@@ -47,20 +47,6 @@ namespace <#= Namespace #>
 
     public partial struct <#= Name #>
     {
-        private static readonly decimal[] s_Epsilons = new decimal[]
-        {
-            1m,
-<# for (var i = 1; i <= highestMinor; i++) { var format = "N" + i.ToString(); #>
-            <#= Math.Pow(10, -i).ToString(format, CultureInfo.InvariantCulture) #>m,
-<# } #>
-        };
-
-        private static readonly uint[] s_PowersOfTen = new uint[] {
-<# for (var i = 0; i <= highestMinor; i++) { #>
-            <#= Math.Pow(10, i).ToString("G") #>,
-<# } #>
-        };
-
         // This list is automatically generated using data obtained from the SNV website.
         private static readonly Dictionary<string, short?> s_Codes = new Dictionary<string, short?>(<#= dict.Count #>) {
 <# foreach (var pair in dict.OrderBy(_ => _.Key)) { #>

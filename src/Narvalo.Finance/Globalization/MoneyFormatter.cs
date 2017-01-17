@@ -19,7 +19,7 @@ namespace Narvalo.Finance.Globalization
             Money<TCurrency> money,
             string format,
             NumberFormatInfo numberFormat)
-            where TCurrency : CurrencyUnit<TCurrency>
+            where TCurrency : Currency<TCurrency>
         {
             Warrant.NotNull<string>();
 

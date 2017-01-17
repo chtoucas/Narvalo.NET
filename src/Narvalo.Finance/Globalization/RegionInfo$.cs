@@ -16,7 +16,7 @@ namespace Narvalo.Finance.Globalization
         }
 
         public static bool IsUsing<TCurrency>(this RegionInfo @this, TCurrency currency)
-            where TCurrency : CurrencyUnit<TCurrency>
+            where TCurrency : Currency<TCurrency>
         {
             Require.NotNull(@this, nameof(@this));
 

@@ -5,11 +5,12 @@ namespace Narvalo.Finance.Generic
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
 
-    using Narvalo.Finance.Utilities;
+    using Narvalo.Finance.Internal;
 
-    public class CurrencyUnit<TCurrency> where TCurrency : CurrencyUnit<TCurrency>
+    public class Currency<TCurrency> : Internal.ICurrencyUnit
+        where TCurrency : Currency<TCurrency>
     {
-        internal CurrencyUnit(short? minorUnits)
+        internal Currency(short? minorUnits)
         {
             Demand.True(!minorUnits.HasValue || minorUnits >= 0);
 
@@ -20,7 +21,7 @@ namespace Narvalo.Finance.Generic
 
         public string Code { get { Warrant.NotNull<string>(); return Name; } }
 
-        public short DecimalPlaces => MinorUnits ?? 0;
+        public int DecimalPlaces => MinorUnits ?? 0;
 
         public bool HasFixedDecimalPlaces => DecimalPlaces != Currency.MaxDecimalPlaces;
 
@@ -28,17 +29,12 @@ namespace Narvalo.Finance.Generic
 
         public bool IsPseudoCurrency => CurrencyHelpers.IsPseudoCurrency(Code, MinorUnits);
 
-        public decimal Epsilon => Currency.Epsilons[DecimalPlaces % Currency.MaxDecimalPlaces];
+        public decimal Epsilon => CurrencyHelpers.Epsilons[DecimalPlaces % Currency.MaxDecimalPlaces];
 
-        private uint Factor => Currency.PowersOfTen[DecimalPlaces % Currency.MaxDecimalPlaces];
+        private uint Factor => CurrencyHelpers.PowersOfTen[DecimalPlaces % Currency.MaxDecimalPlaces];
 
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "[Intentionally] When (if?) we add currencies not using a decimal system, this value will no longer look like a constant.")]
         public decimal One => 1m;
-
-        public bool HasMinorCurrency
-            => MinorUnits.HasValue
-            && MinorUnits.Value != 0
-            && MinorUnits.Value != Currency.UnknownMinorUnits;
 
         protected static string Name
         {
@@ -56,13 +52,9 @@ namespace Narvalo.Finance.Generic
 
         public bool IsNativeTo(CultureInfo cultureInfo)
         {
-            Require.NotNull(cultureInfo, nameof(cultureInfo));
+            Expect.NotNull(cultureInfo);
 
-            if (cultureInfo.IsNeutralCulture) { return false; }
-
-            var ri = new RegionInfo(cultureInfo.Name);
-
-            return ri.ISOCurrencySymbol == Code;
+            return CurrencyHelpers.IsNativeTo(Code, cultureInfo);
         }
     }
 }

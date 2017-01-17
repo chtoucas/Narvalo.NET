@@ -12,12 +12,12 @@ namespace Narvalo.Finance.Generic
 
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public partial struct Money<TCurrency>
-        : IEquatable<Money<TCurrency>>, IComparable<Money<TCurrency>>, IComparable, IFormattable
-        where TCurrency : CurrencyUnit<TCurrency>
+        : Internal.IMoney<Money<TCurrency>> // IEquatable<Money<TCurrency>>, IComparable<Money<TCurrency>>, IComparable, IFormattable
+        where TCurrency : Currency<TCurrency>
     {
         // IMPORTANT: This static field MUST remain first in order to be initialized before the other(s).
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private static readonly TCurrency s_UnderlyingUnit = CurrencyUnit.OfType<TCurrency>();
+        private static readonly TCurrency s_UnderlyingUnit = Internal.CurrencyUnit.OfType<TCurrency>();
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private static readonly Money<TCurrency> s_Zero = new Money<TCurrency>(0M);
@@ -42,6 +42,33 @@ namespace Narvalo.Finance.Generic
         {
             get { Warrant.NotNull<TCurrency>(); return UnderlyingUnit; }
         }
+
+        /// <summary>
+        /// Gets a value indicating whether the amount is zero.
+        /// </summary>
+        public bool IsZero => Amount == 0m;
+
+        /// <summary>
+        /// Gets a value indicating whether the amount is lower than zero.
+        /// </summary>
+        public bool IsNegative => Amount < 0m;
+
+        /// <summary>
+        /// Gets a value indicating whether the amount is lower than or equal to zero.
+        /// </summary>
+        public bool IsNegativeOrZero => Amount <= 0m;
+
+        /// <summary>
+        /// Gets a value indicating whether the amount is greater than zero.
+        /// </summary>
+        public bool IsPositive => Amount > 0m;
+
+        /// <summary>
+        /// Gets a value indicating whether the amount is greater than or equal to zero.
+        /// </summary>
+        public bool IsPositiveOrZero => Amount >= 0m;
+
+        public int Sign => Amount < 0m ? -1 : (Amount > 0m ? 1 : 0);
 
         [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
         private string DebuggerDisplay => Format.Current("{0:F2} ({1})", Amount, Unit.Code);

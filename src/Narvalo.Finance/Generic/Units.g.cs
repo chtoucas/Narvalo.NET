@@ -19,9 +19,9 @@ namespace Narvalo.Finance.Generic
     /// Represents the currency unit for the code "ADP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    public sealed class ADP : CurrencyUnit<ADP>
+    public sealed class ADP : Currency<ADP>
     {
-        private ADP() : base(28) { }
+        private ADP() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ADP" /> class.
@@ -50,7 +50,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class AED : CurrencyUnit<AED>
+    public sealed class AED : Currency<AED>
     {
         private AED() : base(2) { }
 
@@ -81,9 +81,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class AFA : CurrencyUnit<AFA>
+    public sealed class AFA : Currency<AFA>
     {
-        private AFA() : base(28) { }
+        private AFA() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="AFA" /> class.
@@ -112,7 +112,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class AFN : CurrencyUnit<AFN>
+    public sealed class AFN : Currency<AFN>
     {
         private AFN() : base(2) { }
 
@@ -143,9 +143,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ALK : CurrencyUnit<ALK>
+    public sealed class ALK : Currency<ALK>
     {
-        private ALK() : base(28) { }
+        private ALK() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ALK" /> class.
@@ -174,7 +174,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ALL : CurrencyUnit<ALL>
+    public sealed class ALL : Currency<ALL>
     {
         private ALL() : base(2) { }
 
@@ -205,7 +205,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class AMD : CurrencyUnit<AMD>
+    public sealed class AMD : Currency<AMD>
     {
         private AMD() : base(2) { }
 
@@ -236,7 +236,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ANG : CurrencyUnit<ANG>
+    public sealed class ANG : Currency<ANG>
     {
         private ANG() : base(2) { }
 
@@ -267,7 +267,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class AOA : CurrencyUnit<AOA>
+    public sealed class AOA : Currency<AOA>
     {
         private AOA() : base(2) { }
 
@@ -298,9 +298,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class AOK : CurrencyUnit<AOK>
+    public sealed class AOK : Currency<AOK>
     {
-        private AOK() : base(28) { }
+        private AOK() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="AOK" /> class.
@@ -329,9 +329,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class AON : CurrencyUnit<AON>
+    public sealed class AON : Currency<AON>
     {
-        private AON() : base(28) { }
+        private AON() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="AON" /> class.
@@ -360,9 +360,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class AOR : CurrencyUnit<AOR>
+    public sealed class AOR : Currency<AOR>
     {
-        private AOR() : base(28) { }
+        private AOR() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="AOR" /> class.
@@ -391,9 +391,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ARA : CurrencyUnit<ARA>
+    public sealed class ARA : Currency<ARA>
     {
-        private ARA() : base(28) { }
+        private ARA() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ARA" /> class.
@@ -422,9 +422,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ARP : CurrencyUnit<ARP>
+    public sealed class ARP : Currency<ARP>
     {
-        private ARP() : base(28) { }
+        private ARP() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ARP" /> class.
@@ -453,7 +453,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ARS : CurrencyUnit<ARS>
+    public sealed class ARS : Currency<ARS>
     {
         private ARS() : base(2) { }
 
@@ -484,9 +484,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ARY : CurrencyUnit<ARY>
+    public sealed class ARY : Currency<ARY>
     {
-        private ARY() : base(28) { }
+        private ARY() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ARY" /> class.
@@ -515,9 +515,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ATS : CurrencyUnit<ATS>
+    public sealed class ATS : Currency<ATS>
     {
-        private ATS() : base(28) { }
+        private ATS() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ATS" /> class.
@@ -546,7 +546,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class AUD : CurrencyUnit<AUD>
+    public sealed class AUD : Currency<AUD>
     {
         private AUD() : base(2) { }
 
@@ -577,7 +577,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class AWG : CurrencyUnit<AWG>
+    public sealed class AWG : Currency<AWG>
     {
         private AWG() : base(2) { }
 
@@ -608,9 +608,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class AYM : CurrencyUnit<AYM>
+    public sealed class AYM : Currency<AYM>
     {
-        private AYM() : base(28) { }
+        private AYM() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="AYM" /> class.
@@ -639,9 +639,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class AZM : CurrencyUnit<AZM>
+    public sealed class AZM : Currency<AZM>
     {
-        private AZM() : base(28) { }
+        private AZM() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="AZM" /> class.
@@ -670,7 +670,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class AZN : CurrencyUnit<AZN>
+    public sealed class AZN : Currency<AZN>
     {
         private AZN() : base(2) { }
 
@@ -701,9 +701,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BAD : CurrencyUnit<BAD>
+    public sealed class BAD : Currency<BAD>
     {
-        private BAD() : base(28) { }
+        private BAD() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="BAD" /> class.
@@ -732,7 +732,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BAM : CurrencyUnit<BAM>
+    public sealed class BAM : Currency<BAM>
     {
         private BAM() : base(2) { }
 
@@ -763,7 +763,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BBD : CurrencyUnit<BBD>
+    public sealed class BBD : Currency<BBD>
     {
         private BBD() : base(2) { }
 
@@ -794,7 +794,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BDT : CurrencyUnit<BDT>
+    public sealed class BDT : Currency<BDT>
     {
         private BDT() : base(2) { }
 
@@ -825,9 +825,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BEC : CurrencyUnit<BEC>
+    public sealed class BEC : Currency<BEC>
     {
-        private BEC() : base(28) { }
+        private BEC() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="BEC" /> class.
@@ -856,9 +856,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BEF : CurrencyUnit<BEF>
+    public sealed class BEF : Currency<BEF>
     {
-        private BEF() : base(28) { }
+        private BEF() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="BEF" /> class.
@@ -887,9 +887,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BEL : CurrencyUnit<BEL>
+    public sealed class BEL : Currency<BEL>
     {
-        private BEL() : base(28) { }
+        private BEL() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="BEL" /> class.
@@ -918,9 +918,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BGJ : CurrencyUnit<BGJ>
+    public sealed class BGJ : Currency<BGJ>
     {
-        private BGJ() : base(28) { }
+        private BGJ() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="BGJ" /> class.
@@ -949,9 +949,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BGK : CurrencyUnit<BGK>
+    public sealed class BGK : Currency<BGK>
     {
-        private BGK() : base(28) { }
+        private BGK() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="BGK" /> class.
@@ -980,9 +980,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BGL : CurrencyUnit<BGL>
+    public sealed class BGL : Currency<BGL>
     {
-        private BGL() : base(28) { }
+        private BGL() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="BGL" /> class.
@@ -1011,7 +1011,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BGN : CurrencyUnit<BGN>
+    public sealed class BGN : Currency<BGN>
     {
         private BGN() : base(2) { }
 
@@ -1042,7 +1042,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BHD : CurrencyUnit<BHD>
+    public sealed class BHD : Currency<BHD>
     {
         private BHD() : base(3) { }
 
@@ -1073,7 +1073,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BIF : CurrencyUnit<BIF>
+    public sealed class BIF : Currency<BIF>
     {
         private BIF() : base(0) { }
 
@@ -1104,7 +1104,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BMD : CurrencyUnit<BMD>
+    public sealed class BMD : Currency<BMD>
     {
         private BMD() : base(2) { }
 
@@ -1135,7 +1135,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BND : CurrencyUnit<BND>
+    public sealed class BND : Currency<BND>
     {
         private BND() : base(2) { }
 
@@ -1166,7 +1166,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BOB : CurrencyUnit<BOB>
+    public sealed class BOB : Currency<BOB>
     {
         private BOB() : base(2) { }
 
@@ -1197,9 +1197,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BOP : CurrencyUnit<BOP>
+    public sealed class BOP : Currency<BOP>
     {
-        private BOP() : base(28) { }
+        private BOP() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="BOP" /> class.
@@ -1228,7 +1228,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BOV : CurrencyUnit<BOV>
+    public sealed class BOV : Currency<BOV>
     {
         private BOV() : base(2) { }
 
@@ -1259,9 +1259,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BRB : CurrencyUnit<BRB>
+    public sealed class BRB : Currency<BRB>
     {
-        private BRB() : base(28) { }
+        private BRB() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="BRB" /> class.
@@ -1290,9 +1290,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BRC : CurrencyUnit<BRC>
+    public sealed class BRC : Currency<BRC>
     {
-        private BRC() : base(28) { }
+        private BRC() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="BRC" /> class.
@@ -1321,9 +1321,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BRE : CurrencyUnit<BRE>
+    public sealed class BRE : Currency<BRE>
     {
-        private BRE() : base(28) { }
+        private BRE() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="BRE" /> class.
@@ -1352,7 +1352,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BRL : CurrencyUnit<BRL>
+    public sealed class BRL : Currency<BRL>
     {
         private BRL() : base(2) { }
 
@@ -1383,9 +1383,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BRN : CurrencyUnit<BRN>
+    public sealed class BRN : Currency<BRN>
     {
-        private BRN() : base(28) { }
+        private BRN() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="BRN" /> class.
@@ -1414,9 +1414,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BRR : CurrencyUnit<BRR>
+    public sealed class BRR : Currency<BRR>
     {
-        private BRR() : base(28) { }
+        private BRR() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="BRR" /> class.
@@ -1445,7 +1445,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BSD : CurrencyUnit<BSD>
+    public sealed class BSD : Currency<BSD>
     {
         private BSD() : base(2) { }
 
@@ -1476,7 +1476,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BTN : CurrencyUnit<BTN>
+    public sealed class BTN : Currency<BTN>
     {
         private BTN() : base(2) { }
 
@@ -1507,9 +1507,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BUK : CurrencyUnit<BUK>
+    public sealed class BUK : Currency<BUK>
     {
-        private BUK() : base(28) { }
+        private BUK() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="BUK" /> class.
@@ -1538,7 +1538,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BWP : CurrencyUnit<BWP>
+    public sealed class BWP : Currency<BWP>
     {
         private BWP() : base(2) { }
 
@@ -1569,9 +1569,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BYB : CurrencyUnit<BYB>
+    public sealed class BYB : Currency<BYB>
     {
-        private BYB() : base(28) { }
+        private BYB() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="BYB" /> class.
@@ -1600,7 +1600,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BYN : CurrencyUnit<BYN>
+    public sealed class BYN : Currency<BYN>
     {
         private BYN() : base(2) { }
 
@@ -1631,7 +1631,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BYR : CurrencyUnit<BYR>
+    public sealed class BYR : Currency<BYR>
     {
         private BYR() : base(0) { }
 
@@ -1662,7 +1662,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BZD : CurrencyUnit<BZD>
+    public sealed class BZD : Currency<BZD>
     {
         private BZD() : base(2) { }
 
@@ -1693,7 +1693,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CAD : CurrencyUnit<CAD>
+    public sealed class CAD : Currency<CAD>
     {
         private CAD() : base(2) { }
 
@@ -1724,7 +1724,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CDF : CurrencyUnit<CDF>
+    public sealed class CDF : Currency<CDF>
     {
         private CDF() : base(2) { }
 
@@ -1755,9 +1755,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CHC : CurrencyUnit<CHC>
+    public sealed class CHC : Currency<CHC>
     {
-        private CHC() : base(28) { }
+        private CHC() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="CHC" /> class.
@@ -1786,7 +1786,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CHE : CurrencyUnit<CHE>
+    public sealed class CHE : Currency<CHE>
     {
         private CHE() : base(2) { }
 
@@ -1817,7 +1817,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CHF : CurrencyUnit<CHF>
+    public sealed class CHF : Currency<CHF>
     {
         private CHF() : base(2) { }
 
@@ -1848,7 +1848,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CHW : CurrencyUnit<CHW>
+    public sealed class CHW : Currency<CHW>
     {
         private CHW() : base(2) { }
 
@@ -1879,7 +1879,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CLF : CurrencyUnit<CLF>
+    public sealed class CLF : Currency<CLF>
     {
         private CLF() : base(4) { }
 
@@ -1910,7 +1910,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CLP : CurrencyUnit<CLP>
+    public sealed class CLP : Currency<CLP>
     {
         private CLP() : base(0) { }
 
@@ -1941,9 +1941,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CNX : CurrencyUnit<CNX>
+    public sealed class CNX : Currency<CNX>
     {
-        private CNX() : base(28) { }
+        private CNX() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="CNX" /> class.
@@ -1972,7 +1972,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CNY : CurrencyUnit<CNY>
+    public sealed class CNY : Currency<CNY>
     {
         private CNY() : base(2) { }
 
@@ -2003,7 +2003,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class COP : CurrencyUnit<COP>
+    public sealed class COP : Currency<COP>
     {
         private COP() : base(2) { }
 
@@ -2034,7 +2034,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class COU : CurrencyUnit<COU>
+    public sealed class COU : Currency<COU>
     {
         private COU() : base(2) { }
 
@@ -2065,7 +2065,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CRC : CurrencyUnit<CRC>
+    public sealed class CRC : Currency<CRC>
     {
         private CRC() : base(2) { }
 
@@ -2096,9 +2096,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CSD : CurrencyUnit<CSD>
+    public sealed class CSD : Currency<CSD>
     {
-        private CSD() : base(28) { }
+        private CSD() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="CSD" /> class.
@@ -2127,9 +2127,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CSJ : CurrencyUnit<CSJ>
+    public sealed class CSJ : Currency<CSJ>
     {
-        private CSJ() : base(28) { }
+        private CSJ() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="CSJ" /> class.
@@ -2158,9 +2158,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CSK : CurrencyUnit<CSK>
+    public sealed class CSK : Currency<CSK>
     {
-        private CSK() : base(28) { }
+        private CSK() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="CSK" /> class.
@@ -2189,7 +2189,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CUC : CurrencyUnit<CUC>
+    public sealed class CUC : Currency<CUC>
     {
         private CUC() : base(2) { }
 
@@ -2220,7 +2220,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CUP : CurrencyUnit<CUP>
+    public sealed class CUP : Currency<CUP>
     {
         private CUP() : base(2) { }
 
@@ -2251,7 +2251,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CVE : CurrencyUnit<CVE>
+    public sealed class CVE : Currency<CVE>
     {
         private CVE() : base(2) { }
 
@@ -2282,9 +2282,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CYP : CurrencyUnit<CYP>
+    public sealed class CYP : Currency<CYP>
     {
-        private CYP() : base(28) { }
+        private CYP() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="CYP" /> class.
@@ -2313,7 +2313,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CZK : CurrencyUnit<CZK>
+    public sealed class CZK : Currency<CZK>
     {
         private CZK() : base(2) { }
 
@@ -2344,9 +2344,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class DDM : CurrencyUnit<DDM>
+    public sealed class DDM : Currency<DDM>
     {
-        private DDM() : base(28) { }
+        private DDM() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="DDM" /> class.
@@ -2375,9 +2375,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class DEM : CurrencyUnit<DEM>
+    public sealed class DEM : Currency<DEM>
     {
-        private DEM() : base(28) { }
+        private DEM() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="DEM" /> class.
@@ -2406,7 +2406,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class DJF : CurrencyUnit<DJF>
+    public sealed class DJF : Currency<DJF>
     {
         private DJF() : base(0) { }
 
@@ -2437,7 +2437,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class DKK : CurrencyUnit<DKK>
+    public sealed class DKK : Currency<DKK>
     {
         private DKK() : base(2) { }
 
@@ -2468,7 +2468,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class DOP : CurrencyUnit<DOP>
+    public sealed class DOP : Currency<DOP>
     {
         private DOP() : base(2) { }
 
@@ -2499,7 +2499,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class DZD : CurrencyUnit<DZD>
+    public sealed class DZD : Currency<DZD>
     {
         private DZD() : base(2) { }
 
@@ -2530,9 +2530,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ECS : CurrencyUnit<ECS>
+    public sealed class ECS : Currency<ECS>
     {
-        private ECS() : base(28) { }
+        private ECS() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ECS" /> class.
@@ -2561,9 +2561,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ECV : CurrencyUnit<ECV>
+    public sealed class ECV : Currency<ECV>
     {
-        private ECV() : base(28) { }
+        private ECV() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ECV" /> class.
@@ -2592,9 +2592,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class EEK : CurrencyUnit<EEK>
+    public sealed class EEK : Currency<EEK>
     {
-        private EEK() : base(28) { }
+        private EEK() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="EEK" /> class.
@@ -2623,7 +2623,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class EGP : CurrencyUnit<EGP>
+    public sealed class EGP : Currency<EGP>
     {
         private EGP() : base(2) { }
 
@@ -2654,9 +2654,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class EQE : CurrencyUnit<EQE>
+    public sealed class EQE : Currency<EQE>
     {
-        private EQE() : base(28) { }
+        private EQE() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="EQE" /> class.
@@ -2685,7 +2685,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ERN : CurrencyUnit<ERN>
+    public sealed class ERN : Currency<ERN>
     {
         private ERN() : base(2) { }
 
@@ -2716,9 +2716,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ESA : CurrencyUnit<ESA>
+    public sealed class ESA : Currency<ESA>
     {
-        private ESA() : base(28) { }
+        private ESA() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ESA" /> class.
@@ -2747,9 +2747,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ESB : CurrencyUnit<ESB>
+    public sealed class ESB : Currency<ESB>
     {
-        private ESB() : base(28) { }
+        private ESB() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ESB" /> class.
@@ -2778,9 +2778,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ESP : CurrencyUnit<ESP>
+    public sealed class ESP : Currency<ESP>
     {
-        private ESP() : base(28) { }
+        private ESP() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ESP" /> class.
@@ -2809,7 +2809,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ETB : CurrencyUnit<ETB>
+    public sealed class ETB : Currency<ETB>
     {
         private ETB() : base(2) { }
 
@@ -2840,7 +2840,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class EUR : CurrencyUnit<EUR>
+    public sealed class EUR : Currency<EUR>
     {
         private EUR() : base(2) { }
 
@@ -2871,9 +2871,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class FIM : CurrencyUnit<FIM>
+    public sealed class FIM : Currency<FIM>
     {
-        private FIM() : base(28) { }
+        private FIM() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="FIM" /> class.
@@ -2902,7 +2902,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class FJD : CurrencyUnit<FJD>
+    public sealed class FJD : Currency<FJD>
     {
         private FJD() : base(2) { }
 
@@ -2933,7 +2933,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class FKP : CurrencyUnit<FKP>
+    public sealed class FKP : Currency<FKP>
     {
         private FKP() : base(2) { }
 
@@ -2964,9 +2964,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class FRF : CurrencyUnit<FRF>
+    public sealed class FRF : Currency<FRF>
     {
-        private FRF() : base(28) { }
+        private FRF() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="FRF" /> class.
@@ -2995,7 +2995,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class GBP : CurrencyUnit<GBP>
+    public sealed class GBP : Currency<GBP>
     {
         private GBP() : base(2) { }
 
@@ -3026,9 +3026,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class GEK : CurrencyUnit<GEK>
+    public sealed class GEK : Currency<GEK>
     {
-        private GEK() : base(28) { }
+        private GEK() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="GEK" /> class.
@@ -3057,7 +3057,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class GEL : CurrencyUnit<GEL>
+    public sealed class GEL : Currency<GEL>
     {
         private GEL() : base(2) { }
 
@@ -3088,9 +3088,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class GHC : CurrencyUnit<GHC>
+    public sealed class GHC : Currency<GHC>
     {
-        private GHC() : base(28) { }
+        private GHC() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="GHC" /> class.
@@ -3119,9 +3119,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class GHP : CurrencyUnit<GHP>
+    public sealed class GHP : Currency<GHP>
     {
-        private GHP() : base(28) { }
+        private GHP() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="GHP" /> class.
@@ -3150,7 +3150,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class GHS : CurrencyUnit<GHS>
+    public sealed class GHS : Currency<GHS>
     {
         private GHS() : base(2) { }
 
@@ -3181,7 +3181,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class GIP : CurrencyUnit<GIP>
+    public sealed class GIP : Currency<GIP>
     {
         private GIP() : base(2) { }
 
@@ -3212,7 +3212,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class GMD : CurrencyUnit<GMD>
+    public sealed class GMD : Currency<GMD>
     {
         private GMD() : base(2) { }
 
@@ -3243,9 +3243,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class GNE : CurrencyUnit<GNE>
+    public sealed class GNE : Currency<GNE>
     {
-        private GNE() : base(28) { }
+        private GNE() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="GNE" /> class.
@@ -3274,7 +3274,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class GNF : CurrencyUnit<GNF>
+    public sealed class GNF : Currency<GNF>
     {
         private GNF() : base(0) { }
 
@@ -3305,9 +3305,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class GNS : CurrencyUnit<GNS>
+    public sealed class GNS : Currency<GNS>
     {
-        private GNS() : base(28) { }
+        private GNS() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="GNS" /> class.
@@ -3336,9 +3336,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class GQE : CurrencyUnit<GQE>
+    public sealed class GQE : Currency<GQE>
     {
-        private GQE() : base(28) { }
+        private GQE() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="GQE" /> class.
@@ -3367,9 +3367,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class GRD : CurrencyUnit<GRD>
+    public sealed class GRD : Currency<GRD>
     {
-        private GRD() : base(28) { }
+        private GRD() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="GRD" /> class.
@@ -3398,7 +3398,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class GTQ : CurrencyUnit<GTQ>
+    public sealed class GTQ : Currency<GTQ>
     {
         private GTQ() : base(2) { }
 
@@ -3429,9 +3429,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class GWE : CurrencyUnit<GWE>
+    public sealed class GWE : Currency<GWE>
     {
-        private GWE() : base(28) { }
+        private GWE() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="GWE" /> class.
@@ -3460,9 +3460,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class GWP : CurrencyUnit<GWP>
+    public sealed class GWP : Currency<GWP>
     {
-        private GWP() : base(28) { }
+        private GWP() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="GWP" /> class.
@@ -3491,7 +3491,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class GYD : CurrencyUnit<GYD>
+    public sealed class GYD : Currency<GYD>
     {
         private GYD() : base(2) { }
 
@@ -3522,7 +3522,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class HKD : CurrencyUnit<HKD>
+    public sealed class HKD : Currency<HKD>
     {
         private HKD() : base(2) { }
 
@@ -3553,7 +3553,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class HNL : CurrencyUnit<HNL>
+    public sealed class HNL : Currency<HNL>
     {
         private HNL() : base(2) { }
 
@@ -3584,9 +3584,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class HRD : CurrencyUnit<HRD>
+    public sealed class HRD : Currency<HRD>
     {
-        private HRD() : base(28) { }
+        private HRD() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="HRD" /> class.
@@ -3615,7 +3615,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class HRK : CurrencyUnit<HRK>
+    public sealed class HRK : Currency<HRK>
     {
         private HRK() : base(2) { }
 
@@ -3646,7 +3646,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class HTG : CurrencyUnit<HTG>
+    public sealed class HTG : Currency<HTG>
     {
         private HTG() : base(2) { }
 
@@ -3677,7 +3677,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class HUF : CurrencyUnit<HUF>
+    public sealed class HUF : Currency<HUF>
     {
         private HUF() : base(2) { }
 
@@ -3708,7 +3708,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class IDR : CurrencyUnit<IDR>
+    public sealed class IDR : Currency<IDR>
     {
         private IDR() : base(2) { }
 
@@ -3739,9 +3739,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class IEP : CurrencyUnit<IEP>
+    public sealed class IEP : Currency<IEP>
     {
-        private IEP() : base(28) { }
+        private IEP() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="IEP" /> class.
@@ -3770,9 +3770,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ILP : CurrencyUnit<ILP>
+    public sealed class ILP : Currency<ILP>
     {
-        private ILP() : base(28) { }
+        private ILP() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ILP" /> class.
@@ -3801,9 +3801,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ILR : CurrencyUnit<ILR>
+    public sealed class ILR : Currency<ILR>
     {
-        private ILR() : base(28) { }
+        private ILR() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ILR" /> class.
@@ -3832,7 +3832,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ILS : CurrencyUnit<ILS>
+    public sealed class ILS : Currency<ILS>
     {
         private ILS() : base(2) { }
 
@@ -3863,7 +3863,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class INR : CurrencyUnit<INR>
+    public sealed class INR : Currency<INR>
     {
         private INR() : base(2) { }
 
@@ -3894,7 +3894,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class IQD : CurrencyUnit<IQD>
+    public sealed class IQD : Currency<IQD>
     {
         private IQD() : base(3) { }
 
@@ -3925,7 +3925,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class IRR : CurrencyUnit<IRR>
+    public sealed class IRR : Currency<IRR>
     {
         private IRR() : base(2) { }
 
@@ -3956,9 +3956,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ISJ : CurrencyUnit<ISJ>
+    public sealed class ISJ : Currency<ISJ>
     {
-        private ISJ() : base(28) { }
+        private ISJ() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ISJ" /> class.
@@ -3987,7 +3987,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ISK : CurrencyUnit<ISK>
+    public sealed class ISK : Currency<ISK>
     {
         private ISK() : base(0) { }
 
@@ -4018,9 +4018,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ITL : CurrencyUnit<ITL>
+    public sealed class ITL : Currency<ITL>
     {
-        private ITL() : base(28) { }
+        private ITL() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ITL" /> class.
@@ -4049,7 +4049,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class JMD : CurrencyUnit<JMD>
+    public sealed class JMD : Currency<JMD>
     {
         private JMD() : base(2) { }
 
@@ -4080,7 +4080,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class JOD : CurrencyUnit<JOD>
+    public sealed class JOD : Currency<JOD>
     {
         private JOD() : base(3) { }
 
@@ -4111,7 +4111,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class JPY : CurrencyUnit<JPY>
+    public sealed class JPY : Currency<JPY>
     {
         private JPY() : base(0) { }
 
@@ -4142,7 +4142,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class KES : CurrencyUnit<KES>
+    public sealed class KES : Currency<KES>
     {
         private KES() : base(2) { }
 
@@ -4173,7 +4173,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class KGS : CurrencyUnit<KGS>
+    public sealed class KGS : Currency<KGS>
     {
         private KGS() : base(2) { }
 
@@ -4204,7 +4204,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class KHR : CurrencyUnit<KHR>
+    public sealed class KHR : Currency<KHR>
     {
         private KHR() : base(2) { }
 
@@ -4235,7 +4235,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class KMF : CurrencyUnit<KMF>
+    public sealed class KMF : Currency<KMF>
     {
         private KMF() : base(0) { }
 
@@ -4266,7 +4266,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class KPW : CurrencyUnit<KPW>
+    public sealed class KPW : Currency<KPW>
     {
         private KPW() : base(2) { }
 
@@ -4297,7 +4297,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class KRW : CurrencyUnit<KRW>
+    public sealed class KRW : Currency<KRW>
     {
         private KRW() : base(0) { }
 
@@ -4328,7 +4328,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class KWD : CurrencyUnit<KWD>
+    public sealed class KWD : Currency<KWD>
     {
         private KWD() : base(3) { }
 
@@ -4359,7 +4359,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class KYD : CurrencyUnit<KYD>
+    public sealed class KYD : Currency<KYD>
     {
         private KYD() : base(2) { }
 
@@ -4390,7 +4390,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class KZT : CurrencyUnit<KZT>
+    public sealed class KZT : Currency<KZT>
     {
         private KZT() : base(2) { }
 
@@ -4421,9 +4421,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class LAJ : CurrencyUnit<LAJ>
+    public sealed class LAJ : Currency<LAJ>
     {
-        private LAJ() : base(28) { }
+        private LAJ() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="LAJ" /> class.
@@ -4452,7 +4452,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class LAK : CurrencyUnit<LAK>
+    public sealed class LAK : Currency<LAK>
     {
         private LAK() : base(2) { }
 
@@ -4483,7 +4483,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class LBP : CurrencyUnit<LBP>
+    public sealed class LBP : Currency<LBP>
     {
         private LBP() : base(2) { }
 
@@ -4514,7 +4514,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class LKR : CurrencyUnit<LKR>
+    public sealed class LKR : Currency<LKR>
     {
         private LKR() : base(2) { }
 
@@ -4545,7 +4545,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class LRD : CurrencyUnit<LRD>
+    public sealed class LRD : Currency<LRD>
     {
         private LRD() : base(2) { }
 
@@ -4576,7 +4576,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class LSL : CurrencyUnit<LSL>
+    public sealed class LSL : Currency<LSL>
     {
         private LSL() : base(2) { }
 
@@ -4607,9 +4607,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class LSM : CurrencyUnit<LSM>
+    public sealed class LSM : Currency<LSM>
     {
-        private LSM() : base(28) { }
+        private LSM() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="LSM" /> class.
@@ -4638,9 +4638,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class LTL : CurrencyUnit<LTL>
+    public sealed class LTL : Currency<LTL>
     {
-        private LTL() : base(28) { }
+        private LTL() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="LTL" /> class.
@@ -4669,9 +4669,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class LTT : CurrencyUnit<LTT>
+    public sealed class LTT : Currency<LTT>
     {
-        private LTT() : base(28) { }
+        private LTT() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="LTT" /> class.
@@ -4700,9 +4700,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class LUC : CurrencyUnit<LUC>
+    public sealed class LUC : Currency<LUC>
     {
-        private LUC() : base(28) { }
+        private LUC() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="LUC" /> class.
@@ -4731,9 +4731,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class LUF : CurrencyUnit<LUF>
+    public sealed class LUF : Currency<LUF>
     {
-        private LUF() : base(28) { }
+        private LUF() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="LUF" /> class.
@@ -4762,9 +4762,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class LUL : CurrencyUnit<LUL>
+    public sealed class LUL : Currency<LUL>
     {
-        private LUL() : base(28) { }
+        private LUL() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="LUL" /> class.
@@ -4793,9 +4793,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class LVL : CurrencyUnit<LVL>
+    public sealed class LVL : Currency<LVL>
     {
-        private LVL() : base(28) { }
+        private LVL() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="LVL" /> class.
@@ -4824,9 +4824,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class LVR : CurrencyUnit<LVR>
+    public sealed class LVR : Currency<LVR>
     {
-        private LVR() : base(28) { }
+        private LVR() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="LVR" /> class.
@@ -4855,7 +4855,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class LYD : CurrencyUnit<LYD>
+    public sealed class LYD : Currency<LYD>
     {
         private LYD() : base(3) { }
 
@@ -4886,7 +4886,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MAD : CurrencyUnit<MAD>
+    public sealed class MAD : Currency<MAD>
     {
         private MAD() : base(2) { }
 
@@ -4917,9 +4917,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MAF : CurrencyUnit<MAF>
+    public sealed class MAF : Currency<MAF>
     {
-        private MAF() : base(28) { }
+        private MAF() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="MAF" /> class.
@@ -4948,7 +4948,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MDL : CurrencyUnit<MDL>
+    public sealed class MDL : Currency<MDL>
     {
         private MDL() : base(2) { }
 
@@ -4979,7 +4979,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MGA : CurrencyUnit<MGA>
+    public sealed class MGA : Currency<MGA>
     {
         private MGA() : base(2) { }
 
@@ -5010,9 +5010,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MGF : CurrencyUnit<MGF>
+    public sealed class MGF : Currency<MGF>
     {
-        private MGF() : base(28) { }
+        private MGF() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="MGF" /> class.
@@ -5041,7 +5041,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MKD : CurrencyUnit<MKD>
+    public sealed class MKD : Currency<MKD>
     {
         private MKD() : base(2) { }
 
@@ -5072,9 +5072,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MLF : CurrencyUnit<MLF>
+    public sealed class MLF : Currency<MLF>
     {
-        private MLF() : base(28) { }
+        private MLF() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="MLF" /> class.
@@ -5103,7 +5103,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MMK : CurrencyUnit<MMK>
+    public sealed class MMK : Currency<MMK>
     {
         private MMK() : base(2) { }
 
@@ -5134,7 +5134,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MNT : CurrencyUnit<MNT>
+    public sealed class MNT : Currency<MNT>
     {
         private MNT() : base(2) { }
 
@@ -5165,7 +5165,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MOP : CurrencyUnit<MOP>
+    public sealed class MOP : Currency<MOP>
     {
         private MOP() : base(2) { }
 
@@ -5196,7 +5196,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MRO : CurrencyUnit<MRO>
+    public sealed class MRO : Currency<MRO>
     {
         private MRO() : base(2) { }
 
@@ -5227,9 +5227,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MTL : CurrencyUnit<MTL>
+    public sealed class MTL : Currency<MTL>
     {
-        private MTL() : base(28) { }
+        private MTL() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="MTL" /> class.
@@ -5258,9 +5258,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MTP : CurrencyUnit<MTP>
+    public sealed class MTP : Currency<MTP>
     {
-        private MTP() : base(28) { }
+        private MTP() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="MTP" /> class.
@@ -5289,7 +5289,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MUR : CurrencyUnit<MUR>
+    public sealed class MUR : Currency<MUR>
     {
         private MUR() : base(2) { }
 
@@ -5320,9 +5320,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MVQ : CurrencyUnit<MVQ>
+    public sealed class MVQ : Currency<MVQ>
     {
-        private MVQ() : base(28) { }
+        private MVQ() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="MVQ" /> class.
@@ -5351,7 +5351,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MVR : CurrencyUnit<MVR>
+    public sealed class MVR : Currency<MVR>
     {
         private MVR() : base(2) { }
 
@@ -5382,7 +5382,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MWK : CurrencyUnit<MWK>
+    public sealed class MWK : Currency<MWK>
     {
         private MWK() : base(2) { }
 
@@ -5413,7 +5413,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MXN : CurrencyUnit<MXN>
+    public sealed class MXN : Currency<MXN>
     {
         private MXN() : base(2) { }
 
@@ -5444,9 +5444,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MXP : CurrencyUnit<MXP>
+    public sealed class MXP : Currency<MXP>
     {
-        private MXP() : base(28) { }
+        private MXP() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="MXP" /> class.
@@ -5475,7 +5475,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MXV : CurrencyUnit<MXV>
+    public sealed class MXV : Currency<MXV>
     {
         private MXV() : base(2) { }
 
@@ -5506,7 +5506,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MYR : CurrencyUnit<MYR>
+    public sealed class MYR : Currency<MYR>
     {
         private MYR() : base(2) { }
 
@@ -5537,9 +5537,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MZE : CurrencyUnit<MZE>
+    public sealed class MZE : Currency<MZE>
     {
-        private MZE() : base(28) { }
+        private MZE() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="MZE" /> class.
@@ -5568,9 +5568,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MZM : CurrencyUnit<MZM>
+    public sealed class MZM : Currency<MZM>
     {
-        private MZM() : base(28) { }
+        private MZM() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="MZM" /> class.
@@ -5599,7 +5599,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MZN : CurrencyUnit<MZN>
+    public sealed class MZN : Currency<MZN>
     {
         private MZN() : base(2) { }
 
@@ -5630,7 +5630,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class NAD : CurrencyUnit<NAD>
+    public sealed class NAD : Currency<NAD>
     {
         private NAD() : base(2) { }
 
@@ -5661,7 +5661,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class NGN : CurrencyUnit<NGN>
+    public sealed class NGN : Currency<NGN>
     {
         private NGN() : base(2) { }
 
@@ -5692,9 +5692,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class NIC : CurrencyUnit<NIC>
+    public sealed class NIC : Currency<NIC>
     {
-        private NIC() : base(28) { }
+        private NIC() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="NIC" /> class.
@@ -5723,7 +5723,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class NIO : CurrencyUnit<NIO>
+    public sealed class NIO : Currency<NIO>
     {
         private NIO() : base(2) { }
 
@@ -5754,9 +5754,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class NLG : CurrencyUnit<NLG>
+    public sealed class NLG : Currency<NLG>
     {
-        private NLG() : base(28) { }
+        private NLG() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="NLG" /> class.
@@ -5785,7 +5785,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class NOK : CurrencyUnit<NOK>
+    public sealed class NOK : Currency<NOK>
     {
         private NOK() : base(2) { }
 
@@ -5816,7 +5816,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class NPR : CurrencyUnit<NPR>
+    public sealed class NPR : Currency<NPR>
     {
         private NPR() : base(2) { }
 
@@ -5847,7 +5847,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class NZD : CurrencyUnit<NZD>
+    public sealed class NZD : Currency<NZD>
     {
         private NZD() : base(2) { }
 
@@ -5878,7 +5878,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class OMR : CurrencyUnit<OMR>
+    public sealed class OMR : Currency<OMR>
     {
         private OMR() : base(3) { }
 
@@ -5909,7 +5909,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class PAB : CurrencyUnit<PAB>
+    public sealed class PAB : Currency<PAB>
     {
         private PAB() : base(2) { }
 
@@ -5940,9 +5940,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class PEH : CurrencyUnit<PEH>
+    public sealed class PEH : Currency<PEH>
     {
-        private PEH() : base(28) { }
+        private PEH() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="PEH" /> class.
@@ -5971,9 +5971,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class PEI : CurrencyUnit<PEI>
+    public sealed class PEI : Currency<PEI>
     {
-        private PEI() : base(28) { }
+        private PEI() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="PEI" /> class.
@@ -6002,7 +6002,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class PEN : CurrencyUnit<PEN>
+    public sealed class PEN : Currency<PEN>
     {
         private PEN() : base(2) { }
 
@@ -6033,9 +6033,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class PES : CurrencyUnit<PES>
+    public sealed class PES : Currency<PES>
     {
-        private PES() : base(28) { }
+        private PES() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="PES" /> class.
@@ -6064,7 +6064,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class PGK : CurrencyUnit<PGK>
+    public sealed class PGK : Currency<PGK>
     {
         private PGK() : base(2) { }
 
@@ -6095,7 +6095,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class PHP : CurrencyUnit<PHP>
+    public sealed class PHP : Currency<PHP>
     {
         private PHP() : base(2) { }
 
@@ -6126,7 +6126,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class PKR : CurrencyUnit<PKR>
+    public sealed class PKR : Currency<PKR>
     {
         private PKR() : base(2) { }
 
@@ -6157,7 +6157,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class PLN : CurrencyUnit<PLN>
+    public sealed class PLN : Currency<PLN>
     {
         private PLN() : base(2) { }
 
@@ -6188,9 +6188,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class PLZ : CurrencyUnit<PLZ>
+    public sealed class PLZ : Currency<PLZ>
     {
-        private PLZ() : base(28) { }
+        private PLZ() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="PLZ" /> class.
@@ -6219,9 +6219,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class PTE : CurrencyUnit<PTE>
+    public sealed class PTE : Currency<PTE>
     {
-        private PTE() : base(28) { }
+        private PTE() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="PTE" /> class.
@@ -6250,7 +6250,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class PYG : CurrencyUnit<PYG>
+    public sealed class PYG : Currency<PYG>
     {
         private PYG() : base(0) { }
 
@@ -6281,7 +6281,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class QAR : CurrencyUnit<QAR>
+    public sealed class QAR : Currency<QAR>
     {
         private QAR() : base(2) { }
 
@@ -6312,9 +6312,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class RHD : CurrencyUnit<RHD>
+    public sealed class RHD : Currency<RHD>
     {
-        private RHD() : base(28) { }
+        private RHD() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="RHD" /> class.
@@ -6343,9 +6343,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ROK : CurrencyUnit<ROK>
+    public sealed class ROK : Currency<ROK>
     {
-        private ROK() : base(28) { }
+        private ROK() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ROK" /> class.
@@ -6374,9 +6374,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ROL : CurrencyUnit<ROL>
+    public sealed class ROL : Currency<ROL>
     {
-        private ROL() : base(28) { }
+        private ROL() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ROL" /> class.
@@ -6405,7 +6405,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class RON : CurrencyUnit<RON>
+    public sealed class RON : Currency<RON>
     {
         private RON() : base(2) { }
 
@@ -6436,7 +6436,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class RSD : CurrencyUnit<RSD>
+    public sealed class RSD : Currency<RSD>
     {
         private RSD() : base(2) { }
 
@@ -6467,7 +6467,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class RUB : CurrencyUnit<RUB>
+    public sealed class RUB : Currency<RUB>
     {
         private RUB() : base(2) { }
 
@@ -6498,9 +6498,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class RUR : CurrencyUnit<RUR>
+    public sealed class RUR : Currency<RUR>
     {
-        private RUR() : base(28) { }
+        private RUR() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="RUR" /> class.
@@ -6529,7 +6529,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class RWF : CurrencyUnit<RWF>
+    public sealed class RWF : Currency<RWF>
     {
         private RWF() : base(0) { }
 
@@ -6560,7 +6560,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SAR : CurrencyUnit<SAR>
+    public sealed class SAR : Currency<SAR>
     {
         private SAR() : base(2) { }
 
@@ -6591,7 +6591,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SBD : CurrencyUnit<SBD>
+    public sealed class SBD : Currency<SBD>
     {
         private SBD() : base(2) { }
 
@@ -6622,7 +6622,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SCR : CurrencyUnit<SCR>
+    public sealed class SCR : Currency<SCR>
     {
         private SCR() : base(2) { }
 
@@ -6653,9 +6653,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SDD : CurrencyUnit<SDD>
+    public sealed class SDD : Currency<SDD>
     {
-        private SDD() : base(28) { }
+        private SDD() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="SDD" /> class.
@@ -6684,7 +6684,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SDG : CurrencyUnit<SDG>
+    public sealed class SDG : Currency<SDG>
     {
         private SDG() : base(2) { }
 
@@ -6715,9 +6715,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SDP : CurrencyUnit<SDP>
+    public sealed class SDP : Currency<SDP>
     {
-        private SDP() : base(28) { }
+        private SDP() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="SDP" /> class.
@@ -6746,7 +6746,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SEK : CurrencyUnit<SEK>
+    public sealed class SEK : Currency<SEK>
     {
         private SEK() : base(2) { }
 
@@ -6777,7 +6777,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SGD : CurrencyUnit<SGD>
+    public sealed class SGD : Currency<SGD>
     {
         private SGD() : base(2) { }
 
@@ -6808,7 +6808,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SHP : CurrencyUnit<SHP>
+    public sealed class SHP : Currency<SHP>
     {
         private SHP() : base(2) { }
 
@@ -6839,9 +6839,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SIT : CurrencyUnit<SIT>
+    public sealed class SIT : Currency<SIT>
     {
-        private SIT() : base(28) { }
+        private SIT() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="SIT" /> class.
@@ -6870,9 +6870,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SKK : CurrencyUnit<SKK>
+    public sealed class SKK : Currency<SKK>
     {
-        private SKK() : base(28) { }
+        private SKK() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="SKK" /> class.
@@ -6901,7 +6901,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SLL : CurrencyUnit<SLL>
+    public sealed class SLL : Currency<SLL>
     {
         private SLL() : base(2) { }
 
@@ -6932,7 +6932,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SOS : CurrencyUnit<SOS>
+    public sealed class SOS : Currency<SOS>
     {
         private SOS() : base(2) { }
 
@@ -6963,7 +6963,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SRD : CurrencyUnit<SRD>
+    public sealed class SRD : Currency<SRD>
     {
         private SRD() : base(2) { }
 
@@ -6994,9 +6994,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SRG : CurrencyUnit<SRG>
+    public sealed class SRG : Currency<SRG>
     {
-        private SRG() : base(28) { }
+        private SRG() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="SRG" /> class.
@@ -7025,7 +7025,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SSP : CurrencyUnit<SSP>
+    public sealed class SSP : Currency<SSP>
     {
         private SSP() : base(2) { }
 
@@ -7056,7 +7056,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class STD : CurrencyUnit<STD>
+    public sealed class STD : Currency<STD>
     {
         private STD() : base(2) { }
 
@@ -7087,9 +7087,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SUR : CurrencyUnit<SUR>
+    public sealed class SUR : Currency<SUR>
     {
-        private SUR() : base(28) { }
+        private SUR() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="SUR" /> class.
@@ -7118,7 +7118,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SVC : CurrencyUnit<SVC>
+    public sealed class SVC : Currency<SVC>
     {
         private SVC() : base(2) { }
 
@@ -7149,7 +7149,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SYP : CurrencyUnit<SYP>
+    public sealed class SYP : Currency<SYP>
     {
         private SYP() : base(2) { }
 
@@ -7180,7 +7180,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SZL : CurrencyUnit<SZL>
+    public sealed class SZL : Currency<SZL>
     {
         private SZL() : base(2) { }
 
@@ -7211,7 +7211,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class THB : CurrencyUnit<THB>
+    public sealed class THB : Currency<THB>
     {
         private THB() : base(2) { }
 
@@ -7242,9 +7242,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class TJR : CurrencyUnit<TJR>
+    public sealed class TJR : Currency<TJR>
     {
-        private TJR() : base(28) { }
+        private TJR() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="TJR" /> class.
@@ -7273,7 +7273,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class TJS : CurrencyUnit<TJS>
+    public sealed class TJS : Currency<TJS>
     {
         private TJS() : base(2) { }
 
@@ -7304,9 +7304,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class TMM : CurrencyUnit<TMM>
+    public sealed class TMM : Currency<TMM>
     {
-        private TMM() : base(28) { }
+        private TMM() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="TMM" /> class.
@@ -7335,7 +7335,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class TMT : CurrencyUnit<TMT>
+    public sealed class TMT : Currency<TMT>
     {
         private TMT() : base(2) { }
 
@@ -7366,7 +7366,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class TND : CurrencyUnit<TND>
+    public sealed class TND : Currency<TND>
     {
         private TND() : base(3) { }
 
@@ -7397,7 +7397,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class TOP : CurrencyUnit<TOP>
+    public sealed class TOP : Currency<TOP>
     {
         private TOP() : base(2) { }
 
@@ -7428,9 +7428,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class TPE : CurrencyUnit<TPE>
+    public sealed class TPE : Currency<TPE>
     {
-        private TPE() : base(28) { }
+        private TPE() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="TPE" /> class.
@@ -7459,9 +7459,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class TRL : CurrencyUnit<TRL>
+    public sealed class TRL : Currency<TRL>
     {
-        private TRL() : base(28) { }
+        private TRL() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="TRL" /> class.
@@ -7490,7 +7490,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class TRY : CurrencyUnit<TRY>
+    public sealed class TRY : Currency<TRY>
     {
         private TRY() : base(2) { }
 
@@ -7521,7 +7521,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class TTD : CurrencyUnit<TTD>
+    public sealed class TTD : Currency<TTD>
     {
         private TTD() : base(2) { }
 
@@ -7552,7 +7552,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class TWD : CurrencyUnit<TWD>
+    public sealed class TWD : Currency<TWD>
     {
         private TWD() : base(2) { }
 
@@ -7583,7 +7583,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class TZS : CurrencyUnit<TZS>
+    public sealed class TZS : Currency<TZS>
     {
         private TZS() : base(2) { }
 
@@ -7614,7 +7614,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class UAH : CurrencyUnit<UAH>
+    public sealed class UAH : Currency<UAH>
     {
         private UAH() : base(2) { }
 
@@ -7645,9 +7645,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class UAK : CurrencyUnit<UAK>
+    public sealed class UAK : Currency<UAK>
     {
-        private UAK() : base(28) { }
+        private UAK() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="UAK" /> class.
@@ -7676,9 +7676,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class UGS : CurrencyUnit<UGS>
+    public sealed class UGS : Currency<UGS>
     {
-        private UGS() : base(28) { }
+        private UGS() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="UGS" /> class.
@@ -7707,9 +7707,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class UGW : CurrencyUnit<UGW>
+    public sealed class UGW : Currency<UGW>
     {
-        private UGW() : base(28) { }
+        private UGW() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="UGW" /> class.
@@ -7738,7 +7738,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class UGX : CurrencyUnit<UGX>
+    public sealed class UGX : Currency<UGX>
     {
         private UGX() : base(0) { }
 
@@ -7769,7 +7769,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class USD : CurrencyUnit<USD>
+    public sealed class USD : Currency<USD>
     {
         private USD() : base(2) { }
 
@@ -7800,7 +7800,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class USN : CurrencyUnit<USN>
+    public sealed class USN : Currency<USN>
     {
         private USN() : base(2) { }
 
@@ -7831,9 +7831,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class USS : CurrencyUnit<USS>
+    public sealed class USS : Currency<USS>
     {
-        private USS() : base(28) { }
+        private USS() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="USS" /> class.
@@ -7862,7 +7862,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class UYI : CurrencyUnit<UYI>
+    public sealed class UYI : Currency<UYI>
     {
         private UYI() : base(0) { }
 
@@ -7893,9 +7893,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class UYN : CurrencyUnit<UYN>
+    public sealed class UYN : Currency<UYN>
     {
-        private UYN() : base(28) { }
+        private UYN() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="UYN" /> class.
@@ -7924,9 +7924,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class UYP : CurrencyUnit<UYP>
+    public sealed class UYP : Currency<UYP>
     {
-        private UYP() : base(28) { }
+        private UYP() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="UYP" /> class.
@@ -7955,7 +7955,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class UYU : CurrencyUnit<UYU>
+    public sealed class UYU : Currency<UYU>
     {
         private UYU() : base(2) { }
 
@@ -7986,7 +7986,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class UZS : CurrencyUnit<UZS>
+    public sealed class UZS : Currency<UZS>
     {
         private UZS() : base(2) { }
 
@@ -8017,9 +8017,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class VEB : CurrencyUnit<VEB>
+    public sealed class VEB : Currency<VEB>
     {
-        private VEB() : base(28) { }
+        private VEB() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="VEB" /> class.
@@ -8048,7 +8048,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class VEF : CurrencyUnit<VEF>
+    public sealed class VEF : Currency<VEF>
     {
         private VEF() : base(2) { }
 
@@ -8079,9 +8079,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class VNC : CurrencyUnit<VNC>
+    public sealed class VNC : Currency<VNC>
     {
-        private VNC() : base(28) { }
+        private VNC() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="VNC" /> class.
@@ -8110,7 +8110,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class VND : CurrencyUnit<VND>
+    public sealed class VND : Currency<VND>
     {
         private VND() : base(0) { }
 
@@ -8141,7 +8141,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class VUV : CurrencyUnit<VUV>
+    public sealed class VUV : Currency<VUV>
     {
         private VUV() : base(0) { }
 
@@ -8172,7 +8172,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class WST : CurrencyUnit<WST>
+    public sealed class WST : Currency<WST>
     {
         private WST() : base(2) { }
 
@@ -8203,7 +8203,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XAF : CurrencyUnit<XAF>
+    public sealed class XAF : Currency<XAF>
     {
         private XAF() : base(0) { }
 
@@ -8234,7 +8234,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XAG : CurrencyUnit<XAG>
+    public sealed class XAG : Currency<XAG>
     {
         private XAG() : base(null) { }
 
@@ -8265,7 +8265,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XAU : CurrencyUnit<XAU>
+    public sealed class XAU : Currency<XAU>
     {
         private XAU() : base(null) { }
 
@@ -8296,7 +8296,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XBA : CurrencyUnit<XBA>
+    public sealed class XBA : Currency<XBA>
     {
         private XBA() : base(null) { }
 
@@ -8327,7 +8327,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XBB : CurrencyUnit<XBB>
+    public sealed class XBB : Currency<XBB>
     {
         private XBB() : base(null) { }
 
@@ -8358,7 +8358,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XBC : CurrencyUnit<XBC>
+    public sealed class XBC : Currency<XBC>
     {
         private XBC() : base(null) { }
 
@@ -8389,7 +8389,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XBD : CurrencyUnit<XBD>
+    public sealed class XBD : Currency<XBD>
     {
         private XBD() : base(null) { }
 
@@ -8420,7 +8420,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XCD : CurrencyUnit<XCD>
+    public sealed class XCD : Currency<XCD>
     {
         private XCD() : base(2) { }
 
@@ -8451,7 +8451,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XDR : CurrencyUnit<XDR>
+    public sealed class XDR : Currency<XDR>
     {
         private XDR() : base(null) { }
 
@@ -8482,9 +8482,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XEU : CurrencyUnit<XEU>
+    public sealed class XEU : Currency<XEU>
     {
-        private XEU() : base(28) { }
+        private XEU() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="XEU" /> class.
@@ -8513,9 +8513,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XFO : CurrencyUnit<XFO>
+    public sealed class XFO : Currency<XFO>
     {
-        private XFO() : base(28) { }
+        private XFO() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="XFO" /> class.
@@ -8544,9 +8544,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XFU : CurrencyUnit<XFU>
+    public sealed class XFU : Currency<XFU>
     {
-        private XFU() : base(28) { }
+        private XFU() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="XFU" /> class.
@@ -8575,7 +8575,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XOF : CurrencyUnit<XOF>
+    public sealed class XOF : Currency<XOF>
     {
         private XOF() : base(0) { }
 
@@ -8606,7 +8606,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XPD : CurrencyUnit<XPD>
+    public sealed class XPD : Currency<XPD>
     {
         private XPD() : base(null) { }
 
@@ -8637,7 +8637,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XPF : CurrencyUnit<XPF>
+    public sealed class XPF : Currency<XPF>
     {
         private XPF() : base(0) { }
 
@@ -8668,7 +8668,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XPT : CurrencyUnit<XPT>
+    public sealed class XPT : Currency<XPT>
     {
         private XPT() : base(null) { }
 
@@ -8699,9 +8699,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XRE : CurrencyUnit<XRE>
+    public sealed class XRE : Currency<XRE>
     {
-        private XRE() : base(28) { }
+        private XRE() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="XRE" /> class.
@@ -8730,7 +8730,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XSU : CurrencyUnit<XSU>
+    public sealed class XSU : Currency<XSU>
     {
         private XSU() : base(null) { }
 
@@ -8761,7 +8761,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XTS : CurrencyUnit<XTS>
+    public sealed class XTS : Currency<XTS>
     {
         private XTS() : base(null) { }
 
@@ -8792,7 +8792,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XUA : CurrencyUnit<XUA>
+    public sealed class XUA : Currency<XUA>
     {
         private XUA() : base(null) { }
 
@@ -8823,7 +8823,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XXX : CurrencyUnit<XXX>
+    public sealed class XXX : Currency<XXX>
     {
         private XXX() : base(null) { }
 
@@ -8854,9 +8854,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class YDD : CurrencyUnit<YDD>
+    public sealed class YDD : Currency<YDD>
     {
-        private YDD() : base(28) { }
+        private YDD() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="YDD" /> class.
@@ -8885,7 +8885,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class YER : CurrencyUnit<YER>
+    public sealed class YER : Currency<YER>
     {
         private YER() : base(2) { }
 
@@ -8916,9 +8916,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class YUD : CurrencyUnit<YUD>
+    public sealed class YUD : Currency<YUD>
     {
-        private YUD() : base(28) { }
+        private YUD() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="YUD" /> class.
@@ -8947,9 +8947,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class YUM : CurrencyUnit<YUM>
+    public sealed class YUM : Currency<YUM>
     {
-        private YUM() : base(28) { }
+        private YUM() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="YUM" /> class.
@@ -8978,9 +8978,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class YUN : CurrencyUnit<YUN>
+    public sealed class YUN : Currency<YUN>
     {
-        private YUN() : base(28) { }
+        private YUN() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="YUN" /> class.
@@ -9009,9 +9009,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ZAL : CurrencyUnit<ZAL>
+    public sealed class ZAL : Currency<ZAL>
     {
-        private ZAL() : base(28) { }
+        private ZAL() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ZAL" /> class.
@@ -9040,7 +9040,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ZAR : CurrencyUnit<ZAR>
+    public sealed class ZAR : Currency<ZAR>
     {
         private ZAR() : base(2) { }
 
@@ -9071,9 +9071,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ZMK : CurrencyUnit<ZMK>
+    public sealed class ZMK : Currency<ZMK>
     {
-        private ZMK() : base(28) { }
+        private ZMK() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ZMK" /> class.
@@ -9102,7 +9102,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ZMW : CurrencyUnit<ZMW>
+    public sealed class ZMW : Currency<ZMW>
     {
         private ZMW() : base(2) { }
 
@@ -9133,9 +9133,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ZRN : CurrencyUnit<ZRN>
+    public sealed class ZRN : Currency<ZRN>
     {
-        private ZRN() : base(28) { }
+        private ZRN() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ZRN" /> class.
@@ -9164,9 +9164,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ZRZ : CurrencyUnit<ZRZ>
+    public sealed class ZRZ : Currency<ZRZ>
     {
-        private ZRZ() : base(28) { }
+        private ZRZ() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ZRZ" /> class.
@@ -9195,9 +9195,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ZWC : CurrencyUnit<ZWC>
+    public sealed class ZWC : Currency<ZWC>
     {
-        private ZWC() : base(28) { }
+        private ZWC() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ZWC" /> class.
@@ -9226,9 +9226,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ZWD : CurrencyUnit<ZWD>
+    public sealed class ZWD : Currency<ZWD>
     {
-        private ZWD() : base(28) { }
+        private ZWD() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ZWD" /> class.
@@ -9257,7 +9257,7 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ZWL : CurrencyUnit<ZWL>
+    public sealed class ZWL : Currency<ZWL>
     {
         private ZWL() : base(2) { }
 
@@ -9288,9 +9288,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ZWN : CurrencyUnit<ZWN>
+    public sealed class ZWN : Currency<ZWN>
     {
-        private ZWN() : base(28) { }
+        private ZWN() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ZWN" /> class.
@@ -9319,9 +9319,9 @@ namespace Narvalo.Finance.Generic
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ZWR : CurrencyUnit<ZWR>
+    public sealed class ZWR : Currency<ZWR>
     {
-        private ZWR() : base(28) { }
+        private ZWR() : base(Currency.UnknownMinorUnits) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ZWR" /> class.

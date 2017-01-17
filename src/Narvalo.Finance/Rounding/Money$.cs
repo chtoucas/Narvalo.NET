@@ -6,7 +6,7 @@ namespace Narvalo.Finance.Rounding
     using System.Collections.Generic;
 
     using Narvalo.Finance.Allocators;
-    using Narvalo.Finance.Utilities;
+    using Narvalo.Finance.Internal;
 
     // Allocation.
     public static partial class MoneyExtensions

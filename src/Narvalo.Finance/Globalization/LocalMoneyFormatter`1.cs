@@ -9,7 +9,7 @@ namespace Narvalo.Finance.Globalization
 
     public sealed class LocalMoneyFormatter<TCurrency>
         : IFormatProvider, ICustomFormatter
-        where TCurrency : CurrencyUnit<TCurrency>
+        where TCurrency : Currency<TCurrency>
     {
         #region ICustomFormatter
 

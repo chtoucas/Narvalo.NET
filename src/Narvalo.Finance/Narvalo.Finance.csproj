@@ -74,6 +74,15 @@
   <ItemGroup>
     <Compile Include="Allocators\DefaultMoneyAllocator.cs" />
     <Compile Include="Allocators\PennyAllocators.cs" />
+    <Compile Include="Internal\CurrencyHelpers.cs" />
+    <Compile Include="Internal\CurrencyHelpers.g.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CurrencyHelpers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Internal\CurrencyUnit.cs" />
+    <Compile Include="Internal\ICurrencyUnit.cs" />
+    <Compile Include="Internal\IMoney.cs" />
     <Compile Include="MoneyStyles.cs" />
     <Compile Include="Utilities\Allocation.cs" />
     <Compile Include="Utilities\Allocation`1.cs" />
@@ -84,7 +93,7 @@
     <Compile Include="Globalization\LocalMoneyFormatter`1.cs" />
     <Compile Include="Moneypenny.cs" />
     <Compile Include="CurrencyTypes.cs" />
-    <Compile Include="Generic\CurrencyUnit`1.cs" />
+    <Compile Include="Generic\Currency`1.cs" />
     <Compile Include="Generic\CurrencyUnit.cs" />
     <Compile Include="Globalization\LocalMoneyFormatter.cs" />
     <Compile Include="Globalization\RegionInfo%24.cs" />
@@ -98,8 +107,7 @@
     <Compile Include="Rounding\RoundingModeAdjuster.cs" />
     <Compile Include="Rounding\RoundingAdjusters.cs" />
     <Compile Include="FractionalCurrency.cs" />
-    <Compile Include="Utilities\CurrencyHelpers.cs" />
-    <Compile Include="Utilities\Integer.cs" />
+    <Compile Include="Internal\Integer.cs" />
     <Compile Include="Rounding\Money%24.cs" />
     <Compile Include="Rounding\StochasticRoundingAdjuster.cs" />
     <Compile Include="Utilities\IbanCheckDigits.cs" />
@@ -132,8 +140,8 @@
     <Compile Include="IbanValidationLevels.cs" />
     <Compile Include="Utilities\BooleanResult.cs" />
     <Compile Include="IbanValidator.cs" />
-    <Compile Include="Utilities\MoneyChecker.cs" />
-    <Compile Include="Utilities\Sentinel.cs" />
+    <Compile Include="Internal\MoneyChecker.cs" />
+    <Compile Include="Internal\Sentinel.cs" />
     <Compile Include="Money.cs" />
     <Compile Include="Generic\Money`1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -147,7 +155,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.fr.resx</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\Outcome.cs" />
+    <Compile Include="Internal\Outcome.cs" />
     <Compile Include="Utilities\Outcome`1.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -177,6 +185,10 @@
     <Content Include="Globalization\CountryISOCodes.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>CountryISOCodes.g.cs</LastGenOutput>
+    </Content>
+    <Content Include="Internal\CurrencyHelpers.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CurrencyHelpers.g.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />

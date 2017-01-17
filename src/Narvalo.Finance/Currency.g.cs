@@ -18,23 +18,6 @@ namespace Narvalo.Finance
 
     public partial struct Currency
     {
-        private static readonly decimal[] s_Epsilons = new decimal[]
-        {
-            1m,
-            0.1m,
-            0.01m,
-            0.001m,
-            0.0001m,
-        };
-
-        private static readonly uint[] s_PowersOfTen = new uint[] {
-            1,
-            10,
-            100,
-            1000,
-            10000,
-        };
-
         // This list is automatically generated using data obtained from the SNV website.
         private static readonly Dictionary<string, short?> s_Codes = new Dictionary<string, short?>(179) {
             { "AED", 2},

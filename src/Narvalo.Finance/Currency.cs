@@ -9,6 +9,7 @@ namespace Narvalo.Finance
     using System.Globalization;
     using System.Linq;
 
+    using Narvalo.Finance.Internal;
     using Narvalo.Finance.Properties;
     using Narvalo.Finance.Utilities;
 
@@ -22,7 +23,7 @@ namespace Narvalo.Finance
     /// static factories, eg <see cref="Currency.Of(string)"/>.</para>
     /// <para>This class does not offer extended information about the currency.</para>
     /// </remarks>
-    public partial struct Currency : IEquatable<Currency>
+    public partial struct Currency : Internal.ICurrencyUnit, IEquatable<Currency>
     {
         internal const int MaxDecimalPlaces = 28;
 
@@ -68,12 +69,6 @@ namespace Narvalo.Finance
         /// Gets the list of user-defined currency codes/minor units.
         /// </summary>
         internal static Dictionary<string, short?> UserCodes => s_UserCodes;
-
-        // The list is automatically generated using data obtained from the SNV website.
-        internal static decimal[] Epsilons => s_Epsilons;
-
-        // The list is automatically generated using data obtained from the SNV website.
-        internal static uint[] PowersOfTen => s_PowersOfTen;
 
         /// <summary>
         /// Gets the alphabetic code of the currency.
@@ -145,12 +140,12 @@ namespace Narvalo.Finance
         /// </summary>
         // If the currency has no fixed decimal places, DecimalPlaces is equal to MAX_DECIMAL_PLACES
         // which correctly gives 1m for Epsilon.
-        public decimal Epsilon => Epsilons[DecimalPlaces % MaxDecimalPlaces];
+        public decimal Epsilon => CurrencyHelpers.Epsilons[DecimalPlaces % MaxDecimalPlaces];
 
         /// <remarks>Returns 1 if the currency has no minor currency unit.</remarks>
         // If the currency has no fixed decimal places, DecimalPlaces is equal to MAX_DECIMAL_PLACES
         // which correctly gives 1 for Factor.
-        private uint Factor => PowersOfTen[DecimalPlaces % MaxDecimalPlaces];
+        private uint Factor => CurrencyHelpers.PowersOfTen[DecimalPlaces % MaxDecimalPlaces];
 
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "[Intentionally] When (if?) we add currencies not using a decimal system, this value will no longer look like a constant.")]
         public decimal One => 1m;
@@ -449,13 +444,9 @@ namespace Narvalo.Finance
 
         public bool IsNativeTo(CultureInfo cultureInfo)
         {
-            Require.NotNull(cultureInfo, nameof(cultureInfo));
+            Expect.NotNull(cultureInfo);
 
-            if (cultureInfo.IsNeutralCulture) { return false; }
-
-            var ri = new RegionInfo(cultureInfo.Name);
-
-            return ri.ISOCurrencySymbol == Code;
+            return CurrencyHelpers.IsNativeTo(Code, cultureInfo);
         }
 
         /// <summary>

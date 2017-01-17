@@ -17,7 +17,7 @@ namespace Narvalo.Finance
     // about interop with unmanaged code, so why not let the CLR decide what's best for it?
     //[StructLayout(LayoutKind.Auto)]
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public partial struct Money : IEquatable<Money>, IComparable<Money>, IComparable, IFormattable
+    public partial struct Money : Internal.IMoney<Money>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Money"/> class for a specific currency

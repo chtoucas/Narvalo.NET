@@ -1,11 +1,12 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Finance.Utilities
+namespace Narvalo.Finance.Internal
 {
     using System.Diagnostics;
     using System.Diagnostics.Contracts;
 
     using Narvalo.Finance.Properties;
+    using Narvalo.Finance.Utilities;
 
     internal static partial class Sentinel
     {

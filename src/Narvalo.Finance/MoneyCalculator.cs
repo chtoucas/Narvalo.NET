@@ -6,7 +6,7 @@ namespace Narvalo.Finance
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
 
-    using Narvalo.Finance.Utilities;
+    using Narvalo.Finance.Internal;
 
     // Standard binary math operators.
     public static partial class MoneyCalculator

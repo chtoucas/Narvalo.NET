@@ -1,0 +1,38 @@
+﻿<#@ template language="C#" debug="false" hostspecific="true" inherits="Iso4217Template" #>
+<#@ output extension=".g.cs" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(T4NarvaloLibrary)" #>
+<#@ import namespace="System.Globalization" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="Narvalo.T4" #>
+<#
+
+// Uncomment to debug:
+//Debug = true;
+
+var currentCurrencies = ParseCurrent(@"..\..\..\data\ISO4217\A1.xml");
+
+var highestMinor = currentCurrencies.Max(_ => _.MinorUnits);
+
+WriteHeader();
+
+#>
+namespace <#= Namespace #>
+{
+    internal static partial class <#= Name #>
+    {
+        private static readonly decimal[] s_Epsilons = new decimal[]
+        {
+            1m,
+<# for (var i = 1; i <= highestMinor; i++) { var format = "N" + i.ToString(); #>
+            <#= Math.Pow(10, -i).ToString(format, CultureInfo.InvariantCulture) #>m,
+<# } #>
+        };
+
+        private static readonly uint[] s_PowersOfTen = new uint[] {
+<# for (var i = 0; i <= highestMinor; i++) { #>
+            <#= Math.Pow(10, i).ToString("G") #>,
+<# } #>
+        };
+    }
+}

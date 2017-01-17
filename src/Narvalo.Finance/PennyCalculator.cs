@@ -5,6 +5,7 @@ namespace Narvalo.Finance
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
 
+    using Narvalo.Finance.Internal;
     using Narvalo.Finance.Utilities;
 
     // Standard binary math operators.

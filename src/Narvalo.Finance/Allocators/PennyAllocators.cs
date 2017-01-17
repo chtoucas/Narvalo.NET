@@ -5,7 +5,7 @@ namespace Narvalo.Finance.Allocators
     using System.Collections.Generic;
     using System.Linq;
 
-    using Narvalo.Finance.Utilities;
+    using Narvalo.Finance.Internal;
 
     public static class PennyAllocators
     {

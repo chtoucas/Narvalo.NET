@@ -55,10 +55,10 @@ namespace <#= Namespace #>
 <#
         }
 #>
-    public sealed class <#= currency.Code #> : CurrencyUnit<<#= currency.Code #>>
+    public sealed class <#= currency.Code #> : Currency<<#= currency.Code #>>
     {
 <#
-    var minorUnits = currency.IsLegacy ? "28" : (currency.MinorUnits.HasValue ? currency.MinorUnits.Value.ToString() : "null");
+    var minorUnits = currency.IsLegacy ? "Currency.UnknownMinorUnits" : (currency.MinorUnits.HasValue ? currency.MinorUnits.Value.ToString() : "null");
 #>
         private <#= currency.Code #>() : base(<#= minorUnits  #>) { }
 
