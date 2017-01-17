@@ -137,7 +137,7 @@ namespace Narvalo.Finance
         public static Money Divide(Money dividend, decimal divisor)
             => new Money(dividend.Amount / divisor, dividend.Currency, false);
 
-        public static Money Remainder(Money dividend, decimal divisor)
+        public static Money Modulo(Money dividend, decimal divisor)
             => new Money(dividend.Amount % divisor, dividend.Currency, false);
     }
 
@@ -171,8 +171,8 @@ namespace Narvalo.Finance
         public static Money DivRem(Money dividend, long divisor, out Money remainder)
         {
             // REVIEW: remainder = dividend % divisor is slower for integers. What about decimals?
-            // > var q = dividend.Divide(divisor);
-            // > remainder = dividend.Remainder(divisor);
+            // > var q = dividend.DivideBy(divisor);
+            // > remainder = dividend.Modulo(divisor);
             // REVIEW: for doubles, .NET uses:
             // > Modulus = (Math.Abs(dividend) - (Math.Abs(divisor)
             // >   * (Math.Floor(Math.Abs(dividend) / Math.Abs(divisor)))))
@@ -223,7 +223,7 @@ namespace Narvalo.Finance
         public static Money Add(Money money, decimal amount, MidpointRounding mode)
         {
             if (amount == 0m) { return money; }
-            return Money.OfMajor(money.Amount + amount, money.Currency, mode);
+            return Money.FromMajor(money.Amount + amount, money.Currency, mode);
         }
 
         public static Money Add(Money money, Money other, MidpointRounding mode)
@@ -233,8 +233,8 @@ namespace Narvalo.Finance
             var amount = money.Amount + other.Amount;
 
             return money.IsNormalized && other.IsNormalized
-                ? Money.OfMajor(amount, money.Currency)
-                : Money.OfMajor(amount, money.Currency, mode);
+                ? Money.FromMajor(amount, money.Currency)
+                : Money.FromMajor(amount, money.Currency, mode);
         }
 
         public static Money Subtract(Money money, decimal amount, MidpointRounding mode)
@@ -247,18 +247,18 @@ namespace Narvalo.Finance
             var amount = money.Amount - other.Amount;
 
             return money.IsNormalized && other.IsNormalized
-                ? Money.OfMajor(amount, money.Currency)
-                : Money.OfMajor(amount, money.Currency, mode);
+                ? Money.FromMajor(amount, money.Currency)
+                : Money.FromMajor(amount, money.Currency, mode);
         }
 
         public static Money Multiply(Money money, decimal multiplier, MidpointRounding mode)
-            => Money.OfMajor(multiplier * money.Amount, money.Currency, mode);
+            => Money.FromMajor(multiplier * money.Amount, money.Currency, mode);
 
         public static Money Divide(Money dividend, decimal divisor, MidpointRounding mode)
-            => Money.OfMajor(dividend.Amount / divisor, dividend.Currency, mode);
+            => Money.FromMajor(dividend.Amount / divisor, dividend.Currency, mode);
 
-        public static Money Modulus(Money dividend, decimal divisor, MidpointRounding mode)
-            => Money.OfMajor(dividend.Amount % divisor, dividend.Currency, mode);
+        public static Money Modulo(Money dividend, decimal divisor, MidpointRounding mode)
+            => Money.FromMajor(dividend.Amount % divisor, dividend.Currency, mode);
     }
 
     // LINQ-like Sum().
@@ -331,7 +331,7 @@ namespace Narvalo.Finance
             }
 
             EMPTY_COLLECTION:
-            return Money.OfMajor(0, Currency.None);
+            return Money.FromMajor(0, Currency.None);
         }
 
         public static Money Sum(this IEnumerable<Money?> monies)
@@ -374,7 +374,7 @@ namespace Narvalo.Finance
             }
 
             // For an empty collection or a collection of nulls, we return zero.
-            return Money.OfMajor(0, Currency.None);
+            return Money.FromMajor(0, Currency.None);
         }
 
         // Optimized version of: @this.Select(_ => _.Normalize(mode)).Sum().
@@ -399,11 +399,11 @@ namespace Narvalo.Finance
                     sum += NormalizeAmount(mny, mode);
                 }
 
-                return Money.OfMajor(sum, currency);
+                return Money.FromMajor(sum, currency);
             }
 
             EMPTY_COLLECTION:
-            return Money.OfMajor(0, Currency.None);
+            return Money.FromMajor(0, Currency.None);
         }
 
         // Optimized version of: @this.Select(_ => _.Normalize(mode)).Sum().
@@ -436,11 +436,11 @@ namespace Narvalo.Finance
                         }
                     }
 
-                    return Money.OfMajor(sum, currency);
+                    return Money.FromMajor(sum, currency);
                 }
             }
 
-            return Money.OfMajor(0, Currency.None);
+            return Money.FromMajor(0, Currency.None);
         }
     }
 
@@ -555,7 +555,7 @@ namespace Narvalo.Finance
                     count++;
                 }
 
-                return Money.OfMajor(sum / count, currency, mode);
+                return Money.FromMajor(sum / count, currency, mode);
             }
         }
 
@@ -591,7 +591,7 @@ namespace Narvalo.Finance
                         }
                     }
 
-                    return Money.OfMajor(sum / count, currency, mode);
+                    return Money.FromMajor(sum / count, currency, mode);
                 }
             }
 

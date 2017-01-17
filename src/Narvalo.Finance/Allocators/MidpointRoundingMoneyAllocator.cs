@@ -24,14 +24,14 @@ namespace Narvalo.Finance.Allocators
             decimal total = money.Amount;
 
             decimal q = Math.Round(total / count, currency.DecimalPlaces, RoundingMode);
-            Money part = Money.OfMajor(q, currency);
+            Money part = Money.FromMajor(q, currency);
 
             for (var i = 0; i < count - 1; i++)
             {
                 yield return part;
             }
 
-            yield return Money.OfMajor(total - (count - 1) * q, currency, RoundingMode);
+            yield return Money.FromMajor(total - (count - 1) * q, currency, RoundingMode);
         }
 
         public IEnumerable<Money> Allocate(Money money, RatioArray ratios)
@@ -50,10 +50,10 @@ namespace Narvalo.Finance.Allocators
             {
                 decimal amount = Math.Round(ratios[i] * total, decimalPlaces, RoundingMode);
                 last -= amount;
-                yield return Money.OfMajor(amount, currency);
+                yield return Money.FromMajor(amount, currency);
             }
 
-            yield return Money.OfMajor(last, currency, RoundingMode);
+            yield return Money.FromMajor(last, currency, RoundingMode);
         }
     }
 }

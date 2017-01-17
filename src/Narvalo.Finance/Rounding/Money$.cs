@@ -24,17 +24,23 @@ namespace Narvalo.Finance.Rounding
         }
     }
 
-    // Addition with rounding.
+    // Standard binary math operators.
     public static partial class MoneyExtensions
     {
-        public static Money Add(this Money @this, decimal amount, IRoundingAdjuster adjuster)
+        public static Money Plus(this Money @this, decimal amount, MidpointRounding mode)
+            => MoneyCalculator.Add(@this, amount, mode);
+
+        public static Money Plus(this Money @this, decimal amount, IRoundingAdjuster adjuster)
         {
             Expect.NotNull(adjuster);
             if (amount == 0m) { return @this; }
-            return Money.OfMajor(@this.Amount + amount, @this.Currency, adjuster);
+            return Money.FromMajor(@this.Amount + amount, @this.Currency, adjuster);
         }
 
-        public static Money Add(this Money @this, Money other, IRoundingAdjuster adjuster)
+        public static Money Plus(this Money @this, Money other, MidpointRounding mode)
+            => MoneyCalculator.Add(@this, other, mode);
+
+        public static Money Plus(this Money @this, Money other, IRoundingAdjuster adjuster)
         {
             Expect.NotNull(adjuster);
             @this.ThrowIfCurrencyMismatch(other, nameof(other));
@@ -42,21 +48,23 @@ namespace Narvalo.Finance.Rounding
             var amount = @this.Amount + other.Amount;
 
             return @this.IsNormalized && other.IsNormalized
-                ? Money.OfMajor(amount, @this.Currency)
-                : Money.OfMajor(amount, @this.Currency, adjuster);
+                ? Money.FromMajor(amount, @this.Currency)
+                : Money.FromMajor(amount, @this.Currency, adjuster);
         }
-    }
 
-    // Subtraction with rounding.
-    public static partial class MoneyExtensions
-    {
-        public static Money Subtract(this Money @this, decimal amount, IRoundingAdjuster adjuster)
+        public static Money Minus(this Money @this, decimal amount, MidpointRounding mode)
+            => MoneyCalculator.Subtract(@this, amount, mode);
+
+        public static Money Minus(this Money @this, decimal amount, IRoundingAdjuster adjuster)
         {
             Expect.NotNull(adjuster);
-            return Add(@this, -amount, adjuster);
+            return Plus(@this, -amount, adjuster);
         }
 
-        public static Money Subtract(this Money @this, Money other, IRoundingAdjuster adjuster)
+        public static Money Minus(this Money @this, Money other, MidpointRounding mode)
+            => MoneyCalculator.Subtract(@this, other, mode);
+
+        public static Money Minus(this Money @this, Money other, IRoundingAdjuster adjuster)
         {
             Expect.NotNull(adjuster);
             @this.ThrowIfCurrencyMismatch(other, nameof(other));
@@ -64,38 +72,35 @@ namespace Narvalo.Finance.Rounding
             var amount = @this.Amount - other.Amount;
 
             return @this.IsNormalized && other.IsNormalized
-                ? Money.OfMajor(amount, @this.Currency)
-                : Money.OfMajor(amount, @this.Currency, adjuster);
+                ? Money.FromMajor(amount, @this.Currency)
+                : Money.FromMajor(amount, @this.Currency, adjuster);
         }
-    }
 
-    // Multiplication with rounding.
-    public static partial class MoneyExtensions
-    {
-        public static Money Multiply(this Money @this, decimal multiplier, IRoundingAdjuster adjuster)
+        public static Money MultiplyBy(this Money @this, decimal multiplier, MidpointRounding mode)
+            => MoneyCalculator.Multiply(@this, multiplier, mode);
+
+        public static Money MultiplyBy(this Money @this, decimal multiplier, IRoundingAdjuster adjuster)
         {
             Expect.NotNull(adjuster);
-            return Money.OfMajor(multiplier * @this.Amount, @this.Currency, adjuster);
+            return Money.FromMajor(multiplier * @this.Amount, @this.Currency, adjuster);
         }
-    }
 
-    // Division with rounding.
-    public static partial class MoneyExtensions
-    {
-        public static Money Divide(this Money @this, decimal divisor, IRoundingAdjuster adjuster)
+        public static Money DivideBy(this Money @this, decimal divisor, MidpointRounding mode)
+            => MoneyCalculator.Divide(@this, divisor, mode);
+
+        public static Money DivideBy(this Money @this, decimal divisor, IRoundingAdjuster adjuster)
         {
             Expect.NotNull(adjuster);
-            return Money.OfMajor(@this.Amount / divisor, @this.Currency, adjuster);
+            return Money.FromMajor(@this.Amount / divisor, @this.Currency, adjuster);
         }
-    }
 
-    // Remainder/Modulo with rounding.
-    public static partial class MoneyExtensions
-    {
-        public static Money Remainder(this Money @this, decimal divisor, IRoundingAdjuster adjuster)
+        public static Money Mod(this Money @this, decimal divisor, MidpointRounding mode)
+            => MoneyCalculator.Modulo(@this, divisor, mode);
+
+        public static Money Mod(this Money @this, decimal divisor, IRoundingAdjuster adjuster)
         {
             Expect.NotNull(adjuster);
-            return Money.OfMajor(@this.Amount % divisor, @this.Currency, adjuster);
+            return Money.FromMajor(@this.Amount % divisor, @this.Currency, adjuster);
         }
     }
 
@@ -125,11 +130,11 @@ namespace Narvalo.Finance.Rounding
                     sum += NormalizeAmount(mny, adjuster);
                 }
 
-                return Money.OfMajor(sum, currency);
+                return Money.FromMajor(sum, currency);
             }
 
             EMPTY_COLLECTION:
-            return Money.OfMajor(0, Currency.None);
+            return Money.FromMajor(0, Currency.None);
         }
 
         // Optimized version of: @this.Select(_ => _.Normalize(adjuster)).Sum().
@@ -163,11 +168,11 @@ namespace Narvalo.Finance.Rounding
                         }
                     }
 
-                    return Money.OfMajor(sum, currency);
+                    return Money.FromMajor(sum, currency);
                 }
             }
 
-            return Money.OfMajor(0, Currency.None);
+            return Money.FromMajor(0, Currency.None);
         }
     }
 
@@ -199,7 +204,7 @@ namespace Narvalo.Finance.Rounding
                     count++;
                 }
 
-                return Money.OfMajor(sum / count, currency, adjuster);
+                return Money.FromMajor(sum / count, currency, adjuster);
             }
         }
 
@@ -236,7 +241,7 @@ namespace Narvalo.Finance.Rounding
                         }
                     }
 
-                    return Money.OfMajor(sum / count, currency, adjuster);
+                    return Money.FromMajor(sum / count, currency, adjuster);
                 }
             }
 

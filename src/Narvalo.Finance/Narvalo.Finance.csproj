@@ -75,15 +75,12 @@
     <Compile Include="Allocators\DefaultMoneyAllocator.cs" />
     <Compile Include="Allocators\PennyAllocators.cs" />
     <Compile Include="MoneyStyles.cs" />
-    <Compile Include="Money%24.cs" />
-    <Compile Include="PennyFactory.cs" />
     <Compile Include="Utilities\Allocation.cs" />
     <Compile Include="Utilities\Allocation`1.cs" />
     <Compile Include="Allocators\Money%24.cs" />
     <Compile Include="Allocators\MidpointRoundingMoneyAllocator.cs" />
     <Compile Include="Bic.cs" />
     <Compile Include="BicVersion.cs" />
-    <Compile Include="CurrencyFactory.cs" />
     <Compile Include="Globalization\LocalMoneyFormatter`1.cs" />
     <Compile Include="Moneypenny.cs" />
     <Compile Include="CurrencyTypes.cs" />

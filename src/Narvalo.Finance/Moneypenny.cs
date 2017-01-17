@@ -33,10 +33,10 @@ namespace Narvalo.Finance
     // - The Int64 range is smaller. This has two consequences:
     //   * more opportunities to throw an overflow exception.
     //   * some operations might be lossful.
-    //     Divide(long) is actually an integer division, it then rounds toward zero if needed;
+    //     DivideBy(long) is actually an integer division, it then rounds toward zero if needed;
     //     this is necessary to keep the operation closed. If you do not want this, you should
     //     use Divide(decimal) or DivRem() instead.
-    // - Multiply(long), Divide(long) and Remainder(long) are closed but obviously not very useful.
+    // - MultiplyBy(long), DivideBy(long) and Mod(long) are closed but obviously not very useful.
     //   We provide decimal overloads but, for that, we no longer return a Moneypenny object.
     //
     // Remark: This class and FastMoney from JavaMoney are similar in purpose (fast operations)
@@ -85,7 +85,7 @@ namespace Narvalo.Finance
         private string DebuggerDisplay => Format.Current("{0} {1:N0}", Currency.Code, Amount);
     }
 
-    // Static factory methods.
+    // Factory methods.
     public partial struct Moneypenny
     {
         public static Moneypenny FromMinor(decimal minor, Currency currency, MidpointRounding mode)
@@ -126,6 +126,52 @@ namespace Narvalo.Finance
 
             decimal amount = money.ToMinor();
             return new Moneypenny(Convert.ToInt64(amount), money.Currency);
+        }
+
+        public static Moneypenny? TryCreateFromMinor(decimal minor, Currency currency, MidpointRounding mode)
+        {
+            Require.True(currency.HasFixedDecimalPlaces, nameof(currency));
+
+            decimal amount = Math.Round(minor, mode);
+            if (amount < Int64.MinValue || amount > Int64.MaxValue) { return null; }
+
+            return new Moneypenny(Convert.ToInt64(amount), currency);
+        }
+
+        public static Moneypenny? TryCreateFromMinor(decimal minor, Currency currency, IRoundingAdjuster adjuster)
+        {
+            Require.True(currency.HasFixedDecimalPlaces, nameof(currency));
+            Require.NotNull(adjuster, nameof(adjuster));
+
+            decimal amount = adjuster.Round(minor);
+            if (amount < Int64.MinValue || amount > Int64.MaxValue) { return null; }
+
+            return new Moneypenny(Convert.ToInt64(amount), currency);
+        }
+
+        public static Moneypenny? TryCreateFromMajor(decimal major, Currency currency, MidpointRounding mode)
+        {
+            Expect.True(currency.HasFixedDecimalPlaces);
+
+            return TryCreateFromMinor(currency.ConvertToMinor(major), currency, mode);
+        }
+
+        public static Moneypenny? TryCreateFromMajor(decimal major, Currency currency, IRoundingAdjuster adjuster)
+        {
+            Expect.True(currency.HasFixedDecimalPlaces);
+            Expect.NotNull(adjuster);
+
+            return TryCreateFromMinor(currency.ConvertToMinor(major), currency, adjuster);
+        }
+
+        public static Moneypenny? TryCreateFromMoney(Money money)
+        {
+            Require.True(money.IsRounded, nameof(money));
+
+            long? minor = money.ToLongMinor();
+            if (!minor.HasValue) { return null; }
+
+            return new Moneypenny(minor.Value, money.Currency);
         }
     }
 
@@ -226,7 +272,7 @@ namespace Narvalo.Finance
     // Implicit/explicit conversions.
     public partial struct Moneypenny
     {
-        public Money ToMoney() => Money.OfMinor(Amount, Currency);
+        public Money ToMoney() => Money.FromMinor(Amount, Currency);
 
         public static explicit operator Moneypenny(long value) => new Moneypenny(value, Currency.None);
 
@@ -238,13 +284,13 @@ namespace Narvalo.Finance
     // Overrides the op_Addition operator.
     public partial struct Moneypenny
     {
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] See PennyCalculator.")]
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See PennyCalculator.Add().")]
         public static Moneypenny operator +(Moneypenny left, long right) => Add(left, right);
 
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] See PennyCalculator.")]
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See PennyCalculator.Add().")]
         public static Moneypenny operator +(long left, Moneypenny right) => Add(right, left);
 
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] See PennyCalculator.")]
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See PennyCalculator.Add().")]
         public static Moneypenny operator +(Moneypenny left, Moneypenny right) => Add(left, right);
 
         public Moneypenny Plus(long amount) => Add(this, amount);
@@ -255,13 +301,13 @@ namespace Narvalo.Finance
     // Overrides the op_Subtraction operator.
     public partial struct Moneypenny
     {
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] See PennyCalculator.")]
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See PennyCalculator.Subtract().")]
         public static Moneypenny operator -(Moneypenny left, long right) => Subtract(left, right);
 
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] See PennyCalculator.")]
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See PennyCalculator.Subtract().")]
         public static Moneypenny operator -(long left, Moneypenny right) => Subtract(left, right);
 
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] See PennyCalculator.")]
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See PennyCalculator.Subtract().")]
         public static Moneypenny operator -(Moneypenny left, Moneypenny right) => Subtract(left, right);
 
         public Moneypenny Minus(Moneypenny other) => Subtract(this, other);
@@ -272,10 +318,10 @@ namespace Narvalo.Finance
     // Overrides the op_Multiply operator.
     public partial struct Moneypenny
     {
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] See PennyCalculator.")]
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See PennyCalculator.Multiply().")]
         public static Moneypenny operator *(long multiplier, Moneypenny penny) => Multiply(penny, multiplier);
 
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] See PennyCalculator.")]
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See PennyCalculator.Multiply().")]
         public static Moneypenny operator *(Moneypenny penny, long multiplier) => Multiply(penny, multiplier);
 
         public Moneypenny MultiplyBy(long multiplier) => Multiply(this, multiplier);
@@ -284,7 +330,7 @@ namespace Narvalo.Finance
     // Overrides the op_Division operator.
     public partial struct Moneypenny
     {
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] See PennyCalculator.")]
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See PennyCalculator.Divide().")]
         public static Moneypenny operator /(Moneypenny dividend, long divisor) => Divide(dividend, divisor);
 
         public Moneypenny DivideBy(long divisor) => Divide(this, divisor);
@@ -293,10 +339,9 @@ namespace Narvalo.Finance
     // Overrides the op_Modulus operator.
     public partial struct Moneypenny
     {
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] See PennyCalculator.")]
-        public static Moneypenny operator %(Moneypenny dividend, long divisor) => Remainder(dividend, divisor);
+        public static Moneypenny operator %(Moneypenny dividend, long divisor) => Modulo(dividend, divisor);
 
-        public Moneypenny Modulo(long divisor) => Remainder(this, divisor);
+        public Moneypenny Mod(long divisor) => Modulo(this, divisor);
     }
 
     // Overrides the op_Increment operator.
