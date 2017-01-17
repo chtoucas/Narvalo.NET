@@ -1,11 +1,11 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Finance.Utilities
+namespace Narvalo.Finance.Internal
 {
     using System;
     using System.Diagnostics.Contracts;
 
-    public static partial class Ascii
+    internal static partial class Ascii
     {
         [Pure]
         public static bool IsUpperLetter(string value)

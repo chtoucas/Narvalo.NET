@@ -7,7 +7,6 @@ namespace Narvalo.Finance
     using Narvalo.Finance.Globalization;
     using Narvalo.Finance.Internal;
     using Narvalo.Finance.Properties;
-    using Narvalo.Finance.Utilities;
 
     /// <summary>
     /// Represents a Business Identifier Code (BIC).

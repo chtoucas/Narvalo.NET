@@ -2,8 +2,6 @@
 
 namespace Narvalo.Finance.Internal
 {
-    using Narvalo.Finance.Utilities;
-
     /// <summary>
     /// Provides extension methods for <see cref="Outcome{T}"/>.
     /// </summary>

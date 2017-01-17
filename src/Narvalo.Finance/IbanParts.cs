@@ -6,7 +6,6 @@ namespace Narvalo.Finance
 
     using Narvalo.Finance.Internal;
     using Narvalo.Finance.Properties;
-    using Narvalo.Finance.Utilities;
 
     public partial struct IbanParts : IEquatable<IbanParts>, IFormattable
     {

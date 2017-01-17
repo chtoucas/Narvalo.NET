@@ -6,7 +6,6 @@ namespace Narvalo.Finance.Internal
     using System.Diagnostics.Contracts;
 
     using Narvalo.Finance.Properties;
-    using Narvalo.Finance.Utilities;
 
     internal static partial class Sentinel
     {

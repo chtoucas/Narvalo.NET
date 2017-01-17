@@ -11,7 +11,6 @@ namespace Narvalo.Finance
 
     using Narvalo.Finance.Internal;
     using Narvalo.Finance.Properties;
-    using Narvalo.Finance.Utilities;
 
     /// <summary>
     /// Represents a currency such as Euro or US Dollar.

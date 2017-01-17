@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Finance.Utilities
+namespace Narvalo.Finance.Allocators
 {
     using System.Collections;
     using System.Collections.Generic;

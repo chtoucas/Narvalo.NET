@@ -5,7 +5,7 @@ namespace Narvalo.Finance.Internal
     using System.Collections.Generic;
     using System.Linq;
 
-    using Narvalo.Finance.Utilities;
+    using Narvalo.Finance.Allocators;
 
     internal static class Number
     {

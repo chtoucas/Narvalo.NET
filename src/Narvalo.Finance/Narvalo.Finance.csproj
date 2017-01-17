@@ -88,8 +88,8 @@
     <Compile Include="Internal\IMoney.cs" />
     <Compile Include="MoneyStyles.cs" />
     <Compile Include="RoundingMachine.cs" />
-    <Compile Include="Utilities\Allocation.cs" />
-    <Compile Include="Utilities\Allocation`1.cs" />
+    <Compile Include="Allocators\Allocation.cs" />
+    <Compile Include="Allocators\Allocation`1.cs" />
     <Compile Include="Allocators\MidpointRoundingMoneyAllocator.cs" />
     <Compile Include="Bic.cs" />
     <Compile Include="BicVersion.cs" />
@@ -112,7 +112,7 @@
     <Compile Include="Internal\Number.cs" />
     <Compile Include="Extensions\Money%24.cs" />
     <Compile Include="Rounding\StochasticRoundingAdjuster.cs" />
-    <Compile Include="Utilities\IbanCheckDigits.cs" />
+    <Compile Include="IbanCheckDigits.cs" />
     <Compile Include="Rounding\RoudingMode.cs" />
     <Compile Include="Allocators\RatioArray.cs" />
     <Compile Include="Globalization\CountryISOCodes.cs" />
@@ -137,10 +137,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CountryISOCodes.tt</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\Ascii.cs" />
+    <Compile Include="Internal\Ascii.cs" />
     <Compile Include="IbanParts.cs" />
     <Compile Include="IbanValidationLevels.cs" />
-    <Compile Include="Utilities\BooleanResult.cs" />
+    <Compile Include="BooleanResult.cs" />
     <Compile Include="IbanValidator.cs" />
     <Compile Include="Internal\MoneyHelpers.cs" />
     <Compile Include="Internal\Sentinel.cs" />
@@ -158,7 +158,7 @@
       <DependentUpon>Strings.fr.resx</DependentUpon>
     </Compile>
     <Compile Include="Internal\Outcome.cs" />
-    <Compile Include="Utilities\Outcome`1.cs" />
+    <Compile Include="Outcome`1.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml" />
