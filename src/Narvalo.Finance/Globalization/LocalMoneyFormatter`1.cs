@@ -23,10 +23,12 @@ namespace Narvalo.Finance.Globalization
             {
                 var money = (Money<TCurrency>)arg;
 
+                var fmt = FormatParts.Parse(format, money.DecimalPrecision);
+
                 LocalMoneyFormatter.FormatImpl(
                     money.Amount,
                     money.Unit.Code,
-                    format,
+                    fmt,
                     NumberFormatInfo.GetInstance(formatProvider));
             }
 

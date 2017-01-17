@@ -9,9 +9,6 @@ namespace Narvalo.Finance.Globalization
 
     public sealed class LocalMoneyFormatter : IFormatProvider, ICustomFormatter
     {
-        private const string AMOUNT_FORMAT = "C";
-        private const string DEFAULT_FORMAT = "G";
-
         #region ICustomFormatter
 
         public string Format(string format, object arg, IFormatProvider formatProvider)
@@ -24,10 +21,12 @@ namespace Narvalo.Finance.Globalization
             {
                 var money = (Money)arg;
 
+                var fmt = FormatParts.Parse(format, money.DecimalPrecision);
+
                 return FormatImpl(
                     money.Amount,
                     money.Currency.Code,
-                    format,
+                    fmt,
                     NumberFormatInfo.GetInstance(formatProvider));
             }
 
@@ -49,40 +48,38 @@ namespace Narvalo.Finance.Globalization
         internal static string FormatImpl(
             decimal amount,
             string currencyCode,
-            string format,
+            FormatParts format,
             NumberFormatInfo numberFormat)
         {
             Warrant.NotNull<string>();
 
-            if (format == null || format.Length == 0) { format = DEFAULT_FORMAT; }
-            if (format.Length != 1) { throw new FormatException("XXX"); }
+            format.DefaultAmountFormat = "C";
 
             var nfi = (numberFormat ?? NumberFormatInfo.CurrentInfo).Copy();
 
-            // Take the first char and uppercase it (ASCII only).
-            switch (format[0] & 0xDF)
+            switch (format.MainFormat)
             {
                 case 'N':
                     // Numeric. Does not include any information about the currency.
                     nfi.CurrencySymbol = String.Empty;
                     nfi.RemoveCurrencySpacing();
-                    return amount.ToString(AMOUNT_FORMAT, nfi);
+                    return amount.ToString(format.AmountFormat, nfi);
                 case 'L':
                     // Left (Currency code placed on the).
                     nfi.CurrencySymbol = String.Empty;
                     nfi.RemoveCurrencySpacing();
-                    return currencyCode + " " + amount.ToString(AMOUNT_FORMAT, nfi);
+                    return currencyCode + " " + amount.ToString(format.AmountFormat, nfi);
                 case 'R':
                     // Right (Currency code placed on the).
                     nfi.CurrencySymbol = String.Empty;
                     nfi.RemoveCurrencySpacing();
-                    return amount.ToString(AMOUNT_FORMAT, nfi) + " " + currencyCode;
+                    return amount.ToString(format.AmountFormat, nfi) + " " + currencyCode;
                 case 'G':
                     // General (default). It replaces the currency symbol by the currency code
                     // and ensures that there is a space between the amount and the currency code.
                     nfi.CurrencySymbol = currencyCode;
                     nfi.KeepOrAddCurrencySpacing();
-                    return amount.ToString(AMOUNT_FORMAT, nfi);
+                    return amount.ToString(format.AmountFormat, nfi);
                 default:
                     throw new FormatException(
                         Narvalo.Format.Current(Strings.Money_InvalidFormatSpecification));

@@ -96,10 +96,16 @@ namespace Narvalo.Finance
         public bool IsRoundable => Currency.HasFixedDecimalPlaces;
 
         /// <summary>
-        /// Gets a value indicating whether the amount is rounded.
-        /// Always returns false if the instance is not roundable.
+        /// Gets a value indicating whether the amount is rounded to the number of decimal places
+        /// specified by the currency. Always returns false if the instance is not roundable.
         /// </summary>
         public bool IsRounded => IsRoundable && IsNormalized;
+
+        /// <summary>
+        /// If the amount is rounded, returns the number of digits defined by the currency;
+        /// otherwise, returns null.
+        /// </summary>
+        internal int? DecimalPrecision => IsRounded ? Currency.DecimalPlaces : (int?)null;
 
         /// <summary>
         /// Gets a value indicating whether the amount is zero.

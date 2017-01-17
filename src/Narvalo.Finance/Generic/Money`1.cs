@@ -72,6 +72,12 @@ namespace Narvalo.Finance.Generic
         public bool IsRounded => IsRoundable && IsNormalized;
 
         /// <summary>
+        /// If the amount is rounded, returns the number of digits defined by the currency;
+        /// otherwise, returns null.
+        /// </summary>
+        internal int? DecimalPrecision => IsRounded ? Unit.DecimalPlaces : (int?)null;
+
+        /// <summary>
         /// Gets a value indicating whether the amount is zero.
         /// </summary>
         public bool IsZero => Amount == 0m;
