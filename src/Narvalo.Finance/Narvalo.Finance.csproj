@@ -105,7 +105,6 @@
     <Compile Include="Rounding\AlternatedRoundingAdjuster.cs" />
     <Compile Include="Rounding\DitheredRoundingAdjuster.cs" />
     <Compile Include="Rounding\IRoundingAdjuster.cs" />
-    <Compile Include="Rounding\RoundingModeAdjuster.cs" />
     <Compile Include="Rounding\RoundingAdjusters.cs" />
     <Compile Include="FractionalCurrency.cs" />
     <Compile Include="Internal\Number.cs" />

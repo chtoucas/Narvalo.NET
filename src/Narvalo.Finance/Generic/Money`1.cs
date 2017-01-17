@@ -44,6 +44,15 @@ namespace Narvalo.Finance.Generic
             IsNormalized = UnderlyingUnit.HasFixedDecimalPlaces ? normalized : true;
         }
 
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
+        public static Money<TCurrency> Zero => s_Zero;
+
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
+        public static Money<TCurrency> Epsilon => s_Epsilon;
+
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
+        public static Money<TCurrency> One => s_One;
+
         internal static TCurrency UnderlyingUnit
         {
             get { Warrant.NotNull<TCurrency>(); return s_UnderlyingUnit; }
@@ -115,19 +124,6 @@ namespace Narvalo.Finance.Generic
 
         [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
         private string DebuggerDisplay => Format.Current("{0:F2} ({1})", Amount, Unit.Code);
-    }
-
-    // Factory methods: FromXXX() methods produce normalized instances, OfXXX() do not.
-    public partial struct Money<TCurrency>
-    {
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
-        public static Money<TCurrency> Zero => s_Zero;
-
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
-        public static Money<TCurrency> Epsilon => s_Epsilon;
-
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
-        public static Money<TCurrency> One => s_One;
     }
 
     // Implements the IFormattable interface.
