@@ -74,7 +74,9 @@
   <ItemGroup>
     <Compile Include="Allocators\DefaultMoneyAllocator.cs" />
     <Compile Include="Allocators\PennyAllocators.cs" />
+    <Compile Include="Extensions\Enumerable%24.cs" />
     <Compile Include="Generic\MoneyFactory.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Internal\CurrencyHelpers.cs" />
     <Compile Include="Internal\CurrencyHelpers.g.cs">
       <AutoGen>True</AutoGen>
@@ -88,7 +90,6 @@
     <Compile Include="RoundingMachine.cs" />
     <Compile Include="Utilities\Allocation.cs" />
     <Compile Include="Utilities\Allocation`1.cs" />
-    <Compile Include="Allocators\Money%24.cs" />
     <Compile Include="Allocators\MidpointRoundingMoneyAllocator.cs" />
     <Compile Include="Bic.cs" />
     <Compile Include="BicVersion.cs" />
@@ -109,7 +110,7 @@
     <Compile Include="Rounding\RoundingAdjusters.cs" />
     <Compile Include="FractionalCurrency.cs" />
     <Compile Include="Internal\Number.cs" />
-    <Compile Include="Rounding\Money%24.cs" />
+    <Compile Include="Extensions\Money%24.cs" />
     <Compile Include="Rounding\StochasticRoundingAdjuster.cs" />
     <Compile Include="Utilities\IbanCheckDigits.cs" />
     <Compile Include="Rounding\RoudingMode.cs" />

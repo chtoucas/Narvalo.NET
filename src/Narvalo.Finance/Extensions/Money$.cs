@@ -1,20 +1,24 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Finance.Rounding
+namespace Narvalo.Finance.Extensions
 {
     using System;
     using System.Collections.Generic;
 
     using Narvalo.Finance.Allocators;
+    using Narvalo.Finance.Rounding;
 
     // Allocation.
     public static partial class MoneyExtensions
     {
+        private static readonly IMoneyAllocator s_DefaultAllocator
+            = new DefaultMoneyAllocator();
+
+        public static IEnumerable<Money> Allocate(this Money @this, int count)
+            => s_DefaultAllocator.Allocate(@this, count);
+
         public static IEnumerable<Money> Allocate(this Money @this, int count, MidpointRounding mode)
             => new MidpointRoundingMoneyAllocator(mode).Allocate(@this, count);
-
-        public static IEnumerable<Money> Allocate(this Money @this, RatioArray ratios, MidpointRounding mode)
-            => new MidpointRoundingMoneyAllocator(mode).Allocate(@this, ratios);
 
         public static IEnumerable<Money> Allocate(this Money @this, int count, IRoundingAdjuster adjuster)
         {
@@ -22,10 +26,28 @@ namespace Narvalo.Finance.Rounding
             return new RoundingMoneyAllocator(adjuster).Allocate(@this, count);
         }
 
+        public static IEnumerable<Money> Allocate(this Money @this, int count, IMoneyAllocator allocator)
+        {
+            Require.NotNull(allocator, nameof(allocator));
+            return allocator.Allocate(@this, count);
+        }
+
+        public static IEnumerable<Money> Allocate(this Money @this, RatioArray ratios)
+            => s_DefaultAllocator.Allocate(@this, ratios);
+
+        public static IEnumerable<Money> Allocate(this Money @this, RatioArray ratios, MidpointRounding mode)
+            => new MidpointRoundingMoneyAllocator(mode).Allocate(@this, ratios);
+
         public static IEnumerable<Money> Allocate(this Money @this, RatioArray ratios, IRoundingAdjuster adjuster)
         {
             Expect.NotNull(adjuster);
             return new RoundingMoneyAllocator(adjuster).Allocate(@this, ratios);
+        }
+
+        public static IEnumerable<Money> Allocate(this Money @this, RatioArray ratios, IMoneyAllocator allocator)
+        {
+            Require.NotNull(allocator, nameof(allocator));
+            return allocator.Allocate(@this, ratios);
         }
     }
 
@@ -73,33 +95,5 @@ namespace Narvalo.Finance.Rounding
 
         public static Money Mod(this Money @this, decimal divisor, IRoundingAdjuster adjuster)
             => RoundingMachine.Remainder(@this, divisor, adjuster);
-    }
-
-    // LINQ operators.
-    public static partial class MoneyExtensions
-    {
-        public static Money Average(this IEnumerable<Money> @this, MidpointRounding mode)
-            => RoundingMachine.Average(@this, mode);
-
-        public static Money Average(this IEnumerable<Money> @this, IRoundingAdjuster adjuster)
-            => RoundingMachine.Average(@this, adjuster);
-
-        public static Money? Average(this IEnumerable<Money?> @this, MidpointRounding mode)
-            => RoundingMachine.Average(@this, mode);
-
-        public static Money? Average(this IEnumerable<Money?> @this, IRoundingAdjuster adjuster)
-            => RoundingMachine.Average(@this, adjuster);
-
-        public static Money Sum(this IEnumerable<Money> @this, MidpointRounding mode)
-            => RoundingMachine.Sum(@this, mode);
-
-        public static Money Sum(this IEnumerable<Money> @this, IRoundingAdjuster adjuster)
-            => RoundingMachine.Sum(@this, adjuster);
-
-        public static Money Sum(this IEnumerable<Money?> @this, MidpointRounding mode)
-            => RoundingMachine.Sum(@this, mode);
-
-        public static Money Sum(this IEnumerable<Money?> @this, IRoundingAdjuster adjuster)
-            => RoundingMachine.Sum(@this, adjuster);
     }
 }
