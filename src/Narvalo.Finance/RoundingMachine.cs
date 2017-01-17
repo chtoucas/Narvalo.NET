@@ -37,10 +37,14 @@ namespace Narvalo.Finance
     public static partial class RoundingMachine
     {
         public static decimal Round(Money money, IRoundingAdjuster adjuster)
-            => RoundImpl(money, _ => adjuster.Round(_));
+        {
+            Require.NotNull(adjuster, nameof(adjuster));
+            return RoundImpl(money, _ => adjuster.Round(_));
+        }
 
         public static decimal Round(Money money, int decimalPlaces, IRoundingAdjuster adjuster)
         {
+            Require.NotNull(adjuster, nameof(adjuster));
             // If the amount is already rounded to decimalPlaces, do nothing.
             if (money.IsRounded && money.Currency.DecimalPlaces == decimalPlaces) { return money.Amount; }
             return adjuster.Round(money.Amount, decimalPlaces);
