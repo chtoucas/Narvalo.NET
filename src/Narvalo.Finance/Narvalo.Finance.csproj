@@ -83,7 +83,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CurrencyHelpers.tt</DependentUpon>
     </Compile>
-    <Compile Include="Internal\CurrencyUnit.cs" />
     <Compile Include="Internal\ICurrencyUnit.cs" />
     <Compile Include="Internal\IMoney.cs" />
     <Compile Include="MoneyStyles.cs" />

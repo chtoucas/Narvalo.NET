@@ -45,7 +45,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Generic\CurrencyUnitFacts.cs" />
-    <Compile Include="Internal\CurrencyUnitFacts.cs" />
     <Compile Include="Globalization\CountryISOCodesFacts.cs" />
     <Compile Include="IbanFacts.cs" />
     <Compile Include="IbanPartsFacts.cs" />

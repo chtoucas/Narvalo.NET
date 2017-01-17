@@ -19,6 +19,27 @@ namespace Narvalo.Finance.Generic
         #endregion
     }
 
+#if !NO_INTERNALS_VISIBLE_TO
+
+    public static partial class CurrencyUnitFacts
+    {
+        #region OfType()
+
+        [Fact]
+        public static void OfType_Passes_ForBuiltInUnit()
+            => CurrencyUnit.OfType<EUR>();
+
+        [Fact]
+        public static void OfType_ReturnsNull_ForMissingSingletonProperty()
+            => Assert.Null(CurrencyUnit.OfType<XXN>());
+
+        #endregion
+
+        private sealed class XXN : Currency<XXN> { private XXN() : base(0) { } }
+    }
+
+#endif
+
     public static partial class CurrencyUnitFacts
     {
         public static IEnumerable<object[]> Aliases
