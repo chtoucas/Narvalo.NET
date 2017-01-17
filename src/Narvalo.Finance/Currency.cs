@@ -145,7 +145,8 @@ namespace Narvalo.Finance
         /// <remarks>Returns 1 if the currency has no minor currency unit.</remarks>
         // If the currency has no fixed decimal places, DecimalPlaces is equal to MAX_DECIMAL_PLACES
         // which correctly gives 1 for Factor.
-        private uint Factor => CurrencyHelpers.PowersOfTen[DecimalPlaces % MaxDecimalPlaces];
+        [CLSCompliant(false)]
+        public uint Factor => CurrencyHelpers.PowersOfTen[DecimalPlaces % MaxDecimalPlaces];
 
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "[Intentionally] When (if?) we add currencies not using a decimal system, this value will no longer look like a constant.")]
         public decimal One => 1m;

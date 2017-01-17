@@ -2,6 +2,7 @@
 
 namespace Narvalo.Finance.Generic
 {
+    using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
 
@@ -31,7 +32,8 @@ namespace Narvalo.Finance.Generic
 
         public decimal Epsilon => CurrencyHelpers.Epsilons[DecimalPlaces % Currency.MaxDecimalPlaces];
 
-        private uint Factor => CurrencyHelpers.PowersOfTen[DecimalPlaces % Currency.MaxDecimalPlaces];
+        [CLSCompliant(false)]
+        public uint Factor => CurrencyHelpers.PowersOfTen[DecimalPlaces % Currency.MaxDecimalPlaces];
 
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "[Intentionally] When (if?) we add currencies not using a decimal system, this value will no longer look like a constant.")]
         public decimal One => 1m;

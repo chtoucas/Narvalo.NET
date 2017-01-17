@@ -4,7 +4,7 @@ namespace Narvalo.Finance.Internal
 {
     using System.Globalization;
 
-    // Used internally to ensure that Currency and Currency<T> are in sync.
+    // Used internally to ensure that Currency and Currency<T> look alike.
     internal interface ICurrencyUnit
     {
         string Code { get; }
@@ -21,7 +21,7 @@ namespace Narvalo.Finance.Internal
 
         decimal Epsilon { get; }
 
-        //uint Factor { get; }
+        uint Factor { get; }
 
         decimal One { get; }
 
