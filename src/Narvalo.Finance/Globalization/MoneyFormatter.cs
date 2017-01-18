@@ -9,24 +9,33 @@ namespace Narvalo.Finance.Globalization
     using Narvalo.Finance.Properties;
 
     // Default formatter for all money-like types:
-    // - The amount is formatted using the Number specifier ("N") for the requested culture.
+    // - The amount is formatted using the **Number** specifier ("N") for the requested culture.
     // - The position of the currency code depends on the format specifier
     //   (on the left w/ "L"; on the right w/ "R" or "G"; not-included w/ "N").
     //
     // A standard money format string takes the form "Axx", where:
     // - A is a single alphabetic character called the format specifier.
     //   Admissible values are "N" (Numeric), "L" (Left), "R" (Right) and "G" (General):
-    //   * "N", do not include any information about the currency.
-    //   * "L", place the currency code on the left of the amount.
-    //   * "R" and "G", place the currency code on the right of the amount.
+    //   * "N", do not include any information about the currency. Example: 12345.60.
+    //   * "L", place the currency code on the left of the amount. Example: EUR 12345.60.
+    //   * "R" and "G", place the currency code on the right of the amount. Example: 12345.60 EUR.
     // - xx is an optional integer called the precision specifier. The precision specifier ranges
-    //   from 0 to 99 and affects the number of digits displayed for the amount.
+    //   from 0 to 99 and affects the number of digits **displayed** for the amount; it does not
+    //   round the amount itself. If the precision specifier is present and the amount has more
+    //   digits than requested, the displayed value is rounded away from zero.
     //   If no precision is given, we use the decimal precision reported by the object
-    //   (DecimalPrecision for Money and Money<T> and 0 for Moneypenny).
+    //   (DecimalPrecision for Money and Money<T>; for Moneypenny, see below).
     //   For Money and Money<T>, if DecimalPrecision is null, we fallback to the default
     //   precision found in the culture info (NumberFormatInfo.NumberDecimalDigits).
     //
-    // If no specific culture is requested, we use the current culture.
+    // Remark: for a Moneypenny, since the amount is a long, the decimal precision is always equal to 0.
+    // - If the currency does not have a minor currency unit, a penny is "really" a money,
+    //   eg for the Vietnamese đồng, we display 12345 VND, not 12345 VNd.
+    // - Otherwise, we have a "true" penny, eg for the EURO, we display 12345 EUr.
+    //
+    // Behaviour:
+    // - If no format is given, we use the general format ("G").
+    // - If no specific culture is requested, we use the current culture.
     public static class MoneyFormatter
     {
         private const string NO_BREAK_SPACE = "\u00A0";
@@ -57,7 +66,6 @@ namespace Narvalo.Finance.Globalization
         {
             Warrant.NotNull<string>();
 
-            // The amount being a long, the decimal precision is simply equal to 0.
             var spec = MoneyFormatSpecifier.Parse(format, 0);
             string amount = penny.Amount.ToString(spec.AmountFormat, numberFormat ?? NumberFormatInfo.CurrentInfo);
             return FormatImpl(amount, penny.PennyOrCurrencyCode, spec);

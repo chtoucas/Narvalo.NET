@@ -8,7 +8,7 @@ namespace Narvalo.Finance.Globalization
     using Narvalo.Finance.Properties;
 
     // Custom formatter for Money:
-    // - The amount is formatted using the Currency specifier ("C") for the requested culture.
+    // - The amount is formatted using the **Currency** specifier ("C") for the requested culture.
     // - The position of the currency code depends on the format specifier
     //   (on the left w/ "L"; on the right w/ "R"; culture-dependent w/ "G"; not-included w/ "N").
     //
@@ -21,12 +21,16 @@ namespace Narvalo.Finance.Globalization
     //   * "G", replaces the currency symbol by the currency code and ensures that there is a space
     //     between the amount and the currency code.
     // - xx is an optional integer called the precision specifier. The precision specifier ranges
-    //   from 0 to 99 and affects the number of digits displayed for the amount.
+    //   from 0 to 99 and affects the number of digits **displayed** for the amount; it does not
+    //   round the amount itself. If the precision specifier is present and the amount has more
+    //   digits than requested, the displayed value is rounded away from zero.
     //   If no precision is given, we use the decimal precision reported by the object
     //   (the DecimalPrecision property). If DecimalPrecision is null, we fallback to the default
     //   precision found in the culture info (NumberFormatInfo.NumberDecimalDigits).
     //
-    // If no specific culture is requested, we use the current culture.
+    // Behaviour:
+    // - If no format is given, we use the general format ("G").
+    // - If no specific culture is requested, we use the current culture.
     public sealed class LocalMoneyFormatter : IFormatProvider, ICustomFormatter
     {
         internal const char NumericFormat = 'C';
