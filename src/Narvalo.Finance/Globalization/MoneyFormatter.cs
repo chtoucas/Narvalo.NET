@@ -43,35 +43,35 @@ namespace Narvalo.Finance.Globalization
         public static string FormatMoney<TCurrency>(
             Money<TCurrency> money,
             string format,
-            NumberFormatInfo numberFormat)
+            IFormatProvider formatProvider)
             where TCurrency : Currency<TCurrency>
         {
             Warrant.NotNull<string>();
 
             var spec = MoneyFormatSpecifier.Parse(format, money.DecimalPrecision);
-            string amount = money.Amount.ToString(spec.AmountFormat, numberFormat ?? NumberFormatInfo.CurrentInfo);
+            string amount = money.Amount.ToString(spec.AmountFormat, formatProvider);
             return FormatImpl(amount, money.Currency.Code, spec);
         }
 
-        public static string FormatMoney(Money money, string format, NumberFormatInfo numberFormat)
+        public static string FormatMoney(Money money, string format, IFormatProvider formatProvider)
         {
             Warrant.NotNull<string>();
 
             var spec = MoneyFormatSpecifier.Parse(format, money.DecimalPrecision);
-            string amount = money.Amount.ToString(spec.AmountFormat, numberFormat ?? NumberFormatInfo.CurrentInfo);
+            string amount = money.Amount.ToString(spec.AmountFormat, formatProvider);
             return FormatImpl(amount, money.Currency.Code, spec);
         }
 
-        public static string FormatPenny(Moneypenny penny, string format, NumberFormatInfo numberFormat)
+        public static string FormatPenny(Moneypenny penny, string format, IFormatProvider formatProvider)
         {
             Warrant.NotNull<string>();
 
             var spec = MoneyFormatSpecifier.Parse(format, 0);
-            string amount = penny.Amount.ToString(spec.AmountFormat, numberFormat ?? NumberFormatInfo.CurrentInfo);
+            string amount = penny.Amount.ToString(spec.AmountFormat, formatProvider);
             return FormatImpl(amount, penny.PennyOrCurrencyCode, spec);
         }
 
-        private static string FormatImpl(string amount, string currencyCode, MoneyFormatSpecifier spec)
+        internal static string FormatImpl(string amount, string currencyCode, MoneyFormatSpecifier spec)
         {
             Warrant.NotNull<string>();
 
