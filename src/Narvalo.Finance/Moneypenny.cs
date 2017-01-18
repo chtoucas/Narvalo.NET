@@ -7,11 +7,10 @@ namespace Narvalo.Finance
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
 
+    using Narvalo.Finance.Generic;
     using Narvalo.Finance.Globalization;
     using Narvalo.Finance.Properties;
     using Narvalo.Finance.Rounding;
-
-    using static Narvalo.Finance.PennyCalculator;
 
     // A lightweight money type.
     //
@@ -44,8 +43,7 @@ namespace Narvalo.Finance
     // (no rounding is ever needed, at the expense of what you can do with it), a restriction
     // that does not exist with FastMoney.
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public partial struct Moneypenny
-        : IEquatable<Moneypenny>, IComparable<Moneypenny>, IComparable, IFormattable
+    public partial struct Moneypenny : Internal.IMoneypenny<Moneypenny, Currency>
     {
         private const string DEFAULT_FORMAT = "G";
 
@@ -70,8 +68,6 @@ namespace Narvalo.Finance
         public bool IsPositive => Amount > 0L;
         public bool IsPositiveOrZero => Amount >= 0L;
         public int Sign => Amount < 0L ? -1 : (Amount > 0L ? 1 : 0);
-
-        public decimal ToMajor() => Currency.ConvertToMajor(Amount);
 
         public static Moneypenny Zero(Currency currency) => new Moneypenny(0L, currency);
 
@@ -120,14 +116,6 @@ namespace Narvalo.Finance
             return FromMinor(currency.ConvertToMinor(major), currency, adjuster);
         }
 
-        public static Moneypenny FromMoney(Money money)
-        {
-            Require.True(money.IsRounded, nameof(money));
-
-            decimal amount = money.ToMinor();
-            return new Moneypenny(Convert.ToInt64(amount), money.Currency);
-        }
-
         public static Moneypenny? TryCreateFromMinor(decimal minor, Currency currency, MidpointRounding mode)
         {
             Require.True(currency.HasFixedDecimalPlaces, nameof(currency));
@@ -163,16 +151,81 @@ namespace Narvalo.Finance
 
             return TryCreateFromMinor(currency.ConvertToMinor(major), currency, adjuster);
         }
+    }
 
-        public static Moneypenny? TryCreateFromMoney(Money money)
+    // Domain-specific conversions.
+    public partial struct Moneypenny
+    {
+        public decimal ToMajor() => Currency.ConvertToMajor(Amount);
+
+        public Money ToMoney() => new Money(ToMajor(), Currency, true);
+
+        public Money<TCurrency> ToMoney<TCurrency>() where TCurrency : Currency<TCurrency>
         {
-            Require.True(money.IsRounded, nameof(money));
+            if (!(Currency.Code == Money<TCurrency>.UnderlyingUnit.Code))
+            {
+                throw new InvalidOperationException("XXX");
+            }
 
-            long? minor = money.ToLongMinor();
-            if (!minor.HasValue) { return null; }
-
-            return new Moneypenny(minor.Value, money.Currency);
+            return new Money<TCurrency>(ToMajor(), true);
         }
+
+        // Explicit conversion that should not fail.
+        public static explicit operator Money(Moneypenny value) => value.ToMoney();
+    }
+
+    // Numeric conversions.
+    public partial struct Moneypenny
+    {
+        [CLSCompliant(false)]
+        public sbyte ToSByte() => Convert.ToSByte(Amount);
+
+        [CLSCompliant(false)]
+        public ushort ToUInt16() => Convert.ToUInt16(Amount);
+
+        [CLSCompliant(false)]
+        public uint ToUInt32() => Convert.ToUInt32(Amount);
+
+        [CLSCompliant(false)]
+        public ulong ToUInt64() => Convert.ToUInt64(Amount);
+
+        public byte ToByte() => Convert.ToByte(Amount);
+
+        public short ToInt16() => Convert.ToInt16(Amount);
+
+        public int ToInt32() => Convert.ToInt32(Amount);
+
+        // Lossless conversion.
+        public long ToInt64() => Amount;
+
+        // Lossless conversion.
+        public decimal ToDecimal() => Amount;
+
+        // NB: Implicit conversion (no unexpected loss of precision, fast & completely harmless).
+        public static implicit operator long(Moneypenny value) => value.Amount;
+
+        #region Harmless explicit conversions from a numeric type to Moneypenny w/o Currency.
+
+        // No conversion from ulong since there is a risk of overflow.
+
+        [CLSCompliant(false)]
+        public static explicit operator Moneypenny(sbyte value) => new Moneypenny(value, Currency.None);
+
+        [CLSCompliant(false)]
+        public static explicit operator Moneypenny(ushort value) => new Moneypenny(value, Currency.None);
+
+        [CLSCompliant(false)]
+        public static explicit operator Moneypenny(uint value) => new Moneypenny(value, Currency.None);
+
+        public static explicit operator Moneypenny(byte value) => new Moneypenny(value, Currency.None);
+
+        public static explicit operator Moneypenny(short value) => new Moneypenny(value, Currency.None);
+
+        public static explicit operator Moneypenny(int value) => new Moneypenny(value, Currency.None);
+
+        public static explicit operator Moneypenny(long value) => new Moneypenny(value, Currency.None);
+
+        #endregion
     }
 
     // Implements the IFormattable interface.
@@ -267,18 +320,6 @@ namespace Narvalo.Finance
 
             return CompareTo((Moneypenny)obj);
         }
-    }
-
-    // Implicit/explicit conversions.
-    public partial struct Moneypenny
-    {
-        public Money ToMoney() => Money.FromMinor(Amount, Currency);
-
-        public static explicit operator Moneypenny(long value) => new Moneypenny(value, Currency.None);
-
-        public static implicit operator long(Moneypenny value) => value.Amount;
-
-        public static explicit operator Money(Moneypenny value) => value.ToMoney();
     }
 
     // Overrides the op_Addition operator.

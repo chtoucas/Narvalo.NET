@@ -6,6 +6,7 @@ namespace Narvalo.Finance.Globalization
     using System.Globalization;
 
     using Narvalo.Finance.Generic;
+    using Narvalo.Finance.Internal;
 
     public sealed class LocalMoneyFormatter<TCurrency>
         : IFormatProvider, ICustomFormatter
@@ -27,7 +28,7 @@ namespace Narvalo.Finance.Globalization
 
                 LocalMoneyFormatter.FormatImpl(
                     money.Amount,
-                    money.Unit.Code,
+                    money.Currency.Code,
                     fmt,
                     NumberFormatInfo.GetInstance(formatProvider));
             }

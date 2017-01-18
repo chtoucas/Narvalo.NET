@@ -7,6 +7,7 @@ namespace Narvalo.Finance
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
 
+    using Narvalo.Finance.Generic;
     using Narvalo.Finance.Globalization;
     using Narvalo.Finance.Properties;
     using Narvalo.Finance.Rounding;
@@ -15,7 +16,7 @@ namespace Narvalo.Finance
     // about interop with unmanaged code, so why not let the CLR decide what's best for it?
     //[StructLayout(LayoutKind.Auto)]
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public partial struct Money : Internal.IMoney<Money>
+    public partial struct Money : Internal.IMoney<Money, Currency>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Money"/> class for a specific currency
@@ -105,7 +106,7 @@ namespace Narvalo.Finance
         /// If the amount is rounded, returns the number of digits defined by the currency;
         /// otherwise, returns null.
         /// </summary>
-        internal int? DecimalPrecision => IsRounded ? Currency.DecimalPlaces : (int?)null;
+        public int? DecimalPrecision => IsRounded ? Currency.DecimalPlaces : (int?)null;
 
         /// <summary>
         /// Gets a value indicating whether the amount is zero.
@@ -145,32 +146,6 @@ namespace Narvalo.Finance
             Expect.NotNull(adjuster);
             if (IsNormalized) { return this; }
             return FromMajor(Amount, Currency, adjuster);
-        }
-
-        /// <summary>
-        /// Gets the amount given in minor units.
-        /// </summary>
-        /// <exception cref="OverflowException">Thrown if the result is too large to fit into
-        /// the Decimal range.</exception>
-        /// <seealso cref="ToLongMinor()"/>
-        /// <seealso cref="ToLongMinor(out long)"/>
-        /// <returns>The amount in minor units. If the instance is not normalizable, it returns
-        /// the amount untouched as if the currency had no minor currency unit.</returns>
-        public decimal ToMinor() => Currency.ConvertToMinor(Amount);
-
-        /// <summary>
-        /// Gets the amount given in minor units and converted to a 64-bit signed integer.
-        /// </summary>
-        /// <exception cref="InvalidOperationException">Thrown if the instance is not normalized.</exception>
-        /// <returns>A 64-bit signed integer representing the amount in minor units;
-        /// <see langword="null"/> if the result is too large to fit into the Int64 range.</returns>
-        public long? ToLongMinor()
-        {
-            if (!IsNormalized) { throw new InvalidOperationException("XXX"); }
-
-            decimal minor = ToMinor();
-            if (minor < Int64.MinValue || minor > Int64.MaxValue) { return null; }
-            return Convert.ToInt64(minor);
         }
 
         internal void ThrowIfCurrencyMismatch(Money money, string parameterName)
@@ -288,6 +263,112 @@ namespace Narvalo.Finance
             => FromMajor(currency.ConvertToMajor(minor), currency, adjuster);
     }
 
+    // Domain-specific conversions.
+    public partial struct Money
+    {
+        /// <summary>
+        /// Gets the amount given in minor units.
+        /// </summary>
+        /// <exception cref="OverflowException">Thrown if the result is too large to fit into
+        /// the Decimal range.</exception>
+        /// <seealso cref="ToLongMinor()"/>
+        /// <seealso cref="ToLongMinor(out long)"/>
+        /// <returns>The amount in minor units. If the instance is not normalizable, it returns
+        /// the amount untouched as if the currency had no minor currency unit.</returns>
+        public decimal ToMinor() => Currency.ConvertToMinor(Amount);
+
+        /// <summary>
+        /// Gets the amount given in minor units and converted to a 64-bit signed integer.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">Thrown if the instance is not normalized.</exception>
+        /// <returns>A 64-bit signed integer representing the amount in minor units;
+        /// <see langword="null"/> if the result is too large to fit into the Int64 range.</returns>
+        public long? ToLongMinor()
+        {
+            if (!IsNormalized) { throw new InvalidOperationException("XXX"); }
+
+            decimal minor = ToMinor();
+            if (minor < Int64.MinValue || minor > Int64.MaxValue) { return null; }
+            return Convert.ToInt64(minor);
+        }
+
+        public Money<TCurrency> ToMoney<TCurrency>() where TCurrency : Currency<TCurrency>
+        {
+            if (!(Currency.Code == Money<TCurrency>.UnderlyingUnit.Code))
+            {
+                throw new InvalidOperationException("XXX");
+            }
+
+            return new Money<TCurrency>(Amount, IsNormalized);
+        }
+
+        public Moneypenny? ToPenny()
+        {
+            if (!IsRounded) { throw new InvalidOperationException("XXX"); }
+
+            long? amount = ToLongMinor();
+            return amount.HasValue ? new Moneypenny(amount.Value, Currency) : (Moneypenny?)null;
+        }
+    }
+
+    // Numeric conversions.
+    public partial struct Money
+    {
+        [CLSCompliant(false)]
+        public sbyte ToSByte() => Decimal.ToSByte(Amount);
+
+        [CLSCompliant(false)]
+        public ushort ToUInt16() => Decimal.ToUInt16(Amount);
+
+        [CLSCompliant(false)]
+        public uint ToUInt32() => Decimal.ToUInt32(Amount);
+
+        [CLSCompliant(false)]
+        public ulong ToUInt64() => Decimal.ToUInt64(Amount);
+
+        public byte ToByte() => Decimal.ToByte(Amount);
+
+        public short ToInt16() => Decimal.ToInt16(Amount);
+
+        public int ToInt32() => Decimal.ToInt32(Amount);
+
+        public long ToInt64() => Decimal.ToInt64(Amount);
+
+        // Lossless conversion.
+        public decimal ToDecimal() => Amount;
+
+        // NB: Implicit conversion (no unexpected loss of precision, fast & completely harmless).
+        public static implicit operator decimal(Money value) => value.Amount;
+
+        #region Harmless explicit conversions from a numeric type to Money w/o Currency.
+
+        [CLSCompliant(false)]
+        public static explicit operator Money(sbyte value) => new Money(value, Currency.None);
+
+        [CLSCompliant(false)]
+        public static explicit operator Money(ushort value) => new Money(value, Currency.None);
+
+        [CLSCompliant(false)]
+        public static explicit operator Money(uint value) => new Money(value, Currency.None);
+
+        [CLSCompliant(false)]
+        public static explicit operator Money(ulong value) => new Money(value, Currency.None);
+
+        public static explicit operator Money(byte value) => new Money(value, Currency.None);
+
+        public static explicit operator Money(short value) => new Money(value, Currency.None);
+
+        public static explicit operator Money(int value) => new Money(value, Currency.None);
+
+        public static explicit operator Money(long value) => new Money(value, Currency.None);
+
+        // WARNING: Even if we made the other ops implicit, we should keep this one explicit:
+        // the cast is lossless but the result is not normalized.
+        public static explicit operator Money(decimal value) => new Money(value, Currency.None, false);
+
+        #endregion
+    }
+
     // Implements the IFormattable interface.
     public partial struct Money
     {
@@ -385,87 +466,6 @@ namespace Narvalo.Finance
 
             return CompareTo((Money)obj);
         }
-    }
-
-    // Implicit/explicit conversions.
-    public partial struct Money
-    {
-        [CLSCompliant(false)]
-        public sbyte ToSByte() => Decimal.ToSByte(Amount);
-
-        [CLSCompliant(false)]
-        public ushort ToUInt16() => Decimal.ToUInt16(Amount);
-
-        [CLSCompliant(false)]
-        public uint ToUInt32() => Decimal.ToUInt32(Amount);
-
-        [CLSCompliant(false)]
-        public ulong ToUInt64() => Decimal.ToUInt64(Amount);
-
-        public byte ToByte() => Decimal.ToByte(Amount);
-
-        public short ToInt16() => Decimal.ToInt16(Amount);
-
-        public int ToInt32() => Decimal.ToInt32(Amount);
-
-        public long ToInt64() => Decimal.ToInt64(Amount);
-
-        public decimal ToDecimal() => Amount;
-
-        #region Integral type or decimal -> Money.
-
-        [CLSCompliant(false)]
-        public static explicit operator Money(sbyte value) => new Money(value, Currency.None);
-
-        [CLSCompliant(false)]
-        public static explicit operator Money(ushort value) => new Money(value, Currency.None);
-
-        [CLSCompliant(false)]
-        public static explicit operator Money(uint value) => new Money(value, Currency.None);
-
-        [CLSCompliant(false)]
-        public static explicit operator Money(ulong value) => new Money(value, Currency.None);
-
-        public static explicit operator Money(byte value) => new Money(value, Currency.None);
-
-        public static explicit operator Money(short value) => new Money(value, Currency.None);
-
-        public static explicit operator Money(int value) => new Money(value, Currency.None);
-
-        public static explicit operator Money(long value) => new Money(value, Currency.None);
-
-        // NB: If we make the other ops implicit, we MUST keep this one explicit:
-        // the cast is lossless but the result is not normalized.
-        public static explicit operator Money(decimal value) => new Money(value, Currency.None, false);
-
-        #endregion
-
-        #region Money -> integral type or decimal.
-
-        [CLSCompliant(false)]
-        public static explicit operator sbyte(Money value) => value.ToSByte();
-
-        [CLSCompliant(false)]
-        public static explicit operator ushort(Money value) => value.ToUInt16();
-
-        [CLSCompliant(false)]
-        public static explicit operator uint(Money value) => value.ToUInt32();
-
-        [CLSCompliant(false)]
-        public static explicit operator ulong(Money value) => value.ToUInt64();
-
-        public static explicit operator byte(Money value) => value.ToByte();
-
-        public static explicit operator short(Money value) => value.ToInt16();
-
-        public static explicit operator int(Money value) => value.ToInt32();
-
-        public static explicit operator long(Money value) => value.ToInt64();
-
-        // NB: This one is implicit (no unexpected loss of precision, fast & completely harmless).
-        public static implicit operator decimal(Money value) => value.ToDecimal();
-
-        #endregion
     }
 
     // Overrides the op_Addition operator.
@@ -684,7 +684,7 @@ namespace Narvalo.Finance
     {
         public static Money operator %(Money dividend, decimal divisor) => dividend.Mod(divisor);
 
-        public Money Mod(decimal divisor)=> new Money(Amount % divisor, Currency, false);
+        public Money Mod(decimal divisor) => new Money(Amount % divisor, Currency, false);
     }
 
     // Overrides the op_Increment operator.

@@ -76,7 +76,7 @@
     <Compile Include="Allocators\PennyAllocators.cs" />
     <Compile Include="Extensions\Enumerable%24.cs" />
     <Compile Include="Generic\MoneyFactory.cs" />
-    <Compile Include="Globalization\FormatParts.cs" />
+    <Compile Include="Internal\FormatParts.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Internal\CurrencyHelpers.cs" />
     <Compile Include="Internal\CurrencyHelpers.g.cs">
@@ -84,8 +84,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CurrencyHelpers.tt</DependentUpon>
     </Compile>
+    <Compile Include="Internal\IAmount`2.cs" />
     <Compile Include="Internal\ICurrencyUnit.cs" />
-    <Compile Include="Internal\IMoney.cs" />
+    <Compile Include="Internal\IMoney`2.cs" />
+    <Compile Include="Internal\IMoneypenny`2.cs" />
     <Compile Include="MoneyStyles.cs" />
     <Compile Include="RoundingMachine.cs" />
     <Compile Include="Allocators\Allocation.cs" />

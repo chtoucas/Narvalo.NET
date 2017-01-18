@@ -6,6 +6,7 @@ namespace Narvalo.Finance.Globalization
     using System.Globalization;
 
     using Narvalo.Finance.Generic;
+    using Narvalo.Finance.Internal;
     using Narvalo.Finance.Properties;
 
     // Default formatter for all money-like types.
@@ -22,10 +23,8 @@ namespace Narvalo.Finance.Globalization
             Warrant.NotNull<string>();
 
             var fmt = FormatParts.Parse(format, money.DecimalPrecision);
-
             string amount = money.Amount.ToString(fmt.AmountFormat, numberFormat ?? NumberFormatInfo.CurrentInfo);
-
-            return FormatImpl(amount, money.Unit.Code, fmt);
+            return FormatImpl(amount, money.Currency.Code, fmt);
         }
 
         public static string FormatMoney(Money money, string format, NumberFormatInfo numberFormat)
@@ -33,9 +32,7 @@ namespace Narvalo.Finance.Globalization
             Warrant.NotNull<string>();
 
             var fmt = FormatParts.Parse(format, money.DecimalPrecision);
-
             string amount = money.Amount.ToString(fmt.AmountFormat, numberFormat ?? NumberFormatInfo.CurrentInfo);
-
             return FormatImpl(amount, money.Currency.Code, fmt);
         }
 
@@ -44,9 +41,7 @@ namespace Narvalo.Finance.Globalization
             Warrant.NotNull<string>();
 
             var fmt = FormatParts.Parse(format, 0);
-
             string amount = penny.Amount.ToString(fmt.AmountFormat, numberFormat ?? NumberFormatInfo.CurrentInfo);
-
             return FormatImpl(amount, penny.PennyOrCurrencyCode, fmt);
         }
 

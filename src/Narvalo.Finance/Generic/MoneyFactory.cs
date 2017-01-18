@@ -6,7 +6,7 @@ namespace Narvalo.Finance.Generic
 
     using Narvalo.Finance.Rounding;
 
-    // Factory methods: FromXXX() methods produce normalized instances (except FromMoney()), OfXXX() do not.
+    // Factory methods: FromXXX() methods produce normalized instances, OfXXX() do not.
     public static class MoneyFactory
     {
         public static Money<TCurrency> OfMajor<TCurrency>(decimal major)
@@ -65,17 +65,6 @@ namespace Narvalo.Finance.Generic
         {
             var major = Money<TCurrency>.UnderlyingUnit.ConvertToMajor(minor);
             return FromMajor<TCurrency>(major, adjuster);
-        }
-
-        public static Money<TCurrency> FromMoney<TCurrency>(Money money)
-            where TCurrency : Currency<TCurrency>
-        {
-            if (!(money.Currency.Code == Money<TCurrency>.UnderlyingUnit.Code))
-            {
-                throw new InvalidCastException();
-            }
-
-            return new Money<TCurrency>(money.Amount, money.IsNormalized);
         }
     }
 }

@@ -5,6 +5,7 @@ namespace Narvalo.Finance.Globalization
     using System;
     using System.Globalization;
 
+    using Narvalo.Finance.Internal;
     using Narvalo.Finance.Properties;
 
     public sealed class LocalMoneyFormatter : IFormatProvider, ICustomFormatter
