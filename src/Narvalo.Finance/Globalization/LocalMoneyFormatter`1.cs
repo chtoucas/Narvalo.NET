@@ -3,14 +3,29 @@
 namespace Narvalo.Finance.Globalization
 {
     using System;
+    using System.Globalization;
 
     using Narvalo.Finance.Generic;
 
     // Custom formatter for Money<T>. For explanations, please see LocalMoneyFormatter.
-    public sealed class LocalMoneyFormatter<TCurrency>
-        : IFormatProvider, ICustomFormatter
+    public sealed class LocalMoneyFormatter<TCurrency> : IFormatProvider, ICustomFormatter
         where TCurrency : Currency<TCurrency>
     {
+        private readonly IFormatProvider _provider;
+
+        public LocalMoneyFormatter() { }
+
+        public LocalMoneyFormatter(IFormatProvider provider)
+        {
+            _provider = provider;
+        }
+
+        public static LocalMoneyFormatter<TCurrency> Current
+            => new LocalMoneyFormatter<TCurrency>(CultureInfo.CurrentCulture);
+
+        public static LocalMoneyFormatter<TCurrency> Invariant
+            => new LocalMoneyFormatter<TCurrency>(CultureInfo.InvariantCulture);
+
         #region ICustomFormatter
 
         public string Format(string format, object arg, IFormatProvider formatProvider)
@@ -26,7 +41,7 @@ namespace Narvalo.Finance.Globalization
                 var spec = MoneyFormatSpecifier.Parse(
                     format, money.DecimalPrecision, LocalMoneyFormatter.NumericFormat);
 
-                LocalMoneyFormatter.FormatImpl(money.Amount, money.Currency.Code, spec, formatProvider);
+                LocalMoneyFormatter.FormatImpl(money.Amount, money.Currency.Code, spec, _provider);
             }
 
             var formattable = arg as IFormattable;
@@ -38,7 +53,7 @@ namespace Narvalo.Finance.Globalization
         #region IFormatProvider
 
         public object GetFormat(Type formatType)
-            => formatType == typeof(LocalMoneyFormatter<TCurrency>) ? this : null;
+            => formatType == typeof(Money<TCurrency>) || formatType == typeof(ICustomFormatter) ? this : null;
 
         #endregion
     }

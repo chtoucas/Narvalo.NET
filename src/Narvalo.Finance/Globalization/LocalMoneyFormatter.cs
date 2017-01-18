@@ -35,11 +35,28 @@ namespace Narvalo.Finance.Globalization
     {
         internal const char NumericFormat = 'C';
 
+        // Provider for formatting the amount; if null, the current culture is used.
+        private readonly IFormatProvider _provider;
+
+        public LocalMoneyFormatter() : this(CultureInfo.CurrentCulture) { }
+
+        public LocalMoneyFormatter(IFormatProvider provider)
+        {
+            _provider = provider;
+        }
+
+        public static LocalMoneyFormatter Current => new LocalMoneyFormatter(CultureInfo.CurrentCulture);
+
+        public static LocalMoneyFormatter Invariant => new LocalMoneyFormatter(CultureInfo.InvariantCulture);
+
         #region ICustomFormatter
 
         public string Format(string format, object arg, IFormatProvider formatProvider)
         {
             Warrant.NotNull<string>();
+
+            // REVIEW: We could check that it is called from himself? See below.
+            //if (!Equals(formatProvider)) { return String.Empty; }
 
             if (arg == null) { return String.Empty; }
 
@@ -49,7 +66,7 @@ namespace Narvalo.Finance.Globalization
 
                 var spec = MoneyFormatSpecifier.Parse(format, money.DecimalPrecision, NumericFormat);
 
-                return FormatImpl(money.Amount, money.Currency.Code, spec, formatProvider);
+                return FormatImpl(money.Amount, money.Currency.Code, spec, _provider);
             }
 
             var formattable = arg as IFormattable;
@@ -60,8 +77,25 @@ namespace Narvalo.Finance.Globalization
 
         #region IFormatProvider
 
+        // Two possibilities with:
+        // > var provider = new LocalMoneyFormatter();
+        //
+        // typeof(Money) is needed for Money.ToString(format, IFormatProvider):
+        // > money.ToString("N", provider);
+        // it calls provider.GetFormat(money.GetType()), then
+        // > provider.Format("N", money, provider)
+        //
+        // typeof(ICustomFormatter) is needed for String.Format(IFormatProvider, format, args),
+        // and StringBuilder.AppendFormat(IFormatProvider, format, args):
+        // > String.Format(provider, "{0:N}", money);
+        // String.Format() calls provider.GetFormat(typeof(ICustomFormatter)), then
+        // > provider.Format("N", money, provider)
+        //
+        // If we did not handle typeof(ICustomFormatter), since money implements IFormattable,
+        // String.Format() would call money.ToString("N", null) and the provider would be ignored.
+        // See https://msdn.microsoft.com/en-us/library/bb762932(v=vs.110).aspx.
         public object GetFormat(Type formatType)
-            => formatType == typeof(LocalMoneyFormatter) ? this : null;
+            => formatType == typeof(Money) || formatType == typeof(ICustomFormatter) ? this : null;
 
         #endregion
 
@@ -69,11 +103,12 @@ namespace Narvalo.Finance.Globalization
             decimal amount,
             string currencyCode,
             MoneyFormatSpecifier spec,
-            IFormatProvider formatProvider)
+            IFormatProvider provider)
         {
+            Demand.NotNull(provider);
             Warrant.NotNull<string>();
 
-            var nfi = (NumberFormatInfo.GetInstance(formatProvider) ?? NumberFormatInfo.CurrentInfo).Copy();
+            var nfi = NumberFormatInfo.GetInstance(provider).Copy();
 
             switch (spec.MainFormat)
             {

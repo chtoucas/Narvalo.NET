@@ -122,7 +122,7 @@
     <Compile Include="Globalization\CountryISOCodes.cs" />
     <Compile Include="Globalization\NumberFormatInfoExtensions.cs" />
     <Compile Include="IbanStyles.cs" />
-    <Compile Include="Globalization\MoneyFormatter.cs" />
+    <Compile Include="Globalization\MoneyFormatters.cs" />
     <Compile Include="Generic\Units.g.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

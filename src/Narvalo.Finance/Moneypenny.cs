@@ -234,13 +234,13 @@ namespace Narvalo.Finance
         public override string ToString()
         {
             Warrant.NotNull<string>();
-            return MoneyFormatter.FormatPenny(this, null, NumberFormatInfo.CurrentInfo);
+            return MoneyFormatters.FormatPenny(this, null, NumberFormatInfo.CurrentInfo);
         }
 
         public string ToString(string format)
         {
             Warrant.NotNull<string>();
-            return MoneyFormatter.FormatPenny(this, format, NumberFormatInfo.CurrentInfo);
+            return MoneyFormatters.FormatPenny(this, format, NumberFormatInfo.CurrentInfo);
         }
 
         public string ToString(IFormatProvider formatProvider)
@@ -262,7 +262,7 @@ namespace Narvalo.Finance
                 }
             }
 
-            return MoneyFormatter.FormatPenny(this, format, NumberFormatInfo.GetInstance(formatProvider));
+            return MoneyFormatters.FormatPenny(this, format, NumberFormatInfo.GetInstance(formatProvider));
         }
     }
 

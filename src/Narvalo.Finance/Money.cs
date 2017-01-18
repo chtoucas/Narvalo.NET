@@ -376,13 +376,13 @@ namespace Narvalo.Finance
         public override string ToString()
         {
             Warrant.NotNull<string>();
-            return MoneyFormatter.FormatMoney(this, null, NumberFormatInfo.CurrentInfo);
+            return MoneyFormatters.FormatMoney(this, null, NumberFormatInfo.CurrentInfo);
         }
 
         public string ToString(string format)
         {
             Warrant.NotNull<string>();
-            return MoneyFormatter.FormatMoney(this, format, NumberFormatInfo.CurrentInfo);
+            return MoneyFormatters.FormatMoney(this, format, NumberFormatInfo.CurrentInfo);
         }
 
         public string ToString(IFormatProvider formatProvider)
@@ -404,7 +404,7 @@ namespace Narvalo.Finance
                 }
             }
 
-            return MoneyFormatter.FormatMoney(this, format, NumberFormatInfo.GetInstance(formatProvider));
+            return MoneyFormatters.FormatMoney(this, format, NumberFormatInfo.GetInstance(formatProvider));
         }
     }
 

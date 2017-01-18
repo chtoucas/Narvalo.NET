@@ -13,6 +13,19 @@ namespace Narvalo.Finance.Globalization
     {
         internal const char NumericFormat = 'C';
 
+        private readonly IFormatProvider _provider;
+
+        public FixedMoneyFormatter() : this(CultureInfo.CurrentCulture) { }
+
+        public FixedMoneyFormatter(IFormatProvider provider)
+        {
+            _provider = provider;
+        }
+
+        public static FixedMoneyFormatter Current => new FixedMoneyFormatter(CultureInfo.CurrentCulture);
+
+        public static FixedMoneyFormatter Invariant => new FixedMoneyFormatter(CultureInfo.InvariantCulture);
+
         #region ICustomFormatter
 
         public string Format(string format, object arg, IFormatProvider formatProvider)
@@ -26,8 +39,8 @@ namespace Narvalo.Finance.Globalization
                 var money = (Money)arg;
 
                 var spec = MoneyFormatSpecifier.Parse(format, money.Currency.DecimalPlaces);
-                string amount = money.Amount.ToString(spec.AmountFormat, formatProvider);
-                return MoneyFormatter.FormatImpl(amount, money.Currency.Code, spec);
+                string amount = money.Amount.ToString(spec.AmountFormat, _provider);
+                return MoneyFormatters.FormatImpl(amount, money.Currency.Code, spec);
             }
 
             var formattable = arg as IFormattable;
@@ -39,7 +52,7 @@ namespace Narvalo.Finance.Globalization
         #region IFormatProvider
 
         public object GetFormat(Type formatType)
-            => formatType == typeof(FixedMoneyFormatter) ? this : null;
+            => formatType == typeof(Money) || formatType == typeof(ICustomFormatter) ? this : null;
 
         #endregion
     }

@@ -13,7 +13,7 @@ namespace Narvalo.Finance
 
         private MoneyFormatSpecifier(char mainFormat, int? decimalPlaces)
         {
-            // Uppercase it (ASCII only).
+            // Uppercase it (ASCII letter only).
             MainFormat = (char)(mainFormat & 0xDF);
             DecimalPlaces = decimalPlaces;
         }

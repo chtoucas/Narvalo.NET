@@ -35,39 +35,36 @@ namespace Narvalo.Finance.Globalization
     //
     // Behaviour:
     // - If no format is given, we use the general format ("G").
-    // - If no specific culture is requested, we use the current culture.
-    public static class MoneyFormatter
+    // - If no specific culture is requested, we use the default culture.
+    public static class MoneyFormatters
     {
         private const string NO_BREAK_SPACE = "\u00A0";
 
-        public static string FormatMoney<TCurrency>(
-            Money<TCurrency> money,
-            string format,
-            IFormatProvider formatProvider)
+        public static string FormatMoney<TCurrency>(Money<TCurrency> money, string format, IFormatProvider provider)
             where TCurrency : Currency<TCurrency>
         {
             Warrant.NotNull<string>();
 
             var spec = MoneyFormatSpecifier.Parse(format, money.DecimalPrecision);
-            string amount = money.Amount.ToString(spec.AmountFormat, formatProvider);
+            string amount = money.Amount.ToString(spec.AmountFormat, provider);
             return FormatImpl(amount, money.Currency.Code, spec);
         }
 
-        public static string FormatMoney(Money money, string format, IFormatProvider formatProvider)
+        public static string FormatMoney(Money money, string format, IFormatProvider provider)
         {
             Warrant.NotNull<string>();
 
             var spec = MoneyFormatSpecifier.Parse(format, money.DecimalPrecision);
-            string amount = money.Amount.ToString(spec.AmountFormat, formatProvider);
+            string amount = money.Amount.ToString(spec.AmountFormat, provider);
             return FormatImpl(amount, money.Currency.Code, spec);
         }
 
-        public static string FormatPenny(Moneypenny penny, string format, IFormatProvider formatProvider)
+        public static string FormatPenny(Moneypenny penny, string format, IFormatProvider provider)
         {
             Warrant.NotNull<string>();
 
             var spec = MoneyFormatSpecifier.Parse(format, 0);
-            string amount = penny.Amount.ToString(spec.AmountFormat, formatProvider);
+            string amount = penny.Amount.ToString(spec.AmountFormat, provider);
             return FormatImpl(amount, penny.PennyOrCurrencyCode, spec);
         }
 
