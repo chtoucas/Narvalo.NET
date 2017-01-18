@@ -37,7 +37,7 @@ namespace Narvalo.Finance.Internal
             int rem;
             int q = DivRem(value, count, out rem);
 
-            var seq = Enumerable.Repeat(q, count);
+            //var seq = Enumerable.Repeat(q, count);
 
             return Allocation.Create(value, q, rem, count);
         }
@@ -47,7 +47,7 @@ namespace Narvalo.Finance.Internal
             long rem;
             long q = DivRem(value, count, out rem);
 
-            var seq = Enumerable.Repeat(q, count);
+            //var seq = Enumerable.Repeat(q, count);
 
             return Allocation.Create(value, q, rem, count);
         }

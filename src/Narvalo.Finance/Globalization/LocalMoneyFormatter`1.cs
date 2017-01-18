@@ -3,11 +3,10 @@
 namespace Narvalo.Finance.Globalization
 {
     using System;
-    using System.Globalization;
 
     using Narvalo.Finance.Generic;
-    using Narvalo.Finance.Internal;
 
+    // Custom formatter for Money<T>. For more explanations, please see LocalMoneyFormatter.
     public sealed class LocalMoneyFormatter<TCurrency>
         : IFormatProvider, ICustomFormatter
         where TCurrency : Currency<TCurrency>
@@ -24,19 +23,14 @@ namespace Narvalo.Finance.Globalization
             {
                 var money = (Money<TCurrency>)arg;
 
-                var fmt = FormatParts.Parse(format, money.DecimalPrecision);
+                var spec = MoneyFormatSpecifier.Parse(
+                    format, money.DecimalPrecision, LocalMoneyFormatter.NumericFormat);
 
-                LocalMoneyFormatter.FormatImpl(
-                    money.Amount,
-                    money.Currency.Code,
-                    fmt,
-                    NumberFormatInfo.GetInstance(formatProvider));
+                LocalMoneyFormatter.FormatImpl(money.Amount, money.Currency.Code, spec, formatProvider);
             }
 
             var formattable = arg as IFormattable;
-            return formattable == null
-                ? arg.ToString()
-                : formattable.ToString(format, formatProvider);
+            return formattable == null ? arg.ToString() : formattable.ToString(format, formatProvider);
         }
 
         #endregion

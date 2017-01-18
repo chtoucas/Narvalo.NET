@@ -1,19 +1,20 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Finance.Internal
+namespace Narvalo.Finance
 {
     using System;
     using System.Globalization;
 
-    internal sealed class FormatParts
+    public class MoneyFormatSpecifier
     {
         public const char DefaultMainFormat = 'G';
 
-        public FormatParts(int? decimalPlaces) : this(DefaultMainFormat, decimalPlaces) { }
-        public FormatParts(char format, int? decimalPlaces)
+        private MoneyFormatSpecifier(int? decimalPlaces) : this(DefaultMainFormat, decimalPlaces) { }
+
+        private MoneyFormatSpecifier(char mainFormat, int? decimalPlaces)
         {
             // Uppercase it (ASCII only).
-            MainFormat = (char)(format & 0xDF);
+            MainFormat = (char)(mainFormat & 0xDF);
             DecimalPlaces = decimalPlaces;
         }
 
@@ -21,15 +22,22 @@ namespace Narvalo.Finance.Internal
 
         public char MainFormat { get; }
 
-        public string DefaultAmountFormat { get; set; } = "N";
+        public char NumericFormat { get; private set; } = 'N';
 
         public string AmountFormat
-            => DefaultAmountFormat + DecimalPlaces?.ToString(CultureInfo.InvariantCulture);
+            => NumericFormat + DecimalPlaces?.ToString(CultureInfo.InvariantCulture);
 
-        public static FormatParts Parse(string format, int? moneyPrecision)
+        public static MoneyFormatSpecifier Parse(string format, int? moneyPrecision, char numericFormat)
         {
-            if (format == null || format.Length == 0) { return new FormatParts(moneyPrecision); }
-            if (format.Length == 1) { return new FormatParts(format[0], moneyPrecision); }
+            var fmt = Parse(format, moneyPrecision);
+            fmt.NumericFormat = numericFormat;
+            return fmt;
+        }
+
+        public static MoneyFormatSpecifier Parse(string format, int? moneyPrecision)
+        {
+            if (format == null || format.Length == 0) { return new MoneyFormatSpecifier(moneyPrecision); }
+            if (format.Length == 1) { return new MoneyFormatSpecifier(format[0], moneyPrecision); }
 
             // "X00"..."X09" are not valid formats.
             if (format.Length == 3 && format[1] == '0') { throw new FormatException("XXX"); }
@@ -46,7 +54,7 @@ namespace Narvalo.Finance.Internal
 
                 if (!succeed) { throw new FormatException("XXX"); }
 
-                return new FormatParts(format[0], decimalPlaces);
+                return new MoneyFormatSpecifier(format[0], decimalPlaces);
             }
 
             throw new FormatException("XXX");
