@@ -294,7 +294,7 @@ namespace Narvalo.Finance
 
         public Money<TCurrency> ToMoney<TCurrency>() where TCurrency : Currency<TCurrency>
         {
-            if (!(Currency.Code == Money<TCurrency>.UnderlyingUnit.Code))
+            if (Currency.Code != Money<TCurrency>.UnderlyingUnit.Code)
             {
                 throw new InvalidOperationException("XXX");
             }

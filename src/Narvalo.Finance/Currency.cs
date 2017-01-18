@@ -9,6 +9,7 @@ namespace Narvalo.Finance
     using System.Globalization;
     using System.Linq;
 
+    using Narvalo.Finance.Generic;
     using Narvalo.Finance.Internal;
     using Narvalo.Finance.Properties;
 
@@ -194,6 +195,19 @@ namespace Narvalo.Finance
                 Demand.True(HasMinorCurrency);
                 return Code[0] + Code[1] + (Code[3] | 0x20).ToString(CultureInfo.InvariantCulture);
             }
+        }
+
+        // Added for symmetry, but use with care.
+        public TCurrency ToCurrency<TCurrency>() where TCurrency : Currency<TCurrency>
+        {
+            var unit = CurrencyUnit.OfType<TCurrency>();
+
+            if (Code != unit.Code)
+            {
+                throw new InvalidOperationException("XXX");
+            }
+
+            return unit;
         }
 
         /// <summary>
