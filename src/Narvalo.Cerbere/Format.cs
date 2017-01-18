@@ -19,9 +19,50 @@ namespace Narvalo
     /// <para>Do not create an alias for <see cref="CultureInfo.CurrentUICulture"/>
     /// since it has nothing to do with formatting.</para>
     /// </remarks>
+    // REVIEW: https://github.com/dotnet/corefx/issues/1514
     [DebuggerStepThrough]
     public static class Format
     {
+        [Pure]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string Current(string format)
+        {
+            Expect.NotNull(format);
+            Warrant.NotNull<string>();
+
+            return String.Format(CultureInfo.CurrentCulture, format);
+        }
+
+        [Pure]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string Current<T0>(string format, T0 arg0)
+        {
+            Expect.NotNull(format);
+            Warrant.NotNull<string>();
+
+            return String.Format(CultureInfo.CurrentCulture, format, arg0);
+        }
+
+        [Pure]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string Current<T0, T1>(string format, T0 arg0, T1 arg1)
+        {
+            Expect.NotNull(format);
+            Warrant.NotNull<string>();
+
+            return String.Format(CultureInfo.CurrentCulture, format, arg0, arg1);
+        }
+
+        [Pure]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string Current<T0, T1, T2>(string format, T0 arg0, T1 arg1, T2 arg2)
+        {
+            Expect.NotNull(format);
+            Warrant.NotNull<string>();
+
+            return String.Format(CultureInfo.CurrentCulture, format, arg0, arg1, arg2);
+        }
+
         /// <summary>
         /// Replaces the format items in a specified string with the string representations
         /// of corresponding objects in a specified array. Actual formatting is done with
@@ -40,6 +81,46 @@ namespace Narvalo
             Warrant.NotNull<string>();
 
             return String.Format(CultureInfo.CurrentCulture, format, args);
+        }
+
+        [Pure]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string Invariant(string format)
+        {
+            Expect.NotNull(format);
+            Warrant.NotNull<string>();
+
+            return String.Format(CultureInfo.InvariantCulture, format);
+        }
+
+        [Pure]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string Invariant<T0>(string format, T0 arg0)
+        {
+            Expect.NotNull(format);
+            Warrant.NotNull<string>();
+
+            return String.Format(CultureInfo.InvariantCulture, format, arg0);
+        }
+
+        [Pure]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string Invariant<T0, T1>(string format, T0 arg0, T1 arg1)
+        {
+            Expect.NotNull(format);
+            Warrant.NotNull<string>();
+
+            return String.Format(CultureInfo.InvariantCulture, format, arg0, arg1);
+        }
+
+        [Pure]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string Invariant<T0, T1, T2>(string format, T0 arg0, T1 arg1, T2 arg2)
+        {
+            Expect.NotNull(format);
+            Warrant.NotNull<string>();
+
+            return String.Format(CultureInfo.InvariantCulture, format, arg0, arg1, arg2);
         }
 
         /// <summary>
