@@ -12,7 +12,7 @@ namespace Narvalo.Finance.Globalization
     // - The amount is formatted using the **Number** specifier ("N") for the requested culture.
     // - The position of the currency code depends on the format specifier
     //   (on the left w/ "L"; on the right w/ "R" or "G"; not-included w/ "N").
-    // NB: This methods do not handle custom formatters, you must use ToString(..) from the object.
+    // NB: These methods do not handle custom formatters, you must use ToString(..) from the object.
     //
     // A standard money format string takes the form "Axx", where:
     // - A is a single alphabetic character called the format specifier.
