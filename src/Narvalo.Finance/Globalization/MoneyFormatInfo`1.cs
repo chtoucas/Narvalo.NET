@@ -9,36 +9,41 @@ namespace Narvalo.Finance.Globalization
 
     using Narvalo.Finance.Generic;
 
-    // Custom formatter for Money<T>. For explanations, please see LocalMoneyFormatter.
-    public sealed class LocalMoneyFormatter<TCurrency> : IFormatProvider
+    // Custom formatter for Money<T>. For explanations, please see MoneyFormatInfo.
+    // TODO: Merge this and MoneyFormatInfo.
+    public sealed class MoneyFormatInfo<TCurrency> : IFormatProvider
         where TCurrency : Currency<TCurrency>
     {
         private static readonly Formatter s_Formatter = new Formatter();
 
-        private static LocalMoneyFormatter<TCurrency> s_Invariant;
+        private static MoneyFormatInfo<TCurrency> s_Invariant;
 
-        public LocalMoneyFormatter(IFormatProvider provider)
+        public MoneyFormatInfo(IFormatProvider provider)
         {
             Require.NotNull(provider, nameof(provider));
             Provider = provider;
         }
 
+        public bool UseDecimalPlacesFromCurrency { get; set; }
+
+        public bool FormatAmountAsCurrency { get; set; }
+
         public IFormatProvider Provider { get; }
 
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
-        public static LocalMoneyFormatter<TCurrency> Current
-            => new LocalMoneyFormatter<TCurrency>(CultureInfo.CurrentCulture);
+        public static MoneyFormatInfo<TCurrency> Current
+            => new MoneyFormatInfo<TCurrency>(CultureInfo.CurrentCulture);
 
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
-        public static LocalMoneyFormatter<TCurrency> Invariant
+        public static MoneyFormatInfo<TCurrency> Invariant
         {
             get
             {
-                Warrant.NotNull<LocalMoneyFormatter<TCurrency>>();
+                Warrant.NotNull<MoneyFormatInfo<TCurrency>>();
 
                 if (s_Invariant == null)
                 {
-                    var provider = new LocalMoneyFormatter<TCurrency>(CultureInfo.InvariantCulture);
+                    var provider = new MoneyFormatInfo<TCurrency>(CultureInfo.InvariantCulture);
                     Interlocked.CompareExchange(ref s_Invariant, provider, null);
                 }
 
@@ -59,20 +64,29 @@ namespace Narvalo.Finance.Globalization
             {
                 if (arg == null) { return String.Empty; }
 
-                IFormatProvider provider = (formatProvider as LocalMoneyFormatter<TCurrency>)?.Provider;
-                if (provider == null) { return null; }
+                var mfi = formatProvider as MoneyFormatInfo<TCurrency>;
+                if (mfi == null) { return null; }
 
                 if (arg.GetType() == typeof(Money<TCurrency>))
                 {
-                    var money = (Money<TCurrency>)arg;
-
-                    var spec = MoneyFormatSpecifier.Parse(format, money.DecimalPrecision, 'C');
-
-                    MoneyFormatters.LocalFormat(money.Amount, money.Currency.Code, spec, provider);
+                    return FormatImpl((Money<TCurrency>)arg, format, mfi);
                 }
 
                 var formattable = arg as IFormattable;
-                return formattable == null ? arg.ToString() : formattable.ToString(format, provider);
+                return formattable == null ? arg.ToString() : formattable.ToString(format, mfi.Provider);
+            }
+
+            private string FormatImpl(Money<TCurrency> money, string format, MoneyFormatInfo<TCurrency> mfi)
+            {
+                int? precision = mfi.UseDecimalPlacesFromCurrency
+                    ? money.Currency.DecimalPlaces
+                    : money.DecimalPrecision;
+                char numericFormat = mfi.FormatAmountAsCurrency ? 'C' : 'N';
+                var spec = MoneyFormatSpecifier.Parse(format, precision, numericFormat);
+
+                return mfi.FormatAmountAsCurrency
+                    ? MoneyFormatters.FormatAsCurrency(money.Amount, money.Currency.Code, spec, mfi.Provider)
+                    : MoneyFormatters.FormatAsNumber(money.Amount, money.Currency.Code, spec, mfi.Provider);
             }
         }
     }

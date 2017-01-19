@@ -46,34 +46,48 @@ namespace Narvalo.Finance.Globalization
         {
             Warrant.NotNull<string>();
 
-            var spec = MoneyFormatSpecifier.Parse(format, money.DecimalPrecision);
+            var spec = MoneyFormatSpecifier.Parse(format, money.DecimalPrecision, 'N');
             string amount = money.Amount.ToString(spec.AmountFormat, provider);
-            return DefaultFormat(amount, money.Currency.Code, spec);
+            return FormatAsNumber(amount, money.Currency.Code, spec);
         }
 
         public static string FormatMoney(Money money, string format, IFormatProvider provider)
         {
             Warrant.NotNull<string>();
 
-            var spec = MoneyFormatSpecifier.Parse(format, money.DecimalPrecision);
+            var spec = MoneyFormatSpecifier.Parse(format, money.DecimalPrecision, 'N');
             string amount = money.Amount.ToString(spec.AmountFormat, provider);
-            return DefaultFormat(amount, money.Currency.Code, spec);
+            return FormatAsNumber(amount, money.Currency.Code, spec);
         }
 
         public static string FormatPenny(Moneypenny penny, string format, IFormatProvider provider)
         {
             Warrant.NotNull<string>();
 
-            var spec = MoneyFormatSpecifier.Parse(format, 0);
+            var spec = MoneyFormatSpecifier.Parse(format, 0, 'N');
             string amount = penny.Amount.ToString(spec.AmountFormat, provider);
-            return DefaultFormat(amount, penny.PennyOrCurrencyCode, spec);
+            return FormatAsNumber(amount, penny.PennyOrCurrencyCode, spec);
         }
 
-        internal static string DefaultFormat(string amount, string currencyCode, MoneyFormatSpecifier spec)
+        internal static string FormatAsNumber(
+            decimal amount,
+            string currencyCode,
+            MoneyFormatSpecifier spec,
+            IFormatProvider provider)
         {
             Warrant.NotNull<string>();
 
-            switch (spec.MainFormat)
+            string value = amount.ToString(spec.AmountFormat, provider);
+
+            return FormatAsNumber(value, currencyCode, spec);
+        }
+
+        internal static string FormatAsNumber(string amount, string currencyCode, MoneyFormatSpecifier spec)
+        {
+            Warrant.NotNull<string>();
+
+            // Uppercase it (ASCII letter only).
+            switch (spec.MainFormat & 0xDF)
             {
                 case 'N':
                     // Numeric. Does not include any information about the currency.
@@ -90,7 +104,7 @@ namespace Narvalo.Finance.Globalization
             }
         }
 
-        internal static string LocalFormat(
+        internal static string FormatAsCurrency(
             decimal amount,
             string currencyCode,
             MoneyFormatSpecifier spec,
@@ -101,7 +115,8 @@ namespace Narvalo.Finance.Globalization
 
             var nfi = NumberFormatInfo.GetInstance(provider).Copy();
 
-            switch (spec.MainFormat)
+            // Uppercase it (ASCII letter only).
+            switch (spec.MainFormat & 0xDF)
             {
                 case 'N':
                     // Numeric. Does not include any information about the currency.
@@ -125,8 +140,7 @@ namespace Narvalo.Finance.Globalization
                     nfi.KeepOrAddCurrencySpacing();
                     return amount.ToString(spec.AmountFormat, nfi);
                 default:
-                    throw new FormatException(
-                        Narvalo.Format.Current(Strings.Money_InvalidFormatSpecification));
+                    throw new FormatException(Format.Current(Strings.Money_InvalidFormatSpecification));
             }
         }
     }

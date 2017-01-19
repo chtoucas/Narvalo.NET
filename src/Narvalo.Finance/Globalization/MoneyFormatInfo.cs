@@ -6,6 +6,7 @@ namespace Narvalo.Finance.Globalization
     using System.Globalization;
     using System.Threading;
 
+    // FIXME: Update the documentation.
     // Custom formatter for Money:
     // - The amount is formatted using the **Currency** specifier ("C") for the requested culture.
     // - The position of the currency code depends on the format specifier
@@ -31,42 +32,58 @@ namespace Narvalo.Finance.Globalization
     // - If no format is given, we use the general format ("G").
     // - If no specific culture is requested, we use the current culture.
     //
+    // Remarks:
+    // - Usually the provider implements both IFormatProvider & ICustomFormatter. I find it very
+    //   confusing, so the actual formatter is a separate class.
+    //
     // Examples:
     // > money.ToString("R", LocalMoneyFormatter.Current);
     // or
     // > var provider = new LocalMoneyFormatter(new CultureInfo("fr-FR"));
     // > String.Format(provider, "Montant = {0:N}", money);
-    public sealed class LocalMoneyFormatter : IFormatProvider
+    public sealed class MoneyFormatInfo : IFormatProvider
     {
         private static readonly Formatter s_Formatter = new Formatter();
 
-        private static LocalMoneyFormatter s_Invariant;
+        private static MoneyFormatInfo s_InvariantInfo;
 
-        public LocalMoneyFormatter(IFormatProvider provider)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MoneyFormatInfo"/> class for a specific
+        /// <paramref name="provider"/>.
+        /// </summary>
+        /// <param name="provider">The <see cref="IFormatProvider"/> that will be used to format
+        /// the amount. With a composite format, it will also be used to format an
+        /// <see cref="IFormattable"/> object which is not of type <see cref="Money"/>.</param>
+        public MoneyFormatInfo(IFormatProvider provider)
         {
             Require.NotNull(provider, nameof(provider));
             Provider = provider;
         }
 
-        // This provider will be used to format the amount. With a composite format, it will
-        // also be used to format an IFormattable object which is not of type Money.
-        public IFormatProvider Provider { get; }
+        // Do we use the number of decimal places specified by the currency instead of the
+        // decimal precision reported by the object. If you do not use a precision specifier (in the
+        // format), we always display the same number of digits for a given currency.
+        public bool UseDecimalPlacesFromCurrency { get; set; }
 
-        public static LocalMoneyFormatter Current => new LocalMoneyFormatter(CultureInfo.CurrentCulture);
+        public bool FormatAmountAsCurrency { get; set; }
 
-        public static LocalMoneyFormatter Invariant
+        private IFormatProvider Provider { get; }
+
+        public static MoneyFormatInfo CurrentInfo => new MoneyFormatInfo(CultureInfo.CurrentCulture);
+
+        public static MoneyFormatInfo InvariantInfo
         {
             get
             {
-                Warrant.NotNull<LocalMoneyFormatter>();
+                Warrant.NotNull<MoneyFormatInfo>();
 
-                if (s_Invariant == null)
+                if (s_InvariantInfo == null)
                 {
-                    var provider = new LocalMoneyFormatter(CultureInfo.InvariantCulture);
-                    Interlocked.CompareExchange(ref s_Invariant, provider, null);
+                    var provider = new MoneyFormatInfo(CultureInfo.InvariantCulture);
+                    Interlocked.CompareExchange(ref s_InvariantInfo, provider, null);
                 }
 
-                return s_Invariant;
+                return s_InvariantInfo;
             }
         }
 
@@ -121,13 +138,12 @@ namespace Narvalo.Finance.Globalization
             {
                 if (arg == null) { return String.Empty; }
 
-                IFormatProvider provider = (formatProvider as LocalMoneyFormatter)?.Provider;
-                if (provider == null)
+                var mfi = formatProvider as MoneyFormatInfo;
+                if (mfi == null)
                 {
-                    // This should never happen. Normally, formatProvider is not null, of type
-                    // LocalMoneyFormatter, and the property Provider never returns null (this one
-                    // is guaranteed per construction).
-                    // Nevertheless, one might call formatter = provider.GetFormat() but use the result
+                    // This should never happen. Normally, formatProvider is not null and of type
+                    // LocalMoneyFormatter.
+                    // Nevertheless, one might call formatter = provider.GetFormat(...) but use the result
                     // with another provider (I don't see why, but we never know):
                     // > formatter.Format(format, arg, anotherProvider);
                     // Rather than trying to deal with it (we could set provider to the current culture)
@@ -138,15 +154,24 @@ namespace Narvalo.Finance.Globalization
 
                 if (arg.GetType() == typeof(Money))
                 {
-                    var money = (Money)arg;
-
-                    var spec = MoneyFormatSpecifier.Parse(format, money.DecimalPrecision, 'C');
-
-                    return MoneyFormatters.LocalFormat(money.Amount, money.Currency.Code, spec, provider);
+                    return FormatImpl((Money)arg, format, mfi);
                 }
 
                 var formattable = arg as IFormattable;
-                return formattable == null ? arg.ToString() : formattable.ToString(format, provider);
+                return formattable == null ? arg.ToString() : formattable.ToString(format, mfi.Provider);
+            }
+
+            private string FormatImpl(Money money, string format, MoneyFormatInfo mfi)
+            {
+                int? precision = mfi.UseDecimalPlacesFromCurrency
+                    ? money.Currency.DecimalPlaces
+                    : money.DecimalPrecision;
+                char numericFormat = mfi.FormatAmountAsCurrency ? 'C' : 'N';
+                var spec = MoneyFormatSpecifier.Parse(format, precision, numericFormat);
+
+                return mfi.FormatAmountAsCurrency
+                    ? MoneyFormatters.FormatAsCurrency(money.Amount, money.Currency.Code, spec, mfi.Provider)
+                    : MoneyFormatters.FormatAsNumber(money.Amount, money.Currency.Code, spec, mfi.Provider);
             }
         }
     }

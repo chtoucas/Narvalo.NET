@@ -5,39 +5,36 @@ namespace Narvalo.Finance
     using System;
     using System.Globalization;
 
-    public class MoneyFormatSpecifier
+    public sealed class MoneyFormatSpecifier
     {
         public const char DefaultMainFormat = 'G';
 
-        private MoneyFormatSpecifier(int? decimalPlaces) : this(DefaultMainFormat, decimalPlaces) { }
-
-        private MoneyFormatSpecifier(char mainFormat, int? decimalPlaces)
+        public MoneyFormatSpecifier(char mainFormat, int? decimalPlaces, char numericFormat)
         {
-            // Uppercase it (ASCII letter only).
-            MainFormat = (char)(mainFormat & 0xDF);
+            MainFormat = mainFormat;
             DecimalPlaces = decimalPlaces;
+            NumericFormat = numericFormat;
         }
 
         public int? DecimalPlaces { get; }
 
         public char MainFormat { get; }
 
-        public char NumericFormat { get; private set; } = 'N';
+        public char NumericFormat { get; }
 
         public string AmountFormat
             => NumericFormat + DecimalPlaces?.ToString(CultureInfo.InvariantCulture);
 
         public static MoneyFormatSpecifier Parse(string format, int? moneyPrecision, char numericFormat)
         {
-            var fmt = Parse(format, moneyPrecision);
-            fmt.NumericFormat = numericFormat;
-            return fmt;
-        }
-
-        public static MoneyFormatSpecifier Parse(string format, int? moneyPrecision)
-        {
-            if (format == null || format.Length == 0) { return new MoneyFormatSpecifier(moneyPrecision); }
-            if (format.Length == 1) { return new MoneyFormatSpecifier(format[0], moneyPrecision); }
+            if (format == null || format.Length == 0)
+            {
+                return new MoneyFormatSpecifier(DefaultMainFormat, moneyPrecision, numericFormat);
+            }
+            if (format.Length == 1)
+            {
+                return new MoneyFormatSpecifier(format[0], moneyPrecision, numericFormat);
+            }
 
             // "X00"..."X09" are not valid formats.
             if (format.Length == 3 && format[1] == '0') { throw new FormatException("XXX"); }
@@ -54,7 +51,7 @@ namespace Narvalo.Finance
 
                 if (!succeed) { throw new FormatException("XXX"); }
 
-                return new MoneyFormatSpecifier(format[0], decimalPlaces);
+                return new MoneyFormatSpecifier(format[0], decimalPlaces, numericFormat);
             }
 
             throw new FormatException("XXX");
