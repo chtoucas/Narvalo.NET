@@ -12,6 +12,7 @@ namespace Narvalo.Finance.Globalization
     // - The amount is formatted using the **Number** specifier ("N") for the requested culture.
     // - The position of the currency code depends on the format specifier
     //   (on the left w/ "L"; on the right w/ "R" or "G"; not-included w/ "N").
+    // NB: This methods do not handle custom formatters, you must use ToString(..) from the object.
     //
     // A standard money format string takes the form "Axx", where:
     // - A is a single alphabetic character called the format specifier.
@@ -47,7 +48,7 @@ namespace Narvalo.Finance.Globalization
 
             var spec = MoneyFormatSpecifier.Parse(format, money.DecimalPrecision);
             string amount = money.Amount.ToString(spec.AmountFormat, provider);
-            return FormatImpl(amount, money.Currency.Code, spec);
+            return DefaultFormat(amount, money.Currency.Code, spec);
         }
 
         public static string FormatMoney(Money money, string format, IFormatProvider provider)
@@ -56,7 +57,7 @@ namespace Narvalo.Finance.Globalization
 
             var spec = MoneyFormatSpecifier.Parse(format, money.DecimalPrecision);
             string amount = money.Amount.ToString(spec.AmountFormat, provider);
-            return FormatImpl(amount, money.Currency.Code, spec);
+            return DefaultFormat(amount, money.Currency.Code, spec);
         }
 
         public static string FormatPenny(Moneypenny penny, string format, IFormatProvider provider)
@@ -65,10 +66,10 @@ namespace Narvalo.Finance.Globalization
 
             var spec = MoneyFormatSpecifier.Parse(format, 0);
             string amount = penny.Amount.ToString(spec.AmountFormat, provider);
-            return FormatImpl(amount, penny.PennyOrCurrencyCode, spec);
+            return DefaultFormat(amount, penny.PennyOrCurrencyCode, spec);
         }
 
-        internal static string FormatImpl(string amount, string currencyCode, MoneyFormatSpecifier spec)
+        internal static string DefaultFormat(string amount, string currencyCode, MoneyFormatSpecifier spec)
         {
             Warrant.NotNull<string>();
 
@@ -86,6 +87,46 @@ namespace Narvalo.Finance.Globalization
                     return amount + NO_BREAK_SPACE + currencyCode;
                 default:
                     throw new FormatException(Format.Current(Strings.Money_InvalidFormatSpecification));
+            }
+        }
+
+        internal static string LocalFormat(
+            decimal amount,
+            string currencyCode,
+            MoneyFormatSpecifier spec,
+            IFormatProvider provider)
+        {
+            Demand.NotNull(provider);
+            Warrant.NotNull<string>();
+
+            var nfi = NumberFormatInfo.GetInstance(provider).Copy();
+
+            switch (spec.MainFormat)
+            {
+                case 'N':
+                    // Numeric. Does not include any information about the currency.
+                    nfi.CurrencySymbol = String.Empty;
+                    nfi.RemoveCurrencySpacing();
+                    return amount.ToString(spec.AmountFormat, nfi);
+                case 'L':
+                    // Left (Currency code placed on the).
+                    nfi.CurrencySymbol = String.Empty;
+                    nfi.RemoveCurrencySpacing();
+                    return currencyCode + " " + amount.ToString(spec.AmountFormat, nfi);
+                case 'R':
+                    // Right (Currency code placed on the).
+                    nfi.CurrencySymbol = String.Empty;
+                    nfi.RemoveCurrencySpacing();
+                    return amount.ToString(spec.AmountFormat, nfi) + " " + currencyCode;
+                case 'G':
+                    // General (default). It replaces the currency symbol by the currency code
+                    // and ensures that there is a space between the amount and the currency code.
+                    nfi.CurrencySymbol = currencyCode;
+                    nfi.KeepOrAddCurrencySpacing();
+                    return amount.ToString(spec.AmountFormat, nfi);
+                default:
+                    throw new FormatException(
+                        Narvalo.Format.Current(Strings.Money_InvalidFormatSpecification));
             }
         }
     }

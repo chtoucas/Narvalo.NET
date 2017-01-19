@@ -4,8 +4,7 @@ namespace Narvalo.Finance.Globalization
 {
     using System;
     using System.Globalization;
-
-    using Narvalo.Finance.Properties;
+    using System.Threading;
 
     // Custom formatter for Money:
     // - The amount is formatted using the **Currency** specifier ("C") for the requested culture.
@@ -31,111 +30,123 @@ namespace Narvalo.Finance.Globalization
     // Behaviour:
     // - If no format is given, we use the general format ("G").
     // - If no specific culture is requested, we use the current culture.
-    public sealed class LocalMoneyFormatter : IFormatProvider, ICustomFormatter
+    //
+    // Examples:
+    // > money.ToString("R", LocalMoneyFormatter.Current);
+    // or
+    // > var provider = new LocalMoneyFormatter(new CultureInfo("fr-FR"));
+    // > String.Format(provider, "Montant = {0:N}", money);
+    public sealed class LocalMoneyFormatter : IFormatProvider
     {
-        internal const char NumericFormat = 'C';
+        private static readonly Formatter s_Formatter = new Formatter();
 
-        // Provider for formatting the amount; if null, the current culture is used.
-        private readonly IFormatProvider _provider;
-
-        public LocalMoneyFormatter() : this(CultureInfo.CurrentCulture) { }
+        private static LocalMoneyFormatter s_Invariant;
 
         public LocalMoneyFormatter(IFormatProvider provider)
         {
-            _provider = provider;
+            Require.NotNull(provider, nameof(provider));
+            Provider = provider;
         }
+
+        // This provider will be used to format the amount. With a composite format, it will
+        // also be used to format an IFormattable object which is not of type Money.
+        public IFormatProvider Provider { get; }
 
         public static LocalMoneyFormatter Current => new LocalMoneyFormatter(CultureInfo.CurrentCulture);
 
-        public static LocalMoneyFormatter Invariant => new LocalMoneyFormatter(CultureInfo.InvariantCulture);
-
-        #region ICustomFormatter
-
-        public string Format(string format, object arg, IFormatProvider formatProvider)
+        public static LocalMoneyFormatter Invariant
         {
-            Warrant.NotNull<string>();
-
-            // REVIEW: We could check that it is called from himself? See below.
-            //if (!Equals(formatProvider)) { return String.Empty; }
-
-            if (arg == null) { return String.Empty; }
-
-            if (arg.GetType() == typeof(Money))
+            get
             {
-                var money = (Money)arg;
+                Warrant.NotNull<LocalMoneyFormatter>();
 
-                var spec = MoneyFormatSpecifier.Parse(format, money.DecimalPrecision, NumericFormat);
+                if (s_Invariant == null)
+                {
+                    var provider = new LocalMoneyFormatter(CultureInfo.InvariantCulture);
+                    Interlocked.CompareExchange(ref s_Invariant, provider, null);
+                }
 
-                return FormatImpl(money.Amount, money.Currency.Code, spec, _provider);
+                return s_Invariant;
             }
-
-            var formattable = arg as IFormattable;
-            return formattable == null ? arg.ToString() : formattable.ToString(format, formatProvider);
         }
-
-        #endregion
 
         #region IFormatProvider
 
-        // Two possibilities with:
-        // > var provider = new LocalMoneyFormatter();
+        // Let's see how it goes with:
+        // > var provider = LocalMoneyFormatProvider.Current;
         //
-        // typeof(Money) is needed for Money.ToString(format, IFormatProvider):
+        // formatType = typeof(Money) is required for Money.ToString(format, IFormatProvider) to work:
         // > money.ToString("N", provider);
-        // it calls provider.GetFormat(money.GetType()), then
-        // > provider.Format("N", money, provider)
+        // > formatter = provider.GetFormat(money.GetType()) as ICustomFormatter;
+        // where formatter is of type LocalMoneyFormatter,
+        // > formatter.Format("N", money, provider);
+        // money being of type Money, formatter knows how to format it. NB: it **never** returns null.
         //
-        // typeof(ICustomFormatter) is needed for String.Format(IFormatProvider, format, args),
-        // and StringBuilder.AppendFormat(IFormatProvider, format, args):
-        // > String.Format(provider, "{0:N}", money);
-        // String.Format() calls provider.GetFormat(typeof(ICustomFormatter)), then
-        // > provider.Format("N", money, provider)
+        // formatType = typeof(ICustomFormatter) is required for String.Format(IFormatProvider, format, args),
+        // and StringBuilder.AppendFormat(IFormatProvider, format, args) to work; see
+        // https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Text/StringBuilder.cs
+        // For instance,
+        // > String.Format(provider, "{0:N} {1:G}", money, whatever);
+        // > formatter = provider.GetFormat(typeof(ICustomFormatter));
+        // where formatter is of type LocalMoneyFormatter, then:
+        // > formatter.Format("N", money, provider)
+        // > formatter.Format("G", whatever, provider)
+        // The first call never returns null (see remark above).
+        // If the second call returns something, we are done, otherwise, String.Format() checks
+        // if 'whatever' implements IFormattable. If it does, it calls:
+        // > whatever.ToString("G", provider);
+        // otherwise, it falls back to Object.ToString():
+        // > whatever.ToString();
+        // If (again) the result is null, then it outputs String.Empty.
+        // Remark: If we did not handle typeof(ICustomFormatter), String.Format() would check if
+        // the object implemented IFormattable. For 'money', since it is the case, it would call
+        // money.ToString("N", provider) and we are back to the first case. Everything would work
+        // as expected, but it would be less effective.
         //
-        // If we did not handle typeof(ICustomFormatter), since money implements IFormattable,
-        // String.Format() would call money.ToString("N", null) and the provider would be ignored.
-        // See https://msdn.microsoft.com/en-us/library/bb762932(v=vs.110).aspx.
+        // If formatType is anything else, for instance,
+        // > whatever.ToString("N", provider);
+        // might call
+        // > formatter = provider.GetFormat(whatever.GetType());
+        // like we do in Money.ToString(). We always return null and it's up to Whatever.ToString()
+        // to deal with this. We could return CultureInfo.CurrentCulture.GetFormat(formatType)
+        // that is a NumberFormatInfo, a DateTimeFormatInfo or null, matter of taste I think.
         public object GetFormat(Type formatType)
-            => formatType == typeof(Money) || formatType == typeof(ICustomFormatter) ? this : null;
+            => formatType == typeof(Money) || formatType == typeof(ICustomFormatter) ? s_Formatter : null;
 
         #endregion
 
-        internal static string FormatImpl(
-            decimal amount,
-            string currencyCode,
-            MoneyFormatSpecifier spec,
-            IFormatProvider provider)
+        private sealed class Formatter : ICustomFormatter
         {
-            Demand.NotNull(provider);
-            Warrant.NotNull<string>();
-
-            var nfi = NumberFormatInfo.GetInstance(provider).Copy();
-
-            switch (spec.MainFormat)
+            public string Format(string format, object arg, IFormatProvider formatProvider)
             {
-                case 'N':
-                    // Numeric. Does not include any information about the currency.
-                    nfi.CurrencySymbol = String.Empty;
-                    nfi.RemoveCurrencySpacing();
-                    return amount.ToString(spec.AmountFormat, nfi);
-                case 'L':
-                    // Left (Currency code placed on the).
-                    nfi.CurrencySymbol = String.Empty;
-                    nfi.RemoveCurrencySpacing();
-                    return currencyCode + " " + amount.ToString(spec.AmountFormat, nfi);
-                case 'R':
-                    // Right (Currency code placed on the).
-                    nfi.CurrencySymbol = String.Empty;
-                    nfi.RemoveCurrencySpacing();
-                    return amount.ToString(spec.AmountFormat, nfi) + " " + currencyCode;
-                case 'G':
-                    // General (default). It replaces the currency symbol by the currency code
-                    // and ensures that there is a space between the amount and the currency code.
-                    nfi.CurrencySymbol = currencyCode;
-                    nfi.KeepOrAddCurrencySpacing();
-                    return amount.ToString(spec.AmountFormat, nfi);
-                default:
-                    throw new FormatException(
-                        Narvalo.Format.Current(Strings.Money_InvalidFormatSpecification));
+                if (arg == null) { return String.Empty; }
+
+                IFormatProvider provider = (formatProvider as LocalMoneyFormatter)?.Provider;
+                if (provider == null)
+                {
+                    // This should never happen. Normally, formatProvider is not null, of type
+                    // LocalMoneyFormatter, and the property Provider never returns null (this one
+                    // is guaranteed per construction).
+                    // Nevertheless, one might call formatter = provider.GetFormat() but use the result
+                    // with another provider (I don't see why, but we never know):
+                    // > formatter.Format(format, arg, anotherProvider);
+                    // Rather than trying to deal with it (we could set provider to the current culture)
+                    // we prefer to return null since this most certainly means a coding error from the
+                    // caller.
+                    return null;
+                }
+
+                if (arg.GetType() == typeof(Money))
+                {
+                    var money = (Money)arg;
+
+                    var spec = MoneyFormatSpecifier.Parse(format, money.DecimalPrecision, 'C');
+
+                    return MoneyFormatters.LocalFormat(money.Amount, money.Currency.Code, spec, provider);
+                }
+
+                var formattable = arg as IFormattable;
+                return formattable == null ? arg.ToString() : formattable.ToString(format, provider);
             }
         }
     }

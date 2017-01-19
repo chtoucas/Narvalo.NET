@@ -3,58 +3,77 @@
 namespace Narvalo.Finance.Globalization
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
+    using System.Threading;
 
     using Narvalo.Finance.Generic;
 
     // Custom formatter for Money<T>. For explanations, please see LocalMoneyFormatter.
-    public sealed class LocalMoneyFormatter<TCurrency> : IFormatProvider, ICustomFormatter
+    public sealed class LocalMoneyFormatter<TCurrency> : IFormatProvider
         where TCurrency : Currency<TCurrency>
     {
-        private readonly IFormatProvider _provider;
+        private static readonly Formatter s_Formatter = new Formatter();
 
-        public LocalMoneyFormatter() { }
+        private static LocalMoneyFormatter<TCurrency> s_Invariant;
 
         public LocalMoneyFormatter(IFormatProvider provider)
         {
-            _provider = provider;
+            Require.NotNull(provider, nameof(provider));
+            Provider = provider;
         }
 
+        public IFormatProvider Provider { get; }
+
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
         public static LocalMoneyFormatter<TCurrency> Current
             => new LocalMoneyFormatter<TCurrency>(CultureInfo.CurrentCulture);
 
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
         public static LocalMoneyFormatter<TCurrency> Invariant
-            => new LocalMoneyFormatter<TCurrency>(CultureInfo.InvariantCulture);
-
-        #region ICustomFormatter
-
-        public string Format(string format, object arg, IFormatProvider formatProvider)
         {
-            Warrant.NotNull<string>();
-
-            if (arg == null) { return String.Empty; }
-
-            if (arg.GetType() == typeof(Money<TCurrency>))
+            get
             {
-                var money = (Money<TCurrency>)arg;
+                Warrant.NotNull<LocalMoneyFormatter<TCurrency>>();
 
-                var spec = MoneyFormatSpecifier.Parse(
-                    format, money.DecimalPrecision, LocalMoneyFormatter.NumericFormat);
+                if (s_Invariant == null)
+                {
+                    var provider = new LocalMoneyFormatter<TCurrency>(CultureInfo.InvariantCulture);
+                    Interlocked.CompareExchange(ref s_Invariant, provider, null);
+                }
 
-                LocalMoneyFormatter.FormatImpl(money.Amount, money.Currency.Code, spec, _provider);
+                return s_Invariant;
             }
-
-            var formattable = arg as IFormattable;
-            return formattable == null ? arg.ToString() : formattable.ToString(format, formatProvider);
         }
-
-        #endregion
 
         #region IFormatProvider
 
         public object GetFormat(Type formatType)
-            => formatType == typeof(Money<TCurrency>) || formatType == typeof(ICustomFormatter) ? this : null;
+            => formatType == typeof(Money<TCurrency>) || formatType == typeof(ICustomFormatter) ? s_Formatter : null;
 
         #endregion
+
+        private sealed class Formatter : ICustomFormatter
+        {
+            public string Format(string format, object arg, IFormatProvider formatProvider)
+            {
+                if (arg == null) { return String.Empty; }
+
+                IFormatProvider provider = (formatProvider as LocalMoneyFormatter<TCurrency>)?.Provider;
+                if (provider == null) { return null; }
+
+                if (arg.GetType() == typeof(Money<TCurrency>))
+                {
+                    var money = (Money<TCurrency>)arg;
+
+                    var spec = MoneyFormatSpecifier.Parse(format, money.DecimalPrecision, 'C');
+
+                    MoneyFormatters.LocalFormat(money.Amount, money.Currency.Code, spec, provider);
+                }
+
+                var formattable = arg as IFormattable;
+                return formattable == null ? arg.ToString() : formattable.ToString(format, provider);
+            }
+        }
     }
 }
