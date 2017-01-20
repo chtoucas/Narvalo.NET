@@ -5,7 +5,6 @@ namespace Narvalo.Finance
     using System;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
-    using System.Globalization;
 
     using Narvalo.Finance.Generic;
     using Narvalo.Finance.Globalization;
@@ -376,35 +375,41 @@ namespace Narvalo.Finance
         public override string ToString()
         {
             Warrant.NotNull<string>();
-            return MoneyFormatters.FormatMoney(this, null, MoneyFormatInfo.CurrentInfo);
+            return FormatImpl(null, MoneyFormatInfo.CurrentInfo);
         }
 
         public string ToString(string format)
         {
             Warrant.NotNull<string>();
-            return MoneyFormatters.FormatMoney(this, format, MoneyFormatInfo.CurrentInfo);
+            return FormatImpl(format, MoneyFormatInfo.CurrentInfo);
         }
 
-        public string ToString(IFormatProvider formatProvider)
-        {
-            Warrant.NotNull<string>();
-            return ToString(null, formatProvider);
-        }
+        public string ToString(IFormatProvider formatProvider) => ToString(null, formatProvider);
 
         public string ToString(string format, IFormatProvider formatProvider)
         {
-            Warrant.NotNull<string>();
-
             if (formatProvider != null)
             {
-                var fmt = formatProvider.GetFormat(GetType()) as ICustomFormatter;
-                if (fmt != null)
-                {
-                    return fmt.Format(format, this, formatProvider);
-                }
+                var fmtr = formatProvider.GetFormat(typeof(Money)) as ICustomFormatter;
+                if (fmtr != null) { return fmtr.Format(format, this, formatProvider); }
             }
 
-            return MoneyFormatters.FormatMoney(this, format, MoneyFormatInfo.GetInstance(formatProvider));
+            return FormatImpl(format, MoneyFormatInfo.GetInstance(formatProvider));
+        }
+
+        private string FormatImpl(string format, MoneyFormatInfo info)
+        {
+            Demand.NotNull(info);
+            Warrant.NotNull<string>();
+
+            int? precision = info.UseDecimalPlacesFromCurrency
+                ? Currency.DecimalPlaces
+                : DecimalPrecision;
+            var spec = MoneyFormatSpecifier.Parse(format, precision, info.AmountFormat);
+
+            return info.AmountFormat == 'C'
+                ? MoneyFormatters.FormatAsCurrency(Amount, Currency.Code, spec, info.Provider)
+                : MoneyFormatters.FormatAsNumber(Amount, Currency.Code, spec, info.Provider);
         }
     }
 

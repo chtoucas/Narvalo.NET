@@ -76,6 +76,7 @@
     <Compile Include="Allocators\PennyAllocators.cs" />
     <Compile Include="Extensions\Enumerable%24.cs" />
     <Compile Include="Generic\MoneyFactory.cs" />
+    <Compile Include="Globalization\CustomMoneyFormatter.cs" />
     <Compile Include="Globalization\MoneyFormatSpecifier.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Internal\CurrencyHelpers.cs" />
@@ -95,7 +96,6 @@
     <Compile Include="Allocators\MidpointRoundingMoneyAllocator.cs" />
     <Compile Include="Bic.cs" />
     <Compile Include="BicVersion.cs" />
-    <Compile Include="Globalization\MoneyFormatInfo`1.cs" />
     <Compile Include="Moneypenny.cs" />
     <Compile Include="CurrencyTypes.cs" />
     <Compile Include="Generic\Currency`1.cs" />

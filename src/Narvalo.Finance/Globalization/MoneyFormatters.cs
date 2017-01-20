@@ -5,9 +5,10 @@ namespace Narvalo.Finance.Globalization
     using System;
     using System.Globalization;
 
-    using Narvalo.Finance.Generic;
     using Narvalo.Finance.Properties;
 
+    // FIXME: Update the documentation.
+    //
     // Default formatter for all money-like types:
     // - The amount is formatted using the **Number** specifier ("N") for the requested culture.
     // - The position of the currency code depends on the format specifier
@@ -37,75 +38,46 @@ namespace Narvalo.Finance.Globalization
     // Behaviour:
     // - If no format is given, we use the general format ("G").
     // - If no specific culture is requested, we use the default culture.
-    public static class MoneyFormatters
+    //
+    // Custom formatter for Money:
+    // - The amount is formatted using the **Currency** specifier ("C") for the requested culture.
+    // - The position of the currency code depends on the format specifier
+    //   (on the left w/ "L"; on the right w/ "R"; culture-dependent w/ "G"; not-included w/ "N").
+    //
+    // A standard money format string takes the form "Axx", where:
+    // - A is a single alphabetic character called the format specifier.
+    //   Admissible values are: "N" (Numeric), "L" (Left), "R" (Right) and "G" (General).
+    //   * "N", do not include any information about the currency.
+    //   * "L", place the currency code on the left of the amount.
+    //   * "R", place the currency code on the right of the amount.
+    //   * "G", replaces the currency symbol by the currency code and ensures that there is a space
+    //     between the amount and the currency code.
+    // - xx is an optional integer called the precision specifier. The precision specifier ranges
+    //   from 0 to 99 and affects the number of digits **displayed** for the amount; it does not
+    //   round the amount itself. If the precision specifier is present and the amount has more
+    //   digits than requested, the displayed value is rounded away from zero.
+    //   If no precision is given, we use the decimal precision reported by the object
+    //   (the DecimalPrecision property). If DecimalPrecision is null, we fallback to the default
+    //   precision found in the culture info (NumberFormatInfo.NumberDecimalDigits).
+    //
+    // Behaviour:
+    // - If no format is given, we use the general format ("G").
+    // - If no specific culture is requested, we use the current culture.
+    //
+    // Remarks:
+    // - Usually the provider implements both IFormatProvider & ICustomFormatter. I find it very
+    //   confusing, so the actual formatter is a separate class.
+    //
+    // Examples:
+    // > money.ToString("R", MoneyFormatInfo.Invariant);
+    // or
+    // > var provider = new MoneyFormatInfo(new CultureInfo("fr-FR"));
+    // > String.Format(provider, "Montant = {0:N}", money);
+    internal static class MoneyFormatters
     {
         private const string NO_BREAK_SPACE = "\u00A0";
 
-        internal static string FormatMoney(Money money, string format, MoneyFormatInfo info)
-        {
-            Warrant.NotNull<string>();
-
-            var mfi = info ?? MoneyFormatInfo.CurrentInfo;
-
-            int? precision = mfi.UseDecimalPlacesFromCurrency
-                ? money.Currency.DecimalPlaces
-                : money.DecimalPrecision;
-            char numericFormat = mfi.FormatAmountAsCurrency ? 'C' : 'N';
-            var spec = MoneyFormatSpecifier.Parse(format, precision, numericFormat);
-
-            return mfi.FormatAmountAsCurrency
-                ? FormatAsCurrency(money.Amount, money.Currency.Code, spec, mfi.Provider)
-                : FormatAsNumber(money.Amount, money.Currency.Code, spec, mfi.Provider);
-        }
-
-        internal static string FormatMoney<TCurrency>(
-            Money<TCurrency> money,
-            string format,
-            MoneyFormatInfo<TCurrency> info)
-            where TCurrency : Currency<TCurrency>
-        {
-            var mfi = info ?? MoneyFormatInfo<TCurrency>.CurrentInfo;
-
-            int? precision = mfi.UseDecimalPlacesFromCurrency
-                ? money.Currency.DecimalPlaces
-                : money.DecimalPrecision;
-            char numericFormat = mfi.FormatAmountAsCurrency ? 'C' : 'N';
-            var spec = MoneyFormatSpecifier.Parse(format, precision, numericFormat);
-
-            return mfi.FormatAmountAsCurrency
-                ? FormatAsCurrency(money.Amount, money.Currency.Code, spec, mfi.Provider)
-                : FormatAsNumber(money.Amount, money.Currency.Code, spec, mfi.Provider);
-        }
-
-        public static string FormatMoney<TCurrency>(Money<TCurrency> money, string format, IFormatProvider provider)
-            where TCurrency : Currency<TCurrency>
-        {
-            Warrant.NotNull<string>();
-
-            var spec = MoneyFormatSpecifier.Parse(format, money.DecimalPrecision, 'N');
-            string amount = money.Amount.ToString(spec.AmountFormat, provider);
-            return FormatAsNumber(amount, money.Currency.Code, spec);
-        }
-
-        //public static string FormatMoney(Money money, string format, IFormatProvider provider)
-        //{
-        //    Warrant.NotNull<string>();
-
-        //    var spec = MoneyFormatSpecifier.Parse(format, money.DecimalPrecision, 'N');
-        //    string amount = money.Amount.ToString(spec.AmountFormat, provider);
-        //    return FormatAsNumber(amount, money.Currency.Code, spec);
-        //}
-
-        public static string FormatPenny(Moneypenny penny, string format, IFormatProvider provider)
-        {
-            Warrant.NotNull<string>();
-
-            var spec = MoneyFormatSpecifier.Parse(format, 0, 'N');
-            string amount = penny.Amount.ToString(spec.AmountFormat, provider);
-            return FormatAsNumber(amount, penny.PennyOrCurrencyCode, spec);
-        }
-
-        internal static string FormatAsNumber(
+        public static string FormatAsNumber(
             decimal amount,
             string currencyCode,
             MoneyFormatSpecifier spec,
@@ -118,7 +90,7 @@ namespace Narvalo.Finance.Globalization
             return FormatAsNumber(value, currencyCode, spec);
         }
 
-        internal static string FormatAsNumber(string amount, string currencyCode, MoneyFormatSpecifier spec)
+        public static string FormatAsNumber(string amount, string currencyCode, MoneyFormatSpecifier spec)
         {
             Warrant.NotNull<string>();
 
@@ -140,7 +112,7 @@ namespace Narvalo.Finance.Globalization
             }
         }
 
-        internal static string FormatAsCurrency(
+        public static string FormatAsCurrency(
             decimal amount,
             string currencyCode,
             MoneyFormatSpecifier spec,
