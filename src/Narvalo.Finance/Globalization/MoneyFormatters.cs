@@ -41,6 +41,42 @@ namespace Narvalo.Finance.Globalization
     {
         private const string NO_BREAK_SPACE = "\u00A0";
 
+        internal static string FormatMoney(Money money, string format, MoneyFormatInfo info)
+        {
+            Warrant.NotNull<string>();
+
+            var mfi = info ?? MoneyFormatInfo.CurrentInfo;
+
+            int? precision = mfi.UseDecimalPlacesFromCurrency
+                ? money.Currency.DecimalPlaces
+                : money.DecimalPrecision;
+            char numericFormat = mfi.FormatAmountAsCurrency ? 'C' : 'N';
+            var spec = MoneyFormatSpecifier.Parse(format, precision, numericFormat);
+
+            return mfi.FormatAmountAsCurrency
+                ? FormatAsCurrency(money.Amount, money.Currency.Code, spec, mfi.Provider)
+                : FormatAsNumber(money.Amount, money.Currency.Code, spec, mfi.Provider);
+        }
+
+        internal static string FormatMoney<TCurrency>(
+            Money<TCurrency> money,
+            string format,
+            MoneyFormatInfo<TCurrency> info)
+            where TCurrency : Currency<TCurrency>
+        {
+            var mfi = info ?? MoneyFormatInfo<TCurrency>.CurrentInfo;
+
+            int? precision = mfi.UseDecimalPlacesFromCurrency
+                ? money.Currency.DecimalPlaces
+                : money.DecimalPrecision;
+            char numericFormat = mfi.FormatAmountAsCurrency ? 'C' : 'N';
+            var spec = MoneyFormatSpecifier.Parse(format, precision, numericFormat);
+
+            return mfi.FormatAmountAsCurrency
+                ? FormatAsCurrency(money.Amount, money.Currency.Code, spec, mfi.Provider)
+                : FormatAsNumber(money.Amount, money.Currency.Code, spec, mfi.Provider);
+        }
+
         public static string FormatMoney<TCurrency>(Money<TCurrency> money, string format, IFormatProvider provider)
             where TCurrency : Currency<TCurrency>
         {
@@ -51,14 +87,14 @@ namespace Narvalo.Finance.Globalization
             return FormatAsNumber(amount, money.Currency.Code, spec);
         }
 
-        public static string FormatMoney(Money money, string format, IFormatProvider provider)
-        {
-            Warrant.NotNull<string>();
+        //public static string FormatMoney(Money money, string format, IFormatProvider provider)
+        //{
+        //    Warrant.NotNull<string>();
 
-            var spec = MoneyFormatSpecifier.Parse(format, money.DecimalPrecision, 'N');
-            string amount = money.Amount.ToString(spec.AmountFormat, provider);
-            return FormatAsNumber(amount, money.Currency.Code, spec);
-        }
+        //    var spec = MoneyFormatSpecifier.Parse(format, money.DecimalPrecision, 'N');
+        //    string amount = money.Amount.ToString(spec.AmountFormat, provider);
+        //    return FormatAsNumber(amount, money.Currency.Code, spec);
+        //}
 
         public static string FormatPenny(Moneypenny penny, string format, IFormatProvider provider)
         {

@@ -67,7 +67,7 @@ namespace Narvalo.Finance.Globalization
 
         public bool FormatAmountAsCurrency { get; set; }
 
-        private IFormatProvider Provider { get; }
+        public IFormatProvider Provider { get; }
 
         public static MoneyFormatInfo CurrentInfo => new MoneyFormatInfo(CultureInfo.CurrentCulture);
 
@@ -85,6 +85,18 @@ namespace Narvalo.Finance.Globalization
 
                 return s_InvariantInfo;
             }
+        }
+
+        public static MoneyFormatInfo GetInstance(IFormatProvider formatProvider)
+        {
+            var info = formatProvider as MoneyFormatInfo;
+            if (info != null) { return info; }
+            if (formatProvider != null)
+            {
+                return new MoneyFormatInfo(formatProvider);
+            }
+
+            return CurrentInfo;
         }
 
         #region IFormatProvider
@@ -154,24 +166,11 @@ namespace Narvalo.Finance.Globalization
 
                 if (arg.GetType() == typeof(Money))
                 {
-                    return FormatImpl((Money)arg, format, mfi);
+                    return MoneyFormatters.FormatMoney((Money)arg, format, mfi);
                 }
 
                 var formattable = arg as IFormattable;
                 return formattable == null ? arg.ToString() : formattable.ToString(format, mfi.Provider);
-            }
-
-            private string FormatImpl(Money money, string format, MoneyFormatInfo mfi)
-            {
-                int? precision = mfi.UseDecimalPlacesFromCurrency
-                    ? money.Currency.DecimalPlaces
-                    : money.DecimalPrecision;
-                char numericFormat = mfi.FormatAmountAsCurrency ? 'C' : 'N';
-                var spec = MoneyFormatSpecifier.Parse(format, precision, numericFormat);
-
-                return mfi.FormatAmountAsCurrency
-                    ? MoneyFormatters.FormatAsCurrency(money.Amount, money.Currency.Code, spec, mfi.Provider)
-                    : MoneyFormatters.FormatAsNumber(money.Amount, money.Currency.Code, spec, mfi.Provider);
             }
         }
     }

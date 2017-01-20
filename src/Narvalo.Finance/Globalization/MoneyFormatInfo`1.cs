@@ -31,11 +31,11 @@ namespace Narvalo.Finance.Globalization
         public IFormatProvider Provider { get; }
 
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
-        public static MoneyFormatInfo<TCurrency> Current
+        public static MoneyFormatInfo<TCurrency> CurrentInfo
             => new MoneyFormatInfo<TCurrency>(CultureInfo.CurrentCulture);
 
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
-        public static MoneyFormatInfo<TCurrency> Invariant
+        public static MoneyFormatInfo<TCurrency> InvariantInfo
         {
             get
             {
@@ -69,24 +69,11 @@ namespace Narvalo.Finance.Globalization
 
                 if (arg.GetType() == typeof(Money<TCurrency>))
                 {
-                    return FormatImpl((Money<TCurrency>)arg, format, mfi);
+                    return MoneyFormatters.FormatMoney((Money<TCurrency>)arg, format, mfi);
                 }
 
                 var formattable = arg as IFormattable;
                 return formattable == null ? arg.ToString() : formattable.ToString(format, mfi.Provider);
-            }
-
-            private string FormatImpl(Money<TCurrency> money, string format, MoneyFormatInfo<TCurrency> mfi)
-            {
-                int? precision = mfi.UseDecimalPlacesFromCurrency
-                    ? money.Currency.DecimalPlaces
-                    : money.DecimalPrecision;
-                char numericFormat = mfi.FormatAmountAsCurrency ? 'C' : 'N';
-                var spec = MoneyFormatSpecifier.Parse(format, precision, numericFormat);
-
-                return mfi.FormatAmountAsCurrency
-                    ? MoneyFormatters.FormatAsCurrency(money.Amount, money.Currency.Code, spec, mfi.Provider)
-                    : MoneyFormatters.FormatAsNumber(money.Amount, money.Currency.Code, spec, mfi.Provider);
             }
         }
     }
