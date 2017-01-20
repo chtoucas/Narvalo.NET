@@ -405,11 +405,9 @@ namespace Narvalo.Finance
             int? precision = info.UseDecimalPlacesFromCurrency
                 ? Currency.DecimalPlaces
                 : DecimalPrecision;
-            var spec = MoneyFormatSpecifier.Parse(format, precision, info.AmountFormat);
+            var spec = MoneyFormatSpecifier.Parse(format, precision, info.NumericFormat);
 
-            return info.AmountFormat == 'C'
-                ? MoneyFormatters.FormatAsCurrency(Amount, Currency.Code, spec, info.Provider)
-                : MoneyFormatters.FormatAsNumber(Amount, Currency.Code, spec, info.Provider);
+            return MoneyFormatters.Format(Amount, Currency.Code, spec, info);
         }
     }
 

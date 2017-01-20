@@ -29,7 +29,7 @@ namespace Narvalo.Finance.Globalization
         public bool UseDecimalPlacesFromCurrency { get; set; }
 
         // The format that will be used to format the amount part.
-        public char AmountFormat { get; set; } = 'N';
+        public char NumericFormat { get; set; } = 'N';
 
         public IFormatProvider Provider { get; }
 
