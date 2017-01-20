@@ -75,88 +75,44 @@ namespace Narvalo.Finance.Globalization
     // > String.Format(provider, "Montant = {0:N}", money);
     internal static class MoneyFormatters
     {
-        private const string NO_BREAK_SPACE = "\u00A0";
-
-        public static string Format<T>(
+        public static string FormatMoney<T>(
+            MoneyFormatSpecifier format,
             T amount,
             string currencyCode,
-            MoneyFormatSpecifier spec,
             MoneyFormatInfo info)
             where T : IFormattable
         {
             Warrant.NotNull<string>();
 
-            return info.NumericFormat == 'C'
-                ? FormatAsCurrency(amount, currencyCode, spec, info.Provider)
-                : FormatAsNumber(amount, currencyCode, spec, info.Provider);
-        }
+            string value;
 
-        public static string FormatAsNumber<T>(
-            T amount,
-            string currencyCode,
-            MoneyFormatSpecifier spec,
-            IFormatProvider provider)
-            where T : IFormattable
-        {
-            Warrant.NotNull<string>();
-
-            string value = amount.ToString(spec.AmountFormat, provider);
+            if (info.UseCurrencyLayoutFromProvider)
+            {
+                var nfi = NumberFormatInfo.GetInstance(info.Provider).Copy();
+                nfi.CurrencySymbol = String.Empty;
+                nfi.RemoveCurrencySpacing();
+                value = amount.ToString(format.GetAmountFormat('C'), nfi);
+            }
+            else
+            {
+                value = amount.ToString(format.GetAmountFormat('N'), info.Provider);
+            }
 
             // Uppercase it (ASCII letter only).
-            switch (spec.MainFormat & 0xDF)
+            switch (format.MainFormat & 0xDF)
             {
                 case 'N':
                     // Numeric. Does not include any information about the currency.
                     return value;
                 case 'L':
                     // Left (Currency code placed on the).
-                    return currencyCode + NO_BREAK_SPACE + value;
+                    return currencyCode + info.CurrencyAmountSeparator + value;
                 case 'R':
                 case 'G':
                     // General (default) or Right (Currency code placed on the).
-                    return value + NO_BREAK_SPACE + currencyCode;
+                    return value + info.CurrencyAmountSeparator + currencyCode;
                 default:
-                    throw new FormatException(Narvalo.Format.Current(Strings.Money_InvalidFormatSpecification));
-            }
-        }
-
-        public static string FormatAsCurrency<T>(
-            T amount,
-            string currencyCode,
-            MoneyFormatSpecifier spec,
-            IFormatProvider provider)
-            where T : IFormattable
-        {
-            Warrant.NotNull<string>();
-
-            var nfi = NumberFormatInfo.GetInstance(provider).Copy();
-
-            // Uppercase it (ASCII letter only).
-            switch (spec.MainFormat & 0xDF)
-            {
-                case 'N':
-                    // Numeric. Does not include any information about the currency.
-                    nfi.CurrencySymbol = String.Empty;
-                    nfi.RemoveCurrencySpacing();
-                    return amount.ToString(spec.AmountFormat, nfi);
-                case 'L':
-                    // Left (Currency code placed on the).
-                    nfi.CurrencySymbol = String.Empty;
-                    nfi.RemoveCurrencySpacing();
-                    return currencyCode + " " + amount.ToString(spec.AmountFormat, nfi);
-                case 'R':
-                    // Right (Currency code placed on the).
-                    nfi.CurrencySymbol = String.Empty;
-                    nfi.RemoveCurrencySpacing();
-                    return amount.ToString(spec.AmountFormat, nfi) + " " + currencyCode;
-                case 'G':
-                    // General (default). It replaces the currency symbol by the currency code
-                    // and ensures that there is a space between the amount and the currency code.
-                    nfi.CurrencySymbol = currencyCode;
-                    nfi.KeepOrAddCurrencySpacing();
-                    return amount.ToString(spec.AmountFormat, nfi);
-                default:
-                    throw new FormatException(Narvalo.Format.Current(Strings.Money_InvalidFormatSpecification));
+                    throw new FormatException(Format.Current(Strings.Money_InvalidFormatSpecification));
             }
         }
     }

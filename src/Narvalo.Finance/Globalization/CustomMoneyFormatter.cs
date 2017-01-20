@@ -72,6 +72,12 @@ namespace Narvalo.Finance.Globalization
                 if (arg.GetType() == typeof(Money))
                 {
                     //return MoneyFormatters.FormatMoney((Money)arg, format, formatProvider);
+                    //case 'G':
+                    //    // General (default). It replaces the currency symbol by the currency code
+                    //    // and ensures that there is a space between the amount and the currency code.
+                    //    nfi.CurrencySymbol = currencyCode;
+                    //    nfi.KeepOrAddCurrencySpacing();
+                    //    return amount.ToString(format.AmountFormat, nfi);
                     throw new NotImplementedException();
                 }
 

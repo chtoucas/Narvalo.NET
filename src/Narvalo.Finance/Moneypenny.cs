@@ -260,9 +260,9 @@ namespace Narvalo.Finance
             Demand.NotNull(info);
             Warrant.NotNull<string>();
 
-            var spec = MoneyFormatSpecifier.Parse(format, 0, info.NumericFormat);
+            var spec = MoneyFormatSpecifier.Parse(format, 0);
 
-            return MoneyFormatters.Format(Amount, PennyOrCurrencyCode, spec, info);
+            return MoneyFormatters.FormatMoney(spec, Amount, PennyOrCurrencyCode, info);
         }
     }
 

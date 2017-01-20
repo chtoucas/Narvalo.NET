@@ -8,6 +8,8 @@ namespace Narvalo.Finance.Globalization
 
     public sealed class MoneyFormatInfo : IFormatProvider
     {
+        private const string NO_BREAK_SPACE = "\u00A0";
+
         private static MoneyFormatInfo s_InvariantInfo;
 
         /// <summary>
@@ -29,7 +31,9 @@ namespace Narvalo.Finance.Globalization
         public bool UseDecimalPlacesFromCurrency { get; set; }
 
         // The format that will be used to format the amount part.
-        public char NumericFormat { get; set; } = 'N';
+        public bool UseCurrencyLayoutFromProvider { get; set; }
+
+        public string CurrencyAmountSeparator { get; set; } = NO_BREAK_SPACE;
 
         public IFormatProvider Provider { get; }
 

@@ -402,12 +402,10 @@ namespace Narvalo.Finance
             Demand.NotNull(info);
             Warrant.NotNull<string>();
 
-            int? precision = info.UseDecimalPlacesFromCurrency
-                ? Currency.DecimalPlaces
-                : DecimalPrecision;
-            var spec = MoneyFormatSpecifier.Parse(format, precision, info.NumericFormat);
+            int? precision = info.UseDecimalPlacesFromCurrency ? Currency.DecimalPlaces : DecimalPrecision;
+            var spec = MoneyFormatSpecifier.Parse(format, precision);
 
-            return MoneyFormatters.Format(Amount, Currency.Code, spec, info);
+            return MoneyFormatters.FormatMoney(spec, Amount, Currency.Code, info);
         }
     }
 

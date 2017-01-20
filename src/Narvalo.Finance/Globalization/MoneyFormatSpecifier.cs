@@ -9,31 +9,28 @@ namespace Narvalo.Finance
     {
         public const char DefaultMainFormat = 'G';
 
-        public MoneyFormatSpecifier(char mainFormat, int? decimalPlaces, char numericFormat)
+        public MoneyFormatSpecifier(char mainFormat, int? decimalPlaces)
         {
             MainFormat = mainFormat;
             DecimalPlaces = decimalPlaces;
-            NumericFormat = numericFormat;
         }
 
         public int? DecimalPlaces { get; }
 
         public char MainFormat { get; }
 
-        public char NumericFormat { get; }
+        public string GetAmountFormat(char numericFormat)
+            => numericFormat + DecimalPlaces?.ToString(CultureInfo.InvariantCulture);
 
-        public string AmountFormat
-            => NumericFormat + DecimalPlaces?.ToString(CultureInfo.InvariantCulture);
-
-        public static MoneyFormatSpecifier Parse(string format, int? moneyPrecision, char numericFormat)
+        public static MoneyFormatSpecifier Parse(string format, int? moneyPrecision)
         {
             if (format == null || format.Length == 0)
             {
-                return new MoneyFormatSpecifier(DefaultMainFormat, moneyPrecision, numericFormat);
+                return new MoneyFormatSpecifier(DefaultMainFormat, moneyPrecision);
             }
             if (format.Length == 1)
             {
-                return new MoneyFormatSpecifier(format[0], moneyPrecision, numericFormat);
+                return new MoneyFormatSpecifier(format[0], moneyPrecision);
             }
 
             // "X00"..."X09" are not valid formats.
@@ -51,7 +48,7 @@ namespace Narvalo.Finance
 
                 if (!succeed) { throw new FormatException("XXX"); }
 
-                return new MoneyFormatSpecifier(format[0], decimalPlaces, numericFormat);
+                return new MoneyFormatSpecifier(format[0], decimalPlaces);
             }
 
             throw new FormatException("XXX");
