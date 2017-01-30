@@ -6,6 +6,7 @@ namespace Narvalo.Finance.Globalization
     using System.Globalization;
     using System.Threading;
 
+    [Obsolete]
     public sealed class MoneyFormatInfo : IFormatProvider
     {
         private const string NO_BREAK_SPACE = "\u00A0";
@@ -37,7 +38,7 @@ namespace Narvalo.Finance.Globalization
 
         public IFormatProvider Provider { get; }
 
-        public static MoneyFormatInfo CurrentInfo => new MoneyFormatInfo(CultureInfo.CurrentCulture);
+        public static MoneyFormatInfo CurrentInfo => GetInstance(CultureInfo.CurrentCulture);
 
         public static MoneyFormatInfo InvariantInfo
         {

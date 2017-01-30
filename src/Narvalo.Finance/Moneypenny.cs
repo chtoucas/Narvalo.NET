@@ -5,6 +5,7 @@ namespace Narvalo.Finance
     using System;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
 
     using Narvalo.Finance.Generic;
     using Narvalo.Finance.Globalization;
@@ -233,13 +234,13 @@ namespace Narvalo.Finance
         public override string ToString()
         {
             Warrant.NotNull<string>();
-            return FormatImpl(null, MoneyFormatInfo.CurrentInfo);
+            return FormatImpl(null, NumberFormatInfo.CurrentInfo);
         }
 
         public string ToString(string format)
         {
             Warrant.NotNull<string>();
-            return FormatImpl(format, MoneyFormatInfo.CurrentInfo);
+            return FormatImpl(format, NumberFormatInfo.CurrentInfo);
         }
 
         public string ToString(IFormatProvider formatProvider) => ToString(null, formatProvider);
@@ -252,17 +253,30 @@ namespace Narvalo.Finance
                 if (fmtr != null) { return fmtr.Format(format, this, formatProvider); }
             }
 
-            return FormatImpl(format, MoneyFormatInfo.GetInstance(formatProvider));
+            return FormatImpl(format, NumberFormatInfo.GetInstance(formatProvider));
         }
 
-        private string FormatImpl(string format, MoneyFormatInfo info)
+        private string FormatImpl(string format, NumberFormatInfo info)
         {
             Demand.NotNull(info);
             Warrant.NotNull<string>();
 
-            var spec = MoneyFormatSpecifier.Parse(format, 0);
+            MoneyFormat spec;
 
-            return MoneyFormatters.FormatMoney(spec, Amount, PennyOrCurrencyCode, info);
+            if (format == null || format.Length == 0)
+            {
+                spec = new MoneyFormat('G', 0);
+            }
+            else if (format.Length == 1)
+            {
+                spec = new MoneyFormat(format[0], 0);
+            }
+            else
+            {
+                throw new FormatException("XXX");
+            }
+
+            return MoneyFormatter.FormatMoney(spec, Amount, PennyOrCurrencyCode, info);
         }
     }
 

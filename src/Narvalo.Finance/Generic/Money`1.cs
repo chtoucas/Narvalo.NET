@@ -5,6 +5,7 @@ namespace Narvalo.Finance.Generic
     using System;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
 
     using Narvalo.Finance.Globalization;
     using Narvalo.Finance.Properties;
@@ -69,12 +70,6 @@ namespace Narvalo.Finance.Generic
         public bool IsRoundable => UnderlyingUnit.HasFixedDecimalPlaces;
 
         public bool IsRounded => IsRoundable && IsNormalized;
-
-        /// <summary>
-        /// If the amount is rounded, returns the number of digits defined by the currency;
-        /// otherwise, returns null.
-        /// </summary>
-        public int? DecimalPrecision => IsRounded ? Currency.DecimalPlaces : (int?)null;
 
         /// <summary>
         /// Gets a value indicating whether the amount is zero.
@@ -215,13 +210,13 @@ namespace Narvalo.Finance.Generic
         public override string ToString()
         {
             Warrant.NotNull<string>();
-            return FormatImpl(null, MoneyFormatInfo.CurrentInfo);
+            return FormatImpl(null, NumberFormatInfo.CurrentInfo);
         }
 
         public string ToString(string format)
         {
             Warrant.NotNull<string>();
-            return FormatImpl(format, MoneyFormatInfo.CurrentInfo);
+            return FormatImpl(format, NumberFormatInfo.CurrentInfo);
         }
 
         public string ToString(IFormatProvider formatProvider) => ToString(null, formatProvider);
@@ -234,18 +229,17 @@ namespace Narvalo.Finance.Generic
                 if (fmtr != null) { return fmtr.Format(format, this, formatProvider); }
             }
 
-            return FormatImpl(format, MoneyFormatInfo.GetInstance(formatProvider));
+            return FormatImpl(format, NumberFormatInfo.GetInstance(formatProvider));
         }
 
-        private string FormatImpl(string format, MoneyFormatInfo info)
+        private string FormatImpl(string format, NumberFormatInfo info)
         {
             Demand.NotNull(info);
             Warrant.NotNull<string>();
 
-            int? precision = info.UseDecimalPlacesFromCurrency ? Currency.DecimalPlaces : DecimalPrecision;
-            var spec = MoneyFormatSpecifier.Parse(format, precision);
+            var spec = MoneyFormat.Parse(format, Currency.FixedDecimalPlaces);
 
-            return MoneyFormatters.FormatMoney(spec, Amount, Currency.Code, info);
+            return MoneyFormatter.FormatMoney(spec, Amount, Currency.Code, info);
         }
     }
 

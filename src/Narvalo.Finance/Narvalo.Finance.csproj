@@ -77,7 +77,7 @@
     <Compile Include="Extensions\Enumerable%24.cs" />
     <Compile Include="Generic\MoneyFactory.cs" />
     <Compile Include="Globalization\CustomMoneyFormatter.cs" />
-    <Compile Include="Globalization\MoneyFormatSpecifier.cs" />
+    <Compile Include="Globalization\MoneyFormat.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Internal\CurrencyHelpers.cs" />
     <Compile Include="Internal\CurrencyHelpers.g.cs">
@@ -120,7 +120,7 @@
     <Compile Include="Globalization\CountryISOCodes.cs" />
     <Compile Include="Globalization\NumberFormatInfoExtensions.cs" />
     <Compile Include="IbanStyles.cs" />
-    <Compile Include="Globalization\MoneyFormatters.cs" />
+    <Compile Include="Globalization\MoneyFormatter.cs" />
     <Compile Include="Generic\Units.g.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

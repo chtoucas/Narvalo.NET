@@ -78,6 +78,10 @@ namespace Narvalo.Finance.Globalization
                     //    nfi.CurrencySymbol = currencyCode;
                     //    nfi.KeepOrAddCurrencySpacing();
                     //    return amount.ToString(format.AmountFormat, nfi);
+                    //var nfi = NumberFormatInfo.GetInstance(info.Provider).Copy();
+                    //nfi.CurrencySymbol = String.Empty;
+                    //nfi.RemoveCurrencySpacing();
+                    //value = amount.ToString(format.GetAmountFormat('C'), nfi);
                     throw new NotImplementedException();
                 }
 

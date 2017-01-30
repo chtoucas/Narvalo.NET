@@ -15,6 +15,8 @@ namespace Narvalo.Finance.Internal
 
         bool HasFixedDecimalPlaces { get; }
 
+        int? FixedDecimalPlaces { get; }
+
         bool IsMetaCurrency { get; }
 
         bool IsPseudoCurrency { get; }

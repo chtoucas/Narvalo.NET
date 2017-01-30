@@ -26,6 +26,8 @@ namespace Narvalo.Finance.Generic
 
         public bool HasFixedDecimalPlaces => DecimalPlaces != Currency.MaxDecimalPlaces;
 
+        public int? FixedDecimalPlaces => HasFixedDecimalPlaces ? DecimalPlaces : (int?)null;
+
         public bool IsMetaCurrency => CurrencyHelpers.IsMetaCurrency(Code);
 
         public bool IsPseudoCurrency => CurrencyHelpers.IsPseudoCurrency(Code, MinorUnits);

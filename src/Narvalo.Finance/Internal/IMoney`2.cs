@@ -15,7 +15,6 @@ namespace Narvalo.Finance.Internal
         bool IsNormalized { get; }
         bool IsRoundable { get; }
         bool IsRounded { get; }
-        int? DecimalPrecision { get; }
 
         T Normalize(MidpointRounding mode);
         T Normalize(IRoundingAdjuster adjuster);

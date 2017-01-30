@@ -110,6 +110,12 @@ namespace Narvalo.Finance
         public bool HasFixedDecimalPlaces => DecimalPlaces != MaxDecimalPlaces;
 
         /// <summary>
+        /// If the currency specifies a fixed number of decimal places, returns the number of digits
+        /// after the decimal separator; otherwise, returns null.
+        /// </summary>
+        public int? FixedDecimalPlaces => HasFixedDecimalPlaces ? DecimalPlaces : (int?)null;
+
+        /// <summary>
         /// Gets a value indicating whether the currency is a meta-currency.
         /// </summary>
         /// <remarks>
