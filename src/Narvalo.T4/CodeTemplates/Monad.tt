@@ -113,7 +113,7 @@ namespace <#= Namespace #>.Internal
 
     using global::Narvalo;
     using global::Narvalo.Fx; // Required for EmptyIfNull().
-<#+ if (Namespace != "Narvalo.Fx") { #>
+<#+ if (Namespace != "Narvalo.Fx" && Namespace != "Narvalo") { #>
     using <#= Namespace #>;
 <#+ } #>
     using <#= Namespace #>.Advanced;

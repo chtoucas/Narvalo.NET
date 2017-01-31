@@ -76,7 +76,6 @@
     <Compile Include="Allocators\PennyAllocators.cs" />
     <Compile Include="Extensions\Enumerable%24.cs" />
     <Compile Include="Generic\MoneyFactory.cs" />
-    <Compile Include="Globalization\CustomMoneyFormatter.cs" />
     <Compile Include="Globalization\MoneyFormat.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Internal\CurrencyHelpers.cs" />
@@ -100,7 +99,6 @@
     <Compile Include="CurrencyTypes.cs" />
     <Compile Include="Generic\Currency`1.cs" />
     <Compile Include="Generic\CurrencyUnit.cs" />
-    <Compile Include="Globalization\MoneyFormatInfo.cs" />
     <Compile Include="Globalization\RegionInfo%24.cs" />
     <Compile Include="Allocators\IMoneyAllocator.cs" />
     <Compile Include="Allocators\RoundingMoneyAllocator.cs" />

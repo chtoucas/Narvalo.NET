@@ -1,15 +1,15 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Fx
+namespace Narvalo
 {
     using System;
     using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.Runtime.ExceptionServices;
 
-    /// <seealso cref="Outcome{T}"/>
-    /// <seealso cref="Either{T1, T2}"/>
-    /// <seealso cref="Switch{T1, T2}"/>
+    /// <seealso cref="Fx.Outcome{T}"/>
+    /// <seealso cref="Fx.Either{T1, T2}"/>
+    /// <seealso cref="Fx.Switch{T1, T2}"/>
     /// <seealso cref="VoidOrBreak"/>
     [DebuggerDisplay("Void")]
     public partial class VoidOrError

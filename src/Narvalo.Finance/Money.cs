@@ -166,7 +166,7 @@ namespace Narvalo.Finance
         /// <para>Strictly equivalent to <see cref="Money(decimal, Currency)"/>; only added
         /// for completeness.</para>
         /// </summary>
-        /// <param name="amount">The decimal representing the amount of money.</param>
+        /// <param name="major">The decimal representing the amount of money.</param>
         /// <param name="currency">The currency.</param>
         public static Money OfMajor(decimal major, Currency currency)
             => new Money(major, currency, false);
@@ -266,7 +266,6 @@ namespace Narvalo.Finance
         /// <exception cref="OverflowException">Thrown if the result is too large to fit into
         /// the Decimal range.</exception>
         /// <seealso cref="ToLongMinor()"/>
-        /// <seealso cref="ToLongMinor(out long)"/>
         /// <returns>The amount in minor units. If the instance is not normalizable, it returns
         /// the amount untouched as if the currency had no minor currency unit.</returns>
         public decimal ToMinor() => Currency.ConvertToMinor(Amount);

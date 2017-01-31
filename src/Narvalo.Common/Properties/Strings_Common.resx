@@ -123,4 +123,10 @@
   <data name="Configuration_MissingSection_Format" xml:space="preserve">
     <value>The &lt;{0}&gt; section is not defined in your config file!</value>
   </data>
+  <data name="ConvertTo_TypeIsNotFlagsEnum" xml:space="preserve">
+    <value>This method only accepts flags enum.</value>
+  </data>
+  <data name="Int64Encoder_IllegalCharacter_Format" xml:space="preserve">
+    <value>Illegal character '{0}' found at position '{1}'.</value>
+  </data>
 </root>

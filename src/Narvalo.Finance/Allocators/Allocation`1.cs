@@ -5,6 +5,22 @@ namespace Narvalo.Finance.Allocators
     using System.Collections;
     using System.Collections.Generic;
 
+    //public enum BiasAllocation
+    //{
+    //    First,
+    //    Last,
+    //    Lowest,
+    //    Highest,
+    //    Pseudorandom,
+    //}
+
+    // Spread? Partition? Evenly?
+    //public enum Distribution
+    //{
+    //    PseudoUniform,
+    //    Single,
+    //}
+
     public class Allocation<T> : IEnumerable<T>
     {
         public Allocation(T total, IEnumerable<T> parts, T remainder)

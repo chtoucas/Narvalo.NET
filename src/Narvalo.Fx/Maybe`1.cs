@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Fx
+namespace Narvalo
 {
     using System;
     using System.Collections;
@@ -9,7 +9,8 @@ namespace Narvalo.Fx
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
-    using Narvalo.Fx.Properties;
+    using Narvalo.Fx;
+    using Narvalo.Properties;
 
     /// <summary>
     /// Represents an object that is either a single value of type T, or no value at all.
@@ -96,7 +97,7 @@ namespace Narvalo.Fx
 
             if (!value.IsSome)
             {
-                throw new InvalidCastException(Strings.Maybe_CannotCastNoneToValue);
+                throw new InvalidCastException(Strings_Fx.Maybe_CannotCastNoneToValue);
             }
 
             return value.Value;

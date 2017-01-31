@@ -5,6 +5,8 @@ namespace Narvalo.Fx
     using System;
     using System.Collections.Generic;
 
+    using Narvalo.Fx;
+
     public static class Sequence
     {
         /// <summary>

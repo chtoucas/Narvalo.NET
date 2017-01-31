@@ -106,7 +106,6 @@ namespace Narvalo.Finance
         /// <summary>
         /// Gets a value indicating whether the instance specifies a fixed number of decimal places.
         /// </summary>
-        /// <remarks>This is only necessary because of legacy currencies.</remarks>
         public bool HasFixedDecimalPlaces => DecimalPlaces != MaxDecimalPlaces;
 
         /// <summary>

@@ -26,8 +26,8 @@ namespace Narvalo.Finance.Globalization
     //   * "G" or "g", same as "R".
     // - "nn" or "Z" is an optional integer called the precision specifier. The precision specifier
     //   "nn" ranges from 0 to 99 and affects the number of digits after the decimal separator to
-    //   display. The special value "Z" instructs us to use the number of decimal places defined
-    //   by the currency; for those currencies for which the number of decimal places is not known
+    //   display; the special value "Z" instructs us to use the number of decimal places defined
+    //   by the currency - for those currencies for which the number of decimal places is not known
     //   (legacy currencies for instance), we fallback to the default precision found in the
     //   requested culture info.
     //

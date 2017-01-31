@@ -4,7 +4,7 @@
   <PropertyGroup>
     <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
     <ProjectGuid>{28F6175D-0EE3-4763-8004-662A7DE41280}</ProjectGuid>
-    <RootNamespace>Narvalo.Fx</RootNamespace>
+    <RootNamespace>Narvalo</RootNamespace>
     <AssemblyName>Narvalo.Fx</AssemblyName>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
@@ -57,11 +57,11 @@
     <CodeContractsAnalysisWarningLevel>3</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="Identity.tt">
+    <None Include="Fx\Identity.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Identity.g.cs</LastGenOutput>
     </None>
-    <None Include="Maybe.tt">
+    <None Include="Fx\Maybe.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Maybe.g.cs</LastGenOutput>
     </None>
@@ -71,64 +71,65 @@
     <None Include="Narvalo.Fx.Version.props">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Outcome.tt">
+    <None Include="Fx\Outcome.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Outcome.g.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Advanced\Action%24.cs" />
-    <Compile Include="Advanced\Enumerable%24.cs" />
-    <Compile Include="Advanced\Func%24.cs" />
-    <Compile Include="Advanced\Nullable%24.cs" />
-    <Compile Include="Advanced\Predicate%24.cs" />
-    <Compile Include="Either.cs" />
-    <Compile Include="Either`2.cs" />
-    <Compile Include="Enumerable%24.cs" />
-    <Compile Include="Func.cs" />
-    <Compile Include="Identity.g.cs">
+    <Compile Include="Fx\Advanced\Action%24.cs" />
+    <Compile Include="Fx\Advanced\Enumerable%24.cs" />
+    <Compile Include="Fx\Advanced\Func%24.cs" />
+    <Compile Include="Fx\Advanced\Nullable%24.cs" />
+    <Compile Include="Fx\Advanced\Predicate%24.cs" />
+    <Compile Include="Fx\Either.cs" />
+    <Compile Include="Fx\Either`2.cs" />
+    <Compile Include="Fx\Enumerable%24.cs" />
+    <Compile Include="Fx\Func.cs" />
+    <Compile Include="Fx\Identity.g.cs">
       <DependentUpon>Identity.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Identity`1.cs" />
-    <Compile Include="Iteration.cs" />
-    <Compile Include="Iteration`2.cs" />
-    <Compile Include="Maybe.cs" />
-    <Compile Include="Maybe.g.cs">
+    <Compile Include="Fx\Identity`1.cs" />
+    <Compile Include="Fx\Iteration.cs" />
+    <Compile Include="Fx\Iteration`2.cs" />
+    <Compile Include="Fx\Maybe.cs" />
+    <Compile Include="Fx\Maybe.g.cs">
       <DependentUpon>Maybe.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Maybe`1.cs" />
-    <Compile Include="Outcome.cs" />
-    <Compile Include="Outcome.g.cs">
+    <Compile Include="Fx\Outcome.cs" />
+    <Compile Include="Fx\Outcome.g.cs">
       <DependentUpon>Outcome.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Outcome`1.cs" />
+    <Compile Include="Fx\Outcome`1.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Strings.Designer.cs">
+    <Compile Include="Properties\Strings_Fx.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Strings.resx</DependentUpon>
+      <DependentUpon>Strings_Fx.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Strings.fr.Designer.cs">
+    <Compile Include="Properties\Strings_Fx.fr.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Strings.fr.resx</DependentUpon>
+      <DependentUpon>Strings_Fx.fr.resx</DependentUpon>
     </Compile>
-    <Compile Include="Recursion.cs" />
-    <Compile Include="Sequence.cs" />
-    <Compile Include="Sequence`1.cs" />
-    <Compile Include="Stubs.cs" />
-    <Compile Include="Stubs`1.cs" />
-    <Compile Include="Stubs`2.cs" />
-    <Compile Include="Switch.cs" />
-    <Compile Include="Switch%24.cs" />
-    <Compile Include="Switch`2.cs" />
-    <Compile Include="Unit.cs" />
+    <Compile Include="Fx\Recursion.cs" />
+    <Compile Include="Fx\Sequence.cs" />
+    <Compile Include="Fx\Sequence`1.cs" />
+    <Compile Include="Fx\Stubs.cs" />
+    <Compile Include="Fx\Stubs`1.cs" />
+    <Compile Include="Fx\Stubs`2.cs" />
+    <Compile Include="Fx\Switch.cs" />
+    <Compile Include="Fx\Switch%24.cs" />
+    <Compile Include="Fx\Switch`2.cs" />
+    <Compile Include="Fx\Unit.cs" />
     <Compile Include="VoidOrBreak.cs" />
     <Compile Include="VoidOrError.cs" />
   </ItemGroup>
@@ -139,13 +140,13 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\Strings.fr.resx">
+    <EmbeddedResource Include="Properties\Strings_Fx.fr.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Strings.fr.Designer.cs</LastGenOutput>
+      <LastGenOutput>Strings_Fx.fr.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Strings.resx">
+    <EmbeddedResource Include="Properties\Strings_Fx.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+      <LastGenOutput>Strings_Fx.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

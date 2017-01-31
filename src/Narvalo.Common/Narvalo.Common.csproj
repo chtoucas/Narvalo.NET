@@ -60,6 +60,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BinaryEncoder.cs" />
+    <Compile Include="BooleanStyles.cs" />
     <Compile Include="Collections\Dictionary%24.cs" />
     <Compile Include="Collections\Enumerator%24.cs" />
     <Compile Include="Collections\NameValueCollection%24.cs" />
@@ -69,6 +71,7 @@
     <Compile Include="Configuration\Configuration%24.cs" />
     <Compile Include="Configuration\SectionManager.cs" />
     <Compile Include="Configuration\Setter`2.cs" />
+    <Compile Include="ConvertTo.cs" />
     <Compile Include="Data\DataRecord%24.cs" />
     <Compile Include="Data\NonQueryStoredProcedure`1.cs" />
     <Compile Include="Data\SqlCommand%24.cs" />
@@ -77,6 +80,9 @@
     <Compile Include="Data\SqlTypes%24.cs" />
     <Compile Include="Data\StoredProcedure`1.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Int64Encoder.cs" />
+    <Compile Include="Internal\TryParser%24.cs" />
+    <Compile Include="Internal\TryParser`1.cs" />
     <Compile Include="IO\ConcurrentFileFinder.cs" />
     <Compile Include="IO\DirectoryWalker.cs" />
     <Compile Include="IO\FileFinder.cs" />
@@ -84,12 +90,20 @@
     <Compile Include="IO\RelativeDirectory.cs" />
     <Compile Include="IO\RelativeDirectoryEventArgs.cs" />
     <Compile Include="IO\RelativeFile.cs" />
+    <Compile Include="ParseTo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Strings_Common.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings_Common.resx</DependentUpon>
     </Compile>
+    <Compile Include="Range.cs" />
+    <Compile Include="Range`1.cs" />
+    <Compile Include="StringManip.cs" />
+    <Compile Include="Xml\Maybe%24.cs" />
+    <Compile Include="Xml\XAttribute%24.cs" />
+    <Compile Include="Xml\XElement%24.cs" />
+    <Compile Include="Xml\XmlReader%24.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\CustomDictionary.xml" />

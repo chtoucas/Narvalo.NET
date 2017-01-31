@@ -9,7 +9,7 @@ namespace Narvalo.Fx
     using System.Diagnostics.Contracts;
     using System.Runtime.ExceptionServices;
 
-    using Narvalo.Fx.Properties;
+    using Narvalo.Properties;
 
     /// <summary>
     /// Represents the outcome of a computation which may throw exceptions.
@@ -72,7 +72,7 @@ namespace Narvalo.Fx
             // like "Unable to cast a Failure_ type to a Success_ type".
             if (!value.IsSuccess)
             {
-                throw new InvalidCastException(Strings.Outcome_CannotCastFailureToValue);
+                throw new InvalidCastException(Strings_Fx.Outcome_CannotCastFailureToValue);
             }
 
             var success = value as Success_;
@@ -94,7 +94,7 @@ namespace Narvalo.Fx
             // like "Unable to cast a Success_ type to a Failure_ type".
             if (value.IsSuccess)
             {
-                throw new InvalidCastException(Strings.Outcome_CannotCastSuccessToException);
+                throw new InvalidCastException(Strings_Fx.Outcome_CannotCastSuccessToException);
             }
 
             var failure = value as Failure_;

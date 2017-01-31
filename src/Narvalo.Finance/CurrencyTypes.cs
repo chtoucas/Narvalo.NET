@@ -7,7 +7,7 @@ namespace Narvalo.Finance
     /// <summary>
     /// Defines the types of currencies that can be used to create a currency using the
     /// <see cref="Currency.Of(string, CurrencyTypes)"/> and
-    /// <see cref="CurrencyFactory.TryCreate(string, CurrencyTypes)"/> methods.
+    /// <see cref="Currency.TryCreate(string, CurrencyTypes)"/> methods.
     /// </summary>
     /// <remarks>This enumeration has a <see cref="FlagsAttribute"/> attribute that allows
     /// a bitwise combination of its member values.</remarks>
