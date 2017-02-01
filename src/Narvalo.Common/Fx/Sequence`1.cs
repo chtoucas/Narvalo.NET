@@ -2,10 +2,12 @@
 
 namespace Narvalo.Fx
 {
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
     using System.Linq;
 
+    [Obsolete]
     public static class Sequence<TElement>
     {
         /// <summary>
@@ -15,7 +17,7 @@ namespace Narvalo.Fx
         /// Workaround for the fact that <see cref="Enumerable.Empty{TElement}"/> does not have any contract attached.
         /// </remarks>
         /// <value>An empty <see cref="IEnumerable{TElement}"/> whose type argument is TElement.</value>
-        internal static IEnumerable<TElement> Empty
+        public static IEnumerable<TElement> Empty
         {
             get
             {

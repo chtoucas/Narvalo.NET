@@ -8,6 +8,7 @@ namespace Narvalo.Fx
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
+    using System.Linq;
 
     using Narvalo.Fx.Properties;
 
@@ -363,7 +364,7 @@ namespace Narvalo.Fx
         {
             Warrant.NotNull<IEnumerable<T>>();
 
-            return IsSome ? Sequence.Pure(Value) : Sequence<T>.Empty;
+            return IsSome ? Sequence.Pure(Value) : Enumerable.Empty<T>();
         }
 
         /// <inheritdoc cref="IEnumerable{T}.GetEnumerator" />

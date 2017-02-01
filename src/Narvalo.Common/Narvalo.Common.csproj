@@ -63,8 +63,10 @@
     <Compile Include="BinaryEncoder.cs" />
     <Compile Include="BooleanStyles.cs" />
     <Compile Include="Collections\Dictionary%24.cs" />
+    <Compile Include="Collections\Enumerable%24.cs" />
     <Compile Include="Collections\Enumerator%24.cs" />
     <Compile Include="Collections\NameValueCollection%24.cs" />
+    <Compile Include="Fx\Sequence`1.cs" />
     <Compile Include="Configuration\AbsoluteUriValidator.cs" />
     <Compile Include="Configuration\AbsoluteUriValidatorAttribute.cs" />
     <Compile Include="Configuration\Appender`2.cs" />

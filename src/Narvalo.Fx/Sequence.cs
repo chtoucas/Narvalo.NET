@@ -5,8 +5,6 @@ namespace Narvalo.Fx
     using System;
     using System.Collections.Generic;
 
-    using Narvalo.Fx;
-
     public static class Sequence
     {
         /// <summary>
@@ -20,7 +18,7 @@ namespace Narvalo.Fx
         {
             Warrant.NotNull<IEnumerable<TSource>>();
 
-            // Enumerable.Repeat(value, 1) would work too, but is less readable.
+            // Enumerable.Repeat(value, 1) works too, but is less readable.
             yield return value;
         }
 
