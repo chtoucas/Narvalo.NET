@@ -2,6 +2,10 @@
 <Dictionary>
   <Words>
     <Recognized>
+      <!-- ### Brands and Organizations ### -->
+      <!-- Association Suisse de Normalisation-->
+      <Word>Snv</Word>
+
       <!-- ### Finance ### -->
       <Word>Bban</Word>
       <Word>Bic</Word>

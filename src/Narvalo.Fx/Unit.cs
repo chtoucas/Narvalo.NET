@@ -11,10 +11,8 @@ namespace Narvalo.Fx
     {
         public static readonly Unit Single = new Unit();
 
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "left",
-            Justification = "[Intentionally] This method always returns 'true'.")]
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "right",
-            Justification = "[Intentionally] This method always returns 'true'.")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "left", Justification = "[Intentionally] This method always returns 'true'.")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "right", Justification = "[Intentionally] This method always returns 'true'.")]
         public static bool operator ==(Unit left, Unit right)
         {
             Warrant.IsTrue();
@@ -22,10 +20,8 @@ namespace Narvalo.Fx
             return true;
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "left",
-            Justification = "[Intentionally] This method always returns 'false'.")]
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "right",
-            Justification = "[Intentionally] This method always returns 'false'.")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "left", Justification = "[Intentionally] This method always returns 'false'.")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "right", Justification = "[Intentionally] This method always returns 'false'.")]
         public static bool operator !=(Unit left, Unit right)
         {
             Warrant.IsFalse();

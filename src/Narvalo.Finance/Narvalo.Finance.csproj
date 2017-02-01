@@ -78,6 +78,7 @@
     <Compile Include="Generic\MoneyFactory.cs" />
     <Compile Include="Globalization\MoneyFormat.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Internal\Ascii.cs" />
     <Compile Include="Internal\CurrencyHelpers.cs" />
     <Compile Include="Internal\CurrencyHelpers.g.cs">
       <AutoGen>True</AutoGen>
@@ -88,6 +89,7 @@
     <Compile Include="Internal\ICurrencyUnit.cs" />
     <Compile Include="Internal\IMoney`2.cs" />
     <Compile Include="Internal\IMoneypenny`2.cs" />
+    <Compile Include="Internal\Sentinel.cs" />
     <Compile Include="MoneyStyles.cs" />
     <Compile Include="RoundingMachine.cs" />
     <Compile Include="Allocators\Allocation.cs" />
@@ -137,13 +139,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CountryISOCodes.tt</DependentUpon>
     </Compile>
-    <Compile Include="Internal\Ascii.cs" />
     <Compile Include="IbanParts.cs" />
     <Compile Include="IbanValidationLevels.cs" />
     <Compile Include="BooleanResult.cs" />
     <Compile Include="IbanValidator.cs" />
     <Compile Include="Internal\MoneyHelpers.cs" />
-    <Compile Include="Internal\Sentinel.cs" />
     <Compile Include="Money.cs" />
     <Compile Include="Generic\Money`1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -159,6 +159,16 @@
     </Compile>
     <Compile Include="Internal\Outcome.cs" />
     <Compile Include="Outcome`1.cs" />
+    <Compile Include="Snv\CurrentSnvCurrencyDataCollection.cs" />
+    <Compile Include="Snv\HistoricalSnvCurrencyDataCollection.cs" />
+    <Compile Include="Snv\PubDateEventArgs.cs" />
+    <Compile Include="Snv\SnvCurrencyData.cs" />
+    <Compile Include="Snv\SnvCurrencyDataCollection.cs" />
+    <Compile Include="Snv\SnvDataHelpers.cs" />
+    <Compile Include="Snv\SnvProvider.cs" />
+    <Compile Include="Snv\SnvXmlNames.cs" />
+    <Compile Include="Snv\SnvXmlReader.cs" />
+    <Compile Include="Snv\XElement%24.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml" />
@@ -193,6 +203,7 @@
       <LastGenOutput>CurrencyHelpers.g.cs</LastGenOutput>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>

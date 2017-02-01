@@ -1,8 +1,9 @@
 // Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.LocalData.Snv
+namespace Narvalo.Finance.Snv
 {
-    using Narvalo.LocalData.Properties;
+    using Narvalo.Finance.Internal;
+    using Narvalo.Finance.Properties;
 
     /// <summary>
     /// Provides information about a localized currency.
@@ -169,7 +170,7 @@ namespace Narvalo.LocalData.Snv
 
 #if CONTRACTS_FULL
 
-namespace Narvalo.LocalData.Snv
+namespace Narvalo.Finance.Snv
 {
     using System.Diagnostics.Contracts;
 

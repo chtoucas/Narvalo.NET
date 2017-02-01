@@ -195,4 +195,16 @@
   <data name="Sentinel_OutOfRangeCurrencyNumericCode" xml:space="preserve">
     <value>The numeric code MUST be greater than 0 and strictly less than 1000.</value>
   </data>
+  <data name="SnvDataHelpers_InvalidMinorUnits" xml:space="preserve">
+    <value>Found an invalid value ({0}) for the minor units.</value>
+  </data>
+  <data name="SnvDataHelpers_InvalidNumericCode" xml:space="preserve">
+    <value>Found an invalid value ({0}) for the numeric code.</value>
+  </data>
+  <data name="SnvDataHelpers_InvalidPubDate" xml:space="preserve">
+    <value>Found an invalid value ({0}) for the publication date.</value>
+  </data>
+  <data name="SnvDataHelpers_InvalidRangeForNumericCode" xml:space="preserve">
+    <value>The numeric code ({0}) MUST be strictly greater than 0 and strictly less than 1000.</value>
+  </data>
 </root>

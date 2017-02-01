@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.LocalData.Snv
+namespace Narvalo.Finance.Snv
 {
     using System;
     using System.Collections;
@@ -9,7 +9,7 @@ namespace Narvalo.LocalData.Snv
     using System.Xml;
     using System.Xml.Linq;
 
-    using static Narvalo.LocalData.Snv.SnvDataHelpers;
+    using static Narvalo.Finance.Snv.SnvDataHelpers;
 
     public abstract class SnvCurrencyDataCollection : IEnumerable<SnvCurrencyData>, IDisposable
     {

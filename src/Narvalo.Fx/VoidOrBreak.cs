@@ -1,12 +1,12 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo
+namespace Narvalo.Fx
 {
     using System;
     using System.Diagnostics;
     using System.Diagnostics.Contracts;
 
-    using Narvalo.Properties;
+    using Narvalo.Fx.Properties;
 
     /// <seealso cref="Fx.Outcome{T}"/>
     /// <seealso cref="Fx.Either{T1, T2}"/>
@@ -43,7 +43,7 @@ namespace Narvalo
         {
             get
             {
-                throw new InvalidOperationException(Strings_Fx.VoidOrBreak_BreakHasNoReason);
+                throw new InvalidOperationException(Strings.VoidOrBreak_BreakHasNoReason);
             }
         }
 

@@ -1,13 +1,13 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.LocalData.Snv
+namespace Narvalo.Finance.Snv
 {
     using System;
     using System.Diagnostics;
     using System.Globalization;
     using System.IO;
 
-    using Narvalo.LocalData.Properties;
+    using Narvalo.Finance.Properties;
 
     internal static class SnvDataHelpers
     {

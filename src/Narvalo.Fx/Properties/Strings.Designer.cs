@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo.LocalData.Properties {
+namespace Narvalo.Fx.Properties {
     using System;
     using System.Reflection;
     
@@ -40,7 +40,7 @@ namespace Narvalo.LocalData.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.LocalData.Properties.Strings", typeof(Strings).GetTypeInfo().Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.Fx.Properties.Strings", typeof(Strings).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,56 +62,38 @@ namespace Narvalo.LocalData.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The alphabetic code MUST be composed of exactly 3 characters..
+        ///   Looks up a localized string similar to Can not explicitly cast a Maybe&lt;T&gt;.None to a value of type T..
         /// </summary>
-        internal static string Sentinel_OutOfRangeCurrencyAlphabeticCode {
+        internal static string Maybe_CannotCastNoneToValue {
             get {
-                return ResourceManager.GetString("Sentinel_OutOfRangeCurrencyAlphabeticCode", resourceCulture);
+                return ResourceManager.GetString("Maybe_CannotCastNoneToValue", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The numeric code MUST be greater than 0 and strictly less than 1000..
+        ///   Looks up a localized string similar to Can not explicitly cast a failure of type Outcome&lt;T&gt; to a value of type T..
         /// </summary>
-        internal static string Sentinel_OutOfRangeCurrencyNumericCode {
+        internal static string Outcome_CannotCastFailureToValue {
             get {
-                return ResourceManager.GetString("Sentinel_OutOfRangeCurrencyNumericCode", resourceCulture);
+                return ResourceManager.GetString("Outcome_CannotCastFailureToValue", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Found an invalid value ({0}) for the minor units..
+        ///   Looks up a localized string similar to Can not explicitly cast a success of type Outcome&lt;T&gt; to an exception state..
         /// </summary>
-        internal static string SnvDataHelpers_InvalidMinorUnits {
+        internal static string Outcome_CannotCastSuccessToException {
             get {
-                return ResourceManager.GetString("SnvDataHelpers_InvalidMinorUnits", resourceCulture);
+                return ResourceManager.GetString("Outcome_CannotCastSuccessToException", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Found an invalid value ({0}) for the numeric code..
+        ///   Looks up a localized string similar to A successful outcome can not provide an error message. You must check the IsBreak value before accesssing this property..
         /// </summary>
-        internal static string SnvDataHelpers_InvalidNumericCode {
+        internal static string VoidOrBreak_BreakHasNoReason {
             get {
-                return ResourceManager.GetString("SnvDataHelpers_InvalidNumericCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Found an invalid value ({0}) for the publication date..
-        /// </summary>
-        internal static string SnvDataHelpers_InvalidPubDate {
-            get {
-                return ResourceManager.GetString("SnvDataHelpers_InvalidPubDate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The numeric code ({0}) MUST be strictly greater than 0 and strictly less than 1000..
-        /// </summary>
-        internal static string SnvDataHelpers_InvalidRangeForNumericCode {
-            get {
-                return ResourceManager.GetString("SnvDataHelpers_InvalidRangeForNumericCode", resourceCulture);
+                return ResourceManager.GetString("VoidOrBreak_BreakHasNoReason", resourceCulture);
             }
         }
     }

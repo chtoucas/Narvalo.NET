@@ -5,6 +5,8 @@ namespace Narvalo.Xml
     using System;
     using System.Xml.Linq;
 
+    using Narvalo.Fx;
+
     /// <summary>
     /// Provides extension methods for <see cref="Maybe{XElement}"/> and <see cref="Maybe{XAttribute}"/>.
     /// </summary>
