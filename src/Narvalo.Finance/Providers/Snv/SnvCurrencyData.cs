@@ -1,6 +1,6 @@
 // Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Finance.Snv
+namespace Narvalo.Finance.Providers.Snv
 {
     using Narvalo.Finance.Internal;
     using Narvalo.Finance.Properties;

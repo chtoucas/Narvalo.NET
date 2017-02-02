@@ -364,7 +364,15 @@ namespace Narvalo.Fx
         {
             Warrant.NotNull<IEnumerable<T>>();
 
-            return IsSome ? Sequence.Pure(Value) : Enumerable.Empty<T>();
+            if (IsSome)
+            {
+                yield return Value;
+            }
+            else
+            {
+                yield break;
+
+            }
         }
 
         /// <inheritdoc cref="IEnumerable{T}.GetEnumerator" />

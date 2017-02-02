@@ -88,7 +88,7 @@
     <Compile Include="_TestCommon\EnvironmentFacts.cs" />
     <Compile Include="ExpectFacts.cs" />
     <Compile Include="FormatFacts.cs" />
-    <Compile Include="Fx\Advanced\NullableFacts.cs" />
+    <Compile Include="Fx\NullableFacts.cs" />
     <Compile Include="Fx\EitherFacts.cs" />
     <Compile Include="Fx\Maybe.g.cs">
       <AutoGen>True</AutoGen>

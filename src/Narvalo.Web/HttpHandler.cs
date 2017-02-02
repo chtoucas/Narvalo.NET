@@ -6,7 +6,7 @@ namespace Narvalo.Web
     using System.Web;
     using System.Web.Mvc;
 
-    using Narvalo.Fx.Advanced;
+    using Narvalo.Fx;
     using Narvalo.Web.Properties;
 
     /// <summary>

@@ -63,9 +63,22 @@
     <Compile Include="BinaryEncoder.cs" />
     <Compile Include="BooleanStyles.cs" />
     <Compile Include="Collections\Dictionary%24.cs" />
-    <Compile Include="Collections\Enumerable%24.cs" />
+    <Compile Include="Fx\Enumerable%24.cs" />
     <Compile Include="Collections\Enumerator%24.cs" />
     <Compile Include="Collections\NameValueCollection%24.cs" />
+    <Compile Include="Fx\Func%24.cs" />
+    <Compile Include="Fx\Func.cs" />
+    <Compile Include="Fx\Identity.g.cs">
+      <DependentUpon>Identity.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Fx\Identity`1.cs" />
+    <Compile Include="Fx\Iteration.cs" />
+    <Compile Include="Fx\Iteration`2.cs" />
+    <Compile Include="Fx\Nullable%24.cs" />
+    <Compile Include="Fx\Recursion.cs" />
+    <Compile Include="Fx\Sequence.cs" />
     <Compile Include="Fx\Sequence`1.cs" />
     <Compile Include="Configuration\AbsoluteUriValidator.cs" />
     <Compile Include="Configuration\AbsoluteUriValidatorAttribute.cs" />
@@ -81,6 +94,12 @@
     <Compile Include="Data\SqlParameterCollection%24.cs" />
     <Compile Include="Data\SqlTypes%24.cs" />
     <Compile Include="Data\StoredProcedure`1.cs" />
+    <Compile Include="Fx\Stubs.cs" />
+    <Compile Include="Fx\Stubs`1.cs" />
+    <Compile Include="Fx\Stubs`2.cs" />
+    <Compile Include="Fx\Switch%24.cs" />
+    <Compile Include="Fx\Switch.cs" />
+    <Compile Include="Fx\Switch`2.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Int64Encoder.cs" />
     <Compile Include="Internal\TryParser%24.cs" />
@@ -109,6 +128,10 @@
     <Compile Include="Xml\XmlReader%24.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Fx\Identity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Identity.g.cs</LastGenOutput>
+    </None>
     <Content Include="Properties\CustomDictionary.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -134,7 +157,9 @@
       <Name>Narvalo.Fx</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -91,7 +91,7 @@ namespace <#= Namespace #>
 <#+ EmitMonadEnumerableExtensions(); #>
 }
 
-namespace <#= Namespace #>.Advanced
+namespace <#= Namespace #>.More
 {
     using System;
     using System.Collections.Generic;
@@ -116,7 +116,7 @@ namespace <#= Namespace #>.Internal
 <#+ if (Namespace != "Narvalo.Fx" && Namespace != "Narvalo") { #>
     using <#= Namespace #>;
 <#+ } #>
-    using <#= Namespace #>.Advanced;
+    using <#= Namespace #>.More;
 
 <#+
     EmitMonadEnumerableInternalExtensions();

@@ -1,32 +1,30 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Collections
+namespace Narvalo.Fx
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
 
-    using Narvalo.Fx;
-
     /// <summary>
     /// Provides extension methods for <see cref="IEnumerable{T}"/>.
     /// </summary>
-    public static class EnumerableExtensions
+    public static partial class EnumerableExtensions
     {
         // Useful when using built-in LINQ operators. Even if it is not publicly visible,
         // I believe that all LINQ operators never return a null but rather an empty sequence if needed.
-        public static IEnumerable<TSource> EmptyIfNull<TSource>(this IEnumerable<TSource> @this)
-        {
-            Warrant.NotNull<IEnumerable<TSource>>();
+        //public static IEnumerable<TSource> EmptyIfNull<TSource>(this IEnumerable<TSource> @this)
+        //{
+        //    Warrant.NotNull<IEnumerable<TSource>>();
 
-            if (@this == null)
-            {
-                return Enumerable.Empty<TSource>();
-            }
+        //    if (@this == null)
+        //    {
+        //        return Enumerable.Empty<TSource>();
+        //    }
 
-            return @this;
-        }
+        //    return @this;
+        //}
 
         public static bool IsEmpty<TSource>(this IEnumerable<TSource> @this)
         {

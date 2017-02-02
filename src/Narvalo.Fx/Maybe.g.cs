@@ -797,7 +797,7 @@ namespace Narvalo.Fx
     } // End of EnumerableExtensions - T4: EmitMonadEnumerableExtensions().
 }
 
-namespace Narvalo.Fx.Advanced
+namespace Narvalo.Fx.More
 {
     using System;
     using System.Collections.Generic;
@@ -979,7 +979,7 @@ namespace Narvalo.Fx.Internal
 
     using global::Narvalo;
     using global::Narvalo.Fx; // Required for EmptyIfNull().
-    using Narvalo.Fx.Advanced;
+    using Narvalo.Fx.More;
 
     // Provides the core extension methods for IEnumerable<T> where T is a Maybe<S>.
     internal static partial class EnumerableExtensions

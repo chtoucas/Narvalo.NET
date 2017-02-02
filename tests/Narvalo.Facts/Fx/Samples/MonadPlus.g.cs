@@ -842,7 +842,7 @@ namespace Narvalo.Fx.Samples
     } // End of EnumerableExtensions - T4: EmitMonadEnumerableExtensions().
 }
 
-namespace Narvalo.Fx.Samples.Advanced
+namespace Narvalo.Fx.Samples.More
 {
     using System;
     using System.Collections.Generic;
@@ -1033,7 +1033,7 @@ namespace Narvalo.Fx.Samples.Internal
     using global::Narvalo;
     using global::Narvalo.Fx; // Required for EmptyIfNull().
     using Narvalo.Fx.Samples;
-    using Narvalo.Fx.Samples.Advanced;
+    using Narvalo.Fx.Samples.More;
 
     // Provides the core extension methods for IEnumerable<T> where T is a MonadPlus<S>.
     internal static partial class EnumerableExtensions

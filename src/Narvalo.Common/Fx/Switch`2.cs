@@ -28,8 +28,7 @@ namespace Narvalo.Fx
         private Switch() { }
 #endif
 
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
-            Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
         public static Switch<TLeft, TRight> Empty
         {
             get

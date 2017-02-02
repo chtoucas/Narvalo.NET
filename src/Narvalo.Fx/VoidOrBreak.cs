@@ -10,7 +10,6 @@ namespace Narvalo.Fx
 
     /// <seealso cref="Fx.Outcome{T}"/>
     /// <seealso cref="Fx.Either{T1, T2}"/>
-    /// <seealso cref="Fx.Switch{T1, T2}"/>
     /// <seealso cref="VoidOrError"/>
     [DebuggerDisplay("Void")]
     public partial class VoidOrBreak

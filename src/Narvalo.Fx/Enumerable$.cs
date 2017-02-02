@@ -12,7 +12,7 @@ namespace Narvalo.Fx
     {
         // Useful when using built-in LINQ operators. Even if it is not publicly visible,
         // I believe that all LINQ operators never return a null but rather an empty sequence if needed.
-        internal static IEnumerable<TSource> EmptyIfNull<TSource>(this IEnumerable<TSource> @this)
+        public static IEnumerable<TSource> EmptyIfNull<TSource>(this IEnumerable<TSource> @this)
         {
             Warrant.NotNull<IEnumerable<TSource>>();
 
