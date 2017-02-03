@@ -8,8 +8,7 @@ namespace Narvalo.Fx
 
     using Narvalo.Fx.Properties;
 
-    /// <seealso cref="Fx.Outcome{T}"/>
-    /// <seealso cref="Fx.Either{T1, T2}"/>
+    /// <seealso cref="Outcome{T}"/>
     /// <seealso cref="VoidOrError"/>
     [DebuggerDisplay("Void")]
     public partial class VoidOrBreak

@@ -78,8 +78,6 @@
     <Compile Include="Internal\Enumerable%24.cs" />
     <Compile Include="More\EnumerableIntern%24.cs" />
     <Compile Include="More\Enumerable%24.cs" />
-    <Compile Include="Either.cs" />
-    <Compile Include="Either`2.cs" />
     <Compile Include="EnumerableIntern%24.cs" />
     <Compile Include="Func%24.cs" />
     <Compile Include="Maybe.cs" />

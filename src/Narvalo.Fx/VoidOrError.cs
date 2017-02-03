@@ -7,8 +7,7 @@ namespace Narvalo.Fx
     using System.Diagnostics.Contracts;
     using System.Runtime.ExceptionServices;
 
-    /// <seealso cref="Fx.Outcome{T}"/>
-    /// <seealso cref="Fx.Either{T1, T2}"/>
+    /// <seealso cref="Outcome{T}"/>
     /// <seealso cref="VoidOrBreak"/>
     [DebuggerDisplay("Void")]
     public partial class VoidOrError

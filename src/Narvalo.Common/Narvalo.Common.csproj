@@ -63,6 +63,8 @@
     <Compile Include="BinaryEncoder.cs" />
     <Compile Include="BooleanStyles.cs" />
     <Compile Include="Collections\Dictionary%24.cs" />
+    <Compile Include="Fx\Either.cs" />
+    <Compile Include="Fx\Either`2.cs" />
     <Compile Include="Fx\Enumerable%24.cs" />
     <Compile Include="Collections\Enumerator%24.cs" />
     <Compile Include="Collections\NameValueCollection%24.cs" />
