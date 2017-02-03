@@ -5,15 +5,12 @@ namespace Narvalo.Fx
     using System.Collections.Generic;
     using System.Linq;
 
-    /// <summary>
-    /// Provides extension methods for <see cref="IEnumerable{T}"/>.
-    /// </summary>
-    public static partial class EnumerableExtensions
+    internal static class EnumerableInternExtensions
     {
         #region Overrides for auto-generated (extension) methods on IEnumerable<Maybe<T>>
 
         // Custom version of CollectCore.
-        internal static Maybe<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Maybe<TSource>> @this)
+        public static Maybe<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Maybe<TSource>> @this)
         {
             Require.NotNull(@this, nameof(@this));
 
@@ -37,7 +34,7 @@ namespace Narvalo.Fx
         #region Overrides for auto-generated (extension) methods on IEnumerable<Outcome<T>>
 
         // Custom version of CollectCore.
-        internal static Outcome<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Outcome<TSource>> @this)
+        public static Outcome<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Outcome<TSource>> @this)
         {
             Require.NotNull(@this, nameof(@this));
             Warrant.NotNull<Outcome<IEnumerable<TSource>>>();
