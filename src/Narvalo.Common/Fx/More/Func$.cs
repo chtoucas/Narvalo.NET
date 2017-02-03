@@ -1,10 +1,8 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Fx
+namespace Narvalo.Fx.More
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Runtime.ExceptionServices;
 
     /// <summary>
     /// Provides extension methods for <see cref="Func{T}"/>.

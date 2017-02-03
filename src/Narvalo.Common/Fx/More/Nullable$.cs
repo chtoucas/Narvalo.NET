@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Fx
+namespace Narvalo.Fx.More
 {
     using System;
 
@@ -197,9 +197,7 @@ namespace Narvalo.Fx
         }
 
         public static Maybe<TSource> ToMaybe<TSource>(this TSource? @this) where TSource : struct
-        {
-            return Maybe.Of(@this);
-        }
+            => Maybe.Of(@this);
 
         public static void OnValue<TSource>(this TSource? @this, Action<TSource> action)
             where TSource : struct

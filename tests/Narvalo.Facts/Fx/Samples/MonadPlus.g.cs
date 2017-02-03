@@ -16,7 +16,6 @@ namespace Narvalo.Fx.Samples
     using System.Collections.Generic;
     using System.Linq;
 
-    using global::Narvalo;
     using Narvalo.Fx.Samples.Internal;
 
     /// <remarks>
@@ -1030,9 +1029,7 @@ namespace Narvalo.Fx.Samples.Internal
     using System.Collections.Generic;
     using System.Linq;
 
-    using global::Narvalo;
-    using global::Narvalo.Fx; // Required for EmptyIfNull().
-    using Narvalo.Fx.Samples;
+    // WARNING: The extension method EmptyIfNull() MUST be available.
     using Narvalo.Fx.Samples.More;
 
     // Provides the core extension methods for IEnumerable<T> where T is a MonadPlus<S>.

@@ -17,7 +17,6 @@ namespace Narvalo.Fx
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
-    using global::Narvalo;
     using Narvalo.Fx.Internal;
 
     /// <remarks>
@@ -977,8 +976,7 @@ namespace Narvalo.Fx.Internal
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
-    using global::Narvalo;
-    using global::Narvalo.Fx; // Required for EmptyIfNull().
+    // WARNING: The extension method EmptyIfNull() MUST be available.
     using Narvalo.Fx.More;
 
     // Provides the core extension methods for IEnumerable<T> where T is a Maybe<S>.

@@ -13,8 +13,9 @@
 
 // WARNING: This is only a proof of concept.
 // This file depends on Narvalo.Cerbere & Narvalo.Fx packages for:
-// - The classes Acknowledge and Require in the Narvalo namespace.
-// - The Unit class and the EmptyIfNull() extension method in the Narvalo.Fx namespace.
+// - The classes Require, Demand, Expect & Warrant in the Narvalo namespace.
+// - The class Unit in the Narvalo.Fx namespace.
+// WARNING: The extension method EmptyIfNull() MUST be available.
 // The generated files are free of CA warnings except for CA1006:DoNotNestGenericTypesInMemberSignatures.
 
 public abstract partial class MonadTemplate : _MonadTemplate
@@ -44,7 +45,6 @@ namespace <#= Namespace #>
 <#+ } #>
     using System.Linq;
 
-    using global::Narvalo;
     using <#= Namespace #>.Internal;
 
 <#+
@@ -111,11 +111,6 @@ namespace <#= Namespace #>.Internal
 <#+ } #>
     using System.Linq;
 
-    using global::Narvalo;
-    using global::Narvalo.Fx; // Required for EmptyIfNull().
-<#+ if (Namespace != "Narvalo.Fx" && Namespace != "Narvalo") { #>
-    using <#= Namespace #>;
-<#+ } #>
     using <#= Namespace #>.More;
 
 <#+

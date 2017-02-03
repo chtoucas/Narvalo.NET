@@ -6,6 +6,8 @@ namespace Narvalo.Fx.More
     using System.Collections.Generic;
     using System.Linq;
 
+    using Narvalo.Fx.Internal;
+
     /// <summary>
     /// Provides extension methods for <see cref="IEnumerable{T}"/>.
     /// </summary>
@@ -38,7 +40,10 @@ namespace Narvalo.Fx.More
                     where m.IsSuccess
                     select m.ToValue()).EmptyIfNull();
         }
+    }
 
+    public static partial class EnumerableExtensions
+    {
         #region Overrides for auto-generated (extension) methods
 
         internal static IEnumerable<TSource> FilterCore<TSource>(
