@@ -81,6 +81,8 @@ Narvalo.Finance
   * [PHP-IBAN](https://github.com/globalcitizen/php-iban)
   * [python-stdnum](https://github.com/arthurdejong/python-stdnum)
   * [Ruby](http://www.rubydoc.info/gems/money/Money)
+  * [France](http://marlot.org/util/calcul-de-la-cle-nir.php)
+  * [BBAN](https://github.com/globalcitizen/php-iban/issues/39)
 - Rounding
   * [Lippert](https://blogs.msdn.microsoft.com/ericlippert/2003/09/26/bankers-rounding/)
   * [Microsoft KB](https://support.microsoft.com/en-us/kb/196652)

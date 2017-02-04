@@ -76,9 +76,8 @@
     <Compile Include="Action%24.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Internal\Enumerable%24.cs" />
-    <Compile Include="More\EnumerableIntern%24.cs" />
     <Compile Include="More\Enumerable%24.cs" />
-    <Compile Include="EnumerableIntern%24.cs" />
+    <Compile Include="Enumerable%24.cs" />
     <Compile Include="Func%24.cs" />
     <Compile Include="Maybe.cs" />
     <Compile Include="Maybe.g.cs">

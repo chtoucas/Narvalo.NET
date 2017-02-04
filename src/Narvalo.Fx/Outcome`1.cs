@@ -12,7 +12,7 @@ namespace Narvalo.Fx
     using Narvalo.Fx.Properties;
 
     /// <summary>
-    /// Represents the outcome of a computation which may throw exceptions.
+    /// Represents the outcome of a computation which might throw an exception.
     /// An instance of the <see cref="Outcome{T}"/> class contains either a <c>T</c>
     /// value or the exception state at the point it was thrown.
     /// </summary>
@@ -21,16 +21,12 @@ namespace Narvalo.Fx
     /// <para>This class is not meant to replace the standard exception mechanism.</para>
     /// </remarks>
     /// <typeparam name="T">The underlying type of the value.</typeparam>
-    /// <seealso cref="VoidOrBreak"/>
-    /// <seealso cref="VoidOrError"/>
     public abstract partial class Outcome<T>
     {
-        private readonly bool _isSuccess;
-
 #if CONTRACTS_FULL // Custom ctor visibility for the contract class only.
         protected Outcome(bool isSuccess) { _isSuccess = isSuccess; }
 #else
-        private Outcome(bool isSuccess) { _isSuccess = isSuccess; }
+        private Outcome(bool isSuccess) { IsSuccess = isSuccess; }
 #endif
 
         /// <summary>
@@ -39,7 +35,7 @@ namespace Narvalo.Fx
         /// <remarks>Most of the time, you don't need to access this property.
         /// You are better off using the rich vocabulary that this class offers.</remarks>
         /// <value><see langword="true"/> if the outcome is successful; otherwise <see langword="false"/>.</value>
-        public bool IsSuccess { get { return _isSuccess; } }
+        public bool IsSuccess { get; }
 
         #region Operators
 

@@ -19,10 +19,8 @@ namespace Narvalo.Fx
 
     using Narvalo.Fx.Internal;
 
-    /// <remarks>
-    /// Sometimes we prefer to use extension methods over static methods to be able to override them locally.
-    /// </remarks>
     // Provides a set of static methods for Identity<T>.
+    // NB: Sometimes we prefer extension methods over static methods to be able to override them locally.
     public static partial class Identity
     {
         /// <summary>
@@ -740,7 +738,6 @@ namespace Narvalo.Fx.Internal
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
-    // WARNING: The extension method EmptyIfNull() MUST be available.
     using Narvalo.Fx.More;
 
     // Provides the core extension methods for IEnumerable<T> where T is a Identity<S>.

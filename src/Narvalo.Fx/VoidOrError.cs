@@ -7,21 +7,17 @@ namespace Narvalo.Fx
     using System.Diagnostics.Contracts;
     using System.Runtime.ExceptionServices;
 
-    /// <seealso cref="Outcome{T}"/>
-    /// <seealso cref="VoidOrBreak"/>
     [DebuggerDisplay("Void")]
     public partial class VoidOrError
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private static readonly VoidOrError s_Void = new VoidOrError();
 
-        private readonly bool _isError;
-
         private VoidOrError() { }
 
         private VoidOrError(bool isError)
         {
-            _isError = isError;
+            IsError = isError;
         }
 
         public static VoidOrError Void
@@ -34,7 +30,7 @@ namespace Narvalo.Fx
             }
         }
 
-        public bool IsError { get { return _isError; } }
+        public bool IsError { get; }
 
         public static VoidOrError Error(ExceptionDispatchInfo exceptionInfo)
         {

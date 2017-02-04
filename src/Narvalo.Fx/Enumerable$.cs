@@ -5,12 +5,10 @@ namespace Narvalo.Fx
     using System.Collections.Generic;
     using System.Linq;
 
-    internal static class EnumerableInternExtensions
+    // Overrides for auto-generated (extension) methods on IEnumerable<Maybe<T>>.
+    public static partial class EnumerableExtensions
     {
-        #region Overrides for auto-generated (extension) methods on IEnumerable<Maybe<T>>
-
-        // Custom version of CollectCore.
-        public static Maybe<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Maybe<TSource>> @this)
+        internal static Maybe<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Maybe<TSource>> @this)
         {
             Require.NotNull(@this, nameof(@this));
 
@@ -28,13 +26,12 @@ namespace Narvalo.Fx
 
             return Maybe.Of(list.AsEnumerable());
         }
+    }
 
-        #endregion
-
-        #region Overrides for auto-generated (extension) methods on IEnumerable<Outcome<T>>
-
-        // Custom version of CollectCore.
-        public static Outcome<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Outcome<TSource>> @this)
+    // Overrides for auto-generated (extension) methods on IEnumerable<Outcome<T>>.
+    public static partial class EnumerableExtensions
+    {
+        internal static Outcome<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Outcome<TSource>> @this)
         {
             Require.NotNull(@this, nameof(@this));
             Warrant.NotNull<Outcome<IEnumerable<TSource>>>();
@@ -59,7 +56,5 @@ namespace Narvalo.Fx
 
             return Outcome.Success(list.AsEnumerable());
         }
-
-        #endregion
     }
 }

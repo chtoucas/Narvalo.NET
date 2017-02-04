@@ -43,6 +43,7 @@ Narvalo.Web               | 0.26.0
 
 TODO
 ----
+- Remove Narvalo.Core and move from .NET 4.5 to .NET 4.6.1
 - Sync `Money<TCurrency>`, CurrencyUnit<>`, `MoneyFormatter` for rounding, scale...
 - Complete localization of messages.
 - Ops with double, float?
@@ -75,8 +76,8 @@ Highlights
 Bugfixes
 --------
 
-Breaking Changes
-----------------
+Breaking Changes (Stable packages)
+----------------------------------
 ### Narvalo.Cerbere
 - `Enforce.IsWhiteSpace()` has been replaced by `Check.IsWhiteSpace()` and
   no longer throws when the input is `null`, but rather

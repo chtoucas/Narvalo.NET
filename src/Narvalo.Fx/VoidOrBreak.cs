@@ -8,21 +8,17 @@ namespace Narvalo.Fx
 
     using Narvalo.Fx.Properties;
 
-    /// <seealso cref="Outcome{T}"/>
-    /// <seealso cref="VoidOrError"/>
     [DebuggerDisplay("Void")]
     public partial class VoidOrBreak
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private static readonly VoidOrBreak s_Void = new VoidOrBreak();
 
-        private readonly bool _isBreak;
-
         private VoidOrBreak() { }
 
         private VoidOrBreak(bool isBreak)
         {
-            _isBreak = isBreak;
+            IsBreak = isBreak;
         }
 
         public static VoidOrBreak Void
@@ -35,7 +31,7 @@ namespace Narvalo.Fx
             }
         }
 
-        public bool IsBreak { get { return _isBreak; } }
+        public bool IsBreak { get; }
 
         public virtual string Reason
         {
