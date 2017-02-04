@@ -10,5 +10,5 @@ using System.Reflection;
 #endif
 
 #if !NO_INTERNALS_VISIBLE_TO
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Narvalo.Facts" + Narvalo.Properties.AssemblyInfo.PublicKeySuffix)]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Narvalo.Fx.Facts" + Narvalo.Properties.AssemblyInfo.PublicKeySuffix)]
 #endif

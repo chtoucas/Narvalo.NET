@@ -19,7 +19,9 @@ namespace Narvalo.Fx.More
             return selector.Invoke(@this.Invoke());
         }
 
-        public static Func<TResult> Select<TSource, TResult>(this Func<TSource> @this, Func<TSource, TResult> selector)
+        public static Func<TResult> Select<TSource, TResult>(
+            this Func<TSource> @this,
+            Func<TSource, TResult> selector)
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));

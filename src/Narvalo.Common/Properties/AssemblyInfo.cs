@@ -13,12 +13,8 @@ using System.Runtime.InteropServices;
 [assembly: System.Security.SecurityTransparent]
 #endif
 
-[assembly: SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses",
-    Scope = "type", Target = "Narvalo.Properties.Strings_Common",
-    Justification = "[GeneratedCode] Default visibility for resources is internal.")]
-[assembly: SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
-    Scope = "member", Target = "Narvalo.Properties.Strings_Common.#Culture",
-    Justification = "[GeneratedCode] Default visibility for resources is internal.")]
+[assembly: SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Scope = "type", Target = "Narvalo.Properties.Strings_Common", Justification = "[GeneratedCode] Default visibility for resources is internal.")]
+[assembly: SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "Narvalo.Properties.Strings_Common.#Culture", Justification = "[GeneratedCode] Default visibility for resources is internal.")]
 
 #if !NO_INTERNALS_VISIBLE_TO
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Narvalo.Facts" + Narvalo.Properties.AssemblyInfo.PublicKeySuffix)]

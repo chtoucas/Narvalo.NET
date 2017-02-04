@@ -7,6 +7,8 @@ namespace Narvalo.Fx
     using System.Collections.ObjectModel;
     using System.Linq;
 
+    using Narvalo.Fx;
+
     /// <summary>
     /// Provides extension methods for <see cref="IEnumerable{T}"/>.
     /// </summary>

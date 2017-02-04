@@ -77,31 +77,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CheckFacts.cs" />
-    <Compile Include="ControlFlowExceptionFacts.cs" />
     <Compile Include="ConvertToFacts.cs" />
-    <Compile Include="DemandFacts.cs" />
-    <Compile Include="EnforceFacts.cs" />
     <Compile Include="Fx\Samples\Internal\EnumerableExtensions.cs" />
     <Compile Include="_TestCommon\AppDomainUtils.cs" />
-    <Compile Include="_TestCommon\DebugOnlyFactAttribute.cs" />
     <Compile Include="_TestCommon\EnvironmentFacts.cs" />
-    <Compile Include="ExpectFacts.cs" />
-    <Compile Include="FormatFacts.cs" />
     <Compile Include="Fx\More\NullableFacts.cs" />
     <Compile Include="Fx\EitherFacts.cs" />
-    <Compile Include="Fx\Maybe.g.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Maybe.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Fx\MaybeFacts.cs" />
-    <Compile Include="Fx\Outcome.g.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Outcome.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Fx\OutcomeFacts.cs" />
     <Compile Include="Fx\Samples\Comonad.g.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -142,16 +123,12 @@
     <Compile Include="Fx\StubsFacts.cs" />
     <Compile Include="Fx\SwitchFacts.cs" />
     <Compile Include="Fx\UnitFacts.cs" />
-    <Compile Include="Fx\VoidOrBreakFacts.cs" />
-    <Compile Include="Fx\VoidOrErrorFacts.cs" />
     <Compile Include="Int64EncoderFacts.cs" />
     <Compile Include="ParseToFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RequireFacts.cs" />
     <Compile Include="StringManipFacts.cs" />
     <Compile Include="_TestCommon\AspNetHelpers.cs" />
     <Compile Include="_TestCommon\MvcHelper.cs" />
-    <Compile Include="_TestCommon\ReleaseOnlyFactAttribute.cs" />
     <Compile Include="Web\Configuration\AssetSectionFacts.cs" />
     <Compile Include="Web\Configuration\NarvaloWebConfigurationManagerFacts.cs" />
     <Compile Include="Web\Configuration\OptimizationSectionFacts.cs" />
@@ -164,14 +141,6 @@
     <Compile Include="Web\UrlManipFacts.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Fx\Maybe.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Maybe.g.cs</LastGenOutput>
-    </Content>
-    <Content Include="Fx\Outcome.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Outcome.g.cs</LastGenOutput>
-    </Content>
     <Content Include="Fx\Samples\Comonad.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Comonad.g.cs</LastGenOutput>
@@ -217,6 +186,10 @@
     <ProjectReference Include="..\..\src\Narvalo.Common\Narvalo.Common.csproj">
       <Project>{85e2c826-bf5c-4cdd-a90a-56d3d7f9ce25}</Project>
       <Name>Narvalo.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Narvalo.Futures\Narvalo.Futures.csproj">
+      <Project>{e394c38b-f999-4322-b821-7630368da16f}</Project>
+      <Name>Narvalo.Futures</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\Narvalo.Fx\Narvalo.Fx.csproj">
       <Project>{28f6175d-0ee3-4763-8004-662a7de41280}</Project>

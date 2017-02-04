@@ -3,9 +3,9 @@
   <Import Project="..\..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props" Condition="Exists('..\..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <ProjectGuid>{031AB273-4A04-40AF-923A-AA138096F98A}</ProjectGuid>
-    <RootNamespace>Narvalo.Finance</RootNamespace>
-    <AssemblyName>Narvalo.Finance.Facts</AssemblyName>
+    <ProjectGuid>{7741AF0B-D316-4C1D-A51D-A89F3070D6B0}</ProjectGuid>
+    <RootNamespace>Narvalo</RootNamespace>
+    <AssemblyName>Narvalo.Futures.Facts</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -30,55 +30,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BicFacts.cs" />
-    <Compile Include="CurrencyFacts.cs" />
-    <Compile Include="CurrencyFacts.g.cs">
-      <DependentUpon>CurrencyFacts.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="CurrencyNotFoundExceptionFacts.cs" />
-    <Compile Include="Generic\BuiltInCurrencyFacts.cs" />
-    <Compile Include="Generic\BuiltInCurrencyFacts.g.cs">
-      <DependentUpon>BuiltInCurrencyFacts.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Generic\CurrencyUnitFacts.cs" />
-    <Compile Include="Globalization\CountryISOCodesFacts.cs" />
-    <Compile Include="IbanFacts.cs" />
-    <Compile Include="IbanPartsFacts.cs" />
-    <Compile Include="IbanValidatorFacts.cs" />
-    <Compile Include="MoneyFacts.cs" />
-    <Compile Include="Rounding\RoundingAdjustersFacts.cs" />
+    <Compile Include="BinaryEncoderFacts.cs" />
+    <Compile Include="Cerbere\ContractHelpersFacts.cs" />
+    <Compile Include="Finance\CheckDigitsFacts.cs" />
+    <Compile Include="Finance\Currencies\CurrencyActivatorFacts.cs" />
+    <Compile Include="GuardFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Internal\AsciiFacts.cs" />
-    <Compile Include="IbanCheckDigitsFacts.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="Narvalo.Finance.Facts.props" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Narvalo.Finance\Narvalo.Finance.csproj">
       <Project>{38055176-243b-4090-8148-efb8fe18ff23}</Project>
       <Name>Narvalo.Finance</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\src\Narvalo.Futures\Narvalo.Futures.csproj">
+      <Project>{e394c38b-f999-4322-b821-7630368da16f}</Project>
+      <Name>Narvalo.Futures</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CurrencyFacts.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CurrencyFacts.g.cs</LastGenOutput>
-    </Content>
-    <Content Include="Generic\BuiltInCurrencyFacts.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>BuiltInCurrencyFacts.g.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="..\TestCommon\Narvalo.TestCommon.projitems" Label="Shared" />
   <Import Project="..\..\tools\Narvalo.Common.props" />

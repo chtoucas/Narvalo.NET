@@ -65,8 +65,16 @@
     <Compile Include="BinaryEncoder.cs" />
     <Compile Include="BooleanStyles.cs" />
     <Compile Include="Collections\Dictionary%24.cs" />
+    <Compile Include="Fx\Enumerable%24.cs" />
     <Compile Include="Collections\Enumerator%24.cs" />
+    <Compile Include="Fx\Iteration.cs" />
+    <Compile Include="Fx\Iteration`2.cs" />
     <Compile Include="Collections\NameValueCollection%24.cs" />
+    <Compile Include="Fx\Sequence.cs" />
+    <Compile Include="Fx\Sequence`1.cs" />
+    <Compile Include="Fx\Stubs.cs" />
+    <Compile Include="Fx\Stubs`1.cs" />
+    <Compile Include="Fx\Stubs`2.cs" />
     <Compile Include="Configuration\AbsoluteUriValidator.cs" />
     <Compile Include="Configuration\AbsoluteUriValidatorAttribute.cs" />
     <Compile Include="Configuration\Appender`2.cs" />
@@ -83,7 +91,6 @@
     <Compile Include="Data\StoredProcedure`1.cs" />
     <Compile Include="Fx\Either.cs" />
     <Compile Include="Fx\Either`2.cs" />
-    <Compile Include="Fx\Enumerable%24.cs" />
     <Compile Include="Fx\Func.cs" />
     <Compile Include="Fx\Identity.g.cs">
       <DependentUpon>Identity.tt</DependentUpon>
@@ -91,16 +98,9 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Fx\Identity`1.cs" />
-    <Compile Include="Fx\Iteration.cs" />
-    <Compile Include="Fx\Iteration`2.cs" />
     <Compile Include="Fx\More\Func%24.cs" />
     <Compile Include="Fx\More\Nullable%24.cs" />
     <Compile Include="Fx\Recursion.cs" />
-    <Compile Include="Fx\Sequence.cs" />
-    <Compile Include="Fx\Sequence`1.cs" />
-    <Compile Include="Fx\Stubs.cs" />
-    <Compile Include="Fx\Stubs`1.cs" />
-    <Compile Include="Fx\Stubs`2.cs" />
     <Compile Include="Fx\Switch%24.cs" />
     <Compile Include="Fx\Switch.cs" />
     <Compile Include="Fx\Switch`2.cs" />
