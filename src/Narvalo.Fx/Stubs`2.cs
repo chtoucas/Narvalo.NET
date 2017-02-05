@@ -18,8 +18,7 @@ namespace Narvalo.Fx
         /// Gets the function that always evaluates to the default value.
         /// </summary>
         /// <value>The function that always evaluates to the default value.</value>
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
-            Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
         public static Func<TSource, TResult> AlwaysDefault
         {
             get

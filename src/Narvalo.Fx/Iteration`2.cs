@@ -9,18 +9,15 @@ namespace Narvalo.Fx
     public struct Iteration<TResult, TSource>
         : IEquatable<Iteration<TResult, TSource>> //, IComparable
     {
-        private readonly TSource _next;
-        private readonly TResult _result;
-
         public Iteration(TResult result, TSource next)
         {
-            _result = result;
-            _next = next;
+            Result = result;
+            Next = next;
         }
 
-        public TResult Result { get { return _result; } }
+        public TResult Result { get; }
 
-        public TSource Next { get { return _next; } }
+        public TSource Next { get; }
 
         public static bool operator ==(Iteration<TResult, TSource> left, Iteration<TResult, TSource> right)
             => left.Equals(right);

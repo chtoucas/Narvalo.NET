@@ -64,16 +64,8 @@
     <Compile Include="BinaryEncoder.cs" />
     <Compile Include="BooleanStyles.cs" />
     <Compile Include="Collections\Dictionary%24.cs" />
-    <Compile Include="Fx\Enumerable%24.cs" />
     <Compile Include="Collections\Enumerator%24.cs" />
-    <Compile Include="Fx\Iteration.cs" />
-    <Compile Include="Fx\Iteration`2.cs" />
     <Compile Include="Collections\NameValueCollection%24.cs" />
-    <Compile Include="Fx\Sequence.cs" />
-    <Compile Include="Fx\Sequence`1.cs" />
-    <Compile Include="Fx\Stubs.cs" />
-    <Compile Include="Fx\Stubs`1.cs" />
-    <Compile Include="Fx\Stubs`2.cs" />
     <Compile Include="ConvertTo.cs" />
     <Compile Include="Data\DataRecord%24.cs" />
     <Compile Include="Data\NonQueryStoredProcedure`1.cs" />

@@ -71,6 +71,8 @@ TODO
   and [here](http://stackoverflow.com/questions/3032750/structs-interfaces-and-boxing).
 - Pretty sure that we can get rid off all uint and int overloads.
 
+- MapAndUnzip -> SelectAndUnzip? MapAny -> SelectAny?
+
 Highlights
 ----------
 

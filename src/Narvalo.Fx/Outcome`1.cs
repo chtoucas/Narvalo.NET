@@ -24,7 +24,7 @@ namespace Narvalo.Fx
     public abstract partial class Outcome<T>
     {
 #if CONTRACTS_FULL // Custom ctor visibility for the contract class only.
-        protected Outcome(bool isSuccess) { _isSuccess = isSuccess; }
+        protected Outcome(bool isSuccess) { IsSuccess = isSuccess; }
 #else
         private Outcome(bool isSuccess) { IsSuccess = isSuccess; }
 #endif
@@ -34,7 +34,7 @@ namespace Narvalo.Fx
         /// </summary>
         /// <remarks>Most of the time, you don't need to access this property.
         /// You are better off using the rich vocabulary that this class offers.</remarks>
-        /// <value><see langword="true"/> if the outcome is successful; otherwise <see langword="false"/>.</value>
+        /// <value>true if the outcome is successful; otherwise false.</value>
         public bool IsSuccess { get; }
 
         #region Operators
@@ -107,8 +107,7 @@ namespace Narvalo.Fx
         // Overrides the 'Select' auto-generated (extension) method (see Outcome.g.cs).
         // Since Select is a building block, we override it in Failure_ and Success_.
         // Otherwise we would have to call ToValue() or ToExceptionInfo() which imply a casting.
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Select",
-            Justification = "[Intentionally] No trouble here, this 'Select' is the one from the LINQ standard query operators.")]
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Select", Justification = "[Intentionally] No trouble here, this 'Select' is the one from the LINQ standard query operators.")]
         public abstract Outcome<TResult> Select<TResult>(Func<T, TResult> selector);
 
         #endregion
@@ -133,9 +132,7 @@ namespace Narvalo.Fx
             Require.NotNull(caseSuccess, nameof(caseSuccess));
             Require.NotNull(caseFailure, nameof(caseFailure));
 
-            return IsSuccess
-                ? caseSuccess.Invoke(ToValue())
-                : caseFailure.Invoke();
+            return IsSuccess ? caseSuccess.Invoke(ToValue()) : caseFailure.Invoke();
         }
 
         public void OnSuccess(Action<T> action)
@@ -217,20 +214,18 @@ namespace Narvalo.Fx
         }
 
         public Outcome<TResult> Then<TResult>(Outcome<TResult> other)
-            => IsSuccess
-                ? other
-                : Outcome<TResult>.η(ToExceptionDispatchInfo());
+            => IsSuccess ? other : Outcome<TResult>.η(ToExceptionDispatchInfo());
 
         #endregion
 
         #region Core Monad methods
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         [DebuggerHidden]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         internal static Outcome<T> η(T value) => new Success_(value);
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         [DebuggerHidden]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         internal static Outcome<T> η(ExceptionDispatchInfo exceptionInfo)
         {
             Require.NotNull(exceptionInfo, nameof(exceptionInfo));
@@ -238,8 +233,8 @@ namespace Narvalo.Fx
             return new Failure_(exceptionInfo);
         }
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         [DebuggerHidden]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         internal static Outcome<T> μ(Outcome<Outcome<T>> square)
         {
             Require.NotNull(square, nameof(square));
@@ -259,10 +254,8 @@ namespace Narvalo.Fx
         /// <summary>
         /// Obtains the enclosed value.
         /// </summary>
-        /// <remarks>
-        /// Any access to this method must be protected by checking before that <see cref="IsSuccess"/>
-        /// is <see langword="true"/>.
-        /// </remarks>
+        /// <remarks>Any access to this method must be protected by checking before that
+        /// <see cref="IsSuccess"/> is true.</remarks>
         internal T ToValue()
         {
             Demand.True(IsSuccess);
@@ -276,10 +269,8 @@ namespace Narvalo.Fx
         /// <summary>
         /// Obtains the enclosed exception state.
         /// </summary>
-        /// <remarks>
-        /// Any access to this method must be protected by checking before that <see cref="IsSuccess"/>
-        /// is <see langword="false"/>.
-        /// </remarks>
+        /// <remarks>Any access to this method must be protected by checking before that
+        /// <see cref="IsSuccess"/> is false.</remarks>
         internal ExceptionDispatchInfo ToExceptionDispatchInfo()
         {
             Demand.True(!IsSuccess);
@@ -295,15 +286,9 @@ namespace Narvalo.Fx
         /// </summary>
         private sealed partial class Success_ : Outcome<T>, IEquatable<Success_>
         {
-            private readonly T _value;
+            public Success_(T value) : base(true) { Value = value; }
 
-            public Success_(T value)
-                : base(true)
-            {
-                _value = value;
-            }
-
-            internal T Value { get { return _value; } }
+            internal T Value { get; }
 
             public override Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector)
             {
