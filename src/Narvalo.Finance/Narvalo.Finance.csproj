@@ -159,16 +159,6 @@
     </Compile>
     <Compile Include="Internal\Outcome.cs" />
     <Compile Include="Outcome`1.cs" />
-    <Compile Include="Providers\Snv\CurrentSnvCurrencyDataCollection.cs" />
-    <Compile Include="Providers\Snv\HistoricalSnvCurrencyDataCollection.cs" />
-    <Compile Include="Providers\Snv\PubDateEventArgs.cs" />
-    <Compile Include="Providers\Snv\SnvCurrencyData.cs" />
-    <Compile Include="Providers\Snv\SnvCurrencyDataCollection.cs" />
-    <Compile Include="Providers\Snv\SnvDataHelpers.cs" />
-    <Compile Include="Providers\Snv\SnvProvider.cs" />
-    <Compile Include="Providers\Snv\SnvXmlNames.cs" />
-    <Compile Include="Providers\Snv\SnvXmlReader.cs" />
-    <Compile Include="Providers\Snv\XElement%24.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml" />

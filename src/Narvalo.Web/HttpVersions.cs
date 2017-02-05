@@ -11,7 +11,7 @@ namespace Narvalo.Web
 
         HttpV11 = 1 << 1,
 
-        All = HttpV10 | HttpV11
+        Any = HttpV10 | HttpV11
     }
 
     public static class HttpVersionsExtensions

@@ -195,16 +195,4 @@
   <data name="Sentinel_OutOfRangeCurrencyNumericCode" xml:space="preserve">
     <value>Le code alphabétique d'une devise doit être strictement positif et inférieur ou égal à 1000.</value>
   </data>
-  <data name="SnvDataHelpers_InvalidMinorUnits" xml:space="preserve">
-    <value />
-  </data>
-  <data name="SnvDataHelpers_InvalidNumericCode" xml:space="preserve">
-    <value />
-  </data>
-  <data name="SnvDataHelpers_InvalidPubDate" xml:space="preserve">
-    <value />
-  </data>
-  <data name="SnvDataHelpers_InvalidRangeForNumericCode" xml:space="preserve">
-    <value />
-  </data>
 </root>

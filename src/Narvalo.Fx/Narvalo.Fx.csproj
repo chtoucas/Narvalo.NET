@@ -73,12 +73,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Action%24.cs" />
+    <Compile Include="TryInvoke.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Internal\Enumerable%24.cs" />
     <Compile Include="More\Enumerable%24.cs" />
     <Compile Include="Enumerable%24.cs" />
-    <Compile Include="Func%24.cs" />
     <Compile Include="Maybe.cs" />
     <Compile Include="Maybe.g.cs">
       <DependentUpon>Maybe.tt</DependentUpon>

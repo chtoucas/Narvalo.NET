@@ -7,7 +7,7 @@ namespace Narvalo.Finance.Providers.Snv
     using System.Globalization;
     using System.IO;
 
-    using Narvalo.Finance.Properties;
+    using Narvalo.Properties;
 
     internal static class SnvDataHelpers
     {
@@ -48,7 +48,7 @@ namespace Narvalo.Finance.Providers.Snv
                 short minorUnits;
                 if (!Int16.TryParse(value, NumberStyles.None, NumberFormatInfo.InvariantInfo, out minorUnits))
                 {
-                    throw new InvalidDataException(Format.Current(Strings.SnvDataHelpers_InvalidMinorUnits, value));
+                    throw new InvalidDataException(Format.Current(Strings_Futures.SnvDataHelpers_InvalidMinorUnits, value));
                 }
 
                 return minorUnits;
@@ -65,7 +65,7 @@ namespace Narvalo.Finance.Providers.Snv
 
             if (numeriCode <= 0 || numeriCode >= 1000)
             {
-                throw new InvalidDataException(Format.Current(Strings.SnvDataHelpers_InvalidRangeForNumericCode, value));
+                throw new InvalidDataException(Format.Current(Strings_Futures.SnvDataHelpers_InvalidRangeForNumericCode, value));
             }
 
             return numeriCode;
@@ -76,12 +76,12 @@ namespace Narvalo.Finance.Providers.Snv
             short numeriCode;
             if (!Int16.TryParse(value, NumberStyles.None, NumberFormatInfo.InvariantInfo, out numeriCode))
             {
-                throw new InvalidDataException(Format.Current(Strings.SnvDataHelpers_InvalidNumericCode, value));
+                throw new InvalidDataException(Format.Current(Strings_Futures.SnvDataHelpers_InvalidNumericCode, value));
             }
 
             if (numeriCode <= 0 || numeriCode >= 1000)
             {
-                throw new InvalidDataException(Format.Current(Strings.SnvDataHelpers_InvalidRangeForNumericCode, value));
+                throw new InvalidDataException(Format.Current(Strings_Futures.SnvDataHelpers_InvalidRangeForNumericCode, value));
             }
 
             return numeriCode;
@@ -92,7 +92,7 @@ namespace Narvalo.Finance.Providers.Snv
             DateTime pubDate;
             if (!DateTime.TryParseExact(value, "o", CultureInfo.InvariantCulture, DateTimeStyles.None, out pubDate))
             {
-                throw new InvalidDataException(Format.Current(Strings.SnvDataHelpers_InvalidPubDate, value));
+                throw new InvalidDataException(Format.Current(Strings_Futures.SnvDataHelpers_InvalidPubDate, value));
             }
 
             return pubDate;

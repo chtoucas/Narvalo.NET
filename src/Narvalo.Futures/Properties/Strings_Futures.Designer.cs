@@ -61,6 +61,15 @@ namespace Narvalo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The specified value &apos;{0}&apos; is not a well-formed absolute URI..
+        /// </summary>
+        internal static string AbsoluteUriValidator_UriIsNotAbsolute_Format {
+            get {
+                return ResourceManager.GetString("AbsoluteUriValidator_UriIsNotAbsolute_Format", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The value of the parameter &apos;minInclusive&apos; ({0}) must be greater than or equal to value of the parameter &apos;maxInclusive&apos; ({1})..
         /// </summary>
         internal static string Argument_InvalidRange {
@@ -111,6 +120,51 @@ namespace Narvalo.Properties {
         internal static string ArgumentOutOfRange_NotLessThanOrEqualTo {
             get {
                 return ResourceManager.GetString("ArgumentOutOfRange_NotLessThanOrEqualTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &lt;{0}&gt; section is not defined in your config file!.
+        /// </summary>
+        internal static string Configuration_MissingSection_Format {
+            get {
+                return ResourceManager.GetString("Configuration_MissingSection_Format", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Found an invalid value ({0}) for the minor units..
+        /// </summary>
+        internal static string SnvDataHelpers_InvalidMinorUnits {
+            get {
+                return ResourceManager.GetString("SnvDataHelpers_InvalidMinorUnits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Found an invalid value ({0}) for the numeric code..
+        /// </summary>
+        internal static string SnvDataHelpers_InvalidNumericCode {
+            get {
+                return ResourceManager.GetString("SnvDataHelpers_InvalidNumericCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Found an invalid value ({0}) for the publication date..
+        /// </summary>
+        internal static string SnvDataHelpers_InvalidPubDate {
+            get {
+                return ResourceManager.GetString("SnvDataHelpers_InvalidPubDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The numeric code ({0}) MUST be strictly greater than 0 and strictly less than 1000..
+        /// </summary>
+        internal static string SnvDataHelpers_InvalidRangeForNumericCode {
+            get {
+                return ResourceManager.GetString("SnvDataHelpers_InvalidRangeForNumericCode", resourceCulture);
             }
         }
     }

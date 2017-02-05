@@ -11,8 +11,7 @@ namespace Narvalo.Finance.Extensions
     // Allocation.
     public static partial class MoneyExtensions
     {
-        private static readonly IMoneyAllocator s_DefaultAllocator
-            = new DefaultMoneyAllocator();
+        private static readonly IMoneyAllocator s_DefaultAllocator = new DefaultMoneyAllocator();
 
         public static IEnumerable<Money> Allocate(this Money @this, int count)
             => s_DefaultAllocator.Allocate(@this, count);

@@ -22,7 +22,7 @@ namespace Narvalo.Configuration
             if (section == null)
             {
                 throw new ConfigurationErrorsException(
-                    Format.Current(Strings_Common.Configuration_MissingSection_Format, sectionName));
+                    Format.Current(Strings_Futures.Configuration_MissingSection_Format, sectionName));
             }
 
             return section;

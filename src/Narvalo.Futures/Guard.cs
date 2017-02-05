@@ -6,13 +6,10 @@ namespace Narvalo
 
     using Narvalo.Internal;
 
+    // Methods below only accept generics of value type. Adding reference types would make
+    // each method check too many things at a time (null-checks).
     public static partial class Guard
     {
-        #region Generic range guards.
-
-        // Methods below only accept generics of value type. Adding reference types would make
-        // each method check too many things at a time (null-checks).
-
         /// <summary>
         /// Validates that the specified argument is greater than a minimum value.
         /// This method does not enforce any Code Contracts specification.
@@ -96,7 +93,5 @@ namespace Narvalo
                 throw Failure.NotLessThanOrEqualTo(value, maxValue, parameterName);
             }
         }
-
-        #endregion
     }
 }

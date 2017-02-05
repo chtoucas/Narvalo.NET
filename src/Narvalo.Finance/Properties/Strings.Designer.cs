@@ -294,41 +294,5 @@ namespace Narvalo.Finance.Properties {
                 return ResourceManager.GetString("Sentinel_OutOfRangeCurrencyNumericCode", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Found an invalid value ({0}) for the minor units..
-        /// </summary>
-        internal static string SnvDataHelpers_InvalidMinorUnits {
-            get {
-                return ResourceManager.GetString("SnvDataHelpers_InvalidMinorUnits", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Found an invalid value ({0}) for the numeric code..
-        /// </summary>
-        internal static string SnvDataHelpers_InvalidNumericCode {
-            get {
-                return ResourceManager.GetString("SnvDataHelpers_InvalidNumericCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Found an invalid value ({0}) for the publication date..
-        /// </summary>
-        internal static string SnvDataHelpers_InvalidPubDate {
-            get {
-                return ResourceManager.GetString("SnvDataHelpers_InvalidPubDate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The numeric code ({0}) MUST be strictly greater than 0 and strictly less than 1000..
-        /// </summary>
-        internal static string SnvDataHelpers_InvalidRangeForNumericCode {
-            get {
-                return ResourceManager.GetString("SnvDataHelpers_InvalidRangeForNumericCode", resourceCulture);
-            }
-        }
     }
 }

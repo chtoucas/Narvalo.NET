@@ -2,8 +2,8 @@
 
 namespace Narvalo.Finance.Providers.Snv
 {
-    using Narvalo.Finance.Internal;
-    using Narvalo.Finance.Properties;
+    //using Narvalo.Finance.Internal;
+    //using Narvalo.Properties;
 
     /// <summary>
     /// Provides information about a localized currency.
@@ -32,7 +32,8 @@ namespace Narvalo.Finance.Providers.Snv
         /// <param name="withdrawn"></param>
         private SnvCurrencyData(string code, short numericCode, bool withdrawn)
         {
-            Sentinel.Require.CurrencyCode(code, nameof(code));
+            // FIXME: Re-enable.
+            //Sentinel.Require.CurrencyCode(code, nameof(code));
             // NB: CreateCore() requires "numericCode" to be strictly positive,
             // but CreateWithdrawnCurrency() allows zero for "numericCode".
             Demand.Range(numericCode >= 0 && numericCode < 1000);
@@ -53,7 +54,7 @@ namespace Narvalo.Finance.Providers.Snv
         private static SnvCurrencyData CreateCore(string code, short numericCode, bool withdrawn)
         {
             Require.Range(numericCode > 0 && numericCode < 1000, nameof(numericCode),
-                Strings.Sentinel_OutOfRangeCurrencyNumericCode);
+                "Sentinel_OutOfRangeCurrencyNumericCode");
 
             return new SnvCurrencyData(code, numericCode, withdrawn);
         }

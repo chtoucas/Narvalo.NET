@@ -69,7 +69,7 @@ namespace Narvalo.Web
         {
             Expect.NotNull(@this);
 
-            @this.CacheFor(duration, cacheability, HttpVersions.All);
+            @this.CacheFor(duration, cacheability, HttpVersions.Any);
         }
 
         public static void CacheFor(

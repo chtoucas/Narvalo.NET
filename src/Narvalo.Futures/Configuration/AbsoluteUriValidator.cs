@@ -26,7 +26,7 @@ namespace Narvalo.Configuration
             if (!Uri.IsWellFormedUriString(uriString, UriKind.Absolute))
             {
                 throw new ConfigurationErrorsException(
-                    Format.Current(Strings_Common.AbsoluteUriValidator_UriIsNotAbsolute_Format, uriString));
+                    Format.Current(Strings_Futures.AbsoluteUriValidator_UriIsNotAbsolute_Format, uriString));
             }
         }
     }

@@ -6,9 +6,6 @@ namespace Narvalo.Web
 
     public static class HttpVerbsExtensions
     {
-        public static bool Contains(this HttpVerbs @this, HttpVerbs value)
-        {
-            return (@this & value) != 0;
-        }
+        public static bool Contains(this HttpVerbs @this, HttpVerbs value) => (@this & value) != 0;
     }
 }

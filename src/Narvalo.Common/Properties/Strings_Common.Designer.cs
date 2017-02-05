@@ -61,24 +61,6 @@ namespace Narvalo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The specified value &apos;{0}&apos; is not a well-formed absolute URI..
-        /// </summary>
-        internal static string AbsoluteUriValidator_UriIsNotAbsolute_Format {
-            get {
-                return ResourceManager.GetString("AbsoluteUriValidator_UriIsNotAbsolute_Format", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The &lt;{0}&gt; section is not defined in your config file!.
-        /// </summary>
-        internal static string Configuration_MissingSection_Format {
-            get {
-                return ResourceManager.GetString("Configuration_MissingSection_Format", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to This method only accepts flags enum..
         /// </summary>
         internal static string ConvertTo_TypeIsNotFlagsEnum {

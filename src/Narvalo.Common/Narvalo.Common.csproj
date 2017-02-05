@@ -56,7 +56,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -75,12 +74,6 @@
     <Compile Include="Fx\Stubs.cs" />
     <Compile Include="Fx\Stubs`1.cs" />
     <Compile Include="Fx\Stubs`2.cs" />
-    <Compile Include="Configuration\AbsoluteUriValidator.cs" />
-    <Compile Include="Configuration\AbsoluteUriValidatorAttribute.cs" />
-    <Compile Include="Configuration\Appender`2.cs" />
-    <Compile Include="Configuration\Configuration%24.cs" />
-    <Compile Include="Configuration\SectionManager.cs" />
-    <Compile Include="Configuration\Setter`2.cs" />
     <Compile Include="ConvertTo.cs" />
     <Compile Include="Data\DataRecord%24.cs" />
     <Compile Include="Data\NonQueryStoredProcedure`1.cs" />

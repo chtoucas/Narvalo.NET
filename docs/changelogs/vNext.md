@@ -44,6 +44,7 @@ Narvalo.Web               | 0.26.0
 TODO
 ----
 - Remove Narvalo.Core and move from .NET 4.5 to .NET 4.6.1
+- Naming: Extensions / More / Most
 - Sync `Money<TCurrency>`, CurrencyUnit<>`, `MoneyFormatter` for rounding, scale...
 - Complete localization of messages.
 - Ops with double, float?
