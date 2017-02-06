@@ -73,6 +73,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BooleanResult.cs" />
     <Compile Include="Iteration.cs" />
     <Compile Include="Iteration`2.cs" />
     <Compile Include="Sequence.cs" />

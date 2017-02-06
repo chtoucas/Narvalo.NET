@@ -50,8 +50,7 @@ namespace Narvalo.Fx
             return "Void";
         }
 
-        public static explicit operator Outcome<Unit>(VoidOrError value)
-            => Outcome.Success(Unit.Single);
+        public static explicit operator Outcome<Unit>(VoidOrError value) => Outcome.Success(Unit.Single);
 
         [DebuggerDisplay("Error")]
         [DebuggerTypeProxy(typeof(Error_.DebugView))]

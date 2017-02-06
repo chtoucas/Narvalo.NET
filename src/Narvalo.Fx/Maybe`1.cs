@@ -102,15 +102,6 @@ namespace Narvalo.Fx
             return value.Value;
         }
 
-        // FIXME: We should remove these two operators. We did not implement ! and & overloads
-        // and this is no longer a recommended practice?
-        // See the explanation here: https://msdn.microsoft.com/en-us/library/6292hy1k.aspx
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] IsSome provides the alternate name for the 'true' operator overload.")]
-        public static bool operator true(Maybe<T> value) => value.IsSome;
-
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] IsSome provides the alternate name for the 'true' operator overload.")]
-        public static bool operator false(Maybe<T> value) => !value.IsSome;
-
         #endregion
 
         public TResult Map<TResult>(Func<T, TResult> caseSome, Func<TResult> caseNone)
