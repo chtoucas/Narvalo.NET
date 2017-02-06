@@ -21,6 +21,7 @@ namespace Narvalo.Fx
     /// <para>This class is not meant to replace the standard exception mechanism.</para>
     /// </remarks>
     /// <typeparam name="T">The underlying type of the value.</typeparam>
+    // Friendly version of Either<ExceptionDispatchInfo, T>.
     public abstract partial class Outcome<T>
     {
 #if CONTRACTS_FULL // Custom ctor visibility for the contract class only.

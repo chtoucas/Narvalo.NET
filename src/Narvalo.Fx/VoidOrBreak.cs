@@ -8,6 +8,7 @@ namespace Narvalo.Fx
 
     using Narvalo.Fx.Properties;
 
+    // Friendly version of Either<String, Unit>.
     [DebuggerDisplay("Void")]
     public partial class VoidOrBreak
     {
@@ -124,7 +125,7 @@ namespace Narvalo.Fx
             private void ObjectInvariant()
             {
                 Contract.Invariant(_reason != null);
-                Contract.Invariant(_isBreak);
+                Contract.Invariant(IsBreak);
             }
         }
     }

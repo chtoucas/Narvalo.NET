@@ -355,7 +355,7 @@ namespace Narvalo.Fx
         }
     }
 
-    // Implements the IEnumerable>T>
+    // Implements the IEnumerable>T> interface.
     public partial struct Maybe<T>
     {
         [SuppressMessage("Microsoft.Contracts", "Suggestion-6-0", Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]

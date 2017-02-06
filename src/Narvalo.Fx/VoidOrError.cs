@@ -7,6 +7,7 @@ namespace Narvalo.Fx
     using System.Diagnostics.Contracts;
     using System.Runtime.ExceptionServices;
 
+    // Friendly version of Either<ExceptionDispatchInfo, Unit>.
     [DebuggerDisplay("Void")]
     public partial class VoidOrError
     {
@@ -49,6 +50,9 @@ namespace Narvalo.Fx
             return "Void";
         }
 
+        public static explicit operator Outcome<Unit>(VoidOrError value)
+            => Outcome.Success(Unit.Single);
+
         [DebuggerDisplay("Error")]
         [DebuggerTypeProxy(typeof(Error_.DebugView))]
         private sealed partial class Error_ : VoidOrError
@@ -64,6 +68,9 @@ namespace Narvalo.Fx
             }
 
             public override void ThrowIfError() => _exceptionInfo.Throw();
+
+            public static explicit operator Outcome<Unit>(Error_ value)
+                => Outcome.Failure<Unit>(value._exceptionInfo);
 
             public override string ToString()
             {
