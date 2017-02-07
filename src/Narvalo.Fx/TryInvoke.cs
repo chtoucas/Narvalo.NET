@@ -11,33 +11,33 @@ namespace Narvalo.Fx
         #region
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
-        public static VoidOrError Catch<TException>(Action action) where TException : Exception
+        public static VoidOrException Catch<TException>(Action action) where TException : Exception
         {
             Require.NotNull(action, nameof(action));
-            Warrant.NotNull<VoidOrError>();
+            Warrant.NotNull<VoidOrException>();
 
             try
             {
                 action.Invoke();
 
-                return VoidOrError.Void;
+                return VoidOrException.Void;
             }
             catch (TException ex)
             {
                 var edi = ExceptionDispatchInfo.Capture(ex);
 
-                return VoidOrError.Error(edi);
+                return VoidOrException.Error(edi);
             }
         }
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
         [SuppressMessage("Microsoft.Contracts", "Suggestion-17-0", Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
-        public static VoidOrError Catch<T1Exception, T2Exception>(Action action)
+        public static VoidOrException Catch<T1Exception, T2Exception>(Action action)
             where T1Exception : Exception
             where T2Exception : Exception
         {
             Require.NotNull(action, nameof(action));
-            Warrant.NotNull<VoidOrError>();
+            Warrant.NotNull<VoidOrException>();
 
             ExceptionDispatchInfo edi;
 
@@ -45,23 +45,23 @@ namespace Narvalo.Fx
             {
                 action.Invoke();
 
-                return VoidOrError.Void;
+                return VoidOrException.Void;
             }
             catch (T1Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T2Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
 
-            return VoidOrError.Error(edi);
+            return VoidOrException.Error(edi);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
         [SuppressMessage("Microsoft.Contracts", "Suggestion-17-0", Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
-        public static VoidOrError Catch<T1Exception, T2Exception, T3Exception>(Action action)
+        public static VoidOrException Catch<T1Exception, T2Exception, T3Exception>(Action action)
             where T1Exception : Exception
             where T2Exception : Exception
             where T3Exception : Exception
         {
             Require.NotNull(action, nameof(action));
-            Warrant.NotNull<VoidOrError>();
+            Warrant.NotNull<VoidOrException>();
 
             ExceptionDispatchInfo edi;
 
@@ -69,25 +69,25 @@ namespace Narvalo.Fx
             {
                 action.Invoke();
 
-                return VoidOrError.Void;
+                return VoidOrException.Void;
             }
             catch (T1Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T2Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T3Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
 
-            return VoidOrError.Error(edi);
+            return VoidOrException.Error(edi);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
         [SuppressMessage("Microsoft.Contracts", "Suggestion-17-0", Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
-        public static VoidOrError Catch<T1Exception, T2Exception, T3Exception, T4Exception>(Action action)
+        public static VoidOrException Catch<T1Exception, T2Exception, T3Exception, T4Exception>(Action action)
             where T1Exception : Exception
             where T2Exception : Exception
             where T3Exception : Exception
             where T4Exception : Exception
         {
             Require.NotNull(action, nameof(action));
-            Warrant.NotNull<VoidOrError>();
+            Warrant.NotNull<VoidOrException>();
 
             ExceptionDispatchInfo edi;
 
@@ -95,14 +95,14 @@ namespace Narvalo.Fx
             {
                 action.Invoke();
 
-                return VoidOrError.Void;
+                return VoidOrException.Void;
             }
             catch (T1Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T2Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T3Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T4Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
 
-            return VoidOrError.Error(edi);
+            return VoidOrException.Error(edi);
         }
 
         #endregion

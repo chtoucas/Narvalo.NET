@@ -9,6 +9,7 @@ namespace Narvalo.Fx
     using Narvalo.Fx.Properties;
 
     // Friendly version of Either<String, Unit>.
+    [Obsolete]
     [DebuggerDisplay("Void")]
     public partial class VoidOrBreak
     {
@@ -22,15 +23,7 @@ namespace Narvalo.Fx
             IsBreak = isBreak;
         }
 
-        public static VoidOrBreak Void
-        {
-            get
-            {
-                Warrant.NotNull<VoidOrBreak>();
-
-                return s_Void;
-            }
-        }
+        public static VoidOrBreak Void { get { Warrant.NotNull<VoidOrBreak>(); return s_Void; } }
 
         public bool IsBreak { get; }
 
@@ -66,20 +59,12 @@ namespace Narvalo.Fx
             public Break_(string reason)
                 : base(true)
             {
-                Demand.NotNull(reason);
+                Demand.NotNullOrEmpty(reason);
 
                 _reason = reason;
             }
 
-            public override string Reason
-            {
-                get
-                {
-                    Warrant.NotNull<string>();
-
-                    return _reason;
-                }
-            }
+            public override string Reason { get { Warrant.NotNull<string>(); return _reason; } }
 
             public override string ToString()
             {
@@ -102,10 +87,7 @@ namespace Narvalo.Fx
                     _inner = inner;
                 }
 
-                public string Reason
-                {
-                    get { return _inner.Reason; }
-                }
+                public string Reason => _inner.Reason;
             }
         }
     }

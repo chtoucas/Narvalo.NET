@@ -76,6 +76,12 @@
     <Compile Include="BooleanResult.cs" />
     <Compile Include="Iteration.cs" />
     <Compile Include="Iteration`2.cs" />
+    <Compile Include="VoidOrError.cs" />
+    <Compile Include="VoidOrError.g.cs">
+      <DependentUpon>VoidOrError.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Sequence.cs" />
     <Compile Include="Sequence`1.cs" />
     <Compile Include="Stubs.cs" />
@@ -112,7 +118,8 @@
     </Compile>
     <Compile Include="Unit.cs" />
     <Compile Include="VoidOrBreak.cs" />
-    <Compile Include="VoidOrError.cs" />
+    <Compile Include="VoidOrException.cs" />
+    <Compile Include="VoidOrError`1.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml" />
@@ -135,6 +142,12 @@
       <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
       <Name>Narvalo.Cerbere</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="VoidOrError.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>VoidOrError.g.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
