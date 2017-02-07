@@ -6,7 +6,7 @@ namespace Narvalo.Fx
 
     public partial class VoidOrError
     {
-        public static void ThrowIfError<TError>(VoidOrError<TError> @this) where TError : Exception
+        public static void ThrowIfError<TException>(VoidOrError<TException> @this) where TException : Exception
         {
             Require.NotNull(@this, nameof(@this));
 

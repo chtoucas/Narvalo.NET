@@ -67,7 +67,7 @@ namespace Narvalo.Fx
             {
                 Warrant.NotNull<string>();
 
-                return Format.Current("Break({0})", _error);
+                return Format.Current("Error({0})", _error);
             }
 
             /// <summary>
@@ -124,7 +124,7 @@ namespace Narvalo.Fx
 
     public partial class VoidOrError<TError>
     {
-        private sealed partial class Break_
+        private sealed partial class Error_
         {
             [ContractInvariantMethod]
             private void ObjectInvariant()
