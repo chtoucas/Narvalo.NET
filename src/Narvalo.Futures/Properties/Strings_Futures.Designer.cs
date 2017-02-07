@@ -167,5 +167,14 @@ namespace Narvalo.Properties {
                 return ResourceManager.GetString("SnvDataHelpers_InvalidRangeForNumericCode", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A successful outcome can not provide an error message. You must check the IsBreak value before accesssing this property..
+        /// </summary>
+        internal static string VoidOrBreak_BreakHasNoReason {
+            get {
+                return ResourceManager.GetString("VoidOrBreak_BreakHasNoReason", resourceCulture);
+            }
+        }
     }
 }

@@ -3,15 +3,21 @@
   <Import Project="..\..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props" Condition="Exists('..\..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <ProjectGuid>{7741AF0B-D316-4C1D-A51D-A89F3070D6B0}</ProjectGuid>
-    <RootNamespace>Narvalo</RootNamespace>
-    <AssemblyName>Narvalo.Futures.Facts</AssemblyName>
+    <ProjectGuid>{3F3D8108-CC1C-4CE2-8768-2097A0B77D01}</ProjectGuid>
+    <RootNamespace>Narvalo.Mvp.Web</RootNamespace>
+    <AssemblyName>Narvalo.Mvp.Web.Facts</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NSubstitute, Version=1.10.0.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NSubstitute.1.10.0.0\lib\net45\NSubstitute.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Web" />
     <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
       <HintPath>..\..\packages\xunit.abstractions.2.0.0\lib\net35\xunit.abstractions.dll</HintPath>
       <Private>True</Private>
@@ -30,35 +36,27 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BinaryEncoderFacts.cs" />
-    <Compile Include="Cerbere\ContractHelpersFacts.cs" />
-    <Compile Include="Finance\CheckDigitsFacts.cs" />
-    <Compile Include="Finance\Currencies\CurrencyActivatorFacts.cs" />
-    <Compile Include="Fx\EitherFacts.cs" />
-    <Compile Include="Fx\SwitchFacts.cs" />
-    <Compile Include="Fx\VoidOrBreakFacts.cs" />
-    <Compile Include="GuardFacts.cs" />
+    <Compile Include="Core\AspNetMessageCoordinatorFacts.cs" />
+    <Compile Include="HttpPresenterFacts.cs" />
+    <Compile Include="MvpPageFacts.cs" />
+    <Compile Include="MvpUserControlFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Narvalo.Finance\Narvalo.Finance.csproj">
-      <Project>{38055176-243b-4090-8148-efb8fe18ff23}</Project>
-      <Name>Narvalo.Finance</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\Narvalo.Futures\Narvalo.Futures.csproj">
-      <Project>{e394c38b-f999-4322-b821-7630368da16f}</Project>
-      <Name>Narvalo.Futures</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\Narvalo.Fx\Narvalo.Fx.csproj">
-      <Project>{28f6175d-0ee3-4763-8004-662a7de41280}</Project>
-      <Name>Narvalo.Fx</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Narvalo.Mvp.Web.Facts.props" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
-  <Import Project="..\TestCommon\Narvalo.TestCommon.projitems" Label="Shared" />
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj">
+      <Project>{f4e7c519-8c51-4f2f-a50e-1a478399c93c}</Project>
+      <Name>Narvalo.Mvp.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Narvalo.Mvp\Narvalo.Mvp.csproj">
+      <Project>{2944d621-7f6e-4792-94ad-0021c6b73981}</Project>
+      <Name>Narvalo.Mvp</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

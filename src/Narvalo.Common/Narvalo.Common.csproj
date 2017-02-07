@@ -74,21 +74,6 @@
     <Compile Include="Data\SqlParameterCollection%24.cs" />
     <Compile Include="Data\SqlTypes%24.cs" />
     <Compile Include="Data\StoredProcedure`1.cs" />
-    <Compile Include="Fx\Either.cs" />
-    <Compile Include="Fx\Either`2.cs" />
-    <Compile Include="Fx\Func.cs" />
-    <Compile Include="Fx\Identity.g.cs">
-      <DependentUpon>Identity.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Fx\Identity`1.cs" />
-    <Compile Include="Fx\More\Func%24.cs" />
-    <Compile Include="Fx\More\Nullable%24.cs" />
-    <Compile Include="Fx\Recursion.cs" />
-    <Compile Include="Fx\Switch%24.cs" />
-    <Compile Include="Fx\Switch.cs" />
-    <Compile Include="Fx\Switch`2.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Int64Encoder.cs" />
     <Compile Include="Internal\TryParser%24.cs" />
@@ -117,10 +102,6 @@
     <Compile Include="Xml\XmlReader%24.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Fx\Identity.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Identity.g.cs</LastGenOutput>
-    </None>
     <Content Include="Properties\CustomDictionary.xml" />
   </ItemGroup>
   <ItemGroup>

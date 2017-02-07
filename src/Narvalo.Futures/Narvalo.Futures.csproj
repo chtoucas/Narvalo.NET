@@ -51,6 +51,16 @@
       <DependentUpon>SnvCurrencyInfoProvider.tt</DependentUpon>
     </Compile>
     <Compile Include="Formattable.cs" />
+    <Compile Include="Fx\Either.cs" />
+    <Compile Include="Fx\Either`2.cs" />
+    <Compile Include="Fx\Error.cs" />
+    <Compile Include="Fx\Error`1.cs" />
+    <Compile Include="Fx\Func.cs" />
+    <Compile Include="Fx\Recursion.cs" />
+    <Compile Include="Fx\Switch%24.cs" />
+    <Compile Include="Fx\Switch.cs" />
+    <Compile Include="Fx\Switch`2.cs" />
+    <Compile Include="Fx\VoidOrBreak.cs" />
     <Compile Include="Globalization\CountryISOCode.cs" />
     <Compile Include="Globalization\RegionInfo%24.cs" />
     <Compile Include="Guard.cs" />
@@ -111,9 +121,7 @@
       <LastGenOutput>Guard.g.cs</LastGenOutput>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Fx\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -153,4 +153,7 @@
   <data name="SnvDataHelpers_InvalidRangeForNumericCode" xml:space="preserve">
     <value />
   </data>
+  <data name="VoidOrBreak_BreakHasNoReason" xml:space="preserve">
+    <value>Seule une sortie en erreur peut fournir un message d'erreur. Vous devriez toujours vérifier au préalable la valeur de la propriété IsBreak.</value>
+  </data>
 </root>

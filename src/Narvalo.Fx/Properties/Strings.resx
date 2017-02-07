@@ -120,9 +120,6 @@
   <data name="Maybe_CannotCastNoneToValue" xml:space="preserve">
     <value>Can not explicitly cast a Maybe&lt;T&gt;.None to a value of type T.</value>
   </data>
-  <data name="VoidOrBreak_BreakHasNoReason" xml:space="preserve">
-    <value>A successful outcome can not provide an error message. You must check the IsBreak value before accesssing this property.</value>
-  </data>
   <data name="Outcome_CannotCastFailureToValue" xml:space="preserve">
     <value>Can not explicitly cast a failure of type Outcome&lt;T&gt; to a value of type T.</value>
   </data>

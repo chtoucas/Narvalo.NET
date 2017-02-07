@@ -67,7 +67,7 @@ namespace Narvalo.Fx
             {
                 Warrant.NotNull<string>();
 
-                return Format.Current("Error({0})", _error);
+                return "Error(" + _error.ToString() + ")";
             }
 
             /// <summary>

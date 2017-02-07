@@ -6,10 +6,9 @@ namespace Narvalo.Fx
     using System.Diagnostics;
     using System.Diagnostics.Contracts;
 
-    using Narvalo.Fx.Properties;
+    using Narvalo.Properties;
 
     // Friendly version of Either<String, Unit>.
-    [Obsolete]
     [DebuggerDisplay("Void")]
     public partial class VoidOrBreak
     {
@@ -31,7 +30,7 @@ namespace Narvalo.Fx
         {
             get
             {
-                throw new InvalidOperationException(Strings.VoidOrBreak_BreakHasNoReason);
+                throw new InvalidOperationException(Strings_Futures.VoidOrBreak_BreakHasNoReason);
             }
         }
 

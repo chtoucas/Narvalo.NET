@@ -36,6 +36,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="MaybeFacts.cs" />
+    <Compile Include="More\NullableFacts.cs" />
     <Compile Include="Outcome.g.cs">
       <DependentUpon>Outcome.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -43,14 +44,56 @@
     </Compile>
     <Compile Include="OutcomeFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VoidOrBreakFacts.cs" />
-    <Compile Include="VoidOrErrorFacts.cs" />
+    <Compile Include="Samples\Comonad.g.cs">
+      <DependentUpon>Comonad.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Samples\Comonad`1.cs" />
+    <Compile Include="Samples\Internal\EnumerableExtensions.cs" />
+    <Compile Include="Samples\Monad.g.cs">
+      <DependentUpon>Monad.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Samples\MonadOr.g.cs">
+      <DependentUpon>MonadOr.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Samples\MonadOr`1.cs" />
+    <Compile Include="Samples\MonadPlus.g.cs">
+      <DependentUpon>MonadPlus.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Samples\MonadPlus`1.cs" />
+    <Compile Include="Samples\MonadValue.g.cs">
+      <DependentUpon>MonadValue.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Samples\MonadValue`1.cs" />
+    <Compile Include="Samples\MonadZero.g.cs">
+      <DependentUpon>MonadZero.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Samples\MonadZero`1.cs" />
+    <Compile Include="Samples\Monad`1.cs" />
+    <Compile Include="SequenceFacts.cs" />
+    <Compile Include="StubsFacts.cs" />
+    <Compile Include="UnitFacts.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Narvalo.Cerbere\Narvalo.Cerbere.csproj">
+      <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
+      <Name>Narvalo.Cerbere</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\Narvalo.Fx\Narvalo.Fx.csproj">
       <Project>{28f6175d-0ee3-4763-8004-662a7de41280}</Project>
       <Name>Narvalo.Fx</Name>
@@ -64,6 +107,30 @@
     <Content Include="Outcome.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Outcome.g.cs</LastGenOutput>
+    </Content>
+    <Content Include="Samples\Comonad.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Comonad.g.cs</LastGenOutput>
+    </Content>
+    <Content Include="Samples\Monad.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Monad.g.cs</LastGenOutput>
+    </Content>
+    <Content Include="Samples\MonadOr.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MonadOr.g.cs</LastGenOutput>
+    </Content>
+    <Content Include="Samples\MonadPlus.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MonadPlus.g.cs</LastGenOutput>
+    </Content>
+    <Content Include="Samples\MonadValue.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MonadValue.g.cs</LastGenOutput>
+    </Content>
+    <Content Include="Samples\MonadZero.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MonadZero.g.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

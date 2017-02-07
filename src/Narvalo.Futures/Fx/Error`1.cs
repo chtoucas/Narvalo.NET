@@ -66,12 +66,4 @@ namespace Narvalo.Fx
             return comparer.GetHashCode(Message);
         }
     }
-
-    public static class Error
-    {
-        public static void Throw<TException>(Error<TException> @this) where TException : Exception
-        {
-            throw @this.Message;
-        }
-    }
 }

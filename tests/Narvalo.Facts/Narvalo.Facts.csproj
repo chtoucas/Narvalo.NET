@@ -78,51 +78,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConvertToFacts.cs" />
-    <Compile Include="Fx\Samples\Internal\EnumerableExtensions.cs" />
     <Compile Include="_TestCommon\AppDomainUtils.cs" />
     <Compile Include="_TestCommon\EnvironmentFacts.cs" />
-    <Compile Include="Fx\More\NullableFacts.cs" />
-    <Compile Include="Fx\EitherFacts.cs" />
-    <Compile Include="Fx\Samples\Comonad.g.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Comonad.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Fx\Samples\Comonad`1.cs" />
-    <Compile Include="Fx\Samples\Monad.g.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Monad.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Fx\Samples\MonadOr.g.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MonadOr.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Fx\Samples\MonadOr`1.cs" />
-    <Compile Include="Fx\Samples\MonadPlus.g.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MonadPlus.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Fx\Samples\MonadPlus`1.cs" />
-    <Compile Include="Fx\Samples\MonadValue.g.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MonadValue.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Fx\Samples\MonadValue`1.cs" />
-    <Compile Include="Fx\Samples\MonadZero.g.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MonadZero.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Fx\Samples\MonadZero`1.cs" />
-    <Compile Include="Fx\Samples\Monad`1.cs" />
-    <Compile Include="Fx\SequenceFacts.cs" />
-    <Compile Include="Fx\StubsFacts.cs" />
-    <Compile Include="Fx\SwitchFacts.cs" />
-    <Compile Include="Fx\UnitFacts.cs" />
     <Compile Include="Int64EncoderFacts.cs" />
     <Compile Include="ParseToFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -141,30 +98,6 @@
     <Compile Include="Web\UrlManipFacts.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Fx\Samples\Comonad.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Comonad.g.cs</LastGenOutput>
-    </Content>
-    <Content Include="Fx\Samples\Monad.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Monad.g.cs</LastGenOutput>
-    </Content>
-    <Content Include="Fx\Samples\MonadOr.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MonadOr.g.cs</LastGenOutput>
-    </Content>
-    <Content Include="Fx\Samples\MonadPlus.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MonadPlus.g.cs</LastGenOutput>
-    </Content>
-    <Content Include="Fx\Samples\MonadValue.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MonadValue.g.cs</LastGenOutput>
-    </Content>
-    <Content Include="Fx\Samples\MonadZero.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MonadZero.g.cs</LastGenOutput>
-    </Content>
     <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml">
       <SubType>Designer</SubType>
     </CodeAnalysisDictionary>
@@ -187,10 +120,6 @@
       <Project>{85e2c826-bf5c-4cdd-a90a-56d3d7f9ce25}</Project>
       <Name>Narvalo.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\Narvalo.Futures\Narvalo.Futures.csproj">
-      <Project>{e394c38b-f999-4322-b821-7630368da16f}</Project>
-      <Name>Narvalo.Futures</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\src\Narvalo.Fx\Narvalo.Fx.csproj">
       <Project>{28f6175d-0ee3-4763-8004-662a7de41280}</Project>
       <Name>Narvalo.Fx</Name>
@@ -200,6 +129,7 @@
       <Name>Narvalo.Web</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="..\TestCommon\Narvalo.TestCommon.projitems" Label="Shared" />
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
