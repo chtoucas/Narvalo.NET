@@ -80,21 +80,28 @@ namespace Narvalo.Web.UI
 
         protected override void InitializeCustom(NameValueCollection config)
         {
-            Maybe<string> fontsPath = config.MayGetSingle(FONTS_PATH_KEY);
-            Maybe<string> imagesPath = config.MayGetSingle(IMAGES_PATH_KEY);
-            Maybe<string> scriptsPath = config.MayGetSingle(SCRIPTS_PATH_KEY);
-            Maybe<string> stylesPath = config.MayGetSingle(STYLES_PATH_KEY);
+            //Maybe<string> fontsPath = config.MayGetSingle(FONTS_PATH_KEY);
+            //Maybe<string> imagesPath = config.MayGetSingle(IMAGES_PATH_KEY);
+            //Maybe<string> scriptsPath = config.MayGetSingle(SCRIPTS_PATH_KEY);
+            //Maybe<string> stylesPath = config.MayGetSingle(STYLES_PATH_KEY);
 
-            // FIXME: If none after normalization, throw.
-            _fontsPath = fontsPath.Select(NormalizeAppRelativePath).ValueOrElse("~/assets/fonts/");
-            _imagesPath = imagesPath.Select(NormalizeAppRelativePath).ValueOrElse("~/assets/img/");
-            _scriptsPath = scriptsPath.Select(NormalizeAppRelativePath).ValueOrElse("~/assets/js/");
-            _stylesPath = stylesPath.Select(NormalizeAppRelativePath).ValueOrElse("~/assets/css/");
+            _fontsPath = config.MayGetSingle(FONTS_PATH_KEY)
+                .Select(NormalizeAppRelativePath)
+                .ValueOrElse("~/assets/fonts/");
+            _imagesPath = config.MayGetSingle(IMAGES_PATH_KEY)
+                .Select(NormalizeAppRelativePath)
+                .ValueOrElse("~/assets/img/");
+            _scriptsPath = config.MayGetSingle(SCRIPTS_PATH_KEY)
+                .Select(NormalizeAppRelativePath)
+                .ValueOrElse("~/assets/js/");
+            _stylesPath = config.MayGetSingle(STYLES_PATH_KEY)
+                .Select(NormalizeAppRelativePath)
+                .ValueOrElse("~/assets/css/");
 
-            if (fontsPath) { config.Remove(FONTS_PATH_KEY); }
-            if (imagesPath) { config.Remove(IMAGES_PATH_KEY); }
-            if (scriptsPath) { config.Remove(SCRIPTS_PATH_KEY); }
-            if (stylesPath) { config.Remove(STYLES_PATH_KEY); }
+            //if (fontsPath.IsSome) { config.Remove(FONTS_PATH_KEY); }
+            //if (imagesPath.IsSome) { config.Remove(IMAGES_PATH_KEY); }
+            //if (scriptsPath.IsSome) { config.Remove(SCRIPTS_PATH_KEY); }
+            //if (stylesPath.IsSome) { config.Remove(STYLES_PATH_KEY); }
         }
 
         private static Uri MakeUri(string baseIntermediatePath, string relativePath)
