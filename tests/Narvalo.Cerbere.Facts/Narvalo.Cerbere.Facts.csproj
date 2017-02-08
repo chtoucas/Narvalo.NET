@@ -38,9 +38,16 @@
     <Compile Include="FormatFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequireFacts.cs" />
+    <Compile Include="_TestCommon\DebugAssertFailedException.cs" />
+    <Compile Include="_TestCommon\DebugAssertFixture.cs" />
+    <Compile Include="_TestCommon\DebugOnlyFactAttribute.cs" />
+    <Compile Include="_TestCommon\EnvironmentFacts.cs" />
+    <Compile Include="_TestCommon\ReleaseOnlyFactAttribute.cs" />
+    <Compile Include="_TestCommon\UnitTestTraceListener.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Narvalo.Cerbere.Facts.props" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

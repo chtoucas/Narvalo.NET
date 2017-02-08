@@ -86,7 +86,7 @@
     <Compile Include="UnitFacts.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="Narvalo.Fx.Facts.props" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

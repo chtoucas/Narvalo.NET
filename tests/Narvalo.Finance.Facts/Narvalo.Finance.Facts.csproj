@@ -56,7 +56,6 @@
     <Compile Include="IbanCheckDigitsFacts.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="Narvalo.Finance.Facts.props" />
     <None Include="packages.config" />
   </ItemGroup>
