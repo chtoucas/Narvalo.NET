@@ -100,7 +100,7 @@ public partial class MonadTemplate
 
 <#+ End of DISABLED */ #>
 
-        public static <#= Name #><TSource> Invoke<TSource>(
+        public static void Invoke<TSource>(
             this <#= Name #><TSource> @this,
             Action<TSource> action)
             <#+ WriteTypeConstraints("TSource"); #>
@@ -111,7 +111,7 @@ public partial class MonadTemplate
             Warrant.NotNull<<#= Name #><TSource>>();
 <#+ } #>
 
-            return @this.Bind(_ => { action.Invoke(_); return @this; });
+            @this.Bind(_ => { action.Invoke(_); return <#= Name #>.Unit; });
         }
 
 <#+ /* DISABLED #>

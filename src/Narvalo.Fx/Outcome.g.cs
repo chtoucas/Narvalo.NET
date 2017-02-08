@@ -397,7 +397,7 @@ namespace Narvalo.Fx
         }
 
 
-        public static Outcome<TSource> Invoke<TSource>(
+        public static void Invoke<TSource>(
             this Outcome<TSource> @this,
             Action<TSource> action)
             /* T4: C# indent */
@@ -405,7 +405,7 @@ namespace Narvalo.Fx
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(action, nameof(action));
 
-            return @this.Bind(_ => { action.Invoke(_); return @this; });
+            @this.Bind(_ => { action.Invoke(_); return Outcome.Unit; });
         }
 
     } // End of Outcome - T4: EmitMonadExtraExtensions().

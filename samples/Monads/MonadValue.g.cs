@@ -645,7 +645,7 @@ namespace Monads
         }
 
 
-        public static MonadValue<TSource> Invoke<TSource>(
+        public static void Invoke<TSource>(
             this MonadValue<TSource> @this,
             Action<TSource> action)
             where TSource : struct
@@ -653,7 +653,7 @@ namespace Monads
             /* T4: C# indent */
             Require.NotNull(action, nameof(action));
 
-            return @this.Bind(_ => { action.Invoke(_); return @this; });
+            @this.Bind(_ => { action.Invoke(_); return MonadValue.Unit; });
         }
 
     } // End of MonadValue - T4: EmitMonadExtraExtensions().

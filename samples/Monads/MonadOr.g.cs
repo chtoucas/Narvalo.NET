@@ -637,7 +637,7 @@ namespace Monads
         }
 
 
-        public static MonadOr<TSource> Invoke<TSource>(
+        public static void Invoke<TSource>(
             this MonadOr<TSource> @this,
             Action<TSource> action)
             /* T4: C# indent */
@@ -646,7 +646,7 @@ namespace Monads
             Require.NotNull(action, nameof(action));
             Warrant.NotNull<MonadOr<TSource>>();
 
-            return @this.Bind(_ => { action.Invoke(_); return @this; });
+            @this.Bind(_ => { action.Invoke(_); return MonadOr.Unit; });
         }
 
     } // End of MonadOr - T4: EmitMonadExtraExtensions().

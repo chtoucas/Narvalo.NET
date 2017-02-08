@@ -104,7 +104,40 @@ namespace Narvalo.Fx
 
         #endregion
 
-        public TResult Map<TResult>(Func<T, TResult> caseSome, Func<TResult> caseNone)
+        public void Invoke(Action<T> action, Action caseNone)
+        {
+            Require.NotNull(action, nameof(action));
+            Require.NotNull(caseNone, nameof(caseNone));
+
+            if (IsSome)
+            {
+                action.Invoke(Value);
+            }
+            else
+            {
+                caseNone.Invoke();
+            }
+        }
+
+        // Alias for Invoke().
+        public void OnSome(Action<T> action)
+        {
+            Expect.NotNull(action);
+
+            Invoke(action);
+        }
+
+        public void OnNone(Action action)
+        {
+            Require.NotNull(action, nameof(action));
+
+            if (!IsSome)
+            {
+                action.Invoke();
+            }
+        }
+
+        public TResult Invoke<TResult>(Func<T, TResult> caseSome, Func<TResult> caseNone)
         {
             Require.NotNull(caseSome, nameof(caseSome));
             Require.NotNull(caseNone, nameof(caseNone));
@@ -117,13 +150,6 @@ namespace Narvalo.Fx
             {
                 return caseNone.Invoke();
             }
-        }
-
-        public void OnSome(Action<T> action)
-        {
-            Expect.NotNull(action);
-
-            Invoke(action);
         }
 
         /// <summary>
@@ -181,8 +207,43 @@ namespace Narvalo.Fx
             return IsSome ? Format.Current("Maybe({0})", Value) : "Maybe(None)";
         }
 
-        #region Overrides for auto-generated (extension) methods
+        /// <summary>
+        /// Represents a debugger type proxy for <see cref="Maybe{T}"/>.
+        /// </summary>
+        [ContractVerification(false)] // Debugger-only code.
+        [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
+        private sealed class DebugView
+        {
+            private readonly Maybe<T> _inner;
 
+            public DebugView(Maybe<T> inner)
+            {
+                _inner = inner;
+            }
+
+            public bool IsSome
+            {
+                get { return _inner.IsSome; }
+            }
+
+            public T Value
+            {
+                get
+                {
+                    if (!IsSome)
+                    {
+                        return default(T);
+                    }
+
+                    return _inner.Value;
+                }
+            }
+        }
+    }
+
+    // Overrides for auto-generated (extension) methods.
+    public partial struct Maybe<T>
+    {
         #region Basic Monad functions
 
         public Maybe<TResult> Select<TResult>(Func<T, TResult> selector)
@@ -249,7 +310,7 @@ namespace Narvalo.Fx
             Require.NotNull(innerKeySelector, nameof(innerKeySelector));
             Require.NotNull(resultSelector, nameof(resultSelector));
 
-            // REVIEW: I can't remember why I didn't include !inner.IsSome before?
+            // REVIEW: I can't remember why I didn't include !inner.IsSome before. Mistake?
             if (!IsSome || !inner.IsSome)
             {
                 return Maybe<TResult>.None;
@@ -267,24 +328,7 @@ namespace Narvalo.Fx
 
         #region Non-standard extensions
 
-        public Maybe<T> Invoke(Action<T> action, Action caseNone)
-        {
-            Require.NotNull(action, nameof(action));
-            Require.NotNull(caseNone, nameof(caseNone));
-
-            if (IsSome)
-            {
-                action.Invoke(Value);
-            }
-            else
-            {
-                caseNone.Invoke();
-            }
-
-            return this;
-        }
-
-        public Maybe<T> Invoke(Action<T> action)
+        public void Invoke(Action<T> action)
         {
             Require.NotNull(action, nameof(action));
 
@@ -292,58 +336,9 @@ namespace Narvalo.Fx
             {
                 action.Invoke(Value);
             }
-
-            return this;
-        }
-
-        public Maybe<T> OnNone(Action action)
-        {
-            Require.NotNull(action, nameof(action));
-
-            if (!IsSome)
-            {
-                action.Invoke();
-            }
-
-            return this;
         }
 
         #endregion
-
-        #endregion
-
-        /// <summary>
-        /// Represents a debugger type proxy for <see cref="Maybe{T}"/>.
-        /// </summary>
-        [ContractVerification(false)] // Debugger-only code.
-        [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
-        private sealed class DebugView
-        {
-            private readonly Maybe<T> _inner;
-
-            public DebugView(Maybe<T> inner)
-            {
-                _inner = inner;
-            }
-
-            public bool IsSome
-            {
-                get { return _inner.IsSome; }
-            }
-
-            public T Value
-            {
-                get
-                {
-                    if (!IsSome)
-                    {
-                        return default(T);
-                    }
-
-                    return _inner.Value;
-                }
-            }
-        }
     }
 
     // Implements the IEnumerable>T> interface.

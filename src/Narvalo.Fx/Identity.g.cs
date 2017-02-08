@@ -393,7 +393,7 @@ namespace Narvalo.Fx
         }
 
 
-        public static Identity<TSource> Invoke<TSource>(
+        public static void Invoke<TSource>(
             this Identity<TSource> @this,
             Action<TSource> action)
             /* T4: C# indent */
@@ -401,7 +401,7 @@ namespace Narvalo.Fx
             /* T4: C# indent */
             Require.NotNull(action, nameof(action));
 
-            return @this.Bind(_ => { action.Invoke(_); return @this; });
+            @this.Bind(_ => { action.Invoke(_); return Identity.Unit; });
         }
 
     } // End of Identity - T4: EmitMonadExtraExtensions().

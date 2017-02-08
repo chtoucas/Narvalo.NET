@@ -637,7 +637,7 @@ namespace Narvalo.Fx
         }
 
 
-        public static VoidOrError<TSource> Invoke<TSource>(
+        public static void Invoke<TSource>(
             this VoidOrError<TSource> @this,
             Action<TSource> action)
             /* T4: C# indent */
@@ -646,7 +646,7 @@ namespace Narvalo.Fx
             Require.NotNull(action, nameof(action));
             Warrant.NotNull<VoidOrError<TSource>>();
 
-            return @this.Bind(_ => { action.Invoke(_); return @this; });
+            @this.Bind(_ => { action.Invoke(_); return VoidOrError.Unit; });
         }
 
     } // End of VoidOrError - T4: EmitMonadExtraExtensions().

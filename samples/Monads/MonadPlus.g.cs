@@ -637,7 +637,7 @@ namespace Monads
         }
 
 
-        public static MonadPlus<TSource> Invoke<TSource>(
+        public static void Invoke<TSource>(
             this MonadPlus<TSource> @this,
             Action<TSource> action)
             /* T4: C# indent */
@@ -646,7 +646,7 @@ namespace Monads
             Require.NotNull(action, nameof(action));
             Warrant.NotNull<MonadPlus<TSource>>();
 
-            return @this.Bind(_ => { action.Invoke(_); return @this; });
+            @this.Bind(_ => { action.Invoke(_); return MonadPlus.Unit; });
         }
 
     } // End of MonadPlus - T4: EmitMonadExtraExtensions().
