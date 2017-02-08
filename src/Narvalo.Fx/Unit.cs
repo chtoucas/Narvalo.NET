@@ -9,6 +9,7 @@ namespace Narvalo.Fx
 
     public struct Unit : IEquatable<Unit>
     {
+        // FIXME: Single is a bit misleading.
         public static readonly Unit Single = new Unit();
 
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "left", Justification = "[Intentionally] This method always returns 'true'.")]

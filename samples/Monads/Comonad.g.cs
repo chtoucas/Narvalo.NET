@@ -10,7 +10,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo.Fx.Samples
+using global::Narvalo;
+using global::Narvalo.Fx;
+
+namespace Monads
 {
     // Implements core Comonad methods.
     public static partial class Comonad

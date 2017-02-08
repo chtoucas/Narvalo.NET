@@ -1,36 +1,38 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Fx.Samples
+namespace Monads
 {
     using System;
 
-    public sealed class MonadPlus<T>
+    using Narvalo.Fx;
+
+    public sealed class MonadOr<T>
     {
         // [Haskell] mzero
-        public static MonadPlus<T> Zero { get { throw new NotImplementedException(); } }
+        public static MonadOr<T> None { get { throw new NotImplementedException(); } }
 
         // [Haskell] mplus
-        public MonadPlus<T> Plus(MonadPlus<T> other)
+        public MonadOr<T> OrElse(MonadOr<T> other)
         {
             throw new NotImplementedException();
         }
 
         // [Haskell] >>=
-        public MonadPlus<TResult> Bind<TResult>(Func<T, MonadPlus<TResult>> funM)
+        public MonadOr<TResult> Bind<TResult>(Func<T, MonadOr<TResult>> funM)
         {
             throw new NotImplementedException();
         }
 
         // [Haskell] return
-        internal static MonadPlus<T> η(T value)
+        internal static MonadOr<T> η(T value)
         {
             throw new NotImplementedException();
         }
 
         // [Haskell] join
-        internal static MonadPlus<T> μ(MonadPlus<MonadPlus<T>> square)
+        internal static MonadOr<T> μ(MonadOr<MonadOr<T>> square)
         {
-            return square.Bind(Stubs<MonadPlus<T>>.Identity);
+            return square.Bind(Stubs<MonadOr<T>>.Identity);
         }
     }
 }

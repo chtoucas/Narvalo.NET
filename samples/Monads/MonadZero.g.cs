@@ -10,34 +10,35 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo.Fx.Samples
+using global::Narvalo;
+using global::Narvalo.Fx;
+
+namespace Monads
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
-    using Narvalo.Fx.Samples.Internal;
+    using Monads.Internal;
 
-    /// <remarks>
-    /// Sometimes we prefer to use extension methods over static methods to be able to override them locally.
-    /// </remarks>
-    // Provides a set of static methods for MonadOr<T>.
-    public static partial class MonadOr
+    // Provides a set of static methods for MonadZero<T>.
+    // NB: Sometimes we prefer extension methods over static methods to be able to override them locally.
+    public static partial class MonadZero
     {
         /// <summary>
-        /// The unique object of type <c>MonadOr&lt;Unit&gt;</c>.
+        /// The unique object of type <c>MonadZero&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly MonadOr<global::Narvalo.Fx.Unit> s_Unit = Return(global::Narvalo.Fx.Unit.Single);
+        private static readonly MonadZero<global::Narvalo.Fx.Unit> s_Unit = Return(global::Narvalo.Fx.Unit.Single);
 
         /// <summary>
-        /// Gets the unique object of type <c>MonadOr&lt;Unit&gt;</c>.
+        /// Gets the unique object of type <c>MonadZero&lt;Unit&gt;</c>.
         /// </summary>
-        /// <value>The unique object of type <c>MonadOr&lt;Unit&gt;</c>.</value>
-        public static MonadOr<global::Narvalo.Fx.Unit> Unit
+        /// <value>The unique object of type <c>MonadZero&lt;Unit&gt;</c>.</value>
+        public static MonadZero<global::Narvalo.Fx.Unit> Unit
         {
             get
             {
-                Warrant.NotNull<MonadOr<global::Narvalo.Fx.Unit>>();
+                Warrant.NotNull<MonadZero<global::Narvalo.Fx.Unit>>();
 
                 return s_Unit;
             }
@@ -45,38 +46,38 @@ namespace Narvalo.Fx.Samples
 
 
         /// <summary>
-        /// Gets the zero for <see cref="MonadOr{T}"/>.
+        /// Gets the zero for <see cref="MonadZero{T}"/>.
         /// </summary>
         /// <remarks>
         /// Named <c>mzero</c> in Haskell parlance.
         /// </remarks>
-        /// <value>The zero for <see cref="MonadOr{T}"/>.</value>
-        public static MonadOr<global::Narvalo.Fx.Unit> None
+        /// <value>The zero for <see cref="MonadZero{T}"/>.</value>
+        public static MonadZero<global::Narvalo.Fx.Unit> Zero
         {
             get
             {
-                Warrant.NotNull<MonadOr<global::Narvalo.Fx.Unit>>();
+                Warrant.NotNull<MonadZero<global::Narvalo.Fx.Unit>>();
 
-                return MonadOr<global::Narvalo.Fx.Unit>.None;
+                return MonadZero<global::Narvalo.Fx.Unit>.Zero;
             }
         }
 
 
         /// <summary>
-        /// Obtains an instance of the <see cref="MonadOr{T}"/> class for the specified value.
+        /// Obtains an instance of the <see cref="MonadZero{T}"/> class for the specified value.
         /// </summary>
         /// <remarks>
         /// Named <c>return</c> in Haskell parlance.
         /// </remarks>
         /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
-        /// <param name="value">A value to be wrapped into a <see cref="MonadOr{T}"/> object.</param>
-        /// <returns>An instance of the <see cref="MonadOr{T}"/> class for the specified value.</returns>
-        public static MonadOr<T> Return<T>(T value)
+        /// <param name="value">A value to be wrapped into a <see cref="MonadZero{T}"/> object.</param>
+        /// <returns>An instance of the <see cref="MonadZero{T}"/> class for the specified value.</returns>
+        public static MonadZero<T> Return<T>(T value)
             /* T4: C# indent */
         {
-            Warrant.NotNull<MonadOr<T>>();
+            Warrant.NotNull<MonadZero<T>>();
 
-            return MonadOr<T>.η(value);
+            return MonadZero<T>.η(value);
         }
 
         #region Generalisations of list functions (Prelude)
@@ -87,13 +88,13 @@ namespace Narvalo.Fx.Samples
         /// <remarks>
         /// Named <c>join</c> in Haskell parlance.
         /// </remarks>
-        public static MonadOr<T> Flatten<T>(MonadOr<MonadOr<T>> square)
+        public static MonadZero<T> Flatten<T>(MonadZero<MonadZero<T>> square)
             /* T4: C# indent */
         {
             Expect.NotNull(square);
-            Warrant.NotNull<MonadOr<T>>();
+            Warrant.NotNull<MonadZero<T>>();
 
-            return MonadOr<T>.μ(square);
+            return MonadZero<T>.μ(square);
         }
 
         #endregion
@@ -104,11 +105,11 @@ namespace Narvalo.Fx.Samples
         /// <remarks>
         /// Named <c>guard</c> in Haskell parlance.
         /// </remarks>
-        public static MonadOr<global::Narvalo.Fx.Unit> Guard(bool predicate)
+        public static MonadZero<global::Narvalo.Fx.Unit> Guard(bool predicate)
         {
-            Warrant.NotNull<MonadOr<global::Narvalo.Fx.Unit>>();
+            Warrant.NotNull<MonadZero<global::Narvalo.Fx.Unit>>();
 
-            return predicate ? MonadOr.Unit : MonadOr<global::Narvalo.Fx.Unit>.None;
+            return predicate ? MonadZero.Unit : MonadZero<global::Narvalo.Fx.Unit>.Zero;
         }
 
 
@@ -117,16 +118,16 @@ namespace Narvalo.Fx.Samples
         #region Monadic lifting operators (Prelude)
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="MonadOr{T}" /> values.
+        /// Promotes a function to use and return <see cref="MonadZero{T}" /> values.
         /// </summary>
         /// <remarks>
         /// Named <c>liftM</c> in Haskell parlance.
         /// </remarks>
-        public static Func<MonadOr<T>, MonadOr<TResult>> Lift<T, TResult>(
+        public static Func<MonadZero<T>, MonadZero<TResult>> Lift<T, TResult>(
             Func<T, TResult> fun)
             /* T4: C# indent */
         {
-            Warrant.NotNull<Func<MonadOr<T>, MonadOr<TResult>>>();
+            Warrant.NotNull<Func<MonadZero<T>, MonadZero<TResult>>>();
 
             return m =>
             {
@@ -136,17 +137,17 @@ namespace Narvalo.Fx.Samples
         }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="MonadOr{T}" /> values, scanning the
+        /// Promotes a function to use and return <see cref="MonadZero{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
         /// <remarks>
         /// Named <c>liftM2</c> in Haskell parlance.
         /// </remarks>
-        public static Func<MonadOr<T1>, MonadOr<T2>, MonadOr<TResult>>
+        public static Func<MonadZero<T1>, MonadZero<T2>, MonadZero<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
             /* T4: C# indent */
         {
-            Warrant.NotNull<Func<MonadOr<T1>, MonadOr<T2>, MonadOr<TResult>>>();
+            Warrant.NotNull<Func<MonadZero<T1>, MonadZero<T2>, MonadZero<TResult>>>();
 
             return (m1, m2) =>
             {
@@ -156,17 +157,17 @@ namespace Narvalo.Fx.Samples
         }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="MonadOr{T}" /> values, scanning the
+        /// Promotes a function to use and return <see cref="MonadZero{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
         /// <remarks>
         /// Named <c>liftM3</c> in Haskell parlance.
         /// </remarks>
-        public static Func<MonadOr<T1>, MonadOr<T2>, MonadOr<T3>, MonadOr<TResult>>
+        public static Func<MonadZero<T1>, MonadZero<T2>, MonadZero<T3>, MonadZero<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
             /* T4: C# indent */
         {
-            Warrant.NotNull<Func<MonadOr<T1>, MonadOr<T2>, MonadOr<T3>, MonadOr<TResult>>>();
+            Warrant.NotNull<Func<MonadZero<T1>, MonadZero<T2>, MonadZero<T3>, MonadZero<TResult>>>();
 
             return (m1, m2, m3) =>
             {
@@ -176,18 +177,18 @@ namespace Narvalo.Fx.Samples
         }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="MonadOr{T}" /> values, scanning the
+        /// Promotes a function to use and return <see cref="MonadZero{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
         /// <remarks>
         /// Named <c>liftM4</c> in Haskell parlance.
         /// </remarks>
-        public static Func<MonadOr<T1>, MonadOr<T2>, MonadOr<T3>, MonadOr<T4>, MonadOr<TResult>>
+        public static Func<MonadZero<T1>, MonadZero<T2>, MonadZero<T3>, MonadZero<T4>, MonadZero<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> fun)
             /* T4: C# indent */
         {
-            Warrant.NotNull<Func<MonadOr<T1>, MonadOr<T2>, MonadOr<T3>, MonadOr<T4>, MonadOr<TResult>>>();
+            Warrant.NotNull<Func<MonadZero<T1>, MonadZero<T2>, MonadZero<T3>, MonadZero<T4>, MonadZero<TResult>>>();
 
             return (m1, m2, m3, m4) =>
             {
@@ -197,18 +198,18 @@ namespace Narvalo.Fx.Samples
         }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="MonadOr{T}" /> values, scanning the
+        /// Promotes a function to use and return <see cref="MonadZero{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
         /// <remarks>
         /// Named <c>liftM5</c> in Haskell parlance.
         /// </remarks>
-        public static Func<MonadOr<T1>, MonadOr<T2>, MonadOr<T3>, MonadOr<T4>, MonadOr<T5>, MonadOr<TResult>>
+        public static Func<MonadZero<T1>, MonadZero<T2>, MonadZero<T3>, MonadZero<T4>, MonadZero<T5>, MonadZero<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> fun)
             /* T4: C# indent */
         {
-            Warrant.NotNull<Func<MonadOr<T1>, MonadOr<T2>, MonadOr<T3>, MonadOr<T4>, MonadOr<T5>, MonadOr<TResult>>>();
+            Warrant.NotNull<Func<MonadZero<T1>, MonadZero<T2>, MonadZero<T3>, MonadZero<T4>, MonadZero<T5>, MonadZero<TResult>>>();
 
             return (m1, m2, m3, m4, m5) =>
             {
@@ -218,38 +219,38 @@ namespace Narvalo.Fx.Samples
         }
 
         #endregion
-    } // End of MonadOr - T4: EmitMonadCore().
+    } // End of MonadZero - T4: EmitMonadCore().
 
-    // Provides the core monadic extension methods for MonadOr<T>.
-    public static partial class MonadOr
+    // Provides the core monadic extension methods for MonadZero<T>.
+    public static partial class MonadZero
     {
         #region Basic Monad functions (Prelude)
 
         /// <remarks>
         /// Named <c>fmap</c> in Haskell parlance.
         /// </remarks>
-        public static MonadOr<TResult> Select<TSource, TResult>(
-            this MonadOr<TSource> @this,
+        public static MonadZero<TResult> Select<TSource, TResult>(
+            this MonadZero<TSource> @this,
             Func<TSource, TResult> selector)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));
-            Warrant.NotNull<MonadOr<TResult>>();
+            Warrant.NotNull<MonadZero<TResult>>();
 
-            return @this.Bind(_ => MonadOr.Return(selector.Invoke(_)));
+            return @this.Bind(_ => MonadZero.Return(selector.Invoke(_)));
         }
 
         /// <remarks>
         /// Named <c>&gt;&gt;</c> in Haskell parlance.
         /// </remarks>
-        public static MonadOr<TResult> Then<TSource, TResult>(
-            this MonadOr<TSource> @this,
-            MonadOr<TResult> other)
+        public static MonadZero<TResult> Then<TSource, TResult>(
+            this MonadZero<TSource> @this,
+            MonadZero<TResult> other)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
-            Warrant.NotNull<MonadOr<TResult>>();
+            Warrant.NotNull<MonadZero<TResult>>();
 
             return @this.Bind(_ => other);
         }
@@ -257,14 +258,14 @@ namespace Narvalo.Fx.Samples
         /// <remarks>
         /// Named <c>forever</c> in Haskell parlance.
         /// </remarks>
-        public static MonadOr<TResult> Forever<TSource, TResult>(
-            this MonadOr<TSource> @this,
-            Func<MonadOr<TResult>> fun
+        public static MonadZero<TResult> Forever<TSource, TResult>(
+            this MonadZero<TSource> @this,
+            Func<MonadZero<TResult>> fun
             )
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
-            Warrant.NotNull<MonadOr<TResult>>();
+            Warrant.NotNull<MonadZero<TResult>>();
 
             // http://stackoverflow.com/questions/24042977/how-does-forever-monad-work
 
@@ -274,13 +275,13 @@ namespace Narvalo.Fx.Samples
         /// <remarks>
         /// Named <c>void</c> in Haskell parlance.
         /// </remarks>
-        public static MonadOr<global::Narvalo.Fx.Unit> Forget<TSource>(this MonadOr<TSource> @this)
+        public static MonadZero<global::Narvalo.Fx.Unit> Forget<TSource>(this MonadZero<TSource> @this)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
-            Warrant.NotNull<MonadOr<global::Narvalo.Fx.Unit>>();
+            Warrant.NotNull<MonadZero<global::Narvalo.Fx.Unit>>();
 
-            return MonadOr.Unit;
+            return MonadZero.Unit;
         }
 
         #endregion
@@ -291,30 +292,30 @@ namespace Narvalo.Fx.Samples
         /// <remarks>
         /// Named <c>mfilter</c> in Haskell parlance.
         /// </remarks>
-        public static MonadOr<TSource> Where<TSource>(
-            this MonadOr<TSource> @this,
+        public static MonadZero<TSource> Where<TSource>(
+            this MonadZero<TSource> @this,
             Func<TSource, bool> predicate)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
-            Warrant.NotNull<MonadOr<TSource>>();
+            Warrant.NotNull<MonadZero<TSource>>();
 
             return @this.Bind(
-                _ => predicate.Invoke(_) ? @this : MonadOr<TSource>.None);
+                _ => predicate.Invoke(_) ? @this : MonadZero<TSource>.Zero);
         }
 
 
         /// <remarks>
         /// Named <c>replicateM</c> in Haskell parlance.
         /// </remarks>
-        public static MonadOr<IEnumerable<TSource>> Repeat<TSource>(
-            this MonadOr<TSource> @this,
+        public static MonadZero<IEnumerable<TSource>> Repeat<TSource>(
+            this MonadZero<TSource> @this,
             int count)
         {
             Require.NotNull(@this, nameof(@this));
             Require.Range(count >= 1, nameof(count));
-            Warrant.NotNull<MonadOr<IEnumerable<TSource>>>();
+            Warrant.NotNull<MonadZero<IEnumerable<TSource>>>();
 
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }
@@ -325,54 +326,54 @@ namespace Narvalo.Fx.Samples
         #region Monadic lifting operators (Prelude)
 
         /// <see cref="Lift{T1, T2, T3}" />
-        public static MonadOr<TResult> Zip<TFirst, TSecond, TResult>(
-            this MonadOr<TFirst> @this,
-            MonadOr<TSecond> second,
+        public static MonadZero<TResult> Zip<TFirst, TSecond, TResult>(
+            this MonadZero<TFirst> @this,
+            MonadZero<TSecond> second,
             Func<TFirst, TSecond, TResult> resultSelector)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(second, nameof(second));
             Require.NotNull(resultSelector, nameof(resultSelector));
-            Warrant.NotNull<MonadOr<TResult>>();
+            Warrant.NotNull<MonadZero<TResult>>();
 
             return @this.Bind(v1 => second.Select(v2 => resultSelector.Invoke(v1, v2)));
         }
 
         /// <see cref="Lift{T1, T2, T3, T4}" />
-        public static MonadOr<TResult> Zip<T1, T2, T3, TResult>(
-            this MonadOr<T1> @this,
-            MonadOr<T2> second,
-            MonadOr<T3> third,
+        public static MonadZero<TResult> Zip<T1, T2, T3, TResult>(
+            this MonadZero<T1> @this,
+            MonadZero<T2> second,
+            MonadZero<T3> third,
             Func<T1, T2, T3, TResult> resultSelector)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(second, nameof(second));
             Require.NotNull(resultSelector, nameof(resultSelector));
-            Warrant.NotNull<MonadOr<TResult>>();
+            Warrant.NotNull<MonadZero<TResult>>();
 
-            Func<T1, MonadOr<TResult>> g
+            Func<T1, MonadZero<TResult>> g
                 = t1 => second.Zip(third, (t2, t3) => resultSelector.Invoke(t1, t2, t3));
 
             return @this.Bind(g);
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5}" />
-        public static MonadOr<TResult> Zip<T1, T2, T3, T4, TResult>(
-             this MonadOr<T1> @this,
-             MonadOr<T2> second,
-             MonadOr<T3> third,
-             MonadOr<T4> fourth,
+        public static MonadZero<TResult> Zip<T1, T2, T3, T4, TResult>(
+             this MonadZero<T1> @this,
+             MonadZero<T2> second,
+             MonadZero<T3> third,
+             MonadZero<T4> fourth,
              Func<T1, T2, T3, T4, TResult> resultSelector)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(second, nameof(second));
             Require.NotNull(resultSelector, nameof(resultSelector));
-            Warrant.NotNull<MonadOr<TResult>>();
+            Warrant.NotNull<MonadZero<TResult>>();
 
-            Func<T1, MonadOr<TResult>> g
+            Func<T1, MonadZero<TResult>> g
                 = t1 => second.Zip(
                     third,
                     fourth,
@@ -382,21 +383,21 @@ namespace Narvalo.Fx.Samples
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5, T6}" />
-        public static MonadOr<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
-            this MonadOr<T1> @this,
-            MonadOr<T2> second,
-            MonadOr<T3> third,
-            MonadOr<T4> fourth,
-            MonadOr<T5> fifth,
+        public static MonadZero<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
+            this MonadZero<T1> @this,
+            MonadZero<T2> second,
+            MonadZero<T3> third,
+            MonadZero<T4> fourth,
+            MonadZero<T5> fifth,
             Func<T1, T2, T3, T4, T5, TResult> resultSelector)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(second, nameof(second));
             Require.NotNull(resultSelector, nameof(resultSelector));
-            Warrant.NotNull<MonadOr<TResult>>();
+            Warrant.NotNull<MonadZero<TResult>>();
 
-            Func<T1, MonadOr<TResult>> g
+            Func<T1, MonadZero<TResult>> g
                 = t1 => second.Zip(
                     third,
                     fourth,
@@ -414,16 +415,16 @@ namespace Narvalo.Fx.Samples
         /// <remarks>
         /// Kind of generalisation of Zip (liftM2).
         /// </remarks>
-        public static MonadOr<TResult> SelectMany<TSource, TMiddle, TResult>(
-            this MonadOr<TSource> @this,
-            Func<TSource, MonadOr<TMiddle>> valueSelectorM,
+        public static MonadZero<TResult> SelectMany<TSource, TMiddle, TResult>(
+            this MonadZero<TSource> @this,
+            Func<TSource, MonadZero<TMiddle>> valueSelectorM,
             Func<TSource, TMiddle, TResult> resultSelector)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(valueSelectorM, nameof(valueSelectorM));
             Require.NotNull(resultSelector, nameof(resultSelector));
-            Warrant.NotNull<MonadOr<TResult>>();
+            Warrant.NotNull<MonadZero<TResult>>();
 
             return @this.Bind(
                 _ => valueSelectorM.Invoke(_).Select(
@@ -431,9 +432,9 @@ namespace Narvalo.Fx.Samples
         }
 
 
-        public static MonadOr<TResult> Join<TSource, TInner, TKey, TResult>(
-            this MonadOr<TSource> @this,
-            MonadOr<TInner> inner,
+        public static MonadZero<TResult> Join<TSource, TInner, TKey, TResult>(
+            this MonadZero<TSource> @this,
+            MonadZero<TInner> inner,
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, TInner, TResult> resultSelector)
@@ -444,7 +445,7 @@ namespace Narvalo.Fx.Samples
             Expect.NotNull(outerKeySelector);
             Expect.NotNull(innerKeySelector);
             Expect.NotNull(resultSelector);
-            Warrant.NotNull<MonadOr<TResult>>();
+            Warrant.NotNull<MonadZero<TResult>>();
 
             return @this.Join(
                 inner,
@@ -454,12 +455,12 @@ namespace Narvalo.Fx.Samples
                 EqualityComparer<TKey>.Default);
         }
 
-        public static MonadOr<TResult> GroupJoin<TSource, TInner, TKey, TResult>(
-            this MonadOr<TSource> @this,
-            MonadOr<TInner> inner,
+        public static MonadZero<TResult> GroupJoin<TSource, TInner, TKey, TResult>(
+            this MonadZero<TSource> @this,
+            MonadZero<TInner> inner,
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
-            Func<TSource, MonadOr<TInner>, TResult> resultSelector)
+            Func<TSource, MonadZero<TInner>, TResult> resultSelector)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
@@ -467,7 +468,7 @@ namespace Narvalo.Fx.Samples
             Expect.NotNull(outerKeySelector);
             Expect.NotNull(innerKeySelector);
             Expect.NotNull(resultSelector);
-            Warrant.NotNull<MonadOr<TResult>>();
+            Warrant.NotNull<MonadZero<TResult>>();
 
             return @this.GroupJoin(
                 inner,
@@ -483,9 +484,9 @@ namespace Narvalo.Fx.Samples
         #region LINQ extensions
 
 
-        public static MonadOr<TResult> Join<TSource, TInner, TKey, TResult>(
-            this MonadOr<TSource> @this,
-            MonadOr<TInner> inner,
+        public static MonadZero<TResult> Join<TSource, TInner, TKey, TResult>(
+            this MonadZero<TSource> @this,
+            MonadZero<TInner> inner,
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, TInner, TResult> resultSelector,
@@ -497,7 +498,7 @@ namespace Narvalo.Fx.Samples
             Expect.NotNull(outerKeySelector);
             Expect.NotNull(innerKeySelector);
             Expect.NotNull(resultSelector);
-            Warrant.NotNull<MonadOr<TResult>>();
+            Warrant.NotNull<MonadZero<TResult>>();
 
             return JoinCore(
                 @this,
@@ -508,12 +509,12 @@ namespace Narvalo.Fx.Samples
                 comparer ?? EqualityComparer<TKey>.Default);
         }
 
-        public static MonadOr<TResult> GroupJoin<TSource, TInner, TKey, TResult>(
-            this MonadOr<TSource> @this,
-            MonadOr<TInner> inner,
+        public static MonadZero<TResult> GroupJoin<TSource, TInner, TKey, TResult>(
+            this MonadZero<TSource> @this,
+            MonadZero<TInner> inner,
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
-            Func<TSource, MonadOr<TInner>, TResult> resultSelector,
+            Func<TSource, MonadZero<TInner>, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
             /* T4: C# indent */
         {
@@ -522,7 +523,7 @@ namespace Narvalo.Fx.Samples
             Expect.NotNull(outerKeySelector);
             Expect.NotNull(innerKeySelector);
             Expect.NotNull(resultSelector);
-            Warrant.NotNull<MonadOr<TResult>>();
+            Warrant.NotNull<MonadZero<TResult>>();
 
             return GroupJoinCore(
                 @this,
@@ -534,9 +535,9 @@ namespace Narvalo.Fx.Samples
         }
 
 
-        private static MonadOr<TResult> JoinCore<TSource, TInner, TKey, TResult>(
-            MonadOr<TSource> seq,
-            MonadOr<TInner> inner,
+        private static MonadZero<TResult> JoinCore<TSource, TInner, TKey, TResult>(
+            MonadZero<TSource> seq,
+            MonadZero<TInner> inner,
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, TInner, TResult> resultSelector,
@@ -549,7 +550,7 @@ namespace Narvalo.Fx.Samples
             Demand.NotNull(outerKeySelector);
             Demand.NotNull(innerKeySelector);
             Demand.NotNull(comparer);
-            Warrant.NotNull<MonadOr<TResult>>();
+            Warrant.NotNull<MonadZero<TResult>>();
 
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
@@ -558,12 +559,12 @@ namespace Narvalo.Fx.Samples
                    select resultSelector.Invoke(outerValue, innerValue);
         }
 
-        private static MonadOr<TResult> GroupJoinCore<TSource, TInner, TKey, TResult>(
-            MonadOr<TSource> seq,
-            MonadOr<TInner> inner,
+        private static MonadZero<TResult> GroupJoinCore<TSource, TInner, TKey, TResult>(
+            MonadZero<TSource> seq,
+            MonadZero<TInner> inner,
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
-            Func<TSource, MonadOr<TInner>, TResult> resultSelector,
+            Func<TSource, MonadZero<TInner>, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
             /* T4: C# indent */
         {
@@ -573,7 +574,7 @@ namespace Narvalo.Fx.Samples
             Demand.NotNull(outerKeySelector);
             Demand.NotNull(innerKeySelector);
             Demand.NotNull(comparer);
-            Warrant.NotNull<MonadOr<TResult>>();
+            Warrant.NotNull<MonadZero<TResult>>();
 
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
@@ -581,8 +582,8 @@ namespace Narvalo.Fx.Samples
                    select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).Then(inner));
         }
 
-        private static Func<TSource, MonadOr<TKey>> GetKeyLookup<TSource, TInner, TKey>(
-            MonadOr<TInner> inner,
+        private static Func<TSource, MonadZero<TKey>> GetKeyLookup<TSource, TInner, TKey>(
+            MonadZero<TInner> inner,
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             IEqualityComparer<TKey> comparer)
@@ -592,7 +593,7 @@ namespace Narvalo.Fx.Samples
             Require.NotNull(outerKeySelector, nameof(outerKeySelector));
             Require.NotNull(comparer, nameof(comparer));
             Demand.NotNull(innerKeySelector);
-            Warrant.NotNull<Func<TSource, MonadOr<TKey>>>();
+            Warrant.NotNull<Func<TSource, MonadZero<TKey>>>();
 
             return source =>
             {
@@ -604,124 +605,124 @@ namespace Narvalo.Fx.Samples
 
 
         #endregion
-    } // End of MonadOr - T4: EmitMonadExtensions().
+    } // End of MonadZero - T4: EmitMonadExtensions().
 
-    // Provides non-standard extension methods for MonadOr<T>.
-    public static partial class MonadOr
+    // Provides non-standard extension methods for MonadZero<T>.
+    public static partial class MonadZero
     {
-        public static MonadOr<TResult> Coalesce<TSource, TResult>(
-            this MonadOr<TSource> @this,
+        public static MonadZero<TResult> Coalesce<TSource, TResult>(
+            this MonadZero<TSource> @this,
             Func<TSource, bool> predicate,
-            MonadOr<TResult> then,
-            MonadOr<TResult> otherwise)
+            MonadZero<TResult> then,
+            MonadZero<TResult> otherwise)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
-            Warrant.NotNull<MonadOr<TResult>>();
+            Warrant.NotNull<MonadZero<TResult>>();
 
             return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
         }
 
 
-        public static MonadOr<TResult> Then<TSource, TResult>(
-            this MonadOr<TSource> @this,
+        public static MonadZero<TResult> Then<TSource, TResult>(
+            this MonadZero<TSource> @this,
             Func<TSource, bool> predicate,
-            MonadOr<TResult> other)
+            MonadZero<TResult> other)
             /* T4: C# indent */
         {
             Expect.NotNull(@this);
             Expect.NotNull(predicate);
-            Warrant.NotNull<MonadOr<TResult>>();
+            Warrant.NotNull<MonadZero<TResult>>();
 
-            return @this.Coalesce(predicate, other, MonadOr<TResult>.None);
+            return @this.Coalesce(predicate, other, MonadZero<TResult>.Zero);
         }
 
-        public static MonadOr<TResult> Otherwise<TSource, TResult>(
-            this MonadOr<TSource> @this,
+        public static MonadZero<TResult> Otherwise<TSource, TResult>(
+            this MonadZero<TSource> @this,
             Func<TSource, bool> predicate,
-            MonadOr<TResult> other)
+            MonadZero<TResult> other)
             /* T4: C# indent */
         {
             Expect.NotNull(@this);
             Expect.NotNull(predicate);
-            Warrant.NotNull<MonadOr<TResult>>();
+            Warrant.NotNull<MonadZero<TResult>>();
 
-            return @this.Coalesce(predicate, MonadOr<TResult>.None, other);
+            return @this.Coalesce(predicate, MonadZero<TResult>.Zero, other);
         }
 
 
-        public static MonadOr<TSource> When<TSource>(
-            this MonadOr<TSource> @this,
+        public static MonadZero<TSource> When<TSource>(
+            this MonadZero<TSource> @this,
             bool predicate,
             Action action)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(action, nameof(action));
-            Warrant.NotNull<MonadOr<TSource>>();
+            Warrant.NotNull<MonadZero<TSource>>();
 
             if (predicate) { action.Invoke(); }
 
             return @this;
         }
 
-        public static MonadOr<TSource> Unless<TSource>(
-            this MonadOr<TSource> @this,
+        public static MonadZero<TSource> Unless<TSource>(
+            this MonadZero<TSource> @this,
             bool predicate,
             Action action)
             /* T4: C# indent */
         {
             Expect.NotNull(@this);
             Expect.NotNull(action);
-            Warrant.NotNull<MonadOr<TSource>>();
+            Warrant.NotNull<MonadZero<TSource>>();
 
             return @this.When(!predicate, action);
         }
 
-        public static MonadOr<TSource> Invoke<TSource>(
-            this MonadOr<TSource> @this,
+        public static MonadZero<TSource> Invoke<TSource>(
+            this MonadZero<TSource> @this,
             Action<TSource> action)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(action, nameof(action));
-            Warrant.NotNull<MonadOr<TSource>>();
+            Warrant.NotNull<MonadZero<TSource>>();
 
             return @this.Bind(_ => { action.Invoke(_); return @this; });
         }
 
 
-        public static MonadOr<TSource> OnNone<TSource>(
-            this MonadOr<TSource> @this,
+        public static MonadZero<TSource> OnZero<TSource>(
+            this MonadZero<TSource> @this,
             Action action)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(action, nameof(action));
-            Warrant.NotNull<MonadOr<TSource>>();
+            Warrant.NotNull<MonadZero<TSource>>();
 
             // FIXME: It does nothing!
-            //@this.PlusName(MonadOr.Unit).Invoke(_ => action.Invoke());
+            //@this.PlusName(MonadZero.Unit).Invoke(_ => action.Invoke());
 
             return @this;
         }
 
-        public static MonadOr<TSource> Invoke<TSource>(
-            this MonadOr<TSource> @this,
+        public static MonadZero<TSource> Invoke<TSource>(
+            this MonadZero<TSource> @this,
             Action<TSource> action,
-            Action caseNone)
+            Action caseZero)
             /* T4: C# indent */
         {
             Expect.NotNull(@this);
             Require.NotNull(action, nameof(action));
-            Require.NotNull(caseNone, nameof(caseNone));
-            Warrant.NotNull<MonadOr<TSource>>();
+            Require.NotNull(caseZero, nameof(caseZero));
+            Warrant.NotNull<MonadZero<TSource>>();
 
-            return @this.Invoke(action).OnNone(caseNone);
+            return @this.Invoke(action).OnZero(caseZero);
         }
 
-    } // End of MonadOr - T4: EmitMonadExtraExtensions().
+    } // End of MonadZero - T4: EmitMonadExtraExtensions().
 
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class FuncExtensions
@@ -732,13 +733,13 @@ namespace Narvalo.Fx.Samples
         /// <remarks>
         /// Named <c>mapM</c> in Haskell parlance. Same as <c>forM</c> with its arguments flipped.
         /// </remarks>
-        public static MonadOr<IEnumerable<TResult>> Map<TSource, TResult>(
-            this Func<TSource, MonadOr<TResult>> @this,
+        public static MonadZero<IEnumerable<TResult>> Map<TSource, TResult>(
+            this Func<TSource, MonadZero<TResult>> @this,
             IEnumerable<TSource> seq)
         {
             Expect.NotNull(@this);
             Expect.NotNull(seq);
-            Warrant.NotNull<MonadOr<IEnumerable<TResult>>>();
+            Warrant.NotNull<MonadZero<IEnumerable<TResult>>>();
 
             return seq.ForEachCore(@this);
         }
@@ -747,14 +748,14 @@ namespace Narvalo.Fx.Samples
         /// <remarks>
         /// Named <c>=&lt;&lt;</c> in Haskell parlance.
         /// </remarks>
-        public static MonadOr<TResult> Invoke<TSource, TResult>(
-            this Func<TSource, MonadOr<TResult>> @this,
-            MonadOr<TSource> value)
+        public static MonadZero<TResult> Invoke<TSource, TResult>(
+            this Func<TSource, MonadZero<TResult>> @this,
+            MonadZero<TSource> value)
             /* T4: C# indent */
         {
             Expect.NotNull(@this);
             Require.NotNull(value, nameof(value));
-            Warrant.NotNull<MonadOr<TResult>>();
+            Warrant.NotNull<MonadZero<TResult>>();
 
             return value.Bind(@this);
         }
@@ -762,14 +763,14 @@ namespace Narvalo.Fx.Samples
         /// <remarks>
         /// Named <c>&gt;=&gt;</c> in Haskell parlance.
         /// </remarks>
-        public static Func<TSource, MonadOr<TResult>> Compose<TSource, TMiddle, TResult>(
-            this Func<TSource, MonadOr<TMiddle>> @this,
-            Func<TMiddle, MonadOr<TResult>> funM)
+        public static Func<TSource, MonadZero<TResult>> Compose<TSource, TMiddle, TResult>(
+            this Func<TSource, MonadZero<TMiddle>> @this,
+            Func<TMiddle, MonadZero<TResult>> funM)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
             Expect.NotNull(funM);
-            Warrant.NotNull<Func<TSource, MonadOr<TResult>>>();
+            Warrant.NotNull<Func<TSource, MonadZero<TResult>>>();
 
             return _ => @this.Invoke(_).Bind(funM);
         }
@@ -777,14 +778,14 @@ namespace Narvalo.Fx.Samples
         /// <remarks>
         /// Named <c>&lt;=&lt;</c> in Haskell parlance.
         /// </remarks>
-        public static Func<TSource, MonadOr<TResult>> ComposeBack<TSource, TMiddle, TResult>(
-            this Func<TMiddle, MonadOr<TResult>> @this,
-            Func<TSource, MonadOr<TMiddle>> funM)
+        public static Func<TSource, MonadZero<TResult>> ComposeBack<TSource, TMiddle, TResult>(
+            this Func<TMiddle, MonadZero<TResult>> @this,
+            Func<TSource, MonadZero<TMiddle>> funM)
             /* T4: C# indent */
         {
             Expect.NotNull(@this);
             Require.NotNull(funM, nameof(funM));
-            Warrant.NotNull<Func<TSource, MonadOr<TResult>>>();
+            Warrant.NotNull<Func<TSource, MonadZero<TResult>>>();
 
             return _ => funM.Invoke(_).Bind(@this);
         }
@@ -793,13 +794,13 @@ namespace Narvalo.Fx.Samples
     } // End of FuncExtensions - T4: EmitKleisliExtensions().
 }
 
-namespace Narvalo.Fx.Samples
+namespace Monads
 {
     using System.Collections.Generic;
 
-    using Narvalo.Fx.Samples.Internal;
+    using Monads.Internal;
 
-    // Provides extension methods for IEnumerable<T> where T is a MonadOr<S>.
+    // Provides extension methods for IEnumerable<T> where T is a MonadZero<S>.
     public static partial class EnumerableExtensions
     {
         #region Basic Monad functions (Prelude)
@@ -808,11 +809,11 @@ namespace Narvalo.Fx.Samples
         /// <remarks>
         /// Named <c>sequence</c> in Haskell parlance.
         /// </remarks>
-        public static MonadOr<IEnumerable<TSource>> Collect<TSource>(
-            this IEnumerable<MonadOr<TSource>> @this)
+        public static MonadZero<IEnumerable<TSource>> Collect<TSource>(
+            this IEnumerable<MonadZero<TSource>> @this)
         {
             Expect.NotNull(@this);
-            Warrant.NotNull<MonadOr<IEnumerable<TSource>>>();
+            Warrant.NotNull<MonadZero<IEnumerable<TSource>>>();
 
             return @this.CollectCore();
         }
@@ -820,34 +821,16 @@ namespace Narvalo.Fx.Samples
 
         #endregion
 
-
-        #region Generalisations of list functions (Prelude)
-
-        /// <remarks>
-        /// Named <c>msum</c> in Haskell parlance.
-        /// </remarks>
-        public static MonadOr<TSource> Sum<TSource>(
-            this IEnumerable<MonadOr<TSource>> @this)
-            /* T4: C# indent */
-        {
-            Expect.NotNull(@this);
-            Warrant.NotNull<MonadOr<TSource>>();
-
-            return @this.SumCore();
-        }
-
-        #endregion
-
     } // End of EnumerableExtensions - T4: EmitMonadEnumerableExtensions().
 }
 
-namespace Narvalo.Fx.Samples.More
+namespace Monads.More
 {
     using System;
     using System.Collections.Generic;
 
-    using Narvalo.Fx.Samples;
-    using Narvalo.Fx.Samples.Internal;
+    using Monads;
+    using Monads.Internal;
 
     // Provides extension methods for IEnumerable<T>.
     public static partial class EnumerableExtensions
@@ -858,13 +841,13 @@ namespace Narvalo.Fx.Samples.More
         /// <remarks>
         /// Named <c>forM</c> in Haskell parlance.
         /// </remarks>
-        public static MonadOr<IEnumerable<TResult>> ForEach<TSource, TResult>(
+        public static MonadZero<IEnumerable<TResult>> ForEach<TSource, TResult>(
             this IEnumerable<TSource> @this,
-            Func<TSource, MonadOr<TResult>> funM)
+            Func<TSource, MonadZero<TResult>> funM)
         {
             Expect.NotNull(@this);
             Expect.NotNull(funM);
-            Warrant.NotNull<MonadOr<IEnumerable<TResult>>>();
+            Warrant.NotNull<MonadZero<IEnumerable<TResult>>>();
 
             return @this.ForEachCore(funM);
         }
@@ -880,7 +863,7 @@ namespace Narvalo.Fx.Samples.More
         /// </remarks>
         public static IEnumerable<TSource> Filter<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, MonadOr<bool>> predicateM)
+            Func<TSource, MonadZero<bool>> predicateM)
             /* T4: C# indent */
         {
             Expect.NotNull(@this);
@@ -894,14 +877,14 @@ namespace Narvalo.Fx.Samples.More
         /// <remarks>
         /// Named <c>mapAndUnzipM</c> in Haskell parlance.
         /// </remarks>
-        public static MonadOr<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
+        public static MonadZero<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
             MapAndUnzip<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
-            Func<TSource, MonadOr<Tuple<TFirst, TSecond>>> funM)
+            Func<TSource, MonadZero<Tuple<TFirst, TSecond>>> funM)
         {
             Expect.NotNull(@this);
             Expect.NotNull(funM);
-            Warrant.NotNull<MonadOr<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>();
+            Warrant.NotNull<MonadZero<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>();
 
             return @this.MapAndUnzipCore(funM);
         }
@@ -909,15 +892,15 @@ namespace Narvalo.Fx.Samples.More
         /// <remarks>
         /// Named <c>zipWithM</c> in Haskell parlance.
         /// </remarks>
-        public static MonadOr<IEnumerable<TResult>> Zip<TFirst, TSecond, TResult>(
+        public static MonadZero<IEnumerable<TResult>> Zip<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
-            Func<TFirst, TSecond, MonadOr<TResult>> resultSelectorM)
+            Func<TFirst, TSecond, MonadZero<TResult>> resultSelectorM)
         {
             Expect.NotNull(@this);
             Expect.NotNull(second);
             Expect.NotNull(resultSelectorM);
-            Warrant.NotNull<MonadOr<IEnumerable<TResult>>>();
+            Warrant.NotNull<MonadZero<IEnumerable<TResult>>>();
 
             return @this.ZipCore(second, resultSelectorM);
         }
@@ -926,15 +909,15 @@ namespace Narvalo.Fx.Samples.More
         /// <remarks>
         /// Named <c>foldM</c> in Haskell parlance.
         /// </remarks>
-        public static MonadOr<TAccumulate> Fold<TSource, TAccumulate>(
+        public static MonadZero<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, MonadOr<TAccumulate>> accumulatorM)
+            Func<TAccumulate, TSource, MonadZero<TAccumulate>> accumulatorM)
             /* T4: C# indent */
         {
             Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
-            Warrant.NotNull<MonadOr<TAccumulate>>();
+            Warrant.NotNull<MonadZero<TAccumulate>>();
 
             return @this.FoldCore(seed, accumulatorM);
         }
@@ -943,39 +926,39 @@ namespace Narvalo.Fx.Samples.More
 
         #region Aggregate Operators
 
-        public static MonadOr<TAccumulate> FoldBack<TSource, TAccumulate>(
+        public static MonadZero<TAccumulate> FoldBack<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, MonadOr<TAccumulate>> accumulatorM)
+            Func<TAccumulate, TSource, MonadZero<TAccumulate>> accumulatorM)
             /* T4: C# indent */
         {
             Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
-            Warrant.NotNull<MonadOr<TAccumulate>>();
+            Warrant.NotNull<MonadZero<TAccumulate>>();
 
             return @this.FoldBackCore(seed, accumulatorM);
         }
 
-        public static MonadOr<TSource> Reduce<TSource>(
+        public static MonadZero<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, MonadOr<TSource>> accumulatorM)
+            Func<TSource, TSource, MonadZero<TSource>> accumulatorM)
             /* T4: C# indent */
         {
             Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
-            Warrant.NotNull<MonadOr<TSource>>();
+            Warrant.NotNull<MonadZero<TSource>>();
 
             return @this.ReduceCore(accumulatorM);
         }
 
-        public static MonadOr<TSource> ReduceBack<TSource>(
+        public static MonadZero<TSource> ReduceBack<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, MonadOr<TSource>> accumulatorM)
+            Func<TSource, TSource, MonadZero<TSource>> accumulatorM)
             /* T4: C# indent */
         {
             Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
-            Warrant.NotNull<MonadOr<TSource>>();
+            Warrant.NotNull<MonadZero<TSource>>();
 
             return @this.ReduceBackCore(accumulatorM);
         }
@@ -987,17 +970,17 @@ namespace Narvalo.Fx.Samples.More
         /// <remarks>
         /// <para>Haskell use a different signature.</para>
         /// </remarks>
-        public static MonadOr<TAccumulate> Fold<TSource, TAccumulate>(
+        public static MonadZero<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, MonadOr<TAccumulate>> accumulatorM,
-            Func<MonadOr<TAccumulate>, bool> predicate)
+            Func<TAccumulate, TSource, MonadZero<TAccumulate>> accumulatorM,
+            Func<MonadZero<TAccumulate>, bool> predicate)
             /* T4: C# indent */
         {
             Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
             Expect.NotNull(predicate);
-            Warrant.NotNull<MonadOr<TAccumulate>>();
+            Warrant.NotNull<MonadZero<TAccumulate>>();
 
             return @this.FoldCore(seed, accumulatorM, predicate);
         }
@@ -1005,16 +988,16 @@ namespace Narvalo.Fx.Samples.More
         /// <remarks>
         /// <para>Haskell use a different signature.</para>
         /// </remarks>
-        public static MonadOr<TSource> Reduce<TSource>(
+        public static MonadZero<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, MonadOr<TSource>> accumulatorM,
-            Func<MonadOr<TSource>, bool> predicate)
+            Func<TSource, TSource, MonadZero<TSource>> accumulatorM,
+            Func<MonadZero<TSource>, bool> predicate)
             /* T4: C# indent */
         {
             Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
             Expect.NotNull(predicate);
-            Warrant.NotNull<MonadOr<TSource>>();
+            Warrant.NotNull<MonadZero<TSource>>();
 
             return @this.ReduceCore(accumulatorM, predicate);
         }
@@ -1023,27 +1006,26 @@ namespace Narvalo.Fx.Samples.More
     } // End of EnumerableExtensions - T4: EmitEnumerableExtensions().
 }
 
-namespace Narvalo.Fx.Samples.Internal
+namespace Monads.Internal
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
-    // WARNING: The extension method EmptyIfNull() MUST be available.
-    using Narvalo.Fx.Samples.More;
+    using Monads.More;
 
-    // Provides the core extension methods for IEnumerable<T> where T is a MonadOr<S>.
+    // Provides the core extension methods for IEnumerable<T> where T is a MonadZero<S>.
     internal static partial class EnumerableExtensions
     {
 
-        internal static MonadOr<IEnumerable<TSource>> CollectCore<TSource>(
-            this IEnumerable<MonadOr<TSource>> @this)
+        internal static MonadZero<IEnumerable<TSource>> CollectCore<TSource>(
+            this IEnumerable<MonadZero<TSource>> @this)
         {
             Demand.NotNull(@this);
-            Warrant.NotNull<MonadOr<IEnumerable<TSource>>>();
+            Warrant.NotNull<MonadZero<IEnumerable<TSource>>>();
 
-            var seed = MonadOr.Return(Enumerable.Empty<TSource>());
-            Func<MonadOr<IEnumerable<TSource>>, MonadOr<TSource>, MonadOr<IEnumerable<TSource>>> fun
+            var seed = MonadZero.Return(Enumerable.Empty<TSource>());
+            Func<MonadZero<IEnumerable<TSource>>, MonadZero<TSource>, MonadZero<IEnumerable<TSource>>> fun
                 = (m, n) => m.Bind(list => CollectCore(n, list));
 
             var retval = @this.Aggregate(seed, fun);
@@ -1053,26 +1035,13 @@ namespace Narvalo.Fx.Samples.Internal
         }
 
         // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
-        private static MonadOr<IEnumerable<TSource>> CollectCore<TSource>(
-            MonadOr<TSource> m,
+        private static MonadZero<IEnumerable<TSource>> CollectCore<TSource>(
+            MonadZero<TSource> m,
             IEnumerable<TSource> list)
         {
             Demand.NotNull(m);
 
-            return m.Bind(item => MonadOr.Return(list.Concat(Enumerable.Repeat(item, 1))));
-        }
-
-        internal static MonadOr<TSource> SumCore<TSource>(
-            this IEnumerable<MonadOr<TSource>> @this)
-            /* T4: C# indent */
-        {
-            Demand.NotNull(@this);
-            Warrant.NotNull<MonadOr<TSource>>();
-
-            var retval = @this.Aggregate(MonadOr<TSource>.None, (m, n) => m.OrElse(n));
-            System.Diagnostics.Contracts.Contract.Assume(retval != null);
-
-            return retval;
+            return m.Bind(item => MonadZero.Return(list.Concat(Enumerable.Repeat(item, 1))));
         }
 
     } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
@@ -1081,20 +1050,20 @@ namespace Narvalo.Fx.Samples.Internal
     internal static partial class EnumerableExtensions
     {
 
-        internal static MonadOr<IEnumerable<TResult>> ForEachCore<TSource, TResult>(
+        internal static MonadZero<IEnumerable<TResult>> ForEachCore<TSource, TResult>(
             this IEnumerable<TSource> @this,
-            Func<TSource, MonadOr<TResult>> funM)
+            Func<TSource, MonadZero<TResult>> funM)
         {
             Demand.NotNull(@this);
             Demand.NotNull(funM);
-            Warrant.NotNull<MonadOr<IEnumerable<TResult>>>();
+            Warrant.NotNull<MonadZero<IEnumerable<TResult>>>();
 
             return @this.Select(funM).EmptyIfNull().Collect();
         }
 
         internal static IEnumerable<TSource> FilterCore<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, MonadOr<bool>> predicateM)
+            Func<TSource, MonadZero<bool>> predicateM)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
@@ -1124,14 +1093,14 @@ namespace Narvalo.Fx.Samples.Internal
             return list;
         }
 
-        internal static MonadOr<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
+        internal static MonadZero<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
             MapAndUnzipCore<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
-            Func<TSource, MonadOr<Tuple<TFirst, TSecond>>> funM)
+            Func<TSource, MonadZero<Tuple<TFirst, TSecond>>> funM)
         {
             Demand.NotNull(@this);
             Demand.NotNull(funM);
-            Warrant.NotNull<MonadOr<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>();
+            Warrant.NotNull<MonadZero<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>();
 
             var m = @this.Select(funM).EmptyIfNull().Collect();
 
@@ -1145,18 +1114,18 @@ namespace Narvalo.Fx.Samples.Internal
                 });
         }
 
-        internal static MonadOr<IEnumerable<TResult>> ZipCore<TFirst, TSecond, TResult>(
+        internal static MonadZero<IEnumerable<TResult>> ZipCore<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
-            Func<TFirst, TSecond, MonadOr<TResult>> resultSelectorM)
+            Func<TFirst, TSecond, MonadZero<TResult>> resultSelectorM)
         {
             Require.NotNull(resultSelectorM, nameof(resultSelectorM));
 
             Demand.NotNull(@this);
             Demand.NotNull(second);
-            Warrant.NotNull<MonadOr<IEnumerable<TResult>>>();
+            Warrant.NotNull<MonadZero<IEnumerable<TResult>>>();
 
-            Func<TFirst, TSecond, MonadOr<TResult>> resultSelector
+            Func<TFirst, TSecond, MonadZero<TResult>> resultSelector
                 = (v1, v2) => resultSelectorM.Invoke(v1, v2);
 
             // WARNING: Do not remove "resultSelector", otherwise .NET will make a recursive call
@@ -1164,17 +1133,17 @@ namespace Narvalo.Fx.Samples.Internal
             return @this.Zip(second, resultSelector: resultSelector).EmptyIfNull().Collect();
         }
 
-        internal static MonadOr<TAccumulate> FoldCore<TSource, TAccumulate>(
+        internal static MonadZero<TAccumulate> FoldCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, MonadOr<TAccumulate>> accumulatorM)
+            Func<TAccumulate, TSource, MonadZero<TAccumulate>> accumulatorM)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulatorM, nameof(accumulatorM));
-            Warrant.NotNull<MonadOr<TAccumulate>>();
+            Warrant.NotNull<MonadZero<TAccumulate>>();
 
-            MonadOr<TAccumulate> retval = MonadOr.Return(seed);
+            MonadZero<TAccumulate> retval = MonadZero.Return(seed);
 
             foreach (TSource item in @this)
             {
@@ -1184,27 +1153,27 @@ namespace Narvalo.Fx.Samples.Internal
             return retval;
         }
 
-        internal static MonadOr<TAccumulate> FoldBackCore<TSource, TAccumulate>(
+        internal static MonadZero<TAccumulate> FoldBackCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, MonadOr<TAccumulate>> accumulatorM)
+            Func<TAccumulate, TSource, MonadZero<TAccumulate>> accumulatorM)
             /* T4: C# indent */
         {
             Demand.NotNull(@this);
             Demand.NotNull(accumulatorM);
-            Warrant.NotNull<MonadOr<TAccumulate>>();
+            Warrant.NotNull<MonadZero<TAccumulate>>();
 
             return @this.Reverse().EmptyIfNull().Fold(seed, accumulatorM);
         }
 
-        internal static MonadOr<TSource> ReduceCore<TSource>(
+        internal static MonadZero<TSource> ReduceCore<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, MonadOr<TSource>> accumulatorM)
+            Func<TSource, TSource, MonadZero<TSource>> accumulatorM)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulatorM, nameof(accumulatorM));
-            Warrant.NotNull<MonadOr<TSource>>();
+            Warrant.NotNull<MonadZero<TSource>>();
 
             using (var iter = @this.GetEnumerator())
             {
@@ -1213,7 +1182,7 @@ namespace Narvalo.Fx.Samples.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                MonadOr<TSource> retval = MonadOr.Return(iter.Current);
+                MonadZero<TSource> retval = MonadZero.Return(iter.Current);
 
                 while (iter.MoveNext())
                 {
@@ -1224,31 +1193,31 @@ namespace Narvalo.Fx.Samples.Internal
             }
         }
 
-        internal static MonadOr<TSource> ReduceBackCore<TSource>(
+        internal static MonadZero<TSource> ReduceBackCore<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, MonadOr<TSource>> accumulatorM)
+            Func<TSource, TSource, MonadZero<TSource>> accumulatorM)
             /* T4: C# indent */
         {
             Demand.NotNull(@this);
             Demand.NotNull(accumulatorM);
-            Warrant.NotNull<MonadOr<TSource>>();
+            Warrant.NotNull<MonadZero<TSource>>();
 
             return @this.Reverse().EmptyIfNull().Reduce(accumulatorM);
         }
 
-        internal static MonadOr<TAccumulate> FoldCore<TSource, TAccumulate>(
+        internal static MonadZero<TAccumulate> FoldCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, MonadOr<TAccumulate>> accumulatorM,
-            Func<MonadOr<TAccumulate>, bool> predicate)
+            Func<TAccumulate, TSource, MonadZero<TAccumulate>> accumulatorM,
+            Func<MonadZero<TAccumulate>, bool> predicate)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulatorM, nameof(accumulatorM));
             Require.NotNull(predicate, nameof(predicate));
-            Warrant.NotNull<MonadOr<TAccumulate>>();
+            Warrant.NotNull<MonadZero<TAccumulate>>();
 
-            MonadOr<TAccumulate> retval = MonadOr.Return(seed);
+            MonadZero<TAccumulate> retval = MonadZero.Return(seed);
 
             using (var iter = @this.GetEnumerator())
             {
@@ -1261,16 +1230,16 @@ namespace Narvalo.Fx.Samples.Internal
             return retval;
         }
 
-        internal static MonadOr<TSource> ReduceCore<TSource>(
+        internal static MonadZero<TSource> ReduceCore<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, MonadOr<TSource>> accumulatorM,
-            Func<MonadOr<TSource>, bool> predicate)
+            Func<TSource, TSource, MonadZero<TSource>> accumulatorM,
+            Func<MonadZero<TSource>, bool> predicate)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulatorM, nameof(accumulatorM));
             Require.NotNull(predicate, nameof(predicate));
-            Warrant.NotNull<MonadOr<TSource>>();
+            Warrant.NotNull<MonadZero<TSource>>();
 
             using (var iter = @this.GetEnumerator())
             {
@@ -1279,7 +1248,7 @@ namespace Narvalo.Fx.Samples.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                MonadOr<TSource> retval = MonadOr.Return(iter.Current);
+                MonadZero<TSource> retval = MonadZero.Return(iter.Current);
 
                 while (predicate.Invoke(retval) && iter.MoveNext())
                 {

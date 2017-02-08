@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <ProjectGuid>{57051DF4-A9BF-47E2-ADF3-9E938AC1F2E3}</ProjectGuid>
+    <RootNamespace>Monads</RootNamespace>
+    <AssemblyName>Monads</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Comonad.g.cs">
+      <DependentUpon>Comonad.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Comonad`1.cs" />
+    <Compile Include="Internal\EnumerableExtensions.cs" />
+    <Compile Include="Monad.g.cs">
+      <DependentUpon>Monad.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="MonadOr.g.cs">
+      <DependentUpon>MonadOr.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="MonadOr`1.cs" />
+    <Compile Include="MonadPlus.g.cs">
+      <DependentUpon>MonadPlus.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="MonadPlus`1.cs" />
+    <Compile Include="MonadValue.g.cs">
+      <DependentUpon>MonadValue.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="MonadValue`1.cs" />
+    <Compile Include="MonadZero.g.cs">
+      <DependentUpon>MonadZero.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="MonadZero`1.cs" />
+    <Compile Include="Monad`1.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Comonad.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Comonad.g.cs</LastGenOutput>
+    </Content>
+    <Content Include="Monad.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Monad.g.cs</LastGenOutput>
+    </Content>
+    <Content Include="MonadOr.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MonadOr.g.cs</LastGenOutput>
+    </Content>
+    <Content Include="MonadPlus.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MonadPlus.g.cs</LastGenOutput>
+    </Content>
+    <Content Include="MonadValue.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MonadValue.g.cs</LastGenOutput>
+    </Content>
+    <Content Include="MonadZero.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MonadZero.g.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Narvalo.Cerbere\Narvalo.Cerbere.csproj">
+      <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
+      <Name>Narvalo.Cerbere</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Narvalo.Fx\Narvalo.Fx.csproj">
+      <Project>{28f6175d-0ee3-4763-8004-662a7de41280}</Project>
+      <Name>Narvalo.Fx</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="..\..\tools\Narvalo.Common.props" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

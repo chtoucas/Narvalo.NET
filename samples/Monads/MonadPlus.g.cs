@@ -10,18 +10,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo.Fx.Samples
+using global::Narvalo;
+using global::Narvalo.Fx;
+
+namespace Monads
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
-    using Narvalo.Fx.Samples.Internal;
+    using Monads.Internal;
 
-    /// <remarks>
-    /// Sometimes we prefer to use extension methods over static methods to be able to override them locally.
-    /// </remarks>
     // Provides a set of static methods for MonadPlus<T>.
+    // NB: Sometimes we prefer extension methods over static methods to be able to override them locally.
     public static partial class MonadPlus
     {
         /// <summary>
@@ -793,11 +794,11 @@ namespace Narvalo.Fx.Samples
     } // End of FuncExtensions - T4: EmitKleisliExtensions().
 }
 
-namespace Narvalo.Fx.Samples
+namespace Monads
 {
     using System.Collections.Generic;
 
-    using Narvalo.Fx.Samples.Internal;
+    using Monads.Internal;
 
     // Provides extension methods for IEnumerable<T> where T is a MonadPlus<S>.
     public static partial class EnumerableExtensions
@@ -841,13 +842,13 @@ namespace Narvalo.Fx.Samples
     } // End of EnumerableExtensions - T4: EmitMonadEnumerableExtensions().
 }
 
-namespace Narvalo.Fx.Samples.More
+namespace Monads.More
 {
     using System;
     using System.Collections.Generic;
 
-    using Narvalo.Fx.Samples;
-    using Narvalo.Fx.Samples.Internal;
+    using Monads;
+    using Monads.Internal;
 
     // Provides extension methods for IEnumerable<T>.
     public static partial class EnumerableExtensions
@@ -1023,14 +1024,13 @@ namespace Narvalo.Fx.Samples.More
     } // End of EnumerableExtensions - T4: EmitEnumerableExtensions().
 }
 
-namespace Narvalo.Fx.Samples.Internal
+namespace Monads.Internal
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
-    // WARNING: The extension method EmptyIfNull() MUST be available.
-    using Narvalo.Fx.Samples.More;
+    using Monads.More;
 
     // Provides the core extension methods for IEnumerable<T> where T is a MonadPlus<S>.
     internal static partial class EnumerableExtensions

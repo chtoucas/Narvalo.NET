@@ -36,6 +36,12 @@ public abstract partial class MonadTemplate : _MonadTemplate
     public void EmitMonad()
     {
 #>
+
+<#+ if (!Namespace.StartsWith("Narvalo.")) { #>
+using global::Narvalo;
+using global::Narvalo.Fx;
+<#+ } #>
+
 namespace <#= Namespace #>
 {
     using System;
@@ -69,6 +75,12 @@ namespace <#= Namespace #>
     public void EmitComonad()
     {
 #>
+
+<#+ if (!Namespace.StartsWith("Narvalo.")) { #>
+using global::Narvalo;
+using global::Narvalo.Fx;
+<#+ } #>
+
 namespace <#= Namespace #>
 {
 <#+ EmitComonadCore(); #>

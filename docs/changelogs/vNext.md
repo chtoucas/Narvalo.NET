@@ -44,7 +44,6 @@ Narvalo.Web               | 0.26.0
 TODO
 ----
 - Remove Narvalo.Core and move from .NET 4.5 to .NET 4.6.1
-- Naming: Extensions / More / Most
 - Sync `Money<TCurrency>`, CurrencyUnit<>`, `MoneyFormatter` for rounding, scale...
 - Complete localization of messages.
 - Ops with double, float?
@@ -71,6 +70,9 @@ TODO
   and [here](http://stackoverflow.com/questions/3032750/structs-interfaces-and-boxing).
 - Pretty sure that we can get rid off all uint and int overloads.
 
+Narvalo.Fx:
+- Naming: Extensions / More / Most
+- Forget -> Ignore
 - MapAndUnzip -> SelectAndUnzip? MapAny -> SelectAny?
 
 Highlights

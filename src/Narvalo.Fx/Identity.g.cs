@@ -10,6 +10,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+
 namespace Narvalo.Fx
 {
     using System;
@@ -501,6 +502,7 @@ namespace Narvalo.Fx
         #endregion
     } // End of FuncExtensions - T4: EmitKleisliExtensions().
 }
+
 
 namespace Narvalo.Fx
 {
