@@ -94,20 +94,6 @@ namespace Monads
 
         #endregion
 
-        #region Conditional execution of monadic expressions (Prelude)
-
-
-        /// <remarks>
-        /// Named <c>guard</c> in Haskell parlance.
-        /// </remarks>
-        public static MonadValue<global::Narvalo.Fx.Unit> Guard(bool predicate)
-        {
-
-            return predicate ? MonadValue.Unit : MonadValue<global::Narvalo.Fx.Unit>.None;
-        }
-
-
-        #endregion
 
         #region Monadic lifting operators (Prelude)
 
@@ -284,7 +270,7 @@ namespace Monads
         /// <remarks>
         /// Named <c>void</c> in Haskell parlance.
         /// </remarks>
-        public static MonadValue<global::Narvalo.Fx.Unit> Forget<TSource>(this MonadValue<TSource> @this)
+        public static MonadValue<global::Narvalo.Fx.Unit> Ignore<TSource>(this MonadValue<TSource> @this)
             where TSource : struct
         {
             /* T4: C# indent */
@@ -659,31 +645,6 @@ namespace Monads
         }
 
 
-        public static MonadValue<TSource> When<TSource>(
-            this MonadValue<TSource> @this,
-            bool predicate,
-            Action action)
-            where TSource : struct
-        {
-            /* T4: C# indent */
-            Require.NotNull(action, nameof(action));
-
-            if (predicate) { action.Invoke(); }
-
-            return @this;
-        }
-
-        public static MonadValue<TSource> Unless<TSource>(
-            this MonadValue<TSource> @this,
-            bool predicate,
-            Action action)
-            where TSource : struct
-        {
-            Expect.NotNull(action);
-
-            return @this.When(!predicate, action);
-        }
-
         public static MonadValue<TSource> Invoke<TSource>(
             this MonadValue<TSource> @this,
             Action<TSource> action)
@@ -693,33 +654,6 @@ namespace Monads
             Require.NotNull(action, nameof(action));
 
             return @this.Bind(_ => { action.Invoke(_); return @this; });
-        }
-
-
-        public static MonadValue<TSource> OnNone<TSource>(
-            this MonadValue<TSource> @this,
-            Action action)
-            where TSource : struct
-        {
-            /* T4: C# indent */
-            Require.NotNull(action, nameof(action));
-
-            // FIXME: It does nothing!
-            //@this.PlusName(MonadValue.Unit).Invoke(_ => action.Invoke());
-
-            return @this;
-        }
-
-        public static MonadValue<TSource> Invoke<TSource>(
-            this MonadValue<TSource> @this,
-            Action<TSource> action,
-            Action caseNone)
-            where TSource : struct
-        {
-            Require.NotNull(action, nameof(action));
-            Require.NotNull(caseNone, nameof(caseNone));
-
-            return @this.Invoke(action).OnNone(caseNone);
         }
 
     } // End of MonadValue - T4: EmitMonadExtraExtensions().

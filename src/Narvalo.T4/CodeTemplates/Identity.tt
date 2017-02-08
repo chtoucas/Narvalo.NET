@@ -12,13 +12,13 @@
 
         protected override void WriteContent()
         {
-            EmitMonad();
+            EmitMonadLight();
             WriteLine();
 
             EmitComonad();
-            WriteLine();
+            //WriteLine();
 
-            EmitLinq();
+            //EmitLinq();
         }
     }
 

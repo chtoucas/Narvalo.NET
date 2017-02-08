@@ -95,6 +95,8 @@ public partial class MonadTemplate
 
         #endregion
 
+<#+ /* DISABLED #>
+
         #region Conditional execution of monadic expressions (Prelude)
 
 <#+ if (HasZero) { #>
@@ -114,6 +116,8 @@ public partial class MonadTemplate
 <#+ } // T4: End of HasZero. #>
 
         #endregion
+
+<#+ End of DISABLED */ #>
 
         #region Monadic lifting operators (Prelude)
 

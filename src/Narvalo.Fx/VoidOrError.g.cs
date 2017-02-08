@@ -45,6 +45,24 @@ namespace Narvalo.Fx
 
 
         /// <summary>
+        /// Gets the zero for <see cref="VoidOrError{T}"/>.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>mzero</c> in Haskell parlance.
+        /// </remarks>
+        /// <value>The zero for <see cref="VoidOrError{T}"/>.</value>
+        public static VoidOrError<global::Narvalo.Fx.Unit> Void
+        {
+            get
+            {
+                Warrant.NotNull<VoidOrError<global::Narvalo.Fx.Unit>>();
+
+                return VoidOrError<global::Narvalo.Fx.Unit>.Void;
+            }
+        }
+
+
+        /// <summary>
         /// Obtains an instance of the <see cref="VoidOrError{T}"/> class for the specified value.
         /// </summary>
         /// <remarks>
@@ -73,16 +91,13 @@ namespace Narvalo.Fx
             /* T4: C# indent */
         {
             Expect.NotNull(square);
+            Warrant.NotNull<VoidOrError<T>>();
 
             return VoidOrError<T>.μ(square);
         }
 
         #endregion
 
-        #region Conditional execution of monadic expressions (Prelude)
-
-
-        #endregion
 
         #region Monadic lifting operators (Prelude)
 
@@ -205,6 +220,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));
+            Warrant.NotNull<VoidOrError<TResult>>();
 
             return @this.Bind(_ => VoidOrError.Error(selector.Invoke(_)));
         }
@@ -218,6 +234,7 @@ namespace Narvalo.Fx
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
+            Warrant.NotNull<VoidOrError<TResult>>();
 
             return @this.Bind(_ => other);
         }
@@ -232,6 +249,7 @@ namespace Narvalo.Fx
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
+            Warrant.NotNull<VoidOrError<TResult>>();
 
             // http://stackoverflow.com/questions/24042977/how-does-forever-monad-work
 
@@ -242,7 +260,7 @@ namespace Narvalo.Fx
         /// Named <c>void</c> in Haskell parlance.
         /// </remarks>
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
-        public static VoidOrError<global::Narvalo.Fx.Unit> Forget<TSource>(this VoidOrError<TSource> @this)
+        public static VoidOrError<global::Narvalo.Fx.Unit> Ignore<TSource>(this VoidOrError<TSource> @this)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
@@ -257,6 +275,23 @@ namespace Narvalo.Fx
 
 
         /// <remarks>
+        /// Named <c>mfilter</c> in Haskell parlance.
+        /// </remarks>
+        public static VoidOrError<TSource> Where<TSource>(
+            this VoidOrError<TSource> @this,
+            Func<TSource, bool> predicate)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+            Warrant.NotNull<VoidOrError<TSource>>();
+
+            return @this.Bind(
+                _ => predicate.Invoke(_) ? @this : VoidOrError<TSource>.Void);
+        }
+
+
+        /// <remarks>
         /// Named <c>replicateM</c> in Haskell parlance.
         /// </remarks>
         public static VoidOrError<IEnumerable<TSource>> Repeat<TSource>(
@@ -265,6 +300,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(@this, nameof(@this));
             Require.Range(count >= 1, nameof(count));
+            Warrant.NotNull<VoidOrError<IEnumerable<TSource>>>();
 
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }
@@ -284,6 +320,7 @@ namespace Narvalo.Fx
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(second, nameof(second));
             Require.NotNull(resultSelector, nameof(resultSelector));
+            Warrant.NotNull<VoidOrError<TResult>>();
 
             return @this.Bind(v1 => second.Select(v2 => resultSelector.Invoke(v1, v2)));
         }
@@ -299,6 +336,7 @@ namespace Narvalo.Fx
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(second, nameof(second));
             Require.NotNull(resultSelector, nameof(resultSelector));
+            Warrant.NotNull<VoidOrError<TResult>>();
 
             Func<T1, VoidOrError<TResult>> g
                 = t1 => second.Zip(third, (t2, t3) => resultSelector.Invoke(t1, t2, t3));
@@ -318,6 +356,7 @@ namespace Narvalo.Fx
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(second, nameof(second));
             Require.NotNull(resultSelector, nameof(resultSelector));
+            Warrant.NotNull<VoidOrError<TResult>>();
 
             Func<T1, VoidOrError<TResult>> g
                 = t1 => second.Zip(
@@ -341,6 +380,7 @@ namespace Narvalo.Fx
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(second, nameof(second));
             Require.NotNull(resultSelector, nameof(resultSelector));
+            Warrant.NotNull<VoidOrError<TResult>>();
 
             Func<T1, VoidOrError<TResult>> g
                 = t1 => second.Zip(
@@ -369,6 +409,7 @@ namespace Narvalo.Fx
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(valueSelectorM, nameof(valueSelectorM));
             Require.NotNull(resultSelector, nameof(resultSelector));
+            Warrant.NotNull<VoidOrError<TResult>>();
 
             return @this.Bind(
                 _ => valueSelectorM.Invoke(_).Select(
@@ -376,9 +417,176 @@ namespace Narvalo.Fx
         }
 
 
+        public static VoidOrError<TResult> Join<TSource, TInner, TKey, TResult>(
+            this VoidOrError<TSource> @this,
+            VoidOrError<TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TSource, TInner, TResult> resultSelector)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Expect.NotNull(inner);
+            Expect.NotNull(outerKeySelector);
+            Expect.NotNull(innerKeySelector);
+            Expect.NotNull(resultSelector);
+            Warrant.NotNull<VoidOrError<TResult>>();
+
+            return @this.Join(
+                inner,
+                outerKeySelector,
+                innerKeySelector,
+                resultSelector,
+                EqualityComparer<TKey>.Default);
+        }
+
+        public static VoidOrError<TResult> GroupJoin<TSource, TInner, TKey, TResult>(
+            this VoidOrError<TSource> @this,
+            VoidOrError<TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TSource, VoidOrError<TInner>, TResult> resultSelector)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Expect.NotNull(inner);
+            Expect.NotNull(outerKeySelector);
+            Expect.NotNull(innerKeySelector);
+            Expect.NotNull(resultSelector);
+            Warrant.NotNull<VoidOrError<TResult>>();
+
+            return @this.GroupJoin(
+                inner,
+                outerKeySelector,
+                innerKeySelector,
+                resultSelector,
+                EqualityComparer<TKey>.Default);
+        }
+
+
         #endregion
 
         #region LINQ extensions
+
+
+        public static VoidOrError<TResult> Join<TSource, TInner, TKey, TResult>(
+            this VoidOrError<TSource> @this,
+            VoidOrError<TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TSource, TInner, TResult> resultSelector,
+            IEqualityComparer<TKey> comparer)
+            /* T4: C# indent */
+        {
+            Expect.NotNull(@this);
+            Expect.NotNull(inner);
+            Expect.NotNull(outerKeySelector);
+            Expect.NotNull(innerKeySelector);
+            Expect.NotNull(resultSelector);
+            Warrant.NotNull<VoidOrError<TResult>>();
+
+            return JoinCore(
+                @this,
+                inner,
+                outerKeySelector,
+                innerKeySelector,
+                resultSelector,
+                comparer ?? EqualityComparer<TKey>.Default);
+        }
+
+        public static VoidOrError<TResult> GroupJoin<TSource, TInner, TKey, TResult>(
+            this VoidOrError<TSource> @this,
+            VoidOrError<TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TSource, VoidOrError<TInner>, TResult> resultSelector,
+            IEqualityComparer<TKey> comparer)
+            /* T4: C# indent */
+        {
+            Expect.NotNull(@this);
+            Expect.NotNull(inner);
+            Expect.NotNull(outerKeySelector);
+            Expect.NotNull(innerKeySelector);
+            Expect.NotNull(resultSelector);
+            Warrant.NotNull<VoidOrError<TResult>>();
+
+            return GroupJoinCore(
+                @this,
+                inner,
+                outerKeySelector,
+                innerKeySelector,
+                resultSelector,
+                comparer ?? EqualityComparer<TKey>.Default);
+        }
+
+
+        private static VoidOrError<TResult> JoinCore<TSource, TInner, TKey, TResult>(
+            VoidOrError<TSource> seq,
+            VoidOrError<TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TSource, TInner, TResult> resultSelector,
+            IEqualityComparer<TKey> comparer)
+            /* T4: C# indent */
+        {
+            Require.NotNull(seq, nameof(seq));
+            Require.NotNull(resultSelector, nameof(resultSelector));
+            Demand.NotNull(inner);
+            Demand.NotNull(outerKeySelector);
+            Demand.NotNull(innerKeySelector);
+            Demand.NotNull(comparer);
+            Warrant.NotNull<VoidOrError<TResult>>();
+
+            var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
+
+            return from outerValue in seq
+                   from innerValue in keyLookupM.Invoke(outerValue).Then(inner)
+                   select resultSelector.Invoke(outerValue, innerValue);
+        }
+
+        private static VoidOrError<TResult> GroupJoinCore<TSource, TInner, TKey, TResult>(
+            VoidOrError<TSource> seq,
+            VoidOrError<TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TSource, VoidOrError<TInner>, TResult> resultSelector,
+            IEqualityComparer<TKey> comparer)
+            /* T4: C# indent */
+        {
+            Require.NotNull(seq, nameof(seq));
+            Require.NotNull(resultSelector, nameof(resultSelector));
+            Demand.NotNull(inner);
+            Demand.NotNull(outerKeySelector);
+            Demand.NotNull(innerKeySelector);
+            Demand.NotNull(comparer);
+            Warrant.NotNull<VoidOrError<TResult>>();
+
+            var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
+
+            return from outerValue in seq
+                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).Then(inner));
+        }
+
+        private static Func<TSource, VoidOrError<TKey>> GetKeyLookup<TSource, TInner, TKey>(
+            VoidOrError<TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            IEqualityComparer<TKey> comparer)
+            /* T4: C# indent */
+        {
+            Require.NotNull(inner, nameof(inner));
+            Require.NotNull(outerKeySelector, nameof(outerKeySelector));
+            Require.NotNull(comparer, nameof(comparer));
+            Demand.NotNull(innerKeySelector);
+            Warrant.NotNull<Func<TSource, VoidOrError<TKey>>>();
+
+            return source =>
+            {
+                TKey outerKey = outerKeySelector.Invoke(source);
+
+                return inner.Select(innerKeySelector).Where(_ => comparer.Equals(_, outerKey));
+            };
+        }
 
 
         #endregion
@@ -396,38 +604,38 @@ namespace Narvalo.Fx
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
+            Warrant.NotNull<VoidOrError<TResult>>();
 
             return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
         }
 
 
-        public static VoidOrError<TSource> When<TSource>(
+        public static VoidOrError<TResult> Then<TSource, TResult>(
             this VoidOrError<TSource> @this,
-            bool predicate,
-            Action action)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(action, nameof(action));
-            Warrant.NotNull<VoidOrError<TSource>>();
-
-            if (predicate) { action.Invoke(); }
-
-            return @this;
-        }
-
-        public static VoidOrError<TSource> Unless<TSource>(
-            this VoidOrError<TSource> @this,
-            bool predicate,
-            Action action)
+            Func<TSource, bool> predicate,
+            VoidOrError<TResult> other)
             /* T4: C# indent */
         {
             Expect.NotNull(@this);
-            Expect.NotNull(action);
-            Warrant.NotNull<VoidOrError<TSource>>();
+            Expect.NotNull(predicate);
+            Warrant.NotNull<VoidOrError<TResult>>();
 
-            return @this.When(!predicate, action);
+            return @this.Coalesce(predicate, other, VoidOrError<TResult>.Void);
         }
+
+        public static VoidOrError<TResult> Otherwise<TSource, TResult>(
+            this VoidOrError<TSource> @this,
+            Func<TSource, bool> predicate,
+            VoidOrError<TResult> other)
+            /* T4: C# indent */
+        {
+            Expect.NotNull(@this);
+            Expect.NotNull(predicate);
+            Warrant.NotNull<VoidOrError<TResult>>();
+
+            return @this.Coalesce(predicate, VoidOrError<TResult>.Void, other);
+        }
+
 
         public static VoidOrError<TSource> Invoke<TSource>(
             this VoidOrError<TSource> @this,
@@ -436,562 +644,10 @@ namespace Narvalo.Fx
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(action, nameof(action));
+            Warrant.NotNull<VoidOrError<TSource>>();
 
             return @this.Bind(_ => { action.Invoke(_); return @this; });
         }
 
     } // End of VoidOrError - T4: EmitMonadExtraExtensions().
-
-    // Provides extension methods for Func<T> in the Kleisli category.
-    public static partial class FuncExtensions
-    {
-        #region Basic Monad functions (Prelude)
-
-
-        /// <remarks>
-        /// Named <c>mapM</c> in Haskell parlance. Same as <c>forM</c> with its arguments flipped.
-        /// </remarks>
-        public static VoidOrError<IEnumerable<TResult>> Map<TSource, TResult>(
-            this Func<TSource, VoidOrError<TResult>> @this,
-            IEnumerable<TSource> seq)
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(seq);
-            Warrant.NotNull<VoidOrError<IEnumerable<TResult>>>();
-
-            return seq.ForEachCore(@this);
-        }
-
-
-        /// <remarks>
-        /// Named <c>=&lt;&lt;</c> in Haskell parlance.
-        /// </remarks>
-        public static VoidOrError<TResult> Invoke<TSource, TResult>(
-            this Func<TSource, VoidOrError<TResult>> @this,
-            VoidOrError<TSource> value)
-            /* T4: C# indent */
-        {
-            Expect.NotNull(@this);
-            Require.NotNull(value, nameof(value));
-
-            return value.Bind(@this);
-        }
-
-        /// <remarks>
-        /// Named <c>&gt;=&gt;</c> in Haskell parlance.
-        /// </remarks>
-        public static Func<TSource, VoidOrError<TResult>> Compose<TSource, TMiddle, TResult>(
-            this Func<TSource, VoidOrError<TMiddle>> @this,
-            Func<TMiddle, VoidOrError<TResult>> funM)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Expect.NotNull(funM);
-            Warrant.NotNull<Func<TSource, VoidOrError<TResult>>>();
-
-            return _ => @this.Invoke(_).Bind(funM);
-        }
-
-        /// <remarks>
-        /// Named <c>&lt;=&lt;</c> in Haskell parlance.
-        /// </remarks>
-        public static Func<TSource, VoidOrError<TResult>> ComposeBack<TSource, TMiddle, TResult>(
-            this Func<TMiddle, VoidOrError<TResult>> @this,
-            Func<TSource, VoidOrError<TMiddle>> funM)
-            /* T4: C# indent */
-        {
-            Expect.NotNull(@this);
-            Require.NotNull(funM, nameof(funM));
-            Warrant.NotNull<Func<TSource, VoidOrError<TResult>>>();
-
-            return _ => funM.Invoke(_).Bind(@this);
-        }
-
-        #endregion
-    } // End of FuncExtensions - T4: EmitKleisliExtensions().
-}
-
-namespace Narvalo.Fx
-{
-    using System.Collections.Generic;
-
-    using Narvalo.Fx.Internal;
-
-    // Provides extension methods for IEnumerable<T> where T is a VoidOrError<S>.
-    public static partial class EnumerableExtensions
-    {
-        #region Basic Monad functions (Prelude)
-
-
-        /// <remarks>
-        /// Named <c>sequence</c> in Haskell parlance.
-        /// </remarks>
-        public static VoidOrError<IEnumerable<TSource>> Collect<TSource>(
-            this IEnumerable<VoidOrError<TSource>> @this)
-        {
-            Expect.NotNull(@this);
-            Warrant.NotNull<VoidOrError<IEnumerable<TSource>>>();
-
-            return @this.CollectCore();
-        }
-
-
-        #endregion
-
-    } // End of EnumerableExtensions - T4: EmitMonadEnumerableExtensions().
-}
-
-namespace Narvalo.Fx.More
-{
-    using System;
-    using System.Collections.Generic;
-
-    using Narvalo.Fx;
-    using Narvalo.Fx.Internal;
-
-    // Provides extension methods for IEnumerable<T>.
-    public static partial class EnumerableExtensions
-    {
-        #region Basic Monad functions (Prelude)
-
-
-        /// <remarks>
-        /// Named <c>forM</c> in Haskell parlance.
-        /// </remarks>
-        public static VoidOrError<IEnumerable<TResult>> ForEach<TSource, TResult>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, VoidOrError<TResult>> funM)
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(funM);
-            Warrant.NotNull<VoidOrError<IEnumerable<TResult>>>();
-
-            return @this.ForEachCore(funM);
-        }
-
-
-        #endregion
-
-        #region Generalisations of list functions (Prelude)
-
-        /// <remarks>
-        /// <para>Named <c>filterM</c> in Haskell parlance.</para>
-        /// <para>Haskell use a different signature.</para>
-        /// </remarks>
-        public static IEnumerable<TSource> Filter<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, VoidOrError<bool>> predicateM)
-            /* T4: C# indent */
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(predicateM);
-            Warrant.NotNull<IEnumerable<TSource>>();
-
-            return @this.FilterCore(predicateM);
-        }
-
-
-        /// <remarks>
-        /// Named <c>mapAndUnzipM</c> in Haskell parlance.
-        /// </remarks>
-        public static VoidOrError<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
-            MapAndUnzip<TSource, TFirst, TSecond>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, VoidOrError<Tuple<TFirst, TSecond>>> funM)
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(funM);
-
-            return @this.MapAndUnzipCore(funM);
-        }
-
-        /// <remarks>
-        /// Named <c>zipWithM</c> in Haskell parlance.
-        /// </remarks>
-        public static VoidOrError<IEnumerable<TResult>> Zip<TFirst, TSecond, TResult>(
-            this IEnumerable<TFirst> @this,
-            IEnumerable<TSecond> second,
-            Func<TFirst, TSecond, VoidOrError<TResult>> resultSelectorM)
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(second);
-            Expect.NotNull(resultSelectorM);
-            Warrant.NotNull<VoidOrError<IEnumerable<TResult>>>();
-
-            return @this.ZipCore(second, resultSelectorM);
-        }
-
-
-        /// <remarks>
-        /// Named <c>foldM</c> in Haskell parlance.
-        /// </remarks>
-        public static VoidOrError<TAccumulate> Fold<TSource, TAccumulate>(
-            this IEnumerable<TSource> @this,
-            TAccumulate seed,
-            Func<TAccumulate, TSource, VoidOrError<TAccumulate>> accumulatorM)
-            /* T4: C# indent */
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(accumulatorM);
-
-            return @this.FoldCore(seed, accumulatorM);
-        }
-
-        #endregion
-
-        #region Aggregate Operators
-
-        public static VoidOrError<TAccumulate> FoldBack<TSource, TAccumulate>(
-            this IEnumerable<TSource> @this,
-            TAccumulate seed,
-            Func<TAccumulate, TSource, VoidOrError<TAccumulate>> accumulatorM)
-            /* T4: C# indent */
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(accumulatorM);
-
-            return @this.FoldBackCore(seed, accumulatorM);
-        }
-
-        public static VoidOrError<TSource> Reduce<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, TSource, VoidOrError<TSource>> accumulatorM)
-            /* T4: C# indent */
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(accumulatorM);
-
-            return @this.ReduceCore(accumulatorM);
-        }
-
-        public static VoidOrError<TSource> ReduceBack<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, TSource, VoidOrError<TSource>> accumulatorM)
-            /* T4: C# indent */
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(accumulatorM);
-
-            return @this.ReduceBackCore(accumulatorM);
-        }
-
-        #endregion
-
-        #region Catamorphisms
-
-        /// <remarks>
-        /// <para>Haskell use a different signature.</para>
-        /// </remarks>
-        public static VoidOrError<TAccumulate> Fold<TSource, TAccumulate>(
-            this IEnumerable<TSource> @this,
-            TAccumulate seed,
-            Func<TAccumulate, TSource, VoidOrError<TAccumulate>> accumulatorM,
-            Func<VoidOrError<TAccumulate>, bool> predicate)
-            /* T4: C# indent */
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(accumulatorM);
-            Expect.NotNull(predicate);
-
-            return @this.FoldCore(seed, accumulatorM, predicate);
-        }
-
-        /// <remarks>
-        /// <para>Haskell use a different signature.</para>
-        /// </remarks>
-        public static VoidOrError<TSource> Reduce<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, TSource, VoidOrError<TSource>> accumulatorM,
-            Func<VoidOrError<TSource>, bool> predicate)
-            /* T4: C# indent */
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(accumulatorM);
-            Expect.NotNull(predicate);
-
-            return @this.ReduceCore(accumulatorM, predicate);
-        }
-
-        #endregion
-    } // End of EnumerableExtensions - T4: EmitEnumerableExtensions().
-}
-
-namespace Narvalo.Fx.Internal
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
-
-    using Narvalo.Fx.More;
-
-    // Provides the core extension methods for IEnumerable<T> where T is a VoidOrError<S>.
-    internal static partial class EnumerableExtensions
-    {
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static VoidOrError<IEnumerable<TSource>> CollectCore<TSource>(
-            this IEnumerable<VoidOrError<TSource>> @this)
-        {
-            Demand.NotNull(@this);
-            Warrant.NotNull<VoidOrError<IEnumerable<TSource>>>();
-
-            var seed = VoidOrError.Error(Enumerable.Empty<TSource>());
-            Func<VoidOrError<IEnumerable<TSource>>, VoidOrError<TSource>, VoidOrError<IEnumerable<TSource>>> fun
-                = (m, n) => m.Bind(list => CollectCore(n, list));
-
-            var retval = @this.Aggregate(seed, fun);
-            System.Diagnostics.Contracts.Contract.Assume(retval != null);
-
-            return retval;
-        }
-
-        // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
-        private static VoidOrError<IEnumerable<TSource>> CollectCore<TSource>(
-            VoidOrError<TSource> m,
-            IEnumerable<TSource> list)
-        {
-            Demand.NotNull(m);
-
-            return m.Bind(item => VoidOrError.Error(list.Concat(Enumerable.Repeat(item, 1))));
-        }
-
-    } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
-
-    // Provides the core extension methods for IEnumerable<T>.
-    internal static partial class EnumerableExtensions
-    {
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static VoidOrError<IEnumerable<TResult>> ForEachCore<TSource, TResult>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, VoidOrError<TResult>> funM)
-        {
-            Demand.NotNull(@this);
-            Demand.NotNull(funM);
-            Warrant.NotNull<VoidOrError<IEnumerable<TResult>>>();
-
-            return @this.Select(funM).EmptyIfNull().Collect();
-        }
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static IEnumerable<TSource> FilterCore<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, VoidOrError<bool>> predicateM)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicateM, nameof(predicateM));
-            Warrant.NotNull<IEnumerable<TSource>>();
-
-            // NB: Haskell uses tail recursion, we don't.
-            var list = new List<TSource>();
-
-            foreach (var item in @this)
-            {
-                var m = predicateM.Invoke(item);
-
-                if (m != null)
-                {
-                    m.Invoke(
-                        _ =>
-                        {
-                            if (_ == true)
-                            {
-                                list.Add(item);
-                            }
-                        });
-                }
-            }
-
-            return list;
-        }
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static VoidOrError<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
-            MapAndUnzipCore<TSource, TFirst, TSecond>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, VoidOrError<Tuple<TFirst, TSecond>>> funM)
-        {
-            Demand.NotNull(@this);
-            Demand.NotNull(funM);
-
-            var m = @this.Select(funM).EmptyIfNull().Collect();
-
-            return m.Select(
-                tuples =>
-                {
-                    IEnumerable<TFirst> list1 = tuples.Select(_ => _.Item1);
-                    IEnumerable<TSecond> list2 = tuples.Select(_ => _.Item2);
-
-                    return new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(list1, list2);
-                });
-        }
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static VoidOrError<IEnumerable<TResult>> ZipCore<TFirst, TSecond, TResult>(
-            this IEnumerable<TFirst> @this,
-            IEnumerable<TSecond> second,
-            Func<TFirst, TSecond, VoidOrError<TResult>> resultSelectorM)
-        {
-            Require.NotNull(resultSelectorM, nameof(resultSelectorM));
-
-            Demand.NotNull(@this);
-            Demand.NotNull(second);
-            Warrant.NotNull<VoidOrError<IEnumerable<TResult>>>();
-
-            Func<TFirst, TSecond, VoidOrError<TResult>> resultSelector
-                = (v1, v2) => resultSelectorM.Invoke(v1, v2);
-
-            // WARNING: Do not remove "resultSelector", otherwise .NET will make a recursive call
-            // instead of using the Zip from LINQ.
-            return @this.Zip(second, resultSelector: resultSelector).EmptyIfNull().Collect();
-        }
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static VoidOrError<TAccumulate> FoldCore<TSource, TAccumulate>(
-            this IEnumerable<TSource> @this,
-            TAccumulate seed,
-            Func<TAccumulate, TSource, VoidOrError<TAccumulate>> accumulatorM)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(accumulatorM, nameof(accumulatorM));
-
-            VoidOrError<TAccumulate> retval = VoidOrError.Error(seed);
-
-            foreach (TSource item in @this)
-            {
-                if (retval == null)
-                {
-                    return null;
-                }
-
-                retval = retval.Bind(_ => accumulatorM.Invoke(_, item));
-            }
-
-            return retval;
-        }
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static VoidOrError<TAccumulate> FoldBackCore<TSource, TAccumulate>(
-            this IEnumerable<TSource> @this,
-            TAccumulate seed,
-            Func<TAccumulate, TSource, VoidOrError<TAccumulate>> accumulatorM)
-            /* T4: C# indent */
-        {
-            Demand.NotNull(@this);
-            Demand.NotNull(accumulatorM);
-
-            return @this.Reverse().EmptyIfNull().Fold(seed, accumulatorM);
-        }
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static VoidOrError<TSource> ReduceCore<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, TSource, VoidOrError<TSource>> accumulatorM)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(accumulatorM, nameof(accumulatorM));
-
-            using (var iter = @this.GetEnumerator())
-            {
-                if (!iter.MoveNext())
-                {
-                    throw new InvalidOperationException("Source sequence was empty.");
-                }
-
-                VoidOrError<TSource> retval = VoidOrError.Error(iter.Current);
-
-                while (iter.MoveNext())
-                {
-                    if (retval == null)
-                    {
-                        return null;
-                    }
-
-                    retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
-                }
-
-                return retval;
-            }
-        }
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static VoidOrError<TSource> ReduceBackCore<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, TSource, VoidOrError<TSource>> accumulatorM)
-            /* T4: C# indent */
-        {
-            Demand.NotNull(@this);
-            Demand.NotNull(accumulatorM);
-
-            return @this.Reverse().EmptyIfNull().Reduce(accumulatorM);
-        }
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static VoidOrError<TAccumulate> FoldCore<TSource, TAccumulate>(
-            this IEnumerable<TSource> @this,
-            TAccumulate seed,
-            Func<TAccumulate, TSource, VoidOrError<TAccumulate>> accumulatorM,
-            Func<VoidOrError<TAccumulate>, bool> predicate)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(accumulatorM, nameof(accumulatorM));
-            Require.NotNull(predicate, nameof(predicate));
-
-            VoidOrError<TAccumulate> retval = VoidOrError.Error(seed);
-
-            using (var iter = @this.GetEnumerator())
-            {
-                while (predicate.Invoke(retval) && iter.MoveNext())
-                {
-                    if (retval == null)
-                    {
-                        return null;
-                    }
-
-                    retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
-                }
-            }
-
-            return retval;
-        }
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static VoidOrError<TSource> ReduceCore<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, TSource, VoidOrError<TSource>> accumulatorM,
-            Func<VoidOrError<TSource>, bool> predicate)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(accumulatorM, nameof(accumulatorM));
-            Require.NotNull(predicate, nameof(predicate));
-
-            using (var iter = @this.GetEnumerator())
-            {
-                if (!iter.MoveNext())
-                {
-                    throw new InvalidOperationException("Source sequence was empty.");
-                }
-
-                VoidOrError<TSource> retval = VoidOrError.Error(iter.Current);
-
-                while (predicate.Invoke(retval) && iter.MoveNext())
-                {
-                    if (retval == null)
-                    {
-                        return null;
-                    }
-
-                    retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
-                }
-
-                return retval;
-            }
-        }
-    } // End of EnumerableExtensions - T4: EmitEnumerableInternalExtensions().
 }

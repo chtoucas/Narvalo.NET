@@ -10,19 +10,11 @@ namespace Narvalo.Fx
     // Friendly version of Either<TError, Unit>.
     public partial class VoidOrError<TError>
     {
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private static readonly VoidOrError<TError> s_Void = new VoidOrError<TError>();
-
         private VoidOrError() { }
 
         private VoidOrError(bool isError)
         {
             IsError = isError;
-        }
-
-        public static VoidOrError<TError> Void
-        {
-            get { Warrant.NotNull<VoidOrError<TError>>(); return s_Void; }
         }
 
         public bool IsError { get; }
@@ -113,6 +105,21 @@ namespace Narvalo.Fx
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         internal static VoidOrError<TError> μ(VoidOrError<VoidOrError<TError>> square)
             => square.IsError ? square.Error : VoidOrError<TError>.Void;
+    }
+
+    // Provides the core MonadOr methods.
+    public partial class VoidOrError<TError>
+    {
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private static readonly VoidOrError<TError> s_Void = new VoidOrError<TError>();
+
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
+        public static VoidOrError<TError> Void
+        {
+            get { Warrant.NotNull<VoidOrError<TError>>(); return s_Void; }
+        }
+
+        public VoidOrError<TError> OrElse(VoidOrError<TError> other) => IsVoid ? other : this;
     }
 }
 

@@ -47,7 +47,6 @@ namespace Narvalo.Fx
         }
 
         public static implicit operator bool(BooleanResult<TMessage> value) => value.IsTrue;
-
     }
 
     // Provides the core Monad methods.

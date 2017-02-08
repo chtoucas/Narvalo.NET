@@ -33,6 +33,42 @@ public abstract partial class MonadTemplate : _MonadTemplate
     /// <summary>
     /// Generates a Monad.
     /// </summary>
+    public void EmitMonadLight()
+    {
+#>
+
+<#+ if (!Namespace.StartsWith("Narvalo.")) { #>
+using global::Narvalo;
+using global::Narvalo.Fx;
+<#+ } #>
+
+namespace <#= Namespace #>
+{
+    using System;
+    using System.Collections.Generic;
+<#+ if (!SuppressMessage) { #>
+    using System.Diagnostics.CodeAnalysis;
+<#+ } #>
+    using System.Linq;
+
+    using <#= Namespace #>.Internal;
+
+<#+
+    EmitMonadCore();
+    WriteLine();
+
+    EmitMonadExtensions();
+    WriteLine();
+
+    EmitMonadExtraExtensions();
+#>
+}
+<#+
+    } // T4: End of EmitMonad().
+
+    /// <summary>
+    /// Generates a Monad.
+    /// </summary>
     public void EmitMonad()
     {
 #>

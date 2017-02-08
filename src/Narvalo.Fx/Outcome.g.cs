@@ -79,10 +79,6 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Conditional execution of monadic expressions (Prelude)
-
-
-        #endregion
 
         #region Monadic lifting operators (Prelude)
 
@@ -242,7 +238,7 @@ namespace Narvalo.Fx
         /// Named <c>void</c> in Haskell parlance.
         /// </remarks>
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
-        public static Outcome<global::Narvalo.Fx.Unit> Forget<TSource>(this Outcome<TSource> @this)
+        public static Outcome<global::Narvalo.Fx.Unit> Ignore<TSource>(this Outcome<TSource> @this)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
@@ -400,34 +396,6 @@ namespace Narvalo.Fx
             return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
         }
 
-
-        public static Outcome<TSource> When<TSource>(
-            this Outcome<TSource> @this,
-            bool predicate,
-            Action action)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(action, nameof(action));
-            Warrant.NotNull<Outcome<TSource>>();
-
-            if (predicate) { action.Invoke(); }
-
-            return @this;
-        }
-
-        public static Outcome<TSource> Unless<TSource>(
-            this Outcome<TSource> @this,
-            bool predicate,
-            Action action)
-            /* T4: C# indent */
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(action);
-            Warrant.NotNull<Outcome<TSource>>();
-
-            return @this.When(!predicate, action);
-        }
 
         public static Outcome<TSource> Invoke<TSource>(
             this Outcome<TSource> @this,

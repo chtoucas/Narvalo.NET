@@ -7,7 +7,15 @@
 
         public override void Initialize()
         {
+            InitializeOr();
+
             ReturnName = "Error";
+            ZeroName = "Void";
+        }
+
+        protected override void WriteContent()
+        {
+            EmitMonadLight();
         }
     }
 #>

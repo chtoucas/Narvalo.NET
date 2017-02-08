@@ -62,6 +62,8 @@ public partial class MonadTemplate
 
 <#+ } // T4: End of HasZero. #>
 
+<#+ /* DISABLED #>
+
         public static <#= Name #><TSource> When<TSource>(
             this <#= Name #><TSource> @this,
             bool predicate,
@@ -96,6 +98,8 @@ public partial class MonadTemplate
             return @this.When(!predicate, action);
         }
 
+<#+ End of DISABLED */ #>
+
         public static <#= Name #><TSource> Invoke<TSource>(
             this <#= Name #><TSource> @this,
             Action<TSource> action)
@@ -110,7 +114,9 @@ public partial class MonadTemplate
             return @this.Bind(_ => { action.Invoke(_); return @this; });
         }
 
-<#+ if (HasZero) { #>
+<#+ /* DISABLED #>
+
+<#+ if (HasPlus) { #>
 
         public static <#= Name #><TSource> On<#= ZeroName #><TSource>(
             this <#= Name #><TSource> @this,
@@ -123,8 +129,10 @@ public partial class MonadTemplate
             Warrant.NotNull<<#= Name #><TSource>>();
 <#+ } #>
 
-            // FIXME: It does nothing!
-            //@this.PlusName(<#= Name #>.Unit).Invoke(_ => action.Invoke());
+            // WARNING: This is NOT correct. We would like something like what we have for Maybe<T>:
+            // if not IsSome then run action, but here we have: if IsSome then run action.
+            // I simply think that it just does not make sense in general (for a monad other than Maybe).
+            //@this.<#= PlusName #>(<#= Name #><TSource>.<#= ZeroName #>).Invoke(_ => action.Invoke());
 
             return @this;
         }
@@ -148,6 +156,8 @@ public partial class MonadTemplate
         }
 
 <#+ } // T4: End of HasZero. #>
+
+<#+ End of DISABLED */ #>
     } // End of <#= Name #> - T4: EmitMonadExtraExtensions().
 <#+
     } // T4: End of EmitMonadExtraExtensions().

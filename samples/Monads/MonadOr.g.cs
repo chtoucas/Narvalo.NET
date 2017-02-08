@@ -99,21 +99,6 @@ namespace Monads
 
         #endregion
 
-        #region Conditional execution of monadic expressions (Prelude)
-
-
-        /// <remarks>
-        /// Named <c>guard</c> in Haskell parlance.
-        /// </remarks>
-        public static MonadOr<global::Narvalo.Fx.Unit> Guard(bool predicate)
-        {
-            Warrant.NotNull<MonadOr<global::Narvalo.Fx.Unit>>();
-
-            return predicate ? MonadOr.Unit : MonadOr<global::Narvalo.Fx.Unit>.None;
-        }
-
-
-        #endregion
 
         #region Monadic lifting operators (Prelude)
 
@@ -275,7 +260,7 @@ namespace Monads
         /// <remarks>
         /// Named <c>void</c> in Haskell parlance.
         /// </remarks>
-        public static MonadOr<global::Narvalo.Fx.Unit> Forget<TSource>(this MonadOr<TSource> @this)
+        public static MonadOr<global::Narvalo.Fx.Unit> Ignore<TSource>(this MonadOr<TSource> @this)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
@@ -652,34 +637,6 @@ namespace Monads
         }
 
 
-        public static MonadOr<TSource> When<TSource>(
-            this MonadOr<TSource> @this,
-            bool predicate,
-            Action action)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(action, nameof(action));
-            Warrant.NotNull<MonadOr<TSource>>();
-
-            if (predicate) { action.Invoke(); }
-
-            return @this;
-        }
-
-        public static MonadOr<TSource> Unless<TSource>(
-            this MonadOr<TSource> @this,
-            bool predicate,
-            Action action)
-            /* T4: C# indent */
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(action);
-            Warrant.NotNull<MonadOr<TSource>>();
-
-            return @this.When(!predicate, action);
-        }
-
         public static MonadOr<TSource> Invoke<TSource>(
             this MonadOr<TSource> @this,
             Action<TSource> action)
@@ -690,36 +647,6 @@ namespace Monads
             Warrant.NotNull<MonadOr<TSource>>();
 
             return @this.Bind(_ => { action.Invoke(_); return @this; });
-        }
-
-
-        public static MonadOr<TSource> OnNone<TSource>(
-            this MonadOr<TSource> @this,
-            Action action)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(action, nameof(action));
-            Warrant.NotNull<MonadOr<TSource>>();
-
-            // FIXME: It does nothing!
-            //@this.PlusName(MonadOr.Unit).Invoke(_ => action.Invoke());
-
-            return @this;
-        }
-
-        public static MonadOr<TSource> Invoke<TSource>(
-            this MonadOr<TSource> @this,
-            Action<TSource> action,
-            Action caseNone)
-            /* T4: C# indent */
-        {
-            Expect.NotNull(@this);
-            Require.NotNull(action, nameof(action));
-            Require.NotNull(caseNone, nameof(caseNone));
-            Warrant.NotNull<MonadOr<TSource>>();
-
-            return @this.Invoke(action).OnNone(caseNone);
         }
 
     } // End of MonadOr - T4: EmitMonadExtraExtensions().

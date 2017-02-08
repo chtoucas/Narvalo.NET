@@ -72,8 +72,8 @@ TODO
 
 Narvalo.Fx:
 - Naming: Extensions / More / Most
-- Forget -> Ignore
-- MapAndUnzip -> SelectAndUnzip? MapAny -> SelectAny?
+- Filter -> Where; remove Forever? MapAndUnzip -> SelectAndUnzip? MapAny -> SelectMany?
+- Disabled When, Unless and Guard
 
 Highlights
 ----------

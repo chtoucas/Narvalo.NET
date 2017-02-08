@@ -93,20 +93,6 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Conditional execution of monadic expressions (Prelude)
-
-
-        /// <remarks>
-        /// Named <c>guard</c> in Haskell parlance.
-        /// </remarks>
-        public static Maybe<global::Narvalo.Fx.Unit> Guard(bool predicate)
-        {
-
-            return predicate ? Maybe.Unit : Maybe<global::Narvalo.Fx.Unit>.None;
-        }
-
-
-        #endregion
 
         #region Monadic lifting operators (Prelude)
 
@@ -266,7 +252,7 @@ namespace Narvalo.Fx
         /// Named <c>void</c> in Haskell parlance.
         /// </remarks>
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
-        public static Maybe<global::Narvalo.Fx.Unit> Forget<TSource>(this Maybe<TSource> @this)
+        public static Maybe<global::Narvalo.Fx.Unit> Ignore<TSource>(this Maybe<TSource> @this)
             /* T4: C# indent */
         {
             /* T4: C# indent */
@@ -616,31 +602,6 @@ namespace Narvalo.Fx
         }
 
 
-        public static Maybe<TSource> When<TSource>(
-            this Maybe<TSource> @this,
-            bool predicate,
-            Action action)
-            /* T4: C# indent */
-        {
-            /* T4: C# indent */
-            Require.NotNull(action, nameof(action));
-
-            if (predicate) { action.Invoke(); }
-
-            return @this;
-        }
-
-        public static Maybe<TSource> Unless<TSource>(
-            this Maybe<TSource> @this,
-            bool predicate,
-            Action action)
-            /* T4: C# indent */
-        {
-            Expect.NotNull(action);
-
-            return @this.When(!predicate, action);
-        }
-
         public static Maybe<TSource> Invoke<TSource>(
             this Maybe<TSource> @this,
             Action<TSource> action)
@@ -650,33 +611,6 @@ namespace Narvalo.Fx
             Require.NotNull(action, nameof(action));
 
             return @this.Bind(_ => { action.Invoke(_); return @this; });
-        }
-
-
-        public static Maybe<TSource> OnNone<TSource>(
-            this Maybe<TSource> @this,
-            Action action)
-            /* T4: C# indent */
-        {
-            /* T4: C# indent */
-            Require.NotNull(action, nameof(action));
-
-            // FIXME: It does nothing!
-            //@this.PlusName(Maybe.Unit).Invoke(_ => action.Invoke());
-
-            return @this;
-        }
-
-        public static Maybe<TSource> Invoke<TSource>(
-            this Maybe<TSource> @this,
-            Action<TSource> action,
-            Action caseNone)
-            /* T4: C# indent */
-        {
-            Require.NotNull(action, nameof(action));
-            Require.NotNull(caseNone, nameof(caseNone));
-
-            return @this.Invoke(action).OnNone(caseNone);
         }
 
     } // End of Maybe - T4: EmitMonadExtraExtensions().

@@ -80,10 +80,6 @@ namespace Monads
 
         #endregion
 
-        #region Conditional execution of monadic expressions (Prelude)
-
-
-        #endregion
 
         #region Monadic lifting operators (Prelude)
 
@@ -242,7 +238,7 @@ namespace Monads
         /// <remarks>
         /// Named <c>void</c> in Haskell parlance.
         /// </remarks>
-        public static Monad<global::Narvalo.Fx.Unit> Forget<TSource>(this Monad<TSource> @this)
+        public static Monad<global::Narvalo.Fx.Unit> Ignore<TSource>(this Monad<TSource> @this)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
@@ -400,34 +396,6 @@ namespace Monads
             return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
         }
 
-
-        public static Monad<TSource> When<TSource>(
-            this Monad<TSource> @this,
-            bool predicate,
-            Action action)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(action, nameof(action));
-            Warrant.NotNull<Monad<TSource>>();
-
-            if (predicate) { action.Invoke(); }
-
-            return @this;
-        }
-
-        public static Monad<TSource> Unless<TSource>(
-            this Monad<TSource> @this,
-            bool predicate,
-            Action action)
-            /* T4: C# indent */
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(action);
-            Warrant.NotNull<Monad<TSource>>();
-
-            return @this.When(!predicate, action);
-        }
 
         public static Monad<TSource> Invoke<TSource>(
             this Monad<TSource> @this,
