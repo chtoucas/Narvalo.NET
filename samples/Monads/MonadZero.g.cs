@@ -791,7 +791,7 @@ namespace Monads.More
         /// Named <c>mapAndUnzipM</c> in Haskell parlance.
         /// </remarks>
         public static MonadZero<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
-            MapAndUnzip<TSource, TFirst, TSecond>(
+            SelectAndUnzip<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
             Func<TSource, MonadZero<Tuple<TFirst, TSecond>>> funM)
         {
@@ -799,7 +799,7 @@ namespace Monads.More
             Expect.NotNull(funM);
             Warrant.NotNull<MonadZero<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>();
 
-            return @this.MapAndUnzipCore(funM);
+            return @this.SelectAndUnzipCore(funM);
         }
 
         /// <remarks>
@@ -1011,7 +1011,7 @@ namespace Monads.Internal
         }
 
         internal static MonadZero<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
-            MapAndUnzipCore<TSource, TFirst, TSecond>(
+            SelectAndUnzipCore<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
             Func<TSource, MonadZero<Tuple<TFirst, TSecond>>> funM)
         {

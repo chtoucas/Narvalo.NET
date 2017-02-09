@@ -55,7 +55,7 @@ public partial class MonadTemplate
         /// Named <c>mapAndUnzipM</c> in Haskell parlance.
         /// </remarks>
         public static <#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
-            MapAndUnzip<TSource, TFirst, TSecond>(
+            SelectAndUnzip<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><Tuple<TFirst, TSecond>>> funM)
         {
@@ -65,7 +65,7 @@ public partial class MonadTemplate
             Warrant.NotNull<<#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>();
 <#+ } #>
 
-            return @this.MapAndUnzipCore(funM);
+            return @this.SelectAndUnzipCore(funM);
         }
 
         /// <remarks>

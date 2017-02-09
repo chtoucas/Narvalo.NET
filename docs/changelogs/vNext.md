@@ -76,6 +76,9 @@ Narvalo.Fx:
 - Filter -> Where; remove Forever? MapAndUnzip -> SelectAndUnzip? MapAny -> SelectMany?
 - Select -> ??? Apply, Trigger, OnSome, OnNone? Async versions?
 - Disabled When, Unless and Guard
+- https://blogs.msdn.microsoft.com/pfxteam/2013/04/03/tasks-monads-and-linq/
+- http://tomasp.net/blog/idioms-in-linq.aspx/
+- https://ruudvanasseldonk.com/2013/05/01/the-task-monad-in-csharp
 
 Highlights
 ----------

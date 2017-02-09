@@ -769,14 +769,14 @@ namespace Narvalo.Fx.More
         /// Named <c>mapAndUnzipM</c> in Haskell parlance.
         /// </remarks>
         public static Maybe<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
-            MapAndUnzip<TSource, TFirst, TSecond>(
+            SelectAndUnzip<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<Tuple<TFirst, TSecond>>> funM)
         {
             Expect.NotNull(@this);
             Expect.NotNull(funM);
 
-            return @this.MapAndUnzipCore(funM);
+            return @this.SelectAndUnzipCore(funM);
         }
 
         /// <remarks>
@@ -991,7 +991,7 @@ namespace Narvalo.Fx.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Maybe<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
-            MapAndUnzipCore<TSource, TFirst, TSecond>(
+            SelectAndUnzipCore<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<Tuple<TFirst, TSecond>>> funM)
         {

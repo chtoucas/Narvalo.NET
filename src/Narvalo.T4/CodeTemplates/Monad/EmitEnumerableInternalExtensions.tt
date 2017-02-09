@@ -85,7 +85,7 @@ public partial class MonadTemplate
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
 <#+ } #>
         internal static <#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
-            MapAndUnzipCore<TSource, TFirst, TSecond>(
+            SelectAndUnzipCore<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><Tuple<TFirst, TSecond>>> funM)
         {
