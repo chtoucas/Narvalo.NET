@@ -34,11 +34,12 @@ public partial class MonadTemplate
 
         #region Generalisations of list functions (Prelude)
 
+<#+ if (!HasTypeConstraints) { #>
+
         /// <remarks>
         /// <para>Named <c>filterM</c> in Haskell parlance.</para>
-        /// <para>Haskell use a different signature.</para>
         /// </remarks>
-        public static IEnumerable<TSource> Where<TSource>(
+        public static <#= Name #><IEnumerable<TSource>> Where<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><bool>> predicateM)
             <#+ WriteTypeConstraints("TSource"); #>
@@ -49,8 +50,6 @@ public partial class MonadTemplate
 
             return @this.WhereCore(predicateM);
         }
-
-<#+ if (!HasTypeConstraints) { #>
 
         /// <remarks>
         /// Named <c>mapAndUnzipM</c> in Haskell parlance.

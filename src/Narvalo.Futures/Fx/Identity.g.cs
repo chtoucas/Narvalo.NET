@@ -392,18 +392,6 @@ namespace Narvalo.Fx
             return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
         }
 
-
-        public static void Trigger<TSource>(
-            this Identity<TSource> @this,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            /* T4: C# indent */
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(_ => { action.Invoke(_); return Identity.Unit; });
-        }
-
     } // End of Identity - T4: EmitMonadExtraExtensions().
 }
 

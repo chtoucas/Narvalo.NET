@@ -10,7 +10,7 @@ namespace Narvalo.Fx
     // Friendly version of Either<ExceptionDispatchInfo, Unit>, VoidOrError<ExceptionDispatchInfo>
     // or Outcome<Unit>.
     [DebuggerDisplay("Void")]
-    public partial class VoidOrException
+    public partial class VoidOrException : Internal.ISwitch<ExceptionDispatchInfo>
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private static readonly VoidOrException s_Void = new VoidOrException();
@@ -65,6 +65,22 @@ namespace Narvalo.Fx
 
             public override void ThrowIfError() => _exceptionInfo.Throw();
 
+            public override TResult Match<TResult>(
+                Func<ExceptionDispatchInfo, TResult> caseException,
+                Func<TResult> caseVoid)
+            {
+                Require.NotNull(caseException, nameof(caseException));
+
+                return caseException.Invoke(_exceptionInfo);
+            }
+
+            public override void Match(Action<ExceptionDispatchInfo> caseException, Action caseVoid)
+            {
+                Require.NotNull(caseException, nameof(caseException));
+
+                caseException.Invoke(_exceptionInfo);
+            }
+
             public override Outcome<Unit> ToOutcome() => Outcome.Failure<Unit>(_exceptionInfo);
 
             public override string ToString()
@@ -93,6 +109,24 @@ namespace Narvalo.Fx
 
                 public ExceptionDispatchInfo ExceptionInfo => _inner._exceptionInfo;
             }
+        }
+    }
+
+    // Implements the Internal.ISwitch<ExceptionDispatchInfo> interface.
+    public partial class VoidOrException
+    {
+        public virtual TResult Match<TResult>(Func<ExceptionDispatchInfo, TResult> caseException, Func<TResult> caseVoid)
+        {
+            Require.NotNull(caseVoid, nameof(caseVoid));
+
+            return caseVoid.Invoke();
+        }
+
+        public virtual void Match(Action<ExceptionDispatchInfo> caseException, Action caseVoid)
+        {
+            Require.NotNull(caseVoid, nameof(caseVoid));
+
+            caseVoid.Invoke();
         }
     }
 }

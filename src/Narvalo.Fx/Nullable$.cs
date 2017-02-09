@@ -22,27 +22,36 @@ namespace Narvalo.Fx
 
         #endregion
 
-        //public static TResult Project<TSource, TResult>(
-        //    this TSource? @this,
-        //    Func<TSource, TResult> selector,
-        //    TResult caseNull)
-        //    where TSource : struct
-        //{
-        //    Require.NotNull(selector, nameof(selector));
+        #region Pattern matching
 
-        //    return @this.HasValue ? selector.Invoke(@this.Value) : caseNull;
-        //}
+        public static TResult Match<TSource, TResult>(
+            this TSource? @this,
+            Func<TSource, TResult> caseValue,
+            Func<TResult> caseNull)
+            where TSource : struct
+        {
+            Require.NotNull(caseValue, nameof(caseValue));
+            Require.NotNull(caseNull, nameof(caseNull));
 
-        //public static TResult Project<TSource, TResult>(
-        //    this TSource? @this,
-        //    Func<TSource, TResult> selector,
-        //    Func<TResult> caseNull)
-        //    where TSource : struct
-        //{
-        //    Require.NotNull(selector, nameof(selector));
-        //    Require.NotNull(caseNull, nameof(caseNull));
+            return @this.HasValue ? caseValue.Invoke(@this.Value) : caseNull.Invoke();
+        }
 
-        //    return @this.HasValue ? selector.Invoke(@this.Value) : caseNull.Invoke();
-        //}
+        public static void Match<TSource>(this TSource? @this, Action<TSource> caseValue, Action caseNull)
+            where TSource : struct
+        {
+            Require.NotNull(caseValue, nameof(caseValue));
+            Require.NotNull(caseNull, nameof(caseNull));
+
+            if (@this.HasValue)
+            {
+                caseValue.Invoke(@this.Value);
+            }
+            else
+            {
+                caseNull.Invoke();
+            }
+        }
+
+        #endregion
     }
 }

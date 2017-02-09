@@ -126,53 +126,7 @@ namespace Narvalo.Fx.More
             return Coalesce(@this, predicate, null, other);
         }
 
-        public static void Trigger<TSource>(this TSource? @this, Action<TSource> action)
-            where TSource : struct
-        {
-            Require.NotNull(action, nameof(action));
-
-            if (@this.HasValue)
-            {
-                action.Invoke(@this.Value);
-            }
-        }
-
         #endregion
-
-        public static void Trigger<TSource>(this TSource? @this, Action<TSource> action, Action caseNull)
-            where TSource : struct
-        {
-            Require.NotNull(action, nameof(action));
-            Require.NotNull(caseNull, nameof(caseNull));
-
-            if (@this.HasValue)
-            {
-                action.Invoke(@this.Value);
-            }
-            else
-            {
-                caseNull.Invoke();
-            }
-        }
-
-        // Alias for Trigger().
-        public static void OnValue<TSource>(this TSource? @this, Action<TSource> action) where TSource : struct
-        {
-            Expect.NotNull(action);
-
-            @this.Trigger(action);
-        }
-
-        public static void OnNull<TSource>(this TSource? @this, Action action)
-            where TSource : struct
-        {
-            Require.NotNull(action, nameof(action));
-
-            if (!@this.HasValue)
-            {
-                action.Invoke();
-            }
-        }
 
         public static TSource ValueOrThrow<TSource>(this TSource? @this, Exception exception)
             where TSource : struct

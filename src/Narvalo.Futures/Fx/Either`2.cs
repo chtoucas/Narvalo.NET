@@ -13,20 +13,13 @@ namespace Narvalo.Fx
     /// <remarks>The enclosed value might be <see langword="null"/>.</remarks>
     /// <typeparam name="TLeft">The underlying type of the left part.</typeparam>
     /// <typeparam name="TRight">The underlying type of the right part.</typeparam>
-    /// <seealso cref="Outcome{T}"/>
-    /// <seealso cref="VoidOrBreak"/>
-    /// <seealso cref="VoidOrError"/>
-    public abstract partial class Either<TLeft, TRight>
+    public abstract partial class Either<TLeft, TRight> : Internal.IDisjointUnionOf<TLeft, TRight>
     {
 #if CONTRACTS_FULL // Custom ctor visibility for the contract class only.
         protected Either() { }
 #else
         private Either() { }
 #endif
-
-        public abstract void Trigger(Action<TLeft> caseLeft, Action<TRight> caseRight);
-
-        //public abstract TResult Project<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight);
 
         public abstract Maybe<TLeft> LeftOrNone();
 
@@ -56,20 +49,20 @@ namespace Narvalo.Fx
             {
                 _value = value;
             }
+            public override TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
+            {
+                Require.NotNull(caseLeft, nameof(caseLeft));
 
-            public override void Trigger(Action<TLeft> caseLeft, Action<TRight> caseRight)
+                return caseLeft.Invoke(_value);
+            }
+
+            public override void Match(Action<TLeft> caseLeft, Action<TRight> caseRight)
             {
                 Require.NotNull(caseLeft, nameof(caseLeft));
 
                 caseLeft.Invoke(_value);
             }
 
-            //public override TResult Project<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
-            //{
-            //    Require.NotNull(caseLeft, nameof(caseLeft));
-
-            //    return caseLeft.Invoke(_value);
-            //}
 
             public override Maybe<TLeft> LeftOrNone() => Maybe.Of(_value);
 
@@ -112,19 +105,19 @@ namespace Narvalo.Fx
                 _value = value;
             }
 
-            public override void Trigger(Action<TLeft> caseLeft, Action<TRight> caseRight)
+            public override TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
+            {
+                Require.NotNull(caseRight, nameof(caseRight));
+
+                return caseRight.Invoke(_value);
+            }
+
+            public override void Match(Action<TLeft> caseLeft, Action<TRight> caseRight)
             {
                 Require.NotNull(caseRight, nameof(caseRight));
 
                 caseRight.Invoke(_value);
             }
-
-            //public override TResult Project<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
-            //{
-            //    Require.NotNull(caseRight, nameof(caseRight));
-
-            //    return caseRight.Invoke(_value);
-            //}
 
             public override Maybe<TLeft> LeftOrNone() => Maybe<TLeft>.None;
 
@@ -157,6 +150,14 @@ namespace Narvalo.Fx
                 return Format.Current("Right({0})", _value);
             }
         }
+    }
+
+    // Implements the Internal.IDisjointUnionOf<TLeft, TRight> interface.
+    public abstract partial class Either<TLeft, TRight>
+    {
+        public abstract TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight);
+
+        public abstract void Match(Action<TLeft> caseLeft, Action<TRight> caseRight);
     }
 }
 

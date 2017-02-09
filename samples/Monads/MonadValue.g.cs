@@ -644,18 +644,6 @@ namespace Monads
             return @this.Coalesce(predicate, MonadValue<TResult>.None, other);
         }
 
-
-        public static void Trigger<TSource>(
-            this MonadValue<TSource> @this,
-            Action<TSource> action)
-            where TSource : struct
-        {
-            /* T4: C# indent */
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(_ => { action.Invoke(_); return MonadValue.Unit; });
-        }
-
     } // End of MonadValue - T4: EmitMonadExtraExtensions().
 
     // Provides extension methods for Func<T> in the Kleisli category.
@@ -768,22 +756,6 @@ namespace Monads.More
         #endregion
 
         #region Generalisations of list functions (Prelude)
-
-        /// <remarks>
-        /// <para>Named <c>filterM</c> in Haskell parlance.</para>
-        /// <para>Haskell use a different signature.</para>
-        /// </remarks>
-        public static IEnumerable<TSource> Where<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, MonadValue<bool>> predicateM)
-            where TSource : struct
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(predicateM);
-            Warrant.NotNull<IEnumerable<TSource>>();
-
-            return @this.WhereCore(predicateM);
-        }
 
 
         /// <remarks>
@@ -911,35 +883,6 @@ namespace Monads.Internal
     // Provides the core extension methods for IEnumerable<T>.
     internal static partial class EnumerableExtensions
     {
-
-        internal static IEnumerable<TSource> WhereCore<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, MonadValue<bool>> predicateM)
-            where TSource : struct
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicateM, nameof(predicateM));
-            Warrant.NotNull<IEnumerable<TSource>>();
-
-            // NB: Haskell uses tail recursion, we don't.
-            var list = new List<TSource>();
-
-            foreach (var item in @this)
-            {
-                var m = predicateM.Invoke(item);
-
-                m.Trigger(
-                    _ =>
-                    {
-                        if (_ == true)
-                        {
-                            list.Add(item);
-                        }
-                    });
-            }
-
-            return list;
-        }
 
         internal static MonadValue<TAccumulate> FoldCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,

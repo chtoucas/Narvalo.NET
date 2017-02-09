@@ -72,6 +72,7 @@ TODO
 
 Narvalo.Fx:
 - Naming: Extensions / More / Most
+- Fix: Implements WhereCore<>.
 - Filter -> Where; remove Forever? MapAndUnzip -> SelectAndUnzip? MapAny -> SelectMany?
 - Select -> ??? Apply -> Trigger? Async versions?
 - Disabled When, Unless and Guard

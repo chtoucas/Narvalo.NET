@@ -14,6 +14,7 @@ public partial class MonadTemplate
     {
 
 <#+ if (!HasTypeConstraints) { #>
+
 <#+ if (!SuppressMessage) { #>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
 <#+ } #>
@@ -30,12 +31,10 @@ public partial class MonadTemplate
             return @this.Select(funM).EmptyIfNull().Collect();
         }
 
-<#+ } // T4: End of !HasTypeConstraints. #>
-
 <#+ if (!SuppressMessage) { #>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
 <#+ } #>
-        internal static IEnumerable<TSource> WhereCore<TSource>(
+        internal static <#= Name #><IEnumerable<TSource>> WhereCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><bool>> predicateM)
             <#+ WriteTypeConstraints("TSource"); #>
@@ -44,6 +43,9 @@ public partial class MonadTemplate
             Require.NotNull(predicateM, nameof(predicateM));
             Warrant.NotNull<IEnumerable<TSource>>();
 
+            throw new NotImplementedException();
+
+            /*
             // NB: Haskell uses tail recursion, we don't.
             var list = new List<TSource>();
 
@@ -76,9 +78,8 @@ public partial class MonadTemplate
             }
 
             return list;
+            */
         }
-
-<#+ if (!HasTypeConstraints) { #>
 
 <#+ if (!SuppressMessage) { #>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]

@@ -636,18 +636,5 @@ namespace Narvalo.Fx
             return @this.Coalesce(predicate, VoidOrError<TResult>.Void, other);
         }
 
-
-        public static void Trigger<TSource>(
-            this VoidOrError<TSource> @this,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(action, nameof(action));
-            Warrant.NotNull<VoidOrError<TSource>>();
-
-            @this.Bind(_ => { action.Invoke(_); return VoidOrError.Unit; });
-        }
-
     } // End of VoidOrError - T4: EmitMonadExtraExtensions().
 }

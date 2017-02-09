@@ -18,7 +18,7 @@ namespace Narvalo.Fx
     [DebuggerDisplay("IsSome = {IsSome}")]
     [DebuggerTypeProxy(typeof(Maybe<>.DebugView))]
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "[Intentionally] Maybe<T> only pretends to be a collection.")]
-    public partial struct Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>
+    public partial struct Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>, Internal.ISwitch<T>
     {
         private readonly bool _isSome;
 
@@ -103,54 +103,6 @@ namespace Narvalo.Fx
         }
 
         #endregion
-
-        public void Trigger(Action<T> action, Action caseNone)
-        {
-            Require.NotNull(action, nameof(action));
-            Require.NotNull(caseNone, nameof(caseNone));
-
-            if (IsSome)
-            {
-                action.Invoke(Value);
-            }
-            else
-            {
-                caseNone.Invoke();
-            }
-        }
-
-        // Alias for Trigger().
-        public void OnSome(Action<T> action)
-        {
-            Expect.NotNull(action);
-
-            Trigger(action);
-        }
-
-        public void OnNone(Action action)
-        {
-            Require.NotNull(action, nameof(action));
-
-            if (!IsSome)
-            {
-                action.Invoke();
-            }
-        }
-
-        //public TResult Project<TResult>(Func<T, TResult> selector, TResult caseNone)
-        //{
-        //    Require.NotNull(selector, nameof(selector));
-
-        //    return IsSome ? selector.Invoke(Value) : caseNone;
-        //}
-
-        //public TResult Project<TResult>(Func<T, TResult> selector, Func<TResult> caseNone)
-        //{
-        //    Require.NotNull(selector, nameof(selector));
-        //    Require.NotNull(caseNone, nameof(caseNone));
-
-        //    return IsSome ? selector.Invoke(Value) : caseNone.Invoke();
-        //}
 
         /// <summary>
         /// Obtains the enclosed value if any; otherwise the default value of the type T.
@@ -325,20 +277,66 @@ namespace Narvalo.Fx
         }
 
         #endregion
+    }
 
-        #region Non-standard extensions
-
-        public void Trigger(Action<T> action)
+    // Provides the core Monad methods.
+    public partial struct Maybe<T>
+    {
+        public Maybe<TResult> Bind<TResult>(Func<T, Maybe<TResult>> selectorM)
         {
-            Require.NotNull(action, nameof(action));
+            Require.NotNull(selectorM, nameof(selectorM));
+
+            return IsSome ? selectorM.Invoke(Value) : Maybe<TResult>.None;
+        }
+
+        [DebuggerHidden]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
+        internal static Maybe<T> η(T value)
+            => value != null ? new Maybe<T>(value) : Maybe<T>.None;
+
+        [DebuggerHidden]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
+        internal static Maybe<T> μ(Maybe<Maybe<T>> square)
+            => square.IsSome ? square.Value : Maybe<T>.None;
+    }
+
+    // Provides the core MonadOr methods.
+    public partial struct Maybe<T>
+    {
+        /// <summary>
+        /// An instance of <see cref="Maybe{T}" /> that does not enclose any value.
+        /// </summary>
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
+        public static readonly Maybe<T> None = new Maybe<T>();
+
+        public Maybe<T> OrElse(Maybe<T> other) => !IsSome ? other : this;
+    }
+
+    // Implements the Internal.ISwitch<T> interface.
+    public partial struct Maybe<T>
+    {
+        public TResult Match<TResult>(Func<T, TResult> caseSome, Func<TResult> caseNone)
+        {
+            Require.NotNull(caseSome, nameof(caseSome));
+            Require.NotNull(caseNone, nameof(caseNone));
+
+            return IsSome ? caseSome.Invoke(Value) : caseNone.Invoke();
+        }
+
+        public void Match(Action<T> caseSome, Action caseNone)
+        {
+            Require.NotNull(caseSome, nameof(caseSome));
+            Require.NotNull(caseNone, nameof(caseNone));
 
             if (IsSome)
             {
-                action.Invoke(Value);
+                caseSome.Invoke(Value);
+            }
+            else
+            {
+                caseNone.Invoke();
             }
         }
-
-        #endregion
     }
 
     // Implements the IEnumerable>T> interface.
@@ -423,39 +421,6 @@ namespace Narvalo.Fx
 
             return IsSome ? comparer.GetHashCode(Value) : 0;
         }
-    }
-
-    // Provides the core Monad methods.
-    public partial struct Maybe<T>
-    {
-        public Maybe<TResult> Bind<TResult>(Func<T, Maybe<TResult>> selectorM)
-        {
-            Require.NotNull(selectorM, nameof(selectorM));
-
-            return IsSome ? selectorM.Invoke(Value) : Maybe<TResult>.None;
-        }
-
-        [DebuggerHidden]
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
-        internal static Maybe<T> η(T value)
-            => value != null ? new Maybe<T>(value) : Maybe<T>.None;
-
-        [DebuggerHidden]
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
-        internal static Maybe<T> μ(Maybe<Maybe<T>> square)
-            => square.IsSome ? square.Value : Maybe<T>.None;
-    }
-
-    // Provides the core MonadOr methods.
-    public partial struct Maybe<T>
-    {
-        /// <summary>
-        /// An instance of <see cref="Maybe{T}" /> that does not enclose any value.
-        /// </summary>
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
-        public static readonly Maybe<T> None = new Maybe<T>();
-
-        public Maybe<T> OrElse(Maybe<T> other) => !IsSome ? other : this;
     }
 }
 

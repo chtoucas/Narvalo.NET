@@ -98,8 +98,6 @@ public partial class MonadTemplate
             return @this.When(!predicate, action);
         }
 
-<#+ End of DISABLED */ #>
-
         public static void Trigger<TSource>(
             this <#= Name #><TSource> @this,
             Action<TSource> action)
@@ -113,8 +111,6 @@ public partial class MonadTemplate
 
             @this.Bind(_ => { action.Invoke(_); return <#= Name #>.Unit; });
         }
-
-<#+ /* DISABLED #>
 
 <#+ if (HasPlus) { #>
 

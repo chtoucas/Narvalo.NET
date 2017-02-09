@@ -36,7 +36,7 @@ namespace Narvalo.Fx.More
             return (from _ in @this
                     let m = funM.Invoke(_)
                     where m.IsSuccess
-                    select m.ToValue()).EmptyIfNull();
+                    select m.Value).EmptyIfNull();
         }
     }
 

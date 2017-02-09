@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BooleanResult`1.cs" />
+    <Compile Include="Internal\IDisjointUnionOf`.cs" />
     <Compile Include="Iteration.cs" />
     <Compile Include="Iteration`2.cs" />
     <Compile Include="Nullable%24.cs" />

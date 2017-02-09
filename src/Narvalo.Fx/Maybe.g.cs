@@ -601,18 +601,6 @@ namespace Narvalo.Fx
             return @this.Coalesce(predicate, Maybe<TResult>.None, other);
         }
 
-
-        public static void Trigger<TSource>(
-            this Maybe<TSource> @this,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            /* T4: C# indent */
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(_ => { action.Invoke(_); return Maybe.Unit; });
-        }
-
     } // End of Maybe - T4: EmitMonadExtraExtensions().
 
     // Provides extension methods for Func<T> in the Kleisli category.
@@ -761,11 +749,11 @@ namespace Narvalo.Fx.More
 
         #region Generalisations of list functions (Prelude)
 
+
         /// <remarks>
         /// <para>Named <c>filterM</c> in Haskell parlance.</para>
-        /// <para>Haskell use a different signature.</para>
         /// </remarks>
-        public static IEnumerable<TSource> Where<TSource>(
+        public static Maybe<IEnumerable<TSource>> Where<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<bool>> predicateM)
             /* T4: C# indent */
@@ -776,7 +764,6 @@ namespace Narvalo.Fx.More
 
             return @this.WhereCore(predicateM);
         }
-
 
         /// <remarks>
         /// Named <c>mapAndUnzipM</c> in Haskell parlance.
@@ -969,7 +956,7 @@ namespace Narvalo.Fx.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static IEnumerable<TSource> WhereCore<TSource>(
+        internal static Maybe<IEnumerable<TSource>> WhereCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<bool>> predicateM)
             /* T4: C# indent */
@@ -978,6 +965,9 @@ namespace Narvalo.Fx.Internal
             Require.NotNull(predicateM, nameof(predicateM));
             Warrant.NotNull<IEnumerable<TSource>>();
 
+            throw new NotImplementedException();
+
+            /*
             // NB: Haskell uses tail recursion, we don't.
             var list = new List<TSource>();
 
@@ -996,6 +986,7 @@ namespace Narvalo.Fx.Internal
             }
 
             return list;
+            */
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]

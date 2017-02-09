@@ -267,10 +267,10 @@ namespace Narvalo.Fx
 
                 if (!m.IsSuccess)
                 {
-                    return Outcome.Failure<IEnumerable<TSource>>(m.ToExceptionDispatchInfo());
+                    return Outcome.Failure<IEnumerable<TSource>>(m.ExceptionInfo);
                 }
 
-                list.Add(m.ToValue());
+                list.Add(m.Value);
             }
 
             return Outcome.Success(list.AsEnumerable());

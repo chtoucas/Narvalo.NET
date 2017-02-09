@@ -636,19 +636,6 @@ namespace Monads
             return @this.Coalesce(predicate, MonadZero<TResult>.Zero, other);
         }
 
-
-        public static void Trigger<TSource>(
-            this MonadZero<TSource> @this,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(action, nameof(action));
-            Warrant.NotNull<MonadZero<TSource>>();
-
-            @this.Bind(_ => { action.Invoke(_); return MonadZero.Unit; });
-        }
-
     } // End of MonadZero - T4: EmitMonadExtraExtensions().
 
     // Provides extension methods for Func<T> in the Kleisli category.
@@ -784,11 +771,11 @@ namespace Monads.More
 
         #region Generalisations of list functions (Prelude)
 
+
         /// <remarks>
         /// <para>Named <c>filterM</c> in Haskell parlance.</para>
-        /// <para>Haskell use a different signature.</para>
         /// </remarks>
-        public static IEnumerable<TSource> Where<TSource>(
+        public static MonadZero<IEnumerable<TSource>> Where<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, MonadZero<bool>> predicateM)
             /* T4: C# indent */
@@ -799,7 +786,6 @@ namespace Monads.More
 
             return @this.WhereCore(predicateM);
         }
-
 
         /// <remarks>
         /// Named <c>mapAndUnzipM</c> in Haskell parlance.
@@ -988,7 +974,7 @@ namespace Monads.Internal
             return @this.Select(funM).EmptyIfNull().Collect();
         }
 
-        internal static IEnumerable<TSource> WhereCore<TSource>(
+        internal static MonadZero<IEnumerable<TSource>> WhereCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, MonadZero<bool>> predicateM)
             /* T4: C# indent */
@@ -997,6 +983,9 @@ namespace Monads.Internal
             Require.NotNull(predicateM, nameof(predicateM));
             Warrant.NotNull<IEnumerable<TSource>>();
 
+            throw new NotImplementedException();
+
+            /*
             // NB: Haskell uses tail recursion, we don't.
             var list = new List<TSource>();
 
@@ -1018,6 +1007,7 @@ namespace Monads.Internal
             }
 
             return list;
+            */
         }
 
         internal static MonadZero<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>

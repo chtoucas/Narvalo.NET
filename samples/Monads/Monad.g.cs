@@ -396,18 +396,6 @@ namespace Monads
             return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
         }
 
-
-        public static void Trigger<TSource>(
-            this Monad<TSource> @this,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(_ => { action.Invoke(_); return Monad.Unit; });
-        }
-
     } // End of Monad - T4: EmitMonadExtraExtensions().
 
     // Provides extension methods for Func<T> in the Kleisli category.
@@ -542,11 +530,11 @@ namespace Monads.More
 
         #region Generalisations of list functions (Prelude)
 
+
         /// <remarks>
         /// <para>Named <c>filterM</c> in Haskell parlance.</para>
-        /// <para>Haskell use a different signature.</para>
         /// </remarks>
-        public static IEnumerable<TSource> Where<TSource>(
+        public static Monad<IEnumerable<TSource>> Where<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Monad<bool>> predicateM)
             /* T4: C# indent */
@@ -557,7 +545,6 @@ namespace Monads.More
 
             return @this.WhereCore(predicateM);
         }
-
 
         /// <remarks>
         /// Named <c>mapAndUnzipM</c> in Haskell parlance.
@@ -739,7 +726,7 @@ namespace Monads.Internal
             return @this.Select(funM).EmptyIfNull().Collect();
         }
 
-        internal static IEnumerable<TSource> WhereCore<TSource>(
+        internal static Monad<IEnumerable<TSource>> WhereCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Monad<bool>> predicateM)
             /* T4: C# indent */
@@ -748,6 +735,9 @@ namespace Monads.Internal
             Require.NotNull(predicateM, nameof(predicateM));
             Warrant.NotNull<IEnumerable<TSource>>();
 
+            throw new NotImplementedException();
+
+            /*
             // NB: Haskell uses tail recursion, we don't.
             var list = new List<TSource>();
 
@@ -769,6 +759,7 @@ namespace Monads.Internal
             }
 
             return list;
+            */
         }
 
         internal static Monad<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>

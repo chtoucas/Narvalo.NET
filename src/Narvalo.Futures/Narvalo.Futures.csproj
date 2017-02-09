@@ -14,6 +14,9 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Narvalo.Fx\Internal\IDisjointUnionOf`.cs">
+      <Link>Fx\Internal\IDisjointUnionOf`.cs</Link>
+    </Compile>
     <Compile Include="BinaryEncoder.cs" />
     <Compile Include="Cerbere\ContractHelpers.cs" />
     <Compile Include="Configuration\AbsoluteUriValidator.cs" />

@@ -8,7 +8,7 @@ namespace Narvalo.Fx
     using System.Diagnostics.Contracts;
 
     // Friendly version of Either<TError, Unit>.
-    public partial class VoidOrError<TError>
+    public partial class VoidOrError<TError> : Internal.ISwitch<TError>
     {
         private VoidOrError() { }
 
@@ -53,6 +53,20 @@ namespace Narvalo.Fx
             public override TError Error
             {
                 get { Warrant.NotNullUnconstrained<TError>(); return _error; }
+            }
+
+            public override TResult Match<TResult>(Func<TError, TResult> caseError, Func<TResult> caseVoid)
+            {
+                Require.NotNull(caseError, nameof(caseError));
+
+                return caseError.Invoke(Error);
+            }
+
+            public override void Match(Action<TError> caseError, Action caseVoid)
+            {
+                Require.NotNull(caseError, nameof(caseError));
+
+                caseError.Invoke(Error);
             }
 
             public override string ToString()
@@ -120,6 +134,24 @@ namespace Narvalo.Fx
         }
 
         public VoidOrError<TError> OrElse(VoidOrError<TError> other) => IsVoid ? other : this;
+    }
+
+    // Implements the Internal.ISwitch<TError> interface.
+    public partial class VoidOrError<TError>
+    {
+        public virtual TResult Match<TResult>(Func<TError, TResult> caseError, Func<TResult> caseVoid)
+        {
+            Require.NotNull(caseVoid, nameof(caseVoid));
+
+            return caseVoid.Invoke();
+        }
+
+        public virtual void Match(Action<TError> caseError, Action caseVoid)
+        {
+            Require.NotNull(caseVoid, nameof(caseVoid));
+
+            caseVoid.Invoke();
+        }
     }
 }
 
