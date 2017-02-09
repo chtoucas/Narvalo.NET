@@ -645,7 +645,7 @@ namespace Monads
         }
 
 
-        public static void Invoke<TSource>(
+        public static void Trigger<TSource>(
             this MonadValue<TSource> @this,
             Action<TSource> action)
             where TSource : struct
@@ -773,7 +773,7 @@ namespace Monads.More
         /// <para>Named <c>filterM</c> in Haskell parlance.</para>
         /// <para>Haskell use a different signature.</para>
         /// </remarks>
-        public static IEnumerable<TSource> Filter<TSource>(
+        public static IEnumerable<TSource> Where<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, MonadValue<bool>> predicateM)
             where TSource : struct
@@ -782,7 +782,7 @@ namespace Monads.More
             Expect.NotNull(predicateM);
             Warrant.NotNull<IEnumerable<TSource>>();
 
-            return @this.FilterCore(predicateM);
+            return @this.WhereCore(predicateM);
         }
 
 
@@ -912,7 +912,7 @@ namespace Monads.Internal
     internal static partial class EnumerableExtensions
     {
 
-        internal static IEnumerable<TSource> FilterCore<TSource>(
+        internal static IEnumerable<TSource> WhereCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, MonadValue<bool>> predicateM)
             where TSource : struct
@@ -928,7 +928,7 @@ namespace Monads.Internal
             {
                 var m = predicateM.Invoke(item);
 
-                m.Invoke(
+                m.Trigger(
                     _ =>
                     {
                         if (_ == true)

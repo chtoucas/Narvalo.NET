@@ -38,7 +38,7 @@ public partial class MonadTemplate
         /// <para>Named <c>filterM</c> in Haskell parlance.</para>
         /// <para>Haskell use a different signature.</para>
         /// </remarks>
-        public static IEnumerable<TSource> Filter<TSource>(
+        public static IEnumerable<TSource> Where<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><bool>> predicateM)
             <#+ WriteTypeConstraints("TSource"); #>
@@ -47,7 +47,7 @@ public partial class MonadTemplate
             Expect.NotNull(predicateM);
             Warrant.NotNull<IEnumerable<TSource>>();
 
-            return @this.FilterCore(predicateM);
+            return @this.WhereCore(predicateM);
         }
 
 <#+ if (!HasTypeConstraints) { #>

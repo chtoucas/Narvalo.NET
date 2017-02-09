@@ -100,7 +100,7 @@ public partial class MonadTemplate
 
 <#+ End of DISABLED */ #>
 
-        public static void Invoke<TSource>(
+        public static void Trigger<TSource>(
             this <#= Name #><TSource> @this,
             Action<TSource> action)
             <#+ WriteTypeConstraints("TSource"); #>

@@ -20,7 +20,7 @@ namespace Narvalo.Web
             var binder = new TBinder();
 
             binder.Bind(context.Request)
-                .Invoke(
+                .Trigger(
                     action: _ => ProcessRequestCore(context, _),
                     caseNone: () => ProcessBindingFailure(context, binder));
         }

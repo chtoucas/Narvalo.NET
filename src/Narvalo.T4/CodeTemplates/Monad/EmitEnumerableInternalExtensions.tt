@@ -35,7 +35,7 @@ public partial class MonadTemplate
 <#+ if (!SuppressMessage) { #>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
 <#+ } #>
-        internal static IEnumerable<TSource> FilterCore<TSource>(
+        internal static IEnumerable<TSource> WhereCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><bool>> predicateM)
             <#+ WriteTypeConstraints("TSource"); #>
@@ -54,7 +54,7 @@ public partial class MonadTemplate
 <#+ if (IsNullable) { #>
                 if (m != null)
                 {
-                    m.Invoke(
+                    m.Trigger(
                         _ =>
                         {
                             if (_ == true)
@@ -64,7 +64,7 @@ public partial class MonadTemplate
                         });
                 }
 <#+ } else { #>
-                m.Invoke(
+                m.Trigger(
                     _ =>
                     {
                         if (_ == true)

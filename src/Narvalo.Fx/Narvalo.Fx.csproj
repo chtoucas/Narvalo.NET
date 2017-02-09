@@ -74,16 +74,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BooleanResult`1.cs" />
-    <Compile Include="Identity.g.cs">
-      <DependentUpon>Identity.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Identity`1.cs" />
     <Compile Include="Iteration.cs" />
     <Compile Include="Iteration`2.cs" />
-    <Compile Include="More\Func%24.cs" />
-    <Compile Include="More\Nullable%24.cs" />
+    <Compile Include="Nullable%24.cs" />
     <Compile Include="VoidOrError.cs" />
     <Compile Include="VoidOrError.g.cs">
       <DependentUpon>VoidOrError.tt</DependentUpon>
@@ -154,12 +147,6 @@
     <None Include="VoidOrError.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>VoidOrError.g.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Identity.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Identity.g.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />

@@ -97,9 +97,9 @@ public partial class MonadTemplate
 
 <#+ /* DISABLED #>
 
-        #region Conditional execution of monadic expressions (Prelude)
-
 <#+ if (HasZero) { #>
+
+        #region Conditional execution of monadic expressions (Prelude)
 
         /// <remarks>
         /// Named <c>guard</c> in Haskell parlance.
@@ -113,9 +113,9 @@ public partial class MonadTemplate
             return predicate ? <#= Name #>.Unit : <#= Name #><global::Narvalo.Fx.Unit>.<#= ZeroName #>;
         }
 
-<#+ } // T4: End of HasZero. #>
-
         #endregion
+
+<#+ } // T4: End of HasZero. #>
 
 <#+ End of DISABLED */ #>
 

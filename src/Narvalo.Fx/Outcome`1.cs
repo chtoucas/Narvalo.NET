@@ -103,7 +103,7 @@ namespace Narvalo.Fx
         #region Abstract methods
 
         // Core monad Bind method.
-        public abstract Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector);
+        public abstract Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selectorM);
 
         // Overrides the 'Select' auto-generated (extension) method (see Outcome.g.cs).
         // Since Select is a building block, we override it in Failure_ and Success_.
@@ -113,7 +113,7 @@ namespace Narvalo.Fx
 
         #endregion
 
-        public void Invoke(Action<T> caseSuccess, Action<ExceptionDispatchInfo> caseFailure)
+        public void Trigger(Action<T> caseSuccess, Action<ExceptionDispatchInfo> caseFailure)
         {
             Require.NotNull(caseSuccess, nameof(caseSuccess));
             Require.NotNull(caseFailure, nameof(caseFailure));
@@ -128,22 +128,12 @@ namespace Narvalo.Fx
             }
         }
 
-        public TResult Map<TResult>(Func<T, TResult> caseSuccess, Func<TResult> caseFailure)
-        {
-            Require.NotNull(caseSuccess, nameof(caseSuccess));
-            Require.NotNull(caseFailure, nameof(caseFailure));
-
-            return IsSuccess ? caseSuccess.Invoke(ToValue()) : caseFailure.Invoke();
-        }
-
+        // Alias for Trigger().
         public void OnSuccess(Action<T> action)
         {
             Expect.NotNull(action);
 
-            if (IsSuccess)
-            {
-                Invoke(action);
-            }
+            Trigger(action);
         }
 
         public void OnFailure(Action<ExceptionDispatchInfo> action)
@@ -155,6 +145,15 @@ namespace Narvalo.Fx
                 action.Invoke(ToExceptionDispatchInfo());
             }
         }
+
+        // REVIEW: use Func<ExceptionDispatchInfo, TResult> for caseFailure?
+        //public TResult Project<TResult>(Func<T, TResult> caseSuccess, Func<TResult> caseFailure)
+        //{
+        //    Require.NotNull(caseSuccess, nameof(caseSuccess));
+        //    Require.NotNull(caseFailure, nameof(caseFailure));
+
+        //    return IsSuccess ? caseSuccess.Invoke(ToValue()) : caseFailure.Invoke();
+        //}
 
         /// <summary>
         /// Obtains the underlying value if any; otherwise the default value of the type T.
@@ -204,7 +203,7 @@ namespace Narvalo.Fx
 
         #region Overrides a bunch of auto-generated (extension) methods (see Outcome.g.cs).
 
-        public void Invoke(Action<T> action)
+        public void Trigger(Action<T> action)
         {
             Require.NotNull(action, nameof(action));
 
@@ -291,11 +290,11 @@ namespace Narvalo.Fx
 
             internal T Value { get; }
 
-            public override Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector)
+            public override Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selectorM)
             {
-                Require.NotNull(selector, nameof(selector));
+                Require.NotNull(selectorM, nameof(selectorM));
 
-                return selector.Invoke(Value);
+                return selectorM.Invoke(Value);
             }
 
             public override Outcome<TResult> Select<TResult>(Func<T, TResult> selector)
@@ -358,7 +357,7 @@ namespace Narvalo.Fx
                 }
             }
 
-            public override Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector)
+            public override Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selectorM)
                 => Outcome<TResult>.η(ExceptionInfo);
 
             public override Outcome<TResult> Select<TResult>(Func<T, TResult> selector)

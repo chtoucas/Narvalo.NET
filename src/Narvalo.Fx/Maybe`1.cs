@@ -104,7 +104,7 @@ namespace Narvalo.Fx
 
         #endregion
 
-        public void Invoke(Action<T> action, Action caseNone)
+        public void Trigger(Action<T> action, Action caseNone)
         {
             Require.NotNull(action, nameof(action));
             Require.NotNull(caseNone, nameof(caseNone));
@@ -119,12 +119,12 @@ namespace Narvalo.Fx
             }
         }
 
-        // Alias for Invoke().
+        // Alias for Trigger().
         public void OnSome(Action<T> action)
         {
             Expect.NotNull(action);
 
-            Invoke(action);
+            Trigger(action);
         }
 
         public void OnNone(Action action)
@@ -137,20 +137,20 @@ namespace Narvalo.Fx
             }
         }
 
-        public TResult Invoke<TResult>(Func<T, TResult> caseSome, Func<TResult> caseNone)
-        {
-            Require.NotNull(caseSome, nameof(caseSome));
-            Require.NotNull(caseNone, nameof(caseNone));
+        //public TResult Project<TResult>(Func<T, TResult> selector, TResult caseNone)
+        //{
+        //    Require.NotNull(selector, nameof(selector));
 
-            if (IsSome)
-            {
-                return caseSome.Invoke(Value);
-            }
-            else
-            {
-                return caseNone.Invoke();
-            }
-        }
+        //    return IsSome ? selector.Invoke(Value) : caseNone;
+        //}
+
+        //public TResult Project<TResult>(Func<T, TResult> selector, Func<TResult> caseNone)
+        //{
+        //    Require.NotNull(selector, nameof(selector));
+        //    Require.NotNull(caseNone, nameof(caseNone));
+
+        //    return IsSome ? selector.Invoke(Value) : caseNone.Invoke();
+        //}
 
         /// <summary>
         /// Obtains the enclosed value if any; otherwise the default value of the type T.
@@ -328,7 +328,7 @@ namespace Narvalo.Fx
 
         #region Non-standard extensions
 
-        public void Invoke(Action<T> action)
+        public void Trigger(Action<T> action)
         {
             Require.NotNull(action, nameof(action));
 
@@ -428,11 +428,11 @@ namespace Narvalo.Fx
     // Provides the core Monad methods.
     public partial struct Maybe<T>
     {
-        public Maybe<TResult> Bind<TResult>(Func<T, Maybe<TResult>> selector)
+        public Maybe<TResult> Bind<TResult>(Func<T, Maybe<TResult>> selectorM)
         {
-            Require.NotNull(selector, nameof(selector));
+            Require.NotNull(selectorM, nameof(selectorM));
 
-            return IsSome ? selector.Invoke(Value) : Maybe<TResult>.None;
+            return IsSome ? selectorM.Invoke(Value) : Maybe<TResult>.None;
         }
 
         [DebuggerHidden]

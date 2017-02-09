@@ -84,11 +84,11 @@ namespace Narvalo.Fx
     // Provides the core Monad methods.
     public partial class VoidOrError<TError>
     {
-        public VoidOrError<TResult> Bind<TResult>(Func<TError, VoidOrError<TResult>> selector)
+        public VoidOrError<TResult> Bind<TResult>(Func<TError, VoidOrError<TResult>> selectorM)
         {
-            Require.NotNull(selector, nameof(selector));
+            Require.NotNull(selectorM, nameof(selectorM));
 
-            return IsError ? selector.Invoke(Error) : VoidOrError<TResult>.Void;
+            return IsError ? selectorM.Invoke(Error) : VoidOrError<TResult>.Void;
         }
 
         [DebuggerHidden]

@@ -397,7 +397,7 @@ namespace Narvalo.Fx
         }
 
 
-        public static void Invoke<TSource>(
+        public static void Trigger<TSource>(
             this Outcome<TSource> @this,
             Action<TSource> action)
             /* T4: C# indent */
@@ -546,7 +546,7 @@ namespace Narvalo.Fx.More
         /// <para>Named <c>filterM</c> in Haskell parlance.</para>
         /// <para>Haskell use a different signature.</para>
         /// </remarks>
-        public static IEnumerable<TSource> Filter<TSource>(
+        public static IEnumerable<TSource> Where<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Outcome<bool>> predicateM)
             /* T4: C# indent */
@@ -555,7 +555,7 @@ namespace Narvalo.Fx.More
             Expect.NotNull(predicateM);
             Warrant.NotNull<IEnumerable<TSource>>();
 
-            return @this.FilterCore(predicateM);
+            return @this.WhereCore(predicateM);
         }
 
 
@@ -743,7 +743,7 @@ namespace Narvalo.Fx.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static IEnumerable<TSource> FilterCore<TSource>(
+        internal static IEnumerable<TSource> WhereCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Outcome<bool>> predicateM)
             /* T4: C# indent */
@@ -761,7 +761,7 @@ namespace Narvalo.Fx.Internal
 
                 if (m != null)
                 {
-                    m.Invoke(
+                    m.Trigger(
                         _ =>
                         {
                             if (_ == true)

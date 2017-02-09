@@ -33,15 +33,6 @@ namespace Narvalo.Fx.More
 
         #region Basic Monad functions
 
-        public static TResult? Select<TSource, TResult>(this TSource? @this, Func<TSource, TResult> selector)
-            where TSource : struct
-            where TResult : struct
-        {
-            Require.NotNull(selector, nameof(selector));
-
-            return @this.HasValue ? (TResult?)selector.Invoke(@this.Value) : null;
-        }
-
         public static TResult? Then<TSource, TResult>(this TSource? @this, TResult? other)
             where TSource : struct
             where TResult : struct
@@ -135,7 +126,20 @@ namespace Narvalo.Fx.More
             return Coalesce(@this, predicate, null, other);
         }
 
-        public static void Invoke<TSource>(this TSource? @this, Action<TSource> action, Action caseNull)
+        public static void Trigger<TSource>(this TSource? @this, Action<TSource> action)
+            where TSource : struct
+        {
+            Require.NotNull(action, nameof(action));
+
+            if (@this.HasValue)
+            {
+                action.Invoke(@this.Value);
+            }
+        }
+
+        #endregion
+
+        public static void Trigger<TSource>(this TSource? @this, Action<TSource> action, Action caseNull)
             where TSource : struct
         {
             Require.NotNull(action, nameof(action));
@@ -151,15 +155,12 @@ namespace Narvalo.Fx.More
             }
         }
 
-        public static void Invoke<TSource>(this TSource? @this, Action<TSource> action)
-            where TSource : struct
+        // Alias for Trigger().
+        public static void OnValue<TSource>(this TSource? @this, Action<TSource> action) where TSource : struct
         {
-            Require.NotNull(action, nameof(action));
+            Expect.NotNull(action);
 
-            if (@this.HasValue)
-            {
-                action.Invoke(@this.Value);
-            }
+            @this.Trigger(action);
         }
 
         public static void OnNull<TSource>(this TSource? @this, Action action)
@@ -172,8 +173,6 @@ namespace Narvalo.Fx.More
                 action.Invoke();
             }
         }
-
-        #endregion
 
         public static TSource ValueOrThrow<TSource>(this TSource? @this, Exception exception)
             where TSource : struct
@@ -198,13 +197,5 @@ namespace Narvalo.Fx.More
 
         public static Maybe<TSource> ToMaybe<TSource>(this TSource? @this) where TSource : struct
             => Maybe.Of(@this);
-
-        public static void OnValue<TSource>(this TSource? @this, Action<TSource> action)
-            where TSource : struct
-        {
-            Expect.NotNull(action);
-
-            @this.Invoke(action);
-        }
     }
 }

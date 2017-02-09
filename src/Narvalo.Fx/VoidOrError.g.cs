@@ -637,7 +637,7 @@ namespace Narvalo.Fx
         }
 
 
-        public static void Invoke<TSource>(
+        public static void Trigger<TSource>(
             this VoidOrError<TSource> @this,
             Action<TSource> action)
             /* T4: C# indent */

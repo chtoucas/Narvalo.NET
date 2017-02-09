@@ -86,11 +86,11 @@ namespace Narvalo.Fx
     // Provides the core Monad methods.
     public partial struct Identity<T>
     {
-        public Identity<TResult> Bind<TResult>(Func<T, Identity<TResult>> selector)
+        public Identity<TResult> Bind<TResult>(Func<T, Identity<TResult>> selectorM)
         {
-            Require.NotNull(selector, nameof(selector));
+            Require.NotNull(selectorM, nameof(selectorM));
 
-            return selector.Invoke(Value);
+            return selectorM.Invoke(Value);
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]

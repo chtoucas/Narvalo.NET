@@ -24,9 +24,9 @@ namespace Narvalo.Fx
         private Either() { }
 #endif
 
-        public abstract void Invoke(Action<TLeft> caseLeft, Action<TRight> caseRight);
+        public abstract void Trigger(Action<TLeft> caseLeft, Action<TRight> caseRight);
 
-        public abstract TResult Map<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight);
+        //public abstract TResult Project<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight);
 
         public abstract Maybe<TLeft> LeftOrNone();
 
@@ -57,19 +57,19 @@ namespace Narvalo.Fx
                 _value = value;
             }
 
-            public override void Invoke(Action<TLeft> caseLeft, Action<TRight> caseRight)
+            public override void Trigger(Action<TLeft> caseLeft, Action<TRight> caseRight)
             {
                 Require.NotNull(caseLeft, nameof(caseLeft));
 
                 caseLeft.Invoke(_value);
             }
 
-            public override TResult Map<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
-            {
-                Require.NotNull(caseLeft, nameof(caseLeft));
+            //public override TResult Project<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
+            //{
+            //    Require.NotNull(caseLeft, nameof(caseLeft));
 
-                return caseLeft.Invoke(_value);
-            }
+            //    return caseLeft.Invoke(_value);
+            //}
 
             public override Maybe<TLeft> LeftOrNone() => Maybe.Of(_value);
 
@@ -112,19 +112,19 @@ namespace Narvalo.Fx
                 _value = value;
             }
 
-            public override void Invoke(Action<TLeft> caseLeft, Action<TRight> caseRight)
+            public override void Trigger(Action<TLeft> caseLeft, Action<TRight> caseRight)
             {
                 Require.NotNull(caseRight, nameof(caseRight));
 
                 caseRight.Invoke(_value);
             }
 
-            public override TResult Map<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
-            {
-                Require.NotNull(caseRight, nameof(caseRight));
+            //public override TResult Project<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
+            //{
+            //    Require.NotNull(caseRight, nameof(caseRight));
 
-                return caseRight.Invoke(_value);
-            }
+            //    return caseRight.Invoke(_value);
+            //}
 
             public override Maybe<TLeft> LeftOrNone() => Maybe<TLeft>.None;
 

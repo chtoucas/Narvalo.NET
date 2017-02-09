@@ -3,6 +3,7 @@
 namespace Narvalo.Fx
 {
     using System;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Provides a set of static and extension methods for <see cref="Maybe{T}"/>.

@@ -36,7 +36,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="MaybeFacts.cs" />
-    <Compile Include="More\NullableFacts.cs" />
+    <Compile Include="NullableFacts.cs" />
     <Compile Include="Outcome.g.cs">
       <DependentUpon>Outcome.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -74,6 +74,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="More\" />
   </ItemGroup>
   <Import Project="..\TestCommon\Narvalo.TestCommon.projitems" Label="Shared" />
   <Import Project="..\..\tools\Narvalo.Common.props" />

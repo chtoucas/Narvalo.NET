@@ -35,6 +35,7 @@
     <Compile Include="Finance\CheckDigitsFacts.cs" />
     <Compile Include="Finance\Currencies\CurrencyActivatorFacts.cs" />
     <Compile Include="Fx\EitherFacts.cs" />
+    <Compile Include="Fx\More\NullableFacts.cs" />
     <Compile Include="Fx\SwitchFacts.cs" />
     <Compile Include="Fx\VoidOrBreakFacts.cs" />
     <Compile Include="GuardFacts.cs" />
