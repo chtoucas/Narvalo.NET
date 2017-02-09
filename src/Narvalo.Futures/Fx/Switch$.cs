@@ -7,7 +7,7 @@ namespace Narvalo.Fx
     public static class SwitchExtensions
     {
         // Filter the left value.
-        public static Switch<TLeft, TRight> Filter<TLeft, TRight>(
+        public static Switch<TLeft, TRight> Where<TLeft, TRight>(
                this Switch<TLeft, TRight> @this,
                Func<TLeft, bool> leftPredicate)
         {
@@ -18,7 +18,7 @@ namespace Narvalo.Fx
         }
 
         // Filter the right value.
-        public static Switch<TLeft, TRight> Filter<TLeft, TRight>(
+        public static Switch<TLeft, TRight> Where<TLeft, TRight>(
                this Switch<TLeft, TRight> @this,
                Func<TRight, bool> rightPredicate)
         {
