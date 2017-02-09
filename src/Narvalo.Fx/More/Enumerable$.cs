@@ -11,7 +11,7 @@ namespace Narvalo.Fx.More
     /// </summary>
     public static partial class EnumerableExtensions
     {
-        public static IEnumerable<TResult> MapAny<TSource, TResult>(
+        public static IEnumerable<TResult> SelectAny<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<TResult>> funM)
         {
@@ -25,7 +25,7 @@ namespace Narvalo.Fx.More
                     select m.Value).EmptyIfNull();
         }
 
-        public static IEnumerable<TResult> MapAny<TSource, TResult>(
+        public static IEnumerable<TResult> SelectAny<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, Outcome<TResult>> funM)
         {
@@ -43,17 +43,17 @@ namespace Narvalo.Fx.More
     // Overrides for auto-generated (extension) methods on IEnumerable<T>.
     public static partial class EnumerableExtensions
     {
-        internal static IEnumerable<TSource> FilterCore<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, Maybe<bool>> predicateM)
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicateM, nameof(predicateM));
-            Warrant.NotNull<IEnumerable<TSource>>();
+        //internal static Maybe<IEnumerable<TSource>> WhereCore<TSource>(
+        //    this IEnumerable<TSource> @this,
+        //    Func<TSource, Maybe<bool>> predicateM)
+        //{
+        //    Require.NotNull(@this, nameof(@this));
+        //    Require.NotNull(predicateM, nameof(predicateM));
+        //    Warrant.NotNull<IEnumerable<TSource>>();
 
-            return @this
-                .Where(_ => predicateM.Invoke(_).ValueOrElse(false))
-                .EmptyIfNull();
-        }
+        //    var seq = @this.Where(_ => predicateM.Invoke(_).ValueOrElse(false));
+
+        //    return Maybe.Of(seq);
+        //}
     }
 }
