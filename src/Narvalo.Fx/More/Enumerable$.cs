@@ -11,30 +11,31 @@ namespace Narvalo.Fx.More
     /// </summary>
     public static partial class EnumerableExtensions
     {
+        // Named <c>mapMaybe</c> in Haskell parlance.
         public static IEnumerable<TResult> SelectAny<TSource, TResult>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Maybe<TResult>> funM)
+            Func<TSource, Maybe<TResult>> selectorM)
         {
             Require.NotNull(@this, nameof(@this));
-            Require.NotNull(funM, nameof(funM));
+            Require.NotNull(selectorM, nameof(selectorM));
             Warrant.NotNull<IEnumerable<TResult>>();
 
             return (from _ in @this
-                    let m = funM.Invoke(_)
+                    let m = selectorM.Invoke(_)
                     where m.IsSome
                     select m.Value).EmptyIfNull();
         }
 
         public static IEnumerable<TResult> SelectAny<TSource, TResult>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Outcome<TResult>> funM)
+            Func<TSource, Outcome<TResult>> selectorM)
         {
             Require.NotNull(@this, nameof(@this));
-            Require.NotNull(funM, nameof(funM));
+            Require.NotNull(selectorM, nameof(selectorM));
             Warrant.NotNull<IEnumerable<TResult>>();
 
             return (from _ in @this
-                    let m = funM.Invoke(_)
+                    let m = selectorM.Invoke(_)
                     where m.IsSuccess
                     select m.Value).EmptyIfNull();
         }
