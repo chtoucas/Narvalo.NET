@@ -3,7 +3,6 @@
 namespace Narvalo.Fx
 {
     using System;
-    using System.Threading.Tasks;
 
     /// <summary>
     /// Provides a set of static and extension methods for <see cref="Maybe{T}"/>.
@@ -21,23 +20,23 @@ namespace Narvalo.Fx
         public static T? ToNullable<T>(this Maybe<T> @this) where T : struct
             => @this.IsSome ? (T?)@this.Value : null;
 
-        public static T UnpackOrDefault<T>(this Maybe<T?> @this) where T : struct
-            => UnpackOrElse(@this, default(T));
+        public static T ExtractOrDefault<T>(this Maybe<T?> @this) where T : struct
+            => ExtractOrElse(@this, default(T));
 
-        public static T UnpackOrElse<T>(this Maybe<T?> @this, T defaultValue) where T : struct
-            => UnpackOrElse(@this, () => defaultValue);
+        public static T ExtractOrElse<T>(this Maybe<T?> @this, T defaultValue) where T : struct
+            => ExtractOrElse(@this, () => defaultValue);
 
-        public static T UnpackOrElse<T>(this Maybe<T?> @this, Func<T> defaultValueFactory) where T : struct
+        public static T ExtractOrElse<T>(this Maybe<T?> @this, Func<T> defaultValueFactory) where T : struct
         {
             Require.NotNull(defaultValueFactory, nameof(defaultValueFactory));
 
             return @this.ValueOrDefault() ?? defaultValueFactory.Invoke();
         }
 
-        public static T UnpackOrThrow<T>(this Maybe<T?> @this, Exception exception) where T : struct
-            => UnpackOrThrow(@this, () => exception);
+        public static T ExtractOrThrow<T>(this Maybe<T?> @this, Exception exception) where T : struct
+            => ExtractOrThrow(@this, () => exception);
 
-        public static T UnpackOrThrow<T>(this Maybe<T?> @this, Func<Exception> exceptionFactory) where T : struct
+        public static T ExtractOrThrow<T>(this Maybe<T?> @this, Func<Exception> exceptionFactory) where T : struct
         {
             Require.NotNull(exceptionFactory, nameof(exceptionFactory));
 

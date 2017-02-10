@@ -75,6 +75,7 @@ Narvalo.Fx:
 - Review and test all IEnumerable<T> extensions (in particular delayed arg check).
   Fix: Implements FilterCore<>.
 - Select -> ??? Apply, Trigger, OnSome, OnNone? Unpack -> Unbound?
+- Alternative, Maybe
 - Async versions?
 - ToString() and generics.
 - Implements IEquatable<T> on Monad<T>?
