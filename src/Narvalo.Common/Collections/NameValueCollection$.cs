@@ -40,7 +40,8 @@ namespace Narvalo.Collections
             Expect.NotNull(@this);
             Warrant.NotNull<IEnumerable<T>>();
 
-            return (from @_ in @this.MayGetValues(name) select @_.SelectAny(parserM)).ValueOrElse(Enumerable.Empty<T>());
+            return (from @_ in @this.MayGetValues(name) select @_.SelectAny(parserM))
+                .ValueOrElse(Enumerable.Empty<T>());
         }
 
         public static Maybe<IEnumerable<T>> MayParseAll<T>(
@@ -50,7 +51,7 @@ namespace Narvalo.Collections
         {
             Expect.NotNull(@this);
 
-            return @this.MayGetValues(name).Bind(@_ => @_.ForEach(parserM));
+            return @this.MayGetValues(name).Bind(@_ => @_.Map(parserM));
         }
     }
 }

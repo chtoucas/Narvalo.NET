@@ -392,7 +392,7 @@ namespace Narvalo.Fx
         /// <remarks>
         /// Named <c>mapM</c> in Haskell parlance. Same as <c>forM</c> with its arguments flipped.
         /// </remarks>
-        public static Outcome<IEnumerable<TResult>> Map<TSource, TResult>(
+        public static Outcome<IEnumerable<TResult>> ForEach<TSource, TResult>(
             this Func<TSource, Outcome<TResult>> @this,
             IEnumerable<TSource> seq)
         {
@@ -400,7 +400,7 @@ namespace Narvalo.Fx
             Expect.NotNull(seq);
             Warrant.NotNull<Outcome<IEnumerable<TResult>>>();
 
-            return seq.ForEachCore(@this);
+            return seq.MapCore(@this);
         }
 
 
@@ -491,23 +491,26 @@ namespace Narvalo.Fx.More
     using Narvalo.Fx.Internal;
 
     // Provides extension methods for IEnumerable<T>.
+    // We do not use the standard LINQ names to avoid a confusing API (see ZipWithCore()).
+    // - Select    -> Map
+    // - Where     -> Filter
+    // - Zip       -> ZipWith
+    // - Aggregate -> Reduce or Fold
     public static partial class EnumerableExtensions
     {
         #region Basic Monad functions (Prelude)
 
 
-        /// <remarks>
-        /// Named <c>forM</c> in Haskell parlance.
-        /// </remarks>
-        public static Outcome<IEnumerable<TResult>> ForEach<TSource, TResult>(
+        /// <remarks>Named <c>forM</c> in Haskell parlance.</remarks>
+        public static Outcome<IEnumerable<TResult>> Map<TSource, TResult>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Outcome<TResult>> funM)
+            Func<TSource, Outcome<TResult>> selectorM)
         {
             Expect.NotNull(@this);
-            Expect.NotNull(funM);
+            Expect.NotNull(selectorM);
             Warrant.NotNull<Outcome<IEnumerable<TResult>>>();
 
-            return @this.ForEachCore(funM);
+            return @this.MapCore(selectorM);
         }
 
 
@@ -516,10 +519,8 @@ namespace Narvalo.Fx.More
         #region Generalisations of list functions (Prelude)
 
 
-        /// <remarks>
-        /// <para>Named <c>filterM</c> in Haskell parlance.</para>
-        /// </remarks>
-        public static Outcome<IEnumerable<TSource>> Where<TSource>(
+        /// <remarks>Named <c>filterM</c> in Haskell parlance.</remarks>
+        public static Outcome<IEnumerable<TSource>> Filter<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Outcome<bool>> predicateM)
             /* T4: C# indent */
@@ -528,27 +529,27 @@ namespace Narvalo.Fx.More
             Expect.NotNull(predicateM);
             Warrant.NotNull<IEnumerable<TSource>>();
 
-            return @this.WhereCore(predicateM);
+            return @this.FilterCore(predicateM);
         }
 
         /// <remarks>
         /// Named <c>mapAndUnzipM</c> in Haskell parlance.
         /// </remarks>
         public static Outcome<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
-            SelectAndUnzip<TSource, TFirst, TSecond>(
+            MapUnzip<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
             Func<TSource, Outcome<Tuple<TFirst, TSecond>>> funM)
         {
             Expect.NotNull(@this);
             Expect.NotNull(funM);
 
-            return @this.SelectAndUnzipCore(funM);
+            return @this.MapUnzipCore(funM);
         }
 
         /// <remarks>
         /// Named <c>zipWithM</c> in Haskell parlance.
         /// </remarks>
-        public static Outcome<IEnumerable<TResult>> Zip<TFirst, TSecond, TResult>(
+        public static Outcome<IEnumerable<TResult>> ZipWith<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, Outcome<TResult>> resultSelectorM)
@@ -558,7 +559,7 @@ namespace Narvalo.Fx.More
             Expect.NotNull(resultSelectorM);
             Warrant.NotNull<Outcome<IEnumerable<TResult>>>();
 
-            return @this.ZipCore(second, resultSelectorM);
+            return @this.ZipWithCore(second, resultSelectorM);
         }
 
 
@@ -703,19 +704,19 @@ namespace Narvalo.Fx.Internal
     {
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Outcome<IEnumerable<TResult>> ForEachCore<TSource, TResult>(
+        internal static Outcome<IEnumerable<TResult>> MapCore<TSource, TResult>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Outcome<TResult>> funM)
+            Func<TSource, Outcome<TResult>> selectorM)
         {
             Demand.NotNull(@this);
-            Demand.NotNull(funM);
+            Demand.NotNull(selectorM);
             Warrant.NotNull<Outcome<IEnumerable<TResult>>>();
 
-            return @this.Select(funM).EmptyIfNull().Collect();
+            return @this.Select(selectorM).EmptyIfNull().Collect();
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Outcome<IEnumerable<TSource>> WhereCore<TSource>(
+        internal static Outcome<IEnumerable<TSource>> FilterCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Outcome<bool>> predicateM)
             /* T4: C# indent */
@@ -753,7 +754,7 @@ namespace Narvalo.Fx.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Outcome<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
-            SelectAndUnzipCore<TSource, TFirst, TSecond>(
+            MapUnzipCore<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
             Func<TSource, Outcome<Tuple<TFirst, TSecond>>> funM)
         {
@@ -773,7 +774,7 @@ namespace Narvalo.Fx.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Outcome<IEnumerable<TResult>> ZipCore<TFirst, TSecond, TResult>(
+        internal static Outcome<IEnumerable<TResult>> ZipWithCore<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, Outcome<TResult>> resultSelectorM)
@@ -788,8 +789,8 @@ namespace Narvalo.Fx.Internal
                 = (v1, v2) => resultSelectorM.Invoke(v1, v2);
 
             // WARNING: Do not remove "resultSelector", otherwise .NET will make a recursive call
-            // instead of using the Zip from LINQ.
-            IEnumerable<Outcome<TResult>> seq = @this.Zip(second, resultSelector: resultSelector);
+            // instead of using the Zip from LINQ. (no longer necessary since we renamed Zip to ZipWith).
+            IEnumerable<Outcome<TResult>> seq = @this.Zip(second, resultSelector);
 
             return seq.EmptyIfNull().Collect();
         }

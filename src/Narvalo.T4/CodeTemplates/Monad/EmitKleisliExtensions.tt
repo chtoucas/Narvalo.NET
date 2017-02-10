@@ -15,7 +15,7 @@ public partial class MonadTemplate
         /// <remarks>
         /// Named <c>mapM</c> in Haskell parlance. Same as <c>forM</c> with its arguments flipped.
         /// </remarks>
-        public static <#= Name #><IEnumerable<TResult>> Map<TSource, TResult>(
+        public static <#= Name #><IEnumerable<TResult>> ForEach<TSource, TResult>(
             this Func<TSource, <#= Name #><TResult>> @this,
             IEnumerable<TSource> seq)
         {
@@ -25,7 +25,7 @@ public partial class MonadTemplate
             Warrant.NotNull<<#= Name #><IEnumerable<TResult>>>();
 <#+ } #>
 
-            return seq.ForEachCore(@this);
+            return seq.MapCore(@this);
         }
 
 <#+ } // T4: End of !HasTypeConstraints. #>

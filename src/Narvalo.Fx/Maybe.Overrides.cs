@@ -114,7 +114,7 @@ namespace Narvalo.Fx.More
     // Overrides for auto-generated (extension) methods on IEnumerable<T>.
     public static partial class EnumerableExtensions
     {
-        //internal static Maybe<IEnumerable<TSource>> WhereCore<TSource>(
+        //internal static Maybe<IEnumerable<TSource>> FilterCore<TSource>(
         //    this IEnumerable<TSource> @this,
         //    Func<TSource, Maybe<bool>> predicateM)
         //{

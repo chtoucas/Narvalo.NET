@@ -392,7 +392,7 @@ namespace Monads
         /// <remarks>
         /// Named <c>mapM</c> in Haskell parlance. Same as <c>forM</c> with its arguments flipped.
         /// </remarks>
-        public static Monad<IEnumerable<TResult>> Map<TSource, TResult>(
+        public static Monad<IEnumerable<TResult>> ForEach<TSource, TResult>(
             this Func<TSource, Monad<TResult>> @this,
             IEnumerable<TSource> seq)
         {
@@ -400,7 +400,7 @@ namespace Monads
             Expect.NotNull(seq);
             Warrant.NotNull<Monad<IEnumerable<TResult>>>();
 
-            return seq.ForEachCore(@this);
+            return seq.MapCore(@this);
         }
 
 
@@ -491,23 +491,26 @@ namespace Monads.More
     using Monads.Internal;
 
     // Provides extension methods for IEnumerable<T>.
+    // We do not use the standard LINQ names to avoid a confusing API (see ZipWithCore()).
+    // - Select    -> Map
+    // - Where     -> Filter
+    // - Zip       -> ZipWith
+    // - Aggregate -> Reduce or Fold
     public static partial class EnumerableExtensions
     {
         #region Basic Monad functions (Prelude)
 
 
-        /// <remarks>
-        /// Named <c>forM</c> in Haskell parlance.
-        /// </remarks>
-        public static Monad<IEnumerable<TResult>> ForEach<TSource, TResult>(
+        /// <remarks>Named <c>forM</c> in Haskell parlance.</remarks>
+        public static Monad<IEnumerable<TResult>> Map<TSource, TResult>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Monad<TResult>> funM)
+            Func<TSource, Monad<TResult>> selectorM)
         {
             Expect.NotNull(@this);
-            Expect.NotNull(funM);
+            Expect.NotNull(selectorM);
             Warrant.NotNull<Monad<IEnumerable<TResult>>>();
 
-            return @this.ForEachCore(funM);
+            return @this.MapCore(selectorM);
         }
 
 
@@ -516,10 +519,8 @@ namespace Monads.More
         #region Generalisations of list functions (Prelude)
 
 
-        /// <remarks>
-        /// <para>Named <c>filterM</c> in Haskell parlance.</para>
-        /// </remarks>
-        public static Monad<IEnumerable<TSource>> Where<TSource>(
+        /// <remarks>Named <c>filterM</c> in Haskell parlance.</remarks>
+        public static Monad<IEnumerable<TSource>> Filter<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Monad<bool>> predicateM)
             /* T4: C# indent */
@@ -528,27 +529,27 @@ namespace Monads.More
             Expect.NotNull(predicateM);
             Warrant.NotNull<IEnumerable<TSource>>();
 
-            return @this.WhereCore(predicateM);
+            return @this.FilterCore(predicateM);
         }
 
         /// <remarks>
         /// Named <c>mapAndUnzipM</c> in Haskell parlance.
         /// </remarks>
         public static Monad<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
-            SelectAndUnzip<TSource, TFirst, TSecond>(
+            MapUnzip<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
             Func<TSource, Monad<Tuple<TFirst, TSecond>>> funM)
         {
             Expect.NotNull(@this);
             Expect.NotNull(funM);
 
-            return @this.SelectAndUnzipCore(funM);
+            return @this.MapUnzipCore(funM);
         }
 
         /// <remarks>
         /// Named <c>zipWithM</c> in Haskell parlance.
         /// </remarks>
-        public static Monad<IEnumerable<TResult>> Zip<TFirst, TSecond, TResult>(
+        public static Monad<IEnumerable<TResult>> ZipWith<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, Monad<TResult>> resultSelectorM)
@@ -558,7 +559,7 @@ namespace Monads.More
             Expect.NotNull(resultSelectorM);
             Warrant.NotNull<Monad<IEnumerable<TResult>>>();
 
-            return @this.ZipCore(second, resultSelectorM);
+            return @this.ZipWithCore(second, resultSelectorM);
         }
 
 
@@ -700,18 +701,18 @@ namespace Monads.Internal
     internal static partial class EnumerableExtensions
     {
 
-        internal static Monad<IEnumerable<TResult>> ForEachCore<TSource, TResult>(
+        internal static Monad<IEnumerable<TResult>> MapCore<TSource, TResult>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Monad<TResult>> funM)
+            Func<TSource, Monad<TResult>> selectorM)
         {
             Demand.NotNull(@this);
-            Demand.NotNull(funM);
+            Demand.NotNull(selectorM);
             Warrant.NotNull<Monad<IEnumerable<TResult>>>();
 
-            return @this.Select(funM).EmptyIfNull().Collect();
+            return @this.Select(selectorM).EmptyIfNull().Collect();
         }
 
-        internal static Monad<IEnumerable<TSource>> WhereCore<TSource>(
+        internal static Monad<IEnumerable<TSource>> FilterCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Monad<bool>> predicateM)
             /* T4: C# indent */
@@ -748,7 +749,7 @@ namespace Monads.Internal
         }
 
         internal static Monad<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
-            SelectAndUnzipCore<TSource, TFirst, TSecond>(
+            MapUnzipCore<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
             Func<TSource, Monad<Tuple<TFirst, TSecond>>> funM)
         {
@@ -767,7 +768,7 @@ namespace Monads.Internal
                 });
         }
 
-        internal static Monad<IEnumerable<TResult>> ZipCore<TFirst, TSecond, TResult>(
+        internal static Monad<IEnumerable<TResult>> ZipWithCore<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, Monad<TResult>> resultSelectorM)
@@ -782,8 +783,8 @@ namespace Monads.Internal
                 = (v1, v2) => resultSelectorM.Invoke(v1, v2);
 
             // WARNING: Do not remove "resultSelector", otherwise .NET will make a recursive call
-            // instead of using the Zip from LINQ.
-            IEnumerable<Monad<TResult>> seq = @this.Zip(second, resultSelector: resultSelector);
+            // instead of using the Zip from LINQ. (no longer necessary since we renamed Zip to ZipWith).
+            IEnumerable<Monad<TResult>> seq = @this.Zip(second, resultSelector);
 
             return seq.EmptyIfNull().Collect();
         }

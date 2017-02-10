@@ -107,6 +107,8 @@ namespace Narvalo.Fx
 
         #region Concatenation Operators
 
+        // There is a much better implementation coming soon?
+        // https://github.com/dotnet/corefx/commits/master/src/System.Linq/src/System/Linq/AppendPrepend.cs
         public static IEnumerable<TSource> Append<TSource>(this IEnumerable<TSource> @this, TSource element)
         {
             Expect.NotNull(@this);

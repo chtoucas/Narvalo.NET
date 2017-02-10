@@ -732,6 +732,11 @@ namespace Monads.More
     using Monads.Internal;
 
     // Provides extension methods for IEnumerable<T>.
+    // We do not use the standard LINQ names to avoid a confusing API (see ZipWithCore()).
+    // - Select    -> Map
+    // - Where     -> Filter
+    // - Zip       -> ZipWith
+    // - Aggregate -> Reduce or Fold
     public static partial class EnumerableExtensions
     {
         #region Basic Monad functions (Prelude)
