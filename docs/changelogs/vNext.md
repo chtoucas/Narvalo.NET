@@ -71,11 +71,9 @@ TODO
 - Pretty sure that we can get rid off all uint and int overloads.
 
 Narvalo.Fx:
-- Naming: Extensions / More / Most
-- Fix: Implements WhereCore<>.
-- remove Forever?
 - Disabled Forever, When, Unless and Guard
-- Review and test all IEnumerable<T> extensions.
+- Review and test all IEnumerable<T> extensions (in particular delayed arg check).
+  Fix: Implements FilterCore<>.
 - Select -> ??? Apply, Trigger, OnSome, OnNone? Unpack -> Unbound?
 - Async versions?
 - ToString() and generics.

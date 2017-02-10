@@ -13,7 +13,7 @@ public partial class MonadTemplate
 <#+ if (full && !HasTypeConstraints) { #>
 
         /// <remarks>
-        /// Named <c>mapM</c> in Haskell parlance. Same as <c>forM</c> with its arguments flipped.
+        /// Named <c>forM</c> in Haskell parlance. Same as <c>mapM</c> with its arguments flipped.
         /// </remarks>
         public static <#= Name #><IEnumerable<TResult>> ForEach<TSource, TResult>(
             this Func<TSource, <#= Name #><TResult>> @this,

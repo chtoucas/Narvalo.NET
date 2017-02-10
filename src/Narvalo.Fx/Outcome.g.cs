@@ -390,7 +390,7 @@ namespace Narvalo.Fx
 
 
         /// <remarks>
-        /// Named <c>mapM</c> in Haskell parlance. Same as <c>forM</c> with its arguments flipped.
+        /// Named <c>forM</c> in Haskell parlance. Same as <c>mapM</c> with its arguments flipped.
         /// </remarks>
         public static Outcome<IEnumerable<TResult>> ForEach<TSource, TResult>(
             this Func<TSource, Outcome<TResult>> @this,
@@ -501,7 +501,7 @@ namespace Narvalo.Fx.More
         #region Basic Monad functions (Prelude)
 
 
-        /// <remarks>Named <c>forM</c> in Haskell parlance.</remarks>
+        /// <remarks>Named <c>mapM</c> in Haskell parlance.</remarks>
         public static Outcome<IEnumerable<TResult>> Map<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, Outcome<TResult>> selectorM)

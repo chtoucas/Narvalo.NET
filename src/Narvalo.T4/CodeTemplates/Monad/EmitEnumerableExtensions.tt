@@ -17,7 +17,7 @@ public partial class MonadTemplate
 
 <#+ if (!HasTypeConstraints) { #>
 
-        /// <remarks>Named <c>forM</c> in Haskell parlance.</remarks>
+        /// <remarks>Named <c>mapM</c> in Haskell parlance.</remarks>
         public static <#= Name #><IEnumerable<TResult>> Map<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><TResult>> selectorM)

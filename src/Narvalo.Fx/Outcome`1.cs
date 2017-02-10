@@ -266,7 +266,12 @@ namespace Narvalo.Fx
 
             public override T ValueOrElse(T other) => other;
 
-            public override T ValueOrElse(Func<T> valueFactory) => valueFactory.Invoke();
+            public override T ValueOrElse(Func<T> valueFactory)
+            {
+                Require.NotNull(valueFactory, nameof(valueFactory));
+
+                return valueFactory.Invoke();
+            }
 
             public override Maybe<T> ValueOrNone() => Maybe<T>.None;
 

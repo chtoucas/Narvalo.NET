@@ -629,7 +629,7 @@ namespace Monads
 
 
         /// <remarks>
-        /// Named <c>mapM</c> in Haskell parlance. Same as <c>forM</c> with its arguments flipped.
+        /// Named <c>forM</c> in Haskell parlance. Same as <c>mapM</c> with its arguments flipped.
         /// </remarks>
         public static MonadOr<IEnumerable<TResult>> ForEach<TSource, TResult>(
             this Func<TSource, MonadOr<TResult>> @this,
@@ -759,7 +759,7 @@ namespace Monads.More
         #region Basic Monad functions (Prelude)
 
 
-        /// <remarks>Named <c>forM</c> in Haskell parlance.</remarks>
+        /// <remarks>Named <c>mapM</c> in Haskell parlance.</remarks>
         public static MonadOr<IEnumerable<TResult>> Map<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, MonadOr<TResult>> selectorM)
