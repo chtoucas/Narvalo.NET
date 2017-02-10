@@ -17,7 +17,7 @@ namespace Narvalo.Fx
     {
         internal static Outcome<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Outcome<TSource>> @this)
         {
-            Require.NotNull(@this, nameof(@this));
+            Demand.NotNull(@this);
             Warrant.NotNull<Outcome<IEnumerable<TSource>>>();
 
             var list = new List<TSource>();
@@ -25,15 +25,7 @@ namespace Narvalo.Fx
             foreach (var m in @this)
             {
                 // REVIEW: Is this the correct behaviour when m is null?
-                if (m == null)
-                {
-                    continue;
-                }
-
-                if (!m.IsSuccess)
-                {
-                    return Outcome.Failure<IEnumerable<TSource>>(m.ExceptionInfo);
-                }
+                if (m == null || !m.IsSuccess) { continue; }
 
                 list.Add(m.Value);
             }

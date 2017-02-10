@@ -90,16 +90,13 @@ namespace Narvalo.Fx
     {
         internal static Maybe<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Maybe<TSource>> @this)
         {
-            Require.NotNull(@this, nameof(@this));
+            Demand.NotNull(@this);
 
             var list = new List<TSource>();
 
             foreach (var m in @this)
             {
-                if (!m.IsSome)
-                {
-                    return Maybe<IEnumerable<TSource>>.None;
-                }
+                if (m.IsNone) { continue; }
 
                 list.Add(m.Value);
             }
