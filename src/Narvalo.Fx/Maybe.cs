@@ -11,7 +11,7 @@ namespace Narvalo.Fx
     public static partial class Maybe
     {
         public static Maybe<T> Of<T>(T? value) where T : struct
-            => value.HasValue ? Maybe<T>.η(value.Value) : Maybe<T>.None;
+            => value.HasValue ? Of(value.Value) : Maybe<T>.None;
 
         #region Extension methods when T is a struct
 

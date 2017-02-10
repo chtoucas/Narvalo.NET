@@ -8,6 +8,7 @@ namespace Narvalo.Fx
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
+    using System.Runtime.CompilerServices;
 
     using Narvalo.Fx.Properties;
 
@@ -46,7 +47,7 @@ namespace Narvalo.Fx
         /// </summary>
         /// <remarks>Most of the time, you don't need to access this property.
         /// You are better off using the rich vocabulary that this class offers.</remarks>
-        /// <value><see langword="true"/> if the object does hold a value; otherwise false.</value>
+        /// <value>true if the object does hold a value; otherwise false.</value>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public bool IsSome { get { return _isSome; } }
 
@@ -56,10 +57,8 @@ namespace Narvalo.Fx
         /// <summary>
         /// Gets the enclosed value.
         /// </summary>
-        /// <remarks>
-        /// Any access to this property must be protected by checking before that <see cref="IsSome"/>
-        /// is true.
-        /// </remarks>
+        /// <remarks>Any access to this property must be protected by checking before that
+        /// <see cref="IsSome"/> is true.</remarks>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         internal T Value
         {
@@ -89,7 +88,7 @@ namespace Narvalo.Fx
             }
         }
 
-        #region Conversion operators
+        #region Conversion operators.
 
         public static explicit operator Maybe<T>(T value) => η(value);
 
@@ -193,86 +192,6 @@ namespace Narvalo.Fx
         }
     }
 
-    // Overrides for auto-generated (extension) methods.
-    public partial struct Maybe<T>
-    {
-        #region Basic Monad functions
-
-        public Maybe<TResult> Select<TResult>(Func<T, TResult> selector)
-        {
-            Require.NotNull(selector, nameof(selector));
-
-            return IsSome ? Maybe<TResult>.η(selector.Invoke(Value)) : Maybe<TResult>.None;
-        }
-
-        public Maybe<TResult> Then<TResult>(Maybe<TResult> other)
-            => IsSome ? other : Maybe<TResult>.None;
-
-        #endregion
-
-        #region Monadic lifting operators
-
-        public Maybe<TResult> Zip<TSecond, TResult>(
-            Maybe<TSecond> second,
-            Func<T, TSecond, TResult> resultSelector)
-        {
-            Require.NotNull(resultSelector, nameof(resultSelector));
-
-            return IsSome && second.IsSome
-                ? Maybe<TResult>.η(resultSelector.Invoke(Value, second.Value))
-                : Maybe<TResult>.None;
-        }
-
-        #endregion
-
-        #region LINQ extensions
-
-        public Maybe<TResult> Join<TInner, TKey, TResult>(
-            Maybe<TInner> inner,
-            Func<T, TKey> outerKeySelector,
-            Func<TInner, TKey> innerKeySelector,
-            Func<T, TInner, TResult> resultSelector,
-            IEqualityComparer<TKey> comparer)
-        {
-            Require.NotNull(outerKeySelector, nameof(outerKeySelector));
-            Require.NotNull(innerKeySelector, nameof(innerKeySelector));
-            Require.NotNull(resultSelector, nameof(resultSelector));
-
-            if (IsNone || inner.IsNone) { return Maybe<TResult>.None; }
-
-            var outerKey = outerKeySelector.Invoke(Value);
-            var innerKey = innerKeySelector.Invoke(inner.Value);
-
-            return (comparer ?? EqualityComparer<TKey>.Default).Equals(outerKey, innerKey)
-                ? Maybe<TResult>.η(resultSelector.Invoke(Value, inner.Value))
-                : Maybe<TResult>.None;
-        }
-
-        public Maybe<TResult> GroupJoin<TInner, TKey, TResult>(
-            Maybe<TInner> inner,
-            Func<T, TKey> outerKeySelector,
-            Func<TInner, TKey> innerKeySelector,
-            Func<T, Maybe<TInner>, TResult> resultSelector,
-            IEqualityComparer<TKey> comparer)
-        {
-            Require.NotNull(outerKeySelector, nameof(outerKeySelector));
-            Require.NotNull(innerKeySelector, nameof(innerKeySelector));
-            Require.NotNull(resultSelector, nameof(resultSelector));
-
-            // REVIEW: I can't remember why I didn't include !inner.IsSome before. Mistake?
-            if (IsNone || inner.IsNone) { return Maybe<TResult>.None; }
-
-            var outerKey = outerKeySelector.Invoke(Value);
-            var innerKey = innerKeySelector.Invoke(inner.Value);
-
-            return (comparer ?? EqualityComparer<TKey>.Default).Equals(outerKey, innerKey)
-                ? Maybe<TResult>.η(resultSelector.Invoke(Value, inner))
-                : Maybe<TResult>.None;
-        }
-
-        #endregion
-    }
-
     // Provides the core Monad methods.
     public partial struct Maybe<T>
     {
@@ -284,9 +203,11 @@ namespace Narvalo.Fx
         }
 
         [DebuggerHidden]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Maybe<T> η(T value) => value != null ? new Maybe<T>(value) : None;
 
         [DebuggerHidden]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Maybe<T> μ(Maybe<Maybe<T>> square) => square.IsSome ? square.Value : None;
     }
 
@@ -329,7 +250,7 @@ namespace Narvalo.Fx
         }
     }
 
-    // Implements the IEnumerable>T> interface.
+    // Implements the IEnumerable<T> interface.
     public partial struct Maybe<T>
     {
         [SuppressMessage("Microsoft.Contracts", "Suggestion-6-0", Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
@@ -365,7 +286,7 @@ namespace Narvalo.Fx
         }
     }
 
-    // Implements the IEquatable<T> and IEquatable<Maybe<<T>> interfaces.
+    // Implements the IEquatable<Maybe<<T>> interfaces.
     public partial struct Maybe<T>
     {
         public static bool operator ==(Maybe<T> left, Maybe<T> right) => left.Equals(right);

@@ -39,21 +39,4 @@ namespace Narvalo.Fx.More
                     select m.Value).EmptyIfNull();
         }
     }
-
-    // Overrides for auto-generated (extension) methods on IEnumerable<T>.
-    public static partial class EnumerableExtensions
-    {
-        //internal static Maybe<IEnumerable<TSource>> WhereCore<TSource>(
-        //    this IEnumerable<TSource> @this,
-        //    Func<TSource, Maybe<bool>> predicateM)
-        //{
-        //    Require.NotNull(@this, nameof(@this));
-        //    Require.NotNull(predicateM, nameof(predicateM));
-        //    Warrant.NotNull<IEnumerable<TSource>>();
-
-        //    var seq = @this.Where(_ => predicateM.Invoke(_).ValueOrElse(false));
-
-        //    return Maybe.Of(seq);
-        //}
-    }
 }

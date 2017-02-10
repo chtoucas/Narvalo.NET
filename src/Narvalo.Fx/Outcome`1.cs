@@ -320,13 +320,6 @@ namespace Narvalo.Fx
         }
     }
 
-    // Overrides a bunch of auto-generated (extension) methods.
-    public abstract partial class Outcome<T>
-    {
-        public Outcome<TResult> Then<TResult>(Outcome<TResult> other)
-            => IsSuccess ? other : Outcome<TResult>.η(ExceptionInfo);
-    }
-
     // Core Monad methods.
     public abstract partial class Outcome<T>
     {

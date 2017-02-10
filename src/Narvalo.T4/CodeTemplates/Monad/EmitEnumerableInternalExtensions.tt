@@ -128,7 +128,9 @@ public partial class MonadTemplate
 
             // WARNING: Do not remove "resultSelector", otherwise .NET will make a recursive call
             // instead of using the Zip from LINQ.
-            return @this.Zip(second, resultSelector: resultSelector).EmptyIfNull().Collect();
+            IEnumerable<<#= Name #><TResult>> seq = @this.Zip(second, resultSelector: resultSelector);
+
+            return seq.EmptyIfNull().Collect();
         }
 
 <#+ } // T4: End of !HasTypeConstraints. #>

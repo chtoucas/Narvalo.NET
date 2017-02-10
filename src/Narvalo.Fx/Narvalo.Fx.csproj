@@ -77,7 +77,9 @@
     <Compile Include="Internal\IDisjointUnionOf`.cs" />
     <Compile Include="Iteration.cs" />
     <Compile Include="Iteration`2.cs" />
+    <Compile Include="Maybe.Overrides.cs" />
     <Compile Include="Nullable%24.cs" />
+    <Compile Include="Outcome.Overrides.cs" />
     <Compile Include="VoidOrError.cs" />
     <Compile Include="VoidOrError.g.cs">
       <DependentUpon>VoidOrError.tt</DependentUpon>

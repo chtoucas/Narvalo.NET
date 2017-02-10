@@ -804,7 +804,9 @@ namespace Narvalo.Fx.Internal
 
             // WARNING: Do not remove "resultSelector", otherwise .NET will make a recursive call
             // instead of using the Zip from LINQ.
-            return @this.Zip(second, resultSelector: resultSelector).EmptyIfNull().Collect();
+            IEnumerable<Outcome<TResult>> seq = @this.Zip(second, resultSelector: resultSelector);
+
+            return seq.EmptyIfNull().Collect();
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]

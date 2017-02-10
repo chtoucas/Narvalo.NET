@@ -73,9 +73,12 @@ TODO
 Narvalo.Fx:
 - Naming: Extensions / More / Most
 - Fix: Implements WhereCore<>.
-- Filter -> Where; remove Forever? MapAndUnzip -> SelectAndUnzip? MapAny -> SelectMany?
-- Select -> ??? Apply, Trigger, OnSome, OnNone? Async versions?
+- remove Forever?
 - Disabled When, Unless and Guard
+- Select -> ??? Apply, Trigger, OnSome, OnNone? Unpack -> Unbound?
+- Async versions?
+- ToString() and generics.
+- Implements IEquatable<T> on Monad<T>?
 - https://blogs.msdn.microsoft.com/pfxteam/2013/04/03/tasks-monads-and-linq/
 - http://tomasp.net/blog/idioms-in-linq.aspx/
 - https://ruudvanasseldonk.com/2013/05/01/the-task-monad-in-csharp
