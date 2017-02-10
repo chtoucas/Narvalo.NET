@@ -95,6 +95,7 @@ public partial class MonadTemplate
             Warrant.NotNull<<#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>();
 <#+ } #>
 
+            // NB: Same as @this.MapCore(funM)
             var m = @this.Select(funM).EmptyIfNull().Collect();
 
             return m.<#= MapName #>(

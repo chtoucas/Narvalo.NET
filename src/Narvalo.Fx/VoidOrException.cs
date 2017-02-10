@@ -74,6 +74,15 @@ namespace Narvalo.Fx
                 return caseException.Invoke(_exceptionInfo);
             }
 
+            public override TResult Match<TResult>(
+                Func<ExceptionDispatchInfo, TResult> caseException,
+                TResult caseVoid)
+            {
+                Require.NotNull(caseException, nameof(caseException));
+
+                return caseException.Invoke(_exceptionInfo);
+            }
+
             public override void Match(Action<ExceptionDispatchInfo> caseException, Action caseVoid)
             {
                 Require.NotNull(caseException, nameof(caseException));
@@ -115,15 +124,15 @@ namespace Narvalo.Fx
     // Implements the Internal.ISwitch<ExceptionDispatchInfo> interface.
     public partial class VoidOrException
     {
-        public virtual TResult Match<TResult>(Func<ExceptionDispatchInfo, TResult> caseException, TResult caseVoid)
-            => caseVoid;
-
         public virtual TResult Match<TResult>(Func<ExceptionDispatchInfo, TResult> caseException, Func<TResult> caseVoid)
         {
             Require.NotNull(caseVoid, nameof(caseVoid));
 
             return caseVoid.Invoke();
         }
+
+        public virtual TResult Match<TResult>(Func<ExceptionDispatchInfo, TResult> caseException, TResult caseVoid)
+            => caseVoid;
 
         public virtual void Match(Action<ExceptionDispatchInfo> caseException, Action caseVoid)
         {

@@ -46,6 +46,7 @@ namespace Narvalo.Fx
             {
                 _value = value;
             }
+
             public override TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
             {
                 Require.NotNull(caseLeft, nameof(caseLeft));

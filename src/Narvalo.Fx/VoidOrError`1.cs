@@ -62,6 +62,13 @@ namespace Narvalo.Fx
                 return caseError.Invoke(Error);
             }
 
+            public override TResult Match<TResult>(Func<TError, TResult> caseError, TResult caseVoid)
+            {
+                Require.NotNull(caseError, nameof(caseError));
+
+                return caseError.Invoke(Error);
+            }
+
             public override void Match(Action<TError> caseError, Action caseVoid)
             {
                 Require.NotNull(caseError, nameof(caseError));
@@ -137,15 +144,15 @@ namespace Narvalo.Fx
     // Implements the Internal.ISwitch<TError> interface.
     public partial class VoidOrError<TError>
     {
-        public virtual TResult Match<TResult>(Func<TError, TResult> caseError, TResult caseVoid)
-            => caseVoid;
-
         public virtual TResult Match<TResult>(Func<TError, TResult> caseError, Func<TResult> caseVoid)
         {
             Require.NotNull(caseVoid, nameof(caseVoid));
 
             return caseVoid.Invoke();
         }
+
+        public virtual TResult Match<TResult>(Func<TError, TResult> caseError, TResult caseVoid)
+            => caseVoid;
 
         public virtual void Match(Action<TError> caseError, Action caseVoid)
         {

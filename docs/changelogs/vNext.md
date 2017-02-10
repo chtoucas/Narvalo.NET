@@ -76,6 +76,8 @@ Narvalo.Fx:
   Fix: Implements FilterCore<>.
 - Select -> ??? Apply, Trigger, OnSome, OnNone? Unpack -> Unbound?
 - Alternative, Maybe
+- ISwitch -> On...
+- VoidOr... use the same design as Either.
 - Async versions?
 - ToString() and generics.
 - Implements IEquatable<T> on Monad<T>?

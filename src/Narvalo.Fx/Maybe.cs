@@ -14,11 +14,11 @@ namespace Narvalo.Fx
 
         #region Extension methods when T is a struct
 
-        public static T? ToNullable<T>(this Maybe<T?> @this) where T : struct
-            => @this.ValueOrDefault();
-
         public static T? ToNullable<T>(this Maybe<T> @this) where T : struct
             => @this.IsSome ? (T?)@this.Value : null;
+
+        public static T? ToNullable<T>(this Maybe<T?> @this) where T : struct
+            => @this.ValueOrDefault();
 
         public static T ExtractOrDefault<T>(this Maybe<T?> @this) where T : struct
             => ExtractOrElse(@this, default(T));

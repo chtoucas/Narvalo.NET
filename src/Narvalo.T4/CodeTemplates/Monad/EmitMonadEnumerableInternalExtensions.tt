@@ -24,7 +24,7 @@ public partial class MonadTemplate
 
             var seed = <#= Name #>.<#= ReturnName #>(Enumerable.Empty<TSource>());
             Func<<#= Name #><IEnumerable<TSource>>, <#= Name #><TSource>, <#= Name #><IEnumerable<TSource>>> fun
-                = (m, n) => m.Bind(list => CollectCore(n, list));
+                = (m, n) => m.Bind(list => Append(n, list));
 
             var retval = @this.Aggregate(seed, fun);
 <#+ if (IsNullable) { #>
@@ -35,7 +35,7 @@ public partial class MonadTemplate
         }
 
         // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
-        private static <#= Name #><IEnumerable<TSource>> CollectCore<TSource>(
+        private static <#= Name #><IEnumerable<TSource>> Append<TSource>(
             <#= Name #><TSource> m,
             IEnumerable<TSource> list)
         {

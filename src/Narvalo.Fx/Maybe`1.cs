@@ -230,20 +230,20 @@ namespace Narvalo.Fx
     // Implements the Internal.ISwitch<T> interface.
     public partial struct Maybe<T>
     {
-        // Named <c>maybe</c> in Haskell parlance.
-        public TResult Match<TResult>(Func<T, TResult> caseSome, TResult caseNone)
-        {
-            Require.NotNull(caseSome, nameof(caseSome));
-
-            return IsSome ? caseSome.Invoke(Value) : caseNone;
-        }
-
         public TResult Match<TResult>(Func<T, TResult> caseSome, Func<TResult> caseNone)
         {
             Require.NotNull(caseSome, nameof(caseSome));
             Require.NotNull(caseNone, nameof(caseNone));
 
             return IsSome ? caseSome.Invoke(Value) : caseNone.Invoke();
+        }
+
+        // Named <c>maybe</c> in Haskell parlance.
+        public TResult Match<TResult>(Func<T, TResult> caseSome, TResult caseNone)
+        {
+            Require.NotNull(caseSome, nameof(caseSome));
+
+            return IsSome ? caseSome.Invoke(Value) : caseNone;
         }
 
         public void Match(Action<T> caseSome, Action caseNone)

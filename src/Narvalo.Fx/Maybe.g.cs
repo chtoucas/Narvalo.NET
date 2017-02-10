@@ -896,7 +896,7 @@ namespace Narvalo.Fx.Internal
 
             var seed = Maybe.Of(Enumerable.Empty<TSource>());
             Func<Maybe<IEnumerable<TSource>>, Maybe<TSource>, Maybe<IEnumerable<TSource>>> fun
-                = (m, n) => m.Bind(list => CollectCore(n, list));
+                = (m, n) => m.Bind(list => Append(n, list));
 
             var retval = @this.Aggregate(seed, fun);
 
@@ -904,7 +904,7 @@ namespace Narvalo.Fx.Internal
         }
 
         // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
-        private static Maybe<IEnumerable<TSource>> CollectCore<TSource>(
+        private static Maybe<IEnumerable<TSource>> Append<TSource>(
             Maybe<TSource> m,
             IEnumerable<TSource> list)
         {
@@ -984,6 +984,7 @@ namespace Narvalo.Fx.Internal
             Demand.NotNull(@this);
             Demand.NotNull(funM);
 
+            // NB: Same as @this.MapCore(funM)
             var m = @this.Select(funM).EmptyIfNull().Collect();
 
             return m.Select(
