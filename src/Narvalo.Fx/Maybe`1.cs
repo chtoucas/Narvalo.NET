@@ -260,6 +260,23 @@ namespace Narvalo.Fx
                 caseNone.Invoke();
             }
         }
+
+        // Methods below are not really part of the the Internal.ISwitch<T> interface.
+
+        // Alias for Apply().
+        public void OnSome(Action<T> action)
+        {
+            Require.NotNull(action, nameof(action));
+
+            if (IsSome) { action.Invoke(Value); }
+        }
+
+        public void OnNone(Action action)
+        {
+            Require.NotNull(action, nameof(action));
+
+            if (IsSome) { action.Invoke(); }
+        }
     }
 
     // Implements the IEnumerable<T> interface.

@@ -63,7 +63,7 @@ public partial class MonadTemplate
 <#+ } // T4: End of HasZero. #>
 
         // Like Select() w/ an action.
-        public static void Trigger<TSource>(
+        public static void Apply<TSource>(
             this <#= Name #><TSource> @this,
             Action<TSource> action)
             <#+ WriteTypeConstraints("TSource"); #>

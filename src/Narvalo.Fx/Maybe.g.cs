@@ -635,7 +635,7 @@ namespace Narvalo.Fx
 
 
         // Like Select() w/ an action.
-        public static void Trigger<TSource>(
+        public static void Apply<TSource>(
             this Maybe<TSource> @this,
             Action<TSource> action)
             /* T4: C# indent */
@@ -1014,23 +1014,16 @@ namespace Narvalo.Fx.Internal
             Require.NotNull(predicateM, nameof(predicateM));
             Warrant.NotNull<IEnumerable<TSource>>();
 
-            // NB: Haskell uses tail recursion, we don't.
-            var list = new List<TSource>();
+            Func<bool, IEnumerable<TSource>, TSource, IEnumerable<TSource>> selector
+                = (flg, list, item) => { if (flg) { return list.Prepend(item); } else { return list; } };
 
-            foreach (var item in @this)
-            {
-                var m = predicateM.Invoke(item);
+            Func<Maybe<IEnumerable<TSource>>, TSource, Maybe<IEnumerable<TSource>>> accumulatorM
+                = (mlist, item) => predicateM.Invoke(item).Zip(mlist, (flg, list) => selector.Invoke(flg, list, item));
 
-                m.Bind(
-                    _ =>
-                    {
-                        if (_ == true) { list.Add(item); }
+            var seed = Maybe.Of(Enumerable.Empty<TSource>());
 
-                        return Maybe.Unit;
-                    });
-            }
-
-            return Maybe.Of(list.AsEnumerable());
+            // REVIEW: Aggregate?
+            return @this.AggregateBack(seed, accumulatorM);
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]

@@ -43,36 +43,16 @@ public partial class MonadTemplate
             Require.NotNull(predicateM, nameof(predicateM));
             Warrant.NotNull<IEnumerable<TSource>>();
 
-            // NB: Haskell uses tail recursion, we don't.
-            var list = new List<TSource>();
+            Func<bool, IEnumerable<TSource>, TSource, IEnumerable<TSource>> selector
+                = (flg, list, item) => { if (flg) { return list.Prepend(item); } else { return list; } };
 
-            foreach (var item in @this)
-            {
-                var m = predicateM.Invoke(item);
+            Func<<#= Name #><IEnumerable<TSource>>, TSource, <#= Name #><IEnumerable<TSource>>> accumulatorM
+                = (mlist, item) => predicateM.Invoke(item).Zip(mlist, (flg, list) => selector.Invoke(flg, list, item));
 
-<#+ if (IsNullable) { #>
-                if (m != null)
-                {
-                    m.Bind(
-                        _ =>
-                        {
-                            if (_ == true) { list.Add(item); }
+            var seed = <#= Name #>.<#= ReturnName #>(Enumerable.Empty<TSource>());
 
-                            return <#= Name #>.Unit;
-                        });
-                }
-<#+ } else { #>
-                m.Bind(
-                    _ =>
-                    {
-                        if (_ == true) { list.Add(item); }
-
-                        return <#= Name #>.Unit;
-                    });
-<#+ } // T4: End of IsNullable. #>
-            }
-
-            return <#= Name #>.<#= ReturnName #>(list.AsEnumerable());
+            // REVIEW: Aggregate?
+            return @this.AggregateBack(seed, accumulatorM);
         }
 
 <#+ if (!SuppressMessage) { #>

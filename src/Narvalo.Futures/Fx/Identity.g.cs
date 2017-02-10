@@ -416,7 +416,7 @@ namespace Narvalo.Fx
 
 
         // Like Select() w/ an action.
-        public static void Trigger<TSource>(
+        public static void Apply<TSource>(
             this Identity<TSource> @this,
             Action<TSource> action)
             /* T4: C# indent */

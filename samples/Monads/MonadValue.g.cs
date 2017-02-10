@@ -677,7 +677,7 @@ namespace Monads
 
 
         // Like Select() w/ an action.
-        public static void Trigger<TSource>(
+        public static void Apply<TSource>(
             this MonadValue<TSource> @this,
             Action<TSource> action)
             where TSource : struct

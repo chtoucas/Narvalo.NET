@@ -110,7 +110,7 @@ namespace Narvalo.Fx
             return predicate.Invoke(Value) ? Maybe<TResult>.None : other;
         }
 
-        public void Trigger(Action<T> action)
+        public void Apply(Action<T> action)
         {
             Require.NotNull(action, nameof(action));
 
@@ -154,13 +154,25 @@ namespace Narvalo.Fx.More
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<bool>> predicateM)
         {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicateM, nameof(predicateM));
+            Demand.NotNull(@this);
+            Demand.NotNull(predicateM);
             Warrant.NotNull<IEnumerable<TSource>>();
 
-            var seq = @this.Where(_ => predicateM.Invoke(_).ValueOrElse(false));
+            // See https://byorgey.wordpress.com/2007/06/26/deducing-code-from-types-filterm/
+            // http://stackoverflow.com/questions/28872396/haskells-filterm-with-filterm-x-true-false-1-2-3
+            // REVIEW: Recursion would be nicer, no?
+            // or, is it equivalent to:
+            // > var seq = @this.Where(_ => predicateM.Invoke(_).ValueOrElse(false));
+            // > return Maybe.Of(seq);
 
-            return Maybe.Of(seq);
+            var list = new List<TSource>();
+
+            foreach (var item in @this)
+            {
+                predicateM.Invoke(item).Apply(_ => { if (_) { list.Add(item); } });
+            }
+
+            return Maybe.Of(list.AsEnumerable());
         }
     }
 }

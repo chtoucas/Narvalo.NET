@@ -421,7 +421,7 @@ namespace Monads
 
 
         // Like Select() w/ an action.
-        public static void Trigger<TSource>(
+        public static void Apply<TSource>(
             this Monad<TSource> @this,
             Action<TSource> action)
             /* T4: C# indent */
@@ -775,26 +775,16 @@ namespace Monads.Internal
             Require.NotNull(predicateM, nameof(predicateM));
             Warrant.NotNull<IEnumerable<TSource>>();
 
-            // NB: Haskell uses tail recursion, we don't.
-            var list = new List<TSource>();
+            Func<bool, IEnumerable<TSource>, TSource, IEnumerable<TSource>> selector
+                = (flg, list, item) => { if (flg) { return list.Prepend(item); } else { return list; } };
 
-            foreach (var item in @this)
-            {
-                var m = predicateM.Invoke(item);
+            Func<Monad<IEnumerable<TSource>>, TSource, Monad<IEnumerable<TSource>>> accumulatorM
+                = (mlist, item) => predicateM.Invoke(item).Zip(mlist, (flg, list) => selector.Invoke(flg, list, item));
 
-                if (m != null)
-                {
-                    m.Bind(
-                        _ =>
-                        {
-                            if (_ == true) { list.Add(item); }
+            var seed = Monad.Return(Enumerable.Empty<TSource>());
 
-                            return Monad.Unit;
-                        });
-                }
-            }
-
-            return Monad.Return(list.AsEnumerable());
+            // REVIEW: Aggregate?
+            return @this.AggregateBack(seed, accumulatorM);
         }
 
         internal static Monad<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
