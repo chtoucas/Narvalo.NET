@@ -48,9 +48,11 @@ namespace Narvalo.Fx
         /// <remarks>Most of the time, you don't need to access this property.
         /// You are better off using the rich vocabulary that this class offers.</remarks>
         /// <value>true if the object does hold a value; otherwise false.</value>
+        // Named <c>isJust</c> in Haskell parlance.
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public bool IsSome { get { return _isSome; } }
 
+        // Named <c>isNothing</c> in Haskell parlance.
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public bool IsNone => !IsSome;
 
@@ -107,9 +109,9 @@ namespace Narvalo.Fx
         #endregion
 
         /// <summary>
-        /// Obtains the enclosed value if any; otherwise the default value of the type T.
+        /// Obtains the enclosed value if any; otherwise the default value of type T.
         /// </summary>
-        /// <returns>The enclosed value if any; otherwise the default value of the type T.</returns>
+        /// <returns>The enclosed value if any; otherwise the default value of type T.</returns>
         public T ValueOrDefault() => IsSome ? Value : default(T);
 
         /// <summary>
@@ -117,6 +119,7 @@ namespace Narvalo.Fx
         /// </summary>
         /// <param name="other">A default value to be used if if there is no underlying value.</param>
         /// <returns>The enclosed value if any; otherwise <paramref name="other"/>.</returns>
+        // Named <c>fromMaybe</c> in Haskell parlance.
         public T ValueOrElse(T other)
         {
             Require.NotNullUnconstrained(other, nameof(other));
@@ -132,6 +135,7 @@ namespace Narvalo.Fx
             return IsSome ? Value : valueFactory.Invoke();
         }
 
+        // Named <c>fromJust</c> in Haskell parlance.
         public T ValueOrThrow(Exception exception)
         {
             Require.NotNull(exception, nameof(exception));
@@ -226,6 +230,14 @@ namespace Narvalo.Fx
     // Implements the Internal.ISwitch<T> interface.
     public partial struct Maybe<T>
     {
+        // Named <c>maybe</c> in Haskell parlance.
+        public TResult Match<TResult>(Func<T, TResult> caseSome, TResult caseNone)
+        {
+            Require.NotNull(caseSome, nameof(caseSome));
+
+            return IsSome ? caseSome.Invoke(Value) : caseNone;
+        }
+
         public TResult Match<TResult>(Func<T, TResult> caseSome, Func<TResult> caseNone)
         {
             Require.NotNull(caseSome, nameof(caseSome));
@@ -253,6 +265,7 @@ namespace Narvalo.Fx
     // Implements the IEnumerable<T> interface.
     public partial struct Maybe<T>
     {
+        // Named <c>maybeToList</c> in Haskell parlance.
         [SuppressMessage("Microsoft.Contracts", "Suggestion-6-0", Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public IEnumerable<T> ToEnumerable()
         {

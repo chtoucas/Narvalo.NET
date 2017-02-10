@@ -115,6 +115,9 @@ namespace Narvalo.Fx
     // Implements the Internal.ISwitch<ExceptionDispatchInfo> interface.
     public partial class VoidOrException
     {
+        public virtual TResult Match<TResult>(Func<ExceptionDispatchInfo, TResult> caseException, TResult caseVoid)
+            => caseVoid;
+
         public virtual TResult Match<TResult>(Func<ExceptionDispatchInfo, TResult> caseException, Func<TResult> caseVoid)
         {
             Require.NotNull(caseVoid, nameof(caseVoid));

@@ -84,6 +84,12 @@ namespace Narvalo.Fx
             public override TResult Match<TResult>(
                 Func<TLeft, TResult> caseLeft,
                 Func<TRight, TResult> caseRight,
+                TResult other)
+                => other;
+
+            public override TResult Match<TResult>(
+                Func<TLeft, TResult> caseLeft,
+                Func<TRight, TResult> caseRight,
                 Func<TResult> otherwise)
             {
                 Require.NotNull(otherwise, nameof(otherwise));
@@ -155,6 +161,16 @@ namespace Narvalo.Fx
             /// <inheritdoc cref="Switch{TLeft, TRight}.Select{TResult}(Func{TRight, TResult})" />
             public override Switch<TLeft, TResult> Select<TResult>(Func<TRight, TResult> rightSelector)
                 => new Switch<TLeft, TResult>.Left_(_value);
+
+            public override TResult Match<TResult>(
+                Func<TLeft, TResult> caseLeft,
+                Func<TRight, TResult> caseRight,
+                TResult other)
+            {
+                Require.NotNull(caseLeft, nameof(caseLeft));
+
+                return caseLeft.Invoke(_value);
+            }
 
             /// <inheritdoc cref="Switch{TLeft, TRight}.Match" />
             public override TResult Match<TResult>(
@@ -250,6 +266,16 @@ namespace Narvalo.Fx
             /// <inheritdoc cref="Switch{TRight, TLeft}.Swap" />
             public override Switch<TRight, TLeft> Swap() => Switch<TRight, TLeft>.η(_value);
 
+            public override TResult Match<TResult>(
+                Func<TLeft, TResult> caseLeft,
+                Func<TRight, TResult> caseRight,
+                TResult other)
+            {
+                Require.NotNull(caseRight, nameof(caseRight));
+
+                return caseRight.Invoke(_value);
+            }
+
             /// <inheritdoc cref="Switch{TLeft, TRight}.Match" />
             public override TResult Match<TResult>(
                 Func<TLeft, TResult> caseLeft,
@@ -304,6 +330,11 @@ namespace Narvalo.Fx
     // Implements the Internal.ISwitch<TLeft, TRight> interface.
     public abstract partial class Switch<TLeft, TRight>
     {
+        public abstract TResult Match<TResult>(
+            Func<TLeft, TResult> caseLeft,
+            Func<TRight, TResult> caseRight,
+            TResult other);
+
         public abstract TResult Match<TResult>(
             Func<TLeft, TResult> caseLeft,
             Func<TRight, TResult> caseRight,

@@ -137,6 +137,9 @@ namespace Narvalo.Fx
     // Implements the Internal.ISwitch<TError> interface.
     public partial class VoidOrError<TError>
     {
+        public virtual TResult Match<TResult>(Func<TError, TResult> caseError, TResult caseVoid)
+            => caseVoid;
+
         public virtual TResult Match<TResult>(Func<TError, TResult> caseError, Func<TResult> caseVoid)
         {
             Require.NotNull(caseVoid, nameof(caseVoid));
