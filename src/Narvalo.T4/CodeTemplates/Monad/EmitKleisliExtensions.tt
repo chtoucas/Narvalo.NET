@@ -2,7 +2,7 @@
 
 public partial class MonadTemplate
 {
-    public void EmitKleisliExtensions()
+    public void EmitKleisliExtensions(bool full)
     {
 #>
     // Provides extension methods for Func<T> in the Kleisli category.
@@ -10,7 +10,7 @@ public partial class MonadTemplate
     {
         #region Basic Monad functions (Prelude)
 
-<#+ if (!HasTypeConstraints) { #>
+<#+ if (full && !HasTypeConstraints) { #>
 
         /// <remarks>
         /// Named <c>mapM</c> in Haskell parlance. Same as <c>forM</c> with its arguments flipped.

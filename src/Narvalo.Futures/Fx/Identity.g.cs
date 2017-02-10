@@ -378,6 +378,59 @@ namespace Narvalo.Fx
         }
 
     } // End of Identity - T4: EmitMonadExtraExtensions().
+
+    // Provides extension methods for Func<T> in the Kleisli category.
+    public static partial class FuncExtensions
+    {
+        #region Basic Monad functions (Prelude)
+
+
+        /// <remarks>
+        /// Named <c>=&lt;&lt;</c> in Haskell parlance.
+        /// </remarks>
+        public static Identity<TResult> Invoke<TSource, TResult>(
+            this Func<TSource, Identity<TResult>> @this,
+            Identity<TSource> value)
+            /* T4: C# indent */
+        {
+            Expect.NotNull(@this);
+            /* T4: C# indent */
+
+            return value.Bind(@this);
+        }
+
+        /// <remarks>
+        /// Named <c>&gt;=&gt;</c> in Haskell parlance.
+        /// </remarks>
+        public static Func<TSource, Identity<TResult>> Compose<TSource, TMiddle, TResult>(
+            this Func<TSource, Identity<TMiddle>> @this,
+            Func<TMiddle, Identity<TResult>> funM)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Expect.NotNull(funM);
+            Warrant.NotNull<Func<TSource, Identity<TResult>>>();
+
+            return _ => @this.Invoke(_).Bind(funM);
+        }
+
+        /// <remarks>
+        /// Named <c>&lt;=&lt;</c> in Haskell parlance.
+        /// </remarks>
+        public static Func<TSource, Identity<TResult>> ComposeBack<TSource, TMiddle, TResult>(
+            this Func<TMiddle, Identity<TResult>> @this,
+            Func<TSource, Identity<TMiddle>> funM)
+            /* T4: C# indent */
+        {
+            Expect.NotNull(@this);
+            Require.NotNull(funM, nameof(funM));
+            Warrant.NotNull<Func<TSource, Identity<TResult>>>();
+
+            return _ => funM.Invoke(_).Bind(@this);
+        }
+
+        #endregion
+    } // End of FuncExtensions - T4: EmitKleisliExtensions().
 }
 
 

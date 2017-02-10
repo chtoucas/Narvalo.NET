@@ -75,6 +75,7 @@ Narvalo.Fx:
 - Fix: Implements WhereCore<>.
 - remove Forever?
 - Disabled Forever, When, Unless and Guard
+- Review and test all IEnumerable<T> extensions.
 - Select -> ??? Apply, Trigger, OnSome, OnNone? Unpack -> Unbound?
 - Async versions?
 - ToString() and generics.

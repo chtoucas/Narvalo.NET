@@ -621,4 +621,58 @@ namespace Narvalo.Fx
         }
 
     } // End of VoidOrError - T4: EmitMonadExtraExtensions().
+
+    // Provides extension methods for Func<T> in the Kleisli category.
+    public static partial class FuncExtensions
+    {
+        #region Basic Monad functions (Prelude)
+
+
+        /// <remarks>
+        /// Named <c>=&lt;&lt;</c> in Haskell parlance.
+        /// </remarks>
+        public static VoidOrError<TResult> Invoke<TSource, TResult>(
+            this Func<TSource, VoidOrError<TResult>> @this,
+            VoidOrError<TSource> value)
+            /* T4: C# indent */
+        {
+            Expect.NotNull(@this);
+            Require.NotNull(value, nameof(value));
+            Warrant.NotNull<VoidOrError<TResult>>();
+
+            return value.Bind(@this);
+        }
+
+        /// <remarks>
+        /// Named <c>&gt;=&gt;</c> in Haskell parlance.
+        /// </remarks>
+        public static Func<TSource, VoidOrError<TResult>> Compose<TSource, TMiddle, TResult>(
+            this Func<TSource, VoidOrError<TMiddle>> @this,
+            Func<TMiddle, VoidOrError<TResult>> funM)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Expect.NotNull(funM);
+            Warrant.NotNull<Func<TSource, VoidOrError<TResult>>>();
+
+            return _ => @this.Invoke(_).Bind(funM);
+        }
+
+        /// <remarks>
+        /// Named <c>&lt;=&lt;</c> in Haskell parlance.
+        /// </remarks>
+        public static Func<TSource, VoidOrError<TResult>> ComposeBack<TSource, TMiddle, TResult>(
+            this Func<TMiddle, VoidOrError<TResult>> @this,
+            Func<TSource, VoidOrError<TMiddle>> funM)
+            /* T4: C# indent */
+        {
+            Expect.NotNull(@this);
+            Require.NotNull(funM, nameof(funM));
+            Warrant.NotNull<Func<TSource, VoidOrError<TResult>>>();
+
+            return _ => funM.Invoke(_).Bind(@this);
+        }
+
+        #endregion
+    } // End of FuncExtensions - T4: EmitKleisliExtensions().
 }
