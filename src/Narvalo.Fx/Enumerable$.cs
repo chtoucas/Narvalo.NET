@@ -108,8 +108,10 @@ namespace Narvalo.Fx
 
         #region Concatenation Operators
 
-        // There is a much better implementation coming soon?
+        // There is a much better implementation coming soon (?).
         // https://github.com/dotnet/corefx/commits/master/src/System.Linq/src/System/Linq/AppendPrepend.cs
+        // REVIEW: Since this method is a critical component of Collect(), we could import this
+        // until it is publicly available.
         public static IEnumerable<TSource> Append<TSource>(this IEnumerable<TSource> @this, TSource element)
         {
             Expect.NotNull(@this);
@@ -118,6 +120,7 @@ namespace Narvalo.Fx
             return @this.Concat(Sequence.Pure(element)).EmptyIfNull();
         }
 
+        // See remarks for Append.
         public static IEnumerable<TSource> Prepend<TSource>(this IEnumerable<TSource> @this, TSource element)
         {
             Expect.NotNull(@this);

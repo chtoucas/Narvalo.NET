@@ -23,10 +23,14 @@ public partial class MonadTemplate
 <#+ } #>
 
             var seed = <#= Name #>.<#= ReturnName #>(Enumerable.Empty<TSource>());
-            Func<<#= Name #><IEnumerable<TSource>>, <#= Name #><TSource>, <#= Name #><IEnumerable<TSource>>> fun
-                = (m, n) => m.Bind(list => Append(n, list));
+            // Inlined LINQ Append method:
+            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (m, item) => m.Append(item);
 
-            var retval = @this.Aggregate(seed, fun);
+            // NB: Maybe.Lift(append) is the same as:
+            // Func<<#= Name #><IEnumerable<TSource>>, <#= Name #><TSource>, <#= Name #><IEnumerable<TSource>>> liftedAppend
+            //     = (m, item) => m.Bind(list => Append(list, item));
+            // where Append is defined below.
+            var retval = @this.Aggregate(seed, <#= Name #>.Lift(append));
 <#+ if (IsNullable) { #>
             System.Diagnostics.Contracts.Contract.Assume(retval != null);
 <#+ } #>
@@ -35,16 +39,16 @@ public partial class MonadTemplate
         }
 
         // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
-        private static <#= Name #><IEnumerable<TSource>> Append<TSource>(
-            <#= Name #><TSource> m,
-            IEnumerable<TSource> list)
-        {
+        //private static <#= Name #><IEnumerable<TSource>> Append<TSource>(
+        //    IEnumerable<TSource> list,
+        //    <#= Name #><TSource> m)
+        //{
 <#+ if (IsNullable) { #>
-            Demand.NotNull(m);
+        //    Demand.NotNull(m);
 <#+ } #>
 
-            return m.Bind(item => <#= Name #>.<#= ReturnName #>(list.Concat(Enumerable.Repeat(item, 1))));
-        }
+        //    return m.Bind(item => <#= Name #>.<#= ReturnName #>(list.Concat(Enumerable.Repeat(item, 1))));
+        //}
 
 <#+ } // T4: End of !HasTypeConstraints. #>
 

@@ -62,42 +62,7 @@ public partial class MonadTemplate
 
 <#+ } // T4: End of HasZero. #>
 
-<#+ /* DISABLED #>
-
-        public static <#= Name #><TSource> When<TSource>(
-            this <#= Name #><TSource> @this,
-            bool predicate,
-            Action action)
-            <#+ WriteTypeConstraints("TSource"); #>
-        {
-            <#+ WriteNotNull(); #>
-            Require.NotNull(action, nameof(action));
-<#+ if (IsNullable) { #>
-            Warrant.NotNull<<#= Name #><TSource>>();
-<#+ } #>
-
-            if (predicate) { action.Invoke(); }
-
-            return @this;
-        }
-
-        public static <#= Name #><TSource> Unless<TSource>(
-            this <#= Name #><TSource> @this,
-            bool predicate,
-            Action action)
-            <#+ WriteTypeConstraints("TSource"); #>
-        {
-<#+ if (IsNullable) { #>
-            Expect.NotNull(@this);
-<#+ } #>
-            Expect.NotNull(action);
-<#+ if (IsNullable) { #>
-            Warrant.NotNull<<#= Name #><TSource>>();
-<#+ } #>
-
-            return @this.When(!predicate, action);
-        }
-
+        // Like Select() w/ an action.
         public static void Trigger<TSource>(
             this <#= Name #><TSource> @this,
             Action<TSource> action)
@@ -111,49 +76,6 @@ public partial class MonadTemplate
 
             @this.Bind(_ => { action.Invoke(_); return <#= Name #>.Unit; });
         }
-
-<#+ if (HasPlus) { #>
-
-        public static <#= Name #><TSource> On<#= ZeroName #><TSource>(
-            this <#= Name #><TSource> @this,
-            Action action)
-            <#+ WriteTypeConstraints("TSource"); #>
-        {
-            <#+ WriteNotNull(); #>
-            Require.NotNull(action, nameof(action));
-<#+ if (IsNullable) { #>
-            Warrant.NotNull<<#= Name #><TSource>>();
-<#+ } #>
-
-            // WARNING: This is NOT correct. We would like something like what we have for Maybe<T>:
-            // if not IsSome then run action, but here we have: if IsSome then run action.
-            // I simply think that it just does not make sense in general (for a monad other than Maybe).
-            //@this.<#= PlusName #>(<#= Name #><TSource>.<#= ZeroName #>).Invoke(_ => action.Invoke());
-
-            return @this;
-        }
-
-        public static <#= Name #><TSource> Invoke<TSource>(
-            this <#= Name #><TSource> @this,
-            Action<TSource> action,
-            Action case<#= ZeroName #>)
-            <#+ WriteTypeConstraints("TSource"); #>
-        {
-<#+ if (IsNullable) { #>
-            Expect.NotNull(@this);
-<#+ } #>
-            Require.NotNull(action, nameof(action));
-            Require.NotNull(case<#= ZeroName #>, nameof(case<#= ZeroName #>));
-<#+ if (IsNullable) { #>
-            Warrant.NotNull<<#= Name #><TSource>>();
-<#+ } #>
-
-            return @this.Invoke(action).On<#= ZeroName #>(case<#= ZeroName #>);
-        }
-
-<#+ } // T4: End of HasZero. #>
-
-<#+ End of DISABLED */ #>
     } // End of <#= Name #> - T4: EmitMonadExtraExtensions().
 <#+
     } // T4: End of EmitMonadExtraExtensions().

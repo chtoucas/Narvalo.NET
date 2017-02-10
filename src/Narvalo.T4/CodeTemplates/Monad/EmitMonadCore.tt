@@ -95,11 +95,9 @@ public partial class MonadTemplate
 
         #endregion
 
-<#+ /* DISABLED #>
+        #region Conditional execution of monadic expressions (Prelude)
 
 <#+ if (HasZero) { #>
-
-        #region Conditional execution of monadic expressions (Prelude)
 
         /// <remarks>
         /// Named <c>guard</c> in Haskell parlance.
@@ -113,11 +111,45 @@ public partial class MonadTemplate
             return predicate ? <#= Name #>.Unit : <#= Name #><global::Narvalo.Fx.Unit>.<#= ZeroName #>;
         }
 
-        #endregion
-
 <#+ } // T4: End of HasZero. #>
 
-<#+ End of DISABLED */ #>
+        /// <remarks>
+        /// <para>Named <c>when</c> in Haskell parlance.</para>
+        /// <para>Haskell uses a different signature.</para>
+        /// </remarks>
+        public static void When<TSource>(
+            this <#= Name #><TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            <#+ WriteTypeConstraints("TSource"); #>
+        {
+            <#+ WriteNotNull(); #>
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(_ => { if (predicate.Invoke(_)) { action.Invoke(_); } return <#= Name #>.Unit; });
+        }
+
+        /// <remarks>
+        /// <para>Named <c>unless</c> in Haskell parlance.</para>
+        /// <para>Haskell uses a different signature.</para>
+        /// </remarks>
+        public static void Unless<TSource>(
+            this <#= Name #><TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            <#+ WriteTypeConstraints("TSource"); #>
+        {
+<#+ if (IsNullable) { #>
+            Expect.NotNull(@this);
+<#+ } #>
+            Expect.NotNull(predicate);
+            Expect.NotNull(action);
+
+            @this.When(_ => !predicate.Invoke(_), action);
+        }
+
+        #endregion
 
         #region Monadic lifting operators (Prelude)
 

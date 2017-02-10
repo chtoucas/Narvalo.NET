@@ -43,9 +43,6 @@ public partial class MonadTemplate
             Require.NotNull(predicateM, nameof(predicateM));
             Warrant.NotNull<IEnumerable<TSource>>();
 
-            throw new NotImplementedException();
-
-            /*
             // NB: Haskell uses tail recursion, we don't.
             var list = new List<TSource>();
 
@@ -56,29 +53,26 @@ public partial class MonadTemplate
 <#+ if (IsNullable) { #>
                 if (m != null)
                 {
-                    m.Trigger(
+                    m.Bind(
                         _ =>
                         {
-                            if (_ == true)
-                            {
-                                list.Add(item);
-                            }
+                            if (_ == true) { list.Add(item); }
+
+                            return <#= Name #>.Unit;
                         });
                 }
 <#+ } else { #>
-                m.Trigger(
+                m.Bind(
                     _ =>
                     {
-                        if (_ == true)
-                        {
-                            list.Add(item);
-                        }
+                        if (_ == true) { list.Add(item); }
+
+                        return <#= Name #>.Unit;
                     });
 <#+ } // T4: End of IsNullable. #>
             }
 
-            return list;
-            */
+            return <#= Name #>.<#= ReturnName #>(list.AsEnumerable());
         }
 
 <#+ if (!SuppressMessage) { #>
@@ -87,16 +81,16 @@ public partial class MonadTemplate
         internal static <#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
             MapUnzipCore<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
-            Func<TSource, <#= Name #><Tuple<TFirst, TSecond>>> funM)
+            Func<TSource, <#= Name #><Tuple<TFirst, TSecond>>> selectorM)
         {
             Demand.NotNull(@this);
-            Demand.NotNull(funM);
+            Demand.NotNull(selectorM);
 <#+ if (PostMapEnsuresSome) { #>
             Warrant.NotNull<<#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>();
 <#+ } #>
 
-            // NB: Same as @this.MapCore(funM)
-            var m = @this.Select(funM).EmptyIfNull().Collect();
+            // NB: Same as @this.MapCore(selectorM)
+            var m = @this.Select(selectorM).EmptyIfNull().Collect();
 
             return m.<#= MapName #>(
                 tuples =>

@@ -71,10 +71,11 @@ TODO
 - Pretty sure that we can get rid off all uint and int overloads.
 
 Narvalo.Fx:
-- Disabled Forever, When, Unless and Guard
+- Disabled Forever, When, Unless and Guard.
+- Apply, Trigger, OnSome, OnNone?
 - Review and test all IEnumerable<T> extensions (in particular delayed arg check).
-  Fix: Implements FilterCore<>.
-- Select -> ??? Apply, Trigger, OnSome, OnNone? Unpack -> Unbound?
+  Fix: Implements FilterCore<>. Review null in FilterCore and CollectCore.
+  Check signatures / Haskell.
 - Alternative, Maybe
 - ISwitch -> On...
 - VoidOr... use the same design as Either.

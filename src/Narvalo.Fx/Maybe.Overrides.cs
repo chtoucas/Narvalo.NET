@@ -83,6 +83,41 @@ namespace Narvalo.Fx
         }
 
         #endregion
+
+        #region Non-standard extension methods.
+
+        public Maybe<TResult> Coalesce<TResult>(
+            Func<T, bool> predicate,
+            Maybe<TResult> then,
+            Maybe<TResult> otherwise)
+        {
+            Require.NotNull(predicate, nameof(predicate));
+
+            return predicate.Invoke(Value) ? then : otherwise;
+        }
+
+        public Maybe<TResult> Then<TResult>(Func<T, bool> predicate, Maybe<TResult> other)
+        {
+            Expect.NotNull(predicate);
+
+            return predicate.Invoke(Value) ? other : Maybe<TResult>.None;
+        }
+
+        public Maybe<TResult> Otherwise<TResult>(Func<T, bool> predicate, Maybe<TResult> other)
+        {
+            Expect.NotNull(predicate);
+
+            return predicate.Invoke(Value) ? Maybe<TResult>.None : other;
+        }
+
+        public void Trigger(Action<T> action)
+        {
+            Require.NotNull(action, nameof(action));
+
+            if (IsSome) { action.Invoke(Value); }
+        }
+
+        #endregion
     }
 
     // Overrides for auto-generated (extension) methods on IEnumerable<Maybe<T>>.
@@ -108,20 +143,24 @@ namespace Narvalo.Fx
 
 namespace Narvalo.Fx.More
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     // Overrides for auto-generated (extension) methods on IEnumerable<T>.
     public static partial class EnumerableExtensions
     {
-        //internal static Maybe<IEnumerable<TSource>> FilterCore<TSource>(
-        //    this IEnumerable<TSource> @this,
-        //    Func<TSource, Maybe<bool>> predicateM)
-        //{
-        //    Require.NotNull(@this, nameof(@this));
-        //    Require.NotNull(predicateM, nameof(predicateM));
-        //    Warrant.NotNull<IEnumerable<TSource>>();
+        internal static Maybe<IEnumerable<TSource>> FilterCore<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, Maybe<bool>> predicateM)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicateM, nameof(predicateM));
+            Warrant.NotNull<IEnumerable<TSource>>();
 
-        //    var seq = @this.Where(_ => predicateM.Invoke(_).ValueOrElse(false));
+            var seq = @this.Where(_ => predicateM.Invoke(_).ValueOrElse(false));
 
-        //    return Maybe.Of(seq);
-        //}
+            return Maybe.Of(seq);
+        }
     }
 }

@@ -24,8 +24,10 @@ namespace Narvalo.Fx
 
             foreach (var m in @this)
             {
-                // REVIEW: Is this the correct behaviour when m is null?
-                if (m == null || !m.IsSuccess) { continue; }
+                // REVIEW: Is this the correct behaviour for null?
+                if (m == null) { list.Add(default(TSource)); continue; }
+
+                if (!m.IsSuccess) { continue; }
 
                 list.Add(m.Value);
             }

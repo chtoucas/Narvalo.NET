@@ -76,6 +76,43 @@ namespace Narvalo.Fx
 
         #endregion
 
+        #region Conditional execution of monadic expressions (Prelude)
+
+
+        /// <remarks>
+        /// <para>Named <c>when</c> in Haskell parlance.</para>
+        /// <para>Haskell uses a different signature.</para>
+        /// </remarks>
+        public static void When<TSource>(
+            this Identity<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            /* T4: C# indent */
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(_ => { if (predicate.Invoke(_)) { action.Invoke(_); } return Identity.Unit; });
+        }
+
+        /// <remarks>
+        /// <para>Named <c>unless</c> in Haskell parlance.</para>
+        /// <para>Haskell uses a different signature.</para>
+        /// </remarks>
+        public static void Unless<TSource>(
+            this Identity<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            Expect.NotNull(predicate);
+            Expect.NotNull(action);
+
+            @this.When(_ => !predicate.Invoke(_), action);
+        }
+
+        #endregion
 
         #region Monadic lifting operators (Prelude)
 
@@ -377,6 +414,18 @@ namespace Narvalo.Fx
             return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
         }
 
+
+        // Like Select() w/ an action.
+        public static void Trigger<TSource>(
+            this Identity<TSource> @this,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            /* T4: C# indent */
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(_ => { action.Invoke(_); return Identity.Unit; });
+        }
     } // End of Identity - T4: EmitMonadExtraExtensions().
 
     // Provides extension methods for Func<T> in the Kleisli category.

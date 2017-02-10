@@ -79,6 +79,44 @@ namespace Narvalo.Fx
 
         #endregion
 
+        #region Conditional execution of monadic expressions (Prelude)
+
+
+        /// <remarks>
+        /// <para>Named <c>when</c> in Haskell parlance.</para>
+        /// <para>Haskell uses a different signature.</para>
+        /// </remarks>
+        public static void When<TSource>(
+            this Outcome<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(_ => { if (predicate.Invoke(_)) { action.Invoke(_); } return Outcome.Unit; });
+        }
+
+        /// <remarks>
+        /// <para>Named <c>unless</c> in Haskell parlance.</para>
+        /// <para>Haskell uses a different signature.</para>
+        /// </remarks>
+        public static void Unless<TSource>(
+            this Outcome<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            Expect.NotNull(@this);
+            Expect.NotNull(predicate);
+            Expect.NotNull(action);
+
+            @this.When(_ => !predicate.Invoke(_), action);
+        }
+
+        #endregion
 
         #region Monadic lifting operators (Prelude)
 
@@ -381,6 +419,18 @@ namespace Narvalo.Fx
             return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
         }
 
+
+        // Like Select() w/ an action.
+        public static void Trigger<TSource>(
+            this Outcome<TSource> @this,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(_ => { action.Invoke(_); return Outcome.Unit; });
+        }
     } // End of Outcome - T4: EmitMonadExtraExtensions().
 
     // Provides extension methods for Func<T> in the Kleisli category.
@@ -621,7 +671,7 @@ namespace Narvalo.Fx.More
         #region Catamorphisms
 
         /// <remarks>
-        /// <para>Haskell use a different signature.</para>
+        /// <para>Haskell uses a different signature.</para>
         /// </remarks>
         public static Outcome<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
@@ -638,7 +688,7 @@ namespace Narvalo.Fx.More
         }
 
         /// <remarks>
-        /// <para>Haskell use a different signature.</para>
+        /// <para>Haskell uses a different signature.</para>
         /// </remarks>
         public static Outcome<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
@@ -678,24 +728,28 @@ namespace Narvalo.Fx.Internal
             Warrant.NotNull<Outcome<IEnumerable<TSource>>>();
 
             var seed = Outcome.Success(Enumerable.Empty<TSource>());
-            Func<Outcome<IEnumerable<TSource>>, Outcome<TSource>, Outcome<IEnumerable<TSource>>> fun
-                = (m, n) => m.Bind(list => CollectCore(n, list));
+            // Inlined LINQ Append method:
+            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (m, item) => m.Append(item);
 
-            var retval = @this.Aggregate(seed, fun);
+            // NB: Maybe.Lift(append) is the same as:
+            // Func<Outcome<IEnumerable<TSource>>, Outcome<TSource>, Outcome<IEnumerable<TSource>>> liftedAppend
+            //     = (m, item) => m.Bind(list => Append(list, item));
+            // where Append is defined below.
+            var retval = @this.Aggregate(seed, Outcome.Lift(append));
             System.Diagnostics.Contracts.Contract.Assume(retval != null);
 
             return retval;
         }
 
         // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
-        private static Outcome<IEnumerable<TSource>> CollectCore<TSource>(
-            Outcome<TSource> m,
-            IEnumerable<TSource> list)
-        {
-            Demand.NotNull(m);
+        //private static Outcome<IEnumerable<TSource>> Append<TSource>(
+        //    IEnumerable<TSource> list,
+        //    Outcome<TSource> m)
+        //{
+        //    Demand.NotNull(m);
 
-            return m.Bind(item => Outcome.Success(list.Concat(Enumerable.Repeat(item, 1))));
-        }
+        //    return m.Bind(item => Outcome.Success(list.Concat(Enumerable.Repeat(item, 1))));
+        //}
 
     } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
 
@@ -725,9 +779,6 @@ namespace Narvalo.Fx.Internal
             Require.NotNull(predicateM, nameof(predicateM));
             Warrant.NotNull<IEnumerable<TSource>>();
 
-            throw new NotImplementedException();
-
-            /*
             // NB: Haskell uses tail recursion, we don't.
             var list = new List<TSource>();
 
@@ -737,31 +788,30 @@ namespace Narvalo.Fx.Internal
 
                 if (m != null)
                 {
-                    m.Trigger(
+                    m.Bind(
                         _ =>
                         {
-                            if (_ == true)
-                            {
-                                list.Add(item);
-                            }
+                            if (_ == true) { list.Add(item); }
+
+                            return Outcome.Unit;
                         });
                 }
             }
 
-            return list;
-            */
+            return Outcome.Success(list.AsEnumerable());
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Outcome<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
             MapUnzipCore<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Outcome<Tuple<TFirst, TSecond>>> funM)
+            Func<TSource, Outcome<Tuple<TFirst, TSecond>>> selectorM)
         {
             Demand.NotNull(@this);
-            Demand.NotNull(funM);
+            Demand.NotNull(selectorM);
 
-            var m = @this.Select(funM).EmptyIfNull().Collect();
+            // NB: Same as @this.MapCore(selectorM)
+            var m = @this.Select(selectorM).EmptyIfNull().Collect();
 
             return m.Select(
                 tuples =>

@@ -94,6 +94,53 @@ namespace Monads
 
         #endregion
 
+        #region Conditional execution of monadic expressions (Prelude)
+
+
+        /// <remarks>
+        /// Named <c>guard</c> in Haskell parlance.
+        /// </remarks>
+        public static MonadValue<global::Narvalo.Fx.Unit> Guard(bool predicate)
+        {
+
+            return predicate ? MonadValue.Unit : MonadValue<global::Narvalo.Fx.Unit>.None;
+        }
+
+
+        /// <remarks>
+        /// <para>Named <c>when</c> in Haskell parlance.</para>
+        /// <para>Haskell uses a different signature.</para>
+        /// </remarks>
+        public static void When<TSource>(
+            this MonadValue<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            where TSource : struct
+        {
+            /* T4: C# indent */
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(_ => { if (predicate.Invoke(_)) { action.Invoke(_); } return MonadValue.Unit; });
+        }
+
+        /// <remarks>
+        /// <para>Named <c>unless</c> in Haskell parlance.</para>
+        /// <para>Haskell uses a different signature.</para>
+        /// </remarks>
+        public static void Unless<TSource>(
+            this MonadValue<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            where TSource : struct
+        {
+            Expect.NotNull(predicate);
+            Expect.NotNull(action);
+
+            @this.When(_ => !predicate.Invoke(_), action);
+        }
+
+        #endregion
 
         #region Monadic lifting operators (Prelude)
 
@@ -628,6 +675,18 @@ namespace Monads
             return @this.Coalesce(predicate, MonadValue<TResult>.None, other);
         }
 
+
+        // Like Select() w/ an action.
+        public static void Trigger<TSource>(
+            this MonadValue<TSource> @this,
+            Action<TSource> action)
+            where TSource : struct
+        {
+            /* T4: C# indent */
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(_ => { action.Invoke(_); return MonadValue.Unit; });
+        }
     } // End of MonadValue - T4: EmitMonadExtraExtensions().
 
     // Provides extension methods for Func<T> in the Kleisli category.
@@ -807,7 +866,7 @@ namespace Monads.More
         #region Catamorphisms
 
         /// <remarks>
-        /// <para>Haskell use a different signature.</para>
+        /// <para>Haskell uses a different signature.</para>
         /// </remarks>
         public static MonadValue<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
@@ -825,7 +884,7 @@ namespace Monads.More
         }
 
         /// <remarks>
-        /// <para>Haskell use a different signature.</para>
+        /// <para>Haskell uses a different signature.</para>
         /// </remarks>
         public static MonadValue<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,

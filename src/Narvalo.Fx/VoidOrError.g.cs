@@ -98,6 +98,55 @@ namespace Narvalo.Fx
 
         #endregion
 
+        #region Conditional execution of monadic expressions (Prelude)
+
+
+        /// <remarks>
+        /// Named <c>guard</c> in Haskell parlance.
+        /// </remarks>
+        public static VoidOrError<global::Narvalo.Fx.Unit> Guard(bool predicate)
+        {
+            Warrant.NotNull<VoidOrError<global::Narvalo.Fx.Unit>>();
+
+            return predicate ? VoidOrError.Unit : VoidOrError<global::Narvalo.Fx.Unit>.Void;
+        }
+
+
+        /// <remarks>
+        /// <para>Named <c>when</c> in Haskell parlance.</para>
+        /// <para>Haskell uses a different signature.</para>
+        /// </remarks>
+        public static void When<TSource>(
+            this VoidOrError<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(_ => { if (predicate.Invoke(_)) { action.Invoke(_); } return VoidOrError.Unit; });
+        }
+
+        /// <remarks>
+        /// <para>Named <c>unless</c> in Haskell parlance.</para>
+        /// <para>Haskell uses a different signature.</para>
+        /// </remarks>
+        public static void Unless<TSource>(
+            this VoidOrError<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            Expect.NotNull(@this);
+            Expect.NotNull(predicate);
+            Expect.NotNull(action);
+
+            @this.When(_ => !predicate.Invoke(_), action);
+        }
+
+        #endregion
 
         #region Monadic lifting operators (Prelude)
 
@@ -620,6 +669,19 @@ namespace Narvalo.Fx
             return @this.Coalesce(predicate, VoidOrError<TResult>.Void, other);
         }
 
+
+        // Like Select() w/ an action.
+        public static void Trigger<TSource>(
+            this VoidOrError<TSource> @this,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(action, nameof(action));
+            Warrant.NotNull<VoidOrError<TSource>>();
+
+            @this.Bind(_ => { action.Invoke(_); return VoidOrError.Unit; });
+        }
     } // End of VoidOrError - T4: EmitMonadExtraExtensions().
 
     // Provides extension methods for Func<T> in the Kleisli category.

@@ -159,7 +159,7 @@ public partial class MonadTemplate
         #region Catamorphisms
 
         /// <remarks>
-        /// <para>Haskell use a different signature.</para>
+        /// <para>Haskell uses a different signature.</para>
         /// </remarks>
         public static <#= Name #><TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
@@ -179,7 +179,7 @@ public partial class MonadTemplate
         }
 
         /// <remarks>
-        /// <para>Haskell use a different signature.</para>
+        /// <para>Haskell uses a different signature.</para>
         /// </remarks>
         public static <#= Name #><TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,

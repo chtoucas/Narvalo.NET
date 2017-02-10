@@ -93,6 +93,53 @@ namespace Narvalo.Fx
 
         #endregion
 
+        #region Conditional execution of monadic expressions (Prelude)
+
+
+        /// <remarks>
+        /// Named <c>guard</c> in Haskell parlance.
+        /// </remarks>
+        public static Maybe<global::Narvalo.Fx.Unit> Guard(bool predicate)
+        {
+
+            return predicate ? Maybe.Unit : Maybe<global::Narvalo.Fx.Unit>.None;
+        }
+
+
+        /// <remarks>
+        /// <para>Named <c>when</c> in Haskell parlance.</para>
+        /// <para>Haskell uses a different signature.</para>
+        /// </remarks>
+        public static void When<TSource>(
+            this Maybe<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            /* T4: C# indent */
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(_ => { if (predicate.Invoke(_)) { action.Invoke(_); } return Maybe.Unit; });
+        }
+
+        /// <remarks>
+        /// <para>Named <c>unless</c> in Haskell parlance.</para>
+        /// <para>Haskell uses a different signature.</para>
+        /// </remarks>
+        public static void Unless<TSource>(
+            this Maybe<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            Expect.NotNull(predicate);
+            Expect.NotNull(action);
+
+            @this.When(_ => !predicate.Invoke(_), action);
+        }
+
+        #endregion
 
         #region Monadic lifting operators (Prelude)
 
@@ -586,6 +633,18 @@ namespace Narvalo.Fx
             return @this.Coalesce(predicate, Maybe<TResult>.None, other);
         }
 
+
+        // Like Select() w/ an action.
+        public static void Trigger<TSource>(
+            this Maybe<TSource> @this,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            /* T4: C# indent */
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(_ => { action.Invoke(_); return Maybe.Unit; });
+        }
     } // End of Maybe - T4: EmitMonadExtraExtensions().
 
     // Provides extension methods for Func<T> in the Kleisli category.
@@ -839,7 +898,7 @@ namespace Narvalo.Fx.More
         #region Catamorphisms
 
         /// <remarks>
-        /// <para>Haskell use a different signature.</para>
+        /// <para>Haskell uses a different signature.</para>
         /// </remarks>
         public static Maybe<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
@@ -856,7 +915,7 @@ namespace Narvalo.Fx.More
         }
 
         /// <remarks>
-        /// <para>Haskell use a different signature.</para>
+        /// <para>Haskell uses a different signature.</para>
         /// </remarks>
         public static Maybe<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
@@ -895,22 +954,26 @@ namespace Narvalo.Fx.Internal
             Demand.NotNull(@this);
 
             var seed = Maybe.Of(Enumerable.Empty<TSource>());
-            Func<Maybe<IEnumerable<TSource>>, Maybe<TSource>, Maybe<IEnumerable<TSource>>> fun
-                = (m, n) => m.Bind(list => Append(n, list));
+            // Inlined LINQ Append method:
+            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (m, item) => m.Append(item);
 
-            var retval = @this.Aggregate(seed, fun);
+            // NB: Maybe.Lift(append) is the same as:
+            // Func<Maybe<IEnumerable<TSource>>, Maybe<TSource>, Maybe<IEnumerable<TSource>>> liftedAppend
+            //     = (m, item) => m.Bind(list => Append(list, item));
+            // where Append is defined below.
+            var retval = @this.Aggregate(seed, Maybe.Lift(append));
 
             return retval;
         }
 
         // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
-        private static Maybe<IEnumerable<TSource>> Append<TSource>(
-            Maybe<TSource> m,
-            IEnumerable<TSource> list)
-        {
+        //private static Maybe<IEnumerable<TSource>> Append<TSource>(
+        //    IEnumerable<TSource> list,
+        //    Maybe<TSource> m)
+        //{
 
-            return m.Bind(item => Maybe.Of(list.Concat(Enumerable.Repeat(item, 1))));
-        }
+        //    return m.Bind(item => Maybe.Of(list.Concat(Enumerable.Repeat(item, 1))));
+        //}
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Maybe<TSource> SumCore<TSource>(
@@ -951,9 +1014,6 @@ namespace Narvalo.Fx.Internal
             Require.NotNull(predicateM, nameof(predicateM));
             Warrant.NotNull<IEnumerable<TSource>>();
 
-            throw new NotImplementedException();
-
-            /*
             // NB: Haskell uses tail recursion, we don't.
             var list = new List<TSource>();
 
@@ -961,31 +1021,29 @@ namespace Narvalo.Fx.Internal
             {
                 var m = predicateM.Invoke(item);
 
-                m.Trigger(
+                m.Bind(
                     _ =>
                     {
-                        if (_ == true)
-                        {
-                            list.Add(item);
-                        }
+                        if (_ == true) { list.Add(item); }
+
+                        return Maybe.Unit;
                     });
             }
 
-            return list;
-            */
+            return Maybe.Of(list.AsEnumerable());
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Maybe<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
             MapUnzipCore<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Maybe<Tuple<TFirst, TSecond>>> funM)
+            Func<TSource, Maybe<Tuple<TFirst, TSecond>>> selectorM)
         {
             Demand.NotNull(@this);
-            Demand.NotNull(funM);
+            Demand.NotNull(selectorM);
 
-            // NB: Same as @this.MapCore(funM)
-            var m = @this.Select(funM).EmptyIfNull().Collect();
+            // NB: Same as @this.MapCore(selectorM)
+            var m = @this.Select(selectorM).EmptyIfNull().Collect();
 
             return m.Select(
                 tuples =>
