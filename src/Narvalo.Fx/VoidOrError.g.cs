@@ -239,22 +239,6 @@ namespace Narvalo.Fx
             return @this.Bind(_ => other);
         }
 
-        /// <remarks>
-        /// Named <c>forever</c> in Haskell parlance.
-        /// </remarks>
-        public static VoidOrError<TResult> Forever<TSource, TResult>(
-            this VoidOrError<TSource> @this,
-            Func<VoidOrError<TResult>> fun
-            )
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Warrant.NotNull<VoidOrError<TResult>>();
-
-            // http://stackoverflow.com/questions/24042977/how-does-forever-monad-work
-
-            return @this.Then(@this.Forever(fun));
-        }
 
         /// <remarks>
         /// Named <c>void</c> in Haskell parlance.

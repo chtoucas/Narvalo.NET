@@ -74,7 +74,7 @@ Narvalo.Fx:
 - Naming: Extensions / More / Most
 - Fix: Implements WhereCore<>.
 - remove Forever?
-- Disabled When, Unless and Guard
+- Disabled Forever, When, Unless and Guard
 - Select -> ??? Apply, Trigger, OnSome, OnNone? Unpack -> Unbound?
 - Async versions?
 - ToString() and generics.

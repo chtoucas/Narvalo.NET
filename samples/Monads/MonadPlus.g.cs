@@ -240,22 +240,6 @@ namespace Monads
             return @this.Bind(_ => other);
         }
 
-        /// <remarks>
-        /// Named <c>forever</c> in Haskell parlance.
-        /// </remarks>
-        public static MonadPlus<TResult> Forever<TSource, TResult>(
-            this MonadPlus<TSource> @this,
-            Func<MonadPlus<TResult>> fun
-            )
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Warrant.NotNull<MonadPlus<TResult>>();
-
-            // http://stackoverflow.com/questions/24042977/how-does-forever-monad-work
-
-            return @this.Then(@this.Forever(fun));
-        }
 
         /// <remarks>
         /// Named <c>void</c> in Haskell parlance.
@@ -1078,7 +1062,9 @@ namespace Monads.Internal
 
             // WARNING: Do not remove "resultSelector", otherwise .NET will make a recursive call
             // instead of using the Zip from LINQ.
-            return @this.Zip(second, resultSelector: resultSelector).EmptyIfNull().Collect();
+            IEnumerable<MonadPlus<TResult>> seq = @this.Zip(second, resultSelector: resultSelector);
+
+            return seq.EmptyIfNull().Collect();
         }
 
         internal static MonadPlus<TAccumulate> FoldCore<TSource, TAccumulate>(

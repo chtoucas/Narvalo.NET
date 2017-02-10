@@ -43,6 +43,8 @@ public partial class MonadTemplate
             return @this.Bind(_ => other);
         }
 
+<#+ /* DISABLED #>
+
         /// <remarks>
         /// Named <c>forever</c> in Haskell parlance.
         /// </remarks>
@@ -61,6 +63,8 @@ public partial class MonadTemplate
 
             return @this.Then(@this.Forever(fun));
         }
+
+<#+ End of DISABLED */ #>
 
         /// <remarks>
         /// Named <c>void</c> in Haskell parlance.
