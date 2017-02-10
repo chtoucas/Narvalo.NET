@@ -35,6 +35,7 @@ namespace Narvalo.Fx
 
         #region Element Operators
 
+        // Named <c>listToMaybe</c> in Haskell parlance.
         public static Maybe<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this)
         {
             Expect.NotNull(@this);
@@ -224,5 +225,27 @@ namespace Narvalo.Fx
         }
 
         #endregion
+    }
+
+    public static partial class EnumerableExtensions
+    {
+        // Named <c>catMaybes</c> in Haskell parlance.
+        public static IEnumerable<TResult> CollectAny<TSource, TResult>(
+            this IEnumerable<Maybe<TResult>> @this)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Warrant.NotNull<IEnumerable<TResult>>();
+
+            return (from _ in @this where _.IsSome select _.Value).EmptyIfNull();
+        }
+
+        public static IEnumerable<TResult> CollectAny<TSource, TResult>(
+            this IEnumerable<Outcome<TResult>> @this)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Warrant.NotNull<IEnumerable<TResult>>();
+
+            return (from _ in @this where _.IsSuccess select _.Value).EmptyIfNull();
+        }
     }
 }
