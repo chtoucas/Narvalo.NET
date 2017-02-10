@@ -5,7 +5,6 @@ namespace Narvalo.Fx
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Diagnostics.CodeAnalysis;
 
     public partial struct BooleanResult<TMessage> : IEquatable<BooleanResult<TMessage>>
     {
@@ -43,7 +42,7 @@ namespace Narvalo.Fx
         {
             Warrant.NotNull<string>();
 
-            return IsTrue ? "True" : ("False(" + _message.ToString() + ")");
+            return IsTrue ? "True" : ("False(" + Message.ToString() + ")");
         }
 
         public static implicit operator bool(BooleanResult<TMessage> value) => value.IsTrue;
@@ -60,7 +59,6 @@ namespace Narvalo.Fx
         }
 
         [DebuggerHidden]
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         internal static BooleanResult<TMessage> η(TMessage value)
         {
             Require.NotNullUnconstrained(value, nameof(value));
@@ -69,7 +67,6 @@ namespace Narvalo.Fx
         }
 
         [DebuggerHidden]
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         internal static BooleanResult<TMessage> μ(BooleanResult<BooleanResult<TMessage>> square)
             => square.IsFalse ? square.Message : BooleanResult<TMessage>.True;
     }

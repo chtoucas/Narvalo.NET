@@ -4,7 +4,6 @@ namespace Narvalo.Fx
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// Represents the sum of two types. An instance of the <see cref="Either{TLeft, TRight}"/> class
@@ -25,7 +24,6 @@ namespace Narvalo.Fx
 
         public abstract Maybe<TRight> RightOrNone();
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         internal static Either<TLeft, TRight> η(TLeft value)
         {
             Warrant.NotNull<Either<TLeft, TRight>>();
@@ -33,7 +31,6 @@ namespace Narvalo.Fx
             return new Left_(value);
         }
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         internal static Either<TLeft, TRight> η(TRight value)
         {
             Warrant.NotNull<Either<TLeft, TRight>>();

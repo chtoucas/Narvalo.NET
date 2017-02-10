@@ -331,11 +331,9 @@ namespace Narvalo.Fx
     public abstract partial class Outcome<T>
     {
         [DebuggerHidden]
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         internal static Outcome<T> η(T value) => new Success_(value);
 
         [DebuggerHidden]
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         internal static Outcome<T> η(ExceptionDispatchInfo exceptionInfo)
         {
             Require.NotNull(exceptionInfo, nameof(exceptionInfo));
@@ -344,7 +342,6 @@ namespace Narvalo.Fx
         }
 
         [DebuggerHidden]
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         internal static Outcome<T> μ(Outcome<Outcome<T>> square)
         {
             Require.NotNull(square, nameof(square));

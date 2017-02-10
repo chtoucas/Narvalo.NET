@@ -106,7 +106,6 @@ namespace Narvalo.Fx
         }
 
         [DebuggerHidden]
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         internal static VoidOrError<TError> η(TError value)
         {
             Require.NotNullUnconstrained(value, nameof(value));
@@ -116,7 +115,6 @@ namespace Narvalo.Fx
         }
 
         [DebuggerHidden]
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         internal static VoidOrError<TError> μ(VoidOrError<VoidOrError<TError>> square)
             => square.IsError ? square.Error : VoidOrError<TError>.Void;
     }

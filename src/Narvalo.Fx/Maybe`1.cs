@@ -22,7 +22,7 @@ namespace Narvalo.Fx
     {
         private readonly bool _isSome;
 
-        // You should NEVER use this field directly. Always use instead the property; the Code Contracts
+        // You should NEVER use this field directly, use the Value property instead. The Code Contracts
         // static checker should then prove that no illegal access to this field happens (i.e. when IsSome is false).
         private readonly T _value;
 
@@ -46,16 +46,19 @@ namespace Narvalo.Fx
         /// </summary>
         /// <remarks>Most of the time, you don't need to access this property.
         /// You are better off using the rich vocabulary that this class offers.</remarks>
-        /// <value><see langword="true"/> if the object does hold a value; otherwise <see langword="false"/>.</value>
+        /// <value><see langword="true"/> if the object does hold a value; otherwise false.</value>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public bool IsSome { get { return _isSome; } }
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        public bool IsNone => !IsSome;
 
         /// <summary>
         /// Gets the enclosed value.
         /// </summary>
         /// <remarks>
         /// Any access to this property must be protected by checking before that <see cref="IsSome"/>
-        /// is <see langword="true"/>.
+        /// is true.
         /// </remarks>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         internal T Value
@@ -86,7 +89,7 @@ namespace Narvalo.Fx
             }
         }
 
-        #region Operators
+        #region Conversion operators
 
         public static explicit operator Maybe<T>(T value) => η(value);
 
@@ -94,7 +97,7 @@ namespace Narvalo.Fx
         {
             Warrant.NotNullUnconstrained<T>();
 
-            if (!value.IsSome)
+            if (value.IsNone)
             {
                 throw new InvalidCastException(Strings.Maybe_CannotCastNoneToValue);
             }
@@ -143,7 +146,7 @@ namespace Narvalo.Fx
             Require.NotNull(exceptionFactory, nameof(exceptionFactory));
             Warrant.NotNullUnconstrained<T>();
 
-            if (!IsSome)
+            if (IsNone)
             {
                 throw exceptionFactory.Invoke();
             }
@@ -173,10 +176,7 @@ namespace Narvalo.Fx
                 _inner = inner;
             }
 
-            public bool IsSome
-            {
-                get { return _inner.IsSome; }
-            }
+            public bool IsSome { get { return _inner.IsSome; } }
 
             public T Value
             {
@@ -238,10 +238,7 @@ namespace Narvalo.Fx
             Require.NotNull(innerKeySelector, nameof(innerKeySelector));
             Require.NotNull(resultSelector, nameof(resultSelector));
 
-            if (!IsSome || !inner.IsSome)
-            {
-                return Maybe<TResult>.None;
-            }
+            if (IsNone || inner.IsNone) { return Maybe<TResult>.None; }
 
             var outerKey = outerKeySelector.Invoke(Value);
             var innerKey = innerKeySelector.Invoke(inner.Value);
@@ -263,10 +260,7 @@ namespace Narvalo.Fx
             Require.NotNull(resultSelector, nameof(resultSelector));
 
             // REVIEW: I can't remember why I didn't include !inner.IsSome before. Mistake?
-            if (!IsSome || !inner.IsSome)
-            {
-                return Maybe<TResult>.None;
-            }
+            if (IsNone || inner.IsNone) { return Maybe<TResult>.None; }
 
             var outerKey = outerKeySelector.Invoke(Value);
             var innerKey = innerKeySelector.Invoke(inner.Value);
@@ -290,14 +284,10 @@ namespace Narvalo.Fx
         }
 
         [DebuggerHidden]
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
-        internal static Maybe<T> η(T value)
-            => value != null ? new Maybe<T>(value) : Maybe<T>.None;
+        internal static Maybe<T> η(T value) => value != null ? new Maybe<T>(value) : None;
 
         [DebuggerHidden]
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
-        internal static Maybe<T> μ(Maybe<Maybe<T>> square)
-            => square.IsSome ? square.Value : Maybe<T>.None;
+        internal static Maybe<T> μ(Maybe<Maybe<T>> square) => square.IsSome ? square.Value : None;
     }
 
     // Provides the core MonadOr methods.
@@ -309,7 +299,7 @@ namespace Narvalo.Fx
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
         public static readonly Maybe<T> None = new Maybe<T>();
 
-        public Maybe<T> OrElse(Maybe<T> other) => !IsSome ? other : this;
+        public Maybe<T> OrElse(Maybe<T> other) => IsNone ? other : this;
     }
 
     // Implements the Internal.ISwitch<T> interface.
@@ -394,7 +384,7 @@ namespace Narvalo.Fx
                 return other.IsSome && comparer.Equals(Value, other.Value);
             }
 
-            return !other.IsSome;
+            return other.IsNone;
         }
 
         /// <inheritdoc cref="Object.Equals(Object)" />
