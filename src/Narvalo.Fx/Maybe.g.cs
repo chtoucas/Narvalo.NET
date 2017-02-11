@@ -18,7 +18,7 @@ namespace Narvalo.Fx
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
-    using Narvalo.Fx.Internal;
+    using Narvalo.Fx.More;
 
     // Provides a set of static methods for Maybe<T>.
     // NB: Sometimes we prefer extension methods over static methods to be able to override them locally.
@@ -494,7 +494,7 @@ namespace Narvalo.Fx
             Expect.NotNull(innerKeySelector);
             Expect.NotNull(resultSelector);
 
-            return JoinCore(
+            return JoinImpl(
                 @this,
                 inner,
                 outerKeySelector,
@@ -516,7 +516,7 @@ namespace Narvalo.Fx
             Expect.NotNull(innerKeySelector);
             Expect.NotNull(resultSelector);
 
-            return GroupJoinCore(
+            return GroupJoinImpl(
                 @this,
                 inner,
                 outerKeySelector,
@@ -526,7 +526,7 @@ namespace Narvalo.Fx
         }
 
 
-        private static Maybe<TResult> JoinCore<TSource, TInner, TKey, TResult>(
+        private static Maybe<TResult> JoinImpl<TSource, TInner, TKey, TResult>(
             Maybe<TSource> seq,
             Maybe<TInner> inner,
             Func<TSource, TKey> outerKeySelector,
@@ -548,7 +548,7 @@ namespace Narvalo.Fx
                    select resultSelector.Invoke(outerValue, innerValue);
         }
 
-        private static Maybe<TResult> GroupJoinCore<TSource, TInner, TKey, TResult>(
+        private static Maybe<TResult> GroupJoinImpl<TSource, TInner, TKey, TResult>(
             Maybe<TSource> seq,
             Maybe<TInner> inner,
             Func<TSource, TKey> outerKeySelector,
@@ -663,7 +663,7 @@ namespace Narvalo.Fx
             Expect.NotNull(@this);
             Expect.NotNull(seq);
 
-            return seq.MapCore(@this);
+            return seq.Map(@this);
         }
 
 
@@ -735,7 +735,7 @@ namespace Narvalo.Fx
         {
             Expect.NotNull(@this);
 
-            return @this.CollectCore();
+            return @this.CollectImpl();
         }
 
 
@@ -753,7 +753,7 @@ namespace Narvalo.Fx
         {
             Expect.NotNull(@this);
 
-            return @this.SumCore();
+            return @this.SumImpl();
         }
 
         #endregion
@@ -770,7 +770,7 @@ namespace Narvalo.Fx.More
     using Narvalo.Fx.Internal;
 
     // Provides extension methods for IEnumerable<T>.
-    // We do not use the standard LINQ names to avoid a confusing API (see ZipWithCore()).
+    // We do not use the standard LINQ names to avoid a confusing API (see ZipWithImpl()).
     // - Select    -> Map
     // - Where     -> Filter
     // - Zip       -> ZipWith
@@ -788,7 +788,7 @@ namespace Narvalo.Fx.More
             Expect.NotNull(@this);
             Expect.NotNull(selectorM);
 
-            return @this.MapCore(selectorM);
+            return @this.MapImpl(selectorM);
         }
 
 
@@ -807,7 +807,7 @@ namespace Narvalo.Fx.More
             Expect.NotNull(predicateM);
             Warrant.NotNull<IEnumerable<TSource>>();
 
-            return @this.FilterCore(predicateM);
+            return @this.FilterImpl(predicateM);
         }
 
         /// <remarks>
@@ -821,7 +821,7 @@ namespace Narvalo.Fx.More
             Expect.NotNull(@this);
             Expect.NotNull(funM);
 
-            return @this.MapUnzipCore(funM);
+            return @this.MapUnzipImpl(funM);
         }
 
         /// <remarks>
@@ -836,7 +836,7 @@ namespace Narvalo.Fx.More
             Expect.NotNull(second);
             Expect.NotNull(resultSelectorM);
 
-            return @this.ZipWithCore(second, resultSelectorM);
+            return @this.ZipWithImpl(second, resultSelectorM);
         }
 
 
@@ -852,7 +852,7 @@ namespace Narvalo.Fx.More
             Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
 
-            return @this.FoldCore(seed, accumulatorM);
+            return @this.FoldImpl(seed, accumulatorM);
         }
 
         #endregion
@@ -868,7 +868,7 @@ namespace Narvalo.Fx.More
             Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
 
-            return @this.FoldBackCore(seed, accumulatorM);
+            return @this.FoldBackImpl(seed, accumulatorM);
         }
 
         public static Maybe<TSource> Reduce<TSource>(
@@ -879,7 +879,7 @@ namespace Narvalo.Fx.More
             Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
 
-            return @this.ReduceCore(accumulatorM);
+            return @this.ReduceImpl(accumulatorM);
         }
 
         public static Maybe<TSource> ReduceBack<TSource>(
@@ -890,7 +890,7 @@ namespace Narvalo.Fx.More
             Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
 
-            return @this.ReduceBackCore(accumulatorM);
+            return @this.ReduceBackImpl(accumulatorM);
         }
 
         #endregion
@@ -911,7 +911,7 @@ namespace Narvalo.Fx.More
             Expect.NotNull(accumulatorM);
             Expect.NotNull(predicate);
 
-            return @this.FoldCore(seed, accumulatorM, predicate);
+            return @this.FoldImpl(seed, accumulatorM, predicate);
         }
 
         /// <remarks>
@@ -927,7 +927,7 @@ namespace Narvalo.Fx.More
             Expect.NotNull(accumulatorM);
             Expect.NotNull(predicate);
 
-            return @this.ReduceCore(accumulatorM, predicate);
+            return @this.ReduceImpl(accumulatorM, predicate);
         }
 
         #endregion
@@ -948,7 +948,7 @@ namespace Narvalo.Fx.Internal
     {
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Maybe<IEnumerable<TSource>> CollectCore<TSource>(
+        internal static Maybe<IEnumerable<TSource>> CollectImpl<TSource>(
             this IEnumerable<Maybe<TSource>> @this)
         {
             Demand.NotNull(@this);
@@ -976,7 +976,7 @@ namespace Narvalo.Fx.Internal
         //}
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Maybe<TSource> SumCore<TSource>(
+        internal static Maybe<TSource> SumImpl<TSource>(
             this IEnumerable<Maybe<TSource>> @this)
             /* T4: C# indent */
         {
@@ -994,7 +994,7 @@ namespace Narvalo.Fx.Internal
     {
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Maybe<IEnumerable<TResult>> MapCore<TSource, TResult>(
+        internal static Maybe<IEnumerable<TResult>> MapImpl<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<TResult>> selectorM)
         {
@@ -1005,7 +1005,7 @@ namespace Narvalo.Fx.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Maybe<IEnumerable<TSource>> FilterCore<TSource>(
+        internal static Maybe<IEnumerable<TSource>> FilterImpl<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<bool>> predicateM)
             /* T4: C# indent */
@@ -1028,17 +1028,14 @@ namespace Narvalo.Fx.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Maybe<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
-            MapUnzipCore<TSource, TFirst, TSecond>(
+            MapUnzipImpl<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<Tuple<TFirst, TSecond>>> selectorM)
         {
             Demand.NotNull(@this);
             Demand.NotNull(selectorM);
 
-            // NB: Same as @this.MapCore(selectorM)
-            var m = @this.Select(selectorM).EmptyIfNull().Collect();
-
-            return m.Select(
+            return @this.Map(selectorM).Select(
                 tuples =>
                 {
                     IEnumerable<TFirst> list1 = tuples.Select(_ => _.Item1);
@@ -1049,7 +1046,7 @@ namespace Narvalo.Fx.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Maybe<IEnumerable<TResult>> ZipWithCore<TFirst, TSecond, TResult>(
+        internal static Maybe<IEnumerable<TResult>> ZipWithImpl<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, Maybe<TResult>> resultSelectorM)
@@ -1070,7 +1067,7 @@ namespace Narvalo.Fx.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Maybe<TAccumulate> FoldCore<TSource, TAccumulate>(
+        internal static Maybe<TAccumulate> FoldImpl<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulatorM)
@@ -1090,7 +1087,7 @@ namespace Narvalo.Fx.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Maybe<TAccumulate> FoldBackCore<TSource, TAccumulate>(
+        internal static Maybe<TAccumulate> FoldBackImpl<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulatorM)
@@ -1103,7 +1100,7 @@ namespace Narvalo.Fx.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Maybe<TSource> ReduceCore<TSource>(
+        internal static Maybe<TSource> ReduceImpl<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Maybe<TSource>> accumulatorM)
             /* T4: C# indent */
@@ -1130,7 +1127,7 @@ namespace Narvalo.Fx.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Maybe<TSource> ReduceBackCore<TSource>(
+        internal static Maybe<TSource> ReduceBackImpl<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Maybe<TSource>> accumulatorM)
             /* T4: C# indent */
@@ -1142,7 +1139,7 @@ namespace Narvalo.Fx.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Maybe<TAccumulate> FoldCore<TSource, TAccumulate>(
+        internal static Maybe<TAccumulate> FoldImpl<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulatorM,
@@ -1167,7 +1164,7 @@ namespace Narvalo.Fx.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Maybe<TSource> ReduceCore<TSource>(
+        internal static Maybe<TSource> ReduceImpl<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Maybe<TSource>> accumulatorM,
             Func<Maybe<TSource>, bool> predicate)

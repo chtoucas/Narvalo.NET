@@ -25,7 +25,7 @@ public partial class MonadTemplate
             Warrant.NotNull<<#= Name #><IEnumerable<TResult>>>();
 <#+ } #>
 
-            return seq.MapCore(@this);
+            return seq.Map(@this);
         }
 
 <#+ } // T4: End of !HasTypeConstraints. #>

@@ -19,7 +19,7 @@ namespace Monads
     using System.Collections.Generic;
     using System.Linq;
 
-    using Monads.Internal;
+    using Monads.More;
 
     // Provides a set of static methods for Monad<T>.
     // NB: Sometimes we prefer extension methods over static methods to be able to override them locally.
@@ -450,7 +450,7 @@ namespace Monads
             Expect.NotNull(seq);
             Warrant.NotNull<Monad<IEnumerable<TResult>>>();
 
-            return seq.MapCore(@this);
+            return seq.Map(@this);
         }
 
 
@@ -523,7 +523,7 @@ namespace Monads
             Expect.NotNull(@this);
             Warrant.NotNull<Monad<IEnumerable<TSource>>>();
 
-            return @this.CollectCore();
+            return @this.CollectImpl();
         }
 
 
@@ -541,7 +541,7 @@ namespace Monads.More
     using Monads.Internal;
 
     // Provides extension methods for IEnumerable<T>.
-    // We do not use the standard LINQ names to avoid a confusing API (see ZipWithCore()).
+    // We do not use the standard LINQ names to avoid a confusing API (see ZipWithImpl()).
     // - Select    -> Map
     // - Where     -> Filter
     // - Zip       -> ZipWith
@@ -560,7 +560,7 @@ namespace Monads.More
             Expect.NotNull(selectorM);
             Warrant.NotNull<Monad<IEnumerable<TResult>>>();
 
-            return @this.MapCore(selectorM);
+            return @this.MapImpl(selectorM);
         }
 
 
@@ -579,7 +579,7 @@ namespace Monads.More
             Expect.NotNull(predicateM);
             Warrant.NotNull<IEnumerable<TSource>>();
 
-            return @this.FilterCore(predicateM);
+            return @this.FilterImpl(predicateM);
         }
 
         /// <remarks>
@@ -593,7 +593,7 @@ namespace Monads.More
             Expect.NotNull(@this);
             Expect.NotNull(funM);
 
-            return @this.MapUnzipCore(funM);
+            return @this.MapUnzipImpl(funM);
         }
 
         /// <remarks>
@@ -609,7 +609,7 @@ namespace Monads.More
             Expect.NotNull(resultSelectorM);
             Warrant.NotNull<Monad<IEnumerable<TResult>>>();
 
-            return @this.ZipWithCore(second, resultSelectorM);
+            return @this.ZipWithImpl(second, resultSelectorM);
         }
 
 
@@ -625,7 +625,7 @@ namespace Monads.More
             Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
 
-            return @this.FoldCore(seed, accumulatorM);
+            return @this.FoldImpl(seed, accumulatorM);
         }
 
         #endregion
@@ -641,7 +641,7 @@ namespace Monads.More
             Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
 
-            return @this.FoldBackCore(seed, accumulatorM);
+            return @this.FoldBackImpl(seed, accumulatorM);
         }
 
         public static Monad<TSource> Reduce<TSource>(
@@ -652,7 +652,7 @@ namespace Monads.More
             Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
 
-            return @this.ReduceCore(accumulatorM);
+            return @this.ReduceImpl(accumulatorM);
         }
 
         public static Monad<TSource> ReduceBack<TSource>(
@@ -663,7 +663,7 @@ namespace Monads.More
             Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
 
-            return @this.ReduceBackCore(accumulatorM);
+            return @this.ReduceBackImpl(accumulatorM);
         }
 
         #endregion
@@ -684,7 +684,7 @@ namespace Monads.More
             Expect.NotNull(accumulatorM);
             Expect.NotNull(predicate);
 
-            return @this.FoldCore(seed, accumulatorM, predicate);
+            return @this.FoldImpl(seed, accumulatorM, predicate);
         }
 
         /// <remarks>
@@ -700,7 +700,7 @@ namespace Monads.More
             Expect.NotNull(accumulatorM);
             Expect.NotNull(predicate);
 
-            return @this.ReduceCore(accumulatorM, predicate);
+            return @this.ReduceImpl(accumulatorM, predicate);
         }
 
         #endregion
@@ -719,7 +719,7 @@ namespace Monads.Internal
     internal static partial class EnumerableExtensions
     {
 
-        internal static Monad<IEnumerable<TSource>> CollectCore<TSource>(
+        internal static Monad<IEnumerable<TSource>> CollectImpl<TSource>(
             this IEnumerable<Monad<TSource>> @this)
         {
             Demand.NotNull(@this);
@@ -755,7 +755,7 @@ namespace Monads.Internal
     internal static partial class EnumerableExtensions
     {
 
-        internal static Monad<IEnumerable<TResult>> MapCore<TSource, TResult>(
+        internal static Monad<IEnumerable<TResult>> MapImpl<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, Monad<TResult>> selectorM)
         {
@@ -766,7 +766,7 @@ namespace Monads.Internal
             return @this.Select(selectorM).EmptyIfNull().Collect();
         }
 
-        internal static Monad<IEnumerable<TSource>> FilterCore<TSource>(
+        internal static Monad<IEnumerable<TSource>> FilterImpl<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Monad<bool>> predicateM)
             /* T4: C# indent */
@@ -788,17 +788,14 @@ namespace Monads.Internal
         }
 
         internal static Monad<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
-            MapUnzipCore<TSource, TFirst, TSecond>(
+            MapUnzipImpl<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
             Func<TSource, Monad<Tuple<TFirst, TSecond>>> selectorM)
         {
             Demand.NotNull(@this);
             Demand.NotNull(selectorM);
 
-            // NB: Same as @this.MapCore(selectorM)
-            var m = @this.Select(selectorM).EmptyIfNull().Collect();
-
-            return m.Select(
+            return @this.Map(selectorM).Select(
                 tuples =>
                 {
                     IEnumerable<TFirst> list1 = tuples.Select(_ => _.Item1);
@@ -808,7 +805,7 @@ namespace Monads.Internal
                 });
         }
 
-        internal static Monad<IEnumerable<TResult>> ZipWithCore<TFirst, TSecond, TResult>(
+        internal static Monad<IEnumerable<TResult>> ZipWithImpl<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, Monad<TResult>> resultSelectorM)
@@ -829,7 +826,7 @@ namespace Monads.Internal
             return seq.EmptyIfNull().Collect();
         }
 
-        internal static Monad<TAccumulate> FoldCore<TSource, TAccumulate>(
+        internal static Monad<TAccumulate> FoldImpl<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, Monad<TAccumulate>> accumulatorM)
@@ -853,7 +850,7 @@ namespace Monads.Internal
             return retval;
         }
 
-        internal static Monad<TAccumulate> FoldBackCore<TSource, TAccumulate>(
+        internal static Monad<TAccumulate> FoldBackImpl<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, Monad<TAccumulate>> accumulatorM)
@@ -865,7 +862,7 @@ namespace Monads.Internal
             return @this.Reverse().EmptyIfNull().Fold(seed, accumulatorM);
         }
 
-        internal static Monad<TSource> ReduceCore<TSource>(
+        internal static Monad<TSource> ReduceImpl<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Monad<TSource>> accumulatorM)
             /* T4: C# indent */
@@ -896,7 +893,7 @@ namespace Monads.Internal
             }
         }
 
-        internal static Monad<TSource> ReduceBackCore<TSource>(
+        internal static Monad<TSource> ReduceBackImpl<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Monad<TSource>> accumulatorM)
             /* T4: C# indent */
@@ -907,7 +904,7 @@ namespace Monads.Internal
             return @this.Reverse().EmptyIfNull().Reduce(accumulatorM);
         }
 
-        internal static Monad<TAccumulate> FoldCore<TSource, TAccumulate>(
+        internal static Monad<TAccumulate> FoldImpl<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, Monad<TAccumulate>> accumulatorM,
@@ -936,7 +933,7 @@ namespace Monads.Internal
             return retval;
         }
 
-        internal static Monad<TSource> ReduceCore<TSource>(
+        internal static Monad<TSource> ReduceImpl<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Monad<TSource>> accumulatorM,
             Func<Monad<TSource>, bool> predicate)

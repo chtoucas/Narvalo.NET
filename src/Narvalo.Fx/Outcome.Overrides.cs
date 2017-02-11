@@ -3,7 +3,6 @@
 namespace Narvalo.Fx
 {
     using System.Collections.Generic;
-    using System.Linq;
 
     // Overrides a bunch of auto-generated (extension) methods.
     public abstract partial class Outcome<T>
@@ -15,24 +14,33 @@ namespace Narvalo.Fx
     // Overrides for auto-generated (extension) methods on IEnumerable<Outcome<T>>.
     public static partial class EnumerableExtensions
     {
-        internal static Outcome<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Outcome<TSource>> @this)
+        internal static Outcome<IEnumerable<TSource>> CollectImpl<TSource>(this IEnumerable<Outcome<TSource>> @this)
         {
-            Demand.NotNull(@this);
+            Require.NotNull(@this, nameof(@this));
             Warrant.NotNull<Outcome<IEnumerable<TSource>>>();
 
-            var list = new List<TSource>();
+            return Outcome.Success(CollectAnyIterator(@this));
+        }
+    }
+}
 
-            foreach (var m in @this)
-            {
-                // REVIEW: Is this the correct behaviour for null?
-                if (m == null) { list.Add(default(TSource)); continue; }
+namespace Narvalo.Fx.More
+{
+    using System;
+    using System.Collections.Generic;
 
-                if (!m.IsSuccess) { continue; }
+    // Overrides for auto-generated (extension) methods on IEnumerable<T>.
+    public static partial class EnumerableExtensions
+    {
+        internal static Outcome<IEnumerable<TSource>> FilterImpl<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, Outcome<bool>> predicateM)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicateM, nameof(predicateM));
+            Warrant.NotNull<IEnumerable<TSource>>();
 
-                list.Add(m.Value);
-            }
-
-            return Outcome.Success(list.AsEnumerable());
+            return Outcome.Success(WhereAnyIterator(@this, predicateM));
         }
     }
 }

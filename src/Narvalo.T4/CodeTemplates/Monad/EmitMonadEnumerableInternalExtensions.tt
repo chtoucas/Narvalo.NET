@@ -14,7 +14,7 @@ public partial class MonadTemplate
 <#+ if (!SuppressMessage) { #>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
 <#+ } #>
-        internal static <#= Name #><IEnumerable<TSource>> CollectCore<TSource>(
+        internal static <#= Name #><IEnumerable<TSource>> CollectImpl<TSource>(
             this IEnumerable<<#= Name #><TSource>> @this)
         {
             Demand.NotNull(@this);
@@ -57,7 +57,7 @@ public partial class MonadTemplate
 <#+ if (!SuppressMessage) { #>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
 <#+ } #>
-        internal static <#= Name #><TSource> SumCore<TSource>(
+        internal static <#= Name #><TSource> SumImpl<TSource>(
             this IEnumerable<<#= Name #><TSource>> @this)
             <#+ WriteTypeConstraints("TSource"); #>
         {

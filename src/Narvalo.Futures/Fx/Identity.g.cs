@@ -18,8 +18,6 @@ namespace Narvalo.Fx
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
-    using Narvalo.Fx.Internal;
-
     // Provides a set of static methods for Identity<T>.
     // NB: Sometimes we prefer extension methods over static methods to be able to override them locally.
     public static partial class Identity

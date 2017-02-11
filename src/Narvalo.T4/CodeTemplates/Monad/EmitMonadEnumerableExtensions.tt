@@ -23,7 +23,7 @@ public partial class MonadTemplate
             Warrant.NotNull<<#= Name #><IEnumerable<TSource>>>();
 <#+ } #>
 
-            return @this.CollectCore();
+            return @this.CollectImpl();
         }
 
 <#+ } // T4: End of !HasTypeConstraints. #>
@@ -46,7 +46,7 @@ public partial class MonadTemplate
             Warrant.NotNull<<#= Name #><TSource>>();
 <#+ } #>
 
-            return @this.SumCore();
+            return @this.SumImpl();
         }
 
         #endregion

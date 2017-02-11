@@ -6,7 +6,7 @@ public partial class MonadTemplate
     {
 #>
     // Provides extension methods for IEnumerable<T>.
-    // We do not use the standard LINQ names to avoid a confusing API (see ZipWithCore()).
+    // We do not use the standard LINQ names to avoid a confusing API (see ZipWithImpl()).
     // - Select    -> Map
     // - Where     -> Filter
     // - Zip       -> ZipWith
@@ -28,7 +28,7 @@ public partial class MonadTemplate
             Warrant.NotNull<<#= Name #><IEnumerable<TResult>>>();
 <#+ } #>
 
-            return @this.MapCore(selectorM);
+            return @this.MapImpl(selectorM);
         }
 
 <#+ } // T4: End of !HasTypeConstraints. #>
@@ -49,7 +49,7 @@ public partial class MonadTemplate
             Expect.NotNull(predicateM);
             Warrant.NotNull<IEnumerable<TSource>>();
 
-            return @this.FilterCore(predicateM);
+            return @this.FilterImpl(predicateM);
         }
 
         /// <remarks>
@@ -66,7 +66,7 @@ public partial class MonadTemplate
             Warrant.NotNull<<#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>();
 <#+ } #>
 
-            return @this.MapUnzipCore(funM);
+            return @this.MapUnzipImpl(funM);
         }
 
         /// <remarks>
@@ -84,7 +84,7 @@ public partial class MonadTemplate
             Warrant.NotNull<<#= Name #><IEnumerable<TResult>>>();
 <#+ } #>
 
-            return @this.ZipWithCore(second, resultSelectorM);
+            return @this.ZipWithImpl(second, resultSelectorM);
         }
 
 <#+ } // T4: End of !HasTypeConstraints. #>
@@ -104,7 +104,7 @@ public partial class MonadTemplate
             Warrant.NotNull<<#= Name #><TAccumulate>>();
 <#+ } #>
 
-            return @this.FoldCore(seed, accumulatorM);
+            return @this.FoldImpl(seed, accumulatorM);
         }
 
         #endregion
@@ -123,7 +123,7 @@ public partial class MonadTemplate
             Warrant.NotNull<<#= Name #><TAccumulate>>();
 <#+ } #>
 
-            return @this.FoldBackCore(seed, accumulatorM);
+            return @this.FoldBackImpl(seed, accumulatorM);
         }
 
         public static <#= Name #><TSource> Reduce<TSource>(
@@ -137,7 +137,7 @@ public partial class MonadTemplate
             Warrant.NotNull<<#= Name #><TSource>>();
 <#+ } #>
 
-            return @this.ReduceCore(accumulatorM);
+            return @this.ReduceImpl(accumulatorM);
         }
 
         public static <#= Name #><TSource> ReduceBack<TSource>(
@@ -151,7 +151,7 @@ public partial class MonadTemplate
             Warrant.NotNull<<#= Name #><TSource>>();
 <#+ } #>
 
-            return @this.ReduceBackCore(accumulatorM);
+            return @this.ReduceBackImpl(accumulatorM);
         }
 
         #endregion
@@ -175,7 +175,7 @@ public partial class MonadTemplate
             Warrant.NotNull<<#= Name #><TAccumulate>>();
 <#+ } #>
 
-            return @this.FoldCore(seed, accumulatorM, predicate);
+            return @this.FoldImpl(seed, accumulatorM, predicate);
         }
 
         /// <remarks>
@@ -194,7 +194,7 @@ public partial class MonadTemplate
             Warrant.NotNull<<#= Name #><TSource>>();
 <#+ } #>
 
-            return @this.ReduceCore(accumulatorM, predicate);
+            return @this.ReduceImpl(accumulatorM, predicate);
         }
 
         #endregion

@@ -366,7 +366,7 @@ public partial class MonadTemplate
             Warrant.NotNull<<#= Name #><TResult>>();
 <#+ } #>
 
-            return JoinCore(
+            return JoinImpl(
                 @this,
                 inner,
                 outerKeySelector,
@@ -395,7 +395,7 @@ public partial class MonadTemplate
             Warrant.NotNull<<#= Name #><TResult>>();
 <#+ } #>
 
-            return GroupJoinCore(
+            return GroupJoinImpl(
                 @this,
                 inner,
                 outerKeySelector,
@@ -405,7 +405,7 @@ public partial class MonadTemplate
         }
 
 
-        private static <#= Name #><TResult> JoinCore<TSource, TInner, TKey, TResult>(
+        private static <#= Name #><TResult> JoinImpl<TSource, TInner, TKey, TResult>(
             <#= Name #><TSource> seq,
             <#= Name #><TInner> inner,
             Func<TSource, TKey> outerKeySelector,
@@ -433,7 +433,7 @@ public partial class MonadTemplate
                    select resultSelector.Invoke(outerValue, innerValue);
         }
 
-        private static <#= Name #><TResult> GroupJoinCore<TSource, TInner, TKey, TResult>(
+        private static <#= Name #><TResult> GroupJoinImpl<TSource, TInner, TKey, TResult>(
             <#= Name #><TSource> seq,
             <#= Name #><TInner> inner,
             Func<TSource, TKey> outerKeySelector,

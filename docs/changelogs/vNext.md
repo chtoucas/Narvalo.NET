@@ -75,7 +75,9 @@ Narvalo.Fx:
 - Apply, Trigger, OnSome, OnNone?
 - Review and test all IEnumerable<T> extensions (in particular delayed arg check).
   Check signatures / Haskell.
-- CollectCore, CollectCore: use an iterator; review null in FilterCore and CollectCore.
+- CollectCore, FilterCore,...: implement with custom iterators;
+  review null in FilterCore and CollectCore.
+- Rework EmptyIfNull().
 - Alternative, Maybe
 - ISwitch -> On...
 - VoidOr... use the same design as Either.

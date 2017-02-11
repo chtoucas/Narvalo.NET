@@ -51,8 +51,6 @@ namespace <#= Namespace #>
 <#+ } #>
     using System.Linq;
 
-    using <#= Namespace #>.Internal;
-
 <#+
     EmitMonadCore();
     WriteLine();
@@ -90,7 +88,7 @@ namespace <#= Namespace #>
 <#+ } #>
     using System.Linq;
 
-    using <#= Namespace #>.Internal;
+    using <#= Namespace #>.More;
 
 <#+
     EmitMonadCore();

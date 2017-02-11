@@ -18,8 +18,6 @@ namespace Narvalo.Fx
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
-    using Narvalo.Fx.Internal;
-
     // Provides a set of static methods for VoidOrError<T>.
     // NB: Sometimes we prefer extension methods over static methods to be able to override them locally.
     public static partial class VoidOrError
@@ -518,7 +516,7 @@ namespace Narvalo.Fx
             Expect.NotNull(resultSelector);
             Warrant.NotNull<VoidOrError<TResult>>();
 
-            return JoinCore(
+            return JoinImpl(
                 @this,
                 inner,
                 outerKeySelector,
@@ -543,7 +541,7 @@ namespace Narvalo.Fx
             Expect.NotNull(resultSelector);
             Warrant.NotNull<VoidOrError<TResult>>();
 
-            return GroupJoinCore(
+            return GroupJoinImpl(
                 @this,
                 inner,
                 outerKeySelector,
@@ -553,7 +551,7 @@ namespace Narvalo.Fx
         }
 
 
-        private static VoidOrError<TResult> JoinCore<TSource, TInner, TKey, TResult>(
+        private static VoidOrError<TResult> JoinImpl<TSource, TInner, TKey, TResult>(
             VoidOrError<TSource> seq,
             VoidOrError<TInner> inner,
             Func<TSource, TKey> outerKeySelector,
@@ -577,7 +575,7 @@ namespace Narvalo.Fx
                    select resultSelector.Invoke(outerValue, innerValue);
         }
 
-        private static VoidOrError<TResult> GroupJoinCore<TSource, TInner, TKey, TResult>(
+        private static VoidOrError<TResult> GroupJoinImpl<TSource, TInner, TKey, TResult>(
             VoidOrError<TSource> seq,
             VoidOrError<TInner> inner,
             Func<TSource, TKey> outerKeySelector,
