@@ -261,7 +261,7 @@ namespace Narvalo.Fx
             }
         }
 
-        // Methods below are not really part of the the Internal.ISwitch<T> interface.
+        // Methods below do not belong to the interface Internal.ISwitch<T>.
 
         // Alias for Apply().
         public void OnSome(Action<T> action)
@@ -275,7 +275,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(action, nameof(action));
 
-            if (IsSome) { action.Invoke(); }
+            if (IsNone) { action.Invoke(); }
         }
     }
 
