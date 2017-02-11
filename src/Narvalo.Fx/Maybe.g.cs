@@ -775,7 +775,7 @@ namespace Narvalo.Fx.Linq
     // - Where     -> Filter
     // - Zip       -> ZipWith
     // - Aggregate -> Reduce or Fold
-    public static partial class EnumerableExtensions
+    public static partial class MoreEnumerable
     {
         #region Basic Monad functions (Prelude)
 
@@ -931,7 +931,7 @@ namespace Narvalo.Fx.Linq
         }
 
         #endregion
-    } // End of EnumerableExtensions - T4: EmitEnumerableExtensions().
+    } // End of MoreEnumerable - T4: EmitEnumerableExtensions().
 }
 
 namespace Narvalo.Fx.Internal

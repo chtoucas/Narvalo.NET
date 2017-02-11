@@ -11,7 +11,7 @@ public partial class MonadTemplate
     // - Where     -> Filter
     // - Zip       -> ZipWith
     // - Aggregate -> Reduce or Fold
-    public static partial class EnumerableExtensions
+    public static partial class MoreEnumerable
     {
         #region Basic Monad functions (Prelude)
 
@@ -198,7 +198,7 @@ public partial class MonadTemplate
         }
 
         #endregion
-    } // End of EnumerableExtensions - T4: EmitEnumerableExtensions().
+    } // End of MoreEnumerable - T4: EmitEnumerableExtensions().
 <#+
     } // T4: End of EmitEnumerableExtensions().
 } // T4: End of MonadTemplate.

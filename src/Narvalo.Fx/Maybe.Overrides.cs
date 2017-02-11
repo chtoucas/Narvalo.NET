@@ -137,7 +137,7 @@ namespace Narvalo.Fx.Linq
     using System.Collections.Generic;
 
     // Overrides for auto-generated (extension) methods on IEnumerable<T>.
-    public static partial class EnumerableExtensions
+    public static partial class MoreEnumerable
     {
         internal static Maybe<IEnumerable<TSource>> FilterImpl<TSource>(
             this IEnumerable<TSource> @this,

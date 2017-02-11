@@ -7,7 +7,7 @@ namespace Narvalo.Fx
     /// <summary>
     /// Provides extension methods for <see cref="Nullable{T}"/>.
     /// </summary>
-    public static class NullableExtensions
+    public static class Nullable
     {
         #region Basic Monad functions
 
