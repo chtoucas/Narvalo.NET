@@ -76,7 +76,7 @@ Narvalo.Fx:
 - Review and test all IEnumerable<T> extensions.
 - Check signatures / Haskell.
 - Rework EmptyIfNull()?
-- Alternative, Maybe
+- Alternative, Idiom
 - ISwitch -> On...
 - VoidOr... use the same design as Either.
 - Async versions?

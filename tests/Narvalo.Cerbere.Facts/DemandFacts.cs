@@ -28,11 +28,11 @@ namespace Narvalo
         public static void True_Passes_ForTrue() => Demand.True(true);
 
         [ReleaseOnlyFact]
-        public static void True_Passes_ForFalse() => Demand.State(false);
+        public static void True_Passes_ForFalse() => Demand.True(false);
 
         [DebugOnlyFact]
         public void True_Fails_ForFalse()
-            => Assert.Throws<DebugAssertFailedException>(() => Demand.State(false));
+            => Assert.Throws<DebugAssertFailedException>(() => Demand.True(false));
 
         #endregion
 
