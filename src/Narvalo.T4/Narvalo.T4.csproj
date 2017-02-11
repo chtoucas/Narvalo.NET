@@ -38,6 +38,7 @@
     <None Include="CodeTemplates\Monad\EmitMonadExtensions.tt" />
     <None Include="CodeTemplates\Monad\EmitFacts.tt" />
     <None Include="CodeTemplates\Outcome.tt" />
+    <None Include="CodeTemplates\VoidOrError.tt" />
     <None Include="Narvalo.T4.v14.0.props">
       <SubType>Designer</SubType>
     </None>
@@ -51,7 +52,7 @@
     </CodeAnalysisDictionary>
   </ItemGroup>
   <ItemGroup>
-    <None Include="CodeTemplates\VoidOrError.tt" />
+    <None Include="CodeTemplates\Monad\EmitMonadExtraExtensions.tt" />
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

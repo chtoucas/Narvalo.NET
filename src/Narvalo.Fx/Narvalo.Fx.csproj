@@ -75,7 +75,9 @@
   <ItemGroup>
     <Compile Include="BooleanResult`1.cs" />
     <Compile Include="Func.cs" />
-    <Compile Include="Internal\IDisjointUnionOf`.cs" />
+    <Compile Include="Internal\ICoalesce`1.cs" />
+    <Compile Include="Internal\IDisjointUnionOf`2.cs" />
+    <Compile Include="Internal\ISwitch`.cs" />
     <Compile Include="Iteration.cs" />
     <Compile Include="Iteration`2.cs" />
     <Compile Include="Linq\WhereAny.cs" />

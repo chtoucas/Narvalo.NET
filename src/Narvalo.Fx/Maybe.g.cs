@@ -610,6 +610,62 @@ namespace Narvalo.Fx
         #endregion
     } // End of Maybe - T4: EmitMonadExtensions().
 
+    // Provides non-standard extension methods for Maybe<T>.
+    public static partial class Maybe
+    {
+        public static Maybe<TResult> Coalesce<TSource, TResult>(
+            this Maybe<TSource> @this,
+            Func<TSource, bool> predicate,
+            Maybe<TResult> then,
+            Maybe<TResult> otherwise)
+            /* T4: C# indent */
+        {
+            /* T4: C# indent */
+            Require.NotNull(predicate, nameof(predicate));
+
+            return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
+        }
+
+
+        // Generalizes the standard Then().
+        public static Maybe<TResult> Then<TSource, TResult>(
+            this Maybe<TSource> @this,
+            Func<TSource, bool> predicate,
+            Maybe<TResult> other)
+            /* T4: C# indent */
+        {
+            /* T4: C# indent */
+            Require.NotNull(predicate, nameof(predicate));
+
+            return @this.Bind(_ => predicate.Invoke(_) ? other : Maybe<TResult>.None);
+        }
+
+        public static Maybe<TResult> Otherwise<TSource, TResult>(
+            this Maybe<TSource> @this,
+            Func<TSource, bool> predicate,
+            Maybe<TResult> other)
+            /* T4: C# indent */
+        {
+            /* T4: C# indent */
+            Require.NotNull(predicate, nameof(predicate));
+
+            return @this.Bind(_ => !predicate.Invoke(_) ? other : Maybe<TResult>.None);
+        }
+
+
+        // Like Select() w/ an action.
+        public static void Apply<TSource>(
+            this Maybe<TSource> @this,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            /* T4: C# indent */
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(_ => { action.Invoke(_); return Maybe.Unit; });
+        }
+    } // End of Maybe - T4: EmitMonadExtraExtensions().
+
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Func
     {
@@ -631,7 +687,7 @@ namespace Narvalo.Fx
 
 
         /// <remarks>
-        /// Named <c>=&lt;&lt;</c> in Haskell parlance.
+        /// Named <c>=&lt;&lt;</c> in Haskell parlance. Same as <c>bind</c> with its arguments flipped.
         /// </remarks>
         public static Maybe<TResult> Invoke<TSource, TResult>(
             this Func<TSource, Maybe<TResult>> @this,

@@ -641,6 +641,66 @@ namespace Monads
         #endregion
     } // End of MonadPlus - T4: EmitMonadExtensions().
 
+    // Provides non-standard extension methods for MonadPlus<T>.
+    public static partial class MonadPlus
+    {
+        public static MonadPlus<TResult> Coalesce<TSource, TResult>(
+            this MonadPlus<TSource> @this,
+            Func<TSource, bool> predicate,
+            MonadPlus<TResult> then,
+            MonadPlus<TResult> otherwise)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+            Warrant.NotNull<MonadPlus<TResult>>();
+
+            return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
+        }
+
+
+        // Generalizes the standard Then().
+        public static MonadPlus<TResult> Then<TSource, TResult>(
+            this MonadPlus<TSource> @this,
+            Func<TSource, bool> predicate,
+            MonadPlus<TResult> other)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+            Warrant.NotNull<MonadPlus<TResult>>();
+
+            return @this.Bind(_ => predicate.Invoke(_) ? other : MonadPlus<TResult>.Zero);
+        }
+
+        public static MonadPlus<TResult> Otherwise<TSource, TResult>(
+            this MonadPlus<TSource> @this,
+            Func<TSource, bool> predicate,
+            MonadPlus<TResult> other)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+            Warrant.NotNull<MonadPlus<TResult>>();
+
+            return @this.Bind(_ => !predicate.Invoke(_) ? other : MonadPlus<TResult>.Zero);
+        }
+
+
+        // Like Select() w/ an action.
+        public static void Apply<TSource>(
+            this MonadPlus<TSource> @this,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(action, nameof(action));
+            Warrant.NotNull<MonadPlus<TSource>>();
+
+            @this.Bind(_ => { action.Invoke(_); return MonadPlus.Unit; });
+        }
+    } // End of MonadPlus - T4: EmitMonadExtraExtensions().
+
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Func
     {
@@ -663,7 +723,7 @@ namespace Monads
 
 
         /// <remarks>
-        /// Named <c>=&lt;&lt;</c> in Haskell parlance.
+        /// Named <c>=&lt;&lt;</c> in Haskell parlance. Same as <c>bind</c> with its arguments flipped.
         /// </remarks>
         public static MonadPlus<TResult> Invoke<TSource, TResult>(
             this Func<TSource, MonadPlus<TResult>> @this,

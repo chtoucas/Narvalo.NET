@@ -650,6 +650,65 @@ namespace Monads
         #endregion
     } // End of MonadValue - T4: EmitMonadExtensions().
 
+    // Provides non-standard extension methods for MonadValue<T>.
+    public static partial class MonadValue
+    {
+        public static MonadValue<TResult> Coalesce<TSource, TResult>(
+            this MonadValue<TSource> @this,
+            Func<TSource, bool> predicate,
+            MonadValue<TResult> then,
+            MonadValue<TResult> otherwise)
+            where TSource : struct
+            where TResult : struct
+        {
+            /* T4: C# indent */
+            Require.NotNull(predicate, nameof(predicate));
+
+            return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
+        }
+
+
+        // Generalizes the standard Then().
+        public static MonadValue<TResult> Then<TSource, TResult>(
+            this MonadValue<TSource> @this,
+            Func<TSource, bool> predicate,
+            MonadValue<TResult> other)
+            where TSource : struct
+            where TResult : struct
+        {
+            /* T4: C# indent */
+            Require.NotNull(predicate, nameof(predicate));
+
+            return @this.Bind(_ => predicate.Invoke(_) ? other : MonadValue<TResult>.None);
+        }
+
+        public static MonadValue<TResult> Otherwise<TSource, TResult>(
+            this MonadValue<TSource> @this,
+            Func<TSource, bool> predicate,
+            MonadValue<TResult> other)
+            where TSource : struct
+            where TResult : struct
+        {
+            /* T4: C# indent */
+            Require.NotNull(predicate, nameof(predicate));
+
+            return @this.Bind(_ => !predicate.Invoke(_) ? other : MonadValue<TResult>.None);
+        }
+
+
+        // Like Select() w/ an action.
+        public static void Apply<TSource>(
+            this MonadValue<TSource> @this,
+            Action<TSource> action)
+            where TSource : struct
+        {
+            /* T4: C# indent */
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(_ => { action.Invoke(_); return MonadValue.Unit; });
+        }
+    } // End of MonadValue - T4: EmitMonadExtraExtensions().
+
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Func
     {
@@ -657,7 +716,7 @@ namespace Monads
 
 
         /// <remarks>
-        /// Named <c>=&lt;&lt;</c> in Haskell parlance.
+        /// Named <c>=&lt;&lt;</c> in Haskell parlance. Same as <c>bind</c> with its arguments flipped.
         /// </remarks>
         public static MonadValue<TResult> Invoke<TSource, TResult>(
             this Func<TSource, MonadValue<TResult>> @this,

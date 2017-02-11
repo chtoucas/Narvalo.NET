@@ -416,6 +416,36 @@ namespace Monads
         #endregion
     } // End of Monad - T4: EmitMonadExtensions().
 
+    // Provides non-standard extension methods for Monad<T>.
+    public static partial class Monad
+    {
+        public static Monad<TResult> Coalesce<TSource, TResult>(
+            this Monad<TSource> @this,
+            Func<TSource, bool> predicate,
+            Monad<TResult> then,
+            Monad<TResult> otherwise)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+
+            return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
+        }
+
+
+        // Like Select() w/ an action.
+        public static void Apply<TSource>(
+            this Monad<TSource> @this,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(_ => { action.Invoke(_); return Monad.Unit; });
+        }
+    } // End of Monad - T4: EmitMonadExtraExtensions().
+
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Func
     {
@@ -438,7 +468,7 @@ namespace Monads
 
 
         /// <remarks>
-        /// Named <c>=&lt;&lt;</c> in Haskell parlance.
+        /// Named <c>=&lt;&lt;</c> in Haskell parlance. Same as <c>bind</c> with its arguments flipped.
         /// </remarks>
         public static Monad<TResult> Invoke<TSource, TResult>(
             this Func<TSource, Monad<TResult>> @this,

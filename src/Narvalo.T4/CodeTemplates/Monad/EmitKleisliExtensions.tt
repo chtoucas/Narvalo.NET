@@ -31,7 +31,7 @@ public partial class MonadTemplate
 <#+ } // T4: End of !HasTypeConstraints. #>
 
         /// <remarks>
-        /// Named <c>=&lt;&lt;</c> in Haskell parlance.
+        /// Named <c>=&lt;&lt;</c> in Haskell parlance. Same as <c>bind</c> with its arguments flipped.
         /// </remarks>
         public static <#= Name #><TResult> Invoke<TSource, TResult>(
             this Func<TSource, <#= Name #><TResult>> @this,

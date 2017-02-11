@@ -1,0 +1,81 @@
+﻿<#+
+
+public partial class MonadTemplate
+{
+    protected void EmitMonadExtraExtensions()
+    {
+#>
+    // Provides non-standard extension methods for <#= Name #><T>.
+    public static partial class <#= Name #>
+    {
+        public static <#= Name #><TResult> Coalesce<TSource, TResult>(
+            this <#= Name #><TSource> @this,
+            Func<TSource, bool> predicate,
+            <#= Name #><TResult> then,
+            <#= Name #><TResult> otherwise)
+            <#+ WriteTypeConstraints("TSource", "TResult"); #>
+        {
+            <#+ WriteNotNull(); #>
+            Require.NotNull(predicate, nameof(predicate));
+<#+ if (PostBindEnsuresSome) { #>
+            Warrant.NotNull<<#= Name #><TResult>>();
+<#+ } #>
+
+            return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
+        }
+
+<#+ if (HasZero) { #>
+
+        // Generalizes the standard Then().
+        public static <#= Name #><TResult> Then<TSource, TResult>(
+            this <#= Name #><TSource> @this,
+            Func<TSource, bool> predicate,
+            <#= Name #><TResult> other)
+            <#+ WriteTypeConstraints("TSource", "TResult"); #>
+        {
+            <#+ WriteNotNull(); #>
+            Require.NotNull(predicate, nameof(predicate));
+<#+ if (PostBindEnsuresSome) { #>
+            Warrant.NotNull<<#= Name #><TResult>>();
+<#+ } #>
+
+            return @this.Bind(_ => predicate.Invoke(_) ? other : <#= Name #><TResult>.<#= ZeroName #>);
+        }
+
+        public static <#= Name #><TResult> Otherwise<TSource, TResult>(
+            this <#= Name #><TSource> @this,
+            Func<TSource, bool> predicate,
+            <#= Name #><TResult> other)
+            <#+ WriteTypeConstraints("TSource", "TResult"); #>
+        {
+            <#+ WriteNotNull(); #>
+            Require.NotNull(predicate, nameof(predicate));
+<#+ if (PostBindEnsuresSome) { #>
+            Warrant.NotNull<<#= Name #><TResult>>();
+<#+ } #>
+
+            return @this.Bind(_ => !predicate.Invoke(_) ? other : <#= Name #><TResult>.<#= ZeroName #>);
+        }
+
+<#+ } // T4: End of HasZero. #>
+
+        // Like Select() w/ an action.
+        public static void Apply<TSource>(
+            this <#= Name #><TSource> @this,
+            Action<TSource> action)
+            <#+ WriteTypeConstraints("TSource"); #>
+        {
+            <#+ WriteNotNull(); #>
+            Require.NotNull(action, nameof(action));
+<#+ if (PostBindEnsuresSome) { #>
+            Warrant.NotNull<<#= Name #><TSource>>();
+<#+ } #>
+
+            @this.Bind(_ => { action.Invoke(_); return <#= Name #>.Unit; });
+        }
+    } // End of <#= Name #> - T4: EmitMonadExtraExtensions().
+<#+
+    } // T4: End of EmitMonadExtraExtensions().
+} // T4: End of MonadTemplate.
+
+#>

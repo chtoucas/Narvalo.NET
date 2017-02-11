@@ -82,6 +82,41 @@ namespace Narvalo.Fx
         }
 
         #endregion
+
+        #region Non-standard extension methods.
+
+        public Maybe<TResult> Coalesce<TResult>(
+            Func<T, bool> predicate,
+            Maybe<TResult> then,
+            Maybe<TResult> otherwise)
+        {
+            Require.NotNull(predicate, nameof(predicate));
+
+            return IsSome && predicate.Invoke(Value) ? then : otherwise;
+        }
+
+        public Maybe<TResult> Then<TResult>(Func<T, bool> predicate, Maybe<TResult> other)
+        {
+            Require.NotNull(predicate, nameof(predicate));
+
+            return IsSome && predicate.Invoke(Value) ? other : Maybe<TResult>.None;
+        }
+
+        public Maybe<TResult> Otherwise<TResult>(Func<T, bool> predicate, Maybe<TResult> other)
+        {
+            Require.NotNull(predicate, nameof(predicate));
+
+            return IsSome && !predicate.Invoke(Value) ? other : Maybe<TResult>.None;
+        }
+
+        public void Apply(Action<T> action)
+        {
+            Require.NotNull(action, nameof(action));
+
+            if (IsSome) { action.Invoke(Value); }
+        }
+
+        #endregion
     }
 
     // Overrides for auto-generated (extension) methods on IEnumerable<Maybe<T>>.
