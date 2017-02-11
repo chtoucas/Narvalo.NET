@@ -97,14 +97,14 @@ namespace Narvalo.Fx
 
         public Maybe<TResult> Then<TResult>(Func<T, bool> predicate, Maybe<TResult> other)
         {
-            Expect.NotNull(predicate);
+            Require.NotNull(predicate, nameof(predicate));
 
             return predicate.Invoke(Value) ? other : Maybe<TResult>.None;
         }
 
         public Maybe<TResult> Otherwise<TResult>(Func<T, bool> predicate, Maybe<TResult> other)
         {
-            Expect.NotNull(predicate);
+            Require.NotNull(predicate, nameof(predicate));
 
             return predicate.Invoke(Value) ? Maybe<TResult>.None : other;
         }
