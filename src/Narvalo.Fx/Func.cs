@@ -4,9 +4,9 @@ namespace Narvalo.Fx
 {
     using System;
 
-    public static class Func
+    public static partial class Func
     {
-        public static Func<T> Return<T>(T value)
+        public static Func<T> Pure<T>(T value)
         {
             Warrant.NotNull<Func<T>>();
 

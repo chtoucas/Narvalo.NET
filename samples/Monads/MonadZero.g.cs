@@ -19,7 +19,7 @@ namespace Monads
     using System.Collections.Generic;
     using System.Linq;
 
-    using Monads.More;
+    using Monads.Linq;
 
     // Provides a set of static methods for MonadZero<T>.
     // NB: Sometimes we prefer extension methods over static methods to be able to override them locally.
@@ -28,7 +28,7 @@ namespace Monads
         /// <summary>
         /// The unique object of type <c>MonadZero&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly MonadZero<global::Narvalo.Fx.Unit> s_Unit = Return(global::Narvalo.Fx.Unit.Single);
+        private static readonly MonadZero<global::Narvalo.Fx.Unit> s_Unit = Pure(global::Narvalo.Fx.Unit.Single);
 
         /// <summary>
         /// Gets the unique object of type <c>MonadZero&lt;Unit&gt;</c>.
@@ -72,7 +72,7 @@ namespace Monads
         /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
         /// <param name="value">A value to be wrapped into a <see cref="MonadZero{T}"/> object.</param>
         /// <returns>An instance of the <see cref="MonadZero{T}"/> class for the specified value.</returns>
-        public static MonadZero<T> Return<T>(T value)
+        public static MonadZero<T> Pure<T>(T value)
             /* T4: C# indent */
         {
             Warrant.NotNull<MonadZero<T>>();
@@ -272,7 +272,7 @@ namespace Monads
             Require.NotNull(selector, nameof(selector));
             Warrant.NotNull<MonadZero<TResult>>();
 
-            return @this.Bind(_ => MonadZero.Return(selector.Invoke(_)));
+            return @this.Bind(_ => MonadZero.Pure(selector.Invoke(_)));
         }
 
         /// <remarks>
@@ -685,7 +685,7 @@ namespace Monads
     } // End of MonadZero - T4: EmitMonadExtraExtensions().
 
     // Provides extension methods for Func<T> in the Kleisli category.
-    public static partial class FuncExtensions
+    public static partial class Func
     {
         #region Basic Monad functions (Prelude)
 
@@ -751,7 +751,7 @@ namespace Monads
         }
 
         #endregion
-    } // End of FuncExtensions - T4: EmitKleisliExtensions().
+    } // End of Func - T4: EmitKleisliExtensions().
 }
 
 namespace Monads
@@ -761,7 +761,7 @@ namespace Monads
     using Monads.Internal;
 
     // Provides extension methods for IEnumerable<T> where T is a MonadZero<S>.
-    public static partial class EnumerableExtensions
+    public static partial class Sequence
     {
         #region Basic Monad functions (Prelude)
 
@@ -781,10 +781,10 @@ namespace Monads
 
         #endregion
 
-    } // End of EnumerableExtensions - T4: EmitMonadEnumerableExtensions().
+    } // End of Sequence - T4: EmitMonadEnumerableExtensions().
 }
 
-namespace Monads.More
+namespace Monads.Linq
 {
     using System;
     using System.Collections.Generic;
@@ -972,7 +972,7 @@ namespace Monads.Internal
     using System.Collections.Generic;
     using System.Linq;
 
-    using Monads.More;
+    using Monads.Linq;
 
     // Provides the core extension methods for IEnumerable<T> where T is a MonadZero<S>.
     internal static partial class EnumerableExtensions
@@ -984,7 +984,7 @@ namespace Monads.Internal
             Demand.NotNull(@this);
             Warrant.NotNull<MonadZero<IEnumerable<TSource>>>();
 
-            var seed = MonadZero.Return(Enumerable.Empty<TSource>());
+            var seed = MonadZero.Pure(Enumerable.Empty<TSource>());
             // Inlined LINQ Append method:
             Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (m, item) => m.Append(item);
 
@@ -1005,7 +1005,7 @@ namespace Monads.Internal
         //{
         //    Demand.NotNull(m);
 
-        //    return m.Bind(item => MonadZero.Return(list.Concat(Enumerable.Repeat(item, 1))));
+        //    return m.Bind(item => MonadZero.Pure(list.Concat(Enumerable.Repeat(item, 1))));
         //}
 
     } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
@@ -1040,7 +1040,7 @@ namespace Monads.Internal
             Func<MonadZero<IEnumerable<TSource>>, TSource, MonadZero<IEnumerable<TSource>>> accumulatorM
                 = (mlist, item) => predicateM.Invoke(item).Zip(mlist, (flg, list) => selector.Invoke(flg, list, item));
 
-            var seed = MonadZero.Return(Enumerable.Empty<TSource>());
+            var seed = MonadZero.Pure(Enumerable.Empty<TSource>());
 
             // REVIEW: Aggregate?
             return @this.AggregateBack(seed, accumulatorM);
@@ -1096,7 +1096,7 @@ namespace Monads.Internal
             Require.NotNull(accumulatorM, nameof(accumulatorM));
             Warrant.NotNull<MonadZero<TAccumulate>>();
 
-            MonadZero<TAccumulate> retval = MonadZero.Return(seed);
+            MonadZero<TAccumulate> retval = MonadZero.Pure(seed);
 
             foreach (TSource item in @this)
             {
@@ -1135,7 +1135,7 @@ namespace Monads.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                MonadZero<TSource> retval = MonadZero.Return(iter.Current);
+                MonadZero<TSource> retval = MonadZero.Pure(iter.Current);
 
                 while (iter.MoveNext())
                 {
@@ -1170,7 +1170,7 @@ namespace Monads.Internal
             Require.NotNull(predicate, nameof(predicate));
             Warrant.NotNull<MonadZero<TAccumulate>>();
 
-            MonadZero<TAccumulate> retval = MonadZero.Return(seed);
+            MonadZero<TAccumulate> retval = MonadZero.Pure(seed);
 
             using (var iter = @this.GetEnumerator())
             {
@@ -1201,7 +1201,7 @@ namespace Monads.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                MonadZero<TSource> retval = MonadZero.Return(iter.Current);
+                MonadZero<TSource> retval = MonadZero.Pure(iter.Current);
 
                 while (predicate.Invoke(retval) && iter.MoveNext())
                 {

@@ -12,7 +12,7 @@ namespace Narvalo.Fx
     }
 
     // Overrides for auto-generated (extension) methods on IEnumerable<Outcome<T>>.
-    public static partial class EnumerableExtensions
+    public static partial class Sequence
     {
         internal static Outcome<IEnumerable<TSource>> CollectImpl<TSource>(this IEnumerable<Outcome<TSource>> @this)
         {
@@ -24,7 +24,7 @@ namespace Narvalo.Fx
     }
 }
 
-namespace Narvalo.Fx.More
+namespace Narvalo.Fx.Linq
 {
     using System;
     using System.Collections.Generic;

@@ -58,15 +58,14 @@
     <Compile Include="Fx\Either`2.cs" />
     <Compile Include="Fx\Error.cs" />
     <Compile Include="Fx\Error`1.cs" />
-    <Compile Include="Fx\Func.cs" />
     <Compile Include="Fx\Identity.g.cs">
       <DependentUpon>Identity.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Fx\Identity`1.cs" />
-    <Compile Include="Fx\More\Func%24.cs" />
-    <Compile Include="Fx\More\Nullable%24.cs" />
+    <Compile Include="Fx\Extensions\Func%24.cs" />
+    <Compile Include="Fx\Extensions\Nullable%24.cs" />
     <Compile Include="Fx\Recursion.cs" />
     <Compile Include="Fx\Switch%24.cs" />
     <Compile Include="Fx\Switch.cs" />

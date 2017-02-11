@@ -6,7 +6,7 @@ public partial class MonadTemplate
     {
 #>
     // Provides extension methods for IEnumerable<T> where T is a <#= Name #><S>.
-    public static partial class EnumerableExtensions
+    public static partial class Sequence
     {
         #region Basic Monad functions (Prelude)
 
@@ -52,7 +52,7 @@ public partial class MonadTemplate
         #endregion
 
 <#+ } // T4: End of HasSum. #>
-    } // End of EnumerableExtensions - T4: EmitMonadEnumerableExtensions().
+    } // End of Sequence - T4: EmitMonadEnumerableExtensions().
 <#+
     } // T4: End of EmitMonadEnumerableExtensions().
 } // T4: End of MonadTemplate.

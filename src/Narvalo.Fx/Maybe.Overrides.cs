@@ -120,7 +120,7 @@ namespace Narvalo.Fx
     }
 
     // Overrides for auto-generated (extension) methods on IEnumerable<Maybe<T>>.
-    public static partial class EnumerableExtensions
+    public static partial class Sequence
     {
         internal static Maybe<IEnumerable<TSource>> CollectImpl<TSource>(this IEnumerable<Maybe<TSource>> @this)
         {
@@ -131,7 +131,7 @@ namespace Narvalo.Fx
     }
 }
 
-namespace Narvalo.Fx.More
+namespace Narvalo.Fx.Linq
 {
     using System;
     using System.Collections.Generic;

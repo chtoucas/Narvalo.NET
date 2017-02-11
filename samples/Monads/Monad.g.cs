@@ -19,7 +19,7 @@ namespace Monads
     using System.Collections.Generic;
     using System.Linq;
 
-    using Monads.More;
+    using Monads.Linq;
 
     // Provides a set of static methods for Monad<T>.
     // NB: Sometimes we prefer extension methods over static methods to be able to override them locally.
@@ -28,7 +28,7 @@ namespace Monads
         /// <summary>
         /// The unique object of type <c>Monad&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly Monad<global::Narvalo.Fx.Unit> s_Unit = Return(global::Narvalo.Fx.Unit.Single);
+        private static readonly Monad<global::Narvalo.Fx.Unit> s_Unit = Pure(global::Narvalo.Fx.Unit.Single);
 
         /// <summary>
         /// Gets the unique object of type <c>Monad&lt;Unit&gt;</c>.
@@ -54,7 +54,7 @@ namespace Monads
         /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
         /// <param name="value">A value to be wrapped into a <see cref="Monad{T}"/> object.</param>
         /// <returns>An instance of the <see cref="Monad{T}"/> class for the specified value.</returns>
-        public static Monad<T> Return<T>(T value)
+        public static Monad<T> Pure<T>(T value)
             /* T4: C# indent */
         {
             Warrant.NotNull<Monad<T>>();
@@ -241,7 +241,7 @@ namespace Monads
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));
 
-            return @this.Bind(_ => Monad.Return(selector.Invoke(_)));
+            return @this.Bind(_ => Monad.Pure(selector.Invoke(_)));
         }
 
         /// <remarks>
@@ -434,7 +434,7 @@ namespace Monads
     } // End of Monad - T4: EmitMonadExtraExtensions().
 
     // Provides extension methods for Func<T> in the Kleisli category.
-    public static partial class FuncExtensions
+    public static partial class Func
     {
         #region Basic Monad functions (Prelude)
 
@@ -499,7 +499,7 @@ namespace Monads
         }
 
         #endregion
-    } // End of FuncExtensions - T4: EmitKleisliExtensions().
+    } // End of Func - T4: EmitKleisliExtensions().
 }
 
 namespace Monads
@@ -509,7 +509,7 @@ namespace Monads
     using Monads.Internal;
 
     // Provides extension methods for IEnumerable<T> where T is a Monad<S>.
-    public static partial class EnumerableExtensions
+    public static partial class Sequence
     {
         #region Basic Monad functions (Prelude)
 
@@ -529,10 +529,10 @@ namespace Monads
 
         #endregion
 
-    } // End of EnumerableExtensions - T4: EmitMonadEnumerableExtensions().
+    } // End of Sequence - T4: EmitMonadEnumerableExtensions().
 }
 
-namespace Monads.More
+namespace Monads.Linq
 {
     using System;
     using System.Collections.Generic;
@@ -713,7 +713,7 @@ namespace Monads.Internal
     using System.Collections.Generic;
     using System.Linq;
 
-    using Monads.More;
+    using Monads.Linq;
 
     // Provides the core extension methods for IEnumerable<T> where T is a Monad<S>.
     internal static partial class EnumerableExtensions
@@ -725,7 +725,7 @@ namespace Monads.Internal
             Demand.NotNull(@this);
             Warrant.NotNull<Monad<IEnumerable<TSource>>>();
 
-            var seed = Monad.Return(Enumerable.Empty<TSource>());
+            var seed = Monad.Pure(Enumerable.Empty<TSource>());
             // Inlined LINQ Append method:
             Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (m, item) => m.Append(item);
 
@@ -746,7 +746,7 @@ namespace Monads.Internal
         //{
         //    Demand.NotNull(m);
 
-        //    return m.Bind(item => Monad.Return(list.Concat(Enumerable.Repeat(item, 1))));
+        //    return m.Bind(item => Monad.Pure(list.Concat(Enumerable.Repeat(item, 1))));
         //}
 
     } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
@@ -781,7 +781,7 @@ namespace Monads.Internal
             Func<Monad<IEnumerable<TSource>>, TSource, Monad<IEnumerable<TSource>>> accumulatorM
                 = (mlist, item) => predicateM.Invoke(item).Zip(mlist, (flg, list) => selector.Invoke(flg, list, item));
 
-            var seed = Monad.Return(Enumerable.Empty<TSource>());
+            var seed = Monad.Pure(Enumerable.Empty<TSource>());
 
             // REVIEW: Aggregate?
             return @this.AggregateBack(seed, accumulatorM);
@@ -835,7 +835,7 @@ namespace Monads.Internal
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulatorM, nameof(accumulatorM));
 
-            Monad<TAccumulate> retval = Monad.Return(seed);
+            Monad<TAccumulate> retval = Monad.Pure(seed);
 
             foreach (TSource item in @this)
             {
@@ -877,7 +877,7 @@ namespace Monads.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                Monad<TSource> retval = Monad.Return(iter.Current);
+                Monad<TSource> retval = Monad.Pure(iter.Current);
 
                 while (iter.MoveNext())
                 {
@@ -915,7 +915,7 @@ namespace Monads.Internal
             Require.NotNull(accumulatorM, nameof(accumulatorM));
             Require.NotNull(predicate, nameof(predicate));
 
-            Monad<TAccumulate> retval = Monad.Return(seed);
+            Monad<TAccumulate> retval = Monad.Pure(seed);
 
             using (var iter = @this.GetEnumerator())
             {
@@ -950,7 +950,7 @@ namespace Monads.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                Monad<TSource> retval = Monad.Return(iter.Current);
+                Monad<TSource> retval = Monad.Pure(iter.Current);
 
                 while (predicate.Invoke(retval) && iter.MoveNext())
                 {

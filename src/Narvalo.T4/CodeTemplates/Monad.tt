@@ -88,7 +88,7 @@ namespace <#= Namespace #>
 <#+ } #>
     using System.Linq;
 
-    using <#= Namespace #>.More;
+    using <#= Namespace #>.Linq;
 
 <#+
     EmitMonadCore();
@@ -140,7 +140,7 @@ namespace <#= Namespace #>
 <#+ EmitMonadEnumerableExtensions(); #>
 }
 
-namespace <#= Namespace #>.More
+namespace <#= Namespace #>.Linq
 {
     using System;
     using System.Collections.Generic;
@@ -160,7 +160,7 @@ namespace <#= Namespace #>.Internal
 <#+ } #>
     using System.Linq;
 
-    using <#= Namespace #>.More;
+    using <#= Namespace #>.Linq;
 
 <#+
     EmitMonadEnumerableInternalExtensions();

@@ -18,7 +18,7 @@ namespace Narvalo.Fx
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
-    using Narvalo.Fx.More;
+    using Narvalo.Fx.Linq;
 
     // Provides a set of static methods for Maybe<T>.
     // NB: Sometimes we prefer extension methods over static methods to be able to override them locally.
@@ -648,7 +648,7 @@ namespace Narvalo.Fx
     } // End of Maybe - T4: EmitMonadExtraExtensions().
 
     // Provides extension methods for Func<T> in the Kleisli category.
-    public static partial class FuncExtensions
+    public static partial class Func
     {
         #region Basic Monad functions (Prelude)
 
@@ -712,7 +712,7 @@ namespace Narvalo.Fx
         }
 
         #endregion
-    } // End of FuncExtensions - T4: EmitKleisliExtensions().
+    } // End of Func - T4: EmitKleisliExtensions().
 }
 
 namespace Narvalo.Fx
@@ -722,7 +722,7 @@ namespace Narvalo.Fx
     using Narvalo.Fx.Internal;
 
     // Provides extension methods for IEnumerable<T> where T is a Maybe<S>.
-    public static partial class EnumerableExtensions
+    public static partial class Sequence
     {
         #region Basic Monad functions (Prelude)
 
@@ -758,10 +758,10 @@ namespace Narvalo.Fx
 
         #endregion
 
-    } // End of EnumerableExtensions - T4: EmitMonadEnumerableExtensions().
+    } // End of Sequence - T4: EmitMonadEnumerableExtensions().
 }
 
-namespace Narvalo.Fx.More
+namespace Narvalo.Fx.Linq
 {
     using System;
     using System.Collections.Generic;
@@ -941,7 +941,7 @@ namespace Narvalo.Fx.Internal
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
-    using Narvalo.Fx.More;
+    using Narvalo.Fx.Linq;
 
     // Provides the core extension methods for IEnumerable<T> where T is a Maybe<S>.
     internal static partial class EnumerableExtensions

@@ -683,7 +683,7 @@ namespace Narvalo.Fx
     } // End of VoidOrError - T4: EmitMonadExtraExtensions().
 
     // Provides extension methods for Func<T> in the Kleisli category.
-    public static partial class FuncExtensions
+    public static partial class Func
     {
         #region Basic Monad functions (Prelude)
 
@@ -734,5 +734,5 @@ namespace Narvalo.Fx
         }
 
         #endregion
-    } // End of FuncExtensions - T4: EmitKleisliExtensions().
+    } // End of Func - T4: EmitKleisliExtensions().
 }

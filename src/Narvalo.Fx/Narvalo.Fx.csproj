@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BooleanResult`1.cs" />
+    <Compile Include="Func.cs" />
     <Compile Include="Internal\IDisjointUnionOf`.cs" />
     <Compile Include="Iteration.cs" />
     <Compile Include="Iteration`2.cs" />
@@ -93,8 +94,7 @@
     <Compile Include="Stubs`2.cs" />
     <Compile Include="TryInvoke.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="More\Enumerable%24.cs" />
-    <Compile Include="Enumerable%24.cs" />
+    <Compile Include="Linq\Enumerable%24.cs" />
     <Compile Include="Maybe.cs" />
     <Compile Include="Maybe.g.cs">
       <DependentUpon>Maybe.tt</DependentUpon>

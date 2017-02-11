@@ -25,7 +25,7 @@ namespace Narvalo.Fx
         /// <summary>
         /// The unique object of type <c>Identity&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly Identity<global::Narvalo.Fx.Unit> s_Unit = Return(global::Narvalo.Fx.Unit.Single);
+        private static readonly Identity<global::Narvalo.Fx.Unit> s_Unit = Pure(global::Narvalo.Fx.Unit.Single);
 
         /// <summary>
         /// Gets the unique object of type <c>Identity&lt;Unit&gt;</c>.
@@ -50,7 +50,7 @@ namespace Narvalo.Fx
         /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
         /// <param name="value">A value to be wrapped into a <see cref="Identity{T}"/> object.</param>
         /// <returns>An instance of the <see cref="Identity{T}"/> class for the specified value.</returns>
-        public static Identity<T> Return<T>(T value)
+        public static Identity<T> Pure<T>(T value)
             /* T4: C# indent */
         {
 
@@ -234,7 +234,7 @@ namespace Narvalo.Fx
             /* T4: C# indent */
             Require.NotNull(selector, nameof(selector));
 
-            return @this.Bind(_ => Identity.Return(selector.Invoke(_)));
+            return @this.Bind(_ => Identity.Pure(selector.Invoke(_)));
         }
 
         /// <remarks>
@@ -427,7 +427,7 @@ namespace Narvalo.Fx
     } // End of Identity - T4: EmitMonadExtraExtensions().
 
     // Provides extension methods for Func<T> in the Kleisli category.
-    public static partial class FuncExtensions
+    public static partial class Func
     {
         #region Basic Monad functions (Prelude)
 
@@ -477,7 +477,7 @@ namespace Narvalo.Fx
         }
 
         #endregion
-    } // End of FuncExtensions - T4: EmitKleisliExtensions().
+    } // End of Func - T4: EmitKleisliExtensions().
 }
 
 

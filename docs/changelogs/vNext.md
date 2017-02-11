@@ -85,6 +85,7 @@ Narvalo.Fx:
 - https://blogs.msdn.microsoft.com/pfxteam/2013/04/03/tasks-monads-and-linq/
 - http://tomasp.net/blog/idioms-in-linq.aspx/
 - https://ruudvanasseldonk.com/2013/05/01/the-task-monad-in-csharp
+- https://github.com/tomstuart/monads
 
 Highlights
 ----------

@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Fx.More
+namespace Narvalo.Fx.Linq
 {
     using System;
     using System.Collections.Generic;
@@ -8,6 +8,9 @@ namespace Narvalo.Fx.More
     /// <summary>
     /// Provides extension methods for <see cref="IEnumerable{T}"/>.
     /// </summary>
+    public static partial class EnumerableExtensions { }
+
+    // Provides extension methods w/ Maybe.
     public static partial class EnumerableExtensions
     {
         // Named <c>mapMaybe</c> in Haskell parlance.
@@ -20,6 +23,17 @@ namespace Narvalo.Fx.More
             Warrant.NotNull<IEnumerable<TResult>>();
 
             return SelectAnyIterator(@this, selectorM);
+        }
+
+        public static IEnumerable<TSource> WhereAny<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, Maybe<bool>> predicateM)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicateM, nameof(predicateM));
+            Warrant.NotNull<IEnumerable<TSource>>();
+
+            return WhereAnyIterator(@this, predicateM);
         }
 
         private static IEnumerable<TResult> SelectAnyIterator<TSource, TResult>(
@@ -36,17 +50,6 @@ namespace Narvalo.Fx.More
 
                 if (m.IsSome) { yield return m.Value; }
             }
-        }
-
-        public static IEnumerable<TSource> WhereAny<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, Maybe<bool>> predicateM)
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicateM, nameof(predicateM));
-            Warrant.NotNull<IEnumerable<TSource>>();
-
-            return WhereAnyIterator(@this, predicateM);
         }
 
         private static IEnumerable<TSource> WhereAnyIterator<TSource>(
@@ -67,7 +70,11 @@ namespace Narvalo.Fx.More
                 }
             }
         }
+    }
 
+    // Provides extension methods w/ Outcome.
+    public static partial class EnumerableExtensions
+    {
         public static IEnumerable<TResult> SelectAny<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, Outcome<TResult>> selectorM)
@@ -77,6 +84,17 @@ namespace Narvalo.Fx.More
             Warrant.NotNull<IEnumerable<TResult>>();
 
             return SelectAnyIterator(@this, selectorM);
+        }
+
+        public static IEnumerable<TSource> WhereAny<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, Outcome<bool>> predicateM)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicateM, nameof(predicateM));
+            Warrant.NotNull<IEnumerable<TSource>>();
+
+            return WhereAnyIterator(@this, predicateM);
         }
 
         private static IEnumerable<TResult> SelectAnyIterator<TSource, TResult>(
@@ -93,17 +111,6 @@ namespace Narvalo.Fx.More
 
                 if (m.IsSuccess) { yield return m.Value; }
             }
-        }
-
-        public static IEnumerable<TSource> WhereAny<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, Outcome<bool>> predicateM)
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicateM, nameof(predicateM));
-            Warrant.NotNull<IEnumerable<TSource>>();
-
-            return WhereAnyIterator(@this, predicateM);
         }
 
         private static IEnumerable<TSource> WhereAnyIterator<TSource>(

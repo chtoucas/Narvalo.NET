@@ -37,7 +37,7 @@ namespace Narvalo.T4
         /// <summary>
         /// The name of the Return method.
         /// </summary>
-        private string _returnName = "Return";
+        private string _returnName = "Pure";
 
         /// <summary>
         /// The name of the Zero property.

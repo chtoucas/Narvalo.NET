@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Fx.More
+namespace Narvalo.Fx.Extensions
 {
     using System;
 
@@ -10,7 +10,7 @@ namespace Narvalo.Fx.More
     /// <remarks>
     /// <list type="bullet">
     /// <listheader>What's not to be found here:</listheader>
-    /// <item><description><c>Return</c> is simply casting: <c>(T?)value</c>.</description></item>
+    /// <item><description><c>Pure</c> is simply casting: <c>(T?)value</c>.</description></item>
     /// <item><description><c>Nullable</c> does not support the <c>Join</c> operation; there is no
     /// <c>Nullable&lt;Nullable&lt;T&gt;&gt;</c>.</description></item>
     /// <item><description><c>Zero</c> is <see langword="null"/>.</description></item>
