@@ -477,7 +477,8 @@ namespace Narvalo.Fx
             Expect.NotNull(resultSelector);
             Warrant.NotNull<VoidOrError<TResult>>();
 
-            return @this.Join(
+            return JoinImpl(
+                @this,
                 inner,
                 outerKeySelector,
                 innerKeySelector,
@@ -500,7 +501,8 @@ namespace Narvalo.Fx
             Expect.NotNull(resultSelector);
             Warrant.NotNull<VoidOrError<TResult>>();
 
-            return @this.GroupJoin(
+            return GroupJoinImpl(
+                @this,
                 inner,
                 outerKeySelector,
                 innerKeySelector,

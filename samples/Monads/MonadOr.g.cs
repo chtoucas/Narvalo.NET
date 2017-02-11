@@ -479,7 +479,8 @@ namespace Monads
             Expect.NotNull(resultSelector);
             Warrant.NotNull<MonadOr<TResult>>();
 
-            return @this.Join(
+            return JoinImpl(
+                @this,
                 inner,
                 outerKeySelector,
                 innerKeySelector,
@@ -502,7 +503,8 @@ namespace Monads
             Expect.NotNull(resultSelector);
             Warrant.NotNull<MonadOr<TResult>>();
 
-            return @this.GroupJoin(
+            return GroupJoinImpl(
+                @this,
                 inner,
                 outerKeySelector,
                 innerKeySelector,

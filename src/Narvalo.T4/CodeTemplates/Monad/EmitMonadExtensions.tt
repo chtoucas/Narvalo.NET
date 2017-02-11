@@ -297,7 +297,8 @@ public partial class MonadTemplate
             Warrant.NotNull<<#= Name #><TResult>>();
 <#+ } #>
 
-            return @this.Join(
+            return JoinImpl(
+                @this,
                 inner,
                 outerKeySelector,
                 innerKeySelector,
@@ -324,7 +325,8 @@ public partial class MonadTemplate
             Warrant.NotNull<<#= Name #><TResult>>();
 <#+ } #>
 
-            return @this.GroupJoin(
+            return GroupJoinImpl(
+                @this,
                 inner,
                 outerKeySelector,
                 innerKeySelector,

@@ -483,7 +483,8 @@ namespace Monads
             Expect.NotNull(innerKeySelector);
             Expect.NotNull(resultSelector);
 
-            return @this.Join(
+            return JoinImpl(
+                @this,
                 inner,
                 outerKeySelector,
                 innerKeySelector,
@@ -507,7 +508,8 @@ namespace Monads
             Expect.NotNull(innerKeySelector);
             Expect.NotNull(resultSelector);
 
-            return @this.GroupJoin(
+            return GroupJoinImpl(
+                @this,
                 inner,
                 outerKeySelector,
                 innerKeySelector,
