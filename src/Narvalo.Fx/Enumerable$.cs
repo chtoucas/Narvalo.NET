@@ -37,9 +37,12 @@ namespace Narvalo.Fx
         // Named <c>listToMaybe</c> in Haskell parlance.
         public static Maybe<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this)
         {
-            Expect.NotNull(@this);
+            Require.NotNull(@this, nameof(@this));
 
-            return FirstOrNone(@this, Stubs<TSource>.AlwaysTrue);
+            using (var iter = @this.GetEnumerator())
+            {
+                return iter.MoveNext() ? Maybe.Of(iter.Current) : Maybe<TSource>.None;
+            }
         }
 
         public static Maybe<TSource> FirstOrNone<TSource>(
@@ -61,22 +64,29 @@ namespace Narvalo.Fx
         {
             Expect.NotNull(@this);
 
-            return LastOrNone(@this, Stubs<TSource>.AlwaysTrue);
+            return @this.Reverse().EmptyIfNull().FirstOrNone();
         }
 
         public static Maybe<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
         {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
+            Expect.NotNull(@this);
+            Expect.NotNull(predicate);
 
-            return @this.Reverse().EmptyIfNull().FirstOrNone();
+            return @this.Reverse().EmptyIfNull().FirstOrNone(predicate);
         }
 
         public static Maybe<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this)
         {
-            Expect.NotNull(@this);
+            Require.NotNull(@this, nameof(@this));
 
-            return SingleOrNone(@this, Stubs<TSource>.AlwaysTrue);
+            using (var iter = @this.EmptyIfNull().GetEnumerator())
+            {
+                // Return None if the sequence is empty.
+                var result = iter.MoveNext() ? Maybe.Of(iter.Current) : Maybe<TSource>.None;
+
+                // Return None if there is one more element.
+                return iter.MoveNext() ? Maybe<TSource>.None : result;
+            }
         }
 
         public static Maybe<TSource> SingleOrNone<TSource>(
