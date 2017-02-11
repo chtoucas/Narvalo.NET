@@ -140,13 +140,11 @@ public partial class MonadTemplate
             Action<TSource> action)
             <#+ WriteTypeConstraints("TSource"); #>
         {
-<#+ if (IsNullable) { #>
-            Expect.NotNull(@this);
-<#+ } #>
-            Expect.NotNull(predicate);
-            Expect.NotNull(action);
+            <#+ WriteNotNull(); #>
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
 
-            @this.When(_ => !predicate.Invoke(_), action);
+            @this.Bind(_ => { if (!predicate.Invoke(_)) { action.Invoke(_); } return <#= Name #>.Unit; });
         }
 
         #endregion

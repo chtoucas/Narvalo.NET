@@ -71,8 +71,9 @@ TODO
 - Pretty sure that we can get rid off all uint and int overloads.
 
 Narvalo.Fx:
-- Disabled Forever, When, Unless and Guard.
-- Apply, Trigger, OnSome, OnNone?
+- Review
+  * Forever, When, Unless and Guard.
+  * Trigger, OnSome, OnNone <- Implements for other monads.
 - Review and test all IEnumerable<T> extensions.
 - Check signatures / Haskell.
 - Rework EmptyIfNull()?

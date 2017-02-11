@@ -137,11 +137,11 @@ namespace Narvalo.Fx
             Action<TSource> action)
             /* T4: C# indent */
         {
-            Expect.NotNull(@this);
-            Expect.NotNull(predicate);
-            Expect.NotNull(action);
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
 
-            @this.When(_ => !predicate.Invoke(_), action);
+            @this.Bind(_ => { if (!predicate.Invoke(_)) { action.Invoke(_); } return VoidOrError.Unit; });
         }
 
         #endregion
@@ -286,6 +286,20 @@ namespace Narvalo.Fx
             return @this.Bind(_ => other);
         }
 
+        /// <remarks>
+        /// Named <c>forever</c> in Haskell parlance.
+        /// </remarks>
+        public static VoidOrError<TResult> Forever<TSource, TResult>(
+            this VoidOrError<TSource> @this,
+            Func<VoidOrError<TResult>> fun
+            )
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Warrant.NotNull<VoidOrError<TResult>>();
+
+            return @this.Then(@this.Forever(fun));
+        }
 
         /// <remarks>
         /// Named <c>void</c> in Haskell parlance.
