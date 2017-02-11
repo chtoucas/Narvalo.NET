@@ -396,36 +396,6 @@ namespace Narvalo.Fx
         #endregion
     } // End of Identity - T4: EmitMonadExtensions().
 
-    // Provides non-standard extension methods for Identity<T>.
-    public static partial class Identity
-    {
-        public static Identity<TResult> Coalesce<TSource, TResult>(
-            this Identity<TSource> @this,
-            Func<TSource, bool> predicate,
-            Identity<TResult> then,
-            Identity<TResult> otherwise)
-            /* T4: C# indent */
-        {
-            /* T4: C# indent */
-            Require.NotNull(predicate, nameof(predicate));
-
-            return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
-        }
-
-
-        // Like Select() w/ an action.
-        public static void Apply<TSource>(
-            this Identity<TSource> @this,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            /* T4: C# indent */
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(_ => { action.Invoke(_); return Identity.Unit; });
-        }
-    } // End of Identity - T4: EmitMonadExtraExtensions().
-
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Func
     {

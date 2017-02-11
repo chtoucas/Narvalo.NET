@@ -275,25 +275,11 @@ namespace Narvalo.T4
         protected bool PostFilterEnsuresSome => PostBindEnsuresSome;
 
         /// <summary>
-        /// Gets a value indicating whether Monad.Coalesce() ensures a non-null return value. Default to false.
-        /// </summary>
-        /// <value><see langword="true"/> if Monad.Coalesce() ensures a non-null return value;
-        /// otherwise <see langword="false"/>.</value>
-        protected bool PostCoalesceEnsuresSome => PostBindEnsuresSome;
-
-        /// <summary>
         /// Gets a value indicating whether Monad.Then() ensures a non-null return value. Default to false.
         /// </summary>
         /// <value><see langword="true"/> if Monad.Then() ensures a non-null return value;
         /// otherwise <see langword="false"/>.</value>
         protected bool PostThenEnsuresSome => PostBindEnsuresSome;
-
-        /// <summary>
-        /// Gets a value indicating whether Monad.Then(predicate, other) ensures a non-null return value. Default to false.
-        /// </summary>
-        /// <value><see langword="true"/> if Monad.Then(predicate, other) ensures a non-null return value;
-        /// otherwise <see langword="false"/>.</value>
-        protected bool PostExtraThenEnsuresSome => PostCoalesceEnsuresSome;
 
         /// <summary>
         /// Gets a value indicating whether Monad.Join() ensures a non-null return value. Default to false.

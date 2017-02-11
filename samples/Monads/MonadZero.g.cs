@@ -625,65 +625,6 @@ namespace Monads
         #endregion
     } // End of MonadZero - T4: EmitMonadExtensions().
 
-    // Provides non-standard extension methods for MonadZero<T>.
-    public static partial class MonadZero
-    {
-        public static MonadZero<TResult> Coalesce<TSource, TResult>(
-            this MonadZero<TSource> @this,
-            Func<TSource, bool> predicate,
-            MonadZero<TResult> then,
-            MonadZero<TResult> otherwise)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            Warrant.NotNull<MonadZero<TResult>>();
-
-            return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
-        }
-
-
-        public static MonadZero<TResult> Then<TSource, TResult>(
-            this MonadZero<TSource> @this,
-            Func<TSource, bool> predicate,
-            MonadZero<TResult> other)
-            /* T4: C# indent */
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(predicate);
-            Warrant.NotNull<MonadZero<TResult>>();
-
-            return @this.Coalesce(predicate, other, MonadZero<TResult>.Zero);
-        }
-
-        public static MonadZero<TResult> Otherwise<TSource, TResult>(
-            this MonadZero<TSource> @this,
-            Func<TSource, bool> predicate,
-            MonadZero<TResult> other)
-            /* T4: C# indent */
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(predicate);
-            Warrant.NotNull<MonadZero<TResult>>();
-
-            return @this.Coalesce(predicate, MonadZero<TResult>.Zero, other);
-        }
-
-
-        // Like Select() w/ an action.
-        public static void Apply<TSource>(
-            this MonadZero<TSource> @this,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(action, nameof(action));
-            Warrant.NotNull<MonadZero<TSource>>();
-
-            @this.Bind(_ => { action.Invoke(_); return MonadZero.Unit; });
-        }
-    } // End of MonadZero - T4: EmitMonadExtraExtensions().
-
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Func
     {

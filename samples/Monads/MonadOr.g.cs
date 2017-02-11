@@ -625,65 +625,6 @@ namespace Monads
         #endregion
     } // End of MonadOr - T4: EmitMonadExtensions().
 
-    // Provides non-standard extension methods for MonadOr<T>.
-    public static partial class MonadOr
-    {
-        public static MonadOr<TResult> Coalesce<TSource, TResult>(
-            this MonadOr<TSource> @this,
-            Func<TSource, bool> predicate,
-            MonadOr<TResult> then,
-            MonadOr<TResult> otherwise)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            Warrant.NotNull<MonadOr<TResult>>();
-
-            return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
-        }
-
-
-        public static MonadOr<TResult> Then<TSource, TResult>(
-            this MonadOr<TSource> @this,
-            Func<TSource, bool> predicate,
-            MonadOr<TResult> other)
-            /* T4: C# indent */
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(predicate);
-            Warrant.NotNull<MonadOr<TResult>>();
-
-            return @this.Coalesce(predicate, other, MonadOr<TResult>.None);
-        }
-
-        public static MonadOr<TResult> Otherwise<TSource, TResult>(
-            this MonadOr<TSource> @this,
-            Func<TSource, bool> predicate,
-            MonadOr<TResult> other)
-            /* T4: C# indent */
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(predicate);
-            Warrant.NotNull<MonadOr<TResult>>();
-
-            return @this.Coalesce(predicate, MonadOr<TResult>.None, other);
-        }
-
-
-        // Like Select() w/ an action.
-        public static void Apply<TSource>(
-            this MonadOr<TSource> @this,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(action, nameof(action));
-            Warrant.NotNull<MonadOr<TSource>>();
-
-            @this.Bind(_ => { action.Invoke(_); return MonadOr.Unit; });
-        }
-    } // End of MonadOr - T4: EmitMonadExtraExtensions().
-
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Func
     {

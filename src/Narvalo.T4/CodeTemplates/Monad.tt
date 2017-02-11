@@ -3,7 +3,6 @@
 <#@ import namespace="Narvalo.T4" #>
 <#@ include file="Monad\EmitMonadCore.tt" #>
 <#@ include file="Monad\EmitMonadExtensions.tt" #>
-<#@ include file="Monad\EmitMonadExtraExtensions.tt" #>
 <#@ include file="Monad\EmitKleisliExtensions.tt" #>
 <#@ include file="Monad\EmitMonadEnumerableExtensions.tt" #>
 <#@ include file="Monad\EmitMonadEnumerableInternalExtensions.tt" #>
@@ -58,9 +57,6 @@ namespace <#= Namespace #>
     EmitMonadExtensions();
     WriteLine();
 
-    EmitMonadExtraExtensions();
-    WriteLine();
-
     EmitKleisliExtensions(false);
 #>
 }
@@ -95,9 +91,6 @@ namespace <#= Namespace #>
     WriteLine();
 
     EmitMonadExtensions();
-    WriteLine();
-
-    EmitMonadExtraExtensions();
     WriteLine();
 
     EmitKleisliExtensions(true);

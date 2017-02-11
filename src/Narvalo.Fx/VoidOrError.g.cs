@@ -623,65 +623,6 @@ namespace Narvalo.Fx
         #endregion
     } // End of VoidOrError - T4: EmitMonadExtensions().
 
-    // Provides non-standard extension methods for VoidOrError<T>.
-    public static partial class VoidOrError
-    {
-        public static VoidOrError<TResult> Coalesce<TSource, TResult>(
-            this VoidOrError<TSource> @this,
-            Func<TSource, bool> predicate,
-            VoidOrError<TResult> then,
-            VoidOrError<TResult> otherwise)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            Warrant.NotNull<VoidOrError<TResult>>();
-
-            return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
-        }
-
-
-        public static VoidOrError<TResult> Then<TSource, TResult>(
-            this VoidOrError<TSource> @this,
-            Func<TSource, bool> predicate,
-            VoidOrError<TResult> other)
-            /* T4: C# indent */
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(predicate);
-            Warrant.NotNull<VoidOrError<TResult>>();
-
-            return @this.Coalesce(predicate, other, VoidOrError<TResult>.Void);
-        }
-
-        public static VoidOrError<TResult> Otherwise<TSource, TResult>(
-            this VoidOrError<TSource> @this,
-            Func<TSource, bool> predicate,
-            VoidOrError<TResult> other)
-            /* T4: C# indent */
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(predicate);
-            Warrant.NotNull<VoidOrError<TResult>>();
-
-            return @this.Coalesce(predicate, VoidOrError<TResult>.Void, other);
-        }
-
-
-        // Like Select() w/ an action.
-        public static void Apply<TSource>(
-            this VoidOrError<TSource> @this,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(action, nameof(action));
-            Warrant.NotNull<VoidOrError<TSource>>();
-
-            @this.Bind(_ => { action.Invoke(_); return VoidOrError.Unit; });
-        }
-    } // End of VoidOrError - T4: EmitMonadExtraExtensions().
-
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Func
     {

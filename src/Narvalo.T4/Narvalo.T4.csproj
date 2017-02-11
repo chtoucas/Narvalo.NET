@@ -35,7 +35,6 @@
     <None Include="CodeTemplates\Monad\EmitMonadCore.tt" />
     <None Include="CodeTemplates\Monad\EmitMonadEnumerableExtensions.tt" />
     <None Include="CodeTemplates\Monad\EmitMonadEnumerableInternalExtensions.tt" />
-    <None Include="CodeTemplates\Monad\EmitMonadExtraExtensions.tt" />
     <None Include="CodeTemplates\Monad\EmitMonadExtensions.tt" />
     <None Include="CodeTemplates\Monad\EmitFacts.tt" />
     <None Include="CodeTemplates\Outcome.tt" />
