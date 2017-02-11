@@ -53,9 +53,7 @@ namespace Narvalo.Fx
 
             using (var iter = seq.EmptyIfNull().GetEnumerator())
             {
-                var current = Maybe.Of(iter.Current);
-
-                return iter.MoveNext() ? current : Maybe<TSource>.None;
+                return iter.MoveNext() ? Maybe.Of(iter.Current) : Maybe<TSource>.None;
             }
         }
 
@@ -92,10 +90,8 @@ namespace Narvalo.Fx
 
             using (var iter = seq.EmptyIfNull().GetEnumerator())
             {
-                var current = iter.Current;
-
                 // Return None if the sequence is empty.
-                var result = iter.MoveNext() ? Maybe.Of(current) : Maybe<TSource>.None;
+                var result = iter.MoveNext() ? Maybe.Of(iter.Current) : Maybe<TSource>.None;
 
                 // Return None if there is one more element.
                 return iter.MoveNext() ? Maybe<TSource>.None : result;
