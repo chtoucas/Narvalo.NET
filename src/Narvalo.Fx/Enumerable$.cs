@@ -50,12 +50,11 @@ namespace Narvalo.Fx
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
 
-            IEnumerable<Maybe<TSource>> seq
-                = from t in @this where predicate.Invoke(t) select Maybe.Of(t);
+            var seq = from t in @this where predicate.Invoke(t) select t;
 
             using (var iter = seq.EmptyIfNull().GetEnumerator())
             {
-                var current = iter.Current;
+                var current = Maybe.Of(iter.Current);
 
                 return iter.MoveNext() ? current : Maybe<TSource>.None;
             }
@@ -90,16 +89,16 @@ namespace Narvalo.Fx
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
 
-            IEnumerable<Maybe<TSource>> seq
-                = from t in @this where predicate.Invoke(t) select Maybe.Of(t);
+            var seq = from t in @this where predicate.Invoke(t) select t;
 
             using (var iter = seq.EmptyIfNull().GetEnumerator())
             {
                 var current = iter.Current;
 
-                var result = iter.MoveNext() ? current : Maybe<TSource>.None;
+                // Return None if the sequence is empty.
+                var result = iter.MoveNext() ? Maybe.Of(current) : Maybe<TSource>.None;
 
-                // Return Maybe.None if there is one more element.
+                // Return None if there is one more element.
                 return iter.MoveNext() ? Maybe<TSource>.None : result;
             }
         }
@@ -131,24 +130,24 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Conversion Operators
+        //#region Conversion Operators
 
-        public static ICollection<TSource> ToCollection<TSource>(this IEnumerable<TSource> @this)
-        {
-            Require.NotNull(@this, nameof(@this));
-            Warrant.NotNull<ICollection<TSource>>();
+        //public static ICollection<TSource> ToCollection<TSource>(this IEnumerable<TSource> @this)
+        //{
+        //    Require.NotNull(@this, nameof(@this));
+        //    Warrant.NotNull<ICollection<TSource>>();
 
-            var retval = new Collection<TSource>();
+        //    var retval = new Collection<TSource>();
 
-            foreach (TSource item in @this)
-            {
-                retval.Add(item);
-            }
+        //    foreach (TSource item in @this)
+        //    {
+        //        retval.Add(item);
+        //    }
 
-            return retval;
-        }
+        //    return retval;
+        //}
 
-        #endregion
+        //#endregion
 
         #region Aggregate Operators
 
