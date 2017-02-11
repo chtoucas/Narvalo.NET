@@ -13,7 +13,7 @@ namespace Narvalo.Fx.Extensions
     /// <item><description><c>Pure</c> is simply casting: <c>(T?)value</c>.</description></item>
     /// <item><description><c>Nullable</c> does not support the <c>Join</c> operation; there is no
     /// <c>Nullable&lt;Nullable&lt;T&gt;&gt;</c>.</description></item>
-    /// <item><description><c>Zero</c> is <see langword="null"/>.</description></item>
+    /// <item><description><c>Zero</c> is null.</description></item>
     /// </list>
     /// </remarks>
     public static class NullableExtensions
@@ -68,7 +68,7 @@ namespace Narvalo.Fx.Extensions
         {
             Require.NotNull(predicate, nameof(predicate));
 
-            return @this.Bind(_ => predicate.Invoke(_) ? @this : null);
+            return @this.HasValue && predicate.Invoke(@this.Value) ? @this : null;
         }
 
         public static TResult? SelectMany<TSource, TMiddle, TResult>(
@@ -87,43 +87,45 @@ namespace Narvalo.Fx.Extensions
 
         #endregion
 
-        #region Non-standard extensions
+        #region Pattern matching
 
-        public static TResult? Coalesce<TSource, TResult>(
+        public static TResult Match<TSource, TResult>(
             this TSource? @this,
-            Func<TSource, bool> predicate,
-            TResult? then,
-            TResult? otherwise)
+            Func<TSource, TResult> caseValue,
+            Func<TResult> caseNull)
             where TSource : struct
-            where TResult : struct
         {
-            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(caseValue, nameof(caseValue));
+            Require.NotNull(caseNull, nameof(caseNull));
 
-            return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
+            return @this.HasValue ? caseValue.Invoke(@this.Value) : caseNull.Invoke();
         }
 
-        public static TResult? Then<TSource, TResult>(
+        public static TResult Match<TSource, TResult>(
             this TSource? @this,
-            Func<TSource, bool> predicate,
-            TResult? other)
+            Func<TSource, TResult> caseValue,
+            TResult caseNull)
             where TSource : struct
-            where TResult : struct
         {
-            Expect.NotNull(predicate);
+            Require.NotNull(caseValue, nameof(caseValue));
 
-            return Coalesce(@this, predicate, other, null);
+            return @this.HasValue ? caseValue.Invoke(@this.Value) : caseNull;
         }
 
-        public static TResult? Otherwise<TSource, TResult>(
-            this TSource? @this,
-            Func<TSource, bool> predicate,
-            TResult? other)
+        public static void Trigger<TSource>(this TSource? @this, Action<TSource> caseValue, Action caseNull)
             where TSource : struct
-            where TResult : struct
         {
-            Expect.NotNull(predicate);
+            Require.NotNull(caseValue, nameof(caseValue));
+            Require.NotNull(caseNull, nameof(caseNull));
 
-            return Coalesce(@this, predicate, null, other);
+            if (@this.HasValue)
+            {
+                caseValue.Invoke(@this.Value);
+            }
+            else
+            {
+                caseNull.Invoke();
+            }
         }
 
         #endregion

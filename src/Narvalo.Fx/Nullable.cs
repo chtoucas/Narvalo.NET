@@ -21,37 +21,5 @@ namespace Narvalo.Fx
         }
 
         #endregion
-
-        #region Pattern matching
-
-        public static TResult Match<TSource, TResult>(
-            this TSource? @this,
-            Func<TSource, TResult> caseValue,
-            Func<TResult> caseNull)
-            where TSource : struct
-        {
-            Require.NotNull(caseValue, nameof(caseValue));
-            Require.NotNull(caseNull, nameof(caseNull));
-
-            return @this.HasValue ? caseValue.Invoke(@this.Value) : caseNull.Invoke();
-        }
-
-        public static void Match<TSource>(this TSource? @this, Action<TSource> caseValue, Action caseNull)
-            where TSource : struct
-        {
-            Require.NotNull(caseValue, nameof(caseValue));
-            Require.NotNull(caseNull, nameof(caseNull));
-
-            if (@this.HasValue)
-            {
-                caseValue.Invoke(@this.Value);
-            }
-            else
-            {
-                caseNull.Invoke();
-            }
-        }
-
-        #endregion
     }
 }

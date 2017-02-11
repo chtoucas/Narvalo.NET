@@ -97,7 +97,7 @@ namespace Narvalo.Fx
                 return otherwise.Invoke();
             }
 
-            public override void Match(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise)
+            public override void Trigger(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise)
             {
                 Require.NotNull(otherwise, nameof(otherwise));
 
@@ -172,7 +172,7 @@ namespace Narvalo.Fx
                 return caseLeft.Invoke(_value);
             }
 
-            /// <inheritdoc cref="Switch{TLeft, TRight}.Match" />
+            /// <inheritdoc cref="Switch{TLeft, TRight}.Trigger" />
             public override TResult Match<TResult>(
                 Func<TLeft, TResult> caseLeft,
                 Func<TRight, TResult> caseRight,
@@ -183,8 +183,8 @@ namespace Narvalo.Fx
                 return caseLeft.Invoke(_value);
             }
 
-            /// <inheritdoc cref="Switch{TLeft, TRight}.Match" />
-            public override void Match(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise)
+            /// <inheritdoc cref="Switch{TLeft, TRight}.Trigger" />
+            public override void Trigger(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise)
             {
                 Require.NotNull(caseLeft, nameof(caseLeft));
 
@@ -276,7 +276,7 @@ namespace Narvalo.Fx
                 return caseRight.Invoke(_value);
             }
 
-            /// <inheritdoc cref="Switch{TLeft, TRight}.Match" />
+            /// <inheritdoc cref="Switch{TLeft, TRight}.Trigger" />
             public override TResult Match<TResult>(
                 Func<TLeft, TResult> caseLeft,
                 Func<TRight, TResult> caseRight,
@@ -287,8 +287,8 @@ namespace Narvalo.Fx
                 return caseRight.Invoke(_value);
             }
 
-            /// <inheritdoc cref="Switch{TLeft, TRight}.Match" />
-            public override void Match(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise)
+            /// <inheritdoc cref="Switch{TLeft, TRight}.Trigger" />
+            public override void Trigger(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise)
             {
                 Require.NotNull(caseRight, nameof(caseRight));
 
@@ -340,7 +340,7 @@ namespace Narvalo.Fx
             Func<TRight, TResult> caseRight,
             Func<TResult> otherwise);
 
-        public abstract void Match(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise);
+        public abstract void Trigger(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise);
     }
 }
 

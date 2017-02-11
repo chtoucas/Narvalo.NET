@@ -246,7 +246,7 @@ namespace Narvalo.Fx
             return IsSome ? caseSome.Invoke(Value) : caseNone;
         }
 
-        public void Match(Action<T> caseSome, Action caseNone)
+        public void Trigger(Action<T> caseSome, Action caseNone)
         {
             Require.NotNull(caseSome, nameof(caseSome));
             Require.NotNull(caseNone, nameof(caseNone));
@@ -261,9 +261,8 @@ namespace Narvalo.Fx
             }
         }
 
-        // Methods below do not belong to the interface Internal.ISwitch<T>.
+        // Not really part of the interface, but closely related to it.
 
-        // Alias for Apply().
         public void OnSome(Action<T> action)
         {
             Require.NotNull(action, nameof(action));

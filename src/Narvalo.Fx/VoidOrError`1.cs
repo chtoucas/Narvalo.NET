@@ -69,7 +69,7 @@ namespace Narvalo.Fx
                 return caseError.Invoke(Error);
             }
 
-            public override void Match(Action<TError> caseError, Action caseVoid)
+            public override void Trigger(Action<TError> caseError, Action caseVoid)
             {
                 Require.NotNull(caseError, nameof(caseError));
 
@@ -154,7 +154,7 @@ namespace Narvalo.Fx
         public virtual TResult Match<TResult>(Func<TError, TResult> caseError, TResult caseVoid)
             => caseVoid;
 
-        public virtual void Match(Action<TError> caseError, Action caseVoid)
+        public virtual void Trigger(Action<TError> caseError, Action caseVoid)
         {
             Require.NotNull(caseVoid, nameof(caseVoid));
 
