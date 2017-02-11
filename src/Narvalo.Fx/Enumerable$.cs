@@ -4,7 +4,6 @@ namespace Narvalo.Fx
 {
     using System;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using System.Linq;
 
     /// <summary>
@@ -109,45 +108,52 @@ namespace Narvalo.Fx
 
         // There is a much better implementation coming soon (?).
         // https://github.com/dotnet/corefx/commits/master/src/System.Linq/src/System/Linq/AppendPrepend.cs
-        // REVIEW: Since this method is a critical component of Collect(), we could import this
-        // until it is publicly available.
+        // REVIEW: Since this method is a critical component of Collect(), we could include the
+        // .NET implementation until it is publicly available.
         public static IEnumerable<TSource> Append<TSource>(this IEnumerable<TSource> @this, TSource element)
         {
-            Expect.NotNull(@this);
+            Require.NotNull(@this, nameof(@this));
             Warrant.NotNull<IEnumerable<TSource>>();
 
-            return @this.Concat(Sequence.Pure(element)).EmptyIfNull();
+            return AppendIterator(@this, element);
+        }
+
+        private static IEnumerable<TSource> AppendIterator<TSource>(IEnumerable<TSource> source, TSource element)
+        {
+            Demand.NotNull(source);
+            Warrant.NotNull<IEnumerable<TSource>>();
+
+            foreach (var item in source)
+            {
+                yield return item;
+            }
+
+            yield return element;
         }
 
         // See remarks for Append.
         public static IEnumerable<TSource> Prepend<TSource>(this IEnumerable<TSource> @this, TSource element)
         {
-            Expect.NotNull(@this);
+            Require.NotNull(@this, nameof(@this));
             Warrant.NotNull<IEnumerable<TSource>>();
 
-            return Sequence.Pure(element).Concat(@this).EmptyIfNull();
+            return PrependIterator(@this, element);
+        }
+
+        private static IEnumerable<TSource> PrependIterator<TSource>(IEnumerable<TSource> source, TSource element)
+        {
+            Demand.NotNull(source);
+            Warrant.NotNull<IEnumerable<TSource>>();
+
+            yield return element;
+
+            foreach (var item in source)
+            {
+                yield return item;
+            }
         }
 
         #endregion
-
-        //#region Conversion Operators
-
-        //public static ICollection<TSource> ToCollection<TSource>(this IEnumerable<TSource> @this)
-        //{
-        //    Require.NotNull(@this, nameof(@this));
-        //    Warrant.NotNull<ICollection<TSource>>();
-
-        //    var retval = new Collection<TSource>();
-
-        //    foreach (TSource item in @this)
-        //    {
-        //        retval.Add(item);
-        //    }
-
-        //    return retval;
-        //}
-
-        //#endregion
 
         #region Aggregate Operators
 
@@ -232,22 +238,45 @@ namespace Narvalo.Fx
     public static partial class EnumerableExtensions
     {
         // Named <c>catMaybes</c> in Haskell parlance.
-        public static IEnumerable<TResult> CollectAny<TSource, TResult>(
-            this IEnumerable<Maybe<TResult>> @this)
+        public static IEnumerable<TSource> CollectAny<TSource>(this IEnumerable<Maybe<TSource>> @this)
         {
             Require.NotNull(@this, nameof(@this));
-            Warrant.NotNull<IEnumerable<TResult>>();
+            Warrant.NotNull<IEnumerable<TSource>>();
 
-            return (from _ in @this where _.IsSome select _.Value).EmptyIfNull();
+            return CollectAnyIterator(@this);
         }
 
-        public static IEnumerable<TResult> CollectAny<TSource, TResult>(
-            this IEnumerable<Outcome<TResult>> @this)
+        internal static IEnumerable<TSource> CollectAnyIterator<TSource>(IEnumerable<Maybe<TSource>> source)
+        {
+            Demand.NotNull(source);
+            Warrant.NotNull<IEnumerable<TSource>>();
+
+            foreach (var item in source)
+            {
+                if (item.IsSome) { yield return item.Value; }
+            }
+        }
+
+        public static IEnumerable<TSource> CollectAny<TSource>(this IEnumerable<Outcome<TSource>> @this)
         {
             Require.NotNull(@this, nameof(@this));
-            Warrant.NotNull<IEnumerable<TResult>>();
+            Warrant.NotNull<IEnumerable<TSource>>();
 
-            return (from _ in @this where _.IsSuccess select _.Value).EmptyIfNull();
+            return CollectAnyIterator(@this);
+        }
+
+        internal static IEnumerable<TSource> CollectAnyIterator<TSource>(IEnumerable<Outcome<TSource>> source)
+        {
+            Demand.NotNull(source);
+            Warrant.NotNull<IEnumerable<TSource>>();
+
+            foreach (var item in source)
+            {
+                // REVIEW: Is this the correct behaviour for null?
+                if (item == null) { yield return default(TSource); }
+
+                if (item.IsSuccess) { yield return item.Value; }
+            }
         }
     }
 }

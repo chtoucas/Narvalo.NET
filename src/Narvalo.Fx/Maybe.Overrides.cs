@@ -4,7 +4,6 @@ namespace Narvalo.Fx
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
 
     // Overrides for auto-generated (extension) methods.
     public partial struct Maybe<T>
@@ -125,18 +124,9 @@ namespace Narvalo.Fx
     {
         internal static Maybe<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Maybe<TSource>> @this)
         {
-            Demand.NotNull(@this);
+            Require.NotNull(@this, nameof(@this));
 
-            var list = new List<TSource>();
-
-            foreach (var m in @this)
-            {
-                if (m.IsNone) { continue; }
-
-                list.Add(m.Value);
-            }
-
-            return Maybe.Of(list.AsEnumerable());
+            return Maybe.Of(CollectAnyIterator(@this));
         }
     }
 }
@@ -145,7 +135,6 @@ namespace Narvalo.Fx.More
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
 
     // Overrides for auto-generated (extension) methods on IEnumerable<T>.
     public static partial class EnumerableExtensions
@@ -154,25 +143,11 @@ namespace Narvalo.Fx.More
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<bool>> predicateM)
         {
-            Demand.NotNull(@this);
-            Demand.NotNull(predicateM);
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicateM, nameof(predicateM));
             Warrant.NotNull<IEnumerable<TSource>>();
 
-            // See https://byorgey.wordpress.com/2007/06/26/deducing-code-from-types-filterm/
-            // http://stackoverflow.com/questions/28872396/haskells-filterm-with-filterm-x-true-false-1-2-3
-            // REVIEW: Recursion would be nicer, no?
-            // or, is it equivalent to:
-            // > var seq = @this.Where(_ => predicateM.Invoke(_).ValueOrElse(false));
-            // > return Maybe.Of(seq);
-
-            var list = new List<TSource>();
-
-            foreach (var item in @this)
-            {
-                predicateM.Invoke(item).Apply(_ => { if (_) { list.Add(item); } });
-            }
-
-            return Maybe.Of(list.AsEnumerable());
+            return Maybe.Of(WhereAnyIterator(@this, predicateM));
         }
     }
 }
