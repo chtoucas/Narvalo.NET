@@ -4,15 +4,16 @@ namespace Narvalo.Fx.Internal
 {
     using System;
 
+    // Degenerate case, really an if/then.
     // NB: Equivalent to IDisjointUnionOf<T, Unit>.
-    internal interface ISwitch<T1>
+    internal interface ISwitch<T>
     {
-        TResult Match<TResult>(Func<T1, TResult> selector, Func<TResult> otherwise);
+        TResult Match<TResult>(Func<T, TResult> selector, Func<TResult> otherwise);
 
-        TResult Match<TResult>(Func<T1, TResult> selector, TResult other);
+        TResult Match<TResult>(Func<T, TResult> selector, TResult other);
 
         // Equivalent to Match<Unit>().
-        void Trigger(Action<T1> action, Action otherwise);
+        void Trigger(Action<T> action, Action otherwise);
     }
 
     // NB: Equivalent to IDisjointUnionOf<T1, T2, Unit> (not defined).
@@ -24,13 +25,5 @@ namespace Narvalo.Fx.Internal
 
         // Equivalent to Match<Unit>().
         void Trigger(Action<T1> action1, Action<T2> action2, Action otherwise);
-    }
-
-    internal interface IDisjointUnionOf<T1, T2>
-    {
-        TResult Match<TResult>(Func<T1, TResult> selector1, Func<T2, TResult> selector2);
-
-        // Equivalent to Match<Unit>().
-        void Trigger(Action<T1> action1, Action<T2> action2);
     }
 }

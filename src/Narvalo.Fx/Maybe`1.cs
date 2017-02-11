@@ -19,7 +19,7 @@ namespace Narvalo.Fx
     [DebuggerDisplay("IsSome = {IsSome}")]
     [DebuggerTypeProxy(typeof(Maybe<>.DebugView))]
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "[Intentionally] Maybe<T> only pretends to be a collection.")]
-    public partial struct Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>, Internal.ISwitch<T>
+    public partial struct Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>, Internal.ISwitch<T>, Internal.ICoalesce<T>
     {
         private readonly bool _isSome;
 
@@ -227,6 +227,17 @@ namespace Narvalo.Fx
         public Maybe<T> OrElse(Maybe<T> other) => IsNone ? other : this;
     }
 
+    // Implements the Internal.ICoalesce<T> interface.
+    public partial struct Maybe<T>
+    {
+        public TResult Coalesce<TResult>(Func<T, bool> predicate, TResult then, TResult otherwise)
+        {
+            Require.NotNull(predicate, nameof(predicate));
+
+            return IsSome && predicate.Invoke(Value) ? then : otherwise;
+        }
+    }
+
     // Implements the Internal.ISwitch<T> interface.
     public partial struct Maybe<T>
     {
@@ -263,6 +274,7 @@ namespace Narvalo.Fx
 
         // Not really part of the interface, but closely related to it.
 
+        // Alias for Apply().
         public void OnSome(Action<T> action)
         {
             Require.NotNull(action, nameof(action));
