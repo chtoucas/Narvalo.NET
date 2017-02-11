@@ -5,6 +5,7 @@ namespace Narvalo.Fx
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using System.Runtime.CompilerServices;
 
     /// <summary>
     /// Represents the (possibly empty) sum of two types. An instance of the
@@ -53,6 +54,7 @@ namespace Narvalo.Fx
 
         public abstract Maybe<TRight> RightOrNone();
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Switch<TLeft, TRight> η(TLeft value)
         {
             Warrant.NotNull<Switch<TLeft, TRight>>();
@@ -60,6 +62,7 @@ namespace Narvalo.Fx
             return value != null ? new Left_(value) : Switch<TLeft, TRight>.Empty;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Switch<TLeft, TRight> η(TRight value)
         {
             Warrant.NotNull<Switch<TLeft, TRight>>();

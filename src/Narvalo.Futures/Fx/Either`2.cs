@@ -4,6 +4,7 @@ namespace Narvalo.Fx
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
 
     /// <summary>
     /// Represents the sum of two types. An instance of the <see cref="Either{TLeft, TRight}"/> class
@@ -24,6 +25,7 @@ namespace Narvalo.Fx
 
         public abstract Maybe<TRight> RightOrNone();
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Either<TLeft, TRight> η(TLeft value)
         {
             Warrant.NotNull<Either<TLeft, TRight>>();
@@ -31,6 +33,7 @@ namespace Narvalo.Fx
             return new Left_(value);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Either<TLeft, TRight> η(TRight value)
         {
             Warrant.NotNull<Either<TLeft, TRight>>();

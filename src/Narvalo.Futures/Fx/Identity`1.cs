@@ -4,6 +4,7 @@ namespace Narvalo.Fx
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
 
     /// <summary>
     /// Represents the trivial monad.
@@ -92,8 +93,10 @@ namespace Narvalo.Fx
             return selectorM.Invoke(Value);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Identity<T> η(T value) => new Identity<T>(value);
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Identity<T> μ(Identity<Identity<T>> square) => square.Value;
     }
 
@@ -107,8 +110,10 @@ namespace Narvalo.Fx
             return new Identity<TResult>(fun.Invoke(this));
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static T ε(Identity<T> monad) => monad.Value;
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Identity<Identity<T>> δ(Identity<T> monad) => new Identity<Identity<T>>(monad);
     }
 }

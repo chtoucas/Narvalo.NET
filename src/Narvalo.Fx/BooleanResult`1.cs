@@ -5,6 +5,7 @@ namespace Narvalo.Fx
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Runtime.CompilerServices;
 
     public partial struct BooleanResult<TMessage> : IEquatable<BooleanResult<TMessage>>
     {
@@ -59,6 +60,7 @@ namespace Narvalo.Fx
         }
 
         [DebuggerHidden]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static BooleanResult<TMessage> η(TMessage value)
         {
             Require.NotNullUnconstrained(value, nameof(value));
@@ -67,6 +69,7 @@ namespace Narvalo.Fx
         }
 
         [DebuggerHidden]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static BooleanResult<TMessage> μ(BooleanResult<BooleanResult<TMessage>> square)
             => square.IsFalse ? square.Message : BooleanResult<TMessage>.True;
     }

@@ -6,6 +6,7 @@ namespace Narvalo.Fx
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
+    using System.Runtime.CompilerServices;
 
     // Friendly version of Either<TError, Unit>.
     public partial class VoidOrError<TError> : Internal.ISwitch<TError>
@@ -113,6 +114,7 @@ namespace Narvalo.Fx
         }
 
         [DebuggerHidden]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static VoidOrError<TError> η(TError value)
         {
             Require.NotNullUnconstrained(value, nameof(value));
@@ -122,6 +124,7 @@ namespace Narvalo.Fx
         }
 
         [DebuggerHidden]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static VoidOrError<TError> μ(VoidOrError<VoidOrError<TError>> square)
             => square.IsError ? square.Error : VoidOrError<TError>.Void;
     }

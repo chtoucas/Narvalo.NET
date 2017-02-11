@@ -7,6 +7,7 @@ namespace Narvalo.Fx
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
+    using System.Runtime.CompilerServices;
     using System.Runtime.ExceptionServices;
 
     using Narvalo.Fx.Properties;
@@ -329,9 +330,11 @@ namespace Narvalo.Fx
     public abstract partial class Outcome<T>
     {
         [DebuggerHidden]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Outcome<T> η(T value) => new Success_(value);
 
         [DebuggerHidden]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Outcome<T> η(ExceptionDispatchInfo exceptionInfo)
         {
             Require.NotNull(exceptionInfo, nameof(exceptionInfo));
@@ -340,6 +343,7 @@ namespace Narvalo.Fx
         }
 
         [DebuggerHidden]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Outcome<T> μ(Outcome<Outcome<T>> square)
         {
             Require.NotNull(square, nameof(square));
