@@ -74,8 +74,8 @@ Narvalo.Fx:
 - Disabled Forever, When, Unless and Guard.
 - Apply, Trigger, OnSome, OnNone?
 - Review and test all IEnumerable<T> extensions (in particular delayed arg check).
-  Fix: Implements FilterCore<>. Review null in FilterCore and CollectCore.
   Check signatures / Haskell.
+- CollectCore, CollectCore: use an iterator; review null in FilterCore and CollectCore.
 - Alternative, Maybe
 - ISwitch -> On...
 - VoidOr... use the same design as Either.
