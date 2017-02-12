@@ -107,34 +107,6 @@ public partial class MonadTemplate
 
 <#+ } // T4: End of HasZero. #>
 
-        // Named "when" in Haskell parlance. Haskell uses a different signature.
-        public static void When<TSource>(
-            this <#= Name #><TSource> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            <#+ WriteTypeConstraints("TSource"); #>
-        {
-            <#+ WriteNotNull(); #>
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(_ => { if (predicate.Invoke(_)) { action.Invoke(_); } return <#= Name #>.Unit; });
-        }
-
-        // Named "unless" in Haskell parlance. Haskell uses a different signature.
-        public static void Unless<TSource>(
-            this <#= Name #><TSource> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            <#+ WriteTypeConstraints("TSource"); #>
-        {
-            <#+ WriteNotNull(); #>
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(_ => { if (!predicate.Invoke(_)) { action.Invoke(_); } return <#= Name #>.Unit; });
-        }
-
         #endregion
 
         #region Monadic lifting operators (Prelude)
@@ -144,7 +116,7 @@ public partial class MonadTemplate
         /// </summary>
         // Named "liftM" in Haskell parlance.
         public static Func<<#= Name #><T>, <#= Name #><TResult>> Lift<T, TResult>(
-            Func<T, TResult> fun)
+            Func<T, TResult> thunk)
             <#+ WriteTypeConstraints("T", "TResult"); #>
         {
             Warrant.NotNull<Func<<#= Name #><T>, <#= Name #><TResult>>>();
@@ -152,7 +124,7 @@ public partial class MonadTemplate
             return m =>
             {
                 <#+ WriteNotNull("m"); #>
-                return m.<#= MapName #>(fun);
+                return m.<#= MapName #>(thunk);
             };
         }
 
@@ -162,7 +134,7 @@ public partial class MonadTemplate
         /// </summary>
         // Named "liftM2" in Haskell parlance.
         public static Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><TResult>>
-            Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
+            Lift<T1, T2, TResult>(Func<T1, T2, TResult> thunk)
             <#+ WriteTypeConstraints("T1", "T2", "TResult"); #>
         {
             Warrant.NotNull<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><TResult>>>();
@@ -170,7 +142,7 @@ public partial class MonadTemplate
             return (m1, m2) =>
             {
                 <#+ WriteNotNull("m1"); #>
-                return m1.Zip(m2, fun);
+                return m1.Zip(m2, thunk);
             };
         }
 
@@ -180,7 +152,7 @@ public partial class MonadTemplate
         /// </summary>
         // Named "liftM3" in Haskell parlance.
         public static Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><TResult>>
-            Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
+            Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> thunk)
             <#+ WriteTypeConstraints("T1", "T2", "T3", "TResult"); #>
         {
             Warrant.NotNull<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><TResult>>>();
@@ -188,7 +160,7 @@ public partial class MonadTemplate
             return (m1, m2, m3) =>
             {
                 <#+ WriteNotNull("m1"); #>
-                return m1.Zip(m2, m3, fun);
+                return m1.Zip(m2, m3, thunk);
             };
         }
 
@@ -199,7 +171,7 @@ public partial class MonadTemplate
         // Named "liftM4" in Haskell parlance.
         public static Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><TResult>>
             Lift<T1, T2, T3, T4, TResult>(
-            Func<T1, T2, T3, T4, TResult> fun)
+            Func<T1, T2, T3, T4, TResult> thunk)
             <#+ WriteTypeConstraints("T1", "T2", "T3", "T4", "TResult"); #>
         {
             Warrant.NotNull<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><TResult>>>();
@@ -207,7 +179,7 @@ public partial class MonadTemplate
             return (m1, m2, m3, m4) =>
             {
                 <#+ WriteNotNull("m1"); #>
-                return m1.Zip(m2, m3, m4, fun);
+                return m1.Zip(m2, m3, m4, thunk);
             };
         }
 
@@ -218,7 +190,7 @@ public partial class MonadTemplate
         // Named "liftM5" in Haskell parlance.
         public static Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><T5>, <#= Name #><TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
-            Func<T1, T2, T3, T4, T5, TResult> fun)
+            Func<T1, T2, T3, T4, T5, TResult> thunk)
             <#+ WriteTypeConstraints("T1", "T2", "T3", "T4", "T5", "TResult"); #>
         {
             Warrant.NotNull<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><T5>, <#= Name #><TResult>>>();
@@ -226,7 +198,7 @@ public partial class MonadTemplate
             return (m1, m2, m3, m4, m5) =>
             {
                 <#+ WriteNotNull("m1"); #>
-                return m1.Zip(m2, m3, m4, m5, fun);
+                return m1.Zip(m2, m3, m4, m5, thunk);
             };
         }
 

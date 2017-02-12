@@ -1,15 +1,15 @@
 ﻿<#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
 <#@ include file="Monad.tt" once="true" #><#+
 
-    public partial class VoidOrErrorTemplate : MonadTemplate
+    public partial class VoidOrTemplate : MonadTemplate
     {
-        public VoidOrErrorTemplate(TextTransformation parent) : base(parent) { }
+        public VoidOrTemplate(TextTransformation parent) : base(parent) { }
 
         public override void Initialize()
         {
             InitializeOr();
 
-            ReturnName = "Error";
+            ReturnName = "Message";
             ZeroName = "Void";
         }
 

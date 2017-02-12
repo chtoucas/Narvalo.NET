@@ -39,36 +39,6 @@ public partial class MonadTemplate
             return @this.Bind(_ => other);
         }
 
-        // Named "forever" in Haskell parlance.
-        public static <#= Name #><TResult> Forever<TSource, TResult>(
-            this <#= Name #><TSource> @this,
-            Func<<#= Name #><TResult>> fun
-            )
-            <#+ WriteTypeConstraints("TSource", "TResult"); #>
-        {
-            <#+ WriteNotNull(); #>
-<#+ if (PostThenEnsuresSome) { #>
-            Warrant.NotNull<<#= Name #><TResult>>();
-<#+ } #>
-
-            return @this.Then(@this.Forever(fun));
-        }
-
-        // Named "void" in Haskell parlance.
-<#+ if (!SuppressMessage) { #>
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
-<#+ } #>
-        public static <#= Name #><global::Narvalo.Fx.Unit> Forget<TSource>(this <#= Name #><TSource> @this)
-            <#+ WriteTypeConstraints("TSource"); #>
-        {
-            <#+ WriteNotNull(); #>
-<#+ if (IsNullable) { #>
-            Warrant.NotNull<<#= Name #><global::Narvalo.Fx.Unit>>();
-<#+ } #>
-
-            return <#= Name #>.Unit;
-        }
-
         #endregion
 
         #region Generalisations of list functions (Prelude)
@@ -252,19 +222,19 @@ public partial class MonadTemplate
         /// </remarks>
         public static <#= Name #><TResult> SelectMany<TSource, TMiddle, TResult>(
             this <#= Name #><TSource> @this,
-            Func<TSource, <#= Name #><TMiddle>> valueSelectorM,
+            Func<TSource, <#= Name #><TMiddle>> valueSelector,
             Func<TSource, TMiddle, TResult> resultSelector)
             <#+ WriteTypeConstraints("TSource", "TMiddle", "TResult"); #>
         {
             <#+ WriteNotNull(); #>
-            Require.NotNull(valueSelectorM, nameof(valueSelectorM));
+            Require.NotNull(valueSelector, nameof(valueSelector));
             Require.NotNull(resultSelector, nameof(resultSelector));
 <#+ if (PostBindEnsuresSome) { #>
             Warrant.NotNull<<#= Name #><TResult>>();
 <#+ } #>
 
             return @this.Bind(
-                _ => valueSelectorM.Invoke(_).<#= MapName #>(
+                _ => valueSelector.Invoke(_).<#= MapName #>(
                     middle => resultSelector.Invoke(_, middle)));
         }
 

@@ -17,15 +17,15 @@ public partial class MonadTemplate
 <#+ } #>
         internal static <#= Name #><IEnumerable<TResult>> MapImpl<TSource, TResult>(
             this IEnumerable<TSource> @this,
-            Func<TSource, <#= Name #><TResult>> selectorM)
+            Func<TSource, <#= Name #><TResult>> selector)
         {
             Demand.NotNull(@this);
-            Demand.NotNull(selectorM);
+            Demand.NotNull(selector);
 <#+ if (IsNullable) { #>
             Warrant.NotNull<<#= Name #><IEnumerable<TResult>>>();
 <#+ } #>
 
-            return @this.Select(selectorM).EmptyIfNull().Collect();
+            return @this.Select(selector).EmptyIfNull().Collect();
         }
 
 <#+ if (!SuppressMessage) { #>
@@ -33,23 +33,23 @@ public partial class MonadTemplate
 <#+ } #>
         internal static <#= Name #><IEnumerable<TSource>> FilterImpl<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, <#= Name #><bool>> predicateM)
+            Func<TSource, <#= Name #><bool>> predicate)
             <#+ WriteTypeConstraints("TSource"); #>
         {
             <#+ WriteNotNull(true); #>
-            Require.NotNull(predicateM, nameof(predicateM));
+            Require.NotNull(predicate, nameof(predicate));
             Warrant.NotNull<IEnumerable<TSource>>();
 
             Func<bool, IEnumerable<TSource>, TSource, IEnumerable<TSource>> selector
                 = (flg, list, item) => { if (flg) { return list.Prepend(item); } else { return list; } };
 
-            Func<<#= Name #><IEnumerable<TSource>>, TSource, <#= Name #><IEnumerable<TSource>>> accumulatorM
-                = (mlist, item) => predicateM.Invoke(item).Zip(mlist, (flg, list) => selector.Invoke(flg, list, item));
+            Func<<#= Name #><IEnumerable<TSource>>, TSource, <#= Name #><IEnumerable<TSource>>> accumulator
+                = (mlist, item) => predicate.Invoke(item).Zip(mlist, (flg, list) => selector.Invoke(flg, list, item));
 
             var seed = <#= Name #>.<#= ReturnName #>(Enumerable.Empty<TSource>());
 
             // REVIEW: Aggregate?
-            return @this.AggregateBack(seed, accumulatorM);
+            return @this.AggregateBack(seed, accumulator);
         }
 
 <#+ if (!SuppressMessage) { #>
@@ -58,15 +58,15 @@ public partial class MonadTemplate
         internal static <#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
             MapUnzipImpl<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
-            Func<TSource, <#= Name #><Tuple<TFirst, TSecond>>> selectorM)
+            Func<TSource, <#= Name #><Tuple<TFirst, TSecond>>> selector)
         {
             Demand.NotNull(@this);
-            Demand.NotNull(selectorM);
+            Demand.NotNull(selector);
 <#+ if (PostMapEnsuresSome) { #>
             Warrant.NotNull<<#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>();
 <#+ } #>
 
-            return @this.Map(selectorM).<#= MapName #>(
+            return @this.Map(selector).<#= MapName #>(
                 tuples =>
                 {
                     IEnumerable<TFirst> list1 = tuples.Select(_ => _.Item1);
@@ -82,9 +82,9 @@ public partial class MonadTemplate
         internal static <#= Name #><IEnumerable<TResult>> ZipWithImpl<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
-            Func<TFirst, TSecond, <#= Name #><TResult>> resultSelectorM)
+            Func<TFirst, TSecond, <#= Name #><TResult>> resultSelector)
         {
-            Require.NotNull(resultSelectorM, nameof(resultSelectorM));
+            Require.NotNull(resultSelector, nameof(resultSelector));
 
             Demand.NotNull(@this);
             Demand.NotNull(second);
@@ -92,12 +92,10 @@ public partial class MonadTemplate
             Warrant.NotNull<<#= Name #><IEnumerable<TResult>>>();
 <#+ } #>
 
-            Func<TFirst, TSecond, <#= Name #><TResult>> resultSelector
-                = (v1, v2) => resultSelectorM.Invoke(v1, v2);
+            Func<TFirst, TSecond, <#= Name #><TResult>> selector
+                = (v1, v2) => resultSelector.Invoke(v1, v2);
 
-            // WARNING: Do not remove "resultSelector", otherwise .NET will make a recursive call
-            // instead of using the Zip from LINQ. (no longer necessary since we renamed Zip to ZipWith).
-            IEnumerable<<#= Name #><TResult>> seq = @this.Zip(second, resultSelector);
+            IEnumerable<<#= Name #><TResult>> seq = @this.Zip(second, selector);
 
             return seq.EmptyIfNull().Collect();
         }
@@ -110,11 +108,11 @@ public partial class MonadTemplate
         internal static <#= Name #><TAccumulate> FoldImpl<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM)
+            Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulator)
             <#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
         {
             <#+ WriteNotNull(true); #>
-            Require.NotNull(accumulatorM, nameof(accumulatorM));
+            Require.NotNull(accumulator, nameof(accumulator));
 <#+ if (IsNullable && HasZero) { #>
             Warrant.NotNull<<#= Name #><TAccumulate>>();
 <#+ } #>
@@ -130,7 +128,7 @@ public partial class MonadTemplate
                 }
 
 <#+ } #>
-                retval = retval.Bind(_ => accumulatorM.Invoke(_, item));
+                retval = retval.Bind(_ => accumulator.Invoke(_, item));
             }
 
             return retval;
@@ -142,17 +140,17 @@ public partial class MonadTemplate
         internal static <#= Name #><TAccumulate> FoldBackImpl<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM)
+            Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulator)
             <#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
         {
             Demand.NotNull(@this);
-            Demand.NotNull(accumulatorM);
+            Demand.NotNull(accumulator);
 <#+ // "Fold" can not guarantee non null return value. #>
 <#+ if (IsNullable && HasZero) { #>
             Warrant.NotNull<<#= Name #><TAccumulate>>();
 <#+ } #>
 
-            return @this.Reverse().EmptyIfNull().Fold(seed, accumulatorM);
+            return @this.Reverse().EmptyIfNull().Fold(seed, accumulator);
         }
 
 <#+ if (!SuppressMessage) { #>
@@ -160,11 +158,11 @@ public partial class MonadTemplate
 <#+ } #>
         internal static <#= Name #><TSource> ReduceImpl<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
+            Func<TSource, TSource, <#= Name #><TSource>> accumulator)
             <#+ WriteTypeConstraints("TSource"); #>
         {
             <#+ WriteNotNull(true); #>
-            Require.NotNull(accumulatorM, nameof(accumulatorM));
+            Require.NotNull(accumulator, nameof(accumulator));
 <#+ if (IsNullable && HasZero) { #>
             Warrant.NotNull<<#= Name #><TSource>>();
 <#+ } #>
@@ -187,7 +185,7 @@ public partial class MonadTemplate
                     }
 
 <#+ } #>
-                    retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
+                    retval = retval.Bind(_ => accumulator.Invoke(_, iter.Current));
                 }
 
                 return retval;
@@ -199,16 +197,16 @@ public partial class MonadTemplate
 <#+ } #>
         internal static <#= Name #><TSource> ReduceBackImpl<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
+            Func<TSource, TSource, <#= Name #><TSource>> accumulator)
             <#+ WriteTypeConstraints("TSource"); #>
         {
             Demand.NotNull(@this);
-            Demand.NotNull(accumulatorM);
+            Demand.NotNull(accumulator);
 <#+ if (IsNullable && HasZero) { #>
             Warrant.NotNull<<#= Name #><TSource>>();
 <#+ } #>
 
-            return @this.Reverse().EmptyIfNull().Reduce(accumulatorM);
+            return @this.Reverse().EmptyIfNull().Reduce(accumulator);
         }
 
 <#+ if (!SuppressMessage) { #>
@@ -217,12 +215,12 @@ public partial class MonadTemplate
         internal static <#= Name #><TAccumulate> FoldImpl<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM,
+            Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulator,
             Func<<#= Name #><TAccumulate>, bool> predicate)
             <#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
         {
             <#+ WriteNotNull(true); #>
-            Require.NotNull(accumulatorM, nameof(accumulatorM));
+            Require.NotNull(accumulator, nameof(accumulator));
             Require.NotNull(predicate, nameof(predicate));
 <#+ if (IsNullable && HasZero) { #>
             Warrant.NotNull<<#= Name #><TAccumulate>>();
@@ -241,7 +239,7 @@ public partial class MonadTemplate
                     }
 
 <#+ } #>
-                    retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
+                    retval = retval.Bind(_ => accumulator.Invoke(_, iter.Current));
                 }
             }
 
@@ -253,12 +251,12 @@ public partial class MonadTemplate
 <#+ } #>
         internal static <#= Name #><TSource> ReduceImpl<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, <#= Name #><TSource>> accumulatorM,
+            Func<TSource, TSource, <#= Name #><TSource>> accumulator,
             Func<<#= Name #><TSource>, bool> predicate)
             <#+ WriteTypeConstraints("TSource"); #>
         {
             <#+ WriteNotNull(true); #>
-            Require.NotNull(accumulatorM, nameof(accumulatorM));
+            Require.NotNull(accumulator, nameof(accumulator));
             Require.NotNull(predicate, nameof(predicate));
 <#+ if (IsNullable && HasZero) { #>
             Warrant.NotNull<<#= Name #><TSource>>();
@@ -282,7 +280,7 @@ public partial class MonadTemplate
                     }
 
 <#+ } #>
-                    retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
+                    retval = retval.Bind(_ => accumulator.Invoke(_, iter.Current));
                 }
 
                 return retval;

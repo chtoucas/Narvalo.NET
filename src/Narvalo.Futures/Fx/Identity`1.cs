@@ -86,11 +86,11 @@ namespace Narvalo.Fx
     // Provides the core Monad methods.
     public partial struct Identity<T>
     {
-        public Identity<TResult> Bind<TResult>(Func<T, Identity<TResult>> selectorM)
+        public Identity<TResult> Bind<TResult>(Func<T, Identity<TResult>> selector)
         {
-            Require.NotNull(selectorM, nameof(selectorM));
+            Require.NotNull(selector, nameof(selector));
 
-            return selectorM.Invoke(Value);
+            return selector.Invoke(Value);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

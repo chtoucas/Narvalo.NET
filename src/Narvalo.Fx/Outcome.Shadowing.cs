@@ -34,13 +34,13 @@ namespace Narvalo.Fx.Linq
     {
         internal static Outcome<IEnumerable<TSource>> FilterImpl<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Outcome<bool>> predicateM)
+            Func<TSource, Outcome<bool>> predicate)
         {
             Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicateM, nameof(predicateM));
+            Require.NotNull(predicate, nameof(predicate));
             Warrant.NotNull<IEnumerable<TSource>>();
 
-            return Outcome.Success(WhereAnyIterator(@this, predicateM));
+            return Outcome.Success(WhereAnyIterator(@this, predicate));
         }
     }
 }

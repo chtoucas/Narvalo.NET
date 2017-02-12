@@ -199,11 +199,11 @@ namespace Narvalo.Fx
     // Provides the core Monad methods.
     public partial struct Maybe<T>
     {
-        public Maybe<TResult> Bind<TResult>(Func<T, Maybe<TResult>> selectorM)
+        public Maybe<TResult> Bind<TResult>(Func<T, Maybe<TResult>> selector)
         {
-            Require.NotNull(selectorM, nameof(selectorM));
+            Require.NotNull(selector, nameof(selector));
 
-            return IsSome ? selectorM.Invoke(Value) : Maybe<TResult>.None;
+            return IsSome ? selector.Invoke(Value) : Maybe<TResult>.None;
         }
 
         [DebuggerHidden]

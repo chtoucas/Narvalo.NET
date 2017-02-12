@@ -81,34 +81,6 @@ namespace Monads
         #region Conditional execution of monadic expressions (Prelude)
 
 
-        // Named "when" in Haskell parlance. Haskell uses a different signature.
-        public static void When<TSource>(
-            this Monad<TSource> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(_ => { if (predicate.Invoke(_)) { action.Invoke(_); } return Monad.Unit; });
-        }
-
-        // Named "unless" in Haskell parlance. Haskell uses a different signature.
-        public static void Unless<TSource>(
-            this Monad<TSource> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(_ => { if (!predicate.Invoke(_)) { action.Invoke(_); } return Monad.Unit; });
-        }
-
         #endregion
 
         #region Monadic lifting operators (Prelude)
@@ -118,7 +90,7 @@ namespace Monads
         /// </summary>
         // Named "liftM" in Haskell parlance.
         public static Func<Monad<T>, Monad<TResult>> Lift<T, TResult>(
-            Func<T, TResult> fun)
+            Func<T, TResult> thunk)
             /* T4: C# indent */
         {
             Warrant.NotNull<Func<Monad<T>, Monad<TResult>>>();
@@ -126,7 +98,7 @@ namespace Monads
             return m =>
             {
                 Require.NotNull(m, nameof(m));
-                return m.Select(fun);
+                return m.Select(thunk);
             };
         }
 
@@ -136,7 +108,7 @@ namespace Monads
         /// </summary>
         // Named "liftM2" in Haskell parlance.
         public static Func<Monad<T1>, Monad<T2>, Monad<TResult>>
-            Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
+            Lift<T1, T2, TResult>(Func<T1, T2, TResult> thunk)
             /* T4: C# indent */
         {
             Warrant.NotNull<Func<Monad<T1>, Monad<T2>, Monad<TResult>>>();
@@ -144,7 +116,7 @@ namespace Monads
             return (m1, m2) =>
             {
                 Require.NotNull(m1, nameof(m1));
-                return m1.Zip(m2, fun);
+                return m1.Zip(m2, thunk);
             };
         }
 
@@ -154,7 +126,7 @@ namespace Monads
         /// </summary>
         // Named "liftM3" in Haskell parlance.
         public static Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<TResult>>
-            Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
+            Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> thunk)
             /* T4: C# indent */
         {
             Warrant.NotNull<Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<TResult>>>();
@@ -162,7 +134,7 @@ namespace Monads
             return (m1, m2, m3) =>
             {
                 Require.NotNull(m1, nameof(m1));
-                return m1.Zip(m2, m3, fun);
+                return m1.Zip(m2, m3, thunk);
             };
         }
 
@@ -173,7 +145,7 @@ namespace Monads
         // Named "liftM4" in Haskell parlance.
         public static Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<T4>, Monad<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
-            Func<T1, T2, T3, T4, TResult> fun)
+            Func<T1, T2, T3, T4, TResult> thunk)
             /* T4: C# indent */
         {
             Warrant.NotNull<Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<T4>, Monad<TResult>>>();
@@ -181,7 +153,7 @@ namespace Monads
             return (m1, m2, m3, m4) =>
             {
                 Require.NotNull(m1, nameof(m1));
-                return m1.Zip(m2, m3, m4, fun);
+                return m1.Zip(m2, m3, m4, thunk);
             };
         }
 
@@ -192,7 +164,7 @@ namespace Monads
         // Named "liftM5" in Haskell parlance.
         public static Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<T4>, Monad<T5>, Monad<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
-            Func<T1, T2, T3, T4, T5, TResult> fun)
+            Func<T1, T2, T3, T4, T5, TResult> thunk)
             /* T4: C# indent */
         {
             Warrant.NotNull<Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<T4>, Monad<T5>, Monad<TResult>>>();
@@ -200,7 +172,7 @@ namespace Monads
             return (m1, m2, m3, m4, m5) =>
             {
                 Require.NotNull(m1, nameof(m1));
-                return m1.Zip(m2, m3, m4, m5, fun);
+                return m1.Zip(m2, m3, m4, m5, thunk);
             };
         }
 
@@ -233,28 +205,6 @@ namespace Monads
             Require.NotNull(@this, nameof(@this));
 
             return @this.Bind(_ => other);
-        }
-
-        // Named "forever" in Haskell parlance.
-        public static Monad<TResult> Forever<TSource, TResult>(
-            this Monad<TSource> @this,
-            Func<Monad<TResult>> fun
-            )
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-
-            return @this.Then(@this.Forever(fun));
-        }
-
-        // Named "void" in Haskell parlance.
-        public static Monad<global::Narvalo.Fx.Unit> Forget<TSource>(this Monad<TSource> @this)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Warrant.NotNull<Monad<global::Narvalo.Fx.Unit>>();
-
-            return Monad.Unit;
         }
 
         #endregion
@@ -370,16 +320,16 @@ namespace Monads
         /// </remarks>
         public static Monad<TResult> SelectMany<TSource, TMiddle, TResult>(
             this Monad<TSource> @this,
-            Func<TSource, Monad<TMiddle>> valueSelectorM,
+            Func<TSource, Monad<TMiddle>> valueSelector,
             Func<TSource, TMiddle, TResult> resultSelector)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
-            Require.NotNull(valueSelectorM, nameof(valueSelectorM));
+            Require.NotNull(valueSelector, nameof(valueSelector));
             Require.NotNull(resultSelector, nameof(resultSelector));
 
             return @this.Bind(
-                _ => valueSelectorM.Invoke(_).Select(
+                _ => valueSelector.Invoke(_).Select(
                     middle => resultSelector.Invoke(_, middle)));
         }
 
@@ -395,6 +345,64 @@ namespace Monads
     // Provides more extension methods for Monad<T>.
     public static partial class Monad
     {
+        #region Basic Monad functions (Prelude)
+
+        // Named "forever" in Haskell parlance.
+        public static Monad<TResult> Forever<TSource, TResult>(
+            this Monad<TSource> @this,
+            Func<Monad<TResult>> thunk
+            )
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+
+            return @this.Then(@this.Forever(thunk));
+        }
+
+        // Named "void" in Haskell parlance.
+        public static Monad<global::Narvalo.Fx.Unit> Forget<TSource>(this Monad<TSource> @this)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Warrant.NotNull<Monad<global::Narvalo.Fx.Unit>>();
+
+            return Monad.Unit;
+        }
+
+        #endregion
+
+        #region Conditional execution of monadic expressions (Prelude)
+
+        // Named "when" in Haskell parlance. Haskell uses a different signature.
+        public static void When<TSource>(
+            this Monad<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(_ => { if (predicate.Invoke(_)) { action.Invoke(_); } return Monad.Unit; });
+        }
+
+        // Named "unless" in Haskell parlance. Haskell uses a different signature.
+        public static void Unless<TSource>(
+            this Monad<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(_ => { if (!predicate.Invoke(_)) { action.Invoke(_); } return Monad.Unit; });
+        }
+
+        #endregion
+
         #region Applicative
 
         // Named "<$" in Haskell parlance.
@@ -407,6 +415,19 @@ namespace Monads
 
             return @this.Select(_ => value);
         }
+
+
+        // Named "<**>" in Haskell parlance.
+        public static Monad<Tuple<TSource, TOther>> Merge<TSource, TOther>(
+            this Monad<TSource> @this,
+            Monad<TOther> other)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+
+            return @this.Zip(other, Tuple.Create);
+        }
+
 
         #endregion
 
@@ -469,27 +490,27 @@ namespace Monads
         // Named ">=>" in Haskell parlance.
         public static Func<TSource, Monad<TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, Monad<TMiddle>> @this,
-            Func<TMiddle, Monad<TResult>> funM)
+            Func<TMiddle, Monad<TResult>> thunk)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
-            Expect.NotNull(funM);
+            Expect.NotNull(thunk);
             Warrant.NotNull<Func<TSource, Monad<TResult>>>();
 
-            return _ => @this.Invoke(_).Bind(funM);
+            return _ => @this.Invoke(_).Bind(thunk);
         }
 
         // Named "<=<" in Haskell parlance.
         public static Func<TSource, Monad<TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, Monad<TResult>> @this,
-            Func<TSource, Monad<TMiddle>> funM)
+            Func<TSource, Monad<TMiddle>> thunk)
             /* T4: C# indent */
         {
             Expect.NotNull(@this);
-            Require.NotNull(funM, nameof(funM));
+            Require.NotNull(thunk, nameof(thunk));
             Warrant.NotNull<Func<TSource, Monad<TResult>>>();
 
-            return _ => funM.Invoke(_).Bind(@this);
+            return _ => thunk.Invoke(_).Bind(@this);
         }
 
         #endregion
@@ -533,7 +554,7 @@ namespace Monads.Linq
     using Monads.Internal;
 
     // Provides extension methods for IEnumerable<T>.
-    // We do not use the standard LINQ names to avoid a confusing API (see ZipWithImpl()).
+    // We do not use the standard LINQ names to avoid a confusing API.
     // - Select    -> Map
     // - Where     -> Filter
     // - Zip       -> ZipWith
@@ -546,13 +567,13 @@ namespace Monads.Linq
         // Named "mapM" in Haskell parlance.
         public static Monad<IEnumerable<TResult>> Map<TSource, TResult>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Monad<TResult>> selectorM)
+            Func<TSource, Monad<TResult>> selector)
         {
             Expect.NotNull(@this);
-            Expect.NotNull(selectorM);
+            Expect.NotNull(selector);
             Warrant.NotNull<Monad<IEnumerable<TResult>>>();
 
-            return @this.MapImpl(selectorM);
+            return @this.MapImpl(selector);
         }
 
 
@@ -564,40 +585,40 @@ namespace Monads.Linq
         // Named "filterM" in Haskell parlance.
         public static Monad<IEnumerable<TSource>> Filter<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Monad<bool>> predicateM)
+            Func<TSource, Monad<bool>> predicate)
             /* T4: C# indent */
         {
             Expect.NotNull(@this);
-            Expect.NotNull(predicateM);
+            Expect.NotNull(predicate);
             Warrant.NotNull<IEnumerable<TSource>>();
 
-            return @this.FilterImpl(predicateM);
+            return @this.FilterImpl(predicate);
         }
 
         // Named "mapAndUnzipM" in Haskell parlance.
         public static Monad<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
             MapUnzip<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Monad<Tuple<TFirst, TSecond>>> funM)
+            Func<TSource, Monad<Tuple<TFirst, TSecond>>> thunk)
         {
             Expect.NotNull(@this);
-            Expect.NotNull(funM);
+            Expect.NotNull(thunk);
 
-            return @this.MapUnzipImpl(funM);
+            return @this.MapUnzipImpl(thunk);
         }
 
         // Named "zipWithM" in Haskell parlance.
         public static Monad<IEnumerable<TResult>> ZipWith<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
-            Func<TFirst, TSecond, Monad<TResult>> resultSelectorM)
+            Func<TFirst, TSecond, Monad<TResult>> resultSelector)
         {
             Expect.NotNull(@this);
             Expect.NotNull(second);
-            Expect.NotNull(resultSelectorM);
+            Expect.NotNull(resultSelector);
             Warrant.NotNull<Monad<IEnumerable<TResult>>>();
 
-            return @this.ZipWithImpl(second, resultSelectorM);
+            return @this.ZipWithImpl(second, resultSelector);
         }
 
 
@@ -605,13 +626,13 @@ namespace Monads.Linq
         public static Monad<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Monad<TAccumulate>> accumulatorM)
+            Func<TAccumulate, TSource, Monad<TAccumulate>> accumulator)
             /* T4: C# indent */
         {
             Expect.NotNull(@this);
-            Expect.NotNull(accumulatorM);
+            Expect.NotNull(accumulator);
 
-            return @this.FoldImpl(seed, accumulatorM);
+            return @this.FoldImpl(seed, accumulator);
         }
 
         #endregion
@@ -621,35 +642,35 @@ namespace Monads.Linq
         public static Monad<TAccumulate> FoldBack<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Monad<TAccumulate>> accumulatorM)
+            Func<TAccumulate, TSource, Monad<TAccumulate>> accumulator)
             /* T4: C# indent */
         {
             Expect.NotNull(@this);
-            Expect.NotNull(accumulatorM);
+            Expect.NotNull(accumulator);
 
-            return @this.FoldBackImpl(seed, accumulatorM);
+            return @this.FoldBackImpl(seed, accumulator);
         }
 
         public static Monad<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Monad<TSource>> accumulatorM)
+            Func<TSource, TSource, Monad<TSource>> accumulator)
             /* T4: C# indent */
         {
             Expect.NotNull(@this);
-            Expect.NotNull(accumulatorM);
+            Expect.NotNull(accumulator);
 
-            return @this.ReduceImpl(accumulatorM);
+            return @this.ReduceImpl(accumulator);
         }
 
         public static Monad<TSource> ReduceBack<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Monad<TSource>> accumulatorM)
+            Func<TSource, TSource, Monad<TSource>> accumulator)
             /* T4: C# indent */
         {
             Expect.NotNull(@this);
-            Expect.NotNull(accumulatorM);
+            Expect.NotNull(accumulator);
 
-            return @this.ReduceBackImpl(accumulatorM);
+            return @this.ReduceBackImpl(accumulator);
         }
 
         #endregion
@@ -660,29 +681,29 @@ namespace Monads.Linq
         public static Monad<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Monad<TAccumulate>> accumulatorM,
+            Func<TAccumulate, TSource, Monad<TAccumulate>> accumulator,
             Func<Monad<TAccumulate>, bool> predicate)
             /* T4: C# indent */
         {
             Expect.NotNull(@this);
-            Expect.NotNull(accumulatorM);
+            Expect.NotNull(accumulator);
             Expect.NotNull(predicate);
 
-            return @this.FoldImpl(seed, accumulatorM, predicate);
+            return @this.FoldImpl(seed, accumulator, predicate);
         }
 
         // Haskell uses a different signature.
         public static Monad<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Monad<TSource>> accumulatorM,
+            Func<TSource, TSource, Monad<TSource>> accumulator,
             Func<Monad<TSource>, bool> predicate)
             /* T4: C# indent */
         {
             Expect.NotNull(@this);
-            Expect.NotNull(accumulatorM);
+            Expect.NotNull(accumulator);
             Expect.NotNull(predicate);
 
-            return @this.ReduceImpl(accumulatorM, predicate);
+            return @this.ReduceImpl(accumulator, predicate);
         }
 
         #endregion
@@ -741,45 +762,45 @@ namespace Monads.Internal
 
         internal static Monad<IEnumerable<TResult>> MapImpl<TSource, TResult>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Monad<TResult>> selectorM)
+            Func<TSource, Monad<TResult>> selector)
         {
             Demand.NotNull(@this);
-            Demand.NotNull(selectorM);
+            Demand.NotNull(selector);
             Warrant.NotNull<Monad<IEnumerable<TResult>>>();
 
-            return @this.Select(selectorM).EmptyIfNull().Collect();
+            return @this.Select(selector).EmptyIfNull().Collect();
         }
 
         internal static Monad<IEnumerable<TSource>> FilterImpl<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Monad<bool>> predicateM)
+            Func<TSource, Monad<bool>> predicate)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicateM, nameof(predicateM));
+            Require.NotNull(predicate, nameof(predicate));
             Warrant.NotNull<IEnumerable<TSource>>();
 
             Func<bool, IEnumerable<TSource>, TSource, IEnumerable<TSource>> selector
                 = (flg, list, item) => { if (flg) { return list.Prepend(item); } else { return list; } };
 
-            Func<Monad<IEnumerable<TSource>>, TSource, Monad<IEnumerable<TSource>>> accumulatorM
-                = (mlist, item) => predicateM.Invoke(item).Zip(mlist, (flg, list) => selector.Invoke(flg, list, item));
+            Func<Monad<IEnumerable<TSource>>, TSource, Monad<IEnumerable<TSource>>> accumulator
+                = (mlist, item) => predicate.Invoke(item).Zip(mlist, (flg, list) => selector.Invoke(flg, list, item));
 
             var seed = Monad.Of(Enumerable.Empty<TSource>());
 
             // REVIEW: Aggregate?
-            return @this.AggregateBack(seed, accumulatorM);
+            return @this.AggregateBack(seed, accumulator);
         }
 
         internal static Monad<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
             MapUnzipImpl<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Monad<Tuple<TFirst, TSecond>>> selectorM)
+            Func<TSource, Monad<Tuple<TFirst, TSecond>>> selector)
         {
             Demand.NotNull(@this);
-            Demand.NotNull(selectorM);
+            Demand.NotNull(selector);
 
-            return @this.Map(selectorM).Select(
+            return @this.Map(selector).Select(
                 tuples =>
                 {
                     IEnumerable<TFirst> list1 = tuples.Select(_ => _.Item1);
@@ -792,20 +813,18 @@ namespace Monads.Internal
         internal static Monad<IEnumerable<TResult>> ZipWithImpl<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
-            Func<TFirst, TSecond, Monad<TResult>> resultSelectorM)
+            Func<TFirst, TSecond, Monad<TResult>> resultSelector)
         {
-            Require.NotNull(resultSelectorM, nameof(resultSelectorM));
+            Require.NotNull(resultSelector, nameof(resultSelector));
 
             Demand.NotNull(@this);
             Demand.NotNull(second);
             Warrant.NotNull<Monad<IEnumerable<TResult>>>();
 
-            Func<TFirst, TSecond, Monad<TResult>> resultSelector
-                = (v1, v2) => resultSelectorM.Invoke(v1, v2);
+            Func<TFirst, TSecond, Monad<TResult>> selector
+                = (v1, v2) => resultSelector.Invoke(v1, v2);
 
-            // WARNING: Do not remove "resultSelector", otherwise .NET will make a recursive call
-            // instead of using the Zip from LINQ. (no longer necessary since we renamed Zip to ZipWith).
-            IEnumerable<Monad<TResult>> seq = @this.Zip(second, resultSelector);
+            IEnumerable<Monad<TResult>> seq = @this.Zip(second, selector);
 
             return seq.EmptyIfNull().Collect();
         }
@@ -813,11 +832,11 @@ namespace Monads.Internal
         internal static Monad<TAccumulate> FoldImpl<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Monad<TAccumulate>> accumulatorM)
+            Func<TAccumulate, TSource, Monad<TAccumulate>> accumulator)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
-            Require.NotNull(accumulatorM, nameof(accumulatorM));
+            Require.NotNull(accumulator, nameof(accumulator));
 
             Monad<TAccumulate> retval = Monad.Of(seed);
 
@@ -828,7 +847,7 @@ namespace Monads.Internal
                     return null;
                 }
 
-                retval = retval.Bind(_ => accumulatorM.Invoke(_, item));
+                retval = retval.Bind(_ => accumulator.Invoke(_, item));
             }
 
             return retval;
@@ -837,22 +856,22 @@ namespace Monads.Internal
         internal static Monad<TAccumulate> FoldBackImpl<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Monad<TAccumulate>> accumulatorM)
+            Func<TAccumulate, TSource, Monad<TAccumulate>> accumulator)
             /* T4: C# indent */
         {
             Demand.NotNull(@this);
-            Demand.NotNull(accumulatorM);
+            Demand.NotNull(accumulator);
 
-            return @this.Reverse().EmptyIfNull().Fold(seed, accumulatorM);
+            return @this.Reverse().EmptyIfNull().Fold(seed, accumulator);
         }
 
         internal static Monad<TSource> ReduceImpl<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Monad<TSource>> accumulatorM)
+            Func<TSource, TSource, Monad<TSource>> accumulator)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
-            Require.NotNull(accumulatorM, nameof(accumulatorM));
+            Require.NotNull(accumulator, nameof(accumulator));
 
             using (var iter = @this.GetEnumerator())
             {
@@ -870,7 +889,7 @@ namespace Monads.Internal
                         return null;
                     }
 
-                    retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
+                    retval = retval.Bind(_ => accumulator.Invoke(_, iter.Current));
                 }
 
                 return retval;
@@ -879,24 +898,24 @@ namespace Monads.Internal
 
         internal static Monad<TSource> ReduceBackImpl<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Monad<TSource>> accumulatorM)
+            Func<TSource, TSource, Monad<TSource>> accumulator)
             /* T4: C# indent */
         {
             Demand.NotNull(@this);
-            Demand.NotNull(accumulatorM);
+            Demand.NotNull(accumulator);
 
-            return @this.Reverse().EmptyIfNull().Reduce(accumulatorM);
+            return @this.Reverse().EmptyIfNull().Reduce(accumulator);
         }
 
         internal static Monad<TAccumulate> FoldImpl<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Monad<TAccumulate>> accumulatorM,
+            Func<TAccumulate, TSource, Monad<TAccumulate>> accumulator,
             Func<Monad<TAccumulate>, bool> predicate)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
-            Require.NotNull(accumulatorM, nameof(accumulatorM));
+            Require.NotNull(accumulator, nameof(accumulator));
             Require.NotNull(predicate, nameof(predicate));
 
             Monad<TAccumulate> retval = Monad.Of(seed);
@@ -910,7 +929,7 @@ namespace Monads.Internal
                         return null;
                     }
 
-                    retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
+                    retval = retval.Bind(_ => accumulator.Invoke(_, iter.Current));
                 }
             }
 
@@ -919,12 +938,12 @@ namespace Monads.Internal
 
         internal static Monad<TSource> ReduceImpl<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Monad<TSource>> accumulatorM,
+            Func<TSource, TSource, Monad<TSource>> accumulator,
             Func<Monad<TSource>, bool> predicate)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
-            Require.NotNull(accumulatorM, nameof(accumulatorM));
+            Require.NotNull(accumulator, nameof(accumulator));
             Require.NotNull(predicate, nameof(predicate));
 
             using (var iter = @this.GetEnumerator())
@@ -943,7 +962,7 @@ namespace Monads.Internal
                         return null;
                     }
 
-                    retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
+                    retval = retval.Bind(_ => accumulator.Invoke(_, iter.Current));
                 }
 
                 return retval;

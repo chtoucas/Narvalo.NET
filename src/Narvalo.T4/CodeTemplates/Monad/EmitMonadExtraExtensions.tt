@@ -2,12 +2,79 @@
 
 public partial class MonadTemplate
 {
-    protected void EmitMonadExtraExtensions()
+    protected void EmitMonadExtraExtensions(bool full)
     {
 #>
     // Provides more extension methods for <#= Name #><T>.
-    public static partial class <#= Name #>
+    public static partial class <#= Name #><#+ if (!full) { #><#="Extensions"#><#+ } #>
+
     {
+        #region Basic Monad functions (Prelude)
+
+        // Named "forever" in Haskell parlance.
+        public static <#= Name #><TResult> Forever<TSource, TResult>(
+            this <#= Name #><TSource> @this,
+            Func<<#= Name #><TResult>> thunk
+            )
+            <#+ WriteTypeConstraints("TSource", "TResult"); #>
+        {
+            <#+ WriteNotNull(); #>
+<#+ if (PostThenEnsuresSome) { #>
+            Warrant.NotNull<<#= Name #><TResult>>();
+<#+ } #>
+
+            return @this.Then(@this.Forever(thunk));
+        }
+
+        // Named "void" in Haskell parlance.
+<#+ if (!SuppressMessage) { #>
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
+<#+ } #>
+        public static <#= Name #><global::Narvalo.Fx.Unit> Forget<TSource>(this <#= Name #><TSource> @this)
+            <#+ WriteTypeConstraints("TSource"); #>
+        {
+            <#+ WriteNotNull(); #>
+<#+ if (IsNullable) { #>
+            Warrant.NotNull<<#= Name #><global::Narvalo.Fx.Unit>>();
+<#+ } #>
+
+            return <#= Name #>.Unit;
+        }
+
+        #endregion
+
+        #region Conditional execution of monadic expressions (Prelude)
+
+        // Named "when" in Haskell parlance. Haskell uses a different signature.
+        public static void When<TSource>(
+            this <#= Name #><TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            <#+ WriteTypeConstraints("TSource"); #>
+        {
+            <#+ WriteNotNull(); #>
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(_ => { if (predicate.Invoke(_)) { action.Invoke(_); } return <#= Name #>.Unit; });
+        }
+
+        // Named "unless" in Haskell parlance. Haskell uses a different signature.
+        public static void Unless<TSource>(
+            this <#= Name #><TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            <#+ WriteTypeConstraints("TSource"); #>
+        {
+            <#+ WriteNotNull(); #>
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(_ => { if (!predicate.Invoke(_)) { action.Invoke(_); } return <#= Name #>.Unit; });
+        }
+
+        #endregion
+
         #region Applicative
 
         // Named "<$" in Haskell parlance.
@@ -23,6 +90,21 @@ public partial class MonadTemplate
 
             return @this.Select(_ => value);
         }
+
+<#+ if (!HasTypeConstraints) { #>
+
+        // Named "<**>" in Haskell parlance.
+        public static <#= Name #><Tuple<TSource, TOther>> Merge<TSource, TOther>(
+            this <#= Name #><TSource> @this,
+            <#= Name #><TOther> other)
+            <#+ WriteTypeConstraints("TSource", "TOther"); #>
+        {
+            <#+ WriteNotNull(); #>
+
+            return @this.Zip(other, Tuple.Create);
+        }
+
+<#+ } // T4: End of !HasTypeConstraints. #>
 
         #endregion
 

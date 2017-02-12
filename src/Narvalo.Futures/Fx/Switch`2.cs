@@ -37,10 +37,10 @@ namespace Narvalo.Fx
         }
 
         // Bind to the left value.
-        public abstract Switch<TResult, TRight> Bind<TResult>(Func<TLeft, Switch<TResult, TRight>> leftSelectorM);
+        public abstract Switch<TResult, TRight> Bind<TResult>(Func<TLeft, Switch<TResult, TRight>> leftSelector);
 
         // Bind to the right value.
-        public abstract Switch<TLeft, TResult> Bind<TResult>(Func<TRight, Switch<TLeft, TResult>> rightSelectorM);
+        public abstract Switch<TLeft, TResult> Bind<TResult>(Func<TRight, Switch<TLeft, TResult>> rightSelector);
 
         // Map the left value.
         public abstract Switch<TResult, TRight> Select<TResult>(Func<TLeft, TResult> leftSelector);
@@ -72,10 +72,10 @@ namespace Narvalo.Fx
 
         private sealed class Empty_ : Switch<TLeft, TRight>, IEquatable<Empty_>
         {
-            public override Switch<TResult, TRight> Bind<TResult>(Func<TLeft, Switch<TResult, TRight>> leftSelectorM)
+            public override Switch<TResult, TRight> Bind<TResult>(Func<TLeft, Switch<TResult, TRight>> leftSelector)
                 => Switch<TResult, TRight>.Empty;
 
-            public override Switch<TLeft, TResult> Bind<TResult>(Func<TRight, Switch<TLeft, TResult>> rightSelectorM)
+            public override Switch<TLeft, TResult> Bind<TResult>(Func<TRight, Switch<TLeft, TResult>> rightSelector)
                 => Switch<TLeft, TResult>.Empty;
 
             public override Switch<TResult, TRight> Select<TResult>(Func<TLeft, TResult> leftSelector)
@@ -142,15 +142,15 @@ namespace Narvalo.Fx
             }
 
             /// <inheritdoc cref="Switch{TLeft, TRight}.Bind{TResult}(Func{TLeft, Switch{TResult, TRight}})" />
-            public override Switch<TResult, TRight> Bind<TResult>(Func<TLeft, Switch<TResult, TRight>> leftSelectorM)
+            public override Switch<TResult, TRight> Bind<TResult>(Func<TLeft, Switch<TResult, TRight>> leftSelector)
             {
-                Require.NotNull(leftSelectorM, nameof(leftSelectorM));
+                Require.NotNull(leftSelector, nameof(leftSelector));
 
-                return leftSelectorM.Invoke(_value);
+                return leftSelector.Invoke(_value);
             }
 
             /// <inheritdoc cref="Switch{TLeft, TRight}.Bind{TResult}(Func{TRight, Switch{TLeft, TResult}})" />
-            public override Switch<TLeft, TResult> Bind<TResult>(Func<TRight, Switch<TLeft, TResult>> rightSelectorM)
+            public override Switch<TLeft, TResult> Bind<TResult>(Func<TRight, Switch<TLeft, TResult>> rightSelector)
                 => new Switch<TLeft, TResult>.Left_(_value);
 
             /// <inheritdoc cref="Switch{TLeft, TRight}.Select{TResult}(Func{TLeft, TResult})" />
@@ -243,15 +243,15 @@ namespace Narvalo.Fx
             }
 
             /// <inheritdoc cref="Switch{TLeft, TRight}.Bind{TResult}(Func{TLeft, Switch{TResult, TRight}})" />
-            public override Switch<TResult, TRight> Bind<TResult>(Func<TLeft, Switch<TResult, TRight>> leftSelectorM)
+            public override Switch<TResult, TRight> Bind<TResult>(Func<TLeft, Switch<TResult, TRight>> leftSelector)
                 => new Switch<TResult, TRight>.Right_(_value);
 
             /// <inheritdoc cref="Switch{TLeft, TRight}.Bind{TResult}(Func{TRight, Switch{TLeft, TResult}})" />
-            public override Switch<TLeft, TResult> Bind<TResult>(Func<TRight, Switch<TLeft, TResult>> rightSelectorM)
+            public override Switch<TLeft, TResult> Bind<TResult>(Func<TRight, Switch<TLeft, TResult>> rightSelector)
             {
-                Require.NotNull(rightSelectorM, nameof(rightSelectorM));
+                Require.NotNull(rightSelector, nameof(rightSelector));
 
-                return rightSelectorM.Invoke(_value);
+                return rightSelector.Invoke(_value);
             }
 
             /// <inheritdoc cref="Switch{TLeft, TRight}.Select{TResult}(Func{TLeft, TResult})" />
@@ -388,16 +388,16 @@ namespace Narvalo.Fx
             Contract.Requires(otherwise != null);
         }
 
-        public override Switch<TResult, TRight> Bind<TResult>(Func<TLeft, Switch<TResult, TRight>> leftSelectorM)
+        public override Switch<TResult, TRight> Bind<TResult>(Func<TLeft, Switch<TResult, TRight>> leftSelector)
         {
-            Contract.Requires(leftSelectorM != null);
+            Contract.Requires(leftSelector != null);
 
             return default(Switch<TResult, TRight>);
         }
 
-        public override Switch<TLeft, TResult> Bind<TResult>(Func<TRight, Switch<TLeft, TResult>> rightSelectorM)
+        public override Switch<TLeft, TResult> Bind<TResult>(Func<TRight, Switch<TLeft, TResult>> rightSelector)
         {
-            Contract.Requires(rightSelectorM != null);
+            Contract.Requires(rightSelector != null);
 
             return default(Switch<TLeft, TResult>);
         }

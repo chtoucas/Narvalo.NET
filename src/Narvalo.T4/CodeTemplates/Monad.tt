@@ -58,12 +58,23 @@ namespace <#= Namespace #>
     EmitMonadExtensions();
     WriteLine();
 
-    EmitMonadExtraExtensions();
-    WriteLine();
-
     EmitKleisliExtensions(false);
 #>
 }
+
+namespace <#= Namespace #>.Extensions
+{
+    using System;
+<#+ if (!SuppressMessage) { #>
+    using System.Diagnostics.CodeAnalysis;
+<#+ } #>
+    using System.Linq;
+
+<#+
+    EmitMonadExtraExtensions(false);
+#>
+}
+
 <#+
     } // T4: End of EmitMonad().
 
@@ -97,7 +108,7 @@ namespace <#= Namespace #>
     EmitMonadExtensions();
     WriteLine();
 
-    EmitMonadExtraExtensions();
+    EmitMonadExtraExtensions(true);
     WriteLine();
 
     EmitKleisliExtensions(true);

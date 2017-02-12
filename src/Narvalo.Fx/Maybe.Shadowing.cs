@@ -161,13 +161,13 @@ namespace Narvalo.Fx.Linq
     {
         internal static Maybe<IEnumerable<TSource>> FilterImpl<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Maybe<bool>> predicateM)
+            Func<TSource, Maybe<bool>> predicate)
         {
             Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicateM, nameof(predicateM));
+            Require.NotNull(predicate, nameof(predicate));
             Warrant.NotNull<IEnumerable<TSource>>();
 
-            return Maybe.Of(WhereAnyIterator(@this, predicateM));
+            return Maybe.Of(WhereAnyIterator(@this, predicate));
         }
     }
 }

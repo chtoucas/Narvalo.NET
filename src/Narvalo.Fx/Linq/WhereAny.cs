@@ -9,37 +9,37 @@ namespace Narvalo.Fx.Linq
     {
         public static IEnumerable<TSource> WhereAny<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Maybe<bool>> predicateM)
+            Func<TSource, Maybe<bool>> predicate)
         {
             Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicateM, nameof(predicateM));
+            Require.NotNull(predicate, nameof(predicate));
             Warrant.NotNull<IEnumerable<TSource>>();
 
-            return WhereAnyIterator(@this, predicateM);
+            return WhereAnyIterator(@this, predicate);
         }
 
         public static IEnumerable<TSource> WhereAny<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Outcome<bool>> predicateM)
+            Func<TSource, Outcome<bool>> predicate)
         {
             Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicateM, nameof(predicateM));
+            Require.NotNull(predicate, nameof(predicate));
             Warrant.NotNull<IEnumerable<TSource>>();
 
-            return WhereAnyIterator(@this, predicateM);
+            return WhereAnyIterator(@this, predicate);
         }
 
         private static IEnumerable<TSource> WhereAnyIterator<TSource>(
             IEnumerable<TSource> source,
-            Func<TSource, Maybe<bool>> predicateM)
+            Func<TSource, Maybe<bool>> predicate)
         {
             Demand.NotNull(source);
-            Demand.NotNull(predicateM);
+            Demand.NotNull(predicate);
             Warrant.NotNull<IEnumerable<TSource>>();
 
             foreach (var item in source)
             {
-                var flg = predicateM.Invoke(item);
+                var flg = predicate.Invoke(item);
 
                 if (flg.IsSome && flg.Value)
                 {
@@ -50,15 +50,15 @@ namespace Narvalo.Fx.Linq
 
         private static IEnumerable<TSource> WhereAnyIterator<TSource>(
             IEnumerable<TSource> source,
-            Func<TSource, Outcome<bool>> predicateM)
+            Func<TSource, Outcome<bool>> predicate)
         {
             Demand.NotNull(source);
-            Demand.NotNull(predicateM);
+            Demand.NotNull(predicate);
             Warrant.NotNull<IEnumerable<TSource>>();
 
             foreach (var item in source)
             {
-                var flg = predicateM.Invoke(item);
+                var flg = predicate.Invoke(item);
 
                 if (flg.IsSuccess && flg.Value)
                 {

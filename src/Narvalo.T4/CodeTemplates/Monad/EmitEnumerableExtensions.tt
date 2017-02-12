@@ -6,7 +6,7 @@ public partial class MonadTemplate
     {
 #>
     // Provides extension methods for IEnumerable<T>.
-    // We do not use the standard LINQ names to avoid a confusing API (see ZipWithImpl()).
+    // We do not use the standard LINQ names to avoid a confusing API.
     // - Select    -> Map
     // - Where     -> Filter
     // - Zip       -> ZipWith
@@ -20,15 +20,15 @@ public partial class MonadTemplate
         // Named "mapM" in Haskell parlance.
         public static <#= Name #><IEnumerable<TResult>> Map<TSource, TResult>(
             this IEnumerable<TSource> @this,
-            Func<TSource, <#= Name #><TResult>> selectorM)
+            Func<TSource, <#= Name #><TResult>> selector)
         {
             Expect.NotNull(@this);
-            Expect.NotNull(selectorM);
+            Expect.NotNull(selector);
 <#+ if (IsNullable) { #>
             Warrant.NotNull<<#= Name #><IEnumerable<TResult>>>();
 <#+ } #>
 
-            return @this.MapImpl(selectorM);
+            return @this.MapImpl(selector);
         }
 
 <#+ } // T4: End of !HasTypeConstraints. #>
@@ -42,45 +42,45 @@ public partial class MonadTemplate
         // Named "filterM" in Haskell parlance.
         public static <#= Name #><IEnumerable<TSource>> Filter<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, <#= Name #><bool>> predicateM)
+            Func<TSource, <#= Name #><bool>> predicate)
             <#+ WriteTypeConstraints("TSource"); #>
         {
             Expect.NotNull(@this);
-            Expect.NotNull(predicateM);
+            Expect.NotNull(predicate);
             Warrant.NotNull<IEnumerable<TSource>>();
 
-            return @this.FilterImpl(predicateM);
+            return @this.FilterImpl(predicate);
         }
 
         // Named "mapAndUnzipM" in Haskell parlance.
         public static <#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
             MapUnzip<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
-            Func<TSource, <#= Name #><Tuple<TFirst, TSecond>>> funM)
+            Func<TSource, <#= Name #><Tuple<TFirst, TSecond>>> thunk)
         {
             Expect.NotNull(@this);
-            Expect.NotNull(funM);
+            Expect.NotNull(thunk);
 <#+ if (IsNullable && HasZero) { #>
             Warrant.NotNull<<#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>();
 <#+ } #>
 
-            return @this.MapUnzipImpl(funM);
+            return @this.MapUnzipImpl(thunk);
         }
 
         // Named "zipWithM" in Haskell parlance.
         public static <#= Name #><IEnumerable<TResult>> ZipWith<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
-            Func<TFirst, TSecond, <#= Name #><TResult>> resultSelectorM)
+            Func<TFirst, TSecond, <#= Name #><TResult>> resultSelector)
         {
             Expect.NotNull(@this);
             Expect.NotNull(second);
-            Expect.NotNull(resultSelectorM);
+            Expect.NotNull(resultSelector);
 <#+ if (IsNullable) { #>
             Warrant.NotNull<<#= Name #><IEnumerable<TResult>>>();
 <#+ } #>
 
-            return @this.ZipWithImpl(second, resultSelectorM);
+            return @this.ZipWithImpl(second, resultSelector);
         }
 
 <#+ } // T4: End of !HasTypeConstraints. #>
@@ -89,16 +89,16 @@ public partial class MonadTemplate
         public static <#= Name #><TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM)
+            Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulator)
             <#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
         {
             Expect.NotNull(@this);
-            Expect.NotNull(accumulatorM);
+            Expect.NotNull(accumulator);
 <#+ if (IsNullable && HasZero) { #>
             Warrant.NotNull<<#= Name #><TAccumulate>>();
 <#+ } #>
 
-            return @this.FoldImpl(seed, accumulatorM);
+            return @this.FoldImpl(seed, accumulator);
         }
 
         #endregion
@@ -108,44 +108,44 @@ public partial class MonadTemplate
         public static <#= Name #><TAccumulate> FoldBack<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM)
+            Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulator)
             <#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
         {
             Expect.NotNull(@this);
-            Expect.NotNull(accumulatorM);
+            Expect.NotNull(accumulator);
 <#+ if (IsNullable && HasZero) { #>
             Warrant.NotNull<<#= Name #><TAccumulate>>();
 <#+ } #>
 
-            return @this.FoldBackImpl(seed, accumulatorM);
+            return @this.FoldBackImpl(seed, accumulator);
         }
 
         public static <#= Name #><TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
+            Func<TSource, TSource, <#= Name #><TSource>> accumulator)
             <#+ WriteTypeConstraints("TSource"); #>
         {
             Expect.NotNull(@this);
-            Expect.NotNull(accumulatorM);
+            Expect.NotNull(accumulator);
 <#+ if (IsNullable && HasZero) { #>
             Warrant.NotNull<<#= Name #><TSource>>();
 <#+ } #>
 
-            return @this.ReduceImpl(accumulatorM);
+            return @this.ReduceImpl(accumulator);
         }
 
         public static <#= Name #><TSource> ReduceBack<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
+            Func<TSource, TSource, <#= Name #><TSource>> accumulator)
             <#+ WriteTypeConstraints("TSource"); #>
         {
             Expect.NotNull(@this);
-            Expect.NotNull(accumulatorM);
+            Expect.NotNull(accumulator);
 <#+ if (IsNullable && HasZero) { #>
             Warrant.NotNull<<#= Name #><TSource>>();
 <#+ } #>
 
-            return @this.ReduceBackImpl(accumulatorM);
+            return @this.ReduceBackImpl(accumulator);
         }
 
         #endregion
@@ -156,35 +156,35 @@ public partial class MonadTemplate
         public static <#= Name #><TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM,
+            Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulator,
             Func<<#= Name #><TAccumulate>, bool> predicate)
             <#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
         {
             Expect.NotNull(@this);
-            Expect.NotNull(accumulatorM);
+            Expect.NotNull(accumulator);
             Expect.NotNull(predicate);
 <#+ if (IsNullable && HasZero) { #>
             Warrant.NotNull<<#= Name #><TAccumulate>>();
 <#+ } #>
 
-            return @this.FoldImpl(seed, accumulatorM, predicate);
+            return @this.FoldImpl(seed, accumulator, predicate);
         }
 
         // Haskell uses a different signature.
         public static <#= Name #><TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, <#= Name #><TSource>> accumulatorM,
+            Func<TSource, TSource, <#= Name #><TSource>> accumulator,
             Func<<#= Name #><TSource>, bool> predicate)
             <#+ WriteTypeConstraints("TSource"); #>
         {
             Expect.NotNull(@this);
-            Expect.NotNull(accumulatorM);
+            Expect.NotNull(accumulator);
             Expect.NotNull(predicate);
 <#+ if (IsNullable && HasZero) { #>
             Warrant.NotNull<<#= Name #><TSource>>();
 <#+ } #>
 
-            return @this.ReduceImpl(accumulatorM, predicate);
+            return @this.ReduceImpl(accumulator, predicate);
         }
 
         #endregion

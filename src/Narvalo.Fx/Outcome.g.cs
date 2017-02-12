@@ -80,34 +80,6 @@ namespace Narvalo.Fx
         #region Conditional execution of monadic expressions (Prelude)
 
 
-        // Named "when" in Haskell parlance. Haskell uses a different signature.
-        public static void When<TSource>(
-            this Outcome<TSource> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(_ => { if (predicate.Invoke(_)) { action.Invoke(_); } return Outcome.Unit; });
-        }
-
-        // Named "unless" in Haskell parlance. Haskell uses a different signature.
-        public static void Unless<TSource>(
-            this Outcome<TSource> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(_ => { if (!predicate.Invoke(_)) { action.Invoke(_); } return Outcome.Unit; });
-        }
-
         #endregion
 
         #region Monadic lifting operators (Prelude)
@@ -117,7 +89,7 @@ namespace Narvalo.Fx
         /// </summary>
         // Named "liftM" in Haskell parlance.
         public static Func<Outcome<T>, Outcome<TResult>> Lift<T, TResult>(
-            Func<T, TResult> fun)
+            Func<T, TResult> thunk)
             /* T4: C# indent */
         {
             Warrant.NotNull<Func<Outcome<T>, Outcome<TResult>>>();
@@ -125,7 +97,7 @@ namespace Narvalo.Fx
             return m =>
             {
                 Require.NotNull(m, nameof(m));
-                return m.Select(fun);
+                return m.Select(thunk);
             };
         }
 
@@ -135,7 +107,7 @@ namespace Narvalo.Fx
         /// </summary>
         // Named "liftM2" in Haskell parlance.
         public static Func<Outcome<T1>, Outcome<T2>, Outcome<TResult>>
-            Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
+            Lift<T1, T2, TResult>(Func<T1, T2, TResult> thunk)
             /* T4: C# indent */
         {
             Warrant.NotNull<Func<Outcome<T1>, Outcome<T2>, Outcome<TResult>>>();
@@ -143,7 +115,7 @@ namespace Narvalo.Fx
             return (m1, m2) =>
             {
                 Require.NotNull(m1, nameof(m1));
-                return m1.Zip(m2, fun);
+                return m1.Zip(m2, thunk);
             };
         }
 
@@ -153,7 +125,7 @@ namespace Narvalo.Fx
         /// </summary>
         // Named "liftM3" in Haskell parlance.
         public static Func<Outcome<T1>, Outcome<T2>, Outcome<T3>, Outcome<TResult>>
-            Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
+            Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> thunk)
             /* T4: C# indent */
         {
             Warrant.NotNull<Func<Outcome<T1>, Outcome<T2>, Outcome<T3>, Outcome<TResult>>>();
@@ -161,7 +133,7 @@ namespace Narvalo.Fx
             return (m1, m2, m3) =>
             {
                 Require.NotNull(m1, nameof(m1));
-                return m1.Zip(m2, m3, fun);
+                return m1.Zip(m2, m3, thunk);
             };
         }
 
@@ -172,7 +144,7 @@ namespace Narvalo.Fx
         // Named "liftM4" in Haskell parlance.
         public static Func<Outcome<T1>, Outcome<T2>, Outcome<T3>, Outcome<T4>, Outcome<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
-            Func<T1, T2, T3, T4, TResult> fun)
+            Func<T1, T2, T3, T4, TResult> thunk)
             /* T4: C# indent */
         {
             Warrant.NotNull<Func<Outcome<T1>, Outcome<T2>, Outcome<T3>, Outcome<T4>, Outcome<TResult>>>();
@@ -180,7 +152,7 @@ namespace Narvalo.Fx
             return (m1, m2, m3, m4) =>
             {
                 Require.NotNull(m1, nameof(m1));
-                return m1.Zip(m2, m3, m4, fun);
+                return m1.Zip(m2, m3, m4, thunk);
             };
         }
 
@@ -191,7 +163,7 @@ namespace Narvalo.Fx
         // Named "liftM5" in Haskell parlance.
         public static Func<Outcome<T1>, Outcome<T2>, Outcome<T3>, Outcome<T4>, Outcome<T5>, Outcome<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
-            Func<T1, T2, T3, T4, T5, TResult> fun)
+            Func<T1, T2, T3, T4, T5, TResult> thunk)
             /* T4: C# indent */
         {
             Warrant.NotNull<Func<Outcome<T1>, Outcome<T2>, Outcome<T3>, Outcome<T4>, Outcome<T5>, Outcome<TResult>>>();
@@ -199,7 +171,7 @@ namespace Narvalo.Fx
             return (m1, m2, m3, m4, m5) =>
             {
                 Require.NotNull(m1, nameof(m1));
-                return m1.Zip(m2, m3, m4, m5, fun);
+                return m1.Zip(m2, m3, m4, m5, thunk);
             };
         }
 
@@ -232,29 +204,6 @@ namespace Narvalo.Fx
             Require.NotNull(@this, nameof(@this));
 
             return @this.Bind(_ => other);
-        }
-
-        // Named "forever" in Haskell parlance.
-        public static Outcome<TResult> Forever<TSource, TResult>(
-            this Outcome<TSource> @this,
-            Func<Outcome<TResult>> fun
-            )
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-
-            return @this.Then(@this.Forever(fun));
-        }
-
-        // Named "void" in Haskell parlance.
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
-        public static Outcome<global::Narvalo.Fx.Unit> Forget<TSource>(this Outcome<TSource> @this)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Warrant.NotNull<Outcome<global::Narvalo.Fx.Unit>>();
-
-            return Outcome.Unit;
         }
 
         #endregion
@@ -370,16 +319,16 @@ namespace Narvalo.Fx
         /// </remarks>
         public static Outcome<TResult> SelectMany<TSource, TMiddle, TResult>(
             this Outcome<TSource> @this,
-            Func<TSource, Outcome<TMiddle>> valueSelectorM,
+            Func<TSource, Outcome<TMiddle>> valueSelector,
             Func<TSource, TMiddle, TResult> resultSelector)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
-            Require.NotNull(valueSelectorM, nameof(valueSelectorM));
+            Require.NotNull(valueSelector, nameof(valueSelector));
             Require.NotNull(resultSelector, nameof(resultSelector));
 
             return @this.Bind(
-                _ => valueSelectorM.Invoke(_).Select(
+                _ => valueSelector.Invoke(_).Select(
                     middle => resultSelector.Invoke(_, middle)));
         }
 
@@ -395,6 +344,65 @@ namespace Narvalo.Fx
     // Provides more extension methods for Outcome<T>.
     public static partial class Outcome
     {
+        #region Basic Monad functions (Prelude)
+
+        // Named "forever" in Haskell parlance.
+        public static Outcome<TResult> Forever<TSource, TResult>(
+            this Outcome<TSource> @this,
+            Func<Outcome<TResult>> thunk
+            )
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+
+            return @this.Then(@this.Forever(thunk));
+        }
+
+        // Named "void" in Haskell parlance.
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
+        public static Outcome<global::Narvalo.Fx.Unit> Forget<TSource>(this Outcome<TSource> @this)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Warrant.NotNull<Outcome<global::Narvalo.Fx.Unit>>();
+
+            return Outcome.Unit;
+        }
+
+        #endregion
+
+        #region Conditional execution of monadic expressions (Prelude)
+
+        // Named "when" in Haskell parlance. Haskell uses a different signature.
+        public static void When<TSource>(
+            this Outcome<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(_ => { if (predicate.Invoke(_)) { action.Invoke(_); } return Outcome.Unit; });
+        }
+
+        // Named "unless" in Haskell parlance. Haskell uses a different signature.
+        public static void Unless<TSource>(
+            this Outcome<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(_ => { if (!predicate.Invoke(_)) { action.Invoke(_); } return Outcome.Unit; });
+        }
+
+        #endregion
+
         #region Applicative
 
         // Named "<$" in Haskell parlance.
@@ -407,6 +415,19 @@ namespace Narvalo.Fx
 
             return @this.Select(_ => value);
         }
+
+
+        // Named "<**>" in Haskell parlance.
+        public static Outcome<Tuple<TSource, TOther>> Merge<TSource, TOther>(
+            this Outcome<TSource> @this,
+            Outcome<TOther> other)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+
+            return @this.Zip(other, Tuple.Create);
+        }
+
 
         #endregion
 
@@ -469,27 +490,27 @@ namespace Narvalo.Fx
         // Named ">=>" in Haskell parlance.
         public static Func<TSource, Outcome<TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, Outcome<TMiddle>> @this,
-            Func<TMiddle, Outcome<TResult>> funM)
+            Func<TMiddle, Outcome<TResult>> thunk)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
-            Expect.NotNull(funM);
+            Expect.NotNull(thunk);
             Warrant.NotNull<Func<TSource, Outcome<TResult>>>();
 
-            return _ => @this.Invoke(_).Bind(funM);
+            return _ => @this.Invoke(_).Bind(thunk);
         }
 
         // Named "<=<" in Haskell parlance.
         public static Func<TSource, Outcome<TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, Outcome<TResult>> @this,
-            Func<TSource, Outcome<TMiddle>> funM)
+            Func<TSource, Outcome<TMiddle>> thunk)
             /* T4: C# indent */
         {
             Expect.NotNull(@this);
-            Require.NotNull(funM, nameof(funM));
+            Require.NotNull(thunk, nameof(thunk));
             Warrant.NotNull<Func<TSource, Outcome<TResult>>>();
 
-            return _ => funM.Invoke(_).Bind(@this);
+            return _ => thunk.Invoke(_).Bind(@this);
         }
 
         #endregion
@@ -533,7 +554,7 @@ namespace Narvalo.Fx.Linq
     using Narvalo.Fx.Internal;
 
     // Provides extension methods for IEnumerable<T>.
-    // We do not use the standard LINQ names to avoid a confusing API (see ZipWithImpl()).
+    // We do not use the standard LINQ names to avoid a confusing API.
     // - Select    -> Map
     // - Where     -> Filter
     // - Zip       -> ZipWith
@@ -546,13 +567,13 @@ namespace Narvalo.Fx.Linq
         // Named "mapM" in Haskell parlance.
         public static Outcome<IEnumerable<TResult>> Map<TSource, TResult>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Outcome<TResult>> selectorM)
+            Func<TSource, Outcome<TResult>> selector)
         {
             Expect.NotNull(@this);
-            Expect.NotNull(selectorM);
+            Expect.NotNull(selector);
             Warrant.NotNull<Outcome<IEnumerable<TResult>>>();
 
-            return @this.MapImpl(selectorM);
+            return @this.MapImpl(selector);
         }
 
 
@@ -564,40 +585,40 @@ namespace Narvalo.Fx.Linq
         // Named "filterM" in Haskell parlance.
         public static Outcome<IEnumerable<TSource>> Filter<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Outcome<bool>> predicateM)
+            Func<TSource, Outcome<bool>> predicate)
             /* T4: C# indent */
         {
             Expect.NotNull(@this);
-            Expect.NotNull(predicateM);
+            Expect.NotNull(predicate);
             Warrant.NotNull<IEnumerable<TSource>>();
 
-            return @this.FilterImpl(predicateM);
+            return @this.FilterImpl(predicate);
         }
 
         // Named "mapAndUnzipM" in Haskell parlance.
         public static Outcome<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
             MapUnzip<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Outcome<Tuple<TFirst, TSecond>>> funM)
+            Func<TSource, Outcome<Tuple<TFirst, TSecond>>> thunk)
         {
             Expect.NotNull(@this);
-            Expect.NotNull(funM);
+            Expect.NotNull(thunk);
 
-            return @this.MapUnzipImpl(funM);
+            return @this.MapUnzipImpl(thunk);
         }
 
         // Named "zipWithM" in Haskell parlance.
         public static Outcome<IEnumerable<TResult>> ZipWith<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
-            Func<TFirst, TSecond, Outcome<TResult>> resultSelectorM)
+            Func<TFirst, TSecond, Outcome<TResult>> resultSelector)
         {
             Expect.NotNull(@this);
             Expect.NotNull(second);
-            Expect.NotNull(resultSelectorM);
+            Expect.NotNull(resultSelector);
             Warrant.NotNull<Outcome<IEnumerable<TResult>>>();
 
-            return @this.ZipWithImpl(second, resultSelectorM);
+            return @this.ZipWithImpl(second, resultSelector);
         }
 
 
@@ -605,13 +626,13 @@ namespace Narvalo.Fx.Linq
         public static Outcome<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Outcome<TAccumulate>> accumulatorM)
+            Func<TAccumulate, TSource, Outcome<TAccumulate>> accumulator)
             /* T4: C# indent */
         {
             Expect.NotNull(@this);
-            Expect.NotNull(accumulatorM);
+            Expect.NotNull(accumulator);
 
-            return @this.FoldImpl(seed, accumulatorM);
+            return @this.FoldImpl(seed, accumulator);
         }
 
         #endregion
@@ -621,35 +642,35 @@ namespace Narvalo.Fx.Linq
         public static Outcome<TAccumulate> FoldBack<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Outcome<TAccumulate>> accumulatorM)
+            Func<TAccumulate, TSource, Outcome<TAccumulate>> accumulator)
             /* T4: C# indent */
         {
             Expect.NotNull(@this);
-            Expect.NotNull(accumulatorM);
+            Expect.NotNull(accumulator);
 
-            return @this.FoldBackImpl(seed, accumulatorM);
+            return @this.FoldBackImpl(seed, accumulator);
         }
 
         public static Outcome<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Outcome<TSource>> accumulatorM)
+            Func<TSource, TSource, Outcome<TSource>> accumulator)
             /* T4: C# indent */
         {
             Expect.NotNull(@this);
-            Expect.NotNull(accumulatorM);
+            Expect.NotNull(accumulator);
 
-            return @this.ReduceImpl(accumulatorM);
+            return @this.ReduceImpl(accumulator);
         }
 
         public static Outcome<TSource> ReduceBack<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Outcome<TSource>> accumulatorM)
+            Func<TSource, TSource, Outcome<TSource>> accumulator)
             /* T4: C# indent */
         {
             Expect.NotNull(@this);
-            Expect.NotNull(accumulatorM);
+            Expect.NotNull(accumulator);
 
-            return @this.ReduceBackImpl(accumulatorM);
+            return @this.ReduceBackImpl(accumulator);
         }
 
         #endregion
@@ -660,29 +681,29 @@ namespace Narvalo.Fx.Linq
         public static Outcome<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Outcome<TAccumulate>> accumulatorM,
+            Func<TAccumulate, TSource, Outcome<TAccumulate>> accumulator,
             Func<Outcome<TAccumulate>, bool> predicate)
             /* T4: C# indent */
         {
             Expect.NotNull(@this);
-            Expect.NotNull(accumulatorM);
+            Expect.NotNull(accumulator);
             Expect.NotNull(predicate);
 
-            return @this.FoldImpl(seed, accumulatorM, predicate);
+            return @this.FoldImpl(seed, accumulator, predicate);
         }
 
         // Haskell uses a different signature.
         public static Outcome<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Outcome<TSource>> accumulatorM,
+            Func<TSource, TSource, Outcome<TSource>> accumulator,
             Func<Outcome<TSource>, bool> predicate)
             /* T4: C# indent */
         {
             Expect.NotNull(@this);
-            Expect.NotNull(accumulatorM);
+            Expect.NotNull(accumulator);
             Expect.NotNull(predicate);
 
-            return @this.ReduceImpl(accumulatorM, predicate);
+            return @this.ReduceImpl(accumulator, predicate);
         }
 
         #endregion
@@ -744,47 +765,47 @@ namespace Narvalo.Fx.Internal
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Outcome<IEnumerable<TResult>> MapImpl<TSource, TResult>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Outcome<TResult>> selectorM)
+            Func<TSource, Outcome<TResult>> selector)
         {
             Demand.NotNull(@this);
-            Demand.NotNull(selectorM);
+            Demand.NotNull(selector);
             Warrant.NotNull<Outcome<IEnumerable<TResult>>>();
 
-            return @this.Select(selectorM).EmptyIfNull().Collect();
+            return @this.Select(selector).EmptyIfNull().Collect();
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Outcome<IEnumerable<TSource>> FilterImpl<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Outcome<bool>> predicateM)
+            Func<TSource, Outcome<bool>> predicate)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicateM, nameof(predicateM));
+            Require.NotNull(predicate, nameof(predicate));
             Warrant.NotNull<IEnumerable<TSource>>();
 
             Func<bool, IEnumerable<TSource>, TSource, IEnumerable<TSource>> selector
                 = (flg, list, item) => { if (flg) { return list.Prepend(item); } else { return list; } };
 
-            Func<Outcome<IEnumerable<TSource>>, TSource, Outcome<IEnumerable<TSource>>> accumulatorM
-                = (mlist, item) => predicateM.Invoke(item).Zip(mlist, (flg, list) => selector.Invoke(flg, list, item));
+            Func<Outcome<IEnumerable<TSource>>, TSource, Outcome<IEnumerable<TSource>>> accumulator
+                = (mlist, item) => predicate.Invoke(item).Zip(mlist, (flg, list) => selector.Invoke(flg, list, item));
 
             var seed = Outcome.Success(Enumerable.Empty<TSource>());
 
             // REVIEW: Aggregate?
-            return @this.AggregateBack(seed, accumulatorM);
+            return @this.AggregateBack(seed, accumulator);
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Outcome<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
             MapUnzipImpl<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Outcome<Tuple<TFirst, TSecond>>> selectorM)
+            Func<TSource, Outcome<Tuple<TFirst, TSecond>>> selector)
         {
             Demand.NotNull(@this);
-            Demand.NotNull(selectorM);
+            Demand.NotNull(selector);
 
-            return @this.Map(selectorM).Select(
+            return @this.Map(selector).Select(
                 tuples =>
                 {
                     IEnumerable<TFirst> list1 = tuples.Select(_ => _.Item1);
@@ -798,20 +819,18 @@ namespace Narvalo.Fx.Internal
         internal static Outcome<IEnumerable<TResult>> ZipWithImpl<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
-            Func<TFirst, TSecond, Outcome<TResult>> resultSelectorM)
+            Func<TFirst, TSecond, Outcome<TResult>> resultSelector)
         {
-            Require.NotNull(resultSelectorM, nameof(resultSelectorM));
+            Require.NotNull(resultSelector, nameof(resultSelector));
 
             Demand.NotNull(@this);
             Demand.NotNull(second);
             Warrant.NotNull<Outcome<IEnumerable<TResult>>>();
 
-            Func<TFirst, TSecond, Outcome<TResult>> resultSelector
-                = (v1, v2) => resultSelectorM.Invoke(v1, v2);
+            Func<TFirst, TSecond, Outcome<TResult>> selector
+                = (v1, v2) => resultSelector.Invoke(v1, v2);
 
-            // WARNING: Do not remove "resultSelector", otherwise .NET will make a recursive call
-            // instead of using the Zip from LINQ. (no longer necessary since we renamed Zip to ZipWith).
-            IEnumerable<Outcome<TResult>> seq = @this.Zip(second, resultSelector);
+            IEnumerable<Outcome<TResult>> seq = @this.Zip(second, selector);
 
             return seq.EmptyIfNull().Collect();
         }
@@ -820,11 +839,11 @@ namespace Narvalo.Fx.Internal
         internal static Outcome<TAccumulate> FoldImpl<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Outcome<TAccumulate>> accumulatorM)
+            Func<TAccumulate, TSource, Outcome<TAccumulate>> accumulator)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
-            Require.NotNull(accumulatorM, nameof(accumulatorM));
+            Require.NotNull(accumulator, nameof(accumulator));
 
             Outcome<TAccumulate> retval = Outcome.Success(seed);
 
@@ -835,7 +854,7 @@ namespace Narvalo.Fx.Internal
                     return null;
                 }
 
-                retval = retval.Bind(_ => accumulatorM.Invoke(_, item));
+                retval = retval.Bind(_ => accumulator.Invoke(_, item));
             }
 
             return retval;
@@ -845,23 +864,23 @@ namespace Narvalo.Fx.Internal
         internal static Outcome<TAccumulate> FoldBackImpl<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Outcome<TAccumulate>> accumulatorM)
+            Func<TAccumulate, TSource, Outcome<TAccumulate>> accumulator)
             /* T4: C# indent */
         {
             Demand.NotNull(@this);
-            Demand.NotNull(accumulatorM);
+            Demand.NotNull(accumulator);
 
-            return @this.Reverse().EmptyIfNull().Fold(seed, accumulatorM);
+            return @this.Reverse().EmptyIfNull().Fold(seed, accumulator);
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Outcome<TSource> ReduceImpl<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Outcome<TSource>> accumulatorM)
+            Func<TSource, TSource, Outcome<TSource>> accumulator)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
-            Require.NotNull(accumulatorM, nameof(accumulatorM));
+            Require.NotNull(accumulator, nameof(accumulator));
 
             using (var iter = @this.GetEnumerator())
             {
@@ -879,7 +898,7 @@ namespace Narvalo.Fx.Internal
                         return null;
                     }
 
-                    retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
+                    retval = retval.Bind(_ => accumulator.Invoke(_, iter.Current));
                 }
 
                 return retval;
@@ -889,25 +908,25 @@ namespace Narvalo.Fx.Internal
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Outcome<TSource> ReduceBackImpl<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Outcome<TSource>> accumulatorM)
+            Func<TSource, TSource, Outcome<TSource>> accumulator)
             /* T4: C# indent */
         {
             Demand.NotNull(@this);
-            Demand.NotNull(accumulatorM);
+            Demand.NotNull(accumulator);
 
-            return @this.Reverse().EmptyIfNull().Reduce(accumulatorM);
+            return @this.Reverse().EmptyIfNull().Reduce(accumulator);
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Outcome<TAccumulate> FoldImpl<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Outcome<TAccumulate>> accumulatorM,
+            Func<TAccumulate, TSource, Outcome<TAccumulate>> accumulator,
             Func<Outcome<TAccumulate>, bool> predicate)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
-            Require.NotNull(accumulatorM, nameof(accumulatorM));
+            Require.NotNull(accumulator, nameof(accumulator));
             Require.NotNull(predicate, nameof(predicate));
 
             Outcome<TAccumulate> retval = Outcome.Success(seed);
@@ -921,7 +940,7 @@ namespace Narvalo.Fx.Internal
                         return null;
                     }
 
-                    retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
+                    retval = retval.Bind(_ => accumulator.Invoke(_, iter.Current));
                 }
             }
 
@@ -931,12 +950,12 @@ namespace Narvalo.Fx.Internal
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Outcome<TSource> ReduceImpl<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Outcome<TSource>> accumulatorM,
+            Func<TSource, TSource, Outcome<TSource>> accumulator,
             Func<Outcome<TSource>, bool> predicate)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
-            Require.NotNull(accumulatorM, nameof(accumulatorM));
+            Require.NotNull(accumulator, nameof(accumulator));
             Require.NotNull(predicate, nameof(predicate));
 
             using (var iter = @this.GetEnumerator())
@@ -955,7 +974,7 @@ namespace Narvalo.Fx.Internal
                         return null;
                     }
 
-                    retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
+                    retval = retval.Bind(_ => accumulator.Invoke(_, iter.Current));
                 }
 
                 return retval;

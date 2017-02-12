@@ -118,7 +118,7 @@ namespace Narvalo.Fx
         internal abstract ExceptionDispatchInfo ExceptionInfo { get; }
 
         // Core monad Bind method.
-        public abstract Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selectorM);
+        public abstract Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector);
 
         // Overrides the 'Select' auto-generated (extension) method (see Outcome.g.cs).
         // Since Select is a building block, we override it in Failure_ and Success_.
@@ -161,11 +161,11 @@ namespace Narvalo.Fx
                 get { throw new InvalidOperationException("XXX"); }
             }
 
-            public override Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selectorM)
+            public override Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector)
             {
-                Require.NotNull(selectorM, nameof(selectorM));
+                Require.NotNull(selector, nameof(selector));
 
-                return selectorM.Invoke(Value);
+                return selector.Invoke(Value);
             }
 
             public override Outcome<TResult> Select<TResult>(Func<T, TResult> selector)
@@ -257,7 +257,7 @@ namespace Narvalo.Fx
                 }
             }
 
-            public override Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selectorM)
+            public override Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector)
                 => Outcome<TResult>.η(ExceptionInfo);
 
             public override Outcome<TResult> Select<TResult>(Func<T, TResult> selector)

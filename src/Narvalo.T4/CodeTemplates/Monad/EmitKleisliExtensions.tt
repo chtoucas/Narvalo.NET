@@ -46,27 +46,27 @@ public partial class MonadTemplate
         // Named ">=>" in Haskell parlance.
         public static Func<TSource, <#= Name #><TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, <#= Name #><TMiddle>> @this,
-            Func<TMiddle, <#= Name #><TResult>> funM)
+            Func<TMiddle, <#= Name #><TResult>> thunk)
             <#+ WriteTypeConstraints("TSource", "TMiddle", "TResult"); #>
         {
             <#+ WriteNotNull(true); #>
-            Expect.NotNull(funM);
+            Expect.NotNull(thunk);
             Warrant.NotNull<Func<TSource, <#= Name #><TResult>>>();
 
-            return _ => @this.Invoke(_).Bind(funM);
+            return _ => @this.Invoke(_).Bind(thunk);
         }
 
         // Named "<=<" in Haskell parlance.
         public static Func<TSource, <#= Name #><TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, <#= Name #><TResult>> @this,
-            Func<TSource, <#= Name #><TMiddle>> funM)
+            Func<TSource, <#= Name #><TMiddle>> thunk)
             <#+ WriteTypeConstraints("TSource", "TMiddle", "TResult"); #>
         {
             Expect.NotNull(@this);
-            Require.NotNull(funM, nameof(funM));
+            Require.NotNull(thunk, nameof(thunk));
             Warrant.NotNull<Func<TSource, <#= Name #><TResult>>>();
 
-            return _ => funM.Invoke(_).Bind(@this);
+            return _ => thunk.Invoke(_).Bind(@this);
         }
 
         #endregion

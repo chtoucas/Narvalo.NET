@@ -83,9 +83,10 @@
     <Compile Include="Maybe.Shadowing.cs" />
     <Compile Include="Nullable.cs" />
     <Compile Include="Outcome.Shadowing.cs" />
-    <Compile Include="VoidOrError.cs" />
-    <Compile Include="VoidOrError.g.cs">
-      <DependentUpon>VoidOrError.tt</DependentUpon>
+    <Compile Include="TryInvoke.cs" />
+    <Compile Include="VoidOr.cs" />
+    <Compile Include="VoidOr.g.cs">
+      <DependentUpon>VoidOr.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -122,7 +123,8 @@
       <DependentUpon>Strings.fr.resx</DependentUpon>
     </Compile>
     <Compile Include="Unit.cs" />
-    <Compile Include="VoidOrError`1.cs" />
+    <Compile Include="VoidOrError.cs" />
+    <Compile Include="VoidOr`1.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml" />
@@ -147,10 +149,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="VoidOrError.tt">
+    <None Include="VoidOr.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>VoidOrError.g.cs</LastGenOutput>
+      <LastGenOutput>VoidOr.g.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Extensions\" />
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
