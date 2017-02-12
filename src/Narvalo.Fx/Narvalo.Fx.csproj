@@ -83,7 +83,6 @@
     <Compile Include="Maybe.Shadowing.cs" />
     <Compile Include="Nullable.cs" />
     <Compile Include="Outcome.Shadowing.cs" />
-    <Compile Include="TryInvoke.cs" />
     <Compile Include="VoidOr.cs" />
     <Compile Include="VoidOr.g.cs">
       <DependentUpon>VoidOr.tt</DependentUpon>

@@ -3,6 +3,8 @@
 namespace Narvalo.Fx
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Runtime.ExceptionServices;
 
     public static partial class Func
     {
@@ -19,5 +21,303 @@ namespace Narvalo.Fx
 
             return square.Invoke();
         }
+
+        #region Invoke Action.
+
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
+        public static VoidOrError Invoke<TException>(Action action) where TException : Exception
+        {
+            Require.NotNull(action, nameof(action));
+            Warrant.NotNull<VoidOrError>();
+
+            try
+            {
+                action.Invoke();
+
+                return VoidOrError.Void;
+            }
+            catch (TException ex)
+            {
+                var edi = ExceptionDispatchInfo.Capture(ex);
+
+                return VoidOrError.Error(edi);
+            }
+        }
+
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
+        public static VoidOrError Invoke<T1Exception, T2Exception>(Action action)
+            where T1Exception : Exception
+            where T2Exception : Exception
+        {
+            Require.NotNull(action, nameof(action));
+            Warrant.NotNull<VoidOrError>();
+
+            ExceptionDispatchInfo edi;
+
+            try
+            {
+                action.Invoke();
+
+                return VoidOrError.Void;
+            }
+            catch (T1Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
+            catch (T2Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
+
+            return VoidOrError.Error(edi);
+        }
+
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
+        public static VoidOrError Invoke<T1Exception, T2Exception, T3Exception>(Action action)
+            where T1Exception : Exception
+            where T2Exception : Exception
+            where T3Exception : Exception
+        {
+            Require.NotNull(action, nameof(action));
+            Warrant.NotNull<VoidOrError>();
+
+            ExceptionDispatchInfo edi;
+
+            try
+            {
+                action.Invoke();
+
+                return VoidOrError.Void;
+            }
+            catch (T1Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
+            catch (T2Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
+            catch (T3Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
+
+            return VoidOrError.Error(edi);
+        }
+
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
+        public static VoidOrError Invoke<T1Exception, T2Exception, T3Exception, T4Exception>(Action action)
+            where T1Exception : Exception
+            where T2Exception : Exception
+            where T3Exception : Exception
+            where T4Exception : Exception
+        {
+            Require.NotNull(action, nameof(action));
+            Warrant.NotNull<VoidOrError>();
+
+            ExceptionDispatchInfo edi;
+
+            try
+            {
+                action.Invoke();
+
+                return VoidOrError.Void;
+            }
+            catch (T1Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
+            catch (T2Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
+            catch (T3Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
+            catch (T4Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
+
+            return VoidOrError.Error(edi);
+        }
+
+        #endregion
+
+        #region Invoke Func<T>.
+
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
+        public static Outcome<TResult> Invoke<TResult, TException>(Func<TResult> thunk) where TException : Exception
+        {
+            Require.NotNull(thunk, nameof(thunk));
+            Warrant.NotNull<Outcome<TResult>>();
+
+            try
+            {
+                TResult result = thunk.Invoke();
+
+                return Outcome.Success(result);
+            }
+            catch (TException ex)
+            {
+                var edi = ExceptionDispatchInfo.Capture(ex);
+
+                return Outcome.Failure<TResult>(edi);
+            }
+        }
+
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
+        public static Outcome<TResult> Invoke<TResult, T1Exception, T2Exception>(Func<TResult> thunk)
+            where T1Exception : Exception
+            where T2Exception : Exception
+        {
+            Require.NotNull(thunk, nameof(thunk));
+            Warrant.NotNull<Outcome<TResult>>();
+
+            ExceptionDispatchInfo edi;
+
+            try
+            {
+                TResult result = thunk.Invoke();
+
+                return Outcome.Success(result);
+            }
+            catch (T1Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
+            catch (T2Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
+
+            return Outcome.Failure<TResult>(edi);
+        }
+
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
+        public static Outcome<TResult> Invoke<TResult, T1Exception, T2Exception, T3Exception>(Func<TResult> thunk)
+            where T1Exception : Exception
+            where T2Exception : Exception
+            where T3Exception : Exception
+        {
+            Require.NotNull(thunk, nameof(thunk));
+            Warrant.NotNull<Outcome<TResult>>();
+
+            ExceptionDispatchInfo edi;
+
+            try
+            {
+                TResult result = thunk.Invoke();
+
+                return Outcome.Success(result);
+            }
+            catch (T1Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
+            catch (T2Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
+            catch (T3Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
+
+            return Outcome.Failure<TResult>(edi);
+        }
+
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
+        public static Outcome<TResult> Invoke<TResult, T1Exception, T2Exception, T3Exception, T4Exception>(
+            Func<TResult> thunk)
+            where T1Exception : Exception
+            where T2Exception : Exception
+            where T3Exception : Exception
+            where T4Exception : Exception
+        {
+            Require.NotNull(thunk, nameof(thunk));
+            Warrant.NotNull<Outcome<TResult>>();
+
+            ExceptionDispatchInfo edi;
+
+            try
+            {
+                TResult result = thunk.Invoke();
+
+                return Outcome.Success(result);
+            }
+            catch (T1Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
+            catch (T2Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
+            catch (T3Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
+            catch (T4Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
+
+            return Outcome.Failure<TResult>(edi);
+        }
+
+        #endregion
+
+        #region Invoke Func<T1, T2>.
+
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
+        public static Outcome<TResult> Invoke<TSource, TResult, TException>(
+            Func<TSource, TResult> thunk,
+            TSource value)
+            where TException : Exception
+        {
+            Require.NotNull(thunk, nameof(thunk));
+            Warrant.NotNull<Outcome<TResult>>();
+
+            try
+            {
+                TResult result = thunk.Invoke(value);
+
+                return Outcome.Success(result);
+            }
+            catch (TException ex)
+            {
+                var edi = ExceptionDispatchInfo.Capture(ex);
+
+                return Outcome.Failure<TResult>(edi);
+            }
+        }
+
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
+        public static Outcome<TResult> Invoke<TSource, TResult, T1Exception, T2Exception>(
+            Func<TSource, TResult> thunk,
+            TSource value)
+            where T1Exception : Exception
+            where T2Exception : Exception
+        {
+            Require.NotNull(thunk, nameof(thunk));
+            Warrant.NotNull<Outcome<TResult>>();
+
+            ExceptionDispatchInfo edi;
+
+            try
+            {
+                TResult result = thunk.Invoke(value);
+
+                return Outcome.Success(result);
+            }
+            catch (T1Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
+            catch (T2Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
+
+            return Outcome.Failure<TResult>(edi);
+        }
+
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
+        public static Outcome<TResult> Invoke<TSource, TResult, T1Exception, T2Exception, T3Exception>(
+            Func<TSource, TResult> thunk,
+            TSource value)
+            where T1Exception : Exception
+            where T2Exception : Exception
+            where T3Exception : Exception
+        {
+            Require.NotNull(thunk, nameof(thunk));
+            Warrant.NotNull<Outcome<TResult>>();
+
+            ExceptionDispatchInfo edi;
+
+            try
+            {
+                TResult result = thunk.Invoke(value);
+
+                return Outcome.Success(result);
+            }
+            catch (T1Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
+            catch (T2Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
+            catch (T3Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
+
+            return Outcome.Failure<TResult>(edi);
+        }
+
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
+        public static Outcome<TResult> Invoke<TSource, TResult, T1Exception, T2Exception, T3Exception, T4Exception>(
+            Func<TSource, TResult> thunk,
+            TSource value)
+            where T1Exception : Exception
+            where T2Exception : Exception
+            where T3Exception : Exception
+            where T4Exception : Exception
+        {
+            Require.NotNull(thunk, nameof(thunk));
+            Warrant.NotNull<Outcome<TResult>>();
+
+            ExceptionDispatchInfo edi;
+
+            try
+            {
+                TResult result = thunk.Invoke(value);
+
+                return Outcome.Success(result);
+            }
+            catch (T1Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
+            catch (T2Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
+            catch (T3Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
+            catch (T4Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
+
+            return Outcome.Failure<TResult>(edi);
+        }
+
+        #endregion
     }
 }
