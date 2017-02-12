@@ -17,8 +17,8 @@
     <Compile Include="..\Narvalo.Fx\Internal\IDisjointUnionOf`2.cs">
       <Link>Fx\Internal\IDisjointUnionOf`2.cs</Link>
     </Compile>
-    <Compile Include="..\Narvalo.Fx\Internal\IMatcher`.cs">
-      <Link>Fx\Internal\IMatcher`.cs</Link>
+    <Compile Include="..\Narvalo.Fx\Internal\IMatchable`.cs">
+      <Link>Fx\Internal\IMatchable`.cs</Link>
     </Compile>
     <Compile Include="BinaryEncoder.cs" />
     <Compile Include="Cerbere\ContractHelpers.cs" />

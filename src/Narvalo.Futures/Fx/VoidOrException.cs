@@ -10,7 +10,7 @@ namespace Narvalo.Fx
     // Friendly version of Either<ExceptionDispatchInfo, Unit>, VoidOrError<ExceptionDispatchInfo>
     // or Outcome<Unit>.
     [DebuggerDisplay("Void")]
-    public partial class VoidOrException // : Internal.IMatcher<ExceptionDispatchInfo>
+    public partial class VoidOrException // : Internal.IMatchable<ExceptionDispatchInfo>
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private static readonly VoidOrException s_Void = new VoidOrException();
@@ -121,7 +121,7 @@ namespace Narvalo.Fx
         }
     }
 
-    // Implements the Internal.IMatcher<ExceptionDispatchInfo> interface.
+    // Implements the Internal.IMatchable<ExceptionDispatchInfo> interface.
     public partial class VoidOrException
     {
         public virtual TResult Match<TResult>(Func<ExceptionDispatchInfo, TResult> caseException, Func<TResult> caseVoid)

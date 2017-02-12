@@ -19,7 +19,7 @@ namespace Narvalo.Fx
     [DebuggerDisplay("IsSome = {IsSome}")]
     [DebuggerTypeProxy(typeof(Maybe<>.DebugView))]
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "[Intentionally] Maybe<T> only pretends to be a collection.")]
-    public partial struct Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>, Internal.IMatcher<T>
+    public partial struct Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>, Internal.IMatchable<T>
     {
         private readonly bool _isSome;
 
@@ -227,7 +227,7 @@ namespace Narvalo.Fx
         public Maybe<T> OrElse(Maybe<T> other) => IsNone ? other : this;
     }
 
-    // Implements the Internal.IMatcher<T> interface.
+    // Implements the Internal.IMatchable<T> interface.
     public partial struct Maybe<T>
     {
         public TResult Match<TResult>(Func<T, TResult> caseSome, Func<TResult> caseNone)
