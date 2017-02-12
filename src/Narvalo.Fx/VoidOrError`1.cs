@@ -9,7 +9,7 @@ namespace Narvalo.Fx
     using System.Runtime.CompilerServices;
 
     // Friendly version of Either<TError, Unit>.
-    public partial class VoidOrError<TError> : Internal.IMatcher<TError>
+    public partial class VoidOrError<TError> : Internal.IMatchable<TError>
     {
         private VoidOrError() { }
 
@@ -176,7 +176,7 @@ namespace Narvalo.Fx
         public VoidOrError<TError> OrElse(VoidOrError<TError> other) => IsVoid ? other : this;
     }
 
-    // Implements the Internal.IMatcher<TError> interface.
+    // Implements the Internal.IMatchable<TError> interface.
     public partial class VoidOrError<TError>
     {
         public virtual TResult Match<TResult>(Func<TError, TResult> caseError, Func<TResult> caseVoid)

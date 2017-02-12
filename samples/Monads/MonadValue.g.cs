@@ -30,7 +30,7 @@ namespace Monads
         /// <summary>
         /// The unique object of type <c>MonadValue&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly MonadValue<global::Narvalo.Fx.Unit> s_Unit = Pure(global::Narvalo.Fx.Unit.Single);
+        private static readonly MonadValue<global::Narvalo.Fx.Unit> s_Unit = Of(global::Narvalo.Fx.Unit.Single);
 
         /// <summary>
         /// Gets the unique object of type <c>MonadValue&lt;Unit&gt;</c>.
@@ -68,7 +68,7 @@ namespace Monads
         /// <param name="value">A value to be wrapped into a <see cref="MonadValue{T}"/> object.</param>
         /// <returns>An instance of the <see cref="MonadValue{T}"/> class for the specified value.</returns>
         // Named "return" in Haskell parlance.
-        public static MonadValue<T> Pure<T>(T value)
+        public static MonadValue<T> Of<T>(T value)
             where T : struct
         {
 
@@ -247,7 +247,7 @@ namespace Monads
     {
         #region Basic Monad functions (Prelude)
 
-        // Named "fmap" in Haskell parlance.
+        // Named "fmap", "liftA" or "<$>" in Haskell parlance.
         public static MonadValue<TResult> Select<TSource, TResult>(
             this MonadValue<TSource> @this,
             Func<TSource, TResult> selector)
@@ -257,7 +257,7 @@ namespace Monads
             /* T4: C# indent */
             Require.NotNull(selector, nameof(selector));
 
-            return @this.Bind(_ => MonadValue.Pure(selector.Invoke(_)));
+            return @this.Bind(_ => MonadValue.Of(selector.Invoke(_)));
         }
 
         // Named ">>" in Haskell parlance.
@@ -318,6 +318,7 @@ namespace Monads
         #region Monadic lifting operators (Prelude)
 
         /// <see cref="Lift{T1, T2, T3}" />
+        // Named "liftA2" in Haskell parlance.
         public static MonadValue<TResult> Zip<TFirst, TSecond, TResult>(
             this MonadValue<TFirst> @this,
             MonadValue<TSecond> second,
@@ -334,6 +335,7 @@ namespace Monads
         }
 
         /// <see cref="Lift{T1, T2, T3, T4}" />
+        // Named "liftA3" in Haskell parlance.
         public static MonadValue<TResult> Zip<T1, T2, T3, TResult>(
             this MonadValue<T1> @this,
             MonadValue<T2> second,
@@ -355,6 +357,7 @@ namespace Monads
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5}" />
+        // Named "liftA4" in Haskell parlance.
         public static MonadValue<TResult> Zip<T1, T2, T3, T4, TResult>(
              this MonadValue<T1> @this,
              MonadValue<T2> second,
@@ -381,6 +384,7 @@ namespace Monads
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5, T6}" />
+        // Named "liftA5" in Haskell parlance.
         public static MonadValue<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this MonadValue<T1> @this,
             MonadValue<T2> second,
@@ -916,7 +920,7 @@ namespace Monads.Internal
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulatorM, nameof(accumulatorM));
 
-            MonadValue<TAccumulate> retval = MonadValue.Pure(seed);
+            MonadValue<TAccumulate> retval = MonadValue.Of(seed);
 
             foreach (TSource item in @this)
             {
@@ -954,7 +958,7 @@ namespace Monads.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                MonadValue<TSource> retval = MonadValue.Pure(iter.Current);
+                MonadValue<TSource> retval = MonadValue.Of(iter.Current);
 
                 while (iter.MoveNext())
                 {
@@ -988,7 +992,7 @@ namespace Monads.Internal
             Require.NotNull(accumulatorM, nameof(accumulatorM));
             Require.NotNull(predicate, nameof(predicate));
 
-            MonadValue<TAccumulate> retval = MonadValue.Pure(seed);
+            MonadValue<TAccumulate> retval = MonadValue.Of(seed);
 
             using (var iter = @this.GetEnumerator())
             {
@@ -1018,7 +1022,7 @@ namespace Monads.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                MonadValue<TSource> retval = MonadValue.Pure(iter.Current);
+                MonadValue<TSource> retval = MonadValue.Of(iter.Current);
 
                 while (predicate.Invoke(retval) && iter.MoveNext())
                 {

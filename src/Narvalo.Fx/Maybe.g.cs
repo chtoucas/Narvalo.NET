@@ -231,7 +231,7 @@ namespace Narvalo.Fx
     {
         #region Basic Monad functions (Prelude)
 
-        // Named "fmap" in Haskell parlance.
+        // Named "fmap", "liftA" or "<$>" in Haskell parlance.
         public static Maybe<TResult> Select<TSource, TResult>(
             this Maybe<TSource> @this,
             Func<TSource, TResult> selector)
@@ -312,6 +312,7 @@ namespace Narvalo.Fx
         #region Monadic lifting operators (Prelude)
 
         /// <see cref="Lift{T1, T2, T3}" />
+        // Named "liftA2" in Haskell parlance.
         public static Maybe<TResult> Zip<TFirst, TSecond, TResult>(
             this Maybe<TFirst> @this,
             Maybe<TSecond> second,
@@ -326,6 +327,7 @@ namespace Narvalo.Fx
         }
 
         /// <see cref="Lift{T1, T2, T3, T4}" />
+        // Named "liftA3" in Haskell parlance.
         public static Maybe<TResult> Zip<T1, T2, T3, TResult>(
             this Maybe<T1> @this,
             Maybe<T2> second,
@@ -344,6 +346,7 @@ namespace Narvalo.Fx
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5}" />
+        // Named "liftA4" in Haskell parlance.
         public static Maybe<TResult> Zip<T1, T2, T3, T4, TResult>(
              this Maybe<T1> @this,
              Maybe<T2> second,
@@ -366,6 +369,7 @@ namespace Narvalo.Fx
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5, T6}" />
+        // Named "liftA5" in Haskell parlance.
         public static Maybe<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this Maybe<T1> @this,
             Maybe<T2> second,

@@ -27,7 +27,7 @@ namespace Narvalo.Fx
         /// <summary>
         /// The unique object of type <c>Identity&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly Identity<global::Narvalo.Fx.Unit> s_Unit = Pure(global::Narvalo.Fx.Unit.Single);
+        private static readonly Identity<global::Narvalo.Fx.Unit> s_Unit = Of(global::Narvalo.Fx.Unit.Single);
 
         /// <summary>
         /// Gets the unique object of type <c>Identity&lt;Unit&gt;</c>.
@@ -50,7 +50,7 @@ namespace Narvalo.Fx
         /// <param name="value">A value to be wrapped into a <see cref="Identity{T}"/> object.</param>
         /// <returns>An instance of the <see cref="Identity{T}"/> class for the specified value.</returns>
         // Named "return" in Haskell parlance.
-        public static Identity<T> Pure<T>(T value)
+        public static Identity<T> Of<T>(T value)
             /* T4: C# indent */
         {
 
@@ -206,7 +206,7 @@ namespace Narvalo.Fx
     {
         #region Basic Monad functions (Prelude)
 
-        // Named "fmap" in Haskell parlance.
+        // Named "fmap", "liftA" or "<$>" in Haskell parlance.
         public static Identity<TResult> Select<TSource, TResult>(
             this Identity<TSource> @this,
             Func<TSource, TResult> selector)
@@ -215,7 +215,7 @@ namespace Narvalo.Fx
             /* T4: C# indent */
             Require.NotNull(selector, nameof(selector));
 
-            return @this.Bind(_ => Identity.Pure(selector.Invoke(_)));
+            return @this.Bind(_ => Identity.Of(selector.Invoke(_)));
         }
 
         // Named ">>" in Haskell parlance.
@@ -273,6 +273,7 @@ namespace Narvalo.Fx
         #region Monadic lifting operators (Prelude)
 
         /// <see cref="Lift{T1, T2, T3}" />
+        // Named "liftA2" in Haskell parlance.
         public static Identity<TResult> Zip<TFirst, TSecond, TResult>(
             this Identity<TFirst> @this,
             Identity<TSecond> second,
@@ -287,6 +288,7 @@ namespace Narvalo.Fx
         }
 
         /// <see cref="Lift{T1, T2, T3, T4}" />
+        // Named "liftA3" in Haskell parlance.
         public static Identity<TResult> Zip<T1, T2, T3, TResult>(
             this Identity<T1> @this,
             Identity<T2> second,
@@ -305,6 +307,7 @@ namespace Narvalo.Fx
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5}" />
+        // Named "liftA4" in Haskell parlance.
         public static Identity<TResult> Zip<T1, T2, T3, T4, TResult>(
              this Identity<T1> @this,
              Identity<T2> second,
@@ -327,6 +330,7 @@ namespace Narvalo.Fx
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5, T6}" />
+        // Named "liftA5" in Haskell parlance.
         public static Identity<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this Identity<T1> @this,
             Identity<T2> second,

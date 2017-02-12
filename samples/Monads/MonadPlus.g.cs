@@ -30,7 +30,7 @@ namespace Monads
         /// <summary>
         /// The unique object of type <c>MonadPlus&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly MonadPlus<global::Narvalo.Fx.Unit> s_Unit = Pure(global::Narvalo.Fx.Unit.Single);
+        private static readonly MonadPlus<global::Narvalo.Fx.Unit> s_Unit = Of(global::Narvalo.Fx.Unit.Single);
 
         /// <summary>
         /// Gets the unique object of type <c>MonadPlus&lt;Unit&gt;</c>.
@@ -70,7 +70,7 @@ namespace Monads
         /// <param name="value">A value to be wrapped into a <see cref="MonadPlus{T}"/> object.</param>
         /// <returns>An instance of the <see cref="MonadPlus{T}"/> class for the specified value.</returns>
         // Named "return" in Haskell parlance.
-        public static MonadPlus<T> Pure<T>(T value)
+        public static MonadPlus<T> Of<T>(T value)
             /* T4: C# indent */
         {
             Warrant.NotNull<MonadPlus<T>>();
@@ -238,7 +238,7 @@ namespace Monads
     {
         #region Basic Monad functions (Prelude)
 
-        // Named "fmap" in Haskell parlance.
+        // Named "fmap", "liftA" or "<$>" in Haskell parlance.
         public static MonadPlus<TResult> Select<TSource, TResult>(
             this MonadPlus<TSource> @this,
             Func<TSource, TResult> selector)
@@ -248,7 +248,7 @@ namespace Monads
             Require.NotNull(selector, nameof(selector));
             Warrant.NotNull<MonadPlus<TResult>>();
 
-            return @this.Bind(_ => MonadPlus.Pure(selector.Invoke(_)));
+            return @this.Bind(_ => MonadPlus.Of(selector.Invoke(_)));
         }
 
         // Named ">>" in Haskell parlance.
@@ -324,6 +324,7 @@ namespace Monads
         #region Monadic lifting operators (Prelude)
 
         /// <see cref="Lift{T1, T2, T3}" />
+        // Named "liftA2" in Haskell parlance.
         public static MonadPlus<TResult> Zip<TFirst, TSecond, TResult>(
             this MonadPlus<TFirst> @this,
             MonadPlus<TSecond> second,
@@ -339,6 +340,7 @@ namespace Monads
         }
 
         /// <see cref="Lift{T1, T2, T3, T4}" />
+        // Named "liftA3" in Haskell parlance.
         public static MonadPlus<TResult> Zip<T1, T2, T3, TResult>(
             this MonadPlus<T1> @this,
             MonadPlus<T2> second,
@@ -358,6 +360,7 @@ namespace Monads
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5}" />
+        // Named "liftA4" in Haskell parlance.
         public static MonadPlus<TResult> Zip<T1, T2, T3, T4, TResult>(
              this MonadPlus<T1> @this,
              MonadPlus<T2> second,
@@ -381,6 +384,7 @@ namespace Monads
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5, T6}" />
+        // Named "liftA5" in Haskell parlance.
         public static MonadPlus<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this MonadPlus<T1> @this,
             MonadPlus<T2> second,
@@ -962,7 +966,7 @@ namespace Monads.Internal
             Demand.NotNull(@this);
             Warrant.NotNull<MonadPlus<IEnumerable<TSource>>>();
 
-            var seed = MonadPlus.Pure(Enumerable.Empty<TSource>());
+            var seed = MonadPlus.Of(Enumerable.Empty<TSource>());
             // Inlined LINQ Append method:
             Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (m, item) => m.Append(item);
 
@@ -983,7 +987,7 @@ namespace Monads.Internal
         //{
         //    Demand.NotNull(m);
 
-        //    return m.Bind(item => MonadPlus.Pure(list.Concat(Enumerable.Repeat(item, 1))));
+        //    return m.Bind(item => MonadPlus.Of(list.Concat(Enumerable.Repeat(item, 1))));
         //}
 
         internal static MonadPlus<TSource> SumImpl<TSource>(
@@ -1032,7 +1036,7 @@ namespace Monads.Internal
             Func<MonadPlus<IEnumerable<TSource>>, TSource, MonadPlus<IEnumerable<TSource>>> accumulatorM
                 = (mlist, item) => predicateM.Invoke(item).Zip(mlist, (flg, list) => selector.Invoke(flg, list, item));
 
-            var seed = MonadPlus.Pure(Enumerable.Empty<TSource>());
+            var seed = MonadPlus.Of(Enumerable.Empty<TSource>());
 
             // REVIEW: Aggregate?
             return @this.AggregateBack(seed, accumulatorM);
@@ -1088,7 +1092,7 @@ namespace Monads.Internal
             Require.NotNull(accumulatorM, nameof(accumulatorM));
             Warrant.NotNull<MonadPlus<TAccumulate>>();
 
-            MonadPlus<TAccumulate> retval = MonadPlus.Pure(seed);
+            MonadPlus<TAccumulate> retval = MonadPlus.Of(seed);
 
             foreach (TSource item in @this)
             {
@@ -1127,7 +1131,7 @@ namespace Monads.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                MonadPlus<TSource> retval = MonadPlus.Pure(iter.Current);
+                MonadPlus<TSource> retval = MonadPlus.Of(iter.Current);
 
                 while (iter.MoveNext())
                 {
@@ -1162,7 +1166,7 @@ namespace Monads.Internal
             Require.NotNull(predicate, nameof(predicate));
             Warrant.NotNull<MonadPlus<TAccumulate>>();
 
-            MonadPlus<TAccumulate> retval = MonadPlus.Pure(seed);
+            MonadPlus<TAccumulate> retval = MonadPlus.Of(seed);
 
             using (var iter = @this.GetEnumerator())
             {
@@ -1193,7 +1197,7 @@ namespace Monads.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                MonadPlus<TSource> retval = MonadPlus.Pure(iter.Current);
+                MonadPlus<TSource> retval = MonadPlus.Of(iter.Current);
 
                 while (predicate.Invoke(retval) && iter.MoveNext())
                 {

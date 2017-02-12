@@ -6,7 +6,7 @@ namespace Narvalo.Fx
 
     public static partial class Func
     {
-        public static Func<T> Pure<T>(T value)
+        public static Func<T> Of<T>(T value)
         {
             Warrant.NotNull<Func<T>>();
 

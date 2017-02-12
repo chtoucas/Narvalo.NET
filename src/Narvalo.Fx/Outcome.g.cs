@@ -211,7 +211,7 @@ namespace Narvalo.Fx
     {
         #region Basic Monad functions (Prelude)
 
-        // Named "fmap" in Haskell parlance.
+        // Named "fmap", "liftA" or "<$>" in Haskell parlance.
         public static Outcome<TResult> Select<TSource, TResult>(
             this Outcome<TSource> @this,
             Func<TSource, TResult> selector)
@@ -279,6 +279,7 @@ namespace Narvalo.Fx
         #region Monadic lifting operators (Prelude)
 
         /// <see cref="Lift{T1, T2, T3}" />
+        // Named "liftA2" in Haskell parlance.
         public static Outcome<TResult> Zip<TFirst, TSecond, TResult>(
             this Outcome<TFirst> @this,
             Outcome<TSecond> second,
@@ -293,6 +294,7 @@ namespace Narvalo.Fx
         }
 
         /// <see cref="Lift{T1, T2, T3, T4}" />
+        // Named "liftA3" in Haskell parlance.
         public static Outcome<TResult> Zip<T1, T2, T3, TResult>(
             this Outcome<T1> @this,
             Outcome<T2> second,
@@ -311,6 +313,7 @@ namespace Narvalo.Fx
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5}" />
+        // Named "liftA4" in Haskell parlance.
         public static Outcome<TResult> Zip<T1, T2, T3, T4, TResult>(
              this Outcome<T1> @this,
              Outcome<T2> second,
@@ -333,6 +336,7 @@ namespace Narvalo.Fx
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5, T6}" />
+        // Named "liftA5" in Haskell parlance.
         public static Outcome<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this Outcome<T1> @this,
             Outcome<T2> second,

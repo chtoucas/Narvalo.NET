@@ -291,7 +291,7 @@ namespace Narvalo.Fx
             }
         }
 
-        // Alias for Do().
+        // Alias for Do(Action<T>).
         public void OnSome(Action<T> action)
         {
             Require.NotNull(action, nameof(action));

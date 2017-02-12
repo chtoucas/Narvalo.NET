@@ -10,8 +10,6 @@
             InitializeOr();
 
             IsNullable = false;
-
-            ReturnName = "Of";
         }
     }
 

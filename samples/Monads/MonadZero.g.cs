@@ -30,7 +30,7 @@ namespace Monads
         /// <summary>
         /// The unique object of type <c>MonadZero&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly MonadZero<global::Narvalo.Fx.Unit> s_Unit = Pure(global::Narvalo.Fx.Unit.Single);
+        private static readonly MonadZero<global::Narvalo.Fx.Unit> s_Unit = Of(global::Narvalo.Fx.Unit.Single);
 
         /// <summary>
         /// Gets the unique object of type <c>MonadZero&lt;Unit&gt;</c>.
@@ -70,7 +70,7 @@ namespace Monads
         /// <param name="value">A value to be wrapped into a <see cref="MonadZero{T}"/> object.</param>
         /// <returns>An instance of the <see cref="MonadZero{T}"/> class for the specified value.</returns>
         // Named "return" in Haskell parlance.
-        public static MonadZero<T> Pure<T>(T value)
+        public static MonadZero<T> Of<T>(T value)
             /* T4: C# indent */
         {
             Warrant.NotNull<MonadZero<T>>();
@@ -238,7 +238,7 @@ namespace Monads
     {
         #region Basic Monad functions (Prelude)
 
-        // Named "fmap" in Haskell parlance.
+        // Named "fmap", "liftA" or "<$>" in Haskell parlance.
         public static MonadZero<TResult> Select<TSource, TResult>(
             this MonadZero<TSource> @this,
             Func<TSource, TResult> selector)
@@ -248,7 +248,7 @@ namespace Monads
             Require.NotNull(selector, nameof(selector));
             Warrant.NotNull<MonadZero<TResult>>();
 
-            return @this.Bind(_ => MonadZero.Pure(selector.Invoke(_)));
+            return @this.Bind(_ => MonadZero.Of(selector.Invoke(_)));
         }
 
         // Named ">>" in Haskell parlance.
@@ -324,6 +324,7 @@ namespace Monads
         #region Monadic lifting operators (Prelude)
 
         /// <see cref="Lift{T1, T2, T3}" />
+        // Named "liftA2" in Haskell parlance.
         public static MonadZero<TResult> Zip<TFirst, TSecond, TResult>(
             this MonadZero<TFirst> @this,
             MonadZero<TSecond> second,
@@ -339,6 +340,7 @@ namespace Monads
         }
 
         /// <see cref="Lift{T1, T2, T3, T4}" />
+        // Named "liftA3" in Haskell parlance.
         public static MonadZero<TResult> Zip<T1, T2, T3, TResult>(
             this MonadZero<T1> @this,
             MonadZero<T2> second,
@@ -358,6 +360,7 @@ namespace Monads
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5}" />
+        // Named "liftA4" in Haskell parlance.
         public static MonadZero<TResult> Zip<T1, T2, T3, T4, TResult>(
              this MonadZero<T1> @this,
              MonadZero<T2> second,
@@ -381,6 +384,7 @@ namespace Monads
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5, T6}" />
+        // Named "liftA5" in Haskell parlance.
         public static MonadZero<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this MonadZero<T1> @this,
             MonadZero<T2> second,
@@ -946,7 +950,7 @@ namespace Monads.Internal
             Demand.NotNull(@this);
             Warrant.NotNull<MonadZero<IEnumerable<TSource>>>();
 
-            var seed = MonadZero.Pure(Enumerable.Empty<TSource>());
+            var seed = MonadZero.Of(Enumerable.Empty<TSource>());
             // Inlined LINQ Append method:
             Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (m, item) => m.Append(item);
 
@@ -967,7 +971,7 @@ namespace Monads.Internal
         //{
         //    Demand.NotNull(m);
 
-        //    return m.Bind(item => MonadZero.Pure(list.Concat(Enumerable.Repeat(item, 1))));
+        //    return m.Bind(item => MonadZero.Of(list.Concat(Enumerable.Repeat(item, 1))));
         //}
 
     } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
@@ -1003,7 +1007,7 @@ namespace Monads.Internal
             Func<MonadZero<IEnumerable<TSource>>, TSource, MonadZero<IEnumerable<TSource>>> accumulatorM
                 = (mlist, item) => predicateM.Invoke(item).Zip(mlist, (flg, list) => selector.Invoke(flg, list, item));
 
-            var seed = MonadZero.Pure(Enumerable.Empty<TSource>());
+            var seed = MonadZero.Of(Enumerable.Empty<TSource>());
 
             // REVIEW: Aggregate?
             return @this.AggregateBack(seed, accumulatorM);
@@ -1059,7 +1063,7 @@ namespace Monads.Internal
             Require.NotNull(accumulatorM, nameof(accumulatorM));
             Warrant.NotNull<MonadZero<TAccumulate>>();
 
-            MonadZero<TAccumulate> retval = MonadZero.Pure(seed);
+            MonadZero<TAccumulate> retval = MonadZero.Of(seed);
 
             foreach (TSource item in @this)
             {
@@ -1098,7 +1102,7 @@ namespace Monads.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                MonadZero<TSource> retval = MonadZero.Pure(iter.Current);
+                MonadZero<TSource> retval = MonadZero.Of(iter.Current);
 
                 while (iter.MoveNext())
                 {
@@ -1133,7 +1137,7 @@ namespace Monads.Internal
             Require.NotNull(predicate, nameof(predicate));
             Warrant.NotNull<MonadZero<TAccumulate>>();
 
-            MonadZero<TAccumulate> retval = MonadZero.Pure(seed);
+            MonadZero<TAccumulate> retval = MonadZero.Of(seed);
 
             using (var iter = @this.GetEnumerator())
             {
@@ -1164,7 +1168,7 @@ namespace Monads.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                MonadZero<TSource> retval = MonadZero.Pure(iter.Current);
+                MonadZero<TSource> retval = MonadZero.Of(iter.Current);
 
                 while (predicate.Invoke(retval) && iter.MoveNext())
                 {

@@ -18,7 +18,7 @@ namespace Narvalo.Fx
         /// <typeparam name="TSource">The type of the value to be used in the result sequence.</typeparam>
         /// <param name="value">The single value of the sequence.</param>
         /// <returns>An <see cref="IEnumerable{T}"/> that contains a single element.</returns>
-        public static IEnumerable<TSource> Pure<TSource>(TSource value)
+        public static IEnumerable<TSource> Of<TSource>(TSource value)
         {
             Warrant.NotNull<IEnumerable<TSource>>();
 
@@ -96,6 +96,19 @@ namespace Narvalo.Fx
         #endregion
 
         #region List Comprehensions
+
+        /// <summary>
+        /// Generates an infinite sequence containing one repeated value.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the value to be used in the result sequence.</typeparam>
+        /// <param name="value">The value to be repeated.</param>
+        public static IEnumerable<TSource> Gather<TSource>(TSource value)
+        {
+            while (true)
+            {
+                yield return value;
+            }
+        }
 
         /// <summary>
         /// Generates an infinite sequence.
