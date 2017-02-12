@@ -10,7 +10,7 @@ namespace Narvalo.Fx
     // Friendly version of Either<ExceptionDispatchInfo, Unit>, VoidOrError<ExceptionDispatchInfo>
     // or Outcome<Unit>.
     [DebuggerDisplay("Void")]
-    public partial class VoidOrException : Internal.ISwitch<ExceptionDispatchInfo>
+    public partial class VoidOrException // : Internal.IMatcher<ExceptionDispatchInfo>
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private static readonly VoidOrException s_Void = new VoidOrException();
@@ -83,7 +83,7 @@ namespace Narvalo.Fx
                 return caseException.Invoke(_exceptionInfo);
             }
 
-            public override void Trigger(Action<ExceptionDispatchInfo> caseException, Action caseVoid)
+            public override void Do(Action<ExceptionDispatchInfo> caseException, Action caseVoid)
             {
                 Require.NotNull(caseException, nameof(caseException));
 
@@ -121,7 +121,7 @@ namespace Narvalo.Fx
         }
     }
 
-    // Implements the Internal.ISwitch<ExceptionDispatchInfo> interface.
+    // Implements the Internal.IMatcher<ExceptionDispatchInfo> interface.
     public partial class VoidOrException
     {
         public virtual TResult Match<TResult>(Func<ExceptionDispatchInfo, TResult> caseException, Func<TResult> caseVoid)
@@ -134,7 +134,7 @@ namespace Narvalo.Fx
         public virtual TResult Match<TResult>(Func<ExceptionDispatchInfo, TResult> caseException, TResult caseVoid)
             => caseVoid;
 
-        public virtual void Trigger(Action<ExceptionDispatchInfo> caseException, Action caseVoid)
+        public virtual void Do(Action<ExceptionDispatchInfo> caseException, Action caseVoid)
         {
             Require.NotNull(caseVoid, nameof(caseVoid));
 

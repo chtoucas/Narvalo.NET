@@ -4,12 +4,9 @@ public partial class MonadTemplate
 {
     protected void EmitEnumerableInternalExtensions()
     {
-        // Normally we would name the class with EnumerableExtensions, but we prefer
-        // Enumerable{Name}Extensions to avoid any method collision.
-        // Indeed if we generate two monads in the same namespace, we might end up
-        // with two methods named the same in the same partial class.
 #>
-    // Provides the core extension methods for IEnumerable<T>.
+    // Provides default implementations for the extension methods for IEnumerable<T>.
+    // You will certainly want to override them to improve performance.
     internal static partial class EnumerableExtensions
     {
 

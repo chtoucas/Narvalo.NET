@@ -20,7 +20,9 @@ namespace Narvalo.Fx
 
     using Narvalo.Fx.Linq;
 
-    // Provides a set of static methods for Outcome<T>.
+    /// <summary>
+    /// Provides a set of static methods for Outcome<T>.
+    /// </summary>
     // NB: Sometimes we prefer extension methods over static methods to be able to override them locally.
     public static partial class Outcome
     {
@@ -47,12 +49,10 @@ namespace Narvalo.Fx
         /// <summary>
         /// Obtains an instance of the <see cref="Outcome{T}"/> class for the specified value.
         /// </summary>
-        /// <remarks>
-        /// Named <c>return</c> in Haskell parlance.
-        /// </remarks>
         /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
         /// <param name="value">A value to be wrapped into a <see cref="Outcome{T}"/> object.</param>
         /// <returns>An instance of the <see cref="Outcome{T}"/> class for the specified value.</returns>
+        // Named "return" in Haskell parlance.
         public static Outcome<T> Success<T>(T value)
             /* T4: C# indent */
         {
@@ -66,9 +66,7 @@ namespace Narvalo.Fx
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
         /// </summary>
-        /// <remarks>
-        /// Named <c>join</c> in Haskell parlance.
-        /// </remarks>
+        // Named "join" in Haskell parlance.
         public static Outcome<T> Flatten<T>(Outcome<Outcome<T>> square)
             /* T4: C# indent */
         {
@@ -82,10 +80,7 @@ namespace Narvalo.Fx
         #region Conditional execution of monadic expressions (Prelude)
 
 
-        /// <remarks>
-        /// <para>Named <c>when</c> in Haskell parlance.</para>
-        /// <para>Haskell uses a different signature.</para>
-        /// </remarks>
+        // Named "when" in Haskell parlance. Haskell uses a different signature.
         public static void When<TSource>(
             this Outcome<TSource> @this,
             Func<TSource, bool> predicate,
@@ -99,10 +94,7 @@ namespace Narvalo.Fx
             @this.Bind(_ => { if (predicate.Invoke(_)) { action.Invoke(_); } return Outcome.Unit; });
         }
 
-        /// <remarks>
-        /// <para>Named <c>unless</c> in Haskell parlance.</para>
-        /// <para>Haskell uses a different signature.</para>
-        /// </remarks>
+        // Named "unless" in Haskell parlance. Haskell uses a different signature.
         public static void Unless<TSource>(
             this Outcome<TSource> @this,
             Func<TSource, bool> predicate,
@@ -123,9 +115,7 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Outcome{T}" /> values.
         /// </summary>
-        /// <remarks>
-        /// Named <c>liftM</c> in Haskell parlance.
-        /// </remarks>
+        // Named "liftM" in Haskell parlance.
         public static Func<Outcome<T>, Outcome<TResult>> Lift<T, TResult>(
             Func<T, TResult> fun)
             /* T4: C# indent */
@@ -143,9 +133,7 @@ namespace Narvalo.Fx
         /// Promotes a function to use and return <see cref="Outcome{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        /// <remarks>
-        /// Named <c>liftM2</c> in Haskell parlance.
-        /// </remarks>
+        // Named "liftM2" in Haskell parlance.
         public static Func<Outcome<T1>, Outcome<T2>, Outcome<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
             /* T4: C# indent */
@@ -163,9 +151,7 @@ namespace Narvalo.Fx
         /// Promotes a function to use and return <see cref="Outcome{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        /// <remarks>
-        /// Named <c>liftM3</c> in Haskell parlance.
-        /// </remarks>
+        // Named "liftM3" in Haskell parlance.
         public static Func<Outcome<T1>, Outcome<T2>, Outcome<T3>, Outcome<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
             /* T4: C# indent */
@@ -183,9 +169,7 @@ namespace Narvalo.Fx
         /// Promotes a function to use and return <see cref="Outcome{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        /// <remarks>
-        /// Named <c>liftM4</c> in Haskell parlance.
-        /// </remarks>
+        // Named "liftM4" in Haskell parlance.
         public static Func<Outcome<T1>, Outcome<T2>, Outcome<T3>, Outcome<T4>, Outcome<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> fun)
@@ -204,9 +188,7 @@ namespace Narvalo.Fx
         /// Promotes a function to use and return <see cref="Outcome{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        /// <remarks>
-        /// Named <c>liftM5</c> in Haskell parlance.
-        /// </remarks>
+        // Named "liftM5" in Haskell parlance.
         public static Func<Outcome<T1>, Outcome<T2>, Outcome<T3>, Outcome<T4>, Outcome<T5>, Outcome<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> fun)
@@ -229,9 +211,7 @@ namespace Narvalo.Fx
     {
         #region Basic Monad functions (Prelude)
 
-        /// <remarks>
-        /// Named <c>fmap</c> in Haskell parlance.
-        /// </remarks>
+        // Named "fmap" in Haskell parlance.
         public static Outcome<TResult> Select<TSource, TResult>(
             this Outcome<TSource> @this,
             Func<TSource, TResult> selector)
@@ -243,9 +223,7 @@ namespace Narvalo.Fx
             return @this.Bind(_ => Outcome.Success(selector.Invoke(_)));
         }
 
-        /// <remarks>
-        /// Named <c>&gt;&gt;</c> in Haskell parlance.
-        /// </remarks>
+        // Named ">>" in Haskell parlance.
         public static Outcome<TResult> Then<TSource, TResult>(
             this Outcome<TSource> @this,
             Outcome<TResult> other)
@@ -256,9 +234,7 @@ namespace Narvalo.Fx
             return @this.Bind(_ => other);
         }
 
-        /// <remarks>
-        /// Named <c>forever</c> in Haskell parlance.
-        /// </remarks>
+        // Named "forever" in Haskell parlance.
         public static Outcome<TResult> Forever<TSource, TResult>(
             this Outcome<TSource> @this,
             Func<Outcome<TResult>> fun
@@ -270,9 +246,7 @@ namespace Narvalo.Fx
             return @this.Then(@this.Forever(fun));
         }
 
-        /// <remarks>
-        /// Named <c>void</c> in Haskell parlance.
-        /// </remarks>
+        // Named "void" in Haskell parlance.
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
         public static Outcome<global::Narvalo.Fx.Unit> Ignore<TSource>(this Outcome<TSource> @this)
             /* T4: C# indent */
@@ -288,9 +262,7 @@ namespace Narvalo.Fx
         #region Generalisations of list functions (Prelude)
 
 
-        /// <remarks>
-        /// Named <c>replicateM</c> in Haskell parlance.
-        /// </remarks>
+        // Named "replicateM" in Haskell parlance.
         public static Outcome<IEnumerable<TSource>> Repeat<TSource>(
             this Outcome<TSource> @this,
             int count)
@@ -390,7 +362,7 @@ namespace Narvalo.Fx
 
 
         /// <remarks>
-        /// Kind of generalisation of Zip (liftM2).
+        /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" /> (liftM2).
         /// </remarks>
         public static Outcome<TResult> SelectMany<TSource, TMiddle, TResult>(
             this Outcome<TSource> @this,
@@ -432,9 +404,7 @@ namespace Narvalo.Fx
             return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
         }
 
-
-        // Like Select() w/ an action.
-        public static void Apply<TSource>(
+        public static void Do<TSource>(
             this Outcome<TSource> @this,
             Action<TSource> action)
             /* T4: C# indent */
@@ -452,9 +422,7 @@ namespace Narvalo.Fx
         #region Basic Monad functions (Prelude)
 
 
-        /// <remarks>
-        /// Named <c>forM</c> in Haskell parlance. Same as <c>mapM</c> with its arguments flipped.
-        /// </remarks>
+        // Named "forM" in Haskell parlance. Same as Map (mapM) with its arguments flipped.
         public static Outcome<IEnumerable<TResult>> ForEach<TSource, TResult>(
             this Func<TSource, Outcome<TResult>> @this,
             IEnumerable<TSource> seq)
@@ -467,9 +435,7 @@ namespace Narvalo.Fx
         }
 
 
-        /// <remarks>
-        /// Named <c>=&lt;&lt;</c> in Haskell parlance. Same as <c>bind</c> with its arguments flipped.
-        /// </remarks>
+        // Named "=<<" in Haskell parlance. Same as Bind (>>=) with its arguments flipped.
         public static Outcome<TResult> Invoke<TSource, TResult>(
             this Func<TSource, Outcome<TResult>> @this,
             Outcome<TSource> value)
@@ -481,9 +447,7 @@ namespace Narvalo.Fx
             return value.Bind(@this);
         }
 
-        /// <remarks>
-        /// Named <c>&gt;=&gt;</c> in Haskell parlance.
-        /// </remarks>
+        // Named ">=>" in Haskell parlance.
         public static Func<TSource, Outcome<TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, Outcome<TMiddle>> @this,
             Func<TMiddle, Outcome<TResult>> funM)
@@ -496,9 +460,7 @@ namespace Narvalo.Fx
             return _ => @this.Invoke(_).Bind(funM);
         }
 
-        /// <remarks>
-        /// Named <c>&lt;=&lt;</c> in Haskell parlance.
-        /// </remarks>
+        // Named "<=<" in Haskell parlance.
         public static Func<TSource, Outcome<TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, Outcome<TResult>> @this,
             Func<TSource, Outcome<TMiddle>> funM)
@@ -521,15 +483,13 @@ namespace Narvalo.Fx
 
     using Narvalo.Fx.Internal;
 
-    // Provides extension methods for IEnumerable<T> where T is a Outcome<S>.
+    // Provides extension methods for IEnumerable<Outcome<T>>.
     public static partial class Sequence
     {
         #region Basic Monad functions (Prelude)
 
 
-        /// <remarks>
-        /// Named <c>sequence</c> in Haskell parlance.
-        /// </remarks>
+        // Named "sequence" in Haskell parlance.
         public static Outcome<IEnumerable<TSource>> Collect<TSource>(
             this IEnumerable<Outcome<TSource>> @this)
         {
@@ -564,7 +524,7 @@ namespace Narvalo.Fx.Linq
         #region Basic Monad functions (Prelude)
 
 
-        /// <remarks>Named <c>mapM</c> in Haskell parlance.</remarks>
+        // Named "mapM" in Haskell parlance.
         public static Outcome<IEnumerable<TResult>> Map<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, Outcome<TResult>> selectorM)
@@ -582,7 +542,7 @@ namespace Narvalo.Fx.Linq
         #region Generalisations of list functions (Prelude)
 
 
-        /// <remarks>Named <c>filterM</c> in Haskell parlance.</remarks>
+        // Named "filterM" in Haskell parlance.
         public static Outcome<IEnumerable<TSource>> Filter<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Outcome<bool>> predicateM)
@@ -595,9 +555,7 @@ namespace Narvalo.Fx.Linq
             return @this.FilterImpl(predicateM);
         }
 
-        /// <remarks>
-        /// Named <c>mapAndUnzipM</c> in Haskell parlance.
-        /// </remarks>
+        // Named "mapAndUnzipM" in Haskell parlance.
         public static Outcome<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
             MapUnzip<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
@@ -609,9 +567,7 @@ namespace Narvalo.Fx.Linq
             return @this.MapUnzipImpl(funM);
         }
 
-        /// <remarks>
-        /// Named <c>zipWithM</c> in Haskell parlance.
-        /// </remarks>
+        // Named "zipWithM" in Haskell parlance.
         public static Outcome<IEnumerable<TResult>> ZipWith<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
@@ -626,9 +582,7 @@ namespace Narvalo.Fx.Linq
         }
 
 
-        /// <remarks>
-        /// Named <c>foldM</c> in Haskell parlance.
-        /// </remarks>
+        // Named "foldM" in Haskell parlance.
         public static Outcome<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
@@ -683,9 +637,7 @@ namespace Narvalo.Fx.Linq
 
         #region Catamorphisms
 
-        /// <remarks>
-        /// <para>Haskell uses a different signature.</para>
-        /// </remarks>
+        // Haskell uses a different signature.
         public static Outcome<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
@@ -700,9 +652,7 @@ namespace Narvalo.Fx.Linq
             return @this.FoldImpl(seed, accumulatorM, predicate);
         }
 
-        /// <remarks>
-        /// <para>Haskell uses a different signature.</para>
-        /// </remarks>
+        // Haskell uses a different signature.
         public static Outcome<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Outcome<TSource>> accumulatorM,
@@ -729,7 +679,8 @@ namespace Narvalo.Fx.Internal
 
     using Narvalo.Fx.Linq;
 
-    // Provides the core extension methods for IEnumerable<T> where T is a Outcome<S>.
+    // Provides default implementations for the extension methods for IEnumerable<Outcome<T>>.
+    // You will certainly want to override them to improve performance.
     internal static partial class EnumerableExtensions
     {
 
@@ -766,7 +717,8 @@ namespace Narvalo.Fx.Internal
 
     } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
 
-    // Provides the core extension methods for IEnumerable<T>.
+    // Provides default implementations for the extension methods for IEnumerable<T>.
+    // You will certainly want to override them to improve performance.
     internal static partial class EnumerableExtensions
     {
 

@@ -16,9 +16,6 @@
             WriteLine();
 
             EmitComonad();
-            //WriteLine();
-
-            //EmitLinq();
         }
     }
 

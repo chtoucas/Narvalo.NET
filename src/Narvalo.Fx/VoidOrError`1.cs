@@ -9,7 +9,7 @@ namespace Narvalo.Fx
     using System.Runtime.CompilerServices;
 
     // Friendly version of Either<TError, Unit>.
-    public partial class VoidOrError<TError> : Internal.ISwitch<TError>
+    public partial class VoidOrError<TError> : Internal.IMatcher<TError>
     {
         private VoidOrError() { }
 
@@ -70,7 +70,39 @@ namespace Narvalo.Fx
                 return caseError.Invoke(Error);
             }
 
-            public override void Trigger(Action<TError> caseError, Action caseVoid)
+            public override TResult Coalesce<TResult>(
+                Func<TError, bool> predicate,
+                Func<TError, TResult> selector,
+                Func<TResult> otherwise)
+            {
+                Require.NotNull(otherwise, nameof(otherwise));
+
+                return predicate.Invoke(Error) ? selector.Invoke(Error) : otherwise.Invoke();
+            }
+
+            public override TResult Coalesce<TResult>(Func<TError, bool> predicate, TResult then, TResult other)
+            {
+                Require.NotNull(predicate, nameof(predicate));
+
+                return predicate.Invoke(Error) ? then : other;
+            }
+
+            public override void Do(Func<TError, bool> predicate, Action<TError> action, Action otherwise)
+            {
+                Require.NotNull(predicate, nameof(predicate));
+                Require.NotNull(action, nameof(action));
+
+                if (predicate.Invoke(Error))
+                {
+                    action.Invoke(Error);
+                }
+                else
+                {
+                    otherwise.Invoke();
+                }
+            }
+
+            public override void Do(Action<TError> caseError, Action caseVoid)
             {
                 Require.NotNull(caseError, nameof(caseError));
 
@@ -81,7 +113,7 @@ namespace Narvalo.Fx
             {
                 Warrant.NotNull<string>();
 
-                return "Error(" + _error.ToString() + ")";
+                return "Error(" + Error.ToString() + ")";
             }
 
             /// <summary>
@@ -144,7 +176,7 @@ namespace Narvalo.Fx
         public VoidOrError<TError> OrElse(VoidOrError<TError> other) => IsVoid ? other : this;
     }
 
-    // Implements the Internal.ISwitch<TError> interface.
+    // Implements the Internal.IMatcher<TError> interface.
     public partial class VoidOrError<TError>
     {
         public virtual TResult Match<TResult>(Func<TError, TResult> caseError, Func<TResult> caseVoid)
@@ -157,7 +189,27 @@ namespace Narvalo.Fx
         public virtual TResult Match<TResult>(Func<TError, TResult> caseError, TResult caseVoid)
             => caseVoid;
 
-        public virtual void Trigger(Action<TError> caseError, Action caseVoid)
+        public virtual TResult Coalesce<TResult>(
+            Func<TError, bool> predicate,
+            Func<TError, TResult> selector,
+            Func<TResult> otherwise)
+        {
+            Require.NotNull(otherwise, nameof(otherwise));
+
+            return otherwise.Invoke();
+        }
+
+        public virtual TResult Coalesce<TResult>(Func<TError, bool> predicate, TResult then, TResult other)
+            => other;
+
+        public virtual void Do(Func<TError, bool> predicate, Action<TError> action, Action otherwise)
+        {
+            Require.NotNull(otherwise, nameof(otherwise));
+
+            otherwise.Invoke();
+        }
+
+        public virtual void Do(Action<TError> caseError, Action caseVoid)
         {
             Require.NotNull(caseVoid, nameof(caseVoid));
 

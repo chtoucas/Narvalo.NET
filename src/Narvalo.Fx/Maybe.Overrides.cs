@@ -22,6 +22,26 @@ namespace Narvalo.Fx
 
         #endregion
 
+        #region Conditional execution of monadic expressions (Prelude)
+
+        public void When(Func<T, bool> predicate, Action<T> action)
+        {
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            if (IsSome && predicate.Invoke(Value)) { action.Invoke(Value); }
+        }
+
+        public void Unless(Func<T, bool> predicate, Action<T> action)
+        {
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            if (IsSome && !predicate.Invoke(Value)) { action.Invoke(Value); }
+        }
+
+        #endregion
+
         #region Monadic lifting operators
 
         public Maybe<TResult> Zip<TSecond, TResult>(
@@ -109,7 +129,7 @@ namespace Narvalo.Fx
             return IsSome && !predicate.Invoke(Value) ? other : Maybe<TResult>.None;
         }
 
-        public void Apply(Action<T> action)
+        public void Do(Action<T> action)
         {
             Require.NotNull(action, nameof(action));
 

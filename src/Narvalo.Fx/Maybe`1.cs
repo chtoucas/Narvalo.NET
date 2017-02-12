@@ -19,7 +19,7 @@ namespace Narvalo.Fx
     [DebuggerDisplay("IsSome = {IsSome}")]
     [DebuggerTypeProxy(typeof(Maybe<>.DebugView))]
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "[Intentionally] Maybe<T> only pretends to be a collection.")]
-    public partial struct Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>, Internal.ISwitch<T>, Internal.ICoalesce<T>
+    public partial struct Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>, Internal.IMatcher<T>
     {
         private readonly bool _isSome;
 
@@ -227,18 +227,7 @@ namespace Narvalo.Fx
         public Maybe<T> OrElse(Maybe<T> other) => IsNone ? other : this;
     }
 
-    // Implements the Internal.ICoalesce<T> interface.
-    public partial struct Maybe<T>
-    {
-        public TResult Coalesce<TResult>(Func<T, bool> predicate, TResult then, TResult otherwise)
-        {
-            Require.NotNull(predicate, nameof(predicate));
-
-            return IsSome && predicate.Invoke(Value) ? then : otherwise;
-        }
-    }
-
-    // Implements the Internal.ISwitch<T> interface.
+    // Implements the Internal.IMatcher<T> interface.
     public partial struct Maybe<T>
     {
         public TResult Match<TResult>(Func<T, TResult> caseSome, Func<TResult> caseNone)
@@ -257,24 +246,52 @@ namespace Narvalo.Fx
             return IsSome ? caseSome.Invoke(Value) : caseNone;
         }
 
-        public void Trigger(Action<T> caseSome, Action caseNone)
+        public TResult Coalesce<TResult>(Func<T, bool> predicate, Func<T, TResult> selector, Func<TResult> otherwise)
         {
-            Require.NotNull(caseSome, nameof(caseSome));
-            Require.NotNull(caseNone, nameof(caseNone));
+            Require.NotNull(selector, nameof(selector));
+            Require.NotNull(otherwise, nameof(otherwise));
 
-            if (IsSome)
+            return IsSome && predicate.Invoke(Value) ? selector.Invoke(Value) : otherwise.Invoke();
+        }
+
+        public TResult Coalesce<TResult>(Func<T, bool> predicate, TResult then, TResult other)
+        {
+            Require.NotNull(predicate, nameof(predicate));
+
+            return IsSome && predicate.Invoke(Value) ? then : other;
+        }
+
+        public void Do(Func<T, bool> predicate, Action<T> action, Action otherwise)
+        {
+            Require.NotNull(action, nameof(action));
+            Require.NotNull(otherwise, nameof(otherwise));
+
+            if (IsSome && predicate.Invoke(Value))
             {
-                caseSome.Invoke(Value);
+                action.Invoke(Value);
             }
             else
             {
-                caseNone.Invoke();
+                otherwise.Invoke();
             }
         }
 
-        // Not really part of the interface, but closely related to it.
+        public void Do(Action<T> onSome, Action onNone)
+        {
+            Require.NotNull(onSome, nameof(onSome));
+            Require.NotNull(onNone, nameof(onNone));
 
-        // Alias for Apply().
+            if (IsSome)
+            {
+                onSome.Invoke(Value);
+            }
+            else
+            {
+                onNone.Invoke();
+            }
+        }
+
+        // Alias for Do().
         public void OnSome(Action<T> action)
         {
             Require.NotNull(action, nameof(action));

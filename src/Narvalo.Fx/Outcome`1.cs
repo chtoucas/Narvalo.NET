@@ -192,7 +192,7 @@ namespace Narvalo.Fx
                 return caseSuccess.Invoke(Value);
             }
 
-            public override void Trigger(Action<T> caseSuccess, Action<ExceptionDispatchInfo> caseFailure)
+            public override void Do(Action<T> caseSuccess, Action<ExceptionDispatchInfo> caseFailure)
             {
                 Require.NotNull(caseSuccess, nameof(caseSuccess));
 
@@ -290,7 +290,7 @@ namespace Narvalo.Fx
                 return caseFailure.Invoke(ExceptionInfo);
             }
 
-            public override void Trigger(Action<T> caseSuccess, Action<ExceptionDispatchInfo> caseFailure)
+            public override void Do(Action<T> caseSuccess, Action<ExceptionDispatchInfo> caseFailure)
             {
                 Require.NotNull(caseFailure, nameof(caseFailure));
 
@@ -366,7 +366,7 @@ namespace Narvalo.Fx
             Func<T, TResult> caseSuccess,
             Func<ExceptionDispatchInfo, TResult> caseFailure);
 
-        public abstract void Trigger(Action<T> caseSuccess, Action<ExceptionDispatchInfo> caseFailure);
+        public abstract void Do(Action<T> caseSuccess, Action<ExceptionDispatchInfo> caseFailure);
     }
 
 #if CONTRACTS_FULL

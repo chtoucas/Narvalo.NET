@@ -18,7 +18,9 @@ namespace Narvalo.Fx
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
-    // Provides a set of static methods for Identity<T>.
+    /// <summary>
+    /// Provides a set of static methods for Identity<T>.
+    /// </summary>
     // NB: Sometimes we prefer extension methods over static methods to be able to override them locally.
     public static partial class Identity
     {
@@ -44,12 +46,10 @@ namespace Narvalo.Fx
         /// <summary>
         /// Obtains an instance of the <see cref="Identity{T}"/> class for the specified value.
         /// </summary>
-        /// <remarks>
-        /// Named <c>return</c> in Haskell parlance.
-        /// </remarks>
         /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
         /// <param name="value">A value to be wrapped into a <see cref="Identity{T}"/> object.</param>
         /// <returns>An instance of the <see cref="Identity{T}"/> class for the specified value.</returns>
+        // Named "return" in Haskell parlance.
         public static Identity<T> Pure<T>(T value)
             /* T4: C# indent */
         {
@@ -62,9 +62,7 @@ namespace Narvalo.Fx
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
         /// </summary>
-        /// <remarks>
-        /// Named <c>join</c> in Haskell parlance.
-        /// </remarks>
+        // Named "join" in Haskell parlance.
         public static Identity<T> Flatten<T>(Identity<Identity<T>> square)
             /* T4: C# indent */
         {
@@ -77,10 +75,7 @@ namespace Narvalo.Fx
         #region Conditional execution of monadic expressions (Prelude)
 
 
-        /// <remarks>
-        /// <para>Named <c>when</c> in Haskell parlance.</para>
-        /// <para>Haskell uses a different signature.</para>
-        /// </remarks>
+        // Named "when" in Haskell parlance. Haskell uses a different signature.
         public static void When<TSource>(
             this Identity<TSource> @this,
             Func<TSource, bool> predicate,
@@ -94,10 +89,7 @@ namespace Narvalo.Fx
             @this.Bind(_ => { if (predicate.Invoke(_)) { action.Invoke(_); } return Identity.Unit; });
         }
 
-        /// <remarks>
-        /// <para>Named <c>unless</c> in Haskell parlance.</para>
-        /// <para>Haskell uses a different signature.</para>
-        /// </remarks>
+        // Named "unless" in Haskell parlance. Haskell uses a different signature.
         public static void Unless<TSource>(
             this Identity<TSource> @this,
             Func<TSource, bool> predicate,
@@ -118,9 +110,7 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Identity{T}" /> values.
         /// </summary>
-        /// <remarks>
-        /// Named <c>liftM</c> in Haskell parlance.
-        /// </remarks>
+        // Named "liftM" in Haskell parlance.
         public static Func<Identity<T>, Identity<TResult>> Lift<T, TResult>(
             Func<T, TResult> fun)
             /* T4: C# indent */
@@ -138,9 +128,7 @@ namespace Narvalo.Fx
         /// Promotes a function to use and return <see cref="Identity{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        /// <remarks>
-        /// Named <c>liftM2</c> in Haskell parlance.
-        /// </remarks>
+        // Named "liftM2" in Haskell parlance.
         public static Func<Identity<T1>, Identity<T2>, Identity<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
             /* T4: C# indent */
@@ -158,9 +146,7 @@ namespace Narvalo.Fx
         /// Promotes a function to use and return <see cref="Identity{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        /// <remarks>
-        /// Named <c>liftM3</c> in Haskell parlance.
-        /// </remarks>
+        // Named "liftM3" in Haskell parlance.
         public static Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
             /* T4: C# indent */
@@ -178,9 +164,7 @@ namespace Narvalo.Fx
         /// Promotes a function to use and return <see cref="Identity{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        /// <remarks>
-        /// Named <c>liftM4</c> in Haskell parlance.
-        /// </remarks>
+        // Named "liftM4" in Haskell parlance.
         public static Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<T4>, Identity<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> fun)
@@ -199,9 +183,7 @@ namespace Narvalo.Fx
         /// Promotes a function to use and return <see cref="Identity{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        /// <remarks>
-        /// Named <c>liftM5</c> in Haskell parlance.
-        /// </remarks>
+        // Named "liftM5" in Haskell parlance.
         public static Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<T4>, Identity<T5>, Identity<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> fun)
@@ -224,9 +206,7 @@ namespace Narvalo.Fx
     {
         #region Basic Monad functions (Prelude)
 
-        /// <remarks>
-        /// Named <c>fmap</c> in Haskell parlance.
-        /// </remarks>
+        // Named "fmap" in Haskell parlance.
         public static Identity<TResult> Select<TSource, TResult>(
             this Identity<TSource> @this,
             Func<TSource, TResult> selector)
@@ -238,9 +218,7 @@ namespace Narvalo.Fx
             return @this.Bind(_ => Identity.Pure(selector.Invoke(_)));
         }
 
-        /// <remarks>
-        /// Named <c>&gt;&gt;</c> in Haskell parlance.
-        /// </remarks>
+        // Named ">>" in Haskell parlance.
         public static Identity<TResult> Then<TSource, TResult>(
             this Identity<TSource> @this,
             Identity<TResult> other)
@@ -251,9 +229,7 @@ namespace Narvalo.Fx
             return @this.Bind(_ => other);
         }
 
-        /// <remarks>
-        /// Named <c>forever</c> in Haskell parlance.
-        /// </remarks>
+        // Named "forever" in Haskell parlance.
         public static Identity<TResult> Forever<TSource, TResult>(
             this Identity<TSource> @this,
             Func<Identity<TResult>> fun
@@ -265,9 +241,7 @@ namespace Narvalo.Fx
             return @this.Then(@this.Forever(fun));
         }
 
-        /// <remarks>
-        /// Named <c>void</c> in Haskell parlance.
-        /// </remarks>
+        // Named "void" in Haskell parlance.
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
         public static Identity<global::Narvalo.Fx.Unit> Ignore<TSource>(this Identity<TSource> @this)
             /* T4: C# indent */
@@ -282,9 +256,7 @@ namespace Narvalo.Fx
         #region Generalisations of list functions (Prelude)
 
 
-        /// <remarks>
-        /// Named <c>replicateM</c> in Haskell parlance.
-        /// </remarks>
+        // Named "replicateM" in Haskell parlance.
         public static Identity<IEnumerable<TSource>> Repeat<TSource>(
             this Identity<TSource> @this,
             int count)
@@ -384,7 +356,7 @@ namespace Narvalo.Fx
 
 
         /// <remarks>
-        /// Kind of generalisation of Zip (liftM2).
+        /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" /> (liftM2).
         /// </remarks>
         public static Identity<TResult> SelectMany<TSource, TMiddle, TResult>(
             this Identity<TSource> @this,
@@ -426,9 +398,7 @@ namespace Narvalo.Fx
             return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
         }
 
-
-        // Like Select() w/ an action.
-        public static void Apply<TSource>(
+        public static void Do<TSource>(
             this Identity<TSource> @this,
             Action<TSource> action)
             /* T4: C# indent */
@@ -446,9 +416,7 @@ namespace Narvalo.Fx
         #region Basic Monad functions (Prelude)
 
 
-        /// <remarks>
-        /// Named <c>=&lt;&lt;</c> in Haskell parlance. Same as <c>bind</c> with its arguments flipped.
-        /// </remarks>
+        // Named "=<<" in Haskell parlance. Same as Bind (>>=) with its arguments flipped.
         public static Identity<TResult> Invoke<TSource, TResult>(
             this Func<TSource, Identity<TResult>> @this,
             Identity<TSource> value)
@@ -460,9 +428,7 @@ namespace Narvalo.Fx
             return value.Bind(@this);
         }
 
-        /// <remarks>
-        /// Named <c>&gt;=&gt;</c> in Haskell parlance.
-        /// </remarks>
+        // Named ">=>" in Haskell parlance.
         public static Func<TSource, Identity<TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, Identity<TMiddle>> @this,
             Func<TMiddle, Identity<TResult>> funM)
@@ -475,9 +441,7 @@ namespace Narvalo.Fx
             return _ => @this.Invoke(_).Bind(funM);
         }
 
-        /// <remarks>
-        /// Named <c>&lt;=&lt;</c> in Haskell parlance.
-        /// </remarks>
+        // Named "<=<" in Haskell parlance.
         public static Func<TSource, Identity<TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, Identity<TResult>> @this,
             Func<TSource, Identity<TMiddle>> funM)

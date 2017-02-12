@@ -17,7 +17,7 @@ public partial class MonadTemplate
 
 <#+ if (!HasTypeConstraints) { #>
 
-        /// <remarks>Named <c>mapM</c> in Haskell parlance.</remarks>
+        // Named "mapM" in Haskell parlance.
         public static <#= Name #><IEnumerable<TResult>> Map<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><TResult>> selectorM)
@@ -39,7 +39,7 @@ public partial class MonadTemplate
 
 <#+ if (!HasTypeConstraints) { #>
 
-        /// <remarks>Named <c>filterM</c> in Haskell parlance.</remarks>
+        // Named "filterM" in Haskell parlance.
         public static <#= Name #><IEnumerable<TSource>> Filter<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><bool>> predicateM)
@@ -52,9 +52,7 @@ public partial class MonadTemplate
             return @this.FilterImpl(predicateM);
         }
 
-        /// <remarks>
-        /// Named <c>mapAndUnzipM</c> in Haskell parlance.
-        /// </remarks>
+        // Named "mapAndUnzipM" in Haskell parlance.
         public static <#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
             MapUnzip<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
@@ -69,9 +67,7 @@ public partial class MonadTemplate
             return @this.MapUnzipImpl(funM);
         }
 
-        /// <remarks>
-        /// Named <c>zipWithM</c> in Haskell parlance.
-        /// </remarks>
+        // Named "zipWithM" in Haskell parlance.
         public static <#= Name #><IEnumerable<TResult>> ZipWith<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
@@ -89,9 +85,7 @@ public partial class MonadTemplate
 
 <#+ } // T4: End of !HasTypeConstraints. #>
 
-        /// <remarks>
-        /// Named <c>foldM</c> in Haskell parlance.
-        /// </remarks>
+        // Named "foldM" in Haskell parlance.
         public static <#= Name #><TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
@@ -158,9 +152,7 @@ public partial class MonadTemplate
 
         #region Catamorphisms
 
-        /// <remarks>
-        /// <para>Haskell uses a different signature.</para>
-        /// </remarks>
+        // Haskell uses a different signature.
         public static <#= Name #><TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
@@ -178,9 +170,7 @@ public partial class MonadTemplate
             return @this.FoldImpl(seed, accumulatorM, predicate);
         }
 
-        /// <remarks>
-        /// <para>Haskell uses a different signature.</para>
-        /// </remarks>
+        // Haskell uses a different signature.
         public static <#= Name #><TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM,

@@ -5,7 +5,8 @@ public partial class MonadTemplate
     protected void EmitMonadEnumerableInternalExtensions()
     {
 #>
-    // Provides the core extension methods for IEnumerable<T> where T is a <#= Name #><S>.
+    // Provides default implementations for the extension methods for IEnumerable<<#= Name #><T>>.
+    // You will certainly want to override them to improve performance.
     internal static partial class EnumerableExtensions
     {
 

@@ -57,7 +57,7 @@ namespace Narvalo.Fx
                 return caseLeft.Invoke(_value);
             }
 
-            public override void Trigger(Action<TLeft> caseLeft, Action<TRight> caseRight)
+            public override void Do(Action<TLeft> caseLeft, Action<TRight> caseRight)
             {
                 Require.NotNull(caseLeft, nameof(caseLeft));
 
@@ -113,7 +113,7 @@ namespace Narvalo.Fx
                 return caseRight.Invoke(_value);
             }
 
-            public override void Trigger(Action<TLeft> caseLeft, Action<TRight> caseRight)
+            public override void Do(Action<TLeft> caseLeft, Action<TRight> caseRight)
             {
                 Require.NotNull(caseRight, nameof(caseRight));
 
@@ -158,7 +158,7 @@ namespace Narvalo.Fx
     {
         public abstract TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight);
 
-        public abstract void Trigger(Action<TLeft> caseLeft, Action<TRight> caseRight);
+        public abstract void Do(Action<TLeft> caseLeft, Action<TRight> caseRight);
     }
 }
 

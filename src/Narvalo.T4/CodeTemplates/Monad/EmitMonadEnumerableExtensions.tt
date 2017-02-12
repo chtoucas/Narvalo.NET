@@ -5,16 +5,14 @@ public partial class MonadTemplate
     protected void EmitMonadEnumerableExtensions()
     {
 #>
-    // Provides extension methods for IEnumerable<T> where T is a <#= Name #><S>.
+    // Provides extension methods for IEnumerable<<#= Name #><T>>.
     public static partial class Sequence
     {
         #region Basic Monad functions (Prelude)
 
 <#+ if (!HasTypeConstraints) { #>
 
-        /// <remarks>
-        /// Named <c>sequence</c> in Haskell parlance.
-        /// </remarks>
+        // Named "sequence" in Haskell parlance.
         public static <#= Name #><IEnumerable<TSource>> Collect<TSource>(
             this IEnumerable<<#= Name #><TSource>> @this)
         {
@@ -34,9 +32,7 @@ public partial class MonadTemplate
 
         #region Generalisations of list functions (Prelude)
 
-        /// <remarks>
-        /// Named <c>msum</c> in Haskell parlance.
-        /// </remarks>
+        // Named "msum" in Haskell parlance.
         public static <#= Name #><TSource> Sum<TSource>(
             this IEnumerable<<#= Name #><TSource>> @this)
             <#+ WriteTypeConstraints("TSource"); #>

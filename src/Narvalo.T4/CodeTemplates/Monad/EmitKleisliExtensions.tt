@@ -12,9 +12,7 @@ public partial class MonadTemplate
 
 <#+ if (full && !HasTypeConstraints) { #>
 
-        /// <remarks>
-        /// Named <c>forM</c> in Haskell parlance. Same as <c>mapM</c> with its arguments flipped.
-        /// </remarks>
+        // Named "forM" in Haskell parlance. Same as Map (mapM) with its arguments flipped.
         public static <#= Name #><IEnumerable<TResult>> ForEach<TSource, TResult>(
             this Func<TSource, <#= Name #><TResult>> @this,
             IEnumerable<TSource> seq)
@@ -30,9 +28,7 @@ public partial class MonadTemplate
 
 <#+ } // T4: End of !HasTypeConstraints. #>
 
-        /// <remarks>
-        /// Named <c>=&lt;&lt;</c> in Haskell parlance. Same as <c>bind</c> with its arguments flipped.
-        /// </remarks>
+        // Named "=<<" in Haskell parlance. Same as Bind (>>=) with its arguments flipped.
         public static <#= Name #><TResult> Invoke<TSource, TResult>(
             this Func<TSource, <#= Name #><TResult>> @this,
             <#= Name #><TSource> value)
@@ -47,9 +43,7 @@ public partial class MonadTemplate
             return value.Bind(@this);
         }
 
-        /// <remarks>
-        /// Named <c>&gt;=&gt;</c> in Haskell parlance.
-        /// </remarks>
+        // Named ">=>" in Haskell parlance.
         public static Func<TSource, <#= Name #><TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, <#= Name #><TMiddle>> @this,
             Func<TMiddle, <#= Name #><TResult>> funM)
@@ -62,9 +56,7 @@ public partial class MonadTemplate
             return _ => @this.Invoke(_).Bind(funM);
         }
 
-        /// <remarks>
-        /// Named <c>&lt;=&lt;</c> in Haskell parlance.
-        /// </remarks>
+        // Named "<=<" in Haskell parlance.
         public static Func<TSource, <#= Name #><TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, <#= Name #><TResult>> @this,
             Func<TSource, <#= Name #><TMiddle>> funM)

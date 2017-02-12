@@ -21,7 +21,9 @@ namespace Monads
 
     using Monads.Linq;
 
-    // Provides a set of static methods for MonadOr<T>.
+    /// <summary>
+    /// Provides a set of static methods for MonadOr<T>.
+    /// </summary>
     // NB: Sometimes we prefer extension methods over static methods to be able to override them locally.
     public static partial class MonadOr
     {
@@ -48,10 +50,8 @@ namespace Monads
         /// <summary>
         /// Gets the zero for <see cref="MonadOr{T}"/>.
         /// </summary>
-        /// <remarks>
-        /// Named <c>mzero</c> in Haskell parlance.
-        /// </remarks>
         /// <value>The zero for <see cref="MonadOr{T}"/>.</value>
+        // Named "mzero" in Haskell parlance.
         public static MonadOr<global::Narvalo.Fx.Unit> None
         {
             get
@@ -66,12 +66,10 @@ namespace Monads
         /// <summary>
         /// Obtains an instance of the <see cref="MonadOr{T}"/> class for the specified value.
         /// </summary>
-        /// <remarks>
-        /// Named <c>return</c> in Haskell parlance.
-        /// </remarks>
         /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
         /// <param name="value">A value to be wrapped into a <see cref="MonadOr{T}"/> object.</param>
         /// <returns>An instance of the <see cref="MonadOr{T}"/> class for the specified value.</returns>
+        // Named "return" in Haskell parlance.
         public static MonadOr<T> Pure<T>(T value)
             /* T4: C# indent */
         {
@@ -85,9 +83,7 @@ namespace Monads
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
         /// </summary>
-        /// <remarks>
-        /// Named <c>join</c> in Haskell parlance.
-        /// </remarks>
+        // Named "join" in Haskell parlance.
         public static MonadOr<T> Flatten<T>(MonadOr<MonadOr<T>> square)
             /* T4: C# indent */
         {
@@ -102,9 +98,7 @@ namespace Monads
         #region Conditional execution of monadic expressions (Prelude)
 
 
-        /// <remarks>
-        /// Named <c>guard</c> in Haskell parlance.
-        /// </remarks>
+        // Named "guard" in Haskell parlance.
         public static MonadOr<global::Narvalo.Fx.Unit> Guard(bool predicate)
         {
             Warrant.NotNull<MonadOr<global::Narvalo.Fx.Unit>>();
@@ -113,10 +107,7 @@ namespace Monads
         }
 
 
-        /// <remarks>
-        /// <para>Named <c>when</c> in Haskell parlance.</para>
-        /// <para>Haskell uses a different signature.</para>
-        /// </remarks>
+        // Named "when" in Haskell parlance. Haskell uses a different signature.
         public static void When<TSource>(
             this MonadOr<TSource> @this,
             Func<TSource, bool> predicate,
@@ -130,10 +121,7 @@ namespace Monads
             @this.Bind(_ => { if (predicate.Invoke(_)) { action.Invoke(_); } return MonadOr.Unit; });
         }
 
-        /// <remarks>
-        /// <para>Named <c>unless</c> in Haskell parlance.</para>
-        /// <para>Haskell uses a different signature.</para>
-        /// </remarks>
+        // Named "unless" in Haskell parlance. Haskell uses a different signature.
         public static void Unless<TSource>(
             this MonadOr<TSource> @this,
             Func<TSource, bool> predicate,
@@ -154,9 +142,7 @@ namespace Monads
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadOr{T}" /> values.
         /// </summary>
-        /// <remarks>
-        /// Named <c>liftM</c> in Haskell parlance.
-        /// </remarks>
+        // Named "liftM" in Haskell parlance.
         public static Func<MonadOr<T>, MonadOr<TResult>> Lift<T, TResult>(
             Func<T, TResult> fun)
             /* T4: C# indent */
@@ -174,9 +160,7 @@ namespace Monads
         /// Promotes a function to use and return <see cref="MonadOr{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        /// <remarks>
-        /// Named <c>liftM2</c> in Haskell parlance.
-        /// </remarks>
+        // Named "liftM2" in Haskell parlance.
         public static Func<MonadOr<T1>, MonadOr<T2>, MonadOr<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
             /* T4: C# indent */
@@ -194,9 +178,7 @@ namespace Monads
         /// Promotes a function to use and return <see cref="MonadOr{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        /// <remarks>
-        /// Named <c>liftM3</c> in Haskell parlance.
-        /// </remarks>
+        // Named "liftM3" in Haskell parlance.
         public static Func<MonadOr<T1>, MonadOr<T2>, MonadOr<T3>, MonadOr<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
             /* T4: C# indent */
@@ -214,9 +196,7 @@ namespace Monads
         /// Promotes a function to use and return <see cref="MonadOr{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        /// <remarks>
-        /// Named <c>liftM4</c> in Haskell parlance.
-        /// </remarks>
+        // Named "liftM4" in Haskell parlance.
         public static Func<MonadOr<T1>, MonadOr<T2>, MonadOr<T3>, MonadOr<T4>, MonadOr<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> fun)
@@ -235,9 +215,7 @@ namespace Monads
         /// Promotes a function to use and return <see cref="MonadOr{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        /// <remarks>
-        /// Named <c>liftM5</c> in Haskell parlance.
-        /// </remarks>
+        // Named "liftM5" in Haskell parlance.
         public static Func<MonadOr<T1>, MonadOr<T2>, MonadOr<T3>, MonadOr<T4>, MonadOr<T5>, MonadOr<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> fun)
@@ -260,9 +238,7 @@ namespace Monads
     {
         #region Basic Monad functions (Prelude)
 
-        /// <remarks>
-        /// Named <c>fmap</c> in Haskell parlance.
-        /// </remarks>
+        // Named "fmap" in Haskell parlance.
         public static MonadOr<TResult> Select<TSource, TResult>(
             this MonadOr<TSource> @this,
             Func<TSource, TResult> selector)
@@ -275,9 +251,7 @@ namespace Monads
             return @this.Bind(_ => MonadOr.Pure(selector.Invoke(_)));
         }
 
-        /// <remarks>
-        /// Named <c>&gt;&gt;</c> in Haskell parlance.
-        /// </remarks>
+        // Named ">>" in Haskell parlance.
         public static MonadOr<TResult> Then<TSource, TResult>(
             this MonadOr<TSource> @this,
             MonadOr<TResult> other)
@@ -289,9 +263,7 @@ namespace Monads
             return @this.Bind(_ => other);
         }
 
-        /// <remarks>
-        /// Named <c>forever</c> in Haskell parlance.
-        /// </remarks>
+        // Named "forever" in Haskell parlance.
         public static MonadOr<TResult> Forever<TSource, TResult>(
             this MonadOr<TSource> @this,
             Func<MonadOr<TResult>> fun
@@ -304,9 +276,7 @@ namespace Monads
             return @this.Then(@this.Forever(fun));
         }
 
-        /// <remarks>
-        /// Named <c>void</c> in Haskell parlance.
-        /// </remarks>
+        // Named "void" in Haskell parlance.
         public static MonadOr<global::Narvalo.Fx.Unit> Ignore<TSource>(this MonadOr<TSource> @this)
             /* T4: C# indent */
         {
@@ -321,9 +291,7 @@ namespace Monads
         #region Generalisations of list functions (Prelude)
 
 
-        /// <remarks>
-        /// Named <c>mfilter</c> in Haskell parlance.
-        /// </remarks>
+        // Named "mfilter" in Haskell parlance.
         public static MonadOr<TSource> Where<TSource>(
             this MonadOr<TSource> @this,
             Func<TSource, bool> predicate)
@@ -338,9 +306,7 @@ namespace Monads
         }
 
 
-        /// <remarks>
-        /// Named <c>replicateM</c> in Haskell parlance.
-        /// </remarks>
+        // Named "replicateM" in Haskell parlance.
         public static MonadOr<IEnumerable<TSource>> Repeat<TSource>(
             this MonadOr<TSource> @this,
             int count)
@@ -445,7 +411,7 @@ namespace Monads
 
 
         /// <remarks>
-        /// Kind of generalisation of Zip (liftM2).
+        /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" /> (liftM2).
         /// </remarks>
         public static MonadOr<TResult> SelectMany<TSource, TMiddle, TResult>(
             this MonadOr<TSource> @this,
@@ -686,9 +652,7 @@ namespace Monads
             return @this.Bind(_ => !predicate.Invoke(_) ? other : MonadOr<TResult>.None);
         }
 
-
-        // Like Select() w/ an action.
-        public static void Apply<TSource>(
+        public static void Do<TSource>(
             this MonadOr<TSource> @this,
             Action<TSource> action)
             /* T4: C# indent */
@@ -707,9 +671,7 @@ namespace Monads
         #region Basic Monad functions (Prelude)
 
 
-        /// <remarks>
-        /// Named <c>forM</c> in Haskell parlance. Same as <c>mapM</c> with its arguments flipped.
-        /// </remarks>
+        // Named "forM" in Haskell parlance. Same as Map (mapM) with its arguments flipped.
         public static MonadOr<IEnumerable<TResult>> ForEach<TSource, TResult>(
             this Func<TSource, MonadOr<TResult>> @this,
             IEnumerable<TSource> seq)
@@ -722,9 +684,7 @@ namespace Monads
         }
 
 
-        /// <remarks>
-        /// Named <c>=&lt;&lt;</c> in Haskell parlance. Same as <c>bind</c> with its arguments flipped.
-        /// </remarks>
+        // Named "=<<" in Haskell parlance. Same as Bind (>>=) with its arguments flipped.
         public static MonadOr<TResult> Invoke<TSource, TResult>(
             this Func<TSource, MonadOr<TResult>> @this,
             MonadOr<TSource> value)
@@ -737,9 +697,7 @@ namespace Monads
             return value.Bind(@this);
         }
 
-        /// <remarks>
-        /// Named <c>&gt;=&gt;</c> in Haskell parlance.
-        /// </remarks>
+        // Named ">=>" in Haskell parlance.
         public static Func<TSource, MonadOr<TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, MonadOr<TMiddle>> @this,
             Func<TMiddle, MonadOr<TResult>> funM)
@@ -752,9 +710,7 @@ namespace Monads
             return _ => @this.Invoke(_).Bind(funM);
         }
 
-        /// <remarks>
-        /// Named <c>&lt;=&lt;</c> in Haskell parlance.
-        /// </remarks>
+        // Named "<=<" in Haskell parlance.
         public static Func<TSource, MonadOr<TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, MonadOr<TResult>> @this,
             Func<TSource, MonadOr<TMiddle>> funM)
@@ -777,15 +733,13 @@ namespace Monads
 
     using Monads.Internal;
 
-    // Provides extension methods for IEnumerable<T> where T is a MonadOr<S>.
+    // Provides extension methods for IEnumerable<MonadOr<T>>.
     public static partial class Sequence
     {
         #region Basic Monad functions (Prelude)
 
 
-        /// <remarks>
-        /// Named <c>sequence</c> in Haskell parlance.
-        /// </remarks>
+        // Named "sequence" in Haskell parlance.
         public static MonadOr<IEnumerable<TSource>> Collect<TSource>(
             this IEnumerable<MonadOr<TSource>> @this)
         {
@@ -801,9 +755,7 @@ namespace Monads
 
         #region Generalisations of list functions (Prelude)
 
-        /// <remarks>
-        /// Named <c>msum</c> in Haskell parlance.
-        /// </remarks>
+        // Named "msum" in Haskell parlance.
         public static MonadOr<TSource> Sum<TSource>(
             this IEnumerable<MonadOr<TSource>> @this)
             /* T4: C# indent */
@@ -838,7 +790,7 @@ namespace Monads.Linq
         #region Basic Monad functions (Prelude)
 
 
-        /// <remarks>Named <c>mapM</c> in Haskell parlance.</remarks>
+        // Named "mapM" in Haskell parlance.
         public static MonadOr<IEnumerable<TResult>> Map<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, MonadOr<TResult>> selectorM)
@@ -856,7 +808,7 @@ namespace Monads.Linq
         #region Generalisations of list functions (Prelude)
 
 
-        /// <remarks>Named <c>filterM</c> in Haskell parlance.</remarks>
+        // Named "filterM" in Haskell parlance.
         public static MonadOr<IEnumerable<TSource>> Filter<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, MonadOr<bool>> predicateM)
@@ -869,9 +821,7 @@ namespace Monads.Linq
             return @this.FilterImpl(predicateM);
         }
 
-        /// <remarks>
-        /// Named <c>mapAndUnzipM</c> in Haskell parlance.
-        /// </remarks>
+        // Named "mapAndUnzipM" in Haskell parlance.
         public static MonadOr<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
             MapUnzip<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
@@ -884,9 +834,7 @@ namespace Monads.Linq
             return @this.MapUnzipImpl(funM);
         }
 
-        /// <remarks>
-        /// Named <c>zipWithM</c> in Haskell parlance.
-        /// </remarks>
+        // Named "zipWithM" in Haskell parlance.
         public static MonadOr<IEnumerable<TResult>> ZipWith<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
@@ -901,9 +849,7 @@ namespace Monads.Linq
         }
 
 
-        /// <remarks>
-        /// Named <c>foldM</c> in Haskell parlance.
-        /// </remarks>
+        // Named "foldM" in Haskell parlance.
         public static MonadOr<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
@@ -962,9 +908,7 @@ namespace Monads.Linq
 
         #region Catamorphisms
 
-        /// <remarks>
-        /// <para>Haskell uses a different signature.</para>
-        /// </remarks>
+        // Haskell uses a different signature.
         public static MonadOr<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
@@ -980,9 +924,7 @@ namespace Monads.Linq
             return @this.FoldImpl(seed, accumulatorM, predicate);
         }
 
-        /// <remarks>
-        /// <para>Haskell uses a different signature.</para>
-        /// </remarks>
+        // Haskell uses a different signature.
         public static MonadOr<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, MonadOr<TSource>> accumulatorM,
@@ -1009,7 +951,8 @@ namespace Monads.Internal
 
     using Monads.Linq;
 
-    // Provides the core extension methods for IEnumerable<T> where T is a MonadOr<S>.
+    // Provides default implementations for the extension methods for IEnumerable<MonadOr<T>>.
+    // You will certainly want to override them to improve performance.
     internal static partial class EnumerableExtensions
     {
 
@@ -1058,7 +1001,8 @@ namespace Monads.Internal
 
     } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
 
-    // Provides the core extension methods for IEnumerable<T>.
+    // Provides default implementations for the extension methods for IEnumerable<T>.
+    // You will certainly want to override them to improve performance.
     internal static partial class EnumerableExtensions
     {
 

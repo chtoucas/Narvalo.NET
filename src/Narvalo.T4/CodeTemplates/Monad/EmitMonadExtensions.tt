@@ -10,9 +10,7 @@ public partial class MonadTemplate
     {
         #region Basic Monad functions (Prelude)
 
-        /// <remarks>
-        /// Named <c>fmap</c> in Haskell parlance.
-        /// </remarks>
+        // Named "fmap" in Haskell parlance.
         public static <#= Name #><TResult> <#= MapName #><TSource, TResult>(
             this <#= Name #><TSource> @this,
             Func<TSource, TResult> selector)
@@ -27,9 +25,7 @@ public partial class MonadTemplate
             return @this.Bind(_ => <#= Name #>.<#= ReturnName #>(selector.Invoke(_)));
         }
 
-        /// <remarks>
-        /// Named <c>&gt;&gt;</c> in Haskell parlance.
-        /// </remarks>
+        // Named ">>" in Haskell parlance.
         public static <#= Name #><TResult> Then<TSource, TResult>(
             this <#= Name #><TSource> @this,
             <#= Name #><TResult> other)
@@ -43,9 +39,7 @@ public partial class MonadTemplate
             return @this.Bind(_ => other);
         }
 
-        /// <remarks>
-        /// Named <c>forever</c> in Haskell parlance.
-        /// </remarks>
+        // Named "forever" in Haskell parlance.
         public static <#= Name #><TResult> Forever<TSource, TResult>(
             this <#= Name #><TSource> @this,
             Func<<#= Name #><TResult>> fun
@@ -60,9 +54,7 @@ public partial class MonadTemplate
             return @this.Then(@this.Forever(fun));
         }
 
-        /// <remarks>
-        /// Named <c>void</c> in Haskell parlance.
-        /// </remarks>
+        // Named "void" in Haskell parlance.
 <#+ if (!SuppressMessage) { #>
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
 <#+ } #>
@@ -83,9 +75,7 @@ public partial class MonadTemplate
 
 <#+ if (HasZero) { #>
 
-        /// <remarks>
-        /// Named <c>mfilter</c> in Haskell parlance.
-        /// </remarks>
+        // Named "mfilter" in Haskell parlance.
         public static <#= Name #><TSource> <#= FilterName #><TSource>(
             this <#= Name #><TSource> @this,
             Func<TSource, bool> predicate)
@@ -105,9 +95,7 @@ public partial class MonadTemplate
 
 <#+ if (!HasTypeConstraints) { #>
 
-        /// <remarks>
-        /// Named <c>replicateM</c> in Haskell parlance.
-        /// </remarks>
+        // Named "replicateM" in Haskell parlance.
         public static <#= Name #><IEnumerable<TSource>> Repeat<TSource>(
             this <#= Name #><TSource> @this,
             int count)
@@ -256,7 +244,7 @@ public partial class MonadTemplate
 <#+ } // T4: End of !PreferLinqDialect. #>
 
         /// <remarks>
-        /// Kind of generalisation of Zip (liftM2).
+        /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" /> (liftM2).
         /// </remarks>
         public static <#= Name #><TResult> SelectMany<TSource, TMiddle, TResult>(
             this <#= Name #><TSource> @this,
