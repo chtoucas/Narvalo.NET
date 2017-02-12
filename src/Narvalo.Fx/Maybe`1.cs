@@ -19,7 +19,7 @@ namespace Narvalo.Fx
     [DebuggerDisplay("IsSome = {IsSome}")]
     [DebuggerTypeProxy(typeof(Maybe<>.DebugView))]
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "[Intentionally] Maybe<T> only pretends to be a collection.")]
-    public partial struct Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>, Internal.IMatchable<T>
+    public partial struct Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>, Internal.IAlternative<T>
     {
         private readonly bool _isSome;
 
@@ -227,7 +227,7 @@ namespace Narvalo.Fx
         public Maybe<T> OrElse(Maybe<T> other) => IsNone ? other : this;
     }
 
-    // Implements the Internal.IMatchable<T> interface.
+    // Implements the Internal.IAlternative<T> interface.
     public partial struct Maybe<T>
     {
         public TResult Match<TResult>(Func<T, TResult> caseSome, Func<TResult> caseNone)
@@ -248,6 +248,7 @@ namespace Narvalo.Fx
 
         public TResult Coalesce<TResult>(Func<T, bool> predicate, Func<T, TResult> selector, Func<TResult> otherwise)
         {
+            Require.NotNull(predicate, nameof(predicate));
             Require.NotNull(selector, nameof(selector));
             Require.NotNull(otherwise, nameof(otherwise));
 
@@ -263,6 +264,7 @@ namespace Narvalo.Fx
 
         public void Do(Func<T, bool> predicate, Action<T> action, Action otherwise)
         {
+            Require.NotNull(predicate, nameof(predicate));
             Require.NotNull(action, nameof(action));
             Require.NotNull(otherwise, nameof(otherwise));
 

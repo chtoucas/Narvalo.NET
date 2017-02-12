@@ -13,7 +13,7 @@ namespace Narvalo.Fx
     /// <remarks>The enclosed value might be <see langword="null"/>.</remarks>
     /// <typeparam name="TLeft">The underlying type of the left part.</typeparam>
     /// <typeparam name="TRight">The underlying type of the right part.</typeparam>
-    public abstract partial class Either<TLeft, TRight> : Internal.IDisjointUnionOf<TLeft, TRight>
+    public abstract partial class Either<TLeft, TRight> : Internal.IMatchable<TLeft, TRight>
     {
 #if CONTRACTS_FULL // Custom ctor visibility for the contract class only.
         protected Either() { }
@@ -153,7 +153,7 @@ namespace Narvalo.Fx
         }
     }
 
-    // Implements the Internal.IDisjointUnionOf<TLeft, TRight> interface.
+    // Implements the Internal.IMatchable<TLeft, TRight> interface.
     public abstract partial class Either<TLeft, TRight>
     {
         public abstract TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight);

@@ -277,7 +277,7 @@ namespace Monads
         }
 
         // Named "void" in Haskell parlance.
-        public static MonadOr<global::Narvalo.Fx.Unit> Ignore<TSource>(this MonadOr<TSource> @this)
+        public static MonadOr<global::Narvalo.Fx.Unit> Forget<TSource>(this MonadOr<TSource> @this)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
@@ -611,9 +611,25 @@ namespace Monads
         #endregion
     } // End of MonadOr - T4: EmitMonadExtensions().
 
-    // Provides non-standard extension methods for MonadOr<T>.
+    // Provides more extension methods for MonadOr<T>.
     public static partial class MonadOr
     {
+        #region Applicative
+
+        // Named "<$" in Haskell parlance.
+        public static MonadOr<TSource> Replace<TSource>(
+            this MonadOr<TSource> @this,
+            TSource value)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Warrant.NotNull<MonadOr<TSource>>();
+
+            return @this.Select(_ => value);
+        }
+
+        #endregion
+
         public static MonadOr<TResult> Coalesce<TSource, TResult>(
             this MonadOr<TSource> @this,
             Func<TSource, bool> predicate,

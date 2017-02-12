@@ -73,17 +73,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BooleanResult`1.cs" />
     <Compile Include="Func.cs" />
-    <Compile Include="Internal\IDisjointUnionOf`2.cs" />
-    <Compile Include="Internal\IMatchable`.cs" />
+    <Compile Include="Internal\IMatchable`2.cs" />
+    <Compile Include="Internal\IAlternative`.cs" />
     <Compile Include="Iteration.cs" />
     <Compile Include="Iteration`2.cs" />
     <Compile Include="Linq\WhereAny.cs" />
     <Compile Include="Linq\SelectAny.cs" />
-    <Compile Include="Maybe.Overrides.cs" />
+    <Compile Include="Maybe.Shadowing.cs" />
     <Compile Include="Nullable.cs" />
-    <Compile Include="Outcome.Overrides.cs" />
+    <Compile Include="Outcome.Shadowing.cs" />
     <Compile Include="VoidOrError.cs" />
     <Compile Include="VoidOrError.g.cs">
       <DependentUpon>VoidOrError.tt</DependentUpon>

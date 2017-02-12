@@ -5,12 +5,12 @@ namespace Narvalo.Fx.Internal
     using System;
 
     // Degenerate case, really an if/then/else.
-    // NB: Equivalent to IDisjointUnionOf<T, Unit>.
+    // NB: Equivalent to IMatchable<T, Unit>.
     // You should also implements the following methods:
     // - void OnValue(Action<T>)
     // - void OnElse(Action)
     // There are not included since each type has a better way of naming them.
-    internal interface IMatchable<T>
+    internal interface IAlternative<T>
     {
         TResult Match<TResult>(Func<T, TResult> selector, Func<TResult> otherwise);
 
@@ -27,13 +27,13 @@ namespace Narvalo.Fx.Internal
         void Do(Action<T> action, Action otherwise);
     }
 
-    // NB: Equivalent to IDisjointUnionOf<T1, T2, Unit> (not defined).
+    // NB: Equivalent to IMatchable<T1, T2, Unit> (not defined).
     // You should also implements the following methods:
     // - void OnValue1(Action<T1>)
     // - void OnValue2(Action<T1>)
     // - void OnElse(Action)
     // There are not included since each type has a better way of naming them.
-    internal interface IMatchable<T1, T2>
+    internal interface IAlternative<T1, T2>
     {
         TResult Match<TResult>(Func<T1, TResult> selector1, Func<T2, TResult> selector2, Func<TResult> otherwise);
 

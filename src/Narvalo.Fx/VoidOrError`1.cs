@@ -9,7 +9,7 @@ namespace Narvalo.Fx
     using System.Runtime.CompilerServices;
 
     // Friendly version of Either<TError, Unit>.
-    public partial class VoidOrError<TError> : Internal.IMatchable<TError>
+    public partial class VoidOrError<TError> : Internal.IAlternative<TError>
     {
         private VoidOrError() { }
 
@@ -22,7 +22,7 @@ namespace Narvalo.Fx
 
         public bool IsVoid => !IsError;
 
-        public virtual TError Error
+        public virtual TError Message
         {
             get
             {
@@ -41,33 +41,33 @@ namespace Narvalo.Fx
         [DebuggerTypeProxy(typeof(VoidOrError<>.Error_.DebugView))]
         private sealed partial class Error_ : VoidOrError<TError>
         {
-            private readonly TError _error;
+            private readonly TError _message;
 
-            public Error_(TError error)
+            public Error_(TError message)
                 : base(true)
             {
-                Demand.NotNullUnconstrained(error);
+                Demand.NotNullUnconstrained(message);
 
-                _error = error;
+                _message = message;
             }
 
-            public override TError Error
+            public override TError Message
             {
-                get { Warrant.NotNullUnconstrained<TError>(); return _error; }
+                get { Warrant.NotNullUnconstrained<TError>(); return _message; }
             }
 
             public override TResult Match<TResult>(Func<TError, TResult> caseError, Func<TResult> caseVoid)
             {
                 Require.NotNull(caseError, nameof(caseError));
 
-                return caseError.Invoke(Error);
+                return caseError.Invoke(Message);
             }
 
             public override TResult Match<TResult>(Func<TError, TResult> caseError, TResult caseVoid)
             {
                 Require.NotNull(caseError, nameof(caseError));
 
-                return caseError.Invoke(Error);
+                return caseError.Invoke(Message);
             }
 
             public override TResult Coalesce<TResult>(
@@ -75,26 +75,29 @@ namespace Narvalo.Fx
                 Func<TError, TResult> selector,
                 Func<TResult> otherwise)
             {
+                Require.NotNull(predicate, nameof(predicate));
+                Require.NotNull(selector, nameof(selector));
                 Require.NotNull(otherwise, nameof(otherwise));
 
-                return predicate.Invoke(Error) ? selector.Invoke(Error) : otherwise.Invoke();
+                return predicate.Invoke(Message) ? selector.Invoke(Message) : otherwise.Invoke();
             }
 
             public override TResult Coalesce<TResult>(Func<TError, bool> predicate, TResult then, TResult other)
             {
                 Require.NotNull(predicate, nameof(predicate));
 
-                return predicate.Invoke(Error) ? then : other;
+                return predicate.Invoke(Message) ? then : other;
             }
 
             public override void Do(Func<TError, bool> predicate, Action<TError> action, Action otherwise)
             {
                 Require.NotNull(predicate, nameof(predicate));
                 Require.NotNull(action, nameof(action));
+                Require.NotNull(otherwise, nameof(otherwise));
 
-                if (predicate.Invoke(Error))
+                if (predicate.Invoke(Message))
                 {
-                    action.Invoke(Error);
+                    action.Invoke(Message);
                 }
                 else
                 {
@@ -106,14 +109,14 @@ namespace Narvalo.Fx
             {
                 Require.NotNull(caseError, nameof(caseError));
 
-                caseError.Invoke(Error);
+                caseError.Invoke(Message);
             }
 
             public override string ToString()
             {
                 Warrant.NotNull<string>();
 
-                return "Error(" + Error.ToString() + ")";
+                return "Error(" + Message.ToString() + ")";
             }
 
             /// <summary>
@@ -130,7 +133,7 @@ namespace Narvalo.Fx
                     _inner = inner;
                 }
 
-                public TError Message => _inner.Error;
+                public TError Message => _inner.Message;
             }
         }
     }
@@ -142,7 +145,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(selectorM, nameof(selectorM));
 
-            return IsError ? selectorM.Invoke(Error) : VoidOrError<TResult>.Void;
+            return IsError ? selectorM.Invoke(Message) : VoidOrError<TResult>.Void;
         }
 
         [DebuggerHidden]
@@ -158,7 +161,7 @@ namespace Narvalo.Fx
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static VoidOrError<TError> μ(VoidOrError<VoidOrError<TError>> square)
-            => square.IsError ? square.Error : VoidOrError<TError>.Void;
+            => square.IsError ? square.Message : VoidOrError<TError>.Void;
     }
 
     // Provides the core MonadOr methods.
@@ -176,7 +179,7 @@ namespace Narvalo.Fx
         public VoidOrError<TError> OrElse(VoidOrError<TError> other) => IsVoid ? other : this;
     }
 
-    // Implements the Internal.IMatchable<TError> interface.
+    // Implements the Internal.IAlternative<TError> interface.
     public partial class VoidOrError<TError>
     {
         public virtual TResult Match<TResult>(Func<TError, TResult> caseError, Func<TResult> caseVoid)

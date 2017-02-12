@@ -73,12 +73,11 @@ TODO
 Narvalo.Fx:
 - Review
   * Forever, When, Unless and Guard.
-  * Trigger, OnSome, OnNone <- Implements for other monads.
+  * Do, OnSome, OnNone <- Implements for other classes.
 - Review and test all IEnumerable<T> extensions.
 - Check signatures / Haskell.
 - Rework EmptyIfNull()?
-- Alternative, Idiom
-- ISwitch -> On...
+- Alternative, Applicative
 - VoidOr... use the same design as Either.
 - Async versions?
 - ToString() and generics.

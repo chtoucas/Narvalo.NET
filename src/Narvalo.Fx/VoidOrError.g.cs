@@ -275,7 +275,7 @@ namespace Narvalo.Fx
 
         // Named "void" in Haskell parlance.
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
-        public static VoidOrError<global::Narvalo.Fx.Unit> Ignore<TSource>(this VoidOrError<TSource> @this)
+        public static VoidOrError<global::Narvalo.Fx.Unit> Forget<TSource>(this VoidOrError<TSource> @this)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
@@ -609,9 +609,25 @@ namespace Narvalo.Fx
         #endregion
     } // End of VoidOrError - T4: EmitMonadExtensions().
 
-    // Provides non-standard extension methods for VoidOrError<T>.
+    // Provides more extension methods for VoidOrError<T>.
     public static partial class VoidOrError
     {
+        #region Applicative
+
+        // Named "<$" in Haskell parlance.
+        public static VoidOrError<TSource> Replace<TSource>(
+            this VoidOrError<TSource> @this,
+            TSource value)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Warrant.NotNull<VoidOrError<TSource>>();
+
+            return @this.Select(_ => value);
+        }
+
+        #endregion
+
         public static VoidOrError<TResult> Coalesce<TSource, TResult>(
             this VoidOrError<TSource> @this,
             Func<TSource, bool> predicate,

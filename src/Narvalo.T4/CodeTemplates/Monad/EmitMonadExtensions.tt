@@ -58,7 +58,7 @@ public partial class MonadTemplate
 <#+ if (!SuppressMessage) { #>
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
 <#+ } #>
-        public static <#= Name #><global::Narvalo.Fx.Unit> Ignore<TSource>(this <#= Name #><TSource> @this)
+        public static <#= Name #><global::Narvalo.Fx.Unit> Forget<TSource>(this <#= Name #><TSource> @this)
             <#+ WriteTypeConstraints("TSource"); #>
         {
             <#+ WriteNotNull(); #>

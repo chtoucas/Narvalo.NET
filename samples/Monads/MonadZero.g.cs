@@ -277,7 +277,7 @@ namespace Monads
         }
 
         // Named "void" in Haskell parlance.
-        public static MonadZero<global::Narvalo.Fx.Unit> Ignore<TSource>(this MonadZero<TSource> @this)
+        public static MonadZero<global::Narvalo.Fx.Unit> Forget<TSource>(this MonadZero<TSource> @this)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
@@ -611,9 +611,25 @@ namespace Monads
         #endregion
     } // End of MonadZero - T4: EmitMonadExtensions().
 
-    // Provides non-standard extension methods for MonadZero<T>.
+    // Provides more extension methods for MonadZero<T>.
     public static partial class MonadZero
     {
+        #region Applicative
+
+        // Named "<$" in Haskell parlance.
+        public static MonadZero<TSource> Replace<TSource>(
+            this MonadZero<TSource> @this,
+            TSource value)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Warrant.NotNull<MonadZero<TSource>>();
+
+            return @this.Select(_ => value);
+        }
+
+        #endregion
+
         public static MonadZero<TResult> Coalesce<TSource, TResult>(
             this MonadZero<TSource> @this,
             Func<TSource, bool> predicate,

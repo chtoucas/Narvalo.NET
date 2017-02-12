@@ -248,7 +248,7 @@ namespace Narvalo.Fx
 
         // Named "void" in Haskell parlance.
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
-        public static Outcome<global::Narvalo.Fx.Unit> Ignore<TSource>(this Outcome<TSource> @this)
+        public static Outcome<global::Narvalo.Fx.Unit> Forget<TSource>(this Outcome<TSource> @this)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
@@ -392,9 +392,24 @@ namespace Narvalo.Fx
         #endregion
     } // End of Outcome - T4: EmitMonadExtensions().
 
-    // Provides non-standard extension methods for Outcome<T>.
+    // Provides more extension methods for Outcome<T>.
     public static partial class Outcome
     {
+        #region Applicative
+
+        // Named "<$" in Haskell parlance.
+        public static Outcome<TSource> Replace<TSource>(
+            this Outcome<TSource> @this,
+            TSource value)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+
+            return @this.Select(_ => value);
+        }
+
+        #endregion
+
         public static Outcome<TResult> Coalesce<TSource, TResult>(
             this Outcome<TSource> @this,
             Func<TSource, bool> predicate,

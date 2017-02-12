@@ -23,7 +23,7 @@ namespace Narvalo.Fx
     /// </remarks>
     /// <typeparam name="T">The underlying type of the value.</typeparam>
     // Friendly version of Either<ExceptionDispatchInfo, T>.
-    public abstract partial class Outcome<T> : Internal.IDisjointUnionOf<T, ExceptionDispatchInfo>
+    public abstract partial class Outcome<T> : Internal.IMatchable<T, ExceptionDispatchInfo>
     {
 #if CONTRACTS_FULL // Custom ctor visibility for the contract class only.
         protected Outcome(bool isSuccess) { IsSuccess = isSuccess; }
@@ -359,7 +359,7 @@ namespace Narvalo.Fx
         }
     }
 
-    // Implements the Internal.IDisjointUnionOf<T, ExceptionDispatchInfo> interface.
+    // Implements the Internal.IMatchable<T, ExceptionDispatchInfo> interface.
     public abstract partial class Outcome<T>
     {
         public abstract TResult Match<TResult>(

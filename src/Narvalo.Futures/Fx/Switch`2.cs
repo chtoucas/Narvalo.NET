@@ -15,7 +15,7 @@ namespace Narvalo.Fx
     /// <remarks>Any enclosed value is not null.</remarks>
     /// <typeparam name="TLeft">The underlying type of the left part.</typeparam>
     /// <typeparam name="TRight">The underlying type of the right part.</typeparam>
-    public abstract partial class Switch<TLeft, TRight> : Internal.IMatchable<TLeft, TRight>
+    public abstract partial class Switch<TLeft, TRight> : Internal.IAlternative<TLeft, TRight>
     {
         private static readonly Switch<TLeft, TRight> s_Empty = new Switch<TLeft, TRight>.Empty_();
 
@@ -330,7 +330,7 @@ namespace Narvalo.Fx
         }
     }
 
-    // Implements the Internal.IMatchable<TLeft, TRight> interface.
+    // Implements the Internal.IAlternative<TLeft, TRight> interface.
     public abstract partial class Switch<TLeft, TRight>
     {
         public abstract TResult Match<TResult>(

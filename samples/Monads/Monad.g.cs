@@ -248,7 +248,7 @@ namespace Monads
         }
 
         // Named "void" in Haskell parlance.
-        public static Monad<global::Narvalo.Fx.Unit> Ignore<TSource>(this Monad<TSource> @this)
+        public static Monad<global::Narvalo.Fx.Unit> Forget<TSource>(this Monad<TSource> @this)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
@@ -392,9 +392,24 @@ namespace Monads
         #endregion
     } // End of Monad - T4: EmitMonadExtensions().
 
-    // Provides non-standard extension methods for Monad<T>.
+    // Provides more extension methods for Monad<T>.
     public static partial class Monad
     {
+        #region Applicative
+
+        // Named "<$" in Haskell parlance.
+        public static Monad<TSource> Replace<TSource>(
+            this Monad<TSource> @this,
+            TSource value)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+
+            return @this.Select(_ => value);
+        }
+
+        #endregion
+
         public static Monad<TResult> Coalesce<TSource, TResult>(
             this Monad<TSource> @this,
             Func<TSource, bool> predicate,

@@ -12,7 +12,7 @@ namespace Narvalo.Fx
 
             if (@this.IsError)
             {
-                throw @this.Error;
+                throw @this.Message;
             }
         }
     }

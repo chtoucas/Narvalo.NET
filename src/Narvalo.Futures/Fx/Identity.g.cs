@@ -243,7 +243,7 @@ namespace Narvalo.Fx
 
         // Named "void" in Haskell parlance.
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
-        public static Identity<global::Narvalo.Fx.Unit> Ignore<TSource>(this Identity<TSource> @this)
+        public static Identity<global::Narvalo.Fx.Unit> Forget<TSource>(this Identity<TSource> @this)
             /* T4: C# indent */
         {
             /* T4: C# indent */
@@ -386,9 +386,24 @@ namespace Narvalo.Fx
         #endregion
     } // End of Identity - T4: EmitMonadExtensions().
 
-    // Provides non-standard extension methods for Identity<T>.
+    // Provides more extension methods for Identity<T>.
     public static partial class Identity
     {
+        #region Applicative
+
+        // Named "<$" in Haskell parlance.
+        public static Identity<TSource> Replace<TSource>(
+            this Identity<TSource> @this,
+            TSource value)
+            /* T4: C# indent */
+        {
+            /* T4: C# indent */
+
+            return @this.Select(_ => value);
+        }
+
+        #endregion
+
         public static Identity<TResult> Coalesce<TSource, TResult>(
             this Identity<TSource> @this,
             Func<TSource, bool> predicate,

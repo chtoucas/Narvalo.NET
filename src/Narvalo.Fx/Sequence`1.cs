@@ -3,6 +3,7 @@
 namespace Narvalo.Fx
 {
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
 
@@ -15,6 +16,7 @@ namespace Narvalo.Fx
         /// Workaround for the fact that <see cref="Enumerable.Empty{TElement}"/> does not have any contract attached.
         /// </remarks>
         /// <value>An empty <see cref="IEnumerable{TElement}"/> whose type argument is TElement.</value>
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
         public static IEnumerable<TElement> Empty
         {
             get
