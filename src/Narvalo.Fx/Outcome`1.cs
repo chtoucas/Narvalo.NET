@@ -5,7 +5,6 @@ namespace Narvalo.Fx
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Runtime.CompilerServices;
     using System.Runtime.ExceptionServices;
@@ -26,9 +25,9 @@ namespace Narvalo.Fx
     public abstract partial class Outcome<T> : Internal.IMatchable<T, ExceptionDispatchInfo>
     {
 #if CONTRACTS_FULL // Custom ctor visibility for the contract class only.
-        protected Outcome(bool isSuccess) { IsSuccess = isSuccess; }
+        protected Outcome() { }
 #else
-        private Outcome(bool isSuccess) { IsSuccess = isSuccess; }
+        private Outcome() { }
 #endif
 
         /// <summary>
@@ -37,7 +36,9 @@ namespace Narvalo.Fx
         /// <remarks>Most of the time, you don't need to access this property.
         /// You are better off using the rich vocabulary that this class offers.</remarks>
         /// <value>true if the outcome is successful; otherwise false.</value>
-        public bool IsSuccess { get; }
+        public abstract bool IsSuccess { get; }
+
+        public bool IsError => !IsSuccess;
 
         #region Operators
 
@@ -93,15 +94,13 @@ namespace Narvalo.Fx
                 throw new InvalidCastException(Strings.Outcome_CannotCastSuccessToException);
             }
 
-            var failure = value as Failure_;
+            var failure = value as Error_;
             Contract.Assume(failure != null);
 
             return failure.ExceptionInfo;
         }
 
         #endregion
-
-        #region Abstract methods
 
         /// <summary>
         /// Obtains the enclosed value.
@@ -119,14 +118,6 @@ namespace Narvalo.Fx
 
         // Core monad Bind method.
         public abstract Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector);
-
-        // Overrides the 'Select' auto-generated (extension) method (see Outcome.g.cs).
-        // Since Select is a building block, we override it in Failure_ and Success_.
-        // Otherwise we would have to call ToValue() or ToExceptionInfo() which imply a casting.
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Select", Justification = "[Intentionally] No trouble here, this 'Select' is the one from the LINQ standard query operators.")]
-        public abstract Outcome<TResult> Select<TResult>(Func<T, TResult> selector);
-
-        #endregion
 
         /// <summary>
         /// Obtains the underlying value if any; otherwise the default value of the type T.
@@ -152,7 +143,9 @@ namespace Narvalo.Fx
         /// </summary>
         private sealed partial class Success_ : Outcome<T>, IEquatable<Success_>
         {
-            public Success_(T value) : base(true) { Value = value; }
+            public Success_(T value) { Value = value; }
+
+            public override bool IsSuccess => true;
 
             internal override T Value { get; }
 
@@ -168,13 +161,6 @@ namespace Narvalo.Fx
                 return selector.Invoke(Value);
             }
 
-            public override Outcome<TResult> Select<TResult>(Func<T, TResult> selector)
-            {
-                Require.NotNull(selector, nameof(selector));
-
-                return Outcome<TResult>.η(selector.Invoke(Value));
-            }
-
             public override T ValueOrDefault() => Value;
 
             public override T ValueOrElse(T other) => Value;
@@ -184,6 +170,8 @@ namespace Narvalo.Fx
             public override Maybe<T> ValueOrNone() => Maybe.Of(Value);
 
             public override T ValueOrThrow() => Value;
+
+            #region Internal.IMatchable<T, ExceptionDispatchInfo> interface.
 
             public override TResult Match<TResult>(Func<T, TResult> caseSuccess, Func<ExceptionDispatchInfo, TResult> caseFailure)
             {
@@ -198,6 +186,17 @@ namespace Narvalo.Fx
 
                 caseSuccess.Invoke(Value);
             }
+
+            public override void OnSuccess(Action<T> action)
+            {
+                Require.NotNull(action, nameof(action));
+
+                action.Invoke(Value);
+            }
+
+            public override void OnError(Action<ExceptionDispatchInfo> action) { }
+
+            #endregion
 
             public bool Equals(Success_ other)
             {
@@ -230,17 +229,18 @@ namespace Narvalo.Fx
         /// <summary>
         /// Represents the "failure" part of the <see cref="Outcome{T}"/> type.
         /// </summary>
-        private sealed partial class Failure_ : Outcome<T>, IEquatable<Failure_>
+        private sealed partial class Error_ : Outcome<T>, IEquatable<Error_>
         {
             private readonly ExceptionDispatchInfo _exceptionInfo;
 
-            public Failure_(ExceptionDispatchInfo exceptionInfo)
-                : base(false)
+            public Error_(ExceptionDispatchInfo exceptionInfo)
             {
                 Demand.NotNull(exceptionInfo);
 
                 _exceptionInfo = exceptionInfo;
             }
+
+            public override bool IsSuccess => false;
 
             internal override T Value
             {
@@ -258,9 +258,6 @@ namespace Narvalo.Fx
             }
 
             public override Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector)
-                => Outcome<TResult>.η(ExceptionInfo);
-
-            public override Outcome<TResult> Select<TResult>(Func<T, TResult> selector)
                 => Outcome<TResult>.η(ExceptionInfo);
 
             public override T ValueOrDefault() => default(T);
@@ -283,6 +280,8 @@ namespace Narvalo.Fx
                 return default(T);
             }
 
+            #region Internal.IMatchable<T, ExceptionDispatchInfo> interface.
+
             public override TResult Match<TResult>(Func<T, TResult> caseSuccess, Func<ExceptionDispatchInfo, TResult> caseFailure)
             {
                 Require.NotNull(caseFailure, nameof(caseFailure));
@@ -297,7 +296,18 @@ namespace Narvalo.Fx
                 caseFailure.Invoke(ExceptionInfo);
             }
 
-            public bool Equals(Failure_ other)
+            public override void OnSuccess(Action<T> action) { }
+
+            public override void OnError(Action<ExceptionDispatchInfo> action)
+            {
+                Require.NotNull(action, nameof(action));
+
+                action.Invoke(ExceptionInfo);
+            }
+
+            #endregion
+
+            public bool Equals(Error_ other)
             {
                 if (other == this)
                 {
@@ -312,7 +322,7 @@ namespace Narvalo.Fx
                 return EqualityComparer<ExceptionDispatchInfo>.Default.Equals(ExceptionInfo, other.ExceptionInfo);
             }
 
-            public override bool Equals(object obj) => Equals(obj as Failure_);
+            public override bool Equals(object obj) => Equals(obj as Error_);
 
             public override int GetHashCode()
                 => EqualityComparer<ExceptionDispatchInfo>.Default.GetHashCode(ExceptionInfo);
@@ -339,7 +349,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(exceptionInfo, nameof(exceptionInfo));
 
-            return new Failure_(exceptionInfo);
+            return new Error_(exceptionInfo);
         }
 
         [DebuggerHidden]
@@ -364,9 +374,13 @@ namespace Narvalo.Fx
     {
         public abstract TResult Match<TResult>(
             Func<T, TResult> caseSuccess,
-            Func<ExceptionDispatchInfo, TResult> caseFailure);
+            Func<ExceptionDispatchInfo, TResult> caseError);
 
-        public abstract void Do(Action<T> caseSuccess, Action<ExceptionDispatchInfo> caseFailure);
+        public abstract void Do(Action<T> onSuccess, Action<ExceptionDispatchInfo> onError);
+
+        public abstract void OnSuccess(Action<T> action);
+
+        public abstract void OnError(Action<ExceptionDispatchInfo> action);
     }
 
 #if CONTRACTS_FULL

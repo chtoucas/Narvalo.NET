@@ -8,50 +8,49 @@ namespace Narvalo.Fx
     using System.Diagnostics.Contracts;
     using System.Runtime.CompilerServices;
 
-    // Friendly version of Either<TMessage, Unit>.
-    public abstract partial class VoidOr<TMessage> : Internal.IAlternative<TMessage>
+    // Friendly version of Either<TError, Unit>.
+    public abstract partial class VoidOr<TError> : Internal.IAlternative<TError>
     {
         private VoidOr() { }
 
-        private VoidOr(bool isMessage)
-        {
-            IsMessage = isMessage;
-        }
+        public abstract bool IsError { get; }
 
-        public bool IsMessage { get; }
+        internal abstract TError Error { get; }
 
-        public bool IsVoid => !IsMessage;
-
-        internal abstract TMessage Message { get; }
+        public bool IsVoid => !IsError;
 
         [DebuggerDisplay("Void")]
-        private sealed partial class Void_ : VoidOr<TMessage>
+        private sealed partial class Void_ : VoidOr<TError>
         {
-            public Void_() : base(false) { }
+            public Void_() { }
 
-            internal override TMessage Message
+            public override bool IsError => false;
+
+            internal override TError Error
             {
                 get { throw new InvalidOperationException("XXX"); }
             }
 
-            public override VoidOr<TResult> Bind<TResult>(Func<TMessage, VoidOr<TResult>> selector)
+            public override VoidOr<TResult> Bind<TResult>(Func<TError, VoidOr<TResult>> selector)
                 => VoidOr<TResult>.Void;
 
-            public override VoidOr<TMessage> OrElse(VoidOr<TMessage> other) => other;
+            public override VoidOr<TError> OrElse(VoidOr<TError> other) => other;
 
-            public override TResult Match<TResult>(Func<TMessage, TResult> caseMessage, Func<TResult> caseVoid)
+            #region Internal.IAlternative<TError> interface.
+
+            public override TResult Match<TResult>(Func<TError, TResult> caseError, Func<TResult> caseSuccess)
             {
-                Require.NotNull(caseVoid, nameof(caseVoid));
+                Require.NotNull(caseSuccess, nameof(caseSuccess));
 
-                return caseVoid.Invoke();
+                return caseSuccess.Invoke();
             }
 
-            public override TResult Match<TResult>(Func<TMessage, TResult> caseMessage, TResult caseVoid)
-                => caseVoid;
+            public override TResult Match<TResult>(Func<TError, TResult> caseError, TResult caseSuccess)
+                => caseSuccess;
 
             public override TResult Coalesce<TResult>(
-                Func<TMessage, bool> predicate,
-                Func<TMessage, TResult> selector,
+                Func<TError, bool> predicate,
+                Func<TError, TResult> selector,
                 Func<TResult> otherwise)
             {
                 Require.NotNull(otherwise, nameof(otherwise));
@@ -59,22 +58,33 @@ namespace Narvalo.Fx
                 return otherwise.Invoke();
             }
 
-            public override TResult Coalesce<TResult>(Func<TMessage, bool> predicate, TResult then, TResult other)
+            public override TResult Coalesce<TResult>(Func<TError, bool> predicate, TResult then, TResult other)
                 => other;
 
-            public override void Do(Func<TMessage, bool> predicate, Action<TMessage> action, Action otherwise)
+            public override void Do(Func<TError, bool> predicate, Action<TError> action, Action otherwise)
             {
                 Require.NotNull(otherwise, nameof(otherwise));
 
                 otherwise.Invoke();
             }
 
-            public override void Do(Action<TMessage> caseMessage, Action caseVoid)
+            public override void Do(Action<TError> onError, Action onSuccess)
             {
-                Require.NotNull(caseVoid, nameof(caseVoid));
+                Require.NotNull(onSuccess, nameof(onSuccess));
 
-                caseVoid.Invoke();
+                onSuccess.Invoke();
             }
+
+            public override void OnError(Action<TError> action) { }
+
+            public override void OnSuccess(Action action)
+            {
+                Require.NotNull(action, nameof(action));
+
+                action.Invoke();
+            }
+
+            #endregion
 
             public override string ToString()
             {
@@ -84,76 +94,79 @@ namespace Narvalo.Fx
             }
         }
 
-        [DebuggerDisplay("Message")]
-        [DebuggerTypeProxy(typeof(VoidOr<>.Message_.DebugView))]
-        private sealed partial class Message_ : VoidOr<TMessage>
+        [DebuggerDisplay("Error")]
+        [DebuggerTypeProxy(typeof(VoidOr<>.Error_.DebugView))]
+        private sealed partial class Error_ : VoidOr<TError>
         {
-            private readonly TMessage _message;
+            private readonly TError _error;
 
-            public Message_(TMessage message)
-                : base(true)
+            public Error_(TError error)
             {
-                Demand.NotNullUnconstrained(message);
+                Demand.NotNullUnconstrained(error);
 
-                _message = message;
+                _error = error;
             }
 
-            internal override TMessage Message
+            public override bool IsError => true;
+
+            internal override TError Error
             {
-                get { Warrant.NotNullUnconstrained<TMessage>(); return _message; }
+                get { Warrant.NotNullUnconstrained<TError>(); return _error; }
             }
 
-            public override VoidOr<TResult> Bind<TResult>(Func<TMessage, VoidOr<TResult>> selector)
+            public override VoidOr<TResult> Bind<TResult>(Func<TError, VoidOr<TResult>> selector)
             {
                 Require.NotNull(selector, nameof(selector));
 
-                return selector.Invoke(Message);
+                return selector.Invoke(Error);
             }
 
-            public override VoidOr<TMessage> OrElse(VoidOr<TMessage> other) => this;
+            public override VoidOr<TError> OrElse(VoidOr<TError> other) => this;
 
-            public override TResult Match<TResult>(Func<TMessage, TResult> caseMessage, Func<TResult> caseVoid)
+            #region Internal.IAlternative<TError> interface.
+
+            public override TResult Match<TResult>(Func<TError, TResult> caseError, Func<TResult> caseSuccess)
             {
-                Require.NotNull(caseMessage, nameof(caseMessage));
+                Require.NotNull(caseError, nameof(caseError));
 
-                return caseMessage.Invoke(Message);
+                return caseError.Invoke(Error);
             }
 
-            public override TResult Match<TResult>(Func<TMessage, TResult> caseMessage, TResult caseVoid)
+            public override TResult Match<TResult>(Func<TError, TResult> caseError, TResult caseSuccess)
             {
-                Require.NotNull(caseMessage, nameof(caseMessage));
+                Require.NotNull(caseError, nameof(caseError));
 
-                return caseMessage.Invoke(Message);
+                return caseError.Invoke(Error);
             }
 
             public override TResult Coalesce<TResult>(
-                Func<TMessage, bool> predicate,
-                Func<TMessage, TResult> selector,
+                Func<TError, bool> predicate,
+                Func<TError, TResult> selector,
                 Func<TResult> otherwise)
             {
                 Require.NotNull(predicate, nameof(predicate));
                 Require.NotNull(selector, nameof(selector));
                 Require.NotNull(otherwise, nameof(otherwise));
 
-                return predicate.Invoke(Message) ? selector.Invoke(Message) : otherwise.Invoke();
+                return predicate.Invoke(Error) ? selector.Invoke(Error) : otherwise.Invoke();
             }
 
-            public override TResult Coalesce<TResult>(Func<TMessage, bool> predicate, TResult then, TResult other)
+            public override TResult Coalesce<TResult>(Func<TError, bool> predicate, TResult then, TResult other)
             {
                 Require.NotNull(predicate, nameof(predicate));
 
-                return predicate.Invoke(Message) ? then : other;
+                return predicate.Invoke(Error) ? then : other;
             }
 
-            public override void Do(Func<TMessage, bool> predicate, Action<TMessage> action, Action otherwise)
+            public override void Do(Func<TError, bool> predicate, Action<TError> action, Action otherwise)
             {
                 Require.NotNull(predicate, nameof(predicate));
                 Require.NotNull(action, nameof(action));
                 Require.NotNull(otherwise, nameof(otherwise));
 
-                if (predicate.Invoke(Message))
+                if (predicate.Invoke(Error))
                 {
-                    action.Invoke(Message);
+                    action.Invoke(Error);
                 }
                 else
                 {
@@ -161,92 +174,107 @@ namespace Narvalo.Fx
                 }
             }
 
-            public override void Do(Action<TMessage> caseMessage, Action caseVoid)
+            public override void Do(Action<TError> onError, Action onSuccess)
             {
-                Require.NotNull(caseMessage, nameof(caseMessage));
+                Require.NotNull(onError, nameof(onError));
 
-                caseMessage.Invoke(Message);
+                onError.Invoke(Error);
             }
+
+            public override void OnError(Action<TError> action)
+            {
+                Require.NotNull(action, nameof(action));
+
+                action.Invoke(Error);
+            }
+
+            public override void OnSuccess(Action action) { }
 
             public override string ToString()
             {
                 Warrant.NotNull<string>();
 
-                return "Message(" + Message.ToString() + ")";
+                return "Error(" + Error.ToString() + ")";
             }
 
+            #endregion
+
             /// <summary>
-            /// Represents a debugger type proxy for <see cref="VoidOr{TMessage}.Message_"/>.
+            /// Represents a debugger type proxy for <see cref="VoidOr{TError}.Error_"/>.
             /// </summary>
             [ContractVerification(false)] // Debugger-only code.
             [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
             private sealed class DebugView
             {
-                private readonly Message_ _inner;
+                private readonly Error_ _inner;
 
-                public DebugView(Message_ inner)
+                public DebugView(Error_ inner)
                 {
                     _inner = inner;
                 }
 
-                public TMessage Message => _inner.Message;
+                public TError Error => _inner.Error;
             }
         }
     }
 
     // Provides the core Monad methods.
-    public partial class VoidOr<TMessage>
+    public partial class VoidOr<TError>
     {
-        public abstract VoidOr<TResult> Bind<TResult>(Func<TMessage, VoidOr<TResult>> selector);
+        public abstract VoidOr<TResult> Bind<TResult>(Func<TError, VoidOr<TResult>> selector);
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static VoidOr<TMessage> η(TMessage value)
+        internal static VoidOr<TError> η(TError value)
         {
             Require.NotNullUnconstrained(value, nameof(value));
-            Warrant.NotNull<VoidOr<TMessage>>();
+            Warrant.NotNull<VoidOr<TError>>();
 
-            return new VoidOr<TMessage>.Message_(value);
+            return new VoidOr<TError>.Error_(value);
         }
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static VoidOr<TMessage> μ(VoidOr<VoidOr<TMessage>> square)
-            => square.IsMessage ? square.Message : VoidOr<TMessage>.Void;
+        internal static VoidOr<TError> μ(VoidOr<VoidOr<TError>> square)
+            => square.IsError ? square.Error : VoidOr<TError>.Void;
     }
 
     // Provides the core MonadOr methods.
-    public partial class VoidOr<TMessage>
+    public partial class VoidOr<TError>
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private static readonly VoidOr<TMessage> s_Void = new VoidOr<TMessage>.Void_();
+        private static readonly VoidOr<TError> s_Void = new VoidOr<TError>.Void_();
 
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
-        public static VoidOr<TMessage> Void
+        public static VoidOr<TError> Void
         {
-            get { Warrant.NotNull<VoidOr<TMessage>>(); return s_Void; }
+            get { Warrant.NotNull<VoidOr<TError>>(); return s_Void; }
         }
 
-        public abstract VoidOr<TMessage> OrElse(VoidOr<TMessage> other);
+        public abstract VoidOr<TError> OrElse(VoidOr<TError> other);
     }
 
-    // Implements the Internal.IAlternative<TMessage> interface.
-    public partial class VoidOr<TMessage>
+    // Implements the Internal.IAlternative<TError> interface.
+    public partial class VoidOr<TError>
     {
-        public abstract TResult Match<TResult>(Func<TMessage, TResult> caseMessage, Func<TResult> caseVoid);
+        public abstract TResult Match<TResult>(Func<TError, TResult> caseError, Func<TResult> caseSuccess);
 
-        public abstract TResult Match<TResult>(Func<TMessage, TResult> caseMessage, TResult caseVoid);
+        public abstract TResult Match<TResult>(Func<TError, TResult> caseError, TResult caseSuccess);
 
         public abstract TResult Coalesce<TResult>(
-            Func<TMessage, bool> predicate,
-            Func<TMessage, TResult> selector,
+            Func<TError, bool> predicate,
+            Func<TError, TResult> selector,
             Func<TResult> otherwise);
 
-        public abstract TResult Coalesce<TResult>(Func<TMessage, bool> predicate, TResult then, TResult other);
+        public abstract TResult Coalesce<TResult>(Func<TError, bool> predicate, TResult then, TResult other);
 
-        public abstract void Do(Func<TMessage, bool> predicate, Action<TMessage> action, Action otherwise);
+        public abstract void Do(Func<TError, bool> predicate, Action<TError> action, Action otherwise);
 
-        public abstract void Do(Action<TMessage> caseMessage, Action caseVoid);
+        public abstract void Do(Action<TError> onError, Action onSuccess);
+
+        public abstract void OnError(Action<TError> action);
+
+        public abstract void OnSuccess(Action action);
     }
 }
 
@@ -256,15 +284,24 @@ namespace Narvalo.Fx
 {
     using System.Diagnostics.Contracts;
 
-    public partial class VoidOr<TMessage>
+    public partial class VoidOr<TError>
     {
-        private sealed partial class Message_
+        private sealed partial class Void_
         {
             [ContractInvariantMethod]
             private void ObjectInvariant()
             {
-                Contract.Invariant(_message != null);
-                Contract.Invariant(IsMessage);
+                Contract.Invariant(IsSuccess);
+            }
+        }
+
+        private sealed partial class Error_
+        {
+            [ContractInvariantMethod]
+            private void ObjectInvariant()
+            {
+                Contract.Invariant(_error != null);
+                Contract.Invariant(IsError);
             }
         }
     }

@@ -9,7 +9,7 @@
         {
             InitializeOr();
 
-            ReturnName = "Message";
+            ReturnName = "Error";
             ZeroName = "Void";
         }
 

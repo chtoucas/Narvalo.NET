@@ -4,15 +4,18 @@ namespace Narvalo.Fx
 {
     using System;
 
+    /// <summary>
+    /// Provides a set of static and extension methods for <see cref="VoidOr{TError}"/>.
+    /// </summary>
     public partial class VoidOr
     {
-        public static void ThrowIfError<TException>(VoidOr<TException> @this) where TException : Exception
+        public static void ThrowIfError<TException>(this VoidOr<TException> @this) where TException : Exception
         {
             Require.NotNull(@this, nameof(@this));
 
-            if (@this.IsMessage)
+            if (@this.IsError)
             {
-                throw @this.Message;
+                throw @this.Error;
             }
         }
     }

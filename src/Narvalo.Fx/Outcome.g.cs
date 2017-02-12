@@ -21,7 +21,7 @@ namespace Narvalo.Fx
     using Narvalo.Fx.Linq;
 
     /// <summary>
-    /// Provides a set of static methods for Outcome<T>.
+    /// Provides a set of static methods for <see cref="Outcome{T}"/>.
     /// </summary>
     // NB: Sometimes we prefer extension methods over static methods to be able to override them locally.
     public static partial class Outcome

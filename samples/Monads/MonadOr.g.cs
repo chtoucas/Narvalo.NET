@@ -22,7 +22,7 @@ namespace Monads
     using Monads.Linq;
 
     /// <summary>
-    /// Provides a set of static methods for MonadOr<T>.
+    /// Provides a set of static methods for <see cref="MonadOr{T}"/>.
     /// </summary>
     // NB: Sometimes we prefer extension methods over static methods to be able to override them locally.
     public static partial class MonadOr

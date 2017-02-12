@@ -19,7 +19,7 @@ namespace Narvalo.Fx
     using System.Linq;
 
     /// <summary>
-    /// Provides a set of static methods for Identity<T>.
+    /// Provides a set of static methods for <see cref="Identity{T}"/>.
     /// </summary>
     // NB: Sometimes we prefer extension methods over static methods to be able to override them locally.
     public static partial class Identity

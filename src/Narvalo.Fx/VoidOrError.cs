@@ -7,47 +7,108 @@ namespace Narvalo.Fx
     using System.Diagnostics.Contracts;
     using System.Runtime.ExceptionServices;
 
-    // Friendly version of Either<ExceptionDispatchInfo, Unit>, VoidOrError<ExceptionDispatchInfo>
+    // Friendly version of Either<ExceptionDispatchInfo, Unit>, VoidOr<ExceptionDispatchInfo>
     // or Outcome<Unit>.
     [DebuggerDisplay("Void")]
-    public partial class VoidOrError // : Internal.IAlternative<ExceptionDispatchInfo>
+    public abstract partial class VoidOrError : Internal.IAlternative<ExceptionDispatchInfo>
     {
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private static readonly VoidOrError s_Void = new VoidOrError();
-
         private VoidOrError() { }
 
-        private VoidOrError(bool isError)
-        {
-            IsError = isError;
-        }
+        public abstract bool IsError { get; }
 
-        public static VoidOrError Void { get { Warrant.NotNull<VoidOrError>(); return s_Void; } }
-
-        public bool IsError { get; }
+        internal abstract ExceptionDispatchInfo ExceptionInfo { get; }
 
         public bool IsVoid => !IsError;
 
-        public static VoidOrError Error(ExceptionDispatchInfo exceptionInfo)
-        {
-            Require.NotNull(exceptionInfo, nameof(exceptionInfo));
-            Warrant.NotNull<VoidOrError>();
+        public abstract void ThrowIfError();
 
-            return new VoidOrError.Error_(exceptionInfo);
-        }
-
-        public virtual void ThrowIfError() { }
-
-        public override string ToString()
-        {
-            Warrant.NotNull<string>();
-
-            return "Void";
-        }
-
-        public virtual Outcome<Unit> ToOutcome() => Outcome.Success(Unit.Single);
+        public abstract Outcome<Unit> ToOutcome();
 
         public static explicit operator Outcome<Unit>(VoidOrError value) => value?.ToOutcome();
+
+        [DebuggerDisplay("Void")]
+        private sealed partial class Void_ : VoidOrError
+        {
+            public Void_() { }
+
+            public override bool IsError => false;
+
+            internal override ExceptionDispatchInfo ExceptionInfo
+            {
+                get { throw new InvalidOperationException("XXX"); }
+            }
+
+            public override void ThrowIfError() { }
+
+            #region Internal.IAlternative<ExceptionDispatchInfo> interface.
+
+            public override TResult Match<TResult>(
+                Func<ExceptionDispatchInfo, TResult> caseError,
+                Func<TResult> caseSuccess)
+            {
+                Require.NotNull(caseSuccess, nameof(caseSuccess));
+
+                return caseSuccess.Invoke();
+            }
+
+            public override TResult Match<TResult>(
+                Func<ExceptionDispatchInfo, TResult> caseError,
+                TResult caseSuccess)
+                => caseSuccess;
+
+            public override TResult Coalesce<TResult>(
+                Func<ExceptionDispatchInfo, bool> predicate,
+                Func<ExceptionDispatchInfo, TResult> selector,
+                Func<TResult> otherwise)
+            {
+                Require.NotNull(otherwise, nameof(otherwise));
+
+                return otherwise.Invoke();
+            }
+
+            public override TResult Coalesce<TResult>(
+                Func<ExceptionDispatchInfo, bool> predicate,
+                TResult then,
+                TResult other)
+                => other;
+
+            public override void Do(
+                Func<ExceptionDispatchInfo, bool> predicate,
+                Action<ExceptionDispatchInfo> action,
+                Action otherwise)
+            {
+                Require.NotNull(otherwise, nameof(otherwise));
+
+                otherwise.Invoke();
+            }
+
+            public override void Do(Action<ExceptionDispatchInfo> onError, Action onSuccess)
+            {
+                Require.NotNull(onSuccess, nameof(onSuccess));
+
+                onSuccess.Invoke();
+            }
+
+            public override void OnError(Action<ExceptionDispatchInfo> action) { }
+
+            public override void OnSuccess(Action action)
+            {
+                Require.NotNull(action, nameof(action));
+
+                action.Invoke();
+            }
+
+            #endregion
+
+            public override Outcome<Unit> ToOutcome() => Outcome.Success(Unit.Single);
+
+            public override string ToString()
+            {
+                Warrant.NotNull<string>();
+
+                return "Void";
+            }
+        }
 
         [DebuggerDisplay("Error")]
         [DebuggerTypeProxy(typeof(Error_.DebugView))]
@@ -56,47 +117,107 @@ namespace Narvalo.Fx
             private readonly ExceptionDispatchInfo _exceptionInfo;
 
             public Error_(ExceptionDispatchInfo exceptionInfo)
-                : base(true)
             {
                 Demand.NotNull(exceptionInfo);
 
                 _exceptionInfo = exceptionInfo;
             }
 
-            public override void ThrowIfError() => _exceptionInfo.Throw();
+            public override bool IsError => true;
+
+            internal override ExceptionDispatchInfo ExceptionInfo
+            {
+                get { Warrant.NotNull<ExceptionDispatchInfo>(); return _exceptionInfo; }
+            }
+
+            public override void ThrowIfError() => ExceptionInfo.Throw();
+
+            #region Internal.IAlternative<ExceptionDispatchInfo> interface.
 
             public override TResult Match<TResult>(
-                Func<ExceptionDispatchInfo, TResult> caseException,
-                Func<TResult> caseVoid)
+                Func<ExceptionDispatchInfo, TResult> caseError,
+                Func<TResult> caseSuccess)
             {
-                Require.NotNull(caseException, nameof(caseException));
+                Require.NotNull(caseError, nameof(caseError));
 
-                return caseException.Invoke(_exceptionInfo);
+                return caseError.Invoke(ExceptionInfo);
             }
 
             public override TResult Match<TResult>(
-                Func<ExceptionDispatchInfo, TResult> caseException,
-                TResult caseVoid)
+                Func<ExceptionDispatchInfo, TResult> caseError,
+                TResult caseSuccess)
             {
-                Require.NotNull(caseException, nameof(caseException));
+                Require.NotNull(caseError, nameof(caseError));
 
-                return caseException.Invoke(_exceptionInfo);
+                return caseError.Invoke(ExceptionInfo);
             }
 
-            public override void Do(Action<ExceptionDispatchInfo> caseException, Action caseVoid)
+            public override TResult Coalesce<TResult>(
+                Func<ExceptionDispatchInfo, bool> predicate,
+                Func<ExceptionDispatchInfo, TResult> selector,
+                Func<TResult> otherwise)
             {
-                Require.NotNull(caseException, nameof(caseException));
+                Require.NotNull(predicate, nameof(predicate));
+                Require.NotNull(selector, nameof(selector));
+                Require.NotNull(otherwise, nameof(otherwise));
 
-                caseException.Invoke(_exceptionInfo);
+                return predicate.Invoke(ExceptionInfo) ? selector.Invoke(ExceptionInfo) : otherwise.Invoke();
             }
 
-            public override Outcome<Unit> ToOutcome() => Outcome.Failure<Unit>(_exceptionInfo);
+            public override TResult Coalesce<TResult>(
+                Func<ExceptionDispatchInfo, bool> predicate,
+                TResult then,
+                TResult other)
+            {
+                Require.NotNull(predicate, nameof(predicate));
+
+                return predicate.Invoke(ExceptionInfo) ? then : other;
+            }
+
+            public override void Do(
+                Func<ExceptionDispatchInfo, bool> predicate,
+                Action<ExceptionDispatchInfo> action,
+                Action otherwise)
+            {
+                Require.NotNull(predicate, nameof(predicate));
+                Require.NotNull(action, nameof(action));
+                Require.NotNull(otherwise, nameof(otherwise));
+
+                if (predicate.Invoke(ExceptionInfo))
+                {
+                    action.Invoke(ExceptionInfo);
+                }
+                else
+                {
+                    otherwise.Invoke();
+                }
+            }
+
+            public override void Do(Action<ExceptionDispatchInfo> onError, Action onSuccess)
+            {
+                Require.NotNull(onError, nameof(onError));
+
+                onError.Invoke(ExceptionInfo);
+            }
+
+            public override void OnError(Action<ExceptionDispatchInfo> action)
+            {
+                Require.NotNull(action, nameof(action));
+
+                action.Invoke(ExceptionInfo);
+            }
+
+            public override void OnSuccess(Action action) { }
+
+            #endregion
+
+            public override Outcome<Unit> ToOutcome() => Outcome.Failure<Unit>(ExceptionInfo);
 
             public override string ToString()
             {
                 Warrant.NotNull<string>();
 
-                Exception exception = _exceptionInfo.SourceException;
+                Exception exception = ExceptionInfo.SourceException;
                 Contract.Assume(exception != null);
 
                 return Format.Current("Error({0})", exception.Message);
@@ -116,30 +237,59 @@ namespace Narvalo.Fx
                     _inner = inner;
                 }
 
-                public ExceptionDispatchInfo ExceptionInfo => _inner._exceptionInfo;
+                public ExceptionDispatchInfo ExceptionInfo => _inner.ExceptionInfo;
             }
+        }
+    }
+
+    // Factory methods.
+    public partial class VoidOrError
+    {
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private static readonly VoidOrError s_Void = new VoidOrError.Void_();
+
+        public static VoidOrError Void { get { Warrant.NotNull<VoidOrError>(); return s_Void; } }
+
+        public static VoidOrError Error(ExceptionDispatchInfo exceptionInfo)
+        {
+            Require.NotNull(exceptionInfo, nameof(exceptionInfo));
+            Warrant.NotNull<VoidOrError>();
+
+            return new VoidOrError.Error_(exceptionInfo);
         }
     }
 
     // Implements the Internal.IAlternative<ExceptionDispatchInfo> interface.
     public partial class VoidOrError
     {
-        public virtual TResult Match<TResult>(Func<ExceptionDispatchInfo, TResult> caseException, Func<TResult> caseVoid)
-        {
-            Require.NotNull(caseVoid, nameof(caseVoid));
+        public abstract TResult Match<TResult>(
+            Func<ExceptionDispatchInfo, TResult> caseError,
+            Func<TResult> caseSuccess);
 
-            return caseVoid.Invoke();
-        }
+        public abstract TResult Match<TResult>(
+            Func<ExceptionDispatchInfo, TResult> caseError,
+            TResult caseSuccess);
 
-        public virtual TResult Match<TResult>(Func<ExceptionDispatchInfo, TResult> caseException, TResult caseVoid)
-            => caseVoid;
+        public abstract TResult Coalesce<TResult>(
+            Func<ExceptionDispatchInfo, bool> predicate,
+            Func<ExceptionDispatchInfo, TResult> selector,
+            Func<TResult> otherwise);
 
-        public virtual void Do(Action<ExceptionDispatchInfo> caseException, Action caseVoid)
-        {
-            Require.NotNull(caseVoid, nameof(caseVoid));
+        public abstract TResult Coalesce<TResult>(
+            Func<ExceptionDispatchInfo, bool> predicate,
+            TResult then,
+            TResult other);
 
-            caseVoid.Invoke();
-        }
+        public abstract void Do(
+            Func<ExceptionDispatchInfo, bool> predicate,
+            Action<ExceptionDispatchInfo> action,
+            Action otherwise);
+
+        public abstract void Do(Action<ExceptionDispatchInfo> onError, Action onSuccess);
+
+        public abstract void OnError(Action<ExceptionDispatchInfo> action);
+
+        public abstract void OnSuccess(Action action);
     }
 }
 
@@ -151,12 +301,22 @@ namespace Narvalo.Fx
 
     public partial class VoidOrException
     {
+        private sealed partial class Void_
+        {
+            [ContractInvariantMethod]
+            private void ObjectInvariant()
+            {
+                Contract.Invariant(IsSuccess);
+            }
+        }
+
         private sealed partial class Error_
         {
             [ContractInvariantMethod]
             private void ObjectInvariant()
             {
                 Contract.Invariant(_exceptionInfo != null);
+                Contract.Invariant(IsError);
             }
         }
     }
