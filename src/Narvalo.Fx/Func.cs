@@ -25,10 +25,10 @@ namespace Narvalo.Fx
             return square.Invoke();
         }
 
-        #region Invoke Action.
+        #region TryInvoke for Action.
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
-        public static VoidOrError Invoke<TException>(Action action) where TException : Exception
+        public static VoidOrError TryInvoke<TException>(Action action) where TException : Exception
         {
             Require.NotNull(action, nameof(action));
             Warrant.NotNull<VoidOrError>();
@@ -48,7 +48,7 @@ namespace Narvalo.Fx
         }
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
-        public static VoidOrError Invoke<T1Exception, T2Exception>(Action action)
+        public static VoidOrError TryInvoke<T1Exception, T2Exception>(Action action)
             where T1Exception : Exception
             where T2Exception : Exception
         {
@@ -70,7 +70,7 @@ namespace Narvalo.Fx
         }
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
-        public static VoidOrError Invoke<T1Exception, T2Exception, T3Exception>(Action action)
+        public static VoidOrError TryInvoke<T1Exception, T2Exception, T3Exception>(Action action)
             where T1Exception : Exception
             where T2Exception : Exception
             where T3Exception : Exception
@@ -94,7 +94,7 @@ namespace Narvalo.Fx
         }
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
-        public static VoidOrError Invoke<T1Exception, T2Exception, T3Exception, T4Exception>(Action action)
+        public static VoidOrError TryInvoke<T1Exception, T2Exception, T3Exception, T4Exception>(Action action)
             where T1Exception : Exception
             where T2Exception : Exception
             where T3Exception : Exception
@@ -121,10 +121,10 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Invoke Func<T>.
+        #region TryInvoke for Func<T>.
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
-        public static Outcome<TResult> Invoke<TResult, TException>(Func<TResult> thunk) where TException : Exception
+        public static Outcome<TResult> TryInvoke<TResult, TException>(Func<TResult> thunk) where TException : Exception
         {
             Require.NotNull(thunk, nameof(thunk));
             Warrant.NotNull<Outcome<TResult>>();
@@ -144,7 +144,7 @@ namespace Narvalo.Fx
         }
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
-        public static Outcome<TResult> Invoke<TResult, T1Exception, T2Exception>(Func<TResult> thunk)
+        public static Outcome<TResult> TryInvoke<TResult, T1Exception, T2Exception>(Func<TResult> thunk)
             where T1Exception : Exception
             where T2Exception : Exception
         {
@@ -166,7 +166,7 @@ namespace Narvalo.Fx
         }
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
-        public static Outcome<TResult> Invoke<TResult, T1Exception, T2Exception, T3Exception>(Func<TResult> thunk)
+        public static Outcome<TResult> TryInvoke<TResult, T1Exception, T2Exception, T3Exception>(Func<TResult> thunk)
             where T1Exception : Exception
             where T2Exception : Exception
             where T3Exception : Exception
@@ -190,7 +190,7 @@ namespace Narvalo.Fx
         }
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
-        public static Outcome<TResult> Invoke<TResult, T1Exception, T2Exception, T3Exception, T4Exception>(
+        public static Outcome<TResult> TryInvoke<TResult, T1Exception, T2Exception, T3Exception, T4Exception>(
             Func<TResult> thunk)
             where T1Exception : Exception
             where T2Exception : Exception
@@ -218,10 +218,10 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Invoke Func<T1, T2>.
+        #region TryInvoke for Func<T1, T2>.
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
-        public static Outcome<TResult> Invoke<TSource, TResult, TException>(
+        public static Outcome<TResult> TryInvoke<TSource, TResult, TException>(
             Func<TSource, TResult> thunk,
             TSource value)
             where TException : Exception
@@ -244,7 +244,7 @@ namespace Narvalo.Fx
         }
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
-        public static Outcome<TResult> Invoke<TSource, TResult, T1Exception, T2Exception>(
+        public static Outcome<TResult> TryInvoke<TSource, TResult, T1Exception, T2Exception>(
             Func<TSource, TResult> thunk,
             TSource value)
             where T1Exception : Exception
@@ -268,7 +268,7 @@ namespace Narvalo.Fx
         }
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
-        public static Outcome<TResult> Invoke<TSource, TResult, T1Exception, T2Exception, T3Exception>(
+        public static Outcome<TResult> TryInvoke<TSource, TResult, T1Exception, T2Exception, T3Exception>(
             Func<TSource, TResult> thunk,
             TSource value)
             where T1Exception : Exception
@@ -294,7 +294,7 @@ namespace Narvalo.Fx
         }
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
-        public static Outcome<TResult> Invoke<TSource, TResult, T1Exception, T2Exception, T3Exception, T4Exception>(
+        public static Outcome<TResult> TryInvoke<TSource, TResult, T1Exception, T2Exception, T3Exception, T4Exception>(
             Func<TSource, TResult> thunk,
             TSource value)
             where T1Exception : Exception
