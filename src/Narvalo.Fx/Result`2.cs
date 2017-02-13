@@ -44,8 +44,6 @@ namespace Narvalo.Fx
 
         public abstract T ValueOrThrow(Func<Exception> exceptionFactory);
 
-        public abstract Maybe<TError> ErrorOrNone();
-
         [DebuggerTypeProxy(typeof(Result<,>.Success_.DebugView))]
         private sealed partial class Success_ : Result<T, TError>
         {
@@ -73,8 +71,6 @@ namespace Narvalo.Fx
             public override T ValueOrThrow(Exception exception) => Value;
 
             public override T ValueOrThrow(Func<Exception> exceptionFactory) => Value;
-
-            public override Maybe<TError> ErrorOrNone() => Maybe<TError>.None;
 
             public override string ToString()
             {
@@ -143,8 +139,6 @@ namespace Narvalo.Fx
 
                 throw exceptionFactory.Invoke();
             }
-
-            public override Maybe<TError> ErrorOrNone() => Maybe.Of(Error);
 
             public override string ToString()
             {
@@ -330,7 +324,7 @@ namespace Narvalo.Fx
     }
 
     // Other Monad methods.
-    // Some are also to be found in Result.cs, Func.cs and Sequence.cs.
+    // Some are also to be found in Result.cs, ResultExtensions.cs, Func.cs and Sequence.cs.
     public partial class Result<T, TError>
     {
         #region Basic Monad functions (Prelude)
