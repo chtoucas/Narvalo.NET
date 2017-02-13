@@ -112,19 +112,19 @@ namespace Narvalo.Fx.Extensions
             return @this.HasValue ? caseValue.Invoke(@this.Value) : caseNull;
         }
 
-        public static void Trigger<TSource>(this TSource? @this, Action<TSource> caseValue, Action caseNull)
+        public static void Do<TSource>(this TSource? @this, Action<TSource> onValue, Action onNull)
             where TSource : struct
         {
-            Require.NotNull(caseValue, nameof(caseValue));
-            Require.NotNull(caseNull, nameof(caseNull));
+            Require.NotNull(onValue, nameof(onValue));
+            Require.NotNull(onNull, nameof(onNull));
 
             if (@this.HasValue)
             {
-                caseValue.Invoke(@this.Value);
+                onValue.Invoke(@this.Value);
             }
             else
             {
-                caseNull.Invoke();
+                onNull.Invoke();
             }
         }
 
