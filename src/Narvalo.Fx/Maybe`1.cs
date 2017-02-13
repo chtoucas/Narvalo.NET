@@ -121,9 +121,8 @@ namespace Narvalo.Fx
         public T ValueOrThrow(Exception exception)
         {
             Require.NotNull(exception, nameof(exception));
-            Warrant.NotNullUnconstrained<T>();
 
-            return ValueOrThrow(() => exception);
+            throw exception;
         }
 
         public T ValueOrThrow(Func<Exception> exceptionFactory)

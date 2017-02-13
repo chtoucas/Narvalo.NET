@@ -18,6 +18,7 @@ namespace Narvalo.Fx
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
+    using Narvalo.Fx.Internal;
     using Narvalo.Fx.Linq;
 
     /// <summary>
@@ -181,6 +182,21 @@ namespace Narvalo.Fx
     // Provides the core monadic extension methods for Outcome<T>.
     public static partial class Outcome
     {
+        #region Applicative
+
+        // Named "<$" in Haskell parlance.
+        public static Outcome<TResult> Replace<TSource, TResult>(
+            this Outcome<TSource> @this,
+            TResult value)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+
+            return @this.Select(_ => value);
+        }
+
+        #endregion
+
         #region Basic Monad functions (Prelude)
 
         // Named "fmap", "liftA" or "<$>" in Haskell parlance.
@@ -204,6 +220,17 @@ namespace Narvalo.Fx
             Require.NotNull(@this, nameof(@this));
 
             return @this.Bind(_ => other);
+        }
+
+        // Named "void" in Haskell parlance.
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
+        public static Outcome<global::Narvalo.Fx.Unit> Forget<TSource>(this Outcome<TSource> @this)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Warrant.NotNull<Outcome<global::Narvalo.Fx.Unit>>();
+
+            return Outcome.Unit;
         }
 
         #endregion
@@ -341,121 +368,6 @@ namespace Narvalo.Fx
         #endregion
     } // End of Outcome - T4: EmitMonadExtensions().
 
-    // Provides more extension methods for Outcome<T>.
-    public static partial class Outcome
-    {
-        #region Basic Monad functions (Prelude)
-
-        // Named "forever" in Haskell parlance.
-        public static Outcome<TResult> Forever<TSource, TResult>(
-            this Outcome<TSource> @this,
-            Func<Outcome<TResult>> thunk
-            )
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-
-            return @this.Then(@this.Forever(thunk));
-        }
-
-        // Named "void" in Haskell parlance.
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
-        public static Outcome<global::Narvalo.Fx.Unit> Forget<TSource>(this Outcome<TSource> @this)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Warrant.NotNull<Outcome<global::Narvalo.Fx.Unit>>();
-
-            return Outcome.Unit;
-        }
-
-        #endregion
-
-        #region Conditional execution of monadic expressions (Prelude)
-
-        // Named "when" in Haskell parlance. Haskell uses a different signature.
-        public static void When<TSource>(
-            this Outcome<TSource> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(_ => { if (predicate.Invoke(_)) { action.Invoke(_); } return Outcome.Unit; });
-        }
-
-        // Named "unless" in Haskell parlance. Haskell uses a different signature.
-        public static void Unless<TSource>(
-            this Outcome<TSource> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(_ => { if (!predicate.Invoke(_)) { action.Invoke(_); } return Outcome.Unit; });
-        }
-
-        #endregion
-
-        #region Applicative
-
-        // Named "<$" in Haskell parlance.
-        public static Outcome<TSource> Replace<TSource>(
-            this Outcome<TSource> @this,
-            TSource value)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-
-            return @this.Select(_ => value);
-        }
-
-
-        // Named "<**>" in Haskell parlance.
-        public static Outcome<Tuple<TSource, TOther>> Merge<TSource, TOther>(
-            this Outcome<TSource> @this,
-            Outcome<TOther> other)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-
-            return @this.Zip(other, Tuple.Create);
-        }
-
-
-        #endregion
-
-        public static Outcome<TResult> Coalesce<TSource, TResult>(
-            this Outcome<TSource> @this,
-            Func<TSource, bool> predicate,
-            Outcome<TResult> then,
-            Outcome<TResult> otherwise)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-
-            return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
-        }
-
-        public static void Do<TSource>(
-            this Outcome<TSource> @this,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(_ => { action.Invoke(_); return Outcome.Unit; });
-        }
-    } // End of Outcome - T4: EmitMonadExtraExtensions().
-
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Func
     {
@@ -470,7 +382,6 @@ namespace Narvalo.Fx
             Expect.NotNull(@this);
             Expect.NotNull(seq);
             Warrant.NotNull<Outcome<IEnumerable<TResult>>>();
-
             return seq.Map(@this);
         }
 
@@ -515,13 +426,6 @@ namespace Narvalo.Fx
 
         #endregion
     } // End of Func - T4: EmitKleisliExtensions().
-}
-
-namespace Narvalo.Fx
-{
-    using System.Collections.Generic;
-
-    using Narvalo.Fx.Internal;
 
     // Provides extension methods for IEnumerable<Outcome<T>>.
     public static partial class Sequence
@@ -543,6 +447,150 @@ namespace Narvalo.Fx
         #endregion
 
     } // End of Sequence - T4: EmitMonadEnumerableExtensions().
+}
+
+namespace Narvalo.Fx.Extensions
+{
+    using System;
+
+    // Provides more extension methods for Outcome<T>.
+    public static partial class OutcomeExtensions
+    {
+        #region Basic Monad functions (Prelude)
+
+        // Named "forever" in Haskell parlance.
+        public static Outcome<TResult> Forever<TSource, TResult>(
+            this Outcome<TSource> @this,
+            Func<Outcome<TResult>> thunk
+            )
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+
+            return @this.Then(@this.Forever(thunk));
+        }
+
+        #endregion
+
+        #region Conditional execution of monadic expressions (Prelude)
+
+        // Named "when" in Haskell parlance. Haskell uses a different signature.
+        public static void When<TSource>(
+            this Outcome<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(_ => { if (predicate.Invoke(_)) { action.Invoke(_); } return Outcome.Unit; });
+        }
+
+        // Named "unless" in Haskell parlance. Haskell uses a different signature.
+        public static void Unless<TSource>(
+            this Outcome<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(_ => { if (!predicate.Invoke(_)) { action.Invoke(_); } return Outcome.Unit; });
+        }
+
+        #endregion
+
+        #region Applicative
+
+
+        // Named "<**>" in Haskell parlance.
+        public static Outcome<Tuple<TSource, TOther>> Merge<TSource, TOther>(
+            this Outcome<TSource> @this,
+            Outcome<TOther> other)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+
+            return @this.Zip(other, Tuple.Create);
+        }
+
+
+        #endregion
+
+        public static Outcome<TResult> Coalesce<TSource, TResult>(
+            this Outcome<TSource> @this,
+            Func<TSource, bool> predicate,
+            Outcome<TResult> then,
+            Outcome<TResult> otherwise)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+
+            return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
+        }
+
+        public static void Do<TSource>(
+            this Outcome<TSource> @this,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(_ => { action.Invoke(_); return Outcome.Unit; });
+        }
+    } // End of Outcome - T4: EmitMonadExtraExtensions().
+}
+
+namespace Narvalo.Fx.Internal
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
+
+    // Provides default implementations for the extension methods for IEnumerable<Outcome<T>>.
+    // You will certainly want to override them to improve performance.
+    internal static partial class EnumerableExtensions
+    {
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static Outcome<IEnumerable<TSource>> CollectImpl<TSource>(
+            this IEnumerable<Outcome<TSource>> @this)
+        {
+            Demand.NotNull(@this);
+            Warrant.NotNull<Outcome<IEnumerable<TSource>>>();
+
+            var seed = Outcome.Of(Enumerable.Empty<TSource>());
+            // Inlined LINQ Append method:
+            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (m, item) => m.Append(item);
+
+            // NB: Maybe.Lift(append) is the same as:
+            // Func<Outcome<IEnumerable<TSource>>, Outcome<TSource>, Outcome<IEnumerable<TSource>>> liftedAppend
+            //     = (m, item) => m.Bind(list => Append(list, item));
+            // where Append is defined below.
+            var retval = @this.Aggregate(seed, Outcome.Lift(append));
+            System.Diagnostics.Contracts.Contract.Assume(retval != null);
+
+            return retval;
+        }
+
+        // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
+        //private static Outcome<IEnumerable<TSource>> Append<TSource>(
+        //    IEnumerable<TSource> list,
+        //    Outcome<TSource> m)
+        //{
+        //    Demand.NotNull(m);
+
+        //    return m.Bind(item => Outcome.Of(list.Concat(Enumerable.Repeat(item, 1))));
+        //}
+
+    } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
 }
 
 namespace Narvalo.Fx.Linq
@@ -718,44 +766,6 @@ namespace Narvalo.Fx.Internal
     using System.Linq;
 
     using Narvalo.Fx.Linq;
-
-    // Provides default implementations for the extension methods for IEnumerable<Outcome<T>>.
-    // You will certainly want to override them to improve performance.
-    internal static partial class EnumerableExtensions
-    {
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Outcome<IEnumerable<TSource>> CollectImpl<TSource>(
-            this IEnumerable<Outcome<TSource>> @this)
-        {
-            Demand.NotNull(@this);
-            Warrant.NotNull<Outcome<IEnumerable<TSource>>>();
-
-            var seed = Outcome.Of(Enumerable.Empty<TSource>());
-            // Inlined LINQ Append method:
-            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (m, item) => m.Append(item);
-
-            // NB: Maybe.Lift(append) is the same as:
-            // Func<Outcome<IEnumerable<TSource>>, Outcome<TSource>, Outcome<IEnumerable<TSource>>> liftedAppend
-            //     = (m, item) => m.Bind(list => Append(list, item));
-            // where Append is defined below.
-            var retval = @this.Aggregate(seed, Outcome.Lift(append));
-            System.Diagnostics.Contracts.Contract.Assume(retval != null);
-
-            return retval;
-        }
-
-        // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
-        //private static Outcome<IEnumerable<TSource>> Append<TSource>(
-        //    IEnumerable<TSource> list,
-        //    Outcome<TSource> m)
-        //{
-        //    Demand.NotNull(m);
-
-        //    return m.Bind(item => Outcome.Of(list.Concat(Enumerable.Repeat(item, 1))));
-        //}
-
-    } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
 
     // Provides default implementations for the extension methods for IEnumerable<T>.
     // You will certainly want to override them to improve performance.

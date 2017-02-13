@@ -2,7 +2,7 @@
 
 public partial class MonadTemplate
 {
-    public void EmitKleisliExtensions(bool full)
+    public void EmitKleisliExtensions(bool haslinq)
     {
 #>
     // Provides extension methods for Func<T> in the Kleisli category.
@@ -10,7 +10,7 @@ public partial class MonadTemplate
     {
         #region Basic Monad functions (Prelude)
 
-<#+ if (full && !HasTypeConstraints) { #>
+<#+ if (!HasTypeConstraints) { #>
 
         // Named "forM" in Haskell parlance. Same as Map (mapM) with its arguments flipped.
         public static <#= Name #><IEnumerable<TResult>> ForEach<TSource, TResult>(
@@ -23,7 +23,11 @@ public partial class MonadTemplate
             Warrant.NotNull<<#= Name #><IEnumerable<TResult>>>();
 <#+ } #>
 
+<#+ if (haslinq) { #>
             return seq.Map(@this);
+<#+ } else { #>
+            return seq.Select(@this).EmptyIfNull().Collect();
+<#+ } #>
         }
 
 <#+ } // T4: End of !HasTypeConstraints. #>

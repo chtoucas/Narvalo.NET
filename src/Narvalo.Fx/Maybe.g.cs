@@ -18,6 +18,7 @@ namespace Narvalo.Fx
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
+    using Narvalo.Fx.Internal;
     using Narvalo.Fx.Linq;
 
     /// <summary>
@@ -201,6 +202,21 @@ namespace Narvalo.Fx
     // Provides the core monadic extension methods for Maybe<T>.
     public static partial class Maybe
     {
+        #region Applicative
+
+        // Named "<$" in Haskell parlance.
+        public static Maybe<TResult> Replace<TSource, TResult>(
+            this Maybe<TSource> @this,
+            TResult value)
+            /* T4: C# indent */
+        {
+            /* T4: C# indent */
+
+            return @this.Select(_ => value);
+        }
+
+        #endregion
+
         #region Basic Monad functions (Prelude)
 
         // Named "fmap", "liftA" or "<$>" in Haskell parlance.
@@ -224,6 +240,16 @@ namespace Narvalo.Fx
             /* T4: C# indent */
 
             return @this.Bind(_ => other);
+        }
+
+        // Named "void" in Haskell parlance.
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
+        public static Maybe<global::Narvalo.Fx.Unit> Forget<TSource>(this Maybe<TSource> @this)
+            /* T4: C# indent */
+        {
+            /* T4: C# indent */
+
+            return Maybe.Unit;
         }
 
         #endregion
@@ -530,8 +556,106 @@ namespace Narvalo.Fx
         #endregion
     } // End of Maybe - T4: EmitMonadExtensions().
 
+    // Provides extension methods for Func<T> in the Kleisli category.
+    public static partial class Func
+    {
+        #region Basic Monad functions (Prelude)
+
+
+        // Named "forM" in Haskell parlance. Same as Map (mapM) with its arguments flipped.
+        public static Maybe<IEnumerable<TResult>> ForEach<TSource, TResult>(
+            this Func<TSource, Maybe<TResult>> @this,
+            IEnumerable<TSource> seq)
+        {
+            Expect.NotNull(@this);
+            Expect.NotNull(seq);
+            return seq.Map(@this);
+        }
+
+
+        // Named "=<<" in Haskell parlance. Same as Bind (>>=) with its arguments flipped.
+        public static Maybe<TResult> Invoke<TSource, TResult>(
+            this Func<TSource, Maybe<TResult>> @this,
+            Maybe<TSource> value)
+            /* T4: C# indent */
+        {
+            Expect.NotNull(@this);
+            /* T4: C# indent */
+
+            return value.Bind(@this);
+        }
+
+        // Named ">=>" in Haskell parlance.
+        public static Func<TSource, Maybe<TResult>> Compose<TSource, TMiddle, TResult>(
+            this Func<TSource, Maybe<TMiddle>> @this,
+            Func<TMiddle, Maybe<TResult>> thunk)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Expect.NotNull(thunk);
+            Warrant.NotNull<Func<TSource, Maybe<TResult>>>();
+
+            return _ => @this.Invoke(_).Bind(thunk);
+        }
+
+        // Named "<=<" in Haskell parlance.
+        public static Func<TSource, Maybe<TResult>> ComposeBack<TSource, TMiddle, TResult>(
+            this Func<TMiddle, Maybe<TResult>> @this,
+            Func<TSource, Maybe<TMiddle>> thunk)
+            /* T4: C# indent */
+        {
+            Expect.NotNull(@this);
+            Require.NotNull(thunk, nameof(thunk));
+            Warrant.NotNull<Func<TSource, Maybe<TResult>>>();
+
+            return _ => thunk.Invoke(_).Bind(@this);
+        }
+
+        #endregion
+    } // End of Func - T4: EmitKleisliExtensions().
+
+    // Provides extension methods for IEnumerable<Maybe<T>>.
+    public static partial class Sequence
+    {
+        #region Basic Monad functions (Prelude)
+
+
+        // Named "sequence" in Haskell parlance.
+        public static Maybe<IEnumerable<TSource>> Collect<TSource>(
+            this IEnumerable<Maybe<TSource>> @this)
+        {
+            Expect.NotNull(@this);
+
+            return @this.CollectImpl();
+        }
+
+
+        #endregion
+
+
+        #region Generalisations of list functions (Prelude)
+
+        // Named "msum" in Haskell parlance.
+        public static Maybe<TSource> Sum<TSource>(
+            this IEnumerable<Maybe<TSource>> @this)
+            /* T4: C# indent */
+        {
+            Expect.NotNull(@this);
+
+            return @this.SumImpl();
+        }
+
+        #endregion
+
+    } // End of Sequence - T4: EmitMonadEnumerableExtensions().
+}
+
+namespace Narvalo.Fx.Extensions
+{
+    using System;
+
     // Provides more extension methods for Maybe<T>.
-    public static partial class Maybe
+    public static partial class MaybeExtensions
     {
         #region Basic Monad functions (Prelude)
 
@@ -545,16 +669,6 @@ namespace Narvalo.Fx
             /* T4: C# indent */
 
             return @this.Then(@this.Forever(thunk));
-        }
-
-        // Named "void" in Haskell parlance.
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
-        public static Maybe<global::Narvalo.Fx.Unit> Forget<TSource>(this Maybe<TSource> @this)
-            /* T4: C# indent */
-        {
-            /* T4: C# indent */
-
-            return Maybe.Unit;
         }
 
         #endregion
@@ -592,17 +706,6 @@ namespace Narvalo.Fx
         #endregion
 
         #region Applicative
-
-        // Named "<$" in Haskell parlance.
-        public static Maybe<TSource> Replace<TSource>(
-            this Maybe<TSource> @this,
-            TSource value)
-            /* T4: C# indent */
-        {
-            /* T4: C# indent */
-
-            return @this.Select(_ => value);
-        }
 
 
         // Named "<**>" in Haskell parlance.
@@ -669,107 +772,61 @@ namespace Narvalo.Fx
             @this.Bind(_ => { action.Invoke(_); return Maybe.Unit; });
         }
     } // End of Maybe - T4: EmitMonadExtraExtensions().
-
-    // Provides extension methods for Func<T> in the Kleisli category.
-    public static partial class Func
-    {
-        #region Basic Monad functions (Prelude)
-
-
-        // Named "forM" in Haskell parlance. Same as Map (mapM) with its arguments flipped.
-        public static Maybe<IEnumerable<TResult>> ForEach<TSource, TResult>(
-            this Func<TSource, Maybe<TResult>> @this,
-            IEnumerable<TSource> seq)
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(seq);
-
-            return seq.Map(@this);
-        }
-
-
-        // Named "=<<" in Haskell parlance. Same as Bind (>>=) with its arguments flipped.
-        public static Maybe<TResult> Invoke<TSource, TResult>(
-            this Func<TSource, Maybe<TResult>> @this,
-            Maybe<TSource> value)
-            /* T4: C# indent */
-        {
-            Expect.NotNull(@this);
-            /* T4: C# indent */
-
-            return value.Bind(@this);
-        }
-
-        // Named ">=>" in Haskell parlance.
-        public static Func<TSource, Maybe<TResult>> Compose<TSource, TMiddle, TResult>(
-            this Func<TSource, Maybe<TMiddle>> @this,
-            Func<TMiddle, Maybe<TResult>> thunk)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Expect.NotNull(thunk);
-            Warrant.NotNull<Func<TSource, Maybe<TResult>>>();
-
-            return _ => @this.Invoke(_).Bind(thunk);
-        }
-
-        // Named "<=<" in Haskell parlance.
-        public static Func<TSource, Maybe<TResult>> ComposeBack<TSource, TMiddle, TResult>(
-            this Func<TMiddle, Maybe<TResult>> @this,
-            Func<TSource, Maybe<TMiddle>> thunk)
-            /* T4: C# indent */
-        {
-            Expect.NotNull(@this);
-            Require.NotNull(thunk, nameof(thunk));
-            Warrant.NotNull<Func<TSource, Maybe<TResult>>>();
-
-            return _ => thunk.Invoke(_).Bind(@this);
-        }
-
-        #endregion
-    } // End of Func - T4: EmitKleisliExtensions().
 }
 
-namespace Narvalo.Fx
+namespace Narvalo.Fx.Internal
 {
+    using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
 
-    using Narvalo.Fx.Internal;
-
-    // Provides extension methods for IEnumerable<Maybe<T>>.
-    public static partial class Sequence
+    // Provides default implementations for the extension methods for IEnumerable<Maybe<T>>.
+    // You will certainly want to override them to improve performance.
+    internal static partial class EnumerableExtensions
     {
-        #region Basic Monad functions (Prelude)
 
-
-        // Named "sequence" in Haskell parlance.
-        public static Maybe<IEnumerable<TSource>> Collect<TSource>(
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static Maybe<IEnumerable<TSource>> CollectImpl<TSource>(
             this IEnumerable<Maybe<TSource>> @this)
         {
-            Expect.NotNull(@this);
+            Demand.NotNull(@this);
 
-            return @this.CollectImpl();
+            var seed = Maybe.Of(Enumerable.Empty<TSource>());
+            // Inlined LINQ Append method:
+            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (m, item) => m.Append(item);
+
+            // NB: Maybe.Lift(append) is the same as:
+            // Func<Maybe<IEnumerable<TSource>>, Maybe<TSource>, Maybe<IEnumerable<TSource>>> liftedAppend
+            //     = (m, item) => m.Bind(list => Append(list, item));
+            // where Append is defined below.
+            var retval = @this.Aggregate(seed, Maybe.Lift(append));
+
+            return retval;
         }
 
+        // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
+        //private static Maybe<IEnumerable<TSource>> Append<TSource>(
+        //    IEnumerable<TSource> list,
+        //    Maybe<TSource> m)
+        //{
 
-        #endregion
+        //    return m.Bind(item => Maybe.Of(list.Concat(Enumerable.Repeat(item, 1))));
+        //}
 
-
-        #region Generalisations of list functions (Prelude)
-
-        // Named "msum" in Haskell parlance.
-        public static Maybe<TSource> Sum<TSource>(
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static Maybe<TSource> SumImpl<TSource>(
             this IEnumerable<Maybe<TSource>> @this)
             /* T4: C# indent */
         {
-            Expect.NotNull(@this);
+            Demand.NotNull(@this);
 
-            return @this.SumImpl();
+            var retval = @this.Aggregate(Maybe<TSource>.None, (m, n) => m.OrElse(n));
+
+            return retval;
         }
 
-        #endregion
-
-    } // End of Sequence - T4: EmitMonadEnumerableExtensions().
+    } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
 }
 
 namespace Narvalo.Fx.Linq
@@ -943,53 +1000,6 @@ namespace Narvalo.Fx.Internal
     using System.Linq;
 
     using Narvalo.Fx.Linq;
-
-    // Provides default implementations for the extension methods for IEnumerable<Maybe<T>>.
-    // You will certainly want to override them to improve performance.
-    internal static partial class EnumerableExtensions
-    {
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Maybe<IEnumerable<TSource>> CollectImpl<TSource>(
-            this IEnumerable<Maybe<TSource>> @this)
-        {
-            Demand.NotNull(@this);
-
-            var seed = Maybe.Of(Enumerable.Empty<TSource>());
-            // Inlined LINQ Append method:
-            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (m, item) => m.Append(item);
-
-            // NB: Maybe.Lift(append) is the same as:
-            // Func<Maybe<IEnumerable<TSource>>, Maybe<TSource>, Maybe<IEnumerable<TSource>>> liftedAppend
-            //     = (m, item) => m.Bind(list => Append(list, item));
-            // where Append is defined below.
-            var retval = @this.Aggregate(seed, Maybe.Lift(append));
-
-            return retval;
-        }
-
-        // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
-        //private static Maybe<IEnumerable<TSource>> Append<TSource>(
-        //    IEnumerable<TSource> list,
-        //    Maybe<TSource> m)
-        //{
-
-        //    return m.Bind(item => Maybe.Of(list.Concat(Enumerable.Repeat(item, 1))));
-        //}
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Maybe<TSource> SumImpl<TSource>(
-            this IEnumerable<Maybe<TSource>> @this)
-            /* T4: C# indent */
-        {
-            Demand.NotNull(@this);
-
-            var retval = @this.Aggregate(Maybe<TSource>.None, (m, n) => m.OrElse(n));
-
-            return retval;
-        }
-
-    } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
 
     // Provides default implementations for the extension methods for IEnumerable<T>.
     // You will certainly want to override them to improve performance.

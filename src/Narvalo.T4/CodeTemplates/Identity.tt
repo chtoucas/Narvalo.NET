@@ -12,7 +12,7 @@
 
         protected override void WriteContent()
         {
-            EmitMonadLight();
+            EmitMonad(false);
             WriteLine();
 
             EmitComonad();

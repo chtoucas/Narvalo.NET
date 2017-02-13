@@ -8,6 +8,24 @@ public partial class MonadTemplate
     // Provides the core monadic extension methods for <#= Name #><T>.
     public static partial class <#= Name #>
     {
+        #region Applicative
+
+        // Named "<$" in Haskell parlance.
+        public static <#= Name #><TResult> Replace<TSource, TResult>(
+            this <#= Name #><TSource> @this,
+            TResult value)
+            <#+ WriteTypeConstraints("TSource", "TResult"); #>
+        {
+            <#+ WriteNotNull(); #>
+<#+ if (PostMapEnsuresSome) { #>
+            Warrant.NotNull<<#= Name #><TResult>>();
+<#+ } #>
+
+            return @this.Select(_ => value);
+        }
+
+        #endregion
+
         #region Basic Monad functions (Prelude)
 
         // Named "fmap", "liftA" or "<$>" in Haskell parlance.
@@ -37,6 +55,21 @@ public partial class MonadTemplate
 <#+ } #>
 
             return @this.Bind(_ => other);
+        }
+
+        // Named "void" in Haskell parlance.
+<#+ if (!SuppressMessage) { #>
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
+<#+ } #>
+        public static <#= Name #><global::Narvalo.Fx.Unit> Forget<TSource>(this <#= Name #><TSource> @this)
+            <#+ WriteTypeConstraints("TSource"); #>
+        {
+            <#+ WriteNotNull(); #>
+<#+ if (IsNullable) { #>
+            Warrant.NotNull<<#= Name #><global::Narvalo.Fx.Unit>>();
+<#+ } #>
+
+            return <#= Name #>.Unit;
         }
 
         #endregion

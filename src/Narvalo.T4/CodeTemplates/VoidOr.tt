@@ -12,10 +12,5 @@
             ReturnName = "FromError";
             ZeroName = "Void";
         }
-
-        protected override void WriteContent()
-        {
-            EmitMonadLight();
-        }
     }
 #>

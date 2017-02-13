@@ -19,6 +19,7 @@ namespace Monads
     using System.Collections.Generic;
     using System.Linq;
 
+    using Monads.Internal;
     using Monads.Linq;
 
     /// <summary>
@@ -182,6 +183,21 @@ namespace Monads
     // Provides the core monadic extension methods for Monad<T>.
     public static partial class Monad
     {
+        #region Applicative
+
+        // Named "<$" in Haskell parlance.
+        public static Monad<TResult> Replace<TSource, TResult>(
+            this Monad<TSource> @this,
+            TResult value)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+
+            return @this.Select(_ => value);
+        }
+
+        #endregion
+
         #region Basic Monad functions (Prelude)
 
         // Named "fmap", "liftA" or "<$>" in Haskell parlance.
@@ -205,6 +221,16 @@ namespace Monads
             Require.NotNull(@this, nameof(@this));
 
             return @this.Bind(_ => other);
+        }
+
+        // Named "void" in Haskell parlance.
+        public static Monad<global::Narvalo.Fx.Unit> Forget<TSource>(this Monad<TSource> @this)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Warrant.NotNull<Monad<global::Narvalo.Fx.Unit>>();
+
+            return Monad.Unit;
         }
 
         #endregion
@@ -342,120 +368,6 @@ namespace Monads
         #endregion
     } // End of Monad - T4: EmitMonadExtensions().
 
-    // Provides more extension methods for Monad<T>.
-    public static partial class Monad
-    {
-        #region Basic Monad functions (Prelude)
-
-        // Named "forever" in Haskell parlance.
-        public static Monad<TResult> Forever<TSource, TResult>(
-            this Monad<TSource> @this,
-            Func<Monad<TResult>> thunk
-            )
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-
-            return @this.Then(@this.Forever(thunk));
-        }
-
-        // Named "void" in Haskell parlance.
-        public static Monad<global::Narvalo.Fx.Unit> Forget<TSource>(this Monad<TSource> @this)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Warrant.NotNull<Monad<global::Narvalo.Fx.Unit>>();
-
-            return Monad.Unit;
-        }
-
-        #endregion
-
-        #region Conditional execution of monadic expressions (Prelude)
-
-        // Named "when" in Haskell parlance. Haskell uses a different signature.
-        public static void When<TSource>(
-            this Monad<TSource> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(_ => { if (predicate.Invoke(_)) { action.Invoke(_); } return Monad.Unit; });
-        }
-
-        // Named "unless" in Haskell parlance. Haskell uses a different signature.
-        public static void Unless<TSource>(
-            this Monad<TSource> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(_ => { if (!predicate.Invoke(_)) { action.Invoke(_); } return Monad.Unit; });
-        }
-
-        #endregion
-
-        #region Applicative
-
-        // Named "<$" in Haskell parlance.
-        public static Monad<TSource> Replace<TSource>(
-            this Monad<TSource> @this,
-            TSource value)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-
-            return @this.Select(_ => value);
-        }
-
-
-        // Named "<**>" in Haskell parlance.
-        public static Monad<Tuple<TSource, TOther>> Merge<TSource, TOther>(
-            this Monad<TSource> @this,
-            Monad<TOther> other)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-
-            return @this.Zip(other, Tuple.Create);
-        }
-
-
-        #endregion
-
-        public static Monad<TResult> Coalesce<TSource, TResult>(
-            this Monad<TSource> @this,
-            Func<TSource, bool> predicate,
-            Monad<TResult> then,
-            Monad<TResult> otherwise)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-
-            return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
-        }
-
-        public static void Do<TSource>(
-            this Monad<TSource> @this,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(_ => { action.Invoke(_); return Monad.Unit; });
-        }
-    } // End of Monad - T4: EmitMonadExtraExtensions().
-
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Func
     {
@@ -470,7 +382,6 @@ namespace Monads
             Expect.NotNull(@this);
             Expect.NotNull(seq);
             Warrant.NotNull<Monad<IEnumerable<TResult>>>();
-
             return seq.Map(@this);
         }
 
@@ -515,13 +426,6 @@ namespace Monads
 
         #endregion
     } // End of Func - T4: EmitKleisliExtensions().
-}
-
-namespace Monads
-{
-    using System.Collections.Generic;
-
-    using Monads.Internal;
 
     // Provides extension methods for IEnumerable<Monad<T>>.
     public static partial class Sequence
@@ -543,6 +447,148 @@ namespace Monads
         #endregion
 
     } // End of Sequence - T4: EmitMonadEnumerableExtensions().
+}
+
+namespace Monads.Extensions
+{
+    using System;
+
+    // Provides more extension methods for Monad<T>.
+    public static partial class MonadExtensions
+    {
+        #region Basic Monad functions (Prelude)
+
+        // Named "forever" in Haskell parlance.
+        public static Monad<TResult> Forever<TSource, TResult>(
+            this Monad<TSource> @this,
+            Func<Monad<TResult>> thunk
+            )
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+
+            return @this.Then(@this.Forever(thunk));
+        }
+
+        #endregion
+
+        #region Conditional execution of monadic expressions (Prelude)
+
+        // Named "when" in Haskell parlance. Haskell uses a different signature.
+        public static void When<TSource>(
+            this Monad<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(_ => { if (predicate.Invoke(_)) { action.Invoke(_); } return Monad.Unit; });
+        }
+
+        // Named "unless" in Haskell parlance. Haskell uses a different signature.
+        public static void Unless<TSource>(
+            this Monad<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(_ => { if (!predicate.Invoke(_)) { action.Invoke(_); } return Monad.Unit; });
+        }
+
+        #endregion
+
+        #region Applicative
+
+
+        // Named "<**>" in Haskell parlance.
+        public static Monad<Tuple<TSource, TOther>> Merge<TSource, TOther>(
+            this Monad<TSource> @this,
+            Monad<TOther> other)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+
+            return @this.Zip(other, Tuple.Create);
+        }
+
+
+        #endregion
+
+        public static Monad<TResult> Coalesce<TSource, TResult>(
+            this Monad<TSource> @this,
+            Func<TSource, bool> predicate,
+            Monad<TResult> then,
+            Monad<TResult> otherwise)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+
+            return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
+        }
+
+        public static void Do<TSource>(
+            this Monad<TSource> @this,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(_ => { action.Invoke(_); return Monad.Unit; });
+        }
+    } // End of Monad - T4: EmitMonadExtraExtensions().
+}
+
+namespace Monads.Internal
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    // Provides default implementations for the extension methods for IEnumerable<Monad<T>>.
+    // You will certainly want to override them to improve performance.
+    internal static partial class EnumerableExtensions
+    {
+
+        internal static Monad<IEnumerable<TSource>> CollectImpl<TSource>(
+            this IEnumerable<Monad<TSource>> @this)
+        {
+            Demand.NotNull(@this);
+            Warrant.NotNull<Monad<IEnumerable<TSource>>>();
+
+            var seed = Monad.Of(Enumerable.Empty<TSource>());
+            // Inlined LINQ Append method:
+            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (m, item) => m.Append(item);
+
+            // NB: Maybe.Lift(append) is the same as:
+            // Func<Monad<IEnumerable<TSource>>, Monad<TSource>, Monad<IEnumerable<TSource>>> liftedAppend
+            //     = (m, item) => m.Bind(list => Append(list, item));
+            // where Append is defined below.
+            var retval = @this.Aggregate(seed, Monad.Lift(append));
+            System.Diagnostics.Contracts.Contract.Assume(retval != null);
+
+            return retval;
+        }
+
+        // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
+        //private static Monad<IEnumerable<TSource>> Append<TSource>(
+        //    IEnumerable<TSource> list,
+        //    Monad<TSource> m)
+        //{
+        //    Demand.NotNull(m);
+
+        //    return m.Bind(item => Monad.Of(list.Concat(Enumerable.Repeat(item, 1))));
+        //}
+
+    } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
 }
 
 namespace Monads.Linq
@@ -717,43 +763,6 @@ namespace Monads.Internal
     using System.Linq;
 
     using Monads.Linq;
-
-    // Provides default implementations for the extension methods for IEnumerable<Monad<T>>.
-    // You will certainly want to override them to improve performance.
-    internal static partial class EnumerableExtensions
-    {
-
-        internal static Monad<IEnumerable<TSource>> CollectImpl<TSource>(
-            this IEnumerable<Monad<TSource>> @this)
-        {
-            Demand.NotNull(@this);
-            Warrant.NotNull<Monad<IEnumerable<TSource>>>();
-
-            var seed = Monad.Of(Enumerable.Empty<TSource>());
-            // Inlined LINQ Append method:
-            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (m, item) => m.Append(item);
-
-            // NB: Maybe.Lift(append) is the same as:
-            // Func<Monad<IEnumerable<TSource>>, Monad<TSource>, Monad<IEnumerable<TSource>>> liftedAppend
-            //     = (m, item) => m.Bind(list => Append(list, item));
-            // where Append is defined below.
-            var retval = @this.Aggregate(seed, Monad.Lift(append));
-            System.Diagnostics.Contracts.Contract.Assume(retval != null);
-
-            return retval;
-        }
-
-        // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
-        //private static Monad<IEnumerable<TSource>> Append<TSource>(
-        //    IEnumerable<TSource> list,
-        //    Monad<TSource> m)
-        //{
-        //    Demand.NotNull(m);
-
-        //    return m.Bind(item => Monad.Of(list.Concat(Enumerable.Repeat(item, 1))));
-        //}
-
-    } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
 
     // Provides default implementations for the extension methods for IEnumerable<T>.
     // You will certainly want to override them to improve performance.

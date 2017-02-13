@@ -212,7 +212,7 @@ namespace Narvalo.Fx
     }
 
     // Conversions operators.
-    public abstract partial class Outcome<T>
+    public partial class Outcome<T>
     {
         public abstract T ToValue();
 
@@ -268,7 +268,7 @@ namespace Narvalo.Fx
     }
 
     // Core Monad methods.
-    public abstract partial class Outcome<T>
+    public partial class Outcome<T>
     {
         public abstract Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector);
 
@@ -291,14 +291,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(square, nameof(square));
 
-            if (square.IsSuccess)
-            {
-                return square.Value;
-            }
-            else
-            {
-                return Outcome.FromError<T>(square.ExceptionInfo);
-            }
+            return square.IsSuccess ? square.Value : Outcome.FromError<T>(square.ExceptionInfo);
         }
 
         private partial class Success_
@@ -319,7 +312,7 @@ namespace Narvalo.Fx
     }
 
     // Implements the Internal.IMatchable<T, ExceptionDispatchInfo> interface.
-    public abstract partial class Outcome<T>
+    public partial class Outcome<T>
     {
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "1#", Justification = "[Intentionally] Internal interface.")]

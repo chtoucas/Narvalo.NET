@@ -7,13 +7,12 @@ namespace Narvalo.Fx
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.ExceptionServices;
 
-    public abstract partial class Outcome<T>
+    public partial class Outcome<T>
     {
         [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Select", Justification = "[Intentionally] No trouble here, this 'Select' is the one from the LINQ standard query operators.")]
         public abstract Outcome<TResult> Select<TResult>(Func<T, TResult> selector);
 
-        public Outcome<TResult> Then<TResult>(Outcome<TResult> other)
-            => IsSuccess ? other : Outcome.FromError<TResult>(ExceptionInfo);
+        public abstract Outcome<TResult> Then<TResult>(Outcome<TResult> other);
 
         private partial class Success_
         {
@@ -34,11 +33,16 @@ namespace Narvalo.Fx
                     return Outcome.FromError<TResult>(edi);
                 }
             }
+
+            public override Outcome<TResult> Then<TResult>(Outcome<TResult> other) => other;
         }
 
         private partial class Error_
         {
             public override Outcome<TResult> Select<TResult>(Func<T, TResult> selector)
+                => Outcome.FromError<TResult>(ExceptionInfo);
+
+            public override Outcome<TResult> Then<TResult>(Outcome<TResult> other)
                 => Outcome.FromError<TResult>(ExceptionInfo);
         }
     }

@@ -24,7 +24,7 @@ public abstract partial class MonadTemplate : _MonadTemplate
 
     protected override void WriteContent()
     {
-        EmitMonad();
+        EmitMonad(true);
         WriteLine();
 
         EmitLinq();
@@ -33,7 +33,7 @@ public abstract partial class MonadTemplate : _MonadTemplate
     /// <summary>
     /// Generates a Monad.
     /// </summary>
-    public void EmitMonadLight()
+    public void EmitMonad(bool emitlinq)
     {
 #>
 
@@ -51,46 +51,34 @@ namespace <#= Namespace #>
 <#+ } #>
     using System.Linq;
 
+    using <#= Namespace #>.Internal;
+<#+ if (emitlinq) { #>
+    using <#= Namespace #>.Linq;
+<#+ } #>
+
 <#+
+    WriteLine();
     EmitMonadCore();
     WriteLine();
 
     EmitMonadExtensions();
     WriteLine();
 
-    EmitKleisliExtensions(false);
+    EmitKleisliExtensions(emitlinq);
+    WriteLine();
+
+    EmitMonadEnumerableExtensions();
 #>
 }
 
 namespace <#= Namespace #>.Extensions
 {
     using System;
-<#+ if (!SuppressMessage) { #>
-    using System.Diagnostics.CodeAnalysis;
-<#+ } #>
-    using System.Linq;
 
-<#+
-    EmitMonadExtraExtensions(false);
-#>
+<#+ EmitMonadExtraExtensions(); #>
 }
 
-<#+
-    } // T4: End of EmitMonad().
-
-    /// <summary>
-    /// Generates a Monad.
-    /// </summary>
-    public void EmitMonad()
-    {
-#>
-
-<#+ if (!Namespace.StartsWith("Narvalo.")) { #>
-using global::Narvalo;
-using global::Narvalo.Fx;
-<#+ } #>
-
-namespace <#= Namespace #>
+namespace <#= Namespace #>.Internal
 {
     using System;
     using System.Collections.Generic;
@@ -99,20 +87,7 @@ namespace <#= Namespace #>
 <#+ } #>
     using System.Linq;
 
-    using <#= Namespace #>.Linq;
-
-<#+
-    EmitMonadCore();
-    WriteLine();
-
-    EmitMonadExtensions();
-    WriteLine();
-
-    EmitMonadExtraExtensions(true);
-    WriteLine();
-
-    EmitKleisliExtensions(true);
-#>
+<#+ EmitMonadEnumerableInternalExtensions(); #>
 }
 <#+
     } // T4: End of EmitMonad().
@@ -142,15 +117,6 @@ namespace <#= Namespace #>
     public void EmitLinq()
     {
 #>
-namespace <#= Namespace #>
-{
-    using System.Collections.Generic;
-
-    using <#= Namespace #>.Internal;
-
-<#+ EmitMonadEnumerableExtensions(); #>
-}
-
 namespace <#= Namespace #>.Linq
 {
     using System;
@@ -173,12 +139,7 @@ namespace <#= Namespace #>.Internal
 
     using <#= Namespace #>.Linq;
 
-<#+
-    EmitMonadEnumerableInternalExtensions();
-    WriteLine();
-
-    EmitEnumerableInternalExtensions();
-#>
+<#+ EmitEnumerableInternalExtensions(); #>
 }
 <#+
     } // T4: End of EmitLinq().

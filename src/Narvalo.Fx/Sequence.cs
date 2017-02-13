@@ -537,4 +537,58 @@ namespace Narvalo.Fx
             }
         }
     }
+
+    // Provides extension methods for IEnumerable<Result<T, TError>>.
+    public static partial class Sequence
+    {
+        public static Result<IEnumerable<TSource>, TError> Collect<TSource, TError>(
+            this IEnumerable<Result<TSource, TError>> @this)
+        {
+            Require.NotNull(@this, nameof(@this));
+
+            return Result.Of<IEnumerable<TSource>, TError>(CollectAnyIterator(@this));
+        }
+
+        public static IEnumerable<TSource> CollectAny<TSource, TError>(this IEnumerable<Result<TSource, TError>> @this)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Warrant.NotNull<IEnumerable<TSource>>();
+
+            return CollectAnyIterator(@this);
+        }
+
+        internal static IEnumerable<TSource> CollectAnyIterator<TSource, TError>(IEnumerable<Result<TSource, TError>> source)
+        {
+            Demand.NotNull(source);
+            Warrant.NotNull<IEnumerable<TSource>>();
+
+            foreach (var item in source)
+            {
+                if (item.IsSuccess) { yield return item.Value; }
+            }
+        }
+    }
+
+    // Provides extension methods for IEnumerable<VoidOr<TError>>.
+    public static partial class Sequence
+    {
+        public static IEnumerable<TError> CollectAny<TError>(this IEnumerable<VoidOr<TError>> @this)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Warrant.NotNull<IEnumerable<TError>>();
+
+            return CollectAnyIterator(@this);
+        }
+
+        internal static IEnumerable<TError> CollectAnyIterator<TError>(IEnumerable<VoidOr<TError>> source)
+        {
+            Demand.NotNull(source);
+            Warrant.NotNull<IEnumerable<TError>>();
+
+            foreach (var item in source)
+            {
+                if (item.IsError) { yield return item.Error; }
+            }
+        }
+    }
 }

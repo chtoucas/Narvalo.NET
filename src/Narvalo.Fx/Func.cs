@@ -3,7 +3,9 @@
 namespace Narvalo.Fx
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
     using System.Runtime.ExceptionServices;
 
     /// <summary>
@@ -319,6 +321,56 @@ namespace Narvalo.Fx
             catch (T4Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
 
             return Outcome.FromError<TResult>(edi);
+        }
+
+        #endregion
+    }
+
+    // Provides extension methods for Func<..., Result<T, TError>> in the Kleisli category.
+    public static partial class Func
+    {
+        #region Basic Monad functions (Prelude)
+
+        public static Result<IEnumerable<TResult>, TError> ForEach<TSource, TResult, TError>(
+            this Func<TSource, Result<TResult, TError>> @this,
+            IEnumerable<TSource> seq)
+        {
+            Expect.NotNull(@this);
+            Expect.NotNull(seq);
+
+            return seq.Select(@this).EmptyIfNull().Collect();
+        }
+
+        public static Result<TResult, TError> Invoke<TSource, TResult, TError>(
+            this Func<TSource, Result<TResult, TError>> @this,
+            Result<TSource, TError> value)
+        {
+            Require.NotNull(value, nameof(value));
+            Expect.NotNull(@this);
+
+            return value.Bind(@this);
+        }
+
+        public static Func<TSource, Result<TResult, TError>> Compose<TSource, TMiddle, TResult, TError>(
+            this Func<TSource, Result<TMiddle, TError>> @this,
+            Func<TMiddle, Result<TResult, TError>> thunk)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Expect.NotNull(thunk);
+            Warrant.NotNull<Func<TSource, Result<TResult, TError>>>();
+
+            return _ => @this.Invoke(_).Bind(thunk);
+        }
+
+        public static Func<TSource, Result<TResult, TError>> ComposeBack<TSource, TMiddle, TResult, TError>(
+            this Func<TMiddle, Result<TResult, TError>> @this,
+            Func<TSource, Result<TMiddle, TError>> thunk)
+        {
+            Expect.NotNull(@this);
+            Require.NotNull(thunk, nameof(thunk));
+            Warrant.NotNull<Func<TSource, Result<TResult, TError>>>();
+
+            return _ => thunk.Invoke(_).Bind(@this);
         }
 
         #endregion

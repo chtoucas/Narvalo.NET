@@ -73,6 +73,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\ResultExtensions.cs" />
+    <Compile Include="Result.cs" />
     <Compile Include="Func.cs" />
     <Compile Include="Internal\IMatchable`2.cs" />
     <Compile Include="Internal\IAlternative`.cs" />
@@ -83,6 +85,7 @@
     <Compile Include="Maybe.Shadowing.cs" />
     <Compile Include="Nullable.cs" />
     <Compile Include="Outcome.Shadowing.cs" />
+    <Compile Include="Result`2.cs" />
     <Compile Include="VoidOr.cs" />
     <Compile Include="VoidOr.g.cs">
       <DependentUpon>VoidOr.tt</DependentUpon>
@@ -122,6 +125,7 @@
       <DependentUpon>Strings.fr.resx</DependentUpon>
     </Compile>
     <Compile Include="Unit.cs" />
+    <Compile Include="VoidOr.Shadowing.cs" />
     <Compile Include="VoidOrError.cs" />
     <Compile Include="VoidOr`1.cs" />
   </ItemGroup>
@@ -153,9 +157,7 @@
       <LastGenOutput>VoidOr.g.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Extensions\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>

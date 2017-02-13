@@ -19,6 +19,7 @@ namespace Monads
     using System.Collections.Generic;
     using System.Linq;
 
+    using Monads.Internal;
     using Monads.Linq;
 
     /// <summary>
@@ -208,6 +209,22 @@ namespace Monads
     // Provides the core monadic extension methods for MonadZero<T>.
     public static partial class MonadZero
     {
+        #region Applicative
+
+        // Named "<$" in Haskell parlance.
+        public static MonadZero<TResult> Replace<TSource, TResult>(
+            this MonadZero<TSource> @this,
+            TResult value)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Warrant.NotNull<MonadZero<TResult>>();
+
+            return @this.Select(_ => value);
+        }
+
+        #endregion
+
         #region Basic Monad functions (Prelude)
 
         // Named "fmap", "liftA" or "<$>" in Haskell parlance.
@@ -233,6 +250,16 @@ namespace Monads
             Warrant.NotNull<MonadZero<TResult>>();
 
             return @this.Bind(_ => other);
+        }
+
+        // Named "void" in Haskell parlance.
+        public static MonadZero<global::Narvalo.Fx.Unit> Forget<TSource>(this MonadZero<TSource> @this)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Warrant.NotNull<MonadZero<global::Narvalo.Fx.Unit>>();
+
+            return MonadZero.Unit;
         }
 
         #endregion
@@ -560,8 +587,94 @@ namespace Monads
         #endregion
     } // End of MonadZero - T4: EmitMonadExtensions().
 
+    // Provides extension methods for Func<T> in the Kleisli category.
+    public static partial class Func
+    {
+        #region Basic Monad functions (Prelude)
+
+
+        // Named "forM" in Haskell parlance. Same as Map (mapM) with its arguments flipped.
+        public static MonadZero<IEnumerable<TResult>> ForEach<TSource, TResult>(
+            this Func<TSource, MonadZero<TResult>> @this,
+            IEnumerable<TSource> seq)
+        {
+            Expect.NotNull(@this);
+            Expect.NotNull(seq);
+            Warrant.NotNull<MonadZero<IEnumerable<TResult>>>();
+            return seq.Map(@this);
+        }
+
+
+        // Named "=<<" in Haskell parlance. Same as Bind (>>=) with its arguments flipped.
+        public static MonadZero<TResult> Invoke<TSource, TResult>(
+            this Func<TSource, MonadZero<TResult>> @this,
+            MonadZero<TSource> value)
+            /* T4: C# indent */
+        {
+            Expect.NotNull(@this);
+            Require.NotNull(value, nameof(value));
+            Warrant.NotNull<MonadZero<TResult>>();
+
+            return value.Bind(@this);
+        }
+
+        // Named ">=>" in Haskell parlance.
+        public static Func<TSource, MonadZero<TResult>> Compose<TSource, TMiddle, TResult>(
+            this Func<TSource, MonadZero<TMiddle>> @this,
+            Func<TMiddle, MonadZero<TResult>> thunk)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Expect.NotNull(thunk);
+            Warrant.NotNull<Func<TSource, MonadZero<TResult>>>();
+
+            return _ => @this.Invoke(_).Bind(thunk);
+        }
+
+        // Named "<=<" in Haskell parlance.
+        public static Func<TSource, MonadZero<TResult>> ComposeBack<TSource, TMiddle, TResult>(
+            this Func<TMiddle, MonadZero<TResult>> @this,
+            Func<TSource, MonadZero<TMiddle>> thunk)
+            /* T4: C# indent */
+        {
+            Expect.NotNull(@this);
+            Require.NotNull(thunk, nameof(thunk));
+            Warrant.NotNull<Func<TSource, MonadZero<TResult>>>();
+
+            return _ => thunk.Invoke(_).Bind(@this);
+        }
+
+        #endregion
+    } // End of Func - T4: EmitKleisliExtensions().
+
+    // Provides extension methods for IEnumerable<MonadZero<T>>.
+    public static partial class Sequence
+    {
+        #region Basic Monad functions (Prelude)
+
+
+        // Named "sequence" in Haskell parlance.
+        public static MonadZero<IEnumerable<TSource>> Collect<TSource>(
+            this IEnumerable<MonadZero<TSource>> @this)
+        {
+            Expect.NotNull(@this);
+            Warrant.NotNull<MonadZero<IEnumerable<TSource>>>();
+
+            return @this.CollectImpl();
+        }
+
+
+        #endregion
+
+    } // End of Sequence - T4: EmitMonadEnumerableExtensions().
+}
+
+namespace Monads.Extensions
+{
+    using System;
+
     // Provides more extension methods for MonadZero<T>.
-    public static partial class MonadZero
+    public static partial class MonadZeroExtensions
     {
         #region Basic Monad functions (Prelude)
 
@@ -576,16 +689,6 @@ namespace Monads
             Warrant.NotNull<MonadZero<TResult>>();
 
             return @this.Then(@this.Forever(thunk));
-        }
-
-        // Named "void" in Haskell parlance.
-        public static MonadZero<global::Narvalo.Fx.Unit> Forget<TSource>(this MonadZero<TSource> @this)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Warrant.NotNull<MonadZero<global::Narvalo.Fx.Unit>>();
-
-            return MonadZero.Unit;
         }
 
         #endregion
@@ -623,18 +726,6 @@ namespace Monads
         #endregion
 
         #region Applicative
-
-        // Named "<$" in Haskell parlance.
-        public static MonadZero<TSource> Replace<TSource>(
-            this MonadZero<TSource> @this,
-            TSource value)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Warrant.NotNull<MonadZero<TSource>>();
-
-            return @this.Select(_ => value);
-        }
 
 
         // Named "<**>" in Haskell parlance.
@@ -705,95 +796,50 @@ namespace Monads
             @this.Bind(_ => { action.Invoke(_); return MonadZero.Unit; });
         }
     } // End of MonadZero - T4: EmitMonadExtraExtensions().
-
-    // Provides extension methods for Func<T> in the Kleisli category.
-    public static partial class Func
-    {
-        #region Basic Monad functions (Prelude)
-
-
-        // Named "forM" in Haskell parlance. Same as Map (mapM) with its arguments flipped.
-        public static MonadZero<IEnumerable<TResult>> ForEach<TSource, TResult>(
-            this Func<TSource, MonadZero<TResult>> @this,
-            IEnumerable<TSource> seq)
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(seq);
-            Warrant.NotNull<MonadZero<IEnumerable<TResult>>>();
-
-            return seq.Map(@this);
-        }
-
-
-        // Named "=<<" in Haskell parlance. Same as Bind (>>=) with its arguments flipped.
-        public static MonadZero<TResult> Invoke<TSource, TResult>(
-            this Func<TSource, MonadZero<TResult>> @this,
-            MonadZero<TSource> value)
-            /* T4: C# indent */
-        {
-            Expect.NotNull(@this);
-            Require.NotNull(value, nameof(value));
-            Warrant.NotNull<MonadZero<TResult>>();
-
-            return value.Bind(@this);
-        }
-
-        // Named ">=>" in Haskell parlance.
-        public static Func<TSource, MonadZero<TResult>> Compose<TSource, TMiddle, TResult>(
-            this Func<TSource, MonadZero<TMiddle>> @this,
-            Func<TMiddle, MonadZero<TResult>> thunk)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Expect.NotNull(thunk);
-            Warrant.NotNull<Func<TSource, MonadZero<TResult>>>();
-
-            return _ => @this.Invoke(_).Bind(thunk);
-        }
-
-        // Named "<=<" in Haskell parlance.
-        public static Func<TSource, MonadZero<TResult>> ComposeBack<TSource, TMiddle, TResult>(
-            this Func<TMiddle, MonadZero<TResult>> @this,
-            Func<TSource, MonadZero<TMiddle>> thunk)
-            /* T4: C# indent */
-        {
-            Expect.NotNull(@this);
-            Require.NotNull(thunk, nameof(thunk));
-            Warrant.NotNull<Func<TSource, MonadZero<TResult>>>();
-
-            return _ => thunk.Invoke(_).Bind(@this);
-        }
-
-        #endregion
-    } // End of Func - T4: EmitKleisliExtensions().
 }
 
-namespace Monads
+namespace Monads.Internal
 {
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
 
-    using Monads.Internal;
-
-    // Provides extension methods for IEnumerable<MonadZero<T>>.
-    public static partial class Sequence
+    // Provides default implementations for the extension methods for IEnumerable<MonadZero<T>>.
+    // You will certainly want to override them to improve performance.
+    internal static partial class EnumerableExtensions
     {
-        #region Basic Monad functions (Prelude)
 
-
-        // Named "sequence" in Haskell parlance.
-        public static MonadZero<IEnumerable<TSource>> Collect<TSource>(
+        internal static MonadZero<IEnumerable<TSource>> CollectImpl<TSource>(
             this IEnumerable<MonadZero<TSource>> @this)
         {
-            Expect.NotNull(@this);
+            Demand.NotNull(@this);
             Warrant.NotNull<MonadZero<IEnumerable<TSource>>>();
 
-            return @this.CollectImpl();
+            var seed = MonadZero.Of(Enumerable.Empty<TSource>());
+            // Inlined LINQ Append method:
+            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (m, item) => m.Append(item);
+
+            // NB: Maybe.Lift(append) is the same as:
+            // Func<MonadZero<IEnumerable<TSource>>, MonadZero<TSource>, MonadZero<IEnumerable<TSource>>> liftedAppend
+            //     = (m, item) => m.Bind(list => Append(list, item));
+            // where Append is defined below.
+            var retval = @this.Aggregate(seed, MonadZero.Lift(append));
+            System.Diagnostics.Contracts.Contract.Assume(retval != null);
+
+            return retval;
         }
 
+        // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
+        //private static MonadZero<IEnumerable<TSource>> Append<TSource>(
+        //    IEnumerable<TSource> list,
+        //    MonadZero<TSource> m)
+        //{
+        //    Demand.NotNull(m);
 
-        #endregion
+        //    return m.Bind(item => MonadZero.Of(list.Concat(Enumerable.Repeat(item, 1))));
+        //}
 
-    } // End of Sequence - T4: EmitMonadEnumerableExtensions().
+    } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
 }
 
 namespace Monads.Linq
@@ -975,43 +1021,6 @@ namespace Monads.Internal
     using System.Linq;
 
     using Monads.Linq;
-
-    // Provides default implementations for the extension methods for IEnumerable<MonadZero<T>>.
-    // You will certainly want to override them to improve performance.
-    internal static partial class EnumerableExtensions
-    {
-
-        internal static MonadZero<IEnumerable<TSource>> CollectImpl<TSource>(
-            this IEnumerable<MonadZero<TSource>> @this)
-        {
-            Demand.NotNull(@this);
-            Warrant.NotNull<MonadZero<IEnumerable<TSource>>>();
-
-            var seed = MonadZero.Of(Enumerable.Empty<TSource>());
-            // Inlined LINQ Append method:
-            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (m, item) => m.Append(item);
-
-            // NB: Maybe.Lift(append) is the same as:
-            // Func<MonadZero<IEnumerable<TSource>>, MonadZero<TSource>, MonadZero<IEnumerable<TSource>>> liftedAppend
-            //     = (m, item) => m.Bind(list => Append(list, item));
-            // where Append is defined below.
-            var retval = @this.Aggregate(seed, MonadZero.Lift(append));
-            System.Diagnostics.Contracts.Contract.Assume(retval != null);
-
-            return retval;
-        }
-
-        // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
-        //private static MonadZero<IEnumerable<TSource>> Append<TSource>(
-        //    IEnumerable<TSource> list,
-        //    MonadZero<TSource> m)
-        //{
-        //    Demand.NotNull(m);
-
-        //    return m.Bind(item => MonadZero.Of(list.Concat(Enumerable.Repeat(item, 1))));
-        //}
-
-    } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
 
     // Provides default implementations for the extension methods for IEnumerable<T>.
     // You will certainly want to override them to improve performance.

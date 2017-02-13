@@ -19,6 +19,7 @@ namespace Monads
     using System.Collections.Generic;
     using System.Linq;
 
+    using Monads.Internal;
     using Monads.Linq;
 
     /// <summary>
@@ -208,6 +209,22 @@ namespace Monads
     // Provides the core monadic extension methods for MonadPlus<T>.
     public static partial class MonadPlus
     {
+        #region Applicative
+
+        // Named "<$" in Haskell parlance.
+        public static MonadPlus<TResult> Replace<TSource, TResult>(
+            this MonadPlus<TSource> @this,
+            TResult value)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Warrant.NotNull<MonadPlus<TResult>>();
+
+            return @this.Select(_ => value);
+        }
+
+        #endregion
+
         #region Basic Monad functions (Prelude)
 
         // Named "fmap", "liftA" or "<$>" in Haskell parlance.
@@ -233,6 +250,16 @@ namespace Monads
             Warrant.NotNull<MonadPlus<TResult>>();
 
             return @this.Bind(_ => other);
+        }
+
+        // Named "void" in Haskell parlance.
+        public static MonadPlus<global::Narvalo.Fx.Unit> Forget<TSource>(this MonadPlus<TSource> @this)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Warrant.NotNull<MonadPlus<global::Narvalo.Fx.Unit>>();
+
+            return MonadPlus.Unit;
         }
 
         #endregion
@@ -560,8 +587,110 @@ namespace Monads
         #endregion
     } // End of MonadPlus - T4: EmitMonadExtensions().
 
+    // Provides extension methods for Func<T> in the Kleisli category.
+    public static partial class Func
+    {
+        #region Basic Monad functions (Prelude)
+
+
+        // Named "forM" in Haskell parlance. Same as Map (mapM) with its arguments flipped.
+        public static MonadPlus<IEnumerable<TResult>> ForEach<TSource, TResult>(
+            this Func<TSource, MonadPlus<TResult>> @this,
+            IEnumerable<TSource> seq)
+        {
+            Expect.NotNull(@this);
+            Expect.NotNull(seq);
+            Warrant.NotNull<MonadPlus<IEnumerable<TResult>>>();
+            return seq.Map(@this);
+        }
+
+
+        // Named "=<<" in Haskell parlance. Same as Bind (>>=) with its arguments flipped.
+        public static MonadPlus<TResult> Invoke<TSource, TResult>(
+            this Func<TSource, MonadPlus<TResult>> @this,
+            MonadPlus<TSource> value)
+            /* T4: C# indent */
+        {
+            Expect.NotNull(@this);
+            Require.NotNull(value, nameof(value));
+            Warrant.NotNull<MonadPlus<TResult>>();
+
+            return value.Bind(@this);
+        }
+
+        // Named ">=>" in Haskell parlance.
+        public static Func<TSource, MonadPlus<TResult>> Compose<TSource, TMiddle, TResult>(
+            this Func<TSource, MonadPlus<TMiddle>> @this,
+            Func<TMiddle, MonadPlus<TResult>> thunk)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Expect.NotNull(thunk);
+            Warrant.NotNull<Func<TSource, MonadPlus<TResult>>>();
+
+            return _ => @this.Invoke(_).Bind(thunk);
+        }
+
+        // Named "<=<" in Haskell parlance.
+        public static Func<TSource, MonadPlus<TResult>> ComposeBack<TSource, TMiddle, TResult>(
+            this Func<TMiddle, MonadPlus<TResult>> @this,
+            Func<TSource, MonadPlus<TMiddle>> thunk)
+            /* T4: C# indent */
+        {
+            Expect.NotNull(@this);
+            Require.NotNull(thunk, nameof(thunk));
+            Warrant.NotNull<Func<TSource, MonadPlus<TResult>>>();
+
+            return _ => thunk.Invoke(_).Bind(@this);
+        }
+
+        #endregion
+    } // End of Func - T4: EmitKleisliExtensions().
+
+    // Provides extension methods for IEnumerable<MonadPlus<T>>.
+    public static partial class Sequence
+    {
+        #region Basic Monad functions (Prelude)
+
+
+        // Named "sequence" in Haskell parlance.
+        public static MonadPlus<IEnumerable<TSource>> Collect<TSource>(
+            this IEnumerable<MonadPlus<TSource>> @this)
+        {
+            Expect.NotNull(@this);
+            Warrant.NotNull<MonadPlus<IEnumerable<TSource>>>();
+
+            return @this.CollectImpl();
+        }
+
+
+        #endregion
+
+
+        #region Generalisations of list functions (Prelude)
+
+        // Named "msum" in Haskell parlance.
+        public static MonadPlus<TSource> Sum<TSource>(
+            this IEnumerable<MonadPlus<TSource>> @this)
+            /* T4: C# indent */
+        {
+            Expect.NotNull(@this);
+            Warrant.NotNull<MonadPlus<TSource>>();
+
+            return @this.SumImpl();
+        }
+
+        #endregion
+
+    } // End of Sequence - T4: EmitMonadEnumerableExtensions().
+}
+
+namespace Monads.Extensions
+{
+    using System;
+
     // Provides more extension methods for MonadPlus<T>.
-    public static partial class MonadPlus
+    public static partial class MonadPlusExtensions
     {
         #region Basic Monad functions (Prelude)
 
@@ -576,16 +705,6 @@ namespace Monads
             Warrant.NotNull<MonadPlus<TResult>>();
 
             return @this.Then(@this.Forever(thunk));
-        }
-
-        // Named "void" in Haskell parlance.
-        public static MonadPlus<global::Narvalo.Fx.Unit> Forget<TSource>(this MonadPlus<TSource> @this)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Warrant.NotNull<MonadPlus<global::Narvalo.Fx.Unit>>();
-
-            return MonadPlus.Unit;
         }
 
         #endregion
@@ -623,18 +742,6 @@ namespace Monads
         #endregion
 
         #region Applicative
-
-        // Named "<$" in Haskell parlance.
-        public static MonadPlus<TSource> Replace<TSource>(
-            this MonadPlus<TSource> @this,
-            TSource value)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Warrant.NotNull<MonadPlus<TSource>>();
-
-            return @this.Select(_ => value);
-        }
 
 
         // Named "<**>" in Haskell parlance.
@@ -705,111 +812,63 @@ namespace Monads
             @this.Bind(_ => { action.Invoke(_); return MonadPlus.Unit; });
         }
     } // End of MonadPlus - T4: EmitMonadExtraExtensions().
-
-    // Provides extension methods for Func<T> in the Kleisli category.
-    public static partial class Func
-    {
-        #region Basic Monad functions (Prelude)
-
-
-        // Named "forM" in Haskell parlance. Same as Map (mapM) with its arguments flipped.
-        public static MonadPlus<IEnumerable<TResult>> ForEach<TSource, TResult>(
-            this Func<TSource, MonadPlus<TResult>> @this,
-            IEnumerable<TSource> seq)
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(seq);
-            Warrant.NotNull<MonadPlus<IEnumerable<TResult>>>();
-
-            return seq.Map(@this);
-        }
-
-
-        // Named "=<<" in Haskell parlance. Same as Bind (>>=) with its arguments flipped.
-        public static MonadPlus<TResult> Invoke<TSource, TResult>(
-            this Func<TSource, MonadPlus<TResult>> @this,
-            MonadPlus<TSource> value)
-            /* T4: C# indent */
-        {
-            Expect.NotNull(@this);
-            Require.NotNull(value, nameof(value));
-            Warrant.NotNull<MonadPlus<TResult>>();
-
-            return value.Bind(@this);
-        }
-
-        // Named ">=>" in Haskell parlance.
-        public static Func<TSource, MonadPlus<TResult>> Compose<TSource, TMiddle, TResult>(
-            this Func<TSource, MonadPlus<TMiddle>> @this,
-            Func<TMiddle, MonadPlus<TResult>> thunk)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Expect.NotNull(thunk);
-            Warrant.NotNull<Func<TSource, MonadPlus<TResult>>>();
-
-            return _ => @this.Invoke(_).Bind(thunk);
-        }
-
-        // Named "<=<" in Haskell parlance.
-        public static Func<TSource, MonadPlus<TResult>> ComposeBack<TSource, TMiddle, TResult>(
-            this Func<TMiddle, MonadPlus<TResult>> @this,
-            Func<TSource, MonadPlus<TMiddle>> thunk)
-            /* T4: C# indent */
-        {
-            Expect.NotNull(@this);
-            Require.NotNull(thunk, nameof(thunk));
-            Warrant.NotNull<Func<TSource, MonadPlus<TResult>>>();
-
-            return _ => thunk.Invoke(_).Bind(@this);
-        }
-
-        #endregion
-    } // End of Func - T4: EmitKleisliExtensions().
 }
 
-namespace Monads
+namespace Monads.Internal
 {
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
 
-    using Monads.Internal;
-
-    // Provides extension methods for IEnumerable<MonadPlus<T>>.
-    public static partial class Sequence
+    // Provides default implementations for the extension methods for IEnumerable<MonadPlus<T>>.
+    // You will certainly want to override them to improve performance.
+    internal static partial class EnumerableExtensions
     {
-        #region Basic Monad functions (Prelude)
 
-
-        // Named "sequence" in Haskell parlance.
-        public static MonadPlus<IEnumerable<TSource>> Collect<TSource>(
+        internal static MonadPlus<IEnumerable<TSource>> CollectImpl<TSource>(
             this IEnumerable<MonadPlus<TSource>> @this)
         {
-            Expect.NotNull(@this);
+            Demand.NotNull(@this);
             Warrant.NotNull<MonadPlus<IEnumerable<TSource>>>();
 
-            return @this.CollectImpl();
+            var seed = MonadPlus.Of(Enumerable.Empty<TSource>());
+            // Inlined LINQ Append method:
+            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (m, item) => m.Append(item);
+
+            // NB: Maybe.Lift(append) is the same as:
+            // Func<MonadPlus<IEnumerable<TSource>>, MonadPlus<TSource>, MonadPlus<IEnumerable<TSource>>> liftedAppend
+            //     = (m, item) => m.Bind(list => Append(list, item));
+            // where Append is defined below.
+            var retval = @this.Aggregate(seed, MonadPlus.Lift(append));
+            System.Diagnostics.Contracts.Contract.Assume(retval != null);
+
+            return retval;
         }
 
+        // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
+        //private static MonadPlus<IEnumerable<TSource>> Append<TSource>(
+        //    IEnumerable<TSource> list,
+        //    MonadPlus<TSource> m)
+        //{
+        //    Demand.NotNull(m);
 
-        #endregion
+        //    return m.Bind(item => MonadPlus.Of(list.Concat(Enumerable.Repeat(item, 1))));
+        //}
 
-
-        #region Generalisations of list functions (Prelude)
-
-        // Named "msum" in Haskell parlance.
-        public static MonadPlus<TSource> Sum<TSource>(
+        internal static MonadPlus<TSource> SumImpl<TSource>(
             this IEnumerable<MonadPlus<TSource>> @this)
             /* T4: C# indent */
         {
-            Expect.NotNull(@this);
+            Demand.NotNull(@this);
             Warrant.NotNull<MonadPlus<TSource>>();
 
-            return @this.SumImpl();
+            var retval = @this.Aggregate(MonadPlus<TSource>.Zero, (m, n) => m.Plus(n));
+            System.Diagnostics.Contracts.Contract.Assume(retval != null);
+
+            return retval;
         }
 
-        #endregion
-
-    } // End of Sequence - T4: EmitMonadEnumerableExtensions().
+    } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
 }
 
 namespace Monads.Linq
@@ -991,56 +1050,6 @@ namespace Monads.Internal
     using System.Linq;
 
     using Monads.Linq;
-
-    // Provides default implementations for the extension methods for IEnumerable<MonadPlus<T>>.
-    // You will certainly want to override them to improve performance.
-    internal static partial class EnumerableExtensions
-    {
-
-        internal static MonadPlus<IEnumerable<TSource>> CollectImpl<TSource>(
-            this IEnumerable<MonadPlus<TSource>> @this)
-        {
-            Demand.NotNull(@this);
-            Warrant.NotNull<MonadPlus<IEnumerable<TSource>>>();
-
-            var seed = MonadPlus.Of(Enumerable.Empty<TSource>());
-            // Inlined LINQ Append method:
-            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (m, item) => m.Append(item);
-
-            // NB: Maybe.Lift(append) is the same as:
-            // Func<MonadPlus<IEnumerable<TSource>>, MonadPlus<TSource>, MonadPlus<IEnumerable<TSource>>> liftedAppend
-            //     = (m, item) => m.Bind(list => Append(list, item));
-            // where Append is defined below.
-            var retval = @this.Aggregate(seed, MonadPlus.Lift(append));
-            System.Diagnostics.Contracts.Contract.Assume(retval != null);
-
-            return retval;
-        }
-
-        // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
-        //private static MonadPlus<IEnumerable<TSource>> Append<TSource>(
-        //    IEnumerable<TSource> list,
-        //    MonadPlus<TSource> m)
-        //{
-        //    Demand.NotNull(m);
-
-        //    return m.Bind(item => MonadPlus.Of(list.Concat(Enumerable.Repeat(item, 1))));
-        //}
-
-        internal static MonadPlus<TSource> SumImpl<TSource>(
-            this IEnumerable<MonadPlus<TSource>> @this)
-            /* T4: C# indent */
-        {
-            Demand.NotNull(@this);
-            Warrant.NotNull<MonadPlus<TSource>>();
-
-            var retval = @this.Aggregate(MonadPlus<TSource>.Zero, (m, n) => m.Plus(n));
-            System.Diagnostics.Contracts.Contract.Assume(retval != null);
-
-            return retval;
-        }
-
-    } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
 
     // Provides default implementations for the extension methods for IEnumerable<T>.
     // You will certainly want to override them to improve performance.

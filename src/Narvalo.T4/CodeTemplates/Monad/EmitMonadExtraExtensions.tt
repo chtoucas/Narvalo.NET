@@ -2,12 +2,11 @@
 
 public partial class MonadTemplate
 {
-    protected void EmitMonadExtraExtensions(bool full)
+    protected void EmitMonadExtraExtensions()
     {
 #>
     // Provides more extension methods for <#= Name #><T>.
-    public static partial class <#= Name #><#+ if (!full) { #><#="Extensions"#><#+ } #>
-
+    public static partial class <#= Name #>Extensions
     {
         #region Basic Monad functions (Prelude)
 
@@ -24,21 +23,6 @@ public partial class MonadTemplate
 <#+ } #>
 
             return @this.Then(@this.Forever(thunk));
-        }
-
-        // Named "void" in Haskell parlance.
-<#+ if (!SuppressMessage) { #>
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
-<#+ } #>
-        public static <#= Name #><global::Narvalo.Fx.Unit> Forget<TSource>(this <#= Name #><TSource> @this)
-            <#+ WriteTypeConstraints("TSource"); #>
-        {
-            <#+ WriteNotNull(); #>
-<#+ if (IsNullable) { #>
-            Warrant.NotNull<<#= Name #><global::Narvalo.Fx.Unit>>();
-<#+ } #>
-
-            return <#= Name #>.Unit;
         }
 
         #endregion
@@ -76,20 +60,6 @@ public partial class MonadTemplate
         #endregion
 
         #region Applicative
-
-        // Named "<$" in Haskell parlance.
-        public static <#= Name #><TSource> Replace<TSource>(
-            this <#= Name #><TSource> @this,
-            TSource value)
-            <#+ WriteTypeConstraints("TSource"); #>
-        {
-            <#+ WriteNotNull(); #>
-<#+ if (PostMapEnsuresSome) { #>
-            Warrant.NotNull<<#= Name #><TSource>>();
-<#+ } #>
-
-            return @this.Select(_ => value);
-        }
 
 <#+ if (!HasTypeConstraints) { #>
 

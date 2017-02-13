@@ -14,11 +14,11 @@ namespace Narvalo.Fx
     {
         private VoidOrError() { }
 
-        public abstract bool IsError { get; }
+        public abstract bool IsVoid { get; }
+
+        public bool IsError => !IsVoid;
 
         internal abstract ExceptionDispatchInfo ExceptionInfo { get; }
-
-        public bool IsVoid => !IsError;
 
         [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
@@ -26,11 +26,12 @@ namespace Narvalo.Fx
 
         public abstract void ThrowIfError();
 
+        [DebuggerTypeProxy(typeof(Void_.DebugView))]
         private sealed partial class Void_ : VoidOrError
         {
             public Void_() { }
 
-            public override bool IsError => false;
+            public override bool IsVoid => true;
 
             internal override ExceptionDispatchInfo ExceptionInfo
             {
@@ -45,6 +46,13 @@ namespace Narvalo.Fx
 
                 return "Void";
             }
+
+            /// <summary>
+            /// Represents a debugger type proxy for <see cref="VoidOrError.Void_"/>.
+            /// </summary>
+            [ContractVerification(false)] // Debugger-only code.
+            [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
+            private sealed class DebugView { }
         }
 
         [DebuggerTypeProxy(typeof(Error_.DebugView))]
@@ -59,7 +67,7 @@ namespace Narvalo.Fx
                 _exceptionInfo = exceptionInfo;
             }
 
-            public override bool IsError => true;
+            public override bool IsVoid => false;
 
             internal override ExceptionDispatchInfo ExceptionInfo
             {

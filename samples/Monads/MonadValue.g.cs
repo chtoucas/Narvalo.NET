@@ -19,6 +19,7 @@ namespace Monads
     using System.Collections.Generic;
     using System.Linq;
 
+    using Monads.Internal;
     using Monads.Linq;
 
     /// <summary>
@@ -217,6 +218,22 @@ namespace Monads
     // Provides the core monadic extension methods for MonadValue<T>.
     public static partial class MonadValue
     {
+        #region Applicative
+
+        // Named "<$" in Haskell parlance.
+        public static MonadValue<TResult> Replace<TSource, TResult>(
+            this MonadValue<TSource> @this,
+            TResult value)
+            where TSource : struct
+            where TResult : struct
+        {
+            /* T4: C# indent */
+
+            return @this.Select(_ => value);
+        }
+
+        #endregion
+
         #region Basic Monad functions (Prelude)
 
         // Named "fmap", "liftA" or "<$>" in Haskell parlance.
@@ -242,6 +259,15 @@ namespace Monads
             /* T4: C# indent */
 
             return @this.Bind(_ => other);
+        }
+
+        // Named "void" in Haskell parlance.
+        public static MonadValue<global::Narvalo.Fx.Unit> Forget<TSource>(this MonadValue<TSource> @this)
+            where TSource : struct
+        {
+            /* T4: C# indent */
+
+            return MonadValue.Unit;
         }
 
         #endregion
@@ -572,8 +598,90 @@ namespace Monads
         #endregion
     } // End of MonadValue - T4: EmitMonadExtensions().
 
+    // Provides extension methods for Func<T> in the Kleisli category.
+    public static partial class Func
+    {
+        #region Basic Monad functions (Prelude)
+
+
+        // Named "=<<" in Haskell parlance. Same as Bind (>>=) with its arguments flipped.
+        public static MonadValue<TResult> Invoke<TSource, TResult>(
+            this Func<TSource, MonadValue<TResult>> @this,
+            MonadValue<TSource> value)
+            where TSource : struct
+            where TResult : struct
+        {
+            Expect.NotNull(@this);
+            /* T4: C# indent */
+
+            return value.Bind(@this);
+        }
+
+        // Named ">=>" in Haskell parlance.
+        public static Func<TSource, MonadValue<TResult>> Compose<TSource, TMiddle, TResult>(
+            this Func<TSource, MonadValue<TMiddle>> @this,
+            Func<TMiddle, MonadValue<TResult>> thunk)
+            where TSource : struct
+            where TMiddle : struct
+            where TResult : struct
+        {
+            Require.NotNull(@this, nameof(@this));
+            Expect.NotNull(thunk);
+            Warrant.NotNull<Func<TSource, MonadValue<TResult>>>();
+
+            return _ => @this.Invoke(_).Bind(thunk);
+        }
+
+        // Named "<=<" in Haskell parlance.
+        public static Func<TSource, MonadValue<TResult>> ComposeBack<TSource, TMiddle, TResult>(
+            this Func<TMiddle, MonadValue<TResult>> @this,
+            Func<TSource, MonadValue<TMiddle>> thunk)
+            where TSource : struct
+            where TMiddle : struct
+            where TResult : struct
+        {
+            Expect.NotNull(@this);
+            Require.NotNull(thunk, nameof(thunk));
+            Warrant.NotNull<Func<TSource, MonadValue<TResult>>>();
+
+            return _ => thunk.Invoke(_).Bind(@this);
+        }
+
+        #endregion
+    } // End of Func - T4: EmitKleisliExtensions().
+
+    // Provides extension methods for IEnumerable<MonadValue<T>>.
+    public static partial class Sequence
+    {
+        #region Basic Monad functions (Prelude)
+
+
+        #endregion
+
+
+        #region Generalisations of list functions (Prelude)
+
+        // Named "msum" in Haskell parlance.
+        public static MonadValue<TSource> Sum<TSource>(
+            this IEnumerable<MonadValue<TSource>> @this)
+            where TSource : struct
+        {
+            Expect.NotNull(@this);
+
+            return @this.SumImpl();
+        }
+
+        #endregion
+
+    } // End of Sequence - T4: EmitMonadEnumerableExtensions().
+}
+
+namespace Monads.Extensions
+{
+    using System;
+
     // Provides more extension methods for MonadValue<T>.
-    public static partial class MonadValue
+    public static partial class MonadValueExtensions
     {
         #region Basic Monad functions (Prelude)
 
@@ -588,15 +696,6 @@ namespace Monads
             /* T4: C# indent */
 
             return @this.Then(@this.Forever(thunk));
-        }
-
-        // Named "void" in Haskell parlance.
-        public static MonadValue<global::Narvalo.Fx.Unit> Forget<TSource>(this MonadValue<TSource> @this)
-            where TSource : struct
-        {
-            /* T4: C# indent */
-
-            return MonadValue.Unit;
         }
 
         #endregion
@@ -634,17 +733,6 @@ namespace Monads
         #endregion
 
         #region Applicative
-
-        // Named "<$" in Haskell parlance.
-        public static MonadValue<TSource> Replace<TSource>(
-            this MonadValue<TSource> @this,
-            TSource value)
-            where TSource : struct
-        {
-            /* T4: C# indent */
-
-            return @this.Select(_ => value);
-        }
 
 
         #endregion
@@ -702,90 +790,31 @@ namespace Monads
             @this.Bind(_ => { action.Invoke(_); return MonadValue.Unit; });
         }
     } // End of MonadValue - T4: EmitMonadExtraExtensions().
-
-    // Provides extension methods for Func<T> in the Kleisli category.
-    public static partial class Func
-    {
-        #region Basic Monad functions (Prelude)
-
-
-        // Named "=<<" in Haskell parlance. Same as Bind (>>=) with its arguments flipped.
-        public static MonadValue<TResult> Invoke<TSource, TResult>(
-            this Func<TSource, MonadValue<TResult>> @this,
-            MonadValue<TSource> value)
-            where TSource : struct
-            where TResult : struct
-        {
-            Expect.NotNull(@this);
-            /* T4: C# indent */
-
-            return value.Bind(@this);
-        }
-
-        // Named ">=>" in Haskell parlance.
-        public static Func<TSource, MonadValue<TResult>> Compose<TSource, TMiddle, TResult>(
-            this Func<TSource, MonadValue<TMiddle>> @this,
-            Func<TMiddle, MonadValue<TResult>> thunk)
-            where TSource : struct
-            where TMiddle : struct
-            where TResult : struct
-        {
-            Require.NotNull(@this, nameof(@this));
-            Expect.NotNull(thunk);
-            Warrant.NotNull<Func<TSource, MonadValue<TResult>>>();
-
-            return _ => @this.Invoke(_).Bind(thunk);
-        }
-
-        // Named "<=<" in Haskell parlance.
-        public static Func<TSource, MonadValue<TResult>> ComposeBack<TSource, TMiddle, TResult>(
-            this Func<TMiddle, MonadValue<TResult>> @this,
-            Func<TSource, MonadValue<TMiddle>> thunk)
-            where TSource : struct
-            where TMiddle : struct
-            where TResult : struct
-        {
-            Expect.NotNull(@this);
-            Require.NotNull(thunk, nameof(thunk));
-            Warrant.NotNull<Func<TSource, MonadValue<TResult>>>();
-
-            return _ => thunk.Invoke(_).Bind(@this);
-        }
-
-        #endregion
-    } // End of Func - T4: EmitKleisliExtensions().
 }
 
-namespace Monads
+namespace Monads.Internal
 {
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
 
-    using Monads.Internal;
-
-    // Provides extension methods for IEnumerable<MonadValue<T>>.
-    public static partial class Sequence
+    // Provides default implementations for the extension methods for IEnumerable<MonadValue<T>>.
+    // You will certainly want to override them to improve performance.
+    internal static partial class EnumerableExtensions
     {
-        #region Basic Monad functions (Prelude)
 
-
-        #endregion
-
-
-        #region Generalisations of list functions (Prelude)
-
-        // Named "msum" in Haskell parlance.
-        public static MonadValue<TSource> Sum<TSource>(
+        internal static MonadValue<TSource> SumImpl<TSource>(
             this IEnumerable<MonadValue<TSource>> @this)
             where TSource : struct
         {
-            Expect.NotNull(@this);
+            Demand.NotNull(@this);
 
-            return @this.SumImpl();
+            var retval = @this.Aggregate(MonadValue<TSource>.None, (m, n) => m.OrElse(n));
+
+            return retval;
         }
 
-        #endregion
-
-    } // End of Sequence - T4: EmitMonadEnumerableExtensions().
+    } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
 }
 
 namespace Monads.Linq
@@ -910,24 +939,6 @@ namespace Monads.Internal
     using System.Linq;
 
     using Monads.Linq;
-
-    // Provides default implementations for the extension methods for IEnumerable<MonadValue<T>>.
-    // You will certainly want to override them to improve performance.
-    internal static partial class EnumerableExtensions
-    {
-
-        internal static MonadValue<TSource> SumImpl<TSource>(
-            this IEnumerable<MonadValue<TSource>> @this)
-            where TSource : struct
-        {
-            Demand.NotNull(@this);
-
-            var retval = @this.Aggregate(MonadValue<TSource>.None, (m, n) => m.OrElse(n));
-
-            return retval;
-        }
-
-    } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
 
     // Provides default implementations for the extension methods for IEnumerable<T>.
     // You will certainly want to override them to improve performance.

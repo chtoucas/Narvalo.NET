@@ -18,6 +18,8 @@ namespace Narvalo.Fx
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
+    using Narvalo.Fx.Internal;
+
     /// <summary>
     /// Provides a set of static methods for <see cref="Identity{T}"/>.
     /// </summary>
@@ -176,6 +178,21 @@ namespace Narvalo.Fx
     // Provides the core monadic extension methods for Identity<T>.
     public static partial class Identity
     {
+        #region Applicative
+
+        // Named "<$" in Haskell parlance.
+        public static Identity<TResult> Replace<TSource, TResult>(
+            this Identity<TSource> @this,
+            TResult value)
+            /* T4: C# indent */
+        {
+            /* T4: C# indent */
+
+            return @this.Select(_ => value);
+        }
+
+        #endregion
+
         #region Basic Monad functions (Prelude)
 
         // Named "fmap", "liftA" or "<$>" in Haskell parlance.
@@ -199,6 +216,16 @@ namespace Narvalo.Fx
             /* T4: C# indent */
 
             return @this.Bind(_ => other);
+        }
+
+        // Named "void" in Haskell parlance.
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
+        public static Identity<global::Narvalo.Fx.Unit> Forget<TSource>(this Identity<TSource> @this)
+            /* T4: C# indent */
+        {
+            /* T4: C# indent */
+
+            return Identity.Unit;
         }
 
         #endregion
@@ -342,6 +369,17 @@ namespace Narvalo.Fx
         #region Basic Monad functions (Prelude)
 
 
+        // Named "forM" in Haskell parlance. Same as Map (mapM) with its arguments flipped.
+        public static Identity<IEnumerable<TResult>> ForEach<TSource, TResult>(
+            this Func<TSource, Identity<TResult>> @this,
+            IEnumerable<TSource> seq)
+        {
+            Expect.NotNull(@this);
+            Expect.NotNull(seq);
+            return seq.Select(@this).EmptyIfNull().Collect();
+        }
+
+
         // Named "=<<" in Haskell parlance. Same as Bind (>>=) with its arguments flipped.
         public static Identity<TResult> Invoke<TSource, TResult>(
             this Func<TSource, Identity<TResult>> @this,
@@ -382,13 +420,31 @@ namespace Narvalo.Fx
 
         #endregion
     } // End of Func - T4: EmitKleisliExtensions().
+
+    // Provides extension methods for IEnumerable<Identity<T>>.
+    public static partial class Sequence
+    {
+        #region Basic Monad functions (Prelude)
+
+
+        // Named "sequence" in Haskell parlance.
+        public static Identity<IEnumerable<TSource>> Collect<TSource>(
+            this IEnumerable<Identity<TSource>> @this)
+        {
+            Expect.NotNull(@this);
+
+            return @this.CollectImpl();
+        }
+
+
+        #endregion
+
+    } // End of Sequence - T4: EmitMonadEnumerableExtensions().
 }
 
 namespace Narvalo.Fx.Extensions
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
 
     // Provides more extension methods for Identity<T>.
     public static partial class IdentityExtensions
@@ -405,16 +461,6 @@ namespace Narvalo.Fx.Extensions
             /* T4: C# indent */
 
             return @this.Then(@this.Forever(thunk));
-        }
-
-        // Named "void" in Haskell parlance.
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
-        public static Identity<global::Narvalo.Fx.Unit> Forget<TSource>(this Identity<TSource> @this)
-            /* T4: C# indent */
-        {
-            /* T4: C# indent */
-
-            return Identity.Unit;
         }
 
         #endregion
@@ -452,17 +498,6 @@ namespace Narvalo.Fx.Extensions
         #endregion
 
         #region Applicative
-
-        // Named "<$" in Haskell parlance.
-        public static Identity<TSource> Replace<TSource>(
-            this Identity<TSource> @this,
-            TSource value)
-            /* T4: C# indent */
-        {
-            /* T4: C# indent */
-
-            return @this.Select(_ => value);
-        }
 
 
         // Named "<**>" in Haskell parlance.
@@ -505,6 +540,48 @@ namespace Narvalo.Fx.Extensions
     } // End of Identity - T4: EmitMonadExtraExtensions().
 }
 
+namespace Narvalo.Fx.Internal
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
+
+    // Provides default implementations for the extension methods for IEnumerable<Identity<T>>.
+    // You will certainly want to override them to improve performance.
+    internal static partial class EnumerableExtensions
+    {
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static Identity<IEnumerable<TSource>> CollectImpl<TSource>(
+            this IEnumerable<Identity<TSource>> @this)
+        {
+            Demand.NotNull(@this);
+
+            var seed = Identity.Of(Enumerable.Empty<TSource>());
+            // Inlined LINQ Append method:
+            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (m, item) => m.Append(item);
+
+            // NB: Maybe.Lift(append) is the same as:
+            // Func<Identity<IEnumerable<TSource>>, Identity<TSource>, Identity<IEnumerable<TSource>>> liftedAppend
+            //     = (m, item) => m.Bind(list => Append(list, item));
+            // where Append is defined below.
+            var retval = @this.Aggregate(seed, Identity.Lift(append));
+
+            return retval;
+        }
+
+        // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
+        //private static Identity<IEnumerable<TSource>> Append<TSource>(
+        //    IEnumerable<TSource> list,
+        //    Identity<TSource> m)
+        //{
+
+        //    return m.Bind(item => Identity.Of(list.Concat(Enumerable.Repeat(item, 1))));
+        //}
+
+    } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
+}
 
 
 namespace Narvalo.Fx
