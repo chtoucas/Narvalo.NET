@@ -159,6 +159,7 @@ namespace Narvalo.Fx
             Func<TSource, Result<TMiddle, TError>> valueSelector,
             Func<TSource, TMiddle, TResult> resultSelector)
         {
+            Require.NotNull(@this, nameof(@this));
             Require.NotNull(valueSelector, nameof(valueSelector));
             Require.NotNull(resultSelector, nameof(resultSelector));
 

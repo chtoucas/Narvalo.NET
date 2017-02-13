@@ -6,7 +6,7 @@ namespace Narvalo.Fx
 
     public static partial class Sequence
     {
-        public static VoidOr<IEnumerable<TError>> CollectImpl<TError>(
+        internal static VoidOr<IEnumerable<TError>> CollectImpl<TError>(
             this IEnumerable<VoidOr<TError>> @this)
         {
             Require.NotNull(@this, nameof(@this));
