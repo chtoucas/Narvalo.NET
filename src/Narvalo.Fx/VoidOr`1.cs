@@ -9,6 +9,7 @@ namespace Narvalo.Fx
     using System.Runtime.CompilerServices;
 
     // Friendly version of Either<TError, Unit>.
+    [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public abstract partial class VoidOr<TError> : Internal.IAlternative<TError>
     {
         private VoidOr() { }
@@ -19,7 +20,10 @@ namespace Narvalo.Fx
 
         public bool IsVoid => !IsError;
 
-        [DebuggerDisplay("Void")]
+        [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
+        private string DebuggerDisplay => IsVoid ? "Void" : "Error";
+
         private sealed partial class Void_ : VoidOr<TError>
         {
             public Void_() { }
@@ -31,13 +35,174 @@ namespace Narvalo.Fx
                 get { throw new InvalidOperationException("XXX"); }
             }
 
+            public override string ToString()
+            {
+                Warrant.NotNull<string>();
+                return "Void";
+            }
+        }
+
+        [DebuggerTypeProxy(typeof(VoidOr<>.Error_.DebugView))]
+        private sealed partial class Error_ : VoidOr<TError>
+        {
+            private readonly TError _error;
+
+            public Error_(TError error)
+            {
+                Demand.NotNullUnconstrained(error);
+                _error = error;
+            }
+
+            public override bool IsError => true;
+
+            internal override TError Error
+            {
+                get { Warrant.NotNullUnconstrained<TError>(); return _error; }
+            }
+
+            public override string ToString()
+            {
+                Warrant.NotNull<string>();
+                return Format.Current("Error({0})", Error);
+            }
+
+            /// <summary>
+            /// Represents a debugger type proxy for <see cref="VoidOr{TError}.Error_"/>.
+            /// </summary>
+            [ContractVerification(false)] // Debugger-only code.
+            [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
+            private sealed class DebugView
+            {
+                private readonly Error_ _inner;
+
+                public DebugView(Error_ inner)
+                {
+                    _inner = inner;
+                }
+
+                public TError Error => _inner.Error;
+            }
+        }
+    }
+
+    // Conversion operators.
+    public partial class VoidOr<TError>
+    {
+        public abstract TError ToError();
+
+        public static explicit operator TError(VoidOr<TError> value)
+            => value == null ? default(TError) : value.ToError();
+
+        public static explicit operator VoidOr<TError>(TError error)
+            => VoidOr.FromError(error);
+
+        private partial class Void_
+        {
+            public override TError ToError()
+            {
+                throw new InvalidCastException("XXX");
+            }
+        }
+
+        private partial class Error_
+        {
+            public override TError ToError() => Error;
+        }
+    }
+
+    // Provides the core Monad methods.
+    public partial class VoidOr<TError>
+    {
+        public abstract VoidOr<TResult> Bind<TResult>(Func<TError, VoidOr<TResult>> selector);
+
+        [DebuggerHidden]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static VoidOr<TError> η(TError value)
+        {
+            Require.NotNullUnconstrained(value, nameof(value));
+            Warrant.NotNull<VoidOr<TError>>();
+
+            return new VoidOr<TError>.Error_(value);
+        }
+
+        [DebuggerHidden]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static VoidOr<TError> μ(VoidOr<VoidOr<TError>> square)
+            => square.IsError ? square.Error : VoidOr<TError>.Void;
+
+        private partial class Void_
+        {
             public override VoidOr<TResult> Bind<TResult>(Func<TError, VoidOr<TResult>> selector)
                 => VoidOr<TResult>.Void;
+        }
 
+        private partial class Error_
+        {
+            public override VoidOr<TResult> Bind<TResult>(Func<TError, VoidOr<TResult>> selector)
+            {
+                Require.NotNull(selector, nameof(selector));
+
+                return selector.Invoke(Error);
+            }
+        }
+    }
+
+    // Provides the core MonadOr methods.
+    public partial class VoidOr<TError>
+    {
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private static readonly VoidOr<TError> s_Void = new VoidOr<TError>.Void_();
+
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
+        public static VoidOr<TError> Void
+        {
+            get { Warrant.NotNull<VoidOr<TError>>(); return s_Void; }
+        }
+
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "OrElse", Justification = "[Intentionally] Standard name for the monoid method.")]
+        public abstract VoidOr<TError> OrElse(VoidOr<TError> other);
+
+        private partial class Void_
+        {
             public override VoidOr<TError> OrElse(VoidOr<TError> other) => other;
+        }
 
-            #region Internal.IAlternative<TError> interface.
+        private partial class Error_
+        {
+            public override VoidOr<TError> OrElse(VoidOr<TError> other) => this;
+        }
+    }
 
+    // Implements the Internal.IAlternative<TError> interface.
+    public partial class VoidOr<TError>
+    {
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "1#", Justification = "[Intentionally] Internal interface.")]
+        public abstract TResult Match<TResult>(Func<TError, TResult> caseError, Func<TResult> caseSuccess);
+
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "1#", Justification = "[Intentionally] Internal interface.")]
+        public abstract TResult Match<TResult>(Func<TError, TResult> caseError, TResult caseSuccess);
+
+        public abstract TResult Coalesce<TResult>(
+            Func<TError, bool> predicate,
+            Func<TError, TResult> selector,
+            Func<TResult> otherwise);
+
+        public abstract TResult Coalesce<TResult>(Func<TError, bool> predicate, TResult then, TResult other);
+
+        public abstract void Do(Func<TError, bool> predicate, Action<TError> action, Action otherwise);
+
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "1#", Justification = "[Intentionally] Internal interface.")]
+        public abstract void Do(Action<TError> onError, Action onSuccess);
+
+        public abstract void OnSuccess(Action action);
+
+        public abstract void OnError(Action<TError> action);
+
+        private partial class Void_ : VoidOr<TError>
+        {
             public override TResult Match<TResult>(Func<TError, TResult> caseError, Func<TResult> caseSuccess)
             {
                 Require.NotNull(caseSuccess, nameof(caseSuccess));
@@ -75,8 +240,6 @@ namespace Narvalo.Fx
                 onSuccess.Invoke();
             }
 
-            public override void OnError(Action<TError> action) { }
-
             public override void OnSuccess(Action action)
             {
                 Require.NotNull(action, nameof(action));
@@ -84,47 +247,11 @@ namespace Narvalo.Fx
                 action.Invoke();
             }
 
-            #endregion
-
-            public override string ToString()
-            {
-                Warrant.NotNull<string>();
-
-                return "Void";
-            }
+            public override void OnError(Action<TError> action) { }
         }
 
-        [DebuggerDisplay("Error")]
-        [DebuggerTypeProxy(typeof(VoidOr<>.Error_.DebugView))]
-        private sealed partial class Error_ : VoidOr<TError>
+        private partial class Error_
         {
-            private readonly TError _error;
-
-            public Error_(TError error)
-            {
-                Demand.NotNullUnconstrained(error);
-
-                _error = error;
-            }
-
-            public override bool IsError => true;
-
-            internal override TError Error
-            {
-                get { Warrant.NotNullUnconstrained<TError>(); return _error; }
-            }
-
-            public override VoidOr<TResult> Bind<TResult>(Func<TError, VoidOr<TResult>> selector)
-            {
-                Require.NotNull(selector, nameof(selector));
-
-                return selector.Invoke(Error);
-            }
-
-            public override VoidOr<TError> OrElse(VoidOr<TError> other) => this;
-
-            #region Internal.IAlternative<TError> interface.
-
             public override TResult Match<TResult>(Func<TError, TResult> caseError, Func<TResult> caseSuccess)
             {
                 Require.NotNull(caseError, nameof(caseError));
@@ -181,100 +308,15 @@ namespace Narvalo.Fx
                 onError.Invoke(Error);
             }
 
+            public override void OnSuccess(Action action) { }
+
             public override void OnError(Action<TError> action)
             {
                 Require.NotNull(action, nameof(action));
 
                 action.Invoke(Error);
             }
-
-            public override void OnSuccess(Action action) { }
-
-            public override string ToString()
-            {
-                Warrant.NotNull<string>();
-
-                return "Error(" + Error.ToString() + ")";
-            }
-
-            #endregion
-
-            /// <summary>
-            /// Represents a debugger type proxy for <see cref="VoidOr{TError}.Error_"/>.
-            /// </summary>
-            [ContractVerification(false)] // Debugger-only code.
-            [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
-            private sealed class DebugView
-            {
-                private readonly Error_ _inner;
-
-                public DebugView(Error_ inner)
-                {
-                    _inner = inner;
-                }
-
-                public TError Error => _inner.Error;
-            }
         }
-    }
-
-    // Provides the core Monad methods.
-    public partial class VoidOr<TError>
-    {
-        public abstract VoidOr<TResult> Bind<TResult>(Func<TError, VoidOr<TResult>> selector);
-
-        [DebuggerHidden]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static VoidOr<TError> η(TError value)
-        {
-            Require.NotNullUnconstrained(value, nameof(value));
-            Warrant.NotNull<VoidOr<TError>>();
-
-            return new VoidOr<TError>.Error_(value);
-        }
-
-        [DebuggerHidden]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static VoidOr<TError> μ(VoidOr<VoidOr<TError>> square)
-            => square.IsError ? square.Error : VoidOr<TError>.Void;
-    }
-
-    // Provides the core MonadOr methods.
-    public partial class VoidOr<TError>
-    {
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private static readonly VoidOr<TError> s_Void = new VoidOr<TError>.Void_();
-
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
-        public static VoidOr<TError> Void
-        {
-            get { Warrant.NotNull<VoidOr<TError>>(); return s_Void; }
-        }
-
-        public abstract VoidOr<TError> OrElse(VoidOr<TError> other);
-    }
-
-    // Implements the Internal.IAlternative<TError> interface.
-    public partial class VoidOr<TError>
-    {
-        public abstract TResult Match<TResult>(Func<TError, TResult> caseError, Func<TResult> caseSuccess);
-
-        public abstract TResult Match<TResult>(Func<TError, TResult> caseError, TResult caseSuccess);
-
-        public abstract TResult Coalesce<TResult>(
-            Func<TError, bool> predicate,
-            Func<TError, TResult> selector,
-            Func<TResult> otherwise);
-
-        public abstract TResult Coalesce<TResult>(Func<TError, bool> predicate, TResult then, TResult other);
-
-        public abstract void Do(Func<TError, bool> predicate, Action<TError> action, Action otherwise);
-
-        public abstract void Do(Action<TError> onError, Action onSuccess);
-
-        public abstract void OnError(Action<TError> action);
-
-        public abstract void OnSuccess(Action action);
     }
 }
 

@@ -27,7 +27,7 @@ namespace Narvalo.Fx
         /// <summary>
         /// The unique object of type <c>VoidOr&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly VoidOr<global::Narvalo.Fx.Unit> s_Unit = Error(global::Narvalo.Fx.Unit.Single);
+        private static readonly VoidOr<global::Narvalo.Fx.Unit> s_Unit = FromError(global::Narvalo.Fx.Unit.Single);
 
         /// <summary>
         /// Gets the unique object of type <c>VoidOr&lt;Unit&gt;</c>.
@@ -67,7 +67,7 @@ namespace Narvalo.Fx
         /// <param name="value">A value to be wrapped into a <see cref="VoidOr{T}"/> object.</param>
         /// <returns>An instance of the <see cref="VoidOr{T}"/> class for the specified value.</returns>
         // Named "return" in Haskell parlance.
-        public static VoidOr<T> Error<T>(T value)
+        public static VoidOr<T> FromError<T>(T value)
             /* T4: C# indent */
         {
             Warrant.NotNull<VoidOr<T>>();
@@ -217,7 +217,7 @@ namespace Narvalo.Fx
             Require.NotNull(selector, nameof(selector));
             Warrant.NotNull<VoidOr<TResult>>();
 
-            return @this.Bind(_ => VoidOr.Error(selector.Invoke(_)));
+            return @this.Bind(_ => VoidOr.FromError(selector.Invoke(_)));
         }
 
         // Named ">>" in Haskell parlance.

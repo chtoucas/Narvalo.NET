@@ -3,8 +3,8 @@
 namespace Narvalo.Fx
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Runtime.CompilerServices;
     using System.Runtime.ExceptionServices;
@@ -22,6 +22,7 @@ namespace Narvalo.Fx
     /// </remarks>
     /// <typeparam name="T">The underlying type of the value.</typeparam>
     // Friendly version of Either<ExceptionDispatchInfo, T>.
+    [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public abstract partial class Outcome<T> : Internal.IMatchable<T, ExceptionDispatchInfo>
     {
 #if CONTRACTS_FULL // Custom ctor visibility for the contract class only.
@@ -40,68 +41,6 @@ namespace Narvalo.Fx
 
         public bool IsError => !IsSuccess;
 
-        #region Operators
-
-        public static explicit operator Outcome<T>(T value)
-        {
-            Warrant.NotNull<Outcome<T>>();
-
-            return η(value);
-        }
-
-        public static explicit operator Outcome<T>(ExceptionDispatchInfo exceptionInfo)
-        {
-            Expect.NotNull(exceptionInfo);
-            Warrant.NotNull<Outcome<T>>();
-
-            return η(exceptionInfo);
-        }
-
-        public static explicit operator T(Outcome<T> value)
-        {
-            Require.NotNull(value, nameof(value));
-
-            // We check the value of the property IsSuccess even if this is not really necessary
-            // since a direct cast would have worked too:
-            //  return ((Success_)value).Value;
-            // but doing so allows us to throw a more meaningful exception and to effectively
-            // hide the implementation details; the default exception would say something
-            // like "Unable to cast a Failure_ type to a Success_ type".
-            if (!value.IsSuccess)
-            {
-                throw new InvalidCastException(Strings.Outcome_CannotCastFailureToValue);
-            }
-
-            var success = value as Success_;
-            Contract.Assume(success != null);
-
-            return success.Value;
-        }
-
-        public static explicit operator ExceptionDispatchInfo(Outcome<T> value)
-        {
-            Require.NotNull(value, nameof(value));
-            Warrant.NotNull<ExceptionDispatchInfo>();
-
-            // We check the value of the property IsSuccess even if this is not really necessary
-            // since a direct cast would have worked too:
-            //  return ((Failure_)value).Value;
-            // but doing so allows us to throw a more meaningful exception and to effectively
-            // hide the implementation details; the default exception would say something
-            // like "Unable to cast a Success_ type to a Failure_ type".
-            if (value.IsSuccess)
-            {
-                throw new InvalidCastException(Strings.Outcome_CannotCastSuccessToException);
-            }
-
-            var failure = value as Error_;
-            Contract.Assume(failure != null);
-
-            return failure.ExceptionInfo;
-        }
-
-        #endregion
-
         /// <summary>
         /// Obtains the enclosed value.
         /// </summary>
@@ -116,8 +55,11 @@ namespace Narvalo.Fx
         /// <see cref="IsSuccess"/> is false.</remarks>
         internal abstract ExceptionDispatchInfo ExceptionInfo { get; }
 
-        // Core monad Bind method.
-        public abstract Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector);
+        [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
+        private string DebuggerDisplay => IsSuccess ? "Success" : "Error";
+
+        public abstract void ThrowIfError();
 
         /// <summary>
         /// Obtains the underlying value if any; otherwise the default value of the type T.
@@ -141,7 +83,8 @@ namespace Narvalo.Fx
         /// <summary>
         /// Represents the "success" part of the <see cref="Outcome{T}"/> type.
         /// </summary>
-        private sealed partial class Success_ : Outcome<T>, IEquatable<Success_>
+        [DebuggerTypeProxy(typeof(Outcome<>.Success_.DebugView))]
+        private sealed partial class Success_ : Outcome<T>
         {
             public Success_(T value) { Value = value; }
 
@@ -154,12 +97,7 @@ namespace Narvalo.Fx
                 get { throw new InvalidOperationException("XXX"); }
             }
 
-            public override Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector)
-            {
-                Require.NotNull(selector, nameof(selector));
-
-                return selector.Invoke(Value);
-            }
+            public override void ThrowIfError() { }
 
             public override T ValueOrDefault() => Value;
 
@@ -171,65 +109,36 @@ namespace Narvalo.Fx
 
             public override T ValueOrThrow() => Value;
 
-            #region Internal.IMatchable<T, ExceptionDispatchInfo> interface.
-
-            public override TResult Match<TResult>(Func<T, TResult> caseSuccess, Func<ExceptionDispatchInfo, TResult> caseFailure)
-            {
-                Require.NotNull(caseSuccess, nameof(caseSuccess));
-
-                return caseSuccess.Invoke(Value);
-            }
-
-            public override void Do(Action<T> caseSuccess, Action<ExceptionDispatchInfo> caseFailure)
-            {
-                Require.NotNull(caseSuccess, nameof(caseSuccess));
-
-                caseSuccess.Invoke(Value);
-            }
-
-            public override void OnSuccess(Action<T> action)
-            {
-                Require.NotNull(action, nameof(action));
-
-                action.Invoke(Value);
-            }
-
-            public override void OnError(Action<ExceptionDispatchInfo> action) { }
-
-            #endregion
-
-            public bool Equals(Success_ other)
-            {
-                if (other == this)
-                {
-                    return true;
-                }
-
-                if (other == null)
-                {
-                    return false;
-                }
-
-                return EqualityComparer<T>.Default.Equals(Value, other.Value);
-            }
-
-            public override bool Equals(object obj) => Equals(obj as Success_);
-
-            public override int GetHashCode()
-                => Value == null ? 0 : EqualityComparer<T>.Default.GetHashCode(Value);
-
             public override string ToString()
             {
                 Warrant.NotNull<string>();
 
                 return Format.Current("Success({0})", Value);
             }
+
+            /// <summary>
+            /// Represents a debugger type proxy for <see cref="Outcome{T}.Success_"/>.
+            /// </summary>
+            [ContractVerification(false)] // Debugger-only code.
+            [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
+            private sealed class DebugView
+            {
+                private readonly Outcome<T> _inner;
+
+                public DebugView(Outcome<T> inner)
+                {
+                    _inner = inner;
+                }
+
+                public T Value => _inner.Value;
+            }
         }
 
         /// <summary>
         /// Represents the "failure" part of the <see cref="Outcome{T}"/> type.
         /// </summary>
-        private sealed partial class Error_ : Outcome<T>, IEquatable<Error_>
+        [DebuggerTypeProxy(typeof(Outcome<>.Error_.DebugView))]
+        private sealed partial class Error_ : Outcome<T>
         {
             private readonly ExceptionDispatchInfo _exceptionInfo;
 
@@ -257,8 +166,7 @@ namespace Narvalo.Fx
                 }
             }
 
-            public override Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector)
-                => Outcome<TResult>.η(ExceptionInfo);
+            public override void ThrowIfError() => ExceptionInfo.Throw();
 
             public override T ValueOrDefault() => default(T);
 
@@ -280,65 +188,93 @@ namespace Narvalo.Fx
                 return default(T);
             }
 
-            #region Internal.IMatchable<T, ExceptionDispatchInfo> interface.
-
-            public override TResult Match<TResult>(Func<T, TResult> caseSuccess, Func<ExceptionDispatchInfo, TResult> caseFailure)
-            {
-                Require.NotNull(caseFailure, nameof(caseFailure));
-
-                return caseFailure.Invoke(ExceptionInfo);
-            }
-
-            public override void Do(Action<T> caseSuccess, Action<ExceptionDispatchInfo> caseFailure)
-            {
-                Require.NotNull(caseFailure, nameof(caseFailure));
-
-                caseFailure.Invoke(ExceptionInfo);
-            }
-
-            public override void OnSuccess(Action<T> action) { }
-
-            public override void OnError(Action<ExceptionDispatchInfo> action)
-            {
-                Require.NotNull(action, nameof(action));
-
-                action.Invoke(ExceptionInfo);
-            }
-
-            #endregion
-
-            public bool Equals(Error_ other)
-            {
-                if (other == this)
-                {
-                    return true;
-                }
-
-                if (other == null)
-                {
-                    return false;
-                }
-
-                return EqualityComparer<ExceptionDispatchInfo>.Default.Equals(ExceptionInfo, other.ExceptionInfo);
-            }
-
-            public override bool Equals(object obj) => Equals(obj as Error_);
-
-            public override int GetHashCode()
-                => EqualityComparer<ExceptionDispatchInfo>.Default.GetHashCode(ExceptionInfo);
-
             public override string ToString()
             {
                 Warrant.NotNull<string>();
 
-                return Format.Current("Failure({0})", ExceptionInfo);
+                return Format.Current("Error({0})", ExceptionInfo);
             }
+
+            /// <summary>
+            /// Represents a debugger type proxy for <see cref="Outcome{T}.Error_"/>.
+            /// </summary>
+            [ContractVerification(false)] // Debugger-only code.
+            [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
+            private sealed class DebugView
+            {
+                private readonly Error_ _inner;
+
+                public DebugView(Error_ inner)
+                {
+                    _inner = inner;
+                }
+
+                public ExceptionDispatchInfo ExceptionInfo => _inner.ExceptionInfo;
+            }
+        }
+    }
+
+    // Conversions operators.
+    public abstract partial class Outcome<T>
+    {
+        public abstract T ToValue();
+
+        public abstract Exception ToException();
+
+        public abstract ExceptionDispatchInfo ToExceptionInfo();
+
+        public static explicit operator T(Outcome<T> value)
+            => value == null ? default(T) : value.ToValue();
+
+        public static explicit operator Exception(Outcome<T> value)
+            => value?.ToException();
+
+        public static explicit operator ExceptionDispatchInfo(Outcome<T> value)
+            => value?.ToExceptionInfo();
+
+        public static explicit operator Outcome<T>(T value)
+        {
+            Warrant.NotNull<Outcome<T>>();
+
+            return Outcome.Of(value);
+        }
+
+        public static explicit operator Outcome<T>(ExceptionDispatchInfo exceptionInfo)
+            => exceptionInfo == null ? null : Outcome.FromError<T>(exceptionInfo);
+
+        private partial class Success_
+        {
+            public override T ToValue() => Value;
+
+            public override Exception ToException()
+            {
+                throw new InvalidCastException("XXX");
+            }
+
+            public override ExceptionDispatchInfo ToExceptionInfo()
+            {
+                throw new InvalidCastException("XXX");
+            }
+        }
+
+        private partial class Error_
+        {
+            public override T ToValue()
+            {
+                throw new InvalidCastException(Strings.Outcome_CannotCastFailureToValue);
+            }
+
+            public override Exception ToException() => ExceptionInfo.SourceException;
+
+            public override ExceptionDispatchInfo ToExceptionInfo() => ExceptionInfo;
         }
     }
 
     // Core Monad methods.
     public abstract partial class Outcome<T>
     {
+        public abstract Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector);
+
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Outcome<T> η(T value) => new Success_(value);
@@ -364,30 +300,106 @@ namespace Narvalo.Fx
             }
             else
             {
-                return η(square.ExceptionInfo);
+                return Outcome.FromError<T>(square.ExceptionInfo);
             }
+        }
+
+        private partial class Success_
+        {
+            public override Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector)
+            {
+                Require.NotNull(selector, nameof(selector));
+
+                return selector.Invoke(Value);
+            }
+        }
+
+        private partial class Error_
+        {
+            public override Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector)
+                => Outcome.FromError<TResult>(ExceptionInfo);
         }
     }
 
     // Implements the Internal.IMatchable<T, ExceptionDispatchInfo> interface.
     public abstract partial class Outcome<T>
     {
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "1#", Justification = "[Intentionally] Internal interface.")]
         public abstract TResult Match<TResult>(
             Func<T, TResult> caseSuccess,
             Func<ExceptionDispatchInfo, TResult> caseError);
 
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "1#", Justification = "[Intentionally] Internal interface.")]
         public abstract void Do(Action<T> onSuccess, Action<ExceptionDispatchInfo> onError);
 
         public abstract void OnSuccess(Action<T> action);
 
         public abstract void OnError(Action<ExceptionDispatchInfo> action);
+
+        private partial class Success_
+        {
+            public override TResult Match<TResult>(
+                Func<T, TResult> caseSuccess,
+                Func<ExceptionDispatchInfo, TResult> caseError)
+            {
+                Require.NotNull(caseSuccess, nameof(caseSuccess));
+
+                return caseSuccess.Invoke(Value);
+            }
+
+            public override void Do(Action<T> onSuccess, Action<ExceptionDispatchInfo> onError)
+            {
+                Require.NotNull(onSuccess, nameof(onSuccess));
+
+                onSuccess.Invoke(Value);
+            }
+
+            public override void OnSuccess(Action<T> action)
+            {
+                Require.NotNull(action, nameof(action));
+
+                action.Invoke(Value);
+            }
+
+            public override void OnError(Action<ExceptionDispatchInfo> action) { }
+        }
+
+        private partial class Error_
+        {
+            public override TResult Match<TResult>(
+                Func<T, TResult> caseSuccess,
+                Func<ExceptionDispatchInfo, TResult> caseError)
+            {
+                Require.NotNull(caseError, nameof(caseError));
+
+                return caseError.Invoke(ExceptionInfo);
+            }
+
+            public override void Do(Action<T> onSuccess, Action<ExceptionDispatchInfo> OnError)
+            {
+                Require.NotNull(OnError, nameof(OnError));
+
+                OnError.Invoke(ExceptionInfo);
+            }
+
+            public override void OnSuccess(Action<T> action) { }
+
+            public override void OnError(Action<ExceptionDispatchInfo> action)
+            {
+                Require.NotNull(action, nameof(action));
+
+                action.Invoke(ExceptionInfo);
+            }
+        }
     }
 
 #if CONTRACTS_FULL
 
-    // In real world, only Success_ and Failure_ can inherit from Outcome.
+    // In real world, only Success_ and Error_ can inherit from Outcome.
     // Adding the following object invariants on Outcome<T>:
-    //  (IsSuccess && this is Success_) || (this is Failure_)
+    //  (IsSuccess && this is Success_) || (this is Error_)
     // should make unecessary any call to Contract.Assume but I have not been able to make this work.
     [ContractClass(typeof(OutcomeContract<>))]
     public partial class Outcome<T>
@@ -401,12 +413,12 @@ namespace Narvalo.Fx
             }
         }
 
-        private partial class Failure_
+        private partial class Error_
         {
             [ContractInvariantMethod]
             private void ObjectInvariant()
             {
-                Contract.Invariant(!IsSuccess);
+                Contract.Invariant(IsError);
                 Contract.Invariant(_exceptionInfo != null);
             }
         }
@@ -415,7 +427,7 @@ namespace Narvalo.Fx
     [ContractClassFor(typeof(Outcome<>))]
     internal abstract class OutcomeContract<T> : Outcome<T>
     {
-        protected OutcomeContract(bool isSuccess) : base(isSuccess) { }
+        protected OutcomeContract() { }
 
         public override Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector)
         {

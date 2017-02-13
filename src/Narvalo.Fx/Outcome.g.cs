@@ -29,7 +29,7 @@ namespace Narvalo.Fx
         /// <summary>
         /// The unique object of type <c>Outcome&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly Outcome<global::Narvalo.Fx.Unit> s_Unit = Success(global::Narvalo.Fx.Unit.Single);
+        private static readonly Outcome<global::Narvalo.Fx.Unit> s_Unit = Of(global::Narvalo.Fx.Unit.Single);
 
         /// <summary>
         /// Gets the unique object of type <c>Outcome&lt;Unit&gt;</c>.
@@ -53,7 +53,7 @@ namespace Narvalo.Fx
         /// <param name="value">A value to be wrapped into a <see cref="Outcome{T}"/> object.</param>
         /// <returns>An instance of the <see cref="Outcome{T}"/> class for the specified value.</returns>
         // Named "return" in Haskell parlance.
-        public static Outcome<T> Success<T>(T value)
+        public static Outcome<T> Of<T>(T value)
             /* T4: C# indent */
         {
             Warrant.NotNull<Outcome<T>>();
@@ -192,7 +192,7 @@ namespace Narvalo.Fx
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));
 
-            return @this.Bind(_ => Outcome.Success(selector.Invoke(_)));
+            return @this.Bind(_ => Outcome.Of(selector.Invoke(_)));
         }
 
         // Named ">>" in Haskell parlance.
@@ -731,7 +731,7 @@ namespace Narvalo.Fx.Internal
             Demand.NotNull(@this);
             Warrant.NotNull<Outcome<IEnumerable<TSource>>>();
 
-            var seed = Outcome.Success(Enumerable.Empty<TSource>());
+            var seed = Outcome.Of(Enumerable.Empty<TSource>());
             // Inlined LINQ Append method:
             Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (m, item) => m.Append(item);
 
@@ -752,7 +752,7 @@ namespace Narvalo.Fx.Internal
         //{
         //    Demand.NotNull(m);
 
-        //    return m.Bind(item => Outcome.Success(list.Concat(Enumerable.Repeat(item, 1))));
+        //    return m.Bind(item => Outcome.Of(list.Concat(Enumerable.Repeat(item, 1))));
         //}
 
     } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
@@ -790,7 +790,7 @@ namespace Narvalo.Fx.Internal
             Func<Outcome<IEnumerable<TSource>>, TSource, Outcome<IEnumerable<TSource>>> accumulator
                 = (mlist, item) => predicate.Invoke(item).Zip(mlist, (flg, list) => selector.Invoke(flg, list, item));
 
-            var seed = Outcome.Success(Enumerable.Empty<TSource>());
+            var seed = Outcome.Of(Enumerable.Empty<TSource>());
 
             // REVIEW: Aggregate?
             return @this.AggregateBack(seed, accumulator);
@@ -845,7 +845,7 @@ namespace Narvalo.Fx.Internal
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
 
-            Outcome<TAccumulate> retval = Outcome.Success(seed);
+            Outcome<TAccumulate> retval = Outcome.Of(seed);
 
             foreach (TSource item in @this)
             {
@@ -889,7 +889,7 @@ namespace Narvalo.Fx.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                Outcome<TSource> retval = Outcome.Success(iter.Current);
+                Outcome<TSource> retval = Outcome.Of(iter.Current);
 
                 while (iter.MoveNext())
                 {
@@ -929,7 +929,7 @@ namespace Narvalo.Fx.Internal
             Require.NotNull(accumulator, nameof(accumulator));
             Require.NotNull(predicate, nameof(predicate));
 
-            Outcome<TAccumulate> retval = Outcome.Success(seed);
+            Outcome<TAccumulate> retval = Outcome.Of(seed);
 
             using (var iter = @this.GetEnumerator())
             {
@@ -965,7 +965,7 @@ namespace Narvalo.Fx.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                Outcome<TSource> retval = Outcome.Success(iter.Current);
+                Outcome<TSource> retval = Outcome.Of(iter.Current);
 
                 while (predicate.Invoke(retval) && iter.MoveNext())
                 {

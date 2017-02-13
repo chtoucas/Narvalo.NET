@@ -11,15 +11,15 @@ namespace Narvalo.Fx
     {
         #region Explicit Cast
 
-        [Fact]
-        public static void ExplicitCastToExceptionDispatchInfo_ThrowsInvalidCastException_WhenCastingSuccessObject()
-        {
-            // Arrange
-            var output = Outcome.Success(1);
+        //[Fact]
+        //public static void ExplicitCastToExceptionDispatchInfo_ThrowsInvalidCastException_WhenCastingSuccessObject()
+        //{
+        //    // Arrange
+        //    var output = Outcome.Of(1);
 
-            // Act & Assert
-            Assert.Throws<InvalidCastException>(() => (ExceptionDispatchInfo)output);
-        }
+        //    // Act & Assert
+        //    Assert.Throws<InvalidCastException>(() => (ExceptionDispatchInfo)output);
+        //}
 
         [Fact]
         public static void ExplicitCastToValue_ThrowsInvalidCastException_WhenCastingFailureObject()
@@ -35,7 +35,7 @@ namespace Narvalo.Fx
             {
                 var edi = ExceptionDispatchInfo.Capture(ex);
 
-                output = Outcome.Failure<string>(edi);
+                output = Outcome.FromError<string>(edi);
             }
 
             // Act & Assert

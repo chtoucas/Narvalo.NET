@@ -5,7 +5,7 @@ namespace Narvalo.Fx
     using System;
 
     /// <summary>
-    /// Provides extension methods for <see cref="Nullable{T}"/>.
+    /// Provides a set of static and extension methods for <see cref="Nullable{T}"/>.
     /// </summary>
     public static class Nullable
     {

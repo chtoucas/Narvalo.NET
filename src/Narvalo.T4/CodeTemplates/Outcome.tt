@@ -4,10 +4,5 @@
     public partial class OutcomeTemplate : MonadTemplate
     {
         public OutcomeTemplate(TextTransformation parent) : base(parent) { }
-
-        public override void Initialize()
-        {
-            ReturnName = "Success";
-        }
     }
 #>

@@ -6,6 +6,9 @@ namespace Narvalo.Fx
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.ExceptionServices;
 
+    /// <summary>
+    /// Provides a set of static and extension methods for <see cref="Func{T}"/> and <see cref="Action"/>.
+    /// </summary>
     public static partial class Func
     {
         public static Func<T> Of<T>(T value)
@@ -40,7 +43,7 @@ namespace Narvalo.Fx
             {
                 var edi = ExceptionDispatchInfo.Capture(ex);
 
-                return VoidOrError.Error(edi);
+                return VoidOrError.FromError(edi);
             }
         }
 
@@ -63,7 +66,7 @@ namespace Narvalo.Fx
             catch (T1Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T2Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
 
-            return VoidOrError.Error(edi);
+            return VoidOrError.FromError(edi);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
@@ -87,7 +90,7 @@ namespace Narvalo.Fx
             catch (T2Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T3Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
 
-            return VoidOrError.Error(edi);
+            return VoidOrError.FromError(edi);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
@@ -113,7 +116,7 @@ namespace Narvalo.Fx
             catch (T3Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T4Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
 
-            return VoidOrError.Error(edi);
+            return VoidOrError.FromError(edi);
         }
 
         #endregion
@@ -130,13 +133,13 @@ namespace Narvalo.Fx
             {
                 TResult result = thunk.Invoke();
 
-                return Outcome.Success(result);
+                return Outcome.Of(result);
             }
             catch (TException ex)
             {
                 var edi = ExceptionDispatchInfo.Capture(ex);
 
-                return Outcome.Failure<TResult>(edi);
+                return Outcome.FromError<TResult>(edi);
             }
         }
 
@@ -154,12 +157,12 @@ namespace Narvalo.Fx
             {
                 TResult result = thunk.Invoke();
 
-                return Outcome.Success(result);
+                return Outcome.Of(result);
             }
             catch (T1Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T2Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
 
-            return Outcome.Failure<TResult>(edi);
+            return Outcome.FromError<TResult>(edi);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
@@ -177,13 +180,13 @@ namespace Narvalo.Fx
             {
                 TResult result = thunk.Invoke();
 
-                return Outcome.Success(result);
+                return Outcome.Of(result);
             }
             catch (T1Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T2Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T3Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
 
-            return Outcome.Failure<TResult>(edi);
+            return Outcome.FromError<TResult>(edi);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
@@ -203,14 +206,14 @@ namespace Narvalo.Fx
             {
                 TResult result = thunk.Invoke();
 
-                return Outcome.Success(result);
+                return Outcome.Of(result);
             }
             catch (T1Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T2Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T3Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T4Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
 
-            return Outcome.Failure<TResult>(edi);
+            return Outcome.FromError<TResult>(edi);
         }
 
         #endregion
@@ -230,13 +233,13 @@ namespace Narvalo.Fx
             {
                 TResult result = thunk.Invoke(value);
 
-                return Outcome.Success(result);
+                return Outcome.Of(result);
             }
             catch (TException ex)
             {
                 var edi = ExceptionDispatchInfo.Capture(ex);
 
-                return Outcome.Failure<TResult>(edi);
+                return Outcome.FromError<TResult>(edi);
             }
         }
 
@@ -256,12 +259,12 @@ namespace Narvalo.Fx
             {
                 TResult result = thunk.Invoke(value);
 
-                return Outcome.Success(result);
+                return Outcome.Of(result);
             }
             catch (T1Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T2Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
 
-            return Outcome.Failure<TResult>(edi);
+            return Outcome.FromError<TResult>(edi);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
@@ -281,13 +284,13 @@ namespace Narvalo.Fx
             {
                 TResult result = thunk.Invoke(value);
 
-                return Outcome.Success(result);
+                return Outcome.Of(result);
             }
             catch (T1Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T2Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T3Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
 
-            return Outcome.Failure<TResult>(edi);
+            return Outcome.FromError<TResult>(edi);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
@@ -308,14 +311,14 @@ namespace Narvalo.Fx
             {
                 TResult result = thunk.Invoke(value);
 
-                return Outcome.Success(result);
+                return Outcome.Of(result);
             }
             catch (T1Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T2Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T3Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T4Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
 
-            return Outcome.Failure<TResult>(edi);
+            return Outcome.FromError<TResult>(edi);
         }
 
         #endregion

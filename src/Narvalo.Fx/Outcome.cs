@@ -9,7 +9,7 @@ namespace Narvalo.Fx
     /// </summary>
     public static partial class Outcome
     {
-        public static Outcome<T> Failure<T>(ExceptionDispatchInfo exceptionInfo)
+        public static Outcome<T> FromError<T>(ExceptionDispatchInfo exceptionInfo)
         {
             Expect.NotNull(exceptionInfo);
             Warrant.NotNull<Outcome<T>>();

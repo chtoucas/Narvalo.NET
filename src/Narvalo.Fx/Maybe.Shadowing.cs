@@ -5,7 +5,6 @@ namespace Narvalo.Fx
     using System;
     using System.Collections.Generic;
 
-    // Overrides for auto-generated (extension) methods.
     public partial struct Maybe<T>
     {
         #region Basic Monad functions
@@ -139,7 +138,6 @@ namespace Narvalo.Fx
         #endregion
     }
 
-    // Overrides for auto-generated (extension) methods on IEnumerable<Maybe<T>>.
     public static partial class Sequence
     {
         internal static Maybe<IEnumerable<TSource>> CollectImpl<TSource>(this IEnumerable<Maybe<TSource>> @this)
@@ -156,7 +154,6 @@ namespace Narvalo.Fx.Linq
     using System;
     using System.Collections.Generic;
 
-    // Overrides for auto-generated (extension) methods on IEnumerable<T>.
     public static partial class MoreEnumerable
     {
         internal static Maybe<IEnumerable<TSource>> FilterImpl<TSource>(

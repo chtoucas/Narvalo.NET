@@ -90,24 +90,6 @@ namespace Narvalo.Fx
             }
         }
 
-        #region Conversion operators.
-
-        public static explicit operator Maybe<T>(T value) => η(value);
-
-        public static explicit operator T(Maybe<T> value)
-        {
-            Warrant.NotNullUnconstrained<T>();
-
-            if (value.IsNone)
-            {
-                throw new InvalidCastException(Strings.Maybe_CannotCastNoneToValue);
-            }
-
-            return value.Value;
-        }
-
-        #endregion
-
         /// <summary>
         /// Obtains the enclosed value if any; otherwise the default value of type T.
         /// </summary>
@@ -196,6 +178,24 @@ namespace Narvalo.Fx
         }
     }
 
+    // Conversion operators.
+    public partial struct Maybe<T>
+    {
+        public static explicit operator Maybe<T>(T value) => Maybe.Of(value);
+
+        public static explicit operator T(Maybe<T> value)
+        {
+            Warrant.NotNullUnconstrained<T>();
+
+            if (value.IsNone)
+            {
+                throw new InvalidCastException(Strings.Maybe_CannotCastNoneToValue);
+            }
+
+            return value.Value;
+        }
+    }
+
     // Provides the core Monad methods.
     public partial struct Maybe<T>
     {
@@ -230,6 +230,8 @@ namespace Narvalo.Fx
     // Implements the Internal.IAlternative<T> interface.
     public partial struct Maybe<T>
     {
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "1#", Justification = "[Intentionally] Internal interface.")]
         public TResult Match<TResult>(Func<T, TResult> caseSome, Func<TResult> caseNone)
         {
             Require.NotNull(caseSome, nameof(caseSome));
@@ -239,6 +241,8 @@ namespace Narvalo.Fx
         }
 
         // Named <c>maybe</c> in Haskell parlance.
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "1#", Justification = "[Intentionally] Internal interface.")]
         public TResult Match<TResult>(Func<T, TResult> caseSome, TResult caseNone)
         {
             Require.NotNull(caseSome, nameof(caseSome));
@@ -278,6 +282,8 @@ namespace Narvalo.Fx
             }
         }
 
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "1#", Justification = "[Intentionally] Internal interface.")]
         public void Do(Action<T> onSome, Action onNone)
         {
             Require.NotNull(onSome, nameof(onSome));

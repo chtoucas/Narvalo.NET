@@ -3,7 +3,7 @@
 namespace Narvalo.Fx.Linq
 {
     /// <summary>
-    /// Provides extension methods for <see cref="System.Collections.Generic.IEnumerable{T}"/>.
+    /// Provides a set of static and extension methods for <see cref="System.Collections.Generic.IEnumerable{T}"/>.
     /// </summary>
     public static partial class MoreEnumerable { }
 }
