@@ -17,7 +17,9 @@ namespace Narvalo.Fx
     /// value or the exception state at the point it was thrown.
     /// </summary>
     /// <remarks>
-    /// <para>WARNING: We do not catch exceptions throw by any supplied delegate...</para>
+    /// <para>We do not catch exceptions throw by any supplied delegate; there is only one exception
+    /// though: <see cref="Outcome{T}.Select{TResult}(Func{T, TResult})"/>. A good pratice is that
+    /// a function that returns a <see cref="Outcome{T}"/> does not normally throw.</para>
     /// <para>This class is not meant to replace the standard exception mechanism.</para>
     /// </remarks>
     /// <typeparam name="T">The underlying type of the value.</typeparam>
@@ -158,12 +160,7 @@ namespace Narvalo.Fx
 
             internal override ExceptionDispatchInfo ExceptionInfo
             {
-                get
-                {
-                    Warrant.NotNull<ExceptionDispatchInfo>();
-
-                    return _exceptionInfo;
-                }
+                get { Warrant.NotNull<ExceptionDispatchInfo>(); return _exceptionInfo; }
             }
 
             public override void ThrowIfError() => ExceptionInfo.Throw();

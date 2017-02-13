@@ -5,6 +5,7 @@ namespace Narvalo.Fx
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using System.Runtime.ExceptionServices;
 
     public abstract partial class Outcome<T>
     {
@@ -16,11 +17,22 @@ namespace Narvalo.Fx
 
         private partial class Success_
         {
+            [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Exceptionally, we do want to catch all exceptions.")]
             public override Outcome<TResult> Select<TResult>(Func<T, TResult> selector)
             {
                 Require.NotNull(selector, nameof(selector));
 
-                return Outcome.Of(selector.Invoke(Value));
+                // Catching all exceptions is not a good practice, but here it makes sense, since
+                // the type is supposed to encode the exception too.
+                try
+                {
+                    return Outcome.Of(selector.Invoke(Value));
+                }
+                catch (Exception ex)
+                {
+                    var edi = ExceptionDispatchInfo.Capture(ex);
+                    return Outcome.FromError<TResult>(edi);
+                }
             }
         }
 
