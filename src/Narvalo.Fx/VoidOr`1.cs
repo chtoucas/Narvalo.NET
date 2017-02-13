@@ -9,6 +9,8 @@ namespace Narvalo.Fx
     using System.Runtime.CompilerServices;
 
     // Friendly version of Either<TError, Unit>.
+    // WARNING: We make it a "monad" w/ the first parameter (TError).
+    // Normally, TError should represent a light error (!). For exceptions, see VoidOrError.
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public abstract partial class VoidOr<TError> : Internal.IAlternative<TError>
     {
