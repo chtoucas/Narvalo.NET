@@ -598,9 +598,14 @@ namespace Monads
         #endregion
     } // End of MonadValue - T4: EmitMonadExtensions().
 
-    // Provides extension methods for Func<T> in the Kleisli category.
+    // Provides extension methods for Func<T> in the Kleisli category + one Applicative.
     public static partial class Func
     {
+        #region Applicative
+
+
+        #endregion
+
         #region Basic Monad functions (Prelude)
 
 

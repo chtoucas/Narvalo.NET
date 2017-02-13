@@ -368,9 +368,26 @@ namespace Narvalo.Fx
         #endregion
     } // End of Outcome - T4: EmitMonadExtensions().
 
-    // Provides extension methods for Func<T> in the Kleisli category.
+    // Provides extension methods for Func<T> in the Kleisli category + one Applicative.
     public static partial class Func
     {
+        #region Applicative
+
+
+        // Named "<**>" in Haskell parlance. Same as Gather (<*>) with its arguments flipped.
+        public static Outcome<TResult> Apply<TSource, TResult>(
+            this Outcome<Func<TSource, TResult>> @this,
+            Outcome<TSource> value)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(value, nameof(value));
+
+            return @this.Bind(thunk => value.Select(v => thunk.Invoke(v)));
+        }
+
+
+        #endregion
+
         #region Basic Monad functions (Prelude)
 
 
@@ -507,7 +524,17 @@ namespace Narvalo.Fx.Extensions
         #region Applicative
 
 
-        // Named "<**>" in Haskell parlance.
+        // Named "<*>" in Haskell parlance. Same as Apply (<**>) with its arguments flipped.
+        public static Outcome<TResult> Gather<TSource, TResult>(
+            this Outcome<TSource> @this,
+            Outcome<Func<TSource, TResult>> applicative)
+            /* T4: C# indent */
+        {
+            Require.NotNull(applicative, nameof(applicative));
+
+            return applicative.Apply(@this);
+        }
+
         public static Outcome<Tuple<TSource, TOther>> Merge<TSource, TOther>(
             this Outcome<TSource> @this,
             Outcome<TOther> other)

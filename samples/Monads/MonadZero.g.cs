@@ -587,9 +587,26 @@ namespace Monads
         #endregion
     } // End of MonadZero - T4: EmitMonadExtensions().
 
-    // Provides extension methods for Func<T> in the Kleisli category.
+    // Provides extension methods for Func<T> in the Kleisli category + one Applicative.
     public static partial class Func
     {
+        #region Applicative
+
+
+        // Named "<**>" in Haskell parlance. Same as Gather (<*>) with its arguments flipped.
+        public static MonadZero<TResult> Apply<TSource, TResult>(
+            this MonadZero<Func<TSource, TResult>> @this,
+            MonadZero<TSource> value)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(value, nameof(value));
+
+            return @this.Bind(thunk => value.Select(v => thunk.Invoke(v)));
+        }
+
+
+        #endregion
+
         #region Basic Monad functions (Prelude)
 
 
@@ -728,7 +745,17 @@ namespace Monads.Extensions
         #region Applicative
 
 
-        // Named "<**>" in Haskell parlance.
+        // Named "<*>" in Haskell parlance. Same as Apply (<**>) with its arguments flipped.
+        public static MonadZero<TResult> Gather<TSource, TResult>(
+            this MonadZero<TSource> @this,
+            MonadZero<Func<TSource, TResult>> applicative)
+            /* T4: C# indent */
+        {
+            Require.NotNull(applicative, nameof(applicative));
+
+            return applicative.Apply(@this);
+        }
+
         public static MonadZero<Tuple<TSource, TOther>> Merge<TSource, TOther>(
             this MonadZero<TSource> @this,
             MonadZero<TOther> other)

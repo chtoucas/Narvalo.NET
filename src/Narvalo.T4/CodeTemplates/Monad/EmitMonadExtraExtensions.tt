@@ -63,7 +63,17 @@ public partial class MonadTemplate
 
 <#+ if (!HasTypeConstraints) { #>
 
-        // Named "<**>" in Haskell parlance.
+        // Named "<*>" in Haskell parlance. Same as Apply (<**>) with its arguments flipped.
+        public static <#= Name #><TResult> Gather<TSource, TResult>(
+            this <#= Name #><TSource> @this,
+            <#= Name #><Func<TSource, TResult>> applicative)
+            <#+ WriteTypeConstraints("TSource", "TResult"); #>
+        {
+            <#+ WriteNotNull("applicative"); #>
+
+            return applicative.Apply(@this);
+        }
+
         public static <#= Name #><Tuple<TSource, TOther>> Merge<TSource, TOther>(
             this <#= Name #><TSource> @this,
             <#= Name #><TOther> other)

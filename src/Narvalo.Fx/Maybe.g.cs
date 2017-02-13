@@ -556,9 +556,26 @@ namespace Narvalo.Fx
         #endregion
     } // End of Maybe - T4: EmitMonadExtensions().
 
-    // Provides extension methods for Func<T> in the Kleisli category.
+    // Provides extension methods for Func<T> in the Kleisli category + one Applicative.
     public static partial class Func
     {
+        #region Applicative
+
+
+        // Named "<**>" in Haskell parlance. Same as Gather (<*>) with its arguments flipped.
+        public static Maybe<TResult> Apply<TSource, TResult>(
+            this Maybe<Func<TSource, TResult>> @this,
+            Maybe<TSource> value)
+        {
+            /* T4: C# indent */
+            /* T4: C# indent */
+
+            return @this.Bind(thunk => value.Select(v => thunk.Invoke(v)));
+        }
+
+
+        #endregion
+
         #region Basic Monad functions (Prelude)
 
 
@@ -708,7 +725,17 @@ namespace Narvalo.Fx.Extensions
         #region Applicative
 
 
-        // Named "<**>" in Haskell parlance.
+        // Named "<*>" in Haskell parlance. Same as Apply (<**>) with its arguments flipped.
+        public static Maybe<TResult> Gather<TSource, TResult>(
+            this Maybe<TSource> @this,
+            Maybe<Func<TSource, TResult>> applicative)
+            /* T4: C# indent */
+        {
+            /* T4: C# indent */
+
+            return applicative.Apply(@this);
+        }
+
         public static Maybe<Tuple<TSource, TOther>> Merge<TSource, TOther>(
             this Maybe<TSource> @this,
             Maybe<TOther> other)

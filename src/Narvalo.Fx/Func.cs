@@ -329,6 +329,20 @@ namespace Narvalo.Fx
     // Provides extension methods for Func<..., Result<T, TError>> in the Kleisli category.
     public static partial class Func
     {
+        #region Applicative
+
+        public static Result<TResult, TError> Apply<TSource, TResult, TError>(
+            this Result<Func<TSource, TResult>, TError> @this,
+            Result<TSource, TError> value)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(value, nameof(value));
+
+            return @this.Bind(thunk => value.Select(v => thunk.Invoke(v)));
+        }
+
+        #endregion
+
         #region Basic Monad functions (Prelude)
 
         public static Result<IEnumerable<TResult>, TError> ForEach<TSource, TResult, TError>(

@@ -5,9 +5,28 @@ public partial class MonadTemplate
     public void EmitKleisliExtensions(bool haslinq)
     {
 #>
-    // Provides extension methods for Func<T> in the Kleisli category.
+    // Provides extension methods for Func<T> in the Kleisli category + one Applicative.
     public static partial class Func
     {
+        #region Applicative
+
+<#+ if (!HasTypeConstraints) { #>
+
+        // Named "<**>" in Haskell parlance. Same as Gather (<*>) with its arguments flipped.
+        public static <#= Name #><TResult> Apply<TSource, TResult>(
+            this <#= Name #><Func<TSource, TResult>> @this,
+            <#= Name #><TSource> value)
+        {
+            <#+ WriteNotNull(); #>
+            <#+ WriteNotNull("value"); #>
+
+            return @this.Bind(thunk => value.Select(v => thunk.Invoke(v)));
+        }
+
+<#+ } // T4: End of !HasTypeConstraints. #>
+
+        #endregion
+
         #region Basic Monad functions (Prelude)
 
 <#+ if (!HasTypeConstraints) { #>
