@@ -4,14 +4,14 @@ namespace Narvalo.Fx
 {
     public static class Either
     {
-        public static Either<TLeft, TRight> Left<TLeft, TRight>(TLeft value)
+        public static Either<TLeft, TRight> FromLeft<TLeft, TRight>(TLeft value)
         {
             Warrant.NotNull<Either<TLeft, TRight>>();
 
             return Either<TLeft, TRight>.η(value);
         }
 
-        public static Either<TLeft, TRight> Right<TLeft, TRight>(TRight value)
+        public static Either<TLeft, TRight> FromRight<TLeft, TRight>(TRight value)
         {
             Warrant.NotNull<Either<TLeft, TRight>>();
 

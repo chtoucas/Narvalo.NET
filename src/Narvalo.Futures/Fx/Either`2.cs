@@ -41,7 +41,7 @@ namespace Narvalo.Fx
             return new Right_(value);
         }
 
-        private sealed class Left_ : Either<TLeft, TRight>, IEquatable<Left_>
+        private sealed partial class Left_ : Either<TLeft, TRight>
         {
             private readonly TLeft _value;
 
@@ -50,44 +50,9 @@ namespace Narvalo.Fx
                 _value = value;
             }
 
-            public override TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
-            {
-                Require.NotNull(caseLeft, nameof(caseLeft));
-
-                return caseLeft.Invoke(_value);
-            }
-
-            public override void Do(Action<TLeft> caseLeft, Action<TRight> caseRight)
-            {
-                Require.NotNull(caseLeft, nameof(caseLeft));
-
-                caseLeft.Invoke(_value);
-            }
-
-
             public override Maybe<TLeft> LeftOrNone() => Maybe.Of(_value);
 
             public override Maybe<TRight> RightOrNone() => Maybe<TRight>.None;
-
-            public bool Equals(Left_ other)
-            {
-                if (other == this)
-                {
-                    return true;
-                }
-
-                if (other == null)
-                {
-                    return false;
-                }
-
-                return EqualityComparer<TLeft>.Default.Equals(_value, other._value);
-            }
-
-            public override bool Equals(object obj) => Equals(obj as Left_);
-
-            public override int GetHashCode()
-                => _value == null ? 0 : EqualityComparer<TLeft>.Default.GetHashCode(_value);
 
             public override string ToString()
             {
@@ -97,7 +62,7 @@ namespace Narvalo.Fx
             }
         }
 
-        private sealed class Right_ : Either<TLeft, TRight>, IEquatable<Right_>
+        private sealed partial class Right_ : Either<TLeft, TRight>
         {
             private readonly TRight _value;
 
@@ -106,43 +71,9 @@ namespace Narvalo.Fx
                 _value = value;
             }
 
-            public override TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
-            {
-                Require.NotNull(caseRight, nameof(caseRight));
-
-                return caseRight.Invoke(_value);
-            }
-
-            public override void Do(Action<TLeft> caseLeft, Action<TRight> caseRight)
-            {
-                Require.NotNull(caseRight, nameof(caseRight));
-
-                caseRight.Invoke(_value);
-            }
-
             public override Maybe<TLeft> LeftOrNone() => Maybe<TLeft>.None;
 
             public override Maybe<TRight> RightOrNone() => Maybe.Of(_value);
-
-            public bool Equals(Right_ other)
-            {
-                if (other == this)
-                {
-                    return true;
-                }
-
-                if (other == null)
-                {
-                    return false;
-                }
-
-                return EqualityComparer<TRight>.Default.Equals(_value, other._value);
-            }
-
-            public override bool Equals(object obj) => Equals(obj as Right_);
-
-            public override int GetHashCode()
-                => _value == null ? 0 : EqualityComparer<TRight>.Default.GetHashCode(_value);
 
             public override string ToString()
             {
@@ -159,6 +90,62 @@ namespace Narvalo.Fx
         public abstract TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight);
 
         public abstract void Do(Action<TLeft> caseLeft, Action<TRight> caseRight);
+
+        public abstract void OnLeft(Action<TLeft> action);
+
+        public abstract void OnRight(Action<TRight> action);
+
+        private partial class Left_
+        {
+            public override TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
+            {
+                Require.NotNull(caseLeft, nameof(caseLeft));
+
+                return caseLeft.Invoke(_value);
+            }
+
+            public override void Do(Action<TLeft> caseLeft, Action<TRight> caseRight)
+            {
+                Require.NotNull(caseLeft, nameof(caseLeft));
+
+                caseLeft.Invoke(_value);
+            }
+
+            public override void OnLeft(Action<TLeft> action)
+            {
+                Require.NotNull(action, nameof(action));
+
+                action.Invoke(_value);
+            }
+
+            public override void OnRight(Action<TRight> action) { }
+        }
+
+        private partial class Right_
+        {
+            public override TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
+            {
+                Require.NotNull(caseRight, nameof(caseRight));
+
+                return caseRight.Invoke(_value);
+            }
+
+            public override void Do(Action<TLeft> caseLeft, Action<TRight> caseRight)
+            {
+                Require.NotNull(caseRight, nameof(caseRight));
+
+                caseRight.Invoke(_value);
+            }
+
+            public override void OnLeft(Action<TLeft> action) { }
+
+            public override void OnRight(Action<TRight> action)
+            {
+                Require.NotNull(action, nameof(action));
+
+                action.Invoke(_value);
+            }
+        }
     }
 }
 
@@ -175,18 +162,18 @@ namespace Narvalo.Fx
     [ContractClassFor(typeof(Either<,>))]
     internal abstract class EitherContract<TLeft, TRight> : Either<TLeft, TRight>
     {
-        public override void Invoke(Action<TLeft> caseLeft, Action<TRight> caseRight)
-        {
-            Contract.Requires(caseLeft != null);
-            Contract.Requires(caseRight != null);
-        }
-
-        public override TResult Map<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
+        public override TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
         {
             Contract.Requires(caseLeft != null);
             Contract.Requires(caseRight != null);
 
             return default(TResult);
+        }
+
+        public override void Do(Action<TLeft> caseLeft, Action<TRight> caseRight)
+        {
+            Contract.Requires(caseLeft != null);
+            Contract.Requires(caseRight != null);
         }
 
         public override Maybe<TLeft> LeftOrNone() => default(Maybe<TLeft>);
