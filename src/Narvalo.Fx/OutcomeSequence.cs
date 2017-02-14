@@ -6,8 +6,7 @@ namespace Narvalo.Fx
 
     /// <summary>
     /// Provides a set of static and extension methods for querying objects
-    /// that implement <see cref="System.Collections.Generic.IEnumerable{T}"/>
-    /// where T is of type <see cref="Outcome{S}"/>.
+    /// that implement <see cref="IEnumerable{T}"/> where T is of type <see cref="Outcome{S}"/>.
     /// </summary>
     public static partial class OutcomeSequence
     {

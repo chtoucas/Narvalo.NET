@@ -22,9 +22,7 @@ namespace Monads
     using Monads.Internal;
     using Monads.Linq;
 
-    /// <summary>
-    /// Provides a set of static methods for <see cref="Monad{T}"/>.
-    /// </summary>
+    // Provides a set of static methods for Monad<T>.
     // NB: Sometimes we prefer extension methods over static methods to be able to override them locally.
     public static partial class Monad
     {
@@ -54,7 +52,7 @@ namespace Monads
         /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
         /// <param name="value">A value to be wrapped into a <see cref="Monad{T}"/> object.</param>
         /// <returns>An instance of the <see cref="Monad{T}"/> class for the specified value.</returns>
-        // Named "return" in Haskell parlance.
+        // Named "return" (Monad) or "pure" (Applicative) in Haskell parlance.
         public static Monad<T> Of<T>(T value)
             /* T4: C# indent */
         {
@@ -63,7 +61,7 @@ namespace Monads
             return Monad<T>.η(value);
         }
 
-        #region Generalisations of list functions (Prelude)
+        #region Generalisations of list functions
 
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
@@ -79,12 +77,12 @@ namespace Monads
 
         #endregion
 
-        #region Conditional execution of monadic expressions (Prelude)
+        #region Conditional execution of monadic expressions
 
 
         #endregion
 
-        #region Monadic lifting operators (Prelude)
+        #region Monadic lifting operators
 
         /// <summary>
         /// Promotes a function to use and return <see cref="Monad{T}" /> values.
@@ -185,7 +183,7 @@ namespace Monads
     {
         #region Applicative
 
-        // Named "<$" in Haskell parlance.
+        // Named "<$" (Applicative) in Haskell parlance.
         public static Monad<TResult> Replace<TSource, TResult>(
             this Monad<TSource> @this,
             TResult value)
@@ -210,9 +208,9 @@ namespace Monads
 
         #endregion
 
-        #region Basic Monad functions (Prelude)
+        #region Basic Monad functions
 
-        // Named "fmap", "liftA" or "<$>" in Haskell parlance.
+        // Named "fmap", "liftA" or "<$>" (Applicative) in Haskell parlance.
         public static Monad<TResult> Select<TSource, TResult>(
             this Monad<TSource> @this,
             Func<TSource, TResult> selector)
@@ -224,8 +222,8 @@ namespace Monads
             return @this.Bind(_ => Monad.Of(selector.Invoke(_)));
         }
 
-        // Named ">>" in Haskell parlance.
-        public static Monad<TResult> Next<TSource, TResult>(
+        // Named ">>" (Monad) or "*>" (Applicative) in Haskell parlance.
+        public static Monad<TResult> ContinueWith<TSource, TResult>(
             this Monad<TSource> @this,
             Monad<TResult> other)
             /* T4: C# indent */
@@ -247,7 +245,7 @@ namespace Monads
 
         #endregion
 
-        #region Generalisations of list functions (Prelude)
+        #region Generalisations of list functions
 
 
         // Named "replicateM" in Haskell parlance.
@@ -264,10 +262,10 @@ namespace Monads
 
         #endregion
 
-        #region Applicative lifting operators (Prelude)
+        #region Applicative lifting operators
 
         /// <see cref="Lift{T1, T2, T3}" />
-        // Named "liftA2" in Haskell parlance.
+        // Named "liftA2" (Applicative) in Haskell parlance.
         public static Monad<TResult> Zip<TFirst, TSecond, TResult>(
             this Monad<TFirst> @this,
             Monad<TSecond> second,
@@ -282,7 +280,7 @@ namespace Monads
         }
 
         /// <see cref="Lift{T1, T2, T3, T4}" />
-        // Named "liftA3" in Haskell parlance.
+        // Named "liftA3" (Applicative) in Haskell parlance.
         public static Monad<TResult> Zip<T1, T2, T3, TResult>(
             this Monad<T1> @this,
             Monad<T2> second,
@@ -301,7 +299,7 @@ namespace Monads
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5}" />
-        // Named "liftA4" in Haskell parlance.
+        // Named "liftA4" (Applicative) in Haskell parlance.
         public static Monad<TResult> Zip<T1, T2, T3, T4, TResult>(
              this Monad<T1> @this,
              Monad<T2> second,
@@ -324,7 +322,7 @@ namespace Monads
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5, T6}" />
-        // Named "liftA5" in Haskell parlance.
+        // Named "liftA5" (Applicative) in Haskell parlance.
         public static Monad<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this Monad<T1> @this,
             Monad<T2> second,
@@ -354,7 +352,7 @@ namespace Monads
 
 
         /// <remarks>
-        /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" /> (liftM2).
+        /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" />.
         /// </remarks>
         public static Monad<TResult> SelectMany<TSource, TMiddle, TResult>(
             this Monad<TSource> @this,
@@ -400,10 +398,10 @@ namespace Monads
 
         #endregion
 
-        #region Basic Monad functions (Prelude)
+        #region Basic Monad functions
 
 
-        // Named "forM" in Haskell parlance. Same as Map (mapM) with its arguments flipped.
+        // Named "forM" in Haskell parlance. Same as SelectWith (mapM) with its arguments flipped.
         public static Monad<IEnumerable<TResult>> ForEach<TSource, TResult>(
             this Func<TSource, Monad<TResult>> @this,
             IEnumerable<TSource> seq)
@@ -460,7 +458,7 @@ namespace Monads
     // Provides extension methods for IEnumerable<Monad<T>>.
     public static partial class MonadSequence
     {
-        #region Basic Monad functions (Prelude)
+        #region Basic Monad functions
 
 
         // Named "sequence" in Haskell parlance.
@@ -486,23 +484,22 @@ namespace Monads.Extensions
     // Provides more extension methods for Monad<T>.
     public static partial class MonadExtensions
     {
-        #region Basic Monad functions (Prelude)
+        #region Basic Monad functions
 
         // Named "forever" in Haskell parlance.
         public static Monad<TResult> Forever<TSource, TResult>(
             this Monad<TSource> @this,
-            Func<Monad<TResult>> thunk
-            )
+            Func<Monad<TResult>> thunk)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
 
-            return @this.Next(@this.Forever(thunk));
+            return @this.ContinueWith(@this.Forever(thunk));
         }
 
         #endregion
 
-        #region Conditional execution of monadic expressions (Prelude)
+        #region Conditional execution of monadic expressions
 
         // Named "when" in Haskell parlance. Haskell uses a different signature.
         public static void When<TSource>(
@@ -655,7 +652,7 @@ namespace Monads.Linq
     // - Aggregate -> Reduce or Fold
     public static partial class Qperators
     {
-        #region Basic Monad functions (Prelude)
+        #region Basic Monad functions
 
 
         // Named "mapM" in Haskell parlance.
@@ -673,7 +670,7 @@ namespace Monads.Linq
 
         #endregion
 
-        #region Generalisations of list functions (Prelude)
+        #region Generalisations of list functions
 
 
         // Named "filterM" in Haskell parlance.

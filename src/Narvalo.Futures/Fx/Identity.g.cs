@@ -21,9 +21,7 @@ namespace Narvalo.Fx
     using Narvalo.Fx.Internal;
     using Narvalo.Fx.Linq;
 
-    /// <summary>
-    /// Provides a set of static methods for <see cref="Identity{T}"/>.
-    /// </summary>
+    // Provides a set of static methods for Identity<T>.
     // NB: Sometimes we prefer extension methods over static methods to be able to override them locally.
     public static partial class Identity
     {
@@ -52,7 +50,7 @@ namespace Narvalo.Fx
         /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
         /// <param name="value">A value to be wrapped into a <see cref="Identity{T}"/> object.</param>
         /// <returns>An instance of the <see cref="Identity{T}"/> class for the specified value.</returns>
-        // Named "return" in Haskell parlance.
+        // Named "return" (Monad) or "pure" (Applicative) in Haskell parlance.
         public static Identity<T> Of<T>(T value)
             /* T4: C# indent */
         {
@@ -60,7 +58,7 @@ namespace Narvalo.Fx
             return Identity<T>.η(value);
         }
 
-        #region Generalisations of list functions (Prelude)
+        #region Generalisations of list functions
 
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
@@ -75,12 +73,12 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Conditional execution of monadic expressions (Prelude)
+        #region Conditional execution of monadic expressions
 
 
         #endregion
 
-        #region Monadic lifting operators (Prelude)
+        #region Monadic lifting operators
 
         /// <summary>
         /// Promotes a function to use and return <see cref="Identity{T}" /> values.
@@ -181,7 +179,7 @@ namespace Narvalo.Fx
     {
         #region Applicative
 
-        // Named "<$" in Haskell parlance.
+        // Named "<$" (Applicative) in Haskell parlance.
         public static Identity<TResult> Replace<TSource, TResult>(
             this Identity<TSource> @this,
             TResult value)
@@ -206,9 +204,9 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Basic Monad functions (Prelude)
+        #region Basic Monad functions
 
-        // Named "fmap", "liftA" or "<$>" in Haskell parlance.
+        // Named "fmap", "liftA" or "<$>" (Applicative) in Haskell parlance.
         public static Identity<TResult> Select<TSource, TResult>(
             this Identity<TSource> @this,
             Func<TSource, TResult> selector)
@@ -220,8 +218,8 @@ namespace Narvalo.Fx
             return @this.Bind(_ => Identity.Of(selector.Invoke(_)));
         }
 
-        // Named ">>" in Haskell parlance.
-        public static Identity<TResult> Next<TSource, TResult>(
+        // Named ">>" (Monad) or "*>" (Applicative) in Haskell parlance.
+        public static Identity<TResult> ContinueWith<TSource, TResult>(
             this Identity<TSource> @this,
             Identity<TResult> other)
             /* T4: C# indent */
@@ -243,7 +241,7 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Generalisations of list functions (Prelude)
+        #region Generalisations of list functions
 
 
         // Named "replicateM" in Haskell parlance.
@@ -260,10 +258,10 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Applicative lifting operators (Prelude)
+        #region Applicative lifting operators
 
         /// <see cref="Lift{T1, T2, T3}" />
-        // Named "liftA2" in Haskell parlance.
+        // Named "liftA2" (Applicative) in Haskell parlance.
         public static Identity<TResult> Zip<TFirst, TSecond, TResult>(
             this Identity<TFirst> @this,
             Identity<TSecond> second,
@@ -278,7 +276,7 @@ namespace Narvalo.Fx
         }
 
         /// <see cref="Lift{T1, T2, T3, T4}" />
-        // Named "liftA3" in Haskell parlance.
+        // Named "liftA3" (Applicative) in Haskell parlance.
         public static Identity<TResult> Zip<T1, T2, T3, TResult>(
             this Identity<T1> @this,
             Identity<T2> second,
@@ -297,7 +295,7 @@ namespace Narvalo.Fx
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5}" />
-        // Named "liftA4" in Haskell parlance.
+        // Named "liftA4" (Applicative) in Haskell parlance.
         public static Identity<TResult> Zip<T1, T2, T3, T4, TResult>(
              this Identity<T1> @this,
              Identity<T2> second,
@@ -320,7 +318,7 @@ namespace Narvalo.Fx
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5, T6}" />
-        // Named "liftA5" in Haskell parlance.
+        // Named "liftA5" (Applicative) in Haskell parlance.
         public static Identity<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this Identity<T1> @this,
             Identity<T2> second,
@@ -350,7 +348,7 @@ namespace Narvalo.Fx
 
 
         /// <remarks>
-        /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" /> (liftM2).
+        /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" />.
         /// </remarks>
         public static Identity<TResult> SelectMany<TSource, TMiddle, TResult>(
             this Identity<TSource> @this,
@@ -396,10 +394,10 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Basic Monad functions (Prelude)
+        #region Basic Monad functions
 
 
-        // Named "forM" in Haskell parlance. Same as Map (mapM) with its arguments flipped.
+        // Named "forM" in Haskell parlance. Same as SelectWith (mapM) with its arguments flipped.
         public static Identity<IEnumerable<TResult>> ForEach<TSource, TResult>(
             this Func<TSource, Identity<TResult>> @this,
             IEnumerable<TSource> seq)
@@ -455,7 +453,7 @@ namespace Narvalo.Fx
     // Provides extension methods for IEnumerable<Identity<T>>.
     public static partial class IdentitySequence
     {
-        #region Basic Monad functions (Prelude)
+        #region Basic Monad functions
 
 
         // Named "sequence" in Haskell parlance.
@@ -480,23 +478,22 @@ namespace Narvalo.Fx.Extensions
     // Provides more extension methods for Identity<T>.
     public static partial class IdentityExtensions
     {
-        #region Basic Monad functions (Prelude)
+        #region Basic Monad functions
 
         // Named "forever" in Haskell parlance.
         public static Identity<TResult> Forever<TSource, TResult>(
             this Identity<TSource> @this,
-            Func<Identity<TResult>> thunk
-            )
+            Func<Identity<TResult>> thunk)
             /* T4: C# indent */
         {
             /* T4: C# indent */
 
-            return @this.Next(@this.Forever(thunk));
+            return @this.ContinueWith(@this.Forever(thunk));
         }
 
         #endregion
 
-        #region Conditional execution of monadic expressions (Prelude)
+        #region Conditional execution of monadic expressions
 
         // Named "when" in Haskell parlance. Haskell uses a different signature.
         public static void When<TSource>(

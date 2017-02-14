@@ -13,7 +13,7 @@ public partial class MonadTemplate
     // - Aggregate -> Reduce or Fold
     public static partial class Qperators
     {
-        #region Basic Monad functions (Prelude)
+        #region Basic Monad functions
 
 <#+ if (!HasTypeConstraints) { #>
 
@@ -35,7 +35,7 @@ public partial class MonadTemplate
 
         #endregion
 
-        #region Generalisations of list functions (Prelude)
+        #region Generalisations of list functions
 
 <#+ if (!HasTypeConstraints) { #>
 

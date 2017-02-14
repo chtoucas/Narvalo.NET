@@ -21,9 +21,7 @@ namespace Narvalo.Fx
     using Narvalo.Fx.Internal;
     using Narvalo.Fx.Linq;
 
-    /// <summary>
-    /// Provides a set of static methods for <see cref="VoidOr{T}"/>.
-    /// </summary>
+    // Provides a set of static methods for VoidOr<T>.
     // NB: Sometimes we prefer extension methods over static methods to be able to override them locally.
     public static partial class VoidOr
     {
@@ -51,7 +49,7 @@ namespace Narvalo.Fx
         /// Gets the zero for <see cref="VoidOr{T}"/>.
         /// </summary>
         /// <value>The zero for <see cref="VoidOr{T}"/>.</value>
-        // Named "mzero" in Haskell parlance.
+        // Named "mzero" (MonadPlus) in Haskell parlance.
         public static VoidOr<global::Narvalo.Fx.Unit> Void
         {
             get
@@ -69,7 +67,7 @@ namespace Narvalo.Fx
         /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
         /// <param name="value">A value to be wrapped into a <see cref="VoidOr{T}"/> object.</param>
         /// <returns>An instance of the <see cref="VoidOr{T}"/> class for the specified value.</returns>
-        // Named "return" in Haskell parlance.
+        // Named "return" (Monad) or "pure" (Applicative) in Haskell parlance.
         public static VoidOr<T> FromError<T>(T value)
             /* T4: C# indent */
         {
@@ -78,7 +76,7 @@ namespace Narvalo.Fx
             return VoidOr<T>.η(value);
         }
 
-        #region Generalisations of list functions (Prelude)
+        #region Generalisations of list functions
 
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
@@ -95,7 +93,7 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Conditional execution of monadic expressions (Prelude)
+        #region Conditional execution of monadic expressions
 
 
         // Named "guard" in Haskell parlance.
@@ -109,7 +107,7 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Monadic lifting operators (Prelude)
+        #region Monadic lifting operators
 
         /// <summary>
         /// Promotes a function to use and return <see cref="VoidOr{T}" /> values.
@@ -210,7 +208,7 @@ namespace Narvalo.Fx
     {
         #region Applicative
 
-        // Named "<$" in Haskell parlance.
+        // Named "<$" (Applicative) in Haskell parlance.
         public static VoidOr<TResult> Replace<TSource, TResult>(
             this VoidOr<TSource> @this,
             TResult value)
@@ -236,9 +234,9 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Basic Monad functions (Prelude)
+        #region Basic Monad functions
 
-        // Named "fmap", "liftA" or "<$>" in Haskell parlance.
+        // Named "fmap", "liftA" or "<$>" (Applicative) in Haskell parlance.
         public static VoidOr<TResult> Select<TSource, TResult>(
             this VoidOr<TSource> @this,
             Func<TSource, TResult> selector)
@@ -251,8 +249,8 @@ namespace Narvalo.Fx
             return @this.Bind(_ => VoidOr.FromError(selector.Invoke(_)));
         }
 
-        // Named ">>" in Haskell parlance.
-        public static VoidOr<TResult> Next<TSource, TResult>(
+        // Named ">>" (Monad) or "*>" (Applicative) in Haskell parlance.
+        public static VoidOr<TResult> ContinueWith<TSource, TResult>(
             this VoidOr<TSource> @this,
             VoidOr<TResult> other)
             /* T4: C# indent */
@@ -276,7 +274,7 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Generalisations of list functions (Prelude)
+        #region Generalisations of list functions
 
 
         // Named "mfilter" in Haskell parlance.
@@ -309,10 +307,10 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Applicative lifting operators (Prelude)
+        #region Applicative lifting operators
 
         /// <see cref="Lift{T1, T2, T3}" />
-        // Named "liftA2" in Haskell parlance.
+        // Named "liftA2" (Applicative) in Haskell parlance.
         public static VoidOr<TResult> Zip<TFirst, TSecond, TResult>(
             this VoidOr<TFirst> @this,
             VoidOr<TSecond> second,
@@ -328,7 +326,7 @@ namespace Narvalo.Fx
         }
 
         /// <see cref="Lift{T1, T2, T3, T4}" />
-        // Named "liftA3" in Haskell parlance.
+        // Named "liftA3" (Applicative) in Haskell parlance.
         public static VoidOr<TResult> Zip<T1, T2, T3, TResult>(
             this VoidOr<T1> @this,
             VoidOr<T2> second,
@@ -348,7 +346,7 @@ namespace Narvalo.Fx
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5}" />
-        // Named "liftA4" in Haskell parlance.
+        // Named "liftA4" (Applicative) in Haskell parlance.
         public static VoidOr<TResult> Zip<T1, T2, T3, T4, TResult>(
              this VoidOr<T1> @this,
              VoidOr<T2> second,
@@ -372,7 +370,7 @@ namespace Narvalo.Fx
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5, T6}" />
-        // Named "liftA5" in Haskell parlance.
+        // Named "liftA5" (Applicative) in Haskell parlance.
         public static VoidOr<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this VoidOr<T1> @this,
             VoidOr<T2> second,
@@ -403,7 +401,7 @@ namespace Narvalo.Fx
 
 
         /// <remarks>
-        /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" /> (liftM2).
+        /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" />.
         /// </remarks>
         public static VoidOr<TResult> SelectMany<TSource, TMiddle, TResult>(
             this VoidOr<TSource> @this,
@@ -547,7 +545,7 @@ namespace Narvalo.Fx
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
-                   from innerValue in keyLookupM.Invoke(outerValue).Next(inner)
+                   from innerValue in keyLookupM.Invoke(outerValue).ContinueWith(inner)
                    select resultSelector.Invoke(outerValue, innerValue);
         }
 
@@ -571,7 +569,7 @@ namespace Narvalo.Fx
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
-                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).Next(inner));
+                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).ContinueWith(inner));
         }
 
         private static Func<TSource, VoidOr<TKey>> GetKeyLookup<TSource, TInner, TKey>(
@@ -619,10 +617,10 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Basic Monad functions (Prelude)
+        #region Basic Monad functions
 
 
-        // Named "forM" in Haskell parlance. Same as Map (mapM) with its arguments flipped.
+        // Named "forM" in Haskell parlance. Same as SelectWith (mapM) with its arguments flipped.
         public static VoidOr<IEnumerable<TResult>> ForEach<TSource, TResult>(
             this Func<TSource, VoidOr<TResult>> @this,
             IEnumerable<TSource> seq)
@@ -680,7 +678,7 @@ namespace Narvalo.Fx
     // Provides extension methods for IEnumerable<VoidOr<T>>.
     public static partial class VoidOrSequence
     {
-        #region Basic Monad functions (Prelude)
+        #region Basic Monad functions
 
 
         // Named "sequence" in Haskell parlance.
@@ -697,7 +695,7 @@ namespace Narvalo.Fx
         #endregion
 
 
-        #region Generalisations of list functions (Prelude)
+        #region Generalisations of list functions
 
         // Named "msum" in Haskell parlance.
         public static VoidOr<TSource> Sum<TSource>(
@@ -722,24 +720,23 @@ namespace Narvalo.Fx.Extensions
     // Provides more extension methods for VoidOr<T>.
     public static partial class VoidOrExtensions
     {
-        #region Basic Monad functions (Prelude)
+        #region Basic Monad functions
 
         // Named "forever" in Haskell parlance.
         public static VoidOr<TResult> Forever<TSource, TResult>(
             this VoidOr<TSource> @this,
-            Func<VoidOr<TResult>> thunk
-            )
+            Func<VoidOr<TResult>> thunk)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
             Warrant.NotNull<VoidOr<TResult>>();
 
-            return @this.Next(@this.Forever(thunk));
+            return @this.ContinueWith(@this.Forever(thunk));
         }
 
         #endregion
 
-        #region Conditional execution of monadic expressions (Prelude)
+        #region Conditional execution of monadic expressions
 
         // Named "when" in Haskell parlance. Haskell uses a different signature.
         public static void When<TSource>(
@@ -923,7 +920,7 @@ namespace Narvalo.Fx.Linq
     // - Aggregate -> Reduce or Fold
     public static partial class Qperators
     {
-        #region Basic Monad functions (Prelude)
+        #region Basic Monad functions
 
 
         // Named "mapM" in Haskell parlance.
@@ -941,7 +938,7 @@ namespace Narvalo.Fx.Linq
 
         #endregion
 
-        #region Generalisations of list functions (Prelude)
+        #region Generalisations of list functions
 
 
         // Named "filterM" in Haskell parlance.

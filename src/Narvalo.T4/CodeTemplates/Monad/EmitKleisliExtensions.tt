@@ -27,11 +27,11 @@ public partial class MonadTemplate
 
         #endregion
 
-        #region Basic Monad functions (Prelude)
+        #region Basic Monad functions
 
 <#+ if (!HasTypeConstraints) { #>
 
-        // Named "forM" in Haskell parlance. Same as Map (mapM) with its arguments flipped.
+        // Named "forM" in Haskell parlance. Same as SelectWith (mapM) with its arguments flipped.
         public static <#= Name #><IEnumerable<TResult><#= SuffixT #>> ForEach<TSource, TResult<#= SuffixT #>>(
             this Func<TSource, <#= Name #><TResult<#= SuffixT #>>> @this,
             IEnumerable<TSource> seq)

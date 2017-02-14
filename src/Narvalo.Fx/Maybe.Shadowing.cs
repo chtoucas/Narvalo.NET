@@ -16,7 +16,7 @@ namespace Narvalo.Fx
             return IsSome ? Maybe.Of(selector.Invoke(Value)) : Maybe<TResult>.None;
         }
 
-        public Maybe<TResult> Next<TResult>(Maybe<TResult> other)
+        public Maybe<TResult> ContinueWith<TResult>(Maybe<TResult> other)
             => IsSome ? other : Maybe<TResult>.None;
 
         #endregion

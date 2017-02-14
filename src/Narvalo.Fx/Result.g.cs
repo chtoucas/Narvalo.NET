@@ -21,9 +21,7 @@ namespace Narvalo.Fx
     using Narvalo.Fx.Internal;
     using Narvalo.Fx.Linq;
 
-    /// <summary>
-    /// Provides a set of static methods for <see cref="Result{T, TError}"/>.
-    /// </summary>
+    // Provides a set of static methods for Result<T, TError>.
     // NB: Sometimes we prefer extension methods over static methods to be able to override them locally.
     public static partial class Result
     {
@@ -35,7 +33,7 @@ namespace Narvalo.Fx
         /// <typeparam name="TError"></typeparam>
         /// <param name="value">A value to be wrapped into a <see cref="Result{T, TError}"/> object.</param>
         /// <returns>An instance of the <see cref="Result{T, TError}"/> class for the specified value.</returns>
-        // Named "return" in Haskell parlance.
+        // Named "return" (Monad) or "pure" (Applicative) in Haskell parlance.
         public static Result<T, TError> Of<T, TError>(T value)
             /* T4: C# indent */
         {
@@ -44,7 +42,7 @@ namespace Narvalo.Fx
             return Result<T, TError>.η(value);
         }
 
-        #region Generalisations of list functions (Prelude)
+        #region Generalisations of list functions
 
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
@@ -60,12 +58,12 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Conditional execution of monadic expressions (Prelude)
+        #region Conditional execution of monadic expressions
 
 
         #endregion
 
-        #region Monadic lifting operators (Prelude)
+        #region Monadic lifting operators
 
         /// <summary>
         /// Promotes a function to use and return <see cref="Result{T, TError}" /> values.
@@ -166,7 +164,7 @@ namespace Narvalo.Fx
     {
         #region Applicative
 
-        // Named "<$" in Haskell parlance.
+        // Named "<$" (Applicative) in Haskell parlance.
         public static Result<TResult, TError> Replace<TSource, TResult, TError>(
             this Result<TSource, TError> @this,
             TResult value)
@@ -191,9 +189,9 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Basic Monad functions (Prelude)
+        #region Basic Monad functions
 
-        // Named "fmap", "liftA" or "<$>" in Haskell parlance.
+        // Named "fmap", "liftA" or "<$>" (Applicative) in Haskell parlance.
         public static Result<TResult, TError> Select<TSource, TResult, TError>(
             this Result<TSource, TError> @this,
             Func<TSource, TResult> selector)
@@ -205,8 +203,8 @@ namespace Narvalo.Fx
             return @this.Bind(_ => Result.Of<TResult, TError>(selector.Invoke(_)));
         }
 
-        // Named ">>" in Haskell parlance.
-        public static Result<TResult, TError> Next<TSource, TResult, TError>(
+        // Named ">>" (Monad) or "*>" (Applicative) in Haskell parlance.
+        public static Result<TResult, TError> ContinueWith<TSource, TResult, TError>(
             this Result<TSource, TError> @this,
             Result<TResult, TError> other)
             /* T4: C# indent */
@@ -229,7 +227,7 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Generalisations of list functions (Prelude)
+        #region Generalisations of list functions
 
 
         // Named "replicateM" in Haskell parlance.
@@ -246,10 +244,10 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Applicative lifting operators (Prelude)
+        #region Applicative lifting operators
 
         /// <see cref="Lift{T1, T2, T3}" />
-        // Named "liftA2" in Haskell parlance.
+        // Named "liftA2" (Applicative) in Haskell parlance.
         public static Result<TResult, TError> Zip<TFirst, TSecond, TResult, TError>(
             this Result<TFirst, TError> @this,
             Result<TSecond, TError> second,
@@ -264,7 +262,7 @@ namespace Narvalo.Fx
         }
 
         /// <see cref="Lift{T1, T2, T3, T4}" />
-        // Named "liftA3" in Haskell parlance.
+        // Named "liftA3" (Applicative) in Haskell parlance.
         public static Result<TResult, TError> Zip<T1, T2, T3, TResult, TError>(
             this Result<T1, TError> @this,
             Result<T2, TError> second,
@@ -283,7 +281,7 @@ namespace Narvalo.Fx
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5}" />
-        // Named "liftA4" in Haskell parlance.
+        // Named "liftA4" (Applicative) in Haskell parlance.
         public static Result<TResult, TError> Zip<T1, T2, T3, T4, TResult, TError>(
              this Result<T1, TError> @this,
              Result<T2, TError> second,
@@ -306,7 +304,7 @@ namespace Narvalo.Fx
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5, T6}" />
-        // Named "liftA5" in Haskell parlance.
+        // Named "liftA5" (Applicative) in Haskell parlance.
         public static Result<TResult, TError> Zip<T1, T2, T3, T4, T5, TResult, TError>(
             this Result<T1, TError> @this,
             Result<T2, TError> second,
@@ -336,7 +334,7 @@ namespace Narvalo.Fx
 
 
         /// <remarks>
-        /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" /> (liftM2).
+        /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" />.
         /// </remarks>
         public static Result<TResult, TError> SelectMany<TSource, TMiddle, TResult, TError>(
             this Result<TSource, TError> @this,
@@ -382,10 +380,10 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Basic Monad functions (Prelude)
+        #region Basic Monad functions
 
 
-        // Named "forM" in Haskell parlance. Same as Map (mapM) with its arguments flipped.
+        // Named "forM" in Haskell parlance. Same as SelectWith (mapM) with its arguments flipped.
         public static Result<IEnumerable<TResult>, TError> ForEach<TSource, TResult, TError>(
             this Func<TSource, Result<TResult, TError>> @this,
             IEnumerable<TSource> seq)
@@ -442,7 +440,7 @@ namespace Narvalo.Fx
     // Provides extension methods for IEnumerable<Result<T, TError>>.
     public static partial class ResultSequence
     {
-        #region Basic Monad functions (Prelude)
+        #region Basic Monad functions
 
 
         // Named "sequence" in Haskell parlance.
@@ -468,23 +466,22 @@ namespace Narvalo.Fx.Extensions
     // Provides more extension methods for Result<T, TError>.
     public static partial class ResultExtensions
     {
-        #region Basic Monad functions (Prelude)
+        #region Basic Monad functions
 
         // Named "forever" in Haskell parlance.
         public static Result<TResult, TError> Forever<TSource, TResult, TError>(
             this Result<TSource, TError> @this,
-            Func<Result<TResult, TError>> thunk
-            )
+            Func<Result<TResult, TError>> thunk)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
 
-            return @this.Next(@this.Forever(thunk));
+            return @this.ContinueWith(@this.Forever(thunk));
         }
 
         #endregion
 
-        #region Conditional execution of monadic expressions (Prelude)
+        #region Conditional execution of monadic expressions
 
         // Named "when" in Haskell parlance. Haskell uses a different signature.
         public static void When<TSource, TError>(

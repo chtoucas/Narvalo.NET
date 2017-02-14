@@ -8,13 +8,12 @@ public partial class MonadTemplate
     // Provides more extension methods for <#= Name #><T<#= SuffixT #>>.
     public static partial class <#= Name #>Extensions
     {
-        #region Basic Monad functions (Prelude)
+        #region Basic Monad functions
 
         // Named "forever" in Haskell parlance.
         public static <#= Name #><TResult<#= SuffixT #>> Forever<TSource, TResult<#= SuffixT #>>(
             this <#= Name #><TSource<#= SuffixT #>> @this,
-            Func<<#= Name #><TResult<#= SuffixT #>>> thunk
-            )
+            Func<<#= Name #><TResult<#= SuffixT #>>> thunk)
             <#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
             <#+ WriteNotNull(); #>
@@ -22,12 +21,12 @@ public partial class MonadTemplate
             Warrant.NotNull<<#= Name #><TResult<#= SuffixT #>>>();
 <#+ } #>
 
-            return @this.Next(@this.Forever(thunk));
+            return @this.ContinueWith(@this.Forever(thunk));
         }
 
         #endregion
 
-        #region Conditional execution of monadic expressions (Prelude)
+        #region Conditional execution of monadic expressions
 
         // Named "when" in Haskell parlance. Haskell uses a different signature.
         public static void When<TSource<#= SuffixT #>>(

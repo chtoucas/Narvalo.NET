@@ -10,7 +10,7 @@ public partial class MonadTemplate
     {
         #region Applicative
 
-        // Named "<$" in Haskell parlance.
+        // Named "<$" (Applicative) in Haskell parlance.
         public static <#= Name #><TResult<#= SuffixT #>> Replace<TSource, TResult<#= SuffixT #>>(
             this <#= Name #><TSource<#= SuffixT #>> @this,
             TResult value)
@@ -40,9 +40,9 @@ public partial class MonadTemplate
 
         #endregion
 
-        #region Basic Monad functions (Prelude)
+        #region Basic Monad functions
 
-        // Named "fmap", "liftA" or "<$>" in Haskell parlance.
+        // Named "fmap", "liftA" or "<$>" (Applicative) in Haskell parlance.
         public static <#= Name #><TResult<#= SuffixT #>> <#= MapName #><TSource, TResult<#= SuffixT #>>(
             this <#= Name #><TSource<#= SuffixT #>> @this,
             Func<TSource, TResult> selector)
@@ -57,8 +57,8 @@ public partial class MonadTemplate
             return @this.Bind(_ => <#+ WriteFactory("TResult"); #>(selector.Invoke(_)));
         }
 
-        // Named ">>" in Haskell parlance.
-        public static <#= Name #><TResult<#= SuffixT #>> Next<TSource, TResult<#= SuffixT #>>(
+        // Named ">>" (Monad) or "*>" (Applicative) in Haskell parlance.
+        public static <#= Name #><TResult<#= SuffixT #>> ContinueWith<TSource, TResult<#= SuffixT #>>(
             this <#= Name #><TSource<#= SuffixT #>> @this,
             <#= Name #><TResult<#= SuffixT #>> other)
             <#+ WriteTypeConstraints("TSource", "TResult"); #>
@@ -93,7 +93,7 @@ public partial class MonadTemplate
 
         #endregion
 
-        #region Generalisations of list functions (Prelude)
+        #region Generalisations of list functions
 
 <#+ if (HasZero) { #>
 
@@ -135,10 +135,10 @@ public partial class MonadTemplate
 
         #endregion
 
-        #region Applicative lifting operators (Prelude)
+        #region Applicative lifting operators
 
         /// <see cref="Lift{T1, T2, T3}" />
-        // Named "liftA2" in Haskell parlance.
+        // Named "liftA2" (Applicative) in Haskell parlance.
         public static <#= Name #><TResult<#= SuffixT #>> Zip<TFirst, TSecond, TResult<#= SuffixT #>>(
             this <#= Name #><TFirst<#= SuffixT #>> @this,
             <#= Name #><TSecond<#= SuffixT #>> second,
@@ -156,7 +156,7 @@ public partial class MonadTemplate
         }
 
         /// <see cref="Lift{T1, T2, T3, T4}" />
-        // Named "liftA3" in Haskell parlance.
+        // Named "liftA3" (Applicative) in Haskell parlance.
         public static <#= Name #><TResult<#= SuffixT #>> Zip<T1, T2, T3, TResult<#= SuffixT #>>(
             this <#= Name #><T1<#= SuffixT #>> @this,
             <#= Name #><T2<#= SuffixT #>> second,
@@ -178,7 +178,7 @@ public partial class MonadTemplate
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5}" />
-        // Named "liftA4" in Haskell parlance.
+        // Named "liftA4" (Applicative) in Haskell parlance.
         public static <#= Name #><TResult<#= SuffixT #>> Zip<T1, T2, T3, T4, TResult<#= SuffixT #>>(
              this <#= Name #><T1<#= SuffixT #>> @this,
              <#= Name #><T2<#= SuffixT #>> second,
@@ -204,7 +204,7 @@ public partial class MonadTemplate
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5, T6}" />
-        // Named "liftA5" in Haskell parlance.
+        // Named "liftA5" (Applicative) in Haskell parlance.
         public static <#= Name #><TResult<#= SuffixT #>> Zip<T1, T2, T3, T4, T5, TResult<#= SuffixT #>>(
             this <#= Name #><T1<#= SuffixT #>> @this,
             <#= Name #><T2<#= SuffixT #>> second,
@@ -270,7 +270,7 @@ public partial class MonadTemplate
 <#+ } // T4: End of !PreferLinqDialect. #>
 
         /// <remarks>
-        /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" /> (liftM2).
+        /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" />.
         /// </remarks>
         public static <#= Name #><TResult<#= SuffixT #>> SelectMany<TSource, TMiddle, TResult<#= SuffixT #>>(
             this <#= Name #><TSource<#= SuffixT #>> @this,
@@ -439,7 +439,7 @@ public partial class MonadTemplate
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
-                   from innerValue in keyLookupM.Invoke(outerValue).Next(inner)
+                   from innerValue in keyLookupM.Invoke(outerValue).ContinueWith(inner)
                    select resultSelector.Invoke(outerValue, innerValue);
         }
 
@@ -467,7 +467,7 @@ public partial class MonadTemplate
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
-                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).Next(inner));
+                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).ContinueWith(inner));
         }
 
         private static Func<TSource, <#= Name #><TKey>> GetKeyLookup<TSource, TInner, TKey>(

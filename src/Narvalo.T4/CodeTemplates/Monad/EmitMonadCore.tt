@@ -5,9 +5,7 @@ public partial class MonadTemplate
     protected void EmitMonadCore()
     {
 #>
-    /// <summary>
-    /// Provides a set of static methods for <see cref="<#= Name #>{T<#= SuffixT #>}"/>.
-    /// </summary>
+    // Provides a set of static methods for <#= Name #><T<#= SuffixT #>>.
     // NB: Sometimes we prefer extension methods over static methods to be able to override them locally.
     public static partial class <#= Name #>
     {
@@ -52,7 +50,7 @@ public partial class MonadTemplate
         /// Gets the zero for <see cref="<#= Name #>{T}"/>.
         /// </summary>
         /// <value>The zero for <see cref="<#= Name #>{T}"/>.</value>
-        // Named "mzero" in Haskell parlance.
+        // Named "mzero" (MonadPlus) in Haskell parlance.
         public static <#= Name #><global::Narvalo.Fx.Unit> <#= ZeroName #>
         {
             get
@@ -76,7 +74,7 @@ public partial class MonadTemplate
 <#+ } #>
         /// <param name="value">A value to be wrapped into a <see cref="<#= Name #>{T<#= SuffixT #>}"/> object.</param>
         /// <returns>An instance of the <see cref="<#= Name #>{T<#= SuffixT #>}"/> class for the specified value.</returns>
-        // Named "return" in Haskell parlance.
+        // Named "return" (Monad) or "pure" (Applicative) in Haskell parlance.
         public static <#= Name #><T<#= SuffixT #>> <#= ReturnName #><T<#= SuffixT #>>(T value)
             <#+ WriteTypeConstraints("T"); #>
         {
@@ -87,7 +85,7 @@ public partial class MonadTemplate
             return <#= Name #><T<#= SuffixT #>>.η(value);
         }
 
-        #region Generalisations of list functions (Prelude)
+        #region Generalisations of list functions
 
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
@@ -108,7 +106,7 @@ public partial class MonadTemplate
 
         #endregion
 
-        #region Conditional execution of monadic expressions (Prelude)
+        #region Conditional execution of monadic expressions
 
 <#+ if (HasZero) { #>
 
@@ -126,7 +124,7 @@ public partial class MonadTemplate
 
         #endregion
 
-        #region Monadic lifting operators (Prelude)
+        #region Monadic lifting operators
 
         /// <summary>
         /// Promotes a function to use and return <see cref="<#= Name #>{T<#= SuffixT #>}" /> values.

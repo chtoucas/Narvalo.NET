@@ -22,9 +22,7 @@ namespace Monads
     using Monads.Internal;
     using Monads.Linq;
 
-    /// <summary>
-    /// Provides a set of static methods for <see cref="MonadValue{T}"/>.
-    /// </summary>
+    // Provides a set of static methods for MonadValue<T>.
     // NB: Sometimes we prefer extension methods over static methods to be able to override them locally.
     public static partial class MonadValue
     {
@@ -51,7 +49,7 @@ namespace Monads
         /// Gets the zero for <see cref="MonadValue{T}"/>.
         /// </summary>
         /// <value>The zero for <see cref="MonadValue{T}"/>.</value>
-        // Named "mzero" in Haskell parlance.
+        // Named "mzero" (MonadPlus) in Haskell parlance.
         public static MonadValue<global::Narvalo.Fx.Unit> None
         {
             get
@@ -68,7 +66,7 @@ namespace Monads
         /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
         /// <param name="value">A value to be wrapped into a <see cref="MonadValue{T}"/> object.</param>
         /// <returns>An instance of the <see cref="MonadValue{T}"/> class for the specified value.</returns>
-        // Named "return" in Haskell parlance.
+        // Named "return" (Monad) or "pure" (Applicative) in Haskell parlance.
         public static MonadValue<T> Of<T>(T value)
             where T : struct
         {
@@ -76,7 +74,7 @@ namespace Monads
             return MonadValue<T>.η(value);
         }
 
-        #region Generalisations of list functions (Prelude)
+        #region Generalisations of list functions
 
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
@@ -91,7 +89,7 @@ namespace Monads
 
         #endregion
 
-        #region Conditional execution of monadic expressions (Prelude)
+        #region Conditional execution of monadic expressions
 
 
         // Named "guard" in Haskell parlance.
@@ -104,7 +102,7 @@ namespace Monads
 
         #endregion
 
-        #region Monadic lifting operators (Prelude)
+        #region Monadic lifting operators
 
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadValue{T}" /> values.
@@ -220,7 +218,7 @@ namespace Monads
     {
         #region Applicative
 
-        // Named "<$" in Haskell parlance.
+        // Named "<$" (Applicative) in Haskell parlance.
         public static MonadValue<TResult> Replace<TSource, TResult>(
             this MonadValue<TSource> @this,
             TResult value)
@@ -235,9 +233,9 @@ namespace Monads
 
         #endregion
 
-        #region Basic Monad functions (Prelude)
+        #region Basic Monad functions
 
-        // Named "fmap", "liftA" or "<$>" in Haskell parlance.
+        // Named "fmap", "liftA" or "<$>" (Applicative) in Haskell parlance.
         public static MonadValue<TResult> Select<TSource, TResult>(
             this MonadValue<TSource> @this,
             Func<TSource, TResult> selector)
@@ -250,8 +248,8 @@ namespace Monads
             return @this.Bind(_ => MonadValue.Of(selector.Invoke(_)));
         }
 
-        // Named ">>" in Haskell parlance.
-        public static MonadValue<TResult> Next<TSource, TResult>(
+        // Named ">>" (Monad) or "*>" (Applicative) in Haskell parlance.
+        public static MonadValue<TResult> ContinueWith<TSource, TResult>(
             this MonadValue<TSource> @this,
             MonadValue<TResult> other)
             where TSource : struct
@@ -273,7 +271,7 @@ namespace Monads
 
         #endregion
 
-        #region Generalisations of list functions (Prelude)
+        #region Generalisations of list functions
 
 
         // Named "mfilter" in Haskell parlance.
@@ -292,10 +290,10 @@ namespace Monads
 
         #endregion
 
-        #region Applicative lifting operators (Prelude)
+        #region Applicative lifting operators
 
         /// <see cref="Lift{T1, T2, T3}" />
-        // Named "liftA2" in Haskell parlance.
+        // Named "liftA2" (Applicative) in Haskell parlance.
         public static MonadValue<TResult> Zip<TFirst, TSecond, TResult>(
             this MonadValue<TFirst> @this,
             MonadValue<TSecond> second,
@@ -312,7 +310,7 @@ namespace Monads
         }
 
         /// <see cref="Lift{T1, T2, T3, T4}" />
-        // Named "liftA3" in Haskell parlance.
+        // Named "liftA3" (Applicative) in Haskell parlance.
         public static MonadValue<TResult> Zip<T1, T2, T3, TResult>(
             this MonadValue<T1> @this,
             MonadValue<T2> second,
@@ -334,7 +332,7 @@ namespace Monads
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5}" />
-        // Named "liftA4" in Haskell parlance.
+        // Named "liftA4" (Applicative) in Haskell parlance.
         public static MonadValue<TResult> Zip<T1, T2, T3, T4, TResult>(
              this MonadValue<T1> @this,
              MonadValue<T2> second,
@@ -361,7 +359,7 @@ namespace Monads
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5, T6}" />
-        // Named "liftA5" in Haskell parlance.
+        // Named "liftA5" (Applicative) in Haskell parlance.
         public static MonadValue<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this MonadValue<T1> @this,
             MonadValue<T2> second,
@@ -396,7 +394,7 @@ namespace Monads
 
 
         /// <remarks>
-        /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" /> (liftM2).
+        /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" />.
         /// </remarks>
         public static MonadValue<TResult> SelectMany<TSource, TMiddle, TResult>(
             this MonadValue<TSource> @this,
@@ -544,7 +542,7 @@ namespace Monads
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
-                   from innerValue in keyLookupM.Invoke(outerValue).Next(inner)
+                   from innerValue in keyLookupM.Invoke(outerValue).ContinueWith(inner)
                    select resultSelector.Invoke(outerValue, innerValue);
         }
 
@@ -569,7 +567,7 @@ namespace Monads
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
-                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).Next(inner));
+                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).ContinueWith(inner));
         }
 
         private static Func<TSource, MonadValue<TKey>> GetKeyLookup<TSource, TInner, TKey>(
@@ -607,7 +605,7 @@ namespace Monads
 
         #endregion
 
-        #region Basic Monad functions (Prelude)
+        #region Basic Monad functions
 
 
         // Named "=<<" in Haskell parlance. Same as Bind (>>=) with its arguments flipped.
@@ -659,13 +657,13 @@ namespace Monads
     // Provides extension methods for IEnumerable<MonadValue<T>>.
     public static partial class MonadValueSequence
     {
-        #region Basic Monad functions (Prelude)
+        #region Basic Monad functions
 
 
         #endregion
 
 
-        #region Generalisations of list functions (Prelude)
+        #region Generalisations of list functions
 
         // Named "msum" in Haskell parlance.
         public static MonadValue<TSource> Sum<TSource>(
@@ -689,24 +687,23 @@ namespace Monads.Extensions
     // Provides more extension methods for MonadValue<T>.
     public static partial class MonadValueExtensions
     {
-        #region Basic Monad functions (Prelude)
+        #region Basic Monad functions
 
         // Named "forever" in Haskell parlance.
         public static MonadValue<TResult> Forever<TSource, TResult>(
             this MonadValue<TSource> @this,
-            Func<MonadValue<TResult>> thunk
-            )
+            Func<MonadValue<TResult>> thunk)
             where TSource : struct
             where TResult : struct
         {
             /* T4: C# indent */
 
-            return @this.Next(@this.Forever(thunk));
+            return @this.ContinueWith(@this.Forever(thunk));
         }
 
         #endregion
 
-        #region Conditional execution of monadic expressions (Prelude)
+        #region Conditional execution of monadic expressions
 
         // Named "when" in Haskell parlance. Haskell uses a different signature.
         public static void When<TSource>(
@@ -842,12 +839,12 @@ namespace Monads.Linq
     // - Aggregate -> Reduce or Fold
     public static partial class Qperators
     {
-        #region Basic Monad functions (Prelude)
+        #region Basic Monad functions
 
 
         #endregion
 
-        #region Generalisations of list functions (Prelude)
+        #region Generalisations of list functions
 
 
         // Named "foldM" in Haskell parlance.

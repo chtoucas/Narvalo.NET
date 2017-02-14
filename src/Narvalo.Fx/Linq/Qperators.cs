@@ -16,5 +16,6 @@ namespace Narvalo.Fx.Linq
     /// - Quantifiers: IsEmpty
     /// - Generation: EmptyIfNull
     /// </remarks>
+    /// For more generation operators, <seealso cref="Sequence"/>.
     public static partial class Qperators { }
 }
