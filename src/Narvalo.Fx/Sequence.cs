@@ -556,6 +556,9 @@ namespace Narvalo.Fx
 
             foreach (var item in source)
             {
+                // REVIEW: Is this the correct behaviour for null?
+                if (item == null) { yield return default(TError); }
+
                 if (item.IsError) { yield return item.Error; }
             }
         }
@@ -579,6 +582,9 @@ namespace Narvalo.Fx
 
             foreach (var item in source)
             {
+                // REVIEW: Is this the correct behaviour for null?
+                if (item == null) { yield return default(TSource); }
+
                 if (item.IsSuccess) { yield return item.Value; }
             }
         }
