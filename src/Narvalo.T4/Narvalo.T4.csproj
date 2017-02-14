@@ -52,9 +52,6 @@
     </CodeAnalysisDictionary>
   </ItemGroup>
   <ItemGroup>
-    <None Include="CodeTemplates\Monad\EmitMonadExtraExtensions.tt" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="CodeTemplates\Result.tt" />
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />

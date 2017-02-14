@@ -221,6 +221,17 @@ namespace Narvalo.Fx
         }
 
 
+        // Named "<*>" in Haskell parlance. Same as Apply (<**>) with its arguments flipped.
+        public static VoidOr<TResult> Gather<TSource, TResult>(
+            this VoidOr<TSource> @this,
+            VoidOr<Func<TSource, TResult>> applicative)
+            /* T4: C# indent */
+        {
+            Require.NotNull(applicative, nameof(applicative));
+
+            return applicative.Apply(@this);
+        }
+
         public static VoidOr<Tuple<TSource, TOther>> Zip<TSource, TOther>(
             this VoidOr<TSource> @this,
             VoidOr<TOther> other)
@@ -250,7 +261,7 @@ namespace Narvalo.Fx
         }
 
         // Named ">>" (Monad) or "*>" (Applicative) in Haskell parlance.
-        public static VoidOr<TResult> ContinueWith<TSource, TResult>(
+        public static VoidOr<TResult> ReplaceBy<TSource, TResult>(
             this VoidOr<TSource> @this,
             VoidOr<TResult> other)
             /* T4: C# indent */
@@ -271,6 +282,52 @@ namespace Narvalo.Fx
 
             return VoidOr.Unit;
         }
+
+        // Named "forever" in Haskell parlance.
+        public static VoidOr<TResult> Forever<TSource, TResult>(
+            this VoidOr<TSource> @this,
+            Func<VoidOr<TResult>> thunk)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Warrant.NotNull<VoidOr<TResult>>();
+
+            return @this.ReplaceBy(@this.Forever(thunk));
+        }
+
+        #endregion
+
+        #region Non-standard extensions.
+
+        public static VoidOr<TResult> Coalesce<TSource, TResult>(
+            this VoidOr<TSource> @this,
+            Func<TSource, bool> predicate,
+            VoidOr<TResult> thenResult,
+            VoidOr<TResult> elseResult)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+            Warrant.NotNull<VoidOr<TResult>>();
+
+            return @this.Bind(_ => predicate.Invoke(_) ? thenResult : elseResult);
+        }
+
+
+        // Conditional version of ReplaceBy().
+        public static VoidOr<TResult> If<TSource, TResult>(
+            this VoidOr<TSource> @this,
+            Func<TSource, bool> predicate,
+            VoidOr<TResult> thenResult)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+            Warrant.NotNull<VoidOr<TResult>>();
+
+            return @this.Bind(_ => predicate.Invoke(_) ? thenResult : VoidOr<TResult>.Void);
+        }
+
 
         #endregion
 
@@ -304,6 +361,43 @@ namespace Narvalo.Fx
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }
 
+
+        #endregion
+
+        #region Conditional execution of monadic expressions
+
+        // Named "when" in Haskell parlance. Haskell uses a different signature.
+        public static void When<TSource>(
+            this VoidOr<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(
+                _ => {
+                    if (predicate.Invoke(_)) { action.Invoke(_); }
+
+                    return VoidOr.Unit;
+                });
+        }
+
+        // Named "unless" in Haskell parlance. Haskell uses a different signature.
+        public static void Unless<TSource>(
+            this VoidOr<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            Expect.NotNull(@this);
+            Expect.NotNull(predicate);
+            Expect.NotNull(action);
+
+            @this.When(_ => !predicate.Invoke(_), action);
+        }
 
         #endregion
 
@@ -545,7 +639,7 @@ namespace Narvalo.Fx
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
-                   from innerValue in keyLookupM.Invoke(outerValue).ContinueWith(inner)
+                   from innerValue in keyLookupM.Invoke(outerValue).ReplaceBy(inner)
                    select resultSelector.Invoke(outerValue, innerValue);
         }
 
@@ -569,7 +663,7 @@ namespace Narvalo.Fx
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
-                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).ContinueWith(inner));
+                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).ReplaceBy(inner));
         }
 
         private static Func<TSource, VoidOr<TKey>> GetKeyLookup<TSource, TInner, TKey>(
@@ -711,134 +805,6 @@ namespace Narvalo.Fx
         #endregion
 
     } // End of Sequence - T4: EmitMonadEnumerableExtensions().
-}
-
-namespace Narvalo.Fx.Extensions
-{
-    using System;
-
-    // Provides more extension methods for VoidOr<T>.
-    public static partial class VoidOrExtensions
-    {
-        #region Basic Monad functions
-
-        // Named "forever" in Haskell parlance.
-        public static VoidOr<TResult> Forever<TSource, TResult>(
-            this VoidOr<TSource> @this,
-            Func<VoidOr<TResult>> thunk)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Warrant.NotNull<VoidOr<TResult>>();
-
-            return @this.ContinueWith(@this.Forever(thunk));
-        }
-
-        #endregion
-
-        #region Conditional execution of monadic expressions
-
-        // Named "when" in Haskell parlance. Haskell uses a different signature.
-        public static void When<TSource>(
-            this VoidOr<TSource> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(
-                _ => {
-                    if (predicate.Invoke(_)) { action.Invoke(_); }
-
-                    return VoidOr.Unit;
-                });
-        }
-
-        // Named "unless" in Haskell parlance. Haskell uses a different signature.
-        public static void Unless<TSource>(
-            this VoidOr<TSource> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(
-                _ => {
-                    if (!predicate.Invoke(_)) { action.Invoke(_); }
-
-                    return VoidOr.Unit;
-                });
-        }
-
-        #endregion
-
-        #region Applicative
-
-
-        // Named "<*>" in Haskell parlance. Same as Apply (<**>) with its arguments flipped.
-        public static VoidOr<TResult> Gather<TSource, TResult>(
-            this VoidOr<TSource> @this,
-            VoidOr<Func<TSource, TResult>> applicative)
-            /* T4: C# indent */
-        {
-            Require.NotNull(applicative, nameof(applicative));
-
-            return applicative.Apply(@this);
-        }
-
-
-        #endregion
-
-        public static VoidOr<TResult> Coalesce<TSource, TResult>(
-            this VoidOr<TSource> @this,
-            Func<TSource, bool> predicate,
-            VoidOr<TResult> then,
-            VoidOr<TResult> otherwise)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            Warrant.NotNull<VoidOr<TResult>>();
-
-            return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
-        }
-
-
-        public static VoidOr<TResult> If<TSource, TResult>(
-            this VoidOr<TSource> @this,
-            Func<TSource, bool> predicate,
-            VoidOr<TResult> other)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            Warrant.NotNull<VoidOr<TResult>>();
-
-            return @this.Bind(_ => predicate.Invoke(_) ? other : VoidOr<TResult>.Void);
-        }
-
-        public static void Do<TSource>(
-            this VoidOr<TSource> @this,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(
-                _ => {
-                    action.Invoke(_);
-
-                    return VoidOr.Unit;
-                });
-        }
-    } // End of VoidOr - T4: EmitMonadExtraExtensions().
 }
 
 namespace Narvalo.Fx.Internal

@@ -6,10 +6,6 @@ namespace Narvalo.Fx.Internal
 
     // Degenerate case, really an if/then/else.
     // NB: Equivalent to IMatchable<T, Unit>.
-    // You should also implements the following methods:
-    // - void OnValue(Action<T>)
-    // - void OnElse(Action)
-    // There are not included since each type has a better way of naming them.
     internal interface IAlternative<T>
     {
         TResult Match<TResult>(Func<T, TResult> selector, Func<TResult> otherwise);
@@ -18,7 +14,7 @@ namespace Narvalo.Fx.Internal
 
         TResult Coalesce<TResult>(Func<T, bool> predicate, Func<T, TResult> selector, Func<TResult> otherwise);
 
-        TResult Coalesce<TResult>(Func<T, bool> predicate, TResult then, TResult other);
+        TResult Coalesce<TResult>(Func<T, bool> predicate, TResult thenResult, TResult elseResult);
 
         // Equivalent to Coalesce<Unit>().
         void Do(Func<T, bool> predicate, Action<T> action, Action otherwise);
@@ -28,11 +24,6 @@ namespace Narvalo.Fx.Internal
     }
 
     // NB: Equivalent to IMatchable<T1, T2, Unit> (not defined).
-    // You should also implements the following methods:
-    // - void OnValue1(Action<T1>)
-    // - void OnValue2(Action<T1>)
-    // - void OnElse(Action)
-    // There are not included since each type has a better way of naming them.
     internal interface IAlternative<T1, T2>
     {
         TResult Match<TResult>(Func<T1, TResult> selector1, Func<T2, TResult> selector2, Func<TResult> otherwise);

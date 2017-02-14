@@ -214,6 +214,17 @@ namespace Narvalo.Fx
         }
 
 
+        // Named "<*>" in Haskell parlance. Same as Apply (<**>) with its arguments flipped.
+        public static Maybe<TResult> Gather<TSource, TResult>(
+            this Maybe<TSource> @this,
+            Maybe<Func<TSource, TResult>> applicative)
+            /* T4: C# indent */
+        {
+            /* T4: C# indent */
+
+            return applicative.Apply(@this);
+        }
+
         public static Maybe<Tuple<TSource, TOther>> Zip<TSource, TOther>(
             this Maybe<TSource> @this,
             Maybe<TOther> other)
@@ -242,7 +253,7 @@ namespace Narvalo.Fx
         }
 
         // Named ">>" (Monad) or "*>" (Applicative) in Haskell parlance.
-        public static Maybe<TResult> ContinueWith<TSource, TResult>(
+        public static Maybe<TResult> ReplaceBy<TSource, TResult>(
             this Maybe<TSource> @this,
             Maybe<TResult> other)
             /* T4: C# indent */
@@ -261,6 +272,49 @@ namespace Narvalo.Fx
 
             return Maybe.Unit;
         }
+
+        // Named "forever" in Haskell parlance.
+        public static Maybe<TResult> Forever<TSource, TResult>(
+            this Maybe<TSource> @this,
+            Func<Maybe<TResult>> thunk)
+            /* T4: C# indent */
+        {
+            /* T4: C# indent */
+
+            return @this.ReplaceBy(@this.Forever(thunk));
+        }
+
+        #endregion
+
+        #region Non-standard extensions.
+
+        public static Maybe<TResult> Coalesce<TSource, TResult>(
+            this Maybe<TSource> @this,
+            Func<TSource, bool> predicate,
+            Maybe<TResult> thenResult,
+            Maybe<TResult> elseResult)
+            /* T4: C# indent */
+        {
+            /* T4: C# indent */
+            Require.NotNull(predicate, nameof(predicate));
+
+            return @this.Bind(_ => predicate.Invoke(_) ? thenResult : elseResult);
+        }
+
+
+        // Conditional version of ReplaceBy().
+        public static Maybe<TResult> If<TSource, TResult>(
+            this Maybe<TSource> @this,
+            Func<TSource, bool> predicate,
+            Maybe<TResult> thenResult)
+            /* T4: C# indent */
+        {
+            /* T4: C# indent */
+            Require.NotNull(predicate, nameof(predicate));
+
+            return @this.Bind(_ => predicate.Invoke(_) ? thenResult : Maybe<TResult>.None);
+        }
+
 
         #endregion
 
@@ -292,6 +346,42 @@ namespace Narvalo.Fx
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }
 
+
+        #endregion
+
+        #region Conditional execution of monadic expressions
+
+        // Named "when" in Haskell parlance. Haskell uses a different signature.
+        public static void When<TSource>(
+            this Maybe<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            /* T4: C# indent */
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(
+                _ => {
+                    if (predicate.Invoke(_)) { action.Invoke(_); }
+
+                    return Maybe.Unit;
+                });
+        }
+
+        // Named "unless" in Haskell parlance. Haskell uses a different signature.
+        public static void Unless<TSource>(
+            this Maybe<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            Expect.NotNull(predicate);
+            Expect.NotNull(action);
+
+            @this.When(_ => !predicate.Invoke(_), action);
+        }
 
         #endregion
 
@@ -516,7 +606,7 @@ namespace Narvalo.Fx
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
-                   from innerValue in keyLookupM.Invoke(outerValue).ContinueWith(inner)
+                   from innerValue in keyLookupM.Invoke(outerValue).ReplaceBy(inner)
                    select resultSelector.Invoke(outerValue, innerValue);
         }
 
@@ -538,7 +628,7 @@ namespace Narvalo.Fx
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
-                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).ContinueWith(inner));
+                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).ReplaceBy(inner));
         }
 
         private static Func<TSource, Maybe<TKey>> GetKeyLookup<TSource, TInner, TKey>(
@@ -676,131 +766,6 @@ namespace Narvalo.Fx
         #endregion
 
     } // End of Sequence - T4: EmitMonadEnumerableExtensions().
-}
-
-namespace Narvalo.Fx.Extensions
-{
-    using System;
-
-    // Provides more extension methods for Maybe<T>.
-    public static partial class MaybeExtensions
-    {
-        #region Basic Monad functions
-
-        // Named "forever" in Haskell parlance.
-        public static Maybe<TResult> Forever<TSource, TResult>(
-            this Maybe<TSource> @this,
-            Func<Maybe<TResult>> thunk)
-            /* T4: C# indent */
-        {
-            /* T4: C# indent */
-
-            return @this.ContinueWith(@this.Forever(thunk));
-        }
-
-        #endregion
-
-        #region Conditional execution of monadic expressions
-
-        // Named "when" in Haskell parlance. Haskell uses a different signature.
-        public static void When<TSource>(
-            this Maybe<TSource> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            /* T4: C# indent */
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(
-                _ => {
-                    if (predicate.Invoke(_)) { action.Invoke(_); }
-
-                    return Maybe.Unit;
-                });
-        }
-
-        // Named "unless" in Haskell parlance. Haskell uses a different signature.
-        public static void Unless<TSource>(
-            this Maybe<TSource> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            /* T4: C# indent */
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(
-                _ => {
-                    if (!predicate.Invoke(_)) { action.Invoke(_); }
-
-                    return Maybe.Unit;
-                });
-        }
-
-        #endregion
-
-        #region Applicative
-
-
-        // Named "<*>" in Haskell parlance. Same as Apply (<**>) with its arguments flipped.
-        public static Maybe<TResult> Gather<TSource, TResult>(
-            this Maybe<TSource> @this,
-            Maybe<Func<TSource, TResult>> applicative)
-            /* T4: C# indent */
-        {
-            /* T4: C# indent */
-
-            return applicative.Apply(@this);
-        }
-
-
-        #endregion
-
-        public static Maybe<TResult> Coalesce<TSource, TResult>(
-            this Maybe<TSource> @this,
-            Func<TSource, bool> predicate,
-            Maybe<TResult> then,
-            Maybe<TResult> otherwise)
-            /* T4: C# indent */
-        {
-            /* T4: C# indent */
-            Require.NotNull(predicate, nameof(predicate));
-
-            return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
-        }
-
-
-        public static Maybe<TResult> If<TSource, TResult>(
-            this Maybe<TSource> @this,
-            Func<TSource, bool> predicate,
-            Maybe<TResult> other)
-            /* T4: C# indent */
-        {
-            /* T4: C# indent */
-            Require.NotNull(predicate, nameof(predicate));
-
-            return @this.Bind(_ => predicate.Invoke(_) ? other : Maybe<TResult>.None);
-        }
-
-        public static void Do<TSource>(
-            this Maybe<TSource> @this,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            /* T4: C# indent */
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(
-                _ => {
-                    action.Invoke(_);
-
-                    return Maybe.Unit;
-                });
-        }
-    } // End of Maybe - T4: EmitMonadExtraExtensions().
 }
 
 namespace Narvalo.Fx.Internal

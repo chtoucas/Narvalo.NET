@@ -222,6 +222,17 @@ namespace Monads
         }
 
 
+        // Named "<*>" in Haskell parlance. Same as Apply (<**>) with its arguments flipped.
+        public static MonadZero<TResult> Gather<TSource, TResult>(
+            this MonadZero<TSource> @this,
+            MonadZero<Func<TSource, TResult>> applicative)
+            /* T4: C# indent */
+        {
+            Require.NotNull(applicative, nameof(applicative));
+
+            return applicative.Apply(@this);
+        }
+
         public static MonadZero<Tuple<TSource, TOther>> Zip<TSource, TOther>(
             this MonadZero<TSource> @this,
             MonadZero<TOther> other)
@@ -251,7 +262,7 @@ namespace Monads
         }
 
         // Named ">>" (Monad) or "*>" (Applicative) in Haskell parlance.
-        public static MonadZero<TResult> ContinueWith<TSource, TResult>(
+        public static MonadZero<TResult> ReplaceBy<TSource, TResult>(
             this MonadZero<TSource> @this,
             MonadZero<TResult> other)
             /* T4: C# indent */
@@ -271,6 +282,52 @@ namespace Monads
 
             return MonadZero.Unit;
         }
+
+        // Named "forever" in Haskell parlance.
+        public static MonadZero<TResult> Forever<TSource, TResult>(
+            this MonadZero<TSource> @this,
+            Func<MonadZero<TResult>> thunk)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Warrant.NotNull<MonadZero<TResult>>();
+
+            return @this.ReplaceBy(@this.Forever(thunk));
+        }
+
+        #endregion
+
+        #region Non-standard extensions.
+
+        public static MonadZero<TResult> Coalesce<TSource, TResult>(
+            this MonadZero<TSource> @this,
+            Func<TSource, bool> predicate,
+            MonadZero<TResult> thenResult,
+            MonadZero<TResult> elseResult)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+            Warrant.NotNull<MonadZero<TResult>>();
+
+            return @this.Bind(_ => predicate.Invoke(_) ? thenResult : elseResult);
+        }
+
+
+        // Conditional version of ReplaceBy().
+        public static MonadZero<TResult> If<TSource, TResult>(
+            this MonadZero<TSource> @this,
+            Func<TSource, bool> predicate,
+            MonadZero<TResult> thenResult)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+            Warrant.NotNull<MonadZero<TResult>>();
+
+            return @this.Bind(_ => predicate.Invoke(_) ? thenResult : MonadZero<TResult>.Zero);
+        }
+
 
         #endregion
 
@@ -304,6 +361,43 @@ namespace Monads
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }
 
+
+        #endregion
+
+        #region Conditional execution of monadic expressions
+
+        // Named "when" in Haskell parlance. Haskell uses a different signature.
+        public static void When<TSource>(
+            this MonadZero<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(
+                _ => {
+                    if (predicate.Invoke(_)) { action.Invoke(_); }
+
+                    return MonadZero.Unit;
+                });
+        }
+
+        // Named "unless" in Haskell parlance. Haskell uses a different signature.
+        public static void Unless<TSource>(
+            this MonadZero<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            Expect.NotNull(@this);
+            Expect.NotNull(predicate);
+            Expect.NotNull(action);
+
+            @this.When(_ => !predicate.Invoke(_), action);
+        }
 
         #endregion
 
@@ -545,7 +639,7 @@ namespace Monads
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
-                   from innerValue in keyLookupM.Invoke(outerValue).ContinueWith(inner)
+                   from innerValue in keyLookupM.Invoke(outerValue).ReplaceBy(inner)
                    select resultSelector.Invoke(outerValue, innerValue);
         }
 
@@ -569,7 +663,7 @@ namespace Monads
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
-                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).ContinueWith(inner));
+                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).ReplaceBy(inner));
         }
 
         private static Func<TSource, MonadZero<TKey>> GetKeyLookup<TSource, TInner, TKey>(
@@ -695,134 +789,6 @@ namespace Monads
         #endregion
 
     } // End of Sequence - T4: EmitMonadEnumerableExtensions().
-}
-
-namespace Monads.Extensions
-{
-    using System;
-
-    // Provides more extension methods for MonadZero<T>.
-    public static partial class MonadZeroExtensions
-    {
-        #region Basic Monad functions
-
-        // Named "forever" in Haskell parlance.
-        public static MonadZero<TResult> Forever<TSource, TResult>(
-            this MonadZero<TSource> @this,
-            Func<MonadZero<TResult>> thunk)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Warrant.NotNull<MonadZero<TResult>>();
-
-            return @this.ContinueWith(@this.Forever(thunk));
-        }
-
-        #endregion
-
-        #region Conditional execution of monadic expressions
-
-        // Named "when" in Haskell parlance. Haskell uses a different signature.
-        public static void When<TSource>(
-            this MonadZero<TSource> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(
-                _ => {
-                    if (predicate.Invoke(_)) { action.Invoke(_); }
-
-                    return MonadZero.Unit;
-                });
-        }
-
-        // Named "unless" in Haskell parlance. Haskell uses a different signature.
-        public static void Unless<TSource>(
-            this MonadZero<TSource> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(
-                _ => {
-                    if (!predicate.Invoke(_)) { action.Invoke(_); }
-
-                    return MonadZero.Unit;
-                });
-        }
-
-        #endregion
-
-        #region Applicative
-
-
-        // Named "<*>" in Haskell parlance. Same as Apply (<**>) with its arguments flipped.
-        public static MonadZero<TResult> Gather<TSource, TResult>(
-            this MonadZero<TSource> @this,
-            MonadZero<Func<TSource, TResult>> applicative)
-            /* T4: C# indent */
-        {
-            Require.NotNull(applicative, nameof(applicative));
-
-            return applicative.Apply(@this);
-        }
-
-
-        #endregion
-
-        public static MonadZero<TResult> Coalesce<TSource, TResult>(
-            this MonadZero<TSource> @this,
-            Func<TSource, bool> predicate,
-            MonadZero<TResult> then,
-            MonadZero<TResult> otherwise)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            Warrant.NotNull<MonadZero<TResult>>();
-
-            return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
-        }
-
-
-        public static MonadZero<TResult> If<TSource, TResult>(
-            this MonadZero<TSource> @this,
-            Func<TSource, bool> predicate,
-            MonadZero<TResult> other)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            Warrant.NotNull<MonadZero<TResult>>();
-
-            return @this.Bind(_ => predicate.Invoke(_) ? other : MonadZero<TResult>.Zero);
-        }
-
-        public static void Do<TSource>(
-            this MonadZero<TSource> @this,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(
-                _ => {
-                    action.Invoke(_);
-
-                    return MonadZero.Unit;
-                });
-        }
-    } // End of MonadZero - T4: EmitMonadExtraExtensions().
 }
 
 namespace Monads.Internal

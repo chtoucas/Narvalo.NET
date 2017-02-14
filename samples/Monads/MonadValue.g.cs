@@ -249,7 +249,7 @@ namespace Monads
         }
 
         // Named ">>" (Monad) or "*>" (Applicative) in Haskell parlance.
-        public static MonadValue<TResult> ContinueWith<TSource, TResult>(
+        public static MonadValue<TResult> ReplaceBy<TSource, TResult>(
             this MonadValue<TSource> @this,
             MonadValue<TResult> other)
             where TSource : struct
@@ -269,6 +269,52 @@ namespace Monads
             return MonadValue.Unit;
         }
 
+        // Named "forever" in Haskell parlance.
+        public static MonadValue<TResult> Forever<TSource, TResult>(
+            this MonadValue<TSource> @this,
+            Func<MonadValue<TResult>> thunk)
+            where TSource : struct
+            where TResult : struct
+        {
+            /* T4: C# indent */
+
+            return @this.ReplaceBy(@this.Forever(thunk));
+        }
+
+        #endregion
+
+        #region Non-standard extensions.
+
+        public static MonadValue<TResult> Coalesce<TSource, TResult>(
+            this MonadValue<TSource> @this,
+            Func<TSource, bool> predicate,
+            MonadValue<TResult> thenResult,
+            MonadValue<TResult> elseResult)
+            where TSource : struct
+            where TResult : struct
+        {
+            /* T4: C# indent */
+            Require.NotNull(predicate, nameof(predicate));
+
+            return @this.Bind(_ => predicate.Invoke(_) ? thenResult : elseResult);
+        }
+
+
+        // Conditional version of ReplaceBy().
+        public static MonadValue<TResult> If<TSource, TResult>(
+            this MonadValue<TSource> @this,
+            Func<TSource, bool> predicate,
+            MonadValue<TResult> thenResult)
+            where TSource : struct
+            where TResult : struct
+        {
+            /* T4: C# indent */
+            Require.NotNull(predicate, nameof(predicate));
+
+            return @this.Bind(_ => predicate.Invoke(_) ? thenResult : MonadValue<TResult>.None);
+        }
+
+
         #endregion
 
         #region Generalisations of list functions
@@ -287,6 +333,42 @@ namespace Monads
                 _ => predicate.Invoke(_) ? @this : MonadValue<TSource>.None);
         }
 
+
+        #endregion
+
+        #region Conditional execution of monadic expressions
+
+        // Named "when" in Haskell parlance. Haskell uses a different signature.
+        public static void When<TSource>(
+            this MonadValue<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            where TSource : struct
+        {
+            /* T4: C# indent */
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(
+                _ => {
+                    if (predicate.Invoke(_)) { action.Invoke(_); }
+
+                    return MonadValue.Unit;
+                });
+        }
+
+        // Named "unless" in Haskell parlance. Haskell uses a different signature.
+        public static void Unless<TSource>(
+            this MonadValue<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            where TSource : struct
+        {
+            Expect.NotNull(predicate);
+            Expect.NotNull(action);
+
+            @this.When(_ => !predicate.Invoke(_), action);
+        }
 
         #endregion
 
@@ -542,7 +624,7 @@ namespace Monads
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
-                   from innerValue in keyLookupM.Invoke(outerValue).ContinueWith(inner)
+                   from innerValue in keyLookupM.Invoke(outerValue).ReplaceBy(inner)
                    select resultSelector.Invoke(outerValue, innerValue);
         }
 
@@ -567,7 +649,7 @@ namespace Monads
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
-                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).ContinueWith(inner));
+                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).ReplaceBy(inner));
         }
 
         private static Func<TSource, MonadValue<TKey>> GetKeyLookup<TSource, TInner, TKey>(
@@ -678,122 +760,6 @@ namespace Monads
         #endregion
 
     } // End of Sequence - T4: EmitMonadEnumerableExtensions().
-}
-
-namespace Monads.Extensions
-{
-    using System;
-
-    // Provides more extension methods for MonadValue<T>.
-    public static partial class MonadValueExtensions
-    {
-        #region Basic Monad functions
-
-        // Named "forever" in Haskell parlance.
-        public static MonadValue<TResult> Forever<TSource, TResult>(
-            this MonadValue<TSource> @this,
-            Func<MonadValue<TResult>> thunk)
-            where TSource : struct
-            where TResult : struct
-        {
-            /* T4: C# indent */
-
-            return @this.ContinueWith(@this.Forever(thunk));
-        }
-
-        #endregion
-
-        #region Conditional execution of monadic expressions
-
-        // Named "when" in Haskell parlance. Haskell uses a different signature.
-        public static void When<TSource>(
-            this MonadValue<TSource> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            where TSource : struct
-        {
-            /* T4: C# indent */
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(
-                _ => {
-                    if (predicate.Invoke(_)) { action.Invoke(_); }
-
-                    return MonadValue.Unit;
-                });
-        }
-
-        // Named "unless" in Haskell parlance. Haskell uses a different signature.
-        public static void Unless<TSource>(
-            this MonadValue<TSource> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            where TSource : struct
-        {
-            /* T4: C# indent */
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(
-                _ => {
-                    if (!predicate.Invoke(_)) { action.Invoke(_); }
-
-                    return MonadValue.Unit;
-                });
-        }
-
-        #endregion
-
-        #region Applicative
-
-
-        #endregion
-
-        public static MonadValue<TResult> Coalesce<TSource, TResult>(
-            this MonadValue<TSource> @this,
-            Func<TSource, bool> predicate,
-            MonadValue<TResult> then,
-            MonadValue<TResult> otherwise)
-            where TSource : struct
-            where TResult : struct
-        {
-            /* T4: C# indent */
-            Require.NotNull(predicate, nameof(predicate));
-
-            return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
-        }
-
-
-        public static MonadValue<TResult> If<TSource, TResult>(
-            this MonadValue<TSource> @this,
-            Func<TSource, bool> predicate,
-            MonadValue<TResult> other)
-            where TSource : struct
-            where TResult : struct
-        {
-            /* T4: C# indent */
-            Require.NotNull(predicate, nameof(predicate));
-
-            return @this.Bind(_ => predicate.Invoke(_) ? other : MonadValue<TResult>.None);
-        }
-
-        public static void Do<TSource>(
-            this MonadValue<TSource> @this,
-            Action<TSource> action)
-            where TSource : struct
-        {
-            /* T4: C# indent */
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(
-                _ => {
-                    action.Invoke(_);
-
-                    return MonadValue.Unit;
-                });
-        }
-    } // End of MonadValue - T4: EmitMonadExtraExtensions().
 }
 
 namespace Monads.Internal

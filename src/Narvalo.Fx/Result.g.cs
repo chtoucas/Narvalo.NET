@@ -176,6 +176,17 @@ namespace Narvalo.Fx
         }
 
 
+        // Named "<*>" in Haskell parlance. Same as Apply (<**>) with its arguments flipped.
+        public static Result<TResult, TError> Gather<TSource, TResult, TError>(
+            this Result<TSource, TError> @this,
+            Result<Func<TSource, TResult>, TError> applicative)
+            /* T4: C# indent */
+        {
+            Require.NotNull(applicative, nameof(applicative));
+
+            return applicative.Apply(@this);
+        }
+
         public static Result<Tuple<TSource, TOther>, TError> Zip<TSource, TOther, TError>(
             this Result<TSource, TError> @this,
             Result<TOther, TError> other)
@@ -204,7 +215,7 @@ namespace Narvalo.Fx
         }
 
         // Named ">>" (Monad) or "*>" (Applicative) in Haskell parlance.
-        public static Result<TResult, TError> ContinueWith<TSource, TResult, TError>(
+        public static Result<TResult, TError> ReplaceBy<TSource, TResult, TError>(
             this Result<TSource, TError> @this,
             Result<TResult, TError> other)
             /* T4: C# indent */
@@ -225,6 +236,35 @@ namespace Narvalo.Fx
             return Result.Of<Unit, TError>(global::Narvalo.Fx.Unit.Single);
         }
 
+        // Named "forever" in Haskell parlance.
+        public static Result<TResult, TError> Forever<TSource, TResult, TError>(
+            this Result<TSource, TError> @this,
+            Func<Result<TResult, TError>> thunk)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+
+            return @this.ReplaceBy(@this.Forever(thunk));
+        }
+
+        #endregion
+
+        #region Non-standard extensions.
+
+        public static Result<TResult, TError> Coalesce<TSource, TResult, TError>(
+            this Result<TSource, TError> @this,
+            Func<TSource, bool> predicate,
+            Result<TResult, TError> thenResult,
+            Result<TResult, TError> elseResult)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+
+            return @this.Bind(_ => predicate.Invoke(_) ? thenResult : elseResult);
+        }
+
+
         #endregion
 
         #region Generalisations of list functions
@@ -241,6 +281,43 @@ namespace Narvalo.Fx
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }
 
+
+        #endregion
+
+        #region Conditional execution of monadic expressions
+
+        // Named "when" in Haskell parlance. Haskell uses a different signature.
+        public static void When<TSource, TError>(
+            this Result<TSource, TError> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(
+                _ => {
+                    if (predicate.Invoke(_)) { action.Invoke(_); }
+
+                    return @this.Skip();
+                });
+        }
+
+        // Named "unless" in Haskell parlance. Haskell uses a different signature.
+        public static void Unless<TSource, TError>(
+            this Result<TSource, TError> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            Expect.NotNull(@this);
+            Expect.NotNull(predicate);
+            Expect.NotNull(action);
+
+            @this.When(_ => !predicate.Invoke(_), action);
+        }
 
         #endregion
 
@@ -457,118 +534,6 @@ namespace Narvalo.Fx
         #endregion
 
     } // End of Sequence - T4: EmitMonadEnumerableExtensions().
-}
-
-namespace Narvalo.Fx.Extensions
-{
-    using System;
-
-    // Provides more extension methods for Result<T, TError>.
-    public static partial class ResultExtensions
-    {
-        #region Basic Monad functions
-
-        // Named "forever" in Haskell parlance.
-        public static Result<TResult, TError> Forever<TSource, TResult, TError>(
-            this Result<TSource, TError> @this,
-            Func<Result<TResult, TError>> thunk)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-
-            return @this.ContinueWith(@this.Forever(thunk));
-        }
-
-        #endregion
-
-        #region Conditional execution of monadic expressions
-
-        // Named "when" in Haskell parlance. Haskell uses a different signature.
-        public static void When<TSource, TError>(
-            this Result<TSource, TError> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(
-                _ => {
-                    if (predicate.Invoke(_)) { action.Invoke(_); }
-
-                    return @this.Skip();
-                });
-        }
-
-        // Named "unless" in Haskell parlance. Haskell uses a different signature.
-        public static void Unless<TSource, TError>(
-            this Result<TSource, TError> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(
-                _ => {
-                    if (!predicate.Invoke(_)) { action.Invoke(_); }
-
-                    return @this.Skip();
-                });
-        }
-
-        #endregion
-
-        #region Applicative
-
-
-        // Named "<*>" in Haskell parlance. Same as Apply (<**>) with its arguments flipped.
-        public static Result<TResult, TError> Gather<TSource, TResult, TError>(
-            this Result<TSource, TError> @this,
-            Result<Func<TSource, TResult>, TError> applicative)
-            /* T4: C# indent */
-        {
-            Require.NotNull(applicative, nameof(applicative));
-
-            return applicative.Apply(@this);
-        }
-
-
-        #endregion
-
-        public static Result<TResult, TError> Coalesce<TSource, TResult, TError>(
-            this Result<TSource, TError> @this,
-            Func<TSource, bool> predicate,
-            Result<TResult, TError> then,
-            Result<TResult, TError> otherwise)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-
-            return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
-        }
-
-        public static void Do<TSource, TError>(
-            this Result<TSource, TError> @this,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(
-                _ => {
-                    action.Invoke(_);
-
-                    return @this.Skip();
-                });
-        }
-    } // End of Result - T4: EmitMonadExtraExtensions().
 }
 
 namespace Narvalo.Fx.Internal

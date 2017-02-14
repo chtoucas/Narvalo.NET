@@ -191,6 +191,17 @@ namespace Narvalo.Fx
         }
 
 
+        // Named "<*>" in Haskell parlance. Same as Apply (<**>) with its arguments flipped.
+        public static Identity<TResult> Gather<TSource, TResult>(
+            this Identity<TSource> @this,
+            Identity<Func<TSource, TResult>> applicative)
+            /* T4: C# indent */
+        {
+            /* T4: C# indent */
+
+            return applicative.Apply(@this);
+        }
+
         public static Identity<Tuple<TSource, TOther>> Zip<TSource, TOther>(
             this Identity<TSource> @this,
             Identity<TOther> other)
@@ -219,7 +230,7 @@ namespace Narvalo.Fx
         }
 
         // Named ">>" (Monad) or "*>" (Applicative) in Haskell parlance.
-        public static Identity<TResult> ContinueWith<TSource, TResult>(
+        public static Identity<TResult> ReplaceBy<TSource, TResult>(
             this Identity<TSource> @this,
             Identity<TResult> other)
             /* T4: C# indent */
@@ -239,6 +250,35 @@ namespace Narvalo.Fx
             return Identity.Unit;
         }
 
+        // Named "forever" in Haskell parlance.
+        public static Identity<TResult> Forever<TSource, TResult>(
+            this Identity<TSource> @this,
+            Func<Identity<TResult>> thunk)
+            /* T4: C# indent */
+        {
+            /* T4: C# indent */
+
+            return @this.ReplaceBy(@this.Forever(thunk));
+        }
+
+        #endregion
+
+        #region Non-standard extensions.
+
+        public static Identity<TResult> Coalesce<TSource, TResult>(
+            this Identity<TSource> @this,
+            Func<TSource, bool> predicate,
+            Identity<TResult> thenResult,
+            Identity<TResult> elseResult)
+            /* T4: C# indent */
+        {
+            /* T4: C# indent */
+            Require.NotNull(predicate, nameof(predicate));
+
+            return @this.Bind(_ => predicate.Invoke(_) ? thenResult : elseResult);
+        }
+
+
         #endregion
 
         #region Generalisations of list functions
@@ -255,6 +295,42 @@ namespace Narvalo.Fx
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }
 
+
+        #endregion
+
+        #region Conditional execution of monadic expressions
+
+        // Named "when" in Haskell parlance. Haskell uses a different signature.
+        public static void When<TSource>(
+            this Identity<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            /* T4: C# indent */
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(
+                _ => {
+                    if (predicate.Invoke(_)) { action.Invoke(_); }
+
+                    return Identity.Unit;
+                });
+        }
+
+        // Named "unless" in Haskell parlance. Haskell uses a different signature.
+        public static void Unless<TSource>(
+            this Identity<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            Expect.NotNull(predicate);
+            Expect.NotNull(action);
+
+            @this.When(_ => !predicate.Invoke(_), action);
+        }
 
         #endregion
 
@@ -469,118 +545,6 @@ namespace Narvalo.Fx
         #endregion
 
     } // End of Sequence - T4: EmitMonadEnumerableExtensions().
-}
-
-namespace Narvalo.Fx.Extensions
-{
-    using System;
-
-    // Provides more extension methods for Identity<T>.
-    public static partial class IdentityExtensions
-    {
-        #region Basic Monad functions
-
-        // Named "forever" in Haskell parlance.
-        public static Identity<TResult> Forever<TSource, TResult>(
-            this Identity<TSource> @this,
-            Func<Identity<TResult>> thunk)
-            /* T4: C# indent */
-        {
-            /* T4: C# indent */
-
-            return @this.ContinueWith(@this.Forever(thunk));
-        }
-
-        #endregion
-
-        #region Conditional execution of monadic expressions
-
-        // Named "when" in Haskell parlance. Haskell uses a different signature.
-        public static void When<TSource>(
-            this Identity<TSource> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            /* T4: C# indent */
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(
-                _ => {
-                    if (predicate.Invoke(_)) { action.Invoke(_); }
-
-                    return Identity.Unit;
-                });
-        }
-
-        // Named "unless" in Haskell parlance. Haskell uses a different signature.
-        public static void Unless<TSource>(
-            this Identity<TSource> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            /* T4: C# indent */
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(
-                _ => {
-                    if (!predicate.Invoke(_)) { action.Invoke(_); }
-
-                    return Identity.Unit;
-                });
-        }
-
-        #endregion
-
-        #region Applicative
-
-
-        // Named "<*>" in Haskell parlance. Same as Apply (<**>) with its arguments flipped.
-        public static Identity<TResult> Gather<TSource, TResult>(
-            this Identity<TSource> @this,
-            Identity<Func<TSource, TResult>> applicative)
-            /* T4: C# indent */
-        {
-            /* T4: C# indent */
-
-            return applicative.Apply(@this);
-        }
-
-
-        #endregion
-
-        public static Identity<TResult> Coalesce<TSource, TResult>(
-            this Identity<TSource> @this,
-            Func<TSource, bool> predicate,
-            Identity<TResult> then,
-            Identity<TResult> otherwise)
-            /* T4: C# indent */
-        {
-            /* T4: C# indent */
-            Require.NotNull(predicate, nameof(predicate));
-
-            return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
-        }
-
-        public static void Do<TSource>(
-            this Identity<TSource> @this,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            /* T4: C# indent */
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(
-                _ => {
-                    action.Invoke(_);
-
-                    return Identity.Unit;
-                });
-        }
-    } // End of Identity - T4: EmitMonadExtraExtensions().
 }
 
 namespace Narvalo.Fx.Internal

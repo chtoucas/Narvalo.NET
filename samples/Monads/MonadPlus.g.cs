@@ -222,6 +222,17 @@ namespace Monads
         }
 
 
+        // Named "<*>" in Haskell parlance. Same as Apply (<**>) with its arguments flipped.
+        public static MonadPlus<TResult> Gather<TSource, TResult>(
+            this MonadPlus<TSource> @this,
+            MonadPlus<Func<TSource, TResult>> applicative)
+            /* T4: C# indent */
+        {
+            Require.NotNull(applicative, nameof(applicative));
+
+            return applicative.Apply(@this);
+        }
+
         public static MonadPlus<Tuple<TSource, TOther>> Zip<TSource, TOther>(
             this MonadPlus<TSource> @this,
             MonadPlus<TOther> other)
@@ -251,7 +262,7 @@ namespace Monads
         }
 
         // Named ">>" (Monad) or "*>" (Applicative) in Haskell parlance.
-        public static MonadPlus<TResult> ContinueWith<TSource, TResult>(
+        public static MonadPlus<TResult> ReplaceBy<TSource, TResult>(
             this MonadPlus<TSource> @this,
             MonadPlus<TResult> other)
             /* T4: C# indent */
@@ -271,6 +282,52 @@ namespace Monads
 
             return MonadPlus.Unit;
         }
+
+        // Named "forever" in Haskell parlance.
+        public static MonadPlus<TResult> Forever<TSource, TResult>(
+            this MonadPlus<TSource> @this,
+            Func<MonadPlus<TResult>> thunk)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Warrant.NotNull<MonadPlus<TResult>>();
+
+            return @this.ReplaceBy(@this.Forever(thunk));
+        }
+
+        #endregion
+
+        #region Non-standard extensions.
+
+        public static MonadPlus<TResult> Coalesce<TSource, TResult>(
+            this MonadPlus<TSource> @this,
+            Func<TSource, bool> predicate,
+            MonadPlus<TResult> thenResult,
+            MonadPlus<TResult> elseResult)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+            Warrant.NotNull<MonadPlus<TResult>>();
+
+            return @this.Bind(_ => predicate.Invoke(_) ? thenResult : elseResult);
+        }
+
+
+        // Conditional version of ReplaceBy().
+        public static MonadPlus<TResult> If<TSource, TResult>(
+            this MonadPlus<TSource> @this,
+            Func<TSource, bool> predicate,
+            MonadPlus<TResult> thenResult)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+            Warrant.NotNull<MonadPlus<TResult>>();
+
+            return @this.Bind(_ => predicate.Invoke(_) ? thenResult : MonadPlus<TResult>.Zero);
+        }
+
 
         #endregion
 
@@ -304,6 +361,43 @@ namespace Monads
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }
 
+
+        #endregion
+
+        #region Conditional execution of monadic expressions
+
+        // Named "when" in Haskell parlance. Haskell uses a different signature.
+        public static void When<TSource>(
+            this MonadPlus<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(
+                _ => {
+                    if (predicate.Invoke(_)) { action.Invoke(_); }
+
+                    return MonadPlus.Unit;
+                });
+        }
+
+        // Named "unless" in Haskell parlance. Haskell uses a different signature.
+        public static void Unless<TSource>(
+            this MonadPlus<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            Expect.NotNull(@this);
+            Expect.NotNull(predicate);
+            Expect.NotNull(action);
+
+            @this.When(_ => !predicate.Invoke(_), action);
+        }
 
         #endregion
 
@@ -545,7 +639,7 @@ namespace Monads
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
-                   from innerValue in keyLookupM.Invoke(outerValue).ContinueWith(inner)
+                   from innerValue in keyLookupM.Invoke(outerValue).ReplaceBy(inner)
                    select resultSelector.Invoke(outerValue, innerValue);
         }
 
@@ -569,7 +663,7 @@ namespace Monads
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
-                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).ContinueWith(inner));
+                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).ReplaceBy(inner));
         }
 
         private static Func<TSource, MonadPlus<TKey>> GetKeyLookup<TSource, TInner, TKey>(
@@ -711,134 +805,6 @@ namespace Monads
         #endregion
 
     } // End of Sequence - T4: EmitMonadEnumerableExtensions().
-}
-
-namespace Monads.Extensions
-{
-    using System;
-
-    // Provides more extension methods for MonadPlus<T>.
-    public static partial class MonadPlusExtensions
-    {
-        #region Basic Monad functions
-
-        // Named "forever" in Haskell parlance.
-        public static MonadPlus<TResult> Forever<TSource, TResult>(
-            this MonadPlus<TSource> @this,
-            Func<MonadPlus<TResult>> thunk)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Warrant.NotNull<MonadPlus<TResult>>();
-
-            return @this.ContinueWith(@this.Forever(thunk));
-        }
-
-        #endregion
-
-        #region Conditional execution of monadic expressions
-
-        // Named "when" in Haskell parlance. Haskell uses a different signature.
-        public static void When<TSource>(
-            this MonadPlus<TSource> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(
-                _ => {
-                    if (predicate.Invoke(_)) { action.Invoke(_); }
-
-                    return MonadPlus.Unit;
-                });
-        }
-
-        // Named "unless" in Haskell parlance. Haskell uses a different signature.
-        public static void Unless<TSource>(
-            this MonadPlus<TSource> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(
-                _ => {
-                    if (!predicate.Invoke(_)) { action.Invoke(_); }
-
-                    return MonadPlus.Unit;
-                });
-        }
-
-        #endregion
-
-        #region Applicative
-
-
-        // Named "<*>" in Haskell parlance. Same as Apply (<**>) with its arguments flipped.
-        public static MonadPlus<TResult> Gather<TSource, TResult>(
-            this MonadPlus<TSource> @this,
-            MonadPlus<Func<TSource, TResult>> applicative)
-            /* T4: C# indent */
-        {
-            Require.NotNull(applicative, nameof(applicative));
-
-            return applicative.Apply(@this);
-        }
-
-
-        #endregion
-
-        public static MonadPlus<TResult> Coalesce<TSource, TResult>(
-            this MonadPlus<TSource> @this,
-            Func<TSource, bool> predicate,
-            MonadPlus<TResult> then,
-            MonadPlus<TResult> otherwise)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            Warrant.NotNull<MonadPlus<TResult>>();
-
-            return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
-        }
-
-
-        public static MonadPlus<TResult> If<TSource, TResult>(
-            this MonadPlus<TSource> @this,
-            Func<TSource, bool> predicate,
-            MonadPlus<TResult> other)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            Warrant.NotNull<MonadPlus<TResult>>();
-
-            return @this.Bind(_ => predicate.Invoke(_) ? other : MonadPlus<TResult>.Zero);
-        }
-
-        public static void Do<TSource>(
-            this MonadPlus<TSource> @this,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(
-                _ => {
-                    action.Invoke(_);
-
-                    return MonadPlus.Unit;
-                });
-        }
-    } // End of MonadPlus - T4: EmitMonadExtraExtensions().
 }
 
 namespace Monads.Internal

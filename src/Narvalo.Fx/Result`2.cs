@@ -10,7 +10,8 @@ namespace Narvalo.Fx
 
     // Friendly version of Either<T, TError>. NB: Usually the error is the left type parameter.
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public abstract partial class Result<T, TError> : Internal.IMatchable<T, TError>
+    public abstract partial class Result<T, TError>
+        : Internal.IMatchable<T, TError>, Internal.IOptional<T>
     {
 #if CONTRACTS_FULL // Custom ctor visibility for the contract class only.
         protected Result() { }
@@ -264,10 +265,6 @@ namespace Narvalo.Fx
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "1#", Justification = "[Intentionally] Internal interface.")]
         public abstract void Do(Action<T> onSuccess, Action<TError> onError);
 
-        public abstract void OnSuccess(Action<T> action);
-
-        public abstract void OnError(Action<TError> action);
-
         private partial class Success_
         {
             public override TResult Match<TResult>(Func<T, TResult> caseSuccess, Func<TError, TResult> caseError)
@@ -283,15 +280,6 @@ namespace Narvalo.Fx
 
                 onSuccess.Invoke(Value);
             }
-
-            public override void OnSuccess(Action<T> action)
-            {
-                Require.NotNull(action, nameof(action));
-
-                action.Invoke(Value);
-            }
-
-            public override void OnError(Action<TError> action) { }
         }
 
         private partial class Error_
@@ -309,6 +297,41 @@ namespace Narvalo.Fx
 
                 onError.Invoke(Error);
             }
+        }
+    }
+
+    // Implements the Internal.IOptional<T> interface.
+    public partial class Result<T, TError>
+    {
+        public abstract void When(Func<T, bool> predicate, Action<T> action);
+
+        public abstract void OnSuccess(Action<T> action);
+
+        public abstract void OnError(Action<TError> action);
+
+        private partial class Success_
+        {
+            public override void When(Func<T, bool> predicate, Action<T> action)
+            {
+                Require.NotNull(predicate, nameof(predicate));
+                Require.NotNull(action, nameof(action));
+
+                if (predicate.Invoke(Value)) { action.Invoke(Value); }
+            }
+
+            public override void OnSuccess(Action<T> action)
+            {
+                Require.NotNull(action, nameof(action));
+
+                action.Invoke(Value);
+            }
+
+            public override void OnError(Action<TError> action) { }
+        }
+
+        private partial class Error_
+        {
+            public override void When(Func<T, bool> predicate, Action<T> action) { }
 
             public override void OnSuccess(Action<T> action) { }
 

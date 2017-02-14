@@ -16,28 +16,8 @@ namespace Narvalo.Fx
             return IsSome ? Maybe.Of(selector.Invoke(Value)) : Maybe<TResult>.None;
         }
 
-        public Maybe<TResult> ContinueWith<TResult>(Maybe<TResult> other)
+        public Maybe<TResult> ReplaceBy<TResult>(Maybe<TResult> other)
             => IsSome ? other : Maybe<TResult>.None;
-
-        #endregion
-
-        #region Conditional execution of monadic expressions (Prelude)
-
-        public void When(Func<T, bool> predicate, Action<T> action)
-        {
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            if (IsSome && predicate.Invoke(Value)) { action.Invoke(Value); }
-        }
-
-        public void Unless(Func<T, bool> predicate, Action<T> action)
-        {
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            if (IsSome && !predicate.Invoke(Value)) { action.Invoke(Value); }
-        }
 
         #endregion
 
@@ -102,33 +82,22 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Non-standard extension methods.
-
         public Maybe<TResult> Coalesce<TResult>(
             Func<T, bool> predicate,
-            Maybe<TResult> then,
-            Maybe<TResult> otherwise)
+            Maybe<TResult> thenResult,
+            Maybe<TResult> elseResult)
         {
             Require.NotNull(predicate, nameof(predicate));
 
-            return IsSome && predicate.Invoke(Value) ? then : otherwise;
+            return IsSome && predicate.Invoke(Value) ? thenResult : elseResult;
         }
 
-        public Maybe<TResult> If<TResult>(Func<T, bool> predicate, Maybe<TResult> other)
+        public Maybe<TResult> If<TResult>(Func<T, bool> predicate, Maybe<TResult> thenResult)
         {
             Require.NotNull(predicate, nameof(predicate));
 
-            return IsSome && predicate.Invoke(Value) ? other : Maybe<TResult>.None;
+            return IsSome && predicate.Invoke(Value) ? thenResult : Maybe<TResult>.None;
         }
-
-        public void Do(Action<T> action)
-        {
-            Require.NotNull(action, nameof(action));
-
-            if (IsSome) { action.Invoke(Value); }
-        }
-
-        #endregion
     }
 
     public static partial class MaybeSequence

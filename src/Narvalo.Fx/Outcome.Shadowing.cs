@@ -12,7 +12,7 @@ namespace Narvalo.Fx
         [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Select", Justification = "[Intentionally] No trouble here, this 'Select' is the one from the LINQ standard query operators.")]
         public abstract Outcome<TResult> Select<TResult>(Func<T, TResult> selector);
 
-        public abstract Outcome<TResult> ContinueWith<TResult>(Outcome<TResult> other);
+        public abstract Outcome<TResult> ReplaceBy<TResult>(Outcome<TResult> other);
 
         private partial class Success_
         {
@@ -34,7 +34,7 @@ namespace Narvalo.Fx
                 }
             }
 
-            public override Outcome<TResult> ContinueWith<TResult>(Outcome<TResult> other) => other;
+            public override Outcome<TResult> ReplaceBy<TResult>(Outcome<TResult> other) => other;
         }
 
         private partial class Error_
@@ -42,7 +42,7 @@ namespace Narvalo.Fx
             public override Outcome<TResult> Select<TResult>(Func<T, TResult> selector)
                 => Outcome.FromError<TResult>(ExceptionInfo);
 
-            public override Outcome<TResult> ContinueWith<TResult>(Outcome<TResult> other)
+            public override Outcome<TResult> ReplaceBy<TResult>(Outcome<TResult> other)
                 => Outcome.FromError<TResult>(ExceptionInfo);
         }
     }

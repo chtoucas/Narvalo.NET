@@ -26,6 +26,17 @@ public partial class MonadTemplate
 
 <#+ if (!HasTypeConstraints) { #>
 
+        // Named "<*>" in Haskell parlance. Same as Apply (<**>) with its arguments flipped.
+        public static <#= Name #><TResult<#= SuffixT #>> Gather<TSource, TResult<#= SuffixT #>>(
+            this <#= Name #><TSource<#= SuffixT #>> @this,
+            <#= Name #><Func<TSource, TResult><#= SuffixT #>> applicative)
+            <#+ WriteTypeConstraints("TSource", "TResult"); #>
+        {
+            <#+ WriteNotNull("applicative"); #>
+
+            return applicative.Apply(@this);
+        }
+
         public static <#= Name #><Tuple<TSource, TOther><#= SuffixT #>> Zip<TSource, TOther<#= SuffixT #>>(
             this <#= Name #><TSource<#= SuffixT #>> @this,
             <#= Name #><TOther<#= SuffixT #>> other)
@@ -58,7 +69,7 @@ public partial class MonadTemplate
         }
 
         // Named ">>" (Monad) or "*>" (Applicative) in Haskell parlance.
-        public static <#= Name #><TResult<#= SuffixT #>> ContinueWith<TSource, TResult<#= SuffixT #>>(
+        public static <#= Name #><TResult<#= SuffixT #>> ReplaceBy<TSource, TResult<#= SuffixT #>>(
             this <#= Name #><TSource<#= SuffixT #>> @this,
             <#= Name #><TResult<#= SuffixT #>> other)
             <#+ WriteTypeConstraints("TSource", "TResult"); #>
@@ -90,6 +101,60 @@ public partial class MonadTemplate
             return <#= Name #>.Unit;
 <#+ } #>
         }
+
+        // Named "forever" in Haskell parlance.
+        public static <#= Name #><TResult<#= SuffixT #>> Forever<TSource, TResult<#= SuffixT #>>(
+            this <#= Name #><TSource<#= SuffixT #>> @this,
+            Func<<#= Name #><TResult<#= SuffixT #>>> thunk)
+            <#+ WriteTypeConstraints("TSource", "TResult"); #>
+        {
+            <#+ WriteNotNull(); #>
+<#+ if (PostThenEnsuresSome) { #>
+            Warrant.NotNull<<#= Name #><TResult<#= SuffixT #>>>();
+<#+ } #>
+
+            return @this.ReplaceBy(@this.Forever(thunk));
+        }
+
+        #endregion
+
+        #region Non-standard extensions.
+
+        public static <#= Name #><TResult<#= SuffixT #>> Coalesce<TSource, TResult<#= SuffixT #>>(
+            this <#= Name #><TSource<#= SuffixT #>> @this,
+            Func<TSource, bool> predicate,
+            <#= Name #><TResult<#= SuffixT #>> thenResult,
+            <#= Name #><TResult<#= SuffixT #>> elseResult)
+            <#+ WriteTypeConstraints("TSource", "TResult"); #>
+        {
+            <#+ WriteNotNull(); #>
+            Require.NotNull(predicate, nameof(predicate));
+<#+ if (PostBindEnsuresSome) { #>
+            Warrant.NotNull<<#= Name #><TResult<#= SuffixT #>>>();
+<#+ } #>
+
+            return @this.Bind(_ => predicate.Invoke(_) ? thenResult : elseResult);
+        }
+
+<#+ if (HasZero) { #>
+
+        // Conditional version of ReplaceBy().
+        public static <#= Name #><TResult> If<TSource, TResult>(
+            this <#= Name #><TSource> @this,
+            Func<TSource, bool> predicate,
+            <#= Name #><TResult> thenResult)
+            <#+ WriteTypeConstraints("TSource", "TResult"); #>
+        {
+            <#+ WriteNotNull(); #>
+            Require.NotNull(predicate, nameof(predicate));
+<#+ if (PostBindEnsuresSome) { #>
+            Warrant.NotNull<<#= Name #><TResult>>();
+<#+ } #>
+
+            return @this.Bind(_ => predicate.Invoke(_) ? thenResult : <#= Name #><TResult>.<#= ZeroName #>);
+        }
+
+<#+ } // T4: End of HasZero. #>
 
         #endregion
 
@@ -132,6 +197,49 @@ public partial class MonadTemplate
         }
 
 <#+ } // T4: End of !HasTypeConstraints. #>
+
+        #endregion
+
+        #region Conditional execution of monadic expressions
+
+        // Named "when" in Haskell parlance. Haskell uses a different signature.
+        public static void When<TSource<#= SuffixT #>>(
+            this <#= Name #><TSource<#= SuffixT #>> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            <#+ WriteTypeConstraints("TSource"); #>
+        {
+            <#+ WriteNotNull(); #>
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(
+                _ => {
+                    if (predicate.Invoke(_)) { action.Invoke(_); }
+
+<#+ if (HasSuffixT) { #>
+                    return @this.Skip();
+<#+ } else { #>
+                    return <#= Name #>.Unit;
+<#+ } #>
+                });
+        }
+
+        // Named "unless" in Haskell parlance. Haskell uses a different signature.
+        public static void Unless<TSource<#= SuffixT #>>(
+            this <#= Name #><TSource<#= SuffixT #>> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            <#+ WriteTypeConstraints("TSource"); #>
+        {
+<#+ if (IsNullable) { #>
+            Expect.NotNull(@this);
+<#+ } #>
+            Expect.NotNull(predicate);
+            Expect.NotNull(action);
+
+            @this.When(_ => !predicate.Invoke(_), action);
+        }
 
         #endregion
 
@@ -439,7 +547,7 @@ public partial class MonadTemplate
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
-                   from innerValue in keyLookupM.Invoke(outerValue).ContinueWith(inner)
+                   from innerValue in keyLookupM.Invoke(outerValue).ReplaceBy(inner)
                    select resultSelector.Invoke(outerValue, innerValue);
         }
 
@@ -467,7 +575,7 @@ public partial class MonadTemplate
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
-                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).ContinueWith(inner));
+                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).ReplaceBy(inner));
         }
 
         private static Func<TSource, <#= Name #><TKey>> GetKeyLookup<TSource, TInner, TKey>(

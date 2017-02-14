@@ -19,7 +19,8 @@ namespace Narvalo.Fx
     [DebuggerDisplay("IsSome = {IsSome}")]
     [DebuggerTypeProxy(typeof(Maybe<>.DebugView))]
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "[Intentionally] Maybe<T> only pretends to be a collection.")]
-    public partial struct Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>, Internal.IAlternative<T>
+    public partial struct Maybe<T>
+        : IEnumerable<T>, IEquatable<Maybe<T>>, Internal.IAlternative<T>, Internal.IOptional<T>
     {
         private readonly bool _isSome;
 
@@ -258,11 +259,11 @@ namespace Narvalo.Fx
             return IsSome && predicate.Invoke(Value) ? selector.Invoke(Value) : otherwise.Invoke();
         }
 
-        public TResult Coalesce<TResult>(Func<T, bool> predicate, TResult then, TResult other)
+        public TResult Coalesce<TResult>(Func<T, bool> predicate, TResult thenResult, TResult elseResult)
         {
             Require.NotNull(predicate, nameof(predicate));
 
-            return IsSome && predicate.Invoke(Value) ? then : other;
+            return IsSome && predicate.Invoke(Value) ? thenResult : elseResult;
         }
 
         public void Do(Func<T, bool> predicate, Action<T> action, Action otherwise)
@@ -297,8 +298,19 @@ namespace Narvalo.Fx
                 onNone.Invoke();
             }
         }
+    }
 
-        // Alias for Do(Action<T>).
+    // Implements the Internal.IOptional<T> interface.
+    public partial struct Maybe<T>
+    {
+        public void When(Func<T, bool> predicate, Action<T> action)
+        {
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            if (IsSome && predicate.Invoke(Value)) { action.Invoke(Value); }
+        }
+
         public void OnSome(Action<T> action)
         {
             Require.NotNull(action, nameof(action));

@@ -12,7 +12,8 @@ namespace Narvalo.Fx
     // WARNING: We make this class a "monad" on TError.
     // Normally, TError should represent a **light** error. For exceptions, see VoidOrError.
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public abstract partial class VoidOr<TError> : Internal.IAlternative<TError>
+    public abstract partial class VoidOr<TError>
+        : Internal.IAlternative<TError>, Internal.IOptional<TError>
     {
         private VoidOr() { }
 
@@ -199,17 +200,13 @@ namespace Narvalo.Fx
             Func<TError, TResult> selector,
             Func<TResult> otherwise);
 
-        public abstract TResult Coalesce<TResult>(Func<TError, bool> predicate, TResult then, TResult other);
+        public abstract TResult Coalesce<TResult>(Func<TError, bool> predicate, TResult thenResult, TResult elseResult);
 
         public abstract void Do(Func<TError, bool> predicate, Action<TError> action, Action otherwise);
 
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "1#", Justification = "[Intentionally] Internal interface.")]
         public abstract void Do(Action<TError> onError, Action onSuccess);
-
-        public abstract void OnSuccess(Action action);
-
-        public abstract void OnError(Action<TError> action);
 
         private partial class Void_ : VoidOr<TError>
         {
@@ -233,8 +230,8 @@ namespace Narvalo.Fx
                 return otherwise.Invoke();
             }
 
-            public override TResult Coalesce<TResult>(Func<TError, bool> predicate, TResult then, TResult other)
-                => other;
+            public override TResult Coalesce<TResult>(Func<TError, bool> predicate, TResult thenResult, TResult elseResult)
+                => elseResult;
 
             public override void Do(Func<TError, bool> predicate, Action<TError> action, Action otherwise)
             {
@@ -249,15 +246,6 @@ namespace Narvalo.Fx
 
                 onSuccess.Invoke();
             }
-
-            public override void OnSuccess(Action action)
-            {
-                Require.NotNull(action, nameof(action));
-
-                action.Invoke();
-            }
-
-            public override void OnError(Action<TError> action) { }
         }
 
         private partial class Error_
@@ -288,11 +276,11 @@ namespace Narvalo.Fx
                 return predicate.Invoke(Error) ? selector.Invoke(Error) : otherwise.Invoke();
             }
 
-            public override TResult Coalesce<TResult>(Func<TError, bool> predicate, TResult then, TResult other)
+            public override TResult Coalesce<TResult>(Func<TError, bool> predicate, TResult thenResult, TResult elseResult)
             {
                 Require.NotNull(predicate, nameof(predicate));
 
-                return predicate.Invoke(Error) ? then : other;
+                return predicate.Invoke(Error) ? thenResult : elseResult;
             }
 
             public override void Do(Func<TError, bool> predicate, Action<TError> action, Action otherwise)
@@ -316,6 +304,41 @@ namespace Narvalo.Fx
                 Require.NotNull(onError, nameof(onError));
 
                 onError.Invoke(Error);
+            }
+        }
+    }
+
+    // Implements the Internal.IOptional<TError> interface.
+    public partial class VoidOr<TError>
+    {
+        public abstract void When(Func<TError, bool> predicate, Action<TError> action);
+
+        public abstract void OnSuccess(Action action);
+
+        public abstract void OnError(Action<TError> action);
+
+        private partial class Void_ : VoidOr<TError>
+        {
+            public override void When(Func<TError, bool> predicate, Action<TError> action) { }
+
+            public override void OnSuccess(Action action)
+            {
+                Require.NotNull(action, nameof(action));
+
+                action.Invoke();
+            }
+
+            public override void OnError(Action<TError> action) { }
+        }
+
+        private partial class Error_
+        {
+            public override void When(Func<TError, bool> predicate, Action<TError> action)
+            {
+                Require.NotNull(predicate, nameof(predicate));
+                Require.NotNull(action, nameof(action));
+
+                if (predicate.Invoke(Error)) { action.Invoke(Error); }
             }
 
             public override void OnSuccess(Action action) { }
