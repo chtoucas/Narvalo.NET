@@ -6,5 +6,15 @@ namespace Narvalo.Fx.Linq
     /// Provides a set of static and extension methods for querying objects
     /// that implement <see cref="System.Collections.Generic.IEnumerable{T}"/>.
     /// </summary>
+    /// <remarks>
+    /// New LINQ operators:
+    /// - Projecting: SelectAny
+    /// - Filtering: WhereAny
+    /// - Set: Append, Prepend
+    /// - Element: FirstOrNone, LastOrNone, SingleOrNone
+    /// - Aggregation (catamorphisms): AggregateBack, Fold, Reduce
+    /// - Quantifiers: IsEmpty
+    /// - Generation: EmptyIfNull
+    /// </remarks>
     public static partial class Qperators { }
 }

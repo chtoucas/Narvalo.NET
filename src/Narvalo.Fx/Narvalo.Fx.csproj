@@ -79,6 +79,12 @@
     <Compile Include="Extensions\Result%24.cs" />
     <Compile Include="Linq\AppendPrepend.cs" />
     <Compile Include="Linq\EmptyIfNull.cs" />
+    <Compile Include="Linq\AggregateBack.cs" />
+    <Compile Include="Linq\Reduce.cs" />
+    <Compile Include="Linq\Fold.cs" />
+    <Compile Include="Linq\SingleOrNone.cs" />
+    <Compile Include="Linq\LastOrNone.cs" />
+    <Compile Include="Linq\FirstOrNone.cs" />
     <Compile Include="Linq\IsEmpty.cs" />
     <Compile Include="Result.g.cs">
       <DependentUpon>Result.tt</DependentUpon>
