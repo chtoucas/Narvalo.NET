@@ -5,8 +5,32 @@ namespace Narvalo.Fx.Linq
     using System;
     using System.Collections.Generic;
 
-    public static partial class Operators
+    public static partial class Qperators
     {
+        public static IEnumerable<TResult> SelectAny<TSource, TResult>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, TResult?> selector)
+            where TResult : struct
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(selector, nameof(selector));
+            Warrant.NotNull<IEnumerable<TResult>>();
+
+            return SelectAnyIterator(@this, selector);
+        }
+
+        public static IEnumerable<TResult> SelectAny<TSource, TResult>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, TResult> selector)
+            where TResult : class
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(selector, nameof(selector));
+            Warrant.NotNull<IEnumerable<TResult>>();
+
+            return SelectAnyIterator(@this, selector);
+        }
+
         // Named <c>mapMaybe</c> in Haskell parlance.
         public static IEnumerable<TResult> SelectAny<TSource, TResult>(
             this IEnumerable<TSource> @this,
@@ -28,6 +52,40 @@ namespace Narvalo.Fx.Linq
             Warrant.NotNull<IEnumerable<TResult>>();
 
             return SelectAnyIterator(@this, selector);
+        }
+
+        private static IEnumerable<TResult> SelectAnyIterator<TSource, TResult>(
+            IEnumerable<TSource> source,
+            Func<TSource, TResult?> selector)
+            where TResult : struct
+        {
+            Demand.NotNull(source);
+            Demand.NotNull(selector);
+            Warrant.NotNull<IEnumerable<TResult>>();
+
+            foreach (var item in source)
+            {
+                var m = selector.Invoke(item);
+
+                if (m.HasValue) { yield return m.Value; }
+            }
+        }
+
+        private static IEnumerable<TResult> SelectAnyIterator<TSource, TResult>(
+            IEnumerable<TSource> source,
+            Func<TSource, TResult> selector)
+            where TResult : class
+        {
+            Demand.NotNull(source);
+            Demand.NotNull(selector);
+            Warrant.NotNull<IEnumerable<TResult>>();
+
+            foreach (var item in source)
+            {
+                var m = selector.Invoke(item);
+
+                if (m != null) { yield return m; }
+            }
         }
 
         private static IEnumerable<TResult> SelectAnyIterator<TSource, TResult>(

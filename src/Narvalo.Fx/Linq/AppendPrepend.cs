@@ -4,7 +4,7 @@ namespace Narvalo.Fx.Linq
 {
     using System.Collections.Generic;
 
-    public static partial class Operators
+    public static partial class Qperators
     {
         // There is a much better implementation coming soon (?).
         // https://github.com/dotnet/corefx/commits/master/src/System.Linq/src/System/Linq/AppendPrepend.cs

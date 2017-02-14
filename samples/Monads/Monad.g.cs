@@ -653,7 +653,7 @@ namespace Monads.Linq
     // - Where     -> WhereBy
     // - Zip       -> ZipWith
     // - Aggregate -> Reduce or Fold
-    public static partial class Operators
+    public static partial class Qperators
     {
         #region Basic Monad functions (Prelude)
 

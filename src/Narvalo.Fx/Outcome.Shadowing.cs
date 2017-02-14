@@ -64,7 +64,7 @@ namespace Narvalo.Fx.Linq
     using System;
     using System.Collections.Generic;
 
-    public static partial class Operators
+    public static partial class Qperators
     {
         internal static Outcome<IEnumerable<TSource>> WhereByImpl<TSource>(
             this IEnumerable<TSource> @this,

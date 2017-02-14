@@ -110,7 +110,7 @@
     <Compile Include="Stubs`1.cs" />
     <Compile Include="Stubs`2.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Linq\Operators.cs" />
+    <Compile Include="Linq\Qperators.cs" />
     <Compile Include="Maybe.cs" />
     <Compile Include="Maybe.g.cs">
       <DependentUpon>Maybe.tt</DependentUpon>

@@ -5,7 +5,7 @@ namespace Narvalo.Fx.Linq
     using System.Collections.Generic;
     using System.Linq;
 
-    public static partial class Operators
+    public static partial class Qperators
     {
         public static bool IsEmpty<TSource>(this IEnumerable<TSource> @this)
         {

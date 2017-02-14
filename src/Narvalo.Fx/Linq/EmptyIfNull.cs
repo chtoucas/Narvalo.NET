@@ -5,7 +5,7 @@ namespace Narvalo.Fx.Linq
     using System.Collections.Generic;
     using System.Linq;
 
-    public static partial class Operators
+    public static partial class Qperators
     {
         // Useful when using built-in LINQ operators. Even if it is not publicly visible,
         // I believe that all LINQ operators never return a null but rather an empty sequence if needed.
