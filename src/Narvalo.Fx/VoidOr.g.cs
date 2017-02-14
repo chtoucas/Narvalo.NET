@@ -678,7 +678,7 @@ namespace Narvalo.Fx
     } // End of Func - T4: EmitKleisliExtensions().
 
     // Provides extension methods for IEnumerable<VoidOr<T>>.
-    public static partial class Sequence
+    public static partial class VoidOrSequence
     {
         #region Basic Monad functions (Prelude)
 

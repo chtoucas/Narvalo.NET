@@ -453,7 +453,7 @@ namespace Narvalo.Fx
     } // End of Func - T4: EmitKleisliExtensions().
 
     // Provides extension methods for IEnumerable<Identity<T>>.
-    public static partial class Sequence
+    public static partial class IdentitySequence
     {
         #region Basic Monad functions (Prelude)
 

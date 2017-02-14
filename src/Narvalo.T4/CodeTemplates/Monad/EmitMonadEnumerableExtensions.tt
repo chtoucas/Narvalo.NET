@@ -6,7 +6,7 @@ public partial class MonadTemplate
     {
 #>
     // Provides extension methods for IEnumerable<<#= Name #><T<#= SuffixT #>>>.
-    public static partial class Sequence
+    public static partial class <#= Name #>Sequence
     {
         #region Basic Monad functions (Prelude)
 

@@ -645,7 +645,7 @@ namespace Narvalo.Fx
     } // End of Func - T4: EmitKleisliExtensions().
 
     // Provides extension methods for IEnumerable<Maybe<T>>.
-    public static partial class Sequence
+    public static partial class MaybeSequence
     {
         #region Basic Monad functions (Prelude)
 

@@ -1,8 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Dictionary>
   <Words>
+    <Recognized>
+      <Word>Qperators</Word>
+    </Recognized>
+
     <Compound>
       <Term CompoundAlternate="ExtractOr">extractor</Term>
+      <Term CompoundAlternate="WhereBy">whereby</Term>
     </Compound>
   </Words>
 </Dictionary>

@@ -68,11 +68,14 @@ public partial class MonadTemplate
 <#+ } // End of HasZero #>
 
         /// <summary>
-        /// Obtains an instance of the <see cref="<#= Name #>{T}"/> class for the specified value.
+        /// Obtains an instance of the <see cref="<#= Name #>{T<#= SuffixT #>}"/> class for the specified value.
         /// </summary>
         /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
-        /// <param name="value">A value to be wrapped into a <see cref="<#= Name #>{T}"/> object.</param>
-        /// <returns>An instance of the <see cref="<#= Name #>{T}"/> class for the specified value.</returns>
+<#+ if (HasSuffixT) { #>
+        /// <typeparam name="<#= RawSuffixT #>"></typeparam>
+<#+ } #>
+        /// <param name="value">A value to be wrapped into a <see cref="<#= Name #>{T<#= SuffixT #>}"/> object.</param>
+        /// <returns>An instance of the <see cref="<#= Name #>{T<#= SuffixT #>}"/> class for the specified value.</returns>
         // Named "return" in Haskell parlance.
         public static <#= Name #><T<#= SuffixT #>> <#= ReturnName #><T<#= SuffixT #>>(T value)
             <#+ WriteTypeConstraints("T"); #>

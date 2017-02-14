@@ -29,11 +29,12 @@ namespace Narvalo.Fx
     {
 
         /// <summary>
-        /// Obtains an instance of the <see cref="Result{T}"/> class for the specified value.
+        /// Obtains an instance of the <see cref="Result{T, TError}"/> class for the specified value.
         /// </summary>
         /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
-        /// <param name="value">A value to be wrapped into a <see cref="Result{T}"/> object.</param>
-        /// <returns>An instance of the <see cref="Result{T}"/> class for the specified value.</returns>
+        /// <typeparam name="TError"></typeparam>
+        /// <param name="value">A value to be wrapped into a <see cref="Result{T, TError}"/> object.</param>
+        /// <returns>An instance of the <see cref="Result{T, TError}"/> class for the specified value.</returns>
         // Named "return" in Haskell parlance.
         public static Result<T, TError> Of<T, TError>(T value)
             /* T4: C# indent */
@@ -439,7 +440,7 @@ namespace Narvalo.Fx
     } // End of Func - T4: EmitKleisliExtensions().
 
     // Provides extension methods for IEnumerable<Result<T, TError>>.
-    public static partial class Sequence
+    public static partial class ResultSequence
     {
         #region Basic Monad functions (Prelude)
 

@@ -4,7 +4,7 @@ namespace Narvalo.Fx
 {
     using System.Collections.Generic;
 
-    public static partial class Sequence
+    public static partial class VoidOrSequence
     {
         internal static VoidOr<IEnumerable<TError>> CollectImpl<TError>(
             this IEnumerable<VoidOr<TError>> @this)

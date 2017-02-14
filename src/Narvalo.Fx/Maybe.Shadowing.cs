@@ -131,7 +131,7 @@ namespace Narvalo.Fx
         #endregion
     }
 
-    public static partial class Sequence
+    public static partial class MaybeSequence
     {
         internal static Maybe<IEnumerable<TSource>> CollectImpl<TSource>(this IEnumerable<Maybe<TSource>> @this)
         {

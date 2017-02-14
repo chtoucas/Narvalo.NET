@@ -678,7 +678,7 @@ namespace Monads
     } // End of Func - T4: EmitKleisliExtensions().
 
     // Provides extension methods for IEnumerable<MonadOr<T>>.
-    public static partial class Sequence
+    public static partial class MonadOrSequence
     {
         #region Basic Monad functions (Prelude)
 

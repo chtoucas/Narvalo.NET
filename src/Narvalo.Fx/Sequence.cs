@@ -6,7 +6,7 @@ namespace Narvalo.Fx
     using System.Collections.Generic;
 
     /// <summary>
-    /// Provides a set of static methods to generate objects of type <see cref="IEnumerable{T}"/>.
+    /// Provides a set of static methods that produce objects of type <see cref="IEnumerable{T}"/>.
     /// </summary>
     public static partial class Sequence
     {
@@ -252,107 +252,5 @@ namespace Narvalo.Fx
         }
 
         #endregion
-    }
-
-    // Provides extension methods for IEnumerable<Maybe<T>>.
-    public static partial class Sequence
-    {
-        // Named <c>catMaybes</c> in Haskell parlance.
-        public static IEnumerable<TSource> CollectAny<TSource>(this IEnumerable<Maybe<TSource>> @this)
-        {
-            Require.NotNull(@this, nameof(@this));
-            Warrant.NotNull<IEnumerable<TSource>>();
-
-            return CollectAnyIterator(@this);
-        }
-
-        internal static IEnumerable<TSource> CollectAnyIterator<TSource>(IEnumerable<Maybe<TSource>> source)
-        {
-            Demand.NotNull(source);
-            Warrant.NotNull<IEnumerable<TSource>>();
-
-            foreach (var item in source)
-            {
-                if (item.IsSome) { yield return item.Value; }
-            }
-        }
-    }
-
-    // Provides extension methods for IEnumerable<Outcome<T>>.
-    public static partial class Sequence
-    {
-        public static IEnumerable<TSource> CollectAny<TSource>(this IEnumerable<Outcome<TSource>> @this)
-        {
-            Require.NotNull(@this, nameof(@this));
-            Warrant.NotNull<IEnumerable<TSource>>();
-
-            return CollectAnyIterator(@this);
-        }
-
-        internal static IEnumerable<TSource> CollectAnyIterator<TSource>(IEnumerable<Outcome<TSource>> source)
-        {
-            Demand.NotNull(source);
-            Warrant.NotNull<IEnumerable<TSource>>();
-
-            foreach (var item in source)
-            {
-                // REVIEW: Is this the correct behaviour for null?
-                if (item == null) { yield return default(TSource); }
-
-                if (item.IsSuccess) { yield return item.Value; }
-            }
-        }
-    }
-
-    // Provides extension methods for IEnumerable<VoidOr<TError>>.
-    public static partial class Sequence
-    {
-        public static IEnumerable<TError> CollectAny<TError>(this IEnumerable<VoidOr<TError>> @this)
-        {
-            Require.NotNull(@this, nameof(@this));
-            Warrant.NotNull<IEnumerable<TError>>();
-
-            return CollectAnyIterator(@this);
-        }
-
-        internal static IEnumerable<TError> CollectAnyIterator<TError>(IEnumerable<VoidOr<TError>> source)
-        {
-            Demand.NotNull(source);
-            Warrant.NotNull<IEnumerable<TError>>();
-
-            foreach (var item in source)
-            {
-                // REVIEW: Is this the correct behaviour for null?
-                if (item == null) { yield return default(TError); }
-
-                if (item.IsError) { yield return item.Error; }
-            }
-        }
-    }
-
-    // Provides extension methods for IEnumerable<Result<T, TError>>.
-    public static partial class Sequence
-    {
-        public static IEnumerable<TSource> CollectAny<TSource, TError>(this IEnumerable<Result<TSource, TError>> @this)
-        {
-            Require.NotNull(@this, nameof(@this));
-            Warrant.NotNull<IEnumerable<TSource>>();
-
-            return CollectAnyIterator(@this);
-        }
-
-        internal static IEnumerable<TSource> CollectAnyIterator<TSource, TError>(IEnumerable<Result<TSource, TError>> source)
-        {
-            Demand.NotNull(source);
-            Warrant.NotNull<IEnumerable<TSource>>();
-
-            foreach (var item in source)
-            {
-                // REVIEW: Is this the correct behaviour for null?
-                if (item == null) { yield return default(TSource); }
-
-                if (item.IsSuccess) { yield return item.Value; }
-            }
-        }
     }
 }

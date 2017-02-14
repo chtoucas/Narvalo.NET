@@ -65,7 +65,7 @@ namespace Narvalo.Fx
         }
     }
 
-    public static partial class Sequence
+    public static partial class ResultSequence
     {
         internal static Result<IEnumerable<TSource>, TError> CollectImpl<TSource, TError>(
             this IEnumerable<Result<TSource, TError>> @this)
