@@ -20,7 +20,7 @@ namespace Narvalo.Fx
         [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Select", Justification = "[Intentionally] No trouble here, this 'Select' is the one from the LINQ standard query operators.")]
         public abstract Result<TResult, TError> Select<TResult>(Func<T, TResult> selector);
 
-        public abstract Result<TResult, TError> Then<TResult>(Result<TResult, TError> other);
+        public abstract Result<TResult, TError> Next<TResult>(Result<TResult, TError> other);
 
         #endregion
 
@@ -39,7 +39,7 @@ namespace Narvalo.Fx
                 return Result.Of<TResult, TError>(selector.Invoke(Value));
             }
 
-            public override Result<TResult, TError> Then<TResult>(Result<TResult, TError> other)
+            public override Result<TResult, TError> Next<TResult>(Result<TResult, TError> other)
                 => other;
 
             public override Result<IEnumerable<T>, TError> Repeat(int count)
@@ -54,7 +54,7 @@ namespace Narvalo.Fx
             public override Result<TResult, TError> Select<TResult>(Func<T, TResult> selector)
                 => Result.FromError<TResult, TError>(Error);
 
-            public override Result<TResult, TError> Then<TResult>(Result<TResult, TError> other)
+            public override Result<TResult, TError> Next<TResult>(Result<TResult, TError> other)
                 => Result.FromError<TResult, TError>(Error);
 
             public override Result<IEnumerable<T>, TError> Repeat(int count)

@@ -6,6 +6,8 @@ namespace Narvalo.Fx
     using System.Collections.Generic;
     using System.Linq;
 
+    using Narvalo.Fx.Linq;
+
     /// <summary>
     /// Provides a set of static and extension methods for <see cref="IEnumerable{T}"/>.
     /// </summary>
@@ -258,27 +260,6 @@ namespace Narvalo.Fx
     // Provides additional LINQ extensions.
     public static partial class Sequence
     {
-        // Useful when using built-in LINQ operators. Even if it is not publicly visible,
-        // I believe that all LINQ operators never return a null but rather an empty sequence if needed.
-        public static IEnumerable<TSource> EmptyIfNull<TSource>(this IEnumerable<TSource> @this)
-        {
-            Warrant.NotNull<IEnumerable<TSource>>();
-
-            if (@this == null)
-            {
-                return Enumerable.Empty<TSource>();
-            }
-
-            return @this;
-        }
-
-        public static bool IsEmpty<TSource>(this IEnumerable<TSource> @this)
-        {
-            Expect.NotNull(@this);
-
-            return !@this.Any();
-        }
-
         #region Element Operators
 
         // Named <c>listToMaybe</c> in Haskell parlance.
@@ -352,57 +333,6 @@ namespace Narvalo.Fx
 
                 // Return None if there is one more element.
                 return iter.MoveNext() ? Maybe<TSource>.None : result;
-            }
-        }
-
-        #endregion
-
-        #region Concatenation Operators
-
-        // There is a much better implementation coming soon (?).
-        // https://github.com/dotnet/corefx/commits/master/src/System.Linq/src/System/Linq/AppendPrepend.cs
-        // REVIEW: Since this method is a critical component of Collect(), we could include the
-        // .NET implementation until it is publicly available.
-        public static IEnumerable<TSource> Append<TSource>(this IEnumerable<TSource> @this, TSource element)
-        {
-            Require.NotNull(@this, nameof(@this));
-            Warrant.NotNull<IEnumerable<TSource>>();
-
-            return AppendIterator(@this, element);
-        }
-
-        private static IEnumerable<TSource> AppendIterator<TSource>(IEnumerable<TSource> source, TSource element)
-        {
-            Demand.NotNull(source);
-            Warrant.NotNull<IEnumerable<TSource>>();
-
-            foreach (var item in source)
-            {
-                yield return item;
-            }
-
-            yield return element;
-        }
-
-        // See remarks for Append.
-        public static IEnumerable<TSource> Prepend<TSource>(this IEnumerable<TSource> @this, TSource element)
-        {
-            Require.NotNull(@this, nameof(@this));
-            Warrant.NotNull<IEnumerable<TSource>>();
-
-            return PrependIterator(@this, element);
-        }
-
-        private static IEnumerable<TSource> PrependIterator<TSource>(IEnumerable<TSource> source, TSource element)
-        {
-            Demand.NotNull(source);
-            Warrant.NotNull<IEnumerable<TSource>>();
-
-            yield return element;
-
-            foreach (var item in source)
-            {
-                yield return item;
             }
         }
 

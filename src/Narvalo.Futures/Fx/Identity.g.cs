@@ -19,6 +19,7 @@ namespace Narvalo.Fx
     using System.Linq;
 
     using Narvalo.Fx.Internal;
+    using Narvalo.Fx.Linq;
 
     /// <summary>
     /// Provides a set of static methods for <see cref="Identity{T}"/>.
@@ -191,6 +192,18 @@ namespace Narvalo.Fx
             return @this.Select(_ => value);
         }
 
+
+        public static Identity<Tuple<TSource, TOther>> Zip<TSource, TOther>(
+            this Identity<TSource> @this,
+            Identity<TOther> other)
+            /* T4: C# indent */
+        {
+            /* T4: C# indent */
+
+            return @this.Zip(other, Tuple.Create);
+        }
+
+
         #endregion
 
         #region Basic Monad functions (Prelude)
@@ -208,7 +221,7 @@ namespace Narvalo.Fx
         }
 
         // Named ">>" in Haskell parlance.
-        public static Identity<TResult> Then<TSource, TResult>(
+        public static Identity<TResult> Next<TSource, TResult>(
             this Identity<TSource> @this,
             Identity<TResult> other)
             /* T4: C# indent */
@@ -247,7 +260,7 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Monadic lifting operators (Prelude)
+        #region Applicative lifting operators (Prelude)
 
         /// <see cref="Lift{T1, T2, T3}" />
         // Named "liftA2" in Haskell parlance.
@@ -478,7 +491,7 @@ namespace Narvalo.Fx.Extensions
         {
             /* T4: C# indent */
 
-            return @this.Then(@this.Forever(thunk));
+            return @this.Next(@this.Forever(thunk));
         }
 
         #endregion
@@ -539,16 +552,6 @@ namespace Narvalo.Fx.Extensions
             return applicative.Apply(@this);
         }
 
-        public static Identity<Tuple<TSource, TOther>> Merge<TSource, TOther>(
-            this Identity<TSource> @this,
-            Identity<TOther> other)
-            /* T4: C# indent */
-        {
-            /* T4: C# indent */
-
-            return @this.Zip(other, Tuple.Create);
-        }
-
 
         #endregion
 
@@ -589,6 +592,8 @@ namespace Narvalo.Fx.Internal
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+
+    using Narvalo.Fx.Linq;
 
     // Provides default implementations for the extension methods for IEnumerable<Identity<T>>.
     // You will certainly want to override them to improve performance.

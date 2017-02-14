@@ -24,6 +24,20 @@ public partial class MonadTemplate
             return @this.Select(_ => value);
         }
 
+<#+ if (!HasTypeConstraints) { #>
+
+        public static <#= Name #><Tuple<TSource, TOther><#= SuffixT #>> Zip<TSource, TOther<#= SuffixT #>>(
+            this <#= Name #><TSource<#= SuffixT #>> @this,
+            <#= Name #><TOther<#= SuffixT #>> other)
+            <#+ WriteTypeConstraints("TSource", "TOther"); #>
+        {
+            <#+ WriteNotNull(); #>
+
+            return @this.Zip(other, Tuple.Create);
+        }
+
+<#+ } // T4: End of !HasTypeConstraints. #>
+
         #endregion
 
         #region Basic Monad functions (Prelude)
@@ -44,7 +58,7 @@ public partial class MonadTemplate
         }
 
         // Named ">>" in Haskell parlance.
-        public static <#= Name #><TResult<#= SuffixT #>> Then<TSource, TResult<#= SuffixT #>>(
+        public static <#= Name #><TResult<#= SuffixT #>> Next<TSource, TResult<#= SuffixT #>>(
             this <#= Name #><TSource<#= SuffixT #>> @this,
             <#= Name #><TResult<#= SuffixT #>> other)
             <#+ WriteTypeConstraints("TSource", "TResult"); #>
@@ -71,7 +85,7 @@ public partial class MonadTemplate
 <#+ WriteLine(); #>
 
 <#+ if (HasSuffixT) { #>
-            return <#= Name #>.OfUnit<<#= RawSuffixT #>>();
+            return <#+ WriteFactory("Unit"); #>(global::Narvalo.Fx.Unit.Single);
 <#+ } else { #>
             return <#= Name #>.Unit;
 <#+ } #>
@@ -121,7 +135,7 @@ public partial class MonadTemplate
 
         #endregion
 
-        #region Monadic lifting operators (Prelude)
+        #region Applicative lifting operators (Prelude)
 
         /// <see cref="Lift{T1, T2, T3}" />
         // Named "liftA2" in Haskell parlance.
@@ -425,7 +439,7 @@ public partial class MonadTemplate
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
-                   from innerValue in keyLookupM.Invoke(outerValue).Then(inner)
+                   from innerValue in keyLookupM.Invoke(outerValue).Next(inner)
                    select resultSelector.Invoke(outerValue, innerValue);
         }
 
@@ -453,7 +467,7 @@ public partial class MonadTemplate
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
-                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).Then(inner));
+                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).Next(inner));
         }
 
         private static Func<TSource, <#= Name #><TKey>> GetKeyLookup<TSource, TInner, TKey>(

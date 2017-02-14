@@ -9,8 +9,8 @@ namespace Narvalo.Web
     using System.Linq;
     using System.Web;
 
-    using Narvalo.Collections;
     using Narvalo.Fx;
+    using Narvalo.Fx.Linq;
 
     public abstract partial class HttpQueryBinder<TQuery> : IHttpQueryBinder<TQuery>
     {

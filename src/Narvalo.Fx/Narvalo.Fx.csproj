@@ -77,6 +77,9 @@
     <Compile Include="Extensions\Outcome%24.cs" />
     <Compile Include="Extensions\Maybe%24.cs" />
     <Compile Include="Extensions\Result%24.cs" />
+    <Compile Include="Linq\AppendPrepend.cs" />
+    <Compile Include="Linq\EmptyIfNull.cs" />
+    <Compile Include="Linq\IsEmpty.cs" />
     <Compile Include="Result.g.cs">
       <DependentUpon>Result.tt</DependentUpon>
       <AutoGen>True</AutoGen>

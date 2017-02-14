@@ -11,9 +11,9 @@ public partial class MonadTemplate
     // NB: Sometimes we prefer extension methods over static methods to be able to override them locally.
     public static partial class <#= Name #>
     {
-<#+ if (HasSuffixT) { #>
-
-        public static <#= Name #><global::Narvalo.Fx.Unit<#= SuffixT #>> OfUnit<<#= RawSuffixT #>>()
+<#+ if (HasSuffixT) { /* DISABLED #>
+        // Currently disabled. The public equivalent is named Skip().
+        private static <#= Name #><global::Narvalo.Fx.Unit<#= SuffixT #>> OfUnit<<#= RawSuffixT #>>()
         {
 <#+ if (IsNullable) { #>
             Warrant.NotNull<<#= Name #><global::Narvalo.Fx.Unit<#= SuffixT #>>>();
@@ -22,7 +22,7 @@ public partial class MonadTemplate
             return <#+ WriteFactory("Unit"); #>(global::Narvalo.Fx.Unit.Single);
         }
 
-<#+ } else { #>
+<#+ */ } else { #>
         /// <summary>
         /// The unique object of type <c><#= Name #>&lt;Unit&gt;</c>.
         /// </summary>

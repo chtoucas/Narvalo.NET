@@ -22,7 +22,7 @@ public partial class MonadTemplate
             Warrant.NotNull<<#= Name #><TResult<#= SuffixT #>>>();
 <#+ } #>
 
-            return @this.Then(@this.Forever(thunk));
+            return @this.Next(@this.Forever(thunk));
         }
 
         #endregion
@@ -45,7 +45,7 @@ public partial class MonadTemplate
                     if (predicate.Invoke(_)) { action.Invoke(_); }
 
 <#+ if (HasSuffixT) { #>
-                    return <#= Name #>.OfUnit<<#= RawSuffixT #>>();
+                    return @this.Skip();
 <#+ } else { #>
                     return <#= Name #>.Unit;
 <#+ } #>
@@ -68,7 +68,7 @@ public partial class MonadTemplate
                     if (!predicate.Invoke(_)) { action.Invoke(_); }
 
 <#+ if (HasSuffixT) { #>
-                    return <#= Name #>.OfUnit<<#= RawSuffixT #>>();
+                    return @this.Skip();
 <#+ } else { #>
                     return <#= Name #>.Unit;
 <#+ } #>
@@ -90,16 +90,6 @@ public partial class MonadTemplate
             <#+ WriteNotNull("applicative"); #>
 
             return applicative.Apply(@this);
-        }
-
-        public static <#= Name #><Tuple<TSource, TOther><#= SuffixT #>> Merge<TSource, TOther<#= SuffixT #>>(
-            this <#= Name #><TSource<#= SuffixT #>> @this,
-            <#= Name #><TOther<#= SuffixT #>> other)
-            <#+ WriteTypeConstraints("TSource", "TOther"); #>
-        {
-            <#+ WriteNotNull(); #>
-
-            return @this.Zip(other, Tuple.Create);
         }
 
 <#+ } // T4: End of !HasTypeConstraints. #>
@@ -124,8 +114,7 @@ public partial class MonadTemplate
 
 <#+ if (HasZero) { #>
 
-        // Generalizes the standard Then().
-        public static <#= Name #><TResult> Then<TSource, TResult>(
+        public static <#= Name #><TResult> If<TSource, TResult>(
             this <#= Name #><TSource> @this,
             Func<TSource, bool> predicate,
             <#= Name #><TResult> other)
@@ -138,21 +127,6 @@ public partial class MonadTemplate
 <#+ } #>
 
             return @this.Bind(_ => predicate.Invoke(_) ? other : <#= Name #><TResult>.<#= ZeroName #>);
-        }
-
-        public static <#= Name #><TResult> Otherwise<TSource, TResult>(
-            this <#= Name #><TSource> @this,
-            Func<TSource, bool> predicate,
-            <#= Name #><TResult> other)
-            <#+ WriteTypeConstraints("TSource", "TResult"); #>
-        {
-            <#+ WriteNotNull(); #>
-            Require.NotNull(predicate, nameof(predicate));
-<#+ if (PostBindEnsuresSome) { #>
-            Warrant.NotNull<<#= Name #><TResult>>();
-<#+ } #>
-
-            return @this.Bind(_ => !predicate.Invoke(_) ? other : <#= Name #><TResult>.<#= ZeroName #>);
         }
 
 <#+ } // T4: End of HasZero. #>
@@ -169,7 +143,7 @@ public partial class MonadTemplate
                     action.Invoke(_);
 
 <#+ if (HasSuffixT) { #>
-                    return <#= Name #>.OfUnit<<#= RawSuffixT #>>();
+                    return @this.Skip();
 <#+ } else { #>
                     return <#= Name #>.Unit;
 <#+ } #>

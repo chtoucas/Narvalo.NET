@@ -196,6 +196,18 @@ namespace Monads
             return @this.Select(_ => value);
         }
 
+
+        public static Monad<Tuple<TSource, TOther>> Zip<TSource, TOther>(
+            this Monad<TSource> @this,
+            Monad<TOther> other)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+
+            return @this.Zip(other, Tuple.Create);
+        }
+
+
         #endregion
 
         #region Basic Monad functions (Prelude)
@@ -213,7 +225,7 @@ namespace Monads
         }
 
         // Named ">>" in Haskell parlance.
-        public static Monad<TResult> Then<TSource, TResult>(
+        public static Monad<TResult> Next<TSource, TResult>(
             this Monad<TSource> @this,
             Monad<TResult> other)
             /* T4: C# indent */
@@ -252,7 +264,7 @@ namespace Monads
 
         #endregion
 
-        #region Monadic lifting operators (Prelude)
+        #region Applicative lifting operators (Prelude)
 
         /// <see cref="Lift{T1, T2, T3}" />
         // Named "liftA2" in Haskell parlance.
@@ -400,7 +412,7 @@ namespace Monads
             Expect.NotNull(seq);
             Warrant.NotNull<Monad<IEnumerable<TResult>>>();
 
-            return seq.Map(@this);
+            return seq.SelectWith(@this);
         }
 
 
@@ -485,7 +497,7 @@ namespace Monads.Extensions
         {
             Require.NotNull(@this, nameof(@this));
 
-            return @this.Then(@this.Forever(thunk));
+            return @this.Next(@this.Forever(thunk));
         }
 
         #endregion
@@ -546,16 +558,6 @@ namespace Monads.Extensions
             return applicative.Apply(@this);
         }
 
-        public static Monad<Tuple<TSource, TOther>> Merge<TSource, TOther>(
-            this Monad<TSource> @this,
-            Monad<TOther> other)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-
-            return @this.Zip(other, Tuple.Create);
-        }
-
 
         #endregion
 
@@ -595,6 +597,8 @@ namespace Monads.Internal
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
+    using Narvalo.Fx.Linq;
 
     // Provides default implementations for the extension methods for IEnumerable<Monad<T>>.
     // You will certainly want to override them to improve performance.
@@ -645,8 +649,8 @@ namespace Monads.Linq
 
     // Provides extension methods for IEnumerable<T>.
     // We do not use the standard LINQ names to avoid a confusing API.
-    // - Select    -> Map
-    // - Where     -> Filter
+    // - Select    -> SelectWith
+    // - Where     -> WhereBy
     // - Zip       -> ZipWith
     // - Aggregate -> Reduce or Fold
     public static partial class Operators
@@ -655,7 +659,7 @@ namespace Monads.Linq
 
 
         // Named "mapM" in Haskell parlance.
-        public static Monad<IEnumerable<TResult>> Map<TSource, TResult>(
+        public static Monad<IEnumerable<TResult>> SelectWith<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, Monad<TResult>> selector)
         {
@@ -663,7 +667,7 @@ namespace Monads.Linq
             Expect.NotNull(selector);
             Warrant.NotNull<Monad<IEnumerable<TResult>>>();
 
-            return @this.MapImpl(selector);
+            return @this.SelectWithImpl(selector);
         }
 
 
@@ -673,7 +677,7 @@ namespace Monads.Linq
 
 
         // Named "filterM" in Haskell parlance.
-        public static Monad<IEnumerable<TSource>> Filter<TSource>(
+        public static Monad<IEnumerable<TSource>> WhereBy<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Monad<bool>> predicate)
             /* T4: C# indent */
@@ -682,19 +686,19 @@ namespace Monads.Linq
             Expect.NotNull(predicate);
             Warrant.NotNull<IEnumerable<TSource>>();
 
-            return @this.FilterImpl(predicate);
+            return @this.WhereByImpl(predicate);
         }
 
         // Named "mapAndUnzipM" in Haskell parlance.
         public static Monad<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
-            MapUnzip<TSource, TFirst, TSecond>(
+            SelectUnzip<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
             Func<TSource, Monad<Tuple<TFirst, TSecond>>> thunk)
         {
             Expect.NotNull(@this);
             Expect.NotNull(thunk);
 
-            return @this.MapUnzipImpl(thunk);
+            return @this.SelectUnzipImpl(thunk);
         }
 
         // Named "zipWithM" in Haskell parlance.
@@ -807,13 +811,14 @@ namespace Monads.Internal
     using System.Linq;
 
     using Monads.Linq;
+    using Narvalo.Fx.Linq;
 
     // Provides default implementations for the extension methods for IEnumerable<T>.
     // You will certainly want to override them to improve performance.
     internal static partial class EnumerableExtensions
     {
 
-        internal static Monad<IEnumerable<TResult>> MapImpl<TSource, TResult>(
+        internal static Monad<IEnumerable<TResult>> SelectWithImpl<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, Monad<TResult>> selector)
         {
@@ -824,7 +829,7 @@ namespace Monads.Internal
             return @this.Select(selector).EmptyIfNull().Collect();
         }
 
-        internal static Monad<IEnumerable<TSource>> FilterImpl<TSource>(
+        internal static Monad<IEnumerable<TSource>> WhereByImpl<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Monad<bool>> predicate)
             /* T4: C# indent */
@@ -846,14 +851,14 @@ namespace Monads.Internal
         }
 
         internal static Monad<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
-            MapUnzipImpl<TSource, TFirst, TSecond>(
+            SelectUnzipImpl<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
             Func<TSource, Monad<Tuple<TFirst, TSecond>>> selector)
         {
             Demand.NotNull(@this);
             Demand.NotNull(selector);
 
-            return @this.Map(selector).Select(
+            return @this.SelectWith(selector).Select(
                 tuples =>
                 {
                     IEnumerable<TFirst> list1 = tuples.Select(_ => _.Item1);

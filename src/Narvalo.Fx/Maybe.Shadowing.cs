@@ -16,7 +16,7 @@ namespace Narvalo.Fx
             return IsSome ? Maybe.Of(selector.Invoke(Value)) : Maybe<TResult>.None;
         }
 
-        public Maybe<TResult> Then<TResult>(Maybe<TResult> other)
+        public Maybe<TResult> Next<TResult>(Maybe<TResult> other)
             => IsSome ? other : Maybe<TResult>.None;
 
         #endregion
@@ -114,18 +114,11 @@ namespace Narvalo.Fx
             return IsSome && predicate.Invoke(Value) ? then : otherwise;
         }
 
-        public Maybe<TResult> Then<TResult>(Func<T, bool> predicate, Maybe<TResult> other)
+        public Maybe<TResult> If<TResult>(Func<T, bool> predicate, Maybe<TResult> other)
         {
             Require.NotNull(predicate, nameof(predicate));
 
             return IsSome && predicate.Invoke(Value) ? other : Maybe<TResult>.None;
-        }
-
-        public Maybe<TResult> Otherwise<TResult>(Func<T, bool> predicate, Maybe<TResult> other)
-        {
-            Require.NotNull(predicate, nameof(predicate));
-
-            return IsSome && !predicate.Invoke(Value) ? other : Maybe<TResult>.None;
         }
 
         public void Do(Action<T> action)
@@ -156,7 +149,7 @@ namespace Narvalo.Fx.Linq
 
     public static partial class Operators
     {
-        internal static Maybe<IEnumerable<TSource>> FilterImpl<TSource>(
+        internal static Maybe<IEnumerable<TSource>> WhereByImpl<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<bool>> predicate)
         {

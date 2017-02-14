@@ -44,7 +44,7 @@ public partial class MonadTemplate
 <#+ WriteLine(); #>
 
 <#+ if (haslinq) { #>
-            return seq.Map(@this);
+            return seq.SelectWith(@this);
 <#+ } else { #>
             return seq.Select(@this).EmptyIfNull().Collect();
 <#+ } #>

@@ -215,6 +215,18 @@ namespace Narvalo.Fx
             return @this.Select(_ => value);
         }
 
+
+        public static Maybe<Tuple<TSource, TOther>> Zip<TSource, TOther>(
+            this Maybe<TSource> @this,
+            Maybe<TOther> other)
+            /* T4: C# indent */
+        {
+            /* T4: C# indent */
+
+            return @this.Zip(other, Tuple.Create);
+        }
+
+
         #endregion
 
         #region Basic Monad functions (Prelude)
@@ -232,7 +244,7 @@ namespace Narvalo.Fx
         }
 
         // Named ">>" in Haskell parlance.
-        public static Maybe<TResult> Then<TSource, TResult>(
+        public static Maybe<TResult> Next<TSource, TResult>(
             this Maybe<TSource> @this,
             Maybe<TResult> other)
             /* T4: C# indent */
@@ -285,7 +297,7 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Monadic lifting operators (Prelude)
+        #region Applicative lifting operators (Prelude)
 
         /// <see cref="Lift{T1, T2, T3}" />
         // Named "liftA2" in Haskell parlance.
@@ -506,7 +518,7 @@ namespace Narvalo.Fx
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
-                   from innerValue in keyLookupM.Invoke(outerValue).Then(inner)
+                   from innerValue in keyLookupM.Invoke(outerValue).Next(inner)
                    select resultSelector.Invoke(outerValue, innerValue);
         }
 
@@ -528,7 +540,7 @@ namespace Narvalo.Fx
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
-                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).Then(inner));
+                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).Next(inner));
         }
 
         private static Func<TSource, Maybe<TKey>> GetKeyLookup<TSource, TInner, TKey>(
@@ -587,7 +599,7 @@ namespace Narvalo.Fx
             Expect.NotNull(@this);
             Expect.NotNull(seq);
 
-            return seq.Map(@this);
+            return seq.SelectWith(@this);
         }
 
 
@@ -686,7 +698,7 @@ namespace Narvalo.Fx.Extensions
         {
             /* T4: C# indent */
 
-            return @this.Then(@this.Forever(thunk));
+            return @this.Next(@this.Forever(thunk));
         }
 
         #endregion
@@ -747,16 +759,6 @@ namespace Narvalo.Fx.Extensions
             return applicative.Apply(@this);
         }
 
-        public static Maybe<Tuple<TSource, TOther>> Merge<TSource, TOther>(
-            this Maybe<TSource> @this,
-            Maybe<TOther> other)
-            /* T4: C# indent */
-        {
-            /* T4: C# indent */
-
-            return @this.Zip(other, Tuple.Create);
-        }
-
 
         #endregion
 
@@ -774,8 +776,7 @@ namespace Narvalo.Fx.Extensions
         }
 
 
-        // Generalizes the standard Then().
-        public static Maybe<TResult> Then<TSource, TResult>(
+        public static Maybe<TResult> If<TSource, TResult>(
             this Maybe<TSource> @this,
             Func<TSource, bool> predicate,
             Maybe<TResult> other)
@@ -785,18 +786,6 @@ namespace Narvalo.Fx.Extensions
             Require.NotNull(predicate, nameof(predicate));
 
             return @this.Bind(_ => predicate.Invoke(_) ? other : Maybe<TResult>.None);
-        }
-
-        public static Maybe<TResult> Otherwise<TSource, TResult>(
-            this Maybe<TSource> @this,
-            Func<TSource, bool> predicate,
-            Maybe<TResult> other)
-            /* T4: C# indent */
-        {
-            /* T4: C# indent */
-            Require.NotNull(predicate, nameof(predicate));
-
-            return @this.Bind(_ => !predicate.Invoke(_) ? other : Maybe<TResult>.None);
         }
 
         public static void Do<TSource>(
@@ -823,6 +812,8 @@ namespace Narvalo.Fx.Internal
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+
+    using Narvalo.Fx.Linq;
 
     // Provides default implementations for the extension methods for IEnumerable<Maybe<T>>.
     // You will certainly want to override them to improve performance.
@@ -883,8 +874,8 @@ namespace Narvalo.Fx.Linq
 
     // Provides extension methods for IEnumerable<T>.
     // We do not use the standard LINQ names to avoid a confusing API.
-    // - Select    -> Map
-    // - Where     -> Filter
+    // - Select    -> SelectWith
+    // - Where     -> WhereBy
     // - Zip       -> ZipWith
     // - Aggregate -> Reduce or Fold
     public static partial class Operators
@@ -893,14 +884,14 @@ namespace Narvalo.Fx.Linq
 
 
         // Named "mapM" in Haskell parlance.
-        public static Maybe<IEnumerable<TResult>> Map<TSource, TResult>(
+        public static Maybe<IEnumerable<TResult>> SelectWith<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<TResult>> selector)
         {
             Expect.NotNull(@this);
             Expect.NotNull(selector);
 
-            return @this.MapImpl(selector);
+            return @this.SelectWithImpl(selector);
         }
 
 
@@ -910,7 +901,7 @@ namespace Narvalo.Fx.Linq
 
 
         // Named "filterM" in Haskell parlance.
-        public static Maybe<IEnumerable<TSource>> Filter<TSource>(
+        public static Maybe<IEnumerable<TSource>> WhereBy<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<bool>> predicate)
             /* T4: C# indent */
@@ -919,19 +910,19 @@ namespace Narvalo.Fx.Linq
             Expect.NotNull(predicate);
             Warrant.NotNull<IEnumerable<TSource>>();
 
-            return @this.FilterImpl(predicate);
+            return @this.WhereByImpl(predicate);
         }
 
         // Named "mapAndUnzipM" in Haskell parlance.
         public static Maybe<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
-            MapUnzip<TSource, TFirst, TSecond>(
+            SelectUnzip<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<Tuple<TFirst, TSecond>>> thunk)
         {
             Expect.NotNull(@this);
             Expect.NotNull(thunk);
 
-            return @this.MapUnzipImpl(thunk);
+            return @this.SelectUnzipImpl(thunk);
         }
 
         // Named "zipWithM" in Haskell parlance.
@@ -1051,7 +1042,7 @@ namespace Narvalo.Fx.Internal
     {
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Maybe<IEnumerable<TResult>> MapImpl<TSource, TResult>(
+        internal static Maybe<IEnumerable<TResult>> SelectWithImpl<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<TResult>> selector)
         {
@@ -1062,7 +1053,7 @@ namespace Narvalo.Fx.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Maybe<IEnumerable<TSource>> FilterImpl<TSource>(
+        internal static Maybe<IEnumerable<TSource>> WhereByImpl<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<bool>> predicate)
             /* T4: C# indent */
@@ -1085,14 +1076,14 @@ namespace Narvalo.Fx.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Maybe<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
-            MapUnzipImpl<TSource, TFirst, TSecond>(
+            SelectUnzipImpl<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<Tuple<TFirst, TSecond>>> selector)
         {
             Demand.NotNull(@this);
             Demand.NotNull(selector);
 
-            return @this.Map(selector).Select(
+            return @this.SelectWith(selector).Select(
                 tuples =>
                 {
                     IEnumerable<TFirst> list1 = tuples.Select(_ => _.Item1);

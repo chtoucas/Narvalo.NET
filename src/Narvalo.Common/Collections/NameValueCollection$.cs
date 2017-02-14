@@ -51,7 +51,7 @@ namespace Narvalo.Collections
         {
             Expect.NotNull(@this);
 
-            return @this.MayGetValues(name).Bind(@_ => @_.Map(parserM));
+            return @this.MayGetValues(name).Bind(@_ => @_.SelectWith(parserM));
         }
     }
 }

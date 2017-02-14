@@ -232,6 +232,7 @@ namespace Monads
             return @this.Select(_ => value);
         }
 
+
         #endregion
 
         #region Basic Monad functions (Prelude)
@@ -250,7 +251,7 @@ namespace Monads
         }
 
         // Named ">>" in Haskell parlance.
-        public static MonadValue<TResult> Then<TSource, TResult>(
+        public static MonadValue<TResult> Next<TSource, TResult>(
             this MonadValue<TSource> @this,
             MonadValue<TResult> other)
             where TSource : struct
@@ -291,7 +292,7 @@ namespace Monads
 
         #endregion
 
-        #region Monadic lifting operators (Prelude)
+        #region Applicative lifting operators (Prelude)
 
         /// <see cref="Lift{T1, T2, T3}" />
         // Named "liftA2" in Haskell parlance.
@@ -543,7 +544,7 @@ namespace Monads
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
-                   from innerValue in keyLookupM.Invoke(outerValue).Then(inner)
+                   from innerValue in keyLookupM.Invoke(outerValue).Next(inner)
                    select resultSelector.Invoke(outerValue, innerValue);
         }
 
@@ -568,7 +569,7 @@ namespace Monads
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
-                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).Then(inner));
+                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).Next(inner));
         }
 
         private static Func<TSource, MonadValue<TKey>> GetKeyLookup<TSource, TInner, TKey>(
@@ -700,7 +701,7 @@ namespace Monads.Extensions
         {
             /* T4: C# indent */
 
-            return @this.Then(@this.Forever(thunk));
+            return @this.Next(@this.Forever(thunk));
         }
 
         #endregion
@@ -767,8 +768,7 @@ namespace Monads.Extensions
         }
 
 
-        // Generalizes the standard Then().
-        public static MonadValue<TResult> Then<TSource, TResult>(
+        public static MonadValue<TResult> If<TSource, TResult>(
             this MonadValue<TSource> @this,
             Func<TSource, bool> predicate,
             MonadValue<TResult> other)
@@ -779,19 +779,6 @@ namespace Monads.Extensions
             Require.NotNull(predicate, nameof(predicate));
 
             return @this.Bind(_ => predicate.Invoke(_) ? other : MonadValue<TResult>.None);
-        }
-
-        public static MonadValue<TResult> Otherwise<TSource, TResult>(
-            this MonadValue<TSource> @this,
-            Func<TSource, bool> predicate,
-            MonadValue<TResult> other)
-            where TSource : struct
-            where TResult : struct
-        {
-            /* T4: C# indent */
-            Require.NotNull(predicate, nameof(predicate));
-
-            return @this.Bind(_ => !predicate.Invoke(_) ? other : MonadValue<TResult>.None);
         }
 
         public static void Do<TSource>(
@@ -817,6 +804,8 @@ namespace Monads.Internal
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
+    using Narvalo.Fx.Linq;
 
     // Provides default implementations for the extension methods for IEnumerable<MonadValue<T>>.
     // You will certainly want to override them to improve performance.
@@ -847,8 +836,8 @@ namespace Monads.Linq
 
     // Provides extension methods for IEnumerable<T>.
     // We do not use the standard LINQ names to avoid a confusing API.
-    // - Select    -> Map
-    // - Where     -> Filter
+    // - Select    -> SelectWith
+    // - Where     -> WhereBy
     // - Zip       -> ZipWith
     // - Aggregate -> Reduce or Fold
     public static partial class Operators
@@ -959,6 +948,7 @@ namespace Monads.Internal
     using System.Linq;
 
     using Monads.Linq;
+    using Narvalo.Fx.Linq;
 
     // Provides default implementations for the extension methods for IEnumerable<T>.
     // You will certainly want to override them to improve performance.

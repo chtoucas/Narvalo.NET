@@ -19,6 +19,7 @@ namespace Narvalo.Fx
     using System.Linq;
 
     using Narvalo.Fx.Internal;
+    using Narvalo.Fx.Linq;
 
     /// <summary>
     /// Provides a set of static methods for <see cref="Result{T, TError}"/>.
@@ -26,14 +27,6 @@ namespace Narvalo.Fx
     // NB: Sometimes we prefer extension methods over static methods to be able to override them locally.
     public static partial class Result
     {
-
-        public static Result<global::Narvalo.Fx.Unit, TError> OfUnit<TError>()
-        {
-            Warrant.NotNull<Result<global::Narvalo.Fx.Unit, TError>>();
-
-            return Result.Of<Unit, TError>(global::Narvalo.Fx.Unit.Single);
-        }
-
 
         /// <summary>
         /// Obtains an instance of the <see cref="Result{T}"/> class for the specified value.
@@ -183,6 +176,18 @@ namespace Narvalo.Fx
             return @this.Select(_ => value);
         }
 
+
+        public static Result<Tuple<TSource, TOther>, TError> Zip<TSource, TOther, TError>(
+            this Result<TSource, TError> @this,
+            Result<TOther, TError> other)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+
+            return @this.Zip(other, Tuple.Create);
+        }
+
+
         #endregion
 
         #region Basic Monad functions (Prelude)
@@ -200,7 +205,7 @@ namespace Narvalo.Fx
         }
 
         // Named ">>" in Haskell parlance.
-        public static Result<TResult, TError> Then<TSource, TResult, TError>(
+        public static Result<TResult, TError> Next<TSource, TResult, TError>(
             this Result<TSource, TError> @this,
             Result<TResult, TError> other)
             /* T4: C# indent */
@@ -218,7 +223,7 @@ namespace Narvalo.Fx
             Require.NotNull(@this, nameof(@this));
             Warrant.NotNull<Result<global::Narvalo.Fx.Unit, TError>>();
 
-            return Result.OfUnit<TError>();
+            return Result.Of<Unit, TError>(global::Narvalo.Fx.Unit.Single);
         }
 
         #endregion
@@ -240,7 +245,7 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Monadic lifting operators (Prelude)
+        #region Applicative lifting operators (Prelude)
 
         /// <see cref="Lift{T1, T2, T3}" />
         // Named "liftA2" in Haskell parlance.
@@ -473,7 +478,7 @@ namespace Narvalo.Fx.Extensions
         {
             Require.NotNull(@this, nameof(@this));
 
-            return @this.Then(@this.Forever(thunk));
+            return @this.Next(@this.Forever(thunk));
         }
 
         #endregion
@@ -495,7 +500,7 @@ namespace Narvalo.Fx.Extensions
                 _ => {
                     if (predicate.Invoke(_)) { action.Invoke(_); }
 
-                    return Result.OfUnit<TError>();
+                    return @this.Skip();
                 });
         }
 
@@ -514,7 +519,7 @@ namespace Narvalo.Fx.Extensions
                 _ => {
                     if (!predicate.Invoke(_)) { action.Invoke(_); }
 
-                    return Result.OfUnit<TError>();
+                    return @this.Skip();
                 });
         }
 
@@ -532,16 +537,6 @@ namespace Narvalo.Fx.Extensions
             Require.NotNull(applicative, nameof(applicative));
 
             return applicative.Apply(@this);
-        }
-
-        public static Result<Tuple<TSource, TOther>, TError> Merge<TSource, TOther, TError>(
-            this Result<TSource, TError> @this,
-            Result<TOther, TError> other)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-
-            return @this.Zip(other, Tuple.Create);
         }
 
 
@@ -572,7 +567,7 @@ namespace Narvalo.Fx.Extensions
                 _ => {
                     action.Invoke(_);
 
-                    return Result.OfUnit<TError>();
+                    return @this.Skip();
                 });
         }
     } // End of Result - T4: EmitMonadExtraExtensions().
@@ -584,6 +579,8 @@ namespace Narvalo.Fx.Internal
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+
+    using Narvalo.Fx.Linq;
 
     // Provides default implementations for the extension methods for IEnumerable<Result<T, TError>>.
     // You will certainly want to override them to improve performance.

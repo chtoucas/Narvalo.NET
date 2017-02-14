@@ -52,6 +52,9 @@ namespace <#= Namespace #>
 <#+ if (emitlinq) { #>
     using <#= Namespace #>.Linq;
 <#+ } #>
+<#+ if (!emitlinq) { #>
+    using Narvalo.Fx.Linq;
+<#+ } #>
 
 <#+
     WriteLine();
@@ -83,6 +86,8 @@ namespace <#= Namespace #>.Internal
     using System.Diagnostics.CodeAnalysis;
 <#+ } #>
     using System.Linq;
+
+    using Narvalo.Fx.Linq;
 
 <#+ EmitMonadEnumerableInternalExtensions(); #>
 }
@@ -140,7 +145,11 @@ namespace <#= Namespace #>.Internal
     using System.Linq;
 
     using <#= Namespace #>.Linq;
+<#+ if (!Namespace.StartsWith("Narvalo.")) { #>
+    using Narvalo.Fx.Linq;
+<#+ } #>
 
+<#+ WriteLine(); #>
 <#+ EmitEnumerableInternalExtensions(); #>
 }
 <#+

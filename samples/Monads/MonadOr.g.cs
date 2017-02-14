@@ -223,6 +223,18 @@ namespace Monads
             return @this.Select(_ => value);
         }
 
+
+        public static MonadOr<Tuple<TSource, TOther>> Zip<TSource, TOther>(
+            this MonadOr<TSource> @this,
+            MonadOr<TOther> other)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+
+            return @this.Zip(other, Tuple.Create);
+        }
+
+
         #endregion
 
         #region Basic Monad functions (Prelude)
@@ -241,7 +253,7 @@ namespace Monads
         }
 
         // Named ">>" in Haskell parlance.
-        public static MonadOr<TResult> Then<TSource, TResult>(
+        public static MonadOr<TResult> Next<TSource, TResult>(
             this MonadOr<TSource> @this,
             MonadOr<TResult> other)
             /* T4: C# indent */
@@ -297,7 +309,7 @@ namespace Monads
 
         #endregion
 
-        #region Monadic lifting operators (Prelude)
+        #region Applicative lifting operators (Prelude)
 
         /// <see cref="Lift{T1, T2, T3}" />
         // Named "liftA2" in Haskell parlance.
@@ -535,7 +547,7 @@ namespace Monads
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
-                   from innerValue in keyLookupM.Invoke(outerValue).Then(inner)
+                   from innerValue in keyLookupM.Invoke(outerValue).Next(inner)
                    select resultSelector.Invoke(outerValue, innerValue);
         }
 
@@ -559,7 +571,7 @@ namespace Monads
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
-                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).Then(inner));
+                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).Next(inner));
         }
 
         private static Func<TSource, MonadOr<TKey>> GetKeyLookup<TSource, TInner, TKey>(
@@ -619,7 +631,7 @@ namespace Monads
             Expect.NotNull(seq);
             Warrant.NotNull<MonadOr<IEnumerable<TResult>>>();
 
-            return seq.Map(@this);
+            return seq.SelectWith(@this);
         }
 
 
@@ -722,7 +734,7 @@ namespace Monads.Extensions
             Require.NotNull(@this, nameof(@this));
             Warrant.NotNull<MonadOr<TResult>>();
 
-            return @this.Then(@this.Forever(thunk));
+            return @this.Next(@this.Forever(thunk));
         }
 
         #endregion
@@ -783,16 +795,6 @@ namespace Monads.Extensions
             return applicative.Apply(@this);
         }
 
-        public static MonadOr<Tuple<TSource, TOther>> Merge<TSource, TOther>(
-            this MonadOr<TSource> @this,
-            MonadOr<TOther> other)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-
-            return @this.Zip(other, Tuple.Create);
-        }
-
 
         #endregion
 
@@ -811,8 +813,7 @@ namespace Monads.Extensions
         }
 
 
-        // Generalizes the standard Then().
-        public static MonadOr<TResult> Then<TSource, TResult>(
+        public static MonadOr<TResult> If<TSource, TResult>(
             this MonadOr<TSource> @this,
             Func<TSource, bool> predicate,
             MonadOr<TResult> other)
@@ -823,19 +824,6 @@ namespace Monads.Extensions
             Warrant.NotNull<MonadOr<TResult>>();
 
             return @this.Bind(_ => predicate.Invoke(_) ? other : MonadOr<TResult>.None);
-        }
-
-        public static MonadOr<TResult> Otherwise<TSource, TResult>(
-            this MonadOr<TSource> @this,
-            Func<TSource, bool> predicate,
-            MonadOr<TResult> other)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            Warrant.NotNull<MonadOr<TResult>>();
-
-            return @this.Bind(_ => !predicate.Invoke(_) ? other : MonadOr<TResult>.None);
         }
 
         public static void Do<TSource>(
@@ -861,6 +849,8 @@ namespace Monads.Internal
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
+    using Narvalo.Fx.Linq;
 
     // Provides default implementations for the extension methods for IEnumerable<MonadOr<T>>.
     // You will certainly want to override them to improve performance.
@@ -924,8 +914,8 @@ namespace Monads.Linq
 
     // Provides extension methods for IEnumerable<T>.
     // We do not use the standard LINQ names to avoid a confusing API.
-    // - Select    -> Map
-    // - Where     -> Filter
+    // - Select    -> SelectWith
+    // - Where     -> WhereBy
     // - Zip       -> ZipWith
     // - Aggregate -> Reduce or Fold
     public static partial class Operators
@@ -934,7 +924,7 @@ namespace Monads.Linq
 
 
         // Named "mapM" in Haskell parlance.
-        public static MonadOr<IEnumerable<TResult>> Map<TSource, TResult>(
+        public static MonadOr<IEnumerable<TResult>> SelectWith<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, MonadOr<TResult>> selector)
         {
@@ -942,7 +932,7 @@ namespace Monads.Linq
             Expect.NotNull(selector);
             Warrant.NotNull<MonadOr<IEnumerable<TResult>>>();
 
-            return @this.MapImpl(selector);
+            return @this.SelectWithImpl(selector);
         }
 
 
@@ -952,7 +942,7 @@ namespace Monads.Linq
 
 
         // Named "filterM" in Haskell parlance.
-        public static MonadOr<IEnumerable<TSource>> Filter<TSource>(
+        public static MonadOr<IEnumerable<TSource>> WhereBy<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, MonadOr<bool>> predicate)
             /* T4: C# indent */
@@ -961,12 +951,12 @@ namespace Monads.Linq
             Expect.NotNull(predicate);
             Warrant.NotNull<IEnumerable<TSource>>();
 
-            return @this.FilterImpl(predicate);
+            return @this.WhereByImpl(predicate);
         }
 
         // Named "mapAndUnzipM" in Haskell parlance.
         public static MonadOr<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
-            MapUnzip<TSource, TFirst, TSecond>(
+            SelectUnzip<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
             Func<TSource, MonadOr<Tuple<TFirst, TSecond>>> thunk)
         {
@@ -974,7 +964,7 @@ namespace Monads.Linq
             Expect.NotNull(thunk);
             Warrant.NotNull<MonadOr<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>();
 
-            return @this.MapUnzipImpl(thunk);
+            return @this.SelectUnzipImpl(thunk);
         }
 
         // Named "zipWithM" in Haskell parlance.
@@ -1093,13 +1083,14 @@ namespace Monads.Internal
     using System.Linq;
 
     using Monads.Linq;
+    using Narvalo.Fx.Linq;
 
     // Provides default implementations for the extension methods for IEnumerable<T>.
     // You will certainly want to override them to improve performance.
     internal static partial class EnumerableExtensions
     {
 
-        internal static MonadOr<IEnumerable<TResult>> MapImpl<TSource, TResult>(
+        internal static MonadOr<IEnumerable<TResult>> SelectWithImpl<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, MonadOr<TResult>> selector)
         {
@@ -1110,7 +1101,7 @@ namespace Monads.Internal
             return @this.Select(selector).EmptyIfNull().Collect();
         }
 
-        internal static MonadOr<IEnumerable<TSource>> FilterImpl<TSource>(
+        internal static MonadOr<IEnumerable<TSource>> WhereByImpl<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, MonadOr<bool>> predicate)
             /* T4: C# indent */
@@ -1132,7 +1123,7 @@ namespace Monads.Internal
         }
 
         internal static MonadOr<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
-            MapUnzipImpl<TSource, TFirst, TSecond>(
+            SelectUnzipImpl<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
             Func<TSource, MonadOr<Tuple<TFirst, TSecond>>> selector)
         {
@@ -1140,7 +1131,7 @@ namespace Monads.Internal
             Demand.NotNull(selector);
             Warrant.NotNull<MonadOr<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>();
 
-            return @this.Map(selector).Select(
+            return @this.SelectWith(selector).Select(
                 tuples =>
                 {
                     IEnumerable<TFirst> list1 = tuples.Select(_ => _.Item1);

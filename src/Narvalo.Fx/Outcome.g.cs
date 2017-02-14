@@ -195,6 +195,18 @@ namespace Narvalo.Fx
             return @this.Select(_ => value);
         }
 
+
+        public static Outcome<Tuple<TSource, TOther>> Zip<TSource, TOther>(
+            this Outcome<TSource> @this,
+            Outcome<TOther> other)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+
+            return @this.Zip(other, Tuple.Create);
+        }
+
+
         #endregion
 
         #region Basic Monad functions (Prelude)
@@ -212,7 +224,7 @@ namespace Narvalo.Fx
         }
 
         // Named ">>" in Haskell parlance.
-        public static Outcome<TResult> Then<TSource, TResult>(
+        public static Outcome<TResult> Next<TSource, TResult>(
             this Outcome<TSource> @this,
             Outcome<TResult> other)
             /* T4: C# indent */
@@ -252,7 +264,7 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Monadic lifting operators (Prelude)
+        #region Applicative lifting operators (Prelude)
 
         /// <see cref="Lift{T1, T2, T3}" />
         // Named "liftA2" in Haskell parlance.
@@ -400,7 +412,7 @@ namespace Narvalo.Fx
             Expect.NotNull(seq);
             Warrant.NotNull<Outcome<IEnumerable<TResult>>>();
 
-            return seq.Map(@this);
+            return seq.SelectWith(@this);
         }
 
 
@@ -485,7 +497,7 @@ namespace Narvalo.Fx.Extensions
         {
             Require.NotNull(@this, nameof(@this));
 
-            return @this.Then(@this.Forever(thunk));
+            return @this.Next(@this.Forever(thunk));
         }
 
         #endregion
@@ -546,16 +558,6 @@ namespace Narvalo.Fx.Extensions
             return applicative.Apply(@this);
         }
 
-        public static Outcome<Tuple<TSource, TOther>> Merge<TSource, TOther>(
-            this Outcome<TSource> @this,
-            Outcome<TOther> other)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-
-            return @this.Zip(other, Tuple.Create);
-        }
-
 
         #endregion
 
@@ -596,6 +598,8 @@ namespace Narvalo.Fx.Internal
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+
+    using Narvalo.Fx.Linq;
 
     // Provides default implementations for the extension methods for IEnumerable<Outcome<T>>.
     // You will certainly want to override them to improve performance.
@@ -647,8 +651,8 @@ namespace Narvalo.Fx.Linq
 
     // Provides extension methods for IEnumerable<T>.
     // We do not use the standard LINQ names to avoid a confusing API.
-    // - Select    -> Map
-    // - Where     -> Filter
+    // - Select    -> SelectWith
+    // - Where     -> WhereBy
     // - Zip       -> ZipWith
     // - Aggregate -> Reduce or Fold
     public static partial class Operators
@@ -657,7 +661,7 @@ namespace Narvalo.Fx.Linq
 
 
         // Named "mapM" in Haskell parlance.
-        public static Outcome<IEnumerable<TResult>> Map<TSource, TResult>(
+        public static Outcome<IEnumerable<TResult>> SelectWith<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, Outcome<TResult>> selector)
         {
@@ -665,7 +669,7 @@ namespace Narvalo.Fx.Linq
             Expect.NotNull(selector);
             Warrant.NotNull<Outcome<IEnumerable<TResult>>>();
 
-            return @this.MapImpl(selector);
+            return @this.SelectWithImpl(selector);
         }
 
 
@@ -675,7 +679,7 @@ namespace Narvalo.Fx.Linq
 
 
         // Named "filterM" in Haskell parlance.
-        public static Outcome<IEnumerable<TSource>> Filter<TSource>(
+        public static Outcome<IEnumerable<TSource>> WhereBy<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Outcome<bool>> predicate)
             /* T4: C# indent */
@@ -684,19 +688,19 @@ namespace Narvalo.Fx.Linq
             Expect.NotNull(predicate);
             Warrant.NotNull<IEnumerable<TSource>>();
 
-            return @this.FilterImpl(predicate);
+            return @this.WhereByImpl(predicate);
         }
 
         // Named "mapAndUnzipM" in Haskell parlance.
         public static Outcome<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
-            MapUnzip<TSource, TFirst, TSecond>(
+            SelectUnzip<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
             Func<TSource, Outcome<Tuple<TFirst, TSecond>>> thunk)
         {
             Expect.NotNull(@this);
             Expect.NotNull(thunk);
 
-            return @this.MapUnzipImpl(thunk);
+            return @this.SelectUnzipImpl(thunk);
         }
 
         // Named "zipWithM" in Haskell parlance.
@@ -817,7 +821,7 @@ namespace Narvalo.Fx.Internal
     {
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Outcome<IEnumerable<TResult>> MapImpl<TSource, TResult>(
+        internal static Outcome<IEnumerable<TResult>> SelectWithImpl<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, Outcome<TResult>> selector)
         {
@@ -829,7 +833,7 @@ namespace Narvalo.Fx.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Outcome<IEnumerable<TSource>> FilterImpl<TSource>(
+        internal static Outcome<IEnumerable<TSource>> WhereByImpl<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Outcome<bool>> predicate)
             /* T4: C# indent */
@@ -852,14 +856,14 @@ namespace Narvalo.Fx.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Outcome<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
-            MapUnzipImpl<TSource, TFirst, TSecond>(
+            SelectUnzipImpl<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
             Func<TSource, Outcome<Tuple<TFirst, TSecond>>> selector)
         {
             Demand.NotNull(@this);
             Demand.NotNull(selector);
 
-            return @this.Map(selector).Select(
+            return @this.SelectWith(selector).Select(
                 tuples =>
                 {
                     IEnumerable<TFirst> list1 = tuples.Select(_ => _.Item1);
