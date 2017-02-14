@@ -564,14 +564,6 @@ namespace Narvalo.Fx
     // Provides extension methods for IEnumerable<Result<T, TError>>.
     public static partial class Sequence
     {
-        public static Result<IEnumerable<TSource>, TError> Collect<TSource, TError>(
-            this IEnumerable<Result<TSource, TError>> @this)
-        {
-            Require.NotNull(@this, nameof(@this));
-
-            return Result.Of<IEnumerable<TSource>, TError>(CollectAnyIterator(@this));
-        }
-
         public static IEnumerable<TSource> CollectAny<TSource, TError>(this IEnumerable<Result<TSource, TError>> @this)
         {
             Require.NotNull(@this, nameof(@this));

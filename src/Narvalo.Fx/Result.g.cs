@@ -20,7 +20,154 @@ namespace Narvalo.Fx
 
     using Narvalo.Fx.Internal;
 
-    // Provides the core monadic extension methods for Result<T>.
+    /// <summary>
+    /// Provides a set of static methods for <see cref="Result{T, TError}"/>.
+    /// </summary>
+    // NB: Sometimes we prefer extension methods over static methods to be able to override them locally.
+    public static partial class Result
+    {
+
+        public static Result<global::Narvalo.Fx.Unit, TError> OfUnit<TError>()
+        {
+            Warrant.NotNull<Result<global::Narvalo.Fx.Unit, TError>>();
+
+            return Result.Of<Unit, TError>(global::Narvalo.Fx.Unit.Single);
+        }
+
+
+        /// <summary>
+        /// Obtains an instance of the <see cref="Result{T}"/> class for the specified value.
+        /// </summary>
+        /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
+        /// <param name="value">A value to be wrapped into a <see cref="Result{T}"/> object.</param>
+        /// <returns>An instance of the <see cref="Result{T}"/> class for the specified value.</returns>
+        // Named "return" in Haskell parlance.
+        public static Result<T, TError> Of<T, TError>(T value)
+            /* T4: C# indent */
+        {
+            Warrant.NotNull<Result<T, TError>>();
+
+            return Result<T, TError>.η(value);
+        }
+
+        #region Generalisations of list functions (Prelude)
+
+        /// <summary>
+        /// Removes one level of structure, projecting its bound value into the outer level.
+        /// </summary>
+        // Named "join" in Haskell parlance.
+        public static Result<T, TError> Flatten<T, TError>(Result<Result<T, TError>, TError> square)
+            /* T4: C# indent */
+        {
+            Expect.NotNull(square);
+
+            return Result<T, TError>.μ(square);
+        }
+
+        #endregion
+
+        #region Conditional execution of monadic expressions (Prelude)
+
+
+        #endregion
+
+        #region Monadic lifting operators (Prelude)
+
+        /// <summary>
+        /// Promotes a function to use and return <see cref="Result{T, TError}" /> values.
+        /// </summary>
+        // Named "liftM" in Haskell parlance.
+        public static Func<Result<T, TError>, Result<TResult, TError>> Lift<T, TResult, TError>(
+            Func<T, TResult> thunk)
+            /* T4: C# indent */
+        {
+            Warrant.NotNull<Func<Result<T, TError>, Result<TResult, TError>>>();
+
+            return m =>
+            {
+                Require.NotNull(m, nameof(m));
+                return m.Select(thunk);
+            };
+        }
+
+        /// <summary>
+        /// Promotes a function to use and return <see cref="Result{T, TError}" /> values, scanning the
+        /// monadic arguments from left to right.
+        /// </summary>
+        // Named "liftM2" in Haskell parlance.
+        public static Func<Result<T1, TError>, Result<T2, TError>, Result<TResult, TError>>
+            Lift<T1, T2, TResult, TError>(Func<T1, T2, TResult> thunk)
+            /* T4: C# indent */
+        {
+            Warrant.NotNull<Func<Result<T1, TError>, Result<T2, TError>, Result<TResult, TError>>>();
+
+            return (m1, m2) =>
+            {
+                Require.NotNull(m1, nameof(m1));
+                return m1.Zip(m2, thunk);
+            };
+        }
+
+        /// <summary>
+        /// Promotes a function to use and return <see cref="Result{T, TError}" /> values, scanning the
+        /// monadic arguments from left to right.
+        /// </summary>
+        // Named "liftM3" in Haskell parlance.
+        public static Func<Result<T1, TError>, Result<T2, TError>, Result<T3, TError>, Result<TResult, TError>>
+            Lift<T1, T2, T3, TResult, TError>(Func<T1, T2, T3, TResult> thunk)
+            /* T4: C# indent */
+        {
+            Warrant.NotNull<Func<Result<T1, TError>, Result<T2, TError>, Result<T3, TError>, Result<TResult, TError>>>();
+
+            return (m1, m2, m3) =>
+            {
+                Require.NotNull(m1, nameof(m1));
+                return m1.Zip(m2, m3, thunk);
+            };
+        }
+
+        /// <summary>
+        /// Promotes a function to use and return <see cref="Result{T, TError}" /> values, scanning the
+        /// monadic arguments from left to right.
+        /// </summary>
+        // Named "liftM4" in Haskell parlance.
+        public static Func<Result<T1, TError>, Result<T2, TError>, Result<T3, TError>, Result<T4, TError>, Result<TResult, TError>>
+            Lift<T1, T2, T3, T4, TResult, TError>(
+            Func<T1, T2, T3, T4, TResult> thunk)
+            /* T4: C# indent */
+        {
+            Warrant.NotNull<Func<Result<T1, TError>, Result<T2, TError>, Result<T3, TError>, Result<T4, TError>, Result<TResult, TError>>>();
+
+            return (m1, m2, m3, m4) =>
+            {
+                Require.NotNull(m1, nameof(m1));
+                return m1.Zip(m2, m3, m4, thunk);
+            };
+        }
+
+        /// <summary>
+        /// Promotes a function to use and return <see cref="Result{T, TError}" /> values, scanning the
+        /// monadic arguments from left to right.
+        /// </summary>
+        // Named "liftM5" in Haskell parlance.
+        public static Func<Result<T1, TError>, Result<T2, TError>, Result<T3, TError>, Result<T4, TError>, Result<T5, TError>, Result<TResult, TError>>
+            Lift<T1, T2, T3, T4, T5, TResult, TError>(
+            Func<T1, T2, T3, T4, T5, TResult> thunk)
+            /* T4: C# indent */
+        {
+            Warrant.NotNull<Func<Result<T1, TError>, Result<T2, TError>, Result<T3, TError>, Result<T4, TError>, Result<T5, TError>, Result<TResult, TError>>>();
+
+            return (m1, m2, m3, m4, m5) =>
+            {
+                Require.NotNull(m1, nameof(m1));
+                return m1.Zip(m2, m3, m4, m5, thunk);
+            };
+        }
+
+        #endregion
+    } // End of Result - T4: EmitMonadCore().
+
+    // Provides the core monadic extension methods for Result<T, TError>.
     public static partial class Result
     {
         #region Applicative
@@ -50,7 +197,6 @@ namespace Narvalo.Fx
             Require.NotNull(selector, nameof(selector));
 
             return @this.Bind(_ => Result.Of<TResult, TError>(selector.Invoke(_)));
-            //return @this.Bind(_ => Result.Of<TResult, TError>(selector.Invoke(_)));
         }
 
         // Named ">>" in Haskell parlance.
@@ -72,7 +218,7 @@ namespace Narvalo.Fx
             Require.NotNull(@this, nameof(@this));
             Warrant.NotNull<Result<global::Narvalo.Fx.Unit, TError>>();
 
-            return Result.Of<Unit, TError>(global::Narvalo.Fx.Unit.Single);
+            return Result.OfUnit<TError>();
         }
 
         #endregion
@@ -209,4 +355,272 @@ namespace Narvalo.Fx
 
         #endregion
     } // End of Result - T4: EmitMonadExtensions().
+
+    // Provides extension methods for Func<T> in the Kleisli category + one Applicative.
+    public static partial class Func
+    {
+        #region Applicative
+
+
+        // Named "<**>" in Haskell parlance. Same as Gather (<*>) with its arguments flipped.
+        public static Result<TResult, TError> Apply<TSource, TResult, TError>(
+            this Result<Func<TSource, TResult>, TError> @this,
+            Result<TSource, TError> value)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(value, nameof(value));
+
+            return @this.Bind(thunk => value.Select(v => thunk.Invoke(v)));
+        }
+
+
+        #endregion
+
+        #region Basic Monad functions (Prelude)
+
+
+        // Named "forM" in Haskell parlance. Same as Map (mapM) with its arguments flipped.
+        public static Result<IEnumerable<TResult>, TError> ForEach<TSource, TResult, TError>(
+            this Func<TSource, Result<TResult, TError>> @this,
+            IEnumerable<TSource> seq)
+        {
+            Expect.NotNull(@this);
+            Expect.NotNull(seq);
+            Warrant.NotNull<Result<IEnumerable<TResult>, TError>>();
+
+            return seq.Select(@this).EmptyIfNull().Collect();
+        }
+
+
+        // Named "=<<" in Haskell parlance. Same as Bind (>>=) with its arguments flipped.
+        public static Result<TResult, TError> Invoke<TSource, TResult, TError>(
+            this Func<TSource, Result<TResult, TError>> @this,
+            Result<TSource, TError> value)
+            /* T4: C# indent */
+        {
+            Expect.NotNull(@this);
+            Require.NotNull(value, nameof(value));
+
+            return value.Bind(@this);
+        }
+
+        // Named ">=>" in Haskell parlance.
+        public static Func<TSource, Result<TResult, TError>> Compose<TSource, TMiddle, TResult, TError>(
+            this Func<TSource, Result<TMiddle, TError>> @this,
+            Func<TMiddle, Result<TResult, TError>> thunk)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Expect.NotNull(thunk);
+            Warrant.NotNull<Func<TSource, Result<TResult, TError>>>();
+
+            return _ => @this.Invoke(_).Bind(thunk);
+        }
+
+        // Named "<=<" in Haskell parlance.
+        public static Func<TSource, Result<TResult, TError>> ComposeBack<TSource, TMiddle, TResult, TError>(
+            this Func<TMiddle, Result<TResult, TError>> @this,
+            Func<TSource, Result<TMiddle, TError>> thunk)
+            /* T4: C# indent */
+        {
+            Expect.NotNull(@this);
+            Require.NotNull(thunk, nameof(thunk));
+            Warrant.NotNull<Func<TSource, Result<TResult, TError>>>();
+
+            return _ => thunk.Invoke(_).Bind(@this);
+        }
+
+        #endregion
+    } // End of Func - T4: EmitKleisliExtensions().
+
+    // Provides extension methods for IEnumerable<Result<T, TError>>.
+    public static partial class Sequence
+    {
+        #region Basic Monad functions (Prelude)
+
+
+        // Named "sequence" in Haskell parlance.
+        public static Result<IEnumerable<TSource>, TError> Collect<TSource, TError>(
+            this IEnumerable<Result<TSource, TError>> @this)
+        {
+            Expect.NotNull(@this);
+            Warrant.NotNull<Result<IEnumerable<TSource>, TError>>();
+
+            return @this.CollectImpl();
+        }
+
+
+        #endregion
+
+    } // End of Sequence - T4: EmitMonadEnumerableExtensions().
+}
+
+namespace Narvalo.Fx.Extensions
+{
+    using System;
+
+    // Provides more extension methods for Result<T, TError>.
+    public static partial class ResultExtensions
+    {
+        #region Basic Monad functions (Prelude)
+
+        // Named "forever" in Haskell parlance.
+        public static Result<TResult, TError> Forever<TSource, TResult, TError>(
+            this Result<TSource, TError> @this,
+            Func<Result<TResult, TError>> thunk
+            )
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+
+            return @this.Then(@this.Forever(thunk));
+        }
+
+        #endregion
+
+        #region Conditional execution of monadic expressions (Prelude)
+
+        // Named "when" in Haskell parlance. Haskell uses a different signature.
+        public static void When<TSource, TError>(
+            this Result<TSource, TError> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(
+                _ => {
+                    if (predicate.Invoke(_)) { action.Invoke(_); }
+
+                    return Result.OfUnit<TError>();
+                });
+        }
+
+        // Named "unless" in Haskell parlance. Haskell uses a different signature.
+        public static void Unless<TSource, TError>(
+            this Result<TSource, TError> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(
+                _ => {
+                    if (!predicate.Invoke(_)) { action.Invoke(_); }
+
+                    return Result.OfUnit<TError>();
+                });
+        }
+
+        #endregion
+
+        #region Applicative
+
+
+        // Named "<*>" in Haskell parlance. Same as Apply (<**>) with its arguments flipped.
+        public static Result<TResult, TError> Gather<TSource, TResult, TError>(
+            this Result<TSource, TError> @this,
+            Result<Func<TSource, TResult>, TError> applicative)
+            /* T4: C# indent */
+        {
+            Require.NotNull(applicative, nameof(applicative));
+
+            return applicative.Apply(@this);
+        }
+
+        public static Result<Tuple<TSource, TOther>, TError> Merge<TSource, TOther, TError>(
+            this Result<TSource, TError> @this,
+            Result<TOther, TError> other)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+
+            return @this.Zip(other, Tuple.Create);
+        }
+
+
+        #endregion
+
+        public static Result<TResult, TError> Coalesce<TSource, TResult, TError>(
+            this Result<TSource, TError> @this,
+            Func<TSource, bool> predicate,
+            Result<TResult, TError> then,
+            Result<TResult, TError> otherwise)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+
+            return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
+        }
+
+        public static void Do<TSource, TError>(
+            this Result<TSource, TError> @this,
+            Action<TSource> action)
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(
+                _ => {
+                    action.Invoke(_);
+
+                    return Result.OfUnit<TError>();
+                });
+        }
+    } // End of Result - T4: EmitMonadExtraExtensions().
+}
+
+namespace Narvalo.Fx.Internal
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
+
+    // Provides default implementations for the extension methods for IEnumerable<Result<T, TError>>.
+    // You will certainly want to override them to improve performance.
+    internal static partial class EnumerableExtensions
+    {
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static Result<IEnumerable<TSource>, TError> CollectImpl<TSource, TError>(
+            this IEnumerable<Result<TSource, TError>> @this)
+        {
+            Demand.NotNull(@this);
+            Warrant.NotNull<Result<IEnumerable<TSource>, TError>>();
+
+            var seed = Result.Of<IEnumerable<TSource>, TError>(Enumerable.Empty<TSource>());
+            //var seed = Result.Of(Enumerable.Empty<TSource>());
+            // Inlined LINQ Append method:
+            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (m, item) => m.Append(item);
+
+            // NB: Maybe.Lift(append) is the same as:
+            // Func<Result<IEnumerable<TSource>>, Result<TSource>, Result<IEnumerable<TSource>>> liftedAppend
+            //     = (m, item) => m.Bind(list => Append(list, item));
+            // where Append is defined below.
+            var retval = @this.Aggregate(seed, Result.Lift<IEnumerable<TSource>, TSource, IEnumerable<TSource>, TError>(append));
+            System.Diagnostics.Contracts.Contract.Assume(retval != null);
+
+            return retval;
+        }
+
+        // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
+        //private static Result<IEnumerable<TSource>> Append<TSource>(
+        //    IEnumerable<TSource> list,
+        //    Result<TSource> m)
+        //{
+        //    Demand.NotNull(m);
+
+        //    return m.Bind(item => Result.Of(list.Concat(Enumerable.Repeat(item, 1))));
+        //}
+
+    } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
 }

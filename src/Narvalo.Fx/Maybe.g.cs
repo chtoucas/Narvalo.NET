@@ -229,7 +229,6 @@ namespace Narvalo.Fx
             Require.NotNull(selector, nameof(selector));
 
             return @this.Bind(_ => Maybe.Of(selector.Invoke(_)));
-            //return @this.Bind(_ => Maybe.Of<TResult>(selector.Invoke(_)));
         }
 
         // Named ">>" in Haskell parlance.
@@ -587,6 +586,7 @@ namespace Narvalo.Fx
         {
             Expect.NotNull(@this);
             Expect.NotNull(seq);
+
             return seq.Map(@this);
         }
 
@@ -704,7 +704,12 @@ namespace Narvalo.Fx.Extensions
             Require.NotNull(predicate, nameof(predicate));
             Require.NotNull(action, nameof(action));
 
-            @this.Bind(_ => { if (predicate.Invoke(_)) { action.Invoke(_); } return Maybe.Unit; });
+            @this.Bind(
+                _ => {
+                    if (predicate.Invoke(_)) { action.Invoke(_); }
+
+                    return Maybe.Unit;
+                });
         }
 
         // Named "unless" in Haskell parlance. Haskell uses a different signature.
@@ -718,7 +723,12 @@ namespace Narvalo.Fx.Extensions
             Require.NotNull(predicate, nameof(predicate));
             Require.NotNull(action, nameof(action));
 
-            @this.Bind(_ => { if (!predicate.Invoke(_)) { action.Invoke(_); } return Maybe.Unit; });
+            @this.Bind(
+                _ => {
+                    if (!predicate.Invoke(_)) { action.Invoke(_); }
+
+                    return Maybe.Unit;
+                });
         }
 
         #endregion
@@ -797,7 +807,12 @@ namespace Narvalo.Fx.Extensions
             /* T4: C# indent */
             Require.NotNull(action, nameof(action));
 
-            @this.Bind(_ => { action.Invoke(_); return Maybe.Unit; });
+            @this.Bind(
+                _ => {
+                    action.Invoke(_);
+
+                    return Maybe.Unit;
+                });
         }
     } // End of Maybe - T4: EmitMonadExtraExtensions().
 }
@@ -821,6 +836,7 @@ namespace Narvalo.Fx.Internal
             Demand.NotNull(@this);
 
             var seed = Maybe.Of(Enumerable.Empty<TSource>());
+            //var seed = Maybe.Of(Enumerable.Empty<TSource>());
             // Inlined LINQ Append method:
             Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (m, item) => m.Append(item);
 
@@ -828,7 +844,7 @@ namespace Narvalo.Fx.Internal
             // Func<Maybe<IEnumerable<TSource>>, Maybe<TSource>, Maybe<IEnumerable<TSource>>> liftedAppend
             //     = (m, item) => m.Bind(list => Append(list, item));
             // where Append is defined below.
-            var retval = @this.Aggregate(seed, Maybe.Lift(append));
+            var retval = @this.Aggregate(seed, Maybe.Lift<IEnumerable<TSource>, TSource, IEnumerable<TSource>>(append));
 
             return retval;
         }

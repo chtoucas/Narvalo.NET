@@ -247,7 +247,6 @@ namespace Monads
             Require.NotNull(selector, nameof(selector));
 
             return @this.Bind(_ => MonadValue.Of(selector.Invoke(_)));
-            //return @this.Bind(_ => MonadValue.Of<TResult>(selector.Invoke(_)));
         }
 
         // Named ">>" in Haskell parlance.
@@ -719,7 +718,12 @@ namespace Monads.Extensions
             Require.NotNull(predicate, nameof(predicate));
             Require.NotNull(action, nameof(action));
 
-            @this.Bind(_ => { if (predicate.Invoke(_)) { action.Invoke(_); } return MonadValue.Unit; });
+            @this.Bind(
+                _ => {
+                    if (predicate.Invoke(_)) { action.Invoke(_); }
+
+                    return MonadValue.Unit;
+                });
         }
 
         // Named "unless" in Haskell parlance. Haskell uses a different signature.
@@ -733,7 +737,12 @@ namespace Monads.Extensions
             Require.NotNull(predicate, nameof(predicate));
             Require.NotNull(action, nameof(action));
 
-            @this.Bind(_ => { if (!predicate.Invoke(_)) { action.Invoke(_); } return MonadValue.Unit; });
+            @this.Bind(
+                _ => {
+                    if (!predicate.Invoke(_)) { action.Invoke(_); }
+
+                    return MonadValue.Unit;
+                });
         }
 
         #endregion
@@ -793,7 +802,12 @@ namespace Monads.Extensions
             /* T4: C# indent */
             Require.NotNull(action, nameof(action));
 
-            @this.Bind(_ => { action.Invoke(_); return MonadValue.Unit; });
+            @this.Bind(
+                _ => {
+                    action.Invoke(_);
+
+                    return MonadValue.Unit;
+                });
         }
     } // End of MonadValue - T4: EmitMonadExtraExtensions().
 }

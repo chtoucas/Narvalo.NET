@@ -64,4 +64,15 @@ namespace Narvalo.Fx
                 => Result.FromError<TResult, TError>(Error);
         }
     }
+
+    public static partial class Sequence
+    {
+        internal static Result<IEnumerable<TSource>, TError> CollectImpl<TSource, TError>(
+            this IEnumerable<Result<TSource, TError>> @this)
+        {
+            Require.NotNull(@this, nameof(@this));
+
+            return Result.Of<IEnumerable<TSource>, TError>(CollectAnyIterator(@this));
+        }
+    }
 }

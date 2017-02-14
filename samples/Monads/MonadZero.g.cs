@@ -238,7 +238,6 @@ namespace Monads
             Warrant.NotNull<MonadZero<TResult>>();
 
             return @this.Bind(_ => MonadZero.Of(selector.Invoke(_)));
-            //return @this.Bind(_ => MonadZero.Of<TResult>(selector.Invoke(_)));
         }
 
         // Named ">>" in Haskell parlance.
@@ -619,6 +618,7 @@ namespace Monads
             Expect.NotNull(@this);
             Expect.NotNull(seq);
             Warrant.NotNull<MonadZero<IEnumerable<TResult>>>();
+
             return seq.Map(@this);
         }
 
@@ -724,7 +724,12 @@ namespace Monads.Extensions
             Require.NotNull(predicate, nameof(predicate));
             Require.NotNull(action, nameof(action));
 
-            @this.Bind(_ => { if (predicate.Invoke(_)) { action.Invoke(_); } return MonadZero.Unit; });
+            @this.Bind(
+                _ => {
+                    if (predicate.Invoke(_)) { action.Invoke(_); }
+
+                    return MonadZero.Unit;
+                });
         }
 
         // Named "unless" in Haskell parlance. Haskell uses a different signature.
@@ -738,7 +743,12 @@ namespace Monads.Extensions
             Require.NotNull(predicate, nameof(predicate));
             Require.NotNull(action, nameof(action));
 
-            @this.Bind(_ => { if (!predicate.Invoke(_)) { action.Invoke(_); } return MonadZero.Unit; });
+            @this.Bind(
+                _ => {
+                    if (!predicate.Invoke(_)) { action.Invoke(_); }
+
+                    return MonadZero.Unit;
+                });
         }
 
         #endregion
@@ -819,9 +829,13 @@ namespace Monads.Extensions
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(action, nameof(action));
-            Warrant.NotNull<MonadZero<TSource>>();
 
-            @this.Bind(_ => { action.Invoke(_); return MonadZero.Unit; });
+            @this.Bind(
+                _ => {
+                    action.Invoke(_);
+
+                    return MonadZero.Unit;
+                });
         }
     } // End of MonadZero - T4: EmitMonadExtraExtensions().
 }
@@ -844,6 +858,7 @@ namespace Monads.Internal
             Warrant.NotNull<MonadZero<IEnumerable<TSource>>>();
 
             var seed = MonadZero.Of(Enumerable.Empty<TSource>());
+            //var seed = MonadZero.Of(Enumerable.Empty<TSource>());
             // Inlined LINQ Append method:
             Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (m, item) => m.Append(item);
 
@@ -851,7 +866,7 @@ namespace Monads.Internal
             // Func<MonadZero<IEnumerable<TSource>>, MonadZero<TSource>, MonadZero<IEnumerable<TSource>>> liftedAppend
             //     = (m, item) => m.Bind(list => Append(list, item));
             // where Append is defined below.
-            var retval = @this.Aggregate(seed, MonadZero.Lift(append));
+            var retval = @this.Aggregate(seed, MonadZero.Lift<IEnumerable<TSource>, TSource, IEnumerable<TSource>>(append));
             System.Diagnostics.Contracts.Contract.Assume(retval != null);
 
             return retval;

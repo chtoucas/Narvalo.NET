@@ -139,24 +139,9 @@ namespace Narvalo.T4
 
         #region Generic parameters
 
-        private string _suffixT = String.Empty;
+        protected string RawSuffixT { get; private set; } = String.Empty;
 
-        // We only support additional generic parameters without any constraint.
-        // ** WARNING WARNING WARNING ** This one is not very well tested and is really incomplete:
-        // - HasZero is supposed to be false.
-        protected string SuffixT
-        {
-            get { return _suffixT; }
-            set
-            {
-                if (String.IsNullOrWhiteSpace(value))
-                {
-                    throw new ArgumentNullException(nameof(value), "SuffixT can not be null or whitespaces.");
-                }
-                _suffixT = value;
-                HasSuffixT = true;
-            }
-        }
+        protected string SuffixT { get; private set; } = String.Empty;
 
         protected bool HasSuffixT { get; private set; } = false;
 
@@ -334,6 +319,22 @@ namespace Narvalo.T4
 
         #region Initalizers
 
+        // We only support additional generic parameters without any constraint.
+        // ** WARNING WARNING WARNING ** This one is not very well tested and is incomplete:
+        // - HasZero is supposed to be false.
+        // - no LINQ extensions.
+        protected void InitializeGenericSuffix(string suffix)
+        {
+            if (String.IsNullOrWhiteSpace(suffix))
+            {
+                throw new ArgumentException("Suffix can not be null or whitespaces.", nameof(suffix));
+            }
+
+            RawSuffixT = suffix;
+            SuffixT = ", " + suffix;
+            HasSuffixT = true;
+        }
+
         /// <summary>
         /// Initializes a MonadZero.
         /// </summary>
@@ -416,11 +417,6 @@ namespace Narvalo.T4
                 WriteLine("where {0} : {1}", typeName, TypeConstraints);
                 PopIndent();
             }
-        }
-
-        protected void WriteGeneric(string name)
-        {
-            Write(@"<{0}{1}>", name, SuffixT);
         }
 
         protected void WriteFactory(string name)

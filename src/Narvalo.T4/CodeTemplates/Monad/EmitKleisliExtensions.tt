@@ -13,9 +13,9 @@ public partial class MonadTemplate
 <#+ if (!HasTypeConstraints) { #>
 
         // Named "<**>" in Haskell parlance. Same as Gather (<*>) with its arguments flipped.
-        public static <#= Name #><TResult> Apply<TSource, TResult>(
-            this <#= Name #><Func<TSource, TResult>> @this,
-            <#= Name #><TSource> value)
+        public static <#= Name #><TResult<#= SuffixT #>> Apply<TSource, TResult<#= SuffixT #>>(
+            this <#= Name #><Func<TSource, TResult><#= SuffixT #>> @this,
+            <#= Name #><TSource<#= SuffixT #>> value)
         {
             <#+ WriteNotNull(); #>
             <#+ WriteNotNull("value"); #>
@@ -32,15 +32,16 @@ public partial class MonadTemplate
 <#+ if (!HasTypeConstraints) { #>
 
         // Named "forM" in Haskell parlance. Same as Map (mapM) with its arguments flipped.
-        public static <#= Name #><IEnumerable<TResult>> ForEach<TSource, TResult>(
-            this Func<TSource, <#= Name #><TResult>> @this,
+        public static <#= Name #><IEnumerable<TResult><#= SuffixT #>> ForEach<TSource, TResult<#= SuffixT #>>(
+            this Func<TSource, <#= Name #><TResult<#= SuffixT #>>> @this,
             IEnumerable<TSource> seq)
         {
             Expect.NotNull(@this);
             Expect.NotNull(seq);
 <#+ if (IsNullable) { #>
-            Warrant.NotNull<<#= Name #><IEnumerable<TResult>>>();
+            Warrant.NotNull<<#= Name #><IEnumerable<TResult><#= SuffixT #>>>();
 <#+ } #>
+<#+ WriteLine(); #>
 
 <#+ if (haslinq) { #>
             return seq.Map(@this);
@@ -52,42 +53,42 @@ public partial class MonadTemplate
 <#+ } // T4: End of !HasTypeConstraints. #>
 
         // Named "=<<" in Haskell parlance. Same as Bind (>>=) with its arguments flipped.
-        public static <#= Name #><TResult> Invoke<TSource, TResult>(
-            this Func<TSource, <#= Name #><TResult>> @this,
-            <#= Name #><TSource> value)
+        public static <#= Name #><TResult<#= SuffixT #>> Invoke<TSource, TResult<#= SuffixT #>>(
+            this Func<TSource, <#= Name #><TResult<#= SuffixT #>>> @this,
+            <#= Name #><TSource<#= SuffixT #>> value)
             <#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
             Expect.NotNull(@this);
             <#+ WriteNotNull("value"); #>
 <#+ if (PostBindEnsuresSome) { #>
-            Warrant.NotNull<<#= Name #><TResult>>();
+            Warrant.NotNull<<#= Name #><TResult<#= SuffixT #>>>();
 <#+ } #>
 
             return value.Bind(@this);
         }
 
         // Named ">=>" in Haskell parlance.
-        public static Func<TSource, <#= Name #><TResult>> Compose<TSource, TMiddle, TResult>(
-            this Func<TSource, <#= Name #><TMiddle>> @this,
-            Func<TMiddle, <#= Name #><TResult>> thunk)
+        public static Func<TSource, <#= Name #><TResult<#= SuffixT #>>> Compose<TSource, TMiddle, TResult<#= SuffixT #>>(
+            this Func<TSource, <#= Name #><TMiddle<#= SuffixT #>>> @this,
+            Func<TMiddle, <#= Name #><TResult<#= SuffixT #>>> thunk)
             <#+ WriteTypeConstraints("TSource", "TMiddle", "TResult"); #>
         {
             <#+ WriteNotNull(true); #>
             Expect.NotNull(thunk);
-            Warrant.NotNull<Func<TSource, <#= Name #><TResult>>>();
+            Warrant.NotNull<Func<TSource, <#= Name #><TResult<#= SuffixT #>>>>();
 
             return _ => @this.Invoke(_).Bind(thunk);
         }
 
         // Named "<=<" in Haskell parlance.
-        public static Func<TSource, <#= Name #><TResult>> ComposeBack<TSource, TMiddle, TResult>(
-            this Func<TMiddle, <#= Name #><TResult>> @this,
-            Func<TSource, <#= Name #><TMiddle>> thunk)
+        public static Func<TSource, <#= Name #><TResult<#= SuffixT #>>> ComposeBack<TSource, TMiddle, TResult<#= SuffixT #>>(
+            this Func<TMiddle, <#= Name #><TResult<#= SuffixT #>>> @this,
+            Func<TSource, <#= Name #><TMiddle<#= SuffixT #>>> thunk)
             <#+ WriteTypeConstraints("TSource", "TMiddle", "TResult"); #>
         {
             Expect.NotNull(@this);
             Require.NotNull(thunk, nameof(thunk));
-            Warrant.NotNull<Func<TSource, <#= Name #><TResult>>>();
+            Warrant.NotNull<Func<TSource, <#= Name #><TResult<#= SuffixT #>>>>();
 
             return _ => thunk.Invoke(_).Bind(@this);
         }

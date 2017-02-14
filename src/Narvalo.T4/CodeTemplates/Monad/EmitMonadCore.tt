@@ -6,11 +6,23 @@ public partial class MonadTemplate
     {
 #>
     /// <summary>
-    /// Provides a set of static methods for <see cref="<#= Name #>{T}"/>.
+    /// Provides a set of static methods for <see cref="<#= Name #>{T<#= SuffixT #>}"/>.
     /// </summary>
     // NB: Sometimes we prefer extension methods over static methods to be able to override them locally.
     public static partial class <#= Name #>
     {
+<#+ if (HasSuffixT) { #>
+
+        public static <#= Name #><global::Narvalo.Fx.Unit<#= SuffixT #>> OfUnit<<#= RawSuffixT #>>()
+        {
+<#+ if (IsNullable) { #>
+            Warrant.NotNull<<#= Name #><global::Narvalo.Fx.Unit<#= SuffixT #>>>();
+<#+ } #>
+
+            return <#+ WriteFactory("Unit"); #>(global::Narvalo.Fx.Unit.Single);
+        }
+
+<#+ } else { #>
         /// <summary>
         /// The unique object of type <c><#= Name #>&lt;Unit&gt;</c>.
         /// </summary>
@@ -32,6 +44,8 @@ public partial class MonadTemplate
             }
         }
 
+<#+ } // End of HasSuffixT #>
+
 <#+ if (HasZero) { #>
 
         /// <summary>
@@ -51,7 +65,7 @@ public partial class MonadTemplate
             }
         }
 
-<#+ } #>
+<#+ } // End of HasZero #>
 
         /// <summary>
         /// Obtains an instance of the <see cref="<#= Name #>{T}"/> class for the specified value.
@@ -60,14 +74,14 @@ public partial class MonadTemplate
         /// <param name="value">A value to be wrapped into a <see cref="<#= Name #>{T}"/> object.</param>
         /// <returns>An instance of the <see cref="<#= Name #>{T}"/> class for the specified value.</returns>
         // Named "return" in Haskell parlance.
-        public static <#= Name #><T> <#= ReturnName #><T>(T value)
+        public static <#= Name #><T<#= SuffixT #>> <#= ReturnName #><T<#= SuffixT #>>(T value)
             <#+ WriteTypeConstraints("T"); #>
         {
 <#+ if (IsNullable) { #>
-            Warrant.NotNull<<#= Name #><T>>();
+            Warrant.NotNull<<#= Name #><T<#= SuffixT #>>>();
 <#+ } #>
 
-            return <#= Name #><T>.η(value);
+            return <#= Name #><T<#= SuffixT #>>.η(value);
         }
 
         #region Generalisations of list functions (Prelude)
@@ -76,17 +90,17 @@ public partial class MonadTemplate
         /// Removes one level of structure, projecting its bound value into the outer level.
         /// </summary>
         // Named "join" in Haskell parlance.
-        public static <#= Name #><T> Flatten<T>(<#= Name #><<#= Name #><T>> square)
+        public static <#= Name #><T<#= SuffixT #>> Flatten<T<#= SuffixT #>>(<#= Name #><<#= Name #><T<#= SuffixT #>><#= SuffixT #>> square)
             <#+ WriteTypeConstraints("T"); #>
         {
 <#+ if (IsNullable) { #>
             Expect.NotNull(square);
 <#+ } #>
 <#+ if (PostMultiplicationEnsuresSome) { #>
-            Warrant.NotNull<<#= Name #><T>>();
+            Warrant.NotNull<<#= Name #><T<#= SuffixT #>>>();
 <#+ } #>
 
-            return <#= Name #><T>.μ(square);
+            return <#= Name #><T<#= SuffixT #>>.μ(square);
         }
 
         #endregion
@@ -112,14 +126,14 @@ public partial class MonadTemplate
         #region Monadic lifting operators (Prelude)
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="<#= Name #>{T}" /> values.
+        /// Promotes a function to use and return <see cref="<#= Name #>{T<#= SuffixT #>}" /> values.
         /// </summary>
         // Named "liftM" in Haskell parlance.
-        public static Func<<#= Name #><T>, <#= Name #><TResult>> Lift<T, TResult>(
+        public static Func<<#= Name #><T<#= SuffixT #>>, <#= Name #><TResult<#= SuffixT #>>> Lift<T, TResult<#= SuffixT #>>(
             Func<T, TResult> thunk)
             <#+ WriteTypeConstraints("T", "TResult"); #>
         {
-            Warrant.NotNull<Func<<#= Name #><T>, <#= Name #><TResult>>>();
+            Warrant.NotNull<Func<<#= Name #><T<#= SuffixT #>>, <#= Name #><TResult<#= SuffixT #>>>>();
 
             return m =>
             {
@@ -129,15 +143,15 @@ public partial class MonadTemplate
         }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="<#= Name #>{T}" /> values, scanning the
+        /// Promotes a function to use and return <see cref="<#= Name #>{T<#= SuffixT #>}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
         // Named "liftM2" in Haskell parlance.
-        public static Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><TResult>>
-            Lift<T1, T2, TResult>(Func<T1, T2, TResult> thunk)
+        public static Func<<#= Name #><T1<#= SuffixT #>>, <#= Name #><T2<#= SuffixT #>>, <#= Name #><TResult<#= SuffixT #>>>
+            Lift<T1, T2, TResult<#= SuffixT #>>(Func<T1, T2, TResult> thunk)
             <#+ WriteTypeConstraints("T1", "T2", "TResult"); #>
         {
-            Warrant.NotNull<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><TResult>>>();
+            Warrant.NotNull<Func<<#= Name #><T1<#= SuffixT #>>, <#= Name #><T2<#= SuffixT #>>, <#= Name #><TResult<#= SuffixT #>>>>();
 
             return (m1, m2) =>
             {
@@ -147,15 +161,15 @@ public partial class MonadTemplate
         }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="<#= Name #>{T}" /> values, scanning the
+        /// Promotes a function to use and return <see cref="<#= Name #>{T<#= SuffixT #>}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
         // Named "liftM3" in Haskell parlance.
-        public static Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><TResult>>
-            Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> thunk)
+        public static Func<<#= Name #><T1<#= SuffixT #>>, <#= Name #><T2<#= SuffixT #>>, <#= Name #><T3<#= SuffixT #>>, <#= Name #><TResult<#= SuffixT #>>>
+            Lift<T1, T2, T3, TResult<#= SuffixT #>>(Func<T1, T2, T3, TResult> thunk)
             <#+ WriteTypeConstraints("T1", "T2", "T3", "TResult"); #>
         {
-            Warrant.NotNull<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><TResult>>>();
+            Warrant.NotNull<Func<<#= Name #><T1<#= SuffixT #>>, <#= Name #><T2<#= SuffixT #>>, <#= Name #><T3<#= SuffixT #>>, <#= Name #><TResult<#= SuffixT #>>>>();
 
             return (m1, m2, m3) =>
             {
@@ -165,16 +179,16 @@ public partial class MonadTemplate
         }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="<#= Name #>{T}" /> values, scanning the
+        /// Promotes a function to use and return <see cref="<#= Name #>{T<#= SuffixT #>}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
         // Named "liftM4" in Haskell parlance.
-        public static Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><TResult>>
-            Lift<T1, T2, T3, T4, TResult>(
+        public static Func<<#= Name #><T1<#= SuffixT #>>, <#= Name #><T2<#= SuffixT #>>, <#= Name #><T3<#= SuffixT #>>, <#= Name #><T4<#= SuffixT #>>, <#= Name #><TResult<#= SuffixT #>>>
+            Lift<T1, T2, T3, T4, TResult<#= SuffixT #>>(
             Func<T1, T2, T3, T4, TResult> thunk)
             <#+ WriteTypeConstraints("T1", "T2", "T3", "T4", "TResult"); #>
         {
-            Warrant.NotNull<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><TResult>>>();
+            Warrant.NotNull<Func<<#= Name #><T1<#= SuffixT #>>, <#= Name #><T2<#= SuffixT #>>, <#= Name #><T3<#= SuffixT #>>, <#= Name #><T4<#= SuffixT #>>, <#= Name #><TResult<#= SuffixT #>>>>();
 
             return (m1, m2, m3, m4) =>
             {
@@ -184,16 +198,16 @@ public partial class MonadTemplate
         }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="<#= Name #>{T}" /> values, scanning the
+        /// Promotes a function to use and return <see cref="<#= Name #>{T<#= SuffixT #>}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
         // Named "liftM5" in Haskell parlance.
-        public static Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><T5>, <#= Name #><TResult>>
-            Lift<T1, T2, T3, T4, T5, TResult>(
+        public static Func<<#= Name #><T1<#= SuffixT #>>, <#= Name #><T2<#= SuffixT #>>, <#= Name #><T3<#= SuffixT #>>, <#= Name #><T4<#= SuffixT #>>, <#= Name #><T5<#= SuffixT #>>, <#= Name #><TResult<#= SuffixT #>>>
+            Lift<T1, T2, T3, T4, T5, TResult<#= SuffixT #>>(
             Func<T1, T2, T3, T4, T5, TResult> thunk)
             <#+ WriteTypeConstraints("T1", "T2", "T3", "T4", "T5", "TResult"); #>
         {
-            Warrant.NotNull<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><T5>, <#= Name #><TResult>>>();
+            Warrant.NotNull<Func<<#= Name #><T1<#= SuffixT #>>, <#= Name #><T2<#= SuffixT #>>, <#= Name #><T3<#= SuffixT #>>, <#= Name #><T4<#= SuffixT #>>, <#= Name #><T5<#= SuffixT #>>, <#= Name #><TResult<#= SuffixT #>>>>();
 
             return (m1, m2, m3, m4, m5) =>
             {

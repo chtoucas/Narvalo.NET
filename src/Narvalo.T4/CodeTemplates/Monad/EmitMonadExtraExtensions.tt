@@ -5,21 +5,21 @@ public partial class MonadTemplate
     protected void EmitMonadExtraExtensions()
     {
 #>
-    // Provides more extension methods for <#= Name #><T>.
+    // Provides more extension methods for <#= Name #><T<#= SuffixT #>>.
     public static partial class <#= Name #>Extensions
     {
         #region Basic Monad functions (Prelude)
 
         // Named "forever" in Haskell parlance.
-        public static <#= Name #><TResult> Forever<TSource, TResult>(
-            this <#= Name #><TSource> @this,
-            Func<<#= Name #><TResult>> thunk
+        public static <#= Name #><TResult<#= SuffixT #>> Forever<TSource, TResult<#= SuffixT #>>(
+            this <#= Name #><TSource<#= SuffixT #>> @this,
+            Func<<#= Name #><TResult<#= SuffixT #>>> thunk
             )
             <#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
             <#+ WriteNotNull(); #>
 <#+ if (PostThenEnsuresSome) { #>
-            Warrant.NotNull<<#= Name #><TResult>>();
+            Warrant.NotNull<<#= Name #><TResult<#= SuffixT #>>>();
 <#+ } #>
 
             return @this.Then(@this.Forever(thunk));
@@ -30,8 +30,8 @@ public partial class MonadTemplate
         #region Conditional execution of monadic expressions (Prelude)
 
         // Named "when" in Haskell parlance. Haskell uses a different signature.
-        public static void When<TSource>(
-            this <#= Name #><TSource> @this,
+        public static void When<TSource<#= SuffixT #>>(
+            this <#= Name #><TSource<#= SuffixT #>> @this,
             Func<TSource, bool> predicate,
             Action<TSource> action)
             <#+ WriteTypeConstraints("TSource"); #>
@@ -40,12 +40,21 @@ public partial class MonadTemplate
             Require.NotNull(predicate, nameof(predicate));
             Require.NotNull(action, nameof(action));
 
-            @this.Bind(_ => { if (predicate.Invoke(_)) { action.Invoke(_); } return <#= Name #>.Unit; });
+            @this.Bind(
+                _ => {
+                    if (predicate.Invoke(_)) { action.Invoke(_); }
+
+<#+ if (HasSuffixT) { #>
+                    return <#= Name #>.OfUnit<<#= RawSuffixT #>>();
+<#+ } else { #>
+                    return <#= Name #>.Unit;
+<#+ } #>
+                });
         }
 
         // Named "unless" in Haskell parlance. Haskell uses a different signature.
-        public static void Unless<TSource>(
-            this <#= Name #><TSource> @this,
+        public static void Unless<TSource<#= SuffixT #>>(
+            this <#= Name #><TSource<#= SuffixT #>> @this,
             Func<TSource, bool> predicate,
             Action<TSource> action)
             <#+ WriteTypeConstraints("TSource"); #>
@@ -54,7 +63,16 @@ public partial class MonadTemplate
             Require.NotNull(predicate, nameof(predicate));
             Require.NotNull(action, nameof(action));
 
-            @this.Bind(_ => { if (!predicate.Invoke(_)) { action.Invoke(_); } return <#= Name #>.Unit; });
+            @this.Bind(
+                _ => {
+                    if (!predicate.Invoke(_)) { action.Invoke(_); }
+
+<#+ if (HasSuffixT) { #>
+                    return <#= Name #>.OfUnit<<#= RawSuffixT #>>();
+<#+ } else { #>
+                    return <#= Name #>.Unit;
+<#+ } #>
+                });
         }
 
         #endregion
@@ -64,9 +82,9 @@ public partial class MonadTemplate
 <#+ if (!HasTypeConstraints) { #>
 
         // Named "<*>" in Haskell parlance. Same as Apply (<**>) with its arguments flipped.
-        public static <#= Name #><TResult> Gather<TSource, TResult>(
-            this <#= Name #><TSource> @this,
-            <#= Name #><Func<TSource, TResult>> applicative)
+        public static <#= Name #><TResult<#= SuffixT #>> Gather<TSource, TResult<#= SuffixT #>>(
+            this <#= Name #><TSource<#= SuffixT #>> @this,
+            <#= Name #><Func<TSource, TResult><#= SuffixT #>> applicative)
             <#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
             <#+ WriteNotNull("applicative"); #>
@@ -74,9 +92,9 @@ public partial class MonadTemplate
             return applicative.Apply(@this);
         }
 
-        public static <#= Name #><Tuple<TSource, TOther>> Merge<TSource, TOther>(
-            this <#= Name #><TSource> @this,
-            <#= Name #><TOther> other)
+        public static <#= Name #><Tuple<TSource, TOther><#= SuffixT #>> Merge<TSource, TOther<#= SuffixT #>>(
+            this <#= Name #><TSource<#= SuffixT #>> @this,
+            <#= Name #><TOther<#= SuffixT #>> other)
             <#+ WriteTypeConstraints("TSource", "TOther"); #>
         {
             <#+ WriteNotNull(); #>
@@ -88,17 +106,17 @@ public partial class MonadTemplate
 
         #endregion
 
-        public static <#= Name #><TResult> Coalesce<TSource, TResult>(
-            this <#= Name #><TSource> @this,
+        public static <#= Name #><TResult<#= SuffixT #>> Coalesce<TSource, TResult<#= SuffixT #>>(
+            this <#= Name #><TSource<#= SuffixT #>> @this,
             Func<TSource, bool> predicate,
-            <#= Name #><TResult> then,
-            <#= Name #><TResult> otherwise)
+            <#= Name #><TResult<#= SuffixT #>> then,
+            <#= Name #><TResult<#= SuffixT #>> otherwise)
             <#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
             <#+ WriteNotNull(); #>
             Require.NotNull(predicate, nameof(predicate));
 <#+ if (PostBindEnsuresSome) { #>
-            Warrant.NotNull<<#= Name #><TResult>>();
+            Warrant.NotNull<<#= Name #><TResult<#= SuffixT #>>>();
 <#+ } #>
 
             return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
@@ -138,18 +156,24 @@ public partial class MonadTemplate
         }
 
 <#+ } // T4: End of HasZero. #>
-        public static void Do<TSource>(
-            this <#= Name #><TSource> @this,
+        public static void Do<TSource<#= SuffixT #>>(
+            this <#= Name #><TSource<#= SuffixT #>> @this,
             Action<TSource> action)
             <#+ WriteTypeConstraints("TSource"); #>
         {
             <#+ WriteNotNull(); #>
             Require.NotNull(action, nameof(action));
-<#+ if (PostBindEnsuresSome) { #>
-            Warrant.NotNull<<#= Name #><TSource>>();
-<#+ } #>
 
-            @this.Bind(_ => { action.Invoke(_); return <#= Name #>.Unit; });
+            @this.Bind(
+                _ => {
+                    action.Invoke(_);
+
+<#+ if (HasSuffixT) { #>
+                    return <#= Name #>.OfUnit<<#= RawSuffixT #>>();
+<#+ } else { #>
+                    return <#= Name #>.Unit;
+<#+ } #>
+                });
         }
     } // End of <#= Name #> - T4: EmitMonadExtraExtensions().
 <#+

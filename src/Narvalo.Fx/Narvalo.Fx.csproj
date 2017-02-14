@@ -73,7 +73,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\ResultExtensions.cs" />
+    <Compile Include="Extensions\VoidOr%24.cs" />
+    <Compile Include="Extensions\Outcome%24.cs" />
+    <Compile Include="Extensions\Maybe%24.cs" />
+    <Compile Include="Extensions\Result%24.cs" />
     <Compile Include="Result.g.cs">
       <DependentUpon>Result.tt</DependentUpon>
       <AutoGen>True</AutoGen>

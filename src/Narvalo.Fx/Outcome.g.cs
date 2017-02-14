@@ -209,7 +209,6 @@ namespace Narvalo.Fx
             Require.NotNull(selector, nameof(selector));
 
             return @this.Bind(_ => Outcome.Of(selector.Invoke(_)));
-            //return @this.Bind(_ => Outcome.Of<TResult>(selector.Invoke(_)));
         }
 
         // Named ">>" in Haskell parlance.
@@ -400,6 +399,7 @@ namespace Narvalo.Fx
             Expect.NotNull(@this);
             Expect.NotNull(seq);
             Warrant.NotNull<Outcome<IEnumerable<TResult>>>();
+
             return seq.Map(@this);
         }
 
@@ -503,7 +503,12 @@ namespace Narvalo.Fx.Extensions
             Require.NotNull(predicate, nameof(predicate));
             Require.NotNull(action, nameof(action));
 
-            @this.Bind(_ => { if (predicate.Invoke(_)) { action.Invoke(_); } return Outcome.Unit; });
+            @this.Bind(
+                _ => {
+                    if (predicate.Invoke(_)) { action.Invoke(_); }
+
+                    return Outcome.Unit;
+                });
         }
 
         // Named "unless" in Haskell parlance. Haskell uses a different signature.
@@ -517,7 +522,12 @@ namespace Narvalo.Fx.Extensions
             Require.NotNull(predicate, nameof(predicate));
             Require.NotNull(action, nameof(action));
 
-            @this.Bind(_ => { if (!predicate.Invoke(_)) { action.Invoke(_); } return Outcome.Unit; });
+            @this.Bind(
+                _ => {
+                    if (!predicate.Invoke(_)) { action.Invoke(_); }
+
+                    return Outcome.Unit;
+                });
         }
 
         #endregion
@@ -570,7 +580,12 @@ namespace Narvalo.Fx.Extensions
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(action, nameof(action));
 
-            @this.Bind(_ => { action.Invoke(_); return Outcome.Unit; });
+            @this.Bind(
+                _ => {
+                    action.Invoke(_);
+
+                    return Outcome.Unit;
+                });
         }
     } // End of Outcome - T4: EmitMonadExtraExtensions().
 }
@@ -595,6 +610,7 @@ namespace Narvalo.Fx.Internal
             Warrant.NotNull<Outcome<IEnumerable<TSource>>>();
 
             var seed = Outcome.Of(Enumerable.Empty<TSource>());
+            //var seed = Outcome.Of(Enumerable.Empty<TSource>());
             // Inlined LINQ Append method:
             Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (m, item) => m.Append(item);
 
@@ -602,7 +618,7 @@ namespace Narvalo.Fx.Internal
             // Func<Outcome<IEnumerable<TSource>>, Outcome<TSource>, Outcome<IEnumerable<TSource>>> liftedAppend
             //     = (m, item) => m.Bind(list => Append(list, item));
             // where Append is defined below.
-            var retval = @this.Aggregate(seed, Outcome.Lift(append));
+            var retval = @this.Aggregate(seed, Outcome.Lift<IEnumerable<TSource>, TSource, IEnumerable<TSource>>(append));
             System.Diagnostics.Contracts.Contract.Assume(retval != null);
 
             return retval;

@@ -5,7 +5,7 @@ public partial class MonadTemplate
     protected void EmitMonadEnumerableExtensions()
     {
 #>
-    // Provides extension methods for IEnumerable<<#= Name #><T>>.
+    // Provides extension methods for IEnumerable<<#= Name #><T<#= SuffixT #>>>.
     public static partial class Sequence
     {
         #region Basic Monad functions (Prelude)
@@ -13,12 +13,12 @@ public partial class MonadTemplate
 <#+ if (!HasTypeConstraints) { #>
 
         // Named "sequence" in Haskell parlance.
-        public static <#= Name #><IEnumerable<TSource>> Collect<TSource>(
-            this IEnumerable<<#= Name #><TSource>> @this)
+        public static <#= Name #><IEnumerable<TSource><#= SuffixT #>> Collect<TSource<#= SuffixT #>>(
+            this IEnumerable<<#= Name #><TSource<#= SuffixT #>>> @this)
         {
             Expect.NotNull(@this);
 <#+ if (IsNullable) { #>
-            Warrant.NotNull<<#= Name #><IEnumerable<TSource>>>();
+            Warrant.NotNull<<#= Name #><IEnumerable<TSource><#= SuffixT #>>>();
 <#+ } #>
 
             return @this.CollectImpl();

@@ -5,7 +5,7 @@ public partial class MonadTemplate
     protected void EmitMonadExtensions()
     {
 #>
-    // Provides the core monadic extension methods for <#= Name #><T>.
+    // Provides the core monadic extension methods for <#= Name #><T<#= SuffixT #>>.
     public static partial class <#= Name #>
     {
         #region Applicative
@@ -41,7 +41,6 @@ public partial class MonadTemplate
 <#+ } #>
 
             return @this.Bind(_ => <#+ WriteFactory("TResult"); #>(selector.Invoke(_)));
-            //return @this.Bind(_ => <#= Name #>.<#= ReturnName #><#+ WriteGeneric("TResult"); #>(selector.Invoke(_)));
         }
 
         // Named ">>" in Haskell parlance.
@@ -72,7 +71,7 @@ public partial class MonadTemplate
 <#+ WriteLine(); #>
 
 <#+ if (HasSuffixT) { #>
-            return <#+ WriteFactory("Unit"); #>(global::Narvalo.Fx.Unit.Single);
+            return <#= Name #>.OfUnit<<#= RawSuffixT #>>();
 <#+ } else { #>
             return <#= Name #>.Unit;
 <#+ } #>
