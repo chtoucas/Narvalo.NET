@@ -13,20 +13,6 @@ namespace Narvalo.Fx
     /// </summary>
     public static partial class Func
     {
-        public static Func<T> Of<T>(T value)
-        {
-            Warrant.NotNull<Func<T>>();
-
-            return () => value;
-        }
-
-        public static Func<T> Flatten<T>(Func<Func<T>> square)
-        {
-            Require.NotNull(square, nameof(square));
-
-            return square.Invoke();
-        }
-
         #region TryInvoke for Action.
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]

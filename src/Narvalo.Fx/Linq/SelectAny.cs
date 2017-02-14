@@ -5,7 +5,7 @@ namespace Narvalo.Fx.Linq
     using System;
     using System.Collections.Generic;
 
-    public static partial class MoreEnumerable
+    public static partial class Operators
     {
         // Named <c>mapMaybe</c> in Haskell parlance.
         public static IEnumerable<TResult> SelectAny<TSource, TResult>(

@@ -1,0 +1,16 @@
+﻿<#@ template language="C#" debug="false" hostspecific="true" #>
+<#@ output extension=".g.cs" #>
+<#@ include file="$(T4NarvaloTemplates)\Monad.Facts.tt" #>
+<#@ include file="$(T4NarvaloTemplates)\VoidOr.tt" #>
+<#= new VoidOrTemplate(this).Execute() #>
+<#+
+
+    public partial class VoidOrTemplate : MonadTemplate
+    {
+        protected override void WriteContent()
+        {
+            EmitFacts();
+        }
+    }
+
+#>

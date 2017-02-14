@@ -6,8 +6,7 @@ namespace Narvalo.Fx
     using System.Collections;
     using System.Collections.Generic;
 
-    public struct Iteration<TResult, TSource>
-        : IEquatable<Iteration<TResult, TSource>> //, IComparable
+    public struct Iteration<TResult, TSource> : IEquatable<Iteration<TResult, TSource>> //, IComparable
     {
         public Iteration(TResult result, TSource next)
         {

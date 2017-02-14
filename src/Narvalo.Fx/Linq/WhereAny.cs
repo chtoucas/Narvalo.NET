@@ -5,7 +5,7 @@ namespace Narvalo.Fx.Linq
     using System;
     using System.Collections.Generic;
 
-    public static partial class MoreEnumerable
+    public static partial class Operators
     {
         public static IEnumerable<TSource> WhereAny<TSource>(
             this IEnumerable<TSource> @this,

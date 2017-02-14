@@ -4,6 +4,7 @@ namespace Narvalo.Fx
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.CompilerServices;
 
@@ -54,6 +55,7 @@ namespace Narvalo.Fx
 
         public abstract Maybe<TRight> RightOrNone();
 
+        [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Switch<TLeft, TRight> η(TLeft value)
         {
@@ -62,6 +64,7 @@ namespace Narvalo.Fx
             return value != null ? new Left_(value) : Switch<TLeft, TRight>.Empty;
         }
 
+        [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Switch<TLeft, TRight> η(TRight value)
         {

@@ -62,6 +62,7 @@
     <Compile Include="Fx\Either`2.cs" />
     <Compile Include="Fx\Error.cs" />
     <Compile Include="Fx\Error`1.cs" />
+    <Compile Include="Fx\FuncEx.cs" />
     <Compile Include="Fx\Identity.g.cs">
       <DependentUpon>Identity.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -92,7 +93,7 @@
       <DependentUpon>Strings_Futures.resx</DependentUpon>
     </Compile>
     <Compile Include="UrlFormatProvider.cs" />
-    <Compile Include="WarrantX.cs" />
+    <Compile Include="WarrantEx.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Narvalo.Futures.props">

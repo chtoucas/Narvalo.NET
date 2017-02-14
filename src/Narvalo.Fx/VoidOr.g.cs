@@ -237,6 +237,7 @@ namespace Narvalo.Fx
             Warrant.NotNull<VoidOr<TResult>>();
 
             return @this.Bind(_ => VoidOr.FromError(selector.Invoke(_)));
+            //return @this.Bind(_ => VoidOr.FromError<TResult>(selector.Invoke(_)));
         }
 
         // Named ">>" in Haskell parlance.
@@ -915,7 +916,7 @@ namespace Narvalo.Fx.Linq
     // - Where     -> Filter
     // - Zip       -> ZipWith
     // - Aggregate -> Reduce or Fold
-    public static partial class MoreEnumerable
+    public static partial class Operators
     {
         #region Basic Monad functions (Prelude)
 
@@ -1070,7 +1071,7 @@ namespace Narvalo.Fx.Linq
         }
 
         #endregion
-    } // End of MoreEnumerable - T4: EmitEnumerableExtensions().
+    } // End of Iterable - T4: EmitEnumerableExtensions().
 }
 
 namespace Narvalo.Fx.Internal

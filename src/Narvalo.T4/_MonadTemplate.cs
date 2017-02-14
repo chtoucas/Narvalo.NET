@@ -137,6 +137,31 @@ namespace Narvalo.T4
 
         #endregion
 
+        #region Generic parameters
+
+        private string _suffixT = String.Empty;
+
+        // We only support additional generic parameters without any constraint.
+        // ** WARNING WARNING WARNING ** This one is not very well tested and is really incomplete:
+        // - HasZero is supposed to be false.
+        protected string SuffixT
+        {
+            get { return _suffixT; }
+            set
+            {
+                if (String.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentNullException(nameof(value), "SuffixT can not be null or whitespaces.");
+                }
+                _suffixT = value;
+                HasSuffixT = true;
+            }
+        }
+
+        protected bool HasSuffixT { get; private set; } = false;
+
+        #endregion
+
         #region Method and Property Names
 
         /// <summary>
@@ -258,7 +283,7 @@ namespace Narvalo.T4
         /// to never return null but the zero if needed.</remarks>
         /// <value><see langword="true"/> if Monad.μ() ensures a non-null return value;
         /// otherwise <see langword="false"/>.</value>
-        protected bool PostMultiplicationEnsuresSome =>  IsNullable && HasZero;
+        protected bool PostMultiplicationEnsuresSome => IsNullable && HasZero;
 
         /// <summary>
         /// Gets a value indicating whether Monad.Map() ensures a non-null return value. Default to false.
@@ -390,6 +415,24 @@ namespace Narvalo.T4
                 PushIndent("            ");
                 WriteLine("where {0} : {1}", typeName, TypeConstraints);
                 PopIndent();
+            }
+        }
+
+        protected void WriteGeneric(string name)
+        {
+            Write(@"<{0}{1}>", name, SuffixT);
+        }
+
+        protected void WriteFactory(string name)
+        {
+            if (HasSuffixT)
+            {
+                // For instance, Result.Of<TResult, TError>
+                Write(@"{0}.{1}<{2}{3}>", Name, ReturnName, name, SuffixT);
+            }
+            else
+            {
+                Write(@"{0}.{1}", Name, ReturnName);
             }
         }
 

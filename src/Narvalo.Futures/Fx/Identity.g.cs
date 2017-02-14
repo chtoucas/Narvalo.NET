@@ -205,6 +205,7 @@ namespace Narvalo.Fx
             Require.NotNull(selector, nameof(selector));
 
             return @this.Bind(_ => Identity.Of(selector.Invoke(_)));
+            //return @this.Bind(_ => Identity.Of<TResult>(selector.Invoke(_)));
         }
 
         // Named ">>" in Haskell parlance.

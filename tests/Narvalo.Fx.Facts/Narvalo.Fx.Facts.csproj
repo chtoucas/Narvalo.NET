@@ -30,6 +30,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="VoidOr.g.cs">
+      <DependentUpon>VoidOr.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Maybe.g.cs">
       <DependentUpon>Maybe.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -63,6 +68,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="VoidOr.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>VoidOr.g.cs</LastGenOutput>
+    </Content>
     <Content Include="Maybe.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Maybe.g.cs</LastGenOutput>

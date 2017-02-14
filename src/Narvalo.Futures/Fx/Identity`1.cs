@@ -4,6 +4,7 @@ namespace Narvalo.Fx
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Runtime.CompilerServices;
 
     /// <summary>
@@ -93,9 +94,11 @@ namespace Narvalo.Fx
             return selector.Invoke(Value);
         }
 
+        [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Identity<T> η(T value) => new Identity<T>(value);
 
+        [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Identity<T> μ(Identity<Identity<T>> square) => square.Value;
     }
@@ -103,16 +106,18 @@ namespace Narvalo.Fx
     // Provides the core Comonad methods.
     public partial struct Identity<T>
     {
-        public Identity<TResult> Extend<TResult>(Func<Identity<T>, TResult> fun)
+        public Identity<TResult> Extend<TResult>(Func<Identity<T>, TResult> thunk)
         {
-            Require.NotNull(fun, nameof(fun));
+            Require.NotNull(thunk, nameof(thunk));
 
-            return new Identity<TResult>(fun.Invoke(this));
+            return new Identity<TResult>(thunk.Invoke(this));
         }
 
+        [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static T ε(Identity<T> monad) => monad.Value;
 
+        [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Identity<Identity<T>> δ(Identity<T> monad) => new Identity<Identity<T>>(monad);
     }

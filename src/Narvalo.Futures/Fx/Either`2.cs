@@ -3,6 +3,7 @@
 namespace Narvalo.Fx
 {
     using System;
+    using System.Diagnostics;
     using System.Runtime.CompilerServices;
 
     /// <summary>
@@ -24,6 +25,7 @@ namespace Narvalo.Fx
 
         public abstract Maybe<TRight> RightOrNone();
 
+        [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Either<TLeft, TRight> η(TLeft value)
         {
@@ -32,6 +34,7 @@ namespace Narvalo.Fx
             return new Left_(value);
         }
 
+        [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Either<TLeft, TRight> η(TRight value)
         {

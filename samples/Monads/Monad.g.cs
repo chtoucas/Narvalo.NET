@@ -210,6 +210,7 @@ namespace Monads
             Require.NotNull(selector, nameof(selector));
 
             return @this.Bind(_ => Monad.Of(selector.Invoke(_)));
+            //return @this.Bind(_ => Monad.Of<TResult>(selector.Invoke(_)));
         }
 
         // Named ">>" in Haskell parlance.
@@ -632,7 +633,7 @@ namespace Monads.Linq
     // - Where     -> Filter
     // - Zip       -> ZipWith
     // - Aggregate -> Reduce or Fold
-    public static partial class MoreEnumerable
+    public static partial class Operators
     {
         #region Basic Monad functions (Prelude)
 
@@ -780,7 +781,7 @@ namespace Monads.Linq
         }
 
         #endregion
-    } // End of MoreEnumerable - T4: EmitEnumerableExtensions().
+    } // End of Iterable - T4: EmitEnumerableExtensions().
 }
 
 namespace Monads.Internal

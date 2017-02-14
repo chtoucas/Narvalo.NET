@@ -25,10 +25,39 @@ public abstract partial class MonadTemplate : _MonadTemplate
     protected override void WriteContent()
     {
         EmitMonad(true);
-        WriteLine();
-
-        EmitLinq();
     }
+
+    // Temporary code to test code generation for a monad with more than one generic param.
+    public void EmitMonadTmp(bool emitlinq)
+    {
+#>
+
+<#+ if (!Namespace.StartsWith("Narvalo.")) { #>
+using global::Narvalo;
+using global::Narvalo.Fx;
+<#+ } #>
+
+namespace <#= Namespace #>
+{
+    using System;
+    using System.Collections.Generic;
+<#+ if (!SuppressMessage) { #>
+    using System.Diagnostics.CodeAnalysis;
+<#+ } #>
+    using System.Linq;
+
+    using <#= Namespace #>.Internal;
+<#+ if (emitlinq) { #>
+    using <#= Namespace #>.Linq;
+<#+ } #>
+
+<#+
+    WriteLine();
+    EmitMonadExtensions();
+#>
+}
+<#+
+    } // T4: End of EmitMonadTmp().
 
     /// <summary>
     /// Generates a Monad.
@@ -90,6 +119,11 @@ namespace <#= Namespace #>.Internal
 <#+ EmitMonadEnumerableInternalExtensions(); #>
 }
 <#+
+        if (emitlinq) {
+            WriteLine();
+
+            EmitLinq();
+        }
     } // T4: End of EmitMonad().
 
     /// <summary>
