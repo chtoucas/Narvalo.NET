@@ -253,7 +253,7 @@ namespace Monads
         }
 
         // Named "void" in Haskell parlance.
-        public static MonadZero<global::Narvalo.Fx.Unit> Forget<TSource>(this MonadZero<TSource> @this)
+        public static MonadZero<global::Narvalo.Fx.Unit> Skip<TSource>(this MonadZero<TSource> @this)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));

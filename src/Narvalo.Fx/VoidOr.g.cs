@@ -253,7 +253,7 @@ namespace Narvalo.Fx
 
         // Named "void" in Haskell parlance.
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
-        public static VoidOr<global::Narvalo.Fx.Unit> Forget<TSource>(this VoidOr<TSource> @this)
+        public static VoidOr<global::Narvalo.Fx.Unit> Skip<TSource>(this VoidOr<TSource> @this)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));

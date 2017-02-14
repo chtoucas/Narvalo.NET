@@ -262,7 +262,7 @@ namespace Monads
         }
 
         // Named "void" in Haskell parlance.
-        public static MonadValue<global::Narvalo.Fx.Unit> Forget<TSource>(this MonadValue<TSource> @this)
+        public static MonadValue<global::Narvalo.Fx.Unit> Skip<TSource>(this MonadValue<TSource> @this)
             where TSource : struct
         {
             /* T4: C# indent */

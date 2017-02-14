@@ -244,7 +244,7 @@ namespace Narvalo.Fx
 
         // Named "void" in Haskell parlance.
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
-        public static Maybe<global::Narvalo.Fx.Unit> Forget<TSource>(this Maybe<TSource> @this)
+        public static Maybe<global::Narvalo.Fx.Unit> Skip<TSource>(this Maybe<TSource> @this)
             /* T4: C# indent */
         {
             /* T4: C# indent */
