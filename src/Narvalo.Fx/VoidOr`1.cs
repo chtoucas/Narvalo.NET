@@ -201,9 +201,9 @@ namespace Narvalo.Fx
 
         public abstract TResult Coalesce<TResult>(Func<TError, bool> predicate, TResult thenResult, TResult elseResult);
 
-        public abstract void When(Func<TError, bool> predicate, Action<TError> action);
+        public abstract void When(Func<TError, bool> predicate, Action<TError> action, Action otherwise);
 
-        public abstract void Do(Func<TError, bool> predicate, Action<TError> action, Action otherwise);
+        public abstract void When(Func<TError, bool> predicate, Action<TError> action);
 
         // Alias for OnError().
         void Internal.IMagma<TError>.Do(Action<TError> action) => OnError(action);
@@ -241,14 +241,14 @@ namespace Narvalo.Fx
             public override TResult Coalesce<TResult>(Func<TError, bool> predicate, TResult thenResult, TResult elseResult)
                 => elseResult;
 
-            public override void When(Func<TError, bool> predicate, Action<TError> action) { }
-
-            public override void Do(Func<TError, bool> predicate, Action<TError> action, Action otherwise)
+            public override void When(Func<TError, bool> predicate, Action<TError> action, Action otherwise)
             {
                 Require.NotNull(otherwise, nameof(otherwise));
 
                 otherwise.Invoke();
             }
+
+            public override void When(Func<TError, bool> predicate, Action<TError> action) { }
 
             public override void Do(Action<TError> onError, Action onSuccess)
             {
@@ -310,7 +310,7 @@ namespace Narvalo.Fx
                 if (predicate.Invoke(Error)) { action.Invoke(Error); }
             }
 
-            public override void Do(Func<TError, bool> predicate, Action<TError> action, Action otherwise)
+            public override void When(Func<TError, bool> predicate, Action<TError> action, Action otherwise)
             {
                 Require.NotNull(predicate, nameof(predicate));
                 Require.NotNull(action, nameof(action));

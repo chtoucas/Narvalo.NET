@@ -184,12 +184,12 @@ namespace Narvalo.Fx
             TResult thenResult,
             TResult elseResult);
 
-        public abstract void When(Func<ExceptionDispatchInfo, bool> predicate, Action<ExceptionDispatchInfo> action);
-
-        public abstract void Do(
+        public abstract void When(
             Func<ExceptionDispatchInfo, bool> predicate,
             Action<ExceptionDispatchInfo> action,
             Action otherwise);
+
+        public abstract void When(Func<ExceptionDispatchInfo, bool> predicate, Action<ExceptionDispatchInfo> action);
 
         // Alias for OnError().
         void Internal.IMagma<ExceptionDispatchInfo>.Do(Action<ExceptionDispatchInfo> action) => OnError(action);
@@ -234,9 +234,7 @@ namespace Narvalo.Fx
                 TResult elseResult)
                 => elseResult;
 
-            public override void When(Func<ExceptionDispatchInfo, bool> predicate, Action<ExceptionDispatchInfo> action) { }
-
-            public override void Do(
+            public override void When(
                 Func<ExceptionDispatchInfo, bool> predicate,
                 Action<ExceptionDispatchInfo> action,
                 Action otherwise)
@@ -245,6 +243,8 @@ namespace Narvalo.Fx
 
                 otherwise.Invoke();
             }
+
+            public override void When(Func<ExceptionDispatchInfo, bool> predicate, Action<ExceptionDispatchInfo> action) { }
 
             public override void Do(Action<ExceptionDispatchInfo> onError, Action onSuccess)
             {
@@ -305,15 +305,7 @@ namespace Narvalo.Fx
                 return predicate.Invoke(ExceptionInfo) ? thenResult : elseResult;
             }
 
-            public override void When(Func<ExceptionDispatchInfo, bool> predicate, Action<ExceptionDispatchInfo> action)
-            {
-                Require.NotNull(predicate, nameof(predicate));
-                Require.NotNull(action, nameof(action));
-
-                if (predicate.Invoke(ExceptionInfo)) { action.Invoke(ExceptionInfo); }
-            }
-
-            public override void Do(
+            public override void When(
                 Func<ExceptionDispatchInfo, bool> predicate,
                 Action<ExceptionDispatchInfo> action,
                 Action otherwise)
@@ -330,6 +322,14 @@ namespace Narvalo.Fx
                 {
                     otherwise.Invoke();
                 }
+            }
+
+            public override void When(Func<ExceptionDispatchInfo, bool> predicate, Action<ExceptionDispatchInfo> action)
+            {
+                Require.NotNull(predicate, nameof(predicate));
+                Require.NotNull(action, nameof(action));
+
+                if (predicate.Invoke(ExceptionInfo)) { action.Invoke(ExceptionInfo); }
             }
 
             public override void Do(Action<ExceptionDispatchInfo> onError, Action onSuccess)

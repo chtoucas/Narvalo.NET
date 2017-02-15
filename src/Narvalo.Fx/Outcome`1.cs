@@ -320,19 +320,7 @@ namespace Narvalo.Fx
             Func<T, TResult> caseSuccess,
             Func<ExceptionDispatchInfo, TResult> caseError);
 
-        public abstract TResult Coalesce<TResult>(
-            Func<T, bool> predicate,
-            Func<T, TResult> selector,
-            Func<TResult> otherwise);
-
-        public abstract TResult Coalesce<TResult>(
-            Func<T, bool> predicate,
-            TResult thenResult,
-            TResult elseResult);
-
         public abstract void When(Func<T, bool> predicate, Action<T> action);
-
-        public abstract void Do(Func<T, bool> predicate, Action<T> action, Action otherwise);
 
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "1#", Justification = "[Intentionally] Internal interface.")]
@@ -356,37 +344,7 @@ namespace Narvalo.Fx
                 return caseSuccess.Invoke(Value);
             }
 
-            public override TResult Coalesce<TResult>(
-                Func<T, bool> predicate,
-                Func<T, TResult> selector,
-                Func<TResult> otherwise)
-            {
-                Require.NotNull(predicate, nameof(predicate));
-                Require.NotNull(selector, nameof(selector));
-                Require.NotNull(otherwise, nameof(otherwise));
-
-                return predicate.Invoke(Value) ? selector.Invoke(Value) : otherwise.Invoke();
-            }
-
-            public override TResult Coalesce<TResult>(
-                Func<T, bool> predicate,
-                TResult thenResult,
-                TResult elseResult)
-            {
-                Require.NotNull(predicate, nameof(predicate));
-
-                return predicate.Invoke(Value) ? thenResult : elseResult;
-            }
-
             public override void When(Func<T, bool> predicate, Action<T> action)
-            {
-                Require.NotNull(predicate, nameof(predicate));
-                Require.NotNull(action, nameof(action));
-
-                if (predicate.Invoke(Value)) { action.Invoke(Value); }
-            }
-
-            public override void Do(Func<T, bool> predicate, Action<T> action, Action otherwise)
             {
                 Require.NotNull(predicate, nameof(predicate));
                 Require.NotNull(action, nameof(action));
@@ -422,30 +380,7 @@ namespace Narvalo.Fx
                 return caseError.Invoke(ExceptionInfo);
             }
 
-            public override TResult Coalesce<TResult>(
-                Func<T, bool> predicate,
-                Func<T, TResult> selector,
-                Func<TResult> otherwise)
-            {
-                Require.NotNull(otherwise, nameof(otherwise));
-
-                return otherwise.Invoke();
-            }
-
-            public override TResult Coalesce<TResult>(
-                Func<T, bool> predicate,
-                TResult thenResult,
-                TResult elseResult)
-                => elseResult;
-
             public override void When(Func<T, bool> predicate, Action<T> action) { }
-
-            public override void Do(Func<T, bool> predicate, Action<T> action, Action otherwise)
-            {
-                Require.NotNull(otherwise, nameof(otherwise));
-
-                otherwise.Invoke();
-            }
 
             public override void Do(Action<T> onSuccess, Action<ExceptionDispatchInfo> OnError)
             {

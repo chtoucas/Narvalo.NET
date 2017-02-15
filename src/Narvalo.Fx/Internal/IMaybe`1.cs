@@ -11,6 +11,13 @@ namespace Narvalo.Fx.Internal
 
         TResult Match<TResult>(Func<T, TResult> caseSome, TResult caseNone);
 
+        TResult Coalesce<TResult>(Func<T, bool> predicate, Func<T, TResult> selector, Func<TResult> otherwise);
+
+        TResult Coalesce<TResult>(Func<T, bool> predicate, TResult thenResult, TResult elseResult);
+
+        // Equivalent to Coalesce<Unit>().
+        void When(Func<T, bool> predicate, Action<T> action, Action otherwise);
+
         // Equivalent to Match<Unit>().
         void Do(Action<T> onSome, Action onNone);
     }

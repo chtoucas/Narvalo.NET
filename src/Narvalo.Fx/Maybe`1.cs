@@ -261,15 +261,7 @@ namespace Narvalo.Fx
             return IsSome && predicate.Invoke(Value) ? thenResult : elseResult;
         }
 
-        public void When(Func<T, bool> predicate, Action<T> action)
-        {
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            if (IsSome && predicate.Invoke(Value)) { action.Invoke(Value); }
-        }
-
-        public void Do(Func<T, bool> predicate, Action<T> action, Action otherwise)
+        public void When(Func<T, bool> predicate, Action<T> action, Action otherwise)
         {
             Require.NotNull(predicate, nameof(predicate));
             Require.NotNull(action, nameof(action));
@@ -283,6 +275,14 @@ namespace Narvalo.Fx
             {
                 otherwise.Invoke();
             }
+        }
+
+        public void When(Func<T, bool> predicate, Action<T> action)
+        {
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            if (IsSome && predicate.Invoke(Value)) { action.Invoke(Value); }
         }
 
         public void Do(Action<T> onSome, Action onNone)

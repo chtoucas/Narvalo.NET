@@ -296,19 +296,7 @@ namespace Narvalo.Fx
     {
         public abstract TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight);
 
-        public abstract TResult Coalesce<TResult>(
-            Func<TLeft, bool> predicate,
-            Func<TLeft, TResult> selector,
-            Func<TResult> otherwise);
-
-        public abstract TResult Coalesce<TResult>(
-            Func<TLeft, bool> predicate,
-            TResult thenResult,
-            TResult elseResult);
-
         public void When(Func<TLeft, bool> leftPredicate, Action<TLeft> action) => WhenLeft(leftPredicate, action);
-
-        public abstract void Do(Func<TLeft, bool> predicate, Action<TLeft> action, Action otherwise);
 
         public abstract void Do(Action<TLeft> onLeft, Action<TRight> onRight);
 
@@ -332,28 +320,6 @@ namespace Narvalo.Fx
                 return caseLeft.Invoke(Left);
             }
 
-            public override TResult Coalesce<TResult>(
-                Func<TLeft, bool> predicate,
-                Func<TLeft, TResult> selector,
-                Func<TResult> otherwise)
-            {
-                Require.NotNull(predicate, nameof(predicate));
-                Require.NotNull(selector, nameof(selector));
-                Require.NotNull(otherwise, nameof(otherwise));
-
-                return predicate.Invoke(Left) ? selector.Invoke(Left) : otherwise.Invoke();
-            }
-
-            public override TResult Coalesce<TResult>(
-                Func<TLeft, bool> predicate,
-                TResult thenResult,
-                TResult elseResult)
-            {
-                Require.NotNull(predicate, nameof(predicate));
-
-                return predicate.Invoke(Left) ? thenResult : elseResult;
-            }
-
             public override void WhenLeft(Func<TLeft, bool> predicate, Action<TLeft> action)
             {
                 Require.NotNull(predicate, nameof(predicate));
@@ -363,15 +329,6 @@ namespace Narvalo.Fx
             }
 
             public override void WhenRight(Func<TRight, bool> predicate, Action<TRight> action) { }
-
-            public override void Do(Func<TLeft, bool> predicate, Action<TLeft> action, Action otherwise)
-            {
-                Require.NotNull(predicate, nameof(predicate));
-                Require.NotNull(action, nameof(action));
-                Require.NotNull(otherwise, nameof(otherwise));
-
-                if (predicate.Invoke(Left)) { action.Invoke(Left); } else { otherwise.Invoke(); }
-            }
 
             public override void Do(Action<TLeft> onLeft, Action<TRight> onRight)
             {
@@ -399,22 +356,6 @@ namespace Narvalo.Fx
                 return caseRight.Invoke(Right);
             }
 
-            public override TResult Coalesce<TResult>(
-                Func<TLeft, bool> predicate,
-                Func<TLeft, TResult> selector,
-                Func<TResult> otherwise)
-            {
-                Require.NotNull(otherwise, nameof(otherwise));
-
-                return otherwise.Invoke();
-            }
-
-            public override TResult Coalesce<TResult>(
-                Func<TLeft, bool> predicate,
-                TResult thenResult,
-                TResult elseResult)
-                => elseResult;
-
             public override void WhenLeft(Func<TLeft, bool> predicate, Action<TLeft> action) { }
 
             public override void WhenRight(Func<TRight, bool> predicate, Action<TRight> action)
@@ -423,13 +364,6 @@ namespace Narvalo.Fx
                 Require.NotNull(action, nameof(action));
 
                 if (predicate.Invoke(Right)) { action.Invoke(Right); }
-            }
-
-            public override void Do(Func<TLeft, bool> predicate, Action<TLeft> action, Action otherwise)
-            {
-                Require.NotNull(otherwise, nameof(otherwise));
-
-                otherwise.Invoke();
             }
 
             public override void Do(Action<TLeft> onLeft, Action<TRight> onRight)
