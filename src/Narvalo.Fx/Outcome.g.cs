@@ -177,7 +177,7 @@ namespace Narvalo.Fx
         #endregion
     } // End of Outcome - T4: EmitMonadCore().
 
-    // Provides the core monadic extension methods for Outcome<T>.
+    // Provides extension methods for Outcome<T>.
     public static partial class Outcome
     {
         #region Applicative
@@ -533,7 +533,7 @@ namespace Narvalo.Fx
     } // End of Func - T4: EmitKleisliExtensions().
 
     // Provides extension methods for IEnumerable<Outcome<T>>.
-    public static partial class OutcomeSequence
+    public static partial class Outcome
     {
         #region Basic Monad functions
 

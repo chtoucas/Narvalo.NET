@@ -203,7 +203,7 @@ namespace Narvalo.Fx
         #endregion
     } // End of VoidOr - T4: EmitMonadCore().
 
-    // Provides the core monadic extension methods for VoidOr<T>.
+    // Provides extension methods for VoidOr<T>.
     public static partial class VoidOr
     {
         #region Applicative
@@ -770,7 +770,7 @@ namespace Narvalo.Fx
     } // End of Func - T4: EmitKleisliExtensions().
 
     // Provides extension methods for IEnumerable<VoidOr<T>>.
-    public static partial class VoidOrSequence
+    public static partial class VoidOr
     {
         #region Basic Monad functions
 

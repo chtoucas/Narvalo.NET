@@ -197,7 +197,7 @@ namespace Narvalo.Fx
         #endregion
     } // End of Maybe - T4: EmitMonadCore().
 
-    // Provides the core monadic extension methods for Maybe<T>.
+    // Provides extension methods for Maybe<T>.
     public static partial class Maybe
     {
         #region Applicative
@@ -733,7 +733,7 @@ namespace Narvalo.Fx
     } // End of Func - T4: EmitKleisliExtensions().
 
     // Provides extension methods for IEnumerable<Maybe<T>>.
-    public static partial class MaybeSequence
+    public static partial class Maybe
     {
         #region Basic Monad functions
 

@@ -101,10 +101,6 @@
     <Compile Include="Outcome.Shadowing.cs" />
     <Compile Include="Result.Shadowing.cs" />
     <Compile Include="Result`2.cs" />
-    <Compile Include="MaybeSequence.cs" />
-    <Compile Include="OutcomeSequence.cs" />
-    <Compile Include="ResultSequence.cs" />
-    <Compile Include="VoidOrSequence.cs" />
     <Compile Include="VoidOr.cs" />
     <Compile Include="VoidOr.g.cs">
       <DependentUpon>VoidOr.tt</DependentUpon>

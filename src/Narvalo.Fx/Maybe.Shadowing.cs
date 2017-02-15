@@ -100,7 +100,7 @@ namespace Narvalo.Fx
         }
     }
 
-    public static partial class MaybeSequence
+    public static partial class Maybe
     {
         internal static Maybe<IEnumerable<TSource>> CollectImpl<TSource>(this IEnumerable<Maybe<TSource>> @this)
         {

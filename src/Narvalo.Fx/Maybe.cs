@@ -3,9 +3,12 @@
 namespace Narvalo.Fx
 {
     using System;
+    using System.Collections.Generic;
 
     /// <summary>
-    /// Provides a set of static and extension methods for <see cref="Maybe{T}"/>.
+    /// Provides a set of static and extension methods for <see cref="Maybe{T}"/>
+    /// and for querying objects that implement <see cref="IEnumerable{T}"/>
+    /// where T is of type <see cref="Maybe{S}"/>.
     /// </summary>
     public static partial class Maybe
     {
@@ -51,5 +54,29 @@ namespace Narvalo.Fx
         }
 
         #endregion
+    }
+
+    // Provides extension methods for IEnumerable<Maybe<T>>.
+    public static partial class Maybe
+    {
+        // Named <c>catMaybes</c> in Haskell parlance.
+        public static IEnumerable<TSource> CollectAny<TSource>(this IEnumerable<Maybe<TSource>> @this)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Warrant.NotNull<IEnumerable<TSource>>();
+
+            return CollectAnyIterator(@this);
+        }
+
+        internal static IEnumerable<TSource> CollectAnyIterator<TSource>(IEnumerable<Maybe<TSource>> source)
+        {
+            Demand.NotNull(source);
+            Warrant.NotNull<IEnumerable<TSource>>();
+
+            foreach (var item in source)
+            {
+                if (item.IsSome) { yield return item.Value; }
+            }
+        }
     }
 }
