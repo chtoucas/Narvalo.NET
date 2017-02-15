@@ -37,6 +37,17 @@ public partial class MonadTemplate
             return applicative.Apply(@this);
         }
 
+        // Named "<**>" in Haskell parlance. Same as Gather (<*>) with its arguments flipped.
+        public static <#= Name #><TResult<#= SuffixT #>> Apply<TSource, TResult<#= SuffixT #>>(
+            this <#= Name #><Func<TSource, TResult><#= SuffixT #>> @this,
+            <#= Name #><TSource<#= SuffixT #>> value)
+        {
+            <#+ WriteNotNull(); #>
+            <#+ WriteNotNull("value"); #>
+
+            return @this.Bind(thunk => value.Select(v => thunk.Invoke(v)));
+        }
+
         public static <#= Name #><Tuple<TSource, TOther><#= SuffixT #>> Zip<TSource, TOther<#= SuffixT #>>(
             this <#= Name #><TSource<#= SuffixT #>> @this,
             <#= Name #><TOther<#= SuffixT #>> other)

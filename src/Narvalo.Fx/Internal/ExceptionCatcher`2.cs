@@ -12,7 +12,7 @@ namespace Narvalo.Fx.Internal
     {
         public ExceptionCatcher() { }
 
-        public VoidOrError Invoke(Action action)
+        public VoidOrError Capture(Action action)
         {
             Require.NotNull(action, nameof(action));
             Warrant.NotNull<VoidOrError>();
@@ -31,7 +31,7 @@ namespace Narvalo.Fx.Internal
             return VoidOrError.FromError(edi);
         }
 
-        public Outcome<TResult> Invoke<TResult>(Func<TResult> thunk)
+        public Outcome<TResult> Capture<TResult>(Func<TResult> thunk)
         {
             Require.NotNull(thunk, nameof(thunk));
             Warrant.NotNull<Outcome<TResult>>();
@@ -50,7 +50,7 @@ namespace Narvalo.Fx.Internal
             return Outcome.FromError<TResult>(edi);
         }
 
-        public Outcome<TResult> Invoke<TSource, TResult>(Func<TSource, TResult> thunk, TSource value)
+        public Outcome<TResult> Capture<TSource, TResult>(Func<TSource, TResult> thunk, TSource value)
         {
             Require.NotNull(thunk, nameof(thunk));
             Warrant.NotNull<Outcome<TResult>>();

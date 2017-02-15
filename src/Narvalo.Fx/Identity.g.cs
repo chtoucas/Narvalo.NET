@@ -202,6 +202,17 @@ namespace Narvalo.Fx
             return applicative.Apply(@this);
         }
 
+        // Named "<**>" in Haskell parlance. Same as Gather (<*>) with its arguments flipped.
+        public static Identity<TResult> Apply<TSource, TResult>(
+            this Identity<Func<TSource, TResult>> @this,
+            Identity<TSource> value)
+        {
+            /* T4: C# indent */
+            /* T4: C# indent */
+
+            return @this.Bind(thunk => value.Select(v => thunk.Invoke(v)));
+        }
+
         public static Identity<Tuple<TSource, TOther>> Zip<TSource, TOther>(
             this Identity<TSource> @this,
             Identity<TOther> other)
@@ -451,26 +462,9 @@ namespace Narvalo.Fx
         #endregion
     } // End of Identity - T4: EmitMonadExtensions().
 
-    // Provides extension methods for Func<T> in the Kleisli category + one Applicative.
-    public static partial class Func
+    // Provides extension methods for Func<T> in the Kleisli category.
+    public static partial class Kunc
     {
-        #region Applicative
-
-
-        // Named "<**>" in Haskell parlance. Same as Gather (<*>) with its arguments flipped.
-        public static Identity<TResult> Apply<TSource, TResult>(
-            this Identity<Func<TSource, TResult>> @this,
-            Identity<TSource> value)
-        {
-            /* T4: C# indent */
-            /* T4: C# indent */
-
-            return @this.Bind(thunk => value.Select(v => thunk.Invoke(v)));
-        }
-
-
-        #endregion
-
         #region Basic Monad functions
 
 

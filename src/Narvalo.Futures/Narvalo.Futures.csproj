@@ -57,7 +57,7 @@
     <Compile Include="Fx\BooleanResult`1.cs" />
     <Compile Include="Fx\Error.cs" />
     <Compile Include="Fx\Error`1.cs" />
-    <Compile Include="Fx\FuncEx.cs" />
+    <Compile Include="Fx\Func.cs" />
     <Compile Include="Fx\Extensions\Func%24.cs" />
     <Compile Include="Fx\Extensions\Nullable%24.cs" />
     <Compile Include="Fx\Recursion.cs" />

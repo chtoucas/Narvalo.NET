@@ -233,6 +233,17 @@ namespace Monads
             return applicative.Apply(@this);
         }
 
+        // Named "<**>" in Haskell parlance. Same as Gather (<*>) with its arguments flipped.
+        public static MonadPlus<TResult> Apply<TSource, TResult>(
+            this MonadPlus<Func<TSource, TResult>> @this,
+            MonadPlus<TSource> value)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(value, nameof(value));
+
+            return @this.Bind(thunk => value.Select(v => thunk.Invoke(v)));
+        }
+
         public static MonadPlus<Tuple<TSource, TOther>> Zip<TSource, TOther>(
             this MonadPlus<TSource> @this,
             MonadPlus<TOther> other)
@@ -691,26 +702,9 @@ namespace Monads
         #endregion
     } // End of MonadPlus - T4: EmitMonadExtensions().
 
-    // Provides extension methods for Func<T> in the Kleisli category + one Applicative.
-    public static partial class Func
+    // Provides extension methods for Func<T> in the Kleisli category.
+    public static partial class Kunc
     {
-        #region Applicative
-
-
-        // Named "<**>" in Haskell parlance. Same as Gather (<*>) with its arguments flipped.
-        public static MonadPlus<TResult> Apply<TSource, TResult>(
-            this MonadPlus<Func<TSource, TResult>> @this,
-            MonadPlus<TSource> value)
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(value, nameof(value));
-
-            return @this.Bind(thunk => value.Select(v => thunk.Invoke(v)));
-        }
-
-
-        #endregion
-
         #region Basic Monad functions
 
 

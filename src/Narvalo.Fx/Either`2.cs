@@ -35,6 +35,11 @@ namespace Narvalo.Fx
 
         public abstract Maybe<TRight> RightOrNone();
 
+        public abstract Either<TRight, TLeft> Swap();
+
+        /// <summary>
+        /// Represents the left side of the <see cref="Either{TLeft, TRight}"/> type.
+        /// </summary>
         private sealed partial class Left_ : Either<TLeft, TRight>, IEquatable<Left_>
         {
             private readonly TLeft _value;
@@ -53,6 +58,8 @@ namespace Narvalo.Fx
             public override Maybe<TLeft> LeftOrNone() => Maybe.Of(Left);
 
             public override Maybe<TRight> RightOrNone() => Maybe<TRight>.None;
+
+            public override Either<TRight, TLeft> Swap() => Either.FromRight<TRight, TLeft>(Left);
 
             public bool Equals(Left_ other)
             {
@@ -75,6 +82,9 @@ namespace Narvalo.Fx
             }
         }
 
+        /// <summary>
+        /// Represents the right side of the <see cref="Either{TLeft, TRight}"/> type.
+        /// </summary>
         private sealed partial class Right_ : Either<TLeft, TRight>, IEquatable<Right_>
         {
             private readonly TRight _value;
@@ -93,6 +103,8 @@ namespace Narvalo.Fx
             public override Maybe<TLeft> LeftOrNone() => Maybe<TLeft>.None;
 
             public override Maybe<TRight> RightOrNone() => Maybe.Of(Right);
+
+            public override Either<TRight, TLeft> Swap() => Either.FromLeft<TRight, TLeft>(Right);
 
             public bool Equals(Right_ other)
             {
@@ -159,9 +171,11 @@ namespace Narvalo.Fx
     // (More or less) provides the core Monad methods.
     public abstract partial class Either<TLeft, TRight>
     {
-        public abstract Either<TResult, TRight> BindLeft<TResult>(Func<TLeft, Either<TResult, TRight>> selector);
+        public abstract Either<TResult, TRight> BindLeft<TResult>(
+            Func<TLeft, Either<TResult, TRight>> leftSelector);
 
-        public abstract Either<TLeft, TResult> BindRight<TResult>(Func<TRight, Either<TLeft, TResult>> selector);
+        public abstract Either<TLeft, TResult> BindRight<TResult>(
+            Func<TRight, Either<TLeft, TResult>> rightSelector);
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -201,27 +215,31 @@ namespace Narvalo.Fx
 
         private partial class Left_
         {
-            public override Either<TResult, TRight> BindLeft<TResult>(Func<TLeft, Either<TResult, TRight>> selector)
+            public override Either<TResult, TRight> BindLeft<TResult>(
+                Func<TLeft, Either<TResult, TRight>> leftSelector)
             {
-                Require.NotNull(selector, nameof(selector));
+                Require.NotNull(leftSelector, nameof(leftSelector));
 
-                return selector.Invoke(Left);
+                return leftSelector.Invoke(Left);
             }
 
-            public override Either<TLeft, TResult> BindRight<TResult>(Func<TRight, Either<TLeft, TResult>> selector)
+            public override Either<TLeft, TResult> BindRight<TResult>(
+                Func<TRight, Either<TLeft, TResult>> rightSelector)
                 => Either.FromLeft<TLeft, TResult>(Left);
         }
 
         private partial class Right_
         {
-            public override Either<TResult, TRight> BindLeft<TResult>(Func<TLeft, Either<TResult, TRight>> selector)
+            public override Either<TResult, TRight> BindLeft<TResult>(
+                Func<TLeft, Either<TResult, TRight>> leftSelector)
                 => Either.FromRight<TResult, TRight>(Right);
 
-            public override Either<TLeft, TResult> BindRight<TResult>(Func<TRight, Either<TLeft, TResult>> selector)
+            public override Either<TLeft, TResult> BindRight<TResult>(
+                Func<TRight, Either<TLeft, TResult>> rightSelector)
             {
-                Require.NotNull(selector, nameof(selector));
+                Require.NotNull(rightSelector, nameof(rightSelector));
 
-                return selector.Invoke(Right);
+                return rightSelector.Invoke(Right);
             }
         }
     }

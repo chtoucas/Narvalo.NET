@@ -16,7 +16,7 @@ namespace Narvalo.Fx
     /// <remarks>Any enclosed value is not null.</remarks>
     /// <typeparam name="TLeft">The underlying type of the left part.</typeparam>
     /// <typeparam name="TRight">The underlying type of the right part.</typeparam>
-    public abstract partial class Switch<TLeft, TRight> : Internal.IAlternative<TLeft, TRight>
+    public abstract partial class Switch<TLeft, TRight> // : Internal.IAlternative<TLeft, TRight>
     {
         private static readonly Switch<TLeft, TRight> s_Empty = new Switch<TLeft, TRight>.Empty_();
 
@@ -87,28 +87,28 @@ namespace Narvalo.Fx
             public override Switch<TLeft, TResult> Select<TResult>(Func<TRight, TResult> rightSelector)
                 => Switch<TLeft, TResult>.Empty;
 
-            public override TResult Match<TResult>(
-                Func<TLeft, TResult> caseLeft,
-                Func<TRight, TResult> caseRight,
-                TResult other)
-                => other;
+            //public override TResult Match<TResult>(
+            //    Func<TLeft, TResult> caseLeft,
+            //    Func<TRight, TResult> caseRight,
+            //    TResult other)
+            //    => other;
 
-            public override TResult Match<TResult>(
-                Func<TLeft, TResult> caseLeft,
-                Func<TRight, TResult> caseRight,
-                Func<TResult> otherwise)
-            {
-                Require.NotNull(otherwise, nameof(otherwise));
+            //public override TResult Match<TResult>(
+            //    Func<TLeft, TResult> caseLeft,
+            //    Func<TRight, TResult> caseRight,
+            //    Func<TResult> otherwise)
+            //{
+            //    Require.NotNull(otherwise, nameof(otherwise));
 
-                return otherwise.Invoke();
-            }
+            //    return otherwise.Invoke();
+            //}
 
-            public override void Do(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise)
-            {
-                Require.NotNull(otherwise, nameof(otherwise));
+            //public override void Do(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise)
+            //{
+            //    Require.NotNull(otherwise, nameof(otherwise));
 
-                otherwise.Invoke();
-            }
+            //    otherwise.Invoke();
+            //}
 
             public override Switch<TRight, TLeft> Swap() => Switch<TRight, TLeft>.Empty;
 
@@ -168,34 +168,34 @@ namespace Narvalo.Fx
             public override Switch<TLeft, TResult> Select<TResult>(Func<TRight, TResult> rightSelector)
                 => new Switch<TLeft, TResult>.Left_(_value);
 
-            public override TResult Match<TResult>(
-                Func<TLeft, TResult> caseLeft,
-                Func<TRight, TResult> caseRight,
-                TResult other)
-            {
-                Require.NotNull(caseLeft, nameof(caseLeft));
+            //public override TResult Match<TResult>(
+            //    Func<TLeft, TResult> caseLeft,
+            //    Func<TRight, TResult> caseRight,
+            //    TResult other)
+            //{
+            //    Require.NotNull(caseLeft, nameof(caseLeft));
 
-                return caseLeft.Invoke(_value);
-            }
+            //    return caseLeft.Invoke(_value);
+            //}
 
-            /// <inheritdoc cref="Switch{TLeft, TRight}.Do" />
-            public override TResult Match<TResult>(
-                Func<TLeft, TResult> caseLeft,
-                Func<TRight, TResult> caseRight,
-                Func<TResult> otherwise)
-            {
-                Require.NotNull(caseLeft, nameof(caseLeft));
+            ///// <inheritdoc cref="Switch{TLeft, TRight}.Do" />
+            //public override TResult Match<TResult>(
+            //    Func<TLeft, TResult> caseLeft,
+            //    Func<TRight, TResult> caseRight,
+            //    Func<TResult> otherwise)
+            //{
+            //    Require.NotNull(caseLeft, nameof(caseLeft));
 
-                return caseLeft.Invoke(_value);
-            }
+            //    return caseLeft.Invoke(_value);
+            //}
 
-            /// <inheritdoc cref="Switch{TLeft, TRight}.Do" />
-            public override void Do(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise)
-            {
-                Require.NotNull(caseLeft, nameof(caseLeft));
+            ///// <inheritdoc cref="Switch{TLeft, TRight}.Do" />
+            //public override void Do(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise)
+            //{
+            //    Require.NotNull(caseLeft, nameof(caseLeft));
 
-                caseLeft.Invoke(_value);
-            }
+            //    caseLeft.Invoke(_value);
+            //}
 
             /// <inheritdoc cref="Switch{TRight, TLeft}.Swap" />
             public override Switch<TRight, TLeft> Swap() => Switch<TRight, TLeft>.η(_value);
@@ -272,34 +272,34 @@ namespace Narvalo.Fx
             /// <inheritdoc cref="Switch{TRight, TLeft}.Swap" />
             public override Switch<TRight, TLeft> Swap() => Switch<TRight, TLeft>.η(_value);
 
-            public override TResult Match<TResult>(
-                Func<TLeft, TResult> caseLeft,
-                Func<TRight, TResult> caseRight,
-                TResult other)
-            {
-                Require.NotNull(caseRight, nameof(caseRight));
+            //public override TResult Match<TResult>(
+            //    Func<TLeft, TResult> caseLeft,
+            //    Func<TRight, TResult> caseRight,
+            //    TResult other)
+            //{
+            //    Require.NotNull(caseRight, nameof(caseRight));
 
-                return caseRight.Invoke(_value);
-            }
+            //    return caseRight.Invoke(_value);
+            //}
 
-            /// <inheritdoc cref="Switch{TLeft, TRight}.Do" />
-            public override TResult Match<TResult>(
-                Func<TLeft, TResult> caseLeft,
-                Func<TRight, TResult> caseRight,
-                Func<TResult> otherwise)
-            {
-                Require.NotNull(caseRight, nameof(caseRight));
+            ///// <inheritdoc cref="Switch{TLeft, TRight}.Do" />
+            //public override TResult Match<TResult>(
+            //    Func<TLeft, TResult> caseLeft,
+            //    Func<TRight, TResult> caseRight,
+            //    Func<TResult> otherwise)
+            //{
+            //    Require.NotNull(caseRight, nameof(caseRight));
 
-                return caseRight.Invoke(_value);
-            }
+            //    return caseRight.Invoke(_value);
+            //}
 
-            /// <inheritdoc cref="Switch{TLeft, TRight}.Do" />
-            public override void Do(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise)
-            {
-                Require.NotNull(caseRight, nameof(caseRight));
+            ///// <inheritdoc cref="Switch{TLeft, TRight}.Do" />
+            //public override void Do(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise)
+            //{
+            //    Require.NotNull(caseRight, nameof(caseRight));
 
-                caseRight.Invoke(_value);
-            }
+            //    caseRight.Invoke(_value);
+            //}
 
             public override Maybe<TLeft> LeftOrNone() => Maybe<TLeft>.None;
 
@@ -334,20 +334,20 @@ namespace Narvalo.Fx
     }
 
     // Implements the Internal.IAlternative<TLeft, TRight> interface.
-    public abstract partial class Switch<TLeft, TRight>
-    {
-        public abstract TResult Match<TResult>(
-            Func<TLeft, TResult> caseLeft,
-            Func<TRight, TResult> caseRight,
-            TResult other);
+    //public abstract partial class Switch<TLeft, TRight>
+    //{
+    //    public abstract TResult Match<TResult>(
+    //        Func<TLeft, TResult> caseLeft,
+    //        Func<TRight, TResult> caseRight,
+    //        TResult other);
 
-        public abstract TResult Match<TResult>(
-            Func<TLeft, TResult> caseLeft,
-            Func<TRight, TResult> caseRight,
-            Func<TResult> otherwise);
+    //    public abstract TResult Match<TResult>(
+    //        Func<TLeft, TResult> caseLeft,
+    //        Func<TRight, TResult> caseRight,
+    //        Func<TResult> otherwise);
 
-        public abstract void Do(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise);
-    }
+    //    public abstract void Do(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise);
+    //}
 }
 
 #if CONTRACTS_FULL
