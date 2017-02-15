@@ -9,14 +9,14 @@ namespace Narvalo.Fx
     /// </summary>
     public static partial class Either
     {
-        public static Either<TLeft, TRight> FromLeft<TLeft, TRight>(TLeft value)
+        public static Either<TLeft, TRight> OfLeft<TLeft, TRight>(TLeft value)
         {
             Warrant.NotNull<Either<TLeft, TRight>>();
 
             return Either<TLeft, TRight>.η(value);
         }
 
-        public static Either<TLeft, TRight> FromRight<TLeft, TRight>(TRight value)
+        public static Either<TLeft, TRight> OfRight<TLeft, TRight>(TRight value)
         {
             Warrant.NotNull<Either<TLeft, TRight>>();
 
@@ -51,7 +51,7 @@ namespace Narvalo.Fx
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(rightSelector, nameof(rightSelector));
 
-            return @this.BindRight(_ => FromRight<TLeft, TResult>(rightSelector.Invoke(_)));
+            return @this.BindRight(_ => OfRight<TLeft, TResult>(rightSelector.Invoke(_)));
         }
     }
 }

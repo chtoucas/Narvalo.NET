@@ -172,6 +172,8 @@ namespace Narvalo.Fx
 
         public abstract TError ToError();
 
+        public abstract Either<T, TError> ToEither();
+
         public static explicit operator T(Result<T, TError> value)
             => value == null ? default(T) : value.ToValue();
 
@@ -192,6 +194,8 @@ namespace Narvalo.Fx
             {
                 throw new InvalidCastException("XXX");
             }
+
+            public override Either<T, TError> ToEither() => Either.OfLeft<T, TError>(Value);
         }
 
         private partial class Error_
@@ -202,6 +206,8 @@ namespace Narvalo.Fx
             }
 
             public override TError ToError() => Error;
+
+            public override Either<T, TError> ToEither() => Either.OfRight<T, TError>(Error);
         }
     }
 

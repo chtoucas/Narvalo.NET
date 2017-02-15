@@ -12,7 +12,7 @@ namespace Narvalo.Fx
         public static void LeftOrNone_ReturnsNone_WhenRightEither()
         {
             // Arrange
-            var either = Either.FromRight<string, string>("leftValue");
+            var either = Either.OfRight<string, string>("leftValue");
 
             // Act
             var result = either.LeftOrNone();
@@ -26,7 +26,7 @@ namespace Narvalo.Fx
         {
             // Arrange
             var leftValue = "leftValue";
-            var either = Either.FromLeft<string, string>(leftValue);
+            var either = Either.OfLeft<string, string>(leftValue);
             var expectedResult = Maybe.Of(leftValue);
 
             // Act
@@ -45,7 +45,7 @@ namespace Narvalo.Fx
         public static void RightOrNone_ReturnsNone_WhenLeftEither()
         {
             // Arrange
-            var either = Either.FromLeft<string, string>("rightValue");
+            var either = Either.OfLeft<string, string>("rightValue");
 
             // Act
             var result = either.RightOrNone();
@@ -59,7 +59,7 @@ namespace Narvalo.Fx
         {
             // Arrange
             var rightValue = "rightValue";
-            var either = Either.FromRight<string, string>(rightValue);
+            var either = Either.OfRight<string, string>(rightValue);
             var expectedResult = Maybe.Of(rightValue);
 
             // Act

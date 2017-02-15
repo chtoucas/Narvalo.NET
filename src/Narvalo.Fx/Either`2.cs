@@ -6,6 +6,7 @@ namespace Narvalo.Fx
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Contracts;
     using System.Runtime.CompilerServices;
 
     /// <summary>
@@ -17,6 +18,7 @@ namespace Narvalo.Fx
     /// <remarks>The enclosed value might be null.</remarks>
     /// <typeparam name="TLeft">The underlying type of the left part.</typeparam>
     /// <typeparam name="TRight">The underlying type of the right part.</typeparam>
+    [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public abstract partial class Either<TLeft, TRight> : Internal.IMatchable<TLeft, TRight>
     {
 #if CONTRACTS_FULL // Custom ctor visibility for the contract class only.
@@ -33,15 +35,22 @@ namespace Narvalo.Fx
 
         internal abstract TRight Right { get; }
 
+        [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
+        private string DebuggerDisplay => IsLeft ? "Left" : "Right";
+
         public abstract Maybe<TLeft> LeftOrNone();
 
         public abstract Maybe<TRight> RightOrNone();
 
         public abstract Either<TRight, TLeft> Swap();
 
+        public abstract Either<TRight, TLeft> SwapUnchecked();
+
         /// <summary>
         /// Represents the left side of the <see cref="Either{TLeft, TRight}"/> type.
         /// </summary>
+        [DebuggerTypeProxy(typeof(Either<,>.Left_.DebugView))]
         private sealed partial class Left_ : Either<TLeft, TRight>, IEquatable<Left_>
         {
             private readonly TLeft _value;
@@ -61,7 +70,9 @@ namespace Narvalo.Fx
 
             public override Maybe<TRight> RightOrNone() => Maybe<TRight>.None;
 
-            public override Either<TRight, TLeft> Swap() => Either.FromRight<TRight, TLeft>(Left);
+            public override Either<TRight, TLeft> Swap() { throw new InvalidOperationException("XXX"); }
+
+            public override Either<TRight, TLeft> SwapUnchecked() => Either.OfRight<TRight, TLeft>(Left);
 
             public bool Equals(Left_ other)
             {
@@ -82,11 +93,29 @@ namespace Narvalo.Fx
 
                 return Format.Current("Left({0})", Left);
             }
+
+            /// <summary>
+            /// Represents a debugger type proxy for <see cref="Either{TLeft, TRight}.Left_"/>.
+            /// </summary>
+            [ContractVerification(false)] // Debugger-only code.
+            [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
+            private sealed class DebugView
+            {
+                private readonly Either<TLeft, TRight> _inner;
+
+                public DebugView(Either<TLeft, TRight> inner)
+                {
+                    _inner = inner;
+                }
+
+                public TLeft Left => _inner.Left;
+            }
         }
 
         /// <summary>
         /// Represents the right side of the <see cref="Either{TLeft, TRight}"/> type.
         /// </summary>
+        [DebuggerTypeProxy(typeof(Either<,>.Right_.DebugView))]
         private sealed partial class Right_ : Either<TLeft, TRight>, IEquatable<Right_>
         {
             private readonly TRight _value;
@@ -106,7 +135,9 @@ namespace Narvalo.Fx
 
             public override Maybe<TRight> RightOrNone() => Maybe.Of(Right);
 
-            public override Either<TRight, TLeft> Swap() => Either.FromLeft<TRight, TLeft>(Right);
+            public override Either<TRight, TLeft> Swap() => Either.OfLeft<TRight, TLeft>(Right);
+
+            public override Either<TRight, TLeft> SwapUnchecked() => Either.OfLeft<TRight, TLeft>(Right);
 
             public bool Equals(Right_ other)
             {
@@ -127,6 +158,23 @@ namespace Narvalo.Fx
 
                 return Format.Current("Right({0})", Right);
             }
+
+            /// <summary>
+            /// Represents a debugger type proxy for <see cref="Either{TLeft, TRight}.Right_"/>.
+            /// </summary>
+            [ContractVerification(false)] // Debugger-only code.
+            [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
+            private sealed class DebugView
+            {
+                private readonly Either<TLeft, TRight> _inner;
+
+                public DebugView(Either<TLeft, TRight> inner)
+                {
+                    _inner = inner;
+                }
+
+                public TRight Right => _inner.Right;
+            }
         }
     }
 
@@ -144,10 +192,10 @@ namespace Narvalo.Fx
             => value == null ? default(TRight) : value.ToRight();
 
         public static explicit operator Either<TLeft, TRight>(TLeft value)
-            => Either.FromLeft<TLeft, TRight>(value);
+            => Either.OfLeft<TLeft, TRight>(value);
 
         public static explicit operator Either<TLeft, TRight>(TRight value)
-            => Either.FromRight<TLeft, TRight>(value);
+            => Either.OfRight<TLeft, TRight>(value);
 
         private partial class Left_
         {
@@ -170,7 +218,7 @@ namespace Narvalo.Fx
         }
     }
 
-    // (More or less) provides the core Monad methods.
+    // Provides the core Monad methods.
     public abstract partial class Either<TLeft, TRight>
     {
         public abstract Either<TResult, TRight> Bind<TResult>(Func<TLeft, Either<TResult, TRight>> leftSelector);
@@ -204,7 +252,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(square, nameof(square));
 
-            return square.IsLeft ? square.Left : Either.FromRight<TLeft, TRight>(square.Right);
+            return square.IsLeft ? square.Left : Either.OfRight<TLeft, TRight>(square.Right);
         }
 
         [DebuggerHidden]
@@ -213,7 +261,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(square, nameof(square));
 
-            return square.IsRight ? square.Right : Either.FromLeft<TLeft, TRight>(square.Left);
+            return square.IsRight ? square.Right : Either.OfLeft<TLeft, TRight>(square.Left);
         }
 
         private partial class Left_
@@ -226,13 +274,13 @@ namespace Narvalo.Fx
             }
 
             public override Either<TLeft, TResult> BindRight<TResult>(Func<TRight, Either<TLeft, TResult>> selector)
-                => Either.FromLeft<TLeft, TResult>(Left);
+                => Either.OfLeft<TLeft, TResult>(Left);
         }
 
         private partial class Right_
         {
             public override Either<TResult, TRight> Bind<TResult>(Func<TLeft, Either<TResult, TRight>> selector)
-                => Either.FromRight<TResult, TRight>(Right);
+                => Either.OfRight<TResult, TRight>(Right);
 
             public override Either<TLeft, TResult> BindRight<TResult>(Func<TRight, Either<TLeft, TResult>> selector)
             {
