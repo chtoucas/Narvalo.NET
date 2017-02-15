@@ -83,19 +83,19 @@ namespace Narvalo.Finance
 
         [Fact]
         public static void TryParse_ReturnsFailure_ForNull()
-            => Assert.False(IbanParts.TryParse(null).Success);
+            => Assert.False(IbanParts.TryParse(null).IsSuccess);
 
         [Theory]
         [MemberData(nameof(ValidValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void TryParse_ReturnsSuccess_ForValidInput(string value)
-            => Assert.True(IbanParts.TryParse(value).Success);
+            => Assert.True(IbanParts.TryParse(value).IsSuccess);
 
         [Theory]
         [MemberData(nameof(InvalidValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void TryParse_ReturnsFailure_ForInvalidInput(string value)
-            => Assert.False(IbanParts.TryParse(value).Success);
+            => Assert.False(IbanParts.TryParse(value).IsSuccess);
 
         #endregion
 

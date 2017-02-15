@@ -188,24 +188,6 @@ namespace Narvalo.Finance.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Outcome_NoErrorMessage.
-        /// </summary>
-        internal static string Outcome_NoErrorMessage {
-            get {
-                return ResourceManager.GetString("Outcome_NoErrorMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Outcome_NoValue.
-        /// </summary>
-        internal static string Outcome_NoValue {
-            get {
-                return ResourceManager.GetString("Outcome_NoValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Parse_InvalidBban.
         /// </summary>
         internal static string Parse_InvalidBban {
@@ -274,6 +256,24 @@ namespace Narvalo.Finance.Properties {
         internal static string Parse_InvalidLocationCode {
             get {
                 return ResourceManager.GetString("Parse_InvalidLocationCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Result_NoErrorMessage.
+        /// </summary>
+        internal static string Result_NoErrorMessage {
+            get {
+                return ResourceManager.GetString("Result_NoErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Result_NoValue.
+        /// </summary>
+        internal static string Result_NoValue {
+            get {
+                return ResourceManager.GetString("Result_NoValue", resourceCulture);
             }
         }
         

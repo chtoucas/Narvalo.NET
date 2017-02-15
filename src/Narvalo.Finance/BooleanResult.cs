@@ -28,7 +28,7 @@ namespace Narvalo.Finance
 
         public bool IsTrue => !IsFalse;
 
-        public virtual string ErrorMessage
+        public virtual string Error
         {
             get { throw new InvalidOperationException(Strings.BooleanResult_NoErrorMessage); }
         }
@@ -64,7 +64,7 @@ namespace Narvalo.Finance
                 _message = message;
             }
 
-            public override string ErrorMessage
+            public override string Error
             {
                 get { Warrant.NotNull<string>(); return _message; }
             }
@@ -90,7 +90,7 @@ namespace Narvalo.Finance
                     _inner = inner;
                 }
 
-                public string ErrorMessage => _inner.ErrorMessage;
+                public string ErrorMessage => _inner.Error;
             }
         }
     }

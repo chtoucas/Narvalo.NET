@@ -31,15 +31,15 @@ namespace Narvalo.Finance
         }
 
         // Keep this internal. We prefer to expose the simpler TryValidate().
-        internal static Outcome<IbanParts> TryValidateIntern(IbanParts parts, IbanValidationLevels levels)
+        internal static Result<IbanParts> TryValidateIntern(IbanParts parts, IbanValidationLevels levels)
         {
-            Warrant.NotNull<Outcome<IbanParts>>();
+            Warrant.NotNull<Result<IbanParts>>();
 
             var result = new IbanValidator(levels).TryValidate(parts);
 
             return result.IsTrue
-                ? Outcome.Success(parts)
-                : Outcome<IbanParts>.Failure(result.ErrorMessage);
+                ? Result.Of(parts)
+                : Result<IbanParts>.FromError(result.Error);
         }
 
         public bool Validate(IbanParts parts)

@@ -200,25 +200,25 @@ namespace Narvalo.Finance
 
         [Fact]
         public static void TryParse_ReturnsFailure_ForNull()
-            => Assert.False(Bic.TryParse(null).Success);
+            => Assert.False(Bic.TryParse(null).IsSuccess);
 
         [Theory]
         [MemberData(nameof(InvalidValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void TryParse_ReturnsFailure_ForInvalidLength(string value)
-            => Assert.False(Bic.TryParse(value).Success);
+            => Assert.False(Bic.TryParse(value).IsSuccess);
 
         [Theory]
         [MemberData(nameof(InvalidISOValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void TryParse_ReturnsFailure_ForInvalidISOValue(string value)
-            => Assert.False(Bic.TryParse(value, BicVersion.ISO).Success);
+            => Assert.False(Bic.TryParse(value, BicVersion.ISO).IsSuccess);
 
         [Theory]
         [MemberData(nameof(InvalidSwiftValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void TryParse_ReturnsFailure_ForInvalidSwiftValue(string value)
-            => Assert.False(Bic.TryParse(value, BicVersion.Swift).Success);
+            => Assert.False(Bic.TryParse(value, BicVersion.Swift).IsSuccess);
 
         #endregion
 

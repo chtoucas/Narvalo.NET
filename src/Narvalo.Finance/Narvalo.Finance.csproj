@@ -157,8 +157,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.fr.resx</DependentUpon>
     </Compile>
-    <Compile Include="Internal\Outcome.cs" />
-    <Compile Include="Outcome`1.cs" />
+    <Compile Include="Internal\Result.cs" />
+    <Compile Include="Result`1.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml" />

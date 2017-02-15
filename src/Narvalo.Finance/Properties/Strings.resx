@@ -159,11 +159,11 @@
   <data name="Money_InvalidFormatSpecification" xml:space="preserve">
     <value>Money_InvalidFormatSpecification</value>
   </data>
-  <data name="Outcome_NoErrorMessage" xml:space="preserve">
-    <value>Outcome_NoErrorMessage</value>
+  <data name="Result_NoErrorMessage" xml:space="preserve">
+    <value>Result_NoErrorMessage</value>
   </data>
-  <data name="Outcome_NoValue" xml:space="preserve">
-    <value>Outcome_NoValue</value>
+  <data name="Result_NoValue" xml:space="preserve">
+    <value>Result_NoValue</value>
   </data>
   <data name="Parse_InvalidBban" xml:space="preserve">
     <value>Parse_InvalidBban</value>

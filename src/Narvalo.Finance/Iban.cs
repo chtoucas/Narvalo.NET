@@ -92,7 +92,7 @@ namespace Narvalo.Finance
             var result = IbanValidator.TryValidate(parts, levels);
             if (result.IsFalse)
             {
-                throw new ArgumentException(result.ErrorMessage);
+                throw new ArgumentException(result.Error);
             }
 
             return new Iban(parts, levels);
@@ -121,18 +121,18 @@ namespace Narvalo.Finance
             return new Iban(parts.Value, levels);
         }
 
-        public static Outcome<Iban> TryParse(string value)
+        public static Result<Iban> TryParse(string value)
             => TryParse(value, IbanStyles.None, IbanValidationLevels.Default);
 
-        public static Outcome<Iban> TryParse(string value, IbanStyles styles)
+        public static Result<Iban> TryParse(string value, IbanStyles styles)
             => TryParse(value, styles, IbanValidationLevels.Default);
 
-        public static Outcome<Iban> TryParse(string value, IbanValidationLevels levels)
+        public static Result<Iban> TryParse(string value, IbanValidationLevels levels)
             => TryParse(value, IbanStyles.None, levels);
 
-        public static Outcome<Iban> TryParse(string value, IbanStyles styles, IbanValidationLevels levels)
+        public static Result<Iban> TryParse(string value, IbanStyles styles, IbanValidationLevels levels)
         {
-            if (value == null) { return Outcome<Iban>.Failure(Strings.Parse_InvalidIbanValue); }
+            if (value == null) { return Result<Iban>.FromError(Strings.Parse_InvalidIbanValue); }
 
             var val = PreprocessInput(value, styles);
 

@@ -100,20 +100,20 @@ namespace Narvalo.Finance
             return new IbanParts(countryCode, checkDigits, bban, value);
         }
 
-        public static Outcome<IbanParts> TryParse(string value)
+        public static Result<IbanParts> TryParse(string value)
         {
-            if (!CheckLength(value)) { return Outcome<IbanParts>.Failure(Strings.Parse_InvalidIbanValue); }
+            if (!CheckLength(value)) { return Result<IbanParts>.FromError(Strings.Parse_InvalidIbanValue); }
 
             string countryCode = CountryPart.FromIban(value);
-            if (countryCode == null) { return Outcome<IbanParts>.Failure(Strings.Parse_InvalidCountryCode); }
+            if (countryCode == null) { return Result<IbanParts>.FromError(Strings.Parse_InvalidCountryCode); }
 
             string checkDigits = CheckDigitsPart.FromIban(value);
-            if (checkDigits == null) { return Outcome<IbanParts>.Failure(Strings.Parse_InvalidCheckDigits); }
+            if (checkDigits == null) { return Result<IbanParts>.FromError(Strings.Parse_InvalidCheckDigits); }
 
             string bban = BbanPart.FromIban(value);
-            if (bban == null) { return Outcome<IbanParts>.Failure(Strings.Parse_InvalidBban); }
+            if (bban == null) { return Result<IbanParts>.FromError(Strings.Parse_InvalidBban); }
 
-            return Outcome.Success(new IbanParts(countryCode, checkDigits, bban, value));
+            return Result.Of(new IbanParts(countryCode, checkDigits, bban, value));
         }
 
         internal static bool CheckLength(string value)

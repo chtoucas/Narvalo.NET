@@ -8,55 +8,57 @@ namespace Narvalo.Finance
 
     using Narvalo.Finance.Properties;
 
-    public abstract partial class Outcome<T> where T : struct
+    public abstract partial class Result<T> where T : struct
     {
-        private Outcome(bool success) { Success = success; }
+        private Result(bool isSuccess) { IsSuccess = isSuccess; }
 
-        public bool Success { get; }
+        public bool IsSuccess { get; }
 
-        public abstract string ErrorMessage { get; }
+        public bool IsError => !IsSuccess;
+
+        public abstract string Error { get; }
 
         public abstract T Value { get; }
 
-        internal abstract Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector)
+        internal abstract Result<TResult> Bind<TResult>(Func<T, Result<TResult>> selector)
              where TResult : struct;
 
-        internal abstract Outcome<TResult> Select<TResult>(Func<T, TResult> selector)
+        internal abstract Result<TResult> Select<TResult>(Func<T, TResult> selector)
              where TResult : struct;
 
-        public static implicit operator Outcome<T>(T value) => Return(value);
+        public static implicit operator Result<T>(T value) => Return(value);
 
-        public static explicit operator T? (Outcome<T> value)
+        public static explicit operator T? (Result<T> value)
         {
             if (value == null) { return null; }
 
             return value.ToNullable();
         }
 
-        internal static Outcome<T> Failure(string message)
+        internal static Result<T> FromError(string message)
         {
             Require.NotNull(message, nameof(message));
-            Warrant.NotNull<Outcome<T>>();
+            Warrant.NotNull<Result<T>>();
 
-            return new Failure_(message);
+            return new Error_(message);
         }
 
         [DebuggerHidden]
-        internal static Outcome<T> Return(T value)
+        internal static Result<T> Return(T value)
         {
-            Warrant.NotNull<Outcome<T>>();
+            Warrant.NotNull<Result<T>>();
 
             return new Success_(value);
         }
 
         public T? ToNullable()
         {
-            if (!Success) { return null; }
+            if (!IsSuccess) { return null; }
 
             return Value;
         }
 
-        private sealed partial class Success_ : Outcome<T>, IEquatable<Success_>
+        private sealed partial class Success_ : Result<T>, IEquatable<Success_>
         {
             private readonly T _value;
 
@@ -65,25 +67,25 @@ namespace Narvalo.Finance
                 _value = value;
             }
 
-            public override string ErrorMessage
+            public override string Error
             {
-                get { throw new InvalidOperationException(Strings.Outcome_NoErrorMessage); }
+                get { throw new InvalidOperationException(Strings.Result_NoErrorMessage); }
             }
 
             public override T Value { get { return _value; } }
 
-            internal override Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector)
+            internal override Result<TResult> Bind<TResult>(Func<T, Result<TResult>> selector)
             {
                 Require.NotNull(selector, nameof(selector));
 
                 return selector.Invoke(Value);
             }
 
-            internal override Outcome<TResult> Select<TResult>(Func<T, TResult> selector)
+            internal override Result<TResult> Select<TResult>(Func<T, TResult> selector)
             {
                 Require.NotNull(selector, nameof(selector));
 
-                return Outcome<TResult>.Return(selector.Invoke(Value));
+                return Result<TResult>.Return(selector.Invoke(Value));
             }
 
             public bool Equals(Success_ other)
@@ -113,35 +115,35 @@ namespace Narvalo.Finance
             }
         }
 
-        private sealed partial class Failure_ : Outcome<T>, IEquatable<Failure_>
+        private sealed partial class Error_ : Result<T>, IEquatable<Error_>
         {
             private readonly string _message;
 
-            public Failure_(string message) : base(false)
+            public Error_(string message) : base(false)
             {
                 Demand.NotNull(message);
 
                 _message = message;
             }
 
-            public override string ErrorMessage { get { Warrant.NotNull<string>(); return _message; } }
+            public override string Error { get { Warrant.NotNull<string>(); return _message; } }
 
             public override T Value
             {
-                get { throw new InvalidOperationException(Strings.Outcome_NoValue); }
+                get { throw new InvalidOperationException(Strings.Result_NoValue); }
             }
 
-            internal override Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector)
-                => Outcome<TResult>.Failure(ErrorMessage);
+            internal override Result<TResult> Bind<TResult>(Func<T, Result<TResult>> selector)
+                => Result<TResult>.FromError(Error);
 
-            internal override Outcome<TResult> Select<TResult>(Func<T, TResult> selector)
-                => Outcome<TResult>.Failure(ErrorMessage);
+            internal override Result<TResult> Select<TResult>(Func<T, TResult> selector)
+                => Result<TResult>.FromError(Error);
 
-            public bool Equals(Failure_ other)
+            public bool Equals(Error_ other)
             {
                 if (ReferenceEquals(other, null)) { return false; }
 
-                return ErrorMessage == other.ErrorMessage;
+                return Error == other.Error;
             }
 
             public override bool Equals(object obj)
@@ -151,16 +153,16 @@ namespace Narvalo.Finance
                 // This class being sealed, we can ignore the next sentence.
                 // if (obj.GetType() != GetType()) { return false; }
 
-                return Equals(obj as Failure_);
+                return Equals(obj as Error_);
             }
 
-            public override int GetHashCode() => ErrorMessage.GetHashCode();
+            public override int GetHashCode() => Error.GetHashCode();
 
             public override string ToString()
             {
                 Warrant.NotNull<string>();
 
-                return Format.Current("Failure({0})", ErrorMessage);
+                return Format.Current("Error({0})", Error);
             }
         }
     }
