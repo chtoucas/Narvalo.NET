@@ -87,8 +87,9 @@
     <Compile Include="Internal\ExceptionCatcher`4.cs" />
     <Compile Include="Internal\ExceptionCatcher`3.cs" />
     <Compile Include="Internal\ExceptionCatcher`2.cs" />
-    <Compile Include="Internal\IHooks`1.cs" />
     <Compile Include="Capture.cs" />
+    <Compile Include="Internal\IEither`2.cs" />
+    <Compile Include="Internal\IMaybe`1.cs" />
     <Compile Include="Linq\AppendPrepend.cs" />
     <Compile Include="Linq\EmptyIfNull.cs" />
     <Compile Include="Linq\AggregateBack.cs" />
@@ -109,8 +110,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Result.cs" />
-    <Compile Include="Internal\IMatchable`2.cs" />
-    <Compile Include="Internal\IAlternative`.cs" />
+    <Compile Include="Internal\IMagma`1.cs" />
     <Compile Include="Iteration.cs" />
     <Compile Include="Iteration`2.cs" />
     <Compile Include="Linq\WhereAny.cs" />

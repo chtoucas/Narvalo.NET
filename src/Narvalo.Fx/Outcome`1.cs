@@ -25,8 +25,7 @@ namespace Narvalo.Fx
     /// <typeparam name="T">The underlying type of the value.</typeparam>
     // Friendly version of Either<ExceptionDispatchInfo, T>.
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public abstract partial class Outcome<T>
-        : Internal.IMatchable<T, ExceptionDispatchInfo>, Internal.IHooks<T>
+    public abstract partial class Outcome<T> : Internal.IEither<T, ExceptionDispatchInfo>
     {
 #if CONTRACTS_FULL // Custom ctor visibility for the contract class only.
         protected Outcome() { }
@@ -312,7 +311,7 @@ namespace Narvalo.Fx
         }
     }
 
-    // Implements the Internal.IMatchable<T, ExceptionDispatchInfo> interface.
+    // Implements the Internal.IEither<T, ExceptionDispatchInfo> interface.
     public partial class Outcome<T>
     {
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
@@ -321,9 +320,30 @@ namespace Narvalo.Fx
             Func<T, TResult> caseSuccess,
             Func<ExceptionDispatchInfo, TResult> caseError);
 
+        public abstract TResult Coalesce<TResult>(
+            Func<T, bool> predicate,
+            Func<T, TResult> selector,
+            Func<TResult> otherwise);
+
+        public abstract TResult Coalesce<TResult>(
+            Func<T, bool> predicate,
+            TResult thenResult,
+            TResult elseResult);
+
+        public abstract void When(Func<T, bool> predicate, Action<T> action);
+
+        public abstract void Do(Func<T, bool> predicate, Action<T> action, Action otherwise);
+
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "1#", Justification = "[Intentionally] Internal interface.")]
         public abstract void Do(Action<T> onSuccess, Action<ExceptionDispatchInfo> onError);
+
+        // Alias for OnSuccess().
+        void Internal.IMagma<T>.Do(Action<T> action) => OnSuccess(action);
+
+        public abstract void OnSuccess(Action<T> action);
+
+        public abstract void OnError(Action<ExceptionDispatchInfo> action);
 
         private partial class Success_
         {
@@ -336,51 +356,49 @@ namespace Narvalo.Fx
                 return caseSuccess.Invoke(Value);
             }
 
-            public override void Do(Action<T> onSuccess, Action<ExceptionDispatchInfo> onError)
+            public override TResult Coalesce<TResult>(
+                Func<T, bool> predicate,
+                Func<T, TResult> selector,
+                Func<TResult> otherwise)
             {
-                Require.NotNull(onSuccess, nameof(onSuccess));
+                Require.NotNull(predicate, nameof(predicate));
+                Require.NotNull(selector, nameof(selector));
+                Require.NotNull(otherwise, nameof(otherwise));
 
-                onSuccess.Invoke(Value);
-            }
-        }
-
-        private partial class Error_
-        {
-            public override TResult Match<TResult>(
-                Func<T, TResult> caseSuccess,
-                Func<ExceptionDispatchInfo, TResult> caseError)
-            {
-                Require.NotNull(caseError, nameof(caseError));
-
-                return caseError.Invoke(ExceptionInfo);
+                return predicate.Invoke(Value) ? selector.Invoke(Value) : otherwise.Invoke();
             }
 
-            public override void Do(Action<T> onSuccess, Action<ExceptionDispatchInfo> OnError)
+            public override TResult Coalesce<TResult>(
+                Func<T, bool> predicate,
+                TResult thenResult,
+                TResult elseResult)
             {
-                Require.NotNull(OnError, nameof(OnError));
+                Require.NotNull(predicate, nameof(predicate));
 
-                OnError.Invoke(ExceptionInfo);
+                return predicate.Invoke(Value) ? thenResult : elseResult;
             }
-        }
-    }
 
-    // Implements the Internal.IHooks<T> interface.
-    public partial class Outcome<T>
-    {
-        public abstract void When(Func<T, bool> predicate, Action<T> action);
-
-        public abstract void OnSuccess(Action<T> action);
-
-        public abstract void OnError(Action<ExceptionDispatchInfo> action);
-
-        private partial class Success_
-        {
             public override void When(Func<T, bool> predicate, Action<T> action)
             {
                 Require.NotNull(predicate, nameof(predicate));
                 Require.NotNull(action, nameof(action));
 
                 if (predicate.Invoke(Value)) { action.Invoke(Value); }
+            }
+
+            public override void Do(Func<T, bool> predicate, Action<T> action, Action otherwise)
+            {
+                Require.NotNull(predicate, nameof(predicate));
+                Require.NotNull(action, nameof(action));
+
+                if (predicate.Invoke(Value)) { action.Invoke(Value); }
+            }
+
+            public override void Do(Action<T> onSuccess, Action<ExceptionDispatchInfo> onError)
+            {
+                Require.NotNull(onSuccess, nameof(onSuccess));
+
+                onSuccess.Invoke(Value);
             }
 
             public override void OnSuccess(Action<T> action)
@@ -395,7 +413,46 @@ namespace Narvalo.Fx
 
         private partial class Error_
         {
+            public override TResult Match<TResult>(
+                Func<T, TResult> caseSuccess,
+                Func<ExceptionDispatchInfo, TResult> caseError)
+            {
+                Require.NotNull(caseError, nameof(caseError));
+
+                return caseError.Invoke(ExceptionInfo);
+            }
+
+            public override TResult Coalesce<TResult>(
+                Func<T, bool> predicate,
+                Func<T, TResult> selector,
+                Func<TResult> otherwise)
+            {
+                Require.NotNull(otherwise, nameof(otherwise));
+
+                return otherwise.Invoke();
+            }
+
+            public override TResult Coalesce<TResult>(
+                Func<T, bool> predicate,
+                TResult thenResult,
+                TResult elseResult)
+                => elseResult;
+
             public override void When(Func<T, bool> predicate, Action<T> action) { }
+
+            public override void Do(Func<T, bool> predicate, Action<T> action, Action otherwise)
+            {
+                Require.NotNull(otherwise, nameof(otherwise));
+
+                otherwise.Invoke();
+            }
+
+            public override void Do(Action<T> onSuccess, Action<ExceptionDispatchInfo> OnError)
+            {
+                Require.NotNull(OnError, nameof(OnError));
+
+                OnError.Invoke(ExceptionInfo);
+            }
 
             public override void OnSuccess(Action<T> action) { }
 
@@ -407,8 +464,14 @@ namespace Narvalo.Fx
             }
         }
     }
+}
 
 #if CONTRACTS_FULL
+
+namespace Narvalo.Fx
+{
+    using System;
+    using System.Diagnostics.Contracts;
 
     // In real world, only Success_ and Error_ can inherit from Outcome.
     // Adding the following object invariants on Outcome<T>:
@@ -456,6 +519,6 @@ namespace Narvalo.Fx
             return default(Outcome<TResult>);
         }
     }
+}
 
 #endif
-}

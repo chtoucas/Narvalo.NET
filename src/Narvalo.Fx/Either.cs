@@ -36,22 +36,22 @@ namespace Narvalo.Fx
     {
         public static Either<TResult, TRight> SelectLeft<TLeft, TRight, TResult>(
             this Either<TLeft, TRight> @this,
-            Func<TLeft, TResult> leftSelector)
+            Func<TLeft, TResult> selector)
         {
             Expect.NotNull(@this);
-            Expect.NotNull(leftSelector);
+            Expect.NotNull(selector);
 
-            return @this.Select(leftSelector);
+            return @this.BindLeft(_ => OfLeft<TResult, TRight>(selector.Invoke(_)));
         }
 
         public static Either<TLeft, TResult> SelectRight<TLeft, TRight, TResult>(
             this Either<TLeft, TRight> @this,
-            Func<TRight, TResult> rightSelector)
+            Func<TRight, TResult> selector)
         {
             Require.NotNull(@this, nameof(@this));
-            Require.NotNull(rightSelector, nameof(rightSelector));
+            Require.NotNull(selector, nameof(selector));
 
-            return @this.BindRight(_ => OfRight<TLeft, TResult>(rightSelector.Invoke(_)));
+            return @this.BindRight(_ => OfRight<TLeft, TResult>(selector.Invoke(_)));
         }
     }
 }

@@ -8,6 +8,17 @@ namespace Narvalo.Fx
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.CompilerServices;
 
+    // NB: Equivalent to IMatchable<T1, T2, Unit> (not defined).
+    internal interface IAlternative<T1, T2>
+    {
+        TResult Match<TResult>(Func<T1, TResult> selector1, Func<T2, TResult> selector2, Func<TResult> otherwise);
+
+        TResult Match<TResult>(Func<T1, TResult> selector1, Func<T2, TResult> selector2, TResult other);
+
+        // Equivalent to Match<Unit>().
+        void Do(Action<T1> action1, Action<T2> action2, Action otherwise);
+    }
+
     /// <summary>
     /// Represents the (possibly empty) sum of two types. An instance of the
     /// <see cref="Switch{TLeft, TRight}"/> class contains either a <c>TLeft</c>

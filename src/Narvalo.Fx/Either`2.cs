@@ -19,7 +19,7 @@ namespace Narvalo.Fx
     /// <typeparam name="TLeft">The underlying type of the left part.</typeparam>
     /// <typeparam name="TRight">The underlying type of the right part.</typeparam>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public abstract partial class Either<TLeft, TRight> : Internal.IMatchable<TLeft, TRight>
+    public abstract partial class Either<TLeft, TRight> : Internal.IEither<TLeft, TRight>
     {
 #if CONTRACTS_FULL // Custom ctor visibility for the contract class only.
         protected Either() { }
@@ -221,12 +221,12 @@ namespace Narvalo.Fx
     // Provides the core Monad methods.
     public abstract partial class Either<TLeft, TRight>
     {
-        public abstract Either<TResult, TRight> Bind<TResult>(Func<TLeft, Either<TResult, TRight>> leftSelector);
+        public Either<TResult, TRight> Bind<TResult>(Func<TLeft, Either<TResult, TRight>> leftSelector)
+            => BindLeft(leftSelector);
+
+        public abstract Either<TResult, TRight> BindLeft<TResult>(Func<TLeft, Either<TResult, TRight>> selector);
 
         public abstract Either<TLeft, TResult> BindRight<TResult>(Func<TRight, Either<TLeft, TResult>> selector);
-
-        public Either<TResult, TRight> BindLeft<TResult>(Func<TLeft, Either<TResult, TRight>> selector)
-            => Bind(selector);
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -266,7 +266,7 @@ namespace Narvalo.Fx
 
         private partial class Left_
         {
-            public override Either<TResult, TRight> Bind<TResult>(Func<TLeft, Either<TResult, TRight>> selector)
+            public override Either<TResult, TRight> BindLeft<TResult>(Func<TLeft, Either<TResult, TRight>> selector)
             {
                 Require.NotNull(selector, nameof(selector));
 
@@ -279,7 +279,7 @@ namespace Narvalo.Fx
 
         private partial class Right_
         {
-            public override Either<TResult, TRight> Bind<TResult>(Func<TLeft, Either<TResult, TRight>> selector)
+            public override Either<TResult, TRight> BindLeft<TResult>(Func<TLeft, Either<TResult, TRight>> selector)
                 => Either.OfRight<TResult, TRight>(Right);
 
             public override Either<TLeft, TResult> BindRight<TResult>(Func<TRight, Either<TLeft, TResult>> selector)
@@ -291,55 +291,30 @@ namespace Narvalo.Fx
         }
     }
 
-    // Implements the Internal.IMatchable<TLeft, TRight> interface.
+    // Implements the Internal.IEither<TLeft, TRight> interface.
     public abstract partial class Either<TLeft, TRight>
     {
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "1#", Justification = "[Intentionally] Internal interface.")]
         public abstract TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight);
 
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "1#", Justification = "[Intentionally] Internal interface.")]
-        public abstract void Do(Action<TLeft> caseLeft, Action<TRight> caseRight);
+        public abstract TResult Coalesce<TResult>(
+            Func<TLeft, bool> predicate,
+            Func<TLeft, TResult> selector,
+            Func<TResult> otherwise);
 
-        private partial class Left_
-        {
-            public override TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
-            {
-                Require.NotNull(caseLeft, nameof(caseLeft));
+        public abstract TResult Coalesce<TResult>(
+            Func<TLeft, bool> predicate,
+            TResult thenResult,
+            TResult elseResult);
 
-                return caseLeft.Invoke(Left);
-            }
+        public void When(Func<TLeft, bool> leftPredicate, Action<TLeft> action) => WhenLeft(leftPredicate, action);
 
-            public override void Do(Action<TLeft> onLeft, Action<TRight> onRight)
-            {
-                Require.NotNull(onLeft, nameof(onLeft));
+        public abstract void Do(Func<TLeft, bool> predicate, Action<TLeft> action, Action otherwise);
 
-                onLeft.Invoke(Left);
-            }
-        }
+        public abstract void Do(Action<TLeft> onLeft, Action<TRight> onRight);
 
-        private partial class Right_
-        {
-            public override TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
-            {
-                Require.NotNull(caseRight, nameof(caseRight));
+        // Alias for OnLeft().
+        void Internal.IMagma<TLeft>.Do(Action<TLeft> action) => OnLeft(action);
 
-                return caseRight.Invoke(Right);
-            }
-
-            public override void Do(Action<TLeft> onLeft, Action<TRight> onRight)
-            {
-                Require.NotNull(onRight, nameof(onRight));
-
-                onRight.Invoke(Right);
-            }
-        }
-    }
-
-    // (More or less) implements the Internal.IHooks<TLeft> and IHooks<TRight> interfaces.
-    public abstract partial class Either<TLeft, TRight>
-    {
         public abstract void WhenLeft(Func<TLeft, bool> predicate, Action<TLeft> action);
 
         public abstract void WhenRight(Func<TRight, bool> predicate, Action<TRight> action);
@@ -350,6 +325,35 @@ namespace Narvalo.Fx
 
         private partial class Left_
         {
+            public override TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
+            {
+                Require.NotNull(caseLeft, nameof(caseLeft));
+
+                return caseLeft.Invoke(Left);
+            }
+
+            public override TResult Coalesce<TResult>(
+                Func<TLeft, bool> predicate,
+                Func<TLeft, TResult> selector,
+                Func<TResult> otherwise)
+            {
+                Require.NotNull(predicate, nameof(predicate));
+                Require.NotNull(selector, nameof(selector));
+                Require.NotNull(otherwise, nameof(otherwise));
+
+                return predicate.Invoke(Left) ? selector.Invoke(Left) : otherwise.Invoke();
+            }
+
+            public override TResult Coalesce<TResult>(
+                Func<TLeft, bool> predicate,
+                TResult thenResult,
+                TResult elseResult)
+            {
+                Require.NotNull(predicate, nameof(predicate));
+
+                return predicate.Invoke(Left) ? thenResult : elseResult;
+            }
+
             public override void WhenLeft(Func<TLeft, bool> predicate, Action<TLeft> action)
             {
                 Require.NotNull(predicate, nameof(predicate));
@@ -359,6 +363,22 @@ namespace Narvalo.Fx
             }
 
             public override void WhenRight(Func<TRight, bool> predicate, Action<TRight> action) { }
+
+            public override void Do(Func<TLeft, bool> predicate, Action<TLeft> action, Action otherwise)
+            {
+                Require.NotNull(predicate, nameof(predicate));
+                Require.NotNull(action, nameof(action));
+                Require.NotNull(otherwise, nameof(otherwise));
+
+                if (predicate.Invoke(Left)) { action.Invoke(Left); } else { otherwise.Invoke(); }
+            }
+
+            public override void Do(Action<TLeft> onLeft, Action<TRight> onRight)
+            {
+                Require.NotNull(onLeft, nameof(onLeft));
+
+                onLeft.Invoke(Left);
+            }
 
             public override void OnLeft(Action<TLeft> action)
             {
@@ -372,6 +392,29 @@ namespace Narvalo.Fx
 
         private partial class Right_
         {
+            public override TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
+            {
+                Require.NotNull(caseRight, nameof(caseRight));
+
+                return caseRight.Invoke(Right);
+            }
+
+            public override TResult Coalesce<TResult>(
+                Func<TLeft, bool> predicate,
+                Func<TLeft, TResult> selector,
+                Func<TResult> otherwise)
+            {
+                Require.NotNull(otherwise, nameof(otherwise));
+
+                return otherwise.Invoke();
+            }
+
+            public override TResult Coalesce<TResult>(
+                Func<TLeft, bool> predicate,
+                TResult thenResult,
+                TResult elseResult)
+                => elseResult;
+
             public override void WhenLeft(Func<TLeft, bool> predicate, Action<TLeft> action) { }
 
             public override void WhenRight(Func<TRight, bool> predicate, Action<TRight> action)
@@ -380,6 +423,20 @@ namespace Narvalo.Fx
                 Require.NotNull(action, nameof(action));
 
                 if (predicate.Invoke(Right)) { action.Invoke(Right); }
+            }
+
+            public override void Do(Func<TLeft, bool> predicate, Action<TLeft> action, Action otherwise)
+            {
+                Require.NotNull(otherwise, nameof(otherwise));
+
+                otherwise.Invoke();
+            }
+
+            public override void Do(Action<TLeft> onLeft, Action<TRight> onRight)
+            {
+                Require.NotNull(onRight, nameof(onRight));
+
+                onRight.Invoke(Right);
             }
 
             public override void OnLeft(Action<TLeft> action) { }

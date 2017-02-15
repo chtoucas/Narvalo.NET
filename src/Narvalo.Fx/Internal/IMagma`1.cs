@@ -4,13 +4,19 @@ namespace Narvalo.Fx.Internal
 {
     using System;
 
-    internal interface IHooks<T>
+    internal interface IMagma<T>
     {
-        // Normally, you also implement the following methods with a more appropriate name:
-        // > void Do(Action<T> action);
+        TResult Coalesce<TResult>(Func<T, bool> predicate, Func<T, TResult> selector, Func<TResult> otherwise);
+
+        TResult Coalesce<TResult>(Func<T, bool> predicate, TResult thenResult, TResult elseResult);
+
         // There is another closely related method which is automatically generated for monads:
         // > void Unless(Func<T, bool> predicate, Action<T> action);
-
         void When(Func<T, bool> predicate, Action<T> action);
+
+        // Equivalent to Coalesce<Unit>().
+        void Do(Func<T, bool> predicate, Action<T> action, Action otherwise);
+
+        void Do(Action<T> action);
     }
 }

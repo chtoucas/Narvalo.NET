@@ -10,8 +10,7 @@ namespace Narvalo.Fx
 
     // Friendly version of Either<ExceptionDispatchInfo, Unit>.
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public abstract partial class VoidOrError
-        : Internal.IAlternative<ExceptionDispatchInfo>, Internal.IHooks<ExceptionDispatchInfo>
+    public abstract partial class VoidOrError : Internal.IMaybe<ExceptionDispatchInfo>
     {
         private VoidOrError() { }
 
@@ -160,7 +159,7 @@ namespace Narvalo.Fx
         }
     }
 
-    // Implements the Internal.IAlternative<ExceptionDispatchInfo> interface.
+    // Implements the Internal.IMaybe<ExceptionDispatchInfo> interface.
     public partial class VoidOrError
     {
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
@@ -185,10 +184,19 @@ namespace Narvalo.Fx
             TResult thenResult,
             TResult elseResult);
 
+        public abstract void When(Func<ExceptionDispatchInfo, bool> predicate, Action<ExceptionDispatchInfo> action);
+
         public abstract void Do(
             Func<ExceptionDispatchInfo, bool> predicate,
             Action<ExceptionDispatchInfo> action,
             Action otherwise);
+
+        // Alias for OnError().
+        void Internal.IMagma<ExceptionDispatchInfo>.Do(Action<ExceptionDispatchInfo> action) => OnError(action);
+
+        public abstract void OnError(Action<ExceptionDispatchInfo> action);
+
+        public abstract void OnSuccess(Action action);
 
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "1#", Justification = "[Intentionally] Internal interface.")]
@@ -226,6 +234,8 @@ namespace Narvalo.Fx
                 TResult elseResult)
                 => elseResult;
 
+            public override void When(Func<ExceptionDispatchInfo, bool> predicate, Action<ExceptionDispatchInfo> action) { }
+
             public override void Do(
                 Func<ExceptionDispatchInfo, bool> predicate,
                 Action<ExceptionDispatchInfo> action,
@@ -242,6 +252,15 @@ namespace Narvalo.Fx
 
                 onSuccess.Invoke();
             }
+
+            public override void OnSuccess(Action action)
+            {
+                Require.NotNull(action, nameof(action));
+
+                action.Invoke();
+            }
+
+            public override void OnError(Action<ExceptionDispatchInfo> action) { }
         }
 
         private partial class Error_
@@ -286,6 +305,14 @@ namespace Narvalo.Fx
                 return predicate.Invoke(ExceptionInfo) ? thenResult : elseResult;
             }
 
+            public override void When(Func<ExceptionDispatchInfo, bool> predicate, Action<ExceptionDispatchInfo> action)
+            {
+                Require.NotNull(predicate, nameof(predicate));
+                Require.NotNull(action, nameof(action));
+
+                if (predicate.Invoke(ExceptionInfo)) { action.Invoke(ExceptionInfo); }
+            }
+
             public override void Do(
                 Func<ExceptionDispatchInfo, bool> predicate,
                 Action<ExceptionDispatchInfo> action,
@@ -310,41 +337,6 @@ namespace Narvalo.Fx
                 Require.NotNull(onError, nameof(onError));
 
                 onError.Invoke(ExceptionInfo);
-            }
-        }
-    }
-
-    // Implements the Internal.IHooks<ExceptionDispatchInfo> interface.
-    public partial class VoidOrError
-    {
-        public abstract void When(Func<ExceptionDispatchInfo, bool> predicate, Action<ExceptionDispatchInfo> action);
-
-        public abstract void OnError(Action<ExceptionDispatchInfo> action);
-
-        public abstract void OnSuccess(Action action);
-
-        private partial class Void_
-        {
-            public override void When(Func<ExceptionDispatchInfo, bool> predicate, Action<ExceptionDispatchInfo> action) { }
-
-            public override void OnSuccess(Action action)
-            {
-                Require.NotNull(action, nameof(action));
-
-                action.Invoke();
-            }
-
-            public override void OnError(Action<ExceptionDispatchInfo> action) { }
-        }
-
-        private partial class Error_
-        {
-            public override void When(Func<ExceptionDispatchInfo, bool> predicate, Action<ExceptionDispatchInfo> action)
-            {
-                Require.NotNull(predicate, nameof(predicate));
-                Require.NotNull(action, nameof(action));
-
-                if (predicate.Invoke(ExceptionInfo)) { action.Invoke(ExceptionInfo); }
             }
 
             public override void OnSuccess(Action action) { }

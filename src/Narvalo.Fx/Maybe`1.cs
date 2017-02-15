@@ -19,8 +19,7 @@ namespace Narvalo.Fx
     [DebuggerDisplay("IsSome = {IsSome}")]
     [DebuggerTypeProxy(typeof(Maybe<>.DebugView))]
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "[Intentionally] Maybe<T> only pretends to be a collection.")]
-    public partial struct Maybe<T>
-        : IEnumerable<T>, IEquatable<Maybe<T>>, Internal.IAlternative<T>, Internal.IHooks<T>
+    public partial struct Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>, Internal.IMaybe<T>
     {
         private readonly bool _isSome;
 
@@ -227,11 +226,9 @@ namespace Narvalo.Fx
         public Maybe<T> OrElse(Maybe<T> other) => IsNone ? other : this;
     }
 
-    // Implements the Internal.IAlternative<T> interface.
+    // Implements the Internal.IMaybe<T> interface.
     public partial struct Maybe<T>
     {
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "1#", Justification = "[Intentionally] Internal interface.")]
         public TResult Match<TResult>(Func<T, TResult> caseSome, Func<TResult> caseNone)
         {
             Require.NotNull(caseSome, nameof(caseSome));
@@ -241,8 +238,6 @@ namespace Narvalo.Fx
         }
 
         // Named <c>maybe</c> in Haskell parlance.
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "1#", Justification = "[Intentionally] Internal interface.")]
         public TResult Match<TResult>(Func<T, TResult> caseSome, TResult caseNone)
         {
             Require.NotNull(caseSome, nameof(caseSome));
@@ -266,6 +261,14 @@ namespace Narvalo.Fx
             return IsSome && predicate.Invoke(Value) ? thenResult : elseResult;
         }
 
+        public void When(Func<T, bool> predicate, Action<T> action)
+        {
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            if (IsSome && predicate.Invoke(Value)) { action.Invoke(Value); }
+        }
+
         public void Do(Func<T, bool> predicate, Action<T> action, Action otherwise)
         {
             Require.NotNull(predicate, nameof(predicate));
@@ -282,8 +285,6 @@ namespace Narvalo.Fx
             }
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "1#", Justification = "[Intentionally] Internal interface.")]
         public void Do(Action<T> onSome, Action onNone)
         {
             Require.NotNull(onSome, nameof(onSome));
@@ -298,18 +299,9 @@ namespace Narvalo.Fx
                 onNone.Invoke();
             }
         }
-    }
 
-    // Implements the Internal.IHooks<T> interface.
-    public partial struct Maybe<T>
-    {
-        public void When(Func<T, bool> predicate, Action<T> action)
-        {
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            if (IsSome && predicate.Invoke(Value)) { action.Invoke(Value); }
-        }
+        // Alias for OnSome().
+        void Internal.IMagma<T>.Do(Action<T> action) => OnSome(action);
 
         public void OnSome(Action<T> action)
         {

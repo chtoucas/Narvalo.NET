@@ -12,8 +12,7 @@ namespace Narvalo.Fx
     // WARNING: We make this class a "monad" on TError.
     // Normally, TError should represent a **light** error. For real exceptions, see VoidOrError.
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public abstract partial class VoidOr<TError>
-        : Internal.IAlternative<TError>, Internal.IHooks<TError>
+    public abstract partial class VoidOr<TError> : Internal.IMaybe<TError>
     {
         private VoidOr() { }
 
@@ -184,7 +183,7 @@ namespace Narvalo.Fx
         }
     }
 
-    // Implements the Internal.IAlternative<TError> interface.
+    // Implements the Internal.IMaybe<TError> interface.
     public partial class VoidOr<TError>
     {
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
@@ -202,7 +201,16 @@ namespace Narvalo.Fx
 
         public abstract TResult Coalesce<TResult>(Func<TError, bool> predicate, TResult thenResult, TResult elseResult);
 
+        public abstract void When(Func<TError, bool> predicate, Action<TError> action);
+
         public abstract void Do(Func<TError, bool> predicate, Action<TError> action, Action otherwise);
+
+        // Alias for OnError().
+        void Internal.IMagma<TError>.Do(Action<TError> action) => OnError(action);
+
+        public abstract void OnSuccess(Action action);
+
+        public abstract void OnError(Action<TError> action);
 
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "1#", Justification = "[Intentionally] Internal interface.")]
@@ -233,6 +241,8 @@ namespace Narvalo.Fx
             public override TResult Coalesce<TResult>(Func<TError, bool> predicate, TResult thenResult, TResult elseResult)
                 => elseResult;
 
+            public override void When(Func<TError, bool> predicate, Action<TError> action) { }
+
             public override void Do(Func<TError, bool> predicate, Action<TError> action, Action otherwise)
             {
                 Require.NotNull(otherwise, nameof(otherwise));
@@ -246,6 +256,15 @@ namespace Narvalo.Fx
 
                 onSuccess.Invoke();
             }
+
+            public override void OnSuccess(Action action)
+            {
+                Require.NotNull(action, nameof(action));
+
+                action.Invoke();
+            }
+
+            public override void OnError(Action<TError> action) { }
         }
 
         private partial class Error_
@@ -283,6 +302,14 @@ namespace Narvalo.Fx
                 return predicate.Invoke(Error) ? thenResult : elseResult;
             }
 
+            public override void When(Func<TError, bool> predicate, Action<TError> action)
+            {
+                Require.NotNull(predicate, nameof(predicate));
+                Require.NotNull(action, nameof(action));
+
+                if (predicate.Invoke(Error)) { action.Invoke(Error); }
+            }
+
             public override void Do(Func<TError, bool> predicate, Action<TError> action, Action otherwise)
             {
                 Require.NotNull(predicate, nameof(predicate));
@@ -304,41 +331,6 @@ namespace Narvalo.Fx
                 Require.NotNull(onError, nameof(onError));
 
                 onError.Invoke(Error);
-            }
-        }
-    }
-
-    // Implements the Internal.IHooks<TError> interface.
-    public partial class VoidOr<TError>
-    {
-        public abstract void When(Func<TError, bool> predicate, Action<TError> action);
-
-        public abstract void OnSuccess(Action action);
-
-        public abstract void OnError(Action<TError> action);
-
-        private partial class Void_ : VoidOr<TError>
-        {
-            public override void When(Func<TError, bool> predicate, Action<TError> action) { }
-
-            public override void OnSuccess(Action action)
-            {
-                Require.NotNull(action, nameof(action));
-
-                action.Invoke();
-            }
-
-            public override void OnError(Action<TError> action) { }
-        }
-
-        private partial class Error_
-        {
-            public override void When(Func<TError, bool> predicate, Action<TError> action)
-            {
-                Require.NotNull(predicate, nameof(predicate));
-                Require.NotNull(action, nameof(action));
-
-                if (predicate.Invoke(Error)) { action.Invoke(Error); }
             }
 
             public override void OnSuccess(Action action) { }

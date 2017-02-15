@@ -11,7 +11,7 @@ namespace Narvalo.Fx
     /// Represents the trivial monad.
     /// </summary>
     /// <typeparam name="T">The underlying type of the value.</typeparam>
-    public partial struct Identity<T> : IEquatable<Identity<T>>, IEquatable<T>, Internal.IHooks<T>
+    public partial struct Identity<T> : IEquatable<Identity<T>>, IEquatable<T>, Internal.IMagma<T>
     {
         public Identity(T value)
         {
@@ -123,11 +123,28 @@ namespace Narvalo.Fx
     // Implements the Internal.IHooks<T> interface.
     public partial struct Identity<T>
     {
-        public void Do(Action<T> action)
+        public TResult Coalesce<TResult>(Func<T, bool> predicate, Func<T, TResult> selector, Func<TResult> otherwise)
         {
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(selector, nameof(selector));
+            Require.NotNull(otherwise, nameof(otherwise));
+
+            return predicate.Invoke(Value) ? selector.Invoke(Value) : otherwise.Invoke();
+        }
+
+        public TResult Coalesce<TResult>(Func<T, bool> predicate, TResult thenResult, TResult elseResult)
+        {
+            Require.NotNull(predicate, nameof(predicate));
+
+            return predicate.Invoke(Value) ? thenResult : elseResult;
+        }
+
+        public void When(Func<T, bool> predicate, Action<T> action)
+        {
+            Require.NotNull(predicate, nameof(predicate));
             Require.NotNull(action, nameof(action));
 
-            action.Invoke(Value);
+            if (predicate.Invoke(Value)) { action.Invoke(Value); }
         }
 
         public void Do(Func<T, bool> predicate, Action<T> action, Action otherwise)
@@ -146,12 +163,11 @@ namespace Narvalo.Fx
             }
         }
 
-        public void When(Func<T, bool> predicate, Action<T> action)
+        public void Do(Action<T> action)
         {
-            Require.NotNull(predicate, nameof(predicate));
             Require.NotNull(action, nameof(action));
 
-            if (predicate.Invoke(Value)) { action.Invoke(Value); }
+            action.Invoke(Value);
         }
     }
 }
