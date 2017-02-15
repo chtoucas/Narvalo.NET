@@ -204,7 +204,7 @@ namespace Monads
         #endregion
     } // End of MonadPlus - T4: EmitMonadCore().
 
-    // Provides the core monadic extension methods for MonadPlus<T>.
+    // Provides extension methods for MonadPlus<T>.
     public static partial class MonadPlus
     {
         #region Applicative
@@ -392,7 +392,7 @@ namespace Monads
             Action<TSource> action)
             /* T4: C# indent */
         {
-            Expect.NotNull(@this);
+            Require.NotNull(@this, nameof(@this));
             Expect.NotNull(predicate);
             Expect.NotNull(action);
 
@@ -770,7 +770,7 @@ namespace Monads
     } // End of Func - T4: EmitKleisliExtensions().
 
     // Provides extension methods for IEnumerable<MonadPlus<T>>.
-    public static partial class MonadPlusSequence
+    public static partial class MonadPlus
     {
         #region Basic Monad functions
 

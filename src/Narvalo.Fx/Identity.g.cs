@@ -174,7 +174,7 @@ namespace Narvalo.Fx
         #endregion
     } // End of Identity - T4: EmitMonadCore().
 
-    // Provides the core monadic extension methods for Identity<T>.
+    // Provides extension methods for Identity<T>.
     public static partial class Identity
     {
         #region Applicative
@@ -326,6 +326,7 @@ namespace Narvalo.Fx
             Action<TSource> action)
             /* T4: C# indent */
         {
+            /* T4: C# indent */
             Expect.NotNull(predicate);
             Expect.NotNull(action);
 
@@ -527,7 +528,7 @@ namespace Narvalo.Fx
     } // End of Func - T4: EmitKleisliExtensions().
 
     // Provides extension methods for IEnumerable<Identity<T>>.
-    public static partial class IdentitySequence
+    public static partial class Identity
     {
         #region Basic Monad functions
 

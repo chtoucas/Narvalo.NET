@@ -11,19 +11,17 @@ namespace Narvalo.Fx
     /// Represents the trivial monad.
     /// </summary>
     /// <typeparam name="T">The underlying type of the value.</typeparam>
-    public partial struct Identity<T> : IEquatable<Identity<T>>, IEquatable<T>
+    public partial struct Identity<T> : IEquatable<Identity<T>>, IEquatable<T>, Internal.IHooks<T>
     {
-        private readonly T _value;
-
-        private Identity(T value)
+        public Identity(T value)
         {
-            _value = value;
+            Value = value;
         }
 
-        internal T Value { get { return _value; } }
+        public T Value { get; }
     }
 
-    // Implements the IEquatable<T> interface.
+    // Implements the IEquatable<Identity<T>> and IEquatable<T> interfaces.
     public partial struct Identity<T>
     {
         public static bool operator ==(Identity<T> left, Identity<T> right) => left.Equals(right);
@@ -120,5 +118,40 @@ namespace Narvalo.Fx
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Identity<Identity<T>> δ(Identity<T> monad) => new Identity<Identity<T>>(monad);
+    }
+
+    // Implements the Internal.IHooks<T> interface.
+    public partial struct Identity<T>
+    {
+        public void Do(Action<T> action)
+        {
+            Require.NotNull(action, nameof(action));
+
+            action.Invoke(Value);
+        }
+
+        public void Do(Func<T, bool> predicate, Action<T> action, Action otherwise)
+        {
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+            Require.NotNull(otherwise, nameof(otherwise));
+
+            if (predicate.Invoke(Value))
+            {
+                action.Invoke(Value);
+            }
+            else
+            {
+                otherwise.Invoke();
+            }
+        }
+
+        public void When(Func<T, bool> predicate, Action<T> action)
+        {
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            if (predicate.Invoke(Value)) { action.Invoke(Value); }
+        }
     }
 }

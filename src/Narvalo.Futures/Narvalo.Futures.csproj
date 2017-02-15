@@ -17,9 +17,6 @@
     <Compile Include="..\Narvalo.Fx\Internal\IAlternative`.cs">
       <Link>Fx\Internal\IAlternative`.cs</Link>
     </Compile>
-    <Compile Include="..\Narvalo.Fx\Internal\IMatchable`2.cs">
-      <Link>Fx\Internal\IMatchable`2.cs</Link>
-    </Compile>
     <Compile Include="BinaryEncoder.cs" />
     <Compile Include="Cerbere\ContractHelpers.cs" />
     <Compile Include="Configuration\AbsoluteUriValidator.cs" />
@@ -58,17 +55,9 @@
     </Compile>
     <Compile Include="Formattable.cs" />
     <Compile Include="Fx\BooleanResult`1.cs" />
-    <Compile Include="Fx\Either.cs" />
-    <Compile Include="Fx\Either`2.cs" />
     <Compile Include="Fx\Error.cs" />
     <Compile Include="Fx\Error`1.cs" />
     <Compile Include="Fx\FuncEx.cs" />
-    <Compile Include="Fx\Identity.g.cs">
-      <DependentUpon>Identity.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Fx\Identity`1.cs" />
     <Compile Include="Fx\Extensions\Func%24.cs" />
     <Compile Include="Fx\Extensions\Nullable%24.cs" />
     <Compile Include="Fx\Recursion.cs" />
@@ -130,10 +119,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SnvCurrencyInfoProvider.g.cs</LastGenOutput>
     </Content>
-    <None Include="Fx\Identity.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Identity.g.cs</LastGenOutput>
-    </None>
     <Content Include="Guard.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Guard.g.cs</LastGenOutput>

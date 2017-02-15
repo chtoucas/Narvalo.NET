@@ -15,6 +15,7 @@ namespace Narvalo.Fx.Linq
     /// - Aggregation (catamorphisms): AggregateBack, Fold, Reduce
     /// - Quantifiers: IsEmpty
     /// - Generation: EmptyIfNull
+    /// - Monadic: SelectWith, SelectUnzip, ZipWith, WhereBy, Fold, FoldBack, Reduce, ReduceBack
     /// </remarks>
     /// For more generation operators, <seealso cref="Sequence"/>.
     public static partial class Qperators { }

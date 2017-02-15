@@ -11,7 +11,7 @@ namespace Narvalo.Fx
     // Friendly version of Either<ExceptionDispatchInfo, Unit>.
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public abstract partial class VoidOrError
-        : Internal.IAlternative<ExceptionDispatchInfo>, Internal.IOptional<ExceptionDispatchInfo>
+        : Internal.IAlternative<ExceptionDispatchInfo>, Internal.IHooks<ExceptionDispatchInfo>
     {
         private VoidOrError() { }
 
@@ -314,7 +314,7 @@ namespace Narvalo.Fx
         }
     }
 
-    // Implements the Internal.IOptional<ExceptionDispatchInfo> interface.
+    // Implements the Internal.IHooks<ExceptionDispatchInfo> interface.
     public partial class VoidOrError
     {
         public abstract void When(Func<ExceptionDispatchInfo, bool> predicate, Action<ExceptionDispatchInfo> action);

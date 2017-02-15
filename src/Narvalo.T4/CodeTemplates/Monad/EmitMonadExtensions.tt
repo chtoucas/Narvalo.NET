@@ -232,9 +232,7 @@ public partial class MonadTemplate
             Action<TSource> action)
             <#+ WriteTypeConstraints("TSource"); #>
         {
-<#+ if (IsNullable) { #>
-            Expect.NotNull(@this);
-<#+ } #>
+            <#+ WriteNotNull(); #>
             Expect.NotNull(predicate);
             Expect.NotNull(action);
 

@@ -11,7 +11,7 @@ namespace Narvalo.Fx
     // Friendly version of Either<T, TError>. NB: Usually the error is the left type parameter.
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public abstract partial class Result<T, TError>
-        : Internal.IMatchable<T, TError>, Internal.IOptional<T>
+        : Internal.IMatchable<T, TError>, Internal.IHooks<T>
     {
 #if CONTRACTS_FULL // Custom ctor visibility for the contract class only.
         protected Result() { }
@@ -300,7 +300,7 @@ namespace Narvalo.Fx
         }
     }
 
-    // Implements the Internal.IOptional<T> interface.
+    // Implements the Internal.IHooks<T> interface.
     public partial class Result<T, TError>
     {
         public abstract void When(Func<T, bool> predicate, Action<T> action);

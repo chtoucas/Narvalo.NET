@@ -20,7 +20,7 @@ namespace Narvalo.Fx
     [DebuggerTypeProxy(typeof(Maybe<>.DebugView))]
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "[Intentionally] Maybe<T> only pretends to be a collection.")]
     public partial struct Maybe<T>
-        : IEnumerable<T>, IEquatable<Maybe<T>>, Internal.IAlternative<T>, Internal.IOptional<T>
+        : IEnumerable<T>, IEquatable<Maybe<T>>, Internal.IAlternative<T>, Internal.IHooks<T>
     {
         private readonly bool _isSome;
 
@@ -300,7 +300,7 @@ namespace Narvalo.Fx
         }
     }
 
-    // Implements the Internal.IOptional<T> interface.
+    // Implements the Internal.IHooks<T> interface.
     public partial struct Maybe<T>
     {
         public void When(Func<T, bool> predicate, Action<T> action)

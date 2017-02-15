@@ -377,6 +377,7 @@ namespace Narvalo.Fx
             Action<TSource> action)
             /* T4: C# indent */
         {
+            /* T4: C# indent */
             Expect.NotNull(predicate);
             Expect.NotNull(action);
 

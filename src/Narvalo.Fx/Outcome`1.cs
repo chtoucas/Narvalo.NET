@@ -26,7 +26,7 @@ namespace Narvalo.Fx
     // Friendly version of Either<ExceptionDispatchInfo, T>.
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public abstract partial class Outcome<T>
-        : Internal.IMatchable<T, ExceptionDispatchInfo>, Internal.IOptional<T>
+        : Internal.IMatchable<T, ExceptionDispatchInfo>, Internal.IHooks<T>
     {
 #if CONTRACTS_FULL // Custom ctor visibility for the contract class only.
         protected Outcome() { }
@@ -364,7 +364,7 @@ namespace Narvalo.Fx
         }
     }
 
-    // Implements the Internal.IOptional<T> interface.
+    // Implements the Internal.IHooks<T> interface.
     public partial class Outcome<T>
     {
         public abstract void When(Func<T, bool> predicate, Action<T> action);

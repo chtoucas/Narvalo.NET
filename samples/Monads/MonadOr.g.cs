@@ -204,7 +204,7 @@ namespace Monads
         #endregion
     } // End of MonadOr - T4: EmitMonadCore().
 
-    // Provides the core monadic extension methods for MonadOr<T>.
+    // Provides extension methods for MonadOr<T>.
     public static partial class MonadOr
     {
         #region Applicative
@@ -392,7 +392,7 @@ namespace Monads
             Action<TSource> action)
             /* T4: C# indent */
         {
-            Expect.NotNull(@this);
+            Require.NotNull(@this, nameof(@this));
             Expect.NotNull(predicate);
             Expect.NotNull(action);
 
@@ -770,7 +770,7 @@ namespace Monads
     } // End of Func - T4: EmitKleisliExtensions().
 
     // Provides extension methods for IEnumerable<MonadOr<T>>.
-    public static partial class MonadOrSequence
+    public static partial class MonadOr
     {
         #region Basic Monad functions
 

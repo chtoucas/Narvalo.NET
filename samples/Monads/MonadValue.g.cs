@@ -213,7 +213,7 @@ namespace Monads
         #endregion
     } // End of MonadValue - T4: EmitMonadCore().
 
-    // Provides the core monadic extension methods for MonadValue<T>.
+    // Provides extension methods for MonadValue<T>.
     public static partial class MonadValue
     {
         #region Applicative
@@ -364,6 +364,7 @@ namespace Monads
             Action<TSource> action)
             where TSource : struct
         {
+            /* T4: C# indent */
             Expect.NotNull(predicate);
             Expect.NotNull(action);
 
@@ -737,7 +738,7 @@ namespace Monads
     } // End of Func - T4: EmitKleisliExtensions().
 
     // Provides extension methods for IEnumerable<MonadValue<T>>.
-    public static partial class MonadValueSequence
+    public static partial class MonadValue
     {
         #region Basic Monad functions
 

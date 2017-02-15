@@ -13,7 +13,7 @@ namespace Narvalo.Fx
     // Normally, TError should represent a **light** error. For exceptions, see VoidOrError.
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public abstract partial class VoidOr<TError>
-        : Internal.IAlternative<TError>, Internal.IOptional<TError>
+        : Internal.IAlternative<TError>, Internal.IHooks<TError>
     {
         private VoidOr() { }
 
@@ -308,7 +308,7 @@ namespace Narvalo.Fx
         }
     }
 
-    // Implements the Internal.IOptional<TError> interface.
+    // Implements the Internal.IHooks<TError> interface.
     public partial class VoidOr<TError>
     {
         public abstract void When(Func<TError, bool> predicate, Action<TError> action);

@@ -30,6 +30,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EitherFacts.cs" />
     <Compile Include="VoidOr.g.cs">
       <DependentUpon>VoidOr.tt</DependentUpon>
       <AutoGen>True</AutoGen>

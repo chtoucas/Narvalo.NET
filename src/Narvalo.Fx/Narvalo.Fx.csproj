@@ -73,7 +73,22 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Internal\IOptional`1.cs" />
+    <Compile Include="Either.cs" />
+    <Compile Include="Either`2.cs" />
+    <Compile Include="Identity.g.cs">
+      <DependentUpon>Identity.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Identity`1.cs" />
+    <Compile Include="IExceptionCatcher.cs" />
+    <Compile Include="Internal\ExceptionCatcher.cs" />
+    <Compile Include="Internal\ExceptionCatcher`1.cs" />
+    <Compile Include="Internal\ExceptionCatcher`4.cs" />
+    <Compile Include="Internal\ExceptionCatcher`3.cs" />
+    <Compile Include="Internal\ExceptionCatcher`2.cs" />
+    <Compile Include="Internal\IHooks`1.cs" />
+    <Compile Include="Func.cs" />
     <Compile Include="Linq\AppendPrepend.cs" />
     <Compile Include="Linq\EmptyIfNull.cs" />
     <Compile Include="Linq\AggregateBack.cs" />
@@ -89,7 +104,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Result.cs" />
-    <Compile Include="Func.cs" />
     <Compile Include="Internal\IMatchable`2.cs" />
     <Compile Include="Internal\IAlternative`.cs" />
     <Compile Include="Iteration.cs" />
@@ -175,6 +189,12 @@
     <None Include="Result.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Result.g.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Identity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Identity.g.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />

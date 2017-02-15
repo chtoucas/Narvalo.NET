@@ -34,7 +34,6 @@
     <Compile Include="Cerbere\ContractHelpersFacts.cs" />
     <Compile Include="Finance\CheckDigitsFacts.cs" />
     <Compile Include="Finance\Currencies\CurrencyActivatorFacts.cs" />
-    <Compile Include="Fx\EitherFacts.cs" />
     <Compile Include="Fx\Extensions\NullableFacts.cs" />
     <Compile Include="Fx\SwitchFacts.cs" />
     <Compile Include="Fx\VoidOrBreakFacts.cs" />
