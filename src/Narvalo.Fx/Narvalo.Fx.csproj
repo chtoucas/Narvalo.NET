@@ -98,6 +98,11 @@
     <Compile Include="Linq\LastOrNone.cs" />
     <Compile Include="Linq\FirstOrNone.cs" />
     <Compile Include="Linq\IsEmpty.cs" />
+    <Compile Include="Either.g.cs">
+      <DependentUpon>Either.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Result.g.cs">
       <DependentUpon>Result.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -195,6 +200,12 @@
     <None Include="Identity.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Identity.g.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Either.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Either.g.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />

@@ -54,6 +54,9 @@
   <ItemGroup>
     <None Include="CodeTemplates\Result.tt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="CodeTemplates\Either.tt" />
+  </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -11,8 +11,10 @@ namespace Narvalo.Fx
     /// <summary>
     /// Represents the sum of two types. An instance of the <see cref="Either{TLeft, TRight}"/> class
     /// contains either a <c>TLeft</c> value or a <c>TRight</c> value but not both.
+    /// <para>This class is a "monad" for the left parameter, nevertheless using <see cref="Either{TLeft, TRight}.Swap"/>
+    /// you can easily turn it into a "monad" for the right parameter.</para>
     /// </summary>
-    /// <remarks>The enclosed value might be <see langword="null"/>.</remarks>
+    /// <remarks>The enclosed value might be null.</remarks>
     /// <typeparam name="TLeft">The underlying type of the left part.</typeparam>
     /// <typeparam name="TRight">The underlying type of the right part.</typeparam>
     public abstract partial class Either<TLeft, TRight> : Internal.IMatchable<TLeft, TRight>
@@ -171,24 +173,25 @@ namespace Narvalo.Fx
     // (More or less) provides the core Monad methods.
     public abstract partial class Either<TLeft, TRight>
     {
-        public abstract Either<TResult, TRight> BindLeft<TResult>(
-            Func<TLeft, Either<TResult, TRight>> leftSelector);
+        public abstract Either<TResult, TRight> Bind<TResult>(Func<TLeft, Either<TResult, TRight>> leftSelector);
 
-        public abstract Either<TLeft, TResult> BindRight<TResult>(
-            Func<TRight, Either<TLeft, TResult>> rightSelector);
+        public abstract Either<TLeft, TResult> BindRight<TResult>(Func<TRight, Either<TLeft, TResult>> selector);
+
+        public Either<TResult, TRight> BindLeft<TResult>(Func<TLeft, Either<TResult, TRight>> selector)
+            => Bind(selector);
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static Either<TLeft, TRight> η(TLeft value)
+        internal static Either<TLeft, TRight> η(TLeft leftValue)
         {
             Warrant.NotNull<Either<TLeft, TRight>>();
 
-            return new Left_(value);
+            return new Left_(leftValue);
         }
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static Either<TLeft, TRight> η(TRight value)
+        internal static Either<TLeft, TRight> OfRight(TRight value)
         {
             Warrant.NotNull<Either<TLeft, TRight>>();
 
@@ -206,7 +209,7 @@ namespace Narvalo.Fx
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static Either<TLeft, TRight> μ(Either<TLeft, Either<TLeft, TRight>> square)
+        internal static Either<TLeft, TRight> Flatten(Either<TLeft, Either<TLeft, TRight>> square)
         {
             Require.NotNull(square, nameof(square));
 
@@ -215,31 +218,27 @@ namespace Narvalo.Fx
 
         private partial class Left_
         {
-            public override Either<TResult, TRight> BindLeft<TResult>(
-                Func<TLeft, Either<TResult, TRight>> leftSelector)
+            public override Either<TResult, TRight> Bind<TResult>(Func<TLeft, Either<TResult, TRight>> selector)
             {
-                Require.NotNull(leftSelector, nameof(leftSelector));
+                Require.NotNull(selector, nameof(selector));
 
-                return leftSelector.Invoke(Left);
+                return selector.Invoke(Left);
             }
 
-            public override Either<TLeft, TResult> BindRight<TResult>(
-                Func<TRight, Either<TLeft, TResult>> rightSelector)
+            public override Either<TLeft, TResult> BindRight<TResult>(Func<TRight, Either<TLeft, TResult>> selector)
                 => Either.FromLeft<TLeft, TResult>(Left);
         }
 
         private partial class Right_
         {
-            public override Either<TResult, TRight> BindLeft<TResult>(
-                Func<TLeft, Either<TResult, TRight>> leftSelector)
+            public override Either<TResult, TRight> Bind<TResult>(Func<TLeft, Either<TResult, TRight>> selector)
                 => Either.FromRight<TResult, TRight>(Right);
 
-            public override Either<TLeft, TResult> BindRight<TResult>(
-                Func<TRight, Either<TLeft, TResult>> rightSelector)
+            public override Either<TLeft, TResult> BindRight<TResult>(Func<TRight, Either<TLeft, TResult>> selector)
             {
-                Require.NotNull(rightSelector, nameof(rightSelector));
+                Require.NotNull(selector, nameof(selector));
 
-                return rightSelector.Invoke(Right);
+                return selector.Invoke(Right);
             }
         }
     }

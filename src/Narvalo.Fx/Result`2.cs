@@ -8,7 +8,7 @@ namespace Narvalo.Fx
     using System.Diagnostics.Contracts;
     using System.Runtime.CompilerServices;
 
-    // Friendly version of Either<T, TError>. NB: Usually the error is the left type parameter.
+    // Friendly version of Either<T, TError>. NB: In Haskell, the error is the left type parameter.
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public abstract partial class Result<T, TError>
         : Internal.IMatchable<T, TError>, Internal.IHooks<T>
