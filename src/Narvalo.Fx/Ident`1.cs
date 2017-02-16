@@ -11,9 +11,9 @@ namespace Narvalo.Fx
     /// Represents the trivial monad.
     /// </summary>
     /// <typeparam name="T">The underlying type of the value.</typeparam>
-    public partial struct Identity<T> : IEquatable<Identity<T>>, IEquatable<T>, Internal.IContainer<T>
+    public partial struct Ident<T> : IEquatable<Ident<T>>, IEquatable<T>, Internal.IContainer<T>
     {
-        public Identity(T value)
+        public Ident(T value)
         {
             Value = value;
         }
@@ -21,17 +21,17 @@ namespace Narvalo.Fx
         public T Value { get; }
     }
 
-    // Implements the IEquatable<Identity<T>> and IEquatable<T> interfaces.
-    public partial struct Identity<T>
+    // Implements the IEquatable<Ident<T>> and IEquatable<T> interfaces.
+    public partial struct Ident<T>
     {
-        public static bool operator ==(Identity<T> left, Identity<T> right) => left.Equals(right);
+        public static bool operator ==(Ident<T> left, Ident<T> right) => left.Equals(right);
 
-        public static bool operator !=(Identity<T> left, Identity<T> right) => !left.Equals(right);
+        public static bool operator !=(Ident<T> left, Ident<T> right) => !left.Equals(right);
 
         /// <inheritdoc cref="IEquatable{T}.Equals" />
-        public bool Equals(Identity<T> other) => Equals(other, EqualityComparer<T>.Default);
+        public bool Equals(Ident<T> other) => Equals(other, EqualityComparer<T>.Default);
 
-        public bool Equals(Identity<T> other, IEqualityComparer<T> comparer)
+        public bool Equals(Ident<T> other, IEqualityComparer<T> comparer)
         {
             Require.NotNull(comparer, nameof(comparer));
 
@@ -58,9 +58,9 @@ namespace Narvalo.Fx
         {
             Require.NotNull(comparer, nameof(comparer));
 
-            if (other is Identity<T>)
+            if (other is Ident<T>)
             {
-                return Equals((Identity<T>)other, comparer);
+                return Equals((Ident<T>)other, comparer);
             }
 
             if (other is T)
@@ -83,9 +83,9 @@ namespace Narvalo.Fx
     }
 
     // Provides the core Monad methods.
-    public partial struct Identity<T>
+    public partial struct Ident<T>
     {
-        public Identity<TResult> Bind<TResult>(Func<T, Identity<TResult>> selector)
+        public Ident<TResult> Bind<TResult>(Func<T, Ident<TResult>> selector)
         {
             Require.NotNull(selector, nameof(selector));
 
@@ -94,34 +94,34 @@ namespace Narvalo.Fx
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static Identity<T> η(T value) => new Identity<T>(value);
+        internal static Ident<T> η(T value) => new Ident<T>(value);
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static Identity<T> μ(Identity<Identity<T>> square) => square.Value;
+        internal static Ident<T> μ(Ident<Ident<T>> square) => square.Value;
     }
 
     // Provides the core Comonad methods.
-    public partial struct Identity<T>
+    public partial struct Ident<T>
     {
-        public Identity<TResult> Extend<TResult>(Func<Identity<T>, TResult> thunk)
+        public Ident<TResult> Extend<TResult>(Func<Ident<T>, TResult> thunk)
         {
             Require.NotNull(thunk, nameof(thunk));
 
-            return new Identity<TResult>(thunk.Invoke(this));
+            return new Ident<TResult>(thunk.Invoke(this));
         }
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static T ε(Identity<T> monad) => monad.Value;
+        internal static T ε(Ident<T> monad) => monad.Value;
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static Identity<Identity<T>> δ(Identity<T> monad) => new Identity<Identity<T>>(monad);
+        internal static Ident<Ident<T>> δ(Ident<T> monad) => new Ident<Ident<T>>(monad);
     }
 
     // Implements the Internal.IHooks<T> interface.
-    public partial struct Identity<T>
+    public partial struct Ident<T>
     {
         public TResult Coalesce<TResult>(Func<T, bool> predicate, Func<T, TResult> selector, Func<TResult> otherwise)
         {

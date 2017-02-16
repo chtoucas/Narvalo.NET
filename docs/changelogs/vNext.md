@@ -73,15 +73,13 @@ TODO
 Narvalo.Fx:
 - Review
   * Forever, When, Unless and Guard.
-  * Do, OnSome, OnNone <- Implements for other classes.
-- Review and test all IEnumerable<T> extensions.
-- Check signatures / Haskell.
-- Rework EmptyIfNull()?
-- Alternative, Applicative
-- VoidOr... use the same design as Either.
+  * Do <- better name that does not conflict with the do from F#.
+  * IEnumerable<T> extensions.
 - Async versions?
-- ToString() and generics.
-- Implements IEquatable<T> on Monad<T>?
+- Check signatures / Haskell.
+- Alternative (MonadPlus), Applicative
+- Rework EmptyIfNull()?
+- Implements IEquatable<T> on IMaybe<T>?
 - https://blogs.msdn.microsoft.com/pfxteam/2013/04/03/tasks-monads-and-linq/
 - http://tomasp.net/blog/idioms-in-linq.aspx/
 - https://ruudvanasseldonk.com/2013/05/01/the-task-monad-in-csharp
@@ -103,6 +101,8 @@ Breaking Changes (Stable packages)
 - New class constraint added to `Require.NotNull<T>()` (idem with `Demand`
   and `Expect`). See below for unconstrained alternatives.
 
+Breaking Changes (Unstable packages)
+----------------------------------
 ### Narvalo.Common
 - Renamed `PathUtility` to `PathHelpers`.
 

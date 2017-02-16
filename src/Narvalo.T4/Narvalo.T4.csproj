@@ -24,7 +24,7 @@
     <Compile Include="VSTemplate.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="CodeTemplates\Identity.tt" />
+    <None Include="CodeTemplates\Ident.tt" />
     <None Include="CodeTemplates\Maybe.tt" />
     <None Include="CodeTemplates\Monad.tt" />
     <None Include="CodeTemplates\Monad.Facts.tt" />

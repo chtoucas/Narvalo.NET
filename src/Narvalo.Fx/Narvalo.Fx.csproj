@@ -75,12 +75,12 @@
   <ItemGroup>
     <Compile Include="Either.cs" />
     <Compile Include="Either`2.cs" />
-    <Compile Include="Identity.g.cs">
-      <DependentUpon>Identity.tt</DependentUpon>
+    <Compile Include="Ident.g.cs">
+      <DependentUpon>Ident.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Identity`1.cs" />
+    <Compile Include="Ident`1.cs" />
     <Compile Include="IExceptionCatcher.cs" />
     <Compile Include="Internal\ExceptionCatcher.cs" />
     <Compile Include="Internal\ExceptionCatcher`1.cs" />
@@ -199,9 +199,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Identity.tt">
+    <None Include="Ident.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Identity.g.cs</LastGenOutput>
+      <LastGenOutput>Ident.g.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

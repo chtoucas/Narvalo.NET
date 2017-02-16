@@ -21,20 +21,20 @@ namespace Narvalo.Fx
     using Narvalo.Fx.Internal;
     using Narvalo.Fx.Linq;
 
-    // Provides a set of static methods for Identity<T>.
+    // Provides a set of static methods for Ident<T>.
     // NB: Sometimes we prefer extension methods over static methods to be able to override them locally.
-    public static partial class Identity
+    public static partial class Ident
     {
         /// <summary>
-        /// The unique object of type <c>Identity&lt;Unit&gt;</c>.
+        /// The unique object of type <c>Ident&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly Identity<global::Narvalo.Fx.Unit> s_Unit = Of(global::Narvalo.Fx.Unit.Single);
+        private static readonly Ident<global::Narvalo.Fx.Unit> s_Unit = Of(global::Narvalo.Fx.Unit.Single);
 
         /// <summary>
-        /// Gets the unique object of type <c>Identity&lt;Unit&gt;</c>.
+        /// Gets the unique object of type <c>Ident&lt;Unit&gt;</c>.
         /// </summary>
-        /// <value>The unique object of type <c>Identity&lt;Unit&gt;</c>.</value>
-        public static Identity<global::Narvalo.Fx.Unit> Unit
+        /// <value>The unique object of type <c>Ident&lt;Unit&gt;</c>.</value>
+        public static Ident<global::Narvalo.Fx.Unit> Unit
         {
             get
             {
@@ -45,17 +45,17 @@ namespace Narvalo.Fx
 
 
         /// <summary>
-        /// Obtains an instance of the <see cref="Identity{T}"/> class for the specified value.
+        /// Obtains an instance of the <see cref="Ident{T}"/> class for the specified value.
         /// </summary>
         /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
-        /// <param name="value">A value to be wrapped into a <see cref="Identity{T}"/> object.</param>
-        /// <returns>An instance of the <see cref="Identity{T}"/> class for the specified value.</returns>
+        /// <param name="value">A value to be wrapped into a <see cref="Ident{T}"/> object.</param>
+        /// <returns>An instance of the <see cref="Ident{T}"/> class for the specified value.</returns>
         // Named "return" (Monad) or "pure" (Applicative) in Haskell parlance.
-        public static Identity<T> Of<T>(T value)
+        public static Ident<T> Of<T>(T value)
             /* T4: C# indent */
         {
 
-            return Identity<T>.η(value);
+            return Ident<T>.η(value);
         }
 
         #region Generalisations of list functions
@@ -64,11 +64,11 @@ namespace Narvalo.Fx
         /// Removes one level of structure, projecting its bound value into the outer level.
         /// </summary>
         // Named "join" in Haskell parlance.
-        public static Identity<T> Flatten<T>(Identity<Identity<T>> square)
+        public static Ident<T> Flatten<T>(Ident<Ident<T>> square)
             /* T4: C# indent */
         {
 
-            return Identity<T>.μ(square);
+            return Ident<T>.μ(square);
         }
 
         #endregion
@@ -81,14 +81,14 @@ namespace Narvalo.Fx
         #region Monadic lifting operators
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="Identity{T}" /> values.
+        /// Promotes a function to use and return <see cref="Ident{T}" /> values.
         /// </summary>
         // Named "liftM" in Haskell parlance.
-        public static Func<Identity<T>, Identity<TResult>> Lift<T, TResult>(
+        public static Func<Ident<T>, Ident<TResult>> Lift<T, TResult>(
             Func<T, TResult> thunk)
             /* T4: C# indent */
         {
-            Warrant.NotNull<Func<Identity<T>, Identity<TResult>>>();
+            Warrant.NotNull<Func<Ident<T>, Ident<TResult>>>();
 
             return m =>
             {
@@ -98,15 +98,15 @@ namespace Narvalo.Fx
         }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="Identity{T}" /> values, scanning the
+        /// Promotes a function to use and return <see cref="Ident{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
         // Named "liftM2" in Haskell parlance.
-        public static Func<Identity<T1>, Identity<T2>, Identity<TResult>>
+        public static Func<Ident<T1>, Ident<T2>, Ident<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> thunk)
             /* T4: C# indent */
         {
-            Warrant.NotNull<Func<Identity<T1>, Identity<T2>, Identity<TResult>>>();
+            Warrant.NotNull<Func<Ident<T1>, Ident<T2>, Ident<TResult>>>();
 
             return (m1, m2) =>
             {
@@ -116,15 +116,15 @@ namespace Narvalo.Fx
         }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="Identity{T}" /> values, scanning the
+        /// Promotes a function to use and return <see cref="Ident{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
         // Named "liftM3" in Haskell parlance.
-        public static Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<TResult>>
+        public static Func<Ident<T1>, Ident<T2>, Ident<T3>, Ident<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> thunk)
             /* T4: C# indent */
         {
-            Warrant.NotNull<Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<TResult>>>();
+            Warrant.NotNull<Func<Ident<T1>, Ident<T2>, Ident<T3>, Ident<TResult>>>();
 
             return (m1, m2, m3) =>
             {
@@ -134,16 +134,16 @@ namespace Narvalo.Fx
         }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="Identity{T}" /> values, scanning the
+        /// Promotes a function to use and return <see cref="Ident{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
         // Named "liftM4" in Haskell parlance.
-        public static Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<T4>, Identity<TResult>>
+        public static Func<Ident<T1>, Ident<T2>, Ident<T3>, Ident<T4>, Ident<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> thunk)
             /* T4: C# indent */
         {
-            Warrant.NotNull<Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<T4>, Identity<TResult>>>();
+            Warrant.NotNull<Func<Ident<T1>, Ident<T2>, Ident<T3>, Ident<T4>, Ident<TResult>>>();
 
             return (m1, m2, m3, m4) =>
             {
@@ -153,16 +153,16 @@ namespace Narvalo.Fx
         }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="Identity{T}" /> values, scanning the
+        /// Promotes a function to use and return <see cref="Ident{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
         // Named "liftM5" in Haskell parlance.
-        public static Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<T4>, Identity<T5>, Identity<TResult>>
+        public static Func<Ident<T1>, Ident<T2>, Ident<T3>, Ident<T4>, Ident<T5>, Ident<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> thunk)
             /* T4: C# indent */
         {
-            Warrant.NotNull<Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<T4>, Identity<T5>, Identity<TResult>>>();
+            Warrant.NotNull<Func<Ident<T1>, Ident<T2>, Ident<T3>, Ident<T4>, Ident<T5>, Ident<TResult>>>();
 
             return (m1, m2, m3, m4, m5) =>
             {
@@ -172,16 +172,16 @@ namespace Narvalo.Fx
         }
 
         #endregion
-    } // End of Identity - T4: EmitMonadCore().
+    } // End of Ident - T4: EmitMonadCore().
 
-    // Provides extension methods for Identity<T>.
-    public static partial class Identity
+    // Provides extension methods for Ident<T>.
+    public static partial class Ident
     {
         #region Applicative
 
         // Named "<$" (Applicative) in Haskell parlance.
-        public static Identity<TResult> Replace<TSource, TResult>(
-            this Identity<TSource> @this,
+        public static Ident<TResult> Replace<TSource, TResult>(
+            this Ident<TSource> @this,
             TResult value)
             /* T4: C# indent */
         {
@@ -192,9 +192,9 @@ namespace Narvalo.Fx
 
 
         // Named "<*>" in Haskell parlance. Same as Apply (<**>) with its arguments flipped.
-        public static Identity<TResult> Gather<TSource, TResult>(
-            this Identity<TSource> @this,
-            Identity<Func<TSource, TResult>> applicative)
+        public static Ident<TResult> Gather<TSource, TResult>(
+            this Ident<TSource> @this,
+            Ident<Func<TSource, TResult>> applicative)
             /* T4: C# indent */
         {
             /* T4: C# indent */
@@ -203,9 +203,9 @@ namespace Narvalo.Fx
         }
 
         // Named "<**>" in Haskell parlance. Same as Gather (<*>) with its arguments flipped.
-        public static Identity<TResult> Apply<TSource, TResult>(
-            this Identity<Func<TSource, TResult>> @this,
-            Identity<TSource> value)
+        public static Ident<TResult> Apply<TSource, TResult>(
+            this Ident<Func<TSource, TResult>> @this,
+            Ident<TSource> value)
         {
             /* T4: C# indent */
             /* T4: C# indent */
@@ -213,9 +213,9 @@ namespace Narvalo.Fx
             return @this.Bind(thunk => value.Select(v => thunk.Invoke(v)));
         }
 
-        public static Identity<Tuple<TSource, TOther>> Zip<TSource, TOther>(
-            this Identity<TSource> @this,
-            Identity<TOther> other)
+        public static Ident<Tuple<TSource, TOther>> Zip<TSource, TOther>(
+            this Ident<TSource> @this,
+            Ident<TOther> other)
             /* T4: C# indent */
         {
             /* T4: C# indent */
@@ -229,21 +229,21 @@ namespace Narvalo.Fx
         #region Basic Monad functions
 
         // Named "fmap", "liftA" or "<$>" (Applicative) in Haskell parlance.
-        public static Identity<TResult> Select<TSource, TResult>(
-            this Identity<TSource> @this,
+        public static Ident<TResult> Select<TSource, TResult>(
+            this Ident<TSource> @this,
             Func<TSource, TResult> selector)
             /* T4: C# indent */
         {
             /* T4: C# indent */
             Require.NotNull(selector, nameof(selector));
 
-            return @this.Bind(_ => Identity.Of(selector.Invoke(_)));
+            return @this.Bind(_ => Ident.Of(selector.Invoke(_)));
         }
 
         // Named ">>" (Monad) or "*>" (Applicative) in Haskell parlance.
-        public static Identity<TResult> ReplaceBy<TSource, TResult>(
-            this Identity<TSource> @this,
-            Identity<TResult> other)
+        public static Ident<TResult> ReplaceBy<TSource, TResult>(
+            this Ident<TSource> @this,
+            Ident<TResult> other)
             /* T4: C# indent */
         {
             /* T4: C# indent */
@@ -253,18 +253,18 @@ namespace Narvalo.Fx
 
         // Named "void" in Haskell parlance.
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
-        public static Identity<global::Narvalo.Fx.Unit> Skip<TSource>(this Identity<TSource> @this)
+        public static Ident<global::Narvalo.Fx.Unit> Skip<TSource>(this Ident<TSource> @this)
             /* T4: C# indent */
         {
             /* T4: C# indent */
 
-            return Identity.Unit;
+            return Ident.Unit;
         }
 
         // Named "forever" in Haskell parlance.
-        public static Identity<TResult> Forever<TSource, TResult>(
-            this Identity<TSource> @this,
-            Func<Identity<TResult>> thunk)
+        public static Ident<TResult> Forever<TSource, TResult>(
+            this Ident<TSource> @this,
+            Func<Ident<TResult>> thunk)
             /* T4: C# indent */
         {
             /* T4: C# indent */
@@ -276,11 +276,11 @@ namespace Narvalo.Fx
 
         #region Non-standard extensions.
 
-        public static Identity<TResult> Coalesce<TSource, TResult>(
-            this Identity<TSource> @this,
+        public static Ident<TResult> Coalesce<TSource, TResult>(
+            this Ident<TSource> @this,
             Func<TSource, bool> predicate,
-            Identity<TResult> thenResult,
-            Identity<TResult> elseResult)
+            Ident<TResult> thenResult,
+            Ident<TResult> elseResult)
             /* T4: C# indent */
         {
             /* T4: C# indent */
@@ -296,8 +296,8 @@ namespace Narvalo.Fx
 
 
         // Named "replicateM" in Haskell parlance.
-        public static Identity<IEnumerable<TSource>> Repeat<TSource>(
-            this Identity<TSource> @this,
+        public static Ident<IEnumerable<TSource>> Repeat<TSource>(
+            this Ident<TSource> @this,
             int count)
         {
             /* T4: C# indent */
@@ -313,7 +313,7 @@ namespace Narvalo.Fx
 
         // Named "when" in Haskell parlance. Haskell uses a different signature.
         public static void When<TSource>(
-            this Identity<TSource> @this,
+            this Ident<TSource> @this,
             Func<TSource, bool> predicate,
             Action<TSource> action)
             /* T4: C# indent */
@@ -326,13 +326,13 @@ namespace Narvalo.Fx
                 _ => {
                     if (predicate.Invoke(_)) { action.Invoke(_); }
 
-                    return Identity.Unit;
+                    return Ident.Unit;
                 });
         }
 
         // Named "unless" in Haskell parlance. Haskell uses a different signature.
         public static void Unless<TSource>(
-            this Identity<TSource> @this,
+            this Ident<TSource> @this,
             Func<TSource, bool> predicate,
             Action<TSource> action)
             /* T4: C# indent */
@@ -350,9 +350,9 @@ namespace Narvalo.Fx
 
         /// <see cref="Lift{T1, T2, T3}" />
         // Named "liftA2" (Applicative) in Haskell parlance.
-        public static Identity<TResult> Zip<TFirst, TSecond, TResult>(
-            this Identity<TFirst> @this,
-            Identity<TSecond> second,
+        public static Ident<TResult> Zip<TFirst, TSecond, TResult>(
+            this Ident<TFirst> @this,
+            Ident<TSecond> second,
             Func<TFirst, TSecond, TResult> resultSelector)
             /* T4: C# indent */
         {
@@ -365,10 +365,10 @@ namespace Narvalo.Fx
 
         /// <see cref="Lift{T1, T2, T3, T4}" />
         // Named "liftA3" (Applicative) in Haskell parlance.
-        public static Identity<TResult> Zip<T1, T2, T3, TResult>(
-            this Identity<T1> @this,
-            Identity<T2> second,
-            Identity<T3> third,
+        public static Ident<TResult> Zip<T1, T2, T3, TResult>(
+            this Ident<T1> @this,
+            Ident<T2> second,
+            Ident<T3> third,
             Func<T1, T2, T3, TResult> resultSelector)
             /* T4: C# indent */
         {
@@ -376,7 +376,7 @@ namespace Narvalo.Fx
             /* T4: C# indent */
             Require.NotNull(resultSelector, nameof(resultSelector));
 
-            Func<T1, Identity<TResult>> g
+            Func<T1, Ident<TResult>> g
                 = t1 => second.Zip(third, (t2, t3) => resultSelector.Invoke(t1, t2, t3));
 
             return @this.Bind(g);
@@ -384,11 +384,11 @@ namespace Narvalo.Fx
 
         /// <see cref="Lift{T1, T2, T3, T4, T5}" />
         // Named "liftA4" (Applicative) in Haskell parlance.
-        public static Identity<TResult> Zip<T1, T2, T3, T4, TResult>(
-             this Identity<T1> @this,
-             Identity<T2> second,
-             Identity<T3> third,
-             Identity<T4> fourth,
+        public static Ident<TResult> Zip<T1, T2, T3, T4, TResult>(
+             this Ident<T1> @this,
+             Ident<T2> second,
+             Ident<T3> third,
+             Ident<T4> fourth,
              Func<T1, T2, T3, T4, TResult> resultSelector)
             /* T4: C# indent */
         {
@@ -396,7 +396,7 @@ namespace Narvalo.Fx
             /* T4: C# indent */
             Require.NotNull(resultSelector, nameof(resultSelector));
 
-            Func<T1, Identity<TResult>> g
+            Func<T1, Ident<TResult>> g
                 = t1 => second.Zip(
                     third,
                     fourth,
@@ -407,12 +407,12 @@ namespace Narvalo.Fx
 
         /// <see cref="Lift{T1, T2, T3, T4, T5, T6}" />
         // Named "liftA5" (Applicative) in Haskell parlance.
-        public static Identity<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
-            this Identity<T1> @this,
-            Identity<T2> second,
-            Identity<T3> third,
-            Identity<T4> fourth,
-            Identity<T5> fifth,
+        public static Ident<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
+            this Ident<T1> @this,
+            Ident<T2> second,
+            Ident<T3> third,
+            Ident<T4> fourth,
+            Ident<T5> fifth,
             Func<T1, T2, T3, T4, T5, TResult> resultSelector)
             /* T4: C# indent */
         {
@@ -420,7 +420,7 @@ namespace Narvalo.Fx
             /* T4: C# indent */
             Require.NotNull(resultSelector, nameof(resultSelector));
 
-            Func<T1, Identity<TResult>> g
+            Func<T1, Ident<TResult>> g
                 = t1 => second.Zip(
                     third,
                     fourth,
@@ -438,9 +438,9 @@ namespace Narvalo.Fx
         /// <remarks>
         /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" />.
         /// </remarks>
-        public static Identity<TResult> SelectMany<TSource, TMiddle, TResult>(
-            this Identity<TSource> @this,
-            Func<TSource, Identity<TMiddle>> valueSelector,
+        public static Ident<TResult> SelectMany<TSource, TMiddle, TResult>(
+            this Ident<TSource> @this,
+            Func<TSource, Ident<TMiddle>> valueSelector,
             Func<TSource, TMiddle, TResult> resultSelector)
             /* T4: C# indent */
         {
@@ -460,7 +460,7 @@ namespace Narvalo.Fx
 
 
         #endregion
-    } // End of Identity - T4: EmitMonadExtensions().
+    } // End of Ident - T4: EmitMonadExtensions().
 
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Kunc
@@ -469,8 +469,8 @@ namespace Narvalo.Fx
 
 
         // Named "forM" in Haskell parlance. Same as SelectWith (mapM) with its arguments flipped.
-        public static Identity<IEnumerable<TResult>> ForEach<TSource, TResult>(
-            this Func<TSource, Identity<TResult>> @this,
+        public static Ident<IEnumerable<TResult>> ForEach<TSource, TResult>(
+            this Func<TSource, Ident<TResult>> @this,
             IEnumerable<TSource> seq)
         {
             Expect.NotNull(@this);
@@ -481,9 +481,9 @@ namespace Narvalo.Fx
 
 
         // Named "=<<" in Haskell parlance. Same as Bind (>>=) with its arguments flipped.
-        public static Identity<TResult> Invoke<TSource, TResult>(
-            this Func<TSource, Identity<TResult>> @this,
-            Identity<TSource> value)
+        public static Ident<TResult> Invoke<TSource, TResult>(
+            this Func<TSource, Ident<TResult>> @this,
+            Ident<TSource> value)
             /* T4: C# indent */
         {
             Expect.NotNull(@this);
@@ -493,27 +493,27 @@ namespace Narvalo.Fx
         }
 
         // Named ">=>" in Haskell parlance.
-        public static Func<TSource, Identity<TResult>> Compose<TSource, TMiddle, TResult>(
-            this Func<TSource, Identity<TMiddle>> @this,
-            Func<TMiddle, Identity<TResult>> thunk)
+        public static Func<TSource, Ident<TResult>> Compose<TSource, TMiddle, TResult>(
+            this Func<TSource, Ident<TMiddle>> @this,
+            Func<TMiddle, Ident<TResult>> thunk)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
             Expect.NotNull(thunk);
-            Warrant.NotNull<Func<TSource, Identity<TResult>>>();
+            Warrant.NotNull<Func<TSource, Ident<TResult>>>();
 
             return _ => @this.Invoke(_).Bind(thunk);
         }
 
         // Named "<=<" in Haskell parlance.
-        public static Func<TSource, Identity<TResult>> ComposeBack<TSource, TMiddle, TResult>(
-            this Func<TMiddle, Identity<TResult>> @this,
-            Func<TSource, Identity<TMiddle>> thunk)
+        public static Func<TSource, Ident<TResult>> ComposeBack<TSource, TMiddle, TResult>(
+            this Func<TMiddle, Ident<TResult>> @this,
+            Func<TSource, Ident<TMiddle>> thunk)
             /* T4: C# indent */
         {
             Expect.NotNull(@this);
             Require.NotNull(thunk, nameof(thunk));
-            Warrant.NotNull<Func<TSource, Identity<TResult>>>();
+            Warrant.NotNull<Func<TSource, Ident<TResult>>>();
 
             return _ => thunk.Invoke(_).Bind(@this);
         }
@@ -521,15 +521,15 @@ namespace Narvalo.Fx
         #endregion
     } // End of Func - T4: EmitKleisliExtensions().
 
-    // Provides extension methods for IEnumerable<Identity<T>>.
-    public static partial class Identity
+    // Provides extension methods for IEnumerable<Ident<T>>.
+    public static partial class Ident
     {
         #region Basic Monad functions
 
 
         // Named "sequence" in Haskell parlance.
-        public static Identity<IEnumerable<TSource>> Collect<TSource>(
-            this IEnumerable<Identity<TSource>> @this)
+        public static Ident<IEnumerable<TSource>> Collect<TSource>(
+            this IEnumerable<Ident<TSource>> @this)
         {
             Expect.NotNull(@this);
 
@@ -551,38 +551,38 @@ namespace Narvalo.Fx.Internal
 
     using Narvalo.Fx.Linq;
 
-    // Provides default implementations for the extension methods for IEnumerable<Identity<T>>.
+    // Provides default implementations for the extension methods for IEnumerable<Ident<T>>.
     // You will certainly want to override them to improve performance.
     internal static partial class EnumerableExtensions
     {
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Identity<IEnumerable<TSource>> CollectImpl<TSource>(
-            this IEnumerable<Identity<TSource>> @this)
+        internal static Ident<IEnumerable<TSource>> CollectImpl<TSource>(
+            this IEnumerable<Ident<TSource>> @this)
         {
             Demand.NotNull(@this);
 
-            var seed = Identity.Of(Enumerable.Empty<TSource>());
-            //var seed = Identity.Of(Enumerable.Empty<TSource>());
+            var seed = Ident.Of(Enumerable.Empty<TSource>());
+            //var seed = Ident.Of(Enumerable.Empty<TSource>());
             // Inlined LINQ Append method:
             Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (m, item) => m.Append(item);
 
             // NB: Maybe.Lift(append) is the same as:
-            // Func<Identity<IEnumerable<TSource>>, Identity<TSource>, Identity<IEnumerable<TSource>>> liftedAppend
+            // Func<Ident<IEnumerable<TSource>>, Ident<TSource>, Ident<IEnumerable<TSource>>> liftedAppend
             //     = (m, item) => m.Bind(list => Append(list, item));
             // where Append is defined below.
-            var retval = @this.Aggregate(seed, Identity.Lift<IEnumerable<TSource>, TSource, IEnumerable<TSource>>(append));
+            var retval = @this.Aggregate(seed, Ident.Lift<IEnumerable<TSource>, TSource, IEnumerable<TSource>>(append));
 
             return retval;
         }
 
         // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
-        //private static Identity<IEnumerable<TSource>> Append<TSource>(
+        //private static Ident<IEnumerable<TSource>> Append<TSource>(
         //    IEnumerable<TSource> list,
-        //    Identity<TSource> m)
+        //    Ident<TSource> m)
         //{
 
-        //    return m.Bind(item => Identity.Of(list.Concat(Enumerable.Repeat(item, 1))));
+        //    return m.Bind(item => Ident.Of(list.Concat(Enumerable.Repeat(item, 1))));
         //}
 
     } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
@@ -592,27 +592,27 @@ namespace Narvalo.Fx.Internal
 namespace Narvalo.Fx
 {
     // Implements core Comonad methods.
-    public static partial class Identity
+    public static partial class Ident
     {
         /// <remarks>
         /// Named <c>extract</c> in Haskell parlance.
         /// </remarks>
-        public static T Extract<T>(Identity<T> monad)
+        public static T Extract<T>(Ident<T> monad)
             /* T4: C# indent */
         {
 
-            return Identity<T>.ε(monad);
+            return Ident<T>.ε(monad);
         }
 
         /// <remarks>
         /// Named <c>duplicate</c> in Haskell parlance.
         /// </remarks>
-        public static Identity<Identity<T>> Duplicate<T>(Identity<T> monad)
+        public static Ident<Ident<T>> Duplicate<T>(Ident<T> monad)
             /* T4: C# indent */
         {
 
-            return Identity<T>.δ(monad);
+            return Ident<T>.δ(monad);
         }
-    } // End of Identity - T4: EmitComonadCore().
+    } // End of Ident - T4: EmitComonadCore().
 }
 
