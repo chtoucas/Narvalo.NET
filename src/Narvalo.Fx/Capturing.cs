@@ -7,7 +7,7 @@ namespace Narvalo.Fx
 
     using Narvalo.Fx.Internal;
 
-    public static class Capture
+    public static class Capturing
     {
         public static IExceptionCatcher AnyException() => new ExceptionCatcher();
 

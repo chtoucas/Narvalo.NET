@@ -3,6 +3,7 @@
 namespace Narvalo.Fx
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
@@ -186,6 +187,16 @@ namespace Narvalo.Fx
     // Implements the Internal.IMaybe<TError> interface.
     public partial class VoidOr<TError>
     {
+        // Named <c>maybeToList</c> in Haskell parlance.
+        public abstract IEnumerable<TError> ToEnumerable();
+
+        public IEnumerator<TError> GetEnumerator()
+        {
+            Warrant.NotNull<IEnumerator<TError>>();
+
+            return ToEnumerable().GetEnumerator();
+        }
+
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "1#", Justification = "[Intentionally] Internal interface.")]
         public abstract TResult Match<TResult>(Func<TError, TResult> caseError, Func<TResult> caseSuccess);
@@ -218,6 +229,13 @@ namespace Narvalo.Fx
 
         private partial class Void_ : VoidOr<TError>
         {
+            public override IEnumerable<TError> ToEnumerable()
+            {
+                Warrant.NotNull<IEnumerable<TError>>();
+
+                return Sequence.Empty<TError>();
+            }
+
             public override TResult Match<TResult>(Func<TError, TResult> caseError, Func<TResult> caseSuccess)
             {
                 Require.NotNull(caseSuccess, nameof(caseSuccess));
@@ -269,6 +287,13 @@ namespace Narvalo.Fx
 
         private partial class Error_
         {
+            public override IEnumerable<TError> ToEnumerable()
+            {
+                Warrant.NotNull<IEnumerable<TError>>();
+
+                return Sequence.Of(Error);
+            }
+
             public override TResult Match<TResult>(Func<TError, TResult> caseError, Func<TResult> caseSuccess)
             {
                 Require.NotNull(caseError, nameof(caseError));

@@ -3,6 +3,7 @@
 namespace Narvalo.Fx
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
@@ -10,7 +11,7 @@ namespace Narvalo.Fx
 
     // Friendly version of Either<T, TError>. NB: In Haskell, the error is the left type parameter.
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public abstract partial class Result<T, TError> : Internal.IEither<T, TError>
+    public abstract partial class Result<T, TError> : Internal.IEither<T, TError>, Internal.Iterable<T>
     {
 #if CONTRACTS_FULL // Custom ctor visibility for the contract class only.
         protected Result() { }
@@ -364,6 +365,39 @@ namespace Narvalo.Fx
                 Require.NotNull(action, nameof(action));
 
                 action.Invoke(Error);
+            }
+        }
+    }
+
+    // Implements the Internal.Iterable<T> interface.
+    public partial class Result<T, TError>
+    {
+        public abstract IEnumerable<T> ToEnumerable();
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            Warrant.NotNull<IEnumerator<T>>();
+
+            return ToEnumerable().GetEnumerator();
+        }
+
+        private partial class Success_
+        {
+            public override IEnumerable<T> ToEnumerable()
+            {
+                Warrant.NotNull<IEnumerable<T>>();
+
+                return Sequence.Of(Value);
+            }
+        }
+
+        private partial class Error_
+        {
+            public override IEnumerable<T> ToEnumerable()
+            {
+                Warrant.NotNull<IEnumerable<T>>();
+
+                return Sequence.Empty<T>();
             }
         }
     }

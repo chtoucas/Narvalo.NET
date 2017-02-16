@@ -3,6 +3,7 @@
 namespace Narvalo.Fx
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
@@ -25,7 +26,8 @@ namespace Narvalo.Fx
     /// <typeparam name="T">The underlying type of the value.</typeparam>
     // Friendly version of Either<ExceptionDispatchInfo, T>.
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public abstract partial class ResultOrError<T> : Internal.IEither<T, ExceptionDispatchInfo>
+    public abstract partial class ResultOrError<T>
+        : Internal.IEither<T, ExceptionDispatchInfo>, Internal.Iterable<T>
     {
 #if CONTRACTS_FULL // Custom ctor visibility for the contract class only.
         protected ResultOrError() { }
@@ -430,6 +432,39 @@ namespace Narvalo.Fx
                 Require.NotNull(action, nameof(action));
 
                 action.Invoke(ExceptionInfo);
+            }
+        }
+    }
+
+    // Implements the Internal.Iterable<T> interface.
+    public partial class ResultOrError<T>
+    {
+        public abstract IEnumerable<T> ToEnumerable();
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            Warrant.NotNull<IEnumerator<T>>();
+
+            return ToEnumerable().GetEnumerator();
+        }
+
+        private partial class Success_
+        {
+            public override IEnumerable<T> ToEnumerable()
+            {
+                Warrant.NotNull<IEnumerable<T>>();
+
+                return Sequence.Of(Value);
+            }
+        }
+
+        private partial class Error_
+        {
+            public override IEnumerable<T> ToEnumerable()
+            {
+                Warrant.NotNull<IEnumerable<T>>();
+
+                return Sequence.Empty<T>();
             }
         }
     }

@@ -3,6 +3,7 @@
 namespace Narvalo.Fx
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
@@ -162,6 +163,15 @@ namespace Narvalo.Fx
     // Implements the Internal.IMaybe<ExceptionDispatchInfo> interface.
     public partial class VoidOrError
     {
+        public abstract IEnumerable<ExceptionDispatchInfo> ToEnumerable();
+
+        public IEnumerator<ExceptionDispatchInfo> GetEnumerator()
+        {
+            Warrant.NotNull<IEnumerator<ExceptionDispatchInfo>>();
+
+            return ToEnumerable().GetEnumerator();
+        }
+
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "1#", Justification = "[Intentionally] Internal interface.")]
         public abstract TResult Match<TResult>(
@@ -204,6 +214,13 @@ namespace Narvalo.Fx
 
         private partial class Void_
         {
+            public override IEnumerable<ExceptionDispatchInfo> ToEnumerable()
+            {
+                Warrant.NotNull<IEnumerable<ExceptionDispatchInfo>>();
+
+                return Sequence.Empty<ExceptionDispatchInfo>();
+            }
+
             public override TResult Match<TResult>(
                 Func<ExceptionDispatchInfo, TResult> caseError,
                 Func<TResult> caseSuccess)
@@ -265,6 +282,13 @@ namespace Narvalo.Fx
 
         private partial class Error_
         {
+            public override IEnumerable<ExceptionDispatchInfo> ToEnumerable()
+            {
+                Warrant.NotNull<IEnumerable<ExceptionDispatchInfo>>();
+
+                return Sequence.Of(ExceptionInfo);
+            }
+
             public override TResult Match<TResult>(
                 Func<ExceptionDispatchInfo, TResult> caseError,
                 Func<TResult> caseSuccess)

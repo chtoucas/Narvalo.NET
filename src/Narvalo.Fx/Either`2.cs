@@ -20,7 +20,8 @@ namespace Narvalo.Fx
     /// <typeparam name="TLeft">The underlying type of the left part.</typeparam>
     /// <typeparam name="TRight">The underlying type of the right part.</typeparam>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public abstract partial class Either<TLeft, TRight> : Internal.IEither<TLeft, TRight>
+    public abstract partial class Either<TLeft, TRight>
+        : Internal.IEither<TLeft, TRight>, Internal.Iterable<TLeft>
     {
 #if CONTRACTS_FULL // Custom ctor visibility for the contract class only.
         protected Either() { }
@@ -392,6 +393,39 @@ namespace Narvalo.Fx
                 Require.NotNull(action, nameof(action));
 
                 action.Invoke(Right);
+            }
+        }
+    }
+
+    // Implements the Internal.Iterable<TLeft> interface.
+    public partial class Either<TLeft, TRight>
+    {
+        public abstract IEnumerable<TLeft> ToEnumerable();
+
+        public IEnumerator<TLeft> GetEnumerator()
+        {
+            Warrant.NotNull<IEnumerator<TLeft>>();
+
+            return ToEnumerable().GetEnumerator();
+        }
+
+        private partial class Left_
+        {
+            public override IEnumerable<TLeft> ToEnumerable()
+            {
+                Warrant.NotNull<IEnumerable<TLeft>>();
+
+                return Sequence.Of(Left);
+            }
+        }
+
+        private partial class Right_
+        {
+            public override IEnumerable<TLeft> ToEnumerable()
+            {
+                Warrant.NotNull<IEnumerable<TLeft>>();
+
+                return Sequence.Empty<TLeft>();
             }
         }
     }

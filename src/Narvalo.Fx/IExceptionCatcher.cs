@@ -6,10 +6,10 @@ namespace Narvalo.Fx
 
     public interface IExceptionCatcher
     {
-        VoidOrError Capture(Action action);
+        VoidOrError TryInvoke(Action action);
 
-        ResultOrError<TResult> Capture<TResult>(Func<TResult> thunk);
+        ResultOrError<TResult> TryInvoke<TResult>(Func<TResult> thunk);
 
-        ResultOrError<TResult> Capture<TSource, TResult>(Func<TSource, TResult> thunk, TSource value);
+        ResultOrError<TResult> TryInvoke<TSource, TResult>(Func<TSource, TResult> thunk, TSource value);
     }
 }

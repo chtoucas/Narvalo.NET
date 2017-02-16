@@ -3,7 +3,6 @@
 namespace Narvalo.Fx
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
@@ -19,7 +18,7 @@ namespace Narvalo.Fx
     [DebuggerDisplay("IsSome = {IsSome}")]
     [DebuggerTypeProxy(typeof(Maybe<>.DebugView))]
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "[Intentionally] Maybe<T> only pretends to be a collection.")]
-    public partial struct Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>, Internal.IMaybe<T>
+    public partial struct Maybe<T> : IEquatable<Maybe<T>>, Internal.IMaybe<T>
     {
         private readonly bool _isSome;
 
@@ -229,6 +228,25 @@ namespace Narvalo.Fx
     // Implements the Internal.IMaybe<T> interface.
     public partial struct Maybe<T>
     {
+        // Named <c>maybeToList</c> in Haskell parlance.
+        [SuppressMessage("Microsoft.Contracts", "Suggestion-6-0", Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
+        public IEnumerable<T> ToEnumerable()
+        {
+            Warrant.NotNull<IEnumerable<T>>();
+
+            if (IsSome)
+            {
+                yield return Value;
+            }
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            Warrant.NotNull<IEnumerator<T>>();
+
+            return ToEnumerable().GetEnumerator();
+        }
+
         public TResult Match<TResult>(Func<T, TResult> caseSome, Func<TResult> caseNone)
         {
             Require.NotNull(caseSome, nameof(caseSome));
@@ -315,43 +333,6 @@ namespace Narvalo.Fx
             Require.NotNull(action, nameof(action));
 
             if (IsNone) { action.Invoke(); }
-        }
-    }
-
-    // Implements the IEnumerable<T> interface.
-    public partial struct Maybe<T>
-    {
-        // Named <c>maybeToList</c> in Haskell parlance.
-        [SuppressMessage("Microsoft.Contracts", "Suggestion-6-0", Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
-        public IEnumerable<T> ToEnumerable()
-        {
-            Warrant.NotNull<IEnumerable<T>>();
-
-            if (IsSome)
-            {
-                yield return Value;
-            }
-            else
-            {
-                yield break;
-
-            }
-        }
-
-        /// <inheritdoc cref="IEnumerable{T}.GetEnumerator" />
-        IEnumerator<T> IEnumerable<T>.GetEnumerator()
-        {
-            Warrant.NotNull<IEnumerator<T>>();
-
-            return ToEnumerable().GetEnumerator();
-        }
-
-        /// <inheritdoc cref="IEnumerable.GetEnumerator" />
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            Warrant.NotNull<IEnumerator>();
-
-            return ToEnumerable().GetEnumerator();
         }
     }
 

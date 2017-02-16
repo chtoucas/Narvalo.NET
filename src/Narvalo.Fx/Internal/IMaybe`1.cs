@@ -9,7 +9,7 @@ namespace Narvalo.Fx.Internal
     /// </summary>
     /// <remarks>Equivalent to IEither&lt;T, Unit&gt;.</remarks>
     /// <typeparam name="T">The type of the underlying value.</typeparam>
-    internal interface IMaybe<T> : IContainer<T>
+    internal interface IMaybe<T> : IContainer<T>, Iterable<T>
     {
         TResult Match<TResult>(Func<T, TResult> caseSome, Func<TResult> caseNone);
 

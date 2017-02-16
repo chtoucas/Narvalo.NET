@@ -11,7 +11,8 @@ namespace Narvalo.Fx
     /// Represents the trivial monad.
     /// </summary>
     /// <typeparam name="T">The underlying type of the value.</typeparam>
-    public partial struct Ident<T> : IEquatable<Ident<T>>, IEquatable<T>, Internal.IContainer<T>
+    public partial struct Ident<T>
+        : IEquatable<Ident<T>>, IEquatable<T>, Internal.IContainer<T>, Internal.Iterable<T>
     {
         public Ident(T value)
         {
@@ -120,7 +121,7 @@ namespace Narvalo.Fx
         internal static Ident<Ident<T>> δ(Ident<T> monad) => new Ident<Ident<T>>(monad);
     }
 
-    // Implements the Internal.IHooks<T> interface.
+    // Implements the Internal.IContainer<T> interface.
     public partial struct Ident<T>
     {
         public TResult Coalesce<TResult>(Func<T, bool> predicate, Func<T, TResult> selector, Func<TResult> otherwise)
@@ -168,6 +169,24 @@ namespace Narvalo.Fx
             Require.NotNull(action, nameof(action));
 
             action.Invoke(Value);
+        }
+    }
+
+    // Implements the Internal.IMaybe<TError> interface.
+    public partial struct Ident<T>
+    {
+        public IEnumerable<T> ToEnumerable()
+        {
+            Warrant.NotNull<IEnumerator<T>>();
+
+            return Sequence.Of(Value);
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            Warrant.NotNull<IEnumerator<T>>();
+
+            return ToEnumerable().GetEnumerator();
         }
     }
 }
