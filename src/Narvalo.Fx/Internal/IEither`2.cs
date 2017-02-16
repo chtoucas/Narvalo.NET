@@ -16,7 +16,8 @@ namespace Narvalo.Fx.Internal
 
         // Equivalent to Match<Unit>().
         // See also:
-        // > IMagma<TLeft>.Do(Action<TLeft> action);
+        // > IContainer<TLeft>.Do(Action<TLeft> action);
+        // > ISecondaryContainer<TRight>.Do(Action<TRight> action);
         void Do(Action<TLeft> onLeft, Action<TRight> onRight);
     }
 }

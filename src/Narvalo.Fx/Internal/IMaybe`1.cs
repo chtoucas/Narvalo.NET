@@ -23,12 +23,12 @@ namespace Narvalo.Fx.Internal
         TResult Coalesce<TResult>(Func<T, bool> predicate, TResult thenResult, TResult elseResult);
 
         // See also:
-        // > IMagma<T>.When(Func<T, bool> predicate, Action<T> action);
+        // > IContainer<T>.When(Func<T, bool> predicate, Action<T> action);
         // Equivalent to Coalesce<Unit>().
         void When(Func<T, bool> predicate, Action<T> action, Action otherwise);
 
         // See also:
-        // > IMagma<T>.Do(Action<T> action);
+        // > IContainer<T>.Do(Action<T> action);
         // Equivalent to Match<Unit>().
         void Do(Action<T> onSome, Action onNone);
     }
