@@ -3,13 +3,17 @@
 namespace Narvalo.Fx
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
     public interface IExceptionCatcher
     {
-        VoidOrError TryInvoke(Action action);
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Try")]
+        VoidOrError Try(Action action);
 
-        ResultOrError<TResult> TryInvoke<TResult>(Func<TResult> thunk);
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Try")]
+        ResultOrError<TResult> Try<TResult>(Func<TResult> thunk);
 
-        ResultOrError<TResult> TryInvoke<TSource, TResult>(Func<TSource, TResult> thunk, TSource value);
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Try")]
+        ResultOrError<TResult> Try<TSource, TResult>(Func<TSource, TResult> thunk, TSource value);
     }
 }

@@ -11,25 +11,7 @@ namespace Narvalo.Fx.Internal
         public ExceptionCatcher() { }
 
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
-        public VoidOr<string> Invoke(Action action)
-        {
-            Require.NotNull(action, nameof(action));
-            Warrant.NotNull<VoidOr<string>>();
-
-            try
-            {
-                action.Invoke();
-
-                return VoidOr<string>.Void;
-            }
-            catch (Exception ex)
-            {
-                return VoidOr.FromError(ex.Message);
-            }
-        }
-
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
-        public VoidOrError TryInvoke(Action action)
+        public VoidOrError Try(Action action)
         {
             Require.NotNull(action, nameof(action));
             Warrant.NotNull<VoidOrError>();
@@ -49,7 +31,7 @@ namespace Narvalo.Fx.Internal
         }
 
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
-        public ResultOrError<TResult> TryInvoke<TResult>(Func<TResult> thunk)
+        public ResultOrError<TResult> Try<TResult>(Func<TResult> thunk)
         {
             Require.NotNull(thunk, nameof(thunk));
             Warrant.NotNull<ResultOrError<TResult>>();
@@ -69,9 +51,7 @@ namespace Narvalo.Fx.Internal
         }
 
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
-        public ResultOrError<TResult> TryInvoke<TSource, TResult>(
-            Func<TSource, TResult> thunk,
-            TSource value)
+        public ResultOrError<TResult> Try<TSource, TResult>(Func<TSource, TResult> thunk, TSource value)
         {
             Require.NotNull(thunk, nameof(thunk));
             Warrant.NotNull<ResultOrError<TResult>>();

@@ -5,15 +5,14 @@ namespace Narvalo.Fx.Internal
     using System;
     using System.Runtime.ExceptionServices;
 
-    internal sealed class ExceptionCatcher<T1Exception, T2Exception, T3Exception>
-        : IExceptionCatcher
+    internal sealed class ExceptionCatcher<T1Exception, T2Exception, T3Exception> : IExceptionCatcher
         where T1Exception : Exception
         where T2Exception : Exception
         where T3Exception : Exception
     {
         public ExceptionCatcher() { }
 
-        public VoidOrError TryInvoke(Action action)
+        public VoidOrError Try(Action action)
         {
             Require.NotNull(action, nameof(action));
             Warrant.NotNull<VoidOrError>();
@@ -33,7 +32,7 @@ namespace Narvalo.Fx.Internal
             return VoidOrError.FromError(edi);
         }
 
-        public ResultOrError<TResult> TryInvoke<TResult>(Func<TResult> thunk)
+        public ResultOrError<TResult> Try<TResult>(Func<TResult> thunk)
         {
             Require.NotNull(thunk, nameof(thunk));
             Warrant.NotNull<ResultOrError<TResult>>();
@@ -53,7 +52,7 @@ namespace Narvalo.Fx.Internal
             return ResultOrError.FromError<TResult>(edi);
         }
 
-        public ResultOrError<TResult> TryInvoke<TSource, TResult>(Func<TSource, TResult> thunk, TSource value)
+        public ResultOrError<TResult> Try<TSource, TResult>(Func<TSource, TResult> thunk, TSource value)
         {
             Require.NotNull(thunk, nameof(thunk));
             Warrant.NotNull<ResultOrError<TResult>>();

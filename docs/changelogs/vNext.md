@@ -70,6 +70,12 @@ TODO
   and [here](http://stackoverflow.com/questions/3032750/structs-interfaces-and-boxing).
 - Pretty sure that we can get rid off all uint and int overloads.
 
+Refactoring?
+- Narvalo.Properties in AssemblyInfo -> Properties or Narvalo
+- Narvalo.Cerbere -> Cerbere
+- Narvalo.Fx -> Efix
+- Narvalo.Finance -> ?
+
 Narvalo.Fx:
 - Review
   * Forever, When, Unless and Guard.
