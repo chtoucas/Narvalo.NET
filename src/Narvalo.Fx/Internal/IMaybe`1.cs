@@ -4,9 +4,12 @@ namespace Narvalo.Fx.Internal
 {
     using System;
 
-    // MonadOr of T.
-    // NB: Equivalent to IEither<T, Unit>.
-    internal interface IMaybe<T> : IMagma<T>
+    /// <summary>
+    /// Represents a container of zero or one value of type <typeparamref name="T"/>.
+    /// </summary>
+    /// <remarks>Equivalent to IEither&lt;T, Unit&gt;.</remarks>
+    /// <typeparam name="T">The type of the underlying value.</typeparam>
+    internal interface IMaybe<T> : IContainer<T>
     {
         TResult Match<TResult>(Func<T, TResult> caseSome, Func<TResult> caseNone);
 

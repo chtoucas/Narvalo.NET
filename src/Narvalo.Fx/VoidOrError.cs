@@ -191,8 +191,8 @@ namespace Narvalo.Fx
 
         public abstract void When(Func<ExceptionDispatchInfo, bool> predicate, Action<ExceptionDispatchInfo> action);
 
-        // Alias for OnError().
-        void Internal.IMagma<ExceptionDispatchInfo>.Do(Action<ExceptionDispatchInfo> action) => OnError(action);
+        // Alias for OnError(). Publicly hidden.
+        void Internal.IContainer<ExceptionDispatchInfo>.Do(Action<ExceptionDispatchInfo> action) => OnError(action);
 
         public abstract void OnError(Action<ExceptionDispatchInfo> action);
 

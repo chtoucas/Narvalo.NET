@@ -205,8 +205,8 @@ namespace Narvalo.Fx
 
         public abstract void When(Func<TError, bool> predicate, Action<TError> action);
 
-        // Alias for OnError().
-        void Internal.IMagma<TError>.Do(Action<TError> action) => OnError(action);
+        // Alias for OnError(). Publicly hidden.
+        void Internal.IContainer<TError>.Do(Action<TError> action) => OnError(action);
 
         public abstract void OnSuccess(Action action);
 

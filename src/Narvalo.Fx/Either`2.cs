@@ -12,8 +12,9 @@ namespace Narvalo.Fx
     /// <summary>
     /// Represents the sum of two types. An instance of the <see cref="Either{TLeft, TRight}"/> class
     /// contains either a <c>TLeft</c> value or a <c>TRight</c> value but not both.
-    /// <para>This class is a "monad" for the left parameter, nevertheless using <see cref="Either{TLeft, TRight}.Swap"/>
-    /// you can easily turn it into a "monad" for the right parameter.</para>
+    /// <para>This class is a "monad" of the left type parameter, nevertheless using
+    /// <see cref="Either{TLeft, TRight}.Swap"/> you can easily turn it into a "monad" of the
+    /// right type parameter.</para>
     /// </summary>
     /// <remarks>The enclosed value might be null.</remarks>
     /// <typeparam name="TLeft">The underlying type of the left part.</typeparam>
@@ -179,7 +180,7 @@ namespace Narvalo.Fx
     }
 
     // Conversion operators.
-    public abstract partial class Either<TLeft, TRight>
+    public partial class Either<TLeft, TRight>
     {
         public abstract TLeft ToLeft();
 
@@ -219,7 +220,7 @@ namespace Narvalo.Fx
     }
 
     // Provides the core Monad methods.
-    public abstract partial class Either<TLeft, TRight>
+    public partial class Either<TLeft, TRight>
     {
         public Either<TResult, TRight> Bind<TResult>(Func<TLeft, Either<TResult, TRight>> leftSelector)
             => BindLeft(leftSelector);
@@ -292,17 +293,27 @@ namespace Narvalo.Fx
     }
 
     // Implements the Internal.IEither<TLeft, TRight> interface.
-    public abstract partial class Either<TLeft, TRight>
+    public partial class Either<TLeft, TRight>
     {
         public abstract TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight);
 
+        // Alias for WhenLeft().
+        // NB: We keep this one public as it overrides the auto-generated method.
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
-        public void When(Func<TLeft, bool> leftPredicate, Action<TLeft> action) => WhenLeft(leftPredicate, action);
+        public void When(Func<TLeft, bool> leftPredicate, Action<TLeft> action)
+            => WhenLeft(leftPredicate, action);
+
+        // Alias for WhenRight(). Publicly hidden.
+        void Internal.ISecondaryContainer<TRight>.When(Func<TRight, bool> rightPredicate, Action<TRight> action)
+            => WhenRight(rightPredicate, action);
 
         public abstract void Do(Action<TLeft> onLeft, Action<TRight> onRight);
 
-        // Alias for OnLeft().
-        void Internal.IMagma<TLeft>.Do(Action<TLeft> onLeft) => OnLeft(onLeft);
+        // Alias for OnLeft(). Publicly hidden.
+        void Internal.IContainer<TLeft>.Do(Action<TLeft> onLeft) => OnLeft(onLeft);
+
+        // Alias for OnRight(). Publicly hidden.
+        void Internal.ISecondaryContainer<TRight>.Do(Action<TRight> onRight) => OnRight(onRight);
 
         public abstract void WhenLeft(Func<TLeft, bool> predicate, Action<TLeft> action);
 

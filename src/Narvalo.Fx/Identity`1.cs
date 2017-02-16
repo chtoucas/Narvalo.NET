@@ -11,7 +11,7 @@ namespace Narvalo.Fx
     /// Represents the trivial monad.
     /// </summary>
     /// <typeparam name="T">The underlying type of the value.</typeparam>
-    public partial struct Identity<T> : IEquatable<Identity<T>>, IEquatable<T>, Internal.IMagma<T>
+    public partial struct Identity<T> : IEquatable<Identity<T>>, IEquatable<T>, Internal.IContainer<T>
     {
         public Identity(T value)
         {

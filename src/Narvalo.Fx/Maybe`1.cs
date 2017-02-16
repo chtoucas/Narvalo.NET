@@ -301,7 +301,7 @@ namespace Narvalo.Fx
         }
 
         // Alias for OnSome().
-        void Internal.IMagma<T>.Do(Action<T> action) => OnSome(action);
+        void Internal.IContainer<T>.Do(Action<T> action) => OnSome(action);
 
         public void OnSome(Action<T> action)
         {

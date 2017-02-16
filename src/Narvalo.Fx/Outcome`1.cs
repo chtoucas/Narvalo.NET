@@ -320,14 +320,33 @@ namespace Narvalo.Fx
             Func<T, TResult> caseSuccess,
             Func<ExceptionDispatchInfo, TResult> caseError);
 
-        public abstract void When(Func<T, bool> predicate, Action<T> action);
+        // Alias for WhenSuccess().
+        // NB: We keep this one public as it overrides the auto-generated method.
+        public void When(Func<T, bool> predicate, Action<T> action)
+            => WhenSuccess(predicate, action);
+
+        // Alias for WhenError(). Publicly hidden.
+        void Internal.ISecondaryContainer<ExceptionDispatchInfo>.When(
+            Func<ExceptionDispatchInfo, bool> predicate,
+            Action<ExceptionDispatchInfo> action)
+            => WhenError(predicate, action);
 
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "1#", Justification = "[Intentionally] Internal interface.")]
         public abstract void Do(Action<T> onSuccess, Action<ExceptionDispatchInfo> onError);
 
-        // Alias for OnSuccess().
-        void Internal.IMagma<T>.Do(Action<T> onSuccess) => OnSuccess(onSuccess);
+        // Alias for OnSuccess(). Publicly hidden.
+        void Internal.IContainer<T>.Do(Action<T> onSuccess) => OnSuccess(onSuccess);
+
+        // Alias for OnError(). Publicly hidden.
+        void Internal.ISecondaryContainer<ExceptionDispatchInfo>.Do(Action<ExceptionDispatchInfo> onError)
+            => OnError(onError);
+
+        public abstract void WhenSuccess(Func<T, bool> predicate, Action<T> action);
+
+        public abstract void WhenError(
+            Func<ExceptionDispatchInfo, bool> predicate,
+            Action<ExceptionDispatchInfo> action);
 
         public abstract void OnSuccess(Action<T> action);
 
@@ -344,13 +363,18 @@ namespace Narvalo.Fx
                 return caseSuccess.Invoke(Value);
             }
 
-            public override void When(Func<T, bool> predicate, Action<T> action)
+            public override void WhenSuccess(Func<T, bool> predicate, Action<T> action)
             {
                 Require.NotNull(predicate, nameof(predicate));
                 Require.NotNull(action, nameof(action));
 
                 if (predicate.Invoke(Value)) { action.Invoke(Value); }
             }
+
+            public override void WhenError(
+                Func<ExceptionDispatchInfo, bool> predicate,
+                Action<ExceptionDispatchInfo> action)
+            { }
 
             public override void Do(Action<T> onSuccess, Action<ExceptionDispatchInfo> onError)
             {
@@ -380,7 +404,17 @@ namespace Narvalo.Fx
                 return caseError.Invoke(ExceptionInfo);
             }
 
-            public override void When(Func<T, bool> predicate, Action<T> action) { }
+            public override void WhenSuccess(Func<T, bool> predicate, Action<T> action) { }
+
+            public override void WhenError(
+                Func<ExceptionDispatchInfo, bool> predicate,
+                Action<ExceptionDispatchInfo> action)
+            {
+                Require.NotNull(predicate, nameof(predicate));
+                Require.NotNull(action, nameof(action));
+
+                if (predicate.Invoke(ExceptionInfo)) { action.Invoke(ExceptionInfo); }
+            }
 
             public override void Do(Action<T> onSuccess, Action<ExceptionDispatchInfo> OnError)
             {

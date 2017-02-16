@@ -4,8 +4,13 @@ namespace Narvalo.Fx.Internal
 {
     using System;
 
-    // Disjoint union of TLeft and TRight AND monad of the **left** type parameter.
-    internal interface IEither<TLeft, TRight> : IMagma<TLeft>
+    /// <summary>
+    /// Represents the disjoint union of <typeparamref name="TLeft"/> and <typeparamref name="TRight"/>.
+    /// <para>A disjoint union is also called a discriminated union, a variant, a sum type...</para>
+    /// </summary>
+    /// <typeparam name="TLeft">The type of the underlying left value of the sum.</typeparam>
+    /// <typeparam name="TRight">The type of the underlying right value of the sum.</typeparam>
+    internal interface IEither<TLeft, TRight> : IContainer<TLeft>, ISecondaryContainer<TRight>
     {
         TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight);
 
