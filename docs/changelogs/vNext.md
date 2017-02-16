@@ -73,7 +73,10 @@ TODO
 Narvalo.Fx:
 - Review
   * Forever, When, Unless and Guard.
-  * Do <- better name that does not conflict with the do from F#.
+  * Naming:
+    - Do -> Run? (conflict with F# keyword)
+    - Func<TSource, Monad<TResult>>.ForEach -> ???
+    - Func<TSource, Monad<TResult>>.Invoke -> ???
   * IEnumerable<T> extensions.
 - Async versions?
 - Check signatures / Haskell.

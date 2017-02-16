@@ -14,6 +14,86 @@ namespace Narvalo.Fx
     {
         public static Maybe<T> Of<T>(T? value) where T : struct
             => value.HasValue ? Of(value.Value) : Maybe<T>.None;
+    }
+
+
+    // Provides extension methods for Maybe<T>.
+    public static partial class Maybe
+    {
+        //public static Maybe<TResult> Using<TSource, TResult>(
+        //    this Maybe<TSource> @this,
+        //    Func<TSource, TResult> selector)
+        //    where TResult : IDisposable
+        //{
+        //    Require.NotNull(selector, nameof(selector));
+
+        //    return @this.Select(_ =>
+        //    {
+        //        using (var result = selector.Invoke(_))
+        //        {
+        //            return result;
+        //        }
+        //    });
+        //}
+
+        //public static void While<TSource>(this Maybe<TSource> @this, Func<bool> predicate, Action<TSource> action)
+        //{
+        //    Require.NotNull(predicate, nameof(predicate));
+        //    Require.NotNull(action, nameof(action));
+
+        //    if (@this.IsNone) { return; }
+
+        //    while (predicate.Invoke())
+        //    {
+        //        action.Invoke(@this.Value);
+        //    }
+        //}
+
+        //// https://fsharpforfunandprofit.com/posts/computation-expressions-builder-part6/
+        //// https://en.wikibooks.org/wiki/F_Sharp_Programming/Computation_Expressions
+        //public static Maybe<TResult> TryWith<TSource, TResult>(
+        //    this Maybe<TSource> @this,
+        //    Func<TSource, Maybe<TResult>> selector,
+        //    Action<Exception> onException)
+        //{
+        //    Require.NotNull(selector, nameof(selector));
+        //    Require.NotNull(onException, nameof(onException));
+
+        //    return @this.Bind(_ =>
+        //    {
+        //        try
+        //        {
+        //            return selector.Invoke(_);
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            onException.Invoke(ex);
+
+        //            return Maybe<TResult>.None;
+        //        }
+        //    });
+        //}
+
+        //public static Maybe<TResult> TryFinally<TSource, TResult>(
+        //    this Maybe<TSource> @this,
+        //    Func<TSource, Maybe<TResult>> selector,
+        //    Action action)
+        //{
+        //    Require.NotNull(selector, nameof(selector));
+        //    Require.NotNull(action, nameof(action));
+
+        //    return @this.Bind(_ =>
+        //    {
+        //        try
+        //        {
+        //            return selector.Invoke(_);
+        //        }
+        //        finally
+        //        {
+        //            action.Invoke();
+        //        }
+        //    });
+        //}
 
         #region Extension methods when T is a struct
 
