@@ -16,7 +16,6 @@ namespace Narvalo.Fx
             => value.HasValue ? Of(value.Value) : Maybe<T>.None;
     }
 
-
     // Provides extension methods for Maybe<T>.
     public static partial class Maybe
     {
