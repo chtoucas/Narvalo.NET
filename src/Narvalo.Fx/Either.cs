@@ -23,11 +23,18 @@ namespace Narvalo.Fx
             return Either<TLeft, TRight>.OfRight(value);
         }
 
-        public static Either<TLeft, TRight> Flatten<TLeft, TRight>(Either<TLeft, Either<TLeft, TRight>> square)
+        public static Either<TLeft, TRight> FlattenLeft<TLeft, TRight>(Either<Either<TLeft, TRight>, TRight> square)
         {
             Expect.NotNull(square);
 
-            return Either<TLeft, TRight>.Flatten(square);
+            return Either<TLeft, TRight>.μ(square);
+        }
+
+        public static Either<TLeft, TRight> FlattenRight<TLeft, TRight>(Either<TLeft, Either<TLeft, TRight>> square)
+        {
+            Expect.NotNull(square);
+
+            return Either<TLeft, TRight>.FlattenRight(square);
         }
     }
 
@@ -38,8 +45,8 @@ namespace Narvalo.Fx
             this Either<TLeft, TRight> @this,
             Func<TLeft, TResult> selector)
         {
-            Expect.NotNull(@this);
-            Expect.NotNull(selector);
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(selector, nameof(selector));
 
             return @this.BindLeft(_ => OfLeft<TResult, TRight>(selector.Invoke(_)));
         }

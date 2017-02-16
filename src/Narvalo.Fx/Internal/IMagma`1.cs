@@ -4,10 +4,13 @@ namespace Narvalo.Fx.Internal
 {
     using System;
 
+    // Monad of T.
     internal interface IMagma<T>
     {
-        // There is another closely related method which is automatically generated for monads:
+        // This method is also automatically generated for all monads.
+        // Another auto-generated method is:
         // > void Unless(Func<T, bool> predicate, Action<T> action);
+        // for which the default callback to When().
         void When(Func<T, bool> predicate, Action<T> action);
 
         void Do(Action<T> action);

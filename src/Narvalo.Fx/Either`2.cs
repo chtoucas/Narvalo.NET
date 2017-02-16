@@ -257,7 +257,7 @@ namespace Narvalo.Fx
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static Either<TLeft, TRight> Flatten(Either<TLeft, Either<TLeft, TRight>> square)
+        internal static Either<TLeft, TRight> FlattenRight(Either<TLeft, Either<TLeft, TRight>> square)
         {
             Require.NotNull(square, nameof(square));
 
@@ -296,12 +296,13 @@ namespace Narvalo.Fx
     {
         public abstract TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight);
 
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
         public void When(Func<TLeft, bool> leftPredicate, Action<TLeft> action) => WhenLeft(leftPredicate, action);
 
         public abstract void Do(Action<TLeft> onLeft, Action<TRight> onRight);
 
         // Alias for OnLeft().
-        void Internal.IMagma<TLeft>.Do(Action<TLeft> action) => OnLeft(action);
+        void Internal.IMagma<TLeft>.Do(Action<TLeft> onLeft) => OnLeft(onLeft);
 
         public abstract void WhenLeft(Func<TLeft, bool> predicate, Action<TLeft> action);
 

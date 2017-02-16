@@ -327,7 +327,7 @@ namespace Narvalo.Fx
         public abstract void Do(Action<T> onSuccess, Action<ExceptionDispatchInfo> onError);
 
         // Alias for OnSuccess().
-        void Internal.IMagma<T>.Do(Action<T> action) => OnSuccess(action);
+        void Internal.IMagma<T>.Do(Action<T> onSuccess) => OnSuccess(onSuccess);
 
         public abstract void OnSuccess(Action<T> action);
 

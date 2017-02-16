@@ -4,12 +4,14 @@ namespace Narvalo.Fx.Internal
 {
     using System;
 
-    // Disjoint union of TLeft and TRight.
+    // Disjoint union of TLeft and TRight AND monad of the **left** type parameter.
     internal interface IEither<TLeft, TRight> : IMagma<TLeft>
     {
         TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight);
 
         // Equivalent to Match<Unit>().
+        // See also:
+        // > IMagma<TLeft>.Do(Action<TLeft> action);
         void Do(Action<TLeft> onLeft, Action<TRight> onRight);
     }
 }
