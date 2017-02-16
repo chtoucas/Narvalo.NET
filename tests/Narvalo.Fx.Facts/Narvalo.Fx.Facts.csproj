@@ -43,12 +43,12 @@
     </Compile>
     <Compile Include="MaybeFacts.cs" />
     <Compile Include="NullableFacts.cs" />
-    <Compile Include="Outcome.g.cs">
-      <DependentUpon>Outcome.tt</DependentUpon>
+    <Compile Include="ResultOrError.g.cs">
+      <DependentUpon>ResultOrError.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="OutcomeFacts.cs" />
+    <Compile Include="ResultOrErrorFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SequenceFacts.cs" />
     <Compile Include="StubsFacts.cs" />
@@ -77,9 +77,9 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Maybe.g.cs</LastGenOutput>
     </Content>
-    <Content Include="Outcome.tt">
+    <Content Include="ResultOrError.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Outcome.g.cs</LastGenOutput>
+      <LastGenOutput>ResultOrError.g.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

@@ -49,44 +49,44 @@ namespace Narvalo.Fx.Internal
         }
 
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
-        public Outcome<TResult> Capture<TResult>(Func<TResult> thunk)
+        public ResultOrError<TResult> Capture<TResult>(Func<TResult> thunk)
         {
             Require.NotNull(thunk, nameof(thunk));
-            Warrant.NotNull<Outcome<TResult>>();
+            Warrant.NotNull<ResultOrError<TResult>>();
 
             try
             {
                 TResult result = thunk.Invoke();
 
-                return Outcome.Of(result);
+                return ResultOrError.Of(result);
             }
             catch (Exception ex)
             {
                 var edi = ExceptionDispatchInfo.Capture(ex);
 
-                return Outcome.FromError<TResult>(edi);
+                return ResultOrError.FromError<TResult>(edi);
             }
         }
 
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
-        public Outcome<TResult> Capture<TSource, TResult>(
+        public ResultOrError<TResult> Capture<TSource, TResult>(
             Func<TSource, TResult> thunk,
             TSource value)
         {
             Require.NotNull(thunk, nameof(thunk));
-            Warrant.NotNull<Outcome<TResult>>();
+            Warrant.NotNull<ResultOrError<TResult>>();
 
             try
             {
                 TResult result = thunk.Invoke(value);
 
-                return Outcome.Of(result);
+                return ResultOrError.Of(result);
             }
             catch (Exception ex)
             {
                 var edi = ExceptionDispatchInfo.Capture(ex);
 
-                return Outcome.FromError<TResult>(edi);
+                return ResultOrError.FromError<TResult>(edi);
             }
         }
     }

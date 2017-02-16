@@ -12,33 +12,33 @@ namespace Narvalo.Fx
     using Narvalo.Fx.Properties;
 
     /// <summary>
-    /// Represents the outcome of a computation which might throw an exception.
-    /// An instance of the <see cref="Outcome{T}"/> class contains either a <c>T</c>
+    /// Represents the outcome of a computation which might have thrown an exception.
+    /// An instance of the <see cref="ResultOrError{T}"/> class contains either a <c>T</c>
     /// value or the exception state at the point it was thrown.
     /// </summary>
     /// <remarks>
     /// <para>We do not catch exceptions throw by any supplied delegate; there is only one exception
-    /// though: <see cref="Outcome{T}.Select{TResult}(Func{T, TResult})"/>. A good pratice is that
-    /// a function that returns a <see cref="Outcome{T}"/> does not normally throw.</para>
+    /// though: <see cref="ResultOrError{T}.Select{TResult}(Func{T, TResult})"/>. A good pratice is that
+    /// a function that returns a <see cref="ResultOrError{T}"/> does not normally throw.</para>
     /// <para>This class is not meant to replace the standard exception mechanism.</para>
     /// </remarks>
     /// <typeparam name="T">The underlying type of the value.</typeparam>
     // Friendly version of Either<ExceptionDispatchInfo, T>.
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public abstract partial class Outcome<T> : Internal.IEither<T, ExceptionDispatchInfo>
+    public abstract partial class ResultOrError<T> : Internal.IEither<T, ExceptionDispatchInfo>
     {
 #if CONTRACTS_FULL // Custom ctor visibility for the contract class only.
-        protected Outcome() { }
+        protected ResultOrError() { }
 #else
-        private Outcome() { }
+        private ResultOrError() { }
 #endif
 
         /// <summary>
-        /// Gets a value indicating whether the outcome is successful.
+        /// Gets a value indicating whether the object is the result of a successful computation.
         /// </summary>
         /// <remarks>Most of the time, you don't need to access this property.
         /// You are better off using the rich vocabulary that this class offers.</remarks>
-        /// <value>true if the outcome is successful; otherwise false.</value>
+        /// <value>true if the outcome was successful; otherwise false.</value>
         public abstract bool IsSuccess { get; }
 
         public bool IsError => !IsSuccess;
@@ -83,10 +83,10 @@ namespace Narvalo.Fx
         public abstract T ValueOrThrow();
 
         /// <summary>
-        /// Represents the "success" part of the <see cref="Outcome{T}"/> type.
+        /// Represents the "success" part of the <see cref="ResultOrError{T}"/> type.
         /// </summary>
-        [DebuggerTypeProxy(typeof(Outcome<>.Success_.DebugView))]
-        private sealed partial class Success_ : Outcome<T>
+        [DebuggerTypeProxy(typeof(ResultOrError<>.Success_.DebugView))]
+        private sealed partial class Success_ : ResultOrError<T>
         {
             public Success_(T value) { Value = value; }
 
@@ -119,15 +119,15 @@ namespace Narvalo.Fx
             }
 
             /// <summary>
-            /// Represents a debugger type proxy for <see cref="Outcome{T}.Success_"/>.
+            /// Represents a debugger type proxy for <see cref="ResultOrError{T}.Success_"/>.
             /// </summary>
             [ContractVerification(false)] // Debugger-only code.
             [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
             private sealed class DebugView
             {
-                private readonly Outcome<T> _inner;
+                private readonly ResultOrError<T> _inner;
 
-                public DebugView(Outcome<T> inner)
+                public DebugView(ResultOrError<T> inner)
                 {
                     _inner = inner;
                 }
@@ -137,10 +137,10 @@ namespace Narvalo.Fx
         }
 
         /// <summary>
-        /// Represents the "failure" part of the <see cref="Outcome{T}"/> type.
+        /// Represents the "failure" part of the <see cref="ResultOrError{T}"/> type.
         /// </summary>
-        [DebuggerTypeProxy(typeof(Outcome<>.Error_.DebugView))]
-        private sealed partial class Error_ : Outcome<T>
+        [DebuggerTypeProxy(typeof(ResultOrError<>.Error_.DebugView))]
+        private sealed partial class Error_ : ResultOrError<T>
         {
             private readonly ExceptionDispatchInfo _exceptionInfo;
 
@@ -193,7 +193,7 @@ namespace Narvalo.Fx
             }
 
             /// <summary>
-            /// Represents a debugger type proxy for <see cref="Outcome{T}.Error_"/>.
+            /// Represents a debugger type proxy for <see cref="ResultOrError{T}.Error_"/>.
             /// </summary>
             [ContractVerification(false)] // Debugger-only code.
             [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
@@ -212,7 +212,7 @@ namespace Narvalo.Fx
     }
 
     // Conversions operators.
-    public partial class Outcome<T>
+    public partial class ResultOrError<T>
     {
         public abstract T ToValue();
 
@@ -220,24 +220,24 @@ namespace Narvalo.Fx
 
         public abstract ExceptionDispatchInfo ToExceptionInfo();
 
-        public static explicit operator T(Outcome<T> value)
+        public static explicit operator T(ResultOrError<T> value)
             => value == null ? default(T) : value.ToValue();
 
-        public static explicit operator Exception(Outcome<T> value)
+        public static explicit operator Exception(ResultOrError<T> value)
             => value?.ToException();
 
-        public static explicit operator ExceptionDispatchInfo(Outcome<T> value)
+        public static explicit operator ExceptionDispatchInfo(ResultOrError<T> value)
             => value?.ToExceptionInfo();
 
-        public static explicit operator Outcome<T>(T value)
+        public static explicit operator ResultOrError<T>(T value)
         {
-            Warrant.NotNull<Outcome<T>>();
+            Warrant.NotNull<ResultOrError<T>>();
 
-            return Outcome.Of(value);
+            return ResultOrError.Of(value);
         }
 
-        public static explicit operator Outcome<T>(ExceptionDispatchInfo exceptionInfo)
-            => exceptionInfo == null ? null : Outcome.FromError<T>(exceptionInfo);
+        public static explicit operator ResultOrError<T>(ExceptionDispatchInfo exceptionInfo)
+            => exceptionInfo == null ? null : ResultOrError.FromError<T>(exceptionInfo);
 
         private partial class Success_
         {
@@ -258,7 +258,7 @@ namespace Narvalo.Fx
         {
             public override T ToValue()
             {
-                throw new InvalidCastException(Strings.Outcome_CannotCastFailureToValue);
+                throw new InvalidCastException(Strings.ResultOrError_CannotCastFailureToValue);
             }
 
             public override Exception ToException() => ExceptionInfo.SourceException;
@@ -268,17 +268,17 @@ namespace Narvalo.Fx
     }
 
     // Core Monad methods.
-    public partial class Outcome<T>
+    public partial class ResultOrError<T>
     {
-        public abstract Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector);
+        public abstract ResultOrError<TResult> Bind<TResult>(Func<T, ResultOrError<TResult>> selector);
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static Outcome<T> η(T value) => new Success_(value);
+        internal static ResultOrError<T> η(T value) => new Success_(value);
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static Outcome<T> η(ExceptionDispatchInfo exceptionInfo)
+        internal static ResultOrError<T> η(ExceptionDispatchInfo exceptionInfo)
         {
             Require.NotNull(exceptionInfo, nameof(exceptionInfo));
 
@@ -287,16 +287,16 @@ namespace Narvalo.Fx
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static Outcome<T> μ(Outcome<Outcome<T>> square)
+        internal static ResultOrError<T> μ(ResultOrError<ResultOrError<T>> square)
         {
             Require.NotNull(square, nameof(square));
 
-            return square.IsSuccess ? square.Value : Outcome.FromError<T>(square.ExceptionInfo);
+            return square.IsSuccess ? square.Value : ResultOrError.FromError<T>(square.ExceptionInfo);
         }
 
         private partial class Success_
         {
-            public override Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector)
+            public override ResultOrError<TResult> Bind<TResult>(Func<T, ResultOrError<TResult>> selector)
             {
                 Require.NotNull(selector, nameof(selector));
 
@@ -306,13 +306,13 @@ namespace Narvalo.Fx
 
         private partial class Error_
         {
-            public override Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector)
-                => Outcome.FromError<TResult>(ExceptionInfo);
+            public override ResultOrError<TResult> Bind<TResult>(Func<T, ResultOrError<TResult>> selector)
+                => ResultOrError.FromError<TResult>(ExceptionInfo);
         }
     }
 
     // Implements the Internal.IEither<T, ExceptionDispatchInfo> interface.
-    public partial class Outcome<T>
+    public partial class ResultOrError<T>
     {
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "1#", Justification = "[Intentionally] Internal interface.")]
@@ -442,12 +442,12 @@ namespace Narvalo.Fx
     using System;
     using System.Diagnostics.Contracts;
 
-    // In real world, only Success_ and Error_ can inherit from Outcome.
-    // Adding the following object invariants on Outcome<T>:
+    // In real world, only Success_ and Error_ can inherit from ResultOrError.
+    // Adding the following object invariants on ResultOrError<T>:
     //  (IsSuccess && this is Success_) || (this is Error_)
     // should make unecessary any call to Contract.Assume but I have not been able to make this work.
-    [ContractClass(typeof(OutcomeContract<>))]
-    public partial class Outcome<T>
+    [ContractClass(typeof(ResultOrErrorContract<>))]
+    public partial class ResultOrError<T>
     {
         private partial class Success_
         {
@@ -469,23 +469,23 @@ namespace Narvalo.Fx
         }
     }
 
-    [ContractClassFor(typeof(Outcome<>))]
-    internal abstract class OutcomeContract<T> : Outcome<T>
+    [ContractClassFor(typeof(ResultOrError<>))]
+    internal abstract class ResultOrErrorContract<T> : ResultOrError<T>
     {
-        protected OutcomeContract() { }
+        protected ResultOrErrorContract() { }
 
-        public override Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector)
+        public override ResultOrError<TResult> Bind<TResult>(Func<T, ResultOrError<TResult>> selector)
         {
             Contract.Requires(selector != null);
 
-            return default(Outcome<TResult>);
+            return default(ResultOrError<TResult>);
         }
 
-        public override Outcome<TResult> Select<TResult>(Func<T, TResult> selector)
+        public override ResultOrError<TResult> Select<TResult>(Func<T, TResult> selector)
         {
             Contract.Requires(selector != null);
 
-            return default(Outcome<TResult>);
+            return default(ResultOrError<TResult>);
         }
     }
 }

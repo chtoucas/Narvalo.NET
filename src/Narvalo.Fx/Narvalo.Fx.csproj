@@ -67,9 +67,9 @@
     <None Include="Narvalo.Fx.Version.props">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Outcome.tt">
+    <None Include="ResultOrError.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Outcome.g.cs</LastGenOutput>
+      <LastGenOutput>ResultOrError.g.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -119,7 +119,7 @@
     <Compile Include="Linq\SelectAny.cs" />
     <Compile Include="Maybe.Shadowing.cs" />
     <Compile Include="Nullable.cs" />
-    <Compile Include="Outcome.Shadowing.cs" />
+    <Compile Include="ResultOrError.Shadowing.cs" />
     <Compile Include="Result.Shadowing.cs" />
     <Compile Include="Result`2.cs" />
     <Compile Include="VoidOr.cs" />
@@ -141,13 +141,13 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Maybe`1.cs" />
-    <Compile Include="Outcome.cs" />
-    <Compile Include="Outcome.g.cs">
-      <DependentUpon>Outcome.tt</DependentUpon>
+    <Compile Include="ResultOrError.cs" />
+    <Compile Include="ResultOrError.g.cs">
+      <DependentUpon>ResultOrError.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Outcome`1.cs" />
+    <Compile Include="ResultOrError`1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Strings.Designer.cs">
       <AutoGen>True</AutoGen>

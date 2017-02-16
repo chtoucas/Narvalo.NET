@@ -31,10 +31,10 @@ namespace Narvalo.Fx.Internal
             return VoidOrError.FromError(edi);
         }
 
-        public Outcome<TResult> Capture<TResult>(Func<TResult> thunk)
+        public ResultOrError<TResult> Capture<TResult>(Func<TResult> thunk)
         {
             Require.NotNull(thunk, nameof(thunk));
-            Warrant.NotNull<Outcome<TResult>>();
+            Warrant.NotNull<ResultOrError<TResult>>();
 
             ExceptionDispatchInfo edi;
 
@@ -42,18 +42,18 @@ namespace Narvalo.Fx.Internal
             {
                 TResult result = thunk.Invoke();
 
-                return Outcome.Of(result);
+                return ResultOrError.Of(result);
             }
             catch (T1Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T2Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
 
-            return Outcome.FromError<TResult>(edi);
+            return ResultOrError.FromError<TResult>(edi);
         }
 
-        public Outcome<TResult> Capture<TSource, TResult>(Func<TSource, TResult> thunk, TSource value)
+        public ResultOrError<TResult> Capture<TSource, TResult>(Func<TSource, TResult> thunk, TSource value)
         {
             Require.NotNull(thunk, nameof(thunk));
-            Warrant.NotNull<Outcome<TResult>>();
+            Warrant.NotNull<ResultOrError<TResult>>();
 
             ExceptionDispatchInfo edi;
 
@@ -61,12 +61,12 @@ namespace Narvalo.Fx.Internal
             {
                 TResult result = thunk.Invoke(value);
 
-                return Outcome.Of(result);
+                return ResultOrError.Of(result);
             }
             catch (T1Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T2Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
 
-            return Outcome.FromError<TResult>(edi);
+            return ResultOrError.FromError<TResult>(edi);
         }
     }
 }

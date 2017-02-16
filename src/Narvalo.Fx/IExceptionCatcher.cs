@@ -8,8 +8,8 @@ namespace Narvalo.Fx
     {
         VoidOrError Capture(Action action);
 
-        Outcome<TResult> Capture<TResult>(Func<TResult> thunk);
+        ResultOrError<TResult> Capture<TResult>(Func<TResult> thunk);
 
-        Outcome<TResult> Capture<TSource, TResult>(Func<TSource, TResult> thunk, TSource value);
+        ResultOrError<TResult> Capture<TSource, TResult>(Func<TSource, TResult> thunk, TSource value);
     }
 }

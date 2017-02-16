@@ -7,7 +7,7 @@ namespace Narvalo.Fx
 
     using Xunit;
 
-    public static partial class OutcomeFacts
+    public static partial class ResultOrErrorFacts
     {
         #region Explicit Cast
 
@@ -15,7 +15,7 @@ namespace Narvalo.Fx
         //public static void ExplicitCastToExceptionDispatchInfo_ThrowsInvalidCastException_WhenCastingSuccessObject()
         //{
         //    // Arrange
-        //    var output = Outcome.Of(1);
+        //    var output = ResultOrError.Of(1);
 
         //    // Act & Assert
         //    Assert.Throws<InvalidCastException>(() => (ExceptionDispatchInfo)output);
@@ -25,7 +25,7 @@ namespace Narvalo.Fx
         public static void ExplicitCastToValue_ThrowsInvalidCastException_WhenCastingFailureObject()
         {
             // Arrange
-            Outcome<string> output = null;
+            ResultOrError<string> output = null;
 
             try
             {
@@ -35,7 +35,7 @@ namespace Narvalo.Fx
             {
                 var edi = ExceptionDispatchInfo.Capture(ex);
 
-                output = Outcome.FromError<string>(edi);
+                output = ResultOrError.FromError<string>(edi);
             }
 
             // Act & Assert

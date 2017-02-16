@@ -71,20 +71,20 @@ namespace Narvalo.Fx.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Can not explicitly cast a failure of type Outcome&lt;T&gt; to a value of type T..
+        ///   Looks up a localized string similar to Can not explicitly cast a failure of type ResultOrError&lt;T&gt; to a value of type T..
         /// </summary>
-        internal static string Outcome_CannotCastFailureToValue {
+        internal static string ResultOrError_CannotCastFailureToValue {
             get {
-                return ResourceManager.GetString("Outcome_CannotCastFailureToValue", resourceCulture);
+                return ResourceManager.GetString("ResultOrError_CannotCastFailureToValue", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Can not explicitly cast a success of type Outcome&lt;T&gt; to an exception state..
+        ///   Looks up a localized string similar to Can not explicitly cast a success of type ResultOrError&lt;T&gt; to an exception state..
         /// </summary>
-        internal static string Outcome_CannotCastSuccessToException {
+        internal static string ResultOrError_CannotCastSuccessToException {
             get {
-                return ResourceManager.GetString("Outcome_CannotCastSuccessToException", resourceCulture);
+                return ResourceManager.GetString("ResultOrError_CannotCastSuccessToException", resourceCulture);
             }
         }
     }

@@ -6,25 +6,25 @@ namespace Narvalo.Fx
     using System.Runtime.ExceptionServices;
 
     /// <summary>
-    /// Provides a set of static and extension methods for <see cref="Outcome{T}"/>.
+    /// Provides a set of static and extension methods for <see cref="ResultOrError{T}"/>.
     /// and for querying objects that implement <see cref="IEnumerable{T}"/>
-    /// where T is of type <see cref="Outcome{S}"/>.
+    /// where T is of type <see cref="ResultOrError{S}"/>.
     /// </summary>
-    public static partial class Outcome
+    public static partial class ResultOrError
     {
-        public static Outcome<T> FromError<T>(ExceptionDispatchInfo exceptionInfo)
+        public static ResultOrError<T> FromError<T>(ExceptionDispatchInfo exceptionInfo)
         {
             Expect.NotNull(exceptionInfo);
-            Warrant.NotNull<Outcome<T>>();
+            Warrant.NotNull<ResultOrError<T>>();
 
-            return Outcome<T>.η(exceptionInfo);
+            return ResultOrError<T>.η(exceptionInfo);
         }
     }
 
-    // Provides extension methods for IEnumerable<Outcome<T>>.
-    public static partial class Outcome
+    // Provides extension methods for IEnumerable<ResultOrError<T>>.
+    public static partial class ResultOrError
     {
-        public static IEnumerable<TSource> CollectAny<TSource>(this IEnumerable<Outcome<TSource>> @this)
+        public static IEnumerable<TSource> CollectAny<TSource>(this IEnumerable<ResultOrError<TSource>> @this)
         {
             Require.NotNull(@this, nameof(@this));
             Warrant.NotNull<IEnumerable<TSource>>();
@@ -32,7 +32,7 @@ namespace Narvalo.Fx
             return CollectAnyIterator(@this);
         }
 
-        internal static IEnumerable<TSource> CollectAnyIterator<TSource>(IEnumerable<Outcome<TSource>> source)
+        internal static IEnumerable<TSource> CollectAnyIterator<TSource>(IEnumerable<ResultOrError<TSource>> source)
         {
             Demand.NotNull(source);
             Warrant.NotNull<IEnumerable<TSource>>();
