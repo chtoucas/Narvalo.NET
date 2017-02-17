@@ -4,6 +4,7 @@ namespace Narvalo.Fx
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.ExceptionServices;
 
     /// <summary>
@@ -12,6 +13,51 @@ namespace Narvalo.Fx
     /// where T is of type <see cref="VoidOr{TError}"/>.
     /// </summary>
     public partial class VoidOr
+    {
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of this method.")]
+        public static VoidOr<Exception> TryWith(Action action)
+        {
+            Require.NotNull(action, nameof(action));
+            Warrant.NotNull<VoidOr<Exception>>();
+
+            try
+            {
+                action.Invoke();
+
+                return VoidOr<Exception>.Void;
+            }
+            catch (Exception ex)
+            {
+                return FromError(ex);
+            }
+        }
+
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of this method.")]
+        public static VoidOr<Exception> TryFinally(Action action, Action finallyAction)
+        {
+            Require.NotNull(action, nameof(action));
+            Require.NotNull(finallyAction, nameof(finallyAction));
+            Warrant.NotNull<VoidOr<Exception>>();
+
+            try
+            {
+                action.Invoke();
+
+                return VoidOr<Exception>.Void;
+            }
+            catch (Exception ex)
+            {
+                return FromError(ex);
+            }
+            finally
+            {
+                finallyAction.Invoke();
+            }
+        }
+    }
+
+    // Provides extension methods for VoidOr<TError>.
+    public static partial class VoidOr
     {
         public static void ThrowIfError(this VoidOr<ExceptionDispatchInfo> @this)
         {

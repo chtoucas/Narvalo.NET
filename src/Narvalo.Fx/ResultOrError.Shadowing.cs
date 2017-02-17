@@ -16,13 +16,11 @@ namespace Narvalo.Fx
 
         private partial class Success_
         {
-            [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Exceptionally, we do want to catch all exceptions.")]
+            [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of ResultOrError.")]
             public override ResultOrError<TResult> Select<TResult>(Func<T, TResult> selector)
             {
                 Require.NotNull(selector, nameof(selector));
 
-                // Catching all exceptions is not a good practice, but here it makes sense, since
-                // the type is supposed to encode the exception too.
                 try
                 {
                     return ResultOrError.Of(selector.Invoke(Value));

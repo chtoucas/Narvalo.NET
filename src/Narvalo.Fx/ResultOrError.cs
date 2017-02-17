@@ -2,7 +2,9 @@
 
 namespace Narvalo.Fx
 {
+    using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.ExceptionServices;
 
     /// <summary>
@@ -18,6 +20,47 @@ namespace Narvalo.Fx
             Warrant.NotNull<ResultOrError<T>>();
 
             return ResultOrError<T>.η(exceptionInfo);
+        }
+
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of ResultOrError.")]
+        public static ResultOrError<TResult> TryWith<TResult>(Func<TResult> thunk)
+        {
+            Require.NotNull(thunk, nameof(thunk));
+            Warrant.NotNull<ResultOrError<TResult>>();
+
+            try
+            {
+                return Of(thunk.Invoke());
+            }
+            catch (Exception ex)
+            {
+                var edi = ExceptionDispatchInfo.Capture(ex);
+
+                return FromError<TResult>(edi);
+            }
+        }
+
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of ResultOrError.")]
+        public static ResultOrError<TResult> TryFinally<TResult>(Func<TResult> thunk, Action finallyAction)
+        {
+            Require.NotNull(thunk, nameof(thunk));
+            Require.NotNull(finallyAction, nameof(finallyAction));
+            Warrant.NotNull<ResultOrError<TResult>>();
+
+            try
+            {
+                return Of(thunk.Invoke());
+            }
+            catch (Exception ex)
+            {
+                var edi = ExceptionDispatchInfo.Capture(ex);
+
+                return FromError<TResult>(edi);
+            }
+            finally
+            {
+                finallyAction.Invoke();
+            }
         }
     }
 

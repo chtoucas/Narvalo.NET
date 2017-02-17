@@ -158,6 +158,51 @@ namespace Narvalo.Fx
 
             return new VoidOrError.Error_(exceptionInfo);
         }
+
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of VoidOrError.")]
+        public static VoidOrError TryWith(Action action)
+        {
+            Require.NotNull(action, nameof(action));
+            Warrant.NotNull<VoidOrError>();
+
+            try
+            {
+                action.Invoke();
+
+                return Void;
+            }
+            catch (Exception ex)
+            {
+                var edi = ExceptionDispatchInfo.Capture(ex);
+
+                return FromError(edi);
+            }
+        }
+
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of VoidOrError.")]
+        public static VoidOrError TryFinally(Action action, Action finallyAction)
+        {
+            Require.NotNull(action, nameof(action));
+            Require.NotNull(finallyAction, nameof(finallyAction));
+            Warrant.NotNull<VoidOrError>();
+
+            try
+            {
+                action.Invoke();
+
+                return Void;
+            }
+            catch (Exception ex)
+            {
+                var edi = ExceptionDispatchInfo.Capture(ex);
+
+                return FromError(edi);
+            }
+            finally
+            {
+                finallyAction.Invoke();
+            }
+        }
     }
 
     // Implements the Internal.IMaybe<ExceptionDispatchInfo> interface.
