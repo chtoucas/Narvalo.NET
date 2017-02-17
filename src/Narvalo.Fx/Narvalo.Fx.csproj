@@ -85,7 +85,8 @@
     <Compile Include="Internal\IEither`2.cs" />
     <Compile Include="Internal\IMaybe`1.cs" />
     <Compile Include="Internal\Iterable`1.cs" />
-    <Compile Include="Linq\AppendPrepend.cs" />
+    <Compile Include="Linq\Prepend.cs" />
+    <Compile Include="Linq\Append.cs" />
     <Compile Include="Linq\EmptyIfNull.cs" />
     <Compile Include="Linq\AggregateBack.cs" />
     <Compile Include="Linq\Reduce.cs" />
