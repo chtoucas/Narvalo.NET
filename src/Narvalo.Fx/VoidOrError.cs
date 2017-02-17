@@ -9,7 +9,6 @@ namespace Narvalo.Fx
     using System.Diagnostics.Contracts;
     using System.Runtime.ExceptionServices;
 
-    // Friendly version of Either<ExceptionDispatchInfo, Unit>.
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public abstract partial class VoidOrError : Internal.IMaybe<ExceptionDispatchInfo>
     {
@@ -113,11 +112,16 @@ namespace Narvalo.Fx
 
         public abstract ExceptionDispatchInfo ToExceptionInfo();
 
+        public abstract VoidOr<Exception> ToVoidOrException();
+
         public static explicit operator Exception(VoidOrError value)
             => value?.ToException();
 
         public static explicit operator ExceptionDispatchInfo(VoidOrError value)
             => value?.ToExceptionInfo();
+
+        public static explicit operator VoidOr<Exception>(VoidOrError value)
+            => value?.ToVoidOrException();
 
         public static explicit operator VoidOrError(ExceptionDispatchInfo exceptionInfo)
             => FromError(exceptionInfo);
@@ -133,6 +137,8 @@ namespace Narvalo.Fx
             {
                 throw new InvalidCastException("XXX");
             }
+
+            public override VoidOr<Exception> ToVoidOrException() => VoidOr<Exception>.Void;
         }
 
         private partial class Error_
@@ -140,6 +146,8 @@ namespace Narvalo.Fx
             public override Exception ToException() => ExceptionInfo.SourceException;
 
             public override ExceptionDispatchInfo ToExceptionInfo() => ExceptionInfo;
+
+            public override VoidOr<Exception> ToVoidOrException() => VoidOr.FromError(ExceptionInfo.SourceException);
         }
     }
 
@@ -159,6 +167,7 @@ namespace Narvalo.Fx
             return new VoidOrError.Error_(exceptionInfo);
         }
 
+        // NB: This method serves a different purpose than the trywith from F# workflows.
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of VoidOrError.")]
         public static VoidOrError TryWith(Action action)
         {
@@ -179,6 +188,7 @@ namespace Narvalo.Fx
             }
         }
 
+        // NB: This method serves a different purpose than the tryfinally from F# workflows.
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of VoidOrError.")]
         public static VoidOrError TryFinally(Action action, Action finallyAction)
         {

@@ -24,7 +24,7 @@ namespace Narvalo.Fx
     /// <para>This class is not meant to replace the standard exception mechanism.</para>
     /// </remarks>
     /// <typeparam name="T">The underlying type of the value.</typeparam>
-    // Friendly version of Either<ExceptionDispatchInfo, T>.
+    // Friendly version of Either<T, ExceptionDispatchInfo>.
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public abstract partial class ResultOrError<T>
         : Internal.IEither<T, ExceptionDispatchInfo>, Internal.Iterable<T>
@@ -222,6 +222,8 @@ namespace Narvalo.Fx
 
         public abstract ExceptionDispatchInfo ToExceptionInfo();
 
+        public abstract Result<T, Exception> ToResult();
+
         public static explicit operator T(ResultOrError<T> value)
             => value == null ? default(T) : value.ToValue();
 
@@ -230,6 +232,9 @@ namespace Narvalo.Fx
 
         public static explicit operator ExceptionDispatchInfo(ResultOrError<T> value)
             => value?.ToExceptionInfo();
+
+        public static explicit operator Result<T, Exception>(ResultOrError<T> value)
+            => value?.ToResult();
 
         public static explicit operator ResultOrError<T>(T value)
         {
@@ -254,6 +259,8 @@ namespace Narvalo.Fx
             {
                 throw new InvalidCastException("XXX");
             }
+
+            public override Result<T, Exception> ToResult() => Result.Of<T, Exception>(Value);
         }
 
         private partial class Error_
@@ -266,6 +273,9 @@ namespace Narvalo.Fx
             public override Exception ToException() => ExceptionInfo.SourceException;
 
             public override ExceptionDispatchInfo ToExceptionInfo() => ExceptionInfo;
+
+            public override Result<T, Exception> ToResult()
+                => Result.FromError<T, Exception>(ExceptionInfo.SourceException);
         }
     }
 

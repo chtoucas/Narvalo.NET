@@ -9,7 +9,6 @@ namespace Narvalo.Fx
     using System.Diagnostics.Contracts;
     using System.Runtime.CompilerServices;
 
-    // Friendly version of Either<TError, Unit>.
     // WARNING: We make this class a "monad" on TError.
     // Normally, TError should represent a **light** error. For real exceptions, see VoidOrError.
     [DebuggerDisplay("{DebuggerDisplay,nq}")]

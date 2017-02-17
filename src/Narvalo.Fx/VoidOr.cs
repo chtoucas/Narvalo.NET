@@ -4,8 +4,6 @@ namespace Narvalo.Fx
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Runtime.ExceptionServices;
 
     /// <summary>
     /// Provides a set of static and extension methods for <see cref="VoidOr{TError}"/>
@@ -14,61 +12,6 @@ namespace Narvalo.Fx
     /// </summary>
     public partial class VoidOr
     {
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of this method.")]
-        public static VoidOr<Exception> TryWith(Action action)
-        {
-            Require.NotNull(action, nameof(action));
-            Warrant.NotNull<VoidOr<Exception>>();
-
-            try
-            {
-                action.Invoke();
-
-                return VoidOr<Exception>.Void;
-            }
-            catch (Exception ex)
-            {
-                return FromError(ex);
-            }
-        }
-
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of this method.")]
-        public static VoidOr<Exception> TryFinally(Action action, Action finallyAction)
-        {
-            Require.NotNull(action, nameof(action));
-            Require.NotNull(finallyAction, nameof(finallyAction));
-            Warrant.NotNull<VoidOr<Exception>>();
-
-            try
-            {
-                action.Invoke();
-
-                return VoidOr<Exception>.Void;
-            }
-            catch (Exception ex)
-            {
-                return FromError(ex);
-            }
-            finally
-            {
-                finallyAction.Invoke();
-            }
-        }
-    }
-
-    // Provides extension methods for VoidOr<TError>.
-    public static partial class VoidOr
-    {
-        public static void ThrowIfError(this VoidOr<ExceptionDispatchInfo> @this)
-        {
-            Require.NotNull(@this, nameof(@this));
-
-            if (@this.IsError)
-            {
-                @this.Error.Throw();
-            }
-        }
-
         public static void ThrowIfError<TException>(this VoidOr<TException> @this) where TException : Exception
         {
             Require.NotNull(@this, nameof(@this));

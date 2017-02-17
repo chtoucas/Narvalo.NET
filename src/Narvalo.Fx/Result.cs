@@ -4,8 +4,6 @@ namespace Narvalo.Fx
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Runtime.ExceptionServices;
 
     /// <summary>
     /// Provides a set of static and extension methods for <see cref="Result{T, TError}"/>
@@ -19,57 +17,6 @@ namespace Narvalo.Fx
             Warrant.NotNull<Result<T, TError>>();
 
             return Result<T, TError>.η(value);
-        }
-
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of this method.")]
-        public static Result<TResult, Exception> TryWith<TResult>(Func<TResult> thunk)
-        {
-            Require.NotNull(thunk, nameof(thunk));
-            Warrant.NotNull<Result<TResult, Exception>>();
-
-            try
-            {
-                return Of<TResult, Exception>(thunk.Invoke());
-            }
-            catch (Exception ex)
-            {
-                return FromError<TResult, Exception>(ex);
-            }
-        }
-
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of this method.")]
-        public static Result<TResult, Exception> TryFinally<TResult>(Func<TResult> thunk, Action finallyAction)
-        {
-            Require.NotNull(thunk, nameof(thunk));
-            Require.NotNull(finallyAction, nameof(finallyAction));
-            Warrant.NotNull<Result<TResult, Exception>>();
-
-            try
-            {
-                return Of<TResult, Exception>(thunk.Invoke());
-            }
-            catch (Exception ex)
-            {
-                return FromError<TResult, Exception>(ex);
-            }
-            finally
-            {
-                finallyAction.Invoke();
-            }
-        }
-    }
-
-    // Provides extension methods for Result<T, TError>.
-    public static partial class Result
-    {
-        public static void ThrowIfError<T>(this Result<T, ExceptionDispatchInfo> @this)
-        {
-            Require.NotNull(@this, nameof(@this));
-
-            if (@this.IsError)
-            {
-                @this.Error.Throw();
-            }
         }
 
         public static void ThrowIfError<T, TException>(this Result<T, TException> @this) where TException : Exception
