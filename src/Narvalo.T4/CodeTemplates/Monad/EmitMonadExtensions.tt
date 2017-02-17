@@ -129,7 +129,7 @@ public partial class MonadTemplate
 
         #endregion
 
-        #region Non-standard extensions.
+        #region Other extensions
 
         public static <#= Name #><TResult<#= SuffixT #>> Coalesce<TSource, TResult<#= SuffixT #>>(
             this <#= Name #><TSource<#= SuffixT #>> @this,
@@ -166,6 +166,30 @@ public partial class MonadTemplate
         }
 
 <#+ } // T4: End of HasZero. #>
+
+        public static <#= Name #><TResult<#= SuffixT #>> Using<TSource, TResult<#= SuffixT #>>(
+            this <#= Name #><TSource<#= SuffixT #>> @this,
+            Func<TSource, <#= Name #><TResult<#= SuffixT #>>> selector)
+            <#+ WriteCustomTypeConstraint("TSource", "IDisposable"); #>
+            <#+ WriteTypeConstraints("TResult"); #>
+        {
+            <#+ WriteNotNull(); #>
+            Require.NotNull(selector, nameof(selector));
+
+            return @this.Bind(_ => { using (_) { return selector.Invoke(_); } });
+        }
+
+        public static <#= Name #><TResult<#= SuffixT #>> Using<TSource, TResult<#= SuffixT #>>(
+            this <#= Name #><TSource<#= SuffixT #>> @this,
+            Func<TSource, TResult> selector)
+            <#+ WriteCustomTypeConstraint("TSource", "IDisposable"); #>
+            <#+ WriteTypeConstraints("TResult"); #>
+        {
+            <#+ WriteNotNull(); #>
+            Require.NotNull(selector, nameof(selector));
+
+            return @this.<#= MapName #>(_ => { using (_) { return selector.Invoke(_); } });
+        }
 
         #endregion
 

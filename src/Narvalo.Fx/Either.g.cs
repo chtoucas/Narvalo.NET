@@ -260,7 +260,7 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Non-standard extensions.
+        #region Other extensions
 
         public static Either<TResult, TRight> Coalesce<TSource, TResult, TRight>(
             this Either<TSource, TRight> @this,
@@ -275,6 +275,30 @@ namespace Narvalo.Fx
             return @this.Bind(_ => predicate.Invoke(_) ? thenResult : elseResult);
         }
 
+
+        public static Either<TResult, TRight> Using<TSource, TResult, TRight>(
+            this Either<TSource, TRight> @this,
+            Func<TSource, Either<TResult, TRight>> selector)
+            where TSource : IDisposable
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(selector, nameof(selector));
+
+            return @this.Bind(_ => { using (_) { return selector.Invoke(_); } });
+        }
+
+        public static Either<TResult, TRight> Using<TSource, TResult, TRight>(
+            this Either<TSource, TRight> @this,
+            Func<TSource, TResult> selector)
+            where TSource : IDisposable
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(selector, nameof(selector));
+
+            return @this.Select(_ => { using (_) { return selector.Invoke(_); } });
+        }
 
         #endregion
 

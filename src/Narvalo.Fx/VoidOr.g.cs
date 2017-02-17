@@ -308,7 +308,7 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Non-standard extensions.
+        #region Other extensions
 
         public static VoidOr<TResult> Coalesce<TSource, TResult>(
             this VoidOr<TSource> @this,
@@ -339,6 +339,30 @@ namespace Narvalo.Fx
             return @this.Bind(_ => predicate.Invoke(_) ? thenResult : VoidOr<TResult>.Void);
         }
 
+
+        public static VoidOr<TResult> Using<TSource, TResult>(
+            this VoidOr<TSource> @this,
+            Func<TSource, VoidOr<TResult>> selector)
+            where TSource : IDisposable
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(selector, nameof(selector));
+
+            return @this.Bind(_ => { using (_) { return selector.Invoke(_); } });
+        }
+
+        public static VoidOr<TResult> Using<TSource, TResult>(
+            this VoidOr<TSource> @this,
+            Func<TSource, TResult> selector)
+            where TSource : IDisposable
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(selector, nameof(selector));
+
+            return @this.Select(_ => { using (_) { return selector.Invoke(_); } });
+        }
 
         #endregion
 

@@ -308,7 +308,7 @@ namespace Monads
 
         #endregion
 
-        #region Non-standard extensions.
+        #region Other extensions
 
         public static MonadPlus<TResult> Coalesce<TSource, TResult>(
             this MonadPlus<TSource> @this,
@@ -339,6 +339,28 @@ namespace Monads
             return @this.Bind(_ => predicate.Invoke(_) ? thenResult : MonadPlus<TResult>.Zero);
         }
 
+
+        public static MonadPlus<TResult> Using<TSource, TResult>(
+            this MonadPlus<TSource> @this,
+            Func<TSource, MonadPlus<TResult>> selector)
+            where TSource : IDisposable
+            /* T4: C# indent */
+        {
+            Require.NotNull(selector, nameof(selector));
+
+            return @this.Bind(_ => { using (_) { return selector.Invoke(_); } });
+        }
+
+        public static MonadPlus<TResult> Using<TSource, TResult>(
+            this MonadPlus<TSource> @this,
+            Func<TSource, TResult> selector)
+            where TSource : IDisposable
+            /* T4: C# indent */
+        {
+            Require.NotNull(selector, nameof(selector));
+
+            return @this.Select(_ => { using (_) { return selector.Invoke(_); } });
+        }
 
         #endregion
 

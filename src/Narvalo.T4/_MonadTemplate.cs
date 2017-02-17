@@ -401,6 +401,22 @@ namespace Narvalo.T4
             }
         }
 
+        protected void WriteCustomTypeConstraint(string typeName, params string[] typeConstraints)
+        {
+            var constraints = String.Join(",", typeConstraints);
+
+            PushIndent("            ");
+            if (HasTypeConstraints)
+            {
+                WriteLine("where {0} : {1}, {2}", typeName, TypeConstraints, constraints);
+            }
+            else
+            {
+                WriteLine("where {0} : {1}", typeName, constraints);
+            }
+            PopIndent();
+        }
+
         protected void WriteTypeConstraints(params string[] typeNames)
         {
             if (!HasTypeConstraints)

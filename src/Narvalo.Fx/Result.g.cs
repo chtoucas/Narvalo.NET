@@ -260,7 +260,7 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Non-standard extensions.
+        #region Other extensions
 
         public static Result<TResult, TError> Coalesce<TSource, TResult, TError>(
             this Result<TSource, TError> @this,
@@ -275,6 +275,30 @@ namespace Narvalo.Fx
             return @this.Bind(_ => predicate.Invoke(_) ? thenResult : elseResult);
         }
 
+
+        public static Result<TResult, TError> Using<TSource, TResult, TError>(
+            this Result<TSource, TError> @this,
+            Func<TSource, Result<TResult, TError>> selector)
+            where TSource : IDisposable
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(selector, nameof(selector));
+
+            return @this.Bind(_ => { using (_) { return selector.Invoke(_); } });
+        }
+
+        public static Result<TResult, TError> Using<TSource, TResult, TError>(
+            this Result<TSource, TError> @this,
+            Func<TSource, TResult> selector)
+            where TSource : IDisposable
+            /* T4: C# indent */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(selector, nameof(selector));
+
+            return @this.Select(_ => { using (_) { return selector.Invoke(_); } });
+        }
 
         #endregion
 

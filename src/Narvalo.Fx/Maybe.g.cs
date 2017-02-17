@@ -297,7 +297,7 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Non-standard extensions.
+        #region Other extensions
 
         public static Maybe<TResult> Coalesce<TSource, TResult>(
             this Maybe<TSource> @this,
@@ -326,6 +326,30 @@ namespace Narvalo.Fx
             return @this.Bind(_ => predicate.Invoke(_) ? thenResult : Maybe<TResult>.None);
         }
 
+
+        public static Maybe<TResult> Using<TSource, TResult>(
+            this Maybe<TSource> @this,
+            Func<TSource, Maybe<TResult>> selector)
+            where TSource : IDisposable
+            /* T4: C# indent */
+        {
+            /* T4: C# indent */
+            Require.NotNull(selector, nameof(selector));
+
+            return @this.Bind(_ => { using (_) { return selector.Invoke(_); } });
+        }
+
+        public static Maybe<TResult> Using<TSource, TResult>(
+            this Maybe<TSource> @this,
+            Func<TSource, TResult> selector)
+            where TSource : IDisposable
+            /* T4: C# indent */
+        {
+            /* T4: C# indent */
+            Require.NotNull(selector, nameof(selector));
+
+            return @this.Select(_ => { using (_) { return selector.Invoke(_); } });
+        }
 
         #endregion
 
