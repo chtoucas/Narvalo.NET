@@ -52,15 +52,26 @@
     </Compile>
     <Compile Include="Formattable.cs" />
     <Compile Include="Fx\BooleanResult`1.cs" />
+    <Compile Include="Fx\Capturing.cs" />
+    <Compile Include="Fx\Catching.cs" />
     <Compile Include="Fx\Error.cs" />
     <Compile Include="Fx\Error`1.cs" />
     <Compile Include="Fx\Func.cs" />
     <Compile Include="Fx\Extensions\Func%24.cs" />
     <Compile Include="Fx\Extensions\Nullable%24.cs" />
+    <Compile Include="Fx\ITryCaptureExceptionInfo.cs" />
+    <Compile Include="Fx\ITryCatch`1.cs" />
     <Compile Include="Fx\Recursion.cs" />
     <Compile Include="Fx\Switch%24.cs" />
     <Compile Include="Fx\Switch.cs" />
     <Compile Include="Fx\Switch`2.cs" />
+    <Compile Include="Fx\TryCaptureAnyException.cs" />
+    <Compile Include="Fx\TryCapture`1.cs" />
+    <Compile Include="Fx\TryCapture`2.cs" />
+    <Compile Include="Fx\TryCapture`3.cs" />
+    <Compile Include="Fx\TryCapture`4.cs" />
+    <Compile Include="Fx\TryCatch`1.cs" />
+    <Compile Include="Fx\_.cs" />
     <Compile Include="Globalization\CountryISOCode.cs" />
     <Compile Include="Globalization\RegionInfo%24.cs" />
     <Compile Include="Guard.cs" />

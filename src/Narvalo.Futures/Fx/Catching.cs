@@ -7,13 +7,13 @@ namespace Narvalo.Fx
 
     public static class Catching
     {
-        private static readonly IExceptionCatcher<Exception> s_ExceptionCatcher = new ExceptionCatcher<Exception>();
+        private static readonly ITryCatch<Exception> s_CatchAnyException = new TryCatch<Exception>();
 
-        public static IExceptionCatcher<Exception> AnyException() => s_ExceptionCatcher;
+        public static ITryCatch<Exception> AnyException() => s_CatchAnyException;
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
-        public static IExceptionCatcher<TException> Only<TException>()
+        public static ITryCatch<TException> Only<TException>()
             where TException : Exception
-            => new ExceptionCatcher<TException>();
+            => new TryCatch<TException>();
     }
 }

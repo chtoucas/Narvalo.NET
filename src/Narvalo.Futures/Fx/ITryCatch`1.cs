@@ -5,7 +5,7 @@ namespace Narvalo.Fx
     using System;
     using System.Diagnostics.CodeAnalysis;
 
-    public interface IExceptionCatcher<TException> where TException : Exception
+    public interface ITryCatch<TException> where TException : Exception
     {
         [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Try")]
         VoidOr<TException> Try(Action action);

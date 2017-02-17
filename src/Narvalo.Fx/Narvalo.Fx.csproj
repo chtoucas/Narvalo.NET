@@ -73,24 +73,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Catching.cs" />
     <Compile Include="Either.cs" />
     <Compile Include="Either`2.cs" />
-    <Compile Include="ExceptionCatcher`1.cs" />
     <Compile Include="Ident.g.cs">
       <DependentUpon>Ident.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Ident`1.cs" />
-    <Compile Include="IExceptionCatcher.cs" />
-    <Compile Include="IExceptionCatcher`1.cs" />
-    <Compile Include="Internal\ExceptionCatcher.cs" />
-    <Compile Include="Internal\ExceptionCatcher`1.cs" />
-    <Compile Include="Internal\ExceptionCatcher`4.cs" />
-    <Compile Include="Internal\ExceptionCatcher`3.cs" />
-    <Compile Include="Internal\ExceptionCatcher`2.cs" />
-    <Compile Include="Capturing.cs" />
     <Compile Include="Internal\ISecondaryContainer`1.cs" />
     <Compile Include="Internal\IEither`2.cs" />
     <Compile Include="Internal\IMaybe`1.cs" />

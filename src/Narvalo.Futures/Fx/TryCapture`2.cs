@@ -1,18 +1,18 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Fx.Internal
+namespace Narvalo.Fx
 {
     using System;
     using System.Runtime.ExceptionServices;
 
-    internal sealed class ExceptionCatcher<T1Exception, T2Exception, T3Exception> : IExceptionCatcher
+    [Obsolete("BAD IDEA")]
+    public sealed partial class TryCapture<T1Exception, T2Exception> : ITryCaptureExceptionInfo
         where T1Exception : Exception
         where T2Exception : Exception
-        where T3Exception : Exception
     {
-        public ExceptionCatcher() { }
+        internal TryCapture() { }
 
-        public VoidOrError Try(Action action)
+        public static VoidOrError With(Action action)
         {
             Require.NotNull(action, nameof(action));
             Warrant.NotNull<VoidOrError>();
@@ -27,12 +27,11 @@ namespace Narvalo.Fx.Internal
             }
             catch (T1Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T2Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
-            catch (T3Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
 
             return VoidOrError.FromError(edi);
         }
 
-        public ResultOrError<TResult> Try<TResult>(Func<TResult> thunk)
+        public static ResultOrError<TResult> With<TResult>(Func<TResult> thunk)
         {
             Require.NotNull(thunk, nameof(thunk));
             Warrant.NotNull<ResultOrError<TResult>>();
@@ -47,12 +46,11 @@ namespace Narvalo.Fx.Internal
             }
             catch (T1Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T2Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
-            catch (T3Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
 
             return ResultOrError.FromError<TResult>(edi);
         }
 
-        public ResultOrError<TResult> Try<TSource, TResult>(Func<TSource, TResult> thunk, TSource value)
+        public static ResultOrError<TResult> With<TSource, TResult>(Func<TSource, TResult> thunk, TSource value)
         {
             Require.NotNull(thunk, nameof(thunk));
             Warrant.NotNull<ResultOrError<TResult>>();
@@ -67,9 +65,19 @@ namespace Narvalo.Fx.Internal
             }
             catch (T1Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T2Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
-            catch (T3Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
 
             return ResultOrError.FromError<TResult>(edi);
         }
+    }
+
+    // Implements the ITryCapture interface.
+    public sealed partial class TryCapture<T1Exception, T2Exception>
+    {
+        public VoidOrError Try(Action action) => With(action);
+
+        public ResultOrError<TResult> Try<TResult>(Func<TResult> thunk) => With(thunk);
+
+        public ResultOrError<TResult> Try<TSource, TResult>(Func<TSource, TResult> thunk, TSource value)
+            => With(thunk, value);
     }
 }

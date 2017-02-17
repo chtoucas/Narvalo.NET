@@ -4,12 +4,12 @@ namespace Narvalo.Fx
 {
     using System;
 
-    public sealed class ExceptionCatcher<TException> : IExceptionCatcher<TException>
+    public sealed partial class TryCatch<TException> : ITryCatch<TException>
         where TException : Exception
     {
-        internal ExceptionCatcher() { }
+        internal TryCatch() { }
 
-        public static VoidOr<TException> TryCatch(Action action)
+        public static VoidOr<TException> With(Action action)
         {
             Require.NotNull(action, nameof(action));
             Warrant.NotNull<VoidOr<string>>();
@@ -26,7 +26,7 @@ namespace Narvalo.Fx
             }
         }
 
-        public static Result<TResult, TException> TryCatch<TResult>(Func<TResult> thunk)
+        public static Result<TResult, TException> With<TResult>(Func<TResult> thunk)
         {
             Require.NotNull(thunk, nameof(thunk));
             Warrant.NotNull<Result<TResult, TException>>();
@@ -43,7 +43,7 @@ namespace Narvalo.Fx
             }
         }
 
-        public static Result<TResult, TException> TryCatch<T, TResult>(Func<T, TResult> thunk, T arg)
+        public static Result<TResult, TException> With<T, TResult>(Func<T, TResult> thunk, T arg)
         {
             Require.NotNull(thunk, nameof(thunk));
             Warrant.NotNull<Result<TResult, TException>>();
@@ -60,7 +60,8 @@ namespace Narvalo.Fx
             }
         }
 
-        public static Result<TResult, TException> TryCatch<T1, T2, TResult>(Func<T1, T2, TResult> thunk, T1 arg1, T2 arg2)
+        public static Result<TResult, TException> With<T1, T2, TResult>(
+            Func<T1, T2, TResult> thunk, T1 arg1, T2 arg2)
         {
             Require.NotNull(thunk, nameof(thunk));
             Warrant.NotNull<Result<TResult, TException>>();
@@ -77,7 +78,7 @@ namespace Narvalo.Fx
             }
         }
 
-        public static Result<TResult, TException> TryCatch<T1, T2, T3, TResult>(
+        public static Result<TResult, TException> With<T1, T2, T3, TResult>(
             Func<T1, T2, T3, TResult> thunk, T1 arg1, T2 arg2, T3 arg3)
         {
             Require.NotNull(thunk, nameof(thunk));
@@ -95,7 +96,7 @@ namespace Narvalo.Fx
             }
         }
 
-        public static Result<TResult, TException> TryCatch<T1, T2, T3, T4, TResult>(
+        public static Result<TResult, TException> With<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> thunk, T1 arg1, T2 arg2, T3 arg3, T4 arg4)
         {
             Require.NotNull(thunk, nameof(thunk));
@@ -113,7 +114,7 @@ namespace Narvalo.Fx
             }
         }
 
-        public static Result<TResult, TException> TryCatch<T1, T2, T3, T4, T5, TResult>(
+        public static Result<TResult, TException> With<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> thunk, T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5)
         {
             Require.NotNull(thunk, nameof(thunk));
@@ -130,29 +131,33 @@ namespace Narvalo.Fx
                 return Result.FromError<TResult, TException>(ex);
             }
         }
+    }
 
+    // Implements the ITryCatch<TException> interface.
+    public partial class TryCatch<TException>
+    {
         public VoidOr<TException> Try(Action action)
-            => TryCatch(action);
+            => With(action);
 
         public Result<TResult, TException> Try<TResult>(Func<TResult> thunk)
-            => TryCatch(thunk);
+            => With(thunk);
 
         public Result<TResult, TException> Try<T, TResult>(Func<T, TResult> thunk, T arg)
-            => TryCatch(thunk, arg);
+            => With(thunk, arg);
 
         public Result<TResult, TException> Try<T1, T2, TResult>(Func<T1, T2, TResult> thunk, T1 arg1, T2 arg2)
-            => TryCatch(thunk, arg1, arg2);
+            => With(thunk, arg1, arg2);
 
         public Result<TResult, TException> Try<T1, T2, T3, TResult>(
             Func<T1, T2, T3, TResult> thunk, T1 arg1, T2 arg2, T3 arg3)
-            => TryCatch(thunk, arg1, arg2, arg3);
+            => With(thunk, arg1, arg2, arg3);
 
         public Result<TResult, TException> Try<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> thunk, T1 arg1, T2 arg2, T3 arg3, T4 arg4)
-            => TryCatch(thunk, arg1, arg2, arg3, arg4);
+            => With(thunk, arg1, arg2, arg3, arg4);
 
         public Result<TResult, TException> Try<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> thunk, T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5)
-            => TryCatch(thunk, arg1, arg2, arg3, arg4, arg5);
+            => With(thunk, arg1, arg2, arg3, arg4, arg5);
     }
 }
