@@ -621,21 +621,21 @@ namespace Narvalo.Fx
         /// <remarks>
         /// Named <c>extract</c> in Haskell parlance.
         /// </remarks>
-        public static T Extract<T>(Ident<T> monad)
+        public static T Extract<T>(Ident<T> value)
             /* T4: C# indent */
         {
 
-            return Ident<T>.ε(monad);
+            return Ident<T>.ε(value);
         }
 
         /// <remarks>
         /// Named <c>duplicate</c> in Haskell parlance.
         /// </remarks>
-        public static Ident<Ident<T>> Duplicate<T>(Ident<T> monad)
+        public static Ident<Ident<T>> Duplicate<T>(Ident<T> value)
             /* T4: C# indent */
         {
 
-            return Ident<T>.δ(monad);
+            return Ident<T>.δ(value);
         }
     } // End of Ident - T4: EmitComonadCore().
 }

@@ -114,11 +114,11 @@ namespace Narvalo.Fx
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static T ε(Ident<T> monad) => monad.Value;
+        internal static T ε(Ident<T> value) => value.Value;
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static Ident<Ident<T>> δ(Ident<T> monad) => new Ident<Ident<T>>(monad);
+        internal static Ident<Ident<T>> δ(Ident<T> value) => new Ident<Ident<T>>(value);
     }
 
     // Implements the Internal.IContainer<T> interface.
