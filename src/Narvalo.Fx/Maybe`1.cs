@@ -370,7 +370,7 @@ namespace Narvalo.Fx
                 return false;
             }
 
-            return Equals((Maybe<T>)other);
+            return Equals((Maybe<T>)other, comparer);
         }
 
         /// <inheritdoc cref="Object.GetHashCode" />
