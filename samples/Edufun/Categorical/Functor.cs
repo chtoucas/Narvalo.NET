@@ -8,6 +8,15 @@ namespace Edufun.Categorical
 
     // [Haskell] Data.Functor
     // The Functor class is used for types that can be mapped over.
+    //
+    // Translation from Haskell to .NET.
+    // Requirements:
+    // - fmap   Select
+    // API:
+    // - <$     Replace
+    // - $>     Ignore_
+    // - <$>    Invoke_
+    // - void   Skip
     public sealed class Functor<T>
     {
         // [Haskell] fmap :: (a -> b) -> f a -> f b
@@ -15,9 +24,29 @@ namespace Edufun.Categorical
         {
             throw new NotImplementedException();
         }
+
+        public static class Rules
+        {
+            // First law: the identity map is a fixed point for Select.
+            // fmap id  ==  id
+            public static bool FirstLaw<X>(Functor<X> me)
+            {
+                Func<X, X> id = _ => _;
+                Func<Functor<X>, Functor<X>> idM = _ => _;
+
+                return me.Select(id) == idM.Invoke(me);
+            }
+
+            // Second law: Select preserves the composition operator.
+            // fmap (f . g)  ==  fmap f . fmap g
+            public static bool SecondLaw<X, Y, Z>(Functor<X> me, Func<Y, Z> f, Func<X, Y> g)
+            {
+                return me.Select(_ => f(g(_))) == me.Select(g).Select(f);
+            }
+        }
     }
 
-    public static class Functor
+    public static class FunctorApi
     {
         // [Haskell] (<$) :: Functor f => a -> f b -> f a
         // (<$) =  fmap . const
@@ -29,14 +58,14 @@ namespace Edufun.Categorical
         // Flipped version of <$.
         // infixl 4 $>
         // ($>) = flip (<$)
-        internal static Functor<TResult> Replace_<T, TResult>(TResult value, Functor<T> @this)
+        internal static Functor<TResult> Ignore_<T, TResult>(this Functor<T> @this, TResult value)
             => @this.Replace(value);
 
         // [Haskell] (<$>) :: Functor f => (a -> b) -> f a -> f b
         // An infix synonym for fmap.
         // infixl 4 <$>
         // (<$>) = fmap
-        internal static Functor<TResult> Apply_<T, TResult>(Func<T, TResult> @this, Functor<T> value)
+        internal static Functor<TResult> Invoke_<T, TResult>(Func<T, TResult> @this, Functor<T> value)
             => value.Select(@this);
 
         // [Haskell] void :: Functor f => f a -> f ()
@@ -44,25 +73,5 @@ namespace Edufun.Categorical
         // void value discards or ignores the result of evaluation.
         public static Functor<Unit> Skip<T>(this Functor<T> @this)
             => @this.Replace(Unit.Single);
-    }
-
-    public static class FunctorRules
-    {
-        // The identity map is a fixed point for Select.
-        // > fmap id  ==  id
-        public static bool FirstLaw<T>(Functor<T> m)
-        {
-            Func<T, T> id = _ => _;
-            Func<Functor<T>, Functor<T>> idM = _ => _;
-
-            return m.Select(id) == idM.Invoke(m);
-        }
-
-        // Select preserves the composition operator.
-        // > fmap (f . g)  ==  fmap f . fmap g
-        public static bool SecondLaw<X, Y, Z>(Functor<X> m, Func<Y, Z> f, Func<X, Y> g)
-        {
-            return m.Select(_ => f(g(_))) == m.Select(g).Select(f);
-        }
     }
 }

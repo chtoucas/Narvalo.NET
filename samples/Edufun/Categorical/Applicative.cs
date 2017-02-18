@@ -7,24 +7,71 @@ namespace Edufun.Categorical
     using Narvalo.Fx;
 
     // [Haskell] Control.Applicative
+    // In-between a Functor and a Monad.
+    //
+    // Translation from Haskell to .NET.
+    // Requirements:
+    // - pure       Pure
+    // - <*>        Gather
+    // API:
+    // - *>         Replace
+    // - <*         Ignore_
+    // - fmap       Select
+    // Utility functions:
+    // - <$>        Invoke_
+    // - <$         Replace
+    // - <**>       Apply
+    // - liftA
+    // - liftA2     Zip
+    // - liftA3     Zip
+    // - optional
     public sealed class Applicative<T>
     {
-        // [Haskell] pure
+        // [Haskell] pure :: a -> f a
+        // Embed pure expressions ie lift a value.
         internal static Applicative<T> Pure(T value)
         {
             throw new NotImplementedException();
         }
 
-        // [Haskell] pure
-        internal Applicative<Func<T, TResult>> Pure<TResult>(Func<T, TResult> value)
+        // [Haskell] (<*>) :: f (a -> b) -> f a -> f b
+        // Sequence computations and combine their results.
+        public Applicative<TResult> Gather<TResult>(Applicative<Func<T, TResult>> applicative)
         {
             throw new NotImplementedException();
         }
 
-        // [Haskell] <*>
-        public Applicative<TResult> Gather<TResult>(Applicative<Func<T, TResult>> applicative)
+        // If an applicative functor is also a monad, it should satisfy:
+        // pure = return
+        // (<*>) = ap
+        public static class Rules
         {
-            throw new NotImplementedException();
+            // pure id <*> v = v
+            public static bool Identity<X>(Applicative<X> me)
+            {
+                Func<X, X> id = _ => _;
+
+                return me.Gather(Applicative.Of(id)) == me;
+            }
+
+            // pure (.) <*> u <*> v <*> w = u <*> (v <*> w)
+            public static bool Composition()
+            {
+                return true;
+            }
+
+            // pure f <*> pure x = pure (f x)
+            public static bool Homomorphism<X, Y>(Func<X, Y> f, X value)
+            {
+                return Applicative.Of(value).Gather(Applicative.Of(f))
+                    == Applicative.Of(f(value));
+            }
+
+            // u <*> pure y = pure ($ y) <*> u
+            public static bool Interchange()
+            {
+                return true;
+            }
         }
     }
 
@@ -34,12 +81,12 @@ namespace Edufun.Categorical
     }
 
     // Extension methods
-    public static partial class Applicative
+    public static partial class ApplicativeApi
     {
         // [Haskell] fmap
         // fmap f x = pure f <*> x
         public static Applicative<TResult> Select<T, TResult>(this Applicative<T> @this, Func<T, TResult> selector)
-           => @this.Gather(@this.Pure(selector));
+            => @this.Gather(Applicative.Of(selector));
 
         // [Haskell] *>
         // u *> v = pure (const id) <*> u <*> v

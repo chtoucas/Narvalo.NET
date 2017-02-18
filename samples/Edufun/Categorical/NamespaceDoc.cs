@@ -8,10 +8,10 @@ namespace Edufun.Categorical
      * Monads Skeleton
      * ===============
      *
-     * A word of caution
-     * -----------------
-     * The classes found here exist for the sole purpose of demonstration.
-     * It is NOT meant to be a generic monad implementation, anyway this is not possible in C#.
+     * **A word of caution**
+     * The classes found here exist for the sole purpose of documentation.
+     *
+     * API and documentation are adapted from the Haskell sources.
      *
      * Compiler switches
      * -----------------

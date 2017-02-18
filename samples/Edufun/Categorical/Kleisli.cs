@@ -13,7 +13,7 @@ namespace Edufun.Categorical
 
     public delegate Monad<TResult> Kunc<in T1, in T2, TResult>(T1 arg1, T2 arg2);
 
-    public static class Kunc
+    public static class Kleisli
     {
         public static readonly Kunc<Unit, Unit> Noop = _ => Monad.Unit;
 

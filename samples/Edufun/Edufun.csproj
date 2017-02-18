@@ -60,7 +60,7 @@
     </Compile>
     <Compile Include="Categorical\Templates\MonadZero`1.cs" />
     <Compile Include="Categorical\Templates\Monad`1.cs" />
-    <Compile Include="Categorical\Kunc.cs" />
+    <Compile Include="Categorical\Kleisli.cs" />
     <Compile Include="Categorical\Monad.cs" />
     <Compile Include="Categorical\NamespaceDoc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
