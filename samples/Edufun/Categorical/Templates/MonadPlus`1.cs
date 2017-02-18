@@ -1,38 +1,38 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Edufun.Templates
+namespace Edufun.Categorical.Templates
 {
     using System;
 
     using Narvalo.Fx;
 
-    public sealed class MonadOr<T>
+    public sealed class MonadPlus<T>
     {
         // [Haskell] mzero
-        public static MonadOr<T> None { get { throw new NotImplementedException(); } }
+        public static MonadPlus<T> Zero { get { throw new NotImplementedException(); } }
 
         // [Haskell] mplus
-        public MonadOr<T> OrElse(MonadOr<T> other)
+        public MonadPlus<T> Plus(MonadPlus<T> other)
         {
             throw new NotImplementedException();
         }
 
         // [Haskell] >>=
-        public MonadOr<TResult> Bind<TResult>(Func<T, MonadOr<TResult>> funM)
+        public MonadPlus<TResult> Bind<TResult>(Func<T, MonadPlus<TResult>> funM)
         {
             throw new NotImplementedException();
         }
 
         // [Haskell] return
-        internal static MonadOr<T> η(T value)
+        internal static MonadPlus<T> η(T value)
         {
             throw new NotImplementedException();
         }
 
         // [Haskell] join
-        internal static MonadOr<T> μ(MonadOr<MonadOr<T>> square)
+        internal static MonadPlus<T> μ(MonadPlus<MonadPlus<T>> square)
         {
-            return square.Bind(Stubs<MonadOr<T>>.Identity);
+            return square.Bind(Stubs<MonadPlus<T>>.Identity);
         }
     }
 }

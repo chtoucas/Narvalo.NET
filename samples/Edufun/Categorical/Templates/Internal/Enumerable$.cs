@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Edufun.Templates.Internal
+namespace Edufun.Categorical.Templates.Internal
 {
     using System.Diagnostics.CodeAnalysis;
 

@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Edufun.Monads
+namespace Edufun.Categorical
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
@@ -25,15 +25,11 @@ namespace Edufun.Monads
 #endif
         }
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "[Educational] Standard naming convention from mathematics.")]
         internal static T ε(Comonad<T> monad)
         {
             throw new NotImplementedException();
         }
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "[Educational] Standard naming convention from mathematics.")]
         internal static Comonad<Comonad<T>> δ(Comonad<T> monad)
         {
 #if COMONAD_VIA_MAP_COMULTIPLY

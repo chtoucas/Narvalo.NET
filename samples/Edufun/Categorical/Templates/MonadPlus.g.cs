@@ -13,14 +13,14 @@
 using global::Narvalo;
 using global::Narvalo.Fx;
 
-namespace Edufun.Templates
+namespace Edufun.Categorical.Templates
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
-    using Edufun.Templates.Internal;
-    using Edufun.Templates.Linq;
+    using Edufun.Categorical.Templates.Internal;
+    using Edufun.Categorical.Templates.Linq;
 
     // Provides a set of static methods for MonadPlus<T>.
     // NB: Sometimes we prefer extension methods over static methods to be able to override them locally.
@@ -825,7 +825,7 @@ namespace Edufun.Templates
     } // End of Sequence - T4: EmitMonadEnumerableExtensions().
 }
 
-namespace Edufun.Templates.Internal
+namespace Edufun.Categorical.Templates.Internal
 {
     using System;
     using System.Collections.Generic;
@@ -885,13 +885,13 @@ namespace Edufun.Templates.Internal
     } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
 }
 
-namespace Edufun.Templates.Linq
+namespace Edufun.Categorical.Templates.Linq
 {
     using System;
     using System.Collections.Generic;
 
-    using Edufun.Templates;
-    using Edufun.Templates.Internal;
+    using Edufun.Categorical.Templates;
+    using Edufun.Categorical.Templates.Internal;
 
     // Provides extension methods for IEnumerable<T>.
     // We do not use the standard LINQ names to avoid a confusing API.
@@ -1057,13 +1057,13 @@ namespace Edufun.Templates.Linq
     } // End of Iterable - T4: EmitEnumerableExtensions().
 }
 
-namespace Edufun.Templates.Internal
+namespace Edufun.Categorical.Templates.Internal
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
-    using Edufun.Templates.Linq;
+    using Edufun.Categorical.Templates.Linq;
     using Narvalo.Fx.Linq;
 
     // Provides default implementations for the extension methods for IEnumerable<T>.

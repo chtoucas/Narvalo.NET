@@ -13,7 +13,7 @@
 using global::Narvalo;
 using global::Narvalo.Fx;
 
-namespace Edufun.Templates
+namespace Edufun.Categorical.Templates
 {
     // Implements core Comonad methods.
     public static partial class Comonad

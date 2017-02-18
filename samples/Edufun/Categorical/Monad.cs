@@ -1,15 +1,24 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Edufun.Monads
+namespace Edufun.Categorical
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
+
+    using Narvalo.Fx;
+
+    public static partial class Monad
+    {
+        private static readonly Monad<Unit> s_Unit = Return(Narvalo.Fx.Unit.Single);
+
+        public static Monad<Unit> Unit => s_Unit;
+
+        // [Haskell] return
+        public static Monad<T> Return<T>(T value) => Monad<T>.η(value);
+    }
 
     public sealed class Monad<T>
     {
         // [Haskell] mzero
-        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations",
-            Justification = "[Educational] This code is not meant to be used.")]
         public static Monad<T> Zero { get { throw new NotImplementedException(); } }
 
         // [Haskell] mplus
@@ -43,16 +52,12 @@ namespace Edufun.Monads
             => Bind(_ => other);
 
         // [Haskell] return
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "[Educational] Standard naming convention from mathematics.")]
         internal static Monad<T> η(T value)
         {
             throw new NotImplementedException();
         }
 
         // [Haskell] join
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "[Educational] Standard naming convention from mathematics.")]
         internal static Monad<T> μ(Monad<Monad<T>> square)
         {
 #if MONAD_VIA_MAP_MULTIPLY
