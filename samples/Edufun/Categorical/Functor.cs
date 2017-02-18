@@ -10,16 +10,40 @@ namespace Edufun.Categorical
     // The Functor class is used for types that can be mapped over.
     //
     // Translation from Haskell to .NET.
-    // Requirements:
-    // - fmap   Select
-    // API:
-    // - <$     Replace
-    // - $>     Ignore_
-    // - <$>    Invoke_
-    // - void   Skip
-    public sealed class Functor<T>
+    // - fmap   Functor<T>.Select
+    // - <$     Functor<T>.Replace
+    // - $>     Functor<T>.Ignore_
+    // - <$>    Functor.Invoke_
+    // - void   Functor<T>.Skip
+
+    // Minimal requirements: Select().
+    public partial interface IFunctor<T>
     {
         // [Haskell] fmap :: (a -> b) -> f a -> f b
+        Functor<TResult> Select<TResult>(Func<T, TResult> selector);
+
+        // [Haskell] (<$) :: Functor f => a -> f b -> f a
+        // Replace all locations in the input with the same value.
+        Functor<TResult> Replace<TResult>(TResult value);
+
+        // [Haskell] ($>) :: Functor f => f a -> b -> f b
+        // Flipped version of <$.
+        Functor<TResult> Ignore_<TResult>(TResult value);
+
+        // [Haskell] void :: Functor f => f a -> f ()
+        // void value discards or ignores the result of evaluation.
+        Functor<Unit> Skip();
+    }
+
+    public interface IFunctor
+    {
+        // [Haskell] (<$>) :: Functor f => (a -> b) -> f a -> f b
+        // An infix synonym for fmap.
+        Functor<TResult> Invoke_<T, TResult>(Func<T, TResult> @this, Functor<T> value);
+    }
+
+    public partial class Functor<T>
+    {
         public Functor<TResult> Select<TResult>(Func<T, TResult> selector)
         {
             throw new NotImplementedException();
@@ -46,32 +70,22 @@ namespace Edufun.Categorical
         }
     }
 
-    public static class FunctorApi
+    public partial class Functor<T>
     {
-        // [Haskell] (<$) :: Functor f => a -> f b -> f a
         // (<$) =  fmap . const
-        // Replace all locations in the input with the same value.
-        public static Functor<TResult> Replace<T, TResult>(this Functor<T> @this, TResult value)
-            => @this.Select(_ => value);
+        public Functor<TResult> Replace<TResult>(TResult value) => Select(_ => value);
 
-        // [Haskell] ($>) :: Functor f => f a -> b -> f b
-        // Flipped version of <$.
-        // infixl 4 $>
         // ($>) = flip (<$)
-        internal static Functor<TResult> Ignore_<T, TResult>(this Functor<T> @this, TResult value)
-            => @this.Replace(value);
+        public Functor<TResult> Ignore_<TResult>(TResult value) => Replace(value);
 
-        // [Haskell] (<$>) :: Functor f => (a -> b) -> f a -> f b
-        // An infix synonym for fmap.
-        // infixl 4 <$>
-        // (<$>) = fmap
-        internal static Functor<TResult> Invoke_<T, TResult>(Func<T, TResult> @this, Functor<T> value)
-            => value.Select(@this);
-
-        // [Haskell] void :: Functor f => f a -> f ()
         // void x = () <$ x
-        // void value discards or ignores the result of evaluation.
-        public static Functor<Unit> Skip<T>(this Functor<T> @this)
-            => @this.Replace(Unit.Single);
+        public Functor<Unit> Skip() => Replace(Unit.Single);
+    }
+
+    public static partial class Functor
+    {
+        // (<$>) = fmap
+        public static Functor<TResult> Invoke_<T, TResult>(Func<T, TResult> @this, Functor<T> value)
+                => value.Select(@this);
     }
 }

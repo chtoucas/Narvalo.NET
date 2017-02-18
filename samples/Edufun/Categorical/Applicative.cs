@@ -25,17 +25,25 @@ namespace Edufun.Categorical
     // - liftA2     Zip
     // - liftA3     Zip
     // - optional
-    public sealed class Applicative<T>
+
+    public interface IApplicative<T>
     {
         // [Haskell] pure :: a -> f a
         // Embed pure expressions ie lift a value.
-        internal static Applicative<T> Pure(T value)
+        Applicative<T> Pure(T value);
+
+        // [Haskell] (<*>) :: f (a -> b) -> f a -> f b
+        // Sequence computations and combine their results.
+        Applicative<TResult> Gather<TResult>(Applicative<Func<T, TResult>> applicative);
+    }
+
+    public sealed class Applicative<T>
+    {
+        public static Applicative<T> Pure(T value)
         {
             throw new NotImplementedException();
         }
 
-        // [Haskell] (<*>) :: f (a -> b) -> f a -> f b
-        // Sequence computations and combine their results.
         public Applicative<TResult> Gather<TResult>(Applicative<Func<T, TResult>> applicative)
         {
             throw new NotImplementedException();
