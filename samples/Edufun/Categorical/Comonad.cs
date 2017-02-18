@@ -1,42 +1,52 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
+//#define COMONAD_VIA_MAP_COMULTIPLY
+
 namespace Edufun.Categorical
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
 
     public sealed class Comonad<T>
     {
         public Comonad<TResult> Extend<TResult>(Cokunc<T, TResult> cokun)
         {
 #if COMONAD_VIA_MAP_COMULTIPLY
-            return δ(this).Map(_ => cokun.Invoke(_));
+            return Duplicate(this).Map(_ => cokun.Invoke(_));
 #else
             throw new NotImplementedException();
 #endif
         }
 
-        public Comonad<TResult> Map<TResult>(Func<T, TResult> fun)
+        public Comonad<TResult> Select<TResult>(Func<T, TResult> fun)
         {
 #if COMONAD_VIA_MAP_COMULTIPLY
             throw new NotImplementedException();
 #else
-            return Extend(_ => fun(ε(_)));
+            return Extend(_ => fun(Extract(_)));
 #endif
         }
 
-        internal static T ε(Comonad<T> monad)
+        // ε
+        internal static T Extract(Comonad<T> value)
         {
             throw new NotImplementedException();
         }
 
-        internal static Comonad<Comonad<T>> δ(Comonad<T> monad)
+        // δ
+        internal static Comonad<Comonad<T>> Duplicate(Comonad<T> value)
         {
 #if COMONAD_VIA_MAP_COMULTIPLY
             throw new NotImplementedException();
 #else
-            return monad.Extend(_ => _);
+            return value.Extend(_ => _);
 #endif
         }
+    }
+
+    public static class Comonad
+    {
+        public static T Extract<T>(Comonad<T> value) => Comonad<T>.Extract(value);
+
+        public static Comonad<Comonad<T>> Duplicate<T>(Comonad<T> value) => Comonad<T>.Duplicate(value);
     }
 }

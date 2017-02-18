@@ -11,6 +11,8 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Categorical\Cokun.cs" />
+    <Compile Include="Categorical\Functor.cs" />
     <Compile Include="Linq\IGroupingQuerySyntax`1.cs" />
     <Compile Include="Linq\IOrderedQuerySyntax`1.cs" />
     <Compile Include="Linq\IQuerySyntax.cs" />
@@ -58,7 +60,7 @@
     </Compile>
     <Compile Include="Categorical\Templates\MonadZero`1.cs" />
     <Compile Include="Categorical\Templates\Monad`1.cs" />
-    <Compile Include="Categorical\Delegates.cs" />
+    <Compile Include="Categorical\Kunc.cs" />
     <Compile Include="Categorical\Monad.cs" />
     <Compile Include="Categorical\NamespaceDoc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -105,7 +107,11 @@
       <Name>Narvalo.Fx</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Edufun.props">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

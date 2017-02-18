@@ -21,23 +21,23 @@ namespace Edufun.Categorical.Templates
         /// <remarks>
         /// Named <c>extract</c> in Haskell parlance.
         /// </remarks>
-        public static T Extract<T>(Comonad<T> monad)
+        public static T Extract<T>(Comonad<T> value)
             /* T4: C# indent */
         {
-            Expect.NotNull(monad);
+            Expect.NotNull(value);
 
-            return Comonad<T>.ε(monad);
+            return Comonad<T>.ε(value);
         }
 
         /// <remarks>
         /// Named <c>duplicate</c> in Haskell parlance.
         /// </remarks>
-        public static Comonad<Comonad<T>> Duplicate<T>(Comonad<T> monad)
+        public static Comonad<Comonad<T>> Duplicate<T>(Comonad<T> value)
             /* T4: C# indent */
         {
             Warrant.NotNull<Comonad<Comonad<T>>>();
 
-            return Comonad<T>.δ(monad);
+            return Comonad<T>.δ(value);
         }
     } // End of Comonad - T4: EmitComonadCore().
 }

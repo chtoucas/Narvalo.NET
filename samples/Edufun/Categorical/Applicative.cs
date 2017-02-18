@@ -6,40 +6,56 @@ namespace Edufun.Categorical
 
     using Narvalo.Fx;
 
-    // Minimal skeleton definition of an applicative funtor.
-    public class Applicative<T>
+    // [Haskell] Control.Applicative
+    public sealed class Applicative<T>
     {
-        // Map method.
-        public Applicative<TResult> Map<TResult>(Func<T, TResult> selector)
+        // [Haskell] pure
+        internal static Applicative<T> Pure(T value)
         {
             throw new NotImplementedException();
         }
 
-        // Pure method.
-        public static Applicative<T> Pure(T value)
+        // [Haskell] pure
+        internal Applicative<Func<T, TResult>> Pure<TResult>(Func<T, TResult> value)
         {
             throw new NotImplementedException();
         }
 
-        // Gather method.
-        public Applicative<TResult> Gather<TResult>(Applicative<Func<T, TResult>> funs)
+        // [Haskell] <*>
+        public Applicative<TResult> Gather<TResult>(Applicative<Func<T, TResult>> applicative)
         {
             throw new NotImplementedException();
         }
     }
 
-    // Extension methods.
-    public static class Applicative
+    public static partial class Applicative
     {
-        // Replace method.
+        public static Applicative<T> Of<T>(T value) => Applicative<T>.Pure(value);
+    }
+
+    // Extension methods
+    public static partial class Applicative
+    {
+        // [Haskell] fmap
+        // fmap f x = pure f <*> x
+        public static Applicative<TResult> Select<T, TResult>(this Applicative<T> @this, Func<T, TResult> selector)
+           => @this.Gather(@this.Pure(selector));
+
+        // [Haskell] *>
+        // u *> v = pure (const id) <*> u <*> v
+        //public static Applicative<TResult> ReplaceBy<T, TResult>(
+        //    this Applicative<T> @this,
+        //    Applicative<TResult> other)
+        //{
+
+        //}
+
+        // <$ :: a -> f b -> f a
+        // fmap . const
         public static Applicative<T> Replace<T>(this Applicative<T> @this, T value)
-            => @this.Map(_ => value);
+            => @this.Select(_ => value);
 
-        // Void method.
-        public static Applicative<Unit> Forget<T>(this Applicative<T> @this)
-            => @this.Map(_ => Unit.Single);
 
-        // Zip method.
         public static Applicative<Unit> Zip<TFirst, TSecond, TResult>(
             this Applicative<TFirst> @this,
             Applicative<TSecond> second,

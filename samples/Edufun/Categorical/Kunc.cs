@@ -13,11 +13,7 @@ namespace Edufun.Categorical
 
     public delegate Monad<TResult> Kunc<in T1, in T2, TResult>(T1 arg1, T2 arg2);
 
-    public delegate T Cokunc<T>(Comonad<T> arg);
-
-    public delegate TResult Cokunc<T, out TResult>(Comonad<T> arg);
-
-    public static partial class Kunc
+    public static class Kunc
     {
         public static readonly Kunc<Unit, Unit> Noop = _ => Monad.Unit;
 
