@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Categorical\Cokun.cs" />
+    <Compile Include="Categorical\FakeException.cs" />
     <Compile Include="Categorical\Functor.cs" />
     <Compile Include="Linq\IGroupingQuerySyntax`1.cs" />
     <Compile Include="Linq\IOrderedQuerySyntax`1.cs" />

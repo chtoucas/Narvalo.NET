@@ -11,17 +11,17 @@ namespace Edufun.Categorical.Templates
     public struct MonadValue<T> : IEquatable<MonadValue<T>> where T : struct
     {
         [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
-        public static MonadValue<T> None { get { throw new NotImplementedException(); } }
+        public static MonadValue<T> None { get { throw new FakeClassException(); } }
 
         public MonadValue<T> OrElse(MonadValue<T> other)
         {
-            throw new NotImplementedException();
+            throw new FakeClassException();
         }
 
         public MonadValue<TResult> Bind<TResult>(Func<T, MonadValue<TResult>> funM)
             where TResult : struct
         {
-            throw new NotImplementedException();
+            throw new FakeClassException();
         }
 
         public static bool operator ==(MonadValue<T> left, MonadValue<T> right) => left.Equals(right);
@@ -31,7 +31,7 @@ namespace Edufun.Categorical.Templates
         [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
         public bool Equals(MonadValue<T> other)
         {
-            throw new NotImplementedException();
+            throw new FakeClassException();
         }
 
         public override bool Equals(object obj)
@@ -44,12 +44,12 @@ namespace Edufun.Categorical.Templates
         [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
         public override int GetHashCode()
         {
-            throw new NotImplementedException();
+            throw new FakeClassException();
         }
 
         internal static MonadValue<T> η(T value)
         {
-            throw new NotImplementedException();
+            throw new FakeClassException();
         }
 
         internal static MonadValue<T> μ(MonadValue<MonadValue<T>> square)

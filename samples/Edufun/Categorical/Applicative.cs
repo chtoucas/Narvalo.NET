@@ -3,8 +3,11 @@
 namespace Edufun.Categorical
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     using Narvalo.Fx;
+    using Narvalo.Fx.Linq;
 
     // [Haskell] Control.Applicative
     // In-between a Functor and a Monad.
@@ -12,55 +15,61 @@ namespace Edufun.Categorical
     // Translation map from Haskell to .NET.
     // - pure       Applicative<T>.Pure     (required)
     //              Applicative.Of
-    // - <*>        Applicative<T>.Gather   (required)
-    // - *>         Applicative<T>.ReplaceBy
-    // - <*         Applicative<T>.Ignore_
-    // - <$>        Applicative.Invoke
-    // - <$         Applicative<T>.Replace
+    // - <*>        obj.Gather              (required)
+    // - *>         obj.ReplaceBy
+    // - <*         obj.Ignore_
+    // Alternative:
+    // - empty      Applicative<T>.Empty    (required)
+    //              Applicative.Empty       (required)
+    // - <|>        obj.Append              (required)
+    // - some
+    // - many
+    // Utility functions:
+    // - <$>        Applicative.InvokeWith  <- Functor
+    // - <$         obj.Replace             <- Functor
     // - <**>       Applicative.Apply
-    // - liftA      Applicative<T>.Select
-    // - liftA2     Applicative<T>.Zip
-    // - liftA3     Applicative<T>.Zip
-    // - optional   Applicative<T>.Maybe
+    // - liftA      obj.Select              <- Functor::fmap
+    // - liftA2     obj.Zip
+    // - liftA3     obj.Zip
+    // - optional   obj.Optional
 
-    // Minimal requirements for an applicative functor.
-    [CLSCompliant(false)]
     public partial interface IApplicative<T>
     {
         // [Haskell] pure :: a -> f a
         // Embed pure expressions, ie lift a value.
-        Applicative<TSource> __Pure<TSource>(TSource value);
+        Applicative<TSource> Pure<TSource>(TSource value);
 
         // [Haskell] (<*>) :: f (a -> b) -> f a -> f b
         // Sequence computations and combine their results.
         Applicative<TResult> Gather<TResult>(Applicative<Func<T, TResult>> applicative);
-    }
 
-    public partial interface IApplicative<T>
-    {
         // [Haskell] (*>) :: f a -> f b -> f b
         // Sequence actions, discarding the value of the first argument.
         Applicative<TResult> ReplaceBy<TResult>(Applicative<TResult> other);
+
+        // [Haskell] empty :: f a
+        // The identity of <|>.
+        Applicative<TSource> Empty<TSource>();
+
+        // [Haskell] (<|>) :: f a -> f a -> f a
+        // An associative binary operation.
+        Applicative<T> Append(Applicative<T> other);
+
+        // [Haskell] some :: f a -> f [a]
+        // One or more.
+        Applicative<IEnumerable<T>> Some();
+
+        // [Haskell] many :: f a -> f [a]
+        // Zero or more.
+        Applicative<IEnumerable<T>> Many();
 
         // [Haskell] (<*) :: f a -> f b -> f a
         // Sequence actions, discarding the value of the second argument.
         Applicative<T> Ignore_<TResult>(Applicative<TResult> other);
 
-        #region Utility functions
-
-        // [Haskell] (<$>) :: Functor f => (a -> b) -> f a -> f b
-        // An infix synonym for fmap.
-        Applicative<TResult> __Invoke<TSource, TResult>(Func<TSource, TResult> thunk, Applicative<TSource> value);
-
         // [Haskell] (<$) :: Functor f => a -> f b -> f a
         // Replace all locations in the input with the same value.
         Applicative<TResult> Replace<TResult>(TResult other);
-
-        // [Haskell] (<**>) :: Applicative f => f a -> f (a -> b) -> f b
-        // A variant of <*> with the arguments reversed.
-        Applicative<TResult> __Apply<TSource, TResult>(
-            Applicative<Func<TSource, TResult>> @this,
-            Applicative<TSource> value);
 
         // [Haskell] liftA :: Applicative f => (a -> b) -> f a -> f b
         // Lift a function to actions. A synonym of fmap for a functor.
@@ -80,65 +89,31 @@ namespace Edufun.Categorical
             Func<T, T2, T3, TResult> resultSelector);
 
         // [Haskell] optional :: Alternative f => f a -> f (Maybe a)
-        Applicative<Maybe<T>> Maybe();
-
-        #endregion
+        Applicative<Maybe<T>> Optional();
     }
 
-    [CLSCompliant(false)]
+    public interface IApplicative
+    {
+        // [Haskell] (<$>) :: Functor f => (a -> b) -> f a -> f b
+        // An infix synonym for fmap.
+        Applicative<TResult> InvokeWith<TSource, TResult>(Func<TSource, TResult> thunk, Applicative<TSource> value);
+
+        // [Haskell] (<**>) :: Applicative f => f a -> f (a -> b) -> f b
+        // A variant of <*> with the arguments reversed.
+        Applicative<TResult> Apply<TSource, TResult>(
+            Applicative<Func<TSource, TResult>> @this,
+            Applicative<TSource> value);
+    }
+
     public partial class Applicative<T> : IApplicative<T>
     {
-        public static Applicative<T> Pure(T value) { throw new NotImplementedException(); }
-
-        public Applicative<TSource> __Pure<TSource>(TSource value) => Applicative<TSource>.Pure(value);
+        public Applicative<TSource> Pure<TSource>(TSource value) => Applicative.Of(value);
 
         public Applicative<TResult> Gather<TResult>(Applicative<Func<T, TResult>> applicative)
         {
-            throw new NotImplementedException();
+            throw new FakeClassException();
         }
 
-        // If an applicative functor is also a monad, it should satisfy:
-        // - pure = return
-        // - (<*>) = ap
-        public static class Rules
-        {
-            // pure id <*> v = v
-            public static bool Identity<X>(Applicative<X> me)
-            {
-                Func<X, X> id = _ => _;
-
-                return me.Gather(Applicative.Of(id)) == me;
-            }
-
-            // pure (.) <*> u <*> v <*> w = u <*> (v <*> w)
-            public static bool Composition()
-            {
-                return true;
-            }
-
-            // pure f <*> pure x = pure (f x)
-            public static bool Homomorphism<X, Y>(Func<X, Y> f, X value)
-            {
-                return Applicative.Of(value).Gather(Applicative.Of(f))
-                    == Applicative.Of(f(value));
-            }
-
-            // u <*> pure y = pure ($ y) <*> u
-            public static bool Interchange()
-            {
-                throw new NotImplementedException();
-            }
-        }
-    }
-
-    [CLSCompliant(false)]
-    public static partial class Applicative
-    {
-        public static Applicative<T> Of<T>(T value) => Applicative<T>.Pure(value);
-    }
-
-    public partial class Applicative<T>
-    {
         // u *> v = pure (const id) <*> u <*> v
         // GHC.Base: a1 *> a2 = (id <$ a1) <*> a2
         public Applicative<TResult> ReplaceBy<TResult>(Applicative<TResult> other)
@@ -151,6 +126,39 @@ namespace Edufun.Categorical
 
             return other.Gather(second);
         }
+
+        // GHC.Base: empty = Nothing
+        public Applicative<TSource> Empty<TSource>() { throw new FakeClassException(); }
+
+        // GHC.Base:
+        // Nothing <|> r = r
+        // l <|> _ = l
+        public Applicative<T> Append(Applicative<T> other)
+        {
+            throw new FakeClassException();
+        }
+
+        // some v = (:) <$> v <*> many v
+        // GHC.Base:
+        // some v = some_v
+        //   where
+        //     many_v = some_v <|> pure []
+        //     some_v = (fmap(:) v) <*> many_v
+        public Applicative<IEnumerable<T>> Some()
+        {
+            Func<T, Func<IEnumerable<T>, IEnumerable<T>>> append = _ => seq => Qperators.Append(seq, _);
+
+            return Many().Gather(Select(append));
+        }
+
+        // many v = some v <|> pure []
+        // GHC.Base:
+        // many v = many_v
+        //   where
+        //     many_v = some_v <|> pure []
+        //     some_v = (fmap(:) v) <*> many_v
+        public Applicative<IEnumerable<T>> Many()
+            => Some().Append(Applicative.Of(Enumerable.Empty<T>()));
 
         // u <* v = pure const <*> u <*> v
         // GHC.Base: (<*) = liftA2 const
@@ -166,18 +174,8 @@ namespace Edufun.Categorical
             throw new NotImplementedException();
         }
 
-        public Applicative<TResult> __Invoke<TSource, TResult>(
-            Func<TSource, TResult> thunk,
-            Applicative<TSource> value)
-            => Applicative.Invoke(thunk, value);
-
         // GHC.Base: (<$) = fmap . const
         public Applicative<TResult> Replace<TResult>(TResult other) => Select(_ => other);
-
-        public Applicative<TResult> __Apply<TSource, TResult>(
-            Applicative<Func<TSource, TResult>> @this,
-            Applicative<TSource> value)
-            => Applicative.Apply(@this, value);
 
         // GHC.Base: liftA f a = pure f <*> a
         // fmap f x = pure f <*> x
@@ -209,24 +207,60 @@ namespace Edufun.Categorical
             return third.Gather(app);
         }
 
-        public Applicative<Maybe<T>> Maybe()
-        {
-            throw new NotImplementedException();
-        }
+        // optional v = Just <$> v <|> pure Nothing
+        public Applicative<Maybe<T>> Optional()
+            => Select(Maybe.Of).Append(Applicative.Of(Maybe<T>.None));
     }
 
-    public static partial class Applicative
+    public class Applicative : IApplicative
     {
+        public static Applicative<TSource> Empty<TSource>() { throw new FakeClassException(); }
+
+        public static Applicative<TSource> Of<TSource>(TSource value) { throw new FakeClassException(); }
+
         // Data.Functor: (<$>) = fmap
-        public static Applicative<TResult> Invoke<TSource, TResult>(
+        public Applicative<TResult> InvokeWith<TSource, TResult>(
             Func<TSource, TResult> thunk,
             Applicative<TSource> value)
             => value.Select(thunk);
 
         // GHC.Base: (<**>) = liftA2 (flip ($))
-        public static Applicative<TResult> Apply<TSource, TResult>(
-            this Applicative<Func<TSource, TResult>> @this,
+        public Applicative<TResult> Apply<TSource, TResult>(
+            Applicative<Func<TSource, TResult>> @this,
             Applicative<TSource> value)
             => value.Gather(@this);
+    }
+
+    // If an applicative functor is also a monad, it should satisfy:
+    // - pure = return
+    // - (<*>) = ap
+    public static class ApplicativeRules
+    {
+        // pure id <*> v = v
+        public static bool Identity<X>(Applicative<X> me)
+        {
+            Func<X, X> id = _ => _;
+
+            return me.Gather(Applicative.Of(id)) == me;
+        }
+
+        // pure (.) <*> u <*> v <*> w = u <*> (v <*> w)
+        public static bool Composition()
+        {
+            return true;
+        }
+
+        // pure f <*> pure x = pure (f x)
+        public static bool Homomorphism<X, Y>(Func<X, Y> f, X value)
+        {
+            return Applicative.Of(value).Gather(Applicative.Of(f))
+                == Applicative.Of(f(value));
+        }
+
+        // u <*> pure y = pure ($ y) <*> u
+        public static bool Interchange()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -13,12 +13,12 @@ namespace Edufun.Categorical
     {
         // [Haskell] mzero
         [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
-        public static Monad<T> Zero { get { throw new NotImplementedException(); } }
+        public static Monad<T> Zero { get { throw new FakeClassException(); } }
 
         // [Haskell] mplus
         public Monad<T> Plus(Monad<T> other)
         {
-            throw new NotImplementedException();
+            throw new FakeClassException();
         }
 
         // [Haskell] >>=
@@ -27,7 +27,7 @@ namespace Edufun.Categorical
 #if MONAD_VIA_MAP_MULTIPLY
             return Monad<TResult>.Join(Select(_ => kun.Invoke(_)));
 #else
-            throw new NotImplementedException();
+            throw new FakeClassException();
 #endif
         }
 
@@ -35,7 +35,7 @@ namespace Edufun.Categorical
         public Monad<TResult> Select<TResult>(Func<T, TResult> selector)
         {
 #if MONAD_VIA_MAP_MULTIPLY
-            throw new NotImplementedException();
+            throw new FakeClassException();
 #else
             return Bind(_ => Monad<TResult>.Return(selector.Invoke(_)));
 #endif
@@ -48,14 +48,14 @@ namespace Edufun.Categorical
         // [Haskell] return (η)
         internal static Monad<T> Return(T value)
         {
-            throw new NotImplementedException();
+            throw new FakeClassException();
         }
 
         // [Haskell] join (μ)
         internal static Monad<T> Join(Monad<Monad<T>> square)
         {
 #if MONAD_VIA_MAP_MULTIPLY
-            throw new NotImplementedException();
+            throw new FakeClassException();
 #else
             Kunc<Monad<T>, T> id = _ => _;
 
