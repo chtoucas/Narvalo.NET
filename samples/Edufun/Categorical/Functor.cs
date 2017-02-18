@@ -9,14 +9,14 @@ namespace Edufun.Categorical
     // [Haskell] Data.Functor
     // The Functor class is used for types that can be mapped over.
     //
-    // Translation from Haskell to .NET.
-    // - fmap   Functor<T>.Select
+    // Translation map from Haskell to .NET.
+    // - fmap   Functor<T>.Select       (required)
     // - <$     Functor<T>.Replace
-    // - $>     Functor<T>.Ignore_
-    // - <$>    Functor.Invoke_
+    // - $>     Functor.Replace_
+    // - <$>    Functor.Invoke
     // - void   Functor<T>.Skip
 
-    // Minimal requirements: Select().
+    [CLSCompliant(false)]
     public partial interface IFunctor<T>
     {
         // [Haskell] fmap :: (a -> b) -> f a -> f b
@@ -24,25 +24,27 @@ namespace Edufun.Categorical
 
         // [Haskell] (<$) :: Functor f => a -> f b -> f a
         // Replace all locations in the input with the same value.
-        Functor<TResult> Replace<TResult>(TResult value);
-
-        // [Haskell] ($>) :: Functor f => f a -> b -> f b
-        // Flipped version of <$.
-        Functor<TResult> Ignore_<TResult>(TResult value);
+        Functor<TResult> Replace<TResult>(TResult other);
 
         // [Haskell] void :: Functor f => f a -> f ()
         // void value discards or ignores the result of evaluation.
         Functor<Unit> Skip();
     }
 
-    public interface IFunctor
+    [CLSCompliant(false)]
+    public partial interface IFunctor
     {
+        // [Haskell] ($>) :: Functor f => f a -> b -> f b
+        // Flipped version of <$.
+        Functor<TResult> Replace_<TSource, TResult>(TResult other, Functor<TSource> value);
+
         // [Haskell] (<$>) :: Functor f => (a -> b) -> f a -> f b
         // An infix synonym for fmap.
-        Functor<TResult> Invoke_<T, TResult>(Func<T, TResult> @this, Functor<T> value);
+        Functor<TResult> Invoke<TSource, TResult>(Func<TSource, TResult> thunk, Functor<TSource> value);
     }
 
-    public partial class Functor<T>
+    [CLSCompliant(false)]
+    public partial class Functor<T> : IFunctor<T>
     {
         public Functor<TResult> Select<TResult>(Func<T, TResult> selector)
         {
@@ -72,20 +74,22 @@ namespace Edufun.Categorical
 
     public partial class Functor<T>
     {
-        // (<$) =  fmap . const
-        public Functor<TResult> Replace<TResult>(TResult value) => Select(_ => value);
-
-        // ($>) = flip (<$)
-        public Functor<TResult> Ignore_<TResult>(TResult value) => Replace(value);
+        // GHC.Base: (<$) = fmap . const
+        public Functor<TResult> Replace<TResult>(TResult other) => Select(_ => other);
 
         // void x = () <$ x
         public Functor<Unit> Skip() => Replace(Unit.Single);
     }
 
-    public static partial class Functor
+    [CLSCompliant(false)]
+    public partial class Functor : IFunctor
     {
+        // ($>) = flip (<$)
+        public Functor<TResult> Replace_<TSource, TResult>(TResult other, Functor<TSource> value)
+            => value.Select(_ => other);
+
         // (<$>) = fmap
-        public static Functor<TResult> Invoke_<T, TResult>(Func<T, TResult> @this, Functor<T> value)
-                => value.Select(@this);
+        public Functor<TResult> Invoke<TSource, TResult>(Func<TSource, TResult> thunk, Functor<TSource> value)
+            => value.Select(thunk);
     }
 }
