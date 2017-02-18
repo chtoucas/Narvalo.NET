@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D552D1
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Libraries (Main)", "1. Libraries (Main)", "{E532D0F7-CFBB-4D52-BEA3-D67DA931AC86}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Libraries", "1. Libraries", "{E532D0F7-CFBB-4D52-BEA3-D67DA931AC86}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Tools", "3. Tools", "{9C0D3D2C-E3FE-4E83-9C89-144A10CE3402}"
 EndProject
@@ -65,7 +65,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Web.Facts", "tests\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. TO BE REMOVED", "5. TO BE REMOVED", "{AF0713D7-9FA9-460A-BD1C-ED4CD442E09C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monads", "samples\Monads\Monads.csproj", "{57051DF4-A9BF-47E2-ADF3-9E938AC1F2E3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Edufun", "samples\Edufun\Edufun.csproj", "{57051DF4-A9BF-47E2-ADF3-9E938AC1F2E3}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -211,8 +211,8 @@ Global
 		{49823004-DABA-4FE2-B4F0-D40542AF7754}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49823004-DABA-4FE2-B4F0-D40542AF7754}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49823004-DABA-4FE2-B4F0-D40542AF7754}.Release|Any CPU.Build.0 = Release|Any CPU
-		{57051DF4-A9BF-47E2-ADF3-9E938AC1F2E3}.CodeContracts|Any CPU.ActiveCfg = Release|Any CPU
-		{57051DF4-A9BF-47E2-ADF3-9E938AC1F2E3}.CodeContracts|Any CPU.Build.0 = Release|Any CPU
+		{57051DF4-A9BF-47E2-ADF3-9E938AC1F2E3}.CodeContracts|Any CPU.ActiveCfg = CodeContracts|Any CPU
+		{57051DF4-A9BF-47E2-ADF3-9E938AC1F2E3}.CodeContracts|Any CPU.Build.0 = CodeContracts|Any CPU
 		{57051DF4-A9BF-47E2-ADF3-9E938AC1F2E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{57051DF4-A9BF-47E2-ADF3-9E938AC1F2E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57051DF4-A9BF-47E2-ADF3-9E938AC1F2E3}.Release|Any CPU.ActiveCfg = Release|Any CPU

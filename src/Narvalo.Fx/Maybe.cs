@@ -28,7 +28,7 @@ namespace Narvalo.Fx
             => @this.ValueOrDefault();
 
         public static T ExtractOrDefault<T>(this Maybe<T?> @this) where T : struct
-            => ExtractOrElse(@this, default(T));
+            => ExtractOrElse(@this, () => default(T));
 
         public static T ExtractOrElse<T>(this Maybe<T?> @this, T defaultValue) where T : struct
             => ExtractOrElse(@this, () => defaultValue);

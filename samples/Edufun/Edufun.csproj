@@ -3,75 +3,97 @@
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <ProjectGuid>{57051DF4-A9BF-47E2-ADF3-9E938AC1F2E3}</ProjectGuid>
-    <RootNamespace>Monads</RootNamespace>
-    <AssemblyName>Monads</AssemblyName>
+    <RootNamespace>Edufun</RootNamespace>
+    <AssemblyName>Edufun</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Comonad.g.cs">
+    <Compile Include="Linq\IGroupingQuerySyntax`1.cs" />
+    <Compile Include="Linq\IOrderedQuerySyntax`1.cs" />
+    <Compile Include="Linq\IQuerySyntax.cs" />
+    <Compile Include="Linq\IQuerySyntax`1.cs" />
+    <Compile Include="Linq\Qperators.cs" />
+    <Compile Include="Sequences\Recursion.cs" />
+    <Compile Include="Sequences\PythagoreanTriples.cs" />
+    <Compile Include="Sequences\Fibonacci.cs" />
+    <Compile Include="Monads\Action%24.cs" />
+    <Compile Include="Monads\Applicative.cs" />
+    <Compile Include="Monads\Cokunc`.cs" />
+    <Compile Include="Monads\Comonad`1.cs" />
+    <Compile Include="Templates\Comonad.g.cs">
       <DependentUpon>Comonad.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Comonad`1.cs" />
-    <Compile Include="Internal\EnumerableExtensions.cs" />
-    <Compile Include="Monad.g.cs">
+    <Compile Include="Templates\Comonad`1.cs" />
+    <Compile Include="Templates\Internal\Enumerable%24.cs" />
+    <Compile Include="Templates\Monad.g.cs">
       <DependentUpon>Monad.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="MonadOr.g.cs">
+    <Compile Include="Templates\MonadOr.g.cs">
       <DependentUpon>MonadOr.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="MonadOr`1.cs" />
-    <Compile Include="MonadPlus.g.cs">
+    <Compile Include="Templates\MonadOr`1.cs" />
+    <Compile Include="Templates\MonadPlus.g.cs">
       <DependentUpon>MonadPlus.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="MonadPlus`1.cs" />
-    <Compile Include="MonadValue.g.cs">
+    <Compile Include="Templates\MonadPlus`1.cs" />
+    <Compile Include="Templates\MonadValue.g.cs">
       <DependentUpon>MonadValue.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="MonadValue`1.cs" />
-    <Compile Include="MonadZero.g.cs">
+    <Compile Include="Templates\MonadValue`1.cs" />
+    <Compile Include="Templates\MonadZero.g.cs">
       <DependentUpon>MonadZero.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="MonadZero`1.cs" />
-    <Compile Include="Monad`1.cs" />
+    <Compile Include="Templates\MonadZero`1.cs" />
+    <Compile Include="Templates\Monad`1.cs" />
+    <Compile Include="Monads\Kunc%24.cs" />
+    <Compile Include="Monads\Kunc`.cs" />
+    <Compile Include="Monads\Monad.cs" />
+    <Compile Include="Monads\Monad`1.cs" />
+    <Compile Include="Monads\NamespaceDoc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Monads\Rules.cs" />
+    <Compile Include="Monads\Stubs.cs" />
+    <Compile Include="Monads\Stubs`1.cs" />
+    <Compile Include="Sequences\Recursive`2.cs" />
+    <Compile Include="Sequences\YCombinator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Comonad.tt">
+    <Content Include="Templates\Comonad.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Comonad.g.cs</LastGenOutput>
     </Content>
-    <Content Include="Monad.tt">
+    <Content Include="Templates\Monad.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Monad.g.cs</LastGenOutput>
     </Content>
-    <Content Include="MonadOr.tt">
+    <Content Include="Templates\MonadOr.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MonadOr.g.cs</LastGenOutput>
     </Content>
-    <Content Include="MonadPlus.tt">
+    <Content Include="Templates\MonadPlus.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MonadPlus.g.cs</LastGenOutput>
     </Content>
-    <Content Include="MonadValue.tt">
+    <Content Include="Templates\MonadValue.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MonadValue.g.cs</LastGenOutput>
     </Content>
-    <Content Include="MonadZero.tt">
+    <Content Include="Templates\MonadZero.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MonadZero.g.cs</LastGenOutput>
     </Content>
@@ -89,6 +111,7 @@
       <Name>Narvalo.Fx</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

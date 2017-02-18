@@ -13,14 +13,14 @@
 using global::Narvalo;
 using global::Narvalo.Fx;
 
-namespace Monads
+namespace Edufun.Templates
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
-    using Monads.Internal;
-    using Monads.Linq;
+    using Edufun.Templates.Internal;
+    using Edufun.Templates.Linq;
 
     // Provides a set of static methods for MonadValue<T>.
     // NB: Sometimes we prefer extension methods over static methods to be able to override them locally.
@@ -321,6 +321,7 @@ namespace Monads
             where TSource : struct, IDisposable
             where TResult : struct
         {
+            /* T4: C# indent */
             Require.NotNull(selector, nameof(selector));
 
             return @this.Bind(_ => { using (_) { return selector.Invoke(_); } });
@@ -332,6 +333,7 @@ namespace Monads
             where TSource : struct, IDisposable
             where TResult : struct
         {
+            /* T4: C# indent */
             Require.NotNull(selector, nameof(selector));
 
             return @this.Select(_ => { using (_) { return selector.Invoke(_); } });
@@ -780,7 +782,7 @@ namespace Monads
     } // End of Sequence - T4: EmitMonadEnumerableExtensions().
 }
 
-namespace Monads.Internal
+namespace Edufun.Templates.Internal
 {
     using System;
     using System.Collections.Generic;
@@ -807,13 +809,13 @@ namespace Monads.Internal
     } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
 }
 
-namespace Monads.Linq
+namespace Edufun.Templates.Linq
 {
     using System;
     using System.Collections.Generic;
 
-    using Monads;
-    using Monads.Internal;
+    using Edufun.Templates;
+    using Edufun.Templates.Internal;
 
     // Provides extension methods for IEnumerable<T>.
     // We do not use the standard LINQ names to avoid a confusing API.
@@ -922,13 +924,13 @@ namespace Monads.Linq
     } // End of Iterable - T4: EmitEnumerableExtensions().
 }
 
-namespace Monads.Internal
+namespace Edufun.Templates.Internal
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
-    using Monads.Linq;
+    using Edufun.Templates.Linq;
     using Narvalo.Fx.Linq;
 
     // Provides default implementations for the extension methods for IEnumerable<T>.

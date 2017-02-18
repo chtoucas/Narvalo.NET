@@ -56,7 +56,6 @@
     <Compile Include="Fx\Func.cs" />
     <Compile Include="Fx\Extensions\Func%24.cs" />
     <Compile Include="Fx\Extensions\Nullable%24.cs" />
-    <Compile Include="Fx\Recursion.cs" />
     <Compile Include="Fx\TO BE REMOVED\Switch%24.cs" />
     <Compile Include="Fx\TO BE REMOVED\Switch.cs" />
     <Compile Include="Fx\TO BE REMOVED\Switch`2.cs" />
