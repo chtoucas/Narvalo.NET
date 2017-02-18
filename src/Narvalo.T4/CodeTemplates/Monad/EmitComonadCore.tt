@@ -11,27 +11,27 @@ public partial class MonadTemplate
         /// <remarks>
         /// Named <c>extract</c> in Haskell parlance.
         /// </remarks>
-        public static T Extract<T>(<#= Name #><T> monad)
+        public static T Extract<T>(<#= Name #><T> value)
             <#+ WriteTypeConstraints("T"); #>
         {
 <#+ if (IsNullable) { #>
-            Expect.NotNull(monad);
+            Expect.NotNull(value);
 <#+ } #>
 
-            return <#= Name #><T>.ε(monad);
+            return <#= Name #><T>.ε(value);
         }
 
         /// <remarks>
         /// Named <c>duplicate</c> in Haskell parlance.
         /// </remarks>
-        public static <#= Name #><<#= Name #><T>> Duplicate<T>(<#= Name #><T> monad)
+        public static <#= Name #><<#= Name #><T>> Duplicate<T>(<#= Name #><T> value)
             <#+ WriteTypeConstraints("T"); #>
         {
 <#+ if (IsNullable) { #>
             Warrant.NotNull<<#= Name #><<#= Name #><T>>>();
 <#+ } #>
 
-            return <#= Name #><T>.δ(monad);
+            return <#= Name #><T>.δ(value);
         }
     } // End of <#= Name #> - T4: EmitComonadCore().
 <#+
