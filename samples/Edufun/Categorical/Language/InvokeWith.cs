@@ -4,7 +4,7 @@ namespace Edufun.Categorical.Language
 {
     using System;
 
-    public partial class Functor
+    public partial class FunctorSyntax
     {
         // (<$>) = fmap
         public Functor<TResult> InvokeWith<T, TResult>(Func<T, TResult> selector, Functor<T> value)

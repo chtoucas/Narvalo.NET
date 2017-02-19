@@ -13,7 +13,7 @@ namespace Edufun.Linq
     {
         #region Anamorphisms aka Lenses |(...)|
 
-        #region Generation Operators
+        #region Generation
 
         public static IEnumerable<int> Range(int start, int count)
             => Sequence.Gather(0, i => i + 1, i => start + i, i => i < count);
@@ -49,7 +49,7 @@ namespace Edufun.Linq
 
         #endregion
 
-        #region Aggregation Operators
+        #region Aggregation
 
         public static int Count<T>(this IEnumerable<T> @this)
             => Aggregate(@this, 0, (acc, item) => checked(acc + 1));

@@ -23,7 +23,7 @@ namespace Edufun.Categorical
         Functor<TResult> Select<TResult>(Func<T, TResult> selector);
     }
 
-    public interface IFunctorGrammar<T>
+    public interface IFunctorSyntax<T>
     {
         // [Haskell] (<$) :: Functor f => a -> f b -> f a
         // Replace all locations in the input with the same value.
@@ -34,7 +34,7 @@ namespace Edufun.Categorical
         Functor<Unit> Skip();
     }
 
-    public interface IFunctorGrammar
+    public interface IFunctorSyntax
     {
         // [Haskell] ($>) :: Functor f => f a -> b -> f b
         // Flipped version of <$.

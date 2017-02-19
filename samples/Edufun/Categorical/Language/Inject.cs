@@ -2,7 +2,7 @@
 
 namespace Edufun.Categorical.Language
 {
-    public partial class Functor
+    public partial class FunctorSyntax
     {
         // ($>) = flip (<$)
         public Functor<TResult> Inject<T, TResult>(TResult other, Functor<T> value)
