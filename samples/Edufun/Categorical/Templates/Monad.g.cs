@@ -52,7 +52,6 @@ namespace Edufun.Categorical.Templates
         /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
         /// <param name="value">A value to be wrapped into a <see cref="Monad{T}"/> object.</param>
         /// <returns>An instance of the <see cref="Monad{T}"/> class for the specified value.</returns>
-        // Named "return" (Monad) or "pure" (Applicative) in Haskell parlance.
         public static Monad<T> Of<T>(T value)
             /* T4: C# indent */
         {
@@ -66,7 +65,6 @@ namespace Edufun.Categorical.Templates
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
         /// </summary>
-        // Named "join" in Haskell parlance.
         public static Monad<T> Flatten<T>(Monad<Monad<T>> square)
             /* T4: C# indent */
         {
@@ -87,7 +85,6 @@ namespace Edufun.Categorical.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="Monad{T}" /> values.
         /// </summary>
-        // Named "liftM" in Haskell parlance.
         public static Func<Monad<T>, Monad<TResult>> Lift<T, TResult>(
             Func<T, TResult> thunk)
             /* T4: C# indent */
@@ -105,7 +102,6 @@ namespace Edufun.Categorical.Templates
         /// Promotes a function to use and return <see cref="Monad{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        // Named "liftM2" in Haskell parlance.
         public static Func<Monad<T1>, Monad<T2>, Monad<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> thunk)
             /* T4: C# indent */
@@ -123,7 +119,6 @@ namespace Edufun.Categorical.Templates
         /// Promotes a function to use and return <see cref="Monad{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        // Named "liftM3" in Haskell parlance.
         public static Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> thunk)
             /* T4: C# indent */
@@ -141,7 +136,6 @@ namespace Edufun.Categorical.Templates
         /// Promotes a function to use and return <see cref="Monad{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        // Named "liftM4" in Haskell parlance.
         public static Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<T4>, Monad<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> thunk)
@@ -160,7 +154,6 @@ namespace Edufun.Categorical.Templates
         /// Promotes a function to use and return <see cref="Monad{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        // Named "liftM5" in Haskell parlance.
         public static Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<T4>, Monad<T5>, Monad<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> thunk)
@@ -183,7 +176,6 @@ namespace Edufun.Categorical.Templates
     {
         #region Applicative
 
-        // Named "<$" (Applicative) in Haskell parlance.
         public static Monad<TResult> Replace<TSource, TResult>(
             this Monad<TSource> @this,
             TResult value)
@@ -195,7 +187,6 @@ namespace Edufun.Categorical.Templates
         }
 
 
-        // Named "<*>" in Haskell parlance. Same as Apply (<**>) with its arguments flipped.
         public static Monad<TResult> Gather<TSource, TResult>(
             this Monad<TSource> @this,
             Monad<Func<TSource, TResult>> applicative)
@@ -206,7 +197,6 @@ namespace Edufun.Categorical.Templates
             return applicative.Apply(@this);
         }
 
-        // Named "<**>" in Haskell parlance. Same as Gather (<*>) with its arguments flipped.
         public static Monad<TResult> Apply<TSource, TResult>(
             this Monad<Func<TSource, TResult>> @this,
             Monad<TSource> value)
@@ -232,7 +222,6 @@ namespace Edufun.Categorical.Templates
 
         #region Basic Monad functions
 
-        // Named "fmap", "liftA" or "<$>" (Applicative) in Haskell parlance.
         public static Monad<TResult> Select<TSource, TResult>(
             this Monad<TSource> @this,
             Func<TSource, TResult> selector)
@@ -244,7 +233,6 @@ namespace Edufun.Categorical.Templates
             return @this.Bind(_ => Monad.Of(selector.Invoke(_)));
         }
 
-        // Named ">>" (Monad) or "*>" (Applicative) in Haskell parlance.
         public static Monad<TResult> ReplaceBy<TSource, TResult>(
             this Monad<TSource> @this,
             Monad<TResult> other)
@@ -255,7 +243,6 @@ namespace Edufun.Categorical.Templates
             return @this.Bind(_ => other);
         }
 
-        // Named "void" in Haskell parlance.
         public static Monad<global::Narvalo.Fx.Unit> Skip<TSource>(this Monad<TSource> @this)
             /* T4: C# indent */
         {
@@ -265,7 +252,6 @@ namespace Edufun.Categorical.Templates
             return Monad.Unit;
         }
 
-        // Named "forever" in Haskell parlance.
         public static Monad<TResult> Forever<TSource, TResult>(
             this Monad<TSource> @this,
             Func<Monad<TResult>> thunk)
@@ -323,7 +309,6 @@ namespace Edufun.Categorical.Templates
         #region Generalisations of list functions
 
 
-        // Named "replicateM" in Haskell parlance.
         public static Monad<IEnumerable<TSource>> Repeat<TSource>(
             this Monad<TSource> @this,
             int count)
@@ -339,7 +324,7 @@ namespace Edufun.Categorical.Templates
 
         #region Conditional execution of monadic expressions
 
-        // Named "when" in Haskell parlance. Haskell uses a different signature.
+        // Haskell uses a different signature.
         public static void When<TSource>(
             this Monad<TSource> @this,
             Func<TSource, bool> predicate,
@@ -358,7 +343,7 @@ namespace Edufun.Categorical.Templates
                 });
         }
 
-        // Named "unless" in Haskell parlance. Haskell uses a different signature.
+        // Haskell uses a different signature.
         public static void Unless<TSource>(
             this Monad<TSource> @this,
             Func<TSource, bool> predicate,
@@ -377,7 +362,6 @@ namespace Edufun.Categorical.Templates
         #region Applicative lifting operators
 
         /// <see cref="Lift{T1, T2, T3}" />
-        // Named "liftA2" (Applicative) in Haskell parlance.
         public static Monad<TResult> Zip<TFirst, TSecond, TResult>(
             this Monad<TFirst> @this,
             Monad<TSecond> second,
@@ -392,7 +376,6 @@ namespace Edufun.Categorical.Templates
         }
 
         /// <see cref="Lift{T1, T2, T3, T4}" />
-        // Named "liftA3" (Applicative) in Haskell parlance.
         public static Monad<TResult> Zip<T1, T2, T3, TResult>(
             this Monad<T1> @this,
             Monad<T2> second,
@@ -411,7 +394,6 @@ namespace Edufun.Categorical.Templates
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5}" />
-        // Named "liftA4" (Applicative) in Haskell parlance.
         public static Monad<TResult> Zip<T1, T2, T3, T4, TResult>(
              this Monad<T1> @this,
              Monad<T2> second,
@@ -434,7 +416,6 @@ namespace Edufun.Categorical.Templates
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5, T6}" />
-        // Named "liftA5" (Applicative) in Haskell parlance.
         public static Monad<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this Monad<T1> @this,
             Monad<T2> second,
@@ -496,7 +477,6 @@ namespace Edufun.Categorical.Templates
         #region Basic Monad functions
 
 
-        // Named "forM" in Haskell parlance. Same as SelectWith (mapM) with its arguments flipped.
         public static Monad<IEnumerable<TResult>> ForEach<TSource, TResult>(
             this Func<TSource, Monad<TResult>> @this,
             IEnumerable<TSource> seq)
@@ -509,7 +489,6 @@ namespace Edufun.Categorical.Templates
         }
 
 
-        // Named "=<<" in Haskell parlance. Same as Bind (>>=) with its arguments flipped.
         public static Monad<TResult> Invoke<TSource, TResult>(
             this Func<TSource, Monad<TResult>> @this,
             Monad<TSource> value)
@@ -521,7 +500,6 @@ namespace Edufun.Categorical.Templates
             return value.Bind(@this);
         }
 
-        // Named ">=>" in Haskell parlance.
         public static Func<TSource, Monad<TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, Monad<TMiddle>> @this,
             Func<TMiddle, Monad<TResult>> thunk)
@@ -534,7 +512,6 @@ namespace Edufun.Categorical.Templates
             return _ => @this.Invoke(_).Bind(thunk);
         }
 
-        // Named "<=<" in Haskell parlance.
         public static Func<TSource, Monad<TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, Monad<TResult>> @this,
             Func<TSource, Monad<TMiddle>> thunk)
@@ -556,7 +533,6 @@ namespace Edufun.Categorical.Templates
         #region Basic Monad functions
 
 
-        // Named "sequence" in Haskell parlance.
         public static Monad<IEnumerable<TSource>> Collect<TSource>(
             this IEnumerable<Monad<TSource>> @this)
         {
@@ -638,7 +614,6 @@ namespace Edufun.Categorical.Templates.Linq
         #region Basic Monad functions
 
 
-        // Named "mapM" in Haskell parlance.
         public static Monad<IEnumerable<TResult>> SelectWith<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, Monad<TResult>> selector)
@@ -656,7 +631,6 @@ namespace Edufun.Categorical.Templates.Linq
         #region Generalisations of list functions
 
 
-        // Named "filterM" in Haskell parlance.
         public static Monad<IEnumerable<TSource>> WhereBy<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Monad<bool>> predicate)
@@ -669,7 +643,6 @@ namespace Edufun.Categorical.Templates.Linq
             return @this.WhereByImpl(predicate);
         }
 
-        // Named "mapAndUnzipM" in Haskell parlance.
         public static Monad<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
             SelectUnzip<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
@@ -681,7 +654,6 @@ namespace Edufun.Categorical.Templates.Linq
             return @this.SelectUnzipImpl(thunk);
         }
 
-        // Named "zipWithM" in Haskell parlance.
         public static Monad<IEnumerable<TResult>> ZipWith<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
@@ -696,7 +668,6 @@ namespace Edufun.Categorical.Templates.Linq
         }
 
 
-        // Named "foldM" in Haskell parlance.
         public static Monad<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,

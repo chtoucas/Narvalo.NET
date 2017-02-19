@@ -12,7 +12,6 @@ public partial class MonadTemplate
 
 <#+ if (!HasTypeConstraints) { #>
 
-        // Named "forM" in Haskell parlance. Same as SelectWith (mapM) with its arguments flipped.
         public static <#= Name #><IEnumerable<TResult><#= SuffixT #>> ForEach<TSource, TResult<#= SuffixT #>>(
             this Func<TSource, <#= Name #><TResult<#= SuffixT #>>> @this,
             IEnumerable<TSource> seq)
@@ -33,7 +32,6 @@ public partial class MonadTemplate
 
 <#+ } // T4: End of !HasTypeConstraints. #>
 
-        // Named "=<<" in Haskell parlance. Same as Bind (>>=) with its arguments flipped.
         public static <#= Name #><TResult<#= SuffixT #>> Invoke<TSource, TResult<#= SuffixT #>>(
             this Func<TSource, <#= Name #><TResult<#= SuffixT #>>> @this,
             <#= Name #><TSource<#= SuffixT #>> value)
@@ -48,7 +46,6 @@ public partial class MonadTemplate
             return value.Bind(@this);
         }
 
-        // Named ">=>" in Haskell parlance.
         public static Func<TSource, <#= Name #><TResult<#= SuffixT #>>> Compose<TSource, TMiddle, TResult<#= SuffixT #>>(
             this Func<TSource, <#= Name #><TMiddle<#= SuffixT #>>> @this,
             Func<TMiddle, <#= Name #><TResult<#= SuffixT #>>> thunk)
@@ -61,7 +58,6 @@ public partial class MonadTemplate
             return _ => @this.Invoke(_).Bind(thunk);
         }
 
-        // Named "<=<" in Haskell parlance.
         public static Func<TSource, <#= Name #><TResult<#= SuffixT #>>> ComposeBack<TSource, TMiddle, TResult<#= SuffixT #>>(
             this Func<TMiddle, <#= Name #><TResult<#= SuffixT #>>> @this,
             Func<TSource, <#= Name #><TMiddle<#= SuffixT #>>> thunk)

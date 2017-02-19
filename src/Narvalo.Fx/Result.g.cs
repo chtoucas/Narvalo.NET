@@ -33,7 +33,6 @@ namespace Narvalo.Fx
         /// <typeparam name="TError"></typeparam>
         /// <param name="value">A value to be wrapped into a <see cref="Result{T, TError}"/> object.</param>
         /// <returns>An instance of the <see cref="Result{T, TError}"/> class for the specified value.</returns>
-        // Named "return" (Monad) or "pure" (Applicative) in Haskell parlance.
         public static Result<T, TError> Of<T, TError>(T value)
             /* T4: C# indent */
         {
@@ -47,7 +46,6 @@ namespace Narvalo.Fx
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
         /// </summary>
-        // Named "join" in Haskell parlance.
         public static Result<T, TError> Flatten<T, TError>(Result<Result<T, TError>, TError> square)
             /* T4: C# indent */
         {
@@ -68,7 +66,6 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Result{T, TError}" /> values.
         /// </summary>
-        // Named "liftM" in Haskell parlance.
         public static Func<Result<T, TError>, Result<TResult, TError>> Lift<T, TResult, TError>(
             Func<T, TResult> thunk)
             /* T4: C# indent */
@@ -86,7 +83,6 @@ namespace Narvalo.Fx
         /// Promotes a function to use and return <see cref="Result{T, TError}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        // Named "liftM2" in Haskell parlance.
         public static Func<Result<T1, TError>, Result<T2, TError>, Result<TResult, TError>>
             Lift<T1, T2, TResult, TError>(Func<T1, T2, TResult> thunk)
             /* T4: C# indent */
@@ -104,7 +100,6 @@ namespace Narvalo.Fx
         /// Promotes a function to use and return <see cref="Result{T, TError}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        // Named "liftM3" in Haskell parlance.
         public static Func<Result<T1, TError>, Result<T2, TError>, Result<T3, TError>, Result<TResult, TError>>
             Lift<T1, T2, T3, TResult, TError>(Func<T1, T2, T3, TResult> thunk)
             /* T4: C# indent */
@@ -122,7 +117,6 @@ namespace Narvalo.Fx
         /// Promotes a function to use and return <see cref="Result{T, TError}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        // Named "liftM4" in Haskell parlance.
         public static Func<Result<T1, TError>, Result<T2, TError>, Result<T3, TError>, Result<T4, TError>, Result<TResult, TError>>
             Lift<T1, T2, T3, T4, TResult, TError>(
             Func<T1, T2, T3, T4, TResult> thunk)
@@ -141,7 +135,6 @@ namespace Narvalo.Fx
         /// Promotes a function to use and return <see cref="Result{T, TError}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        // Named "liftM5" in Haskell parlance.
         public static Func<Result<T1, TError>, Result<T2, TError>, Result<T3, TError>, Result<T4, TError>, Result<T5, TError>, Result<TResult, TError>>
             Lift<T1, T2, T3, T4, T5, TResult, TError>(
             Func<T1, T2, T3, T4, T5, TResult> thunk)
@@ -164,7 +157,6 @@ namespace Narvalo.Fx
     {
         #region Applicative
 
-        // Named "<$" (Applicative) in Haskell parlance.
         public static Result<TResult, TError> Replace<TSource, TResult, TError>(
             this Result<TSource, TError> @this,
             TResult value)
@@ -176,7 +168,6 @@ namespace Narvalo.Fx
         }
 
 
-        // Named "<*>" in Haskell parlance. Same as Apply (<**>) with its arguments flipped.
         public static Result<TResult, TError> Gather<TSource, TResult, TError>(
             this Result<TSource, TError> @this,
             Result<Func<TSource, TResult>, TError> applicative)
@@ -187,7 +178,6 @@ namespace Narvalo.Fx
             return applicative.Apply(@this);
         }
 
-        // Named "<**>" in Haskell parlance. Same as Gather (<*>) with its arguments flipped.
         public static Result<TResult, TError> Apply<TSource, TResult, TError>(
             this Result<Func<TSource, TResult>, TError> @this,
             Result<TSource, TError> value)
@@ -213,7 +203,6 @@ namespace Narvalo.Fx
 
         #region Basic Monad functions
 
-        // Named "fmap", "liftA" or "<$>" (Applicative) in Haskell parlance.
         public static Result<TResult, TError> Select<TSource, TResult, TError>(
             this Result<TSource, TError> @this,
             Func<TSource, TResult> selector)
@@ -225,7 +214,6 @@ namespace Narvalo.Fx
             return @this.Bind(_ => Result.Of<TResult, TError>(selector.Invoke(_)));
         }
 
-        // Named ">>" (Monad) or "*>" (Applicative) in Haskell parlance.
         public static Result<TResult, TError> ReplaceBy<TSource, TResult, TError>(
             this Result<TSource, TError> @this,
             Result<TResult, TError> other)
@@ -236,7 +224,6 @@ namespace Narvalo.Fx
             return @this.Bind(_ => other);
         }
 
-        // Named "void" in Haskell parlance.
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
         public static Result<global::Narvalo.Fx.Unit, TError> Skip<TSource, TError>(this Result<TSource, TError> @this)
             /* T4: C# indent */
@@ -247,7 +234,6 @@ namespace Narvalo.Fx
             return Result.Of<Unit, TError>(global::Narvalo.Fx.Unit.Single);
         }
 
-        // Named "forever" in Haskell parlance.
         public static Result<TResult, TError> Forever<TSource, TResult, TError>(
             this Result<TSource, TError> @this,
             Func<Result<TResult, TError>> thunk)
@@ -305,7 +291,6 @@ namespace Narvalo.Fx
         #region Generalisations of list functions
 
 
-        // Named "replicateM" in Haskell parlance.
         public static Result<IEnumerable<TSource>, TError> Repeat<TSource, TError>(
             this Result<TSource, TError> @this,
             int count)
@@ -321,7 +306,7 @@ namespace Narvalo.Fx
 
         #region Conditional execution of monadic expressions
 
-        // Named "when" in Haskell parlance. Haskell uses a different signature.
+        // Haskell uses a different signature.
         public static void When<TSource, TError>(
             this Result<TSource, TError> @this,
             Func<TSource, bool> predicate,
@@ -340,7 +325,7 @@ namespace Narvalo.Fx
                 });
         }
 
-        // Named "unless" in Haskell parlance. Haskell uses a different signature.
+        // Haskell uses a different signature.
         public static void Unless<TSource, TError>(
             this Result<TSource, TError> @this,
             Func<TSource, bool> predicate,
@@ -359,7 +344,6 @@ namespace Narvalo.Fx
         #region Applicative lifting operators
 
         /// <see cref="Lift{T1, T2, T3}" />
-        // Named "liftA2" (Applicative) in Haskell parlance.
         public static Result<TResult, TError> Zip<TFirst, TSecond, TResult, TError>(
             this Result<TFirst, TError> @this,
             Result<TSecond, TError> second,
@@ -374,7 +358,6 @@ namespace Narvalo.Fx
         }
 
         /// <see cref="Lift{T1, T2, T3, T4}" />
-        // Named "liftA3" (Applicative) in Haskell parlance.
         public static Result<TResult, TError> Zip<T1, T2, T3, TResult, TError>(
             this Result<T1, TError> @this,
             Result<T2, TError> second,
@@ -393,7 +376,6 @@ namespace Narvalo.Fx
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5}" />
-        // Named "liftA4" (Applicative) in Haskell parlance.
         public static Result<TResult, TError> Zip<T1, T2, T3, T4, TResult, TError>(
              this Result<T1, TError> @this,
              Result<T2, TError> second,
@@ -416,7 +398,6 @@ namespace Narvalo.Fx
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5, T6}" />
-        // Named "liftA5" (Applicative) in Haskell parlance.
         public static Result<TResult, TError> Zip<T1, T2, T3, T4, T5, TResult, TError>(
             this Result<T1, TError> @this,
             Result<T2, TError> second,
@@ -478,7 +459,6 @@ namespace Narvalo.Fx
         #region Basic Monad functions
 
 
-        // Named "forM" in Haskell parlance. Same as SelectWith (mapM) with its arguments flipped.
         public static Result<IEnumerable<TResult>, TError> ForEach<TSource, TResult, TError>(
             this Func<TSource, Result<TResult, TError>> @this,
             IEnumerable<TSource> seq)
@@ -491,7 +471,6 @@ namespace Narvalo.Fx
         }
 
 
-        // Named "=<<" in Haskell parlance. Same as Bind (>>=) with its arguments flipped.
         public static Result<TResult, TError> Invoke<TSource, TResult, TError>(
             this Func<TSource, Result<TResult, TError>> @this,
             Result<TSource, TError> value)
@@ -503,7 +482,6 @@ namespace Narvalo.Fx
             return value.Bind(@this);
         }
 
-        // Named ">=>" in Haskell parlance.
         public static Func<TSource, Result<TResult, TError>> Compose<TSource, TMiddle, TResult, TError>(
             this Func<TSource, Result<TMiddle, TError>> @this,
             Func<TMiddle, Result<TResult, TError>> thunk)
@@ -516,7 +494,6 @@ namespace Narvalo.Fx
             return _ => @this.Invoke(_).Bind(thunk);
         }
 
-        // Named "<=<" in Haskell parlance.
         public static Func<TSource, Result<TResult, TError>> ComposeBack<TSource, TMiddle, TResult, TError>(
             this Func<TMiddle, Result<TResult, TError>> @this,
             Func<TSource, Result<TMiddle, TError>> thunk)
@@ -538,7 +515,6 @@ namespace Narvalo.Fx
         #region Basic Monad functions
 
 
-        // Named "sequence" in Haskell parlance.
         public static Result<IEnumerable<TSource>, TError> Collect<TSource, TError>(
             this IEnumerable<Result<TSource, TError>> @this)
         {

@@ -11,6 +11,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Categorical\Alternative.cs" />
     <Compile Include="Categorical\Cokun.cs" />
     <Compile Include="Categorical\FakeException.cs" />
     <Compile Include="Categorical\Functor.cs" />
@@ -19,6 +20,8 @@
     <Compile Include="Linq\IQuerySyntax.cs" />
     <Compile Include="Linq\IQuerySyntax`1.cs" />
     <Compile Include="Linq\Qperators.cs" />
+    <Compile Include="Categorical\MonadPlus.cs" />
+    <Compile Include="Categorical\Mu.cs" />
     <Compile Include="Sequences\Recursion.cs" />
     <Compile Include="Sequences\PythagoreanTriples.cs" />
     <Compile Include="Sequences\Fibonacci.cs" />

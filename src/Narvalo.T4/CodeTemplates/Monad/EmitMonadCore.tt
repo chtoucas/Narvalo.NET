@@ -50,7 +50,6 @@ public partial class MonadTemplate
         /// Gets the zero for <see cref="<#= Name #>{T}"/>.
         /// </summary>
         /// <value>The zero for <see cref="<#= Name #>{T}"/>.</value>
-        // Named "mzero" (MonadPlus) in Haskell parlance.
         public static <#= Name #><global::Narvalo.Fx.Unit> <#= ZeroName #>
         {
             get
@@ -74,7 +73,6 @@ public partial class MonadTemplate
 <#+ } #>
         /// <param name="value">A value to be wrapped into a <see cref="<#= Name #>{T<#= SuffixT #>}"/> object.</param>
         /// <returns>An instance of the <see cref="<#= Name #>{T<#= SuffixT #>}"/> class for the specified value.</returns>
-        // Named "return" (Monad) or "pure" (Applicative) in Haskell parlance.
         public static <#= Name #><T<#= SuffixT #>> <#= ReturnName #><T<#= SuffixT #>>(T value)
             <#+ WriteTypeConstraints("T"); #>
         {
@@ -90,7 +88,6 @@ public partial class MonadTemplate
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
         /// </summary>
-        // Named "join" in Haskell parlance.
         public static <#= Name #><T<#= SuffixT #>> Flatten<T<#= SuffixT #>>(<#= Name #><<#= Name #><T<#= SuffixT #>><#= SuffixT #>> square)
             <#+ WriteTypeConstraints("T"); #>
         {
@@ -110,7 +107,6 @@ public partial class MonadTemplate
 
 <#+ if (HasZero) { #>
 
-        // Named "guard" in Haskell parlance.
         public static <#= Name #><global::Narvalo.Fx.Unit> Guard(bool predicate)
         {
 <#+ if (IsNullable) { #>
@@ -129,7 +125,6 @@ public partial class MonadTemplate
         /// <summary>
         /// Promotes a function to use and return <see cref="<#= Name #>{T<#= SuffixT #>}" /> values.
         /// </summary>
-        // Named "liftM" in Haskell parlance.
         public static Func<<#= Name #><T<#= SuffixT #>>, <#= Name #><TResult<#= SuffixT #>>> Lift<T, TResult<#= SuffixT #>>(
             Func<T, TResult> thunk)
             <#+ WriteTypeConstraints("T", "TResult"); #>
@@ -147,7 +142,6 @@ public partial class MonadTemplate
         /// Promotes a function to use and return <see cref="<#= Name #>{T<#= SuffixT #>}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        // Named "liftM2" in Haskell parlance.
         public static Func<<#= Name #><T1<#= SuffixT #>>, <#= Name #><T2<#= SuffixT #>>, <#= Name #><TResult<#= SuffixT #>>>
             Lift<T1, T2, TResult<#= SuffixT #>>(Func<T1, T2, TResult> thunk)
             <#+ WriteTypeConstraints("T1", "T2", "TResult"); #>
@@ -165,7 +159,6 @@ public partial class MonadTemplate
         /// Promotes a function to use and return <see cref="<#= Name #>{T<#= SuffixT #>}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        // Named "liftM3" in Haskell parlance.
         public static Func<<#= Name #><T1<#= SuffixT #>>, <#= Name #><T2<#= SuffixT #>>, <#= Name #><T3<#= SuffixT #>>, <#= Name #><TResult<#= SuffixT #>>>
             Lift<T1, T2, T3, TResult<#= SuffixT #>>(Func<T1, T2, T3, TResult> thunk)
             <#+ WriteTypeConstraints("T1", "T2", "T3", "TResult"); #>
@@ -183,7 +176,6 @@ public partial class MonadTemplate
         /// Promotes a function to use and return <see cref="<#= Name #>{T<#= SuffixT #>}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        // Named "liftM4" in Haskell parlance.
         public static Func<<#= Name #><T1<#= SuffixT #>>, <#= Name #><T2<#= SuffixT #>>, <#= Name #><T3<#= SuffixT #>>, <#= Name #><T4<#= SuffixT #>>, <#= Name #><TResult<#= SuffixT #>>>
             Lift<T1, T2, T3, T4, TResult<#= SuffixT #>>(
             Func<T1, T2, T3, T4, TResult> thunk)
@@ -202,7 +194,6 @@ public partial class MonadTemplate
         /// Promotes a function to use and return <see cref="<#= Name #>{T<#= SuffixT #>}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        // Named "liftM5" in Haskell parlance.
         public static Func<<#= Name #><T1<#= SuffixT #>>, <#= Name #><T2<#= SuffixT #>>, <#= Name #><T3<#= SuffixT #>>, <#= Name #><T4<#= SuffixT #>>, <#= Name #><T5<#= SuffixT #>>, <#= Name #><TResult<#= SuffixT #>>>
             Lift<T1, T2, T3, T4, T5, TResult<#= SuffixT #>>(
             Func<T1, T2, T3, T4, T5, TResult> thunk)

@@ -12,7 +12,6 @@ public partial class MonadTemplate
 
 <#+ if (!HasTypeConstraints) { #>
 
-        // Named "sequence" in Haskell parlance.
         public static <#= Name #><IEnumerable<TSource><#= SuffixT #>> Collect<TSource<#= SuffixT #>>(
             this IEnumerable<<#= Name #><TSource<#= SuffixT #>>> @this)
         {
@@ -32,7 +31,6 @@ public partial class MonadTemplate
 
         #region Generalisations of list functions
 
-        // Named "msum" in Haskell parlance.
         public static <#= Name #><TSource> Sum<TSource>(
             this IEnumerable<<#= Name #><TSource>> @this)
             <#+ WriteTypeConstraints("TSource"); #>

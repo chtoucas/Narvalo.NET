@@ -9,14 +9,14 @@ namespace Edufun.Categorical
     // [Haskell] Data.Functor
     // The Functor class is used for types that can be mapped over.
     //
-    // Translation map from Haskell to .NET.
+    // Translation map from Haskell to .NET:
     // - fmap   obj.Select       (required)
     // - <$     obj.Replace
-    // - $>     Functor.Inject_
+    // - $>     Functor.Inject
     // - <$>    Functor.InvokeWith
     // - void   obj.Skip
 
-    public partial interface IFunctor<T>
+    public interface IFunctor<T>
     {
         // [Haskell] fmap :: (a -> b) -> f a -> f b
         Functor<TResult> Select<TResult>(Func<T, TResult> selector);
@@ -30,15 +30,15 @@ namespace Edufun.Categorical
         Functor<Unit> Skip();
     }
 
-    public partial interface IFunctor
+    public interface IFunctor
     {
         // [Haskell] ($>) :: Functor f => f a -> b -> f b
         // Flipped version of <$.
-        Functor<TResult> Inject_<TSource, TResult>(TResult other, Functor<TSource> value);
+        Functor<TResult> Inject<T, TResult>(TResult other, Functor<T> value);
 
         // [Haskell] (<$>) :: Functor f => (a -> b) -> f a -> f b
         // An infix synonym for fmap.
-        Functor<TResult> InvokeWith<TSource, TResult>(Func<TSource, TResult> thunk, Functor<TSource> value);
+        Functor<TResult> InvokeWith<T, TResult>(Func<T, TResult> selector, Functor<T> value);
     }
 
     public partial class Functor<T> : IFunctor<T>
@@ -58,12 +58,12 @@ namespace Edufun.Categorical
     public class Functor : IFunctor
     {
         // ($>) = flip (<$)
-        public Functor<TResult> Inject_<TSource, TResult>(TResult other, Functor<TSource> value)
+        public Functor<TResult> Inject<T, TResult>(TResult other, Functor<T> value)
             => value.Select(_ => other);
 
         // (<$>) = fmap
-        public Functor<TResult> InvokeWith<TSource, TResult>(Func<TSource, TResult> thunk, Functor<TSource> value)
-            => value.Select(thunk);
+        public Functor<TResult> InvokeWith<T, TResult>(Func<T, TResult> selector, Functor<T> value)
+            => value.Select(selector);
     }
 
     public static class FunctorRules

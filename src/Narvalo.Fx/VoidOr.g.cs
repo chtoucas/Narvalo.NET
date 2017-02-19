@@ -49,7 +49,6 @@ namespace Narvalo.Fx
         /// Gets the zero for <see cref="VoidOr{T}"/>.
         /// </summary>
         /// <value>The zero for <see cref="VoidOr{T}"/>.</value>
-        // Named "mzero" (MonadPlus) in Haskell parlance.
         public static VoidOr<global::Narvalo.Fx.Unit> Void
         {
             get
@@ -67,7 +66,6 @@ namespace Narvalo.Fx
         /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
         /// <param name="value">A value to be wrapped into a <see cref="VoidOr{T}"/> object.</param>
         /// <returns>An instance of the <see cref="VoidOr{T}"/> class for the specified value.</returns>
-        // Named "return" (Monad) or "pure" (Applicative) in Haskell parlance.
         public static VoidOr<T> FromError<T>(T value)
             /* T4: C# indent */
         {
@@ -81,7 +79,6 @@ namespace Narvalo.Fx
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
         /// </summary>
-        // Named "join" in Haskell parlance.
         public static VoidOr<T> Flatten<T>(VoidOr<VoidOr<T>> square)
             /* T4: C# indent */
         {
@@ -96,7 +93,6 @@ namespace Narvalo.Fx
         #region Conditional execution of monadic expressions
 
 
-        // Named "guard" in Haskell parlance.
         public static VoidOr<global::Narvalo.Fx.Unit> Guard(bool predicate)
         {
             Warrant.NotNull<VoidOr<global::Narvalo.Fx.Unit>>();
@@ -112,7 +108,6 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="VoidOr{T}" /> values.
         /// </summary>
-        // Named "liftM" in Haskell parlance.
         public static Func<VoidOr<T>, VoidOr<TResult>> Lift<T, TResult>(
             Func<T, TResult> thunk)
             /* T4: C# indent */
@@ -130,7 +125,6 @@ namespace Narvalo.Fx
         /// Promotes a function to use and return <see cref="VoidOr{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        // Named "liftM2" in Haskell parlance.
         public static Func<VoidOr<T1>, VoidOr<T2>, VoidOr<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> thunk)
             /* T4: C# indent */
@@ -148,7 +142,6 @@ namespace Narvalo.Fx
         /// Promotes a function to use and return <see cref="VoidOr{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        // Named "liftM3" in Haskell parlance.
         public static Func<VoidOr<T1>, VoidOr<T2>, VoidOr<T3>, VoidOr<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> thunk)
             /* T4: C# indent */
@@ -166,7 +159,6 @@ namespace Narvalo.Fx
         /// Promotes a function to use and return <see cref="VoidOr{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        // Named "liftM4" in Haskell parlance.
         public static Func<VoidOr<T1>, VoidOr<T2>, VoidOr<T3>, VoidOr<T4>, VoidOr<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> thunk)
@@ -185,7 +177,6 @@ namespace Narvalo.Fx
         /// Promotes a function to use and return <see cref="VoidOr{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        // Named "liftM5" in Haskell parlance.
         public static Func<VoidOr<T1>, VoidOr<T2>, VoidOr<T3>, VoidOr<T4>, VoidOr<T5>, VoidOr<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> thunk)
@@ -208,7 +199,6 @@ namespace Narvalo.Fx
     {
         #region Applicative
 
-        // Named "<$" (Applicative) in Haskell parlance.
         public static VoidOr<TResult> Replace<TSource, TResult>(
             this VoidOr<TSource> @this,
             TResult value)
@@ -221,7 +211,6 @@ namespace Narvalo.Fx
         }
 
 
-        // Named "<*>" in Haskell parlance. Same as Apply (<**>) with its arguments flipped.
         public static VoidOr<TResult> Gather<TSource, TResult>(
             this VoidOr<TSource> @this,
             VoidOr<Func<TSource, TResult>> applicative)
@@ -232,7 +221,6 @@ namespace Narvalo.Fx
             return applicative.Apply(@this);
         }
 
-        // Named "<**>" in Haskell parlance. Same as Gather (<*>) with its arguments flipped.
         public static VoidOr<TResult> Apply<TSource, TResult>(
             this VoidOr<Func<TSource, TResult>> @this,
             VoidOr<TSource> value)
@@ -258,7 +246,6 @@ namespace Narvalo.Fx
 
         #region Basic Monad functions
 
-        // Named "fmap", "liftA" or "<$>" (Applicative) in Haskell parlance.
         public static VoidOr<TResult> Select<TSource, TResult>(
             this VoidOr<TSource> @this,
             Func<TSource, TResult> selector)
@@ -271,7 +258,6 @@ namespace Narvalo.Fx
             return @this.Bind(_ => VoidOr.FromError(selector.Invoke(_)));
         }
 
-        // Named ">>" (Monad) or "*>" (Applicative) in Haskell parlance.
         public static VoidOr<TResult> ReplaceBy<TSource, TResult>(
             this VoidOr<TSource> @this,
             VoidOr<TResult> other)
@@ -283,7 +269,6 @@ namespace Narvalo.Fx
             return @this.Bind(_ => other);
         }
 
-        // Named "void" in Haskell parlance.
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
         public static VoidOr<global::Narvalo.Fx.Unit> Skip<TSource>(this VoidOr<TSource> @this)
             /* T4: C# indent */
@@ -294,7 +279,6 @@ namespace Narvalo.Fx
             return VoidOr.Unit;
         }
 
-        // Named "forever" in Haskell parlance.
         public static VoidOr<TResult> Forever<TSource, TResult>(
             this VoidOr<TSource> @this,
             Func<VoidOr<TResult>> thunk)
@@ -369,7 +353,6 @@ namespace Narvalo.Fx
         #region Generalisations of list functions
 
 
-        // Named "mfilter" in Haskell parlance.
         public static VoidOr<TSource> Where<TSource>(
             this VoidOr<TSource> @this,
             Func<TSource, bool> predicate)
@@ -384,7 +367,6 @@ namespace Narvalo.Fx
         }
 
 
-        // Named "replicateM" in Haskell parlance.
         public static VoidOr<IEnumerable<TSource>> Repeat<TSource>(
             this VoidOr<TSource> @this,
             int count)
@@ -401,7 +383,7 @@ namespace Narvalo.Fx
 
         #region Conditional execution of monadic expressions
 
-        // Named "when" in Haskell parlance. Haskell uses a different signature.
+        // Haskell uses a different signature.
         public static void When<TSource>(
             this VoidOr<TSource> @this,
             Func<TSource, bool> predicate,
@@ -420,7 +402,7 @@ namespace Narvalo.Fx
                 });
         }
 
-        // Named "unless" in Haskell parlance. Haskell uses a different signature.
+        // Haskell uses a different signature.
         public static void Unless<TSource>(
             this VoidOr<TSource> @this,
             Func<TSource, bool> predicate,
@@ -439,7 +421,6 @@ namespace Narvalo.Fx
         #region Applicative lifting operators
 
         /// <see cref="Lift{T1, T2, T3}" />
-        // Named "liftA2" (Applicative) in Haskell parlance.
         public static VoidOr<TResult> Zip<TFirst, TSecond, TResult>(
             this VoidOr<TFirst> @this,
             VoidOr<TSecond> second,
@@ -455,7 +436,6 @@ namespace Narvalo.Fx
         }
 
         /// <see cref="Lift{T1, T2, T3, T4}" />
-        // Named "liftA3" (Applicative) in Haskell parlance.
         public static VoidOr<TResult> Zip<T1, T2, T3, TResult>(
             this VoidOr<T1> @this,
             VoidOr<T2> second,
@@ -475,7 +455,6 @@ namespace Narvalo.Fx
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5}" />
-        // Named "liftA4" (Applicative) in Haskell parlance.
         public static VoidOr<TResult> Zip<T1, T2, T3, T4, TResult>(
              this VoidOr<T1> @this,
              VoidOr<T2> second,
@@ -499,7 +478,6 @@ namespace Narvalo.Fx
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5, T6}" />
-        // Named "liftA5" (Applicative) in Haskell parlance.
         public static VoidOr<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this VoidOr<T1> @this,
             VoidOr<T2> second,
@@ -732,7 +710,6 @@ namespace Narvalo.Fx
         #region Basic Monad functions
 
 
-        // Named "forM" in Haskell parlance. Same as SelectWith (mapM) with its arguments flipped.
         public static VoidOr<IEnumerable<TResult>> ForEach<TSource, TResult>(
             this Func<TSource, VoidOr<TResult>> @this,
             IEnumerable<TSource> seq)
@@ -745,7 +722,6 @@ namespace Narvalo.Fx
         }
 
 
-        // Named "=<<" in Haskell parlance. Same as Bind (>>=) with its arguments flipped.
         public static VoidOr<TResult> Invoke<TSource, TResult>(
             this Func<TSource, VoidOr<TResult>> @this,
             VoidOr<TSource> value)
@@ -758,7 +734,6 @@ namespace Narvalo.Fx
             return value.Bind(@this);
         }
 
-        // Named ">=>" in Haskell parlance.
         public static Func<TSource, VoidOr<TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, VoidOr<TMiddle>> @this,
             Func<TMiddle, VoidOr<TResult>> thunk)
@@ -771,7 +746,6 @@ namespace Narvalo.Fx
             return _ => @this.Invoke(_).Bind(thunk);
         }
 
-        // Named "<=<" in Haskell parlance.
         public static Func<TSource, VoidOr<TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, VoidOr<TResult>> @this,
             Func<TSource, VoidOr<TMiddle>> thunk)
@@ -793,7 +767,6 @@ namespace Narvalo.Fx
         #region Basic Monad functions
 
 
-        // Named "sequence" in Haskell parlance.
         public static VoidOr<IEnumerable<TSource>> Collect<TSource>(
             this IEnumerable<VoidOr<TSource>> @this)
         {
@@ -809,7 +782,6 @@ namespace Narvalo.Fx
 
         #region Generalisations of list functions
 
-        // Named "msum" in Haskell parlance.
         public static VoidOr<TSource> Sum<TSource>(
             this IEnumerable<VoidOr<TSource>> @this)
             /* T4: C# indent */
@@ -907,7 +879,6 @@ namespace Narvalo.Fx.Linq
         #region Basic Monad functions
 
 
-        // Named "mapM" in Haskell parlance.
         public static VoidOr<IEnumerable<TResult>> SelectWith<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, VoidOr<TResult>> selector)
@@ -925,7 +896,6 @@ namespace Narvalo.Fx.Linq
         #region Generalisations of list functions
 
 
-        // Named "filterM" in Haskell parlance.
         public static VoidOr<IEnumerable<TSource>> WhereBy<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, VoidOr<bool>> predicate)
@@ -938,7 +908,6 @@ namespace Narvalo.Fx.Linq
             return @this.WhereByImpl(predicate);
         }
 
-        // Named "mapAndUnzipM" in Haskell parlance.
         public static VoidOr<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
             SelectUnzip<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
@@ -951,7 +920,6 @@ namespace Narvalo.Fx.Linq
             return @this.SelectUnzipImpl(thunk);
         }
 
-        // Named "zipWithM" in Haskell parlance.
         public static VoidOr<IEnumerable<TResult>> ZipWith<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
@@ -966,7 +934,6 @@ namespace Narvalo.Fx.Linq
         }
 
 
-        // Named "foldM" in Haskell parlance.
         public static VoidOr<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,

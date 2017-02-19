@@ -4,5 +4,6 @@ namespace Edufun.Categorical
 {
     using System;
 
+    [Serializable]
     public class FakeClassException : NotImplementedException { }
 }

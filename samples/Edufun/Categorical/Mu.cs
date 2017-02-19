@@ -1,12 +1,10 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Edufun
+namespace Edufun.Categorical
 {
     using System;
 
-    using Edufun.Monads;
-
-    internal class Mu
+    public class Mu
     {
         public Mu(Monad<Mu> fun)
         {
@@ -16,7 +14,7 @@ namespace Edufun
         public Monad<Mu> Out { get; }
 
         public static Mu Ana<TResult>(Func<TResult, Monad<TResult>> psi, TResult seed)
-            => new Mu(psi(seed).Map(_ => Mu.Ana(psi, _)));
+            => new Mu(psi(seed).Select(_ => Mu.Ana(psi, _)));
 
         public static T2 Hylo<T1, T2>(
             Func<T1, Monad<T1>> psi,
@@ -25,6 +23,6 @@ namespace Edufun
             => Mu.Ana(psi, seed).Cata(phi);
 
         public TResult Cata<TResult>(Func<Monad<TResult>, TResult> phi)
-            => phi(Out.Map(_ => _.Cata(phi)));
+            => phi(Out.Select(_ => _.Cata(phi)));
     }
 }

@@ -10,7 +10,6 @@ public partial class MonadTemplate
     {
         #region Applicative
 
-        // Named "<$" (Applicative) in Haskell parlance.
         public static <#= Name #><TResult<#= SuffixT #>> Replace<TSource, TResult<#= SuffixT #>>(
             this <#= Name #><TSource<#= SuffixT #>> @this,
             TResult value)
@@ -26,7 +25,6 @@ public partial class MonadTemplate
 
 <#+ if (!HasTypeConstraints) { #>
 
-        // Named "<*>" in Haskell parlance. Same as Apply (<**>) with its arguments flipped.
         public static <#= Name #><TResult<#= SuffixT #>> Gather<TSource, TResult<#= SuffixT #>>(
             this <#= Name #><TSource<#= SuffixT #>> @this,
             <#= Name #><Func<TSource, TResult><#= SuffixT #>> applicative)
@@ -37,7 +35,6 @@ public partial class MonadTemplate
             return applicative.Apply(@this);
         }
 
-        // Named "<**>" in Haskell parlance. Same as Gather (<*>) with its arguments flipped.
         public static <#= Name #><TResult<#= SuffixT #>> Apply<TSource, TResult<#= SuffixT #>>(
             this <#= Name #><Func<TSource, TResult><#= SuffixT #>> @this,
             <#= Name #><TSource<#= SuffixT #>> value)
@@ -64,7 +61,6 @@ public partial class MonadTemplate
 
         #region Basic Monad functions
 
-        // Named "fmap", "liftA" or "<$>" (Applicative) in Haskell parlance.
         public static <#= Name #><TResult<#= SuffixT #>> <#= MapName #><TSource, TResult<#= SuffixT #>>(
             this <#= Name #><TSource<#= SuffixT #>> @this,
             Func<TSource, TResult> selector)
@@ -79,7 +75,6 @@ public partial class MonadTemplate
             return @this.Bind(_ => <#+ WriteFactory("TResult"); #>(selector.Invoke(_)));
         }
 
-        // Named ">>" (Monad) or "*>" (Applicative) in Haskell parlance.
         public static <#= Name #><TResult<#= SuffixT #>> ReplaceBy<TSource, TResult<#= SuffixT #>>(
             this <#= Name #><TSource<#= SuffixT #>> @this,
             <#= Name #><TResult<#= SuffixT #>> other)
@@ -93,7 +88,6 @@ public partial class MonadTemplate
             return @this.Bind(_ => other);
         }
 
-        // Named "void" in Haskell parlance.
 <#+ if (!SuppressMessage) { #>
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
 <#+ } #>
@@ -113,7 +107,6 @@ public partial class MonadTemplate
 <#+ } #>
         }
 
-        // Named "forever" in Haskell parlance.
         public static <#= Name #><TResult<#= SuffixT #>> Forever<TSource, TResult<#= SuffixT #>>(
             this <#= Name #><TSource<#= SuffixT #>> @this,
             Func<<#= Name #><TResult<#= SuffixT #>>> thunk)
@@ -197,7 +190,6 @@ public partial class MonadTemplate
 
 <#+ if (HasZero) { #>
 
-        // Named "mfilter" in Haskell parlance.
         public static <#= Name #><TSource<#= SuffixT #>> <#= FilterName #><TSource<#= SuffixT #>>(
             this <#= Name #><TSource<#= SuffixT #>> @this,
             Func<TSource, bool> predicate)
@@ -217,7 +209,6 @@ public partial class MonadTemplate
 
 <#+ if (!HasTypeConstraints) { #>
 
-        // Named "replicateM" in Haskell parlance.
         public static <#= Name #><IEnumerable<TSource><#= SuffixT #>> Repeat<TSource<#= SuffixT #>>(
             this <#= Name #><TSource<#= SuffixT #>> @this,
             int count)
@@ -237,7 +228,7 @@ public partial class MonadTemplate
 
         #region Conditional execution of monadic expressions
 
-        // Named "when" in Haskell parlance. Haskell uses a different signature.
+        // Haskell uses a different signature.
         public static void When<TSource<#= SuffixT #>>(
             this <#= Name #><TSource<#= SuffixT #>> @this,
             Func<TSource, bool> predicate,
@@ -260,7 +251,7 @@ public partial class MonadTemplate
                 });
         }
 
-        // Named "unless" in Haskell parlance. Haskell uses a different signature.
+        // Haskell uses a different signature.
         public static void Unless<TSource<#= SuffixT #>>(
             this <#= Name #><TSource<#= SuffixT #>> @this,
             Func<TSource, bool> predicate,
@@ -279,7 +270,6 @@ public partial class MonadTemplate
         #region Applicative lifting operators
 
         /// <see cref="Lift{T1, T2, T3}" />
-        // Named "liftA2" (Applicative) in Haskell parlance.
         public static <#= Name #><TResult<#= SuffixT #>> Zip<TFirst, TSecond, TResult<#= SuffixT #>>(
             this <#= Name #><TFirst<#= SuffixT #>> @this,
             <#= Name #><TSecond<#= SuffixT #>> second,
@@ -297,7 +287,6 @@ public partial class MonadTemplate
         }
 
         /// <see cref="Lift{T1, T2, T3, T4}" />
-        // Named "liftA3" (Applicative) in Haskell parlance.
         public static <#= Name #><TResult<#= SuffixT #>> Zip<T1, T2, T3, TResult<#= SuffixT #>>(
             this <#= Name #><T1<#= SuffixT #>> @this,
             <#= Name #><T2<#= SuffixT #>> second,
@@ -319,7 +308,6 @@ public partial class MonadTemplate
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5}" />
-        // Named "liftA4" (Applicative) in Haskell parlance.
         public static <#= Name #><TResult<#= SuffixT #>> Zip<T1, T2, T3, T4, TResult<#= SuffixT #>>(
              this <#= Name #><T1<#= SuffixT #>> @this,
              <#= Name #><T2<#= SuffixT #>> second,
@@ -345,7 +333,6 @@ public partial class MonadTemplate
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5, T6}" />
-        // Named "liftA5" (Applicative) in Haskell parlance.
         public static <#= Name #><TResult<#= SuffixT #>> Zip<T1, T2, T3, T4, T5, TResult<#= SuffixT #>>(
             this <#= Name #><T1<#= SuffixT #>> @this,
             <#= Name #><T2<#= SuffixT #>> second,

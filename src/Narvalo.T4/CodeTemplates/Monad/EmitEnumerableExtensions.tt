@@ -17,7 +17,6 @@ public partial class MonadTemplate
 
 <#+ if (!HasTypeConstraints) { #>
 
-        // Named "mapM" in Haskell parlance.
         public static <#= Name #><IEnumerable<TResult>> SelectWith<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><TResult>> selector)
@@ -39,7 +38,6 @@ public partial class MonadTemplate
 
 <#+ if (!HasTypeConstraints) { #>
 
-        // Named "filterM" in Haskell parlance.
         public static <#= Name #><IEnumerable<TSource>> WhereBy<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><bool>> predicate)
@@ -52,7 +50,6 @@ public partial class MonadTemplate
             return @this.WhereByImpl(predicate);
         }
 
-        // Named "mapAndUnzipM" in Haskell parlance.
         public static <#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
             SelectUnzip<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
@@ -67,7 +64,6 @@ public partial class MonadTemplate
             return @this.SelectUnzipImpl(thunk);
         }
 
-        // Named "zipWithM" in Haskell parlance.
         public static <#= Name #><IEnumerable<TResult>> ZipWith<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
@@ -85,7 +81,6 @@ public partial class MonadTemplate
 
 <#+ } // T4: End of !HasTypeConstraints. #>
 
-        // Named "foldM" in Haskell parlance.
         public static <#= Name #><TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,

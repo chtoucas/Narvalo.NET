@@ -50,7 +50,6 @@ namespace Narvalo.Fx
         /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
         /// <param name="value">A value to be wrapped into a <see cref="Ident{T}"/> object.</param>
         /// <returns>An instance of the <see cref="Ident{T}"/> class for the specified value.</returns>
-        // Named "return" (Monad) or "pure" (Applicative) in Haskell parlance.
         public static Ident<T> Of<T>(T value)
             /* T4: C# indent */
         {
@@ -63,7 +62,6 @@ namespace Narvalo.Fx
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
         /// </summary>
-        // Named "join" in Haskell parlance.
         public static Ident<T> Flatten<T>(Ident<Ident<T>> square)
             /* T4: C# indent */
         {
@@ -83,7 +81,6 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Ident{T}" /> values.
         /// </summary>
-        // Named "liftM" in Haskell parlance.
         public static Func<Ident<T>, Ident<TResult>> Lift<T, TResult>(
             Func<T, TResult> thunk)
             /* T4: C# indent */
@@ -101,7 +98,6 @@ namespace Narvalo.Fx
         /// Promotes a function to use and return <see cref="Ident{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        // Named "liftM2" in Haskell parlance.
         public static Func<Ident<T1>, Ident<T2>, Ident<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> thunk)
             /* T4: C# indent */
@@ -119,7 +115,6 @@ namespace Narvalo.Fx
         /// Promotes a function to use and return <see cref="Ident{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        // Named "liftM3" in Haskell parlance.
         public static Func<Ident<T1>, Ident<T2>, Ident<T3>, Ident<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> thunk)
             /* T4: C# indent */
@@ -137,7 +132,6 @@ namespace Narvalo.Fx
         /// Promotes a function to use and return <see cref="Ident{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        // Named "liftM4" in Haskell parlance.
         public static Func<Ident<T1>, Ident<T2>, Ident<T3>, Ident<T4>, Ident<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> thunk)
@@ -156,7 +150,6 @@ namespace Narvalo.Fx
         /// Promotes a function to use and return <see cref="Ident{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        // Named "liftM5" in Haskell parlance.
         public static Func<Ident<T1>, Ident<T2>, Ident<T3>, Ident<T4>, Ident<T5>, Ident<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> thunk)
@@ -179,7 +172,6 @@ namespace Narvalo.Fx
     {
         #region Applicative
 
-        // Named "<$" (Applicative) in Haskell parlance.
         public static Ident<TResult> Replace<TSource, TResult>(
             this Ident<TSource> @this,
             TResult value)
@@ -191,7 +183,6 @@ namespace Narvalo.Fx
         }
 
 
-        // Named "<*>" in Haskell parlance. Same as Apply (<**>) with its arguments flipped.
         public static Ident<TResult> Gather<TSource, TResult>(
             this Ident<TSource> @this,
             Ident<Func<TSource, TResult>> applicative)
@@ -202,7 +193,6 @@ namespace Narvalo.Fx
             return applicative.Apply(@this);
         }
 
-        // Named "<**>" in Haskell parlance. Same as Gather (<*>) with its arguments flipped.
         public static Ident<TResult> Apply<TSource, TResult>(
             this Ident<Func<TSource, TResult>> @this,
             Ident<TSource> value)
@@ -228,7 +218,6 @@ namespace Narvalo.Fx
 
         #region Basic Monad functions
 
-        // Named "fmap", "liftA" or "<$>" (Applicative) in Haskell parlance.
         public static Ident<TResult> Select<TSource, TResult>(
             this Ident<TSource> @this,
             Func<TSource, TResult> selector)
@@ -240,7 +229,6 @@ namespace Narvalo.Fx
             return @this.Bind(_ => Ident.Of(selector.Invoke(_)));
         }
 
-        // Named ">>" (Monad) or "*>" (Applicative) in Haskell parlance.
         public static Ident<TResult> ReplaceBy<TSource, TResult>(
             this Ident<TSource> @this,
             Ident<TResult> other)
@@ -251,7 +239,6 @@ namespace Narvalo.Fx
             return @this.Bind(_ => other);
         }
 
-        // Named "void" in Haskell parlance.
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
         public static Ident<global::Narvalo.Fx.Unit> Skip<TSource>(this Ident<TSource> @this)
             /* T4: C# indent */
@@ -261,7 +248,6 @@ namespace Narvalo.Fx
             return Ident.Unit;
         }
 
-        // Named "forever" in Haskell parlance.
         public static Ident<TResult> Forever<TSource, TResult>(
             this Ident<TSource> @this,
             Func<Ident<TResult>> thunk)
@@ -319,7 +305,6 @@ namespace Narvalo.Fx
         #region Generalisations of list functions
 
 
-        // Named "replicateM" in Haskell parlance.
         public static Ident<IEnumerable<TSource>> Repeat<TSource>(
             this Ident<TSource> @this,
             int count)
@@ -335,7 +320,7 @@ namespace Narvalo.Fx
 
         #region Conditional execution of monadic expressions
 
-        // Named "when" in Haskell parlance. Haskell uses a different signature.
+        // Haskell uses a different signature.
         public static void When<TSource>(
             this Ident<TSource> @this,
             Func<TSource, bool> predicate,
@@ -354,7 +339,7 @@ namespace Narvalo.Fx
                 });
         }
 
-        // Named "unless" in Haskell parlance. Haskell uses a different signature.
+        // Haskell uses a different signature.
         public static void Unless<TSource>(
             this Ident<TSource> @this,
             Func<TSource, bool> predicate,
@@ -373,7 +358,6 @@ namespace Narvalo.Fx
         #region Applicative lifting operators
 
         /// <see cref="Lift{T1, T2, T3}" />
-        // Named "liftA2" (Applicative) in Haskell parlance.
         public static Ident<TResult> Zip<TFirst, TSecond, TResult>(
             this Ident<TFirst> @this,
             Ident<TSecond> second,
@@ -388,7 +372,6 @@ namespace Narvalo.Fx
         }
 
         /// <see cref="Lift{T1, T2, T3, T4}" />
-        // Named "liftA3" (Applicative) in Haskell parlance.
         public static Ident<TResult> Zip<T1, T2, T3, TResult>(
             this Ident<T1> @this,
             Ident<T2> second,
@@ -407,7 +390,6 @@ namespace Narvalo.Fx
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5}" />
-        // Named "liftA4" (Applicative) in Haskell parlance.
         public static Ident<TResult> Zip<T1, T2, T3, T4, TResult>(
              this Ident<T1> @this,
              Ident<T2> second,
@@ -430,7 +412,6 @@ namespace Narvalo.Fx
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5, T6}" />
-        // Named "liftA5" (Applicative) in Haskell parlance.
         public static Ident<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this Ident<T1> @this,
             Ident<T2> second,
@@ -492,7 +473,6 @@ namespace Narvalo.Fx
         #region Basic Monad functions
 
 
-        // Named "forM" in Haskell parlance. Same as SelectWith (mapM) with its arguments flipped.
         public static Ident<IEnumerable<TResult>> ForEach<TSource, TResult>(
             this Func<TSource, Ident<TResult>> @this,
             IEnumerable<TSource> seq)
@@ -504,7 +484,6 @@ namespace Narvalo.Fx
         }
 
 
-        // Named "=<<" in Haskell parlance. Same as Bind (>>=) with its arguments flipped.
         public static Ident<TResult> Invoke<TSource, TResult>(
             this Func<TSource, Ident<TResult>> @this,
             Ident<TSource> value)
@@ -516,7 +495,6 @@ namespace Narvalo.Fx
             return value.Bind(@this);
         }
 
-        // Named ">=>" in Haskell parlance.
         public static Func<TSource, Ident<TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, Ident<TMiddle>> @this,
             Func<TMiddle, Ident<TResult>> thunk)
@@ -529,7 +507,6 @@ namespace Narvalo.Fx
             return _ => @this.Invoke(_).Bind(thunk);
         }
 
-        // Named "<=<" in Haskell parlance.
         public static Func<TSource, Ident<TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, Ident<TResult>> @this,
             Func<TSource, Ident<TMiddle>> thunk)
@@ -551,7 +528,6 @@ namespace Narvalo.Fx
         #region Basic Monad functions
 
 
-        // Named "sequence" in Haskell parlance.
         public static Ident<IEnumerable<TSource>> Collect<TSource>(
             this IEnumerable<Ident<TSource>> @this)
         {

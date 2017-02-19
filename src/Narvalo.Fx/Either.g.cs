@@ -33,7 +33,6 @@ namespace Narvalo.Fx
         /// <typeparam name="TRight"></typeparam>
         /// <param name="value">A value to be wrapped into a <see cref="Either{T, TRight}"/> object.</param>
         /// <returns>An instance of the <see cref="Either{T, TRight}"/> class for the specified value.</returns>
-        // Named "return" (Monad) or "pure" (Applicative) in Haskell parlance.
         public static Either<T, TRight> Of<T, TRight>(T value)
             /* T4: C# indent */
         {
@@ -47,7 +46,6 @@ namespace Narvalo.Fx
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
         /// </summary>
-        // Named "join" in Haskell parlance.
         public static Either<T, TRight> Flatten<T, TRight>(Either<Either<T, TRight>, TRight> square)
             /* T4: C# indent */
         {
@@ -68,7 +66,6 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Either{T, TRight}" /> values.
         /// </summary>
-        // Named "liftM" in Haskell parlance.
         public static Func<Either<T, TRight>, Either<TResult, TRight>> Lift<T, TResult, TRight>(
             Func<T, TResult> thunk)
             /* T4: C# indent */
@@ -86,7 +83,6 @@ namespace Narvalo.Fx
         /// Promotes a function to use and return <see cref="Either{T, TRight}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        // Named "liftM2" in Haskell parlance.
         public static Func<Either<T1, TRight>, Either<T2, TRight>, Either<TResult, TRight>>
             Lift<T1, T2, TResult, TRight>(Func<T1, T2, TResult> thunk)
             /* T4: C# indent */
@@ -104,7 +100,6 @@ namespace Narvalo.Fx
         /// Promotes a function to use and return <see cref="Either{T, TRight}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        // Named "liftM3" in Haskell parlance.
         public static Func<Either<T1, TRight>, Either<T2, TRight>, Either<T3, TRight>, Either<TResult, TRight>>
             Lift<T1, T2, T3, TResult, TRight>(Func<T1, T2, T3, TResult> thunk)
             /* T4: C# indent */
@@ -122,7 +117,6 @@ namespace Narvalo.Fx
         /// Promotes a function to use and return <see cref="Either{T, TRight}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        // Named "liftM4" in Haskell parlance.
         public static Func<Either<T1, TRight>, Either<T2, TRight>, Either<T3, TRight>, Either<T4, TRight>, Either<TResult, TRight>>
             Lift<T1, T2, T3, T4, TResult, TRight>(
             Func<T1, T2, T3, T4, TResult> thunk)
@@ -141,7 +135,6 @@ namespace Narvalo.Fx
         /// Promotes a function to use and return <see cref="Either{T, TRight}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        // Named "liftM5" in Haskell parlance.
         public static Func<Either<T1, TRight>, Either<T2, TRight>, Either<T3, TRight>, Either<T4, TRight>, Either<T5, TRight>, Either<TResult, TRight>>
             Lift<T1, T2, T3, T4, T5, TResult, TRight>(
             Func<T1, T2, T3, T4, T5, TResult> thunk)
@@ -164,7 +157,6 @@ namespace Narvalo.Fx
     {
         #region Applicative
 
-        // Named "<$" (Applicative) in Haskell parlance.
         public static Either<TResult, TRight> Replace<TSource, TResult, TRight>(
             this Either<TSource, TRight> @this,
             TResult value)
@@ -176,7 +168,6 @@ namespace Narvalo.Fx
         }
 
 
-        // Named "<*>" in Haskell parlance. Same as Apply (<**>) with its arguments flipped.
         public static Either<TResult, TRight> Gather<TSource, TResult, TRight>(
             this Either<TSource, TRight> @this,
             Either<Func<TSource, TResult>, TRight> applicative)
@@ -187,7 +178,6 @@ namespace Narvalo.Fx
             return applicative.Apply(@this);
         }
 
-        // Named "<**>" in Haskell parlance. Same as Gather (<*>) with its arguments flipped.
         public static Either<TResult, TRight> Apply<TSource, TResult, TRight>(
             this Either<Func<TSource, TResult>, TRight> @this,
             Either<TSource, TRight> value)
@@ -213,7 +203,6 @@ namespace Narvalo.Fx
 
         #region Basic Monad functions
 
-        // Named "fmap", "liftA" or "<$>" (Applicative) in Haskell parlance.
         public static Either<TResult, TRight> Select<TSource, TResult, TRight>(
             this Either<TSource, TRight> @this,
             Func<TSource, TResult> selector)
@@ -225,7 +214,6 @@ namespace Narvalo.Fx
             return @this.Bind(_ => Either.Of<TResult, TRight>(selector.Invoke(_)));
         }
 
-        // Named ">>" (Monad) or "*>" (Applicative) in Haskell parlance.
         public static Either<TResult, TRight> ReplaceBy<TSource, TResult, TRight>(
             this Either<TSource, TRight> @this,
             Either<TResult, TRight> other)
@@ -236,7 +224,6 @@ namespace Narvalo.Fx
             return @this.Bind(_ => other);
         }
 
-        // Named "void" in Haskell parlance.
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
         public static Either<global::Narvalo.Fx.Unit, TRight> Skip<TSource, TRight>(this Either<TSource, TRight> @this)
             /* T4: C# indent */
@@ -247,7 +234,6 @@ namespace Narvalo.Fx
             return Either.Of<Unit, TRight>(global::Narvalo.Fx.Unit.Single);
         }
 
-        // Named "forever" in Haskell parlance.
         public static Either<TResult, TRight> Forever<TSource, TResult, TRight>(
             this Either<TSource, TRight> @this,
             Func<Either<TResult, TRight>> thunk)
@@ -305,7 +291,6 @@ namespace Narvalo.Fx
         #region Generalisations of list functions
 
 
-        // Named "replicateM" in Haskell parlance.
         public static Either<IEnumerable<TSource>, TRight> Repeat<TSource, TRight>(
             this Either<TSource, TRight> @this,
             int count)
@@ -321,7 +306,7 @@ namespace Narvalo.Fx
 
         #region Conditional execution of monadic expressions
 
-        // Named "when" in Haskell parlance. Haskell uses a different signature.
+        // Haskell uses a different signature.
         public static void When<TSource, TRight>(
             this Either<TSource, TRight> @this,
             Func<TSource, bool> predicate,
@@ -340,7 +325,7 @@ namespace Narvalo.Fx
                 });
         }
 
-        // Named "unless" in Haskell parlance. Haskell uses a different signature.
+        // Haskell uses a different signature.
         public static void Unless<TSource, TRight>(
             this Either<TSource, TRight> @this,
             Func<TSource, bool> predicate,
@@ -359,7 +344,6 @@ namespace Narvalo.Fx
         #region Applicative lifting operators
 
         /// <see cref="Lift{T1, T2, T3}" />
-        // Named "liftA2" (Applicative) in Haskell parlance.
         public static Either<TResult, TRight> Zip<TFirst, TSecond, TResult, TRight>(
             this Either<TFirst, TRight> @this,
             Either<TSecond, TRight> second,
@@ -374,7 +358,6 @@ namespace Narvalo.Fx
         }
 
         /// <see cref="Lift{T1, T2, T3, T4}" />
-        // Named "liftA3" (Applicative) in Haskell parlance.
         public static Either<TResult, TRight> Zip<T1, T2, T3, TResult, TRight>(
             this Either<T1, TRight> @this,
             Either<T2, TRight> second,
@@ -393,7 +376,6 @@ namespace Narvalo.Fx
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5}" />
-        // Named "liftA4" (Applicative) in Haskell parlance.
         public static Either<TResult, TRight> Zip<T1, T2, T3, T4, TResult, TRight>(
              this Either<T1, TRight> @this,
              Either<T2, TRight> second,
@@ -416,7 +398,6 @@ namespace Narvalo.Fx
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5, T6}" />
-        // Named "liftA5" (Applicative) in Haskell parlance.
         public static Either<TResult, TRight> Zip<T1, T2, T3, T4, T5, TResult, TRight>(
             this Either<T1, TRight> @this,
             Either<T2, TRight> second,
@@ -478,7 +459,6 @@ namespace Narvalo.Fx
         #region Basic Monad functions
 
 
-        // Named "forM" in Haskell parlance. Same as SelectWith (mapM) with its arguments flipped.
         public static Either<IEnumerable<TResult>, TRight> ForEach<TSource, TResult, TRight>(
             this Func<TSource, Either<TResult, TRight>> @this,
             IEnumerable<TSource> seq)
@@ -491,7 +471,6 @@ namespace Narvalo.Fx
         }
 
 
-        // Named "=<<" in Haskell parlance. Same as Bind (>>=) with its arguments flipped.
         public static Either<TResult, TRight> Invoke<TSource, TResult, TRight>(
             this Func<TSource, Either<TResult, TRight>> @this,
             Either<TSource, TRight> value)
@@ -503,7 +482,6 @@ namespace Narvalo.Fx
             return value.Bind(@this);
         }
 
-        // Named ">=>" in Haskell parlance.
         public static Func<TSource, Either<TResult, TRight>> Compose<TSource, TMiddle, TResult, TRight>(
             this Func<TSource, Either<TMiddle, TRight>> @this,
             Func<TMiddle, Either<TResult, TRight>> thunk)
@@ -516,7 +494,6 @@ namespace Narvalo.Fx
             return _ => @this.Invoke(_).Bind(thunk);
         }
 
-        // Named "<=<" in Haskell parlance.
         public static Func<TSource, Either<TResult, TRight>> ComposeBack<TSource, TMiddle, TResult, TRight>(
             this Func<TMiddle, Either<TResult, TRight>> @this,
             Func<TSource, Either<TMiddle, TRight>> thunk)
@@ -538,7 +515,6 @@ namespace Narvalo.Fx
         #region Basic Monad functions
 
 
-        // Named "sequence" in Haskell parlance.
         public static Either<IEnumerable<TSource>, TRight> Collect<TSource, TRight>(
             this IEnumerable<Either<TSource, TRight>> @this)
         {

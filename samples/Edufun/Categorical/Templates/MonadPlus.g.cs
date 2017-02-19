@@ -50,7 +50,6 @@ namespace Edufun.Categorical.Templates
         /// Gets the zero for <see cref="MonadPlus{T}"/>.
         /// </summary>
         /// <value>The zero for <see cref="MonadPlus{T}"/>.</value>
-        // Named "mzero" (MonadPlus) in Haskell parlance.
         public static MonadPlus<global::Narvalo.Fx.Unit> Zero
         {
             get
@@ -68,7 +67,6 @@ namespace Edufun.Categorical.Templates
         /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
         /// <param name="value">A value to be wrapped into a <see cref="MonadPlus{T}"/> object.</param>
         /// <returns>An instance of the <see cref="MonadPlus{T}"/> class for the specified value.</returns>
-        // Named "return" (Monad) or "pure" (Applicative) in Haskell parlance.
         public static MonadPlus<T> Of<T>(T value)
             /* T4: C# indent */
         {
@@ -82,7 +80,6 @@ namespace Edufun.Categorical.Templates
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
         /// </summary>
-        // Named "join" in Haskell parlance.
         public static MonadPlus<T> Flatten<T>(MonadPlus<MonadPlus<T>> square)
             /* T4: C# indent */
         {
@@ -97,7 +94,6 @@ namespace Edufun.Categorical.Templates
         #region Conditional execution of monadic expressions
 
 
-        // Named "guard" in Haskell parlance.
         public static MonadPlus<global::Narvalo.Fx.Unit> Guard(bool predicate)
         {
             Warrant.NotNull<MonadPlus<global::Narvalo.Fx.Unit>>();
@@ -113,7 +109,6 @@ namespace Edufun.Categorical.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadPlus{T}" /> values.
         /// </summary>
-        // Named "liftM" in Haskell parlance.
         public static Func<MonadPlus<T>, MonadPlus<TResult>> Lift<T, TResult>(
             Func<T, TResult> thunk)
             /* T4: C# indent */
@@ -131,7 +126,6 @@ namespace Edufun.Categorical.Templates
         /// Promotes a function to use and return <see cref="MonadPlus{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        // Named "liftM2" in Haskell parlance.
         public static Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> thunk)
             /* T4: C# indent */
@@ -149,7 +143,6 @@ namespace Edufun.Categorical.Templates
         /// Promotes a function to use and return <see cref="MonadPlus{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        // Named "liftM3" in Haskell parlance.
         public static Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<T3>, MonadPlus<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> thunk)
             /* T4: C# indent */
@@ -167,7 +160,6 @@ namespace Edufun.Categorical.Templates
         /// Promotes a function to use and return <see cref="MonadPlus{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        // Named "liftM4" in Haskell parlance.
         public static Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<T3>, MonadPlus<T4>, MonadPlus<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> thunk)
@@ -186,7 +178,6 @@ namespace Edufun.Categorical.Templates
         /// Promotes a function to use and return <see cref="MonadPlus{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        // Named "liftM5" in Haskell parlance.
         public static Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<T3>, MonadPlus<T4>, MonadPlus<T5>, MonadPlus<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> thunk)
@@ -209,7 +200,6 @@ namespace Edufun.Categorical.Templates
     {
         #region Applicative
 
-        // Named "<$" (Applicative) in Haskell parlance.
         public static MonadPlus<TResult> Replace<TSource, TResult>(
             this MonadPlus<TSource> @this,
             TResult value)
@@ -222,7 +212,6 @@ namespace Edufun.Categorical.Templates
         }
 
 
-        // Named "<*>" in Haskell parlance. Same as Apply (<**>) with its arguments flipped.
         public static MonadPlus<TResult> Gather<TSource, TResult>(
             this MonadPlus<TSource> @this,
             MonadPlus<Func<TSource, TResult>> applicative)
@@ -233,7 +222,6 @@ namespace Edufun.Categorical.Templates
             return applicative.Apply(@this);
         }
 
-        // Named "<**>" in Haskell parlance. Same as Gather (<*>) with its arguments flipped.
         public static MonadPlus<TResult> Apply<TSource, TResult>(
             this MonadPlus<Func<TSource, TResult>> @this,
             MonadPlus<TSource> value)
@@ -259,7 +247,6 @@ namespace Edufun.Categorical.Templates
 
         #region Basic Monad functions
 
-        // Named "fmap", "liftA" or "<$>" (Applicative) in Haskell parlance.
         public static MonadPlus<TResult> Select<TSource, TResult>(
             this MonadPlus<TSource> @this,
             Func<TSource, TResult> selector)
@@ -272,7 +259,6 @@ namespace Edufun.Categorical.Templates
             return @this.Bind(_ => MonadPlus.Of(selector.Invoke(_)));
         }
 
-        // Named ">>" (Monad) or "*>" (Applicative) in Haskell parlance.
         public static MonadPlus<TResult> ReplaceBy<TSource, TResult>(
             this MonadPlus<TSource> @this,
             MonadPlus<TResult> other)
@@ -284,7 +270,6 @@ namespace Edufun.Categorical.Templates
             return @this.Bind(_ => other);
         }
 
-        // Named "void" in Haskell parlance.
         public static MonadPlus<global::Narvalo.Fx.Unit> Skip<TSource>(this MonadPlus<TSource> @this)
             /* T4: C# indent */
         {
@@ -294,7 +279,6 @@ namespace Edufun.Categorical.Templates
             return MonadPlus.Unit;
         }
 
-        // Named "forever" in Haskell parlance.
         public static MonadPlus<TResult> Forever<TSource, TResult>(
             this MonadPlus<TSource> @this,
             Func<MonadPlus<TResult>> thunk)
@@ -369,7 +353,6 @@ namespace Edufun.Categorical.Templates
         #region Generalisations of list functions
 
 
-        // Named "mfilter" in Haskell parlance.
         public static MonadPlus<TSource> Where<TSource>(
             this MonadPlus<TSource> @this,
             Func<TSource, bool> predicate)
@@ -384,7 +367,6 @@ namespace Edufun.Categorical.Templates
         }
 
 
-        // Named "replicateM" in Haskell parlance.
         public static MonadPlus<IEnumerable<TSource>> Repeat<TSource>(
             this MonadPlus<TSource> @this,
             int count)
@@ -401,7 +383,7 @@ namespace Edufun.Categorical.Templates
 
         #region Conditional execution of monadic expressions
 
-        // Named "when" in Haskell parlance. Haskell uses a different signature.
+        // Haskell uses a different signature.
         public static void When<TSource>(
             this MonadPlus<TSource> @this,
             Func<TSource, bool> predicate,
@@ -420,7 +402,7 @@ namespace Edufun.Categorical.Templates
                 });
         }
 
-        // Named "unless" in Haskell parlance. Haskell uses a different signature.
+        // Haskell uses a different signature.
         public static void Unless<TSource>(
             this MonadPlus<TSource> @this,
             Func<TSource, bool> predicate,
@@ -439,7 +421,6 @@ namespace Edufun.Categorical.Templates
         #region Applicative lifting operators
 
         /// <see cref="Lift{T1, T2, T3}" />
-        // Named "liftA2" (Applicative) in Haskell parlance.
         public static MonadPlus<TResult> Zip<TFirst, TSecond, TResult>(
             this MonadPlus<TFirst> @this,
             MonadPlus<TSecond> second,
@@ -455,7 +436,6 @@ namespace Edufun.Categorical.Templates
         }
 
         /// <see cref="Lift{T1, T2, T3, T4}" />
-        // Named "liftA3" (Applicative) in Haskell parlance.
         public static MonadPlus<TResult> Zip<T1, T2, T3, TResult>(
             this MonadPlus<T1> @this,
             MonadPlus<T2> second,
@@ -475,7 +455,6 @@ namespace Edufun.Categorical.Templates
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5}" />
-        // Named "liftA4" (Applicative) in Haskell parlance.
         public static MonadPlus<TResult> Zip<T1, T2, T3, T4, TResult>(
              this MonadPlus<T1> @this,
              MonadPlus<T2> second,
@@ -499,7 +478,6 @@ namespace Edufun.Categorical.Templates
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5, T6}" />
-        // Named "liftA5" (Applicative) in Haskell parlance.
         public static MonadPlus<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this MonadPlus<T1> @this,
             MonadPlus<T2> second,
@@ -732,7 +710,6 @@ namespace Edufun.Categorical.Templates
         #region Basic Monad functions
 
 
-        // Named "forM" in Haskell parlance. Same as SelectWith (mapM) with its arguments flipped.
         public static MonadPlus<IEnumerable<TResult>> ForEach<TSource, TResult>(
             this Func<TSource, MonadPlus<TResult>> @this,
             IEnumerable<TSource> seq)
@@ -745,7 +722,6 @@ namespace Edufun.Categorical.Templates
         }
 
 
-        // Named "=<<" in Haskell parlance. Same as Bind (>>=) with its arguments flipped.
         public static MonadPlus<TResult> Invoke<TSource, TResult>(
             this Func<TSource, MonadPlus<TResult>> @this,
             MonadPlus<TSource> value)
@@ -758,7 +734,6 @@ namespace Edufun.Categorical.Templates
             return value.Bind(@this);
         }
 
-        // Named ">=>" in Haskell parlance.
         public static Func<TSource, MonadPlus<TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, MonadPlus<TMiddle>> @this,
             Func<TMiddle, MonadPlus<TResult>> thunk)
@@ -771,7 +746,6 @@ namespace Edufun.Categorical.Templates
             return _ => @this.Invoke(_).Bind(thunk);
         }
 
-        // Named "<=<" in Haskell parlance.
         public static Func<TSource, MonadPlus<TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, MonadPlus<TResult>> @this,
             Func<TSource, MonadPlus<TMiddle>> thunk)
@@ -793,7 +767,6 @@ namespace Edufun.Categorical.Templates
         #region Basic Monad functions
 
 
-        // Named "sequence" in Haskell parlance.
         public static MonadPlus<IEnumerable<TSource>> Collect<TSource>(
             this IEnumerable<MonadPlus<TSource>> @this)
         {
@@ -809,7 +782,6 @@ namespace Edufun.Categorical.Templates
 
         #region Generalisations of list functions
 
-        // Named "msum" in Haskell parlance.
         public static MonadPlus<TSource> Sum<TSource>(
             this IEnumerable<MonadPlus<TSource>> @this)
             /* T4: C# indent */
@@ -904,7 +876,6 @@ namespace Edufun.Categorical.Templates.Linq
         #region Basic Monad functions
 
 
-        // Named "mapM" in Haskell parlance.
         public static MonadPlus<IEnumerable<TResult>> SelectWith<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, MonadPlus<TResult>> selector)
@@ -922,7 +893,6 @@ namespace Edufun.Categorical.Templates.Linq
         #region Generalisations of list functions
 
 
-        // Named "filterM" in Haskell parlance.
         public static MonadPlus<IEnumerable<TSource>> WhereBy<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, MonadPlus<bool>> predicate)
@@ -935,7 +905,6 @@ namespace Edufun.Categorical.Templates.Linq
             return @this.WhereByImpl(predicate);
         }
 
-        // Named "mapAndUnzipM" in Haskell parlance.
         public static MonadPlus<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
             SelectUnzip<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
@@ -948,7 +917,6 @@ namespace Edufun.Categorical.Templates.Linq
             return @this.SelectUnzipImpl(thunk);
         }
 
-        // Named "zipWithM" in Haskell parlance.
         public static MonadPlus<IEnumerable<TResult>> ZipWith<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
@@ -963,7 +931,6 @@ namespace Edufun.Categorical.Templates.Linq
         }
 
 
-        // Named "foldM" in Haskell parlance.
         public static MonadPlus<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,

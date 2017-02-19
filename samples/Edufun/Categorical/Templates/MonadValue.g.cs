@@ -49,7 +49,6 @@ namespace Edufun.Categorical.Templates
         /// Gets the zero for <see cref="MonadValue{T}"/>.
         /// </summary>
         /// <value>The zero for <see cref="MonadValue{T}"/>.</value>
-        // Named "mzero" (MonadPlus) in Haskell parlance.
         public static MonadValue<global::Narvalo.Fx.Unit> None
         {
             get
@@ -66,7 +65,6 @@ namespace Edufun.Categorical.Templates
         /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
         /// <param name="value">A value to be wrapped into a <see cref="MonadValue{T}"/> object.</param>
         /// <returns>An instance of the <see cref="MonadValue{T}"/> class for the specified value.</returns>
-        // Named "return" (Monad) or "pure" (Applicative) in Haskell parlance.
         public static MonadValue<T> Of<T>(T value)
             where T : struct
         {
@@ -79,7 +77,6 @@ namespace Edufun.Categorical.Templates
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
         /// </summary>
-        // Named "join" in Haskell parlance.
         public static MonadValue<T> Flatten<T>(MonadValue<MonadValue<T>> square)
             where T : struct
         {
@@ -92,7 +89,6 @@ namespace Edufun.Categorical.Templates
         #region Conditional execution of monadic expressions
 
 
-        // Named "guard" in Haskell parlance.
         public static MonadValue<global::Narvalo.Fx.Unit> Guard(bool predicate)
         {
 
@@ -107,7 +103,6 @@ namespace Edufun.Categorical.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadValue{T}" /> values.
         /// </summary>
-        // Named "liftM" in Haskell parlance.
         public static Func<MonadValue<T>, MonadValue<TResult>> Lift<T, TResult>(
             Func<T, TResult> thunk)
             where T : struct
@@ -126,7 +121,6 @@ namespace Edufun.Categorical.Templates
         /// Promotes a function to use and return <see cref="MonadValue{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        // Named "liftM2" in Haskell parlance.
         public static Func<MonadValue<T1>, MonadValue<T2>, MonadValue<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> thunk)
             where T1 : struct
@@ -146,7 +140,6 @@ namespace Edufun.Categorical.Templates
         /// Promotes a function to use and return <see cref="MonadValue{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        // Named "liftM3" in Haskell parlance.
         public static Func<MonadValue<T1>, MonadValue<T2>, MonadValue<T3>, MonadValue<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> thunk)
             where T1 : struct
@@ -167,7 +160,6 @@ namespace Edufun.Categorical.Templates
         /// Promotes a function to use and return <see cref="MonadValue{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        // Named "liftM4" in Haskell parlance.
         public static Func<MonadValue<T1>, MonadValue<T2>, MonadValue<T3>, MonadValue<T4>, MonadValue<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> thunk)
@@ -190,7 +182,6 @@ namespace Edufun.Categorical.Templates
         /// Promotes a function to use and return <see cref="MonadValue{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
-        // Named "liftM5" in Haskell parlance.
         public static Func<MonadValue<T1>, MonadValue<T2>, MonadValue<T3>, MonadValue<T4>, MonadValue<T5>, MonadValue<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> thunk)
@@ -218,7 +209,6 @@ namespace Edufun.Categorical.Templates
     {
         #region Applicative
 
-        // Named "<$" (Applicative) in Haskell parlance.
         public static MonadValue<TResult> Replace<TSource, TResult>(
             this MonadValue<TSource> @this,
             TResult value)
@@ -235,7 +225,6 @@ namespace Edufun.Categorical.Templates
 
         #region Basic Monad functions
 
-        // Named "fmap", "liftA" or "<$>" (Applicative) in Haskell parlance.
         public static MonadValue<TResult> Select<TSource, TResult>(
             this MonadValue<TSource> @this,
             Func<TSource, TResult> selector)
@@ -248,7 +237,6 @@ namespace Edufun.Categorical.Templates
             return @this.Bind(_ => MonadValue.Of(selector.Invoke(_)));
         }
 
-        // Named ">>" (Monad) or "*>" (Applicative) in Haskell parlance.
         public static MonadValue<TResult> ReplaceBy<TSource, TResult>(
             this MonadValue<TSource> @this,
             MonadValue<TResult> other)
@@ -260,7 +248,6 @@ namespace Edufun.Categorical.Templates
             return @this.Bind(_ => other);
         }
 
-        // Named "void" in Haskell parlance.
         public static MonadValue<global::Narvalo.Fx.Unit> Skip<TSource>(this MonadValue<TSource> @this)
             where TSource : struct
         {
@@ -269,7 +256,6 @@ namespace Edufun.Categorical.Templates
             return MonadValue.Unit;
         }
 
-        // Named "forever" in Haskell parlance.
         public static MonadValue<TResult> Forever<TSource, TResult>(
             this MonadValue<TSource> @this,
             Func<MonadValue<TResult>> thunk)
@@ -344,7 +330,6 @@ namespace Edufun.Categorical.Templates
         #region Generalisations of list functions
 
 
-        // Named "mfilter" in Haskell parlance.
         public static MonadValue<TSource> Where<TSource>(
             this MonadValue<TSource> @this,
             Func<TSource, bool> predicate)
@@ -362,7 +347,7 @@ namespace Edufun.Categorical.Templates
 
         #region Conditional execution of monadic expressions
 
-        // Named "when" in Haskell parlance. Haskell uses a different signature.
+        // Haskell uses a different signature.
         public static void When<TSource>(
             this MonadValue<TSource> @this,
             Func<TSource, bool> predicate,
@@ -381,7 +366,7 @@ namespace Edufun.Categorical.Templates
                 });
         }
 
-        // Named "unless" in Haskell parlance. Haskell uses a different signature.
+        // Haskell uses a different signature.
         public static void Unless<TSource>(
             this MonadValue<TSource> @this,
             Func<TSource, bool> predicate,
@@ -400,7 +385,6 @@ namespace Edufun.Categorical.Templates
         #region Applicative lifting operators
 
         /// <see cref="Lift{T1, T2, T3}" />
-        // Named "liftA2" (Applicative) in Haskell parlance.
         public static MonadValue<TResult> Zip<TFirst, TSecond, TResult>(
             this MonadValue<TFirst> @this,
             MonadValue<TSecond> second,
@@ -417,7 +401,6 @@ namespace Edufun.Categorical.Templates
         }
 
         /// <see cref="Lift{T1, T2, T3, T4}" />
-        // Named "liftA3" (Applicative) in Haskell parlance.
         public static MonadValue<TResult> Zip<T1, T2, T3, TResult>(
             this MonadValue<T1> @this,
             MonadValue<T2> second,
@@ -439,7 +422,6 @@ namespace Edufun.Categorical.Templates
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5}" />
-        // Named "liftA4" (Applicative) in Haskell parlance.
         public static MonadValue<TResult> Zip<T1, T2, T3, T4, TResult>(
              this MonadValue<T1> @this,
              MonadValue<T2> second,
@@ -466,7 +448,6 @@ namespace Edufun.Categorical.Templates
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5, T6}" />
-        // Named "liftA5" (Applicative) in Haskell parlance.
         public static MonadValue<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this MonadValue<T1> @this,
             MonadValue<T2> second,
@@ -710,7 +691,6 @@ namespace Edufun.Categorical.Templates
         #region Basic Monad functions
 
 
-        // Named "=<<" in Haskell parlance. Same as Bind (>>=) with its arguments flipped.
         public static MonadValue<TResult> Invoke<TSource, TResult>(
             this Func<TSource, MonadValue<TResult>> @this,
             MonadValue<TSource> value)
@@ -723,7 +703,6 @@ namespace Edufun.Categorical.Templates
             return value.Bind(@this);
         }
 
-        // Named ">=>" in Haskell parlance.
         public static Func<TSource, MonadValue<TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, MonadValue<TMiddle>> @this,
             Func<TMiddle, MonadValue<TResult>> thunk)
@@ -738,7 +717,6 @@ namespace Edufun.Categorical.Templates
             return _ => @this.Invoke(_).Bind(thunk);
         }
 
-        // Named "<=<" in Haskell parlance.
         public static Func<TSource, MonadValue<TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, MonadValue<TResult>> @this,
             Func<TSource, MonadValue<TMiddle>> thunk)
@@ -767,7 +745,6 @@ namespace Edufun.Categorical.Templates
 
         #region Generalisations of list functions
 
-        // Named "msum" in Haskell parlance.
         public static MonadValue<TSource> Sum<TSource>(
             this IEnumerable<MonadValue<TSource>> @this)
             where TSource : struct
@@ -833,7 +810,6 @@ namespace Edufun.Categorical.Templates.Linq
         #region Generalisations of list functions
 
 
-        // Named "foldM" in Haskell parlance.
         public static MonadValue<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
