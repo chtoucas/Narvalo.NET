@@ -19,4 +19,12 @@ namespace Edufun.Categorical.Language
             return other.Gather(second);
         }
     }
+
+    public partial class Monad<T>
+    {
+        public Monad<TResult> ReplaceBy<TResult>(Monad<TResult> other)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

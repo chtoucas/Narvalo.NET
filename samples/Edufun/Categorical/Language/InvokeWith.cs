@@ -17,4 +17,10 @@ namespace Edufun.Categorical.Language
         public Applicative<TResult> InvokeWith<T, TResult>(Func<T, TResult> selector, Applicative<T> value)
             => value.Select(selector);
     }
+
+    public partial class Monad
+    {
+        public Monad<TResult> InvokeWith<T, TResult>(Func<T, TResult> selector, Monad<T> value)
+            => value.Select(selector);
+    }
 }

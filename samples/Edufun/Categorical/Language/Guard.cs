@@ -6,15 +6,9 @@ namespace Edufun.Categorical.Language
 
     using Narvalo.Fx;
 
-    public partial class Functor<T>
+    public partial class Monad
     {
-        // void x = () <$ x
-        public Functor<Unit> Skip() => Replace(Unit.Single);
-    }
-
-    public partial class Monad<T>
-    {
-        public Monad<Unit> Skip()
+        public Monad<Unit> Guard(bool predicate)
         {
             throw new NotImplementedException();
         }

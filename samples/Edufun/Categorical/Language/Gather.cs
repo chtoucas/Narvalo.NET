@@ -9,4 +9,12 @@ namespace Edufun.Categorical.Language
         Applicative<TResult> IApplicative<T>.Gather<TResult>(Applicative<Func<T, TResult>> applicative)
             => Gather(applicative);
     }
+
+    public partial class Monad<T>
+    {
+        public Monad<TResult> Gather<TResult>(Monad<Func<T, TResult>> applicative)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

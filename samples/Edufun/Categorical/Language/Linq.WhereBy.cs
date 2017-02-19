@@ -3,18 +3,11 @@
 namespace Edufun.Categorical.Language
 {
     using System;
+    using System.Collections.Generic;
 
-    using Narvalo.Fx;
-
-    public partial class Functor<T>
+    public partial class Monad
     {
-        // void x = () <$ x
-        public Functor<Unit> Skip() => Replace(Unit.Single);
-    }
-
-    public partial class Monad<T>
-    {
-        public Monad<Unit> Skip()
+        public Monad<IEnumerable<TSource>> WhereBy<TSource>(IEnumerable<TSource> @this, Func<TSource, Monad<bool>> predicate)
         {
             throw new NotImplementedException();
         }

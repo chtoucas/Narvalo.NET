@@ -6,6 +6,6 @@ namespace Edufun.Categorical.Language
     {
         // ($>) = flip (<$)
         public Functor<TResult> Inject<T, TResult>(TResult other, Functor<T> value)
-            => value.Select(_ => other);
+            => value.Replace(other);
     }
 }

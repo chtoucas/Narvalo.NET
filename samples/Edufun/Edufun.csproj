@@ -12,8 +12,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Categorical\Alternative.cs" />
+    <Compile Include="Categorical\Language\Collect.cs" />
+    <Compile Include="Categorical\Language\Kleisli.Compose.cs" />
+    <Compile Include="Categorical\Language\Kleisli.ComposeBack.cs" />
+    <Compile Include="Categorical\Language\Linq.Fold.cs" />
+    <Compile Include="Categorical\Language\Kleisli.ForEach.cs" />
+    <Compile Include="Categorical\Language\Guard.cs" />
+    <Compile Include="Categorical\Language\Kleisli.Invoke.cs" />
+    <Compile Include="Categorical\Language\Lift.cs" />
+    <Compile Include="Categorical\Language\Linq.SelectUnzip.cs" />
+    <Compile Include="Categorical\Language\Linq.SelectWith.cs" />
+    <Compile Include="Categorical\Language\When.cs" />
+    <Compile Include="Categorical\Language\Unless.cs" />
+    <Compile Include="Categorical\Language\Repeat.cs" />
+    <Compile Include="Categorical\Language\Forever.cs" />
     <Compile Include="Categorical\Language\Bind.cs" />
     <Compile Include="Categorical\Language\Join.cs" />
+    <Compile Include="Categorical\Language\Linq.WhereBy.cs" />
+    <Compile Include="Categorical\Language\Linq.ZipWith.cs" />
     <Compile Include="Categorical\Rules\ApplicativeRules.cs" />
     <Compile Include="Categorical\Rules\FunctorRules.cs" />
     <Compile Include="Categorical\FakeClassException.cs" />

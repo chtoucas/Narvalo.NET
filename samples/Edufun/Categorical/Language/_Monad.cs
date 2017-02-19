@@ -6,7 +6,7 @@ namespace Edufun.Categorical.Language
 {
     using System;
 
-    public partial class Monad : IMonad //, IMonadGrammar
+    public partial class Monad : IMonad, IMonadGrammar
     {
         public static Monad<T> Of<T>(T value) { throw new FakeClassException(); }
 
@@ -26,7 +26,7 @@ namespace Edufun.Categorical.Language
         public Monad<T> Join<T>(Monad<Monad<T>> square) => Flatten(square);
     }
 
-    public partial class Monad<T> : IMonad<T> //, IMonadGrammar<T>
+    public partial class Monad<T> : IMonad<T>, IMonadGrammar<T>
     {
         public Monad<TResult> Bind<TResult>(Func<T, Monad<TResult>> selector)
         {
