@@ -2,7 +2,7 @@
 
 //#define COMONAD_VIA_MAP_COMULTIPLY
 
-namespace Edufun.Categorical
+namespace Edufun.Categorical.Tmp
 {
     using System;
 

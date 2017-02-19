@@ -12,21 +12,41 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Categorical\Alternative.cs" />
-    <Compile Include="Categorical\Cokun.cs" />
-    <Compile Include="Categorical\FakeException.cs" />
+    <Compile Include="Categorical\Language\Bind.cs" />
+    <Compile Include="Categorical\Language\Join.cs" />
+    <Compile Include="Categorical\Rules\ApplicativeRules.cs" />
+    <Compile Include="Categorical\Rules\FunctorRules.cs" />
+    <Compile Include="Categorical\FakeClassException.cs" />
     <Compile Include="Categorical\Functor.cs" />
+    <Compile Include="Categorical\Language\Apply.cs" />
+    <Compile Include="Categorical\Language\Pure.cs" />
+    <Compile Include="Categorical\Language\Zip.cs" />
+    <Compile Include="Categorical\Language\InvokeWith.cs" />
+    <Compile Include="Categorical\Language\Inject.cs" />
+    <Compile Include="Categorical\Language\Ignore.cs" />
+    <Compile Include="Categorical\Language\ReplaceBy.cs" />
+    <Compile Include="Categorical\Language\Replace.cs" />
+    <Compile Include="Categorical\Language\Gather.cs" />
+    <Compile Include="Categorical\Language\Select.cs" />
+    <Compile Include="Categorical\Language\Skip.cs" />
+    <Compile Include="Categorical\Language\_Applicative.cs" />
+    <Compile Include="Categorical\Language\_Functor.cs" />
+    <Compile Include="Categorical\Language\_Monad.cs" />
+    <Compile Include="Categorical\Tmp\Kleisli.cs" />
+    <Compile Include="Categorical\Tmp\Monad.cs" />
+    <Compile Include="Categorical\Tmp\Mu.cs" />
+    <Compile Include="Categorical\Tmp\Rules.cs" />
     <Compile Include="Linq\IGroupingQuerySyntax`1.cs" />
     <Compile Include="Linq\IOrderedQuerySyntax`1.cs" />
     <Compile Include="Linq\IQuerySyntax.cs" />
     <Compile Include="Linq\IQuerySyntax`1.cs" />
     <Compile Include="Linq\Qperators.cs" />
     <Compile Include="Categorical\MonadPlus.cs" />
-    <Compile Include="Categorical\Mu.cs" />
     <Compile Include="Sequences\Recursion.cs" />
     <Compile Include="Sequences\PythagoreanTriples.cs" />
     <Compile Include="Sequences\Fibonacci.cs" />
     <Compile Include="Categorical\Applicative.cs" />
-    <Compile Include="Categorical\Comonad.cs" />
+    <Compile Include="Categorical\Tmp\Comonad.cs" />
     <Compile Include="Categorical\Templates\Comonad.g.cs">
       <DependentUpon>Comonad.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -64,11 +84,9 @@
     </Compile>
     <Compile Include="Categorical\Templates\MonadZero`1.cs" />
     <Compile Include="Categorical\Templates\Monad`1.cs" />
-    <Compile Include="Categorical\Kleisli.cs" />
     <Compile Include="Categorical\Monad.cs" />
     <Compile Include="Categorical\NamespaceDoc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Categorical\Rules.cs" />
     <Compile Include="Sequences\Recursive`2.cs" />
     <Compile Include="Sequences\YCombinator.cs" />
   </ItemGroup>

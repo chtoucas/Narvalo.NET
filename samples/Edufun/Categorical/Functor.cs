@@ -4,6 +4,7 @@ namespace Edufun.Categorical
 {
     using System;
 
+    using Edufun.Categorical.Language;
     using Narvalo.Fx;
 
     // [Haskell] Data.Functor
@@ -20,7 +21,10 @@ namespace Edufun.Categorical
     {
         // [Haskell] fmap :: (a -> b) -> f a -> f b
         Functor<TResult> Select<TResult>(Func<T, TResult> selector);
+    }
 
+    public interface IFunctorGrammar<T>
+    {
         // [Haskell] (<$) :: Functor f => a -> f b -> f a
         // Replace all locations in the input with the same value.
         Functor<TResult> Replace<TResult>(TResult other);
@@ -30,7 +34,7 @@ namespace Edufun.Categorical
         Functor<Unit> Skip();
     }
 
-    public interface IFunctor
+    public interface IFunctorGrammar
     {
         // [Haskell] ($>) :: Functor f => f a -> b -> f b
         // Flipped version of <$.
@@ -39,50 +43,5 @@ namespace Edufun.Categorical
         // [Haskell] (<$>) :: Functor f => (a -> b) -> f a -> f b
         // An infix synonym for fmap.
         Functor<TResult> InvokeWith<T, TResult>(Func<T, TResult> selector, Functor<T> value);
-    }
-
-    public partial class Functor<T> : IFunctor<T>
-    {
-        public Functor<TResult> Select<TResult>(Func<T, TResult> selector)
-        {
-            throw new FakeClassException();
-        }
-
-        // GHC.Base: (<$) = fmap . const
-        public Functor<TResult> Replace<TResult>(TResult other) => Select(_ => other);
-
-        // void x = () <$ x
-        public Functor<Unit> Skip() => Replace(Unit.Single);
-    }
-
-    public class Functor : IFunctor
-    {
-        // ($>) = flip (<$)
-        public Functor<TResult> Inject<T, TResult>(TResult other, Functor<T> value)
-            => value.Select(_ => other);
-
-        // (<$>) = fmap
-        public Functor<TResult> InvokeWith<T, TResult>(Func<T, TResult> selector, Functor<T> value)
-            => value.Select(selector);
-    }
-
-    public static class FunctorRules
-    {
-        // First law: the identity map is a fixed point for Select.
-        // fmap id  ==  id
-        public static bool FirstLaw<X>(Functor<X> me)
-        {
-            Func<X, X> id = _ => _;
-            Func<Functor<X>, Functor<X>> idM = _ => _;
-
-            return me.Select(id) == idM.Invoke(me);
-        }
-
-        // Second law: Select preserves the composition operator.
-        // fmap (f . g)  ==  fmap f . fmap g
-        public static bool SecondLaw<X, Y, Z>(Functor<X> me, Func<Y, Z> f, Func<X, Y> g)
-        {
-            return me.Select(_ => f(g(_))) == me.Select(g).Select(f);
-        }
     }
 }

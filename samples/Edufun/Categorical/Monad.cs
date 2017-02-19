@@ -1,25 +1,23 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-//#define MONAD_VIA_MAP_MULTIPLY
-
 namespace Edufun.Categorical
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
 
+    using Edufun.Categorical.Language;
     using Narvalo.Fx;
 
     // [Haskell] Control.Monad
     //
     // Translation map from Haskell to .NET:
     // - >>=            obj.Bind            (required)
-    // - >>             obj.ReplaceBy       <- Applicative::*>
-    // - return         Monad.Return        <- Applicative::pure
+    // - >>             obj.ReplaceBy                       <- Applicative::*>
+    // - return         Monad<T>.Pure       (required)      <- Applicative::pure
     //                  Monad.Of
     // - fail
     // Alternative requirement:
-    // - fmap           obj.Select          (required) <- Functor::fmap, Applicative::liftA
+    // - fmap           obj.Select          (alt-required)  <- Functor::fmap, Applicative::liftA
     //
     // Basic Monad functions:
     // - mapM           Monad.SelectWith
@@ -32,10 +30,11 @@ namespace Edufun.Categorical
     // - (>=>)          Monad.Compose
     // - (<=<)          Monad.ComposeBack
     // - forever        obj.Forever
-    // - void           obj.Skip            <- Functor::void
+    // - void           obj.Skip                            <- Functor::void
     //
     // Generalisations of list functions:
-    // - join           Monad.Flatten
+    // - join           Monad<T>.Join       (alt-required)
+    //                  Monad.Flatten
     // - filterM        Monad.WhereBy
     // - mapAndUnzipM   Monad.SelectUnzip
     // - zipWithM       Monad.ZipWith
@@ -56,10 +55,10 @@ namespace Edufun.Categorical
     // - liftM3         Monad.Lift
     // - liftM4         Monad.Lift
     // - liftM5         Monad.Lift
-    // - ap             obj.Gather          <- Applicative::<*>
+    // - ap             obj.Gather                          <- Applicative::<*>
     //
     // Strict monadic functions:
-    // - (<$!>)         Monad.InvokeWith    <- Applicative::<$>
+    // - (<$!>)         Monad.InvokeWith                    <- Applicative::<$>
 
     public interface IMonad<T>
     {
@@ -68,13 +67,28 @@ namespace Edufun.Categorical
         // as an argument to the second.
         Monad<TResult> Bind<TResult>(Func<T, Monad<TResult>> selector);
 
+        // [Haskell] fmap :: (a -> b) -> f a -> f b
+        Monad<TResult> Select<TResult>(Func<T, TResult> selector);
+    }
+
+    public interface IMonad
+    {
+        // [Haskell] return :: a -> m a
+        // Inject a value into the monadic type.
+        Monad<T> Pure<T>(T value);
+
+        // [Haskell] join :: Monad m => m (m a) -> m a
+        // The join function is the conventional monad join operator. It is used to remove
+        // one level of monadic structure, projecting its bound argument into the outer level.
+        Monad<T> Join<T>(Monad<Monad<T>> square);
+    }
+
+    public interface IMonadGrammar<T>
+    {
         // [Haskell] (>>) :: forall a b. m a -> m b -> m b
         // Sequentially compose two actions, discarding any value produced by the first,
         // like sequencing operators (such as the semicolon) in imperative languages.
         Monad<TResult> ReplaceBy<TResult>(Monad<TResult> other);
-
-        // [Haskell] fmap :: (a -> b) -> f a -> f b
-        Monad<TResult> Select<TResult>(Func<T, TResult> selector);
 
         // [Haskell] forever :: Applicative f => f a -> f b
         // forever act repeats the action infinitely.
@@ -102,12 +116,8 @@ namespace Edufun.Categorical
         Monad<TResult> Gather<TResult>(Monad<Func<T, TResult>> applicative);
     }
 
-    public interface IMonad
+    public interface IMonadGrammar
     {
-        // [Haskell] return :: a -> m a
-        // Inject a value into the monadic type.
-        Monad<T> Return<T>(T value);
-
         // [Haskell] mapM :: (Traversable t, Monad m) => (a -> m b) -> t a -> m (t b)
         // Map each element of a structure to a monadic action, evaluate these actions
         // from left to right, and collect the results.
@@ -140,11 +150,6 @@ namespace Edufun.Categorical
         Func<T, Monad<TResult>> ComposeBack<T, TMiddle, TResult>(
             Func<TMiddle, Monad<TResult>> @this,
             Func<T, Monad<TMiddle>> thunk);
-
-        // [Haskell] join :: Monad m => m (m a) -> m a
-        // The join function is the conventional monad join operator. It is used to remove
-        // one level of monadic structure, projecting its bound argument into the outer level.
-        Monad<T> Flatten<T>(Monad<Monad<T>> square);
 
         // [Haskell] filterM :: Applicative m => (a -> m Bool) -> [a] -> m [a]
         // This generalizes the list-based filter function.
@@ -209,73 +214,5 @@ namespace Edufun.Categorical
         // [Haskell] (<$!>) :: Monad m => (a -> b) -> m a -> m b
         // Strict version of <$>.
         Monad<TResult> InvokeWith<T, TResult>(Func<T, TResult> selector, Monad<T> value);
-    }
-
-    public class Monad<T>
-    {
-        // [Haskell] mzero
-        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
-        public static Monad<T> Zero { get { throw new FakeClassException(); } }
-
-        // [Haskell] mplus
-        public Monad<T> Plus(Monad<T> other)
-        {
-            throw new FakeClassException();
-        }
-
-        // [Haskell] >>=
-        public Monad<TResult> Bind<TResult>(Kunc<T, TResult> kun)
-        {
-#if MONAD_VIA_MAP_MULTIPLY
-            return Monad<TResult>.Join(Select(_ => kun.Invoke(_)));
-#else
-            throw new FakeClassException();
-#endif
-        }
-
-        // [Haskell] fmap
-        public Monad<TResult> Select<TResult>(Func<T, TResult> selector)
-        {
-#if MONAD_VIA_MAP_MULTIPLY
-            throw new FakeClassException();
-#else
-            return Bind(_ => Monad<TResult>.Return(selector.Invoke(_)));
-#endif
-        }
-
-        // [Haskell] >>
-        public Monad<TResult> ReplaceBy<TResult>(Monad<TResult> other)
-            => Bind(_ => other);
-
-        // [Haskell] return
-        internal static Monad<T> Return(T value)
-        {
-            throw new FakeClassException();
-        }
-
-        // [Haskell] join
-        internal static Monad<T> Join(Monad<Monad<T>> square)
-        {
-#if MONAD_VIA_MAP_MULTIPLY
-            throw new FakeClassException();
-#else
-            Kunc<Monad<T>, T> id = _ => _;
-
-            return square.Bind(id);
-#endif
-        }
-    }
-
-    public static partial class Monad
-    {
-        public static readonly Monad<Unit> Unit = Of(Narvalo.Fx.Unit.Single);
-
-        public static Monad<T> Of<T>(T value) => Monad<T>.Return(value);
-
-        public static Monad<T> Flatten<T>(Monad<Monad<T>> square) => Monad<T>.Join(square);
-
-        // [Haskell] void
-        public static Monad<Unit> Skip<T>(this Monad<T> @this)
-            => @this.Select(_ => Narvalo.Fx.Unit.Single);
     }
 }

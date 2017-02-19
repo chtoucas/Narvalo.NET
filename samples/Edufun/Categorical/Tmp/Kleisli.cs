@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Edufun.Categorical
+namespace Edufun.Categorical.Tmp
 {
     using System;
 
@@ -12,6 +12,10 @@ namespace Edufun.Categorical
     public delegate Monad<TResult> Kunc<in T, TResult>(T arg);
 
     public delegate Monad<TResult> Kunc<in T1, in T2, TResult>(T1 arg1, T2 arg2);
+
+    public delegate T Cokunc<T>(Comonad<T> arg);
+
+    public delegate TResult Cokunc<T, out TResult>(Comonad<T> arg);
 
     public static class Kleisli
     {
