@@ -7,11 +7,11 @@ namespace Edufun.Sequences
 
     using Narvalo.Fx;
 
-    // **WARNING** These sequences are infinite!
+    // **WARNING** The sequences are infinite!
     public static class Fibonacci
     {
         public static Func<int, int> Recurse()
-            => Recursion.Fix<int, int>(iter => i => i > 1 ? iter(i - 1) + iter(i - 2) : i);
+            => YCombinator.Fix<int, int>(iter => i => i > 1 ? iter(i - 1) + iter(i - 2) : i);
 
         public static IEnumerable<int> Iterate()
         {

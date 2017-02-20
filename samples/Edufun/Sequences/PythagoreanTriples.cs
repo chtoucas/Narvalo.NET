@@ -11,7 +11,7 @@ namespace Edufun.Sequences
     // **WARNING** These sequences are infinite!
     public static class PythagoreanTriples
     {
-        public static IEnumerable<Tuple<int, int, int>> Generate()
+        public static IEnumerable<Tuple<int, int, int>> Gather()
             => from z in Sequence.Gather(1, i => i + 1)
                from x in Sequence.Gather(1, i => i + 1, i => i <= z)
                from y in Sequence.Gather(x, i => i + 1, i => i <= z)

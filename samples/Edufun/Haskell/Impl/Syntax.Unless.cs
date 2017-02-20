@@ -1,0 +1,14 @@
+﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+namespace Edufun.Haskell.Impl
+{
+    using System;
+
+    public partial class Monad<T>
+    {
+        public void Unless(Func<T, bool> predicate, Action<T> action)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
