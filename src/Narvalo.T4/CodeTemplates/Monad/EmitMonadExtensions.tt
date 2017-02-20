@@ -107,6 +107,7 @@ public partial class MonadTemplate
 <#+ } #>
         }
 
+<#+ /* TO BE REMOVED #>
         public static <#= Name #><TResult<#= SuffixT #>> Forever<TSource, TResult<#= SuffixT #>>(
             this <#= Name #><TSource<#= SuffixT #>> @this,
             Func<<#= Name #><TResult<#= SuffixT #>>> thunk)
@@ -119,6 +120,7 @@ public partial class MonadTemplate
 
             return @this.ReplaceBy(@this.Forever(thunk));
         }
+<#+ */ #>
 
         #endregion
 

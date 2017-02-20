@@ -2,12 +2,16 @@
 
 //#define MONAD_VIA_MAP_MULTIPLY
 
-namespace Edufun.Categorical.Language
+namespace Edufun.Categorical.Impl
 {
     using System;
 
-    public partial class Monad : IMonad, IMonadGrammar
+    using Narvalo.Fx;
+
+    public static class Monad
     {
+        public static Monad<Unit> Unit => Of(Narvalo.Fx.Unit.Single);
+
         public static Monad<T> Of<T>(T value) { throw new FakeClassException(); }
 
         public static Monad<T> Flatten<T>(Monad<Monad<T>> square)
@@ -20,13 +24,9 @@ namespace Edufun.Categorical.Language
             return square.Bind(id);
 #endif
         }
-
-        public Monad<T> Pure<T>(T value) => Of(value);
-
-        public Monad<T> Join<T>(Monad<Monad<T>> square) => Flatten(square);
     }
 
-    public partial class Monad<T> : IMonad<T>, IMonadGrammar<T>
+    public partial class Monad<T> : IMonad<T>, IMonadSyntax<T>
     {
         public Monad<TResult> Bind<TResult>(Func<T, Monad<TResult>> selector)
         {
@@ -46,5 +46,9 @@ namespace Edufun.Categorical.Language
             return Bind(_ => Monad.Of(selector.Invoke(_)));
 #endif
         }
+
+        public Monad<TSource> Of_<TSource>(TSource value) => Monad.Of(value);
+
+        public Monad<TSource> Flatten_<TSource>(Monad<Monad<TSource>> square) => Monad.Flatten(square);
     }
 }

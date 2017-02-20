@@ -1,13 +1,13 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Edufun.Categorical.Language
+namespace Edufun.Categorical.Impl
 {
     using System;
 
     public partial class Applicative<T>
     {
-        // u *> v = pure (const id) <*> u <*> v
-        // GHC.Base: a1 *> a2 = (id <$ a1) <*> a2
+        // [GHC.Base] a1 *> a2 = (id <$ a1) <*> a2
+        // [Control.Applicative] u *> v = pure (const id) <*> u <*> v
         public Applicative<TResult> ReplaceBy<TResult>(Applicative<TResult> other)
         {
             Func<TResult, TResult> id = _ => _;
@@ -23,8 +23,6 @@ namespace Edufun.Categorical.Language
     public partial class Monad<T>
     {
         public Monad<TResult> ReplaceBy<TResult>(Monad<TResult> other)
-        {
-            throw new NotImplementedException();
-        }
+            => Bind(_ => other);
     }
 }

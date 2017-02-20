@@ -6,7 +6,7 @@ public partial class MonadTemplate
     {
 #>
     // Provides extension methods for Func<T> in the Kleisli category.
-    public static partial class Kunc
+    public static partial class Kleisli
     {
         #region Basic Monad functions
 
@@ -71,7 +71,7 @@ public partial class MonadTemplate
         }
 
         #endregion
-    } // End of Func - T4: EmitKleisliExtensions().
+    } // End of Kleisli - T4: EmitKleisliExtensions().
 <#+
     } // T4: End of EmitKleisliExtensions().
 } // T4: End of MonadTemplate.

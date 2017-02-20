@@ -4,7 +4,7 @@ namespace Edufun.Categorical.Rules
 {
     using System;
 
-    using Edufun.Categorical.Language;
+    using Edufun.Categorical.Impl;
 
     public static class FunctorRules
     {

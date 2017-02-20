@@ -4,7 +4,7 @@ namespace Edufun.Categorical.Rules
 {
     using System;
 
-    using Edufun.Categorical.Language;
+    using Edufun.Categorical.Impl;
 
     // If an applicative functor is also a monad, it should satisfy:
     // - pure = return

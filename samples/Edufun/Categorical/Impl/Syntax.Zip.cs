@@ -1,12 +1,12 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Edufun.Categorical.Language
+namespace Edufun.Categorical.Impl
 {
     using System;
 
     public partial class Applicative<T>
     {
-        // GHC.Base: liftA2 f a b = fmap f a <*> b
+        // [GHC.Base] liftA2 f a b = fmap f a <*> b
         public Applicative<TResult> Zip<TSecond, TResult>(
             Applicative<TSecond> second,
             Func<T, TSecond, TResult> resultSelector)
@@ -17,7 +17,7 @@ namespace Edufun.Categorical.Language
             return second.Gather(Select(selector));
         }
 
-        // GHC.Base: liftA3 f a b c = fmap f a <*> b <*> c
+        // [GHC.Base] liftA3 f a b c = fmap f a <*> b <*> c
         public Applicative<TResult> Zip<T2, T3, TResult>(
             Applicative<T2> second,
             Applicative<T3> third,

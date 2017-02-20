@@ -5,7 +5,7 @@ namespace Edufun.Categorical
     using System;
     using System.Collections.Generic;
 
-    using Edufun.Categorical.Language;
+    using Edufun.Categorical.Impl;
     using Narvalo.Fx;
 
     // [Haskell] Control.Monad
@@ -13,52 +13,50 @@ namespace Edufun.Categorical
     // Translation map from Haskell to .NET:
     // - >>=            obj.Bind            (required)
     // - >>             obj.ReplaceBy                       <- Applicative::*>
-    // - return         Monad<T>.Pure       (required)      <- Applicative::pure
-    //                  Monad.Of
+    // - return         Monad.Of            (required)      <- Applicative::pure
     // - fail
     // Alternative requirement:
     // - fmap           obj.Select          (alt-required)  <- Functor::fmap, Applicative::liftA
     //
     // Basic Monad functions:
-    // - mapM           Monad.SelectWith
+    // - mapM           Query.SelectWith
     // - mapM_
-    // - forM           Monad.ForEach
+    // - forM           Kleisli.ForEach
     // - forM_
-    // - sequence       Monad.Collect
+    // - sequence       Operators.Collect
     // - sequence_
-    // - (=<<)          Monad.Invoke
-    // - (>=>)          Monad.Compose
-    // - (<=<)          Monad.ComposeBack
+    // - (=<<)          Kleisli.Invoke
+    // - (>=>)          Kleisli.Compose
+    // - (<=<)          Kleisli.ComposeBack
     // - forever        obj.Forever
     // - void           obj.Skip                            <- Functor::void
     //
     // Generalisations of list functions:
-    // - join           Monad<T>.Join       (alt-required)
-    //                  Monad.Flatten
-    // - filterM        Monad.WhereBy
-    // - mapAndUnzipM   Monad.SelectUnzip
-    // - zipWithM       Monad.ZipWith
+    // - join           Monad.Flatten       (alt-required)
+    // - filterM        Query.WhereBy
+    // - mapAndUnzipM   Query.SelectUnzip
+    // - zipWithM       Query.ZipWith
     // - zipWithM_
-    // - foldM          Monad.Fold
+    // - foldM          Query.Fold
     // - foldM_
     // - replicateM     obj.Repeat
     // - replicateM_
     //
     // Conditional execution of monadic expressions:
-    // - guard          Monad.Guard
+    // - guard          Operators.Guard
     // - when           obj.When
     // - unless         obj.Unless
     //
     // Monadic lifting operators:
-    // - liftM          Monad.Lift
-    // - liftM2         Monad.Lift
-    // - liftM3         Monad.Lift
-    // - liftM4         Monad.Lift
-    // - liftM5         Monad.Lift
+    // - liftM          Operators.Lift
+    // - liftM2         Operators.Lift
+    // - liftM3         Operators.Lift
+    // - liftM4         Operators.Lift
+    // - liftM5         Operators.Lift
     // - ap             obj.Gather                          <- Applicative::<*>
     //
     // Strict monadic functions:
-    // - (<$!>)         Monad.InvokeWith                    <- Applicative::<$>
+    // - (<$!>)         Operators.InvokeWith                <- Applicative::<$>
 
     public interface IMonad<T>
     {
@@ -69,93 +67,80 @@ namespace Edufun.Categorical
 
         // [Haskell] fmap :: (a -> b) -> f a -> f b
         Monad<TResult> Select<TResult>(Func<T, TResult> selector);
-    }
-
-    public interface IMonad
-    {
-        // [Haskell] return :: a -> m a
-        // Inject a value into the monadic type.
-        Monad<T> Pure<T>(T value);
 
         // [Haskell] join :: Monad m => m (m a) -> m a
         // The join function is the conventional monad join operator. It is used to remove
         // one level of monadic structure, projecting its bound argument into the outer level.
-        Monad<T> Join<T>(Monad<Monad<T>> square);
+        Monad<TSource> Flatten_<TSource>(Monad<Monad<TSource>> square);
+
+        // [Haskell] return :: a -> m a
+        // Inject a value into the monadic type.
+        Monad<TSource> Of_<TSource>(TSource value);
     }
 
-    public interface IMonadGrammar<T>
+    public interface IMonadSyntax<T>
     {
+        // [Haskell] ap :: Monad m => m (a -> b) -> m a -> m b
+        // In many situations, the liftM operations can be replaced by uses of ap,
+        // which promotes function application.
+        Monad<TResult> Gather<TResult>(Monad<Func<T, TResult>> applicative);
+
         // [Haskell] (>>) :: forall a b. m a -> m b -> m b
         // Sequentially compose two actions, discarding any value produced by the first,
         // like sequencing operators (such as the semicolon) in imperative languages.
         Monad<TResult> ReplaceBy<TResult>(Monad<TResult> other);
 
-        // [Haskell] forever :: Applicative f => f a -> f b
-        // forever act repeats the action infinitely.
-        Monad<TResult> Forever<TSource, TResult>(Func<Monad<TResult>> thunk);
+        // [Haskell] replicateM :: Applicative m => Int -> m a -> m [a]
+        // replicateM n act performs the action n times, gathering the results.
+        Monad<IEnumerable<T>> Repeat(int count);
 
         // [Haskell] void :: Functor f => f a -> f ()
         // void value discards or ignores the result of evaluation.
         Monad<Unit> Skip();
 
-        // [Haskell] replicateM :: Applicative m => Int -> m a -> m [a]
-        // replicateM n act performs the action n times, gathering the results.
-        Monad<IEnumerable<T>> Repeat(int count);
-
-        // [Haskell] when :: Applicative f => Bool -> f () -> f ()
-        // Conditional execution of Applicative expressions.
-        void When(Func<T, bool> predicate, Action<T> action);
-
         // [Haskell] when :: Applicative f => Bool -> f () -> f ()
         // The reverse of when.
         void Unless(Func<T, bool> predicate, Action<T> action);
 
-        // [Haskell] ap :: Monad m => m (a -> b) -> m a -> m b
-        // In many situations, the liftM operations can be replaced by uses of ap,
-        // which promotes function application.
-        Monad<TResult> Gather<TResult>(Monad<Func<T, TResult>> applicative);
+        // [Haskell] when :: Applicative f => Bool -> f () -> f ()
+        // Conditional execution of Applicative expressions.
+        void When(Func<T, bool> predicate, Action<T> action);
     }
 
-    public interface IMonadGrammar
+    public interface IKleisliOperators
     {
-        // [Haskell] mapM :: (Traversable t, Monad m) => (a -> m b) -> t a -> m (t b)
-        // Map each element of a structure to a monadic action, evaluate these actions
-        // from left to right, and collect the results.
-        Monad<IEnumerable<TResult>> SelectWith<T, TResult>(
-            IEnumerable<T> @this,
-            Func<T, Monad<TResult>> selector);
-
-        // [Haskell] forM :: (Traversable t, Monad m) => t a -> (a -> m b) -> m (t b)
-        // forM is mapM with its arguments flipped.
-        Monad<IEnumerable<TResult>> ForEach<T, TResult>(
-            Func<T, Monad<TResult>> @this,
-            IEnumerable<T> seq);
-
-        // [Haskell] sequence :: (Traversable t, Monad m) => t (m a) -> m (t a)
-        // Evaluate each monadic action in the structure from left to right, and collect the results.
-        Monad<IEnumerable<T>> Collect<T>(IEnumerable<Monad<T>> @this);
-
-        // [Haskell] (=<<) :: Monad m => (a -> m b) -> m a -> m b
-        // Same as >>=, but with the arguments interchanged.
-        Monad<TResult> Invoke<T, TResult>(Func<T, Monad<TResult>> @this, Monad<T> value);
-
         // [Haskell] (>=>) :: Monad m => (a -> m b) -> (b -> m c) -> a -> m c
         // Left-to-right Kleisli composition of monads.
-        Func<T, Monad<TResult>> Compose<T, TMiddle, TResult>(
-            Func<T, Monad<TMiddle>> @this,
+        Func<TSource, Monad<TResult>> Compose<TSource, TMiddle, TResult>(
+            Func<TSource, Monad<TMiddle>> me,
             Func<TMiddle, Monad<TResult>> thunk);
 
         // [Haskell] (<=<) :: Monad m => (b -> m c) -> (a -> m b) -> a -> m c
         // Right-to-left Kleisli composition of monads. (>=>), with the arguments flipped.
-        Func<T, Monad<TResult>> ComposeBack<T, TMiddle, TResult>(
-            Func<TMiddle, Monad<TResult>> @this,
-            Func<T, Monad<TMiddle>> thunk);
+        Func<TSource, Monad<TResult>> ComposeBack<TSource, TMiddle, TResult>(
+            Func<TMiddle, Monad<TResult>> me,
+            Func<TSource, Monad<TMiddle>> thunk);
 
-        // [Haskell] filterM :: Applicative m => (a -> m Bool) -> [a] -> m [a]
-        // This generalizes the list-based filter function.
-        Monad<IEnumerable<TSource>> WhereBy<TSource>(
-            IEnumerable<TSource> @this,
-            Func<TSource, Monad<bool>> predicate);
+        // [Haskell] forM :: (Traversable t, Monad m) => t a -> (a -> m b) -> m (t b)
+        // forM is mapM with its arguments flipped.
+        Monad<IEnumerable<TResult>> ForEach<TSource, TResult>(
+            Func<TSource, Monad<TResult>> me,
+            IEnumerable<TSource> seq);
+
+        // [Haskell] (=<<) :: Monad m => (a -> m b) -> m a -> m b
+        // Same as >>=, but with the arguments interchanged.
+        Monad<TResult> Invoke<TSource, TResult>(Func<TSource, Monad<TResult>> me, Monad<TSource> value);
+    }
+
+    public interface IQueryOperators
+    {
+        // [Haskell] foldM :: (Foldable t, Monad m) => (b -> a -> m b) -> b -> t a -> m b
+        // The foldM function is analogous to foldl, except that its result is encapsulated
+        // in a monad. Note that foldM works from left-to-right over the list arguments.
+        Monad<TAccumulate> Fold<TSource, TAccumulate>(
+            IEnumerable<TSource> source,
+            TAccumulate seed,
+            Func<TAccumulate, TSource, Monad<TAccumulate>> accumulator);
 
         // [Haskell] mapAndUnzipM :: Applicative m => (a -> m (b, c)) -> [a] -> m ([b], [c])
         // The mapAndUnzipM function maps its first argument over a list, returning the result
@@ -163,31 +148,51 @@ namespace Edufun.Categorical
         // or a state-transforming monad.
         Monad<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
             SelectUnzip<TSource, TFirst, TSecond>(
-            IEnumerable<TSource> @this,
-            Func<TSource, Monad<Tuple<TFirst, TSecond>>> thunk);
+            IEnumerable<TSource> source,
+            Func<TSource, Monad<Tuple<TFirst, TSecond>>> selector);
+
+        // [Haskell] mapM :: (Traversable t, Monad m) => (a -> m b) -> t a -> m (t b)
+        // Map each element of a structure to a monadic action, evaluate these actions
+        // from left to right, and collect the results.
+        Monad<IEnumerable<TResult>> SelectWith<TSource, TResult>(
+            IEnumerable<TSource> source,
+            Func<TSource, Monad<TResult>> selector);
+
+        // [Haskell] filterM :: Applicative m => (a -> m Bool) -> [a] -> m [a]
+        // This generalizes the list-based filter function.
+        Monad<IEnumerable<TSource>> WhereBy<TSource>(
+            IEnumerable<TSource> source,
+            Func<TSource, Monad<bool>> predicate);
 
         // [Haskell] zipWithM :: Applicative m => (a -> b -> m c) -> [a] -> [b] -> m [c]
         // The zipWithM function generalizes zipWith to arbitrary applicative functors.
         Monad<IEnumerable<TResult>> ZipWith<TFirst, TSecond, TResult>(
-            IEnumerable<TFirst> @this,
+            IEnumerable<TFirst> first,
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, Monad<TResult>> resultSelector);
+    }
 
-        // [Haskell] foldM :: (Foldable t, Monad m) => (b -> a -> m b) -> b -> t a -> m b
-        // The foldM function is analogous to foldl, except that its result is encapsulated
-        // in a monad. Note that foldM works from left-to-right over the list arguments.
-        Monad<TAccumulate> Fold<TSource, TAccumulate>(
-            IEnumerable<TSource> @this,
-            TAccumulate seed,
-            Func<TAccumulate, TSource, Monad<TAccumulate>> accumulator);
+    public interface IMonadOperators
+    {
+        // [Haskell] sequence :: (Traversable t, Monad m) => t (m a) -> m (t a)
+        // Evaluate each monadic action in the structure from left to right, and collect the results.
+        Monad<IEnumerable<TSource>> Collect<TSource>(IEnumerable<Monad<TSource>> source);
+
+        // [Haskell] forever :: Applicative f => f a -> f b
+        // forever act repeats the action infinitely.
+        void Forever<TSource>(Monad<TSource> value);
 
         // [Haskell] guard :: Alternative f => Bool -> f ()
         // guard b is pure () if b is True, and empty if b is False.
         Monad<Unit> Guard(bool predicate);
 
+        // [Haskell] (<$!>) :: Monad m => (a -> b) -> m a -> m b
+        // Strict version of <$>.
+        Monad<TResult> InvokeWith<TSource, TResult>(Func<TSource, TResult> selector, Monad<TSource> value);
+
         // [Haskell] liftM :: Monad m => (a1 -> r) -> m a1 -> m r
         // Promote a function to a monad.
-        Func<Monad<T>, Monad<TResult>> Lift<T, TResult>(Func<T, TResult> thunk);
+        Func<Monad<TSource>, Monad<TResult>> Lift<TSource, TResult>(Func<TSource, TResult> thunk);
 
         // [Haskell] liftM2 :: Monad m => (a1 -> a2 -> r) -> m a1 -> m a2 -> m r
         // Promote a function to a monad, scanning the monadic arguments from left to right.
@@ -210,9 +215,5 @@ namespace Edufun.Categorical
         Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<T4>, Monad<T5>, Monad<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> thunk);
-
-        // [Haskell] (<$!>) :: Monad m => (a -> b) -> m a -> m b
-        // Strict version of <$>.
-        Monad<TResult> InvokeWith<T, TResult>(Func<T, TResult> selector, Monad<T> value);
     }
 }

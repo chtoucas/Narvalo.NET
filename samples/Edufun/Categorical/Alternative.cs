@@ -6,7 +6,7 @@ namespace Edufun.Categorical
     using System.Collections.Generic;
     using System.Linq;
 
-    using Edufun.Categorical.Language;
+    using Edufun.Categorical.Impl;
     using Narvalo.Fx;
     using Narvalo.Fx.Linq;
 

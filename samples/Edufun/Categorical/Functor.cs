@@ -4,7 +4,7 @@ namespace Edufun.Categorical
 {
     using System;
 
-    using Edufun.Categorical.Language;
+    using Edufun.Categorical.Impl;
     using Narvalo.Fx;
 
     // [Haskell] Data.Functor
@@ -13,8 +13,8 @@ namespace Edufun.Categorical
     // Translation map from Haskell to .NET:
     // - fmap   obj.Select       (required)
     // - <$     obj.Replace
-    // - $>     Functor.Inject
-    // - <$>    Functor.InvokeWith
+    // - $>     Operators.Inject
+    // - <$>    Operators.InvokeWith
     // - void   obj.Skip
 
     public interface IFunctor<T>
@@ -34,7 +34,7 @@ namespace Edufun.Categorical
         Functor<Unit> Skip();
     }
 
-    public interface IFunctorSyntax
+    public interface IFunctorOperators
     {
         // [Haskell] ($>) :: Functor f => f a -> b -> f b
         // Flipped version of <$.

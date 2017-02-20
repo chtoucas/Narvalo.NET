@@ -1,14 +1,12 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Edufun.Categorical.Language
+namespace Edufun.Categorical.Impl
 {
     using System;
 
-    using Narvalo.Fx;
-
-    public partial class Monad
+    public partial class Monad<T>
     {
-        public Monad<Unit> Guard(bool predicate)
+        public void Unless(Func<T, bool> predicate, Action<T> action)
         {
             throw new NotImplementedException();
         }
