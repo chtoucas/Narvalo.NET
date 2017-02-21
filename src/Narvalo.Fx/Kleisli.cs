@@ -6,5 +6,5 @@ namespace Narvalo.Fx
     /// Provides a set of static and extension methods for <see cref="System.Func{T, TResult}"/>
     /// where TResult is of "monadic" type.
     /// </summary>
-    public static partial class Kunc { }
+    public static partial class Kleisli { }
 }
