@@ -6,12 +6,8 @@ namespace Edufun.Haskell.Impl
 {
     using System;
 
-    using Narvalo.Fx;
-
     public static class Monad
     {
-        public static Monad<Unit> Unit => Of(Narvalo.Fx.Unit.Single);
-
         public static Monad<T> Of<T>(T value) { throw new FakeClassException(); }
 
         public static Monad<T> Flatten<T>(Monad<Monad<T>> square)

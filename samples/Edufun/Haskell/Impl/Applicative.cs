@@ -4,12 +4,8 @@ namespace Edufun.Haskell.Impl
 {
     using System;
 
-    using Narvalo.Fx;
-
     public static class Applicative
     {
-        public static Applicative<Unit> Unit => Of(Narvalo.Fx.Unit.Single);
-
         public static Applicative<T> Of<T>(T value) { throw new FakeClassException(); }
     }
 

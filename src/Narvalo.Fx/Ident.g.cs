@@ -21,6 +21,7 @@ namespace Narvalo.Fx
     using Narvalo.Fx.Internal;
     using Narvalo.Fx.Linq;
 
+
     // Provides a set of static methods for Ident<T>.
     // NB: Sometimes we prefer extension methods over static methods to be able to override them locally.
     public static partial class Ident
@@ -308,42 +309,6 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Conditional execution of monadic expressions
-
-        // Haskell uses a different signature.
-        public static void When<TSource>(
-            this Ident<TSource> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            /* T4: C# indent */
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(
-                _ => {
-                    if (predicate.Invoke(_)) { action.Invoke(_); }
-
-                    return Ident.Unit;
-                });
-        }
-
-        // Haskell uses a different signature.
-        public static void Unless<TSource>(
-            this Ident<TSource> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            /* T4: C# indent */
-        {
-            /* T4: C# indent */
-            Expect.NotNull(predicate);
-            Expect.NotNull(action);
-
-            @this.When(_ => !predicate.Invoke(_), action);
-        }
-
-        #endregion
 
         #region Applicative lifting operators
 

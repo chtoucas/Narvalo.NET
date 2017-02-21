@@ -28,7 +28,7 @@ namespace Edufun.Haskell
     // - (=<<)          Kleisli.Invoke
     // - (>=>)          Kleisli.Compose
     // - (<=<)          Kleisli.ComposeBack
-    // - forever        obj.Forever
+    // - forever        Operators.Forever
     // - void           obj.Skip                            <- Functor::void
     //
     // Generalisations of list functions:
@@ -43,7 +43,6 @@ namespace Edufun.Haskell
     // - replicateM_
     //
     // Conditional execution of monadic expressions:
-    // - guard          Operators.Guard
     // - when           obj.When
     // - unless         obj.Unless
     //
@@ -57,6 +56,17 @@ namespace Edufun.Haskell
     //
     // Strict monadic functions:
     // - (<$!>)         Operators.InvokeWith                <- Applicative::<$>
+    //
+    // From Functor:
+    // - <$             obj.Replace
+    // - $>             Operators.Inject
+    // - <$>            Operators.InvokeWith
+    //
+    // From Applicative:
+    // - <*             obj.Ignore
+    // - <**>           Operators.Apply
+    // - liftA2         obj.Zip
+    // - liftA3         obj.Zip
 
     public interface IMonad<T>
     {
@@ -97,14 +107,6 @@ namespace Edufun.Haskell
         // [Haskell] void :: Functor f => f a -> f ()
         // void value discards or ignores the result of evaluation.
         Monad<Unit> Skip();
-
-        // [Haskell] when :: Applicative f => Bool -> f () -> f ()
-        // The reverse of when.
-        void Unless(Func<T, bool> predicate, Action<T> action);
-
-        // [Haskell] when :: Applicative f => Bool -> f () -> f ()
-        // Conditional execution of Applicative expressions.
-        void When(Func<T, bool> predicate, Action<T> action);
     }
 
     public interface IKleisliOperators
@@ -112,24 +114,24 @@ namespace Edufun.Haskell
         // [Haskell] (>=>) :: Monad m => (a -> m b) -> (b -> m c) -> a -> m c
         // Left-to-right Kleisli composition of monads.
         Func<TSource, Monad<TResult>> Compose<TSource, TMiddle, TResult>(
-            Func<TSource, Monad<TMiddle>> me,
-            Func<TMiddle, Monad<TResult>> func);
+            Func<TSource, Monad<TMiddle>> first,
+            Func<TMiddle, Monad<TResult>> second);
 
         // [Haskell] (<=<) :: Monad m => (b -> m c) -> (a -> m b) -> a -> m c
         // Right-to-left Kleisli composition of monads. (>=>), with the arguments flipped.
         Func<TSource, Monad<TResult>> ComposeBack<TSource, TMiddle, TResult>(
-            Func<TMiddle, Monad<TResult>> me,
-            Func<TSource, Monad<TMiddle>> func);
+            Func<TMiddle, Monad<TResult>> first,
+            Func<TSource, Monad<TMiddle>> second);
 
         // [Haskell] forM :: (Traversable t, Monad m) => t a -> (a -> m b) -> m (t b)
         // forM is mapM with its arguments flipped.
         Monad<IEnumerable<TResult>> ForEach<TSource, TResult>(
-            Func<TSource, Monad<TResult>> me,
+            Func<TSource, Monad<TResult>> func,
             IEnumerable<TSource> seq);
 
         // [Haskell] (=<<) :: Monad m => (a -> m b) -> m a -> m b
         // Same as >>=, but with the arguments interchanged.
-        Monad<TResult> Invoke<TSource, TResult>(Func<TSource, Monad<TResult>> me, Monad<TSource> value);
+        Monad<TResult> Invoke<TSource, TResult>(Func<TSource, Monad<TResult>> func, Monad<TSource> value);
     }
 
     public interface IQueryOperators
@@ -182,10 +184,6 @@ namespace Edufun.Haskell
         // forever act repeats the action infinitely.
         Monad<TResult> Forever<TSource, TResult>(Monad<TSource> source);
 
-        // [Haskell] guard :: Alternative f => Bool -> f ()
-        // guard b is pure () if b is True, and empty if b is False.
-        Monad<Unit> Guard(bool predicate);
-
         // [Haskell] (<$!>) :: Monad m => (a -> b) -> m a -> m b
         // Strict version of <$>.
         Monad<TResult> InvokeWith<TSource, TResult>(Func<TSource, TResult> selector, Monad<TSource> value);
@@ -215,5 +213,13 @@ namespace Edufun.Haskell
         Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<T4>, Monad<T5>, Monad<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> func);
+
+        // [Haskell] when :: Applicative f => Bool -> f () -> f ()
+        // The reverse of when.
+        Monad<Unit> Unless(bool predicate, Monad<Unit> value);
+
+        // [Haskell] when :: Applicative f => Bool -> f () -> f ()
+        // Conditional execution of Applicative expressions.
+        Monad<Unit> When(bool predicate, Monad<Unit> value);
     }
 }

@@ -14,9 +14,13 @@ namespace Narvalo.Fx.Internal
     {
         // This method is also automatically generated for all monads. Another one is:
         // > void Unless(Func<T, bool> predicate, Action<T> action);
-        // for which the default implementation calls back to When().
+        // for which the default implementation calls back to When() [FIXME: This is no longer the case].
         void When(Func<T, bool> predicate, Action<T> action);
 
         void Do(Action<T> action);
+
+        //void Forever(Action<T> action);
+
+        //void While(Func<bool> predicate, Action<T> action);
     }
 }

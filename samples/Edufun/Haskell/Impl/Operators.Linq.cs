@@ -5,8 +5,12 @@ namespace Edufun.Haskell.Impl
     using System;
     using System.Collections.Generic;
 
+    using System.Linq;
+
     public class QueryOperators : IQueryOperators
     {
+        private static readonly IMonadOperators s_Qperators = new Operators();
+
         public Monad<TAccumulate> Fold<TSource, TAccumulate>(
             IEnumerable<TSource> source,
             TAccumulate seed,
@@ -19,7 +23,14 @@ namespace Edufun.Haskell.Impl
             IEnumerable<TSource> source,
             Func<TSource, Monad<Tuple<TFirst, TSecond>>> selector)
         {
-            throw new NotImplementedException();
+            return SelectWith(source, selector).Select(
+                tuples =>
+                {
+                    IEnumerable<TFirst> list1 = tuples.Select(_ => _.Item1);
+                    IEnumerable<TSecond> list2 = tuples.Select(_ => _.Item2);
+
+                    return new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(list1, list2);
+                });
         }
 
         public Monad<IEnumerable<TResult>> SelectWith<TSource, TResult>(
@@ -29,6 +40,7 @@ namespace Edufun.Haskell.Impl
             throw new NotImplementedException();
         }
 
+        // [Control.Monad] filterM p = foldr (\ x -> liftA2 (\ flg -> if flg then (x:) else id) (p x)) (pure [])
         public Monad<IEnumerable<TSource>> WhereBy<TSource>(
             IEnumerable<TSource> source,
             Func<TSource, Monad<bool>> predicate)
@@ -36,12 +48,18 @@ namespace Edufun.Haskell.Impl
             throw new NotImplementedException();
         }
 
+        // [Control.Monad] zipWithM f xs ys = sequenceA (zipWith f xs ys)
         public Monad<IEnumerable<TResult>> ZipWith<TFirst, TSecond, TResult>(
             IEnumerable<TFirst> first,
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, Monad<TResult>> resultSelector)
         {
-            throw new NotImplementedException();
+            Func<TFirst, TSecond, Monad<TResult>> selector
+                = (v1, v2) => resultSelector.Invoke(v1, v2);
+
+            IEnumerable<Monad<TResult>> seq = first.Zip(second, selector);
+
+            return s_Qperators.Collect(seq);
         }
     }
 }

@@ -52,7 +52,8 @@ namespace Edufun.Haskell.Impl
             // > Monad<TResult> next = null;
             // > next = ReplaceBy(next);
             // > return next;
-            // Another way of seeing this is:
+            // (NB: The previous code does not work if Monad<T> is a struct; see Forever_().)
+            // Another way of seeing forever is:
             // > forever m = m >> forever m
             // In C#:
             // > return ReplaceBy(Forever<TResult>());
@@ -65,7 +66,7 @@ namespace Edufun.Haskell.Impl
             return next;
         }
 
-        // This one works if Monad<TResult> is a struct.
+        // This one works if Monad<T> is a struct.
         public Monad<TResult> Forever_<TSource, TResult>(Monad<TSource> source)
         {
             var next = __ReplaceBy<TSource, TResult>(source);
@@ -79,15 +80,6 @@ namespace Edufun.Haskell.Impl
                 = f => next => f(value.ReplaceBy(next));
 
             return YCombinator.Fix(g);
-        }
-
-        #endregion
-
-        #region Guard
-
-        public Monad<Unit> Guard(bool predicate)
-        {
-            throw new NotImplementedException();
         }
 
         #endregion
@@ -142,6 +134,22 @@ namespace Edufun.Haskell.Impl
         {
             throw new NotImplementedException();
         }
+
+        #endregion
+
+        #region Unless
+
+        // [Control.Monad] when p s = if p then pure () else s
+        public Monad<Unit> Unless(bool predicate, Monad<Unit> value)
+            => predicate ? Monad.Of(Unit.Single) : value;
+
+        #endregion
+
+        #region When
+
+        // [GHC.Base] when p s = if p then s else pure ()
+        public Monad<Unit> When(bool predicate, Monad<Unit> value)
+            => predicate ? value : Monad.Of(Unit.Single);
 
         #endregion
     }

@@ -105,6 +105,8 @@ namespace Narvalo.T4
         /// <value><see langword="true"/> if the monad is null-able; otherwise <see langword="false"/>.</value>
         protected bool IsNullable { get; set; } = true;
 
+        protected string ClassDeclaration => IsNullable ? "class" : "struct";
+
         /// <summary>
         /// Gets the generic constraints on the underlying type T. Default to String.Empty.
         /// </summary>

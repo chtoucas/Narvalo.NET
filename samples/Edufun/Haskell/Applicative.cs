@@ -22,6 +22,10 @@ namespace Edufun.Haskell
     // - liftA      obj.Select                          <- Functor::fmap
     // - liftA2     obj.Zip
     // - liftA3     obj.Zip
+    //
+    // From Functor:
+    // - $>         Operators.Inject
+    // - void       obj.Skip
 
     public interface IApplicative<T>
     {

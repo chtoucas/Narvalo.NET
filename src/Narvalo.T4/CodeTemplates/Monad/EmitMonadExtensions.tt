@@ -213,6 +213,8 @@ public partial class MonadTemplate
 
         #endregion
 
+<#+ /* DISABLED #>
+
         #region Conditional execution of monadic expressions
 
         // Haskell uses a different signature.
@@ -253,6 +255,8 @@ public partial class MonadTemplate
         }
 
         #endregion
+
+<#+ End of DISABLED */ #>
 
         #region Applicative lifting operators
 

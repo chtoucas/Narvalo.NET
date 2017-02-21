@@ -5,6 +5,8 @@ namespace Edufun.Haskell
     using System;
     using System.Collections.Generic;
 
+    using Narvalo.Fx;
+
     // [Haskell] Control.Monad.MonadPlus
     // Monads that also support choice and failure.
     //
@@ -15,6 +17,9 @@ namespace Edufun.Haskell
     // Generalisations of list functions:
     // - msum           MonadPlus.Sum
     // - mfilter        obj.Where
+    //
+    // Conditional execution of monadic expressions:
+    // - guard          Operators.Guard
 
     public interface IMonadPlus<T>
     {
@@ -26,15 +31,19 @@ namespace Edufun.Haskell
         MonadPlus<T> Where(Func<T, bool> predicate);
     }
 
-    public interface IMonadPlus
+    public interface IMonadPlusOperators
     {
-        // [Haskell] mzero :: m a
-        // The identity of mplus.
-        MonadPlus<T> Zero<T>();
+        // [Haskell] guard :: Alternative f => Bool -> f ()
+        // guard b is pure () if b is True, and empty if b is False.
+        MonadPlus<Unit> Guard(bool predicate);
 
         // [Haskell] msum :: (Foldable t, MonadPlus m) => t (m a) -> m a
         // The sum of a collection of actions, generalizing concat.
         MonadPlus<TSource> Sum<TSource>(IEnumerable<MonadPlus<TSource>> @this);
+
+        // [Haskell] mzero :: m a
+        // The identity of mplus.
+        MonadPlus<T> Zero<T>();
     }
 
     public class MonadPlus<T>
