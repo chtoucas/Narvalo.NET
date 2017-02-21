@@ -48,26 +48,26 @@ public partial class MonadTemplate
 
         public static Func<TSource, <#= Name #><TResult<#= SuffixT #>>> Compose<TSource, TMiddle, TResult<#= SuffixT #>>(
             this Func<TSource, <#= Name #><TMiddle<#= SuffixT #>>> @this,
-            Func<TMiddle, <#= Name #><TResult<#= SuffixT #>>> thunk)
+            Func<TMiddle, <#= Name #><TResult<#= SuffixT #>>> func)
             <#+ WriteTypeConstraints("TSource", "TMiddle", "TResult"); #>
         {
             <#+ WriteNotNull(true); #>
-            Expect.NotNull(thunk);
+            Expect.NotNull(func);
             Warrant.NotNull<Func<TSource, <#= Name #><TResult<#= SuffixT #>>>>();
 
-            return _ => @this.Invoke(_).Bind(thunk);
+            return _ => @this.Invoke(_).Bind(func);
         }
 
         public static Func<TSource, <#= Name #><TResult<#= SuffixT #>>> ComposeBack<TSource, TMiddle, TResult<#= SuffixT #>>(
             this Func<TMiddle, <#= Name #><TResult<#= SuffixT #>>> @this,
-            Func<TSource, <#= Name #><TMiddle<#= SuffixT #>>> thunk)
+            Func<TSource, <#= Name #><TMiddle<#= SuffixT #>>> func)
             <#+ WriteTypeConstraints("TSource", "TMiddle", "TResult"); #>
         {
             Expect.NotNull(@this);
-            Require.NotNull(thunk, nameof(thunk));
+            Require.NotNull(func, nameof(func));
             Warrant.NotNull<Func<TSource, <#= Name #><TResult<#= SuffixT #>>>>();
 
-            return _ => thunk.Invoke(_).Bind(@this);
+            return _ => func.Invoke(_).Bind(@this);
         }
 
         #endregion

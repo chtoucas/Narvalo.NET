@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Edufun
+namespace Narvalo.Fx
 {
     using System;
 
@@ -14,11 +14,9 @@ namespace Edufun
 
     internal delegate Func<T> Recursive<T>(Recursive<T> rec);
 
-    internal delegate Func<TSource, TResult> Recursive<TSource, TResult>(Recursive<TSource, TResult> rec);
-
     internal delegate Func<T1, T2, TResult> Recursive<T1, T2, TResult>(Recursive<T1, T2, TResult> rec);
 
-    public static class YCombinator
+    public static class Recursion
     {
         public static Action Fix(Func<Action, Action> generator)
         {
@@ -36,6 +34,7 @@ namespace Edufun
             return rec(rec);
         }
 
+
         public static Action<T1, T2> Fix<T1, T2>(Func<Action<T1, T2>, Action<T1, T2>> generator)
         {
             Require.NotNull(generator, nameof(generator));
@@ -44,12 +43,12 @@ namespace Edufun
             return rec(rec);
         }
 
-        public static Func<TSource, TResult> Fix<TSource, TResult>(
-            Func<Func<TSource, TResult>, Func<TSource, TResult>> generator)
+        public static Func<TResult> Fix<TResult>(
+            Func<Func<TResult>, Func<TResult>> generator)
         {
             Require.NotNull(generator, nameof(generator));
 
-            Recursive<TSource, TResult> rec = r => generator(r(r));
+            Recursive<TResult> rec = r => generator(r(r));
             return rec(rec);
         }
 
@@ -64,16 +63,5 @@ namespace Edufun
 
             return rec.Invoke(rec);
         }
-
-        //public static Func<TSource, TResult> Fix1<TSource, TResult>(
-        //    Func<Func<TSource, TResult>, Func<TSource, TResult>> generator)
-        //{
-        //    Require.NotNull(generator, nameof(generator));
-
-        //    Func<TSource, TResult> g = null;
-
-        //    //return generator(g);
-        //    return arg => generator.Invoke(g).Invoke(arg);
-        //}
     }
 }

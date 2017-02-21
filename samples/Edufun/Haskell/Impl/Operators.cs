@@ -36,15 +36,49 @@ namespace Edufun.Haskell.Impl
         #region Forever
 
         // [Control.Monad] forever a = let a' = a *> a' in a'
-        public void Forever<TSource>(Monad<TSource> value)
+        public Monad<TResult> Forever<TSource, TResult>(Monad<TSource> source)
         {
             // Explanation:
-            // - let {...} in ... is the recursive let (letrec).
+            // - let {...} in ... is a let as in F# with a recursive code (let rec in F#).
             // - a' is just a syntaxic convention to say that a' is something similar to a.
-            // More readable form:
+            // More readable form ("a" being a monad,we replace *> by >>):
             // > forever m = let x = m >> x in x
-            Func<Monad<TSource>, Monad<TSource>> rec = _ => value.ReplaceBy(_);
-            rec.Invoke(value);
+            // that is
+            // > forever m = m >> m >> m >> m >> m >> ...
+            // Translated into C#:
+            // > Monad<TResult> next = ReplaceBy(next);
+            // > return next;
+            // To make it work, we must split the initialization into two steps:
+            // > Monad<TResult> next = null;
+            // > next = ReplaceBy(next);
+            // > return next;
+            // Another way of seeing this is:
+            // > forever m = m >> forever m
+            // In C#:
+            // > return ReplaceBy(Forever<TResult>());
+            // I think that the last one won't work as expected since the inner Forever
+            // will be evaluated before ReplaceBy (but it works in Haskell due to lazy evaluation).
+            // Remember that ReplaceBy(next) is just Bind(_ => next). If Bind is doing nothing,
+            // Forever() is useless, it just loops forever.
+            Monad<TResult> next = null;
+            next = source.ReplaceBy(next);
+            return next;
+        }
+
+        // This one works if Monad<TResult> is a struct.
+        public Monad<TResult> Forever_<TSource, TResult>(Monad<TSource> source)
+        {
+            var next = __ReplaceBy<TSource, TResult>(source);
+
+            return next(source);
+        }
+
+        private static Func<Monad<TSource>, Monad<TResult>> __ReplaceBy<TSource, TResult>(Monad<TSource> value)
+        {
+            Func<Func<Monad<TSource>, Monad<TResult>>, Func<Monad<TSource>, Monad<TResult>>> g
+                = f => next => f(value.ReplaceBy(next));
+
+            return YCombinator.Fix(g);
         }
 
         #endregion
@@ -84,27 +118,27 @@ namespace Edufun.Haskell.Impl
 
         #region Lift
 
-        public Func<Monad<TSource>, Monad<TResult>> Lift<TSource, TResult>(Func<TSource, TResult> thunk)
+        public Func<Monad<TSource>, Monad<TResult>> Lift<TSource, TResult>(Func<TSource, TResult> func)
         {
             throw new NotImplementedException();
         }
 
-        public Func<Monad<T1>, Monad<T2>, Monad<TResult>> Lift<T1, T2, TResult>(Func<T1, T2, TResult> thunk)
+        public Func<Monad<T1>, Monad<T2>, Monad<TResult>> Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
         {
             throw new NotImplementedException();
         }
 
-        public Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<TResult>> Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> thunk)
+        public Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<TResult>> Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
         {
             throw new NotImplementedException();
         }
 
-        public Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<T4>, Monad<TResult>> Lift<T1, T2, T3, T4, TResult>(Func<T1, T2, T3, T4, TResult> thunk)
+        public Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<T4>, Monad<TResult>> Lift<T1, T2, T3, T4, TResult>(Func<T1, T2, T3, T4, TResult> func)
         {
             throw new NotImplementedException();
         }
 
-        public Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<T4>, Monad<T5>, Monad<TResult>> Lift<T1, T2, T3, T4, T5, TResult>(Func<T1, T2, T3, T4, T5, TResult> thunk)
+        public Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<T4>, Monad<T5>, Monad<TResult>> Lift<T1, T2, T3, T4, T5, TResult>(Func<T1, T2, T3, T4, T5, TResult> func)
         {
             throw new NotImplementedException();
         }

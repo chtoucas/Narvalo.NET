@@ -18,16 +18,16 @@ namespace Edufun.Haskell.Impl
 
         public Func<TSource, Monad<TResult>> Compose<TSource, TMiddle, TResult>(
             Func<TSource, Monad<TMiddle>> me,
-            Func<TMiddle, Monad<TResult>> thunk)
+            Func<TMiddle, Monad<TResult>> func)
         {
-            return _ => me.Invoke(_).Bind(thunk);
+            return _ => me.Invoke(_).Bind(func);
         }
 
         public Func<TSource, Monad<TResult>> ComposeBack<TSource, TMiddle, TResult>(
             Func<TMiddle, Monad<TResult>> me,
-            Func<TSource, Monad<TMiddle>> thunk)
+            Func<TSource, Monad<TMiddle>> func)
         {
-            return _ => thunk.Invoke(_).Bind(me);
+            return _ => func.Invoke(_).Bind(me);
         }
 
         public Monad<TResult> Invoke<TSource, TResult>(

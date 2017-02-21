@@ -158,6 +158,7 @@
     <Compile Include="VoidOr.Shadowing.cs" />
     <Compile Include="VoidOrError.cs" />
     <Compile Include="VoidOr`1.cs" />
+    <Compile Include="YCombinator.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml" />

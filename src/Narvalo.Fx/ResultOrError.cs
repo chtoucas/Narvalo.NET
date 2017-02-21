@@ -24,14 +24,14 @@ namespace Narvalo.Fx
 
         // NB: This method serves a different purpose than the trywith from F# workflows.
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of ResultOrError.")]
-        public static ResultOrError<TResult> TryWith<TResult>(Func<TResult> thunk)
+        public static ResultOrError<TResult> TryWith<TResult>(Func<TResult> func)
         {
-            Require.NotNull(thunk, nameof(thunk));
+            Require.NotNull(func, nameof(func));
             Warrant.NotNull<ResultOrError<TResult>>();
 
             try
             {
-                return Of(thunk.Invoke());
+                return Of(func.Invoke());
             }
             catch (Exception ex)
             {
@@ -43,15 +43,15 @@ namespace Narvalo.Fx
 
         // NB: This method serves a different purpose than the tryfinally from F# workflows.
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of ResultOrError.")]
-        public static ResultOrError<TResult> TryFinally<TResult>(Func<TResult> thunk, Action finallyAction)
+        public static ResultOrError<TResult> TryFinally<TResult>(Func<TResult> func, Action finallyAction)
         {
-            Require.NotNull(thunk, nameof(thunk));
+            Require.NotNull(func, nameof(func));
             Require.NotNull(finallyAction, nameof(finallyAction));
             Warrant.NotNull<ResultOrError<TResult>>();
 
             try
             {
-                return Of(thunk.Invoke());
+                return Of(func.Invoke());
             }
             catch (Exception ex)
             {

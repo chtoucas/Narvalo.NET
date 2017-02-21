@@ -42,7 +42,7 @@ public partial class MonadTemplate
             <#+ WriteNotNull(); #>
             <#+ WriteNotNull("value"); #>
 
-            return @this.Bind(thunk => value.Select(v => thunk.Invoke(v)));
+            return @this.Bind(func => value.Select(v => func.Invoke(v)));
         }
 
         public static <#= Name #><Tuple<TSource, TOther><#= SuffixT #>> Zip<TSource, TOther<#= SuffixT #>>(
@@ -106,21 +106,6 @@ public partial class MonadTemplate
             return <#= Name #>.Unit;
 <#+ } #>
         }
-
-<#+ /* TO BE REMOVED #>
-        public static <#= Name #><TResult<#= SuffixT #>> Forever<TSource, TResult<#= SuffixT #>>(
-            this <#= Name #><TSource<#= SuffixT #>> @this,
-            Func<<#= Name #><TResult<#= SuffixT #>>> thunk)
-            <#+ WriteTypeConstraints("TSource", "TResult"); #>
-        {
-            <#+ WriteNotNull(); #>
-<#+ if (PostThenEnsuresSome) { #>
-            Warrant.NotNull<<#= Name #><TResult<#= SuffixT #>>>();
-<#+ } #>
-
-            return @this.ReplaceBy(@this.Forever(thunk));
-        }
-<#+ */ #>
 
         #endregion
 

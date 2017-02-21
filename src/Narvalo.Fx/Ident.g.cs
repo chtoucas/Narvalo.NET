@@ -82,7 +82,7 @@ namespace Narvalo.Fx
         /// Promotes a function to use and return <see cref="Ident{T}" /> values.
         /// </summary>
         public static Func<Ident<T>, Ident<TResult>> Lift<T, TResult>(
-            Func<T, TResult> thunk)
+            Func<T, TResult> func)
             /* T4: C# indent */
         {
             Warrant.NotNull<Func<Ident<T>, Ident<TResult>>>();
@@ -90,7 +90,7 @@ namespace Narvalo.Fx
             return m =>
             {
                 /* T4: C# indent */
-                return m.Select(thunk);
+                return m.Select(func);
             };
         }
 
@@ -99,7 +99,7 @@ namespace Narvalo.Fx
         /// monadic arguments from left to right.
         /// </summary>
         public static Func<Ident<T1>, Ident<T2>, Ident<TResult>>
-            Lift<T1, T2, TResult>(Func<T1, T2, TResult> thunk)
+            Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
             /* T4: C# indent */
         {
             Warrant.NotNull<Func<Ident<T1>, Ident<T2>, Ident<TResult>>>();
@@ -107,7 +107,7 @@ namespace Narvalo.Fx
             return (m1, m2) =>
             {
                 /* T4: C# indent */
-                return m1.Zip(m2, thunk);
+                return m1.Zip(m2, func);
             };
         }
 
@@ -116,7 +116,7 @@ namespace Narvalo.Fx
         /// monadic arguments from left to right.
         /// </summary>
         public static Func<Ident<T1>, Ident<T2>, Ident<T3>, Ident<TResult>>
-            Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> thunk)
+            Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
             /* T4: C# indent */
         {
             Warrant.NotNull<Func<Ident<T1>, Ident<T2>, Ident<T3>, Ident<TResult>>>();
@@ -124,7 +124,7 @@ namespace Narvalo.Fx
             return (m1, m2, m3) =>
             {
                 /* T4: C# indent */
-                return m1.Zip(m2, m3, thunk);
+                return m1.Zip(m2, m3, func);
             };
         }
 
@@ -134,7 +134,7 @@ namespace Narvalo.Fx
         /// </summary>
         public static Func<Ident<T1>, Ident<T2>, Ident<T3>, Ident<T4>, Ident<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
-            Func<T1, T2, T3, T4, TResult> thunk)
+            Func<T1, T2, T3, T4, TResult> func)
             /* T4: C# indent */
         {
             Warrant.NotNull<Func<Ident<T1>, Ident<T2>, Ident<T3>, Ident<T4>, Ident<TResult>>>();
@@ -142,7 +142,7 @@ namespace Narvalo.Fx
             return (m1, m2, m3, m4) =>
             {
                 /* T4: C# indent */
-                return m1.Zip(m2, m3, m4, thunk);
+                return m1.Zip(m2, m3, m4, func);
             };
         }
 
@@ -152,7 +152,7 @@ namespace Narvalo.Fx
         /// </summary>
         public static Func<Ident<T1>, Ident<T2>, Ident<T3>, Ident<T4>, Ident<T5>, Ident<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
-            Func<T1, T2, T3, T4, T5, TResult> thunk)
+            Func<T1, T2, T3, T4, T5, TResult> func)
             /* T4: C# indent */
         {
             Warrant.NotNull<Func<Ident<T1>, Ident<T2>, Ident<T3>, Ident<T4>, Ident<T5>, Ident<TResult>>>();
@@ -160,7 +160,7 @@ namespace Narvalo.Fx
             return (m1, m2, m3, m4, m5) =>
             {
                 /* T4: C# indent */
-                return m1.Zip(m2, m3, m4, m5, thunk);
+                return m1.Zip(m2, m3, m4, m5, func);
             };
         }
 
@@ -200,7 +200,7 @@ namespace Narvalo.Fx
             /* T4: C# indent */
             /* T4: C# indent */
 
-            return @this.Bind(thunk => value.Select(v => thunk.Invoke(v)));
+            return @this.Bind(func => value.Select(v => func.Invoke(v)));
         }
 
         public static Ident<Tuple<TSource, TOther>> Zip<TSource, TOther>(
@@ -246,16 +246,6 @@ namespace Narvalo.Fx
             /* T4: C# indent */
 
             return Ident.Unit;
-        }
-
-        public static Ident<TResult> Forever<TSource, TResult>(
-            this Ident<TSource> @this,
-            Func<Ident<TResult>> thunk)
-            /* T4: C# indent */
-        {
-            /* T4: C# indent */
-
-            return @this.ReplaceBy(@this.Forever(thunk));
         }
 
         #endregion
@@ -468,7 +458,7 @@ namespace Narvalo.Fx
     } // End of Ident - T4: EmitMonadExtensions().
 
     // Provides extension methods for Func<T> in the Kleisli category.
-    public static partial class Kunc
+    public static partial class Kleisli
     {
         #region Basic Monad functions
 
@@ -497,30 +487,30 @@ namespace Narvalo.Fx
 
         public static Func<TSource, Ident<TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, Ident<TMiddle>> @this,
-            Func<TMiddle, Ident<TResult>> thunk)
+            Func<TMiddle, Ident<TResult>> func)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
-            Expect.NotNull(thunk);
+            Expect.NotNull(func);
             Warrant.NotNull<Func<TSource, Ident<TResult>>>();
 
-            return _ => @this.Invoke(_).Bind(thunk);
+            return _ => @this.Invoke(_).Bind(func);
         }
 
         public static Func<TSource, Ident<TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, Ident<TResult>> @this,
-            Func<TSource, Ident<TMiddle>> thunk)
+            Func<TSource, Ident<TMiddle>> func)
             /* T4: C# indent */
         {
             Expect.NotNull(@this);
-            Require.NotNull(thunk, nameof(thunk));
+            Require.NotNull(func, nameof(func));
             Warrant.NotNull<Func<TSource, Ident<TResult>>>();
 
-            return _ => thunk.Invoke(_).Bind(@this);
+            return _ => func.Invoke(_).Bind(@this);
         }
 
         #endregion
-    } // End of Func - T4: EmitKleisliExtensions().
+    } // End of Kleisli - T4: EmitKleisliExtensions().
 
     // Provides extension methods for IEnumerable<Ident<T>>.
     public static partial class Ident

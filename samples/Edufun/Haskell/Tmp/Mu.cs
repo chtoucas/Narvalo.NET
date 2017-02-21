@@ -6,9 +6,9 @@ namespace Edufun.Haskell.Tmp
 
     public class Mu
     {
-        public Mu(Monad<Mu> fun)
+        public Mu(Monad<Mu> func)
         {
-            Out = fun;
+            Out = func;
         }
 
         public Monad<Mu> Out { get; }

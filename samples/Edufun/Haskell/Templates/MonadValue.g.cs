@@ -104,7 +104,7 @@ namespace Edufun.Haskell.Templates
         /// Promotes a function to use and return <see cref="MonadValue{T}" /> values.
         /// </summary>
         public static Func<MonadValue<T>, MonadValue<TResult>> Lift<T, TResult>(
-            Func<T, TResult> thunk)
+            Func<T, TResult> func)
             where T : struct
             where TResult : struct
         {
@@ -113,7 +113,7 @@ namespace Edufun.Haskell.Templates
             return m =>
             {
                 /* T4: C# indent */
-                return m.Select(thunk);
+                return m.Select(func);
             };
         }
 
@@ -122,7 +122,7 @@ namespace Edufun.Haskell.Templates
         /// monadic arguments from left to right.
         /// </summary>
         public static Func<MonadValue<T1>, MonadValue<T2>, MonadValue<TResult>>
-            Lift<T1, T2, TResult>(Func<T1, T2, TResult> thunk)
+            Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
             where T1 : struct
             where T2 : struct
             where TResult : struct
@@ -132,7 +132,7 @@ namespace Edufun.Haskell.Templates
             return (m1, m2) =>
             {
                 /* T4: C# indent */
-                return m1.Zip(m2, thunk);
+                return m1.Zip(m2, func);
             };
         }
 
@@ -141,7 +141,7 @@ namespace Edufun.Haskell.Templates
         /// monadic arguments from left to right.
         /// </summary>
         public static Func<MonadValue<T1>, MonadValue<T2>, MonadValue<T3>, MonadValue<TResult>>
-            Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> thunk)
+            Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
             where T1 : struct
             where T2 : struct
             where T3 : struct
@@ -152,7 +152,7 @@ namespace Edufun.Haskell.Templates
             return (m1, m2, m3) =>
             {
                 /* T4: C# indent */
-                return m1.Zip(m2, m3, thunk);
+                return m1.Zip(m2, m3, func);
             };
         }
 
@@ -162,7 +162,7 @@ namespace Edufun.Haskell.Templates
         /// </summary>
         public static Func<MonadValue<T1>, MonadValue<T2>, MonadValue<T3>, MonadValue<T4>, MonadValue<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
-            Func<T1, T2, T3, T4, TResult> thunk)
+            Func<T1, T2, T3, T4, TResult> func)
             where T1 : struct
             where T2 : struct
             where T3 : struct
@@ -174,7 +174,7 @@ namespace Edufun.Haskell.Templates
             return (m1, m2, m3, m4) =>
             {
                 /* T4: C# indent */
-                return m1.Zip(m2, m3, m4, thunk);
+                return m1.Zip(m2, m3, m4, func);
             };
         }
 
@@ -184,7 +184,7 @@ namespace Edufun.Haskell.Templates
         /// </summary>
         public static Func<MonadValue<T1>, MonadValue<T2>, MonadValue<T3>, MonadValue<T4>, MonadValue<T5>, MonadValue<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
-            Func<T1, T2, T3, T4, T5, TResult> thunk)
+            Func<T1, T2, T3, T4, T5, TResult> func)
             where T1 : struct
             where T2 : struct
             where T3 : struct
@@ -197,7 +197,7 @@ namespace Edufun.Haskell.Templates
             return (m1, m2, m3, m4, m5) =>
             {
                 /* T4: C# indent */
-                return m1.Zip(m2, m3, m4, m5, thunk);
+                return m1.Zip(m2, m3, m4, m5, func);
             };
         }
 
@@ -255,7 +255,6 @@ namespace Edufun.Haskell.Templates
 
             return MonadValue.Unit;
         }
-
 
         #endregion
 
@@ -695,30 +694,30 @@ namespace Edufun.Haskell.Templates
 
         public static Func<TSource, MonadValue<TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, MonadValue<TMiddle>> @this,
-            Func<TMiddle, MonadValue<TResult>> thunk)
+            Func<TMiddle, MonadValue<TResult>> func)
             where TSource : struct
             where TMiddle : struct
             where TResult : struct
         {
             Require.NotNull(@this, nameof(@this));
-            Expect.NotNull(thunk);
+            Expect.NotNull(func);
             Warrant.NotNull<Func<TSource, MonadValue<TResult>>>();
 
-            return _ => @this.Invoke(_).Bind(thunk);
+            return _ => @this.Invoke(_).Bind(func);
         }
 
         public static Func<TSource, MonadValue<TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, MonadValue<TResult>> @this,
-            Func<TSource, MonadValue<TMiddle>> thunk)
+            Func<TSource, MonadValue<TMiddle>> func)
             where TSource : struct
             where TMiddle : struct
             where TResult : struct
         {
             Expect.NotNull(@this);
-            Require.NotNull(thunk, nameof(thunk));
+            Require.NotNull(func, nameof(func));
             Warrant.NotNull<Func<TSource, MonadValue<TResult>>>();
 
-            return _ => thunk.Invoke(_).Bind(@this);
+            return _ => func.Invoke(_).Bind(@this);
         }
 
         #endregion

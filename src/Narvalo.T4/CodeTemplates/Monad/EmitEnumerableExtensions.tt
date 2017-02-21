@@ -53,15 +53,15 @@ public partial class MonadTemplate
         public static <#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
             SelectUnzip<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
-            Func<TSource, <#= Name #><Tuple<TFirst, TSecond>>> thunk)
+            Func<TSource, <#= Name #><Tuple<TFirst, TSecond>>> selector)
         {
             Expect.NotNull(@this);
-            Expect.NotNull(thunk);
+            Expect.NotNull(selector);
 <#+ if (IsNullable && HasZero) { #>
             Warrant.NotNull<<#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>();
 <#+ } #>
 
-            return @this.SelectUnzipImpl(thunk);
+            return @this.SelectUnzipImpl(selector);
         }
 
         public static <#= Name #><IEnumerable<TResult>> ZipWith<TFirst, TSecond, TResult>(

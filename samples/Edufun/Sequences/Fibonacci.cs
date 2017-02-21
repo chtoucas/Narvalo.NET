@@ -7,7 +7,6 @@ namespace Edufun.Sequences
 
     using Narvalo.Fx;
 
-    // **WARNING** The sequences are infinite!
     public static class Fibonacci
     {
         public static Func<int, int> Recurse()
@@ -20,11 +19,11 @@ namespace Edufun.Sequences
 
             while (true)
             {
-                int retval = i + j;
+                int next = i + j;
                 i = j;
-                j = retval;
+                j = next;
 
-                yield return retval;
+                yield return next;
             }
         }
 

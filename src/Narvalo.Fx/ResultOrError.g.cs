@@ -85,7 +85,7 @@ namespace Narvalo.Fx
         /// Promotes a function to use and return <see cref="ResultOrError{T}" /> values.
         /// </summary>
         public static Func<ResultOrError<T>, ResultOrError<TResult>> Lift<T, TResult>(
-            Func<T, TResult> thunk)
+            Func<T, TResult> func)
             /* T4: C# indent */
         {
             Warrant.NotNull<Func<ResultOrError<T>, ResultOrError<TResult>>>();
@@ -93,7 +93,7 @@ namespace Narvalo.Fx
             return m =>
             {
                 Require.NotNull(m, nameof(m));
-                return m.Select(thunk);
+                return m.Select(func);
             };
         }
 
@@ -102,7 +102,7 @@ namespace Narvalo.Fx
         /// monadic arguments from left to right.
         /// </summary>
         public static Func<ResultOrError<T1>, ResultOrError<T2>, ResultOrError<TResult>>
-            Lift<T1, T2, TResult>(Func<T1, T2, TResult> thunk)
+            Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
             /* T4: C# indent */
         {
             Warrant.NotNull<Func<ResultOrError<T1>, ResultOrError<T2>, ResultOrError<TResult>>>();
@@ -110,7 +110,7 @@ namespace Narvalo.Fx
             return (m1, m2) =>
             {
                 Require.NotNull(m1, nameof(m1));
-                return m1.Zip(m2, thunk);
+                return m1.Zip(m2, func);
             };
         }
 
@@ -119,7 +119,7 @@ namespace Narvalo.Fx
         /// monadic arguments from left to right.
         /// </summary>
         public static Func<ResultOrError<T1>, ResultOrError<T2>, ResultOrError<T3>, ResultOrError<TResult>>
-            Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> thunk)
+            Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
             /* T4: C# indent */
         {
             Warrant.NotNull<Func<ResultOrError<T1>, ResultOrError<T2>, ResultOrError<T3>, ResultOrError<TResult>>>();
@@ -127,7 +127,7 @@ namespace Narvalo.Fx
             return (m1, m2, m3) =>
             {
                 Require.NotNull(m1, nameof(m1));
-                return m1.Zip(m2, m3, thunk);
+                return m1.Zip(m2, m3, func);
             };
         }
 
@@ -137,7 +137,7 @@ namespace Narvalo.Fx
         /// </summary>
         public static Func<ResultOrError<T1>, ResultOrError<T2>, ResultOrError<T3>, ResultOrError<T4>, ResultOrError<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
-            Func<T1, T2, T3, T4, TResult> thunk)
+            Func<T1, T2, T3, T4, TResult> func)
             /* T4: C# indent */
         {
             Warrant.NotNull<Func<ResultOrError<T1>, ResultOrError<T2>, ResultOrError<T3>, ResultOrError<T4>, ResultOrError<TResult>>>();
@@ -145,7 +145,7 @@ namespace Narvalo.Fx
             return (m1, m2, m3, m4) =>
             {
                 Require.NotNull(m1, nameof(m1));
-                return m1.Zip(m2, m3, m4, thunk);
+                return m1.Zip(m2, m3, m4, func);
             };
         }
 
@@ -155,7 +155,7 @@ namespace Narvalo.Fx
         /// </summary>
         public static Func<ResultOrError<T1>, ResultOrError<T2>, ResultOrError<T3>, ResultOrError<T4>, ResultOrError<T5>, ResultOrError<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
-            Func<T1, T2, T3, T4, T5, TResult> thunk)
+            Func<T1, T2, T3, T4, T5, TResult> func)
             /* T4: C# indent */
         {
             Warrant.NotNull<Func<ResultOrError<T1>, ResultOrError<T2>, ResultOrError<T3>, ResultOrError<T4>, ResultOrError<T5>, ResultOrError<TResult>>>();
@@ -163,7 +163,7 @@ namespace Narvalo.Fx
             return (m1, m2, m3, m4, m5) =>
             {
                 Require.NotNull(m1, nameof(m1));
-                return m1.Zip(m2, m3, m4, m5, thunk);
+                return m1.Zip(m2, m3, m4, m5, func);
             };
         }
 
@@ -203,7 +203,7 @@ namespace Narvalo.Fx
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(value, nameof(value));
 
-            return @this.Bind(thunk => value.Select(v => thunk.Invoke(v)));
+            return @this.Bind(func => value.Select(v => func.Invoke(v)));
         }
 
         public static ResultOrError<Tuple<TSource, TOther>> Zip<TSource, TOther>(
@@ -250,16 +250,6 @@ namespace Narvalo.Fx
             Warrant.NotNull<ResultOrError<global::Narvalo.Fx.Unit>>();
 
             return ResultOrError.Unit;
-        }
-
-        public static ResultOrError<TResult> Forever<TSource, TResult>(
-            this ResultOrError<TSource> @this,
-            Func<ResultOrError<TResult>> thunk)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-
-            return @this.ReplaceBy(@this.Forever(thunk));
         }
 
         #endregion
@@ -472,7 +462,7 @@ namespace Narvalo.Fx
     } // End of ResultOrError - T4: EmitMonadExtensions().
 
     // Provides extension methods for Func<T> in the Kleisli category.
-    public static partial class Kunc
+    public static partial class Kleisli
     {
         #region Basic Monad functions
 
@@ -502,30 +492,30 @@ namespace Narvalo.Fx
 
         public static Func<TSource, ResultOrError<TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, ResultOrError<TMiddle>> @this,
-            Func<TMiddle, ResultOrError<TResult>> thunk)
+            Func<TMiddle, ResultOrError<TResult>> func)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
-            Expect.NotNull(thunk);
+            Expect.NotNull(func);
             Warrant.NotNull<Func<TSource, ResultOrError<TResult>>>();
 
-            return _ => @this.Invoke(_).Bind(thunk);
+            return _ => @this.Invoke(_).Bind(func);
         }
 
         public static Func<TSource, ResultOrError<TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, ResultOrError<TResult>> @this,
-            Func<TSource, ResultOrError<TMiddle>> thunk)
+            Func<TSource, ResultOrError<TMiddle>> func)
             /* T4: C# indent */
         {
             Expect.NotNull(@this);
-            Require.NotNull(thunk, nameof(thunk));
+            Require.NotNull(func, nameof(func));
             Warrant.NotNull<Func<TSource, ResultOrError<TResult>>>();
 
-            return _ => thunk.Invoke(_).Bind(@this);
+            return _ => func.Invoke(_).Bind(@this);
         }
 
         #endregion
-    } // End of Func - T4: EmitKleisliExtensions().
+    } // End of Kleisli - T4: EmitKleisliExtensions().
 
     // Provides extension methods for IEnumerable<ResultOrError<T>>.
     public static partial class ResultOrError
@@ -648,12 +638,12 @@ namespace Narvalo.Fx.Linq
         public static ResultOrError<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
             SelectUnzip<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
-            Func<TSource, ResultOrError<Tuple<TFirst, TSecond>>> thunk)
+            Func<TSource, ResultOrError<Tuple<TFirst, TSecond>>> selector)
         {
             Expect.NotNull(@this);
-            Expect.NotNull(thunk);
+            Expect.NotNull(selector);
 
-            return @this.SelectUnzipImpl(thunk);
+            return @this.SelectUnzipImpl(selector);
         }
 
         public static ResultOrError<IEnumerable<TResult>> ZipWith<TFirst, TSecond, TResult>(

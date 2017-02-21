@@ -105,11 +105,11 @@ namespace Narvalo.Fx
     // Provides the core Comonad methods.
     public partial struct Ident<T>
     {
-        public Ident<TResult> Extend<TResult>(Func<Ident<T>, TResult> thunk)
+        public Ident<TResult> Extend<TResult>(Func<Ident<T>, TResult> func)
         {
-            Require.NotNull(thunk, nameof(thunk));
+            Require.NotNull(func, nameof(func));
 
-            return new Ident<TResult>(thunk.Invoke(this));
+            return new Ident<TResult>(func.Invoke(this));
         }
 
         [DebuggerHidden]

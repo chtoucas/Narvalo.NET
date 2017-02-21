@@ -67,7 +67,7 @@ namespace Narvalo.Fx
         /// Promotes a function to use and return <see cref="Either{T, TRight}" /> values.
         /// </summary>
         public static Func<Either<T, TRight>, Either<TResult, TRight>> Lift<T, TResult, TRight>(
-            Func<T, TResult> thunk)
+            Func<T, TResult> func)
             /* T4: C# indent */
         {
             Warrant.NotNull<Func<Either<T, TRight>, Either<TResult, TRight>>>();
@@ -75,7 +75,7 @@ namespace Narvalo.Fx
             return m =>
             {
                 Require.NotNull(m, nameof(m));
-                return m.Select(thunk);
+                return m.Select(func);
             };
         }
 
@@ -84,7 +84,7 @@ namespace Narvalo.Fx
         /// monadic arguments from left to right.
         /// </summary>
         public static Func<Either<T1, TRight>, Either<T2, TRight>, Either<TResult, TRight>>
-            Lift<T1, T2, TResult, TRight>(Func<T1, T2, TResult> thunk)
+            Lift<T1, T2, TResult, TRight>(Func<T1, T2, TResult> func)
             /* T4: C# indent */
         {
             Warrant.NotNull<Func<Either<T1, TRight>, Either<T2, TRight>, Either<TResult, TRight>>>();
@@ -92,7 +92,7 @@ namespace Narvalo.Fx
             return (m1, m2) =>
             {
                 Require.NotNull(m1, nameof(m1));
-                return m1.Zip(m2, thunk);
+                return m1.Zip(m2, func);
             };
         }
 
@@ -101,7 +101,7 @@ namespace Narvalo.Fx
         /// monadic arguments from left to right.
         /// </summary>
         public static Func<Either<T1, TRight>, Either<T2, TRight>, Either<T3, TRight>, Either<TResult, TRight>>
-            Lift<T1, T2, T3, TResult, TRight>(Func<T1, T2, T3, TResult> thunk)
+            Lift<T1, T2, T3, TResult, TRight>(Func<T1, T2, T3, TResult> func)
             /* T4: C# indent */
         {
             Warrant.NotNull<Func<Either<T1, TRight>, Either<T2, TRight>, Either<T3, TRight>, Either<TResult, TRight>>>();
@@ -109,7 +109,7 @@ namespace Narvalo.Fx
             return (m1, m2, m3) =>
             {
                 Require.NotNull(m1, nameof(m1));
-                return m1.Zip(m2, m3, thunk);
+                return m1.Zip(m2, m3, func);
             };
         }
 
@@ -119,7 +119,7 @@ namespace Narvalo.Fx
         /// </summary>
         public static Func<Either<T1, TRight>, Either<T2, TRight>, Either<T3, TRight>, Either<T4, TRight>, Either<TResult, TRight>>
             Lift<T1, T2, T3, T4, TResult, TRight>(
-            Func<T1, T2, T3, T4, TResult> thunk)
+            Func<T1, T2, T3, T4, TResult> func)
             /* T4: C# indent */
         {
             Warrant.NotNull<Func<Either<T1, TRight>, Either<T2, TRight>, Either<T3, TRight>, Either<T4, TRight>, Either<TResult, TRight>>>();
@@ -127,7 +127,7 @@ namespace Narvalo.Fx
             return (m1, m2, m3, m4) =>
             {
                 Require.NotNull(m1, nameof(m1));
-                return m1.Zip(m2, m3, m4, thunk);
+                return m1.Zip(m2, m3, m4, func);
             };
         }
 
@@ -137,7 +137,7 @@ namespace Narvalo.Fx
         /// </summary>
         public static Func<Either<T1, TRight>, Either<T2, TRight>, Either<T3, TRight>, Either<T4, TRight>, Either<T5, TRight>, Either<TResult, TRight>>
             Lift<T1, T2, T3, T4, T5, TResult, TRight>(
-            Func<T1, T2, T3, T4, T5, TResult> thunk)
+            Func<T1, T2, T3, T4, T5, TResult> func)
             /* T4: C# indent */
         {
             Warrant.NotNull<Func<Either<T1, TRight>, Either<T2, TRight>, Either<T3, TRight>, Either<T4, TRight>, Either<T5, TRight>, Either<TResult, TRight>>>();
@@ -145,7 +145,7 @@ namespace Narvalo.Fx
             return (m1, m2, m3, m4, m5) =>
             {
                 Require.NotNull(m1, nameof(m1));
-                return m1.Zip(m2, m3, m4, m5, thunk);
+                return m1.Zip(m2, m3, m4, m5, func);
             };
         }
 
@@ -185,7 +185,7 @@ namespace Narvalo.Fx
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(value, nameof(value));
 
-            return @this.Bind(thunk => value.Select(v => thunk.Invoke(v)));
+            return @this.Bind(func => value.Select(v => func.Invoke(v)));
         }
 
         public static Either<Tuple<TSource, TOther>, TRight> Zip<TSource, TOther, TRight>(
@@ -232,16 +232,6 @@ namespace Narvalo.Fx
             Warrant.NotNull<Either<global::Narvalo.Fx.Unit, TRight>>();
 
             return Either.Of<Unit, TRight>(global::Narvalo.Fx.Unit.Single);
-        }
-
-        public static Either<TResult, TRight> Forever<TSource, TResult, TRight>(
-            this Either<TSource, TRight> @this,
-            Func<Either<TResult, TRight>> thunk)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-
-            return @this.ReplaceBy(@this.Forever(thunk));
         }
 
         #endregion
@@ -454,7 +444,7 @@ namespace Narvalo.Fx
     } // End of Either - T4: EmitMonadExtensions().
 
     // Provides extension methods for Func<T> in the Kleisli category.
-    public static partial class Kunc
+    public static partial class Kleisli
     {
         #region Basic Monad functions
 
@@ -484,30 +474,30 @@ namespace Narvalo.Fx
 
         public static Func<TSource, Either<TResult, TRight>> Compose<TSource, TMiddle, TResult, TRight>(
             this Func<TSource, Either<TMiddle, TRight>> @this,
-            Func<TMiddle, Either<TResult, TRight>> thunk)
+            Func<TMiddle, Either<TResult, TRight>> func)
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
-            Expect.NotNull(thunk);
+            Expect.NotNull(func);
             Warrant.NotNull<Func<TSource, Either<TResult, TRight>>>();
 
-            return _ => @this.Invoke(_).Bind(thunk);
+            return _ => @this.Invoke(_).Bind(func);
         }
 
         public static Func<TSource, Either<TResult, TRight>> ComposeBack<TSource, TMiddle, TResult, TRight>(
             this Func<TMiddle, Either<TResult, TRight>> @this,
-            Func<TSource, Either<TMiddle, TRight>> thunk)
+            Func<TSource, Either<TMiddle, TRight>> func)
             /* T4: C# indent */
         {
             Expect.NotNull(@this);
-            Require.NotNull(thunk, nameof(thunk));
+            Require.NotNull(func, nameof(func));
             Warrant.NotNull<Func<TSource, Either<TResult, TRight>>>();
 
-            return _ => thunk.Invoke(_).Bind(@this);
+            return _ => func.Invoke(_).Bind(@this);
         }
 
         #endregion
-    } // End of Func - T4: EmitKleisliExtensions().
+    } // End of Kleisli - T4: EmitKleisliExtensions().
 
     // Provides extension methods for IEnumerable<Either<T, TRight>>.
     public static partial class Either

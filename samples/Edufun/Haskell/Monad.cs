@@ -113,13 +113,13 @@ namespace Edufun.Haskell
         // Left-to-right Kleisli composition of monads.
         Func<TSource, Monad<TResult>> Compose<TSource, TMiddle, TResult>(
             Func<TSource, Monad<TMiddle>> me,
-            Func<TMiddle, Monad<TResult>> thunk);
+            Func<TMiddle, Monad<TResult>> func);
 
         // [Haskell] (<=<) :: Monad m => (b -> m c) -> (a -> m b) -> a -> m c
         // Right-to-left Kleisli composition of monads. (>=>), with the arguments flipped.
         Func<TSource, Monad<TResult>> ComposeBack<TSource, TMiddle, TResult>(
             Func<TMiddle, Monad<TResult>> me,
-            Func<TSource, Monad<TMiddle>> thunk);
+            Func<TSource, Monad<TMiddle>> func);
 
         // [Haskell] forM :: (Traversable t, Monad m) => t a -> (a -> m b) -> m (t b)
         // forM is mapM with its arguments flipped.
@@ -180,7 +180,7 @@ namespace Edufun.Haskell
 
         // [Haskell] forever :: Applicative f => f a -> f b
         // forever act repeats the action infinitely.
-        void Forever<TSource>(Monad<TSource> value);
+        Monad<TResult> Forever<TSource, TResult>(Monad<TSource> source);
 
         // [Haskell] guard :: Alternative f => Bool -> f ()
         // guard b is pure () if b is True, and empty if b is False.
@@ -192,28 +192,28 @@ namespace Edufun.Haskell
 
         // [Haskell] liftM :: Monad m => (a1 -> r) -> m a1 -> m r
         // Promote a function to a monad.
-        Func<Monad<TSource>, Monad<TResult>> Lift<TSource, TResult>(Func<TSource, TResult> thunk);
+        Func<Monad<TSource>, Monad<TResult>> Lift<TSource, TResult>(Func<TSource, TResult> func);
 
         // [Haskell] liftM2 :: Monad m => (a1 -> a2 -> r) -> m a1 -> m a2 -> m r
         // Promote a function to a monad, scanning the monadic arguments from left to right.
         Func<Monad<T1>, Monad<T2>, Monad<TResult>>
-            Lift<T1, T2, TResult>(Func<T1, T2, TResult> thunk);
+            Lift<T1, T2, TResult>(Func<T1, T2, TResult> func);
 
         // [Haskell] liftM3 :: Monad m => (a1 -> a2 -> a3 -> r) -> m a1 -> m a2 -> m a3 -> m r
         // Promote a function to a monad, scanning the monadic arguments from left to right.
         Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<TResult>>
-            Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> thunk);
+            Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func);
 
         // [Haskell] liftM4 :: Monad m => (a1 -> a2 -> a3 -> a4 -> r) -> m a1 -> m a2 -> m a3 -> m a4 -> m r
         // Promote a function to a monad, scanning the monadic arguments from left to right.
         Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<T4>, Monad<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
-            Func<T1, T2, T3, T4, TResult> thunk);
+            Func<T1, T2, T3, T4, TResult> func);
 
         // [Haskell] liftM5 :: Monad m => (a1 -> a2 -> a3 -> a4 -> a5 -> r) -> m a1 -> m a2 -> m a3 -> m a4 -> m a5 -> m r
         // Promote a function to a monad, scanning the monadic arguments from left to right.
         Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<T4>, Monad<T5>, Monad<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
-            Func<T1, T2, T3, T4, T5, TResult> thunk);
+            Func<T1, T2, T3, T4, T5, TResult> func);
     }
 }
