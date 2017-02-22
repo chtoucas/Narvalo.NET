@@ -7,7 +7,7 @@ namespace Edufun.Haskell
     using Narvalo.Fx;
 
     // [Haskell] Data.Functor
-    // The Functor class is used for types that can be mapped over.
+    // A functor is for types that can be mapped over.
     //
     // Translation map from Haskell to .NET:
     // - fmap   obj.Select       (required)
@@ -37,10 +37,10 @@ namespace Edufun.Haskell
     {
         // [Haskell] ($>) :: Functor f => f a -> b -> f b
         // Flipped version of <$.
-        Functor<TResult> Inject<T, TResult>(TResult other, Functor<T> value);
+        Functor<TResult> Inject<T, TResult>(TResult value, Functor<T> functor);
 
         // [Haskell] (<$>) :: Functor f => (a -> b) -> f a -> f b
         // An infix synonym for fmap.
-        Functor<TResult> InvokeWith<T, TResult>(Func<T, TResult> selector, Functor<T> value);
+        Functor<TResult> InvokeWith<T, TResult>(Func<T, TResult> func, Functor<T> functor);
     }
 }

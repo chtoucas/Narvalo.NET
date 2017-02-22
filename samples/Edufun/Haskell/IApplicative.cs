@@ -4,6 +4,8 @@ namespace Edufun.Haskell
 {
     using System;
 
+    using Narvalo.Fx;
+
     // [Haskell] Control.Applicative
     // In-between a Functor and a Monad.
     //
@@ -40,7 +42,7 @@ namespace Edufun.Haskell
     {
         // [Haskell] (<*) :: f a -> f b -> f a
         // Sequence actions, discarding the value of the second argument.
-        Applicative<T> Ignore<TResult>(Applicative<TResult> other);
+        Applicative<T> Ignore<TOther>(Applicative<TOther> other);
 
         // [Haskell] (<$) :: Functor f => a -> f b -> f a
         // Replace all locations in the input with the same value.
@@ -53,6 +55,10 @@ namespace Edufun.Haskell
         // [Haskell] liftA :: Applicative f => (a -> b) -> f a -> f b
         // Lift a function to actions. A synonym of fmap for a functor.
         Applicative<TResult> Select<TResult>(Func<T, TResult> selector);
+
+        // [Haskell] void :: Functor f => f a -> f ()
+        // void value discards or ignores the result of evaluation.
+        Applicative<Unit> Skip();
 
         // [Haskell] liftA2 :: Applicative f => (a -> b -> c) -> f a -> f b -> f c
         // Lift a binary function to actions.
@@ -73,13 +79,17 @@ namespace Edufun.Haskell
         // [Haskell] (<**>) :: Applicative f => f a -> f (a -> b) -> f b
         // A variant of <*> with the arguments reversed.
         Applicative<TResult> Apply<TSource, TResult>(
-            Applicative<Func<TSource, TResult>> @this,
+            Applicative<Func<TSource, TResult>> applicative,
             Applicative<TSource> value);
+
+        // [Haskell] ($>) :: Functor f => f a -> b -> f b
+        // Flipped version of <$.
+        Applicative<TResult> Inject<T, TResult>(TResult value, Applicative<T> functor);
 
         // [Haskell] (<$>) :: Functor f => (a -> b) -> f a -> f b
         // An infix synonym for fmap.
         Applicative<TResult> InvokeWith<TSource, TResult>(
-            Func<TSource, TResult> selector,
+            Func<TSource, TResult> func,
             Applicative<TSource> value);
     }
 }

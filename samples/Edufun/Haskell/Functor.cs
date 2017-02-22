@@ -8,6 +8,7 @@ namespace Edufun.Haskell
 
     public partial class Functor<T> : IFunctor<T>
     {
+        // Data.Functor: fmap
         public Functor<TResult> Select<TResult>(Func<T, TResult> selector)
         {
             throw new FakeClassException();
@@ -25,12 +26,12 @@ namespace Edufun.Haskell
 
     public class Functor : IFunctorOperators
     {
-        // ($>) = flip (<$)
-        public Functor<TResult> Inject<TSource, TResult>(TResult other, Functor<TSource> value)
-            => value.Replace(other);
+        // [Data.Functor] ($>) = flip (<$)
+        public Functor<TResult> Inject<TSource, TResult>(TResult value, Functor<TSource> functor)
+            => functor.Replace(value);
 
-        // (<$>) = fmap
-        public Functor<TResult> InvokeWith<TSource, TResult>(Func<TSource, TResult> selector, Functor<TSource> value)
-            => value.Select(selector);
+        // [Data.Functor] (<$>) = fmap
+        public Functor<TResult> InvokeWith<TSource, TResult>(Func<TSource, TResult> func, Functor<TSource> functor)
+            => functor.Select(func);
     }
 }
