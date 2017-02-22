@@ -5,6 +5,7 @@ namespace Edufun.Haskell
     using System;
     using System.Collections.Generic;
 
+    using Edufun.Haskell.Impl;
     using Narvalo.Fx;
 
     // [Haskell] Control.Monad.MonadPlus
@@ -44,10 +45,5 @@ namespace Edufun.Haskell
         // [Haskell] mzero :: m a
         // The identity of mplus.
         MonadPlus<T> Zero<T>();
-    }
-
-    public class MonadPlus<T>
-    {
-
     }
 }
