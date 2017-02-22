@@ -1,6 +1,5 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-#define APPLICATIVE_USE_GHC_BASE
 //#define MONAD_VIA_MAP_MULTIPLY
 
 namespace Edufun.Haskell
@@ -59,26 +58,10 @@ namespace Edufun.Haskell
 
     public partial class Monad<T> : IMonadSyntax<T>
     {
-        // [GHC.Base] (<*) = liftA2 const
-        // Control.Applicative: u <* v = pure const <*> u <*> v
-        public Monad<T> Ignore<TOther>(Monad<TOther> other)
-        {
-#if APPLICATIVE_USE_GHC_BASE
-            Func<T, TOther, T> ignorethat = (_, that) => _;
-
-            return Zip(other, ignorethat);
-#else
-            Func<T, Func<TOther, T>> ignorethat = _ => that => _;
-
-            return other.Gather(Gather(Monad.Of(ignorethat)));
-#endif
-        }
-
         // [GHC.Base] ap m1 m2 = do { x1 <- m1; x2 <- m2; return (x1 x2) }
+        // Control.Monad: <*> = ap
         public Monad<TResult> Gather<TResult>(Monad<Func<T, TResult>> applicative)
-        {
-            throw new NotImplementedException();
-        }
+            => Bind(arg => applicative.Select(func => func(arg)));
 
         // [Control.Monad]
         //  replicateM cnt0 f =
@@ -89,45 +72,16 @@ namespace Edufun.Haskell
         //      | otherwise = liftA2(:) f(loop (cnt - 1))
         public Monad<IEnumerable<T>> Repeat(int count) => Select(_ => Enumerable.Repeat(_, count));
 
-        // [GHC.Base] (<$) = fmap . const
-        public Monad<TResult> Replace<TResult>(TResult other) => Select(_ => other);
-
         // [GHC.Base] m >> k = m >>= \_ -> k
         public Monad<TResult> ReplaceBy<TResult>(Monad<TResult> other) => Bind(_ => other);
 
         // [Data.Functor] void x = () <$ x
-        public Monad<Unit> Skip() => Replace(Unit.Single);
-
-        // [GHC.Base] liftA2 f a b = fmap f a <*> b
-        public Monad<TResult> Zip<TSecond, TResult>(
-            Monad<TSecond> second,
-            Func<T, TSecond, TResult> resultSelector)
-        {
-            Func<T, Func<TSecond, TResult>> selector = x => y => resultSelector.Invoke(x, y);
-
-            return second.Gather(Select(selector));
-        }
-
-        // [GHC.Base] liftA3 f a b c = fmap f a <*> b <*> c
-        public Monad<TResult> Zip<T2, T3, TResult>(
-            Monad<T2> second,
-            Monad<T3> third,
-            Func<T, T2, T3, TResult> resultSelector)
-        {
-            Func<T, Func<T2, Func<T3, TResult>>> selector = x => y => z => resultSelector.Invoke(x, y, z);
-
-            return third.Gather(second.Gather(Select(selector)));
-        }
+        // Strictly speaking, this should be Replace(Unit.Single); but we do not have Replace.
+        public Monad<Unit> Skip() => Select(_ => Unit.Single);
     }
 
     public partial class Monad : IMonadOperators
     {
-        // [GHC.Base] (<**>) = liftA2 (flip ($))
-        public Monad<TResult> Apply<TSource, TResult>(
-            Monad<Func<TSource, TResult>> applicative,
-            Monad<TSource> value)
-            => value.Gather(applicative);
-
         public Monad<IEnumerable<TSource>> Collect<TSource>(IEnumerable<Monad<TSource>> @this)
         {
             var seed = Monad.Of(Enumerable.Empty<TSource>());
@@ -135,10 +89,6 @@ namespace Edufun.Haskell
 
             return @this.Aggregate(seed, Lift(append));
         }
-
-        // [Data.Functor] ($>) = flip (<$)
-        public Monad<TResult> Inject<TSource, TResult>(TResult value, Monad<TSource> functor)
-            => functor.Replace(value);
 
         // [Control.Monad] forever a = let a' = a *> a' in a'
         public Monad<TResult> Forever<TSource, TResult>(Monad<TSource> source)

@@ -93,14 +93,6 @@ namespace Edufun.Haskell
         // which promotes function application.
         Monad<TResult> Gather<TResult>(Monad<Func<T, TResult>> applicative);
 
-        // [Haskell] (<*) :: f a -> f b -> f a
-        // Sequence actions, discarding the value of the second argument.
-        Monad<T> Ignore<TOther>(Monad<TOther> other);
-
-        // [Haskell] (<$) :: Functor f => a -> f b -> f a
-        // Replace all locations in the input with the same value.
-        Monad<TResult> Replace<TResult>(TResult other);
-
         // [Haskell] (>>) :: forall a b. m a -> m b -> m b
         // Sequentially compose two actions, discarding any value produced by the first,
         // like sequencing operators (such as the semicolon) in imperative languages.
@@ -113,19 +105,6 @@ namespace Edufun.Haskell
         // [Haskell] void :: Functor f => f a -> f ()
         // void value discards or ignores the result of evaluation.
         Monad<Unit> Skip();
-
-        // [Haskell] liftA2 :: Applicative f => (a -> b -> c) -> f a -> f b -> f c
-        // Lift a binary function to actions.
-        Monad<TResult> Zip<TSecond, TResult>(
-            Monad<TSecond> second,
-            Func<T, TSecond, TResult> resultSelector);
-
-        // [Haskell] liftA3 :: Applicative f => (a -> b -> c -> d) -> f a -> f b -> f c -> f d
-        // Lift a ternary function to actions.
-        Monad<TResult> Zip<T2, T3, TResult>(
-            Monad<T2> second,
-            Monad<T3> third,
-            Func<T, T2, T3, TResult> resultSelector);
     }
 
     public interface IKleisliOperators
@@ -195,12 +174,6 @@ namespace Edufun.Haskell
 
     public interface IMonadOperators
     {
-        // [Haskell] (<**>) :: Applicative f => f a -> f (a -> b) -> f b
-        // A variant of <*> with the arguments reversed.
-        Monad<TResult> Apply<TSource, TResult>(
-            Monad<Func<TSource, TResult>> applicative,
-            Monad<TSource> value);
-
         // [Haskell] sequence :: (Traversable t, Monad m) => t (m a) -> m (t a)
         // Evaluate each monadic action in the structure from left to right, and collect the results.
         Monad<IEnumerable<TSource>> Collect<TSource>(IEnumerable<Monad<TSource>> source);
@@ -208,10 +181,6 @@ namespace Edufun.Haskell
         // [Haskell] forever :: Applicative f => f a -> f b
         // forever act repeats the action infinitely.
         Monad<TResult> Forever<TSource, TResult>(Monad<TSource> source);
-
-        // [Haskell] ($>) :: Functor f => f a -> b -> f b
-        // Flipped version of <$.
-        Monad<TResult> Inject<T, TResult>(TResult value, Monad<T> functor);
 
         // [Haskell] (<$!>) :: Monad m => (a -> b) -> m a -> m b
         // Strict version of <$>.

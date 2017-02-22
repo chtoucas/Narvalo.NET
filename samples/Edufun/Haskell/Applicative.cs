@@ -65,9 +65,6 @@ namespace Edufun.Haskell
         public Applicative<TResult> Select<TResult>(Func<T, TResult> selector)
             => Gather(Applicative.Of(selector));
 
-        // [Data.Functor] void x = () <$ x
-        public Applicative<Unit> Skip() => Replace(Unit.Single);
-
         // [GHC.Base] liftA2 f a b = fmap f a <*> b
         public Applicative<TResult> Zip<TSecond, TResult>(
             Applicative<TSecond> second,
@@ -97,10 +94,6 @@ namespace Edufun.Haskell
             Applicative<Func<TSource, TResult>> applicative,
             Applicative<TSource> value)
             => value.Gather(applicative);
-
-        // [Data.Functor] ($>) = flip (<$)
-        public Applicative<TResult> Inject<TSource, TResult>(TResult value, Applicative<TSource> functor)
-            => functor.Replace(value);
 
         // [Data.Functor] (<$>) = fmap
         public Applicative<TResult> InvokeWith<TSource, TResult>(

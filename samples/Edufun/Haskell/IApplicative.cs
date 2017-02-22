@@ -56,10 +56,6 @@ namespace Edufun.Haskell
         // Lift a function to actions. A synonym of fmap for a functor.
         Applicative<TResult> Select<TResult>(Func<T, TResult> selector);
 
-        // [Haskell] void :: Functor f => f a -> f ()
-        // void value discards or ignores the result of evaluation.
-        Applicative<Unit> Skip();
-
         // [Haskell] liftA2 :: Applicative f => (a -> b -> c) -> f a -> f b -> f c
         // Lift a binary function to actions.
         Applicative<TResult> Zip<TSecond, TResult>(
@@ -81,10 +77,6 @@ namespace Edufun.Haskell
         Applicative<TResult> Apply<TSource, TResult>(
             Applicative<Func<TSource, TResult>> applicative,
             Applicative<TSource> value);
-
-        // [Haskell] ($>) :: Functor f => f a -> b -> f b
-        // Flipped version of <$.
-        Applicative<TResult> Inject<T, TResult>(TResult value, Applicative<T> functor);
 
         // [Haskell] (<$>) :: Functor f => (a -> b) -> f a -> f b
         // An infix synonym for fmap.
