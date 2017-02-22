@@ -4,8 +4,6 @@ namespace Edufun.Haskell.Rules
 {
     using System;
 
-    using Edufun.Haskell.Impl;
-
     // If an applicative functor is also a monad, it should satisfy:
     // - pure = return
     // - (<*>) = ap

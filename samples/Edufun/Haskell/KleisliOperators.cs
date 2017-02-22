@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Edufun.Haskell.Impl
+namespace Edufun.Haskell
 {
     using System;
     using System.Collections.Generic;
@@ -10,28 +10,28 @@ namespace Edufun.Haskell.Impl
         private static readonly IQueryOperators s_Qperators = new QueryOperators();
 
         public Monad<IEnumerable<TResult>> ForEach<TSource, TResult>(
-            Func<TSource, Monad<TResult>> me,
+            Func<TSource, Monad<TResult>> func,
             IEnumerable<TSource> seq)
         {
-            return s_Qperators.SelectWith(seq, me);
+            return s_Qperators.SelectWith(seq, func);
         }
 
         public Func<TSource, Monad<TResult>> Compose<TSource, TMiddle, TResult>(
-            Func<TSource, Monad<TMiddle>> me,
-            Func<TMiddle, Monad<TResult>> func)
+            Func<TSource, Monad<TMiddle>> first,
+            Func<TMiddle, Monad<TResult>> second)
         {
-            return _ => me.Invoke(_).Bind(func);
+            return _ => first.Invoke(_).Bind(second);
         }
 
         public Func<TSource, Monad<TResult>> ComposeBack<TSource, TMiddle, TResult>(
-            Func<TMiddle, Monad<TResult>> me,
-            Func<TSource, Monad<TMiddle>> func)
+            Func<TMiddle, Monad<TResult>> first,
+            Func<TSource, Monad<TMiddle>> second)
         {
-            return _ => func.Invoke(_).Bind(me);
+            return _ => second.Invoke(_).Bind(first);
         }
 
         public Monad<TResult> Invoke<TSource, TResult>(
-            Func<TSource, Monad<TResult>> me,
+            Func<TSource, Monad<TResult>> func,
             Monad<TSource> value)
         {
             throw new NotImplementedException();

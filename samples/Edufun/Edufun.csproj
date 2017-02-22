@@ -11,18 +11,18 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Haskell\IAlternative.cs" />
     <Compile Include="Haskell\Alternative.cs" />
-    <Compile Include="Haskell\Impl\Operators.cs" />
-    <Compile Include="Haskell\Impl\Operators.Linq.cs" />
-    <Compile Include="Haskell\Impl\Operators.Kleisli.cs" />
-    <Compile Include="Haskell\Impl\Syntax.cs" />
+    <Compile Include="Haskell\MonadPlus.cs" />
+    <Compile Include="Haskell\QueryOperators.cs" />
+    <Compile Include="Haskell\KleisliOperators.cs" />
     <Compile Include="Haskell\Rules\ApplicativeRules.cs" />
     <Compile Include="Haskell\Rules\FunctorRules.cs" />
     <Compile Include="Haskell\FakeClassException.cs" />
+    <Compile Include="Haskell\IFunctor.cs" />
+    <Compile Include="Haskell\Applicative.cs" />
     <Compile Include="Haskell\Functor.cs" />
-    <Compile Include="Haskell\Impl\Applicative.cs" />
-    <Compile Include="Haskell\Impl\Functor.cs" />
-    <Compile Include="Haskell\Impl\Monad.cs" />
+    <Compile Include="Haskell\Monad.cs" />
     <Compile Include="Haskell\Tmp\Kleisli.cs" />
     <Compile Include="Haskell\Tmp\Monad.cs" />
     <Compile Include="Haskell\Tmp\Mu.cs" />
@@ -32,11 +32,11 @@
     <Compile Include="Linq\IQuerySyntax.cs" />
     <Compile Include="Linq\IQuerySyntax`1.cs" />
     <Compile Include="Linq\Qperators.cs" />
-    <Compile Include="Haskell\MonadPlus.cs" />
+    <Compile Include="Haskell\IMonadPlus.cs" />
     <Compile Include="Sequences\Factorial.cs" />
     <Compile Include="Sequences\PythagoreanTriples.cs" />
     <Compile Include="Sequences\Fibonacci.cs" />
-    <Compile Include="Haskell\Applicative.cs" />
+    <Compile Include="Haskell\IApplicative.cs" />
     <Compile Include="Haskell\Tmp\Comonad.cs" />
     <Compile Include="Haskell\Templates\Comonad.g.cs">
       <DependentUpon>Comonad.tt</DependentUpon>
@@ -75,7 +75,7 @@
     </Compile>
     <Compile Include="Haskell\Templates\MonadZero`1.cs" />
     <Compile Include="Haskell\Templates\Monad`1.cs" />
-    <Compile Include="Haskell\Monad.cs" />
+    <Compile Include="Haskell\IMonad.cs" />
     <Compile Include="Haskell\NamespaceDoc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Anonymous.cs" />

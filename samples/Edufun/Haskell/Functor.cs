@@ -4,44 +4,33 @@ namespace Edufun.Haskell
 {
     using System;
 
-    using Edufun.Haskell.Impl;
     using Narvalo.Fx;
 
-    // [Haskell] Data.Functor
-    // The Functor class is used for types that can be mapped over.
-    //
-    // Translation map from Haskell to .NET:
-    // - fmap   obj.Select       (required)
-    // - <$     obj.Replace
-    // - $>     Operators.Inject
-    // - <$>    Operators.InvokeWith
-    // - void   obj.Skip
-
-    public interface IFunctor<T>
+    public partial class Functor<T> : IFunctor<T>
     {
-        // [Haskell] fmap :: (a -> b) -> f a -> f b
-        Functor<TResult> Select<TResult>(Func<T, TResult> selector);
+        public Functor<TResult> Select<TResult>(Func<T, TResult> selector)
+        {
+            throw new FakeClassException();
+        }
     }
 
-    public interface IFunctorSyntax<T>
+    public partial class Functor<T> : IFunctorSyntax<T>
     {
-        // [Haskell] (<$) :: Functor f => a -> f b -> f a
-        // Replace all locations in the input with the same value.
-        Functor<TResult> Replace<TResult>(TResult other);
+        // [GHC.Base] (<$) = fmap . const
+        public Functor<TResult> Replace<TResult>(TResult other) => Select(_ => other);
 
-        // [Haskell] void :: Functor f => f a -> f ()
-        // void value discards or ignores the result of evaluation.
-        Functor<Unit> Skip();
+        // [Data.Functor] void x = () <$ x
+        public Functor<Unit> Skip() => Replace(Unit.Single);
     }
 
-    public interface IFunctorOperators
+    public class Functor : IFunctorOperators
     {
-        // [Haskell] ($>) :: Functor f => f a -> b -> f b
-        // Flipped version of <$.
-        Functor<TResult> Inject<T, TResult>(TResult other, Functor<T> value);
+        // ($>) = flip (<$)
+        public Functor<TResult> Inject<TSource, TResult>(TResult other, Functor<TSource> value)
+            => value.Replace(other);
 
-        // [Haskell] (<$>) :: Functor f => (a -> b) -> f a -> f b
-        // An infix synonym for fmap.
-        Functor<TResult> InvokeWith<T, TResult>(Func<T, TResult> selector, Functor<T> value);
+        // (<$>) = fmap
+        public Functor<TResult> InvokeWith<TSource, TResult>(Func<TSource, TResult> selector, Functor<TSource> value)
+            => value.Select(selector);
     }
 }

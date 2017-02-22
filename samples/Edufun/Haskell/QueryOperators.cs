@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Edufun.Haskell.Impl
+namespace Edufun.Haskell
 {
     using System;
     using System.Collections.Generic;
@@ -9,7 +9,7 @@ namespace Edufun.Haskell.Impl
 
     public class QueryOperators : IQueryOperators
     {
-        private static readonly IMonadOperators s_Qperators = new Operators();
+        private static readonly IMonadOperators s_Monad = new Monad();
 
         public Monad<TAccumulate> Fold<TSource, TAccumulate>(
             IEnumerable<TSource> source,
@@ -59,7 +59,7 @@ namespace Edufun.Haskell.Impl
 
             IEnumerable<Monad<TResult>> seq = first.Zip(second, selector);
 
-            return s_Qperators.Collect(seq);
+            return s_Monad.Collect(seq);
         }
     }
 }

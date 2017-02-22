@@ -4,8 +4,6 @@ namespace Edufun.Haskell.Rules
 {
     using System;
 
-    using Edufun.Haskell.Impl;
-
     public static class FunctorRules
     {
         // First law: the identity map is a fixed point for Select.
