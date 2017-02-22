@@ -9,7 +9,6 @@ namespace Edufun.Haskell
     // [Haskell] Data.Functor
     // A functor is for types that can be mapped over.
     //
-    // Translation map from Haskell to .NET:
     // - fmap   obj.Select       (required)
     // - <$     obj.Replace
     // - $>     Operators.Inject

@@ -6,8 +6,6 @@ namespace Edufun.Haskell
 {
     using System;
 
-    using Narvalo.Fx;
-
     public partial class Applicative
     {
         public static Applicative<T> Of<T>(T value) { throw new FakeClassException(); }

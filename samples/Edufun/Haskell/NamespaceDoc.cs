@@ -8,7 +8,7 @@ namespace Edufun.Haskell
      * A word of caution
      * -----------------
      * The classes found here exist for the sole purpose of documentation.
-     * API and documentation are adapted from the Haskell sources.
+     * API and documentation are **adapted** from the Haskell sources.
      *
      * Overview
      * --------

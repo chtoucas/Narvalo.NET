@@ -9,13 +9,22 @@ namespace Edufun.Haskell
 
     // [Haskell] Control.Monad
     //
-    // Translation map from Haskell to .NET:
+    // Rules:
+    // > Monad::return = Applicative::pure
+    // > Monad::ap     = Applicative::<*>
+    // which implies:
+    // > fmap f xs     =  xs >>= return . f
+    // > Monad::>>     = Applicative::*>
+    // in addition we have:
+    // > Monad::fmap   = Functor::fmap       = Applicative::liftA
+    //
+    // API:
     // - >>=            obj.Bind            (required)
-    // - >>             obj.ReplaceBy                       <- Applicative::*>
-    // - return         Monad.Of            (required)      <- Applicative::pure
+    // - >>             obj.ReplaceBy           <- Applicative::*>
+    // - return         Monad.Of            (required) <- Applicative::pure
     // - fail
     // Alternative requirement:
-    // - fmap           obj.Select          (alt-required)  <- Functor::fmap, Applicative::liftA
+    // - fmap           obj.Select          (alt-required) <- Functor::fmap, Applicative::liftA
     //
     // Basic Monad functions:
     // - mapM           Query.SelectWith
@@ -28,7 +37,7 @@ namespace Edufun.Haskell
     // - (>=>)          Kleisli.Compose
     // - (<=<)          Kleisli.ComposeBack
     // - forever        Operators.Forever
-    // - void           obj.Skip                            <- Functor::void
+    // - void           obj.Skip                <- Functor::void
     //
     // Generalisations of list functions:
     // - join           Monad.Flatten       (alt-required)
@@ -51,20 +60,18 @@ namespace Edufun.Haskell
     // - liftM3         Operators.Lift
     // - liftM4         Operators.Lift
     // - liftM5         Operators.Lift
-    // - ap             obj.Gather                          <- Applicative::<*>
+    // - ap             obj.Gather              <- Applicative::<*>
     //
     // Strict monadic functions:
-    // - (<$!>)         Operators.InvokeWith                <- Applicative::<$>
+    // - (<$!>)         Operators.InvokeWith    <- Applicative::<$>
     //
-    // From Functor:
-    // - <$             obj.Replace
-    // - $>             Operators.Inject
-    //
-    // From Applicative:
-    // - <*             obj.Ignore
-    // - <**>           Operators.Apply
-    // - liftA2         obj.Zip
-    // - liftA3         obj.Zip
+    // Inherited:
+    // - <$             obj.Replace             <- Functor::<$
+    // - $>             Operators.Inject        <- Functor::$>
+    // - <*             obj.Ignore              <- Applicative::<*
+    // - <**>           Operators.Apply         <- Applicative::<**>
+    // - liftA2         obj.Zip                 <- Applicative::liftA2
+    // - liftA3         obj.Zip                 <- Applicative::liftA3
 
     public interface IMonad<T>
     {

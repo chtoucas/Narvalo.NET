@@ -61,7 +61,13 @@ namespace Edufun.Haskell
         // [GHC.Base] ap m1 m2 = do { x1 <- m1; x2 <- m2; return (x1 x2) }
         // Control.Monad: <*> = ap
         public Monad<TResult> Gather<TResult>(Monad<Func<T, TResult>> applicative)
-            => Bind(arg => applicative.Select(func => func(arg)));
+        {
+            // In Haskell, m1 is of type m (a -> b) and m2 of type m a;
+            // return is not the "return" of C# but the Applicative::pure.
+            // Using Select this can be simplified:
+            // > return applicative.Bind(func => Select(func));
+            return applicative.Bind(func => Bind(_ => Monad.Of(func(_))));
+        }
 
         // [Control.Monad]
         //  replicateM cnt0 f =
@@ -89,6 +95,8 @@ namespace Edufun.Haskell
 
             return @this.Aggregate(seed, Lift(append));
         }
+
+        #region Forever
 
         // [Control.Monad] forever a = let a' = a *> a' in a'
         public Monad<TResult> Forever<TSource, TResult>(Monad<TSource> source)
@@ -137,9 +145,13 @@ namespace Edufun.Haskell
             return YCombinator.Fix(g);
         }
 
+        #endregion
+
         // <$!>
         public Monad<TResult> InvokeWith<TSource, TResult>(Func<TSource, TResult> selector, Monad<TSource> value)
             => value.Select(selector);
+
+        #region Lift
 
         public Func<Monad<TSource>, Monad<TResult>> Lift<TSource, TResult>(Func<TSource, TResult> func)
         {
@@ -165,6 +177,8 @@ namespace Edufun.Haskell
         {
             throw new NotImplementedException();
         }
+
+        #endregion
 
         // [Control.Monad] when p s = if p then pure () else s
         public Monad<Unit> Unless(bool predicate, Monad<Unit> value)

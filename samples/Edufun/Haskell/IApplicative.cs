@@ -4,28 +4,29 @@ namespace Edufun.Haskell
 {
     using System;
 
-    using Narvalo.Fx;
-
     // [Haskell] Control.Applicative
     // In-between a Functor and a Monad.
     //
-    // Translation map from Haskell to .NET:
+    // Rules:
+    // - Applicative::liftA = Functor::fmap
+    //
+    // API:
     // - pure       Applicative.Of          (required)
     // - <*>        obj.Gather              (required)
     // - *>         obj.ReplaceBy
     // - <*         obj.Ignore
     //
     // Utility functions:
-    // - <$>        Operators.InvokeWith                <- Functor::<$>
-    // - <$         obj.Replace                         <- Functor::<$
+    // - <$>        Operators.InvokeWith        <- Functor::<$>
+    // - <$         obj.Replace                 <- Functor::<$
     // - <**>       Operators.Apply
-    // - liftA      obj.Select                          <- Functor::fmap
+    // - liftA      obj.Select                  <- Functor::fmap
     // - liftA2     obj.Zip
     // - liftA3     obj.Zip
     //
-    // From Functor:
-    // - $>         Operators.Inject
-    // - void       obj.Skip
+    // Inherited:
+    // - $>         Operators.Inject            <- Functor::$>
+    // - void       obj.Skip                    <- Functor::void
 
     public interface IApplicative<T>
     {
