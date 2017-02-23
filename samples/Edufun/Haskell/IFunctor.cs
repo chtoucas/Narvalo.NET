@@ -20,28 +20,28 @@ namespace Edufun.Haskell
     public interface IFunctor<T>
     {
         // [Haskell] fmap :: (a -> b) -> f a -> f b
-        Functor<TResult> Select<TResult>(Func<T, TResult> selector);
+        Prototype<TResult> Select<TResult>(Func<T, TResult> selector);
     }
 
     public interface IFunctorSyntax<T>
     {
         // [Haskell] (<$) :: Functor f => a -> f b -> f a
         // Replace all locations in the input with the same value.
-        Functor<TResult> Replace<TResult>(TResult other);
+        Prototype<TResult> Replace<TResult>(TResult other);
 
         // [Haskell] void :: Functor f => f a -> f ()
         // void value discards or ignores the result of evaluation.
-        Functor<Unit> Skip();
+        Prototype<Unit> Skip();
     }
 
     public interface IFunctorOperators
     {
         // [Haskell] ($>) :: Functor f => f a -> b -> f b
         // Flipped version of <$.
-        Functor<TResult> Inject<T, TResult>(TResult value, Functor<T> functor);
+        Prototype<TResult> Inject<T, TResult>(TResult value, Prototype<T> functor);
 
         // [Haskell] (<$>) :: Functor f => (a -> b) -> f a -> f b
         // An infix synonym for fmap.
-        Functor<TResult> InvokeWith<T, TResult>(Func<T, TResult> func, Functor<T> functor);
+        Prototype<TResult> InvokeWith<T, TResult>(Func<T, TResult> func, Prototype<T> functor);
     }
 }

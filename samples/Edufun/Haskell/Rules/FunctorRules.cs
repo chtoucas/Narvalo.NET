@@ -8,17 +8,17 @@ namespace Edufun.Haskell.Rules
     {
         // First law: the identity map is a fixed point for Select.
         // fmap id  ==  id
-        public static bool FirstLaw<X>(Functor<X> me)
+        public static bool FirstLaw<X>(Prototype<X> me)
         {
             Func<X, X> id = _ => _;
-            Func<Functor<X>, Functor<X>> idM = _ => _;
+            Func<Prototype<X>, Prototype<X>> idM = _ => _;
 
             return me.Select(id) == idM.Invoke(me);
         }
 
         // Second law: Select preserves the composition operator.
         // fmap (f . g)  ==  fmap f . fmap g
-        public static bool SecondLaw<X, Y, Z>(Functor<X> me, Func<Y, Z> f, Func<X, Y> g)
+        public static bool SecondLaw<X, Y, Z>(Prototype<X> me, Func<Y, Z> f, Func<X, Y> g)
         {
             return me.Select(_ => f(g(_))) == me.Select(g).Select(f);
         }

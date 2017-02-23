@@ -13,12 +13,12 @@ namespace Edufun.Haskell.Tmp
     {
         // [Haskell] mzero
         [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
-        public static Monad<T> Zero { get { throw new FakeClassException(); } }
+        public static Monad<T> Zero { get { throw new PrototypeException(); } }
 
         // [Haskell] mplus
         public Monad<T> Plus(Monad<T> other)
         {
-            throw new FakeClassException();
+            throw new PrototypeException();
         }
 
         // [Haskell] >>=
@@ -27,7 +27,7 @@ namespace Edufun.Haskell.Tmp
 #if MONAD_VIA_MAP_MULTIPLY
             return Monad<TResult>.Join(Select(_ => kun.Invoke(_)));
 #else
-            throw new FakeClassException();
+            throw new PrototypeException();
 #endif
         }
 
@@ -35,7 +35,7 @@ namespace Edufun.Haskell.Tmp
         public Monad<TResult> Select<TResult>(Func<T, TResult> selector)
         {
 #if MONAD_VIA_MAP_MULTIPLY
-            throw new FakeClassException();
+            throw new PrototypeException();
 #else
             return Bind(_ => Monad<TResult>.Return(selector.Invoke(_)));
 #endif
@@ -48,14 +48,14 @@ namespace Edufun.Haskell.Tmp
         // [Haskell] return
         internal static Monad<T> Return(T value)
         {
-            throw new FakeClassException();
+            throw new PrototypeException();
         }
 
         // [Haskell] join
         internal static Monad<T> Join(Monad<Monad<T>> square)
         {
 #if MONAD_VIA_MAP_MULTIPLY
-            throw new FakeClassException();
+            throw new PrototypeException();
 #else
             Kunc<Monad<T>, T> id = _ => _;
 

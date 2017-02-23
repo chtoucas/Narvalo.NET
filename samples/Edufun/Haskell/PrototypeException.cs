@@ -5,5 +5,5 @@ namespace Edufun.Haskell
     using System;
 
     [Serializable]
-    public class FakeClassException : NotImplementedException { }
+    public class PrototypeException : NotImplementedException { }
 }

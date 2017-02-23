@@ -13,14 +13,14 @@ namespace Edufun.Haskell.Tmp
 #if COMONAD_VIA_MAP_COMULTIPLY
             return Duplicate(this).Map(_ => cokun.Invoke(_));
 #else
-            throw new FakeClassException();
+            throw new PrototypeException();
 #endif
         }
 
         public Comonad<TResult> Select<TResult>(Func<T, TResult> fun)
         {
 #if COMONAD_VIA_MAP_COMULTIPLY
-            throw new FakeClassException();
+            throw new PrototypeException();
 #else
             return Extend(_ => fun(Extract(_)));
 #endif
@@ -29,14 +29,14 @@ namespace Edufun.Haskell.Tmp
         // ε
         internal static T Extract(Comonad<T> value)
         {
-            throw new FakeClassException();
+            throw new PrototypeException();
         }
 
         // δ
         internal static Comonad<Comonad<T>> Duplicate(Comonad<T> value)
         {
 #if COMONAD_VIA_MAP_COMULTIPLY
-            throw new FakeClassException();
+            throw new PrototypeException();
 #else
             return value.Extend(_ => _);
 #endif

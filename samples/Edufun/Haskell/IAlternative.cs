@@ -22,26 +22,29 @@ namespace Edufun.Haskell
     // Inherited:
     // - all methods from IApplicative
 
-    public interface IAlternative
+    public interface IAlternative<T>
     {
         // [Haskell] empty :: f a
         // The identity of <|>.
-        Applicative<T> Empty<T>();
+        Prototype<T> Empty_();
 
         // [Haskell] (<|>) :: f a -> f a -> f a
         // An associative binary operation.
-        Applicative<T> Append<T>(Applicative<T> first, Applicative<T> second);
+        Prototype<T> Append(Prototype<T> value);
+    }
 
+    public interface IAlternativeOperators
+    {
         // [Haskell] some :: f a -> f [a]
         // One or more.
-        Applicative<IEnumerable<T>> Some<T>(Applicative<T> value);
+        Prototype<IEnumerable<T>> Some<T>(Prototype<T> value);
 
         // [Haskell] many :: f a -> f [a]
         // Zero or more.
-        Applicative<IEnumerable<T>> Many<T>(Applicative<T> value);
+        Prototype<IEnumerable<T>> Many<T>(Prototype<T> value);
 
         // [Haskell] optional :: Alternative f => f a -> f (Maybe a)
         // One or none.
-        Applicative<Maybe<T>> Optional<T>(Applicative<T> value);
+        Prototype<Maybe<T>> Optional<T>(Prototype<T> value);
     }
 }

@@ -10,11 +10,11 @@ namespace Edufun.Haskell.Rules
     public static class ApplicativeRules
     {
         // pure id <*> v = v
-        public static bool Identity<X>(Applicative<X> me)
+        public static bool Identity<X>(Prototype<X> me)
         {
             Func<X, X> id = _ => _;
 
-            return me.Gather(Applicative.Of(id)) == me;
+            return me.Gather(Prototype.Of(id)) == me;
         }
 
         // pure (.) <*> u <*> v <*> w = u <*> (v <*> w)
@@ -26,8 +26,8 @@ namespace Edufun.Haskell.Rules
         // pure f <*> pure x = pure (f x)
         public static bool Homomorphism<X, Y>(Func<X, Y> f, X value)
         {
-            return Applicative.Of(value).Gather(Applicative.Of(f))
-                == Applicative.Of(f(value));
+            return Prototype.Of(value).Gather(Prototype.Of(f))
+                == Prototype.Of(f(value));
         }
 
         // u <*> pure y = pure ($ y) <*> u

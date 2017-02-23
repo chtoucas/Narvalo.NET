@@ -3,7 +3,6 @@
 namespace Edufun.Haskell.Templates
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
 
     using Narvalo.Fx;
@@ -11,17 +10,17 @@ namespace Edufun.Haskell.Templates
     public struct MonadValue<T> : IEquatable<MonadValue<T>> where T : struct
     {
         [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
-        public static MonadValue<T> None { get { throw new FakeClassException(); } }
+        public static MonadValue<T> None { get { throw new PrototypeException(); } }
 
         public MonadValue<T> OrElse(MonadValue<T> other)
         {
-            throw new FakeClassException();
+            throw new PrototypeException();
         }
 
         public MonadValue<TResult> Bind<TResult>(Func<T, MonadValue<TResult>> funM)
             where TResult : struct
         {
-            throw new FakeClassException();
+            throw new PrototypeException();
         }
 
         public static bool operator ==(MonadValue<T> left, MonadValue<T> right) => left.Equals(right);
@@ -31,7 +30,7 @@ namespace Edufun.Haskell.Templates
         [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
         public bool Equals(MonadValue<T> other)
         {
-            throw new FakeClassException();
+            throw new PrototypeException();
         }
 
         public override bool Equals(object obj)
@@ -44,12 +43,12 @@ namespace Edufun.Haskell.Templates
         [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
         public override int GetHashCode()
         {
-            throw new FakeClassException();
+            throw new PrototypeException();
         }
 
         internal static MonadValue<T> η(T value)
         {
-            throw new FakeClassException();
+            throw new PrototypeException();
         }
 
         internal static MonadValue<T> μ(MonadValue<MonadValue<T>> square)

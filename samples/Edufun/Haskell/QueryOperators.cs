@@ -10,28 +10,28 @@ namespace Edufun.Haskell
 
     public class QueryOperators : IQueryOperators
     {
-        private static readonly IMonadOperators s_Monad = new Monad();
+        private static readonly IMonadOperators s_Monad = new Prototype();
 
         // [Control.Monad] foldM = foldlM
-        public Monad<TAccumulate> Fold<TSource, TAccumulate>(
+        public Prototype<TAccumulate> Fold<TSource, TAccumulate>(
             IEnumerable<TSource> source,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Monad<TAccumulate>> accumulator)
+            Func<TAccumulate, TSource, Prototype<TAccumulate>> accumulator)
         {
             // [Haskell] foldlM :: (Foldable t, Monad m) => (b -> a -> m b) -> b -> t a -> m b
             // [Data.Foldable]
             //   foldlM f z0 xs = foldr f' return xs z0
             //     where f' x k z = f z x >>= k
-            Func<Monad<TAccumulate>, TSource, Monad<TAccumulate>> acc
+            Func<Prototype<TAccumulate>, TSource, Prototype<TAccumulate>> acc
                 = (acc1, arg2) => acc1.Bind(arg1 => accumulator(arg1, arg2));
 
-            return source.Aggregate(Monad.Of(seed), acc);
+            return source.Aggregate(Prototype.Of(seed), acc);
         }
 
         // [Control.Monad] mapAndUnzipM f xs = unzip <$> traverse f xs
-        public Monad<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>> SelectUnzip<TSource, TFirst, TSecond>(
+        public Prototype<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>> SelectUnzip<TSource, TFirst, TSecond>(
             IEnumerable<TSource> source,
-            Func<TSource, Monad<Tuple<TFirst, TSecond>>> selector)
+            Func<TSource, Prototype<Tuple<TFirst, TSecond>>> selector)
         {
             return SelectWith(source, selector).Select(
                 tuples =>
@@ -44,9 +44,9 @@ namespace Edufun.Haskell
         }
 
         // [Data.Traversable] mapM = traverse
-        public Monad<IEnumerable<TResult>> SelectWith<TSource, TResult>(
+        public Prototype<IEnumerable<TResult>> SelectWith<TSource, TResult>(
             IEnumerable<TSource> source,
-            Func<TSource, Monad<TResult>> selector)
+            Func<TSource, Prototype<TResult>> selector)
         {
             // The signature of mapM is
             //   mapM :: (Traversable t, Monad m) => (a -> m b) -> t a -> m (t b)
@@ -59,31 +59,31 @@ namespace Edufun.Haskell
         }
 
         // [Control.Monad] filterM p = foldr (\ x -> liftA2 (\ flg -> if flg then (x:) else id) (p x)) (pure [])
-        public Monad<IEnumerable<TSource>> WhereBy<TSource>(
+        public Prototype<IEnumerable<TSource>> WhereBy<TSource>(
             IEnumerable<TSource> source,
-            Func<TSource, Monad<bool>> predicate)
+            Func<TSource, Prototype<bool>> predicate)
         {
             Func<bool, IEnumerable<TSource>, TSource, IEnumerable<TSource>> func
                 = (flg, seq, item) => { if (flg) { return seq.Append(item); } else { return seq; } };
 
             var acc = s_Monad.Lift(func);
 
-            Func<Monad<IEnumerable<TSource>>, TSource, Monad<IEnumerable<TSource>>> accumulator
-                = (mseq, item) => acc(predicate(item), mseq, Monad.Of(item));
+            Func<Prototype<IEnumerable<TSource>>, TSource, Prototype<IEnumerable<TSource>>> accumulator
+                = (mseq, item) => acc(predicate(item), mseq, Prototype.Of(item));
 
-            return source.Aggregate(Monad.Of(Enumerable.Empty<TSource>()), accumulator);
+            return source.Aggregate(Prototype.Of(Enumerable.Empty<TSource>()), accumulator);
         }
 
         // [Control.Monad] zipWithM f xs ys = sequenceA (zipWith f xs ys)
-        public Monad<IEnumerable<TResult>> ZipWith<TFirst, TSecond, TResult>(
+        public Prototype<IEnumerable<TResult>> ZipWith<TFirst, TSecond, TResult>(
             IEnumerable<TFirst> first,
             IEnumerable<TSecond> second,
-            Func<TFirst, TSecond, Monad<TResult>> resultSelector)
+            Func<TFirst, TSecond, Prototype<TResult>> resultSelector)
         {
-            Func<TFirst, TSecond, Monad<TResult>> selector
+            Func<TFirst, TSecond, Prototype<TResult>> selector
                 = (arg1, arg2) => resultSelector.Invoke(arg1, arg2);
 
-            IEnumerable<Monad<TResult>> seq = first.Zip(second, selector);
+            IEnumerable<Prototype<TResult>> seq = first.Zip(second, selector);
 
             return s_Monad.Collect(seq);
         }
