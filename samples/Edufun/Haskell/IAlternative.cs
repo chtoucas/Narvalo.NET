@@ -9,7 +9,8 @@ namespace Edufun.Haskell
     // [Haskell] Control.Applicative.Alternative
     // Amalgamation.
     //
-    // Translation map from Haskell to .NET:
+    // API
+    // ---
     // - empty      Alternative.Empty       (required)
     // - <|>        Alternative.Append      (required)
     // - some       Alternative.Some
@@ -17,6 +18,9 @@ namespace Edufun.Haskell
     //
     // Utility functions:
     // - optional   Alternative.Optional
+    //
+    // Inherited:
+    // - all methods from IApplicative
 
     public interface IAlternative
     {

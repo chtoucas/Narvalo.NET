@@ -10,7 +10,8 @@ namespace Edufun.Haskell
     // [Haskell] Control.Monad.MonadPlus
     // Monads that also support choice and failure.
     //
-    // Translation map from Haskell to .NET:
+    // API
+    // ---
     // - mzero          MonadPlus.Zero      <- Alternative::empty
     // - mplus          obj.Plus            <- Alternative::<|>
     //
@@ -20,6 +21,9 @@ namespace Edufun.Haskell
     //
     // Conditional execution of monadic expressions:
     // - guard          Operators.Guard
+    //
+    // Inherited:
+    // - all methods from IMonad and IAlternative
 
     public interface IMonadPlus<T>
     {

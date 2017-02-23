@@ -9,6 +9,8 @@ namespace Edufun.Haskell
     // [Haskell] Data.Functor
     // A functor is for types that can be mapped over.
     //
+    // API
+    // ---
     // - fmap   obj.Select       (required)
     // - <$     obj.Replace
     // - $>     Operators.Inject

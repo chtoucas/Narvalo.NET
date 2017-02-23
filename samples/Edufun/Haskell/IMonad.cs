@@ -9,22 +9,23 @@ namespace Edufun.Haskell
 
     // [Haskell] Control.Monad
     //
-    // Rules:
+    // Rules
+    // -----
     // > Monad::return = Applicative::pure
     // > Monad::ap     = Applicative::<*>
     // which implies:
     // > fmap f xs     =  xs >>= return . f
     // > Monad::>>     = Applicative::*>
     // in addition we have:
-    // > Monad::fmap   = Functor::fmap       = Applicative::liftA
+    // > Monad::fmap   = Functor::fmap = Applicative::liftA
     //
-    // API:
+    // API
+    // ---
     // - >>=            obj.Bind            (required)
     // - >>             obj.ReplaceBy           <- Applicative::*>
     // - return         Monad.Of            (required) <- Applicative::pure
     // - fail
-    // Alternative requirement:
-    // - fmap           obj.Select          (alt-required) <- Functor::fmap, Applicative::liftA
+    // - fmap           obj.Select          (alt-required) <- Functor::fmap (required), Applicative::liftA
     //
     // Basic Monad functions:
     // - mapM           Query.SelectWith
@@ -60,7 +61,7 @@ namespace Edufun.Haskell
     // - liftM3         Operators.Lift
     // - liftM4         Operators.Lift
     // - liftM5         Operators.Lift
-    // - ap             obj.Gather              <- Applicative::<*>
+    // - ap             obj.Gather              <- Applicative::<*> (required)
     //
     // Strict monadic functions:
     // - (<$!>)         Operators.InvokeWith    <- Applicative::<$>

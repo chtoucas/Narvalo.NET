@@ -9,6 +9,7 @@ namespace Edufun.Haskell
     {
         private static readonly IQueryOperators s_Qperators = new QueryOperators();
 
+        // [Data.Traversable] forM = flip mapM
         public Monad<IEnumerable<TResult>> ForEach<TSource, TResult>(
             Func<TSource, Monad<TResult>> func,
             IEnumerable<TSource> seq)
@@ -16,6 +17,7 @@ namespace Edufun.Haskell
             return s_Qperators.SelectWith(seq, func);
         }
 
+        // [Control.Monad] f >=> g = \x -> f x >>= g
         public Func<TSource, Monad<TResult>> Compose<TSource, TMiddle, TResult>(
             Func<TSource, Monad<TMiddle>> first,
             Func<TMiddle, Monad<TResult>> second)
@@ -23,6 +25,7 @@ namespace Edufun.Haskell
             return _ => first.Invoke(_).Bind(second);
         }
 
+        // [Control.Monad] (<=<) = flip (>=>)
         public Func<TSource, Monad<TResult>> ComposeBack<TSource, TMiddle, TResult>(
             Func<TMiddle, Monad<TResult>> first,
             Func<TSource, Monad<TMiddle>> second)
@@ -30,11 +33,12 @@ namespace Edufun.Haskell
             return _ => second.Invoke(_).Bind(first);
         }
 
+        // [GHC.Base] f =<< x = x >>= f
         public Monad<TResult> Invoke<TSource, TResult>(
             Func<TSource, Monad<TResult>> func,
             Monad<TSource> value)
         {
-            throw new NotImplementedException();
+            return value.Bind(func);
         }
     }
 }

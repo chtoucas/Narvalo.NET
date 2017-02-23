@@ -15,6 +15,7 @@ namespace Edufun.Haskell
     {
         public static Monad<T> Of<T>(T value) { throw new FakeClassException(); }
 
+        // [GHC.Base] join x = x >>= id
         public static Monad<T> Flatten<T>(Monad<Monad<T>> square)
         {
 #if MONAD_VIA_MAP_MULTIPLY
@@ -82,18 +83,26 @@ namespace Edufun.Haskell
         public Monad<TResult> ReplaceBy<TResult>(Monad<TResult> other) => Bind(_ => other);
 
         // [Data.Functor] void x = () <$ x
-        // Strictly speaking, this should be Replace(Unit.Single); but we do not have Replace.
+        // Strictly speaking, this should be Replace(Unit.Single); but we did not include Replace.
         public Monad<Unit> Skip() => Select(_ => Unit.Single);
     }
 
     public partial class Monad : IMonadOperators
     {
-        public Monad<IEnumerable<TSource>> Collect<TSource>(IEnumerable<Monad<TSource>> @this)
+        // [Data.Traversable] sequence = sequenceA
+        public Monad<IEnumerable<TSource>> Collect<TSource>(IEnumerable<Monad<TSource>> source)
         {
+            // The signature of sequence is
+            //   sequence :: (Traversable t, Monad m) => t (m a) -> m (t a)
+            // Here we interpret Traversable as IEnumerable.
+            // The definition for sequenceA for lists is:
+            //   [Haskell] sequenceA :: Applicative f => [f a] -> f [a]
+            //   sequenceA = foldr (liftA2 (:)) (pure [])
             var seed = Monad.Of(Enumerable.Empty<TSource>());
-            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (m, item) => m.Append(item);
+            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append
+                = (seq, item) => seq.Append(item);
 
-            return @this.Aggregate(seed, Lift(append));
+            return source.Aggregate(seed, Lift(append));
         }
 
         #region Forever
@@ -129,7 +138,7 @@ namespace Edufun.Haskell
             return next;
         }
 
-        // This one works if Monad<T> is a struct.
+        // This one works even if Monad<T> is a struct.
         public Monad<TResult> Forever_<TSource, TResult>(Monad<TSource> source)
         {
             var next = __ReplaceBy<TSource, TResult>(source);
@@ -147,36 +156,51 @@ namespace Edufun.Haskell
 
         #endregion
 
-        // <$!>
+        // [Control.Monad]
+        // f <$!> m = do
+        //   x <- m
+        //   let z = f x
+        //   z `seq` return z
         public Monad<TResult> InvokeWith<TSource, TResult>(Func<TSource, TResult> selector, Monad<TSource> value)
             => value.Select(selector);
 
         #region Lift
 
+        // [GHC.Base] liftM f m1 = do { x1 <- m1; return (f x1) }
         public Func<Monad<TSource>, Monad<TResult>> Lift<TSource, TResult>(Func<TSource, TResult> func)
-        {
-            throw new NotImplementedException();
-        }
+            => m => m.Bind(arg => Monad.Of(func(arg)));
 
+        // [GHC.Base] liftM2 f m1 m2 = do { x1 <- m1; x2 <- m2; return (f x1 x2) }
         public Func<Monad<T1>, Monad<T2>, Monad<TResult>> Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
-        {
-            throw new NotImplementedException();
-        }
+            => (m1, m2) => m1.Bind(
+                arg1 => m2.Bind(
+                    arg2 => Monad.Of(func(arg1, arg2))));
 
-        public Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<TResult>> Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
-        {
-            throw new NotImplementedException();
-        }
+        // [GHC.Base] liftM3 f m1 m2 m3 = do { x1 <- m1; x2 <- m2; x3 <- m3; return (f x1 x2 x3) }
+        public Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<TResult>> Lift<T1, T2, T3, TResult>(
+            Func<T1, T2, T3, TResult> func)
+            => (m1, m2, m3) => m1.Bind(
+                arg1 => m2.Bind(
+                    arg2 => m3.Bind(
+                        arg3 => Monad.Of(func(arg1, arg2, arg3)))));
 
-        public Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<T4>, Monad<TResult>> Lift<T1, T2, T3, T4, TResult>(Func<T1, T2, T3, T4, TResult> func)
-        {
-            throw new NotImplementedException();
-        }
+        // [GHC.Base] liftM4 f m1 m2 m3 m4 = do { x1 <- m1; x2 <- m2; x3 <- m3; x4 <- m4; return (f x1 x2 x3 x4) }
+        public Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<T4>, Monad<TResult>> Lift<T1, T2, T3, T4, TResult>(
+            Func<T1, T2, T3, T4, TResult> func)
+            => (m1, m2, m3, m4) => m1.Bind(
+                arg1 => m2.Bind(
+                    arg2 => m3.Bind(
+                        arg3 => m4.Bind(
+                            arg4 => Monad.Of(func(arg1, arg2, arg3, arg4))))));
 
+        // [GHC.Base] liftM5 f m1 m2 m3 m4 m5 = do { x1 <- m1; x2 <- m2; x3 <- m3; x4 <- m4; x5 <- m5; return (f x1 x2 x3 x4 x5) }
         public Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<T4>, Monad<T5>, Monad<TResult>> Lift<T1, T2, T3, T4, T5, TResult>(Func<T1, T2, T3, T4, T5, TResult> func)
-        {
-            throw new NotImplementedException();
-        }
+            => (m1, m2, m3, m4, m5) => m1.Bind(
+                arg1 => m2.Bind(
+                    arg2 => m3.Bind(
+                        arg3 => m4.Bind(
+                            arg4 => m5.Bind(
+                                arg5 => Monad.Of(func(arg1, arg2, arg3, arg4, arg5)))))));
 
         #endregion
 

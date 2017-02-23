@@ -7,10 +7,12 @@ namespace Edufun.Haskell
     // [Haskell] Control.Applicative
     // In-between a Functor and a Monad.
     //
-    // Rules:
+    // Rules
+    // -----
     // - Applicative::liftA = Functor::fmap
     //
-    // API:
+    // API
+    // ---
     // - pure       Applicative.Of          (required)
     // - <*>        obj.Gather              (required)
     // - *>         obj.ReplaceBy
@@ -20,7 +22,7 @@ namespace Edufun.Haskell
     // - <$>        Operators.InvokeWith        <- Functor::<$>
     // - <$         obj.Replace                 <- Functor::<$
     // - <**>       Operators.Apply
-    // - liftA      obj.Select                  <- Functor::fmap
+    // - liftA      obj.Select                  <- Functor::fmap (required)
     // - liftA2     obj.Zip
     // - liftA3     obj.Zip
     //
