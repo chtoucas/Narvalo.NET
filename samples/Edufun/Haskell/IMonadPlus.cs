@@ -29,7 +29,7 @@ namespace Edufun.Haskell
     {
         // [Haskell] mplus :: m a -> m a -> m a
         // An associative operation.
-        Prototype<T> Plus(Prototype<T> other);
+        Prototype<T> Plus(Prototype<T> value);
 
         // [Haskell] mzero :: m a
         // The identity of mplus.
@@ -50,6 +50,6 @@ namespace Edufun.Haskell
 
         // [Haskell] msum :: (Foldable t, MonadPlus m) => t (m a) -> m a
         // The sum of a collection of actions, generalizing concat.
-        Prototype<TSource> Sum<TSource>(IEnumerable<Prototype<TSource>> @this);
+        Prototype<TSource> Sum<TSource>(IEnumerable<Prototype<TSource>> source);
     }
 }

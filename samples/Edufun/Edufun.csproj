@@ -11,6 +11,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Haskell\Comonad.cs" />
     <Compile Include="Haskell\IMonadPlus.cs" />
     <Compile Include="Haskell\Kleisli.cs" />
     <Compile Include="Haskell\PrototypeException.cs" />
@@ -24,7 +25,7 @@
     <Compile Include="Haskell\Rules\FunctorRules.cs" />
     <Compile Include="Haskell\Tmp\Kleisli.cs" />
     <Compile Include="Haskell\Tmp\Monad.cs" />
-    <Compile Include="Haskell\Tmp\Mu.cs" />
+    <Compile Include="Haskell\Mu.cs" />
     <Compile Include="Haskell\Tmp\Rules.cs" />
     <Compile Include="Linq\IGroupingQuerySyntax`1.cs" />
     <Compile Include="Linq\IOrderedQuerySyntax`1.cs" />

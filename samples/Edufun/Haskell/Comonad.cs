@@ -2,38 +2,36 @@
 
 //#define COMONAD_VIA_MAP_COMULTIPLY
 
-namespace Edufun.Haskell.Tmp
+namespace Edufun.Haskell
 {
     using System;
 
     public class Comonad<T>
     {
-        public Comonad<TResult> Extend<TResult>(Cokunc<T, TResult> cokun)
+        public Comonad<TResult> Extend<TResult>(Func<Comonad<T>, TResult> func)
         {
 #if COMONAD_VIA_MAP_COMULTIPLY
-            return Duplicate(this).Select(cokun);
+            return Duplicate(this).Select(func);
 #else
             throw new PrototypeException();
 #endif
         }
 
-        public Comonad<TResult> Select<TResult>(Func<T, TResult> fun)
+        public Comonad<TResult> Select<TResult>(Func<T, TResult> func)
         {
 #if COMONAD_VIA_MAP_COMULTIPLY
             throw new PrototypeException();
 #else
-            return Extend(_ => fun(Extract(_)));
+            return Extend(_ => func(Extract(_)));
 #endif
         }
 
-        // ε
-        internal static T Extract(Comonad<T> value)
+        public static T Extract(Comonad<T> value)
         {
             throw new PrototypeException();
         }
 
-        // δ
-        internal static Comonad<Comonad<T>> Duplicate(Comonad<T> value)
+        public static Comonad<Comonad<T>> Duplicate(Comonad<T> value)
         {
 #if COMONAD_VIA_MAP_COMULTIPLY
             throw new PrototypeException();

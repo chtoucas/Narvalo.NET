@@ -63,13 +63,11 @@ namespace Edufun.Haskell
             IEnumerable<TSource> source,
             Func<TSource, Prototype<bool>> predicate)
         {
-            Func<bool, IEnumerable<TSource>, TSource, IEnumerable<TSource>> func
-                = (flg, seq, item) => { if (flg) { return seq.Append(item); } else { return seq; } };
-
-            var acc = s_Monad.Lift(func);
+            Func<TSource, Func<bool, IEnumerable<TSource>, IEnumerable<TSource>>> func
+                = item => (flg, seq) => flg ? seq.Append(item) : seq;
 
             Func<Prototype<IEnumerable<TSource>>, TSource, Prototype<IEnumerable<TSource>>> accumulator
-                = (mseq, item) => acc(predicate(item), mseq, Prototype.Of(item));
+                = (mseq, item) => predicate(item).Zip(mseq, func(item));
 
             return source.Aggregate(Prototype.Of(Enumerable.Empty<TSource>()), accumulator);
         }

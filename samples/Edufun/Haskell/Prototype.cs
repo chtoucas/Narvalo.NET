@@ -12,88 +12,65 @@ namespace Edufun.Haskell
     using Narvalo.Fx;
     using Narvalo.Fx.Linq;
 
-    public partial class Prototype
+    public partial class Prototype<T>
+        : IFunctor<T>, IApplicative<T>, IMonad<T>, IAlternative<T>, IMonadPlus<T>
     {
-        public static Prototype<T> Of<T>(T value) { throw new PrototypeException(); }
+        #region IFunctor<T>
 
-        public static Prototype<T> Empty<T>() { throw new PrototypeException(); }
-
-        // [GHC.Base] join x = x >>= id
-        public static Prototype<T> Flatten<T>(Prototype<Prototype<T>> square)
-        {
-#if MONAD_VIA_MAP_MULTIPLY
-            throw new PrototypeException();
-#else
-            Func<Prototype<T>, Prototype<T>> id = _ => _;
-
-            return square.Bind(id);
-#endif
-        }
-    }
-
-    // Implements the IFunctor<T> interface.
-    public partial class Prototype<T> : IFunctor<T>
-    {
         // Data.Functor: fmap
-        // NB: Implemented via IApplicativeSyntax<T>.
         Prototype<TResult> IFunctor<T>.Select<TResult>(Func<T, TResult> selector)
         {
             throw new PrototypeException();
         }
-    }
 
-    // Implements the IApplicative<T> interface.
-    public partial class Prototype<T> : IApplicative<T>
-    {
+        #endregion
+
+        #region IApplicative<T>
+
         // Control.Applicative: <*>
-        // NB: Implemented via IFunctorSyntax<T>.
         Prototype<TResult> IApplicative<T>.Gather<TResult>(Prototype<Func<T, TResult>> applicative)
         {
             throw new PrototypeException();
         }
 
         // Control.Applicative: pure
-        public Prototype<TSource> Of_<TSource>(TSource value) => Prototype.Of(value);
-    }
+        Prototype<TSource> IApplicative<T>.Of_<TSource>(TSource value) => Prototype.Of(value);
 
-    // Implements the IMonad<T> interface.
-    public partial class Prototype<T> : IMonad<T>
-    {
+        #endregion
+
+        #region IMonad<T>
+
         // Control.Monad: >>=
         public Prototype<TResult> Bind<TResult>(Func<T, Prototype<TResult>> selector)
         {
 #if MONAD_VIA_MAP_MULTIPLY
-            return Prototype.Flatten(Select(_ => selector.Invoke(_)));
+            return Prototype.Flatten(Select(selector));
 #else
             throw new PrototypeException();
 #endif
         }
 
         // Control.Monad: fmap f xs = xs >>= return . f
-#if MONAD_VIA_MAP_MULTIPLY
-        // NB: Implemented via IApplicativeSyntax<T>.
-        Prototype<TResult> IMonad<T>.Select<TResult>(Func<T, TResult> selector)
-        {
-            throw new PrototypeException();
-        }
-#else
         public Prototype<TResult> Select<TResult>(Func<T, TResult> selector)
         {
-            return Bind(_ => Prototype.Of(selector.Invoke(_)));
-        }
+#if MONAD_VIA_MAP_MULTIPLY
+            throw new PrototypeException();
+#else
+            return Bind(_ => Prototype.Of(selector(_)));
 #endif
+        }
 
         // Control.Monad: return
-        // NB: Already implemented via IApplicative<T>.
-        Prototype<TSource> IMonad<T>.Of_<TSource>(TSource value) => Prototype.Of(value);
+        public Prototype<TSource> Of_<TSource>(TSource value) => Prototype.Of(value);
 
         // Control.Monad: join
-        public Prototype<TSource> Flatten_<TSource>(Prototype<Prototype<TSource>> square) => Prototype.Flatten(square);
-    }
+        public Prototype<TSource> Flatten_<TSource>(Prototype<Prototype<TSource>> square)
+            => Prototype.Flatten(square);
 
-    // Implements the IAlternative<T> interface.
-    public partial class Prototype<T> : IAlternative<T>
-    {
+        #endregion
+
+        #region IAlternative<T>
+
         // GHC.Base: empty = Nothing
         public Prototype<T> Empty_() => Prototype.Empty<T>();
 
@@ -104,21 +81,34 @@ namespace Edufun.Haskell
         {
             throw new PrototypeException();
         }
+
+        #endregion
+
+        #region IMonadPlus<T>
+
+        // [GHC.Base] mplus = (<|>)
+        public Prototype<T> Plus(Prototype<T> value) => Append(value);
+
+        // [GHC.Base] mzero = empty
+        public Prototype<T> Zero_() => Prototype.Zero<T>();
+
+        #endregion
     }
 
-    // Implements the IFunctorSyntax<T> interface.
-    public partial class Prototype<T> : IFunctorSyntax<T>
+    public partial class Prototype<T> : IFunctorSyntax<T>, IApplicativeSyntax<T>, IMonadSyntax<T>
     {
+        #region IFunctorSyntax<T>
+
         // [GHC.Base] (<$) = fmap . const
-        public Prototype<TResult> Replace<TResult>(TResult other) => Select(_ => other);
+        Prototype<TResult> IFunctorSyntax<T>.Replace<TResult>(TResult other) => Select(_ => other);
 
         // [Data.Functor] void x = () <$ x
-        public Prototype<Unit> Skip() => Replace(Unit.Single);
-    }
+        Prototype<Unit> IFunctorSyntax<T>.Skip() => Replace(Unit.Single);
 
-    // Implements the IApplicativeSyntax<T> interface.
-    public partial class Prototype<T> : IApplicativeSyntax<T>
-    {
+        #endregion
+
+        #region IApplicativeSyntax<T>
+
         // [GHC.Base] (<*) = liftA2 const
         // Control.Applicative: u <* v = pure const <*> u <*> v
         public Prototype<T> Ignore<TOther>(Prototype<TOther> other)
@@ -135,12 +125,10 @@ namespace Edufun.Haskell
         }
 
         // [GHC.Base] (<$) = fmap . const
-        // NB: Already implemented via IFunctorSyntax<T>.
-        Prototype<TResult> IApplicativeSyntax<T>.Replace<TResult>(TResult other) => Select(_ => other);
+        public Prototype<TResult> Replace<TResult>(TResult other) => Select(_ => other);
 
         // [GHC.Base] a1 *> a2 = (id <$ a1) <*> a2
         // Control.Applicative: u *> v = pure (const id) <*> u <*> v
-        // NB: Better implemented via IMonadSyntax<T>.
         Prototype<TResult> IApplicativeSyntax<T>.ReplaceBy<TResult>(Prototype<TResult> other)
         {
 #if APPLICATIVE_USE_GHC_BASE
@@ -156,21 +144,15 @@ namespace Edufun.Haskell
 
         // [GHC.Base] liftA f a = pure f <*> a
         // Control.Applicative: fmap f x = pure f <*> x
-#if MONAD_VIA_MAP_MULTIPLY
-        public Prototype<TResult> Select<TResult>(Func<T, TResult> selector)
-            => Gather(Prototype.Of(selector));
-#else
-        // NB: Already implemented via IMonad<T>.
         Prototype<TResult> IApplicativeSyntax<T>.Select<TResult>(Func<T, TResult> selector)
            => Gather(Prototype.Of(selector));
-#endif
 
         // [GHC.Base] liftA2 f a b = fmap f a <*> b
         public Prototype<TResult> Zip<TSecond, TResult>(
             Prototype<TSecond> second,
             Func<T, TSecond, TResult> resultSelector)
         {
-            Func<T, Func<TSecond, TResult>> selector = x => y => resultSelector.Invoke(x, y);
+            Func<T, Func<TSecond, TResult>> selector = x => y => resultSelector(x, y);
 
             return second.Gather(Select(selector));
         }
@@ -181,15 +163,15 @@ namespace Edufun.Haskell
             Prototype<T3> third,
             Func<T, T2, T3, TResult> resultSelector)
         {
-            Func<T, Func<T2, Func<T3, TResult>>> selector = x => y => z => resultSelector.Invoke(x, y, z);
+            Func<T, Func<T2, Func<T3, TResult>>> selector = x => y => z => resultSelector(x, y, z);
 
             return third.Gather(second.Gather(Select(selector)));
         }
-    }
 
-    // Implements the IMonadSyntax<T> interface.
-    public partial class Prototype<T> : IMonadSyntax<T>
-    {
+        #endregion
+
+        #region IMonadSyntax<T>
+
         // [GHC.Base] ap m1 m2 = do { x1 <- m1; x2 <- m2; return (x1 x2) }
         // Control.Monad: <*> = ap
         public Prototype<TResult> Gather<TResult>(Prototype<Func<T, TResult>> applicative)
@@ -214,25 +196,62 @@ namespace Edufun.Haskell
         public Prototype<TResult> ReplaceBy<TResult>(Prototype<TResult> other) => Bind(_ => other);
 
         // [Data.Functor] void x = () <$ x
-        // NB: Already implemented via IFunctorSyntax<T>.
-        Prototype<Unit> IMonadSyntax<T>.Skip() => Replace(Unit.Single);
+        public Prototype<Unit> Skip() => Replace(Unit.Single);
+
+        #endregion
+
+        #region IMonadPlusSyntax<T>
+
+        // [Control.Monad]
+        // mfilter p ma = do
+        //   a <- ma
+        //   if p a then return a else mzero
+        public Prototype<T> Where(Func<T, bool> predicate)
+            => Bind(_ => predicate(_) ? Prototype.Of(_) : Prototype.Zero<T>());
+
+        #endregion
     }
 
-    // Implements the IFunctorOperators interface.
-    public partial class Prototype : IFunctorOperators
+    public partial class Prototype
     {
+        public static Prototype<T> Of<T>(T value) { throw new PrototypeException(); }
+
+        public static Prototype<T> Empty<T>() { throw new PrototypeException(); }
+
+        public static Prototype<T> Zero<T>() => Empty<T>();
+
+        // [GHC.Base] join x = x >>= id
+        public static Prototype<T> Flatten<T>(Prototype<Prototype<T>> square)
+        {
+#if MONAD_VIA_MAP_MULTIPLY
+            throw new PrototypeException();
+#else
+            Func<Prototype<T>, Prototype<T>> id = _ => _;
+
+            return square.Bind(id);
+#endif
+        }
+    }
+
+    public partial class Prototype
+        : IFunctorOperators, IMonadOperators, IAlternativeOperators, IMonadPlusOperators
+    {
+        #region IFunctorOperators
+
         // [Data.Functor] ($>) = flip (<$)
         public Prototype<TResult> Inject<TSource, TResult>(TResult value, Prototype<TSource> functor)
             => functor.Replace(value);
 
         // [Data.Functor] (<$>) = fmap
-        public Prototype<TResult> InvokeWith<TSource, TResult>(Func<TSource, TResult> func, Prototype<TSource> functor)
+        Prototype<TResult> IFunctorOperators.InvokeWith<TSource, TResult>(
+            Func<TSource, TResult> func,
+            Prototype<TSource> functor)
             => functor.Select(func);
-    }
 
-    // Implements the IMonadOperators interface.
-    public partial class Prototype : IMonadOperators
-    {
+        #endregion
+
+        #region IMonadOperators
+
         // [Data.Traversable] sequence = sequenceA
         public Prototype<IEnumerable<TSource>> Collect<TSource>(IEnumerable<Prototype<TSource>> source)
         {
@@ -305,8 +324,9 @@ namespace Edufun.Haskell
         //   x <- m
         //   let z = f x
         //   z `seq` return z
-        // NB: Already implemented via IFunctorOperators.
-        Prototype<TResult> IMonadOperators.InvokeWith<TSource, TResult>(Func<TSource, TResult> selector, Prototype<TSource> value)
+        public Prototype<TResult> InvokeWith<TSource, TResult>(
+            Func<TSource, TResult> selector,
+            Prototype<TSource> value)
             => value.Select(selector);
 
         #region Lift
@@ -358,11 +378,24 @@ namespace Edufun.Haskell
         // [GHC.Base] when p s = if p then s else pure ()
         public Prototype<Unit> When(bool predicate, Prototype<Unit> value)
             => predicate ? value : Prototype.Of(Unit.Single);
-    }
 
-    // Implements the IAlternativeOperators interface.
-    public partial class Prototype : IAlternativeOperators
-    {
+        #endregion
+
+        #region IAlternativeOperators
+
+        // many v = some v <|> pure []
+        // GHC.Base:
+        // many v = many_v
+        //   where
+        //     many_v = some_v <|> pure []
+        //     some_v = (fmap(:) v) <*> many_v
+        public Prototype<IEnumerable<T>> Many<T>(Prototype<T> value)
+            => Some(value).Append(Prototype.Of(Enumerable.Empty<T>()));
+
+        // optional v = Just <$> v <|> pure Nothing
+        public Prototype<Maybe<T>> Optional<T>(Prototype<T> value)
+            => value.Select(Maybe.Of).Append(Prototype.Of(Maybe<T>.None));
+
         // some v = (:) <$> v <*> many v
         // GHC.Base:
         // some v = some_v
@@ -377,17 +410,26 @@ namespace Edufun.Haskell
             return Many(value).Gather(value.Select(append));
         }
 
-        // many v = some v <|> pure []
-        // GHC.Base:
-        // many v = many_v
-        //   where
-        //     many_v = some_v <|> pure []
-        //     some_v = (fmap(:) v) <*> many_v
-        public Prototype<IEnumerable<T>> Many<T>(Prototype<T> value)
-            => Some(value).Append(Prototype.Of(Enumerable.Empty<T>()));
+        #endregion
 
-        // optional v = Just <$> v <|> pure Nothing
-        public Prototype<Maybe<T>> Optional<T>(Prototype<T> value)
-            => value.Select(Maybe.Of).Append(Prototype.Of(Maybe<T>.None));
+        #region IMonadPlusOperators
+
+        // [Control.Monad]
+        //  guard True = pure()
+        //  guard False = empty
+        public Prototype<Unit> Guard(bool predicate)
+           // NB: Using IAlternative<T>:
+           // > predicate ? Prototype.Of(Unit.Single) : Prototype.Empty<Unit>();
+           => predicate ? Prototype.Of(Unit.Single) : Prototype.Zero<Unit>();
+
+        // [Data.Foldable] msum = asum
+        // asum :: (Foldable t, Alternative f) => t (f a) -> f a
+        // asum = foldr (<|>) empty
+        public Prototype<TSource> Sum<TSource>(IEnumerable<Prototype<TSource>> source)
+            // NB: Using IAlternative<T>:
+            // > source.Aggregate(Prototype.Empty<TSource>(), (m, n) => m.Append(n));
+            => source.Aggregate(Prototype.Zero<TSource>(), (m, n) => m.Plus(n));
+
+        #endregion
     }
 }
