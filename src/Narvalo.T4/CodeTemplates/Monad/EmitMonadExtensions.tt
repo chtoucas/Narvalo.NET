@@ -8,16 +8,15 @@ public partial class MonadTemplate
     // Provides extension methods for <#= Name #><T<#= SuffixT #>>.
     public static partial class <#= Name #>
     {
-        public static <#= Name #><TResult<#= SuffixT #>> Replace<TSource, TResult<#= SuffixT #>>(
+        public static <#= Name #><TResult<#= SuffixT #>> <#= MapName #><TSource, TResult<#= SuffixT #>>(
             this <#= Name #><TSource<#= SuffixT #>> @this,
-            TResult value)
+            Func<TSource, TResult> selector)
             <#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
             <#+ WriteNotNull(); #>
-
-            return @this.Select(_ => value);
+            Require.NotNull(selector, nameof(selector));
+            return @this.Bind(val => <#+ WriteFactory("TResult"); #>(selector(val)));
         }
-
 <#+ if (!HasTypeConstraints) { #>
 
         public static <#= Name #><TResult<#= SuffixT #>> Gather<TSource, TResult<#= SuffixT #>>(
@@ -27,7 +26,6 @@ public partial class MonadTemplate
         {
             <#+ WriteNotNull(); #>
             <#+ WriteNotNull("applicative"); #>
-
             return applicative.Bind(func => @this.Select(func));
         }
 
@@ -36,21 +34,17 @@ public partial class MonadTemplate
             <#= Name #><TSource<#= SuffixT #>> value)
         {
             <#+ WriteNotNull("value"); #>
-
             return value.Gather(@this);
         }
-
 <#+ } // T4: End of !HasTypeConstraints. #>
 
-        public static <#= Name #><TResult<#= SuffixT #>> <#= MapName #><TSource, TResult<#= SuffixT #>>(
+        public static <#= Name #><TResult<#= SuffixT #>> Replace<TSource, TResult<#= SuffixT #>>(
             this <#= Name #><TSource<#= SuffixT #>> @this,
-            Func<TSource, TResult> selector)
+            TResult value)
             <#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
             <#+ WriteNotNull(); #>
-            Require.NotNull(selector, nameof(selector));
-
-            return @this.Bind(_ => <#+ WriteFactory("TResult"); #>(selector(_)));
+            return @this.Select(_ => value);
         }
 
         public static <#= Name #><TResult<#= SuffixT #>> ReplaceBy<TSource, TResult<#= SuffixT #>>(
@@ -59,25 +53,43 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
             <#+ WriteNotNull(); #>
-
             return @this.Bind(_ => other);
         }
 
-<#+ if (!SuppressMessage) { #>
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
-<#+ } #>
         public static <#= Name #><global::Narvalo.Fx.Unit<#= SuffixT #>> Skip<TSource<#= SuffixT #>>(this <#= Name #><TSource<#= SuffixT #>> @this)
             <#+ WriteTypeConstraints("TSource"); #>
         {
             <#+ WriteNotNull(); #>
 
-            return @this.Replace(global::Narvalo.Fx.Unit.Single);
 <#+ if (HasSuffixT) { #>
-            //return <#+ WriteFactory("Unit"); #>(global::Narvalo.Fx.Unit.Single);
+            return @this.Replace(global::Narvalo.Fx.Unit.Single);
 <#+ } else { #>
-            //return <#= Name #>.Unit;
+            return @this.ReplaceBy(Unit);
 <#+ } #>
         }
+<#+ if (HasZero) { #>
+
+        public static <#= Name #><TSource<#= SuffixT #>> <#= FilterName #><TSource<#= SuffixT #>>(
+            this <#= Name #><TSource<#= SuffixT #>> @this,
+            Func<TSource, bool> predicate)
+            <#+ WriteTypeConstraints("TSource"); #>
+        {
+            <#+ WriteNotNull(); #>
+            Require.NotNull(predicate, nameof(predicate));
+            return @this.Bind(val => predicate(val) ? <#+ WriteFactory("TSource"); #>(val) : <#= Name #><TSource<#= SuffixT #>>.<#= ZeroName #>);
+        }
+<#+ } // T4: End of HasZero. #>
+<#+ if (!HasTypeConstraints) { #>
+
+        public static <#= Name #><IEnumerable<TSource><#= SuffixT #>> Repeat<TSource<#= SuffixT #>>(
+            this <#= Name #><TSource<#= SuffixT #>> @this,
+            int count)
+        {
+            <#+ WriteNotNull(); #>
+            Require.Range(count >= 1, nameof(count));
+            return @this.<#= MapName #>(val => Enumerable.Repeat(val, count));
+        }
+<#+ } // T4: End of !HasTypeConstraints. #>
 
         public static <#= Name #><TResult<#= SuffixT #>> Coalesce<TSource, TResult<#= SuffixT #>>(
             this <#= Name #><TSource<#= SuffixT #>> @this,
@@ -88,10 +100,8 @@ public partial class MonadTemplate
         {
             <#+ WriteNotNull(); #>
             Require.NotNull(predicate, nameof(predicate));
-
-            return @this.Bind(_ => predicate(_) ? thenResult : elseResult);
+            return @this.Bind(val => predicate(val) ? thenResult : elseResult);
         }
-
 <#+ if (HasZero) { #>
 
         // Conditional version of ReplaceBy().
@@ -103,10 +113,8 @@ public partial class MonadTemplate
         {
             <#+ WriteNotNull(); #>
             Require.NotNull(predicate, nameof(predicate));
-
-            return @this.Bind(_ => predicate(_) ? thenResult : <#= Name #><TResult>.<#= ZeroName #>);
+            return @this.Bind(val => predicate(val) ? thenResult : <#= Name #><TResult>.<#= ZeroName #>);
         }
-
 <#+ } // T4: End of HasZero. #>
 
         public static <#= Name #><TResult<#= SuffixT #>> Using<TSource, TResult<#= SuffixT #>>(
@@ -117,8 +125,7 @@ public partial class MonadTemplate
         {
             <#+ WriteNotNull(); #>
             Require.NotNull(selector, nameof(selector));
-
-            return @this.Bind(_ => { using (_) { return selector(_); } });
+            return @this.Bind(val => { using (val) { return selector(val); } });
         }
 
         public static <#= Name #><TResult<#= SuffixT #>> Using<TSource, TResult<#= SuffixT #>>(
@@ -129,40 +136,8 @@ public partial class MonadTemplate
         {
             <#+ WriteNotNull(); #>
             Require.NotNull(selector, nameof(selector));
-
-            return @this.<#= MapName #>(_ => { using (_) { return selector(_); } });
+            return @this.<#= MapName #>(val => { using (val) { return selector(val); } });
         }
-
-<#+ if (HasZero) { #>
-
-        public static <#= Name #><TSource<#= SuffixT #>> <#= FilterName #><TSource<#= SuffixT #>>(
-            this <#= Name #><TSource<#= SuffixT #>> @this,
-            Func<TSource, bool> predicate)
-            <#+ WriteTypeConstraints("TSource"); #>
-        {
-            <#+ WriteNotNull(); #>
-            Require.NotNull(predicate, nameof(predicate));
-
-            return @this.Bind(
-                _ => predicate(_) ? <#+ WriteFactory("TSource"); #>(_) : <#= Name #><TSource<#= SuffixT #>>.<#= ZeroName #>);
-        }
-
-<#+ } // T4: End of HasZero. #>
-
-<#+ if (!HasTypeConstraints) { #>
-
-        public static <#= Name #><IEnumerable<TSource><#= SuffixT #>> Repeat<TSource<#= SuffixT #>>(
-            this <#= Name #><TSource<#= SuffixT #>> @this,
-            int count)
-        {
-            <#+ WriteNotNull(); #>
-            Require.Range(count >= 1, nameof(count));
-
-            return @this.<#= MapName #>(_ => Enumerable.Repeat(_, count));
-        }
-
-<#+ } // T4: End of !HasTypeConstraints. #>
-
 <#+ /* DISABLED #>
 
         // Haskell uses a different signature.
@@ -201,7 +176,6 @@ public partial class MonadTemplate
         }
 
 <#+ End of DISABLED */ #>
-
 <#+ if (!HasTypeConstraints) { #>
 
         public static <#= Name #><Tuple<TSource, TOther><#= SuffixT #>> Zip<TSource, TOther<#= SuffixT #>>(
@@ -210,10 +184,8 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource", "TOther"); #>
         {
             <#+ WriteNotNull(); #>
-
             return @this.Zip(other, Tuple.Create);
         }
-
 <#+ } #>
 
         /// <see cref="Lift{T1, T2, T3}" />
@@ -336,10 +308,10 @@ public partial class MonadTemplate
 <#+ } #>
         }
 
+        #region LINQ dialect.
+
 <#+ if (!PreferLinqDialect) { #>
-
 <#+ if (HasFilter) { #>
-
         public static <#= Name #><TSource<#= SuffixT #>> Where<TSource<#= SuffixT #>>(
             this <#= Name #><TSource<#= SuffixT #>> @this,
             Func<TSource, bool> predicate)
@@ -351,7 +323,6 @@ public partial class MonadTemplate
         }
 
 <#+ } // T4: End of HasFilter. #>
-
         public static <#= Name #><TResult> Select<TSource, TResult<#= SuffixT #>>(
             this <#= Name #><TSource<#= SuffixT #>> @this,
             Func<TSource, TResult> selector)
@@ -363,7 +334,6 @@ public partial class MonadTemplate
         }
 
 <#+ } // T4: End of !PreferLinqDialect. #>
-
         /// <remarks>
         /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" />.
         /// </remarks>
@@ -383,7 +353,6 @@ public partial class MonadTemplate
         }
 
 <#+ if (HasJoin) { #>
-
         public static <#= Name #><TResult> Join<TSource, TInner, TKey, TResult>(
             this <#= Name #><TSource> @this,
             <#= Name #><TInner> inner,
@@ -423,9 +392,7 @@ public partial class MonadTemplate
         }
 
 <#+ } // T4: End of HasJoin. #>
-
 <#+ if (HasJoin) { #>
-
         public static <#= Name #><TResult> Join<TSource, TInner, TKey, TResult>(
             this <#= Name #><TSource> @this,
             <#= Name #><TInner> inner,
@@ -461,7 +428,6 @@ public partial class MonadTemplate
                 resultSelector,
                 comparer ?? EqualityComparer<TKey>.Default);
         }
-
 
         private static <#= Name #><TResult> JoinImpl<TSource, TInner, TKey, TResult>(
             <#= Name #><TSource> seq,
@@ -532,6 +498,7 @@ public partial class MonadTemplate
             };
         }
 
+        #endregion
 <#+ } // T4: End of HasJoin. #>
     } // End of <#= Name #> - T4: EmitMonadExtensions().
 <#+

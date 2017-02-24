@@ -386,7 +386,7 @@ namespace Narvalo.T4
             else
             {
                 // Ensures that the next line in the output is correctly indented.
-                WriteLine("/* T4: C# indent */");
+                WriteLine("/* T4: NotNull({0}) */", name);
             }
         }
 
@@ -399,7 +399,7 @@ namespace Narvalo.T4
             else
             {
                 // Ensures that the next line in the output is correctly indented.
-                WriteLine("/* T4: C# indent */");
+                WriteLine("/* T4: NotNull(@this) */");
             }
         }
 
@@ -424,7 +424,7 @@ namespace Narvalo.T4
             if (!HasTypeConstraints)
             {
                 // Ensures that the next line in the output is correctly indented.
-                WriteLine("/* T4: C# indent */");
+                WriteLine("/* T4: type constraint */");
 
                 return;
             }

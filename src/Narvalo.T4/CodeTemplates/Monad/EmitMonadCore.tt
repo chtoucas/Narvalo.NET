@@ -9,12 +9,10 @@ public partial class MonadTemplate
     public static partial class <#= Name #>
     {
 <#+ if (!HasSuffixT) { #>
-
         /// <summary>
         /// The unique object of type <c><#= Name #>&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly <#= Name #><global::Narvalo.Fx.Unit> s_Unit
-            = <#= ReturnName #>(global::Narvalo.Fx.Unit.Single);
+        private static readonly <#= Name #><global::Narvalo.Fx.Unit> s_Unit = <#= ReturnName #>(global::Narvalo.Fx.Unit.Single);
 
         /// <summary>
         /// Gets the unique object of type <c><#= Name #>&lt;Unit&gt;</c>.
@@ -22,17 +20,13 @@ public partial class MonadTemplate
         public static <#= Name #><global::Narvalo.Fx.Unit> Unit => s_Unit;
 
 <#+ } #>
-
 <#+ if (HasZero) { #>
-
         /// <summary>
         /// Gets the zero for <see cref="<#= Name #>{T}.Bind"/>.
         /// </summary>
-        public static <#= Name #><global::Narvalo.Fx.Unit> <#= ZeroName #>
-            => <#= Name #><global::Narvalo.Fx.Unit>.<#= ZeroName #>;
+        public static <#= Name #><global::Narvalo.Fx.Unit> <#= ZeroName #> => <#= Name #><global::Narvalo.Fx.Unit>.<#= ZeroName #>;
 
 <#+ } // End of HasZero #>
-
         /// <summary>
         /// Obtains an instance of the <see cref="<#= Name #>{T<#= SuffixT #>}"/> class for the specified value.
         /// </summary>
@@ -52,12 +46,9 @@ public partial class MonadTemplate
         public static <#= Name #><T<#= SuffixT #>> Flatten<T<#= SuffixT #>>(<#= Name #><<#= Name #><T<#= SuffixT #>><#= SuffixT #>> square)
             <#+ WriteTypeConstraints("T"); #>
             => <#= Name #><T<#= SuffixT #>>.μ(square);
-
 <#+ if (HasZero) { #>
 
-        public static <#= Name #><global::Narvalo.Fx.Unit> Guard(bool predicate)
-            => predicate ? <#= Name #>.Unit : <#= Name #>.<#= ZeroName #>;
-
+        public static <#= Name #><global::Narvalo.Fx.Unit> Guard(bool predicate) => predicate ? Unit : <#= ZeroName #>;
 <#+ } // T4: End of HasZero. #>
 
         /// <summary>
@@ -66,75 +57,61 @@ public partial class MonadTemplate
         public static Func<<#= Name #><T<#= SuffixT #>>, <#= Name #><TResult<#= SuffixT #>>> Lift<T, TResult<#= SuffixT #>>(
             Func<T, TResult> func)
             <#+ WriteTypeConstraints("T", "TResult"); #>
-        {
-            return arg =>
+            => arg =>
             {
                 <#+ WriteNotNull("arg"); #>
                 return arg.<#= MapName #>(func);
             };
-        }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="<#= Name #>{T<#= SuffixT #>}" /> values, scanning the
-        /// monadic arguments from left to right.
+        /// Promotes a function to use and return <see cref="<#= Name #>{T<#= SuffixT #>}" /> values.
         /// </summary>
         public static Func<<#= Name #><T1<#= SuffixT #>>, <#= Name #><T2<#= SuffixT #>>, <#= Name #><TResult<#= SuffixT #>>>
             Lift<T1, T2, TResult<#= SuffixT #>>(Func<T1, T2, TResult> func)
             <#+ WriteTypeConstraints("T1", "T2", "TResult"); #>
-        {
-            return (arg1, arg2) =>
+            => (arg1, arg2) =>
             {
                 <#+ WriteNotNull("arg1"); #>
                 return arg1.Zip(arg2, func);
             };
-        }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="<#= Name #>{T<#= SuffixT #>}" /> values, scanning the
-        /// monadic arguments from left to right.
+        /// Promotes a function to use and return <see cref="<#= Name #>{T<#= SuffixT #>}" /> values.
         /// </summary>
         public static Func<<#= Name #><T1<#= SuffixT #>>, <#= Name #><T2<#= SuffixT #>>, <#= Name #><T3<#= SuffixT #>>, <#= Name #><TResult<#= SuffixT #>>>
             Lift<T1, T2, T3, TResult<#= SuffixT #>>(Func<T1, T2, T3, TResult> func)
             <#+ WriteTypeConstraints("T1", "T2", "T3", "TResult"); #>
-        {
-            return (arg1, arg2, arg3) =>
+            => (arg1, arg2, arg3) =>
             {
                 <#+ WriteNotNull("arg1"); #>
                 return arg1.Zip(arg2, arg3, func);
             };
-        }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="<#= Name #>{T<#= SuffixT #>}" /> values, scanning the
-        /// monadic arguments from left to right.
+        /// Promotes a function to use and return <see cref="<#= Name #>{T<#= SuffixT #>}" /> values.
         /// </summary>
         public static Func<<#= Name #><T1<#= SuffixT #>>, <#= Name #><T2<#= SuffixT #>>, <#= Name #><T3<#= SuffixT #>>, <#= Name #><T4<#= SuffixT #>>, <#= Name #><TResult<#= SuffixT #>>>
             Lift<T1, T2, T3, T4, TResult<#= SuffixT #>>(
             Func<T1, T2, T3, T4, TResult> func)
             <#+ WriteTypeConstraints("T1", "T2", "T3", "T4", "TResult"); #>
-        {
-            return (arg1, arg2, arg3, arg4) =>
+            => (arg1, arg2, arg3, arg4) =>
             {
                 <#+ WriteNotNull("arg1"); #>
                 return arg1.Zip(arg2, arg3, arg4, func);
             };
-        }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="<#= Name #>{T<#= SuffixT #>}" /> values, scanning the
-        /// monadic arguments from left to right.
+        /// Promotes a function to use and return <see cref="<#= Name #>{T<#= SuffixT #>}" /> values.
         /// </summary>
         public static Func<<#= Name #><T1<#= SuffixT #>>, <#= Name #><T2<#= SuffixT #>>, <#= Name #><T3<#= SuffixT #>>, <#= Name #><T4<#= SuffixT #>>, <#= Name #><T5<#= SuffixT #>>, <#= Name #><TResult<#= SuffixT #>>>
             Lift<T1, T2, T3, T4, T5, TResult<#= SuffixT #>>(
             Func<T1, T2, T3, T4, T5, TResult> func)
             <#+ WriteTypeConstraints("T1", "T2", "T3", "T4", "T5", "TResult"); #>
-        {
-            return (arg1, arg2, arg3, arg4, arg5) =>
+            => (arg1, arg2, arg3, arg4, arg5) =>
             {
                 <#+ WriteNotNull("arg1"); #>
                 return arg1.Zip(arg2, arg3, arg4, arg5, func);
             };
-        }
     } // End of <#= Name #> - T4: EmitMonadCore().
 <#+
     } // T4: End of EmitMonadCore().
