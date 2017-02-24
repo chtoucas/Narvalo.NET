@@ -28,26 +28,6 @@ namespace Narvalo.Fx
             yield return value;
         }
 
-        /// <summary>
-        /// Gets the empty sequence that has the specified type argument.
-        /// </summary>
-        /// <remarks>
-        /// Workaround for the fact that <see cref="Enumerable.Empty{TResult}"/> does not have any contract attached.
-        /// </remarks>
-        /// <value>An empty <see cref="IEnumerable{TResult}"/> whose type argument is TElement.</value>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static IEnumerable<TResult> Empty<TResult>()
-        {
-            Warrant.NotNull<IEnumerable<TResult>>();
-
-            // We could use "yield break", but Enumerable.Empty<T> is more readable
-            // with the additional benefit of returning a singleton.
-            var coll = Enumerable.Empty<TResult>();
-            Contract.Assume(coll != null);
-
-            return coll;
-        }
-
         #region Anamorphisms
 
         /// <summary>

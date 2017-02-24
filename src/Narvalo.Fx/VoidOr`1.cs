@@ -7,6 +7,7 @@ namespace Narvalo.Fx
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
+    using System.Linq;
     using System.Runtime.CompilerServices;
 
     // WARNING: We make this class a "monad" on TError.
@@ -232,7 +233,7 @@ namespace Narvalo.Fx
             {
                 Warrant.NotNull<IEnumerable<TError>>();
 
-                return Sequence.Empty<TError>();
+                return Enumerable.Empty<TError>();
             }
 
             public override TResult Match<TResult>(Func<TError, TResult> caseError, Func<TResult> caseSuccess)

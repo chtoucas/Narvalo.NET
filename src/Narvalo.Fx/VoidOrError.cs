@@ -7,6 +7,7 @@ namespace Narvalo.Fx
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
+    using System.Linq;
     using System.Runtime.ExceptionServices;
 
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
@@ -273,7 +274,7 @@ namespace Narvalo.Fx
             {
                 Warrant.NotNull<IEnumerable<ExceptionDispatchInfo>>();
 
-                return Sequence.Empty<ExceptionDispatchInfo>();
+                return Enumerable.Empty<ExceptionDispatchInfo>();
             }
 
             public override TResult Match<TResult>(

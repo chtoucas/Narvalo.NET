@@ -3,6 +3,7 @@
 namespace Narvalo.Fx.Linq
 {
     using System.Collections.Generic;
+    using System.Linq;
 
     public static partial class Qperators
     {
@@ -14,7 +15,7 @@ namespace Narvalo.Fx.Linq
 
             if (@this == null)
             {
-                return Sequence.Empty<TSource>();
+                return Enumerable.Empty<TSource>();
             }
 
             return @this;
