@@ -351,8 +351,8 @@ public partial class MonadTemplate
             Require.NotNull(resultSelector, nameof(resultSelector));
 
             return @this.Bind(
-                arg => valueSelector(arg).<#= MapName #>(
-                    middle => resultSelector(arg, middle)));
+                val => valueSelector(val).<#= MapName #>(
+                    middle => resultSelector(val, middle)));
         }
 
 <#+ if (HasJoin) { #>
@@ -363,39 +363,14 @@ public partial class MonadTemplate
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, TInner, TResult> resultSelector)
             <#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
-        {
-            <#+ WriteNotNull(); #>
-
-            return JoinImpl(
+            => JoinImpl(
                 @this,
                 inner,
                 outerKeySelector,
                 innerKeySelector,
                 resultSelector,
                 EqualityComparer<TKey>.Default);
-        }
 
-        public static <#= Name #><TResult> GroupJoin<TSource, TInner, TKey, TResult>(
-            this <#= Name #><TSource> @this,
-            <#= Name #><TInner> inner,
-            Func<TSource, TKey> outerKeySelector,
-            Func<TInner, TKey> innerKeySelector,
-            Func<TSource, <#= Name #><TInner>, TResult> resultSelector)
-            <#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
-        {
-            <#+ WriteNotNull(); #>
-
-            return GroupJoinImpl(
-                @this,
-                inner,
-                outerKeySelector,
-                innerKeySelector,
-                resultSelector,
-                EqualityComparer<TKey>.Default);
-        }
-
-<#+ } // T4: End of HasJoin. #>
-<#+ if (HasJoin) { #>
         public static <#= Name #><TResult> Join<TSource, TInner, TKey, TResult>(
             this <#= Name #><TSource> @this,
             <#= Name #><TInner> inner,
@@ -404,15 +379,28 @@ public partial class MonadTemplate
             Func<TSource, TInner, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
             <#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
-        {
-            return JoinImpl(
+            => JoinImpl(
                 @this,
                 inner,
                 outerKeySelector,
                 innerKeySelector,
                 resultSelector,
                 comparer ?? EqualityComparer<TKey>.Default);
-        }
+
+        public static <#= Name #><TResult> GroupJoin<TSource, TInner, TKey, TResult>(
+            this <#= Name #><TSource> @this,
+            <#= Name #><TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TSource, <#= Name #><TInner>, TResult> resultSelector)
+            <#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
+            => GroupJoinImpl(
+                @this,
+                inner,
+                outerKeySelector,
+                innerKeySelector,
+                resultSelector,
+                EqualityComparer<TKey>.Default);
 
         public static <#= Name #><TResult> GroupJoin<TSource, TInner, TKey, TResult>(
             this <#= Name #><TSource> @this,
@@ -422,18 +410,16 @@ public partial class MonadTemplate
             Func<TSource, <#= Name #><TInner>, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
             <#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
-        {
-            return GroupJoinImpl(
+            => GroupJoinImpl(
                 @this,
                 inner,
                 outerKeySelector,
                 innerKeySelector,
                 resultSelector,
                 comparer ?? EqualityComparer<TKey>.Default);
-        }
 
         private static <#= Name #><TResult> JoinImpl<TSource, TInner, TKey, TResult>(
-            <#= Name #><TSource> seq,
+            <#= Name #><TSource> outer,
             <#= Name #><TInner> inner,
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
@@ -441,24 +427,20 @@ public partial class MonadTemplate
             IEqualityComparer<TKey> comparer)
             <#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
         {
-            <#+ WriteNotNull("seq"); #>
+            <#+ WriteNotNull("outer"); #>
+            <#+ WriteNotNull("inner"); #>
             Require.NotNull(resultSelector, nameof(resultSelector));
-<#+ if (IsNullable) { #>
-            Demand.NotNull(inner);
-<#+ } #>
-            Demand.NotNull(outerKeySelector);
-            Demand.NotNull(innerKeySelector);
-            Demand.NotNull(comparer);
+            Require.NotNull(outerKeySelector, nameof(outerKeySelector));
+            Require.NotNull(innerKeySelector, nameof(innerKeySelector));
+            Require.NotNull(comparer, nameof(comparer));
 
-            var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
+            var keyLookup = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
-            return from outerValue in seq
-                   from innerValue in keyLookupM(outerValue).ReplaceBy(inner)
-                   select resultSelector(outerValue, innerValue);
+            return outer.SelectMany(val => keyLookup(val).ReplaceBy(inner), resultSelector);
         }
 
         private static <#= Name #><TResult> GroupJoinImpl<TSource, TInner, TKey, TResult>(
-            <#= Name #><TSource> seq,
+            <#= Name #><TSource> outer,
             <#= Name #><TInner> inner,
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
@@ -466,19 +448,16 @@ public partial class MonadTemplate
             IEqualityComparer<TKey> comparer)
             <#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
         {
-            <#+ WriteNotNull("seq"); #>
+            <#+ WriteNotNull("outer"); #>
+            <#+ WriteNotNull("inner"); #>
             Require.NotNull(resultSelector, nameof(resultSelector));
-<#+ if (IsNullable) { #>
-            Demand.NotNull(inner);
-<#+ } #>
-            Demand.NotNull(outerKeySelector);
-            Demand.NotNull(innerKeySelector);
-            Demand.NotNull(comparer);
+            Require.NotNull(outerKeySelector, nameof(outerKeySelector));
+            Require.NotNull(innerKeySelector, nameof(innerKeySelector));
+            Require.NotNull(comparer, nameof(comparer));
 
-            var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
+            var keyLookup = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
-            return from outerValue in seq
-                   select resultSelector(outerValue, keyLookupM(outerValue).ReplaceBy(inner));
+            return outer.Select(val => resultSelector(val, keyLookup(val).ReplaceBy(inner)));
         }
 
         private static Func<TSource, <#= Name #><TKey>> GetKeyLookup<TSource, TInner, TKey>(
@@ -488,16 +467,19 @@ public partial class MonadTemplate
             IEqualityComparer<TKey> comparer)
             <#+ WriteTypeConstraints("TSource", "TInner", "TKey"); #>
         {
-            <#+ WriteNotNull("inner"); #>
-            Require.NotNull(outerKeySelector, nameof(outerKeySelector));
-            Require.NotNull(comparer, nameof(comparer));
+<#+ if (IsNullable) { #>
+            Demand.NotNull("inner");
+<#+ } #>
+            Demand.NotNull(outerKeySelector);
             Demand.NotNull(innerKeySelector);
+            Demand.NotNull(comparer);
 
             return arg =>
             {
                 TKey outerKey = outerKeySelector(arg);
 
-                return inner.<#= MapName #>(innerKeySelector).<#= FilterName #>(key => comparer.Equals(key, outerKey));
+                return inner.<#= MapName #>(innerKeySelector)
+                    .<#= FilterName #>(key => comparer.Equals(key, outerKey));
             };
         }
 <#+ } // T4: End of HasJoin. #>

@@ -358,8 +358,8 @@ namespace Narvalo.Fx
             Require.NotNull(resultSelector, nameof(resultSelector));
 
             return @this.Bind(
-                arg => valueSelector(arg).Select(
-                    middle => resultSelector(arg, middle)));
+                val => valueSelector(val).Select(
+                    middle => resultSelector(val, middle)));
         }
 
         public static VoidOr<TResult> Join<TSource, TInner, TKey, TResult>(
@@ -369,36 +369,13 @@ namespace Narvalo.Fx
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, TInner, TResult> resultSelector)
             /* T4: type constraint */
-        {
-            Require.NotNull(@this, nameof(@this));
-
-            return JoinImpl(
+            => JoinImpl(
                 @this,
                 inner,
                 outerKeySelector,
                 innerKeySelector,
                 resultSelector,
                 EqualityComparer<TKey>.Default);
-        }
-
-        public static VoidOr<TResult> GroupJoin<TSource, TInner, TKey, TResult>(
-            this VoidOr<TSource> @this,
-            VoidOr<TInner> inner,
-            Func<TSource, TKey> outerKeySelector,
-            Func<TInner, TKey> innerKeySelector,
-            Func<TSource, VoidOr<TInner>, TResult> resultSelector)
-            /* T4: type constraint */
-        {
-            Require.NotNull(@this, nameof(@this));
-
-            return GroupJoinImpl(
-                @this,
-                inner,
-                outerKeySelector,
-                innerKeySelector,
-                resultSelector,
-                EqualityComparer<TKey>.Default);
-        }
 
         public static VoidOr<TResult> Join<TSource, TInner, TKey, TResult>(
             this VoidOr<TSource> @this,
@@ -408,15 +385,28 @@ namespace Narvalo.Fx
             Func<TSource, TInner, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
             /* T4: type constraint */
-        {
-            return JoinImpl(
+            => JoinImpl(
                 @this,
                 inner,
                 outerKeySelector,
                 innerKeySelector,
                 resultSelector,
                 comparer ?? EqualityComparer<TKey>.Default);
-        }
+
+        public static VoidOr<TResult> GroupJoin<TSource, TInner, TKey, TResult>(
+            this VoidOr<TSource> @this,
+            VoidOr<TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TSource, VoidOr<TInner>, TResult> resultSelector)
+            /* T4: type constraint */
+            => GroupJoinImpl(
+                @this,
+                inner,
+                outerKeySelector,
+                innerKeySelector,
+                resultSelector,
+                EqualityComparer<TKey>.Default);
 
         public static VoidOr<TResult> GroupJoin<TSource, TInner, TKey, TResult>(
             this VoidOr<TSource> @this,
@@ -426,18 +416,16 @@ namespace Narvalo.Fx
             Func<TSource, VoidOr<TInner>, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
             /* T4: type constraint */
-        {
-            return GroupJoinImpl(
+            => GroupJoinImpl(
                 @this,
                 inner,
                 outerKeySelector,
                 innerKeySelector,
                 resultSelector,
                 comparer ?? EqualityComparer<TKey>.Default);
-        }
 
         private static VoidOr<TResult> JoinImpl<TSource, TInner, TKey, TResult>(
-            VoidOr<TSource> seq,
+            VoidOr<TSource> outer,
             VoidOr<TInner> inner,
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
@@ -445,22 +433,20 @@ namespace Narvalo.Fx
             IEqualityComparer<TKey> comparer)
             /* T4: type constraint */
         {
-            Require.NotNull(seq, nameof(seq));
+            Require.NotNull(outer, nameof(outer));
+            Require.NotNull(inner, nameof(inner));
             Require.NotNull(resultSelector, nameof(resultSelector));
-            Demand.NotNull(inner);
-            Demand.NotNull(outerKeySelector);
-            Demand.NotNull(innerKeySelector);
-            Demand.NotNull(comparer);
+            Require.NotNull(outerKeySelector, nameof(outerKeySelector));
+            Require.NotNull(innerKeySelector, nameof(innerKeySelector));
+            Require.NotNull(comparer, nameof(comparer));
 
-            var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
+            var keyLookup = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
-            return from outerValue in seq
-                   from innerValue in keyLookupM(outerValue).ReplaceBy(inner)
-                   select resultSelector(outerValue, innerValue);
+            return outer.SelectMany(val => keyLookup(val).ReplaceBy(inner), resultSelector);
         }
 
         private static VoidOr<TResult> GroupJoinImpl<TSource, TInner, TKey, TResult>(
-            VoidOr<TSource> seq,
+            VoidOr<TSource> outer,
             VoidOr<TInner> inner,
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
@@ -468,17 +454,16 @@ namespace Narvalo.Fx
             IEqualityComparer<TKey> comparer)
             /* T4: type constraint */
         {
-            Require.NotNull(seq, nameof(seq));
+            Require.NotNull(outer, nameof(outer));
+            Require.NotNull(inner, nameof(inner));
             Require.NotNull(resultSelector, nameof(resultSelector));
-            Demand.NotNull(inner);
-            Demand.NotNull(outerKeySelector);
-            Demand.NotNull(innerKeySelector);
-            Demand.NotNull(comparer);
+            Require.NotNull(outerKeySelector, nameof(outerKeySelector));
+            Require.NotNull(innerKeySelector, nameof(innerKeySelector));
+            Require.NotNull(comparer, nameof(comparer));
 
-            var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
+            var keyLookup = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
-            return from outerValue in seq
-                   select resultSelector(outerValue, keyLookupM(outerValue).ReplaceBy(inner));
+            return outer.Select(val => resultSelector(val, keyLookup(val).ReplaceBy(inner)));
         }
 
         private static Func<TSource, VoidOr<TKey>> GetKeyLookup<TSource, TInner, TKey>(
@@ -488,16 +473,17 @@ namespace Narvalo.Fx
             IEqualityComparer<TKey> comparer)
             /* T4: type constraint */
         {
-            Require.NotNull(inner, nameof(inner));
-            Require.NotNull(outerKeySelector, nameof(outerKeySelector));
-            Require.NotNull(comparer, nameof(comparer));
+            Demand.NotNull("inner");
+            Demand.NotNull(outerKeySelector);
             Demand.NotNull(innerKeySelector);
+            Demand.NotNull(comparer);
 
             return arg =>
             {
                 TKey outerKey = outerKeySelector(arg);
 
-                return inner.Select(innerKeySelector).Where(key => comparer.Equals(key, outerKey));
+                return inner.Select(innerKeySelector)
+                    .Where(key => comparer.Equals(key, outerKey));
             };
         }
 

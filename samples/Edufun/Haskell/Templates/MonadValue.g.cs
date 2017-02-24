@@ -353,8 +353,8 @@ namespace Edufun.Haskell.Templates
             Require.NotNull(resultSelector, nameof(resultSelector));
 
             return @this.Bind(
-                arg => valueSelector(arg).Select(
-                    middle => resultSelector(arg, middle)));
+                val => valueSelector(val).Select(
+                    middle => resultSelector(val, middle)));
         }
 
         public static MonadValue<TResult> Join<TSource, TInner, TKey, TResult>(
@@ -367,39 +367,13 @@ namespace Edufun.Haskell.Templates
             where TInner : struct
             where TKey : struct
             where TResult : struct
-        {
-            /* T4: NotNull(@this) */
-
-            return JoinImpl(
+            => JoinImpl(
                 @this,
                 inner,
                 outerKeySelector,
                 innerKeySelector,
                 resultSelector,
                 EqualityComparer<TKey>.Default);
-        }
-
-        public static MonadValue<TResult> GroupJoin<TSource, TInner, TKey, TResult>(
-            this MonadValue<TSource> @this,
-            MonadValue<TInner> inner,
-            Func<TSource, TKey> outerKeySelector,
-            Func<TInner, TKey> innerKeySelector,
-            Func<TSource, MonadValue<TInner>, TResult> resultSelector)
-            where TSource : struct
-            where TInner : struct
-            where TKey : struct
-            where TResult : struct
-        {
-            /* T4: NotNull(@this) */
-
-            return GroupJoinImpl(
-                @this,
-                inner,
-                outerKeySelector,
-                innerKeySelector,
-                resultSelector,
-                EqualityComparer<TKey>.Default);
-        }
 
         public static MonadValue<TResult> Join<TSource, TInner, TKey, TResult>(
             this MonadValue<TSource> @this,
@@ -412,15 +386,31 @@ namespace Edufun.Haskell.Templates
             where TInner : struct
             where TKey : struct
             where TResult : struct
-        {
-            return JoinImpl(
+            => JoinImpl(
                 @this,
                 inner,
                 outerKeySelector,
                 innerKeySelector,
                 resultSelector,
                 comparer ?? EqualityComparer<TKey>.Default);
-        }
+
+        public static MonadValue<TResult> GroupJoin<TSource, TInner, TKey, TResult>(
+            this MonadValue<TSource> @this,
+            MonadValue<TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TSource, MonadValue<TInner>, TResult> resultSelector)
+            where TSource : struct
+            where TInner : struct
+            where TKey : struct
+            where TResult : struct
+            => GroupJoinImpl(
+                @this,
+                inner,
+                outerKeySelector,
+                innerKeySelector,
+                resultSelector,
+                EqualityComparer<TKey>.Default);
 
         public static MonadValue<TResult> GroupJoin<TSource, TInner, TKey, TResult>(
             this MonadValue<TSource> @this,
@@ -433,18 +423,16 @@ namespace Edufun.Haskell.Templates
             where TInner : struct
             where TKey : struct
             where TResult : struct
-        {
-            return GroupJoinImpl(
+            => GroupJoinImpl(
                 @this,
                 inner,
                 outerKeySelector,
                 innerKeySelector,
                 resultSelector,
                 comparer ?? EqualityComparer<TKey>.Default);
-        }
 
         private static MonadValue<TResult> JoinImpl<TSource, TInner, TKey, TResult>(
-            MonadValue<TSource> seq,
+            MonadValue<TSource> outer,
             MonadValue<TInner> inner,
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
@@ -455,21 +443,20 @@ namespace Edufun.Haskell.Templates
             where TKey : struct
             where TResult : struct
         {
-            /* T4: NotNull(seq) */
+            /* T4: NotNull(outer) */
+            /* T4: NotNull(inner) */
             Require.NotNull(resultSelector, nameof(resultSelector));
-            Demand.NotNull(outerKeySelector);
-            Demand.NotNull(innerKeySelector);
-            Demand.NotNull(comparer);
+            Require.NotNull(outerKeySelector, nameof(outerKeySelector));
+            Require.NotNull(innerKeySelector, nameof(innerKeySelector));
+            Require.NotNull(comparer, nameof(comparer));
 
-            var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
+            var keyLookup = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
-            return from outerValue in seq
-                   from innerValue in keyLookupM(outerValue).ReplaceBy(inner)
-                   select resultSelector(outerValue, innerValue);
+            return outer.SelectMany(val => keyLookup(val).ReplaceBy(inner), resultSelector);
         }
 
         private static MonadValue<TResult> GroupJoinImpl<TSource, TInner, TKey, TResult>(
-            MonadValue<TSource> seq,
+            MonadValue<TSource> outer,
             MonadValue<TInner> inner,
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
@@ -480,16 +467,16 @@ namespace Edufun.Haskell.Templates
             where TKey : struct
             where TResult : struct
         {
-            /* T4: NotNull(seq) */
+            /* T4: NotNull(outer) */
+            /* T4: NotNull(inner) */
             Require.NotNull(resultSelector, nameof(resultSelector));
-            Demand.NotNull(outerKeySelector);
-            Demand.NotNull(innerKeySelector);
-            Demand.NotNull(comparer);
+            Require.NotNull(outerKeySelector, nameof(outerKeySelector));
+            Require.NotNull(innerKeySelector, nameof(innerKeySelector));
+            Require.NotNull(comparer, nameof(comparer));
 
-            var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
+            var keyLookup = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
-            return from outerValue in seq
-                   select resultSelector(outerValue, keyLookupM(outerValue).ReplaceBy(inner));
+            return outer.Select(val => resultSelector(val, keyLookup(val).ReplaceBy(inner)));
         }
 
         private static Func<TSource, MonadValue<TKey>> GetKeyLookup<TSource, TInner, TKey>(
@@ -501,16 +488,16 @@ namespace Edufun.Haskell.Templates
             where TInner : struct
             where TKey : struct
         {
-            /* T4: NotNull(inner) */
-            Require.NotNull(outerKeySelector, nameof(outerKeySelector));
-            Require.NotNull(comparer, nameof(comparer));
+            Demand.NotNull(outerKeySelector);
             Demand.NotNull(innerKeySelector);
+            Demand.NotNull(comparer);
 
             return arg =>
             {
                 TKey outerKey = outerKeySelector(arg);
 
-                return inner.Select(innerKeySelector).Where(key => comparer.Equals(key, outerKey));
+                return inner.Select(innerKeySelector)
+                    .Where(key => comparer.Equals(key, outerKey));
             };
         }
 

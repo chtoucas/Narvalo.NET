@@ -321,8 +321,8 @@ namespace Narvalo.Fx
             Require.NotNull(resultSelector, nameof(resultSelector));
 
             return @this.Bind(
-                arg => valueSelector(arg).Select(
-                    middle => resultSelector(arg, middle)));
+                val => valueSelector(val).Select(
+                    middle => resultSelector(val, middle)));
         }
 
 

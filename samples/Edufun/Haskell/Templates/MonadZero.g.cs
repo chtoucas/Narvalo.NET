@@ -361,8 +361,8 @@ namespace Edufun.Haskell.Templates
             Require.NotNull(resultSelector, nameof(resultSelector));
 
             return @this.Bind(
-                arg => valueSelector(arg).Select(
-                    middle => resultSelector(arg, middle)));
+                val => valueSelector(val).Select(
+                    middle => resultSelector(val, middle)));
         }
 
         public static MonadZero<TResult> Join<TSource, TInner, TKey, TResult>(
@@ -372,36 +372,13 @@ namespace Edufun.Haskell.Templates
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, TInner, TResult> resultSelector)
             /* T4: type constraint */
-        {
-            Require.NotNull(@this, nameof(@this));
-
-            return JoinImpl(
+            => JoinImpl(
                 @this,
                 inner,
                 outerKeySelector,
                 innerKeySelector,
                 resultSelector,
                 EqualityComparer<TKey>.Default);
-        }
-
-        public static MonadZero<TResult> GroupJoin<TSource, TInner, TKey, TResult>(
-            this MonadZero<TSource> @this,
-            MonadZero<TInner> inner,
-            Func<TSource, TKey> outerKeySelector,
-            Func<TInner, TKey> innerKeySelector,
-            Func<TSource, MonadZero<TInner>, TResult> resultSelector)
-            /* T4: type constraint */
-        {
-            Require.NotNull(@this, nameof(@this));
-
-            return GroupJoinImpl(
-                @this,
-                inner,
-                outerKeySelector,
-                innerKeySelector,
-                resultSelector,
-                EqualityComparer<TKey>.Default);
-        }
 
         public static MonadZero<TResult> Join<TSource, TInner, TKey, TResult>(
             this MonadZero<TSource> @this,
@@ -411,15 +388,28 @@ namespace Edufun.Haskell.Templates
             Func<TSource, TInner, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
             /* T4: type constraint */
-        {
-            return JoinImpl(
+            => JoinImpl(
                 @this,
                 inner,
                 outerKeySelector,
                 innerKeySelector,
                 resultSelector,
                 comparer ?? EqualityComparer<TKey>.Default);
-        }
+
+        public static MonadZero<TResult> GroupJoin<TSource, TInner, TKey, TResult>(
+            this MonadZero<TSource> @this,
+            MonadZero<TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TSource, MonadZero<TInner>, TResult> resultSelector)
+            /* T4: type constraint */
+            => GroupJoinImpl(
+                @this,
+                inner,
+                outerKeySelector,
+                innerKeySelector,
+                resultSelector,
+                EqualityComparer<TKey>.Default);
 
         public static MonadZero<TResult> GroupJoin<TSource, TInner, TKey, TResult>(
             this MonadZero<TSource> @this,
@@ -429,18 +419,16 @@ namespace Edufun.Haskell.Templates
             Func<TSource, MonadZero<TInner>, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
             /* T4: type constraint */
-        {
-            return GroupJoinImpl(
+            => GroupJoinImpl(
                 @this,
                 inner,
                 outerKeySelector,
                 innerKeySelector,
                 resultSelector,
                 comparer ?? EqualityComparer<TKey>.Default);
-        }
 
         private static MonadZero<TResult> JoinImpl<TSource, TInner, TKey, TResult>(
-            MonadZero<TSource> seq,
+            MonadZero<TSource> outer,
             MonadZero<TInner> inner,
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
@@ -448,22 +436,20 @@ namespace Edufun.Haskell.Templates
             IEqualityComparer<TKey> comparer)
             /* T4: type constraint */
         {
-            Require.NotNull(seq, nameof(seq));
+            Require.NotNull(outer, nameof(outer));
+            Require.NotNull(inner, nameof(inner));
             Require.NotNull(resultSelector, nameof(resultSelector));
-            Demand.NotNull(inner);
-            Demand.NotNull(outerKeySelector);
-            Demand.NotNull(innerKeySelector);
-            Demand.NotNull(comparer);
+            Require.NotNull(outerKeySelector, nameof(outerKeySelector));
+            Require.NotNull(innerKeySelector, nameof(innerKeySelector));
+            Require.NotNull(comparer, nameof(comparer));
 
-            var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
+            var keyLookup = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
-            return from outerValue in seq
-                   from innerValue in keyLookupM(outerValue).ReplaceBy(inner)
-                   select resultSelector(outerValue, innerValue);
+            return outer.SelectMany(val => keyLookup(val).ReplaceBy(inner), resultSelector);
         }
 
         private static MonadZero<TResult> GroupJoinImpl<TSource, TInner, TKey, TResult>(
-            MonadZero<TSource> seq,
+            MonadZero<TSource> outer,
             MonadZero<TInner> inner,
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
@@ -471,17 +457,16 @@ namespace Edufun.Haskell.Templates
             IEqualityComparer<TKey> comparer)
             /* T4: type constraint */
         {
-            Require.NotNull(seq, nameof(seq));
+            Require.NotNull(outer, nameof(outer));
+            Require.NotNull(inner, nameof(inner));
             Require.NotNull(resultSelector, nameof(resultSelector));
-            Demand.NotNull(inner);
-            Demand.NotNull(outerKeySelector);
-            Demand.NotNull(innerKeySelector);
-            Demand.NotNull(comparer);
+            Require.NotNull(outerKeySelector, nameof(outerKeySelector));
+            Require.NotNull(innerKeySelector, nameof(innerKeySelector));
+            Require.NotNull(comparer, nameof(comparer));
 
-            var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
+            var keyLookup = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
-            return from outerValue in seq
-                   select resultSelector(outerValue, keyLookupM(outerValue).ReplaceBy(inner));
+            return outer.Select(val => resultSelector(val, keyLookup(val).ReplaceBy(inner)));
         }
 
         private static Func<TSource, MonadZero<TKey>> GetKeyLookup<TSource, TInner, TKey>(
@@ -491,16 +476,17 @@ namespace Edufun.Haskell.Templates
             IEqualityComparer<TKey> comparer)
             /* T4: type constraint */
         {
-            Require.NotNull(inner, nameof(inner));
-            Require.NotNull(outerKeySelector, nameof(outerKeySelector));
-            Require.NotNull(comparer, nameof(comparer));
+            Demand.NotNull("inner");
+            Demand.NotNull(outerKeySelector);
             Demand.NotNull(innerKeySelector);
+            Demand.NotNull(comparer);
 
             return arg =>
             {
                 TKey outerKey = outerKeySelector(arg);
 
-                return inner.Select(innerKeySelector).Where(key => comparer.Equals(key, outerKey));
+                return inner.Select(innerKeySelector)
+                    .Where(key => comparer.Equals(key, outerKey));
             };
         }
 
