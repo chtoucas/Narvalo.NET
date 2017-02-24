@@ -20,14 +20,13 @@ namespace Edufun.Haskell
     //
     // Utility functions:
     // - <$>        Operators.InvokeWith        <- Functor::<$>
-    // - <$         obj.Replace                 <- Functor::<$
+    // - <$         obj.ReplaceBy               <- Functor::<$
     // - <**>       Operators.Apply
     // - liftA      obj.Select                  <- Functor::fmap (required)
     // - liftA2     obj.Zip
     // - liftA3     obj.Zip
     //
     // Inherited:
-    // - $>         Operators.Inject            <- Functor::$>
     // - void       obj.Skip                    <- Functor::void
 
     public interface IApplicative<T>
@@ -49,7 +48,7 @@ namespace Edufun.Haskell
 
         // [Haskell] (<$) :: Functor f => a -> f b -> f a
         // Replace all locations in the input with the same value.
-        Prototype<TResult> Replace<TResult>(TResult other);
+        Prototype<TResult> ReplaceBy<TResult>(TResult other);
 
         // [Haskell] (*>) :: f a -> f b -> f b
         // Sequence actions, discarding the value of the first argument.

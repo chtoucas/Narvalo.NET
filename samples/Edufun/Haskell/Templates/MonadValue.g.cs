@@ -57,7 +57,9 @@ namespace Edufun.Haskell.Templates
             where T : struct
             => MonadValue<T>.μ(square);
 
-        public static MonadValue<global::Narvalo.Fx.Unit> Guard(bool predicate) => predicate ? Unit : None;
+        public static MonadValue<Unit> Guard(bool predicate) => predicate ? Unit : None;
+
+        #region Lift()
 
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadValue{T}" /> values.
@@ -135,6 +137,8 @@ namespace Edufun.Haskell.Templates
                 /* T4: NotNull(arg1) */
                 return arg1.Zip(arg2, arg3, arg4, arg5, func);
             };
+
+        #endregion
     } // End of MonadValue - T4: EmitMonadCore().
 
     // Provides extension methods for MonadValue<T>.
@@ -151,7 +155,7 @@ namespace Edufun.Haskell.Templates
             return @this.Bind(val => MonadValue.Of(selector(val)));
         }
 
-        public static MonadValue<TResult> Replace<TSource, TResult>(
+        public static MonadValue<TResult> ReplaceBy<TSource, TResult>(
             this MonadValue<TSource> @this,
             TResult value)
             where TSource : struct
@@ -194,6 +198,18 @@ namespace Edufun.Haskell.Templates
             /* T4: NotNull(@this) */
             Require.NotNull(predicate, nameof(predicate));
             return @this.Bind(val => predicate(val) ? thenResult : elseResult);
+        }
+
+        public static MonadValue<TSource> Ignore<TSource, TOther>(
+            this MonadValue<TSource> @this,
+            MonadValue<TOther> other)
+            where TSource : struct
+            where TOther : struct
+        {
+            /* T4: NotNull(@this) */
+            Func<TSource, TOther, TSource> ignorearg2 = (arg1, _) => arg1;
+
+            return @this.Zip(other, ignorearg2);
         }
 
         public static MonadValue<global::Narvalo.Fx.Unit> Skip<TSource>(this MonadValue<TSource> @this)
@@ -508,7 +524,7 @@ namespace Edufun.Haskell.Templates
     public static partial class Kleisli
     {
 
-        public static MonadValue<TResult> Invoke<TSource, TResult>(
+        public static MonadValue<TResult> InvokeWith<TSource, TResult>(
             this Func<TSource, MonadValue<TResult>> @this,
             MonadValue<TSource> value)
             where TSource : struct

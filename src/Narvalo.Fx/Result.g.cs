@@ -40,6 +40,8 @@ namespace Narvalo.Fx
             /* T4: type constraint */
             => Result<T, TError>.μ(square);
 
+        #region Lift()
+
         /// <summary>
         /// Promotes a function to use and return <see cref="Result{T, TError}" /> values.
         /// </summary>
@@ -101,6 +103,8 @@ namespace Narvalo.Fx
                 Require.NotNull(arg1, nameof(arg1));
                 return arg1.Zip(arg2, arg3, arg4, arg5, func);
             };
+
+        #endregion
     } // End of Result - T4: EmitMonadCore().
 
     // Provides extension methods for Result<T, TError>.
@@ -134,7 +138,7 @@ namespace Narvalo.Fx
             return value.Gather(@this);
         }
 
-        public static Result<TResult, TError> Replace<TSource, TResult, TError>(
+        public static Result<TResult, TError> ReplaceBy<TSource, TResult, TError>(
             this Result<TSource, TError> @this,
             TResult value)
             /* T4: type constraint */
@@ -164,11 +168,22 @@ namespace Narvalo.Fx
             return @this.Bind(val => predicate(val) ? thenResult : elseResult);
         }
 
+        public static Result<TSource, TError> Ignore<TSource, TOther, TError>(
+            this Result<TSource, TError> @this,
+            Result<TOther, TError> other)
+            /* T4: type constraint */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Func<TSource, TOther, TSource> ignorearg2 = (arg1, _) => arg1;
+
+            return @this.Zip(other, ignorearg2);
+        }
+
         public static Result<global::Narvalo.Fx.Unit, TError> Skip<TSource, TError>(this Result<TSource, TError> @this)
             /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
-            return @this.Replace(global::Narvalo.Fx.Unit.Single);
+            return @this.ReplaceBy(global::Narvalo.Fx.Unit.Single);
         }
 
         public static Result<IEnumerable<TSource>, TError> Repeat<TSource, TError>(
@@ -332,12 +347,12 @@ namespace Narvalo.Fx
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Kleisli
     {
-        public static Result<IEnumerable<TResult>, TError> ForEach<TSource, TResult, TError>(
+        public static Result<IEnumerable<TResult>, TError> InvokeForEach<TSource, TResult, TError>(
             this Func<TSource, Result<TResult, TError>> @this,
             IEnumerable<TSource> seq)
             => seq.Select(@this).Collect();
 
-        public static Result<TResult, TError> Invoke<TSource, TResult, TError>(
+        public static Result<TResult, TError> InvokeWith<TSource, TResult, TError>(
             this Func<TSource, Result<TResult, TError>> @this,
             Result<TSource, TError> value)
             /* T4: type constraint */

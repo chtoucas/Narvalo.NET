@@ -10,7 +10,7 @@ namespace Edufun.Haskell
         private static readonly IQueryOperators s_Qperators = new QueryOperators();
 
         // [Data.Traversable] forM = flip mapM
-        public Prototype<IEnumerable<TResult>> ForEach<TSource, TResult>(
+        public Prototype<IEnumerable<TResult>> InvokeForEach<TSource, TResult>(
             Func<TSource, Prototype<TResult>> func,
             IEnumerable<TSource> seq)
             => s_Qperators.SelectWith(seq, func);
@@ -28,7 +28,7 @@ namespace Edufun.Haskell
             => arg => second.Invoke(arg).Bind(first);
 
         // [GHC.Base] f =<< x = x >>= f
-        public Prototype<TResult> Invoke<TSource, TResult>(
+        public Prototype<TResult> InvokeWith<TSource, TResult>(
             Func<TSource, Prototype<TResult>> func,
             Prototype<TSource> value)
             => value.Bind(func);

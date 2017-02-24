@@ -54,7 +54,9 @@ namespace Narvalo.Fx
             /* T4: type constraint */
             => Maybe<T>.μ(square);
 
-        public static Maybe<global::Narvalo.Fx.Unit> Guard(bool predicate) => predicate ? Unit : None;
+        public static Maybe<Unit> Guard(bool predicate) => predicate ? Unit : None;
+
+        #region Lift()
 
         /// <summary>
         /// Promotes a function to use and return <see cref="Maybe{T}" /> values.
@@ -117,6 +119,8 @@ namespace Narvalo.Fx
                 /* T4: NotNull(arg1) */
                 return arg1.Zip(arg2, arg3, arg4, arg5, func);
             };
+
+        #endregion
     } // End of Maybe - T4: EmitMonadCore().
 
     // Provides extension methods for Maybe<T>.
@@ -150,7 +154,7 @@ namespace Narvalo.Fx
             return value.Gather(@this);
         }
 
-        public static Maybe<TResult> Replace<TSource, TResult>(
+        public static Maybe<TResult> ReplaceBy<TSource, TResult>(
             this Maybe<TSource> @this,
             TResult value)
             /* T4: type constraint */
@@ -189,6 +193,17 @@ namespace Narvalo.Fx
             /* T4: NotNull(@this) */
             Require.NotNull(predicate, nameof(predicate));
             return @this.Bind(val => predicate(val) ? thenResult : elseResult);
+        }
+
+        public static Maybe<TSource> Ignore<TSource, TOther>(
+            this Maybe<TSource> @this,
+            Maybe<TOther> other)
+            /* T4: type constraint */
+        {
+            /* T4: NotNull(@this) */
+            Func<TSource, TOther, TSource> ignorearg2 = (arg1, _) => arg1;
+
+            return @this.Zip(other, ignorearg2);
         }
 
         public static Maybe<global::Narvalo.Fx.Unit> Skip<TSource>(this Maybe<TSource> @this)
@@ -492,12 +507,12 @@ namespace Narvalo.Fx
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Kleisli
     {
-        public static Maybe<IEnumerable<TResult>> ForEach<TSource, TResult>(
+        public static Maybe<IEnumerable<TResult>> InvokeForEach<TSource, TResult>(
             this Func<TSource, Maybe<TResult>> @this,
             IEnumerable<TSource> seq)
             => seq.SelectWith(@this);
 
-        public static Maybe<TResult> Invoke<TSource, TResult>(
+        public static Maybe<TResult> InvokeWith<TSource, TResult>(
             this Func<TSource, Maybe<TResult>> @this,
             Maybe<TSource> value)
             /* T4: type constraint */

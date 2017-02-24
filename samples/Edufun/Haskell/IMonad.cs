@@ -30,11 +30,11 @@ namespace Edufun.Haskell
     // Basic Monad functions:
     // - mapM           Query.SelectWith
     // - mapM_
-    // - forM           Kleisli.ForEach
+    // - forM           Kleisli.InvokeForEach
     // - forM_
     // - sequence       Operators.Collect
     // - sequence_
-    // - (=<<)          Kleisli.Invoke
+    // - (=<<)          Kleisli.InvokeWith
     // - (>=>)          Kleisli.Compose
     // - (<=<)          Kleisli.ComposeBack
     // - forever        Operators.Forever
@@ -131,13 +131,13 @@ namespace Edufun.Haskell
 
         // [Haskell] forM :: (Traversable t, Monad m) => t a -> (a -> m b) -> m (t b)
         // forM is mapM with its arguments flipped.
-        Prototype<IEnumerable<TResult>> ForEach<TSource, TResult>(
+        Prototype<IEnumerable<TResult>> InvokeForEach<TSource, TResult>(
             Func<TSource, Prototype<TResult>> func,
             IEnumerable<TSource> seq);
 
         // [Haskell] (=<<) :: Monad m => (a -> m b) -> m a -> m b
         // Same as >>=, but with the arguments interchanged.
-        Prototype<TResult> Invoke<TSource, TResult>(Func<TSource, Prototype<TResult>> func, Prototype<TSource> value);
+        Prototype<TResult> InvokeWith<TSource, TResult>(Func<TSource, Prototype<TResult>> func, Prototype<TSource> value);
     }
 
     public interface IQueryOperators

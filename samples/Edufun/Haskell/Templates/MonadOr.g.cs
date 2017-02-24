@@ -57,7 +57,9 @@ namespace Edufun.Haskell.Templates
             /* T4: type constraint */
             => MonadOr<T>.μ(square);
 
-        public static MonadOr<global::Narvalo.Fx.Unit> Guard(bool predicate) => predicate ? Unit : None;
+        public static MonadOr<Unit> Guard(bool predicate) => predicate ? Unit : None;
+
+        #region Lift()
 
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadOr{T}" /> values.
@@ -120,6 +122,8 @@ namespace Edufun.Haskell.Templates
                 Require.NotNull(arg1, nameof(arg1));
                 return arg1.Zip(arg2, arg3, arg4, arg5, func);
             };
+
+        #endregion
     } // End of MonadOr - T4: EmitMonadCore().
 
     // Provides extension methods for MonadOr<T>.
@@ -153,7 +157,7 @@ namespace Edufun.Haskell.Templates
             return value.Gather(@this);
         }
 
-        public static MonadOr<TResult> Replace<TSource, TResult>(
+        public static MonadOr<TResult> ReplaceBy<TSource, TResult>(
             this MonadOr<TSource> @this,
             TResult value)
             /* T4: type constraint */
@@ -192,6 +196,17 @@ namespace Edufun.Haskell.Templates
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
             return @this.Bind(val => predicate(val) ? thenResult : elseResult);
+        }
+
+        public static MonadOr<TSource> Ignore<TSource, TOther>(
+            this MonadOr<TSource> @this,
+            MonadOr<TOther> other)
+            /* T4: type constraint */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Func<TSource, TOther, TSource> ignorearg2 = (arg1, _) => arg1;
+
+            return @this.Zip(other, ignorearg2);
         }
 
         public static MonadOr<global::Narvalo.Fx.Unit> Skip<TSource>(this MonadOr<TSource> @this)
@@ -496,12 +511,12 @@ namespace Edufun.Haskell.Templates
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Kleisli
     {
-        public static MonadOr<IEnumerable<TResult>> ForEach<TSource, TResult>(
+        public static MonadOr<IEnumerable<TResult>> InvokeForEach<TSource, TResult>(
             this Func<TSource, MonadOr<TResult>> @this,
             IEnumerable<TSource> seq)
             => seq.SelectWith(@this);
 
-        public static MonadOr<TResult> Invoke<TSource, TResult>(
+        public static MonadOr<TResult> InvokeWith<TSource, TResult>(
             this Func<TSource, MonadOr<TResult>> @this,
             MonadOr<TSource> value)
             /* T4: type constraint */

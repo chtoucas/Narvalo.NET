@@ -38,7 +38,7 @@ public partial class MonadTemplate
         }
 <#+ } // T4: End of !HasTypeConstraints. #>
 
-        public static <#= Name #><TResult<#= SuffixT #>> Replace<TSource, TResult<#= SuffixT #>>(
+        public static <#= Name #><TResult<#= SuffixT #>> ReplaceBy<TSource, TResult<#= SuffixT #>>(
             this <#= Name #><TSource<#= SuffixT #>> @this,
             TResult value)
             <#+ WriteTypeConstraints("TSource", "TResult"); #>
@@ -81,13 +81,24 @@ public partial class MonadTemplate
             return @this.Bind(val => predicate(val) ? thenResult : elseResult);
         }
 
+        public static <#= Name #><TSource<#= SuffixT #>> Ignore<TSource, TOther<#= SuffixT #>>(
+            this <#= Name #><TSource<#= SuffixT #>> @this,
+            <#= Name #><TOther<#= SuffixT #>> other)
+            <#+ WriteTypeConstraints("TSource", "TOther"); #>
+        {
+            <#+ WriteNotNull(); #>
+            Func<TSource, TOther, TSource> ignorearg2 = (arg1, _) => arg1;
+
+            return @this.Zip(other, ignorearg2);
+        }
+
         public static <#= Name #><global::Narvalo.Fx.Unit<#= SuffixT #>> Skip<TSource<#= SuffixT #>>(this <#= Name #><TSource<#= SuffixT #>> @this)
             <#+ WriteTypeConstraints("TSource"); #>
         {
             <#+ WriteNotNull(); #>
 
 <#+ if (HasSuffixT) { #>
-            return @this.Replace(global::Narvalo.Fx.Unit.Single);
+            return @this.ReplaceBy(global::Narvalo.Fx.Unit.Single);
 <#+ } else { #>
             return @this.ReplaceBy(Unit);
 <#+ } #>

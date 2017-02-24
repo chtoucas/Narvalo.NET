@@ -52,6 +52,8 @@ namespace Edufun.Haskell.Templates
             /* T4: type constraint */
             => Monad<T>.μ(square);
 
+        #region Lift()
+
         /// <summary>
         /// Promotes a function to use and return <see cref="Monad{T}" /> values.
         /// </summary>
@@ -113,6 +115,8 @@ namespace Edufun.Haskell.Templates
                 Require.NotNull(arg1, nameof(arg1));
                 return arg1.Zip(arg2, arg3, arg4, arg5, func);
             };
+
+        #endregion
     } // End of Monad - T4: EmitMonadCore().
 
     // Provides extension methods for Monad<T>.
@@ -146,7 +150,7 @@ namespace Edufun.Haskell.Templates
             return value.Gather(@this);
         }
 
-        public static Monad<TResult> Replace<TSource, TResult>(
+        public static Monad<TResult> ReplaceBy<TSource, TResult>(
             this Monad<TSource> @this,
             TResult value)
             /* T4: type constraint */
@@ -174,6 +178,17 @@ namespace Edufun.Haskell.Templates
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
             return @this.Bind(val => predicate(val) ? thenResult : elseResult);
+        }
+
+        public static Monad<TSource> Ignore<TSource, TOther>(
+            this Monad<TSource> @this,
+            Monad<TOther> other)
+            /* T4: type constraint */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Func<TSource, TOther, TSource> ignorearg2 = (arg1, _) => arg1;
+
+            return @this.Zip(other, ignorearg2);
         }
 
         public static Monad<global::Narvalo.Fx.Unit> Skip<TSource>(this Monad<TSource> @this)
@@ -344,12 +359,12 @@ namespace Edufun.Haskell.Templates
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Kleisli
     {
-        public static Monad<IEnumerable<TResult>> ForEach<TSource, TResult>(
+        public static Monad<IEnumerable<TResult>> InvokeForEach<TSource, TResult>(
             this Func<TSource, Monad<TResult>> @this,
             IEnumerable<TSource> seq)
             => seq.SelectWith(@this);
 
-        public static Monad<TResult> Invoke<TSource, TResult>(
+        public static Monad<TResult> InvokeWith<TSource, TResult>(
             this Func<TSource, Monad<TResult>> @this,
             Monad<TSource> value)
             /* T4: type constraint */

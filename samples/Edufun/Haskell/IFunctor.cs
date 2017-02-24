@@ -12,8 +12,8 @@ namespace Edufun.Haskell
     // API
     // ---
     // - fmap   obj.Select       (required)
-    // - <$     obj.Replace
-    // - $>     Operators.Inject
+    // - <$     obj.ReplaceBy
+    // - $>
     // - <$>    Operators.InvokeWith
     // - void   obj.Skip
 
@@ -27,7 +27,7 @@ namespace Edufun.Haskell
     {
         // [Haskell] (<$) :: Functor f => a -> f b -> f a
         // Replace all locations in the input with the same value.
-        Prototype<TResult> Replace<TResult>(TResult other);
+        Prototype<TResult> ReplaceBy<TResult>(TResult other);
 
         // [Haskell] void :: Functor f => f a -> f ()
         // void value discards or ignores the result of evaluation.
@@ -36,10 +36,6 @@ namespace Edufun.Haskell
 
     public interface IFunctorOperators
     {
-        // [Haskell] ($>) :: Functor f => f a -> b -> f b
-        // Flipped version of <$.
-        Prototype<TResult> Inject<T, TResult>(TResult value, Prototype<T> functor);
-
         // [Haskell] (<$>) :: Functor f => (a -> b) -> f a -> f b
         // An infix synonym for fmap.
         Prototype<TResult> InvokeWith<T, TResult>(Func<T, TResult> func, Prototype<T> functor);

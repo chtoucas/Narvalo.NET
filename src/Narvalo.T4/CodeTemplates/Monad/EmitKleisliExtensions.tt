@@ -9,7 +9,7 @@ public partial class MonadTemplate
     public static partial class Kleisli
     {
 <#+ if (!HasTypeConstraints) { #>
-        public static <#= Name #><IEnumerable<TResult><#= SuffixT #>> ForEach<TSource, TResult<#= SuffixT #>>(
+        public static <#= Name #><IEnumerable<TResult><#= SuffixT #>> InvokeForEach<TSource, TResult<#= SuffixT #>>(
             this Func<TSource, <#= Name #><TResult<#= SuffixT #>>> @this,
             IEnumerable<TSource> seq)
 <#+ if (haslinq) { #>
@@ -20,7 +20,7 @@ public partial class MonadTemplate
 
 <#+ } // T4: End of !HasTypeConstraints. #>
 
-        public static <#= Name #><TResult<#= SuffixT #>> Invoke<TSource, TResult<#= SuffixT #>>(
+        public static <#= Name #><TResult<#= SuffixT #>> InvokeWith<TSource, TResult<#= SuffixT #>>(
             this Func<TSource, <#= Name #><TResult<#= SuffixT #>>> @this,
             <#= Name #><TSource<#= SuffixT #>> value)
             <#+ WriteTypeConstraints("TSource", "TResult"); #>

@@ -101,10 +101,10 @@ namespace Edufun.Haskell
         #region IFunctorSyntax<T>
 
         // [GHC.Base] (<$) = fmap . const
-        Prototype<TResult> IFunctorSyntax<T>.Replace<TResult>(TResult other) => Select(_ => other);
+        Prototype<TResult> IFunctorSyntax<T>.ReplaceBy<TResult>(TResult other) => Select(_ => other);
 
         // [Data.Functor] void x = () <$ x
-        Prototype<Unit> IFunctorSyntax<T>.Skip() => Replace(Unit.Single);
+        Prototype<Unit> IFunctorSyntax<T>.Skip() => ReplaceBy(Unit.Single);
 
         #endregion
 
@@ -126,7 +126,7 @@ namespace Edufun.Haskell
         }
 
         // [GHC.Base] (<$) = fmap . const
-        public Prototype<TResult> Replace<TResult>(TResult other) => Select(_ => other);
+        public Prototype<TResult> ReplaceBy<TResult>(TResult other) => Select(_ => other);
 
         // [GHC.Base] a1 *> a2 = (id <$ a1) <*> a2
         // Control.Applicative: u *> v = pure (const id) <*> u <*> v
@@ -135,7 +135,7 @@ namespace Edufun.Haskell
 #if APPLICATIVE_USE_GHC_BASE
             Func<TResult, TResult> id = _ => _;
 
-            return other.Gather(Replace(id));
+            return other.Gather(ReplaceBy(id));
 #else
             Func<T, Func<TResult, TResult>> id = _ => r => r;
 
@@ -219,7 +219,7 @@ namespace Edufun.Haskell
         public Prototype<TResult> ReplaceBy<TResult>(Prototype<TResult> other) => Bind(_ => other);
 
         // [Data.Functor] void x = () <$ x
-        public Prototype<Unit> Skip() => Replace(Unit.Single);
+        public Prototype<Unit> Skip() => ReplaceBy(Unit.Single);
 
         #endregion
 
@@ -235,6 +235,7 @@ namespace Edufun.Haskell
         #endregion
     }
 
+    // Purely static methods.
     public partial class Prototype
     {
         public static Prototype<T> Of<T>(T value) { throw new PrototypeException(); }
@@ -260,10 +261,6 @@ namespace Edufun.Haskell
         : IFunctorOperators, IApplicativeOperators, IMonadOperators, IAlternativeOperators, IMonadPlusOperators
     {
         #region IFunctorOperators
-
-        // [Data.Functor] ($>) = flip (<$)
-        public Prototype<TResult> Inject<TSource, TResult>(TResult value, Prototype<TSource> functor)
-            => functor.Replace(value);
 
         // [Data.Functor] (<$>) = fmap
         Prototype<TResult> IFunctorOperators.InvokeWith<TSource, TResult>(
@@ -484,6 +481,7 @@ namespace Edufun.Haskell
         #endregion
     }
 
+    // LINQ operators.
     public static class PrototypeExtensions
     {
         public static Prototype<TResult> SelectMany<TSource, TMiddle, TResult>(

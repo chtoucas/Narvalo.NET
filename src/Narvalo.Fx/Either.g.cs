@@ -40,6 +40,8 @@ namespace Narvalo.Fx
             /* T4: type constraint */
             => Either<T, TRight>.μ(square);
 
+        #region Lift()
+
         /// <summary>
         /// Promotes a function to use and return <see cref="Either{T, TRight}" /> values.
         /// </summary>
@@ -101,6 +103,8 @@ namespace Narvalo.Fx
                 Require.NotNull(arg1, nameof(arg1));
                 return arg1.Zip(arg2, arg3, arg4, arg5, func);
             };
+
+        #endregion
     } // End of Either - T4: EmitMonadCore().
 
     // Provides extension methods for Either<T, TRight>.
@@ -134,7 +138,7 @@ namespace Narvalo.Fx
             return value.Gather(@this);
         }
 
-        public static Either<TResult, TRight> Replace<TSource, TResult, TRight>(
+        public static Either<TResult, TRight> ReplaceBy<TSource, TResult, TRight>(
             this Either<TSource, TRight> @this,
             TResult value)
             /* T4: type constraint */
@@ -164,11 +168,22 @@ namespace Narvalo.Fx
             return @this.Bind(val => predicate(val) ? thenResult : elseResult);
         }
 
+        public static Either<TSource, TRight> Ignore<TSource, TOther, TRight>(
+            this Either<TSource, TRight> @this,
+            Either<TOther, TRight> other)
+            /* T4: type constraint */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Func<TSource, TOther, TSource> ignorearg2 = (arg1, _) => arg1;
+
+            return @this.Zip(other, ignorearg2);
+        }
+
         public static Either<global::Narvalo.Fx.Unit, TRight> Skip<TSource, TRight>(this Either<TSource, TRight> @this)
             /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
-            return @this.Replace(global::Narvalo.Fx.Unit.Single);
+            return @this.ReplaceBy(global::Narvalo.Fx.Unit.Single);
         }
 
         public static Either<IEnumerable<TSource>, TRight> Repeat<TSource, TRight>(
@@ -332,12 +347,12 @@ namespace Narvalo.Fx
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Kleisli
     {
-        public static Either<IEnumerable<TResult>, TRight> ForEach<TSource, TResult, TRight>(
+        public static Either<IEnumerable<TResult>, TRight> InvokeForEach<TSource, TResult, TRight>(
             this Func<TSource, Either<TResult, TRight>> @this,
             IEnumerable<TSource> seq)
             => seq.Select(@this).Collect();
 
-        public static Either<TResult, TRight> Invoke<TSource, TResult, TRight>(
+        public static Either<TResult, TRight> InvokeWith<TSource, TResult, TRight>(
             this Func<TSource, Either<TResult, TRight>> @this,
             Either<TSource, TRight> value)
             /* T4: type constraint */

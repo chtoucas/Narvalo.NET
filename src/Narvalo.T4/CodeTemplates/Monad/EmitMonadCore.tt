@@ -48,8 +48,10 @@ public partial class MonadTemplate
             => <#= Name #><T<#= SuffixT #>>.μ(square);
 <#+ if (HasZero) { #>
 
-        public static <#= Name #><global::Narvalo.Fx.Unit> Guard(bool predicate) => predicate ? Unit : <#= ZeroName #>;
+        public static <#= Name #><Unit> Guard(bool predicate) => predicate ? Unit : <#= ZeroName #>;
 <#+ } // T4: End of HasZero. #>
+
+        #region Lift()
 
         /// <summary>
         /// Promotes a function to use and return <see cref="<#= Name #>{T<#= SuffixT #>}" /> values.
@@ -112,6 +114,8 @@ public partial class MonadTemplate
                 <#+ WriteNotNull("arg1"); #>
                 return arg1.Zip(arg2, arg3, arg4, arg5, func);
             };
+
+        #endregion
     } // End of <#= Name #> - T4: EmitMonadCore().
 <#+
     } // T4: End of EmitMonadCore().

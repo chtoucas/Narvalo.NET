@@ -49,6 +49,8 @@ namespace Narvalo.Fx
             /* T4: type constraint */
             => ResultOrError<T>.μ(square);
 
+        #region Lift()
+
         /// <summary>
         /// Promotes a function to use and return <see cref="ResultOrError{T}" /> values.
         /// </summary>
@@ -110,6 +112,8 @@ namespace Narvalo.Fx
                 Require.NotNull(arg1, nameof(arg1));
                 return arg1.Zip(arg2, arg3, arg4, arg5, func);
             };
+
+        #endregion
     } // End of ResultOrError - T4: EmitMonadCore().
 
     // Provides extension methods for ResultOrError<T>.
@@ -143,7 +147,7 @@ namespace Narvalo.Fx
             return value.Gather(@this);
         }
 
-        public static ResultOrError<TResult> Replace<TSource, TResult>(
+        public static ResultOrError<TResult> ReplaceBy<TSource, TResult>(
             this ResultOrError<TSource> @this,
             TResult value)
             /* T4: type constraint */
@@ -171,6 +175,17 @@ namespace Narvalo.Fx
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
             return @this.Bind(val => predicate(val) ? thenResult : elseResult);
+        }
+
+        public static ResultOrError<TSource> Ignore<TSource, TOther>(
+            this ResultOrError<TSource> @this,
+            ResultOrError<TOther> other)
+            /* T4: type constraint */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Func<TSource, TOther, TSource> ignorearg2 = (arg1, _) => arg1;
+
+            return @this.Zip(other, ignorearg2);
         }
 
         public static ResultOrError<global::Narvalo.Fx.Unit> Skip<TSource>(this ResultOrError<TSource> @this)
@@ -341,12 +356,12 @@ namespace Narvalo.Fx
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Kleisli
     {
-        public static ResultOrError<IEnumerable<TResult>> ForEach<TSource, TResult>(
+        public static ResultOrError<IEnumerable<TResult>> InvokeForEach<TSource, TResult>(
             this Func<TSource, ResultOrError<TResult>> @this,
             IEnumerable<TSource> seq)
             => seq.SelectWith(@this);
 
-        public static ResultOrError<TResult> Invoke<TSource, TResult>(
+        public static ResultOrError<TResult> InvokeWith<TSource, TResult>(
             this Func<TSource, ResultOrError<TResult>> @this,
             ResultOrError<TSource> value)
             /* T4: type constraint */

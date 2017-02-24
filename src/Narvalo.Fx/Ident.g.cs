@@ -49,6 +49,8 @@ namespace Narvalo.Fx
             /* T4: type constraint */
             => Ident<T>.μ(square);
 
+        #region Lift()
+
         /// <summary>
         /// Promotes a function to use and return <see cref="Ident{T}" /> values.
         /// </summary>
@@ -110,6 +112,8 @@ namespace Narvalo.Fx
                 /* T4: NotNull(arg1) */
                 return arg1.Zip(arg2, arg3, arg4, arg5, func);
             };
+
+        #endregion
     } // End of Ident - T4: EmitMonadCore().
 
     // Provides extension methods for Ident<T>.
@@ -143,7 +147,7 @@ namespace Narvalo.Fx
             return value.Gather(@this);
         }
 
-        public static Ident<TResult> Replace<TSource, TResult>(
+        public static Ident<TResult> ReplaceBy<TSource, TResult>(
             this Ident<TSource> @this,
             TResult value)
             /* T4: type constraint */
@@ -171,6 +175,17 @@ namespace Narvalo.Fx
             /* T4: NotNull(@this) */
             Require.NotNull(predicate, nameof(predicate));
             return @this.Bind(val => predicate(val) ? thenResult : elseResult);
+        }
+
+        public static Ident<TSource> Ignore<TSource, TOther>(
+            this Ident<TSource> @this,
+            Ident<TOther> other)
+            /* T4: type constraint */
+        {
+            /* T4: NotNull(@this) */
+            Func<TSource, TOther, TSource> ignorearg2 = (arg1, _) => arg1;
+
+            return @this.Zip(other, ignorearg2);
         }
 
         public static Ident<global::Narvalo.Fx.Unit> Skip<TSource>(this Ident<TSource> @this)
@@ -341,12 +356,12 @@ namespace Narvalo.Fx
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Kleisli
     {
-        public static Ident<IEnumerable<TResult>> ForEach<TSource, TResult>(
+        public static Ident<IEnumerable<TResult>> InvokeForEach<TSource, TResult>(
             this Func<TSource, Ident<TResult>> @this,
             IEnumerable<TSource> seq)
             => seq.Select(@this).Collect();
 
-        public static Ident<TResult> Invoke<TSource, TResult>(
+        public static Ident<TResult> InvokeWith<TSource, TResult>(
             this Func<TSource, Ident<TResult>> @this,
             Ident<TSource> value)
             /* T4: type constraint */
