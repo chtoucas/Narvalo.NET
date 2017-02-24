@@ -19,8 +19,8 @@ namespace Narvalo.Fx.Internal
 
         void Do(Action<T> action);
 
-        //void Forever(Action<T> action);
-
         //void While(Func<bool> predicate, Action<T> action);
+
+        //void Forever(Action<T> action);
     }
 }

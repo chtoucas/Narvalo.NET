@@ -150,7 +150,6 @@ public partial class MonadTemplate
         }
 <#+ /* DISABLED #>
 
-        // Haskell uses a different signature.
         public static void When<TSource<#= SuffixT #>>(
             this <#= Name #><TSource<#= SuffixT #>> @this,
             Func<TSource, bool> predicate,
@@ -173,7 +172,6 @@ public partial class MonadTemplate
                 });
         }
 
-        // Haskell uses a different signature.
         public static void Unless<TSource<#= SuffixT #>>(
             this <#= Name #><TSource<#= SuffixT #>> @this,
             Func<TSource, bool> predicate,
