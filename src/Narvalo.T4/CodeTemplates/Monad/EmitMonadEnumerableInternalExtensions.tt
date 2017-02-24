@@ -9,7 +9,6 @@ public partial class MonadTemplate
     // You will certainly want to override them to improve performance.
     internal static partial class EnumerableExtensions
     {
-
 <#+ if (!HasTypeConstraints) { #>
 
 <#+ if (!SuppressMessage) { #>
@@ -19,38 +18,12 @@ public partial class MonadTemplate
             this IEnumerable<<#= Name #><TSource<#= SuffixT #>>> @this)
         {
             Demand.NotNull(@this);
-<#+ if (IsNullable) { #>
-            Warrant.NotNull<<#= Name #><IEnumerable<TSource><#= SuffixT #>>>();
-<#+ } #>
 
             var seed = <#+ WriteFactory("IEnumerable<TSource>"); #>(Enumerable.Empty<TSource>());
-            //var seed = <#= Name #>.<#= ReturnName #>(Enumerable.Empty<TSource>());
-            // Inlined LINQ Append method:
-            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (m, item) => m.Append(item);
+            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (seq, item) => seq.Append(item);
 
-            // NB: Maybe.Lift(append) is the same as:
-            // Func<<#= Name #><IEnumerable<TSource>>, <#= Name #><TSource>, <#= Name #><IEnumerable<TSource>>> liftedAppend
-            //     = (m, item) => m.Bind(list => Append(list, item));
-            // where Append is defined below.
-            var retval = @this.Aggregate(seed, <#= Name #>.Lift<IEnumerable<TSource>, TSource, IEnumerable<TSource><#= SuffixT #>>(append));
-<#+ if (IsNullable) { #>
-            System.Diagnostics.Contracts.Contract.Assume(retval != null);
-<#+ } #>
-
-            return retval;
+            return @this.Aggregate(seed, <#= Name #>.Lift<IEnumerable<TSource>, TSource, IEnumerable<TSource><#= SuffixT #>>(append));
         }
-
-        // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
-        //private static <#= Name #><IEnumerable<TSource>> Append<TSource>(
-        //    IEnumerable<TSource> list,
-        //    <#= Name #><TSource> m)
-        //{
-<#+ if (IsNullable) { #>
-        //    Demand.NotNull(m);
-<#+ } #>
-
-        //    return m.Bind(item => <#= Name #>.<#= ReturnName #>(list.Concat(Enumerable.Repeat(item, 1))));
-        //}
 
 <#+ } // T4: End of !HasTypeConstraints. #>
 
@@ -64,18 +37,9 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource"); #>
         {
             Demand.NotNull(@this);
-<#+ if (IsNullable) { #>
-            Warrant.NotNull<<#= Name #><TSource>>();
-<#+ } #>
 
-            var retval = @this.Aggregate(<#= Name #><TSource>.<#= ZeroName #>, (m, n) => m.<#= PlusName #>(n));
-<#+ if (IsNullable) { #>
-            System.Diagnostics.Contracts.Contract.Assume(retval != null);
-<#+ } #>
-
-            return retval;
+            return @this.Aggregate(<#= Name #><TSource>.<#= ZeroName #>, (m, n) => m.<#= PlusName #>(n));
         }
-
 <#+ } // T4: End of HasSum. #>
     } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
 <#+

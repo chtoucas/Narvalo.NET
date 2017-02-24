@@ -25,25 +25,20 @@ namespace Edufun.Haskell.Templates
     // Provides a set of static methods for MonadOr<T>.
     public static partial class MonadOr
     {
-
         /// <summary>
         /// The unique object of type <c>MonadOr&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly MonadOr<global::Narvalo.Fx.Unit> s_Unit
-            = Of(global::Narvalo.Fx.Unit.Single);
+        private static readonly MonadOr<global::Narvalo.Fx.Unit> s_Unit = Of(global::Narvalo.Fx.Unit.Single);
 
         /// <summary>
         /// Gets the unique object of type <c>MonadOr&lt;Unit&gt;</c>.
         /// </summary>
         public static MonadOr<global::Narvalo.Fx.Unit> Unit => s_Unit;
 
-
         /// <summary>
         /// Gets the zero for <see cref="MonadOr{T}.Bind"/>.
         /// </summary>
-        public static MonadOr<global::Narvalo.Fx.Unit> None
-            => MonadOr<global::Narvalo.Fx.Unit>.None;
-
+        public static MonadOr<global::Narvalo.Fx.Unit> None => MonadOr<global::Narvalo.Fx.Unit>.None;
 
         /// <summary>
         /// Obtains an instance of the <see cref="MonadOr{T}"/> class for the specified value.
@@ -52,120 +47,101 @@ namespace Edufun.Haskell.Templates
         /// <param name="value">A value to be wrapped into an object of type <see cref="MonadOr{T}"/>.</param>
         /// <returns>An instance of the <see cref="MonadOr{T}"/> class for the specified value.</returns>
         public static MonadOr<T> Of<T>(T value)
-            /* T4: C# indent */
+            /* T4: type constraint */
             => MonadOr<T>.η(value);
 
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
         /// </summary>
         public static MonadOr<T> Flatten<T>(MonadOr<MonadOr<T>> square)
-            /* T4: C# indent */
+            /* T4: type constraint */
             => MonadOr<T>.μ(square);
 
-
-        public static MonadOr<global::Narvalo.Fx.Unit> Guard(bool predicate)
-            => predicate ? MonadOr.Unit : MonadOr.None;
-
+        public static MonadOr<global::Narvalo.Fx.Unit> Guard(bool predicate) => predicate ? Unit : None;
 
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadOr{T}" /> values.
         /// </summary>
         public static Func<MonadOr<T>, MonadOr<TResult>> Lift<T, TResult>(
             Func<T, TResult> func)
-            /* T4: C# indent */
-        {
-            return arg =>
+            /* T4: type constraint */
+            => arg =>
             {
                 Require.NotNull(arg, nameof(arg));
                 return arg.Select(func);
             };
-        }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="MonadOr{T}" /> values, scanning the
-        /// monadic arguments from left to right.
+        /// Promotes a function to use and return <see cref="MonadOr{T}" /> values.
         /// </summary>
         public static Func<MonadOr<T1>, MonadOr<T2>, MonadOr<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
-            /* T4: C# indent */
-        {
-            return (arg1, arg2) =>
+            /* T4: type constraint */
+            => (arg1, arg2) =>
             {
                 Require.NotNull(arg1, nameof(arg1));
                 return arg1.Zip(arg2, func);
             };
-        }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="MonadOr{T}" /> values, scanning the
-        /// monadic arguments from left to right.
+        /// Promotes a function to use and return <see cref="MonadOr{T}" /> values.
         /// </summary>
         public static Func<MonadOr<T1>, MonadOr<T2>, MonadOr<T3>, MonadOr<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
-            /* T4: C# indent */
-        {
-            return (arg1, arg2, arg3) =>
+            /* T4: type constraint */
+            => (arg1, arg2, arg3) =>
             {
                 Require.NotNull(arg1, nameof(arg1));
                 return arg1.Zip(arg2, arg3, func);
             };
-        }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="MonadOr{T}" /> values, scanning the
-        /// monadic arguments from left to right.
+        /// Promotes a function to use and return <see cref="MonadOr{T}" /> values.
         /// </summary>
         public static Func<MonadOr<T1>, MonadOr<T2>, MonadOr<T3>, MonadOr<T4>, MonadOr<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> func)
-            /* T4: C# indent */
-        {
-            return (arg1, arg2, arg3, arg4) =>
+            /* T4: type constraint */
+            => (arg1, arg2, arg3, arg4) =>
             {
                 Require.NotNull(arg1, nameof(arg1));
                 return arg1.Zip(arg2, arg3, arg4, func);
             };
-        }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="MonadOr{T}" /> values, scanning the
-        /// monadic arguments from left to right.
+        /// Promotes a function to use and return <see cref="MonadOr{T}" /> values.
         /// </summary>
         public static Func<MonadOr<T1>, MonadOr<T2>, MonadOr<T3>, MonadOr<T4>, MonadOr<T5>, MonadOr<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> func)
-            /* T4: C# indent */
-        {
-            return (arg1, arg2, arg3, arg4, arg5) =>
+            /* T4: type constraint */
+            => (arg1, arg2, arg3, arg4, arg5) =>
             {
                 Require.NotNull(arg1, nameof(arg1));
                 return arg1.Zip(arg2, arg3, arg4, arg5, func);
             };
-        }
     } // End of MonadOr - T4: EmitMonadCore().
 
     // Provides extension methods for MonadOr<T>.
     public static partial class MonadOr
     {
-        public static MonadOr<TResult> Replace<TSource, TResult>(
+        public static MonadOr<TResult> Select<TSource, TResult>(
             this MonadOr<TSource> @this,
-            TResult value)
-            /* T4: C# indent */
+            Func<TSource, TResult> selector)
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
-
-            return @this.Select(_ => value);
+            Require.NotNull(selector, nameof(selector));
+            return @this.Bind(val => MonadOr.Of(selector(val)));
         }
-
 
         public static MonadOr<TResult> Gather<TSource, TResult>(
             this MonadOr<TSource> @this,
             MonadOr<Func<TSource, TResult>> applicative)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(applicative, nameof(applicative));
-
             return applicative.Bind(func => @this.Select(func));
         }
 
@@ -174,39 +150,36 @@ namespace Edufun.Haskell.Templates
             MonadOr<TSource> value)
         {
             Require.NotNull(value, nameof(value));
-
             return value.Gather(@this);
         }
 
-
-        public static MonadOr<TResult> Select<TSource, TResult>(
+        public static MonadOr<TResult> Replace<TSource, TResult>(
             this MonadOr<TSource> @this,
-            Func<TSource, TResult> selector)
-            /* T4: C# indent */
+            TResult value)
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
-            Require.NotNull(selector, nameof(selector));
-
-            return @this.Bind(_ => MonadOr.Of(selector(_)));
+            return @this.Select(_ => value);
         }
 
         public static MonadOr<TResult> ReplaceBy<TSource, TResult>(
             this MonadOr<TSource> @this,
             MonadOr<TResult> other)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
-
             return @this.Bind(_ => other);
         }
 
-        public static MonadOr<global::Narvalo.Fx.Unit> Skip<TSource>(this MonadOr<TSource> @this)
-            /* T4: C# indent */
+        public static MonadOr<TResult> If<TSource, TResult>(
+            this MonadOr<TSource> @this,
+            Func<TSource, bool> predicate,
+            MonadOr<TResult> thenResult)
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
-
-            return @this.Replace(global::Narvalo.Fx.Unit.Single);
-            //return MonadOr.Unit;
+            Require.NotNull(predicate, nameof(predicate));
+            return @this.Bind(val => predicate(val) ? thenResult : MonadOr<TResult>.None);
         }
 
         public static MonadOr<TResult> Coalesce<TSource, TResult>(
@@ -214,66 +187,29 @@ namespace Edufun.Haskell.Templates
             Func<TSource, bool> predicate,
             MonadOr<TResult> thenResult,
             MonadOr<TResult> elseResult)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
-
-            return @this.Bind(_ => predicate(_) ? thenResult : elseResult);
+            return @this.Bind(val => predicate(val) ? thenResult : elseResult);
         }
 
-
-        // Conditional version of ReplaceBy().
-        public static MonadOr<TResult> If<TSource, TResult>(
-            this MonadOr<TSource> @this,
-            Func<TSource, bool> predicate,
-            MonadOr<TResult> thenResult)
-            /* T4: C# indent */
+        public static MonadOr<global::Narvalo.Fx.Unit> Skip<TSource>(this MonadOr<TSource> @this)
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-
-            return @this.Bind(_ => predicate(_) ? thenResult : MonadOr<TResult>.None);
+            return @this.ReplaceBy(Unit);
         }
-
-
-        public static MonadOr<TResult> Using<TSource, TResult>(
-            this MonadOr<TSource> @this,
-            Func<TSource, MonadOr<TResult>> selector)
-            where TSource : IDisposable
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(selector, nameof(selector));
-
-            return @this.Bind(_ => { using (_) { return selector(_); } });
-        }
-
-        public static MonadOr<TResult> Using<TSource, TResult>(
-            this MonadOr<TSource> @this,
-            Func<TSource, TResult> selector)
-            where TSource : IDisposable
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(selector, nameof(selector));
-
-            return @this.Select(_ => { using (_) { return selector(_); } });
-        }
-
 
         public static MonadOr<TSource> Where<TSource>(
             this MonadOr<TSource> @this,
             Func<TSource, bool> predicate)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
-
-            return @this.Bind(
-                _ => predicate(_) ? MonadOr.Of(_) : MonadOr<TSource>.None);
+            return @this.Bind(val => predicate(val) ? MonadOr.Of(val) : MonadOr<TSource>.None);
         }
-
 
         public static MonadOr<IEnumerable<TSource>> Repeat<TSource>(
             this MonadOr<TSource> @this,
@@ -281,35 +217,55 @@ namespace Edufun.Haskell.Templates
         {
             Require.NotNull(@this, nameof(@this));
             Require.Range(count >= 1, nameof(count));
-
-            return @this.Select(_ => Enumerable.Repeat(_, count));
+            return @this.Select(val => Enumerable.Repeat(val, count));
         }
 
+        public static MonadOr<TResult> Using<TSource, TResult>(
+            this MonadOr<TSource> @this,
+            Func<TSource, MonadOr<TResult>> selector)
+            where TSource : IDisposable
+            /* T4: type constraint */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(selector, nameof(selector));
+            return @this.Bind(val => { using (val) { return selector(val); } });
+        }
+
+        public static MonadOr<TResult> Using<TSource, TResult>(
+            this MonadOr<TSource> @this,
+            Func<TSource, TResult> selector)
+            where TSource : IDisposable
+            /* T4: type constraint */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(selector, nameof(selector));
+            return @this.Select(val => { using (val) { return selector(val); } });
+        }
+
+        #region Zip()
 
         public static MonadOr<Tuple<TSource, TOther>> Zip<TSource, TOther>(
             this MonadOr<TSource> @this,
             MonadOr<TOther> other)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
-
             return @this.Zip(other, Tuple.Create);
         }
-
 
         /// <see cref="Lift{T1, T2, T3}" />
         public static MonadOr<TResult> Zip<TFirst, TSecond, TResult>(
             this MonadOr<TFirst> @this,
             MonadOr<TSecond> second,
-            Func<TFirst, TSecond, TResult> resultSelector)
-            /* T4: C# indent */
+            Func<TFirst, TSecond, TResult> zipper)
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(second, nameof(second));
-            Require.NotNull(resultSelector, nameof(resultSelector));
+            Require.NotNull(zipper, nameof(zipper));
 
             Func<TFirst, Func<TSecond, TResult>> selector
-                = arg1 => arg2 => resultSelector(arg1, arg2);
+                = arg1 => arg2 => zipper(arg1, arg2);
 
             return second.Gather(
                 @this.Select(selector));
@@ -320,16 +276,16 @@ namespace Edufun.Haskell.Templates
             this MonadOr<T1> @this,
             MonadOr<T2> second,
             MonadOr<T3> third,
-            Func<T1, T2, T3, TResult> resultSelector)
-            /* T4: C# indent */
+            Func<T1, T2, T3, TResult> zipper)
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(second, nameof(second));
             Require.NotNull(third, nameof(third));
-            Require.NotNull(resultSelector, nameof(resultSelector));
+            Require.NotNull(zipper, nameof(zipper));
 
             Func<T1, Func<T2, Func<T3, TResult>>> selector
-                = arg1 => arg2 => arg3 => resultSelector(arg1, arg2, arg3);
+                = arg1 => arg2 => arg3 => zipper(arg1, arg2, arg3);
 
             return third.Gather(
                 second.Gather(
@@ -342,17 +298,17 @@ namespace Edufun.Haskell.Templates
              MonadOr<T2> second,
              MonadOr<T3> third,
              MonadOr<T4> fourth,
-             Func<T1, T2, T3, T4, TResult> resultSelector)
-            /* T4: C# indent */
+             Func<T1, T2, T3, T4, TResult> zipper)
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(second, nameof(second));
             Require.NotNull(third, nameof(third));
             Require.NotNull(fourth, nameof(fourth));
-            Require.NotNull(resultSelector, nameof(resultSelector));
+            Require.NotNull(zipper, nameof(zipper));
 
             Func<T1, Func<T2, Func<T3, Func<T4, TResult>>>> selector
-                = arg1 => arg2 => arg3 => arg4 => resultSelector(arg1, arg2, arg3, arg4);
+                = arg1 => arg2 => arg3 => arg4 => zipper(arg1, arg2, arg3, arg4);
 
             return fourth.Gather(
                 third.Gather(
@@ -367,18 +323,18 @@ namespace Edufun.Haskell.Templates
             MonadOr<T3> third,
             MonadOr<T4> fourth,
             MonadOr<T5> fifth,
-            Func<T1, T2, T3, T4, T5, TResult> resultSelector)
-            /* T4: C# indent */
+            Func<T1, T2, T3, T4, T5, TResult> zipper)
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(second, nameof(second));
             Require.NotNull(third, nameof(third));
             Require.NotNull(fourth, nameof(fourth));
             Require.NotNull(fifth, nameof(fifth));
-            Require.NotNull(resultSelector, nameof(resultSelector));
+            Require.NotNull(zipper, nameof(zipper));
 
             Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, TResult>>>>> selector
-                = arg1 => arg2 => arg3 => arg4 => arg5 => resultSelector(arg1, arg2, arg3, arg4, arg5);
+                = arg1 => arg2 => arg3 => arg4 => arg5 => zipper(arg1, arg2, arg3, arg4, arg5);
 
             return fifth.Gather(
                 fourth.Gather(
@@ -387,6 +343,9 @@ namespace Edufun.Haskell.Templates
                             @this.Select(selector)))));
         }
 
+        #endregion
+
+        #region LINQ dialect
 
         /// <remarks>
         /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" />.
@@ -395,7 +354,7 @@ namespace Edufun.Haskell.Templates
             this MonadOr<TSource> @this,
             Func<TSource, MonadOr<TMiddle>> valueSelector,
             Func<TSource, TMiddle, TResult> resultSelector)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(valueSelector, nameof(valueSelector));
@@ -406,14 +365,13 @@ namespace Edufun.Haskell.Templates
                     middle => resultSelector(arg, middle)));
         }
 
-
         public static MonadOr<TResult> Join<TSource, TInner, TKey, TResult>(
             this MonadOr<TSource> @this,
             MonadOr<TInner> inner,
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, TInner, TResult> resultSelector)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
 
@@ -432,7 +390,7 @@ namespace Edufun.Haskell.Templates
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, MonadOr<TInner>, TResult> resultSelector)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
 
@@ -445,7 +403,6 @@ namespace Edufun.Haskell.Templates
                 EqualityComparer<TKey>.Default);
         }
 
-
         public static MonadOr<TResult> Join<TSource, TInner, TKey, TResult>(
             this MonadOr<TSource> @this,
             MonadOr<TInner> inner,
@@ -453,7 +410,7 @@ namespace Edufun.Haskell.Templates
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, TInner, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             return JoinImpl(
                 @this,
@@ -471,7 +428,7 @@ namespace Edufun.Haskell.Templates
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, MonadOr<TInner>, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             return GroupJoinImpl(
                 @this,
@@ -482,7 +439,6 @@ namespace Edufun.Haskell.Templates
                 comparer ?? EqualityComparer<TKey>.Default);
         }
 
-
         private static MonadOr<TResult> JoinImpl<TSource, TInner, TKey, TResult>(
             MonadOr<TSource> seq,
             MonadOr<TInner> inner,
@@ -490,7 +446,7 @@ namespace Edufun.Haskell.Templates
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, TInner, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Require.NotNull(seq, nameof(seq));
             Require.NotNull(resultSelector, nameof(resultSelector));
@@ -513,7 +469,7 @@ namespace Edufun.Haskell.Templates
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, MonadOr<TInner>, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Require.NotNull(seq, nameof(seq));
             Require.NotNull(resultSelector, nameof(resultSelector));
@@ -533,7 +489,7 @@ namespace Edufun.Haskell.Templates
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             IEqualityComparer<TKey> comparer)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Require.NotNull(inner, nameof(inner));
             Require.NotNull(outerKeySelector, nameof(outerKeySelector));
@@ -548,12 +504,12 @@ namespace Edufun.Haskell.Templates
             };
         }
 
+        #endregion
     } // End of MonadOr - T4: EmitMonadExtensions().
 
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Kleisli
     {
-
         public static MonadOr<IEnumerable<TResult>> ForEach<TSource, TResult>(
             this Func<TSource, MonadOr<TResult>> @this,
             IEnumerable<TSource> seq)
@@ -562,48 +518,42 @@ namespace Edufun.Haskell.Templates
         public static MonadOr<TResult> Invoke<TSource, TResult>(
             this Func<TSource, MonadOr<TResult>> @this,
             MonadOr<TSource> value)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Require.NotNull(value, nameof(value));
-
             return value.Bind(@this);
         }
 
         public static Func<TSource, MonadOr<TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, MonadOr<TMiddle>> first,
             Func<TMiddle, MonadOr<TResult>> second)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Require.NotNull(first, nameof(first));
-
-            return _ => first(_).Bind(second);
+            return arg => first(arg).Bind(second);
         }
 
         public static Func<TSource, MonadOr<TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, MonadOr<TResult>> first,
             Func<TSource, MonadOr<TMiddle>> second)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Require.NotNull(second, nameof(second));
-
-            return _ => second(_).Bind(first);
+            return arg => second(arg).Bind(first);
         }
     } // End of Kleisli - T4: EmitKleisliExtensions().
 
     // Provides extension methods for IEnumerable<MonadOr<T>>.
     public static partial class MonadOr
     {
-
         public static MonadOr<IEnumerable<TSource>> Collect<TSource>(
             this IEnumerable<MonadOr<TSource>> @this)
             => @this.CollectImpl();
 
-
         public static MonadOr<TSource> Sum<TSource>(
             this IEnumerable<MonadOr<TSource>> @this)
-            /* T4: C# indent */
+            /* T4: type constraint */
             => @this.SumImpl();
-
     } // End of Sequence - T4: EmitMonadEnumerableExtensions().
 }
 
@@ -619,51 +569,25 @@ namespace Edufun.Haskell.Templates.Internal
     // You will certainly want to override them to improve performance.
     internal static partial class EnumerableExtensions
     {
-
         internal static MonadOr<IEnumerable<TSource>> CollectImpl<TSource>(
             this IEnumerable<MonadOr<TSource>> @this)
         {
             Demand.NotNull(@this);
-            Warrant.NotNull<MonadOr<IEnumerable<TSource>>>();
 
             var seed = MonadOr.Of(Enumerable.Empty<TSource>());
-            //var seed = MonadOr.Of(Enumerable.Empty<TSource>());
-            // Inlined LINQ Append method:
-            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (m, item) => m.Append(item);
+            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (seq, item) => seq.Append(item);
 
-            // NB: Maybe.Lift(append) is the same as:
-            // Func<MonadOr<IEnumerable<TSource>>, MonadOr<TSource>, MonadOr<IEnumerable<TSource>>> liftedAppend
-            //     = (m, item) => m.Bind(list => Append(list, item));
-            // where Append is defined below.
-            var retval = @this.Aggregate(seed, MonadOr.Lift<IEnumerable<TSource>, TSource, IEnumerable<TSource>>(append));
-            System.Diagnostics.Contracts.Contract.Assume(retval != null);
-
-            return retval;
+            return @this.Aggregate(seed, MonadOr.Lift<IEnumerable<TSource>, TSource, IEnumerable<TSource>>(append));
         }
-
-        // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
-        //private static MonadOr<IEnumerable<TSource>> Append<TSource>(
-        //    IEnumerable<TSource> list,
-        //    MonadOr<TSource> m)
-        //{
-        //    Demand.NotNull(m);
-
-        //    return m.Bind(item => MonadOr.Of(list.Concat(Enumerable.Repeat(item, 1))));
-        //}
 
         internal static MonadOr<TSource> SumImpl<TSource>(
             this IEnumerable<MonadOr<TSource>> @this)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Demand.NotNull(@this);
-            Warrant.NotNull<MonadOr<TSource>>();
 
-            var retval = @this.Aggregate(MonadOr<TSource>.None, (m, n) => m.OrElse(n));
-            System.Diagnostics.Contracts.Contract.Assume(retval != null);
-
-            return retval;
+            return @this.Aggregate(MonadOr<TSource>.None, (m, n) => m.OrElse(n));
         }
-
     } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
 }
 
@@ -683,17 +607,14 @@ namespace Edufun.Haskell.Templates.Linq
     // - Aggregate -> Reduce or Fold
     public static partial class Qperators
     {
-
         public static MonadOr<IEnumerable<TResult>> SelectWith<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, MonadOr<TResult>> selector)
             => @this.SelectWithImpl(selector);
 
-
         public static MonadOr<IEnumerable<TSource>> WhereBy<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, MonadOr<bool>> predicate)
-            /* T4: C# indent */
             => @this.WhereByImpl(predicate);
 
         public static MonadOr<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
@@ -708,31 +629,30 @@ namespace Edufun.Haskell.Templates.Linq
             Func<TFirst, TSecond, MonadOr<TResult>> resultSelector)
             => @this.ZipWithImpl(second, resultSelector);
 
-
         public static MonadOr<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, MonadOr<TAccumulate>> accumulator)
-            /* T4: C# indent */
+            /* T4: type constraint */
             => @this.FoldImpl(seed, accumulator);
 
         public static MonadOr<TAccumulate> FoldBack<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, MonadOr<TAccumulate>> accumulator)
-            /* T4: C# indent */
+            /* T4: type constraint */
             => @this.FoldBackImpl(seed, accumulator);
 
         public static MonadOr<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, MonadOr<TSource>> accumulator)
-            /* T4: C# indent */
+            /* T4: type constraint */
             => @this.ReduceImpl(accumulator);
 
         public static MonadOr<TSource> ReduceBack<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, MonadOr<TSource>> accumulator)
-            /* T4: C# indent */
+            /* T4: type constraint */
             => @this.ReduceBackImpl(accumulator);
 
         // Haskell uses a different signature.
@@ -741,7 +661,7 @@ namespace Edufun.Haskell.Templates.Linq
             TAccumulate seed,
             Func<TAccumulate, TSource, MonadOr<TAccumulate>> accumulator,
             Func<MonadOr<TAccumulate>, bool> predicate)
-            /* T4: C# indent */
+            /* T4: type constraint */
             => @this.FoldImpl(seed, accumulator, predicate);
 
         // Haskell uses a different signature.
@@ -749,7 +669,7 @@ namespace Edufun.Haskell.Templates.Linq
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, MonadOr<TSource>> accumulator,
             Func<MonadOr<TSource>, bool> predicate)
-            /* T4: C# indent */
+            /* T4: type constraint */
             => @this.ReduceImpl(accumulator, predicate);
     } // End of Iterable - T4: EmitEnumerableExtensions().
 }
@@ -774,27 +694,24 @@ namespace Edufun.Haskell.Templates.Internal
             Demand.NotNull(@this);
             Demand.NotNull(selector);
 
-            return @this.Select(selector).EmptyIfNull().Collect();
+            return @this.Select(selector).Collect();
         }
 
         internal static MonadOr<IEnumerable<TSource>> WhereByImpl<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, MonadOr<bool>> predicate)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
 
-            Func<bool, IEnumerable<TSource>, TSource, IEnumerable<TSource>> selector
-                = (flg, list, item) => { if (flg) { return list.Prepend(item); } else { return list; } };
+            Func<TSource, Func<bool, IEnumerable<TSource>, IEnumerable<TSource>>> func
+                = item => (flg, seq) => flg ? seq.Append(item) : seq;
 
             Func<MonadOr<IEnumerable<TSource>>, TSource, MonadOr<IEnumerable<TSource>>> accumulator
-                = (mlist, item) => predicate.Invoke(item).Zip(mlist, (flg, list) => selector.Invoke(flg, list, item));
+                = (mseq, item) => predicate(item).Zip(mseq, func(item));
 
-            var seed = MonadOr.Of(Enumerable.Empty<TSource>());
-
-            // REVIEW: Aggregate?
-            return @this.AggregateBack(seed, accumulator);
+            return @this.Aggregate(MonadOr.Of(Enumerable.Empty<TSource>()), accumulator);
         }
 
         internal static MonadOr<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
@@ -808,10 +725,10 @@ namespace Edufun.Haskell.Templates.Internal
             return @this.SelectWith(selector).Select(
                 tuples =>
                 {
-                    IEnumerable<TFirst> list1 = tuples.Select(_ => _.Item1);
-                    IEnumerable<TSecond> list2 = tuples.Select(_ => _.Item2);
+                    var seq1 = tuples.Select(_ => _.Item1);
+                    var seq2 = tuples.Select(_ => _.Item2);
 
-                    return new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(list1, list2);
+                    return new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(seq1, seq2);
                 });
         }
 
@@ -820,54 +737,44 @@ namespace Edufun.Haskell.Templates.Internal
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, MonadOr<TResult>> resultSelector)
         {
-            Require.NotNull(resultSelector, nameof(resultSelector));
-
+            Demand.NotNull(resultSelector);
             Demand.NotNull(@this);
             Demand.NotNull(second);
 
-            Func<TFirst, TSecond, MonadOr<TResult>> selector
-                = (v1, v2) => resultSelector.Invoke(v1, v2);
-
-            IEnumerable<MonadOr<TResult>> seq = @this.Zip(second, selector);
-
-            return seq.EmptyIfNull().Collect();
+            return @this.Zip(second, resultSelector).Collect();
         }
 
         internal static MonadOr<TAccumulate> FoldImpl<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, MonadOr<TAccumulate>> accumulator)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
 
-            MonadOr<TAccumulate> retval = MonadOr.Of(seed);
+            Func<MonadOr<TAccumulate>, TSource, MonadOr<TAccumulate>> func
+                = (arg1, arg2) => arg1.Bind(arg => accumulator(arg, arg2));
 
-            foreach (TSource item in @this)
-            {
-                retval = retval.Bind(_ => accumulator.Invoke(_, item));
-            }
-
-            return retval;
+            return @this.Aggregate(MonadOr.Of(seed), func);
         }
 
         internal static MonadOr<TAccumulate> FoldBackImpl<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, MonadOr<TAccumulate>> accumulator)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Demand.NotNull(@this);
             Demand.NotNull(accumulator);
 
-            return @this.Reverse().EmptyIfNull().Fold(seed, accumulator);
+            return @this.Reverse().Fold(seed, accumulator);
         }
 
         internal static MonadOr<TSource> ReduceImpl<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, MonadOr<TSource>> accumulator)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
@@ -893,12 +800,12 @@ namespace Edufun.Haskell.Templates.Internal
         internal static MonadOr<TSource> ReduceBackImpl<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, MonadOr<TSource>> accumulator)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Demand.NotNull(@this);
             Demand.NotNull(accumulator);
 
-            return @this.Reverse().EmptyIfNull().Reduce(accumulator);
+            return @this.Reverse().Reduce(accumulator);
         }
 
         internal static MonadOr<TAccumulate> FoldImpl<TSource, TAccumulate>(
@@ -906,7 +813,7 @@ namespace Edufun.Haskell.Templates.Internal
             TAccumulate seed,
             Func<TAccumulate, TSource, MonadOr<TAccumulate>> accumulator,
             Func<MonadOr<TAccumulate>, bool> predicate)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
@@ -929,7 +836,7 @@ namespace Edufun.Haskell.Templates.Internal
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, MonadOr<TSource>> accumulator,
             Func<MonadOr<TSource>, bool> predicate)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));

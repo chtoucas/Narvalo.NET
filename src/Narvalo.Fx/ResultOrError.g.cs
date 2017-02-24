@@ -14,7 +14,6 @@ namespace Narvalo.Fx
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
     using Narvalo.Fx.Internal;
@@ -23,18 +22,15 @@ namespace Narvalo.Fx
     // Provides a set of static methods for ResultOrError<T>.
     public static partial class ResultOrError
     {
-
         /// <summary>
         /// The unique object of type <c>ResultOrError&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly ResultOrError<global::Narvalo.Fx.Unit> s_Unit
-            = Of(global::Narvalo.Fx.Unit.Single);
+        private static readonly ResultOrError<global::Narvalo.Fx.Unit> s_Unit = Of(global::Narvalo.Fx.Unit.Single);
 
         /// <summary>
         /// Gets the unique object of type <c>ResultOrError&lt;Unit&gt;</c>.
         /// </summary>
         public static ResultOrError<global::Narvalo.Fx.Unit> Unit => s_Unit;
-
 
         /// <summary>
         /// Obtains an instance of the <see cref="ResultOrError{T}"/> class for the specified value.
@@ -43,116 +39,99 @@ namespace Narvalo.Fx
         /// <param name="value">A value to be wrapped into an object of type <see cref="ResultOrError{T}"/>.</param>
         /// <returns>An instance of the <see cref="ResultOrError{T}"/> class for the specified value.</returns>
         public static ResultOrError<T> Of<T>(T value)
-            /* T4: C# indent */
+            /* T4: type constraint */
             => ResultOrError<T>.η(value);
 
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
         /// </summary>
         public static ResultOrError<T> Flatten<T>(ResultOrError<ResultOrError<T>> square)
-            /* T4: C# indent */
+            /* T4: type constraint */
             => ResultOrError<T>.μ(square);
-
 
         /// <summary>
         /// Promotes a function to use and return <see cref="ResultOrError{T}" /> values.
         /// </summary>
         public static Func<ResultOrError<T>, ResultOrError<TResult>> Lift<T, TResult>(
             Func<T, TResult> func)
-            /* T4: C# indent */
-        {
-            return arg =>
+            /* T4: type constraint */
+            => arg =>
             {
                 Require.NotNull(arg, nameof(arg));
                 return arg.Select(func);
             };
-        }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="ResultOrError{T}" /> values, scanning the
-        /// monadic arguments from left to right.
+        /// Promotes a function to use and return <see cref="ResultOrError{T}" /> values.
         /// </summary>
         public static Func<ResultOrError<T1>, ResultOrError<T2>, ResultOrError<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
-            /* T4: C# indent */
-        {
-            return (arg1, arg2) =>
+            /* T4: type constraint */
+            => (arg1, arg2) =>
             {
                 Require.NotNull(arg1, nameof(arg1));
                 return arg1.Zip(arg2, func);
             };
-        }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="ResultOrError{T}" /> values, scanning the
-        /// monadic arguments from left to right.
+        /// Promotes a function to use and return <see cref="ResultOrError{T}" /> values.
         /// </summary>
         public static Func<ResultOrError<T1>, ResultOrError<T2>, ResultOrError<T3>, ResultOrError<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
-            /* T4: C# indent */
-        {
-            return (arg1, arg2, arg3) =>
+            /* T4: type constraint */
+            => (arg1, arg2, arg3) =>
             {
                 Require.NotNull(arg1, nameof(arg1));
                 return arg1.Zip(arg2, arg3, func);
             };
-        }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="ResultOrError{T}" /> values, scanning the
-        /// monadic arguments from left to right.
+        /// Promotes a function to use and return <see cref="ResultOrError{T}" /> values.
         /// </summary>
         public static Func<ResultOrError<T1>, ResultOrError<T2>, ResultOrError<T3>, ResultOrError<T4>, ResultOrError<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> func)
-            /* T4: C# indent */
-        {
-            return (arg1, arg2, arg3, arg4) =>
+            /* T4: type constraint */
+            => (arg1, arg2, arg3, arg4) =>
             {
                 Require.NotNull(arg1, nameof(arg1));
                 return arg1.Zip(arg2, arg3, arg4, func);
             };
-        }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="ResultOrError{T}" /> values, scanning the
-        /// monadic arguments from left to right.
+        /// Promotes a function to use and return <see cref="ResultOrError{T}" /> values.
         /// </summary>
         public static Func<ResultOrError<T1>, ResultOrError<T2>, ResultOrError<T3>, ResultOrError<T4>, ResultOrError<T5>, ResultOrError<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> func)
-            /* T4: C# indent */
-        {
-            return (arg1, arg2, arg3, arg4, arg5) =>
+            /* T4: type constraint */
+            => (arg1, arg2, arg3, arg4, arg5) =>
             {
                 Require.NotNull(arg1, nameof(arg1));
                 return arg1.Zip(arg2, arg3, arg4, arg5, func);
             };
-        }
     } // End of ResultOrError - T4: EmitMonadCore().
 
     // Provides extension methods for ResultOrError<T>.
     public static partial class ResultOrError
     {
-        public static ResultOrError<TResult> Replace<TSource, TResult>(
+        public static ResultOrError<TResult> Select<TSource, TResult>(
             this ResultOrError<TSource> @this,
-            TResult value)
-            /* T4: C# indent */
+            Func<TSource, TResult> selector)
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
-
-            return @this.Select(_ => value);
+            Require.NotNull(selector, nameof(selector));
+            return @this.Bind(val => ResultOrError.Of(selector(val)));
         }
-
 
         public static ResultOrError<TResult> Gather<TSource, TResult>(
             this ResultOrError<TSource> @this,
             ResultOrError<Func<TSource, TResult>> applicative)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(applicative, nameof(applicative));
-
             return applicative.Bind(func => @this.Select(func));
         }
 
@@ -161,40 +140,25 @@ namespace Narvalo.Fx
             ResultOrError<TSource> value)
         {
             Require.NotNull(value, nameof(value));
-
             return value.Gather(@this);
         }
 
-
-        public static ResultOrError<TResult> Select<TSource, TResult>(
+        public static ResultOrError<TResult> Replace<TSource, TResult>(
             this ResultOrError<TSource> @this,
-            Func<TSource, TResult> selector)
-            /* T4: C# indent */
+            TResult value)
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
-            Require.NotNull(selector, nameof(selector));
-
-            return @this.Bind(_ => ResultOrError.Of(selector(_)));
+            return @this.Select(_ => value);
         }
 
         public static ResultOrError<TResult> ReplaceBy<TSource, TResult>(
             this ResultOrError<TSource> @this,
             ResultOrError<TResult> other)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
-
             return @this.Bind(_ => other);
-        }
-
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
-        public static ResultOrError<global::Narvalo.Fx.Unit> Skip<TSource>(this ResultOrError<TSource> @this)
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-
-            return @this.Replace(global::Narvalo.Fx.Unit.Single);
-            //return ResultOrError.Unit;
         }
 
         public static ResultOrError<TResult> Coalesce<TSource, TResult>(
@@ -202,39 +166,19 @@ namespace Narvalo.Fx
             Func<TSource, bool> predicate,
             ResultOrError<TResult> thenResult,
             ResultOrError<TResult> elseResult)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
-
-            return @this.Bind(_ => predicate(_) ? thenResult : elseResult);
+            return @this.Bind(val => predicate(val) ? thenResult : elseResult);
         }
 
-
-        public static ResultOrError<TResult> Using<TSource, TResult>(
-            this ResultOrError<TSource> @this,
-            Func<TSource, ResultOrError<TResult>> selector)
-            where TSource : IDisposable
-            /* T4: C# indent */
+        public static ResultOrError<global::Narvalo.Fx.Unit> Skip<TSource>(this ResultOrError<TSource> @this)
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
-            Require.NotNull(selector, nameof(selector));
-
-            return @this.Bind(_ => { using (_) { return selector(_); } });
+            return @this.ReplaceBy(Unit);
         }
-
-        public static ResultOrError<TResult> Using<TSource, TResult>(
-            this ResultOrError<TSource> @this,
-            Func<TSource, TResult> selector)
-            where TSource : IDisposable
-            /* T4: C# indent */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(selector, nameof(selector));
-
-            return @this.Select(_ => { using (_) { return selector(_); } });
-        }
-
 
         public static ResultOrError<IEnumerable<TSource>> Repeat<TSource>(
             this ResultOrError<TSource> @this,
@@ -242,35 +186,55 @@ namespace Narvalo.Fx
         {
             Require.NotNull(@this, nameof(@this));
             Require.Range(count >= 1, nameof(count));
-
-            return @this.Select(_ => Enumerable.Repeat(_, count));
+            return @this.Select(val => Enumerable.Repeat(val, count));
         }
 
+        public static ResultOrError<TResult> Using<TSource, TResult>(
+            this ResultOrError<TSource> @this,
+            Func<TSource, ResultOrError<TResult>> selector)
+            where TSource : IDisposable
+            /* T4: type constraint */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(selector, nameof(selector));
+            return @this.Bind(val => { using (val) { return selector(val); } });
+        }
+
+        public static ResultOrError<TResult> Using<TSource, TResult>(
+            this ResultOrError<TSource> @this,
+            Func<TSource, TResult> selector)
+            where TSource : IDisposable
+            /* T4: type constraint */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(selector, nameof(selector));
+            return @this.Select(val => { using (val) { return selector(val); } });
+        }
+
+        #region Zip()
 
         public static ResultOrError<Tuple<TSource, TOther>> Zip<TSource, TOther>(
             this ResultOrError<TSource> @this,
             ResultOrError<TOther> other)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
-
             return @this.Zip(other, Tuple.Create);
         }
-
 
         /// <see cref="Lift{T1, T2, T3}" />
         public static ResultOrError<TResult> Zip<TFirst, TSecond, TResult>(
             this ResultOrError<TFirst> @this,
             ResultOrError<TSecond> second,
-            Func<TFirst, TSecond, TResult> resultSelector)
-            /* T4: C# indent */
+            Func<TFirst, TSecond, TResult> zipper)
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(second, nameof(second));
-            Require.NotNull(resultSelector, nameof(resultSelector));
+            Require.NotNull(zipper, nameof(zipper));
 
             Func<TFirst, Func<TSecond, TResult>> selector
-                = arg1 => arg2 => resultSelector(arg1, arg2);
+                = arg1 => arg2 => zipper(arg1, arg2);
 
             return second.Gather(
                 @this.Select(selector));
@@ -281,16 +245,16 @@ namespace Narvalo.Fx
             this ResultOrError<T1> @this,
             ResultOrError<T2> second,
             ResultOrError<T3> third,
-            Func<T1, T2, T3, TResult> resultSelector)
-            /* T4: C# indent */
+            Func<T1, T2, T3, TResult> zipper)
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(second, nameof(second));
             Require.NotNull(third, nameof(third));
-            Require.NotNull(resultSelector, nameof(resultSelector));
+            Require.NotNull(zipper, nameof(zipper));
 
             Func<T1, Func<T2, Func<T3, TResult>>> selector
-                = arg1 => arg2 => arg3 => resultSelector(arg1, arg2, arg3);
+                = arg1 => arg2 => arg3 => zipper(arg1, arg2, arg3);
 
             return third.Gather(
                 second.Gather(
@@ -303,17 +267,17 @@ namespace Narvalo.Fx
              ResultOrError<T2> second,
              ResultOrError<T3> third,
              ResultOrError<T4> fourth,
-             Func<T1, T2, T3, T4, TResult> resultSelector)
-            /* T4: C# indent */
+             Func<T1, T2, T3, T4, TResult> zipper)
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(second, nameof(second));
             Require.NotNull(third, nameof(third));
             Require.NotNull(fourth, nameof(fourth));
-            Require.NotNull(resultSelector, nameof(resultSelector));
+            Require.NotNull(zipper, nameof(zipper));
 
             Func<T1, Func<T2, Func<T3, Func<T4, TResult>>>> selector
-                = arg1 => arg2 => arg3 => arg4 => resultSelector(arg1, arg2, arg3, arg4);
+                = arg1 => arg2 => arg3 => arg4 => zipper(arg1, arg2, arg3, arg4);
 
             return fourth.Gather(
                 third.Gather(
@@ -328,18 +292,18 @@ namespace Narvalo.Fx
             ResultOrError<T3> third,
             ResultOrError<T4> fourth,
             ResultOrError<T5> fifth,
-            Func<T1, T2, T3, T4, T5, TResult> resultSelector)
-            /* T4: C# indent */
+            Func<T1, T2, T3, T4, T5, TResult> zipper)
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(second, nameof(second));
             Require.NotNull(third, nameof(third));
             Require.NotNull(fourth, nameof(fourth));
             Require.NotNull(fifth, nameof(fifth));
-            Require.NotNull(resultSelector, nameof(resultSelector));
+            Require.NotNull(zipper, nameof(zipper));
 
             Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, TResult>>>>> selector
-                = arg1 => arg2 => arg3 => arg4 => arg5 => resultSelector(arg1, arg2, arg3, arg4, arg5);
+                = arg1 => arg2 => arg3 => arg4 => arg5 => zipper(arg1, arg2, arg3, arg4, arg5);
 
             return fifth.Gather(
                 fourth.Gather(
@@ -348,6 +312,9 @@ namespace Narvalo.Fx
                             @this.Select(selector)))));
         }
 
+        #endregion
+
+        #region LINQ dialect
 
         /// <remarks>
         /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" />.
@@ -356,7 +323,7 @@ namespace Narvalo.Fx
             this ResultOrError<TSource> @this,
             Func<TSource, ResultOrError<TMiddle>> valueSelector,
             Func<TSource, TMiddle, TResult> resultSelector)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(valueSelector, nameof(valueSelector));
@@ -367,12 +334,13 @@ namespace Narvalo.Fx
                     middle => resultSelector(arg, middle)));
         }
 
+
+        #endregion
     } // End of ResultOrError - T4: EmitMonadExtensions().
 
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Kleisli
     {
-
         public static ResultOrError<IEnumerable<TResult>> ForEach<TSource, TResult>(
             this Func<TSource, ResultOrError<TResult>> @this,
             IEnumerable<TSource> seq)
@@ -381,38 +349,34 @@ namespace Narvalo.Fx
         public static ResultOrError<TResult> Invoke<TSource, TResult>(
             this Func<TSource, ResultOrError<TResult>> @this,
             ResultOrError<TSource> value)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Require.NotNull(value, nameof(value));
-
             return value.Bind(@this);
         }
 
         public static Func<TSource, ResultOrError<TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, ResultOrError<TMiddle>> first,
             Func<TMiddle, ResultOrError<TResult>> second)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Require.NotNull(first, nameof(first));
-
-            return _ => first(_).Bind(second);
+            return arg => first(arg).Bind(second);
         }
 
         public static Func<TSource, ResultOrError<TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, ResultOrError<TResult>> first,
             Func<TSource, ResultOrError<TMiddle>> second)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Require.NotNull(second, nameof(second));
-
-            return _ => second(_).Bind(first);
+            return arg => second(arg).Bind(first);
         }
     } // End of Kleisli - T4: EmitKleisliExtensions().
 
     // Provides extension methods for IEnumerable<ResultOrError<T>>.
     public static partial class ResultOrError
     {
-
         public static ResultOrError<IEnumerable<TSource>> Collect<TSource>(
             this IEnumerable<ResultOrError<TSource>> @this)
             => @this.CollectImpl();
@@ -433,38 +397,17 @@ namespace Narvalo.Fx.Internal
     // You will certainly want to override them to improve performance.
     internal static partial class EnumerableExtensions
     {
-
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static ResultOrError<IEnumerable<TSource>> CollectImpl<TSource>(
             this IEnumerable<ResultOrError<TSource>> @this)
         {
             Demand.NotNull(@this);
-            Warrant.NotNull<ResultOrError<IEnumerable<TSource>>>();
 
             var seed = ResultOrError.Of(Enumerable.Empty<TSource>());
-            //var seed = ResultOrError.Of(Enumerable.Empty<TSource>());
-            // Inlined LINQ Append method:
-            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (m, item) => m.Append(item);
+            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (seq, item) => seq.Append(item);
 
-            // NB: Maybe.Lift(append) is the same as:
-            // Func<ResultOrError<IEnumerable<TSource>>, ResultOrError<TSource>, ResultOrError<IEnumerable<TSource>>> liftedAppend
-            //     = (m, item) => m.Bind(list => Append(list, item));
-            // where Append is defined below.
-            var retval = @this.Aggregate(seed, ResultOrError.Lift<IEnumerable<TSource>, TSource, IEnumerable<TSource>>(append));
-            System.Diagnostics.Contracts.Contract.Assume(retval != null);
-
-            return retval;
+            return @this.Aggregate(seed, ResultOrError.Lift<IEnumerable<TSource>, TSource, IEnumerable<TSource>>(append));
         }
-
-        // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
-        //private static ResultOrError<IEnumerable<TSource>> Append<TSource>(
-        //    IEnumerable<TSource> list,
-        //    ResultOrError<TSource> m)
-        //{
-        //    Demand.NotNull(m);
-
-        //    return m.Bind(item => ResultOrError.Of(list.Concat(Enumerable.Repeat(item, 1))));
-        //}
 
     } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
 }
@@ -485,17 +428,14 @@ namespace Narvalo.Fx.Linq
     // - Aggregate -> Reduce or Fold
     public static partial class Qperators
     {
-
         public static ResultOrError<IEnumerable<TResult>> SelectWith<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, ResultOrError<TResult>> selector)
             => @this.SelectWithImpl(selector);
 
-
         public static ResultOrError<IEnumerable<TSource>> WhereBy<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, ResultOrError<bool>> predicate)
-            /* T4: C# indent */
             => @this.WhereByImpl(predicate);
 
         public static ResultOrError<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
@@ -510,31 +450,30 @@ namespace Narvalo.Fx.Linq
             Func<TFirst, TSecond, ResultOrError<TResult>> resultSelector)
             => @this.ZipWithImpl(second, resultSelector);
 
-
         public static ResultOrError<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, ResultOrError<TAccumulate>> accumulator)
-            /* T4: C# indent */
+            /* T4: type constraint */
             => @this.FoldImpl(seed, accumulator);
 
         public static ResultOrError<TAccumulate> FoldBack<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, ResultOrError<TAccumulate>> accumulator)
-            /* T4: C# indent */
+            /* T4: type constraint */
             => @this.FoldBackImpl(seed, accumulator);
 
         public static ResultOrError<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, ResultOrError<TSource>> accumulator)
-            /* T4: C# indent */
+            /* T4: type constraint */
             => @this.ReduceImpl(accumulator);
 
         public static ResultOrError<TSource> ReduceBack<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, ResultOrError<TSource>> accumulator)
-            /* T4: C# indent */
+            /* T4: type constraint */
             => @this.ReduceBackImpl(accumulator);
 
         // Haskell uses a different signature.
@@ -543,7 +482,7 @@ namespace Narvalo.Fx.Linq
             TAccumulate seed,
             Func<TAccumulate, TSource, ResultOrError<TAccumulate>> accumulator,
             Func<ResultOrError<TAccumulate>, bool> predicate)
-            /* T4: C# indent */
+            /* T4: type constraint */
             => @this.FoldImpl(seed, accumulator, predicate);
 
         // Haskell uses a different signature.
@@ -551,7 +490,7 @@ namespace Narvalo.Fx.Linq
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, ResultOrError<TSource>> accumulator,
             Func<ResultOrError<TSource>, bool> predicate)
-            /* T4: C# indent */
+            /* T4: type constraint */
             => @this.ReduceImpl(accumulator, predicate);
     } // End of Iterable - T4: EmitEnumerableExtensions().
 }
@@ -577,28 +516,25 @@ namespace Narvalo.Fx.Internal
             Demand.NotNull(@this);
             Demand.NotNull(selector);
 
-            return @this.Select(selector).EmptyIfNull().Collect();
+            return @this.Select(selector).Collect();
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static ResultOrError<IEnumerable<TSource>> WhereByImpl<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, ResultOrError<bool>> predicate)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
 
-            Func<bool, IEnumerable<TSource>, TSource, IEnumerable<TSource>> selector
-                = (flg, list, item) => { if (flg) { return list.Prepend(item); } else { return list; } };
+            Func<TSource, Func<bool, IEnumerable<TSource>, IEnumerable<TSource>>> func
+                = item => (flg, seq) => flg ? seq.Append(item) : seq;
 
             Func<ResultOrError<IEnumerable<TSource>>, TSource, ResultOrError<IEnumerable<TSource>>> accumulator
-                = (mlist, item) => predicate.Invoke(item).Zip(mlist, (flg, list) => selector.Invoke(flg, list, item));
+                = (mseq, item) => predicate(item).Zip(mseq, func(item));
 
-            var seed = ResultOrError.Of(Enumerable.Empty<TSource>());
-
-            // REVIEW: Aggregate?
-            return @this.AggregateBack(seed, accumulator);
+            return @this.Aggregate(ResultOrError.Of(Enumerable.Empty<TSource>()), accumulator);
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
@@ -613,10 +549,10 @@ namespace Narvalo.Fx.Internal
             return @this.SelectWith(selector).Select(
                 tuples =>
                 {
-                    IEnumerable<TFirst> list1 = tuples.Select(_ => _.Item1);
-                    IEnumerable<TSecond> list2 = tuples.Select(_ => _.Item2);
+                    var seq1 = tuples.Select(_ => _.Item1);
+                    var seq2 = tuples.Select(_ => _.Item2);
 
-                    return new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(list1, list2);
+                    return new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(seq1, seq2);
                 });
         }
 
@@ -626,17 +562,11 @@ namespace Narvalo.Fx.Internal
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, ResultOrError<TResult>> resultSelector)
         {
-            Require.NotNull(resultSelector, nameof(resultSelector));
-
+            Demand.NotNull(resultSelector);
             Demand.NotNull(@this);
             Demand.NotNull(second);
 
-            Func<TFirst, TSecond, ResultOrError<TResult>> selector
-                = (v1, v2) => resultSelector.Invoke(v1, v2);
-
-            IEnumerable<ResultOrError<TResult>> seq = @this.Zip(second, selector);
-
-            return seq.EmptyIfNull().Collect();
+            return @this.Zip(second, resultSelector).Collect();
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
@@ -644,24 +574,15 @@ namespace Narvalo.Fx.Internal
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, ResultOrError<TAccumulate>> accumulator)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
 
-            ResultOrError<TAccumulate> retval = ResultOrError.Of(seed);
+            Func<ResultOrError<TAccumulate>, TSource, ResultOrError<TAccumulate>> func
+                = (arg1, arg2) => arg1.Bind(arg => accumulator(arg, arg2));
 
-            foreach (TSource item in @this)
-            {
-                if (retval == null)
-                {
-                    return null;
-                }
-
-                retval = retval.Bind(_ => accumulator.Invoke(_, item));
-            }
-
-            return retval;
+            return @this.Aggregate(ResultOrError.Of(seed), func);
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
@@ -669,19 +590,19 @@ namespace Narvalo.Fx.Internal
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, ResultOrError<TAccumulate>> accumulator)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Demand.NotNull(@this);
             Demand.NotNull(accumulator);
 
-            return @this.Reverse().EmptyIfNull().Fold(seed, accumulator);
+            return @this.Reverse().Fold(seed, accumulator);
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static ResultOrError<TSource> ReduceImpl<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, ResultOrError<TSource>> accumulator)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
@@ -713,12 +634,12 @@ namespace Narvalo.Fx.Internal
         internal static ResultOrError<TSource> ReduceBackImpl<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, ResultOrError<TSource>> accumulator)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Demand.NotNull(@this);
             Demand.NotNull(accumulator);
 
-            return @this.Reverse().EmptyIfNull().Reduce(accumulator);
+            return @this.Reverse().Reduce(accumulator);
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
@@ -727,7 +648,7 @@ namespace Narvalo.Fx.Internal
             TAccumulate seed,
             Func<TAccumulate, TSource, ResultOrError<TAccumulate>> accumulator,
             Func<ResultOrError<TAccumulate>, bool> predicate)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
@@ -756,7 +677,7 @@ namespace Narvalo.Fx.Internal
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, ResultOrError<TSource>> accumulator,
             Func<ResultOrError<TSource>, bool> predicate)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));

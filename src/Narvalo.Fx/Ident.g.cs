@@ -14,7 +14,6 @@ namespace Narvalo.Fx
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
     using Narvalo.Fx.Internal;
@@ -23,18 +22,15 @@ namespace Narvalo.Fx
     // Provides a set of static methods for Ident<T>.
     public static partial class Ident
     {
-
         /// <summary>
         /// The unique object of type <c>Ident&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly Ident<global::Narvalo.Fx.Unit> s_Unit
-            = Of(global::Narvalo.Fx.Unit.Single);
+        private static readonly Ident<global::Narvalo.Fx.Unit> s_Unit = Of(global::Narvalo.Fx.Unit.Single);
 
         /// <summary>
         /// Gets the unique object of type <c>Ident&lt;Unit&gt;</c>.
         /// </summary>
         public static Ident<global::Narvalo.Fx.Unit> Unit => s_Unit;
-
 
         /// <summary>
         /// Obtains an instance of the <see cref="Ident{T}"/> class for the specified value.
@@ -43,116 +39,99 @@ namespace Narvalo.Fx
         /// <param name="value">A value to be wrapped into an object of type <see cref="Ident{T}"/>.</param>
         /// <returns>An instance of the <see cref="Ident{T}"/> class for the specified value.</returns>
         public static Ident<T> Of<T>(T value)
-            /* T4: C# indent */
+            /* T4: type constraint */
             => Ident<T>.η(value);
 
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
         /// </summary>
         public static Ident<T> Flatten<T>(Ident<Ident<T>> square)
-            /* T4: C# indent */
+            /* T4: type constraint */
             => Ident<T>.μ(square);
-
 
         /// <summary>
         /// Promotes a function to use and return <see cref="Ident{T}" /> values.
         /// </summary>
         public static Func<Ident<T>, Ident<TResult>> Lift<T, TResult>(
             Func<T, TResult> func)
-            /* T4: C# indent */
-        {
-            return arg =>
+            /* T4: type constraint */
+            => arg =>
             {
-                /* T4: C# indent */
+                /* T4: NotNull(arg) */
                 return arg.Select(func);
             };
-        }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="Ident{T}" /> values, scanning the
-        /// monadic arguments from left to right.
+        /// Promotes a function to use and return <see cref="Ident{T}" /> values.
         /// </summary>
         public static Func<Ident<T1>, Ident<T2>, Ident<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
-            /* T4: C# indent */
-        {
-            return (arg1, arg2) =>
+            /* T4: type constraint */
+            => (arg1, arg2) =>
             {
-                /* T4: C# indent */
+                /* T4: NotNull(arg1) */
                 return arg1.Zip(arg2, func);
             };
-        }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="Ident{T}" /> values, scanning the
-        /// monadic arguments from left to right.
+        /// Promotes a function to use and return <see cref="Ident{T}" /> values.
         /// </summary>
         public static Func<Ident<T1>, Ident<T2>, Ident<T3>, Ident<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
-            /* T4: C# indent */
-        {
-            return (arg1, arg2, arg3) =>
+            /* T4: type constraint */
+            => (arg1, arg2, arg3) =>
             {
-                /* T4: C# indent */
+                /* T4: NotNull(arg1) */
                 return arg1.Zip(arg2, arg3, func);
             };
-        }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="Ident{T}" /> values, scanning the
-        /// monadic arguments from left to right.
+        /// Promotes a function to use and return <see cref="Ident{T}" /> values.
         /// </summary>
         public static Func<Ident<T1>, Ident<T2>, Ident<T3>, Ident<T4>, Ident<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> func)
-            /* T4: C# indent */
-        {
-            return (arg1, arg2, arg3, arg4) =>
+            /* T4: type constraint */
+            => (arg1, arg2, arg3, arg4) =>
             {
-                /* T4: C# indent */
+                /* T4: NotNull(arg1) */
                 return arg1.Zip(arg2, arg3, arg4, func);
             };
-        }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="Ident{T}" /> values, scanning the
-        /// monadic arguments from left to right.
+        /// Promotes a function to use and return <see cref="Ident{T}" /> values.
         /// </summary>
         public static Func<Ident<T1>, Ident<T2>, Ident<T3>, Ident<T4>, Ident<T5>, Ident<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> func)
-            /* T4: C# indent */
-        {
-            return (arg1, arg2, arg3, arg4, arg5) =>
+            /* T4: type constraint */
+            => (arg1, arg2, arg3, arg4, arg5) =>
             {
-                /* T4: C# indent */
+                /* T4: NotNull(arg1) */
                 return arg1.Zip(arg2, arg3, arg4, arg5, func);
             };
-        }
     } // End of Ident - T4: EmitMonadCore().
 
     // Provides extension methods for Ident<T>.
     public static partial class Ident
     {
-        public static Ident<TResult> Replace<TSource, TResult>(
+        public static Ident<TResult> Select<TSource, TResult>(
             this Ident<TSource> @this,
-            TResult value)
-            /* T4: C# indent */
+            Func<TSource, TResult> selector)
+            /* T4: type constraint */
         {
-            /* T4: C# indent */
-
-            return @this.Select(_ => value);
+            /* T4: NotNull(@this) */
+            Require.NotNull(selector, nameof(selector));
+            return @this.Bind(val => Ident.Of(selector(val)));
         }
-
 
         public static Ident<TResult> Gather<TSource, TResult>(
             this Ident<TSource> @this,
             Ident<Func<TSource, TResult>> applicative)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
-            /* T4: C# indent */
-            /* T4: C# indent */
-
+            /* T4: NotNull(@this) */
+            /* T4: NotNull(applicative) */
             return applicative.Bind(func => @this.Select(func));
         }
 
@@ -160,41 +139,26 @@ namespace Narvalo.Fx
             this Ident<Func<TSource, TResult>> @this,
             Ident<TSource> value)
         {
-            /* T4: C# indent */
-
+            /* T4: NotNull(value) */
             return value.Gather(@this);
         }
 
-
-        public static Ident<TResult> Select<TSource, TResult>(
+        public static Ident<TResult> Replace<TSource, TResult>(
             this Ident<TSource> @this,
-            Func<TSource, TResult> selector)
-            /* T4: C# indent */
+            TResult value)
+            /* T4: type constraint */
         {
-            /* T4: C# indent */
-            Require.NotNull(selector, nameof(selector));
-
-            return @this.Bind(_ => Ident.Of(selector(_)));
+            /* T4: NotNull(@this) */
+            return @this.Select(_ => value);
         }
 
         public static Ident<TResult> ReplaceBy<TSource, TResult>(
             this Ident<TSource> @this,
             Ident<TResult> other)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
-            /* T4: C# indent */
-
+            /* T4: NotNull(@this) */
             return @this.Bind(_ => other);
-        }
-
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
-        public static Ident<global::Narvalo.Fx.Unit> Skip<TSource>(this Ident<TSource> @this)
-            /* T4: C# indent */
-        {
-            /* T4: C# indent */
-
-            return @this.Replace(global::Narvalo.Fx.Unit.Single);
-            //return Ident.Unit;
         }
 
         public static Ident<TResult> Coalesce<TSource, TResult>(
@@ -202,75 +166,75 @@ namespace Narvalo.Fx
             Func<TSource, bool> predicate,
             Ident<TResult> thenResult,
             Ident<TResult> elseResult)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
-            /* T4: C# indent */
+            /* T4: NotNull(@this) */
             Require.NotNull(predicate, nameof(predicate));
-
-            return @this.Bind(_ => predicate(_) ? thenResult : elseResult);
+            return @this.Bind(val => predicate(val) ? thenResult : elseResult);
         }
 
+        public static Ident<global::Narvalo.Fx.Unit> Skip<TSource>(this Ident<TSource> @this)
+            /* T4: type constraint */
+        {
+            /* T4: NotNull(@this) */
+            return @this.ReplaceBy(Unit);
+        }
+
+        public static Ident<IEnumerable<TSource>> Repeat<TSource>(
+            this Ident<TSource> @this,
+            int count)
+        {
+            /* T4: NotNull(@this) */
+            Require.Range(count >= 1, nameof(count));
+            return @this.Select(val => Enumerable.Repeat(val, count));
+        }
 
         public static Ident<TResult> Using<TSource, TResult>(
             this Ident<TSource> @this,
             Func<TSource, Ident<TResult>> selector)
             where TSource : IDisposable
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
-            /* T4: C# indent */
+            /* T4: NotNull(@this) */
             Require.NotNull(selector, nameof(selector));
-
-            return @this.Bind(_ => { using (_) { return selector(_); } });
+            return @this.Bind(val => { using (val) { return selector(val); } });
         }
 
         public static Ident<TResult> Using<TSource, TResult>(
             this Ident<TSource> @this,
             Func<TSource, TResult> selector)
             where TSource : IDisposable
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
-            /* T4: C# indent */
+            /* T4: NotNull(@this) */
             Require.NotNull(selector, nameof(selector));
-
-            return @this.Select(_ => { using (_) { return selector(_); } });
+            return @this.Select(val => { using (val) { return selector(val); } });
         }
 
-
-        public static Ident<IEnumerable<TSource>> Repeat<TSource>(
-            this Ident<TSource> @this,
-            int count)
-        {
-            /* T4: C# indent */
-            Require.Range(count >= 1, nameof(count));
-
-            return @this.Select(_ => Enumerable.Repeat(_, count));
-        }
-
+        #region Zip()
 
         public static Ident<Tuple<TSource, TOther>> Zip<TSource, TOther>(
             this Ident<TSource> @this,
             Ident<TOther> other)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
-            /* T4: C# indent */
-
+            /* T4: NotNull(@this) */
             return @this.Zip(other, Tuple.Create);
         }
-
 
         /// <see cref="Lift{T1, T2, T3}" />
         public static Ident<TResult> Zip<TFirst, TSecond, TResult>(
             this Ident<TFirst> @this,
             Ident<TSecond> second,
-            Func<TFirst, TSecond, TResult> resultSelector)
-            /* T4: C# indent */
+            Func<TFirst, TSecond, TResult> zipper)
+            /* T4: type constraint */
         {
-            /* T4: C# indent */
-            /* T4: C# indent */
-            Require.NotNull(resultSelector, nameof(resultSelector));
+            /* T4: NotNull(@this) */
+            /* T4: NotNull(second) */
+            Require.NotNull(zipper, nameof(zipper));
 
             Func<TFirst, Func<TSecond, TResult>> selector
-                = arg1 => arg2 => resultSelector(arg1, arg2);
+                = arg1 => arg2 => zipper(arg1, arg2);
 
             return second.Gather(
                 @this.Select(selector));
@@ -281,16 +245,16 @@ namespace Narvalo.Fx
             this Ident<T1> @this,
             Ident<T2> second,
             Ident<T3> third,
-            Func<T1, T2, T3, TResult> resultSelector)
-            /* T4: C# indent */
+            Func<T1, T2, T3, TResult> zipper)
+            /* T4: type constraint */
         {
-            /* T4: C# indent */
-            /* T4: C# indent */
-            /* T4: C# indent */
-            Require.NotNull(resultSelector, nameof(resultSelector));
+            /* T4: NotNull(@this) */
+            /* T4: NotNull(second) */
+            /* T4: NotNull(third) */
+            Require.NotNull(zipper, nameof(zipper));
 
             Func<T1, Func<T2, Func<T3, TResult>>> selector
-                = arg1 => arg2 => arg3 => resultSelector(arg1, arg2, arg3);
+                = arg1 => arg2 => arg3 => zipper(arg1, arg2, arg3);
 
             return third.Gather(
                 second.Gather(
@@ -303,17 +267,17 @@ namespace Narvalo.Fx
              Ident<T2> second,
              Ident<T3> third,
              Ident<T4> fourth,
-             Func<T1, T2, T3, T4, TResult> resultSelector)
-            /* T4: C# indent */
+             Func<T1, T2, T3, T4, TResult> zipper)
+            /* T4: type constraint */
         {
-            /* T4: C# indent */
-            /* T4: C# indent */
-            /* T4: C# indent */
-            /* T4: C# indent */
-            Require.NotNull(resultSelector, nameof(resultSelector));
+            /* T4: NotNull(@this) */
+            /* T4: NotNull(second) */
+            /* T4: NotNull(third) */
+            /* T4: NotNull(fourth) */
+            Require.NotNull(zipper, nameof(zipper));
 
             Func<T1, Func<T2, Func<T3, Func<T4, TResult>>>> selector
-                = arg1 => arg2 => arg3 => arg4 => resultSelector(arg1, arg2, arg3, arg4);
+                = arg1 => arg2 => arg3 => arg4 => zipper(arg1, arg2, arg3, arg4);
 
             return fourth.Gather(
                 third.Gather(
@@ -328,18 +292,18 @@ namespace Narvalo.Fx
             Ident<T3> third,
             Ident<T4> fourth,
             Ident<T5> fifth,
-            Func<T1, T2, T3, T4, T5, TResult> resultSelector)
-            /* T4: C# indent */
+            Func<T1, T2, T3, T4, T5, TResult> zipper)
+            /* T4: type constraint */
         {
-            /* T4: C# indent */
-            /* T4: C# indent */
-            /* T4: C# indent */
-            /* T4: C# indent */
-            /* T4: C# indent */
-            Require.NotNull(resultSelector, nameof(resultSelector));
+            /* T4: NotNull(@this) */
+            /* T4: NotNull(second) */
+            /* T4: NotNull(third) */
+            /* T4: NotNull(fourth) */
+            /* T4: NotNull(fifth) */
+            Require.NotNull(zipper, nameof(zipper));
 
             Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, TResult>>>>> selector
-                = arg1 => arg2 => arg3 => arg4 => arg5 => resultSelector(arg1, arg2, arg3, arg4, arg5);
+                = arg1 => arg2 => arg3 => arg4 => arg5 => zipper(arg1, arg2, arg3, arg4, arg5);
 
             return fifth.Gather(
                 fourth.Gather(
@@ -348,6 +312,9 @@ namespace Narvalo.Fx
                             @this.Select(selector)))));
         }
 
+        #endregion
+
+        #region LINQ dialect
 
         /// <remarks>
         /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" />.
@@ -356,9 +323,9 @@ namespace Narvalo.Fx
             this Ident<TSource> @this,
             Func<TSource, Ident<TMiddle>> valueSelector,
             Func<TSource, TMiddle, TResult> resultSelector)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
-            /* T4: C# indent */
+            /* T4: NotNull(@this) */
             Require.NotNull(valueSelector, nameof(valueSelector));
             Require.NotNull(resultSelector, nameof(resultSelector));
 
@@ -367,52 +334,49 @@ namespace Narvalo.Fx
                     middle => resultSelector(arg, middle)));
         }
 
+
+        #endregion
     } // End of Ident - T4: EmitMonadExtensions().
 
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Kleisli
     {
-
         public static Ident<IEnumerable<TResult>> ForEach<TSource, TResult>(
             this Func<TSource, Ident<TResult>> @this,
             IEnumerable<TSource> seq)
-            => seq.Select(@this).EmptyIfNull().Collect();
+            => seq.Select(@this).Collect();
 
         public static Ident<TResult> Invoke<TSource, TResult>(
             this Func<TSource, Ident<TResult>> @this,
             Ident<TSource> value)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
-            /* T4: C# indent */
-
+            /* T4: NotNull(value) */
             return value.Bind(@this);
         }
 
         public static Func<TSource, Ident<TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, Ident<TMiddle>> first,
             Func<TMiddle, Ident<TResult>> second)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Require.NotNull(first, nameof(first));
-
-            return _ => first(_).Bind(second);
+            return arg => first(arg).Bind(second);
         }
 
         public static Func<TSource, Ident<TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, Ident<TResult>> first,
             Func<TSource, Ident<TMiddle>> second)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
             Require.NotNull(second, nameof(second));
-
-            return _ => second(_).Bind(first);
+            return arg => second(arg).Bind(first);
         }
     } // End of Kleisli - T4: EmitKleisliExtensions().
 
     // Provides extension methods for IEnumerable<Ident<T>>.
     public static partial class Ident
     {
-
         public static Ident<IEnumerable<TSource>> Collect<TSource>(
             this IEnumerable<Ident<TSource>> @this)
             => @this.CollectImpl();
@@ -433,7 +397,6 @@ namespace Narvalo.Fx.Internal
     // You will certainly want to override them to improve performance.
     internal static partial class EnumerableExtensions
     {
-
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Ident<IEnumerable<TSource>> CollectImpl<TSource>(
             this IEnumerable<Ident<TSource>> @this)
@@ -441,27 +404,10 @@ namespace Narvalo.Fx.Internal
             Demand.NotNull(@this);
 
             var seed = Ident.Of(Enumerable.Empty<TSource>());
-            //var seed = Ident.Of(Enumerable.Empty<TSource>());
-            // Inlined LINQ Append method:
-            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (m, item) => m.Append(item);
+            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (seq, item) => seq.Append(item);
 
-            // NB: Maybe.Lift(append) is the same as:
-            // Func<Ident<IEnumerable<TSource>>, Ident<TSource>, Ident<IEnumerable<TSource>>> liftedAppend
-            //     = (m, item) => m.Bind(list => Append(list, item));
-            // where Append is defined below.
-            var retval = @this.Aggregate(seed, Ident.Lift<IEnumerable<TSource>, TSource, IEnumerable<TSource>>(append));
-
-            return retval;
+            return @this.Aggregate(seed, Ident.Lift<IEnumerable<TSource>, TSource, IEnumerable<TSource>>(append));
         }
-
-        // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
-        //private static Ident<IEnumerable<TSource>> Append<TSource>(
-        //    IEnumerable<TSource> list,
-        //    Ident<TSource> m)
-        //{
-
-        //    return m.Bind(item => Ident.Of(list.Concat(Enumerable.Repeat(item, 1))));
-        //}
 
     } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
 }
@@ -476,7 +422,7 @@ namespace Narvalo.Fx
         /// Named <c>extract</c> in Haskell parlance.
         /// </remarks>
         public static T Extract<T>(Ident<T> value)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
 
             return Ident<T>.ε(value);
@@ -486,7 +432,7 @@ namespace Narvalo.Fx
         /// Named <c>duplicate</c> in Haskell parlance.
         /// </remarks>
         public static Ident<Ident<T>> Duplicate<T>(Ident<T> value)
-            /* T4: C# indent */
+            /* T4: type constraint */
         {
 
             return Ident<T>.δ(value);

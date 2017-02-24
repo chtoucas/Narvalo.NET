@@ -41,9 +41,6 @@ namespace <#= Namespace #>
 {
     using System;
     using System.Collections.Generic;
-<#+ if (!SuppressMessage) { #>
-    using System.Diagnostics.CodeAnalysis;
-<#+ } #>
     using System.Linq;
 
     using <#= Namespace #>.Internal;

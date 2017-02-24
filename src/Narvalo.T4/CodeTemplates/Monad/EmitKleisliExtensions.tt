@@ -9,14 +9,13 @@ public partial class MonadTemplate
     public static partial class Kleisli
     {
 <#+ if (!HasTypeConstraints) { #>
-
         public static <#= Name #><IEnumerable<TResult><#= SuffixT #>> ForEach<TSource, TResult<#= SuffixT #>>(
             this Func<TSource, <#= Name #><TResult<#= SuffixT #>>> @this,
             IEnumerable<TSource> seq)
 <#+ if (haslinq) { #>
             => seq.SelectWith(@this);
 <#+ } else { #>
-            => seq.Select(@this).EmptyIfNull().Collect();
+            => seq.Select(@this).Collect();
 <#+ } #>
 
 <#+ } // T4: End of !HasTypeConstraints. #>
@@ -27,7 +26,6 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
             <#+ WriteNotNull("value"); #>
-
             return value.Bind(@this);
         }
 
@@ -37,8 +35,7 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource", "TMiddle", "TResult"); #>
         {
             Require.NotNull(first, nameof(first));
-
-            return _ => first(_).Bind(second);
+            return arg => first(arg).Bind(second);
         }
 
         public static Func<TSource, <#= Name #><TResult<#= SuffixT #>>> ComposeBack<TSource, TMiddle, TResult<#= SuffixT #>>(
@@ -47,8 +44,7 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource", "TMiddle", "TResult"); #>
         {
             Require.NotNull(second, nameof(second));
-
-            return _ => second(_).Bind(first);
+            return arg => second(arg).Bind(first);
         }
     } // End of Kleisli - T4: EmitKleisliExtensions().
 <#+

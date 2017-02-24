@@ -14,20 +14,14 @@ public partial class MonadTemplate
     public static partial class Qperators
     {
 <#+ if (!HasTypeConstraints) { #>
-
         public static <#= Name #><IEnumerable<TResult>> SelectWith<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><TResult>> selector)
             => @this.SelectWithImpl(selector);
 
-<#+ } // T4: End of !HasTypeConstraints. #>
-
-<#+ if (!HasTypeConstraints) { #>
-
         public static <#= Name #><IEnumerable<TSource>> WhereBy<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><bool>> predicate)
-            <#+ WriteTypeConstraints("TSource"); #>
             => @this.WhereByImpl(predicate);
 
         public static <#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
@@ -43,7 +37,6 @@ public partial class MonadTemplate
             => @this.ZipWithImpl(second, resultSelector);
 
 <#+ } // T4: End of !HasTypeConstraints. #>
-
         public static <#= Name #><TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,

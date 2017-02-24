@@ -10,7 +10,6 @@ public partial class MonadTemplate
     internal static partial class EnumerableExtensions
     {
 <#+ if (!HasTypeConstraints) { #>
-
 <#+ if (!SuppressMessage) { #>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
 <#+ } #>
@@ -21,7 +20,7 @@ public partial class MonadTemplate
             Demand.NotNull(@this);
             Demand.NotNull(selector);
 
-            return @this.Select(selector).EmptyIfNull().Collect();
+            return @this.Select(selector).Collect();
         }
 
 <#+ if (!SuppressMessage) { #>
@@ -35,16 +34,13 @@ public partial class MonadTemplate
             <#+ WriteNotNull(true); #>
             Require.NotNull(predicate, nameof(predicate));
 
-            Func<bool, IEnumerable<TSource>, TSource, IEnumerable<TSource>> selector
-                = (flg, list, item) => { if (flg) { return list.Prepend(item); } else { return list; } };
+            Func<TSource, Func<bool, IEnumerable<TSource>, IEnumerable<TSource>>> func
+                = item => (flg, seq) => flg ? seq.Append(item) : seq;
 
             Func<<#= Name #><IEnumerable<TSource>>, TSource, <#= Name #><IEnumerable<TSource>>> accumulator
-                = (mlist, item) => predicate.Invoke(item).Zip(mlist, (flg, list) => selector.Invoke(flg, list, item));
+                = (mseq, item) => predicate(item).Zip(mseq, func(item));
 
-            var seed = <#= Name #>.<#= ReturnName #>(Enumerable.Empty<TSource>());
-
-            // REVIEW: Aggregate?
-            return @this.AggregateBack(seed, accumulator);
+            return @this.Aggregate(<#= Name #>.<#= ReturnName #>(Enumerable.Empty<TSource>()), accumulator);
         }
 
 <#+ if (!SuppressMessage) { #>
@@ -61,10 +57,10 @@ public partial class MonadTemplate
             return @this.SelectWith(selector).<#= MapName #>(
                 tuples =>
                 {
-                    IEnumerable<TFirst> list1 = tuples.Select(_ => _.Item1);
-                    IEnumerable<TSecond> list2 = tuples.Select(_ => _.Item2);
+                    var seq1 = tuples.Select(_ => _.Item1);
+                    var seq2 = tuples.Select(_ => _.Item2);
 
-                    return new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(list1, list2);
+                    return new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(seq1, seq2);
                 });
         }
 
@@ -76,17 +72,11 @@ public partial class MonadTemplate
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, <#= Name #><TResult>> resultSelector)
         {
-            Require.NotNull(resultSelector, nameof(resultSelector));
-
+            Demand.NotNull(resultSelector);
             Demand.NotNull(@this);
             Demand.NotNull(second);
 
-            Func<TFirst, TSecond, <#= Name #><TResult>> selector
-                = (v1, v2) => resultSelector.Invoke(v1, v2);
-
-            IEnumerable<<#= Name #><TResult>> seq = @this.Zip(second, selector);
-
-            return seq.EmptyIfNull().Collect();
+            return @this.Zip(second, resultSelector).Collect();
         }
 
 <#+ } // T4: End of !HasTypeConstraints. #>
@@ -103,21 +93,10 @@ public partial class MonadTemplate
             <#+ WriteNotNull(true); #>
             Require.NotNull(accumulator, nameof(accumulator));
 
-            <#= Name #><TAccumulate> retval = <#= Name #>.<#= ReturnName #>(seed);
+            Func<<#= Name #><TAccumulate>, TSource, <#= Name #><TAccumulate>> func
+                = (arg1, arg2) => arg1.Bind(arg => accumulator(arg, arg2));
 
-            foreach (TSource item in @this)
-            {
-<#+ if (IsNullable && !HasZero) { #>
-                if (retval == null)
-                {
-                    return null;
-                }
-
-<#+ } #>
-                retval = retval.Bind(_ => accumulator.Invoke(_, item));
-            }
-
-            return retval;
+            return @this.Aggregate(<#+ WriteFactory("TAccumulate"); #>(seed), func);
         }
 
 <#+ if (!SuppressMessage) { #>
@@ -132,7 +111,7 @@ public partial class MonadTemplate
             Demand.NotNull(@this);
             Demand.NotNull(accumulator);
 
-            return @this.Reverse().EmptyIfNull().Fold(seed, accumulator);
+            return @this.Reverse().Fold(seed, accumulator);
         }
 
 <#+ if (!SuppressMessage) { #>
@@ -182,7 +161,7 @@ public partial class MonadTemplate
             Demand.NotNull(@this);
             Demand.NotNull(accumulator);
 
-            return @this.Reverse().EmptyIfNull().Reduce(accumulator);
+            return @this.Reverse().Reduce(accumulator);
         }
 
 <#+ if (!SuppressMessage) { #>

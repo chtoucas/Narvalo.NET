@@ -55,6 +55,31 @@ public partial class MonadTemplate
             <#+ WriteNotNull(); #>
             return @this.Bind(_ => other);
         }
+<#+ if (HasZero) { #>
+
+        public static <#= Name #><TResult> If<TSource, TResult>(
+            this <#= Name #><TSource> @this,
+            Func<TSource, bool> predicate,
+            <#= Name #><TResult> thenResult)
+            <#+ WriteTypeConstraints("TSource", "TResult"); #>
+        {
+            <#+ WriteNotNull(); #>
+            Require.NotNull(predicate, nameof(predicate));
+            return @this.Bind(val => predicate(val) ? thenResult : <#= Name #><TResult>.<#= ZeroName #>);
+        }
+<#+ } // T4: End of HasZero. #>
+
+        public static <#= Name #><TResult<#= SuffixT #>> Coalesce<TSource, TResult<#= SuffixT #>>(
+            this <#= Name #><TSource<#= SuffixT #>> @this,
+            Func<TSource, bool> predicate,
+            <#= Name #><TResult<#= SuffixT #>> thenResult,
+            <#= Name #><TResult<#= SuffixT #>> elseResult)
+            <#+ WriteTypeConstraints("TSource", "TResult"); #>
+        {
+            <#+ WriteNotNull(); #>
+            Require.NotNull(predicate, nameof(predicate));
+            return @this.Bind(val => predicate(val) ? thenResult : elseResult);
+        }
 
         public static <#= Name #><global::Narvalo.Fx.Unit<#= SuffixT #>> Skip<TSource<#= SuffixT #>>(this <#= Name #><TSource<#= SuffixT #>> @this)
             <#+ WriteTypeConstraints("TSource"); #>
@@ -90,32 +115,6 @@ public partial class MonadTemplate
             return @this.<#= MapName #>(val => Enumerable.Repeat(val, count));
         }
 <#+ } // T4: End of !HasTypeConstraints. #>
-
-        public static <#= Name #><TResult<#= SuffixT #>> Coalesce<TSource, TResult<#= SuffixT #>>(
-            this <#= Name #><TSource<#= SuffixT #>> @this,
-            Func<TSource, bool> predicate,
-            <#= Name #><TResult<#= SuffixT #>> thenResult,
-            <#= Name #><TResult<#= SuffixT #>> elseResult)
-            <#+ WriteTypeConstraints("TSource", "TResult"); #>
-        {
-            <#+ WriteNotNull(); #>
-            Require.NotNull(predicate, nameof(predicate));
-            return @this.Bind(val => predicate(val) ? thenResult : elseResult);
-        }
-<#+ if (HasZero) { #>
-
-        // Conditional version of ReplaceBy().
-        public static <#= Name #><TResult> If<TSource, TResult>(
-            this <#= Name #><TSource> @this,
-            Func<TSource, bool> predicate,
-            <#= Name #><TResult> thenResult)
-            <#+ WriteTypeConstraints("TSource", "TResult"); #>
-        {
-            <#+ WriteNotNull(); #>
-            Require.NotNull(predicate, nameof(predicate));
-            return @this.Bind(val => predicate(val) ? thenResult : <#= Name #><TResult>.<#= ZeroName #>);
-        }
-<#+ } // T4: End of HasZero. #>
 
         public static <#= Name #><TResult<#= SuffixT #>> Using<TSource, TResult<#= SuffixT #>>(
             this <#= Name #><TSource<#= SuffixT #>> @this,
@@ -176,6 +175,8 @@ public partial class MonadTemplate
         }
 
 <#+ End of DISABLED */ #>
+
+        #region Zip()
 <#+ if (!HasTypeConstraints) { #>
 
         public static <#= Name #><Tuple<TSource, TOther><#= SuffixT #>> Zip<TSource, TOther<#= SuffixT #>>(
@@ -192,20 +193,20 @@ public partial class MonadTemplate
         public static <#= Name #><TResult<#= SuffixT #>> Zip<TFirst, TSecond, TResult<#= SuffixT #>>(
             this <#= Name #><TFirst<#= SuffixT #>> @this,
             <#= Name #><TSecond<#= SuffixT #>> second,
-            Func<TFirst, TSecond, TResult> resultSelector)
+            Func<TFirst, TSecond, TResult> zipper)
             <#+ WriteTypeConstraints("TFirst", "TSecond", "TResult"); #>
         {
             <#+ WriteNotNull(); #>
             <#+ WriteNotNull("second"); #>
-            Require.NotNull(resultSelector, nameof(resultSelector));
+            Require.NotNull(zipper, nameof(zipper));
 
 <#+ if (HasTypeConstraints) { #>
             return @this.Bind(
                 arg1 => second.Select(
-                    arg2 => resultSelector(arg1, arg2)));
+                    arg2 => zipper(arg1, arg2)));
 <#+ } else { #>
             Func<TFirst, Func<TSecond, TResult>> selector
-                = arg1 => arg2 => resultSelector(arg1, arg2);
+                = arg1 => arg2 => zipper(arg1, arg2);
 
             return second.Gather(
                 @this.Select(selector));
@@ -217,22 +218,22 @@ public partial class MonadTemplate
             this <#= Name #><T1<#= SuffixT #>> @this,
             <#= Name #><T2<#= SuffixT #>> second,
             <#= Name #><T3<#= SuffixT #>> third,
-            Func<T1, T2, T3, TResult> resultSelector)
+            Func<T1, T2, T3, TResult> zipper)
             <#+ WriteTypeConstraints("T1", "T2", "T3", "TResult"); #>
         {
             <#+ WriteNotNull(); #>
             <#+ WriteNotNull("second"); #>
             <#+ WriteNotNull("third"); #>
-            Require.NotNull(resultSelector, nameof(resultSelector));
+            Require.NotNull(zipper, nameof(zipper));
 
 <#+ if (HasTypeConstraints) { #>
             return @this.Bind(
                 arg1 => second.Bind(
                     arg2 => third.Select(
-                        arg3 => resultSelector(arg1, arg2, arg3))));
+                        arg3 => zipper(arg1, arg2, arg3))));
 <#+ } else { #>
             Func<T1, Func<T2, Func<T3, TResult>>> selector
-                = arg1 => arg2 => arg3 => resultSelector(arg1, arg2, arg3);
+                = arg1 => arg2 => arg3 => zipper(arg1, arg2, arg3);
 
             return third.Gather(
                 second.Gather(
@@ -246,24 +247,24 @@ public partial class MonadTemplate
              <#= Name #><T2<#= SuffixT #>> second,
              <#= Name #><T3<#= SuffixT #>> third,
              <#= Name #><T4<#= SuffixT #>> fourth,
-             Func<T1, T2, T3, T4, TResult> resultSelector)
+             Func<T1, T2, T3, T4, TResult> zipper)
             <#+ WriteTypeConstraints("T1", "T2", "T3", "T4", "TResult"); #>
         {
             <#+ WriteNotNull(); #>
             <#+ WriteNotNull("second"); #>
             <#+ WriteNotNull("third"); #>
             <#+ WriteNotNull("fourth"); #>
-            Require.NotNull(resultSelector, nameof(resultSelector));
+            Require.NotNull(zipper, nameof(zipper));
 
 <#+ if (HasTypeConstraints) { #>
             return @this.Bind(
                 arg1 => second.Bind(
                     arg2 => third.Bind(
                         arg3 => fourth.Select(
-                            arg4 => resultSelector(arg1, arg2, arg3, arg4)))));
+                            arg4 => zipper(arg1, arg2, arg3, arg4)))));
 <#+ } else { #>
             Func<T1, Func<T2, Func<T3, Func<T4, TResult>>>> selector
-                = arg1 => arg2 => arg3 => arg4 => resultSelector(arg1, arg2, arg3, arg4);
+                = arg1 => arg2 => arg3 => arg4 => zipper(arg1, arg2, arg3, arg4);
 
             return fourth.Gather(
                 third.Gather(
@@ -279,7 +280,7 @@ public partial class MonadTemplate
             <#= Name #><T3<#= SuffixT #>> third,
             <#= Name #><T4<#= SuffixT #>> fourth,
             <#= Name #><T5<#= SuffixT #>> fifth,
-            Func<T1, T2, T3, T4, T5, TResult> resultSelector)
+            Func<T1, T2, T3, T4, T5, TResult> zipper)
             <#+ WriteTypeConstraints("T1", "T2", "T3", "T4", "T5", "TResult"); #>
         {
             <#+ WriteNotNull(); #>
@@ -287,7 +288,7 @@ public partial class MonadTemplate
             <#+ WriteNotNull("third"); #>
             <#+ WriteNotNull("fourth"); #>
             <#+ WriteNotNull("fifth"); #>
-            Require.NotNull(resultSelector, nameof(resultSelector));
+            Require.NotNull(zipper, nameof(zipper));
 
 <#+ if (HasTypeConstraints) { #>
             return @this.Bind(
@@ -295,10 +296,10 @@ public partial class MonadTemplate
                     arg2 => third.Bind(
                         arg3 => fourth.Bind(
                             arg4 => fifth.Select(
-                                arg5 => resultSelector(arg1, arg2, arg3, arg4, arg5))))));
+                                arg5 => zipper(arg1, arg2, arg3, arg4, arg5))))));
 <#+ } else { #>
             Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, TResult>>>>> selector
-                = arg1 => arg2 => arg3 => arg4 => arg5 => resultSelector(arg1, arg2, arg3, arg4, arg5);
+                = arg1 => arg2 => arg3 => arg4 => arg5 => zipper(arg1, arg2, arg3, arg4, arg5);
 
             return fifth.Gather(
                 fourth.Gather(
@@ -308,7 +309,9 @@ public partial class MonadTemplate
 <#+ } #>
         }
 
-        #region LINQ dialect.
+        #endregion
+
+        #region LINQ dialect
 
 <#+ if (!PreferLinqDialect) { #>
 <#+ if (HasFilter) { #>
@@ -497,9 +500,9 @@ public partial class MonadTemplate
                 return inner.<#= MapName #>(innerKeySelector).<#= FilterName #>(key => comparer.Equals(key, outerKey));
             };
         }
+<#+ } // T4: End of HasJoin. #>
 
         #endregion
-<#+ } // T4: End of HasJoin. #>
     } // End of <#= Name #> - T4: EmitMonadExtensions().
 <#+
     } // T4: End of EmitMonadExtensions().

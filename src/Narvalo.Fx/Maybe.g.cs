@@ -14,7 +14,6 @@ namespace Narvalo.Fx
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
     using Narvalo.Fx.Internal;
@@ -169,6 +168,29 @@ namespace Narvalo.Fx
             return @this.Bind(_ => other);
         }
 
+        public static Maybe<TResult> If<TSource, TResult>(
+            this Maybe<TSource> @this,
+            Func<TSource, bool> predicate,
+            Maybe<TResult> thenResult)
+            /* T4: type constraint */
+        {
+            /* T4: NotNull(@this) */
+            Require.NotNull(predicate, nameof(predicate));
+            return @this.Bind(val => predicate(val) ? thenResult : Maybe<TResult>.None);
+        }
+
+        public static Maybe<TResult> Coalesce<TSource, TResult>(
+            this Maybe<TSource> @this,
+            Func<TSource, bool> predicate,
+            Maybe<TResult> thenResult,
+            Maybe<TResult> elseResult)
+            /* T4: type constraint */
+        {
+            /* T4: NotNull(@this) */
+            Require.NotNull(predicate, nameof(predicate));
+            return @this.Bind(val => predicate(val) ? thenResult : elseResult);
+        }
+
         public static Maybe<global::Narvalo.Fx.Unit> Skip<TSource>(this Maybe<TSource> @this)
             /* T4: type constraint */
         {
@@ -195,30 +217,6 @@ namespace Narvalo.Fx
             return @this.Select(val => Enumerable.Repeat(val, count));
         }
 
-        public static Maybe<TResult> Coalesce<TSource, TResult>(
-            this Maybe<TSource> @this,
-            Func<TSource, bool> predicate,
-            Maybe<TResult> thenResult,
-            Maybe<TResult> elseResult)
-            /* T4: type constraint */
-        {
-            /* T4: NotNull(@this) */
-            Require.NotNull(predicate, nameof(predicate));
-            return @this.Bind(val => predicate(val) ? thenResult : elseResult);
-        }
-
-        // Conditional version of ReplaceBy().
-        public static Maybe<TResult> If<TSource, TResult>(
-            this Maybe<TSource> @this,
-            Func<TSource, bool> predicate,
-            Maybe<TResult> thenResult)
-            /* T4: type constraint */
-        {
-            /* T4: NotNull(@this) */
-            Require.NotNull(predicate, nameof(predicate));
-            return @this.Bind(val => predicate(val) ? thenResult : Maybe<TResult>.None);
-        }
-
         public static Maybe<TResult> Using<TSource, TResult>(
             this Maybe<TSource> @this,
             Func<TSource, Maybe<TResult>> selector)
@@ -241,6 +239,8 @@ namespace Narvalo.Fx
             return @this.Select(val => { using (val) { return selector(val); } });
         }
 
+        #region Zip()
+
         public static Maybe<Tuple<TSource, TOther>> Zip<TSource, TOther>(
             this Maybe<TSource> @this,
             Maybe<TOther> other)
@@ -254,15 +254,15 @@ namespace Narvalo.Fx
         public static Maybe<TResult> Zip<TFirst, TSecond, TResult>(
             this Maybe<TFirst> @this,
             Maybe<TSecond> second,
-            Func<TFirst, TSecond, TResult> resultSelector)
+            Func<TFirst, TSecond, TResult> zipper)
             /* T4: type constraint */
         {
             /* T4: NotNull(@this) */
             /* T4: NotNull(second) */
-            Require.NotNull(resultSelector, nameof(resultSelector));
+            Require.NotNull(zipper, nameof(zipper));
 
             Func<TFirst, Func<TSecond, TResult>> selector
-                = arg1 => arg2 => resultSelector(arg1, arg2);
+                = arg1 => arg2 => zipper(arg1, arg2);
 
             return second.Gather(
                 @this.Select(selector));
@@ -273,16 +273,16 @@ namespace Narvalo.Fx
             this Maybe<T1> @this,
             Maybe<T2> second,
             Maybe<T3> third,
-            Func<T1, T2, T3, TResult> resultSelector)
+            Func<T1, T2, T3, TResult> zipper)
             /* T4: type constraint */
         {
             /* T4: NotNull(@this) */
             /* T4: NotNull(second) */
             /* T4: NotNull(third) */
-            Require.NotNull(resultSelector, nameof(resultSelector));
+            Require.NotNull(zipper, nameof(zipper));
 
             Func<T1, Func<T2, Func<T3, TResult>>> selector
-                = arg1 => arg2 => arg3 => resultSelector(arg1, arg2, arg3);
+                = arg1 => arg2 => arg3 => zipper(arg1, arg2, arg3);
 
             return third.Gather(
                 second.Gather(
@@ -295,17 +295,17 @@ namespace Narvalo.Fx
              Maybe<T2> second,
              Maybe<T3> third,
              Maybe<T4> fourth,
-             Func<T1, T2, T3, T4, TResult> resultSelector)
+             Func<T1, T2, T3, T4, TResult> zipper)
             /* T4: type constraint */
         {
             /* T4: NotNull(@this) */
             /* T4: NotNull(second) */
             /* T4: NotNull(third) */
             /* T4: NotNull(fourth) */
-            Require.NotNull(resultSelector, nameof(resultSelector));
+            Require.NotNull(zipper, nameof(zipper));
 
             Func<T1, Func<T2, Func<T3, Func<T4, TResult>>>> selector
-                = arg1 => arg2 => arg3 => arg4 => resultSelector(arg1, arg2, arg3, arg4);
+                = arg1 => arg2 => arg3 => arg4 => zipper(arg1, arg2, arg3, arg4);
 
             return fourth.Gather(
                 third.Gather(
@@ -320,7 +320,7 @@ namespace Narvalo.Fx
             Maybe<T3> third,
             Maybe<T4> fourth,
             Maybe<T5> fifth,
-            Func<T1, T2, T3, T4, T5, TResult> resultSelector)
+            Func<T1, T2, T3, T4, T5, TResult> zipper)
             /* T4: type constraint */
         {
             /* T4: NotNull(@this) */
@@ -328,10 +328,10 @@ namespace Narvalo.Fx
             /* T4: NotNull(third) */
             /* T4: NotNull(fourth) */
             /* T4: NotNull(fifth) */
-            Require.NotNull(resultSelector, nameof(resultSelector));
+            Require.NotNull(zipper, nameof(zipper));
 
             Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, TResult>>>>> selector
-                = arg1 => arg2 => arg3 => arg4 => arg5 => resultSelector(arg1, arg2, arg3, arg4, arg5);
+                = arg1 => arg2 => arg3 => arg4 => arg5 => zipper(arg1, arg2, arg3, arg4, arg5);
 
             return fifth.Gather(
                 fourth.Gather(
@@ -340,7 +340,9 @@ namespace Narvalo.Fx
                             @this.Select(selector)))));
         }
 
-        #region LINQ dialect.
+        #endregion
+
+        #region LINQ dialect
 
         /// <remarks>
         /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" />.
@@ -503,7 +505,6 @@ namespace Narvalo.Fx
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Kleisli
     {
-
         public static Maybe<IEnumerable<TResult>> ForEach<TSource, TResult>(
             this Func<TSource, Maybe<TResult>> @this,
             IEnumerable<TSource> seq)
@@ -515,7 +516,6 @@ namespace Narvalo.Fx
             /* T4: type constraint */
         {
             /* T4: NotNull(value) */
-
             return value.Bind(@this);
         }
 
@@ -525,8 +525,7 @@ namespace Narvalo.Fx
             /* T4: type constraint */
         {
             Require.NotNull(first, nameof(first));
-
-            return _ => first(_).Bind(second);
+            return arg => first(arg).Bind(second);
         }
 
         public static Func<TSource, Maybe<TResult>> ComposeBack<TSource, TMiddle, TResult>(
@@ -535,25 +534,21 @@ namespace Narvalo.Fx
             /* T4: type constraint */
         {
             Require.NotNull(second, nameof(second));
-
-            return _ => second(_).Bind(first);
+            return arg => second(arg).Bind(first);
         }
     } // End of Kleisli - T4: EmitKleisliExtensions().
 
     // Provides extension methods for IEnumerable<Maybe<T>>.
     public static partial class Maybe
     {
-
         public static Maybe<IEnumerable<TSource>> Collect<TSource>(
             this IEnumerable<Maybe<TSource>> @this)
             => @this.CollectImpl();
-
 
         public static Maybe<TSource> Sum<TSource>(
             this IEnumerable<Maybe<TSource>> @this)
             /* T4: type constraint */
             => @this.SumImpl();
-
     } // End of Sequence - T4: EmitMonadEnumerableExtensions().
 }
 
@@ -570,7 +565,6 @@ namespace Narvalo.Fx.Internal
     // You will certainly want to override them to improve performance.
     internal static partial class EnumerableExtensions
     {
-
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Maybe<IEnumerable<TSource>> CollectImpl<TSource>(
             this IEnumerable<Maybe<TSource>> @this)
@@ -578,27 +572,10 @@ namespace Narvalo.Fx.Internal
             Demand.NotNull(@this);
 
             var seed = Maybe.Of(Enumerable.Empty<TSource>());
-            //var seed = Maybe.Of(Enumerable.Empty<TSource>());
-            // Inlined LINQ Append method:
-            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (m, item) => m.Append(item);
+            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (seq, item) => seq.Append(item);
 
-            // NB: Maybe.Lift(append) is the same as:
-            // Func<Maybe<IEnumerable<TSource>>, Maybe<TSource>, Maybe<IEnumerable<TSource>>> liftedAppend
-            //     = (m, item) => m.Bind(list => Append(list, item));
-            // where Append is defined below.
-            var retval = @this.Aggregate(seed, Maybe.Lift<IEnumerable<TSource>, TSource, IEnumerable<TSource>>(append));
-
-            return retval;
+            return @this.Aggregate(seed, Maybe.Lift<IEnumerable<TSource>, TSource, IEnumerable<TSource>>(append));
         }
-
-        // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
-        //private static Maybe<IEnumerable<TSource>> Append<TSource>(
-        //    IEnumerable<TSource> list,
-        //    Maybe<TSource> m)
-        //{
-
-        //    return m.Bind(item => Maybe.Of(list.Concat(Enumerable.Repeat(item, 1))));
-        //}
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Maybe<TSource> SumImpl<TSource>(
@@ -607,11 +584,8 @@ namespace Narvalo.Fx.Internal
         {
             Demand.NotNull(@this);
 
-            var retval = @this.Aggregate(Maybe<TSource>.None, (m, n) => m.OrElse(n));
-
-            return retval;
+            return @this.Aggregate(Maybe<TSource>.None, (m, n) => m.OrElse(n));
         }
-
     } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
 }
 
@@ -631,17 +605,14 @@ namespace Narvalo.Fx.Linq
     // - Aggregate -> Reduce or Fold
     public static partial class Qperators
     {
-
         public static Maybe<IEnumerable<TResult>> SelectWith<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<TResult>> selector)
             => @this.SelectWithImpl(selector);
 
-
         public static Maybe<IEnumerable<TSource>> WhereBy<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<bool>> predicate)
-            /* T4: type constraint */
             => @this.WhereByImpl(predicate);
 
         public static Maybe<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
@@ -655,7 +626,6 @@ namespace Narvalo.Fx.Linq
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, Maybe<TResult>> resultSelector)
             => @this.ZipWithImpl(second, resultSelector);
-
 
         public static Maybe<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
@@ -723,7 +693,7 @@ namespace Narvalo.Fx.Internal
             Demand.NotNull(@this);
             Demand.NotNull(selector);
 
-            return @this.Select(selector).EmptyIfNull().Collect();
+            return @this.Select(selector).Collect();
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
@@ -735,16 +705,13 @@ namespace Narvalo.Fx.Internal
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
 
-            Func<bool, IEnumerable<TSource>, TSource, IEnumerable<TSource>> selector
-                = (flg, list, item) => { if (flg) { return list.Prepend(item); } else { return list; } };
+            Func<TSource, Func<bool, IEnumerable<TSource>, IEnumerable<TSource>>> func
+                = item => (flg, seq) => flg ? seq.Append(item) : seq;
 
             Func<Maybe<IEnumerable<TSource>>, TSource, Maybe<IEnumerable<TSource>>> accumulator
-                = (mlist, item) => predicate.Invoke(item).Zip(mlist, (flg, list) => selector.Invoke(flg, list, item));
+                = (mseq, item) => predicate(item).Zip(mseq, func(item));
 
-            var seed = Maybe.Of(Enumerable.Empty<TSource>());
-
-            // REVIEW: Aggregate?
-            return @this.AggregateBack(seed, accumulator);
+            return @this.Aggregate(Maybe.Of(Enumerable.Empty<TSource>()), accumulator);
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
@@ -759,10 +726,10 @@ namespace Narvalo.Fx.Internal
             return @this.SelectWith(selector).Select(
                 tuples =>
                 {
-                    IEnumerable<TFirst> list1 = tuples.Select(_ => _.Item1);
-                    IEnumerable<TSecond> list2 = tuples.Select(_ => _.Item2);
+                    var seq1 = tuples.Select(_ => _.Item1);
+                    var seq2 = tuples.Select(_ => _.Item2);
 
-                    return new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(list1, list2);
+                    return new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(seq1, seq2);
                 });
         }
 
@@ -772,17 +739,11 @@ namespace Narvalo.Fx.Internal
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, Maybe<TResult>> resultSelector)
         {
-            Require.NotNull(resultSelector, nameof(resultSelector));
-
+            Demand.NotNull(resultSelector);
             Demand.NotNull(@this);
             Demand.NotNull(second);
 
-            Func<TFirst, TSecond, Maybe<TResult>> selector
-                = (v1, v2) => resultSelector.Invoke(v1, v2);
-
-            IEnumerable<Maybe<TResult>> seq = @this.Zip(second, selector);
-
-            return seq.EmptyIfNull().Collect();
+            return @this.Zip(second, resultSelector).Collect();
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
@@ -795,14 +756,10 @@ namespace Narvalo.Fx.Internal
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
 
-            Maybe<TAccumulate> retval = Maybe.Of(seed);
+            Func<Maybe<TAccumulate>, TSource, Maybe<TAccumulate>> func
+                = (arg1, arg2) => arg1.Bind(arg => accumulator(arg, arg2));
 
-            foreach (TSource item in @this)
-            {
-                retval = retval.Bind(_ => accumulator.Invoke(_, item));
-            }
-
-            return retval;
+            return @this.Aggregate(Maybe.Of(seed), func);
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
@@ -815,7 +772,7 @@ namespace Narvalo.Fx.Internal
             Demand.NotNull(@this);
             Demand.NotNull(accumulator);
 
-            return @this.Reverse().EmptyIfNull().Fold(seed, accumulator);
+            return @this.Reverse().Fold(seed, accumulator);
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
@@ -854,7 +811,7 @@ namespace Narvalo.Fx.Internal
             Demand.NotNull(@this);
             Demand.NotNull(accumulator);
 
-            return @this.Reverse().EmptyIfNull().Reduce(accumulator);
+            return @this.Reverse().Reduce(accumulator);
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]

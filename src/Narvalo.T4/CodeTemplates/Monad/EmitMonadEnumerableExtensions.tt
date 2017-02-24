@@ -9,20 +9,16 @@ public partial class MonadTemplate
     public static partial class <#= Name #>
     {
 <#+ if (!HasTypeConstraints) { #>
-
         public static <#= Name #><IEnumerable<TSource><#= SuffixT #>> Collect<TSource<#= SuffixT #>>(
             this IEnumerable<<#= Name #><TSource<#= SuffixT #>>> @this)
             => @this.CollectImpl();
 
 <#+ } // T4: End of !HasTypeConstraints. #>
-
 <#+ if (HasSum) { #>
-
         public static <#= Name #><TSource> Sum<TSource>(
             this IEnumerable<<#= Name #><TSource>> @this)
             <#+ WriteTypeConstraints("TSource"); #>
             => @this.SumImpl();
-
 <#+ } // T4: End of HasSum. #>
     } // End of Sequence - T4: EmitMonadEnumerableExtensions().
 <#+
