@@ -614,27 +614,6 @@ namespace Edufun.Haskell.Templates.Linq
             where TAccumulate : struct
             => @this.FoldImpl(seed, accumulator);
 
-        public static MonadValue<TAccumulate> FoldBack<TSource, TAccumulate>(
-            this IEnumerable<TSource> @this,
-            TAccumulate seed,
-            Func<TAccumulate, TSource, MonadValue<TAccumulate>> accumulator)
-            where TSource : struct
-            where TAccumulate : struct
-            => @this.FoldBackImpl(seed, accumulator);
-
-        public static MonadValue<TSource> Reduce<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, TSource, MonadValue<TSource>> accumulator)
-            where TSource : struct
-            => @this.ReduceImpl(accumulator);
-
-        public static MonadValue<TSource> ReduceBack<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, TSource, MonadValue<TSource>> accumulator)
-            where TSource : struct
-            => @this.ReduceBackImpl(accumulator);
-
-        // Haskell uses a different signature.
         public static MonadValue<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
@@ -644,7 +623,12 @@ namespace Edufun.Haskell.Templates.Linq
             where TAccumulate : struct
             => @this.FoldImpl(seed, accumulator, predicate);
 
-        // Haskell uses a different signature.
+        public static MonadValue<TSource> Reduce<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, TSource, MonadValue<TSource>> accumulator)
+            where TSource : struct
+            => @this.ReduceImpl(accumulator);
+
         public static MonadValue<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, MonadValue<TSource>> accumulator,
@@ -683,17 +667,29 @@ namespace Edufun.Haskell.Templates.Internal
             return @this.Aggregate(MonadValue.Of(seed), func);
         }
 
-        internal static MonadValue<TAccumulate> FoldBackImpl<TSource, TAccumulate>(
+        internal static MonadValue<TAccumulate> FoldImpl<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, MonadValue<TAccumulate>> accumulator)
+            Func<TAccumulate, TSource, MonadValue<TAccumulate>> accumulator,
+            Func<MonadValue<TAccumulate>, bool> predicate)
             where TSource : struct
             where TAccumulate : struct
         {
-            Demand.NotNull(@this);
-            Demand.NotNull(accumulator);
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(accumulator, nameof(accumulator));
+            Require.NotNull(predicate, nameof(predicate));
 
-            return @this.Reverse().Fold(seed, accumulator);
+            MonadValue<TAccumulate> retval = MonadValue.Of(seed);
+
+            using (var iter = @this.GetEnumerator())
+            {
+                while (predicate.Invoke(retval) && iter.MoveNext())
+                {
+                    retval = retval.Bind(_ => accumulator.Invoke(_, iter.Current));
+                }
+            }
+
+            return retval;
         }
 
         internal static MonadValue<TSource> ReduceImpl<TSource>(
@@ -720,42 +716,6 @@ namespace Edufun.Haskell.Templates.Internal
 
                 return retval;
             }
-        }
-
-        internal static MonadValue<TSource> ReduceBackImpl<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, TSource, MonadValue<TSource>> accumulator)
-            where TSource : struct
-        {
-            Demand.NotNull(@this);
-            Demand.NotNull(accumulator);
-
-            return @this.Reverse().Reduce(accumulator);
-        }
-
-        internal static MonadValue<TAccumulate> FoldImpl<TSource, TAccumulate>(
-            this IEnumerable<TSource> @this,
-            TAccumulate seed,
-            Func<TAccumulate, TSource, MonadValue<TAccumulate>> accumulator,
-            Func<MonadValue<TAccumulate>, bool> predicate)
-            where TSource : struct
-            where TAccumulate : struct
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(accumulator, nameof(accumulator));
-            Require.NotNull(predicate, nameof(predicate));
-
-            MonadValue<TAccumulate> retval = MonadValue.Of(seed);
-
-            using (var iter = @this.GetEnumerator())
-            {
-                while (predicate.Invoke(retval) && iter.MoveNext())
-                {
-                    retval = retval.Bind(_ => accumulator.Invoke(_, iter.Current));
-                }
-            }
-
-            return retval;
         }
 
         internal static MonadValue<TSource> ReduceImpl<TSource>(

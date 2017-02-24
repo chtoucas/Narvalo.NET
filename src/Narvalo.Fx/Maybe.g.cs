@@ -636,26 +636,6 @@ namespace Narvalo.Fx.Linq
             /* T4: type constraint */
             => @this.FoldImpl(seed, accumulator);
 
-        public static Maybe<TAccumulate> FoldBack<TSource, TAccumulate>(
-            this IEnumerable<TSource> @this,
-            TAccumulate seed,
-            Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulator)
-            /* T4: type constraint */
-            => @this.FoldBackImpl(seed, accumulator);
-
-        public static Maybe<TSource> Reduce<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Maybe<TSource>> accumulator)
-            /* T4: type constraint */
-            => @this.ReduceImpl(accumulator);
-
-        public static Maybe<TSource> ReduceBack<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Maybe<TSource>> accumulator)
-            /* T4: type constraint */
-            => @this.ReduceBackImpl(accumulator);
-
-        // Haskell uses a different signature.
         public static Maybe<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
@@ -664,7 +644,12 @@ namespace Narvalo.Fx.Linq
             /* T4: type constraint */
             => @this.FoldImpl(seed, accumulator, predicate);
 
-        // Haskell uses a different signature.
+        public static Maybe<TSource> Reduce<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, TSource, Maybe<TSource>> accumulator)
+            /* T4: type constraint */
+            => @this.ReduceImpl(accumulator);
+
         public static Maybe<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Maybe<TSource>> accumulator,
@@ -765,16 +750,28 @@ namespace Narvalo.Fx.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Maybe<TAccumulate> FoldBackImpl<TSource, TAccumulate>(
+        internal static Maybe<TAccumulate> FoldImpl<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulator)
+            Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulator,
+            Func<Maybe<TAccumulate>, bool> predicate)
             /* T4: type constraint */
         {
-            Demand.NotNull(@this);
-            Demand.NotNull(accumulator);
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(accumulator, nameof(accumulator));
+            Require.NotNull(predicate, nameof(predicate));
 
-            return @this.Reverse().Fold(seed, accumulator);
+            Maybe<TAccumulate> retval = Maybe.Of(seed);
+
+            using (var iter = @this.GetEnumerator())
+            {
+                while (predicate.Invoke(retval) && iter.MoveNext())
+                {
+                    retval = retval.Bind(_ => accumulator.Invoke(_, iter.Current));
+                }
+            }
+
+            return retval;
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
@@ -802,43 +799,6 @@ namespace Narvalo.Fx.Internal
 
                 return retval;
             }
-        }
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Maybe<TSource> ReduceBackImpl<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Maybe<TSource>> accumulator)
-            /* T4: type constraint */
-        {
-            Demand.NotNull(@this);
-            Demand.NotNull(accumulator);
-
-            return @this.Reverse().Reduce(accumulator);
-        }
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Maybe<TAccumulate> FoldImpl<TSource, TAccumulate>(
-            this IEnumerable<TSource> @this,
-            TAccumulate seed,
-            Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulator,
-            Func<Maybe<TAccumulate>, bool> predicate)
-            /* T4: type constraint */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(accumulator, nameof(accumulator));
-            Require.NotNull(predicate, nameof(predicate));
-
-            Maybe<TAccumulate> retval = Maybe.Of(seed);
-
-            using (var iter = @this.GetEnumerator())
-            {
-                while (predicate.Invoke(retval) && iter.MoveNext())
-                {
-                    retval = retval.Bind(_ => accumulator.Invoke(_, iter.Current));
-                }
-            }
-
-            return retval;
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]

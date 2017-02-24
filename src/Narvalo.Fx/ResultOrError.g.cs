@@ -472,26 +472,6 @@ namespace Narvalo.Fx.Linq
             /* T4: type constraint */
             => @this.FoldImpl(seed, accumulator);
 
-        public static ResultOrError<TAccumulate> FoldBack<TSource, TAccumulate>(
-            this IEnumerable<TSource> @this,
-            TAccumulate seed,
-            Func<TAccumulate, TSource, ResultOrError<TAccumulate>> accumulator)
-            /* T4: type constraint */
-            => @this.FoldBackImpl(seed, accumulator);
-
-        public static ResultOrError<TSource> Reduce<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, TSource, ResultOrError<TSource>> accumulator)
-            /* T4: type constraint */
-            => @this.ReduceImpl(accumulator);
-
-        public static ResultOrError<TSource> ReduceBack<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, TSource, ResultOrError<TSource>> accumulator)
-            /* T4: type constraint */
-            => @this.ReduceBackImpl(accumulator);
-
-        // Haskell uses a different signature.
         public static ResultOrError<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
@@ -500,7 +480,12 @@ namespace Narvalo.Fx.Linq
             /* T4: type constraint */
             => @this.FoldImpl(seed, accumulator, predicate);
 
-        // Haskell uses a different signature.
+        public static ResultOrError<TSource> Reduce<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, TSource, ResultOrError<TSource>> accumulator)
+            /* T4: type constraint */
+            => @this.ReduceImpl(accumulator);
+
         public static ResultOrError<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, ResultOrError<TSource>> accumulator,
@@ -601,16 +586,33 @@ namespace Narvalo.Fx.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static ResultOrError<TAccumulate> FoldBackImpl<TSource, TAccumulate>(
+        internal static ResultOrError<TAccumulate> FoldImpl<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, ResultOrError<TAccumulate>> accumulator)
+            Func<TAccumulate, TSource, ResultOrError<TAccumulate>> accumulator,
+            Func<ResultOrError<TAccumulate>, bool> predicate)
             /* T4: type constraint */
         {
-            Demand.NotNull(@this);
-            Demand.NotNull(accumulator);
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(accumulator, nameof(accumulator));
+            Require.NotNull(predicate, nameof(predicate));
 
-            return @this.Reverse().Fold(seed, accumulator);
+            ResultOrError<TAccumulate> retval = ResultOrError.Of(seed);
+
+            using (var iter = @this.GetEnumerator())
+            {
+                while (predicate.Invoke(retval) && iter.MoveNext())
+                {
+                    if (retval == null)
+                    {
+                        return null;
+                    }
+
+                    retval = retval.Bind(_ => accumulator.Invoke(_, iter.Current));
+                }
+            }
+
+            return retval;
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
@@ -643,48 +645,6 @@ namespace Narvalo.Fx.Internal
 
                 return retval;
             }
-        }
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static ResultOrError<TSource> ReduceBackImpl<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, TSource, ResultOrError<TSource>> accumulator)
-            /* T4: type constraint */
-        {
-            Demand.NotNull(@this);
-            Demand.NotNull(accumulator);
-
-            return @this.Reverse().Reduce(accumulator);
-        }
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static ResultOrError<TAccumulate> FoldImpl<TSource, TAccumulate>(
-            this IEnumerable<TSource> @this,
-            TAccumulate seed,
-            Func<TAccumulate, TSource, ResultOrError<TAccumulate>> accumulator,
-            Func<ResultOrError<TAccumulate>, bool> predicate)
-            /* T4: type constraint */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(accumulator, nameof(accumulator));
-            Require.NotNull(predicate, nameof(predicate));
-
-            ResultOrError<TAccumulate> retval = ResultOrError.Of(seed);
-
-            using (var iter = @this.GetEnumerator())
-            {
-                while (predicate.Invoke(retval) && iter.MoveNext())
-                {
-                    if (retval == null)
-                    {
-                        return null;
-                    }
-
-                    retval = retval.Bind(_ => accumulator.Invoke(_, iter.Current));
-                }
-            }
-
-            return retval;
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]

@@ -473,26 +473,6 @@ namespace Edufun.Haskell.Templates.Linq
             /* T4: type constraint */
             => @this.FoldImpl(seed, accumulator);
 
-        public static Monad<TAccumulate> FoldBack<TSource, TAccumulate>(
-            this IEnumerable<TSource> @this,
-            TAccumulate seed,
-            Func<TAccumulate, TSource, Monad<TAccumulate>> accumulator)
-            /* T4: type constraint */
-            => @this.FoldBackImpl(seed, accumulator);
-
-        public static Monad<TSource> Reduce<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Monad<TSource>> accumulator)
-            /* T4: type constraint */
-            => @this.ReduceImpl(accumulator);
-
-        public static Monad<TSource> ReduceBack<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Monad<TSource>> accumulator)
-            /* T4: type constraint */
-            => @this.ReduceBackImpl(accumulator);
-
-        // Haskell uses a different signature.
         public static Monad<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
@@ -501,7 +481,12 @@ namespace Edufun.Haskell.Templates.Linq
             /* T4: type constraint */
             => @this.FoldImpl(seed, accumulator, predicate);
 
-        // Haskell uses a different signature.
+        public static Monad<TSource> Reduce<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, TSource, Monad<TSource>> accumulator)
+            /* T4: type constraint */
+            => @this.ReduceImpl(accumulator);
+
         public static Monad<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Monad<TSource>> accumulator,
@@ -596,16 +581,33 @@ namespace Edufun.Haskell.Templates.Internal
             return @this.Aggregate(Monad.Of(seed), func);
         }
 
-        internal static Monad<TAccumulate> FoldBackImpl<TSource, TAccumulate>(
+        internal static Monad<TAccumulate> FoldImpl<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Monad<TAccumulate>> accumulator)
+            Func<TAccumulate, TSource, Monad<TAccumulate>> accumulator,
+            Func<Monad<TAccumulate>, bool> predicate)
             /* T4: type constraint */
         {
-            Demand.NotNull(@this);
-            Demand.NotNull(accumulator);
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(accumulator, nameof(accumulator));
+            Require.NotNull(predicate, nameof(predicate));
 
-            return @this.Reverse().Fold(seed, accumulator);
+            Monad<TAccumulate> retval = Monad.Of(seed);
+
+            using (var iter = @this.GetEnumerator())
+            {
+                while (predicate.Invoke(retval) && iter.MoveNext())
+                {
+                    if (retval == null)
+                    {
+                        return null;
+                    }
+
+                    retval = retval.Bind(_ => accumulator.Invoke(_, iter.Current));
+                }
+            }
+
+            return retval;
         }
 
         internal static Monad<TSource> ReduceImpl<TSource>(
@@ -637,46 +639,6 @@ namespace Edufun.Haskell.Templates.Internal
 
                 return retval;
             }
-        }
-
-        internal static Monad<TSource> ReduceBackImpl<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Monad<TSource>> accumulator)
-            /* T4: type constraint */
-        {
-            Demand.NotNull(@this);
-            Demand.NotNull(accumulator);
-
-            return @this.Reverse().Reduce(accumulator);
-        }
-
-        internal static Monad<TAccumulate> FoldImpl<TSource, TAccumulate>(
-            this IEnumerable<TSource> @this,
-            TAccumulate seed,
-            Func<TAccumulate, TSource, Monad<TAccumulate>> accumulator,
-            Func<Monad<TAccumulate>, bool> predicate)
-            /* T4: type constraint */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(accumulator, nameof(accumulator));
-            Require.NotNull(predicate, nameof(predicate));
-
-            Monad<TAccumulate> retval = Monad.Of(seed);
-
-            using (var iter = @this.GetEnumerator())
-            {
-                while (predicate.Invoke(retval) && iter.MoveNext())
-                {
-                    if (retval == null)
-                    {
-                        return null;
-                    }
-
-                    retval = retval.Bind(_ => accumulator.Invoke(_, iter.Current));
-                }
-            }
-
-            return retval;
         }
 
         internal static Monad<TSource> ReduceImpl<TSource>(

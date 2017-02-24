@@ -13,8 +13,6 @@
         protected override void WriteContent()
         {
             EmitMonad(false);
-            WriteLine();
-
             EmitComonad();
         }
     }

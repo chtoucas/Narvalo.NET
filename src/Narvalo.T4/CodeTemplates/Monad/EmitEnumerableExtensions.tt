@@ -44,26 +44,6 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
             => @this.FoldImpl(seed, accumulator);
 
-        public static <#= Name #><TAccumulate> FoldBack<TSource, TAccumulate>(
-            this IEnumerable<TSource> @this,
-            TAccumulate seed,
-            Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulator)
-            <#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
-            => @this.FoldBackImpl(seed, accumulator);
-
-        public static <#= Name #><TSource> Reduce<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, TSource, <#= Name #><TSource>> accumulator)
-            <#+ WriteTypeConstraints("TSource"); #>
-            => @this.ReduceImpl(accumulator);
-
-        public static <#= Name #><TSource> ReduceBack<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, TSource, <#= Name #><TSource>> accumulator)
-            <#+ WriteTypeConstraints("TSource"); #>
-            => @this.ReduceBackImpl(accumulator);
-
-        // Haskell uses a different signature.
         public static <#= Name #><TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
@@ -72,7 +52,12 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
             => @this.FoldImpl(seed, accumulator, predicate);
 
-        // Haskell uses a different signature.
+        public static <#= Name #><TSource> Reduce<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, TSource, <#= Name #><TSource>> accumulator)
+            <#+ WriteTypeConstraints("TSource"); #>
+            => @this.ReduceImpl(accumulator);
+
         public static <#= Name #><TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, <#= Name #><TSource>> accumulator,

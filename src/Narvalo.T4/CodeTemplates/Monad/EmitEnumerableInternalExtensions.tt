@@ -102,16 +102,35 @@ public partial class MonadTemplate
 <#+ if (!SuppressMessage) { #>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
 <#+ } #>
-        internal static <#= Name #><TAccumulate> FoldBackImpl<TSource, TAccumulate>(
+        internal static <#= Name #><TAccumulate> FoldImpl<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulator)
+            Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulator,
+            Func<<#= Name #><TAccumulate>, bool> predicate)
             <#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
         {
-            Demand.NotNull(@this);
-            Demand.NotNull(accumulator);
+            <#+ WriteNotNull(true); #>
+            Require.NotNull(accumulator, nameof(accumulator));
+            Require.NotNull(predicate, nameof(predicate));
 
-            return @this.Reverse().Fold(seed, accumulator);
+            <#= Name #><TAccumulate> retval = <#= Name #>.<#= ReturnName #>(seed);
+
+            using (var iter = @this.GetEnumerator())
+            {
+                while (predicate.Invoke(retval) && iter.MoveNext())
+                {
+<#+ if (IsNullable && !HasZero) { #>
+                    if (retval == null)
+                    {
+                        return null;
+                    }
+
+<#+ } #>
+                    retval = retval.Bind(_ => accumulator.Invoke(_, iter.Current));
+                }
+            }
+
+            return retval;
         }
 
 <#+ if (!SuppressMessage) { #>
@@ -148,54 +167,6 @@ public partial class MonadTemplate
 
                 return retval;
             }
-        }
-
-<#+ if (!SuppressMessage) { #>
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-<#+ } #>
-        internal static <#= Name #><TSource> ReduceBackImpl<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, TSource, <#= Name #><TSource>> accumulator)
-            <#+ WriteTypeConstraints("TSource"); #>
-        {
-            Demand.NotNull(@this);
-            Demand.NotNull(accumulator);
-
-            return @this.Reverse().Reduce(accumulator);
-        }
-
-<#+ if (!SuppressMessage) { #>
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-<#+ } #>
-        internal static <#= Name #><TAccumulate> FoldImpl<TSource, TAccumulate>(
-            this IEnumerable<TSource> @this,
-            TAccumulate seed,
-            Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulator,
-            Func<<#= Name #><TAccumulate>, bool> predicate)
-            <#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
-        {
-            <#+ WriteNotNull(true); #>
-            Require.NotNull(accumulator, nameof(accumulator));
-            Require.NotNull(predicate, nameof(predicate));
-
-            <#= Name #><TAccumulate> retval = <#= Name #>.<#= ReturnName #>(seed);
-
-            using (var iter = @this.GetEnumerator())
-            {
-                while (predicate.Invoke(retval) && iter.MoveNext())
-                {
-<#+ if (IsNullable && !HasZero) { #>
-                    if (retval == null)
-                    {
-                        return null;
-                    }
-
-<#+ } #>
-                    retval = retval.Bind(_ => accumulator.Invoke(_, iter.Current));
-                }
-            }
-
-            return retval;
         }
 
 <#+ if (!SuppressMessage) { #>

@@ -427,7 +427,6 @@ namespace Narvalo.Fx.Internal
     } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
 }
 
-
 namespace Narvalo.Fx
 {
     // Implements core Comonad methods.
