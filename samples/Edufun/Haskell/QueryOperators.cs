@@ -22,10 +22,10 @@ namespace Edufun.Haskell
             // [Data.Foldable]
             //   foldlM f z0 xs = foldr f' return xs z0
             //     where f' x k z = f z x >>= k
-            Func<Prototype<TAccumulate>, TSource, Prototype<TAccumulate>> acc
-                = (acc1, arg2) => acc1.Bind(arg1 => accumulator(arg1, arg2));
+            Func<Prototype<TAccumulate>, TSource, Prototype<TAccumulate>> func
+                = (acc, arg2) => acc.Bind(arg1 => accumulator(arg1, arg2));
 
-            return source.Aggregate(Prototype.Of(seed), acc);
+            return source.Aggregate(Prototype.Of(seed), func);
         }
 
         // [Control.Monad] mapAndUnzipM f xs = unzip <$> traverse f xs
@@ -78,10 +78,7 @@ namespace Edufun.Haskell
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, Prototype<TResult>> resultSelector)
         {
-            Func<TFirst, TSecond, Prototype<TResult>> selector
-                = (arg1, arg2) => resultSelector.Invoke(arg1, arg2);
-
-            IEnumerable<Prototype<TResult>> seq = first.Zip(second, selector);
+            IEnumerable<Prototype<TResult>> seq = first.Zip(second, resultSelector);
 
             return s_Monad.Collect(seq);
         }

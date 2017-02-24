@@ -63,14 +63,14 @@ namespace Edufun.Haskell
         // Lift a binary function to actions.
         Prototype<TResult> Zip<TSecond, TResult>(
             Prototype<TSecond> second,
-            Func<T, TSecond, TResult> resultSelector);
+            Func<T, TSecond, TResult> zipper);
 
         // [Haskell] liftA3 :: Applicative f => (a -> b -> c -> d) -> f a -> f b -> f c -> f d
         // Lift a ternary function to actions.
         Prototype<TResult> Zip<T2, T3, TResult>(
             Prototype<T2> second,
             Prototype<T3> third,
-            Func<T, T2, T3, TResult> resultSelector);
+            Func<T, T2, T3, TResult> zipper);
     }
 
     public interface IApplicativeOperators

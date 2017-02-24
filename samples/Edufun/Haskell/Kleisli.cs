@@ -19,13 +19,13 @@ namespace Edufun.Haskell
         public Func<TSource, Prototype<TResult>> Compose<TSource, TMiddle, TResult>(
             Func<TSource, Prototype<TMiddle>> first,
             Func<TMiddle, Prototype<TResult>> second)
-            => _ => first.Invoke(_).Bind(second);
+            => arg => first.Invoke(arg).Bind(second);
 
         // [Control.Monad] (<=<) = flip (>=>)
         public Func<TSource, Prototype<TResult>> ComposeBack<TSource, TMiddle, TResult>(
             Func<TMiddle, Prototype<TResult>> first,
             Func<TSource, Prototype<TMiddle>> second)
-            => _ => second.Invoke(_).Bind(first);
+            => arg => second.Invoke(arg).Bind(first);
 
         // [GHC.Base] f =<< x = x >>= f
         public Prototype<TResult> Invoke<TSource, TResult>(

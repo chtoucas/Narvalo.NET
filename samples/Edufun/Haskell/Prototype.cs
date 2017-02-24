@@ -151,17 +151,17 @@ namespace Edufun.Haskell
         // [GHC.Base] liftA2 f a b = fmap f a <*> b
         public Prototype<TResult> Zip<TSecond, TResult>(
             Prototype<TSecond> second,
-            Func<T, TSecond, TResult> resultSelector)
+            Func<T, TSecond, TResult> zipper)
         {
 #if STRICT_HASKELL
             Func<T, Func<TSecond, TResult>> selector
-                = arg1 => arg2 => resultSelector(arg1, arg2);
+                = arg1 => arg2 => zipper(arg1, arg2);
 
             return second.Gather(Select(selector));
 #else
             return Bind(
                 arg1 => second.Select(
-                    arg2 => resultSelector(arg1, arg2)));
+                    arg2 => zipper(arg1, arg2)));
 #endif
         }
 
@@ -169,23 +169,23 @@ namespace Edufun.Haskell
         public Prototype<TResult> Zip<T2, T3, TResult>(
             Prototype<T2> second,
             Prototype<T3> third,
-            Func<T, T2, T3, TResult> resultSelector)
+            Func<T, T2, T3, TResult> zipper)
         {
 #if STRICT_HASKELL
             Func<T, Func<T2, Func<T3, TResult>>> selector
-                = arg1 => arg2 => arg3 => resultSelector(arg1, arg2, arg3);
+                = arg1 => arg2 => arg3 => zipper(arg1, arg2, arg3);
 
             return third.Gather(second.Gather(Select(selector)));
 #else
             // NB: We could also use the previous Zip.
             // > Bind(
             // >     arg1 => second.Zip(
-            // >         third, (arg2, arg3) => resultSelector(arg1, arg2, arg3)));
+            // >         third, (arg2, arg3) => zipper(arg1, arg2, arg3)));
 
             return Bind(
                 arg1 => second.Bind(
                     arg2 => third.Select(
-                        arg3 => resultSelector(arg1, arg2, arg3))));
+                        arg3 => zipper(arg1, arg2, arg3))));
 #endif
         }
 
