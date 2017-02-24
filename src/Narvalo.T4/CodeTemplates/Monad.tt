@@ -32,12 +32,11 @@ public abstract partial class MonadTemplate : _MonadTemplate
     public void EmitMonad(bool emitlinq)
     {
 #>
-
 <#+ if (!Namespace.StartsWith("Narvalo.")) { #>
 using global::Narvalo;
 using global::Narvalo.Fx;
-<#+ } #>
 
+<#+ } #>
 namespace <#= Namespace #>
 {
     using System;

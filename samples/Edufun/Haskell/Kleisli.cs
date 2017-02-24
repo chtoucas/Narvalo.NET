@@ -13,32 +13,24 @@ namespace Edufun.Haskell
         public Prototype<IEnumerable<TResult>> ForEach<TSource, TResult>(
             Func<TSource, Prototype<TResult>> func,
             IEnumerable<TSource> seq)
-        {
-            return s_Qperators.SelectWith(seq, func);
-        }
+            => s_Qperators.SelectWith(seq, func);
 
         // [Control.Monad] f >=> g = \x -> f x >>= g
         public Func<TSource, Prototype<TResult>> Compose<TSource, TMiddle, TResult>(
             Func<TSource, Prototype<TMiddle>> first,
             Func<TMiddle, Prototype<TResult>> second)
-        {
-            return _ => first.Invoke(_).Bind(second);
-        }
+            => _ => first.Invoke(_).Bind(second);
 
         // [Control.Monad] (<=<) = flip (>=>)
         public Func<TSource, Prototype<TResult>> ComposeBack<TSource, TMiddle, TResult>(
             Func<TMiddle, Prototype<TResult>> first,
             Func<TSource, Prototype<TMiddle>> second)
-        {
-            return _ => second.Invoke(_).Bind(first);
-        }
+            => _ => second.Invoke(_).Bind(first);
 
         // [GHC.Base] f =<< x = x >>= f
         public Prototype<TResult> Invoke<TSource, TResult>(
             Func<TSource, Prototype<TResult>> func,
             Prototype<TSource> value)
-        {
-            return value.Bind(func);
-        }
+            => value.Bind(func);
     }
 }

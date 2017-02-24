@@ -2,6 +2,7 @@
 
 //#define APPLICATIVE_USE_GHC_BASE
 //#define MONAD_VIA_MAP_MULTIPLY
+#define STRICT_HASKELL
 
 namespace Edufun.Haskell
 {
@@ -152,9 +153,16 @@ namespace Edufun.Haskell
             Prototype<TSecond> second,
             Func<T, TSecond, TResult> resultSelector)
         {
-            Func<T, Func<TSecond, TResult>> selector = x => y => resultSelector(x, y);
+#if STRICT_HASKELL
+            Func<T, Func<TSecond, TResult>> selector
+                = arg1 => arg2 => resultSelector(arg1, arg2);
 
             return second.Gather(Select(selector));
+#else
+            return Bind(
+                arg1 => second.Select(
+                    arg2 => resultSelector(arg1, arg2)));
+#endif
         }
 
         // [GHC.Base] liftA3 f a b c = fmap f a <*> b <*> c
@@ -163,9 +171,22 @@ namespace Edufun.Haskell
             Prototype<T3> third,
             Func<T, T2, T3, TResult> resultSelector)
         {
-            Func<T, Func<T2, Func<T3, TResult>>> selector = x => y => z => resultSelector(x, y, z);
+#if STRICT_HASKELL
+            Func<T, Func<T2, Func<T3, TResult>>> selector
+                = arg1 => arg2 => arg3 => resultSelector(arg1, arg2, arg3);
 
             return third.Gather(second.Gather(Select(selector)));
+#else
+            // NB: We could also use the previous Zip.
+            // > Bind(
+            // >     arg1 => second.Zip(
+            // >         third, (arg2, arg3) => resultSelector(arg1, arg2, arg3)));
+
+            return Bind(
+                arg1 => second.Bind(
+                    arg2 => third.Select(
+                        arg3 => resultSelector(arg1, arg2, arg3))));
+#endif
         }
 
         #endregion
@@ -176,11 +197,13 @@ namespace Edufun.Haskell
         // Control.Monad: <*> = ap
         public Prototype<TResult> Gather<TResult>(Prototype<Func<T, TResult>> applicative)
         {
-            // In Haskell, m1 is of type m (a -> b) and m2 of type m a;
-            // return is not the "return" of C# but the Applicative::pure.
-            // Using Select this can be simplified:
-            // > return applicative.Bind(func => Select(func));
+            // In Haskell, m1 is of type m (a -> b) and m2 of type m a.
+            // WARNING: return is not the "return" of C# but Applicative::pure.
+#if STRICT_HASKELL
             return applicative.Bind(func => Bind(_ => Prototype.Of(func(_))));
+#else
+            return applicative.Bind(func => Select(func));
+#endif
         }
 
         // [Control.Monad]
@@ -234,7 +257,7 @@ namespace Edufun.Haskell
     }
 
     public partial class Prototype
-        : IFunctorOperators, IMonadOperators, IAlternativeOperators, IMonadPlusOperators
+        : IFunctorOperators, IApplicativeOperators, IMonadOperators, IAlternativeOperators, IMonadPlusOperators
     {
         #region IFunctorOperators
 
@@ -247,6 +270,16 @@ namespace Edufun.Haskell
             Func<TSource, TResult> func,
             Prototype<TSource> functor)
             => functor.Select(func);
+
+        #endregion
+
+        #region IApplicativeOperators
+
+        // [GHC.Base] (<**>) = liftA2 (flip ($))
+        public Prototype<TResult> Apply<TSource, TResult>(
+            Prototype<Func<TSource, TResult>> applicative,
+            Prototype<TSource> value)
+            => value.Gather(applicative);
 
         #endregion
 
@@ -333,21 +366,39 @@ namespace Edufun.Haskell
 
         // [GHC.Base] liftM f m1 = do { x1 <- m1; return (f x1) }
         public Func<Prototype<TSource>, Prototype<TResult>> Lift<TSource, TResult>(Func<TSource, TResult> func)
-            => m => m.Bind(arg => Prototype.Of(func(arg)));
+        {
+#if STRICT_HASKELL
+            return m => m.Bind(arg => Prototype.Of(func(arg)));
+#else
+            return m => m.Select(func);
+#endif
+        }
 
         // [GHC.Base] liftM2 f m1 m2 = do { x1 <- m1; x2 <- m2; return (f x1 x2) }
         public Func<Prototype<T1>, Prototype<T2>, Prototype<TResult>> Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
-            => (m1, m2) => m1.Bind(
+        {
+#if STRICT_HASKELL
+            return (m1, m2) => m1.Bind(
                 arg1 => m2.Bind(
                     arg2 => Prototype.Of(func(arg1, arg2))));
+#else
+            return (arg1, arg2) => arg1.Zip(arg2, func);
+#endif
+        }
 
         // [GHC.Base] liftM3 f m1 m2 m3 = do { x1 <- m1; x2 <- m2; x3 <- m3; return (f x1 x2 x3) }
         public Func<Prototype<T1>, Prototype<T2>, Prototype<T3>, Prototype<TResult>> Lift<T1, T2, T3, TResult>(
             Func<T1, T2, T3, TResult> func)
-            => (m1, m2, m3) => m1.Bind(
+        {
+#if STRICT_HASKELL
+            return (m1, m2, m3) => m1.Bind(
                 arg1 => m2.Bind(
                     arg2 => m3.Bind(
                         arg3 => Prototype.Of(func(arg1, arg2, arg3)))));
+#else
+            return (arg1, arg2, arg3) => arg1.Zip(arg2, arg3, func);
+#endif
+        }
 
         // [GHC.Base] liftM4 f m1 m2 m3 m4 = do { x1 <- m1; x2 <- m2; x3 <- m3; x4 <- m4; return (f x1 x2 x3 x4) }
         public Func<Prototype<T1>, Prototype<T2>, Prototype<T3>, Prototype<T4>, Prototype<TResult>>

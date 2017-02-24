@@ -8,27 +8,16 @@ public partial class MonadTemplate
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Kleisli
     {
-        #region Basic Monad functions
-
 <#+ if (!HasTypeConstraints) { #>
 
         public static <#= Name #><IEnumerable<TResult><#= SuffixT #>> ForEach<TSource, TResult<#= SuffixT #>>(
             this Func<TSource, <#= Name #><TResult<#= SuffixT #>>> @this,
             IEnumerable<TSource> seq)
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(seq);
-<#+ if (IsNullable) { #>
-            Warrant.NotNull<<#= Name #><IEnumerable<TResult><#= SuffixT #>>>();
-<#+ } #>
-<#+ WriteLine(); #>
-
 <#+ if (haslinq) { #>
-            return seq.SelectWith(@this);
+            => seq.SelectWith(@this);
 <#+ } else { #>
-            return seq.Select(@this).EmptyIfNull().Collect();
+            => seq.Select(@this).EmptyIfNull().Collect();
 <#+ } #>
-        }
 
 <#+ } // T4: End of !HasTypeConstraints. #>
 
@@ -37,40 +26,30 @@ public partial class MonadTemplate
             <#= Name #><TSource<#= SuffixT #>> value)
             <#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
-            Expect.NotNull(@this);
             <#+ WriteNotNull("value"); #>
-<#+ if (PostBindEnsuresSome) { #>
-            Warrant.NotNull<<#= Name #><TResult<#= SuffixT #>>>();
-<#+ } #>
 
             return value.Bind(@this);
         }
 
         public static Func<TSource, <#= Name #><TResult<#= SuffixT #>>> Compose<TSource, TMiddle, TResult<#= SuffixT #>>(
-            this Func<TSource, <#= Name #><TMiddle<#= SuffixT #>>> @this,
-            Func<TMiddle, <#= Name #><TResult<#= SuffixT #>>> func)
+            this Func<TSource, <#= Name #><TMiddle<#= SuffixT #>>> first,
+            Func<TMiddle, <#= Name #><TResult<#= SuffixT #>>> second)
             <#+ WriteTypeConstraints("TSource", "TMiddle", "TResult"); #>
         {
-            <#+ WriteNotNull(true); #>
-            Expect.NotNull(func);
-            Warrant.NotNull<Func<TSource, <#= Name #><TResult<#= SuffixT #>>>>();
+            Require.NotNull(first, nameof(first));
 
-            return _ => @this.Invoke(_).Bind(func);
+            return _ => first(_).Bind(second);
         }
 
         public static Func<TSource, <#= Name #><TResult<#= SuffixT #>>> ComposeBack<TSource, TMiddle, TResult<#= SuffixT #>>(
-            this Func<TMiddle, <#= Name #><TResult<#= SuffixT #>>> @this,
-            Func<TSource, <#= Name #><TMiddle<#= SuffixT #>>> func)
+            this Func<TMiddle, <#= Name #><TResult<#= SuffixT #>>> first,
+            Func<TSource, <#= Name #><TMiddle<#= SuffixT #>>> second)
             <#+ WriteTypeConstraints("TSource", "TMiddle", "TResult"); #>
         {
-            Expect.NotNull(@this);
-            Require.NotNull(func, nameof(func));
-            Warrant.NotNull<Func<TSource, <#= Name #><TResult<#= SuffixT #>>>>();
+            Require.NotNull(second, nameof(second));
 
-            return _ => func.Invoke(_).Bind(@this);
+            return _ => second(_).Bind(first);
         }
-
-        #endregion
     } // End of Kleisli - T4: EmitKleisliExtensions().
 <#+
     } // T4: End of EmitKleisliExtensions().

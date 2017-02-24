@@ -13,6 +13,8 @@
   <ItemGroup>
     <Compile Include="Haskell\Comonad.cs" />
     <Compile Include="Haskell\IMonadPlus.cs" />
+    <Compile Include="Haskell\IPrototype.cs" />
+    <Compile Include="Haskell\IPrototype1.cs" />
     <Compile Include="Haskell\Kleisli.cs" />
     <Compile Include="Haskell\PrototypeException.cs" />
     <Compile Include="Haskell\IApplicative.cs" />

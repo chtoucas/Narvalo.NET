@@ -10,7 +10,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-
 namespace Narvalo.Fx
 {
     using System;
@@ -21,84 +20,50 @@ namespace Narvalo.Fx
     using Narvalo.Fx.Internal;
     using Narvalo.Fx.Linq;
 
-
     // Provides a set of static methods for Maybe<T>.
-    // NB: Sometimes we prefer extension methods over static methods to be able to override them locally.
     public static partial class Maybe
     {
+
         /// <summary>
         /// The unique object of type <c>Maybe&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly Maybe<global::Narvalo.Fx.Unit> s_Unit = Of(global::Narvalo.Fx.Unit.Single);
+        private static readonly Maybe<global::Narvalo.Fx.Unit> s_Unit
+            = Of(global::Narvalo.Fx.Unit.Single);
 
         /// <summary>
         /// Gets the unique object of type <c>Maybe&lt;Unit&gt;</c>.
         /// </summary>
-        /// <value>The unique object of type <c>Maybe&lt;Unit&gt;</c>.</value>
-        public static Maybe<global::Narvalo.Fx.Unit> Unit
-        {
-            get
-            {
-
-                return s_Unit;
-            }
-        }
+        public static Maybe<global::Narvalo.Fx.Unit> Unit => s_Unit;
 
 
         /// <summary>
-        /// Gets the zero for <see cref="Maybe{T}"/>.
+        /// Gets the zero for <see cref="Maybe{T}.Bind"/>.
         /// </summary>
-        /// <value>The zero for <see cref="Maybe{T}"/>.</value>
         public static Maybe<global::Narvalo.Fx.Unit> None
-        {
-            get
-            {
-
-                return Maybe<global::Narvalo.Fx.Unit>.None;
-            }
-        }
+            => Maybe<global::Narvalo.Fx.Unit>.None;
 
 
         /// <summary>
         /// Obtains an instance of the <see cref="Maybe{T}"/> class for the specified value.
         /// </summary>
         /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
-        /// <param name="value">A value to be wrapped into a <see cref="Maybe{T}"/> object.</param>
+        /// <param name="value">A value to be wrapped into an object of type <see cref="Maybe{T}"/>.</param>
         /// <returns>An instance of the <see cref="Maybe{T}"/> class for the specified value.</returns>
         public static Maybe<T> Of<T>(T value)
             /* T4: C# indent */
-        {
-
-            return Maybe<T>.η(value);
-        }
-
-        #region Generalisations of list functions
+            => Maybe<T>.η(value);
 
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
         /// </summary>
         public static Maybe<T> Flatten<T>(Maybe<Maybe<T>> square)
             /* T4: C# indent */
-        {
-
-            return Maybe<T>.μ(square);
-        }
-
-        #endregion
-
-        #region Conditional execution of monadic expressions
+            => Maybe<T>.μ(square);
 
 
         public static Maybe<global::Narvalo.Fx.Unit> Guard(bool predicate)
-        {
+            => predicate ? Maybe.Unit : Maybe.None;
 
-            return predicate ? Maybe.Unit : Maybe<global::Narvalo.Fx.Unit>.None;
-        }
-
-
-        #endregion
-
-        #region Monadic lifting operators
 
         /// <summary>
         /// Promotes a function to use and return <see cref="Maybe{T}" /> values.
@@ -107,12 +72,10 @@ namespace Narvalo.Fx
             Func<T, TResult> func)
             /* T4: C# indent */
         {
-            Warrant.NotNull<Func<Maybe<T>, Maybe<TResult>>>();
-
-            return m =>
+            return arg =>
             {
                 /* T4: C# indent */
-                return m.Select(func);
+                return arg.Select(func);
             };
         }
 
@@ -124,12 +87,10 @@ namespace Narvalo.Fx
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
             /* T4: C# indent */
         {
-            Warrant.NotNull<Func<Maybe<T1>, Maybe<T2>, Maybe<TResult>>>();
-
-            return (m1, m2) =>
+            return (arg1, arg2) =>
             {
                 /* T4: C# indent */
-                return m1.Zip(m2, func);
+                return arg1.Zip(arg2, func);
             };
         }
 
@@ -141,12 +102,10 @@ namespace Narvalo.Fx
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
             /* T4: C# indent */
         {
-            Warrant.NotNull<Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<TResult>>>();
-
-            return (m1, m2, m3) =>
+            return (arg1, arg2, arg3) =>
             {
                 /* T4: C# indent */
-                return m1.Zip(m2, m3, func);
+                return arg1.Zip(arg2, arg3, func);
             };
         }
 
@@ -159,12 +118,10 @@ namespace Narvalo.Fx
             Func<T1, T2, T3, T4, TResult> func)
             /* T4: C# indent */
         {
-            Warrant.NotNull<Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<T4>, Maybe<TResult>>>();
-
-            return (m1, m2, m3, m4) =>
+            return (arg1, arg2, arg3, arg4) =>
             {
                 /* T4: C# indent */
-                return m1.Zip(m2, m3, m4, func);
+                return arg1.Zip(arg2, arg3, arg4, func);
             };
         }
 
@@ -177,23 +134,17 @@ namespace Narvalo.Fx
             Func<T1, T2, T3, T4, T5, TResult> func)
             /* T4: C# indent */
         {
-            Warrant.NotNull<Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<T4>, Maybe<T5>, Maybe<TResult>>>();
-
-            return (m1, m2, m3, m4, m5) =>
+            return (arg1, arg2, arg3, arg4, arg5) =>
             {
                 /* T4: C# indent */
-                return m1.Zip(m2, m3, m4, m5, func);
+                return arg1.Zip(arg2, arg3, arg4, arg5, func);
             };
         }
-
-        #endregion
     } // End of Maybe - T4: EmitMonadCore().
 
     // Provides extension methods for Maybe<T>.
     public static partial class Maybe
     {
-        #region Applicative
-
         public static Maybe<TResult> Replace<TSource, TResult>(
             this Maybe<TSource> @this,
             TResult value)
@@ -211,8 +162,9 @@ namespace Narvalo.Fx
             /* T4: C# indent */
         {
             /* T4: C# indent */
+            /* T4: C# indent */
 
-            return applicative.Apply(@this);
+            return applicative.Bind(func => @this.Select(func));
         }
 
         public static Maybe<TResult> Apply<TSource, TResult>(
@@ -220,25 +172,10 @@ namespace Narvalo.Fx
             Maybe<TSource> value)
         {
             /* T4: C# indent */
-            /* T4: C# indent */
 
-            return @this.Bind(func => value.Select(v => func.Invoke(v)));
+            return value.Gather(@this);
         }
 
-        public static Maybe<Tuple<TSource, TOther>> Zip<TSource, TOther>(
-            this Maybe<TSource> @this,
-            Maybe<TOther> other)
-            /* T4: C# indent */
-        {
-            /* T4: C# indent */
-
-            return @this.Zip(other, Tuple.Create);
-        }
-
-
-        #endregion
-
-        #region Basic Monad functions
 
         public static Maybe<TResult> Select<TSource, TResult>(
             this Maybe<TSource> @this,
@@ -248,7 +185,7 @@ namespace Narvalo.Fx
             /* T4: C# indent */
             Require.NotNull(selector, nameof(selector));
 
-            return @this.Bind(_ => Maybe.Of(selector.Invoke(_)));
+            return @this.Bind(_ => Maybe.Of(selector(_)));
         }
 
         public static Maybe<TResult> ReplaceBy<TSource, TResult>(
@@ -267,12 +204,9 @@ namespace Narvalo.Fx
         {
             /* T4: C# indent */
 
-            return Maybe.Unit;
+            return @this.Replace(global::Narvalo.Fx.Unit.Single);
+            //return Maybe.Unit;
         }
-
-        #endregion
-
-        #region Other extensions
 
         public static Maybe<TResult> Coalesce<TSource, TResult>(
             this Maybe<TSource> @this,
@@ -284,7 +218,7 @@ namespace Narvalo.Fx
             /* T4: C# indent */
             Require.NotNull(predicate, nameof(predicate));
 
-            return @this.Bind(_ => predicate.Invoke(_) ? thenResult : elseResult);
+            return @this.Bind(_ => predicate(_) ? thenResult : elseResult);
         }
 
 
@@ -298,7 +232,7 @@ namespace Narvalo.Fx
             /* T4: C# indent */
             Require.NotNull(predicate, nameof(predicate));
 
-            return @this.Bind(_ => predicate.Invoke(_) ? thenResult : Maybe<TResult>.None);
+            return @this.Bind(_ => predicate(_) ? thenResult : Maybe<TResult>.None);
         }
 
 
@@ -311,7 +245,7 @@ namespace Narvalo.Fx
             /* T4: C# indent */
             Require.NotNull(selector, nameof(selector));
 
-            return @this.Bind(_ => { using (_) { return selector.Invoke(_); } });
+            return @this.Bind(_ => { using (_) { return selector(_); } });
         }
 
         public static Maybe<TResult> Using<TSource, TResult>(
@@ -323,12 +257,8 @@ namespace Narvalo.Fx
             /* T4: C# indent */
             Require.NotNull(selector, nameof(selector));
 
-            return @this.Select(_ => { using (_) { return selector.Invoke(_); } });
+            return @this.Select(_ => { using (_) { return selector(_); } });
         }
-
-        #endregion
-
-        #region Generalisations of list functions
 
 
         public static Maybe<TSource> Where<TSource>(
@@ -340,7 +270,7 @@ namespace Narvalo.Fx
             Require.NotNull(predicate, nameof(predicate));
 
             return @this.Bind(
-                _ => predicate.Invoke(_) ? @this : Maybe<TSource>.None);
+                _ => predicate(_) ? Maybe.Of(_) : Maybe<TSource>.None);
         }
 
 
@@ -355,10 +285,16 @@ namespace Narvalo.Fx
         }
 
 
-        #endregion
+        public static Maybe<Tuple<TSource, TOther>> Zip<TSource, TOther>(
+            this Maybe<TSource> @this,
+            Maybe<TOther> other)
+            /* T4: C# indent */
+        {
+            /* T4: C# indent */
 
+            return @this.Zip(other, Tuple.Create);
+        }
 
-        #region Applicative lifting operators
 
         /// <see cref="Lift{T1, T2, T3}" />
         public static Maybe<TResult> Zip<TFirst, TSecond, TResult>(
@@ -371,7 +307,11 @@ namespace Narvalo.Fx
             /* T4: C# indent */
             Require.NotNull(resultSelector, nameof(resultSelector));
 
-            return @this.Bind(v1 => second.Select(v2 => resultSelector.Invoke(v1, v2)));
+            Func<TFirst, Func<TSecond, TResult>> selector
+                = arg1 => arg2 => resultSelector(arg1, arg2);
+
+            return second.Gather(
+                @this.Select(selector));
         }
 
         /// <see cref="Lift{T1, T2, T3, T4}" />
@@ -384,12 +324,15 @@ namespace Narvalo.Fx
         {
             /* T4: C# indent */
             /* T4: C# indent */
+            /* T4: C# indent */
             Require.NotNull(resultSelector, nameof(resultSelector));
 
-            Func<T1, Maybe<TResult>> g
-                = t1 => second.Zip(third, (t2, t3) => resultSelector.Invoke(t1, t2, t3));
+            Func<T1, Func<T2, Func<T3, TResult>>> selector
+                = arg1 => arg2 => arg3 => resultSelector(arg1, arg2, arg3);
 
-            return @this.Bind(g);
+            return third.Gather(
+                second.Gather(
+                    @this.Select(selector)));
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5}" />
@@ -403,15 +346,17 @@ namespace Narvalo.Fx
         {
             /* T4: C# indent */
             /* T4: C# indent */
+            /* T4: C# indent */
+            /* T4: C# indent */
             Require.NotNull(resultSelector, nameof(resultSelector));
 
-            Func<T1, Maybe<TResult>> g
-                = t1 => second.Zip(
-                    third,
-                    fourth,
-                    (t2, t3, t4) => resultSelector.Invoke(t1, t2, t3, t4));
+            Func<T1, Func<T2, Func<T3, Func<T4, TResult>>>> selector
+                = arg1 => arg2 => arg3 => arg4 => resultSelector(arg1, arg2, arg3, arg4);
 
-            return @this.Bind(g);
+            return fourth.Gather(
+                third.Gather(
+                    second.Gather(
+                        @this.Select(selector))));
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5, T6}" />
@@ -426,21 +371,20 @@ namespace Narvalo.Fx
         {
             /* T4: C# indent */
             /* T4: C# indent */
+            /* T4: C# indent */
+            /* T4: C# indent */
+            /* T4: C# indent */
             Require.NotNull(resultSelector, nameof(resultSelector));
 
-            Func<T1, Maybe<TResult>> g
-                = t1 => second.Zip(
-                    third,
-                    fourth,
-                    fifth,
-                    (t2, t3, t4, t5) => resultSelector.Invoke(t1, t2, t3, t4, t5));
+            Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, TResult>>>>> selector
+                = arg1 => arg2 => arg3 => arg4 => arg5 => resultSelector(arg1, arg2, arg3, arg4, arg5);
 
-            return @this.Bind(g);
+            return fifth.Gather(
+                fourth.Gather(
+                    third.Gather(
+                        second.Gather(
+                            @this.Select(selector)))));
         }
-
-        #endregion
-
-        #region Query Expression Pattern
 
 
         /// <remarks>
@@ -457,8 +401,8 @@ namespace Narvalo.Fx
             Require.NotNull(resultSelector, nameof(resultSelector));
 
             return @this.Bind(
-                _ => valueSelector.Invoke(_).Select(
-                    middle => resultSelector.Invoke(_, middle)));
+                arg => valueSelector(arg).Select(
+                    middle => resultSelector(arg, middle)));
         }
 
 
@@ -471,9 +415,6 @@ namespace Narvalo.Fx
             /* T4: C# indent */
         {
             /* T4: C# indent */
-            Expect.NotNull(outerKeySelector);
-            Expect.NotNull(innerKeySelector);
-            Expect.NotNull(resultSelector);
 
             return JoinImpl(
                 @this,
@@ -493,9 +434,6 @@ namespace Narvalo.Fx
             /* T4: C# indent */
         {
             /* T4: C# indent */
-            Expect.NotNull(outerKeySelector);
-            Expect.NotNull(innerKeySelector);
-            Expect.NotNull(resultSelector);
 
             return GroupJoinImpl(
                 @this,
@@ -507,11 +445,6 @@ namespace Narvalo.Fx
         }
 
 
-        #endregion
-
-        #region LINQ extensions
-
-
         public static Maybe<TResult> Join<TSource, TInner, TKey, TResult>(
             this Maybe<TSource> @this,
             Maybe<TInner> inner,
@@ -521,10 +454,6 @@ namespace Narvalo.Fx
             IEqualityComparer<TKey> comparer)
             /* T4: C# indent */
         {
-            Expect.NotNull(outerKeySelector);
-            Expect.NotNull(innerKeySelector);
-            Expect.NotNull(resultSelector);
-
             return JoinImpl(
                 @this,
                 inner,
@@ -543,10 +472,6 @@ namespace Narvalo.Fx
             IEqualityComparer<TKey> comparer)
             /* T4: C# indent */
         {
-            Expect.NotNull(outerKeySelector);
-            Expect.NotNull(innerKeySelector);
-            Expect.NotNull(resultSelector);
-
             return GroupJoinImpl(
                 @this,
                 inner,
@@ -575,8 +500,8 @@ namespace Narvalo.Fx
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
-                   from innerValue in keyLookupM.Invoke(outerValue).ReplaceBy(inner)
-                   select resultSelector.Invoke(outerValue, innerValue);
+                   from innerValue in keyLookupM(outerValue).ReplaceBy(inner)
+                   select resultSelector(outerValue, innerValue);
         }
 
         private static Maybe<TResult> GroupJoinImpl<TSource, TInner, TKey, TResult>(
@@ -597,7 +522,7 @@ namespace Narvalo.Fx
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
-                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).ReplaceBy(inner));
+                   select resultSelector(outerValue, keyLookupM(outerValue).ReplaceBy(inner));
         }
 
         private static Func<TSource, Maybe<TKey>> GetKeyLookup<TSource, TInner, TKey>(
@@ -611,105 +536,70 @@ namespace Narvalo.Fx
             Require.NotNull(outerKeySelector, nameof(outerKeySelector));
             Require.NotNull(comparer, nameof(comparer));
             Demand.NotNull(innerKeySelector);
-            Warrant.NotNull<Func<TSource, Maybe<TKey>>>();
 
-            return source =>
+            return arg =>
             {
-                TKey outerKey = outerKeySelector.Invoke(source);
+                TKey outerKey = outerKeySelector(arg);
 
-                return inner.Select(innerKeySelector).Where(_ => comparer.Equals(_, outerKey));
+                return inner.Select(innerKeySelector).Where(key => comparer.Equals(key, outerKey));
             };
         }
 
-
-        #endregion
     } // End of Maybe - T4: EmitMonadExtensions().
 
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Kleisli
     {
-        #region Basic Monad functions
-
 
         public static Maybe<IEnumerable<TResult>> ForEach<TSource, TResult>(
             this Func<TSource, Maybe<TResult>> @this,
             IEnumerable<TSource> seq)
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(seq);
-
-            return seq.SelectWith(@this);
-        }
-
+            => seq.SelectWith(@this);
 
         public static Maybe<TResult> Invoke<TSource, TResult>(
             this Func<TSource, Maybe<TResult>> @this,
             Maybe<TSource> value)
             /* T4: C# indent */
         {
-            Expect.NotNull(@this);
             /* T4: C# indent */
 
             return value.Bind(@this);
         }
 
         public static Func<TSource, Maybe<TResult>> Compose<TSource, TMiddle, TResult>(
-            this Func<TSource, Maybe<TMiddle>> @this,
-            Func<TMiddle, Maybe<TResult>> func)
+            this Func<TSource, Maybe<TMiddle>> first,
+            Func<TMiddle, Maybe<TResult>> second)
             /* T4: C# indent */
         {
-            Require.NotNull(@this, nameof(@this));
-            Expect.NotNull(func);
-            Warrant.NotNull<Func<TSource, Maybe<TResult>>>();
+            Require.NotNull(first, nameof(first));
 
-            return _ => @this.Invoke(_).Bind(func);
+            return _ => first(_).Bind(second);
         }
 
         public static Func<TSource, Maybe<TResult>> ComposeBack<TSource, TMiddle, TResult>(
-            this Func<TMiddle, Maybe<TResult>> @this,
-            Func<TSource, Maybe<TMiddle>> func)
+            this Func<TMiddle, Maybe<TResult>> first,
+            Func<TSource, Maybe<TMiddle>> second)
             /* T4: C# indent */
         {
-            Expect.NotNull(@this);
-            Require.NotNull(func, nameof(func));
-            Warrant.NotNull<Func<TSource, Maybe<TResult>>>();
+            Require.NotNull(second, nameof(second));
 
-            return _ => func.Invoke(_).Bind(@this);
+            return _ => second(_).Bind(first);
         }
-
-        #endregion
     } // End of Kleisli - T4: EmitKleisliExtensions().
 
     // Provides extension methods for IEnumerable<Maybe<T>>.
     public static partial class Maybe
     {
-        #region Basic Monad functions
-
 
         public static Maybe<IEnumerable<TSource>> Collect<TSource>(
             this IEnumerable<Maybe<TSource>> @this)
-        {
-            Expect.NotNull(@this);
+            => @this.CollectImpl();
 
-            return @this.CollectImpl();
-        }
-
-
-        #endregion
-
-
-        #region Generalisations of list functions
 
         public static Maybe<TSource> Sum<TSource>(
             this IEnumerable<Maybe<TSource>> @this)
             /* T4: C# indent */
-        {
-            Expect.NotNull(@this);
-
-            return @this.SumImpl();
-        }
-
-        #endregion
+            => @this.SumImpl();
 
     } // End of Sequence - T4: EmitMonadEnumerableExtensions().
 }
@@ -788,59 +678,30 @@ namespace Narvalo.Fx.Linq
     // - Aggregate -> Reduce or Fold
     public static partial class Qperators
     {
-        #region Basic Monad functions
-
 
         public static Maybe<IEnumerable<TResult>> SelectWith<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<TResult>> selector)
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(selector);
-
-            return @this.SelectWithImpl(selector);
-        }
-
-
-        #endregion
-
-        #region Generalisations of list functions
+            => @this.SelectWithImpl(selector);
 
 
         public static Maybe<IEnumerable<TSource>> WhereBy<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<bool>> predicate)
             /* T4: C# indent */
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(predicate);
-            Warrant.NotNull<IEnumerable<TSource>>();
-
-            return @this.WhereByImpl(predicate);
-        }
+            => @this.WhereByImpl(predicate);
 
         public static Maybe<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
             SelectUnzip<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<Tuple<TFirst, TSecond>>> selector)
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(selector);
-
-            return @this.SelectUnzipImpl(selector);
-        }
+            => @this.SelectUnzipImpl(selector);
 
         public static Maybe<IEnumerable<TResult>> ZipWith<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, Maybe<TResult>> resultSelector)
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(second);
-            Expect.NotNull(resultSelector);
-
-            return @this.ZipWithImpl(second, resultSelector);
-        }
+            => @this.ZipWithImpl(second, resultSelector);
 
 
         public static Maybe<TAccumulate> Fold<TSource, TAccumulate>(
@@ -848,54 +709,26 @@ namespace Narvalo.Fx.Linq
             TAccumulate seed,
             Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulator)
             /* T4: C# indent */
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(accumulator);
-
-            return @this.FoldImpl(seed, accumulator);
-        }
-
-        #endregion
-
-        #region Aggregate Operators
+            => @this.FoldImpl(seed, accumulator);
 
         public static Maybe<TAccumulate> FoldBack<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulator)
             /* T4: C# indent */
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(accumulator);
-
-            return @this.FoldBackImpl(seed, accumulator);
-        }
+            => @this.FoldBackImpl(seed, accumulator);
 
         public static Maybe<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Maybe<TSource>> accumulator)
             /* T4: C# indent */
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(accumulator);
-
-            return @this.ReduceImpl(accumulator);
-        }
+            => @this.ReduceImpl(accumulator);
 
         public static Maybe<TSource> ReduceBack<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Maybe<TSource>> accumulator)
             /* T4: C# indent */
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(accumulator);
-
-            return @this.ReduceBackImpl(accumulator);
-        }
-
-        #endregion
-
-        #region Catamorphisms
+            => @this.ReduceBackImpl(accumulator);
 
         // Haskell uses a different signature.
         public static Maybe<TAccumulate> Fold<TSource, TAccumulate>(
@@ -904,13 +737,7 @@ namespace Narvalo.Fx.Linq
             Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulator,
             Func<Maybe<TAccumulate>, bool> predicate)
             /* T4: C# indent */
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(accumulator);
-            Expect.NotNull(predicate);
-
-            return @this.FoldImpl(seed, accumulator, predicate);
-        }
+            => @this.FoldImpl(seed, accumulator, predicate);
 
         // Haskell uses a different signature.
         public static Maybe<TSource> Reduce<TSource>(
@@ -918,15 +745,7 @@ namespace Narvalo.Fx.Linq
             Func<TSource, TSource, Maybe<TSource>> accumulator,
             Func<Maybe<TSource>, bool> predicate)
             /* T4: C# indent */
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(accumulator);
-            Expect.NotNull(predicate);
-
-            return @this.ReduceImpl(accumulator, predicate);
-        }
-
-        #endregion
+            => @this.ReduceImpl(accumulator, predicate);
     } // End of Iterable - T4: EmitEnumerableExtensions().
 }
 
@@ -943,7 +762,6 @@ namespace Narvalo.Fx.Internal
     // You will certainly want to override them to improve performance.
     internal static partial class EnumerableExtensions
     {
-
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Maybe<IEnumerable<TResult>> SelectWithImpl<TSource, TResult>(
             this IEnumerable<TSource> @this,
@@ -963,7 +781,6 @@ namespace Narvalo.Fx.Internal
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
-            Warrant.NotNull<IEnumerable<TSource>>();
 
             Func<bool, IEnumerable<TSource>, TSource, IEnumerable<TSource>> selector
                 = (flg, list, item) => { if (flg) { return list.Prepend(item); } else { return list; } };

@@ -6,23 +6,6 @@ namespace Narvalo
     using System.Diagnostics;
     using System.Diagnostics.Contracts;
 
-    ///// <summary>
-    ///// Provides helper methods to specify preconditions.
-    ///// </summary>
-    ///// <remarks>
-    ///// <para>The methods WON'T be recognized by FxCop as guards against <see langword="null"/> value.</para>
-    ///// <para>If a condition does not hold, an unrecoverable exception is thrown
-    ///// in debug builds.</para>
-    ///// <para>This class MUST NOT be used in place of proper validation of public
-    ///// arguments but is only useful in very specialized use cases. Be wise.</para>
-    ///// <para>Personally, I can only see one situation where these helpers make sense:
-    ///// for protected overridden methods in a sealed class when the base method
-    ///// declares a contract (otherwise you should use <see cref="Promise"/>),
-    ///// when you know for certain that all callers will satisfy the condition
-    ///// and most certainly when you own all base classes. As you can see, that
-    ///// makes a lot of prerequisites...
-    ///// </para>
-    ///// </remarks>
     [DebuggerStepThrough]
     public static partial class Demand
     {

@@ -13,28 +13,14 @@ public partial class MonadTemplate
     // - Aggregate -> Reduce or Fold
     public static partial class Qperators
     {
-        #region Basic Monad functions
-
 <#+ if (!HasTypeConstraints) { #>
 
         public static <#= Name #><IEnumerable<TResult>> SelectWith<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><TResult>> selector)
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(selector);
-<#+ if (IsNullable) { #>
-            Warrant.NotNull<<#= Name #><IEnumerable<TResult>>>();
-<#+ } #>
-
-            return @this.SelectWithImpl(selector);
-        }
+            => @this.SelectWithImpl(selector);
 
 <#+ } // T4: End of !HasTypeConstraints. #>
-
-        #endregion
-
-        #region Generalisations of list functions
 
 <#+ if (!HasTypeConstraints) { #>
 
@@ -42,42 +28,19 @@ public partial class MonadTemplate
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><bool>> predicate)
             <#+ WriteTypeConstraints("TSource"); #>
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(predicate);
-            Warrant.NotNull<IEnumerable<TSource>>();
-
-            return @this.WhereByImpl(predicate);
-        }
+            => @this.WhereByImpl(predicate);
 
         public static <#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
             SelectUnzip<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><Tuple<TFirst, TSecond>>> selector)
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(selector);
-<#+ if (IsNullable && HasZero) { #>
-            Warrant.NotNull<<#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>();
-<#+ } #>
-
-            return @this.SelectUnzipImpl(selector);
-        }
+            => @this.SelectUnzipImpl(selector);
 
         public static <#= Name #><IEnumerable<TResult>> ZipWith<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, <#= Name #><TResult>> resultSelector)
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(second);
-            Expect.NotNull(resultSelector);
-<#+ if (IsNullable) { #>
-            Warrant.NotNull<<#= Name #><IEnumerable<TResult>>>();
-<#+ } #>
-
-            return @this.ZipWithImpl(second, resultSelector);
-        }
+            => @this.ZipWithImpl(second, resultSelector);
 
 <#+ } // T4: End of !HasTypeConstraints. #>
 
@@ -86,66 +49,26 @@ public partial class MonadTemplate
             TAccumulate seed,
             Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulator)
             <#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(accumulator);
-<#+ if (IsNullable && HasZero) { #>
-            Warrant.NotNull<<#= Name #><TAccumulate>>();
-<#+ } #>
-
-            return @this.FoldImpl(seed, accumulator);
-        }
-
-        #endregion
-
-        #region Aggregate Operators
+            => @this.FoldImpl(seed, accumulator);
 
         public static <#= Name #><TAccumulate> FoldBack<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulator)
             <#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(accumulator);
-<#+ if (IsNullable && HasZero) { #>
-            Warrant.NotNull<<#= Name #><TAccumulate>>();
-<#+ } #>
-
-            return @this.FoldBackImpl(seed, accumulator);
-        }
+            => @this.FoldBackImpl(seed, accumulator);
 
         public static <#= Name #><TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, <#= Name #><TSource>> accumulator)
             <#+ WriteTypeConstraints("TSource"); #>
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(accumulator);
-<#+ if (IsNullable && HasZero) { #>
-            Warrant.NotNull<<#= Name #><TSource>>();
-<#+ } #>
-
-            return @this.ReduceImpl(accumulator);
-        }
+            => @this.ReduceImpl(accumulator);
 
         public static <#= Name #><TSource> ReduceBack<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, <#= Name #><TSource>> accumulator)
             <#+ WriteTypeConstraints("TSource"); #>
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(accumulator);
-<#+ if (IsNullable && HasZero) { #>
-            Warrant.NotNull<<#= Name #><TSource>>();
-<#+ } #>
-
-            return @this.ReduceBackImpl(accumulator);
-        }
-
-        #endregion
-
-        #region Catamorphisms
+            => @this.ReduceBackImpl(accumulator);
 
         // Haskell uses a different signature.
         public static <#= Name #><TAccumulate> Fold<TSource, TAccumulate>(
@@ -154,16 +77,7 @@ public partial class MonadTemplate
             Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulator,
             Func<<#= Name #><TAccumulate>, bool> predicate)
             <#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(accumulator);
-            Expect.NotNull(predicate);
-<#+ if (IsNullable && HasZero) { #>
-            Warrant.NotNull<<#= Name #><TAccumulate>>();
-<#+ } #>
-
-            return @this.FoldImpl(seed, accumulator, predicate);
-        }
+            => @this.FoldImpl(seed, accumulator, predicate);
 
         // Haskell uses a different signature.
         public static <#= Name #><TSource> Reduce<TSource>(
@@ -171,18 +85,7 @@ public partial class MonadTemplate
             Func<TSource, TSource, <#= Name #><TSource>> accumulator,
             Func<<#= Name #><TSource>, bool> predicate)
             <#+ WriteTypeConstraints("TSource"); #>
-        {
-            Expect.NotNull(@this);
-            Expect.NotNull(accumulator);
-            Expect.NotNull(predicate);
-<#+ if (IsNullable && HasZero) { #>
-            Warrant.NotNull<<#= Name #><TSource>>();
-<#+ } #>
-
-            return @this.ReduceImpl(accumulator, predicate);
-        }
-
-        #endregion
+            => @this.ReduceImpl(accumulator, predicate);
     } // End of Iterable - T4: EmitEnumerableExtensions().
 <#+
     } // T4: End of EmitEnumerableExtensions().

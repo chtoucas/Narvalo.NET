@@ -2,8 +2,9 @@
 <Dictionary>
   <Words>
     <Recognized>
+      <Word>Combinator</Word>
       <Word>Ident</Word>
-      <Word>Kunc</Word>
+      <Word>Kleisli</Word>
       <Word>Qperators</Word>
     </Recognized>
 

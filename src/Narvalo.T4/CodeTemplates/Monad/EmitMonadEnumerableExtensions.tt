@@ -8,42 +8,20 @@ public partial class MonadTemplate
     // Provides extension methods for IEnumerable<<#= Name #><T<#= SuffixT #>>>.
     public static partial class <#= Name #>
     {
-        #region Basic Monad functions
-
 <#+ if (!HasTypeConstraints) { #>
 
         public static <#= Name #><IEnumerable<TSource><#= SuffixT #>> Collect<TSource<#= SuffixT #>>(
             this IEnumerable<<#= Name #><TSource<#= SuffixT #>>> @this)
-        {
-            Expect.NotNull(@this);
-<#+ if (IsNullable) { #>
-            Warrant.NotNull<<#= Name #><IEnumerable<TSource><#= SuffixT #>>>();
-<#+ } #>
-
-            return @this.CollectImpl();
-        }
+            => @this.CollectImpl();
 
 <#+ } // T4: End of !HasTypeConstraints. #>
 
-        #endregion
-
 <#+ if (HasSum) { #>
-
-        #region Generalisations of list functions
 
         public static <#= Name #><TSource> Sum<TSource>(
             this IEnumerable<<#= Name #><TSource>> @this)
             <#+ WriteTypeConstraints("TSource"); #>
-        {
-            Expect.NotNull(@this);
-<#+ if (IsNullable) { #>
-            Warrant.NotNull<<#= Name #><TSource>>();
-<#+ } #>
-
-            return @this.SumImpl();
-        }
-
-        #endregion
+            => @this.SumImpl();
 
 <#+ } // T4: End of HasSum. #>
     } // End of Sequence - T4: EmitMonadEnumerableExtensions().

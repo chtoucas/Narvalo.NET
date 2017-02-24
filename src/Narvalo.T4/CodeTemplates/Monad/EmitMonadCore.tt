@@ -5,73 +5,31 @@ public partial class MonadTemplate
     protected void EmitMonadCore()
     {
 #>
-<#+ /* DISABLED #>
-
-    public partial <#= ClassDeclaration #> <#= Name #><T<#= SuffixT #>>
-    {
-        public void Forever(Action<T> action) => ForeverImpl(action);
-
-        partial void ForeverImpl(Action<T> action);
-    }
-
-<#+ End of DISABLED */ #>
-
     // Provides a set of static methods for <#= Name #><T<#= SuffixT #>>.
-    // NB: Sometimes we prefer extension methods over static methods to be able to override them locally.
     public static partial class <#= Name #>
     {
-<#+ if (HasSuffixT) { /* DISABLED #>
-        // Currently disabled. The public equivalent is named Skip().
-        private static <#= Name #><global::Narvalo.Fx.Unit<#= SuffixT #>> OfUnit<<#= RawSuffixT #>>()
-        {
-<#+ if (IsNullable) { #>
-            Warrant.NotNull<<#= Name #><global::Narvalo.Fx.Unit<#= SuffixT #>>>();
-<#+ } #>
+<#+ if (!HasSuffixT) { #>
 
-            return <#+ WriteFactory("Unit"); #>(global::Narvalo.Fx.Unit.Single);
-        }
-
-<#+ */ } else { #>
         /// <summary>
         /// The unique object of type <c><#= Name #>&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly <#= Name #><global::Narvalo.Fx.Unit> s_Unit = <#= ReturnName #>(global::Narvalo.Fx.Unit.Single);
+        private static readonly <#= Name #><global::Narvalo.Fx.Unit> s_Unit
+            = <#= ReturnName #>(global::Narvalo.Fx.Unit.Single);
 
         /// <summary>
         /// Gets the unique object of type <c><#= Name #>&lt;Unit&gt;</c>.
         /// </summary>
-        /// <value>The unique object of type <c><#= Name #>&lt;Unit&gt;</c>.</value>
-        public static <#= Name #><global::Narvalo.Fx.Unit> Unit
-        {
-            get
-            {
-<#+ if (IsNullable) { #>
-                Warrant.NotNull<<#= Name #><global::Narvalo.Fx.Unit>>();
+        public static <#= Name #><global::Narvalo.Fx.Unit> Unit => s_Unit;
+
 <#+ } #>
-
-                return s_Unit;
-            }
-        }
-
-<#+ } // End of HasSuffixT #>
 
 <#+ if (HasZero) { #>
 
         /// <summary>
-        /// Gets the zero for <see cref="<#= Name #>{T}"/>.
+        /// Gets the zero for <see cref="<#= Name #>{T}.Bind"/>.
         /// </summary>
-        /// <value>The zero for <see cref="<#= Name #>{T}"/>.</value>
         public static <#= Name #><global::Narvalo.Fx.Unit> <#= ZeroName #>
-        {
-            get
-            {
-<#+ if (IsNullable) { #>
-                Warrant.NotNull<<#= Name #><global::Narvalo.Fx.Unit>>();
-<#+ } #>
-
-                return <#= Name #><global::Narvalo.Fx.Unit>.<#= ZeroName #>;
-            }
-        }
+            => <#= Name #><global::Narvalo.Fx.Unit>.<#= ZeroName #>;
 
 <#+ } // End of HasZero #>
 
@@ -82,56 +40,25 @@ public partial class MonadTemplate
 <#+ if (HasSuffixT) { #>
         /// <typeparam name="<#= RawSuffixT #>"></typeparam>
 <#+ } #>
-        /// <param name="value">A value to be wrapped into a <see cref="<#= Name #>{T<#= SuffixT #>}"/> object.</param>
+        /// <param name="value">A value to be wrapped into an object of type <see cref="<#= Name #>{T<#= SuffixT #>}"/>.</param>
         /// <returns>An instance of the <see cref="<#= Name #>{T<#= SuffixT #>}"/> class for the specified value.</returns>
         public static <#= Name #><T<#= SuffixT #>> <#= ReturnName #><T<#= SuffixT #>>(T value)
             <#+ WriteTypeConstraints("T"); #>
-        {
-<#+ if (IsNullable) { #>
-            Warrant.NotNull<<#= Name #><T<#= SuffixT #>>>();
-<#+ } #>
-
-            return <#= Name #><T<#= SuffixT #>>.η(value);
-        }
-
-        #region Generalisations of list functions
+            => <#= Name #><T<#= SuffixT #>>.η(value);
 
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
         /// </summary>
         public static <#= Name #><T<#= SuffixT #>> Flatten<T<#= SuffixT #>>(<#= Name #><<#= Name #><T<#= SuffixT #>><#= SuffixT #>> square)
             <#+ WriteTypeConstraints("T"); #>
-        {
-<#+ if (IsNullable) { #>
-            Expect.NotNull(square);
-<#+ } #>
-<#+ if (PostMultiplicationEnsuresSome) { #>
-            Warrant.NotNull<<#= Name #><T<#= SuffixT #>>>();
-<#+ } #>
-
-            return <#= Name #><T<#= SuffixT #>>.μ(square);
-        }
-
-        #endregion
-
-        #region Conditional execution of monadic expressions
+            => <#= Name #><T<#= SuffixT #>>.μ(square);
 
 <#+ if (HasZero) { #>
 
         public static <#= Name #><global::Narvalo.Fx.Unit> Guard(bool predicate)
-        {
-<#+ if (IsNullable) { #>
-            Warrant.NotNull<<#= Name #><global::Narvalo.Fx.Unit>>();
-<#+ } #>
-
-            return predicate ? <#= Name #>.Unit : <#= Name #><global::Narvalo.Fx.Unit>.<#= ZeroName #>;
-        }
+            => predicate ? <#= Name #>.Unit : <#= Name #>.<#= ZeroName #>;
 
 <#+ } // T4: End of HasZero. #>
-
-        #endregion
-
-        #region Monadic lifting operators
 
         /// <summary>
         /// Promotes a function to use and return <see cref="<#= Name #>{T<#= SuffixT #>}" /> values.
@@ -140,12 +67,10 @@ public partial class MonadTemplate
             Func<T, TResult> func)
             <#+ WriteTypeConstraints("T", "TResult"); #>
         {
-            Warrant.NotNull<Func<<#= Name #><T<#= SuffixT #>>, <#= Name #><TResult<#= SuffixT #>>>>();
-
-            return m =>
+            return arg =>
             {
-                <#+ WriteNotNull("m"); #>
-                return m.<#= MapName #>(func);
+                <#+ WriteNotNull("arg"); #>
+                return arg.<#= MapName #>(func);
             };
         }
 
@@ -157,12 +82,10 @@ public partial class MonadTemplate
             Lift<T1, T2, TResult<#= SuffixT #>>(Func<T1, T2, TResult> func)
             <#+ WriteTypeConstraints("T1", "T2", "TResult"); #>
         {
-            Warrant.NotNull<Func<<#= Name #><T1<#= SuffixT #>>, <#= Name #><T2<#= SuffixT #>>, <#= Name #><TResult<#= SuffixT #>>>>();
-
-            return (m1, m2) =>
+            return (arg1, arg2) =>
             {
-                <#+ WriteNotNull("m1"); #>
-                return m1.Zip(m2, func);
+                <#+ WriteNotNull("arg1"); #>
+                return arg1.Zip(arg2, func);
             };
         }
 
@@ -174,12 +97,10 @@ public partial class MonadTemplate
             Lift<T1, T2, T3, TResult<#= SuffixT #>>(Func<T1, T2, T3, TResult> func)
             <#+ WriteTypeConstraints("T1", "T2", "T3", "TResult"); #>
         {
-            Warrant.NotNull<Func<<#= Name #><T1<#= SuffixT #>>, <#= Name #><T2<#= SuffixT #>>, <#= Name #><T3<#= SuffixT #>>, <#= Name #><TResult<#= SuffixT #>>>>();
-
-            return (m1, m2, m3) =>
+            return (arg1, arg2, arg3) =>
             {
-                <#+ WriteNotNull("m1"); #>
-                return m1.Zip(m2, m3, func);
+                <#+ WriteNotNull("arg1"); #>
+                return arg1.Zip(arg2, arg3, func);
             };
         }
 
@@ -192,12 +113,10 @@ public partial class MonadTemplate
             Func<T1, T2, T3, T4, TResult> func)
             <#+ WriteTypeConstraints("T1", "T2", "T3", "T4", "TResult"); #>
         {
-            Warrant.NotNull<Func<<#= Name #><T1<#= SuffixT #>>, <#= Name #><T2<#= SuffixT #>>, <#= Name #><T3<#= SuffixT #>>, <#= Name #><T4<#= SuffixT #>>, <#= Name #><TResult<#= SuffixT #>>>>();
-
-            return (m1, m2, m3, m4) =>
+            return (arg1, arg2, arg3, arg4) =>
             {
-                <#+ WriteNotNull("m1"); #>
-                return m1.Zip(m2, m3, m4, func);
+                <#+ WriteNotNull("arg1"); #>
+                return arg1.Zip(arg2, arg3, arg4, func);
             };
         }
 
@@ -210,16 +129,12 @@ public partial class MonadTemplate
             Func<T1, T2, T3, T4, T5, TResult> func)
             <#+ WriteTypeConstraints("T1", "T2", "T3", "T4", "T5", "TResult"); #>
         {
-            Warrant.NotNull<Func<<#= Name #><T1<#= SuffixT #>>, <#= Name #><T2<#= SuffixT #>>, <#= Name #><T3<#= SuffixT #>>, <#= Name #><T4<#= SuffixT #>>, <#= Name #><T5<#= SuffixT #>>, <#= Name #><TResult<#= SuffixT #>>>>();
-
-            return (m1, m2, m3, m4, m5) =>
+            return (arg1, arg2, arg3, arg4, arg5) =>
             {
-                <#+ WriteNotNull("m1"); #>
-                return m1.Zip(m2, m3, m4, m5, func);
+                <#+ WriteNotNull("arg1"); #>
+                return arg1.Zip(arg2, arg3, arg4, arg5, func);
             };
         }
-
-        #endregion
     } // End of <#= Name #> - T4: EmitMonadCore().
 <#+
     } // T4: End of EmitMonadCore().

@@ -8,17 +8,12 @@ public partial class MonadTemplate
     // Provides extension methods for <#= Name #><T<#= SuffixT #>>.
     public static partial class <#= Name #>
     {
-        #region Applicative
-
         public static <#= Name #><TResult<#= SuffixT #>> Replace<TSource, TResult<#= SuffixT #>>(
             this <#= Name #><TSource<#= SuffixT #>> @this,
             TResult value)
             <#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
             <#+ WriteNotNull(); #>
-<#+ if (PostMapEnsuresSome) { #>
-            Warrant.NotNull<<#= Name #><TResult<#= SuffixT #>>>();
-<#+ } #>
 
             return @this.Select(_ => value);
         }
@@ -30,36 +25,22 @@ public partial class MonadTemplate
             <#= Name #><Func<TSource, TResult><#= SuffixT #>> applicative)
             <#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
+            <#+ WriteNotNull(); #>
             <#+ WriteNotNull("applicative"); #>
 
-            return applicative.Apply(@this);
+            return applicative.Bind(func => @this.Select(func));
         }
 
         public static <#= Name #><TResult<#= SuffixT #>> Apply<TSource, TResult<#= SuffixT #>>(
             this <#= Name #><Func<TSource, TResult><#= SuffixT #>> @this,
             <#= Name #><TSource<#= SuffixT #>> value)
         {
-            <#+ WriteNotNull(); #>
             <#+ WriteNotNull("value"); #>
 
-            return @this.Bind(func => value.Select(v => func.Invoke(v)));
-        }
-
-        public static <#= Name #><Tuple<TSource, TOther><#= SuffixT #>> Zip<TSource, TOther<#= SuffixT #>>(
-            this <#= Name #><TSource<#= SuffixT #>> @this,
-            <#= Name #><TOther<#= SuffixT #>> other)
-            <#+ WriteTypeConstraints("TSource", "TOther"); #>
-        {
-            <#+ WriteNotNull(); #>
-
-            return @this.Zip(other, Tuple.Create);
+            return value.Gather(@this);
         }
 
 <#+ } // T4: End of !HasTypeConstraints. #>
-
-        #endregion
-
-        #region Basic Monad functions
 
         public static <#= Name #><TResult<#= SuffixT #>> <#= MapName #><TSource, TResult<#= SuffixT #>>(
             this <#= Name #><TSource<#= SuffixT #>> @this,
@@ -68,11 +49,8 @@ public partial class MonadTemplate
         {
             <#+ WriteNotNull(); #>
             Require.NotNull(selector, nameof(selector));
-<#+ if (PostBindEnsuresSome) { #>
-            Warrant.NotNull<<#= Name #><TResult<#= SuffixT #>>>();
-<#+ } #>
 
-            return @this.Bind(_ => <#+ WriteFactory("TResult"); #>(selector.Invoke(_)));
+            return @this.Bind(_ => <#+ WriteFactory("TResult"); #>(selector(_)));
         }
 
         public static <#= Name #><TResult<#= SuffixT #>> ReplaceBy<TSource, TResult<#= SuffixT #>>(
@@ -81,9 +59,6 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
             <#+ WriteNotNull(); #>
-<#+ if (PostBindEnsuresSome) { #>
-            Warrant.NotNull<<#= Name #><TResult<#= SuffixT #>>>();
-<#+ } #>
 
             return @this.Bind(_ => other);
         }
@@ -95,21 +70,14 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource"); #>
         {
             <#+ WriteNotNull(); #>
-<#+ if (IsNullable) { #>
-            Warrant.NotNull<<#= Name #><global::Narvalo.Fx.Unit<#= SuffixT #>>>();
-<#+ } #>
-<#+ WriteLine(); #>
 
+            return @this.Replace(global::Narvalo.Fx.Unit.Single);
 <#+ if (HasSuffixT) { #>
-            return <#+ WriteFactory("Unit"); #>(global::Narvalo.Fx.Unit.Single);
+            //return <#+ WriteFactory("Unit"); #>(global::Narvalo.Fx.Unit.Single);
 <#+ } else { #>
-            return <#= Name #>.Unit;
+            //return <#= Name #>.Unit;
 <#+ } #>
         }
-
-        #endregion
-
-        #region Other extensions
 
         public static <#= Name #><TResult<#= SuffixT #>> Coalesce<TSource, TResult<#= SuffixT #>>(
             this <#= Name #><TSource<#= SuffixT #>> @this,
@@ -120,11 +88,8 @@ public partial class MonadTemplate
         {
             <#+ WriteNotNull(); #>
             Require.NotNull(predicate, nameof(predicate));
-<#+ if (PostBindEnsuresSome) { #>
-            Warrant.NotNull<<#= Name #><TResult<#= SuffixT #>>>();
-<#+ } #>
 
-            return @this.Bind(_ => predicate.Invoke(_) ? thenResult : elseResult);
+            return @this.Bind(_ => predicate(_) ? thenResult : elseResult);
         }
 
 <#+ if (HasZero) { #>
@@ -138,11 +103,8 @@ public partial class MonadTemplate
         {
             <#+ WriteNotNull(); #>
             Require.NotNull(predicate, nameof(predicate));
-<#+ if (PostBindEnsuresSome) { #>
-            Warrant.NotNull<<#= Name #><TResult>>();
-<#+ } #>
 
-            return @this.Bind(_ => predicate.Invoke(_) ? thenResult : <#= Name #><TResult>.<#= ZeroName #>);
+            return @this.Bind(_ => predicate(_) ? thenResult : <#= Name #><TResult>.<#= ZeroName #>);
         }
 
 <#+ } // T4: End of HasZero. #>
@@ -156,7 +118,7 @@ public partial class MonadTemplate
             <#+ WriteNotNull(); #>
             Require.NotNull(selector, nameof(selector));
 
-            return @this.Bind(_ => { using (_) { return selector.Invoke(_); } });
+            return @this.Bind(_ => { using (_) { return selector(_); } });
         }
 
         public static <#= Name #><TResult<#= SuffixT #>> Using<TSource, TResult<#= SuffixT #>>(
@@ -168,12 +130,8 @@ public partial class MonadTemplate
             <#+ WriteNotNull(); #>
             Require.NotNull(selector, nameof(selector));
 
-            return @this.<#= MapName #>(_ => { using (_) { return selector.Invoke(_); } });
+            return @this.<#= MapName #>(_ => { using (_) { return selector(_); } });
         }
-
-        #endregion
-
-        #region Generalisations of list functions
 
 <#+ if (HasZero) { #>
 
@@ -184,12 +142,9 @@ public partial class MonadTemplate
         {
             <#+ WriteNotNull(); #>
             Require.NotNull(predicate, nameof(predicate));
-<#+ if (PostBindEnsuresSome) { #>
-            Warrant.NotNull<<#= Name #><TSource<#= SuffixT #>>>();
-<#+ } #>
 
             return @this.Bind(
-                _ => predicate.Invoke(_) ? @this : <#= Name #><TSource<#= SuffixT #>>.<#= ZeroName #>);
+                _ => predicate(_) ? <#+ WriteFactory("TSource"); #>(_) : <#= Name #><TSource<#= SuffixT #>>.<#= ZeroName #>);
         }
 
 <#+ } // T4: End of HasZero. #>
@@ -202,20 +157,13 @@ public partial class MonadTemplate
         {
             <#+ WriteNotNull(); #>
             Require.Range(count >= 1, nameof(count));
-<#+ if (PostMapEnsuresSome) { #>
-            Warrant.NotNull<<#= Name #><IEnumerable<TSource><#= SuffixT #>>>();
-<#+ } #>
 
             return @this.<#= MapName #>(_ => Enumerable.Repeat(_, count));
         }
 
 <#+ } // T4: End of !HasTypeConstraints. #>
 
-        #endregion
-
 <#+ /* DISABLED #>
-
-        #region Conditional execution of monadic expressions
 
         // Haskell uses a different signature.
         public static void When<TSource<#= SuffixT #>>(
@@ -230,7 +178,7 @@ public partial class MonadTemplate
 
             @this.Bind(
                 _ => {
-                    if (predicate.Invoke(_)) { action.Invoke(_); }
+                    if (predicate(_)) { action(_); }
 
 <#+ if (HasSuffixT) { #>
                     return @this.Skip();
@@ -248,17 +196,25 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource"); #>
         {
             <#+ WriteNotNull(); #>
-            Expect.NotNull(predicate);
-            Expect.NotNull(action);
 
-            @this.When(_ => !predicate.Invoke(_), action);
+            @this.When(_ => !predicate(_), action);
         }
-
-        #endregion
 
 <#+ End of DISABLED */ #>
 
-        #region Applicative lifting operators
+<#+ if (!HasTypeConstraints) { #>
+
+        public static <#= Name #><Tuple<TSource, TOther><#= SuffixT #>> Zip<TSource, TOther<#= SuffixT #>>(
+            this <#= Name #><TSource<#= SuffixT #>> @this,
+            <#= Name #><TOther<#= SuffixT #>> other)
+            <#+ WriteTypeConstraints("TSource", "TOther"); #>
+        {
+            <#+ WriteNotNull(); #>
+
+            return @this.Zip(other, Tuple.Create);
+        }
+
+<#+ } #>
 
         /// <see cref="Lift{T1, T2, T3}" />
         public static <#= Name #><TResult<#= SuffixT #>> Zip<TFirst, TSecond, TResult<#= SuffixT #>>(
@@ -270,11 +226,18 @@ public partial class MonadTemplate
             <#+ WriteNotNull(); #>
             <#+ WriteNotNull("second"); #>
             Require.NotNull(resultSelector, nameof(resultSelector));
-<#+ if (PostBindEnsuresSome) { #>
-            Warrant.NotNull<<#= Name #><TResult<#= SuffixT #>>>();
-<#+ } #>
 
-            return @this.Bind(v1 => second.<#= MapName #>(v2 => resultSelector.Invoke(v1, v2)));
+<#+ if (HasTypeConstraints) { #>
+            return @this.Bind(
+                arg1 => second.Select(
+                    arg2 => resultSelector(arg1, arg2)));
+<#+ } else { #>
+            Func<TFirst, Func<TSecond, TResult>> selector
+                = arg1 => arg2 => resultSelector(arg1, arg2);
+
+            return second.Gather(
+                @this.Select(selector));
+<#+ } #>
         }
 
         /// <see cref="Lift{T1, T2, T3, T4}" />
@@ -287,15 +250,22 @@ public partial class MonadTemplate
         {
             <#+ WriteNotNull(); #>
             <#+ WriteNotNull("second"); #>
+            <#+ WriteNotNull("third"); #>
             Require.NotNull(resultSelector, nameof(resultSelector));
-<#+ if (PostBindEnsuresSome) { #>
-            Warrant.NotNull<<#= Name #><TResult<#= SuffixT #>>>();
+
+<#+ if (HasTypeConstraints) { #>
+            return @this.Bind(
+                arg1 => second.Bind(
+                    arg2 => third.Select(
+                        arg3 => resultSelector(arg1, arg2, arg3))));
+<#+ } else { #>
+            Func<T1, Func<T2, Func<T3, TResult>>> selector
+                = arg1 => arg2 => arg3 => resultSelector(arg1, arg2, arg3);
+
+            return third.Gather(
+                second.Gather(
+                    @this.Select(selector)));
 <#+ } #>
-
-            Func<T1, <#= Name #><TResult<#= SuffixT #>>> g
-                = t1 => second.Zip(third, (t2, t3) => resultSelector.Invoke(t1, t2, t3));
-
-            return @this.Bind(g);
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5}" />
@@ -309,18 +279,25 @@ public partial class MonadTemplate
         {
             <#+ WriteNotNull(); #>
             <#+ WriteNotNull("second"); #>
+            <#+ WriteNotNull("third"); #>
+            <#+ WriteNotNull("fourth"); #>
             Require.NotNull(resultSelector, nameof(resultSelector));
-<#+ if (PostBindEnsuresSome) { #>
-            Warrant.NotNull<<#= Name #><TResult<#= SuffixT #>>>();
+
+<#+ if (HasTypeConstraints) { #>
+            return @this.Bind(
+                arg1 => second.Bind(
+                    arg2 => third.Bind(
+                        arg3 => fourth.Select(
+                            arg4 => resultSelector(arg1, arg2, arg3, arg4)))));
+<#+ } else { #>
+            Func<T1, Func<T2, Func<T3, Func<T4, TResult>>>> selector
+                = arg1 => arg2 => arg3 => arg4 => resultSelector(arg1, arg2, arg3, arg4);
+
+            return fourth.Gather(
+                third.Gather(
+                    second.Gather(
+                        @this.Select(selector))));
 <#+ } #>
-
-            Func<T1, <#= Name #><TResult<#= SuffixT #>>> g
-                = t1 => second.Zip(
-                    third,
-                    fourth,
-                    (t2, t3, t4) => resultSelector.Invoke(t1, t2, t3, t4));
-
-            return @this.Bind(g);
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5, T6}" />
@@ -335,24 +312,29 @@ public partial class MonadTemplate
         {
             <#+ WriteNotNull(); #>
             <#+ WriteNotNull("second"); #>
+            <#+ WriteNotNull("third"); #>
+            <#+ WriteNotNull("fourth"); #>
+            <#+ WriteNotNull("fifth"); #>
             Require.NotNull(resultSelector, nameof(resultSelector));
-<#+ if (PostBindEnsuresSome) { #>
-            Warrant.NotNull<<#= Name #><TResult<#= SuffixT #>>>();
+
+<#+ if (HasTypeConstraints) { #>
+            return @this.Bind(
+                arg1 => second.Bind(
+                    arg2 => third.Bind(
+                        arg3 => fourth.Bind(
+                            arg4 => fifth.Select(
+                                arg5 => resultSelector(arg1, arg2, arg3, arg4, arg5))))));
+<#+ } else { #>
+            Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, TResult>>>>> selector
+                = arg1 => arg2 => arg3 => arg4 => arg5 => resultSelector(arg1, arg2, arg3, arg4, arg5);
+
+            return fifth.Gather(
+                fourth.Gather(
+                    third.Gather(
+                        second.Gather(
+                            @this.Select(selector)))));
 <#+ } #>
-
-            Func<T1, <#= Name #><TResult<#= SuffixT #>>> g
-                = t1 => second.Zip(
-                    third,
-                    fourth,
-                    fifth,
-                    (t2, t3, t4, t5) => resultSelector.Invoke(t1, t2, t3, t4, t5));
-
-            return @this.Bind(g);
         }
-
-        #endregion
-
-        #region Query Expression Pattern
 
 <#+ if (!PreferLinqDialect) { #>
 
@@ -364,9 +346,6 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource"); #>
         {
             <#+ WriteNotNull(); #>
-<#+ if (PostFilterEnsuresSome) { #>
-            Warrant.NotNull<<#= Name #><TSource<#= SuffixT #>>>();
-<#+ } #>
 
             return @this.<#= FilterName #>(predicate);
         }
@@ -379,9 +358,6 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
             <#+ WriteNotNull(); #>
-<#+ if (PostMapEnsuresSome) { #>
-            Warrant.NotNull<<#= Name #><TResult<#= SuffixT #>>>();
-<#+ } #>
 
             return @this.<#= MapName #>(selector);
         }
@@ -400,13 +376,10 @@ public partial class MonadTemplate
             <#+ WriteNotNull(); #>
             Require.NotNull(valueSelector, nameof(valueSelector));
             Require.NotNull(resultSelector, nameof(resultSelector));
-<#+ if (PostBindEnsuresSome) { #>
-            Warrant.NotNull<<#= Name #><TResult<#= SuffixT #>>>();
-<#+ } #>
 
             return @this.Bind(
-                _ => valueSelector.Invoke(_).<#= MapName #>(
-                    middle => resultSelector.Invoke(_, middle)));
+                arg => valueSelector(arg).<#= MapName #>(
+                    middle => resultSelector(arg, middle)));
         }
 
 <#+ if (HasJoin) { #>
@@ -420,15 +393,6 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
         {
             <#+ WriteNotNull(); #>
-<#+ if (IsNullable) { #>
-            Expect.NotNull(inner);
-<#+ } #>
-            Expect.NotNull(outerKeySelector);
-            Expect.NotNull(innerKeySelector);
-            Expect.NotNull(resultSelector);
-<#+ if (PostJoinEnsuresSome) { #>
-            Warrant.NotNull<<#= Name #><TResult>>();
-<#+ } #>
 
             return JoinImpl(
                 @this,
@@ -448,15 +412,6 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
         {
             <#+ WriteNotNull(); #>
-<#+ if (IsNullable) { #>
-            Expect.NotNull(inner);
-<#+ } #>
-            Expect.NotNull(outerKeySelector);
-            Expect.NotNull(innerKeySelector);
-            Expect.NotNull(resultSelector);
-<#+ if (PostGroupJoinEnsuresSome) { #>
-            Warrant.NotNull<<#= Name #><TResult>>();
-<#+ } #>
 
             return GroupJoinImpl(
                 @this,
@@ -469,10 +424,6 @@ public partial class MonadTemplate
 
 <#+ } // T4: End of HasJoin. #>
 
-        #endregion
-
-        #region LINQ extensions
-
 <#+ if (HasJoin) { #>
 
         public static <#= Name #><TResult> Join<TSource, TInner, TKey, TResult>(
@@ -484,17 +435,6 @@ public partial class MonadTemplate
             IEqualityComparer<TKey> comparer)
             <#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
         {
-<#+ if (IsNullable) { #>
-            Expect.NotNull(@this);
-            Expect.NotNull(inner);
-<#+ } #>
-            Expect.NotNull(outerKeySelector);
-            Expect.NotNull(innerKeySelector);
-            Expect.NotNull(resultSelector);
-<#+ if (PostJoinEnsuresSome) { #>
-            Warrant.NotNull<<#= Name #><TResult>>();
-<#+ } #>
-
             return JoinImpl(
                 @this,
                 inner,
@@ -513,17 +453,6 @@ public partial class MonadTemplate
             IEqualityComparer<TKey> comparer)
             <#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
         {
-<#+ if (IsNullable) { #>
-            Expect.NotNull(@this);
-            Expect.NotNull(inner);
-<#+ } #>
-            Expect.NotNull(outerKeySelector);
-            Expect.NotNull(innerKeySelector);
-            Expect.NotNull(resultSelector);
-<#+ if (PostGroupJoinEnsuresSome) { #>
-            Warrant.NotNull<<#= Name #><TResult>>();
-<#+ } #>
-
             return GroupJoinImpl(
                 @this,
                 inner,
@@ -551,15 +480,12 @@ public partial class MonadTemplate
             Demand.NotNull(outerKeySelector);
             Demand.NotNull(innerKeySelector);
             Demand.NotNull(comparer);
-<#+ if (PostMapEnsuresSome) { #>
-            Warrant.NotNull<<#= Name #><TResult>>();
-<#+ } #>
 
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
-                   from innerValue in keyLookupM.Invoke(outerValue).ReplaceBy(inner)
-                   select resultSelector.Invoke(outerValue, innerValue);
+                   from innerValue in keyLookupM(outerValue).ReplaceBy(inner)
+                   select resultSelector(outerValue, innerValue);
         }
 
         private static <#= Name #><TResult> GroupJoinImpl<TSource, TInner, TKey, TResult>(
@@ -579,14 +505,11 @@ public partial class MonadTemplate
             Demand.NotNull(outerKeySelector);
             Demand.NotNull(innerKeySelector);
             Demand.NotNull(comparer);
-<#+ if (PostMapEnsuresSome) { #>
-            Warrant.NotNull<<#= Name #><TResult>>();
-<#+ } #>
 
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
-                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).ReplaceBy(inner));
+                   select resultSelector(outerValue, keyLookupM(outerValue).ReplaceBy(inner));
         }
 
         private static Func<TSource, <#= Name #><TKey>> GetKeyLookup<TSource, TInner, TKey>(
@@ -600,19 +523,16 @@ public partial class MonadTemplate
             Require.NotNull(outerKeySelector, nameof(outerKeySelector));
             Require.NotNull(comparer, nameof(comparer));
             Demand.NotNull(innerKeySelector);
-            Warrant.NotNull<Func<TSource, <#= Name #><TKey>>>();
 
-            return source =>
+            return arg =>
             {
-                TKey outerKey = outerKeySelector.Invoke(source);
+                TKey outerKey = outerKeySelector(arg);
 
-                return inner.<#= MapName #>(innerKeySelector).<#= FilterName #>(_ => comparer.Equals(_, outerKey));
+                return inner.<#= MapName #>(innerKeySelector).<#= FilterName #>(key => comparer.Equals(key, outerKey));
             };
         }
 
 <#+ } // T4: End of HasJoin. #>
-
-        #endregion
     } // End of <#= Name #> - T4: EmitMonadExtensions().
 <#+
     } // T4: End of EmitMonadExtensions().
