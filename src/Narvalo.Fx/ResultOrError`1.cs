@@ -7,6 +7,7 @@ namespace Narvalo.Fx
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
+    using System.Linq;
     using System.Runtime.CompilerServices;
     using System.Runtime.ExceptionServices;
 
@@ -485,7 +486,7 @@ namespace Narvalo.Fx
             {
                 Warrant.NotNull<IEnumerable<T>>();
 
-                return Sequence.Empty<T>();
+                return Enumerable.Empty<T>();
             }
         }
     }
