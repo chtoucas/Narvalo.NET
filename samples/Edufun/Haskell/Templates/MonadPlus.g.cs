@@ -739,10 +739,19 @@ namespace Edufun.Haskell.Templates.Internal
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
 
-            Func<MonadPlus<TAccumulate>, TSource, MonadPlus<TAccumulate>> func
-                = (arg1, arg2) => arg1.Bind(arg => accumulator(arg, arg2));
+            MonadPlus<TAccumulate> retval = MonadPlus.Of(seed);
 
-            return @this.Aggregate(MonadPlus.Of(seed), func);
+            using (var iter = @this.GetEnumerator())
+            {
+                while (iter.MoveNext())
+                {
+                    if (retval == null) { continue; }
+
+                    retval = retval.Bind(val => accumulator(val, iter.Current));
+                }
+            }
+
+            return retval;
         }
 
         internal static MonadPlus<TAccumulate> FoldImpl<TSource, TAccumulate>(
@@ -760,9 +769,11 @@ namespace Edufun.Haskell.Templates.Internal
 
             using (var iter = @this.GetEnumerator())
             {
-                while (predicate.Invoke(retval) && iter.MoveNext())
+                while (predicate(retval) && iter.MoveNext())
                 {
-                    retval = retval.Bind(_ => accumulator.Invoke(_, iter.Current));
+                    if (retval == null) { continue; }
+
+                    retval = retval.Bind(val => accumulator(val, iter.Current));
                 }
             }
 
@@ -788,7 +799,9 @@ namespace Edufun.Haskell.Templates.Internal
 
                 while (iter.MoveNext())
                 {
-                    retval = retval.Bind(_ => accumulator.Invoke(_, iter.Current));
+                    if (retval == null) { continue; }
+
+                    retval = retval.Bind(val => accumulator(val, iter.Current));
                 }
 
                 return retval;
@@ -814,9 +827,11 @@ namespace Edufun.Haskell.Templates.Internal
 
                 MonadPlus<TSource> retval = MonadPlus.Of(iter.Current);
 
-                while (predicate.Invoke(retval) && iter.MoveNext())
+                while (predicate(retval) && iter.MoveNext())
                 {
-                    retval = retval.Bind(_ => accumulator.Invoke(_, iter.Current));
+                    if (retval == null) { continue; }
+
+                    retval = retval.Bind(val => accumulator(val, iter.Current));
                 }
 
                 return retval;

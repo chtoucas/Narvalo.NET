@@ -93,10 +93,21 @@ public partial class MonadTemplate
             <#+ WriteNotNull(true); #>
             Require.NotNull(accumulator, nameof(accumulator));
 
-            Func<<#= Name #><TAccumulate>, TSource, <#= Name #><TAccumulate>> func
-                = (arg1, arg2) => arg1.Bind(arg => accumulator(arg, arg2));
+            <#= Name #><TAccumulate> retval = <#= Name #>.<#= ReturnName #>(seed);
 
-            return @this.Aggregate(<#+ WriteFactory("TAccumulate"); #>(seed), func);
+            using (var iter = @this.GetEnumerator())
+            {
+                while (iter.MoveNext())
+                {
+<#+ if (IsNullable) { #>
+                    if (retval == null) { continue; }
+
+<#+ } #>
+                    retval = retval.Bind(val => accumulator(val, iter.Current));
+                }
+            }
+
+            return retval;
         }
 
 <#+ if (!SuppressMessage) { #>
@@ -117,16 +128,13 @@ public partial class MonadTemplate
 
             using (var iter = @this.GetEnumerator())
             {
-                while (predicate.Invoke(retval) && iter.MoveNext())
+                while (predicate(retval) && iter.MoveNext())
                 {
-<#+ if (IsNullable && !HasZero) { #>
-                    if (retval == null)
-                    {
-                        return null;
-                    }
+<#+ if (IsNullable) { #>
+                    if (retval == null) { continue; }
 
 <#+ } #>
-                    retval = retval.Bind(_ => accumulator.Invoke(_, iter.Current));
+                    retval = retval.Bind(val => accumulator(val, iter.Current));
                 }
             }
 
@@ -155,14 +163,11 @@ public partial class MonadTemplate
 
                 while (iter.MoveNext())
                 {
-<#+ if (IsNullable && !HasZero) { #>
-                    if (retval == null)
-                    {
-                        return null;
-                    }
+<#+ if (IsNullable) { #>
+                    if (retval == null) { continue; }
 
 <#+ } #>
-                    retval = retval.Bind(_ => accumulator.Invoke(_, iter.Current));
+                    retval = retval.Bind(val => accumulator(val, iter.Current));
                 }
 
                 return retval;
@@ -191,16 +196,13 @@ public partial class MonadTemplate
 
                 <#= Name #><TSource> retval = <#= Name #>.<#= ReturnName #>(iter.Current);
 
-                while (predicate.Invoke(retval) && iter.MoveNext())
+                while (predicate(retval) && iter.MoveNext())
                 {
-<#+ if (IsNullable && !HasZero) { #>
-                    if (retval == null)
-                    {
-                        return null;
-                    }
+<#+ if (IsNullable) { #>
+                    if (retval == null) { continue; }
 
 <#+ } #>
-                    retval = retval.Bind(_ => accumulator.Invoke(_, iter.Current));
+                    retval = retval.Bind(val => accumulator(val, iter.Current));
                 }
 
                 return retval;

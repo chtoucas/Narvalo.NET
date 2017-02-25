@@ -575,10 +575,19 @@ namespace Edufun.Haskell.Templates.Internal
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
 
-            Func<Monad<TAccumulate>, TSource, Monad<TAccumulate>> func
-                = (arg1, arg2) => arg1.Bind(arg => accumulator(arg, arg2));
+            Monad<TAccumulate> retval = Monad.Of(seed);
 
-            return @this.Aggregate(Monad.Of(seed), func);
+            using (var iter = @this.GetEnumerator())
+            {
+                while (iter.MoveNext())
+                {
+                    if (retval == null) { continue; }
+
+                    retval = retval.Bind(val => accumulator(val, iter.Current));
+                }
+            }
+
+            return retval;
         }
 
         internal static Monad<TAccumulate> FoldImpl<TSource, TAccumulate>(
@@ -596,14 +605,11 @@ namespace Edufun.Haskell.Templates.Internal
 
             using (var iter = @this.GetEnumerator())
             {
-                while (predicate.Invoke(retval) && iter.MoveNext())
+                while (predicate(retval) && iter.MoveNext())
                 {
-                    if (retval == null)
-                    {
-                        return null;
-                    }
+                    if (retval == null) { continue; }
 
-                    retval = retval.Bind(_ => accumulator.Invoke(_, iter.Current));
+                    retval = retval.Bind(val => accumulator(val, iter.Current));
                 }
             }
 
@@ -629,12 +635,9 @@ namespace Edufun.Haskell.Templates.Internal
 
                 while (iter.MoveNext())
                 {
-                    if (retval == null)
-                    {
-                        return null;
-                    }
+                    if (retval == null) { continue; }
 
-                    retval = retval.Bind(_ => accumulator.Invoke(_, iter.Current));
+                    retval = retval.Bind(val => accumulator(val, iter.Current));
                 }
 
                 return retval;
@@ -660,14 +663,11 @@ namespace Edufun.Haskell.Templates.Internal
 
                 Monad<TSource> retval = Monad.Of(iter.Current);
 
-                while (predicate.Invoke(retval) && iter.MoveNext())
+                while (predicate(retval) && iter.MoveNext())
                 {
-                    if (retval == null)
-                    {
-                        return null;
-                    }
+                    if (retval == null) { continue; }
 
-                    retval = retval.Bind(_ => accumulator.Invoke(_, iter.Current));
+                    retval = retval.Bind(val => accumulator(val, iter.Current));
                 }
 
                 return retval;

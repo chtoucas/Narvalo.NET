@@ -661,10 +661,17 @@ namespace Edufun.Haskell.Templates.Internal
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
 
-            Func<MonadValue<TAccumulate>, TSource, MonadValue<TAccumulate>> func
-                = (arg1, arg2) => arg1.Bind(arg => accumulator(arg, arg2));
+            MonadValue<TAccumulate> retval = MonadValue.Of(seed);
 
-            return @this.Aggregate(MonadValue.Of(seed), func);
+            using (var iter = @this.GetEnumerator())
+            {
+                while (iter.MoveNext())
+                {
+                    retval = retval.Bind(val => accumulator(val, iter.Current));
+                }
+            }
+
+            return retval;
         }
 
         internal static MonadValue<TAccumulate> FoldImpl<TSource, TAccumulate>(
@@ -683,9 +690,9 @@ namespace Edufun.Haskell.Templates.Internal
 
             using (var iter = @this.GetEnumerator())
             {
-                while (predicate.Invoke(retval) && iter.MoveNext())
+                while (predicate(retval) && iter.MoveNext())
                 {
-                    retval = retval.Bind(_ => accumulator.Invoke(_, iter.Current));
+                    retval = retval.Bind(val => accumulator(val, iter.Current));
                 }
             }
 
@@ -711,7 +718,7 @@ namespace Edufun.Haskell.Templates.Internal
 
                 while (iter.MoveNext())
                 {
-                    retval = retval.Bind(_ => accumulator.Invoke(_, iter.Current));
+                    retval = retval.Bind(val => accumulator(val, iter.Current));
                 }
 
                 return retval;
@@ -737,9 +744,9 @@ namespace Edufun.Haskell.Templates.Internal
 
                 MonadValue<TSource> retval = MonadValue.Of(iter.Current);
 
-                while (predicate.Invoke(retval) && iter.MoveNext())
+                while (predicate(retval) && iter.MoveNext())
                 {
-                    retval = retval.Bind(_ => accumulator.Invoke(_, iter.Current));
+                    retval = retval.Bind(val => accumulator(val, iter.Current));
                 }
 
                 return retval;

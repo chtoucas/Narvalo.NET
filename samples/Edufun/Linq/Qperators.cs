@@ -36,10 +36,10 @@ namespace Edufun.Linq
         #region Quantifiers
 
         public static bool Any<T>(this IEnumerable<T> @this, Func<T, bool> predicate)
-            => @this.Fold(true, (acc, item) => acc || predicate.Invoke(item), acc => !acc);
+            => @this.Aggregate(true, (acc, item) => acc || predicate.Invoke(item), acc => !acc);
 
         public static bool All<T>(this IEnumerable<T> @this, Func<T, bool> predicate)
-            => @this.Fold(true, (acc, item) => acc && predicate.Invoke(item), acc => acc);
+            => @this.Aggregate(true, (acc, item) => acc && predicate.Invoke(item), acc => acc);
 
         public static bool Contains<T>(this IEnumerable<T> @this, T value)
             => Contains(@this, value, EqualityComparer<T>.Default);
@@ -67,7 +67,7 @@ namespace Edufun.Linq
             this IEnumerable<T> @this,
             TResult seed,
             Func<TResult, T, TResult> accumulator)
-            => @this.Fold(seed, accumulator, Stubs<TResult>.AlwaysTrue);
+            => @this.Aggregate(seed, accumulator, Stubs<TResult>.AlwaysTrue);
 
         #endregion
 

@@ -579,10 +579,19 @@ namespace Narvalo.Fx.Internal
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
 
-            Func<ResultOrError<TAccumulate>, TSource, ResultOrError<TAccumulate>> func
-                = (arg1, arg2) => arg1.Bind(arg => accumulator(arg, arg2));
+            ResultOrError<TAccumulate> retval = ResultOrError.Of(seed);
 
-            return @this.Aggregate(ResultOrError.Of(seed), func);
+            using (var iter = @this.GetEnumerator())
+            {
+                while (iter.MoveNext())
+                {
+                    if (retval == null) { continue; }
+
+                    retval = retval.Bind(val => accumulator(val, iter.Current));
+                }
+            }
+
+            return retval;
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
@@ -601,14 +610,11 @@ namespace Narvalo.Fx.Internal
 
             using (var iter = @this.GetEnumerator())
             {
-                while (predicate.Invoke(retval) && iter.MoveNext())
+                while (predicate(retval) && iter.MoveNext())
                 {
-                    if (retval == null)
-                    {
-                        return null;
-                    }
+                    if (retval == null) { continue; }
 
-                    retval = retval.Bind(_ => accumulator.Invoke(_, iter.Current));
+                    retval = retval.Bind(val => accumulator(val, iter.Current));
                 }
             }
 
@@ -635,12 +641,9 @@ namespace Narvalo.Fx.Internal
 
                 while (iter.MoveNext())
                 {
-                    if (retval == null)
-                    {
-                        return null;
-                    }
+                    if (retval == null) { continue; }
 
-                    retval = retval.Bind(_ => accumulator.Invoke(_, iter.Current));
+                    retval = retval.Bind(val => accumulator(val, iter.Current));
                 }
 
                 return retval;
@@ -667,14 +670,11 @@ namespace Narvalo.Fx.Internal
 
                 ResultOrError<TSource> retval = ResultOrError.Of(iter.Current);
 
-                while (predicate.Invoke(retval) && iter.MoveNext())
+                while (predicate(retval) && iter.MoveNext())
                 {
-                    if (retval == null)
-                    {
-                        return null;
-                    }
+                    if (retval == null) { continue; }
 
-                    retval = retval.Bind(_ => accumulator.Invoke(_, iter.Current));
+                    retval = retval.Bind(val => accumulator(val, iter.Current));
                 }
 
                 return retval;

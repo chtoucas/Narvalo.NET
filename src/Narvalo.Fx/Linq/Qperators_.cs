@@ -12,11 +12,11 @@ namespace Narvalo.Fx.Linq
     /// - Filtering: WhereAny
     /// - Set: Append, Prepend
     /// - Element: FirstOrNone, LastOrNone, SingleOrNone
-    /// - Aggregation (catamorphisms): AggregateBack, Fold, Reduce
+    /// - Aggregation (catamorphisms): Aggregate
     /// - Quantifiers: IsEmpty
     /// - Generation: EmptyIfNull
     /// We have also operators accepting arguments in the Kleisli "category":
-    /// SelectWith, SelectUnzip, ZipWith, WhereBy, Fold, FoldBack, Reduce, ReduceBack.
+    /// SelectWith, SelectUnzip, ZipWith, WhereBy, Fold, Reduce.
     /// </remarks>
     /// For more generation operators, <seealso cref="Sequence"/>.
     public static partial class Qperators { }
