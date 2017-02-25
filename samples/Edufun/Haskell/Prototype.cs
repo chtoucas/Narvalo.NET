@@ -2,7 +2,7 @@
 
 //#define APPLICATIVE_USE_GHC_BASE
 //#define MONAD_VIA_MAP_MULTIPLY
-#define STRICT_HASKELL
+//#define STRICT_HASKELL
 
 namespace Edufun.Haskell
 {
@@ -298,6 +298,7 @@ namespace Edufun.Haskell
 
             return source.Aggregate(seed, Lift(append));
 #else
+            // This version does not use Append() which is quite expensive.
             return Prototype.Of(CollectIterator(source));
 #endif
         }

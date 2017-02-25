@@ -7,6 +7,7 @@ public partial class MonadTemplate
 #>
     // Provides default implementations for the extension methods for IEnumerable<T>.
     // You will certainly want to override them to improve performance.
+    // WARNING: This template does not handle types with more than one generic parameter.
     internal static partial class EnumerableExtensions
     {
 <#+ if (!HasTypeConstraints) { #>

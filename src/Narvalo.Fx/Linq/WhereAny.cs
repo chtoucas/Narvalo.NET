@@ -13,7 +13,6 @@ namespace Narvalo.Fx.Linq
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
-            Warrant.NotNull<IEnumerable<TSource>>();
 
             return WhereAnyIterator(@this, predicate);
         }
@@ -24,7 +23,6 @@ namespace Narvalo.Fx.Linq
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
-            Warrant.NotNull<IEnumerable<TSource>>();
 
             return WhereAnyIterator(@this, predicate);
         }
@@ -35,7 +33,6 @@ namespace Narvalo.Fx.Linq
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
-            Warrant.NotNull<IEnumerable<TSource>>();
 
             return WhereAnyIterator(@this, predicate);
         }
@@ -46,7 +43,6 @@ namespace Narvalo.Fx.Linq
         {
             Demand.NotNull(source);
             Demand.NotNull(predicate);
-            Warrant.NotNull<IEnumerable<TSource>>();
 
             foreach (var item in source)
             {
@@ -62,7 +58,6 @@ namespace Narvalo.Fx.Linq
         {
             Demand.NotNull(source);
             Demand.NotNull(predicate);
-            Warrant.NotNull<IEnumerable<TSource>>();
 
             foreach (var item in source)
             {
@@ -78,7 +73,6 @@ namespace Narvalo.Fx.Linq
         {
             Demand.NotNull(source);
             Demand.NotNull(predicate);
-            Warrant.NotNull<IEnumerable<TSource>>();
 
             foreach (var item in source)
             {

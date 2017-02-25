@@ -69,6 +69,7 @@ namespace Narvalo.Fx.Linq
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
+            Require.NotNull(resultSelector, nameof(resultSelector));
             Require.NotNull(predicate, nameof(predicate));
 
             TAccumulate retval = seed;

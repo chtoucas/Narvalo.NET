@@ -8,10 +8,6 @@ namespace Narvalo.Fx.Linq
     public static partial class Qperators
     {
         public static bool IsEmpty<TSource>(this IEnumerable<TSource> @this)
-        {
-            Expect.NotNull(@this);
-
-            return !@this.Any();
-        }
+            => !@this.Any();
     }
 }

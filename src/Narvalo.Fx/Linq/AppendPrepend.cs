@@ -12,7 +12,6 @@ namespace Narvalo.Fx.Linq
         public static IEnumerable<TSource> Append<TSource>(this IEnumerable<TSource> @this, TSource element)
         {
             Require.NotNull(@this, nameof(@this));
-            Warrant.NotNull<IEnumerable<TSource>>();
 
             return AppendIterator(@this, element);
         }
@@ -20,7 +19,6 @@ namespace Narvalo.Fx.Linq
         public static IEnumerable<TSource> Prepend<TSource>(this IEnumerable<TSource> @this, TSource element)
         {
             Require.NotNull(@this, nameof(@this));
-            Warrant.NotNull<IEnumerable<TSource>>();
 
             return PrependIterator(@this, element);
         }
@@ -28,7 +26,6 @@ namespace Narvalo.Fx.Linq
         private static IEnumerable<TSource> AppendIterator<TSource>(IEnumerable<TSource> source, TSource element)
         {
             Demand.NotNull(source);
-            Warrant.NotNull<IEnumerable<TSource>>();
 
             foreach (var item in source)
             {
@@ -41,7 +38,6 @@ namespace Narvalo.Fx.Linq
         private static IEnumerable<TSource> PrependIterator<TSource>(IEnumerable<TSource> source, TSource element)
         {
             Demand.NotNull(source);
-            Warrant.NotNull<IEnumerable<TSource>>();
 
             yield return element;
 

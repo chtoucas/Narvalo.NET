@@ -11,6 +11,7 @@ public partial class MonadTemplate
     // - Where     -> WhereBy
     // - Zip       -> ZipWith
     // - Aggregate -> Reduce or Fold
+    // WARNING: This template does not handle types with more than one generic parameter.
     public static partial class Qperators
     {
 <#+ if (!HasTypeConstraints) { #>

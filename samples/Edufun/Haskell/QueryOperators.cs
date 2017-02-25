@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-//#define STRICT_HASKELL
+#define STRICT_HASKELL
 
 namespace Edufun.Haskell
 {
@@ -75,6 +75,7 @@ namespace Edufun.Haskell
 
             return source.Aggregate(Prototype.Of(Enumerable.Empty<TSource>()), accumulator);
 #else
+            // This version does not use Append() which is quite expensive.
             return Prototype.Of(WhereByIterator(source, predicate));
 #endif
         }

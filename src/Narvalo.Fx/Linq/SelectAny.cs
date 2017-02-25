@@ -14,7 +14,6 @@ namespace Narvalo.Fx.Linq
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));
-            Warrant.NotNull<IEnumerable<TResult>>();
 
             return SelectAnyIterator(@this, selector);
         }
@@ -26,7 +25,6 @@ namespace Narvalo.Fx.Linq
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));
-            Warrant.NotNull<IEnumerable<TResult>>();
 
             return SelectAnyIterator(@this, selector);
         }
@@ -38,7 +36,6 @@ namespace Narvalo.Fx.Linq
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));
-            Warrant.NotNull<IEnumerable<TResult>>();
 
             return SelectAnyIterator(@this, selector);
         }
@@ -49,7 +46,6 @@ namespace Narvalo.Fx.Linq
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));
-            Warrant.NotNull<IEnumerable<TResult>>();
 
             return SelectAnyIterator(@this, selector);
         }
@@ -61,7 +57,6 @@ namespace Narvalo.Fx.Linq
         {
             Demand.NotNull(source);
             Demand.NotNull(selector);
-            Warrant.NotNull<IEnumerable<TResult>>();
 
             foreach (var item in source)
             {
@@ -78,7 +73,6 @@ namespace Narvalo.Fx.Linq
         {
             Demand.NotNull(source);
             Demand.NotNull(selector);
-            Warrant.NotNull<IEnumerable<TResult>>();
 
             foreach (var item in source)
             {
@@ -94,7 +88,6 @@ namespace Narvalo.Fx.Linq
         {
             Demand.NotNull(source);
             Demand.NotNull(selector);
-            Warrant.NotNull<IEnumerable<TResult>>();
 
             foreach (var item in source)
             {
@@ -110,7 +103,6 @@ namespace Narvalo.Fx.Linq
         {
             Demand.NotNull(source);
             Demand.NotNull(selector);
-            Warrant.NotNull<IEnumerable<TResult>>();
 
             foreach (var item in source)
             {
