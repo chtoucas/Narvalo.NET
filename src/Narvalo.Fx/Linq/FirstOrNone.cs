@@ -13,6 +13,14 @@ namespace Narvalo.Fx.Linq
         {
             Require.NotNull(@this, nameof(@this));
 
+            // Fast track.
+            var list = @this as IList<TSource>;
+            if (list != null)
+            {
+                return list.Count > 0 ? Maybe.Of(list[0]) : Maybe<TSource>.None;
+            }
+
+            // Slow track.
             using (var iter = @this.GetEnumerator())
             {
                 return iter.MoveNext() ? Maybe.Of(iter.Current) : Maybe<TSource>.None;
@@ -26,9 +34,9 @@ namespace Narvalo.Fx.Linq
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
 
-            var seq = from t in @this where predicate.Invoke(t) select t;
+            var seq = from item in @this where predicate(item) select item;
 
-            using (var iter = seq.EmptyIfNull().GetEnumerator())
+            using (var iter = seq.GetEnumerator())
             {
                 return iter.MoveNext() ? Maybe.Of(iter.Current) : Maybe<TSource>.None;
             }

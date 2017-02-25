@@ -8,20 +8,34 @@ namespace Narvalo.Fx.Linq
 
     public static partial class Qperators
     {
+        // WARNING: Here we defer in behaviour from LINQ.
+        // If there is more than one element, we do not throw but rather return None.
         public static Maybe<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this)
         {
             Require.NotNull(@this, nameof(@this));
 
-            using (var iter = @this.EmptyIfNull().GetEnumerator())
+            // Fast track.
+            var list = @this as IList<TSource>;
+            if (list != null)
+            {
+                return list.Count == 1 ? Maybe.Of(list[0]) : Maybe<TSource>.None;
+            }
+
+            // Slow track.
+            using (var iter = @this.GetEnumerator())
             {
                 // Return None if the sequence is empty.
-                var result = iter.MoveNext() ? Maybe.Of(iter.Current) : Maybe<TSource>.None;
+                if (!iter.MoveNext()) { return Maybe<TSource>.None; }
+
+                var item = iter.Current;
 
                 // Return None if there is one more element.
-                return iter.MoveNext() ? Maybe<TSource>.None : result;
+                return iter.MoveNext() ? Maybe<TSource>.None : Maybe.Of(item);
             }
         }
 
+        // WARNING: Here we defer in behaviour from LINQ.
+        // If there is more than one element, we do not throw but rather return None.
         public static Maybe<TSource> SingleOrNone<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, bool> predicate)
@@ -29,15 +43,17 @@ namespace Narvalo.Fx.Linq
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
 
-            var seq = from t in @this where predicate.Invoke(t) select t;
+            var seq = from item in @this where predicate.Invoke(item) select item;
 
-            using (var iter = seq.EmptyIfNull().GetEnumerator())
+            using (var iter = seq.GetEnumerator())
             {
                 // Return None if the sequence is empty.
-                var result = iter.MoveNext() ? Maybe.Of(iter.Current) : Maybe<TSource>.None;
+                if (!iter.MoveNext()) { return Maybe<TSource>.None; }
+
+                var item = iter.Current;
 
                 // Return None if there is one more element.
-                return iter.MoveNext() ? Maybe<TSource>.None : result;
+                return iter.MoveNext() ? Maybe<TSource>.None : Maybe.Of(item);
             }
         }
     }

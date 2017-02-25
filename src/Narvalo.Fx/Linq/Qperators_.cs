@@ -11,7 +11,7 @@ namespace Narvalo.Fx.Linq
     /// - Projecting: SelectAny
     /// - Filtering: WhereAny
     /// - Set: Append, Prepend
-    /// - Element: FirstOrNone, LastOrNone, SingleOrNone
+    /// - Element: FirstOrNone, LastOrNone, SingleOrNone, ElementAtOrNone
     /// - Aggregation (catamorphisms): Aggregate
     /// - Quantifiers: IsEmpty
     /// - Generation: EmptyIfNull
