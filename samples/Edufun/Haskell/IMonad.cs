@@ -22,7 +22,7 @@ namespace Edufun.Haskell
     // API
     // ---
     // - >>=            obj.Bind            (required)
-    // - >>             obj.ReplaceBy           <- Applicative::*>
+    // - >>             obj.Then                <- Applicative::*>
     // - return         Monad.Of            (required) <- Applicative::pure
     // - fail
     // - fmap           obj.Select          (alt-required) <- Functor::fmap (required), Applicative::liftA

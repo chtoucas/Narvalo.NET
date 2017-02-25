@@ -5,7 +5,7 @@ namespace Edufun.Haskell
     using System;
     using System.Collections.Generic;
 
-    public class Kleisli : IKleisliOperators
+    public class KleisliOperators : IKleisliOperators
     {
         private static readonly IQueryOperators s_Qperators = new QueryOperators();
 
