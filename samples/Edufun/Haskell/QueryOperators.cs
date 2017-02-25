@@ -1,11 +1,14 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
+//#define STRICT_HASKELL
+
 namespace Edufun.Haskell
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
+    using Narvalo.Fx;
     using Narvalo.Fx.Linq;
 
     public class QueryOperators : IQueryOperators
@@ -63,13 +66,40 @@ namespace Edufun.Haskell
             IEnumerable<TSource> source,
             Func<TSource, Prototype<bool>> predicate)
         {
+#if STRICT_HASKELL
             Func<TSource, Func<bool, IEnumerable<TSource>, IEnumerable<TSource>>> func
-                = item => (flg, seq) => flg ? seq.Append(item) : seq;
+                = item => (b, seq) => b ? seq.Append(item) : seq;
 
             Func<Prototype<IEnumerable<TSource>>, TSource, Prototype<IEnumerable<TSource>>> accumulator
                 = (mseq, item) => predicate(item).Zip(mseq, func(item));
 
             return source.Aggregate(Prototype.Of(Enumerable.Empty<TSource>()), accumulator);
+#else
+            return Prototype.Of(WhereByIterator(source, predicate));
+#endif
+        }
+
+        public static IEnumerable<TSource> WhereByIterator<TSource>(
+            IEnumerable<TSource> source,
+            Func<TSource, Prototype<bool>> predicate)
+        {
+            using (var iter = source.GetEnumerator())
+            {
+                while (iter.MoveNext())
+                {
+                    bool pass = false;
+                    TSource item = iter.Current;
+
+                    predicate(item).Bind(val =>
+                    {
+                        pass = val;
+
+                        return Prototype.Of(Unit.Single);
+                    });
+
+                    if (pass) { yield return item; }
+                }
+            }
         }
 
         // [Control.Monad] zipWithM f xs ys = sequenceA (zipWith f xs ys)

@@ -254,6 +254,35 @@ namespace Narvalo.Fx
             return @this.Select(val => { using (val) { return selector(val); } });
         }
 
+        public static void When<TSource>(
+            this VoidOr<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: type constraint */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(
+                _ => {
+                    if (predicate(_)) { action(_); }
+
+                    return VoidOr.Unit;
+                });
+        }
+
+        public static void Unless<TSource>(
+            this VoidOr<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: type constraint */
+        {
+            Require.NotNull(@this, nameof(@this));
+
+            @this.When(_ => !predicate(_), action);
+        }
+
         #region Zip()
 
         public static VoidOr<Tuple<TSource, TOther>> Zip<TSource, TOther>(
@@ -557,7 +586,6 @@ namespace Narvalo.Fx
 
 namespace Narvalo.Fx.Internal
 {
-    using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
@@ -572,12 +600,35 @@ namespace Narvalo.Fx.Internal
         internal static VoidOr<IEnumerable<TSource>> CollectImpl<TSource>(
             this IEnumerable<VoidOr<TSource>> @this)
         {
-            Demand.NotNull(@this);
+            Require.NotNull(@this, nameof(@this));
 
-            var seed = VoidOr.FromError(Enumerable.Empty<TSource>());
-            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (seq, item) => seq.Append(item);
+            return VoidOr.FromError(CollectIterator(@this));
+        }
 
-            return @this.Aggregate(seed, VoidOr.Lift<IEnumerable<TSource>, TSource, IEnumerable<TSource>>(append));
+        private static IEnumerable<TSource> CollectIterator<TSource>(IEnumerable<VoidOr<TSource>> source)
+        {
+            Demand.NotNull(source);
+
+            var item = default(TSource);
+
+            using (var iter = source.GetEnumerator())
+            {
+                while (iter.MoveNext())
+                {
+                    var append = false;
+
+                    iter.Current.Bind(
+                        val =>
+                        {
+                            append = true;
+                            item = val;
+
+                            return VoidOr.Unit;
+                        });
+
+                    if (append) { yield return item; }
+                }
+            }
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
@@ -693,13 +744,33 @@ namespace Narvalo.Fx.Internal
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
 
-            Func<TSource, Func<bool, IEnumerable<TSource>, IEnumerable<TSource>>> func
-                = item => (flg, seq) => flg ? seq.Append(item) : seq;
+            return VoidOr.FromError(WhereByIterator(@this, predicate));
+        }
 
-            Func<VoidOr<IEnumerable<TSource>>, TSource, VoidOr<IEnumerable<TSource>>> accumulator
-                = (mseq, item) => predicate(item).Zip(mseq, func(item));
+        private static IEnumerable<TSource> WhereByIterator<TSource>(
+            IEnumerable<TSource> source,
+            Func<TSource, VoidOr<bool>> predicate)
+        {
+            Demand.NotNull(source);
+            Demand.NotNull(predicate);
 
-            return @this.Aggregate(VoidOr.FromError(Enumerable.Empty<TSource>()), accumulator);
+            using (var iter = source.GetEnumerator())
+            {
+                while (iter.MoveNext())
+                {
+                    bool pass = false;
+                    TSource item = iter.Current;
+
+                    predicate(item).Bind(val =>
+                    {
+                        pass = val;
+
+                        return VoidOr.Unit;
+                    });
+
+                    if (pass) { yield return item; }
+                }
+            }
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]

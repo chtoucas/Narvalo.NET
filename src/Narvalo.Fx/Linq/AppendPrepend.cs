@@ -7,9 +7,8 @@ namespace Narvalo.Fx.Linq
     public static partial class Qperators
     {
         // There is a much better implementation coming soon (?).
-        // https://github.com/dotnet/corefx/commits/master/src/System.Linq/src/System/Linq/AppendPrepend.cs
-        // This is especially important when calling Append or Prepend mutiple times in a row,
-        // which is indeed the case with Collect() and WhereBy().
+        // https://github.com/dotnet/corefx/blob/master/src/System.Linq/src/System/Linq/AppendPrepend.cs
+        // This is of particular important when calling Append or Prepend mutiple times in a row.
         public static IEnumerable<TSource> Append<TSource>(this IEnumerable<TSource> @this, TSource element)
         {
             Require.NotNull(@this, nameof(@this));

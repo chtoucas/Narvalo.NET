@@ -17,12 +17,42 @@ public partial class MonadTemplate
         internal static <#= Name #><IEnumerable<TSource><#= SuffixT #>> CollectImpl<TSource<#= SuffixT #>>(
             this IEnumerable<<#= Name #><TSource<#= SuffixT #>>> @this)
         {
-            Demand.NotNull(@this);
+            <#+ WriteNotNull(true); #>
 
-            var seed = <#+ WriteFactory("IEnumerable<TSource>"); #>(Enumerable.Empty<TSource>());
-            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (seq, item) => seq.Append(item);
+            return <#+ WriteFactory("IEnumerable<TSource>"); #>(CollectIterator(@this));
+        }
 
-            return @this.Aggregate(seed, <#= Name #>.Lift<IEnumerable<TSource>, TSource, IEnumerable<TSource><#= SuffixT #>>(append));
+        private static IEnumerable<TSource> CollectIterator<TSource<#= SuffixT #>>(IEnumerable<<#= Name #><TSource<#= SuffixT #>>> source)
+        {
+            Demand.NotNull(source);
+
+<#+ if (HasSuffixT) { #>
+            var unit = <#+ WriteFactory("Unit"); #>(Unit.Single);
+<#+ } #>
+            var item = default(TSource);
+
+            using (var iter = source.GetEnumerator())
+            {
+                while (iter.MoveNext())
+                {
+                    var append = false;
+
+                    iter.Current.Bind(
+                        val =>
+                        {
+                            append = true;
+                            item = val;
+
+<#+ if (HasSuffixT) { #>
+                            return unit;
+<#+ } else { #>
+                            return <#= Name #>.Unit;
+<#+ } #>
+                        });
+
+                    if (append) { yield return item; }
+                }
+            }
         }
 
 <#+ } // T4: End of !HasTypeConstraints. #>

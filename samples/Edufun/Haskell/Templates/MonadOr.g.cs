@@ -257,6 +257,35 @@ namespace Edufun.Haskell.Templates
             return @this.Select(val => { using (val) { return selector(val); } });
         }
 
+        public static void When<TSource>(
+            this MonadOr<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: type constraint */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(
+                _ => {
+                    if (predicate(_)) { action(_); }
+
+                    return MonadOr.Unit;
+                });
+        }
+
+        public static void Unless<TSource>(
+            this MonadOr<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: type constraint */
+        {
+            Require.NotNull(@this, nameof(@this));
+
+            @this.When(_ => !predicate(_), action);
+        }
+
         #region Zip()
 
         public static MonadOr<Tuple<TSource, TOther>> Zip<TSource, TOther>(
@@ -560,7 +589,6 @@ namespace Edufun.Haskell.Templates
 
 namespace Edufun.Haskell.Templates.Internal
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -573,12 +601,35 @@ namespace Edufun.Haskell.Templates.Internal
         internal static MonadOr<IEnumerable<TSource>> CollectImpl<TSource>(
             this IEnumerable<MonadOr<TSource>> @this)
         {
-            Demand.NotNull(@this);
+            Require.NotNull(@this, nameof(@this));
 
-            var seed = MonadOr.Of(Enumerable.Empty<TSource>());
-            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (seq, item) => seq.Append(item);
+            return MonadOr.Of(CollectIterator(@this));
+        }
 
-            return @this.Aggregate(seed, MonadOr.Lift<IEnumerable<TSource>, TSource, IEnumerable<TSource>>(append));
+        private static IEnumerable<TSource> CollectIterator<TSource>(IEnumerable<MonadOr<TSource>> source)
+        {
+            Demand.NotNull(source);
+
+            var item = default(TSource);
+
+            using (var iter = source.GetEnumerator())
+            {
+                while (iter.MoveNext())
+                {
+                    var append = false;
+
+                    iter.Current.Bind(
+                        val =>
+                        {
+                            append = true;
+                            item = val;
+
+                            return MonadOr.Unit;
+                        });
+
+                    if (append) { yield return item; }
+                }
+            }
         }
 
         internal static MonadOr<TSource> SumImpl<TSource>(
@@ -691,13 +742,33 @@ namespace Edufun.Haskell.Templates.Internal
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
 
-            Func<TSource, Func<bool, IEnumerable<TSource>, IEnumerable<TSource>>> func
-                = item => (flg, seq) => flg ? seq.Append(item) : seq;
+            return MonadOr.Of(WhereByIterator(@this, predicate));
+        }
 
-            Func<MonadOr<IEnumerable<TSource>>, TSource, MonadOr<IEnumerable<TSource>>> accumulator
-                = (mseq, item) => predicate(item).Zip(mseq, func(item));
+        private static IEnumerable<TSource> WhereByIterator<TSource>(
+            IEnumerable<TSource> source,
+            Func<TSource, MonadOr<bool>> predicate)
+        {
+            Demand.NotNull(source);
+            Demand.NotNull(predicate);
 
-            return @this.Aggregate(MonadOr.Of(Enumerable.Empty<TSource>()), accumulator);
+            using (var iter = source.GetEnumerator())
+            {
+                while (iter.MoveNext())
+                {
+                    bool pass = false;
+                    TSource item = iter.Current;
+
+                    predicate(item).Bind(val =>
+                    {
+                        pass = val;
+
+                        return MonadOr.Unit;
+                    });
+
+                    if (pass) { yield return item; }
+                }
+            }
         }
 
         internal static MonadOr<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>

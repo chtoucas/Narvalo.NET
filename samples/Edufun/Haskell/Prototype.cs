@@ -285,6 +285,7 @@ namespace Edufun.Haskell
         // [Data.Traversable] sequence = sequenceA
         public Prototype<IEnumerable<TSource>> Collect<TSource>(IEnumerable<Prototype<TSource>> source)
         {
+#if STRICT_HASKELL
             // The signature of sequence is
             //   sequence :: (Traversable t, Monad m) => t (m a) -> m (t a)
             // Here we interpret Traversable as IEnumerable.
@@ -296,6 +297,33 @@ namespace Edufun.Haskell
                 = (seq, item) => seq.Append(item);
 
             return source.Aggregate(seed, Lift(append));
+#else
+            return Prototype.Of(CollectIterator(source));
+#endif
+        }
+
+        private static IEnumerable<TSource> CollectIterator<TSource>(IEnumerable<Prototype<TSource>> source)
+        {
+            var item = default(TSource);
+
+            using (var iter = source.GetEnumerator())
+            {
+                while (iter.MoveNext())
+                {
+                    var append = false;
+
+                    iter.Current.Bind(
+                        val =>
+                        {
+                            append = true;
+                            item = val;
+
+                            return Prototype.Of(Unit.Single);
+                        });
+
+                    if (append) { yield return item; }
+                }
+            }
         }
 
         #region Forever

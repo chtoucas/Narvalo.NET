@@ -251,6 +251,35 @@ namespace Edufun.Haskell.Templates
             return @this.Select(val => { using (val) { return selector(val); } });
         }
 
+        public static void When<TSource>(
+            this MonadValue<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            where TSource : struct
+        {
+            /* T4: NotNull(@this) */
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(
+                _ => {
+                    if (predicate(_)) { action(_); }
+
+                    return MonadValue.Unit;
+                });
+        }
+
+        public static void Unless<TSource>(
+            this MonadValue<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            where TSource : struct
+        {
+            /* T4: NotNull(@this) */
+
+            @this.When(_ => !predicate(_), action);
+        }
+
         #region Zip()
 
         /// <see cref="Lift{T1, T2, T3}" />
@@ -569,7 +598,6 @@ namespace Edufun.Haskell.Templates
 
 namespace Edufun.Haskell.Templates.Internal
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
 

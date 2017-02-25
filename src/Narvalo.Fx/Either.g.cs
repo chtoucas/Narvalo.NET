@@ -217,6 +217,35 @@ namespace Narvalo.Fx
             return @this.Select(val => { using (val) { return selector(val); } });
         }
 
+        public static void When<TSource, TRight>(
+            this Either<TSource, TRight> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: type constraint */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(
+                _ => {
+                    if (predicate(_)) { action(_); }
+
+                    return @this.Skip();
+                });
+        }
+
+        public static void Unless<TSource, TRight>(
+            this Either<TSource, TRight> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: type constraint */
+        {
+            Require.NotNull(@this, nameof(@this));
+
+            @this.When(_ => !predicate(_), action);
+        }
+
         #region Zip()
 
         public static Either<Tuple<TSource, TOther>, TRight> Zip<TSource, TOther, TRight>(
@@ -392,7 +421,6 @@ namespace Narvalo.Fx
 
 namespace Narvalo.Fx.Internal
 {
-    using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
@@ -407,12 +435,36 @@ namespace Narvalo.Fx.Internal
         internal static Either<IEnumerable<TSource>, TRight> CollectImpl<TSource, TRight>(
             this IEnumerable<Either<TSource, TRight>> @this)
         {
-            Demand.NotNull(@this);
+            Require.NotNull(@this, nameof(@this));
 
-            var seed = Either.Of<IEnumerable<TSource>, TRight>(Enumerable.Empty<TSource>());
-            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (seq, item) => seq.Append(item);
+            return Either.Of<IEnumerable<TSource>, TRight>(CollectIterator(@this));
+        }
 
-            return @this.Aggregate(seed, Either.Lift<IEnumerable<TSource>, TSource, IEnumerable<TSource>, TRight>(append));
+        private static IEnumerable<TSource> CollectIterator<TSource, TRight>(IEnumerable<Either<TSource, TRight>> source)
+        {
+            Demand.NotNull(source);
+
+            var unit = Either.Of<Unit, TRight>(Unit.Single);
+            var item = default(TSource);
+
+            using (var iter = source.GetEnumerator())
+            {
+                while (iter.MoveNext())
+                {
+                    var append = false;
+
+                    iter.Current.Bind(
+                        val =>
+                        {
+                            append = true;
+                            item = val;
+
+                            return unit;
+                        });
+
+                    if (append) { yield return item; }
+                }
+            }
         }
 
     } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().

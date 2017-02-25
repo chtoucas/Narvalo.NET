@@ -34,13 +34,41 @@ public partial class MonadTemplate
             <#+ WriteNotNull(true); #>
             Require.NotNull(predicate, nameof(predicate));
 
-            Func<TSource, Func<bool, IEnumerable<TSource>, IEnumerable<TSource>>> func
-                = item => (flg, seq) => flg ? seq.Append(item) : seq;
+            return <#+ WriteFactory("IEnumerable<TSource>"); #>(WhereByIterator(@this, predicate));
+        }
 
-            Func<<#= Name #><IEnumerable<TSource>>, TSource, <#= Name #><IEnumerable<TSource>>> accumulator
-                = (mseq, item) => predicate(item).Zip(mseq, func(item));
+        private static IEnumerable<TSource> WhereByIterator<TSource>(
+            IEnumerable<TSource> source,
+            Func<TSource, <#= Name #><bool>> predicate)
+        {
+            Demand.NotNull(source);
+            Demand.NotNull(predicate);
+<#+ if (HasSuffixT) { #>
 
-            return @this.Aggregate(<#= Name #>.<#= ReturnName #>(Enumerable.Empty<TSource>()), accumulator);
+            var unit = <#+ WriteFactory("Unit"); #>(Unit.Single);
+<#+ } #>
+
+            using (var iter = source.GetEnumerator())
+            {
+                while (iter.MoveNext())
+                {
+                    bool pass = false;
+                    TSource item = iter.Current;
+
+                    predicate(item).Bind(val =>
+                    {
+                        pass = val;
+
+<#+ if (HasSuffixT) { #>
+                        return unit;
+<#+ } else { #>
+                        return <#= Name #>.Unit;
+<#+ } #>
+                    });
+
+                    if (pass) { yield return item; }
+                }
+            }
         }
 
 <#+ if (!SuppressMessage) { #>

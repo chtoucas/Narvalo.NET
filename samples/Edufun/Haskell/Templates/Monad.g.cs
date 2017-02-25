@@ -229,6 +229,35 @@ namespace Edufun.Haskell.Templates
             return @this.Select(val => { using (val) { return selector(val); } });
         }
 
+        public static void When<TSource>(
+            this Monad<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: type constraint */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(
+                _ => {
+                    if (predicate(_)) { action(_); }
+
+                    return Monad.Unit;
+                });
+        }
+
+        public static void Unless<TSource>(
+            this Monad<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: type constraint */
+        {
+            Require.NotNull(@this, nameof(@this));
+
+            @this.When(_ => !predicate(_), action);
+        }
+
         #region Zip()
 
         public static Monad<Tuple<TSource, TOther>> Zip<TSource, TOther>(
@@ -404,7 +433,6 @@ namespace Edufun.Haskell.Templates
 
 namespace Edufun.Haskell.Templates.Internal
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -417,12 +445,35 @@ namespace Edufun.Haskell.Templates.Internal
         internal static Monad<IEnumerable<TSource>> CollectImpl<TSource>(
             this IEnumerable<Monad<TSource>> @this)
         {
-            Demand.NotNull(@this);
+            Require.NotNull(@this, nameof(@this));
 
-            var seed = Monad.Of(Enumerable.Empty<TSource>());
-            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (seq, item) => seq.Append(item);
+            return Monad.Of(CollectIterator(@this));
+        }
 
-            return @this.Aggregate(seed, Monad.Lift<IEnumerable<TSource>, TSource, IEnumerable<TSource>>(append));
+        private static IEnumerable<TSource> CollectIterator<TSource>(IEnumerable<Monad<TSource>> source)
+        {
+            Demand.NotNull(source);
+
+            var item = default(TSource);
+
+            using (var iter = source.GetEnumerator())
+            {
+                while (iter.MoveNext())
+                {
+                    var append = false;
+
+                    iter.Current.Bind(
+                        val =>
+                        {
+                            append = true;
+                            item = val;
+
+                            return Monad.Unit;
+                        });
+
+                    if (append) { yield return item; }
+                }
+            }
         }
 
     } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
@@ -527,13 +578,33 @@ namespace Edufun.Haskell.Templates.Internal
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
 
-            Func<TSource, Func<bool, IEnumerable<TSource>, IEnumerable<TSource>>> func
-                = item => (flg, seq) => flg ? seq.Append(item) : seq;
+            return Monad.Of(WhereByIterator(@this, predicate));
+        }
 
-            Func<Monad<IEnumerable<TSource>>, TSource, Monad<IEnumerable<TSource>>> accumulator
-                = (mseq, item) => predicate(item).Zip(mseq, func(item));
+        private static IEnumerable<TSource> WhereByIterator<TSource>(
+            IEnumerable<TSource> source,
+            Func<TSource, Monad<bool>> predicate)
+        {
+            Demand.NotNull(source);
+            Demand.NotNull(predicate);
 
-            return @this.Aggregate(Monad.Of(Enumerable.Empty<TSource>()), accumulator);
+            using (var iter = source.GetEnumerator())
+            {
+                while (iter.MoveNext())
+                {
+                    bool pass = false;
+                    TSource item = iter.Current;
+
+                    predicate(item).Bind(val =>
+                    {
+                        pass = val;
+
+                        return Monad.Unit;
+                    });
+
+                    if (pass) { yield return item; }
+                }
+            }
         }
 
         internal static Monad<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>

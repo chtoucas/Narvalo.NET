@@ -148,7 +148,6 @@ public partial class MonadTemplate
             Require.NotNull(selector, nameof(selector));
             return @this.<#= MapName #>(val => { using (val) { return selector(val); } });
         }
-<#+ /* DISABLED #>
 
         public static void When<TSource<#= SuffixT #>>(
             this <#= Name #><TSource<#= SuffixT #>> @this,
@@ -182,8 +181,6 @@ public partial class MonadTemplate
 
             @this.When(_ => !predicate(_), action);
         }
-
-<#+ End of DISABLED */ #>
 
         #region Zip()
 <#+ if (!HasTypeConstraints) { #>

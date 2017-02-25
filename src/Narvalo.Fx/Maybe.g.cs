@@ -254,6 +254,35 @@ namespace Narvalo.Fx
             return @this.Select(val => { using (val) { return selector(val); } });
         }
 
+        public static void When<TSource>(
+            this Maybe<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: type constraint */
+        {
+            /* T4: NotNull(@this) */
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(
+                _ => {
+                    if (predicate(_)) { action(_); }
+
+                    return Maybe.Unit;
+                });
+        }
+
+        public static void Unless<TSource>(
+            this Maybe<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: type constraint */
+        {
+            /* T4: NotNull(@this) */
+
+            @this.When(_ => !predicate(_), action);
+        }
+
         #region Zip()
 
         public static Maybe<Tuple<TSource, TOther>> Zip<TSource, TOther>(
@@ -556,7 +585,6 @@ namespace Narvalo.Fx
 
 namespace Narvalo.Fx.Internal
 {
-    using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
@@ -571,12 +599,35 @@ namespace Narvalo.Fx.Internal
         internal static Maybe<IEnumerable<TSource>> CollectImpl<TSource>(
             this IEnumerable<Maybe<TSource>> @this)
         {
-            Demand.NotNull(@this);
+            Require.NotNull(@this, nameof(@this));
 
-            var seed = Maybe.Of(Enumerable.Empty<TSource>());
-            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (seq, item) => seq.Append(item);
+            return Maybe.Of(CollectIterator(@this));
+        }
 
-            return @this.Aggregate(seed, Maybe.Lift<IEnumerable<TSource>, TSource, IEnumerable<TSource>>(append));
+        private static IEnumerable<TSource> CollectIterator<TSource>(IEnumerable<Maybe<TSource>> source)
+        {
+            Demand.NotNull(source);
+
+            var item = default(TSource);
+
+            using (var iter = source.GetEnumerator())
+            {
+                while (iter.MoveNext())
+                {
+                    var append = false;
+
+                    iter.Current.Bind(
+                        val =>
+                        {
+                            append = true;
+                            item = val;
+
+                            return Maybe.Unit;
+                        });
+
+                    if (append) { yield return item; }
+                }
+            }
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
@@ -692,13 +743,33 @@ namespace Narvalo.Fx.Internal
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
 
-            Func<TSource, Func<bool, IEnumerable<TSource>, IEnumerable<TSource>>> func
-                = item => (flg, seq) => flg ? seq.Append(item) : seq;
+            return Maybe.Of(WhereByIterator(@this, predicate));
+        }
 
-            Func<Maybe<IEnumerable<TSource>>, TSource, Maybe<IEnumerable<TSource>>> accumulator
-                = (mseq, item) => predicate(item).Zip(mseq, func(item));
+        private static IEnumerable<TSource> WhereByIterator<TSource>(
+            IEnumerable<TSource> source,
+            Func<TSource, Maybe<bool>> predicate)
+        {
+            Demand.NotNull(source);
+            Demand.NotNull(predicate);
 
-            return @this.Aggregate(Maybe.Of(Enumerable.Empty<TSource>()), accumulator);
+            using (var iter = source.GetEnumerator())
+            {
+                while (iter.MoveNext())
+                {
+                    bool pass = false;
+                    TSource item = iter.Current;
+
+                    predicate(item).Bind(val =>
+                    {
+                        pass = val;
+
+                        return Maybe.Unit;
+                    });
+
+                    if (pass) { yield return item; }
+                }
+            }
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]

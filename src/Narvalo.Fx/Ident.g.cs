@@ -226,6 +226,35 @@ namespace Narvalo.Fx
             return @this.Select(val => { using (val) { return selector(val); } });
         }
 
+        public static void When<TSource>(
+            this Ident<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: type constraint */
+        {
+            /* T4: NotNull(@this) */
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            @this.Bind(
+                _ => {
+                    if (predicate(_)) { action(_); }
+
+                    return Ident.Unit;
+                });
+        }
+
+        public static void Unless<TSource>(
+            this Ident<TSource> @this,
+            Func<TSource, bool> predicate,
+            Action<TSource> action)
+            /* T4: type constraint */
+        {
+            /* T4: NotNull(@this) */
+
+            @this.When(_ => !predicate(_), action);
+        }
+
         #region Zip()
 
         public static Ident<Tuple<TSource, TOther>> Zip<TSource, TOther>(
@@ -401,7 +430,6 @@ namespace Narvalo.Fx
 
 namespace Narvalo.Fx.Internal
 {
-    using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
@@ -416,12 +444,35 @@ namespace Narvalo.Fx.Internal
         internal static Ident<IEnumerable<TSource>> CollectImpl<TSource>(
             this IEnumerable<Ident<TSource>> @this)
         {
-            Demand.NotNull(@this);
+            Require.NotNull(@this, nameof(@this));
 
-            var seed = Ident.Of(Enumerable.Empty<TSource>());
-            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append = (seq, item) => seq.Append(item);
+            return Ident.Of(CollectIterator(@this));
+        }
 
-            return @this.Aggregate(seed, Ident.Lift<IEnumerable<TSource>, TSource, IEnumerable<TSource>>(append));
+        private static IEnumerable<TSource> CollectIterator<TSource>(IEnumerable<Ident<TSource>> source)
+        {
+            Demand.NotNull(source);
+
+            var item = default(TSource);
+
+            using (var iter = source.GetEnumerator())
+            {
+                while (iter.MoveNext())
+                {
+                    var append = false;
+
+                    iter.Current.Bind(
+                        val =>
+                        {
+                            append = true;
+                            item = val;
+
+                            return Ident.Unit;
+                        });
+
+                    if (append) { yield return item; }
+                }
+            }
         }
 
     } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().

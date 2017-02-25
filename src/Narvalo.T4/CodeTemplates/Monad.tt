@@ -68,7 +68,6 @@ namespace <#= Namespace #>
 
 namespace <#= Namespace #>.Internal
 {
-    using System;
     using System.Collections.Generic;
 <#+ if (!SuppressMessage) { #>
     using System.Diagnostics.CodeAnalysis;
