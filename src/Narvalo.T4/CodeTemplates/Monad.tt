@@ -131,12 +131,6 @@ namespace <#= Namespace #>.Internal
 <#+ } #>
     using System.Linq;
 
-    using <#= Namespace #>.Linq;
-<#+ if (!Namespace.StartsWith("Narvalo.")) { #>
-    using Narvalo.Fx.Linq;
-<#+ } #>
-
-<#+ WriteLine(); #>
 <#+ EmitEnumerableInternalExtensions(); #>
 }
 <#+

@@ -64,6 +64,7 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadPlus{T}" /> values.
         /// </summary>
+        /// <seealso cref="Select{T, TResult}" />
         public static Func<MonadPlus<T>, MonadPlus<TResult>> Lift<T, TResult>(
             Func<T, TResult> func)
             /* T4: type constraint */
@@ -76,6 +77,7 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadPlus{T}" /> values.
         /// </summary>
+        /// <seealso cref="Lift{T1, T2, TResult}" />
         public static Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
             /* T4: type constraint */
@@ -88,6 +90,7 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadPlus{T}" /> values.
         /// </summary>
+        /// <seealso cref="Lift{T1, T2, T3, TResult}" />
         public static Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<T3>, MonadPlus<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
             /* T4: type constraint */
@@ -100,6 +103,7 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadPlus{T}" /> values.
         /// </summary>
+        /// <seealso cref="Lift{T1, T2, T3, T4, TResult}" />
         public static Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<T3>, MonadPlus<T4>, MonadPlus<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> func)
@@ -113,6 +117,7 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadPlus{T}" /> values.
         /// </summary>
+        /// <seealso cref="Lift{T1, T2, T3, T4, T5, TResult}" />
         public static Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<T3>, MonadPlus<T4>, MonadPlus<T5>, MonadPlus<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> func)
@@ -129,6 +134,7 @@ namespace Edufun.Haskell.Templates
     // Provides extension methods for MonadPlus<T>.
     public static partial class MonadPlus
     {
+        /// <seealso cref="Apply{TSource, TResult}" />
         public static MonadPlus<TResult> Gather<TSource, TResult>(
             this MonadPlus<TSource> @this,
             MonadPlus<Func<TSource, TResult>> applicative)
@@ -138,6 +144,7 @@ namespace Edufun.Haskell.Templates
             return applicative.Bind(func => @this.Select(func));
         }
 
+        /// <seealso cref="Gather{TSource, TResult}" />
         public static MonadPlus<TResult> Apply<TSource, TResult>(
             this MonadPlus<Func<TSource, TResult>> @this,
             MonadPlus<TSource> value)
@@ -247,7 +254,7 @@ namespace Edufun.Haskell.Templates
             return @this.Zip(other, Tuple.Create);
         }
 
-        /// <see cref="Lift{T1, T2, T3}" />
+        /// <seealso cref="Lift{TFirst, TSecond, TResult}" />
         public static MonadPlus<TResult> Zip<TFirst, TSecond, TResult>(
             this MonadPlus<TFirst> @this,
             MonadPlus<TSecond> second,
@@ -265,7 +272,7 @@ namespace Edufun.Haskell.Templates
                 @this.Select(selector));
         }
 
-        /// <see cref="Lift{T1, T2, T3, T4}" />
+        /// <seealso cref="Lift{T1, T2, T3, TResult}" />
         public static MonadPlus<TResult> Zip<T1, T2, T3, TResult>(
             this MonadPlus<T1> @this,
             MonadPlus<T2> second,
@@ -286,7 +293,7 @@ namespace Edufun.Haskell.Templates
                     @this.Select(selector)));
         }
 
-        /// <see cref="Lift{T1, T2, T3, T4, T5}" />
+        /// <seealso cref="Lift{T1, T2, T3, T4, TResult}" />
         public static MonadPlus<TResult> Zip<T1, T2, T3, T4, TResult>(
              this MonadPlus<T1> @this,
              MonadPlus<T2> second,
@@ -310,7 +317,7 @@ namespace Edufun.Haskell.Templates
                         @this.Select(selector))));
         }
 
-        /// <see cref="Lift{T1, T2, T3, T4, T5, T6}" />
+        /// <seealso cref="Lift{T1, T2, T3, T4, T5, TResult}" />
         public static MonadPlus<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this MonadPlus<T1> @this,
             MonadPlus<T2> second,
@@ -622,12 +629,11 @@ namespace Edufun.Haskell.Templates.Linq
     using Edufun.Haskell.Templates.Internal;
 
     // Provides extension methods for IEnumerable<T>.
-    // We do not use the standard LINQ names to avoid a confusing API.
+    // We do not use the standard LINQ names to avoid any confusion.
     // - Select    -> SelectWith
     // - Where     -> WhereBy
     // - Zip       -> ZipWith
     // - Aggregate -> Reduce or Fold
-    // WARNING: This template does not handle types with more than one generic parameter.
     public static partial class Qperators
     {
         public static MonadPlus<IEnumerable<TResult>> SelectWith<TSource, TResult>(
@@ -639,12 +645,6 @@ namespace Edufun.Haskell.Templates.Linq
             this IEnumerable<TSource> @this,
             Func<TSource, MonadPlus<bool>> predicate)
             => @this.WhereByImpl(predicate);
-
-        public static MonadPlus<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
-            SelectUnzip<TSource, TFirst, TSecond>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, MonadPlus<Tuple<TFirst, TSecond>>> selector)
-            => @this.SelectUnzipImpl(selector);
 
         public static MonadPlus<IEnumerable<TResult>> ZipWith<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
@@ -688,12 +688,8 @@ namespace Edufun.Haskell.Templates.Internal
     using System.Collections.Generic;
     using System.Linq;
 
-    using Edufun.Haskell.Templates.Linq;
-    using Narvalo.Fx.Linq;
-
     // Provides default implementations for the extension methods for IEnumerable<T>.
     // You will certainly want to override them to improve performance.
-    // WARNING: This template does not handle types with more than one generic parameter.
     internal static partial class EnumerableExtensions
     {
         internal static MonadPlus<IEnumerable<TResult>> SelectWithImpl<TSource, TResult>(
@@ -741,24 +737,6 @@ namespace Edufun.Haskell.Templates.Internal
                     if (pass) { yield return item; }
                 }
             }
-        }
-
-        internal static MonadPlus<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
-            SelectUnzipImpl<TSource, TFirst, TSecond>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, MonadPlus<Tuple<TFirst, TSecond>>> selector)
-        {
-            Demand.NotNull(@this);
-            Demand.NotNull(selector);
-
-            return @this.SelectWith(selector).Select(
-                tuples =>
-                {
-                    var seq1 = tuples.Select(_ => _.Item1);
-                    var seq2 = tuples.Select(_ => _.Item2);
-
-                    return new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(seq1, seq2);
-                });
         }
 
         internal static MonadPlus<IEnumerable<TResult>> ZipWithImpl<TFirst, TSecond, TResult>(

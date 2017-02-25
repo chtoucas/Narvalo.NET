@@ -56,6 +56,7 @@ public partial class MonadTemplate
         /// <summary>
         /// Promotes a function to use and return <see cref="<#= Name #>{T<#= SuffixT #>}" /> values.
         /// </summary>
+        /// <seealso cref="Select{T, TResult<#= SuffixT #>}" />
         public static Func<<#= Name #><T<#= SuffixT #>>, <#= Name #><TResult<#= SuffixT #>>> Lift<T, TResult<#= SuffixT #>>(
             Func<T, TResult> func)
             <#+ WriteTypeConstraints("T", "TResult"); #>
@@ -68,6 +69,7 @@ public partial class MonadTemplate
         /// <summary>
         /// Promotes a function to use and return <see cref="<#= Name #>{T<#= SuffixT #>}" /> values.
         /// </summary>
+        /// <seealso cref="Lift{T1, T2, TResult<#= SuffixT #>}" />
         public static Func<<#= Name #><T1<#= SuffixT #>>, <#= Name #><T2<#= SuffixT #>>, <#= Name #><TResult<#= SuffixT #>>>
             Lift<T1, T2, TResult<#= SuffixT #>>(Func<T1, T2, TResult> func)
             <#+ WriteTypeConstraints("T1", "T2", "TResult"); #>
@@ -80,6 +82,7 @@ public partial class MonadTemplate
         /// <summary>
         /// Promotes a function to use and return <see cref="<#= Name #>{T<#= SuffixT #>}" /> values.
         /// </summary>
+        /// <seealso cref="Lift{T1, T2, T3, TResult<#= SuffixT #>}" />
         public static Func<<#= Name #><T1<#= SuffixT #>>, <#= Name #><T2<#= SuffixT #>>, <#= Name #><T3<#= SuffixT #>>, <#= Name #><TResult<#= SuffixT #>>>
             Lift<T1, T2, T3, TResult<#= SuffixT #>>(Func<T1, T2, T3, TResult> func)
             <#+ WriteTypeConstraints("T1", "T2", "T3", "TResult"); #>
@@ -92,6 +95,7 @@ public partial class MonadTemplate
         /// <summary>
         /// Promotes a function to use and return <see cref="<#= Name #>{T<#= SuffixT #>}" /> values.
         /// </summary>
+        /// <seealso cref="Lift{T1, T2, T3, T4, TResult<#= SuffixT #>}" />
         public static Func<<#= Name #><T1<#= SuffixT #>>, <#= Name #><T2<#= SuffixT #>>, <#= Name #><T3<#= SuffixT #>>, <#= Name #><T4<#= SuffixT #>>, <#= Name #><TResult<#= SuffixT #>>>
             Lift<T1, T2, T3, T4, TResult<#= SuffixT #>>(
             Func<T1, T2, T3, T4, TResult> func)
@@ -105,6 +109,7 @@ public partial class MonadTemplate
         /// <summary>
         /// Promotes a function to use and return <see cref="<#= Name #>{T<#= SuffixT #>}" /> values.
         /// </summary>
+        /// <seealso cref="Lift{T1, T2, T3, T4, T5, TResult<#= SuffixT #>}" />
         public static Func<<#= Name #><T1<#= SuffixT #>>, <#= Name #><T2<#= SuffixT #>>, <#= Name #><T3<#= SuffixT #>>, <#= Name #><T4<#= SuffixT #>>, <#= Name #><T5<#= SuffixT #>>, <#= Name #><TResult<#= SuffixT #>>>
             Lift<T1, T2, T3, T4, T5, TResult<#= SuffixT #>>(
             Func<T1, T2, T3, T4, T5, TResult> func)

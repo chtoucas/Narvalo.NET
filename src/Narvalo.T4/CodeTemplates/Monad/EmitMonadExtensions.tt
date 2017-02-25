@@ -9,6 +9,7 @@ public partial class MonadTemplate
     public static partial class <#= Name #>
     {
 <#+ if (!HasTypeConstraints) { #>
+        /// <seealso cref="Apply{TSource, TResult<#= SuffixT #>}" />
         public static <#= Name #><TResult<#= SuffixT #>> Gather<TSource, TResult<#= SuffixT #>>(
             this <#= Name #><TSource<#= SuffixT #>> @this,
             <#= Name #><Func<TSource, TResult><#= SuffixT #>> applicative)
@@ -18,6 +19,7 @@ public partial class MonadTemplate
             return applicative.Bind(func => @this.Select(func));
         }
 
+        /// <seealso cref="Gather{TSource, TResult<#= SuffixT #>}" />
         public static <#= Name #><TResult<#= SuffixT #>> Apply<TSource, TResult<#= SuffixT #>>(
             this <#= Name #><Func<TSource, TResult><#= SuffixT #>> @this,
             <#= Name #><TSource<#= SuffixT #>> value)
@@ -137,7 +139,7 @@ public partial class MonadTemplate
         }
 <#+ } #>
 
-        /// <see cref="Lift{T1, T2, T3}" />
+        /// <seealso cref="Lift{TFirst, TSecond, TResult<#= SuffixT #>}" />
         public static <#= Name #><TResult<#= SuffixT #>> Zip<TFirst, TSecond, TResult<#= SuffixT #>>(
             this <#= Name #><TFirst<#= SuffixT #>> @this,
             <#= Name #><TSecond<#= SuffixT #>> second,
@@ -161,7 +163,7 @@ public partial class MonadTemplate
 <#+ } #>
         }
 
-        /// <see cref="Lift{T1, T2, T3, T4}" />
+        /// <seealso cref="Lift{T1, T2, T3, TResult<#= SuffixT #>}" />
         public static <#= Name #><TResult<#= SuffixT #>> Zip<T1, T2, T3, TResult<#= SuffixT #>>(
             this <#= Name #><T1<#= SuffixT #>> @this,
             <#= Name #><T2<#= SuffixT #>> second,
@@ -189,7 +191,7 @@ public partial class MonadTemplate
 <#+ } #>
         }
 
-        /// <see cref="Lift{T1, T2, T3, T4, T5}" />
+        /// <seealso cref="Lift{T1, T2, T3, T4, TResult<#= SuffixT #>}" />
         public static <#= Name #><TResult<#= SuffixT #>> Zip<T1, T2, T3, T4, TResult<#= SuffixT #>>(
              this <#= Name #><T1<#= SuffixT #>> @this,
              <#= Name #><T2<#= SuffixT #>> second,
@@ -221,7 +223,7 @@ public partial class MonadTemplate
 <#+ } #>
         }
 
-        /// <see cref="Lift{T1, T2, T3, T4, T5, T6}" />
+        /// <seealso cref="Lift{T1, T2, T3, T4, T5, TResult<#= SuffixT #>}" />
         public static <#= Name #><TResult<#= SuffixT #>> Zip<T1, T2, T3, T4, T5, TResult<#= SuffixT #>>(
             this <#= Name #><T1<#= SuffixT #>> @this,
             <#= Name #><T2<#= SuffixT #>> second,

@@ -7,6 +7,7 @@ namespace Narvalo.Fx
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
+    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using Narvalo.Fx.Properties;
@@ -234,10 +235,7 @@ namespace Narvalo.Fx
         {
             Warrant.NotNull<IEnumerable<T>>();
 
-            if (IsSome)
-            {
-                yield return Value;
-            }
+            return IsSome ? Sequence.Of(Value) : Enumerable.Empty<T>();
         }
 
         public IEnumerator<T> GetEnumerator()

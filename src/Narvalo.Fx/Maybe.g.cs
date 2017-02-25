@@ -61,6 +61,7 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Maybe{T}" /> values.
         /// </summary>
+        /// <seealso cref="Select{T, TResult}" />
         public static Func<Maybe<T>, Maybe<TResult>> Lift<T, TResult>(
             Func<T, TResult> func)
             /* T4: type constraint */
@@ -73,6 +74,7 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Maybe{T}" /> values.
         /// </summary>
+        /// <seealso cref="Lift{T1, T2, TResult}" />
         public static Func<Maybe<T1>, Maybe<T2>, Maybe<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
             /* T4: type constraint */
@@ -85,6 +87,7 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Maybe{T}" /> values.
         /// </summary>
+        /// <seealso cref="Lift{T1, T2, T3, TResult}" />
         public static Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
             /* T4: type constraint */
@@ -97,6 +100,7 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Maybe{T}" /> values.
         /// </summary>
+        /// <seealso cref="Lift{T1, T2, T3, T4, TResult}" />
         public static Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<T4>, Maybe<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> func)
@@ -110,6 +114,7 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Maybe{T}" /> values.
         /// </summary>
+        /// <seealso cref="Lift{T1, T2, T3, T4, T5, TResult}" />
         public static Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<T4>, Maybe<T5>, Maybe<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> func)
@@ -126,6 +131,7 @@ namespace Narvalo.Fx
     // Provides extension methods for Maybe<T>.
     public static partial class Maybe
     {
+        /// <seealso cref="Apply{TSource, TResult}" />
         public static Maybe<TResult> Gather<TSource, TResult>(
             this Maybe<TSource> @this,
             Maybe<Func<TSource, TResult>> applicative)
@@ -135,6 +141,7 @@ namespace Narvalo.Fx
             return applicative.Bind(func => @this.Select(func));
         }
 
+        /// <seealso cref="Gather{TSource, TResult}" />
         public static Maybe<TResult> Apply<TSource, TResult>(
             this Maybe<Func<TSource, TResult>> @this,
             Maybe<TSource> value)
@@ -244,7 +251,7 @@ namespace Narvalo.Fx
             return @this.Zip(other, Tuple.Create);
         }
 
-        /// <see cref="Lift{T1, T2, T3}" />
+        /// <seealso cref="Lift{TFirst, TSecond, TResult}" />
         public static Maybe<TResult> Zip<TFirst, TSecond, TResult>(
             this Maybe<TFirst> @this,
             Maybe<TSecond> second,
@@ -262,7 +269,7 @@ namespace Narvalo.Fx
                 @this.Select(selector));
         }
 
-        /// <see cref="Lift{T1, T2, T3, T4}" />
+        /// <seealso cref="Lift{T1, T2, T3, TResult}" />
         public static Maybe<TResult> Zip<T1, T2, T3, TResult>(
             this Maybe<T1> @this,
             Maybe<T2> second,
@@ -283,7 +290,7 @@ namespace Narvalo.Fx
                     @this.Select(selector)));
         }
 
-        /// <see cref="Lift{T1, T2, T3, T4, T5}" />
+        /// <seealso cref="Lift{T1, T2, T3, T4, TResult}" />
         public static Maybe<TResult> Zip<T1, T2, T3, T4, TResult>(
              this Maybe<T1> @this,
              Maybe<T2> second,
@@ -307,7 +314,7 @@ namespace Narvalo.Fx
                         @this.Select(selector))));
         }
 
-        /// <see cref="Lift{T1, T2, T3, T4, T5, T6}" />
+        /// <seealso cref="Lift{T1, T2, T3, T4, T5, TResult}" />
         public static Maybe<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this Maybe<T1> @this,
             Maybe<T2> second,
@@ -621,12 +628,11 @@ namespace Narvalo.Fx.Linq
     using Narvalo.Fx.Internal;
 
     // Provides extension methods for IEnumerable<T>.
-    // We do not use the standard LINQ names to avoid a confusing API.
+    // We do not use the standard LINQ names to avoid any confusion.
     // - Select    -> SelectWith
     // - Where     -> WhereBy
     // - Zip       -> ZipWith
     // - Aggregate -> Reduce or Fold
-    // WARNING: This template does not handle types with more than one generic parameter.
     public static partial class Qperators
     {
         public static Maybe<IEnumerable<TResult>> SelectWith<TSource, TResult>(
@@ -638,12 +644,6 @@ namespace Narvalo.Fx.Linq
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<bool>> predicate)
             => @this.WhereByImpl(predicate);
-
-        public static Maybe<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
-            SelectUnzip<TSource, TFirst, TSecond>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, Maybe<Tuple<TFirst, TSecond>>> selector)
-            => @this.SelectUnzipImpl(selector);
 
         public static Maybe<IEnumerable<TResult>> ZipWith<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
@@ -688,11 +688,8 @@ namespace Narvalo.Fx.Internal
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
-    using Narvalo.Fx.Linq;
-
     // Provides default implementations for the extension methods for IEnumerable<T>.
     // You will certainly want to override them to improve performance.
-    // WARNING: This template does not handle types with more than one generic parameter.
     internal static partial class EnumerableExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
@@ -742,25 +739,6 @@ namespace Narvalo.Fx.Internal
                     if (pass) { yield return item; }
                 }
             }
-        }
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Maybe<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
-            SelectUnzipImpl<TSource, TFirst, TSecond>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, Maybe<Tuple<TFirst, TSecond>>> selector)
-        {
-            Demand.NotNull(@this);
-            Demand.NotNull(selector);
-
-            return @this.SelectWith(selector).Select(
-                tuples =>
-                {
-                    var seq1 = tuples.Select(_ => _.Item1);
-                    var seq2 = tuples.Select(_ => _.Item2);
-
-                    return new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(seq1, seq2);
-                });
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]

@@ -64,6 +64,7 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadValue{T}" /> values.
         /// </summary>
+        /// <seealso cref="Select{T, TResult}" />
         public static Func<MonadValue<T>, MonadValue<TResult>> Lift<T, TResult>(
             Func<T, TResult> func)
             where T : struct
@@ -77,6 +78,7 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadValue{T}" /> values.
         /// </summary>
+        /// <seealso cref="Lift{T1, T2, TResult}" />
         public static Func<MonadValue<T1>, MonadValue<T2>, MonadValue<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
             where T1 : struct
@@ -91,6 +93,7 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadValue{T}" /> values.
         /// </summary>
+        /// <seealso cref="Lift{T1, T2, T3, TResult}" />
         public static Func<MonadValue<T1>, MonadValue<T2>, MonadValue<T3>, MonadValue<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
             where T1 : struct
@@ -106,6 +109,7 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadValue{T}" /> values.
         /// </summary>
+        /// <seealso cref="Lift{T1, T2, T3, T4, TResult}" />
         public static Func<MonadValue<T1>, MonadValue<T2>, MonadValue<T3>, MonadValue<T4>, MonadValue<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> func)
@@ -123,6 +127,7 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadValue{T}" /> values.
         /// </summary>
+        /// <seealso cref="Lift{T1, T2, T3, T4, T5, TResult}" />
         public static Func<MonadValue<T1>, MonadValue<T2>, MonadValue<T3>, MonadValue<T4>, MonadValue<T5>, MonadValue<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> func)
@@ -233,7 +238,7 @@ namespace Edufun.Haskell.Templates
 
         #region Zip()
 
-        /// <see cref="Lift{T1, T2, T3}" />
+        /// <seealso cref="Lift{TFirst, TSecond, TResult}" />
         public static MonadValue<TResult> Zip<TFirst, TSecond, TResult>(
             this MonadValue<TFirst> @this,
             MonadValue<TSecond> second,
@@ -251,7 +256,7 @@ namespace Edufun.Haskell.Templates
                     arg2 => zipper(arg1, arg2)));
         }
 
-        /// <see cref="Lift{T1, T2, T3, T4}" />
+        /// <seealso cref="Lift{T1, T2, T3, TResult}" />
         public static MonadValue<TResult> Zip<T1, T2, T3, TResult>(
             this MonadValue<T1> @this,
             MonadValue<T2> second,
@@ -273,7 +278,7 @@ namespace Edufun.Haskell.Templates
                         arg3 => zipper(arg1, arg2, arg3))));
         }
 
-        /// <see cref="Lift{T1, T2, T3, T4, T5}" />
+        /// <seealso cref="Lift{T1, T2, T3, T4, TResult}" />
         public static MonadValue<TResult> Zip<T1, T2, T3, T4, TResult>(
              this MonadValue<T1> @this,
              MonadValue<T2> second,
@@ -299,7 +304,7 @@ namespace Edufun.Haskell.Templates
                             arg4 => zipper(arg1, arg2, arg3, arg4)))));
         }
 
-        /// <see cref="Lift{T1, T2, T3, T4, T5, T6}" />
+        /// <seealso cref="Lift{T1, T2, T3, T4, T5, TResult}" />
         public static MonadValue<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this MonadValue<T1> @this,
             MonadValue<T2> second,
@@ -599,12 +604,11 @@ namespace Edufun.Haskell.Templates.Linq
     using Edufun.Haskell.Templates.Internal;
 
     // Provides extension methods for IEnumerable<T>.
-    // We do not use the standard LINQ names to avoid a confusing API.
+    // We do not use the standard LINQ names to avoid any confusion.
     // - Select    -> SelectWith
     // - Where     -> WhereBy
     // - Zip       -> ZipWith
     // - Aggregate -> Reduce or Fold
-    // WARNING: This template does not handle types with more than one generic parameter.
     public static partial class Qperators
     {
         public static MonadValue<TAccumulate> Fold<TSource, TAccumulate>(
@@ -645,12 +649,8 @@ namespace Edufun.Haskell.Templates.Internal
     using System.Collections.Generic;
     using System.Linq;
 
-    using Edufun.Haskell.Templates.Linq;
-    using Narvalo.Fx.Linq;
-
     // Provides default implementations for the extension methods for IEnumerable<T>.
     // You will certainly want to override them to improve performance.
-    // WARNING: This template does not handle types with more than one generic parameter.
     internal static partial class EnumerableExtensions
     {
         internal static MonadValue<TAccumulate> FoldImpl<TSource, TAccumulate>(

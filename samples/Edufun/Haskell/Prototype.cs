@@ -154,6 +154,8 @@ namespace Edufun.Haskell
             Func<T, TSecond, TResult> zipper)
         {
 #if STRICT_HASKELL
+            // NB: Using Gather() in T4 will allow this method to use a "shadowed" version of Gather;
+            // with Bind() this is not possible.
             Func<T, Func<TSecond, TResult>> selector
                 = arg1 => arg2 => zipper(arg1, arg2);
 

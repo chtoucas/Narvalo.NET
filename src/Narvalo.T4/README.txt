@@ -1,9 +1,9 @@
-﻿For monads, we do not (yet?) support
-- LINQ and types with more than one generic type.
-- MonadOr and types with more than one generic type.
+﻿Monads
+------
 
-We do not implement methods which are related to the way Haskell handles IO / side-effects
-(see the namespace Narvalo.Fx.Internal for the .NET equivalent):
+For types with more than one generic type, we do not (yet?) support LINQ and MonadOr.
+
+We do not implement methods which are related to the way Haskell handles actions with side-effects:
 - Monad::Forever
 - Monad::Unless
 - Monad::When
@@ -16,3 +16,5 @@ We do not implement methods which are related to the way Haskell handles IO / si
 - Alternative::Many
 - Alternative::Optional
 - Alternative::Some
+We also exclude methods without clear usecases:
+- Monad::SelectUnzip

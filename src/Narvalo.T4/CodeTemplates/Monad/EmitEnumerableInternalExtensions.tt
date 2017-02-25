@@ -2,12 +2,12 @@
 
 public partial class MonadTemplate
 {
+    // WARNING: This template does not handle types with more than one generic parameter.
     protected void EmitEnumerableInternalExtensions()
     {
 #>
     // Provides default implementations for the extension methods for IEnumerable<T>.
     // You will certainly want to override them to improve performance.
-    // WARNING: This template does not handle types with more than one generic parameter.
     internal static partial class EnumerableExtensions
     {
 <#+ if (!HasTypeConstraints) { #>
@@ -70,27 +70,6 @@ public partial class MonadTemplate
                     if (pass) { yield return item; }
                 }
             }
-        }
-
-<#+ if (!SuppressMessage) { #>
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-<#+ } #>
-        internal static <#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
-            SelectUnzipImpl<TSource, TFirst, TSecond>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, <#= Name #><Tuple<TFirst, TSecond>>> selector)
-        {
-            Demand.NotNull(@this);
-            Demand.NotNull(selector);
-
-            return @this.SelectWith(selector).<#= MapName #>(
-                tuples =>
-                {
-                    var seq1 = tuples.Select(_ => _.Item1);
-                    var seq2 = tuples.Select(_ => _.Item2);
-
-                    return new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(seq1, seq2);
-                });
         }
 
 <#+ if (!SuppressMessage) { #>

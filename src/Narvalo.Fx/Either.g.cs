@@ -45,6 +45,7 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Either{T, TRight}" /> values.
         /// </summary>
+        /// <seealso cref="Select{T, TResult, TRight}" />
         public static Func<Either<T, TRight>, Either<TResult, TRight>> Lift<T, TResult, TRight>(
             Func<T, TResult> func)
             /* T4: type constraint */
@@ -57,6 +58,7 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Either{T, TRight}" /> values.
         /// </summary>
+        /// <seealso cref="Lift{T1, T2, TResult, TRight}" />
         public static Func<Either<T1, TRight>, Either<T2, TRight>, Either<TResult, TRight>>
             Lift<T1, T2, TResult, TRight>(Func<T1, T2, TResult> func)
             /* T4: type constraint */
@@ -69,6 +71,7 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Either{T, TRight}" /> values.
         /// </summary>
+        /// <seealso cref="Lift{T1, T2, T3, TResult, TRight}" />
         public static Func<Either<T1, TRight>, Either<T2, TRight>, Either<T3, TRight>, Either<TResult, TRight>>
             Lift<T1, T2, T3, TResult, TRight>(Func<T1, T2, T3, TResult> func)
             /* T4: type constraint */
@@ -81,6 +84,7 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Either{T, TRight}" /> values.
         /// </summary>
+        /// <seealso cref="Lift{T1, T2, T3, T4, TResult, TRight}" />
         public static Func<Either<T1, TRight>, Either<T2, TRight>, Either<T3, TRight>, Either<T4, TRight>, Either<TResult, TRight>>
             Lift<T1, T2, T3, T4, TResult, TRight>(
             Func<T1, T2, T3, T4, TResult> func)
@@ -94,6 +98,7 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Either{T, TRight}" /> values.
         /// </summary>
+        /// <seealso cref="Lift{T1, T2, T3, T4, T5, TResult, TRight}" />
         public static Func<Either<T1, TRight>, Either<T2, TRight>, Either<T3, TRight>, Either<T4, TRight>, Either<T5, TRight>, Either<TResult, TRight>>
             Lift<T1, T2, T3, T4, T5, TResult, TRight>(
             Func<T1, T2, T3, T4, T5, TResult> func)
@@ -110,6 +115,7 @@ namespace Narvalo.Fx
     // Provides extension methods for Either<T, TRight>.
     public static partial class Either
     {
+        /// <seealso cref="Apply{TSource, TResult, TRight}" />
         public static Either<TResult, TRight> Gather<TSource, TResult, TRight>(
             this Either<TSource, TRight> @this,
             Either<Func<TSource, TResult>, TRight> applicative)
@@ -119,6 +125,7 @@ namespace Narvalo.Fx
             return applicative.Bind(func => @this.Select(func));
         }
 
+        /// <seealso cref="Gather{TSource, TResult, TRight}" />
         public static Either<TResult, TRight> Apply<TSource, TResult, TRight>(
             this Either<Func<TSource, TResult>, TRight> @this,
             Either<TSource, TRight> value)
@@ -217,7 +224,7 @@ namespace Narvalo.Fx
             return @this.Zip(other, Tuple.Create);
         }
 
-        /// <see cref="Lift{T1, T2, T3}" />
+        /// <seealso cref="Lift{TFirst, TSecond, TResult, TRight}" />
         public static Either<TResult, TRight> Zip<TFirst, TSecond, TResult, TRight>(
             this Either<TFirst, TRight> @this,
             Either<TSecond, TRight> second,
@@ -235,7 +242,7 @@ namespace Narvalo.Fx
                 @this.Select(selector));
         }
 
-        /// <see cref="Lift{T1, T2, T3, T4}" />
+        /// <seealso cref="Lift{T1, T2, T3, TResult, TRight}" />
         public static Either<TResult, TRight> Zip<T1, T2, T3, TResult, TRight>(
             this Either<T1, TRight> @this,
             Either<T2, TRight> second,
@@ -256,7 +263,7 @@ namespace Narvalo.Fx
                     @this.Select(selector)));
         }
 
-        /// <see cref="Lift{T1, T2, T3, T4, T5}" />
+        /// <seealso cref="Lift{T1, T2, T3, T4, TResult, TRight}" />
         public static Either<TResult, TRight> Zip<T1, T2, T3, T4, TResult, TRight>(
              this Either<T1, TRight> @this,
              Either<T2, TRight> second,
@@ -280,7 +287,7 @@ namespace Narvalo.Fx
                         @this.Select(selector))));
         }
 
-        /// <see cref="Lift{T1, T2, T3, T4, T5, T6}" />
+        /// <seealso cref="Lift{T1, T2, T3, T4, T5, TResult, TRight}" />
         public static Either<TResult, TRight> Zip<T1, T2, T3, T4, T5, TResult, TRight>(
             this Either<T1, TRight> @this,
             Either<T2, TRight> second,

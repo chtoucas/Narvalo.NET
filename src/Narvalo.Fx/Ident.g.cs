@@ -54,6 +54,7 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Ident{T}" /> values.
         /// </summary>
+        /// <seealso cref="Select{T, TResult}" />
         public static Func<Ident<T>, Ident<TResult>> Lift<T, TResult>(
             Func<T, TResult> func)
             /* T4: type constraint */
@@ -66,6 +67,7 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Ident{T}" /> values.
         /// </summary>
+        /// <seealso cref="Lift{T1, T2, TResult}" />
         public static Func<Ident<T1>, Ident<T2>, Ident<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
             /* T4: type constraint */
@@ -78,6 +80,7 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Ident{T}" /> values.
         /// </summary>
+        /// <seealso cref="Lift{T1, T2, T3, TResult}" />
         public static Func<Ident<T1>, Ident<T2>, Ident<T3>, Ident<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
             /* T4: type constraint */
@@ -90,6 +93,7 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Ident{T}" /> values.
         /// </summary>
+        /// <seealso cref="Lift{T1, T2, T3, T4, TResult}" />
         public static Func<Ident<T1>, Ident<T2>, Ident<T3>, Ident<T4>, Ident<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> func)
@@ -103,6 +107,7 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Ident{T}" /> values.
         /// </summary>
+        /// <seealso cref="Lift{T1, T2, T3, T4, T5, TResult}" />
         public static Func<Ident<T1>, Ident<T2>, Ident<T3>, Ident<T4>, Ident<T5>, Ident<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> func)
@@ -119,6 +124,7 @@ namespace Narvalo.Fx
     // Provides extension methods for Ident<T>.
     public static partial class Ident
     {
+        /// <seealso cref="Apply{TSource, TResult}" />
         public static Ident<TResult> Gather<TSource, TResult>(
             this Ident<TSource> @this,
             Ident<Func<TSource, TResult>> applicative)
@@ -128,6 +134,7 @@ namespace Narvalo.Fx
             return applicative.Bind(func => @this.Select(func));
         }
 
+        /// <seealso cref="Gather{TSource, TResult}" />
         public static Ident<TResult> Apply<TSource, TResult>(
             this Ident<Func<TSource, TResult>> @this,
             Ident<TSource> value)
@@ -226,7 +233,7 @@ namespace Narvalo.Fx
             return @this.Zip(other, Tuple.Create);
         }
 
-        /// <see cref="Lift{T1, T2, T3}" />
+        /// <seealso cref="Lift{TFirst, TSecond, TResult}" />
         public static Ident<TResult> Zip<TFirst, TSecond, TResult>(
             this Ident<TFirst> @this,
             Ident<TSecond> second,
@@ -244,7 +251,7 @@ namespace Narvalo.Fx
                 @this.Select(selector));
         }
 
-        /// <see cref="Lift{T1, T2, T3, T4}" />
+        /// <seealso cref="Lift{T1, T2, T3, TResult}" />
         public static Ident<TResult> Zip<T1, T2, T3, TResult>(
             this Ident<T1> @this,
             Ident<T2> second,
@@ -265,7 +272,7 @@ namespace Narvalo.Fx
                     @this.Select(selector)));
         }
 
-        /// <see cref="Lift{T1, T2, T3, T4, T5}" />
+        /// <seealso cref="Lift{T1, T2, T3, T4, TResult}" />
         public static Ident<TResult> Zip<T1, T2, T3, T4, TResult>(
              this Ident<T1> @this,
              Ident<T2> second,
@@ -289,7 +296,7 @@ namespace Narvalo.Fx
                         @this.Select(selector))));
         }
 
-        /// <see cref="Lift{T1, T2, T3, T4, T5, T6}" />
+        /// <seealso cref="Lift{T1, T2, T3, T4, T5, TResult}" />
         public static Ident<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this Ident<T1> @this,
             Ident<T2> second,

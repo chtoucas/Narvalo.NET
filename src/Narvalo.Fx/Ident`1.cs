@@ -172,7 +172,7 @@ namespace Narvalo.Fx
         }
     }
 
-    // Implements the Internal.IMaybe<TError> interface.
+    // Implements the Internal.Iterable<TError> interface.
     public partial struct Ident<T>
     {
         public IEnumerable<T> ToEnumerable()

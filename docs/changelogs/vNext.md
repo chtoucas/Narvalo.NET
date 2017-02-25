@@ -79,18 +79,7 @@ Refactoring?
 - Narvalo.Finance -> ?
 
 Narvalo.Fx:
-- Review
-  * Forever, When, Unless and Guard.
-  * Naming:
-    - Do -> Run? (conflict with F# keyword)
-    - Func<TSource, Monad<TResult>>.ForEach -> ???
-    - Func<TSource, Monad<TResult>>.Invoke -> ???
-  * IEnumerable<T> extensions.
 - Async versions?
-- Check signatures / Haskell.
-- Alternative (MonadPlus), Applicative
-- Rework EmptyIfNull()?
-- Implements IEquatable<T> on IMaybe<T>?
 - https://blogs.msdn.microsoft.com/pfxteam/2013/04/03/tasks-monads-and-linq/
 - http://tomasp.net/blog/idioms-in-linq.aspx/
 - https://ruudvanasseldonk.com/2013/05/01/the-task-monad-in-csharp
