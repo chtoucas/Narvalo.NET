@@ -110,20 +110,9 @@ namespace Narvalo.Fx
     // Provides extension methods for Either<T, TRight>.
     public static partial class Either
     {
-        public static Either<TResult, TRight> Select<TSource, TResult, TRight>(
-            this Either<TSource, TRight> @this,
-            Func<TSource, TResult> selector)
-            /* T4: type constraint */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(selector, nameof(selector));
-            return @this.Bind(val => Either.Of<TResult, TRight>(selector(val)));
-        }
-
         public static Either<TResult, TRight> Gather<TSource, TResult, TRight>(
             this Either<TSource, TRight> @this,
             Either<Func<TSource, TResult>, TRight> applicative)
-            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(applicative, nameof(applicative));
@@ -138,6 +127,15 @@ namespace Narvalo.Fx
             return value.Gather(@this);
         }
 
+        public static Either<IEnumerable<TSource>, TRight> Repeat<TSource, TRight>(
+            this Either<TSource, TRight> @this,
+            int count)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.Range(count >= 1, nameof(count));
+            return @this.Select(val => Enumerable.Repeat(val, count));
+        }
+
         public static Either<TResult, TRight> ReplaceBy<TSource, TResult, TRight>(
             this Either<TSource, TRight> @this,
             TResult value)
@@ -147,13 +145,31 @@ namespace Narvalo.Fx
             return @this.Select(_ => value);
         }
 
-        public static Either<TResult, TRight> ReplaceBy<TSource, TResult, TRight>(
+        public static Either<TResult, TRight> Then<TSource, TResult, TRight>(
             this Either<TSource, TRight> @this,
             Either<TResult, TRight> other)
             /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             return @this.Bind(_ => other);
+        }
+
+        public static Either<TSource, TRight> Ignore<TSource, TOther, TRight>(
+            this Either<TSource, TRight> @this,
+            Either<TOther, TRight> other)
+            /* T4: type constraint */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Func<TSource, TOther, TSource> ignore = (arg, _) => arg;
+
+            return @this.Zip(other, ignore);
+        }
+
+        public static Either<global::Narvalo.Fx.Unit, TRight> Skip<TSource, TRight>(this Either<TSource, TRight> @this)
+            /* T4: type constraint */
+        {
+            Require.NotNull(@this, nameof(@this));
+            return @this.ReplaceBy(global::Narvalo.Fx.Unit.Single);
         }
 
         public static Either<TResult, TRight> Coalesce<TSource, TResult, TRight>(
@@ -166,33 +182,6 @@ namespace Narvalo.Fx
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
             return @this.Bind(val => predicate(val) ? thenResult : elseResult);
-        }
-
-        public static Either<TSource, TRight> Ignore<TSource, TOther, TRight>(
-            this Either<TSource, TRight> @this,
-            Either<TOther, TRight> other)
-            /* T4: type constraint */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Func<TSource, TOther, TSource> ignorearg2 = (arg1, _) => arg1;
-
-            return @this.Zip(other, ignorearg2);
-        }
-
-        public static Either<global::Narvalo.Fx.Unit, TRight> Skip<TSource, TRight>(this Either<TSource, TRight> @this)
-            /* T4: type constraint */
-        {
-            Require.NotNull(@this, nameof(@this));
-            return @this.ReplaceBy(global::Narvalo.Fx.Unit.Single);
-        }
-
-        public static Either<IEnumerable<TSource>, TRight> Repeat<TSource, TRight>(
-            this Either<TSource, TRight> @this,
-            int count)
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.Range(count >= 1, nameof(count));
-            return @this.Select(val => Enumerable.Repeat(val, count));
         }
 
         public static Either<TResult, TRight> Using<TSource, TResult, TRight>(
@@ -215,35 +204,6 @@ namespace Narvalo.Fx
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));
             return @this.Select(val => { using (val) { return selector(val); } });
-        }
-
-        public static void When<TSource, TRight>(
-            this Either<TSource, TRight> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            /* T4: type constraint */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(
-                _ => {
-                    if (predicate(_)) { action(_); }
-
-                    return @this.Skip();
-                });
-        }
-
-        public static void Unless<TSource, TRight>(
-            this Either<TSource, TRight> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            /* T4: type constraint */
-        {
-            Require.NotNull(@this, nameof(@this));
-
-            @this.When(_ => !predicate(_), action);
         }
 
         #region Zip()
@@ -351,6 +311,15 @@ namespace Narvalo.Fx
 
         #region LINQ dialect
 
+        public static Either<TResult, TRight> Select<TSource, TResult, TRight>(
+            this Either<TSource, TRight> @this,
+            Func<TSource, TResult> selector)
+            /* T4: type constraint */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(selector, nameof(selector));
+            return @this.Bind(val => Either.Of<TResult, TRight>(selector(val)));
+        }
         /// <remarks>
         /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" />.
         /// </remarks>
@@ -376,7 +345,7 @@ namespace Narvalo.Fx
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Kleisli
     {
-        public static Either<IEnumerable<TResult>, TRight> InvokeForEach<TSource, TResult, TRight>(
+        public static Either<IEnumerable<TResult>, TRight> InvokeWith<TSource, TResult, TRight>(
             this Func<TSource, Either<TResult, TRight>> @this,
             IEnumerable<TSource> seq)
             => seq.Select(@this).Collect();
@@ -391,21 +360,21 @@ namespace Narvalo.Fx
         }
 
         public static Func<TSource, Either<TResult, TRight>> Compose<TSource, TMiddle, TResult, TRight>(
-            this Func<TSource, Either<TMiddle, TRight>> first,
+            this Func<TSource, Either<TMiddle, TRight>> @this,
             Func<TMiddle, Either<TResult, TRight>> second)
             /* T4: type constraint */
         {
-            Require.NotNull(first, nameof(first));
-            return arg => first(arg).Bind(second);
+            Require.NotNull(@this, nameof(@this));
+            return arg => @this(arg).Bind(second);
         }
 
         public static Func<TSource, Either<TResult, TRight>> ComposeBack<TSource, TMiddle, TResult, TRight>(
-            this Func<TMiddle, Either<TResult, TRight>> first,
+            this Func<TMiddle, Either<TResult, TRight>> @this,
             Func<TSource, Either<TMiddle, TRight>> second)
             /* T4: type constraint */
         {
             Require.NotNull(second, nameof(second));
-            return arg => second(arg).Bind(first);
+            return arg => second(arg).Bind(@this);
         }
     } // End of Kleisli - T4: EmitKleisliExtensions().
 

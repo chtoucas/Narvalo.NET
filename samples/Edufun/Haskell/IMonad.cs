@@ -30,7 +30,7 @@ namespace Edufun.Haskell
     // Basic Monad functions:
     // - mapM           Query.SelectWith
     // - mapM_
-    // - forM           Kleisli.InvokeForEach
+    // - forM           Kleisli.InvokeWith
     // - forM_
     // - sequence       Operators.Collect
     // - sequence_
@@ -68,7 +68,6 @@ namespace Edufun.Haskell
     //
     // Inherited:
     // - <$             obj.Replace             <- Functor::<$
-    // - $>             Operators.Inject        <- Functor::$>
     // - <*             obj.Ignore              <- Applicative::<*
     // - <**>           Operators.Apply         <- Applicative::<**>
     // - liftA2         obj.Zip                 <- Applicative::liftA2
@@ -101,11 +100,6 @@ namespace Edufun.Haskell
         // which promotes function application.
         Prototype<TResult> Gather<TResult>(Prototype<Func<T, TResult>> applicative);
 
-        // [Haskell] (>>) :: forall a b. m a -> m b -> m b
-        // Sequentially compose two actions, discarding any value produced by the first,
-        // like sequencing operators (such as the semicolon) in imperative languages.
-        Prototype<TResult> ReplaceBy<TResult>(Prototype<TResult> other);
-
         // [Haskell] replicateM :: Applicative m => Int -> m a -> m [a]
         // replicateM n act performs the action n times, gathering the results.
         Prototype<IEnumerable<T>> Repeat(int count);
@@ -113,6 +107,11 @@ namespace Edufun.Haskell
         // [Haskell] void :: Functor f => f a -> f ()
         // void value discards or ignores the result of evaluation.
         Prototype<Unit> Skip();
+
+        // [Haskell] (>>) :: forall a b. m a -> m b -> m b
+        // Sequentially compose two actions, discarding any value produced by the first,
+        // like sequencing operators (such as the semicolon) in imperative languages.
+        Prototype<TResult> Then<TResult>(Prototype<TResult> other);
     }
 
     public interface IKleisliOperators
@@ -131,13 +130,15 @@ namespace Edufun.Haskell
 
         // [Haskell] forM :: (Traversable t, Monad m) => t a -> (a -> m b) -> m (t b)
         // forM is mapM with its arguments flipped.
-        Prototype<IEnumerable<TResult>> InvokeForEach<TSource, TResult>(
+        Prototype<IEnumerable<TResult>> InvokeWith<TSource, TResult>(
             Func<TSource, Prototype<TResult>> func,
             IEnumerable<TSource> seq);
 
         // [Haskell] (=<<) :: Monad m => (a -> m b) -> m a -> m b
         // Same as >>=, but with the arguments interchanged.
-        Prototype<TResult> InvokeWith<TSource, TResult>(Func<TSource, Prototype<TResult>> func, Prototype<TSource> value);
+        Prototype<TResult> InvokeWith<TSource, TResult>(
+            Func<TSource, Prototype<TResult>> func,
+            Prototype<TSource> value);
     }
 
     public interface IQueryOperators

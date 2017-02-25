@@ -119,20 +119,9 @@ namespace Narvalo.Fx
     // Provides extension methods for ResultOrError<T>.
     public static partial class ResultOrError
     {
-        public static ResultOrError<TResult> Select<TSource, TResult>(
-            this ResultOrError<TSource> @this,
-            Func<TSource, TResult> selector)
-            /* T4: type constraint */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(selector, nameof(selector));
-            return @this.Bind(val => ResultOrError.Of(selector(val)));
-        }
-
         public static ResultOrError<TResult> Gather<TSource, TResult>(
             this ResultOrError<TSource> @this,
             ResultOrError<Func<TSource, TResult>> applicative)
-            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(applicative, nameof(applicative));
@@ -147,6 +136,15 @@ namespace Narvalo.Fx
             return value.Gather(@this);
         }
 
+        public static ResultOrError<IEnumerable<TSource>> Repeat<TSource>(
+            this ResultOrError<TSource> @this,
+            int count)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.Range(count >= 1, nameof(count));
+            return @this.Select(val => Enumerable.Repeat(val, count));
+        }
+
         public static ResultOrError<TResult> ReplaceBy<TSource, TResult>(
             this ResultOrError<TSource> @this,
             TResult value)
@@ -156,13 +154,31 @@ namespace Narvalo.Fx
             return @this.Select(_ => value);
         }
 
-        public static ResultOrError<TResult> ReplaceBy<TSource, TResult>(
+        public static ResultOrError<TResult> Then<TSource, TResult>(
             this ResultOrError<TSource> @this,
             ResultOrError<TResult> other)
             /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             return @this.Bind(_ => other);
+        }
+
+        public static ResultOrError<TSource> Ignore<TSource, TOther>(
+            this ResultOrError<TSource> @this,
+            ResultOrError<TOther> other)
+            /* T4: type constraint */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Func<TSource, TOther, TSource> ignore = (arg, _) => arg;
+
+            return @this.Zip(other, ignore);
+        }
+
+        public static ResultOrError<global::Narvalo.Fx.Unit> Skip<TSource>(this ResultOrError<TSource> @this)
+            /* T4: type constraint */
+        {
+            Require.NotNull(@this, nameof(@this));
+            return @this.Then(Unit);
         }
 
         public static ResultOrError<TResult> Coalesce<TSource, TResult>(
@@ -175,33 +191,6 @@ namespace Narvalo.Fx
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
             return @this.Bind(val => predicate(val) ? thenResult : elseResult);
-        }
-
-        public static ResultOrError<TSource> Ignore<TSource, TOther>(
-            this ResultOrError<TSource> @this,
-            ResultOrError<TOther> other)
-            /* T4: type constraint */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Func<TSource, TOther, TSource> ignorearg2 = (arg1, _) => arg1;
-
-            return @this.Zip(other, ignorearg2);
-        }
-
-        public static ResultOrError<global::Narvalo.Fx.Unit> Skip<TSource>(this ResultOrError<TSource> @this)
-            /* T4: type constraint */
-        {
-            Require.NotNull(@this, nameof(@this));
-            return @this.ReplaceBy(Unit);
-        }
-
-        public static ResultOrError<IEnumerable<TSource>> Repeat<TSource>(
-            this ResultOrError<TSource> @this,
-            int count)
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.Range(count >= 1, nameof(count));
-            return @this.Select(val => Enumerable.Repeat(val, count));
         }
 
         public static ResultOrError<TResult> Using<TSource, TResult>(
@@ -224,35 +213,6 @@ namespace Narvalo.Fx
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));
             return @this.Select(val => { using (val) { return selector(val); } });
-        }
-
-        public static void When<TSource>(
-            this ResultOrError<TSource> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            /* T4: type constraint */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(
-                _ => {
-                    if (predicate(_)) { action(_); }
-
-                    return ResultOrError.Unit;
-                });
-        }
-
-        public static void Unless<TSource>(
-            this ResultOrError<TSource> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            /* T4: type constraint */
-        {
-            Require.NotNull(@this, nameof(@this));
-
-            @this.When(_ => !predicate(_), action);
         }
 
         #region Zip()
@@ -360,6 +320,15 @@ namespace Narvalo.Fx
 
         #region LINQ dialect
 
+        public static ResultOrError<TResult> Select<TSource, TResult>(
+            this ResultOrError<TSource> @this,
+            Func<TSource, TResult> selector)
+            /* T4: type constraint */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(selector, nameof(selector));
+            return @this.Bind(val => ResultOrError.Of(selector(val)));
+        }
         /// <remarks>
         /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" />.
         /// </remarks>
@@ -385,7 +354,7 @@ namespace Narvalo.Fx
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Kleisli
     {
-        public static ResultOrError<IEnumerable<TResult>> InvokeForEach<TSource, TResult>(
+        public static ResultOrError<IEnumerable<TResult>> InvokeWith<TSource, TResult>(
             this Func<TSource, ResultOrError<TResult>> @this,
             IEnumerable<TSource> seq)
             => seq.SelectWith(@this);
@@ -400,21 +369,21 @@ namespace Narvalo.Fx
         }
 
         public static Func<TSource, ResultOrError<TResult>> Compose<TSource, TMiddle, TResult>(
-            this Func<TSource, ResultOrError<TMiddle>> first,
+            this Func<TSource, ResultOrError<TMiddle>> @this,
             Func<TMiddle, ResultOrError<TResult>> second)
             /* T4: type constraint */
         {
-            Require.NotNull(first, nameof(first));
-            return arg => first(arg).Bind(second);
+            Require.NotNull(@this, nameof(@this));
+            return arg => @this(arg).Bind(second);
         }
 
         public static Func<TSource, ResultOrError<TResult>> ComposeBack<TSource, TMiddle, TResult>(
-            this Func<TMiddle, ResultOrError<TResult>> first,
+            this Func<TMiddle, ResultOrError<TResult>> @this,
             Func<TSource, ResultOrError<TMiddle>> second)
             /* T4: type constraint */
         {
             Require.NotNull(second, nameof(second));
-            return arg => second(arg).Bind(first);
+            return arg => second(arg).Bind(@this);
         }
     } // End of Kleisli - T4: EmitKleisliExtensions().
 
@@ -492,6 +461,7 @@ namespace Narvalo.Fx.Linq
     // - Where     -> WhereBy
     // - Zip       -> ZipWith
     // - Aggregate -> Reduce or Fold
+    // WARNING: This template does not handle types with more than one generic parameter.
     public static partial class Qperators
     {
         public static ResultOrError<IEnumerable<TResult>> SelectWith<TSource, TResult>(
@@ -557,6 +527,7 @@ namespace Narvalo.Fx.Internal
 
     // Provides default implementations for the extension methods for IEnumerable<T>.
     // You will certainly want to override them to improve performance.
+    // WARNING: This template does not handle types with more than one generic parameter.
     internal static partial class EnumerableExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]

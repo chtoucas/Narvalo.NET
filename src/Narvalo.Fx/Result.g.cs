@@ -110,20 +110,9 @@ namespace Narvalo.Fx
     // Provides extension methods for Result<T, TError>.
     public static partial class Result
     {
-        public static Result<TResult, TError> Select<TSource, TResult, TError>(
-            this Result<TSource, TError> @this,
-            Func<TSource, TResult> selector)
-            /* T4: type constraint */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(selector, nameof(selector));
-            return @this.Bind(val => Result.Of<TResult, TError>(selector(val)));
-        }
-
         public static Result<TResult, TError> Gather<TSource, TResult, TError>(
             this Result<TSource, TError> @this,
             Result<Func<TSource, TResult>, TError> applicative)
-            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(applicative, nameof(applicative));
@@ -138,6 +127,15 @@ namespace Narvalo.Fx
             return value.Gather(@this);
         }
 
+        public static Result<IEnumerable<TSource>, TError> Repeat<TSource, TError>(
+            this Result<TSource, TError> @this,
+            int count)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.Range(count >= 1, nameof(count));
+            return @this.Select(val => Enumerable.Repeat(val, count));
+        }
+
         public static Result<TResult, TError> ReplaceBy<TSource, TResult, TError>(
             this Result<TSource, TError> @this,
             TResult value)
@@ -147,13 +145,31 @@ namespace Narvalo.Fx
             return @this.Select(_ => value);
         }
 
-        public static Result<TResult, TError> ReplaceBy<TSource, TResult, TError>(
+        public static Result<TResult, TError> Then<TSource, TResult, TError>(
             this Result<TSource, TError> @this,
             Result<TResult, TError> other)
             /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             return @this.Bind(_ => other);
+        }
+
+        public static Result<TSource, TError> Ignore<TSource, TOther, TError>(
+            this Result<TSource, TError> @this,
+            Result<TOther, TError> other)
+            /* T4: type constraint */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Func<TSource, TOther, TSource> ignore = (arg, _) => arg;
+
+            return @this.Zip(other, ignore);
+        }
+
+        public static Result<global::Narvalo.Fx.Unit, TError> Skip<TSource, TError>(this Result<TSource, TError> @this)
+            /* T4: type constraint */
+        {
+            Require.NotNull(@this, nameof(@this));
+            return @this.ReplaceBy(global::Narvalo.Fx.Unit.Single);
         }
 
         public static Result<TResult, TError> Coalesce<TSource, TResult, TError>(
@@ -166,33 +182,6 @@ namespace Narvalo.Fx
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
             return @this.Bind(val => predicate(val) ? thenResult : elseResult);
-        }
-
-        public static Result<TSource, TError> Ignore<TSource, TOther, TError>(
-            this Result<TSource, TError> @this,
-            Result<TOther, TError> other)
-            /* T4: type constraint */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Func<TSource, TOther, TSource> ignorearg2 = (arg1, _) => arg1;
-
-            return @this.Zip(other, ignorearg2);
-        }
-
-        public static Result<global::Narvalo.Fx.Unit, TError> Skip<TSource, TError>(this Result<TSource, TError> @this)
-            /* T4: type constraint */
-        {
-            Require.NotNull(@this, nameof(@this));
-            return @this.ReplaceBy(global::Narvalo.Fx.Unit.Single);
-        }
-
-        public static Result<IEnumerable<TSource>, TError> Repeat<TSource, TError>(
-            this Result<TSource, TError> @this,
-            int count)
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.Range(count >= 1, nameof(count));
-            return @this.Select(val => Enumerable.Repeat(val, count));
         }
 
         public static Result<TResult, TError> Using<TSource, TResult, TError>(
@@ -215,35 +204,6 @@ namespace Narvalo.Fx
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));
             return @this.Select(val => { using (val) { return selector(val); } });
-        }
-
-        public static void When<TSource, TError>(
-            this Result<TSource, TError> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            /* T4: type constraint */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(
-                _ => {
-                    if (predicate(_)) { action(_); }
-
-                    return @this.Skip();
-                });
-        }
-
-        public static void Unless<TSource, TError>(
-            this Result<TSource, TError> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            /* T4: type constraint */
-        {
-            Require.NotNull(@this, nameof(@this));
-
-            @this.When(_ => !predicate(_), action);
         }
 
         #region Zip()
@@ -351,6 +311,15 @@ namespace Narvalo.Fx
 
         #region LINQ dialect
 
+        public static Result<TResult, TError> Select<TSource, TResult, TError>(
+            this Result<TSource, TError> @this,
+            Func<TSource, TResult> selector)
+            /* T4: type constraint */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(selector, nameof(selector));
+            return @this.Bind(val => Result.Of<TResult, TError>(selector(val)));
+        }
         /// <remarks>
         /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" />.
         /// </remarks>
@@ -376,7 +345,7 @@ namespace Narvalo.Fx
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Kleisli
     {
-        public static Result<IEnumerable<TResult>, TError> InvokeForEach<TSource, TResult, TError>(
+        public static Result<IEnumerable<TResult>, TError> InvokeWith<TSource, TResult, TError>(
             this Func<TSource, Result<TResult, TError>> @this,
             IEnumerable<TSource> seq)
             => seq.Select(@this).Collect();
@@ -391,21 +360,21 @@ namespace Narvalo.Fx
         }
 
         public static Func<TSource, Result<TResult, TError>> Compose<TSource, TMiddle, TResult, TError>(
-            this Func<TSource, Result<TMiddle, TError>> first,
+            this Func<TSource, Result<TMiddle, TError>> @this,
             Func<TMiddle, Result<TResult, TError>> second)
             /* T4: type constraint */
         {
-            Require.NotNull(first, nameof(first));
-            return arg => first(arg).Bind(second);
+            Require.NotNull(@this, nameof(@this));
+            return arg => @this(arg).Bind(second);
         }
 
         public static Func<TSource, Result<TResult, TError>> ComposeBack<TSource, TMiddle, TResult, TError>(
-            this Func<TMiddle, Result<TResult, TError>> first,
+            this Func<TMiddle, Result<TResult, TError>> @this,
             Func<TSource, Result<TMiddle, TError>> second)
             /* T4: type constraint */
         {
             Require.NotNull(second, nameof(second));
-            return arg => second(arg).Bind(first);
+            return arg => second(arg).Bind(@this);
         }
     } // End of Kleisli - T4: EmitKleisliExtensions().
 

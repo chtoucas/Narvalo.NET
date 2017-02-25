@@ -37,6 +37,7 @@ namespace Edufun.Haskell
     {
         // [Haskell] many :: f a -> f [a]
         // Zero or more.
+        // Guess: Try until it fails.
         Prototype<IEnumerable<T>> Many<T>(Prototype<T> value);
 
         // [Haskell] optional :: Alternative f => f a -> f (Maybe a)
@@ -45,6 +46,7 @@ namespace Edufun.Haskell
 
         // [Haskell] some :: f a -> f [a]
         // One or more.
+        // Guess: Try until it succeeds, and continue until it fails.
         Prototype<IEnumerable<T>> Some<T>(Prototype<T> value);
     }
 }

@@ -215,11 +215,11 @@ namespace Edufun.Haskell
         //      | otherwise = liftA2(:) f(loop (cnt - 1))
         public Prototype<IEnumerable<T>> Repeat(int count) => Select(_ => Enumerable.Repeat(_, count));
 
-        // [GHC.Base] m >> k = m >>= \_ -> k
-        public Prototype<TResult> ReplaceBy<TResult>(Prototype<TResult> other) => Bind(_ => other);
-
         // [Data.Functor] void x = () <$ x
         public Prototype<Unit> Skip() => ReplaceBy(Unit.Single);
+
+        // [GHC.Base] m >> k = m >>= \_ -> k
+        public Prototype<TResult> Then<TResult>(Prototype<TResult> other) => Bind(_ => other);
 
         #endregion
 
@@ -282,6 +282,8 @@ namespace Edufun.Haskell
 
         #region IMonadOperators
 
+        #region Collect
+
         // [Data.Traversable] sequence = sequenceA
         public Prototype<IEnumerable<TSource>> Collect<TSource>(IEnumerable<Prototype<TSource>> source)
         {
@@ -327,6 +329,8 @@ namespace Edufun.Haskell
             }
         }
 
+        #endregion
+
         #region Forever
 
         // [Control.Monad] forever a = let a' = a *> a' in a'
@@ -356,7 +360,7 @@ namespace Edufun.Haskell
             // Remember that ReplaceBy(next) is just Bind(_ => next). If Bind is doing nothing,
             // Forever() is useless, it just loops forever.
             Prototype<TResult> next = null;
-            next = source.ReplaceBy(next);
+            next = source.Then(next);
             return next;
         }
 
@@ -371,7 +375,7 @@ namespace Edufun.Haskell
         private static Func<Prototype<TSource>, Prototype<TResult>> __ReplaceBy<TSource, TResult>(Prototype<TSource> value)
         {
             Func<Func<Prototype<TSource>, Prototype<TResult>>, Func<Prototype<TSource>, Prototype<TResult>>> g
-                = f => next => f(value.ReplaceBy(next));
+                = f => next => f(value.Then(next));
 
             return YCombinator.Fix(g);
         }

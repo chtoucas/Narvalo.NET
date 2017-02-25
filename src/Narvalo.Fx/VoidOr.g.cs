@@ -126,20 +126,9 @@ namespace Narvalo.Fx
     // Provides extension methods for VoidOr<T>.
     public static partial class VoidOr
     {
-        public static VoidOr<TResult> Select<TSource, TResult>(
-            this VoidOr<TSource> @this,
-            Func<TSource, TResult> selector)
-            /* T4: type constraint */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(selector, nameof(selector));
-            return @this.Bind(val => VoidOr.FromError(selector(val)));
-        }
-
         public static VoidOr<TResult> Gather<TSource, TResult>(
             this VoidOr<TSource> @this,
             VoidOr<Func<TSource, TResult>> applicative)
-            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(applicative, nameof(applicative));
@@ -154,6 +143,15 @@ namespace Narvalo.Fx
             return value.Gather(@this);
         }
 
+        public static VoidOr<IEnumerable<TSource>> Repeat<TSource>(
+            this VoidOr<TSource> @this,
+            int count)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.Range(count >= 1, nameof(count));
+            return @this.Select(val => Enumerable.Repeat(val, count));
+        }
+
         public static VoidOr<TResult> ReplaceBy<TSource, TResult>(
             this VoidOr<TSource> @this,
             TResult value)
@@ -163,13 +161,31 @@ namespace Narvalo.Fx
             return @this.Select(_ => value);
         }
 
-        public static VoidOr<TResult> ReplaceBy<TSource, TResult>(
+        public static VoidOr<TResult> Then<TSource, TResult>(
             this VoidOr<TSource> @this,
             VoidOr<TResult> other)
             /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             return @this.Bind(_ => other);
+        }
+
+        public static VoidOr<TSource> Ignore<TSource, TOther>(
+            this VoidOr<TSource> @this,
+            VoidOr<TOther> other)
+            /* T4: type constraint */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Func<TSource, TOther, TSource> ignore = (arg, _) => arg;
+
+            return @this.Zip(other, ignore);
+        }
+
+        public static VoidOr<global::Narvalo.Fx.Unit> Skip<TSource>(this VoidOr<TSource> @this)
+            /* T4: type constraint */
+        {
+            Require.NotNull(@this, nameof(@this));
+            return @this.Then(Unit);
         }
 
         public static VoidOr<TResult> If<TSource, TResult>(
@@ -195,43 +211,6 @@ namespace Narvalo.Fx
             return @this.Bind(val => predicate(val) ? thenResult : elseResult);
         }
 
-        public static VoidOr<TSource> Ignore<TSource, TOther>(
-            this VoidOr<TSource> @this,
-            VoidOr<TOther> other)
-            /* T4: type constraint */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Func<TSource, TOther, TSource> ignorearg2 = (arg1, _) => arg1;
-
-            return @this.Zip(other, ignorearg2);
-        }
-
-        public static VoidOr<global::Narvalo.Fx.Unit> Skip<TSource>(this VoidOr<TSource> @this)
-            /* T4: type constraint */
-        {
-            Require.NotNull(@this, nameof(@this));
-            return @this.ReplaceBy(Unit);
-        }
-
-        public static VoidOr<TSource> Where<TSource>(
-            this VoidOr<TSource> @this,
-            Func<TSource, bool> predicate)
-            /* T4: type constraint */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            return @this.Bind(val => predicate(val) ? VoidOr.FromError(val) : VoidOr<TSource>.Void);
-        }
-
-        public static VoidOr<IEnumerable<TSource>> Repeat<TSource>(
-            this VoidOr<TSource> @this,
-            int count)
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.Range(count >= 1, nameof(count));
-            return @this.Select(val => Enumerable.Repeat(val, count));
-        }
-
         public static VoidOr<TResult> Using<TSource, TResult>(
             this VoidOr<TSource> @this,
             Func<TSource, VoidOr<TResult>> selector)
@@ -252,35 +231,6 @@ namespace Narvalo.Fx
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));
             return @this.Select(val => { using (val) { return selector(val); } });
-        }
-
-        public static void When<TSource>(
-            this VoidOr<TSource> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            /* T4: type constraint */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(
-                _ => {
-                    if (predicate(_)) { action(_); }
-
-                    return VoidOr.Unit;
-                });
-        }
-
-        public static void Unless<TSource>(
-            this VoidOr<TSource> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            /* T4: type constraint */
-        {
-            Require.NotNull(@this, nameof(@this));
-
-            @this.When(_ => !predicate(_), action);
         }
 
         #region Zip()
@@ -388,6 +338,26 @@ namespace Narvalo.Fx
 
         #region LINQ dialect
 
+        public static VoidOr<TResult> Select<TSource, TResult>(
+            this VoidOr<TSource> @this,
+            Func<TSource, TResult> selector)
+            /* T4: type constraint */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(selector, nameof(selector));
+            return @this.Bind(val => VoidOr.FromError(selector(val)));
+        }
+
+        public static VoidOr<TSource> Where<TSource>(
+            this VoidOr<TSource> @this,
+            Func<TSource, bool> predicate)
+            /* T4: type constraint */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+            return @this.Bind(val => predicate(val) ? VoidOr.FromError(val) : VoidOr<TSource>.Void);
+        }
+
         /// <remarks>
         /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" />.
         /// </remarks>
@@ -486,7 +456,7 @@ namespace Narvalo.Fx
 
             var keyLookup = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
-            return outer.SelectMany(val => keyLookup(val).ReplaceBy(inner), resultSelector);
+            return outer.SelectMany(val => keyLookup(val).Then(inner), resultSelector);
         }
 
         private static VoidOr<TResult> GroupJoinImpl<TSource, TInner, TKey, TResult>(
@@ -507,7 +477,7 @@ namespace Narvalo.Fx
 
             var keyLookup = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
-            return outer.Select(val => resultSelector(val, keyLookup(val).ReplaceBy(inner)));
+            return outer.Select(val => resultSelector(val, keyLookup(val).Then(inner)));
         }
 
         private static Func<TSource, VoidOr<TKey>> GetKeyLookup<TSource, TInner, TKey>(
@@ -537,7 +507,7 @@ namespace Narvalo.Fx
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Kleisli
     {
-        public static VoidOr<IEnumerable<TResult>> InvokeForEach<TSource, TResult>(
+        public static VoidOr<IEnumerable<TResult>> InvokeWith<TSource, TResult>(
             this Func<TSource, VoidOr<TResult>> @this,
             IEnumerable<TSource> seq)
             => seq.SelectWith(@this);
@@ -552,21 +522,21 @@ namespace Narvalo.Fx
         }
 
         public static Func<TSource, VoidOr<TResult>> Compose<TSource, TMiddle, TResult>(
-            this Func<TSource, VoidOr<TMiddle>> first,
+            this Func<TSource, VoidOr<TMiddle>> @this,
             Func<TMiddle, VoidOr<TResult>> second)
             /* T4: type constraint */
         {
-            Require.NotNull(first, nameof(first));
-            return arg => first(arg).Bind(second);
+            Require.NotNull(@this, nameof(@this));
+            return arg => @this(arg).Bind(second);
         }
 
         public static Func<TSource, VoidOr<TResult>> ComposeBack<TSource, TMiddle, TResult>(
-            this Func<TMiddle, VoidOr<TResult>> first,
+            this Func<TMiddle, VoidOr<TResult>> @this,
             Func<TSource, VoidOr<TMiddle>> second)
             /* T4: type constraint */
         {
             Require.NotNull(second, nameof(second));
-            return arg => second(arg).Bind(first);
+            return arg => second(arg).Bind(@this);
         }
     } // End of Kleisli - T4: EmitKleisliExtensions().
 
@@ -657,6 +627,7 @@ namespace Narvalo.Fx.Linq
     // - Where     -> WhereBy
     // - Zip       -> ZipWith
     // - Aggregate -> Reduce or Fold
+    // WARNING: This template does not handle types with more than one generic parameter.
     public static partial class Qperators
     {
         public static VoidOr<IEnumerable<TResult>> SelectWith<TSource, TResult>(
@@ -722,6 +693,7 @@ namespace Narvalo.Fx.Internal
 
     // Provides default implementations for the extension methods for IEnumerable<T>.
     // You will certainly want to override them to improve performance.
+    // WARNING: This template does not handle types with more than one generic parameter.
     internal static partial class EnumerableExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]

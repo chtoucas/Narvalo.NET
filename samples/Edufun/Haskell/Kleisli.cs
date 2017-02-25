@@ -9,12 +9,6 @@ namespace Edufun.Haskell
     {
         private static readonly IQueryOperators s_Qperators = new QueryOperators();
 
-        // [Data.Traversable] forM = flip mapM
-        public Prototype<IEnumerable<TResult>> InvokeForEach<TSource, TResult>(
-            Func<TSource, Prototype<TResult>> func,
-            IEnumerable<TSource> seq)
-            => s_Qperators.SelectWith(seq, func);
-
         // [Control.Monad] f >=> g = \x -> f x >>= g
         public Func<TSource, Prototype<TResult>> Compose<TSource, TMiddle, TResult>(
             Func<TSource, Prototype<TMiddle>> first,
@@ -32,5 +26,11 @@ namespace Edufun.Haskell
             Func<TSource, Prototype<TResult>> func,
             Prototype<TSource> value)
             => value.Bind(func);
+
+        // [Data.Traversable] forM = flip mapM
+        public Prototype<IEnumerable<TResult>> InvokeWith<TSource, TResult>(
+            Func<TSource, Prototype<TResult>> func,
+            IEnumerable<TSource> seq)
+            => s_Qperators.SelectWith(seq, func);
     }
 }

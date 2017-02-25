@@ -126,20 +126,9 @@ namespace Narvalo.Fx
     // Provides extension methods for Maybe<T>.
     public static partial class Maybe
     {
-        public static Maybe<TResult> Select<TSource, TResult>(
-            this Maybe<TSource> @this,
-            Func<TSource, TResult> selector)
-            /* T4: type constraint */
-        {
-            /* T4: NotNull(@this) */
-            Require.NotNull(selector, nameof(selector));
-            return @this.Bind(val => Maybe.Of(selector(val)));
-        }
-
         public static Maybe<TResult> Gather<TSource, TResult>(
             this Maybe<TSource> @this,
             Maybe<Func<TSource, TResult>> applicative)
-            /* T4: type constraint */
         {
             /* T4: NotNull(@this) */
             /* T4: NotNull(applicative) */
@@ -154,6 +143,15 @@ namespace Narvalo.Fx
             return value.Gather(@this);
         }
 
+        public static Maybe<IEnumerable<TSource>> Repeat<TSource>(
+            this Maybe<TSource> @this,
+            int count)
+        {
+            /* T4: NotNull(@this) */
+            Require.Range(count >= 1, nameof(count));
+            return @this.Select(val => Enumerable.Repeat(val, count));
+        }
+
         public static Maybe<TResult> ReplaceBy<TSource, TResult>(
             this Maybe<TSource> @this,
             TResult value)
@@ -163,13 +161,31 @@ namespace Narvalo.Fx
             return @this.Select(_ => value);
         }
 
-        public static Maybe<TResult> ReplaceBy<TSource, TResult>(
+        public static Maybe<TResult> Then<TSource, TResult>(
             this Maybe<TSource> @this,
             Maybe<TResult> other)
             /* T4: type constraint */
         {
             /* T4: NotNull(@this) */
             return @this.Bind(_ => other);
+        }
+
+        public static Maybe<TSource> Ignore<TSource, TOther>(
+            this Maybe<TSource> @this,
+            Maybe<TOther> other)
+            /* T4: type constraint */
+        {
+            /* T4: NotNull(@this) */
+            Func<TSource, TOther, TSource> ignore = (arg, _) => arg;
+
+            return @this.Zip(other, ignore);
+        }
+
+        public static Maybe<global::Narvalo.Fx.Unit> Skip<TSource>(this Maybe<TSource> @this)
+            /* T4: type constraint */
+        {
+            /* T4: NotNull(@this) */
+            return @this.Then(Unit);
         }
 
         public static Maybe<TResult> If<TSource, TResult>(
@@ -195,43 +211,6 @@ namespace Narvalo.Fx
             return @this.Bind(val => predicate(val) ? thenResult : elseResult);
         }
 
-        public static Maybe<TSource> Ignore<TSource, TOther>(
-            this Maybe<TSource> @this,
-            Maybe<TOther> other)
-            /* T4: type constraint */
-        {
-            /* T4: NotNull(@this) */
-            Func<TSource, TOther, TSource> ignorearg2 = (arg1, _) => arg1;
-
-            return @this.Zip(other, ignorearg2);
-        }
-
-        public static Maybe<global::Narvalo.Fx.Unit> Skip<TSource>(this Maybe<TSource> @this)
-            /* T4: type constraint */
-        {
-            /* T4: NotNull(@this) */
-            return @this.ReplaceBy(Unit);
-        }
-
-        public static Maybe<TSource> Where<TSource>(
-            this Maybe<TSource> @this,
-            Func<TSource, bool> predicate)
-            /* T4: type constraint */
-        {
-            /* T4: NotNull(@this) */
-            Require.NotNull(predicate, nameof(predicate));
-            return @this.Bind(val => predicate(val) ? Maybe.Of(val) : Maybe<TSource>.None);
-        }
-
-        public static Maybe<IEnumerable<TSource>> Repeat<TSource>(
-            this Maybe<TSource> @this,
-            int count)
-        {
-            /* T4: NotNull(@this) */
-            Require.Range(count >= 1, nameof(count));
-            return @this.Select(val => Enumerable.Repeat(val, count));
-        }
-
         public static Maybe<TResult> Using<TSource, TResult>(
             this Maybe<TSource> @this,
             Func<TSource, Maybe<TResult>> selector)
@@ -252,35 +231,6 @@ namespace Narvalo.Fx
             /* T4: NotNull(@this) */
             Require.NotNull(selector, nameof(selector));
             return @this.Select(val => { using (val) { return selector(val); } });
-        }
-
-        public static void When<TSource>(
-            this Maybe<TSource> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            /* T4: type constraint */
-        {
-            /* T4: NotNull(@this) */
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(
-                _ => {
-                    if (predicate(_)) { action(_); }
-
-                    return Maybe.Unit;
-                });
-        }
-
-        public static void Unless<TSource>(
-            this Maybe<TSource> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            /* T4: type constraint */
-        {
-            /* T4: NotNull(@this) */
-
-            @this.When(_ => !predicate(_), action);
         }
 
         #region Zip()
@@ -388,6 +338,26 @@ namespace Narvalo.Fx
 
         #region LINQ dialect
 
+        public static Maybe<TResult> Select<TSource, TResult>(
+            this Maybe<TSource> @this,
+            Func<TSource, TResult> selector)
+            /* T4: type constraint */
+        {
+            /* T4: NotNull(@this) */
+            Require.NotNull(selector, nameof(selector));
+            return @this.Bind(val => Maybe.Of(selector(val)));
+        }
+
+        public static Maybe<TSource> Where<TSource>(
+            this Maybe<TSource> @this,
+            Func<TSource, bool> predicate)
+            /* T4: type constraint */
+        {
+            /* T4: NotNull(@this) */
+            Require.NotNull(predicate, nameof(predicate));
+            return @this.Bind(val => predicate(val) ? Maybe.Of(val) : Maybe<TSource>.None);
+        }
+
         /// <remarks>
         /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" />.
         /// </remarks>
@@ -486,7 +456,7 @@ namespace Narvalo.Fx
 
             var keyLookup = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
-            return outer.SelectMany(val => keyLookup(val).ReplaceBy(inner), resultSelector);
+            return outer.SelectMany(val => keyLookup(val).Then(inner), resultSelector);
         }
 
         private static Maybe<TResult> GroupJoinImpl<TSource, TInner, TKey, TResult>(
@@ -507,7 +477,7 @@ namespace Narvalo.Fx
 
             var keyLookup = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
-            return outer.Select(val => resultSelector(val, keyLookup(val).ReplaceBy(inner)));
+            return outer.Select(val => resultSelector(val, keyLookup(val).Then(inner)));
         }
 
         private static Func<TSource, Maybe<TKey>> GetKeyLookup<TSource, TInner, TKey>(
@@ -536,7 +506,7 @@ namespace Narvalo.Fx
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Kleisli
     {
-        public static Maybe<IEnumerable<TResult>> InvokeForEach<TSource, TResult>(
+        public static Maybe<IEnumerable<TResult>> InvokeWith<TSource, TResult>(
             this Func<TSource, Maybe<TResult>> @this,
             IEnumerable<TSource> seq)
             => seq.SelectWith(@this);
@@ -551,21 +521,21 @@ namespace Narvalo.Fx
         }
 
         public static Func<TSource, Maybe<TResult>> Compose<TSource, TMiddle, TResult>(
-            this Func<TSource, Maybe<TMiddle>> first,
+            this Func<TSource, Maybe<TMiddle>> @this,
             Func<TMiddle, Maybe<TResult>> second)
             /* T4: type constraint */
         {
-            Require.NotNull(first, nameof(first));
-            return arg => first(arg).Bind(second);
+            Require.NotNull(@this, nameof(@this));
+            return arg => @this(arg).Bind(second);
         }
 
         public static Func<TSource, Maybe<TResult>> ComposeBack<TSource, TMiddle, TResult>(
-            this Func<TMiddle, Maybe<TResult>> first,
+            this Func<TMiddle, Maybe<TResult>> @this,
             Func<TSource, Maybe<TMiddle>> second)
             /* T4: type constraint */
         {
             Require.NotNull(second, nameof(second));
-            return arg => second(arg).Bind(first);
+            return arg => second(arg).Bind(@this);
         }
     } // End of Kleisli - T4: EmitKleisliExtensions().
 
@@ -656,6 +626,7 @@ namespace Narvalo.Fx.Linq
     // - Where     -> WhereBy
     // - Zip       -> ZipWith
     // - Aggregate -> Reduce or Fold
+    // WARNING: This template does not handle types with more than one generic parameter.
     public static partial class Qperators
     {
         public static Maybe<IEnumerable<TResult>> SelectWith<TSource, TResult>(
@@ -721,6 +692,7 @@ namespace Narvalo.Fx.Internal
 
     // Provides default implementations for the extension methods for IEnumerable<T>.
     // You will certainly want to override them to improve performance.
+    // WARNING: This template does not handle types with more than one generic parameter.
     internal static partial class EnumerableExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]

@@ -129,20 +129,9 @@ namespace Edufun.Haskell.Templates
     // Provides extension methods for MonadZero<T>.
     public static partial class MonadZero
     {
-        public static MonadZero<TResult> Select<TSource, TResult>(
-            this MonadZero<TSource> @this,
-            Func<TSource, TResult> selector)
-            /* T4: type constraint */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(selector, nameof(selector));
-            return @this.Bind(val => MonadZero.Of(selector(val)));
-        }
-
         public static MonadZero<TResult> Gather<TSource, TResult>(
             this MonadZero<TSource> @this,
             MonadZero<Func<TSource, TResult>> applicative)
-            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(applicative, nameof(applicative));
@@ -157,6 +146,15 @@ namespace Edufun.Haskell.Templates
             return value.Gather(@this);
         }
 
+        public static MonadZero<IEnumerable<TSource>> Repeat<TSource>(
+            this MonadZero<TSource> @this,
+            int count)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.Range(count >= 1, nameof(count));
+            return @this.Select(val => Enumerable.Repeat(val, count));
+        }
+
         public static MonadZero<TResult> ReplaceBy<TSource, TResult>(
             this MonadZero<TSource> @this,
             TResult value)
@@ -166,13 +164,31 @@ namespace Edufun.Haskell.Templates
             return @this.Select(_ => value);
         }
 
-        public static MonadZero<TResult> ReplaceBy<TSource, TResult>(
+        public static MonadZero<TResult> Then<TSource, TResult>(
             this MonadZero<TSource> @this,
             MonadZero<TResult> other)
             /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             return @this.Bind(_ => other);
+        }
+
+        public static MonadZero<TSource> Ignore<TSource, TOther>(
+            this MonadZero<TSource> @this,
+            MonadZero<TOther> other)
+            /* T4: type constraint */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Func<TSource, TOther, TSource> ignore = (arg, _) => arg;
+
+            return @this.Zip(other, ignore);
+        }
+
+        public static MonadZero<global::Narvalo.Fx.Unit> Skip<TSource>(this MonadZero<TSource> @this)
+            /* T4: type constraint */
+        {
+            Require.NotNull(@this, nameof(@this));
+            return @this.Then(Unit);
         }
 
         public static MonadZero<TResult> If<TSource, TResult>(
@@ -198,43 +214,6 @@ namespace Edufun.Haskell.Templates
             return @this.Bind(val => predicate(val) ? thenResult : elseResult);
         }
 
-        public static MonadZero<TSource> Ignore<TSource, TOther>(
-            this MonadZero<TSource> @this,
-            MonadZero<TOther> other)
-            /* T4: type constraint */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Func<TSource, TOther, TSource> ignorearg2 = (arg1, _) => arg1;
-
-            return @this.Zip(other, ignorearg2);
-        }
-
-        public static MonadZero<global::Narvalo.Fx.Unit> Skip<TSource>(this MonadZero<TSource> @this)
-            /* T4: type constraint */
-        {
-            Require.NotNull(@this, nameof(@this));
-            return @this.ReplaceBy(Unit);
-        }
-
-        public static MonadZero<TSource> Where<TSource>(
-            this MonadZero<TSource> @this,
-            Func<TSource, bool> predicate)
-            /* T4: type constraint */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            return @this.Bind(val => predicate(val) ? MonadZero.Of(val) : MonadZero<TSource>.Zero);
-        }
-
-        public static MonadZero<IEnumerable<TSource>> Repeat<TSource>(
-            this MonadZero<TSource> @this,
-            int count)
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.Range(count >= 1, nameof(count));
-            return @this.Select(val => Enumerable.Repeat(val, count));
-        }
-
         public static MonadZero<TResult> Using<TSource, TResult>(
             this MonadZero<TSource> @this,
             Func<TSource, MonadZero<TResult>> selector)
@@ -255,35 +234,6 @@ namespace Edufun.Haskell.Templates
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));
             return @this.Select(val => { using (val) { return selector(val); } });
-        }
-
-        public static void When<TSource>(
-            this MonadZero<TSource> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            /* T4: type constraint */
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            @this.Bind(
-                _ => {
-                    if (predicate(_)) { action(_); }
-
-                    return MonadZero.Unit;
-                });
-        }
-
-        public static void Unless<TSource>(
-            this MonadZero<TSource> @this,
-            Func<TSource, bool> predicate,
-            Action<TSource> action)
-            /* T4: type constraint */
-        {
-            Require.NotNull(@this, nameof(@this));
-
-            @this.When(_ => !predicate(_), action);
         }
 
         #region Zip()
@@ -391,6 +341,26 @@ namespace Edufun.Haskell.Templates
 
         #region LINQ dialect
 
+        public static MonadZero<TResult> Select<TSource, TResult>(
+            this MonadZero<TSource> @this,
+            Func<TSource, TResult> selector)
+            /* T4: type constraint */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(selector, nameof(selector));
+            return @this.Bind(val => MonadZero.Of(selector(val)));
+        }
+
+        public static MonadZero<TSource> Where<TSource>(
+            this MonadZero<TSource> @this,
+            Func<TSource, bool> predicate)
+            /* T4: type constraint */
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+            return @this.Bind(val => predicate(val) ? MonadZero.Of(val) : MonadZero<TSource>.Zero);
+        }
+
         /// <remarks>
         /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" />.
         /// </remarks>
@@ -489,7 +459,7 @@ namespace Edufun.Haskell.Templates
 
             var keyLookup = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
-            return outer.SelectMany(val => keyLookup(val).ReplaceBy(inner), resultSelector);
+            return outer.SelectMany(val => keyLookup(val).Then(inner), resultSelector);
         }
 
         private static MonadZero<TResult> GroupJoinImpl<TSource, TInner, TKey, TResult>(
@@ -510,7 +480,7 @@ namespace Edufun.Haskell.Templates
 
             var keyLookup = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
-            return outer.Select(val => resultSelector(val, keyLookup(val).ReplaceBy(inner)));
+            return outer.Select(val => resultSelector(val, keyLookup(val).Then(inner)));
         }
 
         private static Func<TSource, MonadZero<TKey>> GetKeyLookup<TSource, TInner, TKey>(
@@ -540,7 +510,7 @@ namespace Edufun.Haskell.Templates
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Kleisli
     {
-        public static MonadZero<IEnumerable<TResult>> InvokeForEach<TSource, TResult>(
+        public static MonadZero<IEnumerable<TResult>> InvokeWith<TSource, TResult>(
             this Func<TSource, MonadZero<TResult>> @this,
             IEnumerable<TSource> seq)
             => seq.SelectWith(@this);
@@ -555,21 +525,21 @@ namespace Edufun.Haskell.Templates
         }
 
         public static Func<TSource, MonadZero<TResult>> Compose<TSource, TMiddle, TResult>(
-            this Func<TSource, MonadZero<TMiddle>> first,
+            this Func<TSource, MonadZero<TMiddle>> @this,
             Func<TMiddle, MonadZero<TResult>> second)
             /* T4: type constraint */
         {
-            Require.NotNull(first, nameof(first));
-            return arg => first(arg).Bind(second);
+            Require.NotNull(@this, nameof(@this));
+            return arg => @this(arg).Bind(second);
         }
 
         public static Func<TSource, MonadZero<TResult>> ComposeBack<TSource, TMiddle, TResult>(
-            this Func<TMiddle, MonadZero<TResult>> first,
+            this Func<TMiddle, MonadZero<TResult>> @this,
             Func<TSource, MonadZero<TMiddle>> second)
             /* T4: type constraint */
         {
             Require.NotNull(second, nameof(second));
-            return arg => second(arg).Bind(first);
+            return arg => second(arg).Bind(@this);
         }
     } // End of Kleisli - T4: EmitKleisliExtensions().
 
@@ -645,6 +615,7 @@ namespace Edufun.Haskell.Templates.Linq
     // - Where     -> WhereBy
     // - Zip       -> ZipWith
     // - Aggregate -> Reduce or Fold
+    // WARNING: This template does not handle types with more than one generic parameter.
     public static partial class Qperators
     {
         public static MonadZero<IEnumerable<TResult>> SelectWith<TSource, TResult>(
@@ -710,6 +681,7 @@ namespace Edufun.Haskell.Templates.Internal
 
     // Provides default implementations for the extension methods for IEnumerable<T>.
     // You will certainly want to override them to improve performance.
+    // WARNING: This template does not handle types with more than one generic parameter.
     internal static partial class EnumerableExtensions
     {
         internal static MonadZero<IEnumerable<TResult>> SelectWithImpl<TSource, TResult>(

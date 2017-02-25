@@ -9,7 +9,7 @@ public partial class MonadTemplate
     public static partial class Kleisli
     {
 <#+ if (!HasTypeConstraints) { #>
-        public static <#= Name #><IEnumerable<TResult><#= SuffixT #>> InvokeForEach<TSource, TResult<#= SuffixT #>>(
+        public static <#= Name #><IEnumerable<TResult><#= SuffixT #>> InvokeWith<TSource, TResult<#= SuffixT #>>(
             this Func<TSource, <#= Name #><TResult<#= SuffixT #>>> @this,
             IEnumerable<TSource> seq)
 <#+ if (haslinq) { #>
@@ -30,21 +30,21 @@ public partial class MonadTemplate
         }
 
         public static Func<TSource, <#= Name #><TResult<#= SuffixT #>>> Compose<TSource, TMiddle, TResult<#= SuffixT #>>(
-            this Func<TSource, <#= Name #><TMiddle<#= SuffixT #>>> first,
+            this Func<TSource, <#= Name #><TMiddle<#= SuffixT #>>> @this,
             Func<TMiddle, <#= Name #><TResult<#= SuffixT #>>> second)
             <#+ WriteTypeConstraints("TSource", "TMiddle", "TResult"); #>
         {
-            Require.NotNull(first, nameof(first));
-            return arg => first(arg).Bind(second);
+            Require.NotNull(@this, nameof(@this));
+            return arg => @this(arg).Bind(second);
         }
 
         public static Func<TSource, <#= Name #><TResult<#= SuffixT #>>> ComposeBack<TSource, TMiddle, TResult<#= SuffixT #>>(
-            this Func<TMiddle, <#= Name #><TResult<#= SuffixT #>>> first,
+            this Func<TMiddle, <#= Name #><TResult<#= SuffixT #>>> @this,
             Func<TSource, <#= Name #><TMiddle<#= SuffixT #>>> second)
             <#+ WriteTypeConstraints("TSource", "TMiddle", "TResult"); #>
         {
             Require.NotNull(second, nameof(second));
-            return arg => second(arg).Bind(first);
+            return arg => second(arg).Bind(@this);
         }
     } // End of Kleisli - T4: EmitKleisliExtensions().
 <#+
