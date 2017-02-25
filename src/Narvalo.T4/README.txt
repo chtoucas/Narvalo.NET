@@ -4,15 +4,15 @@
 
 We do not implement methods which are related to the way Haskell handles IO / side-effects
 (see the namespace Narvalo.Fx.Internal for the .NET equivalent):
-- Monad::When
-- Monad::Unless
 - Monad::Forever
-- Monad::SelectWith_
-- Monad::InvokeWith_
+- Monad::Unless
+- Monad::When
 - Monad::Collect_
-- Monad::ZipWith_
 - Monad::Fold_
+- Monad::InvokeWith_
 - Monad::Repeat_
-- Alternative::Some
+- Monad::SelectWith_
+- Monad::ZipWith_
 - Alternative::Many
 - Alternative::Optional
+- Alternative::Some
