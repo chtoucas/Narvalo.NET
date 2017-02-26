@@ -18,29 +18,19 @@ namespace Narvalo.Fx.Extensions
     /// </remarks>
     public static class NullableExtensions
     {
-        #region Monad
-
         public static TResult? Bind<TSource, TResult>(this TSource? @this, Func<TSource, TResult?> selector)
             where TSource : struct
             where TResult : struct
         {
             Require.NotNull(selector, nameof(selector));
 
-            return @this.HasValue ? selector.Invoke(@this.Value) : null;
+            return @this.HasValue ? selector(@this.Value) : null;
         }
-
-        #endregion
-
-        #region Basic Monad functions
 
         public static TResult? Then<TSource, TResult>(this TSource? @this, TResult? other)
             where TSource : struct
             where TResult : struct
             => @this.HasValue ? other : null;
-
-        #endregion
-
-        #region Monadic lifting operators
 
         public static TResult? Zip<TFirst, TSecond, TResult>(
             this TFirst? @this,
@@ -53,11 +43,9 @@ namespace Narvalo.Fx.Extensions
             Require.NotNull(resultSelector, nameof(resultSelector));
 
             return @this.HasValue && second.HasValue
-                ? (TResult?)resultSelector.Invoke(@this.Value, second.Value)
+                ? (TResult?)resultSelector(@this.Value, second.Value)
                 : null;
         }
-
-        #endregion
 
         #region Query Expression Pattern
 
@@ -68,7 +56,7 @@ namespace Narvalo.Fx.Extensions
         {
             Require.NotNull(predicate, nameof(predicate));
 
-            return @this.HasValue && predicate.Invoke(@this.Value) ? @this : null;
+            return @this.HasValue && predicate(@this.Value) ? @this : null;
         }
 
         public static TResult? SelectMany<TSource, TMiddle, TResult>(
@@ -98,7 +86,7 @@ namespace Narvalo.Fx.Extensions
             Require.NotNull(caseValue, nameof(caseValue));
             Require.NotNull(caseNull, nameof(caseNull));
 
-            return @this.HasValue ? caseValue.Invoke(@this.Value) : caseNull.Invoke();
+            return @this.HasValue ? caseValue(@this.Value) : caseNull();
         }
 
         public static TResult Match<TSource, TResult>(
@@ -109,7 +97,7 @@ namespace Narvalo.Fx.Extensions
         {
             Require.NotNull(caseValue, nameof(caseValue));
 
-            return @this.HasValue ? caseValue.Invoke(@this.Value) : caseNull;
+            return @this.HasValue ? caseValue(@this.Value) : caseNull;
         }
 
         public static void Do<TSource>(this TSource? @this, Action<TSource> onValue, Action onNull)
@@ -120,11 +108,11 @@ namespace Narvalo.Fx.Extensions
 
             if (@this.HasValue)
             {
-                onValue.Invoke(@this.Value);
+                onValue(@this.Value);
             }
             else
             {
-                onNull.Invoke();
+                onNull();
             }
         }
 
@@ -145,7 +133,7 @@ namespace Narvalo.Fx.Extensions
 
             if (!@this.HasValue)
             {
-                throw exceptionFactory.Invoke();
+                throw exceptionFactory();
             }
 
             return @this.Value;

@@ -25,23 +25,18 @@ namespace Narvalo.Fx.Extensions
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));
-            Warrant.NotNull<Func<TResult>>();
 
             return () => selector.Invoke(@this.Invoke());
         }
 
-        #region Extensions for Func<Nullable<T>> - Basic Monad functions (Prelude)
+        #region Extensions for Func<Nullable<T>>
 
         public static TResult? Invoke<TSource, TResult>(
             this Func<TSource, TResult?> @this,
             TSource? value)
             where TSource : struct
             where TResult : struct
-        {
-            Expect.NotNull(@this);
-
-            return value.Bind(@this);
-        }
+            => value.Bind(@this);
 
         public static Func<TSource, TResult?> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, TMiddle?> @this,
@@ -51,7 +46,6 @@ namespace Narvalo.Fx.Extensions
             where TResult : struct
         {
             Require.NotNull(@this, nameof(@this));
-            Warrant.NotNull<Func<TSource, TResult?>>();
 
             return _ => @this.Invoke(_).Bind(funM);
         }
@@ -65,7 +59,6 @@ namespace Narvalo.Fx.Extensions
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(funM, nameof(funM));
-            Warrant.NotNull<Func<TSource, TResult?>>();
 
             return _ => funM.Invoke(_).Bind(@this);
         }

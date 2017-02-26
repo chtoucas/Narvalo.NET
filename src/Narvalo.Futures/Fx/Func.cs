@@ -4,7 +4,7 @@ namespace Narvalo.Fx
 {
     using System;
 
-    public static partial class FuncEx
+    public static partial class Func
     {
         public static Func<T> Of<T>(T value)
         {
