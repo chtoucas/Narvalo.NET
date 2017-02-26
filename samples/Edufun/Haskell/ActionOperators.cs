@@ -53,7 +53,7 @@ namespace Edufun.Haskell
             Func<Prototype<Unit>, TSource, Prototype<Unit>> func
                 = (arg1, arg2) => selector(arg2).Then(arg1);
 
-            return source.Aggregate(Prototype.Of(Unit.Single), func);
+            return source.Aggregate(Prototype.Of(Unit.Default), func);
         }
 
         // [Haskell] zipWithM_ :: Applicative m => (a -> b -> m c) -> [a] -> [b] -> m ()

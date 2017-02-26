@@ -104,7 +104,7 @@ namespace Edufun.Haskell
         Prototype<TResult> IFunctorSyntax<T>.ReplaceBy<TResult>(TResult other) => Select(_ => other);
 
         // [Data.Functor] void x = () <$ x
-        Prototype<Unit> IFunctorSyntax<T>.Skip() => ReplaceBy(Unit.Single);
+        Prototype<Unit> IFunctorSyntax<T>.Skip() => ReplaceBy(Unit.Default);
 
         #endregion
 
@@ -218,7 +218,7 @@ namespace Edufun.Haskell
         public Prototype<IEnumerable<T>> Repeat(int count) => Select(_ => Enumerable.Repeat(_, count));
 
         // [Data.Functor] void x = () <$ x
-        public Prototype<Unit> Skip() => ReplaceBy(Unit.Single);
+        public Prototype<Unit> Skip() => ReplaceBy(Unit.Default);
 
         // [GHC.Base] m >> k = m >>= \_ -> k
         public Prototype<TResult> Then<TResult>(Prototype<TResult> other) => Bind(_ => other);
@@ -323,7 +323,7 @@ namespace Edufun.Haskell
                             append = true;
                             item = val;
 
-                            return Prototype.Of(Unit.Single);
+                            return Prototype.Of(Unit.Default);
                         });
 
                     if (append) { yield return item; }
@@ -456,11 +456,11 @@ namespace Edufun.Haskell
 
         // [Control.Monad] when p s = if p then pure () else s
         public Prototype<Unit> Unless(bool predicate, Prototype<Unit> value)
-            => predicate ? Prototype.Of(Unit.Single) : value;
+            => predicate ? Prototype.Of(Unit.Default) : value;
 
         // [GHC.Base] when p s = if p then s else pure ()
         public Prototype<Unit> When(bool predicate, Prototype<Unit> value)
-            => predicate ? value : Prototype.Of(Unit.Single);
+            => predicate ? value : Prototype.Of(Unit.Default);
 
         #endregion
 
@@ -503,7 +503,7 @@ namespace Edufun.Haskell
         public Prototype<Unit> Guard(bool predicate)
            // NB: Using IAlternative<T>:
            // > predicate ? Prototype.Of(Unit.Single) : Prototype.Empty<Unit>();
-           => predicate ? Prototype.Of(Unit.Single) : Prototype.Zero<Unit>();
+           => predicate ? Prototype.Of(Unit.Default) : Prototype.Zero<Unit>();
 
         // [Data.Foldable] msum = asum
         // asum :: (Foldable t, Alternative f) => t (f a) -> f a

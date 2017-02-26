@@ -66,7 +66,7 @@ namespace Edufun.Haskell.Tmp
 
     public static partial class Monad
     {
-        public static readonly Monad<Unit> Unit = Of(Narvalo.Fx.Unit.Single);
+        public static readonly Monad<Unit> Unit = Of(Narvalo.Fx.Unit.Default);
 
         public static Monad<T> Of<T>(T value) => Monad<T>.Return(value);
 
@@ -74,6 +74,6 @@ namespace Edufun.Haskell.Tmp
 
         // [Haskell] void
         public static Monad<Unit> Skip<T>(this Monad<T> @this)
-            => @this.Select(_ => Narvalo.Fx.Unit.Single);
+            => @this.Select(_ => Narvalo.Fx.Unit.Default);
     }
 }

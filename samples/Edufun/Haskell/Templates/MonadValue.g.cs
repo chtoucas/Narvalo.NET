@@ -28,7 +28,7 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// The unique object of type <c>MonadValue&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly MonadValue<global::Narvalo.Fx.Unit> s_Unit = Of(global::Narvalo.Fx.Unit.Single);
+        private static readonly MonadValue<global::Narvalo.Fx.Unit> s_Unit = Of(global::Narvalo.Fx.Unit.Default);
 
         /// <summary>
         /// Gets the unique object of type <c>MonadValue&lt;Unit&gt;</c>.
@@ -514,13 +514,8 @@ namespace Edufun.Haskell.Templates
             Demand.NotNull(innerKeySelector);
             Demand.NotNull(comparer);
 
-            return arg =>
-            {
-                TKey outerKey = outerKeySelector(arg);
-
-                return inner.Select(innerKeySelector)
-                    .Where(key => comparer.Equals(key, outerKey));
-            };
+            return arg => inner.Select(innerKeySelector)
+                .Where(key => comparer.Equals(key, outerKeySelector(arg)));
         }
 
         #endregion

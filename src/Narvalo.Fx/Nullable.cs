@@ -9,8 +9,6 @@ namespace Narvalo.Fx
     /// </summary>
     public static class Nullable
     {
-        #region Basic Monad functions
-
         public static TResult? Select<TSource, TResult>(this TSource? @this, Func<TSource, TResult> selector)
             where TSource : struct
             where TResult : struct
@@ -19,7 +17,5 @@ namespace Narvalo.Fx
 
             return @this.HasValue ? (TResult?)selector.Invoke(@this.Value) : null;
         }
-
-        #endregion
     }
 }

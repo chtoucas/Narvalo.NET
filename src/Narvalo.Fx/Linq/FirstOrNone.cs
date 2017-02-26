@@ -34,7 +34,7 @@ namespace Narvalo.Fx.Linq
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
 
-            var seq = from item in @this where predicate(item) select item;
+            var seq = @this.Where(predicate);
 
             using (var iter = seq.GetEnumerator())
             {

@@ -95,7 +95,7 @@ namespace Edufun.Haskell
                     {
                         pass = val;
 
-                        return Prototype.Of(Unit.Single);
+                        return Prototype.Of(Unit.Default);
                     });
 
                     if (pass) { yield return item; }

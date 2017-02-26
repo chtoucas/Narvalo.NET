@@ -5,47 +5,26 @@ namespace Narvalo.Fx
     using System;
     using System.Diagnostics.CodeAnalysis;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     public struct Unit : IEquatable<Unit>
     {
-        // FIXME: Single is a bit misleading.
-        public static readonly Unit Single = new Unit();
+        private static readonly Unit s_Default = new Unit();
+
+        public static Unit Default => s_Default;
 
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "left", Justification = "[Intentionally] This method always returns 'true'.")]
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "right", Justification = "[Intentionally] This method always returns 'true'.")]
-        public static bool operator ==(Unit left, Unit right)
-        {
-            Warrant.IsTrue();
-
-            return true;
-        }
+        public static bool operator ==(Unit left, Unit right) => true;
 
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "left", Justification = "[Intentionally] This method always returns 'false'.")]
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "right", Justification = "[Intentionally] This method always returns 'false'.")]
-        public static bool operator !=(Unit left, Unit right)
-        {
-            Warrant.IsFalse();
-
-            return false;
-        }
+        public static bool operator !=(Unit left, Unit right) => false;
 
         public bool Equals(Unit other) => true;
 
         public override bool Equals(object obj) => obj is Unit;
 
-        public override int GetHashCode()
-        {
-            Ensures(Result<int>() == 0);
+        public override int GetHashCode() => 0;
 
-            return 0;
-        }
-
-        public override string ToString()
-        {
-            Warrant.NotNull<string>();
-
-            return "()";
-        }
+        public override string ToString() => "()";
     }
 }

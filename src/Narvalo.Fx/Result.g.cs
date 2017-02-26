@@ -176,7 +176,7 @@ namespace Narvalo.Fx
             /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
-            return @this.ReplaceBy(global::Narvalo.Fx.Unit.Single);
+            return @this.ReplaceBy(global::Narvalo.Fx.Unit.Default);
         }
 
         public static Result<TResult, TError> Coalesce<TSource, TResult, TError>(
@@ -420,7 +420,7 @@ namespace Narvalo.Fx.Internal
         {
             Demand.NotNull(source);
 
-            var unit = Result.Of<Unit, TError>(Unit.Single);
+            var unit = Result.Of<Unit, TError>(Unit.Default);
             var item = default(TSource);
 
             using (var iter = source.GetEnumerator())

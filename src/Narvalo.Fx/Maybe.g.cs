@@ -25,7 +25,7 @@ namespace Narvalo.Fx
         /// <summary>
         /// The unique object of type <c>Maybe&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly Maybe<global::Narvalo.Fx.Unit> s_Unit = Of(global::Narvalo.Fx.Unit.Single);
+        private static readonly Maybe<global::Narvalo.Fx.Unit> s_Unit = Of(global::Narvalo.Fx.Unit.Default);
 
         /// <summary>
         /// Gets the unique object of type <c>Maybe&lt;Unit&gt;</c>.
@@ -498,13 +498,8 @@ namespace Narvalo.Fx
             Demand.NotNull(innerKeySelector);
             Demand.NotNull(comparer);
 
-            return arg =>
-            {
-                TKey outerKey = outerKeySelector(arg);
-
-                return inner.Select(innerKeySelector)
-                    .Where(key => comparer.Equals(key, outerKey));
-            };
+            return arg => inner.Select(innerKeySelector)
+                .Where(key => comparer.Equals(key, outerKeySelector(arg)));
         }
 
         #endregion

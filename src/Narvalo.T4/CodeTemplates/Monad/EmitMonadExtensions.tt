@@ -73,7 +73,7 @@ public partial class MonadTemplate
             <#+ WriteNotNull(); #>
 
 <#+ if (HasSuffixT) { #>
-            return @this.ReplaceBy(global::Narvalo.Fx.Unit.Single);
+            return @this.ReplaceBy(global::Narvalo.Fx.Unit.Default);
 <#+ } else { #>
             return @this.Then(Unit);
 <#+ } #>
@@ -445,13 +445,8 @@ public partial class MonadTemplate
             Demand.NotNull(innerKeySelector);
             Demand.NotNull(comparer);
 
-            return arg =>
-            {
-                TKey outerKey = outerKeySelector(arg);
-
-                return inner.<#= MapName #>(innerKeySelector)
-                    .<#= FilterName #>(key => comparer.Equals(key, outerKey));
-            };
+            return arg => inner.<#= MapName #>(innerKeySelector)
+                .<#= FilterName #>(key => comparer.Equals(key, outerKeySelector(arg)));
         }
 <#+ } // T4: End of HasJoin. #>
 

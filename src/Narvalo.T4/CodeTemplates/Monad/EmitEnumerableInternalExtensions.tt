@@ -46,7 +46,7 @@ public partial class MonadTemplate
             Demand.NotNull(predicate);
 <#+ if (HasSuffixT) { #>
 
-            var unit = <#+ WriteFactory("Unit"); #>(Unit.Single);
+            var unit = <#+ WriteFactory("Unit"); #>(Unit.Default);
 <#+ } #>
 
             using (var iter = source.GetEnumerator())

@@ -12,7 +12,7 @@ public partial class MonadTemplate
         /// <summary>
         /// The unique object of type <c><#= Name #>&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly <#= Name #><global::Narvalo.Fx.Unit> s_Unit = <#= ReturnName #>(global::Narvalo.Fx.Unit.Single);
+        private static readonly <#= Name #><global::Narvalo.Fx.Unit> s_Unit = <#= ReturnName #>(global::Narvalo.Fx.Unit.Default);
 
         /// <summary>
         /// Gets the unique object of type <c><#= Name #>&lt;Unit&gt;</c>.

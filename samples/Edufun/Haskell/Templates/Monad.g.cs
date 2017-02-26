@@ -28,7 +28,7 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// The unique object of type <c>Monad&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly Monad<global::Narvalo.Fx.Unit> s_Unit = Of(global::Narvalo.Fx.Unit.Single);
+        private static readonly Monad<global::Narvalo.Fx.Unit> s_Unit = Of(global::Narvalo.Fx.Unit.Default);
 
         /// <summary>
         /// Gets the unique object of type <c>Monad&lt;Unit&gt;</c>.

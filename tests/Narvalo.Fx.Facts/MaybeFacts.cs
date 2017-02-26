@@ -615,7 +615,7 @@ namespace Narvalo.Fx
         {
             // Act & Assert
             Assert.True(Maybe.Unit.IsSome);
-            Assert.Equal(Unit.Single, Maybe.Unit.Value);
+            Assert.Equal(Unit.Default, Maybe.Unit.Value);
         }
 
         #endregion

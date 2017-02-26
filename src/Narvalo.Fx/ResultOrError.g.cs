@@ -25,7 +25,7 @@ namespace Narvalo.Fx
         /// <summary>
         /// The unique object of type <c>ResultOrError&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly ResultOrError<global::Narvalo.Fx.Unit> s_Unit = Of(global::Narvalo.Fx.Unit.Single);
+        private static readonly ResultOrError<global::Narvalo.Fx.Unit> s_Unit = Of(global::Narvalo.Fx.Unit.Default);
 
         /// <summary>
         /// Gets the unique object of type <c>ResultOrError&lt;Unit&gt;</c>.
