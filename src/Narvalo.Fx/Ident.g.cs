@@ -336,6 +336,7 @@ namespace Narvalo.Fx
             Require.NotNull(selector, nameof(selector));
             return @this.Bind(val => Ident.Of(selector(val)));
         }
+
         /// <remarks>
         /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" />.
         /// </remarks>
@@ -353,7 +354,6 @@ namespace Narvalo.Fx
                 val => valueSelector(val).Select(
                     middle => resultSelector(val, middle)));
         }
-
 
         #endregion
     } // End of Ident - T4: EmitMonadExtensions().

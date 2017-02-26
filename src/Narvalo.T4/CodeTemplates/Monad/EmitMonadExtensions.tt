@@ -283,7 +283,6 @@ public partial class MonadTemplate
             Require.NotNull(predicate, nameof(predicate));
             return @this.Bind(val => predicate(val) ? <#+ WriteFactory("TSource"); #>(val) : <#= Name #><TSource<#= SuffixT #>>.<#= ZeroName #>);
         }
-
 <#+ } // T4: End of HasZero. #>
 <#+ if (!PreferLinqDialect) { #>
 <#+ if (HasFilter) { #>
@@ -296,8 +295,8 @@ public partial class MonadTemplate
 
             return @this.<#= FilterName #>(predicate);
         }
-
 <#+ } // T4: End of HasFilter. #>
+
         public static <#= Name #><TResult> Select<TSource, TResult<#= SuffixT #>>(
             this <#= Name #><TSource<#= SuffixT #>> @this,
             Func<TSource, TResult> selector)
@@ -307,8 +306,8 @@ public partial class MonadTemplate
 
             return @this.<#= MapName #>(selector);
         }
-
 <#+ } // T4: End of !PreferLinqDialect. #>
+
         /// <remarks>
         /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" />.
         /// </remarks>
@@ -326,8 +325,8 @@ public partial class MonadTemplate
                 val => valueSelector(val).<#= MapName #>(
                     middle => resultSelector(val, middle)));
         }
-
 <#+ if (HasJoin) { #>
+
         public static <#= Name #><TResult> Join<TSource, TInner, TKey, TResult>(
             this <#= Name #><TSource> @this,
             <#= Name #><TInner> inner,
