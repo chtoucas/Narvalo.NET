@@ -5,12 +5,12 @@ public partial class MonadTemplate
     protected void EmitMonadEnumerableExtensions()
     {
 #>
-    // Provides extension methods for IEnumerable<<#= Name #><T<#= SuffixT #>>>.
+    // Provides extension methods for IEnumerable<<#= Name #><T<#= RTDecl #>>>.
     public static partial class <#= Name #>
     {
 <#+ if (!HasTypeConstraints) { #>
-        public static <#= Name #><IEnumerable<TSource><#= SuffixT #>> Collect<TSource<#= SuffixT #>>(
-            this IEnumerable<<#= Name #><TSource<#= SuffixT #>>> @this)
+        public static <#= Name #><IEnumerable<TSource><#= RTDecl #>> Collect<TSource<#= RTDecl #>>(
+            this IEnumerable<<#= Name #><TSource<#= RTDecl #>>> @this)
             => @this.CollectImpl();
 
 <#+ } // T4: End of !HasTypeConstraints. #>

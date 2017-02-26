@@ -9,8 +9,8 @@ public partial class MonadTemplate
     public static partial class Kleisli
     {
 <#+ if (!HasTypeConstraints) { #>
-        public static <#= Name #><IEnumerable<TResult><#= SuffixT #>> InvokeWith<TSource, TResult<#= SuffixT #>>(
-            this Func<TSource, <#= Name #><TResult<#= SuffixT #>>> @this,
+        public static <#= Name #><IEnumerable<TResult><#= RTDecl #>> InvokeWith<TSource, TResult<#= RTDecl #>>(
+            this Func<TSource, <#= Name #><TResult<#= RTDecl #>>> @this,
             IEnumerable<TSource> seq)
 <#+ if (haslinq) { #>
             => seq.SelectWith(@this);
@@ -20,27 +20,27 @@ public partial class MonadTemplate
 
 <#+ } // T4: End of !HasTypeConstraints. #>
 
-        public static <#= Name #><TResult<#= SuffixT #>> InvokeWith<TSource, TResult<#= SuffixT #>>(
-            this Func<TSource, <#= Name #><TResult<#= SuffixT #>>> @this,
-            <#= Name #><TSource<#= SuffixT #>> value)
+        public static <#= Name #><TResult<#= RTDecl #>> InvokeWith<TSource, TResult<#= RTDecl #>>(
+            this Func<TSource, <#= Name #><TResult<#= RTDecl #>>> @this,
+            <#= Name #><TSource<#= RTDecl #>> value)
             <#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
             <#+ WriteNotNull("value"); #>
             return value.Bind(@this);
         }
 
-        public static Func<TSource, <#= Name #><TResult<#= SuffixT #>>> Compose<TSource, TMiddle, TResult<#= SuffixT #>>(
-            this Func<TSource, <#= Name #><TMiddle<#= SuffixT #>>> @this,
-            Func<TMiddle, <#= Name #><TResult<#= SuffixT #>>> second)
+        public static Func<TSource, <#= Name #><TResult<#= RTDecl #>>> Compose<TSource, TMiddle, TResult<#= RTDecl #>>(
+            this Func<TSource, <#= Name #><TMiddle<#= RTDecl #>>> @this,
+            Func<TMiddle, <#= Name #><TResult<#= RTDecl #>>> second)
             <#+ WriteTypeConstraints("TSource", "TMiddle", "TResult"); #>
         {
             Require.NotNull(@this, nameof(@this));
             return arg => @this(arg).Bind(second);
         }
 
-        public static Func<TSource, <#= Name #><TResult<#= SuffixT #>>> ComposeBack<TSource, TMiddle, TResult<#= SuffixT #>>(
-            this Func<TMiddle, <#= Name #><TResult<#= SuffixT #>>> @this,
-            Func<TSource, <#= Name #><TMiddle<#= SuffixT #>>> second)
+        public static Func<TSource, <#= Name #><TResult<#= RTDecl #>>> ComposeBack<TSource, TMiddle, TResult<#= RTDecl #>>(
+            this Func<TMiddle, <#= Name #><TResult<#= RTDecl #>>> @this,
+            Func<TSource, <#= Name #><TMiddle<#= RTDecl #>>> second)
             <#+ WriteTypeConstraints("TSource", "TMiddle", "TResult"); #>
         {
             Require.NotNull(second, nameof(second));

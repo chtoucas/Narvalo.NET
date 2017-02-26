@@ -105,7 +105,7 @@ namespace Narvalo.T4
         /// <value><see langword="true"/> if the monad is null-able; otherwise <see langword="false"/>.</value>
         protected bool IsNullable { get; set; } = true;
 
-        protected string ClassDeclaration => IsNullable ? "class" : "struct";
+        protected string ClassTypeDecl => IsNullable ? "class" : "struct";
 
         /// <summary>
         /// Gets the generic constraints on the underlying type T. Default to String.Empty.
@@ -141,13 +141,17 @@ namespace Narvalo.T4
 
         #region Generic parameters
 
-        protected string GenericDeclaration { get; private set; } = "T";
+        protected string MainGeneric { get; private set; } = String.Empty;
 
-        protected string[] RightParams { get; private set; } = new String[0];
+        protected string[] RightGenerics { get; private set; } = new String[0];
 
-        protected string SuffixT { get; private set; } = String.Empty;
+        // String that contains all generic type decls, eg "T, T2, T3"
+        protected string GenericsDecl { get; private set; } = "T";
 
-        protected bool HasSuffixT { get; private set; } = false;
+        protected bool HasRightGenerics { get; private set; } = false;
+
+        // String that only contains the "rigth" generic type decls, eg "T2, T3"
+        protected string RTDecl { get; private set; } = String.Empty;
 
         #endregion
 
@@ -323,12 +327,22 @@ namespace Narvalo.T4
 
         #region Initalizers
 
-        protected void InitializeGenericParameters(string mainT, params string[] rightParams)
+        protected void InitializeGenericParameters(string mainGeneric, params string[] rightGenerics)
         {
-            RightParams = rightParams;
-            SuffixT = ", " + String.Join(", ", rightParams);
-            HasSuffixT = true;
-            GenericDeclaration = mainT + SuffixT;
+            MainGeneric = mainGeneric;
+
+            if (rightGenerics.Length > 0)
+            {
+                RightGenerics = rightGenerics;
+
+                HasRightGenerics = true;
+                RTDecl = ", " + String.Join(", ", rightGenerics);
+                GenericsDecl = mainGeneric + RTDecl;
+            }
+            else
+            {
+                GenericsDecl = mainGeneric;
+            }
         }
 
         /// <summary>
@@ -433,10 +447,10 @@ namespace Narvalo.T4
 
         protected void WriteFactory(string name)
         {
-            if (HasSuffixT)
+            if (HasRightGenerics)
             {
                 // For instance, Result.Of<TResult, TError>
-                Write(@"{0}.{1}<{2}{3}>", Name, ReturnName, name, SuffixT);
+                Write(@"{0}.{1}<{2}{3}>", Name, ReturnName, name, RTDecl);
             }
             else
             {

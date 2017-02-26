@@ -44,7 +44,7 @@ public partial class MonadTemplate
         {
             Demand.NotNull(source);
             Demand.NotNull(predicate);
-<#+ if (HasSuffixT) { #>
+<#+ if (HasRightGenerics) { #>
 
             var unit = <#+ WriteFactory("Unit"); #>(Unit.Default);
 <#+ } #>
@@ -60,7 +60,7 @@ public partial class MonadTemplate
                     {
                         pass = val;
 
-<#+ if (HasSuffixT) { #>
+<#+ if (HasRightGenerics) { #>
                         return unit;
 <#+ } else { #>
                         return <#= Name #>.Unit;

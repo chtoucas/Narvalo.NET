@@ -22,3 +22,10 @@ We do not implement methods which are related to the way Haskell handles actions
 - Alternative::Some
 We also exclude methods without clear usecases:
 - Monad::SelectUnzip
+
+Methods specific to our .NET implementation:
+- Miscs: Zip (w/o zipper)
+- Resources management: Using
+- Flow control: If, Coalesce
+- Query Expression Pattern: SelectMany, Join and GroupJoin
+- See also Narvalo.Fx.Internal for interfaces implemented by all monads

@@ -5,10 +5,14 @@ public partial class MonadTemplate
     protected void EmitMonadCore()
     {
 #>
-    // Provides a set of static methods for <#= Name #><T<#= SuffixT #>>.
+    public partial <#= ClassTypeDecl #> <#= Name #><<#= GenericsDecl #>>
+    {
+    }
+
+    // Provides a set of static methods for <#= Name #><T<#= RTDecl #>>.
     public static partial class <#= Name #>
     {
-<#+ if (!HasSuffixT) { #>
+<#+ if (!HasRightGenerics) { #>
         /// <summary>
         /// The unique object of type <c><#= Name #>&lt;Unit&gt;</c>.
         /// </summary>
@@ -28,24 +32,24 @@ public partial class MonadTemplate
 
 <#+ } // End of HasZero #>
         /// <summary>
-        /// Obtains an instance of the <see cref="<#= Name #>{T<#= SuffixT #>}"/> class for the specified value.
+        /// Obtains an instance of the <see cref="<#= Name #>{T<#= RTDecl #>}"/> class for the specified value.
         /// </summary>
         /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
-<#+ if (HasSuffixT) { #>
-        /// <typeparam name="<#= RawSuffixT #>"></typeparam>
+<#+ foreach (var typeParam in RightGenerics) { #>
+        /// <typeparam name="<#= typeParam #>"></typeparam>
 <#+ } #>
-        /// <param name="value">A value to be wrapped into an object of type <see cref="<#= Name #>{T<#= SuffixT #>}"/>.</param>
-        /// <returns>An instance of the <see cref="<#= Name #>{T<#= SuffixT #>}"/> class for the specified value.</returns>
-        public static <#= Name #><T<#= SuffixT #>> <#= ReturnName #><T<#= SuffixT #>>(T value)
+        /// <param name="value">A value to be wrapped into an object of type <see cref="<#= Name #>{T<#= RTDecl #>}"/>.</param>
+        /// <returns>An instance of the <see cref="<#= Name #>{T<#= RTDecl #>}"/> class for the specified value.</returns>
+        public static <#= Name #><T<#= RTDecl #>> <#= ReturnName #><T<#= RTDecl #>>(T value)
             <#+ WriteTypeConstraints("T"); #>
-            => <#= Name #><T<#= SuffixT #>>.η(value);
+            => <#= Name #><T<#= RTDecl #>>.η(value);
 
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
         /// </summary>
-        public static <#= Name #><T<#= SuffixT #>> Flatten<T<#= SuffixT #>>(<#= Name #><<#= Name #><T<#= SuffixT #>><#= SuffixT #>> square)
+        public static <#= Name #><T<#= RTDecl #>> Flatten<T<#= RTDecl #>>(<#= Name #><<#= Name #><T<#= RTDecl #>><#= RTDecl #>> square)
             <#+ WriteTypeConstraints("T"); #>
-            => <#= Name #><T<#= SuffixT #>>.μ(square);
+            => <#= Name #><T<#= RTDecl #>>.μ(square);
 <#+ if (HasZero) { #>
 
         public static <#= Name #><Unit> Guard(bool predicate) => predicate ? Unit : <#= ZeroName #>;
@@ -54,10 +58,10 @@ public partial class MonadTemplate
         #region Lift()
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="<#= Name #>{T<#= SuffixT #>}" /> values.
+        /// Promotes a function to use and return <see cref="<#= Name #>{T<#= RTDecl #>}" /> values.
         /// </summary>
-        /// <seealso cref="Select{T, TResult<#= SuffixT #>}" />
-        public static Func<<#= Name #><T<#= SuffixT #>>, <#= Name #><TResult<#= SuffixT #>>> Lift<T, TResult<#= SuffixT #>>(
+        /// <seealso cref="Select{T, TResult<#= RTDecl #>}" />
+        public static Func<<#= Name #><T<#= RTDecl #>>, <#= Name #><TResult<#= RTDecl #>>> Lift<T, TResult<#= RTDecl #>>(
             Func<T, TResult> func)
             <#+ WriteTypeConstraints("T", "TResult"); #>
             => arg =>
@@ -67,11 +71,11 @@ public partial class MonadTemplate
             };
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="<#= Name #>{T<#= SuffixT #>}" /> values.
+        /// Promotes a function to use and return <see cref="<#= Name #>{T<#= RTDecl #>}" /> values.
         /// </summary>
-        /// <seealso cref="Lift{T1, T2, TResult<#= SuffixT #>}" />
-        public static Func<<#= Name #><T1<#= SuffixT #>>, <#= Name #><T2<#= SuffixT #>>, <#= Name #><TResult<#= SuffixT #>>>
-            Lift<T1, T2, TResult<#= SuffixT #>>(Func<T1, T2, TResult> func)
+        /// <seealso cref="Lift{T1, T2, TResult<#= RTDecl #>}" />
+        public static Func<<#= Name #><T1<#= RTDecl #>>, <#= Name #><T2<#= RTDecl #>>, <#= Name #><TResult<#= RTDecl #>>>
+            Lift<T1, T2, TResult<#= RTDecl #>>(Func<T1, T2, TResult> func)
             <#+ WriteTypeConstraints("T1", "T2", "TResult"); #>
             => (arg1, arg2) =>
             {
@@ -80,11 +84,11 @@ public partial class MonadTemplate
             };
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="<#= Name #>{T<#= SuffixT #>}" /> values.
+        /// Promotes a function to use and return <see cref="<#= Name #>{T<#= RTDecl #>}" /> values.
         /// </summary>
-        /// <seealso cref="Lift{T1, T2, T3, TResult<#= SuffixT #>}" />
-        public static Func<<#= Name #><T1<#= SuffixT #>>, <#= Name #><T2<#= SuffixT #>>, <#= Name #><T3<#= SuffixT #>>, <#= Name #><TResult<#= SuffixT #>>>
-            Lift<T1, T2, T3, TResult<#= SuffixT #>>(Func<T1, T2, T3, TResult> func)
+        /// <seealso cref="Lift{T1, T2, T3, TResult<#= RTDecl #>}" />
+        public static Func<<#= Name #><T1<#= RTDecl #>>, <#= Name #><T2<#= RTDecl #>>, <#= Name #><T3<#= RTDecl #>>, <#= Name #><TResult<#= RTDecl #>>>
+            Lift<T1, T2, T3, TResult<#= RTDecl #>>(Func<T1, T2, T3, TResult> func)
             <#+ WriteTypeConstraints("T1", "T2", "T3", "TResult"); #>
             => (arg1, arg2, arg3) =>
             {
@@ -93,11 +97,11 @@ public partial class MonadTemplate
             };
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="<#= Name #>{T<#= SuffixT #>}" /> values.
+        /// Promotes a function to use and return <see cref="<#= Name #>{T<#= RTDecl #>}" /> values.
         /// </summary>
-        /// <seealso cref="Lift{T1, T2, T3, T4, TResult<#= SuffixT #>}" />
-        public static Func<<#= Name #><T1<#= SuffixT #>>, <#= Name #><T2<#= SuffixT #>>, <#= Name #><T3<#= SuffixT #>>, <#= Name #><T4<#= SuffixT #>>, <#= Name #><TResult<#= SuffixT #>>>
-            Lift<T1, T2, T3, T4, TResult<#= SuffixT #>>(
+        /// <seealso cref="Lift{T1, T2, T3, T4, TResult<#= RTDecl #>}" />
+        public static Func<<#= Name #><T1<#= RTDecl #>>, <#= Name #><T2<#= RTDecl #>>, <#= Name #><T3<#= RTDecl #>>, <#= Name #><T4<#= RTDecl #>>, <#= Name #><TResult<#= RTDecl #>>>
+            Lift<T1, T2, T3, T4, TResult<#= RTDecl #>>(
             Func<T1, T2, T3, T4, TResult> func)
             <#+ WriteTypeConstraints("T1", "T2", "T3", "T4", "TResult"); #>
             => (arg1, arg2, arg3, arg4) =>
@@ -107,11 +111,11 @@ public partial class MonadTemplate
             };
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="<#= Name #>{T<#= SuffixT #>}" /> values.
+        /// Promotes a function to use and return <see cref="<#= Name #>{T<#= RTDecl #>}" /> values.
         /// </summary>
-        /// <seealso cref="Lift{T1, T2, T3, T4, T5, TResult<#= SuffixT #>}" />
-        public static Func<<#= Name #><T1<#= SuffixT #>>, <#= Name #><T2<#= SuffixT #>>, <#= Name #><T3<#= SuffixT #>>, <#= Name #><T4<#= SuffixT #>>, <#= Name #><T5<#= SuffixT #>>, <#= Name #><TResult<#= SuffixT #>>>
-            Lift<T1, T2, T3, T4, T5, TResult<#= SuffixT #>>(
+        /// <seealso cref="Lift{T1, T2, T3, T4, T5, TResult<#= RTDecl #>}" />
+        public static Func<<#= Name #><T1<#= RTDecl #>>, <#= Name #><T2<#= RTDecl #>>, <#= Name #><T3<#= RTDecl #>>, <#= Name #><T4<#= RTDecl #>>, <#= Name #><T5<#= RTDecl #>>, <#= Name #><TResult<#= RTDecl #>>>
+            Lift<T1, T2, T3, T4, T5, TResult<#= RTDecl #>>(
             Func<T1, T2, T3, T4, T5, TResult> func)
             <#+ WriteTypeConstraints("T1", "T2", "T3", "T4", "T5", "TResult"); #>
             => (arg1, arg2, arg3, arg4, arg5) =>

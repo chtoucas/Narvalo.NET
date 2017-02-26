@@ -5,7 +5,7 @@ public partial class MonadTemplate
     protected void EmitMonadEnumerableInternalExtensions()
     {
 #>
-    // Provides default implementations for the extension methods for IEnumerable<<#= Name #><T<#= SuffixT #>>>.
+    // Provides default implementations for the extension methods for IEnumerable<<#= Name #><T<#= RTDecl #>>>.
     // You will certainly want to override them to improve performance.
     internal static partial class EnumerableExtensions
     {
@@ -14,19 +14,19 @@ public partial class MonadTemplate
 <#+ if (!SuppressMessage) { #>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
 <#+ } #>
-        internal static <#= Name #><IEnumerable<TSource><#= SuffixT #>> CollectImpl<TSource<#= SuffixT #>>(
-            this IEnumerable<<#= Name #><TSource<#= SuffixT #>>> @this)
+        internal static <#= Name #><IEnumerable<TSource><#= RTDecl #>> CollectImpl<TSource<#= RTDecl #>>(
+            this IEnumerable<<#= Name #><TSource<#= RTDecl #>>> @this)
         {
             <#+ WriteNotNull(true); #>
 
             return <#+ WriteFactory("IEnumerable<TSource>"); #>(CollectIterator(@this));
         }
 
-        private static IEnumerable<TSource> CollectIterator<TSource<#= SuffixT #>>(IEnumerable<<#= Name #><TSource<#= SuffixT #>>> source)
+        private static IEnumerable<TSource> CollectIterator<TSource<#= RTDecl #>>(IEnumerable<<#= Name #><TSource<#= RTDecl #>>> source)
         {
             Demand.NotNull(source);
 
-<#+ if (HasSuffixT) { #>
+<#+ if (HasRightGenerics) { #>
             var unit = <#+ WriteFactory("Unit"); #>(Unit.Default);
 <#+ } #>
             var item = default(TSource);
@@ -43,7 +43,7 @@ public partial class MonadTemplate
                             append = true;
                             item = val;
 
-<#+ if (HasSuffixT) { #>
+<#+ if (HasRightGenerics) { #>
                             return unit;
 <#+ } else { #>
                             return <#= Name #>.Unit;

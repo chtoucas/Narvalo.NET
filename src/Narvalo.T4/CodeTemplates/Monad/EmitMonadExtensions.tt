@@ -5,31 +5,31 @@ public partial class MonadTemplate
     protected void EmitMonadExtensions()
     {
 #>
-    // Provides extension methods for <#= Name #><T<#= SuffixT #>>.
+    // Provides extension methods for <#= Name #><T<#= RTDecl #>>.
     public static partial class <#= Name #>
     {
 <#+ if (!HasTypeConstraints) { #>
-        /// <seealso cref="Apply{TSource, TResult<#= SuffixT #>}" />
-        public static <#= Name #><TResult<#= SuffixT #>> Gather<TSource, TResult<#= SuffixT #>>(
-            this <#= Name #><TSource<#= SuffixT #>> @this,
-            <#= Name #><Func<TSource, TResult><#= SuffixT #>> applicative)
+        /// <seealso cref="Apply{TSource, TResult<#= RTDecl #>}" />
+        public static <#= Name #><TResult<#= RTDecl #>> Gather<TSource, TResult<#= RTDecl #>>(
+            this <#= Name #><TSource<#= RTDecl #>> @this,
+            <#= Name #><Func<TSource, TResult><#= RTDecl #>> applicative)
         {
             <#+ WriteNotNull(); #>
             <#+ WriteNotNull("applicative"); #>
             return applicative.Bind(func => @this.Select(func));
         }
 
-        /// <seealso cref="Gather{TSource, TResult<#= SuffixT #>}" />
-        public static <#= Name #><TResult<#= SuffixT #>> Apply<TSource, TResult<#= SuffixT #>>(
-            this <#= Name #><Func<TSource, TResult><#= SuffixT #>> @this,
-            <#= Name #><TSource<#= SuffixT #>> value)
+        /// <seealso cref="Gather{TSource, TResult<#= RTDecl #>}" />
+        public static <#= Name #><TResult<#= RTDecl #>> Apply<TSource, TResult<#= RTDecl #>>(
+            this <#= Name #><Func<TSource, TResult><#= RTDecl #>> @this,
+            <#= Name #><TSource<#= RTDecl #>> value)
         {
             <#+ WriteNotNull("value"); #>
             return value.Gather(@this);
         }
 
-        public static <#= Name #><IEnumerable<TSource><#= SuffixT #>> Repeat<TSource<#= SuffixT #>>(
-            this <#= Name #><TSource<#= SuffixT #>> @this,
+        public static <#= Name #><IEnumerable<TSource><#= RTDecl #>> Repeat<TSource<#= RTDecl #>>(
+            this <#= Name #><TSource<#= RTDecl #>> @this,
             int count)
         {
             <#+ WriteNotNull(); #>
@@ -38,8 +38,8 @@ public partial class MonadTemplate
         }
 <#+ } // T4: End of !HasTypeConstraints. #>
 
-        public static <#= Name #><TResult<#= SuffixT #>> ReplaceBy<TSource, TResult<#= SuffixT #>>(
-            this <#= Name #><TSource<#= SuffixT #>> @this,
+        public static <#= Name #><TResult<#= RTDecl #>> ReplaceBy<TSource, TResult<#= RTDecl #>>(
+            this <#= Name #><TSource<#= RTDecl #>> @this,
             TResult value)
             <#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
@@ -47,18 +47,18 @@ public partial class MonadTemplate
             return @this.Select(_ => value);
         }
 
-        public static <#= Name #><TResult<#= SuffixT #>> Then<TSource, TResult<#= SuffixT #>>(
-            this <#= Name #><TSource<#= SuffixT #>> @this,
-            <#= Name #><TResult<#= SuffixT #>> other)
+        public static <#= Name #><TResult<#= RTDecl #>> Then<TSource, TResult<#= RTDecl #>>(
+            this <#= Name #><TSource<#= RTDecl #>> @this,
+            <#= Name #><TResult<#= RTDecl #>> other)
             <#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
             <#+ WriteNotNull(); #>
             return @this.Bind(_ => other);
         }
 
-        public static <#= Name #><TSource<#= SuffixT #>> Ignore<TSource, TOther<#= SuffixT #>>(
-            this <#= Name #><TSource<#= SuffixT #>> @this,
-            <#= Name #><TOther<#= SuffixT #>> other)
+        public static <#= Name #><TSource<#= RTDecl #>> Ignore<TSource, TOther<#= RTDecl #>>(
+            this <#= Name #><TSource<#= RTDecl #>> @this,
+            <#= Name #><TOther<#= RTDecl #>> other)
             <#+ WriteTypeConstraints("TSource", "TOther"); #>
         {
             <#+ WriteNotNull(); #>
@@ -67,12 +67,12 @@ public partial class MonadTemplate
             return @this.Zip(other, ignore);
         }
 
-        public static <#= Name #><global::Narvalo.Fx.Unit<#= SuffixT #>> Skip<TSource<#= SuffixT #>>(this <#= Name #><TSource<#= SuffixT #>> @this)
+        public static <#= Name #><global::Narvalo.Fx.Unit<#= RTDecl #>> Skip<TSource<#= RTDecl #>>(this <#= Name #><TSource<#= RTDecl #>> @this)
             <#+ WriteTypeConstraints("TSource"); #>
         {
             <#+ WriteNotNull(); #>
 
-<#+ if (HasSuffixT) { #>
+<#+ if (HasRightGenerics) { #>
             return @this.ReplaceBy(global::Narvalo.Fx.Unit.Default);
 <#+ } else { #>
             return @this.Then(Unit);
@@ -92,11 +92,11 @@ public partial class MonadTemplate
         }
 <#+ } // T4: End of HasZero. #>
 
-        public static <#= Name #><TResult<#= SuffixT #>> Coalesce<TSource, TResult<#= SuffixT #>>(
-            this <#= Name #><TSource<#= SuffixT #>> @this,
+        public static <#= Name #><TResult<#= RTDecl #>> Coalesce<TSource, TResult<#= RTDecl #>>(
+            this <#= Name #><TSource<#= RTDecl #>> @this,
             Func<TSource, bool> predicate,
-            <#= Name #><TResult<#= SuffixT #>> thenResult,
-            <#= Name #><TResult<#= SuffixT #>> elseResult)
+            <#= Name #><TResult<#= RTDecl #>> thenResult,
+            <#= Name #><TResult<#= RTDecl #>> elseResult)
             <#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
             <#+ WriteNotNull(); #>
@@ -104,9 +104,9 @@ public partial class MonadTemplate
             return @this.Bind(val => predicate(val) ? thenResult : elseResult);
         }
 
-        public static <#= Name #><TResult<#= SuffixT #>> Using<TSource, TResult<#= SuffixT #>>(
-            this <#= Name #><TSource<#= SuffixT #>> @this,
-            Func<TSource, <#= Name #><TResult<#= SuffixT #>>> selector)
+        public static <#= Name #><TResult<#= RTDecl #>> Using<TSource, TResult<#= RTDecl #>>(
+            this <#= Name #><TSource<#= RTDecl #>> @this,
+            Func<TSource, <#= Name #><TResult<#= RTDecl #>>> selector)
             <#+ WriteCustomTypeConstraint("TSource", "IDisposable"); #>
             <#+ WriteTypeConstraints("TResult"); #>
         {
@@ -115,8 +115,8 @@ public partial class MonadTemplate
             return @this.Bind(val => { using (val) { return selector(val); } });
         }
 
-        public static <#= Name #><TResult<#= SuffixT #>> Using<TSource, TResult<#= SuffixT #>>(
-            this <#= Name #><TSource<#= SuffixT #>> @this,
+        public static <#= Name #><TResult<#= RTDecl #>> Using<TSource, TResult<#= RTDecl #>>(
+            this <#= Name #><TSource<#= RTDecl #>> @this,
             Func<TSource, TResult> selector)
             <#+ WriteCustomTypeConstraint("TSource", "IDisposable"); #>
             <#+ WriteTypeConstraints("TResult"); #>
@@ -129,9 +129,9 @@ public partial class MonadTemplate
         #region Zip()
 <#+ if (!HasTypeConstraints) { #>
 
-        public static <#= Name #><Tuple<TSource, TOther><#= SuffixT #>> Zip<TSource, TOther<#= SuffixT #>>(
-            this <#= Name #><TSource<#= SuffixT #>> @this,
-            <#= Name #><TOther<#= SuffixT #>> other)
+        public static <#= Name #><Tuple<TSource, TOther><#= RTDecl #>> Zip<TSource, TOther<#= RTDecl #>>(
+            this <#= Name #><TSource<#= RTDecl #>> @this,
+            <#= Name #><TOther<#= RTDecl #>> other)
             <#+ WriteTypeConstraints("TSource", "TOther"); #>
         {
             <#+ WriteNotNull(); #>
@@ -139,10 +139,10 @@ public partial class MonadTemplate
         }
 <#+ } #>
 
-        /// <seealso cref="Lift{TFirst, TSecond, TResult<#= SuffixT #>}" />
-        public static <#= Name #><TResult<#= SuffixT #>> Zip<TFirst, TSecond, TResult<#= SuffixT #>>(
-            this <#= Name #><TFirst<#= SuffixT #>> @this,
-            <#= Name #><TSecond<#= SuffixT #>> second,
+        /// <seealso cref="Lift{TFirst, TSecond, TResult<#= RTDecl #>}" />
+        public static <#= Name #><TResult<#= RTDecl #>> Zip<TFirst, TSecond, TResult<#= RTDecl #>>(
+            this <#= Name #><TFirst<#= RTDecl #>> @this,
+            <#= Name #><TSecond<#= RTDecl #>> second,
             Func<TFirst, TSecond, TResult> zipper)
             <#+ WriteTypeConstraints("TFirst", "TSecond", "TResult"); #>
         {
@@ -163,11 +163,11 @@ public partial class MonadTemplate
 <#+ } #>
         }
 
-        /// <seealso cref="Lift{T1, T2, T3, TResult<#= SuffixT #>}" />
-        public static <#= Name #><TResult<#= SuffixT #>> Zip<T1, T2, T3, TResult<#= SuffixT #>>(
-            this <#= Name #><T1<#= SuffixT #>> @this,
-            <#= Name #><T2<#= SuffixT #>> second,
-            <#= Name #><T3<#= SuffixT #>> third,
+        /// <seealso cref="Lift{T1, T2, T3, TResult<#= RTDecl #>}" />
+        public static <#= Name #><TResult<#= RTDecl #>> Zip<T1, T2, T3, TResult<#= RTDecl #>>(
+            this <#= Name #><T1<#= RTDecl #>> @this,
+            <#= Name #><T2<#= RTDecl #>> second,
+            <#= Name #><T3<#= RTDecl #>> third,
             Func<T1, T2, T3, TResult> zipper)
             <#+ WriteTypeConstraints("T1", "T2", "T3", "TResult"); #>
         {
@@ -191,12 +191,12 @@ public partial class MonadTemplate
 <#+ } #>
         }
 
-        /// <seealso cref="Lift{T1, T2, T3, T4, TResult<#= SuffixT #>}" />
-        public static <#= Name #><TResult<#= SuffixT #>> Zip<T1, T2, T3, T4, TResult<#= SuffixT #>>(
-             this <#= Name #><T1<#= SuffixT #>> @this,
-             <#= Name #><T2<#= SuffixT #>> second,
-             <#= Name #><T3<#= SuffixT #>> third,
-             <#= Name #><T4<#= SuffixT #>> fourth,
+        /// <seealso cref="Lift{T1, T2, T3, T4, TResult<#= RTDecl #>}" />
+        public static <#= Name #><TResult<#= RTDecl #>> Zip<T1, T2, T3, T4, TResult<#= RTDecl #>>(
+             this <#= Name #><T1<#= RTDecl #>> @this,
+             <#= Name #><T2<#= RTDecl #>> second,
+             <#= Name #><T3<#= RTDecl #>> third,
+             <#= Name #><T4<#= RTDecl #>> fourth,
              Func<T1, T2, T3, T4, TResult> zipper)
             <#+ WriteTypeConstraints("T1", "T2", "T3", "T4", "TResult"); #>
         {
@@ -223,13 +223,13 @@ public partial class MonadTemplate
 <#+ } #>
         }
 
-        /// <seealso cref="Lift{T1, T2, T3, T4, T5, TResult<#= SuffixT #>}" />
-        public static <#= Name #><TResult<#= SuffixT #>> Zip<T1, T2, T3, T4, T5, TResult<#= SuffixT #>>(
-            this <#= Name #><T1<#= SuffixT #>> @this,
-            <#= Name #><T2<#= SuffixT #>> second,
-            <#= Name #><T3<#= SuffixT #>> third,
-            <#= Name #><T4<#= SuffixT #>> fourth,
-            <#= Name #><T5<#= SuffixT #>> fifth,
+        /// <seealso cref="Lift{T1, T2, T3, T4, T5, TResult<#= RTDecl #>}" />
+        public static <#= Name #><TResult<#= RTDecl #>> Zip<T1, T2, T3, T4, T5, TResult<#= RTDecl #>>(
+            this <#= Name #><T1<#= RTDecl #>> @this,
+            <#= Name #><T2<#= RTDecl #>> second,
+            <#= Name #><T3<#= RTDecl #>> third,
+            <#= Name #><T4<#= RTDecl #>> fourth,
+            <#= Name #><T5<#= RTDecl #>> fifth,
             Func<T1, T2, T3, T4, T5, TResult> zipper)
             <#+ WriteTypeConstraints("T1", "T2", "T3", "T4", "T5", "TResult"); #>
         {
@@ -263,8 +263,8 @@ public partial class MonadTemplate
 
         #region LINQ dialect
 
-        public static <#= Name #><TResult<#= SuffixT #>> <#= MapName #><TSource, TResult<#= SuffixT #>>(
-            this <#= Name #><TSource<#= SuffixT #>> @this,
+        public static <#= Name #><TResult<#= RTDecl #>> <#= MapName #><TSource, TResult<#= RTDecl #>>(
+            this <#= Name #><TSource<#= RTDecl #>> @this,
             Func<TSource, TResult> selector)
             <#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
@@ -274,20 +274,20 @@ public partial class MonadTemplate
         }
 <#+ if (HasZero) { #>
 
-        public static <#= Name #><TSource<#= SuffixT #>> <#= FilterName #><TSource<#= SuffixT #>>(
-            this <#= Name #><TSource<#= SuffixT #>> @this,
+        public static <#= Name #><TSource<#= RTDecl #>> <#= FilterName #><TSource<#= RTDecl #>>(
+            this <#= Name #><TSource<#= RTDecl #>> @this,
             Func<TSource, bool> predicate)
             <#+ WriteTypeConstraints("TSource"); #>
         {
             <#+ WriteNotNull(); #>
             Require.NotNull(predicate, nameof(predicate));
-            return @this.Bind(val => predicate(val) ? <#+ WriteFactory("TSource"); #>(val) : <#= Name #><TSource<#= SuffixT #>>.<#= ZeroName #>);
+            return @this.Bind(val => predicate(val) ? <#+ WriteFactory("TSource"); #>(val) : <#= Name #><TSource<#= RTDecl #>>.<#= ZeroName #>);
         }
 <#+ } // T4: End of HasZero. #>
 <#+ if (!PreferLinqDialect) { #>
 <#+ if (HasFilter) { #>
-        public static <#= Name #><TSource<#= SuffixT #>> Where<TSource<#= SuffixT #>>(
-            this <#= Name #><TSource<#= SuffixT #>> @this,
+        public static <#= Name #><TSource<#= RTDecl #>> Where<TSource<#= RTDecl #>>(
+            this <#= Name #><TSource<#= RTDecl #>> @this,
             Func<TSource, bool> predicate)
             <#+ WriteTypeConstraints("TSource"); #>
         {
@@ -297,8 +297,8 @@ public partial class MonadTemplate
         }
 <#+ } // T4: End of HasFilter. #>
 
-        public static <#= Name #><TResult> Select<TSource, TResult<#= SuffixT #>>(
-            this <#= Name #><TSource<#= SuffixT #>> @this,
+        public static <#= Name #><TResult> Select<TSource, TResult<#= RTDecl #>>(
+            this <#= Name #><TSource<#= RTDecl #>> @this,
             Func<TSource, TResult> selector)
             <#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
@@ -311,9 +311,9 @@ public partial class MonadTemplate
         /// <remarks>
         /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" />.
         /// </remarks>
-        public static <#= Name #><TResult<#= SuffixT #>> SelectMany<TSource, TMiddle, TResult<#= SuffixT #>>(
-            this <#= Name #><TSource<#= SuffixT #>> @this,
-            Func<TSource, <#= Name #><TMiddle<#= SuffixT #>>> valueSelector,
+        public static <#= Name #><TResult<#= RTDecl #>> SelectMany<TSource, TMiddle, TResult<#= RTDecl #>>(
+            this <#= Name #><TSource<#= RTDecl #>> @this,
+            Func<TSource, <#= Name #><TMiddle<#= RTDecl #>>> valueSelector,
             Func<TSource, TMiddle, TResult> resultSelector)
             <#+ WriteTypeConstraints("TSource", "TMiddle", "TResult"); #>
         {
