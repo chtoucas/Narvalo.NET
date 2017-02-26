@@ -55,6 +55,8 @@ namespace Narvalo.T4
         /// <param name="parent">The parent text transformation.</param>
         protected _MonadTemplate(TextTransformation parent) : base(parent) { }
 
+        protected bool EmitLinq { get; set; } = true;
+
         #region Monad characteristics
 
         /// <summary>
@@ -141,7 +143,7 @@ namespace Narvalo.T4
 
         #region Generic parameters
 
-        protected string MainGeneric { get; private set; } = String.Empty;
+        protected string MainGeneric { get; private set; } = "T";
 
         protected string[] RightGenerics { get; private set; } = new String[0];
 

@@ -23,13 +23,13 @@ public abstract partial class MonadTemplate : _MonadTemplate
 
     protected override void WriteContent()
     {
-        EmitMonad(true);
+        EmitMonad();
     }
 
     /// <summary>
     /// Generates a Monad.
     /// </summary>
-    public void EmitMonad(bool emitlinq)
+    public void EmitMonad()
     {
 #>
 <#+ if (!Namespace.StartsWith("Narvalo.")) { #>
@@ -44,10 +44,10 @@ namespace <#= Namespace #>
     using System.Linq;
 
     using <#= Namespace #>.Internal;
-<#+ if (emitlinq) { #>
+<#+ if (EmitLinq) { #>
     using <#= Namespace #>.Linq;
 <#+ } #>
-<#+ if (!emitlinq) { #>
+<#+ if (!EmitLinq) { #>
     using Narvalo.Fx.Linq;
 <#+ } #>
 
@@ -59,7 +59,7 @@ namespace <#= Namespace #>
     EmitMonadExtensions();
     WriteLine();
 
-    EmitKleisliExtensions(emitlinq);
+    EmitKleisliExtensions();
     WriteLine();
 
     EmitMonadEnumerableExtensions();
@@ -79,10 +79,10 @@ namespace <#= Namespace #>.Internal
 <#+ EmitMonadEnumerableInternalExtensions(); #>
 }
 <#+
-        if (emitlinq) {
+        if (EmitLinq) {
             WriteLine();
 
-            EmitLinq();
+            EmitLinqExtensions();
         }
     } // T4: End of EmitMonad().
 
@@ -108,7 +108,7 @@ namespace <#= Namespace #>
     /// <summary>
     /// Generates the LINQ extensions.
     /// </summary>
-    public void EmitLinq()
+    public void EmitLinqExtensions()
     {
 #>
 namespace <#= Namespace #>.Linq
@@ -134,7 +134,7 @@ namespace <#= Namespace #>.Internal
 <#+ EmitEnumerableInternalExtensions(); #>
 }
 <#+
-    } // T4: End of EmitLinq().
+    } // T4: End of EmitLinqExtensions().
 } // T4: End of MonadTemplate.
 
 #>

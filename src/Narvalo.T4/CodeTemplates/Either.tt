@@ -8,11 +8,8 @@
         public override void Initialize()
         {
             InitializeGenericParameters("TLeft", "TRight");
-        }
 
-        protected override void WriteContent()
-        {
-            EmitMonad(false);
+            EmitLinq = false;
         }
     }
 #>
