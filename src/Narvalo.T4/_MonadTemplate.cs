@@ -141,7 +141,9 @@ namespace Narvalo.T4
 
         #region Generic parameters
 
-        protected string RawSuffixT { get; private set; } = String.Empty;
+        protected string GenericDeclaration { get; private set; } = "T";
+
+        protected string[] RightParams { get; private set; } = new String[0];
 
         protected string SuffixT { get; private set; } = String.Empty;
 
@@ -321,20 +323,12 @@ namespace Narvalo.T4
 
         #region Initalizers
 
-        // We only support additional generic parameters without any constraint.
-        // ** WARNING WARNING WARNING ** This one is not very well tested and is incomplete:
-        // - HasZero is supposed to be false.
-        // - no LINQ extensions.
-        protected void InitializeGenericSuffix(string suffix)
+        protected void InitializeGenericParameters(string mainT, params string[] rightParams)
         {
-            if (String.IsNullOrWhiteSpace(suffix))
-            {
-                throw new ArgumentException("Suffix can not be null or whitespaces.", nameof(suffix));
-            }
-
-            RawSuffixT = suffix;
-            SuffixT = ", " + suffix;
+            RightParams = rightParams;
+            SuffixT = ", " + String.Join(", ", rightParams);
             HasSuffixT = true;
+            GenericDeclaration = mainT + SuffixT;
         }
 
         /// <summary>

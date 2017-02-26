@@ -1,7 +1,11 @@
 ﻿Monads
 ------
 
-For types with more than one generic type, we do not (yet?) support LINQ and MonadOr.
+For types with more than one generic type aprameter, we do not provide any kind of support for:
+- the main (monadic) type parameter must be the one on the far left
+- type constraints for the "non-monadic" type params
+- LINQ
+- MonadOr, where HasZero is true
 
 We do not implement methods which are related to the way Haskell handles actions with side-effects:
 - Monad::Forever
