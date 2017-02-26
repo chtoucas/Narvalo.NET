@@ -19,6 +19,47 @@ namespace Narvalo.Fx
     using Narvalo.Fx.Internal;
     using Narvalo.Fx.Linq;
 
+    public partial class Either<TLeft, TRight>
+    {
+        private static readonly Either<global::Narvalo.Fx.Unit, TRight> s_Unit
+            = Either.Of<Unit, TRight>(global::Narvalo.Fx.Unit.Default);
+
+        public void Forever(Action<TLeft> action)
+        {
+            Require.NotNull(action, nameof(action));
+
+            ForeverImpl(action);
+        }
+
+        partial void ForeverImpl(Action<TLeft> action);
+
+        public void While(Func<bool> istrue, Action<TLeft> action)
+        {
+            Require.NotNull(istrue, nameof(istrue));
+            Require.NotNull(action, nameof(action));
+
+            Bind(val =>
+            {
+                while (istrue()) { action(val); }
+
+                return s_Unit;
+            });
+        }
+
+        public void Until(Func<bool> istrue, Action<TLeft> action)
+        {
+            Require.NotNull(istrue, nameof(istrue));
+            Require.NotNull(action, nameof(action));
+
+            Bind(val =>
+            {
+                while (!istrue()) { action(val); }
+
+                return s_Unit;
+            });
+        }
+    }
+
     // Provides a set of static methods for Either<T, TRight>.
     public static partial class Either
     {

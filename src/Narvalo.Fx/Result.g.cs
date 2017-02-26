@@ -19,6 +19,47 @@ namespace Narvalo.Fx
     using Narvalo.Fx.Internal;
     using Narvalo.Fx.Linq;
 
+    public partial class Result<T, TError>
+    {
+        private static readonly Result<global::Narvalo.Fx.Unit, TError> s_Unit
+            = Result.Of<Unit, TError>(global::Narvalo.Fx.Unit.Default);
+
+        public void Forever(Action<T> action)
+        {
+            Require.NotNull(action, nameof(action));
+
+            ForeverImpl(action);
+        }
+
+        partial void ForeverImpl(Action<T> action);
+
+        public void While(Func<bool> istrue, Action<T> action)
+        {
+            Require.NotNull(istrue, nameof(istrue));
+            Require.NotNull(action, nameof(action));
+
+            Bind(val =>
+            {
+                while (istrue()) { action(val); }
+
+                return s_Unit;
+            });
+        }
+
+        public void Until(Func<bool> istrue, Action<T> action)
+        {
+            Require.NotNull(istrue, nameof(istrue));
+            Require.NotNull(action, nameof(action));
+
+            Bind(val =>
+            {
+                while (!istrue()) { action(val); }
+
+                return s_Unit;
+            });
+        }
+    }
+
     // Provides a set of static methods for Result<T, TError>.
     public static partial class Result
     {

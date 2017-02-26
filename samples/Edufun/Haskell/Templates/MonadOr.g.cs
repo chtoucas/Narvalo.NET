@@ -22,6 +22,45 @@ namespace Edufun.Haskell.Templates
     using Edufun.Haskell.Templates.Internal;
     using Edufun.Haskell.Templates.Linq;
 
+    public partial class MonadOr<T>
+    {
+
+        public void Forever(Action<T> action)
+        {
+            Require.NotNull(action, nameof(action));
+
+            ForeverImpl(action);
+        }
+
+        partial void ForeverImpl(Action<T> action);
+
+        public void While(Func<bool> istrue, Action<T> action)
+        {
+            Require.NotNull(istrue, nameof(istrue));
+            Require.NotNull(action, nameof(action));
+
+            Bind(val =>
+            {
+                while (istrue()) { action(val); }
+
+                return MonadOr.Unit;
+            });
+        }
+
+        public void Until(Func<bool> istrue, Action<T> action)
+        {
+            Require.NotNull(istrue, nameof(istrue));
+            Require.NotNull(action, nameof(action));
+
+            Bind(val =>
+            {
+                while (!istrue()) { action(val); }
+
+                return MonadOr.Unit;
+            });
+        }
+    }
+
     // Provides a set of static methods for MonadOr<T>.
     public static partial class MonadOr
     {

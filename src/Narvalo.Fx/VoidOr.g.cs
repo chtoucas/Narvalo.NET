@@ -19,6 +19,45 @@ namespace Narvalo.Fx
     using Narvalo.Fx.Internal;
     using Narvalo.Fx.Linq;
 
+    public partial class VoidOr<TError>
+    {
+
+        public void Forever(Action<TError> action)
+        {
+            Require.NotNull(action, nameof(action));
+
+            ForeverImpl(action);
+        }
+
+        partial void ForeverImpl(Action<TError> action);
+
+        public void While(Func<bool> istrue, Action<TError> action)
+        {
+            Require.NotNull(istrue, nameof(istrue));
+            Require.NotNull(action, nameof(action));
+
+            Bind(val =>
+            {
+                while (istrue()) { action(val); }
+
+                return VoidOr.Unit;
+            });
+        }
+
+        public void Until(Func<bool> istrue, Action<TError> action)
+        {
+            Require.NotNull(istrue, nameof(istrue));
+            Require.NotNull(action, nameof(action));
+
+            Bind(val =>
+            {
+                while (!istrue()) { action(val); }
+
+                return VoidOr.Unit;
+            });
+        }
+    }
+
     // Provides a set of static methods for VoidOr<T>.
     public static partial class VoidOr
     {

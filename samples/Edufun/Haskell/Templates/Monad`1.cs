@@ -6,7 +6,7 @@ namespace Edufun.Haskell.Templates
 
     using Narvalo.Fx;
 
-    public sealed class Monad<T>
+    public partial class Monad<T>
     {
         public Monad<TResult> Bind<TResult>(Func<T, Monad<TResult>> funM)
         {

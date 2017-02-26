@@ -7,7 +7,7 @@ namespace Edufun.Haskell.Templates
 
     using Narvalo.Fx;
 
-    public struct MonadValue<T> : IEquatable<MonadValue<T>> where T : struct
+    public partial struct MonadValue<T> : IEquatable<MonadValue<T>> where T : struct
     {
         [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
         public static MonadValue<T> None { get { throw new PrototypeException(); } }

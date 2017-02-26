@@ -3,8 +3,8 @@ ChangeLog (XXXX-XX-XX)
 
 Objectives
 ----------
-The plan is to improve the overall quality & usability of Narvalo.Cerbere
-and Narvalo.Finance.
+The plan is to improve the overall quality & usability of Narvalo.Cerbere,
+Narvalo.Fx and Narvalo.Finance.
 
 Documentation & Tests (Narvalo.Cerbere & Narvalo.Finance):
 - Fully documented API.
@@ -45,7 +45,13 @@ TODO
 ----
 - Remove Narvalo.Core and move from .NET 4.5 to .NET 4.6.1
 - Remove Code Contracts -> Warrant & Expect.
+Refactoring?
+- Narvalo.Properties in AssemblyInfo -> Properties or Narvalo
+- Narvalo.Cerbere -> Cerbere
+- Narvalo.Fx -> Efix
+- Narvalo.Finance -> ?
 
+Narvalo.Finance:
 - Sync `Money<TCurrency>`, CurrencyUnit<>`, `MoneyFormatter` for rounding, scale...
 - Complete localization of messages.
 - Ops with double, float?
@@ -72,13 +78,8 @@ TODO
   and [here](http://stackoverflow.com/questions/3032750/structs-interfaces-and-boxing).
 - Pretty sure that we can get rid off all uint and int overloads.
 
-Refactoring?
-- Narvalo.Properties in AssemblyInfo -> Properties or Narvalo
-- Narvalo.Cerbere -> Cerbere
-- Narvalo.Fx -> Efix
-- Narvalo.Finance -> ?
-
 Narvalo.Fx:
+- null-check's in generated methods.
 - Async versions?
 - https://blogs.msdn.microsoft.com/pfxteam/2013/04/03/tasks-monads-and-linq/
 - http://tomasp.net/blog/idioms-in-linq.aspx/

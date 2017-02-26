@@ -7,7 +7,7 @@ namespace Edufun.Haskell.Templates
 
     using Narvalo.Fx;
 
-    public sealed class MonadOr<T>
+    public partial class MonadOr<T>
     {
         [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
         public static MonadOr<T> None { get { throw new NotImplementedException(); } }

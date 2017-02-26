@@ -7,7 +7,7 @@ namespace Edufun.Haskell.Templates
 
     using Narvalo.Fx;
 
-    public sealed class MonadZero<T>
+    public partial class MonadZero<T>
     {
         [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
         public static MonadZero<T> Zero { get { throw new NotImplementedException(); } }
