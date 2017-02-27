@@ -6,7 +6,6 @@ namespace Narvalo.Fx
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Runtime.CompilerServices;
 
@@ -21,8 +20,6 @@ namespace Narvalo.Fx
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "[Intentionally] Maybe<T> only pretends to be a collection.")]
     public partial struct Maybe<T> : IEquatable<Maybe<T>>, Internal.IMaybe<T>
     {
-        private readonly bool _isSome;
-
         // You should NEVER use this field directly, use the Value property instead. The Code Contracts
         // static checker should then prove that no illegal access to this field happens (i.e. when IsSome is false).
         private readonly T _value;
@@ -39,7 +36,7 @@ namespace Narvalo.Fx
             Demand.NotNullUnconstrained(value);
 
             _value = value;
-            _isSome = true;
+            IsSome = true;
         }
 
         /// <summary>
@@ -50,7 +47,7 @@ namespace Narvalo.Fx
         /// <value>true if the object does hold a value; otherwise false.</value>
         // Named <c>isJust</c> in Haskell parlance.
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        public bool IsSome { get { return _isSome; } }
+        public bool IsSome { get; }
 
         // Named <c>isNothing</c> in Haskell parlance.
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -62,33 +59,7 @@ namespace Narvalo.Fx
         /// <remarks>Any access to this property must be protected by checking before that
         /// <see cref="IsSome"/> is true.</remarks>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        internal T Value
-        {
-            get
-            {
-                Demand.State(IsSome);
-                Warrant.NotNullUnconstrained<T>();
-
-#if CONTRACTS_FULL // Helps CCCheck with the object invariance.
-
-                if (_value == null)
-                {
-                    // If IsSome is true, this can never happen but we keep this around because we want
-                    // that the Code Contracts static checker proves that we never call this property
-                    // when IsSome is false. Without Code Contracts, we are better off disabling this.
-                    // Furthermore, not throwing the exception means that we can use this property safely,
-                    // for instance inside the GetHashCode() method.
-                    // Remember that in our particular setup the Code Contracts symbol does not exist in any
-                    // build except when we do run the Code Contracts tools, which implies that this particular
-                    // piece of code will never execute at runtime.
-                    throw new InvalidOperationException();
-                }
-
-#endif
-
-                return _value;
-            }
-        }
+        internal T Value { get { Demand.State(IsSome); return _value; } }
 
         /// <summary>
         /// Obtains the enclosed value if any; otherwise the default value of type T.
@@ -105,7 +76,6 @@ namespace Narvalo.Fx
         public T ValueOrElse(T other)
         {
             Require.NotNullUnconstrained(other, nameof(other));
-            Warrant.NotNullUnconstrained<T>();
 
             return IsSome ? Value : other;
         }
@@ -128,7 +98,6 @@ namespace Narvalo.Fx
         public T ValueOrThrow(Func<Exception> exceptionFactory)
         {
             Require.NotNull(exceptionFactory, nameof(exceptionFactory));
-            Warrant.NotNullUnconstrained<T>();
 
             if (IsNone)
             {
@@ -140,16 +109,11 @@ namespace Narvalo.Fx
 
         /// <inheritdoc cref="Object.ToString" />
         public override string ToString()
-        {
-            Warrant.NotNull<string>();
-
-            return IsSome ? Format.Current("Maybe({0})", Value) : "Maybe(None)";
-        }
+            => IsSome ? Format.Current("Maybe({0})", Value) : "Maybe(None)";
 
         /// <summary>
         /// Represents a debugger type proxy for <see cref="Maybe{T}"/>.
         /// </summary>
-        [ContractVerification(false)] // Debugger-only code.
         [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
         private sealed class DebugView
         {
@@ -184,8 +148,6 @@ namespace Narvalo.Fx
 
         public static explicit operator T(Maybe<T> value)
         {
-            Warrant.NotNullUnconstrained<T>();
-
             if (value.IsNone)
             {
                 throw new InvalidCastException(Strings.Maybe_CannotCastNoneToValue);
@@ -231,19 +193,9 @@ namespace Narvalo.Fx
     {
         // Named <c>maybeToList</c> in Haskell parlance.
         [SuppressMessage("Microsoft.Contracts", "Suggestion-6-0", Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
-        public IEnumerable<T> ToEnumerable()
-        {
-            Warrant.NotNull<IEnumerable<T>>();
+        public IEnumerable<T> ToEnumerable() => IsSome ? Sequence.Of(Value) : Enumerable.Empty<T>();
 
-            return IsSome ? Sequence.Of(Value) : Enumerable.Empty<T>();
-        }
-
-        public IEnumerator<T> GetEnumerator()
-        {
-            Warrant.NotNull<IEnumerator<T>>();
-
-            return ToEnumerable().GetEnumerator();
-        }
+        public IEnumerator<T> GetEnumerator() => ToEnumerable().GetEnumerator();
 
         public TResult Match<TResult>(Func<T, TResult> caseSome, Func<TResult> caseNone)
         {
@@ -382,21 +334,3 @@ namespace Narvalo.Fx
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Fx
-{
-    using System.Diagnostics.Contracts;
-
-    public partial struct Maybe<T>
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(!IsSome || Value != null);
-        }
-    }
-}
-
-#endif
