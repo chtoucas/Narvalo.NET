@@ -15,9 +15,6 @@ namespace Narvalo.Fx
         /// Gets the action with an empty body.
         /// </summary>
         /// <value>The empty action.</value>
-        public static Action Noop
-        {
-            get { Warrant.NotNull<Action>(); return s_Noop; }
-        }
+        public static Action Noop => s_Noop;
     }
 }

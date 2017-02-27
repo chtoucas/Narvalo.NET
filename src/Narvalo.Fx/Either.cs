@@ -10,32 +10,16 @@ namespace Narvalo.Fx
     public static partial class Either
     {
         public static Either<TLeft, TRight> OfLeft<TLeft, TRight>(TLeft value)
-        {
-            Warrant.NotNull<Either<TLeft, TRight>>();
-
-            return Either<TLeft, TRight>.η(value);
-        }
+            => Either<TLeft, TRight>.η(value);
 
         public static Either<TLeft, TRight> OfRight<TLeft, TRight>(TRight value)
-        {
-            Warrant.NotNull<Either<TLeft, TRight>>();
-
-            return Either<TLeft, TRight>.OfRight(value);
-        }
+            => Either<TLeft, TRight>.OfRight(value);
 
         public static Either<TLeft, TRight> FlattenLeft<TLeft, TRight>(Either<Either<TLeft, TRight>, TRight> square)
-        {
-            Expect.NotNull(square);
-
-            return Either<TLeft, TRight>.μ(square);
-        }
+            => Either<TLeft, TRight>.μ(square);
 
         public static Either<TLeft, TRight> FlattenRight<TLeft, TRight>(Either<TLeft, Either<TLeft, TRight>> square)
-        {
-            Expect.NotNull(square);
-
-            return Either<TLeft, TRight>.FlattenRight(square);
-        }
+            => Either<TLeft, TRight>.FlattenRight(square);
     }
 
     // Provides extension methods for Either<TLeft, TRight>.

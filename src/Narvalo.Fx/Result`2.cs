@@ -6,7 +6,6 @@ namespace Narvalo.Fx
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Runtime.CompilerServices;
 
@@ -14,11 +13,7 @@ namespace Narvalo.Fx
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public abstract partial class Result<T, TError> : Internal.IEither<T, TError>, Internal.Iterable<T>
     {
-#if CONTRACTS_FULL // Custom ctor visibility for the contract class only.
-        protected Result() { }
-#else
         private Result() { }
-#endif
 
         public abstract bool IsSuccess { get; }
 
@@ -72,17 +67,11 @@ namespace Narvalo.Fx
 
             public override T ValueOrThrow(Func<Exception> exceptionFactory) => Value;
 
-            public override string ToString()
-            {
-                Warrant.NotNull<string>();
-
-                return Format.Current("Success({0})", Value);
-            }
+            public override string ToString() => Format.Current("Success({0})", Value);
 
             /// <summary>
             /// Represents a debugger type proxy for <see cref="Result{T, TError}.Success_"/>.
             /// </summary>
-            [ContractVerification(false)] // Debugger-only code.
             [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
             private sealed class DebugView
             {
@@ -140,17 +129,11 @@ namespace Narvalo.Fx
                 throw exceptionFactory.Invoke();
             }
 
-            public override string ToString()
-            {
-                Warrant.NotNull<string>();
-
-                return Format.Current("Error({0})", Error);
-            }
+            public override string ToString() => Format.Current("Error({0})", Error);
 
             /// <summary>
             /// Represents a debugger type proxy for <see cref="Result{T, TError}.Error_"/>.
             /// </summary>
-            [ContractVerification(false)] // Debugger-only code.
             [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
             private sealed class DebugView
             {
@@ -219,21 +202,11 @@ namespace Narvalo.Fx
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static Result<T, TError> η(T value)
-        {
-            Warrant.NotNull<Result<T, TError>>();
-
-            return new Success_(value);
-        }
+        internal static Result<T, TError> η(T value) => new Success_(value);
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static Result<T, TError> η(TError value)
-        {
-            Warrant.NotNull<Result<T, TError>>();
-
-            return new Error_(value);
-        }
+        internal static Result<T, TError> η(TError value) => new Error_(value);
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -375,68 +348,16 @@ namespace Narvalo.Fx
     {
         public abstract IEnumerable<T> ToEnumerable();
 
-        public IEnumerator<T> GetEnumerator()
-        {
-            Warrant.NotNull<IEnumerator<T>>();
-
-            return ToEnumerable().GetEnumerator();
-        }
+        public IEnumerator<T> GetEnumerator() => ToEnumerable().GetEnumerator();
 
         private partial class Success_
         {
-            public override IEnumerable<T> ToEnumerable()
-            {
-                Warrant.NotNull<IEnumerable<T>>();
-
-                return Sequence.Of(Value);
-            }
+            public override IEnumerable<T> ToEnumerable() => Sequence.Of(Value);
         }
 
         private partial class Error_
         {
-            public override IEnumerable<T> ToEnumerable()
-            {
-                Warrant.NotNull<IEnumerable<T>>();
-
-                return Enumerable.Empty<T>();
-            }
+            public override IEnumerable<T> ToEnumerable() => Enumerable.Empty<T>();
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Fx
-{
-    using System;
-    using System.Diagnostics.Contracts;
-
-    [ContractClass(typeof(ResultContract<,>))]
-    public partial class Result<T, TError> { }
-
-    [ContractClassFor(typeof(Result<,>))]
-    internal abstract class ResultContract<T, TError> : Result<T, TError>
-    {
-        protected ResultContract() { }
-
-        public override TResult Match<TResult>(Func<T, TResult> caseSuccess, Func<TError, TResult> caseError)
-        {
-            Contract.Requires(caseSuccess != null);
-            Contract.Requires(caseError != null);
-
-            return default(TResult);
-        }
-
-        public override void Do(Action<T> onSuccess, Action<TError> onError)
-        {
-            Contract.Requires(onSuccess != null);
-            Contract.Requires(onError != null);
-        }
-
-        public override Maybe<T> ValueOrNone() => default(Maybe<T>);
-
-        public override Maybe<TError> ErrorOrNone() => default(Maybe<TError>);
-    }
-}
-
-#endif

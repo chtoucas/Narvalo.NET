@@ -3,10 +3,7 @@
 namespace Narvalo.Fx
 {
     using System;
-    using System.Diagnostics.Contracts;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Runtime.CompilerServices;
 
     /// <summary>
     /// Provides a set of static methods that produce objects of type <see cref="IEnumerable{T}"/>.
@@ -22,8 +19,6 @@ namespace Narvalo.Fx
         /// <returns>An <see cref="IEnumerable{T}"/> that contains a single element.</returns>
         public static IEnumerable<TSource> Of<TSource>(TSource value)
         {
-            Warrant.NotNull<IEnumerable<TSource>>();
-
             // Enumerable.Repeat(value, 1) works too, but is less readable.
             yield return value;
         }
@@ -38,7 +33,6 @@ namespace Narvalo.Fx
             Func<TSource, Iteration<TResult, TSource>> generator)
         {
             Require.NotNull(generator, nameof(generator));
-            Warrant.NotNull<IEnumerable<TResult>>();
 
             return UnfoldIterator(seed, generator);
         }
@@ -50,7 +44,6 @@ namespace Narvalo.Fx
         {
             Require.NotNull(generator, nameof(generator));
             Require.NotNull(predicate, nameof(predicate));
-            Warrant.NotNull<IEnumerable<TResult>>();
 
             return UnfoldIterator(seed, generator, predicate);
         }
@@ -60,7 +53,6 @@ namespace Narvalo.Fx
             Func<TSource, Iteration<TResult, TSource>> generator)
         {
             Demand.NotNull(generator);
-            Warrant.NotNull<IEnumerable<TResult>>();
 
             TSource current = seed;
 
@@ -81,7 +73,6 @@ namespace Narvalo.Fx
         {
             Demand.NotNull(generator);
             Demand.NotNull(predicate);
-            Warrant.NotNull<IEnumerable<TResult>>();
 
             TSource current = seed;
 
@@ -120,7 +111,6 @@ namespace Narvalo.Fx
             Func<TSource, TSource> iterator)
         {
             Require.NotNull(iterator, nameof(iterator));
-            Warrant.NotNull<IEnumerable<TSource>>();
 
             return GatherIterator(seed, iterator);
         }
@@ -132,7 +122,6 @@ namespace Narvalo.Fx
         {
             Require.NotNull(iterator, nameof(iterator));
             Require.NotNull(predicate, nameof(predicate));
-            Warrant.NotNull<IEnumerable<TSource>>();
 
             return GatherIterator(seed, iterator, predicate);
         }
@@ -153,7 +142,6 @@ namespace Narvalo.Fx
         {
             Require.NotNull(iterator, nameof(iterator));
             Require.NotNull(resultSelector, nameof(resultSelector));
-            Warrant.NotNull<IEnumerable<TResult>>();
 
             return GatherIterator(seed, iterator, resultSelector);
         }
@@ -173,7 +161,6 @@ namespace Narvalo.Fx
             Require.NotNull(iterator, nameof(iterator));
             Require.NotNull(resultSelector, nameof(resultSelector));
             Require.NotNull(predicate, nameof(predicate));
-            Warrant.NotNull<IEnumerable<TResult>>();
 
             return GatherIterator(seed, iterator, resultSelector, predicate);
         }
@@ -183,7 +170,6 @@ namespace Narvalo.Fx
             Func<TSource, TSource> iterator)
         {
             Demand.NotNull(iterator);
-            Warrant.NotNull<IEnumerable<TSource>>();
 
             TSource current = seed;
 
@@ -202,7 +188,6 @@ namespace Narvalo.Fx
         {
             Demand.NotNull(iterator);
             Demand.NotNull(predicate);
-            Warrant.NotNull<IEnumerable<TSource>>();
 
             TSource current = seed;
 
@@ -221,7 +206,6 @@ namespace Narvalo.Fx
         {
             Demand.NotNull(iterator);
             Demand.NotNull(resultSelector);
-            Warrant.NotNull<IEnumerable<TResult>>();
 
             TSource current = seed;
 
@@ -242,7 +226,6 @@ namespace Narvalo.Fx
             Demand.NotNull(iterator);
             Demand.NotNull(resultSelector);
             Demand.NotNull(predicate);
-            Warrant.NotNull<IEnumerable<TResult>>();
 
             TSource current = seed;
 

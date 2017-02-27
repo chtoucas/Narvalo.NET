@@ -9,26 +9,14 @@ namespace Narvalo.Fx
 
     public partial class Result<T, TError>
     {
-        #region Applicative
-
         public abstract Result<TResult, TError> Replace<TResult>(TResult value);
-
-        #endregion
-
-        #region Basic Monad functions
 
         [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Select", Justification = "[Intentionally] No trouble here, this 'Select' is the one from the LINQ standard query operators.")]
         public abstract Result<TResult, TError> Select<TResult>(Func<T, TResult> selector);
 
         public abstract Result<TResult, TError> ReplaceBy<TResult>(Result<TResult, TError> other);
 
-        #endregion
-
-        #region Generalisations of list functions
-
         public abstract Result<IEnumerable<T>, TError> Repeat(int count);
-
-        #endregion
 
         private partial class Success_
         {

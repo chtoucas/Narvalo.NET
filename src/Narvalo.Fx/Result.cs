@@ -12,12 +12,7 @@ namespace Narvalo.Fx
     /// </summary>
     public static partial class Result
     {
-        public static Result<T, TError> FromError<T, TError>(TError value)
-        {
-            Warrant.NotNull<Result<T, TError>>();
-
-            return Result<T, TError>.η(value);
-        }
+        public static Result<T, TError> FromError<T, TError>(TError value) => Result<T, TError>.η(value);
 
         public static void ThrowIfError<T, TException>(this Result<T, TException> @this) where TException : Exception
         {
@@ -36,7 +31,6 @@ namespace Narvalo.Fx
         public static IEnumerable<TSource> CollectAny<TSource, TError>(this IEnumerable<Result<TSource, TError>> @this)
         {
             Require.NotNull(@this, nameof(@this));
-            Warrant.NotNull<IEnumerable<TSource>>();
 
             return CollectAnyIterator(@this);
         }
@@ -44,7 +38,6 @@ namespace Narvalo.Fx
         internal static IEnumerable<TSource> CollectAnyIterator<TSource, TError>(IEnumerable<Result<TSource, TError>> source)
         {
             Demand.NotNull(source);
-            Warrant.NotNull<IEnumerable<TSource>>();
 
             foreach (var item in source)
             {

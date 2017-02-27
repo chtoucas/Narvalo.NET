@@ -6,7 +6,6 @@ namespace Narvalo.Fx
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
     using System.Runtime.CompilerServices;
 
     /// <summary>
@@ -22,11 +21,7 @@ namespace Narvalo.Fx
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public abstract partial class Either<TLeft, TRight> : Internal.IEither<TLeft, TRight>
     {
-#if CONTRACTS_FULL // Custom ctor visibility for the contract class only.
-        protected Either() { }
-#else
         private Either() { }
-#endif
 
         public abstract bool IsLeft { get; }
 
@@ -88,17 +83,11 @@ namespace Narvalo.Fx
             public override int GetHashCode()
                 => Left == null ? 0 : EqualityComparer<TLeft>.Default.GetHashCode(Left);
 
-            public override string ToString()
-            {
-                Warrant.NotNull<string>();
-
-                return Format.Current("Left({0})", Left);
-            }
+            public override string ToString() => Format.Current("Left({0})", Left);
 
             /// <summary>
             /// Represents a debugger type proxy for <see cref="Either{TLeft, TRight}.Left_"/>.
             /// </summary>
-            [ContractVerification(false)] // Debugger-only code.
             [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
             private sealed class DebugView
             {
@@ -153,17 +142,11 @@ namespace Narvalo.Fx
             public override int GetHashCode()
                 => Right == null ? 0 : EqualityComparer<TRight>.Default.GetHashCode(Right);
 
-            public override string ToString()
-            {
-                Warrant.NotNull<string>();
-
-                return Format.Current("Right({0})", Right);
-            }
+            public override string ToString() => Format.Current("Right({0})", Right);
 
             /// <summary>
             /// Represents a debugger type proxy for <see cref="Either{TLeft, TRight}.Right_"/>.
             /// </summary>
-            [ContractVerification(false)] // Debugger-only code.
             [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
             private sealed class DebugView
             {
@@ -231,21 +214,11 @@ namespace Narvalo.Fx
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static Either<TLeft, TRight> η(TLeft leftValue)
-        {
-            Warrant.NotNull<Either<TLeft, TRight>>();
-
-            return new Left_(leftValue);
-        }
+        internal static Either<TLeft, TRight> η(TLeft leftValue) => new Left_(leftValue);
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static Either<TLeft, TRight> OfRight(TRight value)
-        {
-            Warrant.NotNull<Either<TLeft, TRight>>();
-
-            return new Right_(value);
-        }
+        internal static Either<TLeft, TRight> OfRight(TRight value) => new Right_(value);
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -396,38 +369,3 @@ namespace Narvalo.Fx
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Fx
-{
-    using System;
-    using System.Diagnostics.Contracts;
-
-    [ContractClass(typeof(EitherContract<,>))]
-    public partial class Either<TLeft, TRight> { }
-
-    [ContractClassFor(typeof(Either<,>))]
-    internal abstract class EitherContract<TLeft, TRight> : Either<TLeft, TRight>
-    {
-        public override TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
-        {
-            Contract.Requires(caseLeft != null);
-            Contract.Requires(caseRight != null);
-
-            return default(TResult);
-        }
-
-        public override void Do(Action<TLeft> caseLeft, Action<TRight> caseRight)
-        {
-            Contract.Requires(caseLeft != null);
-            Contract.Requires(caseRight != null);
-        }
-
-        public override Maybe<TLeft> LeftOrNone() => default(Maybe<TLeft>);
-
-        public override Maybe<TRight> RightOrNone() => default(Maybe<TRight>);
-    }
-}
-
-#endif

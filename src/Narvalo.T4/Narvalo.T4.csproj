@@ -31,7 +31,7 @@
     <None Include="CodeTemplates\Monad\EmitComonadCore.tt" />
     <None Include="CodeTemplates\Monad\EmitLinqCore.tt" />
     <None Include="CodeTemplates\Monad\EmitLinqInternal.tt" />
-    <None Include="CodeTemplates\Monad\EmitKleisliExtensions.tt" />
+    <None Include="CodeTemplates\Monad\EmitKleisli.tt" />
     <None Include="CodeTemplates\Monad\EmitHelpers.tt" />
     <None Include="CodeTemplates\Monad\EmitEnumerableExtensions.tt" />
     <None Include="CodeTemplates\Monad\EmitEnumerableInternal.tt" />

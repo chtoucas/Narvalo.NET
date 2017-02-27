@@ -26,49 +26,34 @@ namespace Narvalo.Fx
         /// </summary>
         /// <value>The function that always returns the default value.</value>
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
-        public static Func<TSource> AlwaysDefault
-        {
-            get { Warrant.NotNull<Func<TSource>>(); return s_AlwaysDefault; }
-        }
+        public static Func<TSource> AlwaysDefault => s_AlwaysDefault;
 
         /// <summary>
         /// Gets the predicate that always evaluates to false.
         /// </summary>
         /// <value>The predicate that always evaluates to false.</value>
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
-        public static Func<TSource, bool> AlwaysFalse
-        {
-            get { Warrant.NotNull<Func<TSource, bool>>(); return s_AlwaysFalse; }
-        }
+        public static Func<TSource, bool> AlwaysFalse => s_AlwaysFalse;
 
         /// <summary>
         /// Gets the predicate that always evaluates to true.
         /// </summary>
         /// <value>The predicate that always evaluates to true.</value>
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
-        public static Func<TSource, bool> AlwaysTrue
-        {
-            get { Warrant.NotNull<Func<TSource, bool>>(); return s_AlwaysTrue; }
-        }
+        public static Func<TSource, bool> AlwaysTrue => s_AlwaysTrue;
 
         /// <summary>
         /// Gets the identity function.
         /// </summary>
         /// <value>The identity function.</value>
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
-        public static Func<TSource, TSource> Identity
-        {
-            get { Warrant.NotNull<Func<TSource, TSource>>(); return s_Identity; }
-        }
+        public static Func<TSource, TSource> Identity => s_Identity;
 
         /// <summary>
         /// Gets the action that will do nothing to its input.
         /// </summary>
         /// <value>The empty action.</value>
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
-        public static Action<TSource> Ignore
-        {
-            get { Warrant.NotNull<Action<TSource>>(); return s_Ignore; }
-        }
+        public static Action<TSource> Ignore => s_Ignore;
     }
 }

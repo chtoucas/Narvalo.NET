@@ -47,11 +47,7 @@ namespace Narvalo.Fx
         public bool Equals(T other) => Equals(η(other), EqualityComparer<T>.Default);
 
         public bool Equals(T other, IEqualityComparer<T> comparer)
-        {
-            Expect.NotNull(comparer);
-
-            return Equals(η(other), comparer);
-        }
+            => Equals(η(other), comparer);
 
         public override bool Equals(object obj) => Equals(obj, EqualityComparer<T>.Default);
 
@@ -175,18 +171,8 @@ namespace Narvalo.Fx
     // Implements the Internal.Iterable<TError> interface.
     public partial struct Ident<T>
     {
-        public IEnumerable<T> ToEnumerable()
-        {
-            Warrant.NotNull<IEnumerator<T>>();
+        public IEnumerable<T> ToEnumerable() => Sequence.Of(Value);
 
-            return Sequence.Of(Value);
-        }
-
-        public IEnumerator<T> GetEnumerator()
-        {
-            Warrant.NotNull<IEnumerator<T>>();
-
-            return ToEnumerable().GetEnumerator();
-        }
+        public IEnumerator<T> GetEnumerator() => ToEnumerable().GetEnumerator();
     }
 }

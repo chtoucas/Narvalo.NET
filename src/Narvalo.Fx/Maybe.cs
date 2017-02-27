@@ -65,7 +65,6 @@ namespace Narvalo.Fx
         public static IEnumerable<TSource> CollectAny<TSource>(this IEnumerable<Maybe<TSource>> @this)
         {
             Require.NotNull(@this, nameof(@this));
-            Warrant.NotNull<IEnumerable<TSource>>();
 
             return CollectAnyIterator(@this);
         }
@@ -73,7 +72,6 @@ namespace Narvalo.Fx
         internal static IEnumerable<TSource> CollectAnyIterator<TSource>(IEnumerable<Maybe<TSource>> source)
         {
             Demand.NotNull(source);
-            Warrant.NotNull<IEnumerable<TSource>>();
 
             foreach (var item in source)
             {
