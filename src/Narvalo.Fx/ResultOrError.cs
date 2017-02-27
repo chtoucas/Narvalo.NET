@@ -22,7 +22,7 @@ namespace Narvalo.Fx
             return ResultOrError<T>.η(exceptionInfo);
         }
 
-        // NB: This method serves a different purpose than the trywith from F# workflows.
+        // NB: This method is **not** the trywith from F# workflows.
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of ResultOrError.")]
         public static ResultOrError<TResult> TryWith<TResult>(Func<TResult> func)
         {
@@ -41,7 +41,7 @@ namespace Narvalo.Fx
             }
         }
 
-        // NB: This method serves a different purpose than the tryfinally from F# workflows.
+        // NB: This method is **not** the tryfinally from F# workflows.
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of ResultOrError.")]
         public static ResultOrError<TResult> TryFinally<TResult>(Func<TResult> func, Action finallyAction)
         {
