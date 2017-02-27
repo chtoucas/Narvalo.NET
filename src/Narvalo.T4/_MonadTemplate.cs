@@ -3,7 +3,9 @@
 namespace Narvalo.T4
 {
     using System;
+#if TYPE_CONSTRAINTS
     using System.Linq;
+#endif
 
     using Microsoft.VisualStudio.TextTemplating;
 
@@ -109,6 +111,8 @@ namespace Narvalo.T4
 
         protected string ClassTypeDecl => IsNullable ? "class" : "struct";
 
+#if TYPE_CONSTRAINTS
+
         /// <summary>
         /// Gets the generic constraints on the underlying type T. Default to String.Empty.
         /// </summary>
@@ -138,6 +142,8 @@ namespace Narvalo.T4
         /// <value><see langword="true"/> if the underlying type T has a generic type constraint;
         /// otherwise <see langword="false"/>.</value>
         protected bool HasTypeConstraints { get; private set; }
+
+#endif
 
         #endregion
 
@@ -376,10 +382,14 @@ namespace Narvalo.T4
             PlusName = "OrElse";
         }
 
+#if TYPE_CONSTRAINTS
+
         protected void InitializeTypeConstraints(params string[] constraints)
         {
             TypeConstraints = String.Join(", ", constraints.Where(_ => !String.IsNullOrWhiteSpace(_)));
         }
+
+#endif
 
         #endregion
 
@@ -412,6 +422,8 @@ namespace Narvalo.T4
                 WriteLine("/* T4: NotNull(@this) */");
             }
         }
+
+#if TYPE_CONSTRAINTS
 
         protected void WriteCustomTypeConstraint(string typeName, params string[] typeConstraints)
         {
@@ -446,6 +458,8 @@ namespace Narvalo.T4
                 PopIndent();
             }
         }
+
+#endif
 
         protected void WriteFactory(string name)
         {

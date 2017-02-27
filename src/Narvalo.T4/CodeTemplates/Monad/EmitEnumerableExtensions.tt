@@ -8,16 +8,12 @@ public partial class MonadTemplate
     // Provides extension methods for IEnumerable<<#= Name #><T<#= RTDecl #>>>.
     public static partial class <#= Name #>
     {
-<#+ if (!HasTypeConstraints) { #>
         public static <#= Name #><IEnumerable<TSource><#= RTDecl #>> Collect<TSource<#= RTDecl #>>(
             this IEnumerable<<#= Name #><TSource<#= RTDecl #>>> @this)
             => @this.CollectImpl();
 
-<#+ } // T4: End of !HasTypeConstraints. #>
 <#+ if (HasSum) { #>
-        public static <#= Name #><TSource> Sum<TSource>(
-            this IEnumerable<<#= Name #><TSource>> @this)
-            <#+ WriteTypeConstraints("TSource"); #>
+        public static <#= Name #><TSource> Sum<TSource>(this IEnumerable<<#= Name #><TSource>> @this)
             => @this.SumImpl();
 <#+ } // T4: End of HasSum. #>
     } // End of Sequence - T4: EmitEnumerableExtensions().

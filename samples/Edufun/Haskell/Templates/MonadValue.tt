@@ -15,8 +15,6 @@
         {
             InitializeOr();
 
-            InitializeTypeConstraints("struct");
-
             IsNullable = false;
         }
     }

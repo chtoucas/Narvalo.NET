@@ -37,14 +37,12 @@ public partial class MonadTemplate
         /// <param name="value">A value to be wrapped into an object of type <see cref="<#= Name #>{T<#= RTDecl #>}"/>.</param>
         /// <returns>An instance of the <see cref="<#= Name #>{T<#= RTDecl #>}"/> class for the specified value.</returns>
         public static <#= Name #><T<#= RTDecl #>> <#= ReturnName #><T<#= RTDecl #>>(T value)
-            <#+ WriteTypeConstraints("T"); #>
             => <#= Name #><T<#= RTDecl #>>.η(value);
 
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
         /// </summary>
         public static <#= Name #><T<#= RTDecl #>> Flatten<T<#= RTDecl #>>(<#= Name #><<#= Name #><T<#= RTDecl #>><#= RTDecl #>> square)
-            <#+ WriteTypeConstraints("T"); #>
             => <#= Name #><T<#= RTDecl #>>.μ(square);
 <#+ if (HasZero) { #>
 
@@ -59,7 +57,6 @@ public partial class MonadTemplate
         /// <seealso cref="Select{T, TResult<#= RTDecl #>}" />
         public static Func<<#= Name #><T<#= RTDecl #>>, <#= Name #><TResult<#= RTDecl #>>> Lift<T, TResult<#= RTDecl #>>(
             Func<T, TResult> func)
-            <#+ WriteTypeConstraints("T", "TResult"); #>
             => arg =>
             {
                 <#+ WriteNotNull("arg"); #>
@@ -72,7 +69,6 @@ public partial class MonadTemplate
         /// <seealso cref="Lift{T1, T2, TResult<#= RTDecl #>}" />
         public static Func<<#= Name #><T1<#= RTDecl #>>, <#= Name #><T2<#= RTDecl #>>, <#= Name #><TResult<#= RTDecl #>>>
             Lift<T1, T2, TResult<#= RTDecl #>>(Func<T1, T2, TResult> func)
-            <#+ WriteTypeConstraints("T1", "T2", "TResult"); #>
             => (arg1, arg2) =>
             {
                 <#+ WriteNotNull("arg1"); #>
@@ -85,7 +81,6 @@ public partial class MonadTemplate
         /// <seealso cref="Lift{T1, T2, T3, TResult<#= RTDecl #>}" />
         public static Func<<#= Name #><T1<#= RTDecl #>>, <#= Name #><T2<#= RTDecl #>>, <#= Name #><T3<#= RTDecl #>>, <#= Name #><TResult<#= RTDecl #>>>
             Lift<T1, T2, T3, TResult<#= RTDecl #>>(Func<T1, T2, T3, TResult> func)
-            <#+ WriteTypeConstraints("T1", "T2", "T3", "TResult"); #>
             => (arg1, arg2, arg3) =>
             {
                 <#+ WriteNotNull("arg1"); #>
@@ -99,7 +94,6 @@ public partial class MonadTemplate
         public static Func<<#= Name #><T1<#= RTDecl #>>, <#= Name #><T2<#= RTDecl #>>, <#= Name #><T3<#= RTDecl #>>, <#= Name #><T4<#= RTDecl #>>, <#= Name #><TResult<#= RTDecl #>>>
             Lift<T1, T2, T3, T4, TResult<#= RTDecl #>>(
             Func<T1, T2, T3, T4, TResult> func)
-            <#+ WriteTypeConstraints("T1", "T2", "T3", "T4", "TResult"); #>
             => (arg1, arg2, arg3, arg4) =>
             {
                 <#+ WriteNotNull("arg1"); #>
@@ -113,7 +107,6 @@ public partial class MonadTemplate
         public static Func<<#= Name #><T1<#= RTDecl #>>, <#= Name #><T2<#= RTDecl #>>, <#= Name #><T3<#= RTDecl #>>, <#= Name #><T4<#= RTDecl #>>, <#= Name #><T5<#= RTDecl #>>, <#= Name #><TResult<#= RTDecl #>>>
             Lift<T1, T2, T3, T4, T5, TResult<#= RTDecl #>>(
             Func<T1, T2, T3, T4, T5, TResult> func)
-            <#+ WriteTypeConstraints("T1", "T2", "T3", "T4", "T5", "TResult"); #>
             => (arg1, arg2, arg3, arg4, arg5) =>
             {
                 <#+ WriteNotNull("arg1"); #>

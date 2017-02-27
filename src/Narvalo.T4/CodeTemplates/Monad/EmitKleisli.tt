@@ -8,7 +8,6 @@ public partial class MonadTemplate
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Kleisli
     {
-<#+ if (!HasTypeConstraints) { #>
         public static <#= Name #><IEnumerable<TResult><#= RTDecl #>> InvokeWith<TSource, TResult<#= RTDecl #>>(
             this Func<TSource, <#= Name #><TResult<#= RTDecl #>>> @this,
             IEnumerable<TSource> seq)
@@ -18,12 +17,9 @@ public partial class MonadTemplate
             => seq.Select(@this).Collect();
 <#+ } #>
 
-<#+ } // T4: End of !HasTypeConstraints. #>
-
         public static <#= Name #><TResult<#= RTDecl #>> InvokeWith<TSource, TResult<#= RTDecl #>>(
             this Func<TSource, <#= Name #><TResult<#= RTDecl #>>> @this,
             <#= Name #><TSource<#= RTDecl #>> value)
-            <#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
             <#+ WriteNotNull("value"); #>
             return value.Bind(@this);
@@ -32,7 +28,6 @@ public partial class MonadTemplate
         public static Func<TSource, <#= Name #><TResult<#= RTDecl #>>> Compose<TSource, TMiddle, TResult<#= RTDecl #>>(
             this Func<TSource, <#= Name #><TMiddle<#= RTDecl #>>> @this,
             Func<TMiddle, <#= Name #><TResult<#= RTDecl #>>> second)
-            <#+ WriteTypeConstraints("TSource", "TMiddle", "TResult"); #>
         {
             Require.NotNull(@this, nameof(@this));
             return arg => @this(arg).Bind(second);
@@ -41,7 +36,6 @@ public partial class MonadTemplate
         public static Func<TSource, <#= Name #><TResult<#= RTDecl #>>> ComposeBack<TSource, TMiddle, TResult<#= RTDecl #>>(
             this Func<TMiddle, <#= Name #><TResult<#= RTDecl #>>> @this,
             Func<TSource, <#= Name #><TMiddle<#= RTDecl #>>> second)
-            <#+ WriteTypeConstraints("TSource", "TMiddle", "TResult"); #>
         {
             Require.NotNull(second, nameof(second));
             return arg => second(arg).Bind(@this);

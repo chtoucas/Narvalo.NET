@@ -39,14 +39,12 @@ namespace Narvalo.Fx
         /// <param name="value">A value to be wrapped into an object of type <see cref="ResultOrError{T}"/>.</param>
         /// <returns>An instance of the <see cref="ResultOrError{T}"/> class for the specified value.</returns>
         public static ResultOrError<T> Of<T>(T value)
-            /* T4: type constraint */
             => ResultOrError<T>.η(value);
 
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
         /// </summary>
         public static ResultOrError<T> Flatten<T>(ResultOrError<ResultOrError<T>> square)
-            /* T4: type constraint */
             => ResultOrError<T>.μ(square);
 
         #region Lift()
@@ -57,7 +55,6 @@ namespace Narvalo.Fx
         /// <seealso cref="Select{T, TResult}" />
         public static Func<ResultOrError<T>, ResultOrError<TResult>> Lift<T, TResult>(
             Func<T, TResult> func)
-            /* T4: type constraint */
             => arg =>
             {
                 Require.NotNull(arg, nameof(arg));
@@ -70,7 +67,6 @@ namespace Narvalo.Fx
         /// <seealso cref="Lift{T1, T2, TResult}" />
         public static Func<ResultOrError<T1>, ResultOrError<T2>, ResultOrError<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
-            /* T4: type constraint */
             => (arg1, arg2) =>
             {
                 Require.NotNull(arg1, nameof(arg1));
@@ -83,7 +79,6 @@ namespace Narvalo.Fx
         /// <seealso cref="Lift{T1, T2, T3, TResult}" />
         public static Func<ResultOrError<T1>, ResultOrError<T2>, ResultOrError<T3>, ResultOrError<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
-            /* T4: type constraint */
             => (arg1, arg2, arg3) =>
             {
                 Require.NotNull(arg1, nameof(arg1));
@@ -97,7 +92,6 @@ namespace Narvalo.Fx
         public static Func<ResultOrError<T1>, ResultOrError<T2>, ResultOrError<T3>, ResultOrError<T4>, ResultOrError<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> func)
-            /* T4: type constraint */
             => (arg1, arg2, arg3, arg4) =>
             {
                 Require.NotNull(arg1, nameof(arg1));
@@ -111,7 +105,6 @@ namespace Narvalo.Fx
         public static Func<ResultOrError<T1>, ResultOrError<T2>, ResultOrError<T3>, ResultOrError<T4>, ResultOrError<T5>, ResultOrError<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> func)
-            /* T4: type constraint */
             => (arg1, arg2, arg3, arg4, arg5) =>
             {
                 Require.NotNull(arg1, nameof(arg1));
@@ -155,7 +148,6 @@ namespace Narvalo.Fx
         public static ResultOrError<TResult> ReplaceBy<TSource, TResult>(
             this ResultOrError<TSource> @this,
             TResult value)
-            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             return @this.Select(_ => value);
@@ -164,7 +156,6 @@ namespace Narvalo.Fx
         public static ResultOrError<TResult> Then<TSource, TResult>(
             this ResultOrError<TSource> @this,
             ResultOrError<TResult> other)
-            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             return @this.Bind(_ => other);
@@ -173,7 +164,6 @@ namespace Narvalo.Fx
         public static ResultOrError<TSource> Ignore<TSource, TOther>(
             this ResultOrError<TSource> @this,
             ResultOrError<TOther> other)
-            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Func<TSource, TOther, TSource> ignore = (arg, _) => arg;
@@ -182,7 +172,6 @@ namespace Narvalo.Fx
         }
 
         public static ResultOrError<global::Narvalo.Fx.Unit> Skip<TSource>(this ResultOrError<TSource> @this)
-            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             return @this.Then(Unit);
@@ -193,7 +182,6 @@ namespace Narvalo.Fx
             Func<TSource, bool> predicate,
             ResultOrError<TResult> thenResult,
             ResultOrError<TResult> elseResult)
-            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
@@ -204,7 +192,6 @@ namespace Narvalo.Fx
             this ResultOrError<TSource> @this,
             Func<TSource, ResultOrError<TResult>> selector)
             where TSource : IDisposable
-            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));
@@ -215,7 +202,6 @@ namespace Narvalo.Fx
             this ResultOrError<TSource> @this,
             Func<TSource, TResult> selector)
             where TSource : IDisposable
-            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));
@@ -227,7 +213,6 @@ namespace Narvalo.Fx
         public static ResultOrError<Tuple<TSource, TOther>> Zip<TSource, TOther>(
             this ResultOrError<TSource> @this,
             ResultOrError<TOther> other)
-            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             return @this.Zip(other, Tuple.Create);
@@ -238,17 +223,14 @@ namespace Narvalo.Fx
             this ResultOrError<TFirst> @this,
             ResultOrError<TSecond> second,
             Func<TFirst, TSecond, TResult> zipper)
-            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(second, nameof(second));
             Require.NotNull(zipper, nameof(zipper));
 
-            Func<TFirst, Func<TSecond, TResult>> selector
-                = arg1 => arg2 => zipper(arg1, arg2);
-
-            return second.Gather(
-                @this.Select(selector));
+            return @this.Bind(
+                arg1 => second.Select(
+                    arg2 => zipper(arg1, arg2)));
         }
 
         /// <seealso cref="Lift{T1, T2, T3, TResult}" />
@@ -257,19 +239,16 @@ namespace Narvalo.Fx
             ResultOrError<T2> second,
             ResultOrError<T3> third,
             Func<T1, T2, T3, TResult> zipper)
-            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(second, nameof(second));
             Require.NotNull(third, nameof(third));
             Require.NotNull(zipper, nameof(zipper));
 
-            Func<T1, Func<T2, Func<T3, TResult>>> selector
-                = arg1 => arg2 => arg3 => zipper(arg1, arg2, arg3);
-
-            return third.Gather(
-                second.Gather(
-                    @this.Select(selector)));
+            return @this.Bind(
+                arg1 => second.Bind(
+                    arg2 => third.Select(
+                        arg3 => zipper(arg1, arg2, arg3))));
         }
 
         /// <seealso cref="Lift{T1, T2, T3, T4, TResult}" />
@@ -279,7 +258,6 @@ namespace Narvalo.Fx
              ResultOrError<T3> third,
              ResultOrError<T4> fourth,
              Func<T1, T2, T3, T4, TResult> zipper)
-            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(second, nameof(second));
@@ -287,13 +265,11 @@ namespace Narvalo.Fx
             Require.NotNull(fourth, nameof(fourth));
             Require.NotNull(zipper, nameof(zipper));
 
-            Func<T1, Func<T2, Func<T3, Func<T4, TResult>>>> selector
-                = arg1 => arg2 => arg3 => arg4 => zipper(arg1, arg2, arg3, arg4);
-
-            return fourth.Gather(
-                third.Gather(
-                    second.Gather(
-                        @this.Select(selector))));
+            return @this.Bind(
+                arg1 => second.Bind(
+                    arg2 => third.Bind(
+                        arg3 => fourth.Select(
+                            arg4 => zipper(arg1, arg2, arg3, arg4)))));
         }
 
         /// <seealso cref="Lift{T1, T2, T3, T4, T5, TResult}" />
@@ -304,7 +280,6 @@ namespace Narvalo.Fx
             ResultOrError<T4> fourth,
             ResultOrError<T5> fifth,
             Func<T1, T2, T3, T4, T5, TResult> zipper)
-            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(second, nameof(second));
@@ -313,14 +288,12 @@ namespace Narvalo.Fx
             Require.NotNull(fifth, nameof(fifth));
             Require.NotNull(zipper, nameof(zipper));
 
-            Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, TResult>>>>> selector
-                = arg1 => arg2 => arg3 => arg4 => arg5 => zipper(arg1, arg2, arg3, arg4, arg5);
-
-            return fifth.Gather(
-                fourth.Gather(
-                    third.Gather(
-                        second.Gather(
-                            @this.Select(selector)))));
+            return @this.Bind(
+                arg1 => second.Bind(
+                    arg2 => third.Bind(
+                        arg3 => fourth.Bind(
+                            arg4 => fifth.Select(
+                                arg5 => zipper(arg1, arg2, arg3, arg4, arg5))))));
         }
 
         #endregion
@@ -330,7 +303,6 @@ namespace Narvalo.Fx
         public static ResultOrError<TResult> Select<TSource, TResult>(
             this ResultOrError<TSource> @this,
             Func<TSource, TResult> selector)
-            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));
@@ -344,7 +316,6 @@ namespace Narvalo.Fx
             this ResultOrError<TSource> @this,
             Func<TSource, ResultOrError<TMiddle>> valueSelector,
             Func<TSource, TMiddle, TResult> resultSelector)
-            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(valueSelector, nameof(valueSelector));
@@ -369,7 +340,6 @@ namespace Narvalo.Fx
         public static ResultOrError<TResult> InvokeWith<TSource, TResult>(
             this Func<TSource, ResultOrError<TResult>> @this,
             ResultOrError<TSource> value)
-            /* T4: type constraint */
         {
             Require.NotNull(value, nameof(value));
             return value.Bind(@this);
@@ -378,7 +348,6 @@ namespace Narvalo.Fx
         public static Func<TSource, ResultOrError<TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, ResultOrError<TMiddle>> @this,
             Func<TMiddle, ResultOrError<TResult>> second)
-            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             return arg => @this(arg).Bind(second);
@@ -387,12 +356,11 @@ namespace Narvalo.Fx
         public static Func<TSource, ResultOrError<TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, ResultOrError<TResult>> @this,
             Func<TSource, ResultOrError<TMiddle>> second)
-            /* T4: type constraint */
         {
             Require.NotNull(second, nameof(second));
             return arg => second(arg).Bind(@this);
         }
-    } // End of Kleisli - T4: EmitKleisliExtensions().
+    } // End of Kleisli - T4: EmitKleisli().
 
     // Provides extension methods for IEnumerable<ResultOrError<T>>.
     public static partial class ResultOrError
@@ -450,7 +418,6 @@ namespace Narvalo.Fx.Internal
                 }
             }
         }
-
     } // End of EnumerableExtensions - T4: EmitEnumerableInternal().
 }
 
@@ -490,7 +457,6 @@ namespace Narvalo.Fx.Linq
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, ResultOrError<TAccumulate>> accumulator)
-            /* T4: type constraint */
             => @this.FoldImpl(seed, accumulator);
 
         public static ResultOrError<TAccumulate> Fold<TSource, TAccumulate>(
@@ -498,20 +464,17 @@ namespace Narvalo.Fx.Linq
             TAccumulate seed,
             Func<TAccumulate, TSource, ResultOrError<TAccumulate>> accumulator,
             Func<ResultOrError<TAccumulate>, bool> predicate)
-            /* T4: type constraint */
             => @this.FoldImpl(seed, accumulator, predicate);
 
         public static ResultOrError<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, ResultOrError<TSource>> accumulator)
-            /* T4: type constraint */
             => @this.ReduceImpl(accumulator);
 
         public static ResultOrError<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, ResultOrError<TSource>> accumulator,
             Func<ResultOrError<TSource>, bool> predicate)
-            /* T4: type constraint */
             => @this.ReduceImpl(accumulator, predicate);
     } // End of Iterable - T4: EmitLinqCore().
 }
@@ -542,7 +505,6 @@ namespace Narvalo.Fx.Internal
         internal static ResultOrError<IEnumerable<TSource>> WhereByImpl<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, ResultOrError<bool>> predicate)
-            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
@@ -594,7 +556,6 @@ namespace Narvalo.Fx.Internal
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, ResultOrError<TAccumulate>> accumulator)
-            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
@@ -620,7 +581,6 @@ namespace Narvalo.Fx.Internal
             TAccumulate seed,
             Func<TAccumulate, TSource, ResultOrError<TAccumulate>> accumulator,
             Func<ResultOrError<TAccumulate>, bool> predicate)
-            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
@@ -645,7 +605,6 @@ namespace Narvalo.Fx.Internal
         internal static ResultOrError<TSource> ReduceImpl<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, ResultOrError<TSource>> accumulator)
-            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
@@ -675,7 +634,6 @@ namespace Narvalo.Fx.Internal
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, ResultOrError<TSource>> accumulator,
             Func<ResultOrError<TSource>, bool> predicate)
-            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));

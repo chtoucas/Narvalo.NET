@@ -47,14 +47,12 @@ namespace Edufun.Haskell.Templates
         /// <param name="value">A value to be wrapped into an object of type <see cref="MonadValue{T}"/>.</param>
         /// <returns>An instance of the <see cref="MonadValue{T}"/> class for the specified value.</returns>
         public static MonadValue<T> Of<T>(T value)
-            where T : struct
             => MonadValue<T>.η(value);
 
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
         /// </summary>
         public static MonadValue<T> Flatten<T>(MonadValue<MonadValue<T>> square)
-            where T : struct
             => MonadValue<T>.μ(square);
 
         public static MonadValue<Unit> Guard(bool predicate) => predicate ? Unit : None;
@@ -67,8 +65,6 @@ namespace Edufun.Haskell.Templates
         /// <seealso cref="Select{T, TResult}" />
         public static Func<MonadValue<T>, MonadValue<TResult>> Lift<T, TResult>(
             Func<T, TResult> func)
-            where T : struct
-            where TResult : struct
             => arg =>
             {
                 /* T4: NotNull(arg) */
@@ -81,9 +77,6 @@ namespace Edufun.Haskell.Templates
         /// <seealso cref="Lift{T1, T2, TResult}" />
         public static Func<MonadValue<T1>, MonadValue<T2>, MonadValue<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
-            where T1 : struct
-            where T2 : struct
-            where TResult : struct
             => (arg1, arg2) =>
             {
                 /* T4: NotNull(arg1) */
@@ -96,10 +89,6 @@ namespace Edufun.Haskell.Templates
         /// <seealso cref="Lift{T1, T2, T3, TResult}" />
         public static Func<MonadValue<T1>, MonadValue<T2>, MonadValue<T3>, MonadValue<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
-            where T1 : struct
-            where T2 : struct
-            where T3 : struct
-            where TResult : struct
             => (arg1, arg2, arg3) =>
             {
                 /* T4: NotNull(arg1) */
@@ -113,11 +102,6 @@ namespace Edufun.Haskell.Templates
         public static Func<MonadValue<T1>, MonadValue<T2>, MonadValue<T3>, MonadValue<T4>, MonadValue<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> func)
-            where T1 : struct
-            where T2 : struct
-            where T3 : struct
-            where T4 : struct
-            where TResult : struct
             => (arg1, arg2, arg3, arg4) =>
             {
                 /* T4: NotNull(arg1) */
@@ -131,12 +115,6 @@ namespace Edufun.Haskell.Templates
         public static Func<MonadValue<T1>, MonadValue<T2>, MonadValue<T3>, MonadValue<T4>, MonadValue<T5>, MonadValue<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> func)
-            where T1 : struct
-            where T2 : struct
-            where T3 : struct
-            where T4 : struct
-            where T5 : struct
-            where TResult : struct
             => (arg1, arg2, arg3, arg4, arg5) =>
             {
                 /* T4: NotNull(arg1) */
@@ -149,12 +127,37 @@ namespace Edufun.Haskell.Templates
     // Provides extension methods for MonadValue<T>.
     public static partial class MonadValue
     {
+        /// <seealso cref="Apply{TSource, TResult}" />
+        public static MonadValue<TResult> Gather<TSource, TResult>(
+            this MonadValue<TSource> @this,
+            MonadValue<Func<TSource, TResult>> applicative)
+        {
+            /* T4: NotNull(@this) */
+            /* T4: NotNull(applicative) */
+            return applicative.Bind(func => @this.Select(func));
+        }
+
+        /// <seealso cref="Gather{TSource, TResult}" />
+        public static MonadValue<TResult> Apply<TSource, TResult>(
+            this MonadValue<Func<TSource, TResult>> @this,
+            MonadValue<TSource> value)
+        {
+            /* T4: NotNull(value) */
+            return value.Gather(@this);
+        }
+
+        public static MonadValue<IEnumerable<TSource>> Repeat<TSource>(
+            this MonadValue<TSource> @this,
+            int count)
+        {
+            /* T4: NotNull(@this) */
+            Require.Range(count >= 1, nameof(count));
+            return @this.Select(val => Enumerable.Repeat(val, count));
+        }
 
         public static MonadValue<TResult> ReplaceBy<TSource, TResult>(
             this MonadValue<TSource> @this,
             TResult value)
-            where TSource : struct
-            where TResult : struct
         {
             /* T4: NotNull(@this) */
             return @this.Select(_ => value);
@@ -163,8 +166,6 @@ namespace Edufun.Haskell.Templates
         public static MonadValue<TResult> Then<TSource, TResult>(
             this MonadValue<TSource> @this,
             MonadValue<TResult> other)
-            where TSource : struct
-            where TResult : struct
         {
             /* T4: NotNull(@this) */
             return @this.Bind(_ => other);
@@ -173,8 +174,6 @@ namespace Edufun.Haskell.Templates
         public static MonadValue<TSource> Ignore<TSource, TOther>(
             this MonadValue<TSource> @this,
             MonadValue<TOther> other)
-            where TSource : struct
-            where TOther : struct
         {
             /* T4: NotNull(@this) */
             Func<TSource, TOther, TSource> ignore = (arg, _) => arg;
@@ -183,7 +182,6 @@ namespace Edufun.Haskell.Templates
         }
 
         public static MonadValue<global::Narvalo.Fx.Unit> Skip<TSource>(this MonadValue<TSource> @this)
-            where TSource : struct
         {
             /* T4: NotNull(@this) */
             return @this.Then(Unit);
@@ -193,8 +191,6 @@ namespace Edufun.Haskell.Templates
             this MonadValue<TSource> @this,
             Func<TSource, bool> predicate,
             MonadValue<TResult> thenResult)
-            where TSource : struct
-            where TResult : struct
         {
             /* T4: NotNull(@this) */
             Require.NotNull(predicate, nameof(predicate));
@@ -206,8 +202,6 @@ namespace Edufun.Haskell.Templates
             Func<TSource, bool> predicate,
             MonadValue<TResult> thenResult,
             MonadValue<TResult> elseResult)
-            where TSource : struct
-            where TResult : struct
         {
             /* T4: NotNull(@this) */
             Require.NotNull(predicate, nameof(predicate));
@@ -217,8 +211,7 @@ namespace Edufun.Haskell.Templates
         public static MonadValue<TResult> Using<TSource, TResult>(
             this MonadValue<TSource> @this,
             Func<TSource, MonadValue<TResult>> selector)
-            where TSource : struct, IDisposable
-            where TResult : struct
+            where TSource : IDisposable
         {
             /* T4: NotNull(@this) */
             Require.NotNull(selector, nameof(selector));
@@ -228,8 +221,7 @@ namespace Edufun.Haskell.Templates
         public static MonadValue<TResult> Using<TSource, TResult>(
             this MonadValue<TSource> @this,
             Func<TSource, TResult> selector)
-            where TSource : struct, IDisposable
-            where TResult : struct
+            where TSource : IDisposable
         {
             /* T4: NotNull(@this) */
             Require.NotNull(selector, nameof(selector));
@@ -238,14 +230,19 @@ namespace Edufun.Haskell.Templates
 
         #region Zip()
 
+        public static MonadValue<Tuple<TSource, TOther>> Zip<TSource, TOther>(
+            this MonadValue<TSource> @this,
+            MonadValue<TOther> other)
+        {
+            /* T4: NotNull(@this) */
+            return @this.Zip(other, Tuple.Create);
+        }
+
         /// <seealso cref="Lift{TFirst, TSecond, TResult}" />
         public static MonadValue<TResult> Zip<TFirst, TSecond, TResult>(
             this MonadValue<TFirst> @this,
             MonadValue<TSecond> second,
             Func<TFirst, TSecond, TResult> zipper)
-            where TFirst : struct
-            where TSecond : struct
-            where TResult : struct
         {
             /* T4: NotNull(@this) */
             /* T4: NotNull(second) */
@@ -262,10 +259,6 @@ namespace Edufun.Haskell.Templates
             MonadValue<T2> second,
             MonadValue<T3> third,
             Func<T1, T2, T3, TResult> zipper)
-            where T1 : struct
-            where T2 : struct
-            where T3 : struct
-            where TResult : struct
         {
             /* T4: NotNull(@this) */
             /* T4: NotNull(second) */
@@ -285,11 +278,6 @@ namespace Edufun.Haskell.Templates
              MonadValue<T3> third,
              MonadValue<T4> fourth,
              Func<T1, T2, T3, T4, TResult> zipper)
-            where T1 : struct
-            where T2 : struct
-            where T3 : struct
-            where T4 : struct
-            where TResult : struct
         {
             /* T4: NotNull(@this) */
             /* T4: NotNull(second) */
@@ -312,12 +300,6 @@ namespace Edufun.Haskell.Templates
             MonadValue<T4> fourth,
             MonadValue<T5> fifth,
             Func<T1, T2, T3, T4, T5, TResult> zipper)
-            where T1 : struct
-            where T2 : struct
-            where T3 : struct
-            where T4 : struct
-            where T5 : struct
-            where TResult : struct
         {
             /* T4: NotNull(@this) */
             /* T4: NotNull(second) */
@@ -341,8 +323,6 @@ namespace Edufun.Haskell.Templates
         public static MonadValue<TResult> Select<TSource, TResult>(
             this MonadValue<TSource> @this,
             Func<TSource, TResult> selector)
-            where TSource : struct
-            where TResult : struct
         {
             /* T4: NotNull(@this) */
             Require.NotNull(selector, nameof(selector));
@@ -352,7 +332,6 @@ namespace Edufun.Haskell.Templates
         public static MonadValue<TSource> Where<TSource>(
             this MonadValue<TSource> @this,
             Func<TSource, bool> predicate)
-            where TSource : struct
         {
             /* T4: NotNull(@this) */
             Require.NotNull(predicate, nameof(predicate));
@@ -366,9 +345,6 @@ namespace Edufun.Haskell.Templates
             this MonadValue<TSource> @this,
             Func<TSource, MonadValue<TMiddle>> valueSelector,
             Func<TSource, TMiddle, TResult> resultSelector)
-            where TSource : struct
-            where TMiddle : struct
-            where TResult : struct
         {
             /* T4: NotNull(@this) */
             Require.NotNull(valueSelector, nameof(valueSelector));
@@ -385,10 +361,6 @@ namespace Edufun.Haskell.Templates
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, TInner, TResult> resultSelector)
-            where TSource : struct
-            where TInner : struct
-            where TKey : struct
-            where TResult : struct
             => JoinImpl(
                 @this,
                 inner,
@@ -404,10 +376,6 @@ namespace Edufun.Haskell.Templates
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, TInner, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
-            where TSource : struct
-            where TInner : struct
-            where TKey : struct
-            where TResult : struct
             => JoinImpl(
                 @this,
                 inner,
@@ -422,10 +390,6 @@ namespace Edufun.Haskell.Templates
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, MonadValue<TInner>, TResult> resultSelector)
-            where TSource : struct
-            where TInner : struct
-            where TKey : struct
-            where TResult : struct
             => GroupJoinImpl(
                 @this,
                 inner,
@@ -441,10 +405,6 @@ namespace Edufun.Haskell.Templates
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, MonadValue<TInner>, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
-            where TSource : struct
-            where TInner : struct
-            where TKey : struct
-            where TResult : struct
             => GroupJoinImpl(
                 @this,
                 inner,
@@ -460,10 +420,6 @@ namespace Edufun.Haskell.Templates
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, TInner, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
-            where TSource : struct
-            where TInner : struct
-            where TKey : struct
-            where TResult : struct
         {
             /* T4: NotNull(outer) */
             /* T4: NotNull(inner) */
@@ -484,10 +440,6 @@ namespace Edufun.Haskell.Templates
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, MonadValue<TInner>, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
-            where TSource : struct
-            where TInner : struct
-            where TKey : struct
-            where TResult : struct
         {
             /* T4: NotNull(outer) */
             /* T4: NotNull(inner) */
@@ -506,9 +458,6 @@ namespace Edufun.Haskell.Templates
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             IEqualityComparer<TKey> comparer)
-            where TSource : struct
-            where TInner : struct
-            where TKey : struct
         {
             Demand.NotNull(outerKeySelector);
             Demand.NotNull(innerKeySelector);
@@ -524,12 +473,14 @@ namespace Edufun.Haskell.Templates
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Kleisli
     {
+        public static MonadValue<IEnumerable<TResult>> InvokeWith<TSource, TResult>(
+            this Func<TSource, MonadValue<TResult>> @this,
+            IEnumerable<TSource> seq)
+            => seq.SelectWith(@this);
 
         public static MonadValue<TResult> InvokeWith<TSource, TResult>(
             this Func<TSource, MonadValue<TResult>> @this,
             MonadValue<TSource> value)
-            where TSource : struct
-            where TResult : struct
         {
             /* T4: NotNull(value) */
             return value.Bind(@this);
@@ -538,9 +489,6 @@ namespace Edufun.Haskell.Templates
         public static Func<TSource, MonadValue<TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, MonadValue<TMiddle>> @this,
             Func<TMiddle, MonadValue<TResult>> second)
-            where TSource : struct
-            where TMiddle : struct
-            where TResult : struct
         {
             Require.NotNull(@this, nameof(@this));
             return arg => @this(arg).Bind(second);
@@ -549,21 +497,20 @@ namespace Edufun.Haskell.Templates
         public static Func<TSource, MonadValue<TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, MonadValue<TResult>> @this,
             Func<TSource, MonadValue<TMiddle>> second)
-            where TSource : struct
-            where TMiddle : struct
-            where TResult : struct
         {
             Require.NotNull(second, nameof(second));
             return arg => second(arg).Bind(@this);
         }
-    } // End of Kleisli - T4: EmitKleisliExtensions().
+    } // End of Kleisli - T4: EmitKleisli().
 
     // Provides extension methods for IEnumerable<MonadValue<T>>.
     public static partial class MonadValue
     {
-        public static MonadValue<TSource> Sum<TSource>(
+        public static MonadValue<IEnumerable<TSource>> Collect<TSource>(
             this IEnumerable<MonadValue<TSource>> @this)
-            where TSource : struct
+            => @this.CollectImpl();
+
+        public static MonadValue<TSource> Sum<TSource>(this IEnumerable<MonadValue<TSource>> @this)
             => @this.SumImpl();
     } // End of Sequence - T4: EmitEnumerableExtensions().
 }
@@ -579,9 +526,41 @@ namespace Edufun.Haskell.Templates.Internal
     // You will certainly want to override them to improve performance.
     internal static partial class EnumerableExtensions
     {
+        internal static MonadValue<IEnumerable<TSource>> CollectImpl<TSource>(
+            this IEnumerable<MonadValue<TSource>> @this)
+        {
+            Require.NotNull(@this, nameof(@this));
+
+            return MonadValue.Of(CollectIterator(@this));
+        }
+
+        private static IEnumerable<TSource> CollectIterator<TSource>(IEnumerable<MonadValue<TSource>> source)
+        {
+            Demand.NotNull(source);
+
+            var item = default(TSource);
+
+            using (var iter = source.GetEnumerator())
+            {
+                while (iter.MoveNext())
+                {
+                    var append = false;
+
+                    iter.Current.Bind(
+                        val =>
+                        {
+                            append = true;
+                            item = val;
+
+                            return MonadValue.Unit;
+                        });
+
+                    if (append) { yield return item; }
+                }
+            }
+        }
         internal static MonadValue<TSource> SumImpl<TSource>(
             this IEnumerable<MonadValue<TSource>> @this)
-            where TSource : struct
         {
             Demand.NotNull(@this);
 
@@ -606,12 +585,26 @@ namespace Edufun.Haskell.Templates.Linq
     // - Aggregate -> Reduce or Fold
     public static partial class Qperators
     {
+        public static MonadValue<IEnumerable<TResult>> SelectWith<TSource, TResult>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, MonadValue<TResult>> selector)
+            => @this.SelectWithImpl(selector);
+
+        public static MonadValue<IEnumerable<TSource>> WhereBy<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, MonadValue<bool>> predicate)
+            => @this.WhereByImpl(predicate);
+
+        public static MonadValue<IEnumerable<TResult>> ZipWith<TFirst, TSecond, TResult>(
+            this IEnumerable<TFirst> @this,
+            IEnumerable<TSecond> second,
+            Func<TFirst, TSecond, MonadValue<TResult>> resultSelector)
+            => @this.ZipWithImpl(second, resultSelector);
+
         public static MonadValue<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, MonadValue<TAccumulate>> accumulator)
-            where TSource : struct
-            where TAccumulate : struct
             => @this.FoldImpl(seed, accumulator);
 
         public static MonadValue<TAccumulate> Fold<TSource, TAccumulate>(
@@ -619,21 +612,17 @@ namespace Edufun.Haskell.Templates.Linq
             TAccumulate seed,
             Func<TAccumulate, TSource, MonadValue<TAccumulate>> accumulator,
             Func<MonadValue<TAccumulate>, bool> predicate)
-            where TSource : struct
-            where TAccumulate : struct
             => @this.FoldImpl(seed, accumulator, predicate);
 
         public static MonadValue<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, MonadValue<TSource>> accumulator)
-            where TSource : struct
             => @this.ReduceImpl(accumulator);
 
         public static MonadValue<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, MonadValue<TSource>> accumulator,
             Func<MonadValue<TSource>, bool> predicate)
-            where TSource : struct
             => @this.ReduceImpl(accumulator, predicate);
     } // End of Iterable - T4: EmitLinqCore().
 }
@@ -648,12 +637,68 @@ namespace Edufun.Haskell.Templates.Internal
     // You will certainly want to override them to improve performance.
     internal static partial class EnumerableExtensions
     {
+        internal static MonadValue<IEnumerable<TResult>> SelectWithImpl<TSource, TResult>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, MonadValue<TResult>> selector)
+        {
+            Demand.NotNull(@this);
+            Demand.NotNull(selector);
+
+            return @this.Select(selector).Collect();
+        }
+
+        internal static MonadValue<IEnumerable<TSource>> WhereByImpl<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, MonadValue<bool>> predicate)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+
+            return MonadValue.Of(WhereByIterator(@this, predicate));
+        }
+
+        private static IEnumerable<TSource> WhereByIterator<TSource>(
+            IEnumerable<TSource> source,
+            Func<TSource, MonadValue<bool>> predicate)
+        {
+            Demand.NotNull(source);
+            Demand.NotNull(predicate);
+
+            using (var iter = source.GetEnumerator())
+            {
+                while (iter.MoveNext())
+                {
+                    bool pass = false;
+                    TSource item = iter.Current;
+
+                    predicate(item).Bind(val =>
+                    {
+                        pass = val;
+
+                        return MonadValue.Unit;
+                    });
+
+                    if (pass) { yield return item; }
+                }
+            }
+        }
+
+        internal static MonadValue<IEnumerable<TResult>> ZipWithImpl<TFirst, TSecond, TResult>(
+            this IEnumerable<TFirst> @this,
+            IEnumerable<TSecond> second,
+            Func<TFirst, TSecond, MonadValue<TResult>> resultSelector)
+        {
+            Demand.NotNull(resultSelector);
+            Demand.NotNull(@this);
+            Demand.NotNull(second);
+
+            return @this.Zip(second, resultSelector).Collect();
+        }
+
         internal static MonadValue<TAccumulate> FoldImpl<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, MonadValue<TAccumulate>> accumulator)
-            where TSource : struct
-            where TAccumulate : struct
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
@@ -676,8 +721,6 @@ namespace Edufun.Haskell.Templates.Internal
             TAccumulate seed,
             Func<TAccumulate, TSource, MonadValue<TAccumulate>> accumulator,
             Func<MonadValue<TAccumulate>, bool> predicate)
-            where TSource : struct
-            where TAccumulate : struct
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
@@ -699,7 +742,6 @@ namespace Edufun.Haskell.Templates.Internal
         internal static MonadValue<TSource> ReduceImpl<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, MonadValue<TSource>> accumulator)
-            where TSource : struct
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
@@ -726,7 +768,6 @@ namespace Edufun.Haskell.Templates.Internal
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, MonadValue<TSource>> accumulator,
             Func<MonadValue<TSource>, bool> predicate)
-            where TSource : struct
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));

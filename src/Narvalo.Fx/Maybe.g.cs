@@ -44,14 +44,12 @@ namespace Narvalo.Fx
         /// <param name="value">A value to be wrapped into an object of type <see cref="Maybe{T}"/>.</param>
         /// <returns>An instance of the <see cref="Maybe{T}"/> class for the specified value.</returns>
         public static Maybe<T> Of<T>(T value)
-            /* T4: type constraint */
             => Maybe<T>.η(value);
 
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
         /// </summary>
         public static Maybe<T> Flatten<T>(Maybe<Maybe<T>> square)
-            /* T4: type constraint */
             => Maybe<T>.μ(square);
 
         public static Maybe<Unit> Guard(bool predicate) => predicate ? Unit : None;
@@ -64,7 +62,6 @@ namespace Narvalo.Fx
         /// <seealso cref="Select{T, TResult}" />
         public static Func<Maybe<T>, Maybe<TResult>> Lift<T, TResult>(
             Func<T, TResult> func)
-            /* T4: type constraint */
             => arg =>
             {
                 /* T4: NotNull(arg) */
@@ -77,7 +74,6 @@ namespace Narvalo.Fx
         /// <seealso cref="Lift{T1, T2, TResult}" />
         public static Func<Maybe<T1>, Maybe<T2>, Maybe<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
-            /* T4: type constraint */
             => (arg1, arg2) =>
             {
                 /* T4: NotNull(arg1) */
@@ -90,7 +86,6 @@ namespace Narvalo.Fx
         /// <seealso cref="Lift{T1, T2, T3, TResult}" />
         public static Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
-            /* T4: type constraint */
             => (arg1, arg2, arg3) =>
             {
                 /* T4: NotNull(arg1) */
@@ -104,7 +99,6 @@ namespace Narvalo.Fx
         public static Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<T4>, Maybe<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> func)
-            /* T4: type constraint */
             => (arg1, arg2, arg3, arg4) =>
             {
                 /* T4: NotNull(arg1) */
@@ -118,7 +112,6 @@ namespace Narvalo.Fx
         public static Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<T4>, Maybe<T5>, Maybe<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> func)
-            /* T4: type constraint */
             => (arg1, arg2, arg3, arg4, arg5) =>
             {
                 /* T4: NotNull(arg1) */
@@ -162,7 +155,6 @@ namespace Narvalo.Fx
         public static Maybe<TResult> ReplaceBy<TSource, TResult>(
             this Maybe<TSource> @this,
             TResult value)
-            /* T4: type constraint */
         {
             /* T4: NotNull(@this) */
             return @this.Select(_ => value);
@@ -171,7 +163,6 @@ namespace Narvalo.Fx
         public static Maybe<TResult> Then<TSource, TResult>(
             this Maybe<TSource> @this,
             Maybe<TResult> other)
-            /* T4: type constraint */
         {
             /* T4: NotNull(@this) */
             return @this.Bind(_ => other);
@@ -180,7 +171,6 @@ namespace Narvalo.Fx
         public static Maybe<TSource> Ignore<TSource, TOther>(
             this Maybe<TSource> @this,
             Maybe<TOther> other)
-            /* T4: type constraint */
         {
             /* T4: NotNull(@this) */
             Func<TSource, TOther, TSource> ignore = (arg, _) => arg;
@@ -189,7 +179,6 @@ namespace Narvalo.Fx
         }
 
         public static Maybe<global::Narvalo.Fx.Unit> Skip<TSource>(this Maybe<TSource> @this)
-            /* T4: type constraint */
         {
             /* T4: NotNull(@this) */
             return @this.Then(Unit);
@@ -199,7 +188,6 @@ namespace Narvalo.Fx
             this Maybe<TSource> @this,
             Func<TSource, bool> predicate,
             Maybe<TResult> thenResult)
-            /* T4: type constraint */
         {
             /* T4: NotNull(@this) */
             Require.NotNull(predicate, nameof(predicate));
@@ -211,7 +199,6 @@ namespace Narvalo.Fx
             Func<TSource, bool> predicate,
             Maybe<TResult> thenResult,
             Maybe<TResult> elseResult)
-            /* T4: type constraint */
         {
             /* T4: NotNull(@this) */
             Require.NotNull(predicate, nameof(predicate));
@@ -222,7 +209,6 @@ namespace Narvalo.Fx
             this Maybe<TSource> @this,
             Func<TSource, Maybe<TResult>> selector)
             where TSource : IDisposable
-            /* T4: type constraint */
         {
             /* T4: NotNull(@this) */
             Require.NotNull(selector, nameof(selector));
@@ -233,7 +219,6 @@ namespace Narvalo.Fx
             this Maybe<TSource> @this,
             Func<TSource, TResult> selector)
             where TSource : IDisposable
-            /* T4: type constraint */
         {
             /* T4: NotNull(@this) */
             Require.NotNull(selector, nameof(selector));
@@ -245,7 +230,6 @@ namespace Narvalo.Fx
         public static Maybe<Tuple<TSource, TOther>> Zip<TSource, TOther>(
             this Maybe<TSource> @this,
             Maybe<TOther> other)
-            /* T4: type constraint */
         {
             /* T4: NotNull(@this) */
             return @this.Zip(other, Tuple.Create);
@@ -256,17 +240,14 @@ namespace Narvalo.Fx
             this Maybe<TFirst> @this,
             Maybe<TSecond> second,
             Func<TFirst, TSecond, TResult> zipper)
-            /* T4: type constraint */
         {
             /* T4: NotNull(@this) */
             /* T4: NotNull(second) */
             Require.NotNull(zipper, nameof(zipper));
 
-            Func<TFirst, Func<TSecond, TResult>> selector
-                = arg1 => arg2 => zipper(arg1, arg2);
-
-            return second.Gather(
-                @this.Select(selector));
+            return @this.Bind(
+                arg1 => second.Select(
+                    arg2 => zipper(arg1, arg2)));
         }
 
         /// <seealso cref="Lift{T1, T2, T3, TResult}" />
@@ -275,19 +256,16 @@ namespace Narvalo.Fx
             Maybe<T2> second,
             Maybe<T3> third,
             Func<T1, T2, T3, TResult> zipper)
-            /* T4: type constraint */
         {
             /* T4: NotNull(@this) */
             /* T4: NotNull(second) */
             /* T4: NotNull(third) */
             Require.NotNull(zipper, nameof(zipper));
 
-            Func<T1, Func<T2, Func<T3, TResult>>> selector
-                = arg1 => arg2 => arg3 => zipper(arg1, arg2, arg3);
-
-            return third.Gather(
-                second.Gather(
-                    @this.Select(selector)));
+            return @this.Bind(
+                arg1 => second.Bind(
+                    arg2 => third.Select(
+                        arg3 => zipper(arg1, arg2, arg3))));
         }
 
         /// <seealso cref="Lift{T1, T2, T3, T4, TResult}" />
@@ -297,7 +275,6 @@ namespace Narvalo.Fx
              Maybe<T3> third,
              Maybe<T4> fourth,
              Func<T1, T2, T3, T4, TResult> zipper)
-            /* T4: type constraint */
         {
             /* T4: NotNull(@this) */
             /* T4: NotNull(second) */
@@ -305,13 +282,11 @@ namespace Narvalo.Fx
             /* T4: NotNull(fourth) */
             Require.NotNull(zipper, nameof(zipper));
 
-            Func<T1, Func<T2, Func<T3, Func<T4, TResult>>>> selector
-                = arg1 => arg2 => arg3 => arg4 => zipper(arg1, arg2, arg3, arg4);
-
-            return fourth.Gather(
-                third.Gather(
-                    second.Gather(
-                        @this.Select(selector))));
+            return @this.Bind(
+                arg1 => second.Bind(
+                    arg2 => third.Bind(
+                        arg3 => fourth.Select(
+                            arg4 => zipper(arg1, arg2, arg3, arg4)))));
         }
 
         /// <seealso cref="Lift{T1, T2, T3, T4, T5, TResult}" />
@@ -322,7 +297,6 @@ namespace Narvalo.Fx
             Maybe<T4> fourth,
             Maybe<T5> fifth,
             Func<T1, T2, T3, T4, T5, TResult> zipper)
-            /* T4: type constraint */
         {
             /* T4: NotNull(@this) */
             /* T4: NotNull(second) */
@@ -331,14 +305,12 @@ namespace Narvalo.Fx
             /* T4: NotNull(fifth) */
             Require.NotNull(zipper, nameof(zipper));
 
-            Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, TResult>>>>> selector
-                = arg1 => arg2 => arg3 => arg4 => arg5 => zipper(arg1, arg2, arg3, arg4, arg5);
-
-            return fifth.Gather(
-                fourth.Gather(
-                    third.Gather(
-                        second.Gather(
-                            @this.Select(selector)))));
+            return @this.Bind(
+                arg1 => second.Bind(
+                    arg2 => third.Bind(
+                        arg3 => fourth.Bind(
+                            arg4 => fifth.Select(
+                                arg5 => zipper(arg1, arg2, arg3, arg4, arg5))))));
         }
 
         #endregion
@@ -348,7 +320,6 @@ namespace Narvalo.Fx
         public static Maybe<TResult> Select<TSource, TResult>(
             this Maybe<TSource> @this,
             Func<TSource, TResult> selector)
-            /* T4: type constraint */
         {
             /* T4: NotNull(@this) */
             Require.NotNull(selector, nameof(selector));
@@ -358,7 +329,6 @@ namespace Narvalo.Fx
         public static Maybe<TSource> Where<TSource>(
             this Maybe<TSource> @this,
             Func<TSource, bool> predicate)
-            /* T4: type constraint */
         {
             /* T4: NotNull(@this) */
             Require.NotNull(predicate, nameof(predicate));
@@ -372,7 +342,6 @@ namespace Narvalo.Fx
             this Maybe<TSource> @this,
             Func<TSource, Maybe<TMiddle>> valueSelector,
             Func<TSource, TMiddle, TResult> resultSelector)
-            /* T4: type constraint */
         {
             /* T4: NotNull(@this) */
             Require.NotNull(valueSelector, nameof(valueSelector));
@@ -389,7 +358,6 @@ namespace Narvalo.Fx
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, TInner, TResult> resultSelector)
-            /* T4: type constraint */
             => JoinImpl(
                 @this,
                 inner,
@@ -405,7 +373,6 @@ namespace Narvalo.Fx
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, TInner, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
-            /* T4: type constraint */
             => JoinImpl(
                 @this,
                 inner,
@@ -420,7 +387,6 @@ namespace Narvalo.Fx
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, Maybe<TInner>, TResult> resultSelector)
-            /* T4: type constraint */
             => GroupJoinImpl(
                 @this,
                 inner,
@@ -436,7 +402,6 @@ namespace Narvalo.Fx
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, Maybe<TInner>, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
-            /* T4: type constraint */
             => GroupJoinImpl(
                 @this,
                 inner,
@@ -452,7 +417,6 @@ namespace Narvalo.Fx
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, TInner, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
-            /* T4: type constraint */
         {
             /* T4: NotNull(outer) */
             /* T4: NotNull(inner) */
@@ -473,7 +437,6 @@ namespace Narvalo.Fx
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, Maybe<TInner>, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
-            /* T4: type constraint */
         {
             /* T4: NotNull(outer) */
             /* T4: NotNull(inner) */
@@ -492,7 +455,6 @@ namespace Narvalo.Fx
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             IEqualityComparer<TKey> comparer)
-            /* T4: type constraint */
         {
             Demand.NotNull(outerKeySelector);
             Demand.NotNull(innerKeySelector);
@@ -516,7 +478,6 @@ namespace Narvalo.Fx
         public static Maybe<TResult> InvokeWith<TSource, TResult>(
             this Func<TSource, Maybe<TResult>> @this,
             Maybe<TSource> value)
-            /* T4: type constraint */
         {
             /* T4: NotNull(value) */
             return value.Bind(@this);
@@ -525,7 +486,6 @@ namespace Narvalo.Fx
         public static Func<TSource, Maybe<TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, Maybe<TMiddle>> @this,
             Func<TMiddle, Maybe<TResult>> second)
-            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             return arg => @this(arg).Bind(second);
@@ -534,12 +494,11 @@ namespace Narvalo.Fx
         public static Func<TSource, Maybe<TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, Maybe<TResult>> @this,
             Func<TSource, Maybe<TMiddle>> second)
-            /* T4: type constraint */
         {
             Require.NotNull(second, nameof(second));
             return arg => second(arg).Bind(@this);
         }
-    } // End of Kleisli - T4: EmitKleisliExtensions().
+    } // End of Kleisli - T4: EmitKleisli().
 
     // Provides extension methods for IEnumerable<Maybe<T>>.
     public static partial class Maybe
@@ -548,9 +507,7 @@ namespace Narvalo.Fx
             this IEnumerable<Maybe<TSource>> @this)
             => @this.CollectImpl();
 
-        public static Maybe<TSource> Sum<TSource>(
-            this IEnumerable<Maybe<TSource>> @this)
-            /* T4: type constraint */
+        public static Maybe<TSource> Sum<TSource>(this IEnumerable<Maybe<TSource>> @this)
             => @this.SumImpl();
     } // End of Sequence - T4: EmitEnumerableExtensions().
 }
@@ -601,11 +558,9 @@ namespace Narvalo.Fx.Internal
                 }
             }
         }
-
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Maybe<TSource> SumImpl<TSource>(
             this IEnumerable<Maybe<TSource>> @this)
-            /* T4: type constraint */
         {
             Demand.NotNull(@this);
 
@@ -650,7 +605,6 @@ namespace Narvalo.Fx.Linq
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulator)
-            /* T4: type constraint */
             => @this.FoldImpl(seed, accumulator);
 
         public static Maybe<TAccumulate> Fold<TSource, TAccumulate>(
@@ -658,20 +612,17 @@ namespace Narvalo.Fx.Linq
             TAccumulate seed,
             Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulator,
             Func<Maybe<TAccumulate>, bool> predicate)
-            /* T4: type constraint */
             => @this.FoldImpl(seed, accumulator, predicate);
 
         public static Maybe<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Maybe<TSource>> accumulator)
-            /* T4: type constraint */
             => @this.ReduceImpl(accumulator);
 
         public static Maybe<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Maybe<TSource>> accumulator,
             Func<Maybe<TSource>, bool> predicate)
-            /* T4: type constraint */
             => @this.ReduceImpl(accumulator, predicate);
     } // End of Iterable - T4: EmitLinqCore().
 }
@@ -702,7 +653,6 @@ namespace Narvalo.Fx.Internal
         internal static Maybe<IEnumerable<TSource>> WhereByImpl<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<bool>> predicate)
-            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
@@ -754,7 +704,6 @@ namespace Narvalo.Fx.Internal
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulator)
-            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
@@ -778,7 +727,6 @@ namespace Narvalo.Fx.Internal
             TAccumulate seed,
             Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulator,
             Func<Maybe<TAccumulate>, bool> predicate)
-            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
@@ -801,7 +749,6 @@ namespace Narvalo.Fx.Internal
         internal static Maybe<TSource> ReduceImpl<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Maybe<TSource>> accumulator)
-            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
@@ -829,7 +776,6 @@ namespace Narvalo.Fx.Internal
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Maybe<TSource>> accumulator,
             Func<Maybe<TSource>, bool> predicate)
-            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));

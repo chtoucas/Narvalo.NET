@@ -9,8 +9,6 @@ public partial class MonadTemplate
     // You will certainly want to override them to improve performance.
     internal static partial class EnumerableExtensions
     {
-<#+ if (!HasTypeConstraints) { #>
-
 <#+ if (!SuppressMessage) { #>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
 <#+ } #>
@@ -54,9 +52,6 @@ public partial class MonadTemplate
                 }
             }
         }
-
-<#+ } // T4: End of !HasTypeConstraints. #>
-
 <#+ if (HasSum) { #>
 
 <#+ if (!SuppressMessage) { #>
@@ -64,7 +59,6 @@ public partial class MonadTemplate
 <#+ } #>
         internal static <#= Name #><TSource> SumImpl<TSource>(
             this IEnumerable<<#= Name #><TSource>> @this)
-            <#+ WriteTypeConstraints("TSource"); #>
         {
             Demand.NotNull(@this);
 

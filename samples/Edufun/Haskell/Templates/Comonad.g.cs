@@ -22,7 +22,6 @@ namespace Edufun.Haskell.Templates
         /// Named <c>extract</c> in Haskell parlance.
         /// </remarks>
         public static T Extract<T>(Comonad<T> value)
-            /* T4: type constraint */
         {
             Expect.NotNull(value);
 
@@ -33,7 +32,6 @@ namespace Edufun.Haskell.Templates
         /// Named <c>duplicate</c> in Haskell parlance.
         /// </remarks>
         public static Comonad<Comonad<T>> Duplicate<T>(Comonad<T> value)
-            /* T4: type constraint */
         {
             Warrant.NotNull<Comonad<Comonad<T>>>();
 

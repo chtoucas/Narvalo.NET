@@ -7,8 +7,6 @@ namespace Narvalo.Fx
 
     public partial struct Maybe<T>
     {
-        #region Basic Monad functions
-
         public Maybe<TResult> Select<TResult>(Func<T, TResult> selector)
         {
             Require.NotNull(selector, nameof(selector));
@@ -18,10 +16,6 @@ namespace Narvalo.Fx
 
         public Maybe<TResult> ReplaceBy<TResult>(Maybe<TResult> other)
             => IsSome ? other : Maybe<TResult>.None;
-
-        #endregion
-
-        #region Monadic lifting operators
 
         public Maybe<TResult> Zip<TSecond, TResult>(
             Maybe<TSecond> second,
@@ -33,8 +27,6 @@ namespace Narvalo.Fx
                 ? Maybe.Of(resultSelector.Invoke(Value, second.Value))
                 : Maybe<TResult>.None;
         }
-
-        #endregion
 
         #region LINQ extensions
 

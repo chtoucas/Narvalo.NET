@@ -39,14 +39,12 @@ namespace Narvalo.Fx
         /// <param name="value">A value to be wrapped into an object of type <see cref="Ident{T}"/>.</param>
         /// <returns>An instance of the <see cref="Ident{T}"/> class for the specified value.</returns>
         public static Ident<T> Of<T>(T value)
-            /* T4: type constraint */
             => Ident<T>.η(value);
 
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
         /// </summary>
         public static Ident<T> Flatten<T>(Ident<Ident<T>> square)
-            /* T4: type constraint */
             => Ident<T>.μ(square);
 
         #region Lift()
@@ -57,7 +55,6 @@ namespace Narvalo.Fx
         /// <seealso cref="Select{T, TResult}" />
         public static Func<Ident<T>, Ident<TResult>> Lift<T, TResult>(
             Func<T, TResult> func)
-            /* T4: type constraint */
             => arg =>
             {
                 /* T4: NotNull(arg) */
@@ -70,7 +67,6 @@ namespace Narvalo.Fx
         /// <seealso cref="Lift{T1, T2, TResult}" />
         public static Func<Ident<T1>, Ident<T2>, Ident<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
-            /* T4: type constraint */
             => (arg1, arg2) =>
             {
                 /* T4: NotNull(arg1) */
@@ -83,7 +79,6 @@ namespace Narvalo.Fx
         /// <seealso cref="Lift{T1, T2, T3, TResult}" />
         public static Func<Ident<T1>, Ident<T2>, Ident<T3>, Ident<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
-            /* T4: type constraint */
             => (arg1, arg2, arg3) =>
             {
                 /* T4: NotNull(arg1) */
@@ -97,7 +92,6 @@ namespace Narvalo.Fx
         public static Func<Ident<T1>, Ident<T2>, Ident<T3>, Ident<T4>, Ident<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> func)
-            /* T4: type constraint */
             => (arg1, arg2, arg3, arg4) =>
             {
                 /* T4: NotNull(arg1) */
@@ -111,7 +105,6 @@ namespace Narvalo.Fx
         public static Func<Ident<T1>, Ident<T2>, Ident<T3>, Ident<T4>, Ident<T5>, Ident<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> func)
-            /* T4: type constraint */
             => (arg1, arg2, arg3, arg4, arg5) =>
             {
                 /* T4: NotNull(arg1) */
@@ -155,7 +148,6 @@ namespace Narvalo.Fx
         public static Ident<TResult> ReplaceBy<TSource, TResult>(
             this Ident<TSource> @this,
             TResult value)
-            /* T4: type constraint */
         {
             /* T4: NotNull(@this) */
             return @this.Select(_ => value);
@@ -164,7 +156,6 @@ namespace Narvalo.Fx
         public static Ident<TResult> Then<TSource, TResult>(
             this Ident<TSource> @this,
             Ident<TResult> other)
-            /* T4: type constraint */
         {
             /* T4: NotNull(@this) */
             return @this.Bind(_ => other);
@@ -173,7 +164,6 @@ namespace Narvalo.Fx
         public static Ident<TSource> Ignore<TSource, TOther>(
             this Ident<TSource> @this,
             Ident<TOther> other)
-            /* T4: type constraint */
         {
             /* T4: NotNull(@this) */
             Func<TSource, TOther, TSource> ignore = (arg, _) => arg;
@@ -182,7 +172,6 @@ namespace Narvalo.Fx
         }
 
         public static Ident<global::Narvalo.Fx.Unit> Skip<TSource>(this Ident<TSource> @this)
-            /* T4: type constraint */
         {
             /* T4: NotNull(@this) */
             return @this.Then(Unit);
@@ -193,7 +182,6 @@ namespace Narvalo.Fx
             Func<TSource, bool> predicate,
             Ident<TResult> thenResult,
             Ident<TResult> elseResult)
-            /* T4: type constraint */
         {
             /* T4: NotNull(@this) */
             Require.NotNull(predicate, nameof(predicate));
@@ -204,7 +192,6 @@ namespace Narvalo.Fx
             this Ident<TSource> @this,
             Func<TSource, Ident<TResult>> selector)
             where TSource : IDisposable
-            /* T4: type constraint */
         {
             /* T4: NotNull(@this) */
             Require.NotNull(selector, nameof(selector));
@@ -215,7 +202,6 @@ namespace Narvalo.Fx
             this Ident<TSource> @this,
             Func<TSource, TResult> selector)
             where TSource : IDisposable
-            /* T4: type constraint */
         {
             /* T4: NotNull(@this) */
             Require.NotNull(selector, nameof(selector));
@@ -227,7 +213,6 @@ namespace Narvalo.Fx
         public static Ident<Tuple<TSource, TOther>> Zip<TSource, TOther>(
             this Ident<TSource> @this,
             Ident<TOther> other)
-            /* T4: type constraint */
         {
             /* T4: NotNull(@this) */
             return @this.Zip(other, Tuple.Create);
@@ -238,17 +223,14 @@ namespace Narvalo.Fx
             this Ident<TFirst> @this,
             Ident<TSecond> second,
             Func<TFirst, TSecond, TResult> zipper)
-            /* T4: type constraint */
         {
             /* T4: NotNull(@this) */
             /* T4: NotNull(second) */
             Require.NotNull(zipper, nameof(zipper));
 
-            Func<TFirst, Func<TSecond, TResult>> selector
-                = arg1 => arg2 => zipper(arg1, arg2);
-
-            return second.Gather(
-                @this.Select(selector));
+            return @this.Bind(
+                arg1 => second.Select(
+                    arg2 => zipper(arg1, arg2)));
         }
 
         /// <seealso cref="Lift{T1, T2, T3, TResult}" />
@@ -257,19 +239,16 @@ namespace Narvalo.Fx
             Ident<T2> second,
             Ident<T3> third,
             Func<T1, T2, T3, TResult> zipper)
-            /* T4: type constraint */
         {
             /* T4: NotNull(@this) */
             /* T4: NotNull(second) */
             /* T4: NotNull(third) */
             Require.NotNull(zipper, nameof(zipper));
 
-            Func<T1, Func<T2, Func<T3, TResult>>> selector
-                = arg1 => arg2 => arg3 => zipper(arg1, arg2, arg3);
-
-            return third.Gather(
-                second.Gather(
-                    @this.Select(selector)));
+            return @this.Bind(
+                arg1 => second.Bind(
+                    arg2 => third.Select(
+                        arg3 => zipper(arg1, arg2, arg3))));
         }
 
         /// <seealso cref="Lift{T1, T2, T3, T4, TResult}" />
@@ -279,7 +258,6 @@ namespace Narvalo.Fx
              Ident<T3> third,
              Ident<T4> fourth,
              Func<T1, T2, T3, T4, TResult> zipper)
-            /* T4: type constraint */
         {
             /* T4: NotNull(@this) */
             /* T4: NotNull(second) */
@@ -287,13 +265,11 @@ namespace Narvalo.Fx
             /* T4: NotNull(fourth) */
             Require.NotNull(zipper, nameof(zipper));
 
-            Func<T1, Func<T2, Func<T3, Func<T4, TResult>>>> selector
-                = arg1 => arg2 => arg3 => arg4 => zipper(arg1, arg2, arg3, arg4);
-
-            return fourth.Gather(
-                third.Gather(
-                    second.Gather(
-                        @this.Select(selector))));
+            return @this.Bind(
+                arg1 => second.Bind(
+                    arg2 => third.Bind(
+                        arg3 => fourth.Select(
+                            arg4 => zipper(arg1, arg2, arg3, arg4)))));
         }
 
         /// <seealso cref="Lift{T1, T2, T3, T4, T5, TResult}" />
@@ -304,7 +280,6 @@ namespace Narvalo.Fx
             Ident<T4> fourth,
             Ident<T5> fifth,
             Func<T1, T2, T3, T4, T5, TResult> zipper)
-            /* T4: type constraint */
         {
             /* T4: NotNull(@this) */
             /* T4: NotNull(second) */
@@ -313,14 +288,12 @@ namespace Narvalo.Fx
             /* T4: NotNull(fifth) */
             Require.NotNull(zipper, nameof(zipper));
 
-            Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, TResult>>>>> selector
-                = arg1 => arg2 => arg3 => arg4 => arg5 => zipper(arg1, arg2, arg3, arg4, arg5);
-
-            return fifth.Gather(
-                fourth.Gather(
-                    third.Gather(
-                        second.Gather(
-                            @this.Select(selector)))));
+            return @this.Bind(
+                arg1 => second.Bind(
+                    arg2 => third.Bind(
+                        arg3 => fourth.Bind(
+                            arg4 => fifth.Select(
+                                arg5 => zipper(arg1, arg2, arg3, arg4, arg5))))));
         }
 
         #endregion
@@ -330,7 +303,6 @@ namespace Narvalo.Fx
         public static Ident<TResult> Select<TSource, TResult>(
             this Ident<TSource> @this,
             Func<TSource, TResult> selector)
-            /* T4: type constraint */
         {
             /* T4: NotNull(@this) */
             Require.NotNull(selector, nameof(selector));
@@ -344,7 +316,6 @@ namespace Narvalo.Fx
             this Ident<TSource> @this,
             Func<TSource, Ident<TMiddle>> valueSelector,
             Func<TSource, TMiddle, TResult> resultSelector)
-            /* T4: type constraint */
         {
             /* T4: NotNull(@this) */
             Require.NotNull(valueSelector, nameof(valueSelector));
@@ -369,7 +340,6 @@ namespace Narvalo.Fx
         public static Ident<TResult> InvokeWith<TSource, TResult>(
             this Func<TSource, Ident<TResult>> @this,
             Ident<TSource> value)
-            /* T4: type constraint */
         {
             /* T4: NotNull(value) */
             return value.Bind(@this);
@@ -378,7 +348,6 @@ namespace Narvalo.Fx
         public static Func<TSource, Ident<TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, Ident<TMiddle>> @this,
             Func<TMiddle, Ident<TResult>> second)
-            /* T4: type constraint */
         {
             Require.NotNull(@this, nameof(@this));
             return arg => @this(arg).Bind(second);
@@ -387,12 +356,11 @@ namespace Narvalo.Fx
         public static Func<TSource, Ident<TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, Ident<TResult>> @this,
             Func<TSource, Ident<TMiddle>> second)
-            /* T4: type constraint */
         {
             Require.NotNull(second, nameof(second));
             return arg => second(arg).Bind(@this);
         }
-    } // End of Kleisli - T4: EmitKleisliExtensions().
+    } // End of Kleisli - T4: EmitKleisli().
 
     // Provides extension methods for IEnumerable<Ident<T>>.
     public static partial class Ident
@@ -450,7 +418,6 @@ namespace Narvalo.Fx.Internal
                 }
             }
         }
-
     } // End of EnumerableExtensions - T4: EmitEnumerableInternal().
 }
 
@@ -463,7 +430,6 @@ namespace Narvalo.Fx
         /// Named <c>extract</c> in Haskell parlance.
         /// </remarks>
         public static T Extract<T>(Ident<T> value)
-            /* T4: type constraint */
         {
 
             return Ident<T>.ε(value);
@@ -473,7 +439,6 @@ namespace Narvalo.Fx
         /// Named <c>duplicate</c> in Haskell parlance.
         /// </remarks>
         public static Ident<Ident<T>> Duplicate<T>(Ident<T> value)
-            /* T4: type constraint */
         {
 
             return Ident<T>.δ(value);

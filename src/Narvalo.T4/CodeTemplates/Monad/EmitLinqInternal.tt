@@ -10,7 +10,6 @@ public partial class MonadTemplate
     // You will certainly want to override them to improve performance.
     internal static partial class EnumerableExtensions
     {
-<#+ if (!HasTypeConstraints) { #>
 <#+ if (!SuppressMessage) { #>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
 <#+ } #>
@@ -30,7 +29,6 @@ public partial class MonadTemplate
         internal static <#= Name #><IEnumerable<TSource>> WhereByImpl<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><bool>> predicate)
-            <#+ WriteTypeConstraints("TSource"); #>
         {
             <#+ WriteNotNull(true); #>
             Require.NotNull(predicate, nameof(predicate));
@@ -87,8 +85,6 @@ public partial class MonadTemplate
             return @this.Zip(second, resultSelector).Collect();
         }
 
-<#+ } // T4: End of !HasTypeConstraints. #>
-
 <#+ if (!SuppressMessage) { #>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
 <#+ } #>
@@ -96,7 +92,6 @@ public partial class MonadTemplate
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulator)
-            <#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
         {
             <#+ WriteNotNull(true); #>
             Require.NotNull(accumulator, nameof(accumulator));
@@ -126,7 +121,6 @@ public partial class MonadTemplate
             TAccumulate seed,
             Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulator,
             Func<<#= Name #><TAccumulate>, bool> predicate)
-            <#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
         {
             <#+ WriteNotNull(true); #>
             Require.NotNull(accumulator, nameof(accumulator));
@@ -155,7 +149,6 @@ public partial class MonadTemplate
         internal static <#= Name #><TSource> ReduceImpl<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, <#= Name #><TSource>> accumulator)
-            <#+ WriteTypeConstraints("TSource"); #>
         {
             <#+ WriteNotNull(true); #>
             Require.NotNull(accumulator, nameof(accumulator));
@@ -189,7 +182,6 @@ public partial class MonadTemplate
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, <#= Name #><TSource>> accumulator,
             Func<<#= Name #><TSource>, bool> predicate)
-            <#+ WriteTypeConstraints("TSource"); #>
         {
             <#+ WriteNotNull(true); #>
             Require.NotNull(accumulator, nameof(accumulator));
