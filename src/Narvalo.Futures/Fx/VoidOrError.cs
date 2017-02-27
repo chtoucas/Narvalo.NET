@@ -21,7 +21,7 @@ namespace Narvalo.Fx
 
         internal abstract ExceptionDispatchInfo ExceptionInfo { get; }
 
-        [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
+        [Narvalo.ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
         private string DebuggerDisplay => IsVoid ? "Void" : "Error";
 
@@ -52,7 +52,7 @@ namespace Narvalo.Fx
             /// Represents a debugger type proxy for <see cref="VoidOrError.Void_"/>.
             /// </summary>
             [ContractVerification(false)] // Debugger-only code.
-            [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
+            [Narvalo.ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
             private sealed class DebugView { }
         }
 
@@ -91,7 +91,7 @@ namespace Narvalo.Fx
             /// Represents a debugger type proxy for <see cref="VoidOrError.Error_"/>.
             /// </summary>
             [ContractVerification(false)] // Debugger-only code.
-            [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
+            [Narvalo.ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
             private sealed class DebugView
             {
                 private readonly Error_ _inner;

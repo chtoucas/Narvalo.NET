@@ -12,38 +12,38 @@ namespace Narvalo.Fx
     /// </summary>
     public static partial class Maybe
     {
+        // Conversion from T? to Maybe<T>.
         public static Maybe<T> Of<T>(T? value) where T : struct
             => value.HasValue ? Of(value.Value) : Maybe<T>.None;
-    }
 
-    // Provides extension methods for Maybe<T>.
-    public static partial class Maybe
-    {
-        #region Extension methods when T is a struct
-
+        // Conversion from Maybe<T> to T?.
         public static T? ToNullable<T>(this Maybe<T> @this) where T : struct
             => @this.IsSome ? (T?)@this.Value : null;
+    }
 
+    // Provides extension methods for Maybe<T?>.
+    public static partial class Maybe
+    {
         public static T? ToNullable<T>(this Maybe<T?> @this) where T : struct
-            => @this.ValueOrDefault();
+            => @this.IsSome ? @this.Value : null;
 
-        public static T ExtractOrDefault<T>(this Maybe<T?> @this) where T : struct
-            => ExtractOrElse(@this, () => default(T));
+        public static T Unwrap<T>(this Maybe<T?> @this) where T : struct
+            => (@this.IsSome ? @this.Value : null) ?? default(T);
 
-        public static T ExtractOrElse<T>(this Maybe<T?> @this, T defaultValue) where T : struct
-            => ExtractOrElse(@this, () => defaultValue);
+        public static T Unwrap<T>(this Maybe<T?> @this, T defaultValue) where T : struct
+            => @this.ValueOrDefault() ?? defaultValue;
 
-        public static T ExtractOrElse<T>(this Maybe<T?> @this, Func<T> defaultValueFactory) where T : struct
+        public static T Unwrap<T>(this Maybe<T?> @this, Func<T> defaultValueFactory) where T : struct
         {
             Require.NotNull(defaultValueFactory, nameof(defaultValueFactory));
 
             return @this.ValueOrDefault() ?? defaultValueFactory.Invoke();
         }
 
-        public static T ExtractOrThrow<T>(this Maybe<T?> @this, Exception exception) where T : struct
-            => ExtractOrThrow(@this, () => exception);
+        public static T UnwrapOrThrow<T>(this Maybe<T?> @this, Exception exception) where T : struct
+            => UnwrapOrThrow(@this, () => exception);
 
-        public static T ExtractOrThrow<T>(this Maybe<T?> @this, Func<Exception> exceptionFactory) where T : struct
+        public static T UnwrapOrThrow<T>(this Maybe<T?> @this, Func<Exception> exceptionFactory) where T : struct
         {
             Require.NotNull(exceptionFactory, nameof(exceptionFactory));
 
@@ -56,8 +56,6 @@ namespace Narvalo.Fx
 
             return m.Value;
         }
-
-        #endregion
     }
 
     // Provides extension methods for IEnumerable<Maybe<T>>.

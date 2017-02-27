@@ -1,20 +1,20 @@
 ﻿<#@ assembly name="$(T4NarvaloLibrary)" #>
 <#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
 <#@ import namespace="Narvalo.T4" #>
-<#@ include file="Monad\EmitMonadCore.tt" #>
-<#@ include file="Monad\EmitMonadExtensions.tt" #>
-<#@ include file="Monad\EmitKleisliExtensions.tt" #>
-<#@ include file="Monad\EmitMonadEnumerableExtensions.tt" #>
-<#@ include file="Monad\EmitMonadEnumerableInternalExtensions.tt" #>
+<#@ include file="Monad\EmitMethods.tt" #>
+<#@ include file="Monad\EmitHelpers.tt" #>
+<#@ include file="Monad\EmitExtensions.tt" #>
+<#@ include file="Monad\EmitKleisli.tt" #>
 <#@ include file="Monad\EmitEnumerableExtensions.tt" #>
-<#@ include file="Monad\EmitEnumerableInternalExtensions.tt" #>
+<#@ include file="Monad\EmitEnumerableInternal.tt" #>
+<#@ include file="Monad\EmitLinqCore.tt" #>
+<#@ include file="Monad\EmitLinqInternal.tt" #>
 <#@ include file="Monad\EmitComonadCore.tt" #><#+
 
 // WARNING: This is only a proof of concept.
-// This file depends on Narvalo.Cerbere & Narvalo.Fx packages for:
-// - The classes Require, Demand, Expect & Warrant in the Narvalo namespace.
+// This template depends on the packages Narvalo.Cerbere & Narvalo.Fx packages:
+// - The classes Require & Demand in the Narvalo namespace.
 // - The class Unit in the Narvalo.Fx namespace.
-// - The LINQ extension methods EmptyIfNull(), Append() & Prepend().
 // The generated files are free of CA warnings except for CA1006:DoNotNestGenericTypesInMemberSignatures.
 
 public abstract partial class MonadTemplate : _MonadTemplate
@@ -53,16 +53,16 @@ namespace <#= Namespace #>
 
 <#+
     WriteLine();
-    EmitMonadCore();
-    WriteLine();
+    EmitHelpers();
 
-    EmitMonadExtensions();
     WriteLine();
+    EmitExtensions();
 
-    EmitKleisliExtensions();
     WriteLine();
+    EmitKleisli();
 
-    EmitMonadEnumerableExtensions();
+    WriteLine();
+    EmitEnumerableExtensions();
 #>
 }
 
@@ -76,7 +76,7 @@ namespace <#= Namespace #>.Internal
 
     using Narvalo.Fx.Linq;
 
-<#+ EmitMonadEnumerableInternalExtensions(); #>
+<#+ EmitEnumerableInternal(); #>
 }
 <#+
         if (EmitLinq) {
@@ -119,7 +119,7 @@ namespace <#= Namespace #>.Linq
     using <#= Namespace #>;
     using <#= Namespace #>.Internal;
 
-<#+ EmitEnumerableExtensions(); #>
+<#+ EmitLinqCore(); #>
 }
 
 namespace <#= Namespace #>.Internal
@@ -131,7 +131,7 @@ namespace <#= Namespace #>.Internal
 <#+ } #>
     using System.Linq;
 
-<#+ EmitEnumerableInternalExtensions(); #>
+<#+ EmitLinqInternal(); #>
 }
 <#+
     } // T4: End of EmitLinqExtensions().

@@ -2,7 +2,7 @@
 
 public partial class MonadTemplate
 {
-    public void EmitKleisliExtensions()
+    public void EmitKleisli()
     {
 #>
     // Provides extension methods for Func<T> in the Kleisli category.
@@ -46,9 +46,9 @@ public partial class MonadTemplate
             Require.NotNull(second, nameof(second));
             return arg => second(arg).Bind(@this);
         }
-    } // End of Kleisli - T4: EmitKleisliExtensions().
+    } // End of Kleisli - T4: EmitKleisli().
 <#+
-    } // T4: End of EmitKleisliExtensions().
+    } // T4: End of EmitKleisli().
 } // T4: End of MonadTemplate.
 
 #>

@@ -19,45 +19,6 @@ namespace Narvalo.Fx
     using Narvalo.Fx.Internal;
     using Narvalo.Fx.Linq;
 
-    public partial struct Maybe<T>
-    {
-
-        public void Forever(Action<T> action)
-        {
-            Require.NotNull(action, nameof(action));
-
-            ForeverImpl(action);
-        }
-
-        partial void ForeverImpl(Action<T> action);
-
-        public void While(Func<bool> istrue, Action<T> action)
-        {
-            Require.NotNull(istrue, nameof(istrue));
-            Require.NotNull(action, nameof(action));
-
-            Bind(val =>
-            {
-                while (istrue()) { action(val); }
-
-                return Maybe.Unit;
-            });
-        }
-
-        public void Until(Func<bool> istrue, Action<T> action)
-        {
-            Require.NotNull(istrue, nameof(istrue));
-            Require.NotNull(action, nameof(action));
-
-            Bind(val =>
-            {
-                while (!istrue()) { action(val); }
-
-                return Maybe.Unit;
-            });
-        }
-    }
-
     // Provides a set of static methods for Maybe<T>.
     public static partial class Maybe
     {
@@ -165,7 +126,7 @@ namespace Narvalo.Fx
             };
 
         #endregion
-    } // End of Maybe - T4: EmitMonadCore().
+    } // End of Maybe - T4: EmitHelpers().
 
     // Provides extension methods for Maybe<T>.
     public static partial class Maybe
@@ -542,7 +503,7 @@ namespace Narvalo.Fx
         }
 
         #endregion
-    } // End of Maybe - T4: EmitMonadExtensions().
+    } // End of Maybe - T4: EmitExtensions().
 
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Kleisli
@@ -591,7 +552,7 @@ namespace Narvalo.Fx
             this IEnumerable<Maybe<TSource>> @this)
             /* T4: type constraint */
             => @this.SumImpl();
-    } // End of Sequence - T4: EmitMonadEnumerableExtensions().
+    } // End of Sequence - T4: EmitEnumerableExtensions().
 }
 
 namespace Narvalo.Fx.Internal
@@ -650,7 +611,7 @@ namespace Narvalo.Fx.Internal
 
             return @this.Aggregate(Maybe<TSource>.None, (m, n) => m.OrElse(n));
         }
-    } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
+    } // End of EnumerableExtensions - T4: EmitEnumerableInternal().
 }
 
 namespace Narvalo.Fx.Linq
@@ -712,7 +673,7 @@ namespace Narvalo.Fx.Linq
             Func<Maybe<TSource>, bool> predicate)
             /* T4: type constraint */
             => @this.ReduceImpl(accumulator, predicate);
-    } // End of Iterable - T4: EmitEnumerableExtensions().
+    } // End of Iterable - T4: EmitLinqCore().
 }
 
 namespace Narvalo.Fx.Internal
@@ -891,5 +852,5 @@ namespace Narvalo.Fx.Internal
                 return retval;
             }
         }
-    } // End of EnumerableExtensions - T4: EmitEnumerableInternalExtensions().
+    } // End of EnumerableExtensions - T4: EmitLinqInternal().
 }

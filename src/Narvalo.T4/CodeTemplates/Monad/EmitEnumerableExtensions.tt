@@ -2,64 +2,25 @@
 
 public partial class MonadTemplate
 {
-    // WARNING: This template does not handle types with more than one generic parameter.
     protected void EmitEnumerableExtensions()
     {
 #>
-    // Provides extension methods for IEnumerable<T>.
-    // We do not use the standard LINQ names to avoid any confusion.
-    // - Select    -> SelectWith
-    // - Where     -> WhereBy
-    // - Zip       -> ZipWith
-    // - Aggregate -> Reduce or Fold
-    public static partial class Qperators
+    // Provides extension methods for IEnumerable<<#= Name #><T<#= RTDecl #>>>.
+    public static partial class <#= Name #>
     {
 <#+ if (!HasTypeConstraints) { #>
-        public static <#= Name #><IEnumerable<TResult>> SelectWith<TSource, TResult>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, <#= Name #><TResult>> selector)
-            => @this.SelectWithImpl(selector);
-
-        public static <#= Name #><IEnumerable<TSource>> WhereBy<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, <#= Name #><bool>> predicate)
-            => @this.WhereByImpl(predicate);
-
-        public static <#= Name #><IEnumerable<TResult>> ZipWith<TFirst, TSecond, TResult>(
-            this IEnumerable<TFirst> @this,
-            IEnumerable<TSecond> second,
-            Func<TFirst, TSecond, <#= Name #><TResult>> resultSelector)
-            => @this.ZipWithImpl(second, resultSelector);
+        public static <#= Name #><IEnumerable<TSource><#= RTDecl #>> Collect<TSource<#= RTDecl #>>(
+            this IEnumerable<<#= Name #><TSource<#= RTDecl #>>> @this)
+            => @this.CollectImpl();
 
 <#+ } // T4: End of !HasTypeConstraints. #>
-        public static <#= Name #><TAccumulate> Fold<TSource, TAccumulate>(
-            this IEnumerable<TSource> @this,
-            TAccumulate seed,
-            Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulator)
-            <#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
-            => @this.FoldImpl(seed, accumulator);
-
-        public static <#= Name #><TAccumulate> Fold<TSource, TAccumulate>(
-            this IEnumerable<TSource> @this,
-            TAccumulate seed,
-            Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulator,
-            Func<<#= Name #><TAccumulate>, bool> predicate)
-            <#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
-            => @this.FoldImpl(seed, accumulator, predicate);
-
-        public static <#= Name #><TSource> Reduce<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, TSource, <#= Name #><TSource>> accumulator)
+<#+ if (HasSum) { #>
+        public static <#= Name #><TSource> Sum<TSource>(
+            this IEnumerable<<#= Name #><TSource>> @this)
             <#+ WriteTypeConstraints("TSource"); #>
-            => @this.ReduceImpl(accumulator);
-
-        public static <#= Name #><TSource> Reduce<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, TSource, <#= Name #><TSource>> accumulator,
-            Func<<#= Name #><TSource>, bool> predicate)
-            <#+ WriteTypeConstraints("TSource"); #>
-            => @this.ReduceImpl(accumulator, predicate);
-    } // End of Iterable - T4: EmitEnumerableExtensions().
+            => @this.SumImpl();
+<#+ } // T4: End of HasSum. #>
+    } // End of Sequence - T4: EmitEnumerableExtensions().
 <#+
     } // T4: End of EmitEnumerableExtensions().
 } // T4: End of MonadTemplate.

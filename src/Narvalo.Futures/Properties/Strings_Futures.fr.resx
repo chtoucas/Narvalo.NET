@@ -141,6 +141,12 @@
   <data name="Configuration_MissingSection_Format" xml:space="preserve">
     <value>La section &lt;{0}&gt; n'existe pas dans votre fichier de configuration !</value>
   </data>
+  <data name="ResultOrError_CannotCastFailureToValue" xml:space="preserve">
+    <value>Il n'est pas possible de convertir explicitement un échec de type ResultOrError&lt;T&gt; en une valeur de type T.</value>
+  </data>
+  <data name="ResultOrError_CannotCastSuccessToException" xml:space="preserve">
+    <value>Il n'est pas possible de convertir explicitement un succès de type ResultOrError&lt;T&gt; en un objet de type ExceptionDispatchInfo.</value>
+  </data>
   <data name="SnvDataHelpers_InvalidMinorUnits" xml:space="preserve">
     <value />
   </data>

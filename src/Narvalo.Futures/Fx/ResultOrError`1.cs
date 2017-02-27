@@ -11,7 +11,7 @@ namespace Narvalo.Fx
     using System.Runtime.CompilerServices;
     using System.Runtime.ExceptionServices;
 
-    using Narvalo.Fx.Properties;
+    using Narvalo.Properties;
 
     /// <summary>
     /// Represents the outcome of a computation which might have thrown an exception.
@@ -60,7 +60,7 @@ namespace Narvalo.Fx
         /// <see cref="IsSuccess"/> is false.</remarks>
         internal abstract ExceptionDispatchInfo ExceptionInfo { get; }
 
-        [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
+        [Narvalo.ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
         private string DebuggerDisplay => IsSuccess ? "Success" : "Error";
 
@@ -125,7 +125,7 @@ namespace Narvalo.Fx
             /// Represents a debugger type proxy for <see cref="ResultOrError{T}.Success_"/>.
             /// </summary>
             [ContractVerification(false)] // Debugger-only code.
-            [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
+            [Narvalo.ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
             private sealed class DebugView
             {
                 private readonly ResultOrError<T> _inner;
@@ -199,7 +199,7 @@ namespace Narvalo.Fx
             /// Represents a debugger type proxy for <see cref="ResultOrError{T}.Error_"/>.
             /// </summary>
             [ContractVerification(false)] // Debugger-only code.
-            [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
+            [Narvalo.ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
             private sealed class DebugView
             {
                 private readonly Error_ _inner;
@@ -268,7 +268,7 @@ namespace Narvalo.Fx
         {
             public override T ToValue()
             {
-                throw new InvalidCastException(Strings.ResultOrError_CannotCastFailureToValue);
+                throw new InvalidCastException(Strings_Futures.ResultOrError_CannotCastFailureToValue);
             }
 
             public override Exception ToException() => ExceptionInfo.SourceException;

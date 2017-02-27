@@ -29,13 +29,13 @@
     <None Include="CodeTemplates\Monad.tt" />
     <None Include="CodeTemplates\Monad.Facts.tt" />
     <None Include="CodeTemplates\Monad\EmitComonadCore.tt" />
-    <None Include="CodeTemplates\Monad\EmitEnumerableExtensions.tt" />
-    <None Include="CodeTemplates\Monad\EmitEnumerableInternalExtensions.tt" />
+    <None Include="CodeTemplates\Monad\EmitLinqCore.tt" />
+    <None Include="CodeTemplates\Monad\EmitLinqInternal.tt" />
     <None Include="CodeTemplates\Monad\EmitKleisliExtensions.tt" />
-    <None Include="CodeTemplates\Monad\EmitMonadCore.tt" />
-    <None Include="CodeTemplates\Monad\EmitMonadEnumerableExtensions.tt" />
-    <None Include="CodeTemplates\Monad\EmitMonadEnumerableInternalExtensions.tt" />
-    <None Include="CodeTemplates\Monad\EmitMonadExtensions.tt" />
+    <None Include="CodeTemplates\Monad\EmitHelpers.tt" />
+    <None Include="CodeTemplates\Monad\EmitEnumerableExtensions.tt" />
+    <None Include="CodeTemplates\Monad\EmitEnumerableInternal.tt" />
+    <None Include="CodeTemplates\Monad\EmitExtensions.tt" />
     <None Include="CodeTemplates\Monad\EmitFacts.tt" />
     <None Include="CodeTemplates\ResultOrError.tt" />
     <None Include="CodeTemplates\VoidOr.tt" />
@@ -58,6 +58,7 @@
     <None Include="CodeTemplates\Either.tt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="CodeTemplates\Monad\EmitMethods.tt" />
     <Content Include="README.txt" />
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />

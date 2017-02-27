@@ -67,10 +67,6 @@
     <None Include="Narvalo.Fx.Version.props">
       <SubType>Designer</SubType>
     </None>
-    <None Include="ResultOrError.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ResultOrError.g.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Either.cs" />
@@ -112,15 +108,8 @@
     <Compile Include="Linq\SelectAny.cs" />
     <Compile Include="Maybe.Shadowing.cs" />
     <Compile Include="Nullable.cs" />
-    <Compile Include="ResultOrError.Shadowing.cs" />
     <Compile Include="Result.Shadowing.cs" />
     <Compile Include="Result`2.cs" />
-    <Compile Include="VoidOr.cs" />
-    <Compile Include="VoidOr.g.cs">
-      <DependentUpon>VoidOr.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Sequence.cs" />
     <Compile Include="Stubs.cs" />
     <Compile Include="Stubs`1.cs" />
@@ -134,13 +123,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Maybe`1.cs" />
-    <Compile Include="ResultOrError.cs" />
-    <Compile Include="ResultOrError.g.cs">
-      <DependentUpon>ResultOrError.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="ResultOrError`1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Strings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -153,9 +135,6 @@
       <DependentUpon>Strings.fr.resx</DependentUpon>
     </Compile>
     <Compile Include="Unit.cs" />
-    <Compile Include="VoidOr.Shadowing.cs" />
-    <Compile Include="VoidOrError.cs" />
-    <Compile Include="VoidOr`1.cs" />
     <Compile Include="YCombinator.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -179,12 +158,6 @@
       <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
       <Name>Narvalo.Cerbere</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="VoidOr.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>VoidOr.g.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Result.tt">

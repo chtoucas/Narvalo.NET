@@ -22,45 +22,6 @@ namespace Edufun.Haskell.Templates
     using Edufun.Haskell.Templates.Internal;
     using Edufun.Haskell.Templates.Linq;
 
-    public partial struct MonadValue<T>
-    {
-
-        public void Forever(Action<T> action)
-        {
-            Require.NotNull(action, nameof(action));
-
-            ForeverImpl(action);
-        }
-
-        partial void ForeverImpl(Action<T> action);
-
-        public void While(Func<bool> istrue, Action<T> action)
-        {
-            Require.NotNull(istrue, nameof(istrue));
-            Require.NotNull(action, nameof(action));
-
-            Bind(val =>
-            {
-                while (istrue()) { action(val); }
-
-                return MonadValue.Unit;
-            });
-        }
-
-        public void Until(Func<bool> istrue, Action<T> action)
-        {
-            Require.NotNull(istrue, nameof(istrue));
-            Require.NotNull(action, nameof(action));
-
-            Bind(val =>
-            {
-                while (!istrue()) { action(val); }
-
-                return MonadValue.Unit;
-            });
-        }
-    }
-
     // Provides a set of static methods for MonadValue<T>.
     public static partial class MonadValue
     {
@@ -183,7 +144,7 @@ namespace Edufun.Haskell.Templates
             };
 
         #endregion
-    } // End of MonadValue - T4: EmitMonadCore().
+    } // End of MonadValue - T4: EmitHelpers().
 
     // Provides extension methods for MonadValue<T>.
     public static partial class MonadValue
@@ -558,7 +519,7 @@ namespace Edufun.Haskell.Templates
         }
 
         #endregion
-    } // End of MonadValue - T4: EmitMonadExtensions().
+    } // End of MonadValue - T4: EmitExtensions().
 
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Kleisli
@@ -604,7 +565,7 @@ namespace Edufun.Haskell.Templates
             this IEnumerable<MonadValue<TSource>> @this)
             where TSource : struct
             => @this.SumImpl();
-    } // End of Sequence - T4: EmitMonadEnumerableExtensions().
+    } // End of Sequence - T4: EmitEnumerableExtensions().
 }
 
 namespace Edufun.Haskell.Templates.Internal
@@ -626,7 +587,7 @@ namespace Edufun.Haskell.Templates.Internal
 
             return @this.Aggregate(MonadValue<TSource>.None, (m, n) => m.OrElse(n));
         }
-    } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
+    } // End of EnumerableExtensions - T4: EmitEnumerableInternal().
 }
 
 namespace Edufun.Haskell.Templates.Linq
@@ -674,7 +635,7 @@ namespace Edufun.Haskell.Templates.Linq
             Func<MonadValue<TSource>, bool> predicate)
             where TSource : struct
             => @this.ReduceImpl(accumulator, predicate);
-    } // End of Iterable - T4: EmitEnumerableExtensions().
+    } // End of Iterable - T4: EmitLinqCore().
 }
 
 namespace Edufun.Haskell.Templates.Internal
@@ -788,6 +749,6 @@ namespace Edufun.Haskell.Templates.Internal
                 return retval;
             }
         }
-    } // End of EnumerableExtensions - T4: EmitEnumerableInternalExtensions().
+    } // End of EnumerableExtensions - T4: EmitLinqInternal().
 }
 

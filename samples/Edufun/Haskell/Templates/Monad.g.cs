@@ -22,45 +22,6 @@ namespace Edufun.Haskell.Templates
     using Edufun.Haskell.Templates.Internal;
     using Edufun.Haskell.Templates.Linq;
 
-    public partial class Monad<T>
-    {
-
-        public void Forever(Action<T> action)
-        {
-            Require.NotNull(action, nameof(action));
-
-            ForeverImpl(action);
-        }
-
-        partial void ForeverImpl(Action<T> action);
-
-        public void While(Func<bool> istrue, Action<T> action)
-        {
-            Require.NotNull(istrue, nameof(istrue));
-            Require.NotNull(action, nameof(action));
-
-            Bind(val =>
-            {
-                while (istrue()) { action(val); }
-
-                return Monad.Unit;
-            });
-        }
-
-        public void Until(Func<bool> istrue, Action<T> action)
-        {
-            Require.NotNull(istrue, nameof(istrue));
-            Require.NotNull(action, nameof(action));
-
-            Bind(val =>
-            {
-                while (!istrue()) { action(val); }
-
-                return Monad.Unit;
-            });
-        }
-    }
-
     // Provides a set of static methods for Monad<T>.
     public static partial class Monad
     {
@@ -161,7 +122,7 @@ namespace Edufun.Haskell.Templates
             };
 
         #endregion
-    } // End of Monad - T4: EmitMonadCore().
+    } // End of Monad - T4: EmitHelpers().
 
     // Provides extension methods for Monad<T>.
     public static partial class Monad
@@ -398,7 +359,7 @@ namespace Edufun.Haskell.Templates
         }
 
         #endregion
-    } // End of Monad - T4: EmitMonadExtensions().
+    } // End of Monad - T4: EmitExtensions().
 
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Kleisli
@@ -443,7 +404,7 @@ namespace Edufun.Haskell.Templates
             this IEnumerable<Monad<TSource>> @this)
             => @this.CollectImpl();
 
-    } // End of Sequence - T4: EmitMonadEnumerableExtensions().
+    } // End of Sequence - T4: EmitEnumerableExtensions().
 }
 
 namespace Edufun.Haskell.Templates.Internal
@@ -491,7 +452,7 @@ namespace Edufun.Haskell.Templates.Internal
             }
         }
 
-    } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
+    } // End of EnumerableExtensions - T4: EmitEnumerableInternal().
 }
 
 namespace Edufun.Haskell.Templates.Linq
@@ -553,7 +514,7 @@ namespace Edufun.Haskell.Templates.Linq
             Func<Monad<TSource>, bool> predicate)
             /* T4: type constraint */
             => @this.ReduceImpl(accumulator, predicate);
-    } // End of Iterable - T4: EmitEnumerableExtensions().
+    } // End of Iterable - T4: EmitLinqCore().
 }
 
 namespace Edufun.Haskell.Templates.Internal
@@ -732,6 +693,6 @@ namespace Edufun.Haskell.Templates.Internal
                 return retval;
             }
         }
-    } // End of EnumerableExtensions - T4: EmitEnumerableInternalExtensions().
+    } // End of EnumerableExtensions - T4: EmitLinqInternal().
 }
 

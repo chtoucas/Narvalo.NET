@@ -1,0 +1,62 @@
+﻿<#+
+
+public partial class MonadTemplate
+{
+    protected void EmitMethods()
+    {
+#>
+    public partial <#= ClassTypeDecl #> <#= Name #><<#= GenericsDecl #>>
+    {
+<#+ if (HasRightGenerics) { #>
+        private static readonly <#= Name #><global::Narvalo.Fx.Unit<#= RTDecl #>> s_Unit
+            = <#+ WriteFactory("Unit"); #>(global::Narvalo.Fx.Unit.Default);
+<#+ } #>
+
+        public void Forever(Action<<#= MainGeneric #>> action)
+        {
+            Require.NotNull(action, nameof(action));
+
+            ForeverImpl(action);
+        }
+
+        partial void ForeverImpl(Action<<#= MainGeneric #>> action);
+
+        public void While(Func<bool> istrue, Action<<#= MainGeneric #>> action)
+        {
+            Require.NotNull(istrue, nameof(istrue));
+            Require.NotNull(action, nameof(action));
+
+            Bind(val =>
+            {
+                while (istrue()) { action(val); }
+
+<#+ if (HasRightGenerics) { #>
+                return s_Unit;
+<#+ } else { #>
+                return <#= Name #>.Unit;
+<#+ } #>
+            });
+        }
+
+        public void Until(Func<bool> istrue, Action<<#= MainGeneric #>> action)
+        {
+            Require.NotNull(istrue, nameof(istrue));
+            Require.NotNull(action, nameof(action));
+
+            Bind(val =>
+            {
+                while (!istrue()) { action(val); }
+
+<#+ if (HasRightGenerics) { #>
+                return s_Unit;
+<#+ } else { #>
+                return <#= Name #>.Unit;
+<#+ } #>
+            });
+        }
+    } // End of <#= Name #> - T4: EmitMethods().
+<#+
+    } // T4: End of EmitMethods().
+} // T4: End of MonadTemplate.
+
+#>

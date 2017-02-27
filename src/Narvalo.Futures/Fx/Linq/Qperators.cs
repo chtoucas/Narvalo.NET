@@ -7,9 +7,19 @@ namespace Narvalo.Fx.Linq
 
     public static partial class Qperators
     {
+        public static IEnumerable<TResult> SelectAny<TSource, TResult>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, ResultOrError<TResult>> selector)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(selector, nameof(selector));
+
+            return SelectAnyIterator(@this, selector);
+        }
+
         public static IEnumerable<TSource> WhereAny<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, bool?> predicate)
+            Func<TSource, ResultOrError<bool>> predicate)
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
@@ -17,34 +27,24 @@ namespace Narvalo.Fx.Linq
             return WhereAnyIterator(@this, predicate);
         }
 
-        public static IEnumerable<TSource> WhereAny<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, Maybe<bool>> predicate)
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-
-            return WhereAnyIterator(@this, predicate);
-        }
-
-        private static IEnumerable<TSource> WhereAnyIterator<TSource>(
+        private static IEnumerable<TResult> SelectAnyIterator<TSource, TResult>(
             IEnumerable<TSource> source,
-            Func<TSource, bool?> predicate)
+            Func<TSource, ResultOrError<TResult>> selector)
         {
             Demand.NotNull(source);
-            Demand.NotNull(predicate);
+            Demand.NotNull(selector);
 
             foreach (var item in source)
             {
-                var m = predicate.Invoke(item);
+                var m = selector.Invoke(item);
 
-                if (m.HasValue && m.Value) { yield return item; }
+                if (m.IsSuccess) { yield return m.Value; }
             }
         }
 
         private static IEnumerable<TSource> WhereAnyIterator<TSource>(
             IEnumerable<TSource> source,
-            Func<TSource, Maybe<bool>> predicate)
+            Func<TSource, ResultOrError<bool>> predicate)
         {
             Demand.NotNull(source);
             Demand.NotNull(predicate);
@@ -53,7 +53,7 @@ namespace Narvalo.Fx.Linq
             {
                 var m = predicate.Invoke(item);
 
-                if (m.IsSome && m.Value) { yield return item; }
+                if (m.IsSuccess && m.Value) { yield return item; }
             }
         }
     }

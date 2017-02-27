@@ -31,11 +31,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EitherFacts.cs" />
-    <Compile Include="VoidOr.g.cs">
-      <DependentUpon>VoidOr.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Maybe.g.cs">
       <DependentUpon>Maybe.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -43,12 +38,6 @@
     </Compile>
     <Compile Include="MaybeFacts.cs" />
     <Compile Include="NullableFacts.cs" />
-    <Compile Include="ResultOrError.g.cs">
-      <DependentUpon>ResultOrError.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="ResultOrErrorFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SequenceFacts.cs" />
     <Compile Include="StubsFacts.cs" />
@@ -69,17 +58,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="VoidOr.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>VoidOr.g.cs</LastGenOutput>
-    </Content>
     <Content Include="Maybe.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Maybe.g.cs</LastGenOutput>
-    </Content>
-    <Content Include="ResultOrError.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ResultOrError.g.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

@@ -2,7 +2,7 @@
 
 public partial class MonadTemplate
 {
-    protected void EmitMonadEnumerableInternalExtensions()
+    protected void EmitEnumerableInternal()
     {
 #>
     // Provides default implementations for the extension methods for IEnumerable<<#= Name #><T<#= RTDecl #>>>.
@@ -71,9 +71,9 @@ public partial class MonadTemplate
             return @this.Aggregate(<#= Name #><TSource>.<#= ZeroName #>, (m, n) => m.<#= PlusName #>(n));
         }
 <#+ } // T4: End of HasSum. #>
-    } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
+    } // End of EnumerableExtensions - T4: EmitEnumerableInternal().
 <#+
-    } // T4: End of EmitMonadEnumerableInternalExtensions().
+    } // T4: End of EmitEnumerableInternal().
 } // T4: End of MonadTemplate.
 
 #>

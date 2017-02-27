@@ -22,45 +22,6 @@ namespace Edufun.Haskell.Templates
     using Edufun.Haskell.Templates.Internal;
     using Edufun.Haskell.Templates.Linq;
 
-    public partial class MonadPlus<T>
-    {
-
-        public void Forever(Action<T> action)
-        {
-            Require.NotNull(action, nameof(action));
-
-            ForeverImpl(action);
-        }
-
-        partial void ForeverImpl(Action<T> action);
-
-        public void While(Func<bool> istrue, Action<T> action)
-        {
-            Require.NotNull(istrue, nameof(istrue));
-            Require.NotNull(action, nameof(action));
-
-            Bind(val =>
-            {
-                while (istrue()) { action(val); }
-
-                return MonadPlus.Unit;
-            });
-        }
-
-        public void Until(Func<bool> istrue, Action<T> action)
-        {
-            Require.NotNull(istrue, nameof(istrue));
-            Require.NotNull(action, nameof(action));
-
-            Bind(val =>
-            {
-                while (!istrue()) { action(val); }
-
-                return MonadPlus.Unit;
-            });
-        }
-    }
-
     // Provides a set of static methods for MonadPlus<T>.
     public static partial class MonadPlus
     {
@@ -168,7 +129,7 @@ namespace Edufun.Haskell.Templates
             };
 
         #endregion
-    } // End of MonadPlus - T4: EmitMonadCore().
+    } // End of MonadPlus - T4: EmitHelpers().
 
     // Provides extension methods for MonadPlus<T>.
     public static partial class MonadPlus
@@ -546,7 +507,7 @@ namespace Edufun.Haskell.Templates
         }
 
         #endregion
-    } // End of MonadPlus - T4: EmitMonadExtensions().
+    } // End of MonadPlus - T4: EmitExtensions().
 
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Kleisli
@@ -595,7 +556,7 @@ namespace Edufun.Haskell.Templates
             this IEnumerable<MonadPlus<TSource>> @this)
             /* T4: type constraint */
             => @this.SumImpl();
-    } // End of Sequence - T4: EmitMonadEnumerableExtensions().
+    } // End of Sequence - T4: EmitEnumerableExtensions().
 }
 
 namespace Edufun.Haskell.Templates.Internal
@@ -651,7 +612,7 @@ namespace Edufun.Haskell.Templates.Internal
 
             return @this.Aggregate(MonadPlus<TSource>.Zero, (m, n) => m.Plus(n));
         }
-    } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
+    } // End of EnumerableExtensions - T4: EmitEnumerableInternal().
 }
 
 namespace Edufun.Haskell.Templates.Linq
@@ -713,7 +674,7 @@ namespace Edufun.Haskell.Templates.Linq
             Func<MonadPlus<TSource>, bool> predicate)
             /* T4: type constraint */
             => @this.ReduceImpl(accumulator, predicate);
-    } // End of Iterable - T4: EmitEnumerableExtensions().
+    } // End of Iterable - T4: EmitLinqCore().
 }
 
 namespace Edufun.Haskell.Templates.Internal
@@ -892,6 +853,6 @@ namespace Edufun.Haskell.Templates.Internal
                 return retval;
             }
         }
-    } // End of EnumerableExtensions - T4: EmitEnumerableInternalExtensions().
+    } // End of EnumerableExtensions - T4: EmitLinqInternal().
 }
 

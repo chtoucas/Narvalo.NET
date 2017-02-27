@@ -2,7 +2,7 @@
 
 public partial class MonadTemplate
 {
-    protected void EmitMonadExtensions()
+    protected void EmitExtensions()
     {
 #>
     // Provides extension methods for <#= Name #><T<#= RTDecl #>>.
@@ -451,9 +451,9 @@ public partial class MonadTemplate
 <#+ } // T4: End of HasJoin. #>
 
         #endregion
-    } // End of <#= Name #> - T4: EmitMonadExtensions().
+    } // End of <#= Name #> - T4: EmitExtensions().
 <#+
-    } // T4: End of EmitMonadExtensions().
+    } // T4: End of EmitExtensions().
 } // T4: End of MonadTemplate.
 
 #>

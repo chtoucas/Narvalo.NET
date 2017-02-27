@@ -3,7 +3,7 @@
 public partial class MonadTemplate
 {
     // WARNING: This template does not handle types with more than one generic parameter.
-    protected void EmitEnumerableInternalExtensions()
+    protected void EmitLinqInternal()
     {
 #>
     // Provides default implementations for the extension methods for IEnumerable<T>.
@@ -216,9 +216,9 @@ public partial class MonadTemplate
                 return retval;
             }
         }
-    } // End of EnumerableExtensions - T4: EmitEnumerableInternalExtensions().
+    } // End of EnumerableExtensions - T4: EmitLinqInternal().
 <#+
-    } // T4: End of EmitEnumerableInternalExtensions().
+    } // T4: End of EmitLinqInternal().
 } // T4: End of MonadTemplate.
 
 #>

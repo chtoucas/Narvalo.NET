@@ -2,60 +2,9 @@
 
 public partial class MonadTemplate
 {
-    protected void EmitMonadCore()
+    protected void EmitHelpers()
     {
 #>
-    public partial <#= ClassTypeDecl #> <#= Name #><<#= GenericsDecl #>>
-    {
-<#+ if (HasRightGenerics) { #>
-        private static readonly <#= Name #><global::Narvalo.Fx.Unit<#= RTDecl #>> s_Unit
-            = <#+ WriteFactory("Unit"); #>(global::Narvalo.Fx.Unit.Default);
-<#+ } #>
-
-        public void Forever(Action<<#= MainGeneric #>> action)
-        {
-            Require.NotNull(action, nameof(action));
-
-            ForeverImpl(action);
-        }
-
-        partial void ForeverImpl(Action<<#= MainGeneric #>> action);
-
-        public void While(Func<bool> istrue, Action<<#= MainGeneric #>> action)
-        {
-            Require.NotNull(istrue, nameof(istrue));
-            Require.NotNull(action, nameof(action));
-
-            Bind(val =>
-            {
-                while (istrue()) { action(val); }
-
-<#+ if (HasRightGenerics) { #>
-                return s_Unit;
-<#+ } else { #>
-                return <#= Name #>.Unit;
-<#+ } #>
-            });
-        }
-
-        public void Until(Func<bool> istrue, Action<<#= MainGeneric #>> action)
-        {
-            Require.NotNull(istrue, nameof(istrue));
-            Require.NotNull(action, nameof(action));
-
-            Bind(val =>
-            {
-                while (!istrue()) { action(val); }
-
-<#+ if (HasRightGenerics) { #>
-                return s_Unit;
-<#+ } else { #>
-                return <#= Name #>.Unit;
-<#+ } #>
-            });
-        }
-    }
-
     // Provides a set of static methods for <#= Name #><T<#= RTDecl #>>.
     public static partial class <#= Name #>
     {
@@ -172,9 +121,9 @@ public partial class MonadTemplate
             };
 
         #endregion
-    } // End of <#= Name #> - T4: EmitMonadCore().
+    } // End of <#= Name #> - T4: EmitHelpers().
 <#+
-    } // T4: End of EmitMonadCore().
+    } // T4: End of EmitHelpers().
 } // T4: End of MonadTemplate.
 
 #>

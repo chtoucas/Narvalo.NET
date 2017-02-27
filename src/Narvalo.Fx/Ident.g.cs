@@ -19,45 +19,6 @@ namespace Narvalo.Fx
     using Narvalo.Fx.Internal;
     using Narvalo.Fx.Linq;
 
-    public partial struct Ident<T>
-    {
-
-        public void Forever(Action<T> action)
-        {
-            Require.NotNull(action, nameof(action));
-
-            ForeverImpl(action);
-        }
-
-        partial void ForeverImpl(Action<T> action);
-
-        public void While(Func<bool> istrue, Action<T> action)
-        {
-            Require.NotNull(istrue, nameof(istrue));
-            Require.NotNull(action, nameof(action));
-
-            Bind(val =>
-            {
-                while (istrue()) { action(val); }
-
-                return Ident.Unit;
-            });
-        }
-
-        public void Until(Func<bool> istrue, Action<T> action)
-        {
-            Require.NotNull(istrue, nameof(istrue));
-            Require.NotNull(action, nameof(action));
-
-            Bind(val =>
-            {
-                while (!istrue()) { action(val); }
-
-                return Ident.Unit;
-            });
-        }
-    }
-
     // Provides a set of static methods for Ident<T>.
     public static partial class Ident
     {
@@ -158,7 +119,7 @@ namespace Narvalo.Fx
             };
 
         #endregion
-    } // End of Ident - T4: EmitMonadCore().
+    } // End of Ident - T4: EmitHelpers().
 
     // Provides extension methods for Ident<T>.
     public static partial class Ident
@@ -395,7 +356,7 @@ namespace Narvalo.Fx
         }
 
         #endregion
-    } // End of Ident - T4: EmitMonadExtensions().
+    } // End of Ident - T4: EmitExtensions().
 
     // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class Kleisli
@@ -440,7 +401,7 @@ namespace Narvalo.Fx
             this IEnumerable<Ident<TSource>> @this)
             => @this.CollectImpl();
 
-    } // End of Sequence - T4: EmitMonadEnumerableExtensions().
+    } // End of Sequence - T4: EmitEnumerableExtensions().
 }
 
 namespace Narvalo.Fx.Internal
@@ -490,7 +451,7 @@ namespace Narvalo.Fx.Internal
             }
         }
 
-    } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
+    } // End of EnumerableExtensions - T4: EmitEnumerableInternal().
 }
 
 namespace Narvalo.Fx
