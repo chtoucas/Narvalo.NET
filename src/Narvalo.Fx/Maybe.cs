@@ -22,13 +22,19 @@ namespace Narvalo.Fx
     }
 
     // Provides extension methods for Maybe<T?>.
+    // NB: in fatc, there is really no reason to use Maybe<T> or Maybe<T?> instead of T? (for value
+    // types of course).
     public static partial class Maybe
     {
+        public static Maybe<T> Flatten<T>(this Maybe<T?> @this) where T : struct
+            => @this.IsSome ? Maybe.Of(@this.Value) : Maybe<T>.None;
+
         public static T? ToNullable<T>(this Maybe<T?> @this) where T : struct
             => @this.IsSome ? @this.Value : null;
 
+        // REVIEW: Returning @this.Value should be enough.
         public static T Unwrap<T>(this Maybe<T?> @this) where T : struct
-            => (@this.IsSome ? @this.Value : null) ?? default(T);
+            => @this.ValueOrDefault() ?? default(T);
 
         public static T Unwrap<T>(this Maybe<T?> @this, T defaultValue) where T : struct
             => @this.ValueOrDefault() ?? defaultValue;

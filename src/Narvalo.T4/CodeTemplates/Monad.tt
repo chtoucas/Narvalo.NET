@@ -46,8 +46,7 @@ namespace <#= Namespace #>
     using <#= Namespace #>.Internal;
 <#+ if (EmitLinq) { #>
     using <#= Namespace #>.Linq;
-<#+ } #>
-<#+ if (!EmitLinq) { #>
+<#+ } else { #>
     using Narvalo.Fx.Linq;
 <#+ } #>
 

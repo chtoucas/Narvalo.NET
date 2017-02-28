@@ -23,7 +23,7 @@ namespace Narvalo.Fx
             yield return value;
         }
 
-        #region Anamorphisms
+        #region Unfold (anamorphism)
 
         /// <summary>
         /// Generates an infinite sequence.
@@ -88,7 +88,7 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region List Comprehensions
+        #region Gather
 
         /// <summary>
         /// Generates an infinite sequence containing one repeated value.
