@@ -8,6 +8,7 @@ public partial class MonadTemplate
 #>
     // Provides default implementations for the extension methods for IEnumerable<T>.
     // You will certainly want to override them to improve performance.
+    // T4: EmitLinqInternal().
     internal static partial class EnumerableExtensions
     {
 <#+ if (!SuppressMessage) { #>
@@ -208,7 +209,7 @@ public partial class MonadTemplate
                 return retval;
             }
         }
-    } // End of EnumerableExtensions - T4: EmitLinqInternal().
+    }
 <#+
     } // T4: End of EmitLinqInternal().
 } // T4: End of MonadTemplate.

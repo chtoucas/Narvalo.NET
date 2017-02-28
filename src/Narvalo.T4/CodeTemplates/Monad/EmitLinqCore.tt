@@ -12,6 +12,7 @@ public partial class MonadTemplate
     // - Where     -> WhereBy
     // - Zip       -> ZipWith
     // - Aggregate -> Reduce or Fold
+    // T4: EmitLinqCore().
     public static partial class Qperators
     {
         public static <#= Name #><IEnumerable<TResult>> SelectWith<TSource, TResult>(
@@ -53,7 +54,7 @@ public partial class MonadTemplate
             Func<TSource, TSource, <#= Name #><TSource>> accumulator,
             Func<<#= Name #><TSource>, bool> predicate)
             => @this.ReduceImpl(accumulator, predicate);
-    } // End of Iterable - T4: EmitLinqCore().
+    }
 <#+
     } // T4: End of EmitLinqCore().
 } // T4: End of MonadTemplate.

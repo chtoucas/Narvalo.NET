@@ -6,6 +6,7 @@ public partial class MonadTemplate
     {
 #>
     // Implements core Comonad methods.
+    // T4: EmitComonadCore().
     public static partial class <#= Name #>
     {
         /// <remarks>
@@ -31,7 +32,7 @@ public partial class MonadTemplate
 
             return <#= Name #><T>.δ(value);
         }
-    } // End of <#= Name #> - T4: EmitComonadCore().
+    }
 <#+
     } // T4: End of EmitComonadCore().
 } // T4: End of MonadTemplate.

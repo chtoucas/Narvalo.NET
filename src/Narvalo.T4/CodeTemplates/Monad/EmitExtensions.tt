@@ -8,6 +8,7 @@ public partial class MonadTemplate
         bool zipViaBind = true;
 #>
     // Provides extension methods for <#= Name #><T<#= RTDecl #>>.
+    // T4: EmitExtensions().
     public static partial class <#= Name #>
     {
         /// <seealso cref="Apply{TSource, TResult<#= RTDecl #>}" />
@@ -424,7 +425,7 @@ public partial class MonadTemplate
 <#+ } // T4: End of HasJoin. #>
 
         #endregion
-    } // End of <#= Name #> - T4: EmitExtensions().
+    }
 <#+
     } // T4: End of EmitExtensions().
 } // T4: End of MonadTemplate.

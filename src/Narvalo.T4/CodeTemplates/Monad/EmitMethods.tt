@@ -5,6 +5,7 @@ public partial class MonadTemplate
     protected void EmitMethods()
     {
 #>
+    // T4: EmitMethods().
     public partial <#= ClassTypeDecl #> <#= Name #><<#= GenericsDecl #>>
     {
 <#+ if (HasRightGenerics) { #>

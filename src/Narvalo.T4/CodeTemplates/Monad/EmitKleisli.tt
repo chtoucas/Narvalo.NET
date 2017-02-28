@@ -6,6 +6,7 @@ public partial class MonadTemplate
     {
 #>
     // Provides extension methods for Func<T> in the Kleisli category.
+    // T4: EmitKleisli().
     public static partial class Kleisli
     {
         public static <#= Name #><IEnumerable<TResult><#= RTDecl #>> InvokeWith<TSource, TResult<#= RTDecl #>>(
@@ -40,7 +41,7 @@ public partial class MonadTemplate
             Require.NotNull(second, nameof(second));
             return arg => second(arg).Bind(@this);
         }
-    } // End of Kleisli - T4: EmitKleisli().
+    }
 <#+
     } // T4: End of EmitKleisli().
 } // T4: End of MonadTemplate.

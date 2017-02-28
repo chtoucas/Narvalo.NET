@@ -6,6 +6,7 @@ public partial class MonadTemplate
     {
 #>
     // Provides a set of static methods for <#= Name #><T<#= RTDecl #>>.
+    // T4: EmitHelpers().
     public static partial class <#= Name #>
     {
 <#+ if (!HasRightGenerics) { #>
@@ -114,7 +115,7 @@ public partial class MonadTemplate
             };
 
         #endregion
-    } // End of <#= Name #> - T4: EmitHelpers().
+    }
 <#+
     } // T4: End of EmitHelpers().
 } // T4: End of MonadTemplate.
