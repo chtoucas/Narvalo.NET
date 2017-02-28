@@ -20,6 +20,7 @@ namespace Narvalo.Fx
     using Narvalo.Fx.Linq;
 
     // Provides a set of static methods for Maybe<T>.
+    // T4: EmitHelpers().
     public static partial class Maybe
     {
         /// <summary>
@@ -119,9 +120,10 @@ namespace Narvalo.Fx
             };
 
         #endregion
-    } // End of Maybe - T4: EmitHelpers().
+    }
 
     // Provides extension methods for Maybe<T>.
+    // T4: EmitExtensions().
     public static partial class Maybe
     {
         /// <seealso cref="Apply{TSource, TResult}" />
@@ -465,9 +467,10 @@ namespace Narvalo.Fx
         }
 
         #endregion
-    } // End of Maybe - T4: EmitExtensions().
+    }
 
     // Provides extension methods for Func<T> in the Kleisli category.
+    // T4: EmitKleisli().
     public static partial class Kleisli
     {
         public static Maybe<IEnumerable<TResult>> InvokeWith<TSource, TResult>(
@@ -498,9 +501,10 @@ namespace Narvalo.Fx
             Require.NotNull(second, nameof(second));
             return arg => second(arg).Bind(@this);
         }
-    } // End of Kleisli - T4: EmitKleisli().
+    }
 
     // Provides extension methods for IEnumerable<Maybe<T>>.
+    // T4: EmitEnumerableExtensions().
     public static partial class Maybe
     {
         public static Maybe<IEnumerable<TSource>> Collect<TSource>(
@@ -509,7 +513,7 @@ namespace Narvalo.Fx
 
         public static Maybe<TSource> Sum<TSource>(this IEnumerable<Maybe<TSource>> @this)
             => @this.SumImpl();
-    } // End of Sequence - T4: EmitEnumerableExtensions().
+    }
 }
 
 namespace Narvalo.Fx.Internal
@@ -522,6 +526,7 @@ namespace Narvalo.Fx.Internal
 
     // Provides default implementations for the extension methods for IEnumerable<Maybe<T>>.
     // You will certainly want to override them to improve performance.
+    // T4: EmitEnumerableInternal().
     internal static partial class EnumerableExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
@@ -558,6 +563,7 @@ namespace Narvalo.Fx.Internal
                 }
             }
         }
+
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Maybe<TSource> SumImpl<TSource>(
             this IEnumerable<Maybe<TSource>> @this)
@@ -566,7 +572,7 @@ namespace Narvalo.Fx.Internal
 
             return @this.Aggregate(Maybe<TSource>.None, (m, n) => m.OrElse(n));
         }
-    } // End of EnumerableExtensions - T4: EmitEnumerableInternal().
+    }
 }
 
 namespace Narvalo.Fx.Linq
@@ -583,6 +589,7 @@ namespace Narvalo.Fx.Linq
     // - Where     -> WhereBy
     // - Zip       -> ZipWith
     // - Aggregate -> Reduce or Fold
+    // T4: EmitLinqCore().
     public static partial class Qperators
     {
         public static Maybe<IEnumerable<TResult>> SelectWith<TSource, TResult>(
@@ -624,7 +631,7 @@ namespace Narvalo.Fx.Linq
             Func<TSource, TSource, Maybe<TSource>> accumulator,
             Func<Maybe<TSource>, bool> predicate)
             => @this.ReduceImpl(accumulator, predicate);
-    } // End of Iterable - T4: EmitLinqCore().
+    }
 }
 
 namespace Narvalo.Fx.Internal
@@ -636,6 +643,7 @@ namespace Narvalo.Fx.Internal
 
     // Provides default implementations for the extension methods for IEnumerable<T>.
     // You will certainly want to override them to improve performance.
+    // T4: EmitLinqInternal().
     internal static partial class EnumerableExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
@@ -798,5 +806,5 @@ namespace Narvalo.Fx.Internal
                 return retval;
             }
         }
-    } // End of EnumerableExtensions - T4: EmitLinqInternal().
+    }
 }

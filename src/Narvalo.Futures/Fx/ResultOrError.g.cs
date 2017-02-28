@@ -20,6 +20,7 @@ namespace Narvalo.Fx
     using Narvalo.Fx.Linq;
 
     // Provides a set of static methods for ResultOrError<T>.
+    // T4: EmitHelpers().
     public static partial class ResultOrError
     {
         /// <summary>
@@ -112,9 +113,10 @@ namespace Narvalo.Fx
             };
 
         #endregion
-    } // End of ResultOrError - T4: EmitHelpers().
+    }
 
     // Provides extension methods for ResultOrError<T>.
+    // T4: EmitExtensions().
     public static partial class ResultOrError
     {
         /// <seealso cref="Apply{TSource, TResult}" />
@@ -327,9 +329,10 @@ namespace Narvalo.Fx
         }
 
         #endregion
-    } // End of ResultOrError - T4: EmitExtensions().
+    }
 
     // Provides extension methods for Func<T> in the Kleisli category.
+    // T4: EmitKleisli().
     public static partial class Kleisli
     {
         public static ResultOrError<IEnumerable<TResult>> InvokeWith<TSource, TResult>(
@@ -360,16 +363,17 @@ namespace Narvalo.Fx
             Require.NotNull(second, nameof(second));
             return arg => second(arg).Bind(@this);
         }
-    } // End of Kleisli - T4: EmitKleisli().
+    }
 
     // Provides extension methods for IEnumerable<ResultOrError<T>>.
+    // T4: EmitEnumerableExtensions().
     public static partial class ResultOrError
     {
         public static ResultOrError<IEnumerable<TSource>> Collect<TSource>(
             this IEnumerable<ResultOrError<TSource>> @this)
             => @this.CollectImpl();
 
-    } // End of Sequence - T4: EmitEnumerableExtensions().
+    }
 }
 
 namespace Narvalo.Fx.Internal
@@ -382,6 +386,7 @@ namespace Narvalo.Fx.Internal
 
     // Provides default implementations for the extension methods for IEnumerable<ResultOrError<T>>.
     // You will certainly want to override them to improve performance.
+    // T4: EmitEnumerableInternal().
     internal static partial class EnumerableExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
@@ -418,7 +423,7 @@ namespace Narvalo.Fx.Internal
                 }
             }
         }
-    } // End of EnumerableExtensions - T4: EmitEnumerableInternal().
+    }
 }
 
 namespace Narvalo.Fx.Linq
@@ -435,6 +440,7 @@ namespace Narvalo.Fx.Linq
     // - Where     -> WhereBy
     // - Zip       -> ZipWith
     // - Aggregate -> Reduce or Fold
+    // T4: EmitLinqCore().
     public static partial class Qperators
     {
         public static ResultOrError<IEnumerable<TResult>> SelectWith<TSource, TResult>(
@@ -476,7 +482,7 @@ namespace Narvalo.Fx.Linq
             Func<TSource, TSource, ResultOrError<TSource>> accumulator,
             Func<ResultOrError<TSource>, bool> predicate)
             => @this.ReduceImpl(accumulator, predicate);
-    } // End of Iterable - T4: EmitLinqCore().
+    }
 }
 
 namespace Narvalo.Fx.Internal
@@ -488,6 +494,7 @@ namespace Narvalo.Fx.Internal
 
     // Provides default implementations for the extension methods for IEnumerable<T>.
     // You will certainly want to override them to improve performance.
+    // T4: EmitLinqInternal().
     internal static partial class EnumerableExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
@@ -658,5 +665,5 @@ namespace Narvalo.Fx.Internal
                 return retval;
             }
         }
-    } // End of EnumerableExtensions - T4: EmitLinqInternal().
+    }
 }

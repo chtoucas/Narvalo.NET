@@ -9,6 +9,12 @@ namespace Narvalo.Fx.Extensions
     /// </summary>
     public static partial class FuncExtensions
     {
+        public static Action Where(this Action @this, bool predicate)
+            => predicate ? @this : Stubs.Noop;
+
+        public static Action<TSource> Where<TSource>(this Action<TSource> @this, bool predicate)
+            => predicate ? @this : Stubs<TSource>.Ignore;
+
         public static Func<TResult> Bind<TSource, TResult>(
             this Func<TSource> @this,
             Func<TSource, Func<TResult>> selector)

@@ -9,12 +9,12 @@ namespace Narvalo.Fx
 
     public partial class Result<T, TError>
     {
-        public abstract Result<TResult, TError> Replace<TResult>(TResult value);
-
         [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Select", Justification = "[Intentionally] No trouble here, this 'Select' is the one from the LINQ standard query operators.")]
         public abstract Result<TResult, TError> Select<TResult>(Func<T, TResult> selector);
 
-        public abstract Result<TResult, TError> ReplaceBy<TResult>(Result<TResult, TError> other);
+        public abstract Result<TResult, TError> ReplaceBy<TResult>(TResult value);
+
+        public abstract Result<TResult, TError> Then<TResult>(Result<TResult, TError> other);
 
         public abstract Result<IEnumerable<T>, TError> Repeat(int count);
 
@@ -27,14 +27,14 @@ namespace Narvalo.Fx
                 return Result.Of<TResult, TError>(selector.Invoke(Value));
             }
 
-            public override Result<TResult, TError> ReplaceBy<TResult>(Result<TResult, TError> other)
+            public override Result<TResult, TError> ReplaceBy<TResult>(TResult value)
+                => Result.Of<TResult, TError>(value);
+
+            public override Result<TResult, TError> Then<TResult>(Result<TResult, TError> other)
                 => other;
 
             public override Result<IEnumerable<T>, TError> Repeat(int count)
                 => Result.Of<IEnumerable<T>, TError>(Enumerable.Repeat(Value, count));
-
-            public override Result<TResult, TError> Replace<TResult>(TResult value)
-                => Result.Of<TResult, TError>(value);
         }
 
         private partial class Error_
@@ -42,14 +42,14 @@ namespace Narvalo.Fx
             public override Result<TResult, TError> Select<TResult>(Func<T, TResult> selector)
                 => Result.FromError<TResult, TError>(Error);
 
-            public override Result<TResult, TError> ReplaceBy<TResult>(Result<TResult, TError> other)
+            public override Result<TResult, TError> ReplaceBy<TResult>(TResult value)
+                => Result.FromError<TResult, TError>(Error);
+
+            public override Result<TResult, TError> Then<TResult>(Result<TResult, TError> other)
                 => Result.FromError<TResult, TError>(Error);
 
             public override Result<IEnumerable<T>, TError> Repeat(int count)
                 => Result.FromError<IEnumerable<T>, TError>(Error);
-
-            public override Result<TResult, TError> Replace<TResult>(TResult value)
-                => Result.FromError<TResult, TError>(Error);
         }
     }
 

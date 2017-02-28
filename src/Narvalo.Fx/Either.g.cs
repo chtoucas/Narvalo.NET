@@ -20,6 +20,7 @@ namespace Narvalo.Fx
     using Narvalo.Fx.Linq;
 
     // Provides a set of static methods for Either<T, TRight>.
+    // T4: EmitHelpers().
     public static partial class Either
     {
         /// <summary>
@@ -103,9 +104,10 @@ namespace Narvalo.Fx
             };
 
         #endregion
-    } // End of Either - T4: EmitHelpers().
+    }
 
     // Provides extension methods for Either<T, TRight>.
+    // T4: EmitExtensions().
     public static partial class Either
     {
         /// <seealso cref="Apply{TSource, TResult, TRight}" />
@@ -318,9 +320,10 @@ namespace Narvalo.Fx
         }
 
         #endregion
-    } // End of Either - T4: EmitExtensions().
+    }
 
     // Provides extension methods for Func<T> in the Kleisli category.
+    // T4: EmitKleisli().
     public static partial class Kleisli
     {
         public static Either<IEnumerable<TResult>, TRight> InvokeWith<TSource, TResult, TRight>(
@@ -351,16 +354,17 @@ namespace Narvalo.Fx
             Require.NotNull(second, nameof(second));
             return arg => second(arg).Bind(@this);
         }
-    } // End of Kleisli - T4: EmitKleisli().
+    }
 
     // Provides extension methods for IEnumerable<Either<T, TRight>>.
+    // T4: EmitEnumerableExtensions().
     public static partial class Either
     {
         public static Either<IEnumerable<TSource>, TRight> Collect<TSource, TRight>(
             this IEnumerable<Either<TSource, TRight>> @this)
             => @this.CollectImpl();
 
-    } // End of Sequence - T4: EmitEnumerableExtensions().
+    }
 }
 
 namespace Narvalo.Fx.Internal
@@ -373,6 +377,7 @@ namespace Narvalo.Fx.Internal
 
     // Provides default implementations for the extension methods for IEnumerable<Either<T, TRight>>.
     // You will certainly want to override them to improve performance.
+    // T4: EmitEnumerableInternal().
     internal static partial class EnumerableExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
@@ -410,5 +415,5 @@ namespace Narvalo.Fx.Internal
                 }
             }
         }
-    } // End of EnumerableExtensions - T4: EmitEnumerableInternal().
+    }
 }
