@@ -157,8 +157,6 @@ namespace Narvalo.T4
             }
         }
 
-        protected bool SuppressMessage { get; set; } = false;
-
         /// <summary>
         /// Initializes the templating class then generates the output text of the transformation.
         /// </summary>

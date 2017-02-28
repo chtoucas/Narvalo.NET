@@ -11,9 +11,7 @@ public partial class MonadTemplate
     // T4: EmitLinqInternal().
     internal static partial class EnumerableExtensions
     {
-<#+ if (!SuppressMessage) { #>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-<#+ } #>
         internal static <#= Name #><IEnumerable<TResult>> SelectWithImpl<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><TResult>> selector)
@@ -24,9 +22,7 @@ public partial class MonadTemplate
             return @this.Select(selector).Collect();
         }
 
-<#+ if (!SuppressMessage) { #>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-<#+ } #>
         internal static <#= Name #><IEnumerable<TSource>> WhereByImpl<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><bool>> predicate)
@@ -71,9 +67,7 @@ public partial class MonadTemplate
             }
         }
 
-<#+ if (!SuppressMessage) { #>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-<#+ } #>
         internal static <#= Name #><IEnumerable<TResult>> ZipWithImpl<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
@@ -86,9 +80,7 @@ public partial class MonadTemplate
             return @this.Zip(second, resultSelector).Collect();
         }
 
-<#+ if (!SuppressMessage) { #>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-<#+ } #>
         internal static <#= Name #><TAccumulate> FoldImpl<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
@@ -114,9 +106,7 @@ public partial class MonadTemplate
             return retval;
         }
 
-<#+ if (!SuppressMessage) { #>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-<#+ } #>
         internal static <#= Name #><TAccumulate> FoldImpl<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
@@ -144,9 +134,7 @@ public partial class MonadTemplate
             return retval;
         }
 
-<#+ if (!SuppressMessage) { #>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-<#+ } #>
         internal static <#= Name #><TSource> ReduceImpl<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, <#= Name #><TSource>> accumulator)
@@ -176,9 +164,7 @@ public partial class MonadTemplate
             }
         }
 
-<#+ if (!SuppressMessage) { #>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-<#+ } #>
         internal static <#= Name #><TSource> ReduceImpl<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, <#= Name #><TSource>> accumulator,

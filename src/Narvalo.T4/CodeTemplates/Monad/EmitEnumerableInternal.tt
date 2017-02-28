@@ -10,9 +10,7 @@ public partial class MonadTemplate
     // T4: EmitEnumerableInternal().
     internal static partial class EnumerableExtensions
     {
-<#+ if (!SuppressMessage) { #>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-<#+ } #>
         internal static <#= Name #><IEnumerable<TSource><#= RTDecl #>> CollectImpl<TSource<#= RTDecl #>>(
             this IEnumerable<<#= Name #><TSource<#= RTDecl #>>> @this)
         {
@@ -55,9 +53,7 @@ public partial class MonadTemplate
         }
 <#+ if (HasSum) { #>
 
-<#+ if (!SuppressMessage) { #>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-<#+ } #>
         internal static <#= Name #><TSource> SumImpl<TSource>(
             this IEnumerable<<#= Name #><TSource>> @this)
         {

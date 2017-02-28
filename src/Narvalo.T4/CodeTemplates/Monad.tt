@@ -69,9 +69,7 @@ namespace <#= Namespace #>
 namespace <#= Namespace #>.Internal
 {
     using System.Collections.Generic;
-<#+ if (!SuppressMessage) { #>
     using System.Diagnostics.CodeAnalysis;
-<#+ } #>
     using System.Linq;
 
     using Narvalo.Fx.Linq;
@@ -126,9 +124,7 @@ namespace <#= Namespace #>.Internal
 {
     using System;
     using System.Collections.Generic;
-<#+ if (!SuppressMessage) { #>
     using System.Diagnostics.CodeAnalysis;
-<#+ } #>
     using System.Linq;
 
 <#+ EmitLinqInternal(); #>
