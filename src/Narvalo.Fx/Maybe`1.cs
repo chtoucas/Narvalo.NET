@@ -192,7 +192,6 @@ namespace Narvalo.Fx
     public partial struct Maybe<T>
     {
         // Named <c>maybeToList</c> in Haskell parlance.
-        [SuppressMessage("Microsoft.Contracts", "Suggestion-6-0", Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public IEnumerable<T> ToEnumerable() => IsSome ? Sequence.Of(Value) : Enumerable.Empty<T>();
 
         public IEnumerator<T> GetEnumerator() => ToEnumerable().GetEnumerator();
