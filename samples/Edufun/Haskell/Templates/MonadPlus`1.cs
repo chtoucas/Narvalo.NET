@@ -10,26 +10,24 @@ namespace Edufun.Haskell.Templates
     public partial class MonadPlus<T>
     {
         [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
-        public static MonadPlus<T> Zero { get { throw new NotImplementedException(); } }
+        public static MonadPlus<T> Zero { get { throw new PrototypeException(); } }
 
         public MonadPlus<T> Plus(MonadPlus<T> other)
         {
-            throw new NotImplementedException();
+            throw new PrototypeException();
         }
 
-        public MonadPlus<TResult> Bind<TResult>(Func<T, MonadPlus<TResult>> funM)
+        public MonadPlus<TResult> Bind<TResult>(Func<T, MonadPlus<TResult>> selector)
         {
-            throw new NotImplementedException();
+            throw new PrototypeException();
         }
 
         internal static MonadPlus<T> η(T value)
         {
-            throw new NotImplementedException();
+            throw new PrototypeException();
         }
 
         internal static MonadPlus<T> μ(MonadPlus<MonadPlus<T>> square)
-        {
-            return square.Bind(Stubs<MonadPlus<T>>.Identity);
-        }
+            => square.Bind(Stubs<MonadPlus<T>>.Identity);
     }
 }

@@ -2,16 +2,13 @@
 
 namespace Edufun.Haskell.Tmp
 {
-    using System;
-
     using Narvalo;
-    using Narvalo.Fx;
 
-    public delegate Monad<T> Kunc<T>();
+    public delegate Prototype<T> Kunc<T>();
 
-    public delegate Monad<TResult> Kunc<in T, TResult>(T arg);
+    public delegate Prototype<TResult> Kunc<in T, TResult>(T arg);
 
-    public delegate Monad<TResult> Kunc<in T1, in T2, TResult>(T1 arg1, T2 arg2);
+    public delegate Prototype<TResult> Kunc<in T1, in T2, TResult>(T1 arg1, T2 arg2);
 
     public delegate T Cokunc<T>(Comonad<T> arg);
 
@@ -19,22 +16,6 @@ namespace Edufun.Haskell.Tmp
 
     public static class Kleisli
     {
-        public static readonly Kunc<Unit, Unit> Noop = _ => Monad.Unit;
-
-        public static Kunc<T, Unit> Ignore<T>() => _ => Monad.Unit;
-
-        public static Kunc<Unit, Unit> ToKunc(this Action @this)
-            => _ => { @this.Invoke(); return Monad.Unit; };
-
-        public static Kunc<TSource, Unit> ToKunc<TSource>(this Action<TSource> @this)
-            => _ => { @this.Invoke(_); return Monad.Unit; };
-
-        // [Haskell] =<<
-        public static Monad<TResult> Invoke<TSource, TResult>(
-           this Kunc<TSource, TResult> @this,
-           Monad<TSource> monad)
-            => monad.Bind(@this);
-
         // [Haskell] >=>
         public static Kunc<TSource, TResult> Compose<TSource, TMiddle, TResult>(
             this Kunc<TSource, TMiddle> @this,
@@ -42,7 +23,7 @@ namespace Edufun.Haskell.Tmp
         {
             Require.NotNull(@this, nameof(@this));
 
-            return _ => @this.Invoke(_).Bind(kun);
+            return arg => @this.Invoke(arg).Bind(_ => kun(_));
         }
 
         // [Haskell] <=<
@@ -53,13 +34,7 @@ namespace Edufun.Haskell.Tmp
             Expect.NotNull(@this);
             Require.NotNull(kun, nameof(kun));
 
-            return _ => kun.Invoke(_).Bind(@this);
+            return arg => kun.Invoke(arg).Bind(_ => @this(_));
         }
-
-        public static Kunc<Unit, Unit> Filter(this Kunc<Unit, Unit> @this, bool predicate)
-            => predicate ? @this : Noop;
-
-        public static Kunc<TSource, Unit> Filter<TSource>(this Kunc<TSource, Unit> @this, bool predicate)
-            => predicate ? @this : Ignore<TSource>();
     }
 }

@@ -16,6 +16,7 @@ using global::Narvalo.Fx;
 namespace Edufun.Haskell.Templates
 {
     // Implements core Comonad methods.
+    // T4: EmitComonadCore().
     public static partial class Comonad
     {
         /// <remarks>
@@ -37,6 +38,6 @@ namespace Edufun.Haskell.Templates
 
             return Comonad<T>.δ(value);
         }
-    } // End of Comonad - T4: EmitComonadCore().
+    }
 }
 

@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Edufun.Sequences
+namespace Edufun
 {
     using System;
     using System.Collections.Generic;
@@ -12,7 +12,7 @@ namespace Edufun.Sequences
     // Other useful posts:
     // https://blogs.msdn.microsoft.com/madst/2007/05/11/recursive-lambda-expressions/
     // https://blogs.msdn.microsoft.com/ericlippert/2006/08/18/why-does-a-recursive-lambda-cause-a-definite-assignment-error/
-    public static class Anonymous
+    public static class Thunk
     {
         delegate TResult Recursive1<TSource, TResult>(Recursive1<TSource, TResult> rec, TSource source);
 

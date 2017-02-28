@@ -23,6 +23,7 @@ namespace Edufun.Haskell.Templates
     using Edufun.Haskell.Templates.Linq;
 
     // Provides a set of static methods for Monad<T>.
+    // T4: EmitHelpers().
     public static partial class Monad
     {
         /// <summary>
@@ -115,9 +116,10 @@ namespace Edufun.Haskell.Templates
             };
 
         #endregion
-    } // End of Monad - T4: EmitHelpers().
+    }
 
     // Provides extension methods for Monad<T>.
+    // T4: EmitExtensions().
     public static partial class Monad
     {
         /// <seealso cref="Apply{TSource, TResult}" />
@@ -330,9 +332,10 @@ namespace Edufun.Haskell.Templates
         }
 
         #endregion
-    } // End of Monad - T4: EmitExtensions().
+    }
 
     // Provides extension methods for Func<T> in the Kleisli category.
+    // T4: EmitKleisli().
     public static partial class Kleisli
     {
         public static Monad<IEnumerable<TResult>> InvokeWith<TSource, TResult>(
@@ -363,29 +366,33 @@ namespace Edufun.Haskell.Templates
             Require.NotNull(second, nameof(second));
             return arg => second(arg).Bind(@this);
         }
-    } // End of Kleisli - T4: EmitKleisli().
+    }
 
     // Provides extension methods for IEnumerable<Monad<T>>.
+    // T4: EmitEnumerableExtensions().
     public static partial class Monad
     {
         public static Monad<IEnumerable<TSource>> Collect<TSource>(
             this IEnumerable<Monad<TSource>> @this)
             => @this.CollectImpl();
 
-    } // End of Sequence - T4: EmitEnumerableExtensions().
+    }
 }
 
 namespace Edufun.Haskell.Templates.Internal
 {
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
     using Narvalo.Fx.Linq;
 
     // Provides default implementations for the extension methods for IEnumerable<Monad<T>>.
     // You will certainly want to override them to improve performance.
+    // T4: EmitEnumerableInternal().
     internal static partial class EnumerableExtensions
     {
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Monad<IEnumerable<TSource>> CollectImpl<TSource>(
             this IEnumerable<Monad<TSource>> @this)
         {
@@ -419,7 +426,7 @@ namespace Edufun.Haskell.Templates.Internal
                 }
             }
         }
-    } // End of EnumerableExtensions - T4: EmitEnumerableInternal().
+    }
 }
 
 namespace Edufun.Haskell.Templates.Linq
@@ -436,6 +443,7 @@ namespace Edufun.Haskell.Templates.Linq
     // - Where     -> WhereBy
     // - Zip       -> ZipWith
     // - Aggregate -> Reduce or Fold
+    // T4: EmitLinqCore().
     public static partial class Qperators
     {
         public static Monad<IEnumerable<TResult>> SelectWith<TSource, TResult>(
@@ -477,19 +485,22 @@ namespace Edufun.Haskell.Templates.Linq
             Func<TSource, TSource, Monad<TSource>> accumulator,
             Func<Monad<TSource>, bool> predicate)
             => @this.ReduceImpl(accumulator, predicate);
-    } // End of Iterable - T4: EmitLinqCore().
+    }
 }
 
 namespace Edufun.Haskell.Templates.Internal
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
     // Provides default implementations for the extension methods for IEnumerable<T>.
     // You will certainly want to override them to improve performance.
+    // T4: EmitLinqInternal().
     internal static partial class EnumerableExtensions
     {
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Monad<IEnumerable<TResult>> SelectWithImpl<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, Monad<TResult>> selector)
@@ -500,6 +511,7 @@ namespace Edufun.Haskell.Templates.Internal
             return @this.Select(selector).Collect();
         }
 
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Monad<IEnumerable<TSource>> WhereByImpl<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Monad<bool>> predicate)
@@ -536,6 +548,7 @@ namespace Edufun.Haskell.Templates.Internal
             }
         }
 
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Monad<IEnumerable<TResult>> ZipWithImpl<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
@@ -548,6 +561,7 @@ namespace Edufun.Haskell.Templates.Internal
             return @this.Zip(second, resultSelector).Collect();
         }
 
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Monad<TAccumulate> FoldImpl<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
@@ -571,6 +585,7 @@ namespace Edufun.Haskell.Templates.Internal
             return retval;
         }
 
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Monad<TAccumulate> FoldImpl<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
@@ -596,6 +611,7 @@ namespace Edufun.Haskell.Templates.Internal
             return retval;
         }
 
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Monad<TSource> ReduceImpl<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Monad<TSource>> accumulator)
@@ -623,6 +639,7 @@ namespace Edufun.Haskell.Templates.Internal
             }
         }
 
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Monad<TSource> ReduceImpl<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Monad<TSource>> accumulator,
@@ -651,6 +668,6 @@ namespace Edufun.Haskell.Templates.Internal
                 return retval;
             }
         }
-    } // End of EnumerableExtensions - T4: EmitLinqInternal().
+    }
 }
 

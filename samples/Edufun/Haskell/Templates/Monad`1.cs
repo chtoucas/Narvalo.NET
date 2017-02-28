@@ -8,20 +8,17 @@ namespace Edufun.Haskell.Templates
 
     public partial class Monad<T>
     {
-        public Monad<TResult> Bind<TResult>(Func<T, Monad<TResult>> funM)
+        public Monad<TResult> Bind<TResult>(Func<T, Monad<TResult>> selector)
         {
-            throw new NotImplementedException();
+            throw new PrototypeException();
         }
 
         internal static Monad<T> η(T value)
         {
-            throw new NotImplementedException();
+            throw new PrototypeException();
         }
 
         internal static Monad<T> μ(Monad<Monad<T>> square)
-        {
-            // REVIEW: Why can't I use "_ => _" as with C# 5?
-            return square.Bind(Stubs<Monad<T>>.Identity);
-        }
+            => square.Bind(Stubs<Monad<T>>.Identity);
     }
 }

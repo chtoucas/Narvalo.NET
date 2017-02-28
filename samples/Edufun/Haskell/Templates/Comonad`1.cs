@@ -6,24 +6,18 @@ namespace Edufun.Haskell.Templates
 
     public sealed class Comonad<T>
     {
-        public Comonad<TResult> Extend<TResult>(Func<Comonad<T>, TResult> fun)
+        public Comonad<TResult> Extend<TResult>(Func<Comonad<T>, TResult> func)
         {
-            throw new NotImplementedException();
+            throw new PrototypeException();
         }
 
-        public Comonad<TResult> Map<TResult>(Func<T, TResult> fun)
-        {
-            return Extend(_ => fun(ε(_)));
-        }
+        public Comonad<TResult> Map<TResult>(Func<T, TResult> func) => Extend(_ => func(ε(_)));
 
         internal static T ε(Comonad<T> monad)
         {
-            throw new NotImplementedException();
+            throw new PrototypeException();
         }
 
-        internal static Comonad<Comonad<T>> δ(Comonad<T> monad)
-        {
-            return monad.Extend(_ => _);
-        }
+        internal static Comonad<Comonad<T>> δ(Comonad<T> monad) => monad.Extend(_ => _);
     }
 }
