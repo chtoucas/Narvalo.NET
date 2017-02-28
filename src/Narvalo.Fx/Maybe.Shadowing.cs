@@ -119,7 +119,6 @@ namespace Narvalo.Fx.Linq
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
-            Warrant.NotNull<IEnumerable<TSource>>();
 
             return Maybe.Of(WhereAnyIterator(@this, predicate));
         }
