@@ -137,7 +137,6 @@ namespace Narvalo.Finance
 
         public Money Normalize(IRoundingAdjuster adjuster)
         {
-            Expect.NotNull(adjuster);
             if (IsNormalized) { return this; }
             return FromMajor(Amount, Currency, adjuster);
         }
@@ -365,17 +364,9 @@ namespace Narvalo.Finance
     // Implements the IFormattable interface.
     public partial struct Money
     {
-        public override string ToString()
-        {
-            Warrant.NotNull<string>();
-            return FormatImpl(null, NumberFormatInfo.CurrentInfo);
-        }
+        public override string ToString() => FormatImpl(null, NumberFormatInfo.CurrentInfo);
 
-        public string ToString(string format)
-        {
-            Warrant.NotNull<string>();
-            return FormatImpl(format, NumberFormatInfo.CurrentInfo);
-        }
+        public string ToString(string format) => FormatImpl(format, NumberFormatInfo.CurrentInfo);
 
         public string ToString(IFormatProvider formatProvider) => ToString(null, formatProvider);
 
@@ -393,7 +384,6 @@ namespace Narvalo.Finance
         private string FormatImpl(string format, NumberFormatInfo info)
         {
             Demand.NotNull(info);
-            Warrant.NotNull<string>();
 
             var spec = MoneyFormat.Parse(format, Currency.FixedDecimalPlaces);
 

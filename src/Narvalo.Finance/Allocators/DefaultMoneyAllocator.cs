@@ -9,7 +9,6 @@ namespace Narvalo.Finance.Allocators
         public IEnumerable<Money> Allocate(Money money, int count)
         {
             Require.Range(count > 1, nameof(count));
-            Warrant.NotNull<IEnumerable<Money>>();
 
             var currency = money.Currency;
             decimal total = money.Amount;
@@ -27,8 +26,6 @@ namespace Narvalo.Finance.Allocators
 
         public IEnumerable<Money> Allocate(Money money, RatioArray ratios)
         {
-            Warrant.NotNull<IEnumerable<Money>>();
-
             var currency = money.Currency;
             decimal total = money.Amount;
 

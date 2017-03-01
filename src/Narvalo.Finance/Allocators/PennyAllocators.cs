@@ -12,7 +12,6 @@ namespace Narvalo.Finance.Allocators
         public static IEnumerable<Moneypenny> Allocate(Moneypenny penny, int count)
         {
             Require.Range(count > 1, nameof(count));
-            Warrant.NotNull<IEnumerable<Moneypenny>>();
 
             long q = penny.Amount / count;
             var part = new Moneypenny(q, penny.Currency);
@@ -28,7 +27,6 @@ namespace Narvalo.Finance.Allocators
         public static IEnumerable<Moneypenny> AllocateEvenly(Moneypenny penny, int count)
         {
             Require.Range(count > 1, nameof(count));
-            Warrant.NotNull<IEnumerable<Moneypenny>>();
 
             var cy = penny.Currency;
 

@@ -25,10 +25,6 @@ namespace Narvalo.Finance
         internal const int PartyLength = InstitutionPart.Length + CountryPart.Length + LocationPart.Length;
         internal const int BicLength = PartyLength + BranchPart.Length;
 
-        private readonly string _branchCode;
-        private readonly string _countryCode;
-        private readonly string _institutionCode;
-        private readonly string _locationCode;
         private readonly string _value;
 
         private Bic(
@@ -42,12 +38,7 @@ namespace Narvalo.Finance
                 locationCode,
                 branchCode,
                 institutionCode + countryCode + locationCode + branchCode)
-        {
-            Expect.NotNull(institutionCode);
-            Expect.NotNull(countryCode);
-            Expect.NotNull(locationCode);
-            Expect.NotNull(branchCode);
-        }
+        { }
 
         private Bic(
             string institutionCode,
@@ -62,42 +53,30 @@ namespace Narvalo.Finance
             Demand.NotNull(branchCode);
             Demand.NotNull(value);
 
-            _institutionCode = institutionCode;
-            _countryCode = countryCode;
-            _locationCode = locationCode;
-            _branchCode = branchCode;
+            InstitutionCode = institutionCode;
+            CountryCode = countryCode;
+            LocationCode = locationCode;
+            BranchCode = branchCode;
             _value = value;
         }
 
         /// <summary>
         /// Gets the branch code.
         /// </summary>
-        public string BranchCode
-        {
-            get { Warrant.NotNull<string>(); return _branchCode; }
-        }
+        public string BranchCode { get; }
 
-        public string BusinessParty
-        {
-            get { Warrant.NotNull<string>(); return InstitutionCode + CountryCode + LocationCode; }
-        }
+        public string BusinessParty => InstitutionCode + CountryCode + LocationCode;
 
         /// <summary>
         /// Gets the ISO country code.
         /// </summary>
-        public string CountryCode
-        {
-            get { Warrant.NotNull<string>(); return _countryCode; }
-        }
+        public string CountryCode { get; }
 
         /// <summary>
         /// Gets the institution code.
         /// </summary>
         /// <remarks>As of ISO 9362:2014, this is also the Business party prefix.</remarks>
-        public string InstitutionCode
-        {
-            get { Warrant.NotNull<string>(); return _institutionCode; }
-        }
+        public string InstitutionCode { get; }
 
         // Connected to the SWIFTNet FIN network?
         public bool IsSwiftConnected => !IsSwiftTest && LocationCode[1] != SWIFT_NOT_CONNECTED_MARK;
@@ -111,24 +90,14 @@ namespace Narvalo.Finance
         /// Gets the location code.
         /// </summary>
         /// <remarks>As of ISO 9362:2014, this is also the Business party suffix.</remarks>
-        public string LocationCode
-        {
-            get { Warrant.NotNull<string>(); return _locationCode; }
-        }
+        public string LocationCode { get; }
 
         public static Bic Create(
             string institutionCode,
             string countryCode,
             string locationCode,
             string branchCode)
-        {
-            Expect.NotNull(institutionCode);
-            Expect.NotNull(countryCode);
-            Expect.NotNull(locationCode);
-            Expect.NotNull(branchCode);
-
-            return Create(institutionCode, countryCode, locationCode, branchCode, BicVersion.Default);
-        }
+            => Create(institutionCode, countryCode, locationCode, branchCode, BicVersion.Default);
 
         public static Bic Create(
             string institutionCode,
@@ -192,12 +161,7 @@ namespace Narvalo.Finance
             return Result.Of(new Bic(institutionCode, countryCode, locationCode, branchCode, value));
         }
 
-        public override string ToString()
-        {
-            Warrant.NotNull<string>();
-
-            return _value;
-        }
+        public override string ToString() => _value;
 
         private static bool CheckLength(string value)
             => value != null && (value.Length == PartyLength || value.Length == BicLength);
@@ -262,8 +226,6 @@ namespace Narvalo.Finance
 
             public static string FromBic(string value, BicVersion version)
             {
-                Expect.True(value.Length >= StartIndex + Length);
-
                 var retval = value.Substring(StartIndex, Length);
 
                 return CheckContent(retval, version) ? retval : null;
@@ -323,25 +285,3 @@ namespace Narvalo.Finance
         public override int GetHashCode() => _value.GetHashCode();
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Finance
-{
-    using System.Diagnostics.Contracts;
-
-    public partial struct Bic
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_branchCode != null);
-            Contract.Invariant(_countryCode != null);
-            Contract.Invariant(_institutionCode != null);
-            Contract.Invariant(_locationCode != null);
-            Contract.Invariant(_value != null);
-        }
-    }
-}
-
-#endif

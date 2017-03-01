@@ -13,18 +13,14 @@
 namespace Narvalo.Finance.Globalization
 {
     using System.Collections.Generic;
-    using System.Diagnostics.Contracts;
 
     public partial class CountryISOCodes
     {
         // All alpha-2 codes as defined in ISO 3166-1 alpha-2.
-        [ContractVerification(false)]
         private static HashSet<string> TwoLetterCodeSet
         {
             get
             {
-                Warrant.NotNull<HashSet<string>>();
-
                 if (s_TwoLetterCodeSet == null)
                 {
                     var codeSet = new HashSet<string>() {

@@ -42,23 +42,5 @@ namespace Narvalo.Finance.Internal
                 Narvalo.Demand.True(Ascii.IsUpperLetter(code));
             }
         }
-
-        public static partial class Expect
-        {
-            [DebuggerHidden]
-            [ContractAbbreviator]
-            [Conditional("CONTRACTS_FULL")]
-            [ExcludeFromCodeCoverage]
-            public static void CurrencyCode(string code)
-            {
-                Narvalo.Expect.NotNull(code);
-
-                // A currency code MUST be composed of exactly 3 letters.
-                Narvalo.Expect.Range(code.Length == 3);
-
-                // A currency code MUST only contain uppercase ASCII letters.
-                Narvalo.Expect.True(Ascii.IsUpperLetter(code));
-            }
-        }
     }
 }

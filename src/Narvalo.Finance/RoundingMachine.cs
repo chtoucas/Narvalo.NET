@@ -100,14 +100,12 @@ namespace Narvalo.Finance
     {
         public static Money Add(Money money, decimal amount, IRoundingAdjuster adjuster)
         {
-            Expect.NotNull(adjuster);
             if (amount == 0m) { return money; }
             return Money.FromMajor(money.Amount + amount, money.Currency, adjuster);
         }
 
         public static Money Add(Money money, Money other, IRoundingAdjuster adjuster)
         {
-            Expect.NotNull(adjuster);
             money.ThrowIfCurrencyMismatch(other, nameof(other));
 
             var amount = money.Amount + other.Amount;
@@ -118,14 +116,10 @@ namespace Narvalo.Finance
         }
 
         public static Money Subtract(Money money, decimal amount, IRoundingAdjuster adjuster)
-        {
-            Expect.NotNull(adjuster);
-            return Add(money, -amount, adjuster);
-        }
+            => Add(money, -amount, adjuster);
 
         public static Money Subtract(Money money, Money other, IRoundingAdjuster adjuster)
         {
-            Expect.NotNull(adjuster);
             money.ThrowIfCurrencyMismatch(other, nameof(other));
 
             var amount = money.Amount - other.Amount;
@@ -136,22 +130,13 @@ namespace Narvalo.Finance
         }
 
         public static Money Multiply(Money money, decimal multiplier, IRoundingAdjuster adjuster)
-        {
-            Expect.NotNull(adjuster);
-            return Money.FromMajor(multiplier * money.Amount, money.Currency, adjuster);
-        }
+            => Money.FromMajor(multiplier * money.Amount, money.Currency, adjuster);
 
         public static Money Divide(Money money, decimal divisor, IRoundingAdjuster adjuster)
-        {
-            Expect.NotNull(adjuster);
-            return Money.FromMajor(money.Amount / divisor, money.Currency, adjuster);
-        }
+            => Money.FromMajor(money.Amount / divisor, money.Currency, adjuster);
 
         public static Money Remainder(Money money, decimal divisor, IRoundingAdjuster adjuster)
-        {
-            Expect.NotNull(adjuster);
-            return Money.FromMajor(money.Amount % divisor, money.Currency, adjuster);
-        }
+            => Money.FromMajor(money.Amount % divisor, money.Currency, adjuster);
     }
 
     // LINQ-like Sum() + MidpointRounding.

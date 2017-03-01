@@ -30,26 +30,17 @@ namespace Narvalo.Finance
         /// <summary>
         /// Gets the Basic Bank Account Number (BBAN).
         /// </summary>
-        public string Bban
-        {
-            get { Warrant.NotNull<string>(); return _parts.Bban; }
-        }
+        public string Bban => _parts.Bban;
 
         /// <summary>
         /// Gets the check digits.
         /// </summary>
-        public string CheckDigits
-        {
-            get { Warrant.NotNull<string>(); return _parts.CheckDigits; }
-        }
+        public string CheckDigits => _parts.CheckDigits;
 
         /// <summary>
         /// Gets the country code.
         /// </summary>
-        public string CountryCode
-        {
-            get { Warrant.NotNull<string>(); return _parts.CountryCode; }
-        }
+        public string CountryCode => _parts.CountryCode;
 
         public IbanValidationLevels VerificationLevels { get; }
 
@@ -64,29 +55,16 @@ namespace Narvalo.Finance
         // REVIEW: TryBuild? Add validation?
         public static Iban Build(string countryCode, string bban)
         {
-            Expect.NotNull(countryCode);
-            Expect.NotNull(bban);
-
             var parts = IbanParts.Build(countryCode, bban);
 
             return new Iban(parts, IbanValidationLevels.Integrity);
         }
 
         public static Iban Create(string countryCode, string checkDigits, string bban)
-        {
-            Expect.NotNull(countryCode);
-            Expect.NotNull(checkDigits);
-            Expect.NotNull(bban);
-
-            return Create(countryCode, checkDigits, bban, IbanValidationLevels.Default);
-        }
+            => Create(countryCode, checkDigits, bban, IbanValidationLevels.Default);
 
         public static Iban Create(string countryCode, string checkDigits, string bban, IbanValidationLevels levels)
         {
-            Expect.NotNull(countryCode);
-            Expect.NotNull(checkDigits);
-            Expect.NotNull(bban);
-
             var parts = IbanParts.Create(countryCode, checkDigits, bban);
 
             var result = IbanValidator.TryValidate(parts, levels);
@@ -155,7 +133,6 @@ namespace Narvalo.Finance
         private static string PreprocessInput(string text, IbanStyles styles)
         {
             Demand.NotNull(text);
-            Warrant.NotNull<string>();
 
             // Fast track.
             if (styles == IbanStyles.None) { return text; }
@@ -236,26 +213,12 @@ namespace Narvalo.Finance
     // Implements the IFormattable interface.
     public partial struct Iban
     {
-        public override string ToString()
-        {
-            Warrant.NotNull<string>();
+        public override string ToString() => _parts.ToString(IbanParts.DefaultFormat, null);
 
-            return _parts.ToString(IbanParts.DefaultFormat, null);
-        }
-
-        public string ToString(string format)
-        {
-            Warrant.NotNull<string>();
-
-            return _parts.ToString(format, null);
-        }
+        public string ToString(string format) => _parts.ToString(format, null);
 
         public string ToString(string format, IFormatProvider formatProvider)
-        {
-            Warrant.NotNull<string>();
-
-            return _parts.ToString(format, formatProvider);
-        }
+            => _parts.ToString(format, formatProvider);
     }
 
     // Implements the IEquatable<Iban> interface.

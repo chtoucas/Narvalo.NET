@@ -102,19 +102,10 @@ namespace Narvalo.Finance
         }
 
         public static Moneypenny FromMajor(decimal major, Currency currency, MidpointRounding mode)
-        {
-            Expect.True(currency.HasFixedDecimalPlaces);
-
-            return FromMinor(currency.ConvertToMinor(major), currency, mode);
-        }
+            => FromMinor(currency.ConvertToMinor(major), currency, mode);
 
         public static Moneypenny FromMajor(decimal major, Currency currency, IRoundingAdjuster adjuster)
-        {
-            Expect.True(currency.HasFixedDecimalPlaces);
-            Expect.NotNull(adjuster);
-
-            return FromMinor(currency.ConvertToMinor(major), currency, adjuster);
-        }
+            => FromMinor(currency.ConvertToMinor(major), currency, adjuster);
 
         public static Moneypenny? TryCreateFromMinor(decimal minor, Currency currency, MidpointRounding mode)
         {
@@ -138,19 +129,10 @@ namespace Narvalo.Finance
         }
 
         public static Moneypenny? TryCreateFromMajor(decimal major, Currency currency, MidpointRounding mode)
-        {
-            Expect.True(currency.HasFixedDecimalPlaces);
-
-            return TryCreateFromMinor(currency.ConvertToMinor(major), currency, mode);
-        }
+            => TryCreateFromMinor(currency.ConvertToMinor(major), currency, mode);
 
         public static Moneypenny? TryCreateFromMajor(decimal major, Currency currency, IRoundingAdjuster adjuster)
-        {
-            Expect.True(currency.HasFixedDecimalPlaces);
-            Expect.NotNull(adjuster);
-
-            return TryCreateFromMinor(currency.ConvertToMinor(major), currency, adjuster);
-        }
+            => TryCreateFromMinor(currency.ConvertToMinor(major), currency, adjuster);
     }
 
     // Domain-specific conversions.
@@ -231,17 +213,9 @@ namespace Narvalo.Finance
     // Implements the IFormattable interface.
     public partial struct Moneypenny
     {
-        public override string ToString()
-        {
-            Warrant.NotNull<string>();
-            return FormatImpl(null, NumberFormatInfo.CurrentInfo);
-        }
+        public override string ToString() => FormatImpl(null, NumberFormatInfo.CurrentInfo);
 
-        public string ToString(string format)
-        {
-            Warrant.NotNull<string>();
-            return FormatImpl(format, NumberFormatInfo.CurrentInfo);
-        }
+        public string ToString(string format) => FormatImpl(format, NumberFormatInfo.CurrentInfo);
 
         public string ToString(IFormatProvider formatProvider) => ToString(null, formatProvider);
 
@@ -259,7 +233,6 @@ namespace Narvalo.Finance
         private string FormatImpl(string format, NumberFormatInfo info)
         {
             Demand.NotNull(info);
-            Warrant.NotNull<string>();
 
             MoneyFormat spec;
 

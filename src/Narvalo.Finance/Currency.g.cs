@@ -13,7 +13,6 @@
 namespace Narvalo.Finance
 {
     using System.Collections.Generic;
-    using System.Diagnostics.Contracts;
     using System.Threading;
 
     public partial struct Currency
@@ -204,13 +203,10 @@ namespace Narvalo.Finance
         /// <summary>
         /// Gets the set of legacy currencies.
         /// </summary>
-        [ContractVerification(false)]
         internal static HashSet<string> WithdrawnCodes
         {
             get
             {
-                Warrant.NotNull<HashSet<string>>();
-
                 if (s_WithdrawnCodes == null)
                 {
                     var set = new HashSet<string>() {

@@ -20,10 +20,7 @@ namespace Narvalo.Finance.Extensions
             => new MidpointRoundingMoneyAllocator(mode).Allocate(@this, count);
 
         public static IEnumerable<Money> Allocate(this Money @this, int count, IRoundingAdjuster adjuster)
-        {
-            Expect.NotNull(adjuster);
-            return new RoundingMoneyAllocator(adjuster).Allocate(@this, count);
-        }
+            => new RoundingMoneyAllocator(adjuster).Allocate(@this, count);
 
         public static IEnumerable<Money> Allocate(this Money @this, int count, IMoneyAllocator allocator)
         {
@@ -38,10 +35,7 @@ namespace Narvalo.Finance.Extensions
             => new MidpointRoundingMoneyAllocator(mode).Allocate(@this, ratios);
 
         public static IEnumerable<Money> Allocate(this Money @this, RatioArray ratios, IRoundingAdjuster adjuster)
-        {
-            Expect.NotNull(adjuster);
-            return new RoundingMoneyAllocator(adjuster).Allocate(@this, ratios);
-        }
+            => new RoundingMoneyAllocator(adjuster).Allocate(@this, ratios);
 
         public static IEnumerable<Money> Allocate(this Money @this, RatioArray ratios, IMoneyAllocator allocator)
         {

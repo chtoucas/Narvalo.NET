@@ -20,7 +20,7 @@ namespace Narvalo.Finance.Generic
 
         public short? MinorUnits { get; }
 
-        public string Code { get { Warrant.NotNull<string>(); return Name; } }
+        public string Code => Name;
 
         public int DecimalPlaces => MinorUnits ?? 0;
 
@@ -40,26 +40,13 @@ namespace Narvalo.Finance.Generic
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "[Intentionally] When (if?) we add currencies not using a decimal system, this value will no longer look like a constant.")]
         public decimal One => 1m;
 
-        protected static string Name
-        {
-            get { Warrant.NotNull<string>(); return typeof(TCurrency).Name; }
-        }
+        protected static string Name => typeof(TCurrency).Name;
 
         public Currency ToCurrency() => new Currency(Code, MinorUnits);
 
-        public override string ToString()
-        {
-            Warrant.NotNull<string>();
+        public override string ToString() => Code;
 
-            return Code;
-        }
-
-        public bool IsNativeTo(CultureInfo cultureInfo)
-        {
-            Expect.NotNull(cultureInfo);
-
-            return CurrencyHelpers.IsNativeTo(Code, cultureInfo);
-        }
+        public bool IsNativeTo(CultureInfo cultureInfo) => CurrencyHelpers.IsNativeTo(Code, cultureInfo);
 
         internal decimal ConvertToMajor(decimal minor) => Epsilon * minor;
 

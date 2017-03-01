@@ -5,7 +5,6 @@ namespace Narvalo.Finance
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Linq;
 
@@ -42,8 +41,6 @@ namespace Narvalo.Finance
         // This one is initialized upon first use.
         private static HashSet<string> s_WithdrawnCodes;
 
-        private readonly string _code;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Currency" /> class for the specified code.
         /// </summary>
@@ -55,14 +52,13 @@ namespace Narvalo.Finance
             Sentinel.Demand.CurrencyCode(code);
             Demand.True(!minorUnits.HasValue || minorUnits >= 0);
 
-            _code = code;
+            Code = code;
             MinorUnits = minorUnits;
         }
 
         /// <summary>
         /// Gets the list of available currency codes/minor units.
         /// </summary>
-        [ContractVerification(false)]
         internal static Dictionary<string, short?> Codes => s_Codes;
 
         /// <summary>
@@ -74,7 +70,7 @@ namespace Narvalo.Finance
         /// Gets the alphabetic code of the currency.
         /// </summary>
         /// <value>The alphabetic code of the currency.</value>
-        public string Code { get { Warrant.NotNull<string>(); return _code; } }
+        public string Code { get; }
 
         /// <summary>
         /// Gets the number of minor units.
@@ -227,7 +223,6 @@ namespace Narvalo.Finance
         public static Currency Of(string code)
         {
             Require.NotNull(code, nameof(code));
-            Sentinel.Expect.CurrencyCode(code);
 
             short? minorUnits;
             if (!Codes.TryGetValue(code, out minorUnits))
@@ -241,8 +236,6 @@ namespace Narvalo.Finance
         /// <seealso cref="TryCreate(string, CurrencyTypes)"/>
         public static Currency Of(string code, CurrencyTypes types)
         {
-            Sentinel.Expect.CurrencyCode(code);
-
             var cy = TryCreate(code, types);
             if (!cy.HasValue)
             {
@@ -255,7 +248,6 @@ namespace Narvalo.Finance
         public static Currency? TryCreate(string code)
         {
             Require.NotNull(code, nameof(code));
-            Sentinel.Expect.CurrencyCode(code);
 
             short? minorUnits;
             if (!Codes.TryGetValue(code, out minorUnits)) { return null; }
@@ -266,7 +258,6 @@ namespace Narvalo.Finance
         public static Currency? TryCreate(string code, CurrencyTypes types)
         {
             Require.NotNull(code, nameof(code));
-            Sentinel.Expect.CurrencyCode(code);
 
             if (types.Contains(CurrencyTypes.Active))
             {
@@ -308,12 +299,6 @@ namespace Narvalo.Finance
         public static Currency ForRegion(RegionInfo regionInfo)
         {
             Require.NotNull(regionInfo, nameof(regionInfo));
-
-            //var code = regionInfo.ISOCurrencySymbol;
-            //Contract.Assume(code != null);
-            //Contract.Assume(code.Length != 0);   // Should not be necessary, but CCCheck insists.
-            //Contract.Assume(Ascii.IsUpperLetter(code));
-            //Contract.Assume(code.Length == 3);
 
             return Of(regionInfo.ISOCurrencySymbol);
         }
@@ -461,12 +446,7 @@ namespace Narvalo.Finance
             return true;
         }
 
-        public bool IsNativeTo(CultureInfo cultureInfo)
-        {
-            Expect.NotNull(cultureInfo);
-
-            return CurrencyHelpers.IsNativeTo(Code, cultureInfo);
-        }
+        public bool IsNativeTo(CultureInfo cultureInfo) => CurrencyHelpers.IsNativeTo(Code, cultureInfo);
 
         /// <summary>
         /// Converts an amount from minor units to major units.
@@ -480,12 +460,7 @@ namespace Narvalo.Finance
         /// <param name="major">The amount in major units to convert.</param>
         internal decimal ConvertToMinor(decimal major) => Factor * major;
 
-        public override string ToString()
-        {
-            Warrant.NotNull<string>();
-
-            return Code;
-        }
+        public override string ToString() => Code;
 
         private static void SwapReferences<T>(ref T lhs, ref T rhs)
         {
@@ -578,22 +553,3 @@ namespace Narvalo.Finance
         public static Currency Silver => Of("XAG");
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Finance
-{
-    using System.Diagnostics.Contracts;
-
-    public partial struct Currency
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_code != null);
-            Contract.Invariant(_code.Length == 3);
-        }
-    }
-}
-
-#endif

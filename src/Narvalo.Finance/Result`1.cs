@@ -38,18 +38,12 @@ namespace Narvalo.Finance
         internal static Result<T> FromError(string message)
         {
             Require.NotNull(message, nameof(message));
-            Warrant.NotNull<Result<T>>();
 
             return new Error_(message);
         }
 
         [DebuggerHidden]
-        internal static Result<T> Return(T value)
-        {
-            Warrant.NotNull<Result<T>>();
-
-            return new Success_(value);
-        }
+        internal static Result<T> Return(T value) => new Success_(value);
 
         public T? ToNullable()
         {
@@ -107,12 +101,7 @@ namespace Narvalo.Finance
 
             public override int GetHashCode() => EqualityComparer<T>.Default.GetHashCode(Value);
 
-            public override string ToString()
-            {
-                Warrant.NotNull<string>();
-
-                return Format.Current("Success({0})", Value);
-            }
+            public override string ToString() => Format.Current("Success({0})", Value);
         }
 
         private sealed partial class Error_ : Result<T>, IEquatable<Error_>
@@ -126,7 +115,7 @@ namespace Narvalo.Finance
                 _message = message;
             }
 
-            public override string Error { get { Warrant.NotNull<string>(); return _message; } }
+            public override string Error => _message;
 
             public override T Value
             {
@@ -158,12 +147,7 @@ namespace Narvalo.Finance
 
             public override int GetHashCode() => Error.GetHashCode();
 
-            public override string ToString()
-            {
-                Warrant.NotNull<string>();
-
-                return Format.Current("Error({0})", Error);
-            }
+            public override string ToString() => Format.Current("Error({0})", Error);
         }
     }
 }

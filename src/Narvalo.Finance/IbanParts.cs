@@ -17,17 +17,11 @@ namespace Narvalo.Finance
 
         public const string HumanHeader = "IBAN ";
 
-        private readonly string _bban;
-        private readonly string _checkDigits;
-        private readonly string _countryCode;
         private readonly string _value;
 
         private IbanParts(string countryCode, string checkDigits, string bban)
             : this(countryCode, checkDigits, bban, countryCode + checkDigits + bban)
         {
-            Expect.NotNull(countryCode);
-            Expect.NotNull(checkDigits);
-            Expect.NotNull(bban);
         }
 
         private IbanParts(string countryCode, string checkDigits, string bban, string value)
@@ -37,26 +31,17 @@ namespace Narvalo.Finance
             Demand.NotNull(bban);
             Demand.NotNull(value);
 
-            _bban = bban;
-            _checkDigits = checkDigits;
-            _countryCode = countryCode;
+            Bban = bban;
+            CheckDigits = checkDigits;
+            CountryCode = countryCode;
             _value = value;
         }
 
-        public string Bban
-        {
-            get { Warrant.NotNull<string>(); return _bban; }
-        }
+        public string Bban { get; }
 
-        public string CheckDigits
-        {
-            get { Warrant.NotNull<string>(); return _checkDigits; }
-        }
+        public string CheckDigits { get; }
 
-        public string CountryCode
-        {
-            get { Warrant.NotNull<string>(); return _countryCode; }
-        }
+        public string CountryCode { get; }
 
         internal string LiteralValue => _value;
 
@@ -193,23 +178,13 @@ namespace Narvalo.Finance
     // Implements the IFormattable interface.
     public partial struct IbanParts
     {
-        public override string ToString()
-        {
-            Warrant.NotNull<string>();
-            return ToString(DefaultFormat, null);
-        }
+        public override string ToString() => ToString(DefaultFormat, null);
 
-        public string ToString(string format)
-        {
-            Warrant.NotNull<string>();
-            return ToString(format, null);
-        }
+        public string ToString(string format) => ToString(format, null);
 
         // NB: We ignore any user supplied "formatProvider".
         public string ToString(string format, IFormatProvider formatProvider)
         {
-            Warrant.NotNull<string>();
-
             if (format == null || format.Length == 0) { format = DefaultFormat; }
             if (format.Length != 1) { throw new FormatException("XXX"); }
 
@@ -235,7 +210,6 @@ namespace Narvalo.Finance
         private static string FormatGeneral(string input)
         {
             Demand.NotNull(input);
-            Warrant.NotNull<string>();
 
             int len = input.Length;
 
@@ -283,24 +257,3 @@ namespace Narvalo.Finance
         public override int GetHashCode() => _value.GetHashCode();
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Finance
-{
-    using System.Diagnostics.Contracts;
-
-    public partial struct IbanParts
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_bban != null);
-            Contract.Invariant(_checkDigits != null);
-            Contract.Invariant(_countryCode != null);
-            Contract.Invariant(_value != null);
-        }
-    }
-}
-
-#endif

@@ -26,7 +26,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="ADP" /> class.
         /// </summary>
-        public static ADP Unit { get { Warrant.NotNull<ADP>(); return Uniq.Instance; } }
+        public static ADP Unit => Uniq.Instance;
 
         public static explicit operator ADP(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(ADP value) => value?.ToCurrency();
@@ -58,7 +58,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="AED" /> class.
         /// </summary>
-        public static AED Unit { get { Warrant.NotNull<AED>(); return Uniq.Instance; } }
+        public static AED Unit => Uniq.Instance;
 
         public static explicit operator AED(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(AED value) => value?.ToCurrency();
@@ -90,7 +90,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="AFA" /> class.
         /// </summary>
-        public static AFA Unit { get { Warrant.NotNull<AFA>(); return Uniq.Instance; } }
+        public static AFA Unit => Uniq.Instance;
 
         public static explicit operator AFA(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(AFA value) => value?.ToCurrency();
@@ -122,7 +122,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="AFN" /> class.
         /// </summary>
-        public static AFN Unit { get { Warrant.NotNull<AFN>(); return Uniq.Instance; } }
+        public static AFN Unit => Uniq.Instance;
 
         public static explicit operator AFN(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(AFN value) => value?.ToCurrency();
@@ -154,7 +154,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="ALK" /> class.
         /// </summary>
-        public static ALK Unit { get { Warrant.NotNull<ALK>(); return Uniq.Instance; } }
+        public static ALK Unit => Uniq.Instance;
 
         public static explicit operator ALK(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(ALK value) => value?.ToCurrency();
@@ -186,7 +186,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="ALL" /> class.
         /// </summary>
-        public static ALL Unit { get { Warrant.NotNull<ALL>(); return Uniq.Instance; } }
+        public static ALL Unit => Uniq.Instance;
 
         public static explicit operator ALL(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(ALL value) => value?.ToCurrency();
@@ -218,7 +218,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="AMD" /> class.
         /// </summary>
-        public static AMD Unit { get { Warrant.NotNull<AMD>(); return Uniq.Instance; } }
+        public static AMD Unit => Uniq.Instance;
 
         public static explicit operator AMD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(AMD value) => value?.ToCurrency();
@@ -250,7 +250,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="ANG" /> class.
         /// </summary>
-        public static ANG Unit { get { Warrant.NotNull<ANG>(); return Uniq.Instance; } }
+        public static ANG Unit => Uniq.Instance;
 
         public static explicit operator ANG(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(ANG value) => value?.ToCurrency();
@@ -282,7 +282,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="AOA" /> class.
         /// </summary>
-        public static AOA Unit { get { Warrant.NotNull<AOA>(); return Uniq.Instance; } }
+        public static AOA Unit => Uniq.Instance;
 
         public static explicit operator AOA(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(AOA value) => value?.ToCurrency();
@@ -314,7 +314,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="AOK" /> class.
         /// </summary>
-        public static AOK Unit { get { Warrant.NotNull<AOK>(); return Uniq.Instance; } }
+        public static AOK Unit => Uniq.Instance;
 
         public static explicit operator AOK(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(AOK value) => value?.ToCurrency();
@@ -346,7 +346,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="AON" /> class.
         /// </summary>
-        public static AON Unit { get { Warrant.NotNull<AON>(); return Uniq.Instance; } }
+        public static AON Unit => Uniq.Instance;
 
         public static explicit operator AON(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(AON value) => value?.ToCurrency();
@@ -378,7 +378,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="AOR" /> class.
         /// </summary>
-        public static AOR Unit { get { Warrant.NotNull<AOR>(); return Uniq.Instance; } }
+        public static AOR Unit => Uniq.Instance;
 
         public static explicit operator AOR(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(AOR value) => value?.ToCurrency();
@@ -410,7 +410,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="ARA" /> class.
         /// </summary>
-        public static ARA Unit { get { Warrant.NotNull<ARA>(); return Uniq.Instance; } }
+        public static ARA Unit => Uniq.Instance;
 
         public static explicit operator ARA(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(ARA value) => value?.ToCurrency();
@@ -442,7 +442,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="ARP" /> class.
         /// </summary>
-        public static ARP Unit { get { Warrant.NotNull<ARP>(); return Uniq.Instance; } }
+        public static ARP Unit => Uniq.Instance;
 
         public static explicit operator ARP(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(ARP value) => value?.ToCurrency();
@@ -474,7 +474,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="ARS" /> class.
         /// </summary>
-        public static ARS Unit { get { Warrant.NotNull<ARS>(); return Uniq.Instance; } }
+        public static ARS Unit => Uniq.Instance;
 
         public static explicit operator ARS(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(ARS value) => value?.ToCurrency();
@@ -506,7 +506,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="ARY" /> class.
         /// </summary>
-        public static ARY Unit { get { Warrant.NotNull<ARY>(); return Uniq.Instance; } }
+        public static ARY Unit => Uniq.Instance;
 
         public static explicit operator ARY(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(ARY value) => value?.ToCurrency();
@@ -538,7 +538,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="ATS" /> class.
         /// </summary>
-        public static ATS Unit { get { Warrant.NotNull<ATS>(); return Uniq.Instance; } }
+        public static ATS Unit => Uniq.Instance;
 
         public static explicit operator ATS(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(ATS value) => value?.ToCurrency();
@@ -570,7 +570,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="AUD" /> class.
         /// </summary>
-        public static AUD Unit { get { Warrant.NotNull<AUD>(); return Uniq.Instance; } }
+        public static AUD Unit => Uniq.Instance;
 
         public static explicit operator AUD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(AUD value) => value?.ToCurrency();
@@ -602,7 +602,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="AWG" /> class.
         /// </summary>
-        public static AWG Unit { get { Warrant.NotNull<AWG>(); return Uniq.Instance; } }
+        public static AWG Unit => Uniq.Instance;
 
         public static explicit operator AWG(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(AWG value) => value?.ToCurrency();
@@ -634,7 +634,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="AYM" /> class.
         /// </summary>
-        public static AYM Unit { get { Warrant.NotNull<AYM>(); return Uniq.Instance; } }
+        public static AYM Unit => Uniq.Instance;
 
         public static explicit operator AYM(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(AYM value) => value?.ToCurrency();
@@ -666,7 +666,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="AZM" /> class.
         /// </summary>
-        public static AZM Unit { get { Warrant.NotNull<AZM>(); return Uniq.Instance; } }
+        public static AZM Unit => Uniq.Instance;
 
         public static explicit operator AZM(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(AZM value) => value?.ToCurrency();
@@ -698,7 +698,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="AZN" /> class.
         /// </summary>
-        public static AZN Unit { get { Warrant.NotNull<AZN>(); return Uniq.Instance; } }
+        public static AZN Unit => Uniq.Instance;
 
         public static explicit operator AZN(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(AZN value) => value?.ToCurrency();
@@ -730,7 +730,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="BAD" /> class.
         /// </summary>
-        public static BAD Unit { get { Warrant.NotNull<BAD>(); return Uniq.Instance; } }
+        public static BAD Unit => Uniq.Instance;
 
         public static explicit operator BAD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(BAD value) => value?.ToCurrency();
@@ -762,7 +762,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="BAM" /> class.
         /// </summary>
-        public static BAM Unit { get { Warrant.NotNull<BAM>(); return Uniq.Instance; } }
+        public static BAM Unit => Uniq.Instance;
 
         public static explicit operator BAM(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(BAM value) => value?.ToCurrency();
@@ -794,7 +794,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="BBD" /> class.
         /// </summary>
-        public static BBD Unit { get { Warrant.NotNull<BBD>(); return Uniq.Instance; } }
+        public static BBD Unit => Uniq.Instance;
 
         public static explicit operator BBD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(BBD value) => value?.ToCurrency();
@@ -826,7 +826,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="BDT" /> class.
         /// </summary>
-        public static BDT Unit { get { Warrant.NotNull<BDT>(); return Uniq.Instance; } }
+        public static BDT Unit => Uniq.Instance;
 
         public static explicit operator BDT(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(BDT value) => value?.ToCurrency();
@@ -858,7 +858,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="BEC" /> class.
         /// </summary>
-        public static BEC Unit { get { Warrant.NotNull<BEC>(); return Uniq.Instance; } }
+        public static BEC Unit => Uniq.Instance;
 
         public static explicit operator BEC(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(BEC value) => value?.ToCurrency();
@@ -890,7 +890,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="BEF" /> class.
         /// </summary>
-        public static BEF Unit { get { Warrant.NotNull<BEF>(); return Uniq.Instance; } }
+        public static BEF Unit => Uniq.Instance;
 
         public static explicit operator BEF(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(BEF value) => value?.ToCurrency();
@@ -922,7 +922,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="BEL" /> class.
         /// </summary>
-        public static BEL Unit { get { Warrant.NotNull<BEL>(); return Uniq.Instance; } }
+        public static BEL Unit => Uniq.Instance;
 
         public static explicit operator BEL(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(BEL value) => value?.ToCurrency();
@@ -954,7 +954,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="BGJ" /> class.
         /// </summary>
-        public static BGJ Unit { get { Warrant.NotNull<BGJ>(); return Uniq.Instance; } }
+        public static BGJ Unit => Uniq.Instance;
 
         public static explicit operator BGJ(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(BGJ value) => value?.ToCurrency();
@@ -986,7 +986,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="BGK" /> class.
         /// </summary>
-        public static BGK Unit { get { Warrant.NotNull<BGK>(); return Uniq.Instance; } }
+        public static BGK Unit => Uniq.Instance;
 
         public static explicit operator BGK(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(BGK value) => value?.ToCurrency();
@@ -1018,7 +1018,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="BGL" /> class.
         /// </summary>
-        public static BGL Unit { get { Warrant.NotNull<BGL>(); return Uniq.Instance; } }
+        public static BGL Unit => Uniq.Instance;
 
         public static explicit operator BGL(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(BGL value) => value?.ToCurrency();
@@ -1050,7 +1050,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="BGN" /> class.
         /// </summary>
-        public static BGN Unit { get { Warrant.NotNull<BGN>(); return Uniq.Instance; } }
+        public static BGN Unit => Uniq.Instance;
 
         public static explicit operator BGN(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(BGN value) => value?.ToCurrency();
@@ -1082,7 +1082,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="BHD" /> class.
         /// </summary>
-        public static BHD Unit { get { Warrant.NotNull<BHD>(); return Uniq.Instance; } }
+        public static BHD Unit => Uniq.Instance;
 
         public static explicit operator BHD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(BHD value) => value?.ToCurrency();
@@ -1114,7 +1114,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="BIF" /> class.
         /// </summary>
-        public static BIF Unit { get { Warrant.NotNull<BIF>(); return Uniq.Instance; } }
+        public static BIF Unit => Uniq.Instance;
 
         public static explicit operator BIF(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(BIF value) => value?.ToCurrency();
@@ -1146,7 +1146,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="BMD" /> class.
         /// </summary>
-        public static BMD Unit { get { Warrant.NotNull<BMD>(); return Uniq.Instance; } }
+        public static BMD Unit => Uniq.Instance;
 
         public static explicit operator BMD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(BMD value) => value?.ToCurrency();
@@ -1178,7 +1178,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="BND" /> class.
         /// </summary>
-        public static BND Unit { get { Warrant.NotNull<BND>(); return Uniq.Instance; } }
+        public static BND Unit => Uniq.Instance;
 
         public static explicit operator BND(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(BND value) => value?.ToCurrency();
@@ -1210,7 +1210,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="BOB" /> class.
         /// </summary>
-        public static BOB Unit { get { Warrant.NotNull<BOB>(); return Uniq.Instance; } }
+        public static BOB Unit => Uniq.Instance;
 
         public static explicit operator BOB(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(BOB value) => value?.ToCurrency();
@@ -1242,7 +1242,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="BOP" /> class.
         /// </summary>
-        public static BOP Unit { get { Warrant.NotNull<BOP>(); return Uniq.Instance; } }
+        public static BOP Unit => Uniq.Instance;
 
         public static explicit operator BOP(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(BOP value) => value?.ToCurrency();
@@ -1274,7 +1274,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="BOV" /> class.
         /// </summary>
-        public static BOV Unit { get { Warrant.NotNull<BOV>(); return Uniq.Instance; } }
+        public static BOV Unit => Uniq.Instance;
 
         public static explicit operator BOV(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(BOV value) => value?.ToCurrency();
@@ -1306,7 +1306,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="BRB" /> class.
         /// </summary>
-        public static BRB Unit { get { Warrant.NotNull<BRB>(); return Uniq.Instance; } }
+        public static BRB Unit => Uniq.Instance;
 
         public static explicit operator BRB(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(BRB value) => value?.ToCurrency();
@@ -1338,7 +1338,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="BRC" /> class.
         /// </summary>
-        public static BRC Unit { get { Warrant.NotNull<BRC>(); return Uniq.Instance; } }
+        public static BRC Unit => Uniq.Instance;
 
         public static explicit operator BRC(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(BRC value) => value?.ToCurrency();
@@ -1370,7 +1370,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="BRE" /> class.
         /// </summary>
-        public static BRE Unit { get { Warrant.NotNull<BRE>(); return Uniq.Instance; } }
+        public static BRE Unit => Uniq.Instance;
 
         public static explicit operator BRE(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(BRE value) => value?.ToCurrency();
@@ -1402,7 +1402,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="BRL" /> class.
         /// </summary>
-        public static BRL Unit { get { Warrant.NotNull<BRL>(); return Uniq.Instance; } }
+        public static BRL Unit => Uniq.Instance;
 
         public static explicit operator BRL(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(BRL value) => value?.ToCurrency();
@@ -1434,7 +1434,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="BRN" /> class.
         /// </summary>
-        public static BRN Unit { get { Warrant.NotNull<BRN>(); return Uniq.Instance; } }
+        public static BRN Unit => Uniq.Instance;
 
         public static explicit operator BRN(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(BRN value) => value?.ToCurrency();
@@ -1466,7 +1466,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="BRR" /> class.
         /// </summary>
-        public static BRR Unit { get { Warrant.NotNull<BRR>(); return Uniq.Instance; } }
+        public static BRR Unit => Uniq.Instance;
 
         public static explicit operator BRR(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(BRR value) => value?.ToCurrency();
@@ -1498,7 +1498,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="BSD" /> class.
         /// </summary>
-        public static BSD Unit { get { Warrant.NotNull<BSD>(); return Uniq.Instance; } }
+        public static BSD Unit => Uniq.Instance;
 
         public static explicit operator BSD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(BSD value) => value?.ToCurrency();
@@ -1530,7 +1530,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="BTN" /> class.
         /// </summary>
-        public static BTN Unit { get { Warrant.NotNull<BTN>(); return Uniq.Instance; } }
+        public static BTN Unit => Uniq.Instance;
 
         public static explicit operator BTN(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(BTN value) => value?.ToCurrency();
@@ -1562,7 +1562,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="BUK" /> class.
         /// </summary>
-        public static BUK Unit { get { Warrant.NotNull<BUK>(); return Uniq.Instance; } }
+        public static BUK Unit => Uniq.Instance;
 
         public static explicit operator BUK(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(BUK value) => value?.ToCurrency();
@@ -1594,7 +1594,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="BWP" /> class.
         /// </summary>
-        public static BWP Unit { get { Warrant.NotNull<BWP>(); return Uniq.Instance; } }
+        public static BWP Unit => Uniq.Instance;
 
         public static explicit operator BWP(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(BWP value) => value?.ToCurrency();
@@ -1626,7 +1626,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="BYB" /> class.
         /// </summary>
-        public static BYB Unit { get { Warrant.NotNull<BYB>(); return Uniq.Instance; } }
+        public static BYB Unit => Uniq.Instance;
 
         public static explicit operator BYB(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(BYB value) => value?.ToCurrency();
@@ -1658,7 +1658,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="BYN" /> class.
         /// </summary>
-        public static BYN Unit { get { Warrant.NotNull<BYN>(); return Uniq.Instance; } }
+        public static BYN Unit => Uniq.Instance;
 
         public static explicit operator BYN(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(BYN value) => value?.ToCurrency();
@@ -1690,7 +1690,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="BYR" /> class.
         /// </summary>
-        public static BYR Unit { get { Warrant.NotNull<BYR>(); return Uniq.Instance; } }
+        public static BYR Unit => Uniq.Instance;
 
         public static explicit operator BYR(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(BYR value) => value?.ToCurrency();
@@ -1722,7 +1722,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="BZD" /> class.
         /// </summary>
-        public static BZD Unit { get { Warrant.NotNull<BZD>(); return Uniq.Instance; } }
+        public static BZD Unit => Uniq.Instance;
 
         public static explicit operator BZD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(BZD value) => value?.ToCurrency();
@@ -1754,7 +1754,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="CAD" /> class.
         /// </summary>
-        public static CAD Unit { get { Warrant.NotNull<CAD>(); return Uniq.Instance; } }
+        public static CAD Unit => Uniq.Instance;
 
         public static explicit operator CAD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(CAD value) => value?.ToCurrency();
@@ -1786,7 +1786,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="CDF" /> class.
         /// </summary>
-        public static CDF Unit { get { Warrant.NotNull<CDF>(); return Uniq.Instance; } }
+        public static CDF Unit => Uniq.Instance;
 
         public static explicit operator CDF(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(CDF value) => value?.ToCurrency();
@@ -1818,7 +1818,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="CHC" /> class.
         /// </summary>
-        public static CHC Unit { get { Warrant.NotNull<CHC>(); return Uniq.Instance; } }
+        public static CHC Unit => Uniq.Instance;
 
         public static explicit operator CHC(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(CHC value) => value?.ToCurrency();
@@ -1850,7 +1850,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="CHE" /> class.
         /// </summary>
-        public static CHE Unit { get { Warrant.NotNull<CHE>(); return Uniq.Instance; } }
+        public static CHE Unit => Uniq.Instance;
 
         public static explicit operator CHE(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(CHE value) => value?.ToCurrency();
@@ -1882,7 +1882,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="CHF" /> class.
         /// </summary>
-        public static CHF Unit { get { Warrant.NotNull<CHF>(); return Uniq.Instance; } }
+        public static CHF Unit => Uniq.Instance;
 
         public static explicit operator CHF(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(CHF value) => value?.ToCurrency();
@@ -1914,7 +1914,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="CHW" /> class.
         /// </summary>
-        public static CHW Unit { get { Warrant.NotNull<CHW>(); return Uniq.Instance; } }
+        public static CHW Unit => Uniq.Instance;
 
         public static explicit operator CHW(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(CHW value) => value?.ToCurrency();
@@ -1946,7 +1946,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="CLF" /> class.
         /// </summary>
-        public static CLF Unit { get { Warrant.NotNull<CLF>(); return Uniq.Instance; } }
+        public static CLF Unit => Uniq.Instance;
 
         public static explicit operator CLF(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(CLF value) => value?.ToCurrency();
@@ -1978,7 +1978,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="CLP" /> class.
         /// </summary>
-        public static CLP Unit { get { Warrant.NotNull<CLP>(); return Uniq.Instance; } }
+        public static CLP Unit => Uniq.Instance;
 
         public static explicit operator CLP(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(CLP value) => value?.ToCurrency();
@@ -2010,7 +2010,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="CNX" /> class.
         /// </summary>
-        public static CNX Unit { get { Warrant.NotNull<CNX>(); return Uniq.Instance; } }
+        public static CNX Unit => Uniq.Instance;
 
         public static explicit operator CNX(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(CNX value) => value?.ToCurrency();
@@ -2042,7 +2042,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="CNY" /> class.
         /// </summary>
-        public static CNY Unit { get { Warrant.NotNull<CNY>(); return Uniq.Instance; } }
+        public static CNY Unit => Uniq.Instance;
 
         public static explicit operator CNY(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(CNY value) => value?.ToCurrency();
@@ -2074,7 +2074,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="COP" /> class.
         /// </summary>
-        public static COP Unit { get { Warrant.NotNull<COP>(); return Uniq.Instance; } }
+        public static COP Unit => Uniq.Instance;
 
         public static explicit operator COP(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(COP value) => value?.ToCurrency();
@@ -2106,7 +2106,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="COU" /> class.
         /// </summary>
-        public static COU Unit { get { Warrant.NotNull<COU>(); return Uniq.Instance; } }
+        public static COU Unit => Uniq.Instance;
 
         public static explicit operator COU(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(COU value) => value?.ToCurrency();
@@ -2138,7 +2138,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="CRC" /> class.
         /// </summary>
-        public static CRC Unit { get { Warrant.NotNull<CRC>(); return Uniq.Instance; } }
+        public static CRC Unit => Uniq.Instance;
 
         public static explicit operator CRC(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(CRC value) => value?.ToCurrency();
@@ -2170,7 +2170,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="CSD" /> class.
         /// </summary>
-        public static CSD Unit { get { Warrant.NotNull<CSD>(); return Uniq.Instance; } }
+        public static CSD Unit => Uniq.Instance;
 
         public static explicit operator CSD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(CSD value) => value?.ToCurrency();
@@ -2202,7 +2202,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="CSJ" /> class.
         /// </summary>
-        public static CSJ Unit { get { Warrant.NotNull<CSJ>(); return Uniq.Instance; } }
+        public static CSJ Unit => Uniq.Instance;
 
         public static explicit operator CSJ(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(CSJ value) => value?.ToCurrency();
@@ -2234,7 +2234,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="CSK" /> class.
         /// </summary>
-        public static CSK Unit { get { Warrant.NotNull<CSK>(); return Uniq.Instance; } }
+        public static CSK Unit => Uniq.Instance;
 
         public static explicit operator CSK(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(CSK value) => value?.ToCurrency();
@@ -2266,7 +2266,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="CUC" /> class.
         /// </summary>
-        public static CUC Unit { get { Warrant.NotNull<CUC>(); return Uniq.Instance; } }
+        public static CUC Unit => Uniq.Instance;
 
         public static explicit operator CUC(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(CUC value) => value?.ToCurrency();
@@ -2298,7 +2298,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="CUP" /> class.
         /// </summary>
-        public static CUP Unit { get { Warrant.NotNull<CUP>(); return Uniq.Instance; } }
+        public static CUP Unit => Uniq.Instance;
 
         public static explicit operator CUP(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(CUP value) => value?.ToCurrency();
@@ -2330,7 +2330,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="CVE" /> class.
         /// </summary>
-        public static CVE Unit { get { Warrant.NotNull<CVE>(); return Uniq.Instance; } }
+        public static CVE Unit => Uniq.Instance;
 
         public static explicit operator CVE(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(CVE value) => value?.ToCurrency();
@@ -2362,7 +2362,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="CYP" /> class.
         /// </summary>
-        public static CYP Unit { get { Warrant.NotNull<CYP>(); return Uniq.Instance; } }
+        public static CYP Unit => Uniq.Instance;
 
         public static explicit operator CYP(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(CYP value) => value?.ToCurrency();
@@ -2394,7 +2394,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="CZK" /> class.
         /// </summary>
-        public static CZK Unit { get { Warrant.NotNull<CZK>(); return Uniq.Instance; } }
+        public static CZK Unit => Uniq.Instance;
 
         public static explicit operator CZK(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(CZK value) => value?.ToCurrency();
@@ -2426,7 +2426,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="DDM" /> class.
         /// </summary>
-        public static DDM Unit { get { Warrant.NotNull<DDM>(); return Uniq.Instance; } }
+        public static DDM Unit => Uniq.Instance;
 
         public static explicit operator DDM(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(DDM value) => value?.ToCurrency();
@@ -2458,7 +2458,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="DEM" /> class.
         /// </summary>
-        public static DEM Unit { get { Warrant.NotNull<DEM>(); return Uniq.Instance; } }
+        public static DEM Unit => Uniq.Instance;
 
         public static explicit operator DEM(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(DEM value) => value?.ToCurrency();
@@ -2490,7 +2490,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="DJF" /> class.
         /// </summary>
-        public static DJF Unit { get { Warrant.NotNull<DJF>(); return Uniq.Instance; } }
+        public static DJF Unit => Uniq.Instance;
 
         public static explicit operator DJF(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(DJF value) => value?.ToCurrency();
@@ -2522,7 +2522,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="DKK" /> class.
         /// </summary>
-        public static DKK Unit { get { Warrant.NotNull<DKK>(); return Uniq.Instance; } }
+        public static DKK Unit => Uniq.Instance;
 
         public static explicit operator DKK(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(DKK value) => value?.ToCurrency();
@@ -2554,7 +2554,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="DOP" /> class.
         /// </summary>
-        public static DOP Unit { get { Warrant.NotNull<DOP>(); return Uniq.Instance; } }
+        public static DOP Unit => Uniq.Instance;
 
         public static explicit operator DOP(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(DOP value) => value?.ToCurrency();
@@ -2586,7 +2586,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="DZD" /> class.
         /// </summary>
-        public static DZD Unit { get { Warrant.NotNull<DZD>(); return Uniq.Instance; } }
+        public static DZD Unit => Uniq.Instance;
 
         public static explicit operator DZD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(DZD value) => value?.ToCurrency();
@@ -2618,7 +2618,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="ECS" /> class.
         /// </summary>
-        public static ECS Unit { get { Warrant.NotNull<ECS>(); return Uniq.Instance; } }
+        public static ECS Unit => Uniq.Instance;
 
         public static explicit operator ECS(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(ECS value) => value?.ToCurrency();
@@ -2650,7 +2650,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="ECV" /> class.
         /// </summary>
-        public static ECV Unit { get { Warrant.NotNull<ECV>(); return Uniq.Instance; } }
+        public static ECV Unit => Uniq.Instance;
 
         public static explicit operator ECV(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(ECV value) => value?.ToCurrency();
@@ -2682,7 +2682,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="EEK" /> class.
         /// </summary>
-        public static EEK Unit { get { Warrant.NotNull<EEK>(); return Uniq.Instance; } }
+        public static EEK Unit => Uniq.Instance;
 
         public static explicit operator EEK(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(EEK value) => value?.ToCurrency();
@@ -2714,7 +2714,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="EGP" /> class.
         /// </summary>
-        public static EGP Unit { get { Warrant.NotNull<EGP>(); return Uniq.Instance; } }
+        public static EGP Unit => Uniq.Instance;
 
         public static explicit operator EGP(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(EGP value) => value?.ToCurrency();
@@ -2746,7 +2746,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="EQE" /> class.
         /// </summary>
-        public static EQE Unit { get { Warrant.NotNull<EQE>(); return Uniq.Instance; } }
+        public static EQE Unit => Uniq.Instance;
 
         public static explicit operator EQE(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(EQE value) => value?.ToCurrency();
@@ -2778,7 +2778,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="ERN" /> class.
         /// </summary>
-        public static ERN Unit { get { Warrant.NotNull<ERN>(); return Uniq.Instance; } }
+        public static ERN Unit => Uniq.Instance;
 
         public static explicit operator ERN(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(ERN value) => value?.ToCurrency();
@@ -2810,7 +2810,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="ESA" /> class.
         /// </summary>
-        public static ESA Unit { get { Warrant.NotNull<ESA>(); return Uniq.Instance; } }
+        public static ESA Unit => Uniq.Instance;
 
         public static explicit operator ESA(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(ESA value) => value?.ToCurrency();
@@ -2842,7 +2842,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="ESB" /> class.
         /// </summary>
-        public static ESB Unit { get { Warrant.NotNull<ESB>(); return Uniq.Instance; } }
+        public static ESB Unit => Uniq.Instance;
 
         public static explicit operator ESB(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(ESB value) => value?.ToCurrency();
@@ -2874,7 +2874,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="ESP" /> class.
         /// </summary>
-        public static ESP Unit { get { Warrant.NotNull<ESP>(); return Uniq.Instance; } }
+        public static ESP Unit => Uniq.Instance;
 
         public static explicit operator ESP(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(ESP value) => value?.ToCurrency();
@@ -2906,7 +2906,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="ETB" /> class.
         /// </summary>
-        public static ETB Unit { get { Warrant.NotNull<ETB>(); return Uniq.Instance; } }
+        public static ETB Unit => Uniq.Instance;
 
         public static explicit operator ETB(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(ETB value) => value?.ToCurrency();
@@ -2938,7 +2938,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="EUR" /> class.
         /// </summary>
-        public static EUR Unit { get { Warrant.NotNull<EUR>(); return Uniq.Instance; } }
+        public static EUR Unit => Uniq.Instance;
 
         public static explicit operator EUR(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(EUR value) => value?.ToCurrency();
@@ -2970,7 +2970,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="FIM" /> class.
         /// </summary>
-        public static FIM Unit { get { Warrant.NotNull<FIM>(); return Uniq.Instance; } }
+        public static FIM Unit => Uniq.Instance;
 
         public static explicit operator FIM(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(FIM value) => value?.ToCurrency();
@@ -3002,7 +3002,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="FJD" /> class.
         /// </summary>
-        public static FJD Unit { get { Warrant.NotNull<FJD>(); return Uniq.Instance; } }
+        public static FJD Unit => Uniq.Instance;
 
         public static explicit operator FJD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(FJD value) => value?.ToCurrency();
@@ -3034,7 +3034,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="FKP" /> class.
         /// </summary>
-        public static FKP Unit { get { Warrant.NotNull<FKP>(); return Uniq.Instance; } }
+        public static FKP Unit => Uniq.Instance;
 
         public static explicit operator FKP(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(FKP value) => value?.ToCurrency();
@@ -3066,7 +3066,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="FRF" /> class.
         /// </summary>
-        public static FRF Unit { get { Warrant.NotNull<FRF>(); return Uniq.Instance; } }
+        public static FRF Unit => Uniq.Instance;
 
         public static explicit operator FRF(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(FRF value) => value?.ToCurrency();
@@ -3098,7 +3098,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="GBP" /> class.
         /// </summary>
-        public static GBP Unit { get { Warrant.NotNull<GBP>(); return Uniq.Instance; } }
+        public static GBP Unit => Uniq.Instance;
 
         public static explicit operator GBP(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(GBP value) => value?.ToCurrency();
@@ -3130,7 +3130,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="GEK" /> class.
         /// </summary>
-        public static GEK Unit { get { Warrant.NotNull<GEK>(); return Uniq.Instance; } }
+        public static GEK Unit => Uniq.Instance;
 
         public static explicit operator GEK(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(GEK value) => value?.ToCurrency();
@@ -3162,7 +3162,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="GEL" /> class.
         /// </summary>
-        public static GEL Unit { get { Warrant.NotNull<GEL>(); return Uniq.Instance; } }
+        public static GEL Unit => Uniq.Instance;
 
         public static explicit operator GEL(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(GEL value) => value?.ToCurrency();
@@ -3194,7 +3194,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="GHC" /> class.
         /// </summary>
-        public static GHC Unit { get { Warrant.NotNull<GHC>(); return Uniq.Instance; } }
+        public static GHC Unit => Uniq.Instance;
 
         public static explicit operator GHC(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(GHC value) => value?.ToCurrency();
@@ -3226,7 +3226,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="GHP" /> class.
         /// </summary>
-        public static GHP Unit { get { Warrant.NotNull<GHP>(); return Uniq.Instance; } }
+        public static GHP Unit => Uniq.Instance;
 
         public static explicit operator GHP(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(GHP value) => value?.ToCurrency();
@@ -3258,7 +3258,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="GHS" /> class.
         /// </summary>
-        public static GHS Unit { get { Warrant.NotNull<GHS>(); return Uniq.Instance; } }
+        public static GHS Unit => Uniq.Instance;
 
         public static explicit operator GHS(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(GHS value) => value?.ToCurrency();
@@ -3290,7 +3290,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="GIP" /> class.
         /// </summary>
-        public static GIP Unit { get { Warrant.NotNull<GIP>(); return Uniq.Instance; } }
+        public static GIP Unit => Uniq.Instance;
 
         public static explicit operator GIP(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(GIP value) => value?.ToCurrency();
@@ -3322,7 +3322,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="GMD" /> class.
         /// </summary>
-        public static GMD Unit { get { Warrant.NotNull<GMD>(); return Uniq.Instance; } }
+        public static GMD Unit => Uniq.Instance;
 
         public static explicit operator GMD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(GMD value) => value?.ToCurrency();
@@ -3354,7 +3354,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="GNE" /> class.
         /// </summary>
-        public static GNE Unit { get { Warrant.NotNull<GNE>(); return Uniq.Instance; } }
+        public static GNE Unit => Uniq.Instance;
 
         public static explicit operator GNE(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(GNE value) => value?.ToCurrency();
@@ -3386,7 +3386,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="GNF" /> class.
         /// </summary>
-        public static GNF Unit { get { Warrant.NotNull<GNF>(); return Uniq.Instance; } }
+        public static GNF Unit => Uniq.Instance;
 
         public static explicit operator GNF(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(GNF value) => value?.ToCurrency();
@@ -3418,7 +3418,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="GNS" /> class.
         /// </summary>
-        public static GNS Unit { get { Warrant.NotNull<GNS>(); return Uniq.Instance; } }
+        public static GNS Unit => Uniq.Instance;
 
         public static explicit operator GNS(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(GNS value) => value?.ToCurrency();
@@ -3450,7 +3450,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="GQE" /> class.
         /// </summary>
-        public static GQE Unit { get { Warrant.NotNull<GQE>(); return Uniq.Instance; } }
+        public static GQE Unit => Uniq.Instance;
 
         public static explicit operator GQE(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(GQE value) => value?.ToCurrency();
@@ -3482,7 +3482,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="GRD" /> class.
         /// </summary>
-        public static GRD Unit { get { Warrant.NotNull<GRD>(); return Uniq.Instance; } }
+        public static GRD Unit => Uniq.Instance;
 
         public static explicit operator GRD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(GRD value) => value?.ToCurrency();
@@ -3514,7 +3514,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="GTQ" /> class.
         /// </summary>
-        public static GTQ Unit { get { Warrant.NotNull<GTQ>(); return Uniq.Instance; } }
+        public static GTQ Unit => Uniq.Instance;
 
         public static explicit operator GTQ(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(GTQ value) => value?.ToCurrency();
@@ -3546,7 +3546,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="GWE" /> class.
         /// </summary>
-        public static GWE Unit { get { Warrant.NotNull<GWE>(); return Uniq.Instance; } }
+        public static GWE Unit => Uniq.Instance;
 
         public static explicit operator GWE(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(GWE value) => value?.ToCurrency();
@@ -3578,7 +3578,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="GWP" /> class.
         /// </summary>
-        public static GWP Unit { get { Warrant.NotNull<GWP>(); return Uniq.Instance; } }
+        public static GWP Unit => Uniq.Instance;
 
         public static explicit operator GWP(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(GWP value) => value?.ToCurrency();
@@ -3610,7 +3610,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="GYD" /> class.
         /// </summary>
-        public static GYD Unit { get { Warrant.NotNull<GYD>(); return Uniq.Instance; } }
+        public static GYD Unit => Uniq.Instance;
 
         public static explicit operator GYD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(GYD value) => value?.ToCurrency();
@@ -3642,7 +3642,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="HKD" /> class.
         /// </summary>
-        public static HKD Unit { get { Warrant.NotNull<HKD>(); return Uniq.Instance; } }
+        public static HKD Unit => Uniq.Instance;
 
         public static explicit operator HKD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(HKD value) => value?.ToCurrency();
@@ -3674,7 +3674,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="HNL" /> class.
         /// </summary>
-        public static HNL Unit { get { Warrant.NotNull<HNL>(); return Uniq.Instance; } }
+        public static HNL Unit => Uniq.Instance;
 
         public static explicit operator HNL(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(HNL value) => value?.ToCurrency();
@@ -3706,7 +3706,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="HRD" /> class.
         /// </summary>
-        public static HRD Unit { get { Warrant.NotNull<HRD>(); return Uniq.Instance; } }
+        public static HRD Unit => Uniq.Instance;
 
         public static explicit operator HRD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(HRD value) => value?.ToCurrency();
@@ -3738,7 +3738,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="HRK" /> class.
         /// </summary>
-        public static HRK Unit { get { Warrant.NotNull<HRK>(); return Uniq.Instance; } }
+        public static HRK Unit => Uniq.Instance;
 
         public static explicit operator HRK(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(HRK value) => value?.ToCurrency();
@@ -3770,7 +3770,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="HTG" /> class.
         /// </summary>
-        public static HTG Unit { get { Warrant.NotNull<HTG>(); return Uniq.Instance; } }
+        public static HTG Unit => Uniq.Instance;
 
         public static explicit operator HTG(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(HTG value) => value?.ToCurrency();
@@ -3802,7 +3802,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="HUF" /> class.
         /// </summary>
-        public static HUF Unit { get { Warrant.NotNull<HUF>(); return Uniq.Instance; } }
+        public static HUF Unit => Uniq.Instance;
 
         public static explicit operator HUF(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(HUF value) => value?.ToCurrency();
@@ -3834,7 +3834,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="IDR" /> class.
         /// </summary>
-        public static IDR Unit { get { Warrant.NotNull<IDR>(); return Uniq.Instance; } }
+        public static IDR Unit => Uniq.Instance;
 
         public static explicit operator IDR(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(IDR value) => value?.ToCurrency();
@@ -3866,7 +3866,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="IEP" /> class.
         /// </summary>
-        public static IEP Unit { get { Warrant.NotNull<IEP>(); return Uniq.Instance; } }
+        public static IEP Unit => Uniq.Instance;
 
         public static explicit operator IEP(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(IEP value) => value?.ToCurrency();
@@ -3898,7 +3898,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="ILP" /> class.
         /// </summary>
-        public static ILP Unit { get { Warrant.NotNull<ILP>(); return Uniq.Instance; } }
+        public static ILP Unit => Uniq.Instance;
 
         public static explicit operator ILP(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(ILP value) => value?.ToCurrency();
@@ -3930,7 +3930,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="ILR" /> class.
         /// </summary>
-        public static ILR Unit { get { Warrant.NotNull<ILR>(); return Uniq.Instance; } }
+        public static ILR Unit => Uniq.Instance;
 
         public static explicit operator ILR(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(ILR value) => value?.ToCurrency();
@@ -3962,7 +3962,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="ILS" /> class.
         /// </summary>
-        public static ILS Unit { get { Warrant.NotNull<ILS>(); return Uniq.Instance; } }
+        public static ILS Unit => Uniq.Instance;
 
         public static explicit operator ILS(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(ILS value) => value?.ToCurrency();
@@ -3994,7 +3994,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="INR" /> class.
         /// </summary>
-        public static INR Unit { get { Warrant.NotNull<INR>(); return Uniq.Instance; } }
+        public static INR Unit => Uniq.Instance;
 
         public static explicit operator INR(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(INR value) => value?.ToCurrency();
@@ -4026,7 +4026,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="IQD" /> class.
         /// </summary>
-        public static IQD Unit { get { Warrant.NotNull<IQD>(); return Uniq.Instance; } }
+        public static IQD Unit => Uniq.Instance;
 
         public static explicit operator IQD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(IQD value) => value?.ToCurrency();
@@ -4058,7 +4058,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="IRR" /> class.
         /// </summary>
-        public static IRR Unit { get { Warrant.NotNull<IRR>(); return Uniq.Instance; } }
+        public static IRR Unit => Uniq.Instance;
 
         public static explicit operator IRR(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(IRR value) => value?.ToCurrency();
@@ -4090,7 +4090,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="ISJ" /> class.
         /// </summary>
-        public static ISJ Unit { get { Warrant.NotNull<ISJ>(); return Uniq.Instance; } }
+        public static ISJ Unit => Uniq.Instance;
 
         public static explicit operator ISJ(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(ISJ value) => value?.ToCurrency();
@@ -4122,7 +4122,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="ISK" /> class.
         /// </summary>
-        public static ISK Unit { get { Warrant.NotNull<ISK>(); return Uniq.Instance; } }
+        public static ISK Unit => Uniq.Instance;
 
         public static explicit operator ISK(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(ISK value) => value?.ToCurrency();
@@ -4154,7 +4154,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="ITL" /> class.
         /// </summary>
-        public static ITL Unit { get { Warrant.NotNull<ITL>(); return Uniq.Instance; } }
+        public static ITL Unit => Uniq.Instance;
 
         public static explicit operator ITL(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(ITL value) => value?.ToCurrency();
@@ -4186,7 +4186,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="JMD" /> class.
         /// </summary>
-        public static JMD Unit { get { Warrant.NotNull<JMD>(); return Uniq.Instance; } }
+        public static JMD Unit => Uniq.Instance;
 
         public static explicit operator JMD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(JMD value) => value?.ToCurrency();
@@ -4218,7 +4218,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="JOD" /> class.
         /// </summary>
-        public static JOD Unit { get { Warrant.NotNull<JOD>(); return Uniq.Instance; } }
+        public static JOD Unit => Uniq.Instance;
 
         public static explicit operator JOD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(JOD value) => value?.ToCurrency();
@@ -4250,7 +4250,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="JPY" /> class.
         /// </summary>
-        public static JPY Unit { get { Warrant.NotNull<JPY>(); return Uniq.Instance; } }
+        public static JPY Unit => Uniq.Instance;
 
         public static explicit operator JPY(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(JPY value) => value?.ToCurrency();
@@ -4282,7 +4282,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="KES" /> class.
         /// </summary>
-        public static KES Unit { get { Warrant.NotNull<KES>(); return Uniq.Instance; } }
+        public static KES Unit => Uniq.Instance;
 
         public static explicit operator KES(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(KES value) => value?.ToCurrency();
@@ -4314,7 +4314,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="KGS" /> class.
         /// </summary>
-        public static KGS Unit { get { Warrant.NotNull<KGS>(); return Uniq.Instance; } }
+        public static KGS Unit => Uniq.Instance;
 
         public static explicit operator KGS(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(KGS value) => value?.ToCurrency();
@@ -4346,7 +4346,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="KHR" /> class.
         /// </summary>
-        public static KHR Unit { get { Warrant.NotNull<KHR>(); return Uniq.Instance; } }
+        public static KHR Unit => Uniq.Instance;
 
         public static explicit operator KHR(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(KHR value) => value?.ToCurrency();
@@ -4378,7 +4378,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="KMF" /> class.
         /// </summary>
-        public static KMF Unit { get { Warrant.NotNull<KMF>(); return Uniq.Instance; } }
+        public static KMF Unit => Uniq.Instance;
 
         public static explicit operator KMF(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(KMF value) => value?.ToCurrency();
@@ -4410,7 +4410,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="KPW" /> class.
         /// </summary>
-        public static KPW Unit { get { Warrant.NotNull<KPW>(); return Uniq.Instance; } }
+        public static KPW Unit => Uniq.Instance;
 
         public static explicit operator KPW(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(KPW value) => value?.ToCurrency();
@@ -4442,7 +4442,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="KRW" /> class.
         /// </summary>
-        public static KRW Unit { get { Warrant.NotNull<KRW>(); return Uniq.Instance; } }
+        public static KRW Unit => Uniq.Instance;
 
         public static explicit operator KRW(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(KRW value) => value?.ToCurrency();
@@ -4474,7 +4474,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="KWD" /> class.
         /// </summary>
-        public static KWD Unit { get { Warrant.NotNull<KWD>(); return Uniq.Instance; } }
+        public static KWD Unit => Uniq.Instance;
 
         public static explicit operator KWD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(KWD value) => value?.ToCurrency();
@@ -4506,7 +4506,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="KYD" /> class.
         /// </summary>
-        public static KYD Unit { get { Warrant.NotNull<KYD>(); return Uniq.Instance; } }
+        public static KYD Unit => Uniq.Instance;
 
         public static explicit operator KYD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(KYD value) => value?.ToCurrency();
@@ -4538,7 +4538,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="KZT" /> class.
         /// </summary>
-        public static KZT Unit { get { Warrant.NotNull<KZT>(); return Uniq.Instance; } }
+        public static KZT Unit => Uniq.Instance;
 
         public static explicit operator KZT(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(KZT value) => value?.ToCurrency();
@@ -4570,7 +4570,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="LAJ" /> class.
         /// </summary>
-        public static LAJ Unit { get { Warrant.NotNull<LAJ>(); return Uniq.Instance; } }
+        public static LAJ Unit => Uniq.Instance;
 
         public static explicit operator LAJ(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(LAJ value) => value?.ToCurrency();
@@ -4602,7 +4602,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="LAK" /> class.
         /// </summary>
-        public static LAK Unit { get { Warrant.NotNull<LAK>(); return Uniq.Instance; } }
+        public static LAK Unit => Uniq.Instance;
 
         public static explicit operator LAK(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(LAK value) => value?.ToCurrency();
@@ -4634,7 +4634,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="LBP" /> class.
         /// </summary>
-        public static LBP Unit { get { Warrant.NotNull<LBP>(); return Uniq.Instance; } }
+        public static LBP Unit => Uniq.Instance;
 
         public static explicit operator LBP(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(LBP value) => value?.ToCurrency();
@@ -4666,7 +4666,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="LKR" /> class.
         /// </summary>
-        public static LKR Unit { get { Warrant.NotNull<LKR>(); return Uniq.Instance; } }
+        public static LKR Unit => Uniq.Instance;
 
         public static explicit operator LKR(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(LKR value) => value?.ToCurrency();
@@ -4698,7 +4698,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="LRD" /> class.
         /// </summary>
-        public static LRD Unit { get { Warrant.NotNull<LRD>(); return Uniq.Instance; } }
+        public static LRD Unit => Uniq.Instance;
 
         public static explicit operator LRD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(LRD value) => value?.ToCurrency();
@@ -4730,7 +4730,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="LSL" /> class.
         /// </summary>
-        public static LSL Unit { get { Warrant.NotNull<LSL>(); return Uniq.Instance; } }
+        public static LSL Unit => Uniq.Instance;
 
         public static explicit operator LSL(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(LSL value) => value?.ToCurrency();
@@ -4762,7 +4762,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="LSM" /> class.
         /// </summary>
-        public static LSM Unit { get { Warrant.NotNull<LSM>(); return Uniq.Instance; } }
+        public static LSM Unit => Uniq.Instance;
 
         public static explicit operator LSM(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(LSM value) => value?.ToCurrency();
@@ -4794,7 +4794,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="LTL" /> class.
         /// </summary>
-        public static LTL Unit { get { Warrant.NotNull<LTL>(); return Uniq.Instance; } }
+        public static LTL Unit => Uniq.Instance;
 
         public static explicit operator LTL(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(LTL value) => value?.ToCurrency();
@@ -4826,7 +4826,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="LTT" /> class.
         /// </summary>
-        public static LTT Unit { get { Warrant.NotNull<LTT>(); return Uniq.Instance; } }
+        public static LTT Unit => Uniq.Instance;
 
         public static explicit operator LTT(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(LTT value) => value?.ToCurrency();
@@ -4858,7 +4858,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="LUC" /> class.
         /// </summary>
-        public static LUC Unit { get { Warrant.NotNull<LUC>(); return Uniq.Instance; } }
+        public static LUC Unit => Uniq.Instance;
 
         public static explicit operator LUC(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(LUC value) => value?.ToCurrency();
@@ -4890,7 +4890,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="LUF" /> class.
         /// </summary>
-        public static LUF Unit { get { Warrant.NotNull<LUF>(); return Uniq.Instance; } }
+        public static LUF Unit => Uniq.Instance;
 
         public static explicit operator LUF(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(LUF value) => value?.ToCurrency();
@@ -4922,7 +4922,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="LUL" /> class.
         /// </summary>
-        public static LUL Unit { get { Warrant.NotNull<LUL>(); return Uniq.Instance; } }
+        public static LUL Unit => Uniq.Instance;
 
         public static explicit operator LUL(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(LUL value) => value?.ToCurrency();
@@ -4954,7 +4954,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="LVL" /> class.
         /// </summary>
-        public static LVL Unit { get { Warrant.NotNull<LVL>(); return Uniq.Instance; } }
+        public static LVL Unit => Uniq.Instance;
 
         public static explicit operator LVL(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(LVL value) => value?.ToCurrency();
@@ -4986,7 +4986,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="LVR" /> class.
         /// </summary>
-        public static LVR Unit { get { Warrant.NotNull<LVR>(); return Uniq.Instance; } }
+        public static LVR Unit => Uniq.Instance;
 
         public static explicit operator LVR(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(LVR value) => value?.ToCurrency();
@@ -5018,7 +5018,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="LYD" /> class.
         /// </summary>
-        public static LYD Unit { get { Warrant.NotNull<LYD>(); return Uniq.Instance; } }
+        public static LYD Unit => Uniq.Instance;
 
         public static explicit operator LYD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(LYD value) => value?.ToCurrency();
@@ -5050,7 +5050,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="MAD" /> class.
         /// </summary>
-        public static MAD Unit { get { Warrant.NotNull<MAD>(); return Uniq.Instance; } }
+        public static MAD Unit => Uniq.Instance;
 
         public static explicit operator MAD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(MAD value) => value?.ToCurrency();
@@ -5082,7 +5082,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="MAF" /> class.
         /// </summary>
-        public static MAF Unit { get { Warrant.NotNull<MAF>(); return Uniq.Instance; } }
+        public static MAF Unit => Uniq.Instance;
 
         public static explicit operator MAF(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(MAF value) => value?.ToCurrency();
@@ -5114,7 +5114,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="MDL" /> class.
         /// </summary>
-        public static MDL Unit { get { Warrant.NotNull<MDL>(); return Uniq.Instance; } }
+        public static MDL Unit => Uniq.Instance;
 
         public static explicit operator MDL(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(MDL value) => value?.ToCurrency();
@@ -5146,7 +5146,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="MGA" /> class.
         /// </summary>
-        public static MGA Unit { get { Warrant.NotNull<MGA>(); return Uniq.Instance; } }
+        public static MGA Unit => Uniq.Instance;
 
         public static explicit operator MGA(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(MGA value) => value?.ToCurrency();
@@ -5178,7 +5178,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="MGF" /> class.
         /// </summary>
-        public static MGF Unit { get { Warrant.NotNull<MGF>(); return Uniq.Instance; } }
+        public static MGF Unit => Uniq.Instance;
 
         public static explicit operator MGF(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(MGF value) => value?.ToCurrency();
@@ -5210,7 +5210,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="MKD" /> class.
         /// </summary>
-        public static MKD Unit { get { Warrant.NotNull<MKD>(); return Uniq.Instance; } }
+        public static MKD Unit => Uniq.Instance;
 
         public static explicit operator MKD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(MKD value) => value?.ToCurrency();
@@ -5242,7 +5242,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="MLF" /> class.
         /// </summary>
-        public static MLF Unit { get { Warrant.NotNull<MLF>(); return Uniq.Instance; } }
+        public static MLF Unit => Uniq.Instance;
 
         public static explicit operator MLF(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(MLF value) => value?.ToCurrency();
@@ -5274,7 +5274,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="MMK" /> class.
         /// </summary>
-        public static MMK Unit { get { Warrant.NotNull<MMK>(); return Uniq.Instance; } }
+        public static MMK Unit => Uniq.Instance;
 
         public static explicit operator MMK(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(MMK value) => value?.ToCurrency();
@@ -5306,7 +5306,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="MNT" /> class.
         /// </summary>
-        public static MNT Unit { get { Warrant.NotNull<MNT>(); return Uniq.Instance; } }
+        public static MNT Unit => Uniq.Instance;
 
         public static explicit operator MNT(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(MNT value) => value?.ToCurrency();
@@ -5338,7 +5338,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="MOP" /> class.
         /// </summary>
-        public static MOP Unit { get { Warrant.NotNull<MOP>(); return Uniq.Instance; } }
+        public static MOP Unit => Uniq.Instance;
 
         public static explicit operator MOP(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(MOP value) => value?.ToCurrency();
@@ -5370,7 +5370,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="MRO" /> class.
         /// </summary>
-        public static MRO Unit { get { Warrant.NotNull<MRO>(); return Uniq.Instance; } }
+        public static MRO Unit => Uniq.Instance;
 
         public static explicit operator MRO(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(MRO value) => value?.ToCurrency();
@@ -5402,7 +5402,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="MTL" /> class.
         /// </summary>
-        public static MTL Unit { get { Warrant.NotNull<MTL>(); return Uniq.Instance; } }
+        public static MTL Unit => Uniq.Instance;
 
         public static explicit operator MTL(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(MTL value) => value?.ToCurrency();
@@ -5434,7 +5434,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="MTP" /> class.
         /// </summary>
-        public static MTP Unit { get { Warrant.NotNull<MTP>(); return Uniq.Instance; } }
+        public static MTP Unit => Uniq.Instance;
 
         public static explicit operator MTP(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(MTP value) => value?.ToCurrency();
@@ -5466,7 +5466,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="MUR" /> class.
         /// </summary>
-        public static MUR Unit { get { Warrant.NotNull<MUR>(); return Uniq.Instance; } }
+        public static MUR Unit => Uniq.Instance;
 
         public static explicit operator MUR(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(MUR value) => value?.ToCurrency();
@@ -5498,7 +5498,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="MVQ" /> class.
         /// </summary>
-        public static MVQ Unit { get { Warrant.NotNull<MVQ>(); return Uniq.Instance; } }
+        public static MVQ Unit => Uniq.Instance;
 
         public static explicit operator MVQ(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(MVQ value) => value?.ToCurrency();
@@ -5530,7 +5530,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="MVR" /> class.
         /// </summary>
-        public static MVR Unit { get { Warrant.NotNull<MVR>(); return Uniq.Instance; } }
+        public static MVR Unit => Uniq.Instance;
 
         public static explicit operator MVR(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(MVR value) => value?.ToCurrency();
@@ -5562,7 +5562,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="MWK" /> class.
         /// </summary>
-        public static MWK Unit { get { Warrant.NotNull<MWK>(); return Uniq.Instance; } }
+        public static MWK Unit => Uniq.Instance;
 
         public static explicit operator MWK(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(MWK value) => value?.ToCurrency();
@@ -5594,7 +5594,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="MXN" /> class.
         /// </summary>
-        public static MXN Unit { get { Warrant.NotNull<MXN>(); return Uniq.Instance; } }
+        public static MXN Unit => Uniq.Instance;
 
         public static explicit operator MXN(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(MXN value) => value?.ToCurrency();
@@ -5626,7 +5626,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="MXP" /> class.
         /// </summary>
-        public static MXP Unit { get { Warrant.NotNull<MXP>(); return Uniq.Instance; } }
+        public static MXP Unit => Uniq.Instance;
 
         public static explicit operator MXP(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(MXP value) => value?.ToCurrency();
@@ -5658,7 +5658,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="MXV" /> class.
         /// </summary>
-        public static MXV Unit { get { Warrant.NotNull<MXV>(); return Uniq.Instance; } }
+        public static MXV Unit => Uniq.Instance;
 
         public static explicit operator MXV(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(MXV value) => value?.ToCurrency();
@@ -5690,7 +5690,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="MYR" /> class.
         /// </summary>
-        public static MYR Unit { get { Warrant.NotNull<MYR>(); return Uniq.Instance; } }
+        public static MYR Unit => Uniq.Instance;
 
         public static explicit operator MYR(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(MYR value) => value?.ToCurrency();
@@ -5722,7 +5722,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="MZE" /> class.
         /// </summary>
-        public static MZE Unit { get { Warrant.NotNull<MZE>(); return Uniq.Instance; } }
+        public static MZE Unit => Uniq.Instance;
 
         public static explicit operator MZE(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(MZE value) => value?.ToCurrency();
@@ -5754,7 +5754,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="MZM" /> class.
         /// </summary>
-        public static MZM Unit { get { Warrant.NotNull<MZM>(); return Uniq.Instance; } }
+        public static MZM Unit => Uniq.Instance;
 
         public static explicit operator MZM(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(MZM value) => value?.ToCurrency();
@@ -5786,7 +5786,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="MZN" /> class.
         /// </summary>
-        public static MZN Unit { get { Warrant.NotNull<MZN>(); return Uniq.Instance; } }
+        public static MZN Unit => Uniq.Instance;
 
         public static explicit operator MZN(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(MZN value) => value?.ToCurrency();
@@ -5818,7 +5818,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="NAD" /> class.
         /// </summary>
-        public static NAD Unit { get { Warrant.NotNull<NAD>(); return Uniq.Instance; } }
+        public static NAD Unit => Uniq.Instance;
 
         public static explicit operator NAD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(NAD value) => value?.ToCurrency();
@@ -5850,7 +5850,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="NGN" /> class.
         /// </summary>
-        public static NGN Unit { get { Warrant.NotNull<NGN>(); return Uniq.Instance; } }
+        public static NGN Unit => Uniq.Instance;
 
         public static explicit operator NGN(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(NGN value) => value?.ToCurrency();
@@ -5882,7 +5882,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="NIC" /> class.
         /// </summary>
-        public static NIC Unit { get { Warrant.NotNull<NIC>(); return Uniq.Instance; } }
+        public static NIC Unit => Uniq.Instance;
 
         public static explicit operator NIC(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(NIC value) => value?.ToCurrency();
@@ -5914,7 +5914,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="NIO" /> class.
         /// </summary>
-        public static NIO Unit { get { Warrant.NotNull<NIO>(); return Uniq.Instance; } }
+        public static NIO Unit => Uniq.Instance;
 
         public static explicit operator NIO(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(NIO value) => value?.ToCurrency();
@@ -5946,7 +5946,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="NLG" /> class.
         /// </summary>
-        public static NLG Unit { get { Warrant.NotNull<NLG>(); return Uniq.Instance; } }
+        public static NLG Unit => Uniq.Instance;
 
         public static explicit operator NLG(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(NLG value) => value?.ToCurrency();
@@ -5978,7 +5978,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="NOK" /> class.
         /// </summary>
-        public static NOK Unit { get { Warrant.NotNull<NOK>(); return Uniq.Instance; } }
+        public static NOK Unit => Uniq.Instance;
 
         public static explicit operator NOK(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(NOK value) => value?.ToCurrency();
@@ -6010,7 +6010,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="NPR" /> class.
         /// </summary>
-        public static NPR Unit { get { Warrant.NotNull<NPR>(); return Uniq.Instance; } }
+        public static NPR Unit => Uniq.Instance;
 
         public static explicit operator NPR(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(NPR value) => value?.ToCurrency();
@@ -6042,7 +6042,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="NZD" /> class.
         /// </summary>
-        public static NZD Unit { get { Warrant.NotNull<NZD>(); return Uniq.Instance; } }
+        public static NZD Unit => Uniq.Instance;
 
         public static explicit operator NZD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(NZD value) => value?.ToCurrency();
@@ -6074,7 +6074,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="OMR" /> class.
         /// </summary>
-        public static OMR Unit { get { Warrant.NotNull<OMR>(); return Uniq.Instance; } }
+        public static OMR Unit => Uniq.Instance;
 
         public static explicit operator OMR(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(OMR value) => value?.ToCurrency();
@@ -6106,7 +6106,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="PAB" /> class.
         /// </summary>
-        public static PAB Unit { get { Warrant.NotNull<PAB>(); return Uniq.Instance; } }
+        public static PAB Unit => Uniq.Instance;
 
         public static explicit operator PAB(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(PAB value) => value?.ToCurrency();
@@ -6138,7 +6138,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="PEH" /> class.
         /// </summary>
-        public static PEH Unit { get { Warrant.NotNull<PEH>(); return Uniq.Instance; } }
+        public static PEH Unit => Uniq.Instance;
 
         public static explicit operator PEH(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(PEH value) => value?.ToCurrency();
@@ -6170,7 +6170,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="PEI" /> class.
         /// </summary>
-        public static PEI Unit { get { Warrant.NotNull<PEI>(); return Uniq.Instance; } }
+        public static PEI Unit => Uniq.Instance;
 
         public static explicit operator PEI(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(PEI value) => value?.ToCurrency();
@@ -6202,7 +6202,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="PEN" /> class.
         /// </summary>
-        public static PEN Unit { get { Warrant.NotNull<PEN>(); return Uniq.Instance; } }
+        public static PEN Unit => Uniq.Instance;
 
         public static explicit operator PEN(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(PEN value) => value?.ToCurrency();
@@ -6234,7 +6234,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="PES" /> class.
         /// </summary>
-        public static PES Unit { get { Warrant.NotNull<PES>(); return Uniq.Instance; } }
+        public static PES Unit => Uniq.Instance;
 
         public static explicit operator PES(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(PES value) => value?.ToCurrency();
@@ -6266,7 +6266,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="PGK" /> class.
         /// </summary>
-        public static PGK Unit { get { Warrant.NotNull<PGK>(); return Uniq.Instance; } }
+        public static PGK Unit => Uniq.Instance;
 
         public static explicit operator PGK(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(PGK value) => value?.ToCurrency();
@@ -6298,7 +6298,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="PHP" /> class.
         /// </summary>
-        public static PHP Unit { get { Warrant.NotNull<PHP>(); return Uniq.Instance; } }
+        public static PHP Unit => Uniq.Instance;
 
         public static explicit operator PHP(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(PHP value) => value?.ToCurrency();
@@ -6330,7 +6330,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="PKR" /> class.
         /// </summary>
-        public static PKR Unit { get { Warrant.NotNull<PKR>(); return Uniq.Instance; } }
+        public static PKR Unit => Uniq.Instance;
 
         public static explicit operator PKR(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(PKR value) => value?.ToCurrency();
@@ -6362,7 +6362,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="PLN" /> class.
         /// </summary>
-        public static PLN Unit { get { Warrant.NotNull<PLN>(); return Uniq.Instance; } }
+        public static PLN Unit => Uniq.Instance;
 
         public static explicit operator PLN(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(PLN value) => value?.ToCurrency();
@@ -6394,7 +6394,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="PLZ" /> class.
         /// </summary>
-        public static PLZ Unit { get { Warrant.NotNull<PLZ>(); return Uniq.Instance; } }
+        public static PLZ Unit => Uniq.Instance;
 
         public static explicit operator PLZ(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(PLZ value) => value?.ToCurrency();
@@ -6426,7 +6426,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="PTE" /> class.
         /// </summary>
-        public static PTE Unit { get { Warrant.NotNull<PTE>(); return Uniq.Instance; } }
+        public static PTE Unit => Uniq.Instance;
 
         public static explicit operator PTE(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(PTE value) => value?.ToCurrency();
@@ -6458,7 +6458,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="PYG" /> class.
         /// </summary>
-        public static PYG Unit { get { Warrant.NotNull<PYG>(); return Uniq.Instance; } }
+        public static PYG Unit => Uniq.Instance;
 
         public static explicit operator PYG(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(PYG value) => value?.ToCurrency();
@@ -6490,7 +6490,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="QAR" /> class.
         /// </summary>
-        public static QAR Unit { get { Warrant.NotNull<QAR>(); return Uniq.Instance; } }
+        public static QAR Unit => Uniq.Instance;
 
         public static explicit operator QAR(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(QAR value) => value?.ToCurrency();
@@ -6522,7 +6522,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="RHD" /> class.
         /// </summary>
-        public static RHD Unit { get { Warrant.NotNull<RHD>(); return Uniq.Instance; } }
+        public static RHD Unit => Uniq.Instance;
 
         public static explicit operator RHD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(RHD value) => value?.ToCurrency();
@@ -6554,7 +6554,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="ROK" /> class.
         /// </summary>
-        public static ROK Unit { get { Warrant.NotNull<ROK>(); return Uniq.Instance; } }
+        public static ROK Unit => Uniq.Instance;
 
         public static explicit operator ROK(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(ROK value) => value?.ToCurrency();
@@ -6586,7 +6586,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="ROL" /> class.
         /// </summary>
-        public static ROL Unit { get { Warrant.NotNull<ROL>(); return Uniq.Instance; } }
+        public static ROL Unit => Uniq.Instance;
 
         public static explicit operator ROL(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(ROL value) => value?.ToCurrency();
@@ -6618,7 +6618,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="RON" /> class.
         /// </summary>
-        public static RON Unit { get { Warrant.NotNull<RON>(); return Uniq.Instance; } }
+        public static RON Unit => Uniq.Instance;
 
         public static explicit operator RON(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(RON value) => value?.ToCurrency();
@@ -6650,7 +6650,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="RSD" /> class.
         /// </summary>
-        public static RSD Unit { get { Warrant.NotNull<RSD>(); return Uniq.Instance; } }
+        public static RSD Unit => Uniq.Instance;
 
         public static explicit operator RSD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(RSD value) => value?.ToCurrency();
@@ -6682,7 +6682,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="RUB" /> class.
         /// </summary>
-        public static RUB Unit { get { Warrant.NotNull<RUB>(); return Uniq.Instance; } }
+        public static RUB Unit => Uniq.Instance;
 
         public static explicit operator RUB(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(RUB value) => value?.ToCurrency();
@@ -6714,7 +6714,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="RUR" /> class.
         /// </summary>
-        public static RUR Unit { get { Warrant.NotNull<RUR>(); return Uniq.Instance; } }
+        public static RUR Unit => Uniq.Instance;
 
         public static explicit operator RUR(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(RUR value) => value?.ToCurrency();
@@ -6746,7 +6746,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="RWF" /> class.
         /// </summary>
-        public static RWF Unit { get { Warrant.NotNull<RWF>(); return Uniq.Instance; } }
+        public static RWF Unit => Uniq.Instance;
 
         public static explicit operator RWF(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(RWF value) => value?.ToCurrency();
@@ -6778,7 +6778,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="SAR" /> class.
         /// </summary>
-        public static SAR Unit { get { Warrant.NotNull<SAR>(); return Uniq.Instance; } }
+        public static SAR Unit => Uniq.Instance;
 
         public static explicit operator SAR(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(SAR value) => value?.ToCurrency();
@@ -6810,7 +6810,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="SBD" /> class.
         /// </summary>
-        public static SBD Unit { get { Warrant.NotNull<SBD>(); return Uniq.Instance; } }
+        public static SBD Unit => Uniq.Instance;
 
         public static explicit operator SBD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(SBD value) => value?.ToCurrency();
@@ -6842,7 +6842,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="SCR" /> class.
         /// </summary>
-        public static SCR Unit { get { Warrant.NotNull<SCR>(); return Uniq.Instance; } }
+        public static SCR Unit => Uniq.Instance;
 
         public static explicit operator SCR(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(SCR value) => value?.ToCurrency();
@@ -6874,7 +6874,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="SDD" /> class.
         /// </summary>
-        public static SDD Unit { get { Warrant.NotNull<SDD>(); return Uniq.Instance; } }
+        public static SDD Unit => Uniq.Instance;
 
         public static explicit operator SDD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(SDD value) => value?.ToCurrency();
@@ -6906,7 +6906,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="SDG" /> class.
         /// </summary>
-        public static SDG Unit { get { Warrant.NotNull<SDG>(); return Uniq.Instance; } }
+        public static SDG Unit => Uniq.Instance;
 
         public static explicit operator SDG(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(SDG value) => value?.ToCurrency();
@@ -6938,7 +6938,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="SDP" /> class.
         /// </summary>
-        public static SDP Unit { get { Warrant.NotNull<SDP>(); return Uniq.Instance; } }
+        public static SDP Unit => Uniq.Instance;
 
         public static explicit operator SDP(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(SDP value) => value?.ToCurrency();
@@ -6970,7 +6970,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="SEK" /> class.
         /// </summary>
-        public static SEK Unit { get { Warrant.NotNull<SEK>(); return Uniq.Instance; } }
+        public static SEK Unit => Uniq.Instance;
 
         public static explicit operator SEK(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(SEK value) => value?.ToCurrency();
@@ -7002,7 +7002,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="SGD" /> class.
         /// </summary>
-        public static SGD Unit { get { Warrant.NotNull<SGD>(); return Uniq.Instance; } }
+        public static SGD Unit => Uniq.Instance;
 
         public static explicit operator SGD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(SGD value) => value?.ToCurrency();
@@ -7034,7 +7034,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="SHP" /> class.
         /// </summary>
-        public static SHP Unit { get { Warrant.NotNull<SHP>(); return Uniq.Instance; } }
+        public static SHP Unit => Uniq.Instance;
 
         public static explicit operator SHP(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(SHP value) => value?.ToCurrency();
@@ -7066,7 +7066,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="SIT" /> class.
         /// </summary>
-        public static SIT Unit { get { Warrant.NotNull<SIT>(); return Uniq.Instance; } }
+        public static SIT Unit => Uniq.Instance;
 
         public static explicit operator SIT(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(SIT value) => value?.ToCurrency();
@@ -7098,7 +7098,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="SKK" /> class.
         /// </summary>
-        public static SKK Unit { get { Warrant.NotNull<SKK>(); return Uniq.Instance; } }
+        public static SKK Unit => Uniq.Instance;
 
         public static explicit operator SKK(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(SKK value) => value?.ToCurrency();
@@ -7130,7 +7130,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="SLL" /> class.
         /// </summary>
-        public static SLL Unit { get { Warrant.NotNull<SLL>(); return Uniq.Instance; } }
+        public static SLL Unit => Uniq.Instance;
 
         public static explicit operator SLL(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(SLL value) => value?.ToCurrency();
@@ -7162,7 +7162,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="SOS" /> class.
         /// </summary>
-        public static SOS Unit { get { Warrant.NotNull<SOS>(); return Uniq.Instance; } }
+        public static SOS Unit => Uniq.Instance;
 
         public static explicit operator SOS(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(SOS value) => value?.ToCurrency();
@@ -7194,7 +7194,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="SRD" /> class.
         /// </summary>
-        public static SRD Unit { get { Warrant.NotNull<SRD>(); return Uniq.Instance; } }
+        public static SRD Unit => Uniq.Instance;
 
         public static explicit operator SRD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(SRD value) => value?.ToCurrency();
@@ -7226,7 +7226,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="SRG" /> class.
         /// </summary>
-        public static SRG Unit { get { Warrant.NotNull<SRG>(); return Uniq.Instance; } }
+        public static SRG Unit => Uniq.Instance;
 
         public static explicit operator SRG(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(SRG value) => value?.ToCurrency();
@@ -7258,7 +7258,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="SSP" /> class.
         /// </summary>
-        public static SSP Unit { get { Warrant.NotNull<SSP>(); return Uniq.Instance; } }
+        public static SSP Unit => Uniq.Instance;
 
         public static explicit operator SSP(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(SSP value) => value?.ToCurrency();
@@ -7290,7 +7290,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="STD" /> class.
         /// </summary>
-        public static STD Unit { get { Warrant.NotNull<STD>(); return Uniq.Instance; } }
+        public static STD Unit => Uniq.Instance;
 
         public static explicit operator STD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(STD value) => value?.ToCurrency();
@@ -7322,7 +7322,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="SUR" /> class.
         /// </summary>
-        public static SUR Unit { get { Warrant.NotNull<SUR>(); return Uniq.Instance; } }
+        public static SUR Unit => Uniq.Instance;
 
         public static explicit operator SUR(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(SUR value) => value?.ToCurrency();
@@ -7354,7 +7354,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="SVC" /> class.
         /// </summary>
-        public static SVC Unit { get { Warrant.NotNull<SVC>(); return Uniq.Instance; } }
+        public static SVC Unit => Uniq.Instance;
 
         public static explicit operator SVC(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(SVC value) => value?.ToCurrency();
@@ -7386,7 +7386,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="SYP" /> class.
         /// </summary>
-        public static SYP Unit { get { Warrant.NotNull<SYP>(); return Uniq.Instance; } }
+        public static SYP Unit => Uniq.Instance;
 
         public static explicit operator SYP(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(SYP value) => value?.ToCurrency();
@@ -7418,7 +7418,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="SZL" /> class.
         /// </summary>
-        public static SZL Unit { get { Warrant.NotNull<SZL>(); return Uniq.Instance; } }
+        public static SZL Unit => Uniq.Instance;
 
         public static explicit operator SZL(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(SZL value) => value?.ToCurrency();
@@ -7450,7 +7450,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="THB" /> class.
         /// </summary>
-        public static THB Unit { get { Warrant.NotNull<THB>(); return Uniq.Instance; } }
+        public static THB Unit => Uniq.Instance;
 
         public static explicit operator THB(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(THB value) => value?.ToCurrency();
@@ -7482,7 +7482,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="TJR" /> class.
         /// </summary>
-        public static TJR Unit { get { Warrant.NotNull<TJR>(); return Uniq.Instance; } }
+        public static TJR Unit => Uniq.Instance;
 
         public static explicit operator TJR(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(TJR value) => value?.ToCurrency();
@@ -7514,7 +7514,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="TJS" /> class.
         /// </summary>
-        public static TJS Unit { get { Warrant.NotNull<TJS>(); return Uniq.Instance; } }
+        public static TJS Unit => Uniq.Instance;
 
         public static explicit operator TJS(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(TJS value) => value?.ToCurrency();
@@ -7546,7 +7546,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="TMM" /> class.
         /// </summary>
-        public static TMM Unit { get { Warrant.NotNull<TMM>(); return Uniq.Instance; } }
+        public static TMM Unit => Uniq.Instance;
 
         public static explicit operator TMM(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(TMM value) => value?.ToCurrency();
@@ -7578,7 +7578,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="TMT" /> class.
         /// </summary>
-        public static TMT Unit { get { Warrant.NotNull<TMT>(); return Uniq.Instance; } }
+        public static TMT Unit => Uniq.Instance;
 
         public static explicit operator TMT(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(TMT value) => value?.ToCurrency();
@@ -7610,7 +7610,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="TND" /> class.
         /// </summary>
-        public static TND Unit { get { Warrant.NotNull<TND>(); return Uniq.Instance; } }
+        public static TND Unit => Uniq.Instance;
 
         public static explicit operator TND(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(TND value) => value?.ToCurrency();
@@ -7642,7 +7642,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="TOP" /> class.
         /// </summary>
-        public static TOP Unit { get { Warrant.NotNull<TOP>(); return Uniq.Instance; } }
+        public static TOP Unit => Uniq.Instance;
 
         public static explicit operator TOP(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(TOP value) => value?.ToCurrency();
@@ -7674,7 +7674,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="TPE" /> class.
         /// </summary>
-        public static TPE Unit { get { Warrant.NotNull<TPE>(); return Uniq.Instance; } }
+        public static TPE Unit => Uniq.Instance;
 
         public static explicit operator TPE(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(TPE value) => value?.ToCurrency();
@@ -7706,7 +7706,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="TRL" /> class.
         /// </summary>
-        public static TRL Unit { get { Warrant.NotNull<TRL>(); return Uniq.Instance; } }
+        public static TRL Unit => Uniq.Instance;
 
         public static explicit operator TRL(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(TRL value) => value?.ToCurrency();
@@ -7738,7 +7738,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="TRY" /> class.
         /// </summary>
-        public static TRY Unit { get { Warrant.NotNull<TRY>(); return Uniq.Instance; } }
+        public static TRY Unit => Uniq.Instance;
 
         public static explicit operator TRY(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(TRY value) => value?.ToCurrency();
@@ -7770,7 +7770,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="TTD" /> class.
         /// </summary>
-        public static TTD Unit { get { Warrant.NotNull<TTD>(); return Uniq.Instance; } }
+        public static TTD Unit => Uniq.Instance;
 
         public static explicit operator TTD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(TTD value) => value?.ToCurrency();
@@ -7802,7 +7802,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="TWD" /> class.
         /// </summary>
-        public static TWD Unit { get { Warrant.NotNull<TWD>(); return Uniq.Instance; } }
+        public static TWD Unit => Uniq.Instance;
 
         public static explicit operator TWD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(TWD value) => value?.ToCurrency();
@@ -7834,7 +7834,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="TZS" /> class.
         /// </summary>
-        public static TZS Unit { get { Warrant.NotNull<TZS>(); return Uniq.Instance; } }
+        public static TZS Unit => Uniq.Instance;
 
         public static explicit operator TZS(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(TZS value) => value?.ToCurrency();
@@ -7866,7 +7866,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="UAH" /> class.
         /// </summary>
-        public static UAH Unit { get { Warrant.NotNull<UAH>(); return Uniq.Instance; } }
+        public static UAH Unit => Uniq.Instance;
 
         public static explicit operator UAH(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(UAH value) => value?.ToCurrency();
@@ -7898,7 +7898,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="UAK" /> class.
         /// </summary>
-        public static UAK Unit { get { Warrant.NotNull<UAK>(); return Uniq.Instance; } }
+        public static UAK Unit => Uniq.Instance;
 
         public static explicit operator UAK(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(UAK value) => value?.ToCurrency();
@@ -7930,7 +7930,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="UGS" /> class.
         /// </summary>
-        public static UGS Unit { get { Warrant.NotNull<UGS>(); return Uniq.Instance; } }
+        public static UGS Unit => Uniq.Instance;
 
         public static explicit operator UGS(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(UGS value) => value?.ToCurrency();
@@ -7962,7 +7962,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="UGW" /> class.
         /// </summary>
-        public static UGW Unit { get { Warrant.NotNull<UGW>(); return Uniq.Instance; } }
+        public static UGW Unit => Uniq.Instance;
 
         public static explicit operator UGW(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(UGW value) => value?.ToCurrency();
@@ -7994,7 +7994,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="UGX" /> class.
         /// </summary>
-        public static UGX Unit { get { Warrant.NotNull<UGX>(); return Uniq.Instance; } }
+        public static UGX Unit => Uniq.Instance;
 
         public static explicit operator UGX(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(UGX value) => value?.ToCurrency();
@@ -8026,7 +8026,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="USD" /> class.
         /// </summary>
-        public static USD Unit { get { Warrant.NotNull<USD>(); return Uniq.Instance; } }
+        public static USD Unit => Uniq.Instance;
 
         public static explicit operator USD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(USD value) => value?.ToCurrency();
@@ -8058,7 +8058,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="USN" /> class.
         /// </summary>
-        public static USN Unit { get { Warrant.NotNull<USN>(); return Uniq.Instance; } }
+        public static USN Unit => Uniq.Instance;
 
         public static explicit operator USN(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(USN value) => value?.ToCurrency();
@@ -8090,7 +8090,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="USS" /> class.
         /// </summary>
-        public static USS Unit { get { Warrant.NotNull<USS>(); return Uniq.Instance; } }
+        public static USS Unit => Uniq.Instance;
 
         public static explicit operator USS(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(USS value) => value?.ToCurrency();
@@ -8122,7 +8122,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="UYI" /> class.
         /// </summary>
-        public static UYI Unit { get { Warrant.NotNull<UYI>(); return Uniq.Instance; } }
+        public static UYI Unit => Uniq.Instance;
 
         public static explicit operator UYI(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(UYI value) => value?.ToCurrency();
@@ -8154,7 +8154,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="UYN" /> class.
         /// </summary>
-        public static UYN Unit { get { Warrant.NotNull<UYN>(); return Uniq.Instance; } }
+        public static UYN Unit => Uniq.Instance;
 
         public static explicit operator UYN(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(UYN value) => value?.ToCurrency();
@@ -8186,7 +8186,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="UYP" /> class.
         /// </summary>
-        public static UYP Unit { get { Warrant.NotNull<UYP>(); return Uniq.Instance; } }
+        public static UYP Unit => Uniq.Instance;
 
         public static explicit operator UYP(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(UYP value) => value?.ToCurrency();
@@ -8218,7 +8218,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="UYU" /> class.
         /// </summary>
-        public static UYU Unit { get { Warrant.NotNull<UYU>(); return Uniq.Instance; } }
+        public static UYU Unit => Uniq.Instance;
 
         public static explicit operator UYU(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(UYU value) => value?.ToCurrency();
@@ -8250,7 +8250,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="UZS" /> class.
         /// </summary>
-        public static UZS Unit { get { Warrant.NotNull<UZS>(); return Uniq.Instance; } }
+        public static UZS Unit => Uniq.Instance;
 
         public static explicit operator UZS(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(UZS value) => value?.ToCurrency();
@@ -8282,7 +8282,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="VEB" /> class.
         /// </summary>
-        public static VEB Unit { get { Warrant.NotNull<VEB>(); return Uniq.Instance; } }
+        public static VEB Unit => Uniq.Instance;
 
         public static explicit operator VEB(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(VEB value) => value?.ToCurrency();
@@ -8314,7 +8314,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="VEF" /> class.
         /// </summary>
-        public static VEF Unit { get { Warrant.NotNull<VEF>(); return Uniq.Instance; } }
+        public static VEF Unit => Uniq.Instance;
 
         public static explicit operator VEF(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(VEF value) => value?.ToCurrency();
@@ -8346,7 +8346,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="VNC" /> class.
         /// </summary>
-        public static VNC Unit { get { Warrant.NotNull<VNC>(); return Uniq.Instance; } }
+        public static VNC Unit => Uniq.Instance;
 
         public static explicit operator VNC(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(VNC value) => value?.ToCurrency();
@@ -8378,7 +8378,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="VND" /> class.
         /// </summary>
-        public static VND Unit { get { Warrant.NotNull<VND>(); return Uniq.Instance; } }
+        public static VND Unit => Uniq.Instance;
 
         public static explicit operator VND(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(VND value) => value?.ToCurrency();
@@ -8410,7 +8410,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="VUV" /> class.
         /// </summary>
-        public static VUV Unit { get { Warrant.NotNull<VUV>(); return Uniq.Instance; } }
+        public static VUV Unit => Uniq.Instance;
 
         public static explicit operator VUV(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(VUV value) => value?.ToCurrency();
@@ -8442,7 +8442,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="WST" /> class.
         /// </summary>
-        public static WST Unit { get { Warrant.NotNull<WST>(); return Uniq.Instance; } }
+        public static WST Unit => Uniq.Instance;
 
         public static explicit operator WST(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(WST value) => value?.ToCurrency();
@@ -8474,7 +8474,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="XAF" /> class.
         /// </summary>
-        public static XAF Unit { get { Warrant.NotNull<XAF>(); return Uniq.Instance; } }
+        public static XAF Unit => Uniq.Instance;
 
         public static explicit operator XAF(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(XAF value) => value?.ToCurrency();
@@ -8506,7 +8506,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="XAG" /> class.
         /// </summary>
-        public static XAG Unit { get { Warrant.NotNull<XAG>(); return Uniq.Instance; } }
+        public static XAG Unit => Uniq.Instance;
 
         public static explicit operator XAG(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(XAG value) => value?.ToCurrency();
@@ -8538,7 +8538,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="XAU" /> class.
         /// </summary>
-        public static XAU Unit { get { Warrant.NotNull<XAU>(); return Uniq.Instance; } }
+        public static XAU Unit => Uniq.Instance;
 
         public static explicit operator XAU(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(XAU value) => value?.ToCurrency();
@@ -8570,7 +8570,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="XBA" /> class.
         /// </summary>
-        public static XBA Unit { get { Warrant.NotNull<XBA>(); return Uniq.Instance; } }
+        public static XBA Unit => Uniq.Instance;
 
         public static explicit operator XBA(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(XBA value) => value?.ToCurrency();
@@ -8602,7 +8602,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="XBB" /> class.
         /// </summary>
-        public static XBB Unit { get { Warrant.NotNull<XBB>(); return Uniq.Instance; } }
+        public static XBB Unit => Uniq.Instance;
 
         public static explicit operator XBB(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(XBB value) => value?.ToCurrency();
@@ -8634,7 +8634,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="XBC" /> class.
         /// </summary>
-        public static XBC Unit { get { Warrant.NotNull<XBC>(); return Uniq.Instance; } }
+        public static XBC Unit => Uniq.Instance;
 
         public static explicit operator XBC(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(XBC value) => value?.ToCurrency();
@@ -8666,7 +8666,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="XBD" /> class.
         /// </summary>
-        public static XBD Unit { get { Warrant.NotNull<XBD>(); return Uniq.Instance; } }
+        public static XBD Unit => Uniq.Instance;
 
         public static explicit operator XBD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(XBD value) => value?.ToCurrency();
@@ -8698,7 +8698,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="XCD" /> class.
         /// </summary>
-        public static XCD Unit { get { Warrant.NotNull<XCD>(); return Uniq.Instance; } }
+        public static XCD Unit => Uniq.Instance;
 
         public static explicit operator XCD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(XCD value) => value?.ToCurrency();
@@ -8730,7 +8730,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="XDR" /> class.
         /// </summary>
-        public static XDR Unit { get { Warrant.NotNull<XDR>(); return Uniq.Instance; } }
+        public static XDR Unit => Uniq.Instance;
 
         public static explicit operator XDR(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(XDR value) => value?.ToCurrency();
@@ -8762,7 +8762,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="XEU" /> class.
         /// </summary>
-        public static XEU Unit { get { Warrant.NotNull<XEU>(); return Uniq.Instance; } }
+        public static XEU Unit => Uniq.Instance;
 
         public static explicit operator XEU(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(XEU value) => value?.ToCurrency();
@@ -8794,7 +8794,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="XFO" /> class.
         /// </summary>
-        public static XFO Unit { get { Warrant.NotNull<XFO>(); return Uniq.Instance; } }
+        public static XFO Unit => Uniq.Instance;
 
         public static explicit operator XFO(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(XFO value) => value?.ToCurrency();
@@ -8826,7 +8826,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="XFU" /> class.
         /// </summary>
-        public static XFU Unit { get { Warrant.NotNull<XFU>(); return Uniq.Instance; } }
+        public static XFU Unit => Uniq.Instance;
 
         public static explicit operator XFU(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(XFU value) => value?.ToCurrency();
@@ -8858,7 +8858,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="XOF" /> class.
         /// </summary>
-        public static XOF Unit { get { Warrant.NotNull<XOF>(); return Uniq.Instance; } }
+        public static XOF Unit => Uniq.Instance;
 
         public static explicit operator XOF(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(XOF value) => value?.ToCurrency();
@@ -8890,7 +8890,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="XPD" /> class.
         /// </summary>
-        public static XPD Unit { get { Warrant.NotNull<XPD>(); return Uniq.Instance; } }
+        public static XPD Unit => Uniq.Instance;
 
         public static explicit operator XPD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(XPD value) => value?.ToCurrency();
@@ -8922,7 +8922,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="XPF" /> class.
         /// </summary>
-        public static XPF Unit { get { Warrant.NotNull<XPF>(); return Uniq.Instance; } }
+        public static XPF Unit => Uniq.Instance;
 
         public static explicit operator XPF(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(XPF value) => value?.ToCurrency();
@@ -8954,7 +8954,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="XPT" /> class.
         /// </summary>
-        public static XPT Unit { get { Warrant.NotNull<XPT>(); return Uniq.Instance; } }
+        public static XPT Unit => Uniq.Instance;
 
         public static explicit operator XPT(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(XPT value) => value?.ToCurrency();
@@ -8986,7 +8986,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="XRE" /> class.
         /// </summary>
-        public static XRE Unit { get { Warrant.NotNull<XRE>(); return Uniq.Instance; } }
+        public static XRE Unit => Uniq.Instance;
 
         public static explicit operator XRE(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(XRE value) => value?.ToCurrency();
@@ -9018,7 +9018,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="XSU" /> class.
         /// </summary>
-        public static XSU Unit { get { Warrant.NotNull<XSU>(); return Uniq.Instance; } }
+        public static XSU Unit => Uniq.Instance;
 
         public static explicit operator XSU(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(XSU value) => value?.ToCurrency();
@@ -9050,7 +9050,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="XTS" /> class.
         /// </summary>
-        public static XTS Unit { get { Warrant.NotNull<XTS>(); return Uniq.Instance; } }
+        public static XTS Unit => Uniq.Instance;
 
         public static explicit operator XTS(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(XTS value) => value?.ToCurrency();
@@ -9082,7 +9082,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="XUA" /> class.
         /// </summary>
-        public static XUA Unit { get { Warrant.NotNull<XUA>(); return Uniq.Instance; } }
+        public static XUA Unit => Uniq.Instance;
 
         public static explicit operator XUA(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(XUA value) => value?.ToCurrency();
@@ -9114,7 +9114,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="XXX" /> class.
         /// </summary>
-        public static XXX Unit { get { Warrant.NotNull<XXX>(); return Uniq.Instance; } }
+        public static XXX Unit => Uniq.Instance;
 
         public static explicit operator XXX(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(XXX value) => value?.ToCurrency();
@@ -9146,7 +9146,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="YDD" /> class.
         /// </summary>
-        public static YDD Unit { get { Warrant.NotNull<YDD>(); return Uniq.Instance; } }
+        public static YDD Unit => Uniq.Instance;
 
         public static explicit operator YDD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(YDD value) => value?.ToCurrency();
@@ -9178,7 +9178,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="YER" /> class.
         /// </summary>
-        public static YER Unit { get { Warrant.NotNull<YER>(); return Uniq.Instance; } }
+        public static YER Unit => Uniq.Instance;
 
         public static explicit operator YER(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(YER value) => value?.ToCurrency();
@@ -9210,7 +9210,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="YUD" /> class.
         /// </summary>
-        public static YUD Unit { get { Warrant.NotNull<YUD>(); return Uniq.Instance; } }
+        public static YUD Unit => Uniq.Instance;
 
         public static explicit operator YUD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(YUD value) => value?.ToCurrency();
@@ -9242,7 +9242,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="YUM" /> class.
         /// </summary>
-        public static YUM Unit { get { Warrant.NotNull<YUM>(); return Uniq.Instance; } }
+        public static YUM Unit => Uniq.Instance;
 
         public static explicit operator YUM(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(YUM value) => value?.ToCurrency();
@@ -9274,7 +9274,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="YUN" /> class.
         /// </summary>
-        public static YUN Unit { get { Warrant.NotNull<YUN>(); return Uniq.Instance; } }
+        public static YUN Unit => Uniq.Instance;
 
         public static explicit operator YUN(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(YUN value) => value?.ToCurrency();
@@ -9306,7 +9306,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="ZAL" /> class.
         /// </summary>
-        public static ZAL Unit { get { Warrant.NotNull<ZAL>(); return Uniq.Instance; } }
+        public static ZAL Unit => Uniq.Instance;
 
         public static explicit operator ZAL(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(ZAL value) => value?.ToCurrency();
@@ -9338,7 +9338,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="ZAR" /> class.
         /// </summary>
-        public static ZAR Unit { get { Warrant.NotNull<ZAR>(); return Uniq.Instance; } }
+        public static ZAR Unit => Uniq.Instance;
 
         public static explicit operator ZAR(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(ZAR value) => value?.ToCurrency();
@@ -9370,7 +9370,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="ZMK" /> class.
         /// </summary>
-        public static ZMK Unit { get { Warrant.NotNull<ZMK>(); return Uniq.Instance; } }
+        public static ZMK Unit => Uniq.Instance;
 
         public static explicit operator ZMK(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(ZMK value) => value?.ToCurrency();
@@ -9402,7 +9402,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="ZMW" /> class.
         /// </summary>
-        public static ZMW Unit { get { Warrant.NotNull<ZMW>(); return Uniq.Instance; } }
+        public static ZMW Unit => Uniq.Instance;
 
         public static explicit operator ZMW(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(ZMW value) => value?.ToCurrency();
@@ -9434,7 +9434,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="ZRN" /> class.
         /// </summary>
-        public static ZRN Unit { get { Warrant.NotNull<ZRN>(); return Uniq.Instance; } }
+        public static ZRN Unit => Uniq.Instance;
 
         public static explicit operator ZRN(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(ZRN value) => value?.ToCurrency();
@@ -9466,7 +9466,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="ZRZ" /> class.
         /// </summary>
-        public static ZRZ Unit { get { Warrant.NotNull<ZRZ>(); return Uniq.Instance; } }
+        public static ZRZ Unit => Uniq.Instance;
 
         public static explicit operator ZRZ(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(ZRZ value) => value?.ToCurrency();
@@ -9498,7 +9498,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="ZWC" /> class.
         /// </summary>
-        public static ZWC Unit { get { Warrant.NotNull<ZWC>(); return Uniq.Instance; } }
+        public static ZWC Unit => Uniq.Instance;
 
         public static explicit operator ZWC(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(ZWC value) => value?.ToCurrency();
@@ -9530,7 +9530,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="ZWD" /> class.
         /// </summary>
-        public static ZWD Unit { get { Warrant.NotNull<ZWD>(); return Uniq.Instance; } }
+        public static ZWD Unit => Uniq.Instance;
 
         public static explicit operator ZWD(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(ZWD value) => value?.ToCurrency();
@@ -9562,7 +9562,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="ZWL" /> class.
         /// </summary>
-        public static ZWL Unit { get { Warrant.NotNull<ZWL>(); return Uniq.Instance; } }
+        public static ZWL Unit => Uniq.Instance;
 
         public static explicit operator ZWL(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(ZWL value) => value?.ToCurrency();
@@ -9594,7 +9594,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="ZWN" /> class.
         /// </summary>
-        public static ZWN Unit { get { Warrant.NotNull<ZWN>(); return Uniq.Instance; } }
+        public static ZWN Unit => Uniq.Instance;
 
         public static explicit operator ZWN(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(ZWN value) => value?.ToCurrency();
@@ -9626,7 +9626,7 @@ namespace Narvalo.Finance.Generic
         /// <summary>
         /// Gets the unique instance of the <see cref="ZWR" /> class.
         /// </summary>
-        public static ZWR Unit { get { Warrant.NotNull<ZWR>(); return Uniq.Instance; } }
+        public static ZWR Unit => Uniq.Instance;
 
         public static explicit operator ZWR(Currency value) => FromCurrency(value);
         public static explicit operator Currency?(ZWR value) => value?.ToCurrency();

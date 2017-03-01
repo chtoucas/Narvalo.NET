@@ -4,7 +4,6 @@ namespace Narvalo.Finance
 {
     using System;
     using System.Diagnostics;
-    using System.Diagnostics.Contracts;
 
     using Narvalo.Finance.Properties;
 
@@ -19,10 +18,7 @@ namespace Narvalo.Finance
             IsFalse = isFalse;
         }
 
-        internal static BooleanResult True
-        {
-            get { Warrant.NotNull<BooleanResult>(); return s_True; }
-        }
+        internal static BooleanResult True => s_True;
 
         public bool IsFalse { get; }
 
@@ -44,12 +40,7 @@ namespace Narvalo.Finance
 
         public bool ToBoolean() => IsTrue;
 
-        public override string ToString()
-        {
-            Warrant.NotNull<string>();
-
-            return "True";
-        }
+        public override string ToString() => "True";
 
         [DebuggerDisplay("False")]
         [DebuggerTypeProxy(typeof(False_.DebugView))]
@@ -64,22 +55,13 @@ namespace Narvalo.Finance
                 _message = message;
             }
 
-            public override string Error
-            {
-                get { Warrant.NotNull<string>(); return _message; }
-            }
+            public override string Error => _message;
 
-            public override string ToString()
-            {
-                Warrant.NotNull<string>();
-
-                return Format.Current("False({0})", _message);
-            }
+            public override string ToString() => Format.Current("False({0})", _message);
 
             /// <summary>
             /// Represents a debugger type proxy for <see cref="BooleanResult.False_"/>.
             /// </summary>
-            [ContractVerification(false)] // Debugger-only code.
             [ExcludeFromCodeCoverage]
             private sealed class DebugView
             {
@@ -95,26 +77,3 @@ namespace Narvalo.Finance
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Finance
-{
-    using System.Diagnostics.Contracts;
-
-    public partial class BooleanResult
-    {
-        private sealed partial class False_
-        {
-            [ContractInvariantMethod]
-            private void ObjectInvariant()
-            {
-                Contract.Invariant(_message != null);
-                Contract.Invariant(IsFalse);
-            }
-        }
-    }
-}
-
-#endif
-

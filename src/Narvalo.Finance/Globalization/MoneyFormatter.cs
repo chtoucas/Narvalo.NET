@@ -94,7 +94,6 @@ namespace Narvalo.Finance.Globalization
             where TAmount : IFormattable
         {
             Demand.NotNull(nfi);
-            Warrant.NotNull<string>();
 
             var format = 'N' + spec.DecimalPlaces?.ToString(CultureInfo.InvariantCulture);
 

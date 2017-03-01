@@ -8,10 +8,6 @@ namespace Narvalo.Finance.Internal
     internal static class Result
     {
         public static Result<T> Of<T>(T value) where T : struct
-        {
-            Warrant.NotNull<Result<T>>();
-
-            return Result<T>.Return(value);
-        }
+            => Result<T>.Return(value);
     }
 }

@@ -53,17 +53,11 @@ namespace Narvalo.Finance.Generic
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
         public static Money<TCurrency> One => s_One;
 
-        internal static TCurrency UnderlyingUnit
-        {
-            get { Warrant.NotNull<TCurrency>(); return s_UnderlyingUnit; }
-        }
+        internal static TCurrency UnderlyingUnit => s_UnderlyingUnit;
 
         public decimal Amount { get; }
 
-        public TCurrency Currency
-        {
-            get { Warrant.NotNull<TCurrency>(); return UnderlyingUnit; }
-        }
+        public TCurrency Currency => UnderlyingUnit;
 
         public bool IsNormalized { get; }
 
@@ -106,7 +100,6 @@ namespace Narvalo.Finance.Generic
 
         public Money<TCurrency> Normalize(IRoundingAdjuster adjuster)
         {
-            Expect.NotNull(adjuster);
             if (IsNormalized) { return this; }
             return MoneyFactory.FromMajor<TCurrency>(Amount, adjuster);
         }
@@ -206,17 +199,9 @@ namespace Narvalo.Finance.Generic
     // Implements the IFormattable interface.
     public partial struct Money<TCurrency>
     {
-        public override string ToString()
-        {
-            Warrant.NotNull<string>();
-            return FormatImpl(null, NumberFormatInfo.CurrentInfo);
-        }
+        public override string ToString() => FormatImpl(null, NumberFormatInfo.CurrentInfo);
 
-        public string ToString(string format)
-        {
-            Warrant.NotNull<string>();
-            return FormatImpl(format, NumberFormatInfo.CurrentInfo);
-        }
+        public string ToString(string format) => FormatImpl(format, NumberFormatInfo.CurrentInfo);
 
         public string ToString(IFormatProvider formatProvider) => ToString(null, formatProvider);
 
@@ -234,7 +219,6 @@ namespace Narvalo.Finance.Generic
         private string FormatImpl(string format, NumberFormatInfo info)
         {
             Demand.NotNull(info);
-            Warrant.NotNull<string>();
 
             var spec = MoneyFormat.Parse(format, Currency.FixedDecimalPlaces);
 

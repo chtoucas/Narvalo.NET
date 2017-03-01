@@ -57,12 +57,7 @@ namespace Narvalo.Finance
 
         public decimal Factor => 1 / Epsilon;
 
-        public override string ToString()
-        {
-            Warrant.NotNull<string>();
-
-            return Code;
-        }
+        public override string ToString() => Code;
     }
 
     // Interface IEquatable<FractionalCurrency>.

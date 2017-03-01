@@ -43,11 +43,7 @@ namespace Narvalo.Finance
         // 3. Replace 'A' by 10, 'B' by 11, etc.
         // 4. Verify that the resulting integer modulo 97 is equal to 1.
         public static bool Verify(string iban, bool useInt64)
-        {
-            Expect.NotNull(iban);
-
-            return (useInt64 ? ComputeInt64Checksum(iban) : ComputeInt32Checksum(iban)) == 1;
-        }
+            => (useInt64 ? ComputeInt64Checksum(iban) : ComputeInt32Checksum(iban)) == 1;
 
         // WARNING: Only works for well-formed values (length and valid characters).
         public static int ComputeInt32Checksum(string value)
