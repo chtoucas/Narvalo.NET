@@ -34,34 +34,22 @@ namespace Narvalo.Fx
     {
         public static void ThrowIfError(this Result<ExceptionDispatchInfo> @this)
         {
-            if (@this.IsError)
-            {
-                @this.Error.Throw();
-            }
+            if (@this.IsError) { @this.Error.Throw(); }
         }
 
         public static void ThrowIfError<TException>(this Result<TException> @this) where TException : Exception
         {
-            if (@this.IsError)
-            {
-                throw @this.Error;
-            }
+            if (@this.IsError) { throw @this.Error; }
         }
 
         public static void ThrowIfError<T>(this Result<T, ExceptionDispatchInfo> @this)
         {
-            if (@this.IsError)
-            {
-                @this.Error.Throw();
-            }
+            if (@this.IsError) { @this.Error.Throw(); }
         }
 
         public static void ThrowIfError<T, TException>(this Result<T, TException> @this) where TException : Exception
         {
-            if (@this.IsError)
-            {
-                throw @this.Error;
-            }
+            if (@this.IsError) { throw @this.Error; }
         }
 
         // NB: This method serves a different purpose than the trywith from F# workflows.
@@ -163,7 +151,8 @@ namespace Narvalo.Fx
             return CollectAnyIterator(@this);
         }
 
-        internal static IEnumerable<TSource> CollectAnyIterator<TSource, TError>(IEnumerable<Result<TSource, TError>> source)
+        private static IEnumerable<TSource> CollectAnyIterator<TSource, TError>(
+            IEnumerable<Result<TSource, TError>> source)
         {
             Demand.NotNull(source);
 
@@ -177,8 +166,7 @@ namespace Narvalo.Fx
     // Provides extension methods for IEnumerable<Result<TError>>.
     public static partial class Result
     {
-        internal static Result<IEnumerable<TError>> Collect<TError>(
-            this IEnumerable<Result<TError>> @this)
+        internal static Result<IEnumerable<TError>> Collect<TError>(this IEnumerable<Result<TError>> @this)
             => Result.FromError(CollectAnyIterator(@this));
 
         public static IEnumerable<TError> CollectAny<TError>(this IEnumerable<Result<TError>> @this)
@@ -188,7 +176,7 @@ namespace Narvalo.Fx
             return CollectAnyIterator(@this);
         }
 
-        internal static IEnumerable<TError> CollectAnyIterator<TError>(IEnumerable<Result<TError>> source)
+        private static IEnumerable<TError> CollectAnyIterator<TError>(IEnumerable<Result<TError>> source)
         {
             Demand.NotNull(source);
 

@@ -77,7 +77,7 @@ namespace Narvalo.Fx
             return CollectAnyIterator(@this);
         }
 
-        internal static IEnumerable<TSource> CollectAnyIterator<TSource>(IEnumerable<ResultOrError<TSource>> source)
+        private static IEnumerable<TSource> CollectAnyIterator<TSource>(IEnumerable<ResultOrError<TSource>> source)
         {
             Demand.NotNull(source);
             Warrant.NotNull<IEnumerable<TSource>>();
