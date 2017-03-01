@@ -19,15 +19,15 @@ namespace Narvalo.Fx
             IsError = true;
         }
 
-        public bool IsSuccess => !IsError;
-
         public bool IsError { get; }
+
+        public bool IsSuccess => !IsError;
 
         internal ExceptionDispatchInfo ExceptionInfo { get { Demand.State(IsError); return _exceptionInfo; } }
 
         [ExcludeFromCodeCoverage]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
-        private string DebuggerDisplay => IsSuccess ? "Void" : "Error";
+        private string DebuggerDisplay => IsError ? "Error" : "Success";
 
         public void ThrowIfError()
         {
@@ -35,7 +35,7 @@ namespace Narvalo.Fx
         }
 
         public override string ToString()
-            => IsSuccess ? "Success" : Format.Current("Error({0})", ExceptionInfo.SourceException.Message);
+            => IsError ? Format.Current("Error({0})", ExceptionInfo.SourceException.Message) : "Success";
 
         /// <summary>
         /// Represents a debugger type proxy for <see cref="Result"/>.
@@ -50,20 +50,15 @@ namespace Narvalo.Fx
                 _inner = inner;
             }
 
-            public ExceptionDispatchInfo ExceptionInfo
-                => _inner.IsError ? _inner.ExceptionInfo : default(ExceptionDispatchInfo);
+            public bool IsSuccess => _inner.IsSuccess;
+
+            public ExceptionDispatchInfo ExceptionInfo => _inner._exceptionInfo;
         }
     }
 
     // Conversion operators.
     public partial struct Result
     {
-        public Unit ToUnit()
-        {
-            if (IsError) { throw new InvalidCastException("XXX"); }
-            return Narvalo.Fx.Unit.Default;
-        }
-
         public Exception ToException()
         {
             if (IsSuccess) { throw new InvalidCastException("XXX"); }
@@ -75,8 +70,6 @@ namespace Narvalo.Fx
             if (IsSuccess) { throw new InvalidCastException("XXX"); }
             return ExceptionInfo;
         }
-
-        public static explicit operator Unit(Result value) => value.ToUnit();
 
         public static explicit operator ExceptionDispatchInfo(Result value) => value.ToExceptionInfo();
 
@@ -93,17 +86,12 @@ namespace Narvalo.Fx
 
         public bool Equals(Result other)
         {
-            if (IsSuccess) { return other.IsSuccess; }
+            if (IsError) { return ReferenceEquals(ExceptionInfo, other.ExceptionInfo); }
 
-            return other.IsError && ReferenceEquals(ExceptionInfo, other.ExceptionInfo);
+            return other.IsSuccess;
         }
 
-        public override bool Equals(object obj)
-        {
-            if (!(obj is Result)) { return false; }
-
-            return Equals((Result)obj);
-        }
+        public override bool Equals(object obj) => obj is Result && Equals((Result)obj);
 
         public override int GetHashCode() => IsError ? ExceptionInfo.GetHashCode() : 0;
     }

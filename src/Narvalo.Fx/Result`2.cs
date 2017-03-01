@@ -3,6 +3,7 @@
 namespace Narvalo.Fx
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
@@ -10,13 +11,13 @@ namespace Narvalo.Fx
     using System.Runtime.CompilerServices;
 
     // Typical use cases and recommendations:
+    // - Result<T, TError> is a value type; for long-lived objects you should use Either<T, TError>.
     // - Result<T, string> for lightweight error reporting to the caller;
     //   think of it as a verbose Maybe<T>.
+    // - For methods with void return type, you should use Result or Maybe<TError>.
     // - Result<T, Exception> should be used only in very rare situations; this is **not** a
     //   replacement for the standard exception mechanism in .NET. See Result and Result<T>
     //   for other alternatives.
-    // - For methods with void return type, you should use Result or Maybe<TError>.
-    // - Result<T, TError> is a value type; for long-lived objects you should use Either<T, TError>.
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     [DebuggerTypeProxy(typeof(Result<,>.DebugView))]
     public partial struct Result<T, TError>
@@ -44,7 +45,7 @@ namespace Narvalo.Fx
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
         private string DebuggerDisplay => IsSuccess ? "Success" : "Error";
 
-        public T ValueOrDefault() => IsSuccess ? Value : default(T);
+        public T ValueOrDefault() => _value;
 
         public T ValueOrElse(T other) => IsSuccess ? Value : other;
 
@@ -61,7 +62,6 @@ namespace Narvalo.Fx
             Require.NotNull(exception, nameof(exception));
 
             if (IsError) { throw exception; }
-
             return Value;
         }
 
@@ -70,7 +70,6 @@ namespace Narvalo.Fx
             Require.NotNull(exceptionFactory, nameof(exceptionFactory));
 
             if (IsError) { throw exceptionFactory(); }
-
             return Value;
         }
 
@@ -90,11 +89,11 @@ namespace Narvalo.Fx
                 _inner = inner;
             }
 
-            public bool IsError => _inner.IsError;
+            public bool IsSuccess => _inner.IsSuccess;
 
-            public TError Error => _inner.Error;
+            public TError Error => _inner._error;
 
-            public T Value => _inner.Value;
+            public T Value => _inner._value;
         }
     }
 
@@ -246,14 +245,12 @@ namespace Narvalo.Fx
         public void OnSuccess(Action<T> action)
         {
             Require.NotNull(action, nameof(action));
-
             if (IsSuccess) { action(Value); }
         }
 
         public void OnError(Action<TError> action)
         {
             Require.NotNull(action, nameof(action));
-
             if (IsError) { action(Error); }
         }
     }
@@ -274,50 +271,47 @@ namespace Narvalo.Fx
         public static bool operator !=(Result<T, TError> left, Result<T, TError> right) => !left.Equals(right);
 
         public bool Equals(Result<T, TError> other)
-            => Equals(other, EqualityComparer<T>.Default, EqualityComparer<TError>.Default);
+        {
+            if (IsSuccess) { return other.IsSuccess && EqualityComparer<T>.Default.Equals(Value, other.Value); }
 
-        public bool Equals(
-            Result<T, TError> other,
-            IEqualityComparer<T> comparer,
-            IEqualityComparer<TError> errComparer)
+            return other.IsError && EqualityComparer<TError>.Default.Equals(Error, other.Error);
+        }
+
+        public bool Equals(Result<T, TError> other, IEqualityComparer comparer)
         {
             Require.NotNull(comparer, nameof(comparer));
-            Require.NotNull(errComparer, nameof(errComparer));
 
             if (IsSuccess) { return other.IsSuccess && comparer.Equals(Value, other.Value); }
 
-            return other.IsError && errComparer.Equals(Error, other.Error);
+            return other.IsError && comparer.Equals(Error, other.Error);
         }
 
         public override bool Equals(object obj)
-            => Equals(obj, EqualityComparer<T>.Default, EqualityComparer<TError>.Default);
+            => obj is Result<T, TError> && Equals((Result<T, TError>)obj);
 
-        public bool Equals(
-            object other,
-            IEqualityComparer<T> comparer,
-            IEqualityComparer<TError> errComparer)
-        {
-            Require.NotNull(comparer, nameof(comparer));
-            Require.NotNull(errComparer, nameof(errComparer));
-
-            if (!(other is Result<T, TError>)) { return false; }
-
-            return Equals((Result<T, TError>)other, comparer, errComparer);
-        }
+        public bool Equals(object other, IEqualityComparer comparer)
+            => other is Result<T, TError> && Equals((Result<T, TError>)other, comparer);
 
         public override int GetHashCode()
-            => GetHashCode(EqualityComparer<T>.Default, EqualityComparer<TError>.Default);
+        {
+            unchecked
+            {
+                int hash = 17;
+                hash = 31 * hash + IsSuccess.GetHashCode();
+                hash = 31 * hash + (IsSuccess ? Value.GetHashCode() : Error.GetHashCode());
+                return hash;
+            }
+        }
 
-        public int GetHashCode(IEqualityComparer<T> comparer, IEqualityComparer<TError> errComparer)
+        public int GetHashCode(IEqualityComparer comparer)
         {
             Require.NotNull(comparer, nameof(comparer));
-            Require.NotNull(errComparer, nameof(errComparer));
 
             unchecked
             {
                 int hash = 17;
                 hash = 31 * hash + IsSuccess.GetHashCode();
-                hash = 31 * hash + (IsSuccess ? comparer.GetHashCode(Value) : errComparer.GetHashCode(Error));
+                hash = 31 * hash + (IsSuccess ? comparer.GetHashCode(Value) : comparer.GetHashCode(Error));
                 return hash;
             }
         }

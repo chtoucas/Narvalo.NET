@@ -82,7 +82,7 @@ namespace Narvalo.Fx
         /// Obtains the underlying value if any; otherwise the default value of the type T.
         /// </summary>
         /// <returns>The underlying value if any; otherwise the default value of the type T.</returns>
-        public T ValueOrDefault() => IsSuccess ? Value : default(T);
+        public T ValueOrDefault() => _value;
 
         /// <summary>
         /// Returns the underlying value if any; otherwise <paramref name="other"/>.
@@ -123,10 +123,9 @@ namespace Narvalo.Fx
 
             public bool IsSuccess => _inner.IsSuccess;
 
-            public T Value => IsSuccess ? _inner.Value : default(T);
+            public T Value => _inner._value;
 
-            public ExceptionDispatchInfo ExceptionInfo
-                => IsSuccess ? default(ExceptionDispatchInfo) : _inner.ExceptionInfo;
+            public ExceptionDispatchInfo ExceptionInfo => _inner._exceptionInfo;
         }
     }
 
@@ -144,7 +143,6 @@ namespace Narvalo.Fx
             if (IsSuccess) { throw new InvalidCastException("XXX"); }
             return ExceptionInfo.SourceException;
         }
-
 
         public ExceptionDispatchInfo ToExceptionInfo()
         {
@@ -298,12 +296,14 @@ namespace Narvalo.Fx
         public IEnumerator<T> GetEnumerator() => ToEnumerable().GetEnumerator();
     }
 
-    // Implements the IEquatable<Result<TError>> interfaces.
+    // Implements the IEquatable<Result<T>> interfaces.
     public partial struct Result<T>
     {
-        public static bool operator ==(Result<T> left, Result<T> right) => left.Equals(right);
+        public static bool operator ==(Result<T> left, Result<T> right)
+            => left.Equals(right, EqualityComparer<T>.Default);
 
-        public static bool operator !=(Result<T> left, Result<T> right) => !left.Equals(right);
+        public static bool operator !=(Result<T> left, Result<T> right)
+            => !left.Equals(right, EqualityComparer<T>.Default);
 
         public bool Equals(Result<T> other) => Equals(other, EqualityComparer<T>.Default);
 
@@ -311,21 +311,16 @@ namespace Narvalo.Fx
         {
             Require.NotNull(comparer, nameof(comparer));
 
-            if (IsError) { return other.IsError && ReferenceEquals(ExceptionInfo, other.ExceptionInfo); }
+            if (IsSuccess) { return comparer.Equals(Value, other.Value); }
 
-            return other.IsSuccess && comparer.Equals(Value, other.Value);
+            return other.IsError && ReferenceEquals(ExceptionInfo, other.ExceptionInfo);
         }
 
-        public override bool Equals(object obj) => Equals(obj, EqualityComparer<T>.Default);
+        public override bool Equals(object obj)
+            => obj is Result<T> && Equals((Result<T>)obj, EqualityComparer<T>.Default);
 
         public bool Equals(object other, IEqualityComparer<T> comparer)
-        {
-            Require.NotNull(comparer, nameof(comparer));
-
-            if (!(other is Result<T>)) { return false; }
-
-            return Equals((Result<T>)other, comparer);
-        }
+            => other is Result<T> && Equals((Result<T>)other, comparer);
 
         public override int GetHashCode() => GetHashCode(EqualityComparer<T>.Default);
 
