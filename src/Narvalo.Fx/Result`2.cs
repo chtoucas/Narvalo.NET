@@ -156,7 +156,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(selector, nameof(selector));
 
-            return BindError(_ => Result.FromError<T, TResult>(selector(_)));
+            return IsError ? Result.FromError<T, TResult>(selector(Error)) : Result.Of<T, TResult>(Value);
         }
     }
 

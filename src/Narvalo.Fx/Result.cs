@@ -28,6 +28,8 @@ namespace Narvalo.Fx
         public static Result<T, TError> FromError<T, TError>(TError value) => Result<T, TError>.FromError(value);
     }
 
+    // Provides extension methods for Result<T, TError> and Result<TError>
+    // where TError is of type Exception or ExceptionDispatchInfo.
     public static partial class Result
     {
         public static void ThrowIfError(this Result<ExceptionDispatchInfo> @this)
@@ -168,6 +170,31 @@ namespace Narvalo.Fx
             foreach (var item in source)
             {
                 if (item.IsSuccess) { yield return item.Value; }
+            }
+        }
+    }
+
+    // Provides extension methods for IEnumerable<Result<TError>>.
+    public static partial class Result
+    {
+        internal static Result<IEnumerable<TError>> Collect<TError>(
+            this IEnumerable<Result<TError>> @this)
+            => Result.FromError(CollectAnyIterator(@this));
+
+        public static IEnumerable<TError> CollectAny<TError>(this IEnumerable<Result<TError>> @this)
+        {
+            Require.NotNull(@this, nameof(@this));
+
+            return CollectAnyIterator(@this);
+        }
+
+        internal static IEnumerable<TError> CollectAnyIterator<TError>(IEnumerable<Result<TError>> source)
+        {
+            Demand.NotNull(source);
+
+            foreach (var item in source)
+            {
+                if (item.IsError) { yield return item.Error; }
             }
         }
     }
