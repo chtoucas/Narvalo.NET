@@ -17,18 +17,11 @@ namespace Narvalo.Fx
         private readonly T _value;
         private readonly TError _error;
 
-        private Result(T value)
-        {
-            _error = default(TError);
-            _value = value;
-            IsSuccess = true;
-        }
-
-        private Result(TError error)
+        private Result(T value, TError error, bool isSuccess)
         {
             _error = error;
-            _value = default(T);
-            IsSuccess = false;
+            _value = value;
+            IsSuccess = isSuccess;
         }
 
         public bool IsSuccess { get; }
@@ -91,9 +84,9 @@ namespace Narvalo.Fx
 
             public bool IsError => _inner.IsError;
 
-            public TError Error => IsError ? _inner.Error : default(TError);
+            public TError Error => _inner.Error;
 
-            public T Value => !IsError ? _inner.Value : default(T);
+            public T Value => _inner.Value;
         }
     }
 
@@ -137,11 +130,11 @@ namespace Narvalo.Fx
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static Result<T, TError> η(T value) => new Result<T, TError>(value);
+        internal static Result<T, TError> η(T value) => new Result<T, TError>(value, default(TError), true);
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static Result<T, TError> FromError(TError error) => new Result<T, TError>(error);
+        internal static Result<T, TError> FromError(TError error) => new Result<T, TError>(default(T), error, false);
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
