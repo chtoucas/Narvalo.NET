@@ -213,7 +213,7 @@ namespace Narvalo.Fx
         }
     }
 
-    // Implements the IEquatable<Maybe<<T>> interfaces.
+    // Implements the IEquatable<Result<TError>> interfaces.
     public partial struct Result<TError>
     {
         public static bool operator ==(Result<TError> left, Result<TError> right) => left.Equals(right);
