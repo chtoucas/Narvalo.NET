@@ -38,7 +38,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(@this, nameof(@this));
 
-            return Result.Of<IEnumerable<TSource>, TError>(CollectAnyIterator(@this));
+            return Of<IEnumerable<TSource>, TError>(CollectAnyIterator(@this));
         }
     }
 }

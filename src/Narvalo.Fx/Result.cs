@@ -52,7 +52,7 @@ namespace Narvalo.Fx
             if (@this.IsError) { throw @this.Error; }
         }
 
-        // NB: This method serves a different purpose than the trywith from F# workflows.
+        // NB: This method is **not** the trywith from F# workflows.
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of VoidOrError.")]
         public static Result<ExceptionDispatchInfo> TryWith(Action action)
         {
@@ -62,13 +62,13 @@ namespace Narvalo.Fx
             {
                 action();
 
-                return Result.Void;
+                return Void;
             }
             catch (Exception ex)
             {
                 var edi = ExceptionDispatchInfo.Capture(ex);
 
-                return FromError<ExceptionDispatchInfo>(edi);
+                return FromError(edi);
             }
         }
 
@@ -90,7 +90,7 @@ namespace Narvalo.Fx
             }
         }
 
-        // NB: This method serves a different purpose than the tryfinally from F# workflows.
+        // NB: This method is **not** the tryfinally from F# workflows.
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of VoidOrError.")]
         public static Result<ExceptionDispatchInfo> TryFinally(Action action, Action finallyAction)
         {
@@ -101,13 +101,13 @@ namespace Narvalo.Fx
             {
                 action();
 
-                return Result.Void;
+                return Void;
             }
             catch (Exception ex)
             {
                 var edi = ExceptionDispatchInfo.Capture(ex);
 
-                return FromError<ExceptionDispatchInfo>(edi);
+                return FromError(edi);
             }
             finally
             {
@@ -167,7 +167,7 @@ namespace Narvalo.Fx
     public static partial class Result
     {
         public static Result<IEnumerable<TError>> Collect<TError>(this IEnumerable<Result<TError>> @this)
-            => Result.FromError(CollectAnyIterator(@this));
+            => FromError(CollectAnyIterator(@this));
 
         public static IEnumerable<TError> CollectAny<TError>(this IEnumerable<Result<TError>> @this)
         {
