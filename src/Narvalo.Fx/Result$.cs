@@ -13,8 +13,7 @@ namespace Narvalo.Fx
     /// </summary>
     public static partial class ResultExtensions { }
 
-    // Provides extension methods for Result<T, TError>
-    // where TError is of type Exception or ExceptionDispatchInfo.
+    // Provides extension methods for Result<T, TError> where TError is of type Exception.
     public static partial class ResultExtensions
     {
         public static void ThrowIfError<T, TException>(this Result<T, TException> @this) where TException : Exception

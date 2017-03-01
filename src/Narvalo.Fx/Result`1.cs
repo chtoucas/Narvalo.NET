@@ -170,6 +170,7 @@ namespace Narvalo.Fx
     // Core Monad methods.
     public partial struct Result<T>
     {
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of VoidOrError.")]
         public Result<TResult> Bind<TResult>(Func<T, Result<TResult>> selector)
         {
             Require.NotNull(selector, nameof(selector));
