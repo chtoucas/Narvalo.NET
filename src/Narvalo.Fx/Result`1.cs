@@ -10,11 +10,10 @@ namespace Narvalo.Fx
     using System.Runtime.CompilerServices;
 
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public partial class Result<TError> : Internal.IMaybe<TError>
+    [DebuggerTypeProxy(typeof(Result<>.DebugView))]
+    public partial struct Result<TError> : IEquatable<Result<TError>>, Internal.IMaybe<TError>
     {
         private readonly TError _error;
-
-        private Result() { IsError = false; }
 
         private Result(TError error)
         {
@@ -29,7 +28,6 @@ namespace Narvalo.Fx
 
         internal TError Error { get { Demand.State(IsError); return _error; } }
 
-        /// <inheritdoc cref="Object.ToString" />
         public override string ToString() => IsError ? Format.Current("Error({0})", Error) : "Success";
 
         [ExcludeFromCodeCoverage]
@@ -49,14 +47,14 @@ namespace Narvalo.Fx
                 _inner = inner;
             }
 
-            public bool IsError { get { return _inner.IsError; } }
+            public bool IsError => _inner.IsError;
 
             public TError Error => IsError ? _inner.Error : default(TError);
         }
     }
 
     // Conversion operators.
-    public partial class Result<TError>
+    public partial struct Result<TError>
     {
         public TError ToError()
         {
@@ -65,14 +63,13 @@ namespace Narvalo.Fx
             return Error;
         }
 
-        public static explicit operator TError(Result<TError> value)
-            => value == null ? default(TError) : value.ToError();
+        public static explicit operator TError(Result<TError> value) => value.ToError();
 
         public static explicit operator Result<TError>(TError error) => Result.FromError(error);
     }
 
     // Provides the core Monad methods.
-    public partial class Result<TError>
+    public partial struct Result<TError>
     {
         public Result<TResult> Bind<TResult>(Func<TError, Result<TResult>> selector)
         {
@@ -97,7 +94,7 @@ namespace Narvalo.Fx
     }
 
     // Provides the core MonadOr methods.
-    public partial class Result<TError>
+    public partial struct Result<TError>
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private static readonly Result<TError> s_Void = new Result<TError>();
@@ -110,7 +107,7 @@ namespace Narvalo.Fx
     }
 
     // Implements the Internal.IMaybe<TError> interface.
-    public partial class Result<TError>
+    public partial struct Result<TError>
     {
         // Named <c>maybeToList</c> in Haskell parlance.
         public IEnumerable<TError> ToEnumerable()
@@ -212,6 +209,51 @@ namespace Narvalo.Fx
             {
                 onSuccess();
             }
+        }
+    }
+
+    // Implements the IEquatable<Maybe<<T>> interfaces.
+    public partial struct Result<TError>
+    {
+        public static bool operator ==(Result<TError> left, Result<TError> right) => left.Equals(right);
+
+        public static bool operator !=(Result<TError> left, Result<TError> right) => !left.Equals(right);
+
+        public bool Equals(Result<TError> other) => Equals(other, EqualityComparer<TError>.Default);
+
+        public bool Equals(Result<TError> other, IEqualityComparer<TError> comparer)
+        {
+            Require.NotNull(comparer, nameof(comparer));
+
+            if (IsError)
+            {
+                return other.IsError && comparer.Equals(Error, other.Error);
+            }
+
+            return other.IsSuccess;
+        }
+
+        public override bool Equals(object obj) => Equals(obj, EqualityComparer<TError>.Default);
+
+        public bool Equals(object other, IEqualityComparer<TError> comparer)
+        {
+            Require.NotNull(comparer, nameof(comparer));
+
+            if (!(other is Result<TError>))
+            {
+                return false;
+            }
+
+            return Equals((Result<TError>)other, comparer);
+        }
+
+        public override int GetHashCode() => GetHashCode(EqualityComparer<TError>.Default);
+
+        public int GetHashCode(IEqualityComparer<TError> comparer)
+        {
+            Require.NotNull(comparer, nameof(comparer));
+
+            return IsError ? comparer.GetHashCode(Error) : 0;
         }
     }
 }

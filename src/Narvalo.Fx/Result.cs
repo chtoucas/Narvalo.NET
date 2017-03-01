@@ -29,8 +29,6 @@ namespace Narvalo.Fx
 
         public static void ThrowIfError(this Result<ExceptionDispatchInfo> @this)
         {
-            Require.NotNull(@this, nameof(@this));
-
             if (@this.IsError)
             {
                 @this.Error.Throw();
@@ -39,8 +37,6 @@ namespace Narvalo.Fx
 
         public static void ThrowIfError<TException>(this Result<TException> @this) where TException : Exception
         {
-            Require.NotNull(@this, nameof(@this));
-
             if (@this.IsError)
             {
                 throw @this.Error;
