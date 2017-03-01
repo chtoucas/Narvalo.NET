@@ -11,13 +11,15 @@ namespace Narvalo.Fx
 
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     [DebuggerTypeProxy(typeof(Result<,>.DebugView))]
-    public partial class Result<T, TError> : Internal.IEither<T, TError>, Internal.Iterable<T>
+    public partial struct Result<T, TError>
+        : IEquatable<Result<T, TError>>, Internal.IEither<T, TError>, Internal.Iterable<T>
     {
         private readonly T _value;
         private readonly TError _error;
 
         private Result(T value)
         {
+            _error = default(TError);
             _value = value;
             IsSuccess = true;
         }
@@ -25,6 +27,7 @@ namespace Narvalo.Fx
         private Result(TError error)
         {
             _error = error;
+            _value = default(T);
             IsSuccess = false;
         }
 
@@ -95,7 +98,7 @@ namespace Narvalo.Fx
     }
 
     // Conversion operators.
-    public partial class Result<T, TError>
+    public partial struct Result<T, TError>
     {
         public T ToValue()
         {
@@ -113,21 +116,17 @@ namespace Narvalo.Fx
         public Either<T, TError> ToEither()
             => IsSuccess ? Either.OfLeft<T, TError>(Value) : Either.OfRight<T, TError>(Error);
 
-        public static explicit operator T(Result<T, TError> value)
-            => value == null ? default(T) : value.ToValue();
+        public static explicit operator T(Result<T, TError> value) => value.ToValue();
 
-        public static explicit operator TError(Result<T, TError> value)
-            => value == null ? default(TError) : value.ToError();
+        public static explicit operator TError(Result<T, TError> value) => value.ToError();
 
-        public static explicit operator Result<T, TError>(T value)
-            => Result.Of<T, TError>(value);
+        public static explicit operator Result<T, TError>(T value) => Result.Of<T, TError>(value);
 
-        public static explicit operator Result<T, TError>(TError error)
-            => Result.FromError<T, TError>(error);
+        public static explicit operator Result<T, TError>(TError error) => Result.FromError<T, TError>(error);
     }
 
     // Provides the core Monad methods.
-    public partial class Result<T, TError>
+    public partial struct Result<T, TError>
     {
         public Result<TResult, TError> Bind<TResult>(Func<T, Result<TResult, TError>> selector)
         {
@@ -142,20 +141,16 @@ namespace Narvalo.Fx
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static Result<T, TError> η(TError error) => new Result<T, TError>(error);
+        internal static Result<T, TError> FromError(TError error) => new Result<T, TError>(error);
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Result<T, TError> μ(Result<Result<T, TError>, TError> square)
-        {
-            Require.NotNull(square, nameof(square));
-
-            return square.IsSuccess ? square.Value : Result.FromError<T, TError>(square.Error);
-        }
+            => square.IsSuccess ? square.Value : Result.FromError<T, TError>(square.Error);
     }
 
     // Implements the Internal.IEither<T, TError> interface.
-    public partial class Result<T, TError>
+    public partial struct Result<T, TError>
     {
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "1#", Justification = "[Intentionally] Internal interface.")]
@@ -233,10 +228,67 @@ namespace Narvalo.Fx
     }
 
     // Implements the Internal.Iterable<T> interface.
-    public partial class Result<T, TError>
+    public partial struct Result<T, TError>
     {
         public IEnumerable<T> ToEnumerable() => IsSuccess ? Sequence.Of(Value) : Enumerable.Empty<T>();
 
         public IEnumerator<T> GetEnumerator() => ToEnumerable().GetEnumerator();
+    }
+
+    // Implements the IEquatable<Result<T, TError>> interfaces.
+    public partial struct Result<T, TError>
+    {
+        public static bool operator ==(Result<T, TError> left, Result<T, TError> right) => left.Equals(right);
+
+        public static bool operator !=(Result<T, TError> left, Result<T, TError> right) => !left.Equals(right);
+
+        public bool Equals(Result<T, TError> other)
+            => Equals(other, EqualityComparer<T>.Default, EqualityComparer<TError>.Default);
+
+        public bool Equals(
+            Result<T, TError> other,
+            IEqualityComparer<T> comparer,
+            IEqualityComparer<TError> errComparer)
+        {
+            Require.NotNull(comparer, nameof(comparer));
+            Require.NotNull(errComparer, nameof(errComparer));
+
+            if (IsSuccess) { return other.IsSuccess && comparer.Equals(Value, other.Value); }
+
+            return other.IsError && errComparer.Equals(Error, other.Error);
+        }
+
+        public override bool Equals(object obj)
+            => Equals(obj, EqualityComparer<T>.Default, EqualityComparer<TError>.Default);
+
+        public bool Equals(
+            object other,
+            IEqualityComparer<T> comparer,
+            IEqualityComparer<TError> errComparer)
+        {
+            Require.NotNull(comparer, nameof(comparer));
+            Require.NotNull(errComparer, nameof(errComparer));
+
+            if (!(other is Result<T, TError>)) { return false; }
+
+            return Equals((Result<T, TError>)other, comparer, errComparer);
+        }
+
+        public override int GetHashCode()
+            => GetHashCode(EqualityComparer<T>.Default, EqualityComparer<TError>.Default);
+
+        public int GetHashCode(IEqualityComparer<T> comparer, IEqualityComparer<TError> errComparer)
+        {
+            Require.NotNull(comparer, nameof(comparer));
+            Require.NotNull(errComparer, nameof(errComparer));
+
+            unchecked
+            {
+                int hash = 17;
+                hash = 31 * hash + IsSuccess.GetHashCode();
+                hash = 31 * hash + (IsSuccess ? comparer.GetHashCode(Value) : errComparer.GetHashCode(Error));
+                return hash;
+            }
+        }
     }
 }

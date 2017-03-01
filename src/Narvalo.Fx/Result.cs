@@ -25,7 +25,7 @@ namespace Narvalo.Fx
         /// <returns>An instance of the <see cref="Result{TError}"/> class for the specified value.</returns>
         public static Result<TError> FromError<TError>(TError value) => Result<TError>.η(value);
 
-        public static Result<T, TError> FromError<T, TError>(TError value) => Result<T, TError>.η(value);
+        public static Result<T, TError> FromError<T, TError>(TError value) => Result<T, TError>.FromError(value);
 
         public static void ThrowIfError(this Result<ExceptionDispatchInfo> @this)
         {
@@ -45,8 +45,6 @@ namespace Narvalo.Fx
 
         public static void ThrowIfError<T>(this Result<T, ExceptionDispatchInfo> @this)
         {
-            Require.NotNull(@this, nameof(@this));
-
             if (@this.IsError)
             {
                 @this.Error.Throw();
@@ -55,8 +53,6 @@ namespace Narvalo.Fx
 
         public static void ThrowIfError<T, TException>(this Result<T, TException> @this) where TException : Exception
         {
-            Require.NotNull(@this, nameof(@this));
-
             if (@this.IsError)
             {
                 throw @this.Error;
@@ -168,9 +164,6 @@ namespace Narvalo.Fx
 
             foreach (var item in source)
             {
-                // REVIEW: Is this the correct behaviour for null?
-                if (item == null) { yield return default(TSource); }
-
                 if (item.IsSuccess) { yield return item.Value; }
             }
         }

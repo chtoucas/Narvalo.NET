@@ -9,6 +9,7 @@
         {
             InitializeGenericParameters("T", "TError");
 
+            IsNullable = false;
             EmitLinq = false;
         }
     }

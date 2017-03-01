@@ -49,7 +49,7 @@ namespace Narvalo.Fx
             Func<T, TResult> func)
             => arg =>
             {
-                Require.NotNull(arg, nameof(arg));
+                /* T4: NotNull(arg) */
                 return arg.Select(func);
             };
 
@@ -61,7 +61,7 @@ namespace Narvalo.Fx
             Lift<T1, T2, TResult, TError>(Func<T1, T2, TResult> func)
             => (arg1, arg2) =>
             {
-                Require.NotNull(arg1, nameof(arg1));
+                /* T4: NotNull(arg1) */
                 return arg1.Zip(arg2, func);
             };
 
@@ -73,7 +73,7 @@ namespace Narvalo.Fx
             Lift<T1, T2, T3, TResult, TError>(Func<T1, T2, T3, TResult> func)
             => (arg1, arg2, arg3) =>
             {
-                Require.NotNull(arg1, nameof(arg1));
+                /* T4: NotNull(arg1) */
                 return arg1.Zip(arg2, arg3, func);
             };
 
@@ -86,7 +86,7 @@ namespace Narvalo.Fx
             Func<T1, T2, T3, T4, TResult> func)
             => (arg1, arg2, arg3, arg4) =>
             {
-                Require.NotNull(arg1, nameof(arg1));
+                /* T4: NotNull(arg1) */
                 return arg1.Zip(arg2, arg3, arg4, func);
             };
 
@@ -99,7 +99,7 @@ namespace Narvalo.Fx
             Func<T1, T2, T3, T4, T5, TResult> func)
             => (arg1, arg2, arg3, arg4, arg5) =>
             {
-                Require.NotNull(arg1, nameof(arg1));
+                /* T4: NotNull(arg1) */
                 return arg1.Zip(arg2, arg3, arg4, arg5, func);
             };
 
@@ -115,8 +115,8 @@ namespace Narvalo.Fx
             this Result<TSource, TError> @this,
             Result<Func<TSource, TResult>, TError> applicative)
         {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(applicative, nameof(applicative));
+            /* T4: NotNull(@this) */
+            /* T4: NotNull(applicative) */
             return applicative.Bind(func => @this.Select(func));
         }
 
@@ -125,7 +125,7 @@ namespace Narvalo.Fx
             this Result<Func<TSource, TResult>, TError> @this,
             Result<TSource, TError> value)
         {
-            Require.NotNull(value, nameof(value));
+            /* T4: NotNull(value) */
             return value.Gather(@this);
         }
 
@@ -133,7 +133,7 @@ namespace Narvalo.Fx
             this Result<TSource, TError> @this,
             int count)
         {
-            Require.NotNull(@this, nameof(@this));
+            /* T4: NotNull(@this) */
             Require.Range(count >= 1, nameof(count));
             return @this.Select(val => Enumerable.Repeat(val, count));
         }
@@ -142,7 +142,7 @@ namespace Narvalo.Fx
             this Result<TSource, TError> @this,
             TResult value)
         {
-            Require.NotNull(@this, nameof(@this));
+            /* T4: NotNull(@this) */
             return @this.Select(_ => value);
         }
 
@@ -150,7 +150,7 @@ namespace Narvalo.Fx
             this Result<TSource, TError> @this,
             Result<TResult, TError> other)
         {
-            Require.NotNull(@this, nameof(@this));
+            /* T4: NotNull(@this) */
             return @this.Bind(_ => other);
         }
 
@@ -158,7 +158,7 @@ namespace Narvalo.Fx
             this Result<TSource, TError> @this,
             Result<TOther, TError> other)
         {
-            Require.NotNull(@this, nameof(@this));
+            /* T4: NotNull(@this) */
             Func<TSource, TOther, TSource> ignore = (arg, _) => arg;
 
             return @this.Zip(other, ignore);
@@ -166,7 +166,7 @@ namespace Narvalo.Fx
 
         public static Result<global::Narvalo.Fx.Unit, TError> Skip<TSource, TError>(this Result<TSource, TError> @this)
         {
-            Require.NotNull(@this, nameof(@this));
+            /* T4: NotNull(@this) */
             return @this.ReplaceBy(global::Narvalo.Fx.Unit.Default);
         }
 
@@ -176,7 +176,7 @@ namespace Narvalo.Fx
             Result<TResult, TError> thenResult,
             Result<TResult, TError> elseResult)
         {
-            Require.NotNull(@this, nameof(@this));
+            /* T4: NotNull(@this) */
             Require.NotNull(predicate, nameof(predicate));
             return @this.Bind(val => predicate(val) ? thenResult : elseResult);
         }
@@ -186,7 +186,7 @@ namespace Narvalo.Fx
             Func<TSource, Result<TResult, TError>> selector)
             where TSource : IDisposable
         {
-            Require.NotNull(@this, nameof(@this));
+            /* T4: NotNull(@this) */
             Require.NotNull(selector, nameof(selector));
             return @this.Bind(val => { using (val) { return selector(val); } });
         }
@@ -196,7 +196,7 @@ namespace Narvalo.Fx
             Func<TSource, TResult> selector)
             where TSource : IDisposable
         {
-            Require.NotNull(@this, nameof(@this));
+            /* T4: NotNull(@this) */
             Require.NotNull(selector, nameof(selector));
             return @this.Select(val => { using (val) { return selector(val); } });
         }
@@ -207,7 +207,7 @@ namespace Narvalo.Fx
             this Result<TSource, TError> @this,
             Result<TOther, TError> other)
         {
-            Require.NotNull(@this, nameof(@this));
+            /* T4: NotNull(@this) */
             return @this.Zip(other, Tuple.Create);
         }
 
@@ -217,8 +217,8 @@ namespace Narvalo.Fx
             Result<TSecond, TError> second,
             Func<TFirst, TSecond, TResult> zipper)
         {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(second, nameof(second));
+            /* T4: NotNull(@this) */
+            /* T4: NotNull(second) */
             Require.NotNull(zipper, nameof(zipper));
 
             return @this.Bind(
@@ -233,9 +233,9 @@ namespace Narvalo.Fx
             Result<T3, TError> third,
             Func<T1, T2, T3, TResult> zipper)
         {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(second, nameof(second));
-            Require.NotNull(third, nameof(third));
+            /* T4: NotNull(@this) */
+            /* T4: NotNull(second) */
+            /* T4: NotNull(third) */
             Require.NotNull(zipper, nameof(zipper));
 
             return @this.Bind(
@@ -252,10 +252,10 @@ namespace Narvalo.Fx
              Result<T4, TError> fourth,
              Func<T1, T2, T3, T4, TResult> zipper)
         {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(second, nameof(second));
-            Require.NotNull(third, nameof(third));
-            Require.NotNull(fourth, nameof(fourth));
+            /* T4: NotNull(@this) */
+            /* T4: NotNull(second) */
+            /* T4: NotNull(third) */
+            /* T4: NotNull(fourth) */
             Require.NotNull(zipper, nameof(zipper));
 
             return @this.Bind(
@@ -274,11 +274,11 @@ namespace Narvalo.Fx
             Result<T5, TError> fifth,
             Func<T1, T2, T3, T4, T5, TResult> zipper)
         {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(second, nameof(second));
-            Require.NotNull(third, nameof(third));
-            Require.NotNull(fourth, nameof(fourth));
-            Require.NotNull(fifth, nameof(fifth));
+            /* T4: NotNull(@this) */
+            /* T4: NotNull(second) */
+            /* T4: NotNull(third) */
+            /* T4: NotNull(fourth) */
+            /* T4: NotNull(fifth) */
             Require.NotNull(zipper, nameof(zipper));
 
             return @this.Bind(
@@ -297,7 +297,7 @@ namespace Narvalo.Fx
             this Result<TSource, TError> @this,
             Func<TSource, TResult> selector)
         {
-            Require.NotNull(@this, nameof(@this));
+            /* T4: NotNull(@this) */
             Require.NotNull(selector, nameof(selector));
             return @this.Bind(val => Result.Of<TResult, TError>(selector(val)));
         }
@@ -310,7 +310,7 @@ namespace Narvalo.Fx
             Func<TSource, Result<TMiddle, TError>> valueSelector,
             Func<TSource, TMiddle, TResult> resultSelector)
         {
-            Require.NotNull(@this, nameof(@this));
+            /* T4: NotNull(@this) */
             Require.NotNull(valueSelector, nameof(valueSelector));
             Require.NotNull(resultSelector, nameof(resultSelector));
 
@@ -335,7 +335,7 @@ namespace Narvalo.Fx
             this Func<TSource, Result<TResult, TError>> @this,
             Result<TSource, TError> value)
         {
-            Require.NotNull(value, nameof(value));
+            /* T4: NotNull(value) */
             return value.Bind(@this);
         }
 

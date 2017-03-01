@@ -7,7 +7,7 @@ namespace Narvalo.Fx
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
-    public partial class Result<T, TError>
+    public partial struct Result<T, TError>
     {
         [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Select", Justification = "[Intentionally] No trouble here, this 'Select' is the one from the LINQ standard query operators.")]
         public Result<TResult, TError> Select<TResult>(Func<T, TResult> selector)

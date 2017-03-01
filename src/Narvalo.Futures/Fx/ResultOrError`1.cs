@@ -235,7 +235,14 @@ namespace Narvalo.Fx
             => value?.ToExceptionInfo();
 
         public static explicit operator Result<T, Exception>(ResultOrError<T> value)
-            => value?.ToResult();
+        {
+            if (value == null)
+            {
+                throw new InvalidCastException("XXX");
+            }
+
+            return value.ToResult();
+        }
 
         public static explicit operator ResultOrError<T>(T value)
         {
