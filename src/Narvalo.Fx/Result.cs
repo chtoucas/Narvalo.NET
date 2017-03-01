@@ -166,7 +166,7 @@ namespace Narvalo.Fx
     // Provides extension methods for IEnumerable<Result<TError>>.
     public static partial class Result
     {
-        internal static Result<IEnumerable<TError>> Collect<TError>(this IEnumerable<Result<TError>> @this)
+        public static Result<IEnumerable<TError>> Collect<TError>(this IEnumerable<Result<TError>> @this)
             => Result.FromError(CollectAnyIterator(@this));
 
         public static IEnumerable<TError> CollectAny<TError>(this IEnumerable<Result<TError>> @this)
