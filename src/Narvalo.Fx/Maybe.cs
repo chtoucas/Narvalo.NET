@@ -43,7 +43,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(defaultValueFactory, nameof(defaultValueFactory));
 
-            return @this.ValueOrDefault() ?? defaultValueFactory.Invoke();
+            return @this.ValueOrDefault() ?? defaultValueFactory();
         }
 
         public static T UnwrapOrThrow<T>(this Maybe<T?> @this, Exception exception) where T : struct
@@ -57,7 +57,7 @@ namespace Narvalo.Fx
 
             if (!m.HasValue)
             {
-                throw exceptionFactory.Invoke();
+                throw exceptionFactory();
             }
 
             return m.Value;

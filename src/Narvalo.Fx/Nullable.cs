@@ -15,7 +15,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(selector, nameof(selector));
 
-            return @this.HasValue ? (TResult?)selector.Invoke(@this.Value) : null;
+            return @this.HasValue ? (TResult?)selector(@this.Value) : null;
         }
     }
 }

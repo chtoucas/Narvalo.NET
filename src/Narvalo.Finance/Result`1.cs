@@ -72,14 +72,14 @@ namespace Narvalo.Finance
             {
                 Require.NotNull(selector, nameof(selector));
 
-                return selector.Invoke(Value);
+                return selector(Value);
             }
 
             internal override Result<TResult> Select<TResult>(Func<T, TResult> selector)
             {
                 Require.NotNull(selector, nameof(selector));
 
-                return Result<TResult>.Return(selector.Invoke(Value));
+                return Result<TResult>.Return(selector(Value));
             }
 
             public bool Equals(Success_ other)

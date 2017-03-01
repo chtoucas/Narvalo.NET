@@ -244,7 +244,7 @@ namespace Narvalo.Fx
             {
                 Require.NotNull(selector, nameof(selector));
 
-                return selector.Invoke(Left);
+                return selector(Left);
             }
 
             public override Either<TLeft, TResult> BindRight<TResult>(Func<TRight, Either<TLeft, TResult>> selector)
@@ -260,7 +260,7 @@ namespace Narvalo.Fx
             {
                 Require.NotNull(selector, nameof(selector));
 
-                return selector.Invoke(Right);
+                return selector(Right);
             }
         }
     }
@@ -302,7 +302,7 @@ namespace Narvalo.Fx
             {
                 Require.NotNull(caseLeft, nameof(caseLeft));
 
-                return caseLeft.Invoke(Left);
+                return caseLeft(Left);
             }
 
             public override void WhenLeft(Func<TLeft, bool> predicate, Action<TLeft> action)
@@ -310,7 +310,7 @@ namespace Narvalo.Fx
                 Require.NotNull(predicate, nameof(predicate));
                 Require.NotNull(action, nameof(action));
 
-                if (predicate.Invoke(Left)) { action.Invoke(Left); }
+                if (predicate(Left)) { action(Left); }
             }
 
             public override void WhenRight(Func<TRight, bool> predicate, Action<TRight> action) { }
@@ -319,14 +319,14 @@ namespace Narvalo.Fx
             {
                 Require.NotNull(onLeft, nameof(onLeft));
 
-                onLeft.Invoke(Left);
+                onLeft(Left);
             }
 
             public override void OnLeft(Action<TLeft> action)
             {
                 Require.NotNull(action, nameof(action));
 
-                action.Invoke(Left);
+                action(Left);
             }
 
             public override void OnRight(Action<TRight> action) { }
@@ -338,7 +338,7 @@ namespace Narvalo.Fx
             {
                 Require.NotNull(caseRight, nameof(caseRight));
 
-                return caseRight.Invoke(Right);
+                return caseRight(Right);
             }
 
             public override void WhenLeft(Func<TLeft, bool> predicate, Action<TLeft> action) { }
@@ -348,14 +348,14 @@ namespace Narvalo.Fx
                 Require.NotNull(predicate, nameof(predicate));
                 Require.NotNull(action, nameof(action));
 
-                if (predicate.Invoke(Right)) { action.Invoke(Right); }
+                if (predicate(Right)) { action(Right); }
             }
 
             public override void Do(Action<TLeft> onLeft, Action<TRight> onRight)
             {
                 Require.NotNull(onRight, nameof(onRight));
 
-                onRight.Invoke(Right);
+                onRight(Right);
             }
 
             public override void OnLeft(Action<TLeft> action) { }
@@ -364,7 +364,7 @@ namespace Narvalo.Fx
             {
                 Require.NotNull(action, nameof(action));
 
-                action.Invoke(Right);
+                action(Right);
             }
         }
     }

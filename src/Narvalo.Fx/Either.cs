@@ -32,7 +32,7 @@ namespace Narvalo.Fx
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));
 
-            return @this.BindLeft(_ => OfLeft<TResult, TRight>(selector.Invoke(_)));
+            return @this.BindLeft(_ => OfLeft<TResult, TRight>(selector(_)));
         }
 
         public static Either<TLeft, TResult> SelectRight<TLeft, TRight, TResult>(
@@ -42,7 +42,7 @@ namespace Narvalo.Fx
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));
 
-            return @this.BindRight(_ => OfRight<TLeft, TResult>(selector.Invoke(_)));
+            return @this.BindRight(_ => OfRight<TLeft, TResult>(selector(_)));
         }
     }
 }

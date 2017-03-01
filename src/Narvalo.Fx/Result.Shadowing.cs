@@ -24,7 +24,7 @@ namespace Narvalo.Fx
             {
                 Require.NotNull(selector, nameof(selector));
 
-                return Result.Of<TResult, TError>(selector.Invoke(Value));
+                return Result.Of<TResult, TError>(selector(Value));
             }
 
             public override Result<TResult, TError> ReplaceBy<TResult>(TResult value)

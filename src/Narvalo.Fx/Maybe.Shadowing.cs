@@ -11,7 +11,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(selector, nameof(selector));
 
-            return IsSome ? Maybe.Of(selector.Invoke(Value)) : Maybe<TResult>.None;
+            return IsSome ? Maybe.Of(selector(Value)) : Maybe<TResult>.None;
         }
 
         public Maybe<TResult> ReplaceBy<TResult>(TResult value)
@@ -27,7 +27,7 @@ namespace Narvalo.Fx
             Require.NotNull(resultSelector, nameof(resultSelector));
 
             return IsSome && second.IsSome
-                ? Maybe.Of(resultSelector.Invoke(Value, second.Value))
+                ? Maybe.Of(resultSelector(Value, second.Value))
                 : Maybe<TResult>.None;
         }
 
@@ -46,11 +46,11 @@ namespace Narvalo.Fx
 
             if (IsNone || inner.IsNone) { return Maybe<TResult>.None; }
 
-            var outerKey = outerKeySelector.Invoke(Value);
-            var innerKey = innerKeySelector.Invoke(inner.Value);
+            var outerKey = outerKeySelector(Value);
+            var innerKey = innerKeySelector(inner.Value);
 
             return (comparer ?? EqualityComparer<TKey>.Default).Equals(outerKey, innerKey)
-                ? Maybe.Of(resultSelector.Invoke(Value, inner.Value))
+                ? Maybe.Of(resultSelector(Value, inner.Value))
                 : Maybe<TResult>.None;
         }
 
@@ -67,11 +67,11 @@ namespace Narvalo.Fx
 
             if (IsNone || inner.IsNone) { return Maybe<TResult>.None; }
 
-            var outerKey = outerKeySelector.Invoke(Value);
-            var innerKey = innerKeySelector.Invoke(inner.Value);
+            var outerKey = outerKeySelector(Value);
+            var innerKey = innerKeySelector(inner.Value);
 
             return (comparer ?? EqualityComparer<TKey>.Default).Equals(outerKey, innerKey)
-                ? Maybe.Of(resultSelector.Invoke(Value, inner))
+                ? Maybe.Of(resultSelector(Value, inner))
                 : Maybe<TResult>.None;
         }
 
@@ -84,14 +84,14 @@ namespace Narvalo.Fx
         {
             Require.NotNull(predicate, nameof(predicate));
 
-            return IsSome && predicate.Invoke(Value) ? thenResult : elseResult;
+            return IsSome && predicate(Value) ? thenResult : elseResult;
         }
 
         public Maybe<TResult> If<TResult>(Func<T, bool> predicate, Maybe<TResult> thenResult)
         {
             Require.NotNull(predicate, nameof(predicate));
 
-            return IsSome && predicate.Invoke(Value) ? thenResult : Maybe<TResult>.None;
+            return IsSome && predicate(Value) ? thenResult : Maybe<TResult>.None;
         }
     }
 

@@ -58,7 +58,7 @@ namespace Narvalo.Fx
 
             while (true)
             {
-                var iter = generator.Invoke(current);
+                var iter = generator(current);
 
                 yield return iter.Result;
 
@@ -76,9 +76,9 @@ namespace Narvalo.Fx
 
             TSource current = seed;
 
-            while (predicate.Invoke(current))
+            while (predicate(current))
             {
-                var iter = generator.Invoke(current);
+                var iter = generator(current);
 
                 yield return iter.Result;
 
@@ -132,7 +132,7 @@ namespace Narvalo.Fx
         /// <remarks>
         /// This method can be derived from Unfold:
         /// <code>
-        /// Sequence.Unfold(seed, _ => Iteration.Create(resultSelector.Invoke(_), iterator.Invoke(_)));
+        /// Sequence.Unfold(seed, _ => Iteration.Create(resultSelector(_), iterator(_)));
         /// </code>
         /// </remarks>
         public static IEnumerable<TResult> Gather<TSource, TResult>(
@@ -149,7 +149,7 @@ namespace Narvalo.Fx
         /// <remarks>
         /// This method can be derived from Unfold:
         /// <code>
-        /// Sequence.Unfold(seed, _ => Iteration.Create(resultSelector.Invoke(_), iterator.Invoke(_)), predicate);
+        /// Sequence.Unfold(seed, _ => Iteration.Create(resultSelector(_), iterator(_)), predicate);
         /// </code>
         /// </remarks>
         public static IEnumerable<TResult> Gather<TSource, TResult>(
@@ -177,7 +177,7 @@ namespace Narvalo.Fx
             {
                 yield return current;
 
-                current = iterator.Invoke(current);
+                current = iterator(current);
             }
         }
 
@@ -191,11 +191,11 @@ namespace Narvalo.Fx
 
             TSource current = seed;
 
-            while (predicate.Invoke(current))
+            while (predicate(current))
             {
                 yield return current;
 
-                current = iterator.Invoke(current);
+                current = iterator(current);
             }
         }
 
@@ -211,9 +211,9 @@ namespace Narvalo.Fx
 
             while (true)
             {
-                yield return resultSelector.Invoke(current);
+                yield return resultSelector(current);
 
-                current = iterator.Invoke(current);
+                current = iterator(current);
             }
         }
 
@@ -229,11 +229,11 @@ namespace Narvalo.Fx
 
             TSource current = seed;
 
-            while (predicate.Invoke(current))
+            while (predicate(current))
             {
-                yield return resultSelector.Invoke(current);
+                yield return resultSelector(current);
 
-                current = iterator.Invoke(current);
+                current = iterator(current);
             }
         }
 

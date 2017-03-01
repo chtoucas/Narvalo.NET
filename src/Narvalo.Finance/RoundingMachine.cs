@@ -456,12 +456,12 @@ namespace Narvalo.Finance
     // Helpers.
     public static partial class RoundingMachine
     {
-        private static decimal RoundImpl(Money money, Func<decimal, decimal> thunk)
+        private static decimal RoundImpl(Money money, Func<decimal, decimal> func)
         {
-            Demand.NotNull(thunk);
+            Demand.NotNull(func);
             // If the amount is already rounded to 0, do nothing.
             if (money.IsRounded && money.Currency.DecimalPlaces == 0) { return money.Amount; }
-            return thunk.Invoke(money.Amount);
+            return func(money.Amount);
         }
 
         private static decimal NormalizeAmount(Money money, MidpointRounding mode)

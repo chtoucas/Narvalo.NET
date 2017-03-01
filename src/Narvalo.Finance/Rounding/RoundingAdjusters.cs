@@ -232,9 +232,9 @@ namespace Narvalo.Finance.Rounding
         {
             if (value == 0m) { return 0m; }
             return decimalPlaces == 0
-                ? round.Invoke(value)
+                ? round(value)
                 : Downscale(
-                    round.Invoke(Upscale(value, decimalPlaces)),
+                    round(Upscale(value, decimalPlaces)),
                     decimalPlaces);
         }
 

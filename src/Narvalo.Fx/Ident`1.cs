@@ -84,7 +84,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(selector, nameof(selector));
 
-            return selector.Invoke(Value);
+            return selector(Value);
         }
 
         [DebuggerHidden]
@@ -103,7 +103,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(func, nameof(func));
 
-            return new Ident<TResult>(func.Invoke(this));
+            return new Ident<TResult>(func(this));
         }
 
         [DebuggerHidden]
@@ -124,14 +124,14 @@ namespace Narvalo.Fx
             Require.NotNull(selector, nameof(selector));
             Require.NotNull(otherwise, nameof(otherwise));
 
-            return predicate.Invoke(Value) ? selector.Invoke(Value) : otherwise.Invoke();
+            return predicate(Value) ? selector(Value) : otherwise();
         }
 
         public TResult Coalesce<TResult>(Func<T, bool> predicate, TResult thenResult, TResult elseResult)
         {
             Require.NotNull(predicate, nameof(predicate));
 
-            return predicate.Invoke(Value) ? thenResult : elseResult;
+            return predicate(Value) ? thenResult : elseResult;
         }
 
         public void When(Func<T, bool> predicate, Action<T> action)
@@ -139,7 +139,7 @@ namespace Narvalo.Fx
             Require.NotNull(predicate, nameof(predicate));
             Require.NotNull(action, nameof(action));
 
-            if (predicate.Invoke(Value)) { action.Invoke(Value); }
+            if (predicate(Value)) { action(Value); }
         }
 
         public void Do(Func<T, bool> predicate, Action<T> action, Action otherwise)
@@ -148,13 +148,13 @@ namespace Narvalo.Fx
             Require.NotNull(action, nameof(action));
             Require.NotNull(otherwise, nameof(otherwise));
 
-            if (predicate.Invoke(Value))
+            if (predicate(Value))
             {
-                action.Invoke(Value);
+                action(Value);
             }
             else
             {
-                otherwise.Invoke();
+                otherwise();
             }
         }
 
@@ -162,7 +162,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(action, nameof(action));
 
-            action.Invoke(Value);
+            action(Value);
         }
     }
 

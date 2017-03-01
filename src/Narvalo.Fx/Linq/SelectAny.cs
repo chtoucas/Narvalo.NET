@@ -50,7 +50,7 @@ namespace Narvalo.Fx.Linq
 
             foreach (var item in source)
             {
-                var m = selector.Invoke(item);
+                var m = selector(item);
 
                 if (m.HasValue) { yield return m.Value; }
             }
@@ -66,7 +66,7 @@ namespace Narvalo.Fx.Linq
 
             foreach (var item in source)
             {
-                var m = selector.Invoke(item);
+                var m = selector(item);
 
                 if (m != null) { yield return m; }
             }
@@ -81,7 +81,7 @@ namespace Narvalo.Fx.Linq
 
             foreach (var item in source)
             {
-                var m = selector.Invoke(item);
+                var m = selector(item);
 
                 if (m.IsSome) { yield return m.Value; }
             }

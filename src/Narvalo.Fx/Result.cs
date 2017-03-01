@@ -71,7 +71,7 @@ namespace Narvalo.Fx
 
             try
             {
-                action.Invoke();
+                action();
 
                 return Result.Void;
             }
@@ -91,7 +91,7 @@ namespace Narvalo.Fx
 
             try
             {
-                return Of<TResult, ExceptionDispatchInfo>(func.Invoke());
+                return Of<TResult, ExceptionDispatchInfo>(func());
             }
             catch (Exception ex)
             {
@@ -110,7 +110,7 @@ namespace Narvalo.Fx
 
             try
             {
-                action.Invoke();
+                action();
 
                 return Result.Void;
             }
@@ -122,7 +122,7 @@ namespace Narvalo.Fx
             }
             finally
             {
-                finallyAction.Invoke();
+                finallyAction();
             }
         }
 
@@ -137,7 +137,7 @@ namespace Narvalo.Fx
 
             try
             {
-                return Of<TResult, ExceptionDispatchInfo>(func.Invoke());
+                return Of<TResult, ExceptionDispatchInfo>(func());
             }
             catch (Exception ex)
             {
@@ -147,7 +147,7 @@ namespace Narvalo.Fx
             }
             finally
             {
-                finallyAction.Invoke();
+                finallyAction();
             }
         }
     }

@@ -9,6 +9,7 @@ namespace Narvalo.Fx
     using System.Linq;
     using System.Runtime.CompilerServices;
 
+    // Friendly version of Result<Unit, TError>.
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     [DebuggerTypeProxy(typeof(Result<>.DebugView))]
     public partial struct Result<TError> : IEquatable<Result<TError>>, Internal.IMaybe<TError>
@@ -75,7 +76,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(selector, nameof(selector));
 
-            return IsSuccess ? Result<TResult>.Void : selector.Invoke(Error);
+            return IsSuccess ? Result<TResult>.Void : selector(Error);
         }
 
         [DebuggerHidden]
@@ -174,7 +175,7 @@ namespace Narvalo.Fx
             Require.NotNull(predicate, nameof(predicate));
             Require.NotNull(action, nameof(action));
 
-            if (IsError && predicate.Invoke(Error)) { action.Invoke(Error); }
+            if (IsError && predicate(Error)) { action(Error); }
         }
 
         // Alias for OnError(). Publicly hidden.

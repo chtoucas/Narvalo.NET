@@ -84,7 +84,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(valueFactory, nameof(valueFactory));
 
-            return IsSome ? Value : valueFactory.Invoke();
+            return IsSome ? Value : valueFactory();
         }
 
         // Named <c>fromJust</c> in Haskell parlance.
@@ -101,7 +101,7 @@ namespace Narvalo.Fx
 
             if (IsNone)
             {
-                throw exceptionFactory.Invoke();
+                throw exceptionFactory();
             }
 
             return Value;
@@ -151,7 +151,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(selector, nameof(selector));
 
-            return IsSome ? selector.Invoke(Value) : Maybe<TResult>.None;
+            return IsSome ? selector(Value) : Maybe<TResult>.None;
         }
 
         [DebuggerHidden]
@@ -188,7 +188,7 @@ namespace Narvalo.Fx
             Require.NotNull(caseSome, nameof(caseSome));
             Require.NotNull(caseNone, nameof(caseNone));
 
-            return IsSome ? caseSome.Invoke(Value) : caseNone.Invoke();
+            return IsSome ? caseSome(Value) : caseNone();
         }
 
         // Named <c>maybe</c> in Haskell parlance.
@@ -196,7 +196,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(caseSome, nameof(caseSome));
 
-            return IsSome ? caseSome.Invoke(Value) : caseNone;
+            return IsSome ? caseSome(Value) : caseNone;
         }
 
         public TResult Coalesce<TResult>(Func<T, bool> predicate, Func<T, TResult> selector, Func<TResult> otherwise)
@@ -205,14 +205,14 @@ namespace Narvalo.Fx
             Require.NotNull(selector, nameof(selector));
             Require.NotNull(otherwise, nameof(otherwise));
 
-            return IsSome && predicate.Invoke(Value) ? selector.Invoke(Value) : otherwise.Invoke();
+            return IsSome && predicate(Value) ? selector(Value) : otherwise();
         }
 
         public TResult Coalesce<TResult>(Func<T, bool> predicate, TResult thenResult, TResult elseResult)
         {
             Require.NotNull(predicate, nameof(predicate));
 
-            return IsSome && predicate.Invoke(Value) ? thenResult : elseResult;
+            return IsSome && predicate(Value) ? thenResult : elseResult;
         }
 
         public void When(Func<T, bool> predicate, Action<T> action, Action otherwise)
@@ -221,13 +221,13 @@ namespace Narvalo.Fx
             Require.NotNull(action, nameof(action));
             Require.NotNull(otherwise, nameof(otherwise));
 
-            if (IsSome && predicate.Invoke(Value))
+            if (IsSome && predicate(Value))
             {
-                action.Invoke(Value);
+                action(Value);
             }
             else
             {
-                otherwise.Invoke();
+                otherwise();
             }
         }
 
@@ -236,7 +236,7 @@ namespace Narvalo.Fx
             Require.NotNull(predicate, nameof(predicate));
             Require.NotNull(action, nameof(action));
 
-            if (IsSome && predicate.Invoke(Value)) { action.Invoke(Value); }
+            if (IsSome && predicate(Value)) { action(Value); }
         }
 
         public void Do(Action<T> onSome, Action onNone)
@@ -246,11 +246,11 @@ namespace Narvalo.Fx
 
             if (IsSome)
             {
-                onSome.Invoke(Value);
+                onSome(Value);
             }
             else
             {
-                onNone.Invoke();
+                onNone();
             }
         }
 
@@ -261,14 +261,14 @@ namespace Narvalo.Fx
         {
             Require.NotNull(action, nameof(action));
 
-            if (IsSome) { action.Invoke(Value); }
+            if (IsSome) { action(Value); }
         }
 
         public void OnNone(Action action)
         {
             Require.NotNull(action, nameof(action));
 
-            if (IsNone) { action.Invoke(); }
+            if (IsNone) { action(); }
         }
     }
 

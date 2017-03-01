@@ -36,7 +36,7 @@ namespace Narvalo.Fx.Linq
 
             foreach (var item in source)
             {
-                var m = predicate.Invoke(item);
+                var m = predicate(item);
 
                 if (m.HasValue && m.Value) { yield return item; }
             }
@@ -51,7 +51,7 @@ namespace Narvalo.Fx.Linq
 
             foreach (var item in source)
             {
-                var m = predicate.Invoke(item);
+                var m = predicate(item);
 
                 if (m.IsSome && m.Value) { yield return item; }
             }
