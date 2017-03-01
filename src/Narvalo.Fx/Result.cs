@@ -95,7 +95,7 @@ namespace Narvalo.Fx
         {
             if (IsSuccess) { return other.IsSuccess; }
 
-            return other.IsError && ExceptionInfo == other.ExceptionInfo;
+            return other.IsError && ReferenceEquals(ExceptionInfo, other.ExceptionInfo);
         }
 
         public override bool Equals(object obj)

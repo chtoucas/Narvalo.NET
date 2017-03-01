@@ -311,7 +311,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(comparer, nameof(comparer));
 
-            if (IsError) { return other.IsError && ExceptionInfo == other.ExceptionInfo; }
+            if (IsError) { return other.IsError && ReferenceEquals(ExceptionInfo, other.ExceptionInfo); }
 
             return other.IsSuccess && comparer.Equals(Value, other.Value);
         }
