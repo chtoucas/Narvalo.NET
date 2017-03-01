@@ -11,8 +11,7 @@ namespace Narvalo
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(
-            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
+        [ExcludeFromCodeCoverage]
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] Abbreviator for Contract.Result<T>().")]
         public static void NotNull<T>() where T : class
             => Contract.Ensures(Contract.Result<T>() != null);
@@ -20,8 +19,7 @@ namespace Narvalo
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(
-            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
+        [ExcludeFromCodeCoverage]
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] Abbreviator for Contract.Result<T>().")]
         public static void NotNullUnconstrained<T>()
             => Contract.Ensures(Contract.Result<T>() != null);
@@ -29,8 +27,7 @@ namespace Narvalo
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(
-            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
+        [ExcludeFromCodeCoverage]
         public static void NotNullOrEmpty()
         {
             // TODO: Explain why we do not use String.IsNullOrEmpty().
@@ -41,24 +38,21 @@ namespace Narvalo
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(
-            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
+        [ExcludeFromCodeCoverage]
         public static void IsTrue()
             => Contract.Ensures(Contract.Result<bool>() == true);
 
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(
-            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
+        [ExcludeFromCodeCoverage]
         public static void IsFalse()
             => Contract.Ensures(Contract.Result<bool>() == false);
 
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(
-            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
+        [ExcludeFromCodeCoverage]
         public static void PassThrough<T>(T @this) where T : class
             => Contract.Ensures(Contract.Result<T>() == @this);
     }

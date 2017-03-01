@@ -120,12 +120,12 @@ namespace Narvalo
     public static partial class Enforce
     {
         [Pure]
-        [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
+        [ExcludeFromCodeCoverage]
         [Obsolete("Use Check.IsWhiteSpace() instead.")]
         public static bool IsWhiteSpace(string value) => Check.IsWhiteSpace(value);
 
         [ContractArgumentValidator]
-        [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
+        [ExcludeFromCodeCoverage]
         // NB: Using this method will cause a compilation error; creating this method was a mistake.
         [Obsolete("Use Require.NotNullOrEmpty() and Enforce.NotWhiteSpace() instead.", true)]
         [SuppressMessage("Microsoft.Contracts", "MissingPrecondition-9-0", Justification = "[Ignore] We can not have a precondition and ContractArgumentValidator both at the same time; error CC1054.")]
@@ -137,7 +137,7 @@ namespace Narvalo
         }
 
         [ContractArgumentValidator]
-        [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
+        [ExcludeFromCodeCoverage]
         // NB: Using this method will cause a compilation error; creating this method was a mistake.
         [Obsolete("Use Require.NotNullOrEmpty() and Enforce.NotWhiteSpace() instead.", true)]
         public static void PropertyNotWhiteSpace([ValidatedNotNull]string value)

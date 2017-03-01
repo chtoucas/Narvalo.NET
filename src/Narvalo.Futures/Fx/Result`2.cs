@@ -9,11 +9,18 @@ namespace Narvalo.Fx
     using System.Linq;
     using System.Runtime.CompilerServices;
 
+    public static class Outcome
+    {
+        public static Outcome<T, TError> Of<T, TError>(T value) => Outcome<T, TError>.η(value);
+
+        public static Outcome<T, TError> FromError<T, TError>(TError value) => Outcome<T, TError>.η(value);
+    }
+
     // Friendly version of Either<T, TError>. NB: In Haskell, the error is the left type parameter.
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public abstract partial class Result<T, TError> : Internal.IEither<T, TError>, Internal.Iterable<T>
+    public abstract partial class Outcome<T, TError> : Internal.IEither<T, TError>, Internal.Iterable<T>
     {
-        private Result() { }
+        private Outcome() { }
 
         public abstract bool IsSuccess { get; }
 
@@ -39,8 +46,8 @@ namespace Narvalo.Fx
 
         public abstract T ValueOrThrow(Func<Exception> exceptionFactory);
 
-        [DebuggerTypeProxy(typeof(Result<,>.Success_.DebugView))]
-        private sealed partial class Success_ : Result<T, TError>
+        [DebuggerTypeProxy(typeof(Outcome<,>.Success_.DebugView))]
+        private sealed partial class Success_ : Outcome<T, TError>
         {
             private readonly T _value;
 
@@ -70,14 +77,14 @@ namespace Narvalo.Fx
             public override string ToString() => Format.Current("Success({0})", Value);
 
             /// <summary>
-            /// Represents a debugger type proxy for <see cref="Result{T, TError}.Success_"/>.
+            /// Represents a debugger type proxy for <see cref="Outcome{T, TError}.Success_"/>.
             /// </summary>
-            [ExcludeFromCodeCoverage]
+            [Narvalo.ExcludeFromCodeCoverage]
             private sealed class DebugView
             {
-                private readonly Result<T, TError> _inner;
+                private readonly Outcome<T, TError> _inner;
 
-                public DebugView(Result<T, TError> inner)
+                public DebugView(Outcome<T, TError> inner)
                 {
                     _inner = inner;
                 }
@@ -86,8 +93,8 @@ namespace Narvalo.Fx
             }
         }
 
-        [DebuggerTypeProxy(typeof(Result<,>.Error_.DebugView))]
-        private sealed partial class Error_ : Result<T, TError>
+        [DebuggerTypeProxy(typeof(Outcome<,>.Error_.DebugView))]
+        private sealed partial class Error_ : Outcome<T, TError>
         {
             private readonly TError _error;
 
@@ -132,14 +139,14 @@ namespace Narvalo.Fx
             public override string ToString() => Format.Current("Error({0})", Error);
 
             /// <summary>
-            /// Represents a debugger type proxy for <see cref="Result{T, TError}.Error_"/>.
+            /// Represents a debugger type proxy for <see cref="Outcome{T, TError}.Error_"/>.
             /// </summary>
             [ExcludeFromCodeCoverage]
             private sealed class DebugView
             {
-                private readonly Result<T, TError> _inner;
+                private readonly Outcome<T, TError> _inner;
 
-                public DebugView(Result<T, TError> inner)
+                public DebugView(Outcome<T, TError> inner)
                 {
                     _inner = inner;
                 }
@@ -150,7 +157,7 @@ namespace Narvalo.Fx
     }
 
     // Conversion operators.
-    public partial class Result<T, TError>
+    public partial class Outcome<T, TError>
     {
         public abstract T ToValue();
 
@@ -158,17 +165,17 @@ namespace Narvalo.Fx
 
         public abstract Either<T, TError> ToEither();
 
-        public static explicit operator T(Result<T, TError> value)
+        public static explicit operator T(Outcome<T, TError> value)
             => value == null ? default(T) : value.ToValue();
 
-        public static explicit operator TError(Result<T, TError> value)
+        public static explicit operator TError(Outcome<T, TError> value)
             => value == null ? default(TError) : value.ToError();
 
-        public static explicit operator Result<T, TError>(T value)
-            => Result.Of<T, TError>(value);
+        public static explicit operator Outcome<T, TError>(T value)
+            => Outcome.Of<T, TError>(value);
 
-        public static explicit operator Result<T, TError>(TError error)
-            => Result.FromError<T, TError>(error);
+        public static explicit operator Outcome<T, TError>(TError error)
+            => Outcome.FromError<T, TError>(error);
 
         private partial class Success_
         {
@@ -196,30 +203,30 @@ namespace Narvalo.Fx
     }
 
     // Provides the core Monad methods.
-    public partial class Result<T, TError>
+    public partial class Outcome<T, TError>
     {
-        public abstract Result<TResult, TError> Bind<TResult>(Func<T, Result<TResult, TError>> selector);
+        public abstract Outcome<TOutcome, TError> Bind<TOutcome>(Func<T, Outcome<TOutcome, TError>> selector);
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static Result<T, TError> η(T value) => new Success_(value);
+        internal static Outcome<T, TError> η(T value) => new Success_(value);
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static Result<T, TError> η(TError value) => new Error_(value);
+        internal static Outcome<T, TError> η(TError value) => new Error_(value);
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static Result<T, TError> μ(Result<Result<T, TError>, TError> square)
+        internal static Outcome<T, TError> μ(Outcome<Outcome<T, TError>, TError> square)
         {
             Require.NotNull(square, nameof(square));
 
-            return square.IsSuccess ? square.Value : Result.FromError<T, TError>(square.Error);
+            return square.IsSuccess ? square.Value : Outcome.FromError<T, TError>(square.Error);
         }
 
         private partial class Success_
         {
-            public override Result<TResult, TError> Bind<TResult>(Func<T, Result<TResult, TError>> selector)
+            public override Outcome<TOutcome, TError> Bind<TOutcome>(Func<T, Outcome<TOutcome, TError>> selector)
             {
                 Require.NotNull(selector, nameof(selector));
 
@@ -229,17 +236,17 @@ namespace Narvalo.Fx
 
         private partial class Error_
         {
-            public override Result<TResult, TError> Bind<TResult>(Func<T, Result<TResult, TError>> selector)
-                => Result.FromError<TResult, TError>(Error);
+            public override Outcome<TOutcome, TError> Bind<TOutcome>(Func<T, Outcome<TOutcome, TError>> selector)
+                => Outcome.FromError<TOutcome, TError>(Error);
         }
     }
 
     // Implements the Internal.IEither<T, TError> interface.
-    public partial class Result<T, TError>
+    public partial class Outcome<T, TError>
     {
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "1#", Justification = "[Intentionally] Internal interface.")]
-        public abstract TResult Match<TResult>(Func<T, TResult> caseSuccess, Func<TError, TResult> caseError);
+        public abstract TOutcome Match<TOutcome>(Func<T, TOutcome> caseSuccess, Func<TError, TOutcome> caseError);
 
         // Alias for WhenSuccess().
         // NB: We keep this one public as it overrides the auto-generated method.
@@ -272,7 +279,7 @@ namespace Narvalo.Fx
 
         private partial class Success_
         {
-            public override TResult Match<TResult>(Func<T, TResult> caseSuccess, Func<TError, TResult> caseError)
+            public override TOutcome Match<TOutcome>(Func<T, TOutcome> caseSuccess, Func<TError, TOutcome> caseError)
             {
                 Require.NotNull(caseSuccess, nameof(caseSuccess));
 
@@ -308,7 +315,7 @@ namespace Narvalo.Fx
 
         private partial class Error_
         {
-            public override TResult Match<TResult>(Func<T, TResult> caseSuccess, Func<TError, TResult> caseError)
+            public override TOutcome Match<TOutcome>(Func<T, TOutcome> caseSuccess, Func<TError, TOutcome> caseError)
             {
                 Require.NotNull(caseError, nameof(caseError));
 
@@ -344,7 +351,7 @@ namespace Narvalo.Fx
     }
 
     // Implements the Internal.Iterable<T> interface.
-    public partial class Result<T, TError>
+    public partial class Outcome<T, TError>
     {
         public abstract IEnumerable<T> ToEnumerable();
 

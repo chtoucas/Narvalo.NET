@@ -50,28 +50,28 @@ namespace Narvalo
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
+        [ExcludeFromCodeCoverage]
         [Obsolete("Use Demand.NotNull() or Demand.NotNullUnconstrained() instead.")]
         public static void Object<T>(T @this) => NotNullUnconstrained(@this);
 
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
+        [ExcludeFromCodeCoverage]
         [Obsolete("Use Demand.NotNull() or Demand.NotNullUnconstrained() instead.")]
         public static void Property<T>(T value) => NotNullUnconstrained(value);
 
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
+        [ExcludeFromCodeCoverage]
         [Obsolete("Use Demand.True() instead.")]
         public static void Property(bool testCondition) => True(testCondition);
 
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
+        [ExcludeFromCodeCoverage]
         [Obsolete("Use Demand.NotNullOrEmpty() instead.")]
         public static void PropertyNotEmpty(string value) => NotNullOrEmpty(value);
     }

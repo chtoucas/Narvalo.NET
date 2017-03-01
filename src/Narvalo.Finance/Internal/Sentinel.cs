@@ -30,8 +30,7 @@ namespace Narvalo.Finance.Internal
             [DebuggerHidden]
             [ContractAbbreviator]
             [Conditional("CONTRACTS_FULL")]
-            [ExcludeFromCodeCoverage(
-                Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
+            [ExcludeFromCodeCoverage]
             public static void CurrencyCode(string code)
             {
                 Narvalo.Demand.NotNull(code);
@@ -49,8 +48,7 @@ namespace Narvalo.Finance.Internal
             [DebuggerHidden]
             [ContractAbbreviator]
             [Conditional("CONTRACTS_FULL")]
-            [ExcludeFromCodeCoverage(
-                Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
+            [ExcludeFromCodeCoverage]
             public static void CurrencyCode(string code)
             {
                 Narvalo.Expect.NotNull(code);

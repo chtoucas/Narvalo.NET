@@ -145,7 +145,7 @@ namespace Narvalo.Finance
         internal void ThrowIfCurrencyMismatch(Money money, string parameterName)
             => Enforce.True(Currency == money.Currency, parameterName, Strings.Argument_CurrencyMismatch);
 
-        [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
+        [ExcludeFromCodeCoverage]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
         private string DebuggerDisplay
             => Format.Current("{0} {1:F}; IsNormalized={2})", Currency.Code, Amount, IsNormalized ? "true" : "false");

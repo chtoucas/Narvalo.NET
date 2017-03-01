@@ -14,9 +14,30 @@ namespace Narvalo.Fx
     /// </summary>
     public static partial class Result
     {
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
+        public static Result<ExceptionDispatchInfo> Void => Result<ExceptionDispatchInfo>.Void;
+
+        /// <summary>
+        /// Obtains an instance of the <see cref="Result{TError}"/> class for the specified value.
+        /// </summary>
+        /// <typeparam name="TError">The underlying type of <paramref name="value"/>.</typeparam>
+        /// <param name="value">A value to be wrapped into an object of type <see cref="Result{TError}"/>.</param>
+        /// <returns>An instance of the <see cref="Result{TError}"/> class for the specified value.</returns>
+        public static Result<TError> FromError<TError>(TError value) => Result<TError>.η(value);
+
         public static Result<T, TError> FromError<T, TError>(TError value) => Result<T, TError>.η(value);
 
-        public static void ThrowIfError<T, TException>(this Result<T, TException> @this) where TException : Exception
+        public static void ThrowIfError(this Result<ExceptionDispatchInfo> @this)
+        {
+            Require.NotNull(@this, nameof(@this));
+
+            if (@this.IsError)
+            {
+                @this.Error.Throw();
+            }
+        }
+
+        public static void ThrowIfError<TException>(this Result<TException> @this) where TException : Exception
         {
             Require.NotNull(@this, nameof(@this));
 
@@ -36,9 +57,19 @@ namespace Narvalo.Fx
             }
         }
 
+        public static void ThrowIfError<T, TException>(this Result<T, TException> @this) where TException : Exception
+        {
+            Require.NotNull(@this, nameof(@this));
+
+            if (@this.IsError)
+            {
+                throw @this.Error;
+            }
+        }
+
         // NB: This method serves a different purpose than the trywith from F# workflows.
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of VoidOrError.")]
-        public static Result<Unit, ExceptionDispatchInfo> TryWith(Action action)
+        public static Result<ExceptionDispatchInfo> TryWith(Action action)
         {
             Require.NotNull(action, nameof(action));
 
@@ -46,13 +77,13 @@ namespace Narvalo.Fx
             {
                 action.Invoke();
 
-                return Of<Unit, ExceptionDispatchInfo>(Unit.Default);
+                return Result.Void;
             }
             catch (Exception ex)
             {
                 var edi = ExceptionDispatchInfo.Capture(ex);
 
-                return FromError<Unit, ExceptionDispatchInfo>(edi);
+                return FromError<ExceptionDispatchInfo>(edi);
             }
         }
 
@@ -76,7 +107,7 @@ namespace Narvalo.Fx
 
         // NB: This method serves a different purpose than the tryfinally from F# workflows.
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of VoidOrError.")]
-        public static Result<Unit, ExceptionDispatchInfo> TryFinally(Action action, Action finallyAction)
+        public static Result<ExceptionDispatchInfo> TryFinally(Action action, Action finallyAction)
         {
             Require.NotNull(action, nameof(action));
             Require.NotNull(finallyAction, nameof(finallyAction));
@@ -85,13 +116,13 @@ namespace Narvalo.Fx
             {
                 action.Invoke();
 
-                return Of<Unit, ExceptionDispatchInfo>(Unit.Default);
+                return Result.Void;
             }
             catch (Exception ex)
             {
                 var edi = ExceptionDispatchInfo.Capture(ex);
 
-                return FromError<Unit, ExceptionDispatchInfo>(edi);
+                return FromError<ExceptionDispatchInfo>(edi);
             }
             finally
             {

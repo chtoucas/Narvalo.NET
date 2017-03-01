@@ -42,8 +42,7 @@ namespace Narvalo
         [Pure]
         [DebuggerHidden]
         [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(
-            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
+        [ExcludeFromCodeCoverage]
         public static void AssumeInvariant<T>(T obj) { }
 
         [DebuggerHidden]

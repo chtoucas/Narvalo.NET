@@ -108,13 +108,12 @@ namespace Narvalo.Fx
         }
 
         /// <inheritdoc cref="Object.ToString" />
-        public override string ToString()
-            => IsSome ? Format.Current("Maybe({0})", Value) : "Maybe(None)";
+        public override string ToString() => IsSome ? Format.Current("Maybe({0})", Value) : "Maybe(None)";
 
         /// <summary>
         /// Represents a debugger type proxy for <see cref="Maybe{T}"/>.
         /// </summary>
-        [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
+        [ExcludeFromCodeCoverage]
         private sealed class DebugView
         {
             private readonly Maybe<T> _inner;
@@ -126,18 +125,7 @@ namespace Narvalo.Fx
 
             public bool IsSome { get { return _inner.IsSome; } }
 
-            public T Value
-            {
-                get
-                {
-                    if (!IsSome)
-                    {
-                        return default(T);
-                    }
-
-                    return _inner.Value;
-                }
-            }
+            public T Value => IsSome ? _inner.Value : default(T);
         }
     }
 

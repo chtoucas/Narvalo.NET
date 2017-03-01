@@ -135,6 +135,7 @@
       <DependentUpon>Strings.fr.resx</DependentUpon>
     </Compile>
     <Compile Include="Unit.cs" />
+    <Compile Include="Result`1.cs" />
     <Compile Include="YCombinator.cs" />
   </ItemGroup>
   <ItemGroup>

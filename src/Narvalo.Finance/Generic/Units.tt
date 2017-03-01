@@ -51,7 +51,8 @@ namespace <#= Namespace #>
         else
         {
 #>
-    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
+    // We don't want to clutter the open cover report.
+    [ExcludeFromCodeCoverage]
 <#
         }
 #>

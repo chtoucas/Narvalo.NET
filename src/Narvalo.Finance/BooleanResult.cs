@@ -80,7 +80,7 @@ namespace Narvalo.Finance
             /// Represents a debugger type proxy for <see cref="BooleanResult.False_"/>.
             /// </summary>
             [ContractVerification(false)] // Debugger-only code.
-            [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
+            [ExcludeFromCodeCoverage]
             private sealed class DebugView
             {
                 private readonly False_ _inner;

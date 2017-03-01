@@ -31,7 +31,7 @@ namespace Narvalo.Fx
 
         internal abstract TRight Right { get; }
 
-        [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
+        [ExcludeFromCodeCoverage]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
         private string DebuggerDisplay => IsLeft ? "Left" : "Right";
 
@@ -88,7 +88,7 @@ namespace Narvalo.Fx
             /// <summary>
             /// Represents a debugger type proxy for <see cref="Either{TLeft, TRight}.Left_"/>.
             /// </summary>
-            [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
+            [ExcludeFromCodeCoverage]
             private sealed class DebugView
             {
                 private readonly Either<TLeft, TRight> _inner;
@@ -147,7 +147,7 @@ namespace Narvalo.Fx
             /// <summary>
             /// Represents a debugger type proxy for <see cref="Either{TLeft, TRight}.Right_"/>.
             /// </summary>
-            [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
+            [ExcludeFromCodeCoverage]
             private sealed class DebugView
             {
                 private readonly Either<TLeft, TRight> _inner;

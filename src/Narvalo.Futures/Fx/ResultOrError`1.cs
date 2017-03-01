@@ -60,7 +60,7 @@ namespace Narvalo.Fx
         /// <see cref="IsSuccess"/> is false.</remarks>
         internal abstract ExceptionDispatchInfo ExceptionInfo { get; }
 
-        [Narvalo.ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
+        [ExcludeFromCodeCoverage]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
         private string DebuggerDisplay => IsSuccess ? "Success" : "Error";
 
@@ -125,7 +125,7 @@ namespace Narvalo.Fx
             /// Represents a debugger type proxy for <see cref="ResultOrError{T}.Success_"/>.
             /// </summary>
             [ContractVerification(false)] // Debugger-only code.
-            [Narvalo.ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
+            [ExcludeFromCodeCoverage]
             private sealed class DebugView
             {
                 private readonly ResultOrError<T> _inner;
@@ -199,7 +199,7 @@ namespace Narvalo.Fx
             /// Represents a debugger type proxy for <see cref="ResultOrError{T}.Error_"/>.
             /// </summary>
             [ContractVerification(false)] // Debugger-only code.
-            [Narvalo.ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
+            [ExcludeFromCodeCoverage]
             private sealed class DebugView
             {
                 private readonly Error_ _inner;

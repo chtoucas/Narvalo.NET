@@ -53,7 +53,7 @@ namespace Narvalo.Finance
 
         public IbanValidationLevels VerificationLevels { get; }
 
-        [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
+        [ExcludeFromCodeCoverage]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
         // We only display the beginning of the IBAN value.
         private string DebuggerDisplay

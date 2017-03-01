@@ -76,7 +76,7 @@ namespace Narvalo.Finance
         internal void ThrowIfCurrencyMismatch(Moneypenny penny, string parameterName)
             => Enforce.True(Currency == penny.Currency, parameterName, Strings.Argument_CurrencyMismatch);
 
-        [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
+        [ExcludeFromCodeCoverage]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
         private string DebuggerDisplay => Format.Current("{0} {1:N0}", Currency.Code, Amount);
     }

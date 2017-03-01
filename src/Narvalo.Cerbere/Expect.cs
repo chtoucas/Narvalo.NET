@@ -14,36 +14,31 @@ namespace Narvalo
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(
-            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
+        [ExcludeFromCodeCoverage]
         public static void State(bool testCondition) => True(testCondition);
 
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(
-            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
+        [ExcludeFromCodeCoverage]
         public static void True(bool testCondition) => Contract.Requires(testCondition);
 
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(
-            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
+        [ExcludeFromCodeCoverage]
         public static void Range(bool rangeCondition) => True(rangeCondition);
 
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(
-            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
+        [ExcludeFromCodeCoverage]
         public static void NotNull<T>(T value) where T : class => True(value != null);
 
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(
-            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
+        [ExcludeFromCodeCoverage]
         public static void NotNullUnconstrained<T>(T value) => True(value != null);
 
         /// <summary>
@@ -53,8 +48,7 @@ namespace Narvalo
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(
-            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
+        [ExcludeFromCodeCoverage]
         public static void NotNullOrEmpty(string value) => True(!String.IsNullOrEmpty(value));
     }
 
@@ -64,28 +58,28 @@ namespace Narvalo
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
+        [ExcludeFromCodeCoverage]
         [Obsolete("Use Expect.NotNull() or Expect.NotNullUnconstrained() instead.")]
         public static void Object<T>(T @this) => NotNullUnconstrained(@this);
 
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
+        [ExcludeFromCodeCoverage]
         [Obsolete("Use Expect.NotNull() or Expect.NotNullUnconstrained() instead.")]
         public static void Property<T>(T value) => NotNullUnconstrained(value);
 
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
+        [ExcludeFromCodeCoverage]
         [Obsolete("Use Expect.True() instead.")]
         public static void Property(bool testCondition) => True(testCondition);
 
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
+        [ExcludeFromCodeCoverage]
         [Obsolete("Use Expect.NotNullOrEmpty() instead.")]
         public static void PropertyNotEmpty(string value) => NotNullOrEmpty(value);
     }

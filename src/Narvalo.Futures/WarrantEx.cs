@@ -12,8 +12,7 @@ namespace Narvalo
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(
-            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
+        [ExcludeFromCodeCoverage]
         public static void Length(int length)
         {
             Ensures(Result<string>() != null);
@@ -23,8 +22,7 @@ namespace Narvalo
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(
-            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
+        [ExcludeFromCodeCoverage]
         public static void Lengths(int length1, int length2)
         {
             Ensures(Result<string>() != null);
@@ -34,8 +32,7 @@ namespace Narvalo
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(
-            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
+        [ExcludeFromCodeCoverage]
         public static void LengthRange(int minLength, int maxLength)
         {
             Ensures(Result<string>() != null);

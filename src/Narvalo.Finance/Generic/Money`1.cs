@@ -111,7 +111,7 @@ namespace Narvalo.Finance.Generic
             return MoneyFactory.FromMajor<TCurrency>(Amount, adjuster);
         }
 
-        [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
+        [ExcludeFromCodeCoverage]
         private string DebuggerDisplay => Format.Current("{0:F2} ({1})", Amount, Currency.Code);
     }
 

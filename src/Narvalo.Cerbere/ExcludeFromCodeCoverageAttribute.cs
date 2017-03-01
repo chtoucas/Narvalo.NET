@@ -16,12 +16,5 @@ namespace Narvalo
         | AttributeTargets.Event,
         Inherited = false,
         AllowMultiple = false)]
-    public sealed class ExcludeFromCodeCoverageAttribute : Attribute
-    {
-        /// <summary>
-        /// Gets or sets the justification for the exclusion from code coverage.
-        /// </summary>
-        /// <value>The justification for the exclusion from code coverage.</value>
-        public string Justification { get; set; }
-    }
+    public sealed class ExcludeFromCodeCoverageAttribute : Attribute { }
 }
