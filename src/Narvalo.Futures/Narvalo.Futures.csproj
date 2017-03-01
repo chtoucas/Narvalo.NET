@@ -77,22 +77,13 @@
     </Compile>
     <Compile Include="Fx\ResultOrError.Shadowing.cs" />
     <Compile Include="Fx\ResultOrError`1.cs" />
-    <Compile Include="Fx\Result`2.cs" />
     <Compile Include="Fx\Func.cs" />
     <Compile Include="Fx\Extensions\Func%24.cs" />
     <Compile Include="Fx\Extensions\Nullable%24.cs" />
     <Compile Include="Fx\TO BE REMOVED\Switch%24.cs" />
     <Compile Include="Fx\TO BE REMOVED\Switch.cs" />
     <Compile Include="Fx\TO BE REMOVED\Switch`2.cs" />
-    <Compile Include="Fx\VoidOr.cs" />
-    <Compile Include="Fx\VoidOr.g.cs">
-      <DependentUpon>VoidOr.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Fx\VoidOr.Shadowing.cs" />
     <Compile Include="Fx\VoidOrError.cs" />
-    <Compile Include="Fx\VoidOr`1.cs" />
     <Compile Include="Globalization\CountryISOCode.cs" />
     <Compile Include="Globalization\RegionInfo%24.cs" />
     <Compile Include="Guard.cs" />
@@ -148,10 +139,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SnvCurrencyInfoProvider.g.cs</LastGenOutput>
     </Content>
-    <None Include="Fx\VoidOr.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>VoidOr.g.cs</LastGenOutput>
-    </None>
     <None Include="Fx\ResultOrError.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ResultOrError.g.cs</LastGenOutput>

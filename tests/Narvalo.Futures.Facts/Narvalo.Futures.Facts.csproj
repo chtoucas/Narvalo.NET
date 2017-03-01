@@ -42,12 +42,7 @@
     </Compile>
     <Compile Include="Fx\ResultOrErrorFacts.cs" />
     <Compile Include="Fx\SwitchFacts.cs" />
-    <Compile Include="Fx\VoidOr.g.cs">
-      <DependentUpon>VoidOr.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Fx\VoidOrBreakFacts.cs" />
+    <Compile Include="Fx\VoidOrErrorFacts.cs" />
     <Compile Include="GuardFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -77,10 +72,6 @@
     <Content Include="Fx\ResultOrError.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ResultOrError.g.cs</LastGenOutput>
-    </Content>
-    <Content Include="Fx\VoidOr.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>VoidOr.g.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="..\TestCommon\Narvalo.TestCommon.projitems" Label="Shared" />

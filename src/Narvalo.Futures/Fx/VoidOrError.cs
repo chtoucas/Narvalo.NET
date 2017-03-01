@@ -6,7 +6,6 @@ namespace Narvalo.Fx
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Runtime.ExceptionServices;
 
@@ -41,17 +40,11 @@ namespace Narvalo.Fx
 
             public override void ThrowIfError() { }
 
-            public override string ToString()
-            {
-                Warrant.NotNull<string>();
-
-                return "Void";
-            }
+            public override string ToString() => "Void";
 
             /// <summary>
             /// Represents a debugger type proxy for <see cref="VoidOrError.Void_"/>.
             /// </summary>
-            [ContractVerification(false)] // Debugger-only code.
             [ExcludeFromCodeCoverage]
             private sealed class DebugView { }
         }
@@ -72,25 +65,19 @@ namespace Narvalo.Fx
 
             internal override ExceptionDispatchInfo ExceptionInfo
             {
-                get { Warrant.NotNull<ExceptionDispatchInfo>(); return _exceptionInfo; }
+                get { return _exceptionInfo; }
             }
 
             public override void ThrowIfError() => ExceptionInfo.Throw();
 
             public override string ToString()
             {
-                Warrant.NotNull<string>();
-
-                Exception exception = ExceptionInfo.SourceException;
-                Contract.Assume(exception != null);
-
-                return Format.Current("Error({0})", exception.Message);
+                return Format.Current("Error({0})", ExceptionInfo.SourceException.Message);
             }
 
             /// <summary>
             /// Represents a debugger type proxy for <see cref="VoidOrError.Error_"/>.
             /// </summary>
-            [ContractVerification(false)] // Debugger-only code.
             [ExcludeFromCodeCoverage]
             private sealed class DebugView
             {
@@ -113,7 +100,7 @@ namespace Narvalo.Fx
 
         public abstract ExceptionDispatchInfo ToExceptionInfo();
 
-        public abstract VoidOr<Exception> ToVoidOrException();
+        public abstract Result<Exception> ToResult();
 
         public static explicit operator Exception(VoidOrError value)
             => value?.ToException();
@@ -121,8 +108,12 @@ namespace Narvalo.Fx
         public static explicit operator ExceptionDispatchInfo(VoidOrError value)
             => value?.ToExceptionInfo();
 
-        public static explicit operator VoidOr<Exception>(VoidOrError value)
-            => value?.ToVoidOrException();
+        public static explicit operator Result<Exception>(VoidOrError value)
+        {
+            if (value == null) { throw new InvalidCastException("XXX"); }
+            return value.ToResult();
+        }
+
 
         public static explicit operator VoidOrError(ExceptionDispatchInfo exceptionInfo)
             => FromError(exceptionInfo);
@@ -139,7 +130,7 @@ namespace Narvalo.Fx
                 throw new InvalidCastException("XXX");
             }
 
-            public override VoidOr<Exception> ToVoidOrException() => VoidOr<Exception>.Void;
+            public override Result<Exception> ToResult() => Result<Exception>.Void;
         }
 
         private partial class Error_
@@ -148,7 +139,7 @@ namespace Narvalo.Fx
 
             public override ExceptionDispatchInfo ToExceptionInfo() => ExceptionInfo;
 
-            public override VoidOr<Exception> ToVoidOrException() => VoidOr.FromError(ExceptionInfo.SourceException);
+            public override Result<Exception> ToResult() => Result.FromError(ExceptionInfo.SourceException);
         }
     }
 
@@ -158,12 +149,11 @@ namespace Narvalo.Fx
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private static readonly VoidOrError s_Void = new VoidOrError.Void_();
 
-        public static VoidOrError Void { get { Warrant.NotNull<VoidOrError>(); return s_Void; } }
+        public static VoidOrError Void { get { return s_Void; } }
 
         public static VoidOrError FromError(ExceptionDispatchInfo exceptionInfo)
         {
             Require.NotNull(exceptionInfo, nameof(exceptionInfo));
-            Warrant.NotNull<VoidOrError>();
 
             return new VoidOrError.Error_(exceptionInfo);
         }
@@ -173,7 +163,6 @@ namespace Narvalo.Fx
         public static VoidOrError TryWith(Action action)
         {
             Require.NotNull(action, nameof(action));
-            Warrant.NotNull<VoidOrError>();
 
             try
             {
@@ -195,7 +184,6 @@ namespace Narvalo.Fx
         {
             Require.NotNull(action, nameof(action));
             Require.NotNull(finallyAction, nameof(finallyAction));
-            Warrant.NotNull<VoidOrError>();
 
             try
             {
@@ -223,8 +211,6 @@ namespace Narvalo.Fx
 
         public IEnumerator<ExceptionDispatchInfo> GetEnumerator()
         {
-            Warrant.NotNull<IEnumerator<ExceptionDispatchInfo>>();
-
             return ToEnumerable().GetEnumerator();
         }
 
@@ -272,8 +258,6 @@ namespace Narvalo.Fx
         {
             public override IEnumerable<ExceptionDispatchInfo> ToEnumerable()
             {
-                Warrant.NotNull<IEnumerable<ExceptionDispatchInfo>>();
-
                 return Enumerable.Empty<ExceptionDispatchInfo>();
             }
 
@@ -340,8 +324,6 @@ namespace Narvalo.Fx
         {
             public override IEnumerable<ExceptionDispatchInfo> ToEnumerable()
             {
-                Warrant.NotNull<IEnumerable<ExceptionDispatchInfo>>();
-
                 return Sequence.Of(ExceptionInfo);
             }
 
@@ -430,34 +412,3 @@ namespace Narvalo.Fx
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Fx
-{
-    using System.Diagnostics.Contracts;
-
-    public partial class VoidOrException
-    {
-        private sealed partial class Void_
-        {
-            [ContractInvariantMethod]
-            private void ObjectInvariant()
-            {
-                Contract.Invariant(IsSuccess);
-            }
-        }
-
-        private sealed partial class Error_
-        {
-            [ContractInvariantMethod]
-            private void ObjectInvariant()
-            {
-                Contract.Invariant(_exceptionInfo != null);
-                Contract.Invariant(IsError);
-            }
-        }
-    }
-}
-
-#endif
