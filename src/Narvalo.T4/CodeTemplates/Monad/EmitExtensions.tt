@@ -9,7 +9,7 @@ public partial class MonadTemplate
 #>
     // Provides extension methods for <#= Name #><T<#= RTDecl #>>.
     // T4: EmitExtensions().
-    public static partial class <#= Name #>
+    public static partial class <#= ExtensionsClsName #>
     {
         /// <seealso cref="Apply{TSource, TResult<#= RTDecl #>}" />
         public static <#= Name #><TResult<#= RTDecl #>> Gather<TSource, TResult<#= RTDecl #>>(
@@ -72,7 +72,7 @@ public partial class MonadTemplate
 <#+ if (HasRightGenerics) { #>
             return @this.ReplaceBy(global::Narvalo.Fx.Unit.Default);
 <#+ } else { #>
-            return @this.Then(Unit);
+            return @this.Then(<#= Name #>.Unit);
 <#+ } #>
         }
 <#+ if (HasZero) { #>

@@ -7,7 +7,7 @@ public partial class MonadTemplate
 #>
     // Provides a set of static methods for <#= Name #><T<#= RTDecl #>>.
     // T4: EmitHelpers().
-    public static partial class <#= Name #>
+    public <#= HelpersTypeDecl #> <#= Name #>
     {
 <#+ if (!HasRightGenerics) { #>
         /// <summary>

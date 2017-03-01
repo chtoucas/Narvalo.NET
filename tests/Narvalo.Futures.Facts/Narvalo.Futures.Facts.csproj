@@ -35,14 +35,9 @@
     <Compile Include="Finance\CheckDigitsFacts.cs" />
     <Compile Include="Finance\Currencies\CurrencyActivatorFacts.cs" />
     <Compile Include="Fx\Extensions\NullableFacts.cs" />
-    <Compile Include="Fx\ResultOrError.g.cs">
-      <DependentUpon>ResultOrError.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Fx\ResultOrErrorFacts.cs" />
     <Compile Include="Fx\SwitchFacts.cs" />
-    <Compile Include="Fx\VoidOrErrorFacts.cs" />
+    <Compile Include="Fx\ResultFacts.cs" />
     <Compile Include="GuardFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -67,12 +62,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Fx\ResultOrError.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ResultOrError.g.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <Import Project="..\TestCommon\Narvalo.TestCommon.projitems" Label="Shared" />
   <Import Project="..\..\tools\Narvalo.Common.props" />

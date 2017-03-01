@@ -21,7 +21,7 @@ namespace Narvalo.Fx
 
     // Provides a set of static methods for Result<T, TError>.
     // T4: EmitHelpers().
-    public static partial class Result
+    public partial struct Result
     {
         /// <summary>
         /// Obtains an instance of the <see cref="Result{T, TError}"/> class for the specified value.
@@ -108,7 +108,7 @@ namespace Narvalo.Fx
 
     // Provides extension methods for Result<T, TError>.
     // T4: EmitExtensions().
-    public static partial class Result
+    public static partial class ResultExtensions
     {
         /// <seealso cref="Apply{TSource, TResult, TError}" />
         public static Result<TResult, TError> Gather<TSource, TResult, TError>(
@@ -358,12 +358,11 @@ namespace Narvalo.Fx
 
     // Provides extension methods for IEnumerable<Result<T, TError>>.
     // T4: EmitEnumerableExtensions().
-    public static partial class Result
+    public static partial class ResultExtensions
     {
         public static Result<IEnumerable<TSource>, TError> Collect<TSource, TError>(
             this IEnumerable<Result<TSource, TError>> @this)
             => @this.CollectImpl();
-
     }
 }
 

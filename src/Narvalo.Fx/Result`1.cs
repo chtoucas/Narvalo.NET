@@ -161,7 +161,10 @@ namespace Narvalo.Fx
         public static explicit operator Result<T>(T value) => Result.Of(value);
 
         public static explicit operator Result<T>(ExceptionDispatchInfo exceptionInfo)
-            => Result.FromError<T>(exceptionInfo);
+        {
+            if (exceptionInfo == null) { throw new InvalidCastException("XXX"); }
+            return Result.FromError<T>(exceptionInfo);
+        }
     }
 
     // Core Monad methods.

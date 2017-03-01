@@ -21,7 +21,7 @@ namespace Narvalo.Fx
 
     // Provides a set of static methods for Result<T>.
     // T4: EmitHelpers().
-    public static partial class Result
+    public partial struct Result
     {
         /// <summary>
         /// The unique object of type <c>Result&lt;Unit&gt;</c>.
@@ -117,7 +117,7 @@ namespace Narvalo.Fx
 
     // Provides extension methods for Result<T>.
     // T4: EmitExtensions().
-    public static partial class Result
+    public static partial class ResultExtensions
     {
         /// <seealso cref="Apply{TSource, TResult}" />
         public static Result<TResult> Gather<TSource, TResult>(
@@ -176,7 +176,7 @@ namespace Narvalo.Fx
         public static Result<global::Narvalo.Fx.Unit> Skip<TSource>(this Result<TSource> @this)
         {
             /* T4: NotNull(@this) */
-            return @this.Then(Unit);
+            return @this.Then(Result.Unit);
         }
 
         public static Result<TResult> Coalesce<TSource, TResult>(
@@ -338,7 +338,7 @@ namespace Narvalo.Fx
         public static Result<IEnumerable<TResult>> InvokeWith<TSource, TResult>(
             this Func<TSource, Result<TResult>> @this,
             IEnumerable<TSource> seq)
-            => seq.Select(@this).Collect();
+            => seq.SelectWith(@this);
 
         public static Result<TResult> InvokeWith<TSource, TResult>(
             this Func<TSource, Result<TResult>> @this,
@@ -367,12 +367,11 @@ namespace Narvalo.Fx
 
     // Provides extension methods for IEnumerable<Result<T>>.
     // T4: EmitEnumerableExtensions().
-    public static partial class Result
+    public static partial class ResultExtensions
     {
         public static Result<IEnumerable<TSource>> Collect<TSource>(
             this IEnumerable<Result<TSource>> @this)
             => @this.CollectImpl();
-
     }
 }
 
@@ -421,6 +420,240 @@ namespace Narvalo.Fx.Internal
 
                     if (append) { yield return item; }
                 }
+            }
+        }
+    }
+}
+
+namespace Narvalo.Fx.Linq
+{
+    using System;
+    using System.Collections.Generic;
+
+    using Narvalo.Fx;
+    using Narvalo.Fx.Internal;
+
+    // Provides extension methods for IEnumerable<T>.
+    // We do not use the standard LINQ names to avoid any confusion.
+    // - Select    -> SelectWith
+    // - Where     -> WhereBy
+    // - Zip       -> ZipWith
+    // - Aggregate -> Reduce or Fold
+    // T4: EmitLinqCore().
+    public static partial class Qperators
+    {
+        public static Result<IEnumerable<TResult>> SelectWith<TSource, TResult>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, Result<TResult>> selector)
+            => @this.SelectWithImpl(selector);
+
+        public static Result<IEnumerable<TSource>> WhereBy<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, Result<bool>> predicate)
+            => @this.WhereByImpl(predicate);
+
+        public static Result<IEnumerable<TResult>> ZipWith<TFirst, TSecond, TResult>(
+            this IEnumerable<TFirst> @this,
+            IEnumerable<TSecond> second,
+            Func<TFirst, TSecond, Result<TResult>> resultSelector)
+            => @this.ZipWithImpl(second, resultSelector);
+
+        public static Result<TAccumulate> Fold<TSource, TAccumulate>(
+            this IEnumerable<TSource> @this,
+            TAccumulate seed,
+            Func<TAccumulate, TSource, Result<TAccumulate>> accumulator)
+            => @this.FoldImpl(seed, accumulator);
+
+        public static Result<TAccumulate> Fold<TSource, TAccumulate>(
+            this IEnumerable<TSource> @this,
+            TAccumulate seed,
+            Func<TAccumulate, TSource, Result<TAccumulate>> accumulator,
+            Func<Result<TAccumulate>, bool> predicate)
+            => @this.FoldImpl(seed, accumulator, predicate);
+
+        public static Result<TSource> Reduce<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, TSource, Result<TSource>> accumulator)
+            => @this.ReduceImpl(accumulator);
+
+        public static Result<TSource> Reduce<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, TSource, Result<TSource>> accumulator,
+            Func<Result<TSource>, bool> predicate)
+            => @this.ReduceImpl(accumulator, predicate);
+    }
+}
+
+namespace Narvalo.Fx.Internal
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
+
+    // Provides default implementations for the extension methods for IEnumerable<T>.
+    // You will certainly want to override them to improve performance.
+    // T4: EmitLinqInternal().
+    internal static partial class EnumerableExtensions
+    {
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static Result<IEnumerable<TResult>> SelectWithImpl<TSource, TResult>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, Result<TResult>> selector)
+        {
+            Demand.NotNull(@this);
+            Demand.NotNull(selector);
+
+            return @this.Select(selector).Collect();
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static Result<IEnumerable<TSource>> WhereByImpl<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, Result<bool>> predicate)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+
+            return Result.Of(WhereByIterator(@this, predicate));
+        }
+
+        private static IEnumerable<TSource> WhereByIterator<TSource>(
+            IEnumerable<TSource> source,
+            Func<TSource, Result<bool>> predicate)
+        {
+            Demand.NotNull(source);
+            Demand.NotNull(predicate);
+
+            using (var iter = source.GetEnumerator())
+            {
+                while (iter.MoveNext())
+                {
+                    bool pass = false;
+                    TSource item = iter.Current;
+
+                    predicate(item).Bind(val =>
+                    {
+                        pass = val;
+
+                        return Result.Unit;
+                    });
+
+                    if (pass) { yield return item; }
+                }
+            }
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static Result<IEnumerable<TResult>> ZipWithImpl<TFirst, TSecond, TResult>(
+            this IEnumerable<TFirst> @this,
+            IEnumerable<TSecond> second,
+            Func<TFirst, TSecond, Result<TResult>> resultSelector)
+        {
+            Demand.NotNull(resultSelector);
+            Demand.NotNull(@this);
+            Demand.NotNull(second);
+
+            return @this.Zip(second, resultSelector).Collect();
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static Result<TAccumulate> FoldImpl<TSource, TAccumulate>(
+            this IEnumerable<TSource> @this,
+            TAccumulate seed,
+            Func<TAccumulate, TSource, Result<TAccumulate>> accumulator)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(accumulator, nameof(accumulator));
+
+            Result<TAccumulate> retval = Result.Of(seed);
+
+            using (var iter = @this.GetEnumerator())
+            {
+                while (iter.MoveNext())
+                {
+                    retval = retval.Bind(val => accumulator(val, iter.Current));
+                }
+            }
+
+            return retval;
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static Result<TAccumulate> FoldImpl<TSource, TAccumulate>(
+            this IEnumerable<TSource> @this,
+            TAccumulate seed,
+            Func<TAccumulate, TSource, Result<TAccumulate>> accumulator,
+            Func<Result<TAccumulate>, bool> predicate)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(accumulator, nameof(accumulator));
+            Require.NotNull(predicate, nameof(predicate));
+
+            Result<TAccumulate> retval = Result.Of(seed);
+
+            using (var iter = @this.GetEnumerator())
+            {
+                while (predicate(retval) && iter.MoveNext())
+                {
+                    retval = retval.Bind(val => accumulator(val, iter.Current));
+                }
+            }
+
+            return retval;
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static Result<TSource> ReduceImpl<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, TSource, Result<TSource>> accumulator)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(accumulator, nameof(accumulator));
+
+            using (var iter = @this.GetEnumerator())
+            {
+                if (!iter.MoveNext())
+                {
+                    throw new InvalidOperationException("Source sequence was empty.");
+                }
+
+                Result<TSource> retval = Result.Of(iter.Current);
+
+                while (iter.MoveNext())
+                {
+                    retval = retval.Bind(val => accumulator(val, iter.Current));
+                }
+
+                return retval;
+            }
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static Result<TSource> ReduceImpl<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, TSource, Result<TSource>> accumulator,
+            Func<Result<TSource>, bool> predicate)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(accumulator, nameof(accumulator));
+            Require.NotNull(predicate, nameof(predicate));
+
+            using (var iter = @this.GetEnumerator())
+            {
+                if (!iter.MoveNext())
+                {
+                    throw new InvalidOperationException("Source sequence was empty.");
+                }
+
+                Result<TSource> retval = Result.Of(iter.Current);
+
+                while (predicate(retval) && iter.MoveNext())
+                {
+                    retval = retval.Bind(val => accumulator(val, iter.Current));
+                }
+
+                return retval;
             }
         }
     }

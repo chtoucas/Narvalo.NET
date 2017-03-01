@@ -21,26 +21,26 @@ namespace Narvalo.Fx
         //    Assert.Throws<InvalidCastException>(() => (ExceptionDispatchInfo)output);
         //}
 
-        [Fact]
-        public static void ExplicitCastToValue_ThrowsInvalidCastException_WhenCastingFailureObject()
-        {
-            // Arrange
-            Result<string> output = null;
+        //[Fact]
+        //public static void ExplicitCastToValue_ThrowsInvalidCastException_WhenCastingFailureObject()
+        //{
+        //    // Arrange
+        //    Result<string> output = null;
 
-            try
-            {
-                throw new My.SimpleException();
-            }
-            catch (My.SimpleException ex)
-            {
-                var edi = ExceptionDispatchInfo.Capture(ex);
+        //    try
+        //    {
+        //        throw new My.SimpleException();
+        //    }
+        //    catch (My.SimpleException ex)
+        //    {
+        //        var edi = ExceptionDispatchInfo.Capture(ex);
 
-                output = ResultOrError.FromError<string>(edi);
-            }
+        //        output = ResultOrError.FromError<string>(edi);
+        //    }
 
-            // Act & Assert
-            Assert.Throws<InvalidCastException>(() => (string)output);
-        }
+        //    // Act & Assert
+        //    Assert.Throws<InvalidCastException>(() => (string)output);
+        //}
 
         #endregion
     }

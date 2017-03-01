@@ -8,6 +8,7 @@
         public override void Initialize()
         {
             InitializeGenericParameters("T", "TError");
+            InitializeHelpers(true);
 
             Name = "Result";
             IsNullable = false;

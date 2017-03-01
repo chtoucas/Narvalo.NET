@@ -4,8 +4,6 @@ namespace Narvalo.Fx
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Runtime.ExceptionServices;
 
     /// <summary>
     /// Provides a set of static and extension methods for <see cref="Maybe{T}"/>
@@ -25,7 +23,8 @@ namespace Narvalo.Fx
 
     // Provides extension methods for Maybe<T?>.
     // NB: There is really no reason to use Maybe<T> or Maybe<T?> instead of T? (for value
-    // types of course).
+    // types of course). You can not directly create directly a Maybe<T?> but it is still
+    // possible via Bind.
     public static partial class Maybe
     {
         public static Maybe<T> Flatten<T>(this Maybe<T?> @this) where T : struct
@@ -64,65 +63,6 @@ namespace Narvalo.Fx
 
             return m.Value;
         }
-    }
-
-    // Provides static helpers for Maybe<TError> where TError is of type Exception or ExceptionDispatchInfo.
-    public static partial class Maybe
-    {
-        public static void ThrowIfError(this Maybe<ExceptionDispatchInfo> @this)
-        {
-            if (@this.IsSome) { @this.Value.Throw(); }
-        }
-
-        public static void ThrowIfError<TException>(this Maybe<TException> @this) where TException : Exception
-        {
-            if (@this.IsSome) { throw @this.Value; }
-        }
-
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of VoidOrError.")]
-        public static Maybe<ExceptionDispatchInfo> TryWith(Action action)
-        {
-            Require.NotNull(action, nameof(action));
-
-            try
-            {
-                action();
-
-                return Maybe<ExceptionDispatchInfo>.None;
-            }
-            catch (Exception ex)
-            {
-                var edi = ExceptionDispatchInfo.Capture(ex);
-
-                return Of(edi);
-            }
-        }
-
-        // NB: This method is **not** the tryfinally from F# workflows.
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of VoidOrError.")]
-        public static Maybe<ExceptionDispatchInfo> TryFinally(Action action, Action finallyAction)
-        {
-            Require.NotNull(action, nameof(action));
-            Require.NotNull(finallyAction, nameof(finallyAction));
-
-            try
-            {
-                action();
-
-                return Maybe<ExceptionDispatchInfo>.None;
-            }
-            catch (Exception ex)
-            {
-                var edi = ExceptionDispatchInfo.Capture(ex);
-
-                return Of(edi);
-            }
-            finally
-            {
-                finallyAction();
-            }
-        }
-
     }
 
     // Provides extension methods for IEnumerable<Maybe<T>>.

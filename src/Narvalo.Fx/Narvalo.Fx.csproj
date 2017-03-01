@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="Either.cs" />
     <Compile Include="Either`2.cs" />
+    <Compile Include="Result.cs" />
     <Compile Include="Ident.g.cs">
       <DependentUpon>Ident.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -95,12 +96,13 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Kleisli_.cs" />
+    <Compile Include="Result%24.cs" />
     <Compile Include="ResultT+TError.g.cs">
       <DependentUpon>ResultT+TError.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Result.cs" />
+    <Compile Include="Result.Helpers.cs" />
     <Compile Include="Internal\IContainer`1.cs" />
     <Compile Include="Iteration.cs" />
     <Compile Include="Iteration`2.cs" />

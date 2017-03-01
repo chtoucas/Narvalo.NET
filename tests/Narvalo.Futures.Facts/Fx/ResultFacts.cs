@@ -6,7 +6,7 @@ namespace Narvalo.Fx
 
     using Xunit;
 
-    public static class VoidOrErrorFacts
+    public static class ResultFacts
     {
         #region IsBreak
 
@@ -14,7 +14,7 @@ namespace Narvalo.Fx
         public static void IsBreak_ReturnsFalse_WhenVoid()
         {
             // Act & Assert
-            Assert.False(Error.Void.IsVoid);
+            Assert.False(Result.Void.IsSuccess);
         }
 
         //[Fact]
@@ -74,7 +74,7 @@ namespace Narvalo.Fx
         public static void ToString_ReturnsVoid_WhenVoid()
         {
             // Act & Assert
-            Assert.Equal("Void", Error.Void.ToString());
+            Assert.Equal("Void", Result.Void.ToString());
         }
 
         //[Fact]

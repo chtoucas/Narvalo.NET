@@ -3,129 +3,108 @@
 namespace Narvalo.Fx
 {
     using System;
-    using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.ExceptionServices;
 
-    /// <summary>
-    /// Provides a set of static and extension methods for <see cref="Result{T, TError}"/>
-    /// and <see cref="Result{T}"/> and for querying objects that implement
-    /// <see cref="IEnumerable{T}"/> where T is of type <see cref="Result{S, TError}"/> or
-    /// <see cref="Result{S}"/>.
-    /// </summary>
-    public static partial class Result
+    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerTypeProxy(typeof(Result.DebugView))]
+    public partial struct Result : IEquatable<Result>
     {
-        public static Result<T> FromError<T>(ExceptionDispatchInfo exceptionInfo)
-            => Result<T>.FromError(exceptionInfo);
+        private readonly ExceptionDispatchInfo _exceptionInfo;
 
-        public static Result<T, TError> FromError<T, TError>(TError value)
-            => Result<T, TError>.FromError(value);
-
-        public static Result<T, TError> FlattenError<T, TError>(Result<T, Result<T, TError>> square)
-            => Result<T, TError>.FlattenError(square);
-    }
-
-    public static partial class Result
-    {
-        // NB: This method is **not** the trywith from F# workflows.
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of ResultOrError.")]
-        public static Result<TResult> TryWith<TResult>(Func<TResult> func)
+        private Result(ExceptionDispatchInfo exceptionInfo)
         {
-            Require.NotNull(func, nameof(func));
-
-            try
-            {
-                return Of(func());
-            }
-            catch (Exception ex)
-            {
-                var edi = ExceptionDispatchInfo.Capture(ex);
-
-                return FromError<TResult>(edi);
-            }
+            _exceptionInfo = exceptionInfo;
+            IsError = true;
         }
 
-        // NB: This method is **not** the tryfinally from F# workflows.
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of ResultOrError.")]
-        public static Result<TResult> TryFinally<TResult>(
-            Func<TResult> func,
-            Action finallyAction)
+        public bool IsSuccess => !IsError;
+
+        public bool IsError { get; }
+
+        internal ExceptionDispatchInfo ExceptionInfo { get { Demand.State(IsError); return _exceptionInfo; } }
+
+        [ExcludeFromCodeCoverage]
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
+        private string DebuggerDisplay => IsSuccess ? "Void" : "Error";
+
+        public void ThrowIfError()
         {
-            Require.NotNull(func, nameof(func));
-            Require.NotNull(finallyAction, nameof(finallyAction));
+            if (IsError) { ExceptionInfo.Throw(); }
+        }
 
-            try
-            {
-                return Of(func());
-            }
-            catch (Exception ex)
-            {
-                var edi = ExceptionDispatchInfo.Capture(ex);
+        public override string ToString()
+            => IsSuccess ? "Success" : Format.Current("Error({0})", ExceptionInfo.SourceException.Message);
 
-                return FromError<TResult>(edi);
-            }
-            finally
+        /// <summary>
+        /// Represents a debugger type proxy for <see cref="Result"/>.
+        /// </summary>
+        [ExcludeFromCodeCoverage]
+        private sealed class DebugView
+        {
+            private readonly Result _inner;
+
+            public DebugView(Result inner)
             {
-                finallyAction();
+                _inner = inner;
             }
+
+            public ExceptionDispatchInfo ExceptionInfo
+                => _inner.IsError ? _inner.ExceptionInfo : default(ExceptionDispatchInfo);
         }
     }
 
-    // Provides extension methods for Result<T, TError>
-    // where TError is of type Exception or ExceptionDispatchInfo.
-    public static partial class Result
+    // Conversion operators.
+    public partial struct Result
     {
-        public static void ThrowIfError<T>(this Result<T, ExceptionDispatchInfo> @this)
+        public Unit ToUnit()
         {
-            if (@this.IsError) { @this.Error.Throw(); }
+            if (IsError) { throw new InvalidCastException("XXX"); }
+            return Narvalo.Fx.Unit.Default;
         }
 
-        public static void ThrowIfError<T, TException>(this Result<T, TException> @this) where TException : Exception
+        public Exception ToException()
         {
-            if (@this.IsError) { throw @this.Error; }
+            if (IsSuccess) { throw new InvalidCastException("XXX"); }
+            return ExceptionInfo.SourceException;
         }
+
+        public ExceptionDispatchInfo ToExceptionInfo()
+        {
+            if (IsSuccess) { throw new InvalidCastException("XXX"); }
+            return ExceptionInfo;
+        }
+
+        public static explicit operator Unit(Result value) => value.ToUnit();
+
+        public static explicit operator ExceptionDispatchInfo(Result value) => value.ToExceptionInfo();
+
+        public static explicit operator Result(ExceptionDispatchInfo exceptionInfo)
+            => FromError(exceptionInfo);
     }
 
-    // Provides extension methods for IEnumerable<Result<T, TError>>.
-    public static partial class Result
+    // Implements the IEquatable<Result> interfaces.
+    public partial struct Result
     {
-        public static IEnumerable<TSource> CollectAny<TSource, TError>(this IEnumerable<Result<TSource, TError>> @this)
-        {
-            Require.NotNull(@this, nameof(@this));
+        public static bool operator ==(Result left, Result right) => left.Equals(right);
 
-            return CollectAnyIterator(@this);
+        public static bool operator !=(Result left, Result right) => !left.Equals(right);
+
+        public bool Equals(Result other)
+        {
+            if (IsSuccess) { return other.IsSuccess; }
+
+            return other.IsError && ExceptionInfo == other.ExceptionInfo;
         }
 
-        private static IEnumerable<TSource> CollectAnyIterator<TSource, TError>(
-            IEnumerable<Result<TSource, TError>> source)
+        public override bool Equals(object obj)
         {
-            Demand.NotNull(source);
+            if (!(obj is Result)) { return false; }
 
-            foreach (var item in source)
-            {
-                if (item.IsSuccess) { yield return item.Value; }
-            }
-        }
-    }
-
-    // Provides extension methods for IEnumerable<Result<T>>.
-    public static partial class Result
-    {
-        public static IEnumerable<TSource> CollectAny<TSource>(this IEnumerable<Result<TSource>> @this)
-        {
-            Require.NotNull(@this, nameof(@this));
-
-            return CollectAnyIterator(@this);
+            return Equals((Result)obj);
         }
 
-        private static IEnumerable<TSource> CollectAnyIterator<TSource>(IEnumerable<Result<TSource>> source)
-        {
-            Demand.NotNull(source);
-
-            foreach (var item in source)
-            {
-                if (item.IsSuccess) { yield return item.Value; }
-            }
-        }
+        public override int GetHashCode() => IsError ? ExceptionInfo.GetHashCode() : 0;
     }
 }

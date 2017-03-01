@@ -38,7 +38,6 @@
     <None Include="CodeTemplates\Monad\EmitExtensions.tt" />
     <None Include="CodeTemplates\Monad\EmitFacts.tt" />
     <None Include="CodeTemplates\ResultOrEdi.tt" />
-    <None Include="CodeTemplates\VoidOr.tt" />
     <None Include="Narvalo.T4.v14.0.props">
       <SubType>Designer</SubType>
     </None>

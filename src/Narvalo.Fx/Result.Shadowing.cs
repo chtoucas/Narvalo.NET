@@ -56,14 +56,14 @@ namespace Narvalo.Fx
             => IsSuccess ? other : Result.FromError<TResult>(ExceptionInfo);
     }
 
-    public static partial class Result
+    public static partial class ResultExtensions
     {
         internal static Result<IEnumerable<TSource>, TError> CollectImpl<TSource, TError>(
             this IEnumerable<Result<TSource, TError>> @this)
         {
             Require.NotNull(@this, nameof(@this));
 
-            return Of<IEnumerable<TSource>, TError>(CollectAnyIterator(@this));
+            return Result.Of<IEnumerable<TSource>, TError>(CollectAnyIterator(@this));
         }
 
         internal static Result<IEnumerable<TSource>> CollectImpl<TSource>(
@@ -71,7 +71,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(@this, nameof(@this));
 
-            return Of(CollectAnyIterator(@this));
+            return Result.Of(CollectAnyIterator(@this));
         }
     }
 }

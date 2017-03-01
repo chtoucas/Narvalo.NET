@@ -7,13 +7,13 @@ public partial class MonadTemplate
 #>
     // Provides extension methods for IEnumerable<<#= Name #><T<#= RTDecl #>>>.
     // T4: EmitEnumerableExtensions().
-    public static partial class <#= Name #>
+    public static partial class <#= ExtensionsClsName #>
     {
         public static <#= Name #><IEnumerable<TSource><#= RTDecl #>> Collect<TSource<#= RTDecl #>>(
             this IEnumerable<<#= Name #><TSource<#= RTDecl #>>> @this)
             => @this.CollectImpl();
-
 <#+ if (HasSum) { #>
+
         public static <#= Name #><TSource> Sum<TSource>(this IEnumerable<<#= Name #><TSource>> @this)
             => @this.SumImpl();
 <#+ } // T4: End of HasSum. #>

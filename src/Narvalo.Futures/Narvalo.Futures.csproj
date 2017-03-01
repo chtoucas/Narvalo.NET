@@ -59,7 +59,6 @@
     <Compile Include="Fx\TO BE REMOVED\Switch%24.cs" />
     <Compile Include="Fx\TO BE REMOVED\Switch.cs" />
     <Compile Include="Fx\TO BE REMOVED\Switch`2.cs" />
-    <Compile Include="Fx\Error.cs" />
     <Compile Include="Globalization\CountryISOCode.cs" />
     <Compile Include="Globalization\RegionInfo%24.cs" />
     <Compile Include="Guard.cs" />

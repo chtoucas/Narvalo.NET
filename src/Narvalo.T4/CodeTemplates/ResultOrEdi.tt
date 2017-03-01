@@ -7,9 +7,11 @@
 
         public override void Initialize()
         {
+            InitializeHelpers(true);
+
             Name = "Result";
             IsNullable = false;
-            EmitLinq = false;
+            EmitLinq = true;
         }
     }
 #>

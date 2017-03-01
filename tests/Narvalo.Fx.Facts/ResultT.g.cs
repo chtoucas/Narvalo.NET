@@ -17,7 +17,7 @@ namespace Narvalo.Fx
 
     using Xunit;
 
-    public static partial class ResultOrErrorFacts
+    public static partial class ResultFacts
     {
         #region Linq Operators
 
@@ -25,7 +25,7 @@ namespace Narvalo.Fx
         public static void Select_ThrowsArgumentNullException_ForNullSelector()
         {
             // Arrange
-            var source = ResultOrError.Of(1);
+            var source = Result.Of(1);
             Func<int, int> selector = null;
 
             // Act & Assert
@@ -37,7 +37,7 @@ namespace Narvalo.Fx
         public static void SelectMany_ThrowsArgumentNullException_ForNullValueSelector()
         {
             // Arrange
-            var source = ResultOrError.Of(1);
+            var source = Result.Of(1);
             Func<int, Result<int>> valueSelector = null;
             Func<int, int, int> resultSelector = (i, j) => i + j;
 
@@ -49,8 +49,8 @@ namespace Narvalo.Fx
         public static void SelectMany_ThrowsArgumentNullException_ForNullResultSelector()
         {
             // Arrange
-            var source = ResultOrError.Of(1);
-            var middle = ResultOrError.Of(2);
+            var source = Result.Of(1);
+            var middle = Result.Of(2);
             Func<int, Result<int>> valueSelector = _ => middle;
             Func<int, int, int> resultSelector = null;
 
@@ -64,14 +64,14 @@ namespace Narvalo.Fx
 
 
         [Fact]
-        public static void ResultOrError_SatisfiesFirstMonadLaw()
+        public static void Result_SatisfiesFirstMonadLaw()
         {
             // Arrange
             int value = 1;
-            Func<int, Result<long>> kun = _ => ResultOrError.Of((long)2 * _);
+            Func<int, Result<long>> kun = _ => Result.Of((long)2 * _);
 
             // Act
-            var left = ResultOrError.Of(value).Bind(kun);
+            var left = Result.Of(value).Bind(kun);
             var right = kun(value);
 
             // Assert
@@ -79,11 +79,11 @@ namespace Narvalo.Fx
         }
 
         [Fact]
-        public static void ResultOrError_SatisfiesSecondMonadLaw()
+        public static void Result_SatisfiesSecondMonadLaw()
         {
             // Arrange
-            Func<int, Result<int>> create = _ => ResultOrError.Of(_);
-            var monad = ResultOrError.Of(1);
+            Func<int, Result<int>> create = _ => Result.Of(_);
+            var monad = Result.Of(1);
 
             // Act
             var left = monad.Bind(create);
@@ -94,12 +94,12 @@ namespace Narvalo.Fx
         }
 
         [Fact]
-        public static void ResultOrError_SatisfiesThirdMonadLaw()
+        public static void Result_SatisfiesThirdMonadLaw()
         {
             // Arrange
-            Result<short> m = ResultOrError.Of((short)1);
-            Func<short, Result<int>> f = _ => ResultOrError.Of((int)3 * _);
-            Func<int, Result<long>> g = _ => ResultOrError.Of((long)2 * _);
+            Result<short> m = Result.Of((short)1);
+            Func<short, Result<int>> f = _ => Result.Of((int)3 * _);
+            Func<int, Result<long>> g = _ => Result.Of((long)2 * _);
 
             // Act
             var left = m.Bind(f).Bind(g);
@@ -111,6 +111,6 @@ namespace Narvalo.Fx
 
 
         #endregion
-    } // End of ResultOrError - T4: EmitFacts().
+    } // End of Result - T4: EmitFacts().
 } // End of Narvalo.Fx.
 

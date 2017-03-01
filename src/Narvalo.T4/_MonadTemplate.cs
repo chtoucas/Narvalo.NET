@@ -46,6 +46,8 @@ namespace Narvalo.T4
         /// </summary>
         private string _zeroName = "Zero";
 
+        private string _extensionsClsSuffix = String.Empty;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="_MonadTemplate"/> class.
         /// </summary>
@@ -110,6 +112,10 @@ namespace Narvalo.T4
         protected bool IsNullable { get; set; } = true;
 
         protected string ClassTypeDecl => IsNullable ? "class" : "struct";
+
+        protected string HelpersTypeDecl { get; private set; } = "static partial class";
+
+        protected string ExtensionsClsName => Name + _extensionsClsSuffix;
 
 #if TYPE_CONSTRAINTS
 
@@ -333,6 +339,12 @@ namespace Narvalo.T4
         }
 
         #region Initalizers
+
+        protected void InitializeHelpers(bool asStruct, string suffix = "Extensions")
+        {
+            HelpersTypeDecl = asStruct ? "partial struct" : "partial class";
+            _extensionsClsSuffix = suffix;
+        }
 
         protected void InitializeGenericParameters(string mainGeneric, params string[] rightGenerics)
         {
