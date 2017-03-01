@@ -142,6 +142,24 @@ namespace Narvalo.Fx
             => square.IsSuccess ? square.Value : Result.FromError<T, TError>(square.Error);
     }
 
+    // Minimalist implementation of a monad on TError.
+    public partial struct Result<T, TError>
+    {
+        public Result<T, TResult> BindError<TResult>(Func<TError, Result<T, TResult>> selector)
+        {
+            Require.NotNull(selector, nameof(selector));
+
+            return IsError ? selector(Error) : Result.Of<T, TResult>(Value);
+        }
+
+        public Result<T, TResult> SelectError<TResult>(Func<TError, TResult> selector)
+        {
+            Require.NotNull(selector, nameof(selector));
+
+            return BindError(_ => Result.FromError<T, TResult>(selector(_)));
+        }
+    }
+
     // Implements the Internal.IEither<T, TError> interface.
     public partial struct Result<T, TError>
     {

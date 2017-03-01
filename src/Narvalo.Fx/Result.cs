@@ -26,7 +26,10 @@ namespace Narvalo.Fx
         public static Result<TError> FromError<TError>(TError value) => Result<TError>.η(value);
 
         public static Result<T, TError> FromError<T, TError>(TError value) => Result<T, TError>.FromError(value);
+    }
 
+    public static partial class Result
+    {
         public static void ThrowIfError(this Result<ExceptionDispatchInfo> @this)
         {
             if (@this.IsError)
