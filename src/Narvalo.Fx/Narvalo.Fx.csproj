@@ -95,8 +95,8 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Kleisli_.cs" />
-    <Compile Include="Result.g.cs">
-      <DependentUpon>Result.tt</DependentUpon>
+    <Compile Include="ResultT+TError.g.cs">
+      <DependentUpon>ResultT+TError.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -109,6 +109,12 @@
     <Compile Include="Maybe.Shadowing.cs" />
     <Compile Include="Nullable.cs" />
     <Compile Include="Result.Shadowing.cs" />
+    <Compile Include="ResultT.g.cs">
+      <DependentUpon>ResultT.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Result`1.cs" />
     <Compile Include="Result`2.cs" />
     <Compile Include="Sequence.cs" />
     <Compile Include="Stubs.cs" />
@@ -135,7 +141,6 @@
       <DependentUpon>Strings.fr.resx</DependentUpon>
     </Compile>
     <Compile Include="Unit.cs" />
-    <Compile Include="Result`1.cs" />
     <Compile Include="YCombinator.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -161,9 +166,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Result.tt">
+    <None Include="ResultT+TError.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Result.g.cs</LastGenOutput>
+      <LastGenOutput>ResultT+TError.g.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -176,6 +181,12 @@
     <None Include="Either.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Either.g.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ResultT.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ResultT.g.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />

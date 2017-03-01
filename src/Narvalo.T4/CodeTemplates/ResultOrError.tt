@@ -1,8 +1,0 @@
-﻿<#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
-<#@ include file="Monad.tt" once="true" #><#+
-
-    public partial class ResultOrErrorTemplate : MonadTemplate
-    {
-        public ResultOrErrorTemplate(TextTransformation parent) : base(parent) { }
-    }
-#>

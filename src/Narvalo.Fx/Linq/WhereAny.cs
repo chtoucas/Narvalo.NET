@@ -27,6 +27,16 @@ namespace Narvalo.Fx.Linq
             return WhereAnyIterator(@this, predicate);
         }
 
+        public static IEnumerable<TSource> WhereAny<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, Result<bool>> predicate)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+
+            return WhereAnyIterator(@this, predicate);
+        }
+
         private static IEnumerable<TSource> WhereAnyIterator<TSource>(
             IEnumerable<TSource> source,
             Func<TSource, bool?> predicate)
@@ -54,6 +64,21 @@ namespace Narvalo.Fx.Linq
                 var m = predicate(item);
 
                 if (m.IsSome && m.Value) { yield return item; }
+            }
+        }
+
+        private static IEnumerable<TSource> WhereAnyIterator<TSource>(
+            IEnumerable<TSource> source,
+            Func<TSource, Result<bool>> predicate)
+        {
+            Demand.NotNull(source);
+            Demand.NotNull(predicate);
+
+            foreach (var item in source)
+            {
+                var m = predicate.Invoke(item);
+
+                if (m.IsSuccess && m.Value) { yield return item; }
             }
         }
     }

@@ -25,7 +25,7 @@ namespace Narvalo.Fx
         public static void ExplicitCastToValue_ThrowsInvalidCastException_WhenCastingFailureObject()
         {
             // Arrange
-            ResultOrError<string> output = null;
+            Result<string> output = null;
 
             try
             {

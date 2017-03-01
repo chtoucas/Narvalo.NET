@@ -20,7 +20,7 @@ We do not implement methods which are related to the way Haskell handles actions
 - Alternative::Many
 - Alternative::Optional
 - Alternative::Some
-We also exclude methods without clear usecases:
+We also exclude methods without clear use cases:
 - Monad::SelectUnzip
 
 Methods specific to our .NET implementation:

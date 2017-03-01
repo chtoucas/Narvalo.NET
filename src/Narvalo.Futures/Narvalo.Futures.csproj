@@ -67,23 +67,14 @@
     </Compile>
     <Compile Include="Formattable.cs" />
     <Compile Include="Fx\BooleanResult`1.cs" />
-    <Compile Include="Fx\Linq\Qperators.cs" />
     <Compile Include="Fx\Recursion.cs" />
-    <Compile Include="Fx\ResultOrError.cs" />
-    <Compile Include="Fx\ResultOrError.g.cs">
-      <DependentUpon>ResultOrError.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Fx\ResultOrError.Shadowing.cs" />
-    <Compile Include="Fx\ResultOrError`1.cs" />
     <Compile Include="Fx\Func.cs" />
     <Compile Include="Fx\Extensions\Func%24.cs" />
     <Compile Include="Fx\Extensions\Nullable%24.cs" />
     <Compile Include="Fx\TO BE REMOVED\Switch%24.cs" />
     <Compile Include="Fx\TO BE REMOVED\Switch.cs" />
     <Compile Include="Fx\TO BE REMOVED\Switch`2.cs" />
-    <Compile Include="Fx\VoidOrError.cs" />
+    <Compile Include="Fx\Error.cs" />
     <Compile Include="Globalization\CountryISOCode.cs" />
     <Compile Include="Globalization\RegionInfo%24.cs" />
     <Compile Include="Guard.cs" />
@@ -101,6 +92,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings_Futures.resx</DependentUpon>
     </Compile>
+    <Compile Include="Fx\Error`1.cs" />
     <Compile Include="UrlFormatProvider.cs" />
     <Compile Include="WarrantEx.cs" />
   </ItemGroup>
@@ -139,10 +131,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SnvCurrencyInfoProvider.g.cs</LastGenOutput>
     </Content>
-    <None Include="Fx\ResultOrError.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ResultOrError.g.cs</LastGenOutput>
-    </None>
     <Content Include="Guard.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Guard.g.cs</LastGenOutput>

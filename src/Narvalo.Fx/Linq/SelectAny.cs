@@ -40,6 +40,16 @@ namespace Narvalo.Fx.Linq
             return SelectAnyIterator(@this, selector);
         }
 
+        public static IEnumerable<TResult> SelectAny<TSource, TResult>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, Result<TResult>> selector)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(selector, nameof(selector));
+
+            return SelectAnyIterator(@this, selector);
+        }
+
         private static IEnumerable<TResult> SelectAnyIterator<TSource, TResult>(
             IEnumerable<TSource> source,
             Func<TSource, TResult?> selector)
@@ -84,6 +94,21 @@ namespace Narvalo.Fx.Linq
                 var m = selector(item);
 
                 if (m.IsSome) { yield return m.Value; }
+            }
+        }
+
+        private static IEnumerable<TResult> SelectAnyIterator<TSource, TResult>(
+            IEnumerable<TSource> source,
+            Func<TSource, Result<TResult>> selector)
+        {
+            Demand.NotNull(source);
+            Demand.NotNull(selector);
+
+            foreach (var item in source)
+            {
+                var m = selector.Invoke(item);
+
+                if (m.IsSuccess) { yield return m.Value; }
             }
         }
     }

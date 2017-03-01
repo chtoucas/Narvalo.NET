@@ -120,4 +120,10 @@
   <data name="Maybe_CannotCastNoneToValue" xml:space="preserve">
     <value>Can not explicitly cast a Maybe&lt;T&gt;.None to a value of type T.</value>
   </data>
+  <data name="ResultOrError_CannotCastFailureToValue" xml:space="preserve">
+    <value>Can not explicitly cast a failure of type ResultOrError&lt;T&gt; to a value of type T.</value>
+  </data>
+  <data name="ResultOrError_CannotCastSuccessToException" xml:space="preserve">
+    <value>Can not explicitly cast a success of type ResultOrError&lt;T&gt; to an exception state.</value>
+  </data>
 </root>

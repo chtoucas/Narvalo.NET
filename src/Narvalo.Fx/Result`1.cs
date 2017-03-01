@@ -8,250 +8,334 @@ namespace Narvalo.Fx
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Runtime.CompilerServices;
+    using System.Runtime.ExceptionServices;
 
-    // Friendly version of Result<Unit, TError>.
+    /// <summary>
+    /// Represents the outcome of a computation which might have thrown an exception.
+    /// An instance of the <see cref="Result{T}"/> class contains either a <c>T</c>
+    /// value or the exception state at the point it was thrown.
+    /// </summary>
+    /// <remarks>
+    /// <para>We do not catch exceptions throw by any supplied delegate; there is only one exception
+    /// though: <see cref="Result{T}.Select{TResult}(Func{T, TResult})"/>. A good pratice is that
+    /// a function that returns a <see cref="Result{T}"/> does not normally throw.</para>
+    /// <para>This class is not meant to replace the standard exception mechanism.</para>
+    /// </remarks>
+    /// <typeparam name="T">The underlying type of the value.</typeparam>
+    // Friendly version of Either<T, ExceptionDispatchInfo>.
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     [DebuggerTypeProxy(typeof(Result<>.DebugView))]
-    public partial struct Result<TError> : IEquatable<Result<TError>>, Internal.IMaybe<TError>
+    public partial struct Result<T>
+        : IEquatable<Result<T>>, Internal.IEither<T, ExceptionDispatchInfo>, Internal.Iterable<T>
     {
-        private readonly TError _error;
+        private readonly ExceptionDispatchInfo _exceptionInfo;
+        private readonly T _value;
 
-        private Result(TError error)
+        private Result(T value)
         {
-            Demand.NotNullUnconstrained(error);
-            _error = error;
-            IsError = true;
+            _exceptionInfo = default(ExceptionDispatchInfo);
+            _value = value;
+            IsSuccess = true;
         }
 
-        public bool IsSuccess => !IsError;
+        private Result(ExceptionDispatchInfo exceptionInfo)
+        {
+            _exceptionInfo = exceptionInfo;
+            _value = default(T);
+            IsSuccess = false;
+        }
 
-        public bool IsError { get; }
+        /// <summary>
+        /// Gets a value indicating whether the object is the result of a successful computation.
+        /// </summary>
+        /// <remarks>Most of the time, you don't need to access this property.
+        /// You are better off using the rich vocabulary that this class offers.</remarks>
+        /// <value>true if the outcome was successful; otherwise false.</value>
+        public bool IsSuccess { get; }
 
-        internal TError Error { get { Demand.State(IsError); return _error; } }
+        public bool IsError => !IsSuccess;
 
-        public override string ToString() => IsError ? Format.Current("Error({0})", Error) : "Success";
+        /// <summary>
+        /// Obtains the enclosed value.
+        /// </summary>
+        /// <remarks>Any access to this method must be protected by checking before that
+        /// <see cref="IsSuccess"/> is true.</remarks>
+        internal T Value { get { Demand.State(IsSuccess); return _value; } }
+
+        /// <summary>
+        /// Obtains the enclosed exception state.
+        /// </summary>
+        /// <remarks>Any access to this method must be protected by checking before that
+        /// <see cref="IsSuccess"/> is false.</remarks>
+        internal ExceptionDispatchInfo ExceptionInfo { get { Demand.State(IsError); return _exceptionInfo; } }
 
         [ExcludeFromCodeCoverage]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
         private string DebuggerDisplay => IsSuccess ? "Success" : "Error";
 
+        public void ThrowIfError()
+        {
+            if (IsError) { ExceptionInfo.Throw(); }
+        }
+
         /// <summary>
-        /// Represents a debugger type proxy for <see cref="Result{TError}"/>.
+        /// Obtains the underlying value if any; otherwise the default value of the type T.
+        /// </summary>
+        /// <returns>The underlying value if any; otherwise the default value of the type T.</returns>
+        public T ValueOrDefault() => IsSuccess ? Value : default(T);
+
+        /// <summary>
+        /// Returns the underlying value if any; otherwise <paramref name="other"/>.
+        /// </summary>
+        /// <param name="other">A default value to be used if if there is no underlying value.</param>
+        /// <returns>The underlying value if any; otherwise <paramref name="other"/>.</returns>
+        public T ValueOrElse(T other) => IsSuccess ? Value : other;
+
+        public T ValueOrElse(Func<T> valueFactory)
+        {
+            Require.NotNull(valueFactory, nameof(valueFactory));
+            return IsSuccess ? Value : valueFactory();
+        }
+
+        public Maybe<T> ValueOrNone() => IsSuccess ? Maybe.Of(Value) : Maybe<T>.None;
+
+        public T ValueOrThrow()
+        {
+            if (IsError) { ExceptionInfo.Throw(); }
+            return Value;
+        }
+
+        public override string ToString()
+            => IsSuccess ? Format.Current("Success({0})", Value) : Format.Current("Error({0})", ExceptionInfo);
+
+        /// <summary>
+        /// Represents a debugger type proxy for <see cref="Result{T}"/>.
         /// </summary>
         [ExcludeFromCodeCoverage]
         private sealed class DebugView
         {
-            private readonly Result<TError> _inner;
+            private readonly Result<T> _inner;
 
-            public DebugView(Result<TError> inner)
+            public DebugView(Result<T> inner)
             {
                 _inner = inner;
             }
 
-            public bool IsError => _inner.IsError;
+            public bool IsSuccess => _inner.IsSuccess;
 
-            public TError Error => IsError ? _inner.Error : default(TError);
+            public T Value => IsSuccess ? _inner.Value : default(T);
+
+            public ExceptionDispatchInfo ExceptionInfo
+                => IsSuccess ? default(ExceptionDispatchInfo) : _inner.ExceptionInfo;
         }
     }
 
-    // Conversion operators.
-    public partial struct Result<TError>
+    // Conversions operators.
+    public partial struct Result<T>
     {
-        public TError ToError()
+        public T ToValue()
+        {
+            if (IsError) { throw new InvalidCastException("XXX"); }
+            return Value;
+        }
+
+        public Exception ToException()
         {
             if (IsSuccess) { throw new InvalidCastException("XXX"); }
-
-            return Error;
+            return ExceptionInfo.SourceException;
         }
 
-        public Maybe<Unit> ToMaybe() => IsSuccess ? Maybe.Unit : Maybe<Unit>.None;
 
-        public static explicit operator TError(Result<TError> value) => value.ToError();
+        public ExceptionDispatchInfo ToExceptionInfo()
+        {
+            if (IsSuccess) { throw new InvalidCastException("XXX"); }
+            return ExceptionInfo;
+        }
 
-        public static explicit operator Result<TError>(TError error) => Result.FromError(error);
+        public Maybe<T> ToMaybe() => ValueOrNone();
+
+        public static explicit operator T(Result<T> value) => value.ToValue();
+
+        public static explicit operator ExceptionDispatchInfo(Result<T> value) => value.ToExceptionInfo();
+
+        public static explicit operator Result<T>(T value) => Result.Of(value);
+
+        public static explicit operator Result<T>(ExceptionDispatchInfo exceptionInfo)
+            => Result.FromError<T>(exceptionInfo);
     }
 
-    // Provides the core Monad methods.
-    public partial struct Result<TError>
+    // Core Monad methods.
+    public partial struct Result<T>
     {
-        public Result<TResult> Bind<TResult>(Func<TError, Result<TResult>> selector)
+        public Result<TResult> Bind<TResult>(Func<T, Result<TResult>> selector)
         {
             Require.NotNull(selector, nameof(selector));
 
-            return IsSuccess ? Result<TResult>.Void : selector(Error);
-        }
+            if (IsError) { return Result.FromError<TResult>(ExceptionInfo); }
 
-        [DebuggerHidden]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static Result<TError> η(TError value)
-        {
-            Require.NotNullUnconstrained(value, nameof(value));
-
-            return new Result<TError>(value);
-        }
-
-        [DebuggerHidden]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static Result<TError> μ(Result<Result<TError>> square)
-            => square.IsError ? square.Error : Void;
-    }
-
-    // Provides the core MonadOr methods.
-    public partial struct Result<TError>
-    {
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private static readonly Result<TError> s_Void = new Result<TError>();
-
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
-        public static Result<TError> Void => s_Void;
-
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "OrElse", Justification = "[Intentionally] Standard name for the monoid method.")]
-        public Result<TError> OrElse(Result<TError> other) => IsSuccess ? other : this;
-    }
-
-    // Implements the Internal.IMaybe<TError> interface.
-    public partial struct Result<TError>
-    {
-        // Named <c>maybeToList</c> in Haskell parlance.
-        public IEnumerable<TError> ToEnumerable()
-            => IsSuccess ? Enumerable.Empty<TError>() : Sequence.Of(Error);
-
-        public IEnumerator<TError> GetEnumerator() => ToEnumerable().GetEnumerator();
-
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "1#", Justification = "[Intentionally] Internal interface.")]
-        public TResult Match<TResult>(Func<TError, TResult> caseError, Func<TResult> caseSuccess)
-        {
-            Require.NotNull(caseError, nameof(caseError));
-            Require.NotNull(caseSuccess, nameof(caseSuccess));
-
-            return IsError ? caseError(Error) : caseSuccess();
-        }
-
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "1#", Justification = "[Intentionally] Internal interface.")]
-        public TResult Match<TResult>(Func<TError, TResult> caseError, TResult caseSuccess)
-        {
-            Require.NotNull(caseError, nameof(caseError));
-
-            return IsError ? caseError(Error) : caseSuccess;
-        }
-
-        public TResult Coalesce<TResult>(
-            Func<TError, bool> predicate,
-            Func<TError, TResult> selector,
-            Func<TResult> otherwise)
-        {
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(selector, nameof(selector));
-            Require.NotNull(otherwise, nameof(otherwise));
-
-            return IsError && predicate(Error) ? selector(Error) : otherwise();
-        }
-
-        public TResult Coalesce<TResult>(Func<TError, bool> predicate, TResult thenResult, TResult elseResult)
-        {
-            Require.NotNull(predicate, nameof(predicate));
-
-            return IsError && predicate(Error) ? thenResult : elseResult;
-        }
-
-        public void When(Func<TError, bool> predicate, Action<TError> action, Action otherwise)
-        {
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-            Require.NotNull(otherwise, nameof(otherwise));
-
-            if (IsError && predicate(Error))
+            // Catching all exceptions is not a good practice, but here it makes sense, since
+            // the type is supposed to encode the exception too.
+            try
             {
-                action(Error);
+                return selector(Value);
+            }
+            catch (Exception ex)
+            {
+                var edi = ExceptionDispatchInfo.Capture(ex);
+                return Result.FromError<TResult>(edi);
+            }
+        }
+
+        [DebuggerHidden]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static Result<T> η(T value) => new Result<T>(value);
+
+        [DebuggerHidden]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static Result<T> FromError(ExceptionDispatchInfo exceptionInfo)
+        {
+            Require.NotNull(exceptionInfo, nameof(exceptionInfo));
+
+            return new Result<T>(exceptionInfo);
+        }
+
+        [DebuggerHidden]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static Result<T> μ(Result<Result<T>> square)
+            => square.IsSuccess ? square.Value : Result.FromError<T>(square.ExceptionInfo);
+    }
+
+    // Implements the Internal.IEither<T, ExceptionDispatchInfo> interface.
+    public partial struct Result<T>
+    {
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "1#", Justification = "[Intentionally] Internal interface.")]
+        public TResult Match<TResult>(
+            Func<T, TResult> caseSuccess,
+            Func<ExceptionDispatchInfo, TResult> caseError)
+        {
+            Require.NotNull(caseSuccess, nameof(caseSuccess));
+            Require.NotNull(caseError, nameof(caseError));
+
+            return IsSuccess ? caseSuccess(Value) : caseError(ExceptionInfo);
+        }
+
+        // Alias for WhenSuccess().
+        // NB: We keep this one public as it overrides the auto-generated method.
+        public void When(Func<T, bool> predicate, Action<T> action)
+            => WhenSuccess(predicate, action);
+
+        // Alias for WhenError(). Publicly hidden.
+        void Internal.ISecondaryContainer<ExceptionDispatchInfo>.When(
+            Func<ExceptionDispatchInfo, bool> predicate,
+            Action<ExceptionDispatchInfo> action)
+            => WhenError(predicate, action);
+
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "1#", Justification = "[Intentionally] Internal interface.")]
+        public void Do(Action<T> onSuccess, Action<ExceptionDispatchInfo> onError)
+        {
+            Require.NotNull(onSuccess, nameof(onSuccess));
+            Require.NotNull(onError, nameof(OnError));
+
+            if (IsSuccess)
+            {
+                onSuccess(Value);
             }
             else
             {
-                otherwise();
+                onError(ExceptionInfo);
             }
         }
 
-        public void When(Func<TError, bool> predicate, Action<TError> action)
-        {
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            if (IsError && predicate(Error)) { action(Error); }
-        }
+        // Alias for OnSuccess(). Publicly hidden.
+        void Internal.IContainer<T>.Do(Action<T> onSuccess) => OnSuccess(onSuccess);
 
         // Alias for OnError(). Publicly hidden.
-        void Internal.IContainer<TError>.Do(Action<TError> action) => OnError(action);
+        void Internal.ISecondaryContainer<ExceptionDispatchInfo>.Do(Action<ExceptionDispatchInfo> onError)
+            => OnError(onError);
 
-        public void OnSuccess(Action action)
+        public void WhenSuccess(Func<T, bool> predicate, Action<T> action)
         {
+            Require.NotNull(predicate, nameof(predicate));
             Require.NotNull(action, nameof(action));
 
-            if (IsSuccess) { action(); }
+            if (IsSuccess && predicate(Value)) { action(Value); }
         }
 
-        public void OnError(Action<TError> action)
+        public void WhenError(
+            Func<ExceptionDispatchInfo, bool> predicate,
+            Action<ExceptionDispatchInfo> action)
         {
+            Require.NotNull(predicate, nameof(predicate));
             Require.NotNull(action, nameof(action));
 
-            if (IsError) { action(Error); }
+            if (IsError && predicate(ExceptionInfo)) { action(ExceptionInfo); }
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "1#", Justification = "[Intentionally] Internal interface.")]
-        public void Do(Action<TError> onError, Action onSuccess)
+        public void OnSuccess(Action<T> action)
         {
-            Require.NotNull(onError, nameof(onError));
-            Require.NotNull(onSuccess, nameof(onSuccess));
-
-            if (IsError)
-            {
-                onError(Error);
-            }
-            else
-            {
-                onSuccess();
-            }
+            Require.NotNull(action, nameof(action));
+            if (IsSuccess) { action(Value); }
         }
+
+        public void OnError(Action<ExceptionDispatchInfo> action)
+        {
+            Require.NotNull(action, nameof(action));
+            if (IsError) { action(ExceptionInfo); }
+        }
+    }
+
+    // Implements the Internal.Iterable<T> interface.
+    public partial struct Result<T>
+    {
+        public IEnumerable<T> ToEnumerable() => IsSuccess ? Sequence.Of(Value) : Enumerable.Empty<T>();
+
+        public IEnumerator<T> GetEnumerator() => ToEnumerable().GetEnumerator();
     }
 
     // Implements the IEquatable<Result<TError>> interfaces.
-    public partial struct Result<TError>
+    public partial struct Result<T>
     {
-        public static bool operator ==(Result<TError> left, Result<TError> right) => left.Equals(right);
+        public static bool operator ==(Result<T> left, Result<T> right) => left.Equals(right);
 
-        public static bool operator !=(Result<TError> left, Result<TError> right) => !left.Equals(right);
+        public static bool operator !=(Result<T> left, Result<T> right) => !left.Equals(right);
 
-        public bool Equals(Result<TError> other) => Equals(other, EqualityComparer<TError>.Default);
+        public bool Equals(Result<T> other) => Equals(other, EqualityComparer<T>.Default);
 
-        public bool Equals(Result<TError> other, IEqualityComparer<TError> comparer)
+        public bool Equals(Result<T> other, IEqualityComparer<T> comparer)
         {
             Require.NotNull(comparer, nameof(comparer));
 
-            if (IsSuccess) { return other.IsSuccess; }
+            if (IsError) { return other.IsError && ExceptionInfo == other.ExceptionInfo; }
 
-            return other.IsError && comparer.Equals(Error, other.Error);
+            return other.IsSuccess && comparer.Equals(Value, other.Value);
         }
 
-        public override bool Equals(object obj) => Equals(obj, EqualityComparer<TError>.Default);
+        public override bool Equals(object obj) => Equals(obj, EqualityComparer<T>.Default);
 
-        public bool Equals(object other, IEqualityComparer<TError> comparer)
+        public bool Equals(object other, IEqualityComparer<T> comparer)
         {
             Require.NotNull(comparer, nameof(comparer));
 
-            if (!(other is Result<TError>)) { return false; }
+            if (!(other is Result<T>)) { return false; }
 
-            return Equals((Result<TError>)other, comparer);
+            return Equals((Result<T>)other, comparer);
         }
 
-        public override int GetHashCode() => GetHashCode(EqualityComparer<TError>.Default);
+        public override int GetHashCode() => GetHashCode(EqualityComparer<T>.Default);
 
-        public int GetHashCode(IEqualityComparer<TError> comparer)
+        public int GetHashCode(IEqualityComparer<T> comparer)
         {
             Require.NotNull(comparer, nameof(comparer));
 
-            return IsError ? comparer.GetHashCode(Error) : 0;
+            unchecked
+            {
+                int hash = 17;
+                hash = 31 * hash + IsSuccess.GetHashCode();
+                hash = 31 * hash + (IsSuccess ? comparer.GetHashCode(Value) : ExceptionInfo.GetHashCode());
+                return hash;
+            }
         }
     }
 }
-

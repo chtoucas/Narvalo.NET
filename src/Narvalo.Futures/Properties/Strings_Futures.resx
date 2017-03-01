@@ -141,12 +141,6 @@
   <data name="Configuration_MissingSection_Format" xml:space="preserve">
     <value>The &lt;{0}&gt; section is not defined in your config file!</value>
   </data>
-  <data name="ResultOrError_CannotCastFailureToValue" xml:space="preserve">
-    <value>Can not explicitly cast a failure of type ResultOrError&lt;T&gt; to a value of type T.</value>
-  </data>
-  <data name="ResultOrError_CannotCastSuccessToException" xml:space="preserve">
-    <value>Can not explicitly cast a success of type ResultOrError&lt;T&gt; to an exception state.</value>
-  </data>
   <data name="SnvDataHelpers_InvalidMinorUnits" xml:space="preserve">
     <value>Found an invalid value ({0}) for the minor units.</value>
   </data>

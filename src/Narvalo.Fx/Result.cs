@@ -9,123 +9,45 @@ namespace Narvalo.Fx
 
     /// <summary>
     /// Provides a set of static and extension methods for <see cref="Result{T, TError}"/>
-    /// and <see cref="Result{TError}"/> and for querying objects that implement
+    /// and <see cref="Result{T}"/> and for querying objects that implement
     /// <see cref="IEnumerable{T}"/> where T is of type <see cref="Result{S, TError}"/> or
-    /// <see cref="Result{TError}"/>.
+    /// <see cref="Result{S}"/>.
     /// </summary>
     public static partial class Result
     {
-        public static Result<T, TError> FromError<T, TError>(TError value) => Result<T, TError>.FromError(value);
+        public static Result<T> FromError<T>(ExceptionDispatchInfo exceptionInfo)
+            => Result<T>.FromError(exceptionInfo);
+
+        public static Result<T, TError> FromError<T, TError>(TError value)
+            => Result<T, TError>.FromError(value);
 
         public static Result<T, TError> FlattenError<T, TError>(Result<T, Result<T, TError>> square)
             => Result<T, TError>.FlattenError(square);
     }
 
-    // Provides static helpers for Result<TError>.
     public static partial class Result
     {
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
-        public static Result<ExceptionDispatchInfo> Void => Result<ExceptionDispatchInfo>.Void;
-
-        /// <summary>
-        /// Obtains an instance of the <see cref="Result{TError}"/> class for the specified value.
-        /// </summary>
-        /// <typeparam name="TError">The underlying type of <paramref name="value"/>.</typeparam>
-        /// <param name="value">A value to be wrapped into an object of type <see cref="Result{TError}"/>.</param>
-        /// <returns>An instance of the <see cref="Result{TError}"/> class for the specified value.</returns>
-        public static Result<TError> FromError<TError>(TError value) => Result<TError>.η(value);
-    }
-
-    // Provides extension methods for Result<T, TError> and Result<TError>
-    // where TError is of type Exception or ExceptionDispatchInfo.
-    public static partial class Result
-    {
-        public static void ThrowIfError(this Result<ExceptionDispatchInfo> @this)
-        {
-            if (@this.IsError) { @this.Error.Throw(); }
-        }
-
-        public static void ThrowIfError<TException>(this Result<TException> @this) where TException : Exception
-        {
-            if (@this.IsError) { throw @this.Error; }
-        }
-
-        public static void ThrowIfError<T>(this Result<T, ExceptionDispatchInfo> @this)
-        {
-            if (@this.IsError) { @this.Error.Throw(); }
-        }
-
-        public static void ThrowIfError<T, TException>(this Result<T, TException> @this) where TException : Exception
-        {
-            if (@this.IsError) { throw @this.Error; }
-        }
-
-        // NB: This method is **not** the trywith from F# workflows.
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of VoidOrError.")]
-        public static Result<ExceptionDispatchInfo> TryWith(Action action)
-        {
-            Require.NotNull(action, nameof(action));
-
-            try
-            {
-                action();
-
-                return Void;
-            }
-            catch (Exception ex)
-            {
-                var edi = ExceptionDispatchInfo.Capture(ex);
-
-                return FromError(edi);
-            }
-        }
-
         // NB: This method is **not** the trywith from F# workflows.
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of ResultOrError.")]
-        public static Result<TResult, ExceptionDispatchInfo> TryWith<TResult>(Func<TResult> func)
+        public static Result<TResult> TryWith<TResult>(Func<TResult> func)
         {
             Require.NotNull(func, nameof(func));
 
             try
             {
-                return Of<TResult, ExceptionDispatchInfo>(func());
+                return Of(func());
             }
             catch (Exception ex)
             {
                 var edi = ExceptionDispatchInfo.Capture(ex);
 
-                return FromError<TResult, ExceptionDispatchInfo>(edi);
-            }
-        }
-
-        // NB: This method is **not** the tryfinally from F# workflows.
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of VoidOrError.")]
-        public static Result<ExceptionDispatchInfo> TryFinally(Action action, Action finallyAction)
-        {
-            Require.NotNull(action, nameof(action));
-            Require.NotNull(finallyAction, nameof(finallyAction));
-
-            try
-            {
-                action();
-
-                return Void;
-            }
-            catch (Exception ex)
-            {
-                var edi = ExceptionDispatchInfo.Capture(ex);
-
-                return FromError(edi);
-            }
-            finally
-            {
-                finallyAction();
+                return FromError<TResult>(edi);
             }
         }
 
         // NB: This method is **not** the tryfinally from F# workflows.
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of ResultOrError.")]
-        public static Result<TResult, ExceptionDispatchInfo> TryFinally<TResult>(
+        public static Result<TResult> TryFinally<TResult>(
             Func<TResult> func,
             Action finallyAction)
         {
@@ -134,18 +56,33 @@ namespace Narvalo.Fx
 
             try
             {
-                return Of<TResult, ExceptionDispatchInfo>(func());
+                return Of(func());
             }
             catch (Exception ex)
             {
                 var edi = ExceptionDispatchInfo.Capture(ex);
 
-                return FromError<TResult, ExceptionDispatchInfo>(edi);
+                return FromError<TResult>(edi);
             }
             finally
             {
                 finallyAction();
             }
+        }
+    }
+
+    // Provides extension methods for Result<T, TError>
+    // where TError is of type Exception or ExceptionDispatchInfo.
+    public static partial class Result
+    {
+        public static void ThrowIfError<T>(this Result<T, ExceptionDispatchInfo> @this)
+        {
+            if (@this.IsError) { @this.Error.Throw(); }
+        }
+
+        public static void ThrowIfError<T, TException>(this Result<T, TException> @this) where TException : Exception
+        {
+            if (@this.IsError) { throw @this.Error; }
         }
     }
 
@@ -171,26 +108,23 @@ namespace Narvalo.Fx
         }
     }
 
-    // Provides extension methods for IEnumerable<Result<TError>>.
+    // Provides extension methods for IEnumerable<Result<T>>.
     public static partial class Result
     {
-        public static Result<IEnumerable<TError>> Collect<TError>(this IEnumerable<Result<TError>> @this)
-            => FromError(CollectAnyIterator(@this));
-
-        public static IEnumerable<TError> CollectAny<TError>(this IEnumerable<Result<TError>> @this)
+        public static IEnumerable<TSource> CollectAny<TSource>(this IEnumerable<Result<TSource>> @this)
         {
             Require.NotNull(@this, nameof(@this));
 
             return CollectAnyIterator(@this);
         }
 
-        private static IEnumerable<TError> CollectAnyIterator<TError>(IEnumerable<Result<TError>> source)
+        private static IEnumerable<TSource> CollectAnyIterator<TSource>(IEnumerable<Result<TSource>> source)
         {
             Demand.NotNull(source);
 
             foreach (var item in source)
             {
-                if (item.IsError) { yield return item.Error; }
+                if (item.IsSuccess) { yield return item.Value; }
             }
         }
     }

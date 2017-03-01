@@ -14,7 +14,7 @@ namespace Narvalo.Fx
         public static void IsBreak_ReturnsFalse_WhenVoid()
         {
             // Act & Assert
-            Assert.False(VoidOrError.Void.IsVoid);
+            Assert.False(Error.Void.IsVoid);
         }
 
         //[Fact]
@@ -74,7 +74,7 @@ namespace Narvalo.Fx
         public static void ToString_ReturnsVoid_WhenVoid()
         {
             // Act & Assert
-            Assert.Equal("Void", VoidOrError.Void.ToString());
+            Assert.Equal("Void", Error.Void.ToString());
         }
 
         //[Fact]

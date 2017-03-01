@@ -133,24 +133,6 @@ namespace Narvalo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Can not explicitly cast a failure of type ResultOrError&lt;T&gt; to a value of type T..
-        /// </summary>
-        internal static string ResultOrError_CannotCastFailureToValue {
-            get {
-                return ResourceManager.GetString("ResultOrError_CannotCastFailureToValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Can not explicitly cast a success of type ResultOrError&lt;T&gt; to an exception state..
-        /// </summary>
-        internal static string ResultOrError_CannotCastSuccessToException {
-            get {
-                return ResourceManager.GetString("ResultOrError_CannotCastSuccessToException", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Found an invalid value ({0}) for the minor units..
         /// </summary>
         internal static string SnvDataHelpers_InvalidMinorUnits {

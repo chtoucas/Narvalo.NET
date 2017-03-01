@@ -38,7 +38,7 @@ namespace Narvalo.Fx
         {
             // Arrange
             var source = ResultOrError.Of(1);
-            Func<int, ResultOrError<int>> valueSelector = null;
+            Func<int, Result<int>> valueSelector = null;
             Func<int, int, int> resultSelector = (i, j) => i + j;
 
             // Act & Assert
@@ -51,7 +51,7 @@ namespace Narvalo.Fx
             // Arrange
             var source = ResultOrError.Of(1);
             var middle = ResultOrError.Of(2);
-            Func<int, ResultOrError<int>> valueSelector = _ => middle;
+            Func<int, Result<int>> valueSelector = _ => middle;
             Func<int, int, int> resultSelector = null;
 
             // Act & Assert
@@ -68,7 +68,7 @@ namespace Narvalo.Fx
         {
             // Arrange
             int value = 1;
-            Func<int, ResultOrError<long>> kun = _ => ResultOrError.Of((long)2 * _);
+            Func<int, Result<long>> kun = _ => ResultOrError.Of((long)2 * _);
 
             // Act
             var left = ResultOrError.Of(value).Bind(kun);
@@ -82,7 +82,7 @@ namespace Narvalo.Fx
         public static void ResultOrError_SatisfiesSecondMonadLaw()
         {
             // Arrange
-            Func<int, ResultOrError<int>> create = _ => ResultOrError.Of(_);
+            Func<int, Result<int>> create = _ => ResultOrError.Of(_);
             var monad = ResultOrError.Of(1);
 
             // Act
@@ -97,9 +97,9 @@ namespace Narvalo.Fx
         public static void ResultOrError_SatisfiesThirdMonadLaw()
         {
             // Arrange
-            ResultOrError<short> m = ResultOrError.Of((short)1);
-            Func<short, ResultOrError<int>> f = _ => ResultOrError.Of((int)3 * _);
-            Func<int, ResultOrError<long>> g = _ => ResultOrError.Of((long)2 * _);
+            Result<short> m = ResultOrError.Of((short)1);
+            Func<short, Result<int>> f = _ => ResultOrError.Of((int)3 * _);
+            Func<int, Result<long>> g = _ => ResultOrError.Of((long)2 * _);
 
             // Act
             var left = m.Bind(f).Bind(g);

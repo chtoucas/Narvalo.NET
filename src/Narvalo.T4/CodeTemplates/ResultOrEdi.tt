@@ -1,14 +1,12 @@
 ﻿<#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
 <#@ include file="Monad.tt" once="true" #><#+
 
-    public partial class ResultTemplate : MonadTemplate
+    public partial class ResultOrEdiTemplate : MonadTemplate
     {
-        public ResultTemplate(TextTransformation parent) : base(parent) { }
+        public ResultOrEdiTemplate(TextTransformation parent) : base(parent) { }
 
         public override void Initialize()
         {
-            InitializeGenericParameters("T", "TError");
-
             Name = "Result";
             IsNullable = false;
             EmitLinq = false;

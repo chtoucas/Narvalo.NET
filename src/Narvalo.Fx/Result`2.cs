@@ -9,6 +9,14 @@ namespace Narvalo.Fx
     using System.Linq;
     using System.Runtime.CompilerServices;
 
+    // Typical use cases and recommendations:
+    // - Result<T, string> for lightweight error reporting to the caller;
+    //   think of it as a verbose Maybe<T>.
+    // - Result<T, Exception> should be used only in very rare situations; this is **not** a
+    //   replacement for the standard exception mechanism in .NET. See Result<T> for an even better
+    //   alternative.
+    // - For methods with void return type, you should use Maybe<TError>.
+    // - Result<T, TError> is a value type; for long-lived objects you should use Either<T, TError>.
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     [DebuggerTypeProxy(typeof(Result<,>.DebugView))]
     public partial struct Result<T, TError>

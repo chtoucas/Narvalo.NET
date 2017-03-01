@@ -10,9 +10,9 @@ namespace Narvalo.Fx
     using System.Runtime.ExceptionServices;
 
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public abstract partial class VoidOrError : Internal.IMaybe<ExceptionDispatchInfo>
+    public abstract partial class Error : Internal.IMaybe<ExceptionDispatchInfo>
     {
-        private VoidOrError() { }
+        private Error() { }
 
         public abstract bool IsVoid { get; }
 
@@ -27,7 +27,7 @@ namespace Narvalo.Fx
         public abstract void ThrowIfError();
 
         [DebuggerTypeProxy(typeof(Void_.DebugView))]
-        private sealed partial class Void_ : VoidOrError
+        private sealed partial class Void_ : Error
         {
             public Void_() { }
 
@@ -43,14 +43,14 @@ namespace Narvalo.Fx
             public override string ToString() => "Void";
 
             /// <summary>
-            /// Represents a debugger type proxy for <see cref="VoidOrError.Void_"/>.
+            /// Represents a debugger type proxy for <see cref="Error.Void_"/>.
             /// </summary>
             [ExcludeFromCodeCoverage]
             private sealed class DebugView { }
         }
 
         [DebuggerTypeProxy(typeof(Error_.DebugView))]
-        private sealed partial class Error_ : VoidOrError
+        private sealed partial class Error_ : Error
         {
             private readonly ExceptionDispatchInfo _exceptionInfo;
 
@@ -76,7 +76,7 @@ namespace Narvalo.Fx
             }
 
             /// <summary>
-            /// Represents a debugger type proxy for <see cref="VoidOrError.Error_"/>.
+            /// Represents a debugger type proxy for <see cref="Error.Error_"/>.
             /// </summary>
             [ExcludeFromCodeCoverage]
             private sealed class DebugView
@@ -94,28 +94,19 @@ namespace Narvalo.Fx
     }
 
     // Conversion operators.
-    public partial class VoidOrError
+    public partial class Error
     {
         public abstract Exception ToException();
 
         public abstract ExceptionDispatchInfo ToExceptionInfo();
 
-        public abstract Result<Exception> ToResult();
-
-        public static explicit operator Exception(VoidOrError value)
+        public static explicit operator Exception(Error value)
             => value?.ToException();
 
-        public static explicit operator ExceptionDispatchInfo(VoidOrError value)
+        public static explicit operator ExceptionDispatchInfo(Error value)
             => value?.ToExceptionInfo();
 
-        public static explicit operator Result<Exception>(VoidOrError value)
-        {
-            if (value == null) { throw new InvalidCastException("XXX"); }
-            return value.ToResult();
-        }
-
-
-        public static explicit operator VoidOrError(ExceptionDispatchInfo exceptionInfo)
+        public static explicit operator Error(ExceptionDispatchInfo exceptionInfo)
             => FromError(exceptionInfo);
 
         private partial class Void_
@@ -129,8 +120,6 @@ namespace Narvalo.Fx
             {
                 throw new InvalidCastException("XXX");
             }
-
-            public override Result<Exception> ToResult() => Result<Exception>.Void;
         }
 
         private partial class Error_
@@ -138,29 +127,27 @@ namespace Narvalo.Fx
             public override Exception ToException() => ExceptionInfo.SourceException;
 
             public override ExceptionDispatchInfo ToExceptionInfo() => ExceptionInfo;
-
-            public override Result<Exception> ToResult() => Result.FromError(ExceptionInfo.SourceException);
         }
     }
 
     // Factory methods.
-    public partial class VoidOrError
+    public partial class Error
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private static readonly VoidOrError s_Void = new VoidOrError.Void_();
+        private static readonly Error s_Void = new Error.Void_();
 
-        public static VoidOrError Void { get { return s_Void; } }
+        public static Error Void { get { return s_Void; } }
 
-        public static VoidOrError FromError(ExceptionDispatchInfo exceptionInfo)
+        public static Error FromError(ExceptionDispatchInfo exceptionInfo)
         {
             Require.NotNull(exceptionInfo, nameof(exceptionInfo));
 
-            return new VoidOrError.Error_(exceptionInfo);
+            return new Error.Error_(exceptionInfo);
         }
 
         // NB: This method serves a different purpose than the trywith from F# workflows.
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of VoidOrError.")]
-        public static VoidOrError TryWith(Action action)
+        public static Error TryWith(Action action)
         {
             Require.NotNull(action, nameof(action));
 
@@ -180,7 +167,7 @@ namespace Narvalo.Fx
 
         // NB: This method serves a different purpose than the tryfinally from F# workflows.
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of VoidOrError.")]
-        public static VoidOrError TryFinally(Action action, Action finallyAction)
+        public static Error TryFinally(Action action, Action finallyAction)
         {
             Require.NotNull(action, nameof(action));
             Require.NotNull(finallyAction, nameof(finallyAction));
@@ -205,7 +192,7 @@ namespace Narvalo.Fx
     }
 
     // Implements the Internal.IMaybe<ExceptionDispatchInfo> interface.
-    public partial class VoidOrError
+    public partial class Error
     {
         public abstract IEnumerable<ExceptionDispatchInfo> ToEnumerable();
 
