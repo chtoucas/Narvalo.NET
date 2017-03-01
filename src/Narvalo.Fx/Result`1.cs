@@ -225,12 +225,9 @@ namespace Narvalo.Fx
         {
             Require.NotNull(comparer, nameof(comparer));
 
-            if (IsError)
-            {
-                return other.IsError && comparer.Equals(Error, other.Error);
-            }
+            if (IsSuccess) { return other.IsSuccess; }
 
-            return other.IsSuccess;
+            return other.IsError && comparer.Equals(Error, other.Error);
         }
 
         public override bool Equals(object obj) => Equals(obj, EqualityComparer<TError>.Default);
@@ -239,10 +236,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(comparer, nameof(comparer));
 
-            if (!(other is Result<TError>))
-            {
-                return false;
-            }
+            if (!(other is Result<TError>)) { return false; }
 
             return Equals((Result<TError>)other, comparer);
         }

@@ -78,7 +78,6 @@
     <Compile Include="Fx\ResultOrError.Shadowing.cs" />
     <Compile Include="Fx\ResultOrError`1.cs" />
     <Compile Include="Fx\Result`2.cs" />
-    <Compile Include="Fx\TO BE REMOVED\Error`1.cs" />
     <Compile Include="Fx\Func.cs" />
     <Compile Include="Fx\Extensions\Func%24.cs" />
     <Compile Include="Fx\Extensions\Nullable%24.cs" />
