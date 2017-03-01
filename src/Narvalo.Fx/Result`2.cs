@@ -105,6 +105,8 @@ namespace Narvalo.Fx
             return Error;
         }
 
+        public Maybe<T> ToMaybe() => ValueOrNone();
+
         // NB: In Haskell, the error is the left type parameter.
         public Either<T, TError> ToEither()
             => IsSuccess ? Either.OfLeft<T, TError>(Value) : Either.OfRight<T, TError>(Error);
@@ -134,10 +136,6 @@ namespace Narvalo.Fx
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static Result<T, TError> FromError(TError error) => new Result<T, TError>(default(T), error, false);
-
-        [DebuggerHidden]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Result<T, TError> μ(Result<Result<T, TError>, TError> square)
             => square.IsSuccess ? square.Value : Result.FromError<T, TError>(square.Error);
     }
@@ -158,6 +156,15 @@ namespace Narvalo.Fx
 
             return IsError ? Result.FromError<T, TResult>(selector(Error)) : Result.Of<T, TResult>(Value);
         }
+
+        [DebuggerHidden]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static Result<T, TError> FromError(TError error) => new Result<T, TError>(default(T), error, false);
+
+        [DebuggerHidden]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static Result<T, TError> FlattenError(Result<T, Result<T, TError>> square)
+            => square.IsError ? square.Error : Result.Of<T, TError>(square.Value);
     }
 
     // Implements the Internal.IEither<T, TError> interface.

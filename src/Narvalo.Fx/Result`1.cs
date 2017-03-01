@@ -64,6 +64,8 @@ namespace Narvalo.Fx
             return Error;
         }
 
+        public Maybe<Unit> ToMaybe() => IsSuccess ? Maybe.Unit : Maybe<Unit>.None;
+
         public static explicit operator TError(Result<TError> value) => value.ToError();
 
         public static explicit operator Result<TError>(TError error) => Result.FromError(error);

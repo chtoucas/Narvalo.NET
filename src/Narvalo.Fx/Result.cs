@@ -9,9 +9,19 @@ namespace Narvalo.Fx
 
     /// <summary>
     /// Provides a set of static and extension methods for <see cref="Result{T, TError}"/>
-    /// and for querying objects that implement <see cref="IEnumerable{T}"/>
-    /// where T is of type <see cref="Result{S, TError}"/>.
+    /// and <see cref="Result{TError}"/> and for querying objects that implement
+    /// <see cref="IEnumerable{T}"/> where T is of type <see cref="Result{S, TError}"/> or
+    /// <see cref="Result{TError}"/>.
     /// </summary>
+    public static partial class Result
+    {
+        public static Result<T, TError> FromError<T, TError>(TError value) => Result<T, TError>.FromError(value);
+
+        public static Result<T, TError> FlattenError<T, TError>(Result<T, Result<T, TError>> square)
+            => Result<T, TError>.FlattenError(square);
+    }
+
+    // Provides static helpers for Result<TError>.
     public static partial class Result
     {
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
@@ -24,8 +34,6 @@ namespace Narvalo.Fx
         /// <param name="value">A value to be wrapped into an object of type <see cref="Result{TError}"/>.</param>
         /// <returns>An instance of the <see cref="Result{TError}"/> class for the specified value.</returns>
         public static Result<TError> FromError<TError>(TError value) => Result<TError>.η(value);
-
-        public static Result<T, TError> FromError<T, TError>(TError value) => Result<T, TError>.FromError(value);
     }
 
     // Provides extension methods for Result<T, TError> and Result<TError>

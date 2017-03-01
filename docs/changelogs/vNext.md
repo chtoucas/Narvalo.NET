@@ -92,8 +92,8 @@ Highlights
 Bugfixes
 --------
 
-Breaking Changes (Stable packages)
-----------------------------------
+Breaking Changes
+----------------
 ### Narvalo.Cerbere
 - `Enforce.IsWhiteSpace()` has been replaced by `Check.IsWhiteSpace()` and
   no longer throws when the input is `null`, but rather
@@ -101,32 +101,6 @@ Breaking Changes (Stable packages)
   `true` for an empty string.
 - New class constraint added to `Require.NotNull<T>()` (idem with `Demand`
   and `Expect`). See below for unconstrained alternatives.
-
-Breaking Changes (Unstable packages)
-----------------------------------
-### Narvalo.Common
-- Renamed `PathUtility` to `PathHelpers`.
-
-### Narvalo.Core
-- All classes in Narvalo.Collections moved to the package Narvalo.Common.
-- `BooleanStyles.EmptyIsFalse` has been replaced by
-  `BooleanStyles.EmptyOrWhiteSpaceIsFalse`. This is to better emphasize that
-  white-space only strings are treated as empty strings by `ParseTo.Boolean()`.
-- `Range<T>.Includes(T)` has been replaced by `Range<T>.Contains(T)`
-
-### Narvalo.Finance
-- `Bic.CheckSwiftFormat()` and `Bic.CheckFormat()` have been removed;
-  it is no longer possible to create an invalid Bic.
-- `Iban.CheckDigit` becomes `Iban.CheckDigits`.
-- `Currency.Of()` now returns a different object at each call.
-- Removed `CurrencyFactory`, `CurrencyProvider` and `DefaultCurrencyFactory`.
-- For built-in currencies, renamed the singleton method, e.g 'EUR.Currency'
-  becomes `EUR.UniqInstance`.
-- `Bic.IsConnected` becomes `Bic.IsSwiftConnected`.
-
-### Narvalo.Web
-- `AssetSection.DefaultProvider` setter now throws an `ArgumentException`
-  if the input consists of only white spaces.
 
 API Changes
 -----------
@@ -162,34 +136,6 @@ New classes and new methods:
 - `Check.IsEmptyOrWhiteSpace()`
 - `Check.IsFlagsEnum()`
 - `Warrant` a new helper class for postconditions.
-
-### Narvalo.Common
-New classes and new methods:
-- `DictionaryExtensions` previously available in Narvalo.Core.
-- `EnumeratorExtensions` previously available in Narvalo.Core.
-- `Appender<TSource, T>`
-- `Setter<TSource, T>`
-
-### Narvalo.Core
-New classes and new methods:
-- `Range.IsValid<T>()`
-- `Range<T>.IsDegenerate`
-
-### Narvalo.Finance
-New classes and new methods:
-- `Currency.OfCurrentRegion()`
-- `Currency.OfCulture()`
-- `Currency.OfCurrentCulture()`
-- `Currency.RegisterCurrency()`
-- `Bic.IsSwiftTest`
-- `Iban` implemens `IFormattable`.
-- `BicFormat`
-- `BicStyles`
-- `IbanFormat`
-- `IbanStyle`
-- `AsciiHelpers`
-
-- `Iban.Parse()` and `Iban.TryParse()` allows the presence of display chars.
 
 Enhancements
 ------------
