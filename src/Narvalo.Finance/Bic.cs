@@ -192,7 +192,6 @@ namespace Narvalo.Finance
             return Result.Of(new Bic(institutionCode, countryCode, locationCode, branchCode, value));
         }
 
-        /// <inheritdoc cref="Object.ToString" />
         public override string ToString()
         {
             Warrant.NotNull<string>();

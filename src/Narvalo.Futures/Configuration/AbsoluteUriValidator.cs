@@ -12,13 +12,11 @@ namespace Narvalo.Configuration
     /// </summary>
     public sealed class AbsoluteUriValidator : ConfigurationValidatorBase
     {
-        /// <inheritdoc cref="System.Configuration.ConfigurationValidatorBase.CanValidate"/>
         public override bool CanValidate(Type type)
         {
             return type == typeof(Uri);
         }
 
-        /// <inheritdoc cref="System.Configuration.ConfigurationValidatorBase.Validate"/>
         public override void Validate(object value)
         {
             string uriString = (string)value;

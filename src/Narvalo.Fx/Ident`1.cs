@@ -29,7 +29,6 @@ namespace Narvalo.Fx
 
         public static bool operator !=(Ident<T> left, Ident<T> right) => !left.Equals(right);
 
-        /// <inheritdoc cref="IEquatable{T}.Equals" />
         public bool Equals(Ident<T> other) => Equals(other, EqualityComparer<T>.Default);
 
         public bool Equals(Ident<T> other, IEqualityComparer<T> comparer)
@@ -68,7 +67,6 @@ namespace Narvalo.Fx
             return false;
         }
 
-        /// <inheritdoc cref="Object.GetHashCode" />
         public override int GetHashCode() => GetHashCode(EqualityComparer<T>.Default);
 
         public int GetHashCode(IEqualityComparer<T> comparer)

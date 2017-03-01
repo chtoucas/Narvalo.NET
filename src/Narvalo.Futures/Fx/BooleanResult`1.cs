@@ -83,7 +83,6 @@ namespace Narvalo.Fx
         public static bool operator !=(BooleanResult<TMessage> left, BooleanResult<TMessage> right)
             => !left.Equals(right);
 
-        /// <inheritdoc cref="IEquatable{TMessage}.Equals" />
         public bool Equals(BooleanResult<TMessage> other) => Equals(other, EqualityComparer<TMessage>.Default);
 
         public bool Equals(BooleanResult<TMessage> other, IEqualityComparer<TMessage> comparer)
@@ -93,7 +92,6 @@ namespace Narvalo.Fx
             return comparer.Equals(Message, other.Message);
         }
 
-        /// <inheritdoc cref="Object.Equals(Object)" />
         public override bool Equals(object obj) => Equals(obj, EqualityComparer<TMessage>.Default);
 
         public bool Equals(object other, IEqualityComparer<TMessage> comparer)
@@ -108,7 +106,6 @@ namespace Narvalo.Fx
             return Equals((BooleanResult<TMessage>)other);
         }
 
-        /// <inheritdoc cref="Object.GetHashCode" />
         public override int GetHashCode() => GetHashCode(EqualityComparer<TMessage>.Default);
 
         public int GetHashCode(IEqualityComparer<TMessage> comparer)

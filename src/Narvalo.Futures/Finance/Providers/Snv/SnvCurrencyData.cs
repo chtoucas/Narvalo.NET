@@ -98,8 +98,8 @@ namespace Narvalo.Finance.Providers.Snv
         /// <summary>
         /// Gets or sets a value indicating whether the currency is no longer in use.
         /// </summary>
-        /// <value><see langword="true"/> if the currency is no longer in use; otherwise <see langword="false"/>.
-        /// The default is <see langword="false"/>.</value>
+        /// <value>true if the currency is no longer in use; otherwise false.
+        /// The default is false.</value>
         public bool Withdrawn { get; }
 
         /// <summary>
@@ -127,15 +127,15 @@ namespace Narvalo.Finance.Providers.Snv
         /// <summary>
         /// Gets or sets a value indicating whether the currency represents a fund.
         /// </summary>
-        /// <value><see langword="true"/> if the currency represents a fund; otherwise <see langword="false"/>.
-        /// The default is <see langword="false"/>.</value>
+        /// <value>true if the currency represents a fund; otherwise false.
+        /// The default is false.</value>
         public bool IsFund { get; internal set; }
 
         /// <summary>
         /// Gets or sets the number of minor units.
         /// </summary>
-        /// <value>The number of minor units; <see langword="null"/> if none defined.
-        /// The default is <see langword="null"/>.</value>
+        /// <value>The number of minor units; null if none defined.
+        /// The default is null.</value>
         public short? MinorUnits { get; internal set; }
 
         /// <summary>
@@ -151,13 +151,13 @@ namespace Narvalo.Finance.Providers.Snv
         /// as defined by the ISO 3166 standard, ie they will never clash with
         /// those of a real country.</para>
         /// </remarks>
-        /// <value><see langword="true"/> if the currency is a meta-currency; otherwise <see langword="false"/>.</value>
+        /// <value>true if the currency is a meta-currency; otherwise false.</value>
         public bool IsMetaCurrency => Code[0] == META_CURRENCY_MARK;
 
         /// <summary>
         /// Gets a value indicating whether the currency has a numeric code.
         /// </summary>
-        /// <value><see langword="true"/> if the currency has a numeric code; otherwise <see langword="false"/>.</value>
+        /// <value>true if the currency has a numeric code; otherwise false.</value>
         public bool HasNumericCode => NumericCode != 0;
 
         public override string ToString()

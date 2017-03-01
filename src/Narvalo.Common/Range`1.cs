@@ -30,7 +30,7 @@ namespace Narvalo
         public bool IsDegenerate => LowerEnd.Equals(UpperEnd);
 
         /// <summary>
-        /// Returns <see langword="true"/> if the value is contained in the range.
+        /// Returns true if the value is contained in the range.
         /// </summary>
         /// <remarks>Range borders are included in the comparison.</remarks>
         /// <param name="value"></param>
@@ -43,7 +43,7 @@ namespace Narvalo
         }
 
         /// <summary>
-        /// Returns <see langword="true"/> if the value is included in the range.
+        /// Returns true if the value is included in the range.
         /// </summary>
         /// <remarks>Range borders are included in the comparison.</remarks>
         /// <param name="range"></param>

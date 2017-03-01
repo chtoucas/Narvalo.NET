@@ -480,7 +480,6 @@ namespace Narvalo.Finance
         /// <param name="major">The amount in major units to convert.</param>
         internal decimal ConvertToMinor(decimal major) => Factor * major;
 
-        /// <inheritdoc cref="Object.ToString" />
         public override string ToString()
         {
             Warrant.NotNull<string>();
@@ -503,10 +502,8 @@ namespace Narvalo.Finance
 
         public static bool operator !=(Currency left, Currency right) => !left.Equals(right);
 
-        /// <inheritdoc cref="IEquatable{T}.Equals" />
         public bool Equals(Currency other) => Code == other.Code;
 
-        /// <inheritdoc cref="Object.Equals(Object)" />
         public override bool Equals(object obj)
         {
             if (!(obj is Currency)) { return false; }
@@ -514,7 +511,6 @@ namespace Narvalo.Finance
             return Equals((Currency)obj);
         }
 
-        /// <inheritdoc cref="Object.GetHashCode" />
         // TODO: Since there are so few currencies, we could cache the hash code?
         public override int GetHashCode() => Code.GetHashCode();
     }

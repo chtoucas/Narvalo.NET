@@ -64,31 +64,31 @@ namespace Narvalo.T4
         /// <summary>
         /// Gets or sets a value indicating whether the monad is a MonadPlus. Default to false.
         /// </summary>
-        /// <value><see langword="true"/> if the monad is a MonadPlus; otherwise <see langword="false"/>.</value>
+        /// <value>true if the monad is a MonadPlus; otherwise false.</value>
         protected bool HasPlus { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the monad is a MonadZero. Default to false.
         /// </summary>
-        /// <value><see langword="true"/> if the monad is a MonadZero; otherwise <see langword="false"/>.</value>
+        /// <value>true if the monad is a MonadZero; otherwise false.</value>
         protected bool HasZero { get; set; }
 
         /// <summary>
         /// Gets a value indicating whether the monad has a Filter method. Default to true.
         /// </summary>
-        /// <value><see langword="true"/> if the monad has a Filter method; otherwise <see langword="false"/>.</value>
+        /// <value>true if the monad has a Filter method; otherwise false.</value>
         protected bool HasFilter => HasZero;
 
         /// <summary>
         /// Gets a value indicating whether the monad has Join and GroupJoin methods. Default to true.
         /// </summary>
-        /// <value><see langword="true"/> if the monad has Join and GroupJoin methods; otherwise <see langword="false"/>.</value>
+        /// <value>true if the monad has Join and GroupJoin methods; otherwise false.</value>
         protected bool HasJoin => HasFilter;
 
         /// <summary>
         /// Gets a value indicating whether the monad has a Sum method. Default to true.
         /// </summary>
-        /// <value><see langword="true"/> if the monad has a Sum method; otherwise <see langword="false"/>.</value>
+        /// <value>true if the monad has a Sum method; otherwise false.</value>
         protected bool HasSum => HasZero && HasPlus;
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace Narvalo.T4
         /// </summary>
         /// <remarks>Among other things, this property changes the names of the Map and Filter methods
         /// to the preferred .NET equivalents: Select and Where.</remarks>
-        /// <value><see langword="true"/> if we prefer to use the LINQ dialect; otherwise <see langword="false"/>.</value>
+        /// <value>true if we prefer to use the LINQ dialect; otherwise false.</value>
         protected bool PreferLinqDialect { get; set; } = true;
 
         #endregion
@@ -106,7 +106,7 @@ namespace Narvalo.T4
         /// <summary>
         /// Gets or sets a value indicating whether the monad is null-able. Default to true.
         /// </summary>
-        /// <value><see langword="true"/> if the monad is null-able; otherwise <see langword="false"/>.</value>
+        /// <value>true if the monad is null-able; otherwise false.</value>
         protected bool IsNullable { get; set; } = true;
 
         protected string ClassTypeDecl => IsNullable ? "class" : "struct";
@@ -139,8 +139,8 @@ namespace Narvalo.T4
         /// <summary>
         /// Gets a value indicating whether the underlying type T has a generic type constraint. Default to false.
         /// </summary>
-        /// <value><see langword="true"/> if the underlying type T has a generic type constraint;
-        /// otherwise <see langword="false"/>.</value>
+        /// <value>true if the underlying type T has a generic type constraint;
+        /// otherwise false.</value>
         protected bool HasTypeConstraints { get; private set; }
 
 #endif
@@ -273,8 +273,8 @@ namespace Narvalo.T4
         /// </summary>
         /// <remarks>If the monad does have a zero, we expect "Bind"
         /// to never return null but the zero if needed.</remarks>
-        /// <value><see langword="true"/> if Monad.Bind() ensures a non-null return value;
-        /// otherwise <see langword="false"/>.</value>
+        /// <value>true if Monad.Bind() ensures a non-null return value;
+        /// otherwise false.</value>
         protected bool PostBindEnsuresSome => IsNullable && HasZero;
 
         /// <summary>
@@ -282,48 +282,47 @@ namespace Narvalo.T4
         /// </summary>
         /// <remarks>If the monad does have a zero, we expect "μ"
         /// to never return null but the zero if needed.</remarks>
-        /// <value><see langword="true"/> if Monad.μ() ensures a non-null return value;
-        /// otherwise <see langword="false"/>.</value>
+        /// <value>true if Monad.μ() ensures a non-null return value;
+        /// otherwise false.</value>
         protected bool PostMultiplicationEnsuresSome => IsNullable && HasZero;
 
         /// <summary>
         /// Gets a value indicating whether Monad.Map() ensures a non-null return value. Default to false.
         /// </summary>
-        /// <value><see langword="true"/> if Monad.Map() ensures a non-null return value;
-        /// otherwise <see langword="false"/>.</value>
+        /// <value>true if Monad.Map() ensures a non-null return value;
+        /// otherwise false.</value>
         protected bool PostMapEnsuresSome => PostBindEnsuresSome;
 
         /// <summary>
         /// Gets a value indicating whether Monad.Filter() ensures a non-null return value. Default to false.
         /// </summary>
-        /// <value><see langword="true"/> if Monad.Filter() ensures a non-null return value;
-        /// otherwise <see langword="false"/>.</value>
+        /// <value>true if Monad.Filter() ensures a non-null return value;
+        /// otherwise false.</value>
         protected bool PostFilterEnsuresSome => PostBindEnsuresSome;
 
         /// <summary>
         /// Gets a value indicating whether Monad.Then() ensures a non-null return value. Default to false.
         /// </summary>
-        /// <value><see langword="true"/> if Monad.Then() ensures a non-null return value;
-        /// otherwise <see langword="false"/>.</value>
+        /// <value>true if Monad.Then() ensures a non-null return value;
+        /// otherwise false.</value>
         protected bool PostThenEnsuresSome => PostBindEnsuresSome;
 
         /// <summary>
         /// Gets a value indicating whether Monad.Join() ensures a non-null return value. Default to false.
         /// </summary>
-        /// <value><see langword="true"/> if Monad.Join() ensures a non-null return value;
-        /// otherwise <see langword="false"/>.</value>
+        /// <value>true if Monad.Join() ensures a non-null return value;
+        /// otherwise false.</value>
         protected bool PostJoinEnsuresSome => PostMapEnsuresSome;
 
         /// <summary>
         /// Gets a value indicating whether Monad.GroupJoin() ensures a non-null return value. Default to false.
         /// </summary>
-        /// <value><see langword="true"/> if Monad.GroupJoin() ensures a non-null return value;
-        /// otherwise <see langword="false"/>.</value>
+        /// <value>true if Monad.GroupJoin() ensures a non-null return value;
+        /// otherwise false.</value>
         protected bool PostGroupJoinEnsuresSome => PostMapEnsuresSome;
 
         #endregion
 
-        /// <inheritdoc cref="TextTransformation.TransformText" />
         public override string TransformText()
         {
             WriteHeader();

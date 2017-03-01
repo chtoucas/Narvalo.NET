@@ -193,7 +193,6 @@ namespace Narvalo.Finance
     // Implements the IFormattable interface.
     public partial struct IbanParts
     {
-        /// <inheritdoc cref="Object.ToString" />
         public override string ToString()
         {
             Warrant.NotNull<string>();
@@ -206,7 +205,6 @@ namespace Narvalo.Finance
             return ToString(format, null);
         }
 
-        /// <inheritdoc cref="IFormattable.ToString(string, IFormatProvider)" />
         // NB: We ignore any user supplied "formatProvider".
         public string ToString(string format, IFormatProvider formatProvider)
         {

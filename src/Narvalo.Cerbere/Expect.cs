@@ -42,7 +42,7 @@ namespace Narvalo
         public static void NotNullUnconstrained<T>(T value) => True(value != null);
 
         /// <summary>
-        /// Checks that the specified object parameter is not <see langword="null"/> or empty.
+        /// Checks that the specified object parameter is not null or empty.
         /// </summary>
         /// <param name="value">The value to check.</param>
         [DebuggerHidden]

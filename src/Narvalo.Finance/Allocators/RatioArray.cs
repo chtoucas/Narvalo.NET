@@ -65,10 +65,8 @@ namespace Narvalo.Finance.Allocators
 
         public static bool operator !=(RatioArray left, RatioArray right) => !left.Equals(right);
 
-        /// <inheritdoc cref="IEquatable{T}.Equals" />
         public bool Equals(RatioArray other) => _ratios == other._ratios;
 
-        /// <inheritdoc cref="Object.Equals(Object)" />
         public override bool Equals(object obj)
         {
             if (!(obj is RatioArray)) { return false; }
@@ -76,7 +74,6 @@ namespace Narvalo.Finance.Allocators
             return Equals((RatioArray)obj);
         }
 
-        /// <inheritdoc cref="Object.GetHashCode" />
         public override int GetHashCode() => _ratios.GetHashCode();
     }
 }

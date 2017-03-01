@@ -10,7 +10,7 @@ namespace Narvalo.Cerbere
     {
         /// <summary>
         /// Instructs code analysis tools to assume that the specified object is not
-        /// <see langword="null"/>, even if it cannot be statically proven.
+        /// null, even if it cannot be statically proven.
         /// IMPORTANT: See the warnings detailed in the remarks before using this class.
         /// </summary>
         /// <remarks>
@@ -20,7 +20,7 @@ namespace Narvalo.Cerbere
         /// <para>When dealing with external dependencies, CCCheck can not infer
         /// that the result of a method is not null. When we know for sure that
         /// the result is not null, this extension method is a useful alias
-        /// to inform CCCheck not to worry of <see langword="null"/> values here.</para>
+        /// to inform CCCheck not to worry of null values here.</para>
         /// <para>We can not use a conditional attribute here since the method has
         /// a return type. Inlining the method should remove any performance concern (on close
         /// inspection, I think this is not even true).</para>

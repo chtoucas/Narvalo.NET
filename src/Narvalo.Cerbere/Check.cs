@@ -114,11 +114,11 @@ namespace Narvalo
         /// Returns a value indicating whether the specified value only consists of white-space
         /// characters.
         /// </summary>
-        /// <remarks>This method returns <see langword="false"/> if <paramref name="value"/>
-        /// is <see langword="null"/> or empty.</remarks>
+        /// <remarks>This method returns false if <paramref name="value"/>
+        /// is null or empty.</remarks>
         /// <param name="value">The string to test.</param>
-        /// <returns><see langword="true"/> if the input only consists of white-space characters;
-        /// otherwise <see langword="false"/>.</returns>
+        /// <returns>true if the input only consists of white-space characters;
+        /// otherwise false.</returns>
         [Pure]
         public static bool IsWhiteSpace(string value)
         {
@@ -139,11 +139,11 @@ namespace Narvalo
         /// Returns a value indicating whether the specified value is empty or only consists
         /// of white-space characters.
         /// </summary>
-        /// <remarks>This method returns <see langword="false"/> if <paramref name="value"/>
-        /// is <see langword="null"/>.</remarks>
+        /// <remarks>This method returns false if <paramref name="value"/>
+        /// is null.</remarks>
         /// <param name="value">The string to test.</param>
-        /// <returns><see langword="true"/> if the specified value is empty or only consists of
-        /// white-space characters; otherwise <see langword="false"/>.</returns>
+        /// <returns>true if the specified value is empty or only consists of
+        /// white-space characters; otherwise false.</returns>
         [Pure]
         public static bool IsEmptyOrWhiteSpace(string value)
         {
@@ -164,8 +164,8 @@ namespace Narvalo
         /// Returns a value indicating whether the specified <paramref name="type"/> is a flags enumeration.
         /// </summary>
         /// <param name="type">The type to test.</param>
-        /// <returns><see langword="true"/> if the specified <paramref name="type"/> is a flags enumeration;
-        /// otherwise <see langword="false"/>.</returns>
+        /// <returns>true if the specified <paramref name="type"/> is a flags enumeration;
+        /// otherwise false.</returns>
         [Pure]
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "[Intentionally] The rule does not apply here.")]
         public static bool IsFlagsEnum(Type type)

@@ -14,7 +14,7 @@ namespace Narvalo
     /// <remarks>
     /// <para>If a condition does not hold, an exception is thrown.</para>
     /// <para>The methods will be recognized as Code Contracts preconditions.</para>
-    /// <para>The methods will be recognized by FxCop as guards against <see langword="null"/> value.</para>
+    /// <para>The methods will be recognized by FxCop as guards against null value.</para>
     /// <para>Only useful if you are using the "Custom Parameter Validation" assembly mode.</para>
     /// </remarks>
     /// <seealso cref="Demand"/>
@@ -94,13 +94,13 @@ namespace Narvalo
         }
 
         /// <summary>
-        /// Validates that the specified argument is not <see langword="null"/>.
+        /// Validates that the specified argument is not null.
         /// </summary>
         /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
         /// <param name="value">The argument to check.</param>
         /// <param name="parameterName">The name of the parameter.</param>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
-        /// <see langword="null"/>.</exception>
+        /// null.</exception>
         /// <seealso cref="Require.NotNullUnconstrained{T}(T, string)"/>
         [ContractArgumentValidator]
         public static void NotNull<T>([ValidatedNotNull]T value, string parameterName)
@@ -115,13 +115,13 @@ namespace Narvalo
         }
 
         /// <summary>
-        /// Validates that the specified argument is not <see langword="null"/>.
+        /// Validates that the specified argument is not null.
         /// </summary>
         /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
         /// <param name="value">The argument to check.</param>
         /// <param name="parameterName">The name of the parameter.</param>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
-        /// <see langword="null"/>.</exception>
+        /// null.</exception>
         /// <seealso cref="Require.NotNull{T}(T, string)"/>
         [ContractArgumentValidator]
         public static void NotNullUnconstrained<T>([ValidatedNotNull]T value, string parameterName)
@@ -135,14 +135,14 @@ namespace Narvalo
         }
 
         /// <summary>
-        /// Validates that the specified argument is not <see langword="null"/> or empty.
+        /// Validates that the specified argument is not null or empty.
         /// </summary>
         /// <param name="value">The argument to check.</param>
         /// <param name="parameterName">The name of the parameter.</param>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
-        /// <see langword="null"/>.</exception>
+        /// null.</exception>
         /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is
-        /// <see langword="null"/> or empty.</exception>
+        /// null or empty.</exception>
         [ContractArgumentValidator]
         public static void NotNullOrEmpty([ValidatedNotNull]string value, string parameterName)
         {

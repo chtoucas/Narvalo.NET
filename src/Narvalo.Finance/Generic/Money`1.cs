@@ -206,7 +206,6 @@ namespace Narvalo.Finance.Generic
     // Implements the IFormattable interface.
     public partial struct Money<TCurrency>
     {
-        /// <inheritdoc cref="Object.ToString" />
         public override string ToString()
         {
             Warrant.NotNull<string>();

@@ -155,7 +155,6 @@ namespace Narvalo.Fx
                 _value = value;
             }
 
-            /// <inheritdoc cref="Switch{TLeft, TRight}.Bind{TResult}(Func{TLeft, Switch{TResult, TRight}})" />
             public override Switch<TResult, TRight> Bind<TResult>(Func<TLeft, Switch<TResult, TRight>> leftSelector)
             {
                 Require.NotNull(leftSelector, nameof(leftSelector));
@@ -163,11 +162,9 @@ namespace Narvalo.Fx
                 return leftSelector.Invoke(_value);
             }
 
-            /// <inheritdoc cref="Switch{TLeft, TRight}.Bind{TResult}(Func{TRight, Switch{TLeft, TResult}})" />
             public override Switch<TLeft, TResult> Bind<TResult>(Func<TRight, Switch<TLeft, TResult>> rightSelector)
                 => new Switch<TLeft, TResult>.Left_(_value);
 
-            /// <inheritdoc cref="Switch{TLeft, TRight}.Select{TResult}(Func{TLeft, TResult})" />
             public override Switch<TResult, TRight> Select<TResult>(Func<TLeft, TResult> leftSelector)
             {
                 Require.NotNull(leftSelector, nameof(leftSelector));
@@ -175,7 +172,6 @@ namespace Narvalo.Fx
                 return Switch<TResult, TRight>.η(leftSelector.Invoke(_value));
             }
 
-            /// <inheritdoc cref="Switch{TLeft, TRight}.Select{TResult}(Func{TRight, TResult})" />
             public override Switch<TLeft, TResult> Select<TResult>(Func<TRight, TResult> rightSelector)
                 => new Switch<TLeft, TResult>.Left_(_value);
 
@@ -189,7 +185,6 @@ namespace Narvalo.Fx
             //    return caseLeft.Invoke(_value);
             //}
 
-            ///// <inheritdoc cref="Switch{TLeft, TRight}.Do" />
             //public override TResult Match<TResult>(
             //    Func<TLeft, TResult> caseLeft,
             //    Func<TRight, TResult> caseRight,
@@ -200,7 +195,6 @@ namespace Narvalo.Fx
             //    return caseLeft.Invoke(_value);
             //}
 
-            ///// <inheritdoc cref="Switch{TLeft, TRight}.Do" />
             //public override void Do(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise)
             //{
             //    Require.NotNull(caseLeft, nameof(caseLeft));
@@ -208,7 +202,6 @@ namespace Narvalo.Fx
             //    caseLeft.Invoke(_value);
             //}
 
-            /// <inheritdoc cref="Switch{TRight, TLeft}.Swap" />
             public override Switch<TRight, TLeft> Swap() => Switch<TRight, TLeft>.η(_value);
 
             public override Maybe<TLeft> LeftOrNone() => Maybe.Of(_value);
@@ -256,11 +249,9 @@ namespace Narvalo.Fx
                 _value = value;
             }
 
-            /// <inheritdoc cref="Switch{TLeft, TRight}.Bind{TResult}(Func{TLeft, Switch{TResult, TRight}})" />
             public override Switch<TResult, TRight> Bind<TResult>(Func<TLeft, Switch<TResult, TRight>> leftSelector)
                 => new Switch<TResult, TRight>.Right_(_value);
 
-            /// <inheritdoc cref="Switch{TLeft, TRight}.Bind{TResult}(Func{TRight, Switch{TLeft, TResult}})" />
             public override Switch<TLeft, TResult> Bind<TResult>(Func<TRight, Switch<TLeft, TResult>> rightSelector)
             {
                 Require.NotNull(rightSelector, nameof(rightSelector));
@@ -268,11 +259,9 @@ namespace Narvalo.Fx
                 return rightSelector.Invoke(_value);
             }
 
-            /// <inheritdoc cref="Switch{TLeft, TRight}.Select{TResult}(Func{TLeft, TResult})" />
             public override Switch<TResult, TRight> Select<TResult>(Func<TLeft, TResult> leftSelector)
                 => new Switch<TResult, TRight>.Right_(_value);
 
-            /// <inheritdoc cref="Switch{TLeft, TRight}.Select{TResult}(Func{TRight, TResult})" />
             public override Switch<TLeft, TResult> Select<TResult>(Func<TRight, TResult> rightSelector)
             {
                 Require.NotNull(rightSelector, nameof(rightSelector));
@@ -280,7 +269,6 @@ namespace Narvalo.Fx
                 return Switch<TLeft, TResult>.η(rightSelector.Invoke(_value));
             }
 
-            /// <inheritdoc cref="Switch{TRight, TLeft}.Swap" />
             public override Switch<TRight, TLeft> Swap() => Switch<TRight, TLeft>.η(_value);
 
             //public override TResult Match<TResult>(
@@ -293,7 +281,6 @@ namespace Narvalo.Fx
             //    return caseRight.Invoke(_value);
             //}
 
-            ///// <inheritdoc cref="Switch{TLeft, TRight}.Do" />
             //public override TResult Match<TResult>(
             //    Func<TLeft, TResult> caseLeft,
             //    Func<TRight, TResult> caseRight,
@@ -304,7 +291,6 @@ namespace Narvalo.Fx
             //    return caseRight.Invoke(_value);
             //}
 
-            ///// <inheritdoc cref="Switch{TLeft, TRight}.Do" />
             //public override void Do(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise)
             //{
             //    Require.NotNull(caseRight, nameof(caseRight));

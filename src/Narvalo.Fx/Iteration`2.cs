@@ -24,7 +24,6 @@ namespace Narvalo.Fx
         public static bool operator !=(Iteration<TResult, TSource> left, Iteration<TResult, TSource> right)
             => !left.Equals(right);
 
-        /// <inheritdoc cref="Object.Equals(Object)" />
         public override bool Equals(object obj) => Equals(obj, EqualityComparer<object>.Default);
 
         public bool Equals(object other, IEqualityComparer comparer)
@@ -50,7 +49,6 @@ namespace Narvalo.Fx
                 && comparer.Equals(Next, other.Next);
         }
 
-        /// <inheritdoc cref="Object.GetHashCode" />
         public override int GetHashCode() => GetHashCode(EqualityComparer<object>.Default);
 
         public int GetHashCode(IEqualityComparer comparer)

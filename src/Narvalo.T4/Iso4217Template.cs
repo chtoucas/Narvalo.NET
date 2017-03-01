@@ -44,7 +44,7 @@ namespace Narvalo.T4
         /// <summary>
         /// Gets or sets a value indicating whether debugging is enabled.
         /// </summary>
-        /// <value><see langword="true"/> if debugging is enabled; otherwise <see langword="false"/>.</value>
+        /// <value>true if debugging is enabled; otherwise false.</value>
         public bool Debug { get; set; }
 
         protected IEnumerable<Currency> ParseCurrent(string path)

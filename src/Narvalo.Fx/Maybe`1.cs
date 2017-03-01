@@ -107,7 +107,6 @@ namespace Narvalo.Fx
             return Value;
         }
 
-        /// <inheritdoc cref="Object.ToString" />
         public override string ToString() => IsSome ? Format.Current("Maybe({0})", Value) : "Maybe(None)";
 
         /// <summary>
@@ -123,7 +122,7 @@ namespace Narvalo.Fx
                 _inner = inner;
             }
 
-            public bool IsSome { get { return _inner.IsSome; } }
+            public bool IsSome => _inner.IsSome;
 
             public T Value => IsSome ? _inner.Value : default(T);
         }
@@ -280,7 +279,6 @@ namespace Narvalo.Fx
 
         public static bool operator !=(Maybe<T> left, Maybe<T> right) => !left.Equals(right);
 
-        /// <inheritdoc cref="IEquatable{T}.Equals" />
         public bool Equals(Maybe<T> other) => Equals(other, EqualityComparer<T>.Default);
 
         public bool Equals(Maybe<T> other, IEqualityComparer<T> comparer)
@@ -295,7 +293,6 @@ namespace Narvalo.Fx
             return other.IsNone;
         }
 
-        /// <inheritdoc cref="Object.Equals(Object)" />
         public override bool Equals(object obj) => Equals(obj, EqualityComparer<T>.Default);
 
         public bool Equals(object other, IEqualityComparer<T> comparer)
@@ -310,7 +307,6 @@ namespace Narvalo.Fx
             return Equals((Maybe<T>)other, comparer);
         }
 
-        /// <inheritdoc cref="Object.GetHashCode" />
         public override int GetHashCode() => GetHashCode(EqualityComparer<T>.Default);
 
         public int GetHashCode(IEqualityComparer<T> comparer)

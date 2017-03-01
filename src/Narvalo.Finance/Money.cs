@@ -275,7 +275,7 @@ namespace Narvalo.Finance
         /// </summary>
         /// <exception cref="InvalidOperationException">Thrown if the instance is not normalized.</exception>
         /// <returns>A 64-bit signed integer representing the amount in minor units;
-        /// <see langword="null"/> if the result is too large to fit into the Int64 range.</returns>
+        /// null if the result is too large to fit into the Int64 range.</returns>
         public long? ToLongMinor()
         {
             if (!IsNormalized) { throw new InvalidOperationException("XXX"); }
@@ -365,7 +365,6 @@ namespace Narvalo.Finance
     // Implements the IFormattable interface.
     public partial struct Money
     {
-        /// <inheritdoc cref="Object.ToString" />
         public override string ToString()
         {
             Warrant.NotNull<string>();

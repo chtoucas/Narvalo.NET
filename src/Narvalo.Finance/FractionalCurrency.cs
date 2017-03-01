@@ -57,7 +57,6 @@ namespace Narvalo.Finance
 
         public decimal Factor => 1 / Epsilon;
 
-        /// <inheritdoc cref="Object.ToString" />
         public override string ToString()
         {
             Warrant.NotNull<string>();
@@ -73,13 +72,11 @@ namespace Narvalo.Finance
 
         public static bool operator !=(FractionalCurrency left, FractionalCurrency right) => !left.Equals(right);
 
-        /// <inheritdoc cref="IEquatable{T}.Equals" />
         public bool Equals(FractionalCurrency other)
             => Parent == other.Parent
             && Code == other.Code
             && Epsilon == other.Epsilon;
 
-        /// <inheritdoc cref="Object.Equals(Object)" />
         public override bool Equals(object obj)
         {
             if (!(obj is FractionalCurrency)) { return false; }
@@ -87,7 +84,6 @@ namespace Narvalo.Finance
             return Equals((FractionalCurrency)obj);
         }
 
-        /// <inheritdoc cref="Object.GetHashCode" />
         public override int GetHashCode()
         {
             unchecked
