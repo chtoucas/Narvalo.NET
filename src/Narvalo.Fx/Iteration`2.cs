@@ -6,7 +6,10 @@ namespace Narvalo.Fx
     using System.Collections;
     using System.Collections.Generic;
 
-    public struct Iteration<TResult, TSource> : IEquatable<Iteration<TResult, TSource>> //, IComparable
+    using HashHelpers = Narvalo.Fx.Internal.HashHelpers;
+
+    public struct Iteration<TResult, TSource>
+        : IEquatable<Iteration<TResult, TSource>>, IStructuralEquatable
     {
         public Iteration(TResult result, TSource next)
         {
@@ -18,75 +21,44 @@ namespace Narvalo.Fx
 
         public TSource Next { get; }
 
+        public override string ToString()
+        {
+            return "(Result=" + Result?.ToString() + ", Next=" + Next?.ToString() + ")";
+        }
+
         public static bool operator ==(Iteration<TResult, TSource> left, Iteration<TResult, TSource> right)
             => left.Equals(right);
 
         public static bool operator !=(Iteration<TResult, TSource> left, Iteration<TResult, TSource> right)
             => !left.Equals(right);
 
-        public override bool Equals(object obj) => Equals(obj, EqualityComparer<object>.Default);
-
-        public bool Equals(object other, IEqualityComparer comparer)
-        {
-            Require.NotNull(comparer, nameof(comparer));
-
-            if (!(other is Iteration<TResult, TSource>))
-            {
-                return false;
-            }
-
-            return Equals((Iteration<TResult, TSource>)other);
-        }
-
         public bool Equals(Iteration<TResult, TSource> other)
-            => Equals(other, EqualityComparer<object>.Default);
+            => EqualityComparer<TResult>.Default.Equals(Result, other.Result)
+            && EqualityComparer<TSource>.Default.Equals(Next, other.Next);
 
-        public bool Equals(Iteration<TResult, TSource> other, IEqualityComparer comparer)
+        public override bool Equals(object obj)
+            => (obj is Iteration<TResult, TSource>) && Equals((Iteration<TResult, TSource>)obj);
+
+        bool IStructuralEquatable.Equals(object other, IEqualityComparer comparer)
         {
             Require.NotNull(comparer, nameof(comparer));
 
-            return comparer.Equals(Result, other.Result)
-                && comparer.Equals(Next, other.Next);
+            if (ReferenceEquals(other, null) || !(other is Iteration<TResult, TSource>)) { return false; }
+
+            var obj = (Iteration<TResult, TSource>)other;
+
+            return comparer.Equals(Result, obj.Result)
+                && comparer.Equals(Next, obj.Next);
         }
 
-        public override int GetHashCode() => GetHashCode(EqualityComparer<object>.Default);
+        public override int GetHashCode()
+            => HashHelpers.Combine(Result?.GetHashCode() ?? 0, Next?.GetHashCode() ?? 0);
 
         public int GetHashCode(IEqualityComparer comparer)
         {
             Require.NotNull(comparer, nameof(comparer));
 
-            int h1 = Result != null ? comparer.GetHashCode(Result) : 0;
-            int h2 = Next != null ? comparer.GetHashCode(Next) : 0;
-
-            return ((h1 << 5) + h1) ^ h2;
+            return HashHelpers.Combine(comparer.GetHashCode(Result), comparer.GetHashCode(Next));
         }
-
-        //public int CompareTo(object obj)
-        //{
-        //    return CompareTo(obj, Comparer<Object>.Default);
-        //}
-
-        //public int CompareTo(object obj, IComparer comparer)
-        //{
-        //    Require.NotNull(comparer, nameof(comparer));
-
-        //    if (!(obj is Iteration<TResult, TSource>))
-        //    {
-        //        throw new ArgumentException();
-        //    }
-
-        //    var other = (Iteration<TResult, TSource>)obj;
-
-        //    int c = 0;
-
-        //    c = comparer.Compare(Result, other.Result);
-
-        //    if (c != 0)
-        //    {
-        //        return c;
-        //    }
-
-        //    return comparer.Compare(Next, other.Next);
-        //}
     }
 }
