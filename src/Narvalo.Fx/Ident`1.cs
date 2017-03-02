@@ -67,6 +67,23 @@ namespace Narvalo.Fx
 
         public bool Contains(T value, IEqualityComparer<T> comparer) => Equals(value, comparer);
 
+        public void When(Func<T, bool> predicate, Action<T> action)
+        {
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            if (predicate(Value)) { action(Value); }
+        }
+
+        public void Do(Action<T> action)
+        {
+            Require.NotNull(action, nameof(action));
+
+            action(Value);
+        }
+
+        #region In between IContainer<T> and IMaybe<T>.
+
         public TResult Coalesce<TResult>(Func<T, bool> predicate, Func<T, TResult> selector, Func<TResult> otherwise)
         {
             Require.NotNull(predicate, nameof(predicate));
@@ -83,36 +100,16 @@ namespace Narvalo.Fx
             return predicate(Value) ? thenResult : elseResult;
         }
 
-        public void When(Func<T, bool> predicate, Action<T> action)
-        {
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            if (predicate(Value)) { action(Value); }
-        }
-
-        public void Do(Func<T, bool> predicate, Action<T> action, Action otherwise)
+        public void When(Func<T, bool> predicate, Action<T> action, Action otherwise)
         {
             Require.NotNull(predicate, nameof(predicate));
             Require.NotNull(action, nameof(action));
             Require.NotNull(otherwise, nameof(otherwise));
 
-            if (predicate(Value))
-            {
-                action(Value);
-            }
-            else
-            {
-                otherwise();
-            }
+            if (predicate(Value)) { action(Value); } else { otherwise(); }
         }
 
-        public void Do(Action<T> action)
-        {
-            Require.NotNull(action, nameof(action));
-
-            action(Value);
-        }
+        #endregion
     }
 
     // Implements the Internal.Iterable<TError> interface.

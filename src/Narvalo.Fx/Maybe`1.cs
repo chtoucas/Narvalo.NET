@@ -237,14 +237,7 @@ namespace Narvalo.Fx
             Require.NotNull(action, nameof(action));
             Require.NotNull(otherwise, nameof(otherwise));
 
-            if (IsSome && predicate(Value))
-            {
-                action(Value);
-            }
-            else
-            {
-                otherwise();
-            }
+            if (IsSome && predicate(Value)) { action(Value); } else { otherwise(); }
         }
 
         public void When(Func<T, bool> predicate, Action<T> action)
@@ -260,14 +253,7 @@ namespace Narvalo.Fx
             Require.NotNull(onSome, nameof(onSome));
             Require.NotNull(onNone, nameof(onNone));
 
-            if (IsSome)
-            {
-                onSome(Value);
-            }
-            else
-            {
-                onNone();
-            }
+            if (IsSome) { onSome(Value); } else { onNone(); }
         }
 
         public void OnSome(Action<T> action)

@@ -238,14 +238,7 @@ namespace Narvalo.Fx
             Require.NotNull(onSuccess, nameof(onSuccess));
             Require.NotNull(onError, nameof(onError));
 
-            if (IsSuccess)
-            {
-                onSuccess(Value);
-            }
-            else
-            {
-                onError(ExceptionInfo);
-            }
+            if (IsSuccess) { onSuccess(Value); } else { onError(ExceptionInfo); }
         }
 
         public void WhenSuccess(Func<T, bool> predicate, Action<T> action)
