@@ -319,7 +319,7 @@ namespace Narvalo.Fx
         public static Either<IEnumerable<TResult>, TRight> InvokeWith<TSource, TResult, TRight>(
             this Func<TSource, Either<TResult, TRight>> @this,
             IEnumerable<TSource> seq)
-            => seq.Select(@this).Collect();
+            => seq.SelectWith(@this);
 
         public static Either<TResult, TRight> InvokeWith<TSource, TResult, TRight>(
             this Func<TSource, Either<TResult, TRight>> @this,
@@ -402,6 +402,250 @@ namespace Narvalo.Fx.Internal
 
                     if (append) { yield return item; }
                 }
+            }
+        }
+    }
+}
+
+namespace Narvalo.Fx.Linq
+{
+    using System;
+    using System.Collections.Generic;
+
+    using Narvalo.Fx;
+    using Narvalo.Fx.Internal;
+
+    // Provides extension methods for IEnumerable<T>.
+    // We do not use the standard LINQ names to avoid any confusion.
+    // - Select    -> SelectWith
+    // - Where     -> WhereBy
+    // - Zip       -> ZipWith
+    // - Aggregate -> Reduce or Fold
+    // T4: EmitLinqCore().
+    public static partial class Qperators
+    {
+        public static Either<IEnumerable<TResult>, TRight> SelectWith<TSource, TResult, TRight>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, Either<TResult, TRight>> selector)
+            => @this.SelectWithImpl(selector);
+
+        public static Either<IEnumerable<TSource>, TRight> WhereBy<TSource, TRight>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, Either<bool, TRight>> predicate)
+            => @this.WhereByImpl(predicate);
+
+        public static Either<IEnumerable<TResult>, TRight> ZipWith<TFirst, TSecond, TResult, TRight>(
+            this IEnumerable<TFirst> @this,
+            IEnumerable<TSecond> second,
+            Func<TFirst, TSecond, Either<TResult, TRight>> resultSelector)
+            => @this.ZipWithImpl(second, resultSelector);
+
+        public static Either<TAccumulate, TRight> Fold<TSource, TAccumulate, TRight>(
+            this IEnumerable<TSource> @this,
+            TAccumulate seed,
+            Func<TAccumulate, TSource, Either<TAccumulate, TRight>> accumulator)
+            => @this.FoldImpl(seed, accumulator);
+
+        public static Either<TAccumulate, TRight> Fold<TSource, TAccumulate, TRight>(
+            this IEnumerable<TSource> @this,
+            TAccumulate seed,
+            Func<TAccumulate, TSource, Either<TAccumulate, TRight>> accumulator,
+            Func<Either<TAccumulate, TRight>, bool> predicate)
+            => @this.FoldImpl(seed, accumulator, predicate);
+
+        public static Either<TSource, TRight> Reduce<TSource, TRight>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, TSource, Either<TSource, TRight>> accumulator)
+            => @this.ReduceImpl(accumulator);
+
+        public static Either<TSource, TRight> Reduce<TSource, TRight>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, TSource, Either<TSource, TRight>> accumulator,
+            Func<Either<TSource, TRight>, bool> predicate)
+            => @this.ReduceImpl(accumulator, predicate);
+    }
+}
+
+namespace Narvalo.Fx.Internal
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
+
+    // Provides default implementations for the extension methods for IEnumerable<T>.
+    // You will certainly want to override them to improve performance.
+    // T4: EmitLinqInternal().
+    internal static partial class EnumerableExtensions
+    {
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static Either<IEnumerable<TResult>, TRight> SelectWithImpl<TSource, TResult, TRight>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, Either<TResult, TRight>> selector)
+        {
+            Demand.NotNull(@this);
+            Demand.NotNull(selector);
+
+            return @this.Select(selector).Collect();
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static Either<IEnumerable<TSource>, TRight> WhereByImpl<TSource, TRight>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, Either<bool, TRight>> predicate)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+
+            return Either.Of<IEnumerable<TSource>, TRight>(WhereByIterator(@this, predicate));
+        }
+
+        private static IEnumerable<TSource> WhereByIterator<TSource, TRight>(
+            IEnumerable<TSource> source,
+            Func<TSource, Either<bool, TRight>> predicate)
+        {
+            Demand.NotNull(source);
+            Demand.NotNull(predicate);
+
+            var unit = Either.Of<Unit, TRight>(Unit.Default);
+
+            using (var iter = source.GetEnumerator())
+            {
+                while (iter.MoveNext())
+                {
+                    bool pass = false;
+                    TSource item = iter.Current;
+
+                    predicate(item).Bind(val =>
+                    {
+                        pass = val;
+
+                        return unit;
+                    });
+
+                    if (pass) { yield return item; }
+                }
+            }
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static Either<IEnumerable<TResult>, TRight> ZipWithImpl<TFirst, TSecond, TResult, TRight>(
+            this IEnumerable<TFirst> @this,
+            IEnumerable<TSecond> second,
+            Func<TFirst, TSecond, Either<TResult, TRight>> resultSelector)
+        {
+            Demand.NotNull(resultSelector);
+            Demand.NotNull(@this);
+            Demand.NotNull(second);
+
+            return @this.Zip(second, resultSelector).Collect();
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static Either<TAccumulate, TRight> FoldImpl<TSource, TAccumulate, TRight>(
+            this IEnumerable<TSource> @this,
+            TAccumulate seed,
+            Func<TAccumulate, TSource, Either<TAccumulate, TRight>> accumulator)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(accumulator, nameof(accumulator));
+
+            Either<TAccumulate, TRight> retval = Either.Of<TAccumulate, TRight>(seed);
+
+            using (var iter = @this.GetEnumerator())
+            {
+                while (iter.MoveNext())
+                {
+                    if (retval == null) { continue; }
+
+                    retval = retval.Bind(val => accumulator(val, iter.Current));
+                }
+            }
+
+            return retval;
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static Either<TAccumulate, TRight> FoldImpl<TSource, TAccumulate, TRight>(
+            this IEnumerable<TSource> @this,
+            TAccumulate seed,
+            Func<TAccumulate, TSource, Either<TAccumulate, TRight>> accumulator,
+            Func<Either<TAccumulate, TRight>, bool> predicate)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(accumulator, nameof(accumulator));
+            Require.NotNull(predicate, nameof(predicate));
+
+            Either<TAccumulate, TRight> retval = Either.Of<TAccumulate, TRight>(seed);
+
+            using (var iter = @this.GetEnumerator())
+            {
+                while (predicate(retval) && iter.MoveNext())
+                {
+                    if (retval == null) { continue; }
+
+                    retval = retval.Bind(val => accumulator(val, iter.Current));
+                }
+            }
+
+            return retval;
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static Either<TSource, TRight> ReduceImpl<TSource, TRight>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, TSource, Either<TSource, TRight>> accumulator)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(accumulator, nameof(accumulator));
+
+            using (var iter = @this.GetEnumerator())
+            {
+                if (!iter.MoveNext())
+                {
+                    throw new InvalidOperationException("Source sequence was empty.");
+                }
+
+                Either<TSource, TRight> retval = Either.Of<TSource, TRight>(iter.Current);
+
+                while (iter.MoveNext())
+                {
+                    if (retval == null) { continue; }
+
+                    retval = retval.Bind(val => accumulator(val, iter.Current));
+                }
+
+                return retval;
+            }
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static Either<TSource, TRight> ReduceImpl<TSource, TRight>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, TSource, Either<TSource, TRight>> accumulator,
+            Func<Either<TSource, TRight>, bool> predicate)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(accumulator, nameof(accumulator));
+            Require.NotNull(predicate, nameof(predicate));
+
+            using (var iter = @this.GetEnumerator())
+            {
+                if (!iter.MoveNext())
+                {
+                    throw new InvalidOperationException("Source sequence was empty.");
+                }
+
+                Either<TSource, TRight> retval = Either.Of<TSource, TRight>(iter.Current);
+
+                while (predicate(retval) && iter.MoveNext())
+                {
+                    if (retval == null) { continue; }
+
+                    retval = retval.Bind(val => accumulator(val, iter.Current));
+                }
+
+                return retval;
             }
         }
     }

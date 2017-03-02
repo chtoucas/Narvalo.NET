@@ -12,7 +12,6 @@
 
             Name = "Result";
             IsNullable = false;
-            EmitLinq = false;
         }
     }
 #>

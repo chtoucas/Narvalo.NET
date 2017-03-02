@@ -8,8 +8,6 @@
         public override void Initialize()
         {
             InitializeGenericParameters("TLeft", "TRight");
-
-            EmitLinq = false;
         }
     }
 #>
