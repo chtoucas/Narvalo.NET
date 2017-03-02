@@ -63,6 +63,10 @@ namespace Narvalo.Fx
     // Implements the Internal.IContainer<T> interface.
     public partial struct Ident<T>
     {
+        public bool Contains(T value) => Equals(value);
+
+        public bool Contains(T value, IEqualityComparer<T> comparer) => Equals(value, comparer);
+
         public TResult Coalesce<TResult>(Func<T, bool> predicate, Func<T, TResult> selector, Func<TResult> otherwise)
         {
             Require.NotNull(predicate, nameof(predicate));

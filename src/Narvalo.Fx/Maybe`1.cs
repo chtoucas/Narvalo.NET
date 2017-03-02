@@ -185,6 +185,20 @@ namespace Narvalo.Fx
 
         public IEnumerator<T> GetEnumerator() => ToEnumerable().GetEnumerator();
 
+        public bool Contains(T value)
+        {
+            if (IsNone) { return false; }
+            return EqualityComparer<T>.Default.Equals(Value, value);
+        }
+
+        public bool Contains(T value, IEqualityComparer<T> comparer)
+        {
+            Require.NotNull(comparer, nameof(comparer));
+
+            if (IsNone) { return false; }
+            return comparer.Equals(Value, value);
+        }
+
         public TResult Match<TResult>(Func<T, TResult> caseSome, Func<TResult> caseNone)
         {
             Require.NotNull(caseSome, nameof(caseSome));
@@ -256,9 +270,6 @@ namespace Narvalo.Fx
             }
         }
 
-        // Alias for OnSome().
-        void Internal.IContainer<T>.Do(Action<T> action) => OnSome(action);
-
         public void OnSome(Action<T> action)
         {
             Require.NotNull(action, nameof(action));
@@ -272,6 +283,9 @@ namespace Narvalo.Fx
 
             if (IsNone) { action(); }
         }
+
+        // Alias for OnSome(). Publicly hidden.
+        void Internal.IContainer<T>.Do(Action<T> action) => OnSome(action);
     }
 
     // Implements the IEquatable<Maybe<T>> interface.

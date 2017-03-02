@@ -3,6 +3,7 @@
 namespace Narvalo.Fx.Internal
 {
     using System;
+    using System.Collections.Generic;
 
     // Strictly identical to IContainer<T>.
     // **WARNING** If we update this interface, we should mirror the modifications in IContainer<T>.
@@ -11,6 +12,10 @@ namespace Narvalo.Fx.Internal
     //   because they may unify for some type parameter substitutions.
     internal interface ISecondaryContainer<T>
     {
+        bool Contains(T value);
+
+        bool Contains(T value, IEqualityComparer<T> comparer);
+
         void When(Func<T, bool> predicate, Action<T> action);
 
         void Do(Action<T> action);

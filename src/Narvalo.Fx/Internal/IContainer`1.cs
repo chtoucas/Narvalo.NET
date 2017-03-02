@@ -3,6 +3,7 @@
 namespace Narvalo.Fx.Internal
 {
     using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Represents a container of zero or more values of type <typeparamref name="T"/>.
@@ -12,6 +13,10 @@ namespace Narvalo.Fx.Internal
     // **WARNING** If we update this interface, we should mirror the modifications in ISecondaryContainer<T>.
     internal interface IContainer<T>
     {
+        bool Contains(T value);
+
+        bool Contains(T value, IEqualityComparer<T> comparer);
+
         void When(Func<T, bool> predicate, Action<T> action);
 
         void Do(Action<T> action);

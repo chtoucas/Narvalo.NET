@@ -7,6 +7,7 @@ namespace Narvalo.Fx
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.CompilerServices;
+    using Internal;
 
     /// <summary>
     /// Represents the sum of two types. An instance of the <see cref="Either{TLeft, TRight}"/> class
@@ -41,24 +42,20 @@ namespace Narvalo.Fx
 
         public abstract Either<TRight, TLeft> Swap();
 
-        public abstract Either<TRight, TLeft> SwapUnchecked();
-
         /// <summary>
         /// Represents the left side of the <see cref="Either{TLeft, TRight}"/> type.
         /// </summary>
         [DebuggerTypeProxy(typeof(Either<,>.Left_.DebugView))]
         private sealed partial class Left_ : Either<TLeft, TRight>, IEquatable<Left_>
         {
-            private readonly TLeft _value;
-
             public Left_(TLeft value)
             {
-                _value = value;
+                Left = value;
             }
 
             public override bool IsLeft => true;
 
-            internal override TLeft Left => _value;
+            internal override TLeft Left { get; }
 
             internal override TRight Right { get { throw new InvalidOperationException("XXX"); } }
 
@@ -66,22 +63,21 @@ namespace Narvalo.Fx
 
             public override Maybe<TRight> RightOrNone() => Maybe<TRight>.None;
 
-            public override Either<TRight, TLeft> Swap() { throw new InvalidOperationException("XXX"); }
-
-            public override Either<TRight, TLeft> SwapUnchecked() => Either.OfRight<TRight, TLeft>(Left);
+            public override Either<TRight, TLeft> Swap() => Either.OfRight<TRight, TLeft>(Left);
 
             public bool Equals(Left_ other)
             {
-                if (other == this) { return true; }
-                if (other == null) { return false; }
+                if (ReferenceEquals(other, null)) { return false; }
+                if (ReferenceEquals(other, this)) { return true; }
+                // This class is sealed so no need to check:
+                // > if (other.GetType() != GetType()) { return false; }
 
                 return EqualityComparer<TLeft>.Default.Equals(Left, other.Left);
             }
 
             public override bool Equals(object obj) => Equals(obj as Left_);
 
-            public override int GetHashCode()
-                => Left == null ? 0 : EqualityComparer<TLeft>.Default.GetHashCode(Left);
+            public override int GetHashCode() => Left?.GetHashCode() ?? 0;
 
             public override string ToString() => Format.Current("Left({0})", Left);
 
@@ -110,18 +106,16 @@ namespace Narvalo.Fx
         [DebuggerTypeProxy(typeof(Either<,>.Right_.DebugView))]
         private sealed partial class Right_ : Either<TLeft, TRight>, IEquatable<Right_>
         {
-            private readonly TRight _value;
-
             public Right_(TRight value)
             {
-                _value = value;
+                Right = value;
             }
 
             public override bool IsLeft => false;
 
             internal override TLeft Left { get { throw new InvalidOperationException("XXX"); } }
 
-            internal override TRight Right => _value;
+            internal override TRight Right { get; }
 
             public override Maybe<TLeft> LeftOrNone() => Maybe<TLeft>.None;
 
@@ -129,20 +123,19 @@ namespace Narvalo.Fx
 
             public override Either<TRight, TLeft> Swap() => Either.OfLeft<TRight, TLeft>(Right);
 
-            public override Either<TRight, TLeft> SwapUnchecked() => Either.OfLeft<TRight, TLeft>(Right);
-
             public bool Equals(Right_ other)
             {
-                if (other == this) { return true; }
-                if (other == null) { return false; }
+                if (ReferenceEquals(other, null)) { return false; }
+                if (ReferenceEquals(other, this)) { return true; }
+                // This class is sealed so no need to check:
+                // > if (other.GetType() != GetType()) { return false; }
 
                 return EqualityComparer<TRight>.Default.Equals(Right, other.Right);
             }
 
             public override bool Equals(object obj) => Equals(obj as Right_);
 
-            public override int GetHashCode()
-                => Right == null ? 0 : EqualityComparer<TRight>.Default.GetHashCode(Right);
+            public override int GetHashCode() => Right?.GetHashCode() ?? 0;
 
             public override string ToString() => Format.Current("Right({0})", Right);
 
@@ -272,36 +265,68 @@ namespace Narvalo.Fx
     // Implements the Internal.IEither<TLeft, TRight> interface.
     public partial class Either<TLeft, TRight>
     {
+        public abstract bool ContainsLeft(TLeft value);
+        public abstract bool ContainsLeft(TLeft value, IEqualityComparer<TLeft> comparer);
+
+        public abstract bool ContainsRight(TRight value);
+        public abstract bool ContainsRight(TRight value, IEqualityComparer<TRight> comparer);
+
         public abstract TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight);
-
-        // Alias for WhenLeft().
-        // NB: We keep this one public as it overrides the auto-generated method.
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
-        public void When(Func<TLeft, bool> leftPredicate, Action<TLeft> action)
-            => WhenLeft(leftPredicate, action);
-
-        // Alias for WhenRight(). Publicly hidden.
-        void Internal.ISecondaryContainer<TRight>.When(Func<TRight, bool> rightPredicate, Action<TRight> action)
-            => WhenRight(rightPredicate, action);
 
         public abstract void Do(Action<TLeft> onLeft, Action<TRight> onRight);
 
-        // Alias for OnLeft(). Publicly hidden.
-        void Internal.IContainer<TLeft>.Do(Action<TLeft> onLeft) => OnLeft(onLeft);
-
-        // Alias for OnRight(). Publicly hidden.
-        void Internal.ISecondaryContainer<TRight>.Do(Action<TRight> onRight) => OnRight(onRight);
-
         public abstract void WhenLeft(Func<TLeft, bool> predicate, Action<TLeft> action);
-
         public abstract void WhenRight(Func<TRight, bool> predicate, Action<TRight> action);
 
         public abstract void OnLeft(Action<TLeft> action);
-
         public abstract void OnRight(Action<TRight> action);
+
+        // Alias for ContainsLeft(). Publicly hidden.
+        bool Internal.IContainer<TLeft>.Contains(TLeft value)
+            => ContainsLeft(value);
+
+        // Alias for ContainsLeft(). Publicly hidden.
+        bool Internal.IContainer<TLeft>.Contains(TLeft value, IEqualityComparer<TLeft> comparer)
+            => ContainsLeft(value, comparer);
+
+        // Alias for ContainsRight(). Publicly hidden.
+        bool Internal.ISecondaryContainer<TRight>.Contains(TRight value)
+            => ContainsRight(value);
+
+        // Alias for ContainsRight(). Publicly hidden.
+        bool Internal.ISecondaryContainer<TRight>.Contains(TRight value, IEqualityComparer<TRight> comparer)
+           => ContainsRight(value, comparer);
+
+        // Alias for WhenLeft(). Publicly hidden.
+        void Internal.IContainer<TLeft>.When(Func<TLeft, bool> predicate, Action<TLeft> action)
+            => WhenLeft(predicate, action);
+
+        // Alias for WhenRight(). Publicly hidden.
+        void Internal.ISecondaryContainer<TRight>.When(Func<TRight, bool> predicate, Action<TRight> action)
+            => WhenRight(predicate, action);
+
+        // Alias for OnLeft(). Publicly hidden.
+        void Internal.IContainer<TLeft>.Do(Action<TLeft> action) => OnLeft(action);
+
+        // Alias for OnRight(). Publicly hidden.
+        void Internal.ISecondaryContainer<TRight>.Do(Action<TRight> action) => OnRight(action);
 
         private partial class Left_
         {
+            public override bool ContainsLeft(TLeft value)
+                => EqualityComparer<TLeft>.Default.Equals(Left, value);
+
+            public override bool ContainsLeft(TLeft value, IEqualityComparer<TLeft> comparer)
+            {
+                Require.NotNull(comparer, nameof(comparer));
+
+                return comparer.Equals(Left, value);
+            }
+
+            public override bool ContainsRight(TRight value) => false;
+
+            public override bool ContainsRight(TRight value, IEqualityComparer<TRight> comparer) => false;
+
             public override TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
             {
                 Require.NotNull(caseLeft, nameof(caseLeft));
@@ -338,6 +363,20 @@ namespace Narvalo.Fx
 
         private partial class Right_
         {
+            public override bool ContainsLeft(TLeft value) => false;
+
+            public override bool ContainsLeft(TLeft value, IEqualityComparer<TLeft> comparer) => false;
+
+            public override bool ContainsRight(TRight value)
+                => EqualityComparer<TRight>.Default.Equals(Right, value);
+
+            public override bool ContainsRight(TRight value, IEqualityComparer<TRight> comparer)
+            {
+                Require.NotNull(comparer, nameof(comparer));
+
+                return comparer.Equals(Right, value);
+            }
+
             public override TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
             {
                 Require.NotNull(caseRight, nameof(caseRight));

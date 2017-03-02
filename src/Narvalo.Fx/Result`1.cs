@@ -203,6 +203,20 @@ namespace Narvalo.Fx
     // Implements the Internal.IEither<T, ExceptionDispatchInfo> interface.
     public partial struct Result<T>
     {
+        public bool Contains(T value)
+        {
+            if (IsError) { return false; }
+            return EqualityComparer<T>.Default.Equals(Value, value);
+        }
+
+        public bool Contains(T value, IEqualityComparer<T> comparer)
+        {
+            Require.NotNull(comparer, nameof(comparer));
+
+            if (IsError) { return false; }
+            return comparer.Equals(Value, value);
+        }
+
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "1#", Justification = "[Intentionally] Internal interface.")]
         public TResult Match<TResult>(
@@ -214,17 +228,6 @@ namespace Narvalo.Fx
 
             return IsSuccess ? caseSuccess(Value) : caseError(ExceptionInfo);
         }
-
-        // Alias for WhenSuccess().
-        // NB: We keep this one public as it overrides the auto-generated method.
-        public void When(Func<T, bool> predicate, Action<T> action)
-            => WhenSuccess(predicate, action);
-
-        // Alias for WhenError(). Publicly hidden.
-        void Internal.ISecondaryContainer<ExceptionDispatchInfo>.When(
-            Func<ExceptionDispatchInfo, bool> predicate,
-            Action<ExceptionDispatchInfo> action)
-            => WhenError(predicate, action);
 
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "1#", Justification = "[Intentionally] Internal interface.")]
@@ -242,13 +245,6 @@ namespace Narvalo.Fx
                 onError(ExceptionInfo);
             }
         }
-
-        // Alias for OnSuccess(). Publicly hidden.
-        void Internal.IContainer<T>.Do(Action<T> onSuccess) => OnSuccess(onSuccess);
-
-        // Alias for OnError(). Publicly hidden.
-        void Internal.ISecondaryContainer<ExceptionDispatchInfo>.Do(Action<ExceptionDispatchInfo> onError)
-            => OnError(onError);
 
         public void WhenSuccess(Func<T, bool> predicate, Action<T> action)
         {
@@ -281,6 +277,37 @@ namespace Narvalo.Fx
 
             if (IsError) { action(ExceptionInfo); }
         }
+
+        // Publicly hidden.
+        bool Internal.ISecondaryContainer<ExceptionDispatchInfo>.Contains(ExceptionDispatchInfo value)
+        {
+            throw new NotSupportedException("XXX");
+        }
+
+        // Publicly hidden.
+        bool Internal.ISecondaryContainer<ExceptionDispatchInfo>.Contains(
+            ExceptionDispatchInfo value,
+            IEqualityComparer<ExceptionDispatchInfo> comparer)
+        {
+            throw new NotSupportedException("XXX");
+        }
+
+        // Alias for WhenSuccess(). Publicly hidden.
+        void Internal.IContainer<T>.When(Func<T, bool> predicate, Action<T> action)
+           => WhenSuccess(predicate, action);
+
+        // Alias for WhenError(). Publicly hidden.
+        void Internal.ISecondaryContainer<ExceptionDispatchInfo>.When(
+            Func<ExceptionDispatchInfo, bool> predicate,
+            Action<ExceptionDispatchInfo> action)
+            => WhenError(predicate, action);
+
+        // Alias for OnSuccess(). Publicly hidden.
+        void Internal.IContainer<T>.Do(Action<T> action) => OnSuccess(action);
+
+        // Alias for OnError(). Publicly hidden.
+        void Internal.ISecondaryContainer<ExceptionDispatchInfo>.Do(Action<ExceptionDispatchInfo> action)
+            => OnError(action);
     }
 
     // Implements the Internal.Iterable<T> interface.
