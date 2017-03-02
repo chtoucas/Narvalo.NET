@@ -11,7 +11,6 @@
 
             Name = "Result";
             IsNullable = false;
-            EmitLinq = true;
         }
     }
 #>

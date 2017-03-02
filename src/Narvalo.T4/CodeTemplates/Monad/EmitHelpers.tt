@@ -55,7 +55,7 @@ public partial class MonadTemplate
         /// <summary>
         /// Promotes a function to use and return <see cref="<#= Name #>{T<#= RTDecl #>}" /> values.
         /// </summary>
-        /// <seealso cref="Select{T, TResult<#= RTDecl #>}" />
+        /// <seealso cref="<#= ExtensionsClsName #>.Select{T, TResult<#= RTDecl #>}" />
         public static Func<<#= Name #><T<#= RTDecl #>>, <#= Name #><TResult<#= RTDecl #>>> Lift<T, TResult<#= RTDecl #>>(
             Func<T, TResult> func)
             => arg =>
@@ -67,7 +67,6 @@ public partial class MonadTemplate
         /// <summary>
         /// Promotes a function to use and return <see cref="<#= Name #>{T<#= RTDecl #>}" /> values.
         /// </summary>
-        /// <seealso cref="Lift{T1, T2, TResult<#= RTDecl #>}" />
         public static Func<<#= Name #><T1<#= RTDecl #>>, <#= Name #><T2<#= RTDecl #>>, <#= Name #><TResult<#= RTDecl #>>>
             Lift<T1, T2, TResult<#= RTDecl #>>(Func<T1, T2, TResult> func)
             => (arg1, arg2) =>
@@ -79,7 +78,6 @@ public partial class MonadTemplate
         /// <summary>
         /// Promotes a function to use and return <see cref="<#= Name #>{T<#= RTDecl #>}" /> values.
         /// </summary>
-        /// <seealso cref="Lift{T1, T2, T3, TResult<#= RTDecl #>}" />
         public static Func<<#= Name #><T1<#= RTDecl #>>, <#= Name #><T2<#= RTDecl #>>, <#= Name #><T3<#= RTDecl #>>, <#= Name #><TResult<#= RTDecl #>>>
             Lift<T1, T2, T3, TResult<#= RTDecl #>>(Func<T1, T2, T3, TResult> func)
             => (arg1, arg2, arg3) =>
@@ -91,7 +89,6 @@ public partial class MonadTemplate
         /// <summary>
         /// Promotes a function to use and return <see cref="<#= Name #>{T<#= RTDecl #>}" /> values.
         /// </summary>
-        /// <seealso cref="Lift{T1, T2, T3, T4, TResult<#= RTDecl #>}" />
         public static Func<<#= Name #><T1<#= RTDecl #>>, <#= Name #><T2<#= RTDecl #>>, <#= Name #><T3<#= RTDecl #>>, <#= Name #><T4<#= RTDecl #>>, <#= Name #><TResult<#= RTDecl #>>>
             Lift<T1, T2, T3, T4, TResult<#= RTDecl #>>(
             Func<T1, T2, T3, T4, TResult> func)
@@ -104,7 +101,6 @@ public partial class MonadTemplate
         /// <summary>
         /// Promotes a function to use and return <see cref="<#= Name #>{T<#= RTDecl #>}" /> values.
         /// </summary>
-        /// <seealso cref="Lift{T1, T2, T3, T4, T5, TResult<#= RTDecl #>}" />
         public static Func<<#= Name #><T1<#= RTDecl #>>, <#= Name #><T2<#= RTDecl #>>, <#= Name #><T3<#= RTDecl #>>, <#= Name #><T4<#= RTDecl #>>, <#= Name #><T5<#= RTDecl #>>, <#= Name #><TResult<#= RTDecl #>>>
             Lift<T1, T2, T3, T4, T5, TResult<#= RTDecl #>>(
             Func<T1, T2, T3, T4, T5, TResult> func)

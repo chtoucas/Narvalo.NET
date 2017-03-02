@@ -63,7 +63,7 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadZero{T}" /> values.
         /// </summary>
-        /// <seealso cref="Select{T, TResult}" />
+        /// <seealso cref="MonadZero.Select{T, TResult}" />
         public static Func<MonadZero<T>, MonadZero<TResult>> Lift<T, TResult>(
             Func<T, TResult> func)
             => arg =>
@@ -75,7 +75,6 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadZero{T}" /> values.
         /// </summary>
-        /// <seealso cref="Lift{T1, T2, TResult}" />
         public static Func<MonadZero<T1>, MonadZero<T2>, MonadZero<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
             => (arg1, arg2) =>
@@ -87,7 +86,6 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadZero{T}" /> values.
         /// </summary>
-        /// <seealso cref="Lift{T1, T2, T3, TResult}" />
         public static Func<MonadZero<T1>, MonadZero<T2>, MonadZero<T3>, MonadZero<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
             => (arg1, arg2, arg3) =>
@@ -99,7 +97,6 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadZero{T}" /> values.
         /// </summary>
-        /// <seealso cref="Lift{T1, T2, T3, T4, TResult}" />
         public static Func<MonadZero<T1>, MonadZero<T2>, MonadZero<T3>, MonadZero<T4>, MonadZero<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> func)
@@ -112,7 +109,6 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadZero{T}" /> values.
         /// </summary>
-        /// <seealso cref="Lift{T1, T2, T3, T4, T5, TResult}" />
         public static Func<MonadZero<T1>, MonadZero<T2>, MonadZero<T3>, MonadZero<T4>, MonadZero<T5>, MonadZero<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> func)
@@ -186,7 +182,7 @@ namespace Edufun.Haskell.Templates
         public static MonadZero<global::Narvalo.Fx.Unit> Skip<TSource>(this MonadZero<TSource> @this)
         {
             Require.NotNull(@this, nameof(@this));
-            return @this.Then(Unit);
+            return @this.Then(MonadZero.Unit);
         }
 
         public static MonadZero<TResult> If<TSource, TResult>(
@@ -240,7 +236,6 @@ namespace Edufun.Haskell.Templates
             return @this.Zip(other, Tuple.Create);
         }
 
-        /// <seealso cref="Lift{TFirst, TSecond, TResult}" />
         public static MonadZero<TResult> Zip<TFirst, TSecond, TResult>(
             this MonadZero<TFirst> @this,
             MonadZero<TSecond> second,
@@ -255,7 +250,6 @@ namespace Edufun.Haskell.Templates
                     arg2 => zipper(arg1, arg2)));
         }
 
-        /// <seealso cref="Lift{T1, T2, T3, TResult}" />
         public static MonadZero<TResult> Zip<T1, T2, T3, TResult>(
             this MonadZero<T1> @this,
             MonadZero<T2> second,
@@ -273,7 +267,6 @@ namespace Edufun.Haskell.Templates
                         arg3 => zipper(arg1, arg2, arg3))));
         }
 
-        /// <seealso cref="Lift{T1, T2, T3, T4, TResult}" />
         public static MonadZero<TResult> Zip<T1, T2, T3, T4, TResult>(
              this MonadZero<T1> @this,
              MonadZero<T2> second,
@@ -294,7 +287,6 @@ namespace Edufun.Haskell.Templates
                             arg4 => zipper(arg1, arg2, arg3, arg4)))));
         }
 
-        /// <seealso cref="Lift{T1, T2, T3, T4, T5, TResult}" />
         public static MonadZero<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this MonadZero<T1> @this,
             MonadZero<T2> second,
@@ -340,9 +332,7 @@ namespace Edufun.Haskell.Templates
             return @this.Bind(val => predicate(val) ? MonadZero.Of(val) : MonadZero<TSource>.Zero);
         }
 
-        /// <remarks>
-        /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" />.
-        /// </remarks>
+        // Kind of generalisation of Zip{T1, T2, T3}.
         public static MonadZero<TResult> SelectMany<TSource, TMiddle, TResult>(
             this MonadZero<TSource> @this,
             Func<TSource, MonadZero<TMiddle>> valueSelector,
@@ -514,7 +504,6 @@ namespace Edufun.Haskell.Templates
         public static MonadZero<IEnumerable<TSource>> Collect<TSource>(
             this IEnumerable<MonadZero<TSource>> @this)
             => @this.CollectImpl();
-
     }
 }
 

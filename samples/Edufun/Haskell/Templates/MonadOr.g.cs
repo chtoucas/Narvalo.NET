@@ -63,7 +63,7 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadOr{T}" /> values.
         /// </summary>
-        /// <seealso cref="Select{T, TResult}" />
+        /// <seealso cref="MonadOr.Select{T, TResult}" />
         public static Func<MonadOr<T>, MonadOr<TResult>> Lift<T, TResult>(
             Func<T, TResult> func)
             => arg =>
@@ -75,7 +75,6 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadOr{T}" /> values.
         /// </summary>
-        /// <seealso cref="Lift{T1, T2, TResult}" />
         public static Func<MonadOr<T1>, MonadOr<T2>, MonadOr<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
             => (arg1, arg2) =>
@@ -87,7 +86,6 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadOr{T}" /> values.
         /// </summary>
-        /// <seealso cref="Lift{T1, T2, T3, TResult}" />
         public static Func<MonadOr<T1>, MonadOr<T2>, MonadOr<T3>, MonadOr<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
             => (arg1, arg2, arg3) =>
@@ -99,7 +97,6 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadOr{T}" /> values.
         /// </summary>
-        /// <seealso cref="Lift{T1, T2, T3, T4, TResult}" />
         public static Func<MonadOr<T1>, MonadOr<T2>, MonadOr<T3>, MonadOr<T4>, MonadOr<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> func)
@@ -112,7 +109,6 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadOr{T}" /> values.
         /// </summary>
-        /// <seealso cref="Lift{T1, T2, T3, T4, T5, TResult}" />
         public static Func<MonadOr<T1>, MonadOr<T2>, MonadOr<T3>, MonadOr<T4>, MonadOr<T5>, MonadOr<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> func)
@@ -186,7 +182,7 @@ namespace Edufun.Haskell.Templates
         public static MonadOr<global::Narvalo.Fx.Unit> Skip<TSource>(this MonadOr<TSource> @this)
         {
             Require.NotNull(@this, nameof(@this));
-            return @this.Then(Unit);
+            return @this.Then(MonadOr.Unit);
         }
 
         public static MonadOr<TResult> If<TSource, TResult>(
@@ -240,7 +236,6 @@ namespace Edufun.Haskell.Templates
             return @this.Zip(other, Tuple.Create);
         }
 
-        /// <seealso cref="Lift{TFirst, TSecond, TResult}" />
         public static MonadOr<TResult> Zip<TFirst, TSecond, TResult>(
             this MonadOr<TFirst> @this,
             MonadOr<TSecond> second,
@@ -255,7 +250,6 @@ namespace Edufun.Haskell.Templates
                     arg2 => zipper(arg1, arg2)));
         }
 
-        /// <seealso cref="Lift{T1, T2, T3, TResult}" />
         public static MonadOr<TResult> Zip<T1, T2, T3, TResult>(
             this MonadOr<T1> @this,
             MonadOr<T2> second,
@@ -273,7 +267,6 @@ namespace Edufun.Haskell.Templates
                         arg3 => zipper(arg1, arg2, arg3))));
         }
 
-        /// <seealso cref="Lift{T1, T2, T3, T4, TResult}" />
         public static MonadOr<TResult> Zip<T1, T2, T3, T4, TResult>(
              this MonadOr<T1> @this,
              MonadOr<T2> second,
@@ -294,7 +287,6 @@ namespace Edufun.Haskell.Templates
                             arg4 => zipper(arg1, arg2, arg3, arg4)))));
         }
 
-        /// <seealso cref="Lift{T1, T2, T3, T4, T5, TResult}" />
         public static MonadOr<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this MonadOr<T1> @this,
             MonadOr<T2> second,
@@ -340,9 +332,7 @@ namespace Edufun.Haskell.Templates
             return @this.Bind(val => predicate(val) ? MonadOr.Of(val) : MonadOr<TSource>.None);
         }
 
-        /// <remarks>
-        /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" />.
-        /// </remarks>
+        // Kind of generalisation of Zip{T1, T2, T3}.
         public static MonadOr<TResult> SelectMany<TSource, TMiddle, TResult>(
             this MonadOr<TSource> @this,
             Func<TSource, MonadOr<TMiddle>> valueSelector,

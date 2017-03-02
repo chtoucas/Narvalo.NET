@@ -53,7 +53,7 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Ident{T}" /> values.
         /// </summary>
-        /// <seealso cref="Select{T, TResult}" />
+        /// <seealso cref="Ident.Select{T, TResult}" />
         public static Func<Ident<T>, Ident<TResult>> Lift<T, TResult>(
             Func<T, TResult> func)
             => arg =>
@@ -65,7 +65,6 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Ident{T}" /> values.
         /// </summary>
-        /// <seealso cref="Lift{T1, T2, TResult}" />
         public static Func<Ident<T1>, Ident<T2>, Ident<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
             => (arg1, arg2) =>
@@ -77,7 +76,6 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Ident{T}" /> values.
         /// </summary>
-        /// <seealso cref="Lift{T1, T2, T3, TResult}" />
         public static Func<Ident<T1>, Ident<T2>, Ident<T3>, Ident<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
             => (arg1, arg2, arg3) =>
@@ -89,7 +87,6 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Ident{T}" /> values.
         /// </summary>
-        /// <seealso cref="Lift{T1, T2, T3, T4, TResult}" />
         public static Func<Ident<T1>, Ident<T2>, Ident<T3>, Ident<T4>, Ident<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> func)
@@ -102,7 +99,6 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Ident{T}" /> values.
         /// </summary>
-        /// <seealso cref="Lift{T1, T2, T3, T4, T5, TResult}" />
         public static Func<Ident<T1>, Ident<T2>, Ident<T3>, Ident<T4>, Ident<T5>, Ident<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> func)
@@ -176,7 +172,7 @@ namespace Narvalo.Fx
         public static Ident<global::Narvalo.Fx.Unit> Skip<TSource>(this Ident<TSource> @this)
         {
             /* T4: NotNull(@this) */
-            return @this.Then(Unit);
+            return @this.Then(Ident.Unit);
         }
 
         public static Ident<TResult> Coalesce<TSource, TResult>(
@@ -220,7 +216,6 @@ namespace Narvalo.Fx
             return @this.Zip(other, Tuple.Create);
         }
 
-        /// <seealso cref="Lift{TFirst, TSecond, TResult}" />
         public static Ident<TResult> Zip<TFirst, TSecond, TResult>(
             this Ident<TFirst> @this,
             Ident<TSecond> second,
@@ -235,7 +230,6 @@ namespace Narvalo.Fx
                     arg2 => zipper(arg1, arg2)));
         }
 
-        /// <seealso cref="Lift{T1, T2, T3, TResult}" />
         public static Ident<TResult> Zip<T1, T2, T3, TResult>(
             this Ident<T1> @this,
             Ident<T2> second,
@@ -253,7 +247,6 @@ namespace Narvalo.Fx
                         arg3 => zipper(arg1, arg2, arg3))));
         }
 
-        /// <seealso cref="Lift{T1, T2, T3, T4, TResult}" />
         public static Ident<TResult> Zip<T1, T2, T3, T4, TResult>(
              this Ident<T1> @this,
              Ident<T2> second,
@@ -274,7 +267,6 @@ namespace Narvalo.Fx
                             arg4 => zipper(arg1, arg2, arg3, arg4)))));
         }
 
-        /// <seealso cref="Lift{T1, T2, T3, T4, T5, TResult}" />
         public static Ident<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this Ident<T1> @this,
             Ident<T2> second,
@@ -311,9 +303,7 @@ namespace Narvalo.Fx
             return @this.Bind(val => Ident.Of(selector(val)));
         }
 
-        /// <remarks>
-        /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" />.
-        /// </remarks>
+        // Kind of generalisation of Zip{T1, T2, T3}.
         public static Ident<TResult> SelectMany<TSource, TMiddle, TResult>(
             this Ident<TSource> @this,
             Func<TSource, Ident<TMiddle>> valueSelector,
@@ -372,7 +362,6 @@ namespace Narvalo.Fx
         public static Ident<IEnumerable<TSource>> Collect<TSource>(
             this IEnumerable<Ident<TSource>> @this)
             => @this.CollectImpl();
-
     }
 }
 

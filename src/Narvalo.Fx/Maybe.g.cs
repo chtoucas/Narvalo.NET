@@ -60,7 +60,7 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Maybe{T}" /> values.
         /// </summary>
-        /// <seealso cref="Select{T, TResult}" />
+        /// <seealso cref="Maybe.Select{T, TResult}" />
         public static Func<Maybe<T>, Maybe<TResult>> Lift<T, TResult>(
             Func<T, TResult> func)
             => arg =>
@@ -72,7 +72,6 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Maybe{T}" /> values.
         /// </summary>
-        /// <seealso cref="Lift{T1, T2, TResult}" />
         public static Func<Maybe<T1>, Maybe<T2>, Maybe<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
             => (arg1, arg2) =>
@@ -84,7 +83,6 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Maybe{T}" /> values.
         /// </summary>
-        /// <seealso cref="Lift{T1, T2, T3, TResult}" />
         public static Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
             => (arg1, arg2, arg3) =>
@@ -96,7 +94,6 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Maybe{T}" /> values.
         /// </summary>
-        /// <seealso cref="Lift{T1, T2, T3, T4, TResult}" />
         public static Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<T4>, Maybe<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> func)
@@ -109,7 +106,6 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Maybe{T}" /> values.
         /// </summary>
-        /// <seealso cref="Lift{T1, T2, T3, T4, T5, TResult}" />
         public static Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<T4>, Maybe<T5>, Maybe<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> func)
@@ -183,7 +179,7 @@ namespace Narvalo.Fx
         public static Maybe<global::Narvalo.Fx.Unit> Skip<TSource>(this Maybe<TSource> @this)
         {
             /* T4: NotNull(@this) */
-            return @this.Then(Unit);
+            return @this.Then(Maybe.Unit);
         }
 
         public static Maybe<TResult> If<TSource, TResult>(
@@ -237,7 +233,6 @@ namespace Narvalo.Fx
             return @this.Zip(other, Tuple.Create);
         }
 
-        /// <seealso cref="Lift{TFirst, TSecond, TResult}" />
         public static Maybe<TResult> Zip<TFirst, TSecond, TResult>(
             this Maybe<TFirst> @this,
             Maybe<TSecond> second,
@@ -252,7 +247,6 @@ namespace Narvalo.Fx
                     arg2 => zipper(arg1, arg2)));
         }
 
-        /// <seealso cref="Lift{T1, T2, T3, TResult}" />
         public static Maybe<TResult> Zip<T1, T2, T3, TResult>(
             this Maybe<T1> @this,
             Maybe<T2> second,
@@ -270,7 +264,6 @@ namespace Narvalo.Fx
                         arg3 => zipper(arg1, arg2, arg3))));
         }
 
-        /// <seealso cref="Lift{T1, T2, T3, T4, TResult}" />
         public static Maybe<TResult> Zip<T1, T2, T3, T4, TResult>(
              this Maybe<T1> @this,
              Maybe<T2> second,
@@ -291,7 +284,6 @@ namespace Narvalo.Fx
                             arg4 => zipper(arg1, arg2, arg3, arg4)))));
         }
 
-        /// <seealso cref="Lift{T1, T2, T3, T4, T5, TResult}" />
         public static Maybe<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this Maybe<T1> @this,
             Maybe<T2> second,
@@ -337,9 +329,7 @@ namespace Narvalo.Fx
             return @this.Bind(val => predicate(val) ? Maybe.Of(val) : Maybe<TSource>.None);
         }
 
-        /// <remarks>
-        /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" />.
-        /// </remarks>
+        // Kind of generalisation of Zip{T1, T2, T3}.
         public static Maybe<TResult> SelectMany<TSource, TMiddle, TResult>(
             this Maybe<TSource> @this,
             Func<TSource, Maybe<TMiddle>> valueSelector,

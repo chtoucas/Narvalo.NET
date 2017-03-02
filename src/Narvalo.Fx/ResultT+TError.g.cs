@@ -44,7 +44,7 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Result{T, TError}" /> values.
         /// </summary>
-        /// <seealso cref="Select{T, TResult, TError}" />
+        /// <seealso cref="ResultExtensions.Select{T, TResult, TError}" />
         public static Func<Result<T, TError>, Result<TResult, TError>> Lift<T, TResult, TError>(
             Func<T, TResult> func)
             => arg =>
@@ -56,7 +56,6 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Result{T, TError}" /> values.
         /// </summary>
-        /// <seealso cref="Lift{T1, T2, TResult, TError}" />
         public static Func<Result<T1, TError>, Result<T2, TError>, Result<TResult, TError>>
             Lift<T1, T2, TResult, TError>(Func<T1, T2, TResult> func)
             => (arg1, arg2) =>
@@ -68,7 +67,6 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Result{T, TError}" /> values.
         /// </summary>
-        /// <seealso cref="Lift{T1, T2, T3, TResult, TError}" />
         public static Func<Result<T1, TError>, Result<T2, TError>, Result<T3, TError>, Result<TResult, TError>>
             Lift<T1, T2, T3, TResult, TError>(Func<T1, T2, T3, TResult> func)
             => (arg1, arg2, arg3) =>
@@ -80,7 +78,6 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Result{T, TError}" /> values.
         /// </summary>
-        /// <seealso cref="Lift{T1, T2, T3, T4, TResult, TError}" />
         public static Func<Result<T1, TError>, Result<T2, TError>, Result<T3, TError>, Result<T4, TError>, Result<TResult, TError>>
             Lift<T1, T2, T3, T4, TResult, TError>(
             Func<T1, T2, T3, T4, TResult> func)
@@ -93,7 +90,6 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Result{T, TError}" /> values.
         /// </summary>
-        /// <seealso cref="Lift{T1, T2, T3, T4, T5, TResult, TError}" />
         public static Func<Result<T1, TError>, Result<T2, TError>, Result<T3, TError>, Result<T4, TError>, Result<T5, TError>, Result<TResult, TError>>
             Lift<T1, T2, T3, T4, T5, TResult, TError>(
             Func<T1, T2, T3, T4, T5, TResult> func)
@@ -211,7 +207,6 @@ namespace Narvalo.Fx
             return @this.Zip(other, Tuple.Create);
         }
 
-        /// <seealso cref="Lift{TFirst, TSecond, TResult, TError}" />
         public static Result<TResult, TError> Zip<TFirst, TSecond, TResult, TError>(
             this Result<TFirst, TError> @this,
             Result<TSecond, TError> second,
@@ -226,7 +221,6 @@ namespace Narvalo.Fx
                     arg2 => zipper(arg1, arg2)));
         }
 
-        /// <seealso cref="Lift{T1, T2, T3, TResult, TError}" />
         public static Result<TResult, TError> Zip<T1, T2, T3, TResult, TError>(
             this Result<T1, TError> @this,
             Result<T2, TError> second,
@@ -244,7 +238,6 @@ namespace Narvalo.Fx
                         arg3 => zipper(arg1, arg2, arg3))));
         }
 
-        /// <seealso cref="Lift{T1, T2, T3, T4, TResult, TError}" />
         public static Result<TResult, TError> Zip<T1, T2, T3, T4, TResult, TError>(
              this Result<T1, TError> @this,
              Result<T2, TError> second,
@@ -265,7 +258,6 @@ namespace Narvalo.Fx
                             arg4 => zipper(arg1, arg2, arg3, arg4)))));
         }
 
-        /// <seealso cref="Lift{T1, T2, T3, T4, T5, TResult, TError}" />
         public static Result<TResult, TError> Zip<T1, T2, T3, T4, T5, TResult, TError>(
             this Result<T1, TError> @this,
             Result<T2, TError> second,
@@ -302,9 +294,7 @@ namespace Narvalo.Fx
             return @this.Bind(val => Result.Of<TResult, TError>(selector(val)));
         }
 
-        /// <remarks>
-        /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" />.
-        /// </remarks>
+        // Kind of generalisation of Zip{T1, T2, T3}.
         public static Result<TResult, TError> SelectMany<TSource, TMiddle, TResult, TError>(
             this Result<TSource, TError> @this,
             Func<TSource, Result<TMiddle, TError>> valueSelector,

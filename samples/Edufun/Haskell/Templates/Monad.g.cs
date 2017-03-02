@@ -56,7 +56,7 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="Monad{T}" /> values.
         /// </summary>
-        /// <seealso cref="Select{T, TResult}" />
+        /// <seealso cref="Monad.Select{T, TResult}" />
         public static Func<Monad<T>, Monad<TResult>> Lift<T, TResult>(
             Func<T, TResult> func)
             => arg =>
@@ -68,7 +68,6 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="Monad{T}" /> values.
         /// </summary>
-        /// <seealso cref="Lift{T1, T2, TResult}" />
         public static Func<Monad<T1>, Monad<T2>, Monad<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
             => (arg1, arg2) =>
@@ -80,7 +79,6 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="Monad{T}" /> values.
         /// </summary>
-        /// <seealso cref="Lift{T1, T2, T3, TResult}" />
         public static Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
             => (arg1, arg2, arg3) =>
@@ -92,7 +90,6 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="Monad{T}" /> values.
         /// </summary>
-        /// <seealso cref="Lift{T1, T2, T3, T4, TResult}" />
         public static Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<T4>, Monad<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> func)
@@ -105,7 +102,6 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="Monad{T}" /> values.
         /// </summary>
-        /// <seealso cref="Lift{T1, T2, T3, T4, T5, TResult}" />
         public static Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<T4>, Monad<T5>, Monad<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> func)
@@ -179,7 +175,7 @@ namespace Edufun.Haskell.Templates
         public static Monad<global::Narvalo.Fx.Unit> Skip<TSource>(this Monad<TSource> @this)
         {
             Require.NotNull(@this, nameof(@this));
-            return @this.Then(Unit);
+            return @this.Then(Monad.Unit);
         }
 
         public static Monad<TResult> Coalesce<TSource, TResult>(
@@ -223,7 +219,6 @@ namespace Edufun.Haskell.Templates
             return @this.Zip(other, Tuple.Create);
         }
 
-        /// <seealso cref="Lift{TFirst, TSecond, TResult}" />
         public static Monad<TResult> Zip<TFirst, TSecond, TResult>(
             this Monad<TFirst> @this,
             Monad<TSecond> second,
@@ -238,7 +233,6 @@ namespace Edufun.Haskell.Templates
                     arg2 => zipper(arg1, arg2)));
         }
 
-        /// <seealso cref="Lift{T1, T2, T3, TResult}" />
         public static Monad<TResult> Zip<T1, T2, T3, TResult>(
             this Monad<T1> @this,
             Monad<T2> second,
@@ -256,7 +250,6 @@ namespace Edufun.Haskell.Templates
                         arg3 => zipper(arg1, arg2, arg3))));
         }
 
-        /// <seealso cref="Lift{T1, T2, T3, T4, TResult}" />
         public static Monad<TResult> Zip<T1, T2, T3, T4, TResult>(
              this Monad<T1> @this,
              Monad<T2> second,
@@ -277,7 +270,6 @@ namespace Edufun.Haskell.Templates
                             arg4 => zipper(arg1, arg2, arg3, arg4)))));
         }
 
-        /// <seealso cref="Lift{T1, T2, T3, T4, T5, TResult}" />
         public static Monad<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this Monad<T1> @this,
             Monad<T2> second,
@@ -314,9 +306,7 @@ namespace Edufun.Haskell.Templates
             return @this.Bind(val => Monad.Of(selector(val)));
         }
 
-        /// <remarks>
-        /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" />.
-        /// </remarks>
+        // Kind of generalisation of Zip{T1, T2, T3}.
         public static Monad<TResult> SelectMany<TSource, TMiddle, TResult>(
             this Monad<TSource> @this,
             Func<TSource, Monad<TMiddle>> valueSelector,
@@ -375,7 +365,6 @@ namespace Edufun.Haskell.Templates
         public static Monad<IEnumerable<TSource>> Collect<TSource>(
             this IEnumerable<Monad<TSource>> @this)
             => @this.CollectImpl();
-
     }
 }
 

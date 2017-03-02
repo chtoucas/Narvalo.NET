@@ -53,7 +53,7 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Result{T}" /> values.
         /// </summary>
-        /// <seealso cref="Select{T, TResult}" />
+        /// <seealso cref="ResultExtensions.Select{T, TResult}" />
         public static Func<Result<T>, Result<TResult>> Lift<T, TResult>(
             Func<T, TResult> func)
             => arg =>
@@ -65,7 +65,6 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Result{T}" /> values.
         /// </summary>
-        /// <seealso cref="Lift{T1, T2, TResult}" />
         public static Func<Result<T1>, Result<T2>, Result<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
             => (arg1, arg2) =>
@@ -77,7 +76,6 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Result{T}" /> values.
         /// </summary>
-        /// <seealso cref="Lift{T1, T2, T3, TResult}" />
         public static Func<Result<T1>, Result<T2>, Result<T3>, Result<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
             => (arg1, arg2, arg3) =>
@@ -89,7 +87,6 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Result{T}" /> values.
         /// </summary>
-        /// <seealso cref="Lift{T1, T2, T3, T4, TResult}" />
         public static Func<Result<T1>, Result<T2>, Result<T3>, Result<T4>, Result<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> func)
@@ -102,7 +99,6 @@ namespace Narvalo.Fx
         /// <summary>
         /// Promotes a function to use and return <see cref="Result{T}" /> values.
         /// </summary>
-        /// <seealso cref="Lift{T1, T2, T3, T4, T5, TResult}" />
         public static Func<Result<T1>, Result<T2>, Result<T3>, Result<T4>, Result<T5>, Result<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> func)
@@ -220,7 +216,6 @@ namespace Narvalo.Fx
             return @this.Zip(other, Tuple.Create);
         }
 
-        /// <seealso cref="Lift{TFirst, TSecond, TResult}" />
         public static Result<TResult> Zip<TFirst, TSecond, TResult>(
             this Result<TFirst> @this,
             Result<TSecond> second,
@@ -235,7 +230,6 @@ namespace Narvalo.Fx
                     arg2 => zipper(arg1, arg2)));
         }
 
-        /// <seealso cref="Lift{T1, T2, T3, TResult}" />
         public static Result<TResult> Zip<T1, T2, T3, TResult>(
             this Result<T1> @this,
             Result<T2> second,
@@ -253,7 +247,6 @@ namespace Narvalo.Fx
                         arg3 => zipper(arg1, arg2, arg3))));
         }
 
-        /// <seealso cref="Lift{T1, T2, T3, T4, TResult}" />
         public static Result<TResult> Zip<T1, T2, T3, T4, TResult>(
              this Result<T1> @this,
              Result<T2> second,
@@ -274,7 +267,6 @@ namespace Narvalo.Fx
                             arg4 => zipper(arg1, arg2, arg3, arg4)))));
         }
 
-        /// <seealso cref="Lift{T1, T2, T3, T4, T5, TResult}" />
         public static Result<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this Result<T1> @this,
             Result<T2> second,
@@ -311,9 +303,7 @@ namespace Narvalo.Fx
             return @this.Bind(val => Result.Of(selector(val)));
         }
 
-        /// <remarks>
-        /// Kind of generalisation of <see cref="Zip{T1, T2, T3}" />.
-        /// </remarks>
+        // Kind of generalisation of Zip{T1, T2, T3}.
         public static Result<TResult> SelectMany<TSource, TMiddle, TResult>(
             this Result<TSource> @this,
             Func<TSource, Result<TMiddle>> valueSelector,

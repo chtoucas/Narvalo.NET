@@ -1,11 +1,12 @@
 ﻿Monads
 ------
 
+In general we do not support type constraints.
+
 For types with more than one generic type aprameter, we do not provide any kind of support for:
 - the main (monadic) type parameter must be the one on the far left
 - LINQ
 - MonadOr, where HasZero is true
-- type constraints
 
 We do not implement methods which are related to the way Haskell handles actions with side-effects:
 - Monad::Forever
