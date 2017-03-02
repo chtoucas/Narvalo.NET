@@ -3,24 +3,24 @@
 namespace Narvalo.Fx
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.CompilerServices;
-    using Internal;
 
     /// <summary>
     /// Represents the sum of two types. An instance of the <see cref="Either{TLeft, TRight}"/> class
     /// contains either a <c>TLeft</c> value or a <c>TRight</c> value but not both.
-    /// <para>This class is a "monad" of the left type parameter, nevertheless using
-    /// <see cref="Either{TLeft, TRight}.Swap"/> you can easily turn it into a "monad" of the
+    /// <para>This class is a "monad" for the left type parameter, nevertheless using
+    /// <see cref="Either{TLeft, TRight}.Swap"/> you can easily turn it into a "monad" for the
     /// right type parameter.</para>
     /// </summary>
     /// <remarks>The enclosed value might be null.</remarks>
     /// <typeparam name="TLeft">The underlying type of the left part.</typeparam>
     /// <typeparam name="TRight">The underlying type of the right part.</typeparam>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public abstract partial class Either<TLeft, TRight> : Internal.IEither<TLeft, TRight>
+    public abstract partial class Either<TLeft, TRight> : IStructuralEquatable, Internal.IEither<TLeft, TRight>
     {
         private Either() { }
 
@@ -410,5 +410,34 @@ namespace Narvalo.Fx
                 action(Right);
             }
         }
+    }
+
+    // Implements the IStructuralEquatable interface.
+    public partial class Either<TLeft, TRight>
+    {
+        bool IStructuralEquatable.Equals(object other, IEqualityComparer comparer)
+        {
+            if (ReferenceEquals(other, null)) { return false; }
+            if (ReferenceEquals(other, this)) { return true; }
+
+            if (IsLeft)
+            {
+                var obj = other as Either<TLeft, TRight>.Left_;
+                return obj != null && comparer.Equals(Left, obj.Left);
+            }
+            else
+            {
+                var obj = other as Either<TLeft, TRight>.Right_;
+                return obj != null && comparer.Equals(Right, obj.Right);
+            }
+        }
+
+        int IStructuralEquatable.GetHashCode(IEqualityComparer comparer)
+            => CombineHashCodes(
+                IsLeft ? comparer.GetHashCode(Left) : 0,
+                IsRight ? comparer.GetHashCode(Right) : 0);
+
+        // Borrowed from https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Tuple.cs
+        private static int CombineHashCodes(int h1, int h2) => (((h1 << 5) + h1) ^ h2);
     }
 }

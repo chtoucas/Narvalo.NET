@@ -24,7 +24,7 @@ namespace Narvalo.Fx
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     [DebuggerTypeProxy(typeof(Result<,>.DebugView))]
     public partial struct Result<T, TError>
-        : IEquatable<Result<T, TError>>, Internal.IEither<T, TError>, Internal.Iterable<T>
+        : IEquatable<Result<T, TError>>, IStructuralEquatable, Internal.IEither<T, TError>, Internal.Iterable<T>
     {
         private readonly T _value;
         private readonly TError _error;
@@ -318,7 +318,7 @@ namespace Narvalo.Fx
         public IEnumerator<T> GetEnumerator() => ToEnumerable().GetEnumerator();
     }
 
-    // Implements the IEquatable<Result<T, TError>> interface.
+    // Implements the IEquatable<Result<T, TError>> and IStructuralEquatable interfaces.
     public partial struct Result<T, TError>
     {
         public static bool operator ==(Result<T, TError> left, Result<T, TError> right) => left.Equals(right);
@@ -331,23 +331,24 @@ namespace Narvalo.Fx
             return other.IsError && EqualityComparer<TError>.Default.Equals(Error, other.Error);
         }
 
-        public bool Equals(Result<T, TError> other, IEqualityComparer comparer)
-        {
-            Require.NotNull(comparer, nameof(comparer));
-
-            if (IsSuccess) { return other.IsSuccess && comparer.Equals(Value, other.Value); }
-            return other.IsError && comparer.Equals(Error, other.Error);
-        }
-
         public override bool Equals(object obj)
             => (obj is Result<T, TError>) && Equals((Result<T, TError>)obj);
 
-        public bool Equals(object other, IEqualityComparer comparer)
-            => (other is Result<T, TError>) && Equals((Result<T, TError>)other, comparer);
-
         public override int GetHashCode() => IsSuccess ? Value.GetHashCode() : Error.GetHashCode();
 
-        public int GetHashCode(IEqualityComparer comparer)
+        bool IStructuralEquatable.Equals(object other, IEqualityComparer comparer)
+        {
+            Require.NotNull(comparer, nameof(comparer));
+
+            if (ReferenceEquals(other, null) || !(other is Result<T, TError>)) { return false; }
+
+            var obj = (Result<T, TError>)other;
+
+            if (IsSuccess) { return obj.IsSuccess && comparer.Equals(Value, obj.Value); }
+            return obj.IsError && comparer.Equals(Error, obj.Error);
+        }
+
+        int IStructuralEquatable.GetHashCode(IEqualityComparer comparer)
         {
             Require.NotNull(comparer, nameof(comparer));
 
