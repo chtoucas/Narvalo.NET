@@ -3,6 +3,7 @@
 namespace Narvalo.Fx
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.ExceptionServices;
@@ -11,7 +12,7 @@ namespace Narvalo.Fx
 
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     [DebuggerTypeProxy(typeof(Result.DebugView))]
-    public partial struct Result : IEquatable<Result>
+    public partial struct Result : IEquatable<Result>, Internal.IEither<Unit, ExceptionDispatchInfo>
     {
         private readonly ExceptionDispatchInfo _exceptionInfo;
 
@@ -85,6 +86,122 @@ namespace Narvalo.Fx
         }
 
         public static explicit operator ExceptionDispatchInfo(Result value) => value.ToExceptionInfo();
+    }
+
+    // Implements the Internal.IEither<Unit, ExceptionDispatchInfo> interface.
+    public partial struct Result
+    {
+        public TResult Match<TResult>(
+            Func<TResult> caseSuccess,
+            Func<ExceptionDispatchInfo, TResult> caseError)
+        {
+            Require.NotNull(caseSuccess, nameof(caseSuccess));
+            Require.NotNull(caseError, nameof(caseError));
+
+            return IsSuccess ? caseSuccess() : caseError(ExceptionInfo);
+        }
+
+        public void Do(Action onSuccess, Action<ExceptionDispatchInfo> onError)
+        {
+            Require.NotNull(onSuccess, nameof(onSuccess));
+            Require.NotNull(onError, nameof(onError));
+
+            if (IsSuccess)
+            {
+                onSuccess();
+            }
+            else
+            {
+                onError(ExceptionInfo);
+            }
+        }
+
+        public void WhenSuccess(Func<bool> predicate, Action action)
+        {
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            if (IsSuccess && predicate()) { action(); }
+        }
+
+        public void WhenError(
+            Func<ExceptionDispatchInfo, bool> predicate,
+            Action<ExceptionDispatchInfo> action)
+        {
+            Require.NotNull(predicate, nameof(predicate));
+            Require.NotNull(action, nameof(action));
+
+            if (IsError && predicate(ExceptionInfo)) { action(ExceptionInfo); }
+        }
+
+        public void OnSuccess(Action action)
+        {
+            Require.NotNull(action, nameof(action));
+
+            if (IsSuccess) { action(); }
+        }
+
+        public void OnError(Action<ExceptionDispatchInfo> action)
+        {
+            Require.NotNull(action, nameof(action));
+
+            if (IsError) { action(ExceptionInfo); }
+        }
+
+        #region Publicly hidden methods.
+
+        bool Internal.IContainer<Unit>.Contains(Unit value)
+        {
+            throw new NotSupportedException();
+        }
+
+        bool Internal.IContainer<Unit>.Contains(Unit value, IEqualityComparer<Unit> comparer)
+        {
+            throw new NotSupportedException();
+        }
+
+        bool Internal.ISecondaryContainer<ExceptionDispatchInfo>.Contains(ExceptionDispatchInfo value)
+        {
+            throw new NotSupportedException();
+        }
+
+        bool Internal.ISecondaryContainer<ExceptionDispatchInfo>.Contains(
+            ExceptionDispatchInfo value,
+            IEqualityComparer<ExceptionDispatchInfo> comparer)
+        {
+            throw new NotSupportedException();
+        }
+
+        // Alias for Match().
+        TResult Internal.IEither<Unit, ExceptionDispatchInfo>.Match<TResult>(
+            Func<Unit, TResult> caseLeft,
+            Func<ExceptionDispatchInfo, TResult> caseRight)
+            => Match(() => caseLeft(Narvalo.Fx.Unit.Default), caseRight);
+
+        // Alias for Do().
+        void Internal.IEither<Unit, ExceptionDispatchInfo>.Do(
+            Action<Unit> onLeft,
+            Action<ExceptionDispatchInfo> onRight)
+            => Do(() => onLeft(Narvalo.Fx.Unit.Default), onRight);
+
+        // Alias for WhenSuccess().
+        void Internal.IContainer<Unit>.When(Func<Unit, bool> predicate, Action<Unit> action)
+            => WhenSuccess(() => predicate(Narvalo.Fx.Unit.Default), () => action(Narvalo.Fx.Unit.Default));
+
+        // Alias for WhenError().
+        void Internal.ISecondaryContainer<ExceptionDispatchInfo>.When(
+            Func<ExceptionDispatchInfo, bool> predicate,
+            Action<ExceptionDispatchInfo> action)
+            => WhenError(predicate, action);
+
+        // Alias for OnSuccess().
+        void Internal.IContainer<Unit>.Do(Action<Unit> action) => OnSuccess(() => action(Narvalo.Fx.Unit.Default));
+
+        // Alias for OnError().
+        void Internal.ISecondaryContainer<ExceptionDispatchInfo>.Do(Action<ExceptionDispatchInfo> action)
+            => OnError(action);
+
+        #endregion
     }
 
     // Implements the IEquatable<Result> interface.
