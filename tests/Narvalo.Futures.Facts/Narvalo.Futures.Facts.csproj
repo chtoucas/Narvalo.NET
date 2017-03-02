@@ -35,9 +35,6 @@
     <Compile Include="Finance\CheckDigitsFacts.cs" />
     <Compile Include="Finance\Currencies\CurrencyActivatorFacts.cs" />
     <Compile Include="Fx\Extensions\NullableFacts.cs" />
-    <Compile Include="Fx\ResultOrErrorFacts.cs" />
-    <Compile Include="Fx\SwitchFacts.cs" />
-    <Compile Include="Fx\ResultFacts.cs" />
     <Compile Include="GuardFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

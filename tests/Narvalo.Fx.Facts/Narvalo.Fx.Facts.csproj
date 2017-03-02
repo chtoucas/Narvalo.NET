@@ -31,6 +31,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EitherFacts.cs" />
+    <Compile Include="ResultFacts.cs" />
     <Compile Include="ResultT.g.cs">
       <DependentUpon>ResultT.tt</DependentUpon>
       <AutoGen>True</AutoGen>
