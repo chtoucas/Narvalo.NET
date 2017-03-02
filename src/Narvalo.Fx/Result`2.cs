@@ -15,6 +15,7 @@ namespace Narvalo.Fx
     using HashHelpers = Narvalo.Fx.Internal.HashHelpers;
 
     // Typical use case:
+    // - Result<T, TError> is a value type; its primary use is for return type. for long-lived objects prefer Either<T, TError>.
     // - Result<T, string> for lightweight error reporting to the caller;
     //   think of it as a verbose Maybe<T>.
     // Few recommendations:
@@ -22,7 +23,6 @@ namespace Narvalo.Fx
     // - Result<T, Exception> should be used only in very rare situations; this is **not** a
     //   replacement for the standard exception mechanism in .NET. See Result and Result<T>
     //   for better alternatives.
-    // - Result<T, TError> is a value type; for long-lived objects prefer Either<T, TError>.
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     [DebuggerTypeProxy(typeof(Result<,>.DebugView))]
     public partial struct Result<T, TError>
@@ -31,11 +31,19 @@ namespace Narvalo.Fx
         private readonly T _value;
         private readonly TError _error;
 
-        private Result(T value, TError error, bool isSuccess)
+        private Result(T value)
+        {
+            _error = default(TError);
+            _value = value;
+            IsSuccess = true;
+        }
+
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "isSuccess", Justification = "[Intentionally] Only added to disambiguate the two ctors when T = TError.")]
+        private Result(TError error, bool isSuccess)
         {
             _error = error;
-            _value = value;
-            IsSuccess = isSuccess;
+            _value = default(T);
+            IsSuccess = false;
         }
 
         /// <summary>
@@ -154,9 +162,9 @@ namespace Narvalo.Fx
 
         public static explicit operator TError(Result<T, TError> value) => value.ToError();
 
-        public static explicit operator Result<T, TError>(T value) => Result.Of<T, TError>(value);
+        public static explicit operator Result<T, TError>(T value) => η(value);
 
-        public static explicit operator Result<T, TError>(TError error) => Result.FromError<T, TError>(error);
+        public static explicit operator Result<T, TError>(TError error) => FromError(error);
     }
 
     // Provides the core Monad methods.
@@ -166,17 +174,17 @@ namespace Narvalo.Fx
         {
             Require.NotNull(selector, nameof(selector));
 
-            return IsSuccess ? selector(Value) : Result.FromError<TResult, TError>(Error);
+            return IsSuccess ? selector(Value) : Result<TResult, TError>.FromError(Error);
         }
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static Result<T, TError> η(T value) => new Result<T, TError>(value, default(TError), true);
+        internal static Result<T, TError> η(T value) => new Result<T, TError>(value);
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Result<T, TError> μ(Result<Result<T, TError>, TError> square)
-            => square.IsSuccess ? square.Value : Result.FromError<T, TError>(square.Error);
+            => square.IsSuccess ? square.Value : FromError(square.Error);
     }
 
     // Minimalist implementation of a monad on TError.
@@ -186,14 +194,14 @@ namespace Narvalo.Fx
         {
             Require.NotNull(selector, nameof(selector));
 
-            return IsError ? selector(Error) : Result.Of<T, TResult>(Value);
+            return IsError ? selector(Error) : Result<T, TResult>.η(Value);
         }
 
         public Result<T, TResult> SelectError<TResult>(Func<TError, TResult> selector)
         {
             Require.NotNull(selector, nameof(selector));
 
-            return IsError ? Result.FromError<T, TResult>(selector(Error)) : Result.Of<T, TResult>(Value);
+            return IsError ? Result<T, TResult>.FromError(selector(Error)) : Result<T, TResult>.η(Value);
         }
 
         [DebuggerHidden]
@@ -202,13 +210,13 @@ namespace Narvalo.Fx
         {
             Require.NotNullUnconstrained(error, nameof(error));
 
-            return new Result<T, TError>(default(T), error, false);
+            return new Result<T, TError>(error, false);
         }
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Result<T, TError> FlattenError(Result<T, Result<T, TError>> square)
-            => square.IsError ? square.Error : Result.Of<T, TError>(square.Value);
+            => square.IsError ? square.Error : η(square.Value);
     }
 
     // Implements the Internal.IEither<T, TError> interface.
