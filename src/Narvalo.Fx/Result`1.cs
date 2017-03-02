@@ -12,6 +12,8 @@ namespace Narvalo.Fx
 
     using Narvalo.Fx.Properties;
 
+    using HashHelpers = Narvalo.Fx.Internal.HashHelpers;
+
     /// <summary>
     /// Represents the outcome of a computation which might have thrown an exception.
     /// An instance of the <see cref="Result{T}"/> class contains either a <c>T</c>
@@ -346,13 +348,13 @@ namespace Narvalo.Fx
             => (other is Result<T>) && Equals((Result<T>)other, comparer);
 
         public override int GetHashCode()
-            => IsSuccess ? Value.GetHashCode() : ExceptionInfo.GetHashCode();
+            => HashHelpers.Combine(_value?.GetHashCode() ?? 0, _exceptionInfo?.GetHashCode() ?? 0);
 
         public int GetHashCode(IEqualityComparer<T> comparer)
         {
             Require.NotNull(comparer, nameof(comparer));
 
-            return IsSuccess ? comparer.GetHashCode(Value) : ExceptionInfo.GetHashCode();
+            return HashHelpers.Combine(comparer.GetHashCode(_value), _exceptionInfo?.GetHashCode() ?? 0);
         }
     }
 }

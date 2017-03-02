@@ -12,6 +12,8 @@ namespace Narvalo.Fx
 
     using Narvalo.Fx.Properties;
 
+    using HashHelpers = Narvalo.Fx.Internal.HashHelpers;
+
     // Typical use case:
     // - Result<T, string> for lightweight error reporting to the caller;
     //   think of it as a verbose Maybe<T>.
@@ -334,7 +336,8 @@ namespace Narvalo.Fx
         public override bool Equals(object obj)
             => (obj is Result<T, TError>) && Equals((Result<T, TError>)obj);
 
-        public override int GetHashCode() => IsSuccess ? Value.GetHashCode() : Error.GetHashCode();
+        public override int GetHashCode()
+            => HashHelpers.Combine(_value?.GetHashCode() ?? 0, _error?.GetHashCode() ?? 0);
 
         bool IStructuralEquatable.Equals(object other, IEqualityComparer comparer)
         {
@@ -352,7 +355,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(comparer, nameof(comparer));
 
-            return IsSuccess ? comparer.GetHashCode(Value) : comparer.GetHashCode(Error);
+            return HashHelpers.Combine(comparer.GetHashCode(_value), comparer.GetHashCode(_error));
         }
     }
 }

@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="Either.cs" />
     <Compile Include="Either`2.cs" />
+    <Compile Include="Internal\HashHelpers.cs" />
     <Compile Include="Result.cs" />
     <Compile Include="Ident.g.cs">
       <DependentUpon>Ident.tt</DependentUpon>

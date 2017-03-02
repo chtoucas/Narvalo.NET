@@ -9,6 +9,8 @@ namespace Narvalo.Fx
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.CompilerServices;
 
+    using HashHelpers = Narvalo.Fx.Internal.HashHelpers;
+
     /// <summary>
     /// Represents the sum of two types. An instance of the <see cref="Either{TLeft, TRight}"/> class
     /// contains either a <c>TLeft</c> value or a <c>TRight</c> value but not both.
@@ -438,21 +440,9 @@ namespace Narvalo.Fx
         {
             Require.NotNull(comparer, nameof(comparer));
 
-            return CombineHashCodes(
+            return HashHelpers.Combine(
                 IsLeft ? comparer.GetHashCode(Left) : 0,
                 IsRight ? comparer.GetHashCode(Right) : 0);
-        }
-
-        // Borrowed from https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Tuple.cs
-        private static int CombineHashCodes_(int h1, int h2) => (((h1 << 5) + h1) ^ h2);
-
-        // Borrowed from https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Numerics/Hashing/HashHelpers.cs
-        private static int CombineHashCodes(int h1, int h2)
-        {
-            // RyuJIT optimizes this to use the ROL instruction
-            // Related GitHub pull request: dotnet/coreclr#1830
-            uint rol5 = ((uint)h1 << 5) | ((uint)h1 >> 27);
-            return ((int)rol5 + h1) ^ h2;
         }
     }
 }
