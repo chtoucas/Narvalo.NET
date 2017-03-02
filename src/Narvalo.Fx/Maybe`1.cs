@@ -315,8 +315,7 @@ namespace Narvalo.Fx
         public bool Equals(object other, IEqualityComparer<T> comparer)
             => (other is Maybe<T>) && Equals((Maybe<T>)other, comparer);
 
-        public override int GetHashCode()
-            => IsSome ? Value.GetHashCode() : 0;
+        public override int GetHashCode() => _value?.GetHashCode() ?? 0;
 
         public int GetHashCode(IEqualityComparer<T> comparer)
         {

@@ -102,6 +102,6 @@ namespace Narvalo.Fx
 
         public override bool Equals(object obj) => (obj is Result) && Equals((Result)obj);
 
-        public override int GetHashCode() => IsError ? ExceptionInfo.GetHashCode() : 0;
+        public override int GetHashCode() => _exceptionInfo?.GetHashCode() ?? 0;
     }
 }
