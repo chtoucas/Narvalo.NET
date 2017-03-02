@@ -112,6 +112,8 @@ namespace Narvalo.Fx
         /// <summary>
         /// Represents a debugger type proxy for <see cref="Maybe{T}"/>.
         /// </summary>
+        /// <remarks>Ensure that <see cref="Maybe{T}.Value"/> does not throw in the debugger
+        /// for DEBUG builds.</remarks>
         [ExcludeFromCodeCoverage]
         private sealed class DebugView
         {
@@ -124,7 +126,7 @@ namespace Narvalo.Fx
 
             public bool IsSome => _inner.IsSome;
 
-            public T Value => IsSome ? _inner.Value : default(T);
+            public T Value => _inner._value;
         }
     }
 

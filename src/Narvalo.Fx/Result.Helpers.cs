@@ -33,8 +33,7 @@ namespace Narvalo.Fx
 
     public partial struct Result
     {
-        // NB: This method is **not** the trywith from F# workflows.
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of VoidOrError.")]
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of this method.")]
         public static Result TryWith(Action action)
         {
             Require.NotNull(action, nameof(action));
@@ -42,18 +41,15 @@ namespace Narvalo.Fx
             try
             {
                 action.Invoke();
-
                 return Result.Void;
             }
             catch (Exception ex)
             {
                 var edi = ExceptionDispatchInfo.Capture(ex);
-
                 return FromError(edi);
             }
         }
 
-        // NB: This method is **not** the trywith from F# workflows.
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of ResultOrError.")]
         public static Result<TResult> TryWith<TResult>(Func<TResult> func)
         {
@@ -66,13 +62,11 @@ namespace Narvalo.Fx
             catch (Exception ex)
             {
                 var edi = ExceptionDispatchInfo.Capture(ex);
-
                 return FromError<TResult>(edi);
             }
         }
 
-        // NB: This method is **not** the tryfinally from F# workflows.
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of VoidOrError.")]
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of this method.")]
         public static Result TryFinally(Action action, Action finallyAction)
         {
             Require.NotNull(action, nameof(action));
@@ -81,13 +75,11 @@ namespace Narvalo.Fx
             try
             {
                 action.Invoke();
-
                 return Result.Void;
             }
             catch (Exception ex)
             {
                 var edi = ExceptionDispatchInfo.Capture(ex);
-
                 return FromError(edi);
             }
             finally
@@ -96,7 +88,6 @@ namespace Narvalo.Fx
             }
         }
 
-        // NB: This method is **not** the tryfinally from F# workflows.
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of ResultOrError.")]
         public static Result<TResult> TryFinally<TResult>(Func<TResult> func, Action finallyAction)
         {
@@ -110,7 +101,6 @@ namespace Narvalo.Fx
             catch (Exception ex)
             {
                 var edi = ExceptionDispatchInfo.Capture(ex);
-
                 return FromError<TResult>(edi);
             }
             finally

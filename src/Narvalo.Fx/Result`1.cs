@@ -10,6 +10,8 @@ namespace Narvalo.Fx
     using System.Runtime.CompilerServices;
     using System.Runtime.ExceptionServices;
 
+    using Narvalo.Fx.Properties;
+
     /// <summary>
     /// Represents the outcome of a computation which might have thrown an exception.
     /// An instance of the <see cref="Result{T}"/> class contains either a <c>T</c>
@@ -40,6 +42,8 @@ namespace Narvalo.Fx
 
         private Result(ExceptionDispatchInfo exceptionInfo)
         {
+            Demand.NotNull(exceptionInfo);
+
             _exceptionInfo = exceptionInfo;
             _value = default(T);
             IsSuccess = false;
@@ -94,6 +98,7 @@ namespace Narvalo.Fx
         public T ValueOrElse(Func<T> valueFactory)
         {
             Require.NotNull(valueFactory, nameof(valueFactory));
+
             return IsSuccess ? Value : valueFactory();
         }
 
@@ -111,6 +116,8 @@ namespace Narvalo.Fx
         /// <summary>
         /// Represents a debugger type proxy for <see cref="Result{T}"/>.
         /// </summary>
+        /// <remarks>Ensure that <see cref="Result{T}.Value"/> and <see cref="Result{T}.ExceptionInfo"/>
+        /// do not throw in the debugger for DEBUG builds.</remarks>
         [ExcludeFromCodeCoverage]
         private sealed class DebugView
         {
@@ -134,19 +141,13 @@ namespace Narvalo.Fx
     {
         public T ToValue()
         {
-            if (IsError) { throw new InvalidCastException("XXX"); }
+            if (IsError) { throw new InvalidCastException(Strings.InvalidCast_ToSuccess); }
             return Value;
-        }
-
-        public Exception ToException()
-        {
-            if (IsSuccess) { throw new InvalidCastException("XXX"); }
-            return ExceptionInfo.SourceException;
         }
 
         public ExceptionDispatchInfo ToExceptionInfo()
         {
-            if (IsSuccess) { throw new InvalidCastException("XXX"); }
+            if (IsSuccess) { throw new InvalidCastException(Strings.InvalidCast_ToError); }
             return ExceptionInfo;
         }
 
@@ -157,26 +158,18 @@ namespace Narvalo.Fx
         public static explicit operator ExceptionDispatchInfo(Result<T> value) => value.ToExceptionInfo();
 
         public static explicit operator Result<T>(T value) => Result.Of(value);
-
-        public static explicit operator Result<T>(ExceptionDispatchInfo exceptionInfo)
-        {
-            if (exceptionInfo == null) { throw new InvalidCastException("XXX"); }
-            return Result.FromError<T>(exceptionInfo);
-        }
     }
 
     // Core Monad methods.
     public partial struct Result<T>
     {
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of VoidOrError.")]
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of this method.")]
         public Result<TResult> Bind<TResult>(Func<T, Result<TResult>> selector)
         {
             Require.NotNull(selector, nameof(selector));
 
             if (IsError) { return Result.FromError<TResult>(ExceptionInfo); }
 
-            // Catching all exceptions is not a good practice, but here it makes sense, since
-            // the type is supposed to encode the exception too.
             try
             {
                 return selector(Value);
@@ -278,12 +271,14 @@ namespace Narvalo.Fx
         public void OnSuccess(Action<T> action)
         {
             Require.NotNull(action, nameof(action));
+
             if (IsSuccess) { action(Value); }
         }
 
         public void OnError(Action<ExceptionDispatchInfo> action)
         {
             Require.NotNull(action, nameof(action));
+
             if (IsError) { action(ExceptionInfo); }
         }
     }

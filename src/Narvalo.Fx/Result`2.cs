@@ -10,6 +10,8 @@ namespace Narvalo.Fx
     using System.Linq;
     using System.Runtime.CompilerServices;
 
+    using Narvalo.Fx.Properties;
+
     // Typical use cases and recommendations:
     // - Result<T, TError> is a value type; for long-lived objects you should use Either<T, TError>.
     // - Result<T, string> for lightweight error reporting to the caller;
@@ -79,6 +81,8 @@ namespace Narvalo.Fx
         /// <summary>
         /// Represents a debugger type proxy for <see cref="Result{T, TError}"/>.
         /// </summary>
+        /// <remarks>Ensure that <see cref="Result{T, TError}.Value"/> and
+        /// <see cref="Result{T, TError}.Error"/> do not throw in the debugger for DEBUG builds.</remarks>
         [ExcludeFromCodeCoverage]
         private sealed class DebugView
         {
@@ -102,19 +106,19 @@ namespace Narvalo.Fx
     {
         public T ToValue()
         {
-            if (IsError) { throw new InvalidCastException("XXX"); }
+            if (IsError) { throw new InvalidCastException(Strings.InvalidCast_ToSuccess); }
             return Value;
         }
 
         public TError ToError()
         {
-            if (IsSuccess) { throw new InvalidCastException("XXX"); }
+            if (IsSuccess) { throw new InvalidCastException(Strings.InvalidCast_ToError); }
             return Error;
         }
 
         public Maybe<T> ToMaybe() => ValueOrNone();
 
-        // NB: In Haskell, the error is the left type parameter.
+        // NB: In Haskell, the error is encoded in the left parameter.
         public Either<T, TError> ToEither()
             => IsSuccess ? Either.OfLeft<T, TError>(Value) : Either.OfRight<T, TError>(Error);
 

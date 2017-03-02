@@ -88,6 +88,8 @@ namespace Narvalo.Fx
             /// <summary>
             /// Represents a debugger type proxy for <see cref="Either{TLeft, TRight}.Left_"/>.
             /// </summary>
+            /// <remarks>Ensure that <see cref="Either{TLeft, TRight}.Left"/> does not throw
+            /// in the debugger for DEBUG builds.</remarks>
             [ExcludeFromCodeCoverage]
             private sealed class DebugView
             {
@@ -147,6 +149,8 @@ namespace Narvalo.Fx
             /// <summary>
             /// Represents a debugger type proxy for <see cref="Either{TLeft, TRight}.Right_"/>.
             /// </summary>
+            /// <remarks>Ensure that <see cref="Either{TLeft, TRight}.Right"/> does not throw
+            /// in the debugger for DEBUG builds.</remarks>
             [ExcludeFromCodeCoverage]
             private sealed class DebugView
             {

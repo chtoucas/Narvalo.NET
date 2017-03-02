@@ -7,6 +7,9 @@ namespace Narvalo.Fx
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.ExceptionServices;
 
+    using Narvalo.Fx.Properties;
+
+    // Friendly version of Result<Unit>.
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     [DebuggerTypeProxy(typeof(Result.DebugView))]
     public partial struct Result : IEquatable<Result>
@@ -15,6 +18,8 @@ namespace Narvalo.Fx
 
         private Result(ExceptionDispatchInfo exceptionInfo)
         {
+            Demand.NotNull(exceptionInfo);
+
             _exceptionInfo = exceptionInfo;
             IsError = true;
         }
@@ -40,6 +45,8 @@ namespace Narvalo.Fx
         /// <summary>
         /// Represents a debugger type proxy for <see cref="Result"/>.
         /// </summary>
+        /// <remarks>Ensure that <see cref="Result.ExceptionInfo"/> does not throw in the debugger
+        /// for DEBUG builds.</remarks>
         [ExcludeFromCodeCoverage]
         private sealed class DebugView
         {
@@ -59,22 +66,13 @@ namespace Narvalo.Fx
     // Conversion operators.
     public partial struct Result
     {
-        public Exception ToException()
-        {
-            if (IsSuccess) { throw new InvalidCastException("XXX"); }
-            return ExceptionInfo.SourceException;
-        }
-
         public ExceptionDispatchInfo ToExceptionInfo()
         {
-            if (IsSuccess) { throw new InvalidCastException("XXX"); }
+            if (IsSuccess) { throw new InvalidCastException(Strings.InvalidCast_ToError); }
             return ExceptionInfo;
         }
 
         public static explicit operator ExceptionDispatchInfo(Result value) => value.ToExceptionInfo();
-
-        public static explicit operator Result(ExceptionDispatchInfo exceptionInfo)
-            => FromError(exceptionInfo);
     }
 
     // Implements the IEquatable<Result> interfaces.
@@ -87,11 +85,10 @@ namespace Narvalo.Fx
         public bool Equals(Result other)
         {
             if (IsError) { return ReferenceEquals(ExceptionInfo, other.ExceptionInfo); }
-
             return other.IsSuccess;
         }
 
-        public override bool Equals(object obj) => obj is Result && Equals((Result)obj);
+        public override bool Equals(object obj) => (obj is Result) && Equals((Result)obj);
 
         public override int GetHashCode() => IsError ? ExceptionInfo.GetHashCode() : 0;
     }
