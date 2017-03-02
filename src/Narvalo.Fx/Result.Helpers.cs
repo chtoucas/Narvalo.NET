@@ -41,7 +41,7 @@ namespace Narvalo.Fx
             try
             {
                 action.Invoke();
-                return Result.Void;
+                return Void;
             }
             catch (Exception ex)
             {
@@ -75,7 +75,7 @@ namespace Narvalo.Fx
             try
             {
                 action.Invoke();
-                return Result.Void;
+                return Void;
             }
             catch (Exception ex)
             {

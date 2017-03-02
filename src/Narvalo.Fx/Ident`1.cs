@@ -22,61 +22,6 @@ namespace Narvalo.Fx
         public T Value { get; }
     }
 
-    // Implements the IEquatable<Ident<T>> and IEquatable<T> interfaces.
-    public partial struct Ident<T>
-    {
-        public static bool operator ==(Ident<T> left, Ident<T> right) => left.Equals(right);
-
-        public static bool operator !=(Ident<T> left, Ident<T> right) => !left.Equals(right);
-
-        public bool Equals(Ident<T> other) => Equals(other, EqualityComparer<T>.Default);
-
-        public bool Equals(Ident<T> other, IEqualityComparer<T> comparer)
-        {
-            Require.NotNull(comparer, nameof(comparer));
-
-            if (Value == null)
-            {
-                return other.Value == null;
-            }
-
-            return comparer.Equals(Value, other.Value);
-        }
-
-        public bool Equals(T other) => Equals(η(other), EqualityComparer<T>.Default);
-
-        public bool Equals(T other, IEqualityComparer<T> comparer)
-            => Equals(η(other), comparer);
-
-        public override bool Equals(object obj) => Equals(obj, EqualityComparer<T>.Default);
-
-        public bool Equals(object other, IEqualityComparer<T> comparer)
-        {
-            Require.NotNull(comparer, nameof(comparer));
-
-            if (other is Ident<T>)
-            {
-                return Equals((Ident<T>)other, comparer);
-            }
-
-            if (other is T)
-            {
-                return Equals((T)other, comparer);
-            }
-
-            return false;
-        }
-
-        public override int GetHashCode() => GetHashCode(EqualityComparer<T>.Default);
-
-        public int GetHashCode(IEqualityComparer<T> comparer)
-        {
-            Require.NotNull(comparer, nameof(comparer));
-
-            return Value != null ? comparer.GetHashCode(Value) : 0;
-        }
-    }
-
     // Provides the core Monad methods.
     public partial struct Ident<T>
     {
@@ -172,5 +117,54 @@ namespace Narvalo.Fx
         public IEnumerable<T> ToEnumerable() => Sequence.Of(Value);
 
         public IEnumerator<T> GetEnumerator() => ToEnumerable().GetEnumerator();
+    }
+
+    // Implements the IEquatable<Ident<T>> and IEquatable<T> interfaces.
+    public partial struct Ident<T>
+    {
+        public static bool operator ==(Ident<T> left, Ident<T> right) => left.Equals(right);
+
+        public static bool operator !=(Ident<T> left, Ident<T> right) => !left.Equals(right);
+
+        public bool Equals(Ident<T> other) => EqualityComparer<T>.Default.Equals(Value, other.Value);
+
+        public bool Equals(Ident<T> other, IEqualityComparer<T> comparer)
+        {
+            Require.NotNull(comparer, nameof(comparer));
+
+            return comparer.Equals(Value, other.Value);
+        }
+
+        public bool Equals(T other) => EqualityComparer<T>.Default.Equals(Value, other);
+
+        public bool Equals(T other, IEqualityComparer<T> comparer)
+        {
+            Require.NotNull(comparer, nameof(comparer));
+
+            return comparer.Equals(Value, other);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Ident<T>) { return Equals((Ident<T>)obj); }
+            if (obj is T) { return Equals((T)obj); }
+            return false;
+        }
+
+        public bool Equals(object other, IEqualityComparer<T> comparer)
+        {
+            if (other is Ident<T>) { return Equals((Ident<T>)other, comparer); }
+            if (other is T) { return Equals((T)other, comparer); }
+            return false;
+        }
+
+        public override int GetHashCode() => Value?.GetHashCode() ?? 0;
+
+        public int GetHashCode(IEqualityComparer<T> comparer)
+        {
+            Require.NotNull(comparer, nameof(comparer));
+
+            return comparer.GetHashCode(Value);
+        }
     }
 }

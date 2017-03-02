@@ -9,7 +9,6 @@ namespace Narvalo.Fx
 
     using Narvalo.Fx.Properties;
 
-    // Friendly version of Result<Unit>.
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     [DebuggerTypeProxy(typeof(Result.DebugView))]
     public partial struct Result : IEquatable<Result>
@@ -24,10 +23,23 @@ namespace Narvalo.Fx
             IsError = true;
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the object is the result of an unsuccessful computation.
+        /// </summary>
+        /// <value>true if the outcome was unsuccessful; otherwise false.</value>
         public bool IsError { get; }
 
+        /// <summary>
+        /// Gets a value indicating whether the object is the result of a successful computation.
+        /// </summary>
+        /// <value>true if the outcome was successful; otherwise false.</value>
         public bool IsSuccess => !IsError;
 
+        /// <summary>
+        /// Obtains the captured exception state.
+        /// </summary>
+        /// <remarks>Any access to this method must be protected by checking before that
+        /// <see cref="IsError"/> is true.</remarks>
         internal ExceptionDispatchInfo ExceptionInfo { get { Demand.State(IsError); return _exceptionInfo; } }
 
         [ExcludeFromCodeCoverage]
@@ -75,7 +87,7 @@ namespace Narvalo.Fx
         public static explicit operator ExceptionDispatchInfo(Result value) => value.ToExceptionInfo();
     }
 
-    // Implements the IEquatable<Result> interfaces.
+    // Implements the IEquatable<Result> interface.
     public partial struct Result
     {
         public static bool operator ==(Result left, Result right) => left.Equals(right);
@@ -84,7 +96,7 @@ namespace Narvalo.Fx
 
         public bool Equals(Result other)
         {
-            if (IsError) { return ReferenceEquals(ExceptionInfo, other.ExceptionInfo); }
+            if (IsError) { return other.IsError && ReferenceEquals(ExceptionInfo, other.ExceptionInfo); }
             return other.IsSuccess;
         }
 

@@ -52,25 +52,27 @@ namespace Narvalo.Fx
         /// <summary>
         /// Gets a value indicating whether the object is the result of a successful computation.
         /// </summary>
-        /// <remarks>Most of the time, you don't need to access this property.
-        /// You are better off using the rich vocabulary that this class offers.</remarks>
         /// <value>true if the outcome was successful; otherwise false.</value>
         public bool IsSuccess { get; }
 
+        /// <summary>
+        /// Gets a value indicating whether the object is the result of an unsuccessful computation.
+        /// </summary>
+        /// <value>true if the outcome was unsuccessful; otherwise false.</value>
         public bool IsError => !IsSuccess;
 
         /// <summary>
-        /// Obtains the enclosed value.
+        /// Obtains the enclosed value if any.
         /// </summary>
         /// <remarks>Any access to this method must be protected by checking before that
         /// <see cref="IsSuccess"/> is true.</remarks>
         internal T Value { get { Demand.State(IsSuccess); return _value; } }
 
         /// <summary>
-        /// Obtains the enclosed exception state.
+        /// Obtains the captured exception state.
         /// </summary>
         /// <remarks>Any access to this method must be protected by checking before that
-        /// <see cref="IsSuccess"/> is false.</remarks>
+        /// <see cref="IsError"/> is true.</remarks>
         internal ExceptionDispatchInfo ExceptionInfo { get { Demand.State(IsError); return _exceptionInfo; } }
 
         [ExcludeFromCodeCoverage]
@@ -83,16 +85,16 @@ namespace Narvalo.Fx
         }
 
         /// <summary>
-        /// Obtains the underlying value if any; otherwise the default value of the type T.
+        /// Obtains the enclosed value if any; otherwise the default value of the type T.
         /// </summary>
-        /// <returns>The underlying value if any; otherwise the default value of the type T.</returns>
         public T ValueOrDefault() => _value;
 
+        public Maybe<T> ValueOrNone() => IsSuccess ? Maybe.Of(Value) : Maybe<T>.None;
+
         /// <summary>
-        /// Returns the underlying value if any; otherwise <paramref name="other"/>.
+        /// Returns the enclosed value if any; otherwise <paramref name="other"/>.
         /// </summary>
         /// <param name="other">A default value to be used if if there is no underlying value.</param>
-        /// <returns>The underlying value if any; otherwise <paramref name="other"/>.</returns>
         public T ValueOrElse(T other) => IsSuccess ? Value : other;
 
         public T ValueOrElse(Func<T> valueFactory)
@@ -101,8 +103,6 @@ namespace Narvalo.Fx
 
             return IsSuccess ? Value : valueFactory();
         }
-
-        public Maybe<T> ValueOrNone() => IsSuccess ? Maybe.Of(Value) : Maybe<T>.None;
 
         public T ValueOrThrow()
         {
@@ -291,45 +291,41 @@ namespace Narvalo.Fx
         public IEnumerator<T> GetEnumerator() => ToEnumerable().GetEnumerator();
     }
 
-    // Implements the IEquatable<Result<T>> interfaces.
+    // Implements the IEquatable<Result<T>> interface.
     public partial struct Result<T>
     {
-        public static bool operator ==(Result<T> left, Result<T> right)
-            => left.Equals(right, EqualityComparer<T>.Default);
+        public static bool operator ==(Result<T> left, Result<T> right) => left.Equals(right);
 
-        public static bool operator !=(Result<T> left, Result<T> right)
-            => !left.Equals(right, EqualityComparer<T>.Default);
+        public static bool operator !=(Result<T> left, Result<T> right) => !left.Equals(right);
 
-        public bool Equals(Result<T> other) => Equals(other, EqualityComparer<T>.Default);
+        public bool Equals(Result<T> other)
+        {
+            if (IsSuccess) { return other.IsSuccess && EqualityComparer<T>.Default.Equals(Value, other.Value); }
+            return other.IsError && ReferenceEquals(ExceptionInfo, other.ExceptionInfo);
+        }
 
         public bool Equals(Result<T> other, IEqualityComparer<T> comparer)
         {
             Require.NotNull(comparer, nameof(comparer));
 
-            if (IsSuccess) { return comparer.Equals(Value, other.Value); }
-
+            if (IsSuccess) { return other.IsSuccess && comparer.Equals(Value, other.Value); }
             return other.IsError && ReferenceEquals(ExceptionInfo, other.ExceptionInfo);
         }
 
         public override bool Equals(object obj)
-            => obj is Result<T> && Equals((Result<T>)obj, EqualityComparer<T>.Default);
+            => (obj is Result<T>) && Equals((Result<T>)obj);
 
         public bool Equals(object other, IEqualityComparer<T> comparer)
-            => other is Result<T> && Equals((Result<T>)other, comparer);
+            => (other is Result<T>) && Equals((Result<T>)other, comparer);
 
-        public override int GetHashCode() => GetHashCode(EqualityComparer<T>.Default);
+        public override int GetHashCode()
+            => IsSuccess ? Value.GetHashCode() : ExceptionInfo.GetHashCode();
 
         public int GetHashCode(IEqualityComparer<T> comparer)
         {
             Require.NotNull(comparer, nameof(comparer));
 
-            unchecked
-            {
-                int hash = 17;
-                hash = 31 * hash + IsSuccess.GetHashCode();
-                hash = 31 * hash + (IsSuccess ? comparer.GetHashCode(Value) : ExceptionInfo.GetHashCode());
-                return hash;
-            }
+            return IsSuccess ? comparer.GetHashCode(Value) : ExceptionInfo.GetHashCode();
         }
     }
 }

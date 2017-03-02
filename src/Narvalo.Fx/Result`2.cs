@@ -12,14 +12,15 @@ namespace Narvalo.Fx
 
     using Narvalo.Fx.Properties;
 
-    // Typical use cases and recommendations:
-    // - Result<T, TError> is a value type; for long-lived objects you should use Either<T, TError>.
+    // Typical use case:
     // - Result<T, string> for lightweight error reporting to the caller;
     //   think of it as a verbose Maybe<T>.
-    // - For methods with void return type, you should use Result or Maybe<TError>.
+    // Few recommendations:
+    // - For methods with a void return type, prefer Result or Maybe<TError>.
     // - Result<T, Exception> should be used only in very rare situations; this is **not** a
     //   replacement for the standard exception mechanism in .NET. See Result and Result<T>
-    //   for other alternatives.
+    //   for better alternatives.
+    // - Result<T, TError> is a value type; for long-lived objects prefer Either<T, TError>.
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     [DebuggerTypeProxy(typeof(Result<,>.DebugView))]
     public partial struct Result<T, TError>
@@ -35,20 +36,47 @@ namespace Narvalo.Fx
             IsSuccess = isSuccess;
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the object is the result of a successful computation.
+        /// </summary>
+        /// <value>true if the outcome was successful; otherwise false.</value>
         public bool IsSuccess { get; }
 
+        /// <summary>
+        /// Gets a value indicating whether the object is the result of an unsuccessful computation.
+        /// </summary>
+        /// <value>true if the outcome was unsuccessful; otherwise false.</value>
         public bool IsError => !IsSuccess;
 
+        /// <summary>
+        /// Obtains the enclosed value if any.
+        /// </summary>
+        /// <remarks>Any access to this method must be protected by checking before that
+        /// <see cref="IsSuccess"/> is true.</remarks>
         internal T Value { get { Demand.State(IsSuccess); return _value; } }
 
+        /// <summary>
+        /// Obtains the enclosed error if any.
+        /// </summary>
+        /// <remarks>Any access to this method must be protected by checking before that
+        /// <see cref="IsError"/> is true.</remarks>
         internal TError Error { get { Demand.State(IsError); return _error; } }
 
         [ExcludeFromCodeCoverage]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
         private string DebuggerDisplay => IsSuccess ? "Success" : "Error";
 
+        /// <summary>
+        /// Obtains the enclosed value if any; otherwise the default value of the type T.
+        /// </summary>
         public T ValueOrDefault() => _value;
 
+        public Maybe<T> ValueOrNone() => IsSuccess ? Maybe.Of(Value) : Maybe<T>.None;
+
+        /// <summary>
+        /// Returns the enclosed value if any; otherwise <paramref name="other"/>.
+        /// </summary>
+        /// <param name="other">A default value to be used if if there is no underlying value.</param>
         public T ValueOrElse(T other) => IsSuccess ? Value : other;
 
         public T ValueOrElse(Func<T> valueFactory)
@@ -56,8 +84,6 @@ namespace Narvalo.Fx
             Require.NotNull(valueFactory, nameof(valueFactory));
             return IsSuccess ? Value : valueFactory();
         }
-
-        public Maybe<T> ValueOrNone() => IsSuccess ? Maybe.Of(Value) : Maybe<T>.None;
 
         public T ValueOrThrow(Exception exception)
         {
@@ -118,7 +144,7 @@ namespace Narvalo.Fx
 
         public Maybe<T> ToMaybe() => ValueOrNone();
 
-        // NB: In Haskell, the error is encoded in the left parameter.
+        // NB: In Haskell, the error is the left parameter.
         public Either<T, TError> ToEither()
             => IsSuccess ? Either.OfLeft<T, TError>(Value) : Either.OfRight<T, TError>(Error);
 
@@ -267,7 +293,7 @@ namespace Narvalo.Fx
         public IEnumerator<T> GetEnumerator() => ToEnumerable().GetEnumerator();
     }
 
-    // Implements the IEquatable<Result<T, TError>> interfaces.
+    // Implements the IEquatable<Result<T, TError>> interface.
     public partial struct Result<T, TError>
     {
         public static bool operator ==(Result<T, TError> left, Result<T, TError> right) => left.Equals(right);
@@ -277,7 +303,6 @@ namespace Narvalo.Fx
         public bool Equals(Result<T, TError> other)
         {
             if (IsSuccess) { return other.IsSuccess && EqualityComparer<T>.Default.Equals(Value, other.Value); }
-
             return other.IsError && EqualityComparer<TError>.Default.Equals(Error, other.Error);
         }
 
@@ -286,38 +311,22 @@ namespace Narvalo.Fx
             Require.NotNull(comparer, nameof(comparer));
 
             if (IsSuccess) { return other.IsSuccess && comparer.Equals(Value, other.Value); }
-
             return other.IsError && comparer.Equals(Error, other.Error);
         }
 
         public override bool Equals(object obj)
-            => obj is Result<T, TError> && Equals((Result<T, TError>)obj);
+            => (obj is Result<T, TError>) && Equals((Result<T, TError>)obj);
 
         public bool Equals(object other, IEqualityComparer comparer)
-            => other is Result<T, TError> && Equals((Result<T, TError>)other, comparer);
+            => (other is Result<T, TError>) && Equals((Result<T, TError>)other, comparer);
 
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 17;
-                hash = 31 * hash + IsSuccess.GetHashCode();
-                hash = 31 * hash + (IsSuccess ? Value.GetHashCode() : Error.GetHashCode());
-                return hash;
-            }
-        }
+        public override int GetHashCode() => IsSuccess ? Value.GetHashCode() : Error.GetHashCode();
 
         public int GetHashCode(IEqualityComparer comparer)
         {
             Require.NotNull(comparer, nameof(comparer));
 
-            unchecked
-            {
-                int hash = 17;
-                hash = 31 * hash + IsSuccess.GetHashCode();
-                hash = 31 * hash + (IsSuccess ? comparer.GetHashCode(Value) : comparer.GetHashCode(Error));
-                return hash;
-            }
+            return IsSuccess ? comparer.GetHashCode(Value) : comparer.GetHashCode(Error);
         }
     }
 }

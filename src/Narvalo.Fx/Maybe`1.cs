@@ -274,42 +274,35 @@ namespace Narvalo.Fx
         }
     }
 
-    // Implements the IEquatable<Maybe<T>> interfaces.
+    // Implements the IEquatable<Maybe<T>> interface.
     public partial struct Maybe<T>
     {
         public static bool operator ==(Maybe<T> left, Maybe<T> right) => left.Equals(right);
 
         public static bool operator !=(Maybe<T> left, Maybe<T> right) => !left.Equals(right);
 
-        public bool Equals(Maybe<T> other) => Equals(other, EqualityComparer<T>.Default);
+        public bool Equals(Maybe<T> other)
+        {
+            if (IsSome) { return other.IsSome && EqualityComparer<T>.Default.Equals(Value, other.Value); }
+            return other.IsNone;
+        }
 
         public bool Equals(Maybe<T> other, IEqualityComparer<T> comparer)
         {
             Require.NotNull(comparer, nameof(comparer));
 
-            if (IsSome)
-            {
-                return other.IsSome && comparer.Equals(Value, other.Value);
-            }
-
+            if (IsSome) { return other.IsSome && comparer.Equals(Value, other.Value); }
             return other.IsNone;
         }
 
-        public override bool Equals(object obj) => Equals(obj, EqualityComparer<T>.Default);
+        public override bool Equals(object obj)
+            => (obj is Maybe<T>) && Equals((Maybe<T>)obj);
 
         public bool Equals(object other, IEqualityComparer<T> comparer)
-        {
-            Require.NotNull(comparer, nameof(comparer));
+            => (other is Maybe<T>) && Equals((Maybe<T>)other, comparer);
 
-            if (!(other is Maybe<T>))
-            {
-                return false;
-            }
-
-            return Equals((Maybe<T>)other, comparer);
-        }
-
-        public override int GetHashCode() => GetHashCode(EqualityComparer<T>.Default);
+        public override int GetHashCode()
+            => IsSome ? Value.GetHashCode() : 0;
 
         public int GetHashCode(IEqualityComparer<T> comparer)
         {
