@@ -417,6 +417,8 @@ namespace Narvalo.Fx
     {
         bool IStructuralEquatable.Equals(object other, IEqualityComparer comparer)
         {
+            Require.NotNull(comparer, nameof(comparer));
+
             if (ReferenceEquals(other, null)) { return false; }
             if (ReferenceEquals(other, this)) { return true; }
 
@@ -433,9 +435,13 @@ namespace Narvalo.Fx
         }
 
         int IStructuralEquatable.GetHashCode(IEqualityComparer comparer)
-            => CombineHashCodes(
+        {
+            Require.NotNull(comparer, nameof(comparer));
+
+            return CombineHashCodes(
                 IsLeft ? comparer.GetHashCode(Left) : 0,
                 IsRight ? comparer.GetHashCode(Right) : 0);
+        }
 
         // Borrowed from https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Tuple.cs
         private static int CombineHashCodes(int h1, int h2) => (((h1 << 5) + h1) ^ h2);
