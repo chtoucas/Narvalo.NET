@@ -291,33 +291,35 @@ namespace Narvalo.Fx
             if (IsError) { action(Error); }
         }
 
-        // Publicly hidden.
+        #region Publicly hidden methods.
+
         bool Internal.ISecondaryContainer<TError>.Contains(TError value)
         {
-            throw new NotSupportedException("XXX");
+            throw new NotSupportedException();
         }
 
-        // Publicly hidden.
         bool Internal.ISecondaryContainer<TError>.Contains(TError value, IEqualityComparer<TError> comparer)
         {
-            throw new NotSupportedException("XXX");
+            throw new NotSupportedException();
         }
 
-        // Alias for WhenSuccess(). Publicly hidden.
+        // Alias for WhenSuccess().
         void Internal.IContainer<T>.When(Func<T, bool> predicate, Action<T> action)
            => WhenSuccess(predicate, action);
 
-        // Alias for WhenError(). Publicly hidden.
+        // Alias for WhenError().
         void Internal.ISecondaryContainer<TError>.When(
             Func<TError, bool> predicate,
             Action<TError> action)
             => WhenError(predicate, action);
 
-        // Alias for OnSuccess(). Publicly hidden.
+        // Alias for OnSuccess().
         void Internal.IContainer<T>.Do(Action<T> action) => OnSuccess(action);
 
-        // Alias for OnError(). Publicly hidden.
+        // Alias for OnError().
         void Internal.ISecondaryContainer<TError>.Do(Action<TError> action) => OnError(action);
+
+        #endregion
     }
 
     // Implements the Internal.Iterable<T> interface.

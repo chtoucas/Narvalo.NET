@@ -281,35 +281,39 @@ namespace Narvalo.Fx
         public abstract void OnLeft(Action<TLeft> action);
         public abstract void OnRight(Action<TRight> action);
 
-        // Alias for ContainsLeft(). Publicly hidden.
+        #region Publicly hidden methods.
+
+        // Alias for ContainsLeft().
         bool Internal.IContainer<TLeft>.Contains(TLeft value)
             => ContainsLeft(value);
 
-        // Alias for ContainsLeft(). Publicly hidden.
+        // Alias for ContainsLeft().
         bool Internal.IContainer<TLeft>.Contains(TLeft value, IEqualityComparer<TLeft> comparer)
             => ContainsLeft(value, comparer);
 
-        // Alias for ContainsRight(). Publicly hidden.
+        // Alias for ContainsRight().
         bool Internal.ISecondaryContainer<TRight>.Contains(TRight value)
             => ContainsRight(value);
 
-        // Alias for ContainsRight(). Publicly hidden.
+        // Alias for ContainsRight().
         bool Internal.ISecondaryContainer<TRight>.Contains(TRight value, IEqualityComparer<TRight> comparer)
            => ContainsRight(value, comparer);
 
-        // Alias for WhenLeft(). Publicly hidden.
+        // Alias for WhenLeft().
         void Internal.IContainer<TLeft>.When(Func<TLeft, bool> predicate, Action<TLeft> action)
             => WhenLeft(predicate, action);
 
-        // Alias for WhenRight(). Publicly hidden.
+        // Alias for WhenRight().
         void Internal.ISecondaryContainer<TRight>.When(Func<TRight, bool> predicate, Action<TRight> action)
             => WhenRight(predicate, action);
 
-        // Alias for OnLeft(). Publicly hidden.
+        // Alias for OnLeft().
         void Internal.IContainer<TLeft>.Do(Action<TLeft> action) => OnLeft(action);
 
-        // Alias for OnRight(). Publicly hidden.
+        // Alias for OnRight().
         void Internal.ISecondaryContainer<TRight>.Do(Action<TRight> action) => OnRight(action);
+
+        #endregion
 
         private partial class Left_
         {
