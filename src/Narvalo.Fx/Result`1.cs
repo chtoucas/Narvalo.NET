@@ -236,7 +236,7 @@ namespace Narvalo.Fx
         public void Do(Action<T> onSuccess, Action<ExceptionDispatchInfo> onError)
         {
             Require.NotNull(onSuccess, nameof(onSuccess));
-            Require.NotNull(onError, nameof(OnError));
+            Require.NotNull(onError, nameof(onError));
 
             if (IsSuccess)
             {
