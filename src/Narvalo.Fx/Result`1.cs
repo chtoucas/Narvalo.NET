@@ -159,7 +159,7 @@ namespace Narvalo.Fx
 
         public static explicit operator ExceptionDispatchInfo(Result<T> value) => value.ToExceptionInfo();
 
-        public static explicit operator Result<T>(T value) => Result.Of(value);
+        public static explicit operator Result<T>(T value) => η(value);
     }
 
     // Core Monad methods.
@@ -170,7 +170,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(selector, nameof(selector));
 
-            if (IsError) { return Result.FromError<TResult>(ExceptionInfo); }
+            if (IsError) { return Result<TResult>.FromError(ExceptionInfo); }
 
             try
             {
@@ -179,7 +179,7 @@ namespace Narvalo.Fx
             catch (Exception ex)
             {
                 var edi = ExceptionDispatchInfo.Capture(ex);
-                return Result.FromError<TResult>(edi);
+                return Result<TResult>.FromError(edi);
             }
         }
 
@@ -199,7 +199,7 @@ namespace Narvalo.Fx
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Result<T> μ(Result<Result<T>> square)
-            => square.IsSuccess ? square.Value : Result.FromError<T>(square.ExceptionInfo);
+            => square.IsSuccess ? square.Value : FromError(square.ExceptionInfo);
     }
 
     // Implements the Internal.IEither<T, ExceptionDispatchInfo> interface.

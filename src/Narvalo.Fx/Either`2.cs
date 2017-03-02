@@ -65,7 +65,7 @@ namespace Narvalo.Fx
 
             public override Maybe<TRight> RightOrNone() => Maybe<TRight>.None;
 
-            public override Either<TRight, TLeft> Swap() => Either.OfRight<TRight, TLeft>(Left);
+            public override Either<TRight, TLeft> Swap() => Either<TRight, TLeft>.OfRight(Left);
 
             public bool Equals(Left_ other)
             {
@@ -123,7 +123,7 @@ namespace Narvalo.Fx
 
             public override Maybe<TRight> RightOrNone() => Maybe.Of(Right);
 
-            public override Either<TRight, TLeft> Swap() => Either.OfLeft<TRight, TLeft>(Right);
+            public override Either<TRight, TLeft> Swap() => Either<TRight, TLeft>.η(Right);
 
             public bool Equals(Right_ other)
             {
@@ -174,11 +174,9 @@ namespace Narvalo.Fx
         public static explicit operator TRight(Either<TLeft, TRight> value)
             => value == null ? default(TRight) : value.ToRight();
 
-        public static explicit operator Either<TLeft, TRight>(TLeft value)
-            => Either.OfLeft<TLeft, TRight>(value);
+        public static explicit operator Either<TLeft, TRight>(TLeft value) => η(value);
 
-        public static explicit operator Either<TLeft, TRight>(TRight value)
-            => Either.OfRight<TLeft, TRight>(value);
+        public static explicit operator Either<TLeft, TRight>(TRight value) => OfRight(value);
 
         private partial class Left_
         {
@@ -225,7 +223,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(square, nameof(square));
 
-            return square.IsLeft ? square.Left : Either.OfRight<TLeft, TRight>(square.Right);
+            return square.IsLeft ? square.Left : Either<TLeft, TRight>.OfRight(square.Right);
         }
 
         [DebuggerHidden]
@@ -234,7 +232,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(square, nameof(square));
 
-            return square.IsRight ? square.Right : Either.OfLeft<TLeft, TRight>(square.Left);
+            return square.IsRight ? square.Right : η(square.Left);
         }
 
         private partial class Left_
@@ -247,13 +245,13 @@ namespace Narvalo.Fx
             }
 
             public override Either<TLeft, TResult> BindRight<TResult>(Func<TRight, Either<TLeft, TResult>> selector)
-                => Either.OfLeft<TLeft, TResult>(Left);
+                => Either<TLeft, TResult>.η(Left);
         }
 
         private partial class Right_
         {
             public override Either<TResult, TRight> BindLeft<TResult>(Func<TLeft, Either<TResult, TRight>> selector)
-                => Either.OfRight<TResult, TRight>(Right);
+                => Either<TResult, TRight>.OfRight(Right);
 
             public override Either<TLeft, TResult> BindRight<TResult>(Func<TRight, Either<TLeft, TResult>> selector)
             {

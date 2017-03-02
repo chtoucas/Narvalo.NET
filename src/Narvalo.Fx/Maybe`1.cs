@@ -133,7 +133,7 @@ namespace Narvalo.Fx
     // Conversion operators.
     public partial struct Maybe<T>
     {
-        public static explicit operator Maybe<T>(T value) => Maybe.Of(value);
+        public static explicit operator Maybe<T>(T value) => η(value);
 
         public static explicit operator T(Maybe<T> value)
         {
