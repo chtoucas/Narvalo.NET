@@ -74,7 +74,7 @@ namespace Narvalo.Finance.Providers.Snv
         /// <value>The alphabetic code of the currency.</value>
         public string Code
         {
-            get { Warrant.NotNull<string>(); return _code; }
+            get { return _code; }
         }
 
         /// <summary>
@@ -162,29 +162,7 @@ namespace Narvalo.Finance.Providers.Snv
 
         public override string ToString()
         {
-            Warrant.NotNull<string>();
-
             return EnglishName + " (" + Code + ")";
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Finance.Snv
-{
-    using System.Diagnostics.Contracts;
-
-    public sealed partial class SnvCurrencyData
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_code != null);
-            Contract.Invariant(_code.Length == 3);
-            Contract.Invariant(_numericCode >= 0 && _numericCode < 1000);
-        }
-    }
-}
-
-#endif

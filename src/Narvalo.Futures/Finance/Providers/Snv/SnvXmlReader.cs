@@ -22,7 +22,6 @@ namespace Narvalo.Finance.Providers.Snv
         public static XmlReader Of(string input)
         {
             Demand.NotNullOrEmpty(input);
-            Warrant.NotNull<XmlReader>();
 
             return XmlReader.Create(input, s_Settings);
         }
@@ -30,7 +29,6 @@ namespace Narvalo.Finance.Providers.Snv
         public static XmlReader Of(Stream input)
         {
             Demand.NotNull(input);
-            Warrant.NotNull<XmlReader>();
 
             return XmlReader.Create(input, s_Settings);
         }
@@ -38,7 +36,6 @@ namespace Narvalo.Finance.Providers.Snv
         public static XmlReader Of(TextReader input)
         {
             Demand.NotNull(input);
-            Warrant.NotNull<XmlReader>();
 
             return XmlReader.Create(input, s_Settings);
         }
@@ -46,7 +43,6 @@ namespace Narvalo.Finance.Providers.Snv
         public static XmlReader Of(XmlReader input)
         {
             Demand.NotNull(input);
-            Warrant.NotNull<XmlReader>();
 
             return XmlReader.Create(input, s_Settings);
         }

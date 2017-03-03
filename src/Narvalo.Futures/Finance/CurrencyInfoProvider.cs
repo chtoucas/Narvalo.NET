@@ -2,8 +2,6 @@
 
 namespace Narvalo.Finance
 {
-    using System.Diagnostics.Contracts;
-
     public sealed class CurrencyInfoProvider
     {
         private static readonly CurrencyInfoProvider s_Instance = new CurrencyInfoProvider();
@@ -19,18 +17,16 @@ namespace Narvalo.Finance
 
         public static ICurrencyInfoProvider Current
         {
-            get { Warrant.NotNull<ICurrencyInfoProvider>(); return s_Instance.InnerCurrent; }
+            get { return s_Instance.InnerCurrent; }
         }
 
         public ICurrencyInfoProvider InnerCurrent
         {
-            get { Warrant.NotNull<ICurrencyInfoProvider>(); return _current; }
+            get { return _current; }
         }
 
         public static void SetProvider(ICurrencyInfoProvider provider)
         {
-            Expect.NotNull(provider);
-
             s_Instance.InnerSetProvider(provider);
         }
 
@@ -40,15 +36,5 @@ namespace Narvalo.Finance
 
             _current = provider;
         }
-
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_current != null);
-        }
-
-#endif
     }
 }

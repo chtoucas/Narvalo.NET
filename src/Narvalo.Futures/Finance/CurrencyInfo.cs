@@ -2,8 +2,6 @@
 
 namespace Narvalo.Finance
 {
-    using System.Diagnostics.Contracts;
-
     public sealed class CurrencyInfo
     {
         private const char META_CURRENCY_MARK = 'X';
@@ -15,18 +13,15 @@ namespace Narvalo.Finance
         {
             Require.NotNullOrEmpty(code, nameof(code));
             //ContractFor.CurrencyCode(code);
-            Contract.Requires(
-                numericCode >= 0 && numericCode < 1000,
-                "The numeric code MUST be strictly greater than 0 and less than 1000.");
+            //Contract.Requires(
+            //    numericCode >= 0 && numericCode < 1000,
+            //    "The numeric code MUST be strictly greater than 0 and less than 1000.");
 
             _code = code;
             _numericCode = numericCode;
         }
 
-        public string Code
-        {
-            get { Warrant.NotNull<string>(); return _code; }
-        }
+        public string Code => _code;
 
         /// <summary>
         /// Gets the currency unit of the currency.
@@ -77,8 +72,6 @@ namespace Narvalo.Finance
 
         public override string ToString()
         {
-            Warrant.NotNull<string>();
-
             return EnglishName + "(" + EnglishRegionName + ")";
         }
     }

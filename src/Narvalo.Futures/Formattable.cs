@@ -20,8 +20,6 @@ namespace Narvalo
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Current(FormattableString formattable)
         {
-            Warrant.NotNull<string>();
-
             // The C# compiler automatically transforms a formattable string ($"") to a string with:
             //    System.Runtime.CompilerServices.FormattableStringFactory.Create()
             // the result of this method is NEVER null,
@@ -37,11 +35,10 @@ namespace Narvalo
 
             // NB: Actually, the default for ToString() is to use the current culture.
             var formatted = formattable.ToString(CultureInfo.CurrentCulture);
+
             // Behind the curtain, formattable.ToString() uses String.Format(formatProvider, format, arguments)
             // which ensures that the result is never null.
             // See https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/FormattableString.cs
-            Assume(formatted != null, "Extern: BCL.");
-
             return formatted;
         }
 
@@ -49,9 +46,6 @@ namespace Narvalo
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Invariant(FormattableString formattable)
         {
-            // No precondition (see the comments in Current()).
-            Warrant.NotNull<string>();
-
             var formatted = FormattableString.Invariant(formattable);
             // This is a safe assumption (see the comments in Current()).
             Assume(formatted != null, "Extern: BCL.");

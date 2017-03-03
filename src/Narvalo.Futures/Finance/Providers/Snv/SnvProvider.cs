@@ -21,15 +21,11 @@ namespace Narvalo.Finance.Providers.Snv
 
         public static SnvProvider GetCurrentDatabase(string fileName)
         {
-            Expect.NotNull(fileName);
-
             return new SnvProvider(fileName, false);
         }
 
         public static SnvProvider GetHistoricalDatabase(string fileName)
         {
-            Expect.NotNull(fileName);
-
             return new SnvProvider(fileName, true);
         }
 

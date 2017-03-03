@@ -23,7 +23,6 @@ namespace Narvalo.Configuration
         public static T GetSection<T>(string sectionName) where T : ConfigurationSection
         {
             Require.NotNullOrEmpty(sectionName, nameof(sectionName));
-            Warrant.NotNull<T>();
 
             T section = ConfigurationManager.GetSection(sectionName) as T;
 
@@ -43,7 +42,6 @@ namespace Narvalo.Configuration
         {
             Require.NotNullOrEmpty(sectionName, nameof(sectionName));
             Require.NotNullOrEmpty(configFilePath, nameof(configFilePath));
-            Warrant.NotNull<T>();
 
             string configFileName;
 

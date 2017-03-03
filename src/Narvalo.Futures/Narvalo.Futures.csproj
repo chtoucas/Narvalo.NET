@@ -58,8 +58,8 @@
     <Compile Include="Fx\Extensions\Nullable%24.cs" />
     <Compile Include="Globalization\CountryISOCode.cs" />
     <Compile Include="Globalization\RegionInfo%24.cs" />
-    <Compile Include="Guard.cs" />
-    <Compile Include="Guard.g.cs">
+    <Compile Include="Cerbere\Guard.cs" />
+    <Compile Include="Cerbere\Guard.g.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Guard.tt</DependentUpon>
@@ -74,7 +74,7 @@
       <DependentUpon>Strings_Futures.resx</DependentUpon>
     </Compile>
     <Compile Include="UrlFormatProvider.cs" />
-    <Compile Include="WarrantEx.cs" />
+    <Compile Include="Cerbere\Warrant.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Narvalo.Futures.props">
@@ -89,6 +89,11 @@
     <ProjectReference Include="..\Narvalo.Cerbere\Narvalo.Cerbere.csproj">
       <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
       <Name>Narvalo.Cerbere</Name>
+      <Aliases>Cerbere</Aliases>
+    </ProjectReference>
+    <ProjectReference Include="..\Narvalo.Core\Narvalo.Core.csproj">
+      <Project>{66b62ba5-e26e-4899-85ac-4c52d3a427e9}</Project>
+      <Name>Narvalo.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Narvalo.Finance\Narvalo.Finance.csproj">
       <Project>{38055176-243b-4090-8148-efb8fe18ff23}</Project>
@@ -115,7 +120,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SnvCurrencyInfoProvider.g.cs</LastGenOutput>
     </Content>
-    <Content Include="Guard.tt">
+    <Content Include="Cerbere\Guard.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Guard.g.cs</LastGenOutput>
     </Content>

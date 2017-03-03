@@ -14,7 +14,6 @@ namespace Narvalo.Finance.Providers.Snv
         public static XElement ElementOrThrow(this XElement @this, XName name)
         {
             Require.NotNull(@this, nameof(@this));
-            Warrant.NotNull<XElement>();
 
             XElement child = @this.Element(name);
             if (child == null) { throw new InvalidDataException(); }
@@ -25,7 +24,6 @@ namespace Narvalo.Finance.Providers.Snv
         public static T AttributeOrThrow<T>(this XElement @this, XName name, Func<string, T> selector)
         {
             Require.NotNull(@this, nameof(@this));
-            Warrant.NotNull<XAttribute>();
 
             XAttribute attr = @this.Attribute(name);
             if (attr == null) { throw new InvalidDataException(); }

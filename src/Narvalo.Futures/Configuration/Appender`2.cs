@@ -21,7 +21,6 @@ namespace Narvalo.Configuration
         public TSource With(params T[] values)
         {
             Require.NotNull(values, nameof(values));
-            Warrant.NotNull<TSource>();
 
             foreach (var value in values)
             {
@@ -34,22 +33,3 @@ namespace Narvalo.Configuration
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Configuration
-{
-    using System.Diagnostics.Contracts;
-
-    public sealed partial class Appender<TSource, T>
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_source != null);
-            Contract.Invariant(_append != null);
-        }
-    }
-}
-
-#endif

@@ -2,8 +2,6 @@
 
 namespace Narvalo.Finance
 {
-    using System.Collections.Generic;
-
     public partial interface ICurrencyInfoProvider
     {
         /// <summary>
@@ -17,28 +15,3 @@ namespace Narvalo.Finance
         CurrencyInfoCollection GetCurrencies(CurrencyTypes types);
     }
 }
-
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-
-namespace Narvalo.Globalization
-{
-    using System.Collections.Generic;
-    using System.Diagnostics.Contracts;
-    using System.Collections.ObjectModel;
-
-    [ContractClass(typeof(ICurrencyInfoProviderContract))]
-    public partial interface ICurrencyInfoProvider { }
-
-    [ContractClassFor(typeof(ICurrencyInfoProvider))]
-    internal abstract class ICurrencyInfoProviderContract : ICurrencyInfoProvider
-    {
-        public override CurrencyInfoCollection GetCurrencies(CurrencyTypes types)
-        {
-            Contract.Ensures(Contract.Result<CurrencyInfoCollection>() != null);
-
-            return default(CurrencyInfoCollection);
-        }
-    }
-}
-
-#endif

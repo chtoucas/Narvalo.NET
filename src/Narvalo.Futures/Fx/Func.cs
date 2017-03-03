@@ -8,8 +8,6 @@ namespace Narvalo.Fx
     {
         public static Func<T> Of<T>(T value)
         {
-            Warrant.NotNull<Func<T>>();
-
             return () => value;
         }
 

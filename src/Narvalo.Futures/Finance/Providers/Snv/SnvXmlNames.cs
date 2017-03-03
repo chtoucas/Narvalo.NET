@@ -19,17 +19,17 @@ namespace Narvalo.Finance.Providers.Snv
         private static readonly XName s_PubDate = XName.Get("Pblshd");
         private static readonly XName s_WithdrawnDate = XName.Get("WthdrwlDt");
 
-        public static XName AlphabeticCode { get { Warrant.NotNull<XName>(); return s_AlphabeticCode; } }
-        public static XName CountryName { get { Warrant.NotNull<XName>(); return s_CountryName; } }
-        public static XName EnglishName { get { Warrant.NotNull<XName>(); return s_EnglishName; } }
-        public static XName Item { get { Warrant.NotNull<XName>(); return s_Item; } }
-        public static XName IsFund { get { Warrant.NotNull<XName>(); return s_IsFund; } }
-        public static XName LegacyItem { get { Warrant.NotNull<XName>(); return s_LegacyItem; } }
-        public static XName LegacyList { get { Warrant.NotNull<XName>(); return s_LegacyList; } }
-        public static XName List { get { Warrant.NotNull<XName>(); return s_List; } }
-        public static XName MinorUnits { get { Warrant.NotNull<XName>(); return s_MinorUnits; } }
-        public static XName NumericCode { get { Warrant.NotNull<XName>(); return s_NumericCode; } }
-        public static XName PubDate { get { Warrant.NotNull<XName>(); return s_PubDate; } }
-        public static XName WithdrawnDate { get { Warrant.NotNull<XName>(); return s_WithdrawnDate; } }
+        public static XName AlphabeticCode => s_AlphabeticCode;
+        public static XName CountryName => s_CountryName;
+        public static XName EnglishName => s_EnglishName;
+        public static XName Item => s_Item;
+        public static XName IsFund => s_IsFund;
+        public static XName LegacyItem => s_LegacyItem;
+        public static XName LegacyList => s_LegacyList;
+        public static XName List => s_List;
+        public static XName MinorUnits => s_MinorUnits;
+        public static XName NumericCode => s_NumericCode;
+        public static XName PubDate => s_PubDate;
+        public static XName WithdrawnDate => s_WithdrawnDate;
     }
 }

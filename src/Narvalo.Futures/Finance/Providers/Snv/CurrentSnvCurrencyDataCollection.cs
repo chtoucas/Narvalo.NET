@@ -12,29 +12,13 @@ namespace Narvalo.Finance.Providers.Snv
 
     public sealed class CurrentSnvCurrencyDataCollection : SnvCurrencyDataCollection
     {
-        public CurrentSnvCurrencyDataCollection(string input)
-            : base(input, false)
-        {
-            Expect.NotNullOrEmpty(input);
-        }
+        public CurrentSnvCurrencyDataCollection(string input) : base(input, false) { }
 
-        public CurrentSnvCurrencyDataCollection(Stream input)
-            : base(input, false)
-        {
-            Expect.NotNull(input);
-        }
+        public CurrentSnvCurrencyDataCollection(Stream input) : base(input, false) { }
 
-        public CurrentSnvCurrencyDataCollection(TextReader input)
-            : base(input, false)
-        {
-            Expect.NotNull(input);
-        }
+        public CurrentSnvCurrencyDataCollection(TextReader input) : base(input, false) { }
 
-        public CurrentSnvCurrencyDataCollection(XmlReader input)
-            : base(input, false)
-        {
-            Expect.NotNull(input);
-        }
+        public CurrentSnvCurrencyDataCollection(XmlReader input) : base(input, false) { }
 
         protected override IEnumerator<SnvCurrencyData> Traverse(XElement root)
         {

@@ -3,7 +3,6 @@
 namespace Narvalo.Finance.Generic
 {
     using System;
-    using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Reflection;
 
@@ -15,7 +14,6 @@ namespace Narvalo.Finance.Generic
         public static TCurrency CreateInstance<TCurrency>() where TCurrency : Currency<TCurrency>
         {
             var typeInfo = typeof(TCurrency).GetTypeInfo();
-            Contract.Assume(typeInfo != null);
 
             // Unsafe, we assume that there is a single constructor, the default one.
             // Nevertheless, it should not be possible to create a currency unit outside this assembly.

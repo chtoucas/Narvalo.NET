@@ -7,7 +7,7 @@ namespace Narvalo
 
     using static System.Diagnostics.Contracts.Contract;
 
-    public static class WarrantEx
+    public static class Warrant
     {
         [DebuggerHidden]
         [ContractAbbreviator]

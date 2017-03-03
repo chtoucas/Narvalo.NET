@@ -3,7 +3,6 @@
 namespace Narvalo.Finance
 {
     using System;
-    using System.Diagnostics.Contracts;
 
     // REVIEW: Prefer BinarySearch to IndexOf?
     public static class CheckDigits
@@ -42,35 +41,17 @@ namespace Narvalo.Finance
         public static string Compute1(string value, CheckDigitsRange range)
         {
             Require.NotNull(value, nameof(value));
-            Contract.Ensures(Contract.Result<string>() != null);
-            Contract.Ensures(Contract.Result<string>().Length == CD_LENGTH_1);
 
             switch (range)
             {
                 case CheckDigitsRange.Alphabetic:
-                    Contract.Assert(s_AlphaAlphabet != null);
-                    Contract.Assume(s_AlphaAlphabet.Length != 0);
-
                     return Compute1_(value, s_AlphaAlphabet);
-
                 case CheckDigitsRange.Alphanumeric:
-                    Contract.Assert(s_AlphanumAlphabet != null);
-                    Contract.Assume(s_AlphanumAlphabet.Length != 0);
-
                     return Compute1_(value, s_AlphanumAlphabet);
-
                 case CheckDigitsRange.Hexadecimal:
-                    Contract.Assert(s_HexAlphabet != null);
-                    Contract.Assume(s_HexAlphabet.Length != 0);
-
                     return Compute1_(value, s_HexAlphabet);
-
                 case CheckDigitsRange.Numeric:
-                    Contract.Assert(s_NumAlphabet != null);
-                    Contract.Assume(s_NumAlphabet.Length != 0);
-
                     return Compute1_(value, s_NumAlphabet);
-
                 default:
                     throw Check.Unreachable("XXX");
             }
@@ -79,35 +60,17 @@ namespace Narvalo.Finance
         public static string Compute2(string value, CheckDigitsRange range)
         {
             Require.NotNull(value, nameof(value));
-            Contract.Ensures(Contract.Result<string>() != null);
-            Contract.Ensures(Contract.Result<string>().Length == CD_LENGTH_2);
 
             switch (range)
             {
                 case CheckDigitsRange.Alphabetic:
-                    Contract.Assert(s_AlphaAlphabet != null);
-                    Contract.Assume(s_AlphaAlphabet.Length != 0);
-
                     return Compute2_(value, s_AlphaAlphabet, ALPHA_MODULUS);
-
                 case CheckDigitsRange.Alphanumeric:
-                    Contract.Assert(s_AlphanumAlphabet != null);
-                    Contract.Assume(s_AlphanumAlphabet.Length != 0);
-
                     return Compute2_(value, s_AlphanumAlphabet, ALPHANUM_MODULUS);
-
                 case CheckDigitsRange.Hexadecimal:
-                    Contract.Assert(s_HexAlphabet != null);
-                    Contract.Assume(s_HexAlphabet.Length != 0);
-
                     return Compute2_(value, s_HexAlphabet, HEX_MODULUS);
-
                 case CheckDigitsRange.Numeric:
-                    Contract.Assert(s_NumAlphabet != null);
-                    Contract.Assume(s_NumAlphabet.Length != 0);
-
                     return Compute2_(value, s_NumAlphabet, NUM_MODULUS);
-
                 default:
                     throw Check.Unreachable("XXX");
             }
@@ -121,8 +84,6 @@ namespace Narvalo.Finance
             {
                 throw new ArgumentException("XXX", nameof(value));
             }
-
-            Contract.Assert(value.Length > CD_LENGTH_1);
 
             string origval = value.Substring(0, value.Length - CD_LENGTH_1);
 
@@ -138,8 +99,6 @@ namespace Narvalo.Finance
                 throw new ArgumentException("XXX", nameof(value));
             }
 
-            Contract.Assert(value.Length > CD_LENGTH_2);
-
             string origval = value.Substring(0, value.Length - CD_LENGTH_2);
 
             return value.Substring(value.Length - CD_LENGTH_2) == Compute2(origval, range);
@@ -147,12 +106,6 @@ namespace Narvalo.Finance
 
         private static string Compute1_(string value, char[] alphabet)
         {
-            Contract.Requires(value != null);
-            Contract.Requires(alphabet != null);
-            Contract.Requires(alphabet.Length != 0);
-            Contract.Ensures(Contract.Result<string>() != null);
-            Contract.Ensures(Contract.Result<string>().Length == CD_LENGTH_1);
-
             int alength = alphabet.Length;
             int pos = alength;
 
@@ -188,21 +141,11 @@ namespace Narvalo.Finance
 
             pos = (alength - pos + 1) % alength;
 
-            Contract.Assert(pos >= 0);
-            Contract.Assert(pos < alength);
-
             return new String(new char[CD_LENGTH_1] { alphabet[pos] });
         }
 
         private static string Compute2_(string value, char[] alphabet, int modulus)
         {
-            Contract.Requires(value != null);
-            Contract.Requires(alphabet != null);
-            Contract.Requires(alphabet.Length != 0);
-            Contract.Requires(modulus > 0);
-            Contract.Ensures(Contract.Result<string>() != null);
-            Contract.Ensures(Contract.Result<string>().Length == CD_LENGTH_2);
-
             int alength = alphabet.Length;
             int pos = 0;
 
@@ -225,11 +168,6 @@ namespace Narvalo.Finance
 
             int r = pos % alength;
             int q = (pos - r) / alength;
-
-            Contract.Assume(q >= 0);
-            Contract.Assume(q < alength);
-            Contract.Assert(r >= 0);
-            Contract.Assert(r < alength);
 
             return new String(new char[CD_LENGTH_2] { alphabet[q], alphabet[r] });
         }

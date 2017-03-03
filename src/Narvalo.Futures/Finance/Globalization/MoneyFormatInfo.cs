@@ -41,8 +41,6 @@ namespace Narvalo.Finance.Globalization
         {
             get
             {
-                Warrant.NotNull<MoneyFormatInfo>();
-
                 if (s_InvariantInfo == null)
                 {
                     var provider = new MoneyFormatInfo(CultureInfo.InvariantCulture);

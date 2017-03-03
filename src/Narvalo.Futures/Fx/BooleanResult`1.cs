@@ -41,8 +41,6 @@ namespace Narvalo.Fx
 
         public override string ToString()
         {
-            Warrant.NotNull<string>();
-
             return IsTrue ? "True" : ("False(" + Message.ToString() + ")");
         }
 

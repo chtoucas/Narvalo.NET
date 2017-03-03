@@ -4,8 +4,6 @@ namespace Narvalo
 {
     using System.Text;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     // TODO: Créer la version Hexavigesimal.
     public static class BinaryEncoder
     {
@@ -27,7 +25,6 @@ namespace Narvalo
         public static string ToBase32String(byte[] value)
         {
             Require.NotNull(value, nameof(value));
-            Ensures(Result<string>() != null);
 
             int inlength = value.Length;
             int totalbits = checked(inlength * BASE32_BITS_IN);
@@ -68,7 +65,6 @@ namespace Narvalo
         public static string ToZBase32String(byte[] value)
         {
             Require.NotNull(value, nameof(value));
-            Ensures(Result<string>() != null);
 
             int length = value.Length;
             var sb = new StringBuilder((length + 7) * 8 / 5);
@@ -125,8 +121,6 @@ namespace Narvalo
                 }
 
                 Check.True(i >= 0);
-                Assume(digit >= 0);
-                Assume(digit < s_ZBase32Alphabet.Length);
 
                 sb.Append(s_ZBase32Alphabet[digit]);
             }
@@ -137,7 +131,6 @@ namespace Narvalo
         public static byte[] FromZBase32String(string value)
         {
             Require.NotNull(value, nameof(value));
-            Ensures(Result<byte[]>() != null);
 
             unchecked
             {

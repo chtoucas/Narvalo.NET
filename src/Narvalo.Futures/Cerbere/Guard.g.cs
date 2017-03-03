@@ -10,7 +10,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo
+namespace Narvalo.Cerbere
 {
     using System.Diagnostics.Contracts;
 
