@@ -10,23 +10,23 @@ Narvalo.NET
 - **Narvalo.Cerbere**
   [![NuGet](https://img.shields.io/nuget/v/Narvalo.Cerbere.svg)](https://www.nuget.org/packages/Narvalo.Cerbere/),
   provides argument validation methods and Code Contracts helpers.
+- **Narvalo.Core**
+  [![NuGet](https://img.shields.io/nuget/v/Narvalo.Core.svg)](https://www.nuget.org/packages/Narvalo.Core/),
+  provides argument validation methods w/o Code Contracts.
 - **Narvalo.Fx**
   [![NuGet](https://img.shields.io/nuget/v/Narvalo.Fx.svg)](https://www.nuget.org/packages/Narvalo.Fx/),
   features implementations of some of the usual suspects from functional
-  programming: Option (`Maybe<T>`) and Error (`Output<T>`) monads, simple pattern matching
-  (`Either<T1, T2>`, `Switch<T1, T2>`), generators and delegate extensions.
+  programming: Option (`Maybe<T>`) and Error (`Result`) monads, simple disjoint union
+  (`Either<T1, T2>`), generators and delegate extensions.
+- **Narvalo.Money** Currency (ISO 4217) and Money types.
 - **Narvalo.Finance**
   [![NuGet](https://img.shields.io/nuget/v/Narvalo.Finance.svg)](https://www.nuget.org/packages/Narvalo.Finance/),
-  provides various financial utilities: Currency (ISO 4217), Money types,
-  BIC (ISO 9362), IBAN & BBAN.
-- **Narvalo.Core**
-  [![NuGet](https://img.shields.io/nuget/v/Narvalo.Core.svg)](https://www.nuget.org/packages/Narvalo.Core/),
-  provides various utilities and extension methods: Range type,
-  Int64 encoders, extension methods for Collections and XDom.
+  provides various financial utilities: BIC (ISO 9362), IBAN & BBAN.
 - **Narvalo.Common**
   [![NuGet](https://img.shields.io/nuget/v/Narvalo.Common.svg)](https://www.nuget.org/packages/Narvalo.Common/),
-  provides various utilities and extension methods: directory walker,
-  extension methods for Configuration and SQL client.
+  provides various utilities and extension methods: Range type,
+  Int64 encoders, directory walker, extension methods for Collections, XDom,
+  Configuration and SQL client.
 - **Narvalo.Web**
   [![NuGet](https://img.shields.io/nuget/v/Narvalo.Web.svg)](https://www.nuget.org/packages/Narvalo.Web/),
   provides types that might prove useful for Web development: generic HttpHandler
