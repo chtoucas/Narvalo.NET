@@ -10,20 +10,12 @@ namespace Narvalo.IO
         private static readonly string s_DirectorySeparator = Path.DirectorySeparatorChar.ToString();
 
         public static string MakeRelativePath(string rootPath, string path)
-        {
-            Expect.NotNull(rootPath);
-            Expect.NotNull(path);
-            Warrant.NotNull<string>();
-
-            return MakeRelativePathCore(new Uri(AppendDirectorySeparator(rootPath)), path);
-        }
+            => MakeRelativePathCore(new Uri(AppendDirectorySeparator(rootPath)), path);
 
         // For this method to work correctly, the "rootUri" string must end with a "/".
         internal static string MakeRelativePathCore(Uri rootUri, string path)
         {
             Require.NotNull(rootUri, nameof(rootUri));
-            Expect.NotNull(path);
-            Warrant.NotNull<string>();
 
             var relativeUri = rootUri.MakeRelativeUri(new Uri(path));
 

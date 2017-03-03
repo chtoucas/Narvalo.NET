@@ -19,28 +19,8 @@ namespace Narvalo.IO
         {
             get
             {
-                Warrant.NotNull<RelativeDirectory>();
-
                 return _relativeDirectory;
             }
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.IO
-{
-    using System.Diagnostics.Contracts;
-
-    public sealed partial class RelativeDirectoryEventArgs
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_relativeDirectory != null);
-        }
-    }
-}
-
-#endif

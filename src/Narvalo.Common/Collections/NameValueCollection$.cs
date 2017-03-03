@@ -17,13 +17,9 @@ namespace Narvalo.Collections
     public static partial class NameValueCollectionExtensions
     {
         public static Maybe<string> MayGetSingle(this NameValueCollection @this, string name)
-        {
-            Expect.NotNull(@this);
-
-            return from values in @this.MayGetValues(name)
-                   where values.Length == 1
-                   select values[0];
-        }
+            => from values in @this.MayGetValues(name)
+               where values.Length == 1
+               select values[0];
 
         public static Maybe<string[]> MayGetValues(this NameValueCollection @this, string name)
         {
@@ -36,22 +32,13 @@ namespace Narvalo.Collections
             this NameValueCollection @this,
             string name,
             Func<string, Maybe<T>> parserM)
-        {
-            Expect.NotNull(@this);
-            Warrant.NotNull<IEnumerable<T>>();
-
-            return (from @_ in @this.MayGetValues(name) select @_.SelectAny(parserM))
+            => (from @_ in @this.MayGetValues(name) select @_.SelectAny(parserM))
                 .ValueOrElse(Enumerable.Empty<T>());
-        }
 
         public static Maybe<IEnumerable<T>> MayParseAll<T>(
             this NameValueCollection @this,
             string name,
             Func<string, Maybe<T>> parserM)
-        {
-            Expect.NotNull(@this);
-
-            return @this.MayGetValues(name).Bind(@_ => @_.SelectWith(parserM));
-        }
+            => @this.MayGetValues(name).Bind(@_ => @_.SelectWith(parserM));
     }
 }

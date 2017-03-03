@@ -9,11 +9,7 @@ namespace Narvalo
     {
         public static Range<T> Of<T>(T lowerEnd, T upperEnd)
             where T : struct, IEquatable<T>, IComparable<T>
-        {
-            Expect.Range(Validate(lowerEnd, upperEnd));
-
-            return new Range<T>(lowerEnd, upperEnd);
-        }
+            => new Range<T>(lowerEnd, upperEnd);
 
         [Pure]
         public static bool Validate<T>(T lowerEnd, T upperEnd)

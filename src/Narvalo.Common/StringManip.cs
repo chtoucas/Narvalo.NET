@@ -18,7 +18,6 @@ namespace Narvalo
         public static string Reverse(string value)
         {
             Require.NotNull(value, nameof(value));
-            Warrant.NotNull<string>();
 
             if (value.Length == 0) { return String.Empty; }
 
@@ -31,7 +30,6 @@ namespace Narvalo
         public static string StripCrLf(string value)
         {
             Require.NotNull(value, nameof(value));
-            Warrant.NotNull<string>();
 
             if (value.Length == 0) { return String.Empty; }
 
@@ -40,21 +38,13 @@ namespace Narvalo
         }
 
         public static string Substring(string value, int startIndex, int length)
-        {
-            Expect.NotNull(value);
-            Expect.True(startIndex >= 0);
-            Expect.True(length >= 1);
-            Warrant.NotNull<string>();
-
-            return Substring(value, startIndex, length, "...");
-        }
+            => Substring(value, startIndex, length, "...");
 
         public static string Substring(string value, int startIndex, int length, string postfix)
         {
             Require.NotNull(value, nameof(value));
             Require.Range(startIndex >= 0, nameof(startIndex));
             Require.Range(length >= 1, nameof(length));
-            Warrant.NotNull<string>();
 
             if (value.Length <= length)
             {
@@ -76,19 +66,12 @@ namespace Narvalo
         }
 
         public static string Truncate(string value, int length)
-        {
-            Expect.NotNull(value);
-            Expect.True(length >= 1);
-            Warrant.NotNull<string>();
-
-            return Truncate(value, length, "..." /* postfix */);
-        }
+            => Truncate(value, length, "..." /* postfix */);
 
         public static string Truncate(string value, int length, string postfix)
         {
             Require.NotNull(value, nameof(value));
             Require.Range(length >= 1, nameof(length));
-            Warrant.NotNull<string>();
 
             if (value.Length <= length)
             {

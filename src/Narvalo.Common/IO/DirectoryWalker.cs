@@ -4,7 +4,6 @@ namespace Narvalo.IO
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.Contracts;
     using System.IO;
     using System.Linq;
 
@@ -46,7 +45,6 @@ namespace Narvalo.IO
 
                 var files = directory
                     .EnumerateFiles(searchPattern, SearchOption.TopDirectoryOnly);
-                Contract.Assume(files != null);
 
                 foreach (var file in files.Where(_fileFilter))
                 {
@@ -57,7 +55,6 @@ namespace Narvalo.IO
 
                 var subdirs = directory
                     .EnumerateDirectories("*", SearchOption.TopDirectoryOnly);
-                Contract.Assume(subdirs != null);
 
                 foreach (var dir in subdirs.Where(_directoryFilter))
                 {
@@ -73,22 +70,3 @@ namespace Narvalo.IO
         protected abstract void OnFile(FileInfo file);
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.IO
-{
-    using System.Diagnostics.Contracts;
-
-    public abstract partial class DirectoryWalker
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_directoryFilter != null);
-            Contract.Invariant(_fileFilter != null);
-        }
-    }
-}
-
-#endif

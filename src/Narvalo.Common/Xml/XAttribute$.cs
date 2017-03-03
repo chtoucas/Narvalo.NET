@@ -30,8 +30,6 @@ namespace Narvalo.Xml
         public static XAttribute NextAttributeOrThrow(this XAttribute @this, Exception exception)
         {
             Require.NotNull(exception, nameof(exception));
-            Expect.NotNull(@this);
-            Warrant.NotNull<XAttribute>();
 
             return NextAttributeOrThrow(@this, () => exception);
         }
@@ -40,7 +38,6 @@ namespace Narvalo.Xml
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(exceptionFactory, nameof(exceptionFactory));
-            Warrant.NotNull<XAttribute>();
 
             XAttribute attr = @this.NextAttribute;
             if (attr == null)
@@ -61,8 +58,6 @@ namespace Narvalo.Xml
         public static XAttribute PreviousAttributeOrThrow(this XAttribute @this, Exception exception)
         {
             Require.NotNull(exception, nameof(exception));
-            Expect.NotNull(@this);
-            Warrant.NotNull<XAttribute>();
 
             return PreviousAttributeOrThrow(@this, () => exception);
         }
@@ -71,7 +66,6 @@ namespace Narvalo.Xml
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(exceptionFactory, nameof(exceptionFactory));
-            Warrant.NotNull<XAttribute>();
 
             XAttribute attr = @this.PreviousAttribute;
             if (attr == null)

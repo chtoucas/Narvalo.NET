@@ -31,7 +31,6 @@ namespace Narvalo.IO
         {
             Require.NotNull(startDirectory, nameof(startDirectory));
             Require.NotNullOrEmpty(searchPattern, nameof(searchPattern));
-            Warrant.NotNull<IEnumerable<RelativeFile>>();
 
             var rootPath = PathHelpers.AppendDirectorySeparator(startDirectory.FullName);
             var rootUri = new Uri(rootPath);
@@ -78,22 +77,3 @@ namespace Narvalo.IO
             => DirectoryEnd?.Invoke(this, e);
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.IO
-{
-    using System.Diagnostics.Contracts;
-
-    public partial class FileFinder
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_directoryFilter != null);
-            Contract.Invariant(_fileFilter != null);
-        }
-    }
-}
-
-#endif

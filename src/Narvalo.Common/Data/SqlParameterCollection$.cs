@@ -6,7 +6,6 @@ namespace Narvalo.Data
     using System.Data;
     using System.Data.SqlClient;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
 
     /// <summary>
     /// Provides extension methods for <see cref="SqlParameterCollection"/>.
@@ -32,10 +31,7 @@ namespace Narvalo.Data
             SqlDbType parameterType,
             object value)
         {
-            Expect.NotNull(@this);
-
             var parameter = @this.Add(parameterName, parameterType);
-            Contract.Assume(parameter != null);
 
             parameter.Value = value;
         }
@@ -61,10 +57,7 @@ namespace Narvalo.Data
             T? value)
             where T : struct
         {
-            Expect.NotNull(@this);
-
             var parameter = @this.Add(parameterName, parameterType);
-            Contract.Assume(parameter != null);
 
             if (value.HasValue)
             {
@@ -97,8 +90,6 @@ namespace Narvalo.Data
             T value)
             where T : class
         {
-            Expect.NotNull(@this);
-
             @this.AddParameterOrNullUnchecked(parameterName, parameterType, value, value != null);
         }
 
@@ -123,10 +114,7 @@ namespace Narvalo.Data
             T value,
             bool condition)
         {
-            Expect.NotNull(@this);
-
             var parameter = @this.Add(parameterName, parameterType);
-            Contract.Assume(parameter != null);
 
             if (condition)
             {

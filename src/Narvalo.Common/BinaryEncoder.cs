@@ -12,7 +12,6 @@ namespace Narvalo
         public static string ToHexString(byte[] value)
         {
             Require.NotNull(value, nameof(value));
-            Warrant.NotNull<string>();
 
             return BitConverter.ToString(value).Replace("-", String.Empty);
         }
@@ -20,7 +19,6 @@ namespace Narvalo
         public static byte[] FromHexString(string value)
         {
             Require.NotNull(value, nameof(value));
-            Warrant.NotNull<byte[]>();
 
             if (value.Length == 0 || value.Length % 2 != 0)
             {

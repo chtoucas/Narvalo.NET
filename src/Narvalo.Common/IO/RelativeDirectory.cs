@@ -23,8 +23,6 @@ namespace Narvalo.IO
         {
             get
             {
-                Warrant.NotNull<DirectoryInfo>();
-
                 return _directory;
             }
         }
@@ -33,29 +31,8 @@ namespace Narvalo.IO
         {
             get
             {
-                Warrant.NotNull<string>();
-
                 return _relativeName;
             }
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.IO
-{
-    using System.Diagnostics.Contracts;
-
-    public sealed partial class RelativeDirectory
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_directory != null);
-            Contract.Invariant(_relativeName != null);
-        }
-    }
-}
-
-#endif

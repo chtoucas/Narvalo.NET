@@ -13,7 +13,6 @@ namespace Narvalo.Collections
         public static Collection<T> ToCollection<T>(this IEnumerator<T> @this)
         {
             Require.NotNull(@this, nameof(@this));
-            Warrant.NotNull<Collection<T>>();
 
             var coll = new Collection<T>();
 

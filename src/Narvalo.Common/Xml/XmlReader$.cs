@@ -45,7 +45,6 @@ namespace Narvalo.Xml
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(name, nameof(name));
-            Expect.NotNull(returnType);
 
             return @this.ReadElementContentAs(returnType, namespaceResolver, name.LocalName, name.NamespaceName);
         }

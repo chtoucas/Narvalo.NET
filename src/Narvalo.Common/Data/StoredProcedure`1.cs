@@ -5,13 +5,9 @@ namespace Narvalo.Data
     using System.Data;
     using System.Data.SqlClient;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
 
     public abstract partial class StoredProcedure<TResult>
     {
-        private readonly string _connectionString;
-        private readonly string _name;
-
         private CommandBehavior _commandBehavior
             = CommandBehavior.CloseConnection | CommandBehavior.SingleResult;
 
@@ -20,8 +16,8 @@ namespace Narvalo.Data
             Require.NotNullOrEmpty(connectionString, nameof(connectionString));
             Require.NotNullOrEmpty(name, nameof(name));
 
-            _connectionString = connectionString;
-            _name = name;
+            ConnectionString = connectionString;
+            Name = name;
         }
 
         protected CommandBehavior CommandBehavior
@@ -30,25 +26,9 @@ namespace Narvalo.Data
             set { _commandBehavior = value; }
         }
 
-        protected string ConnectionString
-        {
-            get
-            {
-                Warrant.NotNull<string>();
+        protected string ConnectionString { get; }
 
-                return _connectionString;
-            }
-        }
-
-        protected string Name
-        {
-            get
-            {
-                Warrant.NotNull<string>();
-
-                return _name;
-            }
-        }
+        protected string Name { get; }
 
         public TResult Execute()
         {
@@ -59,7 +39,6 @@ namespace Narvalo.Data
                 using (var command = CreateCommand(connection))
                 {
                     var parameters = command.Parameters;
-                    Contract.Assume(parameters != null);
 
                     PrepareParameters(parameters);
 
@@ -84,7 +63,6 @@ namespace Narvalo.Data
         private SqlCommand CreateCommand(SqlConnection connection)
         {
             Demand.NotNull(connection);
-            Warrant.NotNull<SqlCommand>();
 
             SqlCommand tmpCmd = null;
             SqlCommand cmd = null;
@@ -109,45 +87,3 @@ namespace Narvalo.Data
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Data
-{
-    using System.Data.SqlClient;
-    using System.Diagnostics.Contracts;
-
-    [ContractClass(typeof(StoredProcedureContract<>))]
-    public abstract partial class StoredProcedure<TResult>
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_connectionString != null);
-            Contract.Invariant(_connectionString.Length != 0);
-            Contract.Invariant(_name != null);
-            Contract.Invariant(_name.Length != 0);
-        }
-    }
-
-    [ContractClassFor(typeof(StoredProcedure<>))]
-    internal abstract class StoredProcedureContract<TResult> : StoredProcedure<TResult>
-    {
-        protected StoredProcedureContract(string connectionString, string name)
-            : base(connectionString, name) { }
-
-        protected override TResult Execute(SqlDataReader reader)
-        {
-            Contract.Requires(reader != null);
-
-            return default(TResult);
-        }
-
-        protected override void PrepareParameters(SqlParameterCollection parameters)
-        {
-            Contract.Requires(parameters != null);
-        }
-    }
-}
-
-#endif

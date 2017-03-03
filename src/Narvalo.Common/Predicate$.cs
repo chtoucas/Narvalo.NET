@@ -12,7 +12,6 @@ namespace Narvalo
         public static Predicate<TSource> Negate<TSource>(this Predicate<TSource> @this)
         {
             Require.NotNull(@this, nameof(@this));
-            Warrant.NotNull<Predicate<TSource>>();
 
             return _ => !@this.Invoke(_);
         }
@@ -20,7 +19,6 @@ namespace Narvalo
         public static Func<TSource, bool> Negate<TSource>(this Func<TSource, bool> @this)
         {
             Require.NotNull(@this, nameof(@this));
-            Warrant.NotNull<Func<TSource, bool>>();
 
             return _ => !@this.Invoke(_);
         }

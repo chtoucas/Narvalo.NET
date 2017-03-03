@@ -6,8 +6,6 @@ namespace Narvalo
 
     using Narvalo.Properties;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     public static class Int64Encoder
     {
         private const int BASE25_ALPHABET_LENGTH = 25;
@@ -62,7 +60,6 @@ namespace Narvalo
         public static string ToBase25String(long value)
         {
             Require.Range(value >= 0L, nameof(value));
-            Warrant.NotNull<string>();
 
             return Encode(value, s_Base25Alphabet, BASE25_ALPHABET_LENGTH, BASE25_MAX_LENGTH);
         }
@@ -70,7 +67,6 @@ namespace Narvalo
         public static string ToBase34String(long value)
         {
             Require.Range(value >= 0L, nameof(value));
-            Warrant.NotNull<string>();
 
             return Encode(value, s_Base34Alphabet, BASE34_ALPHABET_LENGTH, BASE34_MAX_LENGTH);
         }
@@ -78,7 +74,6 @@ namespace Narvalo
         public static string ToBase58String(long value)
         {
             Require.Range(value >= 0L, nameof(value));
-            Warrant.NotNull<string>();
 
             return Encode(value, s_Base58Alphabet, BASE58_ALPHABET_LENGTH, BASE58_MAX_LENGTH);
         }
@@ -86,7 +81,6 @@ namespace Narvalo
         public static string ToFlickrBase58String(long value)
         {
             Require.Range(value >= 0L, nameof(value));
-            Warrant.NotNull<string>();
 
             return Encode(value, s_FlickrBase58Alphabet, BASE58_ALPHABET_LENGTH, BASE58_MAX_LENGTH);
         }
@@ -95,7 +89,6 @@ namespace Narvalo
         {
             Require.NotNull(value, nameof(value));
             Require.True(value.Length <= BASE25_MAX_LENGTH, nameof(value));
-            Ensures(Result<long>() >= 0L);
 
             return Decode(value, s_Base25Alphabet, BASE25_ALPHABET_LENGTH);
         }
@@ -104,7 +97,6 @@ namespace Narvalo
         {
             Require.NotNull(value, nameof(value));
             Require.True(value.Length <= BASE34_MAX_LENGTH, nameof(value));
-            Ensures(Result<long>() >= 0L);
 
             return Decode(value, s_Base34Alphabet, BASE34_ALPHABET_LENGTH);
         }
@@ -113,7 +105,6 @@ namespace Narvalo
         {
             Require.NotNull(value, nameof(value));
             Require.True(value.Length <= BASE58_MAX_LENGTH, nameof(value));
-            Ensures(Result<long>() >= 0L);
 
             return Decode(value, s_Base58Alphabet, BASE58_ALPHABET_LENGTH);
         }
@@ -123,7 +114,6 @@ namespace Narvalo
         {
             Require.NotNull(value, nameof(value));
             Require.True(value.Length <= BASE58_MAX_LENGTH, nameof(value));
-            Ensures(Result<long>() >= 0L);
 
             long retval = 0L;
             long multiplier = 1L;
@@ -157,7 +147,6 @@ namespace Narvalo
             Demand.NotNull(alphabet);
             Demand.True(value.Length <= alphabetLength);
             Demand.Range(alphabetLength > 0);
-            Ensures(Result<long>() >= 0L);
 
             long retval = 0L;
             long multiplier = 1L;
@@ -191,11 +180,9 @@ namespace Narvalo
             Demand.Range(value >= 0L);
             Demand.Range(alphabetLength > 0);
             Demand.Range(maxLength >= 0);
-            Warrant.NotNull<string>();
 
             if (value == 0L) { return String.Empty; }
 
-            Assume(alphabet.Length == alphabetLength);
             Check.True(alphabet.Length == alphabetLength);
 
             var arr = new char[maxLength];
@@ -205,9 +192,7 @@ namespace Narvalo
             {
                 long index = value % alphabetLength;
 
-                Assume(index < alphabet.Length);
                 Check.True(index < alphabet.Length);
-                Assume(i < maxLength);
                 Check.True(i < maxLength);
 
                 arr[i] = alphabet[index];
