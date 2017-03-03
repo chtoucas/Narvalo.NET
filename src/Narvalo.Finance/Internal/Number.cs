@@ -4,8 +4,6 @@ namespace Narvalo.Finance.Internal
 {
     using System.Collections.Generic;
 
-    using Narvalo.Finance.Allocators;
-
     internal static class Number
     {
         // Reproduces the Math.DivRem() method which is not available with PCL:
@@ -29,26 +27,6 @@ namespace Narvalo.Finance.Internal
             // NB: remainder = dividend % divisor is slower.
             remainder = dividend - q * divisor;
             return q;
-        }
-
-        public static Allocation<int> Allocate(int value, int count)
-        {
-            int rem;
-            int q = DivRem(value, count, out rem);
-
-            //var seq = Enumerable.Repeat(q, count);
-
-            return Allocation.Create(value, q, rem, count);
-        }
-
-        public static Allocation<long> Allocate(long value, int count)
-        {
-            long rem;
-            long q = DivRem(value, count, out rem);
-
-            //var seq = Enumerable.Repeat(q, count);
-
-            return Allocation.Create(value, q, rem, count);
         }
 
         // Divide value into n copies of value / n:

@@ -98,6 +98,10 @@
       <Project>{28f6175d-0ee3-4763-8004-662a7de41280}</Project>
       <Name>Narvalo.Fx</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Narvalo.Money\Narvalo.Money.csproj">
+      <Project>{387bde7d-c68d-43c0-93ca-17700577fafd}</Project>
+      <Name>Narvalo.Money</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Strings_Futures.fr.resx" />

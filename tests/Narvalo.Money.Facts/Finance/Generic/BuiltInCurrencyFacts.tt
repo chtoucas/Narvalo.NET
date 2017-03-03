@@ -1,0 +1,54 @@
+﻿<#@ template language="C#" debug="false" hostspecific="true" inherits="Iso4217Template" #>
+<#@ output extension=".g.cs" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(T4NarvaloLibrary)" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="Narvalo.T4" #>
+<#
+
+var currentCurrencies = ParseCurrent(@"..\..\..\..\data\ISO4217\A1.xml");
+var legacyCurrencies = ParseLegacy(@"..\..\..\..\data\ISO4217\A3.xml");
+var currencies = currentCurrencies.Concat(legacyCurrencies);
+
+var codeSet = new HashSet<string>();
+
+foreach (var currency in currencies.OrderBy(_ => _.Code))
+{
+    if (codeSet.Contains(currency.Code))
+    {
+        continue;
+    }
+
+    codeSet.Add(currency.Code);
+}
+
+WriteHeader();
+
+#>
+namespace <#= Namespace #>
+{
+    using System.Collections.Generic;
+
+    public static partial class <#= Name #>
+    {
+        public static IEnumerable<object[]> AllUnits
+        {
+            get
+            {
+                #region Long list of built-in currencies.
+
+<#
+    foreach (var code in codeSet)
+    {
+#>
+                yield return new object[] { <#= code #>.Unit };
+<#
+    }
+#>
+
+                #endregion
+            }
+        }
+    }
+}

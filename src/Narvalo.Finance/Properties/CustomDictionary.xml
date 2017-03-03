@@ -2,23 +2,15 @@
 <Dictionary>
   <Words>
     <Recognized>
-      <!-- ### Brands and Organizations ### -->
-      <!-- Association Suisse de Normalisation-->
-      <Word>Snv</Word>
-
       <!-- ### Finance ### -->
       <Word>Bban</Word>
       <Word>Bic</Word>
       <Word>Iban</Word>
-      <Word>Moneypenny</Word>
 
       <Word>Ascii</Word>
-      <Word>Roundable</Word>
-      <!--<Word>Uniq</Word>-->
     </Recognized>
 
     <Compound>
-      <!--<Term CompoundAlternate="UniqInstance">uniqinstance</Term>-->
       <Term CompoundAlternate="DivRem">divrem</Term>
     </Compound>
   </Words>

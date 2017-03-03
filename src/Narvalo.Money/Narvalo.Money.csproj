@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
+    <ProjectGuid>{387BDE7D-C68D-43C0-93CA-17700577FAFD}</ProjectGuid>
+    <RootNamespace>Narvalo</RootNamespace>
+    <AssemblyName>Narvalo.Money</AssemblyName>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
+    <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'CodeContracts|AnyCPU'">
+    <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
+    <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
+    <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
+    <CodeContractsRuntimeCallSiteRequires>True</CodeContractsRuntimeCallSiteRequires>
+    <CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>
+    <CodeContractsRunCodeAnalysis>False</CodeContractsRunCodeAnalysis>
+    <CodeContractsNonNullObligations>True</CodeContractsNonNullObligations>
+    <CodeContractsBoundsObligations>True</CodeContractsBoundsObligations>
+    <CodeContractsArithmeticObligations>True</CodeContractsArithmeticObligations>
+    <CodeContractsEnumObligations>True</CodeContractsEnumObligations>
+    <CodeContractsRedundantAssumptions>False</CodeContractsRedundantAssumptions>
+    <CodeContractsAssertsToContractsCheckBox>True</CodeContractsAssertsToContractsCheckBox>
+    <CodeContractsRedundantTests>True</CodeContractsRedundantTests>
+    <CodeContractsMissingPublicRequiresAsWarnings>True</CodeContractsMissingPublicRequiresAsWarnings>
+    <CodeContractsMissingPublicEnsuresAsWarnings>True</CodeContractsMissingPublicEnsuresAsWarnings>
+    <CodeContractsInferRequires>True</CodeContractsInferRequires>
+    <CodeContractsInferEnsures>True</CodeContractsInferEnsures>
+    <CodeContractsInferEnsuresAutoProperties>True</CodeContractsInferEnsuresAutoProperties>
+    <CodeContractsInferObjectInvariants>True</CodeContractsInferObjectInvariants>
+    <CodeContractsSuggestAssumptions>True</CodeContractsSuggestAssumptions>
+    <CodeContractsSuggestAssumptionsForCallees>True</CodeContractsSuggestAssumptionsForCallees>
+    <CodeContractsSuggestRequires>True</CodeContractsSuggestRequires>
+    <CodeContractsNecessaryEnsures>True</CodeContractsNecessaryEnsures>
+    <CodeContractsSuggestObjectInvariants>True</CodeContractsSuggestObjectInvariants>
+    <CodeContractsSuggestReadonly>True</CodeContractsSuggestReadonly>
+    <CodeContractsRunInBackground>True</CodeContractsRunInBackground>
+    <CodeContractsShowSquigglies>False</CodeContractsShowSquigglies>
+    <CodeContractsUseBaseLine>False</CodeContractsUseBaseLine>
+    <CodeContractsEmitXMLDocs>False</CodeContractsEmitXMLDocs>
+    <CodeContractsCustomRewriterAssembly />
+    <CodeContractsCustomRewriterClass />
+    <CodeContractsLibPaths />
+    <CodeContractsExtraRewriteOptions />
+    <CodeContractsExtraAnalysisOptions>-outputwarnmasks -show unreached</CodeContractsExtraAnalysisOptions>
+    <CodeContractsSQLServerOption />
+    <CodeContractsBaseLineFile />
+    <CodeContractsCacheAnalysisResults>True</CodeContractsCacheAnalysisResults>
+    <CodeContractsSkipAnalysisIfCannotConnectToCache>False</CodeContractsSkipAnalysisIfCannotConnectToCache>
+    <CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>
+    <CodeContractsBeingOptimisticOnExternal>False</CodeContractsBeingOptimisticOnExternal>
+    <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
+    <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
+    <CodeContractsAnalysisWarningLevel>3</CodeContractsAnalysisWarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="Finance\Generic\Units.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Units.g.cs</LastGenOutput>
+    </None>
+    <None Include="Currency.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Currency.g.cs</LastGenOutput>
+    </None>
+    <None Include="Narvalo.Money.props">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Narvalo.Money.Version.props">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Finance\Allocators\DefaultMoneyAllocator.cs" />
+    <Compile Include="Finance\Allocators\PennyAllocators.cs" />
+    <Compile Include="Finance\Extensions\Enumerable%24.cs" />
+    <Compile Include="Finance\Generic\MoneyFactory.cs" />
+    <Compile Include="Globalization\MoneyFormat.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Internal\Ascii.cs" />
+    <Compile Include="Internal\CurrencyHelpers.cs" />
+    <Compile Include="Internal\CurrencyHelpers.g.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CurrencyHelpers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Internal\IAmount`2.cs" />
+    <Compile Include="Internal\ICurrencyUnit.cs" />
+    <Compile Include="Internal\IMoney`2.cs" />
+    <Compile Include="Internal\IMoneypenny`2.cs" />
+    <Compile Include="Internal\Sentinel.cs" />
+    <Compile Include="MoneyStyles.cs" />
+    <Compile Include="RoundingMachine.cs" />
+    <Compile Include="Finance\Allocators\Allocation.cs" />
+    <Compile Include="Finance\Allocators\Allocation`1.cs" />
+    <Compile Include="Finance\Allocators\MidpointRoundingMoneyAllocator.cs" />
+    <Compile Include="Moneypenny.cs" />
+    <Compile Include="CurrencyTypes.cs" />
+    <Compile Include="Finance\Generic\Currency`1.cs" />
+    <Compile Include="Finance\Generic\CurrencyUnit.cs" />
+    <Compile Include="Globalization\RegionInfo%24.cs" />
+    <Compile Include="Finance\Allocators\IMoneyAllocator.cs" />
+    <Compile Include="Finance\Allocators\RoundingMoneyAllocator.cs" />
+    <Compile Include="MoneyCalculator.cs" />
+    <Compile Include="PennyCalculator.cs" />
+    <Compile Include="Finance\Rounding\AlternatedRoundingAdjuster.cs" />
+    <Compile Include="Finance\Rounding\DitheredRoundingAdjuster.cs" />
+    <Compile Include="Finance\Rounding\IRoundingAdjuster.cs" />
+    <Compile Include="Finance\Rounding\RoundingAdjusters.cs" />
+    <Compile Include="FractionalCurrency.cs" />
+    <Compile Include="Internal\Number.cs" />
+    <Compile Include="Finance\Extensions\Money%24.cs" />
+    <Compile Include="Finance\Rounding\StochasticRoundingAdjuster.cs" />
+    <Compile Include="Finance\Rounding\RoudingMode.cs" />
+    <Compile Include="Finance\Allocators\RatioArray.cs" />
+    <Compile Include="Globalization\NumberFormatInfoExtensions.cs" />
+    <Compile Include="Globalization\MoneyFormatter.cs" />
+    <Compile Include="Finance\Generic\Units.g.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Units.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Currency.cs" />
+    <Compile Include="CurrencyNotFoundException.cs" />
+    <Compile Include="Currency.g.cs">
+      <DependentUpon>Currency.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Internal\MoneyHelpers.cs" />
+    <Compile Include="Money.cs" />
+    <Compile Include="Finance\Generic\Money`1.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Strings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Strings.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.fr.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Strings.fr.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.fr.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Strings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Narvalo.Cerbere\Narvalo.Cerbere.csproj">
+      <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
+      <Name>Narvalo.Cerbere</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Internal\CurrencyHelpers.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CurrencyHelpers.g.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="..\..\tools\Narvalo.Common.props" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+</Project>

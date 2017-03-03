@@ -19,7 +19,7 @@ namespace Narvalo.Finance
         /// .NET does not cover the full range of countries used by ISO 4217.
         /// </para>
         /// <para>
-        /// The <see cref="Currency.Code"/> property is not guaranteed to match the value of
+        /// The <see cref="Narvalo.Currency.Code"/> property is not guaranteed to match the value of
         /// <see cref="RegionInfo.ISOCurrencySymbol"/>. Indeed, the region info
         /// only uses the most recent currency.
         /// Moreover, a country might use more than one currency but .NET will only

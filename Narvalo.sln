@@ -67,9 +67,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. TO BE REMOVED", "5. TO B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Edufun", "samples\Edufun\Edufun.csproj", "{57051DF4-A9BF-47E2-ADF3-9E938AC1F2E3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Money", "src\Narvalo.Money\Narvalo.Money.csproj", "{387BDE7D-C68D-43C0-93CA-17700577FAFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Money.Facts", "tests\Narvalo.Money.Facts\Narvalo.Money.Facts.csproj", "{120900B7-E9A4-41CD-A358-6CAE61E1C328}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		tests\TestCommon\Narvalo.TestCommon.projitems*{031ab273-4a04-40af-923a-aa138096f98a}*SharedItemsImports = 4
+		tests\TestCommon\Narvalo.TestCommon.projitems*{120900b7-e9a4-41cd-a358-6cae61e1c328}*SharedItemsImports = 4
 		tests\TestCommon\Narvalo.TestCommon.projitems*{1f222a47-26e5-462a-ab89-f031060d224a}*SharedItemsImports = 4
 		tests\TestCommon\Narvalo.TestCommon.projitems*{3f3d8108-cc1c-4ce2-8768-2097a0b77d01}*SharedItemsImports = 4
 		tests\TestCommon\Narvalo.TestCommon.projitems*{49823004-daba-4fe2-b4f0-d40542af7754}*SharedItemsImports = 4
@@ -217,6 +222,18 @@ Global
 		{57051DF4-A9BF-47E2-ADF3-9E938AC1F2E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57051DF4-A9BF-47E2-ADF3-9E938AC1F2E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57051DF4-A9BF-47E2-ADF3-9E938AC1F2E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{387BDE7D-C68D-43C0-93CA-17700577FAFD}.CodeContracts|Any CPU.ActiveCfg = CodeContracts|Any CPU
+		{387BDE7D-C68D-43C0-93CA-17700577FAFD}.CodeContracts|Any CPU.Build.0 = CodeContracts|Any CPU
+		{387BDE7D-C68D-43C0-93CA-17700577FAFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{387BDE7D-C68D-43C0-93CA-17700577FAFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{387BDE7D-C68D-43C0-93CA-17700577FAFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{387BDE7D-C68D-43C0-93CA-17700577FAFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{120900B7-E9A4-41CD-A358-6CAE61E1C328}.CodeContracts|Any CPU.ActiveCfg = Release|Any CPU
+		{120900B7-E9A4-41CD-A358-6CAE61E1C328}.CodeContracts|Any CPU.Build.0 = Release|Any CPU
+		{120900B7-E9A4-41CD-A358-6CAE61E1C328}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{120900B7-E9A4-41CD-A358-6CAE61E1C328}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{120900B7-E9A4-41CD-A358-6CAE61E1C328}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{120900B7-E9A4-41CD-A358-6CAE61E1C328}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -246,5 +263,7 @@ Global
 		{F1F1E121-3B3D-463D-8CF5-3A6E92004546} = {1606E94A-5311-4C5F-91E2-876A4B635F02}
 		{49823004-DABA-4FE2-B4F0-D40542AF7754} = {1606E94A-5311-4C5F-91E2-876A4B635F02}
 		{57051DF4-A9BF-47E2-ADF3-9E938AC1F2E3} = {7FF29AE0-15BB-4C3C-B497-23852B98F95B}
+		{387BDE7D-C68D-43C0-93CA-17700577FAFD} = {E532D0F7-CFBB-4D52-BEA3-D67DA931AC86}
+		{120900B7-E9A4-41CD-A358-6CAE61E1C328} = {1606E94A-5311-4C5F-91E2-876A4B635F02}
 	EndGlobalSection
 EndGlobal
