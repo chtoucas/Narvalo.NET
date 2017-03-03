@@ -56,9 +56,6 @@
     <CodeContractsAnalysisWarningLevel>3</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="Narvalo.Finance.props">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Narvalo.Finance.Version.props">
       <SubType>Designer</SubType>
     </None>

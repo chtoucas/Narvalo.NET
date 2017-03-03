@@ -61,9 +61,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Maybe.g.cs</LastGenOutput>
     </None>
-    <None Include="Narvalo.Fx.props">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Narvalo.Fx.Version.props">
       <SubType>Designer</SubType>
     </None>
