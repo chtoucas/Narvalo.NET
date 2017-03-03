@@ -35,7 +35,7 @@
     <Compile Include="Finance\CheckDigitsFacts.cs" />
     <Compile Include="Finance\Currencies\CurrencyActivatorFacts.cs" />
     <Compile Include="Fx\Extensions\NullableFacts.cs" />
-    <Compile Include="GuardFacts.cs" />
+    <Compile Include="Cerbere\GuardFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
