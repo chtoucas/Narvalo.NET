@@ -22,9 +22,6 @@ namespace Narvalo
 
     public static class BooleanStylesExtensions
     {
-        public static bool Contains(this BooleanStyles @this, BooleanStyles styles)
-        {
-            return (@this & styles) != 0;
-        }
+        public static bool Contains(this BooleanStyles @this, BooleanStyles styles) => (@this & styles) != 0;
     }
 }

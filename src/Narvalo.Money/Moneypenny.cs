@@ -262,12 +262,7 @@ namespace Narvalo
 
         public bool Equals(Moneypenny other) => Amount == other.Amount && Currency == other.Currency;
 
-        public override bool Equals(object obj)
-        {
-            if (!(obj is Moneypenny)) { return false; }
-
-            return Equals((Moneypenny)obj);
-        }
+        public override bool Equals(object obj) => (obj is Moneypenny) && Equals((Moneypenny)obj);
 
         public override int GetHashCode()
         {

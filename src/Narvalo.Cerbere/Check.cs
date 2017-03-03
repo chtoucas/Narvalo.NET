@@ -14,10 +14,6 @@ namespace Narvalo
     [DebuggerStepThrough]
     public static partial class Check
     {
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="testCondition"></param>
         /// <remarks>
         /// To be used instead of
         /// <code>

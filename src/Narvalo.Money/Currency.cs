@@ -479,12 +479,7 @@ namespace Narvalo
 
         public bool Equals(Currency other) => Code == other.Code;
 
-        public override bool Equals(object obj)
-        {
-            if (!(obj is Currency)) { return false; }
-
-            return Equals((Currency)obj);
-        }
+        public override bool Equals(object obj) => (obj is Currency) && Equals((Currency)obj);
 
         // TODO: Since there are so few currencies, we could cache the hash code?
         public override int GetHashCode() => Code.GetHashCode();

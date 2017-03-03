@@ -37,10 +37,7 @@ namespace Narvalo
         /// <returns></returns>
         [Pure]
         public bool Contains(T value)
-        {
-            return value.CompareTo(LowerEnd) >= 0
-                && value.CompareTo(UpperEnd) <= 0;
-        }
+            => value.CompareTo(LowerEnd) >= 0 && value.CompareTo(UpperEnd) <= 0;
 
         /// <summary>
         /// Returns true if the value is included in the range.
@@ -50,10 +47,7 @@ namespace Narvalo
         /// <returns></returns>
         [Pure]
         public bool Includes(Range<T> range)
-        {
-            return range.LowerEnd.CompareTo(LowerEnd) >= 0
-                && range.UpperEnd.CompareTo(UpperEnd) <= 0;
-        }
+            => range.LowerEnd.CompareTo(LowerEnd) >= 0 && range.UpperEnd.CompareTo(UpperEnd) <= 0;
 
         public override string ToString()
         {
@@ -71,24 +65,14 @@ namespace Narvalo
         public static bool operator !=(Range<T> left, Range<T> right) => !left.Equals(right);
 
         public bool Equals(Range<T> other)
-            => LowerEnd.Equals(other.LowerEnd)
-                && UpperEnd.Equals(other.UpperEnd);
+            => LowerEnd.Equals(other.LowerEnd) && UpperEnd.Equals(other.UpperEnd);
 
-        public override bool Equals(object obj)
-        {
-            if (!(obj is Range<T>))
-            {
-                return false;
-            }
-
-            return Equals((Range<T>)obj);
-        }
+        public override bool Equals(object obj) => (obj is Range<T>) && Equals((Range<T>)obj);
 
         public override int GetHashCode()
         {
             unchecked
             {
-                // FIXME: Use EqualityComparer.
                 int hash = 17;
                 hash = 23 * hash + LowerEnd.GetHashCode();
                 hash = 23 * hash + UpperEnd.GetHashCode();

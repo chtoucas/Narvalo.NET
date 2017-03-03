@@ -73,11 +73,7 @@ namespace Narvalo
             && Epsilon == other.Epsilon;
 
         public override bool Equals(object obj)
-        {
-            if (!(obj is FractionalCurrency)) { return false; }
-
-            return Equals((FractionalCurrency)obj);
-        }
+            => (obj is FractionalCurrency) && Equals((FractionalCurrency)obj);
 
         public override int GetHashCode()
         {

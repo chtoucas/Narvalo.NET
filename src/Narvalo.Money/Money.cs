@@ -403,12 +403,7 @@ namespace Narvalo
             && Currency == other.Currency
             && IsNormalized == other.IsNormalized;
 
-        public override bool Equals(object obj)
-        {
-            if (!(obj is Money)) { return false; }
-
-            return Equals((Money)obj);
-        }
+        public override bool Equals(object obj) => (obj is Money) && Equals((Money)obj);
 
         public override int GetHashCode()
         {
