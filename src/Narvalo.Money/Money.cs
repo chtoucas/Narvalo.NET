@@ -142,7 +142,7 @@ namespace Narvalo
         }
 
         internal void ThrowIfCurrencyMismatch(Money money, string parameterName)
-            => Require.True(Currency == money.Currency, parameterName, Strings.Argument_CurrencyMismatch);
+            => Require.True(Currency == money.Currency, parameterName, Strings_Money.Argument_CurrencyMismatch);
 
         [ExcludeFromCodeCoverage]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
@@ -433,7 +433,7 @@ namespace Narvalo
 
             if (!(obj is Money))
             {
-                throw new ArgumentException(Strings.Argument_InvalidMoneyType, nameof(obj));
+                throw new ArgumentException(Strings_Money.Argument_InvalidMoneyType, nameof(obj));
             }
 
             return CompareTo((Money)obj);

@@ -18,7 +18,7 @@ namespace Narvalo.Internal
 
                 // A currency code MUST be composed of exactly 3 letters.
                 Narvalo.Require.Range(code.Length == 3, parameterName,
-                    Strings.Sentinel_OutOfRangeCurrencyAlphabeticCode);
+                    Strings_Money.Sentinel_OutOfRangeCurrencyAlphabeticCode);
 
                 // A currency code MUST only contain uppercase ASCII letters.
                 Narvalo.Require.True(Ascii.IsUpperLetter(code), parameterName);

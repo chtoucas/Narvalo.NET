@@ -227,7 +227,7 @@ namespace Narvalo
             short? minorUnits;
             if (!Codes.TryGetValue(code, out minorUnits))
             {
-                throw new CurrencyNotFoundException(Format.Current(Strings.Currency_UnknownCode, code));
+                throw new CurrencyNotFoundException(Format.Current(Strings_Money.Currency_UnknownCode, code));
             }
 
             return new Currency(code, minorUnits);
@@ -239,7 +239,7 @@ namespace Narvalo
             var cy = TryCreate(code, types);
             if (!cy.HasValue)
             {
-                throw new CurrencyNotFoundException(Format.Current(Strings.Currency_UnknownCode, code));
+                throw new CurrencyNotFoundException(Format.Current(Strings_Money.Currency_UnknownCode, code));
             }
 
             return cy.Value;
@@ -320,7 +320,7 @@ namespace Narvalo
 
             if (cultureInfo.IsNeutralCulture)
             {
-                throw new ArgumentException(Strings.Argument_NeutralCultureNotSupported, nameof(cultureInfo));
+                throw new ArgumentException(Strings_Money.Argument_NeutralCultureNotSupported, nameof(cultureInfo));
             }
 
             return ForRegion(new RegionInfo(cultureInfo.Name));

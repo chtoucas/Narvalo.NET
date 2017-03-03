@@ -261,7 +261,7 @@ namespace Narvalo.Finance.Generic
 
             if (!(obj is Money<TCurrency>))
             {
-                throw new ArgumentException(Strings.Argument_InvalidMoneyType, nameof(obj));
+                throw new ArgumentException(Strings_Money.Argument_InvalidMoneyType, nameof(obj));
             }
 
             return CompareTo((Money<TCurrency>)obj);
