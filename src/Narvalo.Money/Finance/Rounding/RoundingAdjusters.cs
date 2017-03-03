@@ -243,7 +243,7 @@ namespace Narvalo.Finance.Rounding
             Require.Range(1 <= decimalPlaces && decimalPlaces <= MAX_SCALE, nameof(decimalPlaces));
 
             decimal maxValue = s_MaxValues[decimalPlaces - 1];
-            Enforce.Range(-maxValue <= value && value <= maxValue, nameof(value));
+            Require.Range(-maxValue <= value && value <= maxValue, nameof(value));
 
             return s_Powers10[decimalPlaces - 1] * value;
         }

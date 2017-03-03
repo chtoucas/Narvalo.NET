@@ -142,7 +142,7 @@ namespace Narvalo
         }
 
         internal void ThrowIfCurrencyMismatch(Money money, string parameterName)
-            => Enforce.True(Currency == money.Currency, parameterName, Strings.Argument_CurrencyMismatch);
+            => Require.True(Currency == money.Currency, parameterName, Strings.Argument_CurrencyMismatch);
 
         [ExcludeFromCodeCoverage]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]

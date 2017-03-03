@@ -74,7 +74,7 @@ namespace Narvalo
         public static Moneypenny One(Currency currency) => new Moneypenny(1L, currency);
 
         internal void ThrowIfCurrencyMismatch(Moneypenny penny, string parameterName)
-            => Enforce.True(Currency == penny.Currency, parameterName, Strings.Argument_CurrencyMismatch);
+            => Require.True(Currency == penny.Currency, parameterName, Strings.Argument_CurrencyMismatch);
 
         [ExcludeFromCodeCoverage]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
