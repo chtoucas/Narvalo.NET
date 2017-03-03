@@ -163,12 +163,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Narvalo.Cerbere\Narvalo.Cerbere.csproj">
-      <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
-      <Name>Narvalo.Cerbere</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="ResultT+TError.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ResultT+TError.g.cs</LastGenOutput>
@@ -191,6 +185,12 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ResultT.g.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Narvalo.Core\Narvalo.Core.csproj">
+      <Project>{66b62ba5-e26e-4899-85ac-4c52d3a427e9}</Project>
+      <Name>Narvalo.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
