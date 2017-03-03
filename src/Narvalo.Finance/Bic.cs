@@ -270,12 +270,7 @@ namespace Narvalo.Finance
 
         public bool Equals(Bic other) => _value == other._value;
 
-        public override bool Equals(object obj)
-        {
-            if (!(obj is Bic)) { return false; }
-
-            return Equals((Bic)obj);
-        }
+        public override bool Equals(object obj) => (obj is Bic) && Equals((Bic)obj);
 
         public override int GetHashCode() => _value.GetHashCode();
     }

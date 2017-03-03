@@ -236,22 +236,10 @@ namespace Narvalo.Finance.Generic
         public bool Equals(Money<TCurrency> other) => Amount == other.Amount;
 
         public override bool Equals(object obj)
-        {
-            if (!(obj is Money<TCurrency>)) { return false; }
-
-            return Equals((Money<TCurrency>)obj);
-        }
+            => (obj is Money<TCurrency>) && Equals((Money<TCurrency>)obj);
 
         public override int GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 17;
-                hash = 31 * hash + Amount.GetHashCode();
-                hash = 31 * hash + Currency.GetHashCode();
-                return hash;
-            }
-        }
+            => HashHelpers.Combine(Amount.GetHashCode(), Currency.GetHashCode());
     }
 
     // Implements the IComparable and IComparable<Money<TCurrency>> interfaces.

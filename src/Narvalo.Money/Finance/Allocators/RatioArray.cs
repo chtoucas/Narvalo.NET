@@ -67,12 +67,7 @@ namespace Narvalo.Finance.Allocators
 
         public bool Equals(RatioArray other) => _ratios == other._ratios;
 
-        public override bool Equals(object obj)
-        {
-            if (!(obj is RatioArray)) { return false; }
-
-            return Equals((RatioArray)obj);
-        }
+        public override bool Equals(object obj) => (obj is RatioArray) && Equals((RatioArray)obj);
 
         public override int GetHashCode() => _ratios.GetHashCode();
     }

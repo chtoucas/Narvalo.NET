@@ -51,7 +51,6 @@
       <DependentUpon>SnvCurrencyInfoProvider.tt</DependentUpon>
     </Compile>
     <Compile Include="Formattable.cs" />
-    <Compile Include="Fx\BooleanResult`1.cs" />
     <Compile Include="Fx\Recursion.cs" />
     <Compile Include="Fx\Func.cs" />
     <Compile Include="Fx\Extensions\Func%24.cs" />

@@ -66,14 +66,6 @@ namespace Narvalo
         public override bool Equals(object obj) => (obj is Range<T>) && Equals((Range<T>)obj);
 
         public override int GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 17;
-                hash = 23 * hash + LowerEnd.GetHashCode();
-                hash = 23 * hash + UpperEnd.GetHashCode();
-                return hash;
-            }
-        }
+            => HashHelpers.Combine(LowerEnd.GetHashCode(), UpperEnd.GetHashCode());
     }
 }

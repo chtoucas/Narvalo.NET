@@ -241,12 +241,7 @@ namespace Narvalo.Finance
 
         public bool Equals(IbanParts other) => _value == other._value;
 
-        public override bool Equals(object obj)
-        {
-            if (!(obj is IbanParts)) { return false; }
-
-            return Equals((IbanParts)obj);
-        }
+        public override bool Equals(object obj) => (obj is IbanParts) && Equals((IbanParts)obj);
 
         public override int GetHashCode() => _value.GetHashCode();
     }

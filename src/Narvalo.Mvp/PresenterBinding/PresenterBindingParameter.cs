@@ -85,10 +85,15 @@ namespace Narvalo.Mvp.PresenterBinding
 
         public override int GetHashCode()
         {
-            return PresenterType.GetHashCode()
-                | ViewType.GetHashCode()
-                | BindingMode.GetHashCode()
-                | Views.GetHashCode();
+            unchecked
+            {
+                int hash = 17;
+                hash = 31 * hash + PresenterType.GetHashCode();
+                hash = 31 * hash + ViewType.GetHashCode();
+                hash = 31 * hash + BindingMode.GetHashCode();
+                hash = 31 * hash + Views.GetHashCode();
+                return hash;
+            }
         }
 
         /// <summary>
