@@ -110,10 +110,10 @@ namespace Narvalo.Finance
             Require.NotNull(countryCode, nameof(countryCode));
             Require.NotNull(locationCode, nameof(locationCode));
             Require.NotNull(branchCode, nameof(branchCode));
-            Enforce.True(InstitutionPart.Validate(institutionCode, version), nameof(institutionCode));
-            Enforce.True(CountryPart.Validate(countryCode), nameof(countryCode));
-            Enforce.True(LocationPart.Validate(locationCode), nameof(locationCode));
-            Enforce.True(BranchPart.Validate(branchCode), nameof(branchCode));
+            Require.True(InstitutionPart.Validate(institutionCode, version), nameof(institutionCode));
+            Require.True(CountryPart.Validate(countryCode), nameof(countryCode));
+            Require.True(LocationPart.Validate(locationCode), nameof(locationCode));
+            Require.True(BranchPart.Validate(branchCode), nameof(branchCode));
 
             return new Bic(institutionCode, countryCode, locationCode, branchCode);
         }
@@ -182,7 +182,6 @@ namespace Narvalo.Finance
                 else
                 {
                     var retval = value.Substring(StartIndex, Length);
-
                     return CheckContent(retval) ? retval : null;
                 }
             }
@@ -204,9 +203,7 @@ namespace Narvalo.Finance
             public static string FromBic(string value)
             {
                 Demand.True(value.Length >= StartIndex + Length);
-
                 var retval = value.Substring(StartIndex, Length);
-
                 return CheckContent(retval) ? retval : null;
             }
 
@@ -250,9 +247,7 @@ namespace Narvalo.Finance
             public static string FromBic(string value)
             {
                 Demand.True(value.Length >= StartIndex + Length);
-
                 var retval = value.Substring(StartIndex, Length);
-
                 return CheckContent(retval) ? retval : null;
             }
 

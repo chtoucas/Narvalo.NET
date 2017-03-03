@@ -49,8 +49,8 @@ namespace Narvalo.Finance
         {
             Require.NotNull(countryCode, nameof(countryCode));
             Require.NotNull(bban, nameof(bban));
-            Enforce.True(CountryPart.Validate(countryCode), nameof(countryCode));
-            Enforce.True(BbanPart.Validate(bban), nameof(bban));
+            Require.True(CountryPart.Validate(countryCode), nameof(countryCode));
+            Require.True(BbanPart.Validate(bban), nameof(bban));
 
             var checkDigits = IbanCheckDigits.Compute(countryCode, bban);
 
@@ -62,9 +62,9 @@ namespace Narvalo.Finance
             Require.NotNull(countryCode, nameof(countryCode));
             Require.NotNull(checkDigits, nameof(checkDigits));
             Require.NotNull(bban, nameof(bban));
-            Enforce.True(CountryPart.Validate(countryCode), nameof(countryCode));
-            Enforce.True(CheckDigitsPart.Validate(checkDigits), nameof(checkDigits));
-            Enforce.True(BbanPart.Validate(bban), nameof(bban));
+            Require.True(CountryPart.Validate(countryCode), nameof(countryCode));
+            Require.True(CheckDigitsPart.Validate(checkDigits), nameof(checkDigits));
+            Require.True(BbanPart.Validate(bban), nameof(bban));
 
             return new IbanParts(countryCode, checkDigits, bban);
         }
@@ -113,9 +113,7 @@ namespace Narvalo.Finance
             public static string FromIban(string value)
             {
                 Demand.Range(value.Length >= StartIndex);
-
                 var retval = value.Substring(StartIndex);
-
                 return CheckContent(retval) ? retval : null;
             }
 
@@ -136,9 +134,7 @@ namespace Narvalo.Finance
             public static string FromIban(string value)
             {
                 Demand.Range(value.Length >= StartIndex + Length);
-
                 var retval = value.Substring(StartIndex, Length);
-
                 return CheckContent(retval) ? retval : null;
             }
 
@@ -159,9 +155,7 @@ namespace Narvalo.Finance
             public static string FromIban(string value)
             {
                 Demand.Range(value.Length >= StartIndex + Length);
-
                 var retval = value.Substring(StartIndex, Length);
-
                 return CheckContent(retval) ? retval : null;
             }
 

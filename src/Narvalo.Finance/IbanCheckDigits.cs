@@ -49,7 +49,7 @@ namespace Narvalo.Finance
         public static int ComputeInt32Checksum(string value)
         {
             Require.NotNull(value, nameof(value));
-            Enforce.Range(IbanParts.CheckLength(value), nameof(value));
+            Require.Range(IbanParts.CheckLength(value), nameof(value));
 
             const int MAX_DIGIT = (Int32.MaxValue - 9) / 10;
             const int MAX_LETTER = (Int32.MaxValue - 35) / 100;
@@ -83,7 +83,7 @@ namespace Narvalo.Finance
         public static int ComputeInt64Checksum(string value)
         {
             Require.NotNull(value, nameof(value));
-            Enforce.Range(IbanParts.CheckLength(value), nameof(value));
+            Require.Range(IbanParts.CheckLength(value), nameof(value));
 
             // 922 337 203 685 477 579
             const long MAX_DIGIT = (Int64.MaxValue - 9) / 10;
