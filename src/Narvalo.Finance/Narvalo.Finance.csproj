@@ -15,8 +15,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Globalization\CountryISOCodes.cs" />
-    <Compile Include="Globalization\CountryISOCodes.g.cs">
+    <Compile Include="Internal\CountryISOCodes.cs" />
+    <Compile Include="Internal\CountryISOCodes.g.cs">
       <DependentUpon>CountryISOCodes.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -70,7 +70,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Globalization\CountryISOCodes.tt">
+    <Content Include="Internal\CountryISOCodes.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>CountryISOCodes.g.cs</LastGenOutput>
     </Content>

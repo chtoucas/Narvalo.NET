@@ -10,11 +10,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo.Finance.Globalization
+namespace Narvalo.Finance.Internal
 {
     using System.Collections.Generic;
 
-    public partial class CountryISOCodes
+    internal static partial class CountryISOCodes
     {
         // All alpha-2 codes as defined in ISO 3166-1 alpha-2.
         private static HashSet<string> TwoLetterCodeSet
