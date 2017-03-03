@@ -60,14 +60,6 @@ namespace Narvalo.Web.Configuration
             }
         }
 
-        protected override ConfigurationPropertyCollection Properties
-        {
-            get
-            {
-                Warrant.NotNull<ConfigurationPropertyCollection>();
-
-                return s_Properties;
-            }
-        }
+        protected override ConfigurationPropertyCollection Properties => s_Properties;
     }
 }

@@ -6,46 +6,15 @@ namespace Narvalo.Web.Semantic
 
     public sealed partial class OpenGraphLocale
     {
-        private readonly CultureInfo _culture;
-
         public OpenGraphLocale(CultureInfo culture)
         {
             Require.NotNull(culture, nameof(culture));
 
-            _culture = culture;
+            Culture = culture;
         }
 
-        public CultureInfo Culture
-        {
-            get
-            {
-                Warrant.NotNull<CultureInfo>();
+        public CultureInfo Culture { get; }
 
-                return _culture;
-            }
-        }
-
-        public override string ToString()
-        {
-            return Culture.ToString().Replace('-', '_');
-        }
+        public override string ToString() => Culture.ToString().Replace('-', '_');
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Web.Semantic
-{
-    using System.Diagnostics.Contracts;
-
-    public sealed partial class OpenGraphLocale
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_culture != null);
-        }
-    }
-}
-
-#endif

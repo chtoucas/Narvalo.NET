@@ -6,32 +6,6 @@ namespace Narvalo.Web.Optimization
     {
         private readonly IWhiteSpaceBuster _buster = new DefaultWhiteSpaceBuster();
 
-        public IWhiteSpaceBuster Buster
-        {
-            get
-            {
-                Warrant.NotNull<IWhiteSpaceBuster>();
-
-                return _buster;
-            }
-        }
+        public IWhiteSpaceBuster Buster => _buster;
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Web.Optimization
-{
-    using System.Diagnostics.Contracts;
-
-    public sealed partial class DefaultWhiteSpaceBusterProvider
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_buster != null);
-        }
-    }
-}
-
-#endif

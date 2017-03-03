@@ -6,10 +6,6 @@ namespace Narvalo.Web.Semantic
 
     public sealed class OpenGraphPng : OpenGraphImage
     {
-        public OpenGraphPng(Uri url)
-            : base(url, "image/png")
-        {
-            Expect.NotNull(url);
-        }
+        public OpenGraphPng(Uri url) : base(url, "image/png") { }
     }
 }

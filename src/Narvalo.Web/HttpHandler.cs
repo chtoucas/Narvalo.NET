@@ -95,25 +95,3 @@ namespace Narvalo.Web
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Web
-{
-    using System.Diagnostics.Contracts;
-    using System.Web;
-
-    [ContractClass(typeof(HttpHandlerContract))]
-    public abstract partial class HttpHandler { }
-
-    [ContractClassFor(typeof(HttpHandler))]
-    internal abstract class HttpHandlerContract : HttpHandler
-    {
-        protected override void ProcessRequestCore(HttpContext context)
-        {
-            Contract.Requires(context != null);
-        }
-    }
-}
-
-#endif

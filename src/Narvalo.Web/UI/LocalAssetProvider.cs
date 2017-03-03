@@ -4,11 +4,9 @@ namespace Narvalo.Web.UI
 {
     using System;
     using System.Collections.Specialized;
-    using System.Diagnostics.Contracts;
     using System.Web;
 
     using Narvalo.Collections;
-    using Narvalo.Fx;
     using Narvalo.Web.Properties;
 
     public sealed class LocalAssetProvider : AssetProvider
@@ -32,36 +30,24 @@ namespace Narvalo.Web.UI
         public override Uri GetFontUri(string relativePath)
         {
             // Here we can be sure that _fontsPath is not null or empty; cf. Initialize().
-            Contract.Assume(_fontsPath != null);
-            Contract.Assume(_fontsPath.Length != 0);
-
             return MakeUri(_fontsPath, relativePath);
         }
 
         public override Uri GetImageUri(string relativePath)
         {
             // Here we can be sure that _fontsPath is not null or empty; cf. Initialize().
-            Contract.Assume(_imagesPath != null);
-            Contract.Assume(_imagesPath.Length != 0);
-
             return MakeUri(_imagesPath, relativePath);
         }
 
         public override Uri GetScriptUri(string relativePath)
         {
             // Here we can be sure that _fontsPath is not null or empty; cf. Initialize().
-            Contract.Assume(_scriptsPath != null);
-            Contract.Assume(_scriptsPath.Length != 0);
-
             return MakeUri(_scriptsPath, relativePath);
         }
 
         public override Uri GetStyleUri(string relativePath)
         {
             // Here we can be sure that _fontsPath is not null or empty; cf. Initialize().
-            Contract.Assume(_stylesPath != null);
-            Contract.Assume(_stylesPath.Length != 0);
-
             return MakeUri(_stylesPath, relativePath);
         }
 
@@ -109,7 +95,6 @@ namespace Narvalo.Web.UI
             Require.NotNull(relativePath, nameof(relativePath));
             Demand.NotNull(baseIntermediatePath);
             Demand.Range(baseIntermediatePath.Length != 0);
-            Warrant.NotNull<Uri>();
 
             // NB: If basePath or relativePath is null or empty, VirtualPathUtility.Combine will throw,
             // which is of course exactly what we want.

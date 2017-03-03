@@ -65,27 +65,3 @@ namespace Narvalo.Web
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Web
-{
-    using System.Diagnostics.Contracts;
-    using System.Web;
-
-    [ContractClass(typeof(HttpHandlerContract<,>))]
-    public abstract partial class HttpHandler<TQuery, TBinder> { }
-
-    [ContractClassFor(typeof(HttpHandler<,>))]
-    internal abstract class HttpHandlerContract<TQuery, TBinder> : HttpHandler<TQuery, TBinder>
-        where TBinder : IHttpQueryBinder<TQuery>, new()
-    {
-        protected override void ProcessRequestCore(HttpContext context, TQuery query)
-        {
-            Contract.Requires(context != null);
-            Contract.Requires(query != null);
-        }
-    }
-}
-
-#endif

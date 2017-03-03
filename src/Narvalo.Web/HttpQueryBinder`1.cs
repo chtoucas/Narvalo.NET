@@ -5,7 +5,6 @@ namespace Narvalo.Web
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
-    using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Web;
 
@@ -18,15 +17,7 @@ namespace Narvalo.Web
 
         protected HttpQueryBinder() { }
 
-        public IEnumerable<HttpQueryBinderException> BindingErrors
-        {
-            get
-            {
-                Warrant.NotNull<IEnumerable<HttpQueryBinderException>>();
-
-                return _errors;
-            }
-        }
+        public IEnumerable<HttpQueryBinderException> BindingErrors => _errors;
 
         public Maybe<TQuery> Bind(HttpRequest request)
         {
@@ -37,7 +28,6 @@ namespace Narvalo.Web
 
         protected abstract Maybe<TQuery> BindCore(HttpRequest request);
 
-        [Pure]
         protected bool Validate(TQuery query)
         {
             return (from prop in TypeDescriptor.GetProperties(query).Cast<PropertyDescriptor>()
@@ -53,36 +43,3 @@ namespace Narvalo.Web
     }
 }
 
-#if CONTRACTS_FULL
-
-namespace Narvalo.Web
-{
-    using System.Diagnostics.Contracts;
-    using System.Web;
-
-    using Narvalo.Fx;
-
-    [ContractClass(typeof(HttpQueryBinderContract<>))]
-    public abstract partial class HttpQueryBinder<TQuery>
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_errors != null);
-        }
-    }
-
-    [ContractClassFor(typeof(HttpQueryBinder<>))]
-    internal abstract class HttpQueryBinderContract<TQuery> : HttpQueryBinder<TQuery>
-    {
-        protected override Maybe<TQuery> BindCore(HttpRequest request)
-        {
-            Contract.Requires(request != null);
-            Contract.Ensures(Contract.Result<Maybe<TQuery>>() != null);
-
-            return default(Maybe<TQuery>);
-        }
-    }
-}
-
-#endif

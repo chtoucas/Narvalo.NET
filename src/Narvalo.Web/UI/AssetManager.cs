@@ -5,7 +5,6 @@ namespace Narvalo.Web.UI
     using System;
     using System.Configuration;
     using System.Configuration.Provider;
-    using System.Diagnostics.Contracts;
     using System.Web.Configuration;
 
     using Narvalo.Web.Configuration;
@@ -28,8 +27,6 @@ namespace Narvalo.Web.UI
         {
             get
             {
-                Warrant.NotNull<AssetProvider>();
-
                 Initialize();
                 return s_Provider;
             }
@@ -39,57 +36,22 @@ namespace Narvalo.Web.UI
         {
             get
             {
-                Warrant.NotNull<AssetProviderCollection>();
-
                 Initialize();
                 return s_Providers;
             }
         }
 
-        public static Uri FontsBaseUri
-        {
-            get
-            {
-                Warrant.NotNull<Uri>();
+        public static Uri FontsBaseUri => Provider.GetFontUri(String.Empty);
 
-                return Provider.GetFontUri(String.Empty);
-            }
-        }
+        public static Uri ImagesBaseUri => Provider.GetImageUri(String.Empty);
 
-        public static Uri ImagesBaseUri
-        {
-            get
-            {
-                Warrant.NotNull<Uri>();
+        public static Uri ScriptsBaseUri => Provider.GetScriptUri(String.Empty);
 
-                return Provider.GetImageUri(String.Empty);
-            }
-        }
-
-        public static Uri ScriptsBaseUri
-        {
-            get
-            {
-                Warrant.NotNull<Uri>();
-
-                return Provider.GetScriptUri(String.Empty);
-            }
-        }
-
-        public static Uri StylesBaseUri
-        {
-            get
-            {
-                Warrant.NotNull<Uri>();
-
-                return Provider.GetStyleUri(String.Empty);
-            }
-        }
+        public static Uri StylesBaseUri => Provider.GetStyleUri(String.Empty);
 
         public static Uri GetFontUri(string relativePath)
         {
             Require.NotNullOrEmpty(relativePath, nameof(relativePath));
-            Warrant.NotNull<Uri>();
 
             return Provider.GetFontUri(relativePath);
         }
@@ -97,7 +59,6 @@ namespace Narvalo.Web.UI
         public static Uri GetImageUri(string relativePath)
         {
             Require.NotNullOrEmpty(relativePath, nameof(relativePath));
-            Warrant.NotNull<Uri>();
 
             return Provider.GetImageUri(relativePath);
         }
@@ -105,7 +66,6 @@ namespace Narvalo.Web.UI
         public static Uri GetScriptUri(string relativePath)
         {
             Require.NotNullOrEmpty(relativePath, nameof(relativePath));
-            Warrant.NotNull<Uri>();
 
             return Provider.GetScriptUri(relativePath);
         }
@@ -113,7 +73,6 @@ namespace Narvalo.Web.UI
         public static Uri GetStyleUri(string relativePath)
         {
             Require.NotNullOrEmpty(relativePath, nameof(relativePath));
-            Warrant.NotNull<Uri>();
 
             return Provider.GetStyleUri(relativePath);
         }
@@ -147,7 +106,6 @@ namespace Narvalo.Web.UI
                 var propertyInfo
                     = section.ElementInformation
                         .Properties[AssetSection.DefaultProviderPropertyName];
-                Contract.Assume(propertyInfo != null);
 
                 throw new ConfigurationErrorsException(
                     Strings.AssetManager_DefaultProviderNotFound,
@@ -156,9 +114,6 @@ namespace Narvalo.Web.UI
             }
 
             s_Provider = tmpProvider;
-
-            Contract.Assert(s_Providers != null);
-            Contract.Assert(s_Provider != null);
         }
 
         // Internal-only method for testing.
@@ -222,9 +177,6 @@ namespace Narvalo.Web.UI
 
             s_Providers = tmpProviders;
             s_Provider = tmpProvider;
-
-            Contract.Assert(s_Providers != null);
-            Contract.Assert(s_Provider != null);
         }
     }
 }

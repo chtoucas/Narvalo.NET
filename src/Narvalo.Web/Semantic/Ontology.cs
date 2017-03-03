@@ -29,8 +29,6 @@ namespace Narvalo.Web.Semantic
         {
             get
             {
-                Warrant.NotNull<CultureInfo>();
-
                 return _culture;
             }
         }
@@ -39,8 +37,6 @@ namespace Narvalo.Web.Semantic
         {
             get
             {
-                Warrant.NotNull<string>();
-
                 return Culture.TwoLetterISOLanguageName;
             }
         }
@@ -49,8 +45,6 @@ namespace Narvalo.Web.Semantic
         {
             get
             {
-                Warrant.NotNull<IOpenGraphMetadata>();
-
                 return _openGraph;
             }
         }
@@ -59,8 +53,6 @@ namespace Narvalo.Web.Semantic
         {
             get
             {
-                Warrant.NotNull<Relationships>();
-
                 return _relationships;
             }
         }
@@ -69,8 +61,6 @@ namespace Narvalo.Web.Semantic
         {
             get
             {
-                Warrant.NotNull<SchemaOrgVocabulary>();
-
                 return _schemaOrg;
             }
         }
@@ -84,24 +74,3 @@ namespace Narvalo.Web.Semantic
         public string Title { get; set; }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Web.Semantic
-{
-    using System.Diagnostics.Contracts;
-
-    public sealed partial class Ontology
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_culture != null);
-            Contract.Invariant(_openGraph != null);
-            Contract.Invariant(_relationships != null);
-            Contract.Invariant(_schemaOrg != null);
-        }
-    }
-}
-
-#endif

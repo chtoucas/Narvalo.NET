@@ -58,21 +58,3 @@ namespace Narvalo.Web.Optimization
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Web.Optimization
-{
-    using System.Diagnostics.Contracts;
-
-    public sealed partial class WhiteSpaceBusterMvcCSharpRazorCodeGenerator
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_optimizer != null);
-        }
-    }
-}
-
-#endif

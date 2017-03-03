@@ -19,8 +19,6 @@ namespace Narvalo.Web.Optimization
         {
             get
             {
-                Warrant.NotNull<IWhiteSpaceBusterProvider>();
-
                 return s_Instance.InnerCurrent;
             }
         }
@@ -29,16 +27,12 @@ namespace Narvalo.Web.Optimization
         {
             get
             {
-                Warrant.NotNull<IWhiteSpaceBusterProvider>();
-
                 return _current;
             }
         }
 
         public static void SetProvider(IWhiteSpaceBusterProvider provider)
         {
-            Expect.NotNull(provider);
-
             s_Instance.InnerSetProvider(provider);
         }
 
@@ -50,21 +44,3 @@ namespace Narvalo.Web.Optimization
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Web.Optimization
-{
-    using System.Diagnostics.Contracts;
-
-    public sealed partial class WhiteSpaceBusterProvider
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_current != null);
-        }
-    }
-}
-
-#endif

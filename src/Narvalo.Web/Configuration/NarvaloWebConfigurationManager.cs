@@ -11,15 +11,7 @@ namespace Narvalo.Web.Configuration
         private static readonly Lazy<OptimizationSection> s_OptimizationSection
             = new Lazy<OptimizationSection>(InitializeOptimizationSection);
 
-        internal static OptimizationSection OptimizationSection
-        {
-            get
-            {
-                Warrant.NotNull<OptimizationSection>();
-
-                return s_OptimizationSection.Value;
-            }
-        }
+        internal static OptimizationSection OptimizationSection => s_OptimizationSection.Value;
 
         public static NarvaloWebSectionGroup GetSectionGroup()
         {
@@ -44,8 +36,6 @@ namespace Narvalo.Web.Configuration
 
         private static OptimizationSection InitializeOptimizationSection()
         {
-            Warrant.NotNull<OptimizationSection>();
-
             var section = WebConfigurationManager.GetSection(
                 Narvalo.Web.Configuration.OptimizationSection.SectionName) as OptimizationSection;
 

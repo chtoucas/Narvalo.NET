@@ -38,37 +38,27 @@ namespace Narvalo.Web
 
         public static void PubliclyCacheFor(this HttpResponse @this, int days, int hours, int minutes)
         {
-            Expect.NotNull(@this);
-
             @this.PubliclyCacheFor(new TimeSpan(days, hours, minutes, 0));
         }
 
         public static void PubliclyCacheFor(this HttpResponse @this, TimeSpan duration)
         {
-            Expect.NotNull(@this);
-
             @this.CacheFor(duration, HttpCacheability.Public);
         }
 
         public static void PrivatelyCacheFor(this HttpResponse @this, int days, int hours, int minutes)
         {
-            Expect.NotNull(@this);
-
             @this.PrivatelyCacheFor(new TimeSpan(days, hours, minutes, 0));
         }
 
         public static void PrivatelyCacheFor(this HttpResponse @this, TimeSpan duration)
         {
-            Expect.NotNull(@this);
-
             // REVIEW: Utiliser HttpCacheability.ServerAndPrivate ?
             @this.CacheFor(duration, HttpCacheability.Private);
         }
 
         public static void CacheFor(this HttpResponse @this, TimeSpan duration, HttpCacheability cacheability)
         {
-            Expect.NotNull(@this);
-
             @this.CacheFor(duration, cacheability, HttpVersions.Any);
         }
 

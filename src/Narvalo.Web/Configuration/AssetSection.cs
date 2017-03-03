@@ -51,7 +51,7 @@ namespace Narvalo.Web.Configuration
             set
             {
                 Require.NotNullOrEmpty(value, nameof(value));
-                Enforce.NotWhiteSpace(value, nameof(value));
+                //Enforce.NotWhiteSpace(value, nameof(value));
 
                 _defaultProvider = value;
             }
@@ -78,8 +78,6 @@ namespace Narvalo.Web.Configuration
         {
             get
             {
-                Warrant.NotNull<ConfigurationPropertyCollection>();
-
                 return s_Properties;
             }
         }

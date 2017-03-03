@@ -47,7 +47,6 @@ namespace Narvalo.Web.UI
             Require.NotNull(relativePath, nameof(relativePath));
             Demand.NotNull(baseIntermediatePath);
             Demand.Range(baseIntermediatePath.Length != 0);
-            Warrant.NotNull<Uri>();
 
             // NB: If basePath or relativePath is null or empty, VirtualPathUtility.Combine will throw,
             // which is of course exactly what we want.

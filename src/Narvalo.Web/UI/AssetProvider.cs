@@ -31,7 +31,6 @@ namespace Narvalo.Web.UI
         {
             get
             {
-                Warrant.NotNull<string>();
                 return String.IsNullOrWhiteSpace(_defaultDescription)
                     ? Strings.AssetProvider_Description
                     : _defaultDescription;
@@ -52,7 +51,6 @@ namespace Narvalo.Web.UI
         {
             get
             {
-                Warrant.NotNull<string>();
                 return String.IsNullOrWhiteSpace(_defaultName) ? DefaultDefaultName : _defaultName;
             }
 
@@ -115,57 +113,6 @@ namespace Narvalo.Web.UI
 
         protected virtual void InitializeCustom(NameValueCollection config)
         {
-            Expect.NotNull(config);
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Web.UI
-{
-    using System;
-    using System.Configuration.Provider;
-    using System.Diagnostics.Contracts;
-
-    [ContractClass(typeof(AssetProviderContract))]
-    public abstract partial class AssetProvider { }
-
-    [ContractClassFor(typeof(AssetProvider))]
-    internal abstract class AssetProviderContract : AssetProvider
-    {
-        public override Uri GetFontUri(string relativePath)
-        {
-            Contract.Requires(relativePath != null);
-            Warrant.NotNull<Uri>();
-
-            return default(Uri);
-        }
-
-        public override Uri GetImageUri(string relativePath)
-        {
-            Contract.Requires(relativePath != null);
-            Warrant.NotNull<Uri>();
-
-            return default(Uri);
-        }
-
-        public override Uri GetScriptUri(string relativePath)
-        {
-            Contract.Requires(relativePath != null);
-            Warrant.NotNull<Uri>();
-
-            return default(Uri);
-        }
-
-        public override Uri GetStyleUri(string relativePath)
-        {
-            Contract.Requires(relativePath != null);
-            Warrant.NotNull<Uri>();
-
-            return default(Uri);
-        }
-    }
-}
-
-#endif

@@ -12,8 +12,6 @@ namespace Narvalo.Web.Configuration
     {
         public static T GetSection<T>(string sectionName) where T : ConfigurationSection
         {
-            Warrant.NotNull<T>();
-
             T section = WebConfigurationManager.GetSection(sectionName) as T;
 
             if (section == null)
@@ -27,8 +25,6 @@ namespace Narvalo.Web.Configuration
 
         public static T GetSection<T>(string sectionName, string virtualPath) where T : ConfigurationSection
         {
-            Warrant.NotNull<T>();
-
             T section = WebConfigurationManager.GetSection(sectionName, virtualPath) as T;
 
             if (section == null)

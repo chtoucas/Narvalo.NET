@@ -5,7 +5,6 @@ namespace Narvalo.Web.UI
     using System;
     using System.Collections.Specialized;
     using System.Configuration.Provider;
-    using System.Diagnostics.Contracts;
 
     using Narvalo.Collections;
     using Narvalo.Web.Properties;
@@ -62,7 +61,6 @@ namespace Narvalo.Web.UI
             Demand.NotNull(basePath);
             Demand.Range(basePath.Length != 0);
             Demand.NotNull(relativePath);
-            Warrant.NotNull<string>();
 
             string retval;
 
@@ -99,12 +97,9 @@ namespace Narvalo.Web.UI
             Require.NotNull(relativePath, nameof(relativePath));
             Demand.NotNull(baseIntermediatePath);
             Demand.Range(baseIntermediatePath.Length != 0);
-            Warrant.NotNull<Uri>();
 
             // Here we can be sure that _baseUri is not null and is absolute; otherwise an exception
             // would have been thrown in InitializeCustom().
-            Contract.Assume(_baseUri != null);
-
             string relativeUri = Combine(baseIntermediatePath, relativePath);
 
             return new Uri(_baseUri, relativeUri);

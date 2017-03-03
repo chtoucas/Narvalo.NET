@@ -3,7 +3,6 @@
 namespace Narvalo.Web
 {
     using System;
-    using System.Diagnostics.Contracts;
 
     using Narvalo.Web.Properties;
 
@@ -12,7 +11,6 @@ namespace Narvalo.Web
         public static string ToProtocolRelativeString(Uri uri)
         {
             Require.NotNull(uri, nameof(uri));
-            Warrant.NotNull<string>();
 
             if (!uri.IsAbsoluteUri)
             {
@@ -24,14 +22,12 @@ namespace Narvalo.Web
             if (scheme == Uri.UriSchemeHttp)
             {
                 var uriString = uri.ToString();
-                Contract.Assume(uriString.Length >= 5);
 
                 return uriString.Substring(5);
             }
             else if (scheme == Uri.UriSchemeHttps)
             {
                 var uriString = uri.ToString();
-                Contract.Assume(uriString.Length >= 6);
 
                 return uriString.Substring(6);
             }

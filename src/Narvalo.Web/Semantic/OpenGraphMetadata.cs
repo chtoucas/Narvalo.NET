@@ -89,24 +89,3 @@ namespace Narvalo.Web.Semantic
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Web.Semantic
-{
-    using System.Diagnostics.Contracts;
-
-    public sealed partial class OpenGraphMetadata : IOpenGraphMetadata
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_alternativeLocales != null);
-            Contract.Invariant(_locale != null);
-            Contract.Invariant(_ontology != null);
-            Contract.Invariant(_ontology.Culture != null);
-        }
-    }
-}
-
-#endif

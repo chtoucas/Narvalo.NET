@@ -3,7 +3,6 @@
 namespace Narvalo.Web
 {
     using System;
-    using System.Diagnostics.Contracts;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Routing;
@@ -18,7 +17,6 @@ namespace Narvalo.Web
             Require.NotNull(@this, nameof(@this));
 
             var requestContext = @this.RequestContext;
-            Contract.Assume(requestContext != null);
 
             return requestContext
                 .HttpContext
@@ -35,11 +33,9 @@ namespace Narvalo.Web
             Require.NotNull(@this, nameof(@this));
 
             var requestContext = @this.RequestContext;
-            Contract.Assume(requestContext != null);
 
             // NB: En ajoutant le paramètre scheme, on obtient une URL absolue.
             var requestUrl = requestContext.HttpContext.Request.Url;
-            Contract.Assume(requestUrl != null);
 
             return @this.Action(actionName, controllerName, routeValues, requestUrl.Scheme);
         }
@@ -53,11 +49,9 @@ namespace Narvalo.Web
             Require.NotNull(@this, nameof(@this));
 
             var requestContext = @this.RequestContext;
-            Contract.Assume(requestContext != null);
 
             // NB: En ajoutant le paramètre scheme, on obtient une URL absolue.
             var requestUrl = requestContext.HttpContext.Request.Url;
-            Contract.Assume(requestUrl != null);
 
             return @this.Action(actionName, controllerName, routeValues, requestUrl.Scheme);
         }
@@ -66,19 +60,15 @@ namespace Narvalo.Web
         public static string AbsoluteContent(this UrlHelper @this, string path)
         {
             Require.NotNull(@this, nameof(@this));
-            Warrant.NotNull<string>();
 
             Uri uri = new Uri(path, UriKind.RelativeOrAbsolute);
 
             if (!uri.IsAbsoluteUri)
             {
                 var requestContext = @this.RequestContext;
-                Contract.Assume(requestContext != null);
 
                 // NB: En ajoutant le paramètre scheme, on obtient une URL absolue.
                 var requestUrl = requestContext.HttpContext.Request.Url;
-                Contract.Assume(requestUrl != null);
-                Contract.Assume(requestUrl.Port >= -1);
 
                 var builder = new UriBuilder(requestUrl.Scheme, requestUrl.Host, requestUrl.Port);
 
