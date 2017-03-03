@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>c1cc85ff-5c06-404b-97a0-a2f422066420</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Narvalo</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)DebugAssertFailedException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DebugAssertFixture.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DebugOnlyFactAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EnvironmentFacts.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ReleaseOnlyFactAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UnitTestTraceListener.cs" />
+  </ItemGroup>
+</Project>

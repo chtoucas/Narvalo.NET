@@ -3,10 +3,11 @@
   <Import Project="..\..\packages\xunit.runner.visualstudio.2.2.0\build\net20\xunit.runner.visualstudio.props" Condition="Exists('..\..\packages\xunit.runner.visualstudio.2.2.0\build\net20\xunit.runner.visualstudio.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <ProjectGuid>{1F222A47-26E5-462A-AB89-F031060D224A}</ProjectGuid>
+    <ProjectGuid>{D05B40A6-15B6-46D0-ABC1-8F8CFC5D02E8}</ProjectGuid>
     <RootNamespace>Narvalo</RootNamespace>
-    <AssemblyName>Narvalo.Cerbere.Facts</AssemblyName>
+    <AssemblyName>Narvalo.Core.Facts</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
@@ -30,24 +31,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CheckFacts.cs" />
-    <Compile Include="EnforceFacts.cs" />
-    <Compile Include="ExpectFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="Narvalo.Cerbere.Facts.props" />
-    <None Include="packages.config" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Narvalo.Cerbere\Narvalo.Cerbere.csproj">
-      <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
-      <Name>Narvalo.Cerbere</Name>
+    <ProjectReference Include="..\..\src\Narvalo.Core\Narvalo.Core.csproj">
+      <Project>{66b62ba5-e26e-4899-85ac-4c52d3a427e9}</Project>
+      <Name>Narvalo.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+    <None Include="App.config" />
+    <None Include="Narvalo.Core.Facts.props" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="..\TestCommon\Narvalo.TestCommon.projitems" Label="Shared" />
   <Import Project="..\DebugCommon\DebugCommon.projitems" Label="Shared" />

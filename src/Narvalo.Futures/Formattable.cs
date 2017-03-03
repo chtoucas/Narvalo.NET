@@ -8,8 +8,6 @@ namespace Narvalo
     using System.Globalization;
     using System.Runtime.CompilerServices;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     // This class uses the FormattableString class which is new to .NET v4.6.
     // See https://gist.github.com/jskeet/9d297d0dc013d7a557ee (for .NET version lower than 4.6).
     // There is also a NuGet package that does exactly this: StringInterpolationBridge.
@@ -45,12 +43,6 @@ namespace Narvalo
         [Pure]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Invariant(FormattableString formattable)
-        {
-            var formatted = FormattableString.Invariant(formattable);
-            // This is a safe assumption (see the comments in Current()).
-            Assume(formatted != null, "Extern: BCL.");
-
-            return formatted;
-        }
+            => FormattableString.Invariant(formattable);
     }
 }
