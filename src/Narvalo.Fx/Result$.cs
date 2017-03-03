@@ -23,6 +23,16 @@ namespace Narvalo.Fx
         }
     }
 
+    // Provides extension methods for Result<bool, TError>.
+    public static partial class ResultExtensions
+    {
+        public static bool IsTrue<TError>(this Result<bool, TError> @this)
+            => !@this.IsError && @this.Value;
+
+        public static bool IsFalse<TError>(this Result<bool, TError> @this)
+            => @this.IsError || !@this.Value;
+    }
+
     // Provides extension methods for IEnumerable<Result<T, TError>>.
     public static partial class ResultExtensions
     {

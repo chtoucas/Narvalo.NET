@@ -26,7 +26,7 @@ namespace Narvalo.Fx
     /// <para>This class is not meant to replace the standard exception mechanism.</para>
     /// </remarks>
     /// <typeparam name="T">The underlying type of the value.</typeparam>
-    // Friendly version of Either<T, ExceptionDispatchInfo>.
+    // Friendly version of Result<T, ExceptionDispatchInfo>.
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     [DebuggerTypeProxy(typeof(Result<>.DebugView))]
     public partial struct Result<T>
