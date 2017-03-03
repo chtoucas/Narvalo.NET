@@ -34,7 +34,7 @@ namespace Narvalo.Web.Configuration
             Assert.Throws<ArgumentException>(() => section.DefaultProvider = String.Empty);
         }
 
-        [Fact]
+        [Fact(Skip = "This precondition is currently disabled.")]
         public static void DefaultProvider_ThrowsArgumentException_ForWhiteSpaceInput()
         {
             var section = new AssetSection();

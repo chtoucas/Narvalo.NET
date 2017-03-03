@@ -2,6 +2,8 @@
 
 namespace Narvalo.Finance.Internal
 {
+#if !NO_INTERNALS_VISIBLE_TO
+
     using System;
 
     using Xunit;
@@ -134,4 +136,6 @@ namespace Narvalo.Finance.Internal
 
         #endregion
     }
+
+#endif
 }

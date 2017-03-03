@@ -200,7 +200,7 @@ namespace Narvalo.Finance
 
         #region GetHashCode()
 
-        [Theory]
+        [Theory(Skip = "Keep this or not?")]
         [MemberData(nameof(SampleValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void GetHashCode_ReturnsHashCodeValue(string value)

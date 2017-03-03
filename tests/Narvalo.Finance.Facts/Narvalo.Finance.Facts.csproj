@@ -31,7 +31,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BicFacts.cs" />
-    <Compile Include="Globalization\CountryISOCodesFacts.cs" />
+    <Compile Include="Internal\CountryISOCodesFacts.cs" />
     <Compile Include="IbanFacts.cs" />
     <Compile Include="IbanPartsFacts.cs" />
     <Compile Include="IbanValidatorFacts.cs" />
@@ -52,6 +52,9 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Globalization\" />
   </ItemGroup>
   <Import Project="..\TestCommon\Narvalo.TestCommon.projitems" Label="Shared" />
   <Import Project="..\..\tools\Narvalo.Common.props" />
