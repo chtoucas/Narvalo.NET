@@ -151,6 +151,13 @@ namespace Narvalo.Applicative
             return Error;
         }
 
+        internal Result<T, ExceptionDispatchInfo> ToGenericResult()
+        {
+            return IsError
+                ? Result<T, ExceptionDispatchInfo>.FromError(Error)
+                : Result<T, ExceptionDispatchInfo>.Of(Value);
+        }
+
         public Maybe<T> ToMaybe() => ValueOrNone();
 
         public static explicit operator T(Result<T> value) => value.ToValue();

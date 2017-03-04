@@ -82,24 +82,14 @@ namespace Narvalo.Applicative
     // Implements the Internal.IResult<string> interface.
     public partial struct Outcome
     {
-        public Result<TResult, string> Then<TResult>(Func<Result<TResult, string>> func)
-        {
-            Require.NotNull(func, nameof(func));
-
-            return IsError ? Result<TResult, string>.FromError(Error) : func();
-        }
-
-        public Result<TResult, string> Then<TResult>(Func<TResult> func)
+        public Result<TResult, string> Select<TResult>(Func<TResult> func)
         {
             Require.NotNull(func, nameof(func));
 
             return IsError ? Result<TResult, string>.FromError(Error) : Result<TResult, string>.Of(func());
         }
 
-        public Result<TResult, string> Then<TResult>(Result<TResult, string> other)
-            => IsError ? Result<TResult, string>.FromError(Error) : other;
-
-        public Result<TResult, string> Then<TResult>(TResult result)
+        public Result<TResult, string> ReplaceBy<TResult>(TResult result)
             => IsError
             ? Result<TResult, string>.FromError(Error)
             : Result<TResult, string>.Of(result);

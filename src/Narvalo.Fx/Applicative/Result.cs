@@ -109,31 +109,15 @@ namespace Narvalo.Applicative
     // Implements the Internal.IResult<ExceptionDispatchInfo> interface.
     public partial struct Result
     {
-        public Result<TResult, ExceptionDispatchInfo> Then<TResult>(
-            Func<Result<TResult, ExceptionDispatchInfo>> func)
+        public Result<TResult> Select<TResult>(Func<TResult> func)
         {
             Require.NotNull(func, nameof(func));
 
-            return IsError ? Result<TResult, ExceptionDispatchInfo>.FromError(Error) : func();
+            return IsError ? Result<TResult>.FromError(Error) : Of(func());
         }
 
-        public Result<TResult, ExceptionDispatchInfo> Then<TResult>(Func<TResult> func)
-        {
-            Require.NotNull(func, nameof(func));
-
-            return IsError
-                ? Result<TResult, ExceptionDispatchInfo>.FromError(Error)
-                : Result<TResult, ExceptionDispatchInfo>.Of(func());
-        }
-
-        public Result<TResult, ExceptionDispatchInfo> Then<TResult>(
-            Result<TResult, ExceptionDispatchInfo> other)
-            => IsError ? Result<TResult, ExceptionDispatchInfo>.FromError(Error) : other;
-
-        public Result<TResult, ExceptionDispatchInfo> Then<TResult>(TResult result)
-            => IsError
-            ? Result<TResult, ExceptionDispatchInfo>.FromError(Error)
-            : Result<TResult, ExceptionDispatchInfo>.Of(result);
+        public Result<TResult> ReplaceBy<TResult>(TResult result)
+            => IsError ? Result<TResult>.FromError(Error) : Of(result);
 
         public TResult Match<TResult>(
             Func<TResult> caseSuccess,
@@ -166,6 +150,20 @@ namespace Narvalo.Applicative
 
             if (IsError) { action(Error); }
         }
+
+        #region Publicly hidden methods.
+
+        // Alias for Then().
+        Result<TResult, ExceptionDispatchInfo> Internal.IResult<ExceptionDispatchInfo>.Select<TResult>(
+            Func<TResult> func)
+            => Select(func).ToGenericResult();
+
+        // Alias for Then().
+        Result<TResult, ExceptionDispatchInfo> Internal.IResult<ExceptionDispatchInfo>.ReplaceBy<TResult>(
+            TResult result)
+            => ReplaceBy(result).ToGenericResult();
+
+        #endregion
     }
 
     // Implements the IEquatable<Result> interface.

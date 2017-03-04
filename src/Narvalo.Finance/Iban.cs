@@ -110,11 +110,11 @@ namespace Narvalo.Finance
         {
             if (value == null) { return Result<Iban, string>.FromError(Strings.Parse_InvalidIbanValue); }
 
-            var val = PreprocessInput(value, styles);
+            var input = PreprocessInput(value, styles);
 
-            return IbanParts.TryParse(val)
-                .Bind(_ => IbanValidator.TryValidate(_, levels).Then(_))
-                .Select(_ => new Iban(_, levels));
+            return from val in IbanParts.TryParse(input)
+                   where IbanValidator.TryValidate(val, levels)
+                   select new Iban(val, levels);
         }
 
         public static Iban? CheckIntegrity(Iban iban)

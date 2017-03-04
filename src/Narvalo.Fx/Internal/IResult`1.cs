@@ -9,17 +9,17 @@ namespace Narvalo.Internal
     // Specialized version of IEither<Unit, TError>.
     internal interface IResult<TError>
     {
-        // Result<Unit, TError>.Bind().
-        Result<TResult, TError> Then<TResult>(Func<Result<TResult, TError>> func);
+        //// Result<Unit, TError>.Bind().
+        //Result<TResult, TError> Bind<TResult>(Func<Result<TResult, TError>> func);
 
         // Result<Unit, TError>.Select().
-        Result<TResult, TError> Then<TResult>(Func<TResult> func);
+        Result<TResult, TError> Select<TResult>(Func<TResult> func);
 
-        // Result<Unit, TError>.Then().
-        Result<TResult, TError> Then<TResult>(Result<TResult, TError> other);
+        //// Result<Unit, TError>.Then().
+        //Result<TResult, TError> Then<TResult>(Result<TResult, TError> other);
 
         // Result<Unit, TError>.ReplaceBy().
-        Result<TResult, TError> Then<TResult>(TResult result);
+        Result<TResult, TError> ReplaceBy<TResult>(TResult result);
 
         TResult Match<TResult>(Func<TResult> caseSuccess, Func<TError, TResult> caseError);
 
