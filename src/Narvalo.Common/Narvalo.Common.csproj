@@ -38,7 +38,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings_Common.resx</DependentUpon>
     </Compile>
-    <Compile Include="StringManip.cs" />
     <Compile Include="Xml\Maybe%24.cs" />
     <Compile Include="Xml\XAttribute%24.cs" />
     <Compile Include="Xml\XElement%24.cs" />
@@ -55,9 +54,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Narvalo.Common.props">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Narvalo.Common.Version.props" />
   </ItemGroup>
   <ItemGroup>

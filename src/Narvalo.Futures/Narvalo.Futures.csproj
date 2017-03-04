@@ -82,6 +82,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings_Futures.resx</DependentUpon>
     </Compile>
+    <Compile Include="StringManip.cs" />
     <Compile Include="UrlFormatProvider.cs" />
     <Compile Include="Cerbere\Warrant.cs" />
     <Compile Include="Web\Semantic\IOpenGraphMetadata.cs" />
