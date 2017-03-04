@@ -106,7 +106,8 @@ namespace Narvalo.Finance.Generic
 
         [ExcludeFromCodeCoverage]
         private string DebuggerDisplay
-            => "(" + Currency.Code + ") " + Amount.ToString("F2", CultureInfo.CurrentCulture);
+            => "(" + Currency.Code + ") " + Amount.ToString("F2", CultureInfo.CurrentCulture)
+            + "; IsNormalized=" + (IsNormalized ? "true" : "false");
     }
 
     // Domain-specific conversions.
@@ -240,7 +241,7 @@ namespace Narvalo.Finance.Generic
             => (obj is Money<TCurrency>) && Equals((Money<TCurrency>)obj);
 
         public override int GetHashCode()
-            => HashHelpers.Combine(Amount.GetHashCode(), Currency.GetHashCode());
+            => HashCodeHelpers.Combine(Amount.GetHashCode(), Currency.GetHashCode(), IsNormalized.GetHashCode());
     }
 
     // Implements the IComparable and IComparable<Money<TCurrency>> interfaces.

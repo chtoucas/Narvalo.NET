@@ -407,7 +407,7 @@ namespace Narvalo
         public override bool Equals(object obj) => (obj is Money) && Equals((Money)obj);
 
         public override int GetHashCode()
-            => HashHelpers.Combine(
+            => HashCodeHelpers.Combine(
                 Amount.GetHashCode(),
                 Currency.GetHashCode(),
                 IsNormalized.GetHashCode());

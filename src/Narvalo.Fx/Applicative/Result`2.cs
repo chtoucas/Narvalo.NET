@@ -12,7 +12,7 @@ namespace Narvalo.Applicative
 
     using Narvalo.Properties;
 
-    using HashHelpers = Narvalo.Internal.HashHelpers;
+    using HashCodeHelpers = Narvalo.Internal.HashCodeHelpers;
 
     // Typical use cases:
     // - Result<T, TError> is a value type, its primary use is as a return type.
@@ -347,7 +347,7 @@ namespace Narvalo.Applicative
             => (obj is Result<T, TError>) && Equals((Result<T, TError>)obj);
 
         public override int GetHashCode()
-            => HashHelpers.Combine(_value?.GetHashCode() ?? 0, _error?.GetHashCode() ?? 0);
+            => HashCodeHelpers.Combine(_value?.GetHashCode() ?? 0, _error?.GetHashCode() ?? 0);
 
         bool IStructuralEquatable.Equals(object other, IEqualityComparer comparer)
         {
@@ -365,7 +365,7 @@ namespace Narvalo.Applicative
         {
             Require.NotNull(comparer, nameof(comparer));
 
-            return HashHelpers.Combine(comparer.GetHashCode(_value), comparer.GetHashCode(_error));
+            return HashCodeHelpers.Combine(comparer.GetHashCode(_value), comparer.GetHashCode(_error));
         }
     }
 }

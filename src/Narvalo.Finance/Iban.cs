@@ -232,6 +232,6 @@ namespace Narvalo.Finance
         public override bool Equals(object obj) => (obj is Iban) && Equals((Iban)obj);
 
         public override int GetHashCode()
-            => HashHelpers.Combine(_parts.GetHashCode(), VerificationLevels.GetHashCode());
+            => HashCodeHelpers.Combine(_parts.GetHashCode(), VerificationLevels.GetHashCode());
     }
 }

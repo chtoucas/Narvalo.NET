@@ -9,7 +9,7 @@ namespace Narvalo.Applicative
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.CompilerServices;
 
-    using HashHelpers = Narvalo.Internal.HashHelpers;
+    using HashCodeHelpers = Narvalo.Internal.HashCodeHelpers;
 
     /// <summary>
     /// Represents the sum of two types. An instance of the <see cref="Either{TLeft, TRight}"/> class
@@ -452,7 +452,7 @@ namespace Narvalo.Applicative
         {
             Require.NotNull(comparer, nameof(comparer));
 
-            return HashHelpers.Combine(
+            return HashCodeHelpers.Combine(
                 IsLeft ? comparer.GetHashCode(Left) : 0,
                 IsRight ? comparer.GetHashCode(Right) : 0);
         }

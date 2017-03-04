@@ -266,7 +266,7 @@ namespace Narvalo
         public override bool Equals(object obj) => (obj is Moneypenny) && Equals((Moneypenny)obj);
 
         public override int GetHashCode()
-            => HashHelpers.Combine(Amount.GetHashCode(), Currency.GetHashCode());
+            => HashCodeHelpers.Combine(Amount.GetHashCode(), Currency.GetHashCode());
     }
 
     // Implements the IComparable and IComparable<Cent> interfaces.

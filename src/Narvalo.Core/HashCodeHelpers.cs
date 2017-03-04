@@ -2,14 +2,13 @@
 
 namespace Narvalo
 {
-    public static class HashHelpers
+    public static class HashCodeHelpers
     {
         // 31 is chosen because the multiplication can be replaced by:
         // > 31 * h = (h << 5) - h
         // for detailed explanations, see "Effective Java" by Joshua Bloch.
         // In https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Tuple.cs, we have:
         // > (((h1 << 5) + h1) ^ h2)
-        // See also: https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Numerics/Hashing/HashHelpers.cs
         private const int INIT = 17;
         private const int MULT = 31;
 

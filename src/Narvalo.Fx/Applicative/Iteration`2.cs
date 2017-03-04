@@ -6,8 +6,6 @@ namespace Narvalo.Applicative
     using System.Collections;
     using System.Collections.Generic;
 
-    using HashHelpers = Narvalo.Internal.HashHelpers;
-
     public struct Iteration<TResult, TSource>
         : IEquatable<Iteration<TResult, TSource>>, IStructuralEquatable
     {
@@ -52,13 +50,13 @@ namespace Narvalo.Applicative
         }
 
         public override int GetHashCode()
-            => HashHelpers.Combine(Result?.GetHashCode() ?? 0, Next?.GetHashCode() ?? 0);
+            => HashCodeHelpers.Combine(Result?.GetHashCode() ?? 0, Next?.GetHashCode() ?? 0);
 
         public int GetHashCode(IEqualityComparer comparer)
         {
             Require.NotNull(comparer, nameof(comparer));
 
-            return HashHelpers.Combine(comparer.GetHashCode(Result), comparer.GetHashCode(Next));
+            return HashCodeHelpers.Combine(comparer.GetHashCode(Result), comparer.GetHashCode(Next));
         }
     }
 }

@@ -76,7 +76,7 @@ namespace Narvalo
             => (obj is FractionalCurrency) && Equals((FractionalCurrency)obj);
 
         public override int GetHashCode()
-            => HashHelpers.Combine(
+            => HashCodeHelpers.Combine(
                 Parent.GetHashCode(),
                 Epsilon.GetHashCode(),
                 Code.GetHashCode());
