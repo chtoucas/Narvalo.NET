@@ -14,13 +14,13 @@ namespace Narvalo.Applicative
 
     using HashHelpers = Narvalo.Internal.HashHelpers;
 
-    // Typical use case:
+    // Typical use cases:
     // - Result<T, TError> is a value type, its primary use is as a return type.
     //   For long-lived objects prefer Either<T, TError>.
     // - Result<T, string> for lightweight error reporting to the caller;
     //   think of it as a verbose Maybe<T>.
-    // Few recommendations:
-    // - For methods with a void return type, prefer
+    // Some recommendations:
+    // - For methods with a void return type, instead of Result<Unit,...> prefer
     //   * Outcome (w/o exception handling)
     //   * Result (w/ exception handling)
     //   * Maybe<TError> (w/o exception handling, w/ custom error type); since there is a risk
