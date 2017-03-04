@@ -15,8 +15,8 @@ namespace Narvalo.Applicative
     /// Represents the sum of two types. An instance of the <see cref="Either{TLeft, TRight}"/> class
     /// contains either a <c>TLeft</c> value or a <c>TRight</c> value but not both.
     /// <para>This class is a "monad" for the left type parameter, nevertheless using
-    /// <see cref="Either{TLeft, TRight}.Swap"/> you can easily turn it into a "monad" for the
-    /// right type parameter.</para>
+    /// <see cref="Either{TLeft, TRight}.Swap"/> or <see cref="Either{TLeft, TRight}.SwapUnchecked"/>
+    /// you can easily turn it into a "monad" for the right type parameter.</para>
     /// </summary>
     /// <remarks>The enclosed value might be null.</remarks>
     /// <typeparam name="TLeft">The underlying type of the left part.</typeparam>
@@ -42,7 +42,11 @@ namespace Narvalo.Applicative
 
         public abstract Maybe<TRight> RightOrNone();
 
+        // Swap() must be understood as SwapLeft(), kind of a "monad"-aware swap methods,
+        // that is it fails if IsLeft is false.
         public abstract Either<TRight, TLeft> Swap();
+
+        public abstract Either<TRight, TLeft> SwapUnchecked();
 
         /// <summary>
         /// Represents the left side of the <see cref="Either{TLeft, TRight}"/> type.
@@ -66,6 +70,8 @@ namespace Narvalo.Applicative
             public override Maybe<TRight> RightOrNone() => Maybe<TRight>.None;
 
             public override Either<TRight, TLeft> Swap() => Either<TRight, TLeft>.OfRight(Left);
+
+            public override Either<TRight, TLeft> SwapUnchecked() => Either<TRight, TLeft>.OfRight(Left);
 
             public bool Equals(Left_ other)
             {
@@ -123,7 +129,9 @@ namespace Narvalo.Applicative
 
             public override Maybe<TRight> RightOrNone() => Maybe.Of(Right);
 
-            public override Either<TRight, TLeft> Swap() => Either<TRight, TLeft>.OfLeft(Right);
+            public override Either<TRight, TLeft> Swap() { throw new InvalidOperationException("XXX"); }
+
+            public override Either<TRight, TLeft> SwapUnchecked() => Either<TRight, TLeft>.OfLeft(Right);
 
             public bool Equals(Right_ other)
             {
@@ -211,12 +219,12 @@ namespace Narvalo.Applicative
 
         // NB: This method is normally internal, but Result<T, TError>.FromError() is more readable
         // than Result.FromError<T, TError>() - no type inference.
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification ="[Intentionally] A static method in a static class won't help.")]
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Intentionally] A static method in a static class won't help.")]
         public static Either<TLeft, TRight> OfLeft(TLeft leftValue) => new Left_(leftValue);
 
         // NB: This method is normally internal, but Result<T, TError>.FromError() is more readable
         // than Result.FromError<T, TError>() - no type inference.
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification ="[Intentionally] A static method in a static class won't help.")]
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Intentionally] A static method in a static class won't help.")]
         public static Either<TLeft, TRight> OfRight(TRight value) => new Right_(value);
 
         [DebuggerHidden]
