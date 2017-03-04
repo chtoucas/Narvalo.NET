@@ -123,7 +123,7 @@ namespace Narvalo.Applicative
 
             public override Maybe<TRight> RightOrNone() => Maybe.Of(Right);
 
-            public override Either<TRight, TLeft> Swap() => Either<TRight, TLeft>.η(Right);
+            public override Either<TRight, TLeft> Swap() => Either<TRight, TLeft>.OfLeft(Right);
 
             public bool Equals(Right_ other)
             {
@@ -174,7 +174,7 @@ namespace Narvalo.Applicative
         public static explicit operator TRight(Either<TLeft, TRight> value)
             => value == null ? default(TRight) : value.ToRight();
 
-        public static explicit operator Either<TLeft, TRight>(TLeft value) => η(value);
+        public static explicit operator Either<TLeft, TRight>(TLeft value) => OfLeft(value);
 
         public static explicit operator Either<TLeft, TRight>(TRight value) => OfRight(value);
 
@@ -199,7 +199,7 @@ namespace Narvalo.Applicative
         }
     }
 
-    // Provides the core Monad methods.
+    // Provides the core Monad methods + minimalist implementation of a Monad on the right.
     public partial class Either<TLeft, TRight>
     {
         public Either<TResult, TRight> Bind<TResult>(Func<TLeft, Either<TResult, TRight>> leftSelector)
@@ -209,13 +209,15 @@ namespace Narvalo.Applicative
 
         public abstract Either<TLeft, TResult> BindRight<TResult>(Func<TRight, Either<TLeft, TResult>> selector);
 
-        [DebuggerHidden]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static Either<TLeft, TRight> η(TLeft leftValue) => new Left_(leftValue);
+        // NB: This method is normally internal, but Result<T, TError>.FromError() is more readable
+        // than Result.FromError<T, TError>() - no type inference.
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification ="[Intentionally] A static method in a static class won't help.")]
+        public static Either<TLeft, TRight> OfLeft(TLeft leftValue) => new Left_(leftValue);
 
-        [DebuggerHidden]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static Either<TLeft, TRight> OfRight(TRight value) => new Right_(value);
+        // NB: This method is normally internal, but Result<T, TError>.FromError() is more readable
+        // than Result.FromError<T, TError>() - no type inference.
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification ="[Intentionally] A static method in a static class won't help.")]
+        public static Either<TLeft, TRight> OfRight(TRight value) => new Right_(value);
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -223,7 +225,7 @@ namespace Narvalo.Applicative
         {
             Require.NotNull(square, nameof(square));
 
-            return square.IsLeft ? square.Left : Either<TLeft, TRight>.OfRight(square.Right);
+            return square.IsLeft ? square.Left : OfRight(square.Right);
         }
 
         [DebuggerHidden]
@@ -232,7 +234,7 @@ namespace Narvalo.Applicative
         {
             Require.NotNull(square, nameof(square));
 
-            return square.IsRight ? square.Right : η(square.Left);
+            return square.IsRight ? square.Right : OfLeft(square.Left);
         }
 
         private partial class Left_
@@ -245,7 +247,7 @@ namespace Narvalo.Applicative
             }
 
             public override Either<TLeft, TResult> BindRight<TResult>(Func<TRight, Either<TLeft, TResult>> selector)
-                => Either<TLeft, TResult>.η(Left);
+                => Either<TLeft, TResult>.OfLeft(Left);
         }
 
         private partial class Right_

@@ -23,7 +23,7 @@ namespace Narvalo.Applicative
 
     // Provides extension methods for Maybe<T?>.
     // NB: There is really no reason to use Maybe<T> or Maybe<T?> instead of T? (for value
-    // types of course). You can not directly create directly a Maybe<T?> but it is still
+    // types of course). You can not create a Maybe<T?> directly but it is still
     // possible via Bind.
     public static partial class Maybe
     {

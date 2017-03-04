@@ -21,12 +21,6 @@ namespace Narvalo.Applicative
             return new Result(exceptionInfo);
         }
 
-        public static Result<T> FromError<T>(ExceptionDispatchInfo exceptionInfo)
-            => Result<T>.FromError(exceptionInfo);
-
-        public static Result<T, TError> FromError<T, TError>(TError error)
-            => Result<T, TError>.FromError(error);
-
         public static Result<T, TError> FlattenError<T, TError>(Result<T, Result<T, TError>> square)
             => Result<T, TError>.FlattenError(square);
     }
@@ -62,7 +56,7 @@ namespace Narvalo.Applicative
             catch (Exception ex)
             {
                 var edi = ExceptionDispatchInfo.Capture(ex);
-                return FromError<TResult>(edi);
+                return Result<TResult>.FromError(edi);
             }
         }
 
@@ -101,7 +95,7 @@ namespace Narvalo.Applicative
             catch (Exception ex)
             {
                 var edi = ExceptionDispatchInfo.Capture(ex);
-                return FromError<TResult>(edi);
+                return Result<TResult>.FromError(edi);
             }
             finally
             {

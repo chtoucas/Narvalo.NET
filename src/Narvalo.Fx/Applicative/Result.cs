@@ -3,7 +3,6 @@
 namespace Narvalo.Applicative
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.ExceptionServices;
@@ -12,7 +11,7 @@ namespace Narvalo.Applicative
 
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     [DebuggerTypeProxy(typeof(Result.DebugView))]
-    public partial struct Result : IEquatable<Result>, Internal.IEither<Unit, ExceptionDispatchInfo>
+    public partial struct Result : IEquatable<Result>, Internal.IResult<ExceptionDispatchInfo>
     {
         private readonly ExceptionDispatchInfo _exceptionInfo;
 
@@ -88,9 +87,35 @@ namespace Narvalo.Applicative
         public static explicit operator ExceptionDispatchInfo(Result value) => value.ToExceptionInfo();
     }
 
-    // Implements the Internal.IEither<Unit, ExceptionDispatchInfo> interface.
+    // Implements the Internal.IResult<ExceptionDispatchInfo> interface.
     public partial struct Result
     {
+        public Result<TResult, ExceptionDispatchInfo> Then<TResult>(
+            Func<Result<TResult, ExceptionDispatchInfo>> func)
+        {
+            Require.NotNull(func, nameof(func));
+
+            return IsError ? Result<TResult, ExceptionDispatchInfo>.FromError(ExceptionInfo) : func();
+        }
+
+        public Result<TResult, ExceptionDispatchInfo> Then<TResult>(Func<TResult> func)
+        {
+            Require.NotNull(func, nameof(func));
+
+            return IsError
+                ? Result<TResult, ExceptionDispatchInfo>.FromError(ExceptionInfo)
+                : Result<TResult, ExceptionDispatchInfo>.Of(func());
+        }
+
+        public Result<TResult, ExceptionDispatchInfo> Then<TResult>(
+            Result<TResult, ExceptionDispatchInfo> other)
+            => IsError ? Result<TResult, ExceptionDispatchInfo>.FromError(ExceptionInfo) : other;
+
+        public Result<TResult, ExceptionDispatchInfo> Then<TResult>(TResult result)
+            => IsError
+            ? Result<TResult, ExceptionDispatchInfo>.FromError(ExceptionInfo)
+            : Result<TResult, ExceptionDispatchInfo>.Of(result);
+
         public TResult Match<TResult>(
             Func<TResult> caseSuccess,
             Func<ExceptionDispatchInfo, TResult> caseError)
@@ -109,24 +134,6 @@ namespace Narvalo.Applicative
             if (IsSuccess) { onSuccess(); } else { onError(ExceptionInfo); }
         }
 
-        public void WhenSuccess(Func<bool> predicate, Action action)
-        {
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            if (IsSuccess && predicate()) { action(); }
-        }
-
-        public void WhenError(
-            Func<ExceptionDispatchInfo, bool> predicate,
-            Action<ExceptionDispatchInfo> action)
-        {
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            if (IsError && predicate(ExceptionInfo)) { action(ExceptionInfo); }
-        }
-
         public void OnSuccess(Action action)
         {
             Require.NotNull(action, nameof(action));
@@ -140,61 +147,6 @@ namespace Narvalo.Applicative
 
             if (IsError) { action(ExceptionInfo); }
         }
-
-        #region Publicly hidden methods.
-
-        bool Internal.IContainer<Unit>.Contains(Unit value)
-        {
-            throw new NotSupportedException();
-        }
-
-        bool Internal.IContainer<Unit>.Contains(Unit value, IEqualityComparer<Unit> comparer)
-        {
-            throw new NotSupportedException();
-        }
-
-        bool Internal.ISecondaryContainer<ExceptionDispatchInfo>.Contains(ExceptionDispatchInfo value)
-        {
-            throw new NotSupportedException();
-        }
-
-        bool Internal.ISecondaryContainer<ExceptionDispatchInfo>.Contains(
-            ExceptionDispatchInfo value,
-            IEqualityComparer<ExceptionDispatchInfo> comparer)
-        {
-            throw new NotSupportedException();
-        }
-
-        // Alias for Match().
-        TResult Internal.IEither<Unit, ExceptionDispatchInfo>.Match<TResult>(
-            Func<Unit, TResult> caseLeft,
-            Func<ExceptionDispatchInfo, TResult> caseRight)
-            => Match(() => caseLeft(Narvalo.Applicative.Unit.Default), caseRight);
-
-        // Alias for Do().
-        void Internal.IEither<Unit, ExceptionDispatchInfo>.Do(
-            Action<Unit> onLeft,
-            Action<ExceptionDispatchInfo> onRight)
-            => Do(() => onLeft(Narvalo.Applicative.Unit.Default), onRight);
-
-        // Alias for WhenSuccess().
-        void Internal.IContainer<Unit>.When(Func<Unit, bool> predicate, Action<Unit> action)
-            => WhenSuccess(() => predicate(Narvalo.Applicative.Unit.Default), () => action(Narvalo.Applicative.Unit.Default));
-
-        // Alias for WhenError().
-        void Internal.ISecondaryContainer<ExceptionDispatchInfo>.When(
-            Func<ExceptionDispatchInfo, bool> predicate,
-            Action<ExceptionDispatchInfo> action)
-            => WhenError(predicate, action);
-
-        // Alias for OnSuccess().
-        void Internal.IContainer<Unit>.Do(Action<Unit> action) => OnSuccess(() => action(Narvalo.Applicative.Unit.Default));
-
-        // Alias for OnError().
-        void Internal.ISecondaryContainer<ExceptionDispatchInfo>.Do(Action<ExceptionDispatchInfo> action)
-            => OnError(action);
-
-        #endregion
     }
 
     // Implements the IEquatable<Result> interface.

@@ -4,6 +4,7 @@ namespace Narvalo.Finance
 {
     using System;
 
+    using Narvalo.Applicative;
     using Narvalo.Finance.Internal;
     using Narvalo.Finance.Properties;
 
@@ -23,40 +24,34 @@ namespace Narvalo.Finance
         public static bool Validate(IbanParts parts, IbanValidationLevels levels)
             => new IbanValidator(levels).Validate(parts);
 
-        public static BooleanResult TryValidate(IbanParts parts, IbanValidationLevels levels)
+        public static Outcome TryValidate(IbanParts parts, IbanValidationLevels levels)
             => new IbanValidator(levels).TryValidate(parts);
 
         // Keep this internal. We prefer to expose the simpler TryValidate().
-        internal static Result<IbanParts> TryValidateIntern(IbanParts parts, IbanValidationLevels levels)
-        {
-            var result = new IbanValidator(levels).TryValidate(parts);
-
-            return result.IsTrue
-                ? Result.Of(parts)
-                : Result<IbanParts>.FromError(result.Error);
-        }
+        internal static Result<IbanParts, string> TryValidateIntern(IbanParts parts, IbanValidationLevels levels)
+            => new IbanValidator(levels).TryValidate(parts).Then(parts);
 
         public bool Validate(IbanParts parts)
             => (!_verifyIntegrity || VerifyIntegrity(parts))
                   && (!_verifyISOCountryCode || VerifyISOCountryCode(parts))
                   && (!_verifyBban || VerifyBban(parts));
 
-        public BooleanResult TryValidate(IbanParts parts)
+        public Outcome TryValidate(IbanParts parts)
         {
             if (_verifyIntegrity && !VerifyIntegrity(parts))
             {
-                return BooleanResult.False(Strings.IbanValidator_IntegrityCheckFailure);
+                return Outcome.Error(Strings.IbanValidator_IntegrityCheckFailure);
             }
             if (_verifyISOCountryCode && !VerifyISOCountryCode(parts))
             {
-                return BooleanResult.False(Strings.IbanValidator_UnknownISOCountryCode);
+                return Outcome.Error(Strings.IbanValidator_UnknownISOCountryCode);
             }
             if (_verifyBban && !VerifyBban(parts))
             {
-                return BooleanResult.False(Strings.IbanValidator_BbanVerificationFailure);
+                return Outcome.Error(Strings.IbanValidator_BbanVerificationFailure);
             }
 
-            return BooleanResult.True;
+            return Outcome.Success;
         }
 
         public static bool VerifyISOCountryCode(IbanParts parts)

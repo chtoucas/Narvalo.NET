@@ -15,11 +15,12 @@ namespace Narvalo.Applicative
     using HashHelpers = Narvalo.Internal.HashHelpers;
 
     // Typical use case:
-    // - Result<T, TError> is a value type; its primary use is for return type. for long-lived objects prefer Either<T, TError>.
+    // - Result<T, TError> is a value type, its primary use is as a return type.
+    //   For long-lived objects prefer Either<T, TError>.
     // - Result<T, string> for lightweight error reporting to the caller;
     //   think of it as a verbose Maybe<T>.
     // Few recommendations:
-    // - For methods with a void return type, prefer Result or Maybe<TError>.
+    // - For methods with a void return type, prefer Result, Outcome or Maybe<TError>.
     // - Result<T, Exception> should be used only in very rare situations; this is **not** a
     //   replacement for the standard exception mechanism in .NET. See Result and Result<T>
     //   for better alternatives.
@@ -156,13 +157,13 @@ namespace Narvalo.Applicative
 
         // NB: In Haskell, the error is the left parameter.
         public Either<T, TError> ToEither()
-            => IsSuccess ? Either.OfLeft<T, TError>(Value) : Either.OfRight<T, TError>(Error);
+            => IsSuccess ? Either<T, TError>.OfLeft(Value) : Either<T, TError>.OfRight(Error);
 
         public static explicit operator T(Result<T, TError> value) => value.ToValue();
 
         public static explicit operator TError(Result<T, TError> value) => value.ToError();
 
-        public static explicit operator Result<T, TError>(T value) => η(value);
+        public static explicit operator Result<T, TError>(T value) => Of(value);
 
         public static explicit operator Result<T, TError>(TError error) => FromError(error);
     }
@@ -177,9 +178,10 @@ namespace Narvalo.Applicative
             return IsSuccess ? selector(Value) : Result<TResult, TError>.FromError(Error);
         }
 
-        [DebuggerHidden]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static Result<T, TError> η(T value) => new Result<T, TError>(value);
+        // NB: This method is normally internal, but Result<T, TError>.Of() is more readable
+        // than Result.Of<T, TError>() - no type inference.
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification ="[Intentionally] A static method in a static class won't help.")]
+        public static Result<T, TError> Of(T value) => new Result<T, TError>(value);
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -194,19 +196,20 @@ namespace Narvalo.Applicative
         {
             Require.NotNull(selector, nameof(selector));
 
-            return IsError ? selector(Error) : Result<T, TResult>.η(Value);
+            return IsError ? selector(Error) : Result<T, TResult>.Of(Value);
         }
 
         public Result<T, TResult> SelectError<TResult>(Func<TError, TResult> selector)
         {
             Require.NotNull(selector, nameof(selector));
 
-            return IsError ? Result<T, TResult>.FromError(selector(Error)) : Result<T, TResult>.η(Value);
+            return IsError ? Result<T, TResult>.FromError(selector(Error)) : Result<T, TResult>.Of(Value);
         }
 
-        [DebuggerHidden]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static Result<T, TError> FromError(TError error)
+        // NB: This method is normally internal, but Result<T, TError>.FromError() is more readable
+        // than Result.FromError<T, TError>() - no type inference.
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification ="[Intentionally] A static method in a static class won't help.")]
+        public static Result<T, TError> FromError(TError error)
         {
             Require.NotNullUnconstrained(error, nameof(error));
 
@@ -216,7 +219,7 @@ namespace Narvalo.Applicative
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Result<T, TError> FlattenError(Result<T, Result<T, TError>> square)
-            => square.IsError ? square.Error : η(square.Value);
+            => square.IsError ? square.Error : Of(square.Value);
     }
 
     // Implements the Internal.IEither<T, TError> interface.

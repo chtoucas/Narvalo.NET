@@ -22,6 +22,7 @@
   <ItemGroup>
     <Compile Include="Applicative\Either.cs" />
     <Compile Include="Applicative\Either`2.cs" />
+    <Compile Include="Applicative\Outcome.cs" />
     <Compile Include="Internal\HashHelpers.cs" />
     <Compile Include="Applicative\Nullable.cs" />
     <Compile Include="Applicative\Result.cs" />
@@ -31,6 +32,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Applicative\Ident`1.cs" />
+    <Compile Include="Internal\IResult`1.cs" />
     <Compile Include="Internal\ISecondaryContainer`1.cs" />
     <Compile Include="Internal\IEither`2.cs" />
     <Compile Include="Internal\IMaybe`1.cs" />

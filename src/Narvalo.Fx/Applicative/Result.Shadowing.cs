@@ -16,20 +16,20 @@ namespace Narvalo.Applicative
             Require.NotNull(selector, nameof(selector));
 
             return IsSuccess
-                ? Result.Of<TResult, TError>(selector(Value))
-                : Result.FromError<TResult, TError>(Error); ;
+                ? Result<TResult, TError>.Of(selector(Value))
+                : Result<TResult, TError>.FromError(Error); ;
         }
 
         public Result<TResult, TError> ReplaceBy<TResult>(TResult value)
-            => IsSuccess ? Result.Of<TResult, TError>(value) : Result.FromError<TResult, TError>(Error);
+            => IsSuccess ? Result<TResult, TError>.Of(value) : Result<TResult, TError>.FromError(Error);
 
         public Result<TResult, TError> Then<TResult>(Result<TResult, TError> other)
-            => IsSuccess ? other : Result.FromError<TResult, TError>(Error);
+            => IsSuccess ? other : Result<TResult, TError>.FromError(Error);
 
         public Result<IEnumerable<T>, TError> Repeat(int count)
             => IsSuccess
-            ? Result.Of<IEnumerable<T>, TError>(Enumerable.Repeat(Value, count))
-            : Result.FromError<IEnumerable<T>, TError>(Error);
+            ? Result<IEnumerable<T>, TError>.Of(Enumerable.Repeat(Value, count))
+            : Result<IEnumerable<T>, TError>.FromError(Error);
     }
 
     public partial struct Result<T>
@@ -40,7 +40,7 @@ namespace Narvalo.Applicative
         {
             Require.NotNull(selector, nameof(selector));
 
-            if (IsError) { Result.FromError<TResult>(ExceptionInfo); }
+            if (IsError) { Result<TResult>.FromError(ExceptionInfo); }
 
             try
             {
@@ -49,12 +49,12 @@ namespace Narvalo.Applicative
             catch (Exception ex)
             {
                 var edi = ExceptionDispatchInfo.Capture(ex);
-                return Result.FromError<TResult>(edi);
+                return Result<TResult>.FromError(edi);
             }
         }
 
         public Result<TResult> Then<TResult>(Result<TResult> other)
-            => IsSuccess ? other : Result.FromError<TResult>(ExceptionInfo);
+            => IsSuccess ? other : Result<TResult>.FromError(ExceptionInfo);
     }
 
     public static partial class ResultExtensions
@@ -64,7 +64,7 @@ namespace Narvalo.Applicative
         {
             Require.NotNull(@this, nameof(@this));
 
-            return Result.Of<IEnumerable<TSource>, TError>(CollectAnyIterator(@this));
+            return Result<IEnumerable<TSource>, TError>.Of(CollectAnyIterator(@this));
         }
 
         internal static Result<IEnumerable<TSource>> CollectImpl<TSource>(

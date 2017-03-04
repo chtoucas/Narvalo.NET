@@ -6,6 +6,7 @@ namespace Narvalo.Finance
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
 
+    using Narvalo.Applicative;
     using Narvalo.Finance.Properties;
 
     /// <summary>
@@ -67,11 +68,8 @@ namespace Narvalo.Finance
         {
             var parts = IbanParts.Create(countryCode, checkDigits, bban);
 
-            var result = IbanValidator.TryValidate(parts, levels);
-            if (result.IsFalse)
-            {
-                throw new ArgumentException(result.Error);
-            }
+            IbanValidator.TryValidate(parts, levels)
+                .OnError(err => { throw new ArgumentException(err); });
 
             return new Iban(parts, levels);
         }
@@ -99,18 +97,18 @@ namespace Narvalo.Finance
             return new Iban(parts.Value, levels);
         }
 
-        public static Result<Iban> TryParse(string value)
+        public static Result<Iban, string> TryParse(string value)
             => TryParse(value, IbanStyles.None, IbanValidationLevels.Default);
 
-        public static Result<Iban> TryParse(string value, IbanStyles styles)
+        public static Result<Iban, string> TryParse(string value, IbanStyles styles)
             => TryParse(value, styles, IbanValidationLevels.Default);
 
-        public static Result<Iban> TryParse(string value, IbanValidationLevels levels)
+        public static Result<Iban, string> TryParse(string value, IbanValidationLevels levels)
             => TryParse(value, IbanStyles.None, levels);
 
-        public static Result<Iban> TryParse(string value, IbanStyles styles, IbanValidationLevels levels)
+        public static Result<Iban, string> TryParse(string value, IbanStyles styles, IbanValidationLevels levels)
         {
-            if (value == null) { return Result<Iban>.FromError(Strings.Parse_InvalidIbanValue); }
+            if (value == null) { return Result<Iban, string>.FromError(Strings.Parse_InvalidIbanValue); }
 
             var val = PreprocessInput(value, styles);
 

@@ -9,12 +9,6 @@ namespace Narvalo.Applicative
     /// </summary>
     public static partial class Either
     {
-        public static Either<TLeft, TRight> OfLeft<TLeft, TRight>(TLeft value)
-            => Either<TLeft, TRight>.η(value);
-
-        public static Either<TLeft, TRight> OfRight<TLeft, TRight>(TRight value)
-            => Either<TLeft, TRight>.OfRight(value);
-
         public static Either<TLeft, TRight> FlattenLeft<TLeft, TRight>(Either<Either<TLeft, TRight>, TRight> square)
             => Either<TLeft, TRight>.μ(square);
 
@@ -32,7 +26,7 @@ namespace Narvalo.Applicative
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));
 
-            return @this.BindLeft(_ => OfLeft<TResult, TRight>(selector(_)));
+            return @this.BindLeft(_ => Either<TResult, TRight>.OfLeft(selector(_)));
         }
 
         public static Either<TLeft, TResult> SelectRight<TLeft, TRight, TResult>(
@@ -42,7 +36,7 @@ namespace Narvalo.Applicative
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));
 
-            return @this.BindRight(_ => OfRight<TLeft, TResult>(selector(_)));
+            return @this.BindRight(_ => Either<TLeft, TResult>.OfRight(selector(_)));
         }
     }
 }

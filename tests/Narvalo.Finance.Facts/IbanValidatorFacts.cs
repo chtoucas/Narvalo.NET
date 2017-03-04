@@ -37,13 +37,13 @@ namespace Narvalo.Finance
         [MemberData(nameof(IbanFacts.SampleValues), MemberType = typeof(IbanFacts), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void TryValidate_Succeeds_ForValidInput_Integrity(string value)
-            => Assert.True(IbanValidator.TryValidate(ParseFast(value), IbanValidationLevels.Integrity).IsTrue);
+            => Assert.True(IbanValidator.TryValidate(ParseFast(value), IbanValidationLevels.Integrity).IsSuccess);
 
         [Theory]
         [MemberData(nameof(IbanFacts.SampleValues), MemberType = typeof(IbanFacts), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void TryValidate_Succeeds_ForValidInput_ISOCountryCode(string value)
-            => Assert.True(IbanValidator.TryValidate(ParseFast(value), IbanValidationLevels.ISOCountryCode).IsTrue);
+            => Assert.True(IbanValidator.TryValidate(ParseFast(value), IbanValidationLevels.ISOCountryCode).IsSuccess);
 
         [Theory]
         [MemberData(nameof(IbanFacts.SampleValues), MemberType = typeof(IbanFacts), DisableDiscoveryEnumeration = true)]
