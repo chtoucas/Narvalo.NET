@@ -2,6 +2,7 @@
 
 namespace Narvalo
 {
+    using System;
     using System.Text;
 
     // TODO: Créer la version Hexavigesimal.
@@ -15,6 +16,38 @@ namespace Narvalo
             'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
             '2', '3', '4', '5', '6', '7', '='
         };
+
+        #region Hexadecimal
+
+        // Cf. http://stackoverflow.com/questions/623104/c-sharp-byte-to-hex-string/623184
+        public static string ToHexString(byte[] value)
+        {
+            Require.NotNull(value, nameof(value));
+
+            return BitConverter.ToString(value).Replace("-", String.Empty);
+        }
+
+        public static byte[] FromHexString(string value)
+        {
+            Require.NotNull(value, nameof(value));
+
+            if (value.Length == 0 || value.Length % 2 != 0)
+            {
+                return new byte[0];
+            }
+
+            int length = value.Length / 2;
+            byte[] bytes = new byte[length];
+
+            for (int i = 0; i < length; i++)
+            {
+                bytes[i] = Convert.ToByte(value.Substring(2 * i, 2), 16);
+            }
+
+            return bytes;
+        }
+
+        #endregion
 
         #region Z-Base32
 

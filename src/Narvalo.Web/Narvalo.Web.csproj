@@ -89,17 +89,6 @@
       <DependentUpon>Strings.fr.resx</DependentUpon>
     </Compile>
     <Compile Include="RouteCollection%24.cs" />
-    <Compile Include="Semantic\IOpenGraphMetadata.cs" />
-    <Compile Include="Semantic\Ontology.cs" />
-    <Compile Include="Semantic\OpenGraphImage.cs" />
-    <Compile Include="Semantic\OpenGraphJpeg.cs" />
-    <Compile Include="Semantic\OpenGraphLocale.cs" />
-    <Compile Include="Semantic\OpenGraphMetadata.cs" />
-    <Compile Include="Semantic\OpenGraphPng.cs" />
-    <Compile Include="Semantic\OpenGraphType.cs" />
-    <Compile Include="Semantic\Relationships.cs" />
-    <Compile Include="Semantic\SchemaOrgType.cs" />
-    <Compile Include="Semantic\SchemaOrgVocabulary.cs" />
     <Compile Include="UI\AssetManager.cs" />
     <Compile Include="UI\AssetProvider.cs" />
     <Compile Include="UI\AssetProviderCollection.cs" />
