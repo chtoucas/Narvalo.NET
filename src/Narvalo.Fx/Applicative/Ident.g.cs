@@ -300,7 +300,7 @@ namespace Narvalo.Applicative
         {
             /* T4: NotNull(@this) */
             Require.NotNull(selector, nameof(selector));
-            return @this.Bind(val => Ident.Of(selector(val)));
+            return @this.Bind(val => Ident<TResult>.η(selector(val)));
         }
 
         // Kind of generalisation of Zip{T1, T2, T3}.
@@ -385,7 +385,7 @@ namespace Narvalo.Internal
         {
             Require.NotNull(@this, nameof(@this));
 
-            return Ident.Of(CollectIterator(@this));
+            return Ident<IEnumerable<TSource>>.η(CollectIterator(@this));
         }
 
         private static IEnumerable<TSource> CollectIterator<TSource>(IEnumerable<Ident<TSource>> source)

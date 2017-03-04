@@ -320,7 +320,7 @@ namespace Edufun.Haskell.Templates
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));
-            return @this.Bind(val => MonadPlus.Of(selector(val)));
+            return @this.Bind(val => MonadPlus<TResult>.η(selector(val)));
         }
 
         public static MonadPlus<TSource> Where<TSource>(
@@ -329,7 +329,7 @@ namespace Edufun.Haskell.Templates
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
-            return @this.Bind(val => predicate(val) ? MonadPlus.Of(val) : MonadPlus<TSource>.Zero);
+            return @this.Bind(val => predicate(val) ? MonadPlus<TSource>.η(val) : MonadPlus<TSource>.Zero);
         }
 
         // Kind of generalisation of Zip{T1, T2, T3}.
@@ -530,7 +530,7 @@ namespace Edufun.Haskell.Templates.Internal
         {
             Require.NotNull(@this, nameof(@this));
 
-            return MonadPlus.Of(CollectIterator(@this));
+            return MonadPlus<IEnumerable<TSource>>.η(CollectIterator(@this));
         }
 
         private static IEnumerable<TSource> CollectIterator<TSource>(IEnumerable<MonadPlus<TSource>> source)
@@ -662,7 +662,7 @@ namespace Edufun.Haskell.Templates.Internal
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
 
-            return MonadPlus.Of(WhereByIterator(@this, predicate));
+            return MonadPlus<IEnumerable<TSource>>.η(WhereByIterator(@this, predicate));
         }
 
         private static IEnumerable<TSource> WhereByIterator<TSource>(
@@ -713,7 +713,7 @@ namespace Edufun.Haskell.Templates.Internal
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
 
-            MonadPlus<TAccumulate> retval = MonadPlus.Of(seed);
+            MonadPlus<TAccumulate> retval = MonadPlus<TAccumulate>.η(seed);
 
             using (var iter = @this.GetEnumerator())
             {
@@ -739,7 +739,7 @@ namespace Edufun.Haskell.Templates.Internal
             Require.NotNull(accumulator, nameof(accumulator));
             Require.NotNull(predicate, nameof(predicate));
 
-            MonadPlus<TAccumulate> retval = MonadPlus.Of(seed);
+            MonadPlus<TAccumulate> retval = MonadPlus<TAccumulate>.η(seed);
 
             using (var iter = @this.GetEnumerator())
             {
@@ -769,7 +769,7 @@ namespace Edufun.Haskell.Templates.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                MonadPlus<TSource> retval = MonadPlus.Of(iter.Current);
+                MonadPlus<TSource> retval = MonadPlus<TSource>.η(iter.Current);
 
                 while (iter.MoveNext())
                 {
@@ -799,7 +799,7 @@ namespace Edufun.Haskell.Templates.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                MonadPlus<TSource> retval = MonadPlus.Of(iter.Current);
+                MonadPlus<TSource> retval = MonadPlus<TSource>.η(iter.Current);
 
                 while (predicate(retval) && iter.MoveNext())
                 {

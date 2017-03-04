@@ -35,6 +35,11 @@ namespace Narvalo.T4
         private string _linqNamespace;
 
         /// <summary>
+        /// The name of the Eta method.
+        /// </summary>
+        private string _etaName = "η";
+
+        /// <summary>
         /// The name of the Plus method.
         /// </summary>
         private string _plusName = "Plus";
@@ -61,6 +66,9 @@ namespace Narvalo.T4
         /// </summary>
         /// <param name="parent">The parent text transformation.</param>
         protected _MonadTemplate(TextTransformation parent) : base(parent) { }
+
+        // NB: Automatically set to true when there is more than one generic parameter.
+        protected bool DisableReturn { get; set; } = false;
 
         protected bool EmitLinq { get; set; } = true;
 
@@ -221,6 +229,28 @@ namespace Narvalo.T4
         #region Method and Property Names
 
         /// <summary>
+        /// Gets or sets the name of the Eta method. Default to "η".
+        /// </summary>
+        /// <value>The name of the Eta method.</value>
+        protected string EtaName
+        {
+            get
+            {
+                return _etaName;
+            }
+
+            set
+            {
+                if (String.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("The name of the Eta method can not be null or blank.", nameof(value));
+                }
+
+                _etaName = value;
+            }
+        }
+
+        /// <summary>
         /// Gets or sets the name of the Zero property. Default to "Zero".
         /// </summary>
         /// <value>The name of the Zero property.</value>
@@ -275,7 +305,7 @@ namespace Narvalo.T4
         }
 
         /// <summary>
-        /// Gets or sets the name of the Return method. Default to "Return".
+        /// Gets or sets the name of the Return method. Default to "Of".
         /// </summary>
         /// <value>The name of the Return method.</value>
         protected string ReturnName
@@ -408,6 +438,7 @@ namespace Narvalo.T4
 
             if (rightGenerics.Length > 0)
             {
+                DisableReturn = true;
                 RightGenerics = rightGenerics;
 
                 HasRightGenerics = true;
@@ -532,12 +563,17 @@ namespace Narvalo.T4
         {
             if (HasRightGenerics)
             {
-                // For instance, Result.Of<TResult, TError>
-                Write(@"{0}.{1}<{2}{3}>", Name, ReturnName, name, RTDecl);
+                // To output Result.Of<TResult, TError>, use:
+                // > Write(@"{0}.{1}<{2}{3}>", Name, ReturnName, name, RTDecl);
+                // but internally we prefer Result<TResult, TError>.η
+                Write(@"{0}<{2}{3}>.{1}", Name, EtaName, name, RTDecl);
             }
             else
             {
-                Write(@"{0}.{1}", Name, ReturnName);
+                // To output Maybe.Of, use:
+                // > Write(@"{0}.{1}", Name, ReturnName);
+                // but internally we prefer Maybe<TResult>.η
+                Write(@"{0}<{2}>.{1}", Name, EtaName, name);
             }
         }
 

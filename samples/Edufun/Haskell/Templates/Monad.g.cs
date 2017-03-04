@@ -303,7 +303,7 @@ namespace Edufun.Haskell.Templates
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));
-            return @this.Bind(val => Monad.Of(selector(val)));
+            return @this.Bind(val => Monad<TResult>.η(selector(val)));
         }
 
         // Kind of generalisation of Zip{T1, T2, T3}.
@@ -388,7 +388,7 @@ namespace Edufun.Haskell.Templates.Internal
         {
             Require.NotNull(@this, nameof(@this));
 
-            return Monad.Of(CollectIterator(@this));
+            return Monad<IEnumerable<TSource>>.η(CollectIterator(@this));
         }
 
         private static IEnumerable<TSource> CollectIterator<TSource>(IEnumerable<Monad<TSource>> source)
@@ -511,7 +511,7 @@ namespace Edufun.Haskell.Templates.Internal
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
 
-            return Monad.Of(WhereByIterator(@this, predicate));
+            return Monad<IEnumerable<TSource>>.η(WhereByIterator(@this, predicate));
         }
 
         private static IEnumerable<TSource> WhereByIterator<TSource>(
@@ -562,7 +562,7 @@ namespace Edufun.Haskell.Templates.Internal
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
 
-            Monad<TAccumulate> retval = Monad.Of(seed);
+            Monad<TAccumulate> retval = Monad<TAccumulate>.η(seed);
 
             using (var iter = @this.GetEnumerator())
             {
@@ -588,7 +588,7 @@ namespace Edufun.Haskell.Templates.Internal
             Require.NotNull(accumulator, nameof(accumulator));
             Require.NotNull(predicate, nameof(predicate));
 
-            Monad<TAccumulate> retval = Monad.Of(seed);
+            Monad<TAccumulate> retval = Monad<TAccumulate>.η(seed);
 
             using (var iter = @this.GetEnumerator())
             {
@@ -618,7 +618,7 @@ namespace Edufun.Haskell.Templates.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                Monad<TSource> retval = Monad.Of(iter.Current);
+                Monad<TSource> retval = Monad<TSource>.η(iter.Current);
 
                 while (iter.MoveNext())
                 {
@@ -648,7 +648,7 @@ namespace Edufun.Haskell.Templates.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                Monad<TSource> retval = Monad.Of(iter.Current);
+                Monad<TSource> retval = Monad<TSource>.η(iter.Current);
 
                 while (predicate(retval) && iter.MoveNext())
                 {

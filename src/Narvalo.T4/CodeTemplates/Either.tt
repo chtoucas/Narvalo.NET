@@ -9,6 +9,8 @@
         {
             InitializeNamespaces();
             InitializeGenericParameters("TLeft", "TRight");
+
+            EtaName = "OfLeft";
         }
     }
 #>

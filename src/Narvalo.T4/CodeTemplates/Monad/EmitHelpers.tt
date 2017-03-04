@@ -28,6 +28,7 @@ public partial class MonadTemplate
         public static <#= Name #><global::Narvalo.Applicative.Unit> <#= ZeroName #> => <#= Name #><global::Narvalo.Applicative.Unit>.<#= ZeroName #>;
 
 <#+ } // End of HasZero #>
+<#+ if (!DisableReturn) { #>
         /// <summary>
         /// Obtains an instance of the <see cref="<#= Name #>{T<#= RTDecl #>}"/> class for the specified value.
         /// </summary>
@@ -38,8 +39,9 @@ public partial class MonadTemplate
         /// <param name="value">A value to be wrapped into an object of type <see cref="<#= Name #>{T<#= RTDecl #>}"/>.</param>
         /// <returns>An instance of the <see cref="<#= Name #>{T<#= RTDecl #>}"/> class for the specified value.</returns>
         public static <#= Name #><T<#= RTDecl #>> <#= ReturnName #><T<#= RTDecl #>>(T value)
-            => <#= Name #><T<#= RTDecl #>>.η(value);
+            => <#= Name #><T<#= RTDecl #>>.<#= EtaName #>(value);
 
+<#+ } // End of !DisableReturn #>
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
         /// </summary>

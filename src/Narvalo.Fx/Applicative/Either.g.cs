@@ -24,16 +24,6 @@ namespace Narvalo.Applicative
     public static partial class Either
     {
         /// <summary>
-        /// Obtains an instance of the <see cref="Either{T, TRight}"/> class for the specified value.
-        /// </summary>
-        /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
-        /// <typeparam name="TRight"></typeparam>
-        /// <param name="value">A value to be wrapped into an object of type <see cref="Either{T, TRight}"/>.</param>
-        /// <returns>An instance of the <see cref="Either{T, TRight}"/> class for the specified value.</returns>
-        public static Either<T, TRight> Of<T, TRight>(T value)
-            => Either<T, TRight>.η(value);
-
-        /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
         /// </summary>
         public static Either<T, TRight> Flatten<T, TRight>(Either<Either<T, TRight>, TRight> square)
@@ -291,7 +281,7 @@ namespace Narvalo.Applicative
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));
-            return @this.Bind(val => Either.Of<TResult, TRight>(selector(val)));
+            return @this.Bind(val => Either<TResult, TRight>.OfLeft(selector(val)));
         }
 
         // Kind of generalisation of Zip{T1, T2, T3}.
@@ -376,14 +366,14 @@ namespace Narvalo.Internal
         {
             Require.NotNull(@this, nameof(@this));
 
-            return Either.Of<IEnumerable<TSource>, TRight>(CollectIterator(@this));
+            return Either<IEnumerable<TSource>, TRight>.OfLeft(CollectIterator(@this));
         }
 
         private static IEnumerable<TSource> CollectIterator<TSource, TRight>(IEnumerable<Either<TSource, TRight>> source)
         {
             Demand.NotNull(source);
 
-            var unit = Either.Of<Unit, TRight>(Unit.Default);
+            var unit = Either<Unit, TRight>.OfLeft(Unit.Default);
             var item = default(TSource);
 
             using (var iter = source.GetEnumerator())
@@ -500,7 +490,7 @@ namespace Narvalo.Internal
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
 
-            return Either.Of<IEnumerable<TSource>, TRight>(WhereByIterator(@this, predicate));
+            return Either<IEnumerable<TSource>, TRight>.OfLeft(WhereByIterator(@this, predicate));
         }
 
         private static IEnumerable<TSource> WhereByIterator<TSource, TRight>(
@@ -510,7 +500,7 @@ namespace Narvalo.Internal
             Demand.NotNull(source);
             Demand.NotNull(predicate);
 
-            var unit = Either.Of<Unit, TRight>(Unit.Default);
+            var unit = Either<Unit, TRight>.OfLeft(Unit.Default);
 
             using (var iter = source.GetEnumerator())
             {
@@ -553,7 +543,7 @@ namespace Narvalo.Internal
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
 
-            Either<TAccumulate, TRight> retval = Either.Of<TAccumulate, TRight>(seed);
+            Either<TAccumulate, TRight> retval = Either<TAccumulate, TRight>.OfLeft(seed);
 
             using (var iter = @this.GetEnumerator())
             {
@@ -579,7 +569,7 @@ namespace Narvalo.Internal
             Require.NotNull(accumulator, nameof(accumulator));
             Require.NotNull(predicate, nameof(predicate));
 
-            Either<TAccumulate, TRight> retval = Either.Of<TAccumulate, TRight>(seed);
+            Either<TAccumulate, TRight> retval = Either<TAccumulate, TRight>.OfLeft(seed);
 
             using (var iter = @this.GetEnumerator())
             {
@@ -609,7 +599,7 @@ namespace Narvalo.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                Either<TSource, TRight> retval = Either.Of<TSource, TRight>(iter.Current);
+                Either<TSource, TRight> retval = Either<TSource, TRight>.OfLeft(iter.Current);
 
                 while (iter.MoveNext())
                 {
@@ -639,7 +629,7 @@ namespace Narvalo.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                Either<TSource, TRight> retval = Either.Of<TSource, TRight>(iter.Current);
+                Either<TSource, TRight> retval = Either<TSource, TRight>.OfLeft(iter.Current);
 
                 while (predicate(retval) && iter.MoveNext())
                 {

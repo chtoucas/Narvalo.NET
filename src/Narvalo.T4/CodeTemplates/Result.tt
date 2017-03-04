@@ -11,6 +11,7 @@
             InitializeGenericParameters("T", "TError");
             InitializeHelpers(true);
 
+            EtaName = "Of";
             Name = "Result";
             IsNullable = false;
         }

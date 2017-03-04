@@ -300,7 +300,7 @@ namespace Narvalo.Applicative
         {
             /* T4: NotNull(@this) */
             Require.NotNull(selector, nameof(selector));
-            return @this.Bind(val => Result.Of(selector(val)));
+            return @this.Bind(val => Result<TResult>.η(selector(val)));
         }
 
         // Kind of generalisation of Zip{T1, T2, T3}.
@@ -385,7 +385,7 @@ namespace Narvalo.Internal
         {
             Require.NotNull(@this, nameof(@this));
 
-            return Result.Of(CollectIterator(@this));
+            return Result<IEnumerable<TSource>>.η(CollectIterator(@this));
         }
 
         private static IEnumerable<TSource> CollectIterator<TSource>(IEnumerable<Result<TSource>> source)
@@ -508,7 +508,7 @@ namespace Narvalo.Internal
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
 
-            return Result.Of(WhereByIterator(@this, predicate));
+            return Result<IEnumerable<TSource>>.η(WhereByIterator(@this, predicate));
         }
 
         private static IEnumerable<TSource> WhereByIterator<TSource>(
@@ -559,7 +559,7 @@ namespace Narvalo.Internal
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
 
-            Result<TAccumulate> retval = Result.Of(seed);
+            Result<TAccumulate> retval = Result<TAccumulate>.η(seed);
 
             using (var iter = @this.GetEnumerator())
             {
@@ -583,7 +583,7 @@ namespace Narvalo.Internal
             Require.NotNull(accumulator, nameof(accumulator));
             Require.NotNull(predicate, nameof(predicate));
 
-            Result<TAccumulate> retval = Result.Of(seed);
+            Result<TAccumulate> retval = Result<TAccumulate>.η(seed);
 
             using (var iter = @this.GetEnumerator())
             {
@@ -611,7 +611,7 @@ namespace Narvalo.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                Result<TSource> retval = Result.Of(iter.Current);
+                Result<TSource> retval = Result<TSource>.η(iter.Current);
 
                 while (iter.MoveNext())
                 {
@@ -639,7 +639,7 @@ namespace Narvalo.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                Result<TSource> retval = Result.Of(iter.Current);
+                Result<TSource> retval = Result<TSource>.η(iter.Current);
 
                 while (predicate(retval) && iter.MoveNext())
                 {

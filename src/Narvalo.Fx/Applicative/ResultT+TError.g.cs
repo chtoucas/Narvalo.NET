@@ -24,16 +24,6 @@ namespace Narvalo.Applicative
     public partial struct Result
     {
         /// <summary>
-        /// Obtains an instance of the <see cref="Result{T, TError}"/> class for the specified value.
-        /// </summary>
-        /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
-        /// <typeparam name="TError"></typeparam>
-        /// <param name="value">A value to be wrapped into an object of type <see cref="Result{T, TError}"/>.</param>
-        /// <returns>An instance of the <see cref="Result{T, TError}"/> class for the specified value.</returns>
-        public static Result<T, TError> Of<T, TError>(T value)
-            => Result<T, TError>.η(value);
-
-        /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
         /// </summary>
         public static Result<T, TError> Flatten<T, TError>(Result<Result<T, TError>, TError> square)
@@ -291,7 +281,7 @@ namespace Narvalo.Applicative
         {
             /* T4: NotNull(@this) */
             Require.NotNull(selector, nameof(selector));
-            return @this.Bind(val => Result.Of<TResult, TError>(selector(val)));
+            return @this.Bind(val => Result<TResult, TError>.Of(selector(val)));
         }
 
         // Kind of generalisation of Zip{T1, T2, T3}.
@@ -376,14 +366,14 @@ namespace Narvalo.Internal
         {
             Require.NotNull(@this, nameof(@this));
 
-            return Result.Of<IEnumerable<TSource>, TError>(CollectIterator(@this));
+            return Result<IEnumerable<TSource>, TError>.Of(CollectIterator(@this));
         }
 
         private static IEnumerable<TSource> CollectIterator<TSource, TError>(IEnumerable<Result<TSource, TError>> source)
         {
             Demand.NotNull(source);
 
-            var unit = Result.Of<Unit, TError>(Unit.Default);
+            var unit = Result<Unit, TError>.Of(Unit.Default);
             var item = default(TSource);
 
             using (var iter = source.GetEnumerator())
@@ -500,7 +490,7 @@ namespace Narvalo.Internal
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
 
-            return Result.Of<IEnumerable<TSource>, TError>(WhereByIterator(@this, predicate));
+            return Result<IEnumerable<TSource>, TError>.Of(WhereByIterator(@this, predicate));
         }
 
         private static IEnumerable<TSource> WhereByIterator<TSource, TError>(
@@ -510,7 +500,7 @@ namespace Narvalo.Internal
             Demand.NotNull(source);
             Demand.NotNull(predicate);
 
-            var unit = Result.Of<Unit, TError>(Unit.Default);
+            var unit = Result<Unit, TError>.Of(Unit.Default);
 
             using (var iter = source.GetEnumerator())
             {
@@ -553,7 +543,7 @@ namespace Narvalo.Internal
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
 
-            Result<TAccumulate, TError> retval = Result.Of<TAccumulate, TError>(seed);
+            Result<TAccumulate, TError> retval = Result<TAccumulate, TError>.Of(seed);
 
             using (var iter = @this.GetEnumerator())
             {
@@ -577,7 +567,7 @@ namespace Narvalo.Internal
             Require.NotNull(accumulator, nameof(accumulator));
             Require.NotNull(predicate, nameof(predicate));
 
-            Result<TAccumulate, TError> retval = Result.Of<TAccumulate, TError>(seed);
+            Result<TAccumulate, TError> retval = Result<TAccumulate, TError>.Of(seed);
 
             using (var iter = @this.GetEnumerator())
             {
@@ -605,7 +595,7 @@ namespace Narvalo.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                Result<TSource, TError> retval = Result.Of<TSource, TError>(iter.Current);
+                Result<TSource, TError> retval = Result<TSource, TError>.Of(iter.Current);
 
                 while (iter.MoveNext())
                 {
@@ -633,7 +623,7 @@ namespace Narvalo.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                Result<TSource, TError> retval = Result.Of<TSource, TError>(iter.Current);
+                Result<TSource, TError> retval = Result<TSource, TError>.Of(iter.Current);
 
                 while (predicate(retval) && iter.MoveNext())
                 {

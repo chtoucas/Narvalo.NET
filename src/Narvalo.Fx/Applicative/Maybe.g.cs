@@ -317,7 +317,7 @@ namespace Narvalo.Applicative
         {
             /* T4: NotNull(@this) */
             Require.NotNull(selector, nameof(selector));
-            return @this.Bind(val => Maybe.Of(selector(val)));
+            return @this.Bind(val => Maybe<TResult>.η(selector(val)));
         }
 
         public static Maybe<TSource> Where<TSource>(
@@ -326,7 +326,7 @@ namespace Narvalo.Applicative
         {
             /* T4: NotNull(@this) */
             Require.NotNull(predicate, nameof(predicate));
-            return @this.Bind(val => predicate(val) ? Maybe.Of(val) : Maybe<TSource>.None);
+            return @this.Bind(val => predicate(val) ? Maybe<TSource>.η(val) : Maybe<TSource>.None);
         }
 
         // Kind of generalisation of Zip{T1, T2, T3}.
@@ -526,7 +526,7 @@ namespace Narvalo.Internal
         {
             Require.NotNull(@this, nameof(@this));
 
-            return Maybe.Of(CollectIterator(@this));
+            return Maybe<IEnumerable<TSource>>.η(CollectIterator(@this));
         }
 
         private static IEnumerable<TSource> CollectIterator<TSource>(IEnumerable<Maybe<TSource>> source)
@@ -658,7 +658,7 @@ namespace Narvalo.Internal
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
 
-            return Maybe.Of(WhereByIterator(@this, predicate));
+            return Maybe<IEnumerable<TSource>>.η(WhereByIterator(@this, predicate));
         }
 
         private static IEnumerable<TSource> WhereByIterator<TSource>(
@@ -709,7 +709,7 @@ namespace Narvalo.Internal
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
 
-            Maybe<TAccumulate> retval = Maybe.Of(seed);
+            Maybe<TAccumulate> retval = Maybe<TAccumulate>.η(seed);
 
             using (var iter = @this.GetEnumerator())
             {
@@ -733,7 +733,7 @@ namespace Narvalo.Internal
             Require.NotNull(accumulator, nameof(accumulator));
             Require.NotNull(predicate, nameof(predicate));
 
-            Maybe<TAccumulate> retval = Maybe.Of(seed);
+            Maybe<TAccumulate> retval = Maybe<TAccumulate>.η(seed);
 
             using (var iter = @this.GetEnumerator())
             {
@@ -761,7 +761,7 @@ namespace Narvalo.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                Maybe<TSource> retval = Maybe.Of(iter.Current);
+                Maybe<TSource> retval = Maybe<TSource>.η(iter.Current);
 
                 while (iter.MoveNext())
                 {
@@ -789,7 +789,7 @@ namespace Narvalo.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                Maybe<TSource> retval = Maybe.Of(iter.Current);
+                Maybe<TSource> retval = Maybe<TSource>.η(iter.Current);
 
                 while (predicate(retval) && iter.MoveNext())
                 {
