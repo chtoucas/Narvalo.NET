@@ -9,8 +9,6 @@ namespace Narvalo.Applicative
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.CompilerServices;
 
-    using HashCodeHelpers = Narvalo.Internal.HashCodeHelpers;
-
     /// <summary>
     /// Represents the sum of two types. An instance of the <see cref="Either{TLeft, TRight}"/> class
     /// contains either a <c>TLeft</c> value or a <c>TRight</c> value but not both.

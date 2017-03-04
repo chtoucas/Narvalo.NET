@@ -23,7 +23,6 @@
     <Compile Include="Applicative\Either.cs" />
     <Compile Include="Applicative\Either`2.cs" />
     <Compile Include="Applicative\Outcome.cs" />
-    <Compile Include="Internal\HashCodeHelpers.cs" />
     <Compile Include="Applicative\Nullable.cs" />
     <Compile Include="Applicative\Result.cs" />
     <Compile Include="Applicative\Ident.g.cs">

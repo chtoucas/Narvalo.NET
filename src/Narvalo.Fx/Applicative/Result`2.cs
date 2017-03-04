@@ -12,8 +12,6 @@ namespace Narvalo.Applicative
 
     using Narvalo.Properties;
 
-    using HashCodeHelpers = Narvalo.Internal.HashCodeHelpers;
-
     // Typical use cases:
     // - Result<T, TError> is a value type, its primary use is as a return type.
     //   For long-lived objects prefer Either<T, TError>.
