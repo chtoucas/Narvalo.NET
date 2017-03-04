@@ -79,17 +79,17 @@ namespace Narvalo
         {
             Require.NotNull(pennies, nameof(pennies));
 
-            using (IEnumerator<Moneypenny> it = pennies.GetEnumerator())
+            using (var iter = pennies.GetEnumerator())
             {
-                if (!it.MoveNext()) { goto EMPTY_COLLECTION; }
+                if (!iter.MoveNext()) { goto EMPTY_COLLECTION; }
 
-                var pny = it.Current;
+                var pny = iter.Current;
                 var currency = pny.Currency;
                 long sum = pny.Amount;
 
-                while (it.MoveNext())
+                while (iter.MoveNext())
                 {
-                    pny = it.Current;
+                    pny = iter.Current;
 
                     MoneyHelpers.ThrowIfCurrencyMismatch(pny, currency);
 
@@ -107,20 +107,20 @@ namespace Narvalo
         {
             Require.NotNull(pennies, nameof(pennies));
 
-            using (IEnumerator<Moneypenny?> it = pennies.GetEnumerator())
+            using (var iter = pennies.GetEnumerator())
             {
-                while (it.MoveNext())
+                while (iter.MoveNext())
                 {
-                    Moneypenny? item = it.Current;
+                    Moneypenny? item = iter.Current;
                     if (!item.HasValue) { continue; }
 
                     var pny = item.Value;
                     var currency = pny.Currency;
                     long sum = pny.Amount;
 
-                    while (it.MoveNext())
+                    while (iter.MoveNext())
                     {
-                        item = it.Current;
+                        item = iter.Current;
 
                         if (item.HasValue)
                         {

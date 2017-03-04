@@ -137,21 +137,21 @@ namespace Narvalo
         {
             Require.NotNull(monies, nameof(monies));
 
-            using (IEnumerator<Money> it = monies.GetEnumerator())
+            using (var iter = monies.GetEnumerator())
             {
-                if (!it.MoveNext()) { goto EMPTY_COLLECTION; }
+                if (!iter.MoveNext()) { goto EMPTY_COLLECTION; }
 
                 // The main purpose for the separate treatment of the first element is to get a
                 // hand on its underlying currency which will serve as a reference when we shall
                 // check that all elements of the collection use the same currency.
-                Money mny = it.Current;
+                Money mny = iter.Current;
                 Currency currency = mny.Currency;
                 bool normalized = mny.IsNormalized;
                 decimal sum = mny.Amount;
 
-                while (it.MoveNext())
+                while (iter.MoveNext())
                 {
-                    mny = it.Current;
+                    mny = iter.Current;
 
                     MoneyHelpers.ThrowIfCurrencyMismatch(mny, currency);
 
@@ -170,13 +170,13 @@ namespace Narvalo
         {
             Require.NotNull(monies, nameof(monies));
 
-            using (IEnumerator<Money?> it = monies.GetEnumerator())
+            using (var iter = monies.GetEnumerator())
             {
                 // If the sequence is empty, we never enter this loop.
                 // Actually, this is not really a loop, as it executes only once.
-                while (it.MoveNext())
+                while (iter.MoveNext())
                 {
-                    Money? item = it.Current;
+                    Money? item = iter.Current;
                     // If all elements are null, we never pass this point.
                     if (!item.HasValue) { continue; }
 
@@ -186,9 +186,9 @@ namespace Narvalo
                     decimal sum = mny.Amount;
 
                     // Loop over the remaining elements, if any.
-                    while (it.MoveNext())
+                    while (iter.MoveNext())
                     {
-                        item = it.Current;
+                        item = iter.Current;
 
                         if (item.HasValue)
                         {
@@ -225,18 +225,18 @@ namespace Narvalo
         {
             Require.NotNull(monies, nameof(monies));
 
-            using (IEnumerator<Money> it = monies.GetEnumerator())
+            using (var iter = monies.GetEnumerator())
             {
-                if (!it.MoveNext()) { throw new InvalidOperationException("XXX"); }
+                if (!iter.MoveNext()) { throw new InvalidOperationException("XXX"); }
 
-                Money mny = it.Current;
+                Money mny = iter.Current;
                 Currency currency = mny.Currency;
                 decimal sum = mny.Amount;
                 long count = 1;
 
-                while (it.MoveNext())
+                while (iter.MoveNext())
                 {
-                    mny = it.Current;
+                    mny = iter.Current;
 
                     MoneyHelpers.ThrowIfCurrencyMismatch(mny, currency);
 
@@ -253,11 +253,11 @@ namespace Narvalo
         {
             Require.NotNull(monies, nameof(monies));
 
-            using (IEnumerator<Money?> it = monies.GetEnumerator())
+            using (var iter = monies.GetEnumerator())
             {
-                while (it.MoveNext())
+                while (iter.MoveNext())
                 {
-                    Money? item = it.Current;
+                    Money? item = iter.Current;
                     if (!item.HasValue) { continue; }
 
                     Money mny = item.Value;
@@ -265,9 +265,9 @@ namespace Narvalo
                     decimal sum = mny.Amount;
                     long count = 1;
 
-                    while (it.MoveNext())
+                    while (iter.MoveNext())
                     {
-                        item = it.Current;
+                        item = iter.Current;
 
                         if (item.HasValue)
                         {

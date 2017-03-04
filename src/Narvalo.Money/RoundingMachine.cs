@@ -165,17 +165,17 @@ namespace Narvalo
         {
             Require.NotNull(monies, nameof(monies));
 
-            using (IEnumerator<Money> it = monies.GetEnumerator())
+            using (var iter = monies.GetEnumerator())
             {
-                if (!it.MoveNext()) { goto EMPTY_COLLECTION; }
+                if (!iter.MoveNext()) { goto EMPTY_COLLECTION; }
 
-                Money mny = it.Current;
+                Money mny = iter.Current;
                 Currency currency = mny.Currency;
                 decimal sum = NormalizeAmount(mny, mode);
 
-                while (it.MoveNext())
+                while (iter.MoveNext())
                 {
-                    mny = it.Current;
+                    mny = iter.Current;
 
                     MoneyHelpers.ThrowIfCurrencyMismatch(mny, currency);
 
@@ -194,20 +194,20 @@ namespace Narvalo
         {
             Require.NotNull(monies, nameof(monies));
 
-            using (IEnumerator<Money?> it = monies.GetEnumerator())
+            using (var iter = monies.GetEnumerator())
             {
-                while (it.MoveNext())
+                while (iter.MoveNext())
                 {
-                    Money? item = it.Current;
+                    Money? item = iter.Current;
                     if (!item.HasValue) { continue; }
 
                     Money mny = item.Value;
                     Currency currency = mny.Currency;
                     decimal sum = NormalizeAmount(mny, mode);
 
-                    while (it.MoveNext())
+                    while (iter.MoveNext())
                     {
-                        item = it.Current;
+                        item = iter.Current;
 
                         if (item.HasValue)
                         {
@@ -236,17 +236,17 @@ namespace Narvalo
             Require.NotNull(monies, nameof(monies));
             Require.NotNull(adjuster, nameof(adjuster));
 
-            using (IEnumerator<Money> it = monies.GetEnumerator())
+            using (var iter = monies.GetEnumerator())
             {
-                if (!it.MoveNext()) { goto EMPTY_COLLECTION; }
+                if (!iter.MoveNext()) { goto EMPTY_COLLECTION; }
 
-                Money mny = it.Current;
+                Money mny = iter.Current;
                 Currency currency = mny.Currency;
                 decimal sum = NormalizeAmount(mny, adjuster);
 
-                while (it.MoveNext())
+                while (iter.MoveNext())
                 {
-                    mny = it.Current;
+                    mny = iter.Current;
 
                     MoneyHelpers.ThrowIfCurrencyMismatch(mny, currency);
 
@@ -266,20 +266,20 @@ namespace Narvalo
             Require.NotNull(monies, nameof(monies));
             Require.NotNull(adjuster, nameof(adjuster));
 
-            using (IEnumerator<Money?> it = monies.GetEnumerator())
+            using (var iter = monies.GetEnumerator())
             {
-                while (it.MoveNext())
+                while (iter.MoveNext())
                 {
-                    Money? item = it.Current;
+                    Money? item = iter.Current;
                     if (!item.HasValue) { continue; }
 
                     Money mny = item.Value;
                     Currency currency = mny.Currency;
                     decimal sum = NormalizeAmount(mny, adjuster);
 
-                    while (it.MoveNext())
+                    while (iter.MoveNext())
                     {
-                        item = it.Current;
+                        item = iter.Current;
 
                         if (item.HasValue)
                         {
@@ -317,18 +317,18 @@ namespace Narvalo
         {
             Require.NotNull(monies, nameof(monies));
 
-            using (IEnumerator<Money> it = monies.GetEnumerator())
+            using (var iter = monies.GetEnumerator())
             {
-                if (!it.MoveNext()) { throw new InvalidOperationException("XXX"); }
+                if (!iter.MoveNext()) { throw new InvalidOperationException("XXX"); }
 
-                Money mny = it.Current;
+                Money mny = iter.Current;
                 Currency currency = mny.Currency;
                 decimal sum = NormalizeAmount(mny, mode);
                 long count = 1;
 
-                while (it.MoveNext())
+                while (iter.MoveNext())
                 {
-                    mny = it.Current;
+                    mny = iter.Current;
 
                     MoneyHelpers.ThrowIfCurrencyMismatch(mny, currency);
 
@@ -345,11 +345,11 @@ namespace Narvalo
         {
             Require.NotNull(monies, nameof(monies));
 
-            using (IEnumerator<Money?> it = monies.GetEnumerator())
+            using (var iter = monies.GetEnumerator())
             {
-                while (it.MoveNext())
+                while (iter.MoveNext())
                 {
-                    Money? item = it.Current;
+                    Money? item = iter.Current;
                     if (!item.HasValue) { continue; }
 
                     Money mny = item.Value;
@@ -357,9 +357,9 @@ namespace Narvalo
                     decimal sum = NormalizeAmount(mny, mode);
                     long count = 1;
 
-                    while (it.MoveNext())
+                    while (iter.MoveNext())
                     {
-                        item = it.Current;
+                        item = iter.Current;
 
                         if (item.HasValue)
                         {
@@ -389,18 +389,18 @@ namespace Narvalo
             Require.NotNull(monies, nameof(monies));
             Require.NotNull(adjuster, nameof(adjuster));
 
-            using (IEnumerator<Money> it = monies.GetEnumerator())
+            using (var iter = monies.GetEnumerator())
             {
-                if (!it.MoveNext()) { throw new InvalidOperationException("XXX"); }
+                if (!iter.MoveNext()) { throw new InvalidOperationException("XXX"); }
 
-                Money mny = it.Current;
+                Money mny = iter.Current;
                 Currency currency = mny.Currency;
                 decimal sum = NormalizeAmount(mny, adjuster);
                 long count = 1;
 
-                while (it.MoveNext())
+                while (iter.MoveNext())
                 {
-                    mny = it.Current;
+                    mny = iter.Current;
 
                     MoneyHelpers.ThrowIfCurrencyMismatch(mny, currency);
 
@@ -418,11 +418,11 @@ namespace Narvalo
             Require.NotNull(monies, nameof(monies));
             Require.NotNull(adjuster, nameof(adjuster));
 
-            using (IEnumerator<Money?> it = monies.GetEnumerator())
+            using (var iter = monies.GetEnumerator())
             {
-                while (it.MoveNext())
+                while (iter.MoveNext())
                 {
-                    Money? item = it.Current;
+                    Money? item = iter.Current;
                     if (!item.HasValue) { continue; }
 
                     Money mny = item.Value;
@@ -430,9 +430,9 @@ namespace Narvalo
                     decimal sum = NormalizeAmount(mny, adjuster);
                     long count = 1;
 
-                    while (it.MoveNext())
+                    while (iter.MoveNext())
                     {
-                        item = it.Current;
+                        item = iter.Current;
 
                         if (item.HasValue)
                         {
