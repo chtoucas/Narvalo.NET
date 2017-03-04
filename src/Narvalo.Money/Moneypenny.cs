@@ -78,7 +78,8 @@ namespace Narvalo
 
         [ExcludeFromCodeCoverage]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
-        private string DebuggerDisplay => Format.Current("{0} {1:N0}", Currency.Code, Amount);
+        private string DebuggerDisplay
+            => "(" + Currency.Code + ") " + Amount.ToString("N0", CultureInfo.CurrentCulture);
     }
 
     // Factory methods.

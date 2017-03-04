@@ -61,7 +61,7 @@ namespace Narvalo.Globalization
             string numericCode;
             if (!Alpha2ToNumeric.TryGetValue(twoLetterCode, out numericCode))
             {
-                throw new Exception(Format.Current("Unknown country code {0}.", twoLetterCode));
+                throw new Exception("Unknown country code " + twoLetterCode + ".");
             }
 
             return new CountryISOCode(twoLetterCode, numericCode);

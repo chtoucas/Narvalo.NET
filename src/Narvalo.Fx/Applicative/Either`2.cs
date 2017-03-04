@@ -87,7 +87,7 @@ namespace Narvalo.Applicative
 
             public override int GetHashCode() => Left?.GetHashCode() ?? 0;
 
-            public override string ToString() => Format.Current("Left({0})", Left);
+            public override string ToString() => "Left(" + Left?.ToString() + ")";
 
             /// <summary>
             /// Represents a debugger type proxy for <see cref="Either{TLeft, TRight}.Left_"/>.
@@ -147,7 +147,7 @@ namespace Narvalo.Applicative
 
             public override int GetHashCode() => Right?.GetHashCode() ?? 0;
 
-            public override string ToString() => Format.Current("Right({0})", Right);
+            public override string ToString() => "Right(" + Right?.ToString() + ")";
 
             /// <summary>
             /// Represents a debugger type proxy for <see cref="Either{TLeft, TRight}.Right_"/>.

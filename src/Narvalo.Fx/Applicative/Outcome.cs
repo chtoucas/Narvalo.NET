@@ -35,14 +35,14 @@ namespace Narvalo.Applicative
 
         [ExcludeFromCodeCoverage]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
-        private string DebuggerDisplay => IsSuccess ? "Success" : "Error";
+        private string DebuggerDisplay => IsError ? "Error" : "Success";
 
-        public override string ToString() => IsSuccess ? "Success" : Format.Current("Error({0})", Error);
+        public override string ToString() => IsError ? "Error(" + Error + ")" : "Success";
 
         /// <summary>
-        /// Represents a debugger type proxy for <see cref="Outcome{TError}"/>.
+        /// Represents a debugger type proxy for <see cref="Outcome"/>.
         /// </summary>
-        /// <remarks>Ensure that <see cref="Outcome{TError}.Error"/> does not throw in the debugger
+        /// <remarks>Ensure that <see cref="Outcome.Error"/> does not throw in the debugger
         /// for DEBUG builds.</remarks>
         [ExcludeFromCodeCoverage]
         private sealed class DebugView
@@ -71,11 +71,11 @@ namespace Narvalo.Applicative
         /// </summary>
         public static Outcome Success => s_Success;
 
-        public static Outcome FromError(string value)
+        public static Outcome FromError(string error)
         {
-            Require.NotNullOrEmpty(value, nameof(value));
+            Require.NotNullOrEmpty(error, nameof(error));
 
-            return new Outcome(value);
+            return new Outcome(error);
         }
     }
 

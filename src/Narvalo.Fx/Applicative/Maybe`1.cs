@@ -107,7 +107,7 @@ namespace Narvalo.Applicative
             return Value;
         }
 
-        public override string ToString() => IsSome ? Format.Current("Maybe({0})", Value) : "Maybe(None)";
+        public override string ToString() => IsSome ? "Maybe(" + Value.ToString() + ")" : "Maybe(None)";
 
         /// <summary>
         /// Represents a debugger type proxy for <see cref="Maybe{T}"/>.

@@ -50,7 +50,7 @@ namespace Narvalo
             => range.LowerEnd.CompareTo(LowerEnd) >= 0 && range.UpperEnd.CompareTo(UpperEnd) <= 0;
 
         public override string ToString()
-            => Format.Current("LowerEnd({0}) - UpperEnd({1})", LowerEnd, UpperEnd);
+            => "LowerEnd(" + LowerEnd.ToString() + ") - UpperEnd(" + UpperEnd.ToString() + ")";
     }
 
     // Implements the IEquatable<Range<T>> interface.

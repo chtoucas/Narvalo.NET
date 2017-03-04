@@ -18,6 +18,6 @@ namespace Narvalo.Linq
     /// We have also operators accepting arguments in the Kleisli "category":
     /// SelectWith, SelectUnzip, ZipWith, WhereBy, Fold, Reduce.
     /// </remarks>
-    /// For more generation operators, <seealso cref="Sequence"/>.
+    /// For more generation operators, <seealso cref="Narvalo.Applicative.Sequence"/>.
     public static partial class Qperators { }
 }

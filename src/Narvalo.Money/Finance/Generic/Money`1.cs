@@ -105,7 +105,8 @@ namespace Narvalo.Finance.Generic
         }
 
         [ExcludeFromCodeCoverage]
-        private string DebuggerDisplay => Format.Current("{0:F2} ({1})", Amount, Currency.Code);
+        private string DebuggerDisplay
+            => "(" + Currency.Code + ") " + Amount.ToString("F2", CultureInfo.CurrentCulture);
     }
 
     // Domain-specific conversions.

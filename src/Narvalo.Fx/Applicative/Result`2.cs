@@ -117,7 +117,7 @@ namespace Narvalo.Applicative
         }
 
         public override string ToString()
-            => IsSuccess ? Format.Current("Success({0})", Value) : Format.Current("Error({0})", Error);
+            => IsSuccess ? "Success(" + Value?.ToString() + ")" : "Error(" + Error.ToString() + ")";
 
         /// <summary>
         /// Represents a debugger type proxy for <see cref="Result{T, TError}"/>.
