@@ -161,7 +161,7 @@ namespace Narvalo
     public static partial class RoundingMachine
     {
         // Optimized version of: monies.Select(_ => _.Normalize(mode)).Sum().
-        public static Money Sum(IEnumerable<Money> monies, MidpointRounding mode)
+        public static Money Sum(this IEnumerable<Money> monies, MidpointRounding mode)
         {
             Require.NotNull(monies, nameof(monies));
 
@@ -190,7 +190,7 @@ namespace Narvalo
         }
 
         // Optimized version of: monies.Select(_ => _.Normalize(mode)).Sum().
-        public static Money Sum(IEnumerable<Money?> monies, MidpointRounding mode)
+        public static Money Sum(this IEnumerable<Money?> monies, MidpointRounding mode)
         {
             Require.NotNull(monies, nameof(monies));
 
@@ -231,7 +231,7 @@ namespace Narvalo
     public static partial class RoundingMachine
     {
         // Optimized version of: monies.Select(_ => _.Normalize(adjuster)).Sum().
-        public static Money Sum(IEnumerable<Money> monies, IRoundingAdjuster adjuster)
+        public static Money Sum(this IEnumerable<Money> monies, IRoundingAdjuster adjuster)
         {
             Require.NotNull(monies, nameof(monies));
             Require.NotNull(adjuster, nameof(adjuster));
@@ -261,7 +261,7 @@ namespace Narvalo
         }
 
         // Optimized version of: monies.Select(_ => _.Normalize(adjuster)).Sum().
-        public static Money Sum(IEnumerable<Money?> monies, IRoundingAdjuster adjuster)
+        public static Money Sum(this IEnumerable<Money?> monies, IRoundingAdjuster adjuster)
         {
             Require.NotNull(monies, nameof(monies));
             Require.NotNull(adjuster, nameof(adjuster));
@@ -313,7 +313,7 @@ namespace Narvalo
     public static partial class RoundingMachine
     {
         // Optimized version of: monies.Select(_ => _.Normalize(mode)).Average().Normalize(mode).
-        public static Money Average(IEnumerable<Money> monies, MidpointRounding mode)
+        public static Money Average(this IEnumerable<Money> monies, MidpointRounding mode)
         {
             Require.NotNull(monies, nameof(monies));
 
@@ -341,7 +341,7 @@ namespace Narvalo
         }
 
         // Optimized version of: monies.Select(_ => _.Normalize(mode)).Average().Normalize(mode).
-        public static Money? Average(IEnumerable<Money?> monies, MidpointRounding mode)
+        public static Money? Average(this IEnumerable<Money?> monies, MidpointRounding mode)
         {
             Require.NotNull(monies, nameof(monies));
 
@@ -384,7 +384,7 @@ namespace Narvalo
     public static partial class RoundingMachine
     {
         // Optimized version of: monies.Select(_ => _.Normalize(adjuster)).Average().Normalize(mode).
-        public static Money Average(IEnumerable<Money> monies, IRoundingAdjuster adjuster)
+        public static Money Average(this IEnumerable<Money> monies, IRoundingAdjuster adjuster)
         {
             Require.NotNull(monies, nameof(monies));
             Require.NotNull(adjuster, nameof(adjuster));
@@ -413,7 +413,7 @@ namespace Narvalo
         }
 
         // Optimized version of: monies.Select(_ => _.Normalize(adjuster)).Average().Normalize(mode).
-        public static Money? Average(IEnumerable<Money?> monies, IRoundingAdjuster adjuster)
+        public static Money? Average(this IEnumerable<Money?> monies, IRoundingAdjuster adjuster)
         {
             Require.NotNull(monies, nameof(monies));
             Require.NotNull(adjuster, nameof(adjuster));

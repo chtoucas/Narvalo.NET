@@ -28,7 +28,6 @@
   <ItemGroup>
     <Compile Include="Finance\Allocators\DefaultMoneyAllocator.cs" />
     <Compile Include="Finance\Allocators\PennyAllocators.cs" />
-    <Compile Include="Finance\Extensions\Enumerable%24.cs" />
     <Compile Include="Finance\Generic\MoneyFactory.cs" />
     <Compile Include="Globalization\MoneyFormat.cs" />
     <Compile Include="GlobalSuppressions.cs" />

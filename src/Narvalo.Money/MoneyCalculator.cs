@@ -133,7 +133,7 @@ namespace Narvalo
     // we can sum the amounts then construct a single Money object.
     public static partial class MoneyCalculator
     {
-        public static Money Sum(IEnumerable<Money> monies)
+        public static Money Sum(this IEnumerable<Money> monies)
         {
             Require.NotNull(monies, nameof(monies));
 
@@ -166,7 +166,7 @@ namespace Narvalo
             return Money.FromMajor(0, Currency.None);
         }
 
-        public static Money Sum(IEnumerable<Money?> monies)
+        public static Money Sum(this IEnumerable<Money?> monies)
         {
             Require.NotNull(monies, nameof(monies));
 
@@ -221,7 +221,7 @@ namespace Narvalo
     public static partial class MoneyCalculator
     {
         // NB: The result is ALWAYS denormalized.
-        public static Money Average(IEnumerable<Money> monies)
+        public static Money Average(this IEnumerable<Money> monies)
         {
             Require.NotNull(monies, nameof(monies));
 
@@ -249,7 +249,7 @@ namespace Narvalo
         }
 
         // NB: The result is ALWAYS denormalized.
-        public static Money? Average(IEnumerable<Money?> monies)
+        public static Money? Average(this IEnumerable<Money?> monies)
         {
             Require.NotNull(monies, nameof(monies));
 
