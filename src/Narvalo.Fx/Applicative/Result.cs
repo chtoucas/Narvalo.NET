@@ -15,11 +15,11 @@ namespace Narvalo.Applicative
     {
         private readonly ExceptionDispatchInfo _error;
 
-        private Result(ExceptionDispatchInfo exceptionInfo)
+        private Result(ExceptionDispatchInfo error)
         {
-            Demand.NotNull(exceptionInfo);
+            Demand.NotNull(error);
 
-            _error = exceptionInfo;
+            _error = error;
             IsError = true;
         }
 
@@ -52,7 +52,7 @@ namespace Narvalo.Applicative
         }
 
         public override string ToString()
-            => IsError ? Format.Current("Error({0})", Error.SourceException) : "Success";
+            => IsError ? "Error(" + Error.SourceException.ToString() + ")" : "Success";
 
         /// <summary>
         /// Represents a debugger type proxy for <see cref="Result"/>.
@@ -86,11 +86,11 @@ namespace Narvalo.Applicative
         /// </summary>
         public static Result Success => s_Success;
 
-        public static Result FromError(ExceptionDispatchInfo exceptionInfo)
+        public static Result FromError(ExceptionDispatchInfo error)
         {
-            Require.NotNull(exceptionInfo, nameof(exceptionInfo));
+            Require.NotNull(error, nameof(error));
 
-            return new Result(exceptionInfo);
+            return new Result(error);
         }
     }
 

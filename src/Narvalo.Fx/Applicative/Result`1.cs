@@ -32,21 +32,21 @@ namespace Narvalo.Applicative
     public partial struct Result<T>
         : IEquatable<Result<T>>, Internal.IEither<T, ExceptionDispatchInfo>, Internal.Iterable<T>
     {
-        private readonly ExceptionDispatchInfo _exceptionInfo;
+        private readonly ExceptionDispatchInfo _error;
         private readonly T _value;
 
         private Result(T value)
         {
-            _exceptionInfo = default(ExceptionDispatchInfo);
+            _error = default(ExceptionDispatchInfo);
             _value = value;
             IsSuccess = true;
         }
 
-        private Result(ExceptionDispatchInfo exceptionInfo)
+        private Result(ExceptionDispatchInfo error)
         {
-            Demand.NotNull(exceptionInfo);
+            Demand.NotNull(error);
 
-            _exceptionInfo = exceptionInfo;
+            _error = error;
             _value = default(T);
             IsSuccess = false;
         }
@@ -75,7 +75,7 @@ namespace Narvalo.Applicative
         /// </summary>
         /// <remarks>Any access to this method must be protected by checking before that
         /// <see cref="IsError"/> is true.</remarks>
-        internal ExceptionDispatchInfo ExceptionInfo { get { Demand.State(IsError); return _exceptionInfo; } }
+        internal ExceptionDispatchInfo Error { get { Demand.State(IsError); return _error; } }
 
         [ExcludeFromCodeCoverage]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
@@ -83,7 +83,7 @@ namespace Narvalo.Applicative
 
         public void ThrowIfError()
         {
-            if (IsError) { ExceptionInfo.Throw(); }
+            if (IsError) { Error.Throw(); }
         }
 
         /// <summary>
@@ -108,17 +108,17 @@ namespace Narvalo.Applicative
 
         public T ValueOrThrow()
         {
-            if (IsError) { ExceptionInfo.Throw(); }
+            if (IsError) { Error.Throw(); }
             return Value;
         }
 
         public override string ToString()
-            => IsSuccess ? Format.Current("Success({0})", Value) : Format.Current("Error({0})", ExceptionInfo);
+            => IsSuccess ? "Success(" + Value?.ToString() + ")" : "Error(" + Error.ToString() + ")";
 
         /// <summary>
         /// Represents a debugger type proxy for <see cref="Result{T}"/>.
         /// </summary>
-        /// <remarks>Ensure that <see cref="Result{T}.Value"/> and <see cref="Result{T}.ExceptionInfo"/>
+        /// <remarks>Ensure that <see cref="Result{T}.Value"/> and <see cref="Result{T}.Error"/>
         /// do not throw in the debugger for DEBUG builds.</remarks>
         [ExcludeFromCodeCoverage]
         private sealed class DebugView
@@ -134,7 +134,7 @@ namespace Narvalo.Applicative
 
             public T Value => _inner._value;
 
-            public ExceptionDispatchInfo ExceptionInfo => _inner._exceptionInfo;
+            public ExceptionDispatchInfo Error => _inner._error;
         }
     }
 
@@ -150,7 +150,7 @@ namespace Narvalo.Applicative
         public ExceptionDispatchInfo ToExceptionInfo()
         {
             if (IsSuccess) { throw new InvalidCastException(Strings.InvalidCast_ToError); }
-            return ExceptionInfo;
+            return Error;
         }
 
         public Maybe<T> ToMaybe() => ValueOrNone();
@@ -170,7 +170,7 @@ namespace Narvalo.Applicative
         {
             Require.NotNull(selector, nameof(selector));
 
-            if (IsError) { return Result<TResult>.FromError(ExceptionInfo); }
+            if (IsError) { return Result<TResult>.FromError(Error); }
 
             try
             {
@@ -189,18 +189,18 @@ namespace Narvalo.Applicative
 
         // NB: This method is normally internal, but Result<T>.Of() is more readable
         // than Result.Of<T>() - no type inference.
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification ="[Intentionally] A static method in a static class won't help.")]
-        public static Result<T> FromError(ExceptionDispatchInfo exceptionInfo)
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Intentionally] A static method in a static class won't help.")]
+        public static Result<T> FromError(ExceptionDispatchInfo error)
         {
-            Require.NotNull(exceptionInfo, nameof(exceptionInfo));
+            Require.NotNull(error, nameof(error));
 
-            return new Result<T>(exceptionInfo);
+            return new Result<T>(error);
         }
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Result<T> μ(Result<Result<T>> square)
-            => square.IsSuccess ? square.Value : FromError(square.ExceptionInfo);
+            => square.IsSuccess ? square.Value : FromError(square.Error);
     }
 
     // Implements the Internal.IEither<T, ExceptionDispatchInfo> interface.
@@ -229,7 +229,7 @@ namespace Narvalo.Applicative
             Require.NotNull(caseSuccess, nameof(caseSuccess));
             Require.NotNull(caseError, nameof(caseError));
 
-            return IsSuccess ? caseSuccess(Value) : caseError(ExceptionInfo);
+            return IsSuccess ? caseSuccess(Value) : caseError(Error);
         }
 
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
@@ -239,7 +239,7 @@ namespace Narvalo.Applicative
             Require.NotNull(onSuccess, nameof(onSuccess));
             Require.NotNull(onError, nameof(onError));
 
-            if (IsSuccess) { onSuccess(Value); } else { onError(ExceptionInfo); }
+            if (IsSuccess) { onSuccess(Value); } else { onError(Error); }
         }
 
         public void WhenSuccess(Func<T, bool> predicate, Action<T> action)
@@ -257,7 +257,7 @@ namespace Narvalo.Applicative
             Require.NotNull(predicate, nameof(predicate));
             Require.NotNull(action, nameof(action));
 
-            if (IsError && predicate(ExceptionInfo)) { action(ExceptionInfo); }
+            if (IsError && predicate(Error)) { action(Error); }
         }
 
         public void OnSuccess(Action<T> action)
@@ -271,7 +271,7 @@ namespace Narvalo.Applicative
         {
             Require.NotNull(action, nameof(action));
 
-            if (IsError) { action(ExceptionInfo); }
+            if (IsError) { action(Error); }
         }
 
         #region Publicly hidden methods.
@@ -326,7 +326,7 @@ namespace Narvalo.Applicative
         public bool Equals(Result<T> other)
         {
             if (IsSuccess) { return other.IsSuccess && EqualityComparer<T>.Default.Equals(Value, other.Value); }
-            return other.IsError && ReferenceEquals(ExceptionInfo, other.ExceptionInfo);
+            return other.IsError && ReferenceEquals(Error, other.Error);
         }
 
         public bool Equals(Result<T> other, IEqualityComparer<T> comparer)
@@ -334,7 +334,7 @@ namespace Narvalo.Applicative
             Require.NotNull(comparer, nameof(comparer));
 
             if (IsSuccess) { return other.IsSuccess && comparer.Equals(Value, other.Value); }
-            return other.IsError && ReferenceEquals(ExceptionInfo, other.ExceptionInfo);
+            return other.IsError && ReferenceEquals(Error, other.Error);
         }
 
         public override bool Equals(object obj)
@@ -344,13 +344,13 @@ namespace Narvalo.Applicative
             => (other is Result<T>) && Equals((Result<T>)other, comparer);
 
         public override int GetHashCode()
-            => HashHelpers.Combine(_value?.GetHashCode() ?? 0, _exceptionInfo?.GetHashCode() ?? 0);
+            => HashHelpers.Combine(_value?.GetHashCode() ?? 0, _error?.GetHashCode() ?? 0);
 
         public int GetHashCode(IEqualityComparer<T> comparer)
         {
             Require.NotNull(comparer, nameof(comparer));
 
-            return HashHelpers.Combine(comparer.GetHashCode(_value), _exceptionInfo?.GetHashCode() ?? 0);
+            return HashHelpers.Combine(comparer.GetHashCode(_value), _error?.GetHashCode() ?? 0);
         }
     }
 }

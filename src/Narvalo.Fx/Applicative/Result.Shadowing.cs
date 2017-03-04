@@ -40,7 +40,7 @@ namespace Narvalo.Applicative
         {
             Require.NotNull(selector, nameof(selector));
 
-            if (IsError) { Result<TResult>.FromError(ExceptionInfo); }
+            if (IsError) { Result<TResult>.FromError(Error); }
 
             try
             {
@@ -54,7 +54,7 @@ namespace Narvalo.Applicative
         }
 
         public Result<TResult> Then<TResult>(Result<TResult> other)
-            => IsSuccess ? other : Result<TResult>.FromError(ExceptionInfo);
+            => IsSuccess ? other : Result<TResult>.FromError(Error);
     }
 
     public static partial class ResultExtensions
