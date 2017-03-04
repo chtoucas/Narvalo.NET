@@ -5,8 +5,8 @@ namespace Edufun.Linq
     using System;
     using System.Collections.Generic;
 
-    using Narvalo.Fx;
-    using Narvalo.Fx.Linq;
+    using Narvalo.Applicative;
+    using Narvalo.Linq;
 
     // LINQ from scratch.
     public static class Qperators

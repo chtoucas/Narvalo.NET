@@ -4,7 +4,7 @@ namespace Edufun.Haskell
 {
     using System;
 
-    using Narvalo.Fx;
+    using Narvalo.Applicative;
 
     // [Haskell] Data.Functor
     // A functor is for types that can be mapped over.

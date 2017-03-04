@@ -5,7 +5,7 @@ namespace Edufun.Haskell.Templates
     using System;
     using System.Diagnostics.CodeAnalysis;
 
-    using Narvalo.Fx;
+    using Narvalo.Applicative;
 
     public partial class MonadPlus<T>
     {

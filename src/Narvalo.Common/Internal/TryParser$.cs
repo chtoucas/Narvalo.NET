@@ -2,7 +2,7 @@
 
 namespace Narvalo.Internal
 {
-    using Narvalo.Fx;
+    using Narvalo.Applicative;
 
     internal static class TryParserExtensions
     {

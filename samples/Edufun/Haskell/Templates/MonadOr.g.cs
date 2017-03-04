@@ -11,7 +11,7 @@
 //------------------------------------------------------------------------------
 
 using global::Narvalo;
-using global::Narvalo.Fx;
+using global::Narvalo.Applicative;
 
 namespace Edufun.Haskell.Templates
 {
@@ -29,17 +29,17 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// The unique object of type <c>MonadOr&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly MonadOr<global::Narvalo.Fx.Unit> s_Unit = Of(global::Narvalo.Fx.Unit.Default);
+        private static readonly MonadOr<global::Narvalo.Applicative.Unit> s_Unit = Of(global::Narvalo.Applicative.Unit.Default);
 
         /// <summary>
         /// Gets the unique object of type <c>MonadOr&lt;Unit&gt;</c>.
         /// </summary>
-        public static MonadOr<global::Narvalo.Fx.Unit> Unit => s_Unit;
+        public static MonadOr<global::Narvalo.Applicative.Unit> Unit => s_Unit;
 
         /// <summary>
         /// Gets the zero for <see cref="MonadOr{T}.Bind"/>.
         /// </summary>
-        public static MonadOr<global::Narvalo.Fx.Unit> None => MonadOr<global::Narvalo.Fx.Unit>.None;
+        public static MonadOr<global::Narvalo.Applicative.Unit> None => MonadOr<global::Narvalo.Applicative.Unit>.None;
 
         /// <summary>
         /// Obtains an instance of the <see cref="MonadOr{T}"/> class for the specified value.
@@ -179,7 +179,7 @@ namespace Edufun.Haskell.Templates
             return @this.Zip(other, ignore);
         }
 
-        public static MonadOr<global::Narvalo.Fx.Unit> Skip<TSource>(this MonadOr<TSource> @this)
+        public static MonadOr<global::Narvalo.Applicative.Unit> Skip<TSource>(this MonadOr<TSource> @this)
         {
             Require.NotNull(@this, nameof(@this));
             return @this.Then(MonadOr.Unit);
@@ -516,7 +516,8 @@ namespace Edufun.Haskell.Templates.Internal
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
-    using Narvalo.Fx.Linq;
+    using Edufun.Haskell.Templates;
+    using Narvalo.Linq;
 
     // Provides default implementations for the extension methods for IEnumerable<MonadOr<T>>.
     // You will certainly want to override them to improve performance.
@@ -634,6 +635,8 @@ namespace Edufun.Haskell.Templates.Internal
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+
+    using Edufun.Haskell.Templates;
 
     // Provides default implementations for the extension methods for IEnumerable<T>.
     // You will certainly want to override them to improve performance.

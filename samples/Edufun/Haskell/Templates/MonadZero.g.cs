@@ -11,7 +11,7 @@
 //------------------------------------------------------------------------------
 
 using global::Narvalo;
-using global::Narvalo.Fx;
+using global::Narvalo.Applicative;
 
 namespace Edufun.Haskell.Templates
 {
@@ -29,17 +29,17 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// The unique object of type <c>MonadZero&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly MonadZero<global::Narvalo.Fx.Unit> s_Unit = Of(global::Narvalo.Fx.Unit.Default);
+        private static readonly MonadZero<global::Narvalo.Applicative.Unit> s_Unit = Of(global::Narvalo.Applicative.Unit.Default);
 
         /// <summary>
         /// Gets the unique object of type <c>MonadZero&lt;Unit&gt;</c>.
         /// </summary>
-        public static MonadZero<global::Narvalo.Fx.Unit> Unit => s_Unit;
+        public static MonadZero<global::Narvalo.Applicative.Unit> Unit => s_Unit;
 
         /// <summary>
         /// Gets the zero for <see cref="MonadZero{T}.Bind"/>.
         /// </summary>
-        public static MonadZero<global::Narvalo.Fx.Unit> Zero => MonadZero<global::Narvalo.Fx.Unit>.Zero;
+        public static MonadZero<global::Narvalo.Applicative.Unit> Zero => MonadZero<global::Narvalo.Applicative.Unit>.Zero;
 
         /// <summary>
         /// Obtains an instance of the <see cref="MonadZero{T}"/> class for the specified value.
@@ -179,7 +179,7 @@ namespace Edufun.Haskell.Templates
             return @this.Zip(other, ignore);
         }
 
-        public static MonadZero<global::Narvalo.Fx.Unit> Skip<TSource>(this MonadZero<TSource> @this)
+        public static MonadZero<global::Narvalo.Applicative.Unit> Skip<TSource>(this MonadZero<TSource> @this)
         {
             Require.NotNull(@this, nameof(@this));
             return @this.Then(MonadZero.Unit);
@@ -513,7 +513,8 @@ namespace Edufun.Haskell.Templates.Internal
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
-    using Narvalo.Fx.Linq;
+    using Edufun.Haskell.Templates;
+    using Narvalo.Linq;
 
     // Provides default implementations for the extension methods for IEnumerable<MonadZero<T>>.
     // You will certainly want to override them to improve performance.
@@ -622,6 +623,8 @@ namespace Edufun.Haskell.Templates.Internal
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+
+    using Edufun.Haskell.Templates;
 
     // Provides default implementations for the extension methods for IEnumerable<T>.
     // You will certainly want to override them to improve performance.

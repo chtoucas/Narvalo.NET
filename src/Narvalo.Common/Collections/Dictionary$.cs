@@ -4,7 +4,7 @@ namespace Narvalo.Collections
 {
     using System.Collections.Generic;
 
-    using Narvalo.Fx;
+    using Narvalo.Applicative;
 
     /// <summary>
     /// Provides extension methods for <see cref="IDictionary{T,U}"/> that depend on the <see cref="Maybe{T}"/> class.

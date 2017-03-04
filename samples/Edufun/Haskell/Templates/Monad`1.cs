@@ -4,7 +4,7 @@ namespace Edufun.Haskell.Templates
 {
     using System;
 
-    using Narvalo.Fx;
+    using Narvalo.Applicative;
 
     public partial class Monad<T>
     {

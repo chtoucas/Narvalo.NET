@@ -8,8 +8,8 @@ namespace Edufun.Haskell
     using System.Collections.Generic;
     using System.Linq;
 
-    using Narvalo.Fx;
-    using Narvalo.Fx.Linq;
+    using Narvalo.Applicative;
+    using Narvalo.Linq;
 
     // Partial work on methods that end with a "_".
     public partial class ActionOperators

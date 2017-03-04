@@ -5,7 +5,7 @@ namespace Narvalo.Xml
     using System;
     using System.Xml.Linq;
 
-    using Narvalo.Fx;
+    using Narvalo.Applicative;
 
     /// <summary>
     /// Provides extension methods for <see cref="XAttribute"/>.

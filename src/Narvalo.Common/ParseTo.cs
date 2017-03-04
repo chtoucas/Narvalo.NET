@@ -5,7 +5,7 @@ namespace Narvalo
     using System;
     using System.Globalization;
 
-    using Narvalo.Fx;
+    using Narvalo.Applicative;
     using Narvalo.Internal;
 
     /// <summary>

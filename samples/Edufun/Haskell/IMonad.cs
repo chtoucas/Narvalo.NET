@@ -5,7 +5,7 @@ namespace Edufun.Haskell
     using System;
     using System.Collections.Generic;
 
-    using Narvalo.Fx;
+    using Narvalo.Applicative;
 
     // [Haskell] Control.Monad
     //

@@ -5,7 +5,7 @@ namespace Edufun.Sequences
     using System;
     using System.Collections.Generic;
 
-    using Narvalo.Fx;
+    using Narvalo.Applicative;
 
     public static class Fibonacci
     {

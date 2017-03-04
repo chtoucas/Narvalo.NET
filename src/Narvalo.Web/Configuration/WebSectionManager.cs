@@ -5,7 +5,7 @@ namespace Narvalo.Web.Configuration
     using System.Configuration;
     using System.Web.Configuration;
 
-    using Narvalo.Fx;
+    using Narvalo.Applicative;
     using Narvalo.Web.Properties;
 
     public static class WebSectionManager

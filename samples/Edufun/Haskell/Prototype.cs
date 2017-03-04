@@ -10,8 +10,8 @@ namespace Edufun.Haskell
     using System.Collections.Generic;
     using System.Linq;
 
-    using Narvalo.Fx;
-    using Narvalo.Fx.Linq;
+    using Narvalo.Applicative;
+    using Narvalo.Linq;
 
     public partial class Prototype<T>
         : IFunctor<T>, IApplicative<T>, IMonad<T>, IAlternative<T>, IMonadPlus<T>

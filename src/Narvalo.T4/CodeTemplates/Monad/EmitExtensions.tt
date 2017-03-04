@@ -65,12 +65,12 @@ public partial class MonadTemplate
             return @this.Zip(other, ignore);
         }
 
-        public static <#= Name #><global::Narvalo.Fx.Unit<#= RTDecl #>> Skip<TSource<#= RTDecl #>>(this <#= Name #><TSource<#= RTDecl #>> @this)
+        public static <#= Name #><global::Narvalo.Applicative.Unit<#= RTDecl #>> Skip<TSource<#= RTDecl #>>(this <#= Name #><TSource<#= RTDecl #>> @this)
         {
             <#+ WriteNotNull(); #>
 
 <#+ if (HasRightGenerics) { #>
-            return @this.ReplaceBy(global::Narvalo.Fx.Unit.Default);
+            return @this.ReplaceBy(global::Narvalo.Applicative.Unit.Default);
 <#+ } else { #>
             return @this.Then(<#= Name #>.Unit);
 <#+ } #>

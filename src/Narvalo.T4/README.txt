@@ -28,4 +28,4 @@ Methods specific to our .NET implementation:
 - Resources management: Using
 - Flow control: If, Coalesce
 - Query Expression Pattern: SelectMany, Join and GroupJoin
-- See also Narvalo.Fx.Internal for interfaces implemented by all monads
+- See also Narvalo.Internal for interfaces implemented by all monads

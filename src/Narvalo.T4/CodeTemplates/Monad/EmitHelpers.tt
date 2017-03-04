@@ -13,19 +13,19 @@ public partial class MonadTemplate
         /// <summary>
         /// The unique object of type <c><#= Name #>&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly <#= Name #><global::Narvalo.Fx.Unit> s_Unit = <#= ReturnName #>(global::Narvalo.Fx.Unit.Default);
+        private static readonly <#= Name #><global::Narvalo.Applicative.Unit> s_Unit = <#= ReturnName #>(global::Narvalo.Applicative.Unit.Default);
 
         /// <summary>
         /// Gets the unique object of type <c><#= Name #>&lt;Unit&gt;</c>.
         /// </summary>
-        public static <#= Name #><global::Narvalo.Fx.Unit> Unit => s_Unit;
+        public static <#= Name #><global::Narvalo.Applicative.Unit> Unit => s_Unit;
 
 <#+ } #>
 <#+ if (HasZero) { #>
         /// <summary>
         /// Gets the zero for <see cref="<#= Name #>{T}.Bind"/>.
         /// </summary>
-        public static <#= Name #><global::Narvalo.Fx.Unit> <#= ZeroName #> => <#= Name #><global::Narvalo.Fx.Unit>.<#= ZeroName #>;
+        public static <#= Name #><global::Narvalo.Applicative.Unit> <#= ZeroName #> => <#= Name #><global::Narvalo.Applicative.Unit>.<#= ZeroName #>;
 
 <#+ } // End of HasZero #>
         /// <summary>

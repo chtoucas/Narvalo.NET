@@ -5,7 +5,7 @@ namespace Narvalo.Web
     using System.Collections.Generic;
     using System.Web;
 
-    using Narvalo.Fx;
+    using Narvalo.Applicative;
 
     public partial interface IHttpQueryBinder<TQuery>
     {

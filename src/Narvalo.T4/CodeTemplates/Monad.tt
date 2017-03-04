@@ -34,7 +34,7 @@ public abstract partial class MonadTemplate : _MonadTemplate
 #>
 <#+ if (!Namespace.StartsWith("Narvalo.")) { #>
 using global::Narvalo;
-using global::Narvalo.Fx;
+using global::Narvalo.Applicative;
 
 <#+ } #>
 namespace <#= Namespace #>
@@ -43,11 +43,11 @@ namespace <#= Namespace #>
     using System.Collections.Generic;
     using System.Linq;
 
-    using <#= Namespace #>.Internal;
+    using <#= InternalNamespace #>;
 <#+ if (EmitLinq) { #>
-    using <#= Namespace #>.Linq;
+    using <#= LinqNamespace #>;
 <#+ } else { #>
-    using Narvalo.Fx.Linq;
+    using Narvalo.Linq;
 <#+ } #>
 
 <#+
@@ -65,13 +65,14 @@ namespace <#= Namespace #>
 #>
 }
 
-namespace <#= Namespace #>.Internal
+namespace <#= InternalNamespace #>
 {
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
-    using Narvalo.Fx.Linq;
+    using <#= Namespace #>;
+    using Narvalo.Linq;
 
 <#+ EmitEnumerableInternal(); #>
 }
@@ -92,7 +93,7 @@ namespace <#= Namespace #>.Internal
 
 <#+ if (!Namespace.StartsWith("Narvalo.")) { #>
 using global::Narvalo;
-using global::Narvalo.Fx;
+using global::Narvalo.Applicative;
 <#+ } #>
 
 namespace <#= Namespace #>
@@ -108,23 +109,25 @@ namespace <#= Namespace #>
     public void EmitLinqExtensions()
     {
 #>
-namespace <#= Namespace #>.Linq
+namespace <#= LinqNamespace #>
 {
     using System;
     using System.Collections.Generic;
 
     using <#= Namespace #>;
-    using <#= Namespace #>.Internal;
+    using <#= InternalNamespace #>;
 
 <#+ EmitLinqCore(); #>
 }
 
-namespace <#= Namespace #>.Internal
+namespace <#= InternalNamespace #>
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+
+    using <#= Namespace #>;
 
 <#+ EmitLinqInternal(); #>
 }

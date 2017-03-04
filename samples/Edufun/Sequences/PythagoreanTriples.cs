@@ -6,7 +6,7 @@ namespace Edufun.Sequences
     using System.Collections.Generic;
     using System.Linq;
 
-    using Narvalo.Fx;
+    using Narvalo.Applicative;
 
     // **WARNING** These sequences are infinite!
     public static class PythagoreanTriples

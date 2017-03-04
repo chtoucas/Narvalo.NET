@@ -8,8 +8,8 @@ namespace Narvalo.Collections
     using System.Linq;
 
     using Narvalo;
-    using Narvalo.Fx;
-    using Narvalo.Fx.Linq;
+    using Narvalo.Applicative;
+    using Narvalo.Linq;
 
     /// <summary>
     /// Provides extension methods for <see cref="NameValueCollection"/> that depend on the <see cref="Maybe{T}"/> class.

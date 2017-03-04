@@ -5,7 +5,7 @@ namespace Narvalo.Data
     using System;
     using System.Data.SqlTypes;
 
-    using Narvalo.Fx;
+    using Narvalo.Applicative;
 
     /// <summary>
     /// Provides extension methods to convert native SQL server data types to CLR types.

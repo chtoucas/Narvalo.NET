@@ -11,7 +11,7 @@
 //------------------------------------------------------------------------------
 
 using global::Narvalo;
-using global::Narvalo.Fx;
+using global::Narvalo.Applicative;
 
 namespace Edufun.Haskell.Templates
 {

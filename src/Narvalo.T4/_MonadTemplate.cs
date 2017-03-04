@@ -31,6 +31,9 @@ namespace Narvalo.T4
         /// </summary>
         private string _typeConstraints = String.Empty;
 
+        private string _internalNamespace;
+        private string _linqNamespace;
+
         /// <summary>
         /// The name of the Plus method.
         /// </summary>
@@ -60,6 +63,52 @@ namespace Narvalo.T4
         protected _MonadTemplate(TextTransformation parent) : base(parent) { }
 
         protected bool EmitLinq { get; set; } = true;
+
+        protected string InternalNamespace
+        {
+            get
+            {
+                if (_internalNamespace == null)
+                {
+                    _internalNamespace = Namespace + ".Internal";
+                }
+
+                return _internalNamespace;
+            }
+
+            set
+            {
+                if (String.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("The Internal namespace can not be null or blank.");
+                }
+
+                _internalNamespace = value;
+            }
+        }
+
+        protected string LinqNamespace
+        {
+            get
+            {
+                if (_linqNamespace == null)
+                {
+                    _linqNamespace = Namespace + ".Linq";
+                }
+
+                return _linqNamespace;
+            }
+
+            set
+            {
+                if (String.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("The LINQ namespace can not be null or blank.");
+                }
+
+                _linqNamespace = value;
+            }
+        }
 
         #region Monad characteristics
 
@@ -339,6 +388,13 @@ namespace Narvalo.T4
         }
 
         #region Initalizers
+
+        // Only for the Narvalo.Fx project.
+        protected void InitializeNamespaces()
+        {
+            InternalNamespace = "Narvalo.Internal";
+            LinqNamespace = "Narvalo.Linq";
+        }
 
         protected void InitializeHelpers(bool asStruct, string suffix = "Extensions")
         {

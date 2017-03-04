@@ -6,7 +6,7 @@ namespace Narvalo.Xml
     using System.Xml;
     using System.Xml.Linq;
 
-    using Narvalo.Fx;
+    using Narvalo.Applicative;
 
     /// <summary>
     /// Provides extension methods for <see cref="XElement"/>.

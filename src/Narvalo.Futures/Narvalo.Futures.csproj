@@ -51,10 +51,10 @@
       <DependentUpon>SnvCurrencyInfoProvider.tt</DependentUpon>
     </Compile>
     <Compile Include="Formattable.cs" />
-    <Compile Include="Fx\Recursion.cs" />
-    <Compile Include="Fx\Func.cs" />
-    <Compile Include="Fx\Extensions\Func%24.cs" />
-    <Compile Include="Fx\Extensions\Nullable%24.cs" />
+    <Compile Include="Applicative\Recursion.cs" />
+    <Compile Include="Applicative\Func.cs" />
+    <Compile Include="Applicative\Extensions\Func%24.cs" />
+    <Compile Include="Applicative\Extensions\Nullable%24.cs" />
     <Compile Include="Globalization\CountryISOCode.cs" />
     <Compile Include="Globalization\RegionInfo%24.cs" />
     <Compile Include="Cerbere\Guard.cs" />

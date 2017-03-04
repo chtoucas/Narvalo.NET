@@ -4,7 +4,7 @@ namespace Narvalo.Configuration
 {
     using System.Configuration;
 
-    using Narvalo.Fx;
+    using Narvalo.Applicative;
     using Narvalo.Properties;
 
     /// <summary>

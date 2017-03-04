@@ -6,7 +6,7 @@ namespace Narvalo.Data
     using System.Data.SqlClient;
     using System.Diagnostics.CodeAnalysis;
 
-    using Narvalo.Fx;
+    using Narvalo.Applicative;
 
     /*!
      * Méthodes d'extension pour `SqlDataReader`
