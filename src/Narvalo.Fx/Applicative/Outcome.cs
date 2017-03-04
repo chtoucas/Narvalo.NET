@@ -11,9 +11,6 @@ namespace Narvalo.Applicative
     [DebuggerTypeProxy(typeof(Outcome.DebugView))]
     public partial struct Outcome : IEquatable<Outcome>, Internal.IResult<string>
     {
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private static readonly Outcome s_Success = new Outcome();
-
         private readonly string _error;
 
         private Outcome(string error)
@@ -22,26 +19,25 @@ namespace Narvalo.Applicative
             IsError = true;
         }
 
-        public static Outcome Success => s_Success;
-
+        /// <summary>
+        /// Gets a value indicating whether the object is the result of an unsuccessful computation.
+        /// </summary>
+        /// <value>true if the outcome was unsuccessful; otherwise false.</value>
         public bool IsError { get; }
 
+        /// <summary>
+        /// Gets a value indicating whether the object is the result of a successful computation.
+        /// </summary>
+        /// <value>true if the outcome was successful; otherwise false.</value>
         public bool IsSuccess => !IsError;
 
-        private string Error_ { get { Demand.State(IsError); return _error; } }
+        internal string Error { get { Demand.State(IsError); return _error; } }
 
         [ExcludeFromCodeCoverage]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
         private string DebuggerDisplay => IsSuccess ? "Success" : "Error";
 
-        public static Outcome Error(string value)
-        {
-            Require.NotNullOrEmpty(value, nameof(value));
-
-            return new Outcome(value);
-        }
-
-        public override string ToString() => IsSuccess ? "Success" : Format.Current("Error({0})", Error_);
+        public override string ToString() => IsSuccess ? "Success" : Format.Current("Error({0})", Error);
 
         /// <summary>
         /// Represents a debugger type proxy for <see cref="Outcome{TError}"/>.
@@ -64,6 +60,25 @@ namespace Narvalo.Applicative
         }
     }
 
+    // Factory methods.
+    public partial struct Outcome
+    {
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private static readonly Outcome s_Success = new Outcome();
+
+        /// <summary>
+        /// Obtains an instance of <see cref="Outcome" /> that represents a successful computation.
+        /// </summary>
+        public static Outcome Success => s_Success;
+
+        public static Outcome FromError(string value)
+        {
+            Require.NotNullOrEmpty(value, nameof(value));
+
+            return new Outcome(value);
+        }
+    }
+
     // Implements the Internal.IResult<string> interface.
     public partial struct Outcome
     {
@@ -71,22 +86,22 @@ namespace Narvalo.Applicative
         {
             Require.NotNull(func, nameof(func));
 
-            return IsError ? Result<TResult, string>.FromError(Error_) : func();
+            return IsError ? Result<TResult, string>.FromError(Error) : func();
         }
 
         public Result<TResult, string> Then<TResult>(Func<TResult> func)
         {
             Require.NotNull(func, nameof(func));
 
-            return IsError ? Result<TResult, string>.FromError(Error_) : Result<TResult, string>.Of(func());
+            return IsError ? Result<TResult, string>.FromError(Error) : Result<TResult, string>.Of(func());
         }
 
         public Result<TResult, string> Then<TResult>(Result<TResult, string> other)
-            => IsError ? Result<TResult, string>.FromError(Error_) : other;
+            => IsError ? Result<TResult, string>.FromError(Error) : other;
 
         public Result<TResult, string> Then<TResult>(TResult result)
             => IsError
-            ? Result<TResult, string>.FromError(Error_)
+            ? Result<TResult, string>.FromError(Error)
             : Result<TResult, string>.Of(result);
 
         public TResult Match<TResult>(Func<TResult> caseSuccess, Func<string, TResult> caseError)
@@ -94,7 +109,7 @@ namespace Narvalo.Applicative
             Require.NotNull(caseSuccess, nameof(caseSuccess));
             Require.NotNull(caseError, nameof(caseError));
 
-            return IsSuccess ? caseSuccess() : caseError(Error_);
+            return IsSuccess ? caseSuccess() : caseError(Error);
         }
 
         public void Do(Action onSuccess, Action<string> onError)
@@ -102,7 +117,7 @@ namespace Narvalo.Applicative
             Require.NotNull(onSuccess, nameof(onSuccess));
             Require.NotNull(onError, nameof(onError));
 
-            if (IsSuccess) { onSuccess(); } else { onError(Error_); }
+            if (IsSuccess) { onSuccess(); } else { onError(Error); }
         }
 
         public void OnSuccess(Action action)
@@ -116,7 +131,7 @@ namespace Narvalo.Applicative
         {
             Require.NotNull(action, nameof(action));
 
-            if (IsError) { action(Error_); }
+            if (IsError) { action(Error); }
         }
     }
 
@@ -130,7 +145,7 @@ namespace Narvalo.Applicative
         public bool Equals(Outcome other)
         {
             if (IsSuccess) { return other.IsSuccess; }
-            return other.IsError && Error_ == other.Error_;
+            return other.IsError && Error == other.Error;
         }
 
         public override bool Equals(object obj)

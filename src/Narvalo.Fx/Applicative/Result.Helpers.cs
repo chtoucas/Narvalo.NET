@@ -3,24 +3,11 @@
 namespace Narvalo.Applicative
 {
     using System;
-    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.ExceptionServices;
 
     public partial struct Result
     {
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private static readonly Result s_Void = new Result();
-
-        public static Result Void => s_Void;
-
-        public static Result FromError(ExceptionDispatchInfo exceptionInfo)
-        {
-            Require.NotNull(exceptionInfo, nameof(exceptionInfo));
-
-            return new Result(exceptionInfo);
-        }
-
         public static Result<T, TError> FlattenError<T, TError>(Result<T, Result<T, TError>> square)
             => Result<T, TError>.FlattenError(square);
     }
@@ -35,7 +22,7 @@ namespace Narvalo.Applicative
             try
             {
                 action.Invoke();
-                return Void;
+                return Success;
             }
             catch (Exception ex)
             {
@@ -69,7 +56,7 @@ namespace Narvalo.Applicative
             try
             {
                 action.Invoke();
-                return Void;
+                return Success;
             }
             catch (Exception ex)
             {

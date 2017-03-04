@@ -13,13 +13,13 @@ namespace Narvalo.Applicative
     [DebuggerTypeProxy(typeof(Result.DebugView))]
     public partial struct Result : IEquatable<Result>, Internal.IResult<ExceptionDispatchInfo>
     {
-        private readonly ExceptionDispatchInfo _exceptionInfo;
+        private readonly ExceptionDispatchInfo _error;
 
         private Result(ExceptionDispatchInfo exceptionInfo)
         {
             Demand.NotNull(exceptionInfo);
 
-            _exceptionInfo = exceptionInfo;
+            _error = exceptionInfo;
             IsError = true;
         }
 
@@ -40,7 +40,7 @@ namespace Narvalo.Applicative
         /// </summary>
         /// <remarks>Any access to this method must be protected by checking before that
         /// <see cref="IsError"/> is true.</remarks>
-        internal ExceptionDispatchInfo ExceptionInfo { get { Demand.State(IsError); return _exceptionInfo; } }
+        internal ExceptionDispatchInfo Error { get { Demand.State(IsError); return _error; } }
 
         [ExcludeFromCodeCoverage]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
@@ -48,16 +48,16 @@ namespace Narvalo.Applicative
 
         public void ThrowIfError()
         {
-            if (IsError) { ExceptionInfo.Throw(); }
+            if (IsError) { Error.Throw(); }
         }
 
         public override string ToString()
-            => IsError ? Format.Current("Error({0})", ExceptionInfo.SourceException) : "Success";
+            => IsError ? Format.Current("Error({0})", Error.SourceException) : "Success";
 
         /// <summary>
         /// Represents a debugger type proxy for <see cref="Result"/>.
         /// </summary>
-        /// <remarks>Ensure that <see cref="Result.ExceptionInfo"/> does not throw in the debugger
+        /// <remarks>Ensure that <see cref="Result.Error"/> does not throw in the debugger
         /// for DEBUG builds.</remarks>
         [ExcludeFromCodeCoverage]
         private sealed class DebugView
@@ -71,7 +71,26 @@ namespace Narvalo.Applicative
 
             public bool IsSuccess => _inner.IsSuccess;
 
-            public ExceptionDispatchInfo ExceptionInfo => _inner._exceptionInfo;
+            public ExceptionDispatchInfo Error => _inner._error;
+        }
+    }
+
+    // Factory methods.
+    public partial struct Result
+    {
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private static readonly Result s_Success = new Result();
+
+        /// <summary>
+        /// Obtains an instance of <see cref="Result" /> that represents a successful computation.
+        /// </summary>
+        public static Result Success => s_Success;
+
+        public static Result FromError(ExceptionDispatchInfo exceptionInfo)
+        {
+            Require.NotNull(exceptionInfo, nameof(exceptionInfo));
+
+            return new Result(exceptionInfo);
         }
     }
 
@@ -81,7 +100,7 @@ namespace Narvalo.Applicative
         public ExceptionDispatchInfo ToExceptionInfo()
         {
             if (IsSuccess) { throw new InvalidCastException(Strings.InvalidCast_ToError); }
-            return ExceptionInfo;
+            return Error;
         }
 
         public static explicit operator ExceptionDispatchInfo(Result value) => value.ToExceptionInfo();
@@ -95,7 +114,7 @@ namespace Narvalo.Applicative
         {
             Require.NotNull(func, nameof(func));
 
-            return IsError ? Result<TResult, ExceptionDispatchInfo>.FromError(ExceptionInfo) : func();
+            return IsError ? Result<TResult, ExceptionDispatchInfo>.FromError(Error) : func();
         }
 
         public Result<TResult, ExceptionDispatchInfo> Then<TResult>(Func<TResult> func)
@@ -103,17 +122,17 @@ namespace Narvalo.Applicative
             Require.NotNull(func, nameof(func));
 
             return IsError
-                ? Result<TResult, ExceptionDispatchInfo>.FromError(ExceptionInfo)
+                ? Result<TResult, ExceptionDispatchInfo>.FromError(Error)
                 : Result<TResult, ExceptionDispatchInfo>.Of(func());
         }
 
         public Result<TResult, ExceptionDispatchInfo> Then<TResult>(
             Result<TResult, ExceptionDispatchInfo> other)
-            => IsError ? Result<TResult, ExceptionDispatchInfo>.FromError(ExceptionInfo) : other;
+            => IsError ? Result<TResult, ExceptionDispatchInfo>.FromError(Error) : other;
 
         public Result<TResult, ExceptionDispatchInfo> Then<TResult>(TResult result)
             => IsError
-            ? Result<TResult, ExceptionDispatchInfo>.FromError(ExceptionInfo)
+            ? Result<TResult, ExceptionDispatchInfo>.FromError(Error)
             : Result<TResult, ExceptionDispatchInfo>.Of(result);
 
         public TResult Match<TResult>(
@@ -123,7 +142,7 @@ namespace Narvalo.Applicative
             Require.NotNull(caseSuccess, nameof(caseSuccess));
             Require.NotNull(caseError, nameof(caseError));
 
-            return IsSuccess ? caseSuccess() : caseError(ExceptionInfo);
+            return IsSuccess ? caseSuccess() : caseError(Error);
         }
 
         public void Do(Action onSuccess, Action<ExceptionDispatchInfo> onError)
@@ -131,7 +150,7 @@ namespace Narvalo.Applicative
             Require.NotNull(onSuccess, nameof(onSuccess));
             Require.NotNull(onError, nameof(onError));
 
-            if (IsSuccess) { onSuccess(); } else { onError(ExceptionInfo); }
+            if (IsSuccess) { onSuccess(); } else { onError(Error); }
         }
 
         public void OnSuccess(Action action)
@@ -145,7 +164,7 @@ namespace Narvalo.Applicative
         {
             Require.NotNull(action, nameof(action));
 
-            if (IsError) { action(ExceptionInfo); }
+            if (IsError) { action(Error); }
         }
     }
 
@@ -158,12 +177,12 @@ namespace Narvalo.Applicative
 
         public bool Equals(Result other)
         {
-            if (IsError) { return other.IsError && ReferenceEquals(ExceptionInfo, other.ExceptionInfo); }
+            if (IsError) { return other.IsError && ReferenceEquals(Error, other.Error); }
             return other.IsSuccess;
         }
 
         public override bool Equals(object obj) => (obj is Result) && Equals((Result)obj);
 
-        public override int GetHashCode() => _exceptionInfo?.GetHashCode() ?? 0;
+        public override int GetHashCode() => _error?.GetHashCode() ?? 0;
     }
 }

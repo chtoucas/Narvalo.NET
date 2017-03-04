@@ -36,15 +36,15 @@ namespace Narvalo.Finance
         {
             if (_verifyIntegrity && !VerifyIntegrity(parts))
             {
-                return Outcome.Error(Strings.IbanValidator_IntegrityCheckFailure);
+                return Outcome.FromError(Strings.IbanValidator_IntegrityCheckFailure);
             }
             if (_verifyISOCountryCode && !VerifyISOCountryCode(parts))
             {
-                return Outcome.Error(Strings.IbanValidator_UnknownISOCountryCode);
+                return Outcome.FromError(Strings.IbanValidator_UnknownISOCountryCode);
             }
             if (_verifyBban && !VerifyBban(parts))
             {
-                return Outcome.Error(Strings.IbanValidator_BbanVerificationFailure);
+                return Outcome.FromError(Strings.IbanValidator_BbanVerificationFailure);
             }
 
             return Outcome.Success;
