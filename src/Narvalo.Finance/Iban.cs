@@ -113,7 +113,7 @@ namespace Narvalo.Finance
             var val = PreprocessInput(value, styles);
 
             return IbanParts.TryParse(val)
-                .Bind(_ => IbanValidator.TryValidateIntern(_, levels))
+                .Bind(_ => IbanValidator.TryValidate(_, levels).Then(_))
                 .Select(_ => new Iban(_, levels));
         }
 

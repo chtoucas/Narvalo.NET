@@ -55,36 +55,6 @@ namespace Narvalo.Finance
         #endregion
     }
 
-#if !NO_INTERNALS_VISIBLE_TO
-
-    public static partial class IbanValidatorFacts
-    {
-        #region TryValidateIntern()
-
-        [Theory]
-        [MemberData(nameof(IbanFacts.SampleValues), MemberType = typeof(IbanFacts), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void TryValidateIntern_Succeeds_ForValidInput_Integrity(string value)
-            => Assert.True(IbanValidator.TryValidateIntern(ParseFast(value), IbanValidationLevels.Integrity).IsSuccess);
-
-        [Theory]
-        [MemberData(nameof(IbanFacts.SampleValues), MemberType = typeof(IbanFacts), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void TryValidateIntern_Succeeds_ForValidInput_ISOCountryCode(string value)
-            => Assert.True(IbanValidator.TryValidateIntern(ParseFast(value), IbanValidationLevels.ISOCountryCode).IsSuccess);
-
-        [Theory]
-        [MemberData(nameof(IbanFacts.SampleValues), MemberType = typeof(IbanFacts), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void TryValidateIntern_ThrowsNotImplementedException_ForValidInput_Bban(string value)
-            => Assert.Throws<NotImplementedException>(
-                () => IbanValidator.TryValidateIntern(ParseFast(value), IbanValidationLevels.Bban));
-
-        #endregion
-    }
-
-#endif
-
     public static partial class IbanValidatorFacts
     {
         private static IbanParts ParseFast(string value) => IbanParts.Parse(value).Value;
