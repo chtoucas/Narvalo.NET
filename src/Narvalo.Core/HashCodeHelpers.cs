@@ -9,6 +9,10 @@ namespace Narvalo
         // for detailed explanations, see "Effective Java" by Joshua Bloch.
         // In https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Tuple.cs, we have:
         // > (((h1 << 5) + h1) ^ h2)
+        // REVIEW: It seems that in the near future .NET will have a built-in utility for that.
+        // There is already
+        // https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Numerics/Hashing/HashHelpers.cs
+        // which is used to compute a randomized hash code for ValueTuple's.
         private const int INIT = 17;
         private const int MULT = 31;
 
