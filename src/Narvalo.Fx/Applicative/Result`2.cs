@@ -20,7 +20,11 @@ namespace Narvalo.Applicative
     // - Result<T, string> for lightweight error reporting to the caller;
     //   think of it as a verbose Maybe<T>.
     // Few recommendations:
-    // - For methods with a void return type, prefer Result, Outcome or Maybe<TError>.
+    // - For methods with a void return type, prefer
+    //   * Outcome (w/o exception handling)
+    //   * Result (w/ exception handling)
+    //   * Maybe<TError> (w/o exception handling, w/ custom error type); since there is a risk
+    //     of confusion with Maybe<T>, this should be your last resort.
     // - Result<T, Exception> should be used only in very rare situations; this is **not** a
     //   replacement for the standard exception mechanism in .NET. See Result and Result<T>
     //   for better alternatives.

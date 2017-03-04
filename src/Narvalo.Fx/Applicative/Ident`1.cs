@@ -10,6 +10,7 @@ namespace Narvalo.Applicative
     /// <summary>
     /// Represents the trivial monad.
     /// </summary>
+    /// <remarks>Pretty useless, only added for completeness.</remarks>
     /// <typeparam name="T">The underlying type of the value.</typeparam>
     public partial struct Ident<T>
         : IEquatable<Ident<T>>, IEquatable<T>, Internal.IContainer<T>, Internal.Iterable<T>
