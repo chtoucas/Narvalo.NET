@@ -9,5 +9,5 @@ using System.Runtime.InteropServices;
 [assembly: Guid("e394c38b-f999-4322-b821-7630368da16f")]
 
 #if !NO_INTERNALS_VISIBLE_TO
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Narvalo.Futures.Facts" + Narvalo.Properties.AssemblyInfo.PublicKeySuffix)]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Narvalo.Futures.Facts" + Narvalo.AssemblyInfo.PublicKeySuffix)]
 #endif

@@ -17,5 +17,5 @@ using System.Runtime.InteropServices;
     Justification = "[GeneratedCode] Default visibility for resources is internal.")]
 
 #if !NO_INTERNALS_VISIBLE_TO
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Narvalo.Mvp.Facts" + Narvalo.Properties.AssemblyInfo.PublicKeySuffix)]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Narvalo.Mvp.Facts" + Narvalo.AssemblyInfo.PublicKeySuffix)]
 #endif

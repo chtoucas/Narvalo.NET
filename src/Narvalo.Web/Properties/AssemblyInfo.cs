@@ -13,5 +13,5 @@ using System.Runtime.InteropServices;
 [assembly: SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "Narvalo.Web.Properties.Strings.#Culture", Justification = "[GeneratedCode] Default visibility for resources is internal.")]
 
 #if !NO_INTERNALS_VISIBLE_TO
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Narvalo.Web.Facts" + Narvalo.Properties.AssemblyInfo.PublicKeySuffix)]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Narvalo.Web.Facts" + Narvalo.AssemblyInfo.PublicKeySuffix)]
 #endif

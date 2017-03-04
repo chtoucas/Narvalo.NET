@@ -6,8 +6,7 @@ using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
 
-[module: SuppressMessage("Microsoft.Usage", "CA2243:AttributeStringLiteralsShouldParseCorrectly",
-    Justification = "Informational version uses semantic versioning.")]
+[module: SuppressMessage("Microsoft.Usage", "CA2243:AttributeStringLiteralsShouldParseCorrectly", Justification = "Informational version uses semantic versioning.")]
 
 [assembly: AssemblyProduct("Narvalo.Org Libraries & Tools.")]
 [assembly: AssemblyCompany("Narvalo.Org - http://narvalo.org")]
@@ -39,7 +38,7 @@ using System.Runtime.InteropServices;
 #endif
 
 #if !NO_INTERNALS_VISIBLE_TO
-namespace Narvalo.Properties
+namespace Narvalo
 {
     /// <summary>
     /// Provides constants used in Assembly's attributes.

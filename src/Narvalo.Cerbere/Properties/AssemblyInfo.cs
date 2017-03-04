@@ -18,5 +18,5 @@ using System.Reflection;
     Justification = "[GeneratedCode] Default visibility for resources is internal.")]
 
 #if !NO_INTERNALS_VISIBLE_TO
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Narvalo.Cerbere.Facts" + Narvalo.Properties.AssemblyInfo.PublicKeySuffix)]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Narvalo.Cerbere.Facts" + Narvalo.AssemblyInfo.PublicKeySuffix)]
 #endif
