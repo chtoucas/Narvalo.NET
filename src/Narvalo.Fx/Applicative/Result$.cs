@@ -4,7 +4,6 @@ namespace Narvalo.Applicative
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.ExceptionServices;
 
     /// <summary>
     /// Provides a set of static and extension methods for <see cref="Result{T, TError}"/>
@@ -22,34 +21,6 @@ namespace Narvalo.Applicative
             // NB: The Error property is never null.
             if (@this.IsError) { throw @this.Error; }
         }
-    }
-
-    public static partial class ResultExtensions
-    {
-        public static Result<T, string> Where<T>(this Result<T, string> @this, Func<T, Outcome> filter)
-        {
-            Require.NotNull(filter, nameof(filter));
-
-            return @this.Bind(val => filter(val).ReplaceBy(val));
-        }
-
-        // REVIEW: Move this to Result<T>?
-        public static Result<T> Where<T>(this Result<T> @this, Func<T, Result> filter)
-        {
-            Require.NotNull(filter, nameof(filter));
-
-            return @this.Bind(val => filter(val).ReplaceBy(val));
-        }
-    }
-
-    // Provides extension methods for Result<bool, TError>.
-    public static partial class ResultExtensions
-    {
-        public static bool IsTrue<TError>(this Result<bool, TError> @this)
-            => !@this.IsError && @this.Value;
-
-        public static bool IsFalse<TError>(this Result<bool, TError> @this)
-            => @this.IsError || !@this.Value;
     }
 
     // Provides extension methods for IEnumerable<Result<T, TError>>.

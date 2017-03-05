@@ -208,6 +208,19 @@ namespace Narvalo.Applicative
             => square.IsSuccess ? square.Value : FromError(square.Error);
     }
 
+    // Query Expression Pattern.
+    public partial struct Result<T>
+    {
+        // Result<T> is not a MonadOr but we can still construct a Where() operator.
+        // It is weird that it works (filter is not a predicate) but it does.
+        public Result<T> Where(Func<T, Result> filter)
+        {
+            Require.NotNull(filter, nameof(filter));
+
+            return Bind(val => filter(val).ReplaceBy(val));
+        }
+    }
+
     // Implements the Internal.IEither<T, ExceptionDispatchInfo> interface.
     public partial struct Result<T>
     {

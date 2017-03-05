@@ -139,26 +139,26 @@ namespace Narvalo.Finance
             return new Bic(institutionCode, countryCode, locationCode, branchCode, value);
         }
 
-        public static Result<Bic, string> TryParse(string value)
+        public static Outcome<Bic> TryParse(string value)
             => TryParse(value, BicVersion.Default);
 
-        public static Result<Bic, string> TryParse(string value, BicVersion version)
+        public static Outcome<Bic> TryParse(string value, BicVersion version)
         {
-            if (!CheckLength(value)) { return Result<Bic, string>.FromError(Strings.Parse_InvalidBicValue); }
+            if (!CheckLength(value)) { return Outcome<Bic>.FromError(Strings.Parse_InvalidBicValue); }
 
             string institutionCode = InstitutionPart.FromBic(value, version);
-            if (institutionCode == null) { return Result<Bic, string>.FromError(Strings.Parse_InvalidInstitutionCode); }
+            if (institutionCode == null) { return Outcome<Bic>.FromError(Strings.Parse_InvalidInstitutionCode); }
 
             string countryCode = CountryPart.FromBic(value);
-            if (countryCode == null) { return Result<Bic, string>.FromError(Strings.Parse_InvalidCountryCode); }
+            if (countryCode == null) { return Outcome<Bic>.FromError(Strings.Parse_InvalidCountryCode); }
 
             string locationCode = LocationPart.FromBic(value);
-            if (locationCode == null) { return Result<Bic, string>.FromError(Strings.Parse_InvalidLocationCode); }
+            if (locationCode == null) { return Outcome<Bic>.FromError(Strings.Parse_InvalidLocationCode); }
 
             string branchCode = BranchPart.FromBic(value);
-            if (branchCode == null) { return Result<Bic, string>.FromError(Strings.Parse_InvalidBranchCode); }
+            if (branchCode == null) { return Outcome<Bic>.FromError(Strings.Parse_InvalidBranchCode); }
 
-            return Result<Bic, string>.Of(new Bic(institutionCode, countryCode, locationCode, branchCode, value));
+            return Outcome.Of(new Bic(institutionCode, countryCode, locationCode, branchCode, value));
         }
 
         public override string ToString() => _value;

@@ -9,7 +9,7 @@ namespace Narvalo.Applicative
     // Friendly version of Result<Unit, string>.
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     [DebuggerTypeProxy(typeof(Outcome.DebugView))]
-    public partial struct Outcome : IEquatable<Outcome>, Internal.IResult<string>
+    public partial struct Outcome : IEquatable<Outcome>
     {
         private readonly string _error;
 
@@ -79,20 +79,28 @@ namespace Narvalo.Applicative
         }
     }
 
-    // Implements the Internal.IResult<string> interface.
+    // Core methods.
     public partial struct Outcome
     {
-        public Result<TResult, string> Select<TResult>(Func<TResult> func)
+        public Outcome<TResult> Bind<TResult>(Func<Outcome<TResult>> func)
         {
             Require.NotNull(func, nameof(func));
 
-            return IsError ? Result<TResult, string>.FromError(Error) : Result<TResult, string>.Of(func());
+            return IsError ? Outcome<TResult>.FromError(Error) : func();
         }
 
-        public Result<TResult, string> ReplaceBy<TResult>(TResult result)
-            => IsError
-            ? Result<TResult, string>.FromError(Error)
-            : Result<TResult, string>.Of(result);
+        public Outcome<TResult> Select<TResult>(Func<TResult> func)
+        {
+            Require.NotNull(func, nameof(func));
+
+            return IsError ? Outcome<TResult>.FromError(Error) : Of(func());
+        }
+
+        public Outcome<TResult> ReplaceBy<TResult>(TResult result)
+            => IsError ? Outcome<TResult>.FromError(Error) : Of(result);
+
+        public Outcome<TResult> ContinueWith<TResult>(Outcome<TResult> result)
+            => IsError ? Outcome<TResult>.FromError(Error) : result;
 
         public TResult Match<TResult>(Func<TResult> caseSuccess, Func<string, TResult> caseError)
         {

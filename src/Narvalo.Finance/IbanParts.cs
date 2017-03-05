@@ -86,20 +86,20 @@ namespace Narvalo.Finance
             return new IbanParts(countryCode, checkDigits, bban, value);
         }
 
-        public static Result<IbanParts, string> TryParse(string value)
+        public static Outcome<IbanParts> TryParse(string value)
         {
-            if (!CheckLength(value)) { return Result<IbanParts, string>.FromError(Strings.Parse_InvalidIbanValue); }
+            if (!CheckLength(value)) { return Outcome<IbanParts>.FromError(Strings.Parse_InvalidIbanValue); }
 
             string countryCode = CountryPart.FromIban(value);
-            if (countryCode == null) { return Result<IbanParts, string>.FromError(Strings.Parse_InvalidCountryCode); }
+            if (countryCode == null) { return Outcome<IbanParts>.FromError(Strings.Parse_InvalidCountryCode); }
 
             string checkDigits = CheckDigitsPart.FromIban(value);
-            if (checkDigits == null) { return Result<IbanParts, string>.FromError(Strings.Parse_InvalidCheckDigits); }
+            if (checkDigits == null) { return Outcome<IbanParts>.FromError(Strings.Parse_InvalidCheckDigits); }
 
             string bban = BbanPart.FromIban(value);
-            if (bban == null) { return Result<IbanParts, string>.FromError(Strings.Parse_InvalidBban); }
+            if (bban == null) { return Outcome<IbanParts>.FromError(Strings.Parse_InvalidBban); }
 
-            return Result<IbanParts, string>.Of(new IbanParts(countryCode, checkDigits, bban, value));
+            return Outcome.Of(new IbanParts(countryCode, checkDigits, bban, value));
         }
 
         internal static bool CheckLength(string value)
