@@ -151,7 +151,7 @@ namespace Narvalo.Applicative
             return @this.Select(_ => value);
         }
 
-        public static Result<TResult> Then<TSource, TResult>(
+        public static Result<TResult> ContinueWith<TSource, TResult>(
             this Result<TSource> @this,
             Result<TResult> other)
         {
@@ -172,7 +172,7 @@ namespace Narvalo.Applicative
         public static Result<global::Narvalo.Applicative.Unit> Skip<TSource>(this Result<TSource> @this)
         {
             /* T4: NotNull(@this) */
-            return @this.Then(Result.Unit);
+            return @this.ContinueWith(Result.Unit);
         }
 
         public static Result<TResult> Coalesce<TSource, TResult>(
@@ -292,7 +292,7 @@ namespace Narvalo.Applicative
 
         #endregion
 
-        #region LINQ dialect
+        #region Query Expression Pattern.
 
         public static Result<TResult> Select<TSource, TResult>(
             this Result<TSource> @this,

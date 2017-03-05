@@ -15,8 +15,8 @@ namespace Narvalo.Internal
         // Result<Unit, TError>.Select().
         Result<TResult, TError> Select<TResult>(Func<TResult> func);
 
-        //// Result<Unit, TError>.Then().
-        //Result<TResult, TError> Then<TResult>(Result<TResult, TError> other);
+        //// Result<Unit, TError>.ContinueWith().
+        //Result<TResult, TError> ContinueWith<TResult>(Result<TResult, TError> other);
 
         // Result<Unit, TError>.ReplaceBy().
         Result<TResult, TError> ReplaceBy<TResult>(TResult result);

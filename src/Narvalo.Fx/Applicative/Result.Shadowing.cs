@@ -23,7 +23,7 @@ namespace Narvalo.Applicative
         public Result<TResult, TError> ReplaceBy<TResult>(TResult value)
             => IsSuccess ? Result<TResult, TError>.Of(value) : Result<TResult, TError>.FromError(Error);
 
-        public Result<TResult, TError> Then<TResult>(Result<TResult, TError> other)
+        public Result<TResult, TError> ContinueWith<TResult>(Result<TResult, TError> other)
             => IsSuccess ? other : Result<TResult, TError>.FromError(Error);
 
         public Result<IEnumerable<T>, TError> Repeat(int count)
@@ -53,7 +53,7 @@ namespace Narvalo.Applicative
             }
         }
 
-        public Result<TResult> Then<TResult>(Result<TResult> other)
+        public Result<TResult> ContinueWith<TResult>(Result<TResult> other)
             => IsSuccess ? other : Result<TResult>.FromError(Error);
     }
 

@@ -51,7 +51,7 @@ namespace Edufun.Haskell
             Func<TSource, Prototype<TResult>> selector)
         {
             Func<Prototype<Unit>, TSource, Prototype<Unit>> func
-                = (arg1, arg2) => selector(arg2).Then(arg1);
+                = (arg1, arg2) => selector(arg2).ContinueWith(arg1);
 
             return source.Aggregate(Prototype.Of(Unit.Default), func);
         }

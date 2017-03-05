@@ -158,7 +158,7 @@ namespace Narvalo.Applicative
             return @this.Select(_ => value);
         }
 
-        public static Maybe<TResult> Then<TSource, TResult>(
+        public static Maybe<TResult> ContinueWith<TSource, TResult>(
             this Maybe<TSource> @this,
             Maybe<TResult> other)
         {
@@ -179,7 +179,7 @@ namespace Narvalo.Applicative
         public static Maybe<global::Narvalo.Applicative.Unit> Skip<TSource>(this Maybe<TSource> @this)
         {
             /* T4: NotNull(@this) */
-            return @this.Then(Maybe.Unit);
+            return @this.ContinueWith(Maybe.Unit);
         }
 
         public static Maybe<TResult> If<TSource, TResult>(
@@ -309,7 +309,7 @@ namespace Narvalo.Applicative
 
         #endregion
 
-        #region LINQ dialect
+        #region Query Expression Pattern.
 
         public static Maybe<TResult> Select<TSource, TResult>(
             this Maybe<TSource> @this,
@@ -419,7 +419,7 @@ namespace Narvalo.Applicative
 
             var keyLookup = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
-            return outer.SelectMany(val => keyLookup(val).Then(inner), resultSelector);
+            return outer.SelectMany(val => keyLookup(val).ContinueWith(inner), resultSelector);
         }
 
         private static Maybe<TResult> GroupJoinImpl<TSource, TInner, TKey, TResult>(
@@ -439,7 +439,7 @@ namespace Narvalo.Applicative
 
             var keyLookup = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
-            return outer.Select(val => resultSelector(val, keyLookup(val).Then(inner)));
+            return outer.Select(val => resultSelector(val, keyLookup(val).ContinueWith(inner)));
         }
 
         private static Func<TSource, Maybe<TKey>> GetKeyLookup<TSource, TInner, TKey>(

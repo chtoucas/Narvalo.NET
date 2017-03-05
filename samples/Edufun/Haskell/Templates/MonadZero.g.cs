@@ -161,7 +161,7 @@ namespace Edufun.Haskell.Templates
             return @this.Select(_ => value);
         }
 
-        public static MonadZero<TResult> Then<TSource, TResult>(
+        public static MonadZero<TResult> ContinueWith<TSource, TResult>(
             this MonadZero<TSource> @this,
             MonadZero<TResult> other)
         {
@@ -182,7 +182,7 @@ namespace Edufun.Haskell.Templates
         public static MonadZero<global::Narvalo.Applicative.Unit> Skip<TSource>(this MonadZero<TSource> @this)
         {
             Require.NotNull(@this, nameof(@this));
-            return @this.Then(MonadZero.Unit);
+            return @this.ContinueWith(MonadZero.Unit);
         }
 
         public static MonadZero<TResult> If<TSource, TResult>(
@@ -312,7 +312,7 @@ namespace Edufun.Haskell.Templates
 
         #endregion
 
-        #region LINQ dialect
+        #region Query Expression Pattern.
 
         public static MonadZero<TResult> Select<TSource, TResult>(
             this MonadZero<TSource> @this,
@@ -422,7 +422,7 @@ namespace Edufun.Haskell.Templates
 
             var keyLookup = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
-            return outer.SelectMany(val => keyLookup(val).Then(inner), resultSelector);
+            return outer.SelectMany(val => keyLookup(val).ContinueWith(inner), resultSelector);
         }
 
         private static MonadZero<TResult> GroupJoinImpl<TSource, TInner, TKey, TResult>(
@@ -442,7 +442,7 @@ namespace Edufun.Haskell.Templates
 
             var keyLookup = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
-            return outer.Select(val => resultSelector(val, keyLookup(val).Then(inner)));
+            return outer.Select(val => resultSelector(val, keyLookup(val).ContinueWith(inner)));
         }
 
         private static Func<TSource, MonadZero<TKey>> GetKeyLookup<TSource, TInner, TKey>(

@@ -17,7 +17,7 @@ namespace Narvalo.Applicative
         public Maybe<TResult> ReplaceBy<TResult>(TResult value)
             => IsSome ? Maybe.Of(value) : Maybe<TResult>.None;
 
-        public Maybe<TResult> Then<TResult>(Maybe<TResult> other)
+        public Maybe<TResult> ContinueWith<TResult>(Maybe<TResult> other)
             => IsSome ? other : Maybe<TResult>.None;
 
         public Maybe<TResult> Zip<TSecond, TResult>(

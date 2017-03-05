@@ -22,7 +22,7 @@ namespace Edufun.Haskell
     // API
     // ---
     // - >>=            obj.Bind            (required)
-    // - >>             obj.Then                <- Applicative::*>
+    // - >>             obj.ContinueWith        <- Applicative::*>
     // - return         Monad.Of            (required) <- Applicative::pure
     // - fail
     // - fmap           obj.Select          (alt-required) <- Functor::fmap (required), Applicative::liftA
@@ -67,7 +67,7 @@ namespace Edufun.Haskell
     // - (<$!>)         Operators.InvokeWith    <- Applicative::<$>
     //
     // Inherited:
-    // - <$             obj.Replace             <- Functor::<$
+    // - <$             obj.ReplaceBy           <- Functor::<$
     // - <*             obj.Ignore              <- Applicative::<*
     // - <**>           Operators.Apply         <- Applicative::<**>
     // - liftA2         obj.Zip                 <- Applicative::liftA2
@@ -111,7 +111,7 @@ namespace Edufun.Haskell
         // [Haskell] (>>) :: forall a b. m a -> m b -> m b
         // Sequentially compose two actions, discarding any value produced by the first,
         // like sequencing operators (such as the semicolon) in imperative languages.
-        Prototype<TResult> Then<TResult>(Prototype<TResult> other);
+        Prototype<TResult> ContinueWith<TResult>(Prototype<TResult> other);
     }
 
     public interface IKleisliOperators

@@ -130,7 +130,7 @@ namespace Edufun.Haskell
 
         // [GHC.Base] a1 *> a2 = (id <$ a1) <*> a2
         // Control.Applicative: u *> v = pure (const id) <*> u <*> v
-        Prototype<TResult> IApplicativeSyntax<T>.ReplaceBy<TResult>(Prototype<TResult> other)
+        Prototype<TResult> IApplicativeSyntax<T>.ContinueWith<TResult>(Prototype<TResult> other)
         {
 #if APPLICATIVE_USE_GHC_BASE
             Func<TResult, TResult> id = _ => _;
@@ -221,7 +221,7 @@ namespace Edufun.Haskell
         public Prototype<Unit> Skip() => ReplaceBy(Unit.Default);
 
         // [GHC.Base] m >> k = m >>= \_ -> k
-        public Prototype<TResult> Then<TResult>(Prototype<TResult> other) => Bind(_ => other);
+        public Prototype<TResult> ContinueWith<TResult>(Prototype<TResult> other) => Bind(_ => other);
 
         #endregion
 
@@ -362,7 +362,7 @@ namespace Edufun.Haskell
             // Remember that ReplaceBy(next) is just Bind(_ => next). If Bind is doing nothing,
             // Forever() is useless, it just loops forever.
             Prototype<TResult> next = null;
-            next = source.Then(next);
+            next = source.ContinueWith(next);
             return next;
         }
 
@@ -377,7 +377,7 @@ namespace Edufun.Haskell
         private static Func<Prototype<TSource>, Prototype<TResult>> __ReplaceBy<TSource, TResult>(Prototype<TSource> value)
         {
             Func<Func<Prototype<TSource>, Prototype<TResult>>, Func<Prototype<TSource>, Prototype<TResult>>> g
-                = f => next => f(value.Then(next));
+                = f => next => f(value.ContinueWith(next));
 
             return YCombinator.Fix(g);
         }

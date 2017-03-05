@@ -154,7 +154,7 @@ namespace Edufun.Haskell.Templates
             return @this.Select(_ => value);
         }
 
-        public static Monad<TResult> Then<TSource, TResult>(
+        public static Monad<TResult> ContinueWith<TSource, TResult>(
             this Monad<TSource> @this,
             Monad<TResult> other)
         {
@@ -175,7 +175,7 @@ namespace Edufun.Haskell.Templates
         public static Monad<global::Narvalo.Applicative.Unit> Skip<TSource>(this Monad<TSource> @this)
         {
             Require.NotNull(@this, nameof(@this));
-            return @this.Then(Monad.Unit);
+            return @this.ContinueWith(Monad.Unit);
         }
 
         public static Monad<TResult> Coalesce<TSource, TResult>(
@@ -295,7 +295,7 @@ namespace Edufun.Haskell.Templates
 
         #endregion
 
-        #region LINQ dialect
+        #region Query Expression Pattern.
 
         public static Monad<TResult> Select<TSource, TResult>(
             this Monad<TSource> @this,

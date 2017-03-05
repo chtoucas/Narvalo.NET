@@ -132,7 +132,7 @@ namespace Narvalo.Applicative
             return @this.Select(_ => value);
         }
 
-        public static Either<TResult, TRight> Then<TSource, TResult, TRight>(
+        public static Either<TResult, TRight> ContinueWith<TSource, TResult, TRight>(
             this Either<TSource, TRight> @this,
             Either<TResult, TRight> other)
         {
@@ -273,7 +273,7 @@ namespace Narvalo.Applicative
 
         #endregion
 
-        #region LINQ dialect
+        #region Query Expression Pattern.
 
         public static Either<TResult, TRight> Select<TSource, TResult, TRight>(
             this Either<TSource, TRight> @this,

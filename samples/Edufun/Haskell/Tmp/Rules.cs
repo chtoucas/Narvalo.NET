@@ -105,7 +105,7 @@ namespace Edufun.Haskell.Tmp
         /// </summary>
         public static bool ReplaceByIsAssociative<X, Y, Z>(Prototype<X> a, Prototype<Y> b, Prototype<Z> c)
             // (m >> n) >> o = m >> (n >> o)
-            => a.Then(b).Then(c) == a.Then(b.Then(c));
+            => a.ContinueWith(b).ContinueWith(c) == a.ContinueWith(b.ContinueWith(c));
 
 #if !MONAD_DISABLE_ZERO
 
@@ -128,7 +128,7 @@ namespace Edufun.Haskell.Tmp
         /// </summary>
         public static bool SatisfiesMonadMoreRuleVariant<X>(Prototype<X> m)
             // v >> mzero = mzero
-            => m.Then(Prototype.Zero<X>()) == Prototype.Zero<X>();
+            => m.ContinueWith(Prototype.Zero<X>()) == Prototype.Zero<X>();
 
 #endif
 

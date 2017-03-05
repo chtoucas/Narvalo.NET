@@ -47,7 +47,7 @@ public partial class MonadTemplate
             return @this.Select(_ => value);
         }
 
-        public static <#= Name #><TResult<#= RTDecl #>> Then<TSource, TResult<#= RTDecl #>>(
+        public static <#= Name #><TResult<#= RTDecl #>> ContinueWith<TSource, TResult<#= RTDecl #>>(
             this <#= Name #><TSource<#= RTDecl #>> @this,
             <#= Name #><TResult<#= RTDecl #>> other)
         {
@@ -72,7 +72,7 @@ public partial class MonadTemplate
 <#+ if (HasRightGenerics) { #>
             return @this.ReplaceBy(global::Narvalo.Applicative.Unit.Default);
 <#+ } else { #>
-            return @this.Then(<#= Name #>.Unit);
+            return @this.ContinueWith(<#= Name #>.Unit);
 <#+ } #>
         }
 <#+ if (HasZero) { #>
@@ -243,7 +243,7 @@ public partial class MonadTemplate
 
         #endregion
 
-        #region LINQ dialect
+        #region Query Expression Pattern.
 
         public static <#= Name #><TResult<#= RTDecl #>> <#= MapName #><TSource, TResult<#= RTDecl #>>(
             this <#= Name #><TSource<#= RTDecl #>> @this,
@@ -377,7 +377,7 @@ public partial class MonadTemplate
 
             var keyLookup = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
-            return outer.SelectMany(val => keyLookup(val).Then(inner), resultSelector);
+            return outer.SelectMany(val => keyLookup(val).ContinueWith(inner), resultSelector);
         }
 
         private static <#= Name #><TResult> GroupJoinImpl<TSource, TInner, TKey, TResult>(
@@ -397,7 +397,7 @@ public partial class MonadTemplate
 
             var keyLookup = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
-            return outer.Select(val => resultSelector(val, keyLookup(val).Then(inner)));
+            return outer.Select(val => resultSelector(val, keyLookup(val).ContinueWith(inner)));
         }
 
         private static Func<TSource, <#= Name #><TKey>> GetKeyLookup<TSource, TInner, TKey>(

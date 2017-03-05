@@ -52,7 +52,7 @@ namespace Edufun.Haskell
 
         // [Haskell] (*>) :: f a -> f b -> f b
         // Sequence actions, discarding the value of the first argument.
-        Prototype<TResult> ReplaceBy<TResult>(Prototype<TResult> other);
+        Prototype<TResult> ContinueWith<TResult>(Prototype<TResult> other);
 
         // [Haskell] liftA :: Applicative f => (a -> b) -> f a -> f b
         // Lift a function to actions. A synonym of fmap for a functor.

@@ -132,7 +132,7 @@ namespace Narvalo.Applicative
             return @this.Select(_ => value);
         }
 
-        public static Result<TResult, TError> Then<TSource, TResult, TError>(
+        public static Result<TResult, TError> ContinueWith<TSource, TResult, TError>(
             this Result<TSource, TError> @this,
             Result<TResult, TError> other)
         {
@@ -273,7 +273,7 @@ namespace Narvalo.Applicative
 
         #endregion
 
-        #region LINQ dialect
+        #region Query Expression Pattern.
 
         public static Result<TResult, TError> Select<TSource, TResult, TError>(
             this Result<TSource, TError> @this,

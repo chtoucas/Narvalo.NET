@@ -153,12 +153,10 @@ namespace Narvalo.Applicative
 
         #region Publicly hidden methods.
 
-        // Alias for Then().
         Result<TResult, ExceptionDispatchInfo> Internal.IResult<ExceptionDispatchInfo>.Select<TResult>(
             Func<TResult> func)
             => Select(func).ToGenericResult();
 
-        // Alias for Then().
         Result<TResult, ExceptionDispatchInfo> Internal.IResult<ExceptionDispatchInfo>.ReplaceBy<TResult>(
             TResult result)
             => ReplaceBy(result).ToGenericResult();
