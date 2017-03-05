@@ -6,10 +6,15 @@ namespace Narvalo.Applicative
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.ExceptionServices;
-    using System.Linq;
 
     public partial struct Result<T, TError>
     {
+        public Result<TResult, TError> ReplaceBy<TResult>(TResult value)
+            => IsSuccess ? Result<TResult, TError>.Of(value) : Result<TResult, TError>.FromError(Error);
+
+        public Result<TResult, TError> ContinueWith<TResult>(Result<TResult, TError> other)
+            => IsSuccess ? other : Result<TResult, TError>.FromError(Error);
+
         [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Select", Justification = "[Intentionally] No trouble here, this 'Select' is the one from the LINQ standard query operators.")]
         public Result<TResult, TError> Select<TResult>(Func<T, TResult> selector)
         {
@@ -19,21 +24,16 @@ namespace Narvalo.Applicative
                 ? Result<TResult, TError>.Of(selector(Value))
                 : Result<TResult, TError>.FromError(Error); ;
         }
-
-        public Result<TResult, TError> ReplaceBy<TResult>(TResult value)
-            => IsSuccess ? Result<TResult, TError>.Of(value) : Result<TResult, TError>.FromError(Error);
-
-        public Result<TResult, TError> ContinueWith<TResult>(Result<TResult, TError> other)
-            => IsSuccess ? other : Result<TResult, TError>.FromError(Error);
-
-        public Result<IEnumerable<T>, TError> Repeat(int count)
-            => IsSuccess
-            ? Result<IEnumerable<T>, TError>.Of(Enumerable.Repeat(Value, count))
-            : Result<IEnumerable<T>, TError>.FromError(Error);
     }
 
     public partial struct Result<T>
     {
+        public Result<TResult> ReplaceBy<TResult>(TResult other)
+            => IsSuccess ? Result.Of(other) : Result<TResult>.FromError(Error);
+
+        public Result<TResult> ContinueWith<TResult>(Result<TResult> other)
+            => IsSuccess ? other : Result<TResult>.FromError(Error);
+
         [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Select", Justification = "[Intentionally] No trouble here, this 'Select' is the one from the LINQ standard query operators.")]
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of this method.")]
         public Result<TResult> Select<TResult>(Func<T, TResult> selector)
@@ -52,9 +52,6 @@ namespace Narvalo.Applicative
                 return Result<TResult>.FromError(edi);
             }
         }
-
-        public Result<TResult> ContinueWith<TResult>(Result<TResult> other)
-            => IsSuccess ? other : Result<TResult>.FromError(Error);
     }
 
     public static partial class ResultExtensions

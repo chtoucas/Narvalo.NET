@@ -7,13 +7,6 @@ namespace Narvalo.Applicative
 
     public partial struct Maybe<T>
     {
-        public Maybe<TResult> Select<TResult>(Func<T, TResult> selector)
-        {
-            Require.NotNull(selector, nameof(selector));
-
-            return IsSome ? Maybe.Of(selector(Value)) : Maybe<TResult>.None;
-        }
-
         public Maybe<TResult> ReplaceBy<TResult>(TResult value)
             => IsSome ? Maybe.Of(value) : Maybe<TResult>.None;
 
@@ -22,16 +15,23 @@ namespace Narvalo.Applicative
 
         public Maybe<TResult> Zip<TSecond, TResult>(
             Maybe<TSecond> second,
-            Func<T, TSecond, TResult> resultSelector)
+            Func<T, TSecond, TResult> zipper)
         {
-            Require.NotNull(resultSelector, nameof(resultSelector));
+            Require.NotNull(zipper, nameof(zipper));
 
             return IsSome && second.IsSome
-                ? Maybe.Of(resultSelector(Value, second.Value))
+                ? Maybe.Of(zipper(Value, second.Value))
                 : Maybe<TResult>.None;
         }
 
-        #region LINQ extensions
+        #region Query Expression Pattern.
+
+        public Maybe<TResult> Select<TResult>(Func<T, TResult> selector)
+        {
+            Require.NotNull(selector, nameof(selector));
+
+            return IsSome ? Maybe.Of(selector(Value)) : Maybe<TResult>.None;
+        }
 
         public Maybe<TResult> Join<TInner, TKey, TResult>(
             Maybe<TInner> inner,
@@ -76,23 +76,6 @@ namespace Narvalo.Applicative
         }
 
         #endregion
-
-        public Maybe<TResult> Coalesce<TResult>(
-            Func<T, bool> predicate,
-            Maybe<TResult> thenResult,
-            Maybe<TResult> elseResult)
-        {
-            Require.NotNull(predicate, nameof(predicate));
-
-            return IsSome && predicate(Value) ? thenResult : elseResult;
-        }
-
-        public Maybe<TResult> If<TResult>(Func<T, bool> predicate, Maybe<TResult> thenResult)
-        {
-            Require.NotNull(predicate, nameof(predicate));
-
-            return IsSome && predicate(Value) ? thenResult : Maybe<TResult>.None;
-        }
     }
 
     public static partial class Maybe
