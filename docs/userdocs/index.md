@@ -2,6 +2,7 @@ Usage guidelines
 ================
 
 - [Narvalo.Cerbere](narvalo-cerbere.md)
+- [Narvalo.Fx](narvalo-fx.md)
 
 ### Samples
 
