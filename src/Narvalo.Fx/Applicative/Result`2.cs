@@ -13,19 +13,27 @@ namespace Narvalo.Applicative
     using Narvalo.Properties;
 
     // Typical use cases:
-    // - Result<T, TError> is a value type, its primary use is as a return type.
+    // - To encapsulate the result of a computation with lightweight error reporting to the caller
+    //   in the form of a string: Outcome and Outcome<T>.
+    // - To encapsulate the result of a computation with full exception capture: Result and Result<T>.
+    // - In all other cases: Result<T, TError>.
+    //
+    // Correspondence:
+    // - Outcome        -> Result<Unit, string>
+    // - Outcome<T>     -> Result<T, string>
+    // - Result         -> Result<Unit, ExceptionDispatchInfo>
+    // - Result<T>      -> Result<T, ExceptionDispatchInfo>
+    //
+    // Remarks:
+    // - All these types are value types, their primary usage is as a return type.
     //   For long-lived objects prefer Either<T, TError>.
-    // - Result<T, string> for lightweight error reporting to the caller;
-    //   think of it as a verbose Maybe<T>.
-    // Some recommendations:
-    // - For methods with a void return type, instead of Result<Unit,...> prefer
-    //   * Outcome (w/o exception handling)
-    //   * Result (w/ exception handling)
-    //   * Maybe<TError> (w/o exception handling, w/ custom error type); since there is a risk
-    //     of confusion with Maybe<T>, this should be your last resort.
     // - Result<T, Exception> should be used only in very rare situations; this is **not** a
-    //   replacement for the standard exception mechanism in .NET. See Result and Result<T>
-    //   for better alternatives.
+    //   replacement for the standard exception mechanism in .NET.
+    //   In any cases, Result and Result<T> offer better alternatives.
+    // - You can see Outcome and Outcome<T> as verbose versions of Maybe<Unit> and Maybe<T>.
+    //   By the way, **always** prefer Outcome over Maybe<TError>. With Maybe<TError> it is not
+    //   obvious that the underlying type (TError) represents an error and not the "normal" return
+    //   type.
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     [DebuggerTypeProxy(typeof(Result<,>.DebugView))]
     public partial struct Result<T, TError>
@@ -182,7 +190,7 @@ namespace Narvalo.Applicative
 
         // NB: This method is normally internal, but Result<T, TError>.Of() is more readable
         // than Result.Of<T, TError>() - no type inference.
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification ="[Intentionally] A static method in a static class won't help.")]
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Intentionally] A static method in a static class won't help.")]
         public static Result<T, TError> Of(T value) => new Result<T, TError>(value);
 
         [DebuggerHidden]
@@ -210,7 +218,7 @@ namespace Narvalo.Applicative
 
         // NB: This method is normally internal, but Result<T, TError>.FromError() is more readable
         // than Result.FromError<T, TError>() - no type inference.
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification ="[Intentionally] A static method in a static class won't help.")]
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Intentionally] A static method in a static class won't help.")]
         public static Result<T, TError> FromError(TError error)
         {
             Require.NotNullUnconstrained(error, nameof(error));

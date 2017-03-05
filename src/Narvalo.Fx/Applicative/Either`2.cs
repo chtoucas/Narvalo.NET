@@ -188,18 +188,12 @@ namespace Narvalo.Applicative
         {
             public override TLeft ToLeft() => Left;
 
-            public override TRight ToRight()
-            {
-                throw new InvalidCastException("XXX");
-            }
+            public override TRight ToRight() { throw new InvalidCastException("XXX"); }
         }
 
         private partial class Right_
         {
-            public override TLeft ToLeft()
-            {
-                throw new InvalidCastException("XXX");
-            }
+            public override TLeft ToLeft() { throw new InvalidCastException("XXX"); }
 
             public override TRight ToRight() => Right;
         }
@@ -215,13 +209,13 @@ namespace Narvalo.Applicative
 
         public abstract Either<TLeft, TResult> BindRight<TResult>(Func<TRight, Either<TLeft, TResult>> selector);
 
-        // NB: This method is normally internal, but Result<T, TError>.FromError() is more readable
-        // than Result.FromError<T, TError>() - no type inference.
+        // NB: This method is normally internal, but Either<TLeft, TRight>.OfLeft() is more readable
+        // than Either.OfLeft<TLeft, TRight>() - no type inference.
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Intentionally] A static method in a static class won't help.")]
         public static Either<TLeft, TRight> OfLeft(TLeft leftValue) => new Left_(leftValue);
 
-        // NB: This method is normally internal, but Result<T, TError>.FromError() is more readable
-        // than Result.FromError<T, TError>() - no type inference.
+        // NB: This method is normally internal, but Either<TLeft, TRight>.OfRight() is more readable
+        // than Either.OfRight<TLeft, TRight>() - no type inference.
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Intentionally] A static method in a static class won't help.")]
         public static Either<TLeft, TRight> OfRight(TRight value) => new Right_(value);
 

@@ -192,8 +192,8 @@ namespace Narvalo.Applicative
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Result<T> η(T value) => new Result<T>(value);
 
-        // NB: This method is normally internal, but Result<T>.Of() is more readable
-        // than Result.Of<T>() - no type inference.
+        // NB: This method is normally internal, but Result<T>.FromError() is more readable
+        // than Result.FromError<T>() - no type inference.
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Intentionally] A static method in a static class won't help.")]
         public static Result<T> FromError(ExceptionDispatchInfo error)
         {
