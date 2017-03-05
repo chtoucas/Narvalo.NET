@@ -159,7 +159,7 @@ namespace Narvalo.Applicative
             return @this.Bind(_ => other);
         }
 
-        public static Outcome<TSource> Ignore<TSource, TOther>(
+        public static Outcome<TSource> PassThrough<TSource, TOther>(
             this Outcome<TSource> @this,
             Outcome<TOther> other)
         {

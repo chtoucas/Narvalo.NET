@@ -140,7 +140,7 @@ namespace Narvalo.Applicative
             return @this.Bind(_ => other);
         }
 
-        public static Either<TSource, TRight> Ignore<TSource, TOther, TRight>(
+        public static Either<TSource, TRight> PassThrough<TSource, TOther, TRight>(
             this Either<TSource, TRight> @this,
             Either<TOther, TRight> other)
         {

@@ -112,7 +112,7 @@ namespace Edufun.Haskell
 
         // [GHC.Base] (<*) = liftA2 const
         // Control.Applicative: u <* v = pure const <*> u <*> v
-        public Prototype<T> Ignore<TOther>(Prototype<TOther> other)
+        public Prototype<T> PassThrough<TOther>(Prototype<TOther> other)
         {
 #if APPLICATIVE_USE_GHC_BASE
             Func<T, TOther, T> ignorethat = (_, that) => _;

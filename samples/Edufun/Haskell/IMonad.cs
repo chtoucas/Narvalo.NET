@@ -68,7 +68,7 @@ namespace Edufun.Haskell
     //
     // Inherited:
     // - <$             obj.ReplaceBy           <- Functor::<$
-    // - <*             obj.Ignore              <- Applicative::<*
+    // - <*             obj.PassThrough         <- Applicative::<*
     // - <**>           Operators.Apply         <- Applicative::<**>
     // - liftA2         obj.Zip                 <- Applicative::liftA2
     // - liftA3         obj.Zip                 <- Applicative::liftA3

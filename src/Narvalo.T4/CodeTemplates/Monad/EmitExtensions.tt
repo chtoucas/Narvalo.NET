@@ -55,7 +55,7 @@ public partial class MonadTemplate
             return @this.Bind(_ => other);
         }
 
-        public static <#= Name #><TSource<#= RTDecl #>> Ignore<TSource, TOther<#= RTDecl #>>(
+        public static <#= Name #><TSource<#= RTDecl #>> PassThrough<TSource, TOther<#= RTDecl #>>(
             this <#= Name #><TSource<#= RTDecl #>> @this,
             <#= Name #><TOther<#= RTDecl #>> other)
         {

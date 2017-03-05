@@ -166,7 +166,7 @@ namespace Narvalo.Applicative
             return @this.Bind(_ => other);
         }
 
-        public static Maybe<TSource> Ignore<TSource, TOther>(
+        public static Maybe<TSource> PassThrough<TSource, TOther>(
             this Maybe<TSource> @this,
             Maybe<TOther> other)
         {

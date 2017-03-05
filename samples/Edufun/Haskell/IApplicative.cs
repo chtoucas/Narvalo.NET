@@ -16,7 +16,7 @@ namespace Edufun.Haskell
     // - pure       Applicative.Of          (required)
     // - <*>        obj.Gather              (required)
     // - *>         obj.ReplaceBy
-    // - <*         obj.Ignore
+    // - <*         obj.PassThrough
     //
     // Utility functions:
     // - <$>        Operators.InvokeWith        <- Functor::<$>
@@ -44,7 +44,7 @@ namespace Edufun.Haskell
     {
         // [Haskell] (<*) :: f a -> f b -> f a
         // Sequence actions, discarding the value of the second argument.
-        Prototype<T> Ignore<TOther>(Prototype<TOther> other);
+        Prototype<T> PassThrough<TOther>(Prototype<TOther> other);
 
         // [Haskell] (<$) :: Functor f => a -> f b -> f a
         // Replace all locations in the input with the same value.

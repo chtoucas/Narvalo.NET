@@ -162,7 +162,7 @@ namespace Edufun.Haskell.Templates
             return @this.Bind(_ => other);
         }
 
-        public static Monad<TSource> Ignore<TSource, TOther>(
+        public static Monad<TSource> PassThrough<TSource, TOther>(
             this Monad<TSource> @this,
             Monad<TOther> other)
         {
