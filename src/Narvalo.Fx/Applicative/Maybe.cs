@@ -2,7 +2,6 @@
 
 namespace Narvalo.Applicative
 {
-    using System;
     using System.Collections.Generic;
 
     /// <summary>
@@ -10,59 +9,25 @@ namespace Narvalo.Applicative
     /// and for querying objects that implement <see cref="IEnumerable{T}"/>
     /// where T is of type <see cref="Maybe{S}"/>.
     /// </summary>
+    public static partial class Maybe { }
+
+    // Provides extension methods for Maybe<T?> or Maybe<T> where T is a struct.
+    // When it comes to value types, there is really no reason to use Maybe<T> or Maybe<T?>
+    // instead of T?.
     public static partial class Maybe
     {
         // Conversion from T? to Maybe<T>.
+        // NB: This method makes it impossible to create a Maybe<T?> directly.
         public static Maybe<T> Of<T>(T? value) where T : struct
             => value.HasValue ? Of(value.Value) : Maybe<T>.None;
 
         // Conversion from Maybe<T> to T?.
         public static T? ToNullable<T>(this Maybe<T> @this) where T : struct
             => @this.IsSome ? (T?)@this.Value : null;
-    }
 
-    // Provides extension methods for Maybe<T?>.
-    // NB: There is really no reason to use Maybe<T> or Maybe<T?> instead of T? (for value
-    // types of course). You can not create a Maybe<T?> directly but it is still
-    // possible via Bind.
-    public static partial class Maybe
-    {
-        public static Maybe<T> Flatten<T>(this Maybe<T?> @this) where T : struct
-            => @this.IsSome ? Maybe.Of(@this.Value) : Maybe<T>.None;
-
-        public static T? ToNullable<T>(this Maybe<T?> @this) where T : struct
+        // Conversion from Maybe<T?> to T?.
+        public static T? Unwrap<T>(this Maybe<T?> @this) where T : struct
             => @this.IsSome ? @this.Value : null;
-
-        // REVIEW: Returning @this.Value should be enough.
-        public static T Unwrap<T>(this Maybe<T?> @this) where T : struct
-            => @this.ValueOrDefault() ?? default(T);
-
-        public static T Unwrap<T>(this Maybe<T?> @this, T defaultValue) where T : struct
-            => @this.ValueOrDefault() ?? defaultValue;
-
-        public static T Unwrap<T>(this Maybe<T?> @this, Func<T> defaultValueFactory) where T : struct
-        {
-            Require.NotNull(defaultValueFactory, nameof(defaultValueFactory));
-
-            return @this.ValueOrDefault() ?? defaultValueFactory();
-        }
-
-        public static T UnwrapOrThrow<T>(this Maybe<T?> @this, Exception exception) where T : struct
-            => UnwrapOrThrow(@this, () => exception);
-
-        public static T UnwrapOrThrow<T>(this Maybe<T?> @this, Func<Exception> exceptionFactory) where T : struct
-        {
-            Require.NotNull(exceptionFactory, nameof(exceptionFactory));
-
-            T? m = @this.ValueOrDefault();
-
-            if (!m.HasValue)
-            {
-                throw exceptionFactory();
-            }
-
-            return m.Value;
-        }
     }
 
     // Provides extension methods for IEnumerable<Maybe<T>>.

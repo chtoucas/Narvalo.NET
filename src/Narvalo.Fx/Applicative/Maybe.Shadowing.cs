@@ -84,7 +84,7 @@ namespace Narvalo.Applicative
         {
             Require.NotNull(@this, nameof(@this));
 
-            return Maybe.Of(CollectAnyIterator(@this));
+            return Of(CollectAnyIterator(@this));
         }
     }
 }
