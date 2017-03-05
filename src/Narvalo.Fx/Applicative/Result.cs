@@ -80,12 +80,12 @@ namespace Narvalo.Applicative
     public partial struct Result
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private static readonly Result s_Success = new Result();
+        private static readonly Result s_Ok = new Result();
 
         /// <summary>
         /// Obtains an instance of <see cref="Result" /> that represents a successful computation.
         /// </summary>
-        public static Result Success => s_Success;
+        public static Result Ok => s_Ok;
 
         public static Result FromError(ExceptionDispatchInfo error)
         {

@@ -22,7 +22,7 @@ namespace Narvalo.Applicative
             try
             {
                 action.Invoke();
-                return Success;
+                return Ok;
             }
             catch (Exception ex)
             {
@@ -56,7 +56,7 @@ namespace Narvalo.Applicative
             try
             {
                 action.Invoke();
-                return Success;
+                return Ok;
             }
             catch (Exception ex)
             {

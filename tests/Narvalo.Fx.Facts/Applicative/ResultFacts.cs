@@ -6,10 +6,10 @@ namespace Narvalo.Applicative
 
     public static partial class ResultFacts
     {
-        #region Success
+        #region Ok
 
         [Fact]
-        public static void Success_IsSuccess() => Assert.True(Result.Success.IsSuccess);
+        public static void Ok_IsSuccess() => Assert.True(Result.Ok.IsSuccess);
 
         #endregion
     }

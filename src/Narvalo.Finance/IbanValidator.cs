@@ -47,7 +47,7 @@ namespace Narvalo.Finance
                 return Outcome.FromError(Strings.IbanValidator_BbanVerificationFailure);
             }
 
-            return Outcome.Success;
+            return Outcome.Ok;
         }
 
         public static bool VerifyISOCountryCode(IbanParts parts)
