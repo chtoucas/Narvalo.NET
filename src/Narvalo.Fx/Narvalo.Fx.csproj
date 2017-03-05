@@ -24,6 +24,11 @@
     <Compile Include="Applicative\Either`2.cs" />
     <Compile Include="Applicative\Outcome.cs" />
     <Compile Include="Applicative\Nullable.cs" />
+    <Compile Include="Applicative\Outcome.g.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Outcome.tt</DependentUpon>
+    </Compile>
     <Compile Include="Applicative\Result.cs" />
     <Compile Include="Applicative\Ident.g.cs">
       <DependentUpon>Ident.tt</DependentUpon>
@@ -31,6 +36,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Applicative\Ident`1.cs" />
+    <Compile Include="Applicative\Outcome`1.cs" />
     <Compile Include="Internal\IResult`1.cs" />
     <Compile Include="Internal\ISecondaryContainer`1.cs" />
     <Compile Include="Internal\IEither`2.cs" />
@@ -144,7 +150,12 @@
       <Name>Narvalo.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Applicative\Outcome.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Outcome.g.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>
