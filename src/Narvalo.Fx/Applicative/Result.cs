@@ -161,18 +161,6 @@ namespace Narvalo.Applicative
 
             if (IsError) { action(Error); }
         }
-
-        //#region Publicly hidden methods.
-
-        //Result<TResult, ExceptionDispatchInfo> Internal.IResult<ExceptionDispatchInfo>.Select<TResult>(
-        //    Func<TResult> func)
-        //    => Select(func).ToGenericResult();
-
-        //Result<TResult, ExceptionDispatchInfo> Internal.IResult<ExceptionDispatchInfo>.ReplaceBy<TResult>(
-        //    TResult result)
-        //    => ReplaceBy(result).ToGenericResult();
-
-        //#endregion
     }
 
     // Implements the IEquatable<Result> interface.

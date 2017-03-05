@@ -19,9 +19,9 @@ namespace Narvalo.Applicative
     // - In all other cases: Result<T, TError>.
     //
     // Correspondence:
-    // - Outcome        -> Result<Unit, string>
+    // - Outcome        -> Result<Unit, string> or Outcome<Unit>
     // - Outcome<T>     -> Result<T, string>
-    // - Result         -> Result<Unit, ExceptionDispatchInfo>
+    // - Result         -> Result<Unit, ExceptionDispatchInfo> or Result<Unit>
     // - Result<T>      -> Result<T, ExceptionDispatchInfo>
     //
     // Remarks:

@@ -37,7 +37,6 @@
     </Compile>
     <Compile Include="Applicative\Ident`1.cs" />
     <Compile Include="Applicative\Outcome`1.cs" />
-    <Compile Include="Internal\IResult`1.cs" />
     <Compile Include="Internal\ISecondaryContainer`1.cs" />
     <Compile Include="Internal\IEither`2.cs" />
     <Compile Include="Internal\IMaybe`1.cs" />
