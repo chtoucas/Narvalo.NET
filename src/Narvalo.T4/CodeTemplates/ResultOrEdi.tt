@@ -7,8 +7,8 @@
 
         public override void Initialize()
         {
-            InitializeNamespaces();
-            InitializeHelpers(true);
+            InitializeNamespacesForNarvaloFx();
+            InitializeHelpers(asStruct: true);
 
             Name = "Result";
             IsNullable = false;

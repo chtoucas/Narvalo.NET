@@ -420,7 +420,7 @@ namespace Narvalo.T4
         #region Initalizers
 
         // Only for the Narvalo.Fx project.
-        protected void InitializeNamespaces()
+        protected void InitializeNamespacesForNarvaloFx()
         {
             InternalNamespace = "Narvalo.Internal";
             LinqNamespace = "Narvalo.Linq";

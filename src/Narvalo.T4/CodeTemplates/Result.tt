@@ -7,9 +7,9 @@
 
         public override void Initialize()
         {
-            InitializeNamespaces();
+            InitializeNamespacesForNarvaloFx();
             InitializeGenericParameters("T", "TError");
-            InitializeHelpers(true);
+            InitializeHelpers(asStruct: true);
 
             EtaName = "Of";
             Name = "Result";

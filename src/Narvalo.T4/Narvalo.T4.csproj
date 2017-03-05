@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CodeTemplates\Monad\EmitMethods.tt" />
+    <None Include="CodeTemplates\Outcome.tt" />
     <Content Include="README.txt" />
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />

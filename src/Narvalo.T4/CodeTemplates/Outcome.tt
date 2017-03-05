@@ -1,16 +1,16 @@
 ﻿<#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
 <#@ include file="Monad.tt" once="true" #><#+
 
-    public partial class EitherTemplate : MonadTemplate
+    public partial class OutcomeTemplate : MonadTemplate
     {
-        public EitherTemplate(TextTransformation parent) : base(parent) { }
+        public OutcomeTemplate(TextTransformation parent) : base(parent) { }
 
         public override void Initialize()
         {
             InitializeNamespacesForNarvaloFx();
-            InitializeGenericParameters("TLeft", "TRight");
+            InitializeHelpers(asStruct: true);
 
-            EtaName = "OfLeft";
+            IsNullable = false;
         }
     }
 #>
