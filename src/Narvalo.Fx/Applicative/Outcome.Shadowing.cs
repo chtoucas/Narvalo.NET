@@ -7,6 +7,11 @@ namespace Narvalo.Applicative
 
     public partial struct Outcome<T>
     {
+        public Outcome<TResult> Gather<TResult>(Outcome<Func<T, TResult>> applicative)
+            => IsSuccess && applicative.IsSuccess
+            ? Outcome<TResult>.η(applicative.Value(Value))
+            : Outcome<TResult>.FromError(Error);
+
         public Outcome<TResult> ReplaceBy<TResult>(TResult other)
             => IsSuccess ? Outcome.Of(other) : Outcome<TResult>.FromError(Error);
 
