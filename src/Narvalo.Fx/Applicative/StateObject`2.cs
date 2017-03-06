@@ -65,6 +65,15 @@ namespace Narvalo.Applicative
     // Implements the IComparable<StateObject<T, TState>>, IComparable and IStructuralComparable interfaces.
     public partial struct StateObject<T, TState>
     {
+        public static bool operator <(StateObject<T, TState> left, StateObject<T, TState> right)
+            => left.CompareTo(right) < 0;
+        public static bool operator <=(StateObject<T, TState> left, StateObject<T, TState> right)
+            => left.CompareTo(right) <= 0;
+        public static bool operator >(StateObject<T, TState> left, StateObject<T, TState> right)
+            => left.CompareTo(right) > 0;
+        public static bool operator >=(StateObject<T, TState> left, StateObject<T, TState> right)
+            => left.CompareTo(right) >= 0;
+
         public int CompareTo(StateObject<T, TState> other)
         {
             int c = Comparer<T>.Default.Compare(Result, other.Result);
@@ -87,6 +96,8 @@ namespace Narvalo.Applicative
 
         int IStructuralComparable.CompareTo(object other, IComparer comparer)
         {
+            Require.NotNull(comparer, nameof(comparer));
+
             if (other == null) { return 1; }
 
             if (!(other is StateObject<T, TState>))

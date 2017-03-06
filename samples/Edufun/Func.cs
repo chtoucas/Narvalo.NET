@@ -1,14 +1,29 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Applicative.Extensions
+namespace Edufun
 {
     using System;
 
+    using Narvalo;
+    using Narvalo.Applicative;
+
     /// <summary>
-    /// Provides extension methods for <see cref="Func{T}"/>.
+    /// The Func monad :-)
     /// </summary>
-    public static partial class FuncExtensions
+    public static partial class Func
     {
+        public static Func<T> Return<T>(T value)
+        {
+            return () => value;
+        }
+
+        public static Func<T> Flatten<T>(Func<Func<T>> square)
+        {
+            Require.NotNull(square, nameof(square));
+
+            return square.Invoke();
+        }
+
         public static Action Where(this Action @this, bool predicate)
             => predicate ? @this : Stubs.Noop;
 

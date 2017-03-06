@@ -28,6 +28,7 @@ namespace Narvalo.Applicative
             => square.Bind(Stubs<Stateful<T, TState>>.Identity);
     }
 
+    // TODO: Find better names.
     public static partial class Stateful
     {
         public static Stateful<TState, TState> Get<TState>()

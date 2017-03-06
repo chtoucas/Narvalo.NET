@@ -1,11 +1,14 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Applicative.Extensions
+namespace Edufun
 {
     using System;
 
+    using Narvalo;
+    using Narvalo.Applicative;
+
     /// <summary>
-    /// Provides extension methods for <see cref="Nullable{T}"/>.
+    /// The Nullable monad
     /// </summary>
     /// <remarks>
     /// <list type="bullet">
@@ -16,7 +19,7 @@ namespace Narvalo.Applicative.Extensions
     /// <item><description><c>Zero</c> is null.</description></item>
     /// </list>
     /// </remarks>
-    public static class NullableExtensions
+    public static class Nullable
     {
         public static TResult? Bind<TSource, TResult>(this TSource? @this, Func<TSource, TResult?> selector)
             where TSource : struct
