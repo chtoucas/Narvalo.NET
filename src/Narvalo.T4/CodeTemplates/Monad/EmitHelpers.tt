@@ -13,19 +13,19 @@ public partial class MonadTemplate
         /// <summary>
         /// The unique object of type <c><#= Name #>&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly <#= Name #><global::Narvalo.Applicative.Unit> s_Unit = <#= ReturnName #>(global::Narvalo.Applicative.Unit.Default);
+        private static readonly <#= Name #><_Unit_> s_Unit = <#= ReturnName #>(_Unit_.Default);
 
         /// <summary>
         /// Gets the unique object of type <c><#= Name #>&lt;Unit&gt;</c>.
         /// </summary>
-        public static <#= Name #><global::Narvalo.Applicative.Unit> Unit => s_Unit;
+        public static <#= Name #><_Unit_> Unit => s_Unit;
 
 <#+ } #>
 <#+ if (HasZero) { #>
         /// <summary>
         /// Gets the zero for <see cref="<#= Name #>{T}.Bind"/>.
         /// </summary>
-        public static <#= Name #><global::Narvalo.Applicative.Unit> <#= ZeroName #> => <#= Name #><global::Narvalo.Applicative.Unit>.<#= ZeroName #>;
+        public static <#= Name #><_Unit_> <#= ZeroName #> => <#= Name #><_Unit_>.<#= ZeroName #>;
 
 <#+ } // End of HasZero #>
 <#+ if (!DisableReturn) { #>
@@ -51,6 +51,24 @@ public partial class MonadTemplate
 
         public static <#= Name #><Unit> Guard(bool predicate) => predicate ? Unit : <#= ZeroName #>;
 <#+ } // T4: End of HasZero. #>
+
+        public static <#= Name #><IEnumerable<TSource><#= RTDecl #>> Repeat<TSource<#= RTDecl #>>(
+            <#= Name #><TSource<#= RTDecl #>> source,
+            int count)
+        {
+            <#+ WriteNotNull("source"); #>
+            Require.Range(count >= 1, nameof(count));
+            return source.<#= MapName #>(val => Enumerable.Repeat(val, count));
+        }
+
+        /// <seealso cref="Gather{TSource, TResult<#= RTDecl #>}" />
+        public static <#= Name #><TResult<#= RTDecl #>> Apply<TSource, TResult<#= RTDecl #>>(
+            <#= Name #><Func<TSource, TResult><#= RTDecl #>> applicative,
+            <#= Name #><TSource<#= RTDecl #>> value)
+        {
+            <#+ WriteNotNull("value"); #>
+            return value.Gather(applicative);
+        }
 
         #region Lift()
 

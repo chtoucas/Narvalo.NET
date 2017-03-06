@@ -1,0 +1,69 @@
+﻿<#+
+
+public partial class MonadTemplate
+{
+    protected void EmitExtensionsExtras()
+    {
+#>
+    // Provides more extension methods for <#= Name #><T<#= RTDecl #>>.
+    // T4: EmitExtensionsExtras().
+    public static partial class <#= ExtensionsClsName #>
+    {
+<#+ /* DISABLED #>
+<#+ if (HasZero) { #>
+        public static <#= Name #><TResult> If<TSource, TResult>(
+            this <#= Name #><TSource> @this,
+            Func<TSource, bool> predicate,
+            <#= Name #><TResult> thenResult)
+        {
+            <#+ WriteNotNull(); #>
+            Require.NotNull(predicate, nameof(predicate));
+            return @this.Bind(val => predicate(val) ? thenResult : <#= Name #><TResult>.<#= ZeroName #>);
+        }
+
+<#+ } // T4: End of HasZero. #>
+        public static <#= Name #><TResult<#= RTDecl #>> Coalesce<TSource, TResult<#= RTDecl #>>(
+            this <#= Name #><TSource<#= RTDecl #>> @this,
+            Func<TSource, bool> predicate,
+            <#= Name #><TResult<#= RTDecl #>> thenResult,
+            <#= Name #><TResult<#= RTDecl #>> elseResult)
+        {
+            <#+ WriteNotNull(); #>
+            Require.NotNull(predicate, nameof(predicate));
+            return @this.Bind(val => predicate(val) ? thenResult : elseResult);
+        }
+
+<#+ End of DISABLED */ #>
+        public static <#= Name #><TResult<#= RTDecl #>> Using<TSource, TResult<#= RTDecl #>>(
+            this <#= Name #><TSource<#= RTDecl #>> @this,
+            Func<TSource, <#= Name #><TResult<#= RTDecl #>>> selector)
+            where TSource : IDisposable
+        {
+            <#+ WriteNotNull(); #>
+            Require.NotNull(selector, nameof(selector));
+            return @this.Bind(val => { using (val) { return selector(val); } });
+        }
+
+        public static <#= Name #><TResult<#= RTDecl #>> Using<TSource, TResult<#= RTDecl #>>(
+            this <#= Name #><TSource<#= RTDecl #>> @this,
+            Func<TSource, TResult> selector)
+            where TSource : IDisposable
+        {
+            <#+ WriteNotNull(); #>
+            Require.NotNull(selector, nameof(selector));
+            return @this.<#= MapName #>(val => { using (val) { return selector(val); } });
+        }
+
+        public static <#= Name #><Tuple<TSource, TOther><#= RTDecl #>> Zip<TSource, TOther<#= RTDecl #>>(
+            this <#= Name #><TSource<#= RTDecl #>> @this,
+            <#= Name #><TOther<#= RTDecl #>> other)
+        {
+            <#+ WriteNotNull(); #>
+            return @this.Zip(other, Tuple.Create);
+        }
+    }
+<#+
+    } // T4: End of EmitExtensionsExtras().
+} // T4: End of MonadTemplate.
+
+#>
