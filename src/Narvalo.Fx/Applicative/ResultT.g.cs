@@ -10,6 +10,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using _Unit_ = global::Narvalo.Applicative.Unit;
+
 namespace Narvalo.Applicative
 {
     using System;
@@ -26,12 +28,12 @@ namespace Narvalo.Applicative
         /// <summary>
         /// The unique object of type <c>Result&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly Result<global::Narvalo.Applicative.Unit> s_Unit = Of(global::Narvalo.Applicative.Unit.Default);
+        private static readonly Result<_Unit_> s_Unit = Of(_Unit_.Default);
 
         /// <summary>
         /// Gets the unique object of type <c>Result&lt;Unit&gt;</c>.
         /// </summary>
-        public static Result<global::Narvalo.Applicative.Unit> Unit => s_Unit;
+        public static Result<_Unit_> Unit => s_Unit;
 
         /// <summary>
         /// Obtains an instance of the <see cref="Result{T}"/> class for the specified value.
@@ -42,11 +44,14 @@ namespace Narvalo.Applicative
         public static Result<T> Of<T>(T value)
             => Result<T>.η(value);
 
-        /// <summary>
-        /// Removes one level of structure, projecting its bound value into the outer level.
-        /// </summary>
-        public static Result<T> Flatten<T>(Result<Result<T>> square)
-            => Result<T>.μ(square);
+        public static Result<IEnumerable<TSource>> Repeat<TSource>(
+            Result<TSource> source,
+            int count)
+        {
+            /* T4: NotNull(source) */
+            Require.Range(count >= 1, nameof(count));
+            return source.Select(val => Enumerable.Repeat(val, count));
+        }
 
         #region Lift()
 
@@ -115,7 +120,13 @@ namespace Narvalo.Applicative
     // T4: EmitExtensions().
     public static partial class ResultExtensions
     {
-        /// <seealso cref="Apply{TSource, TResult}" />
+        /// <summary>
+        /// Removes one level of structure, projecting its bound value into the outer level.
+        /// </summary>
+        public static Result<T> Flatten<T>(this Result<Result<T>> @this)
+            => Result<T>.μ(@this);
+
+        /// <seealso cref="Ap.Apply{TSource, TResult}" />
         public static Result<TResult> Gather<TSource, TResult>(
             this Result<TSource> @this,
             Result<Func<TSource, TResult>> applicative)
@@ -123,24 +134,6 @@ namespace Narvalo.Applicative
             /* T4: NotNull(@this) */
             /* T4: NotNull(applicative) */
             return applicative.Bind(func => @this.Select(func));
-        }
-
-        /// <seealso cref="Gather{TSource, TResult}" />
-        public static Result<TResult> Apply<TSource, TResult>(
-            this Result<Func<TSource, TResult>> @this,
-            Result<TSource> value)
-        {
-            /* T4: NotNull(value) */
-            return value.Gather(@this);
-        }
-
-        public static Result<IEnumerable<TSource>> Repeat<TSource>(
-            this Result<TSource> @this,
-            int count)
-        {
-            /* T4: NotNull(@this) */
-            Require.Range(count >= 1, nameof(count));
-            return @this.Select(val => Enumerable.Repeat(val, count));
         }
 
         public static Result<TResult> ReplaceBy<TSource, TResult>(
@@ -164,46 +157,15 @@ namespace Narvalo.Applicative
             Result<TOther> other)
         {
             /* T4: NotNull(@this) */
-            Func<TSource, TOther, TSource> ignore = (arg, _) => arg;
+            Func<TSource, TOther, TSource> zipper = (arg, _) => arg;
 
-            return @this.Zip(other, ignore);
+            return @this.Zip(other, zipper);
         }
 
-        public static Result<global::Narvalo.Applicative.Unit> Skip<TSource>(this Result<TSource> @this)
+        public static Result<_Unit_> Skip<TSource>(this Result<TSource> @this)
         {
             /* T4: NotNull(@this) */
             return @this.ContinueWith(Result.Unit);
-        }
-
-        public static Result<TResult> Coalesce<TSource, TResult>(
-            this Result<TSource> @this,
-            Func<TSource, bool> predicate,
-            Result<TResult> thenResult,
-            Result<TResult> elseResult)
-        {
-            /* T4: NotNull(@this) */
-            Require.NotNull(predicate, nameof(predicate));
-            return @this.Bind(val => predicate(val) ? thenResult : elseResult);
-        }
-
-        public static Result<TResult> Using<TSource, TResult>(
-            this Result<TSource> @this,
-            Func<TSource, Result<TResult>> selector)
-            where TSource : IDisposable
-        {
-            /* T4: NotNull(@this) */
-            Require.NotNull(selector, nameof(selector));
-            return @this.Bind(val => { using (val) { return selector(val); } });
-        }
-
-        public static Result<TResult> Using<TSource, TResult>(
-            this Result<TSource> @this,
-            Func<TSource, TResult> selector)
-            where TSource : IDisposable
-        {
-            /* T4: NotNull(@this) */
-            Require.NotNull(selector, nameof(selector));
-            return @this.Select(val => { using (val) { return selector(val); } });
         }
 
         #region Zip()
@@ -216,10 +178,10 @@ namespace Narvalo.Applicative
             return @this.Zip(other, Tuple.Create);
         }
 
-        public static Result<TResult> Zip<TFirst, TSecond, TResult>(
-            this Result<TFirst> @this,
-            Result<TSecond> second,
-            Func<TFirst, TSecond, TResult> zipper)
+        public static Result<TResult> Zip<T1, T2, TResult>(
+            this Result<T1> @this,
+            Result<T2> second,
+            Func<T1, T2, TResult> zipper)
         {
             /* T4: NotNull(@this) */
             /* T4: NotNull(second) */
@@ -292,7 +254,31 @@ namespace Narvalo.Applicative
 
         #endregion
 
-        #region Query Expression Pattern.
+        #region Resource management
+
+        public static Result<TResult> Using<TSource, TResult>(
+            this Result<TSource> @this,
+            Func<TSource, Result<TResult>> selector)
+            where TSource : IDisposable
+        {
+            /* T4: NotNull(@this) */
+            Require.NotNull(selector, nameof(selector));
+            return @this.Bind(val => { using (val) { return selector(val); } });
+        }
+
+        public static Result<TResult> Using<TSource, TResult>(
+            this Result<TSource> @this,
+            Func<TSource, TResult> selector)
+            where TSource : IDisposable
+        {
+            /* T4: NotNull(@this) */
+            Require.NotNull(selector, nameof(selector));
+            return @this.Select(val => { using (val) { return selector(val); } });
+        }
+
+        #endregion
+
+        #region Query Expression Pattern
 
         public static Result<TResult> Select<TSource, TResult>(
             this Result<TSource> @this,
@@ -303,7 +289,7 @@ namespace Narvalo.Applicative
             return @this.Bind(val => Result<TResult>.η(selector(val)));
         }
 
-        // Kind of generalisation of Zip{T1, T2, T3}.
+        // Generalizes both Bind() and Zip<T1, T2, TResult>().
         public static Result<TResult> SelectMany<TSource, TMiddle, TResult>(
             this Result<TSource> @this,
             Func<TSource, Result<TMiddle>> valueSelector,
@@ -321,7 +307,21 @@ namespace Narvalo.Applicative
         #endregion
     }
 
-    // Provides extension methods for Func<T> in the Kleisli category.
+    // Provides extension methods for Result<Func<TSource, TResult>>.
+    // T4: EmitApplicative().
+    public static partial class Ap
+    {
+        /// <seealso cref="ResultExtensions.Gather{TSource, TResult}" />
+        public static Result<TResult> Apply<TSource, TResult>(
+            this Result<Func<TSource, TResult>> @this,
+            Result<TSource> value)
+        {
+            /* T4: NotNull(value) */
+            return value.Gather(@this);
+        }
+    }
+
+    // Provides extension methods for functions in the Kleisli category.
     // T4: EmitKleisli().
     public static partial class Kleisli
     {

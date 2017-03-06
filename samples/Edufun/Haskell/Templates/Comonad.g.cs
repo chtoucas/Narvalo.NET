@@ -10,34 +10,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using global::Narvalo;
-using global::Narvalo.Applicative;
-
 namespace Edufun.Haskell.Templates
 {
-    // Implements core Comonad methods.
-    // T4: EmitComonadCore().
+    // T4: EmitComonadHelpers().
     public static partial class Comonad
     {
         /// <remarks>
         /// Named <c>extract</c> in Haskell parlance.
         /// </remarks>
-        public static T Extract<T>(Comonad<T> value)
-        {
-            Expect.NotNull(value);
-
-            return Comonad<T>.ε(value);
-        }
+        public static T Extract<T>(Comonad<T> value) => Comonad<T>.ε(value);
 
         /// <remarks>
         /// Named <c>duplicate</c> in Haskell parlance.
         /// </remarks>
-        public static Comonad<Comonad<T>> Duplicate<T>(Comonad<T> value)
-        {
-            Warrant.NotNull<Comonad<Comonad<T>>>();
-
-            return Comonad<T>.δ(value);
-        }
+        public static Comonad<Comonad<T>> Duplicate<T>(Comonad<T> value) => Comonad<T>.δ(value);
     }
 }
 

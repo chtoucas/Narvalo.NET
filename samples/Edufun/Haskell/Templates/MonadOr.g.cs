@@ -10,8 +10,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using global::Narvalo;
-using global::Narvalo.Applicative;
+using Demand = global::Narvalo.Demand;
+using Require = global::Narvalo.Require;
+using _Unit_ = global::Narvalo.Applicative.Unit;
 
 namespace Edufun.Haskell.Templates
 {
@@ -29,17 +30,17 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// The unique object of type <c>MonadOr&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly MonadOr<global::Narvalo.Applicative.Unit> s_Unit = Of(global::Narvalo.Applicative.Unit.Default);
+        private static readonly MonadOr<_Unit_> s_Unit = Of(_Unit_.Default);
 
         /// <summary>
         /// Gets the unique object of type <c>MonadOr&lt;Unit&gt;</c>.
         /// </summary>
-        public static MonadOr<global::Narvalo.Applicative.Unit> Unit => s_Unit;
+        public static MonadOr<_Unit_> Unit => s_Unit;
 
         /// <summary>
         /// Gets the zero for <see cref="MonadOr{T}.Bind"/>.
         /// </summary>
-        public static MonadOr<global::Narvalo.Applicative.Unit> None => MonadOr<global::Narvalo.Applicative.Unit>.None;
+        public static MonadOr<_Unit_> None => MonadOr<_Unit_>.None;
 
         /// <summary>
         /// Obtains an instance of the <see cref="MonadOr{T}"/> class for the specified value.
@@ -50,13 +51,16 @@ namespace Edufun.Haskell.Templates
         public static MonadOr<T> Of<T>(T value)
             => MonadOr<T>.η(value);
 
-        /// <summary>
-        /// Removes one level of structure, projecting its bound value into the outer level.
-        /// </summary>
-        public static MonadOr<T> Flatten<T>(MonadOr<MonadOr<T>> square)
-            => MonadOr<T>.μ(square);
+        public static MonadOr<_Unit_> Guard(bool predicate) => predicate ? Unit : None;
 
-        public static MonadOr<Unit> Guard(bool predicate) => predicate ? Unit : None;
+        public static MonadOr<IEnumerable<TSource>> Repeat<TSource>(
+            MonadOr<TSource> source,
+            int count)
+        {
+            Require.NotNull(source, nameof(source));
+            Require.Range(count >= 1, nameof(count));
+            return source.Select(val => Enumerable.Repeat(val, count));
+        }
 
         #region Lift()
 
@@ -125,7 +129,13 @@ namespace Edufun.Haskell.Templates
     // T4: EmitExtensions().
     public static partial class MonadOr
     {
-        /// <seealso cref="Apply{TSource, TResult}" />
+        /// <summary>
+        /// Removes one level of structure, projecting its bound value into the outer level.
+        /// </summary>
+        public static MonadOr<T> Flatten<T>(this MonadOr<MonadOr<T>> @this)
+            => MonadOr<T>.μ(@this);
+
+        /// <seealso cref="Ap.Apply{TSource, TResult}" />
         public static MonadOr<TResult> Gather<TSource, TResult>(
             this MonadOr<TSource> @this,
             MonadOr<Func<TSource, TResult>> applicative)
@@ -133,24 +143,6 @@ namespace Edufun.Haskell.Templates
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(applicative, nameof(applicative));
             return applicative.Bind(func => @this.Select(func));
-        }
-
-        /// <seealso cref="Gather{TSource, TResult}" />
-        public static MonadOr<TResult> Apply<TSource, TResult>(
-            this MonadOr<Func<TSource, TResult>> @this,
-            MonadOr<TSource> value)
-        {
-            Require.NotNull(value, nameof(value));
-            return value.Gather(@this);
-        }
-
-        public static MonadOr<IEnumerable<TSource>> Repeat<TSource>(
-            this MonadOr<TSource> @this,
-            int count)
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.Range(count >= 1, nameof(count));
-            return @this.Select(val => Enumerable.Repeat(val, count));
         }
 
         public static MonadOr<TResult> ReplaceBy<TSource, TResult>(
@@ -174,56 +166,15 @@ namespace Edufun.Haskell.Templates
             MonadOr<TOther> other)
         {
             Require.NotNull(@this, nameof(@this));
-            Func<TSource, TOther, TSource> ignore = (arg, _) => arg;
+            Func<TSource, TOther, TSource> zipper = (arg, _) => arg;
 
-            return @this.Zip(other, ignore);
+            return @this.Zip(other, zipper);
         }
 
-        public static MonadOr<global::Narvalo.Applicative.Unit> Skip<TSource>(this MonadOr<TSource> @this)
+        public static MonadOr<_Unit_> Skip<TSource>(this MonadOr<TSource> @this)
         {
             Require.NotNull(@this, nameof(@this));
             return @this.ContinueWith(MonadOr.Unit);
-        }
-
-        public static MonadOr<TResult> If<TSource, TResult>(
-            this MonadOr<TSource> @this,
-            Func<TSource, bool> predicate,
-            MonadOr<TResult> thenResult)
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            return @this.Bind(val => predicate(val) ? thenResult : MonadOr<TResult>.None);
-        }
-
-        public static MonadOr<TResult> Coalesce<TSource, TResult>(
-            this MonadOr<TSource> @this,
-            Func<TSource, bool> predicate,
-            MonadOr<TResult> thenResult,
-            MonadOr<TResult> elseResult)
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            return @this.Bind(val => predicate(val) ? thenResult : elseResult);
-        }
-
-        public static MonadOr<TResult> Using<TSource, TResult>(
-            this MonadOr<TSource> @this,
-            Func<TSource, MonadOr<TResult>> selector)
-            where TSource : IDisposable
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(selector, nameof(selector));
-            return @this.Bind(val => { using (val) { return selector(val); } });
-        }
-
-        public static MonadOr<TResult> Using<TSource, TResult>(
-            this MonadOr<TSource> @this,
-            Func<TSource, TResult> selector)
-            where TSource : IDisposable
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(selector, nameof(selector));
-            return @this.Select(val => { using (val) { return selector(val); } });
         }
 
         #region Zip()
@@ -236,10 +187,10 @@ namespace Edufun.Haskell.Templates
             return @this.Zip(other, Tuple.Create);
         }
 
-        public static MonadOr<TResult> Zip<TFirst, TSecond, TResult>(
-            this MonadOr<TFirst> @this,
-            MonadOr<TSecond> second,
-            Func<TFirst, TSecond, TResult> zipper)
+        public static MonadOr<TResult> Zip<T1, T2, TResult>(
+            this MonadOr<T1> @this,
+            MonadOr<T2> second,
+            Func<T1, T2, TResult> zipper)
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(second, nameof(second));
@@ -312,7 +263,31 @@ namespace Edufun.Haskell.Templates
 
         #endregion
 
-        #region Query Expression Pattern.
+        #region Resource management
+
+        public static MonadOr<TResult> Using<TSource, TResult>(
+            this MonadOr<TSource> @this,
+            Func<TSource, MonadOr<TResult>> selector)
+            where TSource : IDisposable
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(selector, nameof(selector));
+            return @this.Bind(val => { using (val) { return selector(val); } });
+        }
+
+        public static MonadOr<TResult> Using<TSource, TResult>(
+            this MonadOr<TSource> @this,
+            Func<TSource, TResult> selector)
+            where TSource : IDisposable
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(selector, nameof(selector));
+            return @this.Select(val => { using (val) { return selector(val); } });
+        }
+
+        #endregion
+
+        #region Query Expression Pattern
 
         public static MonadOr<TResult> Select<TSource, TResult>(
             this MonadOr<TSource> @this,
@@ -332,7 +307,7 @@ namespace Edufun.Haskell.Templates
             return @this.Bind(val => predicate(val) ? MonadOr<TSource>.η(val) : MonadOr<TSource>.None);
         }
 
-        // Kind of generalisation of Zip{T1, T2, T3}.
+        // Generalizes both Bind() and Zip<T1, T2, TResult>().
         public static MonadOr<TResult> SelectMany<TSource, TMiddle, TResult>(
             this MonadOr<TSource> @this,
             Func<TSource, MonadOr<TMiddle>> valueSelector,
@@ -353,7 +328,7 @@ namespace Edufun.Haskell.Templates
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, TInner, TResult> resultSelector)
-            => JoinImpl(
+            => Join(
                 @this,
                 inner,
                 outerKeySelector,
@@ -368,13 +343,19 @@ namespace Edufun.Haskell.Templates
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, TInner, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
-            => JoinImpl(
-                @this,
-                inner,
-                outerKeySelector,
-                innerKeySelector,
-                resultSelector,
-                comparer ?? EqualityComparer<TKey>.Default);
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(inner, nameof(inner));
+            Require.NotNull(resultSelector, nameof(resultSelector));
+            Require.NotNull(outerKeySelector, nameof(outerKeySelector));
+            Require.NotNull(innerKeySelector, nameof(innerKeySelector));
+            Require.NotNull(comparer, nameof(comparer));
+
+            var keyLookup = GetKeyLookup(
+                inner, outerKeySelector, innerKeySelector, comparer ?? EqualityComparer<TKey>.Default);
+
+            return @this.SelectMany(val => keyLookup(val).ContinueWith(inner), resultSelector);
+        }
 
         public static MonadOr<TResult> GroupJoin<TSource, TInner, TKey, TResult>(
             this MonadOr<TSource> @this,
@@ -382,7 +363,7 @@ namespace Edufun.Haskell.Templates
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, MonadOr<TInner>, TResult> resultSelector)
-            => GroupJoinImpl(
+            => GroupJoin(
                 @this,
                 inner,
                 outerKeySelector,
@@ -397,52 +378,18 @@ namespace Edufun.Haskell.Templates
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, MonadOr<TInner>, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
-            => GroupJoinImpl(
-                @this,
-                inner,
-                outerKeySelector,
-                innerKeySelector,
-                resultSelector,
-                comparer ?? EqualityComparer<TKey>.Default);
-
-        private static MonadOr<TResult> JoinImpl<TSource, TInner, TKey, TResult>(
-            MonadOr<TSource> outer,
-            MonadOr<TInner> inner,
-            Func<TSource, TKey> outerKeySelector,
-            Func<TInner, TKey> innerKeySelector,
-            Func<TSource, TInner, TResult> resultSelector,
-            IEqualityComparer<TKey> comparer)
         {
-            Require.NotNull(outer, nameof(outer));
+            Require.NotNull(@this, nameof(@this));
             Require.NotNull(inner, nameof(inner));
             Require.NotNull(resultSelector, nameof(resultSelector));
             Require.NotNull(outerKeySelector, nameof(outerKeySelector));
             Require.NotNull(innerKeySelector, nameof(innerKeySelector));
             Require.NotNull(comparer, nameof(comparer));
 
-            var keyLookup = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
+            var keyLookup = GetKeyLookup(
+                inner, outerKeySelector, innerKeySelector, comparer ?? EqualityComparer<TKey>.Default);
 
-            return outer.SelectMany(val => keyLookup(val).ContinueWith(inner), resultSelector);
-        }
-
-        private static MonadOr<TResult> GroupJoinImpl<TSource, TInner, TKey, TResult>(
-            MonadOr<TSource> outer,
-            MonadOr<TInner> inner,
-            Func<TSource, TKey> outerKeySelector,
-            Func<TInner, TKey> innerKeySelector,
-            Func<TSource, MonadOr<TInner>, TResult> resultSelector,
-            IEqualityComparer<TKey> comparer)
-        {
-            Require.NotNull(outer, nameof(outer));
-            Require.NotNull(inner, nameof(inner));
-            Require.NotNull(resultSelector, nameof(resultSelector));
-            Require.NotNull(outerKeySelector, nameof(outerKeySelector));
-            Require.NotNull(innerKeySelector, nameof(innerKeySelector));
-            Require.NotNull(comparer, nameof(comparer));
-
-            var keyLookup = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
-
-            return outer.Select(val => resultSelector(val, keyLookup(val).ContinueWith(inner)));
+            return @this.Select(val => resultSelector(val, keyLookup(val).ContinueWith(inner)));
         }
 
         private static Func<TSource, MonadOr<TKey>> GetKeyLookup<TSource, TInner, TKey>(
@@ -463,7 +410,21 @@ namespace Edufun.Haskell.Templates
         #endregion
     }
 
-    // Provides extension methods for Func<T> in the Kleisli category.
+    // Provides extension methods for MonadOr<Func<TSource, TResult>>.
+    // T4: EmitApplicative().
+    public static partial class Ap
+    {
+        /// <seealso cref="MonadOr.Gather{TSource, TResult}" />
+        public static MonadOr<TResult> Apply<TSource, TResult>(
+            this MonadOr<Func<TSource, TResult>> @this,
+            MonadOr<TSource> value)
+        {
+            Require.NotNull(value, nameof(value));
+            return value.Gather(@this);
+        }
+    }
+
+    // Provides extension methods for functions in the Kleisli category.
     // T4: EmitKleisli().
     public static partial class Kleisli
     {

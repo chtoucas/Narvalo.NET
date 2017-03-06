@@ -10,6 +10,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using _Unit_ = global::Narvalo.Applicative.Unit;
+
 namespace Narvalo.Applicative
 {
     using System;
@@ -23,11 +25,14 @@ namespace Narvalo.Applicative
     // T4: EmitHelpers().
     public static partial class Either
     {
-        /// <summary>
-        /// Removes one level of structure, projecting its bound value into the outer level.
-        /// </summary>
-        public static Either<T, TRight> Flatten<T, TRight>(Either<Either<T, TRight>, TRight> square)
-            => Either<T, TRight>.μ(square);
+        public static Either<IEnumerable<TSource>, TRight> Repeat<TSource, TRight>(
+            Either<TSource, TRight> source,
+            int count)
+        {
+            Require.NotNull(source, nameof(source));
+            Require.Range(count >= 1, nameof(count));
+            return source.Select(val => Enumerable.Repeat(val, count));
+        }
 
         #region Lift()
 
@@ -96,7 +101,13 @@ namespace Narvalo.Applicative
     // T4: EmitExtensions().
     public static partial class Either
     {
-        /// <seealso cref="Apply{TSource, TResult, TRight}" />
+        /// <summary>
+        /// Removes one level of structure, projecting its bound value into the outer level.
+        /// </summary>
+        public static Either<T, TRight> Flatten<T, TRight>(this Either<Either<T, TRight>, TRight> @this)
+            => Either<T, TRight>.μ(@this);
+
+        /// <seealso cref="Ap.Apply{TSource, TResult, TRight}" />
         public static Either<TResult, TRight> Gather<TSource, TResult, TRight>(
             this Either<TSource, TRight> @this,
             Either<Func<TSource, TResult>, TRight> applicative)
@@ -104,24 +115,6 @@ namespace Narvalo.Applicative
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(applicative, nameof(applicative));
             return applicative.Bind(func => @this.Select(func));
-        }
-
-        /// <seealso cref="Gather{TSource, TResult, TRight}" />
-        public static Either<TResult, TRight> Apply<TSource, TResult, TRight>(
-            this Either<Func<TSource, TResult>, TRight> @this,
-            Either<TSource, TRight> value)
-        {
-            Require.NotNull(value, nameof(value));
-            return value.Gather(@this);
-        }
-
-        public static Either<IEnumerable<TSource>, TRight> Repeat<TSource, TRight>(
-            this Either<TSource, TRight> @this,
-            int count)
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.Range(count >= 1, nameof(count));
-            return @this.Select(val => Enumerable.Repeat(val, count));
         }
 
         public static Either<TResult, TRight> ReplaceBy<TSource, TResult, TRight>(
@@ -145,46 +138,15 @@ namespace Narvalo.Applicative
             Either<TOther, TRight> other)
         {
             Require.NotNull(@this, nameof(@this));
-            Func<TSource, TOther, TSource> ignore = (arg, _) => arg;
+            Func<TSource, TOther, TSource> zipper = (arg, _) => arg;
 
-            return @this.Zip(other, ignore);
+            return @this.Zip(other, zipper);
         }
 
-        public static Either<global::Narvalo.Applicative.Unit, TRight> Skip<TSource, TRight>(this Either<TSource, TRight> @this)
+        public static Either<_Unit_, TRight> Skip<TSource, TRight>(this Either<TSource, TRight> @this)
         {
             Require.NotNull(@this, nameof(@this));
-            return @this.ReplaceBy(global::Narvalo.Applicative.Unit.Default);
-        }
-
-        public static Either<TResult, TRight> Coalesce<TSource, TResult, TRight>(
-            this Either<TSource, TRight> @this,
-            Func<TSource, bool> predicate,
-            Either<TResult, TRight> thenResult,
-            Either<TResult, TRight> elseResult)
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            return @this.Bind(val => predicate(val) ? thenResult : elseResult);
-        }
-
-        public static Either<TResult, TRight> Using<TSource, TResult, TRight>(
-            this Either<TSource, TRight> @this,
-            Func<TSource, Either<TResult, TRight>> selector)
-            where TSource : IDisposable
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(selector, nameof(selector));
-            return @this.Bind(val => { using (val) { return selector(val); } });
-        }
-
-        public static Either<TResult, TRight> Using<TSource, TResult, TRight>(
-            this Either<TSource, TRight> @this,
-            Func<TSource, TResult> selector)
-            where TSource : IDisposable
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(selector, nameof(selector));
-            return @this.Select(val => { using (val) { return selector(val); } });
+            return @this.ReplaceBy(_Unit_.Default);
         }
 
         #region Zip()
@@ -197,10 +159,10 @@ namespace Narvalo.Applicative
             return @this.Zip(other, Tuple.Create);
         }
 
-        public static Either<TResult, TRight> Zip<TFirst, TSecond, TResult, TRight>(
-            this Either<TFirst, TRight> @this,
-            Either<TSecond, TRight> second,
-            Func<TFirst, TSecond, TResult> zipper)
+        public static Either<TResult, TRight> Zip<T1, T2, TResult, TRight>(
+            this Either<T1, TRight> @this,
+            Either<T2, TRight> second,
+            Func<T1, T2, TResult> zipper)
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(second, nameof(second));
@@ -273,7 +235,31 @@ namespace Narvalo.Applicative
 
         #endregion
 
-        #region Query Expression Pattern.
+        #region Resource management
+
+        public static Either<TResult, TRight> Using<TSource, TResult, TRight>(
+            this Either<TSource, TRight> @this,
+            Func<TSource, Either<TResult, TRight>> selector)
+            where TSource : IDisposable
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(selector, nameof(selector));
+            return @this.Bind(val => { using (val) { return selector(val); } });
+        }
+
+        public static Either<TResult, TRight> Using<TSource, TResult, TRight>(
+            this Either<TSource, TRight> @this,
+            Func<TSource, TResult> selector)
+            where TSource : IDisposable
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(selector, nameof(selector));
+            return @this.Select(val => { using (val) { return selector(val); } });
+        }
+
+        #endregion
+
+        #region Query Expression Pattern
 
         public static Either<TResult, TRight> Select<TSource, TResult, TRight>(
             this Either<TSource, TRight> @this,
@@ -284,7 +270,7 @@ namespace Narvalo.Applicative
             return @this.Bind(val => Either<TResult, TRight>.OfLeft(selector(val)));
         }
 
-        // Kind of generalisation of Zip{T1, T2, T3}.
+        // Generalizes both Bind() and Zip<T1, T2, TResult>().
         public static Either<TResult, TRight> SelectMany<TSource, TMiddle, TResult, TRight>(
             this Either<TSource, TRight> @this,
             Func<TSource, Either<TMiddle, TRight>> valueSelector,
@@ -302,7 +288,21 @@ namespace Narvalo.Applicative
         #endregion
     }
 
-    // Provides extension methods for Func<T> in the Kleisli category.
+    // Provides extension methods for Either<Func<TSource, TResult>, TRight>.
+    // T4: EmitApplicative().
+    public static partial class Ap
+    {
+        /// <seealso cref="Either.Gather{TSource, TResult, TRight}" />
+        public static Either<TResult, TRight> Apply<TSource, TResult, TRight>(
+            this Either<Func<TSource, TResult>, TRight> @this,
+            Either<TSource, TRight> value)
+        {
+            Require.NotNull(value, nameof(value));
+            return value.Gather(@this);
+        }
+    }
+
+    // Provides extension methods for functions in the Kleisli category.
     // T4: EmitKleisli().
     public static partial class Kleisli
     {

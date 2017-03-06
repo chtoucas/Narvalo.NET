@@ -10,6 +10,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using _Unit_ = global::Narvalo.Applicative.Unit;
+
 namespace Narvalo.Applicative
 {
     using System;
@@ -26,12 +28,12 @@ namespace Narvalo.Applicative
         /// <summary>
         /// The unique object of type <c>Ident&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly Ident<global::Narvalo.Applicative.Unit> s_Unit = Of(global::Narvalo.Applicative.Unit.Default);
+        private static readonly Ident<_Unit_> s_Unit = Of(_Unit_.Default);
 
         /// <summary>
         /// Gets the unique object of type <c>Ident&lt;Unit&gt;</c>.
         /// </summary>
-        public static Ident<global::Narvalo.Applicative.Unit> Unit => s_Unit;
+        public static Ident<_Unit_> Unit => s_Unit;
 
         /// <summary>
         /// Obtains an instance of the <see cref="Ident{T}"/> class for the specified value.
@@ -42,11 +44,14 @@ namespace Narvalo.Applicative
         public static Ident<T> Of<T>(T value)
             => Ident<T>.η(value);
 
-        /// <summary>
-        /// Removes one level of structure, projecting its bound value into the outer level.
-        /// </summary>
-        public static Ident<T> Flatten<T>(Ident<Ident<T>> square)
-            => Ident<T>.μ(square);
+        public static Ident<IEnumerable<TSource>> Repeat<TSource>(
+            Ident<TSource> source,
+            int count)
+        {
+            /* T4: NotNull(source) */
+            Require.Range(count >= 1, nameof(count));
+            return source.Select(val => Enumerable.Repeat(val, count));
+        }
 
         #region Lift()
 
@@ -115,7 +120,13 @@ namespace Narvalo.Applicative
     // T4: EmitExtensions().
     public static partial class Ident
     {
-        /// <seealso cref="Apply{TSource, TResult}" />
+        /// <summary>
+        /// Removes one level of structure, projecting its bound value into the outer level.
+        /// </summary>
+        public static Ident<T> Flatten<T>(this Ident<Ident<T>> @this)
+            => Ident<T>.μ(@this);
+
+        /// <seealso cref="Ap.Apply{TSource, TResult}" />
         public static Ident<TResult> Gather<TSource, TResult>(
             this Ident<TSource> @this,
             Ident<Func<TSource, TResult>> applicative)
@@ -123,24 +134,6 @@ namespace Narvalo.Applicative
             /* T4: NotNull(@this) */
             /* T4: NotNull(applicative) */
             return applicative.Bind(func => @this.Select(func));
-        }
-
-        /// <seealso cref="Gather{TSource, TResult}" />
-        public static Ident<TResult> Apply<TSource, TResult>(
-            this Ident<Func<TSource, TResult>> @this,
-            Ident<TSource> value)
-        {
-            /* T4: NotNull(value) */
-            return value.Gather(@this);
-        }
-
-        public static Ident<IEnumerable<TSource>> Repeat<TSource>(
-            this Ident<TSource> @this,
-            int count)
-        {
-            /* T4: NotNull(@this) */
-            Require.Range(count >= 1, nameof(count));
-            return @this.Select(val => Enumerable.Repeat(val, count));
         }
 
         public static Ident<TResult> ReplaceBy<TSource, TResult>(
@@ -164,46 +157,15 @@ namespace Narvalo.Applicative
             Ident<TOther> other)
         {
             /* T4: NotNull(@this) */
-            Func<TSource, TOther, TSource> ignore = (arg, _) => arg;
+            Func<TSource, TOther, TSource> zipper = (arg, _) => arg;
 
-            return @this.Zip(other, ignore);
+            return @this.Zip(other, zipper);
         }
 
-        public static Ident<global::Narvalo.Applicative.Unit> Skip<TSource>(this Ident<TSource> @this)
+        public static Ident<_Unit_> Skip<TSource>(this Ident<TSource> @this)
         {
             /* T4: NotNull(@this) */
             return @this.ContinueWith(Ident.Unit);
-        }
-
-        public static Ident<TResult> Coalesce<TSource, TResult>(
-            this Ident<TSource> @this,
-            Func<TSource, bool> predicate,
-            Ident<TResult> thenResult,
-            Ident<TResult> elseResult)
-        {
-            /* T4: NotNull(@this) */
-            Require.NotNull(predicate, nameof(predicate));
-            return @this.Bind(val => predicate(val) ? thenResult : elseResult);
-        }
-
-        public static Ident<TResult> Using<TSource, TResult>(
-            this Ident<TSource> @this,
-            Func<TSource, Ident<TResult>> selector)
-            where TSource : IDisposable
-        {
-            /* T4: NotNull(@this) */
-            Require.NotNull(selector, nameof(selector));
-            return @this.Bind(val => { using (val) { return selector(val); } });
-        }
-
-        public static Ident<TResult> Using<TSource, TResult>(
-            this Ident<TSource> @this,
-            Func<TSource, TResult> selector)
-            where TSource : IDisposable
-        {
-            /* T4: NotNull(@this) */
-            Require.NotNull(selector, nameof(selector));
-            return @this.Select(val => { using (val) { return selector(val); } });
         }
 
         #region Zip()
@@ -216,10 +178,10 @@ namespace Narvalo.Applicative
             return @this.Zip(other, Tuple.Create);
         }
 
-        public static Ident<TResult> Zip<TFirst, TSecond, TResult>(
-            this Ident<TFirst> @this,
-            Ident<TSecond> second,
-            Func<TFirst, TSecond, TResult> zipper)
+        public static Ident<TResult> Zip<T1, T2, TResult>(
+            this Ident<T1> @this,
+            Ident<T2> second,
+            Func<T1, T2, TResult> zipper)
         {
             /* T4: NotNull(@this) */
             /* T4: NotNull(second) */
@@ -292,7 +254,31 @@ namespace Narvalo.Applicative
 
         #endregion
 
-        #region Query Expression Pattern.
+        #region Resource management
+
+        public static Ident<TResult> Using<TSource, TResult>(
+            this Ident<TSource> @this,
+            Func<TSource, Ident<TResult>> selector)
+            where TSource : IDisposable
+        {
+            /* T4: NotNull(@this) */
+            Require.NotNull(selector, nameof(selector));
+            return @this.Bind(val => { using (val) { return selector(val); } });
+        }
+
+        public static Ident<TResult> Using<TSource, TResult>(
+            this Ident<TSource> @this,
+            Func<TSource, TResult> selector)
+            where TSource : IDisposable
+        {
+            /* T4: NotNull(@this) */
+            Require.NotNull(selector, nameof(selector));
+            return @this.Select(val => { using (val) { return selector(val); } });
+        }
+
+        #endregion
+
+        #region Query Expression Pattern
 
         public static Ident<TResult> Select<TSource, TResult>(
             this Ident<TSource> @this,
@@ -303,7 +289,7 @@ namespace Narvalo.Applicative
             return @this.Bind(val => Ident<TResult>.η(selector(val)));
         }
 
-        // Kind of generalisation of Zip{T1, T2, T3}.
+        // Generalizes both Bind() and Zip<T1, T2, TResult>().
         public static Ident<TResult> SelectMany<TSource, TMiddle, TResult>(
             this Ident<TSource> @this,
             Func<TSource, Ident<TMiddle>> valueSelector,
@@ -321,7 +307,21 @@ namespace Narvalo.Applicative
         #endregion
     }
 
-    // Provides extension methods for Func<T> in the Kleisli category.
+    // Provides extension methods for Ident<Func<TSource, TResult>>.
+    // T4: EmitApplicative().
+    public static partial class Ap
+    {
+        /// <seealso cref="Ident.Gather{TSource, TResult}" />
+        public static Ident<TResult> Apply<TSource, TResult>(
+            this Ident<Func<TSource, TResult>> @this,
+            Ident<TSource> value)
+        {
+            /* T4: NotNull(value) */
+            return value.Gather(@this);
+        }
+    }
+
+    // Provides extension methods for functions in the Kleisli category.
     // T4: EmitKleisli().
     public static partial class Kleisli
     {
@@ -418,27 +418,18 @@ namespace Narvalo.Internal
 
 namespace Narvalo.Applicative
 {
-    // Implements core Comonad methods.
-    // T4: EmitComonadCore().
+    // T4: EmitComonadHelpers().
     public static partial class Ident
     {
         /// <remarks>
         /// Named <c>extract</c> in Haskell parlance.
         /// </remarks>
-        public static T Extract<T>(Ident<T> value)
-        {
-
-            return Ident<T>.ε(value);
-        }
+        public static T Extract<T>(Ident<T> value) => Ident<T>.ε(value);
 
         /// <remarks>
         /// Named <c>duplicate</c> in Haskell parlance.
         /// </remarks>
-        public static Ident<Ident<T>> Duplicate<T>(Ident<T> value)
-        {
-
-            return Ident<T>.δ(value);
-        }
+        public static Ident<Ident<T>> Duplicate<T>(Ident<T> value) => Ident<T>.δ(value);
     }
 }
 

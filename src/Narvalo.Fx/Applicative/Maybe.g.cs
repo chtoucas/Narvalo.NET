@@ -10,6 +10,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using _Unit_ = global::Narvalo.Applicative.Unit;
+
 namespace Narvalo.Applicative
 {
     using System;
@@ -26,17 +28,17 @@ namespace Narvalo.Applicative
         /// <summary>
         /// The unique object of type <c>Maybe&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly Maybe<global::Narvalo.Applicative.Unit> s_Unit = Of(global::Narvalo.Applicative.Unit.Default);
+        private static readonly Maybe<_Unit_> s_Unit = Of(_Unit_.Default);
 
         /// <summary>
         /// Gets the unique object of type <c>Maybe&lt;Unit&gt;</c>.
         /// </summary>
-        public static Maybe<global::Narvalo.Applicative.Unit> Unit => s_Unit;
+        public static Maybe<_Unit_> Unit => s_Unit;
 
         /// <summary>
         /// Gets the zero for <see cref="Maybe{T}.Bind"/>.
         /// </summary>
-        public static Maybe<global::Narvalo.Applicative.Unit> None => Maybe<global::Narvalo.Applicative.Unit>.None;
+        public static Maybe<_Unit_> None => Maybe<_Unit_>.None;
 
         /// <summary>
         /// Obtains an instance of the <see cref="Maybe{T}"/> class for the specified value.
@@ -47,13 +49,16 @@ namespace Narvalo.Applicative
         public static Maybe<T> Of<T>(T value)
             => Maybe<T>.η(value);
 
-        /// <summary>
-        /// Removes one level of structure, projecting its bound value into the outer level.
-        /// </summary>
-        public static Maybe<T> Flatten<T>(Maybe<Maybe<T>> square)
-            => Maybe<T>.μ(square);
+        public static Maybe<_Unit_> Guard(bool predicate) => predicate ? Unit : None;
 
-        public static Maybe<Unit> Guard(bool predicate) => predicate ? Unit : None;
+        public static Maybe<IEnumerable<TSource>> Repeat<TSource>(
+            Maybe<TSource> source,
+            int count)
+        {
+            /* T4: NotNull(source) */
+            Require.Range(count >= 1, nameof(count));
+            return source.Select(val => Enumerable.Repeat(val, count));
+        }
 
         #region Lift()
 
@@ -122,7 +127,13 @@ namespace Narvalo.Applicative
     // T4: EmitExtensions().
     public static partial class Maybe
     {
-        /// <seealso cref="Apply{TSource, TResult}" />
+        /// <summary>
+        /// Removes one level of structure, projecting its bound value into the outer level.
+        /// </summary>
+        public static Maybe<T> Flatten<T>(this Maybe<Maybe<T>> @this)
+            => Maybe<T>.μ(@this);
+
+        /// <seealso cref="Ap.Apply{TSource, TResult}" />
         public static Maybe<TResult> Gather<TSource, TResult>(
             this Maybe<TSource> @this,
             Maybe<Func<TSource, TResult>> applicative)
@@ -130,24 +141,6 @@ namespace Narvalo.Applicative
             /* T4: NotNull(@this) */
             /* T4: NotNull(applicative) */
             return applicative.Bind(func => @this.Select(func));
-        }
-
-        /// <seealso cref="Gather{TSource, TResult}" />
-        public static Maybe<TResult> Apply<TSource, TResult>(
-            this Maybe<Func<TSource, TResult>> @this,
-            Maybe<TSource> value)
-        {
-            /* T4: NotNull(value) */
-            return value.Gather(@this);
-        }
-
-        public static Maybe<IEnumerable<TSource>> Repeat<TSource>(
-            this Maybe<TSource> @this,
-            int count)
-        {
-            /* T4: NotNull(@this) */
-            Require.Range(count >= 1, nameof(count));
-            return @this.Select(val => Enumerable.Repeat(val, count));
         }
 
         public static Maybe<TResult> ReplaceBy<TSource, TResult>(
@@ -171,56 +164,15 @@ namespace Narvalo.Applicative
             Maybe<TOther> other)
         {
             /* T4: NotNull(@this) */
-            Func<TSource, TOther, TSource> ignore = (arg, _) => arg;
+            Func<TSource, TOther, TSource> zipper = (arg, _) => arg;
 
-            return @this.Zip(other, ignore);
+            return @this.Zip(other, zipper);
         }
 
-        public static Maybe<global::Narvalo.Applicative.Unit> Skip<TSource>(this Maybe<TSource> @this)
+        public static Maybe<_Unit_> Skip<TSource>(this Maybe<TSource> @this)
         {
             /* T4: NotNull(@this) */
             return @this.ContinueWith(Maybe.Unit);
-        }
-
-        public static Maybe<TResult> If<TSource, TResult>(
-            this Maybe<TSource> @this,
-            Func<TSource, bool> predicate,
-            Maybe<TResult> thenResult)
-        {
-            /* T4: NotNull(@this) */
-            Require.NotNull(predicate, nameof(predicate));
-            return @this.Bind(val => predicate(val) ? thenResult : Maybe<TResult>.None);
-        }
-
-        public static Maybe<TResult> Coalesce<TSource, TResult>(
-            this Maybe<TSource> @this,
-            Func<TSource, bool> predicate,
-            Maybe<TResult> thenResult,
-            Maybe<TResult> elseResult)
-        {
-            /* T4: NotNull(@this) */
-            Require.NotNull(predicate, nameof(predicate));
-            return @this.Bind(val => predicate(val) ? thenResult : elseResult);
-        }
-
-        public static Maybe<TResult> Using<TSource, TResult>(
-            this Maybe<TSource> @this,
-            Func<TSource, Maybe<TResult>> selector)
-            where TSource : IDisposable
-        {
-            /* T4: NotNull(@this) */
-            Require.NotNull(selector, nameof(selector));
-            return @this.Bind(val => { using (val) { return selector(val); } });
-        }
-
-        public static Maybe<TResult> Using<TSource, TResult>(
-            this Maybe<TSource> @this,
-            Func<TSource, TResult> selector)
-            where TSource : IDisposable
-        {
-            /* T4: NotNull(@this) */
-            Require.NotNull(selector, nameof(selector));
-            return @this.Select(val => { using (val) { return selector(val); } });
         }
 
         #region Zip()
@@ -233,10 +185,10 @@ namespace Narvalo.Applicative
             return @this.Zip(other, Tuple.Create);
         }
 
-        public static Maybe<TResult> Zip<TFirst, TSecond, TResult>(
-            this Maybe<TFirst> @this,
-            Maybe<TSecond> second,
-            Func<TFirst, TSecond, TResult> zipper)
+        public static Maybe<TResult> Zip<T1, T2, TResult>(
+            this Maybe<T1> @this,
+            Maybe<T2> second,
+            Func<T1, T2, TResult> zipper)
         {
             /* T4: NotNull(@this) */
             /* T4: NotNull(second) */
@@ -309,7 +261,31 @@ namespace Narvalo.Applicative
 
         #endregion
 
-        #region Query Expression Pattern.
+        #region Resource management
+
+        public static Maybe<TResult> Using<TSource, TResult>(
+            this Maybe<TSource> @this,
+            Func<TSource, Maybe<TResult>> selector)
+            where TSource : IDisposable
+        {
+            /* T4: NotNull(@this) */
+            Require.NotNull(selector, nameof(selector));
+            return @this.Bind(val => { using (val) { return selector(val); } });
+        }
+
+        public static Maybe<TResult> Using<TSource, TResult>(
+            this Maybe<TSource> @this,
+            Func<TSource, TResult> selector)
+            where TSource : IDisposable
+        {
+            /* T4: NotNull(@this) */
+            Require.NotNull(selector, nameof(selector));
+            return @this.Select(val => { using (val) { return selector(val); } });
+        }
+
+        #endregion
+
+        #region Query Expression Pattern
 
         public static Maybe<TResult> Select<TSource, TResult>(
             this Maybe<TSource> @this,
@@ -329,7 +305,7 @@ namespace Narvalo.Applicative
             return @this.Bind(val => predicate(val) ? Maybe<TSource>.η(val) : Maybe<TSource>.None);
         }
 
-        // Kind of generalisation of Zip{T1, T2, T3}.
+        // Generalizes both Bind() and Zip<T1, T2, TResult>().
         public static Maybe<TResult> SelectMany<TSource, TMiddle, TResult>(
             this Maybe<TSource> @this,
             Func<TSource, Maybe<TMiddle>> valueSelector,
@@ -350,7 +326,7 @@ namespace Narvalo.Applicative
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, TInner, TResult> resultSelector)
-            => JoinImpl(
+            => Join(
                 @this,
                 inner,
                 outerKeySelector,
@@ -365,13 +341,19 @@ namespace Narvalo.Applicative
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, TInner, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
-            => JoinImpl(
-                @this,
-                inner,
-                outerKeySelector,
-                innerKeySelector,
-                resultSelector,
-                comparer ?? EqualityComparer<TKey>.Default);
+        {
+            /* T4: NotNull(@this) */
+            /* T4: NotNull(inner) */
+            Require.NotNull(resultSelector, nameof(resultSelector));
+            Require.NotNull(outerKeySelector, nameof(outerKeySelector));
+            Require.NotNull(innerKeySelector, nameof(innerKeySelector));
+            Require.NotNull(comparer, nameof(comparer));
+
+            var keyLookup = GetKeyLookup(
+                inner, outerKeySelector, innerKeySelector, comparer ?? EqualityComparer<TKey>.Default);
+
+            return @this.SelectMany(val => keyLookup(val).ContinueWith(inner), resultSelector);
+        }
 
         public static Maybe<TResult> GroupJoin<TSource, TInner, TKey, TResult>(
             this Maybe<TSource> @this,
@@ -379,7 +361,7 @@ namespace Narvalo.Applicative
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, Maybe<TInner>, TResult> resultSelector)
-            => GroupJoinImpl(
+            => GroupJoin(
                 @this,
                 inner,
                 outerKeySelector,
@@ -394,52 +376,18 @@ namespace Narvalo.Applicative
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, Maybe<TInner>, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
-            => GroupJoinImpl(
-                @this,
-                inner,
-                outerKeySelector,
-                innerKeySelector,
-                resultSelector,
-                comparer ?? EqualityComparer<TKey>.Default);
-
-        private static Maybe<TResult> JoinImpl<TSource, TInner, TKey, TResult>(
-            Maybe<TSource> outer,
-            Maybe<TInner> inner,
-            Func<TSource, TKey> outerKeySelector,
-            Func<TInner, TKey> innerKeySelector,
-            Func<TSource, TInner, TResult> resultSelector,
-            IEqualityComparer<TKey> comparer)
         {
-            /* T4: NotNull(outer) */
+            /* T4: NotNull(@this) */
             /* T4: NotNull(inner) */
             Require.NotNull(resultSelector, nameof(resultSelector));
             Require.NotNull(outerKeySelector, nameof(outerKeySelector));
             Require.NotNull(innerKeySelector, nameof(innerKeySelector));
             Require.NotNull(comparer, nameof(comparer));
 
-            var keyLookup = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
+            var keyLookup = GetKeyLookup(
+                inner, outerKeySelector, innerKeySelector, comparer ?? EqualityComparer<TKey>.Default);
 
-            return outer.SelectMany(val => keyLookup(val).ContinueWith(inner), resultSelector);
-        }
-
-        private static Maybe<TResult> GroupJoinImpl<TSource, TInner, TKey, TResult>(
-            Maybe<TSource> outer,
-            Maybe<TInner> inner,
-            Func<TSource, TKey> outerKeySelector,
-            Func<TInner, TKey> innerKeySelector,
-            Func<TSource, Maybe<TInner>, TResult> resultSelector,
-            IEqualityComparer<TKey> comparer)
-        {
-            /* T4: NotNull(outer) */
-            /* T4: NotNull(inner) */
-            Require.NotNull(resultSelector, nameof(resultSelector));
-            Require.NotNull(outerKeySelector, nameof(outerKeySelector));
-            Require.NotNull(innerKeySelector, nameof(innerKeySelector));
-            Require.NotNull(comparer, nameof(comparer));
-
-            var keyLookup = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
-
-            return outer.Select(val => resultSelector(val, keyLookup(val).ContinueWith(inner)));
+            return @this.Select(val => resultSelector(val, keyLookup(val).ContinueWith(inner)));
         }
 
         private static Func<TSource, Maybe<TKey>> GetKeyLookup<TSource, TInner, TKey>(
@@ -459,7 +407,21 @@ namespace Narvalo.Applicative
         #endregion
     }
 
-    // Provides extension methods for Func<T> in the Kleisli category.
+    // Provides extension methods for Maybe<Func<TSource, TResult>>.
+    // T4: EmitApplicative().
+    public static partial class Ap
+    {
+        /// <seealso cref="Maybe.Gather{TSource, TResult}" />
+        public static Maybe<TResult> Apply<TSource, TResult>(
+            this Maybe<Func<TSource, TResult>> @this,
+            Maybe<TSource> value)
+        {
+            /* T4: NotNull(value) */
+            return value.Gather(@this);
+        }
+    }
+
+    // Provides extension methods for functions in the Kleisli category.
     // T4: EmitKleisli().
     public static partial class Kleisli
     {

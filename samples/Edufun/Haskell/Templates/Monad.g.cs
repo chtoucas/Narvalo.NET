@@ -10,8 +10,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using global::Narvalo;
-using global::Narvalo.Applicative;
+using Demand = global::Narvalo.Demand;
+using Require = global::Narvalo.Require;
+using _Unit_ = global::Narvalo.Applicative.Unit;
 
 namespace Edufun.Haskell.Templates
 {
@@ -29,12 +30,12 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// The unique object of type <c>Monad&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly Monad<global::Narvalo.Applicative.Unit> s_Unit = Of(global::Narvalo.Applicative.Unit.Default);
+        private static readonly Monad<_Unit_> s_Unit = Of(_Unit_.Default);
 
         /// <summary>
         /// Gets the unique object of type <c>Monad&lt;Unit&gt;</c>.
         /// </summary>
-        public static Monad<global::Narvalo.Applicative.Unit> Unit => s_Unit;
+        public static Monad<_Unit_> Unit => s_Unit;
 
         /// <summary>
         /// Obtains an instance of the <see cref="Monad{T}"/> class for the specified value.
@@ -45,11 +46,14 @@ namespace Edufun.Haskell.Templates
         public static Monad<T> Of<T>(T value)
             => Monad<T>.η(value);
 
-        /// <summary>
-        /// Removes one level of structure, projecting its bound value into the outer level.
-        /// </summary>
-        public static Monad<T> Flatten<T>(Monad<Monad<T>> square)
-            => Monad<T>.μ(square);
+        public static Monad<IEnumerable<TSource>> Repeat<TSource>(
+            Monad<TSource> source,
+            int count)
+        {
+            Require.NotNull(source, nameof(source));
+            Require.Range(count >= 1, nameof(count));
+            return source.Select(val => Enumerable.Repeat(val, count));
+        }
 
         #region Lift()
 
@@ -118,7 +122,13 @@ namespace Edufun.Haskell.Templates
     // T4: EmitExtensions().
     public static partial class Monad
     {
-        /// <seealso cref="Apply{TSource, TResult}" />
+        /// <summary>
+        /// Removes one level of structure, projecting its bound value into the outer level.
+        /// </summary>
+        public static Monad<T> Flatten<T>(this Monad<Monad<T>> @this)
+            => Monad<T>.μ(@this);
+
+        /// <seealso cref="Ap.Apply{TSource, TResult}" />
         public static Monad<TResult> Gather<TSource, TResult>(
             this Monad<TSource> @this,
             Monad<Func<TSource, TResult>> applicative)
@@ -126,24 +136,6 @@ namespace Edufun.Haskell.Templates
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(applicative, nameof(applicative));
             return applicative.Bind(func => @this.Select(func));
-        }
-
-        /// <seealso cref="Gather{TSource, TResult}" />
-        public static Monad<TResult> Apply<TSource, TResult>(
-            this Monad<Func<TSource, TResult>> @this,
-            Monad<TSource> value)
-        {
-            Require.NotNull(value, nameof(value));
-            return value.Gather(@this);
-        }
-
-        public static Monad<IEnumerable<TSource>> Repeat<TSource>(
-            this Monad<TSource> @this,
-            int count)
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.Range(count >= 1, nameof(count));
-            return @this.Select(val => Enumerable.Repeat(val, count));
         }
 
         public static Monad<TResult> ReplaceBy<TSource, TResult>(
@@ -167,46 +159,15 @@ namespace Edufun.Haskell.Templates
             Monad<TOther> other)
         {
             Require.NotNull(@this, nameof(@this));
-            Func<TSource, TOther, TSource> ignore = (arg, _) => arg;
+            Func<TSource, TOther, TSource> zipper = (arg, _) => arg;
 
-            return @this.Zip(other, ignore);
+            return @this.Zip(other, zipper);
         }
 
-        public static Monad<global::Narvalo.Applicative.Unit> Skip<TSource>(this Monad<TSource> @this)
+        public static Monad<_Unit_> Skip<TSource>(this Monad<TSource> @this)
         {
             Require.NotNull(@this, nameof(@this));
             return @this.ContinueWith(Monad.Unit);
-        }
-
-        public static Monad<TResult> Coalesce<TSource, TResult>(
-            this Monad<TSource> @this,
-            Func<TSource, bool> predicate,
-            Monad<TResult> thenResult,
-            Monad<TResult> elseResult)
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-            return @this.Bind(val => predicate(val) ? thenResult : elseResult);
-        }
-
-        public static Monad<TResult> Using<TSource, TResult>(
-            this Monad<TSource> @this,
-            Func<TSource, Monad<TResult>> selector)
-            where TSource : IDisposable
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(selector, nameof(selector));
-            return @this.Bind(val => { using (val) { return selector(val); } });
-        }
-
-        public static Monad<TResult> Using<TSource, TResult>(
-            this Monad<TSource> @this,
-            Func<TSource, TResult> selector)
-            where TSource : IDisposable
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(selector, nameof(selector));
-            return @this.Select(val => { using (val) { return selector(val); } });
         }
 
         #region Zip()
@@ -219,10 +180,10 @@ namespace Edufun.Haskell.Templates
             return @this.Zip(other, Tuple.Create);
         }
 
-        public static Monad<TResult> Zip<TFirst, TSecond, TResult>(
-            this Monad<TFirst> @this,
-            Monad<TSecond> second,
-            Func<TFirst, TSecond, TResult> zipper)
+        public static Monad<TResult> Zip<T1, T2, TResult>(
+            this Monad<T1> @this,
+            Monad<T2> second,
+            Func<T1, T2, TResult> zipper)
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(second, nameof(second));
@@ -295,7 +256,31 @@ namespace Edufun.Haskell.Templates
 
         #endregion
 
-        #region Query Expression Pattern.
+        #region Resource management
+
+        public static Monad<TResult> Using<TSource, TResult>(
+            this Monad<TSource> @this,
+            Func<TSource, Monad<TResult>> selector)
+            where TSource : IDisposable
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(selector, nameof(selector));
+            return @this.Bind(val => { using (val) { return selector(val); } });
+        }
+
+        public static Monad<TResult> Using<TSource, TResult>(
+            this Monad<TSource> @this,
+            Func<TSource, TResult> selector)
+            where TSource : IDisposable
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(selector, nameof(selector));
+            return @this.Select(val => { using (val) { return selector(val); } });
+        }
+
+        #endregion
+
+        #region Query Expression Pattern
 
         public static Monad<TResult> Select<TSource, TResult>(
             this Monad<TSource> @this,
@@ -306,7 +291,7 @@ namespace Edufun.Haskell.Templates
             return @this.Bind(val => Monad<TResult>.η(selector(val)));
         }
 
-        // Kind of generalisation of Zip{T1, T2, T3}.
+        // Generalizes both Bind() and Zip<T1, T2, TResult>().
         public static Monad<TResult> SelectMany<TSource, TMiddle, TResult>(
             this Monad<TSource> @this,
             Func<TSource, Monad<TMiddle>> valueSelector,
@@ -324,7 +309,21 @@ namespace Edufun.Haskell.Templates
         #endregion
     }
 
-    // Provides extension methods for Func<T> in the Kleisli category.
+    // Provides extension methods for Monad<Func<TSource, TResult>>.
+    // T4: EmitApplicative().
+    public static partial class Ap
+    {
+        /// <seealso cref="Monad.Gather{TSource, TResult}" />
+        public static Monad<TResult> Apply<TSource, TResult>(
+            this Monad<Func<TSource, TResult>> @this,
+            Monad<TSource> value)
+        {
+            Require.NotNull(value, nameof(value));
+            return value.Gather(@this);
+        }
+    }
+
+    // Provides extension methods for functions in the Kleisli category.
     // T4: EmitKleisli().
     public static partial class Kleisli
     {
