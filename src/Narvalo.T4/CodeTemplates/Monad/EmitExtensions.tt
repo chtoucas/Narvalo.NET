@@ -66,10 +66,18 @@ public partial class MonadTemplate
 
         #region Zip()
 
-        public static <#= Name #><TResult<#= RTDecl #>> Zip<TFirst, TSecond, TResult<#= RTDecl #>>(
-            this <#= Name #><TFirst<#= RTDecl #>> @this,
-            <#= Name #><TSecond<#= RTDecl #>> second,
-            Func<TFirst, TSecond, TResult> zipper)
+        public static <#= Name #><Tuple<TSource, TOther><#= RTDecl #>> Zip<TSource, TOther<#= RTDecl #>>(
+            this <#= Name #><TSource<#= RTDecl #>> @this,
+            <#= Name #><TOther<#= RTDecl #>> other)
+        {
+            <#+ WriteNotNull(); #>
+            return @this.Zip(other, Tuple.Create);
+        }
+
+        public static <#= Name #><TResult<#= RTDecl #>> Zip<T1, T2, TResult<#= RTDecl #>>(
+            this <#= Name #><T1<#= RTDecl #>> @this,
+            <#= Name #><T2<#= RTDecl #>> second,
+            Func<T1, T2, TResult> zipper)
         {
             <#+ WriteNotNull(); #>
             <#+ WriteNotNull("second"); #>
@@ -80,7 +88,7 @@ public partial class MonadTemplate
                 arg1 => second.Select(
                     arg2 => zipper(arg1, arg2)));
 <#+ } else { #>
-            Func<TFirst, Func<TSecond, TResult>> selector
+            Func<T1, Func<T2, TResult>> selector
                 = arg1 => arg2 => zipper(arg1, arg2);
 
             return second.Gather(
@@ -180,6 +188,30 @@ public partial class MonadTemplate
 
         #endregion
 
+        #region Resource management
+
+        public static <#= Name #><TResult<#= RTDecl #>> Using<TSource, TResult<#= RTDecl #>>(
+            this <#= Name #><TSource<#= RTDecl #>> @this,
+            Func<TSource, <#= Name #><TResult<#= RTDecl #>>> selector)
+            where TSource : IDisposable
+        {
+            <#+ WriteNotNull(); #>
+            Require.NotNull(selector, nameof(selector));
+            return @this.Bind(val => { using (val) { return selector(val); } });
+        }
+
+        public static <#= Name #><TResult<#= RTDecl #>> Using<TSource, TResult<#= RTDecl #>>(
+            this <#= Name #><TSource<#= RTDecl #>> @this,
+            Func<TSource, TResult> selector)
+            where TSource : IDisposable
+        {
+            <#+ WriteNotNull(); #>
+            Require.NotNull(selector, nameof(selector));
+            return @this.<#= MapName #>(val => { using (val) { return selector(val); } });
+        }
+
+        #endregion
+
         #region Query Expression Pattern
 
         public static <#= Name #><TResult<#= RTDecl #>> <#= MapName #><TSource, TResult<#= RTDecl #>>(
@@ -223,7 +255,7 @@ public partial class MonadTemplate
         }
 <#+ } // T4: End of !PreferLinqDialect. #>
 
-        // Generalizes both Bind() and Zip<TFirst, TSecond, TResult>().
+        // Generalizes both Bind() and Zip<T1, T2, TResult>().
         public static <#= Name #><TResult<#= RTDecl #>> SelectMany<TSource, TMiddle, TResult<#= RTDecl #>>(
             this <#= Name #><TSource<#= RTDecl #>> @this,
             Func<TSource, <#= Name #><TMiddle<#= RTDecl #>>> valueSelector,
