@@ -42,16 +42,10 @@ public partial class MonadTemplate
             => <#= Name #><T<#= RTDecl #>>.<#= EtaName #>(value);
 
 <#+ } // End of !DisableReturn #>
-        /// <summary>
-        /// Removes one level of structure, projecting its bound value into the outer level.
-        /// </summary>
-        public static <#= Name #><T<#= RTDecl #>> Flatten<T<#= RTDecl #>>(<#= Name #><<#= Name #><T<#= RTDecl #>><#= RTDecl #>> square)
-            => <#= Name #><T<#= RTDecl #>>.μ(square);
 <#+ if (HasZero) { #>
-
         public static <#= Name #><_Unit_> Guard(bool predicate) => predicate ? Unit : <#= ZeroName #>;
-<#+ } // T4: End of HasZero. #>
 
+<#+ } // T4: End of HasZero. #>
         public static <#= Name #><IEnumerable<TSource><#= RTDecl #>> Repeat<TSource<#= RTDecl #>>(
             <#= Name #><TSource<#= RTDecl #>> source,
             int count)

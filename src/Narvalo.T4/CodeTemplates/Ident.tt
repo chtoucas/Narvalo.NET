@@ -16,6 +16,8 @@
         protected override void WriteContent()
         {
             EmitMonad();
+
+            WriteLine();
             EmitComonad();
         }
     }

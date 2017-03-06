@@ -1,0 +1,25 @@
+﻿<#+
+
+public partial class MonadTemplate
+{
+    protected void EmitComonadHelpers()
+    {
+#>
+    // T4: EmitComonadHelpers().
+    public static partial class <#= Name #>
+    {
+        /// <remarks>
+        /// Named <c>extract</c> in Haskell parlance.
+        /// </remarks>
+        public static T Extract<T>(<#= Name #><T> value) => <#= Name #><T>.ε(value);
+
+        /// <remarks>
+        /// Named <c>duplicate</c> in Haskell parlance.
+        /// </remarks>
+        public static <#= Name #><<#= Name #><T>> Duplicate<T>(<#= Name #><T> value) => <#= Name #><T>.δ(value);
+    }
+<#+
+    } // T4: End of EmitComonadHelpers().
+} // T4: End of MonadTemplate.
+
+#>

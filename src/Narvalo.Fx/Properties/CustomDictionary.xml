@@ -2,6 +2,7 @@
 <Dictionary>
   <Words>
     <Recognized>
+      <Word>Ap</Word>
       <Word>Combinator</Word>
       <Word>Ident</Word>
       <Word>Kleisli</Word>
@@ -9,7 +10,6 @@
     </Recognized>
 
     <Compound>
-      <Term CompoundAlternate="ExtractOr">extractor</Term>
       <Term CompoundAlternate="WhereBy">whereby</Term>
     </Compound>
   </Words>

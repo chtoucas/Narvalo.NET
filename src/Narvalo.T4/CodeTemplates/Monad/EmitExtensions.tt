@@ -11,6 +11,12 @@ public partial class MonadTemplate
     // T4: EmitExtensions().
     public static partial class <#= ExtensionsClsName #>
     {
+        /// <summary>
+        /// Removes one level of structure, projecting its bound value into the outer level.
+        /// </summary>
+        public static <#= Name #><T<#= RTDecl #>> Flatten<T<#= RTDecl #>>(this <#= Name #><<#= Name #><T<#= RTDecl #>><#= RTDecl #>> @this)
+            => <#= Name #><T<#= RTDecl #>>.μ(@this);
+
         /// <seealso cref="Ap.Apply{TSource, TResult<#= RTDecl #>}" />
         public static <#= Name #><TResult<#= RTDecl #>> Gather<TSource, TResult<#= RTDecl #>>(
             this <#= Name #><TSource<#= RTDecl #>> @this,
@@ -239,7 +245,7 @@ public partial class MonadTemplate
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, TInner, TResult> resultSelector)
-            => JoinImpl(
+            => Join(
                 @this,
                 inner,
                 outerKeySelector,
@@ -254,13 +260,19 @@ public partial class MonadTemplate
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, TInner, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
-            => JoinImpl(
-                @this,
-                inner,
-                outerKeySelector,
-                innerKeySelector,
-                resultSelector,
-                comparer ?? EqualityComparer<TKey>.Default);
+        {
+            <#+ WriteNotNull(); #>
+            <#+ WriteNotNull("inner"); #>
+            Require.NotNull(resultSelector, nameof(resultSelector));
+            Require.NotNull(outerKeySelector, nameof(outerKeySelector));
+            Require.NotNull(innerKeySelector, nameof(innerKeySelector));
+            Require.NotNull(comparer, nameof(comparer));
+
+            var keyLookup = GetKeyLookup(
+                inner, outerKeySelector, innerKeySelector, comparer ?? EqualityComparer<TKey>.Default);
+
+            return @this.SelectMany(val => keyLookup(val).ContinueWith(inner), resultSelector);
+        }
 
         public static <#= Name #><TResult> GroupJoin<TSource, TInner, TKey, TResult>(
             this <#= Name #><TSource> @this,
@@ -268,7 +280,7 @@ public partial class MonadTemplate
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, <#= Name #><TInner>, TResult> resultSelector)
-            => GroupJoinImpl(
+            => GroupJoin(
                 @this,
                 inner,
                 outerKeySelector,
@@ -283,52 +295,18 @@ public partial class MonadTemplate
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, <#= Name #><TInner>, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
-            => GroupJoinImpl(
-                @this,
-                inner,
-                outerKeySelector,
-                innerKeySelector,
-                resultSelector,
-                comparer ?? EqualityComparer<TKey>.Default);
-
-        private static <#= Name #><TResult> JoinImpl<TSource, TInner, TKey, TResult>(
-            <#= Name #><TSource> outer,
-            <#= Name #><TInner> inner,
-            Func<TSource, TKey> outerKeySelector,
-            Func<TInner, TKey> innerKeySelector,
-            Func<TSource, TInner, TResult> resultSelector,
-            IEqualityComparer<TKey> comparer)
         {
-            <#+ WriteNotNull("outer"); #>
+            <#+ WriteNotNull(); #>
             <#+ WriteNotNull("inner"); #>
             Require.NotNull(resultSelector, nameof(resultSelector));
             Require.NotNull(outerKeySelector, nameof(outerKeySelector));
             Require.NotNull(innerKeySelector, nameof(innerKeySelector));
             Require.NotNull(comparer, nameof(comparer));
 
-            var keyLookup = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
+            var keyLookup = GetKeyLookup(
+                inner, outerKeySelector, innerKeySelector, comparer ?? EqualityComparer<TKey>.Default);
 
-            return outer.SelectMany(val => keyLookup(val).ContinueWith(inner), resultSelector);
-        }
-
-        private static <#= Name #><TResult> GroupJoinImpl<TSource, TInner, TKey, TResult>(
-            <#= Name #><TSource> outer,
-            <#= Name #><TInner> inner,
-            Func<TSource, TKey> outerKeySelector,
-            Func<TInner, TKey> innerKeySelector,
-            Func<TSource, <#= Name #><TInner>, TResult> resultSelector,
-            IEqualityComparer<TKey> comparer)
-        {
-            <#+ WriteNotNull("outer"); #>
-            <#+ WriteNotNull("inner"); #>
-            Require.NotNull(resultSelector, nameof(resultSelector));
-            Require.NotNull(outerKeySelector, nameof(outerKeySelector));
-            Require.NotNull(innerKeySelector, nameof(innerKeySelector));
-            Require.NotNull(comparer, nameof(comparer));
-
-            var keyLookup = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
-
-            return outer.Select(val => resultSelector(val, keyLookup(val).ContinueWith(inner)));
+            return @this.Select(val => resultSelector(val, keyLookup(val).ContinueWith(inner)));
         }
 
         private static Func<TSource, <#= Name #><TKey>> GetKeyLookup<TSource, TInner, TKey>(

@@ -13,7 +13,7 @@ namespace Narvalo.Applicative
 
     // Provides extension methods for Maybe<T?> or Maybe<T> where T is a struct.
     // When it comes to value types, there is really no reason to use Maybe<T> or Maybe<T?>
-    // instead of T?.
+    // instead of T?. NB: It is still possible to construct indirectly such objects via Bind().
     public static partial class Maybe
     {
         // Conversion from T? to Maybe<T>.
