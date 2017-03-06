@@ -80,9 +80,7 @@
     <Compile Include="Applicative\Result`1.cs" />
     <Compile Include="Applicative\Result`2.cs" />
     <Compile Include="Applicative\Sequence.cs" />
-    <Compile Include="Applicative\Stubs.cs" />
-    <Compile Include="Applicative\Stubs`1.cs" />
-    <Compile Include="Applicative\Stubs`2.cs" />
+    <Compile Include="Applicative\Stubs`.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Linq\Qperators_.cs" />
     <Compile Include="Applicative\Maybe.cs" />

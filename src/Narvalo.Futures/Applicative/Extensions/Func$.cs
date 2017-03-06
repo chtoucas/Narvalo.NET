@@ -46,27 +46,27 @@ namespace Narvalo.Applicative.Extensions
 
         public static Func<TSource, TResult?> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, TMiddle?> @this,
-            Func<TMiddle, TResult?> funM)
+            Func<TMiddle, TResult?> selector)
             where TSource : struct
             where TMiddle : struct
             where TResult : struct
         {
             Require.NotNull(@this, nameof(@this));
 
-            return _ => @this.Invoke(_).Bind(funM);
+            return _ => @this.Invoke(_).Bind(selector);
         }
 
         public static Func<TSource, TResult?> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, TResult?> @this,
-            Func<TSource, TMiddle?> funM)
+            Func<TSource, TMiddle?> selector)
             where TSource : struct
             where TMiddle : struct
             where TResult : struct
         {
             Require.NotNull(@this, nameof(@this));
-            Require.NotNull(funM, nameof(funM));
+            Require.NotNull(selector, nameof(selector));
 
-            return _ => funM.Invoke(_).Bind(@this);
+            return _ => selector.Invoke(_).Bind(@this);
         }
 
         #endregion

@@ -6,7 +6,7 @@ namespace Narvalo.Applicative
 
     public static partial class Func
     {
-        public static Func<T> Of<T>(T value)
+        public static Func<T> Return<T>(T value)
         {
             return () => value;
         }

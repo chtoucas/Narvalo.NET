@@ -6,6 +6,20 @@ namespace Narvalo.Applicative
     using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
+    /// Provides helper methods pertaining to <see cref="Action"/> instances.
+    /// </summary>
+    public static class Stubs
+    {
+        private static readonly Action s_Noop = () => { };
+
+        /// <summary>
+        /// Gets the action with an empty body.
+        /// </summary>
+        /// <value>The empty action.</value>
+        public static Action Noop => s_Noop;
+    }
+
+    /// <summary>
     /// Provides helper methods pertaining to <see cref="Func{TSource}"/> and <see cref="Action{TSource}"/> instances.
     /// </summary>
     /// <typeparam name="TSource">The type of the parameter of the delegates that this class encapsulates.</typeparam>
@@ -51,5 +65,22 @@ namespace Narvalo.Applicative
         /// <value>The empty action.</value>
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
         public static Action<TSource> Ignore => s_Ignore;
+    }
+
+    /// <summary>
+    /// Provides helper methods pertaining to <see cref="Func{TSource, TResult}"/> instances.
+    /// </summary>
+    /// <typeparam name="TSource">The type of the first parameter of the delegates that this class encapsulates.</typeparam>
+    /// <typeparam name="TResult">The type of the second parameter of the delegates that this class encapsulates.</typeparam>
+    public static class Stubs<TSource, TResult>
+    {
+        private static readonly Func<TSource, TResult> s_AlwaysDefault = _ => default(TResult);
+
+        /// <summary>
+        /// Gets the function that always evaluates to the default value.
+        /// </summary>
+        /// <value>The function that always evaluates to the default value.</value>
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
+        public static Func<TSource, TResult> AlwaysDefault => s_AlwaysDefault;
     }
 }

@@ -32,18 +32,18 @@ namespace Narvalo.Applicative.Extensions
             where TResult : struct
             => @this.HasValue ? other : null;
 
-        public static TResult? Zip<TFirst, TSecond, TResult>(
-            this TFirst? @this,
-            TSecond? second,
-            Func<TFirst, TSecond, TResult> resultSelector)
-            where TFirst : struct
-            where TSecond : struct
+        public static TResult? Zip<T1, T2, TResult>(
+            this T1? @this,
+            T2? second,
+            Func<T1, T2, TResult> zipper)
+            where T1 : struct
+            where T2 : struct
             where TResult : struct
         {
-            Require.NotNull(resultSelector, nameof(resultSelector));
+            Require.NotNull(zipper, nameof(zipper));
 
             return @this.HasValue && second.HasValue
-                ? (TResult?)resultSelector(@this.Value, second.Value)
+                ? (TResult?)zipper(@this.Value, second.Value)
                 : null;
         }
 
