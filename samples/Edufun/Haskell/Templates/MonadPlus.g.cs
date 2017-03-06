@@ -58,7 +58,7 @@ namespace Edufun.Haskell.Templates
             int count)
         {
             Require.NotNull(source, nameof(source));
-            Require.Range(count >= 1, nameof(count));
+            Require.Range(count >= 0, nameof(count));
             return source.Select(val => Enumerable.Repeat(val, count));
         }
 
@@ -79,6 +79,7 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadPlus{T}" /> values.
         /// </summary>
+        /// <seealso cref="MonadPlus.Zip{T1, T2, TResult}(MonadPlus{T1}, MonadPlus{T2}, Func{T1, T2, TResult})"/>
         public static Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
             => (arg1, arg2) =>
@@ -90,6 +91,7 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadPlus{T}" /> values.
         /// </summary>
+        /// <seealso cref="MonadPlus.Zip{T1, T2, T3, TResult}(MonadPlus{T1}, MonadPlus{T2}, MonadPlus{T3}, Func{T1, T2, T3, TResult})"/>
         public static Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<T3>, MonadPlus<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
             => (arg1, arg2, arg3) =>
@@ -101,6 +103,7 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadPlus{T}" /> values.
         /// </summary>
+        /// <seealso cref="MonadPlus.Zip{T1, T2, T3, T4, TResult}(MonadPlus{T1}, MonadPlus{T2}, MonadPlus{T3}, MonadPlus{T4}, Func{T1, T2, T3, T4, TResult})"/>
         public static Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<T3>, MonadPlus<T4>, MonadPlus<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> func)
@@ -113,6 +116,7 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadPlus{T}" /> values.
         /// </summary>
+        /// <seealso cref="MonadPlus.Zip{T1, T2, T3, T4, T5, TResult}(MonadPlus{T1}, MonadPlus{T2}, MonadPlus{T3}, MonadPlus{T4}, MonadPlus{T5},Func{T1, T2, T3, T4, T5, TResult})"/>
         public static Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<T3>, MonadPlus<T4>, MonadPlus<T5>, MonadPlus<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> func)
@@ -135,7 +139,7 @@ namespace Edufun.Haskell.Templates
         public static MonadPlus<T> Flatten<T>(this MonadPlus<MonadPlus<T>> @this)
             => MonadPlus<T>.μ(@this);
 
-        /// <seealso cref="Ap.Apply{TSource, TResult}" />
+        /// <seealso cref="Ap.Apply{TSource, TResult}(MonadPlus{Func{TSource, TResult}}, MonadPlus{TSource})" />
         public static MonadPlus<TResult> Gather<TSource, TResult>(
             this MonadPlus<TSource> @this,
             MonadPlus<Func<TSource, TResult>> applicative)
@@ -187,6 +191,7 @@ namespace Edufun.Haskell.Templates
             return @this.Zip(other, Tuple.Create);
         }
 
+        /// <seealso cref="MonadPlus.Lift{T1, T2, TResult}(Func{T1, T2, TResult})"/>
         public static MonadPlus<TResult> Zip<T1, T2, TResult>(
             this MonadPlus<T1> @this,
             MonadPlus<T2> second,
@@ -201,6 +206,7 @@ namespace Edufun.Haskell.Templates
                     arg2 => zipper(arg1, arg2)));
         }
 
+        /// <seealso cref="MonadPlus.Lift{T1, T2, T3, TResult}(Func{T1, T2, T3, TResult})"/>
         public static MonadPlus<TResult> Zip<T1, T2, T3, TResult>(
             this MonadPlus<T1> @this,
             MonadPlus<T2> second,
@@ -212,12 +218,18 @@ namespace Edufun.Haskell.Templates
             Require.NotNull(third, nameof(third));
             Require.NotNull(zipper, nameof(zipper));
 
+            // This is the same as:
+            // > return @this.Bind(
+            // >     arg1 => second.Bind(
+            // >        arg2 => third.Select(
+            // >            arg3 => zipper(arg1, arg2, arg3))));
+            // but faster if Zip is locally shadowed.
             return @this.Bind(
-                arg1 => second.Bind(
-                    arg2 => third.Select(
-                        arg3 => zipper(arg1, arg2, arg3))));
+                arg1 => second.Zip(
+                    third, (arg2, arg3) => zipper(arg1, arg2, arg3)));
         }
 
+        /// <seealso cref="MonadPlus.Lift{T1, T2, T3, T4, TResult}(Func{T1, T2, T3, T4, TResult})"/>
         public static MonadPlus<TResult> Zip<T1, T2, T3, T4, TResult>(
              this MonadPlus<T1> @this,
              MonadPlus<T2> second,
@@ -231,13 +243,19 @@ namespace Edufun.Haskell.Templates
             Require.NotNull(fourth, nameof(fourth));
             Require.NotNull(zipper, nameof(zipper));
 
+            // > return @this.Bind(
+            // >     arg1 => second.Bind(
+            // >         arg2 => third.Bind(
+            // >             arg3 => fourth.Select(
+            // >                 arg4 => zipper(arg1, arg2, arg3, arg4)))));
             return @this.Bind(
-                arg1 => second.Bind(
-                    arg2 => third.Bind(
-                        arg3 => fourth.Select(
-                            arg4 => zipper(arg1, arg2, arg3, arg4)))));
+                arg1 => second.Zip(
+                    third,
+                    fourth,
+                    (arg2, arg3, arg4) => zipper(arg1, arg2, arg3, arg4)));
         }
 
+        /// <seealso cref="MonadPlus.Lift{T1, T2, T3, T4, T5, TResult}(Func{T1, T2, T3, T4, T5, TResult})"/>
         public static MonadPlus<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this MonadPlus<T1> @this,
             MonadPlus<T2> second,
@@ -253,18 +271,25 @@ namespace Edufun.Haskell.Templates
             Require.NotNull(fifth, nameof(fifth));
             Require.NotNull(zipper, nameof(zipper));
 
+            // > return @this.Bind(
+            // >     arg1 => second.Bind(
+            // >         arg2 => third.Bind(
+            // >             arg3 => fourth.Bind(
+            // >                 arg4 => fifth.Select(
+            // >                     arg5 => zipper(arg1, arg2, arg3, arg4, arg5))))));
             return @this.Bind(
-                arg1 => second.Bind(
-                    arg2 => third.Bind(
-                        arg3 => fourth.Bind(
-                            arg4 => fifth.Select(
-                                arg5 => zipper(arg1, arg2, arg3, arg4, arg5))))));
+                arg1 => second.Zip(
+                    third,
+                    fourth,
+                    fifth,
+                    (arg2, arg3, arg4, arg5) => zipper(arg1, arg2, arg3, arg4, arg5)));
         }
 
         #endregion
 
         #region Resource management
 
+        // Bind() with automatic resource management.
         public static MonadPlus<TResult> Using<TSource, TResult>(
             this MonadPlus<TSource> @this,
             Func<TSource, MonadPlus<TResult>> selector)
@@ -275,6 +300,7 @@ namespace Edufun.Haskell.Templates
             return @this.Bind(val => { using (val) { return selector(val); } });
         }
 
+        // Select() with automatic resource management.
         public static MonadPlus<TResult> Using<TSource, TResult>(
             this MonadPlus<TSource> @this,
             Func<TSource, TResult> selector)

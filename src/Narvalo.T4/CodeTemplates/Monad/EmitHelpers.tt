@@ -51,7 +51,7 @@ public partial class MonadTemplate
             int count)
         {
             <#+ WriteNotNull("source"); #>
-            Require.Range(count >= 1, nameof(count));
+            Require.Range(count >= 0, nameof(count));
             return source.<#= MapName #>(val => Enumerable.Repeat(val, count));
         }
 
@@ -72,6 +72,7 @@ public partial class MonadTemplate
         /// <summary>
         /// Promotes a function to use and return <see cref="<#= Name #>{T<#= RTDecl #>}" /> values.
         /// </summary>
+        /// <seealso cref="<#= ExtensionsClsName #>.Zip{T1, T2, TResult<#= RTDecl #>}(<#= Name #>{T1<#= RTDecl #>}, <#= Name #>{T2<#= RTDecl #>}, Func{T1, T2, TResult})"/>
         public static Func<<#= Name #><T1<#= RTDecl #>>, <#= Name #><T2<#= RTDecl #>>, <#= Name #><TResult<#= RTDecl #>>>
             Lift<T1, T2, TResult<#= RTDecl #>>(Func<T1, T2, TResult> func)
             => (arg1, arg2) =>
@@ -83,6 +84,7 @@ public partial class MonadTemplate
         /// <summary>
         /// Promotes a function to use and return <see cref="<#= Name #>{T<#= RTDecl #>}" /> values.
         /// </summary>
+        /// <seealso cref="<#= ExtensionsClsName #>.Zip{T1, T2, T3, TResult<#= RTDecl #>}(<#= Name #>{T1<#= RTDecl #>}, <#= Name #>{T2<#= RTDecl #>}, <#= Name #>{T3<#= RTDecl #>}, Func{T1, T2, T3, TResult})"/>
         public static Func<<#= Name #><T1<#= RTDecl #>>, <#= Name #><T2<#= RTDecl #>>, <#= Name #><T3<#= RTDecl #>>, <#= Name #><TResult<#= RTDecl #>>>
             Lift<T1, T2, T3, TResult<#= RTDecl #>>(Func<T1, T2, T3, TResult> func)
             => (arg1, arg2, arg3) =>
@@ -94,6 +96,7 @@ public partial class MonadTemplate
         /// <summary>
         /// Promotes a function to use and return <see cref="<#= Name #>{T<#= RTDecl #>}" /> values.
         /// </summary>
+        /// <seealso cref="<#= ExtensionsClsName #>.Zip{T1, T2, T3, T4, TResult<#= RTDecl #>}(<#= Name #>{T1<#= RTDecl #>}, <#= Name #>{T2<#= RTDecl #>}, <#= Name #>{T3<#= RTDecl #>}, <#= Name #>{T4<#= RTDecl #>}, Func{T1, T2, T3, T4, TResult})"/>
         public static Func<<#= Name #><T1<#= RTDecl #>>, <#= Name #><T2<#= RTDecl #>>, <#= Name #><T3<#= RTDecl #>>, <#= Name #><T4<#= RTDecl #>>, <#= Name #><TResult<#= RTDecl #>>>
             Lift<T1, T2, T3, T4, TResult<#= RTDecl #>>(
             Func<T1, T2, T3, T4, TResult> func)
@@ -106,6 +109,7 @@ public partial class MonadTemplate
         /// <summary>
         /// Promotes a function to use and return <see cref="<#= Name #>{T<#= RTDecl #>}" /> values.
         /// </summary>
+        /// <seealso cref="<#= ExtensionsClsName #>.Zip{T1, T2, T3, T4, T5, TResult<#= RTDecl #>}(<#= Name #>{T1<#= RTDecl #>}, <#= Name #>{T2<#= RTDecl #>}, <#= Name #>{T3<#= RTDecl #>}, <#= Name #>{T4<#= RTDecl #>}, <#= Name #>{T5<#= RTDecl #>},Func{T1, T2, T3, T4, T5, TResult})"/>
         public static Func<<#= Name #><T1<#= RTDecl #>>, <#= Name #><T2<#= RTDecl #>>, <#= Name #><T3<#= RTDecl #>>, <#= Name #><T4<#= RTDecl #>>, <#= Name #><T5<#= RTDecl #>>, <#= Name #><TResult<#= RTDecl #>>>
             Lift<T1, T2, T3, T4, T5, TResult<#= RTDecl #>>(
             Func<T1, T2, T3, T4, T5, TResult> func)

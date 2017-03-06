@@ -17,7 +17,7 @@ public partial class MonadTemplate
         public static <#= Name #><T<#= RTDecl #>> Flatten<T<#= RTDecl #>>(this <#= Name #><<#= Name #><T<#= RTDecl #>><#= RTDecl #>> @this)
             => <#= Name #><T<#= RTDecl #>>.μ(@this);
 
-        /// <seealso cref="Ap.Apply{TSource, TResult<#= RTDecl #>}" />
+        /// <seealso cref="Ap.Apply{TSource, TResult<#= RTDecl #>}(<#= Name #>{Func{TSource, TResult}<#= RTDecl #>}, <#= Name #>{TSource<#= RTDecl #>})" />
         public static <#= Name #><TResult<#= RTDecl #>> Gather<TSource, TResult<#= RTDecl #>>(
             this <#= Name #><TSource<#= RTDecl #>> @this,
             <#= Name #><Func<TSource, TResult><#= RTDecl #>> applicative)
@@ -74,6 +74,7 @@ public partial class MonadTemplate
             return @this.Zip(other, Tuple.Create);
         }
 
+        /// <seealso cref="<#= Name #>.Lift{T1, T2, TResult<#= RTDecl #>}(Func{T1, T2, TResult})"/>
         public static <#= Name #><TResult<#= RTDecl #>> Zip<T1, T2, TResult<#= RTDecl #>>(
             this <#= Name #><T1<#= RTDecl #>> @this,
             <#= Name #><T2<#= RTDecl #>> second,
@@ -96,6 +97,7 @@ public partial class MonadTemplate
 <#+ } #>
         }
 
+        /// <seealso cref="<#= Name #>.Lift{T1, T2, T3, TResult<#= RTDecl #>}(Func{T1, T2, T3, TResult})"/>
         public static <#= Name #><TResult<#= RTDecl #>> Zip<T1, T2, T3, TResult<#= RTDecl #>>(
             this <#= Name #><T1<#= RTDecl #>> @this,
             <#= Name #><T2<#= RTDecl #>> second,
@@ -108,10 +110,15 @@ public partial class MonadTemplate
             Require.NotNull(zipper, nameof(zipper));
 
 <#+ if (zipViaBind) { #>
+            // This is the same as:
+            // > return @this.Bind(
+            // >     arg1 => second.Bind(
+            // >        arg2 => third.Select(
+            // >            arg3 => zipper(arg1, arg2, arg3))));
+            // but faster if Zip is locally shadowed.
             return @this.Bind(
-                arg1 => second.Bind(
-                    arg2 => third.Select(
-                        arg3 => zipper(arg1, arg2, arg3))));
+                arg1 => second.Zip(
+                    third, (arg2, arg3) => zipper(arg1, arg2, arg3)));
 <#+ } else { #>
             Func<T1, Func<T2, Func<T3, TResult>>> selector
                 = arg1 => arg2 => arg3 => zipper(arg1, arg2, arg3);
@@ -122,6 +129,7 @@ public partial class MonadTemplate
 <#+ } #>
         }
 
+        /// <seealso cref="<#= Name #>.Lift{T1, T2, T3, T4, TResult<#= RTDecl #>}(Func{T1, T2, T3, T4, TResult})"/>
         public static <#= Name #><TResult<#= RTDecl #>> Zip<T1, T2, T3, T4, TResult<#= RTDecl #>>(
              this <#= Name #><T1<#= RTDecl #>> @this,
              <#= Name #><T2<#= RTDecl #>> second,
@@ -136,11 +144,16 @@ public partial class MonadTemplate
             Require.NotNull(zipper, nameof(zipper));
 
 <#+ if (zipViaBind) { #>
+            // > return @this.Bind(
+            // >     arg1 => second.Bind(
+            // >         arg2 => third.Bind(
+            // >             arg3 => fourth.Select(
+            // >                 arg4 => zipper(arg1, arg2, arg3, arg4)))));
             return @this.Bind(
-                arg1 => second.Bind(
-                    arg2 => third.Bind(
-                        arg3 => fourth.Select(
-                            arg4 => zipper(arg1, arg2, arg3, arg4)))));
+                arg1 => second.Zip(
+                    third,
+                    fourth,
+                    (arg2, arg3, arg4) => zipper(arg1, arg2, arg3, arg4)));
 <#+ } else { #>
             Func<T1, Func<T2, Func<T3, Func<T4, TResult>>>> selector
                 = arg1 => arg2 => arg3 => arg4 => zipper(arg1, arg2, arg3, arg4);
@@ -152,6 +165,7 @@ public partial class MonadTemplate
 <#+ } #>
         }
 
+        /// <seealso cref="<#= Name #>.Lift{T1, T2, T3, T4, T5, TResult<#= RTDecl #>}(Func{T1, T2, T3, T4, T5, TResult})"/>
         public static <#= Name #><TResult<#= RTDecl #>> Zip<T1, T2, T3, T4, T5, TResult<#= RTDecl #>>(
             this <#= Name #><T1<#= RTDecl #>> @this,
             <#= Name #><T2<#= RTDecl #>> second,
@@ -168,12 +182,18 @@ public partial class MonadTemplate
             Require.NotNull(zipper, nameof(zipper));
 
 <#+ if (zipViaBind) { #>
+            // > return @this.Bind(
+            // >     arg1 => second.Bind(
+            // >         arg2 => third.Bind(
+            // >             arg3 => fourth.Bind(
+            // >                 arg4 => fifth.Select(
+            // >                     arg5 => zipper(arg1, arg2, arg3, arg4, arg5))))));
             return @this.Bind(
-                arg1 => second.Bind(
-                    arg2 => third.Bind(
-                        arg3 => fourth.Bind(
-                            arg4 => fifth.Select(
-                                arg5 => zipper(arg1, arg2, arg3, arg4, arg5))))));
+                arg1 => second.Zip(
+                    third,
+                    fourth,
+                    fifth,
+                    (arg2, arg3, arg4, arg5) => zipper(arg1, arg2, arg3, arg4, arg5)));
 <#+ } else { #>
             Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, TResult>>>>> selector
                 = arg1 => arg2 => arg3 => arg4 => arg5 => zipper(arg1, arg2, arg3, arg4, arg5);
@@ -190,6 +210,7 @@ public partial class MonadTemplate
 
         #region Resource management
 
+        // Bind() with automatic resource management.
         public static <#= Name #><TResult<#= RTDecl #>> Using<TSource, TResult<#= RTDecl #>>(
             this <#= Name #><TSource<#= RTDecl #>> @this,
             Func<TSource, <#= Name #><TResult<#= RTDecl #>>> selector)
@@ -200,6 +221,7 @@ public partial class MonadTemplate
             return @this.Bind(val => { using (val) { return selector(val); } });
         }
 
+        // Select() with automatic resource management.
         public static <#= Name #><TResult<#= RTDecl #>> Using<TSource, TResult<#= RTDecl #>>(
             this <#= Name #><TSource<#= RTDecl #>> @this,
             Func<TSource, TResult> selector)

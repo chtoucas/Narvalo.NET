@@ -33,23 +33,17 @@ Library                   | vNext
 --------------------------|----------
 Narvalo.Build             | -
 Narvalo.Cerbere           | 2.1.0
-Narvalo.Common            | 0.26.0
-Narvalo.Core              | 0.26.0
-Narvalo.Finance           | 0.26.0 (1.0.0?)
-Narvalo.Fx                | 0.26.0
+Narvalo.Common            | 1.0.0
+Narvalo.Core              | 1.0.0
+Narvalo.Finance           | 1.0.0
+Narvalo.Fx                | 1.0.0
+Narvalo.Money             | 1.0.0
 Narvalo.Mvp               | 1.1.0
 Narvalo.Mvp.Web           | 1.1.0
-Narvalo.Web               | 0.26.0
+Narvalo.Web               | 1.0.0
 
 TODO
 ----
-- Remove Narvalo.Core and move from .NET 4.5 to .NET 4.6.1
-- Remove Code Contracts -> Warrant & Expect.
-Refactoring?
-- Narvalo.Properties in AssemblyInfo -> Properties or Narvalo
-- Narvalo.Cerbere -> Cerbere
-- Narvalo.Fx -> Efix
-- Narvalo.Finance -> ?
 
 Narvalo.Finance:
 - Sync `Money<TCurrency>`, CurrencyUnit<>`, `MoneyFormatter` for rounding, scale...
@@ -79,6 +73,7 @@ Narvalo.Finance:
 - Pretty sure that we can get rid off all uint and int overloads.
 
 Narvalo.Fx:
+- Result.Lift is too complicate.
 - null-check's in generated methods.
 - Async versions?
 - https://blogs.msdn.microsoft.com/pfxteam/2013/04/03/tasks-monads-and-linq/
@@ -88,6 +83,8 @@ Narvalo.Fx:
 
 Highlights
 ----------
+- Move from .NET 4.5 to .NET 4.6.1
+- Remove Code Contracts in all libraries except the MVP ones.
 
 Bugfixes
 --------

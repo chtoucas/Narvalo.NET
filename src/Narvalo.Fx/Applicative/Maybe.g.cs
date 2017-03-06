@@ -56,7 +56,7 @@ namespace Narvalo.Applicative
             int count)
         {
             /* T4: NotNull(source) */
-            Require.Range(count >= 1, nameof(count));
+            Require.Range(count >= 0, nameof(count));
             return source.Select(val => Enumerable.Repeat(val, count));
         }
 
@@ -77,6 +77,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Maybe{T}" /> values.
         /// </summary>
+        /// <seealso cref="Maybe.Zip{T1, T2, TResult}(Maybe{T1}, Maybe{T2}, Func{T1, T2, TResult})"/>
         public static Func<Maybe<T1>, Maybe<T2>, Maybe<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
             => (arg1, arg2) =>
@@ -88,6 +89,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Maybe{T}" /> values.
         /// </summary>
+        /// <seealso cref="Maybe.Zip{T1, T2, T3, TResult}(Maybe{T1}, Maybe{T2}, Maybe{T3}, Func{T1, T2, T3, TResult})"/>
         public static Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
             => (arg1, arg2, arg3) =>
@@ -99,6 +101,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Maybe{T}" /> values.
         /// </summary>
+        /// <seealso cref="Maybe.Zip{T1, T2, T3, T4, TResult}(Maybe{T1}, Maybe{T2}, Maybe{T3}, Maybe{T4}, Func{T1, T2, T3, T4, TResult})"/>
         public static Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<T4>, Maybe<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> func)
@@ -111,6 +114,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Maybe{T}" /> values.
         /// </summary>
+        /// <seealso cref="Maybe.Zip{T1, T2, T3, T4, T5, TResult}(Maybe{T1}, Maybe{T2}, Maybe{T3}, Maybe{T4}, Maybe{T5},Func{T1, T2, T3, T4, T5, TResult})"/>
         public static Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<T4>, Maybe<T5>, Maybe<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> func)
@@ -133,7 +137,7 @@ namespace Narvalo.Applicative
         public static Maybe<T> Flatten<T>(this Maybe<Maybe<T>> @this)
             => Maybe<T>.μ(@this);
 
-        /// <seealso cref="Ap.Apply{TSource, TResult}" />
+        /// <seealso cref="Ap.Apply{TSource, TResult}(Maybe{Func{TSource, TResult}}, Maybe{TSource})" />
         public static Maybe<TResult> Gather<TSource, TResult>(
             this Maybe<TSource> @this,
             Maybe<Func<TSource, TResult>> applicative)
@@ -185,6 +189,7 @@ namespace Narvalo.Applicative
             return @this.Zip(other, Tuple.Create);
         }
 
+        /// <seealso cref="Maybe.Lift{T1, T2, TResult}(Func{T1, T2, TResult})"/>
         public static Maybe<TResult> Zip<T1, T2, TResult>(
             this Maybe<T1> @this,
             Maybe<T2> second,
@@ -199,6 +204,7 @@ namespace Narvalo.Applicative
                     arg2 => zipper(arg1, arg2)));
         }
 
+        /// <seealso cref="Maybe.Lift{T1, T2, T3, TResult}(Func{T1, T2, T3, TResult})"/>
         public static Maybe<TResult> Zip<T1, T2, T3, TResult>(
             this Maybe<T1> @this,
             Maybe<T2> second,
@@ -210,12 +216,18 @@ namespace Narvalo.Applicative
             /* T4: NotNull(third) */
             Require.NotNull(zipper, nameof(zipper));
 
+            // This is the same as:
+            // > return @this.Bind(
+            // >     arg1 => second.Bind(
+            // >        arg2 => third.Select(
+            // >            arg3 => zipper(arg1, arg2, arg3))));
+            // but faster if Zip is locally shadowed.
             return @this.Bind(
-                arg1 => second.Bind(
-                    arg2 => third.Select(
-                        arg3 => zipper(arg1, arg2, arg3))));
+                arg1 => second.Zip(
+                    third, (arg2, arg3) => zipper(arg1, arg2, arg3)));
         }
 
+        /// <seealso cref="Maybe.Lift{T1, T2, T3, T4, TResult}(Func{T1, T2, T3, T4, TResult})"/>
         public static Maybe<TResult> Zip<T1, T2, T3, T4, TResult>(
              this Maybe<T1> @this,
              Maybe<T2> second,
@@ -229,13 +241,19 @@ namespace Narvalo.Applicative
             /* T4: NotNull(fourth) */
             Require.NotNull(zipper, nameof(zipper));
 
+            // > return @this.Bind(
+            // >     arg1 => second.Bind(
+            // >         arg2 => third.Bind(
+            // >             arg3 => fourth.Select(
+            // >                 arg4 => zipper(arg1, arg2, arg3, arg4)))));
             return @this.Bind(
-                arg1 => second.Bind(
-                    arg2 => third.Bind(
-                        arg3 => fourth.Select(
-                            arg4 => zipper(arg1, arg2, arg3, arg4)))));
+                arg1 => second.Zip(
+                    third,
+                    fourth,
+                    (arg2, arg3, arg4) => zipper(arg1, arg2, arg3, arg4)));
         }
 
+        /// <seealso cref="Maybe.Lift{T1, T2, T3, T4, T5, TResult}(Func{T1, T2, T3, T4, T5, TResult})"/>
         public static Maybe<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this Maybe<T1> @this,
             Maybe<T2> second,
@@ -251,18 +269,25 @@ namespace Narvalo.Applicative
             /* T4: NotNull(fifth) */
             Require.NotNull(zipper, nameof(zipper));
 
+            // > return @this.Bind(
+            // >     arg1 => second.Bind(
+            // >         arg2 => third.Bind(
+            // >             arg3 => fourth.Bind(
+            // >                 arg4 => fifth.Select(
+            // >                     arg5 => zipper(arg1, arg2, arg3, arg4, arg5))))));
             return @this.Bind(
-                arg1 => second.Bind(
-                    arg2 => third.Bind(
-                        arg3 => fourth.Bind(
-                            arg4 => fifth.Select(
-                                arg5 => zipper(arg1, arg2, arg3, arg4, arg5))))));
+                arg1 => second.Zip(
+                    third,
+                    fourth,
+                    fifth,
+                    (arg2, arg3, arg4, arg5) => zipper(arg1, arg2, arg3, arg4, arg5)));
         }
 
         #endregion
 
         #region Resource management
 
+        // Bind() with automatic resource management.
         public static Maybe<TResult> Using<TSource, TResult>(
             this Maybe<TSource> @this,
             Func<TSource, Maybe<TResult>> selector)
@@ -273,6 +298,7 @@ namespace Narvalo.Applicative
             return @this.Bind(val => { using (val) { return selector(val); } });
         }
 
+        // Select() with automatic resource management.
         public static Maybe<TResult> Using<TSource, TResult>(
             this Maybe<TSource> @this,
             Func<TSource, TResult> selector)

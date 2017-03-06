@@ -30,7 +30,7 @@ namespace Narvalo.Applicative
             int count)
         {
             /* T4: NotNull(source) */
-            Require.Range(count >= 1, nameof(count));
+            Require.Range(count >= 0, nameof(count));
             return source.Select(val => Enumerable.Repeat(val, count));
         }
 
@@ -51,6 +51,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Result{T, TError}" /> values.
         /// </summary>
+        /// <seealso cref="ResultExtensions.Zip{T1, T2, TResult, TError}(Result{T1, TError}, Result{T2, TError}, Func{T1, T2, TResult})"/>
         public static Func<Result<T1, TError>, Result<T2, TError>, Result<TResult, TError>>
             Lift<T1, T2, TResult, TError>(Func<T1, T2, TResult> func)
             => (arg1, arg2) =>
@@ -62,6 +63,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Result{T, TError}" /> values.
         /// </summary>
+        /// <seealso cref="ResultExtensions.Zip{T1, T2, T3, TResult, TError}(Result{T1, TError}, Result{T2, TError}, Result{T3, TError}, Func{T1, T2, T3, TResult})"/>
         public static Func<Result<T1, TError>, Result<T2, TError>, Result<T3, TError>, Result<TResult, TError>>
             Lift<T1, T2, T3, TResult, TError>(Func<T1, T2, T3, TResult> func)
             => (arg1, arg2, arg3) =>
@@ -73,6 +75,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Result{T, TError}" /> values.
         /// </summary>
+        /// <seealso cref="ResultExtensions.Zip{T1, T2, T3, T4, TResult, TError}(Result{T1, TError}, Result{T2, TError}, Result{T3, TError}, Result{T4, TError}, Func{T1, T2, T3, T4, TResult})"/>
         public static Func<Result<T1, TError>, Result<T2, TError>, Result<T3, TError>, Result<T4, TError>, Result<TResult, TError>>
             Lift<T1, T2, T3, T4, TResult, TError>(
             Func<T1, T2, T3, T4, TResult> func)
@@ -85,6 +88,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Result{T, TError}" /> values.
         /// </summary>
+        /// <seealso cref="ResultExtensions.Zip{T1, T2, T3, T4, T5, TResult, TError}(Result{T1, TError}, Result{T2, TError}, Result{T3, TError}, Result{T4, TError}, Result{T5, TError},Func{T1, T2, T3, T4, T5, TResult})"/>
         public static Func<Result<T1, TError>, Result<T2, TError>, Result<T3, TError>, Result<T4, TError>, Result<T5, TError>, Result<TResult, TError>>
             Lift<T1, T2, T3, T4, T5, TResult, TError>(
             Func<T1, T2, T3, T4, T5, TResult> func)
@@ -107,7 +111,7 @@ namespace Narvalo.Applicative
         public static Result<T, TError> Flatten<T, TError>(this Result<Result<T, TError>, TError> @this)
             => Result<T, TError>.μ(@this);
 
-        /// <seealso cref="Ap.Apply{TSource, TResult, TError}" />
+        /// <seealso cref="Ap.Apply{TSource, TResult, TError}(Result{Func{TSource, TResult}, TError}, Result{TSource, TError})" />
         public static Result<TResult, TError> Gather<TSource, TResult, TError>(
             this Result<TSource, TError> @this,
             Result<Func<TSource, TResult>, TError> applicative)
@@ -159,6 +163,7 @@ namespace Narvalo.Applicative
             return @this.Zip(other, Tuple.Create);
         }
 
+        /// <seealso cref="Result.Lift{T1, T2, TResult, TError}(Func{T1, T2, TResult})"/>
         public static Result<TResult, TError> Zip<T1, T2, TResult, TError>(
             this Result<T1, TError> @this,
             Result<T2, TError> second,
@@ -173,6 +178,7 @@ namespace Narvalo.Applicative
                     arg2 => zipper(arg1, arg2)));
         }
 
+        /// <seealso cref="Result.Lift{T1, T2, T3, TResult, TError}(Func{T1, T2, T3, TResult})"/>
         public static Result<TResult, TError> Zip<T1, T2, T3, TResult, TError>(
             this Result<T1, TError> @this,
             Result<T2, TError> second,
@@ -184,12 +190,18 @@ namespace Narvalo.Applicative
             /* T4: NotNull(third) */
             Require.NotNull(zipper, nameof(zipper));
 
+            // This is the same as:
+            // > return @this.Bind(
+            // >     arg1 => second.Bind(
+            // >        arg2 => third.Select(
+            // >            arg3 => zipper(arg1, arg2, arg3))));
+            // but faster if Zip is locally shadowed.
             return @this.Bind(
-                arg1 => second.Bind(
-                    arg2 => third.Select(
-                        arg3 => zipper(arg1, arg2, arg3))));
+                arg1 => second.Zip(
+                    third, (arg2, arg3) => zipper(arg1, arg2, arg3)));
         }
 
+        /// <seealso cref="Result.Lift{T1, T2, T3, T4, TResult, TError}(Func{T1, T2, T3, T4, TResult})"/>
         public static Result<TResult, TError> Zip<T1, T2, T3, T4, TResult, TError>(
              this Result<T1, TError> @this,
              Result<T2, TError> second,
@@ -203,13 +215,19 @@ namespace Narvalo.Applicative
             /* T4: NotNull(fourth) */
             Require.NotNull(zipper, nameof(zipper));
 
+            // > return @this.Bind(
+            // >     arg1 => second.Bind(
+            // >         arg2 => third.Bind(
+            // >             arg3 => fourth.Select(
+            // >                 arg4 => zipper(arg1, arg2, arg3, arg4)))));
             return @this.Bind(
-                arg1 => second.Bind(
-                    arg2 => third.Bind(
-                        arg3 => fourth.Select(
-                            arg4 => zipper(arg1, arg2, arg3, arg4)))));
+                arg1 => second.Zip(
+                    third,
+                    fourth,
+                    (arg2, arg3, arg4) => zipper(arg1, arg2, arg3, arg4)));
         }
 
+        /// <seealso cref="Result.Lift{T1, T2, T3, T4, T5, TResult, TError}(Func{T1, T2, T3, T4, T5, TResult})"/>
         public static Result<TResult, TError> Zip<T1, T2, T3, T4, T5, TResult, TError>(
             this Result<T1, TError> @this,
             Result<T2, TError> second,
@@ -225,18 +243,25 @@ namespace Narvalo.Applicative
             /* T4: NotNull(fifth) */
             Require.NotNull(zipper, nameof(zipper));
 
+            // > return @this.Bind(
+            // >     arg1 => second.Bind(
+            // >         arg2 => third.Bind(
+            // >             arg3 => fourth.Bind(
+            // >                 arg4 => fifth.Select(
+            // >                     arg5 => zipper(arg1, arg2, arg3, arg4, arg5))))));
             return @this.Bind(
-                arg1 => second.Bind(
-                    arg2 => third.Bind(
-                        arg3 => fourth.Bind(
-                            arg4 => fifth.Select(
-                                arg5 => zipper(arg1, arg2, arg3, arg4, arg5))))));
+                arg1 => second.Zip(
+                    third,
+                    fourth,
+                    fifth,
+                    (arg2, arg3, arg4, arg5) => zipper(arg1, arg2, arg3, arg4, arg5)));
         }
 
         #endregion
 
         #region Resource management
 
+        // Bind() with automatic resource management.
         public static Result<TResult, TError> Using<TSource, TResult, TError>(
             this Result<TSource, TError> @this,
             Func<TSource, Result<TResult, TError>> selector)
@@ -247,6 +272,7 @@ namespace Narvalo.Applicative
             return @this.Bind(val => { using (val) { return selector(val); } });
         }
 
+        // Select() with automatic resource management.
         public static Result<TResult, TError> Using<TSource, TResult, TError>(
             this Result<TSource, TError> @this,
             Func<TSource, TResult> selector)

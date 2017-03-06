@@ -30,7 +30,7 @@ namespace Narvalo.Applicative
             int count)
         {
             Require.NotNull(source, nameof(source));
-            Require.Range(count >= 1, nameof(count));
+            Require.Range(count >= 0, nameof(count));
             return source.Select(val => Enumerable.Repeat(val, count));
         }
 
@@ -51,6 +51,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Either{T, TRight}" /> values.
         /// </summary>
+        /// <seealso cref="Either.Zip{T1, T2, TResult, TRight}(Either{T1, TRight}, Either{T2, TRight}, Func{T1, T2, TResult})"/>
         public static Func<Either<T1, TRight>, Either<T2, TRight>, Either<TResult, TRight>>
             Lift<T1, T2, TResult, TRight>(Func<T1, T2, TResult> func)
             => (arg1, arg2) =>
@@ -62,6 +63,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Either{T, TRight}" /> values.
         /// </summary>
+        /// <seealso cref="Either.Zip{T1, T2, T3, TResult, TRight}(Either{T1, TRight}, Either{T2, TRight}, Either{T3, TRight}, Func{T1, T2, T3, TResult})"/>
         public static Func<Either<T1, TRight>, Either<T2, TRight>, Either<T3, TRight>, Either<TResult, TRight>>
             Lift<T1, T2, T3, TResult, TRight>(Func<T1, T2, T3, TResult> func)
             => (arg1, arg2, arg3) =>
@@ -73,6 +75,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Either{T, TRight}" /> values.
         /// </summary>
+        /// <seealso cref="Either.Zip{T1, T2, T3, T4, TResult, TRight}(Either{T1, TRight}, Either{T2, TRight}, Either{T3, TRight}, Either{T4, TRight}, Func{T1, T2, T3, T4, TResult})"/>
         public static Func<Either<T1, TRight>, Either<T2, TRight>, Either<T3, TRight>, Either<T4, TRight>, Either<TResult, TRight>>
             Lift<T1, T2, T3, T4, TResult, TRight>(
             Func<T1, T2, T3, T4, TResult> func)
@@ -85,6 +88,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Either{T, TRight}" /> values.
         /// </summary>
+        /// <seealso cref="Either.Zip{T1, T2, T3, T4, T5, TResult, TRight}(Either{T1, TRight}, Either{T2, TRight}, Either{T3, TRight}, Either{T4, TRight}, Either{T5, TRight},Func{T1, T2, T3, T4, T5, TResult})"/>
         public static Func<Either<T1, TRight>, Either<T2, TRight>, Either<T3, TRight>, Either<T4, TRight>, Either<T5, TRight>, Either<TResult, TRight>>
             Lift<T1, T2, T3, T4, T5, TResult, TRight>(
             Func<T1, T2, T3, T4, T5, TResult> func)
@@ -107,7 +111,7 @@ namespace Narvalo.Applicative
         public static Either<T, TRight> Flatten<T, TRight>(this Either<Either<T, TRight>, TRight> @this)
             => Either<T, TRight>.μ(@this);
 
-        /// <seealso cref="Ap.Apply{TSource, TResult, TRight}" />
+        /// <seealso cref="Ap.Apply{TSource, TResult, TRight}(Either{Func{TSource, TResult}, TRight}, Either{TSource, TRight})" />
         public static Either<TResult, TRight> Gather<TSource, TResult, TRight>(
             this Either<TSource, TRight> @this,
             Either<Func<TSource, TResult>, TRight> applicative)
@@ -159,6 +163,7 @@ namespace Narvalo.Applicative
             return @this.Zip(other, Tuple.Create);
         }
 
+        /// <seealso cref="Either.Lift{T1, T2, TResult, TRight}(Func{T1, T2, TResult})"/>
         public static Either<TResult, TRight> Zip<T1, T2, TResult, TRight>(
             this Either<T1, TRight> @this,
             Either<T2, TRight> second,
@@ -173,6 +178,7 @@ namespace Narvalo.Applicative
                     arg2 => zipper(arg1, arg2)));
         }
 
+        /// <seealso cref="Either.Lift{T1, T2, T3, TResult, TRight}(Func{T1, T2, T3, TResult})"/>
         public static Either<TResult, TRight> Zip<T1, T2, T3, TResult, TRight>(
             this Either<T1, TRight> @this,
             Either<T2, TRight> second,
@@ -184,12 +190,18 @@ namespace Narvalo.Applicative
             Require.NotNull(third, nameof(third));
             Require.NotNull(zipper, nameof(zipper));
 
+            // This is the same as:
+            // > return @this.Bind(
+            // >     arg1 => second.Bind(
+            // >        arg2 => third.Select(
+            // >            arg3 => zipper(arg1, arg2, arg3))));
+            // but faster if Zip is locally shadowed.
             return @this.Bind(
-                arg1 => second.Bind(
-                    arg2 => third.Select(
-                        arg3 => zipper(arg1, arg2, arg3))));
+                arg1 => second.Zip(
+                    third, (arg2, arg3) => zipper(arg1, arg2, arg3)));
         }
 
+        /// <seealso cref="Either.Lift{T1, T2, T3, T4, TResult, TRight}(Func{T1, T2, T3, T4, TResult})"/>
         public static Either<TResult, TRight> Zip<T1, T2, T3, T4, TResult, TRight>(
              this Either<T1, TRight> @this,
              Either<T2, TRight> second,
@@ -203,13 +215,19 @@ namespace Narvalo.Applicative
             Require.NotNull(fourth, nameof(fourth));
             Require.NotNull(zipper, nameof(zipper));
 
+            // > return @this.Bind(
+            // >     arg1 => second.Bind(
+            // >         arg2 => third.Bind(
+            // >             arg3 => fourth.Select(
+            // >                 arg4 => zipper(arg1, arg2, arg3, arg4)))));
             return @this.Bind(
-                arg1 => second.Bind(
-                    arg2 => third.Bind(
-                        arg3 => fourth.Select(
-                            arg4 => zipper(arg1, arg2, arg3, arg4)))));
+                arg1 => second.Zip(
+                    third,
+                    fourth,
+                    (arg2, arg3, arg4) => zipper(arg1, arg2, arg3, arg4)));
         }
 
+        /// <seealso cref="Either.Lift{T1, T2, T3, T4, T5, TResult, TRight}(Func{T1, T2, T3, T4, T5, TResult})"/>
         public static Either<TResult, TRight> Zip<T1, T2, T3, T4, T5, TResult, TRight>(
             this Either<T1, TRight> @this,
             Either<T2, TRight> second,
@@ -225,18 +243,25 @@ namespace Narvalo.Applicative
             Require.NotNull(fifth, nameof(fifth));
             Require.NotNull(zipper, nameof(zipper));
 
+            // > return @this.Bind(
+            // >     arg1 => second.Bind(
+            // >         arg2 => third.Bind(
+            // >             arg3 => fourth.Bind(
+            // >                 arg4 => fifth.Select(
+            // >                     arg5 => zipper(arg1, arg2, arg3, arg4, arg5))))));
             return @this.Bind(
-                arg1 => second.Bind(
-                    arg2 => third.Bind(
-                        arg3 => fourth.Bind(
-                            arg4 => fifth.Select(
-                                arg5 => zipper(arg1, arg2, arg3, arg4, arg5))))));
+                arg1 => second.Zip(
+                    third,
+                    fourth,
+                    fifth,
+                    (arg2, arg3, arg4, arg5) => zipper(arg1, arg2, arg3, arg4, arg5)));
         }
 
         #endregion
 
         #region Resource management
 
+        // Bind() with automatic resource management.
         public static Either<TResult, TRight> Using<TSource, TResult, TRight>(
             this Either<TSource, TRight> @this,
             Func<TSource, Either<TResult, TRight>> selector)
@@ -247,6 +272,7 @@ namespace Narvalo.Applicative
             return @this.Bind(val => { using (val) { return selector(val); } });
         }
 
+        // Select() with automatic resource management.
         public static Either<TResult, TRight> Using<TSource, TResult, TRight>(
             this Either<TSource, TRight> @this,
             Func<TSource, TResult> selector)
