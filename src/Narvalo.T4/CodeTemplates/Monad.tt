@@ -5,6 +5,7 @@
 <#@ include file="Monad\EmitHelpers.tt" #>
 <#@ include file="Monad\EmitExtensions.tt" #>
 <#@ include file="Monad\EmitExtensionsExtras.tt" #>
+<#@ include file="Monad\EmitApplicative.tt" #>
 <#@ include file="Monad\EmitKleisli.tt" #>
 <#@ include file="Monad\EmitEnumerableExtensions.tt" #>
 <#@ include file="Monad\EmitEnumerableInternal.tt" #>
@@ -35,7 +36,6 @@ public abstract partial class MonadTemplate : _MonadTemplate
 #>
 <#+ if (!Namespace.StartsWith("Narvalo.")) { #>
 using global::Narvalo;
-using global::Narvalo.Applicative;
 
 <#+ } #>
 using _Unit_ = global::Narvalo.Applicative.Unit;
@@ -62,6 +62,9 @@ namespace <#= Namespace #>
 
     WriteLine();
     EmitExtensionsExtras();
+
+    WriteLine();
+    EmitApplicative();
 
     WriteLine();
     EmitKleisli();

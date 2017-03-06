@@ -1,0 +1,25 @@
+﻿<#+
+
+public partial class MonadTemplate
+{
+    protected void EmitApplicative()
+    {
+#>
+    // Provides extension methods for <#= Name #><Func<TSource, TResult><#= RTDecl #>>.
+    // T4: EmitApplicative().
+    public static partial class Ap
+    {
+        /// <seealso cref="<#= ExtensionsClsName #>.Gather{TSource, TResult<#= RTDecl #>}" />
+        public static <#= Name #><TResult<#= RTDecl #>> Apply<TSource, TResult<#= RTDecl #>>(
+            this <#= Name #><Func<TSource, TResult><#= RTDecl #>> @this,
+            <#= Name #><TSource<#= RTDecl #>> value)
+        {
+            <#+ WriteNotNull("value"); #>
+            return value.Gather(@this);
+        }
+    }
+<#+
+    } // T4: End of EmitApplicative().
+} // T4: End of MonadTemplate.
+
+#>

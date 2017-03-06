@@ -5,7 +5,7 @@ public partial class MonadTemplate
     public void EmitKleisli()
     {
 #>
-    // Provides extension methods for Func<T> in the Kleisli category.
+    // Provides extension methods for functions in the Kleisli category.
     // T4: EmitKleisli().
     public static partial class Kleisli
     {

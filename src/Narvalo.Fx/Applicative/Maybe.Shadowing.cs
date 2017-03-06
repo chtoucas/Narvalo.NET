@@ -30,7 +30,7 @@ namespace Narvalo.Applicative
             return IsSome && second.IsSome ? Maybe<TResult>.η(zipper(Value, second.Value)) : Maybe<TResult>.None;
         }
 
-        #region Query Expression Pattern.
+        #region Query Expression Pattern
 
         public Maybe<TResult> Select<TResult>(Func<T, TResult> selector)
         {

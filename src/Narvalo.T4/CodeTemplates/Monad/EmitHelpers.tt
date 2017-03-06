@@ -49,7 +49,7 @@ public partial class MonadTemplate
             => <#= Name #><T<#= RTDecl #>>.μ(square);
 <#+ if (HasZero) { #>
 
-        public static <#= Name #><Unit> Guard(bool predicate) => predicate ? Unit : <#= ZeroName #>;
+        public static <#= Name #><_Unit_> Guard(bool predicate) => predicate ? Unit : <#= ZeroName #>;
 <#+ } // T4: End of HasZero. #>
 
         public static <#= Name #><IEnumerable<TSource><#= RTDecl #>> Repeat<TSource<#= RTDecl #>>(
@@ -59,15 +59,6 @@ public partial class MonadTemplate
             <#+ WriteNotNull("source"); #>
             Require.Range(count >= 1, nameof(count));
             return source.<#= MapName #>(val => Enumerable.Repeat(val, count));
-        }
-
-        /// <seealso cref="Gather{TSource, TResult<#= RTDecl #>}" />
-        public static <#= Name #><TResult<#= RTDecl #>> Apply<TSource, TResult<#= RTDecl #>>(
-            <#= Name #><Func<TSource, TResult><#= RTDecl #>> applicative,
-            <#= Name #><TSource<#= RTDecl #>> value)
-        {
-            <#+ WriteNotNull("value"); #>
-            return value.Gather(applicative);
         }
 
         #region Lift()

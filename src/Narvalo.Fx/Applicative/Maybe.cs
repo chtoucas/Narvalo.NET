@@ -17,7 +17,7 @@ namespace Narvalo.Applicative
     public static partial class Maybe
     {
         // Conversion from T? to Maybe<T>.
-        // NB: This method makes it impossible to create a Maybe<T?> directly.
+        // NB: This method makes it impossible to create a Maybe<T?> **directly**.
         public static Maybe<T> Of<T>(T? value) where T : struct
             => value.HasValue ? Of(value.Value) : Maybe<T>.None;
 
@@ -26,7 +26,7 @@ namespace Narvalo.Applicative
             => @this.IsSome ? (T?)@this.Value : null;
 
         // Conversion from Maybe<T?> to T?.
-        public static T? Unwrap<T>(this Maybe<T?> @this) where T : struct
+        public static T? ToNullable<T>(this Maybe<T?> @this) where T : struct
             => @this.IsSome ? @this.Value : null;
     }
 

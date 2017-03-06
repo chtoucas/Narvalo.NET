@@ -11,7 +11,7 @@ public partial class MonadTemplate
     // T4: EmitExtensions().
     public static partial class <#= ExtensionsClsName #>
     {
-        /// <seealso cref="Apply{TSource, TResult<#= RTDecl #>}" />
+        /// <seealso cref="Ap.Apply{TSource, TResult<#= RTDecl #>}" />
         public static <#= Name #><TResult<#= RTDecl #>> Gather<TSource, TResult<#= RTDecl #>>(
             this <#= Name #><TSource<#= RTDecl #>> @this,
             <#= Name #><Func<TSource, TResult><#= RTDecl #>> applicative)
@@ -174,7 +174,7 @@ public partial class MonadTemplate
 
         #endregion
 
-        #region Query Expression Pattern.
+        #region Query Expression Pattern
 
         public static <#= Name #><TResult<#= RTDecl #>> <#= MapName #><TSource, TResult<#= RTDecl #>>(
             this <#= Name #><TSource<#= RTDecl #>> @this,
@@ -217,7 +217,7 @@ public partial class MonadTemplate
         }
 <#+ } // T4: End of !PreferLinqDialect. #>
 
-        // Generalize both Bind and Zip<TFirst, TSecond, TResult>.
+        // Generalizes both Bind() and Zip<TFirst, TSecond, TResult>().
         public static <#= Name #><TResult<#= RTDecl #>> SelectMany<TSource, TMiddle, TResult<#= RTDecl #>>(
             this <#= Name #><TSource<#= RTDecl #>> @this,
             Func<TSource, <#= Name #><TMiddle<#= RTDecl #>>> valueSelector,
