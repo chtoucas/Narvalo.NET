@@ -73,7 +73,7 @@ Narvalo.Finance:
 - Pretty sure that we can get rid off all uint and int overloads.
 
 Narvalo.Fx:
-- Result.Lift is too complicate.
+- Result.Lift should be sipmplified.
 - null-check's in generated methods.
 - Async versions?
 - https://blogs.msdn.microsoft.com/pfxteam/2013/04/03/tasks-monads-and-linq/
