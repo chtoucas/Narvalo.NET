@@ -70,6 +70,10 @@ namespace Narvalo.T4
         // NB: Automatically set to true when there is more than one generic parameter.
         protected bool DisableReturn { get; set; } = false;
 
+        protected bool DisableFlatten { get; set; } = false;
+
+        protected bool IsDelegate { get; set; } = false;
+
         protected bool EmitLinq { get; set; } = true;
 
         protected string InternalNamespace
@@ -451,6 +455,13 @@ namespace Narvalo.T4
             }
         }
 
+        protected void InitializeDelegate()
+        {
+            IsDelegate = true;
+            DisableReturn = true;
+            DisableFlatten = true;
+        }
+
         /// <summary>
         /// Initializes a MonadZero.
         /// </summary>
@@ -563,17 +574,29 @@ namespace Narvalo.T4
         {
             if (HasRightGenerics)
             {
-                // To output Result.Of<TResult, TError>, use:
-                // > Write(@"{0}.{1}<{2}{3}>", Name, ReturnName, name, RTDecl);
-                // but internally we prefer Result<TResult, TError>.η
-                Write(@"{0}<{2}{3}>.{1}", Name, EtaName, name, RTDecl);
+                if (IsDelegate)
+                {
+                    // To output Monad.Of<TResult, TError>, use:
+                    Write(@"{0}.{1}<{2}{3}>", Name, ReturnName, name, RTDecl);
+                }
+                else
+                {
+                    // Internally we prefer Result<TResult, TError>.η
+                    Write(@"{0}<{2}{3}>.{1}", Name, EtaName, name, RTDecl);
+                }
             }
             else
             {
-                // To output Maybe.Of, use:
-                // > Write(@"{0}.{1}", Name, ReturnName);
-                // but internally we prefer Maybe<TResult>.η
-                Write(@"{0}<{2}>.{1}", Name, EtaName, name);
+                if (IsDelegate)
+                {
+                    // To output Monad.Of<TResult, TError>, use:
+                    Write(@"{0}.{1}", Name, ReturnName);
+                }
+                else
+                {
+                    // Internally we prefer Maybe<TResult>.η
+                    Write(@"{0}<{2}>.{1}", Name, EtaName, name);
+                }
             }
         }
 

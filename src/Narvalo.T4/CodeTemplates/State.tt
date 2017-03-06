@@ -9,9 +9,11 @@
         {
             InitializeNamespacesForNarvaloFx();
             InitializeGenericParameters("T", "TState");
+            InitializeDelegate();
 
             EtaName = "Of";
-            Name = "Stateless";
+            Name = "Stateful";
+            EmitLinq = false;
         }
     }
 #>

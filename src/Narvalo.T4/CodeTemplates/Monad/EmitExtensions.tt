@@ -11,12 +11,14 @@ public partial class MonadTemplate
     // T4: EmitExtensions().
     public static partial class <#= ExtensionsClsName #>
     {
+<#+ if (!DisableFlatten) { #>
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
         /// </summary>
         public static <#= Name #><T<#= RTDecl #>> Flatten<T<#= RTDecl #>>(this <#= Name #><<#= Name #><T<#= RTDecl #>><#= RTDecl #>> @this)
             => <#= Name #><T<#= RTDecl #>>.μ(@this);
 
+<#+ } // End of DisableFlatten #>
         /// <seealso cref="Ap.Apply{TSource, TResult<#= RTDecl #>}(<#= Name #>{Func{TSource, TResult}<#= RTDecl #>}, <#= Name #>{TSource<#= RTDecl #>})" />
         public static <#= Name #><TResult<#= RTDecl #>> Gather<TSource, TResult<#= RTDecl #>>(
             this <#= Name #><TSource<#= RTDecl #>> @this,
