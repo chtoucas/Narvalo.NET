@@ -11,7 +11,7 @@
             InitializeGenericParameters("T", "TState");
 
             EtaName = "Of";
-            Name = "Stateful";
+            Name = "Stateless";
         }
     }
 #>

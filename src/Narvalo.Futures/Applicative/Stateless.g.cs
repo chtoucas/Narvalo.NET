@@ -21,12 +21,12 @@ namespace Narvalo.Applicative
     using Narvalo.Internal;
     using Narvalo.Linq;
 
-    // Provides a set of static methods for Stateful<T, TState>.
+    // Provides a set of static methods for Stateless<T, TState>.
     // T4: EmitHelpers().
-    public static partial class Stateful
+    public static partial class Stateless
     {
-        public static Stateful<IEnumerable<TSource>, TState> Repeat<TSource, TState>(
-            Stateful<TSource, TState> source,
+        public static Stateless<IEnumerable<TSource>, TState> Repeat<TSource, TState>(
+            Stateless<TSource, TState> source,
             int count)
         {
             Require.NotNull(source, nameof(source));
@@ -37,10 +37,10 @@ namespace Narvalo.Applicative
         #region Lift()
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="Stateful{T, TState}" /> values.
+        /// Promotes a function to use and return <see cref="Stateless{T, TState}" /> values.
         /// </summary>
-        /// <seealso cref="Stateful.Select{T, TResult, TState}" />
-        public static Func<Stateful<T, TState>, Stateful<TResult, TState>> Lift<T, TResult, TState>(
+        /// <seealso cref="Stateless.Select{T, TResult, TState}" />
+        public static Func<Stateless<T, TState>, Stateless<TResult, TState>> Lift<T, TResult, TState>(
             Func<T, TResult> func)
             => arg =>
             {
@@ -49,10 +49,10 @@ namespace Narvalo.Applicative
             };
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="Stateful{T, TState}" /> values.
+        /// Promotes a function to use and return <see cref="Stateless{T, TState}" /> values.
         /// </summary>
-        /// <seealso cref="Stateful.Zip{T1, T2, TResult, TState}(Stateful{T1, TState}, Stateful{T2, TState}, Func{T1, T2, TResult})"/>
-        public static Func<Stateful<T1, TState>, Stateful<T2, TState>, Stateful<TResult, TState>>
+        /// <seealso cref="Stateless.Zip{T1, T2, TResult, TState}(Stateless{T1, TState}, Stateless{T2, TState}, Func{T1, T2, TResult})"/>
+        public static Func<Stateless<T1, TState>, Stateless<T2, TState>, Stateless<TResult, TState>>
             Lift<T1, T2, TResult, TState>(Func<T1, T2, TResult> func)
             => (arg1, arg2) =>
             {
@@ -61,10 +61,10 @@ namespace Narvalo.Applicative
             };
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="Stateful{T, TState}" /> values.
+        /// Promotes a function to use and return <see cref="Stateless{T, TState}" /> values.
         /// </summary>
-        /// <seealso cref="Stateful.Zip{T1, T2, T3, TResult, TState}(Stateful{T1, TState}, Stateful{T2, TState}, Stateful{T3, TState}, Func{T1, T2, T3, TResult})"/>
-        public static Func<Stateful<T1, TState>, Stateful<T2, TState>, Stateful<T3, TState>, Stateful<TResult, TState>>
+        /// <seealso cref="Stateless.Zip{T1, T2, T3, TResult, TState}(Stateless{T1, TState}, Stateless{T2, TState}, Stateless{T3, TState}, Func{T1, T2, T3, TResult})"/>
+        public static Func<Stateless<T1, TState>, Stateless<T2, TState>, Stateless<T3, TState>, Stateless<TResult, TState>>
             Lift<T1, T2, T3, TResult, TState>(Func<T1, T2, T3, TResult> func)
             => (arg1, arg2, arg3) =>
             {
@@ -73,10 +73,10 @@ namespace Narvalo.Applicative
             };
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="Stateful{T, TState}" /> values.
+        /// Promotes a function to use and return <see cref="Stateless{T, TState}" /> values.
         /// </summary>
-        /// <seealso cref="Stateful.Zip{T1, T2, T3, T4, TResult, TState}(Stateful{T1, TState}, Stateful{T2, TState}, Stateful{T3, TState}, Stateful{T4, TState}, Func{T1, T2, T3, T4, TResult})"/>
-        public static Func<Stateful<T1, TState>, Stateful<T2, TState>, Stateful<T3, TState>, Stateful<T4, TState>, Stateful<TResult, TState>>
+        /// <seealso cref="Stateless.Zip{T1, T2, T3, T4, TResult, TState}(Stateless{T1, TState}, Stateless{T2, TState}, Stateless{T3, TState}, Stateless{T4, TState}, Func{T1, T2, T3, T4, TResult})"/>
+        public static Func<Stateless<T1, TState>, Stateless<T2, TState>, Stateless<T3, TState>, Stateless<T4, TState>, Stateless<TResult, TState>>
             Lift<T1, T2, T3, T4, TResult, TState>(
             Func<T1, T2, T3, T4, TResult> func)
             => (arg1, arg2, arg3, arg4) =>
@@ -86,10 +86,10 @@ namespace Narvalo.Applicative
             };
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="Stateful{T, TState}" /> values.
+        /// Promotes a function to use and return <see cref="Stateless{T, TState}" /> values.
         /// </summary>
-        /// <seealso cref="Stateful.Zip{T1, T2, T3, T4, T5, TResult, TState}(Stateful{T1, TState}, Stateful{T2, TState}, Stateful{T3, TState}, Stateful{T4, TState}, Stateful{T5, TState},Func{T1, T2, T3, T4, T5, TResult})"/>
-        public static Func<Stateful<T1, TState>, Stateful<T2, TState>, Stateful<T3, TState>, Stateful<T4, TState>, Stateful<T5, TState>, Stateful<TResult, TState>>
+        /// <seealso cref="Stateless.Zip{T1, T2, T3, T4, T5, TResult, TState}(Stateless{T1, TState}, Stateless{T2, TState}, Stateless{T3, TState}, Stateless{T4, TState}, Stateless{T5, TState},Func{T1, T2, T3, T4, T5, TResult})"/>
+        public static Func<Stateless<T1, TState>, Stateless<T2, TState>, Stateless<T3, TState>, Stateless<T4, TState>, Stateless<T5, TState>, Stateless<TResult, TState>>
             Lift<T1, T2, T3, T4, T5, TResult, TState>(
             Func<T1, T2, T3, T4, T5, TResult> func)
             => (arg1, arg2, arg3, arg4, arg5) =>
@@ -101,45 +101,45 @@ namespace Narvalo.Applicative
         #endregion
     }
 
-    // Provides extension methods for Stateful<T, TState>.
+    // Provides extension methods for Stateless<T, TState>.
     // T4: EmitExtensions().
-    public static partial class Stateful
+    public static partial class Stateless
     {
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
         /// </summary>
-        public static Stateful<T, TState> Flatten<T, TState>(this Stateful<Stateful<T, TState>, TState> @this)
-            => Stateful<T, TState>.μ(@this);
+        public static Stateless<T, TState> Flatten<T, TState>(this Stateless<Stateless<T, TState>, TState> @this)
+            => Stateless<T, TState>.μ(@this);
 
-        /// <seealso cref="Ap.Apply{TSource, TResult, TState}(Stateful{Func{TSource, TResult}, TState}, Stateful{TSource, TState})" />
-        public static Stateful<TResult, TState> Gather<TSource, TResult, TState>(
-            this Stateful<TSource, TState> @this,
-            Stateful<Func<TSource, TResult>, TState> applicative)
+        /// <seealso cref="Ap.Apply{TSource, TResult, TState}(Stateless{Func{TSource, TResult}, TState}, Stateless{TSource, TState})" />
+        public static Stateless<TResult, TState> Gather<TSource, TResult, TState>(
+            this Stateless<TSource, TState> @this,
+            Stateless<Func<TSource, TResult>, TState> applicative)
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(applicative, nameof(applicative));
             return applicative.Bind(func => @this.Select(func));
         }
 
-        public static Stateful<TResult, TState> ReplaceBy<TSource, TResult, TState>(
-            this Stateful<TSource, TState> @this,
+        public static Stateless<TResult, TState> ReplaceBy<TSource, TResult, TState>(
+            this Stateless<TSource, TState> @this,
             TResult value)
         {
             Require.NotNull(@this, nameof(@this));
             return @this.Select(_ => value);
         }
 
-        public static Stateful<TResult, TState> ContinueWith<TSource, TResult, TState>(
-            this Stateful<TSource, TState> @this,
-            Stateful<TResult, TState> other)
+        public static Stateless<TResult, TState> ContinueWith<TSource, TResult, TState>(
+            this Stateless<TSource, TState> @this,
+            Stateless<TResult, TState> other)
         {
             Require.NotNull(@this, nameof(@this));
             return @this.Bind(_ => other);
         }
 
-        public static Stateful<TSource, TState> PassThrough<TSource, TOther, TState>(
-            this Stateful<TSource, TState> @this,
-            Stateful<TOther, TState> other)
+        public static Stateless<TSource, TState> PassThrough<TSource, TOther, TState>(
+            this Stateless<TSource, TState> @this,
+            Stateless<TOther, TState> other)
         {
             Require.NotNull(@this, nameof(@this));
             Func<TSource, TOther, TSource> zipper = (arg, _) => arg;
@@ -147,7 +147,7 @@ namespace Narvalo.Applicative
             return @this.Zip(other, zipper);
         }
 
-        public static Stateful<_Unit_, TState> Skip<TSource, TState>(this Stateful<TSource, TState> @this)
+        public static Stateless<_Unit_, TState> Skip<TSource, TState>(this Stateless<TSource, TState> @this)
         {
             Require.NotNull(@this, nameof(@this));
             return @this.ReplaceBy(_Unit_.Default);
@@ -155,18 +155,18 @@ namespace Narvalo.Applicative
 
         #region Zip()
 
-        public static Stateful<Tuple<TSource, TOther>, TState> Zip<TSource, TOther, TState>(
-            this Stateful<TSource, TState> @this,
-            Stateful<TOther, TState> other)
+        public static Stateless<Tuple<TSource, TOther>, TState> Zip<TSource, TOther, TState>(
+            this Stateless<TSource, TState> @this,
+            Stateless<TOther, TState> other)
         {
             Require.NotNull(@this, nameof(@this));
             return @this.Zip(other, Tuple.Create);
         }
 
-        /// <seealso cref="Stateful.Lift{T1, T2, TResult, TState}(Func{T1, T2, TResult})"/>
-        public static Stateful<TResult, TState> Zip<T1, T2, TResult, TState>(
-            this Stateful<T1, TState> @this,
-            Stateful<T2, TState> second,
+        /// <seealso cref="Stateless.Lift{T1, T2, TResult, TState}(Func{T1, T2, TResult})"/>
+        public static Stateless<TResult, TState> Zip<T1, T2, TResult, TState>(
+            this Stateless<T1, TState> @this,
+            Stateless<T2, TState> second,
             Func<T1, T2, TResult> zipper)
         {
             Require.NotNull(@this, nameof(@this));
@@ -178,11 +178,11 @@ namespace Narvalo.Applicative
                     arg2 => zipper(arg1, arg2)));
         }
 
-        /// <seealso cref="Stateful.Lift{T1, T2, T3, TResult, TState}(Func{T1, T2, T3, TResult})"/>
-        public static Stateful<TResult, TState> Zip<T1, T2, T3, TResult, TState>(
-            this Stateful<T1, TState> @this,
-            Stateful<T2, TState> second,
-            Stateful<T3, TState> third,
+        /// <seealso cref="Stateless.Lift{T1, T2, T3, TResult, TState}(Func{T1, T2, T3, TResult})"/>
+        public static Stateless<TResult, TState> Zip<T1, T2, T3, TResult, TState>(
+            this Stateless<T1, TState> @this,
+            Stateless<T2, TState> second,
+            Stateless<T3, TState> third,
             Func<T1, T2, T3, TResult> zipper)
         {
             Require.NotNull(@this, nameof(@this));
@@ -201,12 +201,12 @@ namespace Narvalo.Applicative
                     third, (arg2, arg3) => zipper(arg1, arg2, arg3)));
         }
 
-        /// <seealso cref="Stateful.Lift{T1, T2, T3, T4, TResult, TState}(Func{T1, T2, T3, T4, TResult})"/>
-        public static Stateful<TResult, TState> Zip<T1, T2, T3, T4, TResult, TState>(
-             this Stateful<T1, TState> @this,
-             Stateful<T2, TState> second,
-             Stateful<T3, TState> third,
-             Stateful<T4, TState> fourth,
+        /// <seealso cref="Stateless.Lift{T1, T2, T3, T4, TResult, TState}(Func{T1, T2, T3, T4, TResult})"/>
+        public static Stateless<TResult, TState> Zip<T1, T2, T3, T4, TResult, TState>(
+             this Stateless<T1, TState> @this,
+             Stateless<T2, TState> second,
+             Stateless<T3, TState> third,
+             Stateless<T4, TState> fourth,
              Func<T1, T2, T3, T4, TResult> zipper)
         {
             Require.NotNull(@this, nameof(@this));
@@ -227,13 +227,13 @@ namespace Narvalo.Applicative
                     (arg2, arg3, arg4) => zipper(arg1, arg2, arg3, arg4)));
         }
 
-        /// <seealso cref="Stateful.Lift{T1, T2, T3, T4, T5, TResult, TState}(Func{T1, T2, T3, T4, T5, TResult})"/>
-        public static Stateful<TResult, TState> Zip<T1, T2, T3, T4, T5, TResult, TState>(
-            this Stateful<T1, TState> @this,
-            Stateful<T2, TState> second,
-            Stateful<T3, TState> third,
-            Stateful<T4, TState> fourth,
-            Stateful<T5, TState> fifth,
+        /// <seealso cref="Stateless.Lift{T1, T2, T3, T4, T5, TResult, TState}(Func{T1, T2, T3, T4, T5, TResult})"/>
+        public static Stateless<TResult, TState> Zip<T1, T2, T3, T4, T5, TResult, TState>(
+            this Stateless<T1, TState> @this,
+            Stateless<T2, TState> second,
+            Stateless<T3, TState> third,
+            Stateless<T4, TState> fourth,
+            Stateless<T5, TState> fifth,
             Func<T1, T2, T3, T4, T5, TResult> zipper)
         {
             Require.NotNull(@this, nameof(@this));
@@ -262,9 +262,9 @@ namespace Narvalo.Applicative
         #region Resource management
 
         // Bind() with automatic resource management.
-        public static Stateful<TResult, TState> Using<TSource, TResult, TState>(
-            this Stateful<TSource, TState> @this,
-            Func<TSource, Stateful<TResult, TState>> selector)
+        public static Stateless<TResult, TState> Using<TSource, TResult, TState>(
+            this Stateless<TSource, TState> @this,
+            Func<TSource, Stateless<TResult, TState>> selector)
             where TSource : IDisposable
         {
             Require.NotNull(@this, nameof(@this));
@@ -273,8 +273,8 @@ namespace Narvalo.Applicative
         }
 
         // Select() with automatic resource management.
-        public static Stateful<TResult, TState> Using<TSource, TResult, TState>(
-            this Stateful<TSource, TState> @this,
+        public static Stateless<TResult, TState> Using<TSource, TResult, TState>(
+            this Stateless<TSource, TState> @this,
             Func<TSource, TResult> selector)
             where TSource : IDisposable
         {
@@ -287,19 +287,19 @@ namespace Narvalo.Applicative
 
         #region Query Expression Pattern
 
-        public static Stateful<TResult, TState> Select<TSource, TResult, TState>(
-            this Stateful<TSource, TState> @this,
+        public static Stateless<TResult, TState> Select<TSource, TResult, TState>(
+            this Stateless<TSource, TState> @this,
             Func<TSource, TResult> selector)
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));
-            return @this.Bind(val => Stateful<TResult, TState>.Of(selector(val)));
+            return @this.Bind(val => Stateless<TResult, TState>.Of(selector(val)));
         }
 
         // Generalizes both Bind() and Zip<T1, T2, TResult>().
-        public static Stateful<TResult, TState> SelectMany<TSource, TMiddle, TResult, TState>(
-            this Stateful<TSource, TState> @this,
-            Func<TSource, Stateful<TMiddle, TState>> valueSelector,
+        public static Stateless<TResult, TState> SelectMany<TSource, TMiddle, TResult, TState>(
+            this Stateless<TSource, TState> @this,
+            Func<TSource, Stateless<TMiddle, TState>> valueSelector,
             Func<TSource, TMiddle, TResult> resultSelector)
         {
             Require.NotNull(@this, nameof(@this));
@@ -314,14 +314,14 @@ namespace Narvalo.Applicative
         #endregion
     }
 
-    // Provides extension methods for Stateful<Func<TSource, TResult>, TState>.
+    // Provides extension methods for Stateless<Func<TSource, TResult>, TState>.
     // T4: EmitApplicative().
     public static partial class Ap
     {
-        /// <seealso cref="Stateful.Gather{TSource, TResult, TState}" />
-        public static Stateful<TResult, TState> Apply<TSource, TResult, TState>(
-            this Stateful<Func<TSource, TResult>, TState> @this,
-            Stateful<TSource, TState> value)
+        /// <seealso cref="Stateless.Gather{TSource, TResult, TState}" />
+        public static Stateless<TResult, TState> Apply<TSource, TResult, TState>(
+            this Stateless<Func<TSource, TResult>, TState> @this,
+            Stateless<TSource, TState> value)
         {
             Require.NotNull(value, nameof(value));
             return value.Gather(@this);
@@ -332,42 +332,42 @@ namespace Narvalo.Applicative
     // T4: EmitKleisli().
     public static partial class Kleisli
     {
-        public static Stateful<IEnumerable<TResult>, TState> InvokeWith<TSource, TResult, TState>(
-            this Func<TSource, Stateful<TResult, TState>> @this,
+        public static Stateless<IEnumerable<TResult>, TState> InvokeWith<TSource, TResult, TState>(
+            this Func<TSource, Stateless<TResult, TState>> @this,
             IEnumerable<TSource> seq)
             => seq.SelectWith(@this);
 
-        public static Stateful<TResult, TState> InvokeWith<TSource, TResult, TState>(
-            this Func<TSource, Stateful<TResult, TState>> @this,
-            Stateful<TSource, TState> value)
+        public static Stateless<TResult, TState> InvokeWith<TSource, TResult, TState>(
+            this Func<TSource, Stateless<TResult, TState>> @this,
+            Stateless<TSource, TState> value)
         {
             Require.NotNull(value, nameof(value));
             return value.Bind(@this);
         }
 
-        public static Func<TSource, Stateful<TResult, TState>> Compose<TSource, TMiddle, TResult, TState>(
-            this Func<TSource, Stateful<TMiddle, TState>> @this,
-            Func<TMiddle, Stateful<TResult, TState>> second)
+        public static Func<TSource, Stateless<TResult, TState>> Compose<TSource, TMiddle, TResult, TState>(
+            this Func<TSource, Stateless<TMiddle, TState>> @this,
+            Func<TMiddle, Stateless<TResult, TState>> second)
         {
             Require.NotNull(@this, nameof(@this));
             return arg => @this(arg).Bind(second);
         }
 
-        public static Func<TSource, Stateful<TResult, TState>> ComposeBack<TSource, TMiddle, TResult, TState>(
-            this Func<TMiddle, Stateful<TResult, TState>> @this,
-            Func<TSource, Stateful<TMiddle, TState>> second)
+        public static Func<TSource, Stateless<TResult, TState>> ComposeBack<TSource, TMiddle, TResult, TState>(
+            this Func<TMiddle, Stateless<TResult, TState>> @this,
+            Func<TSource, Stateless<TMiddle, TState>> second)
         {
             Require.NotNull(second, nameof(second));
             return arg => second(arg).Bind(@this);
         }
     }
 
-    // Provides extension methods for IEnumerable<Stateful<T, TState>>.
+    // Provides extension methods for IEnumerable<Stateless<T, TState>>.
     // T4: EmitEnumerableExtensions().
-    public static partial class Stateful
+    public static partial class Stateless
     {
-        public static Stateful<IEnumerable<TSource>, TState> Collect<TSource, TState>(
-            this IEnumerable<Stateful<TSource, TState>> @this)
+        public static Stateless<IEnumerable<TSource>, TState> Collect<TSource, TState>(
+            this IEnumerable<Stateless<TSource, TState>> @this)
             => @this.CollectImpl();
     }
 }
@@ -381,25 +381,25 @@ namespace Narvalo.Internal
     using Narvalo.Applicative;
     using Narvalo.Linq;
 
-    // Provides default implementations for the extension methods for IEnumerable<Stateful<T, TState>>.
+    // Provides default implementations for the extension methods for IEnumerable<Stateless<T, TState>>.
     // You will certainly want to override them to improve performance.
     // T4: EmitEnumerableInternal().
     internal static partial class EnumerableExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Stateful<IEnumerable<TSource>, TState> CollectImpl<TSource, TState>(
-            this IEnumerable<Stateful<TSource, TState>> @this)
+        internal static Stateless<IEnumerable<TSource>, TState> CollectImpl<TSource, TState>(
+            this IEnumerable<Stateless<TSource, TState>> @this)
         {
             Require.NotNull(@this, nameof(@this));
 
-            return Stateful<IEnumerable<TSource>, TState>.Of(CollectIterator(@this));
+            return Stateless<IEnumerable<TSource>, TState>.Of(CollectIterator(@this));
         }
 
-        private static IEnumerable<TSource> CollectIterator<TSource, TState>(IEnumerable<Stateful<TSource, TState>> source)
+        private static IEnumerable<TSource> CollectIterator<TSource, TState>(IEnumerable<Stateless<TSource, TState>> source)
         {
             Demand.NotNull(source);
 
-            var unit = Stateful<Unit, TState>.Of(Unit.Default);
+            var unit = Stateless<Unit, TState>.Of(Unit.Default);
             var item = default(TSource);
 
             using (var iter = source.GetEnumerator())
@@ -441,44 +441,44 @@ namespace Narvalo.Linq
     // T4: EmitLinqCore().
     public static partial class Qperators
     {
-        public static Stateful<IEnumerable<TResult>, TState> SelectWith<TSource, TResult, TState>(
+        public static Stateless<IEnumerable<TResult>, TState> SelectWith<TSource, TResult, TState>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Stateful<TResult, TState>> selector)
+            Func<TSource, Stateless<TResult, TState>> selector)
             => @this.SelectWithImpl(selector);
 
-        public static Stateful<IEnumerable<TSource>, TState> WhereBy<TSource, TState>(
+        public static Stateless<IEnumerable<TSource>, TState> WhereBy<TSource, TState>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Stateful<bool, TState>> predicate)
+            Func<TSource, Stateless<bool, TState>> predicate)
             => @this.WhereByImpl(predicate);
 
-        public static Stateful<IEnumerable<TResult>, TState> ZipWith<TFirst, TSecond, TResult, TState>(
+        public static Stateless<IEnumerable<TResult>, TState> ZipWith<TFirst, TSecond, TResult, TState>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
-            Func<TFirst, TSecond, Stateful<TResult, TState>> resultSelector)
+            Func<TFirst, TSecond, Stateless<TResult, TState>> resultSelector)
             => @this.ZipWithImpl(second, resultSelector);
 
-        public static Stateful<TAccumulate, TState> Fold<TSource, TAccumulate, TState>(
+        public static Stateless<TAccumulate, TState> Fold<TSource, TAccumulate, TState>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Stateful<TAccumulate, TState>> accumulator)
+            Func<TAccumulate, TSource, Stateless<TAccumulate, TState>> accumulator)
             => @this.FoldImpl(seed, accumulator);
 
-        public static Stateful<TAccumulate, TState> Fold<TSource, TAccumulate, TState>(
+        public static Stateless<TAccumulate, TState> Fold<TSource, TAccumulate, TState>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Stateful<TAccumulate, TState>> accumulator,
-            Func<Stateful<TAccumulate, TState>, bool> predicate)
+            Func<TAccumulate, TSource, Stateless<TAccumulate, TState>> accumulator,
+            Func<Stateless<TAccumulate, TState>, bool> predicate)
             => @this.FoldImpl(seed, accumulator, predicate);
 
-        public static Stateful<TSource, TState> Reduce<TSource, TState>(
+        public static Stateless<TSource, TState> Reduce<TSource, TState>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Stateful<TSource, TState>> accumulator)
+            Func<TSource, TSource, Stateless<TSource, TState>> accumulator)
             => @this.ReduceImpl(accumulator);
 
-        public static Stateful<TSource, TState> Reduce<TSource, TState>(
+        public static Stateless<TSource, TState> Reduce<TSource, TState>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Stateful<TSource, TState>> accumulator,
-            Func<Stateful<TSource, TState>, bool> predicate)
+            Func<TSource, TSource, Stateless<TSource, TState>> accumulator,
+            Func<Stateless<TSource, TState>, bool> predicate)
             => @this.ReduceImpl(accumulator, predicate);
     }
 }
@@ -498,9 +498,9 @@ namespace Narvalo.Internal
     internal static partial class EnumerableExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Stateful<IEnumerable<TResult>, TState> SelectWithImpl<TSource, TResult, TState>(
+        internal static Stateless<IEnumerable<TResult>, TState> SelectWithImpl<TSource, TResult, TState>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Stateful<TResult, TState>> selector)
+            Func<TSource, Stateless<TResult, TState>> selector)
         {
             Demand.NotNull(@this);
             Demand.NotNull(selector);
@@ -509,24 +509,24 @@ namespace Narvalo.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Stateful<IEnumerable<TSource>, TState> WhereByImpl<TSource, TState>(
+        internal static Stateless<IEnumerable<TSource>, TState> WhereByImpl<TSource, TState>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Stateful<bool, TState>> predicate)
+            Func<TSource, Stateless<bool, TState>> predicate)
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
 
-            return Stateful<IEnumerable<TSource>, TState>.Of(WhereByIterator(@this, predicate));
+            return Stateless<IEnumerable<TSource>, TState>.Of(WhereByIterator(@this, predicate));
         }
 
         private static IEnumerable<TSource> WhereByIterator<TSource, TState>(
             IEnumerable<TSource> source,
-            Func<TSource, Stateful<bool, TState>> predicate)
+            Func<TSource, Stateless<bool, TState>> predicate)
         {
             Demand.NotNull(source);
             Demand.NotNull(predicate);
 
-            var unit = Stateful<Unit, TState>.Of(Unit.Default);
+            var unit = Stateless<Unit, TState>.Of(Unit.Default);
 
             using (var iter = source.GetEnumerator())
             {
@@ -548,10 +548,10 @@ namespace Narvalo.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Stateful<IEnumerable<TResult>, TState> ZipWithImpl<TFirst, TSecond, TResult, TState>(
+        internal static Stateless<IEnumerable<TResult>, TState> ZipWithImpl<TFirst, TSecond, TResult, TState>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
-            Func<TFirst, TSecond, Stateful<TResult, TState>> resultSelector)
+            Func<TFirst, TSecond, Stateless<TResult, TState>> resultSelector)
         {
             Demand.NotNull(resultSelector);
             Demand.NotNull(@this);
@@ -561,15 +561,15 @@ namespace Narvalo.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Stateful<TAccumulate, TState> FoldImpl<TSource, TAccumulate, TState>(
+        internal static Stateless<TAccumulate, TState> FoldImpl<TSource, TAccumulate, TState>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Stateful<TAccumulate, TState>> accumulator)
+            Func<TAccumulate, TSource, Stateless<TAccumulate, TState>> accumulator)
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
 
-            Stateful<TAccumulate, TState> retval = Stateful<TAccumulate, TState>.Of(seed);
+            Stateless<TAccumulate, TState> retval = Stateless<TAccumulate, TState>.Of(seed);
 
             using (var iter = @this.GetEnumerator())
             {
@@ -585,17 +585,17 @@ namespace Narvalo.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Stateful<TAccumulate, TState> FoldImpl<TSource, TAccumulate, TState>(
+        internal static Stateless<TAccumulate, TState> FoldImpl<TSource, TAccumulate, TState>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Stateful<TAccumulate, TState>> accumulator,
-            Func<Stateful<TAccumulate, TState>, bool> predicate)
+            Func<TAccumulate, TSource, Stateless<TAccumulate, TState>> accumulator,
+            Func<Stateless<TAccumulate, TState>, bool> predicate)
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
             Require.NotNull(predicate, nameof(predicate));
 
-            Stateful<TAccumulate, TState> retval = Stateful<TAccumulate, TState>.Of(seed);
+            Stateless<TAccumulate, TState> retval = Stateless<TAccumulate, TState>.Of(seed);
 
             using (var iter = @this.GetEnumerator())
             {
@@ -611,9 +611,9 @@ namespace Narvalo.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Stateful<TSource, TState> ReduceImpl<TSource, TState>(
+        internal static Stateless<TSource, TState> ReduceImpl<TSource, TState>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Stateful<TSource, TState>> accumulator)
+            Func<TSource, TSource, Stateless<TSource, TState>> accumulator)
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
@@ -625,7 +625,7 @@ namespace Narvalo.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                Stateful<TSource, TState> retval = Stateful<TSource, TState>.Of(iter.Current);
+                Stateless<TSource, TState> retval = Stateless<TSource, TState>.Of(iter.Current);
 
                 while (iter.MoveNext())
                 {
@@ -639,10 +639,10 @@ namespace Narvalo.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Stateful<TSource, TState> ReduceImpl<TSource, TState>(
+        internal static Stateless<TSource, TState> ReduceImpl<TSource, TState>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Stateful<TSource, TState>> accumulator,
-            Func<Stateful<TSource, TState>, bool> predicate)
+            Func<TSource, TSource, Stateless<TSource, TState>> accumulator,
+            Func<Stateless<TSource, TState>, bool> predicate)
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
@@ -655,7 +655,7 @@ namespace Narvalo.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                Stateful<TSource, TState> retval = Stateful<TSource, TState>.Of(iter.Current);
+                Stateless<TSource, TState> retval = Stateless<TSource, TState>.Of(iter.Current);
 
                 while (predicate(retval) && iter.MoveNext())
                 {
