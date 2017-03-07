@@ -15,7 +15,6 @@ public partial class MonadTemplate
             this IEnumerable<<#= Name #><TSource<#= RTDecl #>>> @this)
         {
             <#+ WriteNotNull(true); #>
-
             return <#+ WriteFactory("IEnumerable<TSource>"); #>(CollectIterator(@this));
         }
 
@@ -58,7 +57,6 @@ public partial class MonadTemplate
             this IEnumerable<<#= Name #><TSource>> @this)
         {
             Demand.NotNull(@this);
-
             return @this.Aggregate(<#= Name #><TSource>.<#= ZeroName #>, (m, n) => m.<#= PlusName #>(n));
         }
 <#+ } // T4: End of HasSum. #>

@@ -135,9 +135,7 @@ namespace Narvalo.Applicative
             Stateful<TOther, TState> other)
         {
             Require.NotNull(@this, nameof(@this));
-            Func<TSource, TOther, TSource> zipper = (arg, _) => arg;
-
-            return @this.Zip(other, zipper);
+            return @this.Zip(other, (arg, _) => arg);
         }
 
         public static Stateful<_Unit_, TState> Skip<TSource, TState>(this Stateful<TSource, TState> @this)
@@ -374,7 +372,6 @@ namespace Narvalo.Internal
             this IEnumerable<Stateful<TSource, TState>> @this)
         {
             Require.NotNull(@this, nameof(@this));
-
             return Stateful.Of<IEnumerable<TSource>, TState>(CollectIterator(@this));
         }
 

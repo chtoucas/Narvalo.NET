@@ -5,7 +5,6 @@ public partial class MonadTemplate
     public void EmitFacts()
     {
 #>
-
 namespace <#= Namespace #>
 {
     using System;

@@ -17,6 +17,8 @@ namespace Narvalo.Applicative
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
+    using Narvalo.Internal;
     using Narvalo.Linq;
 
     // Provides a set of static methods for Result<T, TError>.
@@ -135,14 +137,12 @@ namespace Narvalo.Applicative
             return @this.Bind(_ => other);
         }
 
-        public static Result<TSource, TError> PassThrough<TSource, TOther, TError>(
+        public static Result<TSource, TError> PassBy<TSource, TOther, TError>(
             this Result<TSource, TError> @this,
             Result<TOther, TError> other)
         {
             /* T4: NotNull(@this) */
-            Func<TSource, TOther, TSource> zipper = (arg, _) => arg;
-
-            return @this.Zip(other, zipper);
+            return @this.Zip(other, (arg, _) => arg);
         }
 
         public static Result<_Unit_, TError> Skip<TSource, TError>(this Result<TSource, TError> @this)
@@ -379,7 +379,6 @@ namespace Narvalo.Internal
             this IEnumerable<Result<TSource, TError>> @this)
         {
             Require.NotNull(@this, nameof(@this));
-
             return Result<IEnumerable<TSource>, TError>.Of(CollectIterator(@this));
         }
 

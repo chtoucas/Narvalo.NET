@@ -48,8 +48,7 @@ namespace Edufun.Haskell.Templates
         /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
         /// <param name="value">A value to be wrapped into an object of type <see cref="MonadPlus{T}"/>.</param>
         /// <returns>An instance of the <see cref="MonadPlus{T}"/> class for the specified value.</returns>
-        public static MonadPlus<T> Of<T>(T value)
-            => MonadPlus<T>.η(value);
+        public static MonadPlus<T> Of<T>(T value) => MonadPlus<T>.η(value);
 
         public static MonadPlus<_Unit_> Guard(bool predicate) => predicate ? Unit : Zero;
 
@@ -165,14 +164,12 @@ namespace Edufun.Haskell.Templates
             return @this.Bind(_ => other);
         }
 
-        public static MonadPlus<TSource> PassThrough<TSource, TOther>(
+        public static MonadPlus<TSource> PassBy<TSource, TOther>(
             this MonadPlus<TSource> @this,
             MonadPlus<TOther> other)
         {
             Require.NotNull(@this, nameof(@this));
-            Func<TSource, TOther, TSource> zipper = (arg, _) => arg;
-
-            return @this.Zip(other, zipper);
+            return @this.Zip(other, (arg, _) => arg);
         }
 
         public static MonadPlus<_Unit_> Skip<TSource>(this MonadPlus<TSource> @this)
@@ -508,7 +505,6 @@ namespace Edufun.Haskell.Templates.Internal
             this IEnumerable<MonadPlus<TSource>> @this)
         {
             Require.NotNull(@this, nameof(@this));
-
             return MonadPlus<IEnumerable<TSource>>.η(CollectIterator(@this));
         }
 
@@ -543,7 +539,6 @@ namespace Edufun.Haskell.Templates.Internal
             this IEnumerable<MonadPlus<TSource>> @this)
         {
             Demand.NotNull(@this);
-
             return @this.Aggregate(MonadPlus<TSource>.Zero, (m, n) => m.Plus(n));
         }
     }

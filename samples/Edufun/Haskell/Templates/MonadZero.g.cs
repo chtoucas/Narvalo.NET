@@ -48,8 +48,7 @@ namespace Edufun.Haskell.Templates
         /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
         /// <param name="value">A value to be wrapped into an object of type <see cref="MonadZero{T}"/>.</param>
         /// <returns>An instance of the <see cref="MonadZero{T}"/> class for the specified value.</returns>
-        public static MonadZero<T> Of<T>(T value)
-            => MonadZero<T>.η(value);
+        public static MonadZero<T> Of<T>(T value) => MonadZero<T>.η(value);
 
         public static MonadZero<_Unit_> Guard(bool predicate) => predicate ? Unit : Zero;
 
@@ -165,14 +164,12 @@ namespace Edufun.Haskell.Templates
             return @this.Bind(_ => other);
         }
 
-        public static MonadZero<TSource> PassThrough<TSource, TOther>(
+        public static MonadZero<TSource> PassBy<TSource, TOther>(
             this MonadZero<TSource> @this,
             MonadZero<TOther> other)
         {
             Require.NotNull(@this, nameof(@this));
-            Func<TSource, TOther, TSource> zipper = (arg, _) => arg;
-
-            return @this.Zip(other, zipper);
+            return @this.Zip(other, (arg, _) => arg);
         }
 
         public static MonadZero<_Unit_> Skip<TSource>(this MonadZero<TSource> @this)
@@ -503,7 +500,6 @@ namespace Edufun.Haskell.Templates.Internal
             this IEnumerable<MonadZero<TSource>> @this)
         {
             Require.NotNull(@this, nameof(@this));
-
             return MonadZero<IEnumerable<TSource>>.η(CollectIterator(@this));
         }
 

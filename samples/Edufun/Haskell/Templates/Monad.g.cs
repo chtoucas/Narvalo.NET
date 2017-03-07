@@ -43,8 +43,7 @@ namespace Edufun.Haskell.Templates
         /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
         /// <param name="value">A value to be wrapped into an object of type <see cref="Monad{T}"/>.</param>
         /// <returns>An instance of the <see cref="Monad{T}"/> class for the specified value.</returns>
-        public static Monad<T> Of<T>(T value)
-            => Monad<T>.η(value);
+        public static Monad<T> Of<T>(T value) => Monad<T>.η(value);
 
         public static Monad<IEnumerable<TSource>> Repeat<TSource>(
             Monad<TSource> source,
@@ -158,14 +157,12 @@ namespace Edufun.Haskell.Templates
             return @this.Bind(_ => other);
         }
 
-        public static Monad<TSource> PassThrough<TSource, TOther>(
+        public static Monad<TSource> PassBy<TSource, TOther>(
             this Monad<TSource> @this,
             Monad<TOther> other)
         {
             Require.NotNull(@this, nameof(@this));
-            Func<TSource, TOther, TSource> zipper = (arg, _) => arg;
-
-            return @this.Zip(other, zipper);
+            return @this.Zip(other, (arg, _) => arg);
         }
 
         public static Monad<_Unit_> Skip<TSource>(this Monad<TSource> @this)
@@ -402,7 +399,6 @@ namespace Edufun.Haskell.Templates.Internal
             this IEnumerable<Monad<TSource>> @this)
         {
             Require.NotNull(@this, nameof(@this));
-
             return Monad<IEnumerable<TSource>>.η(CollectIterator(@this));
         }
 

@@ -46,8 +46,7 @@ namespace Narvalo.Applicative
         /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
         /// <param name="value">A value to be wrapped into an object of type <see cref="Maybe{T}"/>.</param>
         /// <returns>An instance of the <see cref="Maybe{T}"/> class for the specified value.</returns>
-        public static Maybe<T> Of<T>(T value)
-            => Maybe<T>.η(value);
+        public static Maybe<T> Of<T>(T value) => Maybe<T>.η(value);
 
         public static Maybe<_Unit_> Guard(bool predicate) => predicate ? Unit : None;
 
@@ -163,14 +162,12 @@ namespace Narvalo.Applicative
             return @this.Bind(_ => other);
         }
 
-        public static Maybe<TSource> PassThrough<TSource, TOther>(
+        public static Maybe<TSource> PassBy<TSource, TOther>(
             this Maybe<TSource> @this,
             Maybe<TOther> other)
         {
             /* T4: NotNull(@this) */
-            Func<TSource, TOther, TSource> zipper = (arg, _) => arg;
-
-            return @this.Zip(other, zipper);
+            return @this.Zip(other, (arg, _) => arg);
         }
 
         public static Maybe<_Unit_> Skip<TSource>(this Maybe<TSource> @this)
@@ -505,7 +502,6 @@ namespace Narvalo.Internal
             this IEnumerable<Maybe<TSource>> @this)
         {
             Require.NotNull(@this, nameof(@this));
-
             return Maybe<IEnumerable<TSource>>.η(CollectIterator(@this));
         }
 
@@ -540,7 +536,6 @@ namespace Narvalo.Internal
             this IEnumerable<Maybe<TSource>> @this)
         {
             Demand.NotNull(@this);
-
             return @this.Aggregate(Maybe<TSource>.None, (m, n) => m.OrElse(n));
         }
     }

@@ -45,14 +45,12 @@ public partial class MonadTemplate
             return @this.Bind(_ => other);
         }
 
-        public static <#= Name #><TSource<#= RTDecl #>> PassThrough<TSource, TOther<#= RTDecl #>>(
+        public static <#= Name #><TSource<#= RTDecl #>> PassBy<TSource, TOther<#= RTDecl #>>(
             this <#= Name #><TSource<#= RTDecl #>> @this,
             <#= Name #><TOther<#= RTDecl #>> other)
         {
             <#+ WriteNotNull(); #>
-            Func<TSource, TOther, TSource> zipper = (arg, _) => arg;
-
-            return @this.Zip(other, zipper);
+            return @this.Zip(other, (arg, _) => arg);
         }
 
         public static <#= Name #><_Unit_<#= RTDecl #>> Skip<TSource<#= RTDecl #>>(this <#= Name #><TSource<#= RTDecl #>> @this)

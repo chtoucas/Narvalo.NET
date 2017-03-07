@@ -137,14 +137,12 @@ namespace Narvalo.Applicative
             return @this.Bind(_ => other);
         }
 
-        public static Either<TSource, TRight> PassThrough<TSource, TOther, TRight>(
+        public static Either<TSource, TRight> PassBy<TSource, TOther, TRight>(
             this Either<TSource, TRight> @this,
             Either<TOther, TRight> other)
         {
             Require.NotNull(@this, nameof(@this));
-            Func<TSource, TOther, TSource> zipper = (arg, _) => arg;
-
-            return @this.Zip(other, zipper);
+            return @this.Zip(other, (arg, _) => arg);
         }
 
         public static Either<_Unit_, TRight> Skip<TSource, TRight>(this Either<TSource, TRight> @this)
@@ -381,7 +379,6 @@ namespace Narvalo.Internal
             this IEnumerable<Either<TSource, TRight>> @this)
         {
             Require.NotNull(@this, nameof(@this));
-
             return Either<IEnumerable<TSource>, TRight>.OfLeft(CollectIterator(@this));
         }
 

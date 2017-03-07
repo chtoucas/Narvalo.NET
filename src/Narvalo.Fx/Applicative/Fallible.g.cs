@@ -17,6 +17,8 @@ namespace Narvalo.Applicative
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
+    using Narvalo.Internal;
     using Narvalo.Linq;
 
     // Provides a set of static methods for Fallible<T>.
@@ -39,8 +41,7 @@ namespace Narvalo.Applicative
         /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
         /// <param name="value">A value to be wrapped into an object of type <see cref="Fallible{T}"/>.</param>
         /// <returns>An instance of the <see cref="Fallible{T}"/> class for the specified value.</returns>
-        public static Fallible<T> Of<T>(T value)
-            => Fallible<T>.η(value);
+        public static Fallible<T> Of<T>(T value) => Fallible<T>.η(value);
 
         public static Fallible<IEnumerable<TSource>> Repeat<TSource>(
             Fallible<TSource> source,
@@ -154,14 +155,12 @@ namespace Narvalo.Applicative
             return @this.Bind(_ => other);
         }
 
-        public static Fallible<TSource> PassThrough<TSource, TOther>(
+        public static Fallible<TSource> PassBy<TSource, TOther>(
             this Fallible<TSource> @this,
             Fallible<TOther> other)
         {
             /* T4: NotNull(@this) */
-            Func<TSource, TOther, TSource> zipper = (arg, _) => arg;
-
-            return @this.Zip(other, zipper);
+            return @this.Zip(other, (arg, _) => arg);
         }
 
         public static Fallible<_Unit_> Skip<TSource>(this Fallible<TSource> @this)
@@ -398,7 +397,6 @@ namespace Narvalo.Internal
             this IEnumerable<Fallible<TSource>> @this)
         {
             Require.NotNull(@this, nameof(@this));
-
             return Fallible<IEnumerable<TSource>>.η(CollectIterator(@this));
         }
 

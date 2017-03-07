@@ -40,8 +40,7 @@ namespace Narvalo.Applicative
         /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
         /// <param name="value">A value to be wrapped into an object of type <see cref="Ident{T}"/>.</param>
         /// <returns>An instance of the <see cref="Ident{T}"/> class for the specified value.</returns>
-        public static Ident<T> Of<T>(T value)
-            => Ident<T>.η(value);
+        public static Ident<T> Of<T>(T value) => Ident<T>.η(value);
 
         public static Ident<IEnumerable<TSource>> Repeat<TSource>(
             Ident<TSource> source,
@@ -155,14 +154,12 @@ namespace Narvalo.Applicative
             return @this.Bind(_ => other);
         }
 
-        public static Ident<TSource> PassThrough<TSource, TOther>(
+        public static Ident<TSource> PassBy<TSource, TOther>(
             this Ident<TSource> @this,
             Ident<TOther> other)
         {
             /* T4: NotNull(@this) */
-            Func<TSource, TOther, TSource> zipper = (arg, _) => arg;
-
-            return @this.Zip(other, zipper);
+            return @this.Zip(other, (arg, _) => arg);
         }
 
         public static Ident<_Unit_> Skip<TSource>(this Ident<TSource> @this)
@@ -399,7 +396,6 @@ namespace Narvalo.Internal
             this IEnumerable<Ident<TSource>> @this)
         {
             Require.NotNull(@this, nameof(@this));
-
             return Ident<IEnumerable<TSource>>.η(CollectIterator(@this));
         }
 

@@ -17,6 +17,8 @@ namespace Narvalo.Applicative
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
+    using Narvalo.Internal;
     using Narvalo.Linq;
 
     // Provides a set of static methods for Outcome<T>.
@@ -39,8 +41,7 @@ namespace Narvalo.Applicative
         /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
         /// <param name="value">A value to be wrapped into an object of type <see cref="Outcome{T}"/>.</param>
         /// <returns>An instance of the <see cref="Outcome{T}"/> class for the specified value.</returns>
-        public static Outcome<T> Of<T>(T value)
-            => Outcome<T>.η(value);
+        public static Outcome<T> Of<T>(T value) => Outcome<T>.η(value);
 
         public static Outcome<IEnumerable<TSource>> Repeat<TSource>(
             Outcome<TSource> source,
@@ -154,14 +155,12 @@ namespace Narvalo.Applicative
             return @this.Bind(_ => other);
         }
 
-        public static Outcome<TSource> PassThrough<TSource, TOther>(
+        public static Outcome<TSource> PassBy<TSource, TOther>(
             this Outcome<TSource> @this,
             Outcome<TOther> other)
         {
             /* T4: NotNull(@this) */
-            Func<TSource, TOther, TSource> zipper = (arg, _) => arg;
-
-            return @this.Zip(other, zipper);
+            return @this.Zip(other, (arg, _) => arg);
         }
 
         public static Outcome<_Unit_> Skip<TSource>(this Outcome<TSource> @this)
@@ -398,7 +397,6 @@ namespace Narvalo.Internal
             this IEnumerable<Outcome<TSource>> @this)
         {
             Require.NotNull(@this, nameof(@this));
-
             return Outcome<IEnumerable<TSource>>.η(CollectIterator(@this));
         }
 
