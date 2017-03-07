@@ -378,7 +378,7 @@ namespace Edufun.Haskell
             Func<Func<Prototype<TSource>, Prototype<TResult>>, Func<Prototype<TSource>, Prototype<TResult>>> g
                 = f => next => f(value.ContinueWith(next));
 
-            return YCombinator.Fix(g);
+            return Recursion.Fix(g);
         }
 
         #endregion

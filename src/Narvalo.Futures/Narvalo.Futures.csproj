@@ -15,6 +15,13 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Applicative\Stateful.cs" />
+    <Compile Include="Applicative\Stateful.g.cs">
+      <DependentUpon>Stateful.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Applicative\StateObject`.cs" />
     <Compile Include="BinaryEncoder.cs" />
     <Compile Include="Cerbere\ContractHelpers.cs" />
     <Compile Include="Configuration\AbsoluteUriValidator.cs" />
@@ -134,6 +141,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Applicative\Stateful.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Stateful.g.cs</LastGenOutput>
+    </None>
     <Content Include="Finance\SnvCurrencyInfoProvider.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SnvCurrencyInfoProvider.g.cs</LastGenOutput>

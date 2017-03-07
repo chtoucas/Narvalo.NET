@@ -10,7 +10,7 @@ namespace Edufun.Sequences
     public static class Fibonacci
     {
         public static Func<int, int> Recurse()
-            => YCombinator.Fix<int, int>(iter => i => i > 1 ? iter(i - 1) + iter(i - 2) : i);
+            => Recursion.Fix<int, int>(iter => i => i > 1 ? iter(i - 1) + iter(i - 2) : i);
 
         public static IEnumerable<int> Iterate()
         {

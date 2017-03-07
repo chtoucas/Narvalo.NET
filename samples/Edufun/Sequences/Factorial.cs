@@ -11,7 +11,7 @@ namespace Edufun.Sequences
     public static class Factorial
     {
         public static Func<int, int> Recurse()
-            => YCombinator.Fix<int, int>(iter => i => i == 0 ? 1 : i * iter(i - 1));
+            => Recursion.Fix<int, int>(iter => i => i == 0 ? 1 : i * iter(i - 1));
 
         public static Func<int, int> Aggregate()
             => i => i == 0 ? 1 : Enumerable.Range(1, i).Aggregate((acc, j) => j * acc);

@@ -43,13 +43,6 @@
     <Compile Include="Applicative\Outcome.Shadowing.cs" />
     <Compile Include="Applicative\Outcome%24.cs" />
     <Compile Include="Applicative\Fallible.Helpers.cs" />
-    <Compile Include="Applicative\Stateful.cs" />
-    <Compile Include="Applicative\Stateful.g.cs">
-      <DependentUpon>Stateful.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Applicative\StateObject`.cs" />
     <Compile Include="Internal\ISecondaryContainer`1.cs" />
     <Compile Include="Internal\IEither`2.cs" />
     <Compile Include="Internal\IMaybe`1.cs" />
@@ -110,7 +103,7 @@
       <DependentUpon>Strings.fr.resx</DependentUpon>
     </Compile>
     <Compile Include="Applicative\Unit.cs" />
-    <Compile Include="Applicative\YCombinator.cs" />
+    <Compile Include="Applicative\Recursion.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml" />
@@ -163,10 +156,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Outcome.g.cs</LastGenOutput>
     </Content>
-    <None Include="Applicative\Stateful.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Stateful.g.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

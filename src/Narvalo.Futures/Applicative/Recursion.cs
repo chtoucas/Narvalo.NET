@@ -16,7 +16,7 @@ namespace Narvalo.Applicative
 
     internal delegate Func<T1, T2, TResult> Recursive<T1, T2, TResult>(Recursive<T1, T2, TResult> rec);
 
-    public static class Recursion
+    public static class RecursionEx
     {
         public static Action Fix(Func<Action, Action> generator)
         {

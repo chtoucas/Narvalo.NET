@@ -6,8 +6,9 @@ namespace Narvalo.Applicative
 
     internal delegate Func<TSource, TResult> Recursive<TSource, TResult>(Recursive<TSource, TResult> rec);
 
-    public static class YCombinator
+    public static class Recursion
     {
+        // Y Combinator.
         public static Func<TSource, TResult> Fix<TSource, TResult>(
             Func<Func<TSource, TResult>, Func<TSource, TResult>> generator)
         {

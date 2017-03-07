@@ -130,7 +130,7 @@ namespace Narvalo.Applicative
             return @this.Bind(_ => other);
         }
 
-        public static Stateful<TSource, TState> PassThrough<TSource, TOther, TState>(
+        public static Stateful<TSource, TState> PassBy<TSource, TOther, TState>(
             this Stateful<TSource, TState> @this,
             Stateful<TOther, TState> other)
         {
