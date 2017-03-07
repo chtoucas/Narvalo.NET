@@ -88,7 +88,7 @@ namespace Narvalo.Linq
 
             foreach (var item in source)
             {
-                var m = predicate.Invoke(item);
+                var m = predicate(item);
 
                 if (m.IsSuccess && m.Value) { yield return item; }
             }
@@ -103,7 +103,7 @@ namespace Narvalo.Linq
 
             foreach (var item in source)
             {
-                var m = predicate.Invoke(item);
+                var m = predicate(item);
 
                 if (m.IsSuccess && m.Value) { yield return item; }
             }

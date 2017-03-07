@@ -15,7 +15,7 @@ namespace Narvalo.Applicative
 
             try
             {
-                action.Invoke();
+                action();
                 return Ok;
             }
             catch (Exception ex)
@@ -49,7 +49,7 @@ namespace Narvalo.Applicative
 
             try
             {
-                action.Invoke();
+                action();
                 return Ok;
             }
             catch (Exception ex)
@@ -59,7 +59,7 @@ namespace Narvalo.Applicative
             }
             finally
             {
-                finallyAction.Invoke();
+                finallyAction();
             }
         }
 

@@ -25,7 +25,7 @@ namespace Narvalo.Applicative
 
             try
             {
-                return Fallible.Of(selector.Invoke(Value));
+                return Fallible.Of(selector(Value));
             }
             catch (Exception ex)
             {

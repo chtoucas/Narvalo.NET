@@ -117,7 +117,7 @@ namespace Narvalo.Linq
 
             foreach (var item in source)
             {
-                var m = selector.Invoke(item);
+                var m = selector(item);
 
                 if (m.IsSuccess) { yield return m.Value; }
             }
@@ -132,7 +132,7 @@ namespace Narvalo.Linq
 
             foreach (var item in source)
             {
-                var m = selector.Invoke(item);
+                var m = selector(item);
 
                 if (m.IsSuccess) { yield return m.Value; }
             }
