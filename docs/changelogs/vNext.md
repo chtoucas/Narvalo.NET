@@ -73,9 +73,10 @@ Narvalo.Finance:
 - Pretty sure that we can get rid off all uint and int overloads.
 
 Narvalo.Fx:
-- Result.Lift should be sipmplified.
+- Result.Lift should be simplified.
 - null-check's in generated methods.
-- Async versions?
+- Async versions? Lazy versions
+- For a lazy Stateful, we could use Lazy<T, TMetadata> from System.ComponentModel.Composition.
 - https://blogs.msdn.microsoft.com/pfxteam/2013/04/03/tasks-monads-and-linq/
 - http://tomasp.net/blog/idioms-in-linq.aspx/
 - https://ruudvanasseldonk.com/2013/05/01/the-task-monad-in-csharp

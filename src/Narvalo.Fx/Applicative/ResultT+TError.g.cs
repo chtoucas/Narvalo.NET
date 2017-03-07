@@ -155,14 +155,6 @@ namespace Narvalo.Applicative
 
         #region Zip()
 
-        public static Result<Tuple<TSource, TOther>, TError> Zip<TSource, TOther, TError>(
-            this Result<TSource, TError> @this,
-            Result<TOther, TError> other)
-        {
-            /* T4: NotNull(@this) */
-            return @this.Zip(other, Tuple.Create);
-        }
-
         /// <seealso cref="Result.Lift{T1, T2, TResult, TError}(Func{T1, T2, TResult})"/>
         public static Result<TResult, TError> Zip<T1, T2, TResult, TError>(
             this Result<T1, TError> @this,

@@ -181,14 +181,6 @@ namespace Narvalo.Applicative
 
         #region Zip()
 
-        public static Maybe<Tuple<TSource, TOther>> Zip<TSource, TOther>(
-            this Maybe<TSource> @this,
-            Maybe<TOther> other)
-        {
-            /* T4: NotNull(@this) */
-            return @this.Zip(other, Tuple.Create);
-        }
-
         /// <seealso cref="Maybe.Lift{T1, T2, TResult}(Func{T1, T2, TResult})"/>
         public static Maybe<TResult> Zip<T1, T2, TResult>(
             this Maybe<T1> @this,

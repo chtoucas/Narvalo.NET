@@ -149,14 +149,6 @@ namespace Narvalo.Applicative
 
         #region Zip()
 
-        public static Stateful<Tuple<TSource, TOther>, TState> Zip<TSource, TOther, TState>(
-            this Stateful<TSource, TState> @this,
-            Stateful<TOther, TState> other)
-        {
-            Require.NotNull(@this, nameof(@this));
-            return @this.Zip(other, Tuple.Create);
-        }
-
         /// <seealso cref="Stateful.Lift{T1, T2, TResult, TState}(Func{T1, T2, TResult})"/>
         public static Stateful<TResult, TState> Zip<T1, T2, TResult, TState>(
             this Stateful<T1, TState> @this,

@@ -174,14 +174,6 @@ namespace Narvalo.Applicative
 
         #region Zip()
 
-        public static Ident<Tuple<TSource, TOther>> Zip<TSource, TOther>(
-            this Ident<TSource> @this,
-            Ident<TOther> other)
-        {
-            /* T4: NotNull(@this) */
-            return @this.Zip(other, Tuple.Create);
-        }
-
         /// <seealso cref="Ident.Lift{T1, T2, TResult}(Func{T1, T2, TResult})"/>
         public static Ident<TResult> Zip<T1, T2, TResult>(
             this Ident<T1> @this,

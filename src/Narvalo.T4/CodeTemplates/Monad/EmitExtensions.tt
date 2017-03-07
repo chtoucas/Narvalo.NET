@@ -68,14 +68,6 @@ public partial class MonadTemplate
 
         #region Zip()
 
-        public static <#= Name #><Tuple<TSource, TOther><#= RTDecl #>> Zip<TSource, TOther<#= RTDecl #>>(
-            this <#= Name #><TSource<#= RTDecl #>> @this,
-            <#= Name #><TOther<#= RTDecl #>> other)
-        {
-            <#+ WriteNotNull(); #>
-            return @this.Zip(other, Tuple.Create);
-        }
-
         /// <seealso cref="<#= Name #>.Lift{T1, T2, TResult<#= RTDecl #>}(Func{T1, T2, TResult})"/>
         public static <#= Name #><TResult<#= RTDecl #>> Zip<T1, T2, TResult<#= RTDecl #>>(
             this <#= Name #><T1<#= RTDecl #>> @this,

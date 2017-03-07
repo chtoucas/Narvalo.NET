@@ -13,8 +13,7 @@ namespace Narvalo.Applicative
     }
 
     // To be replaced by ValueTuple<T, TState> when available.
-    public partial struct StateObject<T, TState>
-        : IEquatable<StateObject<T, TState>>, IStructuralEquatable
+    public partial struct StateObject<T, TState> : IEquatable<StateObject<T, TState>>, IStructuralEquatable
     {
         public StateObject(T result, TState state)
         {

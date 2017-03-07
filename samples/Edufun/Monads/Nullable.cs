@@ -30,7 +30,7 @@ namespace Edufun.Monads
             return @this.HasValue ? selector(@this.Value) : null;
         }
 
-        public static TResult? Then<TSource, TResult>(this TSource? @this, TResult? other)
+        public static TResult? ContinueWith<TSource, TResult>(this TSource? @this, TResult? other)
             where TSource : struct
             where TResult : struct
             => @this.HasValue ? other : null;

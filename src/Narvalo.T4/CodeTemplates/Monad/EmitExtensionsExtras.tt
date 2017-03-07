@@ -5,10 +5,18 @@ public partial class MonadTemplate
     protected void EmitExtensionsExtras()
     {
 #>
-    // Provides more extension methods for <#= Name #><T<#= RTDecl #>>.
+    // Provides experimental extension methods for <#= Name #><T<#= RTDecl #>>.
     // T4: EmitExtensionsExtras().
     public static partial class <#= ExtensionsClsName #>
     {
+        public static <#= Name #><Tuple<TSource, TOther><#= RTDecl #>> Zip<TSource, TOther<#= RTDecl #>>(
+            this <#= Name #><TSource<#= RTDecl #>> @this,
+            <#= Name #><TOther<#= RTDecl #>> other)
+        {
+            <#+ WriteNotNull(); #>
+            return @this.Zip(other, Tuple.Create);
+        }
+
 <#+ if (HasZero) { #>
         public static <#= Name #><TResult> If<TSource, TResult>(
             this <#= Name #><TSource> @this,

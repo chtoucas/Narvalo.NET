@@ -183,14 +183,6 @@ namespace Edufun.Haskell.Templates
 
         #region Zip()
 
-        public static MonadOr<Tuple<TSource, TOther>> Zip<TSource, TOther>(
-            this MonadOr<TSource> @this,
-            MonadOr<TOther> other)
-        {
-            Require.NotNull(@this, nameof(@this));
-            return @this.Zip(other, Tuple.Create);
-        }
-
         /// <seealso cref="MonadOr.Lift{T1, T2, TResult}(Func{T1, T2, TResult})"/>
         public static MonadOr<TResult> Zip<T1, T2, TResult>(
             this MonadOr<T1> @this,

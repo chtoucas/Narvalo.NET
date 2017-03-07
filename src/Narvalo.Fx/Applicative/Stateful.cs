@@ -20,7 +20,7 @@ namespace Narvalo.Applicative
                 return selector(obj.Result).Invoke(obj.State);
             };
 
-        // Initialize a stateless computation from a given value.
+        // Initialize a stateful computation from a given value.
         public static Stateful<T, TState> Of<T, TState>(T value)
             => state => StateObject.Create(value, state);
 

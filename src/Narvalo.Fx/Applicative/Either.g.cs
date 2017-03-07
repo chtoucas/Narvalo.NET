@@ -155,14 +155,6 @@ namespace Narvalo.Applicative
 
         #region Zip()
 
-        public static Either<Tuple<TSource, TOther>, TRight> Zip<TSource, TOther, TRight>(
-            this Either<TSource, TRight> @this,
-            Either<TOther, TRight> other)
-        {
-            Require.NotNull(@this, nameof(@this));
-            return @this.Zip(other, Tuple.Create);
-        }
-
         /// <seealso cref="Either.Lift{T1, T2, TResult, TRight}(Func{T1, T2, TResult})"/>
         public static Either<TResult, TRight> Zip<T1, T2, TResult, TRight>(
             this Either<T1, TRight> @this,
