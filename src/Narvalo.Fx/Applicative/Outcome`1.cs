@@ -138,12 +138,10 @@ namespace Narvalo.Applicative
             return Value;
         }
 
-        internal Result<T, string> ToGenericResult()
-        {
-            return IsError ? Result<T, string>.FromError(Error) : Result<T, string>.Of(Value);
-        }
-
         public Maybe<T> ToMaybe() => ValueOrNone();
+
+        public Result<T, string> ToResult()
+            => IsError ? Result<T, string>.FromError(Error) : Result<T, string>.Of(Value);
 
         public static explicit operator T(Outcome<T> value) => value.ToValue();
 

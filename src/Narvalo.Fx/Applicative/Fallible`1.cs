@@ -153,6 +153,11 @@ namespace Narvalo.Applicative
 
         public Maybe<T> ToMaybe() => ValueOrNone();
 
+        public Result<T, ExceptionDispatchInfo> ToResult()
+            => IsError
+            ? Result<T, ExceptionDispatchInfo>.FromError(Error)
+            : Result<T, ExceptionDispatchInfo>.Of(Value);
+
         public static explicit operator T(Fallible<T> value) => value.ToValue();
 
         public static explicit operator ExceptionDispatchInfo(Fallible<T> value) => value.ToExceptionInfo();
