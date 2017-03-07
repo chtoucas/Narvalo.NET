@@ -9,6 +9,18 @@ alternative. This class is sometimes referred to as the Option type.
 
 We suggest to prefix with _May_ the methods that return a Maybe instance.
 
+### Haskell ###
+- `catMaybes`   -> `Maybe.CollectAny()`
+- `isJust`      -> `Maybe<T>.IsSome`
+- `isNothing`   -> `Maybe<T>.IsNone`
+- `fromMaybe`
+- `fromJust`
+- `maybeToList` -> `Maybe<T>.ToEnumerable()`
+- `maybe`       -> `Maybe<T>.Match()`
+- `listToMaybe` -> `Qperators.FirstOrNone()`
+- `mapMaybe`    -> `Qperators.SelectAny()`
+
+
 ### References ###
 
 - [Haskell](http://hackage.haskell.org/package/base-4.6.0.1/docs/Data-Maybe.html)
