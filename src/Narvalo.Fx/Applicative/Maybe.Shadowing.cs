@@ -18,6 +18,7 @@ namespace Narvalo.Applicative
             => IsSome ? other : Maybe<TResult>.None;
 
         public Maybe<T> PassThrough<TOther>(Maybe<TOther> other)
+            // Returning "this" is not very "functional", but since Maybe is a value type, it is fine.
             => other.IsSome ? this : None;
 
         public Maybe<Unit> Skip()
@@ -43,6 +44,7 @@ namespace Narvalo.Applicative
         {
             Require.NotNull(predicate, nameof(predicate));
 
+            // Returning "this" is not very "functional", but since Maybe is a value type, it is fine.
             return IsSome && predicate(Value) ? this : None;
         }
 

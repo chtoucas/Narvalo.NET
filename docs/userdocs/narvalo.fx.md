@@ -13,7 +13,7 @@ Typical use cases:
   `Fallible` and `Fallible<T>`.
 - In all other cases: `Result<T, TError>`.
 Of course, we could have gone away with one single type, but at the expense
-of complicate signatures.
+of complicated signatures.
 
 Correspondence:
 - `Outcome`        -> `Result<Unit, string>` or `Outcome<Unit>`
