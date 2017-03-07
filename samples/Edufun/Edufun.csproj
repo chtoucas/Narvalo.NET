@@ -11,7 +11,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Func.cs" />
+    <Compile Include="Monads\Func.cs" />
     <Compile Include="Haskell\Comonad.cs" />
     <Compile Include="Haskell\IMonadPlus.cs" />
     <Compile Include="Haskell\KleisliOperators.cs" />
@@ -33,7 +33,7 @@
     <Compile Include="Linq\IQuerySyntax.cs" />
     <Compile Include="Linq\IQuerySyntax`1.cs" />
     <Compile Include="Linq\Qperators.cs" />
-    <Compile Include="Nullable.cs" />
+    <Compile Include="Monads\Nullable.cs" />
     <Compile Include="Sequences\Factorial.cs" />
     <Compile Include="Sequences\PythagoreanTriples.cs" />
     <Compile Include="Sequences\Fibonacci.cs" />
