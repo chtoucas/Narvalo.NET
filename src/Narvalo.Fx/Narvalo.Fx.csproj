@@ -46,8 +46,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Applicative\StateObject.cs" />
-    <Compile Include="Applicative\StateObject`2.cs" />
+    <Compile Include="Applicative\StateObject`.cs" />
     <Compile Include="Internal\ISecondaryContainer`1.cs" />
     <Compile Include="Internal\IEither`2.cs" />
     <Compile Include="Internal\IMaybe`1.cs" />
@@ -74,8 +73,7 @@
     </Compile>
     <Compile Include="Applicative\Result.Helpers.cs" />
     <Compile Include="Internal\IContainer`1.cs" />
-    <Compile Include="Applicative\Iteration.cs" />
-    <Compile Include="Applicative\Iteration`2.cs" />
+    <Compile Include="Applicative\Iteration`.cs" />
     <Compile Include="Linq\WhereAny.cs" />
     <Compile Include="Linq\SelectAny.cs" />
     <Compile Include="Applicative\Maybe.Shadowing.cs" />

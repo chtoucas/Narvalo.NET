@@ -4,6 +4,7 @@ namespace Narvalo
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Linq;
@@ -49,7 +50,11 @@ namespace Narvalo
         /// minor units, use null instead.</param>
         internal Currency(string code, short? minorUnits)
         {
-            Sentinel.Demand.CurrencyCode(code);
+            Demand.NotNull(code);
+            // A currency code MUST be composed of exactly 3 letters.
+            Demand.Range(code.Length == 3);
+            // A currency code MUST only contain uppercase ASCII letters.
+            Demand.True(Ascii.IsUpperLetter(code));
             Demand.True(!minorUnits.HasValue || minorUnits >= 0);
 
             Code = code;
@@ -362,7 +367,12 @@ namespace Narvalo
             // good reasons for the complications it will imply. Nevertheless, if we decided
             // to do this, there will a problem with MinorCurrencyCode and we would have to review
             // all guards wherever we accept a code as input.
-            Sentinel.Require.CurrencyCode(code, nameof(code));
+            Require.NotNull(code, nameof(code));
+            // A currency code MUST be composed of exactly 3 letters.
+            Require.Range(code.Length == 3, nameof(code),
+                Strings_Money.Sentinel_OutOfRangeCurrencyAlphabeticCode);
+            // A currency code MUST only contain uppercase ASCII letters.
+            Require.True(Ascii.IsUpperLetter(code), nameof(code));
             Require.True(
                 !minorUnits.HasValue || (minorUnits >= 0 && minorUnits <= MaxDecimalPlaces),
                 nameof(minorUnits));

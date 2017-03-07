@@ -6,7 +6,14 @@ namespace Narvalo.Applicative
     using System.Collections;
     using System.Collections.Generic;
 
-    public struct Iteration<TResult, TSource>
+    public static class Iteration
+    {
+        public static Iteration<TResult, TSource> Create<TResult, TSource>(TResult result, TSource next)
+            => new Iteration<TResult, TSource>(result, next);
+    }
+
+    // To be replaced by ValueTuple<TResult, TSource> when available.
+    public partial struct Iteration<TResult, TSource>
         : IEquatable<Iteration<TResult, TSource>>, IStructuralEquatable
     {
         public Iteration(TResult result, TSource next)
@@ -19,14 +26,14 @@ namespace Narvalo.Applicative
 
         public TSource Next { get; }
 
-        public override string ToString()
-        {
-            return "(Result=" + Result?.ToString() + ", Next=" + Next?.ToString() + ")";
-        }
+        public override string ToString() => "Result=" + Result?.ToString() + "; Next=" + Next?.ToString();
+    }
 
+    // Implements the IEquatable<Iteration<TResult, TSource>> and IStructuralEquatable interfaces.
+    public partial struct Iteration<TResult, TSource>
+    {
         public static bool operator ==(Iteration<TResult, TSource> left, Iteration<TResult, TSource> right)
             => left.Equals(right);
-
         public static bool operator !=(Iteration<TResult, TSource> left, Iteration<TResult, TSource> right)
             => !left.Equals(right);
 
@@ -37,6 +44,9 @@ namespace Narvalo.Applicative
         public override bool Equals(object obj)
             => (obj is Iteration<TResult, TSource>) && Equals((Iteration<TResult, TSource>)obj);
 
+        public override int GetHashCode()
+            => HashCodeHelpers.Combine(Result?.GetHashCode() ?? 0, Next?.GetHashCode() ?? 0);
+
         bool IStructuralEquatable.Equals(object other, IEqualityComparer comparer)
         {
             Require.NotNull(comparer, nameof(comparer));
@@ -45,14 +55,10 @@ namespace Narvalo.Applicative
 
             var obj = (Iteration<TResult, TSource>)other;
 
-            return comparer.Equals(Result, obj.Result)
-                && comparer.Equals(Next, obj.Next);
+            return comparer.Equals(Result, obj.Result) && comparer.Equals(Next, obj.Next);
         }
 
-        public override int GetHashCode()
-            => HashCodeHelpers.Combine(Result?.GetHashCode() ?? 0, Next?.GetHashCode() ?? 0);
-
-        public int GetHashCode(IEqualityComparer comparer)
+        int IStructuralEquatable.GetHashCode(IEqualityComparer comparer)
         {
             Require.NotNull(comparer, nameof(comparer));
 

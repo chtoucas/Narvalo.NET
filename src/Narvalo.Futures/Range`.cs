@@ -5,6 +5,13 @@ namespace Narvalo
     using System;
     using System.Diagnostics.Contracts;
 
+    public static class Range
+    {
+        public static Range<T> Of<T>(T lowerEnd, T upperEnd)
+            where T : struct, IEquatable<T>, IComparable<T>
+            => new Range<T>(lowerEnd, upperEnd);
+    }
+
     /// <summary>
     /// Represents a range of values.
     /// </summary>
@@ -12,20 +19,17 @@ namespace Narvalo
     public partial struct Range<T> : IEquatable<Range<T>>
         where T : struct, IEquatable<T>, IComparable<T>
     {
-        private readonly T _lowerEnd;
-        private readonly T _upperEnd;
-
         public Range(T lowerEnd, T upperEnd)
         {
-            Require.Range(Range.Validate(lowerEnd, upperEnd), nameof(lowerEnd));
+            Require.Range(lowerEnd.CompareTo(upperEnd) <= 0, nameof(lowerEnd));
 
-            _lowerEnd = lowerEnd;
-            _upperEnd = upperEnd;
+            LowerEnd = lowerEnd;
+            UpperEnd = upperEnd;
         }
 
-        public T LowerEnd => _lowerEnd;
+        public T LowerEnd { get; }
 
-        public T UpperEnd => _upperEnd;
+        public T UpperEnd { get; }
 
         public bool IsDegenerate => LowerEnd.Equals(UpperEnd);
 
@@ -50,7 +54,7 @@ namespace Narvalo
             => range.LowerEnd.CompareTo(LowerEnd) >= 0 && range.UpperEnd.CompareTo(UpperEnd) <= 0;
 
         public override string ToString()
-            => "LowerEnd(" + LowerEnd.ToString() + ") - UpperEnd(" + UpperEnd.ToString() + ")";
+            => "LowerEnd=" + LowerEnd.ToString() + "; UpperEnd=" + UpperEnd.ToString();
     }
 
     // Implements the IEquatable<Range<T>> interface.

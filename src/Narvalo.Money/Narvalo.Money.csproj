@@ -42,11 +42,9 @@
     <Compile Include="Internal\ICurrencyUnit.cs" />
     <Compile Include="Internal\IMoney`2.cs" />
     <Compile Include="Internal\IMoneypenny`2.cs" />
-    <Compile Include="Internal\Sentinel.cs" />
     <Compile Include="MoneyStyles.cs" />
     <Compile Include="RoundingMachine.cs" />
-    <Compile Include="Finance\Allocators\Allocation.cs" />
-    <Compile Include="Finance\Allocators\Allocation`1.cs" />
+    <Compile Include="Finance\Allocators\Allocation`.cs" />
     <Compile Include="Finance\Allocators\MidpointRoundingMoneyAllocator.cs" />
     <Compile Include="Moneypenny.cs" />
     <Compile Include="CurrencyTypes.cs" />
@@ -58,7 +56,6 @@
     <Compile Include="MoneyCalculator.cs" />
     <Compile Include="PennyCalculator.cs" />
     <Compile Include="Finance\Rounding\AlternatedRoundingAdjuster.cs" />
-    <Compile Include="Finance\Rounding\DitheredRoundingAdjuster.cs" />
     <Compile Include="Finance\Rounding\IRoundingAdjuster.cs" />
     <Compile Include="Finance\Rounding\RoundingAdjusters.cs" />
     <Compile Include="FractionalCurrency.cs" />

@@ -7,7 +7,7 @@ namespace Narvalo.Finance.Rounding
 
     public static partial class RoundingAdjusters
     {
-        #region Constants.
+        #region Constants
 
         // This limit is rather artificial, but this should be OK for our use cases.
         // NB: This limit is not enforced for ToEven and HalAwayFromZero, in which cases
