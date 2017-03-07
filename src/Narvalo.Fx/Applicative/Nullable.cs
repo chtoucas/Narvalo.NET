@@ -9,6 +9,8 @@ namespace Narvalo.Applicative
     /// </summary>
     public static class Nullable
     {
+        #region Query Expression Pattern
+
         public static TResult? Select<TSource, TResult>(this TSource? @this, Func<TSource, TResult> selector)
             where TSource : struct
             where TResult : struct
@@ -17,5 +19,37 @@ namespace Narvalo.Applicative
 
             return @this.HasValue ? (TResult?)selector(@this.Value) : null;
         }
+
+        public static TSource? Where<TSource>(
+            this TSource? @this,
+            Func<TSource, bool> predicate)
+            where TSource : struct
+        {
+            Require.NotNull(predicate, nameof(predicate));
+
+            return @this.HasValue && predicate(@this.Value) ? @this : null;
+        }
+
+        public static TResult? SelectMany<TSource, TMiddle, TResult>(
+            this TSource? @this,
+            Func<TSource, TMiddle?> valueSelector,
+            Func<TSource, TMiddle, TResult> resultSelector)
+            where TSource : struct
+            where TMiddle : struct
+            where TResult : struct
+        {
+            Require.NotNull(valueSelector, nameof(valueSelector));
+            Require.NotNull(resultSelector, nameof(resultSelector));
+
+            if (!@this.HasValue) { return null; }
+
+            var middle = valueSelector(@this.Value);
+
+            if (!middle.HasValue) { return null; }
+
+            return resultSelector(@this.Value, middle.Value);
+        }
+
+        #endregion
     }
 }
