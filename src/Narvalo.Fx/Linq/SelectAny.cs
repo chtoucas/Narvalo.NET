@@ -31,7 +31,6 @@ namespace Narvalo.Linq
             return SelectAnyIterator(@this, selector);
         }
 
-        // Named <c>mapMaybe</c> in Haskell parlance.
         public static IEnumerable<TResult> SelectAny<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<TResult>> selector)

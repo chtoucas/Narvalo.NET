@@ -439,14 +439,8 @@ namespace Narvalo.Applicative
     // T4: EmitComonadHelpers().
     public static partial class Ident
     {
-        /// <remarks>
-        /// Named <c>extract</c> in Haskell parlance.
-        /// </remarks>
         public static T Extract<T>(Ident<T> value) => Ident<T>.ε(value);
 
-        /// <remarks>
-        /// Named <c>duplicate</c> in Haskell parlance.
-        /// </remarks>
         public static Ident<Ident<T>> Duplicate<T>(Ident<T> value) => Ident<T>.δ(value);
     }
 }

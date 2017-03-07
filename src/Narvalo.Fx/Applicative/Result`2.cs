@@ -159,11 +159,11 @@ namespace Narvalo.Applicative
     // Provides the core Monad methods.
     public partial struct Result<T, TError>
     {
-        public Result<TResult, TError> Bind<TResult>(Func<T, Result<TResult, TError>> selector)
+        public Result<TResult, TError> Bind<TResult>(Func<T, Result<TResult, TError>> binder)
         {
-            Require.NotNull(selector, nameof(selector));
+            Require.NotNull(binder, nameof(binder));
 
-            return IsSuccess ? selector(Value) : Result<TResult, TError>.FromError(Error);
+            return IsSuccess ? binder(Value) : Result<TResult, TError>.FromError(Error);
         }
 
         // NB: This method is normally internal, but Result<T, TError>.Of() is more readable
@@ -180,11 +180,11 @@ namespace Narvalo.Applicative
     // Minimalist implementation of a monad on TError.
     public partial struct Result<T, TError>
     {
-        public Result<T, TResult> BindError<TResult>(Func<TError, Result<T, TResult>> selector)
+        public Result<T, TResult> BindError<TResult>(Func<TError, Result<T, TResult>> binder)
         {
-            Require.NotNull(selector, nameof(selector));
+            Require.NotNull(binder, nameof(binder));
 
-            return IsError ? selector(Error) : Result<T, TResult>.Of(Value);
+            return IsError ? binder(Error) : Result<T, TResult>.Of(Value);
         }
 
         public Result<T, TResult> SelectError<TResult>(Func<TError, TResult> selector)

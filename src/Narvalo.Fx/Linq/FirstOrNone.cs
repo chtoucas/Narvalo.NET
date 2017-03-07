@@ -10,7 +10,6 @@ namespace Narvalo.Linq
 
     public static partial class Qperators
     {
-        // Named <c>listToMaybe</c> in Haskell parlance.
         public static Maybe<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this)
         {
             Require.NotNull(@this, nameof(@this));

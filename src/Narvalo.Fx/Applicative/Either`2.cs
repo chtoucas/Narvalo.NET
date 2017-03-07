@@ -202,12 +202,12 @@ namespace Narvalo.Applicative
     // Provides the core Monad methods + minimalist implementation of a Monad on the right.
     public partial class Either<TLeft, TRight>
     {
-        public Either<TResult, TRight> Bind<TResult>(Func<TLeft, Either<TResult, TRight>> leftSelector)
-            => BindLeft(leftSelector);
+        public Either<TResult, TRight> Bind<TResult>(Func<TLeft, Either<TResult, TRight>> leftBinder)
+            => BindLeft(leftBinder);
 
-        public abstract Either<TResult, TRight> BindLeft<TResult>(Func<TLeft, Either<TResult, TRight>> selector);
+        public abstract Either<TResult, TRight> BindLeft<TResult>(Func<TLeft, Either<TResult, TRight>> binder);
 
-        public abstract Either<TLeft, TResult> BindRight<TResult>(Func<TRight, Either<TLeft, TResult>> selector);
+        public abstract Either<TLeft, TResult> BindRight<TResult>(Func<TRight, Either<TLeft, TResult>> binder);
 
         // NB: This method is normally internal, but Either<TLeft, TRight>.OfLeft() is more readable
         // than Either.OfLeft<TLeft, TRight>() - no type inference.
@@ -239,27 +239,27 @@ namespace Narvalo.Applicative
 
         private partial class Left_
         {
-            public override Either<TResult, TRight> BindLeft<TResult>(Func<TLeft, Either<TResult, TRight>> selector)
+            public override Either<TResult, TRight> BindLeft<TResult>(Func<TLeft, Either<TResult, TRight>> binder)
             {
-                Require.NotNull(selector, nameof(selector));
+                Require.NotNull(binder, nameof(binder));
 
-                return selector(Left);
+                return binder(Left);
             }
 
-            public override Either<TLeft, TResult> BindRight<TResult>(Func<TRight, Either<TLeft, TResult>> selector)
+            public override Either<TLeft, TResult> BindRight<TResult>(Func<TRight, Either<TLeft, TResult>> binder)
                 => Either<TLeft, TResult>.OfLeft(Left);
         }
 
         private partial class Right_
         {
-            public override Either<TResult, TRight> BindLeft<TResult>(Func<TLeft, Either<TResult, TRight>> selector)
+            public override Either<TResult, TRight> BindLeft<TResult>(Func<TLeft, Either<TResult, TRight>> binder)
                 => Either<TResult, TRight>.OfRight(Right);
 
-            public override Either<TLeft, TResult> BindRight<TResult>(Func<TRight, Either<TLeft, TResult>> selector)
+            public override Either<TLeft, TResult> BindRight<TResult>(Func<TRight, Either<TLeft, TResult>> binder)
             {
-                Require.NotNull(selector, nameof(selector));
+                Require.NotNull(binder, nameof(binder));
 
-                return selector(Right);
+                return binder(Right);
             }
         }
     }

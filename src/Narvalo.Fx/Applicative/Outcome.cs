@@ -82,11 +82,11 @@ namespace Narvalo.Applicative
     // Core methods.
     public partial struct Outcome
     {
-        public Outcome<TResult> Bind<TResult>(Func<Outcome<TResult>> func)
+        public Outcome<TResult> Bind<TResult>(Func<Outcome<TResult>> binder)
         {
-            Require.NotNull(func, nameof(func));
+            Require.NotNull(binder, nameof(binder));
 
-            return IsError ? Outcome<TResult>.FromError(Error) : func();
+            return IsError ? Outcome<TResult>.FromError(Error) : binder();
         }
 
         public Outcome<TResult> Select<TResult>(Func<TResult> func)

@@ -12,12 +12,12 @@ namespace Narvalo.Applicative
     {
         public static Stateful<TNext, TState> Bind<T, TNext, TState>(
             this Stateful<T, TState> @this,
-            Func<T, Stateful<TNext, TState>> selector)
+            Func<T, Stateful<TNext, TState>> binder)
             => state =>
             {
                 StateObject<T, TState> obj = @this(state);
 
-                return selector(obj.Result).Invoke(obj.State);
+                return binder(obj.Result).Invoke(obj.State);
             };
 
         // Initialize a stateful computation from a given value.

@@ -26,11 +26,11 @@ namespace Narvalo.Applicative
     // Provides the core Monad methods.
     public partial struct Ident<T>
     {
-        public Ident<TResult> Bind<TResult>(Func<T, Ident<TResult>> selector)
+        public Ident<TResult> Bind<TResult>(Func<T, Ident<TResult>> binder)
         {
-            Require.NotNull(selector, nameof(selector));
+            Require.NotNull(binder, nameof(binder));
 
-            return selector(Value);
+            return binder(Value);
         }
 
         [DebuggerHidden]

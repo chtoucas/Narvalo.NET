@@ -164,15 +164,15 @@ namespace Narvalo.Applicative
     public partial struct Result<T>
     {
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of this method.")]
-        public Result<TResult> Bind<TResult>(Func<T, Result<TResult>> selector)
+        public Result<TResult> Bind<TResult>(Func<T, Result<TResult>> binder)
         {
-            Require.NotNull(selector, nameof(selector));
+            Require.NotNull(binder, nameof(binder));
 
             if (IsError) { return Result<TResult>.FromError(Error); }
 
             try
             {
-                return selector(Value);
+                return binder(Value);
             }
             catch (Exception ex)
             {
