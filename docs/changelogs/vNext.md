@@ -73,7 +73,6 @@ Narvalo.Finance:
 - Pretty sure that we can get rid off all uint and int overloads.
 
 Narvalo.Fx:
-- Result.Lift should be simplified.
 - null-check's in generated methods.
 - Async versions? Lazy versions
 - For a lazy Stateful, we could use Lazy<T, TMetadata> from System.ComponentModel.Composition.
@@ -84,8 +83,6 @@ Narvalo.Fx:
 
 Highlights
 ----------
-- Move from .NET 4.5 to .NET 4.6.1
-- Remove Code Contracts in all libraries except the MVP ones.
 
 Bugfixes
 --------
@@ -137,7 +134,9 @@ New classes and new methods:
 
 Enhancements
 ------------
-- Full test coverage for Narvalo.Cerbere.
+- Full test coverage for Narvalo.Cerbere & Narvalo.Core.
 - Narvalo.Facts is now free of CA warnings/errors.
 - Narvalo.Finance is now a Profile259 project.
 - Turned off overflow checking for Release builds.
+- Move from .NET 4.5 to .NET 4.6.1
+- Remove Code Contracts in all libraries except the MVP ones.
