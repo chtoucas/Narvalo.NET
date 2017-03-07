@@ -17,8 +17,6 @@ namespace Narvalo.Applicative
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
-    using Narvalo.Internal;
     using Narvalo.Linq;
 
     // Provides a set of static methods for Outcome<T>.
@@ -387,10 +385,8 @@ namespace Narvalo.Internal
 {
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
 
     using Narvalo.Applicative;
-    using Narvalo.Linq;
 
     // Provides default implementations for the extension methods for IEnumerable<Outcome<T>>.
     // You will certainly want to override them to improve performance.

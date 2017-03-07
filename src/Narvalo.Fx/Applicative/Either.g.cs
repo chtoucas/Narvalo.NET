@@ -368,10 +368,8 @@ namespace Narvalo.Internal
 {
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
 
     using Narvalo.Applicative;
-    using Narvalo.Linq;
 
     // Provides default implementations for the extension methods for IEnumerable<Either<T, TRight>>.
     // You will certainly want to override them to improve performance.

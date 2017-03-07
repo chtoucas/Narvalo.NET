@@ -83,12 +83,19 @@ namespace <#= InternalNamespace #>
 {
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+<#+ if (HasSum) { #>
     using System.Linq;
+<#+ } #>
 
     using <#= Namespace #>;
+<#+ if (HasSum) { #>
     using Narvalo.Linq;
+<#+ } #>
 
-<#+ EmitEnumerableInternal(); #>
+<#+
+    WriteLine();
+    EmitEnumerableInternal();
+#>
 }
 <#+
         if (EmitLinq) {

@@ -389,10 +389,8 @@ namespace Edufun.Haskell.Templates.Internal
 {
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
 
     using Edufun.Haskell.Templates;
-    using Narvalo.Linq;
 
     // Provides default implementations for the extension methods for IEnumerable<Monad<T>>.
     // You will certainly want to override them to improve performance.
