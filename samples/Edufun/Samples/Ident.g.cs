@@ -308,15 +308,15 @@ namespace Edufun.Samples
         // Generalizes both Bind() and Zip<T1, T2, TResult>().
         public static Ident<TResult> SelectMany<TSource, TMiddle, TResult>(
             this Ident<TSource> @this,
-            Func<TSource, Ident<TMiddle>> valueSelector,
+            Func<TSource, Ident<TMiddle>> selector,
             Func<TSource, TMiddle, TResult> resultSelector)
         {
             /* T4: NotNull(@this) */
-            Require.NotNull(valueSelector, nameof(valueSelector));
+            Require.NotNull(selector, nameof(selector));
             Require.NotNull(resultSelector, nameof(resultSelector));
 
             return @this.Bind(
-                val => valueSelector(val).Select(
+                val => selector(val).Select(
                     middle => resultSelector(val, middle)));
         }
 
@@ -434,9 +434,9 @@ namespace Edufun.Samples
     // T4: EmitComonadHelpers().
     public static partial class Ident
     {
-        public static T Extract<T>(Ident<T> value) => Ident<T>.ε(value);
+        public static T Extract<T>(this Ident<T> @this) => Ident<T>.ε(@this);
 
-        public static Ident<Ident<T>> Duplicate<T>(Ident<T> value) => Ident<T>.δ(value);
+        public static Ident<Ident<T>> Duplicate<T>(this Ident<T> @this) => Ident<T>.δ(@this);
     }
 }
 

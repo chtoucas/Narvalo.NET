@@ -289,15 +289,15 @@ namespace Narvalo.Applicative
         // Generalizes both Bind() and Zip<T1, T2, TResult>().
         public static Result<TResult, TError> SelectMany<TSource, TMiddle, TResult, TError>(
             this Result<TSource, TError> @this,
-            Func<TSource, Result<TMiddle, TError>> valueSelector,
+            Func<TSource, Result<TMiddle, TError>> selector,
             Func<TSource, TMiddle, TResult> resultSelector)
         {
             /* T4: NotNull(@this) */
-            Require.NotNull(valueSelector, nameof(valueSelector));
+            Require.NotNull(selector, nameof(selector));
             Require.NotNull(resultSelector, nameof(resultSelector));
 
             return @this.Bind(
-                val => valueSelector(val).Select(
+                val => selector(val).Select(
                     middle => resultSelector(val, middle)));
         }
 

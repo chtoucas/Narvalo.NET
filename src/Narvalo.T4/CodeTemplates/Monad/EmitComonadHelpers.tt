@@ -8,9 +8,9 @@ public partial class MonadTemplate
     // T4: EmitComonadHelpers().
     public static partial class <#= Name #>
     {
-        public static T Extract<T>(<#= Name #><T> value) => <#= Name #><T>.ε(value);
+        public static T Extract<T>(this <#= Name #><T> @this) => <#= Name #><T>.ε(@this);
 
-        public static <#= Name #><<#= Name #><T>> Duplicate<T>(<#= Name #><T> value) => <#= Name #><T>.δ(value);
+        public static <#= Name #><<#= Name #><T>> Duplicate<T>(this <#= Name #><T> @this) => <#= Name #><T>.δ(@this);
     }
 <#+
     } // T4: End of EmitComonadHelpers().

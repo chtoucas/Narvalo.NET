@@ -309,15 +309,15 @@ namespace Edufun.Haskell.Templates
         // Generalizes both Bind() and Zip<T1, T2, TResult>().
         public static Monad<TResult> SelectMany<TSource, TMiddle, TResult>(
             this Monad<TSource> @this,
-            Func<TSource, Monad<TMiddle>> valueSelector,
+            Func<TSource, Monad<TMiddle>> selector,
             Func<TSource, TMiddle, TResult> resultSelector)
         {
             Require.NotNull(@this, nameof(@this));
-            Require.NotNull(valueSelector, nameof(valueSelector));
+            Require.NotNull(selector, nameof(selector));
             Require.NotNull(resultSelector, nameof(resultSelector));
 
             return @this.Bind(
-                val => valueSelector(val).Select(
+                val => selector(val).Select(
                     middle => resultSelector(val, middle)));
         }
 
