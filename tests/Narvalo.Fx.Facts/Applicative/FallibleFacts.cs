@@ -4,7 +4,7 @@ namespace Narvalo.Applicative
 {
     using Xunit;
 
-    public static partial class ResultFacts
+    public static partial class FallibleFacts
     {
         #region Ok
 

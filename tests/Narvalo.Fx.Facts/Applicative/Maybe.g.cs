@@ -18,64 +18,95 @@ namespace Narvalo.Applicative
 
     public static partial class MaybeFacts
     {
-        #region Linq Operators
+        #region Select()
 
         [Fact]
         public static void Select_ThrowsArgumentNullException_ForNullSelector()
         {
-            // Arrange
             var source = Maybe.Of(1);
             Func<int, int> selector = null;
 
-            // Act & Assert
             Assert.Throws<ArgumentNullException>(() => source.Select(selector));
         }
 
+        #endregion
+
+        #region Where()
 
         [Fact]
         public static void Where_ThrowsArgumentNullException_ForNullPredicate()
         {
-            // Arrange
             var source = Maybe.Of(1);
             Func<int, bool> predicate = null;
 
-            // Act & Assert
             Assert.Throws<ArgumentNullException>(() => source.Where(predicate));
         }
 
+        #endregion
+
+        #region SelectMany()
 
         [Fact]
         public static void SelectMany_ThrowsArgumentNullException_ForNullValueSelector()
         {
-            // Arrange
             var source = Maybe.Of(1);
             Func<int, Maybe<int>> valueSelector = null;
             Func<int, int, int> resultSelector = (i, j) => i + j;
 
-            // Act & Assert
             Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, resultSelector));
         }
 
         [Fact]
         public static void SelectMany_ThrowsArgumentNullException_ForNullResultSelector()
         {
-            // Arrange
             var source = Maybe.Of(1);
             var middle = Maybe.Of(2);
             Func<int, Maybe<int>> valueSelector = _ => middle;
             Func<int, int, int> resultSelector = null;
 
-            // Act & Assert
             Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, resultSelector));
         }
 
         #endregion
 
-        #region Monad Laws
+        #region Functor Rules
 
+        [Fact(DisplayName = "The identity map is a fixed point for Select.")]
+        public static void Satisfies_FirstFunctorLaw()
+        {
+            // Arrange
+            var me = Maybe.Of(1);
 
-        [Fact]
-        public static void Maybe_SatisfiesFirstMonoidLaw()
+            // Act
+            var left = me.Select(Stubs<int>.Identity);
+            var right = Stubs<Maybe<int>>.Identity(me);
+
+            // Assert
+            Assert.True(left.Equals(right));
+        }
+
+        [Fact(DisplayName = "Select preserves the composition operator.")]
+        public static void Satisfies_FunctorSecondRule()
+        {
+            // Arrange
+            var me = Maybe.Of(1);
+            Func<int, long> g = val => (long)2 * val;
+            Func<long, long> f = val => 3 * val;
+
+            // Act
+            var left = me.Select(_ => f(g(_)));
+            var right = me.Select(g).Select(f);
+
+            // Assert
+            Assert.True(left.Equals(right));
+        }
+
+        #endregion
+
+        #region Monoid Rules
+
+        [Fact(DisplayName = "None is a left identity for OrElse.")]
+        public static void Satisfies_FirstMonoidRule()
         {
             // Arrange
             var monad = Maybe.Of(1);
@@ -88,8 +119,8 @@ namespace Narvalo.Applicative
             Assert.True(left.Equals(right));
         }
 
-        [Fact]
-        public static void Maybe_SatisfiesSecondMonoidLaw()
+        [Fact(DisplayName = "None is a right identity for OrElse.")]
+        public static void Satisfies_SecondMonoidRule()
         {
             // Arrange
             var monad = Maybe.Of(1);
@@ -102,8 +133,8 @@ namespace Narvalo.Applicative
             Assert.True(left.Equals(right));
         }
 
-        [Fact]
-        public static void Maybe_SatisfiesThirdMonoidLaw()
+        [Fact(DisplayName = "OrElse is associative.")]
+        public static void Satisfies_ThirdMonoidRule()
         {
             // Arrange
             var monadA = Maybe.Of(1);
@@ -118,27 +149,30 @@ namespace Narvalo.Applicative
             Assert.True(left.Equals(right));
         }
 
+        #endregion
 
-        [Fact]
-        public static void Maybe_SatisfiesFirstMonadLaw()
+        #region Monad Rules
+
+        [Fact(DisplayName = "Of is a left identity for Bind.")]
+        public static void Satisfies_FirstMonadRule()
         {
             // Arrange
             int value = 1;
-            Func<int, Maybe<long>> kun = _ => Maybe.Of((long)2 * _);
+            Func<int, Maybe<long>> binder = val => Maybe.Of((long)2 * val);
 
             // Act
-            var left = Maybe.Of(value).Bind(kun);
-            var right = kun(value);
+            var left = Maybe.Of(value).Bind(binder);
+            var right = binder(value);
 
             // Assert
             Assert.True(left.Equals(right));
         }
 
-        [Fact]
-        public static void Maybe_SatisfiesSecondMonadLaw()
+        [Fact(DisplayName = "Of is a right identity for Bind.")]
+        public static void Satisfies_SecondMonadRule()
         {
             // Arrange
-            Func<int, Maybe<int>> create = _ => Maybe.Of(_);
+            Func<int, Maybe<int>> create = val => Maybe.Of(val);
             var monad = Maybe.Of(1);
 
             // Act
@@ -149,28 +183,27 @@ namespace Narvalo.Applicative
             Assert.True(left.Equals(right));
         }
 
-        [Fact]
-        public static void Maybe_SatisfiesThirdMonadLaw()
+        [Fact(DisplayName = "Bind is associative.")]
+        public static void Satisfies_ThirdMonadRule()
         {
             // Arrange
             Maybe<short> m = Maybe.Of((short)1);
-            Func<short, Maybe<int>> f = _ => Maybe.Of((int)3 * _);
-            Func<int, Maybe<long>> g = _ => Maybe.Of((long)2 * _);
+            Func<short, Maybe<int>> f = val => Maybe.Of((int)3 * val);
+            Func<int, Maybe<long>> g = val => Maybe.Of((long)2 * val);
 
             // Act
             var left = m.Bind(f).Bind(g);
-            var right = m.Bind(_ => f(_).Bind(g));
+            var right = m.Bind(val => f(val).Bind(g));
 
             // Assert
             Assert.True(left.Equals(right));
         }
 
-
         [Fact]
-        public static void Maybe_SatisfiesMonadZeroRule()
+        public static void Satisfies_MonadZeroRule()
         {
             // Arrange
-            Func<int, Maybe<long>> kun = _ => Maybe.Of((long)2 * _);
+            Func<int, Maybe<long>> kun = val => Maybe.Of((long)2 * val);
 
             // Act
             var left = Maybe<int>.None.Bind(kun);
@@ -181,11 +214,11 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void Maybe_SatisfiesMonadMoreRule()
+        public static void Satisfies_MonadMoreRule()
         {
             // Act
-            var leftSome = Maybe.Of(1).Bind(_ => Maybe<int>.None);
-            var leftNone = Maybe<int>.None.Bind(_ => Maybe<int>.None);
+            var leftSome = Maybe.Of(1).Bind(val => Maybe<int>.None);
+            var leftNone = Maybe<int>.None.Bind(val => Maybe<int>.None);
             var right = Maybe<int>.None;
 
             // Assert
@@ -193,9 +226,8 @@ namespace Narvalo.Applicative
             Assert.True(leftNone.Equals(right));
         }
 
-
         [Fact]
-        public static void Maybe_SatisfiesMonadOrRule()
+        public static void Satisfies_MonadOrRule()
         {
             // Arrange
             var monad = Maybe.Of(2);
@@ -211,7 +243,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void Maybe_DoesNotSatisfyRightZeroForPlus()
+        public static void DoesNotSatisfyRightZeroForPlus()
         {
             // Arrange
             var monad = Maybe.Of(2);
@@ -226,8 +258,7 @@ namespace Narvalo.Applicative
             Assert.True(leftNone.Equals(right));
         }
 
-
         #endregion
-    } // End of Maybe - T4: EmitFacts().
-} // End of Narvalo.Applicative.
+    }
+}
 

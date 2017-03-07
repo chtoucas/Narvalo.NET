@@ -44,7 +44,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="Narvalo.Core.Facts.props" />
     <None Include="packages.config" />
   </ItemGroup>

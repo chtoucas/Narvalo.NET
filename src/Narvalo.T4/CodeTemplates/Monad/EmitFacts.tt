@@ -13,67 +13,98 @@ namespace <#= Namespace #>
 
     public static partial class <#= Name #>Facts
     {
-        #region Linq Operators
+        #region Select()
 
         [Fact]
         public static void Select_ThrowsArgumentNullException_ForNullSelector()
         {
-            // Arrange
             var source = <#= Name #>.<#= ReturnName #>(1);
             Func<int, int> selector = null;
 
-            // Act & Assert
             Assert.Throws<ArgumentNullException>(() => source.Select(selector));
         }
 
+        #endregion
+
 <#+ if (HasFilter) { #>
+        #region Where()
 
         [Fact]
         public static void Where_ThrowsArgumentNullException_ForNullPredicate()
         {
-            // Arrange
             var source = <#= Name #>.<#= ReturnName #>(1);
             Func<int, bool> predicate = null;
 
-            // Act & Assert
             Assert.Throws<ArgumentNullException>(() => source.Where(predicate));
         }
 
+        #endregion
+
 <#+ } // T4: End of HasFilter. #>
+        #region SelectMany()
 
         [Fact]
         public static void SelectMany_ThrowsArgumentNullException_ForNullValueSelector()
         {
-            // Arrange
             var source = <#= Name #>.<#= ReturnName #>(1);
             Func<int, <#= Name #><int>> valueSelector = null;
             Func<int, int, int> resultSelector = (i, j) => i + j;
 
-            // Act & Assert
             Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, resultSelector));
         }
 
         [Fact]
         public static void SelectMany_ThrowsArgumentNullException_ForNullResultSelector()
         {
-            // Arrange
             var source = <#= Name #>.<#= ReturnName #>(1);
             var middle = <#= Name #>.<#= ReturnName #>(2);
             Func<int, <#= Name #><int>> valueSelector = _ => middle;
             Func<int, int, int> resultSelector = null;
 
-            // Act & Assert
             Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, resultSelector));
         }
 
         #endregion
 
-        #region Monad Laws
+        #region Functor Rules
+
+        [Fact(DisplayName = "The identity map is a fixed point for <#= MapName #>.")]
+        public static void Satisfies_FirstFunctorLaw()
+        {
+            // Arrange
+            var me = <#= Name #>.<#= ReturnName #>(1);
+
+            // Act
+            var left = me.<#= MapName #>(Stubs<int>.Identity);
+            var right = Stubs<<#= Name #><int>>.Identity(me);
+
+            // Assert
+            Assert.True(left.Equals(right));
+        }
+
+        [Fact(DisplayName = "<#= MapName #> preserves the composition operator.")]
+        public static void Satisfies_FunctorSecondRule()
+        {
+            // Arrange
+            var me = <#= Name #>.<#= ReturnName #>(1);
+            Func<int, long> g = val => (long)2 * val;
+            Func<long, long> f = val => 3 * val;
+
+            // Act
+            var left = me.<#= MapName #>(_ => f(g(_)));
+            var right = me.<#= MapName #>(g).<#= MapName #>(f);
+
+            // Assert
+            Assert.True(left.Equals(right));
+        }
+
+        #endregion
 
 <#+ if (HasZero && HasPlus) { #>
+        #region Monoid Rules
 
-        [Fact]
-        public static void <#= Name #>_SatisfiesFirstMonoidLaw()
+        [Fact(DisplayName = "<#= ZeroName #> is a left identity for <#= PlusName #>.")]
+        public static void Satisfies_FirstMonoidRule()
         {
             // Arrange
             var monad = <#= Name #>.<#= ReturnName #>(1);
@@ -86,8 +117,8 @@ namespace <#= Namespace #>
             Assert.True(left.Equals(right));
         }
 
-        [Fact]
-        public static void <#= Name #>_SatisfiesSecondMonoidLaw()
+        [Fact(DisplayName = "<#= ZeroName #> is a right identity for <#= PlusName #>.")]
+        public static void Satisfies_SecondMonoidRule()
         {
             // Arrange
             var monad = <#= Name #>.<#= ReturnName #>(1);
@@ -100,8 +131,8 @@ namespace <#= Namespace #>
             Assert.True(left.Equals(right));
         }
 
-        [Fact]
-        public static void <#= Name #>_SatisfiesThirdMonoidLaw()
+        [Fact(DisplayName = "<#= PlusName #> is associative.")]
+        public static void Satisfies_ThirdMonoidRule()
         {
             // Arrange
             var monadA = <#= Name #>.<#= ReturnName #>(1);
@@ -116,28 +147,31 @@ namespace <#= Namespace #>
             Assert.True(left.Equals(right));
         }
 
-<#+ } // T4: End of HasZero && HasPlus. #>
+        #endregion
 
-        [Fact]
-        public static void <#= Name #>_SatisfiesFirstMonadLaw()
+<#+ } // T4: End of HasZero && HasPlus. #>
+        #region Monad Rules
+
+        [Fact(DisplayName = "<#= ReturnName #> is a left identity for Bind.")]
+        public static void Satisfies_FirstMonadRule()
         {
             // Arrange
             int value = 1;
-            Func<int, <#= Name #><long>> kun = _ => <#= Name #>.<#= ReturnName #>((long)2 * _);
+            Func<int, <#= Name #><long>> binder = val => <#= Name #>.<#= ReturnName #>((long)2 * val);
 
             // Act
-            var left = <#= Name #>.<#= ReturnName #>(value).Bind(kun);
-            var right = kun(value);
+            var left = <#= Name #>.<#= ReturnName #>(value).Bind(binder);
+            var right = binder(value);
 
             // Assert
             Assert.True(left.Equals(right));
         }
 
-        [Fact]
-        public static void <#= Name #>_SatisfiesSecondMonadLaw()
+        [Fact(DisplayName = "<#= ReturnName #> is a right identity for Bind.")]
+        public static void Satisfies_SecondMonadRule()
         {
             // Arrange
-            Func<int, <#= Name #><int>> create = _ => <#= Name #>.<#= ReturnName #>(_);
+            Func<int, <#= Name #><int>> create = val => <#= Name #>.<#= ReturnName #>(val);
             var monad = <#= Name #>.<#= ReturnName #>(1);
 
             // Act
@@ -148,29 +182,28 @@ namespace <#= Namespace #>
             Assert.True(left.Equals(right));
         }
 
-        [Fact]
-        public static void <#= Name #>_SatisfiesThirdMonadLaw()
+        [Fact(DisplayName = "Bind is associative.")]
+        public static void Satisfies_ThirdMonadRule()
         {
             // Arrange
             <#= Name #><short> m = <#= Name #>.<#= ReturnName #>((short)1);
-            Func<short, <#= Name #><int>> f = _ => <#= Name #>.<#= ReturnName #>((int)3 * _);
-            Func<int, <#= Name #><long>> g = _ => <#= Name #>.<#= ReturnName #>((long)2 * _);
+            Func<short, <#= Name #><int>> f = val => <#= Name #>.<#= ReturnName #>((int)3 * val);
+            Func<int, <#= Name #><long>> g = val => <#= Name #>.<#= ReturnName #>((long)2 * val);
 
             // Act
             var left = m.Bind(f).Bind(g);
-            var right = m.Bind(_ => f(_).Bind(g));
+            var right = m.Bind(val => f(val).Bind(g));
 
             // Assert
             Assert.True(left.Equals(right));
         }
-
 <#+ if (HasZero) { #>
 
         [Fact]
-        public static void <#= Name #>_SatisfiesMonadZeroRule()
+        public static void Satisfies_MonadZeroRule()
         {
             // Arrange
-            Func<int, <#= Name #><long>> kun = _ => <#= Name #>.<#= ReturnName #>((long)2 * _);
+            Func<int, <#= Name #><long>> kun = val => <#= Name #>.<#= ReturnName #>((long)2 * val);
 
             // Act
             var left = <#= Name #><int>.<#= ZeroName #>.Bind(kun);
@@ -181,24 +214,22 @@ namespace <#= Namespace #>
         }
 
         [Fact]
-        public static void <#= Name #>_SatisfiesMonadMoreRule()
+        public static void Satisfies_MonadMoreRule()
         {
             // Act
-            var leftSome = <#= Name #>.<#= ReturnName #>(1).Bind(_ => <#= Name #><int>.<#= ZeroName #>);
-            var leftNone = <#= Name #><int>.<#= ZeroName #>.Bind(_ => <#= Name #><int>.<#= ZeroName #>);
+            var leftSome = <#= Name #>.<#= ReturnName #>(1).Bind(val => <#= Name #><int>.<#= ZeroName #>);
+            var leftNone = <#= Name #><int>.<#= ZeroName #>.Bind(val => <#= Name #><int>.<#= ZeroName #>);
             var right = <#= Name #><int>.<#= ZeroName #>;
 
             // Assert
             Assert.True(leftSome.Equals(right));
             Assert.True(leftNone.Equals(right));
         }
-
 <#+ } // T4: End of HasZero. #>
-
 <#+ if (HasZero && HasPlus) { #>
 
         [Fact]
-        public static void <#= Name #>_SatisfiesMonadOrRule()
+        public static void Satisfies_MonadOrRule()
         {
             // Arrange
             var monad = <#= Name #>.<#= ReturnName #>(2);
@@ -214,7 +245,7 @@ namespace <#= Namespace #>
         }
 
         [Fact]
-        public static void <#= Name #>_DoesNotSatisfyRightZeroForPlus()
+        public static void DoesNotSatisfyRightZeroForPlus()
         {
             // Arrange
             var monad = <#= Name #>.<#= ReturnName #>(2);
@@ -228,12 +259,11 @@ namespace <#= Namespace #>
             Assert.False(leftSome.Equals(right));   // NB: Fails here the "Unit is a right zero for Plus".
             Assert.True(leftNone.Equals(right));
         }
-
 <#+ } // T4: End of HasZero && HasPlus. #>
 
         #endregion
-    } // End of <#= Name #> - T4: EmitFacts().
-} // End of <#= Namespace #>.
+    }
+}
 <#+
     } // T4: End of EmitFacts().
 } // T4: End of MonadTemplate.

@@ -16,14 +16,14 @@ namespace Narvalo.Applicative
 
     using Xunit;
 
-    public static partial class FallibleFacts
+    public static partial class IdentFacts
     {
         #region Select()
 
         [Fact]
         public static void Select_ThrowsArgumentNullException_ForNullSelector()
         {
-            var source = Fallible.Of(1);
+            var source = Ident.Of(1);
             Func<int, int> selector = null;
 
             Assert.Throws<ArgumentNullException>(() => source.Select(selector));
@@ -36,8 +36,8 @@ namespace Narvalo.Applicative
         [Fact]
         public static void SelectMany_ThrowsArgumentNullException_ForNullValueSelector()
         {
-            var source = Fallible.Of(1);
-            Func<int, Fallible<int>> valueSelector = null;
+            var source = Ident.Of(1);
+            Func<int, Ident<int>> valueSelector = null;
             Func<int, int, int> resultSelector = (i, j) => i + j;
 
             Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, resultSelector));
@@ -46,9 +46,9 @@ namespace Narvalo.Applicative
         [Fact]
         public static void SelectMany_ThrowsArgumentNullException_ForNullResultSelector()
         {
-            var source = Fallible.Of(1);
-            var middle = Fallible.Of(2);
-            Func<int, Fallible<int>> valueSelector = _ => middle;
+            var source = Ident.Of(1);
+            var middle = Ident.Of(2);
+            Func<int, Ident<int>> valueSelector = _ => middle;
             Func<int, int, int> resultSelector = null;
 
             Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, resultSelector));
@@ -62,11 +62,11 @@ namespace Narvalo.Applicative
         public static void Satisfies_FirstFunctorLaw()
         {
             // Arrange
-            var me = Fallible.Of(1);
+            var me = Ident.Of(1);
 
             // Act
             var left = me.Select(Stubs<int>.Identity);
-            var right = Stubs<Fallible<int>>.Identity(me);
+            var right = Stubs<Ident<int>>.Identity(me);
 
             // Assert
             Assert.True(left.Equals(right));
@@ -76,7 +76,7 @@ namespace Narvalo.Applicative
         public static void Satisfies_FunctorSecondRule()
         {
             // Arrange
-            var me = Fallible.Of(1);
+            var me = Ident.Of(1);
             Func<int, long> g = val => (long)2 * val;
             Func<long, long> f = val => 3 * val;
 
@@ -97,10 +97,10 @@ namespace Narvalo.Applicative
         {
             // Arrange
             int value = 1;
-            Func<int, Fallible<long>> binder = val => Fallible.Of((long)2 * val);
+            Func<int, Ident<long>> binder = val => Ident.Of((long)2 * val);
 
             // Act
-            var left = Fallible.Of(value).Bind(binder);
+            var left = Ident.Of(value).Bind(binder);
             var right = binder(value);
 
             // Assert
@@ -111,8 +111,8 @@ namespace Narvalo.Applicative
         public static void Satisfies_SecondMonadRule()
         {
             // Arrange
-            Func<int, Fallible<int>> create = val => Fallible.Of(val);
-            var monad = Fallible.Of(1);
+            Func<int, Ident<int>> create = val => Ident.Of(val);
+            var monad = Ident.Of(1);
 
             // Act
             var left = monad.Bind(create);
@@ -126,9 +126,9 @@ namespace Narvalo.Applicative
         public static void Satisfies_ThirdMonadRule()
         {
             // Arrange
-            Fallible<short> m = Fallible.Of((short)1);
-            Func<short, Fallible<int>> f = val => Fallible.Of((int)3 * val);
-            Func<int, Fallible<long>> g = val => Fallible.Of((long)2 * val);
+            Ident<short> m = Ident.Of((short)1);
+            Func<short, Ident<int>> f = val => Ident.Of((int)3 * val);
+            Func<int, Ident<long>> g = val => Ident.Of((long)2 * val);
 
             // Act
             var left = m.Bind(f).Bind(g);
