@@ -17,7 +17,7 @@ namespace Narvalo.Applicative
 
     using Xunit;
 
-    public static partial class ResultFacts
+    public static partial class FallibleFacts
     {
         #region Linq Operators
 
@@ -25,7 +25,7 @@ namespace Narvalo.Applicative
         public static void Select_ThrowsArgumentNullException_ForNullSelector()
         {
             // Arrange
-            var source = Result.Of(1);
+            var source = Fallible.Of(1);
             Func<int, int> selector = null;
 
             // Act & Assert
@@ -37,8 +37,8 @@ namespace Narvalo.Applicative
         public static void SelectMany_ThrowsArgumentNullException_ForNullValueSelector()
         {
             // Arrange
-            var source = Result.Of(1);
-            Func<int, Result<int>> valueSelector = null;
+            var source = Fallible.Of(1);
+            Func<int, Fallible<int>> valueSelector = null;
             Func<int, int, int> resultSelector = (i, j) => i + j;
 
             // Act & Assert
@@ -49,9 +49,9 @@ namespace Narvalo.Applicative
         public static void SelectMany_ThrowsArgumentNullException_ForNullResultSelector()
         {
             // Arrange
-            var source = Result.Of(1);
-            var middle = Result.Of(2);
-            Func<int, Result<int>> valueSelector = _ => middle;
+            var source = Fallible.Of(1);
+            var middle = Fallible.Of(2);
+            Func<int, Fallible<int>> valueSelector = _ => middle;
             Func<int, int, int> resultSelector = null;
 
             // Act & Assert
@@ -64,14 +64,14 @@ namespace Narvalo.Applicative
 
 
         [Fact]
-        public static void Result_SatisfiesFirstMonadLaw()
+        public static void Fallible_SatisfiesFirstMonadLaw()
         {
             // Arrange
             int value = 1;
-            Func<int, Result<long>> kun = _ => Result.Of((long)2 * _);
+            Func<int, Fallible<long>> kun = _ => Fallible.Of((long)2 * _);
 
             // Act
-            var left = Result.Of(value).Bind(kun);
+            var left = Fallible.Of(value).Bind(kun);
             var right = kun(value);
 
             // Assert
@@ -79,11 +79,11 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void Result_SatisfiesSecondMonadLaw()
+        public static void Fallible_SatisfiesSecondMonadLaw()
         {
             // Arrange
-            Func<int, Result<int>> create = _ => Result.Of(_);
-            var monad = Result.Of(1);
+            Func<int, Fallible<int>> create = _ => Fallible.Of(_);
+            var monad = Fallible.Of(1);
 
             // Act
             var left = monad.Bind(create);
@@ -94,12 +94,12 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void Result_SatisfiesThirdMonadLaw()
+        public static void Fallible_SatisfiesThirdMonadLaw()
         {
             // Arrange
-            Result<short> m = Result.Of((short)1);
-            Func<short, Result<int>> f = _ => Result.Of((int)3 * _);
-            Func<int, Result<long>> g = _ => Result.Of((long)2 * _);
+            Fallible<short> m = Fallible.Of((short)1);
+            Func<short, Fallible<int>> f = _ => Fallible.Of((int)3 * _);
+            Func<int, Fallible<long>> g = _ => Fallible.Of((long)2 * _);
 
             // Act
             var left = m.Bind(f).Bind(g);
@@ -111,6 +111,6 @@ namespace Narvalo.Applicative
 
 
         #endregion
-    } // End of Result - T4: EmitFacts().
+    } // End of Fallible - T4: EmitFacts().
 } // End of Narvalo.Applicative.
 

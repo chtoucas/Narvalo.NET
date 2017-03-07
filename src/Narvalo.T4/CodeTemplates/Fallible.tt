@@ -1,16 +1,15 @@
 ﻿<#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
 <#@ include file="Monad.tt" once="true" #><#+
 
-    public partial class ResultOrEdiTemplate : MonadTemplate
+    public partial class FallibleTemplate : MonadTemplate
     {
-        public ResultOrEdiTemplate(TextTransformation parent) : base(parent) { }
+        public FallibleTemplate(TextTransformation parent) : base(parent) { }
 
         public override void Initialize()
         {
             InitializeNamespacesForNarvaloFx();
             InitializeHelpers(asStruct: true);
 
-            Name = "Result";
             IsNullable = false;
         }
     }

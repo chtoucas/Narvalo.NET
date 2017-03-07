@@ -30,7 +30,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Outcome.tt</DependentUpon>
     </Compile>
-    <Compile Include="Applicative\Result.cs" />
+    <Compile Include="Applicative\Fallible.Shadowing.cs" />
+    <Compile Include="Applicative\Fallible%24.cs" />
+    <Compile Include="Applicative\Fallible.cs" />
     <Compile Include="Applicative\Ident.g.cs">
       <DependentUpon>Ident.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -40,6 +42,7 @@
     <Compile Include="Applicative\Outcome`1.cs" />
     <Compile Include="Applicative\Outcome.Shadowing.cs" />
     <Compile Include="Applicative\Outcome%24.cs" />
+    <Compile Include="Applicative\Fallible.Helpers.cs" />
     <Compile Include="Applicative\Stateful.cs" />
     <Compile Include="Applicative\Stateful.g.cs">
       <DependentUpon>Stateful.tt</DependentUpon>
@@ -65,25 +68,24 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Applicative\Kleisli_.cs" />
-    <Compile Include="Applicative\Result%24.cs" />
-    <Compile Include="Applicative\ResultT+TError.g.cs">
-      <DependentUpon>ResultT+TError.tt</DependentUpon>
+    <Compile Include="Applicative\Result.cs" />
+    <Compile Include="Applicative\Result.g.cs">
+      <DependentUpon>Result.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Applicative\Result.Helpers.cs" />
     <Compile Include="Internal\IContainer`1.cs" />
     <Compile Include="Applicative\Iteration`.cs" />
     <Compile Include="Linq\WhereAny.cs" />
     <Compile Include="Linq\SelectAny.cs" />
     <Compile Include="Applicative\Maybe.Shadowing.cs" />
     <Compile Include="Applicative\Result.Shadowing.cs" />
-    <Compile Include="Applicative\ResultT.g.cs">
-      <DependentUpon>ResultT.tt</DependentUpon>
+    <Compile Include="Applicative\Fallible.g.cs">
+      <DependentUpon>Fallible.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Applicative\Result`1.cs" />
+    <Compile Include="Applicative\Fallible`1.cs" />
     <Compile Include="Applicative\Result`2.cs" />
     <Compile Include="Applicative\Sequence.cs" />
     <Compile Include="Applicative\Stubs`.cs" />
@@ -127,9 +129,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Applicative\ResultT+TError.tt">
+    <None Include="Applicative\Result.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ResultT+TError.g.cs</LastGenOutput>
+      <LastGenOutput>Result.g.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -145,9 +147,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Applicative\ResultT.tt">
+    <None Include="Applicative\Fallible.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ResultT.g.cs</LastGenOutput>
+      <LastGenOutput>Fallible.g.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

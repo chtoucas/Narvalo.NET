@@ -53,7 +53,7 @@ namespace Narvalo.Linq
 
         public static IEnumerable<TResult> SelectAny<TSource, TResult>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Result<TResult>> selector)
+            Func<TSource, Fallible<TResult>> selector)
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));
@@ -125,7 +125,7 @@ namespace Narvalo.Linq
 
         private static IEnumerable<TResult> SelectAnyIterator<TSource, TResult>(
             IEnumerable<TSource> source,
-            Func<TSource, Result<TResult>> selector)
+            Func<TSource, Fallible<TResult>> selector)
         {
             Demand.NotNull(source);
             Demand.NotNull(selector);

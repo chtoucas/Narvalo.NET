@@ -6,16 +6,10 @@ namespace Narvalo.Applicative
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.ExceptionServices;
 
-    public partial struct Result
-    {
-        public static Result<T, TError> FlattenError<T, TError>(Result<T, Result<T, TError>> square)
-            => Result<T, TError>.FlattenError(square);
-    }
-
-    public partial struct Result
+    public partial struct Fallible
     {
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of this method.")]
-        public static Result TryWith(Action action)
+        public static Fallible TryWith(Action action)
         {
             Require.NotNull(action, nameof(action));
 
@@ -32,7 +26,7 @@ namespace Narvalo.Applicative
         }
 
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of ResultOrError.")]
-        public static Result<TResult> TryWith<TResult>(Func<TResult> func)
+        public static Fallible<TResult> TryWith<TResult>(Func<TResult> func)
         {
             Require.NotNull(func, nameof(func));
 
@@ -43,12 +37,12 @@ namespace Narvalo.Applicative
             catch (Exception ex)
             {
                 var edi = ExceptionDispatchInfo.Capture(ex);
-                return Result<TResult>.FromError(edi);
+                return Fallible<TResult>.FromError(edi);
             }
         }
 
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of this method.")]
-        public static Result TryFinally(Action action, Action finallyAction)
+        public static Fallible TryFinally(Action action, Action finallyAction)
         {
             Require.NotNull(action, nameof(action));
             Require.NotNull(finallyAction, nameof(finallyAction));
@@ -70,7 +64,7 @@ namespace Narvalo.Applicative
         }
 
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of ResultOrError.")]
-        public static Result<TResult> TryFinally<TResult>(Func<TResult> func, Action finallyAction)
+        public static Fallible<TResult> TryFinally<TResult>(Func<TResult> func, Action finallyAction)
         {
             Require.NotNull(func, nameof(func));
             Require.NotNull(finallyAction, nameof(finallyAction));
@@ -82,7 +76,7 @@ namespace Narvalo.Applicative
             catch (Exception ex)
             {
                 var edi = ExceptionDispatchInfo.Capture(ex);
-                return Result<TResult>.FromError(edi);
+                return Fallible<TResult>.FromError(edi);
             }
             finally
             {

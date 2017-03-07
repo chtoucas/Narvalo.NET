@@ -70,7 +70,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Ident{T}" /> values.
         /// </summary>
-        /// <seealso cref="Ident.Zip{T1, T2, TResult}(Ident{T1}, Ident{T2}, Func{T1, T2, TResult})"/>
+        /// <seealso cref="Ident.Zip{T1, T2, TResult}"/>
         public static Func<Ident<T1>, Ident<T2>, Ident<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
             => (arg1, arg2) =>
@@ -82,7 +82,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Ident{T}" /> values.
         /// </summary>
-        /// <seealso cref="Ident.Zip{T1, T2, T3, TResult}(Ident{T1}, Ident{T2}, Ident{T3}, Func{T1, T2, T3, TResult})"/>
+        /// <seealso cref="Ident.Zip{T1, T2, T3, TResult}"/>
         public static Func<Ident<T1>, Ident<T2>, Ident<T3>, Ident<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
             => (arg1, arg2, arg3) =>
@@ -94,7 +94,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Ident{T}" /> values.
         /// </summary>
-        /// <seealso cref="Ident.Zip{T1, T2, T3, T4, TResult}(Ident{T1}, Ident{T2}, Ident{T3}, Ident{T4}, Func{T1, T2, T3, T4, TResult})"/>
+        /// <seealso cref="Ident.Zip{T1, T2, T3, T4, TResult}"/>
         public static Func<Ident<T1>, Ident<T2>, Ident<T3>, Ident<T4>, Ident<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> func)
@@ -107,7 +107,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Ident{T}" /> values.
         /// </summary>
-        /// <seealso cref="Ident.Zip{T1, T2, T3, T4, T5, TResult}(Ident{T1}, Ident{T2}, Ident{T3}, Ident{T4}, Ident{T5},Func{T1, T2, T3, T4, T5, TResult})"/>
+        /// <seealso cref="Ident.Zip{T1, T2, T3, T4, T5, TResult}"/>
         public static Func<Ident<T1>, Ident<T2>, Ident<T3>, Ident<T4>, Ident<T5>, Ident<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> func)
@@ -174,7 +174,7 @@ namespace Narvalo.Applicative
 
         #region Zip()
 
-        /// <seealso cref="Ident.Lift{T1, T2, TResult}(Func{T1, T2, TResult})"/>
+        /// <seealso cref="Ident.Lift{T1, T2, TResult}"/>
         public static Ident<TResult> Zip<T1, T2, TResult>(
             this Ident<T1> @this,
             Ident<T2> second,
@@ -189,7 +189,7 @@ namespace Narvalo.Applicative
                     arg2 => zipper(arg1, arg2)));
         }
 
-        /// <seealso cref="Ident.Lift{T1, T2, T3, TResult}(Func{T1, T2, T3, TResult})"/>
+        /// <seealso cref="Ident.Lift{T1, T2, T3, TResult}"/>
         public static Ident<TResult> Zip<T1, T2, T3, TResult>(
             this Ident<T1> @this,
             Ident<T2> second,
@@ -212,7 +212,7 @@ namespace Narvalo.Applicative
                     third, (arg2, arg3) => zipper(arg1, arg2, arg3)));
         }
 
-        /// <seealso cref="Ident.Lift{T1, T2, T3, T4, TResult}(Func{T1, T2, T3, T4, TResult})"/>
+        /// <seealso cref="Ident.Lift{T1, T2, T3, T4, TResult}"/>
         public static Ident<TResult> Zip<T1, T2, T3, T4, TResult>(
              this Ident<T1> @this,
              Ident<T2> second,
@@ -238,7 +238,7 @@ namespace Narvalo.Applicative
                     (arg2, arg3, arg4) => zipper(arg1, arg2, arg3, arg4)));
         }
 
-        /// <seealso cref="Ident.Lift{T1, T2, T3, T4, T5, TResult}(Func{T1, T2, T3, T4, T5, TResult})"/>
+        /// <seealso cref="Ident.Lift{T1, T2, T3, T4, T5, TResult}"/>
         public static Ident<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this Ident<T1> @this,
             Ident<T2> second,

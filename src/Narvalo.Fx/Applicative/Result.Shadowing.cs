@@ -5,7 +5,6 @@ namespace Narvalo.Applicative
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using System.Runtime.ExceptionServices;
 
     public partial struct Result<T, TError>
     {
@@ -26,35 +25,7 @@ namespace Narvalo.Applicative
         }
     }
 
-    public partial struct Result<T>
-    {
-        public Result<TResult> ReplaceBy<TResult>(TResult other)
-            => IsSuccess ? Result.Of(other) : Result<TResult>.FromError(Error);
-
-        public Result<TResult> ContinueWith<TResult>(Result<TResult> other)
-            => IsSuccess ? other : Result<TResult>.FromError(Error);
-
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Select", Justification = "[Intentionally] No trouble here, this 'Select' is the one from the LINQ standard query operators.")]
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of this method.")]
-        public Result<TResult> Select<TResult>(Func<T, TResult> selector)
-        {
-            Require.NotNull(selector, nameof(selector));
-
-            if (IsError) { Result<TResult>.FromError(Error); }
-
-            try
-            {
-                return Result.Of(selector.Invoke(Value));
-            }
-            catch (Exception ex)
-            {
-                var edi = ExceptionDispatchInfo.Capture(ex);
-                return Result<TResult>.FromError(edi);
-            }
-        }
-    }
-
-    public static partial class ResultExtensions
+    public static partial class Result
     {
         internal static Result<IEnumerable<TSource>, TError> CollectImpl<TSource, TError>(
             this IEnumerable<Result<TSource, TError>> @this)
@@ -62,35 +33,6 @@ namespace Narvalo.Applicative
             Require.NotNull(@this, nameof(@this));
 
             return Result<IEnumerable<TSource>, TError>.Of(CollectAnyIterator(@this));
-        }
-
-        internal static Result<IEnumerable<TSource>> CollectImpl<TSource>(
-            this IEnumerable<Result<TSource>> @this)
-        {
-            Require.NotNull(@this, nameof(@this));
-
-            return Result.Of(CollectAnyIterator(@this));
-        }
-    }
-}
-
-namespace Narvalo.Linq
-{
-    using System;
-    using System.Collections.Generic;
-
-    using Narvalo.Applicative;
-
-    public static partial class Qperators
-    {
-        internal static Result<IEnumerable<TSource>> WhereByImpl<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, Result<bool>> predicate)
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(predicate, nameof(predicate));
-
-            return Result.Of(WhereAnyIterator(@this, predicate));
         }
     }
 }

@@ -68,7 +68,7 @@ public partial class MonadTemplate
 
         #region Zip()
 
-        /// <seealso cref="<#= Name #>.Lift{T1, T2, TResult<#= RTDecl #>}(Func{T1, T2, TResult})"/>
+        /// <seealso cref="<#= Name #>.Lift{T1, T2, TResult<#= RTDecl #>}"/>
         public static <#= Name #><TResult<#= RTDecl #>> Zip<T1, T2, TResult<#= RTDecl #>>(
             this <#= Name #><T1<#= RTDecl #>> @this,
             <#= Name #><T2<#= RTDecl #>> second,
@@ -91,7 +91,7 @@ public partial class MonadTemplate
 <#+ } #>
         }
 
-        /// <seealso cref="<#= Name #>.Lift{T1, T2, T3, TResult<#= RTDecl #>}(Func{T1, T2, T3, TResult})"/>
+        /// <seealso cref="<#= Name #>.Lift{T1, T2, T3, TResult<#= RTDecl #>}"/>
         public static <#= Name #><TResult<#= RTDecl #>> Zip<T1, T2, T3, TResult<#= RTDecl #>>(
             this <#= Name #><T1<#= RTDecl #>> @this,
             <#= Name #><T2<#= RTDecl #>> second,
@@ -123,7 +123,7 @@ public partial class MonadTemplate
 <#+ } #>
         }
 
-        /// <seealso cref="<#= Name #>.Lift{T1, T2, T3, T4, TResult<#= RTDecl #>}(Func{T1, T2, T3, T4, TResult})"/>
+        /// <seealso cref="<#= Name #>.Lift{T1, T2, T3, T4, TResult<#= RTDecl #>}"/>
         public static <#= Name #><TResult<#= RTDecl #>> Zip<T1, T2, T3, T4, TResult<#= RTDecl #>>(
              this <#= Name #><T1<#= RTDecl #>> @this,
              <#= Name #><T2<#= RTDecl #>> second,
@@ -159,7 +159,7 @@ public partial class MonadTemplate
 <#+ } #>
         }
 
-        /// <seealso cref="<#= Name #>.Lift{T1, T2, T3, T4, T5, TResult<#= RTDecl #>}(Func{T1, T2, T3, T4, T5, TResult})"/>
+        /// <seealso cref="<#= Name #>.Lift{T1, T2, T3, T4, T5, TResult<#= RTDecl #>}"/>
         public static <#= Name #><TResult<#= RTDecl #>> Zip<T1, T2, T3, T4, T5, TResult<#= RTDecl #>>(
             this <#= Name #><T1<#= RTDecl #>> @this,
             <#= Name #><T2<#= RTDecl #>> second,

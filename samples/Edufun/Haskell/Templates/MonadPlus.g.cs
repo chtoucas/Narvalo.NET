@@ -79,7 +79,7 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadPlus{T}" /> values.
         /// </summary>
-        /// <seealso cref="MonadPlus.Zip{T1, T2, TResult}(MonadPlus{T1}, MonadPlus{T2}, Func{T1, T2, TResult})"/>
+        /// <seealso cref="MonadPlus.Zip{T1, T2, TResult}"/>
         public static Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
             => (arg1, arg2) =>
@@ -91,7 +91,7 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadPlus{T}" /> values.
         /// </summary>
-        /// <seealso cref="MonadPlus.Zip{T1, T2, T3, TResult}(MonadPlus{T1}, MonadPlus{T2}, MonadPlus{T3}, Func{T1, T2, T3, TResult})"/>
+        /// <seealso cref="MonadPlus.Zip{T1, T2, T3, TResult}"/>
         public static Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<T3>, MonadPlus<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
             => (arg1, arg2, arg3) =>
@@ -103,7 +103,7 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadPlus{T}" /> values.
         /// </summary>
-        /// <seealso cref="MonadPlus.Zip{T1, T2, T3, T4, TResult}(MonadPlus{T1}, MonadPlus{T2}, MonadPlus{T3}, MonadPlus{T4}, Func{T1, T2, T3, T4, TResult})"/>
+        /// <seealso cref="MonadPlus.Zip{T1, T2, T3, T4, TResult}"/>
         public static Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<T3>, MonadPlus<T4>, MonadPlus<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> func)
@@ -116,7 +116,7 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadPlus{T}" /> values.
         /// </summary>
-        /// <seealso cref="MonadPlus.Zip{T1, T2, T3, T4, T5, TResult}(MonadPlus{T1}, MonadPlus{T2}, MonadPlus{T3}, MonadPlus{T4}, MonadPlus{T5},Func{T1, T2, T3, T4, T5, TResult})"/>
+        /// <seealso cref="MonadPlus.Zip{T1, T2, T3, T4, T5, TResult}"/>
         public static Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<T3>, MonadPlus<T4>, MonadPlus<T5>, MonadPlus<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> func)
@@ -183,7 +183,7 @@ namespace Edufun.Haskell.Templates
 
         #region Zip()
 
-        /// <seealso cref="MonadPlus.Lift{T1, T2, TResult}(Func{T1, T2, TResult})"/>
+        /// <seealso cref="MonadPlus.Lift{T1, T2, TResult}"/>
         public static MonadPlus<TResult> Zip<T1, T2, TResult>(
             this MonadPlus<T1> @this,
             MonadPlus<T2> second,
@@ -198,7 +198,7 @@ namespace Edufun.Haskell.Templates
                     arg2 => zipper(arg1, arg2)));
         }
 
-        /// <seealso cref="MonadPlus.Lift{T1, T2, T3, TResult}(Func{T1, T2, T3, TResult})"/>
+        /// <seealso cref="MonadPlus.Lift{T1, T2, T3, TResult}"/>
         public static MonadPlus<TResult> Zip<T1, T2, T3, TResult>(
             this MonadPlus<T1> @this,
             MonadPlus<T2> second,
@@ -221,7 +221,7 @@ namespace Edufun.Haskell.Templates
                     third, (arg2, arg3) => zipper(arg1, arg2, arg3)));
         }
 
-        /// <seealso cref="MonadPlus.Lift{T1, T2, T3, T4, TResult}(Func{T1, T2, T3, T4, TResult})"/>
+        /// <seealso cref="MonadPlus.Lift{T1, T2, T3, T4, TResult}"/>
         public static MonadPlus<TResult> Zip<T1, T2, T3, T4, TResult>(
              this MonadPlus<T1> @this,
              MonadPlus<T2> second,
@@ -247,7 +247,7 @@ namespace Edufun.Haskell.Templates
                     (arg2, arg3, arg4) => zipper(arg1, arg2, arg3, arg4)));
         }
 
-        /// <seealso cref="MonadPlus.Lift{T1, T2, T3, T4, T5, TResult}(Func{T1, T2, T3, T4, T5, TResult})"/>
+        /// <seealso cref="MonadPlus.Lift{T1, T2, T3, T4, T5, TResult}"/>
         public static MonadPlus<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this MonadPlus<T1> @this,
             MonadPlus<T2> second,

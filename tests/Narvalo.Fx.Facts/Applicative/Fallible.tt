@@ -1,11 +1,11 @@
 ﻿<#@ template language="C#" debug="false" hostspecific="true" #>
 <#@ output extension=".g.cs" #>
 <#@ include file="$(T4NarvaloTemplates)\Monad.Facts.tt" #>
-<#@ include file="$(T4NarvaloTemplates)\Result.tt" #>
-<#= new ResultTemplate(this).Execute() #>
+<#@ include file="$(T4NarvaloTemplates)\Fallible.tt" #>
+<#= new FallibleTemplate(this).Execute() #>
 <#+
 
-    public partial class ResultTemplate : MonadTemplate
+    public partial class FallibleTemplate : MonadTemplate
     {
         protected override void WriteContent()
         {

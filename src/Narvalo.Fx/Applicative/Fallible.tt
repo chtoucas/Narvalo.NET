@@ -1,0 +1,4 @@
+﻿<#@ template language="C#" debug="false" hostspecific="true" #>
+<#@ output extension=".g.cs" #>
+<#@ include file="$(T4NarvaloTemplates)\Fallible.tt" #>
+<#= new FallibleTemplate(this).Execute() #>

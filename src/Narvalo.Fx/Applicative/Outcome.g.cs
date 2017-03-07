@@ -70,7 +70,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Outcome{T}" /> values.
         /// </summary>
-        /// <seealso cref="OutcomeExtensions.Zip{T1, T2, TResult}(Outcome{T1}, Outcome{T2}, Func{T1, T2, TResult})"/>
+        /// <seealso cref="OutcomeExtensions.Zip{T1, T2, TResult}"/>
         public static Func<Outcome<T1>, Outcome<T2>, Outcome<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
             => (arg1, arg2) =>
@@ -82,7 +82,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Outcome{T}" /> values.
         /// </summary>
-        /// <seealso cref="OutcomeExtensions.Zip{T1, T2, T3, TResult}(Outcome{T1}, Outcome{T2}, Outcome{T3}, Func{T1, T2, T3, TResult})"/>
+        /// <seealso cref="OutcomeExtensions.Zip{T1, T2, T3, TResult}"/>
         public static Func<Outcome<T1>, Outcome<T2>, Outcome<T3>, Outcome<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
             => (arg1, arg2, arg3) =>
@@ -94,7 +94,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Outcome{T}" /> values.
         /// </summary>
-        /// <seealso cref="OutcomeExtensions.Zip{T1, T2, T3, T4, TResult}(Outcome{T1}, Outcome{T2}, Outcome{T3}, Outcome{T4}, Func{T1, T2, T3, T4, TResult})"/>
+        /// <seealso cref="OutcomeExtensions.Zip{T1, T2, T3, T4, TResult}"/>
         public static Func<Outcome<T1>, Outcome<T2>, Outcome<T3>, Outcome<T4>, Outcome<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> func)
@@ -107,7 +107,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Outcome{T}" /> values.
         /// </summary>
-        /// <seealso cref="OutcomeExtensions.Zip{T1, T2, T3, T4, T5, TResult}(Outcome{T1}, Outcome{T2}, Outcome{T3}, Outcome{T4}, Outcome{T5},Func{T1, T2, T3, T4, T5, TResult})"/>
+        /// <seealso cref="OutcomeExtensions.Zip{T1, T2, T3, T4, T5, TResult}"/>
         public static Func<Outcome<T1>, Outcome<T2>, Outcome<T3>, Outcome<T4>, Outcome<T5>, Outcome<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> func)
@@ -174,7 +174,7 @@ namespace Narvalo.Applicative
 
         #region Zip()
 
-        /// <seealso cref="Outcome.Lift{T1, T2, TResult}(Func{T1, T2, TResult})"/>
+        /// <seealso cref="Outcome.Lift{T1, T2, TResult}"/>
         public static Outcome<TResult> Zip<T1, T2, TResult>(
             this Outcome<T1> @this,
             Outcome<T2> second,
@@ -189,7 +189,7 @@ namespace Narvalo.Applicative
                     arg2 => zipper(arg1, arg2)));
         }
 
-        /// <seealso cref="Outcome.Lift{T1, T2, T3, TResult}(Func{T1, T2, T3, TResult})"/>
+        /// <seealso cref="Outcome.Lift{T1, T2, T3, TResult}"/>
         public static Outcome<TResult> Zip<T1, T2, T3, TResult>(
             this Outcome<T1> @this,
             Outcome<T2> second,
@@ -212,7 +212,7 @@ namespace Narvalo.Applicative
                     third, (arg2, arg3) => zipper(arg1, arg2, arg3)));
         }
 
-        /// <seealso cref="Outcome.Lift{T1, T2, T3, T4, TResult}(Func{T1, T2, T3, T4, TResult})"/>
+        /// <seealso cref="Outcome.Lift{T1, T2, T3, T4, TResult}"/>
         public static Outcome<TResult> Zip<T1, T2, T3, T4, TResult>(
              this Outcome<T1> @this,
              Outcome<T2> second,
@@ -238,7 +238,7 @@ namespace Narvalo.Applicative
                     (arg2, arg3, arg4) => zipper(arg1, arg2, arg3, arg4)));
         }
 
-        /// <seealso cref="Outcome.Lift{T1, T2, T3, T4, T5, TResult}(Func{T1, T2, T3, T4, T5, TResult})"/>
+        /// <seealso cref="Outcome.Lift{T1, T2, T3, T4, T5, TResult}"/>
         public static Outcome<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this Outcome<T1> @this,
             Outcome<T2> second,

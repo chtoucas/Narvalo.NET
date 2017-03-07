@@ -9,7 +9,7 @@ namespace Narvalo.Applicative
         #region Ok
 
         [Fact]
-        public static void Ok_IsSuccess() => Assert.True(Result.Ok.IsSuccess);
+        public static void Ok_IsSuccess() => Assert.True(Fallible.Ok.IsSuccess);
 
         #endregion
     }

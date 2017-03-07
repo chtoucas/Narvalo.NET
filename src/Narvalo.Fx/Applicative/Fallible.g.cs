@@ -21,31 +21,31 @@ namespace Narvalo.Applicative
     using Narvalo.Internal;
     using Narvalo.Linq;
 
-    // Provides a set of static methods for Result<T>.
+    // Provides a set of static methods for Fallible<T>.
     // T4: EmitHelpers().
-    public partial struct Result
+    public partial struct Fallible
     {
         /// <summary>
-        /// The unique object of type <c>Result&lt;Unit&gt;</c>.
+        /// The unique object of type <c>Fallible&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly Result<_Unit_> s_Unit = Of(_Unit_.Default);
+        private static readonly Fallible<_Unit_> s_Unit = Of(_Unit_.Default);
 
         /// <summary>
-        /// Gets the unique object of type <c>Result&lt;Unit&gt;</c>.
+        /// Gets the unique object of type <c>Fallible&lt;Unit&gt;</c>.
         /// </summary>
-        public static Result<_Unit_> Unit => s_Unit;
+        public static Fallible<_Unit_> Unit => s_Unit;
 
         /// <summary>
-        /// Obtains an instance of the <see cref="Result{T}"/> class for the specified value.
+        /// Obtains an instance of the <see cref="Fallible{T}"/> class for the specified value.
         /// </summary>
         /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
-        /// <param name="value">A value to be wrapped into an object of type <see cref="Result{T}"/>.</param>
-        /// <returns>An instance of the <see cref="Result{T}"/> class for the specified value.</returns>
-        public static Result<T> Of<T>(T value)
-            => Result<T>.η(value);
+        /// <param name="value">A value to be wrapped into an object of type <see cref="Fallible{T}"/>.</param>
+        /// <returns>An instance of the <see cref="Fallible{T}"/> class for the specified value.</returns>
+        public static Fallible<T> Of<T>(T value)
+            => Fallible<T>.η(value);
 
-        public static Result<IEnumerable<TSource>> Repeat<TSource>(
-            Result<TSource> source,
+        public static Fallible<IEnumerable<TSource>> Repeat<TSource>(
+            Fallible<TSource> source,
             int count)
         {
             /* T4: NotNull(source) */
@@ -56,10 +56,10 @@ namespace Narvalo.Applicative
         #region Lift()
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="Result{T}" /> values.
+        /// Promotes a function to use and return <see cref="Fallible{T}" /> values.
         /// </summary>
-        /// <seealso cref="ResultExtensions.Select{T, TResult}" />
-        public static Func<Result<T>, Result<TResult>> Lift<T, TResult>(
+        /// <seealso cref="FallibleExtensions.Select{T, TResult}" />
+        public static Func<Fallible<T>, Fallible<TResult>> Lift<T, TResult>(
             Func<T, TResult> func)
             => arg =>
             {
@@ -68,10 +68,10 @@ namespace Narvalo.Applicative
             };
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="Result{T}" /> values.
+        /// Promotes a function to use and return <see cref="Fallible{T}" /> values.
         /// </summary>
-        /// <seealso cref="ResultExtensions.Zip{T1, T2, TResult}(Result{T1}, Result{T2}, Func{T1, T2, TResult})"/>
-        public static Func<Result<T1>, Result<T2>, Result<TResult>>
+        /// <seealso cref="FallibleExtensions.Zip{T1, T2, TResult}"/>
+        public static Func<Fallible<T1>, Fallible<T2>, Fallible<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
             => (arg1, arg2) =>
             {
@@ -80,10 +80,10 @@ namespace Narvalo.Applicative
             };
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="Result{T}" /> values.
+        /// Promotes a function to use and return <see cref="Fallible{T}" /> values.
         /// </summary>
-        /// <seealso cref="ResultExtensions.Zip{T1, T2, T3, TResult}(Result{T1}, Result{T2}, Result{T3}, Func{T1, T2, T3, TResult})"/>
-        public static Func<Result<T1>, Result<T2>, Result<T3>, Result<TResult>>
+        /// <seealso cref="FallibleExtensions.Zip{T1, T2, T3, TResult}"/>
+        public static Func<Fallible<T1>, Fallible<T2>, Fallible<T3>, Fallible<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
             => (arg1, arg2, arg3) =>
             {
@@ -92,10 +92,10 @@ namespace Narvalo.Applicative
             };
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="Result{T}" /> values.
+        /// Promotes a function to use and return <see cref="Fallible{T}" /> values.
         /// </summary>
-        /// <seealso cref="ResultExtensions.Zip{T1, T2, T3, T4, TResult}(Result{T1}, Result{T2}, Result{T3}, Result{T4}, Func{T1, T2, T3, T4, TResult})"/>
-        public static Func<Result<T1>, Result<T2>, Result<T3>, Result<T4>, Result<TResult>>
+        /// <seealso cref="FallibleExtensions.Zip{T1, T2, T3, T4, TResult}"/>
+        public static Func<Fallible<T1>, Fallible<T2>, Fallible<T3>, Fallible<T4>, Fallible<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> func)
             => (arg1, arg2, arg3, arg4) =>
@@ -105,10 +105,10 @@ namespace Narvalo.Applicative
             };
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="Result{T}" /> values.
+        /// Promotes a function to use and return <see cref="Fallible{T}" /> values.
         /// </summary>
-        /// <seealso cref="ResultExtensions.Zip{T1, T2, T3, T4, T5, TResult}(Result{T1}, Result{T2}, Result{T3}, Result{T4}, Result{T5},Func{T1, T2, T3, T4, T5, TResult})"/>
-        public static Func<Result<T1>, Result<T2>, Result<T3>, Result<T4>, Result<T5>, Result<TResult>>
+        /// <seealso cref="FallibleExtensions.Zip{T1, T2, T3, T4, T5, TResult}"/>
+        public static Func<Fallible<T1>, Fallible<T2>, Fallible<T3>, Fallible<T4>, Fallible<T5>, Fallible<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> func)
             => (arg1, arg2, arg3, arg4, arg5) =>
@@ -120,45 +120,45 @@ namespace Narvalo.Applicative
         #endregion
     }
 
-    // Provides extension methods for Result<T>.
+    // Provides extension methods for Fallible<T>.
     // T4: EmitExtensions().
-    public static partial class ResultExtensions
+    public static partial class FallibleExtensions
     {
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
         /// </summary>
-        public static Result<T> Flatten<T>(this Result<Result<T>> @this)
-            => Result<T>.μ(@this);
+        public static Fallible<T> Flatten<T>(this Fallible<Fallible<T>> @this)
+            => Fallible<T>.μ(@this);
 
-        /// <seealso cref="Ap.Apply{TSource, TResult}(Result{Func{TSource, TResult}}, Result{TSource})" />
-        public static Result<TResult> Gather<TSource, TResult>(
-            this Result<TSource> @this,
-            Result<Func<TSource, TResult>> applicative)
+        /// <seealso cref="Ap.Apply{TSource, TResult}(Fallible{Func{TSource, TResult}}, Fallible{TSource})" />
+        public static Fallible<TResult> Gather<TSource, TResult>(
+            this Fallible<TSource> @this,
+            Fallible<Func<TSource, TResult>> applicative)
         {
             /* T4: NotNull(@this) */
             /* T4: NotNull(applicative) */
             return applicative.Bind(func => @this.Select(func));
         }
 
-        public static Result<TResult> ReplaceBy<TSource, TResult>(
-            this Result<TSource> @this,
+        public static Fallible<TResult> ReplaceBy<TSource, TResult>(
+            this Fallible<TSource> @this,
             TResult value)
         {
             /* T4: NotNull(@this) */
             return @this.Select(_ => value);
         }
 
-        public static Result<TResult> ContinueWith<TSource, TResult>(
-            this Result<TSource> @this,
-            Result<TResult> other)
+        public static Fallible<TResult> ContinueWith<TSource, TResult>(
+            this Fallible<TSource> @this,
+            Fallible<TResult> other)
         {
             /* T4: NotNull(@this) */
             return @this.Bind(_ => other);
         }
 
-        public static Result<TSource> PassThrough<TSource, TOther>(
-            this Result<TSource> @this,
-            Result<TOther> other)
+        public static Fallible<TSource> PassThrough<TSource, TOther>(
+            this Fallible<TSource> @this,
+            Fallible<TOther> other)
         {
             /* T4: NotNull(@this) */
             Func<TSource, TOther, TSource> zipper = (arg, _) => arg;
@@ -166,18 +166,18 @@ namespace Narvalo.Applicative
             return @this.Zip(other, zipper);
         }
 
-        public static Result<_Unit_> Skip<TSource>(this Result<TSource> @this)
+        public static Fallible<_Unit_> Skip<TSource>(this Fallible<TSource> @this)
         {
             /* T4: NotNull(@this) */
-            return @this.ContinueWith(Result.Unit);
+            return @this.ContinueWith(Fallible.Unit);
         }
 
         #region Zip()
 
-        /// <seealso cref="Result.Lift{T1, T2, TResult}(Func{T1, T2, TResult})"/>
-        public static Result<TResult> Zip<T1, T2, TResult>(
-            this Result<T1> @this,
-            Result<T2> second,
+        /// <seealso cref="Fallible.Lift{T1, T2, TResult}"/>
+        public static Fallible<TResult> Zip<T1, T2, TResult>(
+            this Fallible<T1> @this,
+            Fallible<T2> second,
             Func<T1, T2, TResult> zipper)
         {
             /* T4: NotNull(@this) */
@@ -189,11 +189,11 @@ namespace Narvalo.Applicative
                     arg2 => zipper(arg1, arg2)));
         }
 
-        /// <seealso cref="Result.Lift{T1, T2, T3, TResult}(Func{T1, T2, T3, TResult})"/>
-        public static Result<TResult> Zip<T1, T2, T3, TResult>(
-            this Result<T1> @this,
-            Result<T2> second,
-            Result<T3> third,
+        /// <seealso cref="Fallible.Lift{T1, T2, T3, TResult}"/>
+        public static Fallible<TResult> Zip<T1, T2, T3, TResult>(
+            this Fallible<T1> @this,
+            Fallible<T2> second,
+            Fallible<T3> third,
             Func<T1, T2, T3, TResult> zipper)
         {
             /* T4: NotNull(@this) */
@@ -212,12 +212,12 @@ namespace Narvalo.Applicative
                     third, (arg2, arg3) => zipper(arg1, arg2, arg3)));
         }
 
-        /// <seealso cref="Result.Lift{T1, T2, T3, T4, TResult}(Func{T1, T2, T3, T4, TResult})"/>
-        public static Result<TResult> Zip<T1, T2, T3, T4, TResult>(
-             this Result<T1> @this,
-             Result<T2> second,
-             Result<T3> third,
-             Result<T4> fourth,
+        /// <seealso cref="Fallible.Lift{T1, T2, T3, T4, TResult}"/>
+        public static Fallible<TResult> Zip<T1, T2, T3, T4, TResult>(
+             this Fallible<T1> @this,
+             Fallible<T2> second,
+             Fallible<T3> third,
+             Fallible<T4> fourth,
              Func<T1, T2, T3, T4, TResult> zipper)
         {
             /* T4: NotNull(@this) */
@@ -238,13 +238,13 @@ namespace Narvalo.Applicative
                     (arg2, arg3, arg4) => zipper(arg1, arg2, arg3, arg4)));
         }
 
-        /// <seealso cref="Result.Lift{T1, T2, T3, T4, T5, TResult}(Func{T1, T2, T3, T4, T5, TResult})"/>
-        public static Result<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
-            this Result<T1> @this,
-            Result<T2> second,
-            Result<T3> third,
-            Result<T4> fourth,
-            Result<T5> fifth,
+        /// <seealso cref="Fallible.Lift{T1, T2, T3, T4, T5, TResult}"/>
+        public static Fallible<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
+            this Fallible<T1> @this,
+            Fallible<T2> second,
+            Fallible<T3> third,
+            Fallible<T4> fourth,
+            Fallible<T5> fifth,
             Func<T1, T2, T3, T4, T5, TResult> zipper)
         {
             /* T4: NotNull(@this) */
@@ -273,9 +273,9 @@ namespace Narvalo.Applicative
         #region Resource management
 
         // Bind() with automatic resource management.
-        public static Result<TResult> Using<TSource, TResult>(
-            this Result<TSource> @this,
-            Func<TSource, Result<TResult>> selector)
+        public static Fallible<TResult> Using<TSource, TResult>(
+            this Fallible<TSource> @this,
+            Func<TSource, Fallible<TResult>> selector)
             where TSource : IDisposable
         {
             /* T4: NotNull(@this) */
@@ -284,8 +284,8 @@ namespace Narvalo.Applicative
         }
 
         // Select() with automatic resource management.
-        public static Result<TResult> Using<TSource, TResult>(
-            this Result<TSource> @this,
+        public static Fallible<TResult> Using<TSource, TResult>(
+            this Fallible<TSource> @this,
             Func<TSource, TResult> selector)
             where TSource : IDisposable
         {
@@ -298,19 +298,19 @@ namespace Narvalo.Applicative
 
         #region Query Expression Pattern
 
-        public static Result<TResult> Select<TSource, TResult>(
-            this Result<TSource> @this,
+        public static Fallible<TResult> Select<TSource, TResult>(
+            this Fallible<TSource> @this,
             Func<TSource, TResult> selector)
         {
             /* T4: NotNull(@this) */
             Require.NotNull(selector, nameof(selector));
-            return @this.Bind(val => Result<TResult>.η(selector(val)));
+            return @this.Bind(val => Fallible<TResult>.η(selector(val)));
         }
 
         // Generalizes both Bind() and Zip<T1, T2, TResult>().
-        public static Result<TResult> SelectMany<TSource, TMiddle, TResult>(
-            this Result<TSource> @this,
-            Func<TSource, Result<TMiddle>> valueSelector,
+        public static Fallible<TResult> SelectMany<TSource, TMiddle, TResult>(
+            this Fallible<TSource> @this,
+            Func<TSource, Fallible<TMiddle>> valueSelector,
             Func<TSource, TMiddle, TResult> resultSelector)
         {
             /* T4: NotNull(@this) */
@@ -325,14 +325,14 @@ namespace Narvalo.Applicative
         #endregion
     }
 
-    // Provides extension methods for Result<Func<TSource, TResult>>.
+    // Provides extension methods for Fallible<Func<TSource, TResult>>.
     // T4: EmitApplicative().
     public static partial class Ap
     {
-        /// <seealso cref="ResultExtensions.Gather{TSource, TResult}" />
-        public static Result<TResult> Apply<TSource, TResult>(
-            this Result<Func<TSource, TResult>> @this,
-            Result<TSource> value)
+        /// <seealso cref="FallibleExtensions.Gather{TSource, TResult}" />
+        public static Fallible<TResult> Apply<TSource, TResult>(
+            this Fallible<Func<TSource, TResult>> @this,
+            Fallible<TSource> value)
         {
             /* T4: NotNull(value) */
             return value.Gather(@this);
@@ -343,42 +343,42 @@ namespace Narvalo.Applicative
     // T4: EmitKleisli().
     public static partial class Kleisli
     {
-        public static Result<IEnumerable<TResult>> InvokeWith<TSource, TResult>(
-            this Func<TSource, Result<TResult>> @this,
+        public static Fallible<IEnumerable<TResult>> InvokeWith<TSource, TResult>(
+            this Func<TSource, Fallible<TResult>> @this,
             IEnumerable<TSource> seq)
             => seq.SelectWith(@this);
 
-        public static Result<TResult> InvokeWith<TSource, TResult>(
-            this Func<TSource, Result<TResult>> @this,
-            Result<TSource> value)
+        public static Fallible<TResult> InvokeWith<TSource, TResult>(
+            this Func<TSource, Fallible<TResult>> @this,
+            Fallible<TSource> value)
         {
             /* T4: NotNull(value) */
             return value.Bind(@this);
         }
 
-        public static Func<TSource, Result<TResult>> Compose<TSource, TMiddle, TResult>(
-            this Func<TSource, Result<TMiddle>> @this,
-            Func<TMiddle, Result<TResult>> second)
+        public static Func<TSource, Fallible<TResult>> Compose<TSource, TMiddle, TResult>(
+            this Func<TSource, Fallible<TMiddle>> @this,
+            Func<TMiddle, Fallible<TResult>> second)
         {
             Require.NotNull(@this, nameof(@this));
             return arg => @this(arg).Bind(second);
         }
 
-        public static Func<TSource, Result<TResult>> ComposeBack<TSource, TMiddle, TResult>(
-            this Func<TMiddle, Result<TResult>> @this,
-            Func<TSource, Result<TMiddle>> second)
+        public static Func<TSource, Fallible<TResult>> ComposeBack<TSource, TMiddle, TResult>(
+            this Func<TMiddle, Fallible<TResult>> @this,
+            Func<TSource, Fallible<TMiddle>> second)
         {
             Require.NotNull(second, nameof(second));
             return arg => second(arg).Bind(@this);
         }
     }
 
-    // Provides extension methods for IEnumerable<Result<T>>.
+    // Provides extension methods for IEnumerable<Fallible<T>>.
     // T4: EmitEnumerableExtensions().
-    public static partial class ResultExtensions
+    public static partial class FallibleExtensions
     {
-        public static Result<IEnumerable<TSource>> Collect<TSource>(
-            this IEnumerable<Result<TSource>> @this)
+        public static Fallible<IEnumerable<TSource>> Collect<TSource>(
+            this IEnumerable<Fallible<TSource>> @this)
             => @this.CollectImpl();
     }
 }
@@ -392,21 +392,21 @@ namespace Narvalo.Internal
     using Narvalo.Applicative;
     using Narvalo.Linq;
 
-    // Provides default implementations for the extension methods for IEnumerable<Result<T>>.
+    // Provides default implementations for the extension methods for IEnumerable<Fallible<T>>.
     // You will certainly want to override them to improve performance.
     // T4: EmitEnumerableInternal().
     internal static partial class EnumerableExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Result<IEnumerable<TSource>> CollectImpl<TSource>(
-            this IEnumerable<Result<TSource>> @this)
+        internal static Fallible<IEnumerable<TSource>> CollectImpl<TSource>(
+            this IEnumerable<Fallible<TSource>> @this)
         {
             Require.NotNull(@this, nameof(@this));
 
-            return Result<IEnumerable<TSource>>.η(CollectIterator(@this));
+            return Fallible<IEnumerable<TSource>>.η(CollectIterator(@this));
         }
 
-        private static IEnumerable<TSource> CollectIterator<TSource>(IEnumerable<Result<TSource>> source)
+        private static IEnumerable<TSource> CollectIterator<TSource>(IEnumerable<Fallible<TSource>> source)
         {
             Demand.NotNull(source);
 
@@ -424,7 +424,7 @@ namespace Narvalo.Internal
                             append = true;
                             item = val;
 
-                            return Result.Unit;
+                            return Fallible.Unit;
                         });
 
                     if (append) { yield return item; }
@@ -451,44 +451,44 @@ namespace Narvalo.Linq
     // T4: EmitLinqCore().
     public static partial class Qperators
     {
-        public static Result<IEnumerable<TResult>> SelectWith<TSource, TResult>(
+        public static Fallible<IEnumerable<TResult>> SelectWith<TSource, TResult>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Result<TResult>> selector)
+            Func<TSource, Fallible<TResult>> selector)
             => @this.SelectWithImpl(selector);
 
-        public static Result<IEnumerable<TSource>> WhereBy<TSource>(
+        public static Fallible<IEnumerable<TSource>> WhereBy<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Result<bool>> predicate)
+            Func<TSource, Fallible<bool>> predicate)
             => @this.WhereByImpl(predicate);
 
-        public static Result<IEnumerable<TResult>> ZipWith<TFirst, TSecond, TResult>(
+        public static Fallible<IEnumerable<TResult>> ZipWith<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
-            Func<TFirst, TSecond, Result<TResult>> resultSelector)
+            Func<TFirst, TSecond, Fallible<TResult>> resultSelector)
             => @this.ZipWithImpl(second, resultSelector);
 
-        public static Result<TAccumulate> Fold<TSource, TAccumulate>(
+        public static Fallible<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Result<TAccumulate>> accumulator)
+            Func<TAccumulate, TSource, Fallible<TAccumulate>> accumulator)
             => @this.FoldImpl(seed, accumulator);
 
-        public static Result<TAccumulate> Fold<TSource, TAccumulate>(
+        public static Fallible<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Result<TAccumulate>> accumulator,
-            Func<Result<TAccumulate>, bool> predicate)
+            Func<TAccumulate, TSource, Fallible<TAccumulate>> accumulator,
+            Func<Fallible<TAccumulate>, bool> predicate)
             => @this.FoldImpl(seed, accumulator, predicate);
 
-        public static Result<TSource> Reduce<TSource>(
+        public static Fallible<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Result<TSource>> accumulator)
+            Func<TSource, TSource, Fallible<TSource>> accumulator)
             => @this.ReduceImpl(accumulator);
 
-        public static Result<TSource> Reduce<TSource>(
+        public static Fallible<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Result<TSource>> accumulator,
-            Func<Result<TSource>, bool> predicate)
+            Func<TSource, TSource, Fallible<TSource>> accumulator,
+            Func<Fallible<TSource>, bool> predicate)
             => @this.ReduceImpl(accumulator, predicate);
     }
 }
@@ -508,9 +508,9 @@ namespace Narvalo.Internal
     internal static partial class EnumerableExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Result<IEnumerable<TResult>> SelectWithImpl<TSource, TResult>(
+        internal static Fallible<IEnumerable<TResult>> SelectWithImpl<TSource, TResult>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Result<TResult>> selector)
+            Func<TSource, Fallible<TResult>> selector)
         {
             Demand.NotNull(@this);
             Demand.NotNull(selector);
@@ -519,19 +519,19 @@ namespace Narvalo.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Result<IEnumerable<TSource>> WhereByImpl<TSource>(
+        internal static Fallible<IEnumerable<TSource>> WhereByImpl<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Result<bool>> predicate)
+            Func<TSource, Fallible<bool>> predicate)
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
 
-            return Result<IEnumerable<TSource>>.η(WhereByIterator(@this, predicate));
+            return Fallible<IEnumerable<TSource>>.η(WhereByIterator(@this, predicate));
         }
 
         private static IEnumerable<TSource> WhereByIterator<TSource>(
             IEnumerable<TSource> source,
-            Func<TSource, Result<bool>> predicate)
+            Func<TSource, Fallible<bool>> predicate)
         {
             Demand.NotNull(source);
             Demand.NotNull(predicate);
@@ -547,7 +547,7 @@ namespace Narvalo.Internal
                     {
                         pass = val;
 
-                        return Result.Unit;
+                        return Fallible.Unit;
                     });
 
                     if (pass) { yield return item; }
@@ -556,10 +556,10 @@ namespace Narvalo.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Result<IEnumerable<TResult>> ZipWithImpl<TFirst, TSecond, TResult>(
+        internal static Fallible<IEnumerable<TResult>> ZipWithImpl<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
-            Func<TFirst, TSecond, Result<TResult>> resultSelector)
+            Func<TFirst, TSecond, Fallible<TResult>> resultSelector)
         {
             Demand.NotNull(resultSelector);
             Demand.NotNull(@this);
@@ -569,15 +569,15 @@ namespace Narvalo.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Result<TAccumulate> FoldImpl<TSource, TAccumulate>(
+        internal static Fallible<TAccumulate> FoldImpl<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Result<TAccumulate>> accumulator)
+            Func<TAccumulate, TSource, Fallible<TAccumulate>> accumulator)
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
 
-            Result<TAccumulate> retval = Result<TAccumulate>.η(seed);
+            Fallible<TAccumulate> retval = Fallible<TAccumulate>.η(seed);
 
             using (var iter = @this.GetEnumerator())
             {
@@ -591,17 +591,17 @@ namespace Narvalo.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Result<TAccumulate> FoldImpl<TSource, TAccumulate>(
+        internal static Fallible<TAccumulate> FoldImpl<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Result<TAccumulate>> accumulator,
-            Func<Result<TAccumulate>, bool> predicate)
+            Func<TAccumulate, TSource, Fallible<TAccumulate>> accumulator,
+            Func<Fallible<TAccumulate>, bool> predicate)
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
             Require.NotNull(predicate, nameof(predicate));
 
-            Result<TAccumulate> retval = Result<TAccumulate>.η(seed);
+            Fallible<TAccumulate> retval = Fallible<TAccumulate>.η(seed);
 
             using (var iter = @this.GetEnumerator())
             {
@@ -615,9 +615,9 @@ namespace Narvalo.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Result<TSource> ReduceImpl<TSource>(
+        internal static Fallible<TSource> ReduceImpl<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Result<TSource>> accumulator)
+            Func<TSource, TSource, Fallible<TSource>> accumulator)
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
@@ -629,7 +629,7 @@ namespace Narvalo.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                Result<TSource> retval = Result<TSource>.η(iter.Current);
+                Fallible<TSource> retval = Fallible<TSource>.η(iter.Current);
 
                 while (iter.MoveNext())
                 {
@@ -641,10 +641,10 @@ namespace Narvalo.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Result<TSource> ReduceImpl<TSource>(
+        internal static Fallible<TSource> ReduceImpl<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Result<TSource>> accumulator,
-            Func<Result<TSource>, bool> predicate)
+            Func<TSource, TSource, Fallible<TSource>> accumulator,
+            Func<Fallible<TSource>, bool> predicate)
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
@@ -657,7 +657,7 @@ namespace Narvalo.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                Result<TSource> retval = Result<TSource>.η(iter.Current);
+                Fallible<TSource> retval = Fallible<TSource>.η(iter.Current);
 
                 while (predicate(retval) && iter.MoveNext())
                 {

@@ -51,7 +51,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Stateful{T, TState}" /> values.
         /// </summary>
-        /// <seealso cref="Stateful.Zip{T1, T2, TResult, TState}(Stateful{T1, TState}, Stateful{T2, TState}, Func{T1, T2, TResult})"/>
+        /// <seealso cref="Stateful.Zip{T1, T2, TResult, TState}"/>
         public static Func<Stateful<T1, TState>, Stateful<T2, TState>, Stateful<TResult, TState>>
             Lift<T1, T2, TResult, TState>(Func<T1, T2, TResult> func)
             => (arg1, arg2) =>
@@ -63,7 +63,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Stateful{T, TState}" /> values.
         /// </summary>
-        /// <seealso cref="Stateful.Zip{T1, T2, T3, TResult, TState}(Stateful{T1, TState}, Stateful{T2, TState}, Stateful{T3, TState}, Func{T1, T2, T3, TResult})"/>
+        /// <seealso cref="Stateful.Zip{T1, T2, T3, TResult, TState}"/>
         public static Func<Stateful<T1, TState>, Stateful<T2, TState>, Stateful<T3, TState>, Stateful<TResult, TState>>
             Lift<T1, T2, T3, TResult, TState>(Func<T1, T2, T3, TResult> func)
             => (arg1, arg2, arg3) =>
@@ -75,7 +75,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Stateful{T, TState}" /> values.
         /// </summary>
-        /// <seealso cref="Stateful.Zip{T1, T2, T3, T4, TResult, TState}(Stateful{T1, TState}, Stateful{T2, TState}, Stateful{T3, TState}, Stateful{T4, TState}, Func{T1, T2, T3, T4, TResult})"/>
+        /// <seealso cref="Stateful.Zip{T1, T2, T3, T4, TResult, TState}"/>
         public static Func<Stateful<T1, TState>, Stateful<T2, TState>, Stateful<T3, TState>, Stateful<T4, TState>, Stateful<TResult, TState>>
             Lift<T1, T2, T3, T4, TResult, TState>(
             Func<T1, T2, T3, T4, TResult> func)
@@ -88,7 +88,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Stateful{T, TState}" /> values.
         /// </summary>
-        /// <seealso cref="Stateful.Zip{T1, T2, T3, T4, T5, TResult, TState}(Stateful{T1, TState}, Stateful{T2, TState}, Stateful{T3, TState}, Stateful{T4, TState}, Stateful{T5, TState},Func{T1, T2, T3, T4, T5, TResult})"/>
+        /// <seealso cref="Stateful.Zip{T1, T2, T3, T4, T5, TResult, TState}"/>
         public static Func<Stateful<T1, TState>, Stateful<T2, TState>, Stateful<T3, TState>, Stateful<T4, TState>, Stateful<T5, TState>, Stateful<TResult, TState>>
             Lift<T1, T2, T3, T4, T5, TResult, TState>(
             Func<T1, T2, T3, T4, T5, TResult> func)
@@ -149,7 +149,7 @@ namespace Narvalo.Applicative
 
         #region Zip()
 
-        /// <seealso cref="Stateful.Lift{T1, T2, TResult, TState}(Func{T1, T2, TResult})"/>
+        /// <seealso cref="Stateful.Lift{T1, T2, TResult, TState}"/>
         public static Stateful<TResult, TState> Zip<T1, T2, TResult, TState>(
             this Stateful<T1, TState> @this,
             Stateful<T2, TState> second,
@@ -164,7 +164,7 @@ namespace Narvalo.Applicative
                     arg2 => zipper(arg1, arg2)));
         }
 
-        /// <seealso cref="Stateful.Lift{T1, T2, T3, TResult, TState}(Func{T1, T2, T3, TResult})"/>
+        /// <seealso cref="Stateful.Lift{T1, T2, T3, TResult, TState}"/>
         public static Stateful<TResult, TState> Zip<T1, T2, T3, TResult, TState>(
             this Stateful<T1, TState> @this,
             Stateful<T2, TState> second,
@@ -187,7 +187,7 @@ namespace Narvalo.Applicative
                     third, (arg2, arg3) => zipper(arg1, arg2, arg3)));
         }
 
-        /// <seealso cref="Stateful.Lift{T1, T2, T3, T4, TResult, TState}(Func{T1, T2, T3, T4, TResult})"/>
+        /// <seealso cref="Stateful.Lift{T1, T2, T3, T4, TResult, TState}"/>
         public static Stateful<TResult, TState> Zip<T1, T2, T3, T4, TResult, TState>(
              this Stateful<T1, TState> @this,
              Stateful<T2, TState> second,
@@ -213,7 +213,7 @@ namespace Narvalo.Applicative
                     (arg2, arg3, arg4) => zipper(arg1, arg2, arg3, arg4)));
         }
 
-        /// <seealso cref="Stateful.Lift{T1, T2, T3, T4, T5, TResult, TState}(Func{T1, T2, T3, T4, T5, TResult})"/>
+        /// <seealso cref="Stateful.Lift{T1, T2, T3, T4, T5, TResult, TState}"/>
         public static Stateful<TResult, TState> Zip<T1, T2, T3, T4, T5, TResult, TState>(
             this Stateful<T1, TState> @this,
             Stateful<T2, TState> second,

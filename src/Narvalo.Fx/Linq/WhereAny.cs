@@ -41,7 +41,7 @@ namespace Narvalo.Linq
 
         public static IEnumerable<TSource> WhereAny<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Result<bool>> predicate)
+            Func<TSource, Fallible<bool>> predicate)
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
@@ -96,7 +96,7 @@ namespace Narvalo.Linq
 
         private static IEnumerable<TSource> WhereAnyIterator<TSource>(
             IEnumerable<TSource> source,
-            Func<TSource, Result<bool>> predicate)
+            Func<TSource, Fallible<bool>> predicate)
         {
             Demand.NotNull(source);
             Demand.NotNull(predicate);

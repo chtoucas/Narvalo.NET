@@ -72,7 +72,7 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="Monad{T}" /> values.
         /// </summary>
-        /// <seealso cref="Monad.Zip{T1, T2, TResult}(Monad{T1}, Monad{T2}, Func{T1, T2, TResult})"/>
+        /// <seealso cref="Monad.Zip{T1, T2, TResult}"/>
         public static Func<Monad<T1>, Monad<T2>, Monad<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
             => (arg1, arg2) =>
@@ -84,7 +84,7 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="Monad{T}" /> values.
         /// </summary>
-        /// <seealso cref="Monad.Zip{T1, T2, T3, TResult}(Monad{T1}, Monad{T2}, Monad{T3}, Func{T1, T2, T3, TResult})"/>
+        /// <seealso cref="Monad.Zip{T1, T2, T3, TResult}"/>
         public static Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
             => (arg1, arg2, arg3) =>
@@ -96,7 +96,7 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="Monad{T}" /> values.
         /// </summary>
-        /// <seealso cref="Monad.Zip{T1, T2, T3, T4, TResult}(Monad{T1}, Monad{T2}, Monad{T3}, Monad{T4}, Func{T1, T2, T3, T4, TResult})"/>
+        /// <seealso cref="Monad.Zip{T1, T2, T3, T4, TResult}"/>
         public static Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<T4>, Monad<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> func)
@@ -109,7 +109,7 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="Monad{T}" /> values.
         /// </summary>
-        /// <seealso cref="Monad.Zip{T1, T2, T3, T4, T5, TResult}(Monad{T1}, Monad{T2}, Monad{T3}, Monad{T4}, Monad{T5},Func{T1, T2, T3, T4, T5, TResult})"/>
+        /// <seealso cref="Monad.Zip{T1, T2, T3, T4, T5, TResult}"/>
         public static Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<T4>, Monad<T5>, Monad<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> func)
@@ -176,7 +176,7 @@ namespace Edufun.Haskell.Templates
 
         #region Zip()
 
-        /// <seealso cref="Monad.Lift{T1, T2, TResult}(Func{T1, T2, TResult})"/>
+        /// <seealso cref="Monad.Lift{T1, T2, TResult}"/>
         public static Monad<TResult> Zip<T1, T2, TResult>(
             this Monad<T1> @this,
             Monad<T2> second,
@@ -191,7 +191,7 @@ namespace Edufun.Haskell.Templates
                     arg2 => zipper(arg1, arg2)));
         }
 
-        /// <seealso cref="Monad.Lift{T1, T2, T3, TResult}(Func{T1, T2, T3, TResult})"/>
+        /// <seealso cref="Monad.Lift{T1, T2, T3, TResult}"/>
         public static Monad<TResult> Zip<T1, T2, T3, TResult>(
             this Monad<T1> @this,
             Monad<T2> second,
@@ -214,7 +214,7 @@ namespace Edufun.Haskell.Templates
                     third, (arg2, arg3) => zipper(arg1, arg2, arg3)));
         }
 
-        /// <seealso cref="Monad.Lift{T1, T2, T3, T4, TResult}(Func{T1, T2, T3, T4, TResult})"/>
+        /// <seealso cref="Monad.Lift{T1, T2, T3, T4, TResult}"/>
         public static Monad<TResult> Zip<T1, T2, T3, T4, TResult>(
              this Monad<T1> @this,
              Monad<T2> second,
@@ -240,7 +240,7 @@ namespace Edufun.Haskell.Templates
                     (arg2, arg3, arg4) => zipper(arg1, arg2, arg3, arg4)));
         }
 
-        /// <seealso cref="Monad.Lift{T1, T2, T3, T4, T5, TResult}(Func{T1, T2, T3, T4, T5, TResult})"/>
+        /// <seealso cref="Monad.Lift{T1, T2, T3, T4, T5, TResult}"/>
         public static Monad<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this Monad<T1> @this,
             Monad<T2> second,

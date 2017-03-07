@@ -32,8 +32,8 @@
   <ItemGroup>
     <Compile Include="Applicative\EitherFacts.cs" />
     <Compile Include="Applicative\ResultFacts.cs" />
-    <Compile Include="Applicative\ResultT.g.cs">
-      <DependentUpon>ResultT.tt</DependentUpon>
+    <Compile Include="Applicative\Fallible.g.cs">
+      <DependentUpon>Fallible.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -64,9 +64,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Applicative\ResultT.tt">
+    <Content Include="Applicative\Fallible.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ResultT.g.cs</LastGenOutput>
+      <LastGenOutput>Fallible.g.cs</LastGenOutput>
     </Content>
     <Content Include="Applicative\Maybe.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -15,14 +15,8 @@ namespace Edufun.Haskell.Templates
     // T4: EmitComonadHelpers().
     public static partial class Comonad
     {
-        /// <remarks>
-        /// Named <c>extract</c> in Haskell parlance.
-        /// </remarks>
         public static T Extract<T>(Comonad<T> value) => Comonad<T>.ε(value);
 
-        /// <remarks>
-        /// Named <c>duplicate</c> in Haskell parlance.
-        /// </remarks>
         public static Comonad<Comonad<T>> Duplicate<T>(Comonad<T> value) => Comonad<T>.δ(value);
     }
 }

@@ -77,7 +77,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Maybe{T}" /> values.
         /// </summary>
-        /// <seealso cref="Maybe.Zip{T1, T2, TResult}(Maybe{T1}, Maybe{T2}, Func{T1, T2, TResult})"/>
+        /// <seealso cref="Maybe.Zip{T1, T2, TResult}"/>
         public static Func<Maybe<T1>, Maybe<T2>, Maybe<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
             => (arg1, arg2) =>
@@ -89,7 +89,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Maybe{T}" /> values.
         /// </summary>
-        /// <seealso cref="Maybe.Zip{T1, T2, T3, TResult}(Maybe{T1}, Maybe{T2}, Maybe{T3}, Func{T1, T2, T3, TResult})"/>
+        /// <seealso cref="Maybe.Zip{T1, T2, T3, TResult}"/>
         public static Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
             => (arg1, arg2, arg3) =>
@@ -101,7 +101,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Maybe{T}" /> values.
         /// </summary>
-        /// <seealso cref="Maybe.Zip{T1, T2, T3, T4, TResult}(Maybe{T1}, Maybe{T2}, Maybe{T3}, Maybe{T4}, Func{T1, T2, T3, T4, TResult})"/>
+        /// <seealso cref="Maybe.Zip{T1, T2, T3, T4, TResult}"/>
         public static Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<T4>, Maybe<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> func)
@@ -114,7 +114,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Maybe{T}" /> values.
         /// </summary>
-        /// <seealso cref="Maybe.Zip{T1, T2, T3, T4, T5, TResult}(Maybe{T1}, Maybe{T2}, Maybe{T3}, Maybe{T4}, Maybe{T5},Func{T1, T2, T3, T4, T5, TResult})"/>
+        /// <seealso cref="Maybe.Zip{T1, T2, T3, T4, T5, TResult}"/>
         public static Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<T4>, Maybe<T5>, Maybe<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> func)
@@ -181,7 +181,7 @@ namespace Narvalo.Applicative
 
         #region Zip()
 
-        /// <seealso cref="Maybe.Lift{T1, T2, TResult}(Func{T1, T2, TResult})"/>
+        /// <seealso cref="Maybe.Lift{T1, T2, TResult}"/>
         public static Maybe<TResult> Zip<T1, T2, TResult>(
             this Maybe<T1> @this,
             Maybe<T2> second,
@@ -196,7 +196,7 @@ namespace Narvalo.Applicative
                     arg2 => zipper(arg1, arg2)));
         }
 
-        /// <seealso cref="Maybe.Lift{T1, T2, T3, TResult}(Func{T1, T2, T3, TResult})"/>
+        /// <seealso cref="Maybe.Lift{T1, T2, T3, TResult}"/>
         public static Maybe<TResult> Zip<T1, T2, T3, TResult>(
             this Maybe<T1> @this,
             Maybe<T2> second,
@@ -219,7 +219,7 @@ namespace Narvalo.Applicative
                     third, (arg2, arg3) => zipper(arg1, arg2, arg3)));
         }
 
-        /// <seealso cref="Maybe.Lift{T1, T2, T3, T4, TResult}(Func{T1, T2, T3, T4, TResult})"/>
+        /// <seealso cref="Maybe.Lift{T1, T2, T3, T4, TResult}"/>
         public static Maybe<TResult> Zip<T1, T2, T3, T4, TResult>(
              this Maybe<T1> @this,
              Maybe<T2> second,
@@ -245,7 +245,7 @@ namespace Narvalo.Applicative
                     (arg2, arg3, arg4) => zipper(arg1, arg2, arg3, arg4)));
         }
 
-        /// <seealso cref="Maybe.Lift{T1, T2, T3, T4, T5, TResult}(Func{T1, T2, T3, T4, T5, TResult})"/>
+        /// <seealso cref="Maybe.Lift{T1, T2, T3, T4, T5, TResult}"/>
         public static Maybe<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this Maybe<T1> @this,
             Maybe<T2> second,

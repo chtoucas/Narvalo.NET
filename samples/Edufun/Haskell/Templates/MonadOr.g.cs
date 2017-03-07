@@ -79,7 +79,7 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadOr{T}" /> values.
         /// </summary>
-        /// <seealso cref="MonadOr.Zip{T1, T2, TResult}(MonadOr{T1}, MonadOr{T2}, Func{T1, T2, TResult})"/>
+        /// <seealso cref="MonadOr.Zip{T1, T2, TResult}"/>
         public static Func<MonadOr<T1>, MonadOr<T2>, MonadOr<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
             => (arg1, arg2) =>
@@ -91,7 +91,7 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadOr{T}" /> values.
         /// </summary>
-        /// <seealso cref="MonadOr.Zip{T1, T2, T3, TResult}(MonadOr{T1}, MonadOr{T2}, MonadOr{T3}, Func{T1, T2, T3, TResult})"/>
+        /// <seealso cref="MonadOr.Zip{T1, T2, T3, TResult}"/>
         public static Func<MonadOr<T1>, MonadOr<T2>, MonadOr<T3>, MonadOr<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
             => (arg1, arg2, arg3) =>
@@ -103,7 +103,7 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadOr{T}" /> values.
         /// </summary>
-        /// <seealso cref="MonadOr.Zip{T1, T2, T3, T4, TResult}(MonadOr{T1}, MonadOr{T2}, MonadOr{T3}, MonadOr{T4}, Func{T1, T2, T3, T4, TResult})"/>
+        /// <seealso cref="MonadOr.Zip{T1, T2, T3, T4, TResult}"/>
         public static Func<MonadOr<T1>, MonadOr<T2>, MonadOr<T3>, MonadOr<T4>, MonadOr<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> func)
@@ -116,7 +116,7 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadOr{T}" /> values.
         /// </summary>
-        /// <seealso cref="MonadOr.Zip{T1, T2, T3, T4, T5, TResult}(MonadOr{T1}, MonadOr{T2}, MonadOr{T3}, MonadOr{T4}, MonadOr{T5},Func{T1, T2, T3, T4, T5, TResult})"/>
+        /// <seealso cref="MonadOr.Zip{T1, T2, T3, T4, T5, TResult}"/>
         public static Func<MonadOr<T1>, MonadOr<T2>, MonadOr<T3>, MonadOr<T4>, MonadOr<T5>, MonadOr<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> func)
@@ -183,7 +183,7 @@ namespace Edufun.Haskell.Templates
 
         #region Zip()
 
-        /// <seealso cref="MonadOr.Lift{T1, T2, TResult}(Func{T1, T2, TResult})"/>
+        /// <seealso cref="MonadOr.Lift{T1, T2, TResult}"/>
         public static MonadOr<TResult> Zip<T1, T2, TResult>(
             this MonadOr<T1> @this,
             MonadOr<T2> second,
@@ -198,7 +198,7 @@ namespace Edufun.Haskell.Templates
                     arg2 => zipper(arg1, arg2)));
         }
 
-        /// <seealso cref="MonadOr.Lift{T1, T2, T3, TResult}(Func{T1, T2, T3, TResult})"/>
+        /// <seealso cref="MonadOr.Lift{T1, T2, T3, TResult}"/>
         public static MonadOr<TResult> Zip<T1, T2, T3, TResult>(
             this MonadOr<T1> @this,
             MonadOr<T2> second,
@@ -221,7 +221,7 @@ namespace Edufun.Haskell.Templates
                     third, (arg2, arg3) => zipper(arg1, arg2, arg3)));
         }
 
-        /// <seealso cref="MonadOr.Lift{T1, T2, T3, T4, TResult}(Func{T1, T2, T3, T4, TResult})"/>
+        /// <seealso cref="MonadOr.Lift{T1, T2, T3, T4, TResult}"/>
         public static MonadOr<TResult> Zip<T1, T2, T3, T4, TResult>(
              this MonadOr<T1> @this,
              MonadOr<T2> second,
@@ -247,7 +247,7 @@ namespace Edufun.Haskell.Templates
                     (arg2, arg3, arg4) => zipper(arg1, arg2, arg3, arg4)));
         }
 
-        /// <seealso cref="MonadOr.Lift{T1, T2, T3, T4, T5, TResult}(Func{T1, T2, T3, T4, T5, TResult})"/>
+        /// <seealso cref="MonadOr.Lift{T1, T2, T3, T4, T5, TResult}"/>
         public static MonadOr<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this MonadOr<T1> @this,
             MonadOr<T2> second,

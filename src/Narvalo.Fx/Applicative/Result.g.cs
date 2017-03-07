@@ -23,7 +23,7 @@ namespace Narvalo.Applicative
 
     // Provides a set of static methods for Result<T, TError>.
     // T4: EmitHelpers().
-    public partial struct Result
+    public static partial class Result
     {
         public static Result<IEnumerable<TSource>, TError> Repeat<TSource, TError>(
             Result<TSource, TError> source,
@@ -39,7 +39,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Result{T, TError}" /> values.
         /// </summary>
-        /// <seealso cref="ResultExtensions.Select{T, TResult, TError}" />
+        /// <seealso cref="Result.Select{T, TResult, TError}" />
         public static Func<Result<T, TError>, Result<TResult, TError>> Lift<T, TResult, TError>(
             Func<T, TResult> func)
             => arg =>
@@ -51,7 +51,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Result{T, TError}" /> values.
         /// </summary>
-        /// <seealso cref="ResultExtensions.Zip{T1, T2, TResult, TError}(Result{T1, TError}, Result{T2, TError}, Func{T1, T2, TResult})"/>
+        /// <seealso cref="Result.Zip{T1, T2, TResult, TError}"/>
         public static Func<Result<T1, TError>, Result<T2, TError>, Result<TResult, TError>>
             Lift<T1, T2, TResult, TError>(Func<T1, T2, TResult> func)
             => (arg1, arg2) =>
@@ -63,7 +63,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Result{T, TError}" /> values.
         /// </summary>
-        /// <seealso cref="ResultExtensions.Zip{T1, T2, T3, TResult, TError}(Result{T1, TError}, Result{T2, TError}, Result{T3, TError}, Func{T1, T2, T3, TResult})"/>
+        /// <seealso cref="Result.Zip{T1, T2, T3, TResult, TError}"/>
         public static Func<Result<T1, TError>, Result<T2, TError>, Result<T3, TError>, Result<TResult, TError>>
             Lift<T1, T2, T3, TResult, TError>(Func<T1, T2, T3, TResult> func)
             => (arg1, arg2, arg3) =>
@@ -75,7 +75,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Result{T, TError}" /> values.
         /// </summary>
-        /// <seealso cref="ResultExtensions.Zip{T1, T2, T3, T4, TResult, TError}(Result{T1, TError}, Result{T2, TError}, Result{T3, TError}, Result{T4, TError}, Func{T1, T2, T3, T4, TResult})"/>
+        /// <seealso cref="Result.Zip{T1, T2, T3, T4, TResult, TError}"/>
         public static Func<Result<T1, TError>, Result<T2, TError>, Result<T3, TError>, Result<T4, TError>, Result<TResult, TError>>
             Lift<T1, T2, T3, T4, TResult, TError>(
             Func<T1, T2, T3, T4, TResult> func)
@@ -88,7 +88,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Result{T, TError}" /> values.
         /// </summary>
-        /// <seealso cref="ResultExtensions.Zip{T1, T2, T3, T4, T5, TResult, TError}(Result{T1, TError}, Result{T2, TError}, Result{T3, TError}, Result{T4, TError}, Result{T5, TError},Func{T1, T2, T3, T4, T5, TResult})"/>
+        /// <seealso cref="Result.Zip{T1, T2, T3, T4, T5, TResult, TError}"/>
         public static Func<Result<T1, TError>, Result<T2, TError>, Result<T3, TError>, Result<T4, TError>, Result<T5, TError>, Result<TResult, TError>>
             Lift<T1, T2, T3, T4, T5, TResult, TError>(
             Func<T1, T2, T3, T4, T5, TResult> func)
@@ -103,7 +103,7 @@ namespace Narvalo.Applicative
 
     // Provides extension methods for Result<T, TError>.
     // T4: EmitExtensions().
-    public static partial class ResultExtensions
+    public static partial class Result
     {
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
@@ -155,7 +155,7 @@ namespace Narvalo.Applicative
 
         #region Zip()
 
-        /// <seealso cref="Result.Lift{T1, T2, TResult, TError}(Func{T1, T2, TResult})"/>
+        /// <seealso cref="Result.Lift{T1, T2, TResult, TError}"/>
         public static Result<TResult, TError> Zip<T1, T2, TResult, TError>(
             this Result<T1, TError> @this,
             Result<T2, TError> second,
@@ -170,7 +170,7 @@ namespace Narvalo.Applicative
                     arg2 => zipper(arg1, arg2)));
         }
 
-        /// <seealso cref="Result.Lift{T1, T2, T3, TResult, TError}(Func{T1, T2, T3, TResult})"/>
+        /// <seealso cref="Result.Lift{T1, T2, T3, TResult, TError}"/>
         public static Result<TResult, TError> Zip<T1, T2, T3, TResult, TError>(
             this Result<T1, TError> @this,
             Result<T2, TError> second,
@@ -193,7 +193,7 @@ namespace Narvalo.Applicative
                     third, (arg2, arg3) => zipper(arg1, arg2, arg3)));
         }
 
-        /// <seealso cref="Result.Lift{T1, T2, T3, T4, TResult, TError}(Func{T1, T2, T3, T4, TResult})"/>
+        /// <seealso cref="Result.Lift{T1, T2, T3, T4, TResult, TError}"/>
         public static Result<TResult, TError> Zip<T1, T2, T3, T4, TResult, TError>(
              this Result<T1, TError> @this,
              Result<T2, TError> second,
@@ -219,7 +219,7 @@ namespace Narvalo.Applicative
                     (arg2, arg3, arg4) => zipper(arg1, arg2, arg3, arg4)));
         }
 
-        /// <seealso cref="Result.Lift{T1, T2, T3, T4, T5, TResult, TError}(Func{T1, T2, T3, T4, T5, TResult})"/>
+        /// <seealso cref="Result.Lift{T1, T2, T3, T4, T5, TResult, TError}"/>
         public static Result<TResult, TError> Zip<T1, T2, T3, T4, T5, TResult, TError>(
             this Result<T1, TError> @this,
             Result<T2, TError> second,
@@ -310,7 +310,7 @@ namespace Narvalo.Applicative
     // T4: EmitApplicative().
     public static partial class Ap
     {
-        /// <seealso cref="ResultExtensions.Gather{TSource, TResult, TError}" />
+        /// <seealso cref="Result.Gather{TSource, TResult, TError}" />
         public static Result<TResult, TError> Apply<TSource, TResult, TError>(
             this Result<Func<TSource, TResult>, TError> @this,
             Result<TSource, TError> value)
@@ -356,7 +356,7 @@ namespace Narvalo.Applicative
 
     // Provides extension methods for IEnumerable<Result<T, TError>>.
     // T4: EmitEnumerableExtensions().
-    public static partial class ResultExtensions
+    public static partial class Result
     {
         public static Result<IEnumerable<TSource>, TError> Collect<TSource, TError>(
             this IEnumerable<Result<TSource, TError>> @this)

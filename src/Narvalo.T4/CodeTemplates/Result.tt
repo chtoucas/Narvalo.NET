@@ -9,10 +9,8 @@
         {
             InitializeNamespacesForNarvaloFx();
             InitializeGenericParameters("T", "TError");
-            InitializeHelpers(asStruct: true);
 
             EtaName = "Of";
-            Name = "Result";
             IsNullable = false;
         }
     }

@@ -14,33 +14,33 @@ namespace Narvalo.Applicative
 
     /// <summary>
     /// Represents the outcome of a computation which might have thrown an exception.
-    /// An instance of the <see cref="Result{T}"/> class contains either a <c>T</c>
+    /// An instance of the <see cref="Fallible{T}"/> class contains either a <c>T</c>
     /// value or the exception state at the point it was thrown.
     /// </summary>
     /// <remarks>
     /// <para>We do not catch exceptions throw by any supplied delegate; there is only one exception
-    /// though: <see cref="Result{T}.Select{TResult}(Func{T, TResult})"/>. A good pratice is that
-    /// a function that returns a <see cref="Result{T}"/> does not normally throw.</para>
+    /// though: <see cref="Fallible{T}.Select{TResult}(Func{T, TResult})"/>. A good pratice is that
+    /// a function that returns a <see cref="Fallible{T}"/> does not normally throw.</para>
     /// <para>This class is not meant to replace the standard exception mechanism.</para>
     /// </remarks>
     /// <typeparam name="T">The underlying type of the value.</typeparam>
     // Friendly version of Result<T, ExceptionDispatchInfo>.
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    [DebuggerTypeProxy(typeof(Result<>.DebugView))]
-    public partial struct Result<T>
-        : IEquatable<Result<T>>, Internal.IEither<T, ExceptionDispatchInfo>, Internal.Iterable<T>
+    [DebuggerTypeProxy(typeof(Fallible<>.DebugView))]
+    public partial struct Fallible<T>
+        : IEquatable<Fallible<T>>, Internal.IEither<T, ExceptionDispatchInfo>, Internal.Iterable<T>
     {
         private readonly ExceptionDispatchInfo _error;
         private readonly T _value;
 
-        private Result(T value)
+        private Fallible(T value)
         {
             _error = default(ExceptionDispatchInfo);
             _value = value;
             IsSuccess = true;
         }
 
-        private Result(ExceptionDispatchInfo error)
+        private Fallible(ExceptionDispatchInfo error)
         {
             Demand.NotNull(error);
 
@@ -114,16 +114,16 @@ namespace Narvalo.Applicative
             => IsSuccess ? "Success(" + Value?.ToString() + ")" : "Error(" + Error.ToString() + ")";
 
         /// <summary>
-        /// Represents a debugger type proxy for <see cref="Result{T}"/>.
+        /// Represents a debugger type proxy for <see cref="Fallible{T}"/>.
         /// </summary>
-        /// <remarks>Ensure that <see cref="Result{T}.Value"/> and <see cref="Result{T}.Error"/>
+        /// <remarks>Ensure that <see cref="Fallible{T}.Value"/> and <see cref="Fallible{T}.Error"/>
         /// do not throw in the debugger for DEBUG builds.</remarks>
         [ExcludeFromCodeCoverage]
         private sealed class DebugView
         {
-            private readonly Result<T> _inner;
+            private readonly Fallible<T> _inner;
 
-            public DebugView(Result<T> inner)
+            public DebugView(Fallible<T> inner)
             {
                 _inner = inner;
             }
@@ -137,7 +137,7 @@ namespace Narvalo.Applicative
     }
 
     // Conversions operators.
-    public partial struct Result<T>
+    public partial struct Fallible<T>
     {
         public T ToValue()
         {
@@ -153,22 +153,22 @@ namespace Narvalo.Applicative
 
         public Maybe<T> ToMaybe() => ValueOrNone();
 
-        public static explicit operator T(Result<T> value) => value.ToValue();
+        public static explicit operator T(Fallible<T> value) => value.ToValue();
 
-        public static explicit operator ExceptionDispatchInfo(Result<T> value) => value.ToExceptionInfo();
+        public static explicit operator ExceptionDispatchInfo(Fallible<T> value) => value.ToExceptionInfo();
 
-        public static explicit operator Result<T>(T value) => η(value);
+        public static explicit operator Fallible<T>(T value) => η(value);
     }
 
     // Core Monad methods.
-    public partial struct Result<T>
+    public partial struct Fallible<T>
     {
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of this method.")]
-        public Result<TResult> Bind<TResult>(Func<T, Result<TResult>> binder)
+        public Fallible<TResult> Bind<TResult>(Func<T, Fallible<TResult>> binder)
         {
             Require.NotNull(binder, nameof(binder));
 
-            if (IsError) { return Result<TResult>.FromError(Error); }
+            if (IsError) { return Fallible<TResult>.FromError(Error); }
 
             try
             {
@@ -177,36 +177,36 @@ namespace Narvalo.Applicative
             catch (Exception ex)
             {
                 var edi = ExceptionDispatchInfo.Capture(ex);
-                return Result<TResult>.FromError(edi);
+                return Fallible<TResult>.FromError(edi);
             }
         }
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static Result<T> η(T value) => new Result<T>(value);
+        internal static Fallible<T> η(T value) => new Fallible<T>(value);
 
-        // NB: This method is normally internal, but Result<T>.FromError() is more readable
-        // than Result.FromError<T>() - no type inference.
+        // NB: This method is normally internal, but Fallible<T>.FromError() is more readable
+        // than Fallible.FromError<T>() - no type inference.
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Intentionally] A static method in a static class won't help.")]
-        public static Result<T> FromError(ExceptionDispatchInfo error)
+        public static Fallible<T> FromError(ExceptionDispatchInfo error)
         {
             Require.NotNull(error, nameof(error));
 
-            return new Result<T>(error);
+            return new Fallible<T>(error);
         }
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static Result<T> μ(Result<Result<T>> square)
+        internal static Fallible<T> μ(Fallible<Fallible<T>> square)
             => square.IsSuccess ? square.Value : FromError(square.Error);
     }
 
     // Query Expression Pattern.
-    public partial struct Result<T>
+    public partial struct Fallible<T>
     {
-        // Result<T> is not a MonadOr but we can still construct a Where() operator.
+        // Fallible<T> is not a MonadOr but we can still construct a Where() operator.
         // It is weird that it works (filter is not a predicate) but it does.
-        public Result<T> Where(Func<T, Result> filter)
+        public Fallible<T> Where(Func<T, Fallible> filter)
         {
             Require.NotNull(filter, nameof(filter));
 
@@ -215,7 +215,7 @@ namespace Narvalo.Applicative
     }
 
     // Implements the Internal.IEither<T, ExceptionDispatchInfo> interface.
-    public partial struct Result<T>
+    public partial struct Fallible<T>
     {
         public bool Contains(T value)
         {
@@ -320,27 +320,27 @@ namespace Narvalo.Applicative
     }
 
     // Implements the Internal.Iterable<T> interface.
-    public partial struct Result<T>
+    public partial struct Fallible<T>
     {
         public IEnumerable<T> ToEnumerable() => IsSuccess ? Sequence.Of(Value) : Enumerable.Empty<T>();
 
         public IEnumerator<T> GetEnumerator() => ToEnumerable().GetEnumerator();
     }
 
-    // Implements the IEquatable<Result<T>> interface.
-    public partial struct Result<T>
+    // Implements the IEquatable<Fallible<T>> interface.
+    public partial struct Fallible<T>
     {
-        public static bool operator ==(Result<T> left, Result<T> right) => left.Equals(right);
+        public static bool operator ==(Fallible<T> left, Fallible<T> right) => left.Equals(right);
 
-        public static bool operator !=(Result<T> left, Result<T> right) => !left.Equals(right);
+        public static bool operator !=(Fallible<T> left, Fallible<T> right) => !left.Equals(right);
 
-        public bool Equals(Result<T> other)
+        public bool Equals(Fallible<T> other)
         {
             if (IsSuccess) { return other.IsSuccess && EqualityComparer<T>.Default.Equals(Value, other.Value); }
             return other.IsError && ReferenceEquals(Error, other.Error);
         }
 
-        public bool Equals(Result<T> other, IEqualityComparer<T> comparer)
+        public bool Equals(Fallible<T> other, IEqualityComparer<T> comparer)
         {
             Require.NotNull(comparer, nameof(comparer));
 
@@ -349,10 +349,10 @@ namespace Narvalo.Applicative
         }
 
         public override bool Equals(object obj)
-            => (obj is Result<T>) && Equals((Result<T>)obj);
+            => (obj is Fallible<T>) && Equals((Fallible<T>)obj);
 
         public bool Equals(object other, IEqualityComparer<T> comparer)
-            => (other is Result<T>) && Equals((Result<T>)other, comparer);
+            => (other is Fallible<T>) && Equals((Fallible<T>)other, comparer);
 
         public override int GetHashCode()
             => HashCodeHelpers.Combine(_value?.GetHashCode() ?? 0, _error?.GetHashCode() ?? 0);

@@ -79,7 +79,7 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadZero{T}" /> values.
         /// </summary>
-        /// <seealso cref="MonadZero.Zip{T1, T2, TResult}(MonadZero{T1}, MonadZero{T2}, Func{T1, T2, TResult})"/>
+        /// <seealso cref="MonadZero.Zip{T1, T2, TResult}"/>
         public static Func<MonadZero<T1>, MonadZero<T2>, MonadZero<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
             => (arg1, arg2) =>
@@ -91,7 +91,7 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadZero{T}" /> values.
         /// </summary>
-        /// <seealso cref="MonadZero.Zip{T1, T2, T3, TResult}(MonadZero{T1}, MonadZero{T2}, MonadZero{T3}, Func{T1, T2, T3, TResult})"/>
+        /// <seealso cref="MonadZero.Zip{T1, T2, T3, TResult}"/>
         public static Func<MonadZero<T1>, MonadZero<T2>, MonadZero<T3>, MonadZero<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
             => (arg1, arg2, arg3) =>
@@ -103,7 +103,7 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadZero{T}" /> values.
         /// </summary>
-        /// <seealso cref="MonadZero.Zip{T1, T2, T3, T4, TResult}(MonadZero{T1}, MonadZero{T2}, MonadZero{T3}, MonadZero{T4}, Func{T1, T2, T3, T4, TResult})"/>
+        /// <seealso cref="MonadZero.Zip{T1, T2, T3, T4, TResult}"/>
         public static Func<MonadZero<T1>, MonadZero<T2>, MonadZero<T3>, MonadZero<T4>, MonadZero<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> func)
@@ -116,7 +116,7 @@ namespace Edufun.Haskell.Templates
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadZero{T}" /> values.
         /// </summary>
-        /// <seealso cref="MonadZero.Zip{T1, T2, T3, T4, T5, TResult}(MonadZero{T1}, MonadZero{T2}, MonadZero{T3}, MonadZero{T4}, MonadZero{T5},Func{T1, T2, T3, T4, T5, TResult})"/>
+        /// <seealso cref="MonadZero.Zip{T1, T2, T3, T4, T5, TResult}"/>
         public static Func<MonadZero<T1>, MonadZero<T2>, MonadZero<T3>, MonadZero<T4>, MonadZero<T5>, MonadZero<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> func)
@@ -183,7 +183,7 @@ namespace Edufun.Haskell.Templates
 
         #region Zip()
 
-        /// <seealso cref="MonadZero.Lift{T1, T2, TResult}(Func{T1, T2, TResult})"/>
+        /// <seealso cref="MonadZero.Lift{T1, T2, TResult}"/>
         public static MonadZero<TResult> Zip<T1, T2, TResult>(
             this MonadZero<T1> @this,
             MonadZero<T2> second,
@@ -198,7 +198,7 @@ namespace Edufun.Haskell.Templates
                     arg2 => zipper(arg1, arg2)));
         }
 
-        /// <seealso cref="MonadZero.Lift{T1, T2, T3, TResult}(Func{T1, T2, T3, TResult})"/>
+        /// <seealso cref="MonadZero.Lift{T1, T2, T3, TResult}"/>
         public static MonadZero<TResult> Zip<T1, T2, T3, TResult>(
             this MonadZero<T1> @this,
             MonadZero<T2> second,
@@ -221,7 +221,7 @@ namespace Edufun.Haskell.Templates
                     third, (arg2, arg3) => zipper(arg1, arg2, arg3)));
         }
 
-        /// <seealso cref="MonadZero.Lift{T1, T2, T3, T4, TResult}(Func{T1, T2, T3, T4, TResult})"/>
+        /// <seealso cref="MonadZero.Lift{T1, T2, T3, T4, TResult}"/>
         public static MonadZero<TResult> Zip<T1, T2, T3, T4, TResult>(
              this MonadZero<T1> @this,
              MonadZero<T2> second,
@@ -247,7 +247,7 @@ namespace Edufun.Haskell.Templates
                     (arg2, arg3, arg4) => zipper(arg1, arg2, arg3, arg4)));
         }
 
-        /// <seealso cref="MonadZero.Lift{T1, T2, T3, T4, T5, TResult}(Func{T1, T2, T3, T4, T5, TResult})"/>
+        /// <seealso cref="MonadZero.Lift{T1, T2, T3, T4, T5, TResult}"/>
         public static MonadZero<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this MonadZero<T1> @this,
             MonadZero<T2> second,
