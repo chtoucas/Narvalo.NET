@@ -33,6 +33,12 @@
     <Compile Include="Linq\IQuerySyntax.cs" />
     <Compile Include="Linq\IQuerySyntax`1.cs" />
     <Compile Include="Linq\Qperators.cs" />
+    <Compile Include="Samples\Ident.g.cs">
+      <DependentUpon>Ident.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Samples\Ident`1.cs" />
     <Compile Include="Samples\Nullable.cs" />
     <Compile Include="Sequences\Factorial.cs" />
     <Compile Include="Sequences\PythagoreanTriples.cs" />
@@ -93,6 +99,10 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MonadZero.g.cs</LastGenOutput>
     </Content>
+    <None Include="Samples\Ident.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Ident.g.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

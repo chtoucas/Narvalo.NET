@@ -36,11 +36,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Applicative\Ident.g.cs">
-      <DependentUpon>Ident.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Applicative\FallibleFacts.cs" />
     <Compile Include="Applicative\Fallible.g.cs">
       <DependentUpon>Fallible.tt</DependentUpon>
@@ -77,10 +72,6 @@
     <Content Include="Applicative\Outcome.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Outcome.g.cs</LastGenOutput>
-    </Content>
-    <Content Include="Applicative\Ident.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Ident.g.cs</LastGenOutput>
     </Content>
     <Content Include="Applicative\Fallible.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

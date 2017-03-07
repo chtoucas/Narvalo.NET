@@ -23,23 +23,18 @@ namespace Narvalo.Web
         {
             Require.NotNull(request, nameof(request));
 
-            return from _ in BindCore(request) where Validate(_) select _;
+            return from q in BindCore(request) where Validate(q) select q;
         }
 
         protected abstract Maybe<TQuery> BindCore(HttpRequest request);
 
         protected bool Validate(TQuery query)
-        {
-            return (from prop in TypeDescriptor.GetProperties(query).Cast<PropertyDescriptor>()
+            => (from prop in TypeDescriptor.GetProperties(query).Cast<PropertyDescriptor>()
                     from attr in prop.Attributes.OfType<ValidationAttribute>()
                     where !attr.IsValid(prop.GetValue(query))
                     select attr).IsEmpty();
-        }
 
-        protected void AddError(HttpQueryBinderException exception)
-        {
-            _errors.Add(exception);
-        }
+        protected void AddError(HttpQueryBinderException exception) => _errors.Add(exception);
     }
 }
 

@@ -10,9 +10,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Demand = global::Narvalo.Demand;
+using Require = global::Narvalo.Require;
 using _Unit_ = global::Narvalo.Applicative.Unit;
 
-namespace Narvalo.Applicative
+namespace Edufun.Samples
 {
     using System;
     using System.Collections.Generic;
@@ -384,7 +386,7 @@ namespace Narvalo.Internal
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
 
-    using Narvalo.Applicative;
+    using Edufun.Samples;
 
     // Provides default implementations for the extension methods for IEnumerable<Ident<T>>.
     // You will certainly want to override them to improve performance.
@@ -427,7 +429,7 @@ namespace Narvalo.Internal
     }
 }
 
-namespace Narvalo.Applicative
+namespace Edufun.Samples
 {
     // T4: EmitComonadHelpers().
     public static partial class Ident

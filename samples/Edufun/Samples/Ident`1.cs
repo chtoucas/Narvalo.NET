@@ -1,19 +1,22 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Applicative
+namespace Edufun.Samples
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Runtime.CompilerServices;
 
+    using Narvalo;
+    using Narvalo.Applicative;
+
     /// <summary>
     /// Represents the trivial monad.
     /// </summary>
-    /// <remarks>Pretty useless, only added for completeness.</remarks>
+    /// <remarks>Pretty useless.</remarks>
     /// <typeparam name="T">The underlying type of the value.</typeparam>
     public partial struct Ident<T>
-        : IEquatable<Ident<T>>, IEquatable<T>, Internal.IContainer<T>, Internal.Iterable<T>
+        : IEquatable<Ident<T>>, IEquatable<T> //, Internal.IContainer<T>, Internal.Iterable<T>
     {
         public Ident(T value)
         {

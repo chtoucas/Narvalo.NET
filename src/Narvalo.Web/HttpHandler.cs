@@ -6,7 +6,6 @@ namespace Narvalo.Web
     using System.Web;
     using System.Web.Mvc;
 
-    using Narvalo.Applicative;
     using Narvalo.Web.Properties;
 
     /// <summary>
@@ -14,9 +13,6 @@ namespace Narvalo.Web
     /// </summary>
     public abstract partial class HttpHandler : IHttpHandler
     {
-        private bool _isReusable;
-        private bool _trySkipIIsCustomErrors = true;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpHandler"/> class.
         /// </summary>
@@ -27,11 +23,7 @@ namespace Narvalo.Web
         /// The default is false.
         /// </summary>
         /// <value>true if the <see cref="IHttpHandler"/> instance is reusable; otherwise, false.</value>
-        public bool IsReusable
-        {
-            get { return _isReusable; }
-            protected set { _isReusable = value; }
-        }
+        public bool IsReusable { get; protected set; }
 
         public abstract HttpVerbs AcceptedVerbs { get; }
 
@@ -40,11 +32,7 @@ namespace Narvalo.Web
         /// The default is true.
         /// </summary>
         /// <value>true to disable IIS custom errors; otherwise, false.</value>
-        public bool TrySkipIisCustomErrors
-        {
-            get { return _trySkipIIsCustomErrors; }
-            protected set { _trySkipIIsCustomErrors = value; }
-        }
+        public bool TrySkipIisCustomErrors { get; protected set; }
 
         /// <summary>
         /// Enables processing of HTTP Web requests by a custom HttpHandler that implements
@@ -90,8 +78,9 @@ namespace Narvalo.Web
         {
             Demand.NotNull(request);
 
-            return (from _ in ParseTo.Enum<HttpVerbs>(request.HttpMethod)
-                    select AcceptedVerbs.Contains(_)) ?? false;
+            var verbs = ParseTo.Enum<HttpVerbs>(request.HttpMethod);
+
+            return verbs.HasValue ? AcceptedVerbs.Contains(verbs.Value) : false;
         }
     }
 }

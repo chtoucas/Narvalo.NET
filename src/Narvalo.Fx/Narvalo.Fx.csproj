@@ -24,7 +24,6 @@
     <Compile Include="Applicative\Either`2.cs" />
     <Compile Include="Applicative\Ap_.cs" />
     <Compile Include="Applicative\Outcome.cs" />
-    <Compile Include="Applicative\Nullable.cs" />
     <Compile Include="Applicative\Outcome.g.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -33,12 +32,6 @@
     <Compile Include="Applicative\Fallible.Shadowing.cs" />
     <Compile Include="Applicative\Fallible%24.cs" />
     <Compile Include="Applicative\Fallible.cs" />
-    <Compile Include="Applicative\Ident.g.cs">
-      <DependentUpon>Ident.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Applicative\Ident`1.cs" />
     <Compile Include="Applicative\Outcome`1.cs" />
     <Compile Include="Applicative\Outcome.Shadowing.cs" />
     <Compile Include="Applicative\Outcome%24.cs" />
@@ -125,12 +118,6 @@
     <None Include="Applicative\Result.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Result.g.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Applicative\Ident.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Ident.g.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

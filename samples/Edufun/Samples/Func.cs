@@ -7,7 +7,7 @@ namespace Edufun.Samples
     using Narvalo;
     using Narvalo.Applicative;
 
-    public static partial class Func
+    public static class Func
     {
         public static Func<T> Return<T>(T value) => () => value;
 

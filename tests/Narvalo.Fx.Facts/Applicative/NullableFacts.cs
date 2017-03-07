@@ -2,13 +2,14 @@
 
 namespace Narvalo.Applicative
 {
+#if ENABLE
     using System;
 
     using Xunit;
 
     public static class NullableFacts
     {
-        #region Select()
+    #region Select()
 
         [Fact]
         public static void Select_ReturnsNull_WhenNull()
@@ -44,8 +45,9 @@ namespace Narvalo.Applicative
             Assert.Equal(2, q.Value);
         }
 
-        #endregion
-        #region Where()
+    #endregion
+
+    #region Where()
 
         [Fact]
         public static void Where_ReturnsValue_ForSuccessfulPredicate()
@@ -81,9 +83,9 @@ namespace Narvalo.Applicative
             Assert.False(q.HasValue);
         }
 
-        #endregion
+    #endregion
 
-        #region SelectMany()
+    #region SelectMany()
 
         [Fact]
         public static void SelectMany_ReturnsNull_WhenNull()
@@ -167,6 +169,7 @@ namespace Narvalo.Applicative
             Assert.Equal(3, q.Value);
         }
 
-        #endregion
+    #endregion
     }
+#endif
 }
