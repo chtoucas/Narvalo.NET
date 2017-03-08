@@ -40,7 +40,7 @@
     </Compile>
     <Compile Include="Samples\Ident`1.cs" />
     <Compile Include="Samples\Nullable.cs" />
-    <Compile Include="Samples\Task%24.cs" />
+    <Compile Include="Samples\TaskHelpers.cs" />
     <Compile Include="Sequences\Factorial.cs" />
     <Compile Include="Sequences\PythagoreanTriples.cs" />
     <Compile Include="Sequences\Fibonacci.cs" />
