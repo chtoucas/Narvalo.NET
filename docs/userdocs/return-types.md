@@ -1,10 +1,5 @@
-Narvalo.Fx
-==========
-
-Fx = Functional Extensions.
-
 The various ways to return from a method
-----------------------------------------
+========================================
 
 Typical use cases:
 - To encapsulate the result of a computation with lightweight error reporting

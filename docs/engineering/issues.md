@@ -1,12 +1,13 @@
 Issues
 ======
 
-### Quick tasks
-- Review csproj's.
-- Add Narvalo.LocalData to all necessary targets (security, build, ...) + packaging.
-- `IEnumerable` extensions for `null`-checking and deferred execution.
-- Strange thing, CC reports that there are two remaining code fixes but does
-  not give any details about them.
+Tasks
+-----
+
+- Automatic code formatting with CodeFormatter.
+- Put the private key in the repository.
+  See [here](https://msdn.microsoft.com/en-us/library/wd40t7ad(v=vs.110).aspx)
+- Remove .nuget directory.
 
 ### Locales - Unassigned
 - [CLDR](http://cldr.unicode.org/index/downloads)
@@ -32,18 +33,12 @@ Issues
 - INSEE
 
 Narvalo.Fx
-------------
+----------
 
-- **Bug:** Monad.tt
-  * `SumCore()` and `CollectCore()` assert that they never return `null`, is this correct?
-  * `Then()` in `JoinCore()` and `GroupJoinCore()` can return `null`.
-- `Maybe<T>`, add a reference constraint?
-- Enhance EmitFacts.tt.
-
-Narvalo.Core
-------------
-
-- `Range<T>`. Why force struct constraint?
+- null-check's in generated methods.
+- Async versions? Lazy versions?
+- For a lazy Stateful, we could use Lazy<T, TMetadata> from System.ComponentModel.Composition.
+- http://tomasp.net/blog/idioms-in-linq.aspx/
 
 Narvalo.Common
 --------------
@@ -53,6 +48,36 @@ Narvalo.Common
 Narvalo.Finance
 ---------------
 
+- Sync `Money<TCurrency>`, CurrencyUnit<>`, `MoneyFormatter` for rounding, scale...
+- Complete localization of messages.
+- Ops with double, float?
+- Improve Allocate() and custom allocations.
+- Non-decimal moneys: Mauritania & Madagascar;
+  see [here](https://en.wikipedia.org/wiki/Denomination_(currency))
+- Money.Parse & Money.TryParse.
+- `IConvertible` (no) and conversion between currencies.
+- Rounding:
+  [rounding](https://en.wikipedia.org/wiki/Rounding),
+  [cash rounding](https://en.wikipedia.org/wiki/Cash_rounding)
+  [sum](https://en.wikipedia.org/wiki/Kahan_summation_algorithm).
+- Protect Multiply, Divide and Remainder against absurd results when rounding.
+- DecimalRounding.Scale(), check for minimal value?
+- Add support for minor units (EUR -> EUr).
+  [Wikipedia](https://en.wikipedia.org/wiki/List_of_circulating_currencies),
+  [here](http://stackoverflow.com/questions/5023754/do-minor-currency-units-have-a-iso-standard),
+  and [here](http://www.fixtradingcommunity.org/pg/discussions/topicpost/167427/gbpgbpgbx).
+- Check div and rem.
+- Create a currency builder for user-defined currencies.
+- Check boxing.
+  See [here](http://stackoverflow.com/questions/13558579/are-there-other-ways-of-calling-an-interface-method-of-a-struct-without-boxing-e),
+  [here](http://stackoverflow.com/questions/5757324/is-there-boxing-unboxing-when-casting-a-struct-into-a-generic-interface)
+  and [here](http://stackoverflow.com/questions/3032750/structs-interfaces-and-boxing).
+- Pretty sure that we can get rid off all uint and int overloads.
+
+
+- BBAN and IIBAN implementations.
+- Currency info with implementation from the BCL & CLDR.
+- Exchange rate.
 - [Liste des devises et de leurs subdivisions](https://fr.wikipedia.org/wiki/Liste_des_monnaies_en_circulation)
 - LocalCurrency
 - Non-decimal currency: see [here](https://en.wikipedia.org/wiki/Decimalisation)
@@ -99,6 +124,8 @@ Narvalo.Web
 Narvalo.Mvp
 -----------
 
+- Add localized messages in french for Narvalo.Mvp and Narvalo.Mvp.Web.
+- Application Controller and Navigator.
 - Review `ThrowIfNoPresenterBound`, `Load` event, `PresenterBinder.Release`.
 - Review the use of custom presenter types per platform prevents the reuse of
   presenters across different platforms. Maybe is it a necessary evil?
@@ -112,13 +139,8 @@ Code Infrastructure
 
 ### Code Style
 - CodeFormatter (crashes with the last exe).
-- Change `retval` for a more meaningful name.
-
-### Tests
-- Split the test library: per project and eventually move internal externals elsewhere.
 
 ### Documentation
-- Create a better CSS for docfx.
 - Provide better assembly descriptions.
 - Document behaviour regarding infinite sequences.
 - Reference the MSDN package without version attached.

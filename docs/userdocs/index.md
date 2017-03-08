@@ -1,11 +1,15 @@
 Usage guidelines
 ================
 
-- [Narvalo.Cerbere](narvalo-cerbere.md)
-- [Narvalo.Fx](narvalo-fx.md)
+### Narvalo.Cerbere and Narvalo.Core
+- [Preconditions, code contracts](code-contracts.md)
+
+### Narvalo.Fx
+- [Return types](return-types.md)
 
 ### Samples
 
+- [Exercises in functional programming](https://github.com/chtoucas/Narvalo.NET/tree/master/samples/Edufun)
 - [Command-Line MVP sample](https://github.com/chtoucas/Narvalo.NET/tree/master/samples/MvpCommandLine)
 - [WebForms MVP sample](https://github.com/chtoucas/Narvalo.NET/tree/master/samples/MvpWebForms)
 

@@ -9,15 +9,15 @@ Overview
 
 Library                   | Version | Targets                   | Security (*)
 --------------------------|---------|---------------------------|--------------
-Narvalo.Build             | 1.1.0   | .NET 4.5                  |
+Narvalo.Build             | 1.1.0   | .NET 4.6.1                |
 Narvalo.Cerbere           | 2.0.0   | Profile259 + Standard 1.0 | Transparent
-Narvalo.Common            | 0.25.0  | .NET 4.5                  | Transparent
+Narvalo.Common            | 0.25.0  | .NET 4.6.1                | Transparent
 Narvalo.Core              | 0.25.0  | Profile259 + Standard 1.0 | Transparent
-Narvalo.Finance           | 0.25.0  | Profile111 + Standard 1.1 | Transparent
+Narvalo.Finance           | 0.25.0  | Profile259 + Standard 1.0 | Transparent
 Narvalo.Fx                | 0.25.0  | Profile259 + Standard 1.0 | Transparent
-Narvalo.Mvp               | 1.0.0   | .NET 4.5                  |
-Narvalo.Mvp.Web           | 1.0.0   | .NET 4.5                  |
-Narvalo.Web               | 0.25.0  | .NET 4.5                  |
+Narvalo.Mvp               | 1.0.0   | .NET 4.6.1                |
+Narvalo.Mvp.Web           | 1.0.0   | .NET 4.6.1                |
+Narvalo.Web               | 0.25.0  | .NET 4.6.1                |
 
 (*) Security attributes are not applied to the assemblies distributed via NuGet.
 
@@ -26,23 +26,15 @@ In general, we provide localized messages in English and French.
 Status (2016/12/04)
 -------------------
 
-Notes:
-- Code Analysis is done with the default VS analyzers
-- Code Analysis: excellent means no error or warning found,
-  all `SuppressMessage` fully justified.
-- Code Contracts: excellent means 100% verified, no error or warning found,
-  all `SuppressMessage` fully justified.
-- Code Coverage: excellent means 100% line and branch coverages.
-
-Library                   | Code Analysis | Code Contracts | Code Coverage
---------------------------|---------------|----------------|---------------
-Narvalo.Build             | Excellent     | None           | None
-Narvalo.Cerbere           | Excellent     | Excellent      | Excellent
-Narvalo.Common            | Excellent     | Excellent      |
-Narvalo.Core              | Excellent     | Excellent      |
-Narvalo.Finance           | Excellent     | Excellent      |
-Narvalo.Fx                | Excellent     | Excellent      |
-Narvalo.Mvp               | Excellent     | Excellent      |
-Narvalo.Mvp.Web           | Excellent     | Excellent      |
-Narvalo.Web               | Pretty good   | Minimal        |
+Library                   | Code Analysis | Code Coverage
+--------------------------|---------------|---------------
+Narvalo.Build             | Excellent     | None
+Narvalo.Cerbere           | Excellent     | Excellent
+Narvalo.Common            | Excellent     |
+Narvalo.Core              | Excellent     |
+Narvalo.Finance           | Excellent     |
+Narvalo.Fx                | Excellent     |
+Narvalo.Mvp               | Excellent     |
+Narvalo.Mvp.Web           | Excellent     |
+Narvalo.Web               | Pretty good   |
 

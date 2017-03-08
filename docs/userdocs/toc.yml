@@ -1,6 +1,6 @@
 ﻿- name: Usage guidelines
   href: index.md
-- name: Narvalo.Cerbere
-  href: narvalo-cerbere.md
-- name: Narvalo.Fx
-  href: narvalo-fx.md
+- name: Code Contracts
+  href: code-contracts.md
+- name: Return types
+  href: return-types.md

@@ -1,5 +1,5 @@
-Narvalo.Cerbere
-===============
+Code Contracts
+==============
 
 Preconditions
 -------------
@@ -36,21 +36,24 @@ complete control of all the callers, you can certainly replace `Require` by
 `Demand`. Be very careful with protected methods, if your class is not sealed
 you can't know in advance if the caller will satisfy the condition.
 
-Miscellany
-----------
+Check points
+------------
 
-### Check points
-
-None of these assertions will survive in retail buidls:
+None of these assertions will survive in retail builds:
 - `Check`: Code Contract + Debug.Assert
 
-### Class Invariants
+Postconditions
+--------------
 
-### Unreachable code
+Class Invariants
+----------------
 
-### `Format`
+Unreachable code
+----------------
 
-### `ExcludeFromCodeCoverage`
+`ExcludeFromCodeCoverage`
+-------------------------
 
-### `ValidatedNotNull`
+`ValidatedNotNull`
+------------------
 

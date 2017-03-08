@@ -35,13 +35,13 @@ Library                   | Internal Dependencies
 --------------------------|-----------------------------------------------------
 Narvalo.Build             | -
 Narvalo.Cerbere           | -
-Narvalo.Common            | Cerbere, Fx
-Narvalo.Core              | Cerbere, Fx
-Narvalo.Finance           | Cerbere
-Narvalo.Fx                | Cerbere
+Narvalo.Common            | Core, Fx
+Narvalo.Core              | -
+Narvalo.Finance           | Core
+Narvalo.Fx                | Core
 Narvalo.Mvp               | Cerbere
 Narvalo.Mvp.Web           | Cerbere, Mvp
-Narvalo.Web               | Cerbere, Core, Common, Fx
+Narvalo.Web               | Core, Common, Fx
 
 TODO: Explain package versioning and the consequences on major, minor and patch upgrades.
 

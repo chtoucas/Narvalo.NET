@@ -41,6 +41,7 @@ Project Layout
 --------------
 
 - `.nuget`, NuGet configuration.
+- `data`, external data.
 - `docs`, documentation.
 - `etc`, shared configurations.
 - `packages`, local repository of NuGet packages.
@@ -77,6 +78,7 @@ All tasks are fully automated with MSBuild, PowerShell (PSake) and F# scripts.
   * Narvalo.Core
   * Narvalo.Finance
   * Narvalo.Fx
+  * Narvalo.Money
   * Narvalo.Web
 - MVP Framework
   * Narvalo.Mvp
@@ -84,10 +86,9 @@ All tasks are fully automated with MSBuild, PowerShell (PSake) and F# scripts.
 - Developer Tools
   * Narvalo.Build
 - Samples
+  * Edufun
   * MvpCommandLine
   * MvpWebForms
-- Tests
-  * Narvalo.Facts
-  * Narvalo.Mvp.Facts
+- Test projects
 - For internal use only
   * Narvalo.T4
