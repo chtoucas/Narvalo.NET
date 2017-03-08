@@ -12,7 +12,7 @@ Narvalo.NET
   Code Contracts helpers.
 - **Narvalo.Core**
   [![NuGet](https://img.shields.io/nuget/v/Narvalo.Core.svg)](https://www.nuget.org/packages/Narvalo.Core/),
-  contains helpers on which depend the other packages.
+  contains helpers on which depend the other packages - replace Narvalo.Cerbere.
 - **Narvalo.Fx**
   [![NuGet](https://img.shields.io/nuget/v/Narvalo.Fx.svg)](https://www.nuget.org/packages/Narvalo.Fx/),
   features implementations of some of the usual suspects from functional
@@ -26,7 +26,7 @@ Narvalo.NET
 - **Narvalo.Common**
   [![NuGet](https://img.shields.io/nuget/v/Narvalo.Common.svg)](https://www.nuget.org/packages/Narvalo.Common/),
   utilities and extension methods:
-  Int64 encoders, extension methods for Collections, XDom and SQL client.
+  simple parsers, Int64 encoders, extension methods for Collections, XDom and SQL client.
 - **Narvalo.Web**
   [![NuGet](https://img.shields.io/nuget/v/Narvalo.Web.svg)](https://www.nuget.org/packages/Narvalo.Web/),
   provides types that might prove useful for Web development: generic HttpHandler

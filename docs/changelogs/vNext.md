@@ -2,7 +2,7 @@ ChangeLog (XXXX-XX-XX)
 ======================
 
 Library                   | Previous | vNext
---------------------------|-------------------
+--------------------------|----------|--------
 Narvalo.Build             | 1.1.0    | -
 Narvalo.Cerbere           | 2.0.0    | 2.1.0
 Narvalo.Common            | 0.25.0   | 0.26.0
@@ -37,7 +37,7 @@ API Changes
 Methods marked as obsolete and their replacements:
 
 Obsolete API                      | New API
--------------------------------------------------------------------------------------------
+----------------------------------|--------------------------------------------------------
 `Require.Object<T>()`             | `Require.NotNullUnconstrained()`
 `Require.Property<T>()`           | `Require.NotNullUnconstrained()`
 `Require.Property(bool)`          | `Require.True()`

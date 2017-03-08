@@ -1,5 +1,5 @@
-Issues
-======
+Issues (en vrac)
+================
 
 Tasks
 -----
