@@ -37,7 +37,7 @@ Narvalo.Fx
 
 - null-check's in generated methods.
 - Async versions? Lazy versions?
-- For a lazy Stateful, we could use Lazy<T, TMetadata> from System.ComponentModel.Composition.
+- Lazy<T, TMetadata> from System.ComponentModel.Composition.
 - http://tomasp.net/blog/idioms-in-linq.aspx/
 
 Narvalo.Common

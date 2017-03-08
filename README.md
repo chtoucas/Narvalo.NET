@@ -12,21 +12,21 @@ Narvalo.NET
   provides argument validation methods and Code Contracts helpers.
 - **Narvalo.Core**
   [![NuGet](https://img.shields.io/nuget/v/Narvalo.Core.svg)](https://www.nuget.org/packages/Narvalo.Core/),
-  provides argument validation methods w/o Code Contracts.
+  contains helpers on which depend the other packages.
 - **Narvalo.Fx**
   [![NuGet](https://img.shields.io/nuget/v/Narvalo.Fx.svg)](https://www.nuget.org/packages/Narvalo.Fx/),
   features implementations of some of the usual suspects from functional
-  programming: Option (`Maybe<T>`) and Error (`Result`) monads, simple disjoint union
+  programming: option type (`Maybe<T>`), return types (`Result<T, TError>`,
+  `Fallible<>` and `Outcome<>`), simple disjoint union
   (`Either<T1, T2>`), generators and delegate extensions.
-- **Narvalo.Money** Currency (ISO 4217) and Money types.
+- **Narvalo.Money**, Currency (ISO 4217) and Money types.
 - **Narvalo.Finance**
   [![NuGet](https://img.shields.io/nuget/v/Narvalo.Finance.svg)](https://www.nuget.org/packages/Narvalo.Finance/),
-  provides various financial utilities: BIC (ISO 9362), IBAN & BBAN.
+  provides finance-related types: BIC (ISO 9362) & IBAN.
 - **Narvalo.Common**
   [![NuGet](https://img.shields.io/nuget/v/Narvalo.Common.svg)](https://www.nuget.org/packages/Narvalo.Common/),
-  provides various utilities and extension methods: Range type,
-  Int64 encoders, directory walker, extension methods for Collections, XDom,
-  Configuration and SQL client.
+  provides various utilities and extension methods:
+  Int64 encoders, extension methods for Collections, XDom and SQL client.
 - **Narvalo.Web**
   [![NuGet](https://img.shields.io/nuget/v/Narvalo.Web.svg)](https://www.nuget.org/packages/Narvalo.Web/),
   provides types that might prove useful for Web development: generic HttpHandler
