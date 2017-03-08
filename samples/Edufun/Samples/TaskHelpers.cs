@@ -147,12 +147,12 @@ namespace Edufun.Samples
                     inval => EqualityComparer<TKey>.Default.Equals(outerKeySelector(source), innerKeySelector(inval))));
         }
 
-        //public static async Task<TSource> Cast<TSource>(this Task source)
-        //{
-        //    await source;
+        public static async Task<TSource> Cast<TSource>(this Task @this)
+        {
+            await @this;
 
-        //    return (TSource)((dynamic)source).Result;
-        //}
+            return (TSource)((dynamic)@this).Result;
+        }
 
         #endregion
 
