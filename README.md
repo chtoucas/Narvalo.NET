@@ -9,7 +9,7 @@ Narvalo.NET
 ## General Purpose Libraries
 - **Narvalo.Cerbere**
   [![NuGet](https://img.shields.io/nuget/v/Narvalo.Cerbere.svg)](https://www.nuget.org/packages/Narvalo.Cerbere/),
-  provides argument validation methods and Code Contracts helpers.
+  Code Contracts helpers.
 - **Narvalo.Core**
   [![NuGet](https://img.shields.io/nuget/v/Narvalo.Core.svg)](https://www.nuget.org/packages/Narvalo.Core/),
   contains helpers on which depend the other packages.
@@ -19,19 +19,18 @@ Narvalo.NET
   programming: option type (`Maybe<T>`), return types (`Result<T, TError>`,
   `Fallible<>` and `Outcome<>`), simple disjoint union
   (`Either<T1, T2>`), generators and delegate extensions.
-- **Narvalo.Money**, Currency (ISO 4217) and Money types.
+- **Narvalo.Money**, Currency (ISO 4217) & Money types.
 - **Narvalo.Finance**
   [![NuGet](https://img.shields.io/nuget/v/Narvalo.Finance.svg)](https://www.nuget.org/packages/Narvalo.Finance/),
-  provides finance-related types: BIC (ISO 9362) & IBAN.
+  BIC (ISO 9362) & IBAN types.
 - **Narvalo.Common**
   [![NuGet](https://img.shields.io/nuget/v/Narvalo.Common.svg)](https://www.nuget.org/packages/Narvalo.Common/),
-  provides various utilities and extension methods:
+  utilities and extension methods:
   Int64 encoders, extension methods for Collections, XDom and SQL client.
 - **Narvalo.Web**
   [![NuGet](https://img.shields.io/nuget/v/Narvalo.Web.svg)](https://www.nuget.org/packages/Narvalo.Web/),
   provides types that might prove useful for Web development: generic HttpHandler
-  type, asset providers, Razor and WebForms compile-time optimizers, preliminary support
-  for OpenGraph and Schema.Org.
+  type, asset providers, Razor and WebForms compile-time optimizers.
 
 ## MVP Framework
 - **Narvalo.Mvp**
