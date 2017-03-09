@@ -6,7 +6,7 @@
 // behavior and will be lost if the code is regenerated.
 //
 // Runtime Version: 4.0.30319.42000
-// Microsoft.VisualStudio.TextTemplating: 14.0
+// Microsoft.VisualStudio.TextTemplating: 15.0
 // </auto-generated>
 //------------------------------------------------------------------------------
 

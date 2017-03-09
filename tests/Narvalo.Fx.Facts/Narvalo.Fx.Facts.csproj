@@ -6,9 +6,10 @@
     <ProjectGuid>{F3D20800-96A8-4661-B796-FB5037CA0422}</ProjectGuid>
     <RootNamespace>Narvalo</RootNamespace>
     <AssemblyName>Narvalo.Fx.Facts</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

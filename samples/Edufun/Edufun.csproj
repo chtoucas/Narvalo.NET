@@ -5,7 +5,8 @@
     <ProjectGuid>{57051DF4-A9BF-47E2-ADF3-9E938AC1F2E3}</ProjectGuid>
     <RootNamespace>Edufun</RootNamespace>
     <AssemblyName>Edufun</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />

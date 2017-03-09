@@ -6,7 +6,7 @@
     <ProjectGuid>{3F3D8108-CC1C-4CE2-8768-2097A0B77D01}</ProjectGuid>
     <RootNamespace>Narvalo.Mvp.Web</RootNamespace>
     <AssemblyName>Narvalo.Mvp.Web.Facts</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>

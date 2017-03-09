@@ -6,9 +6,10 @@
     <ProjectGuid>{031AB273-4A04-40AF-923A-AA138096F98A}</ProjectGuid>
     <RootNamespace>Narvalo.Finance</RootNamespace>
     <AssemblyName>Narvalo.Finance.Facts</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

@@ -6,7 +6,7 @@
     <ProjectGuid>{D05B40A6-15B6-46D0-ABC1-8F8CFC5D02E8}</ProjectGuid>
     <RootNamespace>Narvalo</RootNamespace>
     <AssemblyName>Narvalo.Core.Facts</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>

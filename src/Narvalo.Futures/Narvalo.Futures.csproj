@@ -5,7 +5,8 @@
     <ProjectGuid>{E394C38B-F999-4322-B821-7630368DA16F}</ProjectGuid>
     <RootNamespace>Narvalo</RootNamespace>
     <AssemblyName>Narvalo.Futures</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

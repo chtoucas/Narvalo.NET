@@ -6,9 +6,10 @@
     <ProjectGuid>{49823004-DABA-4FE2-B4F0-D40542AF7754}</ProjectGuid>
     <RootNamespace>Narvalo.Web</RootNamespace>
     <AssemblyName>Narvalo.Web.Facts</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
