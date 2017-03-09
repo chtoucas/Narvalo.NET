@@ -1,7 +1,5 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-extern alias Cerbere;
-
 namespace Narvalo.Cerbere
 {
     using System;
@@ -25,8 +23,6 @@ namespace Narvalo.Cerbere
         public static void GreaterThan<T>(T value, T minValue, string parameterName)
             where T : struct, IComparable<T>
         {
-            Cerbere::Narvalo.Expect.NotNullOrEmpty(parameterName);
-
             if (value.CompareTo(minValue) <= 0)
             {
                 throw Failure.NotGreaterThan(value, minValue, parameterName);
@@ -46,8 +42,6 @@ namespace Narvalo.Cerbere
         public static void GreaterThanOrEqualTo<T>(T value, T minValue, string parameterName)
             where T : struct, IComparable<T>
         {
-            Cerbere::Narvalo.Expect.NotNullOrEmpty(parameterName);
-
             if (value.CompareTo(minValue) < 0)
             {
                 throw Failure.NotGreaterThanOrEqualTo(value, minValue, parameterName);
@@ -67,8 +61,6 @@ namespace Narvalo.Cerbere
         public static void LessThan<T>(T value, T maxValue, string parameterName)
             where T : struct, IComparable<T>
         {
-            Cerbere::Narvalo.Expect.NotNullOrEmpty(parameterName);
-
             if (value.CompareTo(maxValue) >= 0)
             {
                 throw Failure.NotLessThan(value, maxValue, parameterName);
@@ -88,8 +80,6 @@ namespace Narvalo.Cerbere
         public static void LessThanOrEqualTo<T>(T value, T maxValue, string parameterName)
             where T : struct, IComparable<T>
         {
-            Cerbere::Narvalo.Expect.NotNullOrEmpty(parameterName);
-
             if (value.CompareTo(maxValue) > 0)
             {
                 throw Failure.NotLessThanOrEqualTo(value, maxValue, parameterName);

@@ -31,7 +31,6 @@ namespace Edufun.Haskell.Tmp
             this Kunc<TMiddle, TResult> @this,
             Kunc<TSource, TMiddle> kun)
         {
-            Expect.NotNull(@this);
             Require.NotNull(kun, nameof(kun));
 
             return arg => kun.Invoke(arg).Bind(_ => @this(_));

@@ -115,9 +115,9 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Narvalo.Cerbere\Narvalo.Cerbere.csproj">
-      <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
-      <Name>Narvalo.Cerbere</Name>
+    <ProjectReference Include="..\..\src\Narvalo.Core\Narvalo.Core.csproj">
+      <Project>{66b62ba5-e26e-4899-85ac-4c52d3a427e9}</Project>
+      <Name>Narvalo.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\Narvalo.Fx\Narvalo.Fx.csproj">
       <Project>{28f6175d-0ee3-4763-8004-662a7de41280}</Project>
