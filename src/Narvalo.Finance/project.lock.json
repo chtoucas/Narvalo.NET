@@ -1,0 +1,61 @@
+{
+  "version": 2,
+  "targets": {
+    ".NETPortable,Version=v4.5,Profile=Profile259": {
+      "Narvalo.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETPortable,Version=v4.5,Profile=Profile259"
+      },
+      "Narvalo.Fx/1.0.0": {
+        "type": "project",
+        "framework": ".NETPortable,Version=v4.5,Profile=Profile259",
+        "dependencies": {
+          "Narvalo.Core": "1.0.0"
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Narvalo.Core/1.0.0": {
+      "type": "project",
+      "path": "../Narvalo.Core/project.json",
+      "msbuildProject": "../Narvalo.Core/Narvalo.Core.csproj"
+    },
+    "Narvalo.Fx/1.0.0": {
+      "type": "project",
+      "path": "../Narvalo.Fx/project.json",
+      "msbuildProject": "../Narvalo.Fx/Narvalo.Fx.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "": [],
+    ".NETPortable,Version=v4.5,Profile=Profile259": []
+  },
+  "packageFolders": {
+    "C:\\Users\\merlyn\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "restore": {
+      "projectUniqueName": "I:\\github\\Narvalo.NET\\src\\Narvalo.Finance\\Narvalo.Finance.csproj",
+      "projectName": "Narvalo.Finance",
+      "projectPath": "I:\\github\\Narvalo.NET\\src\\Narvalo.Finance\\Narvalo.Finance.csproj",
+      "projectJsonPath": "I:\\github\\Narvalo.NET\\src\\Narvalo.Finance\\project.json",
+      "projectStyle": "ProjectJson",
+      "frameworks": {
+        "portable45-net45+win8+wp8+wpa81": {
+          "projectReferences": {
+            "I:\\github\\Narvalo.NET\\src\\Narvalo.Core\\Narvalo.Core.csproj": {
+              "projectPath": "I:\\github\\Narvalo.NET\\src\\Narvalo.Core\\Narvalo.Core.csproj"
+            },
+            "I:\\github\\Narvalo.NET\\src\\Narvalo.Fx\\Narvalo.Fx.csproj": {
+              "projectPath": "I:\\github\\Narvalo.NET\\src\\Narvalo.Fx\\Narvalo.Fx.csproj"
+            }
+          }
+        }
+      }
+    },
+    "frameworks": {
+      "portable45-net45+win8+wp8+wpa81": {}
+    }
+  }
+}

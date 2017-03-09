@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "targets": {
+    ".NETPortable,Version=v4.5,Profile=Profile259": {}
+  },
+  "libraries": {},
+  "projectFileDependencyGroups": {
+    "": [],
+    ".NETPortable,Version=v4.5,Profile=Profile259": []
+  },
+  "packageFolders": {
+    "C:\\Users\\merlyn\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "restore": {
+      "projectUniqueName": "I:\\github\\Narvalo.NET\\src\\Narvalo.Core\\Narvalo.Core.csproj",
+      "projectName": "Narvalo.Core",
+      "projectPath": "I:\\github\\Narvalo.NET\\src\\Narvalo.Core\\Narvalo.Core.csproj",
+      "projectJsonPath": "I:\\github\\Narvalo.NET\\src\\Narvalo.Core\\project.json",
+      "projectStyle": "ProjectJson"
+    },
+    "frameworks": {
+      "portable45-net45+win8+wp8+wpa81": {}
+    }
+  }
+}
