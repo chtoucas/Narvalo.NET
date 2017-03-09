@@ -37,11 +37,11 @@ namespace Narvalo
         /// }
         /// </code>
         /// </example>
-        /// <param name="rationale">The error message to use if the point of execution is reached.</param>
+        /// <param name="message">The error message to use if the point of execution is reached.</param>
         /// <returns>A new instance of the <see cref="ControlFlowException"/> class with the specified error message.</returns>
         [DebuggerHidden]
-        public static ControlFlowException Unreachable(string rationale)
-            => new ControlFlowException(rationale);
+        public static ControlFlowException Unreachable(string message)
+            => new ControlFlowException(message);
 
         /// <summary>
         /// Asserts that a point of execution is unreachable.

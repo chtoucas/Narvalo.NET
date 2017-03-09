@@ -11,7 +11,7 @@ namespace Narvalo
     /// Provides helper methods to format strings.
     /// </summary>
     /// <remarks>
-    /// <para>The methods are nothing but aliases for <see cref="String.Format(IFormatProvider, string, object[])"/>
+    /// <para>The methods are nothing but aliases for <see cref="String.Format(IFormatProvider, String, Object[])"/>
     /// but they clearly state which culture is used for formatting.</para>
     /// <para>To avoid any performance penalty we explicitly ask the runtime to inline them;
     /// I am pretty sure this is not necessary but it should be safe to do so.</para>

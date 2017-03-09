@@ -71,65 +71,11 @@ namespace Narvalo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The object instance cannot be null..
-        /// </summary>
-        internal static string Argument_NullObject {
-            get {
-                return ResourceManager.GetString("Argument_NullObject", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Failed precondition for an argument..
         /// </summary>
         internal static string Argument_TestFailed {
             get {
                 return ResourceManager.GetString("Argument_TestFailed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to String cannot contain only white spaces..
-        /// </summary>
-        internal static string Argument_WhiteSpaceString {
-            get {
-                return ResourceManager.GetString("Argument_WhiteSpaceString", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The value of &apos;{0}&apos; is not in range [{1} - {2}]..
-        /// </summary>
-        internal static string ArgumentOutOfRange {
-            get {
-                return ResourceManager.GetString("ArgumentOutOfRange", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The property value cannot be empty..
-        /// </summary>
-        internal static string ArgumentProperty_EmptyString {
-            get {
-                return ResourceManager.GetString("ArgumentProperty_EmptyString", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The property value cannot be null..
-        /// </summary>
-        internal static string ArgumentProperty_Null {
-            get {
-                return ResourceManager.GetString("ArgumentProperty_Null", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Failed precondition for a property value..
-        /// </summary>
-        internal static string ArgumentProperty_TestFailed {
-            get {
-                return ResourceManager.GetString("ArgumentProperty_TestFailed", resourceCulture);
             }
         }
         

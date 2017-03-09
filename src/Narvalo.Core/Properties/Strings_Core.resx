@@ -117,31 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Argument_NullObject" xml:space="preserve">
-    <value>The object instance cannot be null.</value>
-  </data>
-  <data name="ArgumentProperty_Null" xml:space="preserve">
-    <value>The property value cannot be null.</value>
-  </data>
   <data name="Argument_TestFailed" xml:space="preserve">
     <value>Failed precondition for an argument.</value>
   </data>
   <data name="Argument_EmptyString" xml:space="preserve">
     <value>String cannot be empty.</value>
   </data>
-  <data name="Argument_WhiteSpaceString" xml:space="preserve">
-    <value>String cannot contain only white spaces.</value>
-  </data>
-  <data name="ArgumentProperty_EmptyString" xml:space="preserve">
-    <value>The property value cannot be empty.</value>
-  </data>
-  <data name="ArgumentProperty_TestFailed" xml:space="preserve">
-    <value>Failed precondition for a property value.</value>
-  </data>
   <data name="ControlFlowException_DefaultMessage" xml:space="preserve">
     <value>The control flow path reached a section of the code that should have been unreachable under any circumstances.</value>
-  </data>
-  <data name="ArgumentOutOfRange" xml:space="preserve">
-    <value>The value of '{0}' is not in range [{1} - {2}].</value>
   </data>
 </root>

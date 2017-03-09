@@ -65,8 +65,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SnvCurrencyInfoProvider.tt</DependentUpon>
     </Compile>
-    <Compile Include="Formattable.cs" />
     <Compile Include="Applicative\Recursion.cs" />
+    <Compile Include="Formattable.cs" />
     <Compile Include="Globalization\CountryISOCode.cs" />
     <Compile Include="Globalization\RegionInfo%24.cs" />
     <Compile Include="Cerbere\Guard.cs" />
@@ -84,7 +84,6 @@
     <Compile Include="IO\RelativeDirectory.cs" />
     <Compile Include="IO\RelativeDirectoryEventArgs.cs" />
     <Compile Include="IO\RelativeFile.cs" />
-    <Compile Include="Predicate%24.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Range`.cs" />
     <Compile Include="Release.cs" />

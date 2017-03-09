@@ -27,13 +27,13 @@ namespace Edufun.Sequences
             }
         }
 
-        public static IEnumerable<int> GatherNew()
+        public static IEnumerable<int> Gather()
             => Sequence.Gather<(int current, int next), int>(
                 seed: (1, 1),
                 iterator: _ => (_.next, _.current + _.next),
                 resultSelector: _ => _.current);
 
-        public static IEnumerable<int> Gather()
+        public static IEnumerable<int> GatherOld()
             => Sequence.Gather<Tuple<int, int>, int>(
                 seed: Tuple.Create(1, 1),
                 iterator: _ => Tuple.Create(_.Item2, _.Item1 + _.Item2),

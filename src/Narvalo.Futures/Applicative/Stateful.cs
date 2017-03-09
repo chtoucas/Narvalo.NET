@@ -25,7 +25,13 @@ namespace Narvalo.Applicative
             => state => (value, state);
 
         public static Stateful<T, TState> Flatten<T, TState>(Stateful<Stateful<T, TState>, TState> square)
-            => square.Bind(Stubs<Stateful<T, TState>>.Identity);
+            //=> square.Bind(Stubs<Stateful<T, TState>>.Identity);
+            => state =>
+            {
+                var obj = square(state);
+
+                return obj.result(obj.state);
+            };
     }
 
     // TODO: Find better names.
