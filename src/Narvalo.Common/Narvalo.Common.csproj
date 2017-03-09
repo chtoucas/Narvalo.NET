@@ -5,7 +5,7 @@
     <ProjectGuid>{85E2C826-BF5C-4CDD-A90A-56D3D7F9CE25}</ProjectGuid>
     <RootNamespace>Narvalo</RootNamespace>
     <AssemblyName>Narvalo.Common</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <ItemGroup>
