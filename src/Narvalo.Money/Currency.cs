@@ -205,7 +205,7 @@ namespace Narvalo
         // Added for symmetry, but use with care.
         public TCurrency ToCurrency<TCurrency>() where TCurrency : Currency<TCurrency>
         {
-            var unit = CurrencyUnit.OfType<TCurrency>();
+            TCurrency unit = CurrencyUnit.OfType<TCurrency>();
 
             if (Code != unit.Code)
             {
@@ -228,8 +228,7 @@ namespace Narvalo
         {
             Require.NotNull(code, nameof(code));
 
-            short? minorUnits;
-            if (!Codes.TryGetValue(code, out minorUnits))
+            if (!Codes.TryGetValue(code, out short? minorUnits))
             {
                 throw new CurrencyNotFoundException(Format.Current(Strings_Money.Currency_UnknownCode, code));
             }
@@ -240,7 +239,7 @@ namespace Narvalo
         /// <seealso cref="TryCreate(string, CurrencyTypes)"/>
         public static Currency Of(string code, CurrencyTypes types)
         {
-            var cy = TryCreate(code, types);
+            Currency? cy = TryCreate(code, types);
             if (!cy.HasValue)
             {
                 throw new CurrencyNotFoundException(Format.Current(Strings_Money.Currency_UnknownCode, code));
@@ -253,8 +252,7 @@ namespace Narvalo
         {
             Require.NotNull(code, nameof(code));
 
-            short? minorUnits;
-            if (!Codes.TryGetValue(code, out minorUnits)) { return null; }
+            if (!Codes.TryGetValue(code, out short? minorUnits)) { return null; }
 
             return new Currency(code, minorUnits);
         }
@@ -265,8 +263,7 @@ namespace Narvalo
 
             if (types.Contains(CurrencyTypes.Active))
             {
-                short? minorUnits;
-                if (Codes.TryGetValue(code, out minorUnits))
+                if (Codes.TryGetValue(code, out short? minorUnits))
                 {
                     return new Currency(code, minorUnits);
                 }
@@ -274,8 +271,7 @@ namespace Narvalo
 
             if (types.Contains(CurrencyTypes.UserDefined))
             {
-                short? minorUnits;
-                if (UserCodes.TryGetValue(code, out minorUnits))
+                if (UserCodes.TryGetValue(code, out short? minorUnits))
                 {
                     return new Currency(code, minorUnits);
                 }

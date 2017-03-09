@@ -4,8 +4,8 @@ namespace Narvalo.Applicative
 {
     using System;
 
-    // Func<TState, StateObject<T, TState>>
-    public delegate StateObject<T, TState> Stateful<T, TState>(TState state);
+    // Func<TState, (T, TState)>
+    public delegate (T result, TState state) Stateful<T, TState>(TState state);
 
     // Provides the core Monad methods.
     public static partial class Stateful
@@ -15,14 +15,14 @@ namespace Narvalo.Applicative
             Func<T, Stateful<TNext, TState>> binder)
             => state =>
             {
-                StateObject<T, TState> obj = @this(state);
+                var obj = @this(state);
 
-                return binder(obj.Result).Invoke(obj.State);
+                return binder(obj.result).Invoke(obj.state);
             };
 
         // Initialize a stateful computation from a given value.
         public static Stateful<T, TState> Of<T, TState>(T value)
-            => state => StateObject.Create(value, state);
+            => state => (value, state);
 
         public static Stateful<T, TState> Flatten<T, TState>(Stateful<Stateful<T, TState>, TState> square)
             => square.Bind(Stubs<Stateful<T, TState>>.Identity);
@@ -32,15 +32,15 @@ namespace Narvalo.Applicative
     public static partial class Stateful
     {
         public static Stateful<TState, TState> Get<TState>()
-            => state => StateObject.Create(state, state);
+            => state => (state, state);
 
         public static Stateful<Unit, TState> Put<TState>(TState newState)
-            => state => StateObject.Create(Unit.Default, newState);
+            => state => (Unit.Default, newState);
 
         public static Stateful<Unit, TState> Modify<TState>(Func<TState, TState> func)
-            => state => StateObject.Create(Unit.Default, func(state));
+            => state => (Unit.Default, func(state));
 
         public static Stateful<TResult, TState> Gets<TState, TResult>(Func<TState, TResult> func)
-            => state => StateObject.Create(func(state), state);
+            => state => (func(state), state);
     }
 }

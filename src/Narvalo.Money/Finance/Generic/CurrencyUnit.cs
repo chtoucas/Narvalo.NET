@@ -13,10 +13,10 @@ namespace Narvalo.Finance.Generic
         // Nevertheless, calling the constructor somehow defeats the idea of a unit being a singleton.
         internal static TCurrency OfType<TCurrency>() where TCurrency : Currency<TCurrency>
         {
-            var typeInfo = typeof(TCurrency).GetTypeInfo();
+            TypeInfo typeInfo = typeof(TCurrency).GetTypeInfo();
 
             // We expect that all built-in currency units defines this property.
-            var property = typeInfo.GetDeclaredProperty(SINGLETON_PROPERTY_NAME);
+            PropertyInfo property = typeInfo.GetDeclaredProperty(SINGLETON_PROPERTY_NAME);
 
             return property?.GetValue(null) as TCurrency;
         }

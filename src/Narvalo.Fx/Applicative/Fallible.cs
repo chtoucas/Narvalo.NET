@@ -65,10 +65,7 @@ namespace Narvalo.Applicative
         {
             private readonly Fallible _inner;
 
-            public DebugView(Fallible inner)
-            {
-                _inner = inner;
-            }
+            public DebugView(Fallible inner) => _inner = inner;
 
             public bool IsSuccess => _inner.IsSuccess;
 

@@ -6,6 +6,7 @@ namespace Narvalo.Applicative
     using System.Collections;
     using System.Collections.Generic;
 
+    [Obsolete]
     public static class StateObject
     {
         public static StateObject<T, TState> Create<T, TState>(T value, TState state)
@@ -13,6 +14,7 @@ namespace Narvalo.Applicative
     }
 
     // To be replaced by ValueTuple<T, TState> when available.
+    [Obsolete]
     public partial struct StateObject<T, TState> : IEquatable<StateObject<T, TState>>, IStructuralEquatable
     {
         public StateObject(T result, TState state)

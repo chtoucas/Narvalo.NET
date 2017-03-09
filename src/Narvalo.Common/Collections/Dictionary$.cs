@@ -27,8 +27,7 @@ namespace Narvalo.Collections
 
             if (key == null) { return Maybe<TValue>.None; }
 
-            TValue value;
-            return @this.TryGetValue(key, out value) ? Maybe.Of(value) : Maybe<TValue>.None;
+            return @this.TryGetValue(key, out TValue value) ? Maybe.Of(value) : Maybe<TValue>.None;
         }
     }
 }

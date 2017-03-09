@@ -52,16 +52,13 @@ namespace Narvalo.Applicative
         [DebuggerTypeProxy(typeof(Either<,>.Left_.DebugView))]
         private sealed partial class Left_ : Either<TLeft, TRight>, IEquatable<Left_>
         {
-            public Left_(TLeft value)
-            {
-                Left = value;
-            }
+            public Left_(TLeft value) => Left = value;
 
             public override bool IsLeft => true;
 
             internal override TLeft Left { get; }
 
-            internal override TRight Right { get { throw new InvalidOperationException("XXX"); } }
+            internal override TRight Right => throw new InvalidOperationException("XXX");
 
             public override Maybe<TLeft> LeftOrNone() => Maybe.Of(Left);
 
@@ -97,10 +94,7 @@ namespace Narvalo.Applicative
             {
                 private readonly Either<TLeft, TRight> _inner;
 
-                public DebugView(Either<TLeft, TRight> inner)
-                {
-                    _inner = inner;
-                }
+                public DebugView(Either<TLeft, TRight> inner) => _inner = inner;
 
                 public TLeft Left => _inner.Left;
             }
@@ -112,14 +106,11 @@ namespace Narvalo.Applicative
         [DebuggerTypeProxy(typeof(Either<,>.Right_.DebugView))]
         private sealed partial class Right_ : Either<TLeft, TRight>, IEquatable<Right_>
         {
-            public Right_(TRight value)
-            {
-                Right = value;
-            }
+            public Right_(TRight value) => Right = value;
 
             public override bool IsLeft => false;
 
-            internal override TLeft Left { get { throw new InvalidOperationException("XXX"); } }
+            internal override TLeft Left => throw new InvalidOperationException("XXX");
 
             internal override TRight Right { get; }
 
@@ -127,7 +118,7 @@ namespace Narvalo.Applicative
 
             public override Maybe<TRight> RightOrNone() => Maybe.Of(Right);
 
-            public override Either<TRight, TLeft> Swap() { throw new InvalidOperationException("XXX"); }
+            public override Either<TRight, TLeft> Swap() => throw new InvalidOperationException("XXX");
 
             public override Either<TRight, TLeft> SwapUnchecked() => Either<TRight, TLeft>.OfLeft(Right);
 
@@ -157,10 +148,7 @@ namespace Narvalo.Applicative
             {
                 private readonly Either<TLeft, TRight> _inner;
 
-                public DebugView(Either<TLeft, TRight> inner)
-                {
-                    _inner = inner;
-                }
+                public DebugView(Either<TLeft, TRight> inner) => _inner = inner;
 
                 public TRight Right => _inner.Right;
             }
@@ -188,12 +176,12 @@ namespace Narvalo.Applicative
         {
             public override TLeft ToLeft() => Left;
 
-            public override TRight ToRight() { throw new InvalidCastException("XXX"); }
+            public override TRight ToRight() => throw new InvalidCastException("XXX");
         }
 
         private partial class Right_
         {
-            public override TLeft ToLeft() { throw new InvalidCastException("XXX"); }
+            public override TLeft ToLeft() => throw new InvalidCastException("XXX");
 
             public override TRight ToRight() => Right;
         }

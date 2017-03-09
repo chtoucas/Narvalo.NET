@@ -113,10 +113,7 @@ namespace Narvalo.Applicative
         {
             private readonly Result<T, TError> _inner;
 
-            public DebugView(Result<T, TError> inner)
-            {
-                _inner = inner;
-            }
+            public DebugView(Result<T, TError> inner) => _inner = inner;
 
             public bool IsSuccess => _inner.IsSuccess;
 
@@ -278,14 +275,10 @@ namespace Narvalo.Applicative
         #region Publicly hidden methods.
 
         bool Internal.ISecondaryContainer<TError>.Contains(TError value)
-        {
-            throw new NotSupportedException();
-        }
+            => throw new NotSupportedException();
 
         bool Internal.ISecondaryContainer<TError>.Contains(TError value, IEqualityComparer<TError> comparer)
-        {
-            throw new NotSupportedException();
-        }
+            => throw new NotSupportedException();
 
         // Alias for WhenSuccess().
         void Internal.IContainer<T>.When(Func<T, bool> predicate, Action<T> action)

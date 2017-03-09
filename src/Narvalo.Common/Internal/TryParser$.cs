@@ -12,8 +12,7 @@ namespace Narvalo.Internal
 
             if (value == null) { return null; }
 
-            T result;
-            return @this.Invoke(value, out result) ? result : (T?)null;
+            return @this.Invoke(value, out T result) ? result : (T?)null;
         }
 
         public static Maybe<T> MayInvoke<T>(this TryParser<T> @this, string value) where T : class
@@ -22,8 +21,7 @@ namespace Narvalo.Internal
 
             if (value == null) { return Maybe<T>.None; }
 
-            T result;
-            return @this.Invoke(value, out result) ? Maybe.Of(result) : Maybe<T>.None;
+            return @this.Invoke(value, out T result) ? Maybe.Of(result) : Maybe<T>.None;
         }
     }
 }

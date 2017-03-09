@@ -49,10 +49,7 @@ namespace Narvalo.Applicative
         {
             private readonly Outcome _inner;
 
-            public DebugView(Outcome inner)
-            {
-                _inner = inner;
-            }
+            public DebugView(Outcome inner) => _inner = inner;
 
             public bool IsSuccess => _inner.IsSuccess;
 
@@ -146,8 +143,7 @@ namespace Narvalo.Applicative
             return other.IsError && Error == other.Error;
         }
 
-        public override bool Equals(object obj)
-            => (obj is Outcome) && Equals((Outcome)obj);
+        public override bool Equals(object obj) => (obj is Outcome) && Equals((Outcome)obj);
 
         public override int GetHashCode() => _error?.GetHashCode() ?? 0;
     }

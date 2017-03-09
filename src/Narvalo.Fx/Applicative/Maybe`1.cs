@@ -115,10 +115,7 @@ namespace Narvalo.Applicative
         {
             private readonly Maybe<T> _inner;
 
-            public DebugView(Maybe<T> inner)
-            {
-                _inner = inner;
-            }
+            public DebugView(Maybe<T> inner) => _inner = inner;
 
             public bool IsSome => _inner.IsSome;
 

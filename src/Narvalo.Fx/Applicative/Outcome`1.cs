@@ -116,10 +116,7 @@ namespace Narvalo.Applicative
         {
             private readonly Outcome<T> _inner;
 
-            public DebugView(Outcome<T> inner)
-            {
-                _inner = inner;
-            }
+            public DebugView(Outcome<T> inner) => _inner = inner;
 
             public bool IsSuccess => _inner.IsSuccess;
 
@@ -262,14 +259,10 @@ namespace Narvalo.Applicative
         #region Publicly hidden methods.
 
         bool Internal.ISecondaryContainer<string>.Contains(string value)
-        {
-            throw new NotSupportedException();
-        }
+            => throw new NotSupportedException();
 
         bool Internal.ISecondaryContainer<string>.Contains(string value, IEqualityComparer<string> comparer)
-        {
-            throw new NotSupportedException();
-        }
+            => throw new NotSupportedException();
 
         // Alias for WhenSuccess().
         void Internal.IContainer<T>.When(Func<T, bool> predicate, Action<T> action)

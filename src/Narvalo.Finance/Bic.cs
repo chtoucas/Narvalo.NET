@@ -181,7 +181,7 @@ namespace Narvalo.Finance
                 }
                 else
                 {
-                    var retval = value.Substring(StartIndex, Length);
+                    string retval = value.Substring(StartIndex, Length);
                     return CheckContent(retval) ? retval : null;
                 }
             }
@@ -203,7 +203,7 @@ namespace Narvalo.Finance
             public static string FromBic(string value)
             {
                 Demand.True(value.Length >= StartIndex + Length);
-                var retval = value.Substring(StartIndex, Length);
+                string retval = value.Substring(StartIndex, Length);
                 return CheckContent(retval) ? retval : null;
             }
 
@@ -223,7 +223,7 @@ namespace Narvalo.Finance
 
             public static string FromBic(string value, BicVersion version)
             {
-                var retval = value.Substring(StartIndex, Length);
+                string retval = value.Substring(StartIndex, Length);
 
                 return CheckContent(retval, version) ? retval : null;
             }
@@ -247,7 +247,7 @@ namespace Narvalo.Finance
             public static string FromBic(string value)
             {
                 Demand.True(value.Length >= StartIndex + Length);
-                var retval = value.Substring(StartIndex, Length);
+                string retval = value.Substring(StartIndex, Length);
                 return CheckContent(retval) ? retval : null;
             }
 
