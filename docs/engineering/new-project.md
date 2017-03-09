@@ -144,6 +144,17 @@ Notable additions:
 When creating the project we should add it to the list of PCL projects used by SecAnnotate
 (see Make.CustomAfter.targets).
 
+For Visual Studio 2017, add
+```
+{
+  "supports": {},
+  "dependencies": {},
+  "frameworks": {
+    ".NETPortable,Version=v4.5,Profile=Profile259": {}
+  }
+}
+```
+
 See
 - Profiles used by the project: `etc/FrameworkProfiles.props`.
 - Locally available profiles:

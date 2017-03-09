@@ -18,6 +18,7 @@
     <None Include="Narvalo.Fx.Version.props">
       <SubType>Designer</SubType>
     </None>
+    <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Applicative\Either.cs" />
