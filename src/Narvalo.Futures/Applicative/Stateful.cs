@@ -4,7 +4,7 @@ namespace Narvalo.Applicative
 {
     using System;
 
-    // Func<TState, (T, TState)>
+    // Func<TState, (T result, TState state)>
     public delegate (T result, TState state) Stateful<T, TState>(TState state);
 
     // Provides the core Monad methods.
