@@ -3,11 +3,10 @@
 namespace Narvalo.Internal
 {
     using System;
-    using System.Diagnostics.Contracts;
 
+    [Pure]
     internal static partial class Ascii
     {
-        [Pure]
         public static bool IsUpperLetter(string value)
         {
             if (value == null || value.Length == 0) { return false; }
@@ -23,7 +22,6 @@ namespace Narvalo.Internal
             return true;
         }
 
-        [Pure]
         public static bool IsDigit(string value)
         {
             if (value == null || value.Length == 0) { return false; }
@@ -39,7 +37,6 @@ namespace Narvalo.Internal
             return true;
         }
 
-        [Pure]
         public static bool IsDigitOrUpperLetter(string value)
         {
             if (value == null || value.Length == 0) { return false; }

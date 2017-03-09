@@ -4,7 +4,6 @@ namespace Narvalo
 {
     using System;
     using System.Diagnostics;
-    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Runtime.CompilerServices;
 
@@ -20,25 +19,22 @@ namespace Narvalo
     /// since it has nothing to do with formatting.</para>
     /// </remarks>
     // REVIEW: https://github.com/dotnet/corefx/issues/1514
+    [Pure]
     [DebuggerStepThrough]
     public static class Format
     {
-        [Pure]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Current(string format)
             => String.Format(CultureInfo.CurrentCulture, format);
 
-        [Pure]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Current<T0>(string format, T0 arg0)
             => String.Format(CultureInfo.CurrentCulture, format, arg0);
 
-        [Pure]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Current<T0, T1>(string format, T0 arg0, T1 arg1)
             => String.Format(CultureInfo.CurrentCulture, format, arg0, arg1);
 
-        [Pure]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Current<T0, T1, T2>(string format, T0 arg0, T1 arg1, T2 arg2)
             => String.Format(CultureInfo.CurrentCulture, format, arg0, arg1, arg2);
@@ -52,27 +48,22 @@ namespace Narvalo
         /// <param name="args">An object array that contains zero or more objects to format.</param>
         /// <returns>A copy of format in which the format items have been replaced by the string
         /// representation of the corresponding objects in args.</returns>
-        [Pure]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Current(string format, params object[] args)
             => String.Format(CultureInfo.CurrentCulture, format, args);
 
-        [Pure]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Invariant(string format)
             => String.Format(CultureInfo.InvariantCulture, format);
 
-        [Pure]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Invariant<T0>(string format, T0 arg0)
             => String.Format(CultureInfo.InvariantCulture, format, arg0);
 
-        [Pure]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Invariant<T0, T1>(string format, T0 arg0, T1 arg1)
             => String.Format(CultureInfo.InvariantCulture, format, arg0, arg1);
 
-        [Pure]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Invariant<T0, T1, T2>(string format, T0 arg0, T1 arg1, T2 arg2)
             => String.Format(CultureInfo.InvariantCulture, format, arg0, arg1, arg2);
@@ -85,7 +76,6 @@ namespace Narvalo
         /// <param name="args">An object array that contains zero or more objects to format.</param>
         /// <returns>A copy of format in which the format items have been replaced by the string
         /// representation of the corresponding objects in args.</returns>
-        [Pure]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Invariant(string format, params object[] args)
             => String.Format(CultureInfo.InvariantCulture, format, args);

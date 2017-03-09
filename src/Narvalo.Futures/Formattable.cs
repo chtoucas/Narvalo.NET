@@ -4,16 +4,15 @@ namespace Narvalo
 {
     using System;
     using System.Diagnostics;
-    using System.Diagnostics.Contracts;
     using System.Runtime.CompilerServices;
 
     // This class uses the FormattableString class which is new to .NET v4.6.
     // See https://gist.github.com/jskeet/9d297d0dc013d7a557ee (for .NET version lower than 4.6).
     // There is also a NuGet package that does exactly this: StringInterpolationBridge.
+    [Pure]
     [DebuggerStepThrough]
     public static class Formattable
     {
-        [Pure]
         public static string Current(FormattableString formattable)
         {
             // The C# compiler automatically transforms a formattable string ($"") to a string with:
@@ -36,7 +35,6 @@ namespace Narvalo
             return formattable.ToString();
         }
 
-        [Pure]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Invariant(FormattableString formattable)
             => FormattableString.Invariant(formattable);
