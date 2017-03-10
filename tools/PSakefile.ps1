@@ -227,7 +227,7 @@ Task _CI-InitializeVariables `
 Task Package-All `
     -Description 'Package everything.' `
     -Depends Package-Build, Package-Cerbere, Package-Common, Package-Core, `
-      Package-Finance, Package-Fx, Package-Money, Package-Mvp, Package-MvpWeb, Package-Web `
+        Package-Finance, Package-Fx, Package-Money, Package-Mvp, Package-MvpWeb, Package-Web `
     -Alias Pack
 
 Task Package-Build `
@@ -287,7 +287,7 @@ Task Package-Fx `
 Task Package-Money `
     -Description 'Create the package Narvalo.Money.' `
     -Depends _Package-InitializeVariables `
-    -Alias PackMoney`
+    -Alias PackMoney `
 {
     MSBuild $Foundations $Opts $Package_Targets $Package_Props `
         '/p:Filter=_Money_'
