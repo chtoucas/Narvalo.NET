@@ -20,7 +20,7 @@ public partial class MonadTemplate
 
         private static IEnumerable<TSource> CollectIterator<TSource<#= RTDecl #>>(IEnumerable<<#= Name #><TSource<#= RTDecl #>>> source)
         {
-            Demand.NotNull(source);
+            Debug.Assert(source != null);
 
 <#+ if (HasRightGenerics) { #>
             var unit = <#+ WriteFactory("Unit"); #>(Unit.Default);
@@ -56,7 +56,7 @@ public partial class MonadTemplate
         internal static <#= Name #><TSource> SumImpl<TSource>(
             this IEnumerable<<#= Name #><TSource>> @this)
         {
-            Demand.NotNull(@this);
+            Debug.Assert(@this != null);
             return @this.Aggregate(<#= Name #><TSource>.<#= ZeroName #>, (m, n) => m.<#= PlusName #>(n));
         }
 <#+ } // T4: End of HasSum. #>

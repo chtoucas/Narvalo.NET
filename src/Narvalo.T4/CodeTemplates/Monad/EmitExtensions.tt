@@ -362,11 +362,11 @@ public partial class MonadTemplate
             IEqualityComparer<TKey> comparer)
         {
 <#+ if (IsNullable) { #>
-            Demand.NotNull("inner");
+            Debug.Assert(inner != null);
 <#+ } #>
-            Demand.NotNull(outerKeySelector);
-            Demand.NotNull(innerKeySelector);
-            Demand.NotNull(comparer);
+            Debug.Assert(outerKeySelector != null);
+            Debug.Assert(innerKeySelector != null);
+            Debug.Assert(comparer != null);
 
             return arg => inner.<#= MapName #>(innerKeySelector)
                 .<#= FilterName #>(key => comparer.Equals(key, outerKeySelector(arg)));

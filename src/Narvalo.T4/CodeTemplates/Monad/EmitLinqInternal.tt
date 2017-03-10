@@ -15,8 +15,8 @@ public partial class MonadTemplate
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><TResult<#= RTDecl #>>> selector)
         {
-            Demand.NotNull(@this);
-            Demand.NotNull(selector);
+            Debug.Assert(@this != null);
+            Debug.Assert(selector != null);
 
             return @this.Select(selector).Collect();
         }
@@ -36,8 +36,8 @@ public partial class MonadTemplate
             IEnumerable<TSource> source,
             Func<TSource, <#= Name #><bool<#= RTDecl #>>> predicate)
         {
-            Demand.NotNull(source);
-            Demand.NotNull(predicate);
+            Debug.Assert(source != null);
+            Debug.Assert(predicate != null);
 <#+ if (HasRightGenerics) { #>
 
             var unit = <#+ WriteFactory("Unit"); #>(Unit.Default);
@@ -72,9 +72,9 @@ public partial class MonadTemplate
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, <#= Name #><TResult<#= RTDecl #>>> resultSelector)
         {
-            Demand.NotNull(resultSelector);
-            Demand.NotNull(@this);
-            Demand.NotNull(second);
+            Debug.Assert(resultSelector != null);
+            Debug.Assert(@this != null);
+            Debug.Assert(second != null);
 
             return @this.Zip(second, resultSelector).Collect();
         }

@@ -35,7 +35,6 @@ public abstract partial class MonadTemplate : _MonadTemplate
     {
 #>
 <#+ if (!Namespace.StartsWith("Narvalo.")) { #>
-using Demand = global::Narvalo.Demand;
 using Require = global::Narvalo.Require;
 <#+ } #>
 using _Unit_ = global::Narvalo.Applicative.Unit;
@@ -44,6 +43,7 @@ namespace <#= Namespace #>
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
 
     using <#= InternalNamespace #>;
@@ -80,6 +80,7 @@ namespace <#= Namespace #>
 namespace <#= InternalNamespace #>
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
 <#+ if (HasSum) { #>
     using System.Linq;
@@ -137,6 +138,7 @@ namespace <#= InternalNamespace #>
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
