@@ -17,7 +17,6 @@ namespace Narvalo.Applicative
     /// <typeparam name="T">The underlying type of the value.</typeparam>
     [DebuggerDisplay("IsSome = {IsSome}")]
     [DebuggerTypeProxy(typeof(Maybe<>.DebugView))]
-    [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "[Intentionally] Maybe<T> only pretends to be a collection.")]
     public partial struct Maybe<T> : IEquatable<Maybe<T>>, Internal.IMaybe<T>
     {
         // You should NEVER use this field directly, use the Value property instead. The Code Contracts
@@ -95,12 +94,7 @@ namespace Narvalo.Applicative
         {
             Require.NotNull(exceptionFactory, nameof(exceptionFactory));
 
-            if (IsNone)
-            {
-                throw exceptionFactory();
-            }
-
-            return Value;
+            return IsNone ? throw exceptionFactory() : Value;
         }
 
         public override string ToString() => IsSome ? "Maybe(" + Value.ToString() + ")" : "Maybe(None)";

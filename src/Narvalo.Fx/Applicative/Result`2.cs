@@ -81,6 +81,7 @@ namespace Narvalo.Applicative
         public T ValueOrElse(Func<T> valueFactory)
         {
             Require.NotNull(valueFactory, nameof(valueFactory));
+
             return IsSuccess ? Value : valueFactory();
         }
 
@@ -88,16 +89,14 @@ namespace Narvalo.Applicative
         {
             Require.NotNull(exception, nameof(exception));
 
-            if (IsError) { throw exception; }
-            return Value;
+            return IsSuccess ? Value : throw exception;
         }
 
         public T ValueOrThrow(Func<Exception> exceptionFactory)
         {
             Require.NotNull(exceptionFactory, nameof(exceptionFactory));
 
-            if (IsError) { throw exceptionFactory(); }
-            return Value;
+            return IsSuccess ? Value : throw exceptionFactory();
         }
 
         public override string ToString()

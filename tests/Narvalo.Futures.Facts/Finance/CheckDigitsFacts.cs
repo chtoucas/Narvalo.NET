@@ -50,16 +50,21 @@ namespace Narvalo.Finance
         #region Verify1()
 
         [Fact]
-        public static void Verify1_ThrowsArgumentException_ForInvalidInput()
+        public static void Verify1_ThrowsArgumentOutOfRangeException_ForEmptyInput()
         {
-            Assert.Throws<ArgumentException>(() => CheckDigits.Verify1(String.Empty, CheckDigitsRange.Alphabetic));
-            Assert.Throws<ArgumentException>(() => CheckDigits.Verify1(String.Empty, CheckDigitsRange.Alphanumeric));
-            Assert.Throws<ArgumentException>(() => CheckDigits.Verify1(String.Empty, CheckDigitsRange.Hexadecimal));
-            Assert.Throws<ArgumentException>(() => CheckDigits.Verify1(String.Empty, CheckDigitsRange.Numeric));
-            Assert.Throws<ArgumentException>(() => CheckDigits.Verify1("1", CheckDigitsRange.Alphabetic));
-            Assert.Throws<ArgumentException>(() => CheckDigits.Verify1("1", CheckDigitsRange.Alphanumeric));
-            Assert.Throws<ArgumentException>(() => CheckDigits.Verify1("1", CheckDigitsRange.Hexadecimal));
-            Assert.Throws<ArgumentException>(() => CheckDigits.Verify1("1", CheckDigitsRange.Numeric));
+            Assert.Throws<ArgumentOutOfRangeException>(() => CheckDigits.Verify1(String.Empty, CheckDigitsRange.Alphabetic));
+            Assert.Throws<ArgumentOutOfRangeException>(() => CheckDigits.Verify1(String.Empty, CheckDigitsRange.Alphanumeric));
+            Assert.Throws<ArgumentOutOfRangeException>(() => CheckDigits.Verify1(String.Empty, CheckDigitsRange.Hexadecimal));
+            Assert.Throws<ArgumentOutOfRangeException>(() => CheckDigits.Verify1(String.Empty, CheckDigitsRange.Numeric));
+        }
+
+        [Fact]
+        public static void Verify1_ThrowsArgumentOutOfRangeException_ForInputOfLength1()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => CheckDigits.Verify1("1", CheckDigitsRange.Alphabetic));
+            Assert.Throws<ArgumentOutOfRangeException>(() => CheckDigits.Verify1("1", CheckDigitsRange.Alphanumeric));
+            Assert.Throws<ArgumentOutOfRangeException>(() => CheckDigits.Verify1("1", CheckDigitsRange.Hexadecimal));
+            Assert.Throws<ArgumentOutOfRangeException>(() => CheckDigits.Verify1("1", CheckDigitsRange.Numeric));
         }
 
         [Fact]
@@ -75,20 +80,30 @@ namespace Narvalo.Finance
         #region Verify2()
 
         [Fact]
-        public static void Verify2_ThrowsArgumentException_ForInvalidInput()
+        public static void Verify2_ThrowsArgumentOutOfRangeException_ForEmptyInput()
         {
-            Assert.Throws<ArgumentException>(() => CheckDigits.Verify2(String.Empty, CheckDigitsRange.Alphabetic));
-            Assert.Throws<ArgumentException>(() => CheckDigits.Verify2(String.Empty, CheckDigitsRange.Alphanumeric));
-            Assert.Throws<ArgumentException>(() => CheckDigits.Verify2(String.Empty, CheckDigitsRange.Hexadecimal));
-            Assert.Throws<ArgumentException>(() => CheckDigits.Verify2(String.Empty, CheckDigitsRange.Numeric));
-            Assert.Throws<ArgumentException>(() => CheckDigits.Verify2("1", CheckDigitsRange.Alphabetic));
-            Assert.Throws<ArgumentException>(() => CheckDigits.Verify2("1", CheckDigitsRange.Alphanumeric));
-            Assert.Throws<ArgumentException>(() => CheckDigits.Verify2("1", CheckDigitsRange.Hexadecimal));
-            Assert.Throws<ArgumentException>(() => CheckDigits.Verify2("1", CheckDigitsRange.Numeric));
-            Assert.Throws<ArgumentException>(() => CheckDigits.Verify2("12", CheckDigitsRange.Alphabetic));
-            Assert.Throws<ArgumentException>(() => CheckDigits.Verify2("12", CheckDigitsRange.Alphanumeric));
-            Assert.Throws<ArgumentException>(() => CheckDigits.Verify2("12", CheckDigitsRange.Hexadecimal));
-            Assert.Throws<ArgumentException>(() => CheckDigits.Verify2("12", CheckDigitsRange.Numeric));
+            Assert.Throws<ArgumentOutOfRangeException>(() => CheckDigits.Verify2(String.Empty, CheckDigitsRange.Alphabetic));
+            Assert.Throws<ArgumentOutOfRangeException>(() => CheckDigits.Verify2(String.Empty, CheckDigitsRange.Alphanumeric));
+            Assert.Throws<ArgumentOutOfRangeException>(() => CheckDigits.Verify2(String.Empty, CheckDigitsRange.Hexadecimal));
+            Assert.Throws<ArgumentOutOfRangeException>(() => CheckDigits.Verify2(String.Empty, CheckDigitsRange.Numeric));
+        }
+
+        [Fact]
+        public static void Verify2_ThrowsArgumentOutOfRangeException_ForInputOfLength1()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => CheckDigits.Verify2("1", CheckDigitsRange.Alphabetic));
+            Assert.Throws<ArgumentOutOfRangeException>(() => CheckDigits.Verify2("1", CheckDigitsRange.Alphanumeric));
+            Assert.Throws<ArgumentOutOfRangeException>(() => CheckDigits.Verify2("1", CheckDigitsRange.Hexadecimal));
+            Assert.Throws<ArgumentOutOfRangeException>(() => CheckDigits.Verify2("1", CheckDigitsRange.Numeric));
+        }
+
+        [Fact]
+        public static void Verify2_ThrowsArgumentOutOfRangeException_ForInputOfLength2()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => CheckDigits.Verify2("12", CheckDigitsRange.Alphabetic));
+            Assert.Throws<ArgumentOutOfRangeException>(() => CheckDigits.Verify2("12", CheckDigitsRange.Alphanumeric));
+            Assert.Throws<ArgumentOutOfRangeException>(() => CheckDigits.Verify2("12", CheckDigitsRange.Hexadecimal));
+            Assert.Throws<ArgumentOutOfRangeException>(() => CheckDigits.Verify2("12", CheckDigitsRange.Numeric));
         }
 
         [Fact]
