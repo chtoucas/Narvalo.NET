@@ -6,14 +6,10 @@ namespace Narvalo
 
     public sealed class UnitTestTraceListener : DefaultTraceListener
     {
-        public override void Fail(string message)
-        {
-            throw new DebugAssertFailedException();
-        }
+        public override void Fail(string message) 
+            => throw new DebugAssertFailedException();
 
         public override void Fail(string message, string detailMessage)
-        {
-            throw new DebugAssertFailedException();
-        }
+            => throw new DebugAssertFailedException();
     }
 }

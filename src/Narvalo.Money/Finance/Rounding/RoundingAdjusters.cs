@@ -89,7 +89,7 @@ namespace Narvalo.Finance.Rounding
                 case RoundingMode.HalfTowardsZero: return HalfTowardsZero(value, decimalPlaces);
                 case RoundingMode.ToOdd: return ToOdd(value, decimalPlaces);
 
-                default: throw new ControlFlowException("XXX");
+                default: throw new ControlFlowException();
             }
         }
 
@@ -116,7 +116,7 @@ namespace Narvalo.Finance.Rounding
                 case RoundingMode.HalfTowardsZero: return HalfTowardsZero(value);
                 case RoundingMode.ToOdd: return ToOdd(value);
 
-                default: throw new ControlFlowException("XXX");
+                default: throw new ControlFlowException();
             }
         }
 

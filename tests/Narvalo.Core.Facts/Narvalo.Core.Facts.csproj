@@ -48,7 +48,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="..\TestCommon\Narvalo.TestCommon.projitems" Label="Shared" />
-  <Import Project="..\DebugCommon\DebugCommon.projitems" Label="Shared" />
   <Import Project="..\Cerbere+Core\Cerbere+Core.projitems" Label="Shared" />
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

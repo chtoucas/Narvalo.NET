@@ -77,7 +77,7 @@ namespace Narvalo
         /// <param name="parameterName">The name of the parameter.</param>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
         /// null.</exception>
-        /// <seealso cref="Require.NotNullUnconstrained{T}(T, string)"/>
+        /// <seealso cref="Require.NotNullUnconstrained{T}(T, String)"/>
         public static void NotNull<T>([ValidatedNotNull]T value, string parameterName)
             where T : class
         {
@@ -95,7 +95,7 @@ namespace Narvalo
         /// <param name="parameterName">The name of the parameter.</param>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
         /// null.</exception>
-        /// <seealso cref="Require.NotNull{T}(T, string)"/>
+        /// <seealso cref="Require.NotNull{T}(T, String)"/>
         public static void NotNullUnconstrained<T>([ValidatedNotNull]T value, string parameterName)
         {
             if (value == null)

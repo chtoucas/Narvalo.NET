@@ -53,7 +53,7 @@ namespace Narvalo.Finance
                 case CheckDigitsRange.Numeric:
                     return Compute1_(value, s_NumAlphabet);
                 default:
-                    throw new ControlFlowException("XXX");
+                    throw new ControlFlowException();
             }
         }
 
@@ -72,7 +72,7 @@ namespace Narvalo.Finance
                 case CheckDigitsRange.Numeric:
                     return Compute2_(value, s_NumAlphabet, NUM_MODULUS);
                 default:
-                    throw new ControlFlowException("XXX");
+                    throw new ControlFlowException();
             }
         }
 

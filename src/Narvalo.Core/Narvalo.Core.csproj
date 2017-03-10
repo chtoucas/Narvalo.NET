@@ -26,7 +26,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings_Core.fr.resx</DependentUpon>
     </Compile>
-    <Compile Include="PureAttribute.cs" />
     <Compile Include="Require.cs" />
     <Compile Include="ValidatedNotNullAttribute.cs" />
   </ItemGroup>

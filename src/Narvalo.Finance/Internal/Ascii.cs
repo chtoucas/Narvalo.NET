@@ -4,7 +4,6 @@ namespace Narvalo.Finance.Internal
 {
     using System;
 
-    [Pure]
     internal static partial class Ascii
     {
         public static bool IsUpperLetter(string value)

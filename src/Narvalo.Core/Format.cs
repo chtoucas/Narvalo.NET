@@ -19,7 +19,6 @@ namespace Narvalo
     /// since it has nothing to do with formatting.</para>
     /// </remarks>
     // REVIEW: https://github.com/dotnet/corefx/issues/1514
-    [Pure]
     [DebuggerStepThrough]
     public static class Format
     {

@@ -38,7 +38,6 @@ namespace Narvalo
         /// <remarks>Range borders are included in the comparison.</remarks>
         /// <param name="value"></param>
         /// <returns></returns>
-        [Pure]
         public bool Contains(T value)
             => value.CompareTo(LowerEnd) >= 0 && value.CompareTo(UpperEnd) <= 0;
 
@@ -48,7 +47,6 @@ namespace Narvalo
         /// <remarks>Range borders are included in the comparison.</remarks>
         /// <param name="range"></param>
         /// <returns></returns>
-        [Pure]
         public bool Includes(Range<T> range)
             => range.LowerEnd.CompareTo(LowerEnd) >= 0 && range.UpperEnd.CompareTo(UpperEnd) <= 0;
 

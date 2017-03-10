@@ -10,7 +10,6 @@ namespace Narvalo
     // This class uses the FormattableString class which is new to .NET v4.6.
     // See https://gist.github.com/jskeet/9d297d0dc013d7a557ee (for .NET version lower than 4.6).
     // There is also a NuGet package that does exactly this: StringInterpolationBridge.
-    [Pure]
     [Obsolete("Invariant is alreay available and Currrent is already the default.")]
     [DebuggerStepThrough]
     public static class Formattable

@@ -53,8 +53,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Money.Facts", "test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Core.Facts", "tests\Narvalo.Core.Facts\Narvalo.Core.Facts.csproj", "{D05B40A6-15B6-46D0-ABC1-8F8CFC5D02E8}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "DebugCommon", "tests\DebugCommon\DebugCommon.shproj", "{C1CC85FF-5C06-404B-97A0-A2F422066420}"
-EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Cerbere+Core", "tests\Cerbere+Core\Cerbere+Core.shproj", "{B886384D-58BE-475E-980C-5AFAD8E2EE3D}"
 EndProject
 Global
@@ -65,9 +63,7 @@ Global
 		tests\TestCommon\Narvalo.TestCommon.projitems*{7741af0b-d316-4c1d-a51d-a89f3070d6b0}*SharedItemsImports = 4
 		tests\Cerbere+Core\Cerbere+Core.projitems*{b886384d-58be-475e-980c-5afad8e2ee3d}*SharedItemsImports = 13
 		tests\TestCommon\Narvalo.TestCommon.projitems*{c141265f-95ed-4093-a56c-5991dba96f67}*SharedItemsImports = 13
-		tests\DebugCommon\DebugCommon.projitems*{c1cc85ff-5c06-404b-97a0-a2f422066420}*SharedItemsImports = 13
 		tests\Cerbere+Core\Cerbere+Core.projitems*{d05b40a6-15b6-46d0-abc1-8f8cfc5d02e8}*SharedItemsImports = 4
-		tests\DebugCommon\DebugCommon.projitems*{d05b40a6-15b6-46d0-abc1-8f8cfc5d02e8}*SharedItemsImports = 4
 		tests\TestCommon\Narvalo.TestCommon.projitems*{d05b40a6-15b6-46d0-abc1-8f8cfc5d02e8}*SharedItemsImports = 4
 		tests\TestCommon\Narvalo.TestCommon.projitems*{f1f1e121-3b3d-463d-8cf5-3a6e92004546}*SharedItemsImports = 4
 		tests\TestCommon\Narvalo.TestCommon.projitems*{f3d20800-96a8-4661-b796-fb5037ca0422}*SharedItemsImports = 4
@@ -201,7 +197,6 @@ Global
 		{387BDE7D-C68D-43C0-93CA-17700577FAFD} = {E532D0F7-CFBB-4D52-BEA3-D67DA931AC86}
 		{120900B7-E9A4-41CD-A358-6CAE61E1C328} = {1606E94A-5311-4C5F-91E2-876A4B635F02}
 		{D05B40A6-15B6-46D0-ABC1-8F8CFC5D02E8} = {1606E94A-5311-4C5F-91E2-876A4B635F02}
-		{C1CC85FF-5C06-404B-97A0-A2F422066420} = {1606E94A-5311-4C5F-91E2-876A4B635F02}
 		{B886384D-58BE-475E-980C-5AFAD8E2EE3D} = {1606E94A-5311-4C5F-91E2-876A4B635F02}
 	EndGlobalSection
 EndGlobal
