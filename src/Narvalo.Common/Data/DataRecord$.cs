@@ -18,8 +18,7 @@ namespace Narvalo.Data
             return @this.GetBooleanUnchecked(name);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
-            Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
+        [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0", Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static bool GetBooleanUnchecked(this IDataRecord @this, string name)
             => @this.GetBoolean(@this.GetOrdinal(name));
 
@@ -30,8 +29,7 @@ namespace Narvalo.Data
             return @this.GetByteUnchecked(name);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
-            Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
+        [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0", Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static byte GetByteUnchecked(this IDataRecord @this, string name)
             => @this.GetByte(@this.GetOrdinal(name));
 
@@ -42,8 +40,7 @@ namespace Narvalo.Data
             return @this.GetDateTimeUnchecked(name);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
-            Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
+        [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0", Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static DateTime GetDateTimeUnchecked(this IDataRecord @this, string name)
             => @this.GetDateTime(@this.GetOrdinal(name));
 
@@ -54,8 +51,7 @@ namespace Narvalo.Data
             return @this.GetDecimalUnchecked(name);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
-            Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
+        [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0", Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static decimal GetDecimalUnchecked(this IDataRecord @this, string name)
             => @this.GetDecimal(@this.GetOrdinal(name));
 
@@ -66,8 +62,7 @@ namespace Narvalo.Data
             return @this.GetDoubleUnchecked(name);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
-            Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
+        [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0", Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static double GetDoubleUnchecked(this IDataRecord @this, string name)
             => @this.GetDouble(@this.GetOrdinal(name));
 
@@ -78,8 +73,7 @@ namespace Narvalo.Data
             return @this.GetGuidUnchecked(name);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
-            Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
+        [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0", Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static Guid GetGuidUnchecked(this IDataRecord @this, string name)
             => @this.GetGuid(@this.GetOrdinal(name));
 
@@ -90,8 +84,7 @@ namespace Narvalo.Data
             return @this.GetInt16Unchecked(name);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
-            Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
+        [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0", Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static short GetInt16Unchecked(this IDataRecord @this, string name)
             => @this.GetInt16(@this.GetOrdinal(name));
 
@@ -102,8 +95,7 @@ namespace Narvalo.Data
             return @this.GetInt32Unchecked(name);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
-            Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
+        [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0", Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static int GetInt32Unchecked(this IDataRecord @this, string name)
             => @this.GetInt32(@this.GetOrdinal(name));
 
@@ -114,8 +106,7 @@ namespace Narvalo.Data
             return @this.GetInt64Unchecked(name);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
-            Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
+        [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0", Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static long GetInt64Unchecked(this IDataRecord @this, string name)
             => @this.GetInt64(@this.GetOrdinal(name));
     }
@@ -130,8 +121,7 @@ namespace Narvalo.Data
             return @this.GetStringUnchecked(name);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
-            Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
+        [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0", Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static string GetStringUnchecked(this IDataRecord @this, string name)
             => @this.GetString(@this.GetOrdinal(name));
     }

@@ -3,6 +3,7 @@
 namespace Narvalo
 {
     using System;
+    using System.Diagnostics;
 
     using Narvalo.Properties;
 
@@ -126,7 +127,6 @@ namespace Narvalo
                     throw new FormatException(
                         Format.Current(Strings_Common.Int64Encoder_IllegalCharacter_Format, value[i], i));
                 }
-                Check.True(index >= 0);
 
                 checked
                 {
@@ -143,10 +143,8 @@ namespace Narvalo
 
         private static long Decode(string value, char[] alphabet, int alphabetLength)
         {
-            Demand.NotNull(value);
-            Demand.NotNull(alphabet);
-            Demand.True(value.Length <= alphabetLength);
-            Demand.Range(alphabetLength > 0);
+            Debug.Assert(value != null && value.Length <= alphabetLength);
+            Debug.Assert(alphabet != null && alphabetLength > 0);
 
             long retval = 0L;
             long multiplier = 1L;
@@ -159,7 +157,6 @@ namespace Narvalo
                     throw new FormatException(
                         Format.Current(Strings_Common.Int64Encoder_IllegalCharacter_Format, value[i], i));
                 }
-                Check.True(index >= 0);
 
                 checked
                 {
@@ -176,14 +173,12 @@ namespace Narvalo
 
         private static string Encode(long value, char[] alphabet, int alphabetLength, int maxLength)
         {
-            Demand.NotNull(alphabet);
-            Demand.Range(value >= 0L);
-            Demand.Range(alphabetLength > 0);
-            Demand.Range(maxLength >= 0);
+            Debug.Assert(value >= 0L);
+            Debug.Assert(alphabet != null && alphabet.Length == alphabetLength);
+            Debug.Assert(alphabetLength > 0);
+            Debug.Assert(maxLength >= 0);
 
             if (value == 0L) { return String.Empty; }
-
-            Check.True(alphabet.Length == alphabetLength);
 
             var arr = new char[maxLength];
 
@@ -192,8 +187,8 @@ namespace Narvalo
             {
                 long index = value % alphabetLength;
 
-                Check.True(index < alphabet.Length);
-                Check.True(i < maxLength);
+                Debug.Assert(index < alphabet.Length);
+                Debug.Assert(i < maxLength);
 
                 arr[i] = alphabet[index];
                 i++;

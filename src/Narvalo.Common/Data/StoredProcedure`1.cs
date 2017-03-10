@@ -4,6 +4,7 @@ namespace Narvalo.Data
 {
     using System.Data;
     using System.Data.SqlClient;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
 
     public abstract partial class StoredProcedure<TResult>
@@ -58,11 +59,10 @@ namespace Narvalo.Data
 
         protected abstract void PrepareParameters(SqlParameterCollection parameters);
 
-        [SuppressMessage("Microsoft.Security", "CA2100:ReviewSqlQueriesForSecurityVulnerabilities",
-            Justification = "[Intentionally] The Code Analysis error is real, but we expect the consumer of this class to use a named SQL procedure.")]
+        [SuppressMessage("Microsoft.Security", "CA2100:ReviewSqlQueriesForSecurityVulnerabilities", Justification = "[Intentionally] The Code Analysis error is real, but we expect the consumer of this class to use a named SQL procedure.")]
         private SqlCommand CreateCommand(SqlConnection connection)
         {
-            Demand.NotNull(connection);
+            Debug.Assert(connection != null);
 
             SqlCommand tmpCmd = null;
             SqlCommand cmd = null;
