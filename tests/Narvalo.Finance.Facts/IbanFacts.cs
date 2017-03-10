@@ -198,21 +198,6 @@ namespace Narvalo.Finance
 
         #endregion
 
-        #region GetHashCode()
-
-        [Theory(Skip = "Keep this or not?")]
-        [MemberData(nameof(SampleValues), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void GetHashCode_ReturnsHashCodeValue(string value)
-        {
-            var result = ParseFast(value).GetHashCode();
-            var expected = value.GetHashCode();
-
-            Assert.Equal(expected, result);
-        }
-
-        #endregion
-
         #region ToString()
 
         [Theory]

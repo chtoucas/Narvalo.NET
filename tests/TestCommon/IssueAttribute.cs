@@ -4,7 +4,6 @@ namespace Narvalo
 {
     using System;
 
-    // TODO: Add Uri.
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
     public sealed class IssueAttribute : Attribute { }
 }
