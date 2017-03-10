@@ -16,100 +16,25 @@ namespace Narvalo
         private const int INIT = 17;
         private const int MULT = 31;
 
-        public static int Combine(int h1, int h2)
+        public static int Combine(int hash1, int hash2)
         {
             unchecked
             {
                 int hash = INIT;
-                hash = MULT * hash + h1;
-                hash = MULT * hash + h2;
+                hash = MULT * hash + hash1;
+                hash = MULT * hash + hash2;
                 return hash;
             }
         }
 
-        public static int Combine(int h1, int h2, int h3)
+        public static int Combine(int hash1, int hash2, int hash3)
         {
             unchecked
             {
                 int hash = INIT;
-                hash = MULT * hash + h1;
-                hash = MULT * hash + h2;
-                hash = MULT * hash + h3;
-                return hash;
-            }
-        }
-
-        public static int Combine(int h1, int h2, int h3, int h4)
-        {
-            unchecked
-            {
-                int hash = INIT;
-                hash = MULT * hash + h1;
-                hash = MULT * hash + h2;
-                hash = MULT * hash + h3;
-                hash = MULT * hash + h4;
-                return hash;
-            }
-        }
-
-        public static int Combine(int h1, int h2, int h3, int h4, int h5)
-        {
-            unchecked
-            {
-                int hash = INIT;
-                hash = MULT * hash + h1;
-                hash = MULT * hash + h2;
-                hash = MULT * hash + h3;
-                hash = MULT * hash + h4;
-                hash = MULT * hash + h5;
-                return hash;
-            }
-        }
-
-        public static int Combine(int h1, int h2, int h3, int h4, int h5, int h6)
-        {
-            unchecked
-            {
-                int hash = INIT;
-                hash = MULT * hash + h1;
-                hash = MULT * hash + h2;
-                hash = MULT * hash + h3;
-                hash = MULT * hash + h4;
-                hash = MULT * hash + h5;
-                hash = MULT * hash + h6;
-                return hash;
-            }
-        }
-
-        public static int Combine(int h1, int h2, int h3, int h4, int h5, int h6, int h7)
-        {
-            unchecked
-            {
-                int hash = INIT;
-                hash = MULT * hash + h1;
-                hash = MULT * hash + h2;
-                hash = MULT * hash + h3;
-                hash = MULT * hash + h4;
-                hash = MULT * hash + h5;
-                hash = MULT * hash + h6;
-                hash = MULT * hash + h7;
-                return hash;
-            }
-        }
-
-        public static int Combine(int h1, int h2, int h3, int h4, int h5, int h6, int h7, int h8)
-        {
-            unchecked
-            {
-                int hash = INIT;
-                hash = MULT * hash + h1;
-                hash = MULT * hash + h2;
-                hash = MULT * hash + h3;
-                hash = MULT * hash + h4;
-                hash = MULT * hash + h5;
-                hash = MULT * hash + h6;
-                hash = MULT * hash + h7;
-                hash = MULT * hash + h8;
+                hash = MULT * hash + hash1;
+                hash = MULT * hash + hash2;
+                hash = MULT * hash + hash3;
                 return hash;
             }
         }

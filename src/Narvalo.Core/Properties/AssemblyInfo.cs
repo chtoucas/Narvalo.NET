@@ -3,7 +3,7 @@
 using System.Reflection;
 
 [assembly: AssemblyTitle("Narvalo.Core")]
-[assembly: AssemblyDescription("Narvalo Core Library.")]
+[assembly: AssemblyDescription("Provides helpers on which depend the other Narvalo libraries.")]
 
 #if SECURITY_ANNOTATIONS
 [assembly: System.Security.SecurityTransparent]
