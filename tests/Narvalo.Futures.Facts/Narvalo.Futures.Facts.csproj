@@ -31,7 +31,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BinaryEncoderFacts.cs" />
     <Compile Include="Finance\CheckDigitsFacts.cs" />
     <Compile Include="Finance\Currencies\CurrencyActivatorFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

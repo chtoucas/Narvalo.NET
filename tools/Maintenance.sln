@@ -1,13 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E608069F-2FF1-416D-B5C6-BA8918814F74}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Build", "3. Build", "{2D3181AE-6786-49EE-BDCE-1C7687EFB40B}"
 	ProjectSection(SolutionItems) = preProject
 		Make.Common.props = Make.Common.props
@@ -79,6 +74,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Packages", "Packages", "{23
 		..\src\Narvalo.Finance\Narvalo.Finance.Version.props = ..\src\Narvalo.Finance\Narvalo.Finance.Version.props
 		..\src\NuGet\Narvalo.Fx\Narvalo.Fx.nuproj = ..\src\NuGet\Narvalo.Fx\Narvalo.Fx.nuproj
 		..\src\Narvalo.Fx\Narvalo.Fx.Version.props = ..\src\Narvalo.Fx\Narvalo.Fx.Version.props
+		..\src\NuGet\Narvalo.Money\Narvalo.Money.nuproj = ..\src\NuGet\Narvalo.Money\Narvalo.Money.nuproj
+		..\src\Narvalo.Money\Narvalo.Money.Version.props = ..\src\Narvalo.Money\Narvalo.Money.Version.props
 		..\src\NuGet\Narvalo.Mvp\Narvalo.Mvp.nuproj = ..\src\NuGet\Narvalo.Mvp\Narvalo.Mvp.nuproj
 		..\src\Narvalo.Mvp\Narvalo.Mvp.Version.props = ..\src\Narvalo.Mvp\Narvalo.Mvp.Version.props
 		..\src\NuGet\Narvalo.Mvp.Web\Narvalo.Mvp.Web.nuproj = ..\src\NuGet\Narvalo.Mvp.Web\Narvalo.Mvp.Web.nuproj

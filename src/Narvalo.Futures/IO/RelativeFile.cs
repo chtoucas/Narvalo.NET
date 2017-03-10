@@ -20,6 +20,6 @@ namespace Narvalo.IO
 
         public FileInfo File { get; }
 
-        public string RelativeName => Path.Combine(_relativeDirectoryName, _file.Name);
+        public string RelativeName => Path.Combine(_relativeDirectoryName, File.Name);
     }
 }

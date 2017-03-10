@@ -5,12 +5,6 @@ VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Web", "src\Narvalo.Web\Narvalo.Web.csproj", "{56E3969F-5066-4702-A670-4C35FBD97201}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D552D1B5-0EE5-4BC9-AFCB-7A7128811DAB}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\packages.config = .nuget\packages.config
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Libraries", "1. Libraries", "{E532D0F7-CFBB-4D52-BEA3-D67DA931AC86}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Tools", "3. Tools", "{9C0D3D2C-E3FE-4E83-9C89-144A10CE3402}"
@@ -54,6 +48,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Core.Facts", "tests\Narvalo.Core.Facts\Narvalo.Core.Facts.csproj", "{D05B40A6-15B6-46D0-ABC1-8F8CFC5D02E8}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Cerbere+Core", "tests\Cerbere+Core\Cerbere+Core.shproj", "{B886384D-58BE-475E-980C-5AFAD8E2EE3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo", "src\Narvalo\Narvalo.csproj", "{20635909-6C6E-461C-9141-F5802AD3BEB1}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -174,6 +170,12 @@ Global
 		{D05B40A6-15B6-46D0-ABC1-8F8CFC5D02E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D05B40A6-15B6-46D0-ABC1-8F8CFC5D02E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D05B40A6-15B6-46D0-ABC1-8F8CFC5D02E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20635909-6C6E-461C-9141-F5802AD3BEB1}.CodeContracts|Any CPU.ActiveCfg = Release|Any CPU
+		{20635909-6C6E-461C-9141-F5802AD3BEB1}.CodeContracts|Any CPU.Build.0 = Release|Any CPU
+		{20635909-6C6E-461C-9141-F5802AD3BEB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20635909-6C6E-461C-9141-F5802AD3BEB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20635909-6C6E-461C-9141-F5802AD3BEB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20635909-6C6E-461C-9141-F5802AD3BEB1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
