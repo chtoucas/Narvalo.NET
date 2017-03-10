@@ -120,24 +120,6 @@
   <data name="AbsoluteUriValidator_UriIsNotAbsolute_Format" xml:space="preserve">
     <value>The specified value '{0}' is not a well-formed absolute URI.</value>
   </data>
-  <data name="ArgumentOutOfRange" xml:space="preserve">
-    <value>The value of '{0}' is not in range [{1} - {2}].</value>
-  </data>
-  <data name="ArgumentOutOfRange_NotGreaterThan" xml:space="preserve">
-    <value>The value of '{0}' is not greater than '{1}'.</value>
-  </data>
-  <data name="ArgumentOutOfRange_NotGreaterThanOrEqualTo" xml:space="preserve">
-    <value>The value of '{0}' is not greater than or equal to '{1}'.</value>
-  </data>
-  <data name="ArgumentOutOfRange_NotLessThan" xml:space="preserve">
-    <value>The value of '{0}' is not less than '{1}'.</value>
-  </data>
-  <data name="ArgumentOutOfRange_NotLessThanOrEqualTo" xml:space="preserve">
-    <value>The value of '{0}' is not less than or equal to '{1}'.</value>
-  </data>
-  <data name="Argument_InvalidRange" xml:space="preserve">
-    <value>The value of the parameter 'minInclusive' ({0}) must be greater than or equal to value of the parameter 'maxInclusive' ({1}).</value>
-  </data>
   <data name="Configuration_MissingSection_Format" xml:space="preserve">
     <value>The &lt;{0}&gt; section is not defined in your config file!</value>
   </data>
@@ -152,8 +134,5 @@
   </data>
   <data name="SnvDataHelpers_InvalidRangeForNumericCode" xml:space="preserve">
     <value>The numeric code ({0}) MUST be strictly greater than 0 and strictly less than 1000.</value>
-  </data>
-  <data name="VoidOrBreak_BreakHasNoReason" xml:space="preserve">
-    <value>A successful outcome can not provide an error message. You must check the IsBreak value before accesssing this property.</value>
   </data>
 </root>

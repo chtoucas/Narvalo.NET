@@ -10,8 +10,7 @@ namespace Narvalo.Internal
     /// The exception that is thrown to signal a programming (fatal) error.
     /// </summary>
     [Serializable]
-    [SuppressMessage("Microsoft.Design", "CA1064:ExceptionsShouldBePublic",
-        Justification = "[Intentionally] This is an unrecoverable exception, thrown when a supposedly impossible situation happened.")]
+    [SuppressMessage("Microsoft.Design", "CA1064:ExceptionsShouldBePublic", Justification = "[Intentionally] This is an unrecoverable exception, thrown when a supposedly impossible situation happened.")]
     internal sealed class ProgrammingException : Exception
     {
         public ProgrammingException() { }

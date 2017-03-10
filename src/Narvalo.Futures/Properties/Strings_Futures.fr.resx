@@ -120,24 +120,6 @@
   <data name="AbsoluteUriValidator_UriIsNotAbsolute_Format" xml:space="preserve">
     <value>La chaîne '{0}' ne représente pas un URI absolu bien formé.</value>
   </data>
-  <data name="ArgumentOutOfRange" xml:space="preserve">
-    <value>La valeur de '{0}' n'est pas dans l'intervalle [{1} - {2}].</value>
-  </data>
-  <data name="ArgumentOutOfRange_NotGreaterThan" xml:space="preserve">
-    <value>La valeur de '{0}' n'est pas supérieure à '{1}'.</value>
-  </data>
-  <data name="ArgumentOutOfRange_NotGreaterThanOrEqualTo" xml:space="preserve">
-    <value>La valeur de '{0}' n'est pas supérieure ou égale à '{1}'.</value>
-  </data>
-  <data name="ArgumentOutOfRange_NotLessThan" xml:space="preserve">
-    <value>La valeur de '{0}' n'est pas inférieure à '{1}'.</value>
-  </data>
-  <data name="ArgumentOutOfRange_NotLessThanOrEqualTo" xml:space="preserve">
-    <value>La valeur de '{0}' n'est pas inférieure ou égale à '{1}'.</value>
-  </data>
-  <data name="Argument_InvalidRange" xml:space="preserve">
-    <value>La valeur du paramètre 'minInclusive' ({0}) doit être supérieure ou égale à celle du paramètre 'maxInclusive' ({1}).</value>
-  </data>
   <data name="Configuration_MissingSection_Format" xml:space="preserve">
     <value>La section &lt;{0}&gt; n'existe pas dans votre fichier de configuration !</value>
   </data>
@@ -152,8 +134,5 @@
   </data>
   <data name="SnvDataHelpers_InvalidRangeForNumericCode" xml:space="preserve">
     <value />
-  </data>
-  <data name="VoidOrBreak_BreakHasNoReason" xml:space="preserve">
-    <value>Seule une sortie en erreur peut fournir un message d'erreur. Vous devriez toujours vérifier au préalable la valeur de la propriété IsBreak.</value>
   </data>
 </root>

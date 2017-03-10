@@ -70,60 +70,6 @@ namespace Narvalo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The value of the parameter &apos;minInclusive&apos; ({0}) must be greater than or equal to value of the parameter &apos;maxInclusive&apos; ({1})..
-        /// </summary>
-        internal static string Argument_InvalidRange {
-            get {
-                return ResourceManager.GetString("Argument_InvalidRange", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The value of &apos;{0}&apos; is not in range [{1} - {2}]..
-        /// </summary>
-        internal static string ArgumentOutOfRange {
-            get {
-                return ResourceManager.GetString("ArgumentOutOfRange", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The value of &apos;{0}&apos; is not greater than &apos;{1}&apos;..
-        /// </summary>
-        internal static string ArgumentOutOfRange_NotGreaterThan {
-            get {
-                return ResourceManager.GetString("ArgumentOutOfRange_NotGreaterThan", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The value of &apos;{0}&apos; is not greater than or equal to &apos;{1}&apos;..
-        /// </summary>
-        internal static string ArgumentOutOfRange_NotGreaterThanOrEqualTo {
-            get {
-                return ResourceManager.GetString("ArgumentOutOfRange_NotGreaterThanOrEqualTo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The value of &apos;{0}&apos; is not less than &apos;{1}&apos;..
-        /// </summary>
-        internal static string ArgumentOutOfRange_NotLessThan {
-            get {
-                return ResourceManager.GetString("ArgumentOutOfRange_NotLessThan", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The value of &apos;{0}&apos; is not less than or equal to &apos;{1}&apos;..
-        /// </summary>
-        internal static string ArgumentOutOfRange_NotLessThanOrEqualTo {
-            get {
-                return ResourceManager.GetString("ArgumentOutOfRange_NotLessThanOrEqualTo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The &lt;{0}&gt; section is not defined in your config file!.
         /// </summary>
         internal static string Configuration_MissingSection_Format {
@@ -165,15 +111,6 @@ namespace Narvalo.Properties {
         internal static string SnvDataHelpers_InvalidRangeForNumericCode {
             get {
                 return ResourceManager.GetString("SnvDataHelpers_InvalidRangeForNumericCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A successful outcome can not provide an error message. You must check the IsBreak value before accesssing this property..
-        /// </summary>
-        internal static string VoidOrBreak_BreakHasNoReason {
-            get {
-                return ResourceManager.GetString("VoidOrBreak_BreakHasNoReason", resourceCulture);
             }
         }
     }

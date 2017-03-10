@@ -25,10 +25,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Applicative\StateObject`.cs" />
     <Compile Include="BinaryEncoder.cs" />
-    <Compile Include="Cerbere\ContractHelpers.cs" />
-    <Compile Include="Cerbere\Guard.cs" />
     <Compile Include="Configuration\AbsoluteUriValidator.cs" />
     <Compile Include="Configuration\AbsoluteUriValidatorAttribute.cs" />
     <Compile Include="Configuration\Appender`2.cs" />
@@ -36,7 +33,6 @@
     <Compile Include="Configuration\SectionManager.cs" />
     <Compile Include="Configuration\Setter`2.cs" />
     <Compile Include="DecimalCalculator.cs" />
-    <Compile Include="DivCollection`1.cs" />
     <Compile Include="Finance\Allocators\Distribution.cs" />
     <Compile Include="Finance\Allocators\BiasAllocation.cs" />
     <Compile Include="Finance\CheckDigits.cs" />
@@ -70,12 +66,6 @@
     <Compile Include="Formattable.cs" />
     <Compile Include="Globalization\CountryISOCode.cs" />
     <Compile Include="Globalization\RegionInfo%24.cs" />
-    <Compile Include="Cerbere\Guard.g.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Guard.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Internal\Failure.cs" />
     <Compile Include="Internal\ProgrammingException.cs" />
     <Compile Include="IO\ConcurrentFileFinder.cs" />
     <Compile Include="IO\DirectoryWalker.cs" />
@@ -94,7 +84,6 @@
     </Compile>
     <Compile Include="StringManip.cs" />
     <Compile Include="UrlFormatProvider.cs" />
-    <Compile Include="Cerbere\Warrant.cs" />
     <Compile Include="Web\Semantic\IOpenGraphMetadata.cs" />
     <Compile Include="Web\Semantic\Ontology.cs" />
     <Compile Include="Web\Semantic\OpenGraphImage.cs" />
@@ -147,10 +136,6 @@
     <Content Include="Finance\SnvCurrencyInfoProvider.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SnvCurrencyInfoProvider.g.cs</LastGenOutput>
-    </Content>
-    <Content Include="Cerbere\Guard.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Guard.g.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup />
