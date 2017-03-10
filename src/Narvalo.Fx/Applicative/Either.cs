@@ -26,7 +26,7 @@ namespace Narvalo.Applicative
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));
 
-            return @this.BindLeft(_ => Either<TResult, TRight>.OfLeft(selector(_)));
+            return @this.BindLeft(val => Either<TResult, TRight>.OfLeft(selector(val)));
         }
 
         public static Either<TLeft, TResult> SelectRight<TLeft, TRight, TResult>(
@@ -36,7 +36,7 @@ namespace Narvalo.Applicative
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));
 
-            return @this.BindRight(_ => Either<TLeft, TResult>.OfRight(selector(_)));
+            return @this.BindRight(val => Either<TLeft, TResult>.OfRight(selector(val)));
         }
     }
 }

@@ -45,7 +45,7 @@ namespace Narvalo.Applicative
         public static Stateful<Unit, TState> Modify<TState>(Func<TState, TState> func)
             => state => (Unit.Default, func(state));
 
-        public static Stateful<TResult, TState> Gets<TState, TResult>(Func<TState, TResult> func)
+        public static Stateful<T, TState> Gets<T, TState>(Func<TState, T> func)
             => state => (func(state), state);
     }
 }

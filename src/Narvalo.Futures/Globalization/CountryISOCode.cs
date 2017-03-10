@@ -406,9 +406,9 @@ namespace Narvalo.Globalization
         // FIXME: Use .ToDictionary(_ => _.Value, _ => _.Key);
         // since key and values are unique.
         private static ILookup<string, string> InitializeNumericToAlpha2()
-            => Alpha2ToNumeric.ToLookup(_ => _.Value, _ => _.Key);
+            => Alpha2ToNumeric.ToLookup(pair => pair.Value, _ => _.Key);
 
         private static ILookup<string, string> InitializeAlpha3ToAlpha2()
-            => s_Alpha2ToAlpha3.ToLookup(_ => _.Value, _ => _.Key);
+            => s_Alpha2ToAlpha3.ToLookup(pair => pair.Value, _ => _.Key);
     }
 }

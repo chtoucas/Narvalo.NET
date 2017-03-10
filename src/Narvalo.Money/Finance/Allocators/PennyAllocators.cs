@@ -30,7 +30,7 @@ namespace Narvalo.Finance.Allocators
 
             var cy = penny.Currency;
 
-            return from _ in Number.DivideEvenly(penny.Amount, count) select new Moneypenny(_, cy);
+            return from amount in Number.DivideEvenly(penny.Amount, count) select new Moneypenny(amount, cy);
         }
 
         //public static IEnumerable<Moneypenny> Allocate(Moneypenny penny, RatioArray ratios)

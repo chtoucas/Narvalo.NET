@@ -22,7 +22,7 @@ namespace Narvalo.Web
 
             binder.Bind(context.Request)
                 .Do(
-                    onSome: _ => ProcessRequestCore(context, _),
+                    onSome: q => ProcessRequestCore(context, q),
                     onNone: () => ProcessBindingFailure(context, binder));
         }
 

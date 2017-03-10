@@ -17,11 +17,11 @@ namespace Narvalo.Xml
         {
             Require.NotNull(selector, nameof(selector));
 
-            return from _ in @this select selector.Invoke(_.Value);
+            return from elmt in @this select selector.Invoke(elmt.Value);
         }
 
         public static Maybe<string> ValueOrNone(this Maybe<XElement> @this)
-            => from _ in @this select _.Value;
+            => from elmt in @this select elmt.Value;
     }
 
     // Extensions methods for Maybe<XAttribute>.
@@ -31,10 +31,10 @@ namespace Narvalo.Xml
         {
             Require.NotNull(selector, nameof(selector));
 
-            return from _ in @this select selector.Invoke(_.Value);
+            return from attr in @this select selector.Invoke(attr.Value);
         }
 
         public static Maybe<string> ValueOrNone(this Maybe<XAttribute> @this)
-            => from _ in @this select _.Value;
+            => from attr in @this select attr.Value;
     }
 }

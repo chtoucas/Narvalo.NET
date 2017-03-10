@@ -176,7 +176,8 @@ namespace Narvalo.Finance
 
             public static string FromBic(string value)
             {
-                Debug.Assert(value != null && (value.Length == StartIndex || value.Length >= StartIndex + Length));
+                Debug.Assert(value != null);
+                Debug.Assert(value.Length == StartIndex || value.Length >= StartIndex + Length);
 
                 if (value.Length == PartyLength)
                 {

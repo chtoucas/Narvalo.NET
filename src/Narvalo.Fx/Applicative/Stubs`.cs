@@ -28,7 +28,7 @@ namespace Narvalo.Applicative
         private static readonly Func<TSource> s_AlwaysDefault = () => default(TSource);
         private static readonly Func<TSource, bool> s_AlwaysFalse = _ => false;
         private static readonly Func<TSource, bool> s_AlwaysTrue = _ => true;
-        private static readonly Func<TSource, TSource> s_Identity = _ => _;
+        private static readonly Func<TSource, TSource> s_Identity = val => val;
         private static readonly Action<TSource> s_Ignore = _ => { };
 
         /// <summary>

@@ -9,6 +9,7 @@ namespace Narvalo
         // for detailed explanations, see "Effective Java" by Joshua Bloch.
         // In https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Tuple.cs, we have:
         // > (((h1 << 5) + h1) ^ h2)
+        // See also https://github.com/ASP-NET-MVC/aspnetwebstack/blob/master/src/Common/HashCodeCombiner.cs
         // REVIEW: It seems that in the near future .NET will have a built-in utility for that.
         // There is already
         // https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Numerics/Hashing/HashHelpers.cs

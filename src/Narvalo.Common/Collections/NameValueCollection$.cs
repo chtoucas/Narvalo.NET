@@ -31,14 +31,14 @@ namespace Narvalo.Collections
         public static IEnumerable<T> ParseAny<T>(
             this NameValueCollection @this,
             string name,
-            Func<string, Maybe<T>> parserM)
-            => (from @_ in @this.MayGetValues(name) select @_.SelectAny(parserM))
+            Func<string, Maybe<T>> parser)
+            => (from vals in @this.MayGetValues(name) select vals.SelectAny(parser))
                 .ValueOrElse(Enumerable.Empty<T>());
 
         public static Maybe<IEnumerable<T>> MayParseAll<T>(
             this NameValueCollection @this,
             string name,
-            Func<string, Maybe<T>> parserM)
-            => @this.MayGetValues(name).Bind(@_ => @_.SelectWith(parserM));
+            Func<string, Maybe<T>> parser)
+            => @this.MayGetValues(name).Bind(val => val.SelectWith(parser));
     }
 }

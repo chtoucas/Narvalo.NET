@@ -133,7 +133,7 @@ namespace Narvalo.Applicative
         /// <remarks>
         /// This method can be derived from Unfold:
         /// <code>
-        /// Sequence.Unfold(seed, _ => Iteration.Create(resultSelector(_), iterator(_)));
+        /// Sequence.Unfold(seed, _ => (resultSelector(_), iterator(_)));
         /// </code>
         /// </remarks>
         public static IEnumerable<TResult> Gather<TSource, TResult>(
@@ -150,7 +150,7 @@ namespace Narvalo.Applicative
         /// <remarks>
         /// This method can be derived from Unfold:
         /// <code>
-        /// Sequence.Unfold(seed, _ => Iteration.Create(resultSelector(_), iterator(_)), predicate);
+        /// Sequence.Unfold(seed, _ => (resultSelector(_), iterator(_)), predicate);
         /// </code>
         /// </remarks>
         public static IEnumerable<TResult> Gather<TSource, TResult>(

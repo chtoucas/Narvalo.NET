@@ -21,7 +21,7 @@ namespace Narvalo
         public static decimal Round(Money money) => RoundImpl(money, Math.Round);
 
         public static decimal Round(Money money, MidpointRounding mode)
-            => RoundImpl(money, _ => Math.Round(_, mode));
+            => RoundImpl(money, amount => Math.Round(amount, mode));
 
         public static decimal Round(Money money, int decimalPlaces)
             => Round(money, decimalPlaces, MidpointRounding.ToEven);
@@ -40,7 +40,7 @@ namespace Narvalo
         public static decimal Round(Money money, IRoundingAdjuster adjuster)
         {
             Require.NotNull(adjuster, nameof(adjuster));
-            return RoundImpl(money, _ => adjuster.Round(_));
+            return RoundImpl(money, amount => adjuster.Round(amount));
         }
 
         public static decimal Round(Money money, int decimalPlaces, IRoundingAdjuster adjuster)

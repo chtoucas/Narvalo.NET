@@ -431,7 +431,7 @@ namespace Narvalo
                 // NB: This manip has nothing to do with thread-safety, it is only done for
                 // correctness. If Add() fails, the method behaves as advertised - it does not
                 // change the registry.
-                var tmpCopy = s_UserCodes.ToDictionary(_ => _.Key, _ => _.Value);
+                var tmpCopy = s_UserCodes.ToDictionary(pair => pair.Key, pair => pair.Value);
                 foreach (var pair in currencies)
                 {
                     if (tmpCopy.ContainsKey(pair.Key)) { return false; }
