@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(RepositorySettingsDir)FrameworkProfiles.props" />
+
+  <PropertyGroup>
+    <NuId>Narvalo.Finance</NuId>
+    <NuDescription>
+      <![CDATA[
+Currency (ISO 4217) and Money types (w/ or w/o rounding, "fast" money).
+      ]]>
+    </NuDescription>
+    <NuTags>Currency, Money, Rounding, Allocation, BIC, IBAN</NuTags>
+
+    <NuReferences>
+      <![CDATA[
+      <references>
+        <reference file="Narvalo.Money.dll" />
+      </references>
+      ]]>
+    </NuReferences>
+
+    <NuFiles>
+      <![CDATA[
+<file src="Narvalo.Money.dll" target="lib\$(Profile259)\" />
+<file src="Narvalo.Money.pdb" target="lib\$(Profile259)\" />
+<file src="Narvalo.Money.xml" target="lib\$(Profile259)\" />
+<file src="fr\Narvalo.Money.resources.dll" target="lib\$(Profile259)\fr\" />
+<file src="Narvalo.Money.dll" target="lib\$(NetStandard10)\" />
+<file src="Narvalo.Money.pdb" target="lib\$(NetStandard10)\" />
+<file src="Narvalo.Money.xml" target="lib\$(NetStandard10)\" />
+<file src="fr\Narvalo.Money.resources.dll" target="lib\$(NetStandard10)\fr\" />
+      ]]>
+    </NuFiles>
+  </PropertyGroup>
+</Project>
