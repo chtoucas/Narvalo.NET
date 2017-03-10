@@ -5,7 +5,6 @@ namespace Narvalo.Data
     using System;
     using System.Data;
     using System.Data.SqlClient;
-    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// Provides extension methods for <see cref="SqlParameterCollection"/>.
@@ -20,16 +19,6 @@ namespace Narvalo.Data
         {
             Require.NotNull(@this, nameof(@this));
 
-            @this.AddParameterUnchecked(parameterName, parameterType, value);
-        }
-
-        [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0", Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static void AddParameterUnchecked(
-            this SqlParameterCollection @this,
-            string parameterName,
-            SqlDbType parameterType,
-            object value)
-        {
             var parameter = @this.Add(parameterName, parameterType);
 
             parameter.Value = value;
@@ -44,17 +33,6 @@ namespace Narvalo.Data
         {
             Require.NotNull(@this, nameof(@this));
 
-            @this.AddParameterOrNullUnchecked(parameterName, parameterType, value);
-        }
-
-        [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0", Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static void AddParameterOrNullUnchecked<T>(
-            this SqlParameterCollection @this,
-            string parameterName,
-            SqlDbType parameterType,
-            T? value)
-            where T : struct
-        {
             var parameter = @this.Add(parameterName, parameterType);
 
             if (value.HasValue)
@@ -76,18 +54,16 @@ namespace Narvalo.Data
         {
             Require.NotNull(@this, nameof(@this));
 
-            @this.AddParameterOrNullUnchecked(parameterName, parameterType, value, value != null);
-        }
+            var parameter = @this.Add(parameterName, parameterType);
 
-        [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0", Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static void AddParameterOrNullUnchecked<T>(
-            this SqlParameterCollection @this,
-            string parameterName,
-            SqlDbType parameterType,
-            T value)
-            where T : class
-        {
-            @this.AddParameterOrNullUnchecked(parameterName, parameterType, value, value != null);
+            if (value != null)
+            {
+                parameter.Value = value;
+            }
+            else
+            {
+                parameter.Value = DBNull.Value;
+            }
         }
 
         public static void AddParameterOrNull<T>(
@@ -99,17 +75,6 @@ namespace Narvalo.Data
         {
             Require.NotNull(@this, nameof(@this));
 
-            @this.AddParameterOrNullUnchecked(parameterName, parameterType, value, condition);
-        }
-
-        [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0", Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static void AddParameterOrNullUnchecked<T>(
-            this SqlParameterCollection @this,
-            string parameterName,
-            SqlDbType parameterType,
-            T value,
-            bool condition)
-        {
             var parameter = @this.Add(parameterName, parameterType);
 
             if (condition)

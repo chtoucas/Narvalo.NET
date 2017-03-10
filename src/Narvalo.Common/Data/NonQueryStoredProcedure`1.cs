@@ -54,10 +54,8 @@ namespace Narvalo.Data
 
             try
             {
-                tmpCmd = new SqlCommand(Name, connection)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
+                tmpCmd = new SqlCommand(Name, connection);
+                tmpCmd.CommandType = CommandType.StoredProcedure;
 
                 cmd = tmpCmd;
                 tmpCmd = null;
