@@ -2,8 +2,8 @@
 
 namespace Narvalo.Globalization
 {
-    using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Globalization;
     using System.Threading;
 
@@ -51,13 +51,13 @@ namespace Narvalo.Globalization
         /// </summary>
         public static NumberFormatInfo Copy(this NumberFormatInfo @this)
         {
-            Demand.NotNull(@this);
+            Debug.Assert(@this != null);
             return (NumberFormatInfo)@this.Clone();
         }
 
         public static void KeepOrAddCurrencySpacing(this NumberFormatInfo @this)
         {
-            Demand.NotNull(@this);
+            Debug.Assert(@this != null);
 
             // If there is no space between the amount and the currency symbol, add one.
             if (!@this.CurrencyPositivePatternContainsSpace())
@@ -74,7 +74,7 @@ namespace Narvalo.Globalization
 
         public static void RemoveCurrencySpacing(this NumberFormatInfo @this)
         {
-            Demand.NotNull(@this);
+            Debug.Assert(@this != null);
 
             // If there is a space between the amount and the currency symbol, remove it.
             if (@this.CurrencyPositivePatternContainsSpace())
@@ -89,13 +89,13 @@ namespace Narvalo.Globalization
 
         private static bool CurrencyPositivePatternContainsSpace(this NumberFormatInfo @this)
         {
-            Demand.NotNull(@this);
+            Debug.Assert(@this != null);
             return @this.CurrencyPositivePattern >= 2;
         }
 
         private static bool CurrencyNegativePatternContainsSpace(this NumberFormatInfo @this)
         {
-            Demand.NotNull(@this);
+            Debug.Assert(@this != null);
             return @this.CurrencyNegativePattern >= 8;
         }
     }

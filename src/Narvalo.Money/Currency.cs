@@ -4,6 +4,7 @@ namespace Narvalo
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Linq;
@@ -49,12 +50,12 @@ namespace Narvalo
         /// minor units, use null instead.</param>
         internal Currency(string code, short? minorUnits)
         {
-            Demand.NotNull(code);
+            Debug.Assert(code != null);
             // A currency code MUST be composed of exactly 3 letters.
-            Demand.Range(code.Length == 3);
+            Debug.Assert(code.Length == 3);
             // A currency code MUST only contain uppercase ASCII letters.
-            Demand.True(Ascii.IsUpperLetter(code));
-            Demand.True(!minorUnits.HasValue || minorUnits >= 0);
+            Debug.Assert(Ascii.IsUpperLetter(code));
+            Debug.Assert(!minorUnits.HasValue || minorUnits >= 0);
 
             Code = code;
             MinorUnits = minorUnits;
@@ -176,17 +177,9 @@ namespace Narvalo
         /// <exception cref="InvalidOperationException">Thrown if the currency has no minor
         /// currency unit.</exception>
         public FractionalCurrency MinorCurrency
-        {
-            get
-            {
-                if (!HasMinorCurrency)
-                {
-                    throw new InvalidOperationException("XXX");
-                }
-
-                return new FractionalCurrency(this, Epsilon, MinorCurrencyCode);
-            }
-        }
+            => HasMinorCurrency
+            ? new FractionalCurrency(this, Epsilon, MinorCurrencyCode)
+            : throw new InvalidOperationException("XXX");
 
         // If the currency admits a minor currency unit, we obtain its code by "lowercasing"
         // the last character of its code: "EUR" -> "EUr". This convention is not officially
@@ -197,7 +190,7 @@ namespace Narvalo
         {
             get
             {
-                Demand.True(HasMinorCurrency);
+                Debug.Assert(HasMinorCurrency);
                 return Code[0] + Code[1] + (Code[3] | 0x20).ToString(CultureInfo.InvariantCulture);
             }
         }

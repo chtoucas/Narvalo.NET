@@ -3,6 +3,7 @@
 namespace Narvalo.Internal
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
 
     using Narvalo.Finance.Allocators;
 
@@ -13,7 +14,7 @@ namespace Narvalo.Internal
         // > int q = Math.DivRem(dividend, divisor, out remainder);
         public static int DivRem(int dividend, int divisor, out int remainder)
         {
-            Demand.True(divisor != 0);
+            Debug.Assert(divisor != 0);
 
             int q = dividend / divisor;
             // NB: remainder = dividend % divisor is slower.
@@ -23,7 +24,7 @@ namespace Narvalo.Internal
 
         public static long DivRem(long dividend, long divisor, out long remainder)
         {
-            Demand.True(divisor != 0);
+            Debug.Assert(divisor != 0);
 
             long q = dividend / divisor;
             // NB: remainder = dividend % divisor is slower.
@@ -33,8 +34,7 @@ namespace Narvalo.Internal
 
         public static Allocation<int> Allocate(int value, int count)
         {
-            int rem;
-            int q = DivRem(value, count, out rem);
+            int q = DivRem(value, count, out int rem);
 
             //var seq = Enumerable.Repeat(q, count);
 
@@ -43,8 +43,7 @@ namespace Narvalo.Internal
 
         public static Allocation<long> Allocate(long value, int count)
         {
-            long rem;
-            long q = DivRem(value, count, out rem);
+            long q = DivRem(value, count, out long rem);
 
             //var seq = Enumerable.Repeat(q, count);
 
@@ -56,10 +55,9 @@ namespace Narvalo.Internal
         // First returns the high value r times, then the low value n - r times.
         public static IEnumerable<int> DivideEvenly(int value, int count)
         {
-            Demand.Range(count > 1);
+            Debug.Assert(count > 1);
 
-            int rem;
-            int q = DivRem(value, count, out rem);
+            int q = DivRem(value, count, out int rem);
             int h = q + 1;
 
             for (var i = 0; i < count; i++)
@@ -70,10 +68,9 @@ namespace Narvalo.Internal
 
         public static IEnumerable<long> DivideEvenly(long value, int count)
         {
-            Demand.Range(count > 1);
+            Debug.Assert(count > 1);
 
-            long rem;
-            long q = DivRem(value, count, out rem);
+            long q = DivRem(value, count, out long rem);
             long h = q + 1;
 
             for (var i = 0; i < count; i++)

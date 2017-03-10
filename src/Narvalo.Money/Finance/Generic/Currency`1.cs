@@ -3,6 +3,7 @@
 namespace Narvalo.Finance.Generic
 {
     using System;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
 
@@ -13,7 +14,7 @@ namespace Narvalo.Finance.Generic
     {
         internal Currency(short? minorUnits)
         {
-            Demand.True(!minorUnits.HasValue || minorUnits >= 0);
+            Debug.Assert(!minorUnits.HasValue || minorUnits >= 0);
 
             MinorUnits = minorUnits;
         }

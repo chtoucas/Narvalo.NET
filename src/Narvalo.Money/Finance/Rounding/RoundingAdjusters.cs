@@ -89,7 +89,7 @@ namespace Narvalo.Finance.Rounding
                 case RoundingMode.HalfTowardsZero: return HalfTowardsZero(value, decimalPlaces);
                 case RoundingMode.ToOdd: return ToOdd(value, decimalPlaces);
 
-                default: throw Check.Unreachable("XXX");
+                default: throw new ControlFlowException("XXX");
             }
         }
 
@@ -116,7 +116,7 @@ namespace Narvalo.Finance.Rounding
                 case RoundingMode.HalfTowardsZero: return HalfTowardsZero(value);
                 case RoundingMode.ToOdd: return ToOdd(value);
 
-                default: throw Check.Unreachable("XXX");
+                default: throw new ControlFlowException("XXX");
             }
         }
 

@@ -384,7 +384,7 @@ namespace Narvalo
 
         private string FormatImpl(string format, NumberFormatInfo info)
         {
-            Demand.NotNull(info);
+            Debug.Assert(info != null);
 
             var spec = MoneyFormat.Parse(format, Currency.FixedDecimalPlaces);
 

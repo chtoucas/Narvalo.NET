@@ -4,6 +4,7 @@ namespace Narvalo.Globalization
 {
     using System;
     using System.Globalization;
+    using System.Diagnostics;
 
     using Narvalo.Properties;
 
@@ -93,7 +94,7 @@ namespace Narvalo.Globalization
             NumberFormatInfo nfi)
             where TAmount : IFormattable
         {
-            Demand.NotNull(nfi);
+            Debug.Assert(nfi != null);
 
             var format = 'N' + spec.DecimalPlaces?.ToString(CultureInfo.InvariantCulture);
 

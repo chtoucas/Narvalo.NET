@@ -2,6 +2,7 @@
 
 namespace Narvalo.Internal
 {
+    using System.Diagnostics;
     using System.Globalization;
 
     // Used to share methods/data between Currency and CurrencyUnit<TCurrency>.
@@ -17,14 +18,14 @@ namespace Narvalo.Internal
 
         public static bool IsMetaCurrency(string code)
         {
-            Demand.NotNullOrEmpty(code);
+            Debug.Assert(code != null && code.Length > 0);
 
             return code[0] == META_CURRENCY_MARK;
         }
 
         public static bool IsPseudoCurrency(string code, short? minorUnits)
         {
-            Demand.NotNullOrEmpty(code);
+            Debug.Assert(code != null && code.Length > 0);
 
             // A pseudo currency is a meta-currency which is not a regional currency.
             // Among meta-currencies, regional currencies are the only one that do have

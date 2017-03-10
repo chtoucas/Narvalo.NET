@@ -4,6 +4,7 @@ namespace Narvalo
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
 
     using Narvalo.Internal;
     using Narvalo.Finance.Rounding;
@@ -458,7 +459,8 @@ namespace Narvalo
     {
         private static decimal RoundImpl(Money money, Func<decimal, decimal> func)
         {
-            Demand.NotNull(func);
+            Debug.Assert(func != null);
+
             // If the amount is already rounded to 0, do nothing.
             if (money.IsRounded && money.Currency.DecimalPlaces == 0) { return money.Amount; }
             return func(money.Amount);

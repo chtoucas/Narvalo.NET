@@ -3,6 +3,7 @@
 namespace Narvalo.Finance.Allocators
 {
     using System;
+    using System.Diagnostics;
     using System.Linq;
 
     public partial struct RatioArray : IEquatable<RatioArray>
@@ -11,7 +12,7 @@ namespace Narvalo.Finance.Allocators
 
         private RatioArray(decimal[] ratios)
         {
-            Demand.NotNull(ratios);
+            Debug.Assert(ratios != null);
 
             _ratios = ratios;
         }
