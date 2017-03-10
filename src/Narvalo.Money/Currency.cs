@@ -20,7 +20,7 @@ namespace Narvalo
     /// <para>Recognized currencies are defined in ISO 4217.</para>
     /// <para>Only decimal currencies are supported.</para>
     /// <para>You can not directly construct a currency. You must instead use one of the
-    /// static factories, eg <see cref="Currency.Of(string)"/>.</para>
+    /// static factories, eg <see cref="Currency.Of(String)"/>.</para>
     /// <para>This class does not offer extended information about the currency.</para>
     /// </remarks>
     public partial struct Currency : Internal.ICurrencyUnit, IEquatable<Currency>
@@ -216,7 +216,7 @@ namespace Narvalo
         /// <exception cref="CurrencyNotFoundException">Thrown if no currency exists for the
         /// specified code.</exception>
         /// <returns>The currency for the specified code.</returns>
-        /// <seealso cref="TryCreate(string)"/>
+        /// <seealso cref="TryCreate(String)"/>
         public static Currency Of(string code)
         {
             Require.NotNull(code, nameof(code));
@@ -229,7 +229,7 @@ namespace Narvalo
             return new Currency(code, minorUnits);
         }
 
-        /// <seealso cref="TryCreate(string, CurrencyTypes)"/>
+        /// <seealso cref="TryCreate(String, CurrencyTypes)"/>
         public static Currency Of(string code, CurrencyTypes types)
         {
             Currency? cy = TryCreate(code, types);
@@ -337,7 +337,7 @@ namespace Narvalo
         /// type. In particular, they inherit the <see cref="CurrencyTypes.Circulating"/> type; as a
         /// consequence, you can not register a withdrawn currency.</para>
         /// <para>If you have more than one currency to register, you should use
-        /// <see cref="RegisterCurrencies(Dictionary{string, short?})"/> instead.</para>
+        /// <see cref="RegisterCurrencies(Dictionary{String, Int16?})"/> instead.</para>
         /// <para>This method is thread-safe.</para>
         /// </remarks>
         /// <param name="code">The three letters code.</param>
@@ -386,7 +386,7 @@ namespace Narvalo
         /// </summary>
         /// <remarks>
         /// <para>For explanations on when and how to use this method, please see
-        /// <see cref="RegisterCurrency(string, short?)"/>.</para>
+        /// <see cref="RegisterCurrency(String, Int16?)"/>.</para>
         /// <para>This method is thread-safe and ensures that the registry is not modified
         /// if anything goes wrong.</para>
         /// </remarks>

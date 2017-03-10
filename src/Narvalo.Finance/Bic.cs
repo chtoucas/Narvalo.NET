@@ -140,8 +140,7 @@ namespace Narvalo.Finance
             return new Bic(institutionCode, countryCode, locationCode, branchCode, value);
         }
 
-        public static Outcome<Bic> TryParse(string value)
-            => TryParse(value, BicVersion.Default);
+        public static Outcome<Bic> TryParse(string value) => TryParse(value, BicVersion.Default);
 
         public static Outcome<Bic> TryParse(string value, BicVersion version)
         {

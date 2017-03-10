@@ -65,8 +65,7 @@ namespace Narvalo
         [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "2#", Justification = "[Intentionally] Math.DivRem().")]
         public static Moneypenny DivRem(Moneypenny dividend, long divisor, out Moneypenny remainder)
         {
-            long rem;
-            long q = Number.DivRem(dividend.Amount, divisor, out rem);
+            long q = Number.DivRem(dividend.Amount, divisor, out long rem);
             remainder = new Moneypenny(rem, dividend.Currency);
             return new Moneypenny(q, dividend.Currency);
         }

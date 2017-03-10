@@ -224,8 +224,8 @@ namespace Narvalo
         {
             if (formatProvider != null)
             {
-                var fmtr = formatProvider.GetFormat(typeof(Moneypenny)) as ICustomFormatter;
-                if (fmtr != null) { return fmtr.Format(format, this, formatProvider); }
+                object fmt = formatProvider.GetFormat(typeof(Moneypenny));
+                if (fmt is ICustomFormatter fmtr) { return fmtr.Format(format, this, formatProvider); }
             }
 
             return FormatImpl(format, NumberFormatInfo.GetInstance(formatProvider));

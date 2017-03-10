@@ -48,12 +48,11 @@ namespace Narvalo
             {
                 // The user wishes to use a custom number of decimal places.
                 // format = Ann
-                int decimalPlaces;
                 bool succeed = Int32.TryParse(
                     format.Substring(1),
                     NumberStyles.Integer,
                     CultureInfo.InvariantCulture,
-                    out decimalPlaces);
+                    out int decimalPlaces);
 
                 if (!succeed) { throw new FormatException("XXX"); }
 
