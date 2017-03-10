@@ -31,19 +31,5 @@ Provides various utilities and extension methods: Range type, Int64 encoders, ex
 <file src="fr\Narvalo.Core.resources.dll" target="lib\$(NetStandard10)\fr\" />
       ]]>
     </NuFiles>
-    <NuFiles Condition=" '$(SkipCodeContractsReferenceAssembly)' != 'true' ">
-      <![CDATA[
-$(NuFiles)
-<file src="CodeContracts\Narvalo.Core.Contracts.dll" target="lib\$(Profile259)\CodeContracts\" />
-<file src="CodeContracts\Narvalo.Core.Contracts.dll" target="lib\$(NetStandard10)\CodeContracts\" />
-      ]]>
-    </NuFiles>
-    <NuFiles Condition=" '$(CodeContractsEmitXMLDocs)' == 'true' ">
-      <![CDATA[
-$(NuFiles)
-<file src="CodeContracts\Narvalo.Core.Contracts.xml" target="lib\$(Profile259)\CodeContracts\" />
-<file src="CodeContracts\Narvalo.Core.Contracts.xml" target="lib\$(NetStandard10)\CodeContracts\" />
-      ]]>
-    </NuFiles>
   </PropertyGroup>
 </Project>

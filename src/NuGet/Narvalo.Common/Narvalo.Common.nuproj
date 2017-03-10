@@ -36,17 +36,5 @@ Provides various utilities and extension methods: directory walker, extension me
 <file src="fr\Narvalo.Common.resources.dll" target="lib\net45\fr\" />
       ]]>
     </NuFiles>
-    <NuFiles Condition=" '$(SkipCodeContractsReferenceAssembly)' != 'true' ">
-      <![CDATA[
-$(NuFiles)
-<file src="CodeContracts\Narvalo.Common.Contracts.dll" target="lib\net45\CodeContracts\" />
-      ]]>
-    </NuFiles>
-    <NuFiles Condition=" '$(CodeContractsEmitXMLDocs)' == 'true' ">
-      <![CDATA[
-$(NuFiles)
-<file src="CodeContracts\Narvalo.Common.Contracts.xml" target="lib\net45\CodeContracts\" />
-      ]]>
-    </NuFiles>
   </PropertyGroup>
 </Project>

@@ -31,19 +31,5 @@ Provides various financial utilities: Currency (ISO 4217), Money types (w/ or w/
 <file src="fr\Narvalo.Finance.resources.dll" target="lib\$(NetStandard10)\fr\" />
       ]]>
     </NuFiles>
-    <NuFiles Condition=" '$(SkipCodeContractsReferenceAssembly)' != 'true' ">
-      <![CDATA[
-$(NuFiles)
-<file src="CodeContracts\Narvalo.Finance.Contracts.dll" target="lib\$(Profile259)\CodeContracts\" />
-<file src="CodeContracts\Narvalo.Finance.Contracts.dll" target="lib\$(NetStandard10)\CodeContracts\" />
-      ]]>
-    </NuFiles>
-    <NuFiles Condition=" '$(CodeContractsEmitXMLDocs)' == 'true' ">
-      <![CDATA[
-$(NuFiles)
-<file src="CodeContracts\Narvalo.Finance.Contracts.xml" target="lib\$(Profile259)\CodeContracts\" />
-<file src="CodeContracts\Narvalo.Finance.Contracts.xml" target="lib\$(NetStandard10)\CodeContracts\" />
-      ]]>
-    </NuFiles>
   </PropertyGroup>
 </Project>

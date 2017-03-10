@@ -36,18 +36,5 @@ Provides types that might prove useful for Web development: generic HttpHandler 
 <file src="fr\Narvalo.Web.resources.dll" target="lib\net45\fr\" />
       ]]>
     </NuFiles>
-    <NuFiles Condition=" '$(SkipCodeContractsReferenceAssembly)' != 'true' ">
-      <![CDATA[
-$(NuFiles)
-<file src="CodeContracts\Narvalo.Web.Contracts.dll" target="lib\net45\CodeContracts\" />
-      ]]>
-    </NuFiles>
-    <NuFiles Condition=" '$(CodeContractsEmitXMLDocs)' == 'true' ">
-      <![CDATA[
-$(NuFiles)
-<file src="CodeContracts\Narvalo.Web.Contracts.xml" target="lib\net45\CodeContracts\" />
-      ]]>
-    </NuFiles>
-
   </PropertyGroup>
 </Project>
