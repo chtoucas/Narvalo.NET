@@ -10,7 +10,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Demand = global::Narvalo.Demand;
 using Require = global::Narvalo.Require;
 using _Unit_ = global::Narvalo.Applicative.Unit;
 
@@ -18,6 +17,7 @@ namespace Edufun.Haskell.Templates
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
 
     using Edufun.Haskell.Templates.Internal;
@@ -413,10 +413,10 @@ namespace Edufun.Haskell.Templates
             Func<TInner, TKey> innerKeySelector,
             IEqualityComparer<TKey> comparer)
         {
-            Demand.NotNull("inner");
-            Demand.NotNull(outerKeySelector);
-            Demand.NotNull(innerKeySelector);
-            Demand.NotNull(comparer);
+            Debug.Assert(inner != null);
+            Debug.Assert(outerKeySelector != null);
+            Debug.Assert(innerKeySelector != null);
+            Debug.Assert(comparer != null);
 
             return arg => inner.Select(innerKeySelector)
                 .Where(key => comparer.Equals(key, outerKeySelector(arg)));
@@ -489,6 +489,7 @@ namespace Edufun.Haskell.Templates
 namespace Edufun.Haskell.Templates.Internal
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
@@ -510,7 +511,7 @@ namespace Edufun.Haskell.Templates.Internal
 
         private static IEnumerable<TSource> CollectIterator<TSource>(IEnumerable<MonadOr<TSource>> source)
         {
-            Demand.NotNull(source);
+            Debug.Assert(source != null);
 
             var item = default(TSource);
 
@@ -538,7 +539,7 @@ namespace Edufun.Haskell.Templates.Internal
         internal static MonadOr<TSource> SumImpl<TSource>(
             this IEnumerable<MonadOr<TSource>> @this)
         {
-            Demand.NotNull(@this);
+            Debug.Assert(@this != null);
             return @this.Aggregate(MonadOr<TSource>.None, (m, n) => m.OrElse(n));
         }
     }
@@ -607,6 +608,7 @@ namespace Edufun.Haskell.Templates.Internal
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
@@ -622,8 +624,8 @@ namespace Edufun.Haskell.Templates.Internal
             this IEnumerable<TSource> @this,
             Func<TSource, MonadOr<TResult>> selector)
         {
-            Demand.NotNull(@this);
-            Demand.NotNull(selector);
+            Debug.Assert(@this != null);
+            Debug.Assert(selector != null);
 
             return @this.Select(selector).Collect();
         }
@@ -643,8 +645,8 @@ namespace Edufun.Haskell.Templates.Internal
             IEnumerable<TSource> source,
             Func<TSource, MonadOr<bool>> predicate)
         {
-            Demand.NotNull(source);
-            Demand.NotNull(predicate);
+            Debug.Assert(source != null);
+            Debug.Assert(predicate != null);
 
             using (var iter = source.GetEnumerator())
             {
@@ -671,9 +673,9 @@ namespace Edufun.Haskell.Templates.Internal
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, MonadOr<TResult>> resultSelector)
         {
-            Demand.NotNull(resultSelector);
-            Demand.NotNull(@this);
-            Demand.NotNull(second);
+            Debug.Assert(resultSelector != null);
+            Debug.Assert(@this != null);
+            Debug.Assert(second != null);
 
             return @this.Zip(second, resultSelector).Collect();
         }

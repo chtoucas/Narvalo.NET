@@ -10,7 +10,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Demand = global::Narvalo.Demand;
 using Require = global::Narvalo.Require;
 using _Unit_ = global::Narvalo.Applicative.Unit;
 
@@ -18,6 +17,7 @@ namespace Edufun.Samples
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
 
     using Narvalo.Internal;
@@ -384,6 +384,7 @@ namespace Edufun.Samples
 namespace Narvalo.Internal
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
 
     using Edufun.Samples;
@@ -403,7 +404,7 @@ namespace Narvalo.Internal
 
         private static IEnumerable<TSource> CollectIterator<TSource>(IEnumerable<Ident<TSource>> source)
         {
-            Demand.NotNull(source);
+            Debug.Assert(source != null);
 
             var item = default(TSource);
 

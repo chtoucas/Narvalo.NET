@@ -6,7 +6,7 @@
 // behavior and will be lost if the code is regenerated.
 //
 // Runtime Version: 4.0.30319.42000
-// Microsoft.VisualStudio.TextTemplating: 14.0
+// Microsoft.VisualStudio.TextTemplating: 15.0
 // </auto-generated>
 //------------------------------------------------------------------------------
 
@@ -16,6 +16,7 @@ namespace Narvalo.Applicative
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
 
     using Narvalo.Internal;
@@ -411,9 +412,9 @@ namespace Narvalo.Applicative
             Func<TInner, TKey> innerKeySelector,
             IEqualityComparer<TKey> comparer)
         {
-            Demand.NotNull(outerKeySelector);
-            Demand.NotNull(innerKeySelector);
-            Demand.NotNull(comparer);
+            Debug.Assert(outerKeySelector != null);
+            Debug.Assert(innerKeySelector != null);
+            Debug.Assert(comparer != null);
 
             return arg => inner.Select(innerKeySelector)
                 .Where(key => comparer.Equals(key, outerKeySelector(arg)));
@@ -486,6 +487,7 @@ namespace Narvalo.Applicative
 namespace Narvalo.Internal
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
@@ -507,7 +509,7 @@ namespace Narvalo.Internal
 
         private static IEnumerable<TSource> CollectIterator<TSource>(IEnumerable<Maybe<TSource>> source)
         {
-            Demand.NotNull(source);
+            Debug.Assert(source != null);
 
             var item = default(TSource);
 
@@ -535,7 +537,7 @@ namespace Narvalo.Internal
         internal static Maybe<TSource> SumImpl<TSource>(
             this IEnumerable<Maybe<TSource>> @this)
         {
-            Demand.NotNull(@this);
+            Debug.Assert(@this != null);
             return @this.Aggregate(Maybe<TSource>.None, (m, n) => m.OrElse(n));
         }
     }
@@ -604,6 +606,7 @@ namespace Narvalo.Internal
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
@@ -619,8 +622,8 @@ namespace Narvalo.Internal
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<TResult>> selector)
         {
-            Demand.NotNull(@this);
-            Demand.NotNull(selector);
+            Debug.Assert(@this != null);
+            Debug.Assert(selector != null);
 
             return @this.Select(selector).Collect();
         }
@@ -640,8 +643,8 @@ namespace Narvalo.Internal
             IEnumerable<TSource> source,
             Func<TSource, Maybe<bool>> predicate)
         {
-            Demand.NotNull(source);
-            Demand.NotNull(predicate);
+            Debug.Assert(source != null);
+            Debug.Assert(predicate != null);
 
             using (var iter = source.GetEnumerator())
             {
@@ -668,9 +671,9 @@ namespace Narvalo.Internal
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, Maybe<TResult>> resultSelector)
         {
-            Demand.NotNull(resultSelector);
-            Demand.NotNull(@this);
-            Demand.NotNull(second);
+            Debug.Assert(resultSelector != null);
+            Debug.Assert(@this != null);
+            Debug.Assert(second != null);
 
             return @this.Zip(second, resultSelector).Collect();
         }

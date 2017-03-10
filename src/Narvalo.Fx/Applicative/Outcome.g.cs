@@ -6,7 +6,7 @@
 // behavior and will be lost if the code is regenerated.
 //
 // Runtime Version: 4.0.30319.42000
-// Microsoft.VisualStudio.TextTemplating: 14.0
+// Microsoft.VisualStudio.TextTemplating: 15.0
 // </auto-generated>
 //------------------------------------------------------------------------------
 
@@ -16,6 +16,7 @@ namespace Narvalo.Applicative
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
 
     using Narvalo.Internal;
@@ -383,6 +384,7 @@ namespace Narvalo.Applicative
 namespace Narvalo.Internal
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
 
     using Narvalo.Applicative;
@@ -402,7 +404,7 @@ namespace Narvalo.Internal
 
         private static IEnumerable<TSource> CollectIterator<TSource>(IEnumerable<Outcome<TSource>> source)
         {
-            Demand.NotNull(source);
+            Debug.Assert(source != null);
 
             var item = default(TSource);
 
@@ -491,6 +493,7 @@ namespace Narvalo.Internal
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
@@ -506,8 +509,8 @@ namespace Narvalo.Internal
             this IEnumerable<TSource> @this,
             Func<TSource, Outcome<TResult>> selector)
         {
-            Demand.NotNull(@this);
-            Demand.NotNull(selector);
+            Debug.Assert(@this != null);
+            Debug.Assert(selector != null);
 
             return @this.Select(selector).Collect();
         }
@@ -527,8 +530,8 @@ namespace Narvalo.Internal
             IEnumerable<TSource> source,
             Func<TSource, Outcome<bool>> predicate)
         {
-            Demand.NotNull(source);
-            Demand.NotNull(predicate);
+            Debug.Assert(source != null);
+            Debug.Assert(predicate != null);
 
             using (var iter = source.GetEnumerator())
             {
@@ -555,9 +558,9 @@ namespace Narvalo.Internal
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, Outcome<TResult>> resultSelector)
         {
-            Demand.NotNull(resultSelector);
-            Demand.NotNull(@this);
-            Demand.NotNull(second);
+            Debug.Assert(resultSelector != null);
+            Debug.Assert(@this != null);
+            Debug.Assert(second != null);
 
             return @this.Zip(second, resultSelector).Collect();
         }

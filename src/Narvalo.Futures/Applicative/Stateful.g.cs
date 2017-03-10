@@ -16,6 +16,7 @@ namespace Narvalo.Applicative
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
 
     using Narvalo.Internal;
@@ -358,6 +359,7 @@ namespace Narvalo.Applicative
 namespace Narvalo.Internal
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
 
     using Narvalo.Applicative;
@@ -377,7 +379,7 @@ namespace Narvalo.Internal
 
         private static IEnumerable<TSource> CollectIterator<TSource, TState>(IEnumerable<Stateful<TSource, TState>> source)
         {
-            Demand.NotNull(source);
+            Debug.Assert(source != null);
 
             var unit = Stateful.Of<Unit, TState>(Unit.Default);
             var item = default(TSource);

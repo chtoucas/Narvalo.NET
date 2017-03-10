@@ -10,7 +10,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Demand = global::Narvalo.Demand;
 using Require = global::Narvalo.Require;
 using _Unit_ = global::Narvalo.Applicative.Unit;
 
@@ -18,6 +17,7 @@ namespace Edufun.Haskell.Templates
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
 
     using Edufun.Haskell.Templates.Internal;
@@ -385,6 +385,7 @@ namespace Edufun.Haskell.Templates
 namespace Edufun.Haskell.Templates.Internal
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
 
     using Edufun.Haskell.Templates;
@@ -404,7 +405,7 @@ namespace Edufun.Haskell.Templates.Internal
 
         private static IEnumerable<TSource> CollectIterator<TSource>(IEnumerable<Monad<TSource>> source)
         {
-            Demand.NotNull(source);
+            Debug.Assert(source != null);
 
             var item = default(TSource);
 
@@ -493,6 +494,7 @@ namespace Edufun.Haskell.Templates.Internal
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
@@ -508,8 +510,8 @@ namespace Edufun.Haskell.Templates.Internal
             this IEnumerable<TSource> @this,
             Func<TSource, Monad<TResult>> selector)
         {
-            Demand.NotNull(@this);
-            Demand.NotNull(selector);
+            Debug.Assert(@this != null);
+            Debug.Assert(selector != null);
 
             return @this.Select(selector).Collect();
         }
@@ -529,8 +531,8 @@ namespace Edufun.Haskell.Templates.Internal
             IEnumerable<TSource> source,
             Func<TSource, Monad<bool>> predicate)
         {
-            Demand.NotNull(source);
-            Demand.NotNull(predicate);
+            Debug.Assert(source != null);
+            Debug.Assert(predicate != null);
 
             using (var iter = source.GetEnumerator())
             {
@@ -557,9 +559,9 @@ namespace Edufun.Haskell.Templates.Internal
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, Monad<TResult>> resultSelector)
         {
-            Demand.NotNull(resultSelector);
-            Demand.NotNull(@this);
-            Demand.NotNull(second);
+            Debug.Assert(resultSelector != null);
+            Debug.Assert(@this != null);
+            Debug.Assert(second != null);
 
             return @this.Zip(second, resultSelector).Collect();
         }
