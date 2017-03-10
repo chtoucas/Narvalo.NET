@@ -4,7 +4,7 @@ namespace Narvalo.Applicative
 {
     using System;
 
-    // Func<TState, (T result, TState state)>
+    // Custom delegate type: Func<TState, (T result, TState state)>
     public delegate (T result, TState state) Stateful<T, TState>(TState state);
 
     // Provides the core Monad methods.
@@ -25,7 +25,6 @@ namespace Narvalo.Applicative
             => state => (value, state);
 
         public static Stateful<T, TState> Flatten<T, TState>(Stateful<Stateful<T, TState>, TState> square)
-            //=> square.Bind(Stubs<Stateful<T, TState>>.Identity);
             => state =>
             {
                 var obj = square(state);
