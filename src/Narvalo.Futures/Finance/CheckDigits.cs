@@ -53,7 +53,7 @@ namespace Narvalo.Finance
                 case CheckDigitsRange.Numeric:
                     return Compute1_(value, s_NumAlphabet);
                 default:
-                    throw Check.Unreachable("XXX");
+                    throw new ControlFlowException("XXX");
             }
         }
 
@@ -72,18 +72,14 @@ namespace Narvalo.Finance
                 case CheckDigitsRange.Numeric:
                     return Compute2_(value, s_NumAlphabet, NUM_MODULUS);
                 default:
-                    throw Check.Unreachable("XXX");
+                    throw new ControlFlowException("XXX");
             }
         }
 
         public static bool Verify1(string value, CheckDigitsRange range)
         {
             Require.NotNull(value, nameof(value));
-
-            if (value.Length <= CD_LENGTH_1)
-            {
-                throw new ArgumentException("XXX", nameof(value));
-            }
+            Require.Range(value.Length > CD_LENGTH_1, nameof(range));
 
             string origval = value.Substring(0, value.Length - CD_LENGTH_1);
 
@@ -93,11 +89,7 @@ namespace Narvalo.Finance
         public static bool Verify2(string value, CheckDigitsRange range)
         {
             Require.NotNull(value, nameof(value));
-
-            if (value.Length <= CD_LENGTH_2)
-            {
-                throw new ArgumentException("XXX", nameof(value));
-            }
+            Require.Range(value.Length > CD_LENGTH_2, nameof(range));
 
             string origval = value.Substring(0, value.Length - CD_LENGTH_2);
 
@@ -117,8 +109,7 @@ namespace Narvalo.Finance
                     throw new ArgumentException("XXX", nameof(value));
                 }
 
-                //Contract.Assert(index >= 0);
-                //Contract.Assert(index < alength);
+                //Debug.Assert(index < alength);
 
                 pos += index;
 
@@ -127,7 +118,7 @@ namespace Narvalo.Finance
                     pos -= alength;
                 }
 
-                //Contract.Assert(pos <= alength);
+                //Debug.Assert(pos <= alength);
 
                 pos *= 2;
 
@@ -136,7 +127,7 @@ namespace Narvalo.Finance
                     pos -= alength + 1;
                 }
 
-                //Contract.Assert(pos <= alength);
+                //Debug.Assert(pos <= alength);
             }
 
             pos = (alength - pos + 1) % alength;
@@ -156,9 +147,8 @@ namespace Narvalo.Finance
                 {
                     throw new ArgumentException("XXX", nameof(value));
                 }
-
-                //Contract.Assert(index >= 0);
-                //Contract.Assert(index < alength);
+                
+                //Debug.Assert(index < alength);
 
                 pos = ((pos + index) * alength) % modulus;
             }

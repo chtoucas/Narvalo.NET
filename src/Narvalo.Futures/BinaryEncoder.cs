@@ -3,6 +3,7 @@
 namespace Narvalo
 {
     using System;
+    using System.Diagnostics;
     using System.Text;
 
     // TODO: Créer la version Hexavigesimal.
@@ -153,7 +154,7 @@ namespace Narvalo
                     if (index == 0) { i++; }
                 }
 
-                Check.True(i >= 0);
+                Debug.Assert(i >= 0);
 
                 sb.Append(s_ZBase32Alphabet[digit]);
             }

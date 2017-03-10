@@ -2,6 +2,7 @@
 
 namespace Narvalo.Finance.Providers.Snv
 {
+    using System.Diagnostics;
     using System.IO;
     using System.Xml;
 
@@ -21,28 +22,28 @@ namespace Narvalo.Finance.Providers.Snv
 
         public static XmlReader Of(string input)
         {
-            Demand.NotNullOrEmpty(input);
+            Debug.Assert(input != null && input.Length != 0);
 
             return XmlReader.Create(input, s_Settings);
         }
 
         public static XmlReader Of(Stream input)
         {
-            Demand.NotNull(input);
+            Debug.Assert(input != null);
 
             return XmlReader.Create(input, s_Settings);
         }
 
         public static XmlReader Of(TextReader input)
         {
-            Demand.NotNull(input);
+            Debug.Assert(input != null);
 
             return XmlReader.Create(input, s_Settings);
         }
 
         public static XmlReader Of(XmlReader input)
         {
-            Demand.NotNull(input);
+            Debug.Assert(input != null);
 
             return XmlReader.Create(input, s_Settings);
         }

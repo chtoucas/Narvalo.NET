@@ -2,6 +2,8 @@
 
 namespace Narvalo.Finance.Providers.Snv
 {
+    using System.Diagnostics;
+
     //using Narvalo.Finance.Internal;
     //using Narvalo.Properties;
 
@@ -36,7 +38,7 @@ namespace Narvalo.Finance.Providers.Snv
             //Sentinel.Require.CurrencyCode(code, nameof(code));
             // NB: CreateCore() requires "numericCode" to be strictly positive,
             // but CreateWithdrawnCurrency() allows zero for "numericCode".
-            Demand.Range(numericCode >= 0 && numericCode < 1000);
+            Debug.Assert(numericCode >= 0 && numericCode < 1000);
 
             _code = code;
             _numericCode = numericCode;

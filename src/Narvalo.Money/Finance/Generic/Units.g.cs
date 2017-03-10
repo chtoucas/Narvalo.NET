@@ -6,7 +6,7 @@
 // behavior and will be lost if the code is regenerated.
 //
 // Runtime Version: 4.0.30319.42000
-// Microsoft.VisualStudio.TextTemplating: 14.0
+// Microsoft.VisualStudio.TextTemplating: 15.0
 // </auto-generated>
 //------------------------------------------------------------------------------
 
@@ -18,7 +18,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "ADP".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     public sealed class ADP : Currency<ADP>
     {
         private ADP() : base(Currency.UnknownMinorUnits) { }
@@ -48,7 +48,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "AED".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class AED : Currency<AED>
@@ -80,7 +80,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "AFA".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class AFA : Currency<AFA>
@@ -112,7 +112,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "AFN".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class AFN : Currency<AFN>
@@ -144,7 +144,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "ALK".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class ALK : Currency<ALK>
@@ -176,7 +176,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "ALL".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class ALL : Currency<ALL>
@@ -208,7 +208,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "AMD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class AMD : Currency<AMD>
@@ -240,7 +240,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "ANG".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class ANG : Currency<ANG>
@@ -272,7 +272,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "AOA".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class AOA : Currency<AOA>
@@ -304,7 +304,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "AOK".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class AOK : Currency<AOK>
@@ -336,7 +336,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "AON".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class AON : Currency<AON>
@@ -368,7 +368,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "AOR".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class AOR : Currency<AOR>
@@ -400,7 +400,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "ARA".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class ARA : Currency<ARA>
@@ -432,7 +432,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "ARP".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class ARP : Currency<ARP>
@@ -464,7 +464,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "ARS".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class ARS : Currency<ARS>
@@ -496,7 +496,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "ARY".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class ARY : Currency<ARY>
@@ -528,7 +528,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "ATS".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class ATS : Currency<ATS>
@@ -560,7 +560,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "AUD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class AUD : Currency<AUD>
@@ -592,7 +592,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "AWG".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class AWG : Currency<AWG>
@@ -624,7 +624,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "AYM".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class AYM : Currency<AYM>
@@ -656,7 +656,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "AZM".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class AZM : Currency<AZM>
@@ -688,7 +688,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "AZN".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class AZN : Currency<AZN>
@@ -720,7 +720,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "BAD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class BAD : Currency<BAD>
@@ -752,7 +752,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "BAM".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class BAM : Currency<BAM>
@@ -784,7 +784,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "BBD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class BBD : Currency<BBD>
@@ -816,7 +816,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "BDT".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class BDT : Currency<BDT>
@@ -848,7 +848,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "BEC".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class BEC : Currency<BEC>
@@ -880,7 +880,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "BEF".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class BEF : Currency<BEF>
@@ -912,7 +912,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "BEL".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class BEL : Currency<BEL>
@@ -944,7 +944,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "BGJ".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class BGJ : Currency<BGJ>
@@ -976,7 +976,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "BGK".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class BGK : Currency<BGK>
@@ -1008,7 +1008,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "BGL".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class BGL : Currency<BGL>
@@ -1040,7 +1040,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "BGN".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class BGN : Currency<BGN>
@@ -1072,7 +1072,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "BHD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class BHD : Currency<BHD>
@@ -1104,7 +1104,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "BIF".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class BIF : Currency<BIF>
@@ -1136,7 +1136,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "BMD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class BMD : Currency<BMD>
@@ -1168,7 +1168,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "BND".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class BND : Currency<BND>
@@ -1200,7 +1200,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "BOB".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class BOB : Currency<BOB>
@@ -1232,7 +1232,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "BOP".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class BOP : Currency<BOP>
@@ -1264,7 +1264,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "BOV".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class BOV : Currency<BOV>
@@ -1296,7 +1296,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "BRB".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class BRB : Currency<BRB>
@@ -1328,7 +1328,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "BRC".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class BRC : Currency<BRC>
@@ -1360,7 +1360,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "BRE".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class BRE : Currency<BRE>
@@ -1392,7 +1392,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "BRL".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class BRL : Currency<BRL>
@@ -1424,7 +1424,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "BRN".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class BRN : Currency<BRN>
@@ -1456,7 +1456,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "BRR".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class BRR : Currency<BRR>
@@ -1488,7 +1488,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "BSD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class BSD : Currency<BSD>
@@ -1520,7 +1520,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "BTN".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class BTN : Currency<BTN>
@@ -1552,7 +1552,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "BUK".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class BUK : Currency<BUK>
@@ -1584,7 +1584,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "BWP".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class BWP : Currency<BWP>
@@ -1616,7 +1616,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "BYB".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class BYB : Currency<BYB>
@@ -1648,7 +1648,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "BYN".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class BYN : Currency<BYN>
@@ -1680,7 +1680,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "BYR".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class BYR : Currency<BYR>
@@ -1712,7 +1712,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "BZD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class BZD : Currency<BZD>
@@ -1744,7 +1744,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "CAD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class CAD : Currency<CAD>
@@ -1776,7 +1776,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "CDF".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class CDF : Currency<CDF>
@@ -1808,7 +1808,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "CHC".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class CHC : Currency<CHC>
@@ -1840,7 +1840,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "CHE".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class CHE : Currency<CHE>
@@ -1872,7 +1872,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "CHF".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class CHF : Currency<CHF>
@@ -1904,7 +1904,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "CHW".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class CHW : Currency<CHW>
@@ -1936,7 +1936,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "CLF".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class CLF : Currency<CLF>
@@ -1968,7 +1968,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "CLP".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class CLP : Currency<CLP>
@@ -2000,7 +2000,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "CNX".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class CNX : Currency<CNX>
@@ -2032,7 +2032,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "CNY".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class CNY : Currency<CNY>
@@ -2064,7 +2064,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "COP".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class COP : Currency<COP>
@@ -2096,7 +2096,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "COU".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class COU : Currency<COU>
@@ -2128,7 +2128,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "CRC".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class CRC : Currency<CRC>
@@ -2160,7 +2160,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "CSD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class CSD : Currency<CSD>
@@ -2192,7 +2192,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "CSJ".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class CSJ : Currency<CSJ>
@@ -2224,7 +2224,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "CSK".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class CSK : Currency<CSK>
@@ -2256,7 +2256,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "CUC".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class CUC : Currency<CUC>
@@ -2288,7 +2288,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "CUP".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class CUP : Currency<CUP>
@@ -2320,7 +2320,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "CVE".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class CVE : Currency<CVE>
@@ -2352,7 +2352,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "CYP".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class CYP : Currency<CYP>
@@ -2384,7 +2384,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "CZK".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class CZK : Currency<CZK>
@@ -2416,7 +2416,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "DDM".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class DDM : Currency<DDM>
@@ -2448,7 +2448,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "DEM".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class DEM : Currency<DEM>
@@ -2480,7 +2480,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "DJF".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class DJF : Currency<DJF>
@@ -2512,7 +2512,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "DKK".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class DKK : Currency<DKK>
@@ -2544,7 +2544,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "DOP".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class DOP : Currency<DOP>
@@ -2576,7 +2576,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "DZD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class DZD : Currency<DZD>
@@ -2608,7 +2608,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "ECS".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class ECS : Currency<ECS>
@@ -2640,7 +2640,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "ECV".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class ECV : Currency<ECV>
@@ -2672,7 +2672,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "EEK".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class EEK : Currency<EEK>
@@ -2704,7 +2704,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "EGP".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class EGP : Currency<EGP>
@@ -2736,7 +2736,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "EQE".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class EQE : Currency<EQE>
@@ -2768,7 +2768,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "ERN".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class ERN : Currency<ERN>
@@ -2800,7 +2800,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "ESA".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class ESA : Currency<ESA>
@@ -2832,7 +2832,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "ESB".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class ESB : Currency<ESB>
@@ -2864,7 +2864,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "ESP".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class ESP : Currency<ESP>
@@ -2896,7 +2896,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "ETB".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class ETB : Currency<ETB>
@@ -2928,7 +2928,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "EUR".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class EUR : Currency<EUR>
@@ -2960,7 +2960,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "FIM".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class FIM : Currency<FIM>
@@ -2992,7 +2992,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "FJD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class FJD : Currency<FJD>
@@ -3024,7 +3024,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "FKP".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class FKP : Currency<FKP>
@@ -3056,7 +3056,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "FRF".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class FRF : Currency<FRF>
@@ -3088,7 +3088,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "GBP".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class GBP : Currency<GBP>
@@ -3120,7 +3120,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "GEK".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class GEK : Currency<GEK>
@@ -3152,7 +3152,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "GEL".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class GEL : Currency<GEL>
@@ -3184,7 +3184,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "GHC".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class GHC : Currency<GHC>
@@ -3216,7 +3216,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "GHP".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class GHP : Currency<GHP>
@@ -3248,7 +3248,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "GHS".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class GHS : Currency<GHS>
@@ -3280,7 +3280,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "GIP".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class GIP : Currency<GIP>
@@ -3312,7 +3312,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "GMD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class GMD : Currency<GMD>
@@ -3344,7 +3344,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "GNE".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class GNE : Currency<GNE>
@@ -3376,7 +3376,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "GNF".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class GNF : Currency<GNF>
@@ -3408,7 +3408,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "GNS".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class GNS : Currency<GNS>
@@ -3440,7 +3440,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "GQE".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class GQE : Currency<GQE>
@@ -3472,7 +3472,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "GRD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class GRD : Currency<GRD>
@@ -3504,7 +3504,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "GTQ".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class GTQ : Currency<GTQ>
@@ -3536,7 +3536,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "GWE".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class GWE : Currency<GWE>
@@ -3568,7 +3568,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "GWP".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class GWP : Currency<GWP>
@@ -3600,7 +3600,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "GYD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class GYD : Currency<GYD>
@@ -3632,7 +3632,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "HKD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class HKD : Currency<HKD>
@@ -3664,7 +3664,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "HNL".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class HNL : Currency<HNL>
@@ -3696,7 +3696,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "HRD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class HRD : Currency<HRD>
@@ -3728,7 +3728,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "HRK".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class HRK : Currency<HRK>
@@ -3760,7 +3760,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "HTG".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class HTG : Currency<HTG>
@@ -3792,7 +3792,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "HUF".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class HUF : Currency<HUF>
@@ -3824,7 +3824,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "IDR".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class IDR : Currency<IDR>
@@ -3856,7 +3856,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "IEP".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class IEP : Currency<IEP>
@@ -3888,7 +3888,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "ILP".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class ILP : Currency<ILP>
@@ -3920,7 +3920,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "ILR".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class ILR : Currency<ILR>
@@ -3952,7 +3952,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "ILS".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class ILS : Currency<ILS>
@@ -3984,7 +3984,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "INR".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class INR : Currency<INR>
@@ -4016,7 +4016,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "IQD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class IQD : Currency<IQD>
@@ -4048,7 +4048,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "IRR".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class IRR : Currency<IRR>
@@ -4080,7 +4080,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "ISJ".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class ISJ : Currency<ISJ>
@@ -4112,7 +4112,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "ISK".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class ISK : Currency<ISK>
@@ -4144,7 +4144,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "ITL".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class ITL : Currency<ITL>
@@ -4176,7 +4176,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "JMD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class JMD : Currency<JMD>
@@ -4208,7 +4208,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "JOD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class JOD : Currency<JOD>
@@ -4240,7 +4240,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "JPY".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class JPY : Currency<JPY>
@@ -4272,7 +4272,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "KES".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class KES : Currency<KES>
@@ -4304,7 +4304,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "KGS".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class KGS : Currency<KGS>
@@ -4336,7 +4336,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "KHR".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class KHR : Currency<KHR>
@@ -4368,7 +4368,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "KMF".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class KMF : Currency<KMF>
@@ -4400,7 +4400,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "KPW".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class KPW : Currency<KPW>
@@ -4432,7 +4432,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "KRW".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class KRW : Currency<KRW>
@@ -4464,7 +4464,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "KWD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class KWD : Currency<KWD>
@@ -4496,7 +4496,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "KYD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class KYD : Currency<KYD>
@@ -4528,7 +4528,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "KZT".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class KZT : Currency<KZT>
@@ -4560,7 +4560,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "LAJ".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class LAJ : Currency<LAJ>
@@ -4592,7 +4592,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "LAK".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class LAK : Currency<LAK>
@@ -4624,7 +4624,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "LBP".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class LBP : Currency<LBP>
@@ -4656,7 +4656,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "LKR".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class LKR : Currency<LKR>
@@ -4688,7 +4688,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "LRD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class LRD : Currency<LRD>
@@ -4720,7 +4720,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "LSL".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class LSL : Currency<LSL>
@@ -4752,7 +4752,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "LSM".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class LSM : Currency<LSM>
@@ -4784,7 +4784,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "LTL".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class LTL : Currency<LTL>
@@ -4816,7 +4816,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "LTT".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class LTT : Currency<LTT>
@@ -4848,7 +4848,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "LUC".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class LUC : Currency<LUC>
@@ -4880,7 +4880,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "LUF".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class LUF : Currency<LUF>
@@ -4912,7 +4912,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "LUL".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class LUL : Currency<LUL>
@@ -4944,7 +4944,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "LVL".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class LVL : Currency<LVL>
@@ -4976,7 +4976,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "LVR".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class LVR : Currency<LVR>
@@ -5008,7 +5008,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "LYD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class LYD : Currency<LYD>
@@ -5040,7 +5040,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "MAD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class MAD : Currency<MAD>
@@ -5072,7 +5072,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "MAF".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class MAF : Currency<MAF>
@@ -5104,7 +5104,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "MDL".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class MDL : Currency<MDL>
@@ -5136,7 +5136,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "MGA".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class MGA : Currency<MGA>
@@ -5168,7 +5168,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "MGF".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class MGF : Currency<MGF>
@@ -5200,7 +5200,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "MKD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class MKD : Currency<MKD>
@@ -5232,7 +5232,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "MLF".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class MLF : Currency<MLF>
@@ -5264,7 +5264,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "MMK".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class MMK : Currency<MMK>
@@ -5296,7 +5296,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "MNT".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class MNT : Currency<MNT>
@@ -5328,7 +5328,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "MOP".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class MOP : Currency<MOP>
@@ -5360,7 +5360,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "MRO".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class MRO : Currency<MRO>
@@ -5392,7 +5392,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "MTL".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class MTL : Currency<MTL>
@@ -5424,7 +5424,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "MTP".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class MTP : Currency<MTP>
@@ -5456,7 +5456,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "MUR".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class MUR : Currency<MUR>
@@ -5488,7 +5488,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "MVQ".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class MVQ : Currency<MVQ>
@@ -5520,7 +5520,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "MVR".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class MVR : Currency<MVR>
@@ -5552,7 +5552,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "MWK".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class MWK : Currency<MWK>
@@ -5584,7 +5584,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "MXN".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class MXN : Currency<MXN>
@@ -5616,7 +5616,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "MXP".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class MXP : Currency<MXP>
@@ -5648,7 +5648,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "MXV".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class MXV : Currency<MXV>
@@ -5680,7 +5680,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "MYR".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class MYR : Currency<MYR>
@@ -5712,7 +5712,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "MZE".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class MZE : Currency<MZE>
@@ -5744,7 +5744,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "MZM".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class MZM : Currency<MZM>
@@ -5776,7 +5776,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "MZN".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class MZN : Currency<MZN>
@@ -5808,7 +5808,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "NAD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class NAD : Currency<NAD>
@@ -5840,7 +5840,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "NGN".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class NGN : Currency<NGN>
@@ -5872,7 +5872,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "NIC".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class NIC : Currency<NIC>
@@ -5904,7 +5904,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "NIO".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class NIO : Currency<NIO>
@@ -5936,7 +5936,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "NLG".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class NLG : Currency<NLG>
@@ -5968,7 +5968,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "NOK".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class NOK : Currency<NOK>
@@ -6000,7 +6000,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "NPR".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class NPR : Currency<NPR>
@@ -6032,7 +6032,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "NZD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class NZD : Currency<NZD>
@@ -6064,7 +6064,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "OMR".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class OMR : Currency<OMR>
@@ -6096,7 +6096,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "PAB".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class PAB : Currency<PAB>
@@ -6128,7 +6128,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "PEH".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class PEH : Currency<PEH>
@@ -6160,7 +6160,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "PEI".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class PEI : Currency<PEI>
@@ -6192,7 +6192,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "PEN".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class PEN : Currency<PEN>
@@ -6224,7 +6224,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "PES".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class PES : Currency<PES>
@@ -6256,7 +6256,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "PGK".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class PGK : Currency<PGK>
@@ -6288,7 +6288,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "PHP".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class PHP : Currency<PHP>
@@ -6320,7 +6320,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "PKR".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class PKR : Currency<PKR>
@@ -6352,7 +6352,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "PLN".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class PLN : Currency<PLN>
@@ -6384,7 +6384,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "PLZ".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class PLZ : Currency<PLZ>
@@ -6416,7 +6416,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "PTE".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class PTE : Currency<PTE>
@@ -6448,7 +6448,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "PYG".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class PYG : Currency<PYG>
@@ -6480,7 +6480,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "QAR".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class QAR : Currency<QAR>
@@ -6512,7 +6512,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "RHD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class RHD : Currency<RHD>
@@ -6544,7 +6544,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "ROK".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class ROK : Currency<ROK>
@@ -6576,7 +6576,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "ROL".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class ROL : Currency<ROL>
@@ -6608,7 +6608,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "RON".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class RON : Currency<RON>
@@ -6640,7 +6640,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "RSD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class RSD : Currency<RSD>
@@ -6672,7 +6672,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "RUB".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class RUB : Currency<RUB>
@@ -6704,7 +6704,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "RUR".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class RUR : Currency<RUR>
@@ -6736,7 +6736,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "RWF".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class RWF : Currency<RWF>
@@ -6768,7 +6768,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "SAR".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class SAR : Currency<SAR>
@@ -6800,7 +6800,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "SBD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class SBD : Currency<SBD>
@@ -6832,7 +6832,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "SCR".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class SCR : Currency<SCR>
@@ -6864,7 +6864,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "SDD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class SDD : Currency<SDD>
@@ -6896,7 +6896,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "SDG".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class SDG : Currency<SDG>
@@ -6928,7 +6928,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "SDP".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class SDP : Currency<SDP>
@@ -6960,7 +6960,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "SEK".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class SEK : Currency<SEK>
@@ -6992,7 +6992,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "SGD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class SGD : Currency<SGD>
@@ -7024,7 +7024,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "SHP".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class SHP : Currency<SHP>
@@ -7056,7 +7056,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "SIT".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class SIT : Currency<SIT>
@@ -7088,7 +7088,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "SKK".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class SKK : Currency<SKK>
@@ -7120,7 +7120,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "SLL".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class SLL : Currency<SLL>
@@ -7152,7 +7152,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "SOS".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class SOS : Currency<SOS>
@@ -7184,7 +7184,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "SRD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class SRD : Currency<SRD>
@@ -7216,7 +7216,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "SRG".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class SRG : Currency<SRG>
@@ -7248,7 +7248,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "SSP".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class SSP : Currency<SSP>
@@ -7280,7 +7280,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "STD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class STD : Currency<STD>
@@ -7312,7 +7312,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "SUR".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class SUR : Currency<SUR>
@@ -7344,7 +7344,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "SVC".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class SVC : Currency<SVC>
@@ -7376,7 +7376,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "SYP".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class SYP : Currency<SYP>
@@ -7408,7 +7408,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "SZL".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class SZL : Currency<SZL>
@@ -7440,7 +7440,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "THB".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class THB : Currency<THB>
@@ -7472,7 +7472,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "TJR".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class TJR : Currency<TJR>
@@ -7504,7 +7504,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "TJS".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class TJS : Currency<TJS>
@@ -7536,7 +7536,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "TMM".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class TMM : Currency<TMM>
@@ -7568,7 +7568,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "TMT".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class TMT : Currency<TMT>
@@ -7600,7 +7600,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "TND".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class TND : Currency<TND>
@@ -7632,7 +7632,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "TOP".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class TOP : Currency<TOP>
@@ -7664,7 +7664,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "TPE".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class TPE : Currency<TPE>
@@ -7696,7 +7696,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "TRL".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class TRL : Currency<TRL>
@@ -7728,7 +7728,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "TRY".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class TRY : Currency<TRY>
@@ -7760,7 +7760,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "TTD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class TTD : Currency<TTD>
@@ -7792,7 +7792,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "TWD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class TWD : Currency<TWD>
@@ -7824,7 +7824,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "TZS".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class TZS : Currency<TZS>
@@ -7856,7 +7856,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "UAH".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class UAH : Currency<UAH>
@@ -7888,7 +7888,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "UAK".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class UAK : Currency<UAK>
@@ -7920,7 +7920,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "UGS".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class UGS : Currency<UGS>
@@ -7952,7 +7952,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "UGW".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class UGW : Currency<UGW>
@@ -7984,7 +7984,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "UGX".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class UGX : Currency<UGX>
@@ -8016,7 +8016,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "USD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class USD : Currency<USD>
@@ -8048,7 +8048,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "USN".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class USN : Currency<USN>
@@ -8080,7 +8080,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "USS".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class USS : Currency<USS>
@@ -8112,7 +8112,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "UYI".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class UYI : Currency<UYI>
@@ -8144,7 +8144,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "UYN".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class UYN : Currency<UYN>
@@ -8176,7 +8176,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "UYP".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class UYP : Currency<UYP>
@@ -8208,7 +8208,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "UYU".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class UYU : Currency<UYU>
@@ -8240,7 +8240,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "UZS".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class UZS : Currency<UZS>
@@ -8272,7 +8272,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "VEB".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class VEB : Currency<VEB>
@@ -8304,7 +8304,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "VEF".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class VEF : Currency<VEF>
@@ -8336,7 +8336,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "VNC".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class VNC : Currency<VNC>
@@ -8368,7 +8368,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "VND".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class VND : Currency<VND>
@@ -8400,7 +8400,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "VUV".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class VUV : Currency<VUV>
@@ -8432,7 +8432,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "WST".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class WST : Currency<WST>
@@ -8464,7 +8464,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "XAF".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class XAF : Currency<XAF>
@@ -8496,7 +8496,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "XAG".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class XAG : Currency<XAG>
@@ -8528,7 +8528,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "XAU".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class XAU : Currency<XAU>
@@ -8560,7 +8560,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "XBA".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class XBA : Currency<XBA>
@@ -8592,7 +8592,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "XBB".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class XBB : Currency<XBB>
@@ -8624,7 +8624,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "XBC".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class XBC : Currency<XBC>
@@ -8656,7 +8656,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "XBD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class XBD : Currency<XBD>
@@ -8688,7 +8688,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "XCD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class XCD : Currency<XCD>
@@ -8720,7 +8720,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "XDR".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class XDR : Currency<XDR>
@@ -8752,7 +8752,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "XEU".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class XEU : Currency<XEU>
@@ -8784,7 +8784,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "XFO".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class XFO : Currency<XFO>
@@ -8816,7 +8816,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "XFU".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class XFU : Currency<XFU>
@@ -8848,7 +8848,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "XOF".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class XOF : Currency<XOF>
@@ -8880,7 +8880,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "XPD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class XPD : Currency<XPD>
@@ -8912,7 +8912,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "XPF".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class XPF : Currency<XPF>
@@ -8944,7 +8944,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "XPT".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class XPT : Currency<XPT>
@@ -8976,7 +8976,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "XRE".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class XRE : Currency<XRE>
@@ -9008,7 +9008,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "XSU".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class XSU : Currency<XSU>
@@ -9040,7 +9040,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "XTS".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class XTS : Currency<XTS>
@@ -9072,7 +9072,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "XUA".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class XUA : Currency<XUA>
@@ -9104,7 +9104,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "XXX".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class XXX : Currency<XXX>
@@ -9136,7 +9136,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "YDD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class YDD : Currency<YDD>
@@ -9168,7 +9168,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "YER".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class YER : Currency<YER>
@@ -9200,7 +9200,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "YUD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class YUD : Currency<YUD>
@@ -9232,7 +9232,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "YUM".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class YUM : Currency<YUM>
@@ -9264,7 +9264,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "YUN".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class YUN : Currency<YUN>
@@ -9296,7 +9296,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "ZAL".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class ZAL : Currency<ZAL>
@@ -9328,7 +9328,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "ZAR".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class ZAR : Currency<ZAR>
@@ -9360,7 +9360,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "ZMK".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class ZMK : Currency<ZMK>
@@ -9392,7 +9392,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "ZMW".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class ZMW : Currency<ZMW>
@@ -9424,7 +9424,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "ZRN".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class ZRN : Currency<ZRN>
@@ -9456,7 +9456,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "ZRZ".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class ZRZ : Currency<ZRZ>
@@ -9488,7 +9488,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "ZWC".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class ZWC : Currency<ZWC>
@@ -9520,7 +9520,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "ZWD".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class ZWD : Currency<ZWD>
@@ -9552,7 +9552,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "ZWL".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class ZWL : Currency<ZWL>
@@ -9584,7 +9584,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "ZWN".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class ZWN : Currency<ZWN>
@@ -9616,7 +9616,7 @@ namespace Narvalo.Finance.Generic
     /// <summary>
     /// Represents the currency unit for the code "ZWR".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0")]
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
     public sealed class ZWR : Currency<ZWR>
