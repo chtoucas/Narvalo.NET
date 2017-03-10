@@ -3,6 +3,7 @@
 namespace Narvalo.Web.UI
 {
     using System;
+    using System.Diagnostics;
     using System.Web;
 
     using Narvalo.Web.Properties;
@@ -45,8 +46,7 @@ namespace Narvalo.Web.UI
         private static Uri MakeUri(string baseIntermediatePath, string relativePath)
         {
             Require.NotNull(relativePath, nameof(relativePath));
-            Demand.NotNull(baseIntermediatePath);
-            Demand.Range(baseIntermediatePath.Length != 0);
+            Debug.Assert(baseIntermediatePath != null && baseIntermediatePath.Length != 0);
 
             // NB: If basePath or relativePath is null or empty, VirtualPathUtility.Combine will throw,
             // which is of course exactly what we want.

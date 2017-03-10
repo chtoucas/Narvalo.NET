@@ -3,6 +3,7 @@
 namespace Narvalo.Web.Optimization
 {
     using System;
+    using System.Diagnostics;
     using System.Text.RegularExpressions;
 
     /// <summary>
@@ -72,7 +73,7 @@ namespace Narvalo.Web.Optimization
 
         private static bool IsTabsOrSpaces(string value)
         {
-            Demand.NotNull(value);
+            Debug.Assert(value != null);
 
             for (int i = 0; i < value.Length; i++)
             {

@@ -3,6 +3,7 @@
 namespace Narvalo.Web.Optimization
 {
     using System;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Text;
     using System.Web.Razor.Parser.SyntaxTree;
@@ -95,7 +96,7 @@ namespace Narvalo.Web.Optimization
             Justification = "[Intentionally] The use of a parameter passed by reference simplifies the algorithm. Only used privately.")]
         private static string RemoveMarkupAndMergeContentAfter(BlockBuilder block, string content, ref int currentIndex)
         {
-            Demand.NotNull(block);
+            Debug.Assert(block != null);
 
             var sb = new StringBuilder(content);
 
@@ -138,7 +139,7 @@ namespace Narvalo.Web.Optimization
 
         private string OptimizeContent(SymbolBase<HtmlSymbolType> sym, HtmlSymbolType previousType)
         {
-            Demand.NotNull(sym);
+            Debug.Assert(sym != null);
 
             string content;
 

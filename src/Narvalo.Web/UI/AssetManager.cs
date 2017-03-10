@@ -5,6 +5,7 @@ namespace Narvalo.Web.UI
     using System;
     using System.Configuration;
     using System.Configuration.Provider;
+    using System.Diagnostics;
     using System.Web.Configuration;
 
     using Narvalo.Web.Configuration;
@@ -81,7 +82,7 @@ namespace Narvalo.Web.UI
         // We use temporary objects to achieve exception-neutral code.
         internal static void InitializeCore(AssetSection section)
         {
-            Demand.NotNull(section);
+            Debug.Assert(section != null);
 
             // Initialize the provider collection.
             var tmpProviders = new AssetProviderCollection();

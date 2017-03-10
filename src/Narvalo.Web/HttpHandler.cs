@@ -2,6 +2,7 @@
 
 namespace Narvalo.Web
 {
+    using System.Diagnostics;
     using System.Net;
     using System.Web;
     using System.Web.Mvc;
@@ -76,7 +77,7 @@ namespace Narvalo.Web
 
         private bool ValidateHttpMethod(HttpRequest request)
         {
-            Demand.NotNull(request);
+            Debug.Assert(request != null);
 
             var verbs = ParseTo.Enum<HttpVerbs>(request.HttpMethod);
 

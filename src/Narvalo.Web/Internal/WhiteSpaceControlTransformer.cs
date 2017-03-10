@@ -5,6 +5,7 @@
 namespace Narvalo.Web.Internal
 {
     using System.Collections;
+    using System.Diagnostics;
     using System.Web.UI;
 
     using Narvalo.Web.Optimization;
@@ -16,7 +17,7 @@ namespace Narvalo.Web.Internal
 
         public WhiteSpaceControlTransformer(IWhiteSpaceBuster buster)
         {
-            Demand.NotNull(buster);
+            Debug.Assert(buster != null);
 
             _buster = buster;
         }

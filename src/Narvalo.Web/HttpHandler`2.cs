@@ -3,6 +3,7 @@
 namespace Narvalo.Web
 {
     using System;
+    using System.Diagnostics;
     using System.Linq;
     using System.Net;
     using System.Web;
@@ -38,7 +39,7 @@ namespace Narvalo.Web
 
         private void ProcessBindingFailure(HttpContext context, TBinder binder)
         {
-            Demand.NotNull(context);
+            Debug.Assert(context != null);
 
             var errors = binder.BindingErrors;
             HttpQueryBinderException exception;

@@ -5,6 +5,7 @@ namespace Narvalo.Web.UI
     using System;
     using System.Collections.Specialized;
     using System.Configuration.Provider;
+    using System.Diagnostics;
 
     using Narvalo.Collections;
     using Narvalo.Web.Properties;
@@ -58,9 +59,8 @@ namespace Narvalo.Web.UI
 
         private static string Combine(string basePath, string relativePath)
         {
-            Demand.NotNull(basePath);
-            Demand.Range(basePath.Length != 0);
-            Demand.NotNull(relativePath);
+            Debug.Assert(basePath != null && basePath.Length != 0);
+            Debug.Assert(relativePath != null);
 
             string retval;
 
@@ -87,7 +87,7 @@ namespace Narvalo.Web.UI
 
         private static bool HasTrailingSlash(string path)
         {
-            Demand.Range(path.Length > 0);
+            Debug.Assert(path != null && path.Length > 0);
 
             return path[path.Length - 1] == '/';
         }
@@ -95,8 +95,7 @@ namespace Narvalo.Web.UI
         private Uri MakeUri(string baseIntermediatePath, string relativePath)
         {
             Require.NotNull(relativePath, nameof(relativePath));
-            Demand.NotNull(baseIntermediatePath);
-            Demand.Range(baseIntermediatePath.Length != 0);
+            Debug.Assert(baseIntermediatePath != null && baseIntermediatePath.Length != 0);
 
             // Here we can be sure that _baseUri is not null and is absolute; otherwise an exception
             // would have been thrown in InitializeCustom().
