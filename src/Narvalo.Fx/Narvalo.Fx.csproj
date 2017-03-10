@@ -62,7 +62,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Internal\IContainer`1.cs" />
-    <Compile Include="Applicative\Iteration`.cs" />
     <Compile Include="Linq\WhereAny.cs" />
     <Compile Include="Linq\SelectAny.cs" />
     <Compile Include="Applicative\Maybe.Shadowing.cs" />

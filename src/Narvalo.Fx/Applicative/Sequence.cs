@@ -31,16 +31,16 @@ namespace Narvalo.Applicative
         /// </summary>
         public static IEnumerable<TResult> Unfold<TSource, TResult>(
             TSource seed,
-            Func<TSource, Iteration<TResult, TSource>> generator)
+            Func<TSource, (TResult, TSource)> accumulator)
         {
-            Require.NotNull(generator, nameof(generator));
+            Require.NotNull(accumulator, nameof(accumulator));
 
-            return UnfoldIterator(seed, generator);
+            return UnfoldIterator(seed, accumulator);
         }
 
         public static IEnumerable<TResult> Unfold<TSource, TResult>(
             TSource seed,
-            Func<TSource, Iteration<TResult, TSource>> generator,
+            Func<TSource, (TResult, TSource)> generator,
             Func<TSource, bool> predicate)
         {
             Require.NotNull(generator, nameof(generator));
@@ -51,39 +51,39 @@ namespace Narvalo.Applicative
 
         private static IEnumerable<TResult> UnfoldIterator<TSource, TResult>(
             TSource seed,
-            Func<TSource, Iteration<TResult, TSource>> generator)
+            Func<TSource, (TResult, TSource)> accumulator)
         {
-            Debug.Assert(generator != null);
+            Debug.Assert(accumulator != null);
 
             TSource current = seed;
 
             while (true)
             {
-                var iter = generator(current);
+                var (result, next) = accumulator(current);
 
-                yield return iter.Result;
+                yield return result;
 
-                current = iter.Next;
+                current = next;
             }
         }
 
         private static IEnumerable<TResult> UnfoldIterator<TSource, TResult>(
             TSource seed,
-            Func<TSource, Iteration<TResult, TSource>> generator,
+            Func<TSource, (TResult, TSource)> accumulator,
             Func<TSource, bool> predicate)
         {
-            Debug.Assert(generator != null);
+            Debug.Assert(accumulator != null);
             Debug.Assert(predicate != null);
 
             TSource current = seed;
 
             while (predicate(current))
             {
-                var iter = generator(current);
+                var (result, next) = accumulator(current);
 
-                yield return iter.Result;
+                yield return result;
 
-                current = iter.Next;
+                current = next;
             }
         }
 

@@ -33,15 +33,9 @@ namespace Edufun.Sequences
                 iterator: _ => (_.next, _.current + _.next),
                 resultSelector: _ => _.current);
 
-        public static IEnumerable<int> GatherOld()
-            => Sequence.Gather<Tuple<int, int>, int>(
-                seed: Tuple.Create(1, 1),
-                iterator: _ => Tuple.Create(_.Item2, _.Item1 + _.Item2),
-                resultSelector: _ => _.Item1);
-
         public static IEnumerable<int> Unfold()
-            => Sequence.Unfold(
-                seed: Tuple.Create(1, 1),
-                generator: _ => Iteration.Create(_.Item1, Tuple.Create(_.Item2, _.Item1 + _.Item2)));
+            => Sequence.Unfold<(int current, int next), int>(
+                seed: (1, 1),
+                accumulator: _ => (_.current, (_.next, _.current + _.next)));
     }
 }
