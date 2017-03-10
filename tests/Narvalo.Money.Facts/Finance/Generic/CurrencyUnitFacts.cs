@@ -30,8 +30,8 @@ namespace Narvalo.Finance.Generic
             => CurrencyUnit.OfType<EUR>();
 
         [Fact]
-        public static void OfType_ReturnsNull_ForMissingSingletonProperty()
-            => Assert.Null(CurrencyUnit.OfType<XXN>());
+        public static void OfType_ThrowsNotSupportedException_ForMissingSingletonProperty()
+            => Assert.Throws<NotSupportedException>(() => CurrencyUnit.OfType<XXN>());
 
         #endregion
 

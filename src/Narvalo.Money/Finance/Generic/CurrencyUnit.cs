@@ -2,6 +2,7 @@
 
 namespace Narvalo.Finance.Generic
 {
+    using System;
     using System.Reflection;
 
     public partial class CurrencyUnit
@@ -18,7 +19,11 @@ namespace Narvalo.Finance.Generic
             // We expect that all built-in currency units defines this property.
             PropertyInfo property = typeInfo.GetDeclaredProperty(SINGLETON_PROPERTY_NAME);
 
-            return property?.GetValue(null) as TCurrency;
+            var currency = property?.GetValue(null) as TCurrency;
+
+            if (currency == null) { throw new NotSupportedException("XXX"); }
+
+            return currency;
         }
     }
 
