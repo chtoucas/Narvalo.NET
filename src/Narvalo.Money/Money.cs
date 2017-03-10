@@ -163,7 +163,7 @@ namespace Narvalo
         /// <summary>
         /// Creates a new instance of the <see cref="Money"/> class for a specific currency
         /// and an amount where there is no restriction on the scale.
-        /// <para>Strictly equivalent to <see cref="Money(decimal, Currency)"/>; only added
+        /// <para>Strictly equivalent to <see cref="Money(Decimal, Currency)"/>; only added
         /// for completeness.</para>
         /// </summary>
         /// <param name="major">The decimal representing the amount of money.</param>
@@ -375,8 +375,8 @@ namespace Narvalo
         {
             if (formatProvider != null)
             {
-                var fmtr = formatProvider.GetFormat(typeof(Money)) as ICustomFormatter;
-                if (fmtr != null) { return fmtr.Format(format, this, formatProvider); }
+                object fmt = formatProvider.GetFormat(typeof(Money));
+                if (fmt is ICustomFormatter fmtr) { return fmtr.Format(format, this, formatProvider); }
             }
 
             return FormatImpl(format, NumberFormatInfo.GetInstance(formatProvider));

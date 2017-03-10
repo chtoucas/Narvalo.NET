@@ -211,8 +211,8 @@ namespace Narvalo.Finance.Generic
         {
             if (formatProvider != null)
             {
-                var fmtr = formatProvider.GetFormat(typeof(Money<TCurrency>)) as ICustomFormatter;
-                if (fmtr != null) { return fmtr.Format(format, this, formatProvider); }
+                object fmt = formatProvider.GetFormat(typeof(Money<TCurrency>));
+                if (fmt is ICustomFormatter fmtr) { return fmtr.Format(format, this, formatProvider); }
             }
 
             return FormatImpl(format, NumberFormatInfo.GetInstance(formatProvider));
