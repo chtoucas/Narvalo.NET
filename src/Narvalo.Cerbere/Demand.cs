@@ -43,36 +43,4 @@ namespace Narvalo
         [Conditional("CONTRACTS_FULL")]
         public static void NotNullOrEmpty(string value) => True(!String.IsNullOrEmpty(value));
     }
-
-    // Obsolete methods.
-    public static partial class Demand
-    {
-        [ContractAbbreviator]
-        [Conditional("DEBUG")]
-        [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage]
-        [Obsolete("Use Demand.NotNull() or Demand.NotNullUnconstrained() instead.")]
-        public static void Object<T>(T @this) => NotNullUnconstrained(@this);
-
-        [ContractAbbreviator]
-        [Conditional("DEBUG")]
-        [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage]
-        [Obsolete("Use Demand.NotNull() or Demand.NotNullUnconstrained() instead.")]
-        public static void Property<T>(T value) => NotNullUnconstrained(value);
-
-        [ContractAbbreviator]
-        [Conditional("DEBUG")]
-        [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage]
-        [Obsolete("Use Demand.True() instead.")]
-        public static void Property(bool testCondition) => True(testCondition);
-
-        [ContractAbbreviator]
-        [Conditional("DEBUG")]
-        [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage]
-        [Obsolete("Use Demand.NotNullOrEmpty() instead.")]
-        public static void PropertyNotEmpty(string value) => NotNullOrEmpty(value);
-    }
 }

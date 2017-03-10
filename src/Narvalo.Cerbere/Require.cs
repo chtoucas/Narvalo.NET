@@ -153,30 +153,4 @@ namespace Narvalo
             Contract.EndContractBlock();
         }
     }
-
-    // Obsolete methods.
-    public static partial class Require
-    {
-        [ContractArgumentValidator]
-        [ExcludeFromCodeCoverage]
-        // NB: Using this method will cause a compilation error;
-        // the default parameter name ("this") was wrong most of the time.
-        [Obsolete("Use Require.NotNull() or Require.NotNullUnconstrained() instead.", true)]
-        public static void Object<T>([ValidatedNotNull]T @this) => NotNullUnconstrained(@this, "this");
-
-        [ContractArgumentValidator]
-        [ExcludeFromCodeCoverage]
-        [Obsolete("Use Require.NotNull() or Require.NotNullUnconstrained() instead.")]
-        public static void Property<T>([ValidatedNotNull]T value) => NotNullUnconstrained(value, "value");
-
-        [ContractArgumentValidator]
-        [ExcludeFromCodeCoverage]
-        [Obsolete("Use Require.True() instead.")]
-        public static void Property(bool testCondition) => True(testCondition, "value");
-
-        [ContractArgumentValidator]
-        [ExcludeFromCodeCoverage]
-        [Obsolete("Use Require.NotNullOrEmpty() instead.")]
-        public static void PropertyNotEmpty([ValidatedNotNull]string value) => NotNullOrEmpty(value, "value");
-    }
 }
