@@ -3,6 +3,7 @@
 namespace Narvalo.Finance
 {
     using System;
+    using System.Diagnostics;
 
     using Narvalo.Applicative;
     using Narvalo.Finance.Internal;
@@ -22,15 +23,14 @@ namespace Narvalo.Finance
 
         private IbanParts(string countryCode, string checkDigits, string bban)
             : this(countryCode, checkDigits, bban, countryCode + checkDigits + bban)
-        {
-        }
+        { }
 
         private IbanParts(string countryCode, string checkDigits, string bban, string value)
         {
-            Demand.NotNull(countryCode);
-            Demand.NotNull(checkDigits);
-            Demand.NotNull(bban);
-            Demand.NotNull(value);
+            Debug.Assert(countryCode != null);
+            Debug.Assert(checkDigits != null);
+            Debug.Assert(bban != null);
+            Debug.Assert(value != null);
 
             Bban = bban;
             CheckDigits = checkDigits;
@@ -53,7 +53,7 @@ namespace Narvalo.Finance
             Require.True(CountryPart.Validate(countryCode), nameof(countryCode));
             Require.True(BbanPart.Validate(bban), nameof(bban));
 
-            var checkDigits = IbanCheckDigits.Compute(countryCode, bban);
+            string checkDigits = IbanCheckDigits.Compute(countryCode, bban);
 
             return new IbanParts(countryCode, checkDigits, bban);
         }
@@ -72,7 +72,7 @@ namespace Narvalo.Finance
 
         public static IbanParts? Parse(string value)
         {
-            if (!CheckLength(value)) { return null; }
+            if (value == null || !CheckLength(value)) { return null; }
 
             string countryCode = CountryPart.FromIban(value);
             if (countryCode == null) { return null; }
@@ -88,7 +88,10 @@ namespace Narvalo.Finance
 
         public static Outcome<IbanParts> TryParse(string value)
         {
-            if (!CheckLength(value)) { return Outcome<IbanParts>.FromError(Strings.Parse_InvalidIbanValue); }
+            if (value == null || !CheckLength(value))
+            {
+                return Outcome<IbanParts>.FromError(Strings.Parse_InvalidIbanValue);
+            }
 
             string countryCode = CountryPart.FromIban(value);
             if (countryCode == null) { return Outcome<IbanParts>.FromError(Strings.Parse_InvalidCountryCode); }
@@ -103,7 +106,10 @@ namespace Narvalo.Finance
         }
 
         internal static bool CheckLength(string value)
-            => value != null && value.Length >= MinLength && value.Length <= MaxLength;
+        {
+            Debug.Assert(value != null);
+            return value.Length >= MinLength && value.Length <= MaxLength;
+        }
 
         private static class BbanPart
         {
@@ -113,14 +119,14 @@ namespace Narvalo.Finance
 
             public static string FromIban(string value)
             {
-                Demand.Range(value.Length >= StartIndex);
+                Debug.Assert(value != null && value.Length >= StartIndex);
                 var retval = value.Substring(StartIndex);
                 return CheckContent(retval) ? retval : null;
             }
 
             public static bool Validate(string value)
             {
-                Demand.NotNull(value);
+                Debug.Assert(value != null);
                 return value.Length >= MinLength && value.Length <= MaxLength && CheckContent(value);
             }
 
@@ -134,14 +140,14 @@ namespace Narvalo.Finance
 
             public static string FromIban(string value)
             {
-                Demand.Range(value.Length >= StartIndex + Length);
+                Debug.Assert(value != null && value.Length >= StartIndex + Length);
                 var retval = value.Substring(StartIndex, Length);
                 return CheckContent(retval) ? retval : null;
             }
 
             public static bool Validate(string value)
             {
-                Demand.NotNull(value);
+                Debug.Assert(value != null);
                 return value.Length == Length && CheckContent(value);
             }
 
@@ -155,14 +161,14 @@ namespace Narvalo.Finance
 
             public static string FromIban(string value)
             {
-                Demand.Range(value.Length >= StartIndex + Length);
+                Debug.Assert(value != null && value.Length >= StartIndex + Length);
                 var retval = value.Substring(StartIndex, Length);
                 return CheckContent(retval) ? retval : null;
             }
 
             public static bool Validate(string value)
             {
-                Demand.NotNull(value);
+                Debug.Assert(value != null);
                 return value.Length == Length && CheckContent(value);
             }
 
@@ -204,12 +210,11 @@ namespace Narvalo.Finance
 
         private static string FormatGeneral(string input)
         {
-            Demand.NotNull(input);
+            Debug.Assert(input != null);
 
             int len = input.Length;
 
-            int rem;
-            int div = Number.DivRem(len, 4, out rem);
+            int div = Number.DivRem(len, 4, out int rem);
 
             int outlen = len + div - (rem == 0 ? 1 : 0);
             var output = new char[outlen];

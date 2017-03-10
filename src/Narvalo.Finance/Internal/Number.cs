@@ -2,6 +2,8 @@
 
 namespace Narvalo.Finance.Internal
 {
+    using System.Diagnostics;
+
     internal static class Number
     {
         // Reproduces the Math.DivRem() method which is not available with PCL:
@@ -9,7 +11,7 @@ namespace Narvalo.Finance.Internal
         // > int q = Math.DivRem(dividend, divisor, out remainder);
         public static int DivRem(int dividend, int divisor, out int remainder)
         {
-            Demand.True(divisor != 0);
+            Debug.Assert(divisor != 0);
 
             int q = dividend / divisor;
             // NB: remainder = dividend % divisor is slower.

@@ -3,6 +3,7 @@
 namespace Narvalo.Finance
 {
     using System;
+    using System.Diagnostics;
 
     using Narvalo.Applicative;
     using Narvalo.Finance.Internal;
@@ -47,11 +48,11 @@ namespace Narvalo.Finance
             string branchCode,
             string value)
         {
-            Demand.NotNull(institutionCode);
-            Demand.NotNull(countryCode);
-            Demand.NotNull(locationCode);
-            Demand.NotNull(branchCode);
-            Demand.NotNull(value);
+            Debug.Assert(institutionCode != null);
+            Debug.Assert(countryCode != null);
+            Debug.Assert(locationCode != null);
+            Debug.Assert(branchCode != null);
+            Debug.Assert(value != null);
 
             InstitutionCode = institutionCode;
             CountryCode = countryCode;
@@ -122,7 +123,7 @@ namespace Narvalo.Finance
 
         public static Bic? Parse(string value, BicVersion version)
         {
-            if (!CheckLength(value)) { return null; }
+            if (value == null || !CheckLength(value)) { return null; }
 
             string institutionCode = InstitutionPart.FromBic(value, version);
             if (institutionCode == null) { return null; }
@@ -144,7 +145,7 @@ namespace Narvalo.Finance
 
         public static Outcome<Bic> TryParse(string value, BicVersion version)
         {
-            if (!CheckLength(value)) { return Outcome<Bic>.FromError(Strings.Parse_InvalidBicValue); }
+            if (value == null || !CheckLength(value)) { return Outcome<Bic>.FromError(Strings.Parse_InvalidBicValue); }
 
             string institutionCode = InstitutionPart.FromBic(value, version);
             if (institutionCode == null) { return Outcome<Bic>.FromError(Strings.Parse_InvalidInstitutionCode); }
@@ -164,7 +165,10 @@ namespace Narvalo.Finance
         public override string ToString() => _value;
 
         private static bool CheckLength(string value)
-            => value != null && (value.Length == PartyLength || value.Length == BicLength);
+        {
+            Debug.Assert(value != null);
+            return value.Length == PartyLength || value.Length == BicLength;
+        }
 
         private static class BranchPart
         {
@@ -173,7 +177,7 @@ namespace Narvalo.Finance
 
             public static string FromBic(string value)
             {
-                Demand.True(value.Length == StartIndex || value.Length >= StartIndex + Length);
+                Debug.Assert(value != null && (value.Length == StartIndex || value.Length >= StartIndex + Length));
 
                 if (value.Length == PartyLength)
                 {
@@ -188,7 +192,7 @@ namespace Narvalo.Finance
 
             public static bool Validate(string value)
             {
-                Demand.NotNull(value);
+                Debug.Assert(value != null);
                 return value.Length == 0 || (value.Length == Length && CheckContent(value));
             }
 
@@ -202,14 +206,14 @@ namespace Narvalo.Finance
 
             public static string FromBic(string value)
             {
-                Demand.True(value.Length >= StartIndex + Length);
+                Debug.Assert(value != null && value.Length >= StartIndex + Length);
                 string retval = value.Substring(StartIndex, Length);
                 return CheckContent(retval) ? retval : null;
             }
 
             public static bool Validate(string value)
             {
-                Demand.NotNull(value);
+                Debug.Assert(value != null);
                 return value.Length == Length && CheckContent(value);
             }
 
@@ -223,6 +227,8 @@ namespace Narvalo.Finance
 
             public static string FromBic(string value, BicVersion version)
             {
+                Debug.Assert(value != null);
+
                 string retval = value.Substring(StartIndex, Length);
 
                 return CheckContent(retval, version) ? retval : null;
@@ -230,7 +236,7 @@ namespace Narvalo.Finance
 
             public static bool Validate(string value, BicVersion version)
             {
-                Demand.NotNull(value);
+                Debug.Assert(value != null);
                 return value.Length == Length && CheckContent(value, version);
             }
 
@@ -246,14 +252,14 @@ namespace Narvalo.Finance
 
             public static string FromBic(string value)
             {
-                Demand.True(value.Length >= StartIndex + Length);
+                Debug.Assert(value.Length >= StartIndex + Length);
                 string retval = value.Substring(StartIndex, Length);
                 return CheckContent(retval) ? retval : null;
             }
 
             public static bool Validate(string value)
             {
-                Demand.NotNull(value);
+                Debug.Assert(value != null);
                 return value.Length == Length && CheckContent(value);
             }
 

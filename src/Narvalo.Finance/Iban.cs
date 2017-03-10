@@ -110,7 +110,7 @@ namespace Narvalo.Finance
         {
             if (value == null) { return Outcome<Iban>.FromError(Strings.Parse_InvalidIbanValue); }
 
-            var input = PreprocessInput(value, styles);
+            string input = PreprocessInput(value, styles);
 
             return from val in IbanParts.TryParse(input)
                    where IbanValidator.TryValidate(val, levels)
@@ -130,7 +130,7 @@ namespace Narvalo.Finance
         // is not enforced.
         private static string PreprocessInput(string text, IbanStyles styles)
         {
-            Demand.NotNull(text);
+            Debug.Assert(text != null);
 
             // Fast track.
             if (styles == IbanStyles.None) { return text; }
