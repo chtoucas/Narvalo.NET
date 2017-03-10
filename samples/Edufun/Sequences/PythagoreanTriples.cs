@@ -8,7 +8,6 @@ namespace Edufun.Sequences
 
     using Narvalo.Applicative;
 
-    // **WARNING** These sequences are infinite!
     public static class PythagoreanTriples
     {
         public static IEnumerable<Tuple<int, int, int>> Gather()

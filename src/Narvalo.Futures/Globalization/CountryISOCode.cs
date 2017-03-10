@@ -10,23 +10,18 @@ namespace Narvalo.Globalization
     public partial class CountryISOCode
     {
         private string _threeLetterCode;
-        private string _twoLetterCode;
-        private string _numericCode;
 
         public CountryISOCode(string twoLetterCode, string numericCode)
         {
             Require.NotNullOrEmpty(twoLetterCode, nameof(twoLetterCode));
             Require.NotNullOrEmpty(numericCode, nameof(numericCode));
 
-            _twoLetterCode = twoLetterCode;
-            _numericCode = numericCode;
+            TwoLetterCode = twoLetterCode;
+            NumericCode = numericCode;
         }
 
         // Alpha-2 code defined in ISO 3166-1 alpha-2.
-        public string TwoLetterCode
-        {
-            get { return _twoLetterCode; }
-        }
+        public string TwoLetterCode { get; }
 
         // Alpha-3 code defined in ISO 3166-2 alpha-3.
         public string ThreeLetterCode
@@ -45,10 +40,7 @@ namespace Narvalo.Globalization
         }
 
         // Numeric code defined in ISO 3166-1 numeric.
-        public string NumericCode
-        {
-            get { return _numericCode; }
-        }
+        public string NumericCode { get; }
 
         public bool IsUserAssigned
             => TwoLetterCode == "AA"
@@ -58,8 +50,7 @@ namespace Narvalo.Globalization
 
         public static CountryISOCode Of(string twoLetterCode)
         {
-            string numericCode;
-            if (!Alpha2ToNumeric.TryGetValue(twoLetterCode, out numericCode))
+            if (!Alpha2ToNumeric.TryGetValue(twoLetterCode, out string numericCode))
             {
                 throw new Exception("Unknown country code " + twoLetterCode + ".");
             }
@@ -363,15 +354,9 @@ namespace Narvalo.Globalization
             }
         }
 
-        public static string FindThreeLetterCode(string twoLetterCode)
-        {
-            return Alpha2ToAlpha3[twoLetterCode];
-        }
+        public static string FindThreeLetterCode(string twoLetterCode) => Alpha2ToAlpha3[twoLetterCode];
 
-        public static string FindNumericCode(string twoLetterCode)
-        {
-            return Alpha2ToNumeric[twoLetterCode];
-        }
+        public static string FindNumericCode(string twoLetterCode) => Alpha2ToNumeric[twoLetterCode];
 
         public static string FindTwoLetterCode(string numericCode)
         {

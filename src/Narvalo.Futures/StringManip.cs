@@ -73,14 +73,9 @@ namespace Narvalo
             Require.NotNull(value, nameof(value));
             Require.Range(length >= 1, nameof(length));
 
-            if (value.Length <= length)
-            {
-                return value;
-            }
-            else
-            {
-                return value.Substring(0, length - 1) + postfix;
-            }
+            return value.Length <= length
+                ? value
+                : value.Substring(0, length - 1) + postfix;
         }
     }
 }

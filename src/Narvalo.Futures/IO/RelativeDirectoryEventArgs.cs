@@ -6,21 +6,13 @@ namespace Narvalo.IO
 
     public sealed partial class RelativeDirectoryEventArgs : EventArgs
     {
-        private readonly RelativeDirectory _relativeDirectory;
-
         public RelativeDirectoryEventArgs(RelativeDirectory relativeDirectory)
         {
             Require.NotNull(relativeDirectory, nameof(relativeDirectory));
 
-            _relativeDirectory = relativeDirectory;
+            RelativeDirectory = relativeDirectory;
         }
 
-        public RelativeDirectory RelativeDirectory
-        {
-            get
-            {
-                return _relativeDirectory;
-            }
-        }
+        public RelativeDirectory RelativeDirectory { get; }
     }
 }

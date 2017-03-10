@@ -12,10 +12,7 @@ namespace Narvalo.Configuration
     /// </summary>
     public sealed class AbsoluteUriValidator : ConfigurationValidatorBase
     {
-        public override bool CanValidate(Type type)
-        {
-            return type == typeof(Uri);
-        }
+        public override bool CanValidate(Type type) => type == typeof(Uri);
 
         public override void Validate(object value)
         {

@@ -30,12 +30,12 @@ namespace Edufun.Sequences
         public static IEnumerable<int> Gather()
             => Sequence.Gather<(int current, int next), int>(
                 seed: (1, 1),
-                iterator: _ => (_.next, _.current + _.next),
-                resultSelector: _ => _.current);
+                iterator: t => (t.next, t.current + t.next),
+                resultSelector: t => t.current);
 
         public static IEnumerable<int> Unfold()
             => Sequence.Unfold<(int current, int next), int>(
                 seed: (1, 1),
-                accumulator: _ => (_.current, (_.next, _.current + _.next)));
+                accumulator: t => (t.current, (t.next, t.current + t.next)));
     }
 }

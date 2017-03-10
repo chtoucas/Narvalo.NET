@@ -6,7 +6,6 @@ namespace Narvalo.IO
 
     public sealed partial class RelativeFile
     {
-        private readonly FileInfo _file;
         private readonly string _relativeDirectoryName;
 
         // REVIEW: Require.NotEmpty on relativeDirectoryName?
@@ -15,24 +14,12 @@ namespace Narvalo.IO
             Require.NotNull(file, nameof(file));
             Require.NotNull(relativeDirectoryName, nameof(relativeDirectoryName));
 
-            _file = file;
+            File = file;
             _relativeDirectoryName = relativeDirectoryName;
         }
 
-        public FileInfo File
-        {
-            get
-            {
-                return _file;
-            }
-        }
+        public FileInfo File { get; }
 
-        public string RelativeName
-        {
-            get
-            {
-                return Path.Combine(_relativeDirectoryName, _file.Name);
-            }
-        }
+        public string RelativeName => Path.Combine(_relativeDirectoryName, _file.Name);
     }
 }
