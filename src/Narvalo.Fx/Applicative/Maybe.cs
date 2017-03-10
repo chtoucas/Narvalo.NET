@@ -3,6 +3,7 @@
 namespace Narvalo.Applicative
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
 
     /// <summary>
     /// Provides a set of static and extension methods for <see cref="Maybe{T}"/>
@@ -42,7 +43,7 @@ namespace Narvalo.Applicative
 
         private static IEnumerable<TSource> CollectAnyIterator<TSource>(IEnumerable<Maybe<TSource>> source)
         {
-            Demand.NotNull(source);
+            Debug.Assert(source != null);
 
             foreach (var item in source)
             {

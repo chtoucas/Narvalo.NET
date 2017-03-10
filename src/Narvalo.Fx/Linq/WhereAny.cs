@@ -4,6 +4,7 @@ namespace Narvalo.Linq
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
 
     using Narvalo.Applicative;
 
@@ -53,8 +54,8 @@ namespace Narvalo.Linq
             IEnumerable<TSource> source,
             Func<TSource, bool?> predicate)
         {
-            Demand.NotNull(source);
-            Demand.NotNull(predicate);
+            Debug.Assert(source != null);
+            Debug.Assert(predicate != null);
 
             foreach (var item in source)
             {
@@ -68,8 +69,8 @@ namespace Narvalo.Linq
             IEnumerable<TSource> source,
             Func<TSource, Maybe<bool>> predicate)
         {
-            Demand.NotNull(source);
-            Demand.NotNull(predicate);
+            Debug.Assert(source != null);
+            Debug.Assert(predicate != null);
 
             foreach (var item in source)
             {
@@ -83,8 +84,8 @@ namespace Narvalo.Linq
             IEnumerable<TSource> source,
             Func<TSource, Outcome<bool>> predicate)
         {
-            Demand.NotNull(source);
-            Demand.NotNull(predicate);
+            Debug.Assert(source != null);
+            Debug.Assert(predicate != null);
 
             foreach (var item in source)
             {
@@ -98,8 +99,8 @@ namespace Narvalo.Linq
             IEnumerable<TSource> source,
             Func<TSource, Fallible<bool>> predicate)
         {
-            Demand.NotNull(source);
-            Demand.NotNull(predicate);
+            Debug.Assert(source != null);
+            Debug.Assert(predicate != null);
 
             foreach (var item in source)
             {

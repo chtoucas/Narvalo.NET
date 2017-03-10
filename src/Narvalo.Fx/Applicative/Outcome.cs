@@ -31,7 +31,7 @@ namespace Narvalo.Applicative
         /// <value>true if the outcome was successful; otherwise false.</value>
         public bool IsSuccess => !IsError;
 
-        internal string Error { get { Demand.State(IsError); return _error; } }
+        internal string Error { get { Debug.Assert(IsError); return _error; } }
 
         [ExcludeFromCodeCoverage]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]

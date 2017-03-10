@@ -4,6 +4,7 @@ namespace Narvalo.Linq
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
 
     using Narvalo.Applicative;
 
@@ -66,8 +67,8 @@ namespace Narvalo.Linq
             Func<TSource, TResult?> selector)
             where TResult : struct
         {
-            Demand.NotNull(source);
-            Demand.NotNull(selector);
+            Debug.Assert(source != null);
+            Debug.Assert(selector != null);
 
             foreach (var item in source)
             {
@@ -82,8 +83,8 @@ namespace Narvalo.Linq
             Func<TSource, TResult> selector)
             where TResult : class
         {
-            Demand.NotNull(source);
-            Demand.NotNull(selector);
+            Debug.Assert(source != null);
+            Debug.Assert(selector != null);
 
             foreach (var item in source)
             {
@@ -97,8 +98,8 @@ namespace Narvalo.Linq
             IEnumerable<TSource> source,
             Func<TSource, Maybe<TResult>> selector)
         {
-            Demand.NotNull(source);
-            Demand.NotNull(selector);
+            Debug.Assert(source != null);
+            Debug.Assert(selector != null);
 
             foreach (var item in source)
             {
@@ -112,8 +113,8 @@ namespace Narvalo.Linq
             IEnumerable<TSource> source,
             Func<TSource, Outcome<TResult>> selector)
         {
-            Demand.NotNull(source);
-            Demand.NotNull(selector);
+            Debug.Assert(source != null);
+            Debug.Assert(selector != null);
 
             foreach (var item in source)
             {
@@ -127,8 +128,8 @@ namespace Narvalo.Linq
             IEnumerable<TSource> source,
             Func<TSource, Fallible<TResult>> selector)
         {
-            Demand.NotNull(source);
-            Demand.NotNull(selector);
+            Debug.Assert(source != null);
+            Debug.Assert(selector != null);
 
             foreach (var item in source)
             {

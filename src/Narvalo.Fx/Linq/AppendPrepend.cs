@@ -3,6 +3,7 @@
 namespace Narvalo.Linq
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
 
     public static partial class Qperators
     {
@@ -25,7 +26,7 @@ namespace Narvalo.Linq
 
         private static IEnumerable<TSource> AppendIterator<TSource>(IEnumerable<TSource> source, TSource element)
         {
-            Demand.NotNull(source);
+            Debug.Assert(source != null);
 
             foreach (var item in source)
             {
@@ -37,7 +38,7 @@ namespace Narvalo.Linq
 
         private static IEnumerable<TSource> PrependIterator<TSource>(IEnumerable<TSource> source, TSource element)
         {
-            Demand.NotNull(source);
+            Debug.Assert(source != null);
 
             yield return element;
 

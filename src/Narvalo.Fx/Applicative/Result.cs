@@ -4,6 +4,7 @@ namespace Narvalo.Applicative
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
 
     /// <summary>
     /// Provides a set of static and extension methods for <see cref="Result{T, TError}"/>
@@ -41,7 +42,7 @@ namespace Narvalo.Applicative
         private static IEnumerable<TSource> CollectAnyIterator<TSource, TError>(
             IEnumerable<Result<TSource, TError>> source)
         {
-            Demand.NotNull(source);
+            Debug.Assert(source != null);
 
             foreach (var item in source)
             {

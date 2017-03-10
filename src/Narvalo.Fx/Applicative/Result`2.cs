@@ -52,14 +52,14 @@ namespace Narvalo.Applicative
         /// </summary>
         /// <remarks>Any access to this method must be protected by checking before that
         /// <see cref="IsSuccess"/> is true.</remarks>
-        internal T Value { get { Demand.State(IsSuccess); return _value; } }
+        internal T Value { get { Debug.Assert(IsSuccess); return _value; } }
 
         /// <summary>
         /// Obtains the enclosed error if any.
         /// </summary>
         /// <remarks>Any access to this method must be protected by checking before that
         /// <see cref="IsError"/> is true.</remarks>
-        internal TError Error { get { Demand.State(IsError); return _error; } }
+        internal TError Error { get { Debug.Assert(IsError); return _error; } }
 
         [ExcludeFromCodeCoverage]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]

@@ -33,7 +33,7 @@ namespace Narvalo.Applicative
         /// <seealso cref="Maybe.Of{T}(T?)"/>
         private Maybe(T value)
         {
-            Demand.NotNullUnconstrained(value);
+            Debug.Assert(value != null);
 
             _value = value;
             IsSome = true;
@@ -57,7 +57,7 @@ namespace Narvalo.Applicative
         /// <remarks>Any access to this property must be protected by checking before that
         /// <see cref="IsSome"/> is true.</remarks>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        internal T Value { get { Demand.State(IsSome); return _value; } }
+        internal T Value { get { Debug.Assert(IsSome); return _value; } }
 
         /// <summary>
         /// Obtains the enclosed value if any; otherwise the default value of type T.

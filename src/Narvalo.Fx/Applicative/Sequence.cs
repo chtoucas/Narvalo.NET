@@ -4,6 +4,7 @@ namespace Narvalo.Applicative
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
 
     /// <summary>
     /// Provides a set of static methods that produce objects of type <see cref="IEnumerable{T}"/>.
@@ -52,7 +53,7 @@ namespace Narvalo.Applicative
             TSource seed,
             Func<TSource, Iteration<TResult, TSource>> generator)
         {
-            Demand.NotNull(generator);
+            Debug.Assert(generator != null);
 
             TSource current = seed;
 
@@ -71,8 +72,8 @@ namespace Narvalo.Applicative
             Func<TSource, Iteration<TResult, TSource>> generator,
             Func<TSource, bool> predicate)
         {
-            Demand.NotNull(generator);
-            Demand.NotNull(predicate);
+            Debug.Assert(generator != null);
+            Debug.Assert(predicate != null);
 
             TSource current = seed;
 
@@ -169,7 +170,7 @@ namespace Narvalo.Applicative
             TSource seed,
             Func<TSource, TSource> iterator)
         {
-            Demand.NotNull(iterator);
+            Debug.Assert(iterator != null);
 
             TSource current = seed;
 
@@ -186,8 +187,8 @@ namespace Narvalo.Applicative
             Func<TSource, TSource> iterator,
             Func<TSource, bool> predicate)
         {
-            Demand.NotNull(iterator);
-            Demand.NotNull(predicate);
+            Debug.Assert(iterator != null);
+            Debug.Assert(predicate != null);
 
             TSource current = seed;
 
@@ -204,8 +205,8 @@ namespace Narvalo.Applicative
             Func<TSource, TSource> iterator,
             Func<TSource, TResult> resultSelector)
         {
-            Demand.NotNull(iterator);
-            Demand.NotNull(resultSelector);
+            Debug.Assert(iterator != null);
+            Debug.Assert(resultSelector != null);
 
             TSource current = seed;
 
@@ -223,9 +224,9 @@ namespace Narvalo.Applicative
             Func<TSource, TResult> resultSelector,
             Func<TSource, bool> predicate)
         {
-            Demand.NotNull(iterator);
-            Demand.NotNull(resultSelector);
-            Demand.NotNull(predicate);
+            Debug.Assert(iterator != null);
+            Debug.Assert(resultSelector != null);
+            Debug.Assert(predicate != null);
 
             TSource current = seed;
 

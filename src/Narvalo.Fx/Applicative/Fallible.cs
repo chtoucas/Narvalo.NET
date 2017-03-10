@@ -18,7 +18,7 @@ namespace Narvalo.Applicative
 
         private Fallible(ExceptionDispatchInfo error)
         {
-            Demand.NotNull(error);
+            Debug.Assert(error != null);
 
             _error = error;
             IsError = true;
@@ -41,7 +41,7 @@ namespace Narvalo.Applicative
         /// </summary>
         /// <remarks>Any access to this method must be protected by checking before that
         /// <see cref="IsError"/> is true.</remarks>
-        internal ExceptionDispatchInfo Error { get { Demand.State(IsError); return _error; } }
+        internal ExceptionDispatchInfo Error { get { Debug.Assert(IsError); return _error; } }
 
         [ExcludeFromCodeCoverage]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]

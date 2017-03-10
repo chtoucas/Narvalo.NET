@@ -30,7 +30,7 @@ namespace Narvalo.Applicative
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "isSuccess", Justification = "[Intentionally] Only added to disambiguate the two ctors when T = TError.")]
         private Outcome(string error, bool isSuccess)
         {
-            Demand.NotNull(error);
+            Debug.Assert(error != null);
 
             _error = error;
             _value = default(T);
@@ -54,14 +54,14 @@ namespace Narvalo.Applicative
         /// </summary>
         /// <remarks>Any access to this method must be protected by checking before that
         /// <see cref="IsSuccess"/> is true.</remarks>
-        internal T Value { get { Demand.State(IsSuccess); return _value; } }
+        internal T Value { get { Debug.Assert(IsSuccess); return _value; } }
 
         /// <summary>
         /// Obtains the captured exception state.
         /// </summary>
         /// <remarks>Any access to this method must be protected by checking before that
         /// <see cref="IsError"/> is true.</remarks>
-        internal string Error { get { Demand.State(IsError); return _error; } }
+        internal string Error { get { Debug.Assert(IsError); return _error; } }
 
         [ExcludeFromCodeCoverage]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
