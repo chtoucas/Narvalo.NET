@@ -9,9 +9,7 @@
     <Import_RootNamespace>Cerbere_Core</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)CheckFacts.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ControlFlowExceptionFacts.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DemandFacts.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FormatFacts.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RequireFacts.cs" />
   </ItemGroup>

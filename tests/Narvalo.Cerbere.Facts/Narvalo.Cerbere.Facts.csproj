@@ -32,6 +32,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CheckFacts.cs" />
+    <Compile Include="DemandFacts.cs" />
     <Compile Include="EnforceFacts.cs" />
     <Compile Include="ExpectFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

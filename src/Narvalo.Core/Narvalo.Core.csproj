@@ -11,9 +11,7 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Check.cs" />
     <Compile Include="ControlFlowException.cs" />
-    <Compile Include="Demand.cs" />
     <Compile Include="ExcludeFromCodeCoverageAttribute.cs" />
     <Compile Include="Format.cs" />
     <Compile Include="HashCodeHelpers.cs" />

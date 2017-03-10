@@ -6,6 +6,21 @@ namespace Narvalo
 
     using Narvalo.Properties;
 
+    /// <summary>
+    /// Initializes a new instance of <see cref="ControlFlowException"/> class.
+    /// Asserts that a point of execution is unreachable.
+    /// </summary>
+    /// <example>
+    /// <code>
+    /// switch (myEnum)
+    /// {
+    ///     case MyEnum.DefinedValue:
+    ///         return "DefinedValue";
+    ///     default:
+    ///         throw new ControlFlowException("Found a missing case in a switch.");
+    /// }
+    /// </code>
+    /// </example>
     public class ControlFlowException : Exception
     {
         /// <summary>
