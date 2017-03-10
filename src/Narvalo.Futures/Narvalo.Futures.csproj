@@ -10,7 +10,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.ValueTuple.4.3.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
@@ -84,17 +83,6 @@
     </Compile>
     <Compile Include="StringManip.cs" />
     <Compile Include="UrlFormatProvider.cs" />
-    <Compile Include="Web\Semantic\IOpenGraphMetadata.cs" />
-    <Compile Include="Web\Semantic\Ontology.cs" />
-    <Compile Include="Web\Semantic\OpenGraphImage.cs" />
-    <Compile Include="Web\Semantic\OpenGraphJpeg.cs" />
-    <Compile Include="Web\Semantic\OpenGraphLocale.cs" />
-    <Compile Include="Web\Semantic\OpenGraphMetadata.cs" />
-    <Compile Include="Web\Semantic\OpenGraphPng.cs" />
-    <Compile Include="Web\Semantic\OpenGraphType.cs" />
-    <Compile Include="Web\Semantic\Relationships.cs" />
-    <Compile Include="Web\Semantic\SchemaOrgType.cs" />
-    <Compile Include="Web\Semantic\SchemaOrgVocabulary.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Narvalo.Futures.Version.props" />
