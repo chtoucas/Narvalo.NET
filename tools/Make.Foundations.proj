@@ -6,10 +6,6 @@
     - '_Analyze_', only include libraries ready for standard code analysis
     - '_CodeContracts_', only include libraries ready for CC analysis
     - '_Security_', only include libraries ready for security analysis
-    - '_Core_', include Core projects
-    - '_Finance_', include Finance projects
-    - '_Mvp_', include Mvp projects
-    - '_Build_', include Narvalo.Build project
     or any combination, e.g. '/p:Filter="_Core_;_Mvp_"'.
     Any list separator should work but, if you use a semicolon, do not forget
     to quote the list of filters.
@@ -30,6 +26,7 @@
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Core\Narvalo.Core.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Finance\Narvalo.Finance.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Fx\Narvalo.Fx.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Finance\Narvalo.Money.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp\Narvalo.Mvp.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj" />
         <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Web\Narvalo.Web.csproj" />-->
@@ -40,13 +37,8 @@
     <When Condition=" '$(Filter)' == '_CodeContracts_' ">
       <ItemGroup>
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Cerbere\Narvalo.Cerbere.csproj" />
-        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Common\Narvalo.Common.csproj" />
-        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Core\Narvalo.Core.csproj" />
-        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Finance\Narvalo.Finance.csproj" />
-        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Fx\Narvalo.Fx.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp\Narvalo.Mvp.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj" />
-        <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Web\Narvalo.Web.csproj" />-->
       </ItemGroup>
     </When>
 
@@ -58,6 +50,7 @@
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Core\Narvalo.Core.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Finance\Narvalo.Finance.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Fx\Narvalo.Fx.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Finance\Narvalo.Money.csproj" />
         <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp\Narvalo.Mvp.csproj" />-->
         <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj" />-->
         <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Web\Narvalo.Web.csproj" />-->
@@ -67,29 +60,42 @@
 
     <!-- Targets for packaging & publishing . -->
     <Otherwise>
-      <ItemGroup Condition=" '$(Filter)' == '_None_' Or '$(Filter.Contains(_Core_))' == 'true' ">
+      <ItemGroup Condition=" '$(Filter)' == '_None_' Or '$(Filter.Contains(_Cerbere_))' == 'true' ">
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Cerbere\Narvalo.Cerbere.csproj" />
-        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Common\Narvalo.Common.csproj" />
-        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Core\Narvalo.Core.csproj" />
-        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Fx\Narvalo.Fx.csproj" />
-        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Web\Narvalo.Web.csproj" />
-
-        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Facts.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Cerbere.Facts.csproj" />
       </ItemGroup>
-
+      <ItemGroup Condition=" '$(Filter)' == '_None_' Or '$(Filter.Contains(_Common_))' == 'true' ">
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Cerbere\Narvalo.Common.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Common.Facts.csproj" />
+      </ItemGroup>
+      <ItemGroup Condition=" '$(Filter)' == '_None_' Or '$(Filter.Contains(_Core_))' == 'true' ">
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Cerbere\Narvalo.Core.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Core.Facts.csproj" />
+      </ItemGroup>
       <ItemGroup Condition=" '$(Filter)' == '_None_' Or '$(Filter.Contains(_Finance_))' == 'true' ">
-        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Finance\Narvalo.Finance.csproj" />
-
-        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Finance.Facts\Narvalo.Finance.Facts.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Cerbere\Narvalo.Finance.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Finance.Facts.csproj" />
       </ItemGroup>
-
+      <ItemGroup Condition=" '$(Filter)' == '_None_' Or '$(Filter.Contains(_Fx_))' == 'true' ">
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Cerbere\Narvalo.Fx.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Fx.Facts.csproj" />
+      </ItemGroup>
+      <ItemGroup Condition=" '$(Filter)' == '_None_' Or '$(Filter.Contains(_Money_))' == 'true' ">
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Cerbere\Narvalo.Money.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Money.Facts.csproj" />
+      </ItemGroup>
       <ItemGroup Condition=" '$(Filter)' == '_None_' Or '$(Filter.Contains(_Mvp_))' == 'true' ">
-        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp\Narvalo.Mvp.csproj" />
-        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj" />
-
-        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Mvp.Facts\Narvalo.Mvp.Facts.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Cerbere\Narvalo.Mvp.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Mvp.Facts.csproj" />
       </ItemGroup>
-
+      <ItemGroup Condition=" '$(Filter)' == '_None_' Or '$(Filter.Contains(_MvpWeb_))' == 'true' ">
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Cerbere\Narvalo.Mvp.Web.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Mvp.Web.Facts.csproj" />
+      </ItemGroup>
+      <ItemGroup Condition=" '$(Filter)' == '_None_' Or '$(Filter.Contains(_Web_))' == 'true' ">
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Cerbere\Narvalo.Web.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Web.Facts.csproj" />
+      </ItemGroup>
       <ItemGroup Condition=" '$(Filter)' == '_None_' Or '$(Filter.Contains(_Build_))' == 'true' ">
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Build\Narvalo.Build.csproj" />
       </ItemGroup>

@@ -226,35 +226,9 @@ Task _CI-InitializeVariables `
 
 Task Package-All `
     -Description 'Package everything.' `
-    -Depends Package-Core, Package-Mvp, Package-Build `
+    -Depends Package-Build, Package-Cerbere, Package-Common, Package-Core, `
+      Package-Finance, Package-Fx, Package-Money, Package-Mvp, Package-MvpWeb, Package-Web `
     -Alias Pack
-
-Task Package-Core `
-    -Description 'Create the core NuGet packages.' `
-    -Depends _Package-InitializeVariables `
-    -Alias PackCore `
-{
-    MSBuild $Foundations $Opts $Package_Targets $Package_Props `
-        '/p:Filter=_Core_'
-}
-
-Task Package-Finance `
-    -Description 'Create the Narvalo.Finance package.' `
-    -Depends _Package-InitializeVariables `
-    -Alias PackFinance `
-{
-    MSBuild $Foundations $Opts $Package_Targets $Package_Props `
-        '/p:Filter=_Finance_'
-}
-
-Task Package-Mvp `
-    -Description 'Create the MVP-related packages.' `
-    -Depends _Package-InitializeVariables `
-    -Alias PackMvp `
-{
-    MSBuild $Foundations $Opts $Package_Targets $Package_Props `
-        '/p:Filter=_Mvp_'
-}
 
 Task Package-Build `
     -Description 'Create the Narvalo.Build package.' `
@@ -263,6 +237,87 @@ Task Package-Build `
 {
     MSBuild $Foundations $Opts $Package_Targets $Package_Props `
         '/p:Filter=_Build_'
+}
+
+Task Package-Cerbere `
+    -Description 'Create the package Narvalo.Cerbere.' `
+    -Depends _Package-InitializeVariables `
+    -Alias PackCerbere `
+{
+    MSBuild $Foundations $Opts $Package_Targets $Package_Props `
+        '/p:Filter=_Cerbere_'
+}
+
+Task Package-Common `
+    -Description 'Create the package Narvalo.Common.' `
+    -Depends _Package-InitializeVariables `
+    -Alias PackCommon `
+{
+    MSBuild $Foundations $Opts $Package_Targets $Package_Props `
+        '/p:Filter=_Common_'
+}
+
+Task Package-Core `
+    -Description 'Create the package Narvalo.Core.' `
+    -Depends _Package-InitializeVariables `
+    -Alias PackCore `
+{
+    MSBuild $Foundations $Opts $Package_Targets $Package_Props `
+        '/p:Filter=_Core_'
+}
+
+Task Package-Finance `
+    -Description 'Create the package Narvalo.Finance.' `
+    -Depends _Package-InitializeVariables `
+    -Alias PackFinance `
+{
+    MSBuild $Foundations $Opts $Package_Targets $Package_Props `
+        '/p:Filter=_Finance_'
+}
+
+Task Package-Fx `
+    -Description 'Create the package Narvalo.Fx.' `
+    -Depends _Package-InitializeVariables `
+    -Alias PackFx `
+{
+    MSBuild $Foundations $Opts $Package_Targets $Package_Props `
+        '/p:Filter=_Fx_'
+}
+
+Task Package-Money `
+    -Description 'Create the package Narvalo.Money.' `
+    -Depends _Package-InitializeVariables `
+    -Alias PackMoney`
+{
+    MSBuild $Foundations $Opts $Package_Targets $Package_Props `
+        '/p:Filter=_Money_'
+}
+
+Task Package-Mvp `
+    -Description 'Create the package Narvalo.Mvp.' `
+    -Depends _Package-InitializeVariables `
+    -Alias PackMvp `
+{
+    MSBuild $Foundations $Opts $Package_Targets $Package_Props `
+        '/p:Filter=_Mvp_'
+}
+
+Task Package-MvpWeb `
+    -Description 'Create the package Narvalo.Mvp.Web.' `
+    -Depends _Package-InitializeVariables `
+    -Alias PackMvpWeb `
+{
+    MSBuild $Foundations $Opts $Package_Targets $Package_Props `
+        '/p:Filter=_MvpWeb_'
+}
+
+Task Package-Web `
+    -Description 'Create the package Narvalo.Web.' `
+    -Depends _Package-InitializeVariables `
+    -Alias PackWeb `
+{
+    MSBuild $Foundations $Opts $Package_Targets $Package_Props `
+        '/p:Filter=_Web_'
 }
 
 Task _Package-InitializeVariables `
