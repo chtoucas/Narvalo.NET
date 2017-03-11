@@ -4,11 +4,11 @@ ChangeLog (XXXX-XX-XX)
 Library                   | Previous | vNext
 --------------------------|----------|--------
 Narvalo.Build             | 1.1.0    | -
-Narvalo.Cerbere           | 2.0.0    | 2.1.0
-Narvalo.Common            | 0.25.0   | 0.26.0
+Narvalo.Cerbere           | 2.0.0    | 3.0.0
+Narvalo.Common            | 0.25.0   | 1.0.0
 Narvalo.Core              | 0.25.0   | 1.0.0
 Narvalo.Finance           | 0.25.0   | 1.0.0
-Narvalo.Fx                | 0.25.0   | 0.26.0
+Narvalo.Fx                | 0.25.0   | 1.0.0
 Narvalo.Money             | -        | 1.0.0
 Narvalo.Mvp               | 1.0.0    | 1.1.0
 Narvalo.Mvp.Web           | 1.0.0    | 1.1.0
