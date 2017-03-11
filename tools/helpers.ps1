@@ -546,21 +546,3 @@ function Install-RemoteItem {
 }
 
 # ------------------------------------------------------------------------------
-
-Export-ModuleMember -Function `
-    Exit-Gracefully,
-    Get-7Zip,
-    Get-Git,
-    Get-GitCommitHash,
-    Get-GitStatus,
-    Get-LocalPath,
-    Get-NuGet,
-    Get-PSakeModulePath,
-    Install-7Zip,
-    Install-NuGet,
-    Install-PSake,
-    Restore-Packages,
-    Restore-SolutionPackages,
-    Stop-AnyMSBuildProcess
-
-# ------------------------------------------------------------------------------
