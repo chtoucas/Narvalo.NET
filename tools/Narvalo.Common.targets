@@ -40,23 +40,6 @@
   <!-- Use the AfterCleanDependsOn property to add your custom targets to AfterClean. -->
   <Target Name="AfterClean" DependsOnTargets="$(AfterCleanDependsOn)" />
 
-  <!-- ### Code Analysis Hooks ### -->
-  <!--
-    I wanted to replace the FxCop default messages to include the project name
-    but the provided MSBuild targets make it difficult to hook inside the process.
-  -->
-  <!--<Target Name="BeforeCodeAnalysis"
-          BeforeTargets="RunCodeAnalysis"
-          Condition=" '$(RunCodeAnalysis)' == 'true' ">
-    <Message Text="Running Code Analysis on $(ProjectName)..." Importance="normal" />
-  </Target>
-
-  <Target Name="AfterCodeAnalysis"
-          BeforeTargets="RunCodeAnalysis"
-          Condition=" '$(RunCodeAnalysis)' == 'true' ">
-    <Message Text="Code Analysis Complete for $(ProjectName)..." Importance="high" />
-  </Target>-->
-
   <!-- ### After Imports ### -->
 
   <!-- If any, import custom global targets. -->
