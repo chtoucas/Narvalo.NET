@@ -4,17 +4,11 @@
          InitialTargets="__InitializeMakeCommonTargets"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-  <!-- Import Narvalo tasks. -->
-  <!--<Import Project="$(MSBuildThisFileDirectory)..\packages\Narvalo.Build.*\build\Narvalo.Build.tasks" />-->
-
   <!-- Import Xunit tasks. -->
   <ItemGroup>
     <XunitAssemblyFile Include="$(MSBuildThisFileDirectory)..\packages\**\xunit.runner.msbuild.dll" />
   </ItemGroup>
   <UsingTask TaskName="Xunit.Runner.MSBuild.xunit" AssemblyFile="@(XunitAssemblyFile)" />
-  
-  <!-- Import OpenCover tasks. -->
-  <Import Project="$(MSBuildThisFileDirectory)..\packages\OpenCover.*\MSBuild\OpenCover.targets" />
 
   <!-- Clean target. -->
   <Target Name="Clean">
@@ -62,24 +56,14 @@
           Inputs="@(BuildOutputs)"
           Outputs="$(XunitXmlFile)">
     <ItemGroup>
-      <_TestAssembly Include="%(BuildOutputs.Identity)"
-                     Condition=" '@(BuildOutputs->EndsWith('Facts.dll'))' == 'true' " />
+      <_TestAssemblies Include="%(BuildOutputs.Identity)"
+                       Condition=" '@(BuildOutputs->EndsWith('Facts.dll'))' == 'true' " />
     </ItemGroup>
 
-    <xunit Assemblies="@(_TestAssembly)"
+    <xunit Assemblies="@(_TestAssemblies)"
            Html="$(XunitHtmlFile)"
            Xml="$(XunitXmlFile)"
-           Condition=" '@(_TestAssembly)' != '' " />
-  </Target>
-
-  <!-- OpenCover target. -->
-  <Target Name="OpenCover"
-          DependsOnTargets="Xunit"
-          Inputs="@(BuildOutputs)">
-    <ItemGroup>
-      <_TestAssembly Include="%(BuildOutputs.Identity)"
-                     Condition=" '@(BuildOutputs->EndsWith('Facts.dll'))' == 'true' " />
-    </ItemGroup>
+           Condition=" '@(_TestAssemblies)' != '' " />
   </Target>
 
   <!-- __InitializeMakeCommonTargets. -->
