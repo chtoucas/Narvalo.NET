@@ -6,7 +6,7 @@
 
   <!-- Define common MSBuild project options. -->
   <PropertyGroup>
-    <!-- Other options: Release and CodeContracts. -->
+    <!-- Other option: Release. -->
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 
     <!-- Right now, AnyCPU is the only supported platform. -->

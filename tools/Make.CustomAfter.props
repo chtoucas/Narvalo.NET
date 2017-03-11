@@ -157,19 +157,6 @@
   <PropertyGroup Condition=" '$(NuProjectExists)' == 'true' ">
     <NuTitle Condition=" $(NuTitle) == '' ">$(NuId)</NuTitle>
     <NuDescription Condition=" '$(NuDescription)' == '' ">$(NuSummary)</NuDescription>
-    <!-- REVIEW: Should we enable this or let the consumer discover this during the installation?
-    <NuDescription Condition=" '$(TargetFrameworkProfile)' != '' ">
-      <![CDATA[
-$(NuDescription)
-This is a portable class library targeting $(TargetFrameworkProfile).
-      ]]>
-    </NuDescription>-->
-    <NuDescription Condition=" '$(SkipCodeContractsReferenceAssembly)' != 'true' And $(CodeContractsReferenceAssembly) == 'Build' ">
-      <![CDATA[
-$(NuDescription)
-A code contracts reference assembly is included if you ever need it.
-      ]]>
-    </NuDescription>
     <NuReleaseNotes Condition=" $(NuReleaseNotes) == '' ">See https://github.com/chtoucas/Narvalo.NET/blob/master/docs/changelogs/index.md</NuReleaseNotes>
     <NuCopyright Condition=" $(NuCopyright) == '' ">Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
   </PropertyGroup>
