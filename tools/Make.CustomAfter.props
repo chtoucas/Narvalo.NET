@@ -48,16 +48,6 @@
     <CodeAnalysisGenerateSuccessFile>false</CodeAnalysisGenerateSuccessFile>
   </PropertyGroup>
 
-  <!-- Gendarme Analysis -->
-  <PropertyGroup>
-    <EnableGendarme Condition=" '$(EnableGendarme)' != 'true' ">false</EnableGendarme>
-
-    <!-- The constant CODE_ANALYSIS is also defined when $(RunCodeAnalysis) is true, but
-         most certainly this is not the case when $(EnableGendarme) is true. Even if it was
-         the case, we would simply add the constant twice. -->
-    <DefineConstants Condition=" '$(EnableGendarme)' == 'true' ">$(DefineConstants);CODE_ANALYSIS</DefineConstants>
-  </PropertyGroup>
-
   <!-- Code Contracts -->
   <PropertyGroup>
     <!-- Treat all warnings as errors. -->
