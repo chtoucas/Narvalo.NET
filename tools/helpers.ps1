@@ -4,6 +4,35 @@
 
 <#
 .SYNOPSIS
+    Convert a MSBuild verbosity level to a NuGet verbosity level.
+.PARAMETER Verbosity
+    Specifies the MSBuild verbosity.
+.INPUTS
+    None.
+.OUTPUTS
+    None.
+#>
+function ConvertTo-NuGetVerbosity {
+    param([Parameter(Mandatory = $true, Position = 0)] [string] $Verbosity)
+
+    switch ($verbosity) {
+        'q'          { return 'quiet' }
+        'quiet'      { return 'quiet' }
+        'm'          { return 'normal' }
+        'minimal'    { return 'normal' }
+        'n'          { return 'normal' }
+        'normal'     { return 'normal' }
+        'd'          { return 'detailed' }
+        'detailed'   { return 'detailed' }
+        'diag'       { return 'detailed' }
+        'diagnostic' { return 'detailed' }
+
+        default      { return 'normal' }
+    }
+}
+
+<#
+.SYNOPSIS
     Exit current process gracefully.
 .DESCRIPTION
     Depending on the specified error code, display a colorful message for success

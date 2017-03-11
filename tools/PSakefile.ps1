@@ -30,7 +30,6 @@ Properties {
 
     # Main MSBuild projects.
     $Everything  = Get-LocalPath 'tools\Make.proj'
-    $Foundations = Get-LocalPath 'tools\Make.Foundations.proj'
 
     # NuGet packages.
     # TODO: Make it survive NuGet updates.
@@ -64,8 +63,7 @@ Task Default -Depends Build
 # Continuous Integration and development tasks
 # ------------------------------------------------------------------------------
 
-# NB: No need to restore packages before building the projects $Everything
-# or $Foundations; this will be done in MSBuild.
+# NB: No need to restore packages before building the projects; this will be done in MSBuild.
 
 Task FullClean `
     -Description 'Delete permanently the "work" directory.' `
@@ -90,7 +88,6 @@ Task Test `
     MSBuild $Everything $Opts $CI_Props `
         '/t:Xunit',
         '/p:Configuration=Debug',
-        '/p:SkipCodeContractsReferenceAssembly=true',
         '/p:SkipDocumentation=true'
 }
 
@@ -100,10 +97,9 @@ Task OpenCover `
     -Alias Cover `
 {
     # Use debug build to also cover debug-only tests.
-    MSBuild $Foundations $Opts $CI_Props `
+    MSBuild $Everything $Opts $CI_Props `
         '/t:Build',
         '/p:Configuration=Debug',
-        '/p:SkipCodeContractsReferenceAssembly=true',
         '/p:SkipDocumentation=true',
         '/p:Filter="_Core_;_Mvp_"'
 
@@ -117,77 +113,14 @@ Task OpenCoverVerbose `
     -Alias CoverVerbose `
 {
     # Use debug build to also cover debug-only tests.
-    MSBuild $Foundations $Opts $CI_Props `
+    MSBuild $Everything $Opts $CI_Props `
         '/t:Build',
         '/p:Configuration=Debug',
-        '/p:SkipCodeContractsReferenceAssembly=true',
         '/p:SkipDocumentation=true',
         '/p:Filter="_Core_;_Mvp_"'
 
     Invoke-OpenCover 'Debug'
     Invoke-ReportGenerator
-}
-
-Task CodeAnalysis `
-    -Description 'Build, analyze, then run PEVerify.' `
-    -Depends _CI-InitializeVariables `
-    -Alias CA `
-{
-    $output = Get-LocalPath 'work\log\code-analysis.log'
-
-    # Perform the following operations:
-    # - Build all projects
-    # - Run Source Analysis
-    # - Verify Portable Executable (PE) format
-    # NB: For static analysis, we hide internals, otherwise we might not truly
-    # analyze the public API.
-    # NB: Adding Build to the targets is not necessary, but it makes clearer that
-    # we do not just run PEVerify. In fact, we need to rebuild otherwise CA might fail.
-    # NB: Removed '/p:SourceAnalysisEnabled=true' (replaced by StyleCop.Analyzers)
-    MSBuild $Foundations $Opts $CI_Props `
-        '/t:Rebuild;PEVerify',
-        '/p:Configuration=Debug',
-        '/p:VisibleInternals=false',
-        '/p:SkipCodeContractsReferenceAssembly=true',
-        '/p:SkipDocumentation=true',
-        '/p:RunCodeAnalysis=true',
-        '/p:Filter=_Analyze_' | Tee-Object -file $output
-}
-
-Task CodeContractsAnalysis `
-    -Description 'Run Code Contracts Analysis.' `
-    -Depends _CI-InitializeVariables `
-    -Alias CC `
-{
-    $output = Get-LocalPath 'work\log\code-contracts.log'
-
-    # For static analysis, we hide internals, otherwise we might not truly
-    # analyze the public API.
-    MSBuild $Foundations $Opts $CI_Props `
-        '/t:Build',
-        '/p:VisibleInternals=false',
-        '/p:Configuration=CodeContracts',
-        '/p:Filter=_CodeContracts_' | Tee-Object -file $output
-}
-
-Task SecurityAnalysis `
-    -Description 'Run Security Analysis.' `
-    -Depends _CI-InitializeVariables `
-    -Alias SA `
-{
-    $output = Get-LocalPath 'work\log\security-analysis.log'
-
-    # Keep the PEVerify target (see the comments in the MSBuild target _PEVerify).
-    MSBuild $Foundations $Opts $CI_Props `
-        '/t:SecAnnotate;PEVerify',
-        # For static analysis, we hide internals, otherwise we might not truly
-        # analyze the public API.
-        '/p:VisibleInternals=false',
-        '/p:SignAssembly=true',
-        '/p:SkipCodeContractsReferenceAssembly=true',
-        '/p:SkipDocumentation=true',
-        '/p:EnableSecurityAnnotations=true',
-        '/p:Filter=_Security_' | Tee-Object -file $output
 }
 
 Task _CI-InitializeVariables `
@@ -198,17 +131,13 @@ Task _CI-InitializeVariables `
     # - Release configuration
     # - Do not generate assembly versions
     # - Do not sign assemblies
-    # - Do not skip the generation of the Code Contracts reference assembly
     # - Leak internals to enable all white-box tests.
-    # FIXME: CodeContracts disabled.
     $script:CI_Props = `
         '/p:Configuration=Release',
         '/p:BuildGeneratedVersion=false',
         "/p:Retail=$Retail",
         '/p:SignAssembly=false',
-        '/p:SkipCodeContractsReferenceAssembly=false',
-        '/p:VisibleInternals=true',
-        '/p:EnableSecurityAnnotations=false'
+        '/p:VisibleInternals=true'
 
     # FIXME: Don't understand why doing what follows does not work.
     # Either MSBuild or PowerShell mixes up the MSBuild parameters.
@@ -223,94 +152,12 @@ Task _CI-InitializeVariables `
 # Packaging tasks
 # ------------------------------------------------------------------------------
 
-Task Package-Build `
-    -Description 'Create the Narvalo.Build package.' `
+Task Package `
+    -Description 'Create the packages.' `
     -Depends _Package-InitializeVariables `
-    -Alias PackBuild `
+    -Alias Pack `
 {
-    MSBuild $Foundations $Opts $Package_Targets $Package_Props `
-        '/p:Filter=_Build_'
-}
-
-Task Package-Cerbere `
-    -Description 'Create the package Narvalo.Cerbere.' `
-    -Depends _Package-InitializeVariables `
-    -Alias PackCerbere `
-{
-    MSBuild $Foundations $Opts $Package_Targets $Package_Props `
-        '/p:Filter=_Cerbere_'
-}
-
-Task Package-Common `
-    -Description 'Create the package Narvalo.Common.' `
-    -Depends _Package-InitializeVariables `
-    -Alias PackCommon `
-{
-    MSBuild $Foundations $Opts $Package_Targets $Package_Props `
-        '/p:Filter=_Common_'
-}
-
-Task Package-Core `
-    -Description 'Create the package Narvalo.Core.' `
-    -Depends _Package-InitializeVariables `
-    -Alias PackCore `
-{
-    MSBuild $Foundations $Opts $Package_Targets $Package_Props `
-        '/p:Filter=_Core_'
-}
-
-Task Package-Finance `
-    -Description 'Create the package Narvalo.Finance.' `
-    -Depends _Package-InitializeVariables `
-    -Alias PackFinance `
-{
-    MSBuild $Foundations $Opts $Package_Targets $Package_Props `
-        '/p:Filter=_Finance_'
-}
-
-Task Package-Fx `
-    -Description 'Create the package Narvalo.Fx.' `
-    -Depends _Package-InitializeVariables `
-    -Alias PackFx `
-{
-    MSBuild $Foundations $Opts $Package_Targets $Package_Props `
-        '/p:Filter=_Fx_'
-}
-
-Task Package-Money `
-    -Description 'Create the package Narvalo.Money.' `
-    -Depends _Package-InitializeVariables `
-    -Alias PackMoney `
-{
-    MSBuild $Foundations $Opts $Package_Targets $Package_Props `
-        '/p:Filter=_Money_'
-}
-
-Task Package-Mvp `
-    -Description 'Create the package Narvalo.Mvp.' `
-    -Depends _Package-InitializeVariables `
-    -Alias PackMvp `
-{
-    MSBuild $Foundations $Opts $Package_Targets $Package_Props `
-        '/p:Filter=_Mvp_'
-}
-
-Task Package-MvpWeb `
-    -Description 'Create the package Narvalo.Mvp.Web.' `
-    -Depends _Package-InitializeVariables `
-    -Alias PackMvpWeb `
-{
-    MSBuild $Foundations $Opts $Package_Targets $Package_Props `
-        '/p:Filter=_MvpWeb_'
-}
-
-Task Package-Web `
-    -Description 'Create the package Narvalo.Web.' `
-    -Depends _Package-InitializeVariables `
-    -Alias PackWeb `
-{
-    MSBuild $Foundations $Opts $Package_Targets $Package_Props `
-        '/p:Filter=_Web_'
+    MSBuild $Everything $Opts $Package_Targets $Package_Props
 }
 
 Task _Package-InitializeVariables `
@@ -322,25 +169,21 @@ Task _Package-InitializeVariables `
     # - Release configuration
     # - Generate assembly versions (necessary for NuGet packaging)
     # - Sign assemblies
-    # - Do not skip the generation of the Code Contracts reference assembly
     # - Unconditionally hide internals (implies no white-box testing)
-    # FIXME: CodeContracts disabled.
     $script:Package_Props = `
         '/p:Configuration=Release',
         '/p:BuildGeneratedVersion=true',
         "/p:GitCommitHash=$GitCommitHash",
         "/p:Retail=$Retail",
         '/p:SignAssembly=true',
-        '/p:SkipCodeContractsReferenceAssembly=false',
-        '/p:VisibleInternals=false',
-        '/p:EnableSecurityAnnotations=false'
+        '/p:VisibleInternals=false'
 
     # Packaging targets:
     # - Rebuild all
     # - Verify Portable Executable (PE) format
     # - Run Xunit tests
     # - Package
-    $script:Package_Targets = '/t:PEVerify;Xunit;Package'
+    $script:Package_Targets = '/t:Xunit;Package'
 }
 
 Task _Package-CheckVariablesForRetail `
@@ -398,35 +241,6 @@ Task _Tools-InitializeVariables `
 # ------------------------------------------------------------------------------
 # Functions
 # ------------------------------------------------------------------------------
-
-<#
-.SYNOPSIS
-    Convert a MSBuild verbosity level to a NuGet verbosity level.
-.PARAMETER Verbosity
-    Specifies the MSBuild verbosity.
-.INPUTS
-    None.
-.OUTPUTS
-    None.
-#>
-function ConvertTo-NuGetVerbosity {
-    param([Parameter(Mandatory = $true, Position = 0)] [string] $Verbosity)
-
-    switch ($verbosity) {
-        'q'          { return 'quiet' }
-        'quiet'      { return 'quiet' }
-        'm'          { return 'normal' }
-        'minimal'    { return 'normal' }
-        'n'          { return 'normal' }
-        'normal'     { return 'normal' }
-        'd'          { return 'detailed' }
-        'detailed'   { return 'detailed' }
-        'diag'       { return 'detailed' }
-        'diagnostic' { return 'detailed' }
-
-        default      { return 'normal' }
-    }
-}
 
 # TODO: Should be a task.
 function Invoke-OpenCover {
