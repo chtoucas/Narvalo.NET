@@ -1,106 +1,3 @@
-
-function Invoke-BuildTask {
-    & $script:MSBuild $script:Project $script:MSBuildCommonProps $script:MSBuildCIProps '/t:Build'
-}
-
-function Invoke-XunitTask {
-    & $script:MSBuild $script:Project $script:MSBuildCommonProps $script:MSBuildCIProps '/t:Xunit'
-}
-
-function Invoke-OpenCoverTask {
-    & $script:MSBuild $script:Project $script:MSBuildCommonProps $script:MSBuildCIProps '/t:Build'
-
-    Invoke-OpenCover
-    Invoke-ReportGenerator -Summary
-}
-
-function Invoke-PackageTask {
-    if ($script:Retail -eq $null) {
-        Exit-Gracefully -ExitCode 1 "`$Retail must not be null."
-    }
-
-    $git = (Get-Git)
-
-    $hash = ''
-
-    if ($git -ne $null) {
-        $status = Get-GitStatus $git -Short
-
-        if ($status -eq $null) {
-            Write-Warning 'Skipping git commit hash... unabled to verify the git status.'
-        } elseif ($status -ne '') {
-            Write-Warning 'Skipping git commit hash... uncommitted changes are pending.'
-        } else {
-            $hash = Get-GitCommitHash $git
-        }
-    }
-
-    if ($script:Retail -and $hash -eq '') {
-        Exit-Gracefully -ExitCode 1 `
-            'When building retail packages, the git commit hash CAN NOT be empty.'
-    }
-
-    & $script:MSBuild $script:Project $script:MSBuildCommonProps `
-        '/t:Package' `
-        '/p:Configuration=Release',
-        '/p:BuildGeneratedVersion=true',
-        "/p:GitCommitHash=$hash",
-        "/p:Retail=$script:Retail",
-        '/p:SignAssembly=true',
-        '/p:VisibleInternals=false'
-}
-
-function Invoke-OpenCover {
-    $opencover = Get-LocalPath "packages\OpenCover.$script:OpenCoverVersion\tools\OpenCover.Console.exe" -Resolve
-    $xunit     = Get-LocalPath "packages\xunit.runner.console.$script:XunitVersion\tools\xunit.console.exe" -Resolve
-
-    $filter = '+[Narvalo*]* -[*Facts]* -[Xunit.*]*'
-    $excludeByAttribute = 'System.Runtime.CompilerServices.CompilerGeneratedAttribute;Narvalo.ExcludeFromCodeCoverageAttribute;System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute'
-
-    $asm1 = Get-LocalPath "work\bin\$script:Configuration\Narvalo.Core.Facts.dll" -Resolve
-    $asm1 = Get-LocalPath "work\bin\$script:Configuration\Narvalo.Money.Facts.dll" -Resolve
-    $asm1 = Get-LocalPath "work\bin\$script:Configuration\Narvalo.Finance.Facts.dll" -Resolve
-    $asms = "$asm1"
-
-    # Be very careful with arguments containing spaces.
-    . $opencover `
-      -register:user `
-      "-filter:$filter" `
-      "-excludebyattribute:$excludeByAttribute" `
-      "-output:$script:OpenCoverXml" `
-      "-target:$xunit"  `
-      "-targetargs:$asms -nologo -noshadow"
-}
-
-function Invoke-ReportGenerator {
-    [CmdletBinding()]
-    param(
-        [switch] $Summary
-    )
-
-    $reportgenerator = Get-LocalPath "packages\ReportGenerator.$script:ReportGeneratorVersion\tools\ReportGenerator.exe" -Resolve
-
-    if ($summary.IsPresent) {
-        $targetdir   = Get-LocalPath 'work\log'
-        $filters     = '+*'
-        $reporttypes = 'HtmlSummary'
-    }
-    else {
-        $targetdir   = Get-LocalPath 'work\log\opencover'
-        $filters     = '-Narvalo.Common;-Narvalo.Fx;-Narvalo.Money;-Narvalo.Mvp;-Narvalo.Mvp.Web;-Narvalo.Web'
-        $reporttypes = 'Html'
-    }
-
-    . $reportgenerator `
-        -verbosity:Info `
-        -reporttypes:$reporttypes `
-        "-filters:$filters" `
-        -reports:$script:OpenCoverXml `
-        -targetdir:$targetdir
-}
-
-# ------------------------------------------------------------------------------
-
 <#
 .SYNOPSIS
     Exit current process gracefully.
@@ -135,6 +32,27 @@ function Exit-Gracefully {
     Write-Host $message -BackgroundColor $backgroundColor -ForegroundColor Yellow
 
     Exit $exitCode
+}
+
+function Find-PkgTool {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)]
+        [string] $Directory,
+
+        [Parameter(Mandatory = $true, Position = 1)]
+        [string] $Pkg,
+        
+        [Parameter(Mandatory = $true, Position = 2)]
+        [string] $Tool
+    )
+    
+    $matches = @($Directory | Get-ChildItem -Directory | Where { $_.FullName -match $pkg })
+
+    if ($matches.Count -eq 0) { Exit-Gracefully -ExitCode 1 "No package found matching $pkg." }
+    if ($matches.Count -ne 1) { Exit-Gracefully -ExitCode 1 "More than one package found matching $pkg"}
+
+    return $matches | %{ Join-Path -Path $_.FullName -ChildPath $tool -Resolve }
 }
 
 <#
@@ -288,6 +206,26 @@ function Get-LocalPath {
     } else {
         Join-Path -Path $script:ProjectRoot -ChildPath $path -Resolve:$resolve.IsPresent
     }
+}
+
+<#
+.SYNOPSIS
+    Get the path to the locally installed MSBuild command.
+.OUTPUTS
+    System.String. Get-MSBuild returns a string that contains the path to the MSBuild executable.
+#>
+function Get-MSBuild {
+    # See https://github.com/Microsoft/vswhere/wiki/Find-MSBuild
+    # Apparently, the documentation (or vswhere) is wrong, it gives us the path to VS not MSBuild.
+    $VisualStudio = .\packages\vswhere.1.0.50\tools\vswhere -latest -products * `
+        -requires Microsoft.Component.MSBuild -property installationPath
+    $MSBuild = Join-Path $VisualStudio 'MSBuild\15.0\Bin\MSBuild.exe'
+    if (!(Test-Path $MSBuild)) {
+        Write-Host -BackgroundColor Red -ForegroundColor Yellow 'Unable to locate MSBuild' `
+        Exit 1
+    }
+
+    return $MSBuild
 }
 
 <#

@@ -4,11 +4,11 @@
 .SYNOPSIS
     Run the build script.
 .PARAMETER Configuration
-    Specifies the configuration (not used by the task Package).
-.PARAMETER Help
-    If present, display the help then exit.
+    Specifies the configuration (ignored by the task Package).
+.PARAMETER FullCoverage
+    Produces a detailed coverage report (only for the task Cover).
 .PARAMETER Retail
-    If present, packages/assemblies are built for retail.
+    If present, packages/assemblies are built for retail (only for the task Package).
 .PARAMETER Safe
     If present, ensures there is no concurrent MSBuild running.
 .PARAMETER Task
@@ -46,7 +46,7 @@ param(
     [Alias('v')] [string] $Verbosity = 'minimal',
 
     [switch] $Safe,
-    [Alias('h')] [switch] $Help
+    [switch] $FullCoverage
 )
 
 Set-StrictMode -Version Latest
@@ -68,18 +68,13 @@ if ($retail.IsPresent) {
     Write-Host "Make script - Non-retail version.`n"
 }
 
-if ($help.IsPresent) {
-    Get-Help $MyInvocation.MyCommand.Path -Full
-    Exit 0
-}
+# Path to the local repository (used by helpers.ps1).
+$ProjectRoot = $PSScriptRoot
 
 # Load the helpers.
-. '.\tools\helpers.ps1'
+. '.\tools\make-helpers.ps1'
 
 # ------------------------------------------------------------------------------
-
-# Path to the local repository for the project Narvalo.NET.
-$ProjectRoot = $PSScriptRoot
 
 # Main MSBuild projects.
 $Project  = Get-LocalPath 'tools\Make.proj'
@@ -87,22 +82,23 @@ $Project  = Get-LocalPath 'tools\Make.proj'
 # Common MSBuild options.
 $MSBuildCommonProps = '/nologo', "/verbosity:$Verbosity", '/maxcpucount', '/nodeReuse:false';
 
-# Default CI properties.
-# - Leak internals to enable all white-box tests.
+# CI properties.
 $MSBuildCIProps = `
     "/p:Configuration=$Configuration",
     '/p:BuildGeneratedVersion=false',
-    "/p:Retail=$Retail",
+    "/p:Retail=false",
     '/p:SignAssembly=false',
     '/p:SkipDocumentation=true',
     '/p:VisibleInternals=true'
 
-# TODO: Make them survive NuGet updates.
-$OpenCoverVersion = '4.6.519'
-$XunitVersion = '2.2.0'
-$ReportGeneratorVersion = '2.5.6'
-    
-$OpenCoverXml = Get-LocalPath 'work\log\opencover.xml'
+# Packaging properties.
+$MSBuildPackageProps = `
+    '/p:Configuration=Release',
+    '/p:BuildGeneratedVersion=true',
+    "/p:Retail=$Retail",
+    '/p:SignAssembly=true',
+    '/p:SkipDocumentation=false',
+    '/p:VisibleInternals=false'
 
 # ------------------------------------------------------------------------------
 
@@ -112,21 +108,88 @@ if ($safe.IsPresent) {
 
 Restore-SolutionPackages
 
-# See https://github.com/Microsoft/vswhere/wiki/Find-MSBuild
-# Apparently, the documentation (or vswhere) is wrong, it gives us the path to VS not MSBuild.
-$VisualStudio = .\packages\vswhere.1.0.50\tools\vswhere -latest -products * `
-    -requires Microsoft.Component.MSBuild -property installationPath
-$MSBuild = Join-Path $VisualStudio 'MSBuild\15.0\Bin\MSBuild.exe'
-if (!(Test-Path $MSBuild)) {
-    Write-Host -BackgroundColor Red -ForegroundColor Yellow 'Unable to locate MSBuild' `
-    Exit 1
-}
-
 switch ($task) {
-    'build' { Invoke-BuildTask }
-    'test' { Invoke-XunitTask }
-    'cover' { Invoke-OpenCoverTask }
-    'pack' { Invoke-PackageTask }
+    'build' {
+        & (Get-MSBuild) $Project $MSBuildCommonProps $MSBuildCIProps '/t:Build'
+    }
+
+    'test' {
+        & (Get-MSBuild) $Project $MSBuildCommonProps $MSBuildCIProps '/t:Xunit'
+    }
+
+    'pack' {
+        $git = (Get-Git)
+
+        $hash = ''
+
+        if ($git -ne $null) {
+            $status = Get-GitStatus $git -Short
+
+            if ($status -eq $null) {
+                Write-Warning 'Skipping git commit hash... unabled to verify the git status.'
+            } elseif ($status -ne '') {
+                Write-Warning 'Skipping git commit hash... uncommitted changes are pending.'
+            } else {
+                $hash = Get-GitCommitHash $git
+            }
+        }
+
+        if ($Retail -and $hash -eq '') {
+            Exit-Gracefully -ExitCode 1 `
+                'When building retail packages, the git commit hash CAN NOT be empty.'
+        }
+
+        & (Get-MSBuild) $Project $MSBuildCommonProps $MSBuildPackageProps "/p:GitCommitHash=$hash" '/t:Xunit;Package'
+    }
+
+    'cover' {
+        & (Get-MSBuild) $Project $MSBuildCommonProps $MSBuildCIProps '/t:Build'
+
+        $packages     = (Get-LocalPath "packages")
+        $opencoverxml = Get-LocalPath 'work\log\opencover.xml'
+
+        # OpenCover
+        # ---------
+
+        $opencover = $packages | Find-PkgTool -Pkg 'OpenCover.*' -Tool 'tools\OpenCover.Console.exe'
+        $xunit     = $packages | Find-PkgTool -Pkg 'xunit.runner.console.*' -Tool 'tools\xunit.console.exe'
+        $asms      = Get-ChildItem -Path (Get-LocalPath "work\bin\$Configuration\*") -Include "*.Facts.dll"
+
+        $targetargs   = $asms -join " "
+
+        # Be very careful with arguments containing spaces.
+        . $opencover `
+          -register:user `
+          "-filter:+[Narvalo*]* -[*Facts]* -[Xunit.*]*" `
+          "-excludebyattribute:System.Runtime.CompilerServices.CompilerGeneratedAttribute;*.ExcludeFromCodeCoverageAttribute" `
+          "-output:$opencoverxml" `
+          "-target:$xunit"  `
+          "-targetargs:$targetargs -nologo -noshadow"
+
+        # ReportGenerator
+        # ---------------
+
+        $reportgenerator = $packages | Find-PkgTool -Pkg 'ReportGenerator.*' -Tool 'tools\ReportGenerator.exe'
+
+        if ($FullCoverage) {
+            # WARNING: We filter out most assemblies.
+            $targetdir     = Get-LocalPath 'work\log\opencover'
+            $reportfilters = '-Narvalo.Common;-Narvalo.Fx;-Narvalo.Money;-Narvalo.Mvp;-Narvalo.Mvp.Web;-Narvalo.Web'
+            $reporttypes   = 'Html'
+        }
+        else {
+            $targetdir     = Get-LocalPath 'work\log'
+            $reportfilters = '+*'
+            $reporttypes   = 'HtmlSummary'
+        }
+
+        . $reportgenerator `
+            -verbosity:Info `
+            -reporttypes:$reporttypes `
+            "-assemblyfilters:$reportfilters" `
+            -reports:$opencoverxml `
+            -targetdir:$targetdir
+    }
 }
 
 # ------------------------------------------------------------------------------

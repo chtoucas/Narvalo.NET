@@ -4,10 +4,10 @@ Issues (en vrac)
 Tasks
 -----
 
-- Automatic code formatting with CodeFormatter.
+- Re-enable CC just for Narvalo.Cerbere.
 - Put the private key in the repository.
   See [here](https://msdn.microsoft.com/en-us/library/wd40t7ad(v=vs.110).aspx)
-- Remove .nuget directory.
+- Automatic code formatting with CodeFormatter.
 
 ### Locales - Unassigned
 - [CLDR](http://cldr.unicode.org/index/downloads)

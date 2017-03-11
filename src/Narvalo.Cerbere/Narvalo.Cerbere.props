@@ -21,20 +21,6 @@
   </PropertyGroup>
 
   <!-- Code Contracts -->
-  <!--
-    For a complete list of available options, see
-      %ProgramFiles%\Microsoft\Contracts\MsBuild\v$(VisualStudioVersion)\Microsoft.CodeContractAnalysis.targets
-      %ProgramFiles%\Microsoft\Contracts\MsBuild\v$(VisualStudioVersion)\Microsoft.CodeContracts.targets
-
-    We do not really enforce any policy for Code Contracts as they are not
-    currently used by all projects. When enabling Code Contracts on a project,
-    you should also add the following lines to {AssemblyName}.props:
-      <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">
-        <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
-      </PropertyGroup>
-    On CodeContracts Build, configuration is exclusively done inside VS.
-    Even so, let's set some reasonable defaults.
-  -->
   <PropertyGroup>
     <!-- Use "Custom Parameter Validation". -->
     <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>
