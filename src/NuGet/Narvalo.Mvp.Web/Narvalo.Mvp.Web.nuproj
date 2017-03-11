@@ -38,17 +38,5 @@ Samples are available on the project web site.
 <file src="Narvalo.Mvp.Web.xml" target="lib\net45\" />
       ]]>
     </NuFiles>
-    <NuFiles Condition=" '$(SkipCodeContractsReferenceAssembly)' != 'true' ">
-      <![CDATA[
-$(NuFiles)
-<file src="CodeContracts\Narvalo.Mvp.Web.Contracts.dll" target="lib\net45\CodeContracts\" />
-      ]]>
-    </NuFiles>
-    <NuFiles Condition=" '$(CodeContractsEmitXMLDocs)' == 'true' ">
-      <![CDATA[
-$(NuFiles)
-<file src="CodeContracts\Narvalo.Mvp.Web.Contracts.xml" target="lib\net45\CodeContracts\" />
-      ]]>
-    </NuFiles>
   </PropertyGroup>
 </Project>

@@ -12,7 +12,7 @@
   -->
 
   <PropertyGroup>
-    <CodeAnalysisRuleSet Condition=" '$(Configuration)' != 'CodeContracts' ">MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">

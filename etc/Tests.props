@@ -17,7 +17,7 @@
   -->
 
   <PropertyGroup>
-    <CodeAnalysisRuleSet Condition=" '$(Configuration)' != 'CodeContracts' ">$(RepositorySettingsDir)Tests.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>$(RepositorySettingsDir)Tests.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
 
