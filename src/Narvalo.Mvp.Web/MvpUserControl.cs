@@ -39,17 +39,12 @@ namespace Narvalo.Mvp.Web
 
         protected T DataItem<T>() where T : class, new()
         {
-            Expect.NotNull(Page);
-            Warrant.NotNull<T>();
-
             var t = Page.GetDataItem() as T;
             return t ?? new T();
         }
 
         protected T DataValue<T>() where T : class
         {
-            Expect.NotNull(Page);
-
             // NB: WebFormsMvp does not add a type constraint and use a direct cast
             // (T)Page.GetDataItem() but I prefer to avoid boxing/unboxing and the risk
             // of an InvalidCastException.
@@ -60,9 +55,6 @@ namespace Narvalo.Mvp.Web
             Justification = "XXX")]
         protected string DataValue<T>(string format) where T : class
         {
-            Expect.NotNull(Page);
-            Warrant.NotNull<string>();
-
             // NB: WebFormsMvp does not add a type constraint and use a direct cast
             // (T)Page.GetDataItem() but I prefer to avoid boxing/unboxing and the risk
             // of an InvalidCastException.

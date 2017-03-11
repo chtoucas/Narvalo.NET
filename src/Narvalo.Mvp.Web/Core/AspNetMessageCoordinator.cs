@@ -78,7 +78,7 @@ namespace Narvalo.Mvp.Web.Core
 
         private void AddHandler<T>(Action<T> onNext)
         {
-            Demand.NotNull(onNext);
+            Debug.Assert(onNext != null);
 
             var handlersOfT = _handlers.GetOrAdd(typeof(T), _ => new List<Action<object>>());
             Assume(handlersOfT != null, "Extern: BCL.");
@@ -109,7 +109,7 @@ namespace Narvalo.Mvp.Web.Core
 
         private void PushPreviousMessages<T>(Action<T> onNext)
         {
-            Demand.NotNull(onNext);
+            Debug.Assert(onNext != null);
 
             var messageType = typeof(T);
 
@@ -148,23 +148,3 @@ namespace Narvalo.Mvp.Web.Core
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Mvp.Web.Core
-{
-    using System.Diagnostics.Contracts;
-
-    public sealed partial class AspNetMessageCoordinator
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_handlers != null);
-            Contract.Invariant(_lock != null);
-            Contract.Invariant(_messages != null);
-        }
-    }
-}
-
-#endif

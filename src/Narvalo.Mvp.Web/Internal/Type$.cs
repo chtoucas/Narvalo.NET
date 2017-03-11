@@ -3,13 +3,14 @@
 namespace Narvalo.Mvp.Web.Internal
 {
     using System;
+    using System.Diagnostics;
     using System.Web.UI;
 
     internal static class TypeExtensions
     {
         public static bool IsAspNetDynamicType(this Type @this)
         {
-            Demand.NotNull(@this);
+            Debug.Assert(@this != null);
 
             // REVIEW: The following remarks are taken from the original WebFormsMvp code.
             // Use the base type for pages & user controls as that is the code-behind file.

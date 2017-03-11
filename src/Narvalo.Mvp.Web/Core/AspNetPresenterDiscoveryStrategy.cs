@@ -53,25 +53,9 @@ namespace Narvalo.Mvp.Web.Core
             _inner = new PresenterDiscoveryStrategy(typeResolver, enableCache);
         }
 
-        public static IEnumerable<string> DefaultPresenterNameTemplates
-        {
-            get
-            {
-                Warrant.NotNull<IEnumerable<string>>();
+        public static IEnumerable<string> DefaultPresenterNameTemplates => s_DefaultPresenterNameTemplates;
 
-                return s_DefaultPresenterNameTemplates;
-            }
-        }
-
-        public static IEnumerable<string> DefaultViewSuffixes
-        {
-            get
-            {
-                Warrant.NotNull<IEnumerable<string>>();
-
-                return s_DefaultViewSuffixes;
-            }
-        }
+        public static IEnumerable<string> DefaultViewSuffixes => s_DefaultViewSuffixes;
 
         public PresenterDiscoveryResult FindBindings(
             IEnumerable<object> hosts,
@@ -79,21 +63,3 @@ namespace Narvalo.Mvp.Web.Core
             => _inner.FindBindings(hosts, views);
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Mvp.Web.Core
-{
-    using System.Diagnostics.Contracts;
-
-    public partial class AspNetPresenterDiscoveryStrategy
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_inner != null);
-        }
-    }
-}
-
-#endif

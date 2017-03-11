@@ -3,6 +3,7 @@
 namespace Narvalo.Mvp.Web
 {
     using System;
+    using System.Diagnostics;
     using System.Web;
     using System.Web.Caching;
 
@@ -17,17 +18,12 @@ namespace Narvalo.Mvp.Web
         private IAsyncTaskManager _asyncManager;
         private HttpContextBase _httpContext;
 
-        protected HttpPresenter(TView view) : base(view)
-        {
-            Expect.NotNull(view);
-        }
+        protected HttpPresenter(TView view) : base(view) { }
 
         public IAsyncTaskManager AsyncManager
         {
             get
             {
-                Warrant.NotNull<IAsyncTaskManager>();
-
                 if (_asyncManager == null)
                 {
                     throw new InvalidOperationException(Strings.HttpPresenter_AsyncManagerPropertyIsNull);
@@ -37,7 +33,7 @@ namespace Narvalo.Mvp.Web
             }
             private set
             {
-                Demand.NotNull(value);
+                Debug.Assert(value != null);
 
                 _asyncManager = value;
             }
@@ -47,8 +43,6 @@ namespace Narvalo.Mvp.Web
         {
             get
             {
-                Warrant.NotNull<HttpContextBase>();
-
                 if (_httpContext == null)
                 {
                     throw new InvalidOperationException(Strings.HttpPresenter_HttpContextIsNull);
@@ -58,63 +52,23 @@ namespace Narvalo.Mvp.Web
             }
             private set
             {
-                Demand.NotNull(value);
+                Debug.Assert(value != null);
 
                 _httpContext = value;
             }
         }
 
-        public HttpApplicationStateBase Application
-        {
-            get
-            {
-                Warrant.NotNull<HttpApplicationStateBase>();
-
-                return HttpContext.Application;
-            }
-        }
+        public HttpApplicationStateBase Application => HttpContext.Application;
 
         public Cache Cache => HttpContext.Cache;
 
-        public HttpRequestBase Request
-        {
-            get
-            {
-                Warrant.NotNull<HttpRequestBase>();
+        public HttpRequestBase Request => HttpContext.Request;
 
-                return HttpContext.Request;
-            }
-        }
+        public HttpResponseBase Response => HttpContext.Response;
 
-        public HttpResponseBase Response
-        {
-            get
-            {
-                Warrant.NotNull<HttpResponseBase>();
+        public HttpServerUtilityBase Server => HttpContext.Server;
 
-                return HttpContext.Response;
-            }
-        }
-
-        public HttpServerUtilityBase Server
-        {
-            get
-            {
-                Warrant.NotNull<HttpServerUtilityBase>();
-
-                return HttpContext.Server;
-            }
-        }
-
-        public HttpSessionStateBase Session
-        {
-            get
-            {
-                Warrant.NotNull<HttpSessionStateBase>();
-
-                return HttpContext.Session;
-            }
-        }
+        public HttpSessionStateBase Session => HttpContext.Session;
 
         IAsyncTaskManager Internal.IHttpPresenter.AsyncManager
         {

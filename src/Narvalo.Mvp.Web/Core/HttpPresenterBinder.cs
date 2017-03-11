@@ -27,11 +27,6 @@ namespace Narvalo.Mvp.Web.Core
                 messageCoordinator)
         {
             Require.NotNull(context, nameof(context));
-            Expect.NotNull(hosts);
-            Expect.NotNull(presenterDiscoveryStrategy);
-            Expect.NotNull(presenterFactory);
-            Expect.NotNull(compositeViewFactory);
-            Expect.NotNull(messageCoordinator);
 
             _context = context;
         }
@@ -50,21 +45,3 @@ namespace Narvalo.Mvp.Web.Core
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Mvp.Web.Core
-{
-    using System.Diagnostics.Contracts;
-
-    public sealed partial class HttpPresenterBinder
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_context != null);
-        }
-    }
-}
-
-#endif

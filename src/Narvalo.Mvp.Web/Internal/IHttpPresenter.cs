@@ -20,38 +20,3 @@ namespace Narvalo.Mvp.Web.Internal
         IAsyncTaskManager AsyncManager { set; }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Mvp.Web.Internal
-{
-    using System.Web;
-    using System.Diagnostics.Contracts;
-
-    using Narvalo.Mvp;
-
-    [ContractClass(typeof(IHttpPresenterContract))]
-    internal partial interface IHttpPresenter { }
-
-    [ContractClassFor(typeof(IHttpPresenter))]
-    internal abstract class IHttpPresenterContract : IHttpPresenter
-    {
-        IAsyncTaskManager IHttpPresenter.AsyncManager
-        {
-            set { Contract.Requires(value != null); }
-        }
-
-        HttpContextBase IHttpPresenter.HttpContext
-        {
-            set { Contract.Requires(value != null); }
-        }
-
-        IMessageCoordinator IPresenter.Messages
-        {
-            get { return default(IMessageCoordinator); }
-        }
-    }
-}
-
-#endif
-

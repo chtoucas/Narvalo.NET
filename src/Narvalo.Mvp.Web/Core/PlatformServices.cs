@@ -13,20 +13,12 @@ namespace Narvalo.Mvp.Web.Core
         private static readonly PlatformServicesVirtualProxy s_Instance
             = new PlatformServicesVirtualProxy(() => s_Default);
 
-        public static IPlatformServices Default
-        {
-            get
-            {
-                Warrant.NotNull<IPlatformServices>();
-
-                return s_Default;
-            }
-        }
+        public static IPlatformServices Default=> s_Default;
 
         public static IPlatformServices Current
         {
-            get { Warrant.NotNull<IPlatformServices>();  return s_Instance; }
-            set { Expect.NotNull(value); s_Instance.Reset(value); }
+            get { return s_Instance; }
+            set { s_Instance.Reset(value); }
         }
 
         private sealed class DefaultPlatformServices_ : DefaultPlatformServices

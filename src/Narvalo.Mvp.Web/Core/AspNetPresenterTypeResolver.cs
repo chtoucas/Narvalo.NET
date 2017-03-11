@@ -19,10 +19,6 @@ namespace Narvalo.Mvp.Web.Core
             IEnumerable<string> presenterNameTemplates)
             : base(buildManager, defaultNamespaces, viewSuffixes, presenterNameTemplates)
         {
-            Expect.NotNull(buildManager);
-            Expect.NotNull(defaultNamespaces);
-            Expect.NotNull(viewSuffixes);
-            Expect.NotNull(presenterNameTemplates);
         }
 
         // REVIEW: Prefers composition over extension?

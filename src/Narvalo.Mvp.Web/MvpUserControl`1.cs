@@ -19,8 +19,6 @@ namespace Narvalo.Mvp.Web
         {
             get
             {
-                Warrant.NotNullUnconstrained<TViewModel>();
-
                 if (_model == null)
                 {
                     throw new InvalidOperationException(Strings.MvpUserControl_ModelPropertyIsNull);

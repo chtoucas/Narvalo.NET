@@ -55,21 +55,3 @@ namespace Narvalo.Mvp.Web.Core
                 new PageAsyncTask(beginHandler, endHandler, timeoutHandler, state, executeInParallel));
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Mvp.Web.Core
-{
-    using System.Diagnostics.Contracts;
-
-    public partial class PageAsyncTaskManager
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_page != null);
-        }
-    }
-}
-
-#endif

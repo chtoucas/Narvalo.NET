@@ -20,7 +20,6 @@ namespace Narvalo.Mvp.Web.Core
         public PageHost(Page page, HttpContext context)
         {
             Require.NotNull(page, nameof(page));
-            Expect.NotNull(context);
 
             var hosts = FindHosts(page);
 
@@ -48,8 +47,6 @@ namespace Narvalo.Mvp.Web.Core
         public static PageHost Register(Page page, HttpContext context)
         {
             Require.NotNull(page, nameof(page));
-            Expect.NotNull(context);
-            Warrant.NotNull<PageHost>();
 
             var pageContext = page.Items;
 
@@ -70,15 +67,11 @@ namespace Narvalo.Mvp.Web.Core
 
         public void RegisterView(IView view)
         {
-            Expect.NotNull(view);
-
             _presenterBinder.RegisterView(view);
         }
 
         private static IEnumerable<Control> FindHosts(Page page)
         {
-            Warrant.NotNull<IEnumerable<Control>>();
-
             yield return page;
 
             var masterHost = page.Master;
@@ -92,21 +85,3 @@ namespace Narvalo.Mvp.Web.Core
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Mvp.Web.Core
-{
-    using System.Diagnostics.Contracts;
-
-    public sealed partial class PageHost
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_presenterBinder != null);
-        }
-    }
-}
-
-#endif

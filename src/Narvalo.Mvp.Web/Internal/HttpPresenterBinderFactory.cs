@@ -15,16 +15,11 @@ namespace Narvalo.Mvp.Web.Internal
         public static HttpPresenterBinder Create(
             IEnumerable<Control> controls,
             HttpContext context)
-        {
-            Expect.NotNull(controls);
-            Expect.NotNull(context);
-
-            return Create(
+            => Create(
                 controls,
                 context,
                 PlatformServices.Current,
                 PlatformServices.Current.MessageCoordinatorFactory.Create());
-        }
 
         public static HttpPresenterBinder Create(
             IEnumerable<object> hosts,
@@ -33,8 +28,6 @@ namespace Narvalo.Mvp.Web.Internal
             IMessageCoordinator messageCoordinator)
         {
             Require.NotNull(platformServices, nameof(platformServices));
-            Expect.NotNull(hosts);
-            Expect.NotNull(context);
 
             return new HttpPresenterBinder(
                 hosts,
