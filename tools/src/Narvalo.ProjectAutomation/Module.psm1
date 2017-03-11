@@ -4,8 +4,6 @@
 .DESCRIPTION
     Provides helpers to automate various development tasks:
     - Install or uninstall external tools.
-    - Fix the most common problems.
-    - Clean up the repository.
     - Helpers for the build script.
 #>
 
@@ -505,33 +503,6 @@ function Stop-AnyMSBuildProcess {
 # ------------------------------------------------------------------------------
 # Private functions
 # ------------------------------------------------------------------------------
-
-<#
-.SYNOPSIS
-    Requests confirmation from the user.
-.PARAMETER Query
-    Specifies the query to be displayed to the user.
-.INPUTS
-    None.
-.OUTPUTS
-    None.
-#>
-function Confirm-Yes {
-    param(
-        [Parameter(Mandatory = $true, Position = 0)]
-        [string] $Query
-    )
-
-    while ($true) {
-        $answer = (Read-Host $query, '[y/N]')
-
-        if ($answer -eq '' -or $answer -eq 'n') {
-            return $false
-        } elseif ($answer -eq 'y') {
-            return $true
-        }
-    }
-}
 
 <#
 .SYNOPSIS
