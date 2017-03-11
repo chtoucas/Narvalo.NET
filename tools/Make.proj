@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
-    Options are defined here and either in Shared.props or in Make.Common.props.
-
-    - CustomSolution (default: none)
-      Select a custom solution for building.
-      The path must be relative to the repository root.
-      Also used by Make.Common.props for restoring NuGet packages.
-
-    - CustomProject (default: none)
-      Select a single project for building.
-      The path must be relative to the repository root.
-      __Ignored when CustomSolution is also set.__
+    Filter using any combination, e.g. '/p:Filter="_Core_;_Mvp_"'.
+    Any list separator should work but, if you use a semicolon, do not forget
+    to quote the list of filters.
   -->
 
   <Import Project="$(MSBuildThisFileDirectory)Make.Common.props" />
 
-  <!-- Define the ProjectsToBuild property. -->
-  <Choose>
-    <When Condition=" '$(CustomSolution)' != '' ">
-      <!-- WARNING: Solutions use the Configuration Manager which can lead
-           to unexpected behaviour. For instance, a project might not have been
-           selected for building. -->
-      <PropertyGroup>
-        <!-- Solutions use "Any CPU" instead of "AnyCPU". -->
-        <Platform Condition=" '$(Platform)' == '' Or '$(Platform)' == 'AnyCPU' ">Any CPU</Platform>
-        <SolutionFile>$(RepositoryRoot)$(CustomSolution)</SolutionFile>
-      </PropertyGroup>
-      <ItemGroup>
-        <ProjectsToBuild Include="$(SolutionFile)"></ProjectsToBuild>
-      </ItemGroup>
-    </When>
-
-    <When Condition=" '$(CustomProject)' != '' ">
-      <ItemGroup>
-        <ProjectsToBuild Include="$(RepositoryRoot)$(CustomProject)"></ProjectsToBuild>
-      </ItemGroup>
-    </When>
-
-    <Otherwise>
-      <!-- Include everything. -->
-      <ItemGroup>
-        <ProjectsToBuild Include="$(RepositoryRoot)samples\**\*.csproj" />
-        <ProjectsToBuild Include="$(RepositoryRoot)src\**\*.csproj" />
-        <ProjectsToBuild Include="$(RepositoryRoot)tests\**\*.csproj" />
-      </ItemGroup>
-    </Otherwise>
-  </Choose>
+  <ItemGroup Condition=" '$(Filter.Contains(_Cerbere_))' == 'true' ">
+    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Cerbere\Narvalo.Cerbere.csproj" />
+    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Cerbere.Facts.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(Filter.Contains(_Common_))' == 'true' ">
+    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Cerbere\Narvalo.Common.csproj" />
+    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Common.Facts.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(Filter.Contains(_Core_))' == 'true' ">
+    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Cerbere\Narvalo.Core.csproj" />
+    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Core.Facts.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(Filter.Contains(_Finance_))' == 'true' ">
+    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Cerbere\Narvalo.Finance.csproj" />
+    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Finance.Facts.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(Filter.Contains(_Fx_))' == 'true' ">
+    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Cerbere\Narvalo.Fx.csproj" />
+    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Fx.Facts.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(Filter.Contains(_Money_))' == 'true' ">
+    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Cerbere\Narvalo.Money.csproj" />
+    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Money.Facts.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(Filter.Contains(_Mvp_))' == 'true' ">
+    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Cerbere\Narvalo.Mvp.csproj" />
+    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Mvp.Facts.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(Filter.Contains(_MvpWeb_))' == 'true' ">
+    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Cerbere\Narvalo.Mvp.Web.csproj" />
+    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Mvp.Web.Facts.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(Filter.Contains(_Web_))' == 'true' ">
+    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Cerbere\Narvalo.Web.csproj" />
+    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Web.Facts.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(Filter.Contains(_Build_))' == 'true' ">
+    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Build\Narvalo.Build.csproj" />
+  </ItemGroup>
 
   <Import Project="$(MSBuildThisFileDirectory)Make.Common.targets" />
 </Project>

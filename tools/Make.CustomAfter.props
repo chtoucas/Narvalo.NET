@@ -22,9 +22,6 @@
     <!-- If true, skip the generation of the assembly documentation. Default to false. -->
     <SkipDocumentation Condition=" '$(SkipDocumentation)' != 'true' ">false</SkipDocumentation>
 
-    <!-- If true, skip code contracts reference assembly. Default to false. -->
-    <SkipCodeContractsReferenceAssembly Condition=" '$(SkipCodeContractsReferenceAssembly)' != 'true' ">false</SkipCodeContractsReferenceAssembly>
-
     <!-- If true, packages/assemblies are built for retail. Default to false. -->
     <Retail Condition=" '$(Retail)' != 'true' ">false</Retail>
   </PropertyGroup>
@@ -46,28 +43,6 @@
     <!-- FIXME: Seems to be ignored by MSBuild. -->
     <!--<CodeAnalysisSucceededFile>$(IntermediateOutputPath)$(AssemblyName).FxCop.out</CodeAnalysisSucceededFile>-->
     <CodeAnalysisGenerateSuccessFile>false</CodeAnalysisGenerateSuccessFile>
-  </PropertyGroup>
-
-  <!-- Code Contracts -->
-  <PropertyGroup>
-    <!-- Treat all warnings as errors. -->
-    <CodeContractsFailBuildOnWarnings>true</CodeContractsFailBuildOnWarnings>
-
-    <!-- Code Contracts background checking is not available in terminal. -->
-    <CodeContractsRunInBackground>false</CodeContractsRunInBackground>
-
-    <!-- Original documentation file (before the Code Contracts transformation).
-         NB: This is not something that you can change. Only defined to make
-         things clearer. -->
-    <OriginalDocumentationFile>$(OutDir)$(AssemblyName).xml.old</OriginalDocumentationFile>
-    <CodeContractsDocumentationFile>$(OutDir)\CodeContracts\$(AssemblyName).Contracts.xml</CodeContractsDocumentationFile>
-  </PropertyGroup>
-
-  <!-- Code Contracts reference assembly. -->
-  <PropertyGroup Condition=" '$(SkipCodeContractsReferenceAssembly)' == 'true' ">
-    <!-- If requested, completely disable the generation of the CC reference assembly. -->
-    <CodeContractsReferenceAssembly>DoNotBuild</CodeContractsReferenceAssembly>
-    <CodeContractsEmitXMLDocs>false</CodeContractsEmitXMLDocs>
   </PropertyGroup>
 
   <!-- Sign the assembly. -->
@@ -118,22 +93,6 @@
     <!-- Dynamically add the assembly version file to the list of sources to compile. -->
     <Compile Include="$(AssemblyVersionFile)" />
   </ItemGroup>
-
-  <!-- PEVerify. -->
-  <PropertyGroup>
-    <PEVerifyCommand>$(SDK40ToolsPath)PEVerify.exe</PEVerifyCommand>
-    <PEVerifyDummyOutput>$(IntermediateOutputPath)$(AssemblyName).PEVerify.out</PEVerifyDummyOutput>
-    <PEVerifyLogFile>$(WorkLogDir)$(AssemblyName).PEVerify.log</PEVerifyLogFile>
-  </PropertyGroup>
-
-  <!-- SecAnnotate. -->
-  <PropertyGroup>
-    <SecAnnotateCommand>$(SDK40ToolsPath)SecAnnotate.exe</SecAnnotateCommand>
-    <SecAnnotateDummyOutput>$(IntermediateOutputPath)$(AssemblyName).SecAnnotate.out</SecAnnotateDummyOutput>
-    <SecAnnotateOutput>$(WorkLogDir)$(AssemblyName).SecAnnotate.xml</SecAnnotateOutput>
-    <SecAnnotateLogFile>$(WorkLogDir)$(AssemblyName).SecAnnotate.log</SecAnnotateLogFile>
-    <SecAnnotateVerifyLogFile>$(WorkLogDir)$(AssemblyName).SecAnnotate.txt</SecAnnotateVerifyLogFile>
-  </PropertyGroup>
 
   <!-- NuGet packaging. -->
   <PropertyGroup>

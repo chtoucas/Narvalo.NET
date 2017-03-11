@@ -115,13 +115,6 @@
     <CodeAnalysisTreatWarningsAsErrors>false</CodeAnalysisTreatWarningsAsErrors>
   </PropertyGroup>
 
-  <!-- Security Annotations. -->
-  <PropertyGroup>
-    <EnableSecurityAnnotations Condition=" '$(EnableSecurityAnnotations)' != 'true' ">false</EnableSecurityAnnotations>
-
-    <DefineConstants Condition=" '$(EnableSecurityAnnotations)' == 'true' ">$(DefineConstants);SECURITY_ANNOTATIONS</DefineConstants>
-  </PropertyGroup>
-
   <!-- T4 -->
   <PropertyGroup>
     <T4NarvaloLibrary>$(MSBuildThisFileDirectory)lib\Narvalo.T4.v$(VisualStudioVersion).dll</T4NarvaloLibrary>

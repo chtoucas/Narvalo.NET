@@ -34,7 +34,7 @@
   </Target>
 
   <!-- Build target. -->
-  <Target Name="Build" DependsOnTargets="RestorePackages">
+  <Target Name="Build">
     <MSBuild Projects="@(ProjectsToBuild)"
              Properties="$(BuildProperties)"
              BuildInParallel="$(BuildInParallel)"
@@ -57,28 +57,6 @@
              StopOnFirstFailure="true" />
   </Target>
 
-  <!-- PEVerify target. -->
-  <Target Name="PEVerify">
-    <!-- WARNING: Child PEVerify target is a non-standard MSBuild target.
-         The projects must have imported Narvalo.Common.targets. -->
-    <MSBuild Projects="@(ProjectsToBuild)"
-             Properties="$(BuildProperties)"
-             BuildInParallel="$(BuildInParallel)"
-             Targets="PEVerify"
-             StopOnFirstFailure="true" />
-  </Target>
-
-  <!-- SecAnnotate target. -->
-  <Target Name="SecAnnotate">
-    <!-- WARNING: Child SecAnnotate target is a non-standard MSBuild target.
-         The projects must have imported Narvalo.Common.targets. -->
-    <MSBuild Projects="@(ProjectsToBuild)"
-             Properties="$(BuildProperties)"
-             BuildInParallel="$(BuildInParallel)"
-             Targets="SecAnnotate"
-             StopOnFirstFailure="true" />
-  </Target>
-
   <!-- Xunit target. -->
   <Target Name="Xunit"
           DependsOnTargets="Build"
@@ -93,21 +71,6 @@
            Html="$(XunitHtmlFile)"
            Xml="$(XunitXmlFile)"
            Condition=" '@(_TestAssembly)' != '' " />
-  </Target>
-
-  <!-- InstallNuGet target. -->
-  <Target Name="InstallNuGet" Condition=" !Exists('$(NuGetCommand)') ">
-    <Message Text="Downloading latest version of NuGet..." Importance="high" />
-
-    <DownloadFile Address="https://nuget.org/nuget.exe" OutputFile="$(NuGetCommand)" />
-  </Target>
-
-  <!-- RestorePackages target. -->
-  <Target Name="RestorePackages" DependsOnTargets="InstallNuGet">
-    <Message Text="Restoring NuGet packages..." Importance="high" />
-
-    <Exec Command="&quot;$(NuGetCommand)&quot; restore &quot;$(SolutionFile)&quot; -PackagesDirectory &quot;$(RepositoryRoot)packages&quot; -ConfigFile &quot;$(RepositoryRoot).nuget\NuGet.Config&quot; -NonInteractive -Verbosity quiet"
-          LogStandardErrorAsError="true" />
   </Target>
 
   <!-- __InitializeMakeCommonProps target. -->

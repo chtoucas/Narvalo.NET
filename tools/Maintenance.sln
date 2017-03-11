@@ -10,7 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. MSBuild", "3. MSBuild", 
 		Make.Custom.tasks = Make.Custom.tasks
 		Make.CustomAfter.props = Make.CustomAfter.props
 		Make.CustomAfter.targets = Make.CustomAfter.targets
-		Make.Foundations.proj = Make.Foundations.proj
 		Make.proj = Make.proj
 		Make.Shared.props = Make.Shared.props
 		Narvalo.Common.props = Narvalo.Common.props
