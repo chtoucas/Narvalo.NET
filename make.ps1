@@ -13,26 +13,28 @@
     If present, ensures there is no concurrent MSBuild running.
 .PARAMETER Task
     Specifies the task to be executed.
+    You can use one of the following values:
+        build, cover, doc, pack, test
 .PARAMETER Verbosity
     Specifies the amount of information displayed by MSBuild.
     You can use the following verbosity levels:
         q[uiet], m[inimal], n[ormal], d[etailed], and diag[nostic].
 .INPUTS
-    The list of tasks to be executed.
+    The task to be executed.
 .OUTPUTS
     None.
 .EXAMPLE
-    make.ps1 -Retail Package
     Create retail packages.
+    make.ps1 -Retail -t pack
 .EXAMPLE
+    Run default task (build) with detailed informations.
     make.ps1 -Verbosity detailed
-    Run default task with detailed informations.
 #>
 
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $false, Position = 0, ValueFromPipeline = $true)]
-    [ValidateSet('build', 'test', 'cover', 'pack')]
+    [ValidateSet('build', 'cover', 'doc', 'pack', 'test')]
     [Alias('t')] [string] $Task = 'build',
 
     [Alias('r')] [switch] $Retail,
@@ -189,6 +191,10 @@ switch ($task) {
             "-assemblyfilters:$reportfilters" `
             -reports:$opencoverxml `
             -targetdir:$targetdir
+    }
+
+    'doc' {
+        ExitGracefully -ExitCode 1 'The documentation task is not yet implemented'
     }
 }
 
