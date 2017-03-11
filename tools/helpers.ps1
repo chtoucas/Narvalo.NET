@@ -1,17 +1,20 @@
 
-function Invoke-Build {
+function Invoke-BuildTask {
     & $script:MSBuild $script:Project $script:MSBuildCommonProps $script:MSBuildCIProps '/t:Build'
 }
 
-function Invoke-Xunit {
+function Invoke-XunitTask {
     & $script:MSBuild $script:Project $script:MSBuildCommonProps $script:MSBuildCIProps '/t:Xunit'
 }
 
-function Invoke-OpenCover {
-    & $script:MSBuild $script:Project $script:MSBuildCommonProps $script:MSBuildCIProps '/t:OpenCover'
+function Invoke-OpenCoverTask {
+    & $script:MSBuild $script:Project $script:MSBuildCommonProps $script:MSBuildCIProps '/t:Build'
+
+    Invoke-OpenCover
+    Invoke-ReportGenerator -Summary
 }
 
-function Invoke-Package {
+function Invoke-PackageTask {
     if ($script:Retail -eq $null) {
         Exit-Gracefully -ExitCode 1 "`$Retail must not be null."
     }
@@ -34,7 +37,7 @@ function Invoke-Package {
 
     if ($script:Retail -and $hash -eq '') {
         Exit-Gracefully -ExitCode 1 `
-            'When building retail packages, the git commit hash MUST not be empty.'
+            'When building retail packages, the git commit hash CAN NOT be empty.'
     }
 
     & $script:MSBuild $script:Project $script:MSBuildCommonProps `
@@ -45,6 +48,55 @@ function Invoke-Package {
         "/p:Retail=$script:Retail",
         '/p:SignAssembly=true',
         '/p:VisibleInternals=false'
+}
+
+function Invoke-OpenCover {
+    $opencover = Get-LocalPath "packages\OpenCover.$script:OpenCoverVersion\tools\OpenCover.Console.exe" -Resolve
+    $xunit     = Get-LocalPath "packages\xunit.runner.console.$script:XunitVersion\tools\xunit.console.exe" -Resolve
+
+    $filter = '+[Narvalo*]* -[*Facts]* -[Xunit.*]*'
+    $excludeByAttribute = 'System.Runtime.CompilerServices.CompilerGeneratedAttribute;Narvalo.ExcludeFromCodeCoverageAttribute;System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute'
+
+    $asm1 = Get-LocalPath "work\bin\$script:Configuration\Narvalo.Core.Facts.dll" -Resolve
+    $asm1 = Get-LocalPath "work\bin\$script:Configuration\Narvalo.Money.Facts.dll" -Resolve
+    $asm1 = Get-LocalPath "work\bin\$script:Configuration\Narvalo.Finance.Facts.dll" -Resolve
+    $asms = "$asm1"
+
+    # Be very careful with arguments containing spaces.
+    . $opencover `
+      -register:user `
+      "-filter:$filter" `
+      "-excludebyattribute:$excludeByAttribute" `
+      "-output:$script:OpenCoverXml" `
+      "-target:$xunit"  `
+      "-targetargs:$asms -nologo -noshadow"
+}
+
+function Invoke-ReportGenerator {
+    [CmdletBinding()]
+    param(
+        [switch] $Summary
+    )
+
+    $reportgenerator = Get-LocalPath "packages\ReportGenerator.$script:ReportGeneratorVersion\tools\ReportGenerator.exe" -Resolve
+
+    if ($summary.IsPresent) {
+        $targetdir   = Get-LocalPath 'work\log'
+        $filters     = '+*'
+        $reporttypes = 'HtmlSummary'
+    }
+    else {
+        $targetdir   = Get-LocalPath 'work\log\opencover'
+        $filters     = '-Narvalo.Common;-Narvalo.Fx;-Narvalo.Money;-Narvalo.Mvp;-Narvalo.Mvp.Web;-Narvalo.Web'
+        $reporttypes = 'Html'
+    }
+
+    . $reportgenerator `
+        -verbosity:Info `
+        -reporttypes:$reporttypes `
+        "-filters:$filters" `
+        -reports:$script:OpenCoverXml `
+        -targetdir:$targetdir
 }
 
 # ------------------------------------------------------------------------------

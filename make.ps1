@@ -3,6 +3,8 @@
 <#
 .SYNOPSIS
     Run the build script.
+.PARAMETER Configuration
+    Specifies the configuration (not used by the task Package).
 .PARAMETER Help
     If present, display the help then exit.
 .PARAMETER Retail
@@ -36,6 +38,10 @@ param(
     [Alias('r')] [switch] $Retail,
 
     [Parameter(Mandatory = $false, Position = 1)]
+    [ValidateSet('Debug', 'Release')]
+    [Alias('c')] [string] $Configuration = 'Debug',
+
+    [Parameter(Mandatory = $false, Position = 2)]
     [ValidateSet('q', 'quiet', 'm', 'minimal', 'n', 'normal', 'd', 'detailed', 'diag', 'diagnostic')]
     [Alias('v')] [string] $Verbosity = 'minimal',
 
@@ -84,12 +90,19 @@ $MSBuildCommonProps = '/nologo', "/verbosity:$Verbosity", '/maxcpucount', '/node
 # Default CI properties.
 # - Leak internals to enable all white-box tests.
 $MSBuildCIProps = `
-    '/p:Configuration=Debug',
+    "/p:Configuration=$Configuration",
     '/p:BuildGeneratedVersion=false',
     "/p:Retail=$Retail",
     '/p:SignAssembly=false',
     '/p:SkipDocumentation=true',
     '/p:VisibleInternals=true'
+
+# TODO: Make them survive NuGet updates.
+$OpenCoverVersion = '4.6.519'
+$XunitVersion = '2.2.0'
+$ReportGeneratorVersion = '2.5.6'
+    
+$OpenCoverXml = Get-LocalPath 'work\log\opencover.xml'
 
 # ------------------------------------------------------------------------------
 
@@ -110,10 +123,10 @@ if (!(Test-Path $MSBuild)) {
 }
 
 switch ($task) {
-    'build' { Invoke-Build }
-    'test' { Invoke-Xunit }
-    'cover' { Invoke-OpenCover }
-    'pack' { Invoke-Package }
+    'build' { Invoke-BuildTask }
+    'test' { Invoke-XunitTask }
+    'cover' { Invoke-OpenCoverTask }
+    'pack' { Invoke-PackageTask }
 }
 
 # ------------------------------------------------------------------------------
