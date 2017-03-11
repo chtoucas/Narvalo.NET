@@ -1,3 +1,13 @@
+
+function Invoke-BuildProjects {
+  & $script:MSBuild $script:Project $script:MSBuildCommonProps $script:MSBuildCIProps '/t:Build'
+}
+
+function Invoke-TestProjects {
+  & $script:MSBuild $script:Project $script:MSBuildCommonProps $script:MSBuildCIProps '/t:Xunit'
+}
+
+
 <#
 .SYNOPSIS
     Exit current process gracefully.

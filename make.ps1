@@ -25,9 +25,6 @@
 .EXAMPLE
     make.ps1 -Verbosity detailed
     Run default task with detailed informations.
-.EXAMPLE
-    make.ps1 CA, SA -v quiet
-    Quiet run of the Code Analysis & SecurityAnalysis tasks.
 #>
 
 [CmdletBinding()]
@@ -58,14 +55,6 @@ trap {
 
 # ------------------------------------------------------------------------------
 
-New-Variable -Name ProjectRoot `
-    -Value $PSScriptRoot `
-    -Scope Script `
-    -Option ReadOnly `
-    -Description 'Path to the local repository for the project Narvalo.NET.'
-
-# ------------------------------------------------------------------------------
-
 if ($retail.IsPresent) {
     Write-Host "Make script (RETAIL).`n"
 } else {
@@ -80,21 +69,45 @@ if ($help.IsPresent) {
 # Load the helpers.
 . '.\tools\helpers.ps1'
 
+# ------------------------------------------------------------------------------
+
+# Path to the local repository for the project Narvalo.NET.
+$ProjectRoot = $PSScriptRoot
+
+# Main MSBuild projects.
+$Project  = Get-LocalPath 'tools\Make.proj'
+
+# Common MSBuild options.
+$MSBuildCommonProps = '/nologo', "/verbosity:$Verbosity", '/maxcpucount', '/nodeReuse:false';
+
+# Default CI properties.
+# - Leak internals to enable all white-box tests.
+$MSBuildCIProps = `
+    '/p:Configuration=Debug',
+    '/p:BuildGeneratedVersion=false',
+    "/p:Retail=$Retail",
+    '/p:SignAssembly=false',
+    '/p:SkipDocumentation=true',
+    '/p:VisibleInternals=true'
+
+# ------------------------------------------------------------------------------
+
 if ($safe.IsPresent) {
     Stop-AnyMSBuildProcess
 }
 
 Restore-SolutionPackages
 
-Write-Host -BackgroundColor Red -ForegroundColor Yellow `
-    "Due to the upgrade to VS 2017, the build script is currently broken." 
+# See https://github.com/Microsoft/vswhere/wiki/Find-MSBuild
+# Apparently, the documentation (or vswhere) is wrong, it gives us the path to VS not MSBuild.
+$VisualStudio = .\packages\vswhere.1.0.50\tools\vswhere -latest -products * `
+    -requires Microsoft.Component.MSBuild -property installationPath
+$MSBuild = Join-Path $VisualStudio 'MSBuild\15.0\Bin\MSBuild.exe'
+if (!(Test-Path $MSBuild)) {
+    Write-Host -BackgroundColor Red -ForegroundColor Yellow 'Unable to locate MSBuild' `
+    Exit 1
+}
 
-#Invoke-PSake $psakefile `
-#    -NoLogo `
-#    -TaskList $taskList `
-#    -Parameters @{
-#        'verbosity' = $verbosity;
-#        'retail' = $retail.IsPresent;
-#    }
+Invoke-TestProjects
 
 # ------------------------------------------------------------------------------

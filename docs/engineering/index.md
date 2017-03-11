@@ -10,7 +10,7 @@ Overview
 Prerequisites
 -------------
 
-- [Visual Studio Community 2015](http://msdn.microsoft.com/en-us/visual-studio-community-vs.aspx)
+- Visual Studio Community 2017
 - PowerShell v4
 
 Optional components:

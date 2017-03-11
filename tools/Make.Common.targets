@@ -4,10 +4,6 @@
          InitialTargets="__InitializeMakeCommonTargets"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-  <!-- Import common properties, if not already done. -->
-  <Import Project="$(MSBuildThisFileDirectory)Make.Common.props"
-          Condition=" '$(MakeCommonPropsImported)' != 'true' "/>
-
   <!-- Import Narvalo tasks. -->
   <Import Project="$(MSBuildThisFileDirectory)..\packages\Narvalo.Build.*\build\Narvalo.Build.tasks" />
 
@@ -73,7 +69,7 @@
            Condition=" '@(_TestAssembly)' != '' " />
   </Target>
 
-  <!-- __InitializeMakeCommonProps target. -->
+  <!-- __InitializeMakeCommonTargets. -->
   <Target Name="__InitializeMakeCommonTargets">
     <MakeDir Directories="$(WorkRoot)" Condition=" !Exists($(WorkRoot)) " />
     <MakeDir Directories="$(WorkLogDir)" Condition=" !Exists($(WorkLogDir)) " />

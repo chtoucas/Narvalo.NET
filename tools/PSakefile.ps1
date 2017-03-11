@@ -9,19 +9,7 @@ Properties {
     # Process mandatory parameters.
     Assert($Retail -ne $null) "`$Retail must not be null, e.g. run with -Parameters @{ 'retail' = `$true; }"
 
-    # MSBuild options.
-    $Opts = '/nologo', "/verbosity:$Verbosity", '/maxcpucount', '/nodeReuse:false'
-
-    # Main MSBuild projects.
-    $Project  = Get-LocalPath 'tools\Make.proj'
-
     $OpenCoverXml = Get-LocalPath 'work\log\opencover.xml'
-}
-
-FormatTaskName {
-    param([Parameter(Mandatory = $true)] [string] $TaskName)
-
-    Write-Host "Executing Task '$taskName'." -ForegroundColor DarkCyan
 }
 
 TaskTearDown {
@@ -34,35 +22,29 @@ TaskTearDown {
     #    Exit-Gracefully -ExitCode $LastExitCode 'Build failed.'
     #}
 }
-
-Task Default -Depends Build
-
 # ------------------------------------------------------------------------------
-# Continuous Integration and development tasks
+# Tasks
 # ------------------------------------------------------------------------------
 
-Task Build `
-    -Description 'Build.' `
-    -Depends _CI-InitializeVariables `
+Task OpenCover `
 {
-    MSBuild $Project $Opts $CI_Props '/t:Build'
+    MSBuild $script:Project $script:MSBuildCommonProps $script:MSBuildCIProps '/t:Build'
+
+    Invoke-OpenCover 'Debug'
+    Invoke-ReportGenerator -Summary
 }
 
-Task Test `
-    -Description 'Build then run tests.' `
-    -Depends _CI-InitializeVariables `
+Task OpenCoverVerbose `
 {
-    MSBuild $Project $Opts $CI_Props `
-        '/t:Xunit',
-        '/p:Configuration=Debug',
-        '/p:SkipDocumentation=true'
+    MSBuild $script:Project $script:MSBuildCommonProps $script:MSBuildCIProps '/t:Build'
+
+    Invoke-OpenCover 'Debug'
+    Invoke-ReportGenerator
 }
 
 Task Package `
-    -Description 'Create the packages.' `
     -Depends _Initialize-GitCommitHash, _Package-CheckVariablesForRetail `
     -RequiredVariables Retail `
-    -Alias Pack `
 {
     # Packaging properties:
     # - Release configuration
@@ -74,7 +56,8 @@ Task Package `
     # - Verify Portable Executable (PE) format
     # - Run Xunit tests
     # - Package
-    MSBuild $Project $Opts '/t:Xunit;Package' `
+    MSBuild $script:Project $script:MSBuildCommonProps `
+        '/t:Xunit;Package' `
         '/p:Configuration=Release',
         '/p:BuildGeneratedVersion=true',
         "/p:GitCommitHash=$GitCommitHash",
@@ -83,67 +66,11 @@ Task Package `
         '/p:VisibleInternals=false'
 }
 
-Task OpenCover `
-    -Description 'Run OpenCover (summary only).' `
-    -Depends _CI-InitializeVariables `
-    -Alias Cover `
-{
-    # Use debug build to also cover debug-only tests.
-    MSBuild $Project $Opts $CI_Props `
-        '/t:Build',
-        '/p:Configuration=Debug',
-        '/p:SkipDocumentation=true'
-
-    Invoke-OpenCover 'Debug'
-    Invoke-ReportGenerator -Summary
-}
-
-Task OpenCoverVerbose `
-    -Description 'Run OpenCover (full details).' `
-    -Depends _CI-InitializeVariables `
-    -Alias CoverVerbose `
-{
-    # Use debug build to also cover debug-only tests.
-    MSBuild $Project $Opts $CI_Props `
-        '/t:Build',
-        '/p:Configuration=Debug',
-        '/p:SkipDocumentation=true'
-
-    Invoke-OpenCover 'Debug'
-    Invoke-ReportGenerator
-}
-
 # ------------------------------------------------------------------------------
 # Helpers
 # ------------------------------------------------------------------------------
 
-Task _CI-InitializeVariables `
-    -Description 'Initialize variables only used by the CI tasks.' `
-    -RequiredVariables Retail `
-{
-    # Default CI properties:
-    # - Release configuration
-    # - Do not generate assembly versions
-    # - Do not sign assemblies
-    # - Leak internals to enable all white-box tests.
-    $script:CI_Props = `
-        '/p:Configuration=Release',
-        '/p:BuildGeneratedVersion=false',
-        "/p:Retail=$Retail",
-        '/p:SignAssembly=false',
-        '/p:VisibleInternals=true'
-
-    # FIXME: Don't understand why doing what follows does not work.
-    # Either MSBuild or PowerShell mixes up the MSBuild parameters.
-    # The result is that Configuration property takes all following properties
-    # as its value. For instance, Configuration is read as "Release /p:BuildGeneratedVersion=false...".
-    # For static analysis, we hide internals, otherwise we might not truly
-    # analyze the public API.
-    #$script:CI_AnalysisProps = $CI_Props, '/p:VisibleInternals=false'
-}
-
 Task _Package-CheckVariablesForRetail `
-    -Description 'Check conditions are met for creating retail packages.' `
     -Depends _Initialize-GitCommitHash `
     -PreCondition { $Retail } `
 {
@@ -154,7 +81,6 @@ Task _Package-CheckVariablesForRetail `
 }
 
 Task _Initialize-GitCommitHash `
-    -Description 'Initialize GitCommitHash.' `
 {
     $git = (Get-Git)
 

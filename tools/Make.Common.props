@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Project ToolsVersion="14.0"
-         InitialTargets="__InitializeMakeCommonProps"
-         xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <!-- Import shared properties. -->
   <Import Project="$(MSBuildThisFileDirectory)Make.Shared.props" />
-
-  <!-- If the property ProjectsToBuild is set, but not the item, use the property to define the item. -->
-  <ItemGroup Condition=" '@(ProjectsToBuild)' == '' And '$(ProjectsToBuild)' != '' ">
-    <ProjectsToBuild Include="$(ProjectsToBuild)" />
-  </ItemGroup>
-
+  
   <!-- Define the ConfigurationVariant property. -->
   <PropertyGroup>
     <!-- This property is useful to distinguish between variants of the same base configuration.
@@ -88,15 +81,4 @@
       CustomAfterNarvaloCommonTargets=$(MSBuildThisFileDirectory)Make.CustomAfter.targets;
     </BuildProperties>
   </PropertyGroup>
-
-  <!-- Mark the file as already imported. -->
-  <PropertyGroup>
-    <MakeCommonPropsImported>true</MakeCommonPropsImported>
-  </PropertyGroup>
-
-  <!-- __InitializeMakeCommonProps target. -->
-  <Target Name="__InitializeMakeCommonProps">
-    <Error Text="Each master project (e.g. Make.proj) MUST create its own instance of %40(ProjectsToBuild)."
-           Condition=" '@(ProjectsToBuild)' == '' " />
-  </Target>
 </Project>

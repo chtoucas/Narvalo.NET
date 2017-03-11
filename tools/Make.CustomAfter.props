@@ -8,6 +8,9 @@
   <!-- Import shared properties. -->
   <Import Project="$(MSBuildThisFileDirectory)Make.Shared.props" />
 
+  <!-- Import Narvalo tasks. -->
+  <Import Project="$(MSBuildThisFileDirectory)..\packages\Narvalo.Build.*\build\Narvalo.Build.tasks" />
+  
   <!-- Import custom tasks, if not already done. -->
   <Import Project="$(MSBuildThisFileDirectory)Make.Custom.tasks"
           Condition=" '$(MakeCustomTasksImported)' != 'true' "/>
