@@ -1,0 +1,81 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Libraries", "1. Libraries", "{E532D0F7-CFBB-4D52-BEA3-D67DA931AC86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Core", "src\Narvalo.Core\Narvalo.Core.csproj", "{66B62BA5-E26E-4899-85AC-4C52D3A427E9}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "TestCommon", "tests\TestCommon\TestCommon.shproj", "{C141265F-95ED-4093-A56C-5991DBA96F67}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Samples", "4. Samples", "{7FF29AE0-15BB-4C3C-B497-23852B98F95B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Tests", "2. Tests", "{1606E94A-5311-4C5F-91E2-876A4B635F02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Mvp", "src\Narvalo.Mvp\Narvalo.Mvp.csproj", "{2944D621-7F6E-4792-94AD-0021C6B73981}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Mvp.Web", "src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj", "{F4E7C519-8C51-4F2F-A50E-1A478399C93C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Mvp.Facts", "tests\Narvalo.Mvp.Facts\Narvalo.Mvp.Facts.csproj", "{E94F4D98-3882-4713-90FD-27C515B68BB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Mvp.Web.Facts", "tests\Narvalo.Mvp.Web.Facts\Narvalo.Mvp.Web.Facts.csproj", "{3F3D8108-CC1C-4CE2-8768-2097A0B77D01}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvpCommandLine", "samples\MvpCommandLine\MvpCommandLine.csproj", "{22F5819B-94C5-47B5-A83D-2F807BAC8130}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvpWebForms", "samples\MvpWebForms\MvpWebForms.csproj", "{779357E7-F156-425C-8EB8-FB45ACDFF9DE}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		tests\TestCommon\Narvalo.TestCommon.projitems*{3f3d8108-cc1c-4ce2-8768-2097a0b77d01}*SharedItemsImports = 4
+		tests\TestCommon\Narvalo.TestCommon.projitems*{c141265f-95ed-4093-a56c-5991dba96f67}*SharedItemsImports = 13
+		tests\TestCommon\Narvalo.TestCommon.projitems*{e94f4d98-3882-4713-90fd-27c515b68bb0}*SharedItemsImports = 4
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{66B62BA5-E26E-4899-85AC-4C52D3A427E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66B62BA5-E26E-4899-85AC-4C52D3A427E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66B62BA5-E26E-4899-85AC-4C52D3A427E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66B62BA5-E26E-4899-85AC-4C52D3A427E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2944D621-7F6E-4792-94AD-0021C6B73981}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2944D621-7F6E-4792-94AD-0021C6B73981}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2944D621-7F6E-4792-94AD-0021C6B73981}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2944D621-7F6E-4792-94AD-0021C6B73981}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4E7C519-8C51-4F2F-A50E-1A478399C93C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4E7C519-8C51-4F2F-A50E-1A478399C93C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4E7C519-8C51-4F2F-A50E-1A478399C93C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4E7C519-8C51-4F2F-A50E-1A478399C93C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E94F4D98-3882-4713-90FD-27C515B68BB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E94F4D98-3882-4713-90FD-27C515B68BB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E94F4D98-3882-4713-90FD-27C515B68BB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E94F4D98-3882-4713-90FD-27C515B68BB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F3D8108-CC1C-4CE2-8768-2097A0B77D01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F3D8108-CC1C-4CE2-8768-2097A0B77D01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F3D8108-CC1C-4CE2-8768-2097A0B77D01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F3D8108-CC1C-4CE2-8768-2097A0B77D01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22F5819B-94C5-47B5-A83D-2F807BAC8130}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22F5819B-94C5-47B5-A83D-2F807BAC8130}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22F5819B-94C5-47B5-A83D-2F807BAC8130}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22F5819B-94C5-47B5-A83D-2F807BAC8130}.Release|Any CPU.Build.0 = Release|Any CPU
+		{779357E7-F156-425C-8EB8-FB45ACDFF9DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{779357E7-F156-425C-8EB8-FB45ACDFF9DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{779357E7-F156-425C-8EB8-FB45ACDFF9DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{779357E7-F156-425C-8EB8-FB45ACDFF9DE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{66B62BA5-E26E-4899-85AC-4C52D3A427E9} = {E532D0F7-CFBB-4D52-BEA3-D67DA931AC86}
+		{C141265F-95ED-4093-A56C-5991DBA96F67} = {1606E94A-5311-4C5F-91E2-876A4B635F02}
+		{2944D621-7F6E-4792-94AD-0021C6B73981} = {E532D0F7-CFBB-4D52-BEA3-D67DA931AC86}
+		{F4E7C519-8C51-4F2F-A50E-1A478399C93C} = {E532D0F7-CFBB-4D52-BEA3-D67DA931AC86}
+		{E94F4D98-3882-4713-90FD-27C515B68BB0} = {1606E94A-5311-4C5F-91E2-876A4B635F02}
+		{3F3D8108-CC1C-4CE2-8768-2097A0B77D01} = {1606E94A-5311-4C5F-91E2-876A4B635F02}
+		{22F5819B-94C5-47B5-A83D-2F807BAC8130} = {7FF29AE0-15BB-4C3C-B497-23852B98F95B}
+		{779357E7-F156-425C-8EB8-FB45ACDFF9DE} = {7FF29AE0-15BB-4C3C-B497-23852B98F95B}
+	EndGlobalSection
+EndGlobal

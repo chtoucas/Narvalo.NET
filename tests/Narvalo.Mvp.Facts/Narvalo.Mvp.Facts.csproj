@@ -52,10 +52,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj">
-      <Project>{f4e7c519-8c51-4f2f-a50e-1a478399c93c}</Project>
-      <Name>Narvalo.Mvp.Web</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\src\Narvalo.Mvp\Narvalo.Mvp.csproj">
       <Project>{2944d621-7f6e-4792-94ad-0021c6b73981}</Project>
       <Name>Narvalo.Mvp</Name>
