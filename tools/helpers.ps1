@@ -1,36 +1,3 @@
-# ------------------------------------------------------------------------------
-# Public functions
-# ------------------------------------------------------------------------------
-
-<#
-.SYNOPSIS
-    Convert a MSBuild verbosity level to a NuGet verbosity level.
-.PARAMETER Verbosity
-    Specifies the MSBuild verbosity.
-.INPUTS
-    None.
-.OUTPUTS
-    None.
-#>
-function ConvertTo-NuGetVerbosity {
-    param([Parameter(Mandatory = $true, Position = 0)] [string] $Verbosity)
-
-    switch ($verbosity) {
-        'q'          { return 'quiet' }
-        'quiet'      { return 'quiet' }
-        'm'          { return 'normal' }
-        'minimal'    { return 'normal' }
-        'n'          { return 'normal' }
-        'normal'     { return 'normal' }
-        'd'          { return 'detailed' }
-        'detailed'   { return 'detailed' }
-        'diag'       { return 'detailed' }
-        'diagnostic' { return 'detailed' }
-
-        default      { return 'normal' }
-    }
-}
-
 <#
 .SYNOPSIS
     Exit current process gracefully.
@@ -268,103 +235,8 @@ function Install-NuGet {
     )
 
     [System.Uri] $uri = 'https://nuget.org/nuget.exe'
-    $uri | _Install-RemoteItem -Name 'NuGet' -o $outFile -Force:$force.IsPresent
+    $uri | Install-RemoteItem -Name 'NuGet' -o $outFile -Force:$force.IsPresent
 }
-
-<#
-.SYNOPSIS
-    Restore packages.
-.PARAMETER ConfigFile
-    Specifies the path to the NuGet config.
-.PARAMETER PackagesDirectory
-    Specifies the path to the packages directory.
-.PARAMETER Source
-    Specifies the list of packages sources to use.
-.PARAMETER Verbosity
-    Specifies the verbosity level for the underlying NuGet command-line.
-.INPUTS
-    None.
-.OUTPUTS
-    None.
-#>
-function Restore-Packages {
-    [CmdletBinding()]
-    param(
-        [Parameter(Mandatory = $true, Position = 0)]
-        [Alias('s')] [string] $Source,
-
-        [Parameter(Mandatory = $true, Position = 1)]
-        [string] $PackagesDirectory,
-
-        [Parameter(Mandatory = $true, Position = 2)]
-        [string] $ConfigFile,
-
-        [Parameter(Mandatory = $false, Position = 3)]
-        [ValidateSet('', 'quiet', 'normal', 'detailed')]
-        [string] $Verbosity
-    )
-
-    if ($verbosity -eq '') {
-        $verbosity = $script:DefaultNuGetVerbosity
-    }
-
-    $nuget = Get-NuGet -Install
-
-    try {
-        Write-Debug 'Call nuget.exe restore.'
-        . $nuget restore $source `
-            -PackagesDirectory $packagesDirectory `
-            -ConfigFile $configFile `
-            -Verbosity $verbosity 2>&1
-    } catch {
-        throw "'nuget.exe restore' failed: $_"
-    }
-}
-
-<#
-.SYNOPSIS
-    Restore solution packages.
-.PARAMETER Verbosity
-    Specifies the verbosity level for the underlying NuGet command-line.
-.INPUTS
-    None.
-.OUTPUTS
-    None.
-#>
-function Restore-SolutionPackages {
-    [CmdletBinding()]
-    param(
-        [Parameter(Mandatory = $false, Position = 0)]
-        [string] $Verbosity
-    )
-
-    Write-Verbose 'Restoring solution packages.'
-
-    Restore-Packages -Source (Get-LocalPath '.nuget\packages.config') `
-        -PackagesDirectory (Get-LocalPath 'packages') `
-        -ConfigFile (Get-LocalPath '.nuget\NuGet.Config') `
-        -Verbosity $verbosity
-}
-
-<#
-.SYNOPSIS
-    Stop any running MSBuild process.
-.INPUTS
-    None.
-.OUTPUTS
-    None.
-#>
-function Stop-AnyMSBuildProcess {
-    [CmdletBinding()]
-    param()
-
-    Write-Debug 'Stop any concurrent MSBuild running.'
-    Get-Process | ?{ $_.ProcessName -eq 'msbuild' } | %{ Stop-Process $_.ID -Force }
-}
-
-# ------------------------------------------------------------------------------
-# Private functions
-# ------------------------------------------------------------------------------
 
 <#
 .SYNOPSIS
@@ -374,7 +246,7 @@ function Stop-AnyMSBuildProcess {
 .OUTPUTS
     None.
 #>
-function _Install-RemoteItem {
+function Install-RemoteItem {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
@@ -405,6 +277,90 @@ function _Install-RemoteItem {
             throw "Unabled to download ${name}: $_"
         }
     }
+}
+
+<#
+.SYNOPSIS
+    Restore packages.
+.PARAMETER PackagesDirectory
+    Specifies the path to the packages directory.
+.PARAMETER Source
+    Specifies the list of packages sources to use.
+.PARAMETER Verbosity
+    Specifies the verbosity level for the underlying NuGet command-line.
+.INPUTS
+    None.
+.OUTPUTS
+    None.
+#>
+function Restore-Packages {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true, Position = 0)]
+        [Alias('s')] [string] $Source,
+
+        [Parameter(Mandatory = $true, Position = 1)]
+        [string] $PackagesDirectory,
+
+        [Parameter(Mandatory = $false, Position = 3)]
+        [ValidateSet('', 'quiet', 'normal', 'detailed')]
+        [string] $Verbosity
+    )
+
+    if ($verbosity -eq '') {
+        $verbosity = 'normal'
+    }
+
+    $nuget = Get-NuGet -Install
+
+    try {
+        Write-Debug 'Call nuget.exe restore.'
+        . $nuget restore $source `
+            -PackagesDirectory $packagesDirectory `
+            -Verbosity $verbosity 2>&1
+    } catch {
+        throw "'nuget.exe restore' failed: $_"
+    }
+}
+
+<#
+.SYNOPSIS
+    Restore solution packages.
+.PARAMETER Verbosity
+    Specifies the verbosity level for the underlying NuGet command-line.
+.INPUTS
+    None.
+.OUTPUTS
+    None.
+#>
+function Restore-SolutionPackages {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $false, Position = 0)]
+        [string] $Verbosity
+    )
+
+    Write-Verbose 'Restoring solution packages.'
+
+    Restore-Packages -Source (Get-LocalPath 'etc\packages.config') `
+        -PackagesDirectory (Get-LocalPath 'packages') `
+        -Verbosity $verbosity
+}
+
+<#
+.SYNOPSIS
+    Stop any running MSBuild process.
+.INPUTS
+    None.
+.OUTPUTS
+    None.
+#>
+function Stop-AnyMSBuildProcess {
+    [CmdletBinding()]
+    param()
+
+    Write-Debug 'Stop any concurrent MSBuild running.'
+    Get-Process | ?{ $_.ProcessName -eq 'msbuild' } | %{ Stop-Process $_.ID -Force }
 }
 
 # ------------------------------------------------------------------------------

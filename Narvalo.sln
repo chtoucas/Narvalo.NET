@@ -49,8 +49,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Core.Facts", "tests
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Cerbere+Core", "tests\Cerbere+Core\Cerbere+Core.shproj", "{B886384D-58BE-475E-980C-5AFAD8E2EE3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo", "src\Narvalo\Narvalo.csproj", "{20635909-6C6E-461C-9141-F5802AD3BEB1}"
-EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		tests\TestCommon\Narvalo.TestCommon.projitems*{031ab273-4a04-40af-923a-aa138096f98a}*SharedItemsImports = 4
@@ -137,10 +135,6 @@ Global
 		{D05B40A6-15B6-46D0-ABC1-8F8CFC5D02E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D05B40A6-15B6-46D0-ABC1-8F8CFC5D02E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D05B40A6-15B6-46D0-ABC1-8F8CFC5D02E8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{20635909-6C6E-461C-9141-F5802AD3BEB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{20635909-6C6E-461C-9141-F5802AD3BEB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{20635909-6C6E-461C-9141-F5802AD3BEB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{20635909-6C6E-461C-9141-F5802AD3BEB1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

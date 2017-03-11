@@ -64,12 +64,6 @@ New-Variable -Name ProjectRoot `
     -Option ReadOnly `
     -Description 'Path to the local repository for the project Narvalo.NET.'
 
-New-Variable -Name DefaultNuGetVerbosity `
-    -Value 'normal' `
-    -Scope Script `
-    -Option ReadOnly `
-    -Description 'Default NuGet verbosity.'
-
 # ------------------------------------------------------------------------------
 
 if ($retail.IsPresent) {
@@ -78,19 +72,19 @@ if ($retail.IsPresent) {
     Write-Host "Make script - Non-retail version.`n"
 }
 
-. '.\tools\helpers.ps1'
-
-#Write-Debug 'Ensure PSake is installed by restoring the solution packages.'
-#Restore-SolutionPackages -Verbosity quiet
-
 if ($help.IsPresent) {
     Get-Help $MyInvocation.MyCommand.Path -Full
     Exit 0
 }
 
+# Load the helpers.
+. '.\tools\helpers.ps1'
+
 if ($safe.IsPresent) {
     Stop-AnyMSBuildProcess
 }
+
+Restore-SolutionPackages
 
 Write-Host -BackgroundColor Red -ForegroundColor Yellow `
     "Due to the upgrade to VS 2017, the build script is currently broken." 

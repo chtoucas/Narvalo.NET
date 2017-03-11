@@ -1,13 +1,3 @@
-# PSakefile script.
-# Requires the module 'Narvalo.ProjectAutomation'.
-#
-
-# We force the framework to be sure we use the v12.0 of the build tools.
-# For instance, this is a requirement for the _MyGet-Publish target where
-# the DeployOnBuild instruction is not understood by previous versions of MSBuild.
-# TODO: Check if this is still necessary.
-# NB: We could also use
-#   Invoke-psake -framework '4.5.1x64' in make.ps1.
 #Framework '4.5.1x64'
 Framework '4.6.1x64'
 
@@ -19,23 +9,11 @@ Properties {
     # Process mandatory parameters.
     Assert($Retail -ne $null) "`$Retail must not be null, e.g. run with -Parameters @{ 'retail' = `$true; }"
 
-    # Process optional parameters.
-    if ($Verbosity -eq $null) { $Verbosity = 'minimal' }
-
-    # Define the NuGet verbosity level.
-    $NuGetVerbosity = ConvertTo-NuGetVerbosity $Verbosity
-
     # MSBuild options.
     $Opts = '/nologo', "/verbosity:$Verbosity", '/maxcpucount', '/nodeReuse:false'
 
     # Main MSBuild projects.
     $Everything  = Get-LocalPath 'tools\Make.proj'
-
-    # NuGet packages.
-    # TODO: Make it survive NuGet updates.
-    $OpenCoverVersion       = '4.6.519'
-    $ReportGeneratorVersion = '2.5.6'
-    $XunitVersion           = '2.2.0'
 
     $OpenCoverXml = Get-LocalPath 'work\log\opencover.xml'
 }
@@ -63,17 +41,6 @@ Task Default -Depends Build
 # Continuous Integration and development tasks
 # ------------------------------------------------------------------------------
 
-# NB: No need to restore packages before building the projects; this will be done in MSBuild.
-
-Task FullClean `
-    -Description 'Delete permanently the "work" directory.' `
-    -Alias Clean `
-    -ContinueOnError `
-{
-    # Sometimes this task fails for some obscure reasons. Maybe the directory is locked?
-    Remove-LocalItem 'work' -Recurse
-}
-
 Task Build `
     -Description 'Build.' `
     -Depends _CI-InitializeVariables `
@@ -91,6 +58,31 @@ Task Test `
         '/p:SkipDocumentation=true'
 }
 
+Task Package `
+    -Description 'Create the packages.' `
+    -Depends _Initialize-GitCommitHash, _Package-CheckVariablesForRetail `
+    -RequiredVariables Retail `
+    -Alias Pack `
+{
+    # Packaging properties:
+    # - Release configuration
+    # - Generate assembly versions (necessary for NuGet packaging)
+    # - Sign assemblies
+    # - Unconditionally hide internals (implies no white-box testing)
+    # Packaging targets:
+    # - Rebuild all
+    # - Verify Portable Executable (PE) format
+    # - Run Xunit tests
+    # - Package
+    MSBuild $Everything $Opts '/t:Xunit;Package' `
+        '/p:Configuration=Release',
+        '/p:BuildGeneratedVersion=true',
+        "/p:GitCommitHash=$GitCommitHash",
+        "/p:Retail=$Retail",
+        '/p:SignAssembly=true',
+        '/p:VisibleInternals=false'
+}
+
 Task OpenCover `
     -Description 'Run OpenCover (summary only).' `
     -Depends _CI-InitializeVariables `
@@ -100,8 +92,7 @@ Task OpenCover `
     MSBuild $Everything $Opts $CI_Props `
         '/t:Build',
         '/p:Configuration=Debug',
-        '/p:SkipDocumentation=true',
-        '/p:Filter="_Core_;_Mvp_"'
+        '/p:SkipDocumentation=true'
 
     Invoke-OpenCover 'Debug'
     Invoke-ReportGenerator -Summary
@@ -116,12 +107,15 @@ Task OpenCoverVerbose `
     MSBuild $Everything $Opts $CI_Props `
         '/t:Build',
         '/p:Configuration=Debug',
-        '/p:SkipDocumentation=true',
-        '/p:Filter="_Core_;_Mvp_"'
+        '/p:SkipDocumentation=true'
 
     Invoke-OpenCover 'Debug'
     Invoke-ReportGenerator
 }
+
+# ------------------------------------------------------------------------------
+# Helpers
+# ------------------------------------------------------------------------------
 
 Task _CI-InitializeVariables `
     -Description 'Initialize variables only used by the CI tasks.' `
@@ -148,44 +142,6 @@ Task _CI-InitializeVariables `
     #$script:CI_AnalysisProps = $CI_Props, '/p:VisibleInternals=false'
 }
 
-# ------------------------------------------------------------------------------
-# Packaging tasks
-# ------------------------------------------------------------------------------
-
-Task Package `
-    -Description 'Create the packages.' `
-    -Depends _Package-InitializeVariables `
-    -Alias Pack `
-{
-    MSBuild $Everything $Opts $Package_Targets $Package_Props
-}
-
-Task _Package-InitializeVariables `
-    -Description 'Initialize variables only used by the Package-* tasks.' `
-    -Depends _Initialize-GitCommitHash, _Package-CheckVariablesForRetail `
-    -RequiredVariables Retail `
-{
-    # Packaging properties:
-    # - Release configuration
-    # - Generate assembly versions (necessary for NuGet packaging)
-    # - Sign assemblies
-    # - Unconditionally hide internals (implies no white-box testing)
-    $script:Package_Props = `
-        '/p:Configuration=Release',
-        '/p:BuildGeneratedVersion=true',
-        "/p:GitCommitHash=$GitCommitHash",
-        "/p:Retail=$Retail",
-        '/p:SignAssembly=true',
-        '/p:VisibleInternals=false'
-
-    # Packaging targets:
-    # - Rebuild all
-    # - Verify Portable Executable (PE) format
-    # - Run Xunit tests
-    # - Package
-    $script:Package_Targets = '/t:Xunit;Package'
-}
-
 Task _Package-CheckVariablesForRetail `
     -Description 'Check conditions are met for creating retail packages.' `
     -Depends _Initialize-GitCommitHash `
@@ -195,18 +151,6 @@ Task _Package-CheckVariablesForRetail `
         Exit-Gracefully -ExitCode 1 `
             'When building retail packages, the git commit hash MUST not be empty.'
     }
-}
-
-# ------------------------------------------------------------------------------
-# Miscs
-# ------------------------------------------------------------------------------
-
-Task RestoreSolutionPackages `
-    -Description 'Restore solution-level packages.' `
-    -Alias restore `
-{
-    # Usually, it is not necessary to run this task, since it is already done in make.ps1.
-    Restore-SolutionPackages -Verbosity quiet
 }
 
 Task _Initialize-GitCommitHash `
@@ -231,24 +175,20 @@ Task _Initialize-GitCommitHash `
     $script:GitCommitHash = $hash
 }
 
-Task _Tools-InitializeVariables `
-    -Description 'Initialize variables for the tooling projects.' `
-{
-    $script:Tools_PackagesDirectory = Get-LocalPath 'tools\packages'
-    $script:Tools_NuGetConfig       = Get-LocalPath 'tools\.nuget\NuGet.Config'
-}
-
 # ------------------------------------------------------------------------------
 # Functions
 # ------------------------------------------------------------------------------
 
-# TODO: Should be a task.
 function Invoke-OpenCover {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true, Position = 0)]
         [string] $Configuration
     )
+
+    # TODO: Make it survive NuGet updates.
+    $OpenCoverVersion = '4.6.519'
+    $XunitVersion = '2.2.0'
 
     $opencover = Get-LocalPath "packages\OpenCover.$OpenCoverVersion\tools\OpenCover.Console.exe" -Resolve
     $xunit     = Get-LocalPath "packages\xunit.runner.console.$XunitVersion\tools\xunit.console.exe" -Resolve
@@ -271,12 +211,14 @@ function Invoke-OpenCover {
       "-targetargs:$asms -nologo -noshadow"
 }
 
-# TODO: Should be a task.
 function Invoke-ReportGenerator {
     [CmdletBinding()]
     param(
         [switch] $Summary
     )
+
+    # TODO: Make it survive NuGet updates.
+    $ReportGeneratorVersion = '2.5.6'
 
     $reportgenerator = Get-LocalPath "packages\ReportGenerator.$ReportGeneratorVersion\tools\ReportGenerator.exe" -Resolve
 
