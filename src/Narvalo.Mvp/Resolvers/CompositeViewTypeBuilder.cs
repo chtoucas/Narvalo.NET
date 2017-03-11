@@ -5,7 +5,7 @@ namespace Narvalo.Mvp.Resolvers
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Diagnostics.Contracts;
+    using System.Diagnostics;
     using System.Linq;
     using System.Reflection;
     using System.Reflection.Emit;
@@ -40,13 +40,9 @@ namespace Narvalo.Mvp.Resolvers
         {
             get
             {
-                Warrant.NotNull<Type>();
-
                 if (_compositeViewType == null)
                 {
                     var type = typeof(CompositeView<>);
-                    Contract.Assume(type.GetGenericArguments()?.Length == 1, "Obvious per definition of CompositeView<>.");
-                    Contract.Assume(type.IsGenericTypeDefinition, "Obvious per definition of CompositeView<>.");
 
                     _compositeViewType = type.MakeGenericType(new Type[] { _viewType });
                 }
@@ -59,13 +55,9 @@ namespace Narvalo.Mvp.Resolvers
         {
             get
             {
-                Warrant.NotNull<Type>();
-
                 if (_enumerableType == null)
                 {
                     var type = typeof(IEnumerable<>);
-                    Contract.Assume(type.GetGenericArguments()?.Length == 1, "Obvious per definition of IEnumerable<>.");
-                    Contract.Assume(type.IsGenericTypeDefinition, "Obvious per definition of IEnumerable<>.");
 
                     _enumerableType = type.MakeGenericType(new Type[] { _viewType });
                 }
@@ -78,13 +70,9 @@ namespace Narvalo.Mvp.Resolvers
         {
             get
             {
-                Warrant.NotNull<Type>();
-
                 if (_enumeratorType == null)
                 {
                     var type = typeof(IEnumerator<>);
-                    Contract.Assume(type.GetGenericArguments()?.Length == 1, "Obvious per definition of IEnumerator<>.");
-                    Contract.Assume(type.IsGenericTypeDefinition, "Obvious per definition of IEnumerator<>.");
 
                     _enumeratorType = type.MakeGenericType(new Type[] { _viewType });
                 }
@@ -93,15 +81,7 @@ namespace Narvalo.Mvp.Resolvers
             }
         }
 
-        public Type Build()
-        {
-            Warrant.NotNull<Type>();
-
-            var type = _typeBuilder.CreateType();
-            Contract.Assume(type != null, "Extern: BCL.");
-
-            return type;
-        }
+        public Type Build() => _typeBuilder.CreateType();
 
         public void AddEvent(EventInfo eventInfo)
         {
@@ -123,7 +103,6 @@ namespace Narvalo.Mvp.Resolvers
                 eventInfo.Name,
                 eventInfo.Attributes,
                 eventInfo.EventHandlerType);
-            Contract.Assume(@event != null, "Extern: BCL.");
 
             @event.SetAddOnMethod(addMethod);
             @event.SetRemoveOnMethod(removeMethod);
@@ -138,7 +117,6 @@ namespace Narvalo.Mvp.Resolvers
                 propertyInfo.Attributes,
                 propertyInfo.PropertyType,
                 Type.EmptyTypes);
-            Contract.Assume(property != null, "Extern: BCL.");
 
             if (propertyInfo.CanRead)
             {
@@ -155,17 +133,15 @@ namespace Narvalo.Mvp.Resolvers
 
         private MethodBuilder DefineAddMethod(EventInfo eventInfo)
         {
-            Demand.NotNull(eventInfo);
+            Debug.Assert(eventInfo != null);
 
             var addBuilder = _typeBuilder.DefineMethod(
                 "add" + "_" + eventInfo.Name,
                 s_MethodAttributes,
                 typeof(void),
                 new[] { eventInfo.EventHandlerType });
-            Contract.Assume(addBuilder != null, "Extern: BCL.");
 
             var il = addBuilder.GetILGenerator();
-            Contract.Assume(il != null, "Extern: BCL.");
 
             EmitILForEachView(
                 il,
@@ -184,17 +160,15 @@ namespace Narvalo.Mvp.Resolvers
 
         private MethodBuilder DefineRemoveMethod(EventInfo eventInfo)
         {
-            Demand.NotNull(eventInfo);
+            Debug.Assert(eventInfo != null);
 
             var removeBuilder = _typeBuilder.DefineMethod(
                 "remove" + "_" + eventInfo.Name,
                 s_MethodAttributes,
                 typeof(void),
                 new[] { eventInfo.EventHandlerType });
-            Contract.Assume(removeBuilder != null, "Extern: BCL.");
 
             var il = removeBuilder.GetILGenerator();
-            Contract.Assume(il != null, "Extern: BCL.");
 
             EmitILForEachView(
                 il,
@@ -213,21 +187,18 @@ namespace Narvalo.Mvp.Resolvers
 
         private MethodBuilder DefineGetter(PropertyInfo propertyInfo)
         {
-            Demand.NotNull(propertyInfo);
+            Debug.Assert(propertyInfo != null);
 
             var getBuilder = _typeBuilder.DefineMethod(
                 "get" + "_" + propertyInfo.Name,
                 s_MethodAttributes,
                 propertyInfo.PropertyType,
                 Type.EmptyTypes);
-            Contract.Assume(getBuilder != null, "Extern: BCL.");
 
             var il = getBuilder.GetILGenerator();
-            Contract.Assume(il != null, "Extern: BCL.");
 
             // Declare a local to store the return value in
             var local = il.DeclareLocal(propertyInfo.PropertyType);
-            Contract.Assume(local != null, "Extern: BCL.");
 
             // Load the view instance on to the evaluation stack
             il.Emit(OpCodes.Ldarg, local.LocalIndex);
@@ -267,17 +238,15 @@ namespace Narvalo.Mvp.Resolvers
 
         private MethodBuilder DefineSetter(PropertyInfo propertyInfo)
         {
-            Demand.NotNull(propertyInfo);
+            Debug.Assert(propertyInfo != null);
 
             var setBuilder = _typeBuilder.DefineMethod(
                 "set" + "_" + propertyInfo.Name,
                 s_MethodAttributes,
                 typeof(void),
                 new[] { propertyInfo.PropertyType });
-            Contract.Assume(setBuilder != null, "Extern: BCL.");
 
             var il = setBuilder.GetILGenerator();
-            Contract.Assume(il != null, "Extern: BCL.");
 
             EmitILForEachView(
                 il,
@@ -296,18 +265,15 @@ namespace Narvalo.Mvp.Resolvers
 
         private void EmitILForEachView(ILGenerator il, Action forEachAction)
         {
-            Demand.NotNull(il);
-            Demand.NotNull(forEachAction);
+            Debug.Assert(il != null);
+            Debug.Assert(forEachAction != null);
 
             // Declare the locals we need
             var viewLocal = il.DeclareLocal(_viewType);
-            Contract.Assume(viewLocal != null, "Extern: BCL.");
 
             var enumeratorLocal = il.DeclareLocal(EnumerableType);
-            Contract.Assume(enumeratorLocal != null, "Extern: BCL.");
 
             var enumeratorContinueLocal = il.DeclareLocal(typeof(bool));
-            Contract.Assume(enumeratorContinueLocal != null, "Extern: BCL.");
 
             // Load the view instance on to the evaluation stack
             il.Emit(OpCodes.Ldarg, viewLocal.LocalIndex);
@@ -427,22 +393,3 @@ namespace Narvalo.Mvp.Resolvers
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Mvp.Resolvers
-{
-    using System.Diagnostics.Contracts;
-
-    public sealed partial class CompositeViewTypeBuilder
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_viewType != null);
-            Contract.Invariant(_typeBuilder != null);
-        }
-    }
-}
-
-#endif

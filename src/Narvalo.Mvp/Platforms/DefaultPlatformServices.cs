@@ -12,36 +12,16 @@ namespace Narvalo.Mvp.Platforms
     public partial class DefaultPlatformServices : IPlatformServices
     {
         private Func<ICompositeViewFactory> _compositeViewFactoryThunk
-           = () =>
-           {
-               Warrant.NotNull<ICompositeViewFactory>();
-
-               return new CompositeViewFactory();
-           };
+           = () => new CompositeViewFactory();
 
         private Func<IMessageCoordinatorFactory> _messageCoordinatorFactoryThunk
-           = () =>
-           {
-               Warrant.NotNull<IMessageCoordinatorFactory>();
-
-               return new MessageCoordinatorFactory();
-           };
+           = () => new MessageCoordinatorFactory();
 
         private Func<IPresenterDiscoveryStrategy> _presenterDiscoveryStrategyThunk
-           = () =>
-           {
-               Warrant.NotNull<IPresenterDiscoveryStrategy>();
-
-               return new AttributedPresenterDiscoveryStrategy();
-           };
+           = () => new AttributedPresenterDiscoveryStrategy();
 
         private Func<IPresenterFactory> _presenterFactoryThunk
-           = () =>
-           {
-               Warrant.NotNull<IPresenterFactory>();
-
-               return new PresenterFactory();
-           };
+           = () => new PresenterFactory();
 
         private ICompositeViewFactory _compositeViewFactory;
         private IMessageCoordinatorFactory _messageCoordinatorFactory;
@@ -153,24 +133,3 @@ namespace Narvalo.Mvp.Platforms
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Mvp.Platforms
-{
-    using System.Diagnostics.Contracts;
-
-    public partial class DefaultPlatformServices
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_compositeViewFactoryThunk != null);
-            Contract.Invariant(_messageCoordinatorFactoryThunk != null);
-            Contract.Invariant(_presenterDiscoveryStrategyThunk != null);
-            Contract.Invariant(_presenterFactoryThunk != null);
-        }
-    }
-}
-
-#endif

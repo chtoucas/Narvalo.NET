@@ -11,37 +11,3 @@ namespace Narvalo.Mvp.PresenterBinding
         void Release(IPresenter presenter);
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Mvp.PresenterBinding
-{
-    using System;
-    using System.Diagnostics.Contracts;
-
-    using static System.Diagnostics.Contracts.Contract;
-
-    [ContractClass(typeof(IPresenterFactoryContract))]
-    public partial interface IPresenterFactory { }
-
-    [ContractClassFor(typeof(IPresenterFactory))]
-    internal abstract class IPresenterFactoryContract : IPresenterFactory
-    {
-        IPresenter IPresenterFactory.Create(Type presenterType, Type viewType, IView view)
-        {
-            Requires(presenterType != null);
-            Requires(viewType != null);
-            Requires(view != null);
-            // NB: no postcondition.
-
-            return default(IPresenter);
-        }
-
-        void IPresenterFactory.Release(IPresenter presenter)
-        {
-            Requires(presenter != null);
-        }
-    }
-}
-
-#endif

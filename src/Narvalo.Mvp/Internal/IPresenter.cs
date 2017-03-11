@@ -17,26 +17,3 @@ namespace Narvalo.Mvp.Internal
         IMessageCoordinator Messages { set; }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Mvp.Internal
-{
-    using System.Diagnostics.Contracts;
-
-    using static System.Diagnostics.Contracts.Contract;
-
-    [ContractClass(typeof(IPresenterContract))]
-    internal partial interface IPresenter { }
-
-    [ContractClassFor(typeof(IPresenter))]
-    internal abstract class IPresenterContract : IPresenter
-    {
-        IMessageCoordinator IPresenter.Messages
-        {
-            set { Requires(value != null); }
-        }
-    }
-}
-
-#endif

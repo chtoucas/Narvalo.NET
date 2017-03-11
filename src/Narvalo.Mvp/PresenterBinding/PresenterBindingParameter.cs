@@ -34,35 +34,11 @@ namespace Narvalo.Mvp.PresenterBinding
 
         public PresenterBindingMode BindingMode { get { return _bindingMode; } }
 
-        public Type PresenterType
-        {
-            get
-            {
-                Warrant.NotNull<Type>();
+        public Type PresenterType => _presenterType;
 
-                return _presenterType;
-            }
-        }
+        public IEnumerable<IView> Views => _views;
 
-        public IEnumerable<IView> Views
-        {
-            get
-            {
-                Warrant.NotNull<IEnumerable<IView>>();
-
-                return _views;
-            }
-        }
-
-        public Type ViewType
-        {
-            get
-            {
-                Warrant.NotNull<Type>();
-
-                return _viewType;
-            }
-        }
+        public Type ViewType => _viewType;
 
         public override bool Equals(object obj)
         {
@@ -126,23 +102,3 @@ namespace Narvalo.Mvp.PresenterBinding
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Mvp.PresenterBinding
-{
-    using System.Diagnostics.Contracts;
-
-    public sealed partial class PresenterBindingParameter
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_presenterType != null);
-            Contract.Invariant(_views != null);
-            Contract.Invariant(_viewType != null);
-        }
-    }
-}
-
-#endif

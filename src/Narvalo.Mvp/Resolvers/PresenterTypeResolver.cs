@@ -103,24 +103,3 @@ namespace Narvalo.Mvp.Resolvers
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Mvp.Resolvers
-{
-    using System.Diagnostics.Contracts;
-
-    public partial class PresenterTypeResolver
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_buildManager != null);
-            Contract.Invariant(_defaultNamespaces != null);
-            Contract.Invariant(_viewSuffixes != null);
-            Contract.Invariant(_presenterNameTemplates != null);
-        }
-    }
-}
-
-#endif

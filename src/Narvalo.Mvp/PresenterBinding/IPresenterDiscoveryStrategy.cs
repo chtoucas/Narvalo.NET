@@ -9,33 +9,3 @@ namespace Narvalo.Mvp.PresenterBinding
         PresenterDiscoveryResult FindBindings(IEnumerable<object> hosts, IEnumerable<IView> views);
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Mvp.PresenterBinding
-{
-    using System.Collections.Generic;
-    using System.Diagnostics.Contracts;
-
-    using static System.Diagnostics.Contracts.Contract;
-
-    [ContractClass(typeof(IPresenterDiscoveryStrategyContract))]
-    public partial interface IPresenterDiscoveryStrategy { }
-
-    [ContractClassFor(typeof(IPresenterDiscoveryStrategy))]
-    internal abstract class IPresenterDiscoveryStrategyContract : IPresenterDiscoveryStrategy
-    {
-        PresenterDiscoveryResult IPresenterDiscoveryStrategy.FindBindings(
-            IEnumerable<object> hosts,
-            IEnumerable<IView> views)
-        {
-            Requires(hosts != null);
-            Requires(views != null);
-            Ensures(Result<PresenterDiscoveryResult>() != null);
-
-            return default(PresenterDiscoveryResult);
-        }
-    }
-}
-
-#endif

@@ -2,8 +2,6 @@
 
 namespace Narvalo.Mvp.CommandLine.Internal
 {
-    using System.Diagnostics.Contracts;
-
     using Narvalo;
     using Narvalo.Mvp;
     using Narvalo.Mvp.CommandLine;
@@ -13,21 +11,13 @@ namespace Narvalo.Mvp.CommandLine.Internal
     internal static class PresenterBinderFactory
     {
         public static PresenterBinder Create(MvpCommand command)
-        {
-            Expect.NotNull(command);
-            Warrant.NotNull<PresenterBinder>();
+            => Create(command, PlatformServices.Current);
 
-            return Create(command, PlatformServices.Current);
-        }
-
-        [ContractVerification(false)]   // Strange CCCheck complains with "ensures unreachable".
-        // Even a SuppressMessage won't work here, the problem will propagate to MvpCommand.
         public static PresenterBinder Create(
             ICommand command,
             IPlatformServices platformServices)
         {
             Require.NotNull(platformServices, nameof(platformServices));
-            Warrant.NotNull<PresenterBinder>();
 
             return new PresenterBinder(
                 new[] { command },

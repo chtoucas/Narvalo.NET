@@ -6,7 +6,6 @@ namespace Narvalo.Mvp.PresenterBinding
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
     using System.Linq;
 
     using Narvalo;
@@ -21,10 +20,7 @@ namespace Narvalo.Mvp.PresenterBinding
 
         public AttributedPresenterDiscoveryStrategy(
             IPresenterBindingAttributesResolver attributesResolver)
-            : this(attributesResolver, true)
-        {
-            Expect.NotNull(attributesResolver);
-        }
+            : this(attributesResolver, true) { }
 
         public AttributedPresenterDiscoveryStrategy(
             IPresenterBindingAttributesResolver attributesResolver,
@@ -56,8 +52,6 @@ namespace Narvalo.Mvp.PresenterBinding
             while (pendingViews.Any())
             {
                 var view = pendingViews.First();
-                Contract.Assume(view != null, "At this point, we know for sure that there is a pending view.");
-
                 var viewType = view.GetType();
 
                 var bindingsThisRound
@@ -90,9 +84,9 @@ namespace Narvalo.Mvp.PresenterBinding
             IView view,
             IEnumerable<IView> pendingViews)
         {
-            Demand.NotNull(attribute);
-            Demand.NotNull(view);
-            Demand.NotNull(pendingViews);
+            Debug.Assert(attribute != null);
+            Debug.Assert(view != null);
+            Debug.Assert(pendingViews != null);
 
             Trace.TraceInformation(
                 "[AttributeBasedPresenterDiscoveryStrategy] Found presenter '{0}' for view '{1}', origin='{2}', binding mode='{3}'.",
@@ -110,26 +104,8 @@ namespace Narvalo.Mvp.PresenterBinding
                     return pendingViews.Where(_ => attribute.ViewType?.IsInstanceOfType(_) ?? false);
 
                 default:
-                    throw Check.Unreachable("A case in a switch has been forgotten.");
+                    throw new ControlFlowException();
             }
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Mvp.PresenterBinding
-{
-    using System.Diagnostics.Contracts;
-
-    public sealed partial class AttributedPresenterDiscoveryStrategy
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_attributesResolver != null);
-        }
-    }
-}
-
-#endif

@@ -26,21 +26,3 @@ namespace Narvalo.Mvp
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Mvp
-{
-    using System.Diagnostics.Contracts;
-
-    public abstract partial class PresenterOf<TViewModel>
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_view != null);
-        }
-    }
-}
-
-#endif

@@ -27,8 +27,6 @@ namespace Narvalo.Mvp.Resolvers
         public TValue GetOrAdd(TKey key, Func<TKey, TValue> valueFactory)
         {
             Require.NotNull(valueFactory, nameof(valueFactory));
-            Expect.NotNull(key);
-            Warrant.NotNullUnconstrained<TValue>();
 
             TCacheKey innerKey = _cacheKeyProvider.Invoke(key);
 
@@ -48,22 +46,3 @@ namespace Narvalo.Mvp.Resolvers
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Mvp.Resolvers
-{
-    using System.Diagnostics.Contracts;
-
-    public partial class ResolverCache<TKey, TCacheKey, TValue>
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_cacheKeyProvider != null);
-            Contract.Invariant(_dictionary != null);
-        }
-    }
-}
-
-#endif

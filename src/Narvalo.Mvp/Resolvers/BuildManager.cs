@@ -27,21 +27,3 @@ namespace Narvalo.Mvp.Resolvers
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Mvp.Resolvers
-{
-    using System.Diagnostics.Contracts;
-
-    public sealed partial class BuildManager
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_assemblies != null);
-        }
-    }
-}
-
-#endif

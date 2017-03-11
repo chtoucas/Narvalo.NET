@@ -35,8 +35,6 @@ namespace Narvalo.Mvp.CommandLine
 
         public DefaultPresenterDiscoveryStrategy(Assembly[] assemblies)
         {
-            Expect.NotNull(assemblies);
-
             var typeResolver = new PresenterTypeResolver(
                    new BuildManager(assemblies),
                    assemblies.Select(_ => new AssemblyName(_.FullName).Name),
@@ -52,21 +50,3 @@ namespace Narvalo.Mvp.CommandLine
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Mvp.CommandLine
-{
-    using System.Diagnostics.Contracts;
-
-    public sealed partial class DefaultPresenterDiscoveryStrategy
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_inner != null);
-        }
-    }
-}
-
-#endif

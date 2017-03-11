@@ -22,10 +22,7 @@ namespace Narvalo.Mvp
         /// <summary>
         /// Gets the list of individual views represented by this composite view.
         /// </summary>
-        protected internal IEnumerable<TView> Views
-        {
-            get { Warrant.NotNull<IEnumerable<TView>>(); return _views; }
-        }
+        protected internal IEnumerable<TView> Views => _views;
 
         /// <summary>
         /// Adds the specified view instance to the composite view collection.
@@ -47,21 +44,3 @@ namespace Narvalo.Mvp
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Mvp
-{
-    using System.Diagnostics.Contracts;
-
-    public abstract partial class CompositeView<TView>
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_views != null);
-        }
-    }
-}
-
-#endif

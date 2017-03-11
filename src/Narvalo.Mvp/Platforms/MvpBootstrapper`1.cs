@@ -27,54 +27,24 @@ namespace Narvalo.Mvp.Platforms
         }
 
         public Setter<T, ICompositeViewFactory> CompositeViewFactory
-        {
-            get
-            {
-                Warrant.NotNull<Setter<T, ICompositeViewFactory>>();
-
-                return new Setter<T, ICompositeViewFactory>(
+            => new Setter<T, ICompositeViewFactory>(
                     (T)this, _ => _compositeViewFactory = _);
-            }
-        }
 
         public Appender<T, IPresenterDiscoveryStrategy> DiscoverPresenter
-        {
-            get
-            {
-                Warrant.NotNull<Appender<T, IPresenterDiscoveryStrategy>>();
-
-                return new Appender<T, IPresenterDiscoveryStrategy>(
+            => new Appender<T, IPresenterDiscoveryStrategy>(
                     (T)this, _ => _presenterDiscoveryStrategies.Add(_));
-            }
-        }
 
         public Setter<T, IMessageCoordinatorFactory> MessageCoordinatorFactory
-        {
-            get
-            {
-                Warrant.NotNull<Setter<T, IMessageCoordinatorFactory>>();
-
-                return new Setter<T, IMessageCoordinatorFactory>(
+            => new Setter<T, IMessageCoordinatorFactory>(
                     (T)this, _ => _messageCoordinatorFactory = _);
-            }
-        }
 
         public Setter<T, IPresenterFactory> PresenterFactory
-        {
-            get
-            {
-                Warrant.NotNull<Setter<T, IPresenterFactory>>();
-
-                return new Setter<T, IPresenterFactory>(
+            => new Setter<T, IPresenterFactory>(
                     (T)this, _ => _presenterFactory = _);
-            }
-        }
 
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public IPlatformServices CreatePlatformServices()
         {
-            Warrant.NotNull<IPlatformServices>();
-
             var platformServices = new PlatformServices_();
 
             platformServices.CompositeViewFactory = _compositeViewFactory != null
@@ -121,22 +91,3 @@ namespace Narvalo.Mvp.Platforms
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Mvp.Platforms
-{
-    using System.Diagnostics.Contracts;
-
-    public abstract partial class MvpBootstrapper<T>
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_defaultServices != null);
-            Contract.Invariant(_presenterDiscoveryStrategies != null);
-        }
-    }
-}
-
-#endif

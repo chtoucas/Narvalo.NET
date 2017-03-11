@@ -30,8 +30,6 @@ namespace Narvalo.Mvp.Platforms
         {
             get
             {
-                Warrant.NotNull<TValue>();
-
                 var value = _lazyValue.Value;
 
                 if (value == null)
@@ -66,21 +64,3 @@ namespace Narvalo.Mvp.Platforms
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Mvp.Platforms
-{
-    using System.Diagnostics.Contracts;
-
-    public partial class LazyValueHolder<TValue>
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_lazyValue != null);
-        }
-    }
-}
-
-#endif

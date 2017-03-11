@@ -41,21 +41,3 @@ namespace Narvalo.Mvp.CommandLine
         protected virtual void OnLoad(EventArgs e) => Load?.Invoke(this, e);
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Mvp.CommandLine
-{
-    using System.Diagnostics.Contracts;
-
-    public partial class MvpCommand
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_presenterBinder != null);
-        }
-    }
-}
-
-#endif

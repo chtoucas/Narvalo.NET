@@ -18,34 +18,3 @@ namespace Narvalo.Mvp
         void Subscribe<T>(Action<T> onNext);
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Mvp
-{
-    using System;
-    using System.Diagnostics.Contracts;
-
-    using static System.Diagnostics.Contracts.Contract;
-
-    [ContractClass(typeof(IMessageCoordinatorContract))]
-    public partial interface IMessageCoordinator { }
-
-    [ContractClassFor(typeof(IMessageCoordinator))]
-    internal abstract class IMessageCoordinatorContract : IMessageCoordinator
-    {
-        void IMessageCoordinator.Close() { }
-
-        void IMessageCoordinator.Publish<T>(T message)
-        {
-            Requires(message != null);
-        }
-
-        void IMessageCoordinator.Subscribe<T>(Action<T> onNext)
-        {
-            Requires(onNext != null);
-        }
-    }
-}
-
-#endif

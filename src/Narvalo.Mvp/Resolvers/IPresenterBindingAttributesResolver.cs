@@ -10,31 +10,3 @@ namespace Narvalo.Mvp.Resolvers
         IEnumerable<PresenterBindingAttribute> Resolve(Type viewType);
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Mvp.Resolvers
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.Contracts;
-
-    using static System.Diagnostics.Contracts.Contract;
-
-    [ContractClass(typeof(IPresenterBindingAttributesResolverContract))]
-    public partial interface IPresenterBindingAttributesResolver { }
-
-    [ContractClassFor(typeof(IPresenterBindingAttributesResolver))]
-    internal abstract class IPresenterBindingAttributesResolverContract : IPresenterBindingAttributesResolver
-    {
-        IEnumerable<PresenterBindingAttribute> IPresenterBindingAttributesResolver.Resolve(Type viewType)
-        {
-            Requires(viewType != null);
-            Ensures(Result<IEnumerable<PresenterBindingAttribute>>() != null);
-
-            return default(IEnumerable<PresenterBindingAttribute>);
-        }
-    }
-}
-
-#endif

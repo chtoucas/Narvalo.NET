@@ -3,7 +3,6 @@
 namespace Narvalo.Mvp.Resolvers
 {
     using System;
-    using System.Diagnostics.Contracts;
     using System.Reflection;
     using System.Reflection.Emit;
 
@@ -25,26 +24,19 @@ namespace Narvalo.Mvp.Resolvers
         public TypeBuilder DefineType(Type viewType)
         {
             Require.NotNull(viewType, nameof(viewType));
-            Warrant.NotNull<TypeBuilder>();
 
             // Create a generic type of type "CompositeView<ITestView>".
             var type = typeof(CompositeView<>);
-            Contract.Assume(type.GetGenericArguments()?.Length == 1, "Obvious per definition of CompositeView<>.");
-            Contract.Assume(type.IsGenericTypeDefinition, "Obvious per definition of CompositeView<>.");
 
             var parentType = type.MakeGenericType(new Type[] { viewType });
 
             var interfaces = new[] { viewType };
-
-            Contract.Assume(_moduleBuilder.Value != null, "Extern: BCL.");
 
             var typeBuilder = _moduleBuilder.Value.DefineType(
                 viewType.FullName + "__@CompositeView",
                 TypeAttributes.Public | TypeAttributes.Sealed | TypeAttributes.Class,
                 parentType,
                 interfaces);
-
-            Contract.Assume(typeBuilder != null, "Extern: BCL.");
 
             return typeBuilder;
         }
@@ -64,28 +56,8 @@ namespace Narvalo.Mvp.Resolvers
             var assembly = AppDomain.CurrentDomain.DefineDynamicAssembly(
                 assemblyName,
                 AssemblyBuilderAccess.Run);
-            Contract.Assume(assembly != null, "Extern: BCL.");
 
             return assembly.DefineDynamicModule(assemblyName.Name);
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Mvp.Resolvers
-{
-    using System.Diagnostics.Contracts;
-
-    public sealed partial class CompositeViewModuleBuilder
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_assemblyName != null);
-            Contract.Invariant(_moduleBuilder != null);
-        }
-    }
-}
-
-#endif

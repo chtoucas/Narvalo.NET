@@ -4,8 +4,8 @@ namespace Narvalo.Mvp.PresenterBinding
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
     using System.Linq;
 
     using Narvalo;
@@ -51,15 +51,7 @@ namespace Narvalo.Mvp.PresenterBinding
 
         public event EventHandler<PresenterEventArgs> PresenterCreated;
 
-        public IMessageCoordinator MessageCoordinator
-        {
-            get
-            {
-                Warrant.NotNull<IMessageCoordinator>();
-
-                return _messageCoordinator;
-            }
-        }
+        public IMessageCoordinator MessageCoordinator => _messageCoordinator;
 
         public void PerformBinding()
         {
@@ -137,8 +129,6 @@ namespace Narvalo.Mvp.PresenterBinding
 
         private IEnumerable<PresenterBindingParameter> FindBindings(IEnumerable<Object> hosts)
         {
-            Warrant.NotNull<IEnumerable<PresenterBindingParameter>>();
-
             var viewsToBind = _viewsToBind.Distinct();
 
             var result = _presenterDiscoveryStrategy.FindBindings(hosts, viewsToBind);
@@ -149,8 +139,8 @@ namespace Narvalo.Mvp.PresenterBinding
 
             if (unboundViews.Any())
             {
+                // At this point, we know for sure that there is an unbound view.
                 var unboundView = unboundViews.First();
-                Contract.Assume(unboundView != null, "At this point, we know for sure that there is an unbound view.");
 
                 throw new PresenterBindingException(Format.Current(
                    Strings.PresenterBinder_NoPresenterFoundForView,
@@ -163,7 +153,7 @@ namespace Narvalo.Mvp.PresenterBinding
         [SuppressMessage("Microsoft.Contracts", "Requires-7-71", Justification = "[Intentionally] Requires unreachable but CCCheck still proves no case is forgotten.")]
         private IEnumerable<IView> GetViews(PresenterBindingParameter binding)
         {
-            Demand.NotNull(binding);
+            Debug.Assert(binding != null);
 
             IEnumerable<IView> views;
 
@@ -181,34 +171,10 @@ namespace Narvalo.Mvp.PresenterBinding
                     break;
 
                 default:
-                    throw Check.Unreachable("A case in a switch has been forgotten.");
+                    throw new ControlFlowException();
             }
 
             return views;
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Mvp.PresenterBinding
-{
-    using System.Diagnostics.Contracts;
-
-    public partial class PresenterBinder
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_compositeViewFactory != null);
-            Contract.Invariant(_hosts != null);
-            Contract.Invariant(_presenterDiscoveryStrategy != null);
-            Contract.Invariant(_presenterFactory != null);
-            Contract.Invariant(_presenters != null);
-            Contract.Invariant(_messageCoordinator != null);
-            Contract.Invariant(_viewsToBind != null);
-        }
-    }
-}
-
-#endif

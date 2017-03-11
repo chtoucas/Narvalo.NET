@@ -21,7 +21,6 @@ namespace Narvalo.Mvp.Platforms
         public TSource With(params T[] values)
         {
             Require.NotNull(values, nameof(values));
-            Warrant.NotNull<TSource>();
 
             foreach (var value in values)
             {
@@ -34,22 +33,3 @@ namespace Narvalo.Mvp.Platforms
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Mvp.Platforms
-{
-    using System.Diagnostics.Contracts;
-
-    public sealed partial class Appender<TSource, T>
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_source != null);
-            Contract.Invariant(_append != null);
-        }
-    }
-}
-
-#endif

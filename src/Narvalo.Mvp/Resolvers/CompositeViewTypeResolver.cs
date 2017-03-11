@@ -36,7 +36,7 @@ namespace Narvalo.Mvp.Resolvers
             var events = FindEvents(viewType);
             foreach (var eventInfo in events)
             {
-                if (eventInfo ==null) { continue; }
+                if (eventInfo == null) { continue; }
 
                 typeBuilder.AddEvent(eventInfo);
             }
@@ -84,7 +84,7 @@ namespace Narvalo.Mvp.Resolvers
 
         private static IEnumerable<EventInfo> FindEvents(Type viewType)
         {
-            Demand.NotNull(viewType);
+            Debug.Assert(viewType != null);
 
             return viewType.GetEvents()
                 .Union(
@@ -94,7 +94,7 @@ namespace Narvalo.Mvp.Resolvers
 
         private static IEnumerable<PropertyInfo> FindProperties(Type viewType)
         {
-            Demand.NotNull(viewType);
+            Debug.Assert(viewType != null);
 
             return viewType.GetProperties()
                 .Union(
@@ -113,21 +113,3 @@ namespace Narvalo.Mvp.Resolvers
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Mvp.Resolvers
-{
-    using System.Diagnostics.Contracts;
-
-    public partial class CompositeViewTypeResolver
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_moduleBuilder != null);
-        }
-    }
-}
-
-#endif

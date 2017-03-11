@@ -20,43 +20,8 @@ namespace Narvalo.Mvp.PresenterBinding
             _bindings = bindings;
         }
 
-        public IEnumerable<IView> BoundViews
-        {
-            get
-            {
-                Warrant.NotNull<IEnumerable<IView>>();
+        public IEnumerable<IView> BoundViews => _boundViews;
 
-                return _boundViews;
-            }
-        }
-
-        public IEnumerable<PresenterBindingParameter> Bindings
-        {
-            get
-            {
-                Warrant.NotNull<IEnumerable<PresenterBindingParameter>>();
-
-                return _bindings;
-            }
-        }
+        public IEnumerable<PresenterBindingParameter> Bindings => _bindings;
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Mvp.PresenterBinding
-{
-    using System.Diagnostics.Contracts;
-
-    public sealed partial class PresenterDiscoveryResult
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_bindings != null);
-            Contract.Invariant(_boundViews != null);
-        }
-    }
-}
-
-#endif

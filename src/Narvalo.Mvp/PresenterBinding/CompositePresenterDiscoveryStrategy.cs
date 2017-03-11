@@ -56,21 +56,3 @@ namespace Narvalo.Mvp.PresenterBinding
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Mvp.PresenterBinding
-{
-    using System.Diagnostics.Contracts;
-
-    public sealed partial class CompositePresenterDiscoveryStrategy
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_strategies != null);
-        }
-    }
-}
-
-#endif

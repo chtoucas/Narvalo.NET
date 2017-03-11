@@ -31,15 +31,7 @@ namespace Narvalo.Mvp
             set { _bindingMode = value; }
         }
 
-        public Type PresenterType
-        {
-            get
-            {
-                Warrant.NotNull<Type>();
-
-                return _presenterType;
-            }
-        }
+        public Type PresenterType => _presenterType;
 
         // NB: null values are allowed.
         public Type ViewType
@@ -51,25 +43,7 @@ namespace Narvalo.Mvp
         internal Type Origin
         {
             get { return _origin; }
-            set { Demand.NotNull(value); _origin = value; }
+            set { Debug.Assert(value != null); _origin = value; }
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Mvp
-{
-    using System.Diagnostics.Contracts;
-
-    public sealed partial class PresenterBindingAttribute
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_presenterType != null);
-        }
-    }
-}
-
-#endif

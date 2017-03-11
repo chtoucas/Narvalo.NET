@@ -17,10 +17,7 @@ namespace Narvalo.Mvp.PresenterBinding
         private readonly IPresenterTypeResolver _typeResolver;
 
         public PresenterDiscoveryStrategy(IPresenterTypeResolver typeResolver)
-            : this(typeResolver, true)
-        {
-            Expect.NotNull(typeResolver);
-        }
+            : this(typeResolver, true) { }
 
         public PresenterDiscoveryStrategy(
             IPresenterTypeResolver typeResolver,
@@ -75,21 +72,3 @@ namespace Narvalo.Mvp.PresenterBinding
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Mvp.PresenterBinding
-{
-    using System.Diagnostics.Contracts;
-
-    public sealed partial class PresenterDiscoveryStrategy
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_typeResolver != null);
-        }
-    }
-}
-
-#endif

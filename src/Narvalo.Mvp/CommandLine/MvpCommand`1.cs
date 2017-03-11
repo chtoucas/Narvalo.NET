@@ -18,8 +18,6 @@ namespace Narvalo.Mvp.CommandLine
         {
             get
             {
-                Warrant.NotNullUnconstrained<TViewModel>();
-
                 if (_model == null)
                 {
                     throw new InvalidOperationException(Strings.MvpCommand_ModelPropertyIsNull);

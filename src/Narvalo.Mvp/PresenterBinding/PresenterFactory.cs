@@ -23,9 +23,7 @@ namespace Narvalo.Mvp.PresenterBinding
 
         public PresenterFactory(IPresenterConstructorResolver constructorResolver)
             : this(constructorResolver, true)
-        {
-            Expect.NotNull(constructorResolver);
-        }
+        { }
 
         public PresenterFactory(
             IPresenterConstructorResolver constructorResolver,
@@ -84,21 +82,3 @@ namespace Narvalo.Mvp.PresenterBinding
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Mvp.PresenterBinding
-{
-    using System.Diagnostics.Contracts;
-
-    public sealed partial class PresenterFactory
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_constructorResolver != null);
-        }
-    }
-}
-
-#endif

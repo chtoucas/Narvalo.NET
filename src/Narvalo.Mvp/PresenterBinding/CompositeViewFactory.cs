@@ -16,10 +16,7 @@ namespace Narvalo.Mvp.PresenterBinding
             : this(new CompositeViewTypeResolver()) { }
 
         public CompositeViewFactory(ICompositeViewTypeResolver typeResolver)
-            : this(typeResolver, true)
-        {
-            Expect.NotNull(typeResolver);
-        }
+            : this(typeResolver, true) { }
 
         public CompositeViewFactory(
             ICompositeViewTypeResolver typeResolver,
@@ -51,21 +48,3 @@ namespace Narvalo.Mvp.PresenterBinding
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Mvp.PresenterBinding
-{
-    using System.Diagnostics.Contracts;
-
-    public sealed partial class CompositeViewFactory
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_typeResolver != null);
-        }
-    }
-}
-
-#endif

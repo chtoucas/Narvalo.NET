@@ -20,30 +20,9 @@ namespace Narvalo.Mvp.Platforms
 
         public TSource Is(T value)
         {
-            Warrant.NotNull<TSource>();
-
             _set.Invoke(value);
 
             return _source;
         }
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Mvp.Platforms
-{
-    using System.Diagnostics.Contracts;
-
-    public sealed partial class Setter<TSource, T>
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_source != null);
-            Contract.Invariant(_set != null);
-        }
-    }
-}
-
-#endif

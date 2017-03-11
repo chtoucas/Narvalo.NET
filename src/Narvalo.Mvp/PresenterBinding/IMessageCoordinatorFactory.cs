@@ -7,28 +7,3 @@ namespace Narvalo.Mvp.PresenterBinding
         IMessageCoordinator Create();
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Mvp.PresenterBinding
-{
-    using System.Diagnostics.Contracts;
-
-    using static System.Diagnostics.Contracts.Contract;
-
-    [ContractClass(typeof(IMessageCoordinatorFactoryContract))]
-    public partial interface IMessageCoordinatorFactory { }
-
-    [ContractClassFor(typeof(IMessageCoordinatorFactory))]
-    internal abstract class IMessageCoordinatorFactoryContract : IMessageCoordinatorFactory
-    {
-        IMessageCoordinator IMessageCoordinatorFactory.Create()
-        {
-            Ensures(Result<IMessageCoordinator>() != null);
-
-            return default(IMessageCoordinator);
-        }
-    }
-}
-
-#endif
