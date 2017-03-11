@@ -23,9 +23,8 @@
   <PropertyGroup>
     <!-- WARNING: Overriding this property may lead to unexpected results.
          Microsoft.Common.targets will completely ignore the original targets
-         file which, by the way, is used by Code Contracts. A simple workaround
-         is to import in Narvalo.Common.targets the orignal system-wide custom
-         after targets. -->
+         file. A simple workaround is to import in Narvalo.Common.targets 
+         the original system-wide custom after targets. -->
     <CustomAfterMicrosoftCommonTargets>$(MSBuildThisFileDirectory)Narvalo.Common.targets</CustomAfterMicrosoftCommonTargets>
   </PropertyGroup>
 
@@ -61,7 +60,6 @@
   <!--
     Debug configuration is optimized for build speed.
     Release configuration is optimized for execution speed.
-    CodeContracts configuration focuses on Code Contracts!
     This explains why I choose to only check for overflow/underflow
     in Debug configuration (FIXME).
   -->
@@ -87,29 +85,6 @@
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
   </PropertyGroup>
 
-  <!-- CodeContracts configuration -->
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'CodeContracts|AnyCPU' ">
-    <DebugSymbols>false</DebugSymbols>
-    <DebugType>none</DebugType>
-    <Optimize>false</Optimize>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <!-- WARNING: Do not add the CODE_ANALYSIS symbol. Inside VS, it would cause
-         FxCop to run automatically on build but Code Contracts and Code Analysis
-         don't play well together. Anyway, the build is already slow enough in this
-         confguration. Otherwise, note that the Code Contracts rewriter will
-         define the CODE_ANALYSIS symbol. -->
-    <DefineConstants>TRACE;CONTRACTS_FULL</DefineConstants>
-    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
-  </PropertyGroup>
-
-  <!-- Inside VS, we would like to always define the Code Contracts symbol; otherwise many lines
-       are unreachable, leading to broken sources after refactoring. Unfortunately it does not
-       play nicely with the VS environment: compiling is fine but running anything is broken. -->
-  <!--<PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' == 'true' ">
-    <DefineConstants
-      Condition=" '$(Configuration)' != 'CodeContracts' And '$(CodeContractsRunCodeAnalysis)' != 'true' ">$(DefineConstants);CONTRACTS_FULL</DefineConstants>
-  </PropertyGroup>-->
-
   <!-- Additional files -->
   <ItemGroup>
     <!-- Unfortunately, when done here, the files won't appear in VS (even
@@ -131,45 +106,13 @@
 
     <DefineConstants Condition=" '$(RunCodeAnalysis)' == 'true' ">$(DefineConstants);CODE_ANALYSIS</DefineConstants>
 
-    <!-- The default behaviour is to use a strict ruleset.
-         For performance reasons we use a minimal ruleset when using Code
-         Contracts. Also Code Contracts produce assemblies that are not
-         compatible with Code Analysis. -->
-    <CodeAnalysisRuleSet Condition=" '$(Configuration)' == 'CodeContracts' ">MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisRuleSet Condition=" '$(Configuration)' != 'CodeContracts' ">$(RepositorySettingsDir)Strict.ruleset</CodeAnalysisRuleSet>
+    <!-- The default behaviour is to use a strict ruleset. -->
+    <CodeAnalysisRuleSet>$(RepositorySettingsDir)Strict.ruleset</CodeAnalysisRuleSet>
 
     <!-- Process generated files (.g.cs). -->
     <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
 
     <CodeAnalysisTreatWarningsAsErrors>false</CodeAnalysisTreatWarningsAsErrors>
-  </PropertyGroup>
-
-  <!-- Code Contracts -->
-  <!--
-    For a complete list of available options, see
-      %ProgramFiles%\Microsoft\Contracts\MsBuild\v$(VisualStudioVersion)\Microsoft.CodeContractAnalysis.targets
-      %ProgramFiles%\Microsoft\Contracts\MsBuild\v$(VisualStudioVersion)\Microsoft.CodeContracts.targets
-
-    We do not really enforce any policy for Code Contracts as they are not
-    currently used by all projects. When enabling Code Contracts on a project,
-    you should also add the following lines to {AssemblyName}.props:
-      <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">
-        <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
-      </PropertyGroup>
-    On CodeContracts Build, configuration is exclusively done inside VS.
-    Even so, let's set some reasonable defaults.
-  -->
-  <PropertyGroup>
-    <!-- Use "Custom Parameter Validation". -->
-    <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>
-    <!-- Only meaningful inside VS, anyway I find the result confusing. -->
-    <CodeContractsShowSquigglies>false</CodeContractsShowSquigglies>
-    <!-- Extra CCChecker options. -->
-    <CodeContractsExtraAnalysisOptions>-outputwarnmasks -show unreached</CodeContractsExtraAnalysisOptions>
-
-    <!-- For command-line builds the following settings are reversed. -->
-    <CodeContractsFailBuildOnWarnings>false</CodeContractsFailBuildOnWarnings>
-    <CodeContractsRunInBackground>true</CodeContractsRunInBackground>
   </PropertyGroup>
 
   <!-- Security Annotations. -->
