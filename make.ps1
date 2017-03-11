@@ -10,7 +10,7 @@
 .PARAMETER Safe
     If present, ensures there is no concurrent MSBuild running.
 .PARAMETER Task
-    Specifies the list of tasks to be executed.
+    Specifies the task to be executed.
 .PARAMETER Verbosity
     Specifies the amount of information displayed by MSBuild.
     You can use the following verbosity levels:
@@ -110,9 +110,9 @@ if (!(Test-Path $MSBuild)) {
 }
 
 switch ($task) {
-    'build' { Invoke-BuildProjects }
-    'test' { Invoke-TestProjects }
-    'cover' { Write-Host "COVER has not yet been implemented." }
+    'build' { Invoke-Build }
+    'test' { Invoke-Xunit }
+    'cover' { Invoke-OpenCover }
     'pack' { Invoke-Package }
 }
 

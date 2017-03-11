@@ -48,7 +48,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Scripts", "4. Scripts", 
 		helpers.ps1 = helpers.ps1
 		..\make.cmd = ..\make.cmd
 		..\make.ps1 = ..\make.ps1
-		PSakefile.ps1 = PSakefile.ps1
 		publish-edge.fsx = publish-edge.fsx
 		publish-retail.fsx = publish-retail.fsx
 	EndProjectSection

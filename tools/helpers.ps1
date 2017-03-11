@@ -1,10 +1,14 @@
 
-function Invoke-BuildProjects {
-  & $script:MSBuild $script:Project $script:MSBuildCommonProps $script:MSBuildCIProps '/t:Build'
+function Invoke-Build {
+    & $script:MSBuild $script:Project $script:MSBuildCommonProps $script:MSBuildCIProps '/t:Build'
 }
 
-function Invoke-TestProjects {
-  & $script:MSBuild $script:Project $script:MSBuildCommonProps $script:MSBuildCIProps '/t:Xunit'
+function Invoke-Xunit {
+    & $script:MSBuild $script:Project $script:MSBuildCommonProps $script:MSBuildCIProps '/t:Xunit'
+}
+
+function Invoke-OpenCover {
+    & $script:MSBuild $script:Project $script:MSBuildCommonProps $script:MSBuildCIProps '/t:OpenCover'
 }
 
 function Invoke-Package {
@@ -20,9 +24,9 @@ function Invoke-Package {
         $status = Get-GitStatus $git -Short
 
         if ($status -eq $null) {
-            Write-Warning 'Skipping... unabled to verify the git status.'
+            Write-Warning 'Skipping git commit hash... unabled to verify the git status.'
         } elseif ($status -ne '') {
-            Write-Warning 'Skipping... uncommitted changes are pending.'
+            Write-Warning 'Skipping git commit hash... uncommitted changes are pending.'
         } else {
             $hash = Get-GitCommitHash $git
         }
@@ -34,7 +38,7 @@ function Invoke-Package {
     }
 
     & $script:MSBuild $script:Project $script:MSBuildCommonProps `
-        '/t:Xunit;Package' `
+        '/t:Package' `
         '/p:Configuration=Release',
         '/p:BuildGeneratedVersion=true',
         "/p:GitCommitHash=$hash",
@@ -42,6 +46,8 @@ function Invoke-Package {
         '/p:SignAssembly=true',
         '/p:VisibleInternals=false'
 }
+
+# ------------------------------------------------------------------------------
 
 <#
 .SYNOPSIS

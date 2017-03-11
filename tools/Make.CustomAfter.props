@@ -35,19 +35,6 @@
     <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
 
-  <!-- Code Analysis. -->
-  <PropertyGroup>
-    <!-- Treat all warnings as errors. -->
-    <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
-
-    <!-- Reports are saved in a custom location. -->
-    <CodeAnalysisLogFile>$(WorkLogDir)$(AssemblyName).FxCop.xml</CodeAnalysisLogFile>
-
-    <!-- FIXME: Seems to be ignored by MSBuild. -->
-    <!--<CodeAnalysisSucceededFile>$(IntermediateOutputPath)$(AssemblyName).FxCop.out</CodeAnalysisSucceededFile>-->
-    <CodeAnalysisGenerateSuccessFile>false</CodeAnalysisGenerateSuccessFile>
-  </PropertyGroup>
-
   <!-- Sign the assembly. -->
   <PropertyGroup Condition=" '$(SignAssembly)' == 'true' ">
     <DefineConstants>$(DefineConstants);SIGNED_ASSEMBLY</DefineConstants>
