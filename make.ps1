@@ -9,7 +9,7 @@
     If present, packages/assemblies are built for retail.
 .PARAMETER Safe
     If present, ensures there is no concurrent MSBuild running.
-.PARAMETER TaskList
+.PARAMETER Task
     Specifies the list of tasks to be executed.
 .PARAMETER Verbosity
     Specifies the amount of information displayed by MSBuild.
@@ -30,7 +30,8 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $false, Position = 0, ValueFromPipeline = $true)]
-    [Alias('t')] [string[]] $TaskList = @(),
+    [ValidateSet('build', 'test', 'cover', 'pack')]
+    [Alias('t')] [string] $Task = 'build',
 
     [Alias('r')] [switch] $Retail,
 
@@ -108,6 +109,11 @@ if (!(Test-Path $MSBuild)) {
     Exit 1
 }
 
-Invoke-TestProjects
+switch ($task) {
+    'build' { Invoke-BuildProjects }
+    'test' { Invoke-TestProjects }
+    'cover' { Write-Host "COVER has not yet been implemented." }
+    'pack' { Invoke-Package }
+}
 
 # ------------------------------------------------------------------------------

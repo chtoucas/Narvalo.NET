@@ -7,6 +7,41 @@ function Invoke-TestProjects {
   & $script:MSBuild $script:Project $script:MSBuildCommonProps $script:MSBuildCIProps '/t:Xunit'
 }
 
+function Invoke-Package {
+    if ($script:Retail -eq $null) {
+        Exit-Gracefully -ExitCode 1 "`$Retail must not be null."
+    }
+
+    $git = (Get-Git)
+
+    $hash = ''
+
+    if ($git -ne $null) {
+        $status = Get-GitStatus $git -Short
+
+        if ($status -eq $null) {
+            Write-Warning 'Skipping... unabled to verify the git status.'
+        } elseif ($status -ne '') {
+            Write-Warning 'Skipping... uncommitted changes are pending.'
+        } else {
+            $hash = Get-GitCommitHash $git
+        }
+    }
+
+    if ($script:Retail -and $hash -eq '') {
+        Exit-Gracefully -ExitCode 1 `
+            'When building retail packages, the git commit hash MUST not be empty.'
+    }
+
+    & $script:MSBuild $script:Project $script:MSBuildCommonProps `
+        '/t:Xunit;Package' `
+        '/p:Configuration=Release',
+        '/p:BuildGeneratedVersion=true',
+        "/p:GitCommitHash=$hash",
+        "/p:Retail=$script:Retail",
+        '/p:SignAssembly=true',
+        '/p:VisibleInternals=false'
+}
 
 <#
 .SYNOPSIS
