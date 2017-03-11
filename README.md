@@ -12,20 +12,17 @@ Narvalo.NET
   Code Contracts helpers.
 - **Narvalo.Core**
   [![NuGet](https://img.shields.io/nuget/v/Narvalo.Core.svg)](https://www.nuget.org/packages/Narvalo.Core/),
-  contains helpers on which depend the other packages.
+  helpers on which depend the other packages.
 - **Narvalo.Fx**
   [![NuGet](https://img.shields.io/nuget/v/Narvalo.Fx.svg)](https://www.nuget.org/packages/Narvalo.Fx/),
-  features implementations of some of the usual suspects from functional
-  programming: option type (`Maybe<T>`), return types (`Result<T, TError>`,
-  `Fallible<>` and `Outcome<>`), simple disjoint union
-  (`Either<T1, T2>`), LINQ extensions.
-- **Narvalo.Money**, Currency (ISO 4217) & Money types.
+  option type (`Maybe<T>`), return type (`Result<T, TError>`), simple disjoint
+  union (`Either<T1, T2>`) & LINQ extensions.
+- **Narvalo.Money**, Currency (ISO 4217) and Money types.
 - **Narvalo.Finance**
   [![NuGet](https://img.shields.io/nuget/v/Narvalo.Finance.svg)](https://www.nuget.org/packages/Narvalo.Finance/),
-  BIC (ISO 9362) & IBAN types.
+  BIC (ISO 9362) and IBAN types.
 - **Narvalo.Common**
   [![NuGet](https://img.shields.io/nuget/v/Narvalo.Common.svg)](https://www.nuget.org/packages/Narvalo.Common/),
-  utilities and extension methods:
   simple parsers, Int64 encoders, extension methods for Collections, XDom and SQL client.
 - **Narvalo.Web**
   [![NuGet](https://img.shields.io/nuget/v/Narvalo.Web.svg)](https://www.nuget.org/packages/Narvalo.Web/),
