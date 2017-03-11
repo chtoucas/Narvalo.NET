@@ -72,4 +72,4 @@ Enhancements
 - Narvalo.Finance is now a Profile259 project.
 - Turned off overflow checking for Release builds.
 - Move from .NET 4.5 to .NET 4.6.1
-- Remove Code Contracts in all libraries except the MVP ones.
+- Remove Code Contracts except for Cerbere and MVP.

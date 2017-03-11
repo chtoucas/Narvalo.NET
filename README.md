@@ -12,13 +12,13 @@ Narvalo.NET
   Code Contracts helpers.
 - **Narvalo.Core**
   [![NuGet](https://img.shields.io/nuget/v/Narvalo.Core.svg)](https://www.nuget.org/packages/Narvalo.Core/),
-  contains helpers on which depend the other packages - replace Narvalo.Cerbere.
+  contains helpers on which depend the other packages.
 - **Narvalo.Fx**
   [![NuGet](https://img.shields.io/nuget/v/Narvalo.Fx.svg)](https://www.nuget.org/packages/Narvalo.Fx/),
   features implementations of some of the usual suspects from functional
   programming: option type (`Maybe<T>`), return types (`Result<T, TError>`,
   `Fallible<>` and `Outcome<>`), simple disjoint union
-  (`Either<T1, T2>`), generators and delegate extensions.
+  (`Either<T1, T2>`), LINQ extensions.
 - **Narvalo.Money**, Currency (ISO 4217) & Money types.
 - **Narvalo.Finance**
   [![NuGet](https://img.shields.io/nuget/v/Narvalo.Finance.svg)](https://www.nuget.org/packages/Narvalo.Finance/),
@@ -29,8 +29,7 @@ Narvalo.NET
   simple parsers, Int64 encoders, extension methods for Collections, XDom and SQL client.
 - **Narvalo.Web**
   [![NuGet](https://img.shields.io/nuget/v/Narvalo.Web.svg)](https://www.nuget.org/packages/Narvalo.Web/),
-  provides types that might prove useful for Web development: generic HttpHandler
-  type, asset providers, Razor and WebForms compile-time optimizers.
+  generic HttpHandler type, asset providers, Razor and WebForms compile-time optimizers.
 
 ## MVP Framework
 - **Narvalo.Mvp**

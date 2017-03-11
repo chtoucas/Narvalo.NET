@@ -21,7 +21,6 @@ Properties {
 
     # Process optional parameters.
     if ($Verbosity -eq $null) { $Verbosity = 'minimal' }
-    if ($Developer -eq $null) { $Developer = $false }
 
     # Define the NuGet verbosity level.
     $NuGetVerbosity = ConvertTo-NuGetVerbosity $Verbosity
@@ -224,12 +223,6 @@ Task _CI-InitializeVariables `
 # Packaging tasks
 # ------------------------------------------------------------------------------
 
-Task Package-All `
-    -Description 'Package everything.' `
-    -Depends Package-Build, Package-Cerbere, Package-Common, Package-Core, `
-        Package-Finance, Package-Fx, Package-Money, Package-Mvp, Package-MvpWeb, Package-Web `
-    -Alias Pack
-
 Task Package-Build `
     -Description 'Create the Narvalo.Build package.' `
     -Depends _Package-InitializeVariables `
@@ -362,80 +355,6 @@ Task _Package-CheckVariablesForRetail `
 }
 
 # ------------------------------------------------------------------------------
-# MyGet project
-# ------------------------------------------------------------------------------
-
-Task MyGet-Package `
-    -Description 'Package the project MyGet.' `
-    -Depends _MyGet-InitializeVariables, _MyGet-DeleteStagingDirectory, _MyGet-Publish, _MyGet-Zip `
-    -Alias MyGet `
-{
-    Write-Host "A ready to publish zip file for MyGet may be found here: '$MyGet_ZipFile'." -ForegroundColor Green
-}
-
-Task _MyGet-Publish `
-    -Description 'Clean up, build then publish the project MyGet.' `
-    -Depends _MyGet-InitializeVariables, _MyGet-RestorePackages `
-{
-    # Force the value of "VisualStudioVersion", otherwise MSBuild won't publish the project on build.
-    # Cf. http://sedodream.com/2012/08/19/VisualStudioProjectCompatabilityAndVisualStudioVersion.aspx.
-    MSBuild $MyGet_Project $Opts `
-        '/t:Rebuild',
-        '/p:Configuration=Release;PublishProfile=NarvaloOrg;DeployOnBuild=true;VisualStudioVersion=14.0'
-}
-
-Task _MyGet-RestorePackages `
-    -Description 'Restore packages for the project MyGet.' `
-    -Depends _MyGet-InitializeVariables, _Tools-InitializeVariables `
-{
-    Restore-Packages -Source $MyGet_PackagesConfig `
-        -PackagesDirectory $Tools_PackagesDirectory `
-        -ConfigFile $Tools_NuGetConfig `
-        -Verbosity $NuGetVerbosity
-}
-
-Task _MyGet-DeleteStagingDirectory `
-    -Description 'Remove the directory ''work\myget''.' `
-    -Depends _MyGet-InitializeVariables `
-{
-    Remove-LocalItem -Path $MyGet_StagingDirectory -Recurse
-}
-
-Task _MyGet-DeleteZipFile `
-    -Description 'Delete the package for MyGet.' `
-    -Depends _MyGet-InitializeVariables `
-{
-    Remove-LocalItem -Path $MyGet_ZipFile
-}
-
-Task _MyGet-Zip `
-    -Description 'Zip the publication artefacts for the project MyGet.' `
-    -Depends _MyGet-InitializeVariables, _MyGet-DeleteZipFile `
-    -PreAction {
-        if (!(Test-Path $MyGet_StagingDirectory)) {
-            # We do not add a dependency on _MyGet-Publish so that we can run this task alone.
-            # MyGet-Package provides the stronger version.
-            Exit-Gracefully -ExitCode 1 `
-                'Can not create the Zip package: did you forgot to call the _MyGet-Publish task?'
-        }
-    } -Action {
-        . (Get-7Zip -Install) -mx9 a $MyGet_ZipFile $MyGet_StagingDirectory | Out-Null
-
-        if (!$?) {
-            Exit-Gracefully -ExitCode 1 'Failed to create the Zip package.'
-        }
-    }
-
-Task _MyGet-InitializeVariables `
-    -Description 'Initialize variables only used by the MyGet-* tasks.' `
-{
-    $script:MyGet_Project          = Get-LocalPath 'tools\src\MyGet\MyGet.csproj'
-    $script:MyGet_PackagesConfig   = Get-LocalPath 'tools\src\MyGet\packages.config'
-    $script:MyGet_StagingDirectory = Get-LocalPath 'work\myget'
-    $script:MyGet_ZipFile          = Get-LocalPath 'work\myget.7z'
-}
-
-# ------------------------------------------------------------------------------
 # Miscs
 # ------------------------------------------------------------------------------
 
@@ -445,73 +364,6 @@ Task RestoreSolutionPackages `
 {
     # Usually, it is not necessary to run this task, since it is already done in make.ps1.
     Restore-SolutionPackages -Verbosity quiet
-}
-
-Task Environment `
-    -Description 'Display infos on the build environment.' `
-    -Alias Env `
-{
-    # The output of running "MSBuild /version" looks like:
-    # >   Microsoft (R) Build Engine, version 12.0.31101.0
-    # >   [Microsoft .NET Framework, Version 4.0.30319.34209]
-    # >   Copyright (C) Microsoft Corporation. Tous droits réservés.
-    # >
-    # >   12.0.31101.0
-    # Since VS 2015, we no longer get the framework version.
-    $infos = (MSBuild '/version') -Split "`n", 3
-
-    $msbuild = $infos[3]
-    #$netFramework = ($infos[1] -Split ' ', 5)[4].TrimEnd(']')
-    $psakeFramework = $psake.context.peek().config.framework
-    $psakeVersion = $psake.version
-
-    Write-Host "  MSBuild         v$msbuild"
-    #Write-Host "  .NET Framework  v$netFramework"
-    Write-Host "  PSake           v$psakeVersion"
-    Write-Host "  PSake Framework v$psakeFramework"
-}
-
-Task _Documentation `
-    -Description 'Display a description of the public tasks.' `
-{
-    # PSake allows to display a description of the tasks by using:
-    # > Invoke-PSake $buildFile -Docs
-    # but I find the result more geared towards developers.
-    # Here is my own version of the underlying WriteDocumentation function.
-    $currentContext = $psake.context.Peek()
-
-    if ($currentContext.tasks.default) {
-        $defaultTaskDependencies = $currentContext.tasks.default.DependsOn
-    } else {
-        $defaultTaskDependencies = @()
-    }
-
-    $currentContext.tasks.Keys | %{
-        # Ignore default and private tasks.
-        if ($_ -eq 'default') {
-            return
-        }
-
-        if (!$Developer -and $_.StartsWith('_')) {
-            return
-        }
-
-        $task = $currentContext.tasks.$_
-
-        if ($defaultTaskDependencies -Contains $task.Name) {
-            $name = "$($task.Name) (DEFAULT)"
-        } else {
-            $name = $task.Name
-        }
-
-        New-Object PSObject -Property @{
-            Task = $name;
-            Alias = $task.Alias;
-            Synopsis = $task.Description;
-        }
-    } |
-        sort 'Task' |
-        Format-Table -AutoSize -Wrap -Property Task, Alias, Synopsis
 }
 
 Task _Initialize-GitCommitHash `
