@@ -35,8 +35,8 @@ Properties {
     # NuGet packages.
     # TODO: Make it survive NuGet updates.
     $OpenCoverVersion       = '4.6.519'
-    $ReportGeneratorVersion = '2.5.1'
-    $XunitVersion           = '2.1.0'
+    $ReportGeneratorVersion = '2.5.6'
+    $XunitVersion           = '2.2.0'
 
     $OpenCoverXml = Get-LocalPath 'work\log\opencover.xml'
 }

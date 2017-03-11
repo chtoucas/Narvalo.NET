@@ -2,18 +2,9 @@
 
 <#
 .SYNOPSIS
-    Run the PSake build script.
-.PARAMETER Developer
-    If present, enable the developer mode.
-.PARAMETER Docs
-    If present, display the list of available tasks then exit.
+    Run the build script.
 .PARAMETER Help
     If present, display the help then exit.
-.PARAMETER Pristine
-    If present, force re-import of local modules into the current session.
-    This is a developer option and should not be used under normal circumstances.
-.PARAMETER NoLogo
-    If present, don't display the startup banner.
 .PARAMETER Retail
     If present, packages/assemblies are built for retail.
 .PARAMETER Safe
@@ -37,8 +28,6 @@
 .EXAMPLE
     make.ps1 CA, SA -v quiet
     Quiet run of the Code Analysis & SecurityAnalysis tasks.
-.LINK
-    https://github.com/psake/psake
 #>
 
 [CmdletBinding()]
@@ -53,11 +42,7 @@ param(
     [Alias('v')] [string] $Verbosity = 'minimal',
 
     [switch] $Safe,
-    [switch] $Docs,
-    [Alias('h')] [switch] $Help,
-    [switch] $NoLogo,
-    [switch] $Pristine,
-    [Alias('d')] [switch] $Developer
+    [Alias('h')] [switch] $Help
 )
 
 Set-StrictMode -Version Latest
@@ -73,60 +58,49 @@ trap {
 
 # ------------------------------------------------------------------------------
 
-if (!(Get-Module Narvalo.Local)) {
-    Import-Module (Join-Path $PSScriptRoot 'tools\src\Narvalo.Local.psm1')
-}
-$module = Import-LocalModule 'Narvalo.ProjectAutomation' $pristine.IsPresent -Args $PSScriptRoot
+New-Variable -Name ProjectRoot `
+    -Value $PSScriptRoot `
+    -Scope Script `
+    -Option ReadOnly `
+    -Description 'Path to the local repository for the project Narvalo.NET.'
 
-if (!$noLogo.IsPresent) {
-    $version = $module.Version
+New-Variable -Name DefaultNuGetVerbosity `
+    -Value 'normal' `
+    -Scope Script `
+    -Option ReadOnly `
+    -Description 'Default NuGet verbosity.'
 
-    if ($retail.IsPresent) {
-        Write-Host "Make (RETAIL), version $version. Copyright (c) Narvalo.Org.`n"
-    } else {
-        Write-Host "Make, version $version. Copyright (c) Narvalo.Org.`n"
-    }
-}
+# ------------------------------------------------------------------------------
 
-if (!(Get-Module psake)) {
-    Write-Debug 'Ensure PSake is installed by restoring the solution packages.'
-    Restore-SolutionPackages -Verbosity quiet
-
-    Write-Debug 'Import the psake module.'
-    Get-PSakeModulePath | Import-Module -NoClobber
+if ($retail.IsPresent) {
+    Write-Host "Make script (RETAIL).`n"
+} else {
+    Write-Host "Make script - Non-retail version.`n"
 }
 
-$psakefile = Get-LocalPath 'tools\PSakefile.ps1' -Resolve
+. '.\tools\helpers.ps1'
+
+#Write-Debug 'Ensure PSake is installed by restoring the solution packages.'
+#Restore-SolutionPackages -Verbosity quiet
 
 if ($help.IsPresent) {
     Get-Help $MyInvocation.MyCommand.Path -Full
     Exit 0
 }
 
-if (!$developer) {
-    foreach ($task in $taskList) {
-        if ($task.StartsWith('_')) {
-            Exit-Gracefully -ExitCode 1 `
-                'Private tasks are only available when the developer mode is on.'
-        }
-    }
-}
-
-if ($docs.IsPresent) {
-    $taskList = '_Documentation'
-}
-
 if ($safe.IsPresent) {
     Stop-AnyMSBuildProcess
 }
 
-Invoke-PSake $psakefile `
-    -NoLogo `
-    -TaskList $taskList `
-    -Parameters @{
-        'developer' = $developer;
-        'verbosity' = $verbosity;
-        'retail' = $retail.IsPresent;
-    }
+Write-Host -BackgroundColor Red -ForegroundColor Yellow `
+    "Due to the upgrade to VS 2017, the build script is currently broken." 
+
+#Invoke-PSake $psakefile `
+#    -NoLogo `
+#    -TaskList $taskList `
+#    -Parameters @{
+#        'verbosity' = $verbosity;
+#        'retail' = $retail.IsPresent;
+#    }
 
 # ------------------------------------------------------------------------------

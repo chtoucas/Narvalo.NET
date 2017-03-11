@@ -1,59 +1,3 @@
-<#
-.SYNOPSIS
-    PowerShell module to manage the project Narvalo.NET.
-.DESCRIPTION
-    Provides helpers to automate various development tasks:
-    - Install or uninstall external tools.
-    - Helpers for the build script.
-#>
-
-Set-StrictMode -Version Latest
-
-<#
-.SYNOPSIS
-    Validate a path for use as a project root.
-.DESCRIPTION
-    The Approve-ProjectRoot cmdlet validates that the path exists and is absolute.
-.PARAMETER Path
-    Specifies a path to be approved.
-.OUTPUTS
-    System.String. Approve-ProjectRoot returns a string that contains the approved path.
-#>
-function Approve-ProjectRoot {
-    [CmdletBinding()]
-    param([Parameter(Mandatory = $true)] [string] $Path)
-
-    if (![System.IO.Path]::IsPathRooted($path)) {
-        throw 'When importing the ''Narvalo.ProjectAutomation'' module, ',
-            'you MUST specify an absolute path for the Narvalo.NET project repository.'
-    }
-
-    if (!(Test-Path $path)) {
-        throw 'When importing the ''Narvalo.ProjectAutomation'' module,',
-            'you MUST specify an existing directory for the Narvalo.NET project repository.'
-    }
-
-    return $path
-}
-
-if ($args.Length -ne 1) {
-    throw 'When importing the ''Narvalo.ProjectAutomation'' module,',
-        'you MUST specify the Narvalo.NET project repository,',
-        'e.g. ''Import-Module Narvalo.ProjectAutomation -Args $projectRoot''.'
-}
-
-New-Variable -Name ProjectRoot `
-    -Value (Approve-ProjectRoot $args[0]) `
-    -Scope Script `
-    -Option ReadOnly `
-    -Description 'Path to the local repository for the project Narvalo.NET.'
-
-New-Variable -Name DefaultNuGetVerbosity `
-    -Value 'normal' `
-    -Scope Script `
-    -Option ReadOnly `
-    -Description 'Default NuGet verbosity.'
-
 # ------------------------------------------------------------------------------
 # Public functions
 # ------------------------------------------------------------------------------
@@ -92,32 +36,6 @@ function Exit-Gracefully {
     Write-Host $message -BackgroundColor $backgroundColor -ForegroundColor Yellow
 
     Exit $exitCode
-}
-
-<#
-.SYNOPSIS
-    Get the path to the locally installed 7-Zip command.
-.DESCRIPTION
-    Get the path to the locally installed 7-Zip command.
-    Optionally install the 7-Zip commmand in the local repository.
-.PARAMETER Install
-    If present and the command does not exist, install 7-Zip.
-.INPUTS
-    None.
-.OUTPUTS
-    System.String. Get-7Zip returns a string that contains the path to the 7-Zip executable.
-#>
-function Get-7Zip {
-    [CmdletBinding()]
-    param([switch] $Install)
-
-    $sevenZip = Get-LocalPath 'tools\7za.exe'
-
-    if ($install.IsPresent -and !(Test-Path $sevenZip)) {
-        Install-7Zip $sevenZip
-    }
-
-    return $sevenZip
 }
 
 <#
@@ -301,53 +219,6 @@ function Get-NuGet {
 
 <#
 .SYNOPSIS
-    Get the path to the PSake module.
-.PARAMETER NoVersion
-    If present, do not include a version agnostic path.
-.INPUTS
-    None.
-.OUTPUTS
-    System.String. Get-PSakeModulePath returns a string that contains the path
-    to the PSake module.
-#>
-function Get-PSakeModulePath {
-    [CmdletBinding()]
-    param([switch] $NoVersion)
-
-    if ($noVersion.IsPresent) {
-        Get-LocalPath 'packages\psake\tools\psake.psm1'
-    } else {
-        (ls (Get-LocalPath 'packages\psake.*\tools\psake.psm1') | select -First 1)
-    }
-}
-
-<#
-.SYNOPSIS
-    Install 7-Zip.
-.PARAMETER Force
-    If present, override any previously installed 7-Zip.
-.PARAMETER OutFile
-    Specifies the path where 7-Zip will be installed.
-.INPUTS
-    The path where 7-Zip will be installed.
-.OUTPUTS
-    None.
-#>
-function Install-7Zip {
-    [CmdletBinding()]
-    param(
-        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)]
-        [Alias('o')] [string] $OutFile,
-
-        [switch] $Force
-    )
-
-    [System.Uri] $uri = 'http://narvalo.org/7z936.exe'
-    $uri | Install-RemoteItem -Name '7-Zip' -o $outFile -Force:$force.IsPresent
-}
-
-<#
-.SYNOPSIS
     Install NuGet.
 .PARAMETER Force
     If present, override any previously installed NuGet.
@@ -368,45 +239,7 @@ function Install-NuGet {
     )
 
     [System.Uri] $uri = 'https://nuget.org/nuget.exe'
-    $uri | Install-RemoteItem -Name 'NuGet' -o $outFile -Force:$force.IsPresent
-}
-
-<#
-.SYNOPSIS
-    Install PSake.
-.PARAMETER Verbosity
-    Specifies the verbosity level for the underlying NuGet command-line.
-.INPUTS
-    None.
-.OUTPUTS
-    System.String. Install-PSake returns a string that contains the path to the PSake module.
-.NOTES
-    This function is rather slow to execute.
-#>
-function Install-PSake {
-    [CmdletBinding()]
-    param(
-        [Parameter(Mandatory = $false, Position = 0)]
-        [ValidateSet('quiet', 'normal', 'detailed')]
-        [string] $Verbosity = $script:DefaultNuGetVerbosity
-    )
-
-    Write-Verbose 'Installing PSake.'
-
-    $nuget = Get-NuGet -Install
-
-    try {
-        Write-Debug 'Call nuget.exe install psake.'
-        . $nuget install psake `
-           -ExcludeVersion `
-           -OutputDirectory (Get-LocalPath 'packages') `
-           -ConfigFile (Get-LocalPath '.nuget\NuGet.Config') `
-           -Verbosity $verbosity 2>&1
-    } catch {
-        throw "'nuget.exe install' failed: $_"
-    }
-
-    Get-PSakeModulePath -NoVersion
+    $uri | _Install-RemoteItem -Name 'NuGet' -o $outFile -Force:$force.IsPresent
 }
 
 <#
@@ -512,7 +345,7 @@ function Stop-AnyMSBuildProcess {
 .OUTPUTS
     None.
 #>
-function Install-RemoteItem {
+function _Install-RemoteItem {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
