@@ -7,8 +7,6 @@
     <CodeTaskFactoryAssemblyFile>$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll</CodeTaskFactoryAssemblyFile>
   </PropertyGroup>
 
-  <Import Project="$(MSBuildThisFileDirectory)Package.Narvalo.targets" />
-
   <!-- WriteNuspec task. -->
   <UsingTask TaskName="WriteNuspec" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
     <ParameterGroup>

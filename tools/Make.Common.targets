@@ -8,14 +8,14 @@
   <Import Project="$(MSBuildThisFileDirectory)Make.Common.props"
           Condition=" '$(MakeCommonPropsImported)' != 'true' "/>
 
-  <!-- Import common tasks. -->
-  <!--<Import Project="$(MSBuildThisFileDirectory)Make.Common.tasks" />-->
-
   <!-- Import Narvalo tasks. -->
-  <Import Project="$(MSBuildThisFileDirectory)Package.Narvalo.targets" />
+  <Import Project="$(MSBuildThisFileDirectory)..\packages\Narvalo.Build.*\build\Narvalo.Build.tasks" />
 
   <!-- Import Xunit tasks. -->
-  <Import Project="$(MSBuildThisFileDirectory)Package.Xunit.tasks" />
+  <ItemGroup>
+    <XunitAssemblyFile Include="$(MSBuildThisFileDirectory)..\packages\**\xunit.runner.msbuild.dll" />
+  </ItemGroup>
+  <UsingTask TaskName="Xunit.Runner.MSBuild.xunit" AssemblyFile="@(XunitAssemblyFile)" />
 
   <!-- Clean target. -->
   <Target Name="Clean">

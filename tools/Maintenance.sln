@@ -14,8 +14,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. MSBuild", "3. MSBuild", 
 		Make.Shared.props = Make.Shared.props
 		Narvalo.Common.props = Narvalo.Common.props
 		Narvalo.Common.targets = Narvalo.Common.targets
-		Package.Narvalo.targets = Package.Narvalo.targets
-		Package.Xunit.tasks = Package.Xunit.tasks
 		Shared.props = Shared.props
 	EndProjectSection
 EndProject
@@ -27,6 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Settings", "1. Settings"
 		..\etc\GlobalSuppressions.Common.cs = ..\etc\GlobalSuppressions.Common.cs
 		..\etc\Narvalo.CurrentVersion.props = ..\etc\Narvalo.CurrentVersion.props
 		..\etc\Narvalo.Mvp.CurrentVersion.props = ..\etc\Narvalo.Mvp.CurrentVersion.props
+		..\etc\packages.config = ..\etc\packages.config
 		..\etc\Samples.props = ..\etc\Samples.props
 		..\etc\Strict.ruleset = ..\etc\Strict.ruleset
 		..\etc\Template.nuspec = ..\etc\Template.nuspec
