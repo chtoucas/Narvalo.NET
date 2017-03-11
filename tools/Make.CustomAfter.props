@@ -70,13 +70,6 @@
     <CodeContractsEmitXMLDocs>false</CodeContractsEmitXMLDocs>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(CodeContractsReferenceAssembly)' == 'Build' ">
-    <!-- Whenever we build the CC reference assembly we also patch the documentation. -->
-    <!-- REVIEW: ccdocgen.exe often fails for obscure reasons.
-         For the time being, patching the XML doc is done only on explicit request. -->
-    <!--<CodeContractsEmitXMLDocs>true</CodeContractsEmitXMLDocs>-->
-  </PropertyGroup>
-
   <!-- Sign the assembly. -->
   <PropertyGroup Condition=" '$(SignAssembly)' == 'true' ">
     <DefineConstants>$(DefineConstants);SIGNED_ASSEMBLY</DefineConstants>
@@ -186,6 +179,7 @@ A code contracts reference assembly is included if you ever need it.
     <!-- Force T4 re-generation on build.
          REVIEW: Currently disabled since current T4 templates require VS hosting. -->
     <TransformOnBuild>false</TransformOnBuild>
+    <!--<TransformOutOfDateOnly>true</TransformOutOfDateOnly>-->
   </PropertyGroup>
 
   <!-- __InitialMakeCustomAfterProps target. -->

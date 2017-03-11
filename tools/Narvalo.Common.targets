@@ -40,8 +40,6 @@
   <!-- Use the AfterCleanDependsOn property to add your custom targets to AfterClean. -->
   <Target Name="AfterClean" DependsOnTargets="$(AfterCleanDependsOn)" />
 
-  <!-- ### Analyzers Hooks ### -->
-
   <!-- ### Code Analysis Hooks ### -->
   <!--
     I wanted to replace the FxCop default messages to include the project name
@@ -58,37 +56,6 @@
           Condition=" '$(RunCodeAnalysis)' == 'true' ">
     <Message Text="Code Analysis Complete for $(ProjectName)..." Importance="high" />
   </Target>-->
-
-  <!-- ### Code Contracts Hooks ### -->
-
-  <Target Name="BeforeCodeContractsDocumentation"
-        BeforeTargets="ContractXmlDocumentation"
-        Condition=" '$(CodeContractsEmitXMLDocs)' == 'true' ">
-    <Message Text="Building Code Contracts Documentation for $(ProjectName)..." Importance="normal" />
-  </Target>
-
-  <Target Name="AfterCodeContractsDocumentation"
-          AfterTargets="ContractXmlDocumentation"
-          Condition=" '$(CodeContractsEmitXMLDocs)' == 'true' ">
-    <Message Text="Code Contracts Documentation Complete for $(ProjectName)" Importance="high" />
-  </Target>
-
-  <!--
-    Use "CreateCodeContractReferenceAssembly" not "CodeContractReferenceAssembly",
-    since "CodeContractReferenceAssembly" depends on it. Otherwise, the message
-    will appear too late.
-  -->
-  <Target Name="BeforeCodeContractsReferenceAssembly"
-          BeforeTargets="CreateCodeContractReferenceAssembly"
-          Condition=" '$(CodeContractsReferenceAssembly)' == 'Build' ">
-    <Message Text="Building Code Contracts Reference Assembly for $(ProjectName)..." Importance="normal" />
-  </Target>
-
-  <Target Name="AfterCodeContractsReferenceAssembly"
-          AfterTargets="CodeContractReferenceAssembly"
-          Condition=" '$(CodeContractsReferenceAssembly)' == 'Build' ">
-    <Message Text="Code Contracts Reference Assembly Complete for $(ProjectName)" Importance="high" />
-  </Target>
 
   <!-- ### After Imports ### -->
 

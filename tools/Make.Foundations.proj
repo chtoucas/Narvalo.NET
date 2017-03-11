@@ -4,7 +4,6 @@
     Available filters:
     - Empty or '_None_', include all projects (default)
     - '_Analyze_', only include libraries ready for standard code analysis
-    - '_CodeContracts_', only include libraries ready for CC analysis
     - '_Security_', only include libraries ready for security analysis
     or any combination, e.g. '/p:Filter="_Core_;_Mvp_"'.
     Any list separator should work but, if you use a semicolon, do not forget
@@ -30,15 +29,6 @@
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp\Narvalo.Mvp.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj" />
         <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Web\Narvalo.Web.csproj" />-->
-      </ItemGroup>
-    </When>
-
-    <!-- Only include projects that have been configured for Code Contracts. -->
-    <When Condition=" '$(Filter)' == '_CodeContracts_' ">
-      <ItemGroup>
-        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Cerbere\Narvalo.Cerbere.csproj" />
-        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp\Narvalo.Mvp.csproj" />
-        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj" />
       </ItemGroup>
     </When>
 
