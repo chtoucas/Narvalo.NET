@@ -13,7 +13,7 @@ Properties {
     $Opts = '/nologo', "/verbosity:$Verbosity", '/maxcpucount', '/nodeReuse:false'
 
     # Main MSBuild projects.
-    $Everything  = Get-LocalPath 'tools\Make.proj'
+    $Project  = Get-LocalPath 'tools\Make.proj'
 
     $OpenCoverXml = Get-LocalPath 'work\log\opencover.xml'
 }
@@ -45,14 +45,14 @@ Task Build `
     -Description 'Build.' `
     -Depends _CI-InitializeVariables `
 {
-    MSBuild $Everything $Opts $CI_Props '/t:Build'
+    MSBuild $Project $Opts $CI_Props '/t:Build'
 }
 
 Task Test `
     -Description 'Build then run tests.' `
     -Depends _CI-InitializeVariables `
 {
-    MSBuild $Everything $Opts $CI_Props `
+    MSBuild $Project $Opts $CI_Props `
         '/t:Xunit',
         '/p:Configuration=Debug',
         '/p:SkipDocumentation=true'
@@ -74,7 +74,7 @@ Task Package `
     # - Verify Portable Executable (PE) format
     # - Run Xunit tests
     # - Package
-    MSBuild $Everything $Opts '/t:Xunit;Package' `
+    MSBuild $Project $Opts '/t:Xunit;Package' `
         '/p:Configuration=Release',
         '/p:BuildGeneratedVersion=true',
         "/p:GitCommitHash=$GitCommitHash",
@@ -89,7 +89,7 @@ Task OpenCover `
     -Alias Cover `
 {
     # Use debug build to also cover debug-only tests.
-    MSBuild $Everything $Opts $CI_Props `
+    MSBuild $Project $Opts $CI_Props `
         '/t:Build',
         '/p:Configuration=Debug',
         '/p:SkipDocumentation=true'
@@ -104,7 +104,7 @@ Task OpenCoverVerbose `
     -Alias CoverVerbose `
 {
     # Use debug build to also cover debug-only tests.
-    MSBuild $Everything $Opts $CI_Props `
+    MSBuild $Project $Opts $CI_Props `
         '/t:Build',
         '/p:Configuration=Debug',
         '/p:SkipDocumentation=true'

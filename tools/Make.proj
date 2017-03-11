@@ -5,24 +5,24 @@
   <ItemGroup>
     <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Build\Narvalo.Build.csproj" />
     <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Cerbere\Narvalo.Cerbere.csproj" />
-    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Cerbere\Narvalo.Common.csproj" />
-    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Cerbere\Narvalo.Core.csproj" />
-    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Cerbere\Narvalo.Finance.csproj" />
-    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Cerbere\Narvalo.Fx.csproj" />
-    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Cerbere\Narvalo.Money.csproj" />
-    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Cerbere\Narvalo.Mvp.csproj" />
-    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Cerbere\Narvalo.Mvp.Web.csproj" />
-    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Cerbere\Narvalo.Web.csproj" />
+    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Common\Narvalo.Common.csproj" />
+    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Core\Narvalo.Core.csproj" />
+    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Finance\Narvalo.Finance.csproj" />
+    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Fx\Narvalo.Fx.csproj" />
+    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Money\Narvalo.Money.csproj" />
+    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp\Narvalo.Mvp.csproj" />
+    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj" />
+    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Web\Narvalo.Web.csproj" />
 
-    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Cerbere.Facts.csproj" />
-    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Common.Facts.csproj" />
-    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Core.Facts.csproj" />
-    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Finance.Facts.csproj" />
-    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Fx.Facts.csproj" />
-    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Money.Facts.csproj" />
-    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Mvp.Facts.csproj" />
-    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Mvp.Web.Facts.csproj" />
-    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Web.Facts.csproj" />
+    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Cerbere.Facts\Narvalo.Cerbere.Facts.csproj" />
+    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Common.Facts\Narvalo.Common.Facts.csproj" />
+    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Core.Facts\Narvalo.Core.Facts.csproj" />
+    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Finance.Facts\Narvalo.Finance.Facts.csproj" />
+    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Fx.Facts\Narvalo.Fx.Facts.csproj" />
+    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Money.Facts\Narvalo.Money.Facts.csproj" />
+    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Mvp.Facts\Narvalo.Mvp.Facts.csproj" />
+    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Mvp.Web.Facts\Narvalo.Mvp.Web.Facts.csproj" />
+    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Web.Facts\Narvalo.Web.Facts.csproj" />
   </ItemGroup>
 
   <Import Project="$(MSBuildThisFileDirectory)Make.Common.targets" />
