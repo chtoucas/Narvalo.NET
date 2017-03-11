@@ -13,7 +13,6 @@
     <None Include="Narvalo.Finance.Version.props">
       <SubType>Designer</SubType>
     </None>
-    <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Internal\CountryISOCodes.cs" />

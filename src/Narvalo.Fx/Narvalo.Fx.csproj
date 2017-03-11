@@ -2,7 +2,6 @@
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
     <ProjectGuid>{28F6175D-0EE3-4763-8004-662A7DE41280}</ProjectGuid>
     <RootNamespace>Narvalo</RootNamespace>
     <AssemblyName>Narvalo.Fx</AssemblyName>
@@ -18,7 +17,7 @@
     <None Include="Narvalo.Fx.Version.props">
       <SubType>Designer</SubType>
     </None>
-    <None Include="project.json" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Applicative\Either.cs" />
@@ -133,16 +132,21 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Applicative\Outcome.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Outcome.g.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Narvalo.Core\Narvalo.Core.csproj">
       <Project>{66b62ba5-e26e-4899-85ac-4c52d3a427e9}</Project>
       <Name>Narvalo.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Applicative\Outcome.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Outcome.g.cs</LastGenOutput>
-    </Content>
+    <Reference Include="System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.ValueTuple.4.3.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
