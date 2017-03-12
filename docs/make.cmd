@@ -6,15 +6,13 @@
 ::   make.cmd build
 :: - Generate documentation then start a local HTTP server
 ::   make.cmd serve _www
-::
-:: WARNING: Only works on my computer (the path to docfx.exe is hardcoded).
 
 @echo off
 @setlocal
 
 :Setup
 
-@set DocFX="C:\opt\apps\docfx\docfx.exe"
+@set DocFX="..\packages\docfx.console.2.13.1\tools\docfx.exe"
 
 @if not exist %DocFX% (
     @goto NotFound

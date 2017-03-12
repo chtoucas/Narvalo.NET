@@ -4,14 +4,20 @@
       "src": [
         {
           "files": [
-            "Narvalo.Cerbere/Narvalo.Cerbere.csproj",
-            "Narvalo.Fx/Narvalo.Fx.csproj"
+            "Narvalo.Core/Narvalo.Core.csproj",
+            // "Narvalo.Money/Narvalo.Money.csproj",
+            // "Narvalo.Fx/Narvalo.Fx.csproj",
+            "Narvalo.Finance/Narvalo.Finance.csproj",
+            // "Narvalo.Common/Narvalo.Common.csproj",
+            // "Narvalo.Web/Narvalo.Web.csproj"
           ],
           "exclude": [ "**/bin/**", "**/obj/**" ],
           "src": "../src"
         }
       ],
-      "dest": "api"
+      "dest": "api",
+      // FIXME: Does not seem to work.
+      "filter": "filterConfig.yml"
     }
   ],
   "build": {
@@ -24,8 +30,6 @@
       {
         "files": [
           "*.{md,yml}",
-          "changelogs/**/*.{md,yml}",
-          "engineering/**/*.{md,yml}",
           "userdocs/**/*.{md,yml}"
         ]
       }
@@ -34,7 +38,7 @@
     "overwrite": "apidocs/**/*.md",
     "dest": "_www",
     "globalMetadata": {
-      "_appTitle": "Narvalo.NET website",
+      "_appTitle": "Narvalo.NET C# libraries",
       "_appFooter": "Copyright (c) Narvalo.Org",
       "_disableContribution": true
     },

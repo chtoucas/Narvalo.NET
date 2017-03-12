@@ -1,7 +1,6 @@
 Usage guidelines
 ================
 
-### Narvalo.Fx
 - [Return types](return-types.md)
 
 ### Samples

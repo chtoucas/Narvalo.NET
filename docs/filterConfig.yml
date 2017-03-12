@@ -1,0 +1,14 @@
+﻿apiRules:
+- include:
+  uidRegex: ^Narvalo\.Finance\.Generic\.Currency`1$
+- include:
+  uidRegex: ^Narvalo\.Finance\.Generic\.CurrencyUnit$
+- include:
+  uidRegex: ^Narvalo\.Finance\.Generic\.EUR$
+- include:
+  uidRegex: ^Narvalo\.Finance\.Generic\.MoneyFactory$
+- include:
+  uidRegex: ^Narvalo\.Finance\.Generic\.Money`1$
+- exclude:
+  uidRegex: ^Narvalo\.Finance\.Generic$
+  type: Namespace

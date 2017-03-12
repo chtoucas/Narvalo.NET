@@ -2,5 +2,5 @@ Overview
 ========
 
 - [User Documentation](userdocs/index.md)
-- [Engineering Guides](engineering/index.md)
-- [Issues, TODOs & Ideas](engineering/issues.md)
+- [Developer Guidelines](developer.md)
+- [Issues, TODOs & Ideas](issues.md)
