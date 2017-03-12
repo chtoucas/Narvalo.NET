@@ -110,7 +110,9 @@
   <ItemGroup>
     <Content Include="Packages\Readme.txt" />
     <Content Include="robots.txt" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataServices\Routes.cs" />
