@@ -5,7 +5,7 @@
 
 :Setup
 
-@set FsiVersion=4.0
+@set FsiVersion=4.1
 @set FrameworkVersion=v4.0
 
 @set Fsi="%ProgramFiles(x86)%\Microsoft SDKs\F#\%FsiVersion%\Framework\%FrameworkVersion%\fsi.exe"
