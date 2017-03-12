@@ -167,20 +167,7 @@ This has two consequences:
 - Test projects use a dummy assembly version.
 - Test projects use custom FxCop rules.
 
-Reference the shared project `Narvalo.TestCommon`.
-
-Add `App.config` with the following content (to disable `Debug.Assert` UI):
-```xml
-<?xml version="1.0" encoding="utf-8" ?>
-<configuration>
-  <system.diagnostics>
-    <!-- Disable Debug.Assert for unit tests. -->
-    <assert assertuienabled="false"/>
-  </system.diagnostics>
-</configuration>
-```
-
-Add the project to the list of test projects used by OpenCover in the Psake file.
+Reference the shared project `TestCommon`.
 
 ### Sample project
 
