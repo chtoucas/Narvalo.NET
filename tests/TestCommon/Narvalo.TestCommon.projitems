@@ -9,7 +9,6 @@
     <Import_RootNamespace>Narvalo</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)EnvironmentFacts.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IssueAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)My.cs" />
   </ItemGroup>

@@ -1,12 +1,6 @@
 Issues (en vrac)
 ================
 
-Tasks
------
-
-- Automatic code formatting with CodeFormatter.
-- Finish automation of docfx.
-
 Narvalo.Fx
 ----------
 
