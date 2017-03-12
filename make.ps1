@@ -3,8 +3,10 @@
 <#
 .SYNOPSIS
     Run the build script.
+.PARAMETER Fast
+    Do not run the tests (only for the task 'pack').
 .PARAMETER Release
-    Instructs the script to use the Release configuration (ignored by the task 'pack')..
+    Instructs the script to use the Release configuration (ignored by the task 'pack').
 .PARAMETER Retail
     If present, packages are built for retail (only for the task 'pack').
 .PARAMETER Safe
@@ -40,6 +42,7 @@ param(
     [ValidateSet('q', 'quiet', 'm', 'minimal', 'n', 'normal', 'd', 'detailed', 'diag', 'diagnostic')]
     [Alias('v')] [string] $Verbosity = 'minimal',
 
+    [switch] $Fast,
     [switch] $Release,
     [Alias('r')] [switch] $Retail,
     [switch] $Safe,
@@ -140,6 +143,12 @@ switch ($Task) {
 
         if ($Retail -and $hash -eq '') {
             Exit-Gracefully 'When building retail packages, the git commit hash CAN NOT be empty.'
+        }
+
+        if ($Fast) {
+            $target = '/t:Package'
+        } else {
+            $target = '/t:Xunit;Package'
         }
 
         & (Get-MSBuild) $project $msbuildpackprops  "/p:GitCommitHash=$hash" '/t:Xunit;Package'
