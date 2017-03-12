@@ -100,7 +100,6 @@ Create a property file `{AssemblyName}.props` with the following content:
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <SourceAnalysisOverrideSettingsFile>$(RepositorySettingsDir)Custom.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
@@ -118,8 +117,7 @@ Special Cases
 
 ### Portable Class Library
 
-The "long" term goal is that PCL projects do not reference a PCL profile but
-rather a .NET Standard.
+The long term goal is to move to .NET Standard projects.
 
 We target at least .NET 4.5, Windows 8 and Windows Phone 8.1:
 - **Profile259** (.NET Framework 4.5, ASP.NET Core 1.0, Windows 8, Windows Phone 8.1, Windows Phone Silverlight 8):

@@ -1,9 +1,6 @@
 Coding Guidelines
 =================
 
-Design and Style
-----------------
-
 We mostly follow the guidelines produced by the .NET team:
 - [CoreFX](https://github.com/dotnet/corefx/blob/master/Documentation/coding-guidelines/)
 - [CoreClr](https://github.com/dotnet/coreclr/blob/master/Documentation/coding-guidelines/)
@@ -13,12 +10,14 @@ Consider using tasks:
   * HACK
   * TODO
   * REVIEW
+
 For temporary strings, use `"XXX"`.
 
-Code Analysis
--------------
+For tests, consider using traits:
+  * "Slow" for slow tests.
+  * "Unsafe" for unsafe tests (`AppDomain` for instance).
 
-All suppressions must be justified and tagged:
+All Code Analysis suppressions must be justified and tagged:
 - `[Ignore]` Only use this one to tag a false positive and for unrecognized
   Code Contracts postconditions; by the way, if they are no longer necessary
   CCCheck will tell us.
@@ -28,28 +27,6 @@ All suppressions must be justified and tagged:
 Every project already load the dictionary `etc\CodeAnalysisDictionary.xml`.
 If needed, consider adding a local dictionary `CustomDictionary.xml` in the
 directory `Properties` rather than modifying the global one.
-
-Compilation Symbols and Conditional Attributes
-----------------------------------------------
-
-Compilation Symbols are a pain in the ass: it prevents clean refatoring, things might
-or might not work depending on the build configuration.
-
-Standard compilation symbols:
-- `DEBUG`
-- `TRACE`
-- `CODE_ANALYSIS`
-
-Symbols used to define the assembly properties:
-- `BUILD_GENERATED_VERSION`
-- `DUMMY_GENERATED_VERSION`
-- `NOT_CLS_COMPLIANT`
-- `NO_INTERNALS_VISIBLE_TO`
-- `SECURITY_ANNOTATIONS`
-- `SIGNED_ASSEMBLY`
-
-**Always** prefer conditional attributes to `#if` directives. We only accept one exception:
-exposing internals to test projects  white-box tests (`NO_INTERNALS_VISIBLE_TO`).
 
 Documentation
 -------------
@@ -73,9 +50,3 @@ namespace Namespace
 }
 ```
 
-Tests
------
-
-Consider using traits:
-  * "Slow" for slow tests.
-  * "Unsafe" for unsafe tests (`AppDomain` for instance).
