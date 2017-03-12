@@ -45,11 +45,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Scripts", "4. Scripts", "{E886C15F-0369-4B3A-B2F2-4B7C0000E27D}"
 	ProjectSection(SolutionItems) = preProject
 		fsi.cmd = fsi.cmd
-		make-helpers.ps1 = make-helpers.ps1
 		..\make.cmd = ..\make.cmd
 		..\make.ps1 = ..\make.ps1
 		publish-edge.fsx = publish-edge.fsx
 		publish-retail.fsx = publish-retail.fsx
+		script-helpers.ps1 = script-helpers.ps1
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Packages", "Packages", "{234E8E32-CA91-4F16-BE5A-7E5E079C203C}"

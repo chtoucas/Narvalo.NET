@@ -4,8 +4,8 @@ Issues (en vrac)
 Infrastructure
 --------------
 
-- Incremental build seems broken when building w/ make.ps1.
-- make.ps1 w/ the option `Fast` should not run the tests.
+- Incremental build is broken when building w/ make.ps1
+  <- certainly due to the generation of an AssemblyInfo file on the fly.
 - Upgrade the MyGet server (requires .NET 4.6 to be installed).
 
 Next:

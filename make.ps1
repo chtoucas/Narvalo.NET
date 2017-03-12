@@ -151,7 +151,7 @@ switch ($Task) {
             $target = '/t:Xunit;Package'
         }
 
-        & (Get-MSBuild) $project $msbuildpackprops  "/p:GitCommitHash=$hash" '/t:Xunit;Package'
+        & (Get-MSBuild) $project $msbuildpackprops  "/p:GitCommitHash=$hash" $target
     }
 }
 
