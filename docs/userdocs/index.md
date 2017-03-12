@@ -1,9 +1,6 @@
 Usage guidelines
 ================
 
-### Narvalo.Cerbere and Narvalo.Core
-- [Preconditions, code contracts](code-contracts.md)
-
 ### Narvalo.Fx
 - [Return types](return-types.md)
 

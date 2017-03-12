@@ -106,7 +106,6 @@
   <PropertyGroup Condition=" '$(NuProjectExists)' == 'true' ">
     <NuTitle Condition=" $(NuTitle) == '' ">$(NuId)</NuTitle>
     <NuDescription Condition=" '$(NuDescription)' == '' ">$(NuSummary)</NuDescription>
-    <NuReleaseNotes Condition=" $(NuReleaseNotes) == '' ">See https://github.com/chtoucas/Narvalo.NET/blob/master/docs/changelogs/index.md</NuReleaseNotes>
     <NuCopyright Condition=" $(NuCopyright) == '' ">Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
   </PropertyGroup>
 
