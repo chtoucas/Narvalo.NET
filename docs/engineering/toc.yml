@@ -4,8 +4,6 @@
   href: new-project.md
 - name: Coding Guidelines
   href: coding-guidelines.md
-- name: Build Infrastructure
-  href: build.md
 - name: Versioning
   href: versioning.md
 - name: Developer Operations

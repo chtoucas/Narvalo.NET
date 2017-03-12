@@ -8,7 +8,7 @@ The following procedure enables us to centralize all settings into a single plac
 Except for Code Contracts, there should be no need to edit the project properties
 anymore.
 
-Create a project and add it to `Narvalo.sln` and `Make.Foundations.proj`.
+Create a project and add it to `Narvalo.sln` and `Make.proj`.
 
 Edit the project file:
 - Add the following line at the bottom of the project file, BEFORE the Microsoft targets:
@@ -88,7 +88,7 @@ using System.Reflection;
 Optionally, give access to internals to the test project:
 ```csharp
 #if !NO_INTERNALS_VISIBLE_TO // Make internals visible to the test projects.
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Narvalo.Facts" + Narvalo.Properties.AssemblyInfo.PublicKeySuffix)]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Narvalo.XXX.Facts" + Narvalo.Properties.AssemblyInfo.PublicKeySuffix)]
 #endif
 ```
 
@@ -141,40 +141,7 @@ Notable additions:
 - .NET Standard 1.2 (Profile151) vs 1.1 (Profile111):
   * `System.Threading.Timer`.
 
-When creating the project we should add it to the list of PCL projects used by SecAnnotate
-(see Make.CustomAfter.targets).
-
-For Visual Studio 2017, add
-```
-{
-  "supports": {},
-  "dependencies": {},
-  "frameworks": {
-    ".NETPortable,Version=v4.5,Profile=Profile259": {}
-  }
-}
-```
-
-See
-- Profiles used by the project: `etc/FrameworkProfiles.props`.
-- Locally available profiles:
-  `C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETPortable\`.
-- [NuGet Tools](http://nugettoolsdev.azurewebsites.net/3.5.0-rc1-final)
-- [Reverse Package Search](http://packagesearch.azurewebsites.net/)
-- [Introducing .NET Standard](https://blogs.msdn.microsoft.com/dotnet/2016/09/26/introducing-net-standard/)
-- [.NET Standard Library](https://docs.microsoft.com/en-us/dotnet/articles/standard/library)
-- [.NET Standard Versions](https://github.com/dotnet/standard/blob/master/docs/versions.md)
-- [Frameworks and Targets](https://docs.microsoft.com/en-us/dotnet/articles/standard/frameworks)
-- [NuGet Target Frameworks](https://docs.nuget.org/ndocs/schema/target-frameworks)
-- Stephen Cleary's [blog post](http://blog.stephencleary.com/2012/05/framework-profiles-in-net.html),
-  the list of [Portable Class Library profiles](http://embed.plnkr.co/03ck2dCtnJogBKHJ9EjY/preview),
-  the [tool](https://github.com/StephenCleary/PortableLibraryProfiles),
-  [app](http://portablelibraryprofiles.apps.stephencleary.com/)
-
-.NET Core:
-- [Project.json](https://docs.microsoft.com/en-us/dotnet/articles/core/tools/project-json)
-- [Project.json & NuGet](https://docs.nuget.org/ndocs/schema/project.json)
-- [Using MSBuild to build .NET Core projects](https://docs.microsoft.com/en-us/dotnet/articles/core/tutorials/target-dotnetcore-with-msbuild)
+See also: `etc/FrameworkProfiles.props`.
 
 ### Desktop application
 
@@ -227,35 +194,3 @@ Add the following content to you local customization property file `{AssemblyNam
 This has ony one effect:
 - Sample projects use a dummy assembly version.
 - Sample projects use custom FxCop rules.
-
-Code Contracts
---------------
-
-When a project is ready for Code Contracts, add the following lines to the
-local property file `{AssemblyName}.props`:
-```xml
-<PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">
-  <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
-  <CodeContractsEmitXMLDocs>true</CodeContractsEmitXMLDocs>
-</PropertyGroup>
-```
-The part concerning the XML docs is optional (often it causes the build to fail
-with the current version of the CC tools).
-
-You MUST also configure VS to build the project when selecting the Code Contracts
-configuration.
-
-WARNING
--------
-
-Bad things might happen if we use references to NuGet packages of Narvalo.Core
-& Narvalo.Common instead of simple project references of the same
-assemblies. Tests run from MSBuild command-line might fail
-for obscure reasons. Worst, they might as well succeed even if nothing had
-changed. In fact, it truly depended on the order of builds decided by MSBuild
-at that time; parallel build in action. The problem is that a project carries
-its own versions of Narvalo.Core and Narvalo.Common, albeit the NuGet ones,
-and, when built, it overrides the freshly compiled versions of the same
-assemblies. Follows version and API missmatchs. The bottom line is to never
-add references to one of our NuGet packages or be sure not to include
-the project in any MSBuild project.

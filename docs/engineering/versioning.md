@@ -25,23 +25,6 @@ I do not change the AssemblyVersion when PATCH is incremented.
 Version updates
 ---------------
 
-## Behaviour
-
-## Non-retail packages
-
-## Package dependencies:
-
-Library                   | Internal Dependencies
---------------------------|-----------------------------------------------------
-Narvalo.Build             | -
-Narvalo.Common            | Core, Fx
-Narvalo.Core              | -
-Narvalo.Finance           | Core
-Narvalo.Fx                | Core
-Narvalo.Mvp               | Core
-Narvalo.Mvp.Web           | Core, Mvp
-Narvalo.Web               | Core, Common, Fx
-
 TODO: Explain package versioning and the consequences on major, minor and patch upgrades.
 
 All core Narvalo projects use the same version, let's see if things work with NuGet:
