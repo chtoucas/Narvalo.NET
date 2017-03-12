@@ -30,7 +30,6 @@
     Run default task (build) with detailed informations:
     make.ps1 -v detailed
 #>
-
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $false, Position = 0)]
