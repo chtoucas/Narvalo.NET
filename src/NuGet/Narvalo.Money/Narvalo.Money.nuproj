@@ -3,7 +3,7 @@
   <Import Project="$(RepositorySettingsDir)FrameworkProfiles.props" />
 
   <PropertyGroup>
-    <NuId>Narvalo.Finance</NuId>
+    <NuId>Narvalo.Money</NuId>
     <NuDescription>
       <![CDATA[
 Currency (ISO 4217) and Money types (w/ or w/o rounding, "fast" money).
