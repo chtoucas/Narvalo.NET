@@ -4,7 +4,6 @@ Issues (en vrac)
 Tasks
 -----
 
-- Re-enable CC just for Narvalo.Cerbere.
 - Put the private key in the repository.
   See [here](https://msdn.microsoft.com/en-us/library/wd40t7ad(v=vs.110).aspx)
 - Automatic code formatting with CodeFormatter.
