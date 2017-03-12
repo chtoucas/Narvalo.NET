@@ -6,7 +6,7 @@
     <NuId>Narvalo.Finance</NuId>
     <NuDescription>
       <![CDATA[
-Provides various financial utilities: Currency (ISO 4217), Money types (w/ or w/o rounding, "fast" money), BIC (ISO 9362), IBAN.
+BIC (ISO 9362) and IBAN types w/ validators.
       ]]>
     </NuDescription>
     <NuTags>Currency, Money, Rounding, Allocation, BIC, IBAN</NuTags>

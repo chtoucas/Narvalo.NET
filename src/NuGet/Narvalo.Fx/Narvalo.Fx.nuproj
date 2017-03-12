@@ -6,12 +6,12 @@
     <NuId>Narvalo.Fx</NuId>
     <NuSummary>
       <![CDATA[
-Features implementations of some of the usual suspects from functional programming.
+Features implementations of some of the usual suspects from functional programming: Option, Error, Either.
       ]]>
     </NuSummary>
     <NuDescription>
       <![CDATA[
-Features implementations of some of the usual suspects from functional programming: Option (Maybe&lt;T&gt;) and Error (Output&lt;T&gt;) monads, simple pattern matching (Either&lt;T1, T2&gt;, Switch&lt;T1, T2&gt;), generators and delegate extensions.
+Features implementations of some of the usual suspects from functional programming: option type (Maybe&lt;T&gt;), return types (Result&lt;T, TError&gt;, Outcome&lt;T&lt; and Fallible&lt;T&lt;), simple disjoint union (Either&lt;T1, T2&gt;), sequence generators and LINQ extensions.
       ]]>
     </NuDescription>
     <NuTags>Maybe, Option, Error, Either, Linq, Monad, Functional</NuTags>

@@ -6,7 +6,7 @@
     <NuId>Narvalo.Core</NuId>
     <NuDescription>
       <![CDATA[
-Provides various utilities and extension methods: Range type, Int64 encoders, extension methods for Collections and XDom.
+Provides helpers on which depend the other Narvalo packages.
       ]]>
     </NuDescription>
     <NuTags>Range, Utilities, Extensions</NuTags>

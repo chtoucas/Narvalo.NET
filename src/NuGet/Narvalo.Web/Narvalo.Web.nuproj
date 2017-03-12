@@ -4,7 +4,7 @@
     <NuId>Narvalo.Web</NuId>
     <NuDescription>
       <![CDATA[
-Provides types that might prove useful for Web development: generic HttpHandler type, asset providers, Razor and WebForms compile-time optimizers, preliminary support for OpenGraph and Schema.Org.
+Provides types that might prove useful for Web development: generic HttpHandler type, asset providers, Razor and WebForms compile-time optimizers.
       ]]>
     </NuDescription>
     <NuTags>ASP.NET, MVC, WebForms, Razor, Optimization</NuTags>

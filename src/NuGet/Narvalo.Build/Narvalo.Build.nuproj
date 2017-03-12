@@ -4,7 +4,7 @@
     <NuId>Narvalo.Build</NuId>
     <NuDescription>
       <![CDATA[
-Provides custom MSBuild tasks: download a file from internet, merge files, helpers to generate and verify assembly versions, tasks for Google Closure Compiler and YUICompressor.
+Provides custom MSBuild tasks: helpers to generate and verify assembly versions, download a file from internet, merge files, tasks for Google Closure Compiler and YUICompressor.
       ]]>
     </NuDescription>
     <NuTags>MSBuild, Closure, YUI, Versioning</NuTags>

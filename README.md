@@ -12,8 +12,9 @@ Narvalo.NET
   helpers on which depend the other packages.
 - **Narvalo.Fx**
   [![NuGet](https://img.shields.io/nuget/v/Narvalo.Fx.svg)](https://www.nuget.org/packages/Narvalo.Fx/),
-  option type (`Maybe<T>`), return type (`Result<T, TError>`), simple disjoint
-  union (`Either<T1, T2>`) & LINQ extensions.
+  option type (`Maybe<T>`), return types (`Result<T, TError>`, `Outcome<T>` and
+  `Fallible<T>`), simple disjoint union (`Either<T1, T2>`), sequence generators
+  and LINQ extensions.
 - **Narvalo.Money**, Currency (ISO 4217) and Money types.
 - **Narvalo.Finance**
   [![NuGet](https://img.shields.io/nuget/v/Narvalo.Finance.svg)](https://www.nuget.org/packages/Narvalo.Finance/),
