@@ -10,7 +10,7 @@
 
   <!-- Import Narvalo tasks. -->
   <Import Project="$(MSBuildThisFileDirectory)..\packages\Narvalo.Build.*\build\Narvalo.Build.tasks" />
-  
+
   <!-- Import custom tasks, if not already done. -->
   <Import Project="$(MSBuildThisFileDirectory)Make.Custom.tasks"
           Condition=" '$(MakeCustomTasksImported)' != 'true' "/>
@@ -39,7 +39,7 @@
   <PropertyGroup Condition=" '$(SignAssembly)' == 'true' ">
     <DefineConstants>$(DefineConstants);SIGNED_ASSEMBLY</DefineConstants>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>$(RepositorySettingsDir)private\Narvalo.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>$(RepositorySettingsDir)Narvalo.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
   </PropertyGroup>
 
