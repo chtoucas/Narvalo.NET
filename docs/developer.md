@@ -349,7 +349,8 @@ Checklist:
 - The shared version: `etc\Narvalo.CurrentVersion.props`.
 - Individual versions in `src\NuGet`, if they differ from the shared one.
 - Individual package descriptions in `src\NuGet`.
-- "frameworkAssemblies" references.
+- Check that the property "frameworkAssemblies" in nuspec's do not need any update.
+- "TargetFrameworkVersion" in projects and the one in the nuspec's must match.
 
 To release a new version of a package (for instance the core packages):
 1. Build the packages: `make.ps1 -r pack`.

@@ -4,10 +4,10 @@
     <NuId>Narvalo.Common</NuId>
     <NuDescription>
       <![CDATA[
-Provides various utilities and extension methods for Collections, Configuration, SQL client and XDom.
+Provides various utilities (simple parsers, Int64 encoders) and extension methods for Collections, SQL client and XDom.
       ]]>
     </NuDescription>
-    <NuTags>Utilities, Extensions</NuTags>
+    <NuTags>Utilities, Extensions, SQL, XML</NuTags>
 
     <NuFrameworkAssemblies>
       <![CDATA[
