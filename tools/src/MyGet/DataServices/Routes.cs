@@ -11,7 +11,7 @@ using RouteMagic;
 namespace MyGet {
     public static class NuGetRoutes {
         public static void Start() {
-			ServiceResolver.SetServiceResolver(new DefaultServiceResolver());
+            ServiceResolver.SetServiceResolver(new DefaultServiceResolver());
 
             MapRoutes(RouteTable.Routes);
         }
