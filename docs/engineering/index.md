@@ -3,7 +3,6 @@ Overview
 
 - [Configuring a new Project](new-project.md)
 - [Coding Rules](coding-guidelines.md)
-- [Build Infrastructure](build.md)
 - [Versioning](versioning.md)
 - [Developer Operations](devops.md)
 
@@ -14,7 +13,7 @@ Prerequisites
 - Modeling SDK (part of the Visual Studio installer) for T4 integration
 - PowerShell v4
 
-Optional necessary to run the build scripts:
+Optional components:
 - [DocFX](https://dotnet.github.io/docfx/) to build the documentation.
 
 Project Layout
@@ -45,28 +44,6 @@ There are two solutions.
 All tasks are fully automated with MSBuild, PowerShell and F# scripts.
 
 ### Projects
-
-- Libraries
-  * Narvalo.Common
-  * Narvalo.Core
-  * Narvalo.Finance
-  * Narvalo.Fx
-  * Narvalo.Money
-  * Narvalo.Web
-- MVP Framework
-  * Narvalo.Mvp
-  * Narvalo.Mvp.Web
-- Developer Tools
-  * Narvalo.Build
-- Samples
-  * Edufun
-  * MvpCommandLine
-  * MvpWebForms
-- Test projects
-- For internal use only
-  * Narvalo.T4
-
-Internal dependencies:
 
 Library                   | Dependencies
 --------------------------|-----------------------------------------------------
