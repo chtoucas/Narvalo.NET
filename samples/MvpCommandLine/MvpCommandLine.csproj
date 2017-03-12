@@ -13,11 +13,13 @@
     <StartupObject>MvpCommandLine.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Narvalo.Cerbere, Version=2.0.0.0, Culture=neutral, PublicKeyToken=e3c64fceb1bc8b20, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Narvalo.Cerbere.2.0.0\lib\portable-net45+netcore45+wpa81+wp8\Narvalo.Cerbere.dll</HintPath>
+    </Reference>
+    <Reference Include="Narvalo.Mvp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e3c64fceb1bc8b20, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Narvalo.Mvp.1.0.0\lib\net45\Narvalo.Mvp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ISampleView.cs" />
@@ -25,11 +27,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleCommand.cs" />
     <Compile Include="SamplePresenter.cs" />
-    <Compile Include="Strings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Strings.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -39,18 +36,7 @@
     <None Include="MvpCommandLine.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Strings.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\Narvalo.Mvp\Narvalo.Mvp.csproj">
-      <Project>{2944d621-7f6e-4792-94ad-0021c6b73981}</Project>
-      <Name>Narvalo.Mvp</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

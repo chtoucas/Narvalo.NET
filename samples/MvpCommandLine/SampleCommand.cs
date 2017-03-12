@@ -7,14 +7,8 @@ namespace MvpCommandLine
 
     public sealed class SampleCommand : MvpCommand, ISampleView
     {
-        public void ShowLoad()
-        {
-            Console.WriteLine(Strings.SampleCommand_OnLoad);
-        }
+        public void ShowLoad() => Console.WriteLine("Command says Load.");
 
-        public void ShowCompleted()
-        {
-            Console.WriteLine(Strings.SampleCommand_OnCompleted);
-        }
+        public void ShowCompleted() => Console.WriteLine("Command says Completed.");
     }
 }

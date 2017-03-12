@@ -4,7 +4,6 @@
 
   <ItemGroup>
     <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Build\Narvalo.Build.csproj" />
-    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Cerbere\Narvalo.Cerbere.csproj" />
     <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Common\Narvalo.Common.csproj" />
     <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Core\Narvalo.Core.csproj" />
     <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Finance\Narvalo.Finance.csproj" />
@@ -14,7 +13,6 @@
     <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj" />
     <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Web\Narvalo.Web.csproj" />
 
-    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Cerbere.Facts\Narvalo.Cerbere.Facts.csproj" />
     <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Common.Facts\Narvalo.Common.Facts.csproj" />
     <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Core.Facts\Narvalo.Core.Facts.csproj" />
     <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Finance.Facts\Narvalo.Finance.Facts.csproj" />

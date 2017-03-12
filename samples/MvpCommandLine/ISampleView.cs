@@ -3,7 +3,6 @@
 namespace MvpCommandLine
 {
     using System;
-
     using Narvalo.Mvp;
 
     public interface ISampleView : IView

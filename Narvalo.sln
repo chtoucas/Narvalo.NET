@@ -47,18 +47,24 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Money.Facts", "test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Core.Facts", "tests\Narvalo.Core.Facts\Narvalo.Core.Facts.csproj", "{D05B40A6-15B6-46D0-ABC1-8F8CFC5D02E8}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Cerbere+Core", "tests\Cerbere+Core\Cerbere+Core.shproj", "{B886384D-58BE-475E-980C-5AFAD8E2EE3D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Mvp", "src\Narvalo.Mvp\Narvalo.Mvp.csproj", "{2944D621-7F6E-4792-94AD-0021C6B73981}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Mvp.Web", "src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj", "{F4E7C519-8C51-4F2F-A50E-1A478399C93C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Mvp.Facts", "tests\Narvalo.Mvp.Facts\Narvalo.Mvp.Facts.csproj", "{E94F4D98-3882-4713-90FD-27C515B68BB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Mvp.Web.Facts", "tests\Narvalo.Mvp.Web.Facts\Narvalo.Mvp.Web.Facts.csproj", "{3F3D8108-CC1C-4CE2-8768-2097A0B77D01}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		tests\TestCommon\Narvalo.TestCommon.projitems*{031ab273-4a04-40af-923a-aa138096f98a}*SharedItemsImports = 4
 		tests\TestCommon\Narvalo.TestCommon.projitems*{120900b7-e9a4-41cd-a358-6cae61e1c328}*SharedItemsImports = 4
+		tests\TestCommon\Narvalo.TestCommon.projitems*{3f3d8108-cc1c-4ce2-8768-2097a0b77d01}*SharedItemsImports = 4
 		tests\TestCommon\Narvalo.TestCommon.projitems*{49823004-daba-4fe2-b4f0-d40542af7754}*SharedItemsImports = 4
 		tests\TestCommon\Narvalo.TestCommon.projitems*{7741af0b-d316-4c1d-a51d-a89f3070d6b0}*SharedItemsImports = 4
-		tests\Cerbere+Core\Cerbere+Core.projitems*{b886384d-58be-475e-980c-5afad8e2ee3d}*SharedItemsImports = 13
 		tests\TestCommon\Narvalo.TestCommon.projitems*{c141265f-95ed-4093-a56c-5991dba96f67}*SharedItemsImports = 13
-		tests\Cerbere+Core\Cerbere+Core.projitems*{d05b40a6-15b6-46d0-abc1-8f8cfc5d02e8}*SharedItemsImports = 4
 		tests\TestCommon\Narvalo.TestCommon.projitems*{d05b40a6-15b6-46d0-abc1-8f8cfc5d02e8}*SharedItemsImports = 4
+		tests\TestCommon\Narvalo.TestCommon.projitems*{e94f4d98-3882-4713-90fd-27c515b68bb0}*SharedItemsImports = 4
 		tests\TestCommon\Narvalo.TestCommon.projitems*{f1f1e121-3b3d-463d-8cf5-3a6e92004546}*SharedItemsImports = 4
 		tests\TestCommon\Narvalo.TestCommon.projitems*{f3d20800-96a8-4661-b796-fb5037ca0422}*SharedItemsImports = 4
 	EndGlobalSection
@@ -135,6 +141,22 @@ Global
 		{D05B40A6-15B6-46D0-ABC1-8F8CFC5D02E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D05B40A6-15B6-46D0-ABC1-8F8CFC5D02E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D05B40A6-15B6-46D0-ABC1-8F8CFC5D02E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2944D621-7F6E-4792-94AD-0021C6B73981}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2944D621-7F6E-4792-94AD-0021C6B73981}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2944D621-7F6E-4792-94AD-0021C6B73981}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2944D621-7F6E-4792-94AD-0021C6B73981}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4E7C519-8C51-4F2F-A50E-1A478399C93C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4E7C519-8C51-4F2F-A50E-1A478399C93C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4E7C519-8C51-4F2F-A50E-1A478399C93C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4E7C519-8C51-4F2F-A50E-1A478399C93C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E94F4D98-3882-4713-90FD-27C515B68BB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E94F4D98-3882-4713-90FD-27C515B68BB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E94F4D98-3882-4713-90FD-27C515B68BB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E94F4D98-3882-4713-90FD-27C515B68BB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F3D8108-CC1C-4CE2-8768-2097A0B77D01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F3D8108-CC1C-4CE2-8768-2097A0B77D01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F3D8108-CC1C-4CE2-8768-2097A0B77D01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F3D8108-CC1C-4CE2-8768-2097A0B77D01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -158,6 +180,9 @@ Global
 		{387BDE7D-C68D-43C0-93CA-17700577FAFD} = {E532D0F7-CFBB-4D52-BEA3-D67DA931AC86}
 		{120900B7-E9A4-41CD-A358-6CAE61E1C328} = {1606E94A-5311-4C5F-91E2-876A4B635F02}
 		{D05B40A6-15B6-46D0-ABC1-8F8CFC5D02E8} = {1606E94A-5311-4C5F-91E2-876A4B635F02}
-		{B886384D-58BE-475E-980C-5AFAD8E2EE3D} = {1606E94A-5311-4C5F-91E2-876A4B635F02}
+		{2944D621-7F6E-4792-94AD-0021C6B73981} = {E532D0F7-CFBB-4D52-BEA3-D67DA931AC86}
+		{F4E7C519-8C51-4F2F-A50E-1A478399C93C} = {E532D0F7-CFBB-4D52-BEA3-D67DA931AC86}
+		{E94F4D98-3882-4713-90FD-27C515B68BB0} = {1606E94A-5311-4C5F-91E2-876A4B635F02}
+		{3F3D8108-CC1C-4CE2-8768-2097A0B77D01} = {1606E94A-5311-4C5F-91E2-876A4B635F02}
 	EndGlobalSection
 EndGlobal

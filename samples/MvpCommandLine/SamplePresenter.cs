@@ -3,7 +3,6 @@
 namespace MvpCommandLine
 {
     using System;
-
     using Narvalo.Mvp;
 
     public sealed class SamplePresenter : Presenter<ISampleView>
@@ -15,14 +14,8 @@ namespace MvpCommandLine
             View.Completed += View_Completed;
         }
 
-        private void View_Load(object sender, EventArgs e)
-        {
-            View.ShowLoad();
-        }
+        private void View_Load(object sender, EventArgs e) => View.ShowLoad();
 
-        private void View_Completed(object sender, EventArgs e)
-        {
-            View.ShowCompleted();
-        }
+        private void View_Completed(object sender, EventArgs e) => View.ShowCompleted();
     }
 }

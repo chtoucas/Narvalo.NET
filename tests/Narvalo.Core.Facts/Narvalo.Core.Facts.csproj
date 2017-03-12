@@ -31,7 +31,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControlFlowExceptionFacts.cs" />
+    <Compile Include="FormatFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequireFacts.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -48,7 +51,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="..\TestCommon\Narvalo.TestCommon.projitems" Label="Shared" />
-  <Import Project="..\Cerbere+Core\Cerbere+Core.projitems" Label="Shared" />
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
