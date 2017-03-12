@@ -9,7 +9,7 @@
 Provides helpers on which depend the other Narvalo packages.
       ]]>
     </NuDescription>
-    <NuTags>Range, Utilities, Extensions</NuTags>
+    <NuTags>Guard</NuTags>
 
     <NuReferences>
       <![CDATA[

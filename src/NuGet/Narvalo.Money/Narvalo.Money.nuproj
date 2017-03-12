@@ -9,7 +9,7 @@
 Currency (ISO 4217) and Money types (w/ or w/o rounding, "fast" money).
       ]]>
     </NuDescription>
-    <NuTags>Currency, Money, Rounding, Allocation, BIC, IBAN</NuTags>
+    <NuTags>Currency, Money, Rounding, Allocation</NuTags>
 
     <NuReferences>
       <![CDATA[

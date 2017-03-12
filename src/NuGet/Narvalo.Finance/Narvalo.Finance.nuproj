@@ -9,7 +9,7 @@
 BIC (ISO 9362) and IBAN types w/ validators.
       ]]>
     </NuDescription>
-    <NuTags>Currency, Money, Rounding, Allocation, BIC, IBAN</NuTags>
+    <NuTags>BIC, IBAN</NuTags>
 
     <NuReferences>
       <![CDATA[
