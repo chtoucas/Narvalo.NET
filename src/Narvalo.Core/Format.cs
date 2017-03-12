@@ -11,14 +11,15 @@ namespace Narvalo
     /// Provides helper methods to format strings.
     /// </summary>
     /// <remarks>
-    /// <para>The methods are nothing but aliases for <see cref="String.Format(IFormatProvider, String, Object[])"/>
-    /// but they clearly state which culture is used for formatting.</para>
-    /// <para>To avoid any performance penalty we explicitly ask the runtime to inline them;
-    /// I am pretty sure this is not necessary but it should be safe to do so.</para>
-    /// <para>Do not create an alias for <see cref="CultureInfo.CurrentUICulture"/>
-    /// since it has nothing to do with formatting.</para>
+    /// The methods are nothing but aliases for <see cref="String.Format(IFormatProvider, String, Object[])"/>
+    /// but they clearly state which culture is used for formatting.
     /// </remarks>
     // REVIEW: https://github.com/dotnet/corefx/issues/1514
+    // Remarks:
+    // - Do not create an alias for CultureInfo.CurrentUICulture, since it has nothing to do
+    //   with formatting.
+    // - To avoid any performance penalty we explicitly ask the runtime to inline them;
+    //   I am pretty sure this is not necessary but it should be safe to do so.
     [DebuggerStepThrough]
     public static class Format
     {

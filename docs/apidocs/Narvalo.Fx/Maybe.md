@@ -19,9 +19,3 @@ We suggest to prefix with _May_ the methods that return a Maybe instance.
 - `maybe`       -> `Maybe<T>.Match()`
 - `listToMaybe` -> `Qperators.FirstOrNone()`
 - `mapMaybe`    -> `Qperators.SelectAny()`
-
-
-### References ###
-
-- [Haskell](http://hackage.haskell.org/package/base-4.6.0.1/docs/Data-Maybe.html)
-- [Kinds of Immutability](http://blogs.msdn.com/b/ericlippert/archive/2007/11/13/immutability-in-c-part-one-kinds-of-immutability.aspx)
