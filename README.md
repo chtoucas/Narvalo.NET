@@ -15,7 +15,9 @@ Narvalo.NET
   option type (`Maybe<T>`), return types (`Result<T, TError>`, `Outcome<T>` and
   `Fallible<T>`), simple disjoint union (`Either<T1, T2>`), sequence generators
   and LINQ extensions.
-- **Narvalo.Money**, Currency (ISO 4217) and Money types.
+- **Narvalo.Money**
+  [![NuGet](https://img.shields.io/nuget/v/Narvalo.Money.svg)](https://www.nuget.org/packages/Narvalo.Money/),
+  Currency (ISO 4217) and Money types.
 - **Narvalo.Finance**
   [![NuGet](https://img.shields.io/nuget/v/Narvalo.Finance.svg)](https://www.nuget.org/packages/Narvalo.Finance/),
   BIC (ISO 9362) and IBAN types.
