@@ -1,5 +1,11 @@
 # This file requires that $script:ProjectRoot is correctly initialized.
 
+New-Variable -Name ProjectRoot `
+    -Value (Join-Path $PSScriptRoot '..') `
+    -Scope Script `
+    -Option ReadOnly `
+    -Description 'Path to the local repository for the project Narvalo.NET.'
+
 <#
 .SYNOPSIS
     Exit current process gracefully.
