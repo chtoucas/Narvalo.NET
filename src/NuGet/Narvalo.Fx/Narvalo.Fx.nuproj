@@ -11,7 +11,7 @@ Features implementations of some of the usual suspects from functional programmi
     </NuSummary>
     <NuDescription>
       <![CDATA[
-Features implementations of some of the usual suspects from functional programming: option type (Maybe&lt;T&gt;), return types (Result&lt;T, TError&gt;, Outcome&lt;T&lt; and Fallible&lt;T&lt;), simple disjoint union (Either&lt;T1, T2&gt;), sequence generators and LINQ extensions.
+Features implementations of some of the usual suspects from functional programming: option type (Maybe&lt;T&gt;), return types (Result&lt;T, TError&gt;, Outcome&lt;T&gt; and Fallible&lt;T&gt;), simple disjoint union (Either&lt;T1, T2&gt;), sequence generators and LINQ extensions.
       ]]>
     </NuDescription>
     <NuTags>Maybe, Option, Error, Either, Linq, Monad, Functional</NuTags>
