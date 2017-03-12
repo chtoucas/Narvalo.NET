@@ -1,7 +1,3 @@
 !lib/*.dll
 packages/
 nuget.exe
-
-# Disabled rules:
-#!lib/StyleCop/*.dll
-#7za.exe

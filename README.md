@@ -7,9 +7,6 @@ Narvalo.NET
   on which depend all MVP-related packages.
 
 ## General Purpose Libraries
-- **Narvalo.Cerbere**
-  [![NuGet](https://img.shields.io/nuget/v/Narvalo.Cerbere.svg)](https://www.nuget.org/packages/Narvalo.Cerbere/),
-  Code Contracts helpers.
 - **Narvalo.Core**
   [![NuGet](https://img.shields.io/nuget/v/Narvalo.Core.svg)](https://www.nuget.org/packages/Narvalo.Core/),
   helpers on which depend the other packages.

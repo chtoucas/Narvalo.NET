@@ -4,17 +4,17 @@
 .SYNOPSIS
     Run the build script.
 .PARAMETER Configuration
-    Specifies the configuration (ignored by the task Package).
+    Specifies the configuration (ignored by the task 'pack').
 .PARAMETER FullCoverage
-    Produces a detailed coverage report (only for the task Cover).
+    Produces a detailed coverage report (only for the task 'cover').
 .PARAMETER Retail
-    If present, packages/assemblies are built for retail (only for the task Package).
+    If present, packages/assemblies are built for retail (only for the task 'pack').
 .PARAMETER Safe
     If present, ensures there is no concurrent MSBuild running.
 .PARAMETER Task
     Specifies the task to be executed.
     You can use one of the following values:
-        build, cover, doc, pack, test
+        build, cover, pack, test
 .PARAMETER Verbosity
     Specifies the amount of information displayed by MSBuild.
     You can use the following verbosity levels:
@@ -34,10 +34,8 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $false, Position = 0, ValueFromPipeline = $true)]
-    [ValidateSet('build', 'cover', 'doc', 'pack', 'test')]
+    [ValidateSet('build', 'cover', 'pack', 'test')]
     [Alias('t')] [string] $Task = 'build',
-
-    [Alias('r')] [switch] $Retail,
 
     [Parameter(Mandatory = $false, Position = 1)]
     [ValidateSet('Debug', 'Release')]
@@ -47,6 +45,7 @@ param(
     [ValidateSet('q', 'quiet', 'm', 'minimal', 'n', 'normal', 'd', 'detailed', 'diag', 'diagnostic')]
     [Alias('v')] [string] $Verbosity = 'minimal',
 
+    [Alias('r')] [switch] $Retail,
     [switch] $Safe,
     [switch] $FullCoverage
 )
@@ -141,7 +140,8 @@ switch ($task) {
                 'When building retail packages, the git commit hash CAN NOT be empty.'
         }
 
-        & (Get-MSBuild) $Project $MSBuildCommonProps $MSBuildPackageProps "/p:GitCommitHash=$hash" '/t:Xunit;Package'
+        & (Get-MSBuild) $Project $MSBuildCommonProps $MSBuildPackageProps `
+            "/p:GitCommitHash=$hash" '/t:Xunit;Package'
     }
 
     'cover' {
@@ -153,9 +153,12 @@ switch ($task) {
         # OpenCover
         # ---------
 
-        $opencover = $packages | Find-PkgTool -Pkg 'OpenCover.*' -Tool 'tools\OpenCover.Console.exe'
-        $xunit     = $packages | Find-PkgTool -Pkg 'xunit.runner.console.*' -Tool 'tools\xunit.console.exe'
-        $asms      = Get-ChildItem -Path (Get-LocalPath "work\bin\$Configuration\*") -Include "*.Facts.dll"
+        $opencover = $packages |
+            Find-PkgTool -Pkg 'OpenCover.*' -Tool 'tools\OpenCover.Console.exe'
+        $xunit = $packages |
+            Find-PkgTool -Pkg 'xunit.runner.console.*' -Tool 'tools\xunit.console.exe'
+        $asms = Get-ChildItem -Path (Get-LocalPath "work\bin\$Configuration\*") `
+            -Include "*.Facts.dll"
 
         $targetargs   = $asms -join " "
 
@@ -171,7 +174,8 @@ switch ($task) {
         # ReportGenerator
         # ---------------
 
-        $reportgenerator = $packages | Find-PkgTool -Pkg 'ReportGenerator.*' -Tool 'tools\ReportGenerator.exe'
+        $reportgenerator = $packages |
+            Find-PkgTool -Pkg 'ReportGenerator.*' -Tool 'tools\ReportGenerator.exe'
 
         if ($FullCoverage) {
             # WARNING: We filter out most assemblies.
@@ -191,10 +195,6 @@ switch ($task) {
             "-assemblyfilters:$reportfilters" `
             -reports:$opencoverxml `
             -targetdir:$targetdir
-    }
-
-    'doc' {
-        ExitGracefully -ExitCode 1 'The documentation task is not yet implemented'
     }
 }
 

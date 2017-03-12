@@ -34,6 +34,12 @@ function Exit-Gracefully {
     Exit $exitCode
 }
 
+<#
+.SYNOPSIS
+    Get the path for a package tool.
+.OUTPUTS
+    System.String. Find-PkgTool returns a string that contains the path to the tool.
+#>
 function Find-PkgTool {
     [CmdletBinding()]
     param(
@@ -42,17 +48,19 @@ function Find-PkgTool {
 
         [Parameter(Mandatory = $true, Position = 1)]
         [string] $Pkg,
-        
+
         [Parameter(Mandatory = $true, Position = 2)]
         [string] $Tool
     )
-    
-    $matches = @($Directory | Get-ChildItem -Directory | Where { $_.FullName -match $pkg })
+
+    $matches = @($Directory |
+        Get-ChildItem -Directory |
+        Where-Object { $_.FullName -match $pkg })
 
     if ($matches.Count -eq 0) { Exit-Gracefully -ExitCode 1 "No package found matching $pkg." }
     if ($matches.Count -ne 1) { Exit-Gracefully -ExitCode 1 "More than one package found matching $pkg"}
 
-    return $matches | %{ Join-Path -Path $_.FullName -ChildPath $tool -Resolve }
+    return $matches | ForEach-Object { Join-Path -Path $_.FullName -ChildPath $tool -Resolve }
 }
 
 <#
@@ -401,7 +409,9 @@ function Stop-AnyMSBuildProcess {
     param()
 
     Write-Debug 'Stop any concurrent MSBuild running.'
-    Get-Process | ?{ $_.ProcessName -eq 'msbuild' } | %{ Stop-Process $_.ID -Force }
+    Get-Process |
+        Where-Object { $_.ProcessName -eq 'msbuild' } |
+        ForEach-Object { Stop-Process $_.ID -Force }
 }
 
 # ------------------------------------------------------------------------------
