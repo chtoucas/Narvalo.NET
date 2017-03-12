@@ -3,12 +3,14 @@
 <#
 .SYNOPSIS
     Run the build script.
-.PARAMETER Configuration
-    Specifies the configuration (ignored by the task 'pack').
 .PARAMETER FullCoverage
     Produces a detailed coverage report (only for the task 'cover').
+.PARAMETER Release
+    Instructs the script to use the Release configuration (ignored by the task 'pack')..
+.PARAMETER Restore
+    Restore solution packages.
 .PARAMETER Retail
-    If present, packages/assemblies are built for retail (only for the task 'pack').
+    If present, packages are built for retail (only for the task 'pack').
 .PARAMETER Safe
     If present, ensures there is no concurrent MSBuild running.
 .PARAMETER Task
@@ -37,17 +39,15 @@ param(
     [ValidateSet('build', 'cover', 'pack', 'test')]
     [Alias('t')] [string] $Task = 'build',
 
-    [Parameter(Mandatory = $false, Position = 1)]
-    [ValidateSet('Debug', 'Release')]
-    [Alias('c')] [string] $Configuration = 'Debug',
-
     [Parameter(Mandatory = $false, Position = 2)]
     [ValidateSet('q', 'quiet', 'm', 'minimal', 'n', 'normal', 'd', 'detailed', 'diag', 'diagnostic')]
     [Alias('v')] [string] $Verbosity = 'minimal',
 
+    [switch] $FullCoverage,
+    [switch] $Release,
+    [switch] $Restore,
     [Alias('r')] [switch] $Retail,
-    [switch] $Safe,
-    [switch] $FullCoverage
+    [switch] $Safe
 )
 
 Set-StrictMode -Version Latest
@@ -63,13 +63,13 @@ trap {
 
 # ------------------------------------------------------------------------------
 
-if ($retail.IsPresent) {
+if ($Retail.IsPresent) {
     Write-Host "Make script (RETAIL).`n"
 } else {
     Write-Host "Make script - Non-retail version.`n"
 }
 
-# Path to the local repository (used by helpers.ps1).
+# Path to the local repository (used by make-helpers.ps1).
 $ProjectRoot = $PSScriptRoot
 
 # Load the helpers.
@@ -77,23 +77,29 @@ $ProjectRoot = $PSScriptRoot
 
 # ------------------------------------------------------------------------------
 
-# Main MSBuild projects.
-$Project  = Get-LocalPath 'tools\Make.proj'
+# MSBuild project.
+$project  = Get-LocalPath 'tools\Make.proj'
 
-# Common MSBuild options.
-$MSBuildCommonProps = '/nologo', "/verbosity:$Verbosity", '/maxcpucount', '/nodeReuse:false';
+# Build configuration.
+if ($Release.IsPresent) {
+    $configuration = 'Release'
+} else {
+    $configuration = 'Debug'
+}
 
-# CI properties.
-$MSBuildCIProps = `
-    "/p:Configuration=$Configuration",
+# MSBuild properties.
+$msbuildprops = `
+    '/nologo', "/verbosity:$Verbosity", '/maxcpucount', '/nodeReuse:false',
+    "/p:Configuration=$configuration",
     '/p:BuildGeneratedVersion=false',
     "/p:Retail=false",
     '/p:SignAssembly=false',
     '/p:SkipDocumentation=true',
     '/p:VisibleInternals=true'
 
-# Packaging properties.
-$MSBuildPackageProps = `
+# MSBuild properties solely for the task 'pack'.
+$msbuildpackprops = `
+    '/nologo', "/verbosity:$Verbosity", '/maxcpucount', '/nodeReuse:false',
     '/p:Configuration=Release',
     '/p:BuildGeneratedVersion=true',
     "/p:Retail=$Retail",
@@ -103,49 +109,49 @@ $MSBuildPackageProps = `
 
 # ------------------------------------------------------------------------------
 
-if ($safe.IsPresent) {
+if ($Safe.IsPresent) {
     Stop-AnyMSBuildProcess
 }
 
-Restore-SolutionPackages
+if ($Restore.IsPresent) {
+    Write-Host '> Restoring solution packages ' -NoNewline
+    Restore-SolutionPackages
+}
 
-switch ($task) {
-    'build' {
-        & (Get-MSBuild) $Project $MSBuildCommonProps $MSBuildCIProps '/t:Build'
-    }
+Write-Host "> Executing the task '$Task'`n"
 
-    'test' {
-        & (Get-MSBuild) $Project $MSBuildCommonProps $MSBuildCIProps '/t:Xunit'
-    }
+switch ($Task) {
+    'build' { & (Get-MSBuild) $project $msbuildprops '/t:Build' }
+    'test'  { & (Get-MSBuild) $project $msbuildprops '/t:Xunit' }
 
     'pack' {
         $git = (Get-Git)
 
+        if ($git -eq $null) {
+            Exit-Gracefully 'git.exe could not be found in your PATH. Please ensure git is installed.'
+        }
+
         $hash = ''
 
-        if ($git -ne $null) {
-            $status = Get-GitStatus $git -Short
+        $status = Get-GitStatus $git -Short
 
-            if ($status -eq $null) {
-                Write-Warning 'Skipping git commit hash... unabled to verify the git status.'
-            } elseif ($status -ne '') {
-                Write-Warning 'Skipping git commit hash... uncommitted changes are pending.'
-            } else {
-                $hash = Get-GitCommitHash $git
-            }
+        if ($status -eq $null) {
+            Write-Warning 'Skipping git commit hash... unabled to verify the git status.'
+        } elseif ($status -ne '') {
+            Write-Warning 'Skipping git commit hash... uncommitted changes are pending.'
+        } else {
+            $hash = Get-GitCommitHash $git
         }
 
         if ($Retail -and $hash -eq '') {
-            Exit-Gracefully -ExitCode 1 `
-                'When building retail packages, the git commit hash CAN NOT be empty.'
+            Exit-Gracefully 'When building retail packages, the git commit hash CAN NOT be empty.'
         }
 
-        & (Get-MSBuild) $Project $MSBuildCommonProps $MSBuildPackageProps `
-            "/p:GitCommitHash=$hash" '/t:Xunit;Package'
+        & (Get-MSBuild) $project $msbuildpackprops  "/p:GitCommitHash=$hash" '/t:Xunit;Package'
     }
 
     'cover' {
-        & (Get-MSBuild) $Project $MSBuildCommonProps $MSBuildCIProps '/t:Build'
+        & (Get-MSBuild) $project $msbuildprops '/t:Build'
 
         $packages     = (Get-LocalPath "packages")
         $opencoverxml = Get-LocalPath 'work\log\opencover.xml'
@@ -157,7 +163,7 @@ switch ($task) {
             Find-PkgTool -Pkg 'OpenCover.*' -Tool 'tools\OpenCover.Console.exe'
         $xunit = $packages |
             Find-PkgTool -Pkg 'xunit.runner.console.*' -Tool 'tools\xunit.console.exe'
-        $asms = Get-ChildItem -Path (Get-LocalPath "work\bin\$Configuration\*") `
+        $asms = Get-ChildItem -Path (Get-LocalPath "work\bin\$configuration\*") `
             -Include "*.Facts.dll"
 
         $targetargs   = $asms -join " "

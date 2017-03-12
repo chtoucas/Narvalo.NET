@@ -4,6 +4,10 @@
          InitialTargets="__InitializeMakeCommonTargets"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
+  <!-- Import common properties, if not already done. -->
+  <Import Project="$(MSBuildThisFileDirectory)Make.Common.props"
+          Condition=" '$(MakeCommonPropsImported)' != 'true' "/>
+
   <!-- Import Xunit tasks. -->
   <ItemGroup>
     <XunitAssemblyFile Include="$(MSBuildThisFileDirectory)..\packages\**\xunit.runner.msbuild.dll" />

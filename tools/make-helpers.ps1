@@ -1,3 +1,5 @@
+# This file requires that $script:ProjectRoot is correctly initialized.
+
 <#
 .SYNOPSIS
     Exit current process gracefully.
@@ -20,7 +22,7 @@ function Exit-Gracefully {
         [string] $Message,
 
         [Parameter(Mandatory = $false, Position = 1)]
-        [int] $ExitCode = 0
+        [int] $ExitCode = 1
     )
 
     if ($exitCode -eq 0) {
@@ -57,8 +59,8 @@ function Find-PkgTool {
         Get-ChildItem -Directory |
         Where-Object { $_.FullName -match $pkg })
 
-    if ($matches.Count -eq 0) { Exit-Gracefully -ExitCode 1 "No package found matching $pkg." }
-    if ($matches.Count -ne 1) { Exit-Gracefully -ExitCode 1 "More than one package found matching $pkg"}
+    if ($matches.Count -eq 0) { Exit-Gracefully "No package found matching $pkg." }
+    if ($matches.Count -ne 1) { Exit-Gracefully "More than one package found matching $pkg"}
 
     return $matches | ForEach-Object { Join-Path -Path $_.FullName -ChildPath $tool -Resolve }
 }
@@ -81,8 +83,6 @@ function Get-Git {
     $git = (Get-Command "git.exe" -CommandType Application -TotalCount 1 -ErrorAction SilentlyContinue)
 
     if ($git -eq $null) {
-        Write-Warning 'git.exe could not be found in your PATH. Please ensure git is installed.'
-
         return $null
     } else {
         return $git.Path
@@ -229,8 +229,7 @@ function Get-MSBuild {
         -requires Microsoft.Component.MSBuild -property installationPath
     $MSBuild = Join-Path $VisualStudio 'MSBuild\15.0\Bin\MSBuild.exe'
     if (!(Test-Path $MSBuild)) {
-        Write-Host -BackgroundColor Red -ForegroundColor Yellow 'Unable to locate MSBuild' `
-        Exit 1
+        Exit-Gracefully 'Unable to locate MSBuild' `
     }
 
     return $MSBuild
@@ -384,16 +383,11 @@ function Restore-Packages {
 #>
 function Restore-SolutionPackages {
     [CmdletBinding()]
-    param(
-        [Parameter(Mandatory = $false, Position = 0)]
-        [string] $Verbosity
-    )
-
-    Write-Verbose 'Restoring solution packages.'
+    param()
 
     Restore-Packages -Source (Get-LocalPath 'etc\packages.config') `
         -PackagesDirectory (Get-LocalPath 'packages') `
-        -Verbosity $verbosity
+        -Verbosity 'quiet'
 }
 
 <#
