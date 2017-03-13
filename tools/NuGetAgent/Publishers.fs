@@ -132,18 +132,19 @@ module Publishers =
             let settings = loadNuGetSettings
             let container = new ApiKeysContainer(settings)
 
+            // WARNING: Now that we use myget.org, we no longer purge obsolete packages.
             if retail then
                 // For retail packages, the default behaviour is to publish them
                 // to the official NuGet server.
                 match official with
                 | None
                 | Some(true)  -> Retail(true, new PublisherToNuGet(container))
-                | Some(false) -> Retail(false, new PublisherToMyGet(container))
+                | Some(false) -> Retail(false, new PublisherToMyGet(container, false))
             else
                 // For edge packages, we only allow publication to our own private NuGet server.
                 match official with
                 | None
-                | Some(false) -> Edge(new PublisherToMyGet(container))
+                | Some(false) -> Edge(new PublisherToMyGet(container, false))
                 | Some(true)  -> failwith "You CAN NOT publish edge packages to the official NuGet server."
 
         /// Publish packages from a directory.
