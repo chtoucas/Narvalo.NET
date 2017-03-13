@@ -134,7 +134,7 @@ namespace Narvalo
         {
             NotNull(value, parameterName);
 
-            if (IsWhiteSpace(value))
+            if (IsEmptyOrWhiteSpace(value))
             {
                 throw new ArgumentException(Strings_Core.Argument_WhiteSpaceString, parameterName);
             }
@@ -144,15 +144,14 @@ namespace Narvalo
         /// Returns a value indicating whether the specified value only consists of white-space
         /// characters.
         /// </summary>
-        /// <remarks>This method returns false if <paramref name="value"/> is empty.</remarks>
         /// <param name="value">The string to test.</param>
-        /// <returns>true if the input only consists of white-space characters;
+        /// <returns>true if the input is empty or only consists of white-space characters;
         /// otherwise false.</returns>
-        private static bool IsWhiteSpace(string value)
+        private static bool IsEmptyOrWhiteSpace(string value)
         {
             Debug.Assert(value != null);
 
-            if (value.Length == 0) { return false; }
+            if (value.Length == 0) { return true; }
 
             for (int i = 0; i < value.Length; i++)
             {
