@@ -14,7 +14,8 @@ Narvalo.Fx
 
 Next:
 - Add `SelectMany` to `Outcome` and `Fallible`.
-- OnError(), WhenError() & co could return a boolean to signal if it did anything.
+- Deprecate some of `ValueOr...`
+- `OnError()`, `WhenError()` & co could return a boolean to signal if it did anything.
 - Explain what do we mean by shadowing.
 - More Haskell API, eg When, Forever & co?
 - Add async and lazy alternatives?
