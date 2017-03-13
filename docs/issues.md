@@ -6,7 +6,8 @@ Infrastructure
 
 - Incremental build is broken when building w/ make.ps1
   <- certainly due to the generation of an AssemblyInfo file on the fly.
-- Upgrade the MyGet server (requires .NET 4.6 to be installed).
+- Upgrade the MyGet server (requires .NET 4.6 to be installed) or simply
+  move to www.myget.org?
 
 Next:
 - We can certainly simplify the MSBuild scripts a bit.

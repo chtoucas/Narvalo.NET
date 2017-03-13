@@ -99,6 +99,13 @@ namespace Narvalo.Applicative
             return IsSuccess ? Value : throw exceptionFactory();
         }
 
+        public T ValueOrThrow(Func<TError, Exception> exceptionFactory)
+        {
+            Require.NotNull(exceptionFactory, nameof(exceptionFactory));
+
+            return IsSuccess ? Value : throw exceptionFactory(Error);
+        }
+
         public override string ToString()
             => IsSuccess ? "Success(" + Value?.ToString() + ")" : "Error(" + Error.ToString() + ")";
 
