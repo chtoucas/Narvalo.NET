@@ -6,6 +6,8 @@ Narvalo.NET
 - [License for WebFormsMvp](https://github.com/chtoucas/Narvalo.NET/tree/master/LICENSE-WebFormsMvp.txt)
   on which depend all MVP-related packages.
 
+Unstable packages are available on [MyGet](https://www.myget.org/feed/narvalo-edge/).
+
 ## General Purpose Libraries
 - **Narvalo.Core**
   [![NuGet](https://img.shields.io/nuget/v/Narvalo.Core.svg)](https://www.nuget.org/packages/Narvalo.Core/),
@@ -43,5 +45,6 @@ Narvalo.NET
 
 ## Developer Tools
 - **Narvalo.Build**
-  [![NuGet](https://img.shields.io/nuget/v/Narvalo.Build.svg)](https://www.nuget.org/packages/Narvalo.Build/),
+  [![NuGet](https://img.shields.io/nuget/v/Narvalo.Build.svg)](https://www.nuget.org/packages/Narvalo.Build/)
+  [![NuGet](https://img.shields.io/myget/narvalo-edge/v/Narvalo.Build.EDGE.svg)](https://www.myget.org/feed/narvalo-edge/package/nuget/Narvalo.Build.EDGE),
   custom MSBuild tasks.
