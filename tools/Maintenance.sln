@@ -45,7 +45,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Scripts", "4. Scripts", "{E886C15F-0369-4B3A-B2F2-4B7C0000E27D}"
 	ProjectSection(SolutionItems) = preProject
 		fsi.cmd = fsi.cmd
-		..\make.cmd = ..\make.cmd
 		..\make.ps1 = ..\make.ps1
 		publish-edge.fsx = publish-edge.fsx
 		publish-retail.fsx = publish-retail.fsx
@@ -74,9 +73,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Packages", "Packages", "{23
 		..\src\Narvalo.Web\Narvalo.Web.Version.props = ..\src\Narvalo.Web\Narvalo.Web.Version.props
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGet", "src\MyGet\MyGet.csproj", "{48ACFCCA-45CF-40FD-95C4-00830CF9DD2F}"
-EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "NuGetAgent", "src\NuGetAgent\NuGetAgent.fsproj", "{702370E8-516C-4AE4-8913-CDB198070812}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "NuGetAgent", "NuGetAgent\NuGetAgent.fsproj", "{702370E8-516C-4AE4-8913-CDB198070812}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -85,12 +82,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{48ACFCCA-45CF-40FD-95C4-00830CF9DD2F}.CodeContracts|Any CPU.ActiveCfg = Release|Any CPU
-		{48ACFCCA-45CF-40FD-95C4-00830CF9DD2F}.CodeContracts|Any CPU.Build.0 = Release|Any CPU
-		{48ACFCCA-45CF-40FD-95C4-00830CF9DD2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{48ACFCCA-45CF-40FD-95C4-00830CF9DD2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{48ACFCCA-45CF-40FD-95C4-00830CF9DD2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{48ACFCCA-45CF-40FD-95C4-00830CF9DD2F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{702370E8-516C-4AE4-8913-CDB198070812}.CodeContracts|Any CPU.ActiveCfg = Release|Any CPU
 		{702370E8-516C-4AE4-8913-CDB198070812}.CodeContracts|Any CPU.Build.0 = Release|Any CPU
 		{702370E8-516C-4AE4-8913-CDB198070812}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

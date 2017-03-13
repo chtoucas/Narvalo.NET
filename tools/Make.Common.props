@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Project ToolsVersion="14.0" 
+<Project ToolsVersion="14.0"
          InitialTargets="__InitializeMakeCommonProps"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
@@ -10,7 +10,7 @@
   <ItemGroup Condition=" '@(ProjectsToBuild)' == '' And '$(ProjectsToBuild)' != '' ">
     <ProjectsToBuild Include="$(ProjectsToBuild)" />
   </ItemGroup>
-  
+
   <!-- Define the ConfigurationVariant property. -->
   <PropertyGroup>
     <!-- This property is useful to distinguish between variants of the same base configuration.

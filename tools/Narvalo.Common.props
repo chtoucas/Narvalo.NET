@@ -23,7 +23,7 @@
   <PropertyGroup>
     <!-- WARNING: Overriding this property may lead to unexpected results.
          Microsoft.Common.targets will completely ignore the original targets
-         file. A simple workaround is to import in Narvalo.Common.targets 
+         file. A simple workaround is to import (in Narvalo.Common.targets)
          the original system-wide custom after targets. -->
     <CustomAfterMicrosoftCommonTargets>$(MSBuildThisFileDirectory)Narvalo.Common.targets</CustomAfterMicrosoftCommonTargets>
   </PropertyGroup>
