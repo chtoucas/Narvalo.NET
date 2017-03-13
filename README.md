@@ -6,7 +6,7 @@ Narvalo.NET
 - [License for WebFormsMvp](https://github.com/chtoucas/Narvalo.NET/tree/master/LICENSE-WebFormsMvp.txt)
   on which depend all MVP-related packages.
 
-Unstable packages are available on [MyGet](https://www.myget.org/feed/narvalo-edge/).
+Unstable packages are available on [MyGet](https://www.myget.org/).
 
 ## General Purpose Libraries
 - **Narvalo.Core**
