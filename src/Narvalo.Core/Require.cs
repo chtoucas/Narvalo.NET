@@ -111,8 +111,7 @@ namespace Narvalo
         /// <param name="parameterName">The name of the parameter.</param>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
         /// null.</exception>
-        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is
-        /// null or empty.</exception>
+        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is empty.</exception>
         public static void NotNullOrEmpty([ValidatedNotNull]string value, string parameterName)
         {
             NotNull(value, parameterName);
@@ -121,6 +120,49 @@ namespace Narvalo
             {
                 throw new ArgumentException(Strings_Core.Argument_EmptyString, parameterName);
             }
+        }
+
+        /// <summary>
+        /// Validates that the specified argument is not null or empty.
+        /// </summary>
+        /// <param name="value">The argument to check.</param>
+        /// <param name="parameterName">The name of the parameter.</param>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
+        /// null.</exception>
+        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is empty.</exception>
+        public static void NotNullOrWhiteSpace([ValidatedNotNull]string value, string parameterName)
+        {
+            NotNull(value, parameterName);
+
+            if (IsWhiteSpace(value))
+            {
+                throw new ArgumentException(Strings_Core.Argument_WhiteSpaceString, parameterName);
+            }
+        }
+
+        /// <summary>
+        /// Returns a value indicating whether the specified value only consists of white-space
+        /// characters.
+        /// </summary>
+        /// <remarks>This method returns false if <paramref name="value"/> is empty.</remarks>
+        /// <param name="value">The string to test.</param>
+        /// <returns>true if the input only consists of white-space characters;
+        /// otherwise false.</returns>
+        private static bool IsWhiteSpace(string value)
+        {
+            Debug.Assert(value != null);
+
+            if (value.Length == 0) { return false; }
+
+            for (int i = 0; i < value.Length; i++)
+            {
+                if (!Char.IsWhiteSpace(value[i]))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

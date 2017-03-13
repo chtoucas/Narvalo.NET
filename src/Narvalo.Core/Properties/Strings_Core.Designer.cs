@@ -80,6 +80,15 @@ namespace Narvalo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to String cannot be empty or contains only whitespaces..
+        /// </summary>
+        internal static string Argument_WhiteSpaceString {
+            get {
+                return ResourceManager.GetString("Argument_WhiteSpaceString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The control flow path reached a section of the code that should have been unreachable under any circumstances..
         /// </summary>
         internal static string ControlFlowException_DefaultMessage {

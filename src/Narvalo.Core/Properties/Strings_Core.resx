@@ -126,4 +126,7 @@
   <data name="ControlFlowException_DefaultMessage" xml:space="preserve">
     <value>The control flow path reached a section of the code that should have been unreachable under any circumstances.</value>
   </data>
+  <data name="Argument_WhiteSpaceString" xml:space="preserve">
+    <value>String cannot be empty or contains only whitespaces.</value>
+  </data>
 </root>

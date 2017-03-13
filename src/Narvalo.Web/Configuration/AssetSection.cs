@@ -43,15 +43,11 @@ namespace Narvalo.Web.Configuration
 
         public string DefaultProvider
         {
-            get
-            {
-                return _defaultProvider ?? (string)base[s_DefaultProvider];
-            }
+            get => _defaultProvider ?? (string)base[s_DefaultProvider];
 
             set
             {
-                Require.NotNullOrEmpty(value, nameof(value));
-                //Enforce.NotWhiteSpace(value, nameof(value));
+                Require.NotNullOrWhiteSpace(value, nameof(value));
 
                 _defaultProvider = value;
             }
