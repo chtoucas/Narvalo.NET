@@ -1,6 +1,11 @@
 Issues (en vrac)
 ================
 
+Miscs
+-----
+
+- Integrate publish-*.fsx in make.ps1.
+
 Narvalo.Fx
 ----------
 
