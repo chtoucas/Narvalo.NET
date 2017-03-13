@@ -1,18 +1,6 @@
 Issues (en vrac)
 ================
 
-Infrastructure
---------------
-
-- Incremental build is broken when building w/ make.ps1
-  <- certainly due to the generation of an AssemblyInfo file on the fly.
-- Upgrade the MyGet server (requires .NET 4.6 to be installed) or simply
-  move to www.myget.org?
-
-Next:
-- We can certainly simplify the MSBuild scripts a bit.
-- Discuss `StructLayout.Auto`.
-
 Narvalo.Fx
 ----------
 
@@ -21,6 +9,7 @@ Narvalo.Fx
 
 Next:
 - Add `SelectMany` to `Outcome` and `Fallible`.
+- OnError(), WhenError() & co could return a boolean to signal if it did anything.
 - Explain what do we mean by shadowing.
 - More Haskell API, eg When, Forever & co?
 - Add async and lazy alternatives?
