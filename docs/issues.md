@@ -16,8 +16,7 @@ Narvalo.Fx
 - Simplify LINQ for Maybe<T?>.
 
 Next:
-- Add `SelectMany` to `Outcome` and `Fallible`.
-- Deprecate some of the methods `ValueOr...`
+- Add `SelectMany` to `Outcome` and `Fallible`... OR remove `Select`.
 - `OnError()`, `WhenError()` & co could return a boolean to signal if it did anything.
 - Explain what do we mean by shadowing.
 - More Haskell API, eg When, Forever & co?
@@ -33,6 +32,7 @@ Narvalo.Money
 - `DecimalRounding.Scale()`, check for minimal value?
 
 Next:
+- Review the formatting stuff + enhance.
 - Implements `DitheredRoundingAdjuster`.
 - Bias allocation: First, Last, Lowest, Highest, Pseudorandom.
 - Distribution: PseudoUniform, Single, Evenly, Spread.
