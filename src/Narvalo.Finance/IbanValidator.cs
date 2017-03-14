@@ -55,7 +55,7 @@ namespace Narvalo.Finance
 
         public static bool VerifyBban(IbanParts parts)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("BBAN validation is still in the work.");
         }
 
         public static bool VerifyIntegrity(IbanParts parts) => IbanCheckDigits.Verify(parts.LiteralValue);

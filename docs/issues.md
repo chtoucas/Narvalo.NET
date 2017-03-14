@@ -4,7 +4,7 @@ Issues (en vrac)
 Miscs
 -----
 
-- Integrate publish-*.fsx in make.ps1.
+- Integrate publish-*.fsx into make.ps1.
 
 Narvalo.Fx
 ----------
@@ -23,23 +23,34 @@ Next:
 - Complete T4 generation of tests for all monads.
 - [Idioms](http://tomasp.net/blog/idioms-in-linq.aspx/)
 
-Narvalo.Finance
----------------
+Narvalo.Money
+-------------
 
 - Protect `Multiply`, `Divide` and `Remainder` against absurd results when rounding.
 - `DecimalRounding.Scale()`, check for minimal value?
 
 Next:
+- Implements `DitheredRoundingAdjuster`.
+- Bias allocation: First, Last, Lowest, Highest, Pseudorandom.
+- Distribution: PseudoUniform, Single, Evenly, Spread.
 - Inspirations:
-  * JodaMoney & NodaMoney
+  * JodaMoney
+  * NodaMoney
   * [Money Type for the CLR](https://bitbucket.org/rplaire/money-type-for-the-clr)
   * [CSharpMoney](https://csharpmoney.codeplex.com/)
   * [NMoneys](https://github.com/dgg/nmoneys)
-  * [France](http://marlot.org/util/calcul-de-la-cle-nir.php)
+
+Narvalo.Finance
+---------------
+
+- BBAN validation.
+
+Next:
 - BBAN and IIBAN implementations:
   * [PHP-IBAN](https://github.com/globalcitizen/php-iban)
   * [BBAN](https://github.com/globalcitizen/php-iban/issues/39)
   * [python-stdnum](https://github.com/arthurdejong/python-stdnum)
+  * [France](http://marlot.org/util/calcul-de-la-cle-nir.php)
 
 Narvalo.Mvp
 -----------
