@@ -16,97 +16,85 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Samples\Func.cs" />
-    <Compile Include="Haskell\Comonad.cs" />
-    <Compile Include="Haskell\IMonadPlus.cs" />
-    <Compile Include="Haskell\KleisliOperators.cs" />
-    <Compile Include="Haskell\ActionOperators.cs" />
-    <Compile Include="Haskell\PrototypeException.cs" />
-    <Compile Include="Haskell\IApplicative.cs" />
-    <Compile Include="Haskell\IFunctor.cs" />
-    <Compile Include="Haskell\IMonad.cs" />
-    <Compile Include="Haskell\Prototype.cs" />
-    <Compile Include="Haskell\QueryOperators.cs" />
-    <Compile Include="Haskell\IAlternative.cs" />
-    <Compile Include="Haskell\Rules\ApplicativeRules.cs" />
-    <Compile Include="Haskell\Rules\FunctorRules.cs" />
-    <Compile Include="Haskell\Tmp\Kleisli.cs" />
-    <Compile Include="Haskell\Tmp\Mu.cs" />
-    <Compile Include="Haskell\Tmp\Rules.cs" />
-    <Compile Include="Linq\IGroupingQuerySyntax`1.cs" />
-    <Compile Include="Linq\IOrderedQuerySyntax`1.cs" />
-    <Compile Include="Linq\IQuerySyntax.cs" />
-    <Compile Include="Linq\IQuerySyntax`1.cs" />
-    <Compile Include="Linq\Qperators.cs" />
-    <Compile Include="Samples\Ident.g.cs">
+    <Compile Include="Comonad.cs" />
+    <Compile Include="IMonadPlus.cs" />
+    <Compile Include="KleisliOperators.cs" />
+    <Compile Include="ActionOperators.cs" />
+    <Compile Include="PrototypeException.cs" />
+    <Compile Include="IApplicative.cs" />
+    <Compile Include="IFunctor.cs" />
+    <Compile Include="IMonad.cs" />
+    <Compile Include="Prototype.cs" />
+    <Compile Include="QueryOperators.cs" />
+    <Compile Include="IAlternative.cs" />
+    <Compile Include="Rules\ApplicativeRules.cs" />
+    <Compile Include="Rules\FunctorRules.cs" />
+    <Compile Include="Tmp\Kleisli.cs" />
+    <Compile Include="Tmp\Mu.cs" />
+    <Compile Include="Tmp\Rules.cs" />
+    <Compile Include="Templates\Ident.g.cs">
       <DependentUpon>Ident.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Samples\Ident`1.cs" />
-    <Compile Include="Samples\Nullable.cs" />
-    <Compile Include="Samples\TaskHelpers.cs" />
-    <Compile Include="Sequences\Factorial.cs" />
-    <Compile Include="Sequences\PythagoreanTriples.cs" />
-    <Compile Include="Sequences\Fibonacci.cs" />
-    <Compile Include="Haskell\Templates\Comonad.g.cs">
+    <Compile Include="Templates\Ident`1.cs" />
+    <Compile Include="Templates\Comonad.g.cs">
       <DependentUpon>Comonad.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Haskell\Templates\Comonad`1.cs" />
-    <Compile Include="Haskell\Templates\Internal\Enumerable%24.cs" />
-    <Compile Include="Haskell\Templates\Monad.g.cs">
+    <Compile Include="Templates\Comonad`1.cs" />
+    <Compile Include="Templates\Internal\Enumerable%24.cs" />
+    <Compile Include="Templates\Monad.g.cs">
       <DependentUpon>Monad.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Haskell\Templates\MonadOr.g.cs">
+    <Compile Include="Templates\MonadOr.g.cs">
       <DependentUpon>MonadOr.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Haskell\Templates\MonadOr`1.cs" />
-    <Compile Include="Haskell\Templates\MonadPlus.g.cs">
+    <Compile Include="Templates\MonadOr`1.cs" />
+    <Compile Include="Templates\MonadPlus.g.cs">
       <DependentUpon>MonadPlus.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Haskell\Templates\MonadPlus`1.cs" />
-    <Compile Include="Haskell\Templates\MonadZero.g.cs">
+    <Compile Include="Templates\MonadPlus`1.cs" />
+    <Compile Include="Templates\MonadZero.g.cs">
       <DependentUpon>MonadZero.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Haskell\Templates\MonadZero`1.cs" />
-    <Compile Include="Haskell\Templates\Monad`1.cs" />
-    <Compile Include="Haskell\NamespaceDoc.cs" />
+    <Compile Include="Templates\MonadZero`1.cs" />
+    <Compile Include="Templates\Monad`1.cs" />
+    <Compile Include="NamespaceDoc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Thunk.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Haskell\Templates\Comonad.tt">
+    <Content Include="Templates\Comonad.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Comonad.g.cs</LastGenOutput>
     </Content>
-    <Content Include="Haskell\Templates\Monad.tt">
+    <Content Include="Templates\Monad.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Monad.g.cs</LastGenOutput>
     </Content>
-    <Content Include="Haskell\Templates\MonadOr.tt">
+    <Content Include="Templates\MonadOr.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MonadOr.g.cs</LastGenOutput>
     </Content>
-    <Content Include="Haskell\Templates\MonadPlus.tt">
+    <Content Include="Templates\MonadPlus.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MonadPlus.g.cs</LastGenOutput>
     </Content>
-    <Content Include="Haskell\Templates\MonadZero.tt">
+    <Content Include="Templates\MonadZero.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MonadZero.g.cs</LastGenOutput>
     </Content>
     <None Include="packages.config" />
-    <None Include="Samples\Ident.tt">
+    <None Include="Templates\Ident.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Ident.g.cs</LastGenOutput>
     </None>
@@ -129,6 +117,7 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
