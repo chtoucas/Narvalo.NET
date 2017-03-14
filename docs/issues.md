@@ -5,7 +5,9 @@ Miscs
 -----
 
 - Integrate publish-*.fsx into make.ps1.
-- There is a problem w/ dependency resolution for EDGE packages on myget.org.
+- I think there is a problem w/ dependency resolution for EDGE packages
+  on myget.org.
+- Should we remove the EDGE suffix now that they always have a higher version?
 - Finish localization in french and english.
 
 Narvalo.Fx

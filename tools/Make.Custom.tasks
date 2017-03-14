@@ -107,6 +107,13 @@ if (!Retail) {
     // dynamically replaced by a timestamp in Make.CustomAfter.targets.
     int prereleaseIndex = version.LastIndexOf("-");
     if (prereleaseIndex > 0) { version = version.Remove(prereleaseIndex); }
+
+    // If you change what's below, also change __PatchNuProject in Make.CustomAfter.targets.
+    // We automatically increment the patch version so that edge packages always
+    // have a higher version number than the release package.
+    int patchIndex = version.LastIndexOf(".");
+    int patchVersion = Convert.ToInt32(version.Substring(patchIndex + 1));
+    version = version.Substring(0, patchIndex + 1) + (1 + patchVersion).ToString();
 }
 
 ProductVersion = version;
