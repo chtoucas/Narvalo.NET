@@ -5,21 +5,24 @@ Miscs
 -----
 
 - Integrate publish-*.fsx into make.ps1.
+- Reorganize NuGet projects (remove the useless subdirectories).
+- For EDGE packages, increment the patch by 1 on the fly.
+  There is a problem w/ dependcy resolution for EDGE packages on myget.org.
+- Finish localization in french and english.
 
 Narvalo.Fx
 ----------
 
-- Find better names for `Stateful` methods and decide what to do with it:
-  should it be part of Narvalo.Fx or Edufun.
+- Simplify LINQ for Maybe<T?>.
 
 Next:
 - Add `SelectMany` to `Outcome` and `Fallible`.
-- Deprecate some of `ValueOr...`
+- Deprecate some of the methods `ValueOr...`
 - `OnError()`, `WhenError()` & co could return a boolean to signal if it did anything.
 - Explain what do we mean by shadowing.
 - More Haskell API, eg When, Forever & co?
 - Add async and lazy alternatives?
-- Add Continuation and IO monads, at least in Edufun?
+- Add Continuation and IO monads, doubtful?
 - Complete T4 generation of tests for all monads.
 - [Idioms](http://tomasp.net/blog/idioms-in-linq.aspx/)
 
