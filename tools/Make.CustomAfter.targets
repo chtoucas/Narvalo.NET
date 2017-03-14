@@ -259,6 +259,9 @@ using System.Reflection;
 
     <PropertyGroup>
       <EDGE>EDGE</EDGE>
+      <!-- We automatically increment the patch version so that edge packages always
+           have a higher version number than the release package. -->
+      <PatchVersion>$([MSBuild]::Add($(PatchVersion), 1))</PatchVersion>
 
       <NuId>$(NuId).$(EDGE)</NuId>
       <NuTitle Condition=" '$(NuTitle)' != '' ">$(NuTitle) ($(EDGE))</NuTitle>

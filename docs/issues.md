@@ -6,8 +6,7 @@ Miscs
 
 - Integrate publish-*.fsx into make.ps1.
 - Reorganize NuGet projects (remove the useless subdirectories).
-- For EDGE packages, increment the patch by 1 on the fly.
-  There is a problem w/ dependcy resolution for EDGE packages on myget.org.
+- There is a problem w/ dependency resolution for EDGE packages on myget.org.
 - Finish localization in french and english.
 
 Narvalo.Fx
