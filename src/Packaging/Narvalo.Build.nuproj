@@ -13,7 +13,7 @@ Provides custom MSBuild tasks: helpers to generate and verify assembly versions,
 
     <NuFiles>
       <![CDATA[
-<file src="$(MSBuildThisFileDirectory)build\Narvalo.Build.tasks" target="build\" />
+<file src="$(MSBuildThisFileDirectory)Narvalo.Build\Narvalo.Build.tasks" target="build\" />
 <file src="Narvalo.Build.dll" target="tools\" />
       ]]>
     </NuFiles>

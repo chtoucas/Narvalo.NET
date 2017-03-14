@@ -5,7 +5,6 @@ Miscs
 -----
 
 - Integrate publish-*.fsx into make.ps1.
-- Reorganize NuGet projects (remove the useless subdirectories).
 - There is a problem w/ dependency resolution for EDGE packages on myget.org.
 - Finish localization in french and english.
 

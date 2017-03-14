@@ -89,9 +89,9 @@
     <PackagesConfig>$(MSBuildProjectDirectory)\packages.config</PackagesConfig>
 
     <!-- The root directory for NuGet projects. -->
-    <NuProjectsRoot>$(RepositoryRoot)src\NuGet\</NuProjectsRoot>
+    <NuProjectsRoot>$(RepositoryRoot)src\Packaging\</NuProjectsRoot>
 
-    <NuProjectFile>$(NuProjectsRoot)$(AssemblyName)\$(AssemblyName).nuproj</NuProjectFile>
+    <NuProjectFile>$(NuProjectsRoot)$(AssemblyName).nuproj</NuProjectFile>
 
     <NuProjectExists Condition=" Exists('$(NuProjectFile)') ">true</NuProjectExists>
     <NuProjectExists Condition=" '$(NuProjectExists)' != 'true' ">false</NuProjectExists>
