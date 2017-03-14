@@ -83,18 +83,13 @@ namespace Narvalo.Applicative
             return IsSome ? Value : valueFactory();
         }
 
-        public T ValueOrThrow(Exception exception)
-        {
-            Require.NotNull(exception, nameof(exception));
-
-            throw exception;
-        }
+        public T ValueOrThrow() => IsSome ? Value : throw new InvalidOperationException();
 
         public T ValueOrThrow(Func<Exception> exceptionFactory)
         {
             Require.NotNull(exceptionFactory, nameof(exceptionFactory));
 
-            return IsNone ? throw exceptionFactory() : Value;
+            return IsSome ? Value : throw exceptionFactory();
         }
 
         public override string ToString() => IsSome ? "Maybe(" + Value.ToString() + ")" : "Maybe(None)";
