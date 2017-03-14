@@ -32,12 +32,6 @@
     <Compile Include="Tmp\Kleisli.cs" />
     <Compile Include="Tmp\Mu.cs" />
     <Compile Include="Tmp\Rules.cs" />
-    <Compile Include="Templates\Ident.g.cs">
-      <DependentUpon>Ident.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Templates\Ident`1.cs" />
     <Compile Include="Templates\Comonad.g.cs">
       <DependentUpon>Comonad.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -94,10 +88,6 @@
       <LastGenOutput>MonadZero.g.cs</LastGenOutput>
     </Content>
     <None Include="packages.config" />
-    <None Include="Templates\Ident.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Ident.g.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
