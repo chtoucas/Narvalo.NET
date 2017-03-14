@@ -87,22 +87,6 @@ namespace Narvalo.Applicative
             return IsSuccess ? Value : valueFactory();
         }
 
-        public T ValueOrThrow(Exception exception)
-        {
-            Require.NotNull(exception, nameof(exception));
-
-            if (IsError) { throw exception; }
-            return Value;
-        }
-
-        public T ValueOrThrow(Func<Exception> exceptionFactory)
-        {
-            Require.NotNull(exceptionFactory, nameof(exceptionFactory));
-
-            if (IsError) { throw exceptionFactory(); }
-            return Value;
-        }
-
         public T ValueOrThrow(Func<string, Exception> exceptionFactory)
         {
             Require.NotNull(exceptionFactory, nameof(exceptionFactory));
