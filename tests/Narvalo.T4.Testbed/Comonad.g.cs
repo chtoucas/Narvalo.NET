@@ -10,7 +10,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Edufun.Templates
+namespace Narvalo.T4.Testbed
 {
     // T4: EmitComonadHelpers().
     public static partial class Comonad

@@ -1,33 +1,33 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Edufun.Templates
+namespace Narvalo.T4.Testbed
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
 
     using Narvalo.Applicative;
 
-    public partial class MonadOr<T>
+    public partial class MonadPlus<T>
     {
         [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
-        public static MonadOr<T> None { get { throw new PrototypeException(); } }
+        public static MonadPlus<T> Zero { get { throw new PrototypeException(); } }
 
-        public MonadOr<T> OrElse(MonadOr<T> other)
+        public MonadPlus<T> Plus(MonadPlus<T> other)
         {
             throw new PrototypeException();
         }
 
-        public MonadOr<TResult> Bind<TResult>(Func<T, MonadOr<TResult>> selector)
+        public MonadPlus<TResult> Bind<TResult>(Func<T, MonadPlus<TResult>> selector)
         {
             throw new PrototypeException();
         }
 
-        internal static MonadOr<T> η(T value)
+        internal static MonadPlus<T> η(T value)
         {
             throw new PrototypeException();
         }
 
-        internal static MonadOr<T> μ(MonadOr<MonadOr<T>> square)
-            => square.Bind(Stubs<MonadOr<T>>.Identity);
+        internal static MonadPlus<T> μ(MonadPlus<MonadPlus<T>> square)
+            => square.Bind(Stubs<MonadPlus<T>>.Identity);
     }
 }

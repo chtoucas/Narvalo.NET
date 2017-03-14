@@ -10,18 +10,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Require = global::Narvalo.Require;
 using _Unit_ = global::Narvalo.Applicative.Unit;
 
-namespace Edufun.Templates
+namespace Narvalo.T4.Testbed
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
 
-    using Edufun.Templates.Internal;
-    using Edufun.Templates.Linq;
+    using Narvalo.T4.Testbed.Internal;
+    using Narvalo.T4.Testbed.Linq;
 
     // Provides a set of static methods for MonadOr<T>.
     // T4: EmitHelpers().
@@ -486,14 +485,14 @@ namespace Edufun.Templates
     }
 }
 
-namespace Edufun.Templates.Internal
+namespace Narvalo.T4.Testbed.Internal
 {
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
-    using Edufun.Templates;
+    using Narvalo.T4.Testbed;
     using Narvalo.Linq;
 
     // Provides default implementations for the extension methods for IEnumerable<MonadOr<T>>.
@@ -545,13 +544,13 @@ namespace Edufun.Templates.Internal
     }
 }
 
-namespace Edufun.Templates.Linq
+namespace Narvalo.T4.Testbed.Linq
 {
     using System;
     using System.Collections.Generic;
 
-    using Edufun.Templates;
-    using Edufun.Templates.Internal;
+    using Narvalo.T4.Testbed;
+    using Narvalo.T4.Testbed.Internal;
 
     // Provides extension methods for IEnumerable<T>.
     // We do not use the standard LINQ names to avoid any confusion.
@@ -604,7 +603,7 @@ namespace Edufun.Templates.Linq
     }
 }
 
-namespace Edufun.Templates.Internal
+namespace Narvalo.T4.Testbed.Internal
 {
     using System;
     using System.Collections.Generic;
@@ -612,7 +611,7 @@ namespace Edufun.Templates.Internal
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
-    using Edufun.Templates;
+    using Narvalo.T4.Testbed;
 
     // Provides default implementations for the extension methods for IEnumerable<T>.
     // You will certainly want to override them to improve performance.

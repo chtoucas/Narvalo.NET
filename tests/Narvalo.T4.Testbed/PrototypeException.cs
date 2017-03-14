@@ -1,9 +1,8 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Edufun
+namespace Narvalo.T4.Testbed
 {
     using System;
 
-    [Serializable]
     public class PrototypeException : NotImplementedException { }
 }
