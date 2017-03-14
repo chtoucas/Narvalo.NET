@@ -3,6 +3,7 @@
 namespace Narvalo.Finance.Allocators
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
 
     using Narvalo.Internal;
@@ -13,15 +14,7 @@ namespace Narvalo.Finance.Allocators
         {
             Require.Range(count > 1, nameof(count));
 
-            long q = penny.Amount / count;
-            var part = new Moneypenny(q, penny.Currency);
-
-            for (var i = 0; i < count - 1; i++)
-            {
-                yield return part;
-            }
-
-            yield return new Moneypenny(penny.Amount - (count - 1) * q, penny.Currency);
+            return AllocateIterator(penny, count);
         }
 
         public static IEnumerable<Moneypenny> AllocateEvenly(Moneypenny penny, int count)
@@ -31,6 +24,21 @@ namespace Narvalo.Finance.Allocators
             var cy = penny.Currency;
 
             return from amount in Number.DivideEvenly(penny.Amount, count) select new Moneypenny(amount, cy);
+        }
+
+        private static IEnumerable<Moneypenny> AllocateIterator(Moneypenny penny, int count)
+        {
+            Debug.Assert(count > 1);
+
+            long q = penny.Amount / count;
+            var part = new Moneypenny(q, penny.Currency);
+
+            for (var i = 0; i < count - 1; i++)
+            {
+                yield return part;
+            }
+
+            yield return new Moneypenny(penny.Amount - (count - 1) * q, penny.Currency);
         }
 
         //public static IEnumerable<Moneypenny> Allocate(Moneypenny penny, RatioArray ratios)

@@ -3,6 +3,7 @@
 namespace Narvalo.Finance.Allocators
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
 
     using Narvalo.Finance.Rounding;
 
@@ -22,18 +23,7 @@ namespace Narvalo.Finance.Allocators
         {
             Require.Range(count > 1, nameof(count));
 
-            var currency = money.Currency;
-            decimal total = money.Amount;
-
-            decimal q = RoundingAdjuster.Round(total / count, money.Currency.DecimalPlaces);
-            var part = Money.FromMajor(q, currency);
-
-            for (var i = 0; i < count - 1; i++)
-            {
-                yield return part;
-            }
-
-            yield return Money.FromMajor(total - (count - 1) * q, currency, RoundingAdjuster);
+            return AllocateIterator(money, count);
         }
 
         public IEnumerable<Money> Allocate(Money money, RatioArray ratios)
@@ -54,6 +44,24 @@ namespace Narvalo.Finance.Allocators
             }
 
             yield return Money.FromMajor(last, currency, RoundingAdjuster);
+        }
+
+        private IEnumerable<Money> AllocateIterator(Money money, int count)
+        {
+            Debug.Assert(count > 1);
+
+            var currency = money.Currency;
+            decimal total = money.Amount;
+
+            decimal q = RoundingAdjuster.Round(total / count, money.Currency.DecimalPlaces);
+            var part = Money.FromMajor(q, currency);
+
+            for (var i = 0; i < count - 1; i++)
+            {
+                yield return part;
+            }
+
+            yield return Money.FromMajor(total - (count - 1) * q, currency, RoundingAdjuster);
         }
     }
 }

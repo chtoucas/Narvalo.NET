@@ -3,6 +3,7 @@
 namespace Narvalo.Finance.Allocators
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
 
     public sealed class DefaultMoneyAllocator : IMoneyAllocator
     {
@@ -10,18 +11,7 @@ namespace Narvalo.Finance.Allocators
         {
             Require.Range(count > 1, nameof(count));
 
-            var currency = money.Currency;
-            decimal total = money.Amount;
-
-            decimal q = total / count;
-            var part = new Money(q, currency);
-
-            for (var i = 0; i < count - 1; i++)
-            {
-                yield return part;
-            }
-
-            yield return new Money(total - (count - 1) * q, currency);
+            return AllocateIterator(money, count);
         }
 
         public IEnumerable<Money> Allocate(Money money, RatioArray ratios)
@@ -41,6 +31,24 @@ namespace Narvalo.Finance.Allocators
             }
 
             yield return new Money(last, currency);
+        }
+
+        private IEnumerable<Money> AllocateIterator(Money money, int count)
+        {
+            Debug.Assert(count > 1);
+
+            var currency = money.Currency;
+            decimal total = money.Amount;
+
+            decimal q = total / count;
+            var part = new Money(q, currency);
+
+            for (var i = 0; i < count - 1; i++)
+            {
+                yield return part;
+            }
+
+            yield return new Money(total - (count - 1) * q, currency);
         }
     }
 }
