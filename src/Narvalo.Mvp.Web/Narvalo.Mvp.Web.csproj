@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Narvalo.Mvp.Web.Version.props" />
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Strings.resx">

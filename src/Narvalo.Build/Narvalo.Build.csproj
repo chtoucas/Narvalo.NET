@@ -33,13 +33,11 @@
     <Compile Include="JavaTasks\JavaScriptYuiCompressor.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\NuGet\Narvalo.Build\build\Narvalo.Build.tasks">
+    <None Include="..\Packaging\Narvalo.Build\Narvalo.Build.tasks">
       <Link>Narvalo.Build.tasks</Link>
     </None>
     <None Include="Narvalo.Build.Version.props" />
-    <None Include="Narvalo.Build.props">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Strings.resx">

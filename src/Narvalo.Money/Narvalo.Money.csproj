@@ -24,6 +24,7 @@
     <None Include="Narvalo.Money.Version.props">
       <SubType>Designer</SubType>
     </None>
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Finance\Allocators\DefaultMoneyAllocator.cs" />

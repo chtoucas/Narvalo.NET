@@ -1,5 +1,5 @@
-﻿Monads
-------
+﻿Monad.T4
+========
 
 In general we do not support type constraints.
 

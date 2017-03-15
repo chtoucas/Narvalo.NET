@@ -4,14 +4,14 @@ Issues & TODOs (en vrac)
 Miscs
 -----
 
+- Finish localization in french and english.
 - Integrate publish-*.fsx into make.ps1.
 - I think there is a problem w/ dependency resolution for EDGE packages
   on myget.org. Should we remove the EDGE suffix now that they always have
   a higher version number?
+- We could move package version infos into the nuproj's and
+  commeon version props to src\Packaging.
 - Enable continuous integration (Travis, AppVeyor, Coverall, Readthedoc)?
-- Finish localization in french and english.
-- Add a README to all projects and use it in the NuGet packages.
-  We could move package version infos to the nuproj's.
 
 Narvalo.Fx
 ----------
