@@ -25,7 +25,6 @@ Next:
 - Add async and lazy alternatives?
 - Complete T4 generation of tests for all monads
 - [Idioms](http://tomasp.net/blog/idioms-in-linq.aspx/)
-- Give examples: parser combinator, state-machine. See Sprache and Stateless.
 
 Narvalo.Money
 -------------
@@ -63,6 +62,7 @@ Narvalo.Mvp
 - Review `ThrowIfNoPresenterBound`, `Load` event, `PresenterBinder.Release`.
 
 Next:
+- Can it be a .NET Standard library.
 - Application Controller and Navigator.
 - Review the use of custom presenter types per platform prevents the reuse of
   presenters across different platforms. Maybe is it a necessary evil?
@@ -81,7 +81,7 @@ Notes for the other [repository](https://github.com/chtoucas/Brouillons).
 - Use the `dotnet` command-line.
 - Sync Autofac helpers & Release class w/ Quaderno.
 - Do we really need GC.SuppressFinalize(this).
-- Reboot Narvalo.Tap?
+- Reboot Narvalo.Tap and Narvalo.Ghostscript?
 - [CLDR](http://cldr.unicode.org/index/downloads)
   * [NCLDR](https://github.com/GuySmithFerrier/NCLDR)
   * [Onism](https://github.com/pgolebiowski/onism-cldr)
@@ -91,9 +91,10 @@ Notes for the other [repository](https://github.com/chtoucas/Brouillons).
 Play
 ----
 
-- Finish Haskell demo.
+- Finish monad rules.
 - Add demo codes for all monads.
-- Write and Continuation monads.
+- Add Write and Continuation monads.
+- Give examples: parser combinator (Sprache), state-machine (Stateless).
 
 Narvalo.Reliability
 -------------------
