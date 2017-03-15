@@ -10,7 +10,7 @@ Miscs
   on myget.org. Should we remove the EDGE suffix now that they always have
   a higher version number?
 - We could move package version infos into the nuproj's and
-  commeon version props to src\Packaging.
+  common version props to src\Packaging.
 - Enable continuous integration (Travis, AppVeyor, Coverall, Readthedoc)?
 
 Narvalo.Fx
