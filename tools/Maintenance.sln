@@ -25,7 +25,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Settings", "1. Settings"
 		..\etc\packages.config = ..\etc\packages.config
 		..\etc\Samples.props = ..\etc\Samples.props
 		..\etc\Strict.ruleset = ..\etc\Strict.ruleset
-		..\etc\Template.nuspec = ..\etc\Template.nuspec
 		..\etc\Tests.props = ..\etc\Tests.props
 		..\etc\Tests.ruleset = ..\etc\Tests.ruleset
 	EndProjectSection
@@ -37,9 +36,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Narvalo.Build", "Narvalo.Bu
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. NuGet", "2. NuGet", "{C951776C-B912-4BB2-95ED-02A5D7A3F4A4}"
 	ProjectSection(SolutionItems) = preProject
-		..\etc\FrameworkProfiles.props = ..\etc\FrameworkProfiles.props
+		..\src\Packaging\FrameworkProfiles.props = ..\src\Packaging\FrameworkProfiles.props
 		..\etc\Narvalo.CurrentVersion.props = ..\etc\Narvalo.CurrentVersion.props
 		..\etc\Narvalo.Mvp.CurrentVersion.props = ..\etc\Narvalo.Mvp.CurrentVersion.props
+		..\src\Packaging\Template.nuspec = ..\src\Packaging\Template.nuspec
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Scripts", "4. Scripts", "{E886C15F-0369-4B3A-B2F2-4B7C0000E27D}"

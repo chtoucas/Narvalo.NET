@@ -20,6 +20,7 @@
 
       <Title ParameterType="System.String" />
       <Summary ParameterType="System.String" />
+      <ProjectUrl ParameterType="System.String" />
       <ReleaseNotes ParameterType="System.String" />
       <Copyright ParameterType="System.String" />
       <Tags ParameterType="System.String" />
@@ -38,6 +39,7 @@ try {
       .Replace("$files$", Files)
 
       .Replace("$title$", String.IsNullOrWhiteSpace(Title) ? String.Empty : "<title>" + Title + "</title>")
+      .Replace("$projectUrl$", String.IsNullOrWhiteSpace(Title) ? String.Empty : "<projectUrl>" + ProjectUrl + "</projectUrl>")
       .Replace("$summary$", String.IsNullOrWhiteSpace(Summary) ? String.Empty : "<summary>" + Summary + "</summary>")
       .Replace("$releaseNotes$", String.IsNullOrWhiteSpace(ReleaseNotes) ? String.Empty : "<releaseNotes>" + ReleaseNotes + "</releaseNotes>")
       .Replace("$copyright$", String.IsNullOrWhiteSpace(Copyright) ? String.Empty : "<copyright>" + Copyright + "</copyright>")

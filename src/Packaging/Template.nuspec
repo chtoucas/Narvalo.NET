@@ -5,8 +5,8 @@
     <version>$version$</version>
     <authors>Narvalo.Org</authors>
     <owners>chtoucas</owners>
-    <licenseUrl>http://www.freebsd.org/copyright/license.html</licenseUrl>
-    <projectUrl>https://github.com/chtoucas/Narvalo.NET</projectUrl>
+    <licenseUrl>https://github.com/chtoucas/Narvalo.NET/blob/master/LICENSE.txt</licenseUrl>
+    $projectUrl$
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     $title$
     <description>$description$</description>

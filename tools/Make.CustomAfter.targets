@@ -164,7 +164,7 @@ using System.Reflection;
     <Error Text="You MUST NOT use 'SkipDocumentation=true' when creating a NuGet package."
            Condition=" '$(SkipDocumentation)' == 'true' " />
 
-    <WriteNuspec TemplateFile="$(RepositorySettingsDir)Template.nuspec"
+    <WriteNuspec TemplateFile="$(NuProjectsRoot)Template.nuspec"
                  OutFile="$(NuspecFile)"
 
                  Id="$(NuId)"
@@ -173,6 +173,7 @@ using System.Reflection;
                  Files="$(NuFiles)"
 
                  Title="$(NuTitle)"
+                 ProjectUrl="$(NuProjectUrl)"
                  Summary="$(NuSummary)"
                  Copyright="$(NuCopyright)"
                  Tags="$(NuTags)"

@@ -11,6 +11,7 @@ Miscs
 - Enable continuous integration (Travis, AppVeyor, Coverall, Readthedoc)?
 - Finish localization in french and english.
 - Add a README to all projects and use it in the NuGet packages.
+  We could move package version infos to the nuproj's.
 
 Narvalo.Fx
 ----------

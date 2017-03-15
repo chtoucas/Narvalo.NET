@@ -107,6 +107,7 @@
     <NuTitle Condition=" $(NuTitle) == '' ">$(NuId)</NuTitle>
     <NuDescription Condition=" '$(NuDescription)' == '' ">$(NuSummary)</NuDescription>
     <NuCopyright Condition=" $(NuCopyright) == '' ">Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
+    <NuProjectUrl Condition=" $(NuProjectUrl) == '' ">https://github.com/chtoucas/Narvalo.NET/tree/master/src/$(AssemblyName)</NuProjectUrl>
   </PropertyGroup>
 
   <!-- T4 settings. -->
