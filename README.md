@@ -9,8 +9,8 @@ Narvalo.NET
 Unstable packages are available on [MyGet](https://www.myget.org/).
 
 ## General Purpose Libraries
-- **Narvalo.Core** ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Core/))
-  [![MyGet](https://img.shields.io/myget/narvalo-edge/v/Narvalo.Core.EDGE.svg)](https://www.myget.org/feed/narvalo-edge/package/nuget/Narvalo.Core.EDGE)
+- **[Narvalo.Core](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Core/)**
+  [![NuGet](https://img.shields.io/nuget/v/Narvalo.Core.svg)](https://www.nuget.org/packages/Narvalo.Core/)
 - **Narvalo.Fx**
   [![NuGet](https://img.shields.io/nuget/v/Narvalo.Fx.svg)](https://www.nuget.org/packages/Narvalo.Fx/)
   [![MyGet](https://img.shields.io/myget/narvalo-edge/v/Narvalo.Fx.EDGE.svg)](https://www.myget.org/feed/narvalo-edge/package/nuget/Narvalo.Fx.EDGE),
