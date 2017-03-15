@@ -1,5 +1,5 @@
-Issues (en vrac)
-================
+Issues & TODOs (en vrac)
+========================
 
 Miscs
 -----
@@ -21,9 +21,10 @@ Next:
 - Explain what do we mean by shadowing.
 - More Haskell API, eg When, Forever & co?
 - Add async and lazy alternatives?
-- Add Continuation and IO monads, doubtful?
 - Complete T4 generation of tests for all monads.
+- Add Continuation and IO monads, doubtful?
 - [Idioms](http://tomasp.net/blog/idioms-in-linq.aspx/)
+- Give examples w/ a parser combinator, a state-machine.
 
 Narvalo.Money
 -------------
@@ -61,7 +62,6 @@ Narvalo.Mvp
 - Review `ThrowIfNoPresenterBound`, `Load` event, `PresenterBinder.Release`.
 
 Next:
-- Add localized messages?
 - Application Controller and Navigator.
 - Review the use of custom presenter types per platform prevents the reuse of
   presenters across different platforms. Maybe is it a necessary evil?
@@ -71,11 +71,35 @@ Next:
   See [here](http://aspiringcraftsman.com/tag/model-view-presenter/)
   and [here](http://aspiringcraftsman.com/2007/08/25/interactive-application-architecture/)
 
-Future plans (?)
-----------------
+Futures
+=======
 
+Notes for the other [repository](https://github.com/chtoucas/Brouillons).
+
+- Use a common MSBuild configuration for .NET Standard and .NET Core.
+- Use the `dotnet` command-line.
+- Sync Autofac helpers & Release class w/ Quaderno
+
+- Reliability patterns?
+  * [Polly](https://github.com/App-vNext/Polly)
+  * [kite](https://github.com/williewheeler/kite)
+  * jrugged
+  * [Hystrix](https://github.com/Netflix/Hystrix)
+- Revive Narvalo.Tap
 - [CLDR](http://cldr.unicode.org/index/downloads)
   * [NCLDR](https://github.com/GuySmithFerrier/NCLDR)
   * [Onism](https://github.com/pgolebiowski/onism-cldr)
   * [cldrjs](https://github.com/rxaviers/cldrjs)
 - INSEE COG
+
+Narvalo.Mvp.Windows.Forms
+-------------------------
+
+- Cross-presenter communication is not functional.
+  Things to work on before it might prove to be useful:
+  * Right now, only controls contained in a MvpForm share the same presenter binder.
+    We need something similar to what is done with ASP.NET (`PageHost`) but the situation
+    is a bit more complicated due to the different execution model. Controls
+    are fully loaded before we reach the `CreateControl` or `Load` events in the form
+    container where we normally perform the binding.
+  * The message coordinator must support unsubscription (automatic or manual).
