@@ -6,9 +6,11 @@ Miscs
 
 - Integrate publish-*.fsx into make.ps1.
 - I think there is a problem w/ dependency resolution for EDGE packages
-  on myget.org.
-- Should we remove the EDGE suffix now that they always have a higher version?
+  on myget.org. Should we remove the EDGE suffix now that they always have
+  a higher version number?
+- Enable continuous integration (Travis, AppVeyor, Coverall, Readthedoc)?
 - Finish localization in french and english.
+- Add a README to all projects and use it in the NuGet packages.
 
 Narvalo.Fx
 ----------
@@ -21,10 +23,9 @@ Next:
 - Explain what do we mean by shadowing.
 - More Haskell API, eg When, Forever & co?
 - Add async and lazy alternatives?
-- Complete T4 generation of tests for all monads.
-- Add Continuation and IO monads, doubtful?
+- Complete T4 generation of tests for all monads
 - [Idioms](http://tomasp.net/blog/idioms-in-linq.aspx/)
-- Give examples w/ a parser combinator, a state-machine.
+- Give examples: parser combinator, state-machine. See Sprache and Stateless.
 
 Narvalo.Money
 -------------
@@ -78,19 +79,30 @@ Notes for the other [repository](https://github.com/chtoucas/Brouillons).
 
 - Use a common MSBuild configuration for .NET Standard and .NET Core.
 - Use the `dotnet` command-line.
-- Sync Autofac helpers & Release class w/ Quaderno
-
-- Reliability patterns?
-  * [Polly](https://github.com/App-vNext/Polly)
-  * [kite](https://github.com/williewheeler/kite)
-  * jrugged
-  * [Hystrix](https://github.com/Netflix/Hystrix)
-- Revive Narvalo.Tap
+- Sync Autofac helpers & Release class w/ Quaderno.
+- Do we really need GC.SuppressFinalize(this).
+- Reboot Narvalo.Tap?
 - [CLDR](http://cldr.unicode.org/index/downloads)
   * [NCLDR](https://github.com/GuySmithFerrier/NCLDR)
   * [Onism](https://github.com/pgolebiowski/onism-cldr)
   * [cldrjs](https://github.com/rxaviers/cldrjs)
 - INSEE COG
+
+Play
+----
+
+- Finish Haskell demo.
+- Add demo codes for all monads.
+- Write and Continuation monads.
+
+Narvalo.Reliability
+-------------------
+
+References:
+- [Polly](https://github.com/App-vNext/Polly)
+- [kite](https://github.com/williewheeler/kite)
+- jrugged
+- [Hystrix](https://github.com/Netflix/Hystrix)
 
 Narvalo.Mvp.Windows.Forms
 -------------------------

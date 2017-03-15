@@ -60,7 +60,6 @@
     <None Include="CodeTemplates\Outcome.tt" />
     <None Include="CodeTemplates\Monad\EmitExtensionsExtras.tt" />
     <None Include="CodeTemplates\Monad\EmitApplicative.tt" />
-    <None Include="CodeTemplates\State.tt" />
     <Content Include="README.txt" />
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
