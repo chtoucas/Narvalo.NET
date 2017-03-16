@@ -51,12 +51,15 @@ We mostly follow the guidelines produced by the .NET teams:
 [corefx](https://github.com/dotnet/corefx/blob/master/Documentation/coding-guidelines/)
 and [coreclr](https://github.com/dotnet/coreclr/blob/master/Documentation/coding-guidelines/).
 
+To enforce the coding rules, we use the [codeformatter](https://github.com/dotnet/codeformatter)
+tool.
+
 In addition:
 - Consider using tasks: FIXME, HACK, TODO, REVIEW.
-- For temporary strings, use `"XXX"`.
+- For temporary strings, use `XXX`.
 - For tests, consider using traits:
-  * "Slow" for slow tests.
-  * "Unsafe" for unsafe tests (`AppDomain` for instance).
+  * `Slow` for slow tests.
+  * `Unsafe` for unsafe tests (`AppDomain` for instance).
 
 All Code Analysis suppressions must be justified and tagged:
 - `[Ignore]` Only use this one to tag a false positive.
@@ -292,7 +295,7 @@ Checklist:
 - Individual versions in `src\Versioning`, if they differ from the shared ones.
 - Individual package descriptions in `src\Packaging`.
 - Check that the property `frameworkAssemblies` in nuspec's do not need any update.
-- Check `TargetFrameworkVersion` in projects and the one in the nuspec's must match.
+- Check that the `TargetFrameworkVersion` in projects and the one in the nuspec's must match.
 
 To release a new version of a package (for instance the core packages):
 1. Create the packages: `make.ps1 -r pack`.
