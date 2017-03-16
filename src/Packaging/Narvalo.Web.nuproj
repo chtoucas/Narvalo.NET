@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <NuId>Narvalo.Web</NuId>
-    <NuDescription>
+    <PackageId>Narvalo.Web</PackageId>
+    <PackageDescription>
       <![CDATA[
 Provides types that might prove useful for Web development: generic HttpHandler type, asset providers, Razor and WebForms compile-time optimizers.
       ]]>
-    </NuDescription>
-    <NuTags>ASP.NET, MVC, WebForms, Razor, Optimization</NuTags>
+    </PackageDescription>
+    <PackageTags>ASP.NET, MVC, WebForms, Razor, Optimization</PackageTags>
 
     <NuFrameworkAssemblies>
       <![CDATA[
@@ -36,5 +36,6 @@ Provides types that might prove useful for Web development: generic HttpHandler 
 <file src="fr\Narvalo.Web.resources.dll" target="lib\net45\fr\" />
       ]]>
     </NuFiles>
-  </PropertyGroup>
+
+</PropertyGroup>
 </Project>

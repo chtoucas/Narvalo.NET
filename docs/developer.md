@@ -4,6 +4,7 @@ Developer Guidelines
 - [Overview](#overview)
 - [Coding Rules](#coding-rules)
 - [Project Configuration](#project-configuration)
+- [Localization](#localization)
 - [Versioning](#versioning)
 - [Packaging](#packaging)
 - [Developer Operations](#developer-operations)
@@ -32,6 +33,7 @@ Requirements:
   * `src\Versioning`, assembly versions.
 - `tests`, test projects.
 - `tools`, build and maintenance scripts.
+  * `tools\lib`, Visual Studio runtime dependencies.
 
 Temporary directories:
 - `packages`, local repository of NuGet packages.
@@ -211,6 +213,18 @@ This has ony one effect:
 
 --------------------------------------------------------------------------------
 
+Localization
+------------
+
+English is the default language. Localized resources are to be found in the
+subdirectory `Properties`. Sometimes we provide resources in french too.
+
+**WARNING** Many projects use the same root namespace, to avoid any conflict,
+it is better then to choose different names for each resources. For instance,
+we use `Properties\Strings_Core.resx` for Narvalo.Core.
+
+--------------------------------------------------------------------------------
+
 Versioning
 ----------
 
@@ -297,7 +311,10 @@ Checklist:
 - Individual versions in `src\Versioning`, if they differ from the shared ones.
 - Individual package descriptions in `src\Packaging`.
 - Check that the property `frameworkAssemblies` in nuspec's do not need any update.
-- Check that the `TargetFrameworkVersion` in projects and the one in the nuspec's must match.
+- Check that the `TargetFrameworkVersion` property in the project file and
+  the one in the nuspec's must match.
+- Check that there is no new resources, eg a satellite assembly for french or
+  a Code Contracts assembly.
 
 To release a new version to the official NuGet repository:
 1. Create the packages: `make.ps1 -r pack`.

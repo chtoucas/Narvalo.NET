@@ -5,6 +5,7 @@ Miscs
 -----
 
 - Finish localization in french and english.
+- There might be a conflict with the new package format and our target `Package`.
 - Update CodeFormatter when it supports C# 7.0. After that, change
   from `format-code.cmd` to `format-code.ps1`.
 - I think there is a problem w/ dependency resolution for EDGE packages
@@ -12,6 +13,45 @@ Miscs
   a higher version number?
 - Revise the version scheme used inside Visual Studio.
 - Enable continuous integration (Travis, AppVeyor, Coverall, Readthedoc, GitLink)?
+- Update all nuproj's to use the (new) native package properties:
+```xml
+  <PropertyGroup>
+    <!--<PackageId></PackageId>-->
+    <Version></Version>
+    <Authors></Authors>
+    <Company></Company>
+    <Product></Product>
+    <!--<Description></Description>-->
+    <!--<Copyright></Copyright>-->
+    <PackageLicenseUrl></PackageLicenseUrl>
+    <!--<PackageProjectUrl></PackageProjectUrl>-->
+    <PackageIconUrl></PackageIconUrl>
+    <RepositoryUrl></RepositoryUrl>
+    <RepositoryType></RepositoryType>
+    <!--<PackageTags></PackageTags>-->
+    <!--<PackageReleaseNotes></PackageReleaseNotes>-->
+    <NeutralLanguage></NeutralLanguage>
+    <AssemblyVersion></AssemblyVersion>
+    <FileVersion></FileVersion>
+  </PropertyGroup>
+```
+  We can be a bit smarter and merge Description, Copyright w/ PackageDescription,
+  PackageCopyright.
+- Migration to .NET Standard (pending: support for Code Analysis). There are plenty
+  of new properties, for instance:
+```xml
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
+    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
+    <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
+    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+  </PropertyGroup>
+```
 
 Narvalo.Fx
 ----------

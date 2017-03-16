@@ -3,13 +3,13 @@
   <Import Project="$(MSBuildThisFileDirectory)PortableProfiles.props" />
 
   <PropertyGroup>
-    <NuId>Narvalo.Finance</NuId>
-    <NuDescription>
+    <PackageId>Narvalo.Finance</PackageId>
+    <PackageDescription>
       <![CDATA[
 BIC (ISO 9362) and IBAN types w/ validators.
       ]]>
-    </NuDescription>
-    <NuTags>BIC, IBAN</NuTags>
+    </PackageDescription>
+    <PackageTags>BIC, IBAN</PackageTags>
 
     <NuReferences>
       <![CDATA[

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <NuId>Narvalo.Mvp</NuId>
-    <NuSummary>
+    <PackageId>Narvalo.Mvp</PackageId>
+    <PackageSummary>
       <![CDATA[
 Features a MVP framework largely inspired by webformsmvp. Contrary to webformsmvp, it is not restricted to the WebForms platform; nevertheless, featurewise, it should be on par with WebFormsMvp.
       ]]>
-    </NuSummary>
-    <NuDescription>
+    </PackageSummary>
+    <PackageDescription>
       <![CDATA[
-$(NuSummary)
+$(PackageSummary)
 Samples are available on the project web site.
       ]]>
-    </NuDescription>
-    <NuTags>MVP, CommandLine, Command, Line, Command-Line</NuTags>
+    </PackageDescription>
+    <PackageTags>MVP, CommandLine, Command, Line, Command-Line</PackageTags>
 
     <NuReferences>
       <![CDATA[

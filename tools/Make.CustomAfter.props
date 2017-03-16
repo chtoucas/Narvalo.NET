@@ -104,10 +104,10 @@
   <Import Project="$(NuProjectFile)" Condition=" '$(NuProjectExists)' == 'true' " />
 
   <PropertyGroup Condition=" '$(NuProjectExists)' == 'true' ">
-    <NuTitle Condition=" $(NuTitle) == '' ">$(NuId)</NuTitle>
-    <NuDescription Condition=" '$(NuDescription)' == '' ">$(NuSummary)</NuDescription>
-    <NuCopyright Condition=" $(NuCopyright) == '' ">Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
-    <NuProjectUrl Condition=" $(NuProjectUrl) == '' ">https://github.com/chtoucas/Narvalo.NET/tree/master/src/$(AssemblyName)</NuProjectUrl>
+    <PackageTitle Condition=" $(PackageTitle) == '' ">$(PackageId)</PackageTitle>
+    <PackageDescription Condition=" '$(PackageDescription)' == '' ">$(PackageSummary)</PackageDescription>
+    <PackageCopyright Condition=" $(PackageCopyright) == '' ">Copyright © 2013-$([System.DateTime]::Now.Year) Narvalo.Org</PackageCopyright>
+    <PackageProjectUrl Condition=" $(PackageProjectUrl) == '' ">https://github.com/chtoucas/Narvalo.NET/tree/master/src/$(AssemblyName)</PackageProjectUrl>
   </PropertyGroup>
 
   <!-- T4 settings. -->
@@ -151,10 +151,10 @@
 
   <!-- __ValidateNuProject target. -->
   <Target Name="__ValidateNuProject" Condition=" '$(NuProjectExists)' == 'true' ">
-    <Error Text="You MUST define the 'NuId' property in the NuGet project: $(NuProjectFile)."
-           Condition=" '$(NuId)' == '' " />
-    <Error Text="You MUST define at least one property ('NuSummary' or 'NuDescription') in the NuGet project: $(NuProjectFile)."
-           Condition=" '$(NuSummary)' == '' And '$(NuDescription)' == '' " />
+    <Error Text="You MUST define the 'PackageId' property in the NuGet project: $(NuProjectFile)."
+           Condition=" '$(PackageId)' == '' " />
+    <Error Text="You MUST define at least one property ('PackageSummary' or 'PackageDescription') in the NuGet project: $(NuProjectFile)."
+           Condition=" '$(PackageSummary)' == '' And '$(PackageDescription)' == '' " />
     <Error Text="You MUST define the 'NuFiles' property in the NuGet project: $(NuProjectFile)."
            Condition=" '$(NuFiles)' == '' " />
   </Target>

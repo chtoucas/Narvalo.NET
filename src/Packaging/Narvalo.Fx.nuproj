@@ -3,18 +3,18 @@
   <Import Project="$(MSBuildThisFileDirectory)PortableProfiles.props" />
 
   <PropertyGroup>
-    <NuId>Narvalo.Fx</NuId>
-    <NuSummary>
+    <PackageId>Narvalo.Fx</PackageId>
+    <PackageSummary>
       <![CDATA[
 Features implementations of some of the usual suspects from functional programming: Option, Error, Either.
       ]]>
-    </NuSummary>
-    <NuDescription>
+    </PackageSummary>
+    <PackageDescription>
       <![CDATA[
 Features implementations of some of the usual suspects from functional programming: option type (Maybe&lt;T&gt;), return types (Result&lt;T, TError&gt;, Outcome&lt;T&gt; and Fallible&lt;T&gt;), simple disjoint union (Either&lt;T1, T2&gt;), sequence generators and LINQ extensions.
       ]]>
-    </NuDescription>
-    <NuTags>Maybe, Option, Error, Either, Linq, Monad, Functional</NuTags>
+    </PackageDescription>
+    <PackageTags>Maybe, Option, Error, Either, Linq, Monad, Functional</PackageTags>
 
     <NuReferences>
       <![CDATA[
@@ -36,5 +36,6 @@ Features implementations of some of the usual suspects from functional programmi
 <file src="fr\Narvalo.Fx.resources.dll" target="lib\netstandard1.0\fr\" />
       ]]>
     </NuFiles>
-  </PropertyGroup>
+
+</PropertyGroup>
 </Project>

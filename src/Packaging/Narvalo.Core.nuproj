@@ -3,13 +3,13 @@
   <Import Project="$(MSBuildThisFileDirectory)PortableProfiles.props" />
 
   <PropertyGroup>
-    <NuId>Narvalo.Core</NuId>
-    <NuDescription>
+    <PackageId>Narvalo.Core</PackageId>
+    <PackageDescription>
       <![CDATA[
 Provides helpers on which depend the other Narvalo packages.
       ]]>
-    </NuDescription>
-    <NuTags>Require, Guard</NuTags>
+    </PackageDescription>
+    <PackageTags>Require, Guard</PackageTags>
 
     <NuReferences>
       <![CDATA[

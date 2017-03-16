@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <NuId>Narvalo.Build</NuId>
-    <NuDescription>
+    <PackageId>Narvalo.Build</PackageId>
+    <PackageDescription>
       <![CDATA[
 Provides custom MSBuild tasks: helpers to generate and verify assembly versions, download a file from internet, merge files, tasks for Google Closure Compiler and YUICompressor.
       ]]>
-    </NuDescription>
-    <NuTags>MSBuild, Closure, YUI, Versioning</NuTags>
+    </PackageDescription>
+    <PackageTags>MSBuild, Closure, YUI, Versioning</PackageTags>
 
     <NuGetCommandAdditionalArgs>-Tool</NuGetCommandAdditionalArgs>
 

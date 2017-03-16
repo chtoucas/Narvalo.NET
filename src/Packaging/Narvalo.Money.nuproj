@@ -3,13 +3,13 @@
   <Import Project="$(MSBuildThisFileDirectory)PortableProfiles.props" />
 
   <PropertyGroup>
-    <NuId>Narvalo.Money</NuId>
-    <NuDescription>
+    <PackageId>Narvalo.Money</PackageId>
+    <PackageDescription>
       <![CDATA[
 Currency (ISO 4217) and Money types (w/ or w/o rounding, "fast" money).
       ]]>
-    </NuDescription>
-    <NuTags>Currency, Money, Rounding, Allocation</NuTags>
+    </PackageDescription>
+    <PackageTags>Currency, Money, Rounding, Allocation</PackageTags>
 
     <NuReferences>
       <![CDATA[

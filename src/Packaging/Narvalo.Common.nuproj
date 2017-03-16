@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <NuId>Narvalo.Common</NuId>
-    <NuDescription>
+    <PackageId>Narvalo.Common</PackageId>
+    <PackageDescription>
       <![CDATA[
 Provides various utilities (simple parsers, Int64 encoders) and extension methods for Collections, SQL client and XDom.
       ]]>
-    </NuDescription>
-    <NuTags>Utilities, Extensions, SQL, XML</NuTags>
+    </PackageDescription>
+    <PackageTags>Utilities, Extensions, SQL, XML</PackageTags>
 
     <NuFrameworkAssemblies>
       <![CDATA[

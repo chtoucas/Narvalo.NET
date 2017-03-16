@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <NuId>Narvalo.Mvp.Web</NuId>
-    <NuSummary>
+    <PackageId>Narvalo.Mvp.Web</PackageId>
+    <PackageSummary>
       <![CDATA[
 Enhances the Narvalo.Mvp package with support for ASP.NET WebForms.
       ]]>
-    </NuSummary>
-    <NuDescription>
+    </PackageSummary>
+    <PackageDescription>
       <![CDATA[
-$(NuSummary)
+$(PackageSummary)
 Samples are available on the project web site.
       ]]>
-    </NuDescription>
-    <NuTags>MVP, ASP.NET, WebForms</NuTags>
+    </PackageDescription>
+    <PackageTags>MVP, ASP.NET, WebForms</PackageTags>
 
     <NuFrameworkAssemblies>
       <![CDATA[
