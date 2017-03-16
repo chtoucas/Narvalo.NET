@@ -4,7 +4,8 @@ Developer Guidelines
 - [Overview](#overview)
 - [Coding Rules](#coding-rules)
 - [Adding and Configuring a new Project](#adding-and-configuring-a-new-project)
-- [Assembly Versioning](#assembly-versioning)
+- [Versioning](#versioning)
+- [Packaging](#packaging)
 - [Developer Operations](#developer-operations)
 
 --------------------------------------------------------------------------------
@@ -16,27 +17,25 @@ Overview
 
 Requirements:
 - Visual Studio Community 2017.
-- Modeling SDK (option of the Visual Studio installer) needed for T4 integration
+- Modeling SDK (part of the Visual Studio installer) needed for T4 integration
   with MSBuild.
 - PowerShell v4+ and F# v4+ for the build scripts.
-
-Optional components:
-- [DocFX](https://dotnet.github.io/docfx/) to build the documentation.
 
 ### Project Layout
 
 - `data`, external data.
 - `docs`, documentation.
-- `etc`, shared configurations.
+- `etc`, shared configuration files.
 - `samples`, sample projects.
 - `src`, source directory.
-- `src\Packaging`, NuGet projects.
+  * `src\Packaging`, NuGet projects.
+  * `src\Versioning`, assembly versions.
 - `tests`, test projects.
 - `tools`, build and maintenance scripts.
 
 Temporary directories:
 - `packages`, local repository of NuGet packages.
-- `work`, temporary directory created during cmdline builds.
+- `work`, created by command-line builds.
 
 There are three solutions:
 - `Narvalo.sln` the main solution.
@@ -48,9 +47,9 @@ There are three solutions:
 Coding Rules
 ------------
 
-We mostly follow the guidelines produced by the .NET team:
-[CoreFX](https://github.com/dotnet/corefx/blob/master/Documentation/coding-guidelines/)
-and [CoreCLR](https://github.com/dotnet/coreclr/blob/master/Documentation/coding-guidelines/).
+We mostly follow the guidelines produced by the .NET teams:
+[corefx](https://github.com/dotnet/corefx/blob/master/Documentation/coding-guidelines/)
+and [coreclr](https://github.com/dotnet/coreclr/blob/master/Documentation/coding-guidelines/).
 
 In addition:
 - Consider using tasks: FIXME, HACK, TODO, REVIEW.
@@ -58,8 +57,6 @@ In addition:
 - For tests, consider using traits:
   * "Slow" for slow tests.
   * "Unsafe" for unsafe tests (`AppDomain` for instance).
-
-### Code Analysis
 
 All Code Analysis suppressions must be justified and tagged:
 - `[Ignore]` Only use this one to tag a false positive.
@@ -77,18 +74,16 @@ Adding and Configuring a new Project
 
 ### Initialize a C# project
 
-The following procedure enables us to centralize all settings into a single place.
-Except for Code Contracts, there should be no need to edit the project properties
-anymore.
+The following procedure enables us to centralize all settings.
 
-Create a project and add it to `Narvalo.sln` and `Make.proj`.
+Create a project and add it to `Narvalo.sln` and `tools\Make.proj`.
 
 Edit the project file:
 - Add the following line at the bottom of the project file, BEFORE the Microsoft targets:
 ```xml
 <Import Project="..\..\tools\Narvalo.Common.props" />
 ```
-- Remove all sections about Debug, Release and CodeContracts.
+- Remove all sections about Debug and Release configurations.
 - Remove all properties already configured globally.
 
 A typical project file should then look like this:
@@ -98,24 +93,16 @@ A typical project file should then look like this:
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <ProjectGuid>{XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Narvalo.XXX</RootNamespace>
     <AssemblyName>Narvalo.XXX</AssemblyName>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
     ...
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
 ```
 
-Clean up the assembly information file:
+Clean up the assembly information file (`Properties\AssemblyInfo.cs`):
 ```csharp
 // Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
@@ -124,6 +111,7 @@ using System.Reflection;
 [assembly: AssemblyTitle("The assembly title.")]
 [assembly: AssemblyDescription("The assembly description.")]
 ```
+For the assembly version see [here](#versioning).
 
 Optionally, give access to internals to the test project:
 ```csharp
@@ -132,37 +120,10 @@ Optionally, give access to internals to the test project:
 #endif
 ```
 
-### Customize the Assembly Version
+### How to override the global settings
 
-See also [Versioning](#assembly-versioning).
-- This is mandatory only for NuGet projects.
-- Test and sample projects do not need a version property file.
-
-Create a version property file: `{AssemblyName}.Version.props`:
-```xml
-<?xml version="1.0" encoding="utf-8" ?>
-<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(RepositorySettingsDir)Narvalo.CurrentVersion.props" />
-</Project>
-```
-
-When you want to override the default version properties,
-create a property file `{AssemblyName}.Version.props`:
-```xml
-<?xml version="1.0" encoding="utf-8" ?>
-<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <MajorVersion>1</MajorVersion>
-    <MinorVersion>2</MinorVersion>
-    <PatchVersion>0</PatchVersion>
-    <PreReleaseLabel></PreReleaseLabel>
-  </PropertyGroup>
-</Project>
-```
-
-### Override the global settings (sample)
-
-Create a property file `{AssemblyName}.props` with the following content:
+Create a property file `{AssemblyName}.props` for instance with the following
+content:
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
@@ -205,11 +166,11 @@ Notable additions:
 - .NET Standard 1.2 (Profile151) vs 1.1 (Profile111):
   * `System.Threading.Timer`.
 
-See also: `etc/FrameworkProfiles.props`.
+See also: `src\Packaging\PortableProfiles.props`.
 
 #### Desktop application
 
-Desktop applications should include a .ini containing:
+Desktop applications should include a .ini with:
 ```
 [.NET Framework Debugging Control]
 GenerateTrackingInfo=0
@@ -231,7 +192,7 @@ This has two consequences:
 - Test projects use a dummy assembly version.
 - Test projects use custom FxCop rules.
 
-Reference the shared project `TestCommon`.
+Reference the shared project `tests\TestCommon`.
 
 #### Sample project
 
@@ -248,45 +209,73 @@ This has ony one effect:
 
 --------------------------------------------------------------------------------
 
-Assembly Versioning
--------------------
+Versioning
+----------
 
 Reminder:
-- AssemblyVersion, version used by the runtime.
-- AssemblyFileVersion, version as seen in the file explorer,
+- `AssemblyVersion`, version used by the runtime.
+- `AssemblyFileVersion`, version as seen in the file explorer,
   also used to uniquely identify a build.
-- AssemblyInformationalVersion, the product version. In most cases
-  this is the version I shall use for NuGet package versioning.
-  This attribute follows semantic versioning rules.
+- `AssemblyInformationalVersion`, the product version. In most cases
+  this is the version we shall use for NuGet package versioning.
 
 We use the following:
-- AssemblyVersion = MAJOR.MINOR.0.0
-- AssemblyFileVersion = MAJOR.MINOR.BUILD.REVISION
-- AssemblyInformationalVersion = MAJOR.MINOR.PATCH(-PreRelaseLabel)
+- `AssemblyVersion = MAJOR.MINOR.0.0`
+- `AssemblyFileVersion = MAJOR.MINOR.BUILD.REVISION`
+- `AssemblyInformationalVersion = MAJOR.MINOR.PATCH(-PreRelaseLabel)`
 
-MAJOR, MINOR, PATCH and PreRelaseLabel (alpha, beta...) are manually set.
+`MAJOR`, `MINOR`, `PATCH` and `PreRelaseLabel` (`alpha`, `beta`...) are set manually.
 
-BUILD and REVISION are generated automatically:
-- Inside Visual Studio, I don't mind if the versions do not change between builds.
+`BUILD` and `REVISION` are generated automatically:
+- Inside Visual Studio, we don't mind if the versions do not change between builds.
 - Continuous build or publicly released build should increment it.
 
-I do not change the AssemblyVersion when PATCH is incremented.
+We do not change the `AssemblyVersion` attribute when `PATCH` is incremented.
+
+### Customize the Assembly Version
+
+Remarks:
+- This is only mandatory for NuGet projects.
+- Test and sample projects do not have a version property file.
+
+In `src\Packaging`, create a version property file: `{AssemblyName}.Version.props`:
+```xml
+<?xml version="1.0" encoding="utf-8" ?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildThisFileDirectory)DefaultVersion.props" />
+</Project>
+```
+
+NB: For Mvp-related projects use: `DefaultVersion.Mvp.props`.
+
+If you do not want to use the default version properties:
+```xml
+<?xml version="1.0" encoding="utf-8" ?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MajorVersion>1</MajorVersion>
+    <MinorVersion>2</MinorVersion>
+    <PatchVersion>0</PatchVersion>
+    <PreReleaseLabel></PreReleaseLabel>
+  </PropertyGroup>
+</Project>
+```
 
 ### Version updates
 
 Let's see if things work with NuGet:
-- Patch update: X.Y.0.0 -> X.Y.1.0
-  * If I publish Narvalo.Core but not Narvalo.Common, binding redirect works
+- Patch update: `X.Y.0.0` -> `X.Y.1.0`
+  * If we publish Narvalo.Core but not Narvalo.Common, binding redirect works
     for Narvalo.Core and Narvalo.Common can reference the newly published assembly.
-  * If I publish Narvalo.Common but not Narvalo.Core, even if Narvalo.Common
-    references Narvalo.Core X.Y.1.0, obviously unknown outside, it doesn't
+  * If we publish Narvalo.Common but not Narvalo.Core, even if Narvalo.Common
+    references Narvalo.Core `X.Y.1.0`, obviously unknown outside, it doesn't
     matter for the CLR: the assembly version _did not actually change_,
-    it's still X.Y.0.0.
-- Major or Minor upgrade: 1.1.0.0 -> 1.2.0.0 (or 1.1.0.0 -> 2.1.0.0)
-  * If I publish Narvalo.Core but not Narvalo.Common, binding redirect works.
-    Let's cross fingers that I did not make a mistake by not releasing
+    it's still `X.Y.0.0`.
+- Major or Minor upgrade: `1.1.0.0` -> `1.2.0.0` (or `1.1.0.0` -> `2.1.0.0`)
+  * If we publish Narvalo.Core but not Narvalo.Common, binding redirect works.
+    Let's cross fingers that we did not make a mistake by not releasing
     Narvalo.Common too.
-  * If I publish Narvalo.Common but not Narvalo.Core, we get a runtime error
+  * If we publish Narvalo.Common but not Narvalo.Core, we get a runtime error
     since Narvalo.Common references an assembly version unknown outside my
     development environment. The solution is obvious. Narvalo.Core has not
     changed so Narvalo.Common should replace the direct reference and use
@@ -295,12 +284,37 @@ Let's see if things work with NuGet:
 
 --------------------------------------------------------------------------------
 
+Packaging
+---------
+
+Before going further, be sure to read [Versioning](#versioning).
+
+Checklist:
+- The shared versions: `src\Versioning\DefaultVersion.props` and
+  `src\Versioning\DefaultVersion.Mvp.props`.
+- Individual versions in `src\Versioning`, if they differ from the shared ones.
+- Individual package descriptions in `src\Packaging`.
+- Check that the property `frameworkAssemblies` in nuspec's do not need any update.
+- Check `TargetFrameworkVersion` in projects and the one in the nuspec's must match.
+
+To release a new version of a package (for instance the core packages):
+1. Create the packages: `make.ps1 -r pack`.
+2. Publish them: `publish.ps1 -r`
+3. Tag the repository. For instance, for version 1.1.0
+```
+git tag -a release-1.1.0 -m 'Core Version 1.1.0' 33e07eceba5a56cde7b0dc753aed0fa5d0e101dc
+git push origin core-1.1.0
+```
+
+--------------------------------------------------------------------------------
+
 Developer Operations
 --------------------
 
 ### NuGet Updates
 
-For package updates, use the Narvalo.sln solution.
+Simply use the solution `Narvalo.sln`. Unforunately, for solution-level packages
+(`etc\packages.config`), this must be done manually.
 
 **WARNING:** If the NuGet core framework is updated, do not forget to also
 update `tools\nuget.exe` (I believe this is done automatically whenever we use
@@ -312,12 +326,12 @@ tools\nuget.exe update -Self
 ### Visual Studio or Framework Updates
 
 After upgrading Visual Studio or MSBuild, do not forget to update the
-`VisualStudioVersion` property in Make.Shared.props.
+`VisualStudioVersion` property in `Make.Shared.props`.
 
 Other places to look at:
-- fsci.cmd (for F# updates)
-- `TargetFrameworkVersion` in Narvalo.Common.props
-- For NuGet packaging check the target lib in the NuGet projects (src\Packaging).
+- `publish.ps1` (for F# updates)
+- `TargetFrameworkVersion` in `Narvalo.Common.props`
+- For NuGet packaging check the target lib in the NuGet projects (`src\Packaging`).
 
 ### Copyright Year Update
 
@@ -326,22 +340,4 @@ A copyright appears in three places:
 - `LICENSE.txt`
 - `tools\Make.CustomAfter.props` (this one is always up-to-date)
 
-### Releasing a NuGet package
-
-Before going further, be sure to read [Versioning](#assembly-versioning).
-
-Checklist:
-- The shared version: `etc\Narvalo.CurrentVersion.props`.
-- Individual versions in `src\NuGet`, if they differ from the shared one.
-- Individual package descriptions in `src\NuGet`.
-- Check that the property "frameworkAssemblies" in nuspec's do not need any update.
-- "TargetFrameworkVersion" in projects and the one in the nuspec's must match.
-
-To release a new version of a package (for instance the core packages):
-1. Build the packages: `make.ps1 -r pack`.
-2. Publish the packages: `tools\publish-retail.fsx`
-3. Tag the repository. For instance, for version 1.1.0
-```
-git tag -a release-1.1.0 -m 'Core Version 1.1.0' 33e07eceba5a56cde7b0dc753aed0fa5d0e101dc
-git push origin core-1.1.0
-```
+--------------------------------------------------------------------------------

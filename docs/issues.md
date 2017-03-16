@@ -8,12 +8,13 @@ Miscs
 - I think there is a problem w/ dependency resolution for EDGE packages
   on myget.org. Also, should we remove the EDGE suffix now that they always have
   a higher version number?
-- Enable continuous integration (Travis, AppVeyor, Coverall, Readthedoc)?
+- Revise the version scheme used inside Visual Studio.
+- Enable continuous integration (Travis, AppVeyor, Coverall, Readthedoc, GitLink)?
 
 Narvalo.Fx
 ----------
 
-- Simplify LINQ for Maybe<T?>.
+- Simplify LINQ for `Maybe<T?>`.
 
 Next:
 - Add `SelectMany` to `Outcome` and `Fallible`... OR remove `Select`.
@@ -32,7 +33,7 @@ Narvalo.Money
 
 Next:
 - Review the formatting stuff + enhance.
-- Implements `DitheredRoundingAdjuster`.
+- Add `DitheredRoundingAdjuster`.
 - Bias allocation: First, Last, Lowest, Highest, Pseudorandom.
 - Distribution: PseudoUniform, Single, Evenly, Spread.
 - Inspirations:
@@ -45,7 +46,7 @@ Next:
 Narvalo.Finance
 ---------------
 
-- BBAN validation.
+- Implement BBAN validation.
 
 Next:
 - BBAN and IIBAN implementations:
@@ -60,7 +61,7 @@ Narvalo.Mvp
 - Review `ThrowIfNoPresenterBound`, `Load` event, `PresenterBinder.Release`.
 
 Next:
-- Can it be a .NET Standard library.
+- Could it be a .NET Standard library?
 - Application Controller and Navigator.
 - Review the use of custom presenter types per platform prevents the reuse of
   presenters across different platforms. Maybe is it a necessary evil?
