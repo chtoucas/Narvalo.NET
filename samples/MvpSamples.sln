@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvpCommandLine", "samples\MvpCommandLine\MvpCommandLine.csproj", "{22F5819B-94C5-47B5-A83D-2F807BAC8130}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvpCommandLine", "MvpCommandLine\MvpCommandLine.csproj", "{22F5819B-94C5-47B5-A83D-2F807BAC8130}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvpWebForms", "samples\MvpWebForms\MvpWebForms.csproj", "{779357E7-F156-425C-8EB8-FB45ACDFF9DE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvpWebForms", "MvpWebForms\MvpWebForms.csproj", "{779357E7-F156-425C-8EB8-FB45ACDFF9DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -28,21 +28,20 @@ Optional components:
 - `data`, external data.
 - `docs`, documentation.
 - `etc`, shared configurations.
-- `packages`, local repository of NuGet packages.
 - `samples`, sample projects.
 - `src`, source directory.
-- `src\NuGet`, NuGet projects.
+- `src\Packaging`, NuGet projects.
 - `tests`, test projects.
 - `tools`, build and maintenance scripts.
+
+Temporary directories:
+- `packages`, local repository of NuGet packages.
 - `work`, temporary directory created during cmdline builds.
 
 There are three solutions:
 - `Narvalo.sln` the main solution.
-- `MvpSample.sln` contains sample MVP projects.
-- `tools\Maintenance.sln` contains settings, maintenance scripts
-  and various helper projects:
-  * MyGet, private NuGet server.
-  * NuGetAgent, a NuGet publishing tool.
+- `samples\MvpSamples.sln` contains sample MVP projects.
+- `tools\Maintenance.sln` contains settings and maintenance scripts.
 
 --------------------------------------------------------------------------------
 

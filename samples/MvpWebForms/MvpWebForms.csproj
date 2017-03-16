@@ -21,20 +21,20 @@
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="Narvalo.Cerbere, Version=2.0.0.0, Culture=neutral, PublicKeyToken=e3c64fceb1bc8b20, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Narvalo.Cerbere.2.0.0\lib\portable-net45+netcore45+wpa81+wp8\Narvalo.Cerbere.dll</HintPath>
+    <Reference Include="Narvalo.Core, Version=1.1.0.0, Culture=neutral, PublicKeyToken=e3c64fceb1bc8b20, processorArchitecture=MSIL">
+      <HintPath>..\packages\Narvalo.Core.1.1.0\lib\portable-net45+netcore45+wpa81+wp8\Narvalo.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Narvalo.Mvp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e3c64fceb1bc8b20, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Narvalo.Mvp.1.0.0\lib\net45\Narvalo.Mvp.dll</HintPath>
+    <Reference Include="Narvalo.Mvp, Version=1.1.0.0, Culture=neutral, PublicKeyToken=e3c64fceb1bc8b20, processorArchitecture=MSIL">
+      <HintPath>..\packages\Narvalo.Mvp.1.1.1\lib\net45\Narvalo.Mvp.dll</HintPath>
     </Reference>
-    <Reference Include="Narvalo.Mvp.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e3c64fceb1bc8b20, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Narvalo.Mvp.Web.1.0.0\lib\net45\Narvalo.Mvp.Web.dll</HintPath>
+    <Reference Include="Narvalo.Mvp.Web, Version=1.1.0.0, Culture=neutral, PublicKeyToken=e3c64fceb1bc8b20, processorArchitecture=MSIL">
+      <HintPath>..\packages\Narvalo.Mvp.Web.1.1.1\lib\net45\Narvalo.Mvp.Web.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />

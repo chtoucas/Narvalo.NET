@@ -13,11 +13,11 @@
     <StartupObject>MvpCommandLine.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Narvalo.Cerbere, Version=2.0.0.0, Culture=neutral, PublicKeyToken=e3c64fceb1bc8b20, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Narvalo.Cerbere.2.0.0\lib\portable-net45+netcore45+wpa81+wp8\Narvalo.Cerbere.dll</HintPath>
+    <Reference Include="Narvalo.Core, Version=1.1.0.0, Culture=neutral, PublicKeyToken=e3c64fceb1bc8b20, processorArchitecture=MSIL">
+      <HintPath>..\packages\Narvalo.Core.1.1.0\lib\portable-net45+netcore45+wpa81+wp8\Narvalo.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Narvalo.Mvp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e3c64fceb1bc8b20, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Narvalo.Mvp.1.0.0\lib\net45\Narvalo.Mvp.dll</HintPath>
+    <Reference Include="Narvalo.Mvp, Version=1.1.0.0, Culture=neutral, PublicKeyToken=e3c64fceb1bc8b20, processorArchitecture=MSIL">
+      <HintPath>..\packages\Narvalo.Mvp.1.1.1\lib\net45\Narvalo.Mvp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
