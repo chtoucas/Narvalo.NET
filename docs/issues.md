@@ -6,7 +6,8 @@ Miscs
 
 - Finish localization in french and english.
 - Update CodeFormatter when it supports C# 7.0 and see if it still has a
-  problem w/ our code analysis ruleset.
+  problem w/ our code analysis ruleset. After that, change from `codeformatter.cmd`
+  to `format-code.ps1`.
 - I think there is a problem w/ dependency resolution for EDGE packages
   on myget.org. Also, should we remove the EDGE suffix now that they always have
   a higher version number?

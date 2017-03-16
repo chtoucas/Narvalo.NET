@@ -19,7 +19,7 @@ Requirements:
 - Visual Studio Community 2017.
 - Modeling SDK (part of the Visual Studio installer) needed for T4 integration
   with MSBuild.
-- PowerShell v4+ and F# v4.1+ for the build scripts.
+- PowerShell v4+, F# v4.1+ and Git for the build scripts.
 
 ### Project Layout
 
@@ -310,6 +310,15 @@ git push origin core-1.1.0
 
 Developer Operations
 --------------------
+
+### Scripts
+
+- `codeformatter.cmd`
+- `cover.ps1`
+- `make.ps1`
+- `publish.ps1`
+- `restore.ps1`
+- `docs\make-docs.ps1`
 
 ### NuGet Updates
 

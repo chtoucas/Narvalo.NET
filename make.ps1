@@ -35,7 +35,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $false, Position = 0)]
-    [ValidateSet('build', 'cover', 'pack', 'test')]
+    [ValidateSet('build', 'pack', 'test')]
     [Alias('t')] [string] $Task = 'build',
 
     [Parameter(Mandatory = $false, Position = 1)]
