@@ -13,7 +13,7 @@ namespace Narvalo.Mvp.Web.Core
         private static readonly PlatformServicesVirtualProxy s_Instance
             = new PlatformServicesVirtualProxy(() => s_Default);
 
-        public static IPlatformServices Default=> s_Default;
+        public static IPlatformServices Default => s_Default;
 
         public static IPlatformServices Current
         {

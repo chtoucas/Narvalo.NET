@@ -53,8 +53,7 @@ namespace Narvalo.Web.Configuration
             }
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly",
-            Justification = "[Intentionally] This property must be writable in order to be initialized by the framework.")]
+        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "[Intentionally] This property must be writable in order to be initialized by the framework.")]
         public ProviderSettingsCollection Providers
         {
             get

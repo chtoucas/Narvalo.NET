@@ -117,7 +117,8 @@ namespace Narvalo.Build.JavaTasks
 
                 using (var process = new Process())
                 {
-                    process.StartInfo = new ProcessStartInfo {
+                    process.StartInfo = new ProcessStartInfo
+                    {
                         FileName = javaExe,
                         Arguments = GenerateCommandLineArguments(inFile, outFile),
                         UseShellExecute = false,

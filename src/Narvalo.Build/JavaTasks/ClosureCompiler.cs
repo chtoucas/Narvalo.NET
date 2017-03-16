@@ -112,7 +112,8 @@ namespace Narvalo.Build.JavaTasks
 
                 using (var process = new Process())
                 {
-                    process.StartInfo = new ProcessStartInfo {
+                    process.StartInfo = new ProcessStartInfo
+                    {
                         FileName = fullPathToTool,
                         Arguments = GetCommandLineArguments(inFile, outFile),
                         UseShellExecute = false,

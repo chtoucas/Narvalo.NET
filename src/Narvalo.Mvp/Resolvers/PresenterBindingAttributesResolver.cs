@@ -34,7 +34,8 @@ namespace Narvalo.Mvp.Resolvers
 
             return attributes
                 .Select(pba =>
-                    new PresenterBindingAttribute(pba.PresenterType) {
+                    new PresenterBindingAttribute(pba.PresenterType)
+                    {
                         BindingMode = pba.BindingMode,
                         Origin = viewType,
                         ViewType = pba.ViewType ?? viewType,

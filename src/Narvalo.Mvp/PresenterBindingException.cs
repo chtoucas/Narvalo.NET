@@ -13,9 +13,11 @@ namespace Narvalo.Mvp
         public PresenterBindingException(string message) : base(message) { }
 
         public PresenterBindingException(string message, Exception innerException)
-            : base(message, innerException) { }
+            : base(message, innerException)
+        { }
 
         protected PresenterBindingException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        { }
     }
 }

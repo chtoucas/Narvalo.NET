@@ -28,10 +28,12 @@ namespace Narvalo.Mvp.CommandLine
         private readonly IPresenterDiscoveryStrategy _inner;
 
         public DefaultPresenterDiscoveryStrategy()
-            : this(Assembly.GetEntryAssembly()) { }
+            : this(Assembly.GetEntryAssembly())
+        { }
 
         public DefaultPresenterDiscoveryStrategy(Assembly assembly)
-            : this(new[] { assembly }) { }
+            : this(new[] { assembly })
+        { }
 
         public DefaultPresenterDiscoveryStrategy(Assembly[] assemblies)
         {

@@ -16,11 +16,13 @@ namespace Narvalo.Mvp.PresenterBinding
         private readonly IPresenterBindingAttributesResolver _attributesResolver;
 
         public AttributedPresenterDiscoveryStrategy()
-            : this(new PresenterBindingAttributesResolver()) { }
+            : this(new PresenterBindingAttributesResolver())
+        { }
 
         public AttributedPresenterDiscoveryStrategy(
             IPresenterBindingAttributesResolver attributesResolver)
-            : this(attributesResolver, true) { }
+            : this(attributesResolver, true)
+        { }
 
         public AttributedPresenterDiscoveryStrategy(
             IPresenterBindingAttributesResolver attributesResolver,

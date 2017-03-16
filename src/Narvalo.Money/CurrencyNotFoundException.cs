@@ -24,7 +24,8 @@ namespace Narvalo
         /// </summary>
         /// <param name="message">The error message to display with this exception.</param>
         public CurrencyNotFoundException(string message)
-            : base(message) { }
+            : base(message)
+        { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CurrencyNotFoundException"/>
@@ -36,6 +37,7 @@ namespace Narvalo
         /// If the innerException parameter is not a null reference, the current exception is raised
         /// in a catch block that handles the inner exception.</param>
         public CurrencyNotFoundException(string message, Exception innerException) :
-            base(message, innerException) { }
+            base(message, innerException)
+        { }
     }
 }

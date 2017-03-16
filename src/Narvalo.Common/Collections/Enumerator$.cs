@@ -16,7 +16,8 @@ namespace Narvalo.Collections
 
             var coll = new Collection<T>();
 
-            while (@this.MoveNext()) {
+            while (@this.MoveNext())
+            {
                 coll.Add(@this.Current);
             }
 

@@ -30,9 +30,9 @@ namespace Narvalo.Web
 
         protected bool Validate(TQuery query)
             => (from prop in TypeDescriptor.GetProperties(query).Cast<PropertyDescriptor>()
-                    from attr in prop.Attributes.OfType<ValidationAttribute>()
-                    where !attr.IsValid(prop.GetValue(query))
-                    select attr).IsEmpty();
+                from attr in prop.Attributes.OfType<ValidationAttribute>()
+                where !attr.IsValid(prop.GetValue(query))
+                select attr).IsEmpty();
 
         protected void AddError(HttpQueryBinderException exception) => _errors.Add(exception);
     }

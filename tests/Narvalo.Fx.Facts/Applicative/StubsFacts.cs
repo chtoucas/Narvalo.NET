@@ -195,4 +195,4 @@ namespace Narvalo.Applicative
             }
         }
     }
-    }
+}

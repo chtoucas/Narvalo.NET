@@ -91,13 +91,15 @@ namespace Narvalo.Web.Optimization
         {
             Require.NotNull(value, nameof(value));
 
-            if (value.Length == 0) {
+            if (value.Length == 0)
+            {
                 return String.Empty;
             }
 
             // On remplace les chaînes de caractères constituées uniquement
             // d'espaces blancs par un seul espace.
-            if (String.IsNullOrWhiteSpace(value)) {
+            if (String.IsNullOrWhiteSpace(value))
+            {
                 return "\x20";
             }
 

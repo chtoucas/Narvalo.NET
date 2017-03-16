@@ -12,7 +12,8 @@ namespace Narvalo.Mvp.Platforms
         : LazyValueHolder<IPlatformServices>, IPlatformServices
     {
         public PlatformServicesVirtualProxy(Func<IPlatformServices> valueFactory)
-            : base(valueFactory) { }
+            : base(valueFactory)
+        { }
 
         public ICompositeViewFactory CompositeViewFactory => Value.CompositeViewFactory;
 

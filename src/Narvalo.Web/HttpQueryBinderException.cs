@@ -13,10 +13,12 @@ namespace Narvalo.Web
         public HttpQueryBinderException(string message) : base(message) { }
 
         public HttpQueryBinderException(string message, Exception innerException)
-            : base(message, innerException) { }
+            : base(message, innerException)
+        { }
 
         protected HttpQueryBinderException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        { }
 
         public string MemberName { get; set; } = String.Empty;
 

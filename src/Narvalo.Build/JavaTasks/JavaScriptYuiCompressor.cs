@@ -51,23 +51,28 @@ namespace Narvalo.Build.JavaTasks
             var sb = new StringBuilder();
             sb.AppendFormat(@"-jar ""{0}"" --type js --charset utf8", JarPath);
 
-            if (DisableOptimizations) {
+            if (DisableOptimizations)
+            {
                 sb.Append(" --disable-optimizations");
             }
 
-            if (LineBreak > 0) {
+            if (LineBreak > 0)
+            {
                 sb.AppendFormat(" --line-break {0}", LineBreak);
             }
 
-            if (NoMunge) {
+            if (NoMunge)
+            {
                 sb.Append(" --nomunge");
             }
 
-            if (PreserveSemi) {
+            if (PreserveSemi)
+            {
                 sb.Append(" --preserve-semi");
             }
 
-            if (Verbose) {
+            if (Verbose)
+            {
                 sb.Append(" --verbose");
             }
 

@@ -148,10 +148,12 @@ namespace Narvalo
             public SimpleException(string message) : base(message) { }
 
             public SimpleException(string message, Exception innerException)
-                : base(message, innerException) { }
+                : base(message, innerException)
+            { }
 
             private SimpleException(SerializationInfo info, StreamingContext context)
-                : base(info, context) { }
+                : base(info, context)
+            { }
         }
     }
 }

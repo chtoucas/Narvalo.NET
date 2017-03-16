@@ -19,7 +19,8 @@ namespace Narvalo.Mvp.PresenterBinding
         private readonly IPresenterConstructorResolver _constructorResolver;
 
         public PresenterFactory()
-            : this(new PresenterConstructorResolver()) { }
+            : this(new PresenterConstructorResolver())
+        { }
 
         public PresenterFactory(IPresenterConstructorResolver constructorResolver)
             : this(constructorResolver, true)
