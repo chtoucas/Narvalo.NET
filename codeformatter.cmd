@@ -4,13 +4,14 @@
 ::
 :: Currently disabled:
 :: - It does not work for C# 7.0
-:: - The tool also fails with an error CS1702 on our solution (it passes if we
-::   comment out the CodeAnalysisRuleSet property in Narvalo.Common.props)
+:: - The tool also fails with an error CS1702 on our solution: it passes if we
+::   comment out the CodeAnalysisRuleSet property in Narvalo.Common.props. In
+::   fact, the problem seems to be with etc\Strict.ruleset.
 
 @echo off
 @setlocal
 
-@goto Disabled
+:: @goto Disabled
 
 :Setup
 
