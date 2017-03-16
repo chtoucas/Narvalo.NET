@@ -77,10 +77,10 @@ function Find-PkgTool {
 .INPUTS
     None.
 .OUTPUTS
-    System.String. Get-Git returns a string that contains the path to the git command
+    System.String. Get-GitExe returns a string that contains the path to the git command
     or $null if git is nowhere to be found.
 #>
-function Get-Git {
+function Get-GitExe {
     [CmdletBinding()]
     param()
 
@@ -226,12 +226,18 @@ function Get-LocalPath {
 .SYNOPSIS
     Get the path to the locally installed MSBuild command.
 .OUTPUTS
-    System.String. Get-MSBuild returns a string that contains the path to the MSBuild executable.
+    System.String. Get-MSBuildExe returns a string that contains the path to the MSBuild executable.
 #>
-function Get-MSBuild {
+function Get-MSBuildExe {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)]
+        [string] $VSWhere
+    )
+
     # See https://github.com/Microsoft/vswhere/wiki/Find-MSBuild
     # Apparently, the documentation (or vswhere) is wrong, it gives us the path to VS not MSBuild.
-    $VisualStudio = .\packages\vswhere.1.0.50\tools\vswhere -latest -products * `
+    $VisualStudio = . $VSWhere -latest -products * `
         -requires Microsoft.Component.MSBuild -property installationPath
     $MSBuild = Join-Path $VisualStudio 'MSBuild\15.0\Bin\MSBuild.exe'
     if (!(Test-Path $MSBuild)) {
@@ -252,9 +258,9 @@ function Get-MSBuild {
 .INPUTS
     None.
 .OUTPUTS
-    System.String. Get-NuGet returns a string that contains the path to the NuGet executable.
+    System.String. Get-NuGetExe returns a string that contains the path to the NuGet executable.
 #>
-function Get-NuGet {
+function Get-NuGetExe {
     [CmdletBinding()]
     param([switch] $Install)
 
@@ -265,6 +271,46 @@ function Get-NuGet {
     }
 
     $nuget
+}
+
+function Get-OpenCoverExe {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)]
+        [string] $Directory
+    )
+
+    return $Directory | Find-PkgTool -Pkg 'OpenCover.*' -Tool 'tools\OpenCover.Console.exe'
+}
+
+function Get-ReportGeneratorExe {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)]
+        [string] $Directory
+    )
+
+    return $Directory | Find-PkgTool -Pkg 'ReportGenerator.*' -Tool 'tools\ReportGenerator.exe'
+}
+
+function Get-VSWhereExe {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)]
+        [string] $Directory
+    )
+
+    return $Directory | Find-PkgTool -Pkg 'vswhere.*' -Tool 'tools\vswhere.exe'
+}
+
+function Get-XunitExe {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)]
+        [string] $Directory
+    )
+
+    return $Directory | Find-PkgTool -Pkg 'xunit.runner.console.*' -Tool 'tools\xunit.console.exe'
 }
 
 <#
@@ -365,7 +411,7 @@ function Restore-Packages {
         $verbosity = 'normal'
     }
 
-    $nuget = Get-NuGet -Install
+    $nuget = Get-NuGetExe -Install
 
     try {
         Write-Debug 'Call nuget.exe restore.'

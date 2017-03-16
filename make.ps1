@@ -118,12 +118,14 @@ if (!$Quiet) {
     Write-Host "> Executing the task '$Task'`n"
 }
 
+$msbuild = (Get-LocalPath "packages") | Get-VSWhereExe | Get-MSBuildExe
+
 switch ($Task) {
-    'build' { & (Get-MSBuild) $project $msbuildprops '/t:Build' }
-    'test'  { & (Get-MSBuild) $project $msbuildprops '/t:Xunit' }
+    'build' { & $msbuild $project $msbuildprops '/t:Build' }
+    'test'  { & $msbuild $project $msbuildprops '/t:Xunit' }
 
     'pack' {
-        $git = (Get-Git)
+        $git = (Get-GitExe)
 
         if ($git -eq $null) {
             Exit-Gracefully 'git.exe could not be found in your PATH. Please ensure git is installed.'
@@ -151,7 +153,7 @@ switch ($Task) {
             $target = '/t:Xunit;Package'
         }
 
-        & (Get-MSBuild) $project $msbuildpackprops  "/p:GitCommitHash=$hash" $target
+        & $msbuild $project $msbuildpackprops  "/p:GitCommitHash=$hash" $target
     }
 }
 

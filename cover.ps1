@@ -37,10 +37,8 @@ if ($Rebuild) {
 
     .\make.ps1 -q
 
-    $opencover = $packages |
-        Find-PkgTool -Pkg 'OpenCover.*' -Tool 'tools\OpenCover.Console.exe'
-    $xunit = $packages |
-        Find-PkgTool -Pkg 'xunit.runner.console.*' -Tool 'tools\xunit.console.exe'
+    $opencover = $packages | Get-OpenCoverExe
+    $xunit = $packages | Get-XunitExe
 
     $asms = Get-ChildItem -Path (Get-LocalPath "work\bin\Debug\*") `
         -Include "*.Facts.dll"
@@ -59,8 +57,7 @@ if ($Rebuild) {
 # Generate the report.
 # WARNING: Be sure that you already run opencover; option $Rebuild.
 
-$reportgenerator = $packages |
-    Find-PkgTool -Pkg 'ReportGenerator.*' -Tool 'tools\ReportGenerator.exe'
+$reportgenerator = $packages | Get-ReportGeneratorExe
 
 if ($Full) {
     $targetdir     = Get-LocalPath 'work\log\opencover'
