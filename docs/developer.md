@@ -3,7 +3,7 @@ Developer Guidelines
 
 - [Overview](#overview)
 - [Coding Rules](#coding-rules)
-- [Adding and Configuring a new Project](#adding-and-configuring-a-new-project)
+- [Project Configuration](#project-configuration)
 - [Versioning](#versioning)
 - [Packaging](#packaging)
 - [Developer Operations](#developer-operations)
@@ -19,7 +19,7 @@ Requirements:
 - Visual Studio Community 2017.
 - Modeling SDK (part of the Visual Studio installer) needed for T4 integration
   with MSBuild.
-- PowerShell v4+ and F# v4+ for the build scripts.
+- PowerShell v4+ and F# v4.1+ for the build scripts.
 
 ### Project Layout
 
@@ -69,16 +69,13 @@ directory `Properties` rather than modifying the global one.
 
 --------------------------------------------------------------------------------
 
-Adding and Configuring a new Project
-------------------------------------
+Project Configuration
+---------------------
 
 ### Initialize a C# project
 
-The following procedure enables us to centralize all settings.
-
-Create a project and add it to `Narvalo.sln` and `tools\Make.proj`.
-
-Edit the project file:
+The following procedure enables us to centralize all settings:
+- Create a project and add it to `Narvalo.sln` and `tools\Make.proj`.
 - Add the following line at the bottom of the project file, BEFORE the Microsoft targets:
 ```xml
 <Import Project="..\..\tools\Narvalo.Common.props" />
@@ -122,7 +119,7 @@ Optionally, give access to internals to the test project:
 
 ### How to override the global settings
 
-Create a property file `{AssemblyName}.props` for instance with the following
+Create a property file `Narvalo.XXX.props` for instance with the following
 content:
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -181,7 +178,7 @@ Ensure that it is copied to the output directory.
 #### Test project
 
 To create a test project use the "Class Library" template from Visual Studio.
-Add the following content to you local customization property file `{AssemblyName}.props`:
+Add the following content to you local customization property file `Narvalo.XXX.props`:
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
@@ -196,7 +193,7 @@ Reference the shared project `tests\TestCommon`.
 
 #### Sample project
 
-Add the following content to you local customization property file `{AssemblyName}.props`:
+Add the following content to you local customization property file `Narvalo.XXX.props`:
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
@@ -232,13 +229,13 @@ We use the following:
 
 We do not change the `AssemblyVersion` attribute when `PATCH` is incremented.
 
-### Customize the Assembly Version
+### How to customize the Assembly Version
 
 Remarks:
 - This is only mandatory for NuGet projects.
 - Test and sample projects do not have a version property file.
 
-In `src\Packaging`, create a version property file: `{AssemblyName}.Version.props`:
+In `src\Packaging`, create a version property file: `Narvalo.XXX.Version.props`:
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
@@ -246,7 +243,7 @@ In `src\Packaging`, create a version property file: `{AssemblyName}.Version.prop
 </Project>
 ```
 
-NB: For Mvp-related projects use: `DefaultVersion.Mvp.props`.
+NB: For MVP-related projects use: `DefaultVersion.Mvp.props`.
 
 If you do not want to use the default version properties:
 ```xml
@@ -264,7 +261,7 @@ If you do not want to use the default version properties:
 ### Version updates
 
 Let's see if things work with NuGet:
-- Patch update: `X.Y.0.0` -> `X.Y.1.0`
+- Patch upgrade: `X.Y.0.0` -> `X.Y.1.0`
   * If we publish Narvalo.Core but not Narvalo.Common, binding redirect works
     for Narvalo.Core and Narvalo.Common can reference the newly published assembly.
   * If we publish Narvalo.Common but not Narvalo.Core, even if Narvalo.Common
