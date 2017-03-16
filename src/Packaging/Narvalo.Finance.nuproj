@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildThisFileDirectory)FrameworkProfiles.props" />
+  <Import Project="$(MSBuildThisFileDirectory)PortableProfiles.props" />
 
   <PropertyGroup>
     <NuId>Narvalo.Finance</NuId>
@@ -25,10 +25,10 @@ BIC (ISO 9362) and IBAN types w/ validators.
 <file src="Narvalo.Finance.pdb" target="lib\$(Profile259)\" />
 <file src="Narvalo.Finance.xml" target="lib\$(Profile259)\" />
 <file src="fr\Narvalo.Finance.resources.dll" target="lib\$(Profile259)\fr\" />
-<file src="Narvalo.Finance.dll" target="lib\$(NetStandard10)\" />
-<file src="Narvalo.Finance.pdb" target="lib\$(NetStandard10)\" />
-<file src="Narvalo.Finance.xml" target="lib\$(NetStandard10)\" />
-<file src="fr\Narvalo.Finance.resources.dll" target="lib\$(NetStandard10)\fr\" />
+<file src="Narvalo.Finance.dll" target="lib\netstandard1.0\" />
+<file src="Narvalo.Finance.pdb" target="lib\netstandard1.0\" />
+<file src="Narvalo.Finance.xml" target="lib\netstandard1.0\" />
+<file src="fr\Narvalo.Finance.resources.dll" target="lib\netstandard1.0\fr\" />
       ]]>
     </NuFiles>
   </PropertyGroup>

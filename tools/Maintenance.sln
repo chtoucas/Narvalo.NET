@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. MSBuild", "3. MSBuild", "{2D3181AE-6786-49EE-BDCE-1C7687EFB40B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. MSBuild", "4. MSBuild", "{2D3181AE-6786-49EE-BDCE-1C7687EFB40B}"
 	ProjectSection(SolutionItems) = preProject
 		Make.Common.props = Make.Common.props
 		Make.Common.targets = Make.Common.targets
@@ -34,42 +34,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Narvalo.Build", "Narvalo.Bu
 		..\src\Packaging\Narvalo.Build\Narvalo.Build.tasks = ..\src\Packaging\Narvalo.Build\Narvalo.Build.tasks
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. NuGet", "2. NuGet", "{C951776C-B912-4BB2-95ED-02A5D7A3F4A4}"
-	ProjectSection(SolutionItems) = preProject
-		..\src\Packaging\FrameworkProfiles.props = ..\src\Packaging\FrameworkProfiles.props
-		..\etc\Narvalo.CurrentVersion.props = ..\etc\Narvalo.CurrentVersion.props
-		..\etc\Narvalo.Mvp.CurrentVersion.props = ..\etc\Narvalo.Mvp.CurrentVersion.props
-		..\src\Packaging\Template.nuspec = ..\src\Packaging\Template.nuspec
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Scripts", "4. Scripts", "{E886C15F-0369-4B3A-B2F2-4B7C0000E27D}"
-	ProjectSection(SolutionItems) = preProject
-		..\ci.ps1 = ..\ci.ps1
-		..\cover.ps1 = ..\cover.ps1
-		fsi.cmd = fsi.cmd
-		..\make.ps1 = ..\make.ps1
-		publish-edge.fsx = publish-edge.fsx
-		publish-retail.fsx = publish-retail.fsx
-		..\restore.ps1 = ..\restore.ps1
-		script-helpers.ps1 = script-helpers.ps1
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Versions", "Versions", "{234E8E32-CA91-4F16-BE5A-7E5E079C203C}"
-	ProjectSection(SolutionItems) = preProject
-		..\src\Narvalo.Build\Narvalo.Build.Version.props = ..\src\Narvalo.Build\Narvalo.Build.Version.props
-		..\src\Narvalo.Common\Narvalo.Common.Version.props = ..\src\Narvalo.Common\Narvalo.Common.Version.props
-		..\src\Narvalo.Core\Narvalo.Core.Version.props = ..\src\Narvalo.Core\Narvalo.Core.Version.props
-		..\src\Narvalo.Finance\Narvalo.Finance.Version.props = ..\src\Narvalo.Finance\Narvalo.Finance.Version.props
-		..\src\Narvalo.Fx\Narvalo.Fx.Version.props = ..\src\Narvalo.Fx\Narvalo.Fx.Version.props
-		..\src\Narvalo.Money\Narvalo.Money.Version.props = ..\src\Narvalo.Money\Narvalo.Money.Version.props
-		..\src\Narvalo.Mvp\Narvalo.Mvp.Version.props = ..\src\Narvalo.Mvp\Narvalo.Mvp.Version.props
-		..\src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.Version.props = ..\src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.Version.props
-		..\src\Narvalo.Web\Narvalo.Web.Version.props = ..\src\Narvalo.Web\Narvalo.Web.Version.props
-	EndProjectSection
-EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "NuGetAgent", "NuGetAgent\NuGetAgent.fsproj", "{702370E8-516C-4AE4-8913-CDB198070812}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Specs", "Specs", "{AC9581EA-C0AC-4EDD-9B66-858E2B3A6A8A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Packaging", "3. Packaging", "{C951776C-B912-4BB2-95ED-02A5D7A3F4A4}"
 	ProjectSection(SolutionItems) = preProject
 		..\src\Packaging\Narvalo.Build.nuproj = ..\src\Packaging\Narvalo.Build.nuproj
 		..\src\Packaging\Narvalo.Common.nuproj = ..\src\Packaging\Narvalo.Common.nuproj
@@ -80,9 +45,24 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Specs", "Specs", "{AC9581EA
 		..\src\Packaging\Narvalo.Mvp.nuproj = ..\src\Packaging\Narvalo.Mvp.nuproj
 		..\src\Packaging\Narvalo.Mvp.Web.nuproj = ..\src\Packaging\Narvalo.Mvp.Web.nuproj
 		..\src\Packaging\Narvalo.Web.nuproj = ..\src\Packaging\Narvalo.Web.nuproj
+		..\src\Packaging\PortableProfiles.props = ..\src\Packaging\PortableProfiles.props
+		..\src\Packaging\Template.nuspec = ..\src\Packaging\Template.nuspec
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contents", "Contents", "{8091374C-EA52-4E3C-AD82-7D1DAF2DA442}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. Scripts", "5. Scripts", "{E886C15F-0369-4B3A-B2F2-4B7C0000E27D}"
+	ProjectSection(SolutionItems) = preProject
+		..\cover.ps1 = ..\cover.ps1
+		fsi.cmd = fsi.cmd
+		..\make.ps1 = ..\make.ps1
+		publish-edge.fsx = publish-edge.fsx
+		publish-retail.fsx = publish-retail.fsx
+		..\restore.ps1 = ..\restore.ps1
+		script-helpers.ps1 = script-helpers.ps1
+	EndProjectSection
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "NuGetAgent", "NuGetAgent\NuGetAgent.fsproj", "{702370E8-516C-4AE4-8913-CDB198070812}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Versioning", "2. Versioning", "{226CE8B6-51B6-4AD7-A133-BF83DF925DE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -102,9 +82,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{480E9A5C-6E59-44BC-9D25-3A2BC0057B2B} = {8091374C-EA52-4E3C-AD82-7D1DAF2DA442}
-		{234E8E32-CA91-4F16-BE5A-7E5E079C203C} = {C951776C-B912-4BB2-95ED-02A5D7A3F4A4}
-		{AC9581EA-C0AC-4EDD-9B66-858E2B3A6A8A} = {C951776C-B912-4BB2-95ED-02A5D7A3F4A4}
-		{8091374C-EA52-4E3C-AD82-7D1DAF2DA442} = {C951776C-B912-4BB2-95ED-02A5D7A3F4A4}
+		{480E9A5C-6E59-44BC-9D25-3A2BC0057B2B} = {C951776C-B912-4BB2-95ED-02A5D7A3F4A4}
 	EndGlobalSection
 EndGlobal

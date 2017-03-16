@@ -331,7 +331,7 @@ After upgrading Visual Studio or MSBuild, do not forget to update the
 Other places to look at:
 - fsci.cmd (for F# updates)
 - `TargetFrameworkVersion` in Narvalo.Common.props
-- For NuGet packaging check the target lib.
+- For NuGet packaging check the target lib in the NuGet projects (src\Packaging).
 
 ### Copyright Year Update
 
