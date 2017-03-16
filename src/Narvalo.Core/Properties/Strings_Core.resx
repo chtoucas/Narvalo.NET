@@ -127,6 +127,6 @@
     <value>The control flow path reached a section of the code that should have been unreachable under any circumstances.</value>
   </data>
   <data name="Argument_WhiteSpaceString" xml:space="preserve">
-    <value>String cannot be empty or contains only whitespaces.</value>
+    <value>String cannot be empty or contains only white spaces.</value>
   </data>
 </root>

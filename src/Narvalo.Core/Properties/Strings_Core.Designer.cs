@@ -80,7 +80,7 @@ namespace Narvalo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to String cannot be empty or contains only whitespaces..
+        ///   Looks up a localized string similar to String cannot be empty or contains only white spaces..
         /// </summary>
         internal static string Argument_WhiteSpaceString {
             get {

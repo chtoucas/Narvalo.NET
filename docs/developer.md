@@ -59,7 +59,7 @@ In addition:
 - For temporary strings, use `XXX`.
 - For tests, consider using traits:
   * `Slow` for slow tests.
-  * `Unsafe` for unsafe tests (`AppDomain` for instance).
+  * `Unsafe` for unsafe tests.
 
 All Code Analysis suppressions must be justified and tagged:
 - `[Ignore]` Only use this one to tag a false positive.
@@ -297,7 +297,7 @@ Checklist:
 - Check that the property `frameworkAssemblies` in nuspec's do not need any update.
 - Check that the `TargetFrameworkVersion` in projects and the one in the nuspec's must match.
 
-To release a new version of a package (for instance the core packages):
+To release a new version to the official NuGet repository:
 1. Create the packages: `make.ps1 -r pack`.
 2. Publish them: `publish.ps1 -r`
 3. Tag the repository. For instance, for version 1.1.0
@@ -313,12 +313,13 @@ Developer Operations
 
 ### Scripts
 
-- `codeformatter.cmd`
-- `cover.ps1`
-- `make.ps1`
-- `publish.ps1`
-- `restore.ps1`
-- `docs\make-docs.ps1`
+- `restore.ps1` restore the solution-level packages.
+- `make.ps1` build, test or package the projects.
+- `cover.ps1` test coverage.
+- `publish.ps1` publish the packages.
+
+- `format-code.cmd` format the code w/ [CodeFormatter](https://github.com/dotnet/codeformatter).
+- `docs\make-docs.ps1` build the documentation w/ [DocFX](https://dotnet.github.io/docfx/).
 
 ### NuGet Updates
 
