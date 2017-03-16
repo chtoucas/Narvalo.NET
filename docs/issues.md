@@ -9,8 +9,6 @@ Miscs
 - I think there is a problem w/ dependency resolution for EDGE packages
   on myget.org. Also, should we remove the EDGE suffix now that they always have
   a higher version number?
-- We could move package version infos into the nuproj's and
-  common version props to src\Packaging.
 - Enable continuous integration (Travis, AppVeyor, Coverall, Readthedoc)?
 
 Narvalo.Fx

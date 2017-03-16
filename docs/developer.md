@@ -274,20 +274,6 @@ I do not change the AssemblyVersion when PATCH is incremented.
 
 ### Version updates
 
-The dependency graph is the following:
-
-Library                   | Dependencies
---------------------------|-----------------------------------------------------
-Narvalo.Build             | -
-Narvalo.Common            | Core, Fx
-Narvalo.Core              | -
-Narvalo.Finance           | Core, Fx
-Narvalo.Fx                | Core
-Narvalo.Money             | Core
-Narvalo.Mvp               | Core
-Narvalo.Mvp.Web           | Core, Mvp
-Narvalo.Web               | Core, Common, Fx
-
 Let's see if things work with NuGet:
 - Patch update: X.Y.0.0 -> X.Y.1.0
   * If I publish Narvalo.Core but not Narvalo.Common, binding redirect works

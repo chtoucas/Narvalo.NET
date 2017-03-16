@@ -6,17 +6,17 @@ Narvalo.NET
 - [License for WebFormsMvp](https://github.com/chtoucas/Narvalo.NET/tree/master/LICENSE-WebFormsMvp.txt)
   on which depend Narvalo.Mvp and Narvalo.Mvp.Web.
 
-Project | Summary | Package
---------|---------|--------
-[Narvalo.Build](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Build/) | Custom MSBuild tasks | [![NuGet](https://img.shields.io/nuget/v/Narvalo.Build.svg)](https://www.nuget.org/packages/Narvalo.Build/)
-[Narvalo.Common](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Common/) | Utilities and extension methods | [![NuGet](https://img.shields.io/nuget/v/Narvalo.Common.svg)](https://www.nuget.org/packages/Narvalo.Common/)
-[Narvalo.Core](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Core/) | Helpers on which depend the other packages | [![NuGet](https://img.shields.io/nuget/v/Narvalo.Core.svg)](https://www.nuget.org/packages/Narvalo.Core/)
-[Narvalo.Finance](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Finance/) | BIC and IBAN types | [![NuGet](https://img.shields.io/nuget/v/Narvalo.Finance.svg)](https://www.nuget.org/packages/Narvalo.Finance/)
-[Narvalo.Fx](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Fx/) | Monads and functional patterns | [![NuGet](https://img.shields.io/nuget/v/Narvalo.Fx.svg)](https://www.nuget.org/packages/Narvalo.Fx/)
-[Narvalo.Money](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Money/) | Money and Currency types| [![NuGet](https://img.shields.io/nuget/v/Narvalo.Money.svg)](https://www.nuget.org/packages/Narvalo.Money/)
-[Narvalo.Mvp](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Mvp/) | MVP framework | [![NuGet](https://img.shields.io/nuget/v/Narvalo.Mvp.svg)](https://www.nuget.org/packages/Narvalo.Mvp/)
-[Narvalo.Mvp.Web](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Mvp.Web/) | WebForms MVP | [![NuGet](https://img.shields.io/nuget/v/Narvalo.Mvp.Web.svg)](https://www.nuget.org/packages/Narvalo.Mvp.Web/)
-[Narvalo.Web](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Web/) | ASP.NET utilities | [![NuGet](https://img.shields.io/nuget/v/Narvalo.Web.svg)](https://www.nuget.org/packages/Narvalo.Web/)
+Project | Summary | Internal Dependencies | Package
+--------|---------|-----------------------|-------------
+[Narvalo.Build](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Build/) | Custom **MSBuild** tasks | - | [![NuGet](https://img.shields.io/nuget/v/Narvalo.Build.svg)](https://www.nuget.org/packages/Narvalo.Build/)
+[Narvalo.Common](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Common/) | Utilities and extension methods | Core, Fx | [![NuGet](https://img.shields.io/nuget/v/Narvalo.Common.svg)](https://www.nuget.org/packages/Narvalo.Common/)
+[Narvalo.Core](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Core/) | Helpers on which depend the other packages | - | [![NuGet](https://img.shields.io/nuget/v/Narvalo.Core.svg)](https://www.nuget.org/packages/Narvalo.Core/)
+[Narvalo.Finance](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Finance/) | **BIC** and **IBAN** types | Core, Fx | [![NuGet](https://img.shields.io/nuget/v/Narvalo.Finance.svg)](https://www.nuget.org/packages/Narvalo.Finance/)
+[Narvalo.Fx](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Fx/) | **Monads** and functional patterns | Core | [![NuGet](https://img.shields.io/nuget/v/Narvalo.Fx.svg)](https://www.nuget.org/packages/Narvalo.Fx/)
+[Narvalo.Money](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Money/) | **Money** and **Currency** types | Core | [![NuGet](https://img.shields.io/nuget/v/Narvalo.Money.svg)](https://www.nuget.org/packages/Narvalo.Money/)
+[Narvalo.Mvp](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Mvp/) | **MVP** framework | Core | [![NuGet](https://img.shields.io/nuget/v/Narvalo.Mvp.svg)](https://www.nuget.org/packages/Narvalo.Mvp/)
+[Narvalo.Mvp.Web](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Mvp.Web/) | MVP for ASP.NET | Core, MVP | [![NuGet](https://img.shields.io/nuget/v/Narvalo.Mvp.Web.svg)](https://www.nuget.org/packages/Narvalo.Mvp.Web/)
+[Narvalo.Web](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Web/) | ASP.NET optimization | Core, Common, Fx | [![NuGet](https://img.shields.io/nuget/v/Narvalo.Web.svg)](https://www.nuget.org/packages/Narvalo.Web/)
 
 Samples:
   - [Command-Line MVP sample](https://github.com/chtoucas/Narvalo.NET/tree/master/samples/MvpCommandLine)
