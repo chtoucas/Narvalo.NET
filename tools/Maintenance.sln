@@ -63,6 +63,19 @@ EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "NuGetAgent", "NuGetAgent\NuGetAgent.fsproj", "{702370E8-516C-4AE4-8913-CDB198070812}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Versioning", "2. Versioning", "{226CE8B6-51B6-4AD7-A133-BF83DF925DE1}"
+	ProjectSection(SolutionItems) = preProject
+		..\src\Versioning\DefaultVersion.Mvp.props = ..\src\Versioning\DefaultVersion.Mvp.props
+		..\src\Versioning\DefaultVersion.props = ..\src\Versioning\DefaultVersion.props
+		..\src\Versioning\Narvalo.Build.Version.props = ..\src\Versioning\Narvalo.Build.Version.props
+		..\src\Versioning\Narvalo.Common.Version.props = ..\src\Versioning\Narvalo.Common.Version.props
+		..\src\Versioning\Narvalo.Core.Version.props = ..\src\Versioning\Narvalo.Core.Version.props
+		..\src\Versioning\Narvalo.Finance.Version.props = ..\src\Versioning\Narvalo.Finance.Version.props
+		..\src\Versioning\Narvalo.Fx.Version.props = ..\src\Versioning\Narvalo.Fx.Version.props
+		..\src\Versioning\Narvalo.Money.Version.props = ..\src\Versioning\Narvalo.Money.Version.props
+		..\src\Versioning\Narvalo.Mvp.Version.props = ..\src\Versioning\Narvalo.Mvp.Version.props
+		..\src\Versioning\Narvalo.Mvp.Web.Version.props = ..\src\Versioning\Narvalo.Mvp.Web.Version.props
+		..\src\Versioning\Narvalo.Web.Version.props = ..\src\Versioning\Narvalo.Web.Version.props
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

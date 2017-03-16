@@ -50,7 +50,7 @@
 
   <!-- (Kind of) Semantic versioning. -->
   <PropertyGroup>
-    <VersionFile>$(MSBuildProjectDirectory)\$(AssemblyName).Version.props</VersionFile>
+    <VersionFile>$(RepositoryRoot)src\Versioning\$(AssemblyName).Version.props</VersionFile>
 
     <VersionExists Condition=" Exists('$(VersionFile)') ">true</VersionExists>
     <VersionExists Condition=" '$(VersionExists)' != 'true' ">false</VersionExists>
