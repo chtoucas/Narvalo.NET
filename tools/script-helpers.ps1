@@ -71,6 +71,16 @@ function Find-PkgTool {
     return $matches | ForEach-Object { Join-Path -Path $_.FullName -ChildPath $tool -Resolve }
 }
 
+function Get-DocFXExe {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)]
+        [string] $Directory
+    )
+
+    return $Directory | Find-PkgTool -Pkg 'docfx.console.*' -Tool 'tools\docfx.exe'
+}
+
 <#
 .SYNOPSIS
     Get the path to the system git command.

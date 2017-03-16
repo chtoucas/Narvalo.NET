@@ -24,8 +24,7 @@ trap {
 
 # ------------------------------------------------------------------------------
 
-$docfx = (Get-LocalPath "packages") |
-    Find-PkgTool -Pkg 'docfx.console.*' -Tool 'tools\docfx.exe'
+$docfx = (Get-LocalPath "packages") | Get-DocFXExe
 
 # Extract language metadata.
 if ($ExtractApi) { . $docfx metadata }

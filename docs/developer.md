@@ -39,6 +39,7 @@ Temporary directories:
 
 There are three solutions:
 - `Narvalo.sln` the main solution.
+- `Narvalo.Light.sln` same as `Narvalo.sln` but without the test projects.
 - `samples\MvpSamples.sln` contains sample MVP projects.
 - `tools\Maintenance.sln` contains settings and maintenance scripts.
 
@@ -53,6 +54,7 @@ and [coreclr](https://github.com/dotnet/coreclr/blob/master/Documentation/coding
 
 To enforce the coding rules, we use [CodeFormatter](https://github.com/dotnet/codeformatter)
 (currently disabled as the tool does not support C# 7.0 yet).
+See [here](#developer-operations).
 
 In addition:
 - Consider using tasks: FIXME, HACK, TODO, REVIEW.
@@ -78,7 +80,7 @@ Project Configuration
 ### Initialize a C# project
 
 The following procedure enables us to centralize all settings:
-- Create a project and add it to `Narvalo.sln` and `tools\Make.proj`.
+- Create a project and add it to `Narvalo.sln`, `Narvalo.Light.sln` and `tools\Make.proj`.
 - Add the following line at the bottom of the project file, BEFORE the Microsoft targets:
 ```xml
 <Import Project="..\..\tools\Narvalo.Common.props" />
@@ -319,7 +321,7 @@ Developer Operations
 - `publish.ps1` publish the packages.
 
 - `format-code.cmd` format the code w/ [CodeFormatter](https://github.com/dotnet/codeformatter).
-- `docs\make-docs.ps1` build the documentation w/ [DocFX](https://dotnet.github.io/docfx/).
+- `docs\make.ps1` build the documentation w/ [DocFX](https://dotnet.github.io/docfx/).
 
 ### NuGet Updates
 
