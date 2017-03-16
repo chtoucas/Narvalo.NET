@@ -183,7 +183,7 @@ Create a property file `{AssemblyName}.props` with the following content:
 
 #### Portable Class Library
 
-The long term goal is to move to .NET Standard projects.
+The long term plan is to move to .NET Standard projects.
 
 We target at least .NET 4.5, Windows 8 and Windows Phone 8.1:
 - **Profile259** (.NET Framework 4.5, ASP.NET Core 1.0, Windows 8, Windows Phone 8.1, Windows Phone Silverlight 8):

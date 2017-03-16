@@ -30,7 +30,7 @@
       {
         "files": [
           "*.{md,yml}",
-          "userdocs/**/*.{md,yml}"
+          "userguide/**/*.{md,yml}"
         ]
       }
     ],
