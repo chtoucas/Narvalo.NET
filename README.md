@@ -3,8 +3,6 @@ Narvalo.NET
 
 - [Documentation](https://github.com/chtoucas/Narvalo.NET/tree/master/docs)
 - [License](https://github.com/chtoucas/Narvalo.NET/tree/master/LICENSE.txt)
-- [License for WebFormsMvp](https://github.com/chtoucas/Narvalo.NET/tree/master/LICENSE-WebFormsMvp.txt)
-  on which depend Narvalo.Mvp and Narvalo.Mvp.Web.
 
 Project | Summary | .NET Platform | Package
 --------|---------|---------------|--------
