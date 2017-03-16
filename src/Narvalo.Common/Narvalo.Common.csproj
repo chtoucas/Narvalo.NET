@@ -54,7 +54,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Narvalo.Common.Version.props" />
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>

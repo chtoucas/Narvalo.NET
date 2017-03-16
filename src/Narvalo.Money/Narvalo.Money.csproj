@@ -21,9 +21,6 @@
     <None Include="Narvalo.Money.props">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Narvalo.Money.Version.props">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>

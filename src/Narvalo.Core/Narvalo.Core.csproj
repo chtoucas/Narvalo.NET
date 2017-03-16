@@ -29,9 +29,6 @@
     <Compile Include="ValidatedNotNullAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Narvalo.Core.Version.props">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>

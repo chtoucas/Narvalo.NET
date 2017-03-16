@@ -33,10 +33,6 @@
     <Compile Include="JavaTasks\JavaScriptYuiCompressor.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Packaging\Narvalo.Build\Narvalo.Build.tasks">
-      <Link>Narvalo.Build.tasks</Link>
-    </None>
-    <None Include="Narvalo.Build.Version.props" />
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>

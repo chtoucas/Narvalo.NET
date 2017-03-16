@@ -10,9 +10,6 @@
     <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="Narvalo.Finance.Version.props">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>

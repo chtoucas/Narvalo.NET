@@ -82,7 +82,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Narvalo.Mvp.Version.props" />
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
