@@ -1,9 +1,16 @@
 :: Formatage automatique du code source.
 ::
 :: WARNING: Only works on my computer (path to CodeFormatter.exe is hard-coded).
+::
+:: Currently disabled:
+:: - It does not work for C# 7.0
+:: - The tool also fails with an error CS1702 on our solution (it passes if we
+::   comment out the CodeAnalysisRuleSet property in Narvalo.Common.props)
 
 @echo off
 @setlocal
+
+@goto Disabled
 
 :Setup
 
@@ -26,6 +33,15 @@
 
 @echo.
 @echo *** Path to CodeFormatter.exe is wrong ***
+@echo.
+
+@endlocal
+@exit /B 1
+
+:Disabled
+
+@echo.
+@echo *** CodeFormatter.exe does not yet work w/ C# 7.0 ***
 @echo.
 
 @endlocal

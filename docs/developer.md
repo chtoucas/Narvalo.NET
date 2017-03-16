@@ -52,7 +52,7 @@ We mostly follow the guidelines produced by the .NET teams:
 and [coreclr](https://github.com/dotnet/coreclr/blob/master/Documentation/coding-guidelines/).
 
 To enforce the coding rules, we use the [codeformatter](https://github.com/dotnet/codeformatter)
-tool.
+tool (currently disabled as the tool does not support C# 7.0).
 
 In addition:
 - Consider using tasks: FIXME, HACK, TODO, REVIEW.
