@@ -1,6 +1,7 @@
 :: Formatage automatique du code source.
 ::
 :: WARNING: Only works on my computer (path to CodeFormatter.exe is hard-coded).
+:: There is no NuGet package yet.
 ::
 :: Currently disabled:
 :: - It does not work for C# 7.0

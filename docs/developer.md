@@ -51,8 +51,8 @@ We mostly follow the guidelines produced by the .NET teams:
 [corefx](https://github.com/dotnet/corefx/blob/master/Documentation/coding-guidelines/)
 and [coreclr](https://github.com/dotnet/coreclr/blob/master/Documentation/coding-guidelines/).
 
-To enforce the coding rules, we use the [codeformatter](https://github.com/dotnet/codeformatter)
-tool (currently disabled as the tool does not support C# 7.0).
+To enforce the coding rules, we use [CodeFormatter](https://github.com/dotnet/codeformatter)
+(currently disabled as the tool does not support C# 7.0 yet).
 
 In addition:
 - Consider using tasks: FIXME, HACK, TODO, REVIEW.
