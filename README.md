@@ -20,18 +20,3 @@ Project | Summary | .NET Platform | Package
 Samples:
   - [Command-Line MVP sample](https://github.com/chtoucas/Narvalo.NET/tree/master/samples/MvpCommandLine)
   - [WebForms MVP sample](https://github.com/chtoucas/Narvalo.NET/tree/master/samples/MvpWebForms)
-
-Internal dependency graph:
-
-Project         | Dependencies
-----------------|-------------
-Narvalo.Build   | -
-Narvalo.Cerbere | -
-Narvalo.Common  | Core, Fx
-Narvalo.Core    | -
-Narvalo.Finance | Core, Fx
-Narvalo.Fx      | Core
-Narvalo.Money   | Core
-Narvalo.Mvp     | Core
-Narvalo.Mvp.Web | Core, Mvp
-Narvalo.Web     | Core, Common, Fx
