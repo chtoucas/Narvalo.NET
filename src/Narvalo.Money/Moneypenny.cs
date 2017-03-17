@@ -255,7 +255,7 @@ namespace Narvalo
             else
             {
                 throw new FormatException(
-                    Format.Current(Strings.Money_BadFormatSpecifier_Format, format));
+                    Format.Current(Strings.Money_BadMainSpecifier_Format, format));
             }
 
             return MoneyFormatter.FormatMoney(spec, Amount, PennyOrCurrencyCode, info);

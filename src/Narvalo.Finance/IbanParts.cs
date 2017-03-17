@@ -90,17 +90,26 @@ namespace Narvalo.Finance
         {
             if (value == null || !CheckLength(value))
             {
-                return Outcome<IbanParts>.FromError(Strings.Parse_InvalidIbanValue);
+                return Outcome<IbanParts>.FromError(Format.Current(Strings.InvalidIbanValue_Format, value));
             }
 
             string countryCode = CountryPart.FromIban(value);
-            if (countryCode == null) { return Outcome<IbanParts>.FromError(Strings.Parse_InvalidCountryCode); }
+            if (countryCode == null)
+            {
+                return Outcome<IbanParts>.FromError(Format.Current(Strings.InvalidInput_CountryCode_Format, value));
+            }
 
             string checkDigits = CheckDigitsPart.FromIban(value);
-            if (checkDigits == null) { return Outcome<IbanParts>.FromError(Strings.Parse_InvalidCheckDigits); }
+            if (checkDigits == null)
+            {
+                return Outcome<IbanParts>.FromError(Format.Current(Strings.InvalidInput_CheckDigits_Format, value));
+            }
 
             string bban = BbanPart.FromIban(value);
-            if (bban == null) { return Outcome<IbanParts>.FromError(Strings.Parse_InvalidBban); }
+            if (bban == null)
+            {
+                return Outcome<IbanParts>.FromError(Format.Current(Strings.InvalidInput_Bban_Format, value));
+            }
 
             return Outcome.Of(new IbanParts(countryCode, checkDigits, bban, value));
         }
@@ -187,7 +196,10 @@ namespace Narvalo.Finance
         public string ToString(string format, IFormatProvider formatProvider)
         {
             if (format == null || format.Length == 0) { format = DefaultFormat; }
-            if (format.Length != 1) { throw new FormatException("XXX"); }
+            if (format.Length != 1)
+            {
+                throw new FormatException(Format.Current(Strings.Iban_BadFormatSpecifier_Format, format));
+            }
 
             // Take the first char and uppercase it (ASCII only).
             switch (format[0] & 0xDF)
@@ -204,7 +216,7 @@ namespace Narvalo.Finance
                     // This format is NOT suitable for electronic transmission.
                     return FormatGeneral(_value);
                 default:
-                    throw new FormatException(Format.Current(Strings.Iban_InvalidFormatSpecification));
+                    throw new FormatException(Format.Current(Strings.Iban_BadFormatSpecifier_Format, format));
             }
         }
 

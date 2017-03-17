@@ -108,7 +108,10 @@ namespace Narvalo.Finance
 
         public static Outcome<Iban> TryParse(string value, IbanStyles styles, IbanValidationLevels levels)
         {
-            if (value == null) { return Outcome<Iban>.FromError(Strings.Parse_InvalidIbanValue); }
+            if (value == null)
+            {
+                return Outcome<Iban>.FromError(Format.Current(Strings.InvalidIbanValue_Format, value));
+            }
 
             string input = PreprocessInput(value, styles);
 

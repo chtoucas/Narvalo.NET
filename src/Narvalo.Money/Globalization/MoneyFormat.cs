@@ -70,7 +70,7 @@ namespace Narvalo
             }
 
             throw new FormatException(
-                    Format.Current(Strings.Money_BadSpecifier_Format, format));
+                    Format.Current(Strings.Money_BadFormatSpecifier_Format, format));
         }
     }
 }

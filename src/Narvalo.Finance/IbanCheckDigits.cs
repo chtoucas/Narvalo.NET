@@ -5,6 +5,8 @@ namespace Narvalo.Finance
     using System;
     using System.Globalization;
 
+    using Narvalo.Finance.Properties;
+
     // ComputeInt64Checksum() is slightly faster in a 64-bit process; it does more additions
     // but less divisions.
     // NB: On full .NET we have Environment.Is64BitProcess.
@@ -72,7 +74,8 @@ namespace Narvalo.Finance
                 }
                 else
                 {
-                    throw new ArgumentException("XXX", nameof(value));
+                    throw new ArgumentException(
+                        Format.Current(Strings.IbanValueIsNotWellFormed_Format, value), nameof(value));
                 }
             }
 
@@ -108,7 +111,8 @@ namespace Narvalo.Finance
                 }
                 else
                 {
-                    throw new ArgumentException("XXX", nameof(value));
+                    throw new ArgumentException(
+                        Format.Current(Strings.IbanValueIsNotWellFormed_Format, value), nameof(value));
                 }
             }
 

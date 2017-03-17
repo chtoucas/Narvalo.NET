@@ -117,82 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Argument_CurrencyMismatch" xml:space="preserve">
-    <value>Argument_CurrencyMismatch</value>
+  <data name="BbanVerificationFailure_Format" xml:space="preserve">
+    <value>Nous n'avons pas été en mesure de vérifier le code BBAN suivant '{0}'.</value>
   </data>
-  <data name="Argument_InvalidBicParts" xml:space="preserve">
-    <value>Argument_InvalidBicParts</value>
+  <data name="IbanIntegrityCheckFailure_Format" xml:space="preserve">
+    <value>Nous n'avons pas été en mesure de vérifier du code IBAN suivant '{0}'.</value>
   </data>
-  <data name="Argument_InvalidIbanParts" xml:space="preserve">
-    <value>Argument_InvalidIbanParts</value>
+  <data name="IbanValueIsNotWellFormed_Format" xml:space="preserve">
+    <value>La valeur '{0}' ne représente pas un code IBAN bien formée.</value>
   </data>
-  <data name="Argument_InvalidMoneyType" xml:space="preserve">
-    <value>L'argument doit être de type Money.</value>
+  <data name="Iban_BadFormatSpecifier_Format" xml:space="preserve">
+    <value>La spécification de format est invalide; les valeurs admissibles sont null, une chaîne de caractères vide, 'G', 'g', 'C', 'c', 'H' et 'h'.</value>
   </data>
-  <data name="Argument_NeutralCultureNotSupported" xml:space="preserve">
-    <value>Argument_NeutralCultureNotSupported</value>
+  <data name="InvalidBicValue_Format" xml:space="preserve">
+    <value>La valeur d'un code BIC ne peut pas être null et doit être composée de 8 ou 11 caractères; valeur reçue '{0}'.</value>
   </data>
-  <data name="BooleanResult_NoErrorMessage" xml:space="preserve">
-    <value>BooleanResult_NoErrorMessage</value>
+  <data name="InvalidIbanValue_Format" xml:space="preserve">
+    <value>La valeur d'un code IBANne peut pas être null et doit être composée de 14 à 34 caractères; valeur reçue '{0}'.</value>
   </data>
-  <data name="CurrencyNotFound_DefaultMessage" xml:space="preserve">
-    <value>Devise inconnue.</value>
+  <data name="InvalidInput_Bban_Format" xml:space="preserve">
+    <value>La valeur en entrée ne nous a pas permis d'en extraire le code BBAN; valeur reçue '{0}'.</value>
   </data>
-  <data name="Currency_UnknownCode" xml:space="preserve">
-    <value>Devise inconnue : {0}.</value>
+  <data name="InvalidInput_BranchCode_Format" xml:space="preserve">
+    <value>La valeur en entrée ne nous a pas permis d'en extraire le code branche; valeur reçue '{0}'.</value>
   </data>
-  <data name="IbanValidator_BbanVerificationFailure" xml:space="preserve">
-    <value>IbanValidator_BbanVerificationFailure</value>
+  <data name="InvalidInput_CheckDigits_Format" xml:space="preserve">
+    <value>La valeur en entrée ne nous a pas permis d'en extraire la clef de contrôle; valeur reçue '{0}'.</value>
   </data>
-  <data name="IbanValidator_IntegrityCheckFailure" xml:space="preserve">
-    <value>IbanValidator_IntegrityCheckFailure</value>
+  <data name="InvalidInput_CountryCode_Format" xml:space="preserve">
+    <value>La valeur en entrée ne nous a pas permis d'en extraire le code pays; valeur reçue '{0}'.</value>
   </data>
-  <data name="IbanValidator_UnknownISOCountryCode" xml:space="preserve">
-    <value>IbanValidator_UnknownISOCountryCode</value>
+  <data name="InvalidInput_InstitutionCode_Format" xml:space="preserve">
+    <value>La valeur en entrée ne nous a pas permis d'en extraire le code banque valeur reçue '{0}'.</value>
   </data>
-  <data name="Iban_InvalidFormatSpecification" xml:space="preserve">
-    <value>Iban_InvalidFormatSpecification</value>
+  <data name="InvalidInput_LocationCode_Format" xml:space="preserve">
+    <value>La valeur en entrée ne nous a pas permis d'en extraire le code emplacement; valeur reçue '{0}'.</value>
   </data>
-  <data name="Moneypenny_InvalidFormatSpecification" xml:space="preserve">
-    <value>Moneypenny_InvalidFormatSpecification</value>
-  </data>
-  <data name="Money_InvalidFormatSpecification" xml:space="preserve">
-    <value>Money_InvalidFormatSpecification</value>
-  </data>
-  <data name="Result_NoErrorMessage" xml:space="preserve">
-    <value>Result_NoErrorMessage</value>
-  </data>
-  <data name="Result_NoValue" xml:space="preserve">
-    <value>Result_NoValue</value>
-  </data>
-  <data name="Parse_InvalidBban" xml:space="preserve">
-    <value>Parse_InvalidBban</value>
-  </data>
-  <data name="Parse_InvalidBicValue" xml:space="preserve">
-    <value>Un code BIC doit comporter 8 ou 11 caractères.</value>
-  </data>
-  <data name="Parse_InvalidBranchCode" xml:space="preserve">
-    <value>Parse_InvalidBranchCode</value>
-  </data>
-  <data name="Parse_InvalidCheckDigits" xml:space="preserve">
-    <value>Parse_InvalidCheckDigits</value>
-  </data>
-  <data name="Parse_InvalidCountryCode" xml:space="preserve">
-    <value>Parse_InvalidCountryCode</value>
-  </data>
-  <data name="Parse_InvalidIbanValue" xml:space="preserve">
-    <value>Un code IBAN string doit comporter de 14 à 34 caractères.</value>
-  </data>
-  <data name="Parse_InvalidInstitutionCode" xml:space="preserve">
-    <value>Parse_InvalidInstitutionCode</value>
-  </data>
-  <data name="Parse_InvalidLocationCode" xml:space="preserve">
-    <value>Parse_InvalidLocationCode</value>
-  </data>
-  <data name="Sentinel_OutOfRangeCurrencyAlphabeticCode" xml:space="preserve">
-    <value>Le code alphabétique d'une devise doit comporter 3 caractères exactement.</value>
-  </data>
-  <data name="Sentinel_OutOfRangeCurrencyNumericCode" xml:space="preserve">
-    <value>Le code alphabétique d'une devise doit être strictement positif et inférieur ou égal à 1000.</value>
+  <data name="UnknownISOCountryCode_Format" xml:space="preserve">
+    <value>La valeur '{0}' n'a pas été reconnu comme représentant un code pays au sens ISO.</value>
   </data>
 </root>

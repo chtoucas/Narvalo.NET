@@ -126,8 +126,8 @@
   <data name="CurrencyNotFound_UnknownCode_Format" xml:space="preserve">
     <value>Unknown currency code: '{0}'.</value>
   </data>
-  <data name="Money_BadFormatSpecifier_Format" xml:space="preserve">
-    <value>Format specifier '{0}' was invalid; valid specifiers are 'N', 'L', 'R' and 'G'.</value>
+  <data name="Money_BadMainSpecifier_Format" xml:space="preserve">
+    <value>Format specifier '{0}' was invalid; valid specifiers are 'N', 'n', 'L', 'l', 'R', 'r', 'G' and 'g',.</value>
   </data>
   <data name="Argument_CannotCompare" xml:space="preserve">
     <value>The two objects cannot be compared.</value>
@@ -165,7 +165,7 @@
   <data name="Money_BadPrecisionSpecifier_Format" xml:space="preserve">
     <value>Precision specifier '{0}' was invalid; valid specifiers ranges from 0 to 99 (no leading zero).</value>
   </data>
-  <data name="Money_BadSpecifier_Format" xml:space="preserve">
-    <value>Format specifier '{0}' was invalid; valid specifiers takes the form "Axx" where A is a single character 'N', 'L', 'R' or 'G', and xx is an optional integer ranging from 0 to 99 (no leading zero).</value>
+  <data name="Money_BadFormatSpecifier_Format" xml:space="preserve">
+    <value>Format specifier '{0}' was invalid; valid specifiers takes the form "Axx" where A is a single character 'N', 'n', 'L', 'l', 'R', 'r', 'G' or 'g', and xx is an optional integer ranging from 0 to 99 (no leading zero).</value>
   </data>
 </root>

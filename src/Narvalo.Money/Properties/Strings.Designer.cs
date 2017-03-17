@@ -170,11 +170,20 @@ namespace Narvalo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Format specifier &apos;{0}&apos; was invalid; valid specifiers are &apos;N&apos;, &apos;L&apos;, &apos;R&apos; and &apos;G&apos;..
+        ///   Looks up a localized string similar to Format specifier &apos;{0}&apos; was invalid; valid specifiers takes the form &quot;Axx&quot; where A is a single character &apos;N&apos;, &apos;n&apos;, &apos;L&apos;, &apos;l&apos;, &apos;R&apos;, &apos;r&apos;, &apos;G&apos; or &apos;g&apos;, and xx is an optional integer ranging from 0 to 99 (no leading zero)..
         /// </summary>
         internal static string Money_BadFormatSpecifier_Format {
             get {
                 return ResourceManager.GetString("Money_BadFormatSpecifier_Format", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Format specifier &apos;{0}&apos; was invalid; valid specifiers are &apos;N&apos;, &apos;n&apos;, &apos;L&apos;, &apos;l&apos;, &apos;R&apos;, &apos;r&apos;, &apos;G&apos; and &apos;g&apos;,..
+        /// </summary>
+        internal static string Money_BadMainSpecifier_Format {
+            get {
+                return ResourceManager.GetString("Money_BadMainSpecifier_Format", resourceCulture);
             }
         }
         
@@ -184,15 +193,6 @@ namespace Narvalo.Properties {
         internal static string Money_BadPrecisionSpecifier_Format {
             get {
                 return ResourceManager.GetString("Money_BadPrecisionSpecifier_Format", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Format specifier &apos;{0}&apos; was invalid; valid specifiers takes the form &quot;Axx&quot; where A is a single character &apos;N&apos;, &apos;L&apos;, &apos;R&apos; or &apos;G&apos;, and xx is an optional integer ranging from 0 to 99 (no leading zero)..
-        /// </summary>
-        internal static string Money_BadSpecifier_Format {
-            get {
-                return ResourceManager.GetString("Money_BadSpecifier_Format", resourceCulture);
             }
         }
         

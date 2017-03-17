@@ -154,13 +154,13 @@
     <value>La séquence est vide.</value>
   </data>
   <data name="Money_BadFormatSpecifier_Format" xml:space="preserve">
-    <value>La spécification de format '{0}' n'est pas valide; les valeurs admissibles sont 'N', 'L', 'R' et 'G'.</value>
+    <value>La spécification de format '{0}' n'est pas valide; les valeurs admissibles prennent la forme "Axx" où A est égal à  'N', 'n', 'L', 'l', 'R', 'r', 'G' ou 'g', et xx est un entier facultatif allant de 0 à 99 (sans zéro en tête).</value>
+  </data>
+  <data name="Money_BadMainSpecifier_Format" xml:space="preserve">
+    <value>La spécification de format '{0}' n'est pas valide; les valeurs admissibles sont  'N', 'n', 'L', 'l', 'R', 'r', 'G' et 'g'.</value>
   </data>
   <data name="Money_BadPrecisionSpecifier_Format" xml:space="preserve">
     <value>La spécification de précision '{0}' n'est pas valide; les valeurs admissibles vont de 0 à 99 (sans zéro en tête).</value>
-  </data>
-  <data name="Money_BadSpecifier_Format" xml:space="preserve">
-    <value>La spécification de format '{0}' n'est pas valide; les valeurs admissibles prennent la forme "Axx" où A est égal à 'N', 'L', 'R' ou 'G', et xx est un entier facultatif allant de 0 à 99 (sans zéro en tête).</value>
   </data>
   <data name="NotSupported_CurrencyActivation_Format" xml:space="preserve">
     <value>Nous n'avons pas pu créer une devise de type '{0}'. Il s'agit d'une erreur interne: le type ne définit pas de propriété Unit retournant un objet du type en question.</value>
