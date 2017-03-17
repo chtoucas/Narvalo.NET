@@ -91,36 +91,36 @@ namespace Narvalo.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The alphabetic code &apos;{0}&apos; must be composed of exactly three ASCII characters, all uppercase..
         /// </summary>
-        internal static string Argument_InvalidCurrencyCode_Format {
+        internal static string Argument_InvalidCurrencyCode {
             get {
-                return ResourceManager.GetString("Argument_InvalidCurrencyCode_Format", resourceCulture);
+                return ResourceManager.GetString("Argument_InvalidCurrencyCode", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The minor units &apos;{0}&apos; must be null OR be greater or equal to 0 and less than or equal to 28..
         /// </summary>
-        internal static string Argument_InvalidCurrencyMinorUnits_Format {
+        internal static string Argument_InvalidCurrencyMinorUnits {
             get {
-                return ResourceManager.GetString("Argument_InvalidCurrencyMinorUnits_Format", resourceCulture);
+                return ResourceManager.GetString("Argument_InvalidCurrencyMinorUnits", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to This method does not accept neutral cultures; &apos;{0}&apos; was used..
         /// </summary>
-        internal static string Argument_NeutralCultureNotSupported_Format {
+        internal static string Argument_NeutralCultureNotSupported {
             get {
-                return ResourceManager.GetString("Argument_NeutralCultureNotSupported_Format", resourceCulture);
+                return ResourceManager.GetString("Argument_NeutralCultureNotSupported", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Currency mismatch; expected &apos;{0}&apos; but found &apos;{1}&apos;..
         /// </summary>
-        internal static string CurrencyMismatch_Format {
+        internal static string CurrencyMismatch {
             get {
-                return ResourceManager.GetString("CurrencyMismatch_Format", resourceCulture);
+                return ResourceManager.GetString("CurrencyMismatch", resourceCulture);
             }
         }
         
@@ -136,9 +136,9 @@ namespace Narvalo.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Unknown currency code: &apos;{0}&apos;..
         /// </summary>
-        internal static string CurrencyNotFound_UnknownCode_Format {
+        internal static string CurrencyNotFound_UnknownCode {
             get {
-                return ResourceManager.GetString("CurrencyNotFound_UnknownCode_Format", resourceCulture);
+                return ResourceManager.GetString("CurrencyNotFound_UnknownCode", resourceCulture);
             }
         }
         
@@ -172,45 +172,45 @@ namespace Narvalo.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Format specifier &apos;{0}&apos; was invalid; valid specifiers takes the form &quot;Axx&quot; where A is a single character &apos;N&apos;, &apos;n&apos;, &apos;L&apos;, &apos;l&apos;, &apos;R&apos;, &apos;r&apos;, &apos;G&apos; or &apos;g&apos;, and xx is an optional integer ranging from 0 to 99 (no leading zero)..
         /// </summary>
-        internal static string Money_BadFormatSpecifier_Format {
+        internal static string Money_BadFormatSpecifier {
             get {
-                return ResourceManager.GetString("Money_BadFormatSpecifier_Format", resourceCulture);
+                return ResourceManager.GetString("Money_BadFormatSpecifier", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Format specifier &apos;{0}&apos; was invalid; valid specifiers are &apos;N&apos;, &apos;n&apos;, &apos;L&apos;, &apos;l&apos;, &apos;R&apos;, &apos;r&apos;, &apos;G&apos; and &apos;g&apos;,..
         /// </summary>
-        internal static string Money_BadMainSpecifier_Format {
+        internal static string Money_BadMainSpecifier {
             get {
-                return ResourceManager.GetString("Money_BadMainSpecifier_Format", resourceCulture);
+                return ResourceManager.GetString("Money_BadMainSpecifier", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Precision specifier &apos;{0}&apos; was invalid; valid specifiers ranges from 0 to 99 (no leading zero)..
         /// </summary>
-        internal static string Money_BadPrecisionSpecifier_Format {
+        internal static string Money_BadPrecisionSpecifier {
             get {
-                return ResourceManager.GetString("Money_BadPrecisionSpecifier_Format", resourceCulture);
+                return ResourceManager.GetString("Money_BadPrecisionSpecifier", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Cannot create an instance of the currency &apos;{0}&apos;. This is an internal unrecoverable error: the type does not define a property named Unit returning an instance of the currency..
         /// </summary>
-        internal static string NotSupported_CurrencyActivation_Format {
+        internal static string NotSupported_CurrencyActivation {
             get {
-                return ResourceManager.GetString("NotSupported_CurrencyActivation_Format", resourceCulture);
+                return ResourceManager.GetString("NotSupported_CurrencyActivation", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The currency &apos;{0}&apos; does not admit a minor currency unit. You should check that the property HasMinorCurrency is true before..
         /// </summary>
-        internal static string NotSupported_MinorCurrency_Format {
+        internal static string NotSupported_MinorCurrency {
             get {
-                return ResourceManager.GetString("NotSupported_MinorCurrency_Format", resourceCulture);
+                return ResourceManager.GetString("NotSupported_MinorCurrency", resourceCulture);
             }
         }
     }

@@ -126,22 +126,22 @@
   <data name="Argument_IncompleteRatioArray" xml:space="preserve">
     <value>La somme de tous les rapports doit être égale à 100.</value>
   </data>
-  <data name="Argument_InvalidCurrencyCode_Format" xml:space="preserve">
+  <data name="Argument_InvalidCurrencyCode" xml:space="preserve">
     <value>Le code alphabétique '{0}' d'une devise doit être composé d'exactement trois caractères ASCII tous en majuscule.</value>
   </data>
-  <data name="Argument_InvalidCurrencyMinorUnits_Format" xml:space="preserve">
+  <data name="Argument_InvalidCurrencyMinorUnits" xml:space="preserve">
     <value>Le nombre décimales après la virgule '{0}' doit être null, ou plus grand que zéro (inclus) et plus petit que 28 (inclus).</value>
   </data>
-  <data name="Argument_NeutralCultureNotSupported_Format" xml:space="preserve">
+  <data name="Argument_NeutralCultureNotSupported" xml:space="preserve">
     <value>Cette méthode n'accepte pas de culture neutre en entrée; reçue '{0}'.</value>
   </data>
-  <data name="CurrencyMismatch_Format" xml:space="preserve">
+  <data name="CurrencyMismatch" xml:space="preserve">
     <value>Devise incompatible; attendue '{0}', reçue '{1}'.</value>
   </data>
   <data name="CurrencyNotFound_DefaultMessage" xml:space="preserve">
     <value>Devise inconnue.</value>
   </data>
-  <data name="CurrencyNotFound_UnknownCode_Format" xml:space="preserve">
+  <data name="CurrencyNotFound_UnknownCode" xml:space="preserve">
     <value>Le code alphabétique '{0}' ne correspond pas à une devise reconnue.</value>
   </data>
   <data name="InvalidConversion_MoneyIsNotNormalized" xml:space="preserve">
@@ -153,19 +153,19 @@
   <data name="InvalidOperation_EmptySequence" xml:space="preserve">
     <value>La séquence est vide.</value>
   </data>
-  <data name="Money_BadFormatSpecifier_Format" xml:space="preserve">
+  <data name="Money_BadFormatSpecifier" xml:space="preserve">
     <value>La spécification de format '{0}' n'est pas valide; les valeurs admissibles prennent la forme "Axx" où A est égal à  'N', 'n', 'L', 'l', 'R', 'r', 'G' ou 'g', et xx est un entier facultatif allant de 0 à 99 (sans zéro en tête).</value>
   </data>
-  <data name="Money_BadMainSpecifier_Format" xml:space="preserve">
+  <data name="Money_BadMainSpecifier" xml:space="preserve">
     <value>La spécification de format '{0}' n'est pas valide; les valeurs admissibles sont  'N', 'n', 'L', 'l', 'R', 'r', 'G' et 'g'.</value>
   </data>
-  <data name="Money_BadPrecisionSpecifier_Format" xml:space="preserve">
+  <data name="Money_BadPrecisionSpecifier" xml:space="preserve">
     <value>La spécification de précision '{0}' n'est pas valide; les valeurs admissibles vont de 0 à 99 (sans zéro en tête).</value>
   </data>
-  <data name="NotSupported_CurrencyActivation_Format" xml:space="preserve">
+  <data name="NotSupported_CurrencyActivation" xml:space="preserve">
     <value>Nous n'avons pas pu créer une devise de type '{0}'. Il s'agit d'une erreur interne: le type ne définit pas de propriété Unit retournant un objet du type en question.</value>
   </data>
-  <data name="NotSupported_MinorCurrency_Format" xml:space="preserve">
+  <data name="NotSupported_MinorCurrency" xml:space="preserve">
     <value>La devise '{0}' n'admet pas d'unité mineure. Veuillez vérifier au préalable que la propriété HasMinorCurrency a la valeur true.</value>
   </data>
 </root>

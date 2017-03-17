@@ -90,25 +90,25 @@ namespace Narvalo.Finance
         {
             if (value == null || !CheckLength(value))
             {
-                return Outcome<IbanParts>.FromError(Format.Current(Strings.InvalidIbanValue_Format, value));
+                return Outcome<IbanParts>.FromError(Format.Current(Strings.InvalidIbanValue, value));
             }
 
             string countryCode = CountryPart.FromIban(value);
             if (countryCode == null)
             {
-                return Outcome<IbanParts>.FromError(Format.Current(Strings.InvalidInput_CountryCode_Format, value));
+                return Outcome<IbanParts>.FromError(Format.Current(Strings.InvalidInput_CountryCode, value));
             }
 
             string checkDigits = CheckDigitsPart.FromIban(value);
             if (checkDigits == null)
             {
-                return Outcome<IbanParts>.FromError(Format.Current(Strings.InvalidInput_CheckDigits_Format, value));
+                return Outcome<IbanParts>.FromError(Format.Current(Strings.InvalidInput_CheckDigits, value));
             }
 
             string bban = BbanPart.FromIban(value);
             if (bban == null)
             {
-                return Outcome<IbanParts>.FromError(Format.Current(Strings.InvalidInput_Bban_Format, value));
+                return Outcome<IbanParts>.FromError(Format.Current(Strings.InvalidInput_Bban, value));
             }
 
             return Outcome.Of(new IbanParts(countryCode, checkDigits, bban, value));
@@ -198,7 +198,7 @@ namespace Narvalo.Finance
             if (format == null || format.Length == 0) { format = DefaultFormat; }
             if (format.Length != 1)
             {
-                throw new FormatException(Format.Current(Strings.Iban_BadFormatSpecifier_Format, format));
+                throw new FormatException(Format.Current(Strings.Iban_BadFormatSpecifier, format));
             }
 
             // Take the first char and uppercase it (ASCII only).
@@ -216,7 +216,7 @@ namespace Narvalo.Finance
                     // This format is NOT suitable for electronic transmission.
                     return FormatGeneral(_value);
                 default:
-                    throw new FormatException(Format.Current(Strings.Iban_BadFormatSpecifier_Format, format));
+                    throw new FormatException(Format.Current(Strings.Iban_BadFormatSpecifier, format));
             }
         }
 

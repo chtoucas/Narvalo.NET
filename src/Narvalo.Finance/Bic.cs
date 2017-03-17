@@ -146,31 +146,31 @@ namespace Narvalo.Finance
         {
             if (value == null || !CheckLength(value))
             {
-                return Outcome<Bic>.FromError(Format.Current(Strings.InvalidBicValue_Format, value));
+                return Outcome<Bic>.FromError(Format.Current(Strings.InvalidBicValue, value));
             }
 
             string institutionCode = InstitutionPart.FromBic(value, version);
             if (institutionCode == null)
             {
-                return Outcome<Bic>.FromError(Format.Current(Strings.InvalidInput_InstitutionCode_Format, value));
+                return Outcome<Bic>.FromError(Format.Current(Strings.InvalidInput_InstitutionCode, value));
             }
 
             string countryCode = CountryPart.FromBic(value);
             if (countryCode == null)
             {
-                return Outcome<Bic>.FromError(Format.Current(Strings.InvalidInput_CountryCode_Format, value));
+                return Outcome<Bic>.FromError(Format.Current(Strings.InvalidInput_CountryCode, value));
             }
 
             string locationCode = LocationPart.FromBic(value);
             if (locationCode == null)
             {
-                return Outcome<Bic>.FromError(Format.Current(Strings.InvalidInput_LocationCode_Format, value));
+                return Outcome<Bic>.FromError(Format.Current(Strings.InvalidInput_LocationCode, value));
             }
 
             string branchCode = BranchPart.FromBic(value);
             if (branchCode == null)
             {
-                return Outcome<Bic>.FromError(Format.Current(Strings.InvalidInput_BranchCode_Format, value));
+                return Outcome<Bic>.FromError(Format.Current(Strings.InvalidInput_BranchCode, value));
             }
 
             return Outcome.Of(new Bic(institutionCode, countryCode, locationCode, branchCode, value));

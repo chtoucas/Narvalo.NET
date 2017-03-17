@@ -6,7 +6,7 @@ Miscs
 
 - Review localization for Narvalo.Build, Narvalo.Mvp, Narvalo.Mvp.Web
   and Narvalo.Web.
-- There might be a conflict between the new package format and our target `Package`.
+- We might have a conflict between the new package format and our target `Package`.
 - Update CodeFormatter when it supports C# 7.0. After that, change
   from `format-code.cmd` to `format-code.ps1`.
 - I think there is a problem w/ dependency resolution for EDGE packages

@@ -37,17 +37,17 @@ namespace Narvalo.Finance
             if (_verifyIntegrity && !VerifyIntegrity(parts))
             {
                 return Outcome.FromError(
-                    Format.Current(Strings.IbanIntegrityCheckFailure_Format, parts.LiteralValue));
+                    Format.Current(Strings.IbanIntegrityCheckFailure, parts.LiteralValue));
             }
             if (_verifyISOCountryCode && !VerifyISOCountryCode(parts))
             {
                 return Outcome.FromError(
-                    Format.Current(Strings.UnknownISOCountryCode_Format, parts.CountryCode));
+                    Format.Current(Strings.UnknownISOCountryCode, parts.CountryCode));
             }
             if (_verifyBban && !VerifyBban(parts))
             {
                 return Outcome.FromError(
-                    Format.Current(Strings.BbanVerificationFailure_Format, parts.Bban));
+                    Format.Current(Strings.BbanVerificationFailure, parts.Bban));
             }
 
             return Outcome.Ok;

@@ -63,9 +63,9 @@ namespace Narvalo.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Illegal character &apos;{0}&apos; found at position &apos;{1}&apos;..
         /// </summary>
-        internal static string IllegalCharacter_Format {
+        internal static string IllegalCharacter {
             get {
-                return ResourceManager.GetString("IllegalCharacter_Format", resourceCulture);
+                return ResourceManager.GetString("IllegalCharacter", resourceCulture);
             }
         }
         

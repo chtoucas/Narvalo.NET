@@ -110,7 +110,7 @@ namespace Narvalo.Finance
         {
             if (value == null)
             {
-                return Outcome<Iban>.FromError(Format.Current(Strings.InvalidIbanValue_Format, value));
+                return Outcome<Iban>.FromError(Format.Current(Strings.InvalidIbanValue, value));
             }
 
             string input = PreprocessInput(value, styles);

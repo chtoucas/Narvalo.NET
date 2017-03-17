@@ -64,117 +64,117 @@ namespace Narvalo.Finance.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Failed to verify the BBAN code: &apos;{0}&apos;..
         /// </summary>
-        internal static string BbanVerificationFailure_Format {
+        internal static string BbanVerificationFailure {
             get {
-                return ResourceManager.GetString("BbanVerificationFailure_Format", resourceCulture);
+                return ResourceManager.GetString("BbanVerificationFailure", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Format specifier &apos;{0}&apos; was invalid; valid specifiers are null, an empty string, &apos;G&apos;, &apos;g&apos;, &apos;C&apos;, &apos;c&apos;, &apos;H&apos;, &apos;h&apos;..
         /// </summary>
-        internal static string Iban_BadFormatSpecifier_Format {
+        internal static string Iban_BadFormatSpecifier {
             get {
-                return ResourceManager.GetString("Iban_BadFormatSpecifier_Format", resourceCulture);
+                return ResourceManager.GetString("Iban_BadFormatSpecifier", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Failed to verify integrity of the IBAN code: &apos;{0}&apos;..
         /// </summary>
-        internal static string IbanIntegrityCheckFailure_Format {
+        internal static string IbanIntegrityCheckFailure {
             get {
-                return ResourceManager.GetString("IbanIntegrityCheckFailure_Format", resourceCulture);
+                return ResourceManager.GetString("IbanIntegrityCheckFailure", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The IBAN value is not well-formed: &apos;{0}&apos;..
         /// </summary>
-        internal static string IbanValueIsNotWellFormed_Format {
+        internal static string IbanValueIsNotWellFormed {
             get {
-                return ResourceManager.GetString("IbanValueIsNotWellFormed_Format", resourceCulture);
+                return ResourceManager.GetString("IbanValueIsNotWellFormed", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The BIC value &apos;{0}&apos; cannot be null and must be 8 or 11 characters long..
         /// </summary>
-        internal static string InvalidBicValue_Format {
+        internal static string InvalidBicValue {
             get {
-                return ResourceManager.GetString("InvalidBicValue_Format", resourceCulture);
+                return ResourceManager.GetString("InvalidBicValue", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The IBAN value &apos;{0}&apos; cannot be null and must be at most 34 characters long and at least 14 characters long..
         /// </summary>
-        internal static string InvalidIbanValue_Format {
+        internal static string InvalidIbanValue {
             get {
-                return ResourceManager.GetString("InvalidIbanValue_Format", resourceCulture);
+                return ResourceManager.GetString("InvalidIbanValue", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Unabled to parse the input for the BBAN code: &apos;{0}&apos;..
         /// </summary>
-        internal static string InvalidInput_Bban_Format {
+        internal static string InvalidInput_Bban {
             get {
-                return ResourceManager.GetString("InvalidInput_Bban_Format", resourceCulture);
+                return ResourceManager.GetString("InvalidInput_Bban", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Unabled to parse the input for the branch code: &apos;{0}&apos;..
         /// </summary>
-        internal static string InvalidInput_BranchCode_Format {
+        internal static string InvalidInput_BranchCode {
             get {
-                return ResourceManager.GetString("InvalidInput_BranchCode_Format", resourceCulture);
+                return ResourceManager.GetString("InvalidInput_BranchCode", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Unabled to parse the input for the check digits: &apos;{0}&apos;..
         /// </summary>
-        internal static string InvalidInput_CheckDigits_Format {
+        internal static string InvalidInput_CheckDigits {
             get {
-                return ResourceManager.GetString("InvalidInput_CheckDigits_Format", resourceCulture);
+                return ResourceManager.GetString("InvalidInput_CheckDigits", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Unabled to parse the input for the country code: &apos;{0}&apos;..
         /// </summary>
-        internal static string InvalidInput_CountryCode_Format {
+        internal static string InvalidInput_CountryCode {
             get {
-                return ResourceManager.GetString("InvalidInput_CountryCode_Format", resourceCulture);
+                return ResourceManager.GetString("InvalidInput_CountryCode", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Unabled to parse the input for the institution code: &apos;{0}&apos;..
         /// </summary>
-        internal static string InvalidInput_InstitutionCode_Format {
+        internal static string InvalidInput_InstitutionCode {
             get {
-                return ResourceManager.GetString("InvalidInput_InstitutionCode_Format", resourceCulture);
+                return ResourceManager.GetString("InvalidInput_InstitutionCode", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Unabled to parse the input for location code: &apos;{0}&apos;..
         /// </summary>
-        internal static string InvalidInput_LocationCode_Format {
+        internal static string InvalidInput_LocationCode {
             get {
-                return ResourceManager.GetString("InvalidInput_LocationCode_Format", resourceCulture);
+                return ResourceManager.GetString("InvalidInput_LocationCode", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Unknown ISO country code: &apos;{0}&apos;..
         /// </summary>
-        internal static string UnknownISOCountryCode_Format {
+        internal static string UnknownISOCountryCode {
             get {
-                return ResourceManager.GetString("UnknownISOCountryCode_Format", resourceCulture);
+                return ResourceManager.GetString("UnknownISOCountryCode", resourceCulture);
             }
         }
     }

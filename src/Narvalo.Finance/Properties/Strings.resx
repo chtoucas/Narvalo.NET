@@ -117,43 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BbanVerificationFailure_Format" xml:space="preserve">
+  <data name="BbanVerificationFailure" xml:space="preserve">
     <value>Failed to verify the BBAN code: '{0}'.</value>
   </data>
-  <data name="IbanIntegrityCheckFailure_Format" xml:space="preserve">
+  <data name="IbanIntegrityCheckFailure" xml:space="preserve">
     <value>Failed to verify integrity of the IBAN code: '{0}'.</value>
   </data>
-  <data name="IbanValueIsNotWellFormed_Format" xml:space="preserve">
+  <data name="IbanValueIsNotWellFormed" xml:space="preserve">
     <value>The IBAN value is not well-formed: '{0}'.</value>
   </data>
-  <data name="Iban_BadFormatSpecifier_Format" xml:space="preserve">
+  <data name="Iban_BadFormatSpecifier" xml:space="preserve">
     <value>Format specifier '{0}' was invalid; valid specifiers are null, an empty string, 'G', 'g', 'C', 'c', 'H', 'h'.</value>
   </data>
-  <data name="InvalidBicValue_Format" xml:space="preserve">
+  <data name="InvalidBicValue" xml:space="preserve">
     <value>The BIC value '{0}' cannot be null and must be 8 or 11 characters long.</value>
   </data>
-  <data name="InvalidIbanValue_Format" xml:space="preserve">
+  <data name="InvalidIbanValue" xml:space="preserve">
     <value>The IBAN value '{0}' cannot be null and must be at most 34 characters long and at least 14 characters long.</value>
   </data>
-  <data name="InvalidInput_Bban_Format" xml:space="preserve">
+  <data name="InvalidInput_Bban" xml:space="preserve">
     <value>Unabled to parse the input for the BBAN code: '{0}'.</value>
   </data>
-  <data name="InvalidInput_BranchCode_Format" xml:space="preserve">
+  <data name="InvalidInput_BranchCode" xml:space="preserve">
     <value>Unabled to parse the input for the branch code: '{0}'.</value>
   </data>
-  <data name="InvalidInput_CheckDigits_Format" xml:space="preserve">
+  <data name="InvalidInput_CheckDigits" xml:space="preserve">
     <value>Unabled to parse the input for the check digits: '{0}'.</value>
   </data>
-  <data name="InvalidInput_CountryCode_Format" xml:space="preserve">
+  <data name="InvalidInput_CountryCode" xml:space="preserve">
     <value>Unabled to parse the input for the country code: '{0}'.</value>
   </data>
-  <data name="InvalidInput_InstitutionCode_Format" xml:space="preserve">
+  <data name="InvalidInput_InstitutionCode" xml:space="preserve">
     <value>Unabled to parse the input for the institution code: '{0}'.</value>
   </data>
-  <data name="InvalidInput_LocationCode_Format" xml:space="preserve">
+  <data name="InvalidInput_LocationCode" xml:space="preserve">
     <value>Unabled to parse the input for location code: '{0}'.</value>
   </data>
-  <data name="UnknownISOCountryCode_Format" xml:space="preserve">
+  <data name="UnknownISOCountryCode" xml:space="preserve">
     <value>Unknown ISO country code: '{0}'.</value>
   </data>
 </root>

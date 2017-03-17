@@ -38,7 +38,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -74,7 +74,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -110,7 +110,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -146,7 +146,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -182,7 +182,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -218,7 +218,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -254,7 +254,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -290,7 +290,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -326,7 +326,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -362,7 +362,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -398,7 +398,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -434,7 +434,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -470,7 +470,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -506,7 +506,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -542,7 +542,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -578,7 +578,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -614,7 +614,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -650,7 +650,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -686,7 +686,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -722,7 +722,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -758,7 +758,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -794,7 +794,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -830,7 +830,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -866,7 +866,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -902,7 +902,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -938,7 +938,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -974,7 +974,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -1010,7 +1010,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -1046,7 +1046,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -1082,7 +1082,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -1118,7 +1118,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -1154,7 +1154,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -1190,7 +1190,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -1226,7 +1226,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -1262,7 +1262,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -1298,7 +1298,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -1334,7 +1334,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -1370,7 +1370,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -1406,7 +1406,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -1442,7 +1442,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -1478,7 +1478,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -1514,7 +1514,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -1550,7 +1550,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -1586,7 +1586,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -1622,7 +1622,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -1658,7 +1658,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -1694,7 +1694,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -1730,7 +1730,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -1766,7 +1766,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -1802,7 +1802,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -1838,7 +1838,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -1874,7 +1874,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -1910,7 +1910,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -1946,7 +1946,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -1982,7 +1982,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -2018,7 +2018,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -2054,7 +2054,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -2090,7 +2090,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -2126,7 +2126,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -2162,7 +2162,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -2198,7 +2198,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -2234,7 +2234,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -2270,7 +2270,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -2306,7 +2306,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -2342,7 +2342,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -2378,7 +2378,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -2414,7 +2414,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -2450,7 +2450,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -2486,7 +2486,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -2522,7 +2522,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -2558,7 +2558,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -2594,7 +2594,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -2630,7 +2630,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -2666,7 +2666,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -2702,7 +2702,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -2738,7 +2738,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -2774,7 +2774,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -2810,7 +2810,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -2846,7 +2846,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -2882,7 +2882,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -2918,7 +2918,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -2954,7 +2954,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -2990,7 +2990,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -3026,7 +3026,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -3062,7 +3062,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -3098,7 +3098,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -3134,7 +3134,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -3170,7 +3170,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -3206,7 +3206,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -3242,7 +3242,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -3278,7 +3278,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -3314,7 +3314,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -3350,7 +3350,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -3386,7 +3386,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -3422,7 +3422,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -3458,7 +3458,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -3494,7 +3494,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -3530,7 +3530,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -3566,7 +3566,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -3602,7 +3602,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -3638,7 +3638,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -3674,7 +3674,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -3710,7 +3710,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -3746,7 +3746,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -3782,7 +3782,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -3818,7 +3818,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -3854,7 +3854,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -3890,7 +3890,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -3926,7 +3926,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -3962,7 +3962,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -3998,7 +3998,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -4034,7 +4034,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -4070,7 +4070,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -4106,7 +4106,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -4142,7 +4142,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -4178,7 +4178,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -4214,7 +4214,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -4250,7 +4250,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -4286,7 +4286,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -4322,7 +4322,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -4358,7 +4358,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -4394,7 +4394,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -4430,7 +4430,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -4466,7 +4466,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -4502,7 +4502,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -4538,7 +4538,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -4574,7 +4574,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -4610,7 +4610,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -4646,7 +4646,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -4682,7 +4682,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -4718,7 +4718,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -4754,7 +4754,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -4790,7 +4790,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -4826,7 +4826,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -4862,7 +4862,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -4898,7 +4898,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -4934,7 +4934,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -4970,7 +4970,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -5006,7 +5006,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -5042,7 +5042,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -5078,7 +5078,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -5114,7 +5114,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -5150,7 +5150,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -5186,7 +5186,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -5222,7 +5222,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -5258,7 +5258,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -5294,7 +5294,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -5330,7 +5330,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -5366,7 +5366,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -5402,7 +5402,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -5438,7 +5438,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -5474,7 +5474,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -5510,7 +5510,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -5546,7 +5546,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -5582,7 +5582,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -5618,7 +5618,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -5654,7 +5654,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -5690,7 +5690,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -5726,7 +5726,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -5762,7 +5762,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -5798,7 +5798,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -5834,7 +5834,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -5870,7 +5870,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -5906,7 +5906,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -5942,7 +5942,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -5978,7 +5978,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -6014,7 +6014,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -6050,7 +6050,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -6086,7 +6086,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -6122,7 +6122,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -6158,7 +6158,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -6194,7 +6194,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -6230,7 +6230,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -6266,7 +6266,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -6302,7 +6302,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -6338,7 +6338,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -6374,7 +6374,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -6410,7 +6410,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -6446,7 +6446,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -6482,7 +6482,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -6518,7 +6518,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -6554,7 +6554,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -6590,7 +6590,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -6626,7 +6626,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -6662,7 +6662,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -6698,7 +6698,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -6734,7 +6734,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -6770,7 +6770,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -6806,7 +6806,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -6842,7 +6842,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -6878,7 +6878,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -6914,7 +6914,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -6950,7 +6950,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -6986,7 +6986,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -7022,7 +7022,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -7058,7 +7058,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -7094,7 +7094,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -7130,7 +7130,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -7166,7 +7166,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -7202,7 +7202,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -7238,7 +7238,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -7274,7 +7274,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -7310,7 +7310,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -7346,7 +7346,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -7382,7 +7382,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -7418,7 +7418,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -7454,7 +7454,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -7490,7 +7490,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -7526,7 +7526,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -7562,7 +7562,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -7598,7 +7598,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -7634,7 +7634,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -7670,7 +7670,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -7706,7 +7706,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -7742,7 +7742,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -7778,7 +7778,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -7814,7 +7814,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -7850,7 +7850,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -7886,7 +7886,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -7922,7 +7922,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -7958,7 +7958,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -7994,7 +7994,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -8030,7 +8030,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -8066,7 +8066,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -8102,7 +8102,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -8138,7 +8138,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -8174,7 +8174,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -8210,7 +8210,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -8246,7 +8246,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -8282,7 +8282,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -8318,7 +8318,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -8354,7 +8354,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -8390,7 +8390,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -8426,7 +8426,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -8462,7 +8462,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -8498,7 +8498,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -8534,7 +8534,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -8570,7 +8570,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -8606,7 +8606,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -8642,7 +8642,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -8678,7 +8678,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -8714,7 +8714,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -8750,7 +8750,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -8786,7 +8786,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -8822,7 +8822,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -8858,7 +8858,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -8894,7 +8894,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -8930,7 +8930,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -8966,7 +8966,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -9002,7 +9002,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -9038,7 +9038,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -9074,7 +9074,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -9110,7 +9110,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -9146,7 +9146,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -9182,7 +9182,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -9218,7 +9218,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -9254,7 +9254,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -9290,7 +9290,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -9326,7 +9326,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -9362,7 +9362,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -9398,7 +9398,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -9434,7 +9434,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -9470,7 +9470,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -9506,7 +9506,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -9542,7 +9542,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -9578,7 +9578,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -9614,7 +9614,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -9650,7 +9650,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -9686,7 +9686,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -9722,7 +9722,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -9758,7 +9758,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -9794,7 +9794,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -9830,7 +9830,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -9866,7 +9866,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -9902,7 +9902,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -9938,7 +9938,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -9974,7 +9974,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -10010,7 +10010,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -10046,7 +10046,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -10082,7 +10082,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -10118,7 +10118,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -10154,7 +10154,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -10190,7 +10190,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -10226,7 +10226,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -10262,7 +10262,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -10298,7 +10298,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -10334,7 +10334,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -10370,7 +10370,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -10406,7 +10406,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -10442,7 +10442,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -10478,7 +10478,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -10514,7 +10514,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -10550,7 +10550,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -10586,7 +10586,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -10622,7 +10622,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -10658,7 +10658,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -10694,7 +10694,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -10730,7 +10730,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -10766,7 +10766,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -10802,7 +10802,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;
@@ -10838,7 +10838,7 @@ namespace Narvalo.Finance.Generic
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;

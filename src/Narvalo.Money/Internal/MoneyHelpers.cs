@@ -13,7 +13,7 @@ namespace Narvalo.Internal
             if (mny.Currency != cy)
             {
                 throw new InvalidOperationException(
-                    Format.Current(Strings.CurrencyMismatch_Format, cy, mny.Currency));
+                    Format.Current(Strings.CurrencyMismatch, cy, mny.Currency));
             }
         }
 
@@ -22,7 +22,7 @@ namespace Narvalo.Internal
             if (pny.Currency != cy)
             {
                 throw new InvalidOperationException(
-                    Format.Current(Strings.CurrencyMismatch_Format, cy, pny.Currency));
+                    Format.Current(Strings.CurrencyMismatch, cy, pny.Currency));
             }
         }
     }

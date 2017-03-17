@@ -117,28 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Argument_NeutralCultureNotSupported_Format" xml:space="preserve">
+  <data name="Argument_NeutralCultureNotSupported" xml:space="preserve">
     <value>This method does not accept neutral cultures; '{0}' was used.</value>
   </data>
   <data name="CurrencyNotFound_DefaultMessage" xml:space="preserve">
     <value>Unknown currency.</value>
   </data>
-  <data name="CurrencyNotFound_UnknownCode_Format" xml:space="preserve">
+  <data name="CurrencyNotFound_UnknownCode" xml:space="preserve">
     <value>Unknown currency code: '{0}'.</value>
   </data>
-  <data name="Money_BadMainSpecifier_Format" xml:space="preserve">
+  <data name="Money_BadMainSpecifier" xml:space="preserve">
     <value>Format specifier '{0}' was invalid; valid specifiers are 'N', 'n', 'L', 'l', 'R', 'r', 'G' and 'g',.</value>
   </data>
   <data name="Argument_CannotCompare" xml:space="preserve">
     <value>The two objects cannot be compared.</value>
   </data>
-  <data name="Argument_InvalidCurrencyMinorUnits_Format" xml:space="preserve">
+  <data name="Argument_InvalidCurrencyMinorUnits" xml:space="preserve">
     <value>The minor units '{0}' must be null OR be greater or equal to 0 and less than or equal to 28.</value>
   </data>
-  <data name="CurrencyMismatch_Format" xml:space="preserve">
+  <data name="CurrencyMismatch" xml:space="preserve">
     <value>Currency mismatch; expected '{0}' but found '{1}'.</value>
   </data>
-  <data name="NotSupported_MinorCurrency_Format" xml:space="preserve">
+  <data name="NotSupported_MinorCurrency" xml:space="preserve">
     <value>The currency '{0}' does not admit a minor currency unit. You should check that the property HasMinorCurrency is true before.</value>
   </data>
   <data name="Argument_CurrencyCodeIsNull" xml:space="preserve">
@@ -147,7 +147,7 @@
   <data name="Argument_IncompleteRatioArray" xml:space="preserve">
     <value>The sum of all ratios must be equal to 100.</value>
   </data>
-  <data name="Argument_InvalidCurrencyCode_Format" xml:space="preserve">
+  <data name="Argument_InvalidCurrencyCode" xml:space="preserve">
     <value>The alphabetic code '{0}' must be composed of exactly three ASCII characters, all uppercase.</value>
   </data>
   <data name="InvalidConversion_MoneyIsNotNormalized" xml:space="preserve">
@@ -159,13 +159,13 @@
   <data name="InvalidOperation_EmptySequence" xml:space="preserve">
     <value>The sequence is empty.</value>
   </data>
-  <data name="NotSupported_CurrencyActivation_Format" xml:space="preserve">
+  <data name="NotSupported_CurrencyActivation" xml:space="preserve">
     <value>Cannot create an instance of the currency '{0}'. This is an internal unrecoverable error: the type does not define a property named Unit returning an instance of the currency.</value>
   </data>
-  <data name="Money_BadPrecisionSpecifier_Format" xml:space="preserve">
+  <data name="Money_BadPrecisionSpecifier" xml:space="preserve">
     <value>Precision specifier '{0}' was invalid; valid specifiers ranges from 0 to 99 (no leading zero).</value>
   </data>
-  <data name="Money_BadFormatSpecifier_Format" xml:space="preserve">
+  <data name="Money_BadFormatSpecifier" xml:space="preserve">
     <value>Format specifier '{0}' was invalid; valid specifiers takes the form "Axx" where A is a single character 'N', 'n', 'L', 'l', 'R', 'r', 'G' or 'g', and xx is an optional integer ranging from 0 to 99 (no leading zero).</value>
   </data>
 </root>

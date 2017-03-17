@@ -145,7 +145,7 @@ namespace Narvalo
             => Require.True(
                 Currency == money.Currency,
                 parameterName,
-                Format.Current(Strings.CurrencyMismatch_Format, Currency, money.Currency));
+                Format.Current(Strings.CurrencyMismatch, Currency, money.Currency));
 
         [ExcludeFromCodeCoverage]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
@@ -297,7 +297,7 @@ namespace Narvalo
             {
                 throw new InvalidCastException(
                     Format.Current(
-                        Strings.CurrencyMismatch_Format,
+                        Strings.CurrencyMismatch,
                         Currency.Code,
                         Money<TCurrency>.UnderlyingUnit.Code));
             }

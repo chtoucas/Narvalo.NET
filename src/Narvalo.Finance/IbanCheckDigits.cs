@@ -75,7 +75,7 @@ namespace Narvalo.Finance
                 else
                 {
                     throw new ArgumentException(
-                        Format.Current(Strings.IbanValueIsNotWellFormed_Format, value), nameof(value));
+                        Format.Current(Strings.IbanValueIsNotWellFormed, value), nameof(value));
                 }
             }
 
@@ -112,7 +112,7 @@ namespace Narvalo.Finance
                 else
                 {
                     throw new ArgumentException(
-                        Format.Current(Strings.IbanValueIsNotWellFormed_Format, value), nameof(value));
+                        Format.Current(Strings.IbanValueIsNotWellFormed, value), nameof(value));
                 }
             }
 

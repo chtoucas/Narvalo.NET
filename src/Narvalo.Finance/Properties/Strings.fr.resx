@@ -117,43 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BbanVerificationFailure_Format" xml:space="preserve">
+  <data name="BbanVerificationFailure" xml:space="preserve">
     <value>Nous n'avons pas été en mesure de vérifier le code BBAN suivant '{0}'.</value>
   </data>
-  <data name="IbanIntegrityCheckFailure_Format" xml:space="preserve">
+  <data name="IbanIntegrityCheckFailure" xml:space="preserve">
     <value>Nous n'avons pas été en mesure de vérifier du code IBAN suivant '{0}'.</value>
   </data>
-  <data name="IbanValueIsNotWellFormed_Format" xml:space="preserve">
+  <data name="IbanValueIsNotWellFormed" xml:space="preserve">
     <value>La valeur '{0}' ne représente pas un code IBAN bien formée.</value>
   </data>
-  <data name="Iban_BadFormatSpecifier_Format" xml:space="preserve">
+  <data name="Iban_BadFormatSpecifier" xml:space="preserve">
     <value>La spécification de format est invalide; les valeurs admissibles sont null, une chaîne de caractères vide, 'G', 'g', 'C', 'c', 'H' et 'h'.</value>
   </data>
-  <data name="InvalidBicValue_Format" xml:space="preserve">
+  <data name="InvalidBicValue" xml:space="preserve">
     <value>La valeur d'un code BIC ne peut pas être null et doit être composée de 8 ou 11 caractères; valeur reçue '{0}'.</value>
   </data>
-  <data name="InvalidIbanValue_Format" xml:space="preserve">
+  <data name="InvalidIbanValue" xml:space="preserve">
     <value>La valeur d'un code IBANne peut pas être null et doit être composée de 14 à 34 caractères; valeur reçue '{0}'.</value>
   </data>
-  <data name="InvalidInput_Bban_Format" xml:space="preserve">
+  <data name="InvalidInput_Bban" xml:space="preserve">
     <value>La valeur en entrée ne nous a pas permis d'en extraire le code BBAN; valeur reçue '{0}'.</value>
   </data>
-  <data name="InvalidInput_BranchCode_Format" xml:space="preserve">
+  <data name="InvalidInput_BranchCode" xml:space="preserve">
     <value>La valeur en entrée ne nous a pas permis d'en extraire le code branche; valeur reçue '{0}'.</value>
   </data>
-  <data name="InvalidInput_CheckDigits_Format" xml:space="preserve">
+  <data name="InvalidInput_CheckDigits" xml:space="preserve">
     <value>La valeur en entrée ne nous a pas permis d'en extraire la clef de contrôle; valeur reçue '{0}'.</value>
   </data>
-  <data name="InvalidInput_CountryCode_Format" xml:space="preserve">
+  <data name="InvalidInput_CountryCode" xml:space="preserve">
     <value>La valeur en entrée ne nous a pas permis d'en extraire le code pays; valeur reçue '{0}'.</value>
   </data>
-  <data name="InvalidInput_InstitutionCode_Format" xml:space="preserve">
+  <data name="InvalidInput_InstitutionCode" xml:space="preserve">
     <value>La valeur en entrée ne nous a pas permis d'en extraire le code banque valeur reçue '{0}'.</value>
   </data>
-  <data name="InvalidInput_LocationCode_Format" xml:space="preserve">
+  <data name="InvalidInput_LocationCode" xml:space="preserve">
     <value>La valeur en entrée ne nous a pas permis d'en extraire le code emplacement; valeur reçue '{0}'.</value>
   </data>
-  <data name="UnknownISOCountryCode_Format" xml:space="preserve">
+  <data name="UnknownISOCountryCode" xml:space="preserve">
     <value>La valeur '{0}' n'a pas été reconnu comme représentant un code pays au sens ISO.</value>
   </data>
 </root>
