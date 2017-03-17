@@ -6,12 +6,12 @@ Miscs
 
 - Review localization for Narvalo.Build, Narvalo.Mvp, Narvalo.Mvp.Web
   and Narvalo.Web.
+- Provide titles for packages.
 - Update CodeFormatter when it supports C# 7.0. After that, change
   from `format-code.cmd` to `format-code.ps1`.
-- I think there is a problem w/ dependency resolution for EDGE packages
-  on myget.org. Also, should we remove the EDGE suffix now that they always have
-  a higher version number?
-- Revise the version scheme used inside Visual Studio.
+- `make.ps1 test` fails sometimes for unknown reasons (most of the time it works
+  perfectly and things are fine inside VS). There seems to be problem with the
+  new MSBuild when we have VS opened and we run `make.ps1`.
 - Enable continuous integration (Travis, AppVeyor, Coverall, Readthedoc, GitLink)?
 
 ### Migration to .NET Standard

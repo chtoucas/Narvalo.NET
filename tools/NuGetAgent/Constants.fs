@@ -6,8 +6,11 @@ module Constants
 /// ApiKeys section name in the configuration.
 let [<Literal>] ApiKeysSectionName = "apikeys"
 
-/// Suffix used by the edge packages.
-let [<Literal>] EdgePackageSuffix = ".EDGE"
+/// ID suffix used by the edge packages.
+let [<Literal>] EdgePackageIdSuffix = ".EDGE"
+
+// Version pattern to identify edge packages.
+let [<Literal>] EdgePackageVersionTag = "-EDGE"
 
 /// MyGet's config key.
 //let [<Literal>] MyGetConfigKey = "http://narvalo.org/myget/"

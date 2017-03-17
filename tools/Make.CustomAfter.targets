@@ -232,7 +232,7 @@ using System.Reflection;
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Retail)' != 'true' ">
-      <_ProjectDependencyId>$(_ProjectDependencyId).$(EDGE)</_ProjectDependencyId>
+      <_ProjectDependencyId Condition=" $(PatchPackageId) == 'true' ">$(_ProjectDependencyId).EDGE</_ProjectDependencyId>
       <_ProjectDependencyVersion>(,$(_ProjectDependencyVersion)]</_ProjectDependencyVersion>
     </PropertyGroup>
 
@@ -261,15 +261,18 @@ using System.Reflection;
     </GetBuildStampAsPreReleaseLabel>
 
     <PropertyGroup>
-      <EDGE>EDGE</EDGE>
+      <!-- Legacy behaviour: when true, we add a suffix .EDGE to the package id.
+           If you re-enable this, you should update NuGetAgent too. -->
+      <PatchPackageId>false</PatchPackageId>
+
       <!-- We automatically increment the patch version so that edge packages always
            have a higher version number than the release package.
            WARNING: If you change this, update also the task FindProductVersion
            in Make.Custom.tasks. -->
       <PatchVersion>$([MSBuild]::Add($(PatchVersion), 1))</PatchVersion>
 
-      <PackageId>$(PackageId).$(EDGE)</PackageId>
-      <PackageTitle Condition=" '$(PackageTitle)' != '' ">$(PackageTitle) ($(EDGE))</PackageTitle>
+      <PackageId Condition=" $(PatchPackageId) == 'true' ">$(PackageId).EDGE</PackageId>
+      <PackageTitle Condition=" '$(PackageTitle)' != '' ">$(PackageTitle) (EDGE)</PackageTitle>
       <PackageVersion>$(MajorVersion).$(MinorVersion).$(PatchVersion)-$(BuildStampAsPreReleaseLabel)</PackageVersion>
     </PropertyGroup>
   </Target>

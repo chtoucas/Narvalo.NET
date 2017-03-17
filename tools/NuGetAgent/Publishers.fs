@@ -2,6 +2,7 @@
 
 namespace NuGetAgent
 
+open System
 open System.Collections.Generic
 open System.Linq
 
@@ -155,12 +156,21 @@ module Publishers =
                 printfn <| if official then "Publishing retail packages to the official NuGet server."
                            else "Publishing retail packages to our own private NuGet server."
 
-                findLatestPackages path (fun p -> not(p.Id.EndsWith(Constants.EdgePackageSuffix)))
+                findLatestPackages path (
+                    // Legacy behaviour:
+                    // fun p -> not(p.Id.EndsWith(Constants.EdgePackageSuffix, StringComparison.Ordinal)))
+                    fun p ->
+                        p.Version.ToString().IndexOf(Constants.EdgePackageVersionTag, StringComparison.Ordinal) = -1)
                 |> (publishPackages <| inner)
 
             | Edge(inner) ->
                 printfn "Publishing edge packages to our own private NuGet server."
 
-                findLatestPackages path (fun p -> p.Id.EndsWith(Constants.EdgePackageSuffix))
+                findLatestPackages path (
+                    // Legacy behaviour:
+                    // fun p -> p.Id.EndsWith(Constants.EdgePackageSuffix, StringComparison.Ordinal))
+                    fun p ->
+                        not(p.IsReleaseVersion())
+                        && p.Version.ToString().IndexOf(Constants.EdgePackageVersionTag, StringComparison.Ordinal) > 0)
                 |> (publishPackages <| inner)
 

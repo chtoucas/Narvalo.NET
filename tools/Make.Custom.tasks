@@ -70,12 +70,13 @@ return !Log.HasLoggedErrors;
     <Task>
       <Code Type="Fragment" Language="cs">
         <![CDATA[
-// Semantic versioning v1.0 has a weird behaviour: 1.0.0-T1 < 1.0.0-T10 < 1.0.0-T2.
+// Semantic versioning v1.0 has a weird behaviour: 1.0.0-EDGE1 < 1.0.0-EDGE10 < 1.0.0-EDGE2.
 var stamp = String.Empty;
 
 for (int i = 0; i < 10 - BuildStamp.Length; i++) { stamp += "0"; }
 
-PreReleaseLabel = "T" + stamp + BuildStamp;
+// WARNING: If you change EDGE to something else, you must also update NuGetAgent.
+PreReleaseLabel = "EDGE" + stamp + BuildStamp;
 
 return !Log.HasLoggedErrors;
         ]]>
