@@ -117,8 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Argument_TestFailed" xml:space="preserve">
-    <value>Failed precondition for an argument.</value>
+  <data name="Argument_UnmetPrecondition" xml:space="preserve">
+    <value>Precondition failed.</value>
   </data>
   <data name="Argument_EmptyString" xml:space="preserve">
     <value>String cannot be empty.</value>

@@ -120,8 +120,8 @@
   <data name="Argument_EmptyString" xml:space="preserve">
     <value>La chaîne de caractères ne peut pas être vide.</value>
   </data>
-  <data name="Argument_TestFailed" xml:space="preserve">
-    <value>Un test sur un argument a échoué.</value>
+  <data name="Argument_UnmetPrecondition" xml:space="preserve">
+    <value>L'argument ne satisfait pas une précondition.</value>
   </data>
   <data name="Argument_WhiteSpaceString" xml:space="preserve">
     <value>La chaîne de caractères ne peut pas être vide ou constitué uniquement d'espaces blancs.</value>

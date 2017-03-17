@@ -71,11 +71,11 @@ namespace Narvalo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed precondition for an argument..
+        ///   Looks up a localized string similar to Precondition failed..
         /// </summary>
-        internal static string Argument_TestFailed {
+        internal static string Argument_UnmetPrecondition {
             get {
-                return ResourceManager.GetString("Argument_TestFailed", resourceCulture);
+                return ResourceManager.GetString("Argument_UnmetPrecondition", resourceCulture);
             }
         }
         

@@ -41,7 +41,7 @@ namespace Narvalo
         {
             if (!testCondition)
             {
-                throw new ArgumentException(Strings_Core.Argument_TestFailed, parameterName);
+                throw new ArgumentException(Strings_Core.Argument_UnmetPrecondition, parameterName);
             }
         }
 
