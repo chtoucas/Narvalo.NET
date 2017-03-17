@@ -438,6 +438,8 @@ namespace Narvalo.T4
 
         protected void InitializeGenericParameters(string mainGeneric, params string[] rightGenerics)
         {
+            if (rightGenerics == null) { throw new ArgumentNullException(nameof(rightGenerics)); }
+
             MainGeneric = mainGeneric;
 
             if (rightGenerics.Length > 0)
