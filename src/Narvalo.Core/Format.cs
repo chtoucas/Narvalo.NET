@@ -24,10 +24,6 @@ namespace Narvalo
     public static class Format
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string Current(string format)
-            => String.Format(CultureInfo.CurrentCulture, format);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Current<T0>(string format, T0 arg0)
             => String.Format(CultureInfo.CurrentCulture, format, arg0);
 
@@ -51,10 +47,6 @@ namespace Narvalo
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Current(string format, params object[] args)
             => String.Format(CultureInfo.CurrentCulture, format, args);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string Invariant(string format)
-            => String.Format(CultureInfo.InvariantCulture, format);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Invariant<T0>(string format, T0 arg0)
