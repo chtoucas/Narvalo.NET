@@ -23,14 +23,14 @@ namespace Narvalo.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Strings {
+    internal class Strings_Fx {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Strings() {
+        internal Strings_Fx() {
         }
         
         /// <summary>
@@ -40,7 +40,7 @@ namespace Narvalo.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.Properties.Strings", typeof(Strings).GetTypeInfo().Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.Properties.Strings_Fx", typeof(Strings_Fx).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,29 +62,47 @@ namespace Narvalo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Can not cast a successful result to an exception state..
+        ///   Looks up a localized string similar to The conversion is invalid. You should check that the property IsError is true before..
         /// </summary>
-        internal static string InvalidCast_ToError {
+        internal static string InvalidConversionToError {
             get {
-                return ResourceManager.GetString("InvalidCast_ToError", resourceCulture);
+                return ResourceManager.GetString("InvalidConversionToError", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Can not cast a failure to a value of type T..
+        ///   Looks up a localized string similar to Cannot convert a &quot;lefty&quot; object to its &quot;Right&quot; value. You should check that the property IsLeft is true before..
         /// </summary>
-        internal static string InvalidCast_ToSuccess {
+        internal static string InvalidConversionToLeft {
             get {
-                return ResourceManager.GetString("InvalidCast_ToSuccess", resourceCulture);
+                return ResourceManager.GetString("InvalidConversionToLeft", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Can not explicitly cast a Maybe&lt;T&gt;.None to a value of type T..
+        ///   Looks up a localized string similar to Cannot convert a &quot;righty&quot; object to its &quot;Left&quot; value. You should check that the property IsRight is true before..
         /// </summary>
-        internal static string Maybe_CannotCastNoneToValue {
+        internal static string InvalidConversionToRight {
             get {
-                return ResourceManager.GetString("Maybe_CannotCastNoneToValue", resourceCulture);
+                return ResourceManager.GetString("InvalidConversionToRight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The conversion is invalid. You should check that the property IsSuccess is true before..
+        /// </summary>
+        internal static string InvalidConversionToValue {
+            get {
+                return ResourceManager.GetString("InvalidConversionToValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot swap the generic type parameters of a &quot;righty&quot; object. You should either check that the property IsLeft is true before, or use SwapUnchecked instead..
+        /// </summary>
+        internal static string InvalidOperation_SwapRightyEither {
+            get {
+                return ResourceManager.GetString("InvalidOperation_SwapRightyEither", resourceCulture);
             }
         }
     }

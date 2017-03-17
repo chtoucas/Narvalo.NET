@@ -117,13 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="InvalidCast_ToError" xml:space="preserve">
-    <value>InvalidCast_ToError</value>
+  <data name="InvalidConversionToError" xml:space="preserve">
+    <value>The conversion is invalid. You should check that the property IsError is true before.</value>
   </data>
-  <data name="InvalidCast_ToSuccess" xml:space="preserve">
-    <value>InvalidCast_ToSuccess</value>
+  <data name="InvalidConversionToLeft" xml:space="preserve">
+    <value>Cannot convert a "lefty" object to its "Right" value. You should check that the property IsLeft is true before.</value>
   </data>
-  <data name="Maybe_CannotCastNoneToValue" xml:space="preserve">
-    <value>Il n'est pas possible de convertir explicitement un objet Maybe&lt;T&gt;.None en une valeur de type T.</value>
+  <data name="InvalidConversionToRight" xml:space="preserve">
+    <value>Cannot convert a "righty" object to its "Left" value. You should check that the property IsRight is true before.</value>
+  </data>
+  <data name="InvalidConversionToValue" xml:space="preserve">
+    <value>The conversion is invalid. You should check that the property IsSuccess is true before.</value>
+  </data>
+  <data name="InvalidOperation_SwapRightyEither" xml:space="preserve">
+    <value>Cannot swap the generic type parameters of a "righty" object. You should either check that the property IsLeft is true before, or use SwapUnchecked instead.</value>
   </data>
 </root>

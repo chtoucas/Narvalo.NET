@@ -117,13 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="InvalidCast_ToError" xml:space="preserve">
-    <value>Can not cast a successful result to an exception state.</value>
+  <data name="InvalidConversionToError" xml:space="preserve">
+    <value>La conversion est invalide. Veuillez vérifier au préalable que la propriété IsError a la valeur true.</value>
   </data>
-  <data name="InvalidCast_ToSuccess" xml:space="preserve">
-    <value>Can not cast a failure to a value of type T.</value>
+  <data name="InvalidConversionToLeft" xml:space="preserve">
+    <value>La conversion est invalide. Veuillez vérifier au préalable que la propriété IsLeft a la valeur true.</value>
   </data>
-  <data name="Maybe_CannotCastNoneToValue" xml:space="preserve">
-    <value>Can not explicitly cast a Maybe&lt;T&gt;.None to a value of type T.</value>
+  <data name="InvalidConversionToRight" xml:space="preserve">
+    <value>La conversion est invalide. Veuillez vérifier au préalable que la propriété IsRight a la valeur true.</value>
+  </data>
+  <data name="InvalidConversionToValue" xml:space="preserve">
+    <value>La conversion est invalide. Veuillez vérifier au préalable que la propriété IsSuccess a la valeur true.</value>
+  </data>
+  <data name="InvalidOperation_SwapRightyEither" xml:space="preserve">
+    <value>Impossible d'échanger les paramètres de type générique. Veuillez vérifier au préalable que la propriété IsLeft a la valeur true ou utilisez à la place la méthode SwapUnchecked.</value>
   </data>
 </root>

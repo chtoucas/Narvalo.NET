@@ -3,16 +3,6 @@
   <Words>
     <Recognized>
       <Word>Ap</Word>
-      <Word>Combinator</Word>
-      <Word>Ident</Word>
-      <Word>Kleisli</Word>
-      <Word>Qperators</Word>
-      <Word>Qullable</Word>
-      <Word>Stateful</Word>
     </Recognized>
-
-    <Compound>
-      <Term CompoundAlternate="WhereBy">whereby</Term>
-    </Compound>
   </Words>
 </Dictionary>

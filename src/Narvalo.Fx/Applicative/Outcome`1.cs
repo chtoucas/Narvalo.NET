@@ -27,7 +27,7 @@ namespace Narvalo.Applicative
             IsSuccess = true;
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "isSuccess", Justification = "[Intentionally] Only added to disambiguate the two ctors when T = TError.")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "isSuccess", Justification = "[Intentionally] Only added to disambiguate the two ctors when T = string.")]
         private Outcome(string error, bool isSuccess)
         {
             Debug.Assert(error != null);
@@ -123,7 +123,7 @@ namespace Narvalo.Applicative
     {
         public T ToValue()
         {
-            if (IsError) { throw new InvalidCastException(Strings.InvalidCast_ToSuccess); }
+            if (IsError) { throw new InvalidCastException(Strings_Fx.InvalidConversionToValue); }
             return Value;
         }
 

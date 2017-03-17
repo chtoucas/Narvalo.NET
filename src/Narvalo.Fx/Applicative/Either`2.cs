@@ -9,6 +9,8 @@ namespace Narvalo.Applicative
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.CompilerServices;
 
+    using Narvalo.Properties;
+
     /// <summary>
     /// Represents the sum of two types. An instance of the <see cref="Either{TLeft, TRight}"/> class
     /// contains either a <c>TLeft</c> value or a <c>TRight</c> value but not both.
@@ -41,7 +43,7 @@ namespace Narvalo.Applicative
         public abstract Maybe<TRight> RightOrNone();
 
         // Swap() must be understood as SwapLeft(), kind of a "monad"-aware swap methods,
-        // that is it fails if IsLeft is false.
+        // it fails if IsLeft is false.
         public abstract Either<TRight, TLeft> Swap();
 
         public abstract Either<TRight, TLeft> SwapUnchecked();
@@ -58,7 +60,7 @@ namespace Narvalo.Applicative
 
             internal override TLeft Left { get; }
 
-            internal override TRight Right => throw new InvalidOperationException("XXX");
+            internal override TRight Right => throw new InvalidOperationException();
 
             public override Maybe<TLeft> LeftOrNone() => Maybe.Of(Left);
 
@@ -110,7 +112,7 @@ namespace Narvalo.Applicative
 
             public override bool IsLeft => false;
 
-            internal override TLeft Left => throw new InvalidOperationException("XXX");
+            internal override TLeft Left => throw new InvalidOperationException();
 
             internal override TRight Right { get; }
 
@@ -118,9 +120,11 @@ namespace Narvalo.Applicative
 
             public override Maybe<TRight> RightOrNone() => Maybe.Of(Right);
 
-            public override Either<TRight, TLeft> Swap() => throw new InvalidOperationException("XXX");
+            public override Either<TRight, TLeft> Swap()
+                => throw new InvalidOperationException(Strings_Fx.InvalidOperation_SwapRightyEither);
 
-            public override Either<TRight, TLeft> SwapUnchecked() => Either<TRight, TLeft>.OfLeft(Right);
+            public override Either<TRight, TLeft> SwapUnchecked()
+                => Either<TRight, TLeft>.OfLeft(Right);
 
             public bool Equals(Right_ other)
             {
@@ -176,12 +180,14 @@ namespace Narvalo.Applicative
         {
             public override TLeft ToLeft() => Left;
 
-            public override TRight ToRight() => throw new InvalidCastException("XXX");
+            public override TRight ToRight()
+                => throw new InvalidCastException(Strings_Fx.InvalidConversionToRight);
         }
 
         private partial class Right_
         {
-            public override TLeft ToLeft() => throw new InvalidCastException("XXX");
+            public override TLeft ToLeft()
+                => throw new InvalidCastException(Strings_Fx.InvalidConversionToLeft);
 
             public override TRight ToRight() => Right;
         }
