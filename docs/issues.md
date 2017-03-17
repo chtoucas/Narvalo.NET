@@ -4,7 +4,9 @@ Issues & TODOs (en vrac)
 Miscs
 -----
 
-- Finish localization in french and english.
+- Finish localization in french and english (check XXX) + Review SuppressMessage.
+  * Narvalo.Core OK
+  * Narvalo.Fx OK
 - There might be a conflict with the new package format and our target `Package`.
 - Update CodeFormatter when it supports C# 7.0. After that, change
   from `format-code.cmd` to `format-code.ps1`.

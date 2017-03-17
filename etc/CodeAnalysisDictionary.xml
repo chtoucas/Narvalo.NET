@@ -7,53 +7,65 @@
     <Recognized>
       <Word>Narvalo</Word>
 
-      <!-- ### Mathematical Symbols ### -->
-      <!-- Comultiplication (Comonad) -->
-      <Word>δ</Word>
-      <!-- Counit (Comonad) -->
-      <Word>ε</Word>
-      <!-- Multiplication (Monad) -->
-      <Word>μ</Word>
-      <!-- Unit (Monad) -->
-      <Word>η</Word>
+      <!-- Narvalo.Build -->
+      <Word>Yui</Word>        <!-- Yahoo! User Interface -->
 
-      <!-- ### Common Terms ### -->
-      <!-- Lipsum, Faux-Texte -->
-      <Word>Ipsum</Word>
-      <Word>Lorem</Word>
+      <!-- Narvalo.Common -->
+      <Word>Flickr</Word>
 
-      <!-- ### Acronyms ### -->
-      <!-- Carriage Return -->
-      <Word>Cr</Word>
-      <!-- Line Feed -->
-      <Word>Lf</Word>
-      <!-- ISO -->
-      <Word>Iso</Word>
-      <!-- Model View Controller -->
-      <Word>Mvc</Word>
-      <!-- Model View Presenter -->
-      <Word>Mvp</Word>
+      <!-- Narvalo.Finance -->
+      <Word>Bban</Word>       <!-- Basic Bank Account Number -->
+      <Word>Bic</Word>        <!-- Business Identifier Code -->
+      <Word>Iban</Word>       <!-- International Bank Account Number -->
 
-      <!-- ### Abbreviations ### -->
-      <!-- Manipulation -->
-      <Word>Manip</Word>
-      <!-- No Operation -->
-      <Word>Noop</Word>
+      <!-- Narvalo.Fx -->
+      <Word>δ</Word>          <!-- Comultiplication (Comonad) -->
+      <Word>ε</Word>          <!-- Counit (Comonad) -->
+      <Word>μ</Word>          <!-- Multiplication (Monad) -->
+      <Word>η</Word>          <!-- Unit (Monad) -->
+      <Word>Kleisli</Word>
+      <Word>Qperators</Word>  <!-- Q(uery) Operators-->
+      <Word>Qullable</Word>   <!-- Q(ueryable) Nullable -->
 
-      <!-- ### Jargon and Barbarisms ### -->
+      <!-- Narvalo.Money -->
+      <Word>Moneypenny</Word>
+      <Word>Roundable</Word>  <!-- Barbarism for "may be rounded" -->
+      <Word>Snv</Word>        <!-- Association Suisse de Normalisation-->
+
+      <!-- ### Computer stuff ### -->
+
+      <!-- Acronyms -->
+      <Word>Ascii</Word>
+      <Word>ISO</Word>
+
+      <!-- Abbreviations -->
+      <Word>Cr</Word>         <!-- Carriage Return -->
+      <Word>Lf</Word>         <!-- Line Feed -->
+      <Word>Mvc</Word>        <!-- Model View Controller -->
+      <Word>Mvp</Word>        <!-- Model View Presenter -->
+
+      <!-- Jargon and barbarisms -->
       <Word>Appender</Word>
+      <Word>Combinator</Word>
       <Word>Enricher</Word>
+      <Word>Ident</Word>      <!-- Ident(ity) -->
+      <Word>Ipsum</Word>      <!-- Lipsum, Faux-Texte -->
+      <Word>Lorem</Word>      <!-- Lipsum, Faux-Texte -->
+      <Word>Manip</Word>      <!-- Manip(ulation) -->
       <Word>Munge</Word>
+      <Word>Noop</Word>       <!-- No Op(eration) -->
     </Recognized>
 
     <Deprecated>
     </Deprecated>
 
     <Compound>
+      <Term CompoundAlternate="DivRem">divrem</Term>
       <Term CompoundAlternate="LoremIpsum">loremipsum</Term>
       <Term CompoundAlternate="PlainText">plaintext</Term>
       <Term CompoundAlternate="WebPage">webpage</Term>
       <Term CompoundAlternate="WebSite">website</Term>
+      <Term CompoundAlternate="WhereBy">whereby</Term>
     </Compound>
 
     <DiscreteExceptions>
@@ -66,9 +78,11 @@
       <Acronym>ε</Acronym>
       <Acronym>μ</Acronym>
       <Acronym>η</Acronym>
+
       <Acronym>Cr</Acronym>
       <Acronym>Lf</Acronym>
       <Acronym>Tv</Acronym>
+
       <Acronym>ISO</Acronym>
     </CasingExceptions>
   </Acronyms>

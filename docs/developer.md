@@ -70,10 +70,6 @@ All Code Analysis suppressions must be justified and tagged:
 - `[GeneratedCode]` Used to mark a suppression related to generated code.
 - `[Intentionally]` Used in all other cases.
 
-Every project already load the dictionary `etc\CodeAnalysisDictionary.xml`.
-If needed, consider adding a local dictionary `CustomDictionary.xml` in the
-directory `Properties` rather than modifying the global one.
-
 --------------------------------------------------------------------------------
 
 Project Configuration
