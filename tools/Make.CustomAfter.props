@@ -74,7 +74,7 @@
     <DefineConstants>$(DefineConstants);BUILD_GENERATED_VERSION</DefineConstants>
 
     <!-- WARNING: This property requires IntermediateOutputPath to be initialized
-         which is true only because we add this property via Make.proj, otherwise
+         which is true only because we add this property via Make.Common.proj, otherwise
          it is only available after importing Microsoft.Common.targets. -->
     <AssemblyVersionFile>$(IntermediateOutputPath)$(AssemblyName).Version.cs</AssemblyVersionFile>
   </PropertyGroup>
@@ -96,7 +96,7 @@
     <NuProjectExists Condition=" Exists('$(NuProjectFile)') ">true</NuProjectExists>
     <NuProjectExists Condition=" '$(NuProjectExists)' != 'true' ">false</NuProjectExists>
 
-    <NuVersion>$(SemanticVersion)</NuVersion>
+    <PackageVersion>$(SemanticVersion)</PackageVersion>
     <NuspecFile>$(OutDir)$(AssemblyName).nuspec</NuspecFile>
   </PropertyGroup>
 
@@ -134,7 +134,7 @@
              Condition=" '$(VersionExists)' == 'true' And '$(DummyGeneratedVersion)' == 'true' " />
 
     <Error Text="You MUST create a version file when the project is intended to be packaged: $(VersionFile)."
-           Condition=" '$(NuProjectExists)' == 'true' And '$(NuVersion)' == '' " />
+           Condition=" '$(NuProjectExists)' == 'true' And '$(PackageVersion)' == '' " />
   </Target>
 
   <!-- __ValidateVersion target. -->

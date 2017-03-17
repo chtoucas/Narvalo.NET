@@ -278,24 +278,21 @@ If you do not want to use the default version properties:
 
 ### Version updates
 
-Let's see if things work with NuGet:
+If two projects use a shared version `DefaultVersion.props`, we need to be very
+careful. Let's see how things work with NuGet when Narvalo.YYY depends on
+Narvalo.XXX:
 - Patch upgrade: `X.Y.0.0` -> `X.Y.1.0`
-  * If we publish Narvalo.Core but not Narvalo.Common, binding redirect works
-    for Narvalo.Core and Narvalo.Common can reference the newly published assembly.
-  * If we publish Narvalo.Common but not Narvalo.Core, even if Narvalo.Common
-    references Narvalo.Core `X.Y.1.0`, obviously unknown outside, it doesn't
+  * If we publish Narvalo.XXX but not Narvalo.YYY, binding redirect works.
+  * If we publish Narvalo.YYY but not Narvalo.XXX, even if Narvalo.YYY
+    references Narvalo.XXX `X.Y.1.0`, obviously unknown outside, it doesn't
     matter for the CLR: the assembly version _did not actually change_,
     it's still `X.Y.0.0`.
 - Major or Minor upgrade: `1.1.0.0` -> `1.2.0.0` (or `1.1.0.0` -> `2.1.0.0`)
-  * If we publish Narvalo.Core but not Narvalo.Common, binding redirect works.
-    Let's cross fingers that we did not make a mistake by not releasing
-    Narvalo.Common too.
-  * If we publish Narvalo.Common but not Narvalo.Core, we get a runtime error
-    since Narvalo.Common references an assembly version unknown outside my
-    development environment. The solution is obvious. Narvalo.Core has not
-    changed so Narvalo.Common should replace the direct reference and use
-    the NuGet package for Narvalo.Core. If necessary we can roll back
-    at any time and next time we must publish both packages.
+  * If we publish Narvalo.XXX but not Narvalo.YYY, binding redirect works.
+  * If we publish Narvalo.YYY but not Narvalo.XXX, we get a **runtime error**
+    since Narvalo.YYY references an assembly version unknown outside.
+    The solution is obvious: do not change the shared version and configure
+    Narvalo.YYY to use a custom version.
 
 --------------------------------------------------------------------------------
 

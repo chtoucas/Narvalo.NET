@@ -6,7 +6,6 @@ Miscs
 
 - Review localization for Narvalo.Build, Narvalo.Mvp, Narvalo.Mvp.Web
   and Narvalo.Web.
-- We might have a conflict between the new package format and our target `Package`.
 - Update CodeFormatter when it supports C# 7.0. After that, change
   from `format-code.cmd` to `format-code.ps1`.
 - I think there is a problem w/ dependency resolution for EDGE packages
@@ -14,6 +13,12 @@ Miscs
   a higher version number?
 - Revise the version scheme used inside Visual Studio.
 - Enable continuous integration (Travis, AppVeyor, Coverall, Readthedoc, GitLink)?
+
+### Migration to .NET Standard
+- We might have a conflict between the new MSBuild and our target `Package`.
+- Use `PackageReference` instead of parsing `packages.config`.
+- Versioning: Use `Version`, `AssemblyVersion` and `FileVersion` instead of
+  `_AssemblyVersion`, `_AssemblyInformationalVersion` and `_AssemblyFileVersion`.
 - Update all nuproj's to use the (new) native package properties:
 ```xml
   <PropertyGroup>
@@ -53,6 +58,7 @@ Miscs
     <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
   </PropertyGroup>
 ```
+  Instead of
 
 Narvalo.Fx
 ----------

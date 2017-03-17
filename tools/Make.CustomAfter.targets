@@ -93,6 +93,7 @@
     <PropertyGroup>
       <_AssemblyConfiguration>$(_ConfigurationMetadata) built on $([System.DateTime]::UtcNow.ToString()).</_AssemblyConfiguration>
 
+      <!-- Before changing anything here, be sure to read docs\developer.md#versioning -->
       <_AssemblyVersion>$(MajorVersion).$(MinorVersion).0.0</_AssemblyVersion>
       <_AssemblyFileVersion>$(MajorVersion).$(MinorVersion).$(BuildNumber).$(RevisionNumber)</_AssemblyFileVersion>
       <_AssemblyInformationalVersion>$(SemanticVersion)</_AssemblyInformationalVersion>
@@ -168,7 +169,7 @@ using System.Reflection;
                  OutFile="$(NuspecFile)"
 
                  Id="$(PackageId)"
-                 Version="$(NuVersion)"
+                 Version="$(PackageVersion)"
                  Description="$(PackageDescription)"
                  Files="$(NuFiles)"
 
@@ -188,7 +189,7 @@ using System.Reflection;
           Condition=" '$(NuProjectExists)' == 'true' And '$(Retail)' == 'true' ">
     <!-- No need to try to delete a non-retail packages. Its name changes at each run. -->
     <PropertyGroup>
-      <_NupkgFile>$(WorkPackagesDir)$(PackageId).$(NuVersion).nupkg</_NupkgFile>
+      <_NupkgFile>$(WorkPackagesDir)$(PackageId).$(PackageVersion).nupkg</_NupkgFile>
     </PropertyGroup>
 
     <Delete Files="$(_NupkgFile)" />
@@ -269,7 +270,7 @@ using System.Reflection;
 
       <PackageId>$(PackageId).$(EDGE)</PackageId>
       <PackageTitle Condition=" '$(PackageTitle)' != '' ">$(PackageTitle) ($(EDGE))</PackageTitle>
-      <NuVersion>$(MajorVersion).$(MinorVersion).$(PatchVersion)-$(BuildStampAsPreReleaseLabel)</NuVersion>
+      <PackageVersion>$(MajorVersion).$(MinorVersion).$(PatchVersion)-$(BuildStampAsPreReleaseLabel)</PackageVersion>
     </PropertyGroup>
   </Target>
 </Project>
