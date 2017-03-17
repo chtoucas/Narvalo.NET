@@ -35,21 +35,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Strings.fr.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Strings.fr.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\Strings.fr.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Strings.fr.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Strings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
