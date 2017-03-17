@@ -131,11 +131,6 @@
       <Name>Narvalo.Fx</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml">
-      <SubType>Designer</SubType>
-    </CodeAnalysisDictionary>
-  </ItemGroup>
   <ItemGroup />
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -44,9 +44,6 @@
     <Compile Include="Xml\XmlReader%24.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Properties\CustomDictionary.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Properties\Strings_Common.fr.resx" />
     <EmbeddedResource Include="Properties\Strings_Common.resx">
       <Generator>ResXFileCodeGenerator</Generator>
