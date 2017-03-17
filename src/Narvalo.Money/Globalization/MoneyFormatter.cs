@@ -114,7 +114,8 @@ namespace Narvalo.Globalization
                     // General (default) or Right (Currency code placed on the).
                     return value + NO_BREAK_SPACE + currencyCode;
                 default:
-                    throw new FormatException(Format.Current(Strings_Money.Money_InvalidFormatSpecification));
+                    throw new FormatException(
+                        Format.Current(Strings.Money_BadFormatSpecifier_Format, spec.MainFormat));
             }
         }
     }

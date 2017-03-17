@@ -29,6 +29,8 @@ namespace <#= Namespace #>
 {
     using System;
 
+    using Narvalo.Properties;
+
 <#
     foreach (var currency in currencies.OrderBy(_ => _.Code))
     {
@@ -73,7 +75,11 @@ namespace <#= Namespace #>
 
         public static <#= currency.Code #> FromCurrency(Currency value)
         {
-            if (value.Code != Name) { throw new InvalidCastException(); }
+            if (Name != value.Code)
+            {
+                throw new InvalidCastException(
+                    Format.Current(Strings.CurrencyMismatch_Format, Name, value.Code));
+            }
 
             return Unit;
         }

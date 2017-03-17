@@ -5,6 +5,8 @@ namespace Narvalo.Finance.Generic
     using System;
     using System.Reflection;
 
+    using Narvalo.Properties;
+
     public partial class CurrencyUnit
     {
         private const string SINGLETON_PROPERTY_NAME = "Unit";
@@ -21,7 +23,11 @@ namespace Narvalo.Finance.Generic
 
             var currency = property?.GetValue(null) as TCurrency;
 
-            if (currency == null) { throw new NotSupportedException("XXX"); }
+            if (currency == null)
+            {
+                throw new NotSupportedException(
+                    Format.Current(Strings.NotSupported_CurrencyActivation_Format, typeof(TCurrency).FullName));
+            }
 
             return currency;
         }

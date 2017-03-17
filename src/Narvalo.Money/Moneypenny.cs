@@ -74,7 +74,10 @@ namespace Narvalo
         public static Moneypenny One(Currency currency) => new Moneypenny(1L, currency);
 
         internal void ThrowIfCurrencyMismatch(Moneypenny penny, string parameterName)
-            => Require.True(Currency == penny.Currency, parameterName, Strings_Money.Argument_CurrencyMismatch);
+            => Require.True(
+                Currency == penny.Currency,
+                parameterName,
+                Format.Current(Strings.CurrencyMismatch_Format, Currency, penny.Currency));
 
         [ExcludeFromCodeCoverage]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
@@ -147,7 +150,11 @@ namespace Narvalo
         {
             if (Currency.Code != Money<TCurrency>.UnderlyingUnit.Code)
             {
-                throw new InvalidOperationException("XXX");
+                throw new InvalidCastException(
+                    Format.Current(
+                        Strings.CurrencyMismatch_Format,
+                        Currency.Code,
+                        Money<TCurrency>.UnderlyingUnit.Code));
             }
 
             return new Money<TCurrency>(ToMajor(), true);
@@ -247,7 +254,8 @@ namespace Narvalo
             }
             else
             {
-                throw new FormatException("XXX");
+                throw new FormatException(
+                    Format.Current(Strings.Money_BadFormatSpecifier_Format, format));
             }
 
             return MoneyFormatter.FormatMoney(spec, Amount, PennyOrCurrencyCode, info);
@@ -290,7 +298,7 @@ namespace Narvalo
 
             if (!(obj is Moneypenny))
             {
-                throw new ArgumentException(Strings_Money.Argument_InvalidMoneyType, nameof(obj));
+                throw new ArgumentException(Strings.Argument_CannotCompare, nameof(obj));
             }
 
             return CompareTo((Moneypenny)obj);

@@ -7,6 +7,7 @@ namespace Narvalo
     using System.Diagnostics.CodeAnalysis;
 
     using Narvalo.Internal;
+    using Narvalo.Properties;
 
     // Standard binary math operators.
     public static partial class MoneyCalculator
@@ -227,7 +228,10 @@ namespace Narvalo
 
             using (var iter = monies.GetEnumerator())
             {
-                if (!iter.MoveNext()) { throw new InvalidOperationException("XXX"); }
+                if (!iter.MoveNext())
+                {
+                    throw new InvalidOperationException(Strings.InvalidOperation_EmptySequence);
+                }
 
                 Money mny = iter.Current;
                 Currency currency = mny.Currency;

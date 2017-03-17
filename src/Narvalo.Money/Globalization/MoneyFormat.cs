@@ -5,6 +5,8 @@ namespace Narvalo
     using System;
     using System.Globalization;
 
+    using Narvalo.Properties;
+
     public sealed class MoneyFormat
     {
         public const char DefaultMainFormat = 'G';
@@ -42,7 +44,11 @@ namespace Narvalo
                 return new MoneyFormat(format[0], currencyDecimalPlaces);
             }
             // Fail fast for "X00"..."X09" which are not valid formats.
-            if (format.Length == 3 && format[1] == '0') { throw new FormatException("XXX"); }
+            if (format.Length == 3 && format[1] == '0')
+            {
+                throw new FormatException(
+                    Format.Current(Strings.Money_BadPrecisionSpecifier_Format, format));
+            }
 
             if (format.Length <= 3)
             {
@@ -54,12 +60,17 @@ namespace Narvalo
                     CultureInfo.InvariantCulture,
                     out int decimalPlaces);
 
-                if (!succeed) { throw new FormatException("XXX"); }
+                if (!succeed)
+                {
+                    throw new FormatException(
+                    Format.Current(Strings.Money_BadPrecisionSpecifier_Format, format));
+                }
 
                 return new MoneyFormat(format[0], decimalPlaces);
             }
 
-            throw new FormatException("XXX");
+            throw new FormatException(
+                    Format.Current(Strings.Money_BadSpecifier_Format, format));
         }
     }
 }

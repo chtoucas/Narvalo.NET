@@ -117,7 +117,10 @@ namespace Narvalo.Finance.Generic
 
         public long? ToLongMinor()
         {
-            if (!IsNormalized) { throw new InvalidOperationException("XXX"); }
+            if (!IsNormalized)
+            {
+                throw new InvalidCastException(Strings.InvalidConversion_MoneyIsNotNormalized);
+            }
 
             decimal minor = ToMinor();
             if (minor < Int64.MinValue || minor > Int64.MaxValue) { return null; }
@@ -128,7 +131,10 @@ namespace Narvalo.Finance.Generic
 
         public Moneypenny? ToPenny()
         {
-            if (!IsRounded) { throw new InvalidOperationException("XXX"); }
+            if (!IsRounded)
+            {
+                throw new InvalidCastException(Strings.InvalidConversion_MoneyIsNotRounded);
+            }
 
             long? amount = ToLongMinor();
             return amount.HasValue
@@ -263,7 +269,7 @@ namespace Narvalo.Finance.Generic
 
             if (!(obj is Money<TCurrency>))
             {
-                throw new ArgumentException(Strings_Money.Argument_InvalidMoneyType, nameof(obj));
+                throw new ArgumentException(Strings.Argument_CannotCompare, nameof(obj));
             }
 
             return CompareTo((Money<TCurrency>)obj);

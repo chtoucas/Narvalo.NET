@@ -142,7 +142,10 @@ namespace Narvalo
         }
 
         internal void ThrowIfCurrencyMismatch(Money money, string parameterName)
-            => Require.True(Currency == money.Currency, parameterName, Strings_Money.Argument_CurrencyMismatch);
+            => Require.True(
+                Currency == money.Currency,
+                parameterName,
+                Format.Current(Strings.CurrencyMismatch_Format, Currency, money.Currency));
 
         [ExcludeFromCodeCoverage]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
@@ -273,12 +276,15 @@ namespace Narvalo
         /// <summary>
         /// Gets the amount given in minor units and converted to a 64-bit signed integer.
         /// </summary>
-        /// <exception cref="InvalidOperationException">Thrown if the instance is not normalized.</exception>
+        /// <exception cref="InvalidCastException">Thrown if the instance is not normalized.</exception>
         /// <returns>A 64-bit signed integer representing the amount in minor units;
         /// null if the result is too large to fit into the Int64 range.</returns>
         public long? ToLongMinor()
         {
-            if (!IsNormalized) { throw new InvalidOperationException("XXX"); }
+            if (!IsNormalized)
+            {
+                throw new InvalidCastException(Strings.InvalidConversion_MoneyIsNotNormalized);
+            }
 
             decimal minor = ToMinor();
             if (minor < Int64.MinValue || minor > Int64.MaxValue) { return null; }
@@ -289,7 +295,11 @@ namespace Narvalo
         {
             if (Currency.Code != Money<TCurrency>.UnderlyingUnit.Code)
             {
-                throw new InvalidOperationException("XXX");
+                throw new InvalidCastException(
+                    Format.Current(
+                        Strings.CurrencyMismatch_Format,
+                        Currency.Code,
+                        Money<TCurrency>.UnderlyingUnit.Code));
             }
 
             return new Money<TCurrency>(Amount, IsNormalized);
@@ -297,7 +307,10 @@ namespace Narvalo
 
         public Moneypenny? ToPenny()
         {
-            if (!IsRounded) { throw new InvalidOperationException("XXX"); }
+            if (!IsRounded)
+            {
+                throw new InvalidCastException(Strings.InvalidConversion_MoneyIsNotRounded);
+            }
 
             long? amount = ToLongMinor();
             return amount.HasValue ? new Moneypenny(amount.Value, Currency) : (Moneypenny?)null;
@@ -434,7 +447,7 @@ namespace Narvalo
 
             if (!(obj is Money))
             {
-                throw new ArgumentException(Strings_Money.Argument_InvalidMoneyType, nameof(obj));
+                throw new ArgumentException(Strings.Argument_CannotCompare, nameof(obj));
             }
 
             return CompareTo((Money)obj);

@@ -117,82 +117,55 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Argument_CurrencyMismatch" xml:space="preserve">
-    <value>Argument_CurrencyMismatch</value>
-  </data>
-  <data name="Argument_InvalidBicParts" xml:space="preserve">
-    <value>Argument_InvalidBicParts</value>
-  </data>
-  <data name="Argument_InvalidIbanParts" xml:space="preserve">
-    <value>Argument_InvalidIbanParts</value>
-  </data>
-  <data name="Argument_InvalidMoneyType" xml:space="preserve">
-    <value>The specified argument MUST be of Money type.</value>
-  </data>
-  <data name="Argument_NeutralCultureNotSupported" xml:space="preserve">
-    <value>Argument_NeutralCultureNotSupported</value>
-  </data>
-  <data name="BooleanResult_NoErrorMessage" xml:space="preserve">
-    <value>InvalidOperation_NoValue</value>
+  <data name="Argument_NeutralCultureNotSupported_Format" xml:space="preserve">
+    <value>This method does not accept neutral cultures; '{0}' was used.</value>
   </data>
   <data name="CurrencyNotFound_DefaultMessage" xml:space="preserve">
     <value>Unknown currency.</value>
   </data>
-  <data name="Currency_UnknownCode" xml:space="preserve">
-    <value>Unknown currency: {0}.</value>
+  <data name="CurrencyNotFound_UnknownCode_Format" xml:space="preserve">
+    <value>Unknown currency code: '{0}'.</value>
   </data>
-  <data name="IbanValidator_BbanVerificationFailure" xml:space="preserve">
-    <value>IbanValidator_BbanVerificationFailure</value>
+  <data name="Money_BadFormatSpecifier_Format" xml:space="preserve">
+    <value>Format specifier '{0}' was invalid; valid specifiers are 'N', 'L', 'R' and 'G'.</value>
   </data>
-  <data name="IbanValidator_IntegrityCheckFailure" xml:space="preserve">
-    <value>IbanValidator_IntegrityCheckFailure</value>
+  <data name="Argument_CannotCompare" xml:space="preserve">
+    <value>The two objects cannot be compared.</value>
   </data>
-  <data name="IbanValidator_UnknownISOCountryCode" xml:space="preserve">
-    <value>IbanValidator_UnknownISOCountryCode</value>
+  <data name="Argument_InvalidCurrencyMinorUnits_Format" xml:space="preserve">
+    <value>The minor units '{0}' must be null OR be greater or equal to 0 and less than or equal to 28.</value>
   </data>
-  <data name="Iban_InvalidFormatSpecification" xml:space="preserve">
-    <value>Format string can be only null, an empty string, "G", "g", "C", "c", "H", "h".</value>
+  <data name="CurrencyMismatch_Format" xml:space="preserve">
+    <value>Currency mismatch; expected '{0}' but found '{1}'.</value>
   </data>
-  <data name="Moneypenny_InvalidFormatSpecification" xml:space="preserve">
-    <value>Moneypenny_InvalidFormatSpecification</value>
+  <data name="NotSupported_MinorCurrency_Format" xml:space="preserve">
+    <value>The currency '{0}' does not admit a minor currency unit. You should check that the property HasMinorCurrency is true before.</value>
   </data>
-  <data name="Money_InvalidFormatSpecification" xml:space="preserve">
-    <value>Money_InvalidFormatSpecification</value>
+  <data name="Argument_CurrencyCodeIsNull" xml:space="preserve">
+    <value>The alphabetic code for a currency cannot be null.</value>
   </data>
-  <data name="Result_NoErrorMessage" xml:space="preserve">
-    <value>Result_NoErrorMessage</value>
+  <data name="Argument_IncompleteRatioArray" xml:space="preserve">
+    <value>The sum of all ratios must be equal to 100.</value>
   </data>
-  <data name="Result_NoValue" xml:space="preserve">
-    <value>Result_NoValue</value>
+  <data name="Argument_InvalidCurrencyCode_Format" xml:space="preserve">
+    <value>The alphabetic code '{0}' must be composed of exactly three ASCII characters, all uppercase.</value>
   </data>
-  <data name="Parse_InvalidBban" xml:space="preserve">
-    <value>Parse_InvalidBban</value>
+  <data name="InvalidConversion_MoneyIsNotNormalized" xml:space="preserve">
+    <value>The amount is not normalized.</value>
   </data>
-  <data name="Parse_InvalidBicValue" xml:space="preserve">
-    <value>The BIC string MUST be 8 or 11 characters long.</value>
+  <data name="InvalidConversion_MoneyIsNotRounded" xml:space="preserve">
+    <value>The amount is not rounded.</value>
   </data>
-  <data name="Parse_InvalidBranchCode" xml:space="preserve">
-    <value>Parse_InvalidBranchCode</value>
+  <data name="InvalidOperation_EmptySequence" xml:space="preserve">
+    <value>The sequence is empty.</value>
   </data>
-  <data name="Parse_InvalidCheckDigits" xml:space="preserve">
-    <value>Parse_InvalidCheckDigits</value>
+  <data name="NotSupported_CurrencyActivation_Format" xml:space="preserve">
+    <value>Cannot create an instance of the currency '{0}'. This is an internal unrecoverable error: the type does not define a property named Unit returning an instance of the currency.</value>
   </data>
-  <data name="Parse_InvalidCountryCode" xml:space="preserve">
-    <value>Parse_InvalidCountryCode</value>
+  <data name="Money_BadPrecisionSpecifier_Format" xml:space="preserve">
+    <value>Precision specifier '{0}' was invalid; valid specifiers ranges from 0 to 99 (no leading zero).</value>
   </data>
-  <data name="Parse_InvalidIbanValue" xml:space="preserve">
-    <value>The IBAN string MUST be at most 34 characters long and at least 14 characters long.</value>
-  </data>
-  <data name="Parse_InvalidInstitutionCode" xml:space="preserve">
-    <value>Parse_InvalidInstitutionCode</value>
-  </data>
-  <data name="Parse_InvalidLocationCode" xml:space="preserve">
-    <value>Parse_InvalidLocationCode</value>
-  </data>
-  <data name="Sentinel_OutOfRangeCurrencyAlphabeticCode" xml:space="preserve">
-    <value>The alphabetic code MUST be composed of exactly 3 characters.</value>
-  </data>
-  <data name="Sentinel_OutOfRangeCurrencyNumericCode" xml:space="preserve">
-    <value>The numeric code MUST be greater than 0 and strictly less than 1000.</value>
+  <data name="Money_BadSpecifier_Format" xml:space="preserve">
+    <value>Format specifier '{0}' was invalid; valid specifiers takes the form "Axx" where A is a single character 'N', 'L', 'R' or 'G', and xx is an optional integer ranging from 0 to 99 (no leading zero).</value>
   </data>
 </root>

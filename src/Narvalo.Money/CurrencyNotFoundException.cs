@@ -16,7 +16,7 @@ namespace Narvalo
         /// Initializes a new instance of the <see cref="CurrencyNotFoundException"/>
         /// class with its message string set to a system-supplied message.
         /// </summary>
-        public CurrencyNotFoundException() : base(Strings_Money.CurrencyNotFound_DefaultMessage) { }
+        public CurrencyNotFoundException() : base(Strings.CurrencyNotFound_DefaultMessage) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CurrencyNotFoundException"/>

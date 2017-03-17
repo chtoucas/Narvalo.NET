@@ -6,6 +6,8 @@ namespace Narvalo.Finance.Allocators
     using System.Diagnostics;
     using System.Linq;
 
+    using Narvalo.Properties;
+
     public partial struct RatioArray : IEquatable<RatioArray>
     {
         private readonly decimal[] _ratios;
@@ -31,7 +33,10 @@ namespace Narvalo.Finance.Allocators
         {
             Require.NotNull(ratios, nameof(ratios));
 
-            if (ratios.Sum() != 1M) { throw new ArgumentException("XXX", nameof(ratios)); }
+            if (ratios.Sum() != 1M)
+            {
+                throw new ArgumentException(Strings.Argument_IncompleteRatioArray, nameof(ratios));
+            }
 
             return new RatioArray(ratios);
         }
@@ -47,7 +52,10 @@ namespace Narvalo.Finance.Allocators
         {
             Require.NotNull(percentages, nameof(percentages));
 
-            if (percentages.Sum() != 100) { throw new ArgumentException("XXX", nameof(percentages)); }
+            if (percentages.Sum() != 100)
+            {
+                throw new ArgumentException(Strings.Argument_IncompleteRatioArray, nameof(percentages));
+            }
 
             var ratios = new decimal[percentages.Length];
             for (var i = 0; i < percentages.Length; i++)

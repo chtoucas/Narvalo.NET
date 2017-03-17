@@ -174,12 +174,13 @@ namespace Narvalo
         /// <summary>
         /// Gets the minor currency unit.
         /// </summary>
-        /// <exception cref="InvalidOperationException">Thrown if the currency has no minor
+        /// <exception cref="NotSupportedException">Thrown if the currency has no minor
         /// currency unit.</exception>
         public FractionalCurrency MinorCurrency
             => HasMinorCurrency
             ? new FractionalCurrency(this, Epsilon, MinorCurrencyCode)
-            : throw new InvalidOperationException("XXX");
+            : throw new NotSupportedException(
+                Format.Current(Strings.NotSupported_MinorCurrency_Format, Code));
 
         // If the currency admits a minor currency unit, we obtain its code by "lowercasing"
         // the last character of its code: "EUR" -> "EUr". This convention is not officially
@@ -202,7 +203,8 @@ namespace Narvalo
 
             if (Code != unit.Code)
             {
-                throw new InvalidOperationException("XXX");
+                throw new InvalidCastException(
+                    Format.Current(Strings.CurrencyMismatch_Format, Code, unit.Code));
             }
 
             return unit;
@@ -223,7 +225,7 @@ namespace Narvalo
 
             if (!Codes.TryGetValue(code, out short? minorUnits))
             {
-                throw new CurrencyNotFoundException(Format.Current(Strings_Money.Currency_UnknownCode, code));
+                throw new CurrencyNotFoundException(Format.Current(Strings.CurrencyNotFound_UnknownCode_Format, code));
             }
 
             return new Currency(code, minorUnits);
@@ -235,7 +237,7 @@ namespace Narvalo
             Currency? cy = TryCreate(code, types);
             if (!cy.HasValue)
             {
-                throw new CurrencyNotFoundException(Format.Current(Strings_Money.Currency_UnknownCode, code));
+                throw new CurrencyNotFoundException(Format.Current(Strings.CurrencyNotFound_UnknownCode_Format, code));
             }
 
             return cy.Value;
@@ -310,11 +312,10 @@ namespace Narvalo
         public static Currency ForCulture(CultureInfo cultureInfo)
         {
             Require.NotNull(cultureInfo, nameof(cultureInfo));
-
-            if (cultureInfo.IsNeutralCulture)
-            {
-                throw new ArgumentException(Strings_Money.Argument_NeutralCultureNotSupported, nameof(cultureInfo));
-            }
+            Require.True(
+                cultureInfo.IsNeutralCulture,
+                nameof(cultureInfo),
+                Format.Current(Strings.Argument_NeutralCultureNotSupported_Format, cultureInfo));
 
             return ForRegion(new RegionInfo(cultureInfo.Name));
         }
@@ -357,13 +358,15 @@ namespace Narvalo
             // all guards wherever we accept a code as input.
             Require.NotNull(code, nameof(code));
             // A currency code MUST be composed of exactly 3 letters.
-            Require.Range(code.Length == 3, nameof(code),
-                Strings_Money.Sentinel_OutOfRangeCurrencyAlphabeticCode);
             // A currency code MUST only contain uppercase ASCII letters.
-            Require.True(Ascii.IsUpperLetter(code), nameof(code));
             Require.True(
-                !minorUnits.HasValue || (minorUnits >= 0 && minorUnits <= MaxDecimalPlaces),
-                nameof(minorUnits));
+                ValidateCode(code),
+                nameof(code),
+                Format.Current(Strings.Argument_InvalidCurrencyCode_Format, code));
+            Require.True(
+                ValidateMinorUnits(minorUnits),
+                nameof(minorUnits),
+                Format.Current(Strings.Argument_InvalidCurrencyMinorUnits_Format, minorUnits));
 
             // Codes and WithdrawnCodes are immutable, so no concurrency problems here.
             if (Codes.ContainsKey(code) || WithdrawnCodes.Contains(code)) { return false; }
@@ -405,15 +408,23 @@ namespace Narvalo
             foreach (var pair in currencies)
             {
                 string code = pair.Key;
-                if (code == null || code.Length != 3 || !Ascii.IsUpperLetter(code))
+                if (code == null)
                 {
-                    throw new ArgumentException("XXX", nameof(currencies));
+                    throw new ArgumentException(Strings.Argument_CurrencyCodeIsNull, nameof(currencies));
+                }
+                if (!ValidateCode(code))
+                {
+                    throw new ArgumentException(
+                        Format.Current(Strings.Argument_InvalidCurrencyCode_Format, code),
+                        nameof(currencies));
                 }
 
                 short? minorUnits = pair.Value;
-                if (minorUnits.HasValue && (minorUnits < 0 || minorUnits > MaxDecimalPlaces))
+                if (!ValidateMinorUnits(minorUnits))
                 {
-                    throw new ArgumentException("XXX", nameof(currencies));
+                    throw new ArgumentException(
+                        Format.Current(Strings.Argument_InvalidCurrencyMinorUnits_Format, minorUnits),
+                        nameof(currencies));
                 }
 
                 if (Codes.ContainsKey(code) || WithdrawnCodes.Contains(code)) { return false; }
@@ -459,6 +470,16 @@ namespace Narvalo
         internal decimal ConvertToMinor(decimal major) => Factor * major;
 
         public override string ToString() => Code;
+
+        private static bool ValidateCode(string code)
+        {
+            Debug.Assert(code != null);
+
+            return code.Length == 3 && Ascii.IsUpperLetter(code);
+        }
+
+        private static bool ValidateMinorUnits(short? minorUnits)
+            => !minorUnits.HasValue || (minorUnits >= 0 && minorUnits <= MaxDecimalPlaces);
 
         private static void SwapReferences<T>(ref T lhs, ref T rhs)
         {
