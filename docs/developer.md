@@ -213,7 +213,7 @@ Localization
 ------------
 
 English is the default language. Localized resources are to be found in
-`Properties\Strings.resx`. Sometimes we provide resources in french too.
+`Properties\Strings.resx`. Sometimes we provide resources in French too.
 
 **WARNING** If a project references two libraries with the same root namespace,
 eg Narvalo.XXX and Narvalo.YYY, and have access to their internals (a Xunit

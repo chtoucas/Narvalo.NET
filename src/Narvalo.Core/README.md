@@ -9,5 +9,6 @@ Provides helpers on which depend the other Narvalo packages.
 Changelog
 ---------
 
-Version 1.2 (2017-03-17)
-- [Breaking] Remove `Format.Current` and `Format.Invariant` w/o arguments.
+Version 1.2.0 (2017-03-17)
+- [Breaking] Remove variants of `Format.Current` and `Format.Invariant` w/o arguments.
+- Localization of messages in French and English.
