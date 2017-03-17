@@ -9,7 +9,5 @@ Provides helpers on which depend the other Narvalo packages.
 Changelog
 ---------
 
-### 2017-03-17 - v1.2
-
-Breaking changes:
-  - Remove `Format.Current` and `Format.Invariant` w/o arguments.
+Version 1.2 (2017-03-17)
+- [Breaking] Remove `Format.Current` and `Format.Invariant` w/o arguments.
