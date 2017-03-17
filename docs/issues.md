@@ -5,7 +5,7 @@ Miscs
 -----
 
 - Write localization in french for: Narvalo.Build, Narvalo.Mvp, Narvalo.Mvp.Web
-  and Narvalo.Web.
+  and Narvalo.Web. Remove unused resources.
 - There might be a conflict with the new package format and our target `Package`.
 - Update CodeFormatter when it supports C# 7.0. After that, change
   from `format-code.cmd` to `format-code.ps1`.
