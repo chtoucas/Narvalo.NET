@@ -4,6 +4,8 @@ Narvalo.NET
 - [Documentation](https://github.com/chtoucas/Narvalo.NET/tree/master/docs)
 - [License](https://github.com/chtoucas/Narvalo.NET/tree/master/LICENSE.txt)
 
+Unstable packages are available on [myget](http://www.myget.org/)
+
 Project | Summary | .NET Platform | Package
 --------|---------|---------------|--------
 [Narvalo.Build](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Build/) | Custom **MSBuild** tasks |.NET 4.5 | [![NuGet](https://img.shields.io/nuget/v/Narvalo.Build.svg)](https://www.nuget.org/packages/Narvalo.Build/)
