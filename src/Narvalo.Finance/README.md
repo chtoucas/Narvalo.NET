@@ -9,5 +9,5 @@ BIC (ISO 9362) and IBAN types w/ validators.
 Changelog
 ---------
 
-Version **1.1.0** (released 2017-03-17)
+**Version 1.1.0** (released 2017-03-17)
 - Localized messages for French and English.
