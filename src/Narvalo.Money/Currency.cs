@@ -313,7 +313,7 @@ namespace Narvalo
         {
             Require.NotNull(cultureInfo, nameof(cultureInfo));
             Require.True(
-                cultureInfo.IsNeutralCulture,
+                !cultureInfo.IsNeutralCulture,
                 nameof(cultureInfo),
                 Format.Current(Strings.Argument_NeutralCultureNotSupported_Format, cultureInfo));
 
