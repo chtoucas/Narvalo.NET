@@ -22,14 +22,14 @@ namespace Narvalo.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Strings_Common {
+    internal class Strings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Strings_Common() {
+        internal Strings() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Narvalo.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.Properties.Strings_Common", typeof(Strings_Common).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.Properties.Strings", typeof(Strings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,20 @@ namespace Narvalo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This method only accepts flags enum..
+        ///   Looks up a localized string similar to Illegal character &apos;{0}&apos; found at position &apos;{1}&apos;..
         /// </summary>
-        internal static string ConvertTo_TypeIsNotFlagsEnum {
+        internal static string IllegalCharacter_Format {
             get {
-                return ResourceManager.GetString("ConvertTo_TypeIsNotFlagsEnum", resourceCulture);
+                return ResourceManager.GetString("IllegalCharacter_Format", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Illegal character &apos;{0}&apos; found at position &apos;{1}&apos;..
+        ///   Looks up a localized string similar to This method only accepts flags enum..
         /// </summary>
-        internal static string Int64Encoder_IllegalCharacter_Format {
+        internal static string NotSupported_TypeIsNotFlagsEnum {
             get {
-                return ResourceManager.GetString("Int64Encoder_IllegalCharacter_Format", resourceCulture);
+                return ResourceManager.GetString("NotSupported_TypeIsNotFlagsEnum", resourceCulture);
             }
         }
     }

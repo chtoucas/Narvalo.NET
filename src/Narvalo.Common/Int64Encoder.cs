@@ -125,7 +125,7 @@ namespace Narvalo
                 if (index < 0)
                 {
                     throw new FormatException(
-                        Format.Current(Strings_Common.Int64Encoder_IllegalCharacter_Format, value[i], i));
+                        Format.Current(Strings.IllegalCharacter_Format, value[i], i));
                 }
 
                 checked
@@ -155,7 +155,7 @@ namespace Narvalo
                 if (index < 0)
                 {
                     throw new FormatException(
-                        Format.Current(Strings_Common.Int64Encoder_IllegalCharacter_Format, value[i], i));
+                        Format.Current(Strings.IllegalCharacter_Format, value[i], i));
                 }
 
                 checked

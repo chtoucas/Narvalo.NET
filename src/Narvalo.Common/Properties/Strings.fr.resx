@@ -117,10 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ConvertTo_TypeIsNotFlagsEnum" xml:space="preserve">
-    <value>This method only accepts flags enum.</value>
+  <data name="IllegalCharacter_Format" xml:space="preserve">
+    <value>Caractère illégal '{0}' trouvé à la position '{1}'.</value>
   </data>
-  <data name="Int64Encoder_IllegalCharacter_Format" xml:space="preserve">
-    <value>Illegal character '{0}' found at position '{1}'.</value>
+  <data name="NotSupported_TypeIsNotFlagsEnum" xml:space="preserve">
+    <value>Cette méthode n'accepte que les enumérations avec bits indicateurs.</value>
   </data>
 </root>
