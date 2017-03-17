@@ -23,14 +23,14 @@ namespace Narvalo.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Strings_Fx {
+    internal class Strings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Strings_Fx() {
+        internal Strings() {
         }
         
         /// <summary>
@@ -40,7 +40,7 @@ namespace Narvalo.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.Properties.Strings_Fx", typeof(Strings_Fx).GetTypeInfo().Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.Properties.Strings", typeof(Strings).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,47 +62,38 @@ namespace Narvalo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The conversion is invalid. You should check that the property IsError is true before..
+        ///   Looks up a localized string similar to String cannot be empty..
         /// </summary>
-        internal static string InvalidConversionToError {
+        internal static string Argument_EmptyString {
             get {
-                return ResourceManager.GetString("InvalidConversionToError", resourceCulture);
+                return ResourceManager.GetString("Argument_EmptyString", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot convert a &quot;lefty&quot; object to its &quot;Right&quot; value. You should check that the property IsLeft is true before..
+        ///   Looks up a localized string similar to Precondition failed..
         /// </summary>
-        internal static string InvalidConversionToLeft {
+        internal static string Argument_UnmetPrecondition {
             get {
-                return ResourceManager.GetString("InvalidConversionToLeft", resourceCulture);
+                return ResourceManager.GetString("Argument_UnmetPrecondition", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot convert a &quot;righty&quot; object to its &quot;Left&quot; value. You should check that the property IsRight is true before..
+        ///   Looks up a localized string similar to String cannot be empty or contains only white spaces..
         /// </summary>
-        internal static string InvalidConversionToRight {
+        internal static string Argument_WhiteSpaceString {
             get {
-                return ResourceManager.GetString("InvalidConversionToRight", resourceCulture);
+                return ResourceManager.GetString("Argument_WhiteSpaceString", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The conversion is invalid. You should check that the property IsSuccess is true before..
+        ///   Looks up a localized string similar to The control flow path reached a section of the code that should have been unreachable under any circumstances..
         /// </summary>
-        internal static string InvalidConversionToValue {
+        internal static string ControlFlowException_DefaultMessage {
             get {
-                return ResourceManager.GetString("InvalidConversionToValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cannot swap the generic type parameters of a &quot;righty&quot; object. You should either check that the property IsLeft is true before, or use SwapUnchecked instead..
-        /// </summary>
-        internal static string InvalidOperation_SwapRightyEither {
-            get {
-                return ResourceManager.GetString("InvalidOperation_SwapRightyEither", resourceCulture);
+                return ResourceManager.GetString("ControlFlowException_DefaultMessage", resourceCulture);
             }
         }
     }

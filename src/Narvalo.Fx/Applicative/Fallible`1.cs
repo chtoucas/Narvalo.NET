@@ -141,13 +141,13 @@ namespace Narvalo.Applicative
     {
         public T ToValue()
         {
-            if (IsError) { throw new InvalidCastException(Strings_Fx.InvalidConversionToValue); }
+            if (IsError) { throw new InvalidCastException(Strings.InvalidConversionToValue); }
             return Value;
         }
 
         public ExceptionDispatchInfo ToExceptionInfo()
         {
-            if (IsSuccess) { throw new InvalidCastException(Strings_Fx.InvalidConversionToError); }
+            if (IsSuccess) { throw new InvalidCastException(Strings.InvalidConversionToError); }
             return Error;
         }
 

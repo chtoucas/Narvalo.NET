@@ -26,7 +26,7 @@ namespace Narvalo
         /// <summary>
         /// Initializes a new instance of the <see cref="ControlFlowException"/> class.
         /// </summary>
-        public ControlFlowException() : base(Strings_Core.ControlFlowException_DefaultMessage) { }
+        public ControlFlowException() : base(Strings.ControlFlowException_DefaultMessage) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ControlFlowException"/> class with

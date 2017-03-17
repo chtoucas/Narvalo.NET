@@ -212,12 +212,15 @@ This has ony one effect:
 Localization
 ------------
 
-English is the default language. Localized resources are to be found in the
-subdirectory `Properties`. Sometimes we provide resources in french too.
+English is the default language. Localized resources are to be found in
+`Properties\Strings.resx`. Sometimes we provide resources in french too.
 
-**WARNING** Many projects use the same root namespace, to avoid any conflict,
-it is better then to choose different names for each resources. For instance,
-we use `Properties\Strings_Core.resx` for Narvalo.Core.
+**WARNING** If a project references two libraries with the same root namespace,
+eg Narvalo.XXX and Narvalo.YYY, and have access to their internals (a Xunit
+project is the typical example where this might happen), to avoid any conflict,
+it is better to choose a different name for each resource; for instance,
+`Properties\Strings_XXX.resx` for Narvalo.XXX and
+`Properties\Strings_YYY.resx` for Narvalo.YYY.
 
 --------------------------------------------------------------------------------
 

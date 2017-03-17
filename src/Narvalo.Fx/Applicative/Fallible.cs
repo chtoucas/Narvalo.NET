@@ -97,7 +97,7 @@ namespace Narvalo.Applicative
     {
         public ExceptionDispatchInfo ToExceptionInfo()
         {
-            if (IsSuccess) { throw new InvalidCastException(Strings_Fx.InvalidConversionToError); }
+            if (IsSuccess) { throw new InvalidCastException(Strings.InvalidConversionToError); }
             return Error;
         }
 

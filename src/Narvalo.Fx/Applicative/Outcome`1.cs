@@ -123,7 +123,7 @@ namespace Narvalo.Applicative
     {
         public T ToValue()
         {
-            if (IsError) { throw new InvalidCastException(Strings_Fx.InvalidConversionToValue); }
+            if (IsError) { throw new InvalidCastException(Strings.InvalidConversionToValue); }
             return Value;
         }
 

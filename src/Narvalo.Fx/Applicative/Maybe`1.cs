@@ -121,7 +121,7 @@ namespace Narvalo.Applicative
         {
             if (value.IsNone)
             {
-                throw new InvalidCastException(Strings_Fx.InvalidConversionToValue);
+                throw new InvalidCastException(Strings.InvalidConversionToValue);
             }
 
             return value.Value;

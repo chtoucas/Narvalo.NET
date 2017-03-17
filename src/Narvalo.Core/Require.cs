@@ -41,7 +41,7 @@ namespace Narvalo
         {
             if (!testCondition)
             {
-                throw new ArgumentException(Strings_Core.Argument_UnmetPrecondition, parameterName);
+                throw new ArgumentException(Strings.Argument_UnmetPrecondition, parameterName);
             }
         }
 
@@ -118,7 +118,7 @@ namespace Narvalo
 
             if (value.Length == 0)
             {
-                throw new ArgumentException(Strings_Core.Argument_EmptyString, parameterName);
+                throw new ArgumentException(Strings.Argument_EmptyString, parameterName);
             }
         }
 
@@ -136,7 +136,7 @@ namespace Narvalo
 
             if (IsEmptyOrWhiteSpace(value))
             {
-                throw new ArgumentException(Strings_Core.Argument_WhiteSpaceString, parameterName);
+                throw new ArgumentException(Strings.Argument_WhiteSpaceString, parameterName);
             }
         }
 

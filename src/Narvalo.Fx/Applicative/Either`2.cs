@@ -121,7 +121,7 @@ namespace Narvalo.Applicative
             public override Maybe<TRight> RightOrNone() => Maybe.Of(Right);
 
             public override Either<TRight, TLeft> Swap()
-                => throw new InvalidOperationException(Strings_Fx.InvalidOperation_SwapRightyEither);
+                => throw new InvalidOperationException(Strings.InvalidOperation_SwapRightyEither);
 
             public override Either<TRight, TLeft> SwapUnchecked()
                 => Either<TRight, TLeft>.OfLeft(Right);
@@ -181,13 +181,13 @@ namespace Narvalo.Applicative
             public override TLeft ToLeft() => Left;
 
             public override TRight ToRight()
-                => throw new InvalidCastException(Strings_Fx.InvalidConversionToRight);
+                => throw new InvalidCastException(Strings.InvalidConversionToRight);
         }
 
         private partial class Right_
         {
             public override TLeft ToLeft()
-                => throw new InvalidCastException(Strings_Fx.InvalidConversionToLeft);
+                => throw new InvalidCastException(Strings.InvalidConversionToLeft);
 
             public override TRight ToRight() => Right;
         }
