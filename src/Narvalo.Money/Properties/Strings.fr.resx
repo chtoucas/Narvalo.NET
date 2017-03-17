@@ -145,10 +145,10 @@
     <value>Le code alphabétique '{0}' ne correspond pas à une devise reconnue.</value>
   </data>
   <data name="InvalidConversion_MoneyIsNotNormalized" xml:space="preserve">
-    <value>Le montant n'est pas normalisé.</value>
+    <value>Le montant n'est pas normalisé. Veuillez vérifier au préalable que la propriété IsNormalized a la valeur true.</value>
   </data>
   <data name="InvalidConversion_MoneyIsNotRounded" xml:space="preserve">
-    <value>Le montant n'est pas arrondi.</value>
+    <value>Le montant n'est pas arrondi. Veuillez vérifier au préalable que la propriété IsRounded a la valeur true.</value>
   </data>
   <data name="InvalidOperation_EmptySequence" xml:space="preserve">
     <value>La séquence est vide.</value>

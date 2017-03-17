@@ -143,7 +143,7 @@ namespace Narvalo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The amount is not normalized..
+        ///   Looks up a localized string similar to The amount is not normalized. You should check that the property IsNormlized is true before..
         /// </summary>
         internal static string InvalidConversion_MoneyIsNotNormalized {
             get {
@@ -152,7 +152,7 @@ namespace Narvalo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The amount is not rounded..
+        ///   Looks up a localized string similar to The amount is not rounded. You should check that the property IsRounded is true before..
         /// </summary>
         internal static string InvalidConversion_MoneyIsNotRounded {
             get {

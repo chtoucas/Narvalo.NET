@@ -151,10 +151,10 @@
     <value>The alphabetic code '{0}' must be composed of exactly three ASCII characters, all uppercase.</value>
   </data>
   <data name="InvalidConversion_MoneyIsNotNormalized" xml:space="preserve">
-    <value>The amount is not normalized.</value>
+    <value>The amount is not normalized. You should check that the property IsNormlized is true before.</value>
   </data>
   <data name="InvalidConversion_MoneyIsNotRounded" xml:space="preserve">
-    <value>The amount is not rounded.</value>
+    <value>The amount is not rounded. You should check that the property IsRounded is true before.</value>
   </data>
   <data name="InvalidOperation_EmptySequence" xml:space="preserve">
     <value>The sequence is empty.</value>
