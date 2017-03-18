@@ -1,159 +1,156 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo
+using System;
+using System.Globalization;
+using System.Runtime.Serialization;
+
+public static partial class My
 {
-    using System;
-    using System.Globalization;
-    using System.Runtime.Serialization;
+    // To be used only when we need a strongly-typed null-string.
+    public const string NullString = null;
 
-    public static partial class My
+    public const string WhiteSpaceOnlyString = "     ";
+
+    public enum Enum012
     {
-        // To be used only when we need a strongly-typed null-string.
-        public const string NullString = null;
+        Zero = 0,
+        One = 1,
+        Two = 2,
+        Alias1 = One,
+    }
 
-        public const string WhiteSpaceOnlyString = "     ";
+    [Flags]
+    public enum EnumBits
+    {
+        None = 0,
+        One = 1 << 0,
+        Two = 1 << 1,
+        Four = 1 << 2,
+        OneTwo = One | Two,
+        OneTwoFour = One | Two | Four
+    }
 
-        public enum Enum012
+    public struct EmptyStruct { }
+
+    public struct ComparableStruct : IEquatable<ComparableStruct>, IComparable<ComparableStruct>
+    {
+        private readonly int _value;
+
+        public ComparableStruct(int value)
         {
-            Zero = 0,
-            One = 1,
-            Two = 2,
-            Alias1 = One,
+            _value = value;
         }
 
-        [Flags]
-        public enum EnumBits
+        public int CompareTo(ComparableStruct other) => _value.CompareTo(other._value);
+
+        public static bool operator <(ComparableStruct left, ComparableStruct right) => left.CompareTo(right) < 0;
+
+        public static bool operator <=(ComparableStruct left, ComparableStruct right) => left.CompareTo(right) <= 0;
+
+        public static bool operator >(ComparableStruct left, ComparableStruct right) => left.CompareTo(right) > 0;
+
+        public static bool operator >=(ComparableStruct left, ComparableStruct right) => left.CompareTo(right) >= 0;
+
+        public static bool operator ==(ComparableStruct left, ComparableStruct right) => left.Equals(right);
+
+        public static bool operator !=(ComparableStruct left, ComparableStruct right) => !left.Equals(right);
+
+        public bool Equals(ComparableStruct other) => _value == other._value;
+
+        public override bool Equals(object obj)
         {
-            None = 0,
-            One = 1 << 0,
-            Two = 1 << 1,
-            Four = 1 << 2,
-            OneTwo = One | Two,
-            OneTwoFour = One | Two | Four
-        }
-
-        public struct EmptyStruct { }
-
-        public struct ComparableStruct : IEquatable<ComparableStruct>, IComparable<ComparableStruct>
-        {
-            private readonly int _value;
-
-            public ComparableStruct(int value)
+            if (!(obj is ComparableStruct))
             {
-                _value = value;
+                return false;
             }
 
-            public int CompareTo(ComparableStruct other) => _value.CompareTo(other._value);
-
-            public static bool operator <(ComparableStruct left, ComparableStruct right) => left.CompareTo(right) < 0;
-
-            public static bool operator <=(ComparableStruct left, ComparableStruct right) => left.CompareTo(right) <= 0;
-
-            public static bool operator >(ComparableStruct left, ComparableStruct right) => left.CompareTo(right) > 0;
-
-            public static bool operator >=(ComparableStruct left, ComparableStruct right) => left.CompareTo(right) >= 0;
-
-            public static bool operator ==(ComparableStruct left, ComparableStruct right) => left.Equals(right);
-
-            public static bool operator !=(ComparableStruct left, ComparableStruct right) => !left.Equals(right);
-
-            public bool Equals(ComparableStruct other) => _value == other._value;
-
-            public override bool Equals(object obj)
-            {
-                if (!(obj is ComparableStruct))
-                {
-                    return false;
-                }
-
-                return Equals((ComparableStruct)obj);
-            }
-
-            public override int GetHashCode() => _value.GetHashCode();
-
-            public override string ToString() => _value.ToString(CultureInfo.CurrentCulture);
+            return Equals((ComparableStruct)obj);
         }
 
-        public struct SimpleStruct : IEquatable<SimpleStruct>
+        public override int GetHashCode() => _value.GetHashCode();
+
+        public override string ToString() => _value.ToString(CultureInfo.CurrentCulture);
+    }
+
+    public struct SimpleStruct : IEquatable<SimpleStruct>
+    {
+        public SimpleStruct(int value) { Value = value; }
+
+        public int Value { get; }
+
+        public static bool operator ==(SimpleStruct left, SimpleStruct right) => left.Equals(right);
+
+        public static bool operator !=(SimpleStruct left, SimpleStruct right) => !left.Equals(right);
+
+        public bool Equals(SimpleStruct other) => Value == other.Value;
+
+        public override bool Equals(object obj)
         {
-            public SimpleStruct(int value) { Value = value; }
+            if (obj == null) { return false; }
 
-            public int Value { get; }
+            if (!(obj is SimpleStruct)) { return false; }
 
-            public static bool operator ==(SimpleStruct left, SimpleStruct right) => left.Equals(right);
-
-            public static bool operator !=(SimpleStruct left, SimpleStruct right) => !left.Equals(right);
-
-            public bool Equals(SimpleStruct other) => Value == other.Value;
-
-            public override bool Equals(object obj)
-            {
-                if (obj == null) { return false; }
-
-                if (!(obj is SimpleStruct)) { return false; }
-
-                return Equals((SimpleStruct)obj);
-            }
-
-            public override int GetHashCode() => Value.GetHashCode();
+            return Equals((SimpleStruct)obj);
         }
 
-        public sealed class SimpleValue
+        public override int GetHashCode() => Value.GetHashCode();
+    }
+
+    public sealed class SimpleValue
+    {
+        public string Value { get; set; }
+    }
+
+    public sealed class ImmutableValue
+    {
+        public ImmutableValue(int value)
         {
-            public string Value { get; set; }
+            Value = value;
         }
 
-        public sealed class ImmutableValue
+        public int Value { get; }
+    }
+
+    public sealed class EquatableValue : IEquatable<EquatableValue>
+    {
+        public EquatableValue(string value) { Value = value; }
+
+        public string Value { get; }
+
+        public bool Equals(EquatableValue other)
         {
-            public ImmutableValue(int value)
-            {
-                Value = value;
-            }
+            if (ReferenceEquals(other, null)) { return false; }
 
-            public int Value { get; }
+            return Value == other.Value;
         }
 
-        public sealed class EquatableValue : IEquatable<EquatableValue>
+        public override bool Equals(object obj)
         {
-            public EquatableValue(string value) { Value = value; }
+            if (ReferenceEquals(obj, null)) { return false; }
 
-            public string Value { get; }
+            if (ReferenceEquals(obj, this)) { return true; }
 
-            public bool Equals(EquatableValue other)
-            {
-                if (ReferenceEquals(other, null)) { return false; }
+            if (obj.GetType() != this.GetType()) { return false; }
 
-                return Value == other.Value;
-            }
-
-            public override bool Equals(object obj)
-            {
-                if (ReferenceEquals(obj, null)) { return false; }
-
-                if (ReferenceEquals(obj, this)) { return true; }
-
-                if (obj.GetType() != this.GetType()) { return false; }
-
-                return Equals((EquatableValue)obj);
-            }
-
-            public override int GetHashCode() => Value.GetHashCode();
+            return Equals((EquatableValue)obj);
         }
 
-        [Serializable]
-        public sealed class SimpleException : Exception
-        {
-            public SimpleException() : base() { }
+        public override int GetHashCode() => Value.GetHashCode();
+    }
 
-            public SimpleException(string message) : base(message) { }
+    [Serializable]
+    public sealed class SimpleException : Exception
+    {
+        public SimpleException() : base() { }
 
-            public SimpleException(string message, Exception innerException)
-                : base(message, innerException)
-            { }
+        public SimpleException(string message) : base(message) { }
 
-            private SimpleException(SerializationInfo info, StreamingContext context)
-                : base(info, context)
-            { }
-        }
+        public SimpleException(string message, Exception innerException)
+            : base(message, innerException)
+        { }
+
+        private SimpleException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        { }
     }
 }
