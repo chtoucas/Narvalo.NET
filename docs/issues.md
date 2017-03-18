@@ -5,18 +5,18 @@ Miscs
 -----
 
 - Review localization for Narvalo.Build, Narvalo.Mvp, Narvalo.Mvp.Web
-  and Narvalo.Web.
-- Update CodeFormatter when it supports C# 7.0. After that, change
-  from `format-code.cmd` to `format-code.ps1`.
+  and Narvalo.Web. Is it possible to test completeness of localized strings?
 - `make.ps1 test` fails sometimes for unknown reasons (most of the time it works
   perfectly and things are always fine inside VS). There seems to be problem
   with the new MSBuild when we have VS opened and we run MSBuild at the same
   time.
 - Automatically create the assembly infos from the NuGet spec.
+- Update CodeFormatter when it supports C# 7.0. After that, change
+  from `format-code.cmd` to `format-code.ps1`.
 - Add a "dry run" option to NuGetAgent.
 - Enable continuous integration (Travis, AppVeyor, Coverall, Readthedoc, GitLink)?
 
-### Migration to .NET Standard and new packaging tools.
+### Migration to .NET Standard projects.
 - Pending: support for Code Analysis.
 - We might have a conflict between the new MSBuild and our target `Package`.
 - Use `PackageReference` instead of parsing `packages.config`.

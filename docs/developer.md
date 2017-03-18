@@ -231,13 +231,12 @@ Reminder:
 - `AssemblyVersion`, version used by the runtime.
 - `AssemblyFileVersion`, version as seen in the file explorer,
   also used to uniquely identify a build.
-- `AssemblyInformationalVersion`, the product version. In most cases
-  this is the version we shall use for NuGet package versioning.
+- `AssemblyInformationalVersion`, the product version.
 
 We use the following:
 - `AssemblyVersion = MAJOR.MINOR.0.0`
 - `AssemblyFileVersion = MAJOR.MINOR.BUILD.REVISION`
-- `AssemblyInformationalVersion = MAJOR.MINOR.PATCH(-PreRelaseLabel)`
+- `AssemblyInformationalVersion = MAJOR.MINOR.PATCH(-PreRelaseLabel)(+BuildMetadata)`
 
 `MAJOR`, `MINOR`, `PATCH` and `PreRelaseLabel` (`alpha`, `beta`...) are set manually.
 
@@ -253,7 +252,7 @@ Remarks:
 - This is only mandatory for NuGet-enabled projects.
 - Test and sample projects do not have a version property file.
 
-In `src\Packaging`, create a version property file: `Narvalo.XXX.Version.props`:
+In `src\Versioning`, create a version property file: `Narvalo.XXX.Version.props`:
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
@@ -276,22 +275,25 @@ If you do not want to use the default version properties:
 </Project>
 ```
 
-### Version updates
+### Version updates & NuGet packages
+
+NuGet packages use `AssemblyInformationalVersion` without build metadata
+attached: `PackageVersion = MAJOR.MINOR.PATCH(-PreRelaseLabel)`.
 
 **IMPORTANT** Only update the version number immediately before a new release
 to the _official_ NuGet repository. Otherwise, versions found in the repository
-should **match** the ones found in the NuGet registry.
+must **match** the ones found in the NuGet registry.
 
 If two projects use a shared version `DefaultVersion.props`, we need to be very
 careful. Let's see how things work with NuGet when Narvalo.YYY depends on
 Narvalo.XXX:
-- Patch upgrade: `X.Y.0.0` -> `X.Y.1.0`
+- Patch upgrade: `X.Y.0` -> `X.Y.1`
   * If we publish Narvalo.XXX but not Narvalo.YYY, binding redirect works.
   * If we publish Narvalo.YYY but not Narvalo.XXX, even if Narvalo.YYY
-    references Narvalo.XXX `X.Y.1.0`, obviously unknown outside, it doesn't
-    matter for the CLR: the assembly version _did not actually change_,
+    references Narvalo.XXX `X.Y.1`, obviously unknown outside, it doesn't
+    matter for the CLR: `AssemblyVersion` _did not actually change_,
     it's still `X.Y.0.0`.
-- Major or Minor upgrade: `1.1.0.0` -> `1.2.0.0` (or `1.1.0.0` -> `2.1.0.0`)
+- Major or Minor upgrade: `1.1.0` -> `1.2.0` (or `1.1.0` -> `2.1.0`)
   * If we publish Narvalo.XXX but not Narvalo.YYY, binding redirect works.
   * If we publish Narvalo.YYY but not Narvalo.XXX, we get a **runtime error**
     since Narvalo.YYY references an assembly version unknown outside.

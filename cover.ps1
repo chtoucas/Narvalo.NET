@@ -1,5 +1,10 @@
 #Requires -Version 4.0
 
+<#
+.EXAMPLE
+    Rebuild then run test coverage for Narvalo.Core with full details:
+    cover.ps1 Narvalo.Core -r -f
+#>
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $false, Position = 0)]
