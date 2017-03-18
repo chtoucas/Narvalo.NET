@@ -9,9 +9,10 @@ Miscs
 - Update CodeFormatter when it supports C# 7.0. After that, change
   from `format-code.cmd` to `format-code.ps1`.
 - `make.ps1 test` fails sometimes for unknown reasons (most of the time it works
-  perfectly and things are fine inside VS). There seems to be problem with the
-  new MSBuild when we have VS opened and we run `make.ps1`.
-- Automatically create the assembly description from the NuGet spec.
+  perfectly and things are always fine inside VS). There seems to be problem
+  with the new MSBuild when we have VS opened and we run MSBuild at the same
+  time.
+- Automatically create the assembly infos from the NuGet spec.
 - Add a "dry run" option to NuGetAgent.
 - Enable continuous integration (Travis, AppVeyor, Coverall, Readthedoc, GitLink)?
 
@@ -46,6 +47,12 @@ Miscs
   </PropertyGroup>
 ```
 
+Narvalo.Common
+--------------
+
+Next:
+- Make it a .NET Standard 2.0 library.
+
 Narvalo.Fx
 ----------
 
@@ -68,6 +75,7 @@ Narvalo.Money
 
 Next:
 - Review the formatting stuff + enhance.
+- Parsing.
 - Add `DitheredRoundingAdjuster`.
 - Bias allocation: First, Last, Lowest, Highest, Pseudorandom.
 - Distribution: PseudoUniform, Single, Evenly, Spread.
@@ -84,7 +92,8 @@ Narvalo.Finance
 - Implement BBAN validation.
 
 Next:
-- BBAN and IIBAN implementations:
+- [Internet International Bank Account Number](https://tools.ietf.org/html/draft-iiban-00)
+- BBAN and IBAN implementations:
   * [PHP-IBAN](https://github.com/globalcitizen/php-iban)
   * [BBAN](https://github.com/globalcitizen/php-iban/issues/39)
   * [python-stdnum](https://github.com/arthurdejong/python-stdnum)
@@ -139,10 +148,10 @@ References:
 - jrugged
 - [Hystrix](https://github.com/Netflix/Hystrix)
 
-Narvalo.Mvp.Windows.Forms
--------------------------
+Narvalo.Mvp.Futures
+-------------------
 
-- Cross-presenter communication is not functional.
+- Cross-presenter communication in WinForms is not functional.
   Things to work on before it might prove to be useful:
   * Right now, only controls contained in a MvpForm share the same presenter binder.
     We need something similar to what is done with ASP.NET (`PageHost`) but the situation
