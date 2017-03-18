@@ -243,14 +243,14 @@ We use the following:
 
 `BUILD` and `REVISION` are generated automatically:
 - Inside Visual Studio, we don't mind if the versions do not change between builds.
-- Continuous build or publicly released build should increment it.
+- Continuous build or publicly released build should increment them.
 
 We do not change the `AssemblyVersion` attribute when `PATCH` is incremented.
 
 ### How to customize the Assembly Version
 
 Remarks:
-- This is only mandatory for NuGet projects.
+- This is only mandatory for NuGet-enabled projects.
 - Test and sample projects do not have a version property file.
 
 In `src\Packaging`, create a version property file: `Narvalo.XXX.Version.props`:
@@ -271,7 +271,7 @@ If you do not want to use the default version properties:
     <MajorVersion>1</MajorVersion>
     <MinorVersion>2</MinorVersion>
     <PatchVersion>0</PatchVersion>
-    <PreReleaseLabel></PreReleaseLabel>
+    <PreReleaseLabel>alpha</PreReleaseLabel>
   </PropertyGroup>
 </Project>
 ```
@@ -297,6 +297,11 @@ Narvalo.XXX:
     since Narvalo.YYY references an assembly version unknown outside.
     The solution is obvious: do not change the shared version and configure
     Narvalo.YYY to use a custom version.
+
+Unstable packages (published to [myget](http://www.myget.org)) use the official
+version with the PATCH number increased by one and a unique PreReleaseLabel -
+all this is done automatically. Their dependencies on other Narvalo packages
+are always set to the highest unstable version.
 
 --------------------------------------------------------------------------------
 
@@ -326,10 +331,17 @@ git tag -a release-1.1.0 -m 'Core Version 1.1.0' 33e07eceba5a56cde7b0dc753aed0fa
 git push origin core-1.1.0
 ```
 
-We also publish unstable packages to [myget](http://www.myget.org/). The procedure
-is almost identical to the one described above with the following differences:
+We also publish unstable packages to [myget](https://www.myget.org/gallery/narvalo-edge).
+The procedure is almost identical to the one described above with the following
+differences:
 - Do not update the versions.
-- Do not include the command-line option `-r`.
+- Do not include the command-line option `-r`:
+```
+make.ps1 pack
+publish.ps1
+```
+**IMPORTANT** Due to the custom behaviour of unstable packages regarding the
+dependency on other Narvalo pacakges, always publish all packages together.
 
 --------------------------------------------------------------------------------
 
@@ -338,17 +350,17 @@ Developer Operations
 
 ### Scripts
 
-- `restore.ps1` restore the solution-level packages.
-- `make.ps1` build, test or package the projects.
-- `cover.ps1` test coverage.
-- `publish.ps1` publish the packages.
+- `restore.ps1` to restore solution-level packages.
+- `make.ps1` to build, test or package the projects.
+- `cover.ps1` to perform test coverage.
+- `publish.ps1` to publish the packages.
 
 - `format-code.cmd` format the code w/ [CodeFormatter](https://github.com/dotnet/codeformatter).
 - `docs\make.ps1` build the documentation w/ [DocFX](https://dotnet.github.io/docfx/).
 
 ### NuGet Updates
 
-Simply use the solution `Narvalo.sln`. Unforunately, for solution-level packages
+Simply use the solution `Narvalo.sln`. Unfortunately, for solution-level packages
 (`etc\packages.config`), this must be done manually.
 
 **WARNING:** If the NuGet core framework is updated, do not forget to also
@@ -358,7 +370,7 @@ it to install/update packages):
 tools\nuget.exe update -Self
 ```
 
-### Visual Studio or Framework Updates
+### Visual Studio and Framework Updates
 
 After upgrading Visual Studio or MSBuild, do not forget to update the
 `VisualStudioVersion` property in `Make.Shared.props`.
