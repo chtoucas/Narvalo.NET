@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Project ToolsVersion="14.0"
-         InitialTargets="__InitializeMakeCustomAfterTargets"
+<Project InitialTargets="__InitializeMakeCustomAfterTargets"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!-- This file is injected at the end of Narvalo.Common.targets by Make.proj. -->
 
@@ -8,12 +7,13 @@
   <Import Project="$(MSBuildThisFileDirectory)Make.Custom.tasks"
           Condition=" '$(MakeCustomTasksImported)' != 'true' "/>
 
-  <!-- Import the T4 targets. -->
+  <!-- Import the T4 targets (Disabled as our T4 templates require VS hosting). -->
+  <!--
   <PropertyGroup>
     <TextTemplatingTargetsPath>$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TextTemplating\Microsoft.TextTemplating.targets</TextTemplatingTargetsPath>
   </PropertyGroup>
-
   <Import Project="$(TextTemplatingTargetsPath)" Condition="Exists('$(TextTemplatingTargetsPath)')" />
+  -->
 
   <!-- Append to the BeforeBuildDependsOn property. -->
   <PropertyGroup>

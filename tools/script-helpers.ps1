@@ -254,6 +254,8 @@ function Get-MSBuildExe {
         Exit-Gracefully 'Unable to locate MSBuild' `
     }
 
+    Write-Debug "MSBuild found here: $MSBuild."
+
     return $MSBuild
 }
 

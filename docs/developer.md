@@ -378,8 +378,9 @@ After upgrading Visual Studio or MSBuild, do not forget to update the
 `VisualStudioVersion` property in `Make.Shared.props`.
 
 Other places to look at:
-- `publish.ps1` (for F# updates)
-- `TargetFrameworkVersion` in `Narvalo.Common.props`
+- `ToolsVersion` attribute in all MSBuild and project files.
+- `publish.ps1` (for F# updates).
+- `TargetFrameworkVersion` in `Narvalo.Common.props`.
 - For NuGet packaging check the target lib in the NuGet projects (`src\Packaging`).
 
 ### Copyright Year Update

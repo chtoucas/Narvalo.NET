@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Project ToolsVersion="14.0"
-         InitialTargets="__InitialMakeCustomAfterProps"
+<Project InitialTargets="__InitialMakeCustomAfterProps"
          TreatAsLocalProperty="BuildGeneratedVersion"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!-- This file is injected at the end of Narvalo.Common.props by Make.proj. -->
@@ -110,11 +109,10 @@
     <PackageProjectUrl Condition=" $(PackageProjectUrl) == '' ">https://github.com/chtoucas/Narvalo.NET/tree/master/src/$(AssemblyName)</PackageProjectUrl>
   </PropertyGroup>
 
-  <!-- T4 settings. -->
+  <!-- T4 settings (Disabled as our T4 templates require VS hosting). -->
   <PropertyGroup>
-    <!-- Force T4 re-generation on build.
-         REVIEW: Currently disabled since current T4 templates require VS hosting. -->
-    <TransformOnBuild>false</TransformOnBuild>
+    <!-- Force T4 re-generation on build. -->
+    <!--<TransformOnBuild>false</TransformOnBuild>-->
     <!--<TransformOutOfDateOnly>true</TransformOutOfDateOnly>-->
   </PropertyGroup>
 

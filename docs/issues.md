@@ -6,7 +6,7 @@ Miscs
 
 - [High] Is it possible to test completeness of localized strings (see remark
   below)?
-- [High] Sometimes, localized resources seem to be ignored by Xunit too.
+- [High] Sometimes, Xunit cannot find localized resources.
   Re-running the tests make the error go away.
 - [High] `make.ps1 test` fails sometimes for unknown reasons (most of the time
   it works perfectly and things are always fine inside VS). There seems to be
@@ -21,6 +21,7 @@ he', car il est en cours d'utilisation par un autre processus. [I:\github\Narval
 ```
 - Review localization for Narvalo.Build, Narvalo.Mvp, Narvalo.Mvp.Web
   and Narvalo.Web.
+- [Low] Update the attribute `ToolsVersion` in MSBuild projects?
 - [Low] Automatically create the assembly infos from the NuGet spec.
 - [Low] Update CodeFormatter when it supports C# 7.0. After that, change
   from `format-code.cmd` to `format-code.ps1`.
