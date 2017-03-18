@@ -51,9 +51,11 @@ Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		tests\TestCommon\Narvalo.TestCommon.projitems*{031ab273-4a04-40af-923a-aa138096f98a}*SharedItemsImports = 4
 		tests\TestCommon\Narvalo.TestCommon.projitems*{120900b7-e9a4-41cd-a358-6cae61e1c328}*SharedItemsImports = 4
+		tests\TestCommon\Narvalo.TestCommon.projitems*{3f3d8108-cc1c-4ce2-8768-2097a0b77d01}*SharedItemsImports = 4
 		tests\TestCommon\Narvalo.TestCommon.projitems*{49823004-daba-4fe2-b4f0-d40542af7754}*SharedItemsImports = 4
 		tests\TestCommon\Narvalo.TestCommon.projitems*{c141265f-95ed-4093-a56c-5991dba96f67}*SharedItemsImports = 13
 		tests\TestCommon\Narvalo.TestCommon.projitems*{d05b40a6-15b6-46d0-abc1-8f8cfc5d02e8}*SharedItemsImports = 4
+		tests\TestCommon\Narvalo.TestCommon.projitems*{e94f4d98-3882-4713-90fd-27c515b68bb0}*SharedItemsImports = 4
 		tests\TestCommon\Narvalo.TestCommon.projitems*{f1f1e121-3b3d-463d-8cf5-3a6e92004546}*SharedItemsImports = 4
 		tests\TestCommon\Narvalo.TestCommon.projitems*{f3d20800-96a8-4661-b796-fb5037ca0422}*SharedItemsImports = 4
 	EndGlobalSection

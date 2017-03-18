@@ -9,6 +9,13 @@
     <Import_RootNamespace>Narvalo</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)DefaultLocalizationFacts.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)StringsResource.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UseEnglishAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UseItalianoAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UseFrançaisAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)My.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AssertExtended.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UseCultureAttribute.cs" />
   </ItemGroup>
 </Project>

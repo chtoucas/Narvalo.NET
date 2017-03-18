@@ -4,8 +4,6 @@ Issues & TODOs (en vrac)
 Miscs
 -----
 
-- [High] Is it possible to test completeness of localized strings (see remark
-  below)?
 - [High] Sometimes, Xunit cannot find localized resources.
   Re-running the tests make the error go away.
 - [High] `make.ps1 test` fails sometimes for unknown reasons (most of the time

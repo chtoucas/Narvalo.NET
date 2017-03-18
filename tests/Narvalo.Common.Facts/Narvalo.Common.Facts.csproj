@@ -33,6 +33,7 @@
   <ItemGroup>
     <Compile Include="ConvertToFacts.cs" />
     <Compile Include="Int64EncoderFacts.cs" />
+    <Compile Include="LocalizationFacts.cs" />
     <Compile Include="ParseToFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

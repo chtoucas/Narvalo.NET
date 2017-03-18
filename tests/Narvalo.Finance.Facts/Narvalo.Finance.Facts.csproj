@@ -36,6 +36,7 @@
     <Compile Include="IbanFacts.cs" />
     <Compile Include="IbanPartsFacts.cs" />
     <Compile Include="IbanValidatorFacts.cs" />
+    <Compile Include="LocalizationFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Internal\AsciiFacts.cs" />
     <Compile Include="IbanCheckDigitsFacts.cs" />

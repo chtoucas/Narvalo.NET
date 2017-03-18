@@ -73,6 +73,7 @@
     <Compile Include="Configuration\NarvaloWebConfigurationManagerFacts.cs" />
     <Compile Include="Configuration\OptimizationSectionFacts.cs" />
     <Compile Include="Html\MarkupFacts.cs" />
+    <Compile Include="LocalizationFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\AssetManagerFacts.cs" />
     <Compile Include="UI\AssetProviderCollectionFacts.cs" />

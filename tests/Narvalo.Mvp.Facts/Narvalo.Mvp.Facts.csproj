@@ -36,6 +36,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CompositeViewFacts.cs" />
+    <Compile Include="LocalizationFacts.cs" />
     <Compile Include="PresenterBindingAttributeFacts.cs" />
     <Compile Include="PresenterBinding\CompositePresenterDiscoveryStrategyFacts.cs" />
     <Compile Include="PresenterBinding\PresenterFactoryFacts.cs" />

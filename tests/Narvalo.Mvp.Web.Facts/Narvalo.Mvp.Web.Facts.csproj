@@ -38,6 +38,7 @@
   <ItemGroup>
     <Compile Include="Core\AspNetMessageCoordinatorFacts.cs" />
     <Compile Include="HttpPresenterFacts.cs" />
+    <Compile Include="LocalizationFacts.cs" />
     <Compile Include="MvpPageFacts.cs" />
     <Compile Include="MvpUserControlFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

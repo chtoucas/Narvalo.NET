@@ -50,6 +50,7 @@
     </Compile>
     <Compile Include="Applicative\MaybeFacts.cs" />
     <Compile Include="Applicative\NullableFacts.cs" />
+    <Compile Include="LocalizationFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Applicative\SequenceFacts.cs" />
     <Compile Include="Applicative\StubsFacts.cs" />
