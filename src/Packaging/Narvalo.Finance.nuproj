@@ -4,9 +4,10 @@
 
   <PropertyGroup>
     <PackageId>Narvalo.Finance</PackageId>
+    <PackageTitle>Narvalo BIC and IBAN types</PackageTitle>
     <PackageDescription>
       <![CDATA[
-BIC (ISO 9362) and IBAN types w/ validators.
+BIC (ISO 9362) and IBAN types; includes support for parsing, validation and formatting.
       ]]>
     </PackageDescription>
     <PackageTags>BIC, IBAN</PackageTags>

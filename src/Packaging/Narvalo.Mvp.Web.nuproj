@@ -2,6 +2,7 @@
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <PackageId>Narvalo.Mvp.Web</PackageId>
+    <PackageTitle>Narvalo MVP framework for WebForms</PackageTitle>
     <PackageSummary>
       <![CDATA[
 Enhances the Narvalo.Mvp package with support for ASP.NET WebForms.

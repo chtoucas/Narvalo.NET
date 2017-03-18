@@ -2,9 +2,10 @@
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <PackageId>Narvalo.Mvp</PackageId>
+    <PackageTitle>Narvalo Model-View-Presenter (MVP) framework</PackageTitle>
     <PackageSummary>
       <![CDATA[
-Features a MVP framework largely inspired by webformsmvp. Contrary to webformsmvp, it is not restricted to the WebForms platform; nevertheless, featurewise, it should be on par with WebFormsMvp.
+Features a MVP framework largely inspired by WebFormsMvp. Contrary to WebFormsMvp, it is not restricted to the WebForms platform; nevertheless, featurewise, it should be on par with it.
       ]]>
     </PackageSummary>
     <PackageDescription>

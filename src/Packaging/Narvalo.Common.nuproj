@@ -2,6 +2,7 @@
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <PackageId>Narvalo.Common</PackageId>
+    <PackageTitle>Narvalo SQL and XML Extensions</PackageTitle>
     <PackageDescription>
       <![CDATA[
 Provides various utilities (simple parsers, Int64 encoders) and extension methods for Collections, SQL client and XDom.

@@ -370,7 +370,7 @@ Other places to look at:
 
 ### Copyright Year Update
 
-A copyright appears in three places:
+A copyright year appears in three places:
 - `etc\AssemblyInfo.Common.cs`
 - `LICENSE.txt`
 - `tools\Make.CustomAfter.props` (this one is always up-to-date)

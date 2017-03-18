@@ -4,12 +4,13 @@
 
   <PropertyGroup>
     <PackageId>Narvalo.Money</PackageId>
+    <PackageTitle>Narvalo Money and Currency types</PackageTitle>
     <PackageDescription>
       <![CDATA[
-Currency (ISO 4217) and Money types (w/ or w/o rounding, "fast" money).
+Currency (ISO 4217) and Money types. Allows for a lot of flexibility, you can express an amount in Decimal or Int64, in major or minor units. The library includes support for formatting, rounding and allocation, customized versions of Sum() and Average() from LINQ w/ or w/o rounding, alternative strongly typed currency units and generic Money type.
       ]]>
     </PackageDescription>
-    <PackageTags>Currency, Money, Rounding, Allocation</PackageTags>
+    <PackageTags>Currency, Money, Rounding, Allocation, Linq</PackageTags>
 
     <NuReferences>
       <![CDATA[

@@ -2,12 +2,13 @@
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <PackageId>Narvalo.Web</PackageId>
+    <PackageTitle>Narvalo ASP.NET Asset Providers and Optimization</PackageTitle>
     <PackageDescription>
       <![CDATA[
 Provides types that might prove useful for Web development: generic HttpHandler type, asset providers, Razor and WebForms compile-time optimizers.
       ]]>
     </PackageDescription>
-    <PackageTags>ASP.NET, MVC, WebForms, Razor, Optimization</PackageTags>
+    <PackageTags>ASP.NET, MVC, WebForms, Assets, Razor, Optimization</PackageTags>
 
     <NuFrameworkAssemblies>
       <![CDATA[

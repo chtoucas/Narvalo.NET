@@ -6,7 +6,6 @@ Miscs
 
 - Review localization for Narvalo.Build, Narvalo.Mvp, Narvalo.Mvp.Web
   and Narvalo.Web.
-- Provide titles for packages.
 - Update CodeFormatter when it supports C# 7.0. After that, change
   from `format-code.cmd` to `format-code.ps1`.
 - `make.ps1 test` fails sometimes for unknown reasons (most of the time it works
@@ -58,7 +57,6 @@ Miscs
     <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
   </PropertyGroup>
 ```
-  Instead of
 
 Narvalo.Fx
 ----------

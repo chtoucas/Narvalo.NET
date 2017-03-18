@@ -4,6 +4,7 @@
 
   <PropertyGroup>
     <PackageId>Narvalo.Core</PackageId>
+    <PackageTitle>Narvalo Internal Dependency</PackageTitle>
     <PackageDescription>
       <![CDATA[
 Provides helpers on which depend the other Narvalo packages.
