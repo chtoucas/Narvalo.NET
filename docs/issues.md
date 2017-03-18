@@ -4,17 +4,28 @@ Issues & TODOs (en vrac)
 Miscs
 -----
 
+- [High] Is it possible to test completeness of localized strings (see remark
+  below)?
+- [High] Sometimes, localized resources seem to be ignored by Xunit too.
+  Re-running the tests make the error go away.
+- [High] `make.ps1 test` fails sometimes for unknown reasons (most of the time
+  it works perfectly and things are always fine inside VS). There seems to be
+  a problem with the new MSBuild when we have VS opened and we run MSBuild at
+  the same time:
+```
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\Microsoft.Common.CurrentVersion.targets(
+3245,5): error MSB3491: Impossible d'écrire des lignes dans le fichier "I:\github\Narvalo.NET\work\obj\Debug\CoreCompil
+eInputs.cache". Le processus ne peut pas accéder au fichier 'I:\github\Narvalo.NET\work\obj\Debug\CoreCompileInputs.cac
+he', car il est en cours d'utilisation par un autre processus. [I:\github\Narvalo.NET\tests\Narvalo.Fx.Facts\Narvalo.Fx
+.Facts.csproj]
+```
 - Review localization for Narvalo.Build, Narvalo.Mvp, Narvalo.Mvp.Web
-  and Narvalo.Web. Is it possible to test completeness of localized strings?
-- `make.ps1 test` fails sometimes for unknown reasons (most of the time it works
-  perfectly and things are always fine inside VS). There seems to be problem
-  with the new MSBuild when we have VS opened and we run MSBuild at the same
-  time.
-- Automatically create the assembly infos from the NuGet spec.
-- Update CodeFormatter when it supports C# 7.0. After that, change
+  and Narvalo.Web.
+- [Low] Automatically create the assembly infos from the NuGet spec.
+- [Low] Update CodeFormatter when it supports C# 7.0. After that, change
   from `format-code.cmd` to `format-code.ps1`.
-- Add a "dry run" option to NuGetAgent.
-- Enable continuous integration (Travis, AppVeyor, Coverall, Readthedoc, GitLink)?
+- [Low] Add a "dry run" option to NuGetAgent.
+- [Low] Enable continuous integration (Travis, AppVeyor, Coverall, Readthedoc, GitLink)?
 
 ### Migration to .NET Standard projects.
 - Pending: support for Code Analysis.
