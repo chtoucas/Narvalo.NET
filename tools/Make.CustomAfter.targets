@@ -225,6 +225,7 @@ using System.Reflection;
     <FindProductVersion AssemblyPath="$(OutDir)%(ProjectReference.Name).dll"
                         Retail="$(Retail)">
       <Output TaskParameter="ProductVersion" PropertyName="_ProjectDependencyVersion"/>
+      <Output TaskParameter="MinProductVersion" PropertyName="_MinProjectDependencyVersion"/>
     </FindProductVersion>
 
     <PropertyGroup>
@@ -233,7 +234,7 @@ using System.Reflection;
 
     <PropertyGroup Condition=" '$(Retail)' != 'true' ">
       <_ProjectDependencyId Condition=" $(PatchPackageId) == 'true' ">$(_ProjectDependencyId).EDGE</_ProjectDependencyId>
-      <_ProjectDependencyVersion>(,$(_ProjectDependencyVersion)]</_ProjectDependencyVersion>
+      <_ProjectDependencyVersion>[$(_MinProjectDependencyVersion),$(_ProjectDependencyVersion)]</_ProjectDependencyVersion>
     </PropertyGroup>
 
     <ItemGroup>
@@ -261,7 +262,7 @@ using System.Reflection;
     </GetBuildStampAsPreReleaseLabel>
 
     <PropertyGroup>
-      <!-- Legacy behaviour: when true, we add a suffix .EDGE to the package id.
+      <!-- Legacy behaviour: add a suffix .EDGE to the package id.
            If you re-enable this, you should update NuGetAgent too. -->
       <PatchPackageId>false</PatchPackageId>
 

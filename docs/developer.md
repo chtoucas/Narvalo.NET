@@ -278,6 +278,10 @@ If you do not want to use the default version properties:
 
 ### Version updates
 
+**IMPORTANT** Only update the version number immediately before a new release
+to the _official_ NuGet repository. Otherwise, versions found in the repository
+should **match** the ones found in the NuGet registry.
+
 If two projects use a shared version `DefaultVersion.props`, we need to be very
 careful. Let's see how things work with NuGet when Narvalo.YYY depends on
 Narvalo.XXX:
@@ -302,17 +306,18 @@ Packaging
 Before going further, be sure to read [Versioning](#versioning).
 
 Checklist:
-- The shared versions: `src\Versioning\DefaultVersion.props` and
+- Update the shared versions: `src\Versioning\DefaultVersion.props` and
   `src\Versioning\DefaultVersion.Mvp.props`.
-- Individual versions in `src\Versioning`, if they differ from the shared ones.
+- Update individual versions in `src\Versioning`, if they differ from the shared
+  ones.
 - Individual package descriptions in `src\Packaging`.
 - Check that the property `frameworkAssemblies` in nuspec's do not need any update.
 - Check that the `TargetFrameworkVersion` property in the project file and
   the one in the nuspec's must match.
-- Check that there is no new resources, eg a satellite assembly for french or
+- Check that there is no new resource, eg a satellite assembly for french or
   a Code Contracts assembly.
 
-To release a new version to the official NuGet repository:
+To release a new version to the _official_ NuGet repository:
 1. Create the packages: `make.ps1 -r pack`.
 2. Publish them: `publish.ps1 -r`
 3. Tag the repository. For instance, for version 1.1.0
@@ -320,6 +325,11 @@ To release a new version to the official NuGet repository:
 git tag -a release-1.1.0 -m 'Core Version 1.1.0' 33e07eceba5a56cde7b0dc753aed0fa5d0e101dc
 git push origin core-1.1.0
 ```
+
+We also publish unstable packages to [myget](http://www.myget.org/). The procedure
+is almost identical to the one described above with the following differences:
+- Do not update the versions.
+- Do not include the command-line option `-r`.
 
 --------------------------------------------------------------------------------
 
