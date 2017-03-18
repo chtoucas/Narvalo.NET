@@ -4,7 +4,7 @@ Narvalo.NET
 - [Documentation](https://github.com/chtoucas/Narvalo.NET/tree/master/docs)
 - [License](https://github.com/chtoucas/Narvalo.NET/tree/master/LICENSE.txt)
 
-Unstable packages are available on [myget](http://www.myget.org/)
+Unstable packages are available on [myget](https://www.myget.org/gallery/narvalo-edge)
 
 Project | Summary | .NET Platform | Package
 --------|---------|---------------|--------

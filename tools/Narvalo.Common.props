@@ -96,6 +96,27 @@
     <CodeAnalysisDictionary Include="$(RepositorySettingsDir)CodeAnalysisDictionary.xml" />
   </ItemGroup>
 
+  <!-- Assembly infos -->
+  <!-- We have our own way to generate assembly/package infos. -->
+  <PropertyGroup>
+    <!-- This propery disabled the others at once.
+         See https://github.com/dotnet/sdk/blob/master/src/Tasks/Microsoft.NET.Build.Tasks/build/Microsoft.NET.GenerateAssemblyInfo.targets -->
+         -->
+  <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <!--
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
+    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
+    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+    <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
+    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+    <GenerateNeutralResourcesLanguageAttribute>false</GenerateNeutralResourcesLanguageAttribute>
+    -->
+  </PropertyGroup>
+
   <!-- Code Analysis -->
   <!--
     For a complete list of available options, see

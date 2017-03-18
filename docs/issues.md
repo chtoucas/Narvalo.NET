@@ -11,14 +11,17 @@ Miscs
 - `make.ps1 test` fails sometimes for unknown reasons (most of the time it works
   perfectly and things are fine inside VS). There seems to be problem with the
   new MSBuild when we have VS opened and we run `make.ps1`.
+- Automatically create the assembly description from the NuGet spec.
+- Add a "dry run" option to NuGetAgent.
 - Enable continuous integration (Travis, AppVeyor, Coverall, Readthedoc, GitLink)?
 
-### Migration to .NET Standard
+### Migration to .NET Standard and new packaging tools.
+- Pending: support for Code Analysis.
 - We might have a conflict between the new MSBuild and our target `Package`.
 - Use `PackageReference` instead of parsing `packages.config`.
 - Versioning: Use `Version`, `AssemblyVersion` and `FileVersion` instead of
   `_AssemblyVersion`, `_AssemblyInformationalVersion` and `_AssemblyFileVersion`.
-- Update all nuproj's to use the (new) native package properties:
+- Update to use the (new) native package properties:
 ```xml
   <PropertyGroup>
     <!--<PackageId></PackageId>-->
@@ -38,23 +41,8 @@ Miscs
     <NeutralLanguage></NeutralLanguage>
     <AssemblyVersion></AssemblyVersion>
     <FileVersion></FileVersion>
-  </PropertyGroup>
-```
-  We can be a bit smarter and merge Description, Copyright w/ PackageDescription,
-  PackageCopyright.
-- Migration to .NET Standard (pending: support for Code Analysis). There are plenty
-  of new properties, for instance:
-```xml
-  <PropertyGroup>
+
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
-    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
-    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
-    <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
-    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
-    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
   </PropertyGroup>
 ```
 
