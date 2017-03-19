@@ -8,7 +8,7 @@ namespace Narvalo
 
     using Xunit;
 
-    public partial class AssertExtended : Xunit.Assert
+    public partial class AssertExtended : Assert
     {
         public static void IsNotLocalized(LocalizedStrings localizedStrings)
         {

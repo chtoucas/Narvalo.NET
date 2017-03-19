@@ -63,7 +63,10 @@
                        Condition=" '@(BuildOutputs->EndsWith('Facts.dll'))' == 'true' " />
     </ItemGroup>
 
+    <!-- If we do not specify the working folder, Xunit sometimes fails to find
+         localized resources. -->
     <xunit Assemblies="@(_TestAssemblies)"
+           WorkingFolder="$(OutDir)"
            Html="$(XunitHtmlFile)"
            Xml="$(XunitXmlFile)"
            Condition=" '@(_TestAssemblies)' != '' " />

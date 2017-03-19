@@ -19,7 +19,7 @@ he', car il est en cours d'utilisation par un autre processus. [I:\github\Narval
 ```
 - Review localization for Narvalo.Build, Narvalo.Mvp, Narvalo.Mvp.Web
   and Narvalo.Web.
-- [Low] Update the attribute `ToolsVersion` in MSBuild projects?
+- [Low] Update the attribute `ToolsVersion` in csproj's?
 - [Low] Automatically create the assembly infos from the NuGet spec.
 - [Low] Update CodeFormatter when it supports C# 7.0. After that, change
   from `format-code.cmd` to `format-code.ps1`.
