@@ -317,6 +317,7 @@ Checklist:
   `src\Versioning\DefaultVersion.Mvp.props`.
 - Update individual versions in `src\Versioning`, if they differ from the shared
   ones.
+- Update the individual READMEs w/ version info.
 - Individual package descriptions in `src\Packaging`.
 - Check that the property `frameworkAssemblies` in nuspec's do not need any update.
 - Check that the `TargetFrameworkVersion` property in the project file and
