@@ -9,11 +9,18 @@ namespace Narvalo
     public static class HashCodeHelpersFacts
     {
         [Fact]
-        public static void Combine2_DoesNotThrow_WhenOverflowed()
-            => HashCodeHelpers.Combine(Int32.MaxValue, 1);
+        public static void Combine2_DoesNotThrow_WhenMinOverflowed()
+            => HashCodeHelpers.Combine(Int32.MinValue, 1);
 
         [Fact]
-        public static void Combine3_DoesNotThrow_WhenOverflowed()
+        public static void Combine2_DoesNotThrow_WhenMaxOverflowed()
+            => HashCodeHelpers.Combine(Int32.MaxValue, 1);
+        [Fact]
+        public static void Combine3_DoesNotThrow_WhenMinOverflowed()
+            => HashCodeHelpers.Combine(Int32.MinValue, 1, 1);
+
+        [Fact]
+        public static void Combine3_DoesNotThrow_WhenMaxOverflowed()
             => HashCodeHelpers.Combine(Int32.MaxValue, 1, 1);
     }
 }
