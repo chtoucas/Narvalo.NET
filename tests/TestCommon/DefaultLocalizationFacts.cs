@@ -2,66 +2,29 @@
 
 namespace Narvalo
 {
-    using System;
-    using System.Collections.Generic;
     using System.Resources;
 
     using Xunit;
 
+    using Assert = Narvalo.AssertExtended;
+
     public abstract class DefaultLocalizationFacts
     {
-        private readonly Lazy<HashSet<string>> _defaultKeys;
-        private readonly LocalizedStrings _localizedStrings;
+        protected DefaultLocalizationFacts(ResourceManager manager)
+            => LocalizedStrings = new LocalizedStrings(manager);
 
-        protected DefaultLocalizationFacts(ResourceManager resourceManager)
-        {
-            _localizedStrings = new LocalizedStrings(resourceManager);
-            _defaultKeys = new Lazy<HashSet<string>>(() => _localizedStrings.GetKeys());
-        }
+        protected LocalizedStrings LocalizedStrings { get; }
 
-        protected HashSet<string> DefaultKeys => _defaultKeys.Value;
-
-        [Fact, UseCulture(LocalizedStrings.DefaultNeutralResourcesLanguage)]
-        public void Neutral()
-        {
-            var dict = _localizedStrings.GetNeutralStrings();
-
-            foreach (var pair in dict)
-            {
-                Assert.True(!String.IsNullOrWhiteSpace(pair.Value),
-                    $"The resource '{pair.Key}' is empty or contains only white spaces.");
-            }
-        }
+        [Fact, UseCulture("en")]
+        public void English_IsLocalized() => Assert.IsLocalized(LocalizedStrings);
 
         [Fact, UseCulture("fr")]
-        public void Français() => TestLanguage(tryParents: false);
+        public void Français_IsLocalized() => Assert.IsLocalized(LocalizedStrings);
+
+        [Fact, UseCulture("fr")]
+        public void Français_IsComplete() => Assert.IsLocalizationComplete(LocalizedStrings);
 
         [Fact, UseCulture("vn")]
-        public void TiếngViệt_IsMissing()
-        {
-            var dict = _localizedStrings.GetCurrentStrings(false);
-
-            Assert.Null(dict);
-        }
-
-        private void TestLanguage(bool tryParents)
-        {
-            var dict = _localizedStrings.GetCurrentStrings(tryParents);
-
-            Assert.NotNull(dict);
-
-            foreach (var pair in dict)
-            {
-                Assert.True(DefaultKeys.Contains(pair.Key),
-                    $"The resource contains an unrecognized key '{pair.Key}'.");
-                Assert.True(!String.IsNullOrWhiteSpace(pair.Value),
-                    $"The resource '{pair.Key}' is empty or contains only white spaces.");
-            }
-
-            foreach (var key in DefaultKeys)
-            {
-                Assert.True(dict.ContainsKey(key), $"The resource does not localize '{key}'.");
-            }
-        }
+        public void TiếngViệt_IsNotLocalized() => Assert.IsNotLocalized(LocalizedStrings);
     }
 }

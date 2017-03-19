@@ -9,7 +9,7 @@ namespace Narvalo.Mvp.Web
 
     public static class LocalizationFacts
     {
-        [Fact, UseCulture(LocalizedStrings.DefaultNeutralResourcesLanguage)]
-        public static void Neutral() => Assert.IsLocalized(Strings.ResourceManager);
+        [Fact, UseCulture("en")]
+        public static void English_IsLocalized() => Assert.IsLocalized(Strings.ResourceManager);
     }
 }

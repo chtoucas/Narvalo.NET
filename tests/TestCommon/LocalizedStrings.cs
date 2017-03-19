@@ -11,35 +11,59 @@ namespace Narvalo
 
     public sealed class LocalizedStrings
     {
-        // English is the default language used for resources.
-        public const string DefaultNeutralResourcesLanguage = "en";
-
         private readonly ResourceManager _manager;
-        private readonly Lazy<ResourceSet> _neutralResources;
+        private readonly CultureInfo _referenceCulture;
+        private readonly Lazy<HashSet<string>> _referenceKeys;
 
+        // REVIEW: Shouldn't we use the assembly attribute NeutralResourcesLanguage
+        // to determine the default culture.
         public LocalizedStrings(ResourceManager manager)
-            : this(manager, DefaultNeutralResourcesLanguage) { }
+            : this(manager, CultureInfo.InvariantCulture) { }
 
-        // lang = Neutral Resources Language.
-        public LocalizedStrings(ResourceManager manager, string lang)
+        public LocalizedStrings(ResourceManager manager, string referenceCulture)
+            : this(manager, new CultureInfo(referenceCulture)) { }
+
+        // defaultCulture = the culture we will use as a baseline.
+        public LocalizedStrings(ResourceManager manager, CultureInfo referenceCulture)
         {
-            if (lang == null) { throw new ArgumentNullException(nameof(lang)); }
-
             _manager = manager ?? throw new ArgumentNullException(nameof(manager));
+            _referenceCulture = referenceCulture ?? throw new ArgumentNullException(nameof(referenceCulture));
 
-            // NB: We use tryParents = false, to be sure that we do not load any resource fallback.
-            // Could we use GetNeutralResourcesLanguage(Assembly)?
-            _neutralResources = new Lazy<ResourceSet>(
-                () => _manager.GetResourceSet(new CultureInfo(lang), true, tryParents: false));
+            _referenceKeys = new Lazy<HashSet<string>>(GetReferenceKeys);
         }
 
-        private ResourceSet NeutralResources => _neutralResources.Value ?? throw new NotSupportedException();
+        public HashSet<string> ReferenceKeys => _referenceKeys.Value;
 
-        public HashSet<string> GetKeys()
+        public Dictionary<string, string> GetStrings()
+            => GetStrings(CultureInfo.CurrentCulture, false);
+
+        public Dictionary<string, string> GetStrings(bool tryParents)
+            => GetStrings(CultureInfo.CurrentCulture, tryParents);
+
+        public Dictionary<string, string> GetStrings(CultureInfo cultureInfo, bool tryParents)
         {
+            var set = GetResourceSet(cultureInfo, tryParents);
+
+            if (set == null) { return null; }
+
+            return set.Cast<DictionaryEntry>()
+                .Where(item => item.Value is string)
+                .ToDictionary(item => item.Key.ToString(),
+                              item => item.Value.ToString());
+        }
+
+        private ResourceSet GetResourceSet(CultureInfo cultureInfo, bool tryParents)
+            => _manager.GetResourceSet(cultureInfo, true, tryParents);
+
+        private HashSet<string> GetReferenceKeys()
+        {
+            var set = GetResourceSet(_referenceCulture, false);
+
+            if (set == null) { return null; }
+
             var retval = new HashSet<string>();
 
-            foreach (DictionaryEntry item in NeutralResources)
+            foreach (DictionaryEntry item in set)
             {
                 // We only keep resources that are of type string.
                 if (!(item.Value is string)) { continue; }
@@ -48,23 +72,5 @@ namespace Narvalo
 
             return retval;
         }
-
-        public Dictionary<string, string> GetNeutralStrings()
-            => ToDictionary(NeutralResources);
-
-        public Dictionary<string, string> GetCurrentStrings(bool tryParents)
-        {
-            var set = _manager.GetResourceSet(CultureInfo.CurrentCulture, true, tryParents);
-
-            if (set == null) { return null; }
-
-            return ToDictionary(set);
-        }
-
-        private static Dictionary<string, string> ToDictionary(ResourceSet resources)
-            => resources.Cast<DictionaryEntry>()
-                .Where(item => item.Value is string)
-                .ToDictionary(item => item.Key.ToString(),
-                              item => item.Value.ToString());
     }
 }
