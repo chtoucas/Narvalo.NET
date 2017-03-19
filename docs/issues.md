@@ -4,11 +4,11 @@ Issues & TODOs (en vrac)
 Miscs
 -----
 
-- [High] Sometimes, Xunit cannot find localized resources (should be fixed).
-- [High] `make.ps1 test` fails sometimes for weird reasons (most of the time
-  it works perfectly and things are always fine inside VS). There seems to be
-  a problem with the new MSBuild when we have VS opened and it is running
-  at the same time:
+- [High] `make.ps1` fails sometimes for weird reasons (most of the time
+  it works perfectly):
+  * Xunit cannot find localized resources (should be fixed).
+  * There seems to be a problem with the new MSBuild when we have VS opened
+    and it is running at the same time:
 ```
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\Microsoft.Common.CurrentVersion.targets(
 3245,5): error MSB3491: Impossible d'écrire des lignes dans le fichier "I:\github\Narvalo.NET\work\obj\Debug\CoreCompil
@@ -26,35 +26,12 @@ he', car il est en cours d'utilisation par un autre processus. [I:\github\Narval
 - [Low] Enable continuous integration (Travis, AppVeyor, Coverall, Readthedoc, GitLink)?
 
 ### Migration to .NET Standard projects.
-- Pending: support for Code Analysis.
+- Waiting: support for Code Analysis.
 - We might have a conflict between the new MSBuild and our target `Package`.
 - Use `PackageReference` instead of parsing `packages.config`.
-- Versioning: Use `Version`, `AssemblyVersion` and `FileVersion` instead of
-  `_AssemblyVersion`, `_AssemblyInformationalVersion` and `_AssemblyFileVersion`.
-- Update to use the (new) native package properties:
-```xml
-  <PropertyGroup>
-    <!--<PackageId></PackageId>-->
-    <Version></Version>
-    <Authors></Authors>
-    <Company></Company>
-    <Product></Product>
-    <!--<Description></Description>-->
-    <!--<Copyright></Copyright>-->
-    <PackageLicenseUrl></PackageLicenseUrl>
-    <!--<PackageProjectUrl></PackageProjectUrl>-->
-    <PackageIconUrl></PackageIconUrl>
-    <RepositoryUrl></RepositoryUrl>
-    <RepositoryType></RepositoryType>
-    <!--<PackageTags></PackageTags>-->
-    <!--<PackageReleaseNotes></PackageReleaseNotes>-->
-    <NeutralLanguage></NeutralLanguage>
-    <AssemblyVersion></AssemblyVersion>
-    <FileVersion></FileVersion>
-
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-  </PropertyGroup>
-```
+- Update to use the (new) native package properties: `Version`, `AssemblyVersion`,
+  `FileVersion`... instead of `_AssemblyVersion`, `_AssemblyInformationalVersion`
+  and `_AssemblyFileVersion`.
 
 Narvalo.Common
 --------------

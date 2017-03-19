@@ -3,16 +3,15 @@
 <#
 .EXAMPLE
     Rebuild then run test coverage for Narvalo.Core with full details:
-    cover.ps1 Narvalo.Core -r -f
+    cover.ps1 -r -d Narvalo.Core
 #>
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $false, Position = 0)]
-    [string] $AssemblyName = '*',
+    [string] $Assembly = '*',
 
     [Alias('r')] [switch] $Rebuild,
-
-    [Alias('f')] [switch] $Full
+    [Alias('d')] [switch] $Detailed
 )
 
 Set-StrictMode -Version Latest
@@ -40,17 +39,13 @@ $opencoverxml = (Get-LocalPath 'work\log\opencover.xml')
 if ($Rebuild) {
     # Build the projects then create the opencover report.
 
-    if ($AssemblyName -eq '*') {
-        .\make.ps1 -q
-    } else {
-        .\make.ps1 build $AssemblyName -q
-    }
+    .\make.ps1 build $Assembly -q
 
     $opencover = $packages | Get-OpenCoverExe
     $xunit = $packages | Get-XunitExe
 
     $asms = Get-ChildItem -Path (Get-LocalPath "work\bin\Debug\*") `
-        -Include "$AssemblyName.Facts.dll"
+        -Include "$Assembly.Facts.dll"
     $targetargs = $asms -join " "
 
     # Be very careful with arguments containing spaces.
@@ -64,11 +59,13 @@ if ($Rebuild) {
 }
 
 # Generate the report.
-# WARNING: Be sure that you already run opencover; option $Rebuild.
+if (!(Test-Path $opencoverxml)) {
+    Exit-Gracefully 'No OpenCover report found, please re-run the script with the option -r'
+}
 
 $reportgenerator = $packages | Get-ReportGeneratorExe
 
-if ($Full) {
+if ($Detailed) {
     $targetdir     = Get-LocalPath 'work\log\opencover'
     $reporttypes   = 'Html'
     $result        = 'work\log\opencover\index.htm'
@@ -82,7 +79,7 @@ else {
 . $reportgenerator `
     -verbosity:Info `
     -reporttypes:$reporttypes `
-    "-assemblyfilters:+$AssemblyName" `
+    "-assemblyfilters:+$Assembly" `
     -reports:$opencoverxml `
     -targetdir:$targetdir
 

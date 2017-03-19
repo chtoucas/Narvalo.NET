@@ -3,8 +3,9 @@
 <#
 .SYNOPSIS
     Run the build script.
-.PARAMETER AssemblyName
-    Run the script only for one assembly (ignored by the task 'pack').
+.PARAMETER Assembly
+    Build only the specified assembly (ignored by the task 'pack').
+    Assembly is the name of the assembly without the extension part.
 .PARAMETER Fast
     Do not run the tests (only for the task 'pack').
 .PARAMETER Release
@@ -29,7 +30,7 @@
     None.
 .EXAMPLE
     Create retail packages:
-    make.ps1 -Retail -t pack
+    make.ps1 -Retail pack
 .EXAMPLE
     Run default task (build) with detailed informations:
     make.ps1 -v detailed
@@ -44,7 +45,7 @@ param(
     [Alias('t')] [string] $Task = 'build',
 
     [Parameter(Mandatory = $false, Position = 1)]
-    [string] $AssemblyName = $null,
+    [string] $Assembly = '*',
 
     [Parameter(Mandatory = $false, Position = 2)]
     [ValidateSet('q', 'quiet', 'm', 'minimal', 'n', 'normal', 'd', 'detailed', 'diag', 'diagnostic')]
@@ -96,8 +97,10 @@ if ($Release) {
     $configuration = 'Debug'
 }
 
-if ($AssemblyName -ne $null) {
-    $customProject = "/p:CustomAssembly=$AssemblyName"
+if ($Assembly -ne '*') {
+    $customProject = "/p:CustomAssembly=$Assembly"
+} else {
+    $customProject = ''
 }
 
 # MSBuild properties.
