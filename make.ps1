@@ -3,6 +3,8 @@
 <#
 .SYNOPSIS
     Run the build script.
+.PARAMETER AssemblyName
+    Run the script only for one assembly (ignored by the task 'pack').
 .PARAMETER Fast
     Do not run the tests (only for the task 'pack').
 .PARAMETER Release
@@ -14,7 +16,7 @@
 .PARAMETER Task
     Specifies the task to be executed.
     You can use one of the following values:
-        build, cover, pack, test
+        clean, build, pack, rebuild, test
     The default value is 'build'.
 .PARAMETER Verbosity
     Specifies the amount of information displayed by MSBuild.
@@ -31,14 +33,20 @@
 .EXAMPLE
     Run default task (build) with detailed informations:
     make.ps1 -v detailed
+.EXAMPLE
+    Test the project Narvalo.Common
+    make.ps1 test Narvalo.Common
 #>
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $false, Position = 0)]
-    [ValidateSet('build', 'pack', 'test')]
+    [ValidateSet('clean', 'build', 'pack', 'rebuild', 'test')]
     [Alias('t')] [string] $Task = 'build',
 
     [Parameter(Mandatory = $false, Position = 1)]
+    [string] $AssemblyName = $null,
+
+    [Parameter(Mandatory = $false, Position = 2)]
     [ValidateSet('q', 'quiet', 'm', 'minimal', 'n', 'normal', 'd', 'detailed', 'diag', 'diagnostic')]
     [Alias('v')] [string] $Verbosity = 'minimal',
 
@@ -88,6 +96,10 @@ if ($Release) {
     $configuration = 'Debug'
 }
 
+if ($AssemblyName -ne $null) {
+    $customProject = "/p:CustomAssembly=$AssemblyName"
+}
+
 # MSBuild properties.
 $msbuildprops = `
     '/nologo', "/verbosity:$Verbosity", '/maxcpucount', '/nodeReuse:false',
@@ -121,8 +133,10 @@ if (!$Quiet) {
 $msbuild = (Get-LocalPath "packages") | Get-VSWhereExe | Get-MSBuildExe
 
 switch ($Task) {
-    'build' { & $msbuild $project $msbuildprops '/t:Build' }
-    'test'  { & $msbuild $project $msbuildprops '/t:Xunit' }
+    'clean' { & $msbuild $project $msbuildprops $customProject '/t:Clean' }
+    'build' { & $msbuild $project $msbuildprops $customProject '/t:Build' }
+    'rebuild' { & $msbuild $project $msbuildprops $customProject '/t:Rebuild' }
+    'test'  { & $msbuild $project $msbuildprops $customProject '/t:Test' }
 
     'pack' {
         $git = (Get-GitExe)
@@ -153,7 +167,9 @@ switch ($Task) {
             $target = '/t:Xunit;Package'
         }
 
-        & $msbuild $project $msbuildpackprops  "/p:GitCommitHash=$hash" $target
+        # We do not append $customProject to force because it could create
+        # unresolved dependencies in the NuGet registry.
+        & $msbuild $project $msbuildpackprops "/p:GitCommitHash=$hash" $target
     }
 }
 

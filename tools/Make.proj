@@ -2,33 +2,45 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildThisFileDirectory)Make.Common.props" />
 
-  <ItemGroup>
-    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Build\Narvalo.Build.csproj" />
 
-    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Common\Narvalo.Common.csproj" />
-    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Common.Facts\Narvalo.Common.Facts.csproj" />
+  <Choose>
+    <When Condition=" '$(CustomAssembly)' != '' ">
+      <ItemGroup>
+        <ProjectsToBuild Include="$(RepositoryRoot)src\$(CustomAssembly)\$(CustomAssembly).csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)tests\$(CustomAssembly).Facts\$(CustomAssembly).Facts.csproj" />
+      </ItemGroup>
+    </When>
 
-    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Core\Narvalo.Core.csproj" />
-    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Core.Facts\Narvalo.Core.Facts.csproj" />
+    <Otherwise>
+      <ItemGroup>
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Build\Narvalo.Build.csproj" />
 
-    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Finance\Narvalo.Finance.csproj" />
-    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Finance.Facts\Narvalo.Finance.Facts.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Common\Narvalo.Common.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Common.Facts\Narvalo.Common.Facts.csproj" />
 
-    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Fx\Narvalo.Fx.csproj" />
-    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Fx.Facts\Narvalo.Fx.Facts.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Core\Narvalo.Core.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Core.Facts\Narvalo.Core.Facts.csproj" />
 
-    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Money\Narvalo.Money.csproj" />
-    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Money.Facts\Narvalo.Money.Facts.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Finance\Narvalo.Finance.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Finance.Facts\Narvalo.Finance.Facts.csproj" />
 
-    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp\Narvalo.Mvp.csproj" />
-    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Mvp.Facts\Narvalo.Mvp.Facts.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Fx\Narvalo.Fx.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Fx.Facts\Narvalo.Fx.Facts.csproj" />
 
-    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj" />
-    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Mvp.Web.Facts\Narvalo.Mvp.Web.Facts.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Money\Narvalo.Money.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Money.Facts\Narvalo.Money.Facts.csproj" />
 
-    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Web\Narvalo.Web.csproj" />
-    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Web.Facts\Narvalo.Web.Facts.csproj" />
-  </ItemGroup>
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp\Narvalo.Mvp.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Mvp.Facts\Narvalo.Mvp.Facts.csproj" />
+
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Mvp.Web.Facts\Narvalo.Mvp.Web.Facts.csproj" />
+
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Web\Narvalo.Web.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Web.Facts\Narvalo.Web.Facts.csproj" />
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
 
   <Import Project="$(MSBuildThisFileDirectory)Make.Common.targets" />
 </Project>

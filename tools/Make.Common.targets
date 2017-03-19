@@ -53,8 +53,8 @@
              StopOnFirstFailure="true" />
   </Target>
 
-  <!-- Xunit target. -->
-  <Target Name="Xunit"
+  <!-- Test target. -->
+  <Target Name="Test"
           DependsOnTargets="Build"
           Inputs="@(BuildOutputs)"
           Outputs="$(XunitXmlFile)">

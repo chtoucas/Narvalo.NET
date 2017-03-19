@@ -351,6 +351,10 @@ dependency on other Narvalo pacakges, always publish all packages together.
 Developer Operations
 --------------------
 
+### Cleanup the repository
+
+Delete files untracked by git: `git clean -d -n`
+
 ### Scripts
 
 - `restore.ps1` to restore solution-level packages.
