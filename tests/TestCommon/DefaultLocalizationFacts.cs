@@ -15,16 +15,16 @@ namespace Narvalo
 
         protected LocalizedStrings LocalizedStrings { get; }
 
-        [Fact, UseCulture("en")]
+        [Fact(DisplayName = "English localization is available and looks good."), UseCulture("en")]
         public void English_IsSupported() => Assert.IsLocalized(LocalizedStrings);
 
-        [Fact, UseCulture("fr")]
+        [Fact(DisplayName = "La traduction des messages en français est disponible."), UseCulture("fr")]
         public void Français_IsSupported() => Assert.IsLocalized(LocalizedStrings);
 
-        [Fact, UseCulture("fr")]
+        [Fact(DisplayName = "Le français est pleinement supporté."), UseCulture("fr")]
         public void Français_IsComplete() => Assert.IsLocalizationComplete(LocalizedStrings);
 
-        [Fact, UseCulture("vn")]
+        [Fact(DisplayName = "Tiếng Việt localization is not available."), UseCulture("vn")]
         public void TiếngViệt_IsNotSupported() => Assert.IsNotLocalized(LocalizedStrings);
     }
 }

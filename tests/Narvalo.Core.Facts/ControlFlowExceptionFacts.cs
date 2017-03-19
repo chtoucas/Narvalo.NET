@@ -6,8 +6,6 @@ namespace Narvalo
 
     public static class ControlFlowExceptionFacts
     {
-        #region Ctor
-
         [Fact]
         public static void Ctor_DefaultCtor()
         {
@@ -35,7 +33,5 @@ namespace Narvalo
             Assert.Equal(message, ex.Message);
             Assert.Same(innerException, ex.InnerException);
         }
-
-        #endregion
     }
 }

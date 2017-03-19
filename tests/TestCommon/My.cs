@@ -16,7 +16,7 @@ public static partial class My
         Zero = 0,
         One = 1,
         Two = 2,
-        Alias1 = One,
+        AliasOne = One,
     }
 
     [Flags]
@@ -34,42 +34,33 @@ public static partial class My
 
     public struct ComparableStruct : IEquatable<ComparableStruct>, IComparable<ComparableStruct>
     {
-        private readonly int _value;
-
         public ComparableStruct(int value)
         {
-            _value = value;
+            Value = value;
         }
 
-        public int CompareTo(ComparableStruct other) => _value.CompareTo(other._value);
+        public int Value { get; }
 
-        public static bool operator <(ComparableStruct left, ComparableStruct right) => left.CompareTo(right) < 0;
-
-        public static bool operator <=(ComparableStruct left, ComparableStruct right) => left.CompareTo(right) <= 0;
-
-        public static bool operator >(ComparableStruct left, ComparableStruct right) => left.CompareTo(right) > 0;
-
-        public static bool operator >=(ComparableStruct left, ComparableStruct right) => left.CompareTo(right) >= 0;
+        public int CompareTo(ComparableStruct other) => Value.CompareTo(other.Value);
 
         public static bool operator ==(ComparableStruct left, ComparableStruct right) => left.Equals(right);
-
         public static bool operator !=(ComparableStruct left, ComparableStruct right) => !left.Equals(right);
+        public static bool operator <(ComparableStruct left, ComparableStruct right) => left.CompareTo(right) < 0;
+        public static bool operator <=(ComparableStruct left, ComparableStruct right) => left.CompareTo(right) <= 0;
+        public static bool operator >(ComparableStruct left, ComparableStruct right) => left.CompareTo(right) > 0;
+        public static bool operator >=(ComparableStruct left, ComparableStruct right) => left.CompareTo(right) >= 0;
 
-        public bool Equals(ComparableStruct other) => _value == other._value;
+        public bool Equals(ComparableStruct other) => Value == other.Value;
 
         public override bool Equals(object obj)
         {
-            if (!(obj is ComparableStruct))
-            {
-                return false;
-            }
-
-            return Equals((ComparableStruct)obj);
+            if (obj == null) { return false; }
+            return (obj is ComparableStruct) && Equals((ComparableStruct)obj);
         }
 
-        public override int GetHashCode() => _value.GetHashCode();
+        public override int GetHashCode() => Value.GetHashCode();
 
-        public override string ToString() => _value.ToString(CultureInfo.CurrentCulture);
+        public override string ToString() => Value.ToString(CultureInfo.CurrentCulture);
     }
 
     public struct SimpleStruct : IEquatable<SimpleStruct>
@@ -79,7 +70,6 @@ public static partial class My
         public int Value { get; }
 
         public static bool operator ==(SimpleStruct left, SimpleStruct right) => left.Equals(right);
-
         public static bool operator !=(SimpleStruct left, SimpleStruct right) => !left.Equals(right);
 
         public bool Equals(SimpleStruct other) => Value == other.Value;
@@ -87,13 +77,12 @@ public static partial class My
         public override bool Equals(object obj)
         {
             if (obj == null) { return false; }
-
-            if (!(obj is SimpleStruct)) { return false; }
-
-            return Equals((SimpleStruct)obj);
+            return (obj is SimpleStruct) && Equals((SimpleStruct)obj);
         }
 
         public override int GetHashCode() => Value.GetHashCode();
+
+        public override string ToString() => Value.ToString(CultureInfo.CurrentCulture);
     }
 
     public sealed class SimpleValue
@@ -120,18 +109,13 @@ public static partial class My
         public bool Equals(EquatableValue other)
         {
             if (ReferenceEquals(other, null)) { return false; }
-
             return Value == other.Value;
         }
 
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(obj, null)) { return false; }
-
             if (ReferenceEquals(obj, this)) { return true; }
-
-            if (obj.GetType() != this.GetType()) { return false; }
-
             return Equals((EquatableValue)obj);
         }
 
