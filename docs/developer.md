@@ -355,9 +355,10 @@ Developer Operations
 
 Common cases:
 - Remove untracked files and directories: `git clean -nd`
-- Remove ignored files and directories: `git clean -ndx -e *.user -e nuget.exe -e .vs -e packages`;
-  This command should delete `bin`, `obj` and `work`.
-- Hard cleanup: `git clean -ndx`
+- Remove ignored files and directories: `git clean -ndx -e nuget.exe -e *.user -e .vs -e packages`;
+  This command should only delete `bin`, `obj` and `work`.
+- Hard cleanup: `git clean -ndx`. ** WARNING:** It will also remove your local
+  customizations.
 
 When you are ready, change `-n` to `-f`, otherwise nothing will happen.
 

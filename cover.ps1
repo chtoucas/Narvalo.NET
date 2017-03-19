@@ -40,13 +40,17 @@ $opencoverxml = (Get-LocalPath 'work\log\opencover.xml')
 if ($Rebuild) {
     # Build the projects then create the opencover report.
 
-    .\make.ps1 -q
+    if ($AssemblyName -eq '*') {
+        .\make.ps1 -q
+    } else {
+        .\make.ps1 build $AssemblyName -q
+    }
 
     $opencover = $packages | Get-OpenCoverExe
     $xunit = $packages | Get-XunitExe
 
     $asms = Get-ChildItem -Path (Get-LocalPath "work\bin\Debug\*") `
-        -Include "*.Facts.dll"
+        -Include "$AssemblyName.Facts.dll"
     $targetargs = $asms -join " "
 
     # Be very careful with arguments containing spaces.

@@ -4,12 +4,11 @@ Issues & TODOs (en vrac)
 Miscs
 -----
 
-- [High] Sometimes, Xunit cannot find localized resources.
-  Re-running the tests make the error go away.
-- [High] `make.ps1 test` fails sometimes for unknown reasons (most of the time
+- [High] Sometimes, Xunit cannot find localized resources (should be fixed).
+- [High] `make.ps1 test` fails sometimes for weird reasons (most of the time
   it works perfectly and things are always fine inside VS). There seems to be
-  a problem with the new MSBuild when we have VS opened and we run MSBuild at
-  the same time:
+  a problem with the new MSBuild when we have VS opened and it is running
+  at the same time:
 ```
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\Microsoft.Common.CurrentVersion.targets(
 3245,5): error MSB3491: Impossible d'écrire des lignes dans le fichier "I:\github\Narvalo.NET\work\obj\Debug\CoreCompil
