@@ -193,6 +193,10 @@ namespace Narvalo
             => Require.NotNullOrEmpty("value", "paramName");
 
         [Fact]
+        public static void NotNullOrEmpty_DoesNotThrow_ForWhiteSpaceString()
+            => Require.NotNullOrEmpty(" ", "paramName");
+
+        [Fact]
         public static void NotNullOrEmpty_ThrowsArgumentNullException_ForNull()
         {
             // Arrange
@@ -215,6 +219,69 @@ namespace Narvalo
             // Arrange
             var paramName = "paramName";
             Action act = () => Require.NotNullOrEmpty(String.Empty, paramName);
+
+            // Act
+            var ex = Record.Exception(act);
+
+            // Assert
+            Assert.NotNull(ex);
+            Assert.NotNull(ex.Message);
+            var argex = Assert.IsType<ArgumentException>(ex);
+            Assert.Equal(paramName, argex.ParamName);
+        }
+
+        #endregion
+
+        #region NotNullOrWhiteSpace()
+
+        [Fact]
+        public static void NotNullOrWhiteSpace_DoesNotThrow_ForNonNullOrWhiteSpaceString()
+            => Require.NotNullOrWhiteSpace("value", "paramName");
+
+        [Fact]
+        public static void NotNullOrWhiteSpace_DoesNotThrow_ForStringWithWhiteSpaces()
+            => Require.NotNullOrWhiteSpace("va lue", "paramName");
+
+        [Fact]
+        public static void NotNullOrWhiteSpace_ThrowsArgumentNullException_ForNull()
+        {
+            // Arrange
+            var paramName = "paramName";
+            Action act = () => Require.NotNullOrWhiteSpace(null, paramName);
+
+            // Act
+            var ex = Record.Exception(act);
+
+            // Assert
+            Assert.NotNull(ex);
+            Assert.NotNull(ex.Message);
+            var argex = Assert.IsType<ArgumentNullException>(ex);
+            Assert.Equal(paramName, argex.ParamName);
+        }
+
+        [Fact]
+        public static void NotNullOrWhiteSpace_ThrowsArgumentException_ForEmptyString()
+        {
+            // Arrange
+            var paramName = "paramName";
+            Action act = () => Require.NotNullOrWhiteSpace(String.Empty, paramName);
+
+            // Act
+            var ex = Record.Exception(act);
+
+            // Assert
+            Assert.NotNull(ex);
+            Assert.NotNull(ex.Message);
+            var argex = Assert.IsType<ArgumentException>(ex);
+            Assert.Equal(paramName, argex.ParamName);
+        }
+
+        [Fact]
+        public static void NotNullOrWhiteSpace_ThrowsArgumentException_ForWhiteSpaceString()
+        {
+            // Arrange
+            var paramName = "paramName";
+            Action act = () => Require.NotNullOrWhiteSpace(" ", paramName);
 
             // Act
             var ex = Record.Exception(act);
