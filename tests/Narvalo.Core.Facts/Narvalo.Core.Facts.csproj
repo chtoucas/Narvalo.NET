@@ -31,6 +31,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HashCodeHelpersFacts.cs" />
     <Compile Include="LocalizationFacts.cs" />
     <Compile Include="ControlFlowExceptionFacts.cs" />
     <Compile Include="FormatFacts.cs" />
