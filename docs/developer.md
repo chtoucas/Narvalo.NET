@@ -89,7 +89,7 @@ The following procedure enables us to centralize all settings:
 A typical project file should then look like this:
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <ProjectGuid>{XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}</ProjectGuid>
@@ -126,7 +126,7 @@ Create a property file `Narvalo.XXX.props` for instance with the following
 content:
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
-<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project>
   <PropertyGroup>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
@@ -184,7 +184,7 @@ To create a test project use the "Class Library" template from Visual Studio.
 Add the following content to you local customization property file `Narvalo.XXX.props`:
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
-<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project>
   <Import Project="$(RepositorySettingsDir)Tests.props" />
 </Project>
 ```
@@ -199,7 +199,7 @@ Reference the shared project `tests\TestCommon`.
 Add the following content to you local customization property file `Narvalo.XXX.props`:
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
-<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project>
   <Import Project="$(RepositorySettingsDir)Samples.props" />
 </Project>
 ```
@@ -255,7 +255,7 @@ Remarks:
 In `src\Versioning`, create a version property file: `Narvalo.XXX.Version.props`:
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
-<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project>
   <Import Project="$(MSBuildThisFileDirectory)DefaultVersion.props" />
 </Project>
 ```
@@ -265,7 +265,7 @@ NB: For MVP-related projects use: `DefaultVersion.Mvp.props`.
 If you do not want to use the default version properties:
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
-<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project>
   <PropertyGroup>
     <MajorVersion>1</MajorVersion>
     <MinorVersion>2</MinorVersion>
@@ -393,7 +393,7 @@ After upgrading Visual Studio or MSBuild, do not forget to update the
 `VisualStudioVersion` property in `Make.Shared.props`.
 
 Other places to look at:
-- `ToolsVersion` attribute in all MSBuild and project files.
+- `ToolsVersion` and `LangVersion` attributes in all MSBuild and project files.
 - `publish.ps1` (for F# updates).
 - `TargetFrameworkVersion` in `Narvalo.Common.props`.
 - For NuGet packaging check the target lib in the NuGet projects (`src\Packaging`).

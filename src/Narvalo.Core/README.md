@@ -14,7 +14,7 @@ Changelog
   use `FormattableString.Invariant` instead.
 - **[Breaking]** Remove variant of `Format.Current` w/ variable arguments;
   we do not have a real use case for it.
-- **[Breaking]** Change from `arg0` to `arg` the name of the second parameter 
+- **[Breaking]** Change the name of the second parameter (`arg0` to `arg` )
   in `Format.Current(string, T)`.
 
 **Version 1.2.0** (released 2017-03-17)
