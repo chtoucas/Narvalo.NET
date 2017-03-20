@@ -1,3 +1,30 @@
-body {
-  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+BODY {
+  font-family: segoe-ui_normal, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif, "Segoe UI Symbol";
+  font-size: 16px;
+  line-height: 1.5;
 }
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+  font-family: segoe-ui_normal, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif, "Segoe UI Symbol";
+  line-height: 1.25;
+  text-rendering: optimizeLegibility;
+}
+
+.h1, h1 { font-size: 2.2em; font-family: Georgia, serif; }
+.h2, h2 { font-size: 2em; font-family: Georgia, serif; }
+.h3, h3 { font-size: 1.6em; font-family: Georgia, serif; }
+.h4, h4 { font-size: 1.2em; font-family: Georgia, serif; }
+.h5, h5 { font-size: 1em; font-style: italic; }
+.h6, h6 { font-size: .9em; }
+
+#navbar .level1 { font-size: .9em; }
+
+.breadcrumb { font-size: .9em; }
+
+.toc .level2 { margin: 0px; font-size: .8em; }
+
+.inheritance div, .inheritedMembers div { font-size: .9em; }
+
+table { font-size: .9em; }
+
+article h4 { padding-bottom: .3em; }

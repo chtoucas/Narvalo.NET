@@ -7,7 +7,7 @@
             "Narvalo.Core/Narvalo.Core.csproj",
             // "Narvalo.Money/Narvalo.Money.csproj",
             // "Narvalo.Fx/Narvalo.Fx.csproj",
-            // "Narvalo.Finance/Narvalo.Finance.csproj",
+            "Narvalo.Finance/Narvalo.Finance.csproj",
             // "Narvalo.Common/Narvalo.Common.csproj",
             // "Narvalo.Web/Narvalo.Web.csproj"
           ],
