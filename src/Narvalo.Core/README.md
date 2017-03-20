@@ -10,7 +10,7 @@ Changelog
 ---------
 
 **vNext**
-- **[Breaking]** Remove all variants of `Format.Invariant`; 
+- **[Breaking]** Remove all variants of `Format.Invariant`;
   use `FormattableString.Invariant` instead.
 - **[Breaking]** Remove variant of `Format.Current` w/ variable arguments;
   we do not have a real use case for it.
@@ -21,4 +21,4 @@ Changelog
 **Version 1.2.0** (released 2017-03-17)
 - **[Breaking]** Remove variants of `Format.Current` and `Format.Invariant`
   w/o arguments; adding these methods was a mistake.
-- Provide localized messages in French and English.
+- Provide localized messages in both French and English.

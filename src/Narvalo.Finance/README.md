@@ -10,4 +10,4 @@ Changelog
 ---------
 
 **Version 1.1.0** (released 2017-03-17)
-- Provide localized messages in French and English.
+- Provide localized messages in both French and English.

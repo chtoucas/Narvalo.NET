@@ -1,8 +1,8 @@
 Issues & TODOs (en vrac)
 ========================
 
-Miscs
------
+Divers et variés
+----------------
 
 - [High] `make.ps1` fails sometimes for weird reasons (most of the time
   it works perfectly):
@@ -38,6 +38,19 @@ Narvalo.Common
 Next:
 - Make it a .NET Standard 2.0 library.
 
+Narvalo.Finance
+---------------
+
+- Implement BBAN validation.
+
+Next:
+- [Internet International Bank Account Number](https://tools.ietf.org/html/draft-iiban-00)
+- BBAN and IBAN implementations:
+  * [PHP-IBAN](https://github.com/globalcitizen/php-iban)
+  * [BBAN](https://github.com/globalcitizen/php-iban/issues/39)
+  * [python-stdnum](https://github.com/arthurdejong/python-stdnum)
+  * [France](http://marlot.org/util/calcul-de-la-cle-nir.php)
+
 Narvalo.Fx
 ----------
 
@@ -70,19 +83,6 @@ Next:
   * [Money Type for the CLR](https://bitbucket.org/rplaire/money-type-for-the-clr)
   * [CSharpMoney](https://csharpmoney.codeplex.com/)
   * [NMoneys](https://github.com/dgg/nmoneys)
-
-Narvalo.Finance
----------------
-
-- Implement BBAN validation.
-
-Next:
-- [Internet International Bank Account Number](https://tools.ietf.org/html/draft-iiban-00)
-- BBAN and IBAN implementations:
-  * [PHP-IBAN](https://github.com/globalcitizen/php-iban)
-  * [BBAN](https://github.com/globalcitizen/php-iban/issues/39)
-  * [python-stdnum](https://github.com/arthurdejong/python-stdnum)
-  * [France](http://marlot.org/util/calcul-de-la-cle-nir.php)
 
 Narvalo.Mvp
 -----------
