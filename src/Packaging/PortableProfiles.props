@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project>
   <PropertyGroup>
     <Profile111>portable-net45+netcore45+wpa81</Profile111>
     <Profile151>portable-net451+netcore451+wpa81</Profile151>
