@@ -11,17 +11,44 @@ BODY {
 }
 
 .h1, h1 { font-size: 2.2em; font-family: Georgia, serif; }
-.h2, h2 { font-size: 2em; font-family: Georgia, serif; }
-.h3, h3 { font-size: 1.6em; font-family: Georgia, serif; }
+.h2, h2 { font-size: 2em; font-family: Georgia, serif; color: #E74C3C; }
+.h3, h3 { font-size: 1.6em; font-family: Georgia, serif; color: #E74C3C; }
 .h4, h4 { font-size: 1.2em; font-family: Georgia, serif; }
 .h5, h5 { font-size: 1em; font-style: italic; }
 .h6, h6 { font-size: .9em; }
 
+/* Menu en haut */
 #navbar .level1 { font-size: .9em; }
 
+header .navbar { border: none; }
+
+.subnav { background-color: #2980B9; }
+.subnav A { color: white; }
 .breadcrumb { font-size: .9em; }
 
-.toc .level2 { margin: 0px; font-size: .8em; }
+/* Panneau à gauche */
+.sidefilter, .sidetoc, body .toc { background-color: #343131; color: #404040; }
+
+.sidefilter { padding-top: 1.5em; }
+
+/* Menu à gauche */
+#toc { padding-right: 20px; }
+/* */
+.toc .level2 { margin: 0px; font-size: 1em; }
+/* */
+.toc .nav > li A:hover { color: white; }
+/* Menu à gauche: espace de noms */
+.toc .nav > li.active > a { color: #555; }
+.toc .nav > li > span + a {
+  font-size: .9em; margin-bottom: .5em; color: #555; text-transform: uppercase; }
+/* Menu à gauche: classes */
+.toc .level2 LI A { overflow-x: hidden; color: #b3b3b3; font-size: .9em; }
+/* Menu à gauche: filtre */
+.toc-filter {
+  font-size: .9em;
+  padding: 1px;
+  border-width: thin; border-style: solid; border-color: LightGray; }
+.glyphicon-filter::before { display:none; }
 
 .inheritance div, .inheritedMembers div { font-size: .9em; }
 

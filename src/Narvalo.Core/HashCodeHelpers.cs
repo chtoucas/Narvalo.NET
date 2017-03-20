@@ -32,10 +32,12 @@ namespace Narvalo
         private const int MULT = 31;
 
         /// <summary>
-        /// Return a combination of two hash codes.
+        /// Combines two hash codes.
         /// </summary>
         /// <param name="hash1">The first hash code.</param>
         /// <param name="hash2">The second hash code.</param>
+        /// <returns>A combined hash code of the <paramref name="hash1"/>
+        /// and <paramref name="hash2"/>.</returns>
         public static int Combine(int hash1, int hash2)
         {
             unchecked
@@ -48,11 +50,13 @@ namespace Narvalo
         }
 
         /// <summary>
-        /// Return a combination of three hash codes..
+        /// Combines three hash codes.
         /// </summary>
         /// <param name="hash1">The first hash code.</param>
         /// <param name="hash2">The second hash code.</param>
         /// <param name="hash3">The third hash code.</param>
+        /// <returns>A combined hash code of <paramref name="hash1"/>,
+        /// <paramref name="hash2"/> and <paramref name="hash3"/>.</returns>
         public static int Combine(int hash1, int hash2, int hash3)
         {
             unchecked

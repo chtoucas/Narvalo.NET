@@ -89,8 +89,11 @@ The following procedure enables us to centralize all settings:
 A typical project file should then look like this:
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project ToolsVersion="15.0"
+         DefaultTargets="Build"
+        xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props"
+          Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <ProjectGuid>{XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}</ProjectGuid>
     <RootNamespace>Narvalo.XXX</RootNamespace>
@@ -215,7 +218,7 @@ Localization
 English is the default language. Localized resources are to be found in
 `Properties\Strings.resx`. Sometimes we provide resources in French too.
 
-**WARNING** If a project references two libraries with the same root namespace,
+**WARNING:** If a project references two libraries with the same root namespace,
 eg Narvalo.XXX and Narvalo.YYY, and have access to their internals (a Xunit
 project is the typical example where this might happen), to avoid any conflict,
 it is better to choose a different name for each resource; for instance,
@@ -280,7 +283,7 @@ If you do not want to use the default version properties:
 NuGet packages use `AssemblyInformationalVersion` without build metadata
 attached: `PackageVersion = MAJOR.MINOR.PATCH(-PreRelaseLabel)`.
 
-**IMPORTANT** Only update the version number immediately before a new release
+**IMPORTANT:** Only update the version number immediately before a new release
 to the _official_ NuGet repository. Otherwise, versions found in the repository
 must **match** the ones found in the NuGet registry.
 
@@ -343,8 +346,9 @@ differences:
 make.ps1 pack
 publish.ps1
 ```
-**IMPORTANT** Due to the custom behaviour of unstable packages regarding the
-dependency on other Narvalo pacakges, always publish all packages together.
+
+**IMPORTANT:** Due to the custom behaviour of unstable packages regarding the
+dependency on other Narvalo packages, always publish all packages together.
 
 --------------------------------------------------------------------------------
 
@@ -357,7 +361,7 @@ Common cases:
 - Remove untracked files and directories: `git clean -nd`
 - Remove ignored files and directories: `git clean -ndx -e nuget.exe -e *.user -e .vs -e packages`;
   This command should only delete `bin`, `obj` and `work`.
-- Hard cleanup: `git clean -ndx`. ** WARNING:** It will also remove your local
+- Hard cleanup: `git clean -ndx`. **WARNING:** It will also remove your local
   customizations.
 
 When you are ready, change `-n` to `-f`, otherwise nothing will happen.
@@ -380,7 +384,7 @@ Cleanup unnecessary files and optimize the local repository:
 Simply use the solution `Narvalo.sln`. Unfortunately, for solution-level packages
 (`etc\packages.config`), this must be done manually.
 
-**WARNING:** If the NuGet core framework is updated, do not forget to also
+If the NuGet core framework is updated, do not forget to also
 update `tools\nuget.exe` (I believe this is done automatically whenever we use
 it to install/update packages):
 ```

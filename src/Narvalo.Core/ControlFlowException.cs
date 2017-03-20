@@ -7,7 +7,7 @@ namespace Narvalo
     using Narvalo.Properties;
 
     /// <summary>
-    /// The exception that is thrown when the control flow path reached a section
+    /// The exception that is thrown when the control flow path reaches a section
     /// of the code that should have been unreachable under any circumstances,
     /// like a missing case in a switch.
     /// </summary>
