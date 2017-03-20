@@ -39,9 +39,7 @@
     <Prefer32Bit>false</Prefer32Bit>
     <AllowUnsafeBlocks Condition=" '$(AllowUnsafeBlocks)' == '' ">false</AllowUnsafeBlocks>
     <WarningLevel>4</WarningLevel>
-
-    <NoWarn Condition=" $(EnableDocumentationWarning) == 'true' "></NoWarn>
-    <NoWarn Condition=" $(EnableDocumentationWarning) != 'true' ">1591</NoWarn>
+    <NoWarn>1591</NoWarn>
 
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <RegisterForComInterop>false</RegisterForComInterop>
