@@ -2,22 +2,25 @@
 
 namespace Narvalo
 {
+    // The multiplier (31) is chosen because the multiplication can be replaced
+    // by the compiler by:
+    // > 31 * h = (h << 5) - h
+    // For detailed explanations, see "Effective Java" by Joshua Bloch.
+    // Note that the .NET team is planning for a built-in utility for that.
+    //
+    // Current alternatives that I know of are:
+    // - https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Tuple.cs
+    //   > (((h1 << 5) + h1) ^ h2)
+    // - https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Numerics/Hashing/HashHelpers.cs
+    //   which is used to compute a randomized hash code for ValueTuple's.
+    // - https://github.com/ASP-NET-MVC/aspnetwebstack/blob/master/src/Common/HashCodeCombiner.cs
+    //
+    //
     /// <summary>
     /// Provides helper methods to combine hash codes.
     /// </summary>
     public static class HashCodeHelpers
     {
-        // 31 is chosen because the multiplication can be replaced by:
-        // > 31 * h = (h << 5) - h
-        // for detailed explanations, see "Effective Java" by Joshua Bloch.
-        // In https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Tuple.cs, we have:
-        // > (((h1 << 5) + h1) ^ h2)
-        // See also https://github.com/ASP-NET-MVC/aspnetwebstack/blob/master/src/Common/HashCodeCombiner.cs
-        // REVIEW: It seems that in the near future .NET will have a built-in utility for that.
-        // There is already
-        // https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Numerics/Hashing/HashHelpers.cs
-        // which is used to compute a randomized hash code for ValueTuple's.
-
         /// <summary>
         /// Initial hash value.
         /// </summary>
