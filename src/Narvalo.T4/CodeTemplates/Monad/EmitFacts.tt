@@ -15,7 +15,6 @@ namespace <#= Namespace #>
     {
         #region Select()
 
-        [Fact]
         public static void Select_ThrowsArgumentNullException_ForNullSelector()
         {
             var source = <#= Name #>.<#= ReturnName #>(1);
@@ -68,7 +67,7 @@ namespace <#= Namespace #>
 
         #region Functor Rules
 
-        [Fact(DisplayName = "The identity map is a fixed point for <#= MapName #>.")]
+        [Fact(DisplayName = "<#= Name #><T<#= RTDecl #>> - The identity map is a fixed point for <#= MapName #>.")]
         public static void Satisfies_FirstFunctorLaw()
         {
             // Arrange
@@ -82,7 +81,7 @@ namespace <#= Namespace #>
             Assert.True(left.Equals(right));
         }
 
-        [Fact(DisplayName = "<#= MapName #> preserves the composition operator.")]
+        [Fact(DisplayName = "<#= Name #><T<#= RTDecl #>> - <#= MapName #> preserves the composition operator.")]
         public static void Satisfies_FunctorSecondRule()
         {
             // Arrange
@@ -103,7 +102,7 @@ namespace <#= Namespace #>
 <#+ if (HasZero && HasPlus) { #>
         #region Monoid Rules
 
-        [Fact(DisplayName = "<#= ZeroName #> is a left identity for <#= PlusName #>.")]
+        [Fact(DisplayName = "<#= Name #><T<#= RTDecl #>> - <#= ZeroName #> is a left identity for <#= PlusName #>.")]
         public static void Satisfies_FirstMonoidRule()
         {
             // Arrange
@@ -117,7 +116,7 @@ namespace <#= Namespace #>
             Assert.True(left.Equals(right));
         }
 
-        [Fact(DisplayName = "<#= ZeroName #> is a right identity for <#= PlusName #>.")]
+        [Fact(DisplayName = "<#= Name #><T<#= RTDecl #>> - <#= ZeroName #> is a right identity for <#= PlusName #>.")]
         public static void Satisfies_SecondMonoidRule()
         {
             // Arrange
@@ -131,7 +130,7 @@ namespace <#= Namespace #>
             Assert.True(left.Equals(right));
         }
 
-        [Fact(DisplayName = "<#= PlusName #> is associative.")]
+        [Fact(DisplayName = "<#= Name #><T<#= RTDecl #>> - <#= PlusName #> is associative.")]
         public static void Satisfies_ThirdMonoidRule()
         {
             // Arrange
@@ -152,7 +151,7 @@ namespace <#= Namespace #>
 <#+ } // T4: End of HasZero && HasPlus. #>
         #region Monad Rules
 
-        [Fact(DisplayName = "<#= ReturnName #> is a left identity for Bind.")]
+        [Fact(DisplayName = "<#= Name #><T<#= RTDecl #>> - <#= ReturnName #> is a left identity for Bind.")]
         public static void Satisfies_FirstMonadRule()
         {
             // Arrange
@@ -167,7 +166,7 @@ namespace <#= Namespace #>
             Assert.True(left.Equals(right));
         }
 
-        [Fact(DisplayName = "<#= ReturnName #> is a right identity for Bind.")]
+        [Fact(DisplayName = "<#= Name #><T<#= RTDecl #>> - <#= ReturnName #> is a right identity for Bind.")]
         public static void Satisfies_SecondMonadRule()
         {
             // Arrange
@@ -182,7 +181,7 @@ namespace <#= Namespace #>
             Assert.True(left.Equals(right));
         }
 
-        [Fact(DisplayName = "Bind is associative.")]
+        [Fact(DisplayName = "<#= Name #><T<#= RTDecl #>> - Bind is associative.")]
         public static void Satisfies_ThirdMonadRule()
         {
             // Arrange
