@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <!-- This file defines MSBuild properties shared among Make.* files. -->
+  <!-- This file defines MSBuild properties shared among Make.* files but not used in VS. -->
 
   <!-- Import shared properties, if not already done. -->
   <Import Project="$(MSBuildThisFileDirectory)Shared.props"

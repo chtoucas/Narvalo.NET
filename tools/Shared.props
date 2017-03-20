@@ -19,6 +19,8 @@
 
   <!-- Define common Narvalo project options. -->
   <PropertyGroup>
+    <!-- Enable/disable compiler warnings for missing documentation. -->
+    <EnableDocumentationWarning Condition=" '$(EnableDocumentationWarning)' != 'true' ">false</EnableDocumentationWarning>
     <!-- No need to set this manually. If empty, MSBuild will pick up the right value. -->
     <RepositoryRoot Condition=" '$(RepositoryRoot)' == '' ">$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.sln))\</RepositoryRoot>
   </PropertyGroup>

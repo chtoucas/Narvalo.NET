@@ -35,17 +35,19 @@
     <AppDesignerFolder Condition=" '$(AppDesignerFolder)' == '' ">Properties</AppDesignerFolder>
     <OutputType Condition=" '$(OutputType)' == '' ">Library</OutputType>
 
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget Condition=" '$(PlatformTarget)' == '' ">AnyCPU</PlatformTarget>
     <Prefer32Bit>false</Prefer32Bit>
-    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks Condition=" '$(AllowUnsafeBlocks)' == '' ">false</AllowUnsafeBlocks>
     <WarningLevel>4</WarningLevel>
-    <!-- Disable compiler warnings for missing documentation. -->
-    <NoWarn>1591</NoWarn>
+
+    <NoWarn Condition=" $(EnableDocumentationWarning) == 'true' "></NoWarn>
+    <NoWarn Condition=" $(EnableDocumentationWarning) != 'true' ">1591</NoWarn>
+
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <RegisterForComInterop>false</RegisterForComInterop>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
 
-    <LangVersion>default</LangVersion>
+    <LangVersion Condition=" '$(LangVersion)' == '' ">default</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <FileAlignment>512</FileAlignment>
 
