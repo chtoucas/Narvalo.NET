@@ -21,4 +21,4 @@ Changelog
 **Version 1.2.0** (released 2017-03-17)
 - **[Breaking]** Remove variants of `Format.Current` and `Format.Invariant`
   w/o arguments; adding these methods was a mistake.
-- Localized messages for French and English.
+- Provide localized messages in French and English.

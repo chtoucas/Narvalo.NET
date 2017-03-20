@@ -2,6 +2,11 @@
 
 namespace Narvalo
 {
+    /// <summary>
+    /// Provides helper methods to combine hash codes.
+    /// </summary>
+    //
+    //
     // The multiplier (31) is chosen because the multiplication can be replaced
     // by the compiler by:
     // > 31 * h = (h << 5) - h
@@ -14,11 +19,6 @@ namespace Narvalo
     // - https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Numerics/Hashing/HashHelpers.cs
     //   which is used to compute a randomized hash code for ValueTuple's.
     // - https://github.com/ASP-NET-MVC/aspnetwebstack/blob/master/src/Common/HashCodeCombiner.cs
-    //
-    //
-    /// <summary>
-    /// Provides helper methods to combine hash codes.
-    /// </summary>
     public static class HashCodeHelpers
     {
         /// <summary>
