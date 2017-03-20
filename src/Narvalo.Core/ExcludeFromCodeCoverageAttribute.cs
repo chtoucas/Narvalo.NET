@@ -7,7 +7,7 @@ namespace Narvalo
     /// <summary>
     /// Specifies that the attributed code should be excluded from code coverage information.
     /// </summary>
-    /// <remarks>PCL shim for the class System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute.
+    /// <remarks>Shim for System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute.
     /// It seems that this attribute will be part of .NET Standard 2.0.</remarks>
     [AttributeUsage(
         AttributeTargets.Class

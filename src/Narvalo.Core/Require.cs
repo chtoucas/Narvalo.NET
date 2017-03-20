@@ -10,13 +10,16 @@ namespace Narvalo
     /// <summary>
     /// Provides helper methods to specify preconditions on a method.
     /// </summary>
-    /// <remarks>
-    /// <para>If a condition does not hold, an exception is thrown.</para>
-    /// <para>The methods will be recognized by FxCop as guards against null value.</para>
-    /// </remarks>
+    /// <remarks>Guards against null values will be recognized by FxCop.</remarks>
     [DebuggerStepThrough]
     public static partial class Require
     {
+        /// <summary>
+        /// Validates a condition on the object's current state.
+        /// </summary>
+        /// <param name="testCondition">The conditional expression to evaluate.</param>
+        /// <exception cref="InvalidOperationException">Thrown if <paramref name="testCondition"/>
+        /// is false.</exception>
         public static void State(bool testCondition)
         {
             if (!testCondition)
@@ -25,6 +28,13 @@ namespace Narvalo
             }
         }
 
+        /// <summary>
+        /// Validates a condition on the object's current state.
+        /// </summary>
+        /// <param name="testCondition">The conditional expression to evaluate.</param>
+        /// <param name="message">The name of the parameter.</param>
+        /// <exception cref="InvalidOperationException">Thrown if <paramref name="testCondition"/>
+        /// is false.</exception>
         public static void State(bool testCondition, string message)
         {
             if (!testCondition)
@@ -34,9 +44,16 @@ namespace Narvalo
         }
     }
 
-    // Methods to perform argument validation.
+    // Methods to perform parameter validation.
     public static partial class Require
     {
+        /// <summary>
+        /// Validates a condition on a parameter.
+        /// </summary>
+        /// <param name="testCondition">The conditional expression to evaluate.</param>
+        /// <param name="parameterName">The name of the parameter.</param>
+        /// <exception cref="ArgumentException">Thrown if <paramref name="testCondition"/>
+        /// is false.</exception>
         public static void True(bool testCondition, string parameterName)
         {
             if (!testCondition)
@@ -45,6 +62,15 @@ namespace Narvalo
             }
         }
 
+        /// <summary>
+        /// Validates a condition on a parameter.
+        /// </summary>
+        /// <param name="testCondition">The conditional expression to evaluate.</param>
+        /// <param name="parameterName">The name of the parameter.</param>
+        /// <param name="message">A string that describes the error when
+        /// <paramref name="testCondition"/> is false.</param>
+        /// <exception cref="ArgumentException">Thrown if <paramref name="testCondition"/>
+        /// is false.</exception>
         public static void True(bool testCondition, string parameterName, string message)
         {
             if (!testCondition)
@@ -53,6 +79,13 @@ namespace Narvalo
             }
         }
 
+        /// <summary>
+        /// Validates a range condition on a parameter.
+        /// </summary>
+        /// <param name="rangeCondition">The range condition to evaluate.</param>
+        /// <param name="parameterName">The name of the parameter.</param>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="rangeCondition"/>
+        /// is false.</exception>
         public static void Range(bool rangeCondition, string parameterName)
         {
             if (!rangeCondition)
@@ -61,6 +94,15 @@ namespace Narvalo
             }
         }
 
+        /// <summary>
+        /// Validates a range condition on a parameter.
+        /// </summary>
+        /// <param name="rangeCondition">The range condition to evaluate.</param>
+        /// <param name="parameterName">The name of the parameter.</param>
+        /// <param name="message">A string that describes the error when
+        /// <paramref name="rangeCondition"/> is false.</param>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="rangeCondition"/>
+        /// is false.</exception>
         public static void Range(bool rangeCondition, string parameterName, string message)
         {
             if (!rangeCondition)
@@ -70,14 +112,15 @@ namespace Narvalo
         }
 
         /// <summary>
-        /// Validates that the specified argument is not null.
+        /// Validates that the specified parameter is not null.
         /// </summary>
+        /// <remarks>For a method without a reference constraint on <paramref name="value"/>,
+        /// see <see cref="NotNullUnconstrained{T}(T, String)"/>.</remarks>
         /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
-        /// <param name="value">The argument to check.</param>
+        /// <param name="value">The parameter to check.</param>
         /// <param name="parameterName">The name of the parameter.</param>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
         /// null.</exception>
-        /// <seealso cref="Require.NotNullUnconstrained{T}(T, String)"/>
         public static void NotNull<T>([ValidatedNotNull]T value, string parameterName)
             where T : class
         {
@@ -88,14 +131,13 @@ namespace Narvalo
         }
 
         /// <summary>
-        /// Validates that the specified argument is not null.
+        /// Validates that the specified parameter is not null.
         /// </summary>
         /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
-        /// <param name="value">The argument to check.</param>
+        /// <param name="value">The parameter to validate.</param>
         /// <param name="parameterName">The name of the parameter.</param>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
         /// null.</exception>
-        /// <seealso cref="Require.NotNull{T}(T, String)"/>
         public static void NotNullUnconstrained<T>([ValidatedNotNull]T value, string parameterName)
         {
             if (value == null)
@@ -105,9 +147,9 @@ namespace Narvalo
         }
 
         /// <summary>
-        /// Validates that the specified argument is not null or empty.
+        /// Validates that the specified parameter is not null or empty.
         /// </summary>
-        /// <param name="value">The argument to check.</param>
+        /// <param name="value">The parameter to validate.</param>
         /// <param name="parameterName">The name of the parameter.</param>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
         /// null.</exception>
@@ -123,13 +165,15 @@ namespace Narvalo
         }
 
         /// <summary>
-        /// Validates that the specified argument is not null or empty.
+        /// Validates that the specified parameter is not null or empty, and does not
+        /// consist only of white-space characters.
         /// </summary>
-        /// <param name="value">The argument to check.</param>
+        /// <param name="value">The parameter to validate.</param>
         /// <param name="parameterName">The name of the parameter.</param>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
         /// null.</exception>
-        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is empty.</exception>
+        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is empty,
+        /// or consists only of white-space characters.</exception>
         public static void NotNullOrWhiteSpace([ValidatedNotNull]string value, string parameterName)
         {
             NotNull(value, parameterName);
@@ -145,7 +189,7 @@ namespace Narvalo
         /// characters.
         /// </summary>
         /// <param name="value">The string to test.</param>
-        /// <returns>true if the input is empty or only consists of white-space characters;
+        /// <returns>true if the input is empty or consists only of white-space characters;
         /// otherwise false.</returns>
         private static bool IsEmptyOrWhiteSpace(string value)
         {

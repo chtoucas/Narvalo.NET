@@ -2,6 +2,9 @@
 
 namespace Narvalo
 {
+    /// <summary>
+    /// Provides helper methods to combine hash codes.
+    /// </summary>
     public static class HashCodeHelpers
     {
         // 31 is chosen because the multiplication can be replaced by:
@@ -14,9 +17,22 @@ namespace Narvalo
         // There is already
         // https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Numerics/Hashing/HashHelpers.cs
         // which is used to compute a randomized hash code for ValueTuple's.
+
+        /// <summary>
+        /// Initial hash value.
+        /// </summary>
         private const int INIT = 17;
+
+        /// <summary>
+        /// Multiplier for each value.
+        /// </summary>
         private const int MULT = 31;
 
+        /// <summary>
+        /// Return a combination of two hash codes.
+        /// </summary>
+        /// <param name="hash1">The first hash code.</param>
+        /// <param name="hash2">The second hash code.</param>
         public static int Combine(int hash1, int hash2)
         {
             unchecked
@@ -28,6 +44,12 @@ namespace Narvalo
             }
         }
 
+        /// <summary>
+        /// Return a combination of three hash codes..
+        /// </summary>
+        /// <param name="hash1">The first hash code.</param>
+        /// <param name="hash2">The second hash code.</param>
+        /// <param name="hash3">The third hash code.</param>
         public static int Combine(int hash1, int hash2, int hash3)
         {
             unchecked
