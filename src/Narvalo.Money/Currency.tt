@@ -13,8 +13,6 @@
 
 var currentCurrencies = ParseCurrent(@"..\..\data\ISO4217\A1.xml");
 var legacyCurrencies = ParseLegacy(@"..\..\data\ISO4217\A3.xml");
-// NB: Current currencies must come first.
-//var currencies = currentCurrencies.Concat(legacyCurrencies).ToList();
 
 var highestMinor = currentCurrencies.Max(_ => _.MinorUnits);
 
@@ -64,13 +62,15 @@ namespace <#= Namespace #>
                 {
                     var set = new HashSet<string>() {
 <#
-foreach (var item in legacyCurrencies.OrderBy(_ => _.Code)) {
-    if (item.MinorUnits != null)
-    {
-        Warning("A legacy currency has minor units: " + item.EnglishName + " " + item.Code);
-    }
+//var seq = legacyCurrencies.GroupBy(item => item.Code).Select(gp => gp.First()).OrderBy(_ => _.Code);
+var seq = legacyCurrencies.Select(item => item.Code).Distinct().OrderBy(_ => _);
+foreach (var item in seq) {
+    //if (item.MinorUnits != null)
+    //{
+    //    Warning("A legacy currency has minor units: " + item.EnglishName + " " + item.Code);
+    //}
 #>
-                        "<#= item.Code#>",
+                        "<#= item #>",
 <# } #>
                     };
 
