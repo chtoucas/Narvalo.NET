@@ -95,7 +95,6 @@ namespace Narvalo
         [Fact]
         public static void Range_ThrowsArgumentOutOfRangeException_ForFalse_1()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => Require.Range(false, "paramName"));
             // Arrange
             var paramName = "paramName";
             Action act = () => Require.Range(false, paramName);
