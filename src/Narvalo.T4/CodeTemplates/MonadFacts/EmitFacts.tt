@@ -8,11 +8,69 @@ public partial class MonadTemplate
 namespace <#= Namespace #>
 {
     using System;
+    using System.Collections.Generic;
 
     using Xunit;
 
     public static partial class <#= Name #>Facts
     {
+        #region Repeat()
+
+        public static void Repeat_ThrowsArgumentOutOfRangeException_ForNegativeCount()
+        {
+            var source = <#= Name #>.<#= ReturnName #>(1);
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => <#= Name #>.Repeat(source, -1));
+        }
+
+        #endregion
+
+        #region Zip()
+
+        public static void Zip2_ThrowsArgumentNullException_ForNullZipper()
+        {
+            var first = <#= Name #>.<#= ReturnName #>(1);
+            var second = <#= Name #>.<#= ReturnName #>(2);
+            Func<int, int, int> zipper = null;
+
+            Assert.Throws<ArgumentNullException>(() => first.Zip(second, zipper));
+        }
+
+        public static void Zip3_ThrowsArgumentNullException_ForNullZipper()
+        {
+            var first = <#= Name #>.<#= ReturnName #>(1);
+            var second = <#= Name #>.<#= ReturnName #>(2);
+            var third = <#= Name #>.<#= ReturnName #>(3);
+            Func<int, int, int, int> zipper = null;
+
+            Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, zipper));
+        }
+
+        public static void Zip4_ThrowsArgumentNullException_ForNullZipper()
+        {
+            var first = <#= Name #>.<#= ReturnName #>(1);
+            var second = <#= Name #>.<#= ReturnName #>(2);
+            var third = <#= Name #>.<#= ReturnName #>(3);
+            var fourth = <#= Name #>.<#= ReturnName #>(4);
+            Func<int, int, int, int, int> zipper = null;
+
+            Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, fourth, zipper));
+        }
+
+        public static void Zip5_ThrowsArgumentNullException_ForNullZipper()
+        {
+            var first = <#= Name #>.<#= ReturnName #>(1);
+            var second = <#= Name #>.<#= ReturnName #>(2);
+            var third = <#= Name #>.<#= ReturnName #>(3);
+            var fourth = <#= Name #>.<#= ReturnName #>(4);
+            var fifth = <#= Name #>.<#= ReturnName #>(4);
+            Func<int, int, int, int, int, int> zipper = null;
+
+            Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, fourth, fifth, zipper));
+        }
+
+        #endregion
+
         #region Select()
 
         public static void Select_ThrowsArgumentNullException_ForNullSelector()
@@ -65,6 +123,94 @@ namespace <#= Namespace #>
 
         #endregion
 
+<#+ if (HasJoin) { #>
+        #region Join()
+
+        [Fact]
+        public static void Join_ThrowsArgumentNullException_ForNullResultSelector()
+        {
+            var source = <#= Name #>.<#= ReturnName #>(1);
+            var inner = <#= Name #>.<#= ReturnName #>(2);
+            Func<int, int> outerKeySelector = val => val;
+            Func<int, int> innerKeySelector = val => val;
+            Func<int, int, int> resultSelector = null;
+
+            Assert.Throws<ArgumentNullException>(
+                () => source.Join(inner, outerKeySelector, innerKeySelector, resultSelector));
+        }
+
+        [Fact]
+        public static void Join_ThrowsArgumentNullException_ForNullOuterKeySelector()
+        {
+            var source = <#= Name #>.<#= ReturnName #>(1);
+            var inner = <#= Name #>.<#= ReturnName #>(2);
+            Func<int, int> outerKeySelector = null;
+            Func<int, int> innerKeySelector = val => val;
+            Func<int, int, int> resultSelector = (i, j) => i + j;
+
+            Assert.Throws<ArgumentNullException>(
+                () => source.Join(inner, outerKeySelector, innerKeySelector, resultSelector));
+        }
+
+        [Fact]
+        public static void Join_ThrowsArgumentNullException_ForNullInnerKeySelector()
+        {
+            var source = <#= Name #>.<#= ReturnName #>(1);
+            var inner = <#= Name #>.<#= ReturnName #>(2);
+            Func<int, int> outerKeySelector = val => val;
+            Func<int, int> innerKeySelector = null;
+            Func<int, int, int> resultSelector = (i, j) => i + j;
+
+            Assert.Throws<ArgumentNullException>(
+                () => source.Join(inner, outerKeySelector, innerKeySelector, resultSelector));
+        }
+
+        #endregion
+
+        #region GroupJoin()
+
+        [Fact]
+        public static void GroupJoin_ThrowsArgumentNullException_ForNullResultSelector()
+        {
+            var source = <#= Name #>.<#= ReturnName #>(1);
+            var inner = <#= Name #>.<#= ReturnName #>(2);
+            Func<int, int> outerKeySelector = val => val;
+            Func<int, int> innerKeySelector = val => val;
+            Func<int, <#= Name #><int>, int> resultSelector = null;
+
+            Assert.Throws<ArgumentNullException>(
+                () => source.GroupJoin(inner, outerKeySelector, innerKeySelector, resultSelector));
+        }
+
+        [Fact]
+        public static void GroupJoin_ThrowsArgumentNullException_ForNullOuterKeySelector()
+        {
+            var source = <#= Name #>.<#= ReturnName #>(1);
+            var inner = <#= Name #>.<#= ReturnName #>(2);
+            Func<int, int> outerKeySelector = null;
+            Func<int, int> innerKeySelector = val => val;
+            Func<int, <#= Name #><int>, int> resultSelector = (i, m) => 1;
+
+            Assert.Throws<ArgumentNullException>(
+                () => source.GroupJoin(inner, outerKeySelector, innerKeySelector, resultSelector));
+        }
+
+        [Fact]
+        public static void GroupJoin_ThrowsArgumentNullException_ForNullInnerKeySelector()
+        {
+            var source = <#= Name #>.<#= ReturnName #>(1);
+            var inner = <#= Name #>.<#= ReturnName #>(2);
+            Func<int, int> outerKeySelector = val => val;
+            Func<int, int> innerKeySelector = null;
+            Func<int, <#= Name #><int>, int> resultSelector = (i, m) => 1;
+
+            Assert.Throws<ArgumentNullException>(
+                () => source.GroupJoin(inner, outerKeySelector, innerKeySelector, resultSelector));
+        }
+
+        #endregion
+
+<#+ } // T4: End of HasJoin. #>
         #region Functor Rules
 
         [Fact(DisplayName = "<#= Name #><T<#= RTDecl #>> - The identity map is a fixed point for <#= MapName #>.")]

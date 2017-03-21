@@ -78,7 +78,7 @@ namespace Narvalo.T4
         {
             if (parent == null)
             {
-                throw new ArgumentNullException("parent");
+                throw new ArgumentNullException(nameof(parent));
             }
 
             _host = new Lazy<ITextTemplatingEngineHost>(() => HostFactory(parent));
@@ -89,19 +89,13 @@ namespace Narvalo.T4
         /// Gets the DTE (Development Tools Environment) service.
         /// </summary>
         /// <value>The DTE (Development Tools Environment) service.</value>
-        protected DTE DTE
-        {
-            get { return _dte.Value; }
-        }
+        protected DTE DTE => _dte.Value;
 
         /// <summary>
         /// Gets the templating engine host.
         /// </summary>
         /// <value>The templating engine host.</value>
-        protected ITextTemplatingEngineHost VSHost
-        {
-            get { return _host.Value; }
-        }
+        protected ITextTemplatingEngineHost VSHost => _host.Value;
 
         /// <summary>
         /// Gets or sets the name of the template.
@@ -123,7 +117,7 @@ namespace Narvalo.T4
             {
                 if (String.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentException("The name can not be null or blank.");
+                    throw new ArgumentException("The name can not be null or blank.", nameof(value));
                 }
 
                 _name = value;
@@ -150,7 +144,7 @@ namespace Narvalo.T4
             {
                 if (String.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentException("The namespace can not be null or blank.");
+                    throw new ArgumentException("The namespace can not be null or blank.", nameof(value));
                 }
 
                 _namespace = value;
@@ -172,33 +166,22 @@ namespace Narvalo.T4
         /// Writes the file header directly into the generated output.
         /// </summary>
         protected virtual void WriteHeader()
-        {
-            WriteLine(HEADER_FORMAT, Environment.Version, DTE.Version);
-        }
+            => WriteLine(HEADER_FORMAT, Environment.Version, DTE.Version);
 
         /// <summary>
         /// Increases the indent by the default indent.
         /// </summary>
-        protected void PushIndent()
-        {
-            PushIndent(INDENT);
-        }
+        protected void PushIndent() => PushIndent(INDENT);
 
         /// <summary>
         /// Writes a new line directly into the generated output.
         /// </summary>
-        protected void WriteLine()
-        {
-            WriteLine(String.Empty);
-        }
+        protected void WriteLine() => WriteLine(String.Empty);
 
         /// <summary>
         /// Write the T4 compiler attribute into the generated output.
         /// </summary>
-        protected void WriteCompilerAttributes()
-        {
-            WriteLine(COMPILER_ATTR_FORMAT, DTE.Version);
-        }
+        protected void WriteCompilerAttributes() => WriteLine(COMPILER_ATTR_FORMAT, DTE.Version);
 
         private static ITextTemplatingEngineHost HostFactory(TextTransformation transformation)
         {
@@ -217,14 +200,10 @@ namespace Narvalo.T4
         }
 
         private static string InferNamespace()
-        {
-            return CallContext.LogicalGetData("NamespaceHint").ToString();
-        }
+            => CallContext.LogicalGetData("NamespaceHint").ToString();
 
         private string InferName()
-        {
-            return Path.GetFileNameWithoutExtension(VSHost.TemplateFile);
-        }
+            => Path.GetFileNameWithoutExtension(VSHost.TemplateFile);
 
         private DTE DTEFactory()
         {
@@ -235,12 +214,9 @@ namespace Narvalo.T4
             }
 
             var dte = serviceProvider.GetService(typeof(DTE)) as DTE;
-            if (dte == null)
-            {
-                throw new NotSupportedException("Unable to retrieve the DTE (Development Tools Environment) service.");
-            }
 
-            return dte;
+            return dte
+                ?? throw new NotSupportedException("Unable to retrieve the DTE (Development Tools Environment) service.");;
         }
     }
 }

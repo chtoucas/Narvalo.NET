@@ -1,17 +1,17 @@
 ﻿<#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
 <#@ include file="Monad.tt" once="true" #><#+
 
-    public partial class MaybeTemplate : MonadTemplate
+public partial class MaybeTemplate : MonadTemplate
+{
+    public MaybeTemplate(TextTransformation parent) : base(parent) { }
+
+    public override void Initialize()
     {
-        public MaybeTemplate(TextTransformation parent) : base(parent) { }
+        InitializeNamespacesForNarvaloFx();
+        InitializeOr();
 
-        public override void Initialize()
-        {
-            InitializeNamespacesForNarvaloFx();
-            InitializeOr();
-
-            IsNullable = false;
-        }
+        IsNullable = false;
     }
+}
 
 #>

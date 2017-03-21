@@ -1,2 +1,2 @@
 ﻿<#@ include file="Monad.tt" once="true" #>
-<#@ include file="Monad\EmitFacts.tt" #>
+<#@ include file="MonadFacts\EmitFacts.tt" #>

@@ -13,10 +13,11 @@
 <#@ include file="Monad\EmitLinqInternal.tt" #>
 <#@ include file="Monad\EmitComonadHelpers.tt" #><#+
 
-// WARNING: This is only a proof of concept.
-// This template depends on the packages Narvalo.Cerbere & Narvalo.Fx packages:
-// - The classes Require & Demand in the Narvalo namespace.
-// - The class Unit in the Narvalo.Fx namespace.
+// WARNINGs:
+// The templates depend on:
+// - The classes Narvalo.Require (Narvalo.Core).
+// - The class Narvalo.Applicative.Unit (Narvalo.Fx).
+// - Enumerable extensions in Narvalo.Linq (Narvalo.Fx).
 // The generated files are free of CA warnings except for CA1006:DoNotNestGenericTypesInMemberSignatures.
 
 public abstract partial class MonadTemplate : _MonadTemplate

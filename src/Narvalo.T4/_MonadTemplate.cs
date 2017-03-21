@@ -92,7 +92,9 @@ namespace Narvalo.T4
             {
                 if (String.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentException("The Internal namespace can not be null or blank.");
+                    throw new ArgumentException(
+                        "The Internal namespace can not be null or blank.",
+                        nameof(value));
                 }
 
                 _internalNamespace = value;
@@ -115,7 +117,9 @@ namespace Narvalo.T4
             {
                 if (String.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentException("The LINQ namespace can not be null or blank.");
+                    throw new ArgumentException(
+                        "The LINQ namespace can not be null or blank.",
+                        nameof(value));
                 }
 
                 _linqNamespace = value;
@@ -190,7 +194,8 @@ namespace Narvalo.T4
             {
                 if (!HasTypeConstraints)
                 {
-                    throw new InvalidOperationException("The underlying type does not enforce any type constraint.");
+                    throw new InvalidOperationException(
+                        "The underlying type does not enforce any type constraint.");
                 }
 
                 return _typeConstraints;
@@ -204,7 +209,8 @@ namespace Narvalo.T4
         }
 
         /// <summary>
-        /// Gets a value indicating whether the underlying type T has a generic type constraint. Default to false.
+        /// Gets a value indicating whether the underlying type T has a generic type constraint.
+        /// Default to false.
         /// </summary>
         /// <value>true if the underlying type T has a generic type constraint;
         /// otherwise false.</value>
@@ -238,16 +244,14 @@ namespace Narvalo.T4
         /// <value>The name of the Eta method.</value>
         protected string EtaName
         {
-            get
-            {
-                return _etaName;
-            }
-
+            get => _etaName;
             set
             {
                 if (String.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentException("The name of the Eta method can not be null or blank.", nameof(value));
+                    throw new ArgumentException(
+                        "The name of the Eta method can not be null or blank.",
+                        nameof(value));
                 }
 
                 _etaName = value;
@@ -274,7 +278,9 @@ namespace Narvalo.T4
             {
                 if (String.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentException("The name of the Zero property can not be null or blank.", nameof(value));
+                    throw new ArgumentException(
+                        "The name of the Zero property can not be null or blank.",
+                        nameof(value));
                 }
 
                 _zeroName = value;
@@ -301,7 +307,9 @@ namespace Narvalo.T4
             {
                 if (String.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentException("The name of the Plus method can not be null or blank.", nameof(value));
+                    throw new ArgumentException(
+                        "The name of the Plus method can not be null or blank.",
+                        nameof(value));
                 }
 
                 _plusName = value;
@@ -314,11 +322,7 @@ namespace Narvalo.T4
         /// <value>The name of the Return method.</value>
         protected string ReturnName
         {
-            get
-            {
-                return _returnName;
-            }
-
+            get => _returnName;
             set
             {
                 if (String.IsNullOrWhiteSpace(value))

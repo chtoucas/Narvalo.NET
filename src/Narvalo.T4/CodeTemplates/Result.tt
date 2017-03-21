@@ -1,17 +1,18 @@
 ﻿<#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
 <#@ include file="Monad.tt" once="true" #><#+
 
-    public partial class ResultTemplate : MonadTemplate
+public partial class ResultTemplate : MonadTemplate
+{
+    public ResultTemplate(TextTransformation parent) : base(parent) { }
+
+    public override void Initialize()
     {
-        public ResultTemplate(TextTransformation parent) : base(parent) { }
+        InitializeNamespacesForNarvaloFx();
+        InitializeGenericParameters("T", "TError");
 
-        public override void Initialize()
-        {
-            InitializeNamespacesForNarvaloFx();
-            InitializeGenericParameters("T", "TError");
-
-            EtaName = "Of";
-            IsNullable = false;
-        }
+        EtaName = "Of";
+        IsNullable = false;
     }
+}
+
 #>

@@ -185,17 +185,11 @@ namespace Narvalo.T4
         protected class Currency
         {
             public string Code { get; set; }
-
             public string EnglishName { get; set; }
-
             public string EnglishRegionName { get; set; }
-
             public bool IsFund { get; set; }
-
             public bool IsLegacy { get; set; }
-
             public short? MinorUnits { get; set; }
-
             public short NumericCode { get; set; }
         }
     }
