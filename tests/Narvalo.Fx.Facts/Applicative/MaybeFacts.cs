@@ -62,6 +62,45 @@ namespace Narvalo.Applicative
             Assert.Throws<ArgumentNullException>(() => maybe.ValueOrElse(valueFactory));
         }
 
+        [Fact]
+        public static void ValueOrElse_ReturnsValue_WhenSome1()
+        {
+            var value = new My.SimpleValue();
+            var maybe = Maybe.Of(value);
+            var other = new My.SimpleValue("other");
+
+            Assert.Same(value, maybe.ValueOrElse(other));
+        }
+
+        [Fact]
+        public static void ValueOrElse_ReturnsValue_WhenSome2()
+        {
+            var value = new My.SimpleValue();
+            var maybe = Maybe.Of(value);
+            Func<My.SimpleValue> otherFactory = () => new My.SimpleValue("other");
+
+            Assert.Same(value, maybe.ValueOrElse(otherFactory));
+        }
+
+        [Fact]
+        public static void ValueOrElse_ReturnsOther_WhenNone1()
+        {
+            var maybe = Maybe<My.SimpleValue>.None;
+            var other = new My.SimpleValue("other");
+
+            Assert.Same(other, maybe.ValueOrElse(other));
+        }
+
+        [Fact]
+        public static void ValueOrElse_ReturnsOther_WhenNone2()
+        {
+            var maybe = Maybe<My.SimpleValue>.None;
+            var other = new My.SimpleValue("other");
+            Func<My.SimpleValue> otherFactory = () => other;
+
+            Assert.Same(other, maybe.ValueOrElse(otherFactory));
+        }
+
         #endregion
 
         #region ValueOrThrow()
