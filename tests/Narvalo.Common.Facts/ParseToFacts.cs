@@ -250,7 +250,7 @@ namespace Narvalo
             var result = ParseTo.Enum<My.Enum012>(value);
 
             Assert.True(result.HasValue);
-            Assert.Equal(My.Enum012.AliasOne, result.Value);
+            Assert.Equal(My.Enum012.Alias1, result.Value);
         }
 
         [Theory]

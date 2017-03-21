@@ -16,7 +16,7 @@ public static partial class My
         Zero = 0,
         One = 1,
         Two = 2,
-        AliasOne = One,
+        Alias1 = One,
     }
 
     [Flags]

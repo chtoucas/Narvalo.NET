@@ -4,6 +4,7 @@ Overview
 - [User Documentation](userguide/index.md)
 - [Developer Guidelines](developer.md)
 - [Issues](issues.md)
+- [Test coverage](test-coverage.html) (not always up-to-date).
 
 Project | Summary | .NET Platform | Package
 --------|---------|---------------|--------
@@ -19,8 +20,8 @@ Project | Summary | .NET Platform | Package
 [Narvalo.Web](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Web/) | ASP.NET optimization | .NET 4.5 |  [![NuGet](https://img.shields.io/nuget/v/Narvalo.Web.svg)](https://www.nuget.org/packages/Narvalo.Web/)
 
 Samples:
-  - [Command-Line MVP sample](https://github.com/chtoucas/Narvalo.NET/tree/master/samples/MvpCommandLine)
-  - [WebForms MVP sample](https://github.com/chtoucas/Narvalo.NET/tree/master/samples/MvpWebForms)
+- [Command-Line MVP sample](https://github.com/chtoucas/Narvalo.NET/tree/master/samples/MvpCommandLine)
+- [WebForms MVP sample](https://github.com/chtoucas/Narvalo.NET/tree/master/samples/MvpWebForms)
 
 Internal dependency graph:
 
