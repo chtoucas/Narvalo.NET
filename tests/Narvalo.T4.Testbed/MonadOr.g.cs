@@ -363,9 +363,10 @@ namespace Narvalo.T4.Testbed
             Require.NotNull(resultSelector, nameof(resultSelector));
             Require.NotNull(outerKeySelector, nameof(outerKeySelector));
             Require.NotNull(innerKeySelector, nameof(innerKeySelector));
+            Require.NotNull(comparer, nameof(comparer));
 
             var keyLookup = GetKeyLookup(
-                inner, outerKeySelector, innerKeySelector, comparer ?? EqualityComparer<TKey>.Default);
+                inner, outerKeySelector, innerKeySelector, comparer);
 
             return @this.SelectMany(val => keyLookup(val).ContinueWith(inner), resultSelector);
         }
@@ -397,9 +398,10 @@ namespace Narvalo.T4.Testbed
             Require.NotNull(resultSelector, nameof(resultSelector));
             Require.NotNull(outerKeySelector, nameof(outerKeySelector));
             Require.NotNull(innerKeySelector, nameof(innerKeySelector));
+            Require.NotNull(comparer, nameof(comparer));
 
             var keyLookup = GetKeyLookup(
-                inner, outerKeySelector, innerKeySelector, comparer ?? EqualityComparer<TKey>.Default);
+                inner, outerKeySelector, innerKeySelector, comparer);
 
             return @this.Select(val => resultSelector(val, keyLookup(val).ContinueWith(inner)));
         }
