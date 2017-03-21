@@ -12,11 +12,7 @@ namespace Narvalo.Applicative
         #region Noop
 
         [Fact]
-        public static void Noop_IsNotNull()
-        {
-            // Act
-            Assert.NotNull(Stubs.Noop);
-        }
+        public static void Noop_IsNotNull() => Assert.NotNull(Stubs.Noop);
 
         #endregion
 
@@ -25,7 +21,6 @@ namespace Narvalo.Applicative
         [Fact]
         public static void AlwaysDefault_IsNotNull()
         {
-            // Act
             Assert.NotNull(Stubs<string>.AlwaysDefault);
             Assert.NotNull(Stubs<int>.AlwaysDefault);
             Assert.NotNull(Stubs<long>.AlwaysDefault);
@@ -43,7 +38,6 @@ namespace Narvalo.Applicative
         [Fact]
         public static void AlwaysDefault_ReturnsDefault()
         {
-            // Act
             Assert.Equal(default(string), Stubs<string>.AlwaysDefault());
             Assert.Equal(default(int), Stubs<int>.AlwaysDefault());
             Assert.Equal(default(long), Stubs<long>.AlwaysDefault());
@@ -65,7 +59,6 @@ namespace Narvalo.Applicative
         [Fact]
         public static void AlwaysFalse_IsNotNull()
         {
-            // Act
             Assert.NotNull(Stubs<string>.AlwaysFalse);
             Assert.NotNull(Stubs<int>.AlwaysFalse);
             Assert.NotNull(Stubs<long>.AlwaysFalse);
@@ -76,19 +69,13 @@ namespace Narvalo.Applicative
         [MemberData(nameof(StringTestData), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void AlwaysFalse_ReturnsFalse_StringTestSuite(string input)
-        {
-            // Act
-            Assert.False(Stubs<string>.AlwaysFalse(input));
-        }
+            => Assert.False(Stubs<string>.AlwaysFalse(input));
 
         [Theory]
         [MemberData(nameof(Int32TestData), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void AlwaysFalse_ReturnsFalse_Int32TestSuite(int input)
-        {
-            // Act
-            Assert.False(Stubs<int>.AlwaysFalse(input));
-        }
+            => Assert.False(Stubs<int>.AlwaysFalse(input));
 
         #endregion
 
@@ -97,7 +84,6 @@ namespace Narvalo.Applicative
         [Fact]
         public static void AlwaysTrue_IsNotNull()
         {
-            // Act
             Assert.NotNull(Stubs<string>.AlwaysTrue);
             Assert.NotNull(Stubs<int>.AlwaysTrue);
             Assert.NotNull(Stubs<long>.AlwaysTrue);
@@ -108,19 +94,13 @@ namespace Narvalo.Applicative
         [MemberData(nameof(StringTestData), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void AlwaysTrue_ReturnsTrue_StringTestSuite(string input)
-        {
-            // Act
-            Assert.True(Stubs<string>.AlwaysTrue(input));
-        }
+            => Assert.True(Stubs<string>.AlwaysTrue(input));
 
         [Theory]
         [MemberData(nameof(Int32TestData), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void AlwaysTrue_ReturnsTrue_Int32TestSuite(int input)
-        {
-            // Act
-            Assert.True(Stubs<int>.AlwaysTrue(input));
-        }
+            => Assert.True(Stubs<int>.AlwaysTrue(input));
 
         #endregion
 
@@ -129,7 +109,6 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Identity_IsNotNull()
         {
-            // Act
             Assert.NotNull(Stubs<string>.Identity);
             Assert.NotNull(Stubs<int>.Identity);
             Assert.NotNull(Stubs<long>.Identity);
@@ -140,19 +119,13 @@ namespace Narvalo.Applicative
         [MemberData(nameof(StringTestData), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Identity_ReturnsBackInput_StringTestSuite(string input)
-        {
-            // Act
-            Assert.Equal(input, Stubs<string>.Identity(input));
-        }
+            => Assert.Equal(input, Stubs<string>.Identity(input));
 
         [Theory]
         [MemberData(nameof(Int32TestData), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Identity_ReturnsBackInput_Int32TestSuite(int input)
-        {
-            // Act
-            Assert.Equal(input, Stubs<int>.Identity(input));
-        }
+            => Assert.Equal(input, Stubs<int>.Identity(input));
 
         #endregion
 
@@ -161,7 +134,6 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Ignore_IsNotNull()
         {
-            // Act
             Assert.NotNull(Stubs<string>.Ignore);
             Assert.NotNull(Stubs<int>.Ignore);
             Assert.NotNull(Stubs<long>.Ignore);

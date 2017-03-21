@@ -13,14 +13,71 @@
 namespace Narvalo.Applicative
 {
     using System;
+    using System.Collections.Generic;
 
     using Xunit;
 
     public static partial class FallibleFacts
     {
+        #region Repeat()
+
+        public static void Repeat_ThrowsArgumentOutOfRangeException_ForNegativeCount()
+        {
+            var source = Fallible.Of(1);
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => Fallible.Repeat(source, -1));
+        }
+
+        #endregion
+
+        #region Zip()
+
+        public static void Zip2_ThrowsArgumentNullException_ForNullZipper()
+        {
+            var first = Fallible.Of(1);
+            var second = Fallible.Of(2);
+            Func<int, int, int> zipper = null;
+
+            Assert.Throws<ArgumentNullException>(() => first.Zip(second, zipper));
+        }
+
+        public static void Zip3_ThrowsArgumentNullException_ForNullZipper()
+        {
+            var first = Fallible.Of(1);
+            var second = Fallible.Of(2);
+            var third = Fallible.Of(3);
+            Func<int, int, int, int> zipper = null;
+
+            Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, zipper));
+        }
+
+        public static void Zip4_ThrowsArgumentNullException_ForNullZipper()
+        {
+            var first = Fallible.Of(1);
+            var second = Fallible.Of(2);
+            var third = Fallible.Of(3);
+            var fourth = Fallible.Of(4);
+            Func<int, int, int, int, int> zipper = null;
+
+            Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, fourth, zipper));
+        }
+
+        public static void Zip5_ThrowsArgumentNullException_ForNullZipper()
+        {
+            var first = Fallible.Of(1);
+            var second = Fallible.Of(2);
+            var third = Fallible.Of(3);
+            var fourth = Fallible.Of(4);
+            var fifth = Fallible.Of(4);
+            Func<int, int, int, int, int, int> zipper = null;
+
+            Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, fourth, fifth, zipper));
+        }
+
+        #endregion
+
         #region Select()
 
-        [Fact]
         public static void Select_ThrowsArgumentNullException_ForNullSelector()
         {
             var source = Fallible.Of(1);
@@ -58,7 +115,7 @@ namespace Narvalo.Applicative
 
         #region Functor Rules
 
-        [Fact(DisplayName = "The identity map is a fixed point for Select.")]
+        [Fact(DisplayName = "Fallible<T> - The identity map is a fixed point for Select.")]
         public static void Satisfies_FirstFunctorLaw()
         {
             // Arrange
@@ -72,7 +129,7 @@ namespace Narvalo.Applicative
             Assert.True(left.Equals(right));
         }
 
-        [Fact(DisplayName = "Select preserves the composition operator.")]
+        [Fact(DisplayName = "Fallible<T> - Select preserves the composition operator.")]
         public static void Satisfies_FunctorSecondRule()
         {
             // Arrange
@@ -92,7 +149,7 @@ namespace Narvalo.Applicative
 
         #region Monad Rules
 
-        [Fact(DisplayName = "Of is a left identity for Bind.")]
+        [Fact(DisplayName = "Fallible<T> - Of is a left identity for Bind.")]
         public static void Satisfies_FirstMonadRule()
         {
             // Arrange
@@ -107,7 +164,7 @@ namespace Narvalo.Applicative
             Assert.True(left.Equals(right));
         }
 
-        [Fact(DisplayName = "Of is a right identity for Bind.")]
+        [Fact(DisplayName = "Fallible<T> - Of is a right identity for Bind.")]
         public static void Satisfies_SecondMonadRule()
         {
             // Arrange
@@ -122,7 +179,7 @@ namespace Narvalo.Applicative
             Assert.True(left.Equals(right));
         }
 
-        [Fact(DisplayName = "Bind is associative.")]
+        [Fact(DisplayName = "Fallible<T> - Bind is associative.")]
         public static void Satisfies_ThirdMonadRule()
         {
             // Arrange

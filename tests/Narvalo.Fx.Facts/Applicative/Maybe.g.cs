@@ -13,14 +13,71 @@
 namespace Narvalo.Applicative
 {
     using System;
+    using System.Collections.Generic;
 
     using Xunit;
 
     public static partial class MaybeFacts
     {
+        #region Repeat()
+
+        public static void Repeat_ThrowsArgumentOutOfRangeException_ForNegativeCount()
+        {
+            var source = Maybe.Of(1);
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => Maybe.Repeat(source, -1));
+        }
+
+        #endregion
+
+        #region Zip()
+
+        public static void Zip2_ThrowsArgumentNullException_ForNullZipper()
+        {
+            var first = Maybe.Of(1);
+            var second = Maybe.Of(2);
+            Func<int, int, int> zipper = null;
+
+            Assert.Throws<ArgumentNullException>(() => first.Zip(second, zipper));
+        }
+
+        public static void Zip3_ThrowsArgumentNullException_ForNullZipper()
+        {
+            var first = Maybe.Of(1);
+            var second = Maybe.Of(2);
+            var third = Maybe.Of(3);
+            Func<int, int, int, int> zipper = null;
+
+            Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, zipper));
+        }
+
+        public static void Zip4_ThrowsArgumentNullException_ForNullZipper()
+        {
+            var first = Maybe.Of(1);
+            var second = Maybe.Of(2);
+            var third = Maybe.Of(3);
+            var fourth = Maybe.Of(4);
+            Func<int, int, int, int, int> zipper = null;
+
+            Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, fourth, zipper));
+        }
+
+        public static void Zip5_ThrowsArgumentNullException_ForNullZipper()
+        {
+            var first = Maybe.Of(1);
+            var second = Maybe.Of(2);
+            var third = Maybe.Of(3);
+            var fourth = Maybe.Of(4);
+            var fifth = Maybe.Of(4);
+            Func<int, int, int, int, int, int> zipper = null;
+
+            Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, fourth, fifth, zipper));
+        }
+
+        #endregion
+
         #region Select()
 
-        [Fact]
         public static void Select_ThrowsArgumentNullException_ForNullSelector()
         {
             var source = Maybe.Of(1);
@@ -69,9 +126,95 @@ namespace Narvalo.Applicative
 
         #endregion
 
+        #region Join()
+
+        [Fact]
+        public static void Join_ThrowsArgumentNullException_ForNullResultSelector()
+        {
+            var source = Maybe.Of(1);
+            var inner = Maybe.Of(2);
+            Func<int, int> outerKeySelector = val => val;
+            Func<int, int> innerKeySelector = val => val;
+            Func<int, int, int> resultSelector = null;
+
+            Assert.Throws<ArgumentNullException>(
+                () => source.Join(inner, outerKeySelector, innerKeySelector, resultSelector));
+        }
+
+        [Fact]
+        public static void Join_ThrowsArgumentNullException_ForNullOuterKeySelector()
+        {
+            var source = Maybe.Of(1);
+            var inner = Maybe.Of(2);
+            Func<int, int> outerKeySelector = null;
+            Func<int, int> innerKeySelector = val => val;
+            Func<int, int, int> resultSelector = (i, j) => i + j;
+
+            Assert.Throws<ArgumentNullException>(
+                () => source.Join(inner, outerKeySelector, innerKeySelector, resultSelector));
+        }
+
+        [Fact]
+        public static void Join_ThrowsArgumentNullException_ForNullInnerKeySelector()
+        {
+            var source = Maybe.Of(1);
+            var inner = Maybe.Of(2);
+            Func<int, int> outerKeySelector = val => val;
+            Func<int, int> innerKeySelector = null;
+            Func<int, int, int> resultSelector = (i, j) => i + j;
+
+            Assert.Throws<ArgumentNullException>(
+                () => source.Join(inner, outerKeySelector, innerKeySelector, resultSelector));
+        }
+
+        #endregion
+
+        #region GroupJoin()
+
+        [Fact]
+        public static void GroupJoin_ThrowsArgumentNullException_ForNullResultSelector()
+        {
+            var source = Maybe.Of(1);
+            var inner = Maybe.Of(2);
+            Func<int, int> outerKeySelector = val => val;
+            Func<int, int> innerKeySelector = val => val;
+            Func<int, Maybe<int>, int> resultSelector = null;
+
+            Assert.Throws<ArgumentNullException>(
+                () => source.GroupJoin(inner, outerKeySelector, innerKeySelector, resultSelector));
+        }
+
+        [Fact]
+        public static void GroupJoin_ThrowsArgumentNullException_ForNullOuterKeySelector()
+        {
+            var source = Maybe.Of(1);
+            var inner = Maybe.Of(2);
+            Func<int, int> outerKeySelector = null;
+            Func<int, int> innerKeySelector = val => val;
+            Func<int, Maybe<int>, int> resultSelector = (i, m) => 1;
+
+            Assert.Throws<ArgumentNullException>(
+                () => source.GroupJoin(inner, outerKeySelector, innerKeySelector, resultSelector));
+        }
+
+        [Fact]
+        public static void GroupJoin_ThrowsArgumentNullException_ForNullInnerKeySelector()
+        {
+            var source = Maybe.Of(1);
+            var inner = Maybe.Of(2);
+            Func<int, int> outerKeySelector = val => val;
+            Func<int, int> innerKeySelector = null;
+            Func<int, Maybe<int>, int> resultSelector = (i, m) => 1;
+
+            Assert.Throws<ArgumentNullException>(
+                () => source.GroupJoin(inner, outerKeySelector, innerKeySelector, resultSelector));
+        }
+
+        #endregion
+
         #region Functor Rules
 
-        [Fact(DisplayName = "The identity map is a fixed point for Select.")]
+        [Fact(DisplayName = "Maybe<T> - The identity map is a fixed point for Select.")]
         public static void Satisfies_FirstFunctorLaw()
         {
             // Arrange
@@ -85,7 +228,7 @@ namespace Narvalo.Applicative
             Assert.True(left.Equals(right));
         }
 
-        [Fact(DisplayName = "Select preserves the composition operator.")]
+        [Fact(DisplayName = "Maybe<T> - Select preserves the composition operator.")]
         public static void Satisfies_FunctorSecondRule()
         {
             // Arrange
@@ -105,7 +248,7 @@ namespace Narvalo.Applicative
 
         #region Monoid Rules
 
-        [Fact(DisplayName = "None is a left identity for OrElse.")]
+        [Fact(DisplayName = "Maybe<T> - None is a left identity for OrElse.")]
         public static void Satisfies_FirstMonoidRule()
         {
             // Arrange
@@ -119,7 +262,7 @@ namespace Narvalo.Applicative
             Assert.True(left.Equals(right));
         }
 
-        [Fact(DisplayName = "None is a right identity for OrElse.")]
+        [Fact(DisplayName = "Maybe<T> - None is a right identity for OrElse.")]
         public static void Satisfies_SecondMonoidRule()
         {
             // Arrange
@@ -133,7 +276,7 @@ namespace Narvalo.Applicative
             Assert.True(left.Equals(right));
         }
 
-        [Fact(DisplayName = "OrElse is associative.")]
+        [Fact(DisplayName = "Maybe<T> - OrElse is associative.")]
         public static void Satisfies_ThirdMonoidRule()
         {
             // Arrange
@@ -153,7 +296,7 @@ namespace Narvalo.Applicative
 
         #region Monad Rules
 
-        [Fact(DisplayName = "Of is a left identity for Bind.")]
+        [Fact(DisplayName = "Maybe<T> - Of is a left identity for Bind.")]
         public static void Satisfies_FirstMonadRule()
         {
             // Arrange
@@ -168,7 +311,7 @@ namespace Narvalo.Applicative
             Assert.True(left.Equals(right));
         }
 
-        [Fact(DisplayName = "Of is a right identity for Bind.")]
+        [Fact(DisplayName = "Maybe<T> - Of is a right identity for Bind.")]
         public static void Satisfies_SecondMonadRule()
         {
             // Arrange
@@ -183,7 +326,7 @@ namespace Narvalo.Applicative
             Assert.True(left.Equals(right));
         }
 
-        [Fact(DisplayName = "Bind is associative.")]
+        [Fact(DisplayName = "Maybe<T> - Bind is associative.")]
         public static void Satisfies_ThirdMonadRule()
         {
             // Arrange
