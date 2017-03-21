@@ -21,6 +21,7 @@ namespace Narvalo.Applicative
     {
         #region Repeat()
 
+        [Fact]
         public static void Repeat_ThrowsArgumentOutOfRangeException_ForNegativeCount()
         {
             var source = Maybe.Of(1);
@@ -32,6 +33,7 @@ namespace Narvalo.Applicative
 
         #region Zip()
 
+        [Fact]
         public static void Zip2_ThrowsArgumentNullException_ForNullZipper()
         {
             var first = Maybe.Of(1);
@@ -39,8 +41,10 @@ namespace Narvalo.Applicative
             Func<int, int, int> zipper = null;
 
             Assert.Throws<ArgumentNullException>(() => first.Zip(second, zipper));
+            Assert.Throws<ArgumentNullException>(() => Maybe.Zip(first, second, zipper));
         }
 
+        [Fact]
         public static void Zip3_ThrowsArgumentNullException_ForNullZipper()
         {
             var first = Maybe.Of(1);
@@ -49,8 +53,10 @@ namespace Narvalo.Applicative
             Func<int, int, int, int> zipper = null;
 
             Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, zipper));
+            Assert.Throws<ArgumentNullException>(() => Maybe.Zip(first, second, third, zipper));
         }
 
+        [Fact]
         public static void Zip4_ThrowsArgumentNullException_ForNullZipper()
         {
             var first = Maybe.Of(1);
@@ -60,8 +66,10 @@ namespace Narvalo.Applicative
             Func<int, int, int, int, int> zipper = null;
 
             Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, fourth, zipper));
+            Assert.Throws<ArgumentNullException>(() => Maybe.Zip(first, second, third, fourth, zipper));
         }
 
+        [Fact]
         public static void Zip5_ThrowsArgumentNullException_ForNullZipper()
         {
             var first = Maybe.Of(1);
@@ -72,18 +80,21 @@ namespace Narvalo.Applicative
             Func<int, int, int, int, int, int> zipper = null;
 
             Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, fourth, fifth, zipper));
+            Assert.Throws<ArgumentNullException>(() => Maybe.Zip(first, second, third, fourth, fifth, zipper));
         }
 
         #endregion
 
         #region Select()
 
+        [Fact]
         public static void Select_ThrowsArgumentNullException_ForNullSelector()
         {
             var source = Maybe.Of(1);
             Func<int, int> selector = null;
 
             Assert.Throws<ArgumentNullException>(() => source.Select(selector));
+            Assert.Throws<ArgumentNullException>(() => Maybe.Select(source, selector));
         }
 
         #endregion
@@ -97,6 +108,7 @@ namespace Narvalo.Applicative
             Func<int, bool> predicate = null;
 
             Assert.Throws<ArgumentNullException>(() => source.Where(predicate));
+            Assert.Throws<ArgumentNullException>(() => Maybe.Where(source, predicate));
         }
 
         #endregion
@@ -111,6 +123,7 @@ namespace Narvalo.Applicative
             Func<int, int, int> resultSelector = (i, j) => i + j;
 
             Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, resultSelector));
+            Assert.Throws<ArgumentNullException>(() => Maybe.SelectMany(source, valueSelector, resultSelector));
         }
 
         [Fact]
@@ -122,6 +135,7 @@ namespace Narvalo.Applicative
             Func<int, int, int> resultSelector = null;
 
             Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, resultSelector));
+            Assert.Throws<ArgumentNullException>(() => Maybe.SelectMany(source, valueSelector, resultSelector));
         }
 
         #endregion
@@ -139,6 +153,8 @@ namespace Narvalo.Applicative
 
             Assert.Throws<ArgumentNullException>(
                 () => source.Join(inner, outerKeySelector, innerKeySelector, resultSelector));
+            Assert.Throws<ArgumentNullException>(
+                () => Maybe.Join(source, inner, outerKeySelector, innerKeySelector, resultSelector));
         }
 
         [Fact]
@@ -152,6 +168,8 @@ namespace Narvalo.Applicative
 
             Assert.Throws<ArgumentNullException>(
                 () => source.Join(inner, outerKeySelector, innerKeySelector, resultSelector));
+            Assert.Throws<ArgumentNullException>(
+                () => Maybe.Join(source, inner, outerKeySelector, innerKeySelector, resultSelector));
         }
 
         [Fact]
@@ -165,6 +183,8 @@ namespace Narvalo.Applicative
 
             Assert.Throws<ArgumentNullException>(
                 () => source.Join(inner, outerKeySelector, innerKeySelector, resultSelector));
+            Assert.Throws<ArgumentNullException>(
+                () => Maybe.Join(source, inner, outerKeySelector, innerKeySelector, resultSelector));
         }
 
         #endregion
@@ -182,6 +202,8 @@ namespace Narvalo.Applicative
 
             Assert.Throws<ArgumentNullException>(
                 () => source.GroupJoin(inner, outerKeySelector, innerKeySelector, resultSelector));
+            Assert.Throws<ArgumentNullException>(
+                () => Maybe.GroupJoin(source, inner, outerKeySelector, innerKeySelector, resultSelector));
         }
 
         [Fact]
@@ -195,6 +217,8 @@ namespace Narvalo.Applicative
 
             Assert.Throws<ArgumentNullException>(
                 () => source.GroupJoin(inner, outerKeySelector, innerKeySelector, resultSelector));
+            Assert.Throws<ArgumentNullException>(
+                () => Maybe.GroupJoin(source, inner, outerKeySelector, innerKeySelector, resultSelector));
         }
 
         [Fact]
@@ -208,6 +232,8 @@ namespace Narvalo.Applicative
 
             Assert.Throws<ArgumentNullException>(
                 () => source.GroupJoin(inner, outerKeySelector, innerKeySelector, resultSelector));
+            Assert.Throws<ArgumentNullException>(
+                () => Maybe.GroupJoin(source, inner, outerKeySelector, innerKeySelector, resultSelector));
         }
 
         #endregion

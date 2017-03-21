@@ -16,6 +16,7 @@ namespace <#= Namespace #>
     {
         #region Repeat()
 
+        [Fact]
         public static void Repeat_ThrowsArgumentOutOfRangeException_ForNegativeCount()
         {
             var source = <#= Name #>.<#= ReturnName #>(1);
@@ -27,6 +28,7 @@ namespace <#= Namespace #>
 
         #region Zip()
 
+        [Fact]
         public static void Zip2_ThrowsArgumentNullException_ForNullZipper()
         {
             var first = <#= Name #>.<#= ReturnName #>(1);
@@ -34,8 +36,10 @@ namespace <#= Namespace #>
             Func<int, int, int> zipper = null;
 
             Assert.Throws<ArgumentNullException>(() => first.Zip(second, zipper));
+            Assert.Throws<ArgumentNullException>(() => <#= ExtensionsClsName #>.Zip(first, second, zipper));
         }
 
+        [Fact]
         public static void Zip3_ThrowsArgumentNullException_ForNullZipper()
         {
             var first = <#= Name #>.<#= ReturnName #>(1);
@@ -44,8 +48,10 @@ namespace <#= Namespace #>
             Func<int, int, int, int> zipper = null;
 
             Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, zipper));
+            Assert.Throws<ArgumentNullException>(() => <#= ExtensionsClsName #>.Zip(first, second, third, zipper));
         }
 
+        [Fact]
         public static void Zip4_ThrowsArgumentNullException_ForNullZipper()
         {
             var first = <#= Name #>.<#= ReturnName #>(1);
@@ -55,8 +61,10 @@ namespace <#= Namespace #>
             Func<int, int, int, int, int> zipper = null;
 
             Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, fourth, zipper));
+            Assert.Throws<ArgumentNullException>(() => <#= ExtensionsClsName #>.Zip(first, second, third, fourth, zipper));
         }
 
+        [Fact]
         public static void Zip5_ThrowsArgumentNullException_ForNullZipper()
         {
             var first = <#= Name #>.<#= ReturnName #>(1);
@@ -67,18 +75,21 @@ namespace <#= Namespace #>
             Func<int, int, int, int, int, int> zipper = null;
 
             Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, fourth, fifth, zipper));
+            Assert.Throws<ArgumentNullException>(() => <#= ExtensionsClsName #>.Zip(first, second, third, fourth, fifth, zipper));
         }
 
         #endregion
 
-        #region Select()
+        #region <#= MapName #>()
 
+        [Fact]
         public static void Select_ThrowsArgumentNullException_ForNullSelector()
         {
             var source = <#= Name #>.<#= ReturnName #>(1);
             Func<int, int> selector = null;
 
             Assert.Throws<ArgumentNullException>(() => source.Select(selector));
+            Assert.Throws<ArgumentNullException>(() => <#= ExtensionsClsName #>.Select(source, selector));
         }
 
         #endregion
@@ -93,6 +104,7 @@ namespace <#= Namespace #>
             Func<int, bool> predicate = null;
 
             Assert.Throws<ArgumentNullException>(() => source.Where(predicate));
+            Assert.Throws<ArgumentNullException>(() => <#= ExtensionsClsName #>.Where(source, predicate));
         }
 
         #endregion
@@ -108,6 +120,7 @@ namespace <#= Namespace #>
             Func<int, int, int> resultSelector = (i, j) => i + j;
 
             Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, resultSelector));
+            Assert.Throws<ArgumentNullException>(() => <#= ExtensionsClsName #>.SelectMany(source, valueSelector, resultSelector));
         }
 
         [Fact]
@@ -119,6 +132,7 @@ namespace <#= Namespace #>
             Func<int, int, int> resultSelector = null;
 
             Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, resultSelector));
+            Assert.Throws<ArgumentNullException>(() => <#= ExtensionsClsName #>.SelectMany(source, valueSelector, resultSelector));
         }
 
         #endregion
@@ -137,6 +151,8 @@ namespace <#= Namespace #>
 
             Assert.Throws<ArgumentNullException>(
                 () => source.Join(inner, outerKeySelector, innerKeySelector, resultSelector));
+            Assert.Throws<ArgumentNullException>(
+                () => <#= ExtensionsClsName #>.Join(source, inner, outerKeySelector, innerKeySelector, resultSelector));
         }
 
         [Fact]
@@ -150,6 +166,8 @@ namespace <#= Namespace #>
 
             Assert.Throws<ArgumentNullException>(
                 () => source.Join(inner, outerKeySelector, innerKeySelector, resultSelector));
+            Assert.Throws<ArgumentNullException>(
+                () => <#= ExtensionsClsName #>.Join(source, inner, outerKeySelector, innerKeySelector, resultSelector));
         }
 
         [Fact]
@@ -163,6 +181,8 @@ namespace <#= Namespace #>
 
             Assert.Throws<ArgumentNullException>(
                 () => source.Join(inner, outerKeySelector, innerKeySelector, resultSelector));
+            Assert.Throws<ArgumentNullException>(
+                () => <#= ExtensionsClsName #>.Join(source, inner, outerKeySelector, innerKeySelector, resultSelector));
         }
 
         #endregion
@@ -180,6 +200,8 @@ namespace <#= Namespace #>
 
             Assert.Throws<ArgumentNullException>(
                 () => source.GroupJoin(inner, outerKeySelector, innerKeySelector, resultSelector));
+            Assert.Throws<ArgumentNullException>(
+                () => <#= ExtensionsClsName #>.GroupJoin(source, inner, outerKeySelector, innerKeySelector, resultSelector));
         }
 
         [Fact]
@@ -193,6 +215,8 @@ namespace <#= Namespace #>
 
             Assert.Throws<ArgumentNullException>(
                 () => source.GroupJoin(inner, outerKeySelector, innerKeySelector, resultSelector));
+            Assert.Throws<ArgumentNullException>(
+                () => <#= ExtensionsClsName #>.GroupJoin(source, inner, outerKeySelector, innerKeySelector, resultSelector));
         }
 
         [Fact]
@@ -206,6 +230,8 @@ namespace <#= Namespace #>
 
             Assert.Throws<ArgumentNullException>(
                 () => source.GroupJoin(inner, outerKeySelector, innerKeySelector, resultSelector));
+            Assert.Throws<ArgumentNullException>(
+                () => <#= ExtensionsClsName #>.GroupJoin(source, inner, outerKeySelector, innerKeySelector, resultSelector));
         }
 
         #endregion
