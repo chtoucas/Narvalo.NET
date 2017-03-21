@@ -32,6 +32,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Applicative\EitherFacts.cs" />
+    <Compile Include="Applicative\OutcomeFacts.cs" />
     <Compile Include="Applicative\Outcome.g.cs">
       <DependentUpon>Outcome.tt</DependentUpon>
       <AutoGen>True</AutoGen>

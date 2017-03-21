@@ -25,7 +25,7 @@ he', car il est en cours d'utilisation par un autre processus. [I:\github\Narval
 - [Low] Enable continuous integration (Travis, AppVeyor, Coverall, Readthedoc, GitLink)?
 
 ### Migration to .NET Standard projects.
-- Waiting: support for Code Analysis.
+- Pending: support for Code Analysis.
 - We might have a conflict between the new MSBuild and our target `Package`.
 - Use `PackageReference` instead of parsing `packages.config`.
 - Update to use the (new) native package properties: `Version`, `AssemblyVersion`,

@@ -87,6 +87,10 @@ public static partial class My
 
     public sealed class SimpleValue
     {
+        public SimpleValue() { Value = "value"; }
+
+        public SimpleValue(string value) { Value = value; }
+
         public string Value { get; set; }
     }
 

@@ -9,28 +9,367 @@ namespace Narvalo.Applicative
 
     public static partial class MaybeFacts
     {
+        #region Unit
+
+        [Fact]
+        public static void Unit_IsSome() => Assert.True(Maybe.Unit.IsSome);
+
+        #endregion
+
         #region None
 
         [Fact]
-        public static void None_IsNone()
+        public static void None_IsNone() => Assert.True(Maybe.None.IsNone);
+
+        #endregion
+
+        #region ValueOrDefault()
+
+        [Fact]
+        public static void ValueOrDefault_ReturnsValue_WhenSome()
         {
-            // Act & Assert
-            Assert.False(Maybe.None.IsSome);
+            var value = new My.SimpleValue();
+            var maybe = Maybe.Of(value);
+            Assert.Same(value, maybe.ValueOrDefault());
+        }
+
+        [Fact]
+        public static void ValueOrDefault_ReturnsDefault_WhenNone()
+        {
+            var maybe = Maybe<string>.None;
+            Assert.Same(default(String), maybe.ValueOrDefault());
         }
 
         #endregion
 
+        #region ValueOrElse()
+
+        [Fact]
+        public static void ValueOrElse_ThrowArgumentNullException_ForNullInput()
+        {
+            var maybe = Maybe.Of("value");
+            string other = null;
+
+            Assert.Throws<ArgumentNullException>(() => maybe.ValueOrElse(other));
+        }
+
+        [Fact]
+        public static void ValueOrElse_ThrowArgumentNullException_ForNullFactory()
+        {
+            var maybe = Maybe.Of(1);
+            Func<int> valueFactory = null;
+
+            Assert.Throws<ArgumentNullException>(() => maybe.ValueOrElse(valueFactory));
+        }
+
+        #endregion
+
+        #region ValueOrThrow()
+
+        [Fact]
+        public static void ValueOrThrow_ReturnsValue_WhenSome()
+        {
+            var value = new My.SimpleValue();
+            var maybe = Maybe.Of(value);
+            Assert.Same(value, maybe.ValueOrThrow());
+        }
+
+        [Fact]
+        public static void ValueOrThrow_ThrowInvalidOperationException_WhenNone()
+        {
+            var maybe = Maybe<string>.None;
+            Assert.Throws<InvalidOperationException>(() => maybe.ValueOrThrow());
+        }
+
+        [Fact]
+        public static void ValueOrThrow_ThrowArgumentNullException_ForNullFactory_WhenSome()
+        {
+            var maybe = Maybe.Of(1);
+            Func<Exception> exceptionFactory = null;
+
+            Assert.Throws<ArgumentNullException>(() => maybe.ValueOrThrow(exceptionFactory));
+        }
+
+        [Fact]
+        public static void ValueOrThrow_ThrowArgumentNullException_ForNullFactory_WhenNone()
+        {
+            var maybe = Maybe<string>.None;
+            Func<Exception> exceptionFactory = null;
+
+            Assert.Throws<ArgumentNullException>(() => maybe.ValueOrThrow(exceptionFactory));
+        }
+
+        [Fact]
+        public static void ValueOrThrow_ThrowCustomException_WhenNone()
+        {
+            var maybe = Maybe<string>.None;
+            Func<My.SimpleException> exceptionFactory = () => new My.SimpleException();
+
+            Assert.Throws<My.SimpleException>(() => maybe.ValueOrThrow(exceptionFactory));
+        }
+
+        [Fact]
+        public static void ValueOrThrow_DoesNotThrowReturnsValue_WhenSome()
+        {
+            var maybe = Maybe.Of(1);
+            Func<My.SimpleException> exceptionFactory = () => new My.SimpleException();
+
+            Assert.Equal(1, maybe.ValueOrThrow(exceptionFactory));
+        }
+
+        #endregion
+
+        #region Bind()
+
+        [Fact]
+        public static void Bind_ThrowArgumentNullException_ForNullBinder()
+        {
+            var maybe = Maybe.Of(1);
+            Func<int, Maybe<int>> binder = null;
+
+            Assert.Throws<ArgumentNullException>(() => maybe.Bind(binder));
+        }
+
+        #endregion
+
+        #region Contains()
+
+        [Fact]
+        public static void Contains_ThrowArgumentNullException_ForNullComparer()
+        {
+            var maybe = Maybe.Of(1);
+            IEqualityComparer<int> comparer = null;
+
+            Assert.Throws<ArgumentNullException>(() => maybe.Contains(1, comparer));
+        }
+
+        #endregion
+
+        #region Match()
+
+        [Fact]
+        public static void Match_ThrowArgumentNullException_ForNullCaseSome1()
+        {
+            var maybe = Maybe.Of(1);
+            Func<int, int> caseSome = null;
+            Func<int> caseNone = () => 1;
+
+            Assert.Throws<ArgumentNullException>(() => maybe.Match(caseSome, caseNone));
+        }
+
+        [Fact]
+        public static void Match_ThrowArgumentNullException_ForNullCaseSome2()
+        {
+            var maybe = Maybe.Of(1);
+            Func<int, int> caseSome = null;
+
+            Assert.Throws<ArgumentNullException>(() => maybe.Match(caseSome, 1));
+        }
+
+        [Fact]
+        public static void Match_ThrowArgumentNullException_ForNullCaseNone()
+        {
+            var maybe = Maybe.Of(1);
+            Func<int, int> caseSome = val => val;
+            Func<int> caseNone = null;
+
+            Assert.Throws<ArgumentNullException>(() => maybe.Match(caseSome, caseNone));
+        }
+
+        #endregion
+
+        #region Coalesce()
+
+        [Fact]
+        public static void Coalesce_ThrowArgumentNullException_ForNullPredicate1()
+        {
+            var maybe = Maybe.Of(1);
+            Func<int, bool> predicate = null;
+            Func<int, int> selector = val => val;
+            Func<int> otherwise = () => 1;
+
+            Assert.Throws<ArgumentNullException>(() => maybe.Coalesce(predicate, selector, otherwise));
+        }
+
+        [Fact]
+        public static void Coalesce_ThrowArgumentNullException_ForNullPredicate2()
+        {
+            var maybe = Maybe.Of(1);
+            Func<int, bool> predicate = null;
+
+            Assert.Throws<ArgumentNullException>(() => maybe.Coalesce(predicate, 1, 2));
+        }
+
+        [Fact]
+        public static void Coalesce_ThrowArgumentNullException_ForNullSelector()
+        {
+            var maybe = Maybe.Of(1);
+            Func<int, bool> predicate = val => true;
+            Func<int, int> selector = null;
+            Func<int> otherwise = () => 1;
+
+            Assert.Throws<ArgumentNullException>(() => maybe.Coalesce(predicate, selector, otherwise));
+        }
+
+        [Fact]
+        public static void Coalesce_ThrowArgumentNullException_ForNullOtherwise()
+        {
+            var maybe = Maybe.Of(1);
+            Func<int, bool> predicate = val => true;
+            Func<int, int> selector = val => val;
+            Func<int> otherwise = null;
+
+            Assert.Throws<ArgumentNullException>(() => maybe.Coalesce(predicate, selector, otherwise));
+        }
+
+        #endregion
+
+        #region When()
+
+        [Fact]
+        public static void When_ThrowArgumentNullException_ForNullPredicate1()
+        {
+            var maybe = Maybe.Of(1);
+            Func<int, bool> predicate = null;
+            Action<int> action = val => { };
+            Action otherwise = () => { };
+
+            Assert.Throws<ArgumentNullException>(() => maybe.When(predicate, action, otherwise));
+        }
+
+        [Fact]
+        public static void When_ThrowArgumentNullException_ForNullPredicate2()
+        {
+            var maybe = Maybe.Of(1);
+            Func<int, bool> predicate = null;
+            Action<int> action = val => { };
+
+            Assert.Throws<ArgumentNullException>(() => maybe.When(predicate, action));
+        }
+
+        [Fact]
+        public static void When_ThrowArgumentNullException_ForNullAction1()
+        {
+            var maybe = Maybe.Of(1);
+            Func<int, bool> predicate = val => true;
+            Action<int> action = null;
+            Action otherwise = () => { };
+
+            Assert.Throws<ArgumentNullException>(() => maybe.When(predicate, action, otherwise));
+        }
+
+        [Fact]
+        public static void When_ThrowArgumentNullException_ForNullAction2()
+        {
+            var maybe = Maybe.Of(1);
+            Func<int, bool> predicate = val => true;
+            Action<int> action = null;
+
+            Assert.Throws<ArgumentNullException>(() => maybe.When(predicate, action));
+        }
+
+        [Fact]
+        public static void When_ThrowArgumentNullException_ForNullOtherwise()
+        {
+            var maybe = Maybe.Of(1);
+            Func<int, bool> predicate = val => true;
+            Action<int> action = val => { };
+            Action otherwise = null;
+
+            Assert.Throws<ArgumentNullException>(() => maybe.When(predicate, action, otherwise));
+        }
+
+        #endregion
+
+        #region Do()
+
+        [Fact]
+        public static void Do_ThrowArgumentNullException_ForNullOnSome()
+        {
+            var maybe = Maybe.Of(1);
+            Action<int> onSome = null;
+            Action onNone = () => { };
+
+            Assert.Throws<ArgumentNullException>(() => maybe.Do(onSome, onNone));
+        }
+
+        [Fact]
+        public static void Do_ThrowArgumentNullException_ForNullOnNone()
+        {
+            var maybe = Maybe.Of(1);
+            Action<int> onSome = val => { };
+            Action onNone = null;
+
+            Assert.Throws<ArgumentNullException>(() => maybe.Do(onSome, onNone));
+        }
+
+        #endregion
+
+        #region OnSome()
+
+        [Fact]
+        public static void OnSome_ThrowArgumentNullException_ForNullAction()
+        {
+            var maybe = Maybe.Of(1);
+            Action<int> action = null;
+
+            Assert.Throws<ArgumentNullException>(() => maybe.OnSome(action));
+        }
+
+        #endregion
+
+        #region OnNone()
+
+        [Fact]
+        public static void OnNone_ThrowArgumentNullException_ForNullAction()
+        {
+            var maybe = Maybe.Of(1);
+            Action action = null;
+
+            Assert.Throws<ArgumentNullException>(() => maybe.OnNone(action));
+        }
+
+        #endregion
+
+        #region Equals()
+
+        [Fact]
+        public static void Equals_ThrowArgumentNullException_ForNullComparer()
+        {
+            var maybe1 = Maybe.Of(1);
+            var maybe2 = Maybe.Of(2);
+            IEqualityComparer<int> comparer = null;
+
+            Assert.Throws<ArgumentNullException>(() => maybe1.Equals(maybe2, comparer));
+        }
+
+        #endregion
+
+        #region GetHashCode()
+
+        [Fact]
+        public static void GetHashCode_ThrowArgumentNullException_ForNullComparer()
+        {
+            var maybe1 = Maybe.Of(1);
+            IEqualityComparer<int> comparer = null;
+
+            Assert.Throws<ArgumentNullException>(() => maybe1.GetHashCode(comparer));
+        }
+
+        #endregion
+    }
+
+    public static partial class MaybeFacts
+    {
         #region IsSome
 
         [Fact]
         public static void IsSome_IsFalse_WhenNone()
         {
-            // Arrange
             var simple = Maybe<int>.None;
             var value = Maybe<My.SimpleStruct>.None;
             var reference = Maybe<List<int>>.None;
 
-            // Act & Assert
             Assert.False(simple.IsSome);
             Assert.False(value.IsSome);
             Assert.False(reference.IsSome);
@@ -39,12 +378,10 @@ namespace Narvalo.Applicative
         [Fact]
         public static void IsSome_IsTrue_WhenSome()
         {
-            // Arrange
             var simple = Maybe.Of(3141);
             var value = Maybe.Of(new My.SimpleStruct(3141));
             var reference = Maybe.Of(new List<int>());
 
-            // Act & Assert
             Assert.True(simple.IsSome);
             Assert.True(value.IsSome);
             Assert.True(reference.IsSome);
@@ -405,10 +742,8 @@ namespace Narvalo.Applicative
         #region Bind()
 
         /// <summary>
-        /// <![CDATA[
         /// Maybe<T>.Bind(selector) returned null when selector returned null.
         /// The correct behaviour is to return Maybe<T>.None.
-        /// ]]>
         /// </summary>
         ////[Fact, Issue]
         ////public static void Bind_ReturnsNone_WhenSelectorReturnsNull()
@@ -611,10 +946,9 @@ namespace Narvalo.Applicative
         #region Unit
 
         [Fact]
-        public static void Unit_IsSome()
+        public static void Unit_IsSomeXXX()
         {
             // Act & Assert
-            Assert.True(Maybe.Unit.IsSome);
             Assert.Equal(Unit.Default, Maybe.Unit.Value);
         }
 

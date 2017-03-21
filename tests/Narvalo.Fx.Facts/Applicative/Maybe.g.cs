@@ -187,6 +187,22 @@ namespace Narvalo.Applicative
                 () => Maybe.Join(source, inner, outerKeySelector, innerKeySelector, resultSelector));
         }
 
+        [Fact]
+        public static void Join_ThrowsArgumentNullException_ForNullComparer()
+        {
+            var source = Maybe.Of(1);
+            var inner = Maybe.Of(2);
+            Func<int, int> outerKeySelector = val => val;
+            Func<int, int> innerKeySelector = val => val;
+            Func<int, int, int> resultSelector = (i, j) => i + j;
+            IEqualityComparer<int> comparer = null;
+
+            Assert.Throws<ArgumentNullException>(
+                () => source.Join(inner, outerKeySelector, innerKeySelector, resultSelector, comparer));
+            Assert.Throws<ArgumentNullException>(
+                () => Maybe.Join(source, inner, outerKeySelector, innerKeySelector, resultSelector, comparer));
+        }
+
         #endregion
 
         #region GroupJoin()
@@ -234,6 +250,22 @@ namespace Narvalo.Applicative
                 () => source.GroupJoin(inner, outerKeySelector, innerKeySelector, resultSelector));
             Assert.Throws<ArgumentNullException>(
                 () => Maybe.GroupJoin(source, inner, outerKeySelector, innerKeySelector, resultSelector));
+        }
+
+        [Fact]
+        public static void GroupJoin_ThrowsArgumentNullException_ForNullComparer()
+        {
+            var source = Maybe.Of(1);
+            var inner = Maybe.Of(2);
+            Func<int, int> outerKeySelector = val => val;
+            Func<int, int> innerKeySelector = val => val;
+            Func<int, Maybe<int>, int> resultSelector = (i, m) => 1;
+            IEqualityComparer<int> comparer = null;
+
+            Assert.Throws<ArgumentNullException>(
+                () => source.GroupJoin(inner, outerKeySelector, innerKeySelector, resultSelector, comparer));
+            Assert.Throws<ArgumentNullException>(
+                () => Maybe.GroupJoin(source, inner, outerKeySelector, innerKeySelector, resultSelector, comparer));
         }
 
         #endregion
