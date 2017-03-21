@@ -6,7 +6,7 @@ Divers et variés
 
 - [High] `make.ps1` fails sometimes for weird reasons (most of the time
   it works perfectly):
-  * Xunit cannot find localized resources (should be fixed).
+  * Xunit cannot find localized resources (should be fixed now).
   * There seems to be a problem with the new MSBuild when we have VS opened
     and it is running at the same time:
 ```

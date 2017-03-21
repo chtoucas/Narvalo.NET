@@ -12,7 +12,7 @@ namespace Narvalo.Linq
     /// - Filtering: WhereAny
     /// - Set: Append, Prepend
     /// - Element: FirstOrNone, LastOrNone, SingleOrNone, ElementAtOrNone
-    /// - Aggregation (catamorphisms): Aggregate
+    /// - Aggregation: Aggregate
     /// - Quantifiers: IsEmpty
     /// - Generation: EmptyIfNull
     /// We have also operators accepting arguments in the Kleisli "category":

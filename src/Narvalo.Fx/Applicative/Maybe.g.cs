@@ -363,7 +363,6 @@ namespace Narvalo.Applicative
             Require.NotNull(resultSelector, nameof(resultSelector));
             Require.NotNull(outerKeySelector, nameof(outerKeySelector));
             Require.NotNull(innerKeySelector, nameof(innerKeySelector));
-            Require.NotNull(comparer, nameof(comparer));
 
             var keyLookup = GetKeyLookup(
                 inner, outerKeySelector, innerKeySelector, comparer ?? EqualityComparer<TKey>.Default);
@@ -398,7 +397,6 @@ namespace Narvalo.Applicative
             Require.NotNull(resultSelector, nameof(resultSelector));
             Require.NotNull(outerKeySelector, nameof(outerKeySelector));
             Require.NotNull(innerKeySelector, nameof(innerKeySelector));
-            Require.NotNull(comparer, nameof(comparer));
 
             var keyLookup = GetKeyLookup(
                 inner, outerKeySelector, innerKeySelector, comparer ?? EqualityComparer<TKey>.Default);

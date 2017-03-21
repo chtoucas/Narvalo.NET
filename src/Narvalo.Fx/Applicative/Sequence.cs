@@ -24,7 +24,7 @@ namespace Narvalo.Applicative
             yield return value;
         }
 
-        #region Unfold (anamorphism)
+        #region Unfold
 
         /// <summary>
         /// Generates an infinite sequence.
