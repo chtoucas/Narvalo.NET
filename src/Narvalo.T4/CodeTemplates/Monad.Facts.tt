@@ -1,2 +1,37 @@
 ﻿<#@ include file="Monad.tt" once="true" #>
-<#@ include file="MonadFacts\EmitFacts.tt" #>
+<#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
+<#@ include file="MonadFacts\EmitCore.tt" #>
+<#@ include file="MonadFacts\EmitRules.tt" #><#+
+
+// This template is fairly incomplete (does not work for many monads) and depend on:
+// - Xunit
+// - FsCheck.Xunit
+
+public partial class MonadTemplate
+{
+    /// <summary>
+    /// Generates tests for a Monad.
+    /// </summary>
+    public void EmitFacts()
+    {
+#>
+namespace <#= Namespace #>
+{
+    using System;
+    using System.Collections.Generic;
+
+    using FsCheck.Xunit;
+    using Xunit;
+
+<#+
+    EmitCore();
+
+    WriteLine();
+    EmitRules();
+#>
+}
+<#+
+    }
+}
+
+#>

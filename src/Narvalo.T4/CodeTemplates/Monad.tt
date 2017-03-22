@@ -14,7 +14,7 @@
 <#@ include file="Monad\EmitComonadHelpers.tt" #><#+
 
 // WARNINGs:
-// The templates depend on:
+// This templates depend on:
 // - The classes Narvalo.Require (Narvalo.Core).
 // - The class Narvalo.Applicative.Unit (Narvalo.Fx).
 // - Enumerable extensions in Narvalo.Linq (Narvalo.Fx).
@@ -53,7 +53,7 @@ namespace <#= Namespace #>
 <#+ } #>
 
 <#+
-    // Disabled.
+    // Disabled for now.
     //WriteLine();
     //EmitMethods();
 
@@ -63,7 +63,7 @@ namespace <#= Namespace #>
     WriteLine();
     EmitExtensions();
 
-    // Disabled.
+    // Disabled for now.
     //WriteLine();
     //EmitExtensionsExtras();
 

@@ -18,6 +18,8 @@ namespace Narvalo.Applicative
     using FsCheck.Xunit;
     using Xunit;
 
+    // Provides tests for Fallible<T>.
+    // T4: EmitCore().
     public static partial class FallibleFacts
     {
         #region Repeat()
@@ -25,7 +27,7 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Repeat_ThrowsArgumentOutOfRangeException_ForNegativeCount()
         {
-            var source = Fallible.Of(1);
+            var source = Fallible<int>.η(1);
 
             Assert.Throws<ArgumentOutOfRangeException>(() => Fallible.Repeat(source, -1));
         }
@@ -37,8 +39,8 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Zip2_ThrowsArgumentNullException_ForNullZipper()
         {
-            var first = Fallible.Of(1);
-            var second = Fallible.Of(2);
+            var first = Fallible<int>.η(1);
+            var second = Fallible<int>.η(2);
             Func<int, int, int> zipper = null;
 
             Assert.Throws<ArgumentNullException>(() => first.Zip(second, zipper));
@@ -48,9 +50,9 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Zip3_ThrowsArgumentNullException_ForNullZipper()
         {
-            var first = Fallible.Of(1);
-            var second = Fallible.Of(2);
-            var third = Fallible.Of(3);
+            var first = Fallible<int>.η(1);
+            var second = Fallible<int>.η(2);
+            var third = Fallible<int>.η(3);
             Func<int, int, int, int> zipper = null;
 
             Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, zipper));
@@ -60,10 +62,10 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Zip4_ThrowsArgumentNullException_ForNullZipper()
         {
-            var first = Fallible.Of(1);
-            var second = Fallible.Of(2);
-            var third = Fallible.Of(3);
-            var fourth = Fallible.Of(4);
+            var first = Fallible<int>.η(1);
+            var second = Fallible<int>.η(2);
+            var third = Fallible<int>.η(3);
+            var fourth = Fallible<int>.η(4);
             Func<int, int, int, int, int> zipper = null;
 
             Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, fourth, zipper));
@@ -73,11 +75,11 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Zip5_ThrowsArgumentNullException_ForNullZipper()
         {
-            var first = Fallible.Of(1);
-            var second = Fallible.Of(2);
-            var third = Fallible.Of(3);
-            var fourth = Fallible.Of(4);
-            var fifth = Fallible.Of(4);
+            var first = Fallible<int>.η(1);
+            var second = Fallible<int>.η(2);
+            var third = Fallible<int>.η(3);
+            var fourth = Fallible<int>.η(4);
+            var fifth = Fallible<int>.η(4);
             Func<int, int, int, int, int, int> zipper = null;
 
             Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, fourth, fifth, zipper));
@@ -91,7 +93,7 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Select_ThrowsArgumentNullException_ForNullSelector()
         {
-            var source = Fallible.Of(1);
+            var source = Fallible<int>.η(1);
             Func<int, int> selector = null;
 
             Assert.Throws<ArgumentNullException>(() => source.Select(selector));
@@ -105,7 +107,7 @@ namespace Narvalo.Applicative
         [Fact]
         public static void SelectMany_ThrowsArgumentNullException_ForNullValueSelector()
         {
-            var source = Fallible.Of(1);
+            var source = Fallible<int>.η(1);
             Func<int, Fallible<int>> valueSelector = null;
             Func<int, int, int> resultSelector = (i, j) => i + j;
 
@@ -116,8 +118,8 @@ namespace Narvalo.Applicative
         [Fact]
         public static void SelectMany_ThrowsArgumentNullException_ForNullResultSelector()
         {
-            var source = Fallible.Of(1);
-            var middle = Fallible.Of(2);
+            var source = Fallible<int>.η(1);
+            var middle = Fallible<int>.η(2);
             Func<int, Fallible<int>> valueSelector = _ => middle;
             Func<int, int, int> resultSelector = null;
 
@@ -127,84 +129,87 @@ namespace Narvalo.Applicative
 
         #endregion
 
+    }
+
+    // Provides tests for Fallible<T>: functor, monoid and monad laws.
+    // T4: EmitRules().
+    public static partial class FallibleFacts
+    {
         #region Functor Rules
 
-        [Fact(DisplayName = "Fallible<T> - The identity map is a fixed point for Select.")]
-        public static void Satisfies_FirstFunctorLaw()
+        [Property(DisplayName = "Fallible<T> - The identity map is a fixed point for Select (first functor law).")]
+        public static bool Identity_IsFixedPointForSelect(int arg)
         {
-            // Arrange
-            var me = Fallible.Of(1);
+            var me = Fallible<int>.η(arg);
 
-            // Act
-            var left = me.Select(Stubs<int>.Identity);
-            var right = Stubs<Fallible<int>>.Identity(me);
+            // fmap id  ==  id
+            var left = me.Select(val => val);
+            var right = me;
 
-            // Assert
-            Assert.True(left.Equals(right));
+            return left.Equals(right);
         }
 
-        [Fact(DisplayName = "Fallible<T> - Select preserves the composition operator.")]
-        public static void Satisfies_FunctorSecondRule()
+        [Property(DisplayName = "Fallible<T> - Select preserves the composition operator (second functor law).")]
+        public static bool Select_PreservesComposition(short arg, Func<short, int> g, Func<int, long> f)
         {
-            // Arrange
-            var me = Fallible.Of(1);
-            Func<int, long> g = val => (long)2 * val;
-            Func<long, long> f = val => 3 * val;
+            var me = Fallible<short>.η(arg);
 
-            // Act
-            var left = me.Select(_ => f(g(_)));
+            // fmap (f . g)  ==  fmap f . fmap g
+            var left = me.Select(val => f(g(val)));
             var right = me.Select(g).Select(f);
 
-            // Assert
-            Assert.True(left.Equals(right));
+           return left.Equals(right);
         }
 
         #endregion
 
         #region Monad Rules
 
-        [Property(DisplayName = "Fallible<T> - Of is a left identity for Bind (first monad rule).")]
+        [Property(DisplayName = "Fallible<T> - Of is a left identity for Bind (first monad law).")]
         public static bool Of_IsLeftIdentityForBind(int arg0, float arg1)
         {
-            Func<int, Fallible<float>> binder = val => Fallible.Of(arg1 * val);
+            Func<int, Fallible<float>> f = val => Fallible<float>.η(arg1 * val);
 
-            var left = Fallible.Of(arg0).Bind(binder);
-            var right = binder(arg0);
+            // return a >>= k  ==  k a
+            var left = Fallible<int>.η(arg0).Bind(f);
+            var right = f(arg0);
 
             return left.Equals(right);
         }
 
-        [Property(DisplayName = "Fallible<T> - Of is a left identity for Compose (first monad rule).")]
+        [Property(DisplayName = "Fallible<T> - Of is a left identity for Compose (first monad law).")]
         public static bool Of_IsLeftIdentityForCompose(int arg0, float arg1)
         {
-            Func<int, Fallible<int>> of = Fallible.Of;
-            Func<int, Fallible<float>> fun = val => Fallible.Of(arg1 * val);
+            Func<int, Fallible<int>> of = Fallible<int>.η;
+            Func<int, Fallible<float>> f = val => Fallible<float>.η(arg1 * val);
 
-            var left = of.Compose(fun).Invoke(arg0);
-            var right = fun(arg0);
+            // return >=> g  ==  g
+            var left = of.Compose(f).Invoke(arg0);
+            var right = f(arg0);
 
             return left.Equals(right);
         }
 
-        [Property(DisplayName = "Fallible<T> - Of is a right identity for Bind (second monad rule).")]
+        [Property(DisplayName = "Fallible<T> - Of is a right identity for Bind (second monad law).")]
         public static bool Of_IsRightIdentityForBind(int arg0)
         {
-            var me = Fallible.Of(arg0);
+            var me = Fallible<int>.η(arg0);
 
-            var left = me.Bind(Fallible.Of);
+            // m >>= return  ==  m
+            var left = me.Bind(Fallible<int>.η);
             var right = me;
 
             return left.Equals(right);
         }
 
-        [Property(DisplayName = "Fallible<T> - Of is a right identity for Compose (second monad rule).")]
+        [Property(DisplayName = "Fallible<T> - Of is a right identity for Compose (second monad law).")]
         public static bool Of_IsRightIdentityForCompose(int arg0, float arg1)
         {
-            Func<float, Fallible<float>> of = Fallible.Of;
-            Func<int, Fallible<float>> fun = val => Fallible.Of(arg1 * val);
+            Func<int, Fallible<float>> f = val => Fallible<float>.η(arg1 * val);
 
-            var left = fun.Compose(of).Invoke(arg0);
-            var right = fun(arg0);
+            // f >=> return  ==  f
+            var left = f.Compose(Fallible<float>.η).Invoke(arg0);
+            var right = f(arg0);
 
             return left.Equals(right);
         }
@@ -212,13 +217,28 @@ namespace Narvalo.Applicative
         [Property(DisplayName = "Fallible<T> - Bind is associative (third monad law).")]
         public static bool Bind_IsAssociative(short arg0, int arg1, long arg2)
         {
-            var me = Fallible.Of(arg0);
+            var me = Fallible<short>.η(arg0);
 
-            Func<short, Fallible<int>> f = val => Fallible.Of(arg1 * val);
-            Func<int, Fallible<long>> g = val => Fallible.Of(arg2 * val);
+            Func<short, Fallible<int>> f = val => Fallible<int>.η(arg1 * val);
+            Func<int, Fallible<long>> g = val => Fallible<long>.η(arg2 * val);
 
+            // m >>= (\x -> f x >>= g)  ==  (m >>= f) >>= g
             var left = me.Bind(f).Bind(g);
             var right = me.Bind(val => f(val).Bind(g));
+
+            return left.Equals(right);
+        }
+
+        [Property(DisplayName = "Fallible<T> - Compose is associative (third monad law).")]
+        public static bool Compose_IsAssociative(short arg0, int arg1, long arg2, double arg3)
+        {
+            Func<short, Fallible<int>> f = val => Fallible<int>.η(arg1 * val);
+            Func<int, Fallible<long>> g = val => Fallible<long>.η(arg2 * val);
+            Func<long, Fallible<double>> h = val => Fallible<double>.η(arg3 * val);
+
+            // f >=> (g >=> h)  ==  (f >=> g) >=> h
+            var left = f.Compose(g.Compose(h)).Invoke(arg0);
+            var right = f.Compose(g).Compose(h).Invoke(arg0);
 
             return left.Equals(right);
         }

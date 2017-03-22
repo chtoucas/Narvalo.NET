@@ -45,6 +45,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Applicative\EitherFacts.cs" />
+    <Compile Include="Applicative\Either.g.cs">
+      <DependentUpon>Either.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Applicative\Result.g.cs">
+      <DependentUpon>Result.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Applicative\OutcomeFacts.cs" />
     <Compile Include="Applicative\Outcome.g.cs">
       <DependentUpon>Outcome.tt</DependentUpon>
@@ -82,6 +92,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Applicative\Either.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Either.g.cs</LastGenOutput>
+    </Content>
+    <Content Include="Applicative\Result.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Result.g.cs</LastGenOutput>
+    </Content>
     <Content Include="Applicative\Outcome.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Outcome.g.cs</LastGenOutput>

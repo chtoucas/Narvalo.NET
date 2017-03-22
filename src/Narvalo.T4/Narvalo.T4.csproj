@@ -57,7 +57,8 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CodeTemplates\MonadFacts\EmitFacts.tt" />
+    <Content Include="CodeTemplates\MonadFacts\EmitCore.tt" />
+    <Content Include="CodeTemplates\MonadFacts\EmitRules.tt" />
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

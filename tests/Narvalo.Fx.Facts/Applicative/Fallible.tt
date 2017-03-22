@@ -5,12 +5,9 @@
 <#= new FallibleTemplate(this).Execute() #>
 <#+
 
-    public partial class FallibleTemplate : MonadTemplate
-    {
-        protected override void WriteContent()
-        {
-            EmitFacts();
-        }
-    }
+public partial class FallibleTemplate : MonadTemplate
+{
+    protected override void WriteContent() => EmitFacts();
+}
 
 #>

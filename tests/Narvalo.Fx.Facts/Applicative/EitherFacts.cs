@@ -4,7 +4,7 @@ namespace Narvalo.Applicative
 {
     using Xunit;
 
-    public static class EitherFacts
+    public static partial class EitherFacts
     {
         #region LeftOrNone
 

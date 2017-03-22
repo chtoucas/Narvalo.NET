@@ -5,12 +5,9 @@
 <#= new MaybeTemplate(this).Execute() #>
 <#+
 
-    public partial class MaybeTemplate : MonadTemplate
-    {
-        protected override void WriteContent()
-        {
-            EmitFacts();
-        }
-    }
+public partial class MaybeTemplate : MonadTemplate
+{
+    protected override void WriteContent() => EmitFacts();
+}
 
 #>

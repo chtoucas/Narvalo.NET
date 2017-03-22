@@ -5,12 +5,9 @@
 <#= new OutcomeTemplate(this).Execute() #>
 <#+
 
-    public partial class OutcomeTemplate : MonadTemplate
-    {
-        protected override void WriteContent()
-        {
-            EmitFacts();
-        }
-    }
+public partial class OutcomeTemplate : MonadTemplate
+{
+    protected override void WriteContent() => EmitFacts();
+}
 
 #>

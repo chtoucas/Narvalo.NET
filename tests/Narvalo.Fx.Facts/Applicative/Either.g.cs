@@ -18,18 +18,18 @@ namespace Narvalo.Applicative
     using FsCheck.Xunit;
     using Xunit;
 
-    // Provides tests for Outcome<T>.
+    // Provides tests for Either<T, My.SimpleObj>.
     // T4: EmitCore().
-    public static partial class OutcomeFacts
+    public static partial class EitherFacts
     {
         #region Repeat()
 
         [Fact]
         public static void Repeat_ThrowsArgumentOutOfRangeException_ForNegativeCount()
         {
-            var source = Outcome<int>.η(1);
+            var source = Either<int, My.SimpleObj>.OfLeft(1);
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => Outcome.Repeat(source, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(() => Either.Repeat(source, -1));
         }
 
         #endregion
@@ -39,51 +39,51 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Zip2_ThrowsArgumentNullException_ForNullZipper()
         {
-            var first = Outcome<int>.η(1);
-            var second = Outcome<int>.η(2);
+            var first = Either<int, My.SimpleObj>.OfLeft(1);
+            var second = Either<int, My.SimpleObj>.OfLeft(2);
             Func<int, int, int> zipper = null;
 
             Assert.Throws<ArgumentNullException>(() => first.Zip(second, zipper));
-            Assert.Throws<ArgumentNullException>(() => OutcomeExtensions.Zip(first, second, zipper));
+            Assert.Throws<ArgumentNullException>(() => Either.Zip(first, second, zipper));
         }
 
         [Fact]
         public static void Zip3_ThrowsArgumentNullException_ForNullZipper()
         {
-            var first = Outcome<int>.η(1);
-            var second = Outcome<int>.η(2);
-            var third = Outcome<int>.η(3);
+            var first = Either<int, My.SimpleObj>.OfLeft(1);
+            var second = Either<int, My.SimpleObj>.OfLeft(2);
+            var third = Either<int, My.SimpleObj>.OfLeft(3);
             Func<int, int, int, int> zipper = null;
 
             Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, zipper));
-            Assert.Throws<ArgumentNullException>(() => OutcomeExtensions.Zip(first, second, third, zipper));
+            Assert.Throws<ArgumentNullException>(() => Either.Zip(first, second, third, zipper));
         }
 
         [Fact]
         public static void Zip4_ThrowsArgumentNullException_ForNullZipper()
         {
-            var first = Outcome<int>.η(1);
-            var second = Outcome<int>.η(2);
-            var third = Outcome<int>.η(3);
-            var fourth = Outcome<int>.η(4);
+            var first = Either<int, My.SimpleObj>.OfLeft(1);
+            var second = Either<int, My.SimpleObj>.OfLeft(2);
+            var third = Either<int, My.SimpleObj>.OfLeft(3);
+            var fourth = Either<int, My.SimpleObj>.OfLeft(4);
             Func<int, int, int, int, int> zipper = null;
 
             Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, fourth, zipper));
-            Assert.Throws<ArgumentNullException>(() => OutcomeExtensions.Zip(first, second, third, fourth, zipper));
+            Assert.Throws<ArgumentNullException>(() => Either.Zip(first, second, third, fourth, zipper));
         }
 
         [Fact]
         public static void Zip5_ThrowsArgumentNullException_ForNullZipper()
         {
-            var first = Outcome<int>.η(1);
-            var second = Outcome<int>.η(2);
-            var third = Outcome<int>.η(3);
-            var fourth = Outcome<int>.η(4);
-            var fifth = Outcome<int>.η(4);
+            var first = Either<int, My.SimpleObj>.OfLeft(1);
+            var second = Either<int, My.SimpleObj>.OfLeft(2);
+            var third = Either<int, My.SimpleObj>.OfLeft(3);
+            var fourth = Either<int, My.SimpleObj>.OfLeft(4);
+            var fifth = Either<int, My.SimpleObj>.OfLeft(4);
             Func<int, int, int, int, int, int> zipper = null;
 
             Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, fourth, fifth, zipper));
-            Assert.Throws<ArgumentNullException>(() => OutcomeExtensions.Zip(first, second, third, fourth, fifth, zipper));
+            Assert.Throws<ArgumentNullException>(() => Either.Zip(first, second, third, fourth, fifth, zipper));
         }
 
         #endregion
@@ -93,11 +93,11 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Select_ThrowsArgumentNullException_ForNullSelector()
         {
-            var source = Outcome<int>.η(1);
+            var source = Either<int, My.SimpleObj>.OfLeft(1);
             Func<int, int> selector = null;
 
             Assert.Throws<ArgumentNullException>(() => source.Select(selector));
-            Assert.Throws<ArgumentNullException>(() => OutcomeExtensions.Select(source, selector));
+            Assert.Throws<ArgumentNullException>(() => Either.Select(source, selector));
         }
 
         #endregion
@@ -107,40 +107,40 @@ namespace Narvalo.Applicative
         [Fact]
         public static void SelectMany_ThrowsArgumentNullException_ForNullValueSelector()
         {
-            var source = Outcome<int>.η(1);
-            Func<int, Outcome<int>> valueSelector = null;
+            var source = Either<int, My.SimpleObj>.OfLeft(1);
+            Func<int, Either<int, My.SimpleObj>> valueSelector = null;
             Func<int, int, int> resultSelector = (i, j) => i + j;
 
             Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, resultSelector));
-            Assert.Throws<ArgumentNullException>(() => OutcomeExtensions.SelectMany(source, valueSelector, resultSelector));
+            Assert.Throws<ArgumentNullException>(() => Either.SelectMany(source, valueSelector, resultSelector));
         }
 
         [Fact]
         public static void SelectMany_ThrowsArgumentNullException_ForNullResultSelector()
         {
-            var source = Outcome<int>.η(1);
-            var middle = Outcome<int>.η(2);
-            Func<int, Outcome<int>> valueSelector = _ => middle;
+            var source = Either<int, My.SimpleObj>.OfLeft(1);
+            var middle = Either<int, My.SimpleObj>.OfLeft(2);
+            Func<int, Either<int, My.SimpleObj>> valueSelector = _ => middle;
             Func<int, int, int> resultSelector = null;
 
             Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, resultSelector));
-            Assert.Throws<ArgumentNullException>(() => OutcomeExtensions.SelectMany(source, valueSelector, resultSelector));
+            Assert.Throws<ArgumentNullException>(() => Either.SelectMany(source, valueSelector, resultSelector));
         }
 
         #endregion
 
     }
 
-    // Provides tests for Outcome<T>: functor, monoid and monad laws.
+    // Provides tests for Either<T, My.SimpleObj>: functor, monoid and monad laws.
     // T4: EmitRules().
-    public static partial class OutcomeFacts
+    public static partial class EitherFacts
     {
         #region Functor Rules
 
-        [Property(DisplayName = "Outcome<T> - The identity map is a fixed point for Select (first functor law).")]
+        [Property(DisplayName = "Either<T, My.SimpleObj> - The identity map is a fixed point for Select (first functor law).")]
         public static bool Identity_IsFixedPointForSelect(int arg)
         {
-            var me = Outcome<int>.η(arg);
+            var me = Either<int, My.SimpleObj>.OfLeft(arg);
 
             // fmap id  ==  id
             var left = me.Select(val => val);
@@ -149,10 +149,10 @@ namespace Narvalo.Applicative
             return left.Equals(right);
         }
 
-        [Property(DisplayName = "Outcome<T> - Select preserves the composition operator (second functor law).")]
+        [Property(DisplayName = "Either<T, My.SimpleObj> - Select preserves the composition operator (second functor law).")]
         public static bool Select_PreservesComposition(short arg, Func<short, int> g, Func<int, long> f)
         {
-            var me = Outcome<short>.η(arg);
+            var me = Either<short, My.SimpleObj>.OfLeft(arg);
 
             // fmap (f . g)  ==  fmap f . fmap g
             var left = me.Select(val => f(g(val)));
@@ -165,23 +165,23 @@ namespace Narvalo.Applicative
 
         #region Monad Rules
 
-        [Property(DisplayName = "Outcome<T> - Of is a left identity for Bind (first monad law).")]
+        [Property(DisplayName = "Either<T, My.SimpleObj> - Of is a left identity for Bind (first monad law).")]
         public static bool Of_IsLeftIdentityForBind(int arg0, float arg1)
         {
-            Func<int, Outcome<float>> f = val => Outcome<float>.η(arg1 * val);
+            Func<int, Either<float, My.SimpleObj>> f = val => Either<float, My.SimpleObj>.OfLeft(arg1 * val);
 
             // return a >>= k  ==  k a
-            var left = Outcome<int>.η(arg0).Bind(f);
+            var left = Either<int, My.SimpleObj>.OfLeft(arg0).Bind(f);
             var right = f(arg0);
 
             return left.Equals(right);
         }
 
-        [Property(DisplayName = "Outcome<T> - Of is a left identity for Compose (first monad law).")]
+        [Property(DisplayName = "Either<T, My.SimpleObj> - Of is a left identity for Compose (first monad law).")]
         public static bool Of_IsLeftIdentityForCompose(int arg0, float arg1)
         {
-            Func<int, Outcome<int>> of = Outcome<int>.η;
-            Func<int, Outcome<float>> f = val => Outcome<float>.η(arg1 * val);
+            Func<int, Either<int, My.SimpleObj>> of = Either<int, My.SimpleObj>.OfLeft;
+            Func<int, Either<float, My.SimpleObj>> f = val => Either<float, My.SimpleObj>.OfLeft(arg1 * val);
 
             // return >=> g  ==  g
             var left = of.Compose(f).Invoke(arg0);
@@ -190,37 +190,37 @@ namespace Narvalo.Applicative
             return left.Equals(right);
         }
 
-        [Property(DisplayName = "Outcome<T> - Of is a right identity for Bind (second monad law).")]
+        [Property(DisplayName = "Either<T, My.SimpleObj> - Of is a right identity for Bind (second monad law).")]
         public static bool Of_IsRightIdentityForBind(int arg0)
         {
-            var me = Outcome<int>.η(arg0);
+            var me = Either<int, My.SimpleObj>.OfLeft(arg0);
 
             // m >>= return  ==  m
-            var left = me.Bind(Outcome<int>.η);
+            var left = me.Bind(Either<int, My.SimpleObj>.OfLeft);
             var right = me;
 
             return left.Equals(right);
         }
 
-        [Property(DisplayName = "Outcome<T> - Of is a right identity for Compose (second monad law).")]
+        [Property(DisplayName = "Either<T, My.SimpleObj> - Of is a right identity for Compose (second monad law).")]
         public static bool Of_IsRightIdentityForCompose(int arg0, float arg1)
         {
-            Func<int, Outcome<float>> f = val => Outcome<float>.η(arg1 * val);
+            Func<int, Either<float, My.SimpleObj>> f = val => Either<float, My.SimpleObj>.OfLeft(arg1 * val);
 
             // f >=> return  ==  f
-            var left = f.Compose(Outcome<float>.η).Invoke(arg0);
+            var left = f.Compose(Either<float, My.SimpleObj>.OfLeft).Invoke(arg0);
             var right = f(arg0);
 
             return left.Equals(right);
         }
 
-        [Property(DisplayName = "Outcome<T> - Bind is associative (third monad law).")]
+        [Property(DisplayName = "Either<T, My.SimpleObj> - Bind is associative (third monad law).")]
         public static bool Bind_IsAssociative(short arg0, int arg1, long arg2)
         {
-            var me = Outcome<short>.η(arg0);
+            var me = Either<short, My.SimpleObj>.OfLeft(arg0);
 
-            Func<short, Outcome<int>> f = val => Outcome<int>.η(arg1 * val);
-            Func<int, Outcome<long>> g = val => Outcome<long>.η(arg2 * val);
+            Func<short, Either<int, My.SimpleObj>> f = val => Either<int, My.SimpleObj>.OfLeft(arg1 * val);
+            Func<int, Either<long, My.SimpleObj>> g = val => Either<long, My.SimpleObj>.OfLeft(arg2 * val);
 
             // m >>= (\x -> f x >>= g)  ==  (m >>= f) >>= g
             var left = me.Bind(f).Bind(g);
@@ -229,12 +229,12 @@ namespace Narvalo.Applicative
             return left.Equals(right);
         }
 
-        [Property(DisplayName = "Outcome<T> - Compose is associative (third monad law).")]
+        [Property(DisplayName = "Either<T, My.SimpleObj> - Compose is associative (third monad law).")]
         public static bool Compose_IsAssociative(short arg0, int arg1, long arg2, double arg3)
         {
-            Func<short, Outcome<int>> f = val => Outcome<int>.η(arg1 * val);
-            Func<int, Outcome<long>> g = val => Outcome<long>.η(arg2 * val);
-            Func<long, Outcome<double>> h = val => Outcome<double>.η(arg3 * val);
+            Func<short, Either<int, My.SimpleObj>> f = val => Either<int, My.SimpleObj>.OfLeft(arg1 * val);
+            Func<int, Either<long, My.SimpleObj>> g = val => Either<long, My.SimpleObj>.OfLeft(arg2 * val);
+            Func<long, Either<double, My.SimpleObj>> h = val => Either<double, My.SimpleObj>.OfLeft(arg3 * val);
 
             // f >=> (g >=> h)  ==  (f >=> g) >=> h
             var left = f.Compose(g.Compose(h)).Invoke(arg0);
