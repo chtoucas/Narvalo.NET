@@ -85,18 +85,18 @@ public static partial class My
         public override string ToString() => Value.ToString(CultureInfo.CurrentCulture);
     }
 
-    public sealed class SimpleValue
+    public sealed class SimpleObj
     {
-        public SimpleValue() { Value = "value"; }
+        public SimpleObj() { Value = "value"; }
 
-        public SimpleValue(string value) { Value = value; }
+        public SimpleObj(string value) { Value = value; }
 
         public string Value { get; set; }
     }
 
-    public sealed class ImmutableValue
+    public sealed class ImmutableObj
     {
-        public ImmutableValue(int value)
+        public ImmutableObj(int value)
         {
             Value = value;
         }
@@ -104,13 +104,13 @@ public static partial class My
         public int Value { get; }
     }
 
-    public sealed class EquatableValue : IEquatable<EquatableValue>
+    public sealed class EquatableObj : IEquatable<EquatableObj>
     {
-        public EquatableValue(string value) { Value = value; }
+        public EquatableObj(string value) { Value = value; }
 
         public string Value { get; }
 
-        public bool Equals(EquatableValue other)
+        public bool Equals(EquatableObj other)
         {
             if (ReferenceEquals(other, null)) { return false; }
             return Value == other.Value;
@@ -120,7 +120,7 @@ public static partial class My
         {
             if (ReferenceEquals(obj, null)) { return false; }
             if (ReferenceEquals(obj, this)) { return true; }
-            return Equals((EquatableValue)obj);
+            return Equals((EquatableObj)obj);
         }
 
         public override int GetHashCode() => Value.GetHashCode();

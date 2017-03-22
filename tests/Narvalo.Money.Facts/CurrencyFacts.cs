@@ -247,7 +247,7 @@ namespace Narvalo
             Assert.False(currency.Equals("EUR"));
             Assert.False(currency.Equals(new Object()));
             Assert.False(currency.Equals(new My.SimpleStruct(1)));
-            Assert.False(currency.Equals(new My.SimpleValue()));
+            Assert.False(currency.Equals(new My.SimpleObj()));
         }
 
         //[Fact]
