@@ -15,6 +15,7 @@ namespace Narvalo.Applicative
     using System;
     using System.Collections.Generic;
 
+    using FsCheck.Xunit;
     using Xunit;
 
     public static partial class MaybeFacts
@@ -354,50 +355,64 @@ namespace Narvalo.Applicative
 
         #region Monad Rules
 
-        [Fact(DisplayName = "Maybe<T> - Of is a left identity for Bind.")]
-        public static void Satisfies_FirstMonadRule()
+        [Property(DisplayName = "Maybe<T> - Of is a left identity for Bind (first monad rule).")]
+        public static bool Of_IsLeftIdentityForBind(int arg0, float arg1)
         {
-            // Arrange
-            int value = 1;
-            Func<int, Maybe<long>> binder = val => Maybe.Of((long)2 * val);
+            Func<int, Maybe<float>> binder = val => Maybe.Of(arg1 * val);
 
-            // Act
-            var left = Maybe.Of(value).Bind(binder);
-            var right = binder(value);
+            var left = Maybe.Of(arg0).Bind(binder);
+            var right = binder(arg0);
 
-            // Assert
-            Assert.True(left.Equals(right));
+            return left.Equals(right);
         }
 
-        [Fact(DisplayName = "Maybe<T> - Of is a right identity for Bind.")]
-        public static void Satisfies_SecondMonadRule()
+        [Property(DisplayName = "Maybe<T> - Of is a left identity for Compose (first monad rule).")]
+        public static bool Of_IsLeftIdentityForCompose(int arg0, float arg1)
         {
-            // Arrange
-            Func<int, Maybe<int>> create = val => Maybe.Of(val);
-            var monad = Maybe.Of(1);
+            Func<int, Maybe<int>> of = val => Maybe.Of(val);
+            Func<int, Maybe<float>> fun = val => Maybe.Of(arg1 * val);
 
-            // Act
-            var left = monad.Bind(create);
-            var right = monad;
+            var left = of.Compose(fun).Invoke(arg0);
+            var right = fun(arg0);
 
-            // Assert
-            Assert.True(left.Equals(right));
+            return left.Equals(right);
         }
 
-        [Fact(DisplayName = "Maybe<T> - Bind is associative.")]
-        public static void Satisfies_ThirdMonadRule()
+        [Property(DisplayName = "Maybe<T> - Of is a right identity for Bind (second monad rule).")]
+        public static bool Of_IsRightIdentityForBind(int arg0)
         {
-            // Arrange
-            Maybe<short> m = Maybe.Of((short)1);
-            Func<short, Maybe<int>> f = val => Maybe.Of((int)3 * val);
-            Func<int, Maybe<long>> g = val => Maybe.Of((long)2 * val);
+            var me = Maybe.Of(arg0);
 
-            // Act
-            var left = m.Bind(f).Bind(g);
-            var right = m.Bind(val => f(val).Bind(g));
+            var left = me.Bind(Maybe.Of);
+            var right = me;
 
-            // Assert
-            Assert.True(left.Equals(right));
+            return left.Equals(right);
+        }
+
+        [Property(DisplayName = "Maybe<T> - Of is a right identity for Compose (second monad rule).")]
+        public static bool Of_IsRightIdentityForCompose(int arg0, float arg1)
+        {
+            Func<float, Maybe<float>> of = val => Maybe.Of(val);
+            Func<int, Maybe<float>> fun = val => Maybe.Of(arg1 * val);
+
+            var left = fun.Compose(of).Invoke(arg0);
+            var right = fun(arg0);
+
+            return left.Equals(right);
+        }
+
+        [Property(DisplayName = "Maybe<T> - Bind is associative (third monad law).")]
+        public static bool Bind_IsAssociative(short arg0, int arg1, long arg2)
+        {
+            var me = Maybe.Of(arg0);
+
+            Func<short, Maybe<int>> f = val => Maybe.Of(arg1);
+            Func<int, Maybe<long>> g = val => Maybe.Of(arg2);
+
+            var left = me.Bind(f).Bind(g);
+            var right = me.Bind(val => f(val).Bind(g));
+
+            return left.Equals(right);
         }
 
         [Fact]

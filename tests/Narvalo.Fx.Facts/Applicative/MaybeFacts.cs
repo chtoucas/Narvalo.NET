@@ -5,6 +5,7 @@ namespace Narvalo.Applicative
     using System;
     using System.Collections.Generic;
 
+    using FsCheck.Xunit;
     using Xunit;
 
     public static partial class MaybeFacts

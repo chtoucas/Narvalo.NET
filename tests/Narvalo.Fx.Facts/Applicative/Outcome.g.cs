@@ -15,6 +15,7 @@ namespace Narvalo.Applicative
     using System;
     using System.Collections.Generic;
 
+    using FsCheck.Xunit;
     using Xunit;
 
     public static partial class OutcomeFacts
@@ -162,50 +163,64 @@ namespace Narvalo.Applicative
 
         #region Monad Rules
 
-        [Fact(DisplayName = "Outcome<T> - Of is a left identity for Bind.")]
-        public static void Satisfies_FirstMonadRule()
+        [Property(DisplayName = "Outcome<T> - Of is a left identity for Bind (first monad rule).")]
+        public static bool Of_IsLeftIdentityForBind(int arg0, float arg1)
         {
-            // Arrange
-            int value = 1;
-            Func<int, Outcome<long>> binder = val => Outcome.Of((long)2 * val);
+            Func<int, Outcome<float>> binder = val => Outcome.Of(arg1 * val);
 
-            // Act
-            var left = Outcome.Of(value).Bind(binder);
-            var right = binder(value);
+            var left = Outcome.Of(arg0).Bind(binder);
+            var right = binder(arg0);
 
-            // Assert
-            Assert.True(left.Equals(right));
+            return left.Equals(right);
         }
 
-        [Fact(DisplayName = "Outcome<T> - Of is a right identity for Bind.")]
-        public static void Satisfies_SecondMonadRule()
+        [Property(DisplayName = "Outcome<T> - Of is a left identity for Compose (first monad rule).")]
+        public static bool Of_IsLeftIdentityForCompose(int arg0, float arg1)
         {
-            // Arrange
-            Func<int, Outcome<int>> create = val => Outcome.Of(val);
-            var monad = Outcome.Of(1);
+            Func<int, Outcome<int>> of = val => Outcome.Of(val);
+            Func<int, Outcome<float>> fun = val => Outcome.Of(arg1 * val);
 
-            // Act
-            var left = monad.Bind(create);
-            var right = monad;
+            var left = of.Compose(fun).Invoke(arg0);
+            var right = fun(arg0);
 
-            // Assert
-            Assert.True(left.Equals(right));
+            return left.Equals(right);
         }
 
-        [Fact(DisplayName = "Outcome<T> - Bind is associative.")]
-        public static void Satisfies_ThirdMonadRule()
+        [Property(DisplayName = "Outcome<T> - Of is a right identity for Bind (second monad rule).")]
+        public static bool Of_IsRightIdentityForBind(int arg0)
         {
-            // Arrange
-            Outcome<short> m = Outcome.Of((short)1);
-            Func<short, Outcome<int>> f = val => Outcome.Of((int)3 * val);
-            Func<int, Outcome<long>> g = val => Outcome.Of((long)2 * val);
+            var me = Outcome.Of(arg0);
 
-            // Act
-            var left = m.Bind(f).Bind(g);
-            var right = m.Bind(val => f(val).Bind(g));
+            var left = me.Bind(Outcome.Of);
+            var right = me;
 
-            // Assert
-            Assert.True(left.Equals(right));
+            return left.Equals(right);
+        }
+
+        [Property(DisplayName = "Outcome<T> - Of is a right identity for Compose (second monad rule).")]
+        public static bool Of_IsRightIdentityForCompose(int arg0, float arg1)
+        {
+            Func<float, Outcome<float>> of = val => Outcome.Of(val);
+            Func<int, Outcome<float>> fun = val => Outcome.Of(arg1 * val);
+
+            var left = fun.Compose(of).Invoke(arg0);
+            var right = fun(arg0);
+
+            return left.Equals(right);
+        }
+
+        [Property(DisplayName = "Outcome<T> - Bind is associative (third monad law).")]
+        public static bool Bind_IsAssociative(short arg0, int arg1, long arg2)
+        {
+            var me = Outcome.Of(arg0);
+
+            Func<short, Outcome<int>> f = val => Outcome.Of(arg1);
+            Func<int, Outcome<long>> g = val => Outcome.Of(arg2);
+
+            var left = me.Bind(f).Bind(g);
+            var right = me.Bind(val => f(val).Bind(g));
+
+            return left.Equals(right);
         }
 
         #endregion
