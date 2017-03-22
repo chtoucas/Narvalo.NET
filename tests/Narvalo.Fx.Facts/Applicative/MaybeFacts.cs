@@ -129,6 +129,35 @@ namespace Narvalo.Applicative
             Assert.Throws<ArgumentNullException>(() => None.Contains(value, null));
         }
 
+        [Fact]
+        public static void Contains_Succeeds()
+        {
+            var value = new My.SimpleObj();
+            var some = Maybe.Of(value);
+
+            Assert.True(Maybe.Of(1).Contains(1), "Value type.");
+            Assert.True(some.Contains(value), "Reference type.");
+        }
+
+        [Fact]
+        public static void Contains_Succeeds_ForTypeImplementingStructuralEquality()
+        {
+            var some = Maybe.Of(Tuple.Create("value"));
+
+            Assert.True(some.Contains(Tuple.Create("value")), "References differ but we have structural equality.");
+        }
+
+        [Fact]
+        public static void Contains_Fails()
+        {
+            var some = Maybe.Of(new My.SimpleObj());
+            var other = new My.SimpleObj("other");
+
+            Assert.False(Maybe.Of(1).Contains(2));
+            Assert.False(some.Contains(other));
+            Assert.False(some.Contains(new My.SimpleObj()), "References differ.");
+        }
+
         #endregion
 
         #region Match()
@@ -193,6 +222,42 @@ namespace Narvalo.Applicative
             Assert.Throws<ArgumentNullException>(() => None.Do(val => { }, null));
         }
 
+        [Fact]
+        public static void Do_InvokesOnSome_IfSome()
+        {
+            // Arrange
+            var some = Maybe.Of(new My.SimpleObj());
+            var onSomeWasCalled = false;
+            var onNoneWasCalled = false;
+            Action<My.SimpleObj> onSome = _ => onSomeWasCalled = true;
+            Action onNone = () => onNoneWasCalled = true;
+
+            // Act
+            some.Do(onSome, onNone);
+
+            // Assert
+            Assert.True(onSomeWasCalled);
+            Assert.False(onNoneWasCalled);
+        }
+
+        [Fact]
+        public static void Do_InvokesOnNone_IfNone()
+        {
+            // Arrange
+            var none = Maybe<My.SimpleObj>.None;
+            var onSomeWasCalled = false;
+            var onNoneWasCalled = false;
+            Action<My.SimpleObj> onSome = _ => onSomeWasCalled = true;
+            Action onNone = () => onNoneWasCalled = true;
+
+            // Act
+            none.Do(onSome, onNone);
+
+            // Assert
+            Assert.False(onSomeWasCalled);
+            Assert.True(onNoneWasCalled);
+        }
+
         #endregion
 
         #region OnSome()
@@ -204,6 +269,36 @@ namespace Narvalo.Applicative
             Assert.Throws<ArgumentNullException>(() => None.OnSome(null));
         }
 
+        [Fact]
+        public static void OnSome_InvokesAction_IfSome()
+        {
+            // Arrange
+            var some = Maybe.Of(new My.SimpleObj());
+            var wasCalled = false;
+            Action<My.SimpleObj> op = _ => wasCalled = true;
+
+            // Act
+            some.OnSome(op);
+
+            // Assert
+            Assert.True(wasCalled);
+        }
+
+        [Fact]
+        public static void OnSome_DoesNotInvokeAction_IfNone()
+        {
+            // Arrange
+            var none = Maybe<My.SimpleObj>.None;
+            var wasCalled = false;
+            Action<My.SimpleObj> op = _ => wasCalled = true;
+
+            // Act
+            none.OnSome(op);
+
+            // Assert
+            Assert.False(wasCalled);
+        }
+
         #endregion
 
         #region OnNone()
@@ -213,6 +308,36 @@ namespace Narvalo.Applicative
         {
             Assert.Throws<ArgumentNullException>(() => Some.OnNone(null));
             Assert.Throws<ArgumentNullException>(() => None.OnNone(null));
+        }
+
+        [Fact]
+        public static void OnNone_InvokesAction_IfNone()
+        {
+            // Arrange
+            var none = Maybe<My.SimpleObj>.None;
+            var wasCalled = false;
+            Action op = () => wasCalled = true;
+
+            // Act
+            none.OnNone(op);
+
+            // Assert
+            Assert.True(wasCalled);
+        }
+
+        [Fact]
+        public static void OnNone_DoesNotInvokeAction_IfSome()
+        {
+            // Arrange
+            var some = Maybe.Of(new My.SimpleObj());
+            var wasCalled = false;
+            Action op = () => wasCalled = true;
+
+            // Act
+            some.OnNone(op);
+
+            // Assert
+            Assert.False(wasCalled);
         }
 
         #endregion
