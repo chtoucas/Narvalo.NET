@@ -370,7 +370,7 @@ namespace <#= Namespace #>
         [Property(DisplayName = "<#= Name #><T<#= RTDecl #>> - <#= ReturnName #> is a left identity for Compose (first monad rule).")]
         public static bool <#= ReturnName #>_IsLeftIdentityForCompose(int arg0, float arg1)
         {
-            Func<int, <#= Name #><int>> of = val => <#= Name #>.<#= ReturnName #>(val);
+            Func<int, <#= Name #><int>> of = <#= Name #>.<#= ReturnName #>;
             Func<int, <#= Name #><float>> fun = val => <#= Name #>.<#= ReturnName #>(arg1 * val);
 
             var left = of.Compose(fun).Invoke(arg0);
@@ -393,7 +393,7 @@ namespace <#= Namespace #>
         [Property(DisplayName = "<#= Name #><T<#= RTDecl #>> - <#= ReturnName #> is a right identity for Compose (second monad rule).")]
         public static bool <#= ReturnName #>_IsRightIdentityForCompose(int arg0, float arg1)
         {
-            Func<float, <#= Name #><float>> of = val => <#= Name #>.<#= ReturnName #>(val);
+            Func<float, <#= Name #><float>> of = <#= Name #>.<#= ReturnName #>;
             Func<int, <#= Name #><float>> fun = val => <#= Name #>.<#= ReturnName #>(arg1 * val);
 
             var left = fun.Compose(of).Invoke(arg0);
@@ -407,8 +407,8 @@ namespace <#= Namespace #>
         {
             var me = <#= Name #>.Of(arg0);
 
-            Func<short, <#= Name #><int>> f = val => <#= Name #>.<#= ReturnName #>(arg1);
-            Func<int, <#= Name #><long>> g = val => <#= Name #>.<#= ReturnName #>(arg2);
+            Func<short, <#= Name #><int>> f = val => <#= Name #>.<#= ReturnName #>(arg1 * val);
+            Func<int, <#= Name #><long>> g = val => <#= Name #>.<#= ReturnName #>(arg2 * val);
 
             var left = me.Bind(f).Bind(g);
             var right = me.Bind(val => f(val).Bind(g));

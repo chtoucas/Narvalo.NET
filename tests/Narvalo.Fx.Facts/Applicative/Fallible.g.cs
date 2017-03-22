@@ -177,7 +177,7 @@ namespace Narvalo.Applicative
         [Property(DisplayName = "Fallible<T> - Of is a left identity for Compose (first monad rule).")]
         public static bool Of_IsLeftIdentityForCompose(int arg0, float arg1)
         {
-            Func<int, Fallible<int>> of = val => Fallible.Of(val);
+            Func<int, Fallible<int>> of = Fallible.Of;
             Func<int, Fallible<float>> fun = val => Fallible.Of(arg1 * val);
 
             var left = of.Compose(fun).Invoke(arg0);
@@ -200,7 +200,7 @@ namespace Narvalo.Applicative
         [Property(DisplayName = "Fallible<T> - Of is a right identity for Compose (second monad rule).")]
         public static bool Of_IsRightIdentityForCompose(int arg0, float arg1)
         {
-            Func<float, Fallible<float>> of = val => Fallible.Of(val);
+            Func<float, Fallible<float>> of = Fallible.Of;
             Func<int, Fallible<float>> fun = val => Fallible.Of(arg1 * val);
 
             var left = fun.Compose(of).Invoke(arg0);
@@ -214,8 +214,8 @@ namespace Narvalo.Applicative
         {
             var me = Fallible.Of(arg0);
 
-            Func<short, Fallible<int>> f = val => Fallible.Of(arg1);
-            Func<int, Fallible<long>> g = val => Fallible.Of(arg2);
+            Func<short, Fallible<int>> f = val => Fallible.Of(arg1 * val);
+            Func<int, Fallible<long>> g = val => Fallible.Of(arg2 * val);
 
             var left = me.Bind(f).Bind(g);
             var right = me.Bind(val => f(val).Bind(g));

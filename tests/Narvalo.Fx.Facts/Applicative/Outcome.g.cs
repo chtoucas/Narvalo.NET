@@ -177,7 +177,7 @@ namespace Narvalo.Applicative
         [Property(DisplayName = "Outcome<T> - Of is a left identity for Compose (first monad rule).")]
         public static bool Of_IsLeftIdentityForCompose(int arg0, float arg1)
         {
-            Func<int, Outcome<int>> of = val => Outcome.Of(val);
+            Func<int, Outcome<int>> of = Outcome.Of;
             Func<int, Outcome<float>> fun = val => Outcome.Of(arg1 * val);
 
             var left = of.Compose(fun).Invoke(arg0);
@@ -200,7 +200,7 @@ namespace Narvalo.Applicative
         [Property(DisplayName = "Outcome<T> - Of is a right identity for Compose (second monad rule).")]
         public static bool Of_IsRightIdentityForCompose(int arg0, float arg1)
         {
-            Func<float, Outcome<float>> of = val => Outcome.Of(val);
+            Func<float, Outcome<float>> of = Outcome.Of;
             Func<int, Outcome<float>> fun = val => Outcome.Of(arg1 * val);
 
             var left = fun.Compose(of).Invoke(arg0);
@@ -214,8 +214,8 @@ namespace Narvalo.Applicative
         {
             var me = Outcome.Of(arg0);
 
-            Func<short, Outcome<int>> f = val => Outcome.Of(arg1);
-            Func<int, Outcome<long>> g = val => Outcome.Of(arg2);
+            Func<short, Outcome<int>> f = val => Outcome.Of(arg1 * val);
+            Func<int, Outcome<long>> g = val => Outcome.Of(arg2 * val);
 
             var left = me.Bind(f).Bind(g);
             var right = me.Bind(val => f(val).Bind(g));

@@ -369,7 +369,7 @@ namespace Narvalo.Applicative
         [Property(DisplayName = "Maybe<T> - Of is a left identity for Compose (first monad rule).")]
         public static bool Of_IsLeftIdentityForCompose(int arg0, float arg1)
         {
-            Func<int, Maybe<int>> of = val => Maybe.Of(val);
+            Func<int, Maybe<int>> of = Maybe.Of;
             Func<int, Maybe<float>> fun = val => Maybe.Of(arg1 * val);
 
             var left = of.Compose(fun).Invoke(arg0);
@@ -392,7 +392,7 @@ namespace Narvalo.Applicative
         [Property(DisplayName = "Maybe<T> - Of is a right identity for Compose (second monad rule).")]
         public static bool Of_IsRightIdentityForCompose(int arg0, float arg1)
         {
-            Func<float, Maybe<float>> of = val => Maybe.Of(val);
+            Func<float, Maybe<float>> of = Maybe.Of;
             Func<int, Maybe<float>> fun = val => Maybe.Of(arg1 * val);
 
             var left = fun.Compose(of).Invoke(arg0);
@@ -406,8 +406,8 @@ namespace Narvalo.Applicative
         {
             var me = Maybe.Of(arg0);
 
-            Func<short, Maybe<int>> f = val => Maybe.Of(arg1);
-            Func<int, Maybe<long>> g = val => Maybe.Of(arg2);
+            Func<short, Maybe<int>> f = val => Maybe.Of(arg1 * val);
+            Func<int, Maybe<long>> g = val => Maybe.Of(arg2 * val);
 
             var left = me.Bind(f).Bind(g);
             var right = me.Bind(val => f(val).Bind(g));
