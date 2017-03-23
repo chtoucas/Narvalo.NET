@@ -4,10 +4,9 @@ namespace Narvalo.Linq
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     using Xunit;
-
-    using Assert = Narvalo.AssertExtended;
 
     public static class SelectAnyFacts
     {
@@ -24,12 +23,25 @@ namespace Narvalo.Linq
         }
 
         [Fact]
-        public static void IsDeferred()
+        public static void IsDeferred_1()
         {
-            Func<int, int?> selector = val => val;
+            bool wasCalled = false;
+            Func<string> fun = () => { wasCalled = true; return String.Empty; };
 
-            Assert.IsDeferred(src => src.SelectAny(selector));
-            Assert.IsDeferred(src => src.SelectAny(val => String.Empty));
+            var q = Enumerable.Repeat(fun, 1).SelectAny(val => val());
+
+            Assert.False(wasCalled);
+        }
+
+        [Fact]
+        public static void IsDeferred_2()
+        {
+            bool wasCalled = false;
+            Func<int?> fun = () => { wasCalled = true; return 1; };
+
+            var q = Enumerable.Repeat(fun, 1).SelectAny(val => val());
+
+            Assert.False(wasCalled);
         }
     }
 }

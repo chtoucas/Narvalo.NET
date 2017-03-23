@@ -16,6 +16,11 @@ eInputs.cache". Le processus ne peut pas accéder au fichier 'I:\github\Narvalo.
 he', car il est en cours d'utilisation par un autre processus. [I:\github\Narvalo.NET\tests\Narvalo.Fx.Facts\Narvalo.Fx
 .Facts.csproj]
 ```
+- Sometimes FsCheck fails with:
+```
+C:\Users\Kurt\Projects\FsCheck\FsCheck\src\FsCheck\Gen.fs(592):
+---- System.ArgumentException : Un élément avec la même clé a déjà été ajouté.
+```
 - Review localization for Narvalo.Build, Narvalo.Mvp, Narvalo.Mvp.Web
   and Narvalo.Web.
 - [Low] Automatically create the assembly infos from the NuGet spec.

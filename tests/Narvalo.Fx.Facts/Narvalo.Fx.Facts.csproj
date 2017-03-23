@@ -76,6 +76,7 @@
     </Compile>
     <Compile Include="Applicative\MaybeFacts.cs" />
     <Compile Include="Applicative\QullableFacts.cs" />
+    <Compile Include="Linq\AppendPrependFacts.cs" />
     <Compile Include="Linq\_Externs\AppendPrependFacts.cs" />
     <Compile Include="Linq\_Externs\EnumerableTests.cs" />
     <Compile Include="Linq\SelectAnyFacts.cs" />

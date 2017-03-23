@@ -11,10 +11,11 @@ namespace Narvalo
         #region State()
 
         [Fact]
-        public static void State_DoesNotThrow_ForTrue_1() => Require.State(true);
-
-        [Fact]
-        public static void State_DoesNotThrow_ForTrue_2() => Require.State(true, "My message");
+        public static void State_DoesNotThrow_ForTrue()
+        {
+            Require.State(true);
+            Require.State(true, "My message");
+        }
 
         [Fact]
         public static void State_ThrowsInvalidOperationException_ForFalse_1()
@@ -41,10 +42,11 @@ namespace Narvalo
         #region True()
 
         [Fact]
-        public static void True_DoesNotThrow_ForTrue_1() => Require.True(true, "paramName");
-
-        [Fact]
-        public static void True_DoesNotThrow_ForTrue_2() => Require.True(true, "paramName", "My message");
+        public static void True_DoesNotThrow_ForTrue()
+        {
+            Require.True(true, "paramName");
+            Require.True(true, "paramName", "My message");
+        }
 
         [Fact]
         public static void True_ThrowsArgumentException_ForFalse_1()
@@ -87,10 +89,11 @@ namespace Narvalo
         #region Range()
 
         [Fact]
-        public static void Range_DoesNotThrow_ForTrue_1() => Require.Range(true, "paramName");
-
-        [Fact]
-        public static void Range_DoesNotThrow_ForTrue_2() => Require.Range(true, "paramName", "My message");
+        public static void Range_DoesNotThrow_ForTrue()
+        {
+            Require.Range(true, "paramName");
+            Require.Range(true, "paramName", "My message");
+        }
 
         [Fact]
         public static void Range_ThrowsArgumentOutOfRangeException_ForFalse_1()
