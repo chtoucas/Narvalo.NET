@@ -25,7 +25,7 @@ namespace Narvalo.Applicative
         #region Repeat()
 
         [Fact]
-        public static void Repeat_ThrowsArgumentOutOfRangeException_ForNegativeCount()
+        public static void Repeat_Guards()
         {
             var source = Outcome<int>.η(1);
 
@@ -37,53 +37,26 @@ namespace Narvalo.Applicative
         #region Zip()
 
         [Fact]
-        public static void Zip2_ThrowsArgumentNullException_ForNullZipper()
-        {
-            var first = Outcome<int>.η(1);
-            var second = Outcome<int>.η(2);
-            Func<int, int, int> zipper = null;
-
-            Assert.Throws<ArgumentNullException>(() => first.Zip(second, zipper));
-            Assert.Throws<ArgumentNullException>(() => OutcomeExtensions.Zip(first, second, zipper));
-        }
-
-        [Fact]
-        public static void Zip3_ThrowsArgumentNullException_ForNullZipper()
-        {
-            var first = Outcome<int>.η(1);
-            var second = Outcome<int>.η(2);
-            var third = Outcome<int>.η(3);
-            Func<int, int, int, int> zipper = null;
-
-            Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, zipper));
-            Assert.Throws<ArgumentNullException>(() => OutcomeExtensions.Zip(first, second, third, zipper));
-        }
-
-        [Fact]
-        public static void Zip4_ThrowsArgumentNullException_ForNullZipper()
+        public static void Zip_Guards()
         {
             var first = Outcome<int>.η(1);
             var second = Outcome<int>.η(2);
             var third = Outcome<int>.η(3);
             var fourth = Outcome<int>.η(4);
-            Func<int, int, int, int, int> zipper = null;
+            var fifth = Outcome<int>.η(5);
+            Func<int, int, int> zipper2 = null;
+            Func<int, int, int, int> zipper3 = null;
+            Func<int, int, int, int, int> zipper4 = null;
+            Func<int, int, int, int, int, int> zipper5 = null;
 
-            Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, fourth, zipper));
-            Assert.Throws<ArgumentNullException>(() => OutcomeExtensions.Zip(first, second, third, fourth, zipper));
-        }
-
-        [Fact]
-        public static void Zip5_ThrowsArgumentNullException_ForNullZipper()
-        {
-            var first = Outcome<int>.η(1);
-            var second = Outcome<int>.η(2);
-            var third = Outcome<int>.η(3);
-            var fourth = Outcome<int>.η(4);
-            var fifth = Outcome<int>.η(4);
-            Func<int, int, int, int, int, int> zipper = null;
-
-            Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, fourth, fifth, zipper));
-            Assert.Throws<ArgumentNullException>(() => OutcomeExtensions.Zip(first, second, third, fourth, fifth, zipper));
+            Assert.Throws<ArgumentNullException>(() => first.Zip(second, zipper2));
+            Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, zipper3));
+            Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, fourth, zipper4));
+            Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, fourth, fifth, zipper5));
+            Assert.Throws<ArgumentNullException>(() => OutcomeExtensions.Zip(first, second, zipper2));
+            Assert.Throws<ArgumentNullException>(() => OutcomeExtensions.Zip(first, second, third, zipper3));
+            Assert.Throws<ArgumentNullException>(() => OutcomeExtensions.Zip(first, second, third, fourth, zipper4));
+            Assert.Throws<ArgumentNullException>(() => OutcomeExtensions.Zip(first, second, third, fourth, fifth, zipper5));
         }
 
         #endregion
@@ -91,10 +64,10 @@ namespace Narvalo.Applicative
         #region Select()
 
         [Fact]
-        public static void Select_ThrowsArgumentNullException_ForNullSelector()
+        public static void Select_Guards()
         {
             var source = Outcome<int>.η(1);
-            Func<int, int> selector = null;
+            Func<int, long> selector = null;
 
             Assert.Throws<ArgumentNullException>(() => source.Select(selector));
             Assert.Throws<ArgumentNullException>(() => OutcomeExtensions.Select(source, selector));
@@ -105,26 +78,17 @@ namespace Narvalo.Applicative
         #region SelectMany()
 
         [Fact]
-        public static void SelectMany_ThrowsArgumentNullException_ForNullValueSelector()
+        public static void SelectMany_Guards()
         {
-            var source = Outcome<int>.η(1);
-            Func<int, Outcome<int>> valueSelector = null;
-            Func<int, int, int> resultSelector = (i, j) => i + j;
-
-            Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, resultSelector));
-            Assert.Throws<ArgumentNullException>(() => OutcomeExtensions.SelectMany(source, valueSelector, resultSelector));
-        }
-
-        [Fact]
-        public static void SelectMany_ThrowsArgumentNullException_ForNullResultSelector()
-        {
-            var source = Outcome<int>.η(1);
+            var source = Outcome<short>.η(1);
             var middle = Outcome<int>.η(2);
-            Func<int, Outcome<int>> valueSelector = _ => middle;
-            Func<int, int, int> resultSelector = null;
+            Func<short, Outcome<int>> valueSelector =  i => Outcome<int>.η(i);
+            Func<short, int, long> resultSelector = (i, j) => i + j;
 
-            Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, resultSelector));
-            Assert.Throws<ArgumentNullException>(() => OutcomeExtensions.SelectMany(source, valueSelector, resultSelector));
+            Assert.Throws<ArgumentNullException>(() => source.SelectMany(null, resultSelector));
+            Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, (Func<short, int, long>)null));
+            Assert.Throws<ArgumentNullException>(() => OutcomeExtensions.SelectMany(source, null, resultSelector));
+            Assert.Throws<ArgumentNullException>(() => OutcomeExtensions.SelectMany(source, valueSelector, (Func<short, int, long>)null));
         }
 
         #endregion

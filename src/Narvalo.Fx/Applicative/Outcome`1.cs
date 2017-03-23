@@ -87,6 +87,8 @@ namespace Narvalo.Applicative
             return IsSuccess ? Value : valueFactory();
         }
 
+        public T ValueOrThrow() => IsSuccess ? Value : throw new InvalidOperationException(Error);
+
         public T ValueOrThrow(Func<string, Exception> exceptionFactory)
         {
             Require.NotNull(exceptionFactory, nameof(exceptionFactory));

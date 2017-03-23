@@ -25,7 +25,7 @@ namespace Narvalo.Applicative
         #region Repeat()
 
         [Fact]
-        public static void Repeat_ThrowsArgumentOutOfRangeException_ForNegativeCount()
+        public static void Repeat_Guards()
         {
             var source = Maybe<int>.η(1);
 
@@ -37,53 +37,26 @@ namespace Narvalo.Applicative
         #region Zip()
 
         [Fact]
-        public static void Zip2_ThrowsArgumentNullException_ForNullZipper()
-        {
-            var first = Maybe<int>.η(1);
-            var second = Maybe<int>.η(2);
-            Func<int, int, int> zipper = null;
-
-            Assert.Throws<ArgumentNullException>(() => first.Zip(second, zipper));
-            Assert.Throws<ArgumentNullException>(() => Maybe.Zip(first, second, zipper));
-        }
-
-        [Fact]
-        public static void Zip3_ThrowsArgumentNullException_ForNullZipper()
-        {
-            var first = Maybe<int>.η(1);
-            var second = Maybe<int>.η(2);
-            var third = Maybe<int>.η(3);
-            Func<int, int, int, int> zipper = null;
-
-            Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, zipper));
-            Assert.Throws<ArgumentNullException>(() => Maybe.Zip(first, second, third, zipper));
-        }
-
-        [Fact]
-        public static void Zip4_ThrowsArgumentNullException_ForNullZipper()
+        public static void Zip_Guards()
         {
             var first = Maybe<int>.η(1);
             var second = Maybe<int>.η(2);
             var third = Maybe<int>.η(3);
             var fourth = Maybe<int>.η(4);
-            Func<int, int, int, int, int> zipper = null;
+            var fifth = Maybe<int>.η(5);
+            Func<int, int, int> zipper2 = null;
+            Func<int, int, int, int> zipper3 = null;
+            Func<int, int, int, int, int> zipper4 = null;
+            Func<int, int, int, int, int, int> zipper5 = null;
 
-            Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, fourth, zipper));
-            Assert.Throws<ArgumentNullException>(() => Maybe.Zip(first, second, third, fourth, zipper));
-        }
-
-        [Fact]
-        public static void Zip5_ThrowsArgumentNullException_ForNullZipper()
-        {
-            var first = Maybe<int>.η(1);
-            var second = Maybe<int>.η(2);
-            var third = Maybe<int>.η(3);
-            var fourth = Maybe<int>.η(4);
-            var fifth = Maybe<int>.η(4);
-            Func<int, int, int, int, int, int> zipper = null;
-
-            Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, fourth, fifth, zipper));
-            Assert.Throws<ArgumentNullException>(() => Maybe.Zip(first, second, third, fourth, fifth, zipper));
+            Assert.Throws<ArgumentNullException>(() => first.Zip(second, zipper2));
+            Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, zipper3));
+            Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, fourth, zipper4));
+            Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, fourth, fifth, zipper5));
+            Assert.Throws<ArgumentNullException>(() => Maybe.Zip(first, second, zipper2));
+            Assert.Throws<ArgumentNullException>(() => Maybe.Zip(first, second, third, zipper3));
+            Assert.Throws<ArgumentNullException>(() => Maybe.Zip(first, second, third, fourth, zipper4));
+            Assert.Throws<ArgumentNullException>(() => Maybe.Zip(first, second, third, fourth, fifth, zipper5));
         }
 
         #endregion
@@ -91,10 +64,10 @@ namespace Narvalo.Applicative
         #region Select()
 
         [Fact]
-        public static void Select_ThrowsArgumentNullException_ForNullSelector()
+        public static void Select_Guards()
         {
             var source = Maybe<int>.η(1);
-            Func<int, int> selector = null;
+            Func<int, long> selector = null;
 
             Assert.Throws<ArgumentNullException>(() => source.Select(selector));
             Assert.Throws<ArgumentNullException>(() => Maybe.Select(source, selector));
@@ -105,13 +78,12 @@ namespace Narvalo.Applicative
         #region Where()
 
         [Fact]
-        public static void Where_ThrowsArgumentNullException_ForNullPredicate()
+        public static void Where_Guards()
         {
             var source = Maybe<int>.η(1);
-            Func<int, bool> predicate = null;
 
-            Assert.Throws<ArgumentNullException>(() => source.Where(predicate));
-            Assert.Throws<ArgumentNullException>(() => Maybe.Where(source, predicate));
+            Assert.Throws<ArgumentNullException>(() => source.Where(null));
+            Assert.Throws<ArgumentNullException>(() => Maybe.Where(source, null));
         }
 
         #endregion
@@ -119,26 +91,17 @@ namespace Narvalo.Applicative
         #region SelectMany()
 
         [Fact]
-        public static void SelectMany_ThrowsArgumentNullException_ForNullValueSelector()
+        public static void SelectMany_Guards()
         {
-            var source = Maybe<int>.η(1);
-            Func<int, Maybe<int>> valueSelector = null;
-            Func<int, int, int> resultSelector = (i, j) => i + j;
-
-            Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, resultSelector));
-            Assert.Throws<ArgumentNullException>(() => Maybe.SelectMany(source, valueSelector, resultSelector));
-        }
-
-        [Fact]
-        public static void SelectMany_ThrowsArgumentNullException_ForNullResultSelector()
-        {
-            var source = Maybe<int>.η(1);
+            var source = Maybe<short>.η(1);
             var middle = Maybe<int>.η(2);
-            Func<int, Maybe<int>> valueSelector = _ => middle;
-            Func<int, int, int> resultSelector = null;
+            Func<short, Maybe<int>> valueSelector =  i => Maybe<int>.η(i);
+            Func<short, int, long> resultSelector = (i, j) => i + j;
 
-            Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, resultSelector));
-            Assert.Throws<ArgumentNullException>(() => Maybe.SelectMany(source, valueSelector, resultSelector));
+            Assert.Throws<ArgumentNullException>(() => source.SelectMany(null, resultSelector));
+            Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, (Func<short, int, long>)null));
+            Assert.Throws<ArgumentNullException>(() => Maybe.SelectMany(source, null, resultSelector));
+            Assert.Throws<ArgumentNullException>(() => Maybe.SelectMany(source, valueSelector, (Func<short, int, long>)null));
         }
 
         #endregion
@@ -146,64 +109,30 @@ namespace Narvalo.Applicative
         #region Join()
 
         [Fact]
-        public static void Join_ThrowsArgumentNullException_ForNullResultSelector()
-        {
-            var source = Maybe<int>.η(1);
-            var inner = Maybe<int>.η(2);
-            Func<int, int> outerKeySelector = val => val;
-            Func<int, int> innerKeySelector = val => val;
-            Func<int, int, int> resultSelector = null;
-
-            Assert.Throws<ArgumentNullException>(
-                () => source.Join(inner, outerKeySelector, innerKeySelector, resultSelector));
-            Assert.Throws<ArgumentNullException>(
-                () => Maybe.Join(source, inner, outerKeySelector, innerKeySelector, resultSelector));
-        }
-
-        [Fact]
-        public static void Join_ThrowsArgumentNullException_ForNullOuterKeySelector()
-        {
-            var source = Maybe<int>.η(1);
-            var inner = Maybe<int>.η(2);
-            Func<int, int> outerKeySelector = null;
-            Func<int, int> innerKeySelector = val => val;
-            Func<int, int, int> resultSelector = (i, j) => i + j;
-
-            Assert.Throws<ArgumentNullException>(
-                () => source.Join(inner, outerKeySelector, innerKeySelector, resultSelector));
-            Assert.Throws<ArgumentNullException>(
-                () => Maybe.Join(source, inner, outerKeySelector, innerKeySelector, resultSelector));
-        }
-
-        [Fact]
-        public static void Join_ThrowsArgumentNullException_ForNullInnerKeySelector()
-        {
-            var source = Maybe<int>.η(1);
-            var inner = Maybe<int>.η(2);
-            Func<int, int> outerKeySelector = val => val;
-            Func<int, int> innerKeySelector = null;
-            Func<int, int, int> resultSelector = (i, j) => i + j;
-
-            Assert.Throws<ArgumentNullException>(
-                () => source.Join(inner, outerKeySelector, innerKeySelector, resultSelector));
-            Assert.Throws<ArgumentNullException>(
-                () => Maybe.Join(source, inner, outerKeySelector, innerKeySelector, resultSelector));
-        }
-
-        [Fact]
-        public static void Join_ThrowsArgumentNullException_ForNullComparer()
+        public static void Join_Guards()
         {
             var source = Maybe<int>.η(1);
             var inner = Maybe<int>.η(2);
             Func<int, int> outerKeySelector = val => val;
             Func<int, int> innerKeySelector = val => val;
             Func<int, int, int> resultSelector = (i, j) => i + j;
-            IEqualityComparer<int> comparer = null;
 
             Assert.Throws<ArgumentNullException>(
-                () => source.Join(inner, outerKeySelector, innerKeySelector, resultSelector, comparer));
+                () => source.Join(inner, (Func<int, int>)null, innerKeySelector, resultSelector));
             Assert.Throws<ArgumentNullException>(
-                () => Maybe.Join(source, inner, outerKeySelector, innerKeySelector, resultSelector, comparer));
+                () => source.Join(inner, outerKeySelector, (Func<int, int>)null, resultSelector));
+            Assert.Throws<ArgumentNullException>(
+                () => source.Join(inner, outerKeySelector, innerKeySelector, (Func<int, int, int>)null));
+            Assert.Throws<ArgumentNullException>(
+                () => source.Join(inner, outerKeySelector, innerKeySelector, resultSelector, null));
+            Assert.Throws<ArgumentNullException>(
+                () => Maybe.Join(source, inner, (Func<int, int>)null, innerKeySelector, resultSelector));
+            Assert.Throws<ArgumentNullException>(
+                () => Maybe.Join(source, inner, outerKeySelector, (Func<int, int>)null, resultSelector));
+            Assert.Throws<ArgumentNullException>(
+                () => Maybe.Join(source, inner, outerKeySelector, innerKeySelector, (Func<int, int, int>)null));
+            Assert.Throws<ArgumentNullException>(
+                () => Maybe.Join(source, inner, outerKeySelector, innerKeySelector, resultSelector, null));
         }
 
         #endregion
@@ -211,64 +140,30 @@ namespace Narvalo.Applicative
         #region GroupJoin()
 
         [Fact]
-        public static void GroupJoin_ThrowsArgumentNullException_ForNullResultSelector()
-        {
-            var source = Maybe<int>.η(1);
-            var inner = Maybe<int>.η(2);
-            Func<int, int> outerKeySelector = val => val;
-            Func<int, int> innerKeySelector = val => val;
-            Func<int, Maybe<int>, int> resultSelector = null;
-
-            Assert.Throws<ArgumentNullException>(
-                () => source.GroupJoin(inner, outerKeySelector, innerKeySelector, resultSelector));
-            Assert.Throws<ArgumentNullException>(
-                () => Maybe.GroupJoin(source, inner, outerKeySelector, innerKeySelector, resultSelector));
-        }
-
-        [Fact]
-        public static void GroupJoin_ThrowsArgumentNullException_ForNullOuterKeySelector()
-        {
-            var source = Maybe<int>.η(1);
-            var inner = Maybe<int>.η(2);
-            Func<int, int> outerKeySelector = null;
-            Func<int, int> innerKeySelector = val => val;
-            Func<int, Maybe<int>, int> resultSelector = (i, m) => 1;
-
-            Assert.Throws<ArgumentNullException>(
-                () => source.GroupJoin(inner, outerKeySelector, innerKeySelector, resultSelector));
-            Assert.Throws<ArgumentNullException>(
-                () => Maybe.GroupJoin(source, inner, outerKeySelector, innerKeySelector, resultSelector));
-        }
-
-        [Fact]
-        public static void GroupJoin_ThrowsArgumentNullException_ForNullInnerKeySelector()
-        {
-            var source = Maybe<int>.η(1);
-            var inner = Maybe<int>.η(2);
-            Func<int, int> outerKeySelector = val => val;
-            Func<int, int> innerKeySelector = null;
-            Func<int, Maybe<int>, int> resultSelector = (i, m) => 1;
-
-            Assert.Throws<ArgumentNullException>(
-                () => source.GroupJoin(inner, outerKeySelector, innerKeySelector, resultSelector));
-            Assert.Throws<ArgumentNullException>(
-                () => Maybe.GroupJoin(source, inner, outerKeySelector, innerKeySelector, resultSelector));
-        }
-
-        [Fact]
-        public static void GroupJoin_ThrowsArgumentNullException_ForNullComparer()
+        public static void GroupJoin_Guards()
         {
             var source = Maybe<int>.η(1);
             var inner = Maybe<int>.η(2);
             Func<int, int> outerKeySelector = val => val;
             Func<int, int> innerKeySelector = val => val;
             Func<int, Maybe<int>, int> resultSelector = (i, m) => 1;
-            IEqualityComparer<int> comparer = null;
 
             Assert.Throws<ArgumentNullException>(
-                () => source.GroupJoin(inner, outerKeySelector, innerKeySelector, resultSelector, comparer));
+                () => source.GroupJoin(inner, (Func<int, int>)null, innerKeySelector, resultSelector));
             Assert.Throws<ArgumentNullException>(
-                () => Maybe.GroupJoin(source, inner, outerKeySelector, innerKeySelector, resultSelector, comparer));
+                () => source.GroupJoin(inner, outerKeySelector, (Func<int, int>)null, resultSelector));
+            Assert.Throws<ArgumentNullException>(
+                () => source.GroupJoin(inner, outerKeySelector, innerKeySelector, (Func<int, Maybe<int>, int>)null));
+            Assert.Throws<ArgumentNullException>(
+                () => source.GroupJoin(inner, outerKeySelector, innerKeySelector, resultSelector, null));
+            Assert.Throws<ArgumentNullException>(
+                () => Maybe.GroupJoin(source, inner, (Func<int, int>)null, innerKeySelector, resultSelector));
+            Assert.Throws<ArgumentNullException>(
+                () => Maybe.GroupJoin(source, inner, outerKeySelector, (Func<int, int>)null, resultSelector));
+            Assert.Throws<ArgumentNullException>(
+                () => Maybe.GroupJoin(source, inner, outerKeySelector, innerKeySelector, (Func<int, Maybe<int>, int>)null));
+            Assert.Throws<ArgumentNullException>(
+                () => Maybe.GroupJoin(source, inner, outerKeySelector, innerKeySelector, resultSelector, null));
         }
 
         #endregion

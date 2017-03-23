@@ -7,15 +7,9 @@ namespace Narvalo.Applicative
 
     using Xunit;
 
+    // Tests for Fallible.
     public static partial class FallibleFacts
     {
-        #region Unit
-
-        [Fact]
-        public static void Unit_IsSuccess() => Assert.True(Fallible.Unit.IsSuccess);
-
-        #endregion
-
         #region Ok
 
         [Fact]
@@ -23,22 +17,10 @@ namespace Narvalo.Applicative
 
         #endregion
 
-        #region Of()
-
-        [Fact]
-        public static void Of_ReturnsSuccess()
-        {
-            var result = Fallible.Of(1);
-
-            Assert.True(result.IsSuccess);
-        }
-
-        #endregion
-
         #region FromError()
 
         [Fact]
-        public static void FromError_ThrowArgumentNullException_ForNullEmpty()
+        public static void FromError_Guards()
             => Assert.Throws<ArgumentNullException>(() => Fallible.FromError(null));
 
         [Fact]
@@ -47,6 +29,17 @@ namespace Narvalo.Applicative
             var result = Fallible.FromError(Error);
 
             Assert.True(result.IsError);
+        }
+
+        #endregion
+
+        #region Bind()
+
+        [Fact]
+        public static void Bind_Guards()
+        {
+            Assert.Throws<ArgumentNullException>(() => Fallible.Ok.Bind<string>(null));
+            Assert.Throws<ArgumentNullException>(() => Fallible.FromError(Error).Bind<string>(null));
         }
 
         #endregion

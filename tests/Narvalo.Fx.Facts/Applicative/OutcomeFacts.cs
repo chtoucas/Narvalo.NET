@@ -6,15 +6,9 @@ namespace Narvalo.Applicative
 
     using Xunit;
 
+    // Tests for Outcome.
     public static partial class OutcomeFacts
     {
-        #region Unit
-
-        [Fact]
-        public static void Unit_IsSuccess() => Assert.True(Outcome.Unit.IsSuccess);
-
-        #endregion
-
         #region Ok
 
         [Fact]
@@ -22,32 +16,31 @@ namespace Narvalo.Applicative
 
         #endregion
 
-        #region Of()
-
-        [Fact]
-        public static void Of_ReturnsSuccess()
-        {
-            var result = Outcome.Of(1);
-            Assert.True(result.IsSuccess);
-        }
-
-        #endregion
-
         #region FromError()
 
         [Fact]
-        public static void FromError_ThrowArgumentNullException_ForNullString()
-            => Assert.Throws<ArgumentNullException>(() => Outcome.FromError(null));
-
-        [Fact]
-        public static void FromError_ThrowArgumentException_ForEmptyString()
-            => Assert.Throws<ArgumentException>(() => Outcome.FromError(String.Empty));
+        public static void FromError_Guards()
+        {
+            Assert.Throws<ArgumentNullException>(() => Outcome.FromError(null));
+            Assert.Throws<ArgumentException>(() => Outcome.FromError(String.Empty));
+        }
 
         [Fact]
         public static void FromError_ReturnsError()
         {
             var result = Outcome.FromError("error");
             Assert.True(result.IsError);
+        }
+
+        #endregion
+
+        #region Bind()
+
+        [Fact]
+        public static void Bind_Guards()
+        {
+            Assert.Throws<ArgumentNullException>(() => Outcome.Ok.Bind<string>(null));
+            Assert.Throws<ArgumentNullException>(() => Outcome.FromError("error").Bind<string>(null));
         }
 
         #endregion
