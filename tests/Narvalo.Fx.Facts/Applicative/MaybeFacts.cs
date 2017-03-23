@@ -52,6 +52,7 @@ namespace Narvalo.Applicative
         {
             Assert.Throws<ArgumentNullException>("other", () => MySome.ValueOrElse((My.SimpleObj)null));
             Assert.Throws<ArgumentNullException>("valueFactory", () => MySome.ValueOrElse((Func<My.SimpleObj>)null));
+
             Assert.Throws<ArgumentNullException>("other", () => MyNone.ValueOrElse((My.SimpleObj)null));
             Assert.Throws<ArgumentNullException>("valueFactory", () => MyNone.ValueOrElse((Func<My.SimpleObj>)null));
         }
@@ -219,6 +220,7 @@ namespace Narvalo.Applicative
             Assert.Throws<ArgumentNullException>("caseSome", () => MySome.Match(null, new My.SimpleObj()));
             Assert.Throws<ArgumentNullException>("caseSome", () => MySome.Match(null, () => new My.SimpleObj()));
             Assert.Throws<ArgumentNullException>("caseNone", () => MySome.Match(val => val, (Func<My.SimpleObj>)null));
+
             Assert.Throws<ArgumentNullException>("caseSome", () => MyNone.Match(null, new My.SimpleObj()));
             Assert.Throws<ArgumentNullException>("caseSome", () => MyNone.Match(null, () => new My.SimpleObj()));
             Assert.Throws<ArgumentNullException>("caseNone", () => MyNone.Match(val => val, (Func<My.SimpleObj>)null));
@@ -235,6 +237,7 @@ namespace Narvalo.Applicative
             Assert.Throws<ArgumentNullException>("predicate", () => MySome.Coalesce(null, val => val, () => new My.SimpleObj()));
             Assert.Throws<ArgumentNullException>("selector", () => MySome.Coalesce(val => true, null, () => new My.SimpleObj()));
             Assert.Throws<ArgumentNullException>("otherwise", () => MySome.Coalesce(val => true, val => val, null));
+
             Assert.Throws<ArgumentNullException>("predicate", () => MyNone.Coalesce(null, new My.SimpleObj("this"), new My.SimpleObj("that")));
             Assert.Throws<ArgumentNullException>("predicate", () => MyNone.Coalesce(null, val => val, () => new My.SimpleObj()));
             Assert.Throws<ArgumentNullException>("selector", () => MyNone.Coalesce(val => true, null, () => new My.SimpleObj()));
@@ -253,6 +256,7 @@ namespace Narvalo.Applicative
             Assert.Throws<ArgumentNullException>("predicate", () => MySome.When(null, val => { }, () => { }));
             Assert.Throws<ArgumentNullException>("action", () => MySome.When(val => true, null, () => { }));
             Assert.Throws<ArgumentNullException>("otherwise", () => MySome.When(val => true, val => { }, null));
+
             Assert.Throws<ArgumentNullException>("predicate", () => MyNone.When(null, val => { }));
             Assert.Throws<ArgumentNullException>("action", () => MyNone.When(val => true, null));
             Assert.Throws<ArgumentNullException>("predicate", () => MyNone.When(null, val => { }, () => { }));
@@ -269,6 +273,7 @@ namespace Narvalo.Applicative
         {
             Assert.Throws<ArgumentNullException>("onSome", () => MySome.Do(null, () => { }));
             Assert.Throws<ArgumentNullException>("onNone", () => MySome.Do(val => { }, null));
+
             Assert.Throws<ArgumentNullException>("onSome", () => MyNone.Do(null, () => { }));
             Assert.Throws<ArgumentNullException>("onNone", () => MyNone.Do(val => { }, null));
         }
@@ -400,6 +405,7 @@ namespace Narvalo.Applicative
         {
             Assert.Throws<ArgumentNullException>("comparer", () => MySome.Equals(MySome, null));
             Assert.Throws<ArgumentNullException>("comparer", () => MySome.Equals(MyNone, null));
+
             Assert.Throws<ArgumentNullException>("comparer", () => MyNone.Equals(MyNone, null));
             Assert.Throws<ArgumentNullException>("comparer", () => MyNone.Equals(MySome, null));
         }

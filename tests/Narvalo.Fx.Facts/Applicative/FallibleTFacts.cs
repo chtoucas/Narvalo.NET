@@ -252,6 +252,7 @@ namespace Narvalo.Applicative
         {
             Assert.Throws<ArgumentNullException>("caseSuccess", () => MySuccess.Match(null, _ => new My.SimpleObj()));
             Assert.Throws<ArgumentNullException>("caseError", () => MySuccess.Match(val => val, null));
+
             Assert.Throws<ArgumentNullException>("caseSuccess", () => MyError.Match(null, _ => new My.SimpleObj()));
             Assert.Throws<ArgumentNullException>("caseError", () => MyError.Match(val => val, null));
         }
@@ -265,6 +266,7 @@ namespace Narvalo.Applicative
         {
             Assert.Throws<ArgumentNullException>("comparer", () => MySuccess.Equals(MySuccess, null));
             Assert.Throws<ArgumentNullException>("comparer", () => MySuccess.Equals(MyError, null));
+
             Assert.Throws<ArgumentNullException>("comparer", () => MyError.Equals(MyError, null));
             Assert.Throws<ArgumentNullException>("comparer", () => MyError.Equals(MySuccess, null));
         }
