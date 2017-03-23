@@ -1,7 +1,8 @@
 ﻿<#@ include file="Monad.tt" once="true" #>
 <#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
-<#@ include file="MonadFacts\EmitCore.tt" #>
-<#@ include file="MonadFacts\EmitRules.tt" #><#+
+<#@ include file="Facts\EmitMonadCore.tt" #>
+<#@ include file="Facts\EmitMonadInternal.tt" #>
+<#@ include file="Facts\EmitMonadRules.tt" #><#+
 
 // This template is fairly incomplete (does not work for many monads) and depend on:
 // - Xunit
@@ -9,6 +10,8 @@
 
 public partial class MonadTemplate
 {
+    protected string ValueProperty { get; set; } = "Value";
+
     /// <summary>
     /// Generates tests for a Monad.
     /// </summary>
@@ -24,10 +27,13 @@ namespace <#= Namespace #>
     using Xunit;
 
 <#+
-    EmitCore();
+    EmitMonadCore();
 
     WriteLine();
-    EmitRules();
+    EmitMonadInternal();
+
+    WriteLine();
+    EmitMonadRules();
 #>
 }
 <#+

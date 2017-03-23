@@ -95,6 +95,51 @@ namespace Narvalo.Applicative
 
     }
 
+#if !NO_INTERNALS_VISIBLE_TO
+
+    // Provides (tests for Either<T, My.SimpleObj>.
+    // T4: EmitCore().
+    public static partial class EitherFacts
+    {
+        #region Bind()
+
+        [Fact]
+        public static void Bind_AppliesBinder()
+        {
+            // Arrange
+            var source = Either<int, My.SimpleObj>.OfLeft(1);
+            Func<int, Either<int, My.SimpleObj>> binder = val => Either<int, My.SimpleObj>.OfLeft(2 * val);
+
+            // Act
+            var me = source.Bind(binder);
+
+            // Assert
+            Assert.Equal(2, me.Left);
+        }
+
+        #endregion
+
+        #region Select()
+
+        [Fact]
+        public static void Select_AppliesSelector()
+        {
+            // Arrange
+            var source = Either<int, My.SimpleObj>.OfLeft(1);
+            Func<int, int> selector = val => 2 * val;
+
+            // Act
+            var me = source.Select(selector);
+
+            // Assert
+            Assert.Equal(2, me.Left);
+        }
+
+        #endregion
+    }
+
+#endif
+
     // Provides tests for Either<T, My.SimpleObj>: functor, monoid and monad laws.
     // T4: EmitRules().
     public static partial class EitherFacts

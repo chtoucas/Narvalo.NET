@@ -2,7 +2,7 @@
 
 public partial class MonadTemplate
 {
-    public void EmitCore()
+    public void EmitMonadCore()
     {
 #>
     // Provides tests for <#= Name #><T<#= RTDecl #>>.

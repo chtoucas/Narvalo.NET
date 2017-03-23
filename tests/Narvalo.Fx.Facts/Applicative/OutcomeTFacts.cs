@@ -68,6 +68,32 @@ namespace Narvalo.Applicative
 
         #endregion
 
+        #region ValueOrNone()
+
+        [Fact]
+        public static void ValueOrNone_ReturnsSome_IfSuccess()
+        {
+            var exp = new My.SimpleObj();
+            var ok = Outcome.Of(exp);
+
+            var maybe = ok.ValueOrNone();
+
+            Assert.True(maybe.IsSome);
+#if !NO_INTERNALS_VISIBLE_TO
+            Assert.Same(exp, maybe.Value);
+#endif
+        }
+
+        [Fact]
+        public static void ValueOrNone_ReturnsNone_IfError()
+        {
+            var err = Outcome<My.SimpleObj>.FromError("error");
+
+            Assert.True(err.ValueOrNone().IsNone);
+        }
+
+        #endregion
+
         #region ValueOrElse()
 
         [Fact]
@@ -110,7 +136,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void ValueOrThrow_ReturnsValue_IfSome()
+        public static void ValueOrThrow_ReturnsValue_IfSuccess()
         {
             var exp = new My.SimpleObj();
             var ok = Outcome.Of(exp);
@@ -120,12 +146,81 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void ValueOrThrow_Throws_IfNone()
+        public static void ValueOrThrow_Throws_IfError()
         {
             var err = Outcome<My.SimpleObj>.FromError("error");
 
-            Assert.Throws<InvalidOperationException>(() => err.ValueOrThrow());
-            Assert.Throws<My.SimpleException>(() => err.ValueOrThrow(error => new My.SimpleException(error)));
+            Action act = () => err.ValueOrThrow();
+            var ex = Record.Exception(act);
+
+            Assert.NotNull(ex);
+            Assert.IsType<InvalidOperationException>(ex);
+        }
+
+        [Fact]
+        public static void ValueOrThrow_ThrowsCustomException_IfError()
+        {
+            var message = "error";
+            var err = Outcome<My.SimpleObj>.FromError(message);
+
+            Action act = () => err.ValueOrThrow(error => new My.SimpleException(error));
+            var ex = Record.Exception(act);
+
+            Assert.NotNull(ex);
+            Assert.IsType<My.SimpleException>(ex);
+            Assert.Equal(message, ex.Message);
+        }
+
+        #endregion
+
+        #region ToValue()
+
+        [Fact]
+        public static void ToValue_Throws_IfError()
+        {
+            var message = "error";
+            var err = Outcome<My.SimpleObj>.FromError(message);
+
+            Action act = () => err.ToValue();
+            var ex = Record.Exception(act);
+
+            Assert.NotNull(ex);
+            Assert.IsType<InvalidCastException>(ex);
+        }
+
+        [Fact]
+        public static void ToValue_ReturnsValue_IfSuccess()
+        {
+            var exp = new My.SimpleObj();
+            var ok = Outcome.Of(exp);
+
+            Assert.Same(exp, ok.ToValue());
+        }
+
+        #endregion
+
+        #region ToMaybe()
+
+        [Fact]
+        public static void ToMaybe_ReturnsSome_IfSuccess()
+        {
+            var exp = new My.SimpleObj();
+            var ok = Outcome.Of(exp);
+
+            var maybe = ok.ToMaybe();
+
+            Assert.True(maybe.IsSome);
+#if !NO_INTERNALS_VISIBLE_TO
+            Assert.Same(exp, maybe.Value);
+#endif
+        }
+
+        [Fact]
+        public static void ToMaybe_ReturnsNone_IfError()
+        {
+            var err = Outcome<My.SimpleObj>.FromError("error");
+
+            Assert.True(err.ToMaybe().IsNone);
         }
 
         #endregion
@@ -137,6 +232,59 @@ namespace Narvalo.Applicative
         {
             Assert.Throws<ArgumentNullException>(() => MySuccess.Bind<string>(null));
             Assert.Throws<ArgumentNullException>(() => MyError.Bind<string>(null));
+        }
+
+        [Fact]
+        public static void Bind_ReturnsError_IfError()
+        {
+            // Arrange
+            var exp = "error";
+            var err = Outcome<My.SimpleObj>.FromError(exp);
+            Func<My.SimpleObj, Outcome<string>> binder = _ => Outcome.Of(_.Value);
+
+            // Act
+            var me = err.Bind(binder);
+
+            // Assert
+            Assert.True(me.IsError);
+#if !NO_INTERNALS_VISIBLE_TO
+            Assert.Equal(exp, me.Error);
+#endif
+        }
+
+        [Fact]
+        public static void Bind_ReturnsSuccess_IfSuccess()
+        {
+            // Arrange
+            var exp = new My.SimpleObj("My Value");
+            var ok = Outcome.Of(exp);
+            Func<My.SimpleObj, Outcome<string>> binder = _ => Outcome.Of(_.Value);
+
+            // Act
+            var me = ok.Bind(binder);
+
+            // Assert
+            Assert.True(me.IsSuccess);
+        }
+
+        #endregion
+
+        #region Flatten()
+
+        [Fact]
+        public static void Flatten_ReturnsError_IfError()
+        {
+            var err = Outcome<Outcome<My.SimpleObj>>.FromError("error");
+
+            Assert.True(err.IsError);
+        }
+
+        [Fact]
+        public static void Flatten_ReturnsSuccess_IfSuccess()
+        {
+            var ok = Outcome.Of(Outcome.Of(new My.SimpleObj()));
+
+            Assert.True(ok.IsSuccess);
         }
 
         #endregion

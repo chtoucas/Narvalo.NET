@@ -45,6 +45,31 @@ namespace Narvalo.Applicative
 
         #endregion
 
+        #region ThrowIfError()
+
+        [Fact]
+        public static void ThrowIfError_DoesNotThrow_IfSuccess()
+        {
+            var ok = Fallible.Of(new My.SimpleObj());
+
+            ok.ThrowIfError();
+        }
+
+        [Fact]
+        public static void ThrowIfError_Throws_IfError()
+        {
+            var err = Fallible<My.SimpleObj>.FromError(Edi);
+
+            Action act = () => err.ThrowIfError();
+            var ex = Record.Exception(act);
+
+            Assert.NotNull(ex);
+            Assert.IsType<My.SimpleException>(ex);
+            Assert.Equal(s_EdiMessage, ex.Message);
+        }
+
+        #endregion
+
         #region ValueOrDefault()
 
         [Fact]
@@ -62,6 +87,26 @@ namespace Narvalo.Applicative
             var err = Fallible<My.SimpleObj>.FromError(Edi);
 
             Assert.Same(default(My.SimpleObj), err.ValueOrDefault());
+        }
+
+        #endregion
+
+        #region ValueOrNone()
+
+        [Fact]
+        public static void ValueOrNone_ReturnsSome_IfSuccess()
+        {
+            var ok = Fallible.Of(new My.SimpleObj());
+
+            Assert.True(ok.ValueOrNone().IsSome);
+        }
+
+        [Fact]
+        public static void ValueOrNone_ReturnsNone_IfError()
+        {
+            var err = Fallible<My.SimpleObj>.FromError(Edi);
+
+            Assert.True(err.ValueOrNone().IsNone);
         }
 
         #endregion
@@ -111,7 +156,16 @@ namespace Narvalo.Applicative
 
         [Fact]
         public static void ValueOrThrow_Throws_IfError()
-            => Assert.Throws<My.SimpleException>(() => MyError.ValueOrThrow());
+        {
+            var err = Fallible<My.SimpleObj>.FromError(Edi);
+
+            Action act = () => err.ValueOrThrow();
+            var ex = Record.Exception(act);
+
+            Assert.NotNull(ex);
+            Assert.IsType<My.SimpleException>(ex);
+            Assert.Equal(s_EdiMessage, ex.Message);
+        }
 
         #endregion
 
@@ -122,6 +176,58 @@ namespace Narvalo.Applicative
         {
             Assert.Throws<ArgumentNullException>(() => MySuccess.Bind<string>(null));
             Assert.Throws<ArgumentNullException>(() => MyError.Bind<string>(null));
+        }
+
+        [Fact]
+        public static void Bind_ReturnsError_IfError()
+        {
+            // Arrange
+            var err = Fallible<My.SimpleObj>.FromError(Edi);
+            Func<My.SimpleObj, Fallible<string>> binder = _ => Fallible.Of(_.Value);
+
+            // Act
+            var me = err.Bind(binder);
+
+            // Assert
+            Assert.True(me.IsError);
+#if !NO_INTERNALS_VISIBLE_TO
+            Assert.Same(Edi, me.Error);
+#endif
+        }
+
+        [Fact]
+        public static void Bind_ReturnsSuccess_IfSuccess()
+        {
+            // Arrange
+            var exp = new My.SimpleObj("My Value");
+            var ok = Fallible.Of(exp);
+            Func<My.SimpleObj, Fallible<string>> binder = _ => Fallible.Of(_.Value);
+
+            // Act
+            var me = ok.Bind(binder);
+
+            // Assert
+            Assert.True(me.IsSuccess);
+        }
+
+        #endregion
+
+        #region Flatten()
+
+        [Fact]
+        public static void Flatten_ReturnsError_IfError()
+        {
+            var err = Fallible<Fallible<My.SimpleObj>>.FromError(Edi);
+
+            Assert.True(err.IsError);
+        }
+
+        [Fact]
+        public static void Flatten_ReturnsSuccess_IfSuccess()
+        {
+            var ok = Fallible.Of(Fallible.Of(new My.SimpleObj()));
+
+            Assert.True(ok.IsSuccess);
         }
 
         #endregion
@@ -186,11 +292,13 @@ namespace Narvalo.Applicative
         private static Fallible<My.SimpleObj> MySuccess => Fallible.Of(new My.SimpleObj());
         private static Fallible<My.SimpleObj> MyError => Fallible<My.SimpleObj>.FromError(Edi);
 
+        private static readonly string s_EdiMessage = "My message";
+
         private static ExceptionDispatchInfo CreateExceptionDispatchInfo()
         {
             try
             {
-                throw new My.SimpleException("My message");
+                throw new My.SimpleException(s_EdiMessage);
             }
             catch (Exception ex)
             {

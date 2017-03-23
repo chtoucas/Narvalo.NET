@@ -170,6 +170,51 @@ namespace Narvalo.Applicative
 
     }
 
+#if !NO_INTERNALS_VISIBLE_TO
+
+    // Provides tests for Maybe<T> that need access to internals.
+    // T4: EmitCore().
+    public static partial class MaybeFacts
+    {
+        #region Bind()
+
+        [Fact]
+        public static void Bind_AppliesBinder()
+        {
+            // Arrange
+            var source = Maybe<int>.η(1);
+            Func<int, Maybe<int>> binder = val => Maybe<int>.η(2 * val);
+
+            // Act
+            var me = source.Bind(binder);
+
+            // Assert
+            Assert.Equal(2, me.Value);
+        }
+
+        #endregion
+
+        #region Select()
+
+        [Fact]
+        public static void Select_AppliesSelector()
+        {
+            // Arrange
+            var source = Maybe<int>.η(1);
+            Func<int, int> selector = val => 2 * val;
+
+            // Act
+            var me = source.Select(selector);
+
+            // Assert
+            Assert.Equal(2, me.Value);
+        }
+
+        #endregion
+    }
+
+#endif
+
     // Provides tests for Maybe<T>: functor, monoid and monad laws.
     // T4: EmitRules().
     public static partial class MaybeFacts

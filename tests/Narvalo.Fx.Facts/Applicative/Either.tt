@@ -11,6 +11,8 @@ public partial class EitherTemplate : MonadTemplate
     {
         InitializeGenericParameters("T", "My.SimpleObj");
 
+        ValueProperty = "Left";
+
         EmitFacts();
     }
 }

@@ -2,7 +2,7 @@
 
 public partial class MonadTemplate
 {
-    public void EmitRules()
+    public void EmitMonadRules()
     {
 #>
     // Provides tests for <#= Name #><T<#= RTDecl #>>: functor, monoid and monad laws.

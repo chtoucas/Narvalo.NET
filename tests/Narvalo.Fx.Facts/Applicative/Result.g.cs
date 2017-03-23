@@ -95,6 +95,51 @@ namespace Narvalo.Applicative
 
     }
 
+#if !NO_INTERNALS_VISIBLE_TO
+
+    // Provides (tests for Result<T, My.SimpleObj>.
+    // T4: EmitCore().
+    public static partial class ResultFacts
+    {
+        #region Bind()
+
+        [Fact]
+        public static void Bind_AppliesBinder()
+        {
+            // Arrange
+            var source = Result<int, My.SimpleObj>.Of(1);
+            Func<int, Result<int, My.SimpleObj>> binder = val => Result<int, My.SimpleObj>.Of(2 * val);
+
+            // Act
+            var me = source.Bind(binder);
+
+            // Assert
+            Assert.Equal(2, me.Value);
+        }
+
+        #endregion
+
+        #region Select()
+
+        [Fact]
+        public static void Select_AppliesSelector()
+        {
+            // Arrange
+            var source = Result<int, My.SimpleObj>.Of(1);
+            Func<int, int> selector = val => 2 * val;
+
+            // Act
+            var me = source.Select(selector);
+
+            // Assert
+            Assert.Equal(2, me.Value);
+        }
+
+        #endregion
+    }
+
+#endif
+
     // Provides tests for Result<T, My.SimpleObj>: functor, monoid and monad laws.
     // T4: EmitRules().
     public static partial class ResultFacts

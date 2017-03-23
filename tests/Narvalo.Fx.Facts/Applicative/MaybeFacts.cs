@@ -118,6 +118,55 @@ namespace Narvalo.Applicative
             Assert.Throws<ArgumentNullException>(() => MyNone.Bind<string>(null));
         }
 
+        [Fact]
+        public static void Bind_ReturnsNone_IfNone()
+        {
+            // Arrange
+            var none = Maybe<My.SimpleObj>.None;
+            Func<My.SimpleObj, Maybe<string>> binder = val => Maybe.Of(val.Value);
+
+            // Act
+            var me = none.Bind(binder);
+
+            // Assert
+            Assert.True(me.IsNone);
+        }
+
+        [Fact]
+        public static void Bind_ReturnsSome_IfSome()
+        {
+            // Arrange
+            var exp = new My.SimpleObj();
+            var some = Maybe.Of(exp);
+            Func<My.SimpleObj, Maybe<string>> binder = val => Maybe.Of(val.Value);
+
+            // Act
+            var me = some.Bind(binder);
+
+            // Assert
+            Assert.True(me.IsSome);
+        }
+
+        #endregion
+
+        #region Flatten()
+
+        [Fact]
+        public static void Flatten_ReturnsNone_IfNone()
+        {
+            var me = Maybe<Maybe<My.SimpleObj>>.None.Flatten();
+
+            Assert.True(me.IsNone);
+        }
+
+        [Fact]
+        public static void Flatten_ReturnsSome_IfSome()
+        {
+            var me = Maybe.Of(Maybe.Of(new My.SimpleObj()));
+
+            Assert.True(me.IsSome);
+        }
+
         #endregion
 
         #region Contains()
@@ -364,6 +413,42 @@ namespace Narvalo.Applicative
         {
             Assert.Throws<ArgumentNullException>(() => MySome.GetHashCode(null));
             Assert.Throws<ArgumentNullException>(() => MyNone.GetHashCode(null));
+        }
+
+        #endregion
+
+        #region Select()
+
+        [Fact]
+        public static void Select_ReturnsSome_IfSome()
+        {
+            // Arrange
+            var some = Maybe.Of(1);
+            Func<int, int> selector = val => 2 * val;
+
+            // Act
+            var m = some.Select(selector);
+            var q = from item in some select selector(item);
+
+            // Assert
+            Assert.True(m.IsSome);
+            Assert.True(q.IsSome);
+        }
+
+        [Fact]
+        public static void Select_ReturnsNone_IfNone()
+        {
+            // Arrange
+            var none = Maybe<int>.None;
+            Func<int, int> selector = val => 2 * val;
+
+            // Act
+            var m = none.Select(selector);
+            var q = from item in none select selector(item);
+
+            // Assert
+            Assert.True(m.IsNone);
+            Assert.True(q.IsNone);
         }
 
         #endregion
@@ -995,25 +1080,6 @@ namespace Narvalo.Applicative
 
         #endregion
 
-        #region Bind()
-
-        [Fact]
-        public static void Bind_ReturnsSomeAndApplySelector_IfSourceIsSome()
-        {
-            // Arrange
-            var source = Maybe.Of(1);
-            Func<int, Maybe<int>> selector = _ => Maybe.Of(2 * _);
-
-            // Act
-            var m = source.Bind(selector);
-
-            // Assert
-            Assert.True(m.IsSome);
-            Assert.Equal(2, m.Value);
-        }
-
-        #endregion
-
         #region Linq Operators
 
         [Fact]
@@ -1032,24 +1098,6 @@ namespace Narvalo.Applicative
             Assert.True(q.IsSome);
             Assert.Equal(1, m.Value);
             Assert.Equal(1, q.Value);
-        }
-
-        [Fact]
-        public static void Select_ReturnsSomeAndApplySelector_IfSourceIsSome()
-        {
-            // Arrange
-            var source = Maybe.Of(1);
-            Func<int, int> selector = _ => 2 * _;
-
-            // Act
-            var m = source.Select(selector);
-            var q = from _ in source select selector(_);
-
-            // Assert
-            Assert.True(m.IsSome);
-            Assert.True(q.IsSome);
-            Assert.Equal(2, m.Value);
-            Assert.Equal(2, q.Value);
         }
 
         [Fact]
