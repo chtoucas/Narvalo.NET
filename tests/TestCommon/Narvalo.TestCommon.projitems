@@ -13,6 +13,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)LocalizedStrings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)My.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AssertExtended.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ThrowingEnumerable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UseCultureAttribute.cs" />
   </ItemGroup>
 </Project>

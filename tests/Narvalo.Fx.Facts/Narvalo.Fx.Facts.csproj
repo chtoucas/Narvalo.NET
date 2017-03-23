@@ -76,6 +76,7 @@
     </Compile>
     <Compile Include="Applicative\MaybeFacts.cs" />
     <Compile Include="Applicative\QullableFacts.cs" />
+    <Compile Include="Linq\QperatorsFacts.cs" />
     <Compile Include="LocalizationFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Applicative\SequenceFacts.cs" />

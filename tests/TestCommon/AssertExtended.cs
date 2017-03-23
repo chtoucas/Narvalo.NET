@@ -3,6 +3,7 @@
 namespace Narvalo
 {
     using System;
+    using System.Collections.Generic;
     using System.Globalization;
     using System.Resources;
 
@@ -10,6 +11,24 @@ namespace Narvalo
 
     public partial class AssertExtended : Assert
     {
+        /// <summary>
+        /// Check that the given function uses deferred execution.
+        /// A "spiked" source is given to the function: the function
+        /// call itself shouldn't throw an exception. However, using
+        /// the result (by calling GetEnumerator() then MoveNext() on it) *should*
+        /// throw InvalidOperationException.
+        /// </summary>
+        // Adapted from https://raw.githubusercontent.com/jskeet/edulinq/master/src/Edulinq.TestSupport/ThrowingEnumerable.cs
+        public static void IsDeferred<T>(Func<IEnumerable<int>, IEnumerable<T>> deferredFunction)
+        {
+            var result = deferredFunction(new ThrowingEnumerable());
+
+            using (var iter = result.GetEnumerator())
+            {
+                Assert.Throws<InvalidOperationException>(() => iter.MoveNext());
+            }
+        }
+
         public static void IsNotLocalized(LocalizedStrings localizedStrings)
         {
             var dict = localizedStrings.GetStrings();
