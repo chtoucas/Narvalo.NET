@@ -33,8 +33,8 @@ namespace Narvalo.Applicative
         [Fact]
         public static void FromError_Guards()
         {
-            Assert.Throws<ArgumentNullException>(() => Outcome<int>.FromError(null));
-            Assert.Throws<ArgumentException>(() => Outcome<int>.FromError(String.Empty));
+            Assert.Throws<ArgumentNullException>("error", () => Outcome<int>.FromError(null));
+            Assert.Throws<ArgumentException>("error", () => Outcome<int>.FromError(String.Empty));
         }
 
         [Fact]
@@ -99,8 +99,8 @@ namespace Narvalo.Applicative
         [Fact]
         public static void ValueOrElse_Guards()
         {
-            Assert.Throws<ArgumentNullException>(() => MySuccess.ValueOrElse((Func<My.SimpleObj>)null));
-            Assert.Throws<ArgumentNullException>(() => MyError.ValueOrElse((Func<My.SimpleObj>)null));
+            Assert.Throws<ArgumentNullException>("valueFactory", () => MySuccess.ValueOrElse((Func<My.SimpleObj>)null));
+            Assert.Throws<ArgumentNullException>("valueFactory", () => MyError.ValueOrElse((Func<My.SimpleObj>)null));
         }
 
         [Fact]
@@ -131,8 +131,8 @@ namespace Narvalo.Applicative
         [Fact]
         public static void ValueOrThrow_Guards()
         {
-            Assert.Throws<ArgumentNullException>(() => MySuccess.ValueOrThrow(null));
-            Assert.Throws<ArgumentNullException>(() => MyError.ValueOrThrow(null));
+            Assert.Throws<ArgumentNullException>("exceptionFactory", () => MySuccess.ValueOrThrow(null));
+            Assert.Throws<ArgumentNullException>("exceptionFactory", () => MyError.ValueOrThrow(null));
         }
 
         [Fact]
@@ -230,8 +230,8 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Bind_Guards()
         {
-            Assert.Throws<ArgumentNullException>(() => MySuccess.Bind<string>(null));
-            Assert.Throws<ArgumentNullException>(() => MyError.Bind<string>(null));
+            Assert.Throws<ArgumentNullException>("binder", () => MySuccess.Bind<string>(null));
+            Assert.Throws<ArgumentNullException>("binder", () => MyError.Bind<string>(null));
         }
 
         [Fact]
@@ -296,8 +296,8 @@ namespace Narvalo.Applicative
         {
             var value = new My.SimpleObj();
 
-            Assert.Throws<ArgumentNullException>(() => MySuccess.Contains(value, null));
-            Assert.Throws<ArgumentNullException>(() => MyError.Contains(value, null));
+            Assert.Throws<ArgumentNullException>("comparer", () => MySuccess.Contains(value, null));
+            Assert.Throws<ArgumentNullException>("comparer", () => MyError.Contains(value, null));
         }
 
         #endregion
@@ -307,10 +307,10 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Match_Guards()
         {
-            Assert.Throws<ArgumentNullException>(() => MySuccess.Match(null, _ => new My.SimpleObj()));
-            Assert.Throws<ArgumentNullException>(() => MySuccess.Match(val => val, null));
-            Assert.Throws<ArgumentNullException>(() => MyError.Match(null, _ => new My.SimpleObj()));
-            Assert.Throws<ArgumentNullException>(() => MyError.Match(val => val, null));
+            Assert.Throws<ArgumentNullException>("caseSuccess", () => MySuccess.Match(null, _ => new My.SimpleObj()));
+            Assert.Throws<ArgumentNullException>("caseError", () => MySuccess.Match(val => val, null));
+            Assert.Throws<ArgumentNullException>("caseSuccess", () => MyError.Match(null, _ => new My.SimpleObj()));
+            Assert.Throws<ArgumentNullException>("caseError", () => MyError.Match(val => val, null));
         }
 
         #endregion
@@ -320,10 +320,10 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Equals_Guards()
         {
-            Assert.Throws<ArgumentNullException>(() => MySuccess.Equals(MySuccess, null));
-            Assert.Throws<ArgumentNullException>(() => MySuccess.Equals(MyError, null));
-            Assert.Throws<ArgumentNullException>(() => MyError.Equals(MyError, null));
-            Assert.Throws<ArgumentNullException>(() => MyError.Equals(MySuccess, null));
+            Assert.Throws<ArgumentNullException>("comparer", () => MySuccess.Equals(MySuccess, null));
+            Assert.Throws<ArgumentNullException>("comparer", () => MySuccess.Equals(MyError, null));
+            Assert.Throws<ArgumentNullException>("comparer", () => MyError.Equals(MyError, null));
+            Assert.Throws<ArgumentNullException>("comparer", () => MyError.Equals(MySuccess, null));
         }
 
         #endregion
@@ -333,8 +333,8 @@ namespace Narvalo.Applicative
         [Fact]
         public static void GetHashCode_Guards()
         {
-            Assert.Throws<ArgumentNullException>(() => MySuccess.GetHashCode(null));
-            Assert.Throws<ArgumentNullException>(() => MyError.GetHashCode(null));
+            Assert.Throws<ArgumentNullException>("comparer", () => MySuccess.GetHashCode(null));
+            Assert.Throws<ArgumentNullException>("comparer", () => MyError.GetHashCode(null));
         }
 
         #endregion

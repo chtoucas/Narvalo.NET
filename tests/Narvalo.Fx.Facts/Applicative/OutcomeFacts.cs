@@ -21,8 +21,8 @@ namespace Narvalo.Applicative
         [Fact]
         public static void FromError_Guards()
         {
-            Assert.Throws<ArgumentNullException>(() => Outcome.FromError(null));
-            Assert.Throws<ArgumentException>(() => Outcome.FromError(String.Empty));
+            Assert.Throws<ArgumentNullException>("error", () => Outcome.FromError(null));
+            Assert.Throws<ArgumentException>("error", () => Outcome.FromError(String.Empty));
         }
 
         [Fact]
@@ -39,8 +39,8 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Bind_Guards()
         {
-            Assert.Throws<ArgumentNullException>(() => Outcome.Ok.Bind<string>(null));
-            Assert.Throws<ArgumentNullException>(() => Outcome.FromError("error").Bind<string>(null));
+            Assert.Throws<ArgumentNullException>("binder", () => Outcome.Ok.Bind<string>(null));
+            Assert.Throws<ArgumentNullException>("binder", () => Outcome.FromError("error").Bind<string>(null));
         }
 
         #endregion
