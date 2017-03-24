@@ -49,14 +49,14 @@ namespace Narvalo.Applicative
         }
 
         public Maybe<TResult> SelectMany<TMiddle, TResult>(
-            Func<T, Maybe<TMiddle>> valueSelector,
+            Func<T, Maybe<TMiddle>> selector,
             Func<T, TMiddle, TResult> resultSelector)
         {
-            Require.NotNull(valueSelector, nameof(valueSelector));
+            Require.NotNull(selector, nameof(selector));
             Require.NotNull(resultSelector, nameof(resultSelector));
 
             if (IsNone) { return Maybe<TResult>.None; }
-            var middle = valueSelector(Value);
+            var middle = selector(Value);
 
             if (middle.IsNone) { return Maybe<TResult>.None; }
             return Maybe<TResult>.η(resultSelector(Value, middle.Value));
