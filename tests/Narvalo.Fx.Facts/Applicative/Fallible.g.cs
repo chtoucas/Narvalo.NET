@@ -49,11 +49,12 @@ namespace Narvalo.Applicative
             Func<int, int, int, int, int> zipper4 = null;
             Func<int, int, int, int, int, int> zipper5 = null;
 
+            // Extension method.
             Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, zipper2));
             Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, third, zipper3));
             Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, third, fourth, zipper4));
             Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, third, fourth, fifth, zipper5));
-
+            // Static method.
             Assert.Throws<ArgumentNullException>("zipper", () => FallibleExtensions.Zip(first, second, zipper2));
             Assert.Throws<ArgumentNullException>("zipper", () => FallibleExtensions.Zip(first, second, third, zipper3));
             Assert.Throws<ArgumentNullException>("zipper", () => FallibleExtensions.Zip(first, second, third, fourth, zipper4));
@@ -86,9 +87,10 @@ namespace Narvalo.Applicative
             Func<short, Fallible<int>> valueSelector =  i => Fallible<int>.η(i);
             Func<short, int, long> resultSelector = (i, j) => i + j;
 
+            // Extension method.
             Assert.Throws<ArgumentNullException>("selector", () => source.SelectMany(null, resultSelector));
             Assert.Throws<ArgumentNullException>("resultSelector", () => source.SelectMany(valueSelector, (Func<short, int, long>)null));
-
+            // Static method.
             Assert.Throws<ArgumentNullException>("selector", () => FallibleExtensions.SelectMany(source, null, resultSelector));
             Assert.Throws<ArgumentNullException>("resultSelector", () => FallibleExtensions.SelectMany(source, valueSelector, (Func<short, int, long>)null));
         }

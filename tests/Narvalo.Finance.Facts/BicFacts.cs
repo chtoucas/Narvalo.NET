@@ -369,8 +369,8 @@ namespace Narvalo.Finance
             Assert.False(bic.Equals(1));
             Assert.False(bic.Equals(value));
             Assert.False(bic.Equals(new Object()));
-            Assert.False(bic.Equals(new My.SimpleStruct(1)));
-            Assert.False(bic.Equals(new My.SimpleObj()));
+            Assert.False(bic.Equals(new My.Val(1)));
+            Assert.False(bic.Equals(new My.Obj()));
         }
 
         [Theory]

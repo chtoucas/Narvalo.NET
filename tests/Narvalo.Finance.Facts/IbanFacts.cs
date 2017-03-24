@@ -158,7 +158,7 @@ namespace Narvalo.Finance
             Assert.False(iban.Equals(1));
             Assert.False(iban.Equals(value));
             Assert.False(iban.Equals(new Object()));
-            Assert.False(iban.Equals(new My.SimpleStruct(1)));
+            Assert.False(iban.Equals(new My.Val(1)));
         }
 
         [Theory]

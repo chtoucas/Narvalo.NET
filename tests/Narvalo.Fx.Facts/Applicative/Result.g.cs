@@ -27,7 +27,7 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Repeat_Guards()
         {
-            var source = Result<int, My.SimpleObj>.Of(1);
+            var source = Result<int, My.Obj>.Of(1);
 
             Assert.Throws<ArgumentOutOfRangeException>("count", () => Result.Repeat(source, -1));
         }
@@ -39,21 +39,22 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Zip_Guards()
         {
-            var first = Result<int, My.SimpleObj>.Of(1);
-            var second = Result<int, My.SimpleObj>.Of(2);
-            var third = Result<int, My.SimpleObj>.Of(3);
-            var fourth = Result<int, My.SimpleObj>.Of(4);
-            var fifth = Result<int, My.SimpleObj>.Of(5);
+            var first = Result<int, My.Obj>.Of(1);
+            var second = Result<int, My.Obj>.Of(2);
+            var third = Result<int, My.Obj>.Of(3);
+            var fourth = Result<int, My.Obj>.Of(4);
+            var fifth = Result<int, My.Obj>.Of(5);
             Func<int, int, int> zipper2 = null;
             Func<int, int, int, int> zipper3 = null;
             Func<int, int, int, int, int> zipper4 = null;
             Func<int, int, int, int, int, int> zipper5 = null;
 
+            // Extension method.
             Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, zipper2));
             Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, third, zipper3));
             Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, third, fourth, zipper4));
             Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, third, fourth, fifth, zipper5));
-
+            // Static method.
             Assert.Throws<ArgumentNullException>("zipper", () => Result.Zip(first, second, zipper2));
             Assert.Throws<ArgumentNullException>("zipper", () => Result.Zip(first, second, third, zipper3));
             Assert.Throws<ArgumentNullException>("zipper", () => Result.Zip(first, second, third, fourth, zipper4));
@@ -67,7 +68,7 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Select_Guards()
         {
-            var source = Result<int, My.SimpleObj>.Of(1);
+            var source = Result<int, My.Obj>.Of(1);
             Func<int, long> selector = null;
 
             Assert.Throws<ArgumentNullException>("selector", () => source.Select(selector));
@@ -81,14 +82,15 @@ namespace Narvalo.Applicative
         [Fact]
         public static void SelectMany_Guards()
         {
-            var source = Result<short, My.SimpleObj>.Of(1);
-            var middle = Result<int, My.SimpleObj>.Of(2);
-            Func<short, Result<int, My.SimpleObj>> valueSelector =  i => Result<int, My.SimpleObj>.Of(i);
+            var source = Result<short, My.Obj>.Of(1);
+            var middle = Result<int, My.Obj>.Of(2);
+            Func<short, Result<int, My.Obj>> valueSelector =  i => Result<int, My.Obj>.Of(i);
             Func<short, int, long> resultSelector = (i, j) => i + j;
 
+            // Extension method.
             Assert.Throws<ArgumentNullException>("selector", () => source.SelectMany(null, resultSelector));
             Assert.Throws<ArgumentNullException>("resultSelector", () => source.SelectMany(valueSelector, (Func<short, int, long>)null));
-
+            // Static method.
             Assert.Throws<ArgumentNullException>("selector", () => Result.SelectMany(source, null, resultSelector));
             Assert.Throws<ArgumentNullException>("resultSelector", () => Result.SelectMany(source, valueSelector, (Func<short, int, long>)null));
         }
@@ -109,8 +111,8 @@ namespace Narvalo.Applicative
         public static void Bind_AppliesBinder()
         {
             // Arrange
-            var source = Result<int, My.SimpleObj>.Of(1);
-            Func<int, Result<int, My.SimpleObj>> binder = val => Result<int, My.SimpleObj>.Of(2 * val);
+            var source = Result<int, My.Obj>.Of(1);
+            Func<int, Result<int, My.Obj>> binder = val => Result<int, My.Obj>.Of(2 * val);
 
             // Act
             var me = source.Bind(binder);
@@ -127,7 +129,7 @@ namespace Narvalo.Applicative
         public static void Select_AppliesSelector()
         {
             // Arrange
-            var source = Result<int, My.SimpleObj>.Of(1);
+            var source = Result<int, My.Obj>.Of(1);
             Func<int, int> selector = val => 2 * val;
 
             // Act
@@ -151,7 +153,7 @@ namespace Narvalo.Applicative
         [Property(DisplayName = "Result<T, My.SimpleObj> - The identity map is a fixed point for Select (first functor law).")]
         public static bool Identity_IsFixedPointForSelect(int arg)
         {
-            var me = Result<int, My.SimpleObj>.Of(arg);
+            var me = Result<int, My.Obj>.Of(arg);
 
             // fmap id  ==  id
             var left = me.Select(val => val);
@@ -163,7 +165,7 @@ namespace Narvalo.Applicative
         [Property(DisplayName = "Result<T, My.SimpleObj> - Select preserves the composition operator (second functor law).")]
         public static bool Select_PreservesComposition(short arg, Func<short, int> g, Func<int, long> f)
         {
-            var me = Result<short, My.SimpleObj>.Of(arg);
+            var me = Result<short, My.Obj>.Of(arg);
 
             // fmap (f . g)  ==  fmap f . fmap g
             var left = me.Select(val => f(g(val)));
@@ -179,10 +181,10 @@ namespace Narvalo.Applicative
         [Property(DisplayName = "Result<T, My.SimpleObj> - Of is a left identity for Bind (first monad law).")]
         public static bool Of_IsLeftIdentityForBind(int arg0, float arg1)
         {
-            Func<int, Result<float, My.SimpleObj>> f = val => Result<float, My.SimpleObj>.Of(arg1 * val);
+            Func<int, Result<float, My.Obj>> f = val => Result<float, My.Obj>.Of(arg1 * val);
 
             // return a >>= k  ==  k a
-            var left = Result<int, My.SimpleObj>.Of(arg0).Bind(f);
+            var left = Result<int, My.Obj>.Of(arg0).Bind(f);
             var right = f(arg0);
 
             return left.Equals(right);
@@ -191,8 +193,8 @@ namespace Narvalo.Applicative
         [Property(DisplayName = "Result<T, My.SimpleObj> - Of is a left identity for Compose (first monad law).")]
         public static bool Of_IsLeftIdentityForCompose(int arg0, float arg1)
         {
-            Func<int, Result<int, My.SimpleObj>> of = Result<int, My.SimpleObj>.Of;
-            Func<int, Result<float, My.SimpleObj>> f = val => Result<float, My.SimpleObj>.Of(arg1 * val);
+            Func<int, Result<int, My.Obj>> of = Result<int, My.Obj>.Of;
+            Func<int, Result<float, My.Obj>> f = val => Result<float, My.Obj>.Of(arg1 * val);
 
             // return >=> g  ==  g
             var left = of.Compose(f).Invoke(arg0);
@@ -204,10 +206,10 @@ namespace Narvalo.Applicative
         [Property(DisplayName = "Result<T, My.SimpleObj> - Of is a right identity for Bind (second monad law).")]
         public static bool Of_IsRightIdentityForBind(int arg0)
         {
-            var me = Result<int, My.SimpleObj>.Of(arg0);
+            var me = Result<int, My.Obj>.Of(arg0);
 
             // m >>= return  ==  m
-            var left = me.Bind(Result<int, My.SimpleObj>.Of);
+            var left = me.Bind(Result<int, My.Obj>.Of);
             var right = me;
 
             return left.Equals(right);
@@ -216,10 +218,10 @@ namespace Narvalo.Applicative
         [Property(DisplayName = "Result<T, My.SimpleObj> - Of is a right identity for Compose (second monad law).")]
         public static bool Of_IsRightIdentityForCompose(int arg0, float arg1)
         {
-            Func<int, Result<float, My.SimpleObj>> f = val => Result<float, My.SimpleObj>.Of(arg1 * val);
+            Func<int, Result<float, My.Obj>> f = val => Result<float, My.Obj>.Of(arg1 * val);
 
             // f >=> return  ==  f
-            var left = f.Compose(Result<float, My.SimpleObj>.Of).Invoke(arg0);
+            var left = f.Compose(Result<float, My.Obj>.Of).Invoke(arg0);
             var right = f(arg0);
 
             return left.Equals(right);
@@ -228,10 +230,10 @@ namespace Narvalo.Applicative
         [Property(DisplayName = "Result<T, My.SimpleObj> - Bind is associative (third monad law).")]
         public static bool Bind_IsAssociative(short arg0, int arg1, long arg2)
         {
-            var me = Result<short, My.SimpleObj>.Of(arg0);
+            var me = Result<short, My.Obj>.Of(arg0);
 
-            Func<short, Result<int, My.SimpleObj>> f = val => Result<int, My.SimpleObj>.Of(arg1 * val);
-            Func<int, Result<long, My.SimpleObj>> g = val => Result<long, My.SimpleObj>.Of(arg2 * val);
+            Func<short, Result<int, My.Obj>> f = val => Result<int, My.Obj>.Of(arg1 * val);
+            Func<int, Result<long, My.Obj>> g = val => Result<long, My.Obj>.Of(arg2 * val);
 
             // m >>= (\x -> f x >>= g)  ==  (m >>= f) >>= g
             var left = me.Bind(f).Bind(g);
@@ -243,9 +245,9 @@ namespace Narvalo.Applicative
         [Property(DisplayName = "Result<T, My.SimpleObj> - Compose is associative (third monad law).")]
         public static bool Compose_IsAssociative(short arg0, int arg1, long arg2, double arg3)
         {
-            Func<short, Result<int, My.SimpleObj>> f = val => Result<int, My.SimpleObj>.Of(arg1 * val);
-            Func<int, Result<long, My.SimpleObj>> g = val => Result<long, My.SimpleObj>.Of(arg2 * val);
-            Func<long, Result<double, My.SimpleObj>> h = val => Result<double, My.SimpleObj>.Of(arg3 * val);
+            Func<short, Result<int, My.Obj>> f = val => Result<int, My.Obj>.Of(arg1 * val);
+            Func<int, Result<long, My.Obj>> g = val => Result<long, My.Obj>.Of(arg2 * val);
+            Func<long, Result<double, My.Obj>> h = val => Result<double, My.Obj>.Of(arg3 * val);
 
             // f >=> (g >=> h)  ==  (f >=> g) >=> h
             var left = f.Compose(g.Compose(h)).Invoke(arg0);

@@ -9,10 +9,12 @@
     <Import_RootNamespace>Narvalo</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)DebugOnlyFactAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DefaultLocalizationFacts.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LocalizedStrings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)My.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AssertExtended.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ReleaseOnlyFactAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ThrowingEnumerable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UseCultureAttribute.cs" />
   </ItemGroup>

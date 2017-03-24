@@ -6,6 +6,8 @@ namespace Narvalo.Applicative
 
     using Xunit;
 
+    using static global::My;
+
     // Tests for Outcome<T>.
     public static partial class OutcomeTFacts
     {
@@ -52,7 +54,7 @@ namespace Narvalo.Applicative
         [Fact]
         public static void ValueOrDefault_ReturnsValue_IfSuccess()
         {
-            var exp = new My.SimpleObj();
+            var exp = new Obj();
             var ok = Outcome.Of(exp);
 
             Assert.Same(exp, ok.ValueOrDefault());
@@ -61,9 +63,9 @@ namespace Narvalo.Applicative
         [Fact]
         public static void ValueOrDefault_ReturnsDefault_IfError()
         {
-            var err = Outcome<My.SimpleObj>.FromError("error");
+            var err = Outcome<Obj>.FromError("error");
 
-            Assert.Same(default(My.SimpleObj), err.ValueOrDefault());
+            Assert.Same(default(Obj), err.ValueOrDefault());
         }
 
         #endregion
@@ -73,7 +75,7 @@ namespace Narvalo.Applicative
         [Fact]
         public static void ValueOrNone_ReturnsSome_IfSuccess()
         {
-            var exp = new My.SimpleObj();
+            var exp = new Obj();
             var ok = Outcome.Of(exp);
 
             var maybe = ok.ValueOrNone();
@@ -87,7 +89,7 @@ namespace Narvalo.Applicative
         [Fact]
         public static void ValueOrNone_ReturnsNone_IfError()
         {
-            var err = Outcome<My.SimpleObj>.FromError("error");
+            var err = Outcome<Obj>.FromError("error");
 
             Assert.True(err.ValueOrNone().IsNone);
         }
@@ -99,16 +101,16 @@ namespace Narvalo.Applicative
         [Fact]
         public static void ValueOrElse_Guards()
         {
-            Assert.Throws<ArgumentNullException>("valueFactory", () => MySuccess.ValueOrElse((Func<My.SimpleObj>)null));
-            Assert.Throws<ArgumentNullException>("valueFactory", () => MyError.ValueOrElse((Func<My.SimpleObj>)null));
+            Assert.Throws<ArgumentNullException>("valueFactory", () => MySuccess.ValueOrElse((Func<Obj>)null));
+            Assert.Throws<ArgumentNullException>("valueFactory", () => MyError.ValueOrElse((Func<Obj>)null));
         }
 
         [Fact]
         public static void ValueOrElse_ReturnsValue_IfSuccess()
         {
-            var exp = new My.SimpleObj();
+            var exp = new Obj();
             var ok = Outcome.Of(exp);
-            var other = new My.SimpleObj("other");
+            var other = new Obj("other");
 
             Assert.Same(exp, ok.ValueOrElse(other));
             Assert.Same(exp, ok.ValueOrElse(() => other));
@@ -117,8 +119,8 @@ namespace Narvalo.Applicative
         [Fact]
         public static void ValueOrElse_ReturnsOther_IfError()
         {
-            var err = Outcome<My.SimpleObj>.FromError("error");
-            var exp = new My.SimpleObj();
+            var err = Outcome<Obj>.FromError("error");
+            var exp = new Obj();
 
             Assert.Same(exp, err.ValueOrElse(exp));
             Assert.Same(exp, err.ValueOrElse(() => exp));
@@ -138,17 +140,17 @@ namespace Narvalo.Applicative
         [Fact]
         public static void ValueOrThrow_ReturnsValue_IfSuccess()
         {
-            var exp = new My.SimpleObj();
+            var exp = new Obj();
             var ok = Outcome.Of(exp);
 
             Assert.Same(exp, ok.ValueOrThrow());
-            Assert.Equal(exp, ok.ValueOrThrow(error => new My.SimpleException(error)));
+            Assert.Equal(exp, ok.ValueOrThrow(error => new SimpleException(error)));
         }
 
         [Fact]
         public static void ValueOrThrow_Throws_IfError()
         {
-            var err = Outcome<My.SimpleObj>.FromError("error");
+            var err = Outcome<Obj>.FromError("error");
 
             Action act = () => err.ValueOrThrow();
             var ex = Record.Exception(act);
@@ -161,13 +163,13 @@ namespace Narvalo.Applicative
         public static void ValueOrThrow_ThrowsCustomException_IfError()
         {
             var message = "error";
-            var err = Outcome<My.SimpleObj>.FromError(message);
+            var err = Outcome<Obj>.FromError(message);
 
-            Action act = () => err.ValueOrThrow(error => new My.SimpleException(error));
+            Action act = () => err.ValueOrThrow(error => new SimpleException(error));
             var ex = Record.Exception(act);
 
             Assert.NotNull(ex);
-            Assert.IsType<My.SimpleException>(ex);
+            Assert.IsType<SimpleException>(ex);
             Assert.Equal(message, ex.Message);
         }
 
@@ -179,7 +181,7 @@ namespace Narvalo.Applicative
         public static void ToValue_Throws_IfError()
         {
             var message = "error";
-            var err = Outcome<My.SimpleObj>.FromError(message);
+            var err = Outcome<Obj>.FromError(message);
 
             Action act = () => err.ToValue();
             var ex = Record.Exception(act);
@@ -191,7 +193,7 @@ namespace Narvalo.Applicative
         [Fact]
         public static void ToValue_ReturnsValue_IfSuccess()
         {
-            var exp = new My.SimpleObj();
+            var exp = new Obj();
             var ok = Outcome.Of(exp);
 
             Assert.Same(exp, ok.ToValue());
@@ -204,7 +206,7 @@ namespace Narvalo.Applicative
         [Fact]
         public static void ToMaybe_ReturnsSome_IfSuccess()
         {
-            var exp = new My.SimpleObj();
+            var exp = new Obj();
             var ok = Outcome.Of(exp);
 
             var maybe = ok.ToMaybe();
@@ -218,7 +220,7 @@ namespace Narvalo.Applicative
         [Fact]
         public static void ToMaybe_ReturnsNone_IfError()
         {
-            var err = Outcome<My.SimpleObj>.FromError("error");
+            var err = Outcome<Obj>.FromError("error");
 
             Assert.True(err.ToMaybe().IsNone);
         }
@@ -239,8 +241,8 @@ namespace Narvalo.Applicative
         {
             // Arrange
             var exp = "error";
-            var err = Outcome<My.SimpleObj>.FromError(exp);
-            Func<My.SimpleObj, Outcome<string>> binder = _ => Outcome.Of(_.Value);
+            var err = Outcome<Obj>.FromError(exp);
+            Func<Obj, Outcome<string>> binder = _ => Outcome.Of(_.Value);
 
             // Act
             var me = err.Bind(binder);
@@ -256,9 +258,9 @@ namespace Narvalo.Applicative
         public static void Bind_ReturnsSuccess_IfSuccess()
         {
             // Arrange
-            var exp = new My.SimpleObj("My Value");
+            var exp = new Obj("My Value");
             var ok = Outcome.Of(exp);
-            Func<My.SimpleObj, Outcome<string>> binder = _ => Outcome.Of(_.Value);
+            Func<Obj, Outcome<string>> binder = _ => Outcome.Of(_.Value);
 
             // Act
             var me = ok.Bind(binder);
@@ -274,7 +276,7 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Flatten_ReturnsError_IfError()
         {
-            var err = Outcome<Outcome<My.SimpleObj>>.FromError("error");
+            var err = Outcome<Outcome<Obj>>.FromError("error");
 
             Assert.True(err.IsError);
         }
@@ -282,7 +284,7 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Flatten_ReturnsSuccess_IfSuccess()
         {
-            var ok = Outcome.Of(Outcome.Of(new My.SimpleObj()));
+            var ok = Outcome.Of(Outcome.Of(new Obj()));
 
             Assert.True(ok.IsSuccess);
         }
@@ -294,7 +296,7 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Contains_Guards()
         {
-            var value = new My.SimpleObj();
+            var value = new Obj();
 
             Assert.Throws<ArgumentNullException>("comparer", () => MySuccess.Contains(value, null));
             Assert.Throws<ArgumentNullException>("comparer", () => MyError.Contains(value, null));
@@ -307,10 +309,10 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Match_Guards()
         {
-            Assert.Throws<ArgumentNullException>("caseSuccess", () => MySuccess.Match(null, _ => new My.SimpleObj()));
+            Assert.Throws<ArgumentNullException>("caseSuccess", () => MySuccess.Match(null, _ => new Obj()));
             Assert.Throws<ArgumentNullException>("caseError", () => MySuccess.Match(val => val, null));
 
-            Assert.Throws<ArgumentNullException>("caseSuccess", () => MyError.Match(null, _ => new My.SimpleObj()));
+            Assert.Throws<ArgumentNullException>("caseSuccess", () => MyError.Match(null, _ => new Obj()));
             Assert.Throws<ArgumentNullException>("caseError", () => MyError.Match(val => val, null));
         }
 
@@ -344,7 +346,7 @@ namespace Narvalo.Applicative
 
     public static partial class OutcomeTFacts
     {
-        private static Outcome<My.SimpleObj> MySuccess => Outcome.Of(new My.SimpleObj());
-        private static Outcome<My.SimpleObj> MyError => Outcome<My.SimpleObj>.FromError("error");
+        private static Outcome<Obj> MySuccess => Outcome.Of(new Obj());
+        private static Outcome<Obj> MyError => Outcome<Obj>.FromError("error");
     }
 }

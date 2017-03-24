@@ -7,6 +7,8 @@ namespace Narvalo.Applicative
 
     using Xunit;
 
+    using static global::My;
+
     // Tests for Fallible<T>.
     public static partial class FallibleTFacts
     {
@@ -50,7 +52,7 @@ namespace Narvalo.Applicative
         [Fact]
         public static void ThrowIfError_DoesNotThrow_IfSuccess()
         {
-            var ok = Fallible.Of(new My.SimpleObj());
+            var ok = Fallible.Of(new Obj());
 
             ok.ThrowIfError();
         }
@@ -58,13 +60,13 @@ namespace Narvalo.Applicative
         [Fact]
         public static void ThrowIfError_Throws_IfError()
         {
-            var err = Fallible<My.SimpleObj>.FromError(Edi);
+            var err = Fallible<Obj>.FromError(Edi);
 
             Action act = () => err.ThrowIfError();
             var ex = Record.Exception(act);
 
             Assert.NotNull(ex);
-            Assert.IsType<My.SimpleException>(ex);
+            Assert.IsType<SimpleException>(ex);
             Assert.Equal(s_EdiMessage, ex.Message);
         }
 
@@ -75,7 +77,7 @@ namespace Narvalo.Applicative
         [Fact]
         public static void ValueOrDefault_ReturnsValue_IfSuccess()
         {
-            var exp = new My.SimpleObj();
+            var exp = new Obj();
             var ok = Fallible.Of(exp);
 
             Assert.Same(exp, ok.ValueOrDefault());
@@ -84,9 +86,9 @@ namespace Narvalo.Applicative
         [Fact]
         public static void ValueOrDefault_ReturnsDefault_IfError()
         {
-            var err = Fallible<My.SimpleObj>.FromError(Edi);
+            var err = Fallible<Obj>.FromError(Edi);
 
-            Assert.Same(default(My.SimpleObj), err.ValueOrDefault());
+            Assert.Same(default(Obj), err.ValueOrDefault());
         }
 
         #endregion
@@ -96,7 +98,7 @@ namespace Narvalo.Applicative
         [Fact]
         public static void ValueOrNone_ReturnsSome_IfSuccess()
         {
-            var ok = Fallible.Of(new My.SimpleObj());
+            var ok = Fallible.Of(new Obj());
 
             Assert.True(ok.ValueOrNone().IsSome);
         }
@@ -104,7 +106,7 @@ namespace Narvalo.Applicative
         [Fact]
         public static void ValueOrNone_ReturnsNone_IfError()
         {
-            var err = Fallible<My.SimpleObj>.FromError(Edi);
+            var err = Fallible<Obj>.FromError(Edi);
 
             Assert.True(err.ValueOrNone().IsNone);
         }
@@ -116,16 +118,16 @@ namespace Narvalo.Applicative
         [Fact]
         public static void ValueOrElse_Guards()
         {
-            Assert.Throws<ArgumentNullException>("valueFactory", () => MySuccess.ValueOrElse((Func<My.SimpleObj>)null));
-            Assert.Throws<ArgumentNullException>("valueFactory", () => MyError.ValueOrElse((Func<My.SimpleObj>)null));
+            Assert.Throws<ArgumentNullException>("valueFactory", () => MySuccess.ValueOrElse((Func<Obj>)null));
+            Assert.Throws<ArgumentNullException>("valueFactory", () => MyError.ValueOrElse((Func<Obj>)null));
         }
 
         [Fact]
         public static void ValueOrElse_ReturnsValue_IfSuccess()
         {
-            var exp = new My.SimpleObj();
+            var exp = new Obj();
             var ok = Fallible.Of(exp);
-            var other = new My.SimpleObj("other");
+            var other = new Obj("other");
 
             Assert.Same(exp, ok.ValueOrElse(other));
             Assert.Same(exp, ok.ValueOrElse(() => other));
@@ -134,8 +136,8 @@ namespace Narvalo.Applicative
         [Fact]
         public static void ValueOrElse_ReturnsOther_IfError()
         {
-            var err = Fallible<My.SimpleObj>.FromError(Edi);
-            var exp = new My.SimpleObj();
+            var err = Fallible<Obj>.FromError(Edi);
+            var exp = new Obj();
 
             Assert.Same(exp, err.ValueOrElse(exp));
             Assert.Same(exp, err.ValueOrElse(() => exp));
@@ -148,7 +150,7 @@ namespace Narvalo.Applicative
         [Fact]
         public static void ValueOrThrow_ReturnsValue_IfSuccess()
         {
-            var exp = new My.SimpleObj();
+            var exp = new Obj();
             var ok = Fallible.Of(exp);
 
             Assert.Same(exp, ok.ValueOrThrow());
@@ -157,13 +159,13 @@ namespace Narvalo.Applicative
         [Fact]
         public static void ValueOrThrow_Throws_IfError()
         {
-            var err = Fallible<My.SimpleObj>.FromError(Edi);
+            var err = Fallible<Obj>.FromError(Edi);
 
             Action act = () => err.ValueOrThrow();
             var ex = Record.Exception(act);
 
             Assert.NotNull(ex);
-            Assert.IsType<My.SimpleException>(ex);
+            Assert.IsType<SimpleException>(ex);
             Assert.Equal(s_EdiMessage, ex.Message);
         }
 
@@ -182,8 +184,8 @@ namespace Narvalo.Applicative
         public static void Bind_ReturnsError_IfError()
         {
             // Arrange
-            var err = Fallible<My.SimpleObj>.FromError(Edi);
-            Func<My.SimpleObj, Fallible<string>> binder = _ => Fallible.Of(_.Value);
+            var err = Fallible<Obj>.FromError(Edi);
+            Func<Obj, Fallible<string>> binder = _ => Fallible.Of(_.Value);
 
             // Act
             var me = err.Bind(binder);
@@ -199,9 +201,9 @@ namespace Narvalo.Applicative
         public static void Bind_ReturnsSuccess_IfSuccess()
         {
             // Arrange
-            var exp = new My.SimpleObj("My Value");
+            var exp = new Obj("My Value");
             var ok = Fallible.Of(exp);
-            Func<My.SimpleObj, Fallible<string>> binder = _ => Fallible.Of(_.Value);
+            Func<Obj, Fallible<string>> binder = _ => Fallible.Of(_.Value);
 
             // Act
             var me = ok.Bind(binder);
@@ -217,7 +219,7 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Flatten_ReturnsError_IfError()
         {
-            var err = Fallible<Fallible<My.SimpleObj>>.FromError(Edi);
+            var err = Fallible<Fallible<Obj>>.FromError(Edi);
 
             Assert.True(err.IsError);
         }
@@ -225,7 +227,7 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Flatten_ReturnsSuccess_IfSuccess()
         {
-            var ok = Fallible.Of(Fallible.Of(new My.SimpleObj()));
+            var ok = Fallible.Of(Fallible.Of(new Obj()));
 
             Assert.True(ok.IsSuccess);
         }
@@ -237,7 +239,7 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Contains_Guards()
         {
-            var value = new My.SimpleObj();
+            var value = new Obj();
 
             Assert.Throws<ArgumentNullException>("comparer", () => MySuccess.Contains(value, null));
             Assert.Throws<ArgumentNullException>("comparer", () => MyError.Contains(value, null));
@@ -250,10 +252,10 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Match_Guards()
         {
-            Assert.Throws<ArgumentNullException>("caseSuccess", () => MySuccess.Match(null, _ => new My.SimpleObj()));
+            Assert.Throws<ArgumentNullException>("caseSuccess", () => MySuccess.Match(null, _ => new Obj()));
             Assert.Throws<ArgumentNullException>("caseError", () => MySuccess.Match(val => val, null));
 
-            Assert.Throws<ArgumentNullException>("caseSuccess", () => MyError.Match(null, _ => new My.SimpleObj()));
+            Assert.Throws<ArgumentNullException>("caseSuccess", () => MyError.Match(null, _ => new Obj()));
             Assert.Throws<ArgumentNullException>("caseError", () => MyError.Match(val => val, null));
         }
 
@@ -291,8 +293,8 @@ namespace Narvalo.Applicative
             = new Lazy<ExceptionDispatchInfo>(CreateExceptionDispatchInfo);
 
         private static ExceptionDispatchInfo Edi => s_Edi.Value;
-        private static Fallible<My.SimpleObj> MySuccess => Fallible.Of(new My.SimpleObj());
-        private static Fallible<My.SimpleObj> MyError => Fallible<My.SimpleObj>.FromError(Edi);
+        private static Fallible<Obj> MySuccess => Fallible.Of(new Obj());
+        private static Fallible<Obj> MyError => Fallible<Obj>.FromError(Edi);
 
         private static readonly string s_EdiMessage = "My message";
 
@@ -300,7 +302,7 @@ namespace Narvalo.Applicative
         {
             try
             {
-                throw new My.SimpleException(s_EdiMessage);
+                throw new SimpleException(s_EdiMessage);
             }
             catch (Exception ex)
             {

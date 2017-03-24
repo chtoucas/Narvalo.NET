@@ -30,32 +30,30 @@ public static partial class My
         OneTwoFour = One | Two | Four
     }
 
-    public struct EmptyStruct { }
+    // An empty struct.
+    public struct EmptyVal { }
 
-    public struct ComparableStruct : IEquatable<ComparableStruct>, IComparable<ComparableStruct>
+    public struct ComparableVal : IEquatable<ComparableVal>, IComparable<ComparableVal>
     {
-        public ComparableStruct(int value)
-        {
-            Value = value;
-        }
+        public ComparableVal(int value) => Value = value;
 
         public int Value { get; }
 
-        public int CompareTo(ComparableStruct other) => Value.CompareTo(other.Value);
+        public int CompareTo(ComparableVal other) => Value.CompareTo(other.Value);
 
-        public static bool operator ==(ComparableStruct left, ComparableStruct right) => left.Equals(right);
-        public static bool operator !=(ComparableStruct left, ComparableStruct right) => !left.Equals(right);
-        public static bool operator <(ComparableStruct left, ComparableStruct right) => left.CompareTo(right) < 0;
-        public static bool operator <=(ComparableStruct left, ComparableStruct right) => left.CompareTo(right) <= 0;
-        public static bool operator >(ComparableStruct left, ComparableStruct right) => left.CompareTo(right) > 0;
-        public static bool operator >=(ComparableStruct left, ComparableStruct right) => left.CompareTo(right) >= 0;
+        public static bool operator ==(ComparableVal left, ComparableVal right) => left.Equals(right);
+        public static bool operator !=(ComparableVal left, ComparableVal right) => !left.Equals(right);
+        public static bool operator <(ComparableVal left, ComparableVal right) => left.CompareTo(right) < 0;
+        public static bool operator <=(ComparableVal left, ComparableVal right) => left.CompareTo(right) <= 0;
+        public static bool operator >(ComparableVal left, ComparableVal right) => left.CompareTo(right) > 0;
+        public static bool operator >=(ComparableVal left, ComparableVal right) => left.CompareTo(right) >= 0;
 
-        public bool Equals(ComparableStruct other) => Value == other.Value;
+        public bool Equals(ComparableVal other) => Value == other.Value;
 
         public override bool Equals(object obj)
         {
             if (obj == null) { return false; }
-            return (obj is ComparableStruct) && Equals((ComparableStruct)obj);
+            return (obj is ComparableVal) && Equals((ComparableVal)obj);
         }
 
         public override int GetHashCode() => Value.GetHashCode();
@@ -63,21 +61,22 @@ public static partial class My
         public override string ToString() => Value.ToString(CultureInfo.CurrentCulture);
     }
 
-    public struct SimpleStruct : IEquatable<SimpleStruct>
+    // A simple value type.
+    public struct Val : IEquatable<Val>
     {
-        public SimpleStruct(int value) { Value = value; }
+        public Val(int value) => Value = value;
 
         public int Value { get; }
 
-        public static bool operator ==(SimpleStruct left, SimpleStruct right) => left.Equals(right);
-        public static bool operator !=(SimpleStruct left, SimpleStruct right) => !left.Equals(right);
+        public static bool operator ==(Val left, Val right) => left.Equals(right);
+        public static bool operator !=(Val left, Val right) => !left.Equals(right);
 
-        public bool Equals(SimpleStruct other) => Value == other.Value;
+        public bool Equals(Val other) => Value == other.Value;
 
         public override bool Equals(object obj)
         {
             if (obj == null) { return false; }
-            return (obj is SimpleStruct) && Equals((SimpleStruct)obj);
+            return (obj is Val) && Equals((Val)obj);
         }
 
         public override int GetHashCode() => Value.GetHashCode();
@@ -85,28 +84,27 @@ public static partial class My
         public override string ToString() => Value.ToString(CultureInfo.CurrentCulture);
     }
 
-    public sealed class SimpleObj
+    // A simple reference type.
+    public sealed class Obj
     {
-        public SimpleObj() { Value = "value"; }
+        public Obj() => Value = "value";
 
-        public SimpleObj(string value) { Value = value; }
+        public Obj(string value) => Value = value;
 
         public string Value { get; set; }
     }
 
+    // An immutable reference type.
     public sealed class ImmutableObj
     {
-        public ImmutableObj(int value)
-        {
-            Value = value;
-        }
+        public ImmutableObj(int value) => Value = value;
 
         public int Value { get; }
     }
 
     public sealed class EquatableObj : IEquatable<EquatableObj>
     {
-        public EquatableObj(string value) { Value = value; }
+        public EquatableObj(string value) => Value = value;
 
         public string Value { get; }
 

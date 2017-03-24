@@ -36,11 +36,12 @@ public partial class MonadTemplate
             Func<int, int, int, int, int> zipper4 = null;
             Func<int, int, int, int, int, int> zipper5 = null;
 
+            // Extension method.
             Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, zipper2));
             Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, third, zipper3));
             Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, third, fourth, zipper4));
             Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, third, fourth, fifth, zipper5));
-
+            // Static method.
             Assert.Throws<ArgumentNullException>("zipper", () => <#= ExtensionsClsName #>.Zip(first, second, zipper2));
             Assert.Throws<ArgumentNullException>("zipper", () => <#= ExtensionsClsName #>.Zip(first, second, third, zipper3));
             Assert.Throws<ArgumentNullException>("zipper", () => <#= ExtensionsClsName #>.Zip(first, second, third, fourth, zipper4));
@@ -88,9 +89,10 @@ public partial class MonadTemplate
             Func<short, <#= Name #><int<#= RTDecl #>>> valueSelector =  i => <#+ WriteFactory("int"); #>(i);
             Func<short, int, long> resultSelector = (i, j) => i + j;
 
+            // Extension method.
             Assert.Throws<ArgumentNullException>("selector", () => source.SelectMany(null, resultSelector));
             Assert.Throws<ArgumentNullException>("resultSelector", () => source.SelectMany(valueSelector, (Func<short, int, long>)null));
-
+            // Static method.
             Assert.Throws<ArgumentNullException>("selector", () => <#= ExtensionsClsName #>.SelectMany(source, null, resultSelector));
             Assert.Throws<ArgumentNullException>("resultSelector", () => <#= ExtensionsClsName #>.SelectMany(source, valueSelector, (Func<short, int, long>)null));
         }
@@ -109,6 +111,7 @@ public partial class MonadTemplate
             Func<int, int> innerKeySelector = val => val;
             Func<int, int, int> resultSelector = (i, j) => i + j;
 
+            // Extension method.
             Assert.Throws<ArgumentNullException>("outerKeySelector",
                 () => source.Join(inner, (Func<int, int>)null, innerKeySelector, resultSelector));
             Assert.Throws<ArgumentNullException>("innerKeySelector",
@@ -117,7 +120,7 @@ public partial class MonadTemplate
                 () => source.Join(inner, outerKeySelector, innerKeySelector, (Func<int, int, int>)null));
             Assert.Throws<ArgumentNullException>("comparer",
                 () => source.Join(inner, outerKeySelector, innerKeySelector, resultSelector, null));
-
+            // Static method.
             Assert.Throws<ArgumentNullException>("outerKeySelector",
                 () => <#= ExtensionsClsName #>.Join(source, inner, (Func<int, int>)null, innerKeySelector, resultSelector));
             Assert.Throws<ArgumentNullException>("innerKeySelector",
@@ -141,6 +144,7 @@ public partial class MonadTemplate
             Func<int, int> innerKeySelector = val => val;
             Func<int, <#= Name #><int>, int> resultSelector = (i, m) => 1;
 
+            // Extension method.
             Assert.Throws<ArgumentNullException>("outerKeySelector",
                 () => source.GroupJoin(inner, (Func<int, int>)null, innerKeySelector, resultSelector));
             Assert.Throws<ArgumentNullException>("innerKeySelector",
@@ -149,7 +153,7 @@ public partial class MonadTemplate
                 () => source.GroupJoin(inner, outerKeySelector, innerKeySelector, (Func<int, <#= Name #><int>, int>)null));
             Assert.Throws<ArgumentNullException>("comparer",
                 () => source.GroupJoin(inner, outerKeySelector, innerKeySelector, resultSelector, null));
-
+            // Static method.
             Assert.Throws<ArgumentNullException>("outerKeySelector",
                 () => <#= ExtensionsClsName #>.GroupJoin(source, inner, (Func<int, int>)null, innerKeySelector, resultSelector));
             Assert.Throws<ArgumentNullException>("innerKeySelector",

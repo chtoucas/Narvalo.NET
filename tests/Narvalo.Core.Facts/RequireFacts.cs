@@ -162,7 +162,7 @@ namespace Narvalo
 
         [Fact]
         public static void NotNullUnconstrained_DoesNotThrow_ForStruct()
-            => Require.NotNullUnconstrained(new My.EmptyStruct(), "paramName");
+            => Require.NotNullUnconstrained(new My.EmptyVal(), "paramName");
 
         [Fact]
         public static void NotNullUnconstrained_DoesNotThrow_ForNonNull()

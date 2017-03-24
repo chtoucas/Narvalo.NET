@@ -16,7 +16,7 @@ namespace Narvalo
 
         [Fact]
         public static void Enum_ThrowsArgumentException_ForNonEnumerationStruct()
-            => Assert.Throws<ArgumentException>(() => ConvertTo.Enum<My.EmptyStruct>(1));
+            => Assert.Throws<ArgumentException>(() => ConvertTo.Enum<My.EmptyVal>(1));
 
         [Fact]
         public static void Enum_ThrowsNotSupportedException_ForBitFlagsEnum()

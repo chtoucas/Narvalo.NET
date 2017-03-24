@@ -142,7 +142,7 @@ namespace Narvalo
 
         [Fact]
         public static void Enum_ThrowsArgumentException_ForNonEnumerationStruct()
-            => Assert.Throws<ArgumentException>(() => ParseTo.Enum<My.EmptyStruct>("Whatever"));
+            => Assert.Throws<ArgumentException>(() => ParseTo.Enum<My.EmptyVal>("Whatever"));
 
         [Theory]
         [InlineData("1")]
