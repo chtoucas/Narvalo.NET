@@ -7,6 +7,8 @@ namespace Narvalo.Applicative
 
     using Xunit;
 
+    using static global::My;
+
     public static partial class MaybeFacts
     {
         #region Unit
@@ -28,7 +30,7 @@ namespace Narvalo.Applicative
         [Fact]
         public static void ValueOrDefault_ReturnsValue_IfSome()
         {
-            var exp = new My.SimpleObj();
+            var exp = new SimpleObj();
             var some = Maybe.Of(exp);
 
             Assert.Same(exp, some.ValueOrDefault());
@@ -37,8 +39,8 @@ namespace Narvalo.Applicative
         [Fact]
         public static void ValueOrDefault_ReturnsDefault_IfNone()
         {
-            var none = Maybe<My.SimpleObj>.None;
-            var exp = default(My.SimpleObj);
+            var none = Maybe<SimpleObj>.None;
+            var exp = default(SimpleObj);
 
             Assert.Same(exp, none.ValueOrDefault());
         }
@@ -50,19 +52,19 @@ namespace Narvalo.Applicative
         [Fact]
         public static void ValueOrElse_Guards()
         {
-            Assert.Throws<ArgumentNullException>("other", () => MySome.ValueOrElse((My.SimpleObj)null));
-            Assert.Throws<ArgumentNullException>("valueFactory", () => MySome.ValueOrElse((Func<My.SimpleObj>)null));
+            Assert.Throws<ArgumentNullException>("other", () => MySome.ValueOrElse((SimpleObj)null));
+            Assert.Throws<ArgumentNullException>("valueFactory", () => MySome.ValueOrElse((Func<SimpleObj>)null));
 
-            Assert.Throws<ArgumentNullException>("other", () => MyNone.ValueOrElse((My.SimpleObj)null));
-            Assert.Throws<ArgumentNullException>("valueFactory", () => MyNone.ValueOrElse((Func<My.SimpleObj>)null));
+            Assert.Throws<ArgumentNullException>("other", () => MyNone.ValueOrElse((SimpleObj)null));
+            Assert.Throws<ArgumentNullException>("valueFactory", () => MyNone.ValueOrElse((Func<SimpleObj>)null));
         }
 
         [Fact]
         public static void ValueOrElse_ReturnsValue_IfSome()
         {
-            var exp = new My.SimpleObj();
+            var exp = new SimpleObj();
             var some = Maybe.Of(exp);
-            var other = new My.SimpleObj("other");
+            var other = new SimpleObj("other");
 
             Assert.Same(exp, some.ValueOrElse(other));
             Assert.Same(exp, some.ValueOrElse(() => other));
@@ -71,8 +73,8 @@ namespace Narvalo.Applicative
         [Fact]
         public static void ValueOrElse_ReturnsOther_IfNone()
         {
-            var none = Maybe<My.SimpleObj>.None;
-            var exp = new My.SimpleObj();
+            var none = Maybe<SimpleObj>.None;
+            var exp = new SimpleObj();
 
             Assert.Same(exp, none.ValueOrElse(exp));
             Assert.Same(exp, none.ValueOrElse(() => exp));
@@ -92,20 +94,20 @@ namespace Narvalo.Applicative
         [Fact]
         public static void ValueOrThrow_ReturnsValue_IfSome()
         {
-            var exp = new My.SimpleObj();
+            var exp = new SimpleObj();
             var some = Maybe.Of(exp);
 
             Assert.Same(exp, some.ValueOrThrow());
-            Assert.Equal(exp, some.ValueOrThrow(() => new My.SimpleException()));
+            Assert.Same(exp, some.ValueOrThrow(() => new SimpleException()));
         }
 
         [Fact]
         public static void ValueOrThrow_Throws_IfNone()
         {
-            var none = Maybe<My.SimpleObj>.None;
+            var none = Maybe<SimpleObj>.None;
 
             Assert.Throws<InvalidOperationException>(() => none.ValueOrThrow());
-            Assert.Throws<My.SimpleException>(() => none.ValueOrThrow(() => new My.SimpleException()));
+            Assert.Throws<SimpleException>(() => none.ValueOrThrow(() => new SimpleException()));
         }
 
         #endregion
@@ -123,8 +125,8 @@ namespace Narvalo.Applicative
         public static void Bind_ReturnsNone_IfNone()
         {
             // Arrange
-            var none = Maybe<My.SimpleObj>.None;
-            Func<My.SimpleObj, Maybe<string>> binder = val => Maybe.Of(val.Value);
+            var none = Maybe<SimpleObj>.None;
+            Func<SimpleObj, Maybe<string>> binder = val => Maybe.Of(val.Value);
 
             // Act
             var me = none.Bind(binder);
@@ -137,9 +139,9 @@ namespace Narvalo.Applicative
         public static void Bind_ReturnsSome_IfSome()
         {
             // Arrange
-            var exp = new My.SimpleObj();
+            var exp = new SimpleObj();
             var some = Maybe.Of(exp);
-            Func<My.SimpleObj, Maybe<string>> binder = val => Maybe.Of(val.Value);
+            Func<SimpleObj, Maybe<string>> binder = val => Maybe.Of(val.Value);
 
             // Act
             var me = some.Bind(binder);
@@ -155,7 +157,7 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Flatten_ReturnsNone_IfNone()
         {
-            var me = Maybe<Maybe<My.SimpleObj>>.None.Flatten();
+            var me = Maybe<Maybe<SimpleObj>>.None.Flatten();
 
             Assert.True(me.IsNone);
         }
@@ -163,7 +165,7 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Flatten_ReturnsSome_IfSome()
         {
-            var me = Maybe.Of(Maybe.Of(new My.SimpleObj()));
+            var me = Maybe.Of(Maybe.Of(new SimpleObj()));
 
             Assert.True(me.IsSome);
         }
@@ -175,7 +177,7 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Contains_Guards()
         {
-            var value = new My.SimpleObj();
+            var value = new SimpleObj();
 
             Assert.Throws<ArgumentNullException>("comparer", () => MySome.Contains(value, null));
             Assert.Throws<ArgumentNullException>("comparer", () => MyNone.Contains(value, null));
@@ -184,7 +186,7 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Contains_Succeeds()
         {
-            var value = new My.SimpleObj();
+            var value = new SimpleObj();
             var some = Maybe.Of(value);
 
             Assert.True(Maybe.Of(1).Contains(1), "Value type.");
@@ -202,12 +204,12 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Contains_Fails()
         {
-            var some = Maybe.Of(new My.SimpleObj());
-            var other = new My.SimpleObj("other");
+            var some = Maybe.Of(new SimpleObj());
+            var other = new SimpleObj("other");
 
             Assert.False(Maybe.Of(1).Contains(2));
             Assert.False(some.Contains(other));
-            Assert.False(some.Contains(new My.SimpleObj()), "References differ.");
+            Assert.False(some.Contains(new SimpleObj()), "References differ.");
         }
 
         #endregion
@@ -217,13 +219,13 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Match_Guards()
         {
-            Assert.Throws<ArgumentNullException>("caseSome", () => MySome.Match(null, new My.SimpleObj()));
-            Assert.Throws<ArgumentNullException>("caseSome", () => MySome.Match(null, () => new My.SimpleObj()));
-            Assert.Throws<ArgumentNullException>("caseNone", () => MySome.Match(val => val, (Func<My.SimpleObj>)null));
+            Assert.Throws<ArgumentNullException>("caseSome", () => MySome.Match(null, new SimpleObj()));
+            Assert.Throws<ArgumentNullException>("caseSome", () => MySome.Match(null, () => new SimpleObj()));
+            Assert.Throws<ArgumentNullException>("caseNone", () => MySome.Match(val => val, (Func<SimpleObj>)null));
 
-            Assert.Throws<ArgumentNullException>("caseSome", () => MyNone.Match(null, new My.SimpleObj()));
-            Assert.Throws<ArgumentNullException>("caseSome", () => MyNone.Match(null, () => new My.SimpleObj()));
-            Assert.Throws<ArgumentNullException>("caseNone", () => MyNone.Match(val => val, (Func<My.SimpleObj>)null));
+            Assert.Throws<ArgumentNullException>("caseSome", () => MyNone.Match(null, new SimpleObj()));
+            Assert.Throws<ArgumentNullException>("caseSome", () => MyNone.Match(null, () => new SimpleObj()));
+            Assert.Throws<ArgumentNullException>("caseNone", () => MyNone.Match(val => val, (Func<SimpleObj>)null));
         }
 
         #endregion
@@ -233,14 +235,14 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Coalesce_Guards()
         {
-            Assert.Throws<ArgumentNullException>("predicate", () => MySome.Coalesce(null, new My.SimpleObj("this"), new My.SimpleObj("that")));
-            Assert.Throws<ArgumentNullException>("predicate", () => MySome.Coalesce(null, val => val, () => new My.SimpleObj()));
-            Assert.Throws<ArgumentNullException>("selector", () => MySome.Coalesce(val => true, null, () => new My.SimpleObj()));
+            Assert.Throws<ArgumentNullException>("predicate", () => MySome.Coalesce(null, new SimpleObj("this"), new SimpleObj("that")));
+            Assert.Throws<ArgumentNullException>("predicate", () => MySome.Coalesce(null, val => val, () => new SimpleObj()));
+            Assert.Throws<ArgumentNullException>("selector", () => MySome.Coalesce(val => true, null, () => new SimpleObj()));
             Assert.Throws<ArgumentNullException>("otherwise", () => MySome.Coalesce(val => true, val => val, null));
 
-            Assert.Throws<ArgumentNullException>("predicate", () => MyNone.Coalesce(null, new My.SimpleObj("this"), new My.SimpleObj("that")));
-            Assert.Throws<ArgumentNullException>("predicate", () => MyNone.Coalesce(null, val => val, () => new My.SimpleObj()));
-            Assert.Throws<ArgumentNullException>("selector", () => MyNone.Coalesce(val => true, null, () => new My.SimpleObj()));
+            Assert.Throws<ArgumentNullException>("predicate", () => MyNone.Coalesce(null, new SimpleObj("this"), new SimpleObj("that")));
+            Assert.Throws<ArgumentNullException>("predicate", () => MyNone.Coalesce(null, val => val, () => new SimpleObj()));
+            Assert.Throws<ArgumentNullException>("selector", () => MyNone.Coalesce(val => true, null, () => new SimpleObj()));
             Assert.Throws<ArgumentNullException>("otherwise", () => MyNone.Coalesce(val => true, val => val, null));
         }
 
@@ -282,10 +284,10 @@ namespace Narvalo.Applicative
         public static void Do_InvokesOnSome_IfSome()
         {
             // Arrange
-            var some = Maybe.Of(new My.SimpleObj());
+            var some = Maybe.Of(new SimpleObj());
             var onSomeWasCalled = false;
             var onNoneWasCalled = false;
-            Action<My.SimpleObj> onSome = _ => onSomeWasCalled = true;
+            Action<SimpleObj> onSome = _ => onSomeWasCalled = true;
             Action onNone = () => onNoneWasCalled = true;
 
             // Act
@@ -300,10 +302,10 @@ namespace Narvalo.Applicative
         public static void Do_InvokesOnNone_IfNone()
         {
             // Arrange
-            var none = Maybe<My.SimpleObj>.None;
+            var none = Maybe<SimpleObj>.None;
             var onSomeWasCalled = false;
             var onNoneWasCalled = false;
-            Action<My.SimpleObj> onSome = _ => onSomeWasCalled = true;
+            Action<SimpleObj> onSome = _ => onSomeWasCalled = true;
             Action onNone = () => onNoneWasCalled = true;
 
             // Act
@@ -329,9 +331,9 @@ namespace Narvalo.Applicative
         public static void OnSome_InvokesAction_IfSome()
         {
             // Arrange
-            var some = Maybe.Of(new My.SimpleObj());
+            var some = Maybe.Of(new SimpleObj());
             var wasCalled = false;
-            Action<My.SimpleObj> op = _ => wasCalled = true;
+            Action<SimpleObj> op = _ => wasCalled = true;
 
             // Act
             some.OnSome(op);
@@ -344,9 +346,9 @@ namespace Narvalo.Applicative
         public static void OnSome_DoesNotInvokeAction_IfNone()
         {
             // Arrange
-            var none = Maybe<My.SimpleObj>.None;
+            var none = Maybe<SimpleObj>.None;
             var wasCalled = false;
-            Action<My.SimpleObj> op = _ => wasCalled = true;
+            Action<SimpleObj> op = _ => wasCalled = true;
 
             // Act
             none.OnSome(op);
@@ -370,7 +372,7 @@ namespace Narvalo.Applicative
         public static void OnNone_InvokesAction_IfNone()
         {
             // Arrange
-            var none = Maybe<My.SimpleObj>.None;
+            var none = Maybe<SimpleObj>.None;
             var wasCalled = false;
             Action op = () => wasCalled = true;
 
@@ -385,7 +387,7 @@ namespace Narvalo.Applicative
         public static void OnNone_DoesNotInvokeAction_IfSome()
         {
             // Arrange
-            var some = Maybe.Of(new My.SimpleObj());
+            var some = Maybe.Of(new SimpleObj());
             var wasCalled = false;
             Action op = () => wasCalled = true;
 
@@ -462,8 +464,8 @@ namespace Narvalo.Applicative
 
     public static partial class MaybeFacts
     {
-        private static Maybe<My.SimpleObj> MySome => Maybe.Of(new My.SimpleObj());
-        private static Maybe<My.SimpleObj> MyNone => Maybe<My.SimpleObj>.None;
+        private static Maybe<SimpleObj> MySome => Maybe.Of(new SimpleObj());
+        private static Maybe<SimpleObj> MyNone => Maybe<SimpleObj>.None;
     }
 
     public static partial class MaybeFacts
@@ -474,7 +476,7 @@ namespace Narvalo.Applicative
         public static void IsSome_IsFalse_IfNone()
         {
             var simple = Maybe<int>.None;
-            var value = Maybe<My.SimpleStruct>.None;
+            var value = Maybe<SimpleStruct>.None;
             var reference = Maybe<List<int>>.None;
 
             Assert.False(simple.IsSome);
@@ -486,7 +488,7 @@ namespace Narvalo.Applicative
         public static void IsSome_IsTrue_IfSome()
         {
             var simple = Maybe.Of(3141);
-            var value = Maybe.Of(new My.SimpleStruct(3141));
+            var value = Maybe.Of(new SimpleStruct(3141));
             var reference = Maybe.Of(new List<int>());
 
             Assert.True(simple.IsSome);
@@ -532,7 +534,7 @@ namespace Narvalo.Applicative
         ////    // Arrange
         ////    // REVIEW: Cast
         ////    var simple = (Maybe<int>)null;
-        ////    var value = (Maybe<My.SimpleStruct>)null;
+        ////    var value = (Maybe<SimpleStruct>)null;
         ////    var reference = (Maybe<List<int>>)null;
 
         ////    // Act & Assert
@@ -546,7 +548,7 @@ namespace Narvalo.Applicative
         ////{
         ////    // Arrange
         ////    var simple = Maybe<int>.None;
-        ////    var value = Maybe<My.SimpleStruct>.None;
+        ////    var value = Maybe<SimpleStruct>.None;
         ////    var reference = Maybe<List<int>>.None;
 
         ////    // Act & Assert
@@ -562,11 +564,11 @@ namespace Narvalo.Applicative
             var simpleA0 = Maybe.Of(3141);
             var simpleA1 = Maybe.Of(3141);
 
-            var valueA0 = Maybe.Of(new My.SimpleStruct(3141));
-            var valueA1 = Maybe.Of(new My.SimpleStruct(3141));
+            var valueA0 = Maybe.Of(new SimpleStruct(3141));
+            var valueA1 = Maybe.Of(new SimpleStruct(3141));
 
-            var almostValueA0 = Maybe.Of(new My.EquatableObj("Une chaîne de caractère"));
-            var almostValueA1 = Maybe.Of(new My.EquatableObj("Une chaîne de caractère"));
+            var almostValueA0 = Maybe.Of(new EquatableObj("Une chaîne de caractère"));
+            var almostValueA1 = Maybe.Of(new EquatableObj("Une chaîne de caractère"));
 
             //// FIXME
             ////var referenceA0 = Maybe.Of(new List<int>());
@@ -589,7 +591,7 @@ namespace Narvalo.Applicative
         ////    // Arrange
         ////    // REVIEW: Cast
         ////    var simple = (Maybe<int>)null;
-        ////    var value = (Maybe<My.SimpleStruct>)null;
+        ////    var value = (Maybe<SimpleStruct>)null;
         ////    var reference = (Maybe<List<int>>)null;
 
         ////    // Act & Assert
@@ -603,7 +605,7 @@ namespace Narvalo.Applicative
         ////{
         ////    // Arrange
         ////    var simple = Maybe<int>.None;
-        ////    var value = Maybe<My.SimpleStruct>.None;
+        ////    var value = Maybe<SimpleStruct>.None;
         ////    var reference = Maybe<List<int>>.None;
 
         ////    // Act & Assert
@@ -619,11 +621,11 @@ namespace Narvalo.Applicative
             var simpleA0 = Maybe.Of(3141);
             var simpleA1 = Maybe.Of(3141);
 
-            var valueA0 = Maybe.Of(new My.SimpleStruct(3141));
-            var valueA1 = Maybe.Of(new My.SimpleStruct(3141));
+            var valueA0 = Maybe.Of(new SimpleStruct(3141));
+            var valueA1 = Maybe.Of(new SimpleStruct(3141));
 
-            var almostValueA0 = Maybe.Of(new My.EquatableObj("Une chaîne de caractère"));
-            var almostValueA1 = Maybe.Of(new My.EquatableObj("Une chaîne de caractère"));
+            var almostValueA0 = Maybe.Of(new EquatableObj("Une chaîne de caractère"));
+            var almostValueA1 = Maybe.Of(new EquatableObj("Une chaîne de caractère"));
 
             //// FIXME
             ////var referenceA0 = Maybe.Of(new List<int>());
@@ -645,7 +647,7 @@ namespace Narvalo.Applicative
         {
             // Arrange
             var simple = Maybe.Of(3141);
-            var value = Maybe.Of(new My.SimpleStruct(3141));
+            var value = Maybe.Of(new SimpleStruct(3141));
             var reference = Maybe.Of(new List<int>());
 
             // Act & Assert
@@ -662,9 +664,9 @@ namespace Narvalo.Applicative
             var simpleA1 = Maybe.Of(3141);
             var simple = Maybe.Of(1570);
 
-            var valueA0 = Maybe.Of(new My.SimpleStruct(3141));
-            var valueA1 = Maybe.Of(new My.SimpleStruct(3141));
-            var value = Maybe.Of(new My.SimpleStruct(1570));
+            var valueA0 = Maybe.Of(new SimpleStruct(3141));
+            var valueA1 = Maybe.Of(new SimpleStruct(3141));
+            var value = Maybe.Of(new SimpleStruct(1570));
 
             var referenceA0 = Maybe.Of(new List<int>());
             var referenceA1 = Maybe.Of(new List<int>());
@@ -687,9 +689,9 @@ namespace Narvalo.Applicative
             var simple2 = Maybe.Of(3141);
             var simple3 = Maybe.Of(3141);
 
-            var value1 = Maybe.Of(new My.SimpleStruct(3141));
-            var value2 = Maybe.Of(new My.SimpleStruct(3141));
-            var value3 = Maybe.Of(new My.SimpleStruct(3141));
+            var value1 = Maybe.Of(new SimpleStruct(3141));
+            var value2 = Maybe.Of(new SimpleStruct(3141));
+            var value3 = Maybe.Of(new SimpleStruct(3141));
 
             var reference1 = Maybe.Of(new List<int>());
             var reference2 = Maybe.Of(new List<int>());
@@ -706,7 +708,7 @@ namespace Narvalo.Applicative
         {
             // Arrange
             var simple = Maybe<int>.None;
-            var value = Maybe<My.SimpleStruct>.None;
+            var value = Maybe<SimpleStruct>.None;
             var reference = Maybe<List<int>>.None;
 
             // Act & Assert
@@ -733,7 +735,7 @@ namespace Narvalo.Applicative
         ////    var simple = 3141;
         ////    var simpleOpt = Maybe.Of(simple);
 
-        ////    var value = new My.SimpleStruct(3141);
+        ////    var value = new SimpleStruct(3141);
         ////    var valueOpt = Maybe.Of(value);
 
         ////    var reference = new List<int>();
@@ -752,7 +754,7 @@ namespace Narvalo.Applicative
         ////    var simple = 3141;
         ////    var simpleOpt = Maybe.Of(simple);
 
-        ////    var value = new My.SimpleStruct(3141);
+        ////    var value = new SimpleStruct(3141);
         ////    var valueOpt = Maybe.Of(value);
 
         ////    var reference = new List<int>();
@@ -771,11 +773,11 @@ namespace Narvalo.Applicative
             var simpleA0 = Maybe.Of(3141);
             var simpleA1 = Maybe.Of(3141);
 
-            var valueA0 = Maybe.Of(new My.SimpleStruct(3141));
-            var valueA1 = Maybe.Of(new My.SimpleStruct(3141));
+            var valueA0 = Maybe.Of(new SimpleStruct(3141));
+            var valueA1 = Maybe.Of(new SimpleStruct(3141));
 
-            var almostValueA0 = Maybe.Of(new My.EquatableObj("Une chaîne de caractère"));
-            var almostValueA1 = Maybe.Of(new My.EquatableObj("Une chaîne de caractère"));
+            var almostValueA0 = Maybe.Of(new EquatableObj("Une chaîne de caractère"));
+            var almostValueA1 = Maybe.Of(new EquatableObj("Une chaîne de caractère"));
 
             // Act & Assert
             Assert.True(simpleA0.Equals(simpleA1));
@@ -790,11 +792,11 @@ namespace Narvalo.Applicative
             var simpleA0 = Maybe.Of(3141);
             var simpleA1 = Maybe.Of(3141);
 
-            var valueA0 = Maybe.Of(new My.SimpleStruct(3141));
-            var valueA1 = Maybe.Of(new My.SimpleStruct(3141));
+            var valueA0 = Maybe.Of(new SimpleStruct(3141));
+            var valueA1 = Maybe.Of(new SimpleStruct(3141));
 
-            var almostValueA0 = Maybe.Of(new My.EquatableObj("Une chaîne de caractère"));
-            var almostValueA1 = Maybe.Of(new My.EquatableObj("Une chaîne de caractère"));
+            var almostValueA0 = Maybe.Of(new EquatableObj("Une chaîne de caractère"));
+            var almostValueA1 = Maybe.Of(new EquatableObj("Une chaîne de caractère"));
 
             // Act & Assert
             Assert.True(simpleA0.Equals((object)simpleA1));
@@ -811,8 +813,8 @@ namespace Narvalo.Applicative
         {
             // Arrange
             var simple = 3141;
-            var value = new My.SimpleStruct(3141);
-            My.SimpleStruct? nullableValue = new My.SimpleStruct(3141);
+            var value = new SimpleStruct(3141);
+            SimpleStruct? nullableValue = new SimpleStruct(3141);
             var reference = new List<int>();
 
             // Act
@@ -832,7 +834,7 @@ namespace Narvalo.Applicative
         public static void Of_ReturnsNone_ForNull()
         {
             // Arrange
-            My.SimpleStruct? value = null;
+            SimpleStruct? value = null;
             List<int> reference = null;
 
             // Act
@@ -1038,7 +1040,7 @@ namespace Narvalo.Applicative
         public static void Maybe_IsImmutable()
         {
             // Arrange
-            var value = new My.ImmutableObj(1);
+            var value = new ImmutableObj(1);
             var option = Maybe.Of(value);
 
             // Act
@@ -1068,8 +1070,8 @@ namespace Narvalo.Applicative
         {
             // Arrange
             var simple = 3141;
-            var value = new My.SimpleStruct(3141);
-            My.SimpleStruct? nullableValue = new My.SimpleStruct(3141);
+            var value = new SimpleStruct(3141);
+            SimpleStruct? nullableValue = new SimpleStruct(3141);
             var reference = new List<int>();
 
             var simpleOpt = Maybe.Of(simple);

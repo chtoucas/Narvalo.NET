@@ -29,7 +29,7 @@ namespace Narvalo.Applicative
         {
             var source = Result<int, My.SimpleObj>.Of(1);
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => Result.Repeat(source, -1));
+            Assert.Throws<ArgumentOutOfRangeException>("count", () => Result.Repeat(source, -1));
         }
 
         #endregion
@@ -49,14 +49,15 @@ namespace Narvalo.Applicative
             Func<int, int, int, int, int> zipper4 = null;
             Func<int, int, int, int, int, int> zipper5 = null;
 
-            Assert.Throws<ArgumentNullException>(() => first.Zip(second, zipper2));
-            Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, zipper3));
-            Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, fourth, zipper4));
-            Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, fourth, fifth, zipper5));
-            Assert.Throws<ArgumentNullException>(() => Result.Zip(first, second, zipper2));
-            Assert.Throws<ArgumentNullException>(() => Result.Zip(first, second, third, zipper3));
-            Assert.Throws<ArgumentNullException>(() => Result.Zip(first, second, third, fourth, zipper4));
-            Assert.Throws<ArgumentNullException>(() => Result.Zip(first, second, third, fourth, fifth, zipper5));
+            Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, zipper2));
+            Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, third, zipper3));
+            Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, third, fourth, zipper4));
+            Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, third, fourth, fifth, zipper5));
+
+            Assert.Throws<ArgumentNullException>("zipper", () => Result.Zip(first, second, zipper2));
+            Assert.Throws<ArgumentNullException>("zipper", () => Result.Zip(first, second, third, zipper3));
+            Assert.Throws<ArgumentNullException>("zipper", () => Result.Zip(first, second, third, fourth, zipper4));
+            Assert.Throws<ArgumentNullException>("zipper", () => Result.Zip(first, second, third, fourth, fifth, zipper5));
         }
 
         #endregion
@@ -69,8 +70,8 @@ namespace Narvalo.Applicative
             var source = Result<int, My.SimpleObj>.Of(1);
             Func<int, long> selector = null;
 
-            Assert.Throws<ArgumentNullException>(() => source.Select(selector));
-            Assert.Throws<ArgumentNullException>(() => Result.Select(source, selector));
+            Assert.Throws<ArgumentNullException>("selector", () => source.Select(selector));
+            Assert.Throws<ArgumentNullException>("selector", () => Result.Select(source, selector));
         }
 
         #endregion
@@ -85,10 +86,11 @@ namespace Narvalo.Applicative
             Func<short, Result<int, My.SimpleObj>> valueSelector =  i => Result<int, My.SimpleObj>.Of(i);
             Func<short, int, long> resultSelector = (i, j) => i + j;
 
-            Assert.Throws<ArgumentNullException>(() => source.SelectMany(null, resultSelector));
-            Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, (Func<short, int, long>)null));
-            Assert.Throws<ArgumentNullException>(() => Result.SelectMany(source, null, resultSelector));
-            Assert.Throws<ArgumentNullException>(() => Result.SelectMany(source, valueSelector, (Func<short, int, long>)null));
+            Assert.Throws<ArgumentNullException>("selector", () => source.SelectMany(null, resultSelector));
+            Assert.Throws<ArgumentNullException>("resultSelector", () => source.SelectMany(valueSelector, (Func<short, int, long>)null));
+
+            Assert.Throws<ArgumentNullException>("selector", () => Result.SelectMany(source, null, resultSelector));
+            Assert.Throws<ArgumentNullException>("resultSelector", () => Result.SelectMany(source, valueSelector, (Func<short, int, long>)null));
         }
 
         #endregion
@@ -97,7 +99,7 @@ namespace Narvalo.Applicative
 
 #if !NO_INTERNALS_VISIBLE_TO
 
-    // Provides (tests for Result<T, My.SimpleObj>.
+    // Provides tests for Result<T, My.SimpleObj> that need access to internals.
     // T4: EmitCore().
     public static partial class ResultFacts
     {

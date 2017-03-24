@@ -16,7 +16,7 @@ public partial class MonadTemplate
         {
             var source = <#+ WriteFactory("int"); #>(1);
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => <#= Name #>.Repeat(source, -1));
+            Assert.Throws<ArgumentOutOfRangeException>("count", () => <#= Name #>.Repeat(source, -1));
         }
 
         #endregion
@@ -36,14 +36,15 @@ public partial class MonadTemplate
             Func<int, int, int, int, int> zipper4 = null;
             Func<int, int, int, int, int, int> zipper5 = null;
 
-            Assert.Throws<ArgumentNullException>(() => first.Zip(second, zipper2));
-            Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, zipper3));
-            Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, fourth, zipper4));
-            Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, fourth, fifth, zipper5));
-            Assert.Throws<ArgumentNullException>(() => <#= ExtensionsClsName #>.Zip(first, second, zipper2));
-            Assert.Throws<ArgumentNullException>(() => <#= ExtensionsClsName #>.Zip(first, second, third, zipper3));
-            Assert.Throws<ArgumentNullException>(() => <#= ExtensionsClsName #>.Zip(first, second, third, fourth, zipper4));
-            Assert.Throws<ArgumentNullException>(() => <#= ExtensionsClsName #>.Zip(first, second, third, fourth, fifth, zipper5));
+            Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, zipper2));
+            Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, third, zipper3));
+            Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, third, fourth, zipper4));
+            Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, third, fourth, fifth, zipper5));
+
+            Assert.Throws<ArgumentNullException>("zipper", () => <#= ExtensionsClsName #>.Zip(first, second, zipper2));
+            Assert.Throws<ArgumentNullException>("zipper", () => <#= ExtensionsClsName #>.Zip(first, second, third, zipper3));
+            Assert.Throws<ArgumentNullException>("zipper", () => <#= ExtensionsClsName #>.Zip(first, second, third, fourth, zipper4));
+            Assert.Throws<ArgumentNullException>("zipper", () => <#= ExtensionsClsName #>.Zip(first, second, third, fourth, fifth, zipper5));
         }
 
         #endregion
@@ -56,8 +57,8 @@ public partial class MonadTemplate
             var source = <#+ WriteFactory("int"); #>(1);
             Func<int, long> selector = null;
 
-            Assert.Throws<ArgumentNullException>(() => source.Select(selector));
-            Assert.Throws<ArgumentNullException>(() => <#= ExtensionsClsName #>.Select(source, selector));
+            Assert.Throws<ArgumentNullException>("selector", () => source.Select(selector));
+            Assert.Throws<ArgumentNullException>("selector", () => <#= ExtensionsClsName #>.Select(source, selector));
         }
 
         #endregion
@@ -70,8 +71,8 @@ public partial class MonadTemplate
         {
             var source = <#+ WriteFactory("int"); #>(1);
 
-            Assert.Throws<ArgumentNullException>(() => source.<#= FilterName #>(null));
-            Assert.Throws<ArgumentNullException>(() => <#= ExtensionsClsName #>.Where(source, null));
+            Assert.Throws<ArgumentNullException>("predicate", () => source.<#= FilterName #>(null));
+            Assert.Throws<ArgumentNullException>("predicate", () => <#= ExtensionsClsName #>.Where(source, null));
         }
 
         #endregion
@@ -87,10 +88,11 @@ public partial class MonadTemplate
             Func<short, <#= Name #><int<#= RTDecl #>>> valueSelector =  i => <#+ WriteFactory("int"); #>(i);
             Func<short, int, long> resultSelector = (i, j) => i + j;
 
-            Assert.Throws<ArgumentNullException>(() => source.SelectMany(null, resultSelector));
-            Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, (Func<short, int, long>)null));
-            Assert.Throws<ArgumentNullException>(() => <#= ExtensionsClsName #>.SelectMany(source, null, resultSelector));
-            Assert.Throws<ArgumentNullException>(() => <#= ExtensionsClsName #>.SelectMany(source, valueSelector, (Func<short, int, long>)null));
+            Assert.Throws<ArgumentNullException>("selector", () => source.SelectMany(null, resultSelector));
+            Assert.Throws<ArgumentNullException>("resultSelector", () => source.SelectMany(valueSelector, (Func<short, int, long>)null));
+
+            Assert.Throws<ArgumentNullException>("selector", () => <#= ExtensionsClsName #>.SelectMany(source, null, resultSelector));
+            Assert.Throws<ArgumentNullException>("resultSelector", () => <#= ExtensionsClsName #>.SelectMany(source, valueSelector, (Func<short, int, long>)null));
         }
 
         #endregion
@@ -107,21 +109,22 @@ public partial class MonadTemplate
             Func<int, int> innerKeySelector = val => val;
             Func<int, int, int> resultSelector = (i, j) => i + j;
 
-            Assert.Throws<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>("outerKeySelector",
                 () => source.Join(inner, (Func<int, int>)null, innerKeySelector, resultSelector));
-            Assert.Throws<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>("innerKeySelector",
                 () => source.Join(inner, outerKeySelector, (Func<int, int>)null, resultSelector));
-            Assert.Throws<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>("resultSelector",
                 () => source.Join(inner, outerKeySelector, innerKeySelector, (Func<int, int, int>)null));
-            Assert.Throws<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>("comparer",
                 () => source.Join(inner, outerKeySelector, innerKeySelector, resultSelector, null));
-            Assert.Throws<ArgumentNullException>(
+
+            Assert.Throws<ArgumentNullException>("outerKeySelector",
                 () => <#= ExtensionsClsName #>.Join(source, inner, (Func<int, int>)null, innerKeySelector, resultSelector));
-            Assert.Throws<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>("innerKeySelector",
                 () => <#= ExtensionsClsName #>.Join(source, inner, outerKeySelector, (Func<int, int>)null, resultSelector));
-            Assert.Throws<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>("resultSelector",
                 () => <#= ExtensionsClsName #>.Join(source, inner, outerKeySelector, innerKeySelector, (Func<int, int, int>)null));
-            Assert.Throws<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>("comparer",
                 () => <#= ExtensionsClsName #>.Join(source, inner, outerKeySelector, innerKeySelector, resultSelector, null));
         }
 
@@ -138,21 +141,22 @@ public partial class MonadTemplate
             Func<int, int> innerKeySelector = val => val;
             Func<int, <#= Name #><int>, int> resultSelector = (i, m) => 1;
 
-            Assert.Throws<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>("outerKeySelector",
                 () => source.GroupJoin(inner, (Func<int, int>)null, innerKeySelector, resultSelector));
-            Assert.Throws<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>("innerKeySelector",
                 () => source.GroupJoin(inner, outerKeySelector, (Func<int, int>)null, resultSelector));
-            Assert.Throws<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>("resultSelector",
                 () => source.GroupJoin(inner, outerKeySelector, innerKeySelector, (Func<int, <#= Name #><int>, int>)null));
-            Assert.Throws<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>("comparer",
                 () => source.GroupJoin(inner, outerKeySelector, innerKeySelector, resultSelector, null));
-            Assert.Throws<ArgumentNullException>(
+
+            Assert.Throws<ArgumentNullException>("outerKeySelector",
                 () => <#= ExtensionsClsName #>.GroupJoin(source, inner, (Func<int, int>)null, innerKeySelector, resultSelector));
-            Assert.Throws<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>("innerKeySelector",
                 () => <#= ExtensionsClsName #>.GroupJoin(source, inner, outerKeySelector, (Func<int, int>)null, resultSelector));
-            Assert.Throws<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>("resultSelector",
                 () => <#= ExtensionsClsName #>.GroupJoin(source, inner, outerKeySelector, innerKeySelector, (Func<int, <#= Name #><int>, int>)null));
-            Assert.Throws<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>("comparer",
                 () => <#= ExtensionsClsName #>.GroupJoin(source, inner, outerKeySelector, innerKeySelector, resultSelector, null));
         }
 

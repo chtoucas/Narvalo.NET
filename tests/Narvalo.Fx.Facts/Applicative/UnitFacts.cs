@@ -11,11 +11,9 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Equality_Tests()
         {
-            // Arrange
             var u1 = new Unit();
             var u2 = new Unit();
 
-            // Act & Assert
             Assert.True(u1 == Unit.Default);
             Assert.True(Unit.Default == u1);
             Assert.True(u1 == u2);
@@ -24,11 +22,9 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Inequality_Tests()
         {
-            // Arrange
             var u1 = new Unit();
             var u2 = new Unit();
 
-            // Act & Assert
             Assert.False(u1 != Unit.Default);
             Assert.False(Unit.Default != u1);
             Assert.False(u1 != u2);
@@ -37,11 +33,9 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Equals_Tests()
         {
-            // Arrange
             var u1 = new Unit();
             var u2 = new Unit();
 
-            // Act & Assert
             Assert.True(u1.Equals(u1));
             Assert.True(u1.Equals(u2));
             Assert.True(u1.Equals(Unit.Default));
@@ -58,7 +52,6 @@ namespace Narvalo.Applicative
         [Fact]
         public static void GetHashCode_Tests()
         {
-            // Act & Assert
             Assert.Equal(0, new Unit().GetHashCode());
             Assert.Equal(0, Unit.Default.GetHashCode());
         }
@@ -66,7 +59,6 @@ namespace Narvalo.Applicative
         [Fact]
         public static void ToString_Tests()
         {
-            // Act & Assert
             Assert.Equal("()", new Unit().ToString());
             Assert.Equal("()", Unit.Default.ToString());
         }

@@ -29,7 +29,7 @@ namespace Narvalo.Applicative
         {
             var source = Either<int, My.SimpleObj>.OfLeft(1);
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => Either.Repeat(source, -1));
+            Assert.Throws<ArgumentOutOfRangeException>("count", () => Either.Repeat(source, -1));
         }
 
         #endregion
@@ -49,14 +49,15 @@ namespace Narvalo.Applicative
             Func<int, int, int, int, int> zipper4 = null;
             Func<int, int, int, int, int, int> zipper5 = null;
 
-            Assert.Throws<ArgumentNullException>(() => first.Zip(second, zipper2));
-            Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, zipper3));
-            Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, fourth, zipper4));
-            Assert.Throws<ArgumentNullException>(() => first.Zip(second, third, fourth, fifth, zipper5));
-            Assert.Throws<ArgumentNullException>(() => Either.Zip(first, second, zipper2));
-            Assert.Throws<ArgumentNullException>(() => Either.Zip(first, second, third, zipper3));
-            Assert.Throws<ArgumentNullException>(() => Either.Zip(first, second, third, fourth, zipper4));
-            Assert.Throws<ArgumentNullException>(() => Either.Zip(first, second, third, fourth, fifth, zipper5));
+            Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, zipper2));
+            Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, third, zipper3));
+            Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, third, fourth, zipper4));
+            Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, third, fourth, fifth, zipper5));
+
+            Assert.Throws<ArgumentNullException>("zipper", () => Either.Zip(first, second, zipper2));
+            Assert.Throws<ArgumentNullException>("zipper", () => Either.Zip(first, second, third, zipper3));
+            Assert.Throws<ArgumentNullException>("zipper", () => Either.Zip(first, second, third, fourth, zipper4));
+            Assert.Throws<ArgumentNullException>("zipper", () => Either.Zip(first, second, third, fourth, fifth, zipper5));
         }
 
         #endregion
@@ -69,8 +70,8 @@ namespace Narvalo.Applicative
             var source = Either<int, My.SimpleObj>.OfLeft(1);
             Func<int, long> selector = null;
 
-            Assert.Throws<ArgumentNullException>(() => source.Select(selector));
-            Assert.Throws<ArgumentNullException>(() => Either.Select(source, selector));
+            Assert.Throws<ArgumentNullException>("selector", () => source.Select(selector));
+            Assert.Throws<ArgumentNullException>("selector", () => Either.Select(source, selector));
         }
 
         #endregion
@@ -85,10 +86,11 @@ namespace Narvalo.Applicative
             Func<short, Either<int, My.SimpleObj>> valueSelector =  i => Either<int, My.SimpleObj>.OfLeft(i);
             Func<short, int, long> resultSelector = (i, j) => i + j;
 
-            Assert.Throws<ArgumentNullException>(() => source.SelectMany(null, resultSelector));
-            Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, (Func<short, int, long>)null));
-            Assert.Throws<ArgumentNullException>(() => Either.SelectMany(source, null, resultSelector));
-            Assert.Throws<ArgumentNullException>(() => Either.SelectMany(source, valueSelector, (Func<short, int, long>)null));
+            Assert.Throws<ArgumentNullException>("selector", () => source.SelectMany(null, resultSelector));
+            Assert.Throws<ArgumentNullException>("resultSelector", () => source.SelectMany(valueSelector, (Func<short, int, long>)null));
+
+            Assert.Throws<ArgumentNullException>("selector", () => Either.SelectMany(source, null, resultSelector));
+            Assert.Throws<ArgumentNullException>("resultSelector", () => Either.SelectMany(source, valueSelector, (Func<short, int, long>)null));
         }
 
         #endregion
@@ -97,7 +99,7 @@ namespace Narvalo.Applicative
 
 #if !NO_INTERNALS_VISIBLE_TO
 
-    // Provides (tests for Either<T, My.SimpleObj>.
+    // Provides tests for Either<T, My.SimpleObj> that need access to internals.
     // T4: EmitCore().
     public static partial class EitherFacts
     {
