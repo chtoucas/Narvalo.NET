@@ -17,7 +17,7 @@ namespace Narvalo.Applicative
         public Maybe<TResult> ContinueWith<TResult>(Maybe<TResult> other)
             => IsSome ? other : Maybe<TResult>.None;
 
-        public Maybe<T> PassThrough<TOther>(Maybe<TOther> other)
+        public Maybe<T> PassBy<TOther>(Maybe<TOther> other)
             // Returning "this" is not very "functional", but since Maybe is a value type, it is fine.
             => other.IsSome ? this : None;
 
