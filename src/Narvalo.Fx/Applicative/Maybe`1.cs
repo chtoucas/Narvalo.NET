@@ -182,6 +182,15 @@ namespace Narvalo.Applicative
             return comparer.Equals(Value, value);
         }
 
+        /// <summary>
+        /// Matches the current instance. If <see cref="IsSome"/> is true, execute
+        /// <paramref name="caseSome"/>, otherwise execute <paramref name="caseNone"/>.
+        /// </summary>
+        /// <typeparam name="TResult">The underlying type of the result.</typeparam>
+        /// <param name="caseSome">A function to be executed if <see cref="IsSome"/> is true.</param>
+        /// <param name="caseNone">A function to be executed if <see cref="IsSome"/> is false.</param>
+        /// <returns>The result of <paramref name="caseSome"/> if <see cref="IsSome"/> is true;
+        /// otherwise the result of <paramref name="caseNone"/>.</returns>
         public TResult Match<TResult>(Func<T, TResult> caseSome, Func<TResult> caseNone)
         {
             Require.NotNull(caseSome, nameof(caseSome));
@@ -190,6 +199,15 @@ namespace Narvalo.Applicative
             return IsSome ? caseSome(Value) : caseNone();
         }
 
+        /// <summary>
+        /// Matches the current instance. If <see cref="IsSome"/> is true, execute
+        /// <paramref name="caseSome"/>, otherwise return <paramref name="caseNone"/>.
+        /// </summary>
+        /// <typeparam name="TResult">The underlying type of the result.</typeparam>
+        /// <param name="caseSome">A function to be executed if <see cref="IsSome"/> is true.</param>
+        /// <param name="caseNone">A value to be returned if <see cref="IsSome"/> is false.</param>
+        /// <returns>The result of <paramref name="caseSome"/> if <see cref="IsSome"/> is true;
+        /// otherwise <paramref name="caseNone"/>.</returns>
         public TResult Match<TResult>(Func<T, TResult> caseSome, TResult caseNone)
         {
             Require.NotNull(caseSome, nameof(caseSome));
@@ -197,6 +215,20 @@ namespace Narvalo.Applicative
             return IsSome ? caseSome(Value) : caseNone;
         }
 
+        /// <summary>
+        /// Coalesces the current instance. If both <see cref="IsSome"/> and <paramref name="predicate"/>
+        /// are true, execute <paramref name="selector"/>, otherwise execute
+        /// <paramref name="otherwise"/>.
+        /// </summary>
+        /// <typeparam name="TResult">The underlying type of the result.</typeparam>
+        /// <param name="predicate">A function to test the underlying value if any.</param>
+        /// <param name="selector">A function to be executed if both <see cref="IsSome"/>
+        /// and <paramref name="predicate"/> are true.</param>
+        /// <param name="otherwise">A function to be executed if <see cref="IsSome"/>
+        /// or <paramref name="predicate"/> is false.</param>
+        /// <returns>The result of <paramref name="selector"/> if <see cref="IsSome"/>
+        /// or <paramref name="predicate"/> is true; otherwise the result of
+        /// <paramref name="otherwise"/>.</returns>
         public TResult Coalesce<TResult>(Func<T, bool> predicate, Func<T, TResult> selector, Func<TResult> otherwise)
         {
             Require.NotNull(predicate, nameof(predicate));
@@ -206,6 +238,20 @@ namespace Narvalo.Applicative
             return IsSome && predicate(Value) ? selector(Value) : otherwise();
         }
 
+        /// <summary>
+        /// Coalesces the current instance. If both <see cref="IsSome"/> and <paramref name="predicate"/>
+        /// are true, return <paramref name="thenResult"/>; otherwise return
+        /// <paramref name="elseResult"/>.
+        /// </summary>
+        /// <typeparam name="TResult">The underlying type of the result.</typeparam>
+        /// <param name="predicate">A function to test the underlying value if any.</param>
+        /// <param name="thenResult">A value to be returned if both <see cref="IsSome"/>
+        /// and <paramref name="predicate"/> are true.</param>
+        /// <param name="elseResult">A value to be returned if <see cref="IsSome"/>
+        /// or <paramref name="predicate"/> is false.</param>
+        /// <returns><paramref name="thenResult"/> if both <see cref="IsSome"/>
+        /// and <paramref name="predicate"/> are true; otherwise
+        /// <paramref name="elseResult"/>.</returns>
         public TResult Coalesce<TResult>(Func<T, bool> predicate, TResult thenResult, TResult elseResult)
         {
             Require.NotNull(predicate, nameof(predicate));
@@ -253,6 +299,7 @@ namespace Narvalo.Applicative
         }
 
         // Alias for OnSome(). Publicly hidden.
+        [ExcludeFromCodeCoverage]
         void Internal.IContainer<T>.Do(Action<T> action) => OnSome(action);
     }
 

@@ -280,33 +280,41 @@ namespace Narvalo.Applicative
         #region Publicly hidden methods.
 
         // Alias for ContainsLeft().
+        [ExcludeFromCodeCoverage]
         bool Internal.IContainer<TLeft>.Contains(TLeft value)
             => ContainsLeft(value);
 
         // Alias for ContainsLeft().
+        [ExcludeFromCodeCoverage]
         bool Internal.IContainer<TLeft>.Contains(TLeft value, IEqualityComparer<TLeft> comparer)
             => ContainsLeft(value, comparer);
 
         // Alias for ContainsRight().
+        [ExcludeFromCodeCoverage]
         bool Internal.ISecondaryContainer<TRight>.Contains(TRight value)
             => ContainsRight(value);
 
         // Alias for ContainsRight().
+        [ExcludeFromCodeCoverage]
         bool Internal.ISecondaryContainer<TRight>.Contains(TRight value, IEqualityComparer<TRight> comparer)
            => ContainsRight(value, comparer);
 
         // Alias for WhenLeft().
+        [ExcludeFromCodeCoverage]
         void Internal.IContainer<TLeft>.When(Func<TLeft, bool> predicate, Action<TLeft> action)
             => WhenLeft(predicate, action);
 
         // Alias for WhenRight().
+        [ExcludeFromCodeCoverage]
         void Internal.ISecondaryContainer<TRight>.When(Func<TRight, bool> predicate, Action<TRight> action)
             => WhenRight(predicate, action);
 
         // Alias for OnLeft().
+        [ExcludeFromCodeCoverage]
         void Internal.IContainer<TLeft>.Do(Action<TLeft> action) => OnLeft(action);
 
         // Alias for OnRight().
+        [ExcludeFromCodeCoverage]
         void Internal.ISecondaryContainer<TRight>.Do(Action<TRight> action) => OnRight(action);
 
         #endregion

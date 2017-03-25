@@ -266,26 +266,32 @@ namespace Narvalo.Applicative
 
         #region Publicly hidden methods.
 
+        [ExcludeFromCodeCoverage]
         bool Internal.ISecondaryContainer<TError>.Contains(TError value)
             => throw new NotSupportedException();
 
+        [ExcludeFromCodeCoverage]
         bool Internal.ISecondaryContainer<TError>.Contains(TError value, IEqualityComparer<TError> comparer)
             => throw new NotSupportedException();
 
         // Alias for WhenSuccess().
+        [ExcludeFromCodeCoverage]
         void Internal.IContainer<T>.When(Func<T, bool> predicate, Action<T> action)
            => WhenSuccess(predicate, action);
 
         // Alias for WhenError().
+        [ExcludeFromCodeCoverage]
         void Internal.ISecondaryContainer<TError>.When(
             Func<TError, bool> predicate,
             Action<TError> action)
             => WhenError(predicate, action);
 
         // Alias for OnSuccess().
+        [ExcludeFromCodeCoverage]
         void Internal.IContainer<T>.Do(Action<T> action) => OnSuccess(action);
 
         // Alias for OnError().
+        [ExcludeFromCodeCoverage]
         void Internal.ISecondaryContainer<TError>.Do(Action<TError> action) => OnError(action);
 
         #endregion

@@ -292,11 +292,13 @@ namespace Narvalo.Applicative
 
         #region Publicly hidden methods.
 
+        [ExcludeFromCodeCoverage]
         bool Internal.ISecondaryContainer<ExceptionDispatchInfo>.Contains(ExceptionDispatchInfo value)
         {
             throw new NotSupportedException();
         }
 
+        [ExcludeFromCodeCoverage]
         bool Internal.ISecondaryContainer<ExceptionDispatchInfo>.Contains(
             ExceptionDispatchInfo value,
             IEqualityComparer<ExceptionDispatchInfo> comparer)
@@ -305,19 +307,23 @@ namespace Narvalo.Applicative
         }
 
         // Alias for WhenSuccess().
+        [ExcludeFromCodeCoverage]
         void Internal.IContainer<T>.When(Func<T, bool> predicate, Action<T> action)
            => WhenSuccess(predicate, action);
 
         // Alias for WhenError().
+        [ExcludeFromCodeCoverage]
         void Internal.ISecondaryContainer<ExceptionDispatchInfo>.When(
             Func<ExceptionDispatchInfo, bool> predicate,
             Action<ExceptionDispatchInfo> action)
             => WhenError(predicate, action);
 
         // Alias for OnSuccess().
+        [ExcludeFromCodeCoverage]
         void Internal.IContainer<T>.Do(Action<T> action) => OnSuccess(action);
 
         // Alias for OnError().
+        [ExcludeFromCodeCoverage]
         void Internal.ISecondaryContainer<ExceptionDispatchInfo>.Do(Action<ExceptionDispatchInfo> action)
             => OnError(action);
 
