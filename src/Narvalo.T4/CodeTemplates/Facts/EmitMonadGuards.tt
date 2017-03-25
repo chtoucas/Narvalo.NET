@@ -2,11 +2,11 @@
 
 public partial class MonadTemplate
 {
-    public void EmitMonadCore()
+    public void EmitMonadGuards()
     {
 #>
     // Provides tests for <#= Name #><T<#= RTDecl #>>.
-    // T4: EmitCore().
+    // T4: EmitMonadGuards().
     public static partial class <#= Name #>Facts
     {
         #region Repeat()
@@ -169,7 +169,7 @@ public partial class MonadTemplate
 <#+ } // T4: End of HasJoin. #>
     }
 <#+
-    } // T4: End of EmitCore().
+    } // T4: End of EmitMonadGuards().
 } // T4: End of MonadTemplate.
 
 #>

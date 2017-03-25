@@ -8,7 +8,7 @@ public partial class MonadTemplate
 #if !NO_INTERNALS_VISIBLE_TO
 
     // Provides tests for <#= Name #><T<#= RTDecl #>> that need access to internals.
-    // T4: EmitCore().
+    // T4: EmitMonadInternal().
     public static partial class <#= Name #>Facts
     {
         #region Bind()
@@ -16,14 +16,11 @@ public partial class MonadTemplate
         [Fact]
         public static void Bind_AppliesBinder()
         {
-            // Arrange
             var source = <#+ WriteFactory("int"); #>(1);
             Func<int, <#= Name #><int<#= RTDecl #>>> binder = val => <#+ WriteFactory("int"); #>(2 * val);
 
-            // Act
             var me = source.Bind(binder);
 
-            // Assert
             Assert.Equal(2, me.<#= ValueProperty #>);
         }
 
@@ -34,14 +31,11 @@ public partial class MonadTemplate
         [Fact]
         public static void Select_AppliesSelector()
         {
-            // Arrange
             var source = <#+ WriteFactory("int"); #>(1);
             Func<int, int> selector = val => 2 * val;
 
-            // Act
             var me = source.Select(selector);
 
-            // Assert
             Assert.Equal(2, me.<#= ValueProperty #>);
         }
 
@@ -50,7 +44,7 @@ public partial class MonadTemplate
 
 #endif
 <#+
-    } // T4: End of EmitCore().
+    } // T4: End of EmitMonadInternal().
 } // T4: End of MonadTemplate.
 
 #>
