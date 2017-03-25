@@ -4,7 +4,6 @@ Overview
 - [User Documentation](userguide/index.md)
 - [Developer Guidelines](developer.md)
 - [Issues](issues.md)
-- [Test coverage](test-coverage.html) (not always up-to-date).
 
 Project | Summary | .NET Platform | Package
 --------|---------|---------------|--------
