@@ -13,8 +13,8 @@ public partial class MonadTemplate
     {
         #region Bind()
 
-        [Fact]
-        public static void Bind_AppliesBinder()
+        [Fact(DisplayName = "Bind() applies the binder to the underlying value.")]
+        public static void Bind_calls_binder()
         {
             var source = <#+ WriteFactory("int"); #>(1);
             Func<int, <#= Name #><int<#= RTDecl #>>> binder = val => <#+ WriteFactory("int"); #>(2 * val);
@@ -28,8 +28,8 @@ public partial class MonadTemplate
 
         #region Select()
 
-        [Fact]
-        public static void Select_AppliesSelector()
+        [Fact(DisplayName = "Select() applies the selector to the underlying value.")]
+        public static void Select_calls_selector()
         {
             var source = <#+ WriteFactory("int"); #>(1);
             Func<int, int> selector = val => 2 * val;

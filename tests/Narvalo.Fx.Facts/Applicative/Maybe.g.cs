@@ -24,8 +24,8 @@ namespace Narvalo.Applicative
     {
         #region Repeat()
 
-        [Fact]
-        public static void Repeat_Guards()
+        [Fact(DisplayName = "Repeat() guards.")]
+        public static void Repeat_guards()
         {
             var source = Maybe<int>.η(1);
 
@@ -36,8 +36,8 @@ namespace Narvalo.Applicative
 
         #region Zip()
 
-        [Fact]
-        public static void Zip_Guards()
+        [Fact(DisplayName = "Zip() guards.")]
+        public static void Zip_guards()
         {
             var first = Maybe<int>.η(1);
             var second = Maybe<int>.η(2);
@@ -65,8 +65,8 @@ namespace Narvalo.Applicative
 
         #region Select()
 
-        [Fact]
-        public static void Select_Guards()
+        [Fact(DisplayName = "Select() guards.")]
+        public static void Select_guards()
         {
             var source = Maybe<int>.η(1);
             Func<int, long> selector = null;
@@ -79,8 +79,8 @@ namespace Narvalo.Applicative
 
         #region Where()
 
-        [Fact]
-        public static void Where_Guards()
+        [Fact(DisplayName = "Where() guards.")]
+        public static void Where_guards()
         {
             var source = Maybe<int>.η(1);
 
@@ -92,8 +92,8 @@ namespace Narvalo.Applicative
 
         #region SelectMany()
 
-        [Fact]
-        public static void SelectMany_Guards()
+        [Fact(DisplayName = "SelectMany() guards.")]
+        public static void SelectMany_guards()
         {
             var source = Maybe<short>.η(1);
             var middle = Maybe<int>.η(2);
@@ -112,8 +112,8 @@ namespace Narvalo.Applicative
 
         #region Join()
 
-        [Fact]
-        public static void Join_Guards()
+        [Fact(DisplayName = "Join() guards.")]
+        public static void Join_guards()
         {
             var source = Maybe<int>.η(1);
             var inner = Maybe<int>.η(2);
@@ -145,8 +145,8 @@ namespace Narvalo.Applicative
 
         #region GroupJoin()
 
-        [Fact]
-        public static void GroupJoin_Guards()
+        [Fact(DisplayName = "GroupJoin() guards.")]
+        public static void GroupJoin_guards()
         {
             var source = Maybe<int>.η(1);
             var inner = Maybe<int>.η(2);
@@ -186,8 +186,8 @@ namespace Narvalo.Applicative
     {
         #region Bind()
 
-        [Fact]
-        public static void Bind_AppliesBinder()
+        [Fact(DisplayName = "Bind() applies the binder to the underlying value.")]
+        public static void Bind_calls_binder()
         {
             var source = Maybe<int>.η(1);
             Func<int, Maybe<int>> binder = val => Maybe<int>.η(2 * val);
@@ -201,8 +201,8 @@ namespace Narvalo.Applicative
 
         #region Select()
 
-        [Fact]
-        public static void Select_AppliesSelector()
+        [Fact(DisplayName = "Select() applies the selector to the underlying value.")]
+        public static void Select_calls_selector()
         {
             var source = Maybe<int>.η(1);
             Func<int, int> selector = val => 2 * val;
@@ -224,7 +224,7 @@ namespace Narvalo.Applicative
         #region Functor Rules
 
         [Property(DisplayName = "The identity map is a fixed point for Select (first functor law).")]
-        public static bool Identity_IsFixedPointForSelect(int arg)
+        public static bool Identity_is_fixed_pointSelect(int arg)
         {
             var me = Maybe<int>.η(arg);
 
@@ -236,7 +236,7 @@ namespace Narvalo.Applicative
         }
 
         [Property(DisplayName = "Select() preserves the composition operator (second functor law).")]
-        public static bool Select_PreservesComposition(short arg, Func<short, int> g, Func<int, long> f)
+        public static bool Select_preserves_composition(short arg, Func<short, int> g, Func<int, long> f)
         {
             var me = Maybe<short>.η(arg);
 
@@ -252,7 +252,7 @@ namespace Narvalo.Applicative
         #region Monoid Rules
 
         [Property(DisplayName = "None is a left identity for OrElse.")]
-        public static bool None_IsLeftIdentityForOrElse(int arg)
+        public static bool None_is_left_identity(int arg)
         {
             var me = Maybe<int>.η(arg);
 
@@ -264,7 +264,7 @@ namespace Narvalo.Applicative
         }
 
         [Property(DisplayName = "None is a right identity for OrElse.")]
-        public static bool None_IsRightIdentityForOrElse(int arg)
+        public static bool None_is_right_identity(int arg)
         {
             var me = Maybe<int>.η(arg);
 
@@ -276,7 +276,7 @@ namespace Narvalo.Applicative
         }
 
         [Property(DisplayName = "OrElse() is associative.")]
-        public static bool OrElse_IsAssociative(int arg0, int arg1, int arg2)
+        public static bool OrElse_is_associative(int arg0, int arg1, int arg2)
         {
             var x = Maybe<int>.η(arg0);
             var y = Maybe<int>.η(arg1);
@@ -293,8 +293,8 @@ namespace Narvalo.Applicative
 
         #region Monad Rules
 
-        [Property(DisplayName = "Maybe.Of() is a left identity for Bind (first monad law).")]
-        public static bool Of_IsLeftIdentityForBind(int arg0, float arg1)
+        [Property(DisplayName = "Of() is a left identity for Bind (first monad law).")]
+        public static bool Of_is_left_identity_for_bind(int arg0, float arg1)
         {
             Func<int, Maybe<float>> f = val => Maybe<float>.η(arg1 * val);
 
@@ -305,8 +305,8 @@ namespace Narvalo.Applicative
             return left.Equals(right);
         }
 
-        [Property(DisplayName = "Maybe.Of() is a left identity for Compose (first monad law).")]
-        public static bool Of_IsLeftIdentityForCompose(int arg0, float arg1)
+        [Property(DisplayName = "Of() is a left identity for Compose (first monad law).")]
+        public static bool Of_is_left_identity_for_compose(int arg0, float arg1)
         {
             Func<int, Maybe<int>> of = Maybe<int>.η;
             Func<int, Maybe<float>> f = val => Maybe<float>.η(arg1 * val);
@@ -318,8 +318,8 @@ namespace Narvalo.Applicative
             return left.Equals(right);
         }
 
-        [Property(DisplayName = "Maybe.Of() is a right identity for Bind (second monad law).")]
-        public static bool Of_IsRightIdentityForBind(int arg0)
+        [Property(DisplayName = "Of() is a right identity for Bind (second monad law).")]
+        public static bool Of_is_right_identity_for_bind(int arg0)
         {
             var me = Maybe<int>.η(arg0);
 
@@ -330,8 +330,8 @@ namespace Narvalo.Applicative
             return left.Equals(right);
         }
 
-        [Property(DisplayName = "Maybe.Of() is a right identity for Compose (second monad law).")]
-        public static bool Of_IsRightIdentityForCompose(int arg0, float arg1)
+        [Property(DisplayName = "Of() is a right identity for Compose (second monad law).")]
+        public static bool Of_is_right_identity_for_compose(int arg0, float arg1)
         {
             Func<int, Maybe<float>> f = val => Maybe<float>.η(arg1 * val);
 
@@ -343,7 +343,7 @@ namespace Narvalo.Applicative
         }
 
         [Property(DisplayName = "Bind() is associative (third monad law).")]
-        public static bool Bind_IsAssociative(short arg0, int arg1, long arg2)
+        public static bool Bind_is_associative(short arg0, int arg1, long arg2)
         {
             var me = Maybe<short>.η(arg0);
 
@@ -358,7 +358,7 @@ namespace Narvalo.Applicative
         }
 
         [Property(DisplayName = "Compose() is associative (third monad law).")]
-        public static bool Compose_IsAssociative(short arg0, int arg1, long arg2, double arg3)
+        public static bool Compose_is_associative(short arg0, int arg1, long arg2, double arg3)
         {
             Func<short, Maybe<int>> f = val => Maybe<int>.η(arg1 * val);
             Func<int, Maybe<long>> g = val => Maybe<long>.η(arg2 * val);
@@ -376,7 +376,7 @@ namespace Narvalo.Applicative
         #region Monad Plus Rules
 
         [Property(DisplayName = "None is is a left zero for Bind (monad zero rule).")]
-        public static bool None_IsLeftZeroForBind(long arg0)
+        public static bool None_is_left_zero(long arg0)
         {
             Func<int, Maybe<long>> f = val => Maybe<long>.η(arg0 * val);
 
@@ -388,7 +388,7 @@ namespace Narvalo.Applicative
         }
 
         [Property(DisplayName = "None is is a right zero for Bind (monad more rule).")]
-        public static bool None_IsRightZeroForBind(int arg0)
+        public static bool None_is_right_zero(int arg0)
         {
             // m >>= (\x -> mzero) = mzero
             var left = Maybe<int>.η(arg0).Bind(_ => Maybe<long>.None);

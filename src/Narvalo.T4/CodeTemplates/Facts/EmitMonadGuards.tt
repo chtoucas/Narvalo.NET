@@ -11,8 +11,8 @@ public partial class MonadTemplate
     {
         #region Repeat()
 
-        [Fact]
-        public static void Repeat_Guards()
+        [Fact(DisplayName = "Repeat() guards.")]
+        public static void Repeat_guards()
         {
             var source = <#+ WriteFactory("int"); #>(1);
 
@@ -23,8 +23,8 @@ public partial class MonadTemplate
 
         #region Zip()
 
-        [Fact]
-        public static void Zip_Guards()
+        [Fact(DisplayName = "Zip() guards.")]
+        public static void Zip_guards()
         {
             var first = <#+ WriteFactory("int"); #>(1);
             var second = <#+ WriteFactory("int"); #>(2);
@@ -52,8 +52,8 @@ public partial class MonadTemplate
 
         #region <#= MapName #>()
 
-        [Fact]
-        public static void <#= MapName #>_Guards()
+        [Fact(DisplayName = "<#= MapName #>() guards.")]
+        public static void <#= MapName #>_guards()
         {
             var source = <#+ WriteFactory("int"); #>(1);
             Func<int, long> selector = null;
@@ -67,8 +67,8 @@ public partial class MonadTemplate
 <#+ if (HasFilter) { #>
         #region <#= FilterName #>()
 
-        [Fact]
-        public static void <#= FilterName #>_Guards()
+        [Fact(DisplayName = "<#= FilterName #>() guards.")]
+        public static void <#= FilterName #>_guards()
         {
             var source = <#+ WriteFactory("int"); #>(1);
 
@@ -81,8 +81,8 @@ public partial class MonadTemplate
 <#+ } // T4: End of HasFilter. #>
         #region SelectMany()
 
-        [Fact]
-        public static void SelectMany_Guards()
+        [Fact(DisplayName = "SelectMany() guards.")]
+        public static void SelectMany_guards()
         {
             var source = <#+ WriteFactory("short"); #>(1);
             var middle = <#+ WriteFactory("int"); #>(2);
@@ -102,8 +102,8 @@ public partial class MonadTemplate
 <#+ if (HasJoin) { #>
         #region Join()
 
-        [Fact]
-        public static void Join_Guards()
+        [Fact(DisplayName = "Join() guards.")]
+        public static void Join_guards()
         {
             var source = <#+ WriteFactory("int"); #>(1);
             var inner = <#+ WriteFactory("int"); #>(2);
@@ -135,8 +135,8 @@ public partial class MonadTemplate
 
         #region GroupJoin()
 
-        [Fact]
-        public static void GroupJoin_Guards()
+        [Fact(DisplayName = "GroupJoin() guards.")]
+        public static void GroupJoin_guards()
         {
             var source = <#+ WriteFactory("int"); #>(1);
             var inner = <#+ WriteFactory("int"); #>(2);

@@ -13,38 +13,44 @@ namespace Narvalo.Applicative
     {
         #region Unit
 
-        [Fact]
-        public static void Unit_IsSuccess() => Assert.True(Outcome.Unit.IsSuccess);
+        [Fact(DisplayName = "Unit is OK.")]
+        public static void Unit_is_success()
+        {
+            Assert.True(Outcome.Unit.IsSuccess);
+            Assert.False(Outcome.Unit.IsError);
+        }
 
         #endregion
 
         #region Of()
 
-        [Fact]
-        public static void Of_ReturnsSuccess()
+        [Fact(DisplayName = "Of() result is OK.")]
+        public static void Of_returns_success()
         {
             var result = Outcome.Of(1);
 
             Assert.True(result.IsSuccess);
+            Assert.False(result.IsError);
         }
 
         #endregion
 
         #region FromError()
 
-        [Fact]
-        public static void FromError_Guards()
+        [Fact(DisplayName = "FromError() guards.")]
+        public static void FromError_guards()
         {
             Assert.Throws<ArgumentNullException>("error", () => Outcome<int>.FromError(null));
             Assert.Throws<ArgumentException>("error", () => Outcome<int>.FromError(String.Empty));
         }
 
-        [Fact]
-        public static void FromError_ReturnsError()
+        [Fact(DisplayName = "FromError() result is KO.")]
+        public static void FromError_returns_failure()
         {
             var result = Outcome<int>.FromError("error");
 
             Assert.True(result.IsError);
+            Assert.False(result.IsSuccess);
         }
 
         #endregion
@@ -227,6 +233,66 @@ namespace Narvalo.Applicative
 
         #endregion
 
+        #region Equals()
+
+        [Fact]
+        public static void Equals_Guards()
+        {
+            Assert.Throws<ArgumentNullException>("comparer", () => MySuccess.Equals(MySuccess, null));
+            Assert.Throws<ArgumentNullException>("comparer", () => MySuccess.Equals(MyError, null));
+
+            Assert.Throws<ArgumentNullException>("comparer", () => MyError.Equals(MyError, null));
+            Assert.Throws<ArgumentNullException>("comparer", () => MyError.Equals(MySuccess, null));
+        }
+
+        #endregion
+
+        #region GetHashCode()
+
+        [Fact]
+        public static void GetHashCode_Guards()
+        {
+            Assert.Throws<ArgumentNullException>("comparer", () => MySuccess.GetHashCode(null));
+            Assert.Throws<ArgumentNullException>("comparer", () => MyError.GetHashCode(null));
+        }
+
+        #endregion
+    }
+
+    public static partial class OutcomeTFacts
+    {
+        #region Contains()
+
+        [Fact]
+        public static void Contains_Guards()
+        {
+            var value = new Obj();
+
+            Assert.Throws<ArgumentNullException>("comparer", () => MySuccess.Contains(value, null));
+            Assert.Throws<ArgumentNullException>("comparer", () => MyError.Contains(value, null));
+        }
+
+        #endregion
+
+        #region Match()
+
+        [Fact]
+        public static void Match_Guards()
+        {
+            Assert.Throws<ArgumentNullException>("caseSuccess", () => MySuccess.Match(null, _ => new Obj()));
+            Assert.Throws<ArgumentNullException>("caseError", () => MySuccess.Match(val => val, null));
+
+            Assert.Throws<ArgumentNullException>("caseSuccess", () => MyError.Match(null, _ => new Obj()));
+            Assert.Throws<ArgumentNullException>("caseError", () => MyError.Match(val => val, null));
+        }
+
+        #endregion
+    }
+
+    // Tests for the monadic methods.
+    public static partial class OutcomeTFacts
+    {
+
         #region Bind()
 
         [Fact]
@@ -291,57 +357,6 @@ namespace Narvalo.Applicative
 
         #endregion
 
-        #region Contains()
-
-        [Fact]
-        public static void Contains_Guards()
-        {
-            var value = new Obj();
-
-            Assert.Throws<ArgumentNullException>("comparer", () => MySuccess.Contains(value, null));
-            Assert.Throws<ArgumentNullException>("comparer", () => MyError.Contains(value, null));
-        }
-
-        #endregion
-
-        #region Match()
-
-        [Fact]
-        public static void Match_Guards()
-        {
-            Assert.Throws<ArgumentNullException>("caseSuccess", () => MySuccess.Match(null, _ => new Obj()));
-            Assert.Throws<ArgumentNullException>("caseError", () => MySuccess.Match(val => val, null));
-
-            Assert.Throws<ArgumentNullException>("caseSuccess", () => MyError.Match(null, _ => new Obj()));
-            Assert.Throws<ArgumentNullException>("caseError", () => MyError.Match(val => val, null));
-        }
-
-        #endregion
-
-        #region Equals()
-
-        [Fact]
-        public static void Equals_Guards()
-        {
-            Assert.Throws<ArgumentNullException>("comparer", () => MySuccess.Equals(MySuccess, null));
-            Assert.Throws<ArgumentNullException>("comparer", () => MySuccess.Equals(MyError, null));
-
-            Assert.Throws<ArgumentNullException>("comparer", () => MyError.Equals(MyError, null));
-            Assert.Throws<ArgumentNullException>("comparer", () => MyError.Equals(MySuccess, null));
-        }
-
-        #endregion
-
-        #region GetHashCode()
-
-        [Fact]
-        public static void GetHashCode_Guards()
-        {
-            Assert.Throws<ArgumentNullException>("comparer", () => MySuccess.GetHashCode(null));
-            Assert.Throws<ArgumentNullException>("comparer", () => MyError.GetHashCode(null));
-        }
-
-        #endregion
     }
 
     public static partial class OutcomeTFacts
