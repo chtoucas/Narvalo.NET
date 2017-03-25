@@ -9,7 +9,7 @@ public partial class ResultTemplate : MonadTemplate
 {
     protected override void WriteContent()
     {
-        InitializeGenericParameters("T", "My.SimpleObj");
+        InitializeGenericParameters("T", "My.Obj");
 
         EmitFacts();
     }

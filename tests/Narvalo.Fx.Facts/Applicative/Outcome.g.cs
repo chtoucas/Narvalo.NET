@@ -19,7 +19,7 @@ namespace Narvalo.Applicative
     using Xunit;
 
     // Provides tests for Outcome<T>.
-    // T4: EmitCore().
+    // T4: EmitMonadGuards().
     public static partial class OutcomeFacts
     {
         #region Repeat()
@@ -102,7 +102,7 @@ namespace Narvalo.Applicative
 #if !NO_INTERNALS_VISIBLE_TO
 
     // Provides tests for Outcome<T> that need access to internals.
-    // T4: EmitCore().
+    // T4: EmitMonadInternal().
     public static partial class OutcomeFacts
     {
         #region Bind()
@@ -110,14 +110,11 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Bind_AppliesBinder()
         {
-            // Arrange
             var source = Outcome<int>.η(1);
             Func<int, Outcome<int>> binder = val => Outcome<int>.η(2 * val);
 
-            // Act
             var me = source.Bind(binder);
 
-            // Assert
             Assert.Equal(2, me.Value);
         }
 
@@ -128,14 +125,11 @@ namespace Narvalo.Applicative
         [Fact]
         public static void Select_AppliesSelector()
         {
-            // Arrange
             var source = Outcome<int>.η(1);
             Func<int, int> selector = val => 2 * val;
 
-            // Act
             var me = source.Select(selector);
 
-            // Assert
             Assert.Equal(2, me.Value);
         }
 
@@ -145,12 +139,12 @@ namespace Narvalo.Applicative
 #endif
 
     // Provides tests for Outcome<T>: functor, monoid and monad laws.
-    // T4: EmitRules().
+    // T4: EmitMonadRules().
     public static partial class OutcomeFacts
     {
         #region Functor Rules
 
-        [Property(DisplayName = "Outcome<T> - The identity map is a fixed point for Select (first functor law).")]
+        [Property(DisplayName = "The identity map is a fixed point for Select (first functor law).")]
         public static bool Identity_IsFixedPointForSelect(int arg)
         {
             var me = Outcome<int>.η(arg);
@@ -162,7 +156,7 @@ namespace Narvalo.Applicative
             return left.Equals(right);
         }
 
-        [Property(DisplayName = "Outcome<T> - Select preserves the composition operator (second functor law).")]
+        [Property(DisplayName = "Select() preserves the composition operator (second functor law).")]
         public static bool Select_PreservesComposition(short arg, Func<short, int> g, Func<int, long> f)
         {
             var me = Outcome<short>.η(arg);
@@ -178,7 +172,7 @@ namespace Narvalo.Applicative
 
         #region Monad Rules
 
-        [Property(DisplayName = "Outcome<T> - Of is a left identity for Bind (first monad law).")]
+        [Property(DisplayName = "Outcome.Of() is a left identity for Bind (first monad law).")]
         public static bool Of_IsLeftIdentityForBind(int arg0, float arg1)
         {
             Func<int, Outcome<float>> f = val => Outcome<float>.η(arg1 * val);
@@ -190,7 +184,7 @@ namespace Narvalo.Applicative
             return left.Equals(right);
         }
 
-        [Property(DisplayName = "Outcome<T> - Of is a left identity for Compose (first monad law).")]
+        [Property(DisplayName = "Outcome.Of() is a left identity for Compose (first monad law).")]
         public static bool Of_IsLeftIdentityForCompose(int arg0, float arg1)
         {
             Func<int, Outcome<int>> of = Outcome<int>.η;
@@ -203,7 +197,7 @@ namespace Narvalo.Applicative
             return left.Equals(right);
         }
 
-        [Property(DisplayName = "Outcome<T> - Of is a right identity for Bind (second monad law).")]
+        [Property(DisplayName = "Outcome.Of() is a right identity for Bind (second monad law).")]
         public static bool Of_IsRightIdentityForBind(int arg0)
         {
             var me = Outcome<int>.η(arg0);
@@ -215,7 +209,7 @@ namespace Narvalo.Applicative
             return left.Equals(right);
         }
 
-        [Property(DisplayName = "Outcome<T> - Of is a right identity for Compose (second monad law).")]
+        [Property(DisplayName = "Outcome.Of() is a right identity for Compose (second monad law).")]
         public static bool Of_IsRightIdentityForCompose(int arg0, float arg1)
         {
             Func<int, Outcome<float>> f = val => Outcome<float>.η(arg1 * val);
@@ -227,7 +221,7 @@ namespace Narvalo.Applicative
             return left.Equals(right);
         }
 
-        [Property(DisplayName = "Outcome<T> - Bind is associative (third monad law).")]
+        [Property(DisplayName = "Bind() is associative (third monad law).")]
         public static bool Bind_IsAssociative(short arg0, int arg1, long arg2)
         {
             var me = Outcome<short>.η(arg0);
@@ -242,7 +236,7 @@ namespace Narvalo.Applicative
             return left.Equals(right);
         }
 
-        [Property(DisplayName = "Outcome<T> - Compose is associative (third monad law).")]
+        [Property(DisplayName = "Compose() is associative (third monad law).")]
         public static bool Compose_IsAssociative(short arg0, int arg1, long arg2, double arg3)
         {
             Func<short, Outcome<int>> f = val => Outcome<int>.η(arg1 * val);

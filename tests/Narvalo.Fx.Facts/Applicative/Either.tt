@@ -9,7 +9,7 @@ public partial class EitherTemplate : MonadTemplate
 {
     protected override void WriteContent()
     {
-        InitializeGenericParameters("T", "My.SimpleObj");
+        InitializeGenericParameters("T", "My.Obj");
 
         ValueProperty = "Left";
 
