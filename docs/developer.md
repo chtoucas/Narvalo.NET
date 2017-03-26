@@ -56,19 +56,23 @@ and [coreclr](https://github.com/dotnet/coreclr/blob/master/Documentation/coding
 
 To enforce the coding rules, we use [CodeFormatter](https://github.com/dotnet/codeformatter)
 (currently disabled as the tool does not support C# 7.0 yet).
-See [here](#developer-operations).
-
+There is an .editorconfig in the root project that matches our coding style.
 In addition:
 - Consider using tasks: FIXME, HACK, TODO, REVIEW.
 - For temporary strings, use `XXX`.
-- For tests, consider using traits:
-  * `Slow` for slow tests.
-  * `Unsafe` for unsafe tests.
 
 All Code Analysis suppressions must be justified and tagged:
 - `[Ignore]` Only use this one to tag a false positive.
 - `[GeneratedCode]` Used to mark a suppression related to generated code.
 - `[Intentionally]` Used in all other cases.
+
+### Tests
+
+Test projects use a custom .editorconfig taylored to produce more compact code.
+
+Consider using traits:
+  * `Slow` for slow tests.
+  * `Unsafe` for unsafe tests.
 
 --------------------------------------------------------------------------------
 

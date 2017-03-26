@@ -16,6 +16,7 @@ eInputs.cache". Le processus ne peut pas accéder au fichier 'I:\github\Narvalo.
 he', car il est en cours d'utilisation par un autre processus. [I:\github\Narvalo.NET\tests\Narvalo.Fx.Facts\Narvalo.Fx
 .Facts.csproj]
 ```
+  See [dotnet issue](https://github.com/dotnet/cli/issues/4786)?
 - Sometimes FsCheck fails with:
 ```
 C:\Users\Kurt\Projects\FsCheck\FsCheck\src\FsCheck\Gen.fs(592):
