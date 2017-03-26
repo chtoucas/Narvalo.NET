@@ -2,12 +2,10 @@
 
 #if !NO_INTERNALS_VISIBLE_TO
 
-namespace Narvalo
-{
+namespace Narvalo {
     using Narvalo.Properties;
 
-    public class LocalizationFacts : DefaultLocalizationFacts
-    {
+    public class LocalizationFacts : DefaultLocalizationFacts {
         public LocalizationFacts() : base(Strings.ResourceManager) { }
     }
 }

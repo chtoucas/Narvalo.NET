@@ -70,6 +70,9 @@ All Code Analysis suppressions must be justified and tagged:
 
 Test projects use a custom .editorconfig taylored to produce more compact code.
 
+We do not use any special scheme to name the test methods **instead** we should
+provide a display name.
+
 Consider using traits:
   * `Slow` for slow tests.
   * `Unsafe` for unsafe tests.

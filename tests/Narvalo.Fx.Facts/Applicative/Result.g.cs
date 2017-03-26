@@ -24,7 +24,7 @@ namespace Narvalo.Applicative
     {
         #region Repeat()
 
-        [Fact(DisplayName = "Repeat() guards.")]
+        [fact("Repeat() guards.")]
         public static void Repeat_guards()
         {
             var source = Result<int, My.Obj>.Of(1);
@@ -36,7 +36,7 @@ namespace Narvalo.Applicative
 
         #region Zip()
 
-        [Fact(DisplayName = "Zip() guards.")]
+        [fact("Zip() guards.")]
         public static void Zip_guards()
         {
             var first = Result<int, My.Obj>.Of(1);
@@ -65,7 +65,7 @@ namespace Narvalo.Applicative
 
         #region Select()
 
-        [Fact(DisplayName = "Select() guards.")]
+        [fact("Select() guards.")]
         public static void Select_guards()
         {
             var source = Result<int, My.Obj>.Of(1);
@@ -79,7 +79,7 @@ namespace Narvalo.Applicative
 
         #region SelectMany()
 
-        [Fact(DisplayName = "SelectMany() guards.")]
+        [fact("SelectMany() guards.")]
         public static void SelectMany_guards()
         {
             var source = Result<short, My.Obj>.Of(1);
@@ -107,7 +107,7 @@ namespace Narvalo.Applicative
     {
         #region Bind()
 
-        [Fact(DisplayName = "Bind() applies the binder to the underlying value.")]
+        [fact("Bind() applies the binder to the underlying value.")]
         public static void Bind_calls_binder()
         {
             var source = Result<int, My.Obj>.Of(1);
@@ -122,7 +122,7 @@ namespace Narvalo.Applicative
 
         #region Select()
 
-        [Fact(DisplayName = "Select() applies the selector to the underlying value.")]
+        [fact("Select() applies the selector to the underlying value.")]
         public static void Select_calls_selector()
         {
             var source = Result<int, My.Obj>.Of(1);
@@ -144,7 +144,7 @@ namespace Narvalo.Applicative
     {
         #region Functor Rules
 
-        [Property(DisplayName = "The identity map is a fixed point for Select (first functor law).")]
+        [Property(DisplayName = "Result - The identity map is a fixed point for Select (first functor law).")]
         public static bool Identity_is_fixed_pointSelect(int arg)
         {
             var me = Result<int, My.Obj>.Of(arg);
@@ -156,7 +156,7 @@ namespace Narvalo.Applicative
             return left.Equals(right);
         }
 
-        [Property(DisplayName = "Select() preserves the composition operator (second functor law).")]
+        [Property(DisplayName = "Result - Select() preserves the composition operator (second functor law).")]
         public static bool Select_preserves_composition(short arg, Func<short, int> g, Func<int, long> f)
         {
             var me = Result<short, My.Obj>.Of(arg);
@@ -172,7 +172,7 @@ namespace Narvalo.Applicative
 
         #region Monad Rules
 
-        [Property(DisplayName = "Of() is a left identity for Bind (first monad law).")]
+        [Property(DisplayName = "Result - Of() is a left identity for Bind (first monad law).")]
         public static bool Of_is_left_identity_for_bind(int arg0, float arg1)
         {
             Func<int, Result<float, My.Obj>> f = val => Result<float, My.Obj>.Of(arg1 * val);
@@ -184,7 +184,7 @@ namespace Narvalo.Applicative
             return left.Equals(right);
         }
 
-        [Property(DisplayName = "Of() is a left identity for Compose (first monad law).")]
+        [Property(DisplayName = "Result - Of() is a left identity for Compose (first monad law).")]
         public static bool Of_is_left_identity_for_compose(int arg0, float arg1)
         {
             Func<int, Result<int, My.Obj>> of = Result<int, My.Obj>.Of;
@@ -197,7 +197,7 @@ namespace Narvalo.Applicative
             return left.Equals(right);
         }
 
-        [Property(DisplayName = "Of() is a right identity for Bind (second monad law).")]
+        [Property(DisplayName = "Result - Of() is a right identity for Bind (second monad law).")]
         public static bool Of_is_right_identity_for_bind(int arg0)
         {
             var me = Result<int, My.Obj>.Of(arg0);
@@ -209,7 +209,7 @@ namespace Narvalo.Applicative
             return left.Equals(right);
         }
 
-        [Property(DisplayName = "Of() is a right identity for Compose (second monad law).")]
+        [Property(DisplayName = "Result - Of() is a right identity for Compose (second monad law).")]
         public static bool Of_is_right_identity_for_compose(int arg0, float arg1)
         {
             Func<int, Result<float, My.Obj>> f = val => Result<float, My.Obj>.Of(arg1 * val);
@@ -221,7 +221,7 @@ namespace Narvalo.Applicative
             return left.Equals(right);
         }
 
-        [Property(DisplayName = "Bind() is associative (third monad law).")]
+        [Property(DisplayName = "Result - Bind() is associative (third monad law).")]
         public static bool Bind_is_associative(short arg0, int arg1, long arg2)
         {
             var me = Result<short, My.Obj>.Of(arg0);
@@ -236,7 +236,7 @@ namespace Narvalo.Applicative
             return left.Equals(right);
         }
 
-        [Property(DisplayName = "Compose() is associative (third monad law).")]
+        [Property(DisplayName = "Result - Compose() is associative (third monad law).")]
         public static bool Compose_is_associative(short arg0, int arg1, long arg2, double arg3)
         {
             Func<short, Result<int, My.Obj>> f = val => Result<int, My.Obj>.Of(arg1 * val);

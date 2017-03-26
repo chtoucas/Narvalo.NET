@@ -1,18 +1,19 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Applicative
-{
+namespace Narvalo.Applicative {
     using System;
 
     using Xunit;
 
-    public static class QullableFacts
-    {
+    public static class QullableFacts {
+        internal sealed class factAttribute : FactAttribute_ {
+            public factAttribute(string message) : base(nameof(Qullable), message) { }
+        }
+
         #region Select()
 
-        [Fact]
-        public static void Select_ReturnsNull_WhenNull()
-        {
+        [fact("")]
+        public static void Select_ReturnsNull_WhenNull() {
             // Arrange
             int? source = null;
             Func<int, int> selector = _ => _;
@@ -26,9 +27,8 @@ namespace Narvalo.Applicative
             Assert.False(q.HasValue);
         }
 
-        [Fact]
-        public static void Select_ReturnsValueAfterApplyingSelector()
-        {
+        [fact("")]
+        public static void Select_ReturnsValueAfterApplyingSelector() {
             // Arrange
             int? source = 1;
             Func<int, int> selector = _ => 2 * _;
@@ -48,9 +48,8 @@ namespace Narvalo.Applicative
 
         #region Where()
 
-        [Fact]
-        public static void Where_ReturnsValue_ForSuccessfulPredicate()
-        {
+        [fact("")]
+        public static void Where_ReturnsValue_ForSuccessfulPredicate() {
             // Arrange
             int? source = 1;
             Func<int, bool> predicate = _ => _ == 1;
@@ -66,9 +65,8 @@ namespace Narvalo.Applicative
             Assert.Equal(1, q.Value);
         }
 
-        [Fact]
-        public static void Where_ReturnsNull_ForFailedPredicate()
-        {
+        [fact("")]
+        public static void Where_ReturnsNull_ForFailedPredicate() {
             // Arrange
             int? source = 1;
             Func<int, bool> predicate = _ => _ == 2;
@@ -86,9 +84,8 @@ namespace Narvalo.Applicative
 
         #region SelectMany()
 
-        [Fact]
-        public static void SelectMany_ReturnsNull_WhenNull()
-        {
+        [fact("")]
+        public static void SelectMany_ReturnsNull_WhenNull() {
             // Arrange
             int? source = null;
             int? middle = 2;
@@ -106,9 +103,8 @@ namespace Narvalo.Applicative
             Assert.False(q.HasValue);
         }
 
-        [Fact]
-        public static void SelectMany_ReturnsNull_ForNullMiddle_WhenNull()
-        {
+        [fact("")]
+        public static void SelectMany_ReturnsNull_ForNullMiddle_WhenNull() {
             // Arrange
             int? source = null;
             int? middle = null;
@@ -126,9 +122,8 @@ namespace Narvalo.Applicative
             Assert.False(q.HasValue);
         }
 
-        [Fact]
-        public static void SelectMany_ReturnsNull_ForNullMiddle()
-        {
+        [fact("")]
+        public static void SelectMany_ReturnsNull_ForNullMiddle() {
             // Arrange
             int? source = 1;
             int? middle = null;
@@ -146,9 +141,8 @@ namespace Narvalo.Applicative
             Assert.False(q.HasValue);
         }
 
-        [Fact]
-        public static void SelectMany_ReturnsValueAfterApplyingSelector()
-        {
+        [fact("")]
+        public static void SelectMany_ReturnsValueAfterApplyingSelector() {
             // Arrange
             int? source = 1;
             int? middle = 2;

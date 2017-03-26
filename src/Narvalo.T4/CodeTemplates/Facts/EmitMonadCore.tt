@@ -1,0 +1,16 @@
+﻿<#+
+
+public partial class MonadTemplate
+{
+    public void EmitMonadCore()
+    {
+#>
+    // T4: EmitMonadCore().
+    public static partial class <#= Name #>Facts
+    {
+    }
+<#+
+    } // T4: End of EmitMonadCore().
+} // T4: End of MonadTemplate.
+
+#>

@@ -1,16 +1,17 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Applicative
-{
+namespace Narvalo.Applicative {
     using Xunit;
 
-    public static partial class EitherFacts
-    {
+    public static partial class EitherFacts {
+        internal sealed class factAttribute : FactAttribute_ {
+            public factAttribute(string message) : base(nameof(Either), message) { }
+        }
+
         #region LeftOrNone
 
-        [Fact]
-        public static void LeftOrNone_ReturnsNone_WhenRightEither()
-        {
+        [fact("")]
+        public static void LeftOrNone_ReturnsNone_WhenRightEither() {
             // Arrange
             var either = Either<string, string>.OfRight("leftValue");
 
@@ -21,9 +22,8 @@ namespace Narvalo.Applicative
             Assert.False(result.IsSome);
         }
 
-        [Fact]
-        public static void LeftOrNone_ReturnsSome_WhenLeftEither()
-        {
+        [fact("")]
+        public static void LeftOrNone_ReturnsSome_WhenLeftEither() {
             // Arrange
             var leftValue = "leftValue";
             var either = Either<string, string>.OfLeft(leftValue);
@@ -41,9 +41,8 @@ namespace Narvalo.Applicative
 
         #region RightOrNone
 
-        [Fact]
-        public static void RightOrNone_ReturnsNone_WhenLeftEither()
-        {
+        [fact("")]
+        public static void RightOrNone_ReturnsNone_WhenLeftEither() {
             // Arrange
             var either = Either<string, string>.OfLeft("rightValue");
 
@@ -54,9 +53,8 @@ namespace Narvalo.Applicative
             Assert.False(result.IsSome);
         }
 
-        [Fact]
-        public static void RightOrNone_ReturnsSome_WhenRightEither()
-        {
+        [fact("")]
+        public static void RightOrNone_ReturnsSome_WhenRightEither() {
             // Arrange
             var rightValue = "rightValue";
             var either = Either<string, string>.OfRight(rightValue);

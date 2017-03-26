@@ -1,16 +1,17 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Applicative
-{
+namespace Narvalo.Applicative {
     using System;
 
     using Xunit;
 
-    public static class UnitFacts
-    {
-        [Fact]
-        public static void Equality_Tests()
-        {
+    public static class UnitFacts {
+        internal sealed class factAttribute : FactAttribute_ {
+            public factAttribute(string message) : base(nameof(Unit), message) { }
+        }
+
+        [fact("")]
+        public static void Equality_Tests() {
             var u1 = new Unit();
             var u2 = new Unit();
 
@@ -19,9 +20,8 @@ namespace Narvalo.Applicative
             Assert.True(u1 == u2);
         }
 
-        [Fact]
-        public static void Inequality_Tests()
-        {
+        [fact("")]
+        public static void Inequality_Tests() {
             var u1 = new Unit();
             var u2 = new Unit();
 
@@ -30,9 +30,8 @@ namespace Narvalo.Applicative
             Assert.False(u1 != u2);
         }
 
-        [Fact]
-        public static void Equals_Tests()
-        {
+        [fact("")]
+        public static void Equals_Tests() {
             var u1 = new Unit();
             var u2 = new Unit();
 
@@ -49,16 +48,14 @@ namespace Narvalo.Applicative
             Assert.False(new Object().Equals(Unit.Default));
         }
 
-        [Fact]
-        public static void GetHashCode_Tests()
-        {
+        [fact("")]
+        public static void GetHashCode_Tests() {
             Assert.Equal(0, new Unit().GetHashCode());
             Assert.Equal(0, Unit.Default.GetHashCode());
         }
 
-        [Fact]
-        public static void ToString_Tests()
-        {
+        [fact("")]
+        public static void ToString_Tests() {
             Assert.Equal("()", new Unit().ToString());
             Assert.Equal("()", Unit.Default.ToString());
         }

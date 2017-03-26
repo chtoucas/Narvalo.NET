@@ -1,31 +1,32 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Applicative
-{
+namespace Narvalo.Applicative {
     using System;
     using System.Runtime.ExceptionServices;
 
     using Xunit;
 
     // Tests for Fallible.
-    public static partial class FallibleFacts
-    {
+    public static partial class FallibleFacts {
+        internal sealed class factAttribute : FactAttribute_ {
+            public factAttribute(string message) : base(nameof(Fallible), message) { }
+        }
+
         #region Ok
 
-        [Fact]
+        [fact("")]
         public static void Ok_IsSuccess() => Assert.True(Fallible.Ok.IsSuccess);
 
         #endregion
 
         #region FromError()
 
-        [Fact]
+        [fact("")]
         public static void FromError_Guards()
             => Assert.Throws<ArgumentNullException>("error", () => Fallible.FromError(null));
 
-        [Fact]
-        public static void FromError_ReturnsError()
-        {
+        [fact("")]
+        public static void FromError_ReturnsError() {
             var result = Fallible.FromError(Error);
 
             Assert.True(result.IsError);
@@ -35,9 +36,8 @@ namespace Narvalo.Applicative
 
         #region Bind()
 
-        [Fact]
-        public static void Bind_Guards()
-        {
+        [fact("")]
+        public static void Bind_Guards() {
             Assert.Throws<ArgumentNullException>("binder", () => Fallible.Ok.Bind<string>(null));
             Assert.Throws<ArgumentNullException>("binder", () => Fallible.FromError(Error).Bind<string>(null));
         }
@@ -45,21 +45,16 @@ namespace Narvalo.Applicative
         #endregion
     }
 
-    public static partial class FallibleFacts
-    {
+    public static partial class FallibleFacts {
         private static readonly Lazy<ExceptionDispatchInfo> s_Error
             = new Lazy<ExceptionDispatchInfo>(CreateExceptionDispatchInfo);
 
         internal static ExceptionDispatchInfo Error => s_Error.Value;
 
-        private static ExceptionDispatchInfo CreateExceptionDispatchInfo()
-        {
-            try
-            {
+        private static ExceptionDispatchInfo CreateExceptionDispatchInfo() {
+            try {
                 throw new Exception("My message");
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 return ExceptionDispatchInfo.Capture(ex);
             }
         }
