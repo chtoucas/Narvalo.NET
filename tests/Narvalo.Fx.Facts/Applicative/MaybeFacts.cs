@@ -1192,7 +1192,7 @@ namespace Narvalo.Applicative {
         #region ReplaceBy()
 
         [fact("ReplaceBy() returns some if some.")]
-        public static void ReplaceBy_if_some() {
+        public static void ReplaceBy_if_some_1() {
             var exp = 2;
 
             var m1 = Maybe.Of(1).ReplaceBy(exp);
@@ -1244,7 +1244,7 @@ namespace Narvalo.Applicative {
         #region PassBy()
 
         [fact("PassBy(other) returns 'this' if 'other' is some.")]
-        public static void PassBy_ReturnsObj_ForSome() {
+        public static void PassBy_if_other_is_some() {
             var some = Maybe.Of(new Obj());
             var none = Maybe<Obj>.None;
 
@@ -1262,7 +1262,7 @@ namespace Narvalo.Applicative {
         }
 
         [fact("PassBy(other) returns none if 'other' is none.")]
-        public static void PassBy_ReturnsNone_ForNone() {
+        public static void PassBy_if_other_is_none() {
             var some = Maybe.Of(new Obj());
             var none = Maybe<Obj>.None;
 
@@ -1282,7 +1282,7 @@ namespace Narvalo.Applicative {
         #region Skip()
 
         [fact("Skip() returns 'Maybe.Unit' if some.")]
-        public static void Skip_ReturnsUnit_IfSome() {
+        public static void Skip_if_some() {
             var m1 = Maybe.Of(new Obj()).Skip();
             var m2 = Maybe.Skip(Maybe.Of(new Obj()));
 
@@ -1290,8 +1290,8 @@ namespace Narvalo.Applicative {
             Assert.Equal(Maybe.Unit, m2);
         }
 
-        [fact("Skip() returns 'Maybe.None' if some.")]
-        public static void Skip_ReturnsNone_IfNone() {
+        [fact("Skip() returns 'Maybe.None' if none.")]
+        public static void Skip_if_none() {
             var m1 = Maybe<Obj>.None.Skip();
             var m2 = Maybe.Skip(Maybe<Obj>.None);
 
@@ -1307,8 +1307,8 @@ namespace Narvalo.Applicative {
     public static partial class MaybeFacts {
         #region η()
 
-        [fact("")]
-        public static void η_ReturnsNone_ForNull() {
+        [fact("η(null) returns none.")]
+        public static void η_returns_none() {
             var o1 = Maybe<Obj>.η(null);
             var o2 = Maybe<Val?>.η(null);
 
@@ -1316,8 +1316,8 @@ namespace Narvalo.Applicative {
             Assert.True(o2.IsNone);
         }
 
-        [fact("")]
-        public static void η_ReturnsSome_ForNonNull() {
+        [fact("η(non-null) returns some.")]
+        public static void η_returns_some() {
             var o1 = Maybe<int>.η(1);
             var o2 = Maybe<Val>.η(new Val(1));
             var o3 = Maybe<Val?>.η(new Val(1));
@@ -1333,8 +1333,8 @@ namespace Narvalo.Applicative {
 
         #region Value
 
-        [fact("")]
-        public static void Value_IsImmutable() {
+        [fact("Value is immutable.")]
+        public static void Value_is_immutable() {
             var exp = new Obj();
             var some = Maybe.Of(exp);
 
@@ -1344,8 +1344,8 @@ namespace Narvalo.Applicative {
             Assert.NotEqual(exp, some.Value);
         }
 
-        [fact("")]
-        public static void Value_IsOriginalValue_IfSome() {
+        [fact("Value contains the original value.")]
+        public static void Value_if_some() {
             var exp1 = 1;
             var exp2 = new Val(1);
             var exp3 = (Val?)new Val(1);
@@ -1374,8 +1374,8 @@ namespace Narvalo.Applicative {
 
         #region ReplaceBy()
 
-        [fact("")]
-        public static void ReplaceBy_ContainsValue_IfSome() {
+        [fact("ReplaceBy() replace Value with the new one if some.")]
+        public static void ReplaceBy_if_some_2() {
             var exp = new Obj("other");
 
             var m = Maybe.Of(new Obj()).ReplaceBy(exp);
