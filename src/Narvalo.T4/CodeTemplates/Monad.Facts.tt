@@ -1,5 +1,6 @@
 ﻿<#@ include file="Monad.tt" once="true" #>
 <#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
+<#@ include file="Facts\EmitMonadCore.tt" #>
 <#@ include file="Facts\EmitMonadGuards.tt" #>
 <#@ include file="Facts\EmitMonadInternal.tt" #>
 <#@ include file="Facts\EmitMonadRules.tt" #><#+
@@ -28,6 +29,9 @@ namespace <#= Namespace #>
     using Xunit;
 
 <#+
+    EmitMonadCore();
+
+    WriteLine();
     EmitMonadGuards();
 
     WriteLine();

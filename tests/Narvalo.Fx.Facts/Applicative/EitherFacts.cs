@@ -3,69 +3,55 @@
 namespace Narvalo.Applicative {
     using Xunit;
 
+    using static global::My;
+
     public static partial class EitherFacts {
-        internal sealed class factAttribute : FactAttribute_ {
-            public factAttribute(string message) : base(nameof(Either), message) { }
-        }
+        #region LeftOrNone()
 
-        #region LeftOrNone
-
-        [fact("")]
-        public static void LeftOrNone_ReturnsNone_WhenRightEither() {
-            // Arrange
+        [t("LeftOrNone() returns none if righty.")]
+        public static void LeftOrNone1() {
             var either = Either<string, string>.OfRight("leftValue");
 
-            // Act
             var result = either.LeftOrNone();
 
-            // Assert
-            Assert.False(result.IsSome);
+            Assert.True(result.IsNone);
         }
 
-        [fact("")]
-        public static void LeftOrNone_ReturnsSome_WhenLeftEither() {
-            // Arrange
-            var leftValue = "leftValue";
-            var either = Either<string, string>.OfLeft(leftValue);
-            var expectedResult = Maybe.Of(leftValue);
+        [t("LeftOrNone() returns some if lefty.")]
+        public static void LeftOrNone2() {
+            var value = new Obj("leftValue");
+            var either = Either<Obj, string>.OfLeft(value);
+            var exp = Maybe.Of(value);
 
-            // Act
             var result = either.LeftOrNone();
 
-            // Assert
             Assert.True(result.IsSome);
-            Assert.Equal(expectedResult, result);
+            Assert.Equal(exp, result);
         }
 
         #endregion
 
-        #region RightOrNone
+        #region RightOrNone()
 
-        [fact("")]
-        public static void RightOrNone_ReturnsNone_WhenLeftEither() {
-            // Arrange
+        [t("RightOrNone() returns none if lefty.")]
+        public static void RightOrNone1() {
             var either = Either<string, string>.OfLeft("rightValue");
 
-            // Act
             var result = either.RightOrNone();
 
-            // Assert
-            Assert.False(result.IsSome);
+            Assert.True(result.IsNone);
         }
 
-        [fact("")]
-        public static void RightOrNone_ReturnsSome_WhenRightEither() {
-            // Arrange
-            var rightValue = "rightValue";
-            var either = Either<string, string>.OfRight(rightValue);
-            var expectedResult = Maybe.Of(rightValue);
+        [t("RightOrNone() returns some if righty.")]
+        public static void RightOrNone2() {
+            var value = new Obj("rightValue");
+            var either = Either<string, Obj>.OfRight(value);
+            var exp = Maybe.Of(value);
 
-            // Act
             var result = either.RightOrNone();
 
-            // Assert
             Assert.True(result.IsSome);
-            Assert.Equal(expectedResult, result);
+            Assert.Equal(exp, result);
         }
 
         #endregion

@@ -4,12 +4,12 @@ namespace Narvalo {
     using System;
 
     public static class HashCodeHelpersFacts {
-        internal sealed class factAttribute : FactAttribute_ {
-            public factAttribute(string message) : base(nameof(HashCodeHelpers), message) { }
+        internal sealed class tAttribute : TestAttribute {
+            public tAttribute(string message) : base(nameof(HashCodeHelpers), message) { }
         }
 
-        [fact("Combine() does not throw OverflowException.")]
-        public static void Combine() {
+        [t("Combine() does not throw OverflowException.")]
+        public static void Combine1() {
             HashCodeHelpers.Combine(Int32.MinValue, 1);
             HashCodeHelpers.Combine(Int32.MaxValue, 1);
             HashCodeHelpers.Combine(Int32.MinValue, 1, 1);

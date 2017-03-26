@@ -8,24 +8,24 @@ namespace Narvalo {
     using static global::My;
 
     public static partial class RequireFacts {
-        internal sealed class factAttribute : FactAttribute_ {
-            public factAttribute(string message) : base(nameof(Require), message) { }
+        internal sealed class tAttribute : TestAttribute {
+            public tAttribute(string message) : base(nameof(Require), message) { }
         }
 
         #region State()
 
-        [fact("State(true) does not throw if the precondition is met.")]
-        public static void State_passes() {
+        [t("State(true) does not throw if the precondition is met.")]
+        public static void State1() {
             Require.State(true);
             Require.State(true, "My message");
         }
 
-        [fact("State(false) throws InvalidOperationException.")]
-        public static void State_throws_1()
+        [t("State(false) throws InvalidOperationException.")]
+        public static void State2()
             => Assert.Throws<InvalidOperationException>(() => Require.State(false));
 
-        [fact("State(false, message) throws InvalidOperationException.")]
-        public static void State_throws_2() {
+        [t("State(false, message) throws InvalidOperationException.")]
+        public static void State3() {
             var message = "My message";
             Action act = () => Require.State(false, message);
 
@@ -40,14 +40,14 @@ namespace Narvalo {
 
         #region True()
 
-        [fact("True(true) does not throw if the precondition is met.")]
-        public static void True_passes() {
+        [t("True(true) does not throw if the precondition is met.")]
+        public static void True1() {
             Require.True(true, "paramName");
             Require.True(true, "paramName", "My message");
         }
 
-        [fact("True(false) throws ArgumentException.")]
-        public static void True_throws_1() {
+        [t("True(false) throws ArgumentException.")]
+        public static void True2() {
             var paramName = "paramName";
             Action act = () => Require.True(false, paramName);
 
@@ -59,8 +59,8 @@ namespace Narvalo {
             Assert.Equal(paramName, argex.ParamName);
         }
 
-        [fact("True(false, message) throws ArgumentException.")]
-        public static void True_throws_2() {
+        [t("True(false, message) throws ArgumentException.")]
+        public static void True3() {
             var paramName = "paramName";
             var message = "My message";
             Action act = () => Require.True(false, paramName, message);
@@ -78,14 +78,14 @@ namespace Narvalo {
 
         #region Range()
 
-        [fact("Range(true) does not throw if the precondition is met.")]
-        public static void Range_passes() {
+        [t("Range(true) does not throw if the precondition is met.")]
+        public static void Range1() {
             Require.Range(true, "paramName");
             Require.Range(true, "paramName", "My message");
         }
 
-        [fact("Range(false) throws ArgumentOutOfRangeException.")]
-        public static void Range_throws_1() {
+        [t("Range(false) throws ArgumentOutOfRangeException.")]
+        public static void Range2() {
             var paramName = "paramName";
             Action act = () => Require.Range(false, paramName);
 
@@ -97,8 +97,8 @@ namespace Narvalo {
             Assert.Equal(paramName, argex.ParamName);
         }
 
-        [fact("Range(false, message) throws ArgumentOutOfRangeException.")]
-        public static void Range_throws_2() {
+        [t("Range(false, message) throws ArgumentOutOfRangeException.")]
+        public static void Range3() {
             var paramName = "paramName";
             var message = "My message";
             Action act = () => Require.Range(false, paramName, message);
@@ -116,11 +116,11 @@ namespace Narvalo {
 
         #region NotNull()
 
-        [fact("NotNull() does not throw if the precondition is met.")]
-        public static void NotNull_passes() => Require.NotNull(new Obj(), "paramName");
+        [t("NotNull() does not throw if the precondition is met.")]
+        public static void NotNull1() => Require.NotNull(new Obj(), "paramName");
 
-        [fact("NotNull(null) throws ArgumentNullException.")]
-        public static void NotNull_throws() {
+        [t("NotNull(null) throws ArgumentNullException.")]
+        public static void NotNull2() {
             Object obj = null;
             var paramName = "paramName";
             Action act = () => Require.NotNull(obj, paramName);
@@ -137,14 +137,14 @@ namespace Narvalo {
 
         #region NotNullUnconstrained()
 
-        [fact("NotNullUnconstrained() does not throw if the precondition is met.")]
-        public static void NotNullUnconstrained_passes() {
+        [t("NotNullUnconstrained() does not throw if the precondition is met.")]
+        public static void NotNullUnconstrained1() {
             Require.NotNullUnconstrained(new Val(1), "paramName");
             Require.NotNullUnconstrained(new Obj(), "paramName");
         }
 
-        [fact("NotNullUnconstrained(null) throws ArgumentNullException.")]
-        public static void NotNullUnconstrained_throws() {
+        [t("NotNullUnconstrained(null) throws ArgumentNullException.")]
+        public static void NotNullUnconstrained2() {
             Object obj = null;
             var paramName = "paramName";
             Action act = () => Require.NotNullUnconstrained(obj, paramName);
@@ -161,14 +161,14 @@ namespace Narvalo {
 
         #region NotNullOrEmpty()
 
-        [fact("NotNullOrEmpty() does not throw if the precondition is met.")]
-        public static void NotNullOrEmpty_passes() {
+        [t("NotNullOrEmpty() does not throw if the precondition is met.")]
+        public static void NotNullOrEmpty1() {
             Require.NotNullOrEmpty("value", "paramName");
             Require.NotNullOrEmpty(" ", "paramName");
         }
 
-        [fact("NotNullOrEmpty(null) throws ArgumentNullException.")]
-        public static void NotNullOrEmpty_throws_1() {
+        [t("NotNullOrEmpty(null) throws ArgumentNullException.")]
+        public static void NotNullOrEmpty2() {
             var paramName = "paramName";
             Action act = () => Require.NotNullOrEmpty(null, paramName);
 
@@ -180,8 +180,8 @@ namespace Narvalo {
             Assert.Equal(paramName, argex.ParamName);
         }
 
-        [fact("NotNullOrEmpty(String.Empty) throws ArgumentException.")]
-        public static void NotNullOrEmpty_throws_2() {
+        [t("NotNullOrEmpty(String.Empty) throws ArgumentException.")]
+        public static void NotNullOrEmpty3() {
             var paramName = "paramName";
             Action act = () => Require.NotNullOrEmpty(String.Empty, paramName);
 
@@ -197,14 +197,14 @@ namespace Narvalo {
 
         #region NotNullOrWhiteSpace()
 
-        [fact("NotNullOrWhiteSpace() does not throw if the precondition is met.")]
-        public static void NotNullOrWhiteSpace_passes() {
+        [t("NotNullOrWhiteSpace() does not throw if the precondition is met.")]
+        public static void NotNullOrWhiteSpace1() {
             Require.NotNullOrWhiteSpace("value", "paramName");
             Require.NotNullOrWhiteSpace("va lue", "paramName");
         }
 
-        [fact("NotNullOrWhiteSpace(null) throws ArgumentNullException.")]
-        public static void NotNullOrWhiteSpace_throws_1() {
+        [t("NotNullOrWhiteSpace(null) throws ArgumentNullException.")]
+        public static void NotNullOrWhiteSpace2() {
             var paramName = "paramName";
             Action act = () => Require.NotNullOrWhiteSpace(null, paramName);
 
@@ -216,8 +216,8 @@ namespace Narvalo {
             Assert.Equal(paramName, argex.ParamName);
         }
 
-        [fact("NotNullOrWhiteSpace(String.Empty) throws ArgumentException.")]
-        public static void NotNullOrWhiteSpace_throws_2() {
+        [t("NotNullOrWhiteSpace(String.Empty) throws ArgumentException.")]
+        public static void NotNullOrWhiteSpace3() {
             var paramName = "paramName";
             Action act = () => Require.NotNullOrWhiteSpace(String.Empty, paramName);
 
@@ -229,8 +229,8 @@ namespace Narvalo {
             Assert.Equal(paramName, argex.ParamName);
         }
 
-        [fact(@"NotNullOrWhiteSpace("" "") throws ArgumentException.")]
-        public static void NotNullOrWhiteSpace_throws_3() {
+        [t(@"NotNullOrWhiteSpace("" "") throws ArgumentException.")]
+        public static void NotNullOrWhiteSpace4() {
             var paramName = "paramName";
             Action act = () => Require.NotNullOrWhiteSpace(" ", paramName);
 

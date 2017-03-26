@@ -9,14 +9,14 @@ namespace Narvalo.Applicative {
 
     // Tests for Outcome<T>.
     public static partial class OutcomeTFacts {
-        internal sealed class factAttribute : FactAttribute_ {
-            public factAttribute(string message) : base(nameof(Outcome), message) { }
+        internal sealed class tAttribute : TestAttribute {
+            public tAttribute(string message) : base(nameof(Outcome), message) { }
         }
 
         #region Unit
 
-        [fact("Unit is OK.")]
-        public static void Unit_is_success() {
+        [t("Unit is OK.")]
+        public static void Unit1() {
             Assert.True(Outcome.Unit.IsSuccess);
             Assert.False(Outcome.Unit.IsError);
         }
@@ -25,8 +25,8 @@ namespace Narvalo.Applicative {
 
         #region Of()
 
-        [fact("Of() result is OK.")]
-        public static void Of_returns_success() {
+        [t("Of() returns OK.")]
+        public static void Of1() {
             var result = Outcome.Of(1);
 
             Assert.True(result.IsSuccess);
@@ -37,14 +37,14 @@ namespace Narvalo.Applicative {
 
         #region FromError()
 
-        [fact("FromError() guards.")]
-        public static void FromError_guards() {
+        [t("FromError() guards.")]
+        public static void FromError0() {
             Assert.Throws<ArgumentNullException>("error", () => Outcome<int>.FromError(null));
             Assert.Throws<ArgumentException>("error", () => Outcome<int>.FromError(String.Empty));
         }
 
-        [fact("FromError() result is KO.")]
-        public static void FromError_returns_failure() {
+        [t("FromError() returns NOK.")]
+        public static void FromError1() {
             var result = Outcome<int>.FromError("error");
 
             Assert.True(result.IsError);
@@ -55,7 +55,7 @@ namespace Narvalo.Applicative {
 
         #region ValueOrDefault()
 
-        [fact("")]
+        [t("")]
         public static void ValueOrDefault_ReturnsValue_IfSuccess() {
             var exp = new Obj();
             var ok = Outcome.Of(exp);
@@ -63,7 +63,7 @@ namespace Narvalo.Applicative {
             Assert.Same(exp, ok.ValueOrDefault());
         }
 
-        [fact("")]
+        [t("")]
         public static void ValueOrDefault_ReturnsDefault_IfError() {
             var err = Outcome<Obj>.FromError("error");
 
@@ -74,7 +74,7 @@ namespace Narvalo.Applicative {
 
         #region ValueOrNone()
 
-        [fact("")]
+        [t("")]
         public static void ValueOrNone_ReturnsSome_IfSuccess() {
             var exp = new Obj();
             var ok = Outcome.Of(exp);
@@ -87,7 +87,7 @@ namespace Narvalo.Applicative {
 #endif
         }
 
-        [fact("")]
+        [t("")]
         public static void ValueOrNone_ReturnsNone_IfError() {
             var err = Outcome<Obj>.FromError("error");
 
@@ -98,13 +98,13 @@ namespace Narvalo.Applicative {
 
         #region ValueOrElse()
 
-        [fact("")]
+        [t("")]
         public static void ValueOrElse_Guards() {
             Assert.Throws<ArgumentNullException>("valueFactory", () => MySuccess.ValueOrElse((Func<Obj>)null));
             Assert.Throws<ArgumentNullException>("valueFactory", () => MyError.ValueOrElse((Func<Obj>)null));
         }
 
-        [fact("")]
+        [t("")]
         public static void ValueOrElse_ReturnsValue_IfSuccess() {
             var exp = new Obj();
             var ok = Outcome.Of(exp);
@@ -114,7 +114,7 @@ namespace Narvalo.Applicative {
             Assert.Same(exp, ok.ValueOrElse(() => other));
         }
 
-        [fact("")]
+        [t("")]
         public static void ValueOrElse_ReturnsOther_IfError() {
             var err = Outcome<Obj>.FromError("error");
             var exp = new Obj();
@@ -127,13 +127,13 @@ namespace Narvalo.Applicative {
 
         #region ValueOrThrow()
 
-        [fact("")]
+        [t("")]
         public static void ValueOrThrow_Guards() {
             Assert.Throws<ArgumentNullException>("exceptionFactory", () => MySuccess.ValueOrThrow(null));
             Assert.Throws<ArgumentNullException>("exceptionFactory", () => MyError.ValueOrThrow(null));
         }
 
-        [fact("")]
+        [t("")]
         public static void ValueOrThrow_ReturnsValue_IfSuccess() {
             var exp = new Obj();
             var ok = Outcome.Of(exp);
@@ -142,7 +142,7 @@ namespace Narvalo.Applicative {
             Assert.Equal(exp, ok.ValueOrThrow(error => new SimpleException(error)));
         }
 
-        [fact("")]
+        [t("")]
         public static void ValueOrThrow_Throws_IfError() {
             var err = Outcome<Obj>.FromError("error");
 
@@ -153,7 +153,7 @@ namespace Narvalo.Applicative {
             Assert.IsType<InvalidOperationException>(ex);
         }
 
-        [fact("")]
+        [t("")]
         public static void ValueOrThrow_ThrowsCustomException_IfError() {
             var message = "error";
             var err = Outcome<Obj>.FromError(message);
@@ -170,7 +170,7 @@ namespace Narvalo.Applicative {
 
         #region ToValue()
 
-        [fact("")]
+        [t("")]
         public static void ToValue_Throws_IfError() {
             var message = "error";
             var err = Outcome<Obj>.FromError(message);
@@ -182,7 +182,7 @@ namespace Narvalo.Applicative {
             Assert.IsType<InvalidCastException>(ex);
         }
 
-        [fact("")]
+        [t("")]
         public static void ToValue_ReturnsValue_IfSuccess() {
             var exp = new Obj();
             var ok = Outcome.Of(exp);
@@ -194,7 +194,7 @@ namespace Narvalo.Applicative {
 
         #region ToMaybe()
 
-        [fact("")]
+        [t("")]
         public static void ToMaybe_ReturnsSome_IfSuccess() {
             var exp = new Obj();
             var ok = Outcome.Of(exp);
@@ -207,7 +207,7 @@ namespace Narvalo.Applicative {
 #endif
         }
 
-        [fact("")]
+        [t("")]
         public static void ToMaybe_ReturnsNone_IfError() {
             var err = Outcome<Obj>.FromError("error");
 
@@ -218,7 +218,7 @@ namespace Narvalo.Applicative {
 
         #region Equals()
 
-        [fact("")]
+        [t("")]
         public static void Equals_Guards() {
             Assert.Throws<ArgumentNullException>("comparer", () => MySuccess.Equals(MySuccess, null));
             Assert.Throws<ArgumentNullException>("comparer", () => MySuccess.Equals(MyError, null));
@@ -231,7 +231,7 @@ namespace Narvalo.Applicative {
 
         #region GetHashCode()
 
-        [fact("")]
+        [t("")]
         public static void GetHashCode_Guards() {
             Assert.Throws<ArgumentNullException>("comparer", () => MySuccess.GetHashCode(null));
             Assert.Throws<ArgumentNullException>("comparer", () => MyError.GetHashCode(null));
@@ -243,7 +243,7 @@ namespace Narvalo.Applicative {
     public static partial class OutcomeTFacts {
         #region Contains()
 
-        [fact("")]
+        [t("")]
         public static void Contains_Guards() {
             var value = new Obj();
 
@@ -255,7 +255,7 @@ namespace Narvalo.Applicative {
 
         #region Match()
 
-        [fact("")]
+        [t("")]
         public static void Match_Guards() {
             Assert.Throws<ArgumentNullException>("caseSuccess", () => MySuccess.Match(null, _ => new Obj()));
             Assert.Throws<ArgumentNullException>("caseError", () => MySuccess.Match(val => val, null));
@@ -272,13 +272,13 @@ namespace Narvalo.Applicative {
 
         #region Bind()
 
-        [fact("")]
+        [t("")]
         public static void Bind_Guards() {
             Assert.Throws<ArgumentNullException>("binder", () => MySuccess.Bind<string>(null));
             Assert.Throws<ArgumentNullException>("binder", () => MyError.Bind<string>(null));
         }
 
-        [fact("")]
+        [t("")]
         public static void Bind_ReturnsError_IfError() {
             // Arrange
             var exp = "error";
@@ -295,7 +295,7 @@ namespace Narvalo.Applicative {
 #endif
         }
 
-        [fact("")]
+        [t("")]
         public static void Bind_ReturnsSuccess_IfSuccess() {
             // Arrange
             var exp = new Obj("My Value");
@@ -313,14 +313,14 @@ namespace Narvalo.Applicative {
 
         #region Flatten()
 
-        [fact("")]
+        [t("")]
         public static void Flatten_ReturnsError_IfError() {
             var err = Outcome<Outcome<Obj>>.FromError("error");
 
             Assert.True(err.IsError);
         }
 
-        [fact("")]
+        [t("")]
         public static void Flatten_ReturnsSuccess_IfSuccess() {
             var ok = Outcome.Of(Outcome.Of(new Obj()));
 

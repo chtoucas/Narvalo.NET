@@ -8,36 +8,36 @@ namespace Narvalo.Applicative {
 
     // Tests for Fallible.
     public static partial class FallibleFacts {
-        internal sealed class factAttribute : FactAttribute_ {
-            public factAttribute(string message) : base(nameof(Fallible), message) { }
-        }
-
         #region Ok
 
-        [fact("")]
-        public static void Ok_IsSuccess() => Assert.True(Fallible.Ok.IsSuccess);
+        [t("Ok is OK.")]
+        public static void Ok1() {
+            Assert.True(Fallible.Ok.IsSuccess);
+            Assert.False(Fallible.Ok.IsError);
+        }
 
         #endregion
 
         #region FromError()
 
-        [fact("")]
-        public static void FromError_Guards()
+        [t("FromError() guards.")]
+        public static void FromError0()
             => Assert.Throws<ArgumentNullException>("error", () => Fallible.FromError(null));
 
-        [fact("")]
-        public static void FromError_ReturnsError() {
+        [t("FromError() returns NOK.")]
+        public static void FromError1() {
             var result = Fallible.FromError(Error);
 
             Assert.True(result.IsError);
+            Assert.False(result.IsSuccess);
         }
 
         #endregion
 
         #region Bind()
 
-        [fact("")]
-        public static void Bind_Guards() {
+        [t("Bind() guards.")]
+        public static void Bind0() {
             Assert.Throws<ArgumentNullException>("binder", () => Fallible.Ok.Bind<string>(null));
             Assert.Throws<ArgumentNullException>("binder", () => Fallible.FromError(Error).Bind<string>(null));
         }

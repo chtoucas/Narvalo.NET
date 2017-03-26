@@ -13,7 +13,7 @@ public partial class MonadTemplate
     {
         #region Bind()
 
-        [fact("Bind() applies the binder to the underlying value.")]
+        [t("Bind() applies the binder to the underlying value.")]
         public static void Bind_calls_binder()
         {
             var source = <#+ WriteFactory("int"); #>(1);
@@ -28,7 +28,7 @@ public partial class MonadTemplate
 
         #region Select()
 
-        [fact("Select() applies the selector to the underlying value.")]
+        [t("Select() applies the selector to the underlying value.")]
         public static void Select_calls_selector()
         {
             var source = <#+ WriteFactory("int"); #>(1);

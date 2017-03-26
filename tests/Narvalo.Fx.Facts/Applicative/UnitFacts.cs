@@ -6,11 +6,11 @@ namespace Narvalo.Applicative {
     using Xunit;
 
     public static class UnitFacts {
-        internal sealed class factAttribute : FactAttribute_ {
-            public factAttribute(string message) : base(nameof(Unit), message) { }
+        internal sealed class tAttribute : TestAttribute {
+            public tAttribute(string message) : base(nameof(Unit), message) { }
         }
 
-        [fact("")]
+        [t("")]
         public static void Equality_Tests() {
             var u1 = new Unit();
             var u2 = new Unit();
@@ -20,7 +20,7 @@ namespace Narvalo.Applicative {
             Assert.True(u1 == u2);
         }
 
-        [fact("")]
+        [t("")]
         public static void Inequality_Tests() {
             var u1 = new Unit();
             var u2 = new Unit();
@@ -30,7 +30,7 @@ namespace Narvalo.Applicative {
             Assert.False(u1 != u2);
         }
 
-        [fact("")]
+        [t("")]
         public static void Equals_Tests() {
             var u1 = new Unit();
             var u2 = new Unit();
@@ -48,13 +48,13 @@ namespace Narvalo.Applicative {
             Assert.False(new Object().Equals(Unit.Default));
         }
 
-        [fact("")]
+        [t("")]
         public static void GetHashCode_Tests() {
             Assert.Equal(0, new Unit().GetHashCode());
             Assert.Equal(0, Unit.Default.GetHashCode());
         }
 
-        [fact("")]
+        [t("")]
         public static void ToString_Tests() {
             Assert.Equal("()", new Unit().ToString());
             Assert.Equal("()", Unit.Default.ToString());

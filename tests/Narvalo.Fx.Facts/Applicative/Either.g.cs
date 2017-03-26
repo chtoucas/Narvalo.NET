@@ -18,13 +18,32 @@ namespace Narvalo.Applicative
     using FsCheck.Xunit;
     using Xunit;
 
+    // T4: EmitMonadCore().
+    public static partial class EitherFacts
+    {
+        internal sealed class tAttribute : TestAttribute
+        {
+            public tAttribute(string message) : base(nameof(Either), message) { }
+        }
+
+        internal sealed class dAttribute : TestSuiteAttribute
+        {
+            public dAttribute(string message) : base(nameof(Either), message) { }
+        }
+
+        internal sealed class qAttribute : PropertyAttribute
+        {
+            public qAttribute(string message) : base() { DisplayName = nameof(Either) + " - " + message; }
+        }
+    }
+
     // Provides tests for Either<T, My.Obj>.
     // T4: EmitMonadGuards().
     public static partial class EitherFacts
     {
         #region Repeat()
 
-        [fact("Repeat() guards.")]
+        [t("Repeat() guards.")]
         public static void Repeat_guards()
         {
             var source = Either<int, My.Obj>.OfLeft(1);
@@ -36,7 +55,7 @@ namespace Narvalo.Applicative
 
         #region Zip()
 
-        [fact("Zip() guards.")]
+        [t("Zip() guards.")]
         public static void Zip_guards()
         {
             var first = Either<int, My.Obj>.OfLeft(1);
@@ -65,7 +84,7 @@ namespace Narvalo.Applicative
 
         #region Select()
 
-        [fact("Select() guards.")]
+        [t("Select() guards.")]
         public static void Select_guards()
         {
             var source = Either<int, My.Obj>.OfLeft(1);
@@ -79,7 +98,7 @@ namespace Narvalo.Applicative
 
         #region SelectMany()
 
-        [fact("SelectMany() guards.")]
+        [t("SelectMany() guards.")]
         public static void SelectMany_guards()
         {
             var source = Either<short, My.Obj>.OfLeft(1);
@@ -107,7 +126,7 @@ namespace Narvalo.Applicative
     {
         #region Bind()
 
-        [fact("Bind() applies the binder to the underlying value.")]
+        [t("Bind() applies the binder to the underlying value.")]
         public static void Bind_calls_binder()
         {
             var source = Either<int, My.Obj>.OfLeft(1);
@@ -122,7 +141,7 @@ namespace Narvalo.Applicative
 
         #region Select()
 
-        [fact("Select() applies the selector to the underlying value.")]
+        [t("Select() applies the selector to the underlying value.")]
         public static void Select_calls_selector()
         {
             var source = Either<int, My.Obj>.OfLeft(1);
@@ -144,7 +163,7 @@ namespace Narvalo.Applicative
     {
         #region Functor Rules
 
-        [Property(DisplayName = "Either - The identity map is a fixed point for Select (first functor law).")]
+        [q("The identity map is a fixed point for Select (first functor law).")]
         public static bool Identity_is_fixed_pointSelect(int arg)
         {
             var me = Either<int, My.Obj>.OfLeft(arg);
@@ -156,7 +175,7 @@ namespace Narvalo.Applicative
             return left.Equals(right);
         }
 
-        [Property(DisplayName = "Either - Select() preserves the composition operator (second functor law).")]
+        [q("Select() preserves the composition operator (second functor law).")]
         public static bool Select_preserves_composition(short arg, Func<short, int> g, Func<int, long> f)
         {
             var me = Either<short, My.Obj>.OfLeft(arg);
@@ -172,7 +191,7 @@ namespace Narvalo.Applicative
 
         #region Monad Rules
 
-        [Property(DisplayName = "Either - Of() is a left identity for Bind (first monad law).")]
+        [q("Of() is a left identity for Bind (first monad law).")]
         public static bool Of_is_left_identity_for_bind(int arg0, float arg1)
         {
             Func<int, Either<float, My.Obj>> f = val => Either<float, My.Obj>.OfLeft(arg1 * val);
@@ -184,7 +203,7 @@ namespace Narvalo.Applicative
             return left.Equals(right);
         }
 
-        [Property(DisplayName = "Either - Of() is a left identity for Compose (first monad law).")]
+        [q("Of() is a left identity for Compose (first monad law).")]
         public static bool Of_is_left_identity_for_compose(int arg0, float arg1)
         {
             Func<int, Either<int, My.Obj>> of = Either<int, My.Obj>.OfLeft;
@@ -197,7 +216,7 @@ namespace Narvalo.Applicative
             return left.Equals(right);
         }
 
-        [Property(DisplayName = "Either - Of() is a right identity for Bind (second monad law).")]
+        [q("Of() is a right identity for Bind (second monad law).")]
         public static bool Of_is_right_identity_for_bind(int arg0)
         {
             var me = Either<int, My.Obj>.OfLeft(arg0);
@@ -209,7 +228,7 @@ namespace Narvalo.Applicative
             return left.Equals(right);
         }
 
-        [Property(DisplayName = "Either - Of() is a right identity for Compose (second monad law).")]
+        [q("Of() is a right identity for Compose (second monad law).")]
         public static bool Of_is_right_identity_for_compose(int arg0, float arg1)
         {
             Func<int, Either<float, My.Obj>> f = val => Either<float, My.Obj>.OfLeft(arg1 * val);
@@ -221,7 +240,7 @@ namespace Narvalo.Applicative
             return left.Equals(right);
         }
 
-        [Property(DisplayName = "Either - Bind() is associative (third monad law).")]
+        [q("Bind() is associative (third monad law).")]
         public static bool Bind_is_associative(short arg0, int arg1, long arg2)
         {
             var me = Either<short, My.Obj>.OfLeft(arg0);
@@ -236,7 +255,7 @@ namespace Narvalo.Applicative
             return left.Equals(right);
         }
 
-        [Property(DisplayName = "Either - Compose() is associative (third monad law).")]
+        [q("Compose() is associative (third monad law).")]
         public static bool Compose_is_associative(short arg0, int arg1, long arg2, double arg3)
         {
             Func<short, Either<int, My.Obj>> f = val => Either<int, My.Obj>.OfLeft(arg1 * val);

@@ -6,13 +6,13 @@ namespace Narvalo.Applicative {
     using Xunit;
 
     public static class QullableFacts {
-        internal sealed class factAttribute : FactAttribute_ {
-            public factAttribute(string message) : base(nameof(Qullable), message) { }
+        internal sealed class tAttribute : TestAttribute {
+            public tAttribute(string message) : base(nameof(Qullable), message) { }
         }
 
         #region Select()
 
-        [fact("")]
+        [t("")]
         public static void Select_ReturnsNull_WhenNull() {
             // Arrange
             int? source = null;
@@ -27,7 +27,7 @@ namespace Narvalo.Applicative {
             Assert.False(q.HasValue);
         }
 
-        [fact("")]
+        [t("")]
         public static void Select_ReturnsValueAfterApplyingSelector() {
             // Arrange
             int? source = 1;
@@ -48,7 +48,7 @@ namespace Narvalo.Applicative {
 
         #region Where()
 
-        [fact("")]
+        [t("")]
         public static void Where_ReturnsValue_ForSuccessfulPredicate() {
             // Arrange
             int? source = 1;
@@ -65,7 +65,7 @@ namespace Narvalo.Applicative {
             Assert.Equal(1, q.Value);
         }
 
-        [fact("")]
+        [t("")]
         public static void Where_ReturnsNull_ForFailedPredicate() {
             // Arrange
             int? source = 1;
@@ -84,7 +84,7 @@ namespace Narvalo.Applicative {
 
         #region SelectMany()
 
-        [fact("")]
+        [t("")]
         public static void SelectMany_ReturnsNull_WhenNull() {
             // Arrange
             int? source = null;
@@ -103,7 +103,7 @@ namespace Narvalo.Applicative {
             Assert.False(q.HasValue);
         }
 
-        [fact("")]
+        [t("")]
         public static void SelectMany_ReturnsNull_ForNullMiddle_WhenNull() {
             // Arrange
             int? source = null;
@@ -122,7 +122,7 @@ namespace Narvalo.Applicative {
             Assert.False(q.HasValue);
         }
 
-        [fact("")]
+        [t("")]
         public static void SelectMany_ReturnsNull_ForNullMiddle() {
             // Arrange
             int? source = 1;
@@ -141,7 +141,7 @@ namespace Narvalo.Applicative {
             Assert.False(q.HasValue);
         }
 
-        [fact("")]
+        [t("")]
         public static void SelectMany_ReturnsValueAfterApplyingSelector() {
             // Arrange
             int? source = 1;

@@ -5,8 +5,5 @@ namespace Narvalo.Applicative
     using Xunit;
 
     public static partial class ResultFacts {
-        internal sealed class factAttribute : FactAttribute_ {
-            public factAttribute(string message) : base(nameof(Result), message) { }
-        }
     }
 }

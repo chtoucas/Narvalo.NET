@@ -8,11 +8,11 @@ namespace Narvalo.Linq {
     using Xunit;
 
     public static class SelectAnyFacts {
-        internal sealed class factAttribute : FactAttribute_ {
-            public factAttribute(string message) : base(nameof(Qperators), message) { }
+        internal sealed class tAttribute : TestAttribute {
+            public tAttribute(string message) : base(nameof(Qperators), message) { }
         }
 
-        [fact("")]
+        [t("")]
         public static void Guards() {
             IEnumerable<int> source = null;
             Func<int, int?> selector = val => val;
@@ -23,7 +23,7 @@ namespace Narvalo.Linq {
             Assert.Throws<ArgumentNullException>("this", () => source.SelectAny((Func<int, string>)null));
         }
 
-        [fact("")]
+        [t("")]
         public static void IsDeferred_1() {
             bool wasCalled = false;
             Func<string> fun = () => { wasCalled = true; return String.Empty; };
@@ -33,7 +33,7 @@ namespace Narvalo.Linq {
             Assert.False(wasCalled);
         }
 
-        [fact("")]
+        [t("")]
         public static void IsDeferred_2() {
             bool wasCalled = false;
             Func<int?> fun = () => { wasCalled = true; return 1; };

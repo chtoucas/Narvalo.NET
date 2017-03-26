@@ -7,23 +7,23 @@ namespace Narvalo.Applicative {
     using Xunit;
 
     public static partial class StubsFacts {
-        internal sealed class factAttribute : FactAttribute_ {
-            public factAttribute(string message) : base(nameof(Stubs), message) { }
+        internal sealed class tAttribute : TestAttribute {
+            public tAttribute(string message) : base(nameof(Stubs), message) { }
         }
-        internal sealed class theoryAttribute : TheoryAttribute_ {
+        internal sealed class theoryAttribute : TestSuiteAttribute {
             public theoryAttribute(string message) : base(nameof(Stubs), message) { }
         }
 
         #region Noop
 
-        [fact("")]
+        [t("")]
         public static void Noop_IsNotNull() => Assert.NotNull(Stubs.Noop);
 
         #endregion
 
         #region AlwaysDefault
 
-        [fact("")]
+        [t("")]
         public static void AlwaysDefault_IsNotNull() {
             Assert.NotNull(Stubs<string>.AlwaysDefault);
             Assert.NotNull(Stubs<int>.AlwaysDefault);
@@ -39,7 +39,7 @@ namespace Narvalo.Applicative {
             Assert.NotNull(Stubs<long, object>.AlwaysDefault);
         }
 
-        [fact("")]
+        [t("")]
         public static void AlwaysDefault_ReturnsDefault() {
             Assert.Equal(default(string), Stubs<string>.AlwaysDefault());
             Assert.Equal(default(int), Stubs<int>.AlwaysDefault());
@@ -59,7 +59,7 @@ namespace Narvalo.Applicative {
 
         #region AlwaysFalse
 
-        [fact("")]
+        [t("")]
         public static void AlwaysFalse_IsNotNull() {
             Assert.NotNull(Stubs<string>.AlwaysFalse);
             Assert.NotNull(Stubs<int>.AlwaysFalse);
@@ -69,13 +69,11 @@ namespace Narvalo.Applicative {
 
         [theory("")]
         [MemberData(nameof(StringTestData), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
         public static void AlwaysFalse_ReturnsFalse_StringTestSuite(string input)
             => Assert.False(Stubs<string>.AlwaysFalse(input));
 
         [theory("")]
         [MemberData(nameof(Int32TestData), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
         public static void AlwaysFalse_ReturnsFalse_Int32TestSuite(int input)
             => Assert.False(Stubs<int>.AlwaysFalse(input));
 
@@ -83,7 +81,7 @@ namespace Narvalo.Applicative {
 
         #region AlwaysTrue
 
-        [fact("")]
+        [t("")]
         public static void AlwaysTrue_IsNotNull() {
             Assert.NotNull(Stubs<string>.AlwaysTrue);
             Assert.NotNull(Stubs<int>.AlwaysTrue);
@@ -93,13 +91,11 @@ namespace Narvalo.Applicative {
 
         [theory("")]
         [MemberData(nameof(StringTestData), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
         public static void AlwaysTrue_ReturnsTrue_StringTestSuite(string input)
             => Assert.True(Stubs<string>.AlwaysTrue(input));
 
         [theory("")]
         [MemberData(nameof(Int32TestData), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
         public static void AlwaysTrue_ReturnsTrue_Int32TestSuite(int input)
             => Assert.True(Stubs<int>.AlwaysTrue(input));
 
@@ -107,7 +103,7 @@ namespace Narvalo.Applicative {
 
         #region Identity
 
-        [fact("")]
+        [t("")]
         public static void Identity_IsNotNull() {
             Assert.NotNull(Stubs<string>.Identity);
             Assert.NotNull(Stubs<int>.Identity);
@@ -117,13 +113,11 @@ namespace Narvalo.Applicative {
 
         [theory("")]
         [MemberData(nameof(StringTestData), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
         public static void Identity_ReturnsBackInput_StringTestSuite(string input)
             => Assert.Equal(input, Stubs<string>.Identity(input));
 
         [theory("")]
         [MemberData(nameof(Int32TestData), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
         public static void Identity_ReturnsBackInput_Int32TestSuite(int input)
             => Assert.Equal(input, Stubs<int>.Identity(input));
 
@@ -131,7 +125,7 @@ namespace Narvalo.Applicative {
 
         #region Ignore
 
-        [fact("")]
+        [t("")]
         public static void Ignore_IsNotNull() {
             Assert.NotNull(Stubs<string>.Ignore);
             Assert.NotNull(Stubs<int>.Ignore);

@@ -4,27 +4,27 @@ namespace Narvalo {
     using Xunit;
 
     public static class ControlFlowExceptionFacts {
-        internal sealed class factAttribute : FactAttribute_ {
-            public factAttribute(string message) : base(nameof(ControlFlowException), message) { }
+        internal sealed class tAttribute : TestAttribute {
+            public tAttribute(string message) : base(nameof(ControlFlowException), message) { }
         }
 
-        [fact("Default ctor sets a default message.")]
-        public static void Ctor_default() {
+        [t("Default ctor sets a default message.")]
+        public static void Ctor1() {
             var ex = new ControlFlowException();
 
             Assert.NotNull(ex.Message);
         }
 
-        [fact("Ctor sets message.")]
-        public static void Ctor_message() {
+        [t("Ctor sets message.")]
+        public static void Ctor2() {
             var message = "My message";
             var ex = new ControlFlowException(message);
 
             Assert.Equal(message, ex.Message);
         }
 
-        [fact("Ctor sets message and inner exception.")]
-        public static void Ctor_inner_exception() {
+        [t("Ctor sets message and inner exception.")]
+        public static void Ctor3() {
             var message = "My message";
             var innerException = new My.SimpleException();
             var ex = new ControlFlowException(message, innerException);

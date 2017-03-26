@@ -6,7 +6,7 @@ namespace Narvalo {
     using Assert = Narvalo.AssertExtended;
 
     public abstract class DefaultLocalizationFacts {
-        internal sealed class factAttribute : FactAttribute_ {
+        internal sealed class factAttribute : TestAttribute {
             public factAttribute(string message) : base("L10N", message) { }
         }
 
