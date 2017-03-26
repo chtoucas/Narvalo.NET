@@ -1,37 +1,36 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo
-{
+namespace Narvalo {
     using System;
 
     using Xunit;
 
-    public static partial class RequireFacts
-    {
+    using static global::My;
+
+    public static partial class RequireFacts {
+        internal sealed class factAttribute : FactAttribute_ {
+            public factAttribute(string message) : base(nameof(Require), message) { }
+        }
+
         #region State()
 
-        [Fact]
-        public static void State_DoesNotThrow_ForTrue()
-        {
+        [fact("State(true) does not throw if the precondition is met.")]
+        public static void State_passes() {
             Require.State(true);
             Require.State(true, "My message");
         }
 
-        [Fact]
-        public static void State_ThrowsInvalidOperationException_ForFalse_1()
+        [fact("State(false) throws InvalidOperationException.")]
+        public static void State_throws_1()
             => Assert.Throws<InvalidOperationException>(() => Require.State(false));
 
-        [Fact]
-        public static void State_ThrowsInvalidOperationException_ForFalse_2()
-        {
-            // Arrange
+        [fact("State(false, message) throws InvalidOperationException.")]
+        public static void State_throws_2() {
             var message = "My message";
             Action act = () => Require.State(false, message);
 
-            // Act
             var ex = Record.Exception(act);
 
-            // Assert
             Assert.NotNull(ex);
             Assert.IsType<InvalidOperationException>(ex);
             Assert.Equal(message, ex.Message);
@@ -41,42 +40,33 @@ namespace Narvalo
 
         #region True()
 
-        [Fact]
-        public static void True_DoesNotThrow_ForTrue()
-        {
+        [fact("True(true) does not throw if the precondition is met.")]
+        public static void True_passes() {
             Require.True(true, "paramName");
             Require.True(true, "paramName", "My message");
         }
 
-        [Fact]
-        public static void True_ThrowsArgumentException_ForFalse_1()
-        {
-            // Arrange
+        [fact("True(false) throws ArgumentException.")]
+        public static void True_throws_1() {
             var paramName = "paramName";
             Action act = () => Require.True(false, paramName);
 
-            // Act
             var ex = Record.Exception(act);
 
-            // Assert
             Assert.NotNull(ex);
             Assert.NotNull(ex.Message);
             var argex = Assert.IsType<ArgumentException>(ex);
             Assert.Equal(paramName, argex.ParamName);
         }
 
-        [Fact]
-        public static void True_ThrowsArgumentException_ForFalse_2()
-        {
-            // Arrange
+        [fact("True(false, message) throws ArgumentException.")]
+        public static void True_throws_2() {
             var paramName = "paramName";
             var message = "My message";
             Action act = () => Require.True(false, paramName, message);
 
-            // Act
             var ex = Record.Exception(act);
 
-            // Assert
             Assert.NotNull(ex);
             var argex = Assert.IsType<ArgumentException>(ex);
             Assert.Equal(paramName, argex.ParamName);
@@ -88,42 +78,33 @@ namespace Narvalo
 
         #region Range()
 
-        [Fact]
-        public static void Range_DoesNotThrow_ForTrue()
-        {
+        [fact("Range(true) does not throw if the precondition is met.")]
+        public static void Range_passes() {
             Require.Range(true, "paramName");
             Require.Range(true, "paramName", "My message");
         }
 
-        [Fact]
-        public static void Range_ThrowsArgumentOutOfRangeException_ForFalse_1()
-        {
-            // Arrange
+        [fact("Range(false) throws ArgumentOutOfRangeException.")]
+        public static void Range_throws_1() {
             var paramName = "paramName";
             Action act = () => Require.Range(false, paramName);
 
-            // Act
             var ex = Record.Exception(act);
 
-            // Assert
             Assert.NotNull(ex);
             Assert.NotNull(ex.Message);
             var argex = Assert.IsType<ArgumentOutOfRangeException>(ex);
             Assert.Equal(paramName, argex.ParamName);
         }
 
-        [Fact]
-        public static void Range_ThrowsArgumentOutOfRangeException_ForFalse_2()
-        {
-            // Arrange
+        [fact("Range(false, message) throws ArgumentOutOfRangeException.")]
+        public static void Range_throws_2() {
             var paramName = "paramName";
             var message = "My message";
             Action act = () => Require.Range(false, paramName, message);
 
-            // Act
             var ex = Record.Exception(act);
 
-            // Assert
             Assert.NotNull(ex);
             var argex = Assert.IsType<ArgumentOutOfRangeException>(ex);
             Assert.Equal(paramName, argex.ParamName);
@@ -135,21 +116,17 @@ namespace Narvalo
 
         #region NotNull()
 
-        [Fact]
-        public static void NotNull_DoesNotThrow_ForNonNull() => Require.NotNull(new Object(), "paramName");
+        [fact("NotNull() does not throw if the precondition is met.")]
+        public static void NotNull_passes() => Require.NotNull(new Obj(), "paramName");
 
-        [Fact]
-        public static void NotNull_ThrowsArgumentNullException_ForNull()
-        {
-            // Arrange
+        [fact("NotNull(null) throws ArgumentNullException.")]
+        public static void NotNull_throws() {
             Object obj = null;
             var paramName = "paramName";
             Action act = () => Require.NotNull(obj, paramName);
 
-            // Act
             var ex = Record.Exception(act);
 
-            // Assert
             Assert.NotNull(ex);
             Assert.NotNull(ex.Message);
             var argex = Assert.IsType<ArgumentNullException>(ex);
@@ -160,26 +137,20 @@ namespace Narvalo
 
         #region NotNullUnconstrained()
 
-        [Fact]
-        public static void NotNullUnconstrained_DoesNotThrow_ForStruct()
-            => Require.NotNullUnconstrained(new My.EmptyVal(), "paramName");
+        [fact("NotNullUnconstrained() does not throw if the precondition is met.")]
+        public static void NotNullUnconstrained_passes() {
+            Require.NotNullUnconstrained(new Val(1), "paramName");
+            Require.NotNullUnconstrained(new Obj(), "paramName");
+        }
 
-        [Fact]
-        public static void NotNullUnconstrained_DoesNotThrow_ForNonNull()
-            => Require.NotNullUnconstrained(new Object(), "paramName");
-
-        [Fact]
-        public static void NotNullUnconstrained_ThrowsArgumentNullException_ForNull()
-        {
-            // Arrange
+        [fact("NotNullUnconstrained(null) throws ArgumentNullException.")]
+        public static void NotNullUnconstrained_throws() {
             Object obj = null;
             var paramName = "paramName";
             Action act = () => Require.NotNullUnconstrained(obj, paramName);
 
-            // Act
             var ex = Record.Exception(act);
 
-            // Assert
             Assert.NotNull(ex);
             Assert.NotNull(ex.Message);
             var argex = Assert.IsType<ArgumentNullException>(ex);
@@ -190,42 +161,32 @@ namespace Narvalo
 
         #region NotNullOrEmpty()
 
-        [Fact]
-        public static void NotNullOrEmpty_DoesNotThrow_ForNonNullOrEmptyString()
-            => Require.NotNullOrEmpty("value", "paramName");
+        [fact("NotNullOrEmpty() does not throw if the precondition is met.")]
+        public static void NotNullOrEmpty_passes() {
+            Require.NotNullOrEmpty("value", "paramName");
+            Require.NotNullOrEmpty(" ", "paramName");
+        }
 
-        [Fact]
-        public static void NotNullOrEmpty_DoesNotThrow_ForWhiteSpaceString()
-            => Require.NotNullOrEmpty(" ", "paramName");
-
-        [Fact]
-        public static void NotNullOrEmpty_ThrowsArgumentNullException_ForNull()
-        {
-            // Arrange
+        [fact("NotNullOrEmpty(null) throws ArgumentNullException.")]
+        public static void NotNullOrEmpty_throws_1() {
             var paramName = "paramName";
             Action act = () => Require.NotNullOrEmpty(null, paramName);
 
-            // Act
             var ex = Record.Exception(act);
 
-            // Assert
             Assert.NotNull(ex);
             Assert.NotNull(ex.Message);
             var argex = Assert.IsType<ArgumentNullException>(ex);
             Assert.Equal(paramName, argex.ParamName);
         }
 
-        [Fact]
-        public static void NotNullOrEmpty_ThrowsArgumentException_ForEmptyString()
-        {
-            // Arrange
+        [fact("NotNullOrEmpty(String.Empty) throws ArgumentException.")]
+        public static void NotNullOrEmpty_throws_2() {
             var paramName = "paramName";
             Action act = () => Require.NotNullOrEmpty(String.Empty, paramName);
 
-            // Act
             var ex = Record.Exception(act);
 
-            // Assert
             Assert.NotNull(ex);
             Assert.NotNull(ex.Message);
             var argex = Assert.IsType<ArgumentException>(ex);
@@ -236,59 +197,45 @@ namespace Narvalo
 
         #region NotNullOrWhiteSpace()
 
-        [Fact]
-        public static void NotNullOrWhiteSpace_DoesNotThrow_ForNonNullOrWhiteSpaceString()
-            => Require.NotNullOrWhiteSpace("value", "paramName");
+        [fact("NotNullOrWhiteSpace() does not throw if the precondition is met.")]
+        public static void NotNullOrWhiteSpace_passes() {
+            Require.NotNullOrWhiteSpace("value", "paramName");
+            Require.NotNullOrWhiteSpace("va lue", "paramName");
+        }
 
-        [Fact]
-        public static void NotNullOrWhiteSpace_DoesNotThrow_ForStringWithWhiteSpaces()
-            => Require.NotNullOrWhiteSpace("va lue", "paramName");
-
-        [Fact]
-        public static void NotNullOrWhiteSpace_ThrowsArgumentNullException_ForNull()
-        {
-            // Arrange
+        [fact("NotNullOrWhiteSpace(null) throws ArgumentNullException.")]
+        public static void NotNullOrWhiteSpace_throws_1() {
             var paramName = "paramName";
             Action act = () => Require.NotNullOrWhiteSpace(null, paramName);
 
-            // Act
             var ex = Record.Exception(act);
 
-            // Assert
             Assert.NotNull(ex);
             Assert.NotNull(ex.Message);
             var argex = Assert.IsType<ArgumentNullException>(ex);
             Assert.Equal(paramName, argex.ParamName);
         }
 
-        [Fact]
-        public static void NotNullOrWhiteSpace_ThrowsArgumentException_ForEmptyString()
-        {
-            // Arrange
+        [fact("NotNullOrWhiteSpace(String.Empty) throws ArgumentException.")]
+        public static void NotNullOrWhiteSpace_throws_2() {
             var paramName = "paramName";
             Action act = () => Require.NotNullOrWhiteSpace(String.Empty, paramName);
 
-            // Act
             var ex = Record.Exception(act);
 
-            // Assert
             Assert.NotNull(ex);
             Assert.NotNull(ex.Message);
             var argex = Assert.IsType<ArgumentException>(ex);
             Assert.Equal(paramName, argex.ParamName);
         }
 
-        [Fact]
-        public static void NotNullOrWhiteSpace_ThrowsArgumentException_ForWhiteSpaceString()
-        {
-            // Arrange
+        [fact(@"NotNullOrWhiteSpace("" "") throws ArgumentException.")]
+        public static void NotNullOrWhiteSpace_throws_3() {
             var paramName = "paramName";
             Action act = () => Require.NotNullOrWhiteSpace(" ", paramName);
 
-            // Act
             var ex = Record.Exception(act);
 
-            // Assert
             Assert.NotNull(ex);
             Assert.NotNull(ex.Message);
             var argex = Assert.IsType<ArgumentException>(ex);

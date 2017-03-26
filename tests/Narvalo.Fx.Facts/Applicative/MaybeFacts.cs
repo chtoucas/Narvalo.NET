@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Applicative
-{
+namespace Narvalo.Applicative {
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -10,13 +9,15 @@ namespace Narvalo.Applicative
 
     using static global::My;
 
-    public static partial class MaybeFacts
-    {
+    public static partial class MaybeFacts {
+        internal sealed class factAttribute : FactAttribute_ {
+            public factAttribute(string message) : base(nameof(Maybe), message) { }
+        }
+
         #region Unit
 
-        [Fact(DisplayName = "Unit is some.")]
-        public static void Unit_is_some()
-        {
+        [fact("Unit is some.")]
+        public static void Unit_is_some() {
             Assert.True(Maybe.Unit.IsSome);
             Assert.False(Maybe.Unit.IsNone);
         }
@@ -25,16 +26,14 @@ namespace Narvalo.Applicative
 
         #region None
 
-        [Fact(DisplayName = "None (static) is none.")]
-        public static void Zero_is_none()
-        {
+        [fact("None (static) is none.")]
+        public static void Zero_is_none() {
             Assert.True(Maybe.None.IsNone);
             Assert.False(Maybe.None.IsSome);
         }
 
-        [Fact(DisplayName = "None is none.")]
-        public static void None_is_none()
-        {
+        [fact("None is none.")]
+        public static void None_is_none() {
             var o1 = Maybe<int>.None;               // Core value type
             var o2 = Maybe<Val>.None;               // User-defined value type
             var o3 = Maybe<Val?>.None;              // Nullable value type
@@ -55,9 +54,8 @@ namespace Narvalo.Applicative
 
         #region IsSome & IsNone
 
-        [Fact(DisplayName = "IsSome, once true, stays true.")]
-        public static void IsSome_is_immutable()
-        {
+        [fact("IsSome, once true, stays true.")]
+        public static void IsSome_is_immutable() {
             var obj = new Obj();
             var some = Maybe.Of(obj);
 
@@ -70,9 +68,8 @@ namespace Narvalo.Applicative
             Assert.False(some.IsNone);
         }
 
-        [Fact(DisplayName = "IsNone, once true, stays true.")]
-        public static void IsNone_is_immutable()
-        {
+        [fact("IsNone, once true, stays true.")]
+        public static void IsNone_is_immutable() {
             Obj obj = null;
             var none = Maybe.Of(obj);
 
@@ -89,9 +86,8 @@ namespace Narvalo.Applicative
 
         #region Of()
 
-        [Fact(DisplayName = "Of() returns some for non-null.")]
-        public static void Of_returns_some()
-        {
+        [fact("Of() returns some for non-null.")]
+        public static void Of_returns_some() {
             var o1 = Maybe.Of(1);
             var o2 = Maybe.Of(new Val(1));
             var o3 = Maybe.Of((Val?)new Val(1));
@@ -108,9 +104,8 @@ namespace Narvalo.Applicative
             Assert.False(o4.IsNone);
         }
 
-        [Fact(DisplayName = "Of() returns none for null.")]
-        public static void Of_returns_none()
-        {
+        [fact("Of() returns none for null.")]
+        public static void Of_returns_none() {
             var o1 = Maybe.Of((Obj)null);
             var o2 = Maybe.Of((Val?)null);
 
@@ -125,38 +120,32 @@ namespace Narvalo.Applicative
 
         #region Cast to/from value
 
-        [Fact(DisplayName = "Casting to value throws if none.")]
-        public static void CastToValue_throws()
-        {
-            var none = Maybe<Obj>.None;
-
-            Action act = () => { var _ = (Obj)none; };
+        [fact("Casting to value throws if none.")]
+        public static void cast_to_throws() {
+            Action act = () => { var _ = (Obj)Maybe<Obj>.None; };
             var ex = Record.Exception(act);
 
             Assert.NotNull(ex);
             Assert.IsType<InvalidCastException>(ex);
         }
 
-        [Fact(DisplayName = "Casting to value returns value if some.")]
-        public static void CastToValue_returns_value()
-        {
+        [fact("Casting to value returns value if some.")]
+        public static void cast_to_returns_value() {
             var exp = new Obj();
             var some = Maybe.Of(exp);
 
             Assert.Same(exp, (Obj)some);
         }
 
-        [Fact(DisplayName = "Casting from value returns none for null.")]
-        public static void CastFromValue_returns_none()
-        {
+        [fact("Casting from value returns none for null.")]
+        public static void cast_from_returns_none() {
             var none = (Maybe<Obj>)null;
 
             Assert.True(none.IsNone);
         }
 
-        [Fact(DisplayName = "Casting from value returns some for non-null.")]
-        public static void CastFromValue_returns_some()
-        {
+        [fact("Casting from value returns some for non-null.")]
+        public static void cast_from_returns_some() {
             var exp = new Obj();
             var some = (Maybe<Obj>)exp;
 
@@ -168,20 +157,18 @@ namespace Narvalo.Applicative
 
         #region ValueOrDefault()
 
-        [Fact(DisplayName = "ValueOrDefault() returns value if some.")]
-        public static void ValueOrDefault_returns_value()
-        {
+        [fact("ValueOrDefault() returns value if some.")]
+        public static void ValueOrDefault_returns_value() {
             var exp = new Obj();
             var some = Maybe.Of(exp);
 
             Assert.Same(exp, some.ValueOrDefault());
         }
 
-        [Fact(DisplayName = "ValueOrDefault() returns default value if none.")]
-        public static void ValueOrDefaul_returns_default()
-        {
-            var none = Maybe<Obj>.None;
+        [fact("ValueOrDefault() returns default value if none.")]
+        public static void ValueOrDefaul_returns_default() {
             var exp = default(Obj);
+            var none = Maybe<Obj>.None;
 
             Assert.Same(exp, none.ValueOrDefault());
         }
@@ -190,22 +177,20 @@ namespace Narvalo.Applicative
 
         #region ValueOrElse()
 
-        [Fact(DisplayName = "ValueOrElse() guards.")]
-        public static void ValueOrElse_guards()
-        {
+        [fact("ValueOrElse() guards.")]
+        public static void ValueOrElse_guards() {
             var none = Maybe<Obj>.None;
             var some = Maybe.Of(new Obj());
 
-            Assert.Throws<ArgumentNullException>("other", () => some.ValueOrElse((Obj)null));
-            Assert.Throws<ArgumentNullException>("valueFactory", () => some.ValueOrElse((Func<Obj>)null));
+            Assert.Throws<ArgumentNullException>("other", () => some.ValueOrElse(default(Obj)));
+            Assert.Throws<ArgumentNullException>("valueFactory", () => some.ValueOrElse(default(Func<Obj>)));
 
-            Assert.Throws<ArgumentNullException>("other", () => none.ValueOrElse((Obj)null));
-            Assert.Throws<ArgumentNullException>("valueFactory", () => none.ValueOrElse((Func<Obj>)null));
+            Assert.Throws<ArgumentNullException>("other", () => none.ValueOrElse(default(Obj)));
+            Assert.Throws<ArgumentNullException>("valueFactory", () => none.ValueOrElse(default(Func<Obj>)));
         }
 
-        [Fact(DisplayName = "ValueOrElse() returns value if some.")]
-        public static void ValueOrElse_returns_value()
-        {
+        [fact("ValueOrElse() returns value if some.")]
+        public static void ValueOrElse_returns_value() {
             var exp = new Obj();
             var some = Maybe.Of(exp);
             var other = new Obj("other");
@@ -214,9 +199,8 @@ namespace Narvalo.Applicative
             Assert.Same(exp, some.ValueOrElse(() => other));
         }
 
-        [Fact(DisplayName = "ValueOrElse(other) returns 'other' if none.")]
-        public static void ValueOrElse_returns_other()
-        {
+        [fact("ValueOrElse(other) returns 'other' if none.")]
+        public static void ValueOrElse_returns_other() {
             var none = Maybe<Obj>.None;
             var exp = new Obj();
 
@@ -228,9 +212,8 @@ namespace Narvalo.Applicative
 
         #region ValueOrThrow()
 
-        [Fact(DisplayName = "ValueOrThrow() guards.")]
-        public static void ValueOrThrow_guards()
-        {
+        [fact("ValueOrThrow() guards.")]
+        public static void ValueOrThrow_guards() {
             var none = Maybe<Obj>.None;
             var some = Maybe.Of(new Obj());
 
@@ -238,9 +221,8 @@ namespace Narvalo.Applicative
             Assert.Throws<ArgumentNullException>("exceptionFactory", () => none.ValueOrThrow(null));
         }
 
-        [Fact(DisplayName = "ValueOrThrow() returns value if some.")]
-        public static void ValueOrThrow_returns_value()
-        {
+        [fact("ValueOrThrow() returns value if some.")]
+        public static void ValueOrThrow_returns_value() {
             var exp = new Obj();
             var some = Maybe.Of(exp);
 
@@ -248,9 +230,8 @@ namespace Narvalo.Applicative
             Assert.Same(exp, some.ValueOrThrow(() => new SimpleException()));
         }
 
-        [Fact(DisplayName = "ValueOrThrow() throws if none.")]
-        public static void ValueOrThrow_throws()
-        {
+        [fact("ValueOrThrow() throws if none.")]
+        public static void ValueOrThrow_throws() {
             var none = Maybe<Obj>.None;
 
             Assert.Throws<InvalidOperationException>(() => none.ValueOrThrow());
@@ -261,9 +242,8 @@ namespace Narvalo.Applicative
 
         #region op_Equality() & op_Inequality()
 
-        [Fact(DisplayName = "== and != when the underlying values are equals.")]
-        public static void Equality_is_true()
-        {
+        [fact("== and != when the underlying values are equals.")]
+        public static void Equality_is_true() {
             var o1a = Maybe.Of(1);
             var o1b = Maybe.Of(1);
             var o2a = Maybe.Of(new Val(1));
@@ -284,9 +264,8 @@ namespace Narvalo.Applicative
             Assert.False(o4a != o4b);
         }
 
-        [Fact(DisplayName = "== and != when the underlying values are not equals.")]
-        public static void Equality_is_false()
-        {
+        [fact("== and != when the underlying values are not equals.")]
+        public static void Equality_is_false() {
             var o1a = Maybe.Of(1);
             var o1b = Maybe.Of(2);
             var o2a = Maybe.Of(new Val(1));
@@ -315,9 +294,8 @@ namespace Narvalo.Applicative
 
         #region Equals()
 
-        [Fact(DisplayName = "Equals() guards.")]
-        public static void Equals_guards()
-        {
+        [fact("Equals() guards.")]
+        public static void Equals_guards() {
             var none = Maybe<Obj>.None;
             var some = Maybe.Of(new Obj());
 
@@ -328,9 +306,8 @@ namespace Narvalo.Applicative
             Assert.Throws<ArgumentNullException>("comparer", () => none.Equals(some, null));
         }
 
-        [Fact(DisplayName = "Equals() is reflexive.")]
-        public static void Equals_is_reflexive()
-        {
+        [fact("Equals() is reflexive.")]
+        public static void Equals_is_reflexive() {
             var n = Maybe<int>.None;
             var o1 = Maybe.Of(1);
             var o2 = Maybe.Of(new Val(1));
@@ -349,9 +326,8 @@ namespace Narvalo.Applicative
             Assert.True(o4.Equals(o4, EqualityComparer<Obj>.Default));
         }
 
-        [Fact(DisplayName = "Equals() is abelian.")]
-        public static void Equals_is_abelian()
-        {
+        [fact("Equals() is abelian.")]
+        public static void Equals_is_abelian() {
             var o1a = Maybe.Of(1);
             var o1b = Maybe.Of(1);
             var o1c = Maybe.Of(2);
@@ -386,9 +362,8 @@ namespace Narvalo.Applicative
             Assert.Equal(o4a.Equals(o4c, EqualityComparer<Obj>.Default), o4c.Equals(o4a, EqualityComparer<Obj>.Default));
         }
 
-        [Fact(DisplayName = "Equals() is transitive.")]
-        public static void Equals_is_transitive()
-        {
+        [fact("Equals() is transitive.")]
+        public static void Equals_is_transitive() {
             var o1a = Maybe.Of(1);
             var o1b = Maybe.Of(1);
             var o1c = Maybe.Of(1);
@@ -415,9 +390,8 @@ namespace Narvalo.Applicative
             Assert.Equal(o4a.Equals(o4b, EqualityComparer<Obj>.Default) && o4b.Equals(o4c, EqualityComparer<Obj>.Default), o4a.Equals(o4c, EqualityComparer<Obj>.Default));
         }
 
-        [Fact(DisplayName = "Equals() returns false for null if none.")]
-        public static void Equals_returns_false_1()
-        {
+        [fact("Equals() returns false for null if none.")]
+        public static void Equals_returns_false_1() {
             var o1 = Maybe<int>.None;
             var o2 = Maybe<Val>.None;
             var o3 = Maybe<Val?>.None;
@@ -433,9 +407,8 @@ namespace Narvalo.Applicative
             Assert.False(o4.Equals(null, EqualityComparer<Obj>.Default));
         }
 
-        [Fact(DisplayName = "Equals() returns false for null if some.")]
-        public static void Equals_returns_false_2()
-        {
+        [fact("Equals() returns false for null if some.")]
+        public static void Equals_returns_false_2() {
             var o1 = Maybe.Of(1);
             var o2 = Maybe.Of(new Val(1));
             var o3 = Maybe.Of((Val?)new Val(1));
@@ -451,9 +424,8 @@ namespace Narvalo.Applicative
             Assert.False(o4.Equals(null, EqualityComparer<Obj>.Default));
         }
 
-        [Fact(DisplayName = "Equals() follows structural equality rules.")]
-        public static void Equals_follows_structural_equality_1()
-        {
+        [fact("Equals() follows structural equality rules.")]
+        public static void Equals_follows_structural_equality_1() {
             var o1a = Maybe.Of(1);
             var o1b = Maybe.Of(1);
             var o1c = Maybe.Of(2);
@@ -479,9 +451,8 @@ namespace Narvalo.Applicative
             Assert.False(o3a.Equals(o3c, EqualityComparer<Tuple<string>>.Default));
         }
 
-        [Fact(DisplayName = "Equals() follows structural equality rules after boxing.")]
-        public static void Equals_follows_structural_equality_2()
-        {
+        [fact("Equals() follows structural equality rules after boxing.")]
+        public static void Equals_follows_structural_equality_2() {
             var o1a = Maybe.Of(1);
             var o1b = Maybe.Of(1);
             var o1c = Maybe.Of(2);
@@ -511,9 +482,8 @@ namespace Narvalo.Applicative
 
         #region GetHashCode()
 
-        [Fact(DisplayName = "GetHashCode() guards.")]
-        public static void GetHashCode_guards()
-        {
+        [fact("GetHashCode() guards.")]
+        public static void GetHashCode_guards() {
             var none = Maybe<Obj>.None;
             var some = Maybe.Of(new Obj());
 
@@ -521,9 +491,8 @@ namespace Narvalo.Applicative
             Assert.Throws<ArgumentNullException>("comparer", () => none.GetHashCode(null));
         }
 
-        [Fact(DisplayName = "GetHashCode() returns the same result when called repeatedly.")]
-        public static void GetHashCode_does_not_change()
-        {
+        [fact("GetHashCode() returns the same result when called repeatedly.")]
+        public static void GetHashCode_does_not_change() {
             var none = Maybe<Obj>.None;
             var someobj = Maybe.Of(new Obj());
             var someval = Maybe.Of(1);
@@ -536,9 +505,8 @@ namespace Narvalo.Applicative
             Assert.Equal(someval.GetHashCode(EqualityComparer<int>.Default), someval.GetHashCode(EqualityComparer<int>.Default));
         }
 
-        [Fact(DisplayName = "GetHashCode() returns the same result for equal instances.")]
-        public static void GetHashCode_is_the_same()
-        {
+        [fact("GetHashCode() returns the same result for equal instances.")]
+        public static void GetHashCode_is_the_same() {
             var tuple1 = Maybe.Of(Tuple.Create("1"));
             var tuple2 = Maybe.Of(Tuple.Create("1"));
 
@@ -551,9 +519,8 @@ namespace Narvalo.Applicative
 
         #region ToString()
 
-        [Fact(DisplayName = "ToString() result contains a string representation of the value if any, otherwise 'None'.")]
-        public static void ToString_contains_value()
-        {
+        [fact("ToString() result contains a string representation of the value if any, otherwise 'None'.")]
+        public static void ToString_contains_value() {
             var exp = "My Value";
             var none = Maybe<Obj>.None;
             var some = Maybe.Of(exp);
@@ -566,22 +533,19 @@ namespace Narvalo.Applicative
     }
 
     // Tests for the Internal.IMaybe<T> interface.
-    public static partial class MaybeFacts
-    {
+    public static partial class MaybeFacts {
         #region ToEnumerable()
 
-        [Fact(DisplayName = "ToEnumerable() result is empty if none.")]
-        public static void ToEnumerable_if_none()
-        {
+        [fact("ToEnumerable() result is empty if none.")]
+        public static void ToEnumerable_if_none() {
             var none = Maybe<Obj>.None;
             var seq = none.ToEnumerable();
 
             Assert.Empty(seq);
         }
 
-        [Fact(DisplayName = "ToEnumerable() result is a sequence made of one element if some.")]
-        public static void ToEnumerable_if_some()
-        {
+        [fact("ToEnumerable() result is a sequence made of one element if some.")]
+        public static void ToEnumerable_if_some() {
             var obj = new Obj();
             var some = Maybe.Of(obj);
             var seq = some.ToEnumerable();
@@ -593,9 +557,8 @@ namespace Narvalo.Applicative
 
         #region GetEnumerator()
 
-        [Fact(DisplayName = "GetEnumerator() does not iterate.")]
-        public static void GetEnumerator_if_none()
-        {
+        [fact("GetEnumerator() does not iterate.")]
+        public static void GetEnumerator_if_none() {
             var none = Maybe<Obj>.None;
             var count = 0;
 
@@ -604,9 +567,8 @@ namespace Narvalo.Applicative
             Assert.Equal(0, count);
         }
 
-        [Fact(DisplayName = "GetEnumerator() iterates only once.")]
-        public static void GetEnumerator_if_some()
-        {
+        [fact("GetEnumerator() iterates only once.")]
+        public static void GetEnumerator_if_some() {
             var exp = new Obj();
             var some = Maybe.Of(exp);
             var count = 0;
@@ -620,9 +582,8 @@ namespace Narvalo.Applicative
 
         #region Contains()
 
-        [Fact(DisplayName = "Contains() guards.")]
-        public static void Contains_guards()
-        {
+        [fact("Contains() guards.")]
+        public static void Contains_guards() {
             var none = Maybe<Obj>.None;
             var some = Maybe.Of(new Obj());
             var value = new Obj();
@@ -631,9 +592,8 @@ namespace Narvalo.Applicative
             Assert.Throws<ArgumentNullException>("comparer", () => none.Contains(value, null));
         }
 
-        [Fact(DisplayName = "Contains() returns false if none.")]
-        public static void Contains_if_none()
-        {
+        [fact("Contains() returns false if none.")]
+        public static void Contains_if_none() {
             var n1 = Maybe<int>.None;
             var n2 = Maybe<Obj>.None;
 
@@ -644,8 +604,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void Contains_ReturnsTrue_ForCorrectValue()
-        {
+        public static void Contains_ReturnsTrue_ForCorrectValue() {
             var value = new Obj();
             var s1 = Maybe.Of(1);
             var s2 = Maybe.Of(value);
@@ -657,8 +616,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void Contains_ReturnsTrue_ForTypeImplementingStructuralEquality()
-        {
+        public static void Contains_ReturnsTrue_ForTypeImplementingStructuralEquality() {
             var some = Maybe.Of(Tuple.Create("value"));
 
             Assert.True(some.Contains(Tuple.Create("value")), "References differ but we have structural equality.");
@@ -666,8 +624,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void Contains_ReturnsFalse_ForIncorrectValue()
-        {
+        public static void Contains_ReturnsFalse_ForIncorrectValue() {
             var s1 = Maybe.Of(1);
             var s2 = Maybe.Of(new Obj());
             var other = new Obj("other");
@@ -682,24 +639,22 @@ namespace Narvalo.Applicative
 
         #region Match()
 
-        [Fact]
-        public static void Match_Guards()
-        {
+        [fact("Match() guards.")]
+        public static void Match_guards() {
             var none = Maybe<Obj>.None;
             var some = Maybe.Of(new Obj());
 
             Assert.Throws<ArgumentNullException>("caseSome", () => some.Match(null, new Obj()));
             Assert.Throws<ArgumentNullException>("caseSome", () => some.Match(null, () => new Obj()));
-            Assert.Throws<ArgumentNullException>("caseNone", () => some.Match(val => val, (Func<Obj>)null));
+            Assert.Throws<ArgumentNullException>("caseNone", () => some.Match(x => x, default(Func<Obj>)));
 
             Assert.Throws<ArgumentNullException>("caseSome", () => none.Match(null, new Obj()));
             Assert.Throws<ArgumentNullException>("caseSome", () => none.Match(null, () => new Obj()));
-            Assert.Throws<ArgumentNullException>("caseNone", () => none.Match(val => val, (Func<Obj>)null));
+            Assert.Throws<ArgumentNullException>("caseNone", () => none.Match(x => x, default(Func<Obj>)));
         }
 
         [Fact]
-        public static void Match_InvokesCaseSome_IfSome1()
-        {
+        public static void Match_InvokesCaseSome_IfSome1() {
             var some = Maybe.Of(new Obj());
             var caseSomeWasCalled = false;
             var caseNoneWasCalled = false;
@@ -715,8 +670,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void Match_InvokesCaseSome_IfSome2()
-        {
+        public static void Match_InvokesCaseSome_IfSome2() {
             var some = Maybe.Of(new Obj());
             var wasCalled = false;
             var exp = new Obj("caseSome");
@@ -730,8 +684,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void Match_InvokesCaseNone_IfNone1()
-        {
+        public static void Match_InvokesCaseNone_IfNone1() {
             var none = Maybe<Obj>.None;
             var caseSomeWasCalled = false;
             var caseNoneWasCalled = false;
@@ -747,8 +700,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void Match_InvokesCaseNone_IfNone2()
-        {
+        public static void Match_InvokesCaseNone_IfNone2() {
             var none = Maybe<Obj>.None;
             var wasCalled = false;
             Func<Obj, Obj> caseSome = _ => { wasCalled = true; return new Obj("caseSome"); };
@@ -764,26 +716,24 @@ namespace Narvalo.Applicative
 
         #region Coalesce()
 
-        [Fact]
-        public static void Coalesce_Guards()
-        {
+        [fact("Coalesce() guards.")]
+        public static void Coalesce_guards() {
             var none = Maybe<Obj>.None;
             var some = Maybe.Of(new Obj());
 
             Assert.Throws<ArgumentNullException>("predicate", () => some.Coalesce(null, new Obj("this"), new Obj("that")));
-            Assert.Throws<ArgumentNullException>("predicate", () => some.Coalesce(null, val => val, () => new Obj()));
-            Assert.Throws<ArgumentNullException>("selector", () => some.Coalesce(val => true, null, () => new Obj()));
-            Assert.Throws<ArgumentNullException>("otherwise", () => some.Coalesce(val => true, val => val, null));
+            Assert.Throws<ArgumentNullException>("predicate", () => some.Coalesce(null, x => x, () => new Obj()));
+            Assert.Throws<ArgumentNullException>("selector", () => some.Coalesce(_ => true, null, () => new Obj()));
+            Assert.Throws<ArgumentNullException>("otherwise", () => some.Coalesce(_ => true, x => x, null));
 
             Assert.Throws<ArgumentNullException>("predicate", () => none.Coalesce(null, new Obj("this"), new Obj("that")));
-            Assert.Throws<ArgumentNullException>("predicate", () => none.Coalesce(null, val => val, () => new Obj()));
-            Assert.Throws<ArgumentNullException>("selector", () => none.Coalesce(val => true, null, () => new Obj()));
-            Assert.Throws<ArgumentNullException>("otherwise", () => none.Coalesce(val => true, val => val, null));
+            Assert.Throws<ArgumentNullException>("predicate", () => none.Coalesce(null, x => x, () => new Obj()));
+            Assert.Throws<ArgumentNullException>("selector", () => none.Coalesce(_ => true, null, () => new Obj()));
+            Assert.Throws<ArgumentNullException>("otherwise", () => none.Coalesce(_ => true, x => x, null));
         }
 
         [Fact]
-        public static void Coalesce_InvokesSelector_IfSome_ForTrue()
-        {
+        public static void Coalesce_InvokesSelector_IfSome_ForTrue() {
             var some = Maybe.Of(new Obj());
             var wasCalled = false;
             var otherWasCalled = false;
@@ -799,8 +749,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void Coalesce_ReturnsThenResult_IfSome_ForTrue()
-        {
+        public static void Coalesce_ReturnsThenResult_IfSome_ForTrue() {
             var some = Maybe.Of(new Obj());
             var thenResult = new Obj("then");
             var elseResult = new Obj("else");
@@ -811,8 +760,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void Coalesce_InvokesOtherwise_IfSome_ForFalse()
-        {
+        public static void Coalesce_InvokesOtherwise_IfSome_ForFalse() {
             var some = Maybe.Of(new Obj());
             var wasCalled = false;
             var otherWasCalled = false;
@@ -828,8 +776,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void Coalesce_ReturnsElseResult_IfSome_ForFalse()
-        {
+        public static void Coalesce_ReturnsElseResult_IfSome_ForFalse() {
             var some = Maybe.Of(new Obj());
             var thenResult = new Obj("then");
             var elseResult = new Obj("else");
@@ -840,8 +787,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void Coalesce_InvokesOtherwise_IfNone_ForTrue()
-        {
+        public static void Coalesce_InvokesOtherwise_IfNone_ForTrue() {
             var none = Maybe<Obj>.None;
             var wasCalled = false;
             var otherWasCalled = false;
@@ -857,8 +803,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void Coalesce_InvokesOtherwise_IfNone_ForFalse()
-        {
+        public static void Coalesce_InvokesOtherwise_IfNone_ForFalse() {
             var none = Maybe<Obj>.None;
             var wasCalled = false;
             var otherWasCalled = false;
@@ -874,8 +819,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void Coalesce_ReturnsElseResult_IfNone_ForTrue()
-        {
+        public static void Coalesce_ReturnsElseResult_IfNone_ForTrue() {
             var none = Maybe<Obj>.None;
             var thenResult = new Obj("then");
             var elseResult = new Obj("else");
@@ -886,8 +830,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void Coalesce_ReturnsElseResult_IfNone_ForFalse()
-        {
+        public static void Coalesce_ReturnsElseResult_IfNone_ForFalse() {
             var none = Maybe<Obj>.None;
             var thenResult = new Obj("then");
             var elseResult = new Obj("else");
@@ -901,28 +844,26 @@ namespace Narvalo.Applicative
 
         #region When()
 
-        [Fact]
-        public static void When_Guards()
-        {
+        [fact("When() guards.")]
+        public static void When_guards() {
             var none = Maybe<Obj>.None;
             var some = Maybe.Of(new Obj());
 
-            Assert.Throws<ArgumentNullException>("predicate", () => some.When(null, val => { }));
-            Assert.Throws<ArgumentNullException>("action", () => some.When(val => true, null));
-            Assert.Throws<ArgumentNullException>("predicate", () => some.When(null, val => { }, () => { }));
-            Assert.Throws<ArgumentNullException>("action", () => some.When(val => true, null, () => { }));
-            Assert.Throws<ArgumentNullException>("otherwise", () => some.When(val => true, val => { }, null));
+            Assert.Throws<ArgumentNullException>("predicate", () => some.When(null, _ => { }));
+            Assert.Throws<ArgumentNullException>("action", () => some.When(_ => true, null));
+            Assert.Throws<ArgumentNullException>("predicate", () => some.When(null, _ => { }, () => { }));
+            Assert.Throws<ArgumentNullException>("action", () => some.When(_ => true, null, () => { }));
+            Assert.Throws<ArgumentNullException>("otherwise", () => some.When(_ => true, _ => { }, null));
 
-            Assert.Throws<ArgumentNullException>("predicate", () => none.When(null, val => { }));
-            Assert.Throws<ArgumentNullException>("action", () => none.When(val => true, null));
-            Assert.Throws<ArgumentNullException>("predicate", () => none.When(null, val => { }, () => { }));
-            Assert.Throws<ArgumentNullException>("action", () => none.When(val => true, null, () => { }));
-            Assert.Throws<ArgumentNullException>("otherwise", () => none.When(val => true, val => { }, null));
+            Assert.Throws<ArgumentNullException>("predicate", () => none.When(null, _ => { }));
+            Assert.Throws<ArgumentNullException>("action", () => none.When(_ => true, null));
+            Assert.Throws<ArgumentNullException>("predicate", () => none.When(null, _ => { }, () => { }));
+            Assert.Throws<ArgumentNullException>("action", () => none.When(_ => true, null, () => { }));
+            Assert.Throws<ArgumentNullException>("otherwise", () => none.When(_ => true, _ => { }, null));
         }
 
         [Fact]
-        public static void When_InvokesAction_IfSome_ForTrue1()
-        {
+        public static void When_InvokesAction_IfSome_ForTrue1() {
             var some = Maybe.Of(new Obj());
             var wasCalled = false;
             var otherWasCalled = false;
@@ -936,8 +877,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void When_InvokesAction_IfSome_ForTrue2()
-        {
+        public static void When_InvokesAction_IfSome_ForTrue2() {
             var some = Maybe.Of(new Obj());
             var wasCalled = false;
             Action<Obj> action = _ => wasCalled = true;
@@ -948,8 +888,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void When_InvokesOtherwise_IfSome_ForFalse()
-        {
+        public static void When_InvokesOtherwise_IfSome_ForFalse() {
             var some = Maybe.Of(new Obj());
             var wasCalled = false;
             var otherWasCalled = false;
@@ -963,8 +902,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void When_DoesNotInvokesAction_IfSome_ForFalse()
-        {
+        public static void When_DoesNotInvokesAction_IfSome_ForFalse() {
             var some = Maybe.Of(new Obj());
             var wasCalled = false;
             Action<Obj> action = _ => wasCalled = true;
@@ -975,8 +913,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void When_InvokesOtherwise_IfNone_ForTrue()
-        {
+        public static void When_InvokesOtherwise_IfNone_ForTrue() {
             var none = Maybe<Obj>.None;
             var wasCalled = false;
             var otherWasCalled = false;
@@ -990,8 +927,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void When_DoesNotInvokeAction_IfNone_ForTrue()
-        {
+        public static void When_DoesNotInvokeAction_IfNone_ForTrue() {
             var none = Maybe<Obj>.None;
             var wasCalled = false;
             Action<Obj> action = _ => wasCalled = true;
@@ -1002,8 +938,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void When_InvokesOtherwise_IfNone_ForFalse()
-        {
+        public static void When_InvokesOtherwise_IfNone_ForFalse() {
             var none = Maybe<Obj>.None;
             var wasCalled = false;
             var otherWasCalled = false;
@@ -1017,8 +952,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void When_DoesNotInvokeAction_IfNone_ForFalse()
-        {
+        public static void When_DoesNotInvokeAction_IfNone_ForFalse() {
             var none = Maybe<Obj>.None;
             var wasCalled = false;
             Action<Obj> action = _ => wasCalled = true;
@@ -1032,22 +966,20 @@ namespace Narvalo.Applicative
 
         #region Do()
 
-        [Fact]
-        public static void Do_Guards()
-        {
+        [fact("Do() guards.")]
+        public static void Do_guards() {
             var none = Maybe<Obj>.None;
             var some = Maybe.Of(new Obj());
 
             Assert.Throws<ArgumentNullException>("onSome", () => some.Do(null, () => { }));
-            Assert.Throws<ArgumentNullException>("onNone", () => some.Do(val => { }, null));
+            Assert.Throws<ArgumentNullException>("onNone", () => some.Do(_ => { }, null));
 
             Assert.Throws<ArgumentNullException>("onSome", () => none.Do(null, () => { }));
-            Assert.Throws<ArgumentNullException>("onNone", () => none.Do(val => { }, null));
+            Assert.Throws<ArgumentNullException>("onNone", () => none.Do(_ => { }, null));
         }
 
         [Fact]
-        public static void Do_InvokesOnSome_IfSome()
-        {
+        public static void Do_InvokesOnSome_IfSome() {
             var some = Maybe.Of(new Obj());
             var onSomeWasCalled = false;
             var onNoneWasCalled = false;
@@ -1061,8 +993,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void Do_InvokesOnNone_IfNone()
-        {
+        public static void Do_InvokesOnNone_IfNone() {
             var none = Maybe<Obj>.None;
             var onSomeWasCalled = false;
             var onNoneWasCalled = false;
@@ -1079,9 +1010,8 @@ namespace Narvalo.Applicative
 
         #region OnSome()
 
-        [Fact]
-        public static void OnSome_Guards()
-        {
+        [fact("OnSome() guards.")]
+        public static void OnSome_guards() {
             var none = Maybe<Obj>.None;
             var some = Maybe.Of(new Obj());
 
@@ -1090,8 +1020,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void OnSome_InvokesAction_IfSome()
-        {
+        public static void OnSome_InvokesAction_IfSome() {
             var some = Maybe.Of(new Obj());
             var wasCalled = false;
             Action<Obj> op = _ => wasCalled = true;
@@ -1102,8 +1031,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void OnSome_DoesNotInvokeAction_IfNone()
-        {
+        public static void OnSome_DoesNotInvokeAction_IfNone() {
             var none = Maybe<Obj>.None;
             var wasCalled = false;
             Action<Obj> op = _ => wasCalled = true;
@@ -1117,9 +1045,8 @@ namespace Narvalo.Applicative
 
         #region OnNone()
 
-        [Fact]
-        public static void OnNone_Guards()
-        {
+        [fact("OnNone() guards.")]
+        public static void OnNone_guards() {
             var none = Maybe<Obj>.None;
             var some = Maybe.Of(new Obj());
 
@@ -1128,8 +1055,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void OnNone_InvokesAction_IfNone()
-        {
+        public static void OnNone_InvokesAction_IfNone() {
             var none = Maybe<Obj>.None;
             var wasCalled = false;
             Action act = () => wasCalled = true;
@@ -1140,8 +1066,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void OnNone_DoesNotInvokeAction_IfSome()
-        {
+        public static void OnNone_DoesNotInvokeAction_IfSome() {
             var some = Maybe.Of(new Obj());
             var wasCalled = false;
             Action act = () => wasCalled = true;
@@ -1155,13 +1080,11 @@ namespace Narvalo.Applicative
     }
 
     // Tests for the monadic methods.
-    public static partial class MaybeFacts
-    {
+    public static partial class MaybeFacts {
         #region Bind()
 
         [Fact]
-        public static void Bind_Guards()
-        {
+        public static void Bind_Guards() {
             var none = Maybe<Obj>.None;
             var some = Maybe.Of(new Obj());
 
@@ -1170,10 +1093,9 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void Bind_ReturnsNone_IfNone()
-        {
+        public static void Bind_ReturnsNone_IfNone() {
             var none = Maybe<Obj>.None;
-            Func<Obj, Maybe<string>> binder = val => Maybe.Of(val.Value);
+            Func<Obj, Maybe<string>> binder = x => Maybe.Of(x.Value);
 
             var me = none.Bind(binder);
 
@@ -1181,11 +1103,10 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void Bind_ReturnsSome_IfSome()
-        {
+        public static void Bind_ReturnsSome_IfSome() {
             var exp = new Obj();
             var some = Maybe.Of(exp);
-            Func<Obj, Maybe<string>> binder = val => Maybe.Of(val.Value);
+            Func<Obj, Maybe<string>> binder = x => Maybe.Of(x.Value);
 
             var me = some.Bind(binder);
 
@@ -1197,16 +1118,14 @@ namespace Narvalo.Applicative
         #region Flatten()
 
         [Fact]
-        public static void Flatten_ReturnsNone_IfNone()
-        {
+        public static void Flatten_ReturnsNone_IfNone() {
             var me = Maybe<Maybe<Obj>>.None.Flatten();
 
             Assert.True(me.IsNone);
         }
 
         [Fact]
-        public static void Flatten_ReturnsSome_IfSome()
-        {
+        public static void Flatten_ReturnsSome_IfSome() {
             var me = Maybe.Of(Maybe.Of(new Obj())).Flatten();
 
             Assert.True(me.IsSome);
@@ -1217,8 +1136,7 @@ namespace Narvalo.Applicative
         #region OrElse()
 
         [Fact]
-        public static void OrElse_ReturnsOther_IfNone()
-        {
+        public static void OrElse_ReturnsOther_IfNone() {
             var none = Maybe<Obj>.None;
             var other = Maybe.Of(new Obj());
 
@@ -1228,8 +1146,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void OrElse_ReturnsObj_IfSome()
-        {
+        public static void OrElse_ReturnsObj_IfSome() {
             var some = Maybe.Of(new Obj());
             var other = Maybe.Of(new Obj("other"));
 
@@ -1243,10 +1160,9 @@ namespace Narvalo.Applicative
         #region Select()
 
         [Fact]
-        public static void Select_ReturnsSome_IfSome()
-        {
+        public static void Select_ReturnsSome_IfSome() {
             var some = Maybe.Of(1);
-            Func<int, int> selector = val => 2 * val;
+            Func<int, int> selector = x => 2 * x;
 
             var m1 = some.Select(selector);
             var m2 = Maybe.Select(some, selector);
@@ -1258,10 +1174,9 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void Select_ReturnsNone_IfNone()
-        {
+        public static void Select_ReturnsNone_IfNone() {
             var none = Maybe<int>.None;
-            Func<int, int> selector = val => 2 * val;
+            Func<int, int> selector = x => 2 * x;
 
             var m1 = none.Select(selector);
             var m2 = Maybe.Select(none, selector);
@@ -1277,8 +1192,7 @@ namespace Narvalo.Applicative
         #region ReplaceBy()
 
         [Fact]
-        public static void ReplaceBy_ReturnsSome_IfSome()
-        {
+        public static void ReplaceBy_ReturnsSome_IfSome() {
             var exp = 2;
 
             var m1 = Maybe.Of(1).ReplaceBy(exp);
@@ -1289,8 +1203,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void ReplaceBy_ReturnsNone_IfNone()
-        {
+        public static void ReplaceBy_ReturnsNone_IfNone() {
             var exp = 2;
 
             var m1 = Maybe<int>.None.ReplaceBy(exp);
@@ -1305,8 +1218,7 @@ namespace Narvalo.Applicative
         #region ContinueWith()
 
         [Fact]
-        public static void ContinueWith_ReturnsOther_IfSome()
-        {
+        public static void ContinueWith_ReturnsOther_IfSome() {
             var exp = Maybe.Of(1);
 
             var m1 = Maybe.Of(new Obj()).ContinueWith(exp);
@@ -1317,8 +1229,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void ContinueWith_ReturnsNone_IfNone()
-        {
+        public static void ContinueWith_ReturnsNone_IfNone() {
             var other = Maybe.Of(1);
 
             var m1 = Maybe<Obj>.None.ContinueWith(other);
@@ -1333,8 +1244,7 @@ namespace Narvalo.Applicative
         #region PassBy()
 
         [Fact]
-        public static void PassBy_ReturnsObj_ForSome()
-        {
+        public static void PassBy_ReturnsObj_ForSome() {
             var some = Maybe.Of(new Obj());
             var none = Maybe<Obj>.None;
 
@@ -1352,8 +1262,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void PassBy_ReturnsNone_ForNone()
-        {
+        public static void PassBy_ReturnsNone_ForNone() {
             var some = Maybe.Of(new Obj());
             var none = Maybe<Obj>.None;
 
@@ -1373,8 +1282,7 @@ namespace Narvalo.Applicative
         #region Skip()
 
         [Fact]
-        public static void Skip_ReturnsUnit_IfSome()
-        {
+        public static void Skip_ReturnsUnit_IfSome() {
             var m1 = Maybe.Of(new Obj()).Skip();
             var m2 = Maybe.Skip(Maybe.Of(new Obj()));
 
@@ -1383,8 +1291,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void Skip_ReturnsNone_IfNone()
-        {
+        public static void Skip_ReturnsNone_IfNone() {
             var m1 = Maybe<Obj>.None.Skip();
             var m2 = Maybe.Skip(Maybe<Obj>.None);
 
@@ -1397,13 +1304,11 @@ namespace Narvalo.Applicative
 
 #if !NO_INTERNALS_VISIBLE_TO
 
-    public static partial class MaybeFacts
-    {
+    public static partial class MaybeFacts {
         #region η()
 
         [Fact]
-        public static void η_ReturnsNone_ForNull()
-        {
+        public static void η_ReturnsNone_ForNull() {
             var o1 = Maybe<Obj>.η(null);
             var o2 = Maybe<Val?>.η(null);
 
@@ -1412,8 +1317,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void η_ReturnsSome_ForNonNull()
-        {
+        public static void η_ReturnsSome_ForNonNull() {
             var o1 = Maybe<int>.η(1);
             var o2 = Maybe<Val>.η(new Val(1));
             var o3 = Maybe<Val?>.η(new Val(1));
@@ -1430,8 +1334,7 @@ namespace Narvalo.Applicative
         #region Value
 
         [Fact]
-        public static void Value_IsImmutable()
-        {
+        public static void Value_IsImmutable() {
             var exp = new Obj();
             var some = Maybe.Of(exp);
 
@@ -1442,8 +1345,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void Value_IsOriginalValue_IfSome()
-        {
+        public static void Value_IsOriginalValue_IfSome() {
             var exp1 = 1;
             var exp2 = new Val(1);
             var exp3 = (Val?)new Val(1);
@@ -1462,8 +1364,7 @@ namespace Narvalo.Applicative
         }
 
         [ReleaseOnlyFact]
-        public static void Value_IsNullOrDefault_IfNone()
-        {
+        public static void Value_IsNullOrDefault_IfNone() {
             Assert.Equal(Maybe<int>.None.Value, default(int));
             Assert.Null(Maybe<string>.None.Value);
             Assert.Null(Maybe<Obj>.None.Value);
@@ -1474,8 +1375,7 @@ namespace Narvalo.Applicative
         #region ReplaceBy()
 
         [Fact]
-        public static void ReplaceBy_ContainsValue_IfSome()
-        {
+        public static void ReplaceBy_ContainsValue_IfSome() {
             var exp = new Obj("other");
 
             var m = Maybe.Of(new Obj()).ReplaceBy(exp);
@@ -1488,13 +1388,11 @@ namespace Narvalo.Applicative
 
 #endif
 
-    public static partial class MaybeFacts
-    {
+    public static partial class MaybeFacts {
         #region Linq Operators
 
         [Fact]
-        public static void Where_ReturnsNone_ForUnsuccessfulPredicate()
-        {
+        public static void Where_ReturnsNone_ForUnsuccessfulPredicate() {
             var some = Maybe.Of(1);
             Func<int, bool> predicate = _ => _ == 2;
 
@@ -1508,8 +1406,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void SelectMany_ReturnsNone_IfNone()
-        {
+        public static void SelectMany_ReturnsNone_IfNone() {
             var none = Maybe<int>.None;
             var some = Maybe.Of(2);
             Func<int, Maybe<int>> valueSelector = _ => some;
@@ -1527,8 +1424,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void SelectMany_ReturnsNone_ForMiddleIsNone()
-        {
+        public static void SelectMany_ReturnsNone_ForMiddleIsNone() {
             var some = Maybe.Of(1);
             var none = Maybe<int>.None;
             Func<int, Maybe<int>> valueSelector = _ => none;
@@ -1546,8 +1442,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void SelectMany_ReturnsNone_ForNoneObjectAndNoneMiddle()
-        {
+        public static void SelectMany_ReturnsNone_ForNoneObjectAndNoneMiddle() {
             var none1 = Maybe<int>.None;
             var none2 = Maybe<int>.None;
             Func<int, Maybe<int>> valueSelector = _ => none2;
@@ -1565,8 +1460,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void Join_ReturnsNone_IfJoinFailed()
-        {
+        public static void Join_ReturnsNone_IfJoinFailed() {
             var some1 = Maybe.Of(1);
             var some2 = Maybe.Of(2);
 
@@ -1586,13 +1480,11 @@ namespace Narvalo.Applicative
 
 #if !NO_INTERNALS_VISIBLE_TO
 
-    public static partial class MaybeFacts
-    {
+    public static partial class MaybeFacts {
         #region Linq Operators
 
         [Fact]
-        public static void Where_ReturnsSome_ForSuccessfulPredicate()
-        {
+        public static void Where_ReturnsSome_ForSuccessfulPredicate() {
             var source = Maybe.Of(1);
             Func<int, bool> predicate = _ => _ == 1;
 
@@ -1609,8 +1501,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void SelectMany_ReturnsSomeAndApplySelector()
-        {
+        public static void SelectMany_ReturnsSomeAndApplySelector() {
             var source = Maybe.Of(1);
             var middle = Maybe.Of(2);
             Func<int, Maybe<int>> valueSelector = _ => middle;
@@ -1631,8 +1522,7 @@ namespace Narvalo.Applicative
         }
 
         [Fact]
-        public static void Join_ReturnsSome_IfJoinSucceed()
-        {
+        public static void Join_ReturnsSome_IfJoinSucceed() {
             var source = Maybe.Of(1);
             var inner = Maybe.Of(2);
 
