@@ -17,6 +17,8 @@
   -->
 
   <PropertyGroup>
+    <DefineConstants>$(DefineConstants);NOT_CLS_COMPLIANT</DefineConstants>
+
     <CodeAnalysisRuleSet>$(RepositorySettingsDir)Tests.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
