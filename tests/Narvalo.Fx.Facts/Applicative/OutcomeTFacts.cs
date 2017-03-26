@@ -9,7 +9,7 @@ namespace Narvalo.Applicative {
 
     // Tests for Outcome<T>.
     public static partial class OutcomeTFacts {
-        internal sealed class tAttribute : TestAttribute {
+        internal sealed class tAttribute : TestCaseAttribute {
             public tAttribute(string message) : base(nameof(Outcome), message) { }
         }
 

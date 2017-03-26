@@ -10,7 +10,7 @@ namespace Narvalo.Applicative {
 
     // Tests for Fallible<T>.
     public static partial class FallibleTFacts {
-        internal sealed class tAttribute : TestAttribute {
+        internal sealed class tAttribute : TestCaseAttribute {
             public tAttribute(string message) : base(nameof(Fallible), message) { }
         }
 

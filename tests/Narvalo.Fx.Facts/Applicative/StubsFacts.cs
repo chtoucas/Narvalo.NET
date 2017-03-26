@@ -7,24 +7,25 @@ namespace Narvalo.Applicative {
     using Xunit;
 
     public static partial class StubsFacts {
-        internal sealed class tAttribute : TestAttribute {
-            public tAttribute(string message) : base(nameof(Stubs), message) { }
+        internal sealed class tAttribute : TestCaseAttribute {
+            public tAttribute(string description) : base(nameof(Stubs), description) { }
         }
-        internal sealed class theoryAttribute : TestSuiteAttribute {
-            public theoryAttribute(string message) : base(nameof(Stubs), message) { }
+
+        internal sealed class TAttribute : TestTheoryAttribute {
+            public TAttribute(string description) : base(nameof(Stubs), description) { }
         }
 
         #region Noop
 
-        [t("")]
-        public static void Noop_IsNotNull() => Assert.NotNull(Stubs.Noop);
+        [t("Noop is not null.")]
+        public static void Noop1() => Assert.NotNull(Stubs.Noop);
 
         #endregion
 
         #region AlwaysDefault
 
-        [t("")]
-        public static void AlwaysDefault_IsNotNull() {
+        [t("AlwaysDefault is not null.")]
+        public static void AlwaysDefault1() {
             Assert.NotNull(Stubs<string>.AlwaysDefault);
             Assert.NotNull(Stubs<int>.AlwaysDefault);
             Assert.NotNull(Stubs<long>.AlwaysDefault);
@@ -39,8 +40,8 @@ namespace Narvalo.Applicative {
             Assert.NotNull(Stubs<long, object>.AlwaysDefault);
         }
 
-        [t("")]
-        public static void AlwaysDefault_ReturnsDefault() {
+        [t("AlwaysDefault is constant default.")]
+        public static void AlwaysDefault2() {
             Assert.Equal(default(string), Stubs<string>.AlwaysDefault());
             Assert.Equal(default(int), Stubs<int>.AlwaysDefault());
             Assert.Equal(default(long), Stubs<long>.AlwaysDefault());
@@ -59,74 +60,74 @@ namespace Narvalo.Applicative {
 
         #region AlwaysFalse
 
-        [t("")]
-        public static void AlwaysFalse_IsNotNull() {
+        [t("AlwaysFalse is not null.")]
+        public static void AlwaysFalse1() {
             Assert.NotNull(Stubs<string>.AlwaysFalse);
             Assert.NotNull(Stubs<int>.AlwaysFalse);
             Assert.NotNull(Stubs<long>.AlwaysFalse);
             Assert.NotNull(Stubs<object>.AlwaysFalse);
         }
 
-        [theory("")]
+        [T("AlwaysFalse is constant false.")]
         [MemberData(nameof(StringTestData), DisableDiscoveryEnumeration = true)]
-        public static void AlwaysFalse_ReturnsFalse_StringTestSuite(string input)
+        public static void AlwaysFalse2(string input)
             => Assert.False(Stubs<string>.AlwaysFalse(input));
 
-        [theory("")]
+        [T("AlwaysFalse is constant false.")]
         [MemberData(nameof(Int32TestData), DisableDiscoveryEnumeration = true)]
-        public static void AlwaysFalse_ReturnsFalse_Int32TestSuite(int input)
+        public static void AlwaysFalse3(int input)
             => Assert.False(Stubs<int>.AlwaysFalse(input));
 
         #endregion
 
         #region AlwaysTrue
 
-        [t("")]
-        public static void AlwaysTrue_IsNotNull() {
+        [t("AlwaysTrue is not null.")]
+        public static void AlwaysTrue1() {
             Assert.NotNull(Stubs<string>.AlwaysTrue);
             Assert.NotNull(Stubs<int>.AlwaysTrue);
             Assert.NotNull(Stubs<long>.AlwaysTrue);
             Assert.NotNull(Stubs<object>.AlwaysTrue);
         }
 
-        [theory("")]
+        [T("AlwaysTrue is constant true.")]
         [MemberData(nameof(StringTestData), DisableDiscoveryEnumeration = true)]
-        public static void AlwaysTrue_ReturnsTrue_StringTestSuite(string input)
+        public static void AlwaysTrue2(string input)
             => Assert.True(Stubs<string>.AlwaysTrue(input));
 
-        [theory("")]
+        [T("AlwaysTrue is constant true.")]
         [MemberData(nameof(Int32TestData), DisableDiscoveryEnumeration = true)]
-        public static void AlwaysTrue_ReturnsTrue_Int32TestSuite(int input)
+        public static void AlwaysTrue3(int input)
             => Assert.True(Stubs<int>.AlwaysTrue(input));
 
         #endregion
 
         #region Identity
 
-        [t("")]
-        public static void Identity_IsNotNull() {
+        [t("Identity is not null.")]
+        public static void Identity1() {
             Assert.NotNull(Stubs<string>.Identity);
             Assert.NotNull(Stubs<int>.Identity);
             Assert.NotNull(Stubs<long>.Identity);
             Assert.NotNull(Stubs<object>.Identity);
         }
 
-        [theory("")]
+        [T("Identity is identity.")]
         [MemberData(nameof(StringTestData), DisableDiscoveryEnumeration = true)]
-        public static void Identity_ReturnsBackInput_StringTestSuite(string input)
+        public static void Identity2(string input)
             => Assert.Equal(input, Stubs<string>.Identity(input));
 
-        [theory("")]
+        [T("Identity is identity.")]
         [MemberData(nameof(Int32TestData), DisableDiscoveryEnumeration = true)]
-        public static void Identity_ReturnsBackInput_Int32TestSuite(int input)
+        public static void Identity3(int input)
             => Assert.Equal(input, Stubs<int>.Identity(input));
 
         #endregion
 
         #region Ignore
 
-        [t("")]
-        public static void Ignore_IsNotNull() {
+        [t("Ignore is not null.")]
+        public static void Ignore1() {
             Assert.NotNull(Stubs<string>.Ignore);
             Assert.NotNull(Stubs<int>.Ignore);
             Assert.NotNull(Stubs<long>.Ignore);

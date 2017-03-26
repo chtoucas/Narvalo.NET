@@ -6,7 +6,7 @@ namespace Narvalo.Applicative {
     using Xunit;
 
     public static class UnitFacts {
-        internal sealed class tAttribute : TestAttribute {
+        internal sealed class tAttribute : TestCaseAttribute {
             public tAttribute(string message) : base(nameof(Unit), message) { }
         }
 

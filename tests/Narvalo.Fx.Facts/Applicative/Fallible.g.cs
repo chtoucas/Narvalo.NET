@@ -21,19 +21,19 @@ namespace Narvalo.Applicative
     // T4: EmitMonadCore().
     public static partial class FallibleFacts
     {
-        internal sealed class tAttribute : TestAttribute
+        internal sealed class tAttribute : FactAttribute
         {
-            public tAttribute(string message) : base(nameof(Fallible), message) { }
+            public tAttribute(string description) : base() { DisplayName = nameof(Fallible) + " - " + description; }
         }
 
-        internal sealed class dAttribute : TestSuiteAttribute
+        internal sealed class TAttribute : TheoryAttribute
         {
-            public dAttribute(string message) : base(nameof(Fallible), message) { }
+            public TAttribute(string description) : base() { DisplayName = nameof(Fallible) + " - " + description; }
         }
 
         internal sealed class qAttribute : PropertyAttribute
         {
-            public qAttribute(string message) : base() { DisplayName = nameof(Fallible) + " - " + message; }
+            public qAttribute(string description) : base() { DisplayName = nameof(Fallible) + " - " + description; }
         }
     }
 

@@ -8,7 +8,7 @@ namespace Narvalo {
     using static global::My;
 
     public static partial class RequireFacts {
-        internal sealed class tAttribute : TestAttribute {
+        internal sealed class tAttribute : TestCaseAttribute {
             public tAttribute(string message) : base(nameof(Require), message) { }
         }
 

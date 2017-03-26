@@ -8,19 +8,19 @@ public partial class MonadTemplate
     // T4: EmitMonadCore().
     public static partial class <#= Name #>Facts
     {
-        internal sealed class tAttribute : TestAttribute
+        internal sealed class tAttribute : FactAttribute
         {
-            public tAttribute(string message) : base(nameof(<#= Name #>), message) { }
+            public tAttribute(string description) : base() { DisplayName = nameof(<#= Name #>) + " - " + description; }
         }
 
-        internal sealed class dAttribute : TestSuiteAttribute
+        internal sealed class TAttribute : TheoryAttribute
         {
-            public dAttribute(string message) : base(nameof(<#= Name #>), message) { }
+            public TAttribute(string description) : base() { DisplayName = nameof(<#= Name #>) + " - " + description; }
         }
 
         internal sealed class qAttribute : PropertyAttribute
         {
-            public qAttribute(string message) : base() { DisplayName = nameof(<#= Name #>) + " - " + message; }
+            public qAttribute(string description) : base() { DisplayName = nameof(<#= Name #>) + " - " + description; }
         }
     }
 <#+

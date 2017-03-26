@@ -4,7 +4,7 @@ namespace Narvalo {
     using System;
 
     public static class HashCodeHelpersFacts {
-        internal sealed class tAttribute : TestAttribute {
+        internal sealed class tAttribute : TestCaseAttribute {
             public tAttribute(string message) : base(nameof(HashCodeHelpers), message) { }
         }
 
