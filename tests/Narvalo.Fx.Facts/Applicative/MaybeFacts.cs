@@ -101,9 +101,7 @@ namespace Narvalo.Applicative {
 
         [t("Casting (to T) throws if none.")]
         public static void cast1() {
-            Action act = () => { var _ = (Obj)Maybe<Obj>.None; };
-
-            Assert.Throws<InvalidCastException>(act);
+            Assert.Throws<InvalidCastException>(() => { var _ = (Obj)Maybe<Obj>.None; });
         }
 
         [t("Casting (to T) returns Value if some.")]

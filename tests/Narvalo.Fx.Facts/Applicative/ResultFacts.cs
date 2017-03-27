@@ -25,24 +25,50 @@ namespace Narvalo.Applicative {
             var nok = Result<Obj, string>.FromError("error");
             Assert.Equal(nok.GetHashCode(), nok.GetHashCode());
 
-            //var v1 = (IStructuralEquatable)nok;
-            //Assert.Equal(v1.GetHashCode(EqualityComparer<Obj>.Default), v1.GetHashCode(EqualityComparer<Obj>.Default));
-
             var ok1 = Result<Obj, string>.Of(new Obj());
             Assert.Equal(ok1.GetHashCode(), ok1.GetHashCode());
 
-            //var v2 = (IStructuralEquatable)ok1;
-            //Assert.Equal(v2.GetHashCode(EqualityComparer<Obj>.Default), v2.GetHashCode(EqualityComparer<Obj>.Default));
-
             var ok2 = Result<int, string>.Of(1);
             Assert.Equal(ok2.GetHashCode(), ok2.GetHashCode());
+        }
 
-            //var v3 = (IStructuralEquatable)ok2;
-            //Assert.Equal(v3.GetHashCode(EqualityComparer<int>.Default), v3.GetHashCode(EqualityComparer<int>.Default));
+        [t("GetHashCode(comparer) returns the same result when called repeatedly.")]
+        public static void GetHashCode2() {
+            var nok = Result<Obj, string>.FromError("error");
+            var v = (IStructuralEquatable)nok;
+            Assert.Equal(v.GetHashCode(s_Comparer), v.GetHashCode(s_Comparer));
+
+            var ok1 = Result<Obj, string>.Of(new Obj());
+            var v1 = (IStructuralEquatable)ok1;
+            Assert.Equal(v1.GetHashCode(s_Comparer), v1.GetHashCode(s_Comparer));
+
+            var ok2 = Result<int, string>.Of(1);
+            var v2 = (IStructuralEquatable)ok2;
+            Assert.Equal(v2.GetHashCode(s_Comparer), v2.GetHashCode(s_Comparer));
+        }
+
+        [t("GetHashCode() returns different results for non-equal instances.")]
+        public static void GetHashCode3() {
+            var nok = Result<Obj, string>.FromError("error");
+            var ok = Result<Obj, string>.Of(new Obj());
+
+            Assert.NotEqual(nok.GetHashCode(), ok.GetHashCode());
+
+            var nok1 = Result<Obj, string>.FromError("error1");
+            var nok2 = Result<Obj, string>.FromError("error2");
+
+            Assert.NotEqual(nok1, nok2);
+            Assert.NotEqual(nok1.GetHashCode(), nok2.GetHashCode());
+
+            var ok1 = Result<Tuple<string>, string>.Of(Tuple.Create("1"));
+            var ok2 = Result<Tuple<string>, string>.Of(Tuple.Create("2"));
+
+            Assert.NotEqual(ok1, ok2);
+            Assert.NotEqual(ok1.GetHashCode(), ok2.GetHashCode());
         }
 
         [t("GetHashCode() returns the same result for equal instances.")]
-        public static void GetHashCode2() {
+        public static void GetHashCode4() {
             var nok1 = Result<Obj, string>.FromError("error");
             var nok2 = Result<Obj, string>.FromError("error");
 
@@ -56,11 +82,28 @@ namespace Narvalo.Applicative {
             Assert.NotSame(ok1, ok2);
             Assert.Equal(ok1, ok2);
             Assert.Equal(ok1.GetHashCode(), ok2.GetHashCode());
+        }
 
-            //var v1 = (IStructuralEquatable)ok1;
-            //var v2 = (IStructuralEquatable)ok2;
+        [t("GetHashCode(comparer) returns the same result for equal instances if OKs.")]
+        public static void GetHashCode5() {
+            var ok1 = Result<Tuple<string>, string>.Of(Tuple.Create("1"));
+            var v1 = (IStructuralEquatable)ok1;
 
-            //Assert.Equal(v1.GetHashCode(EqualityComparer<Tuple<string>>.Default), v2.GetHashCode(EqualityComparer<Tuple<string>>.Default));
+            var ok2 = Result<Tuple<string>, string>.Of(Tuple.Create("1"));
+            var v2 = (IStructuralEquatable)ok2;
+
+            Assert.Equal(v1.GetHashCode(s_Comparer), v2.GetHashCode(s_Comparer));
+        }
+
+        [t("GetHashCode(comparer) returns the same result for equal instances if NOKs.")]
+        public static void GetHashCode6() {
+            var nok1 = Result<Obj, string>.FromError("error");
+            var v1 = (IStructuralEquatable)nok1;
+
+            var nok2 = Result<Obj, string>.FromError("error");
+            var v2 = (IStructuralEquatable)nok2;
+
+            Assert.Equal(v1.GetHashCode(s_Comparer), v2.GetHashCode(s_Comparer));
         }
 
         [t("ToString() result contains a string representation of the value if OK, of the error if NOK.")]
@@ -134,6 +177,16 @@ namespace Narvalo.Applicative {
             var nok = Result<Obj, string>.FromError("error");
             Assert.Throws<ArgumentNullException>("caseSuccess", () => nok.Match(null, _ => new Obj()));
             Assert.Throws<ArgumentNullException>("caseError", () => nok.Match(val => val, null));
+        }
+    }
+
+    public static partial class ResultFacts {
+        private static readonly EqualityComparer s_Comparer = new EqualityComparer();
+
+        private sealed class EqualityComparer : IEqualityComparer {
+            public new bool Equals(object left, object right) => left?.Equals(right) ?? right == null;
+
+            public int GetHashCode(object obj) => obj?.GetHashCode() ?? 0;
         }
     }
 }
