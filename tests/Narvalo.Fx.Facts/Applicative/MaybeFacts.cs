@@ -200,7 +200,7 @@ namespace Narvalo.Applicative {
             Assert.Throws<SimpleException>(() => none.ValueOrThrow(() => new SimpleException()));
         }
 
-        [t("== and != when the Value's are equals.")]
+        [t("== and != when the Value's are equal.")]
         public static void Equality1() {
             var m1 = Maybe.Of(1);
             var m2 = Maybe.Of(1);
@@ -223,7 +223,7 @@ namespace Narvalo.Applicative {
             Assert.False(m7 != m8);
         }
 
-        [t("== and != when the Value's are not equals.")]
+        [t("== and != when the Value's are not equal.")]
         public static void Equality2() {
             var m1 = Maybe.Of(1);
             var m2 = Maybe.Of(2);
@@ -249,6 +249,14 @@ namespace Narvalo.Applicative {
             var m10 = Maybe.Of(new Obj());
             Assert.False(m9 == m10);
             Assert.True(m9 != m10);
+        }
+
+        [t("!= when one of the sides is none.")]
+        public static void Equality3() {
+            var none = Maybe<int>.None;
+            var some = Maybe.Of(1);
+
+            Assert.True(none != some);
         }
 
         [t("Equals() guards.")]
@@ -386,8 +394,17 @@ namespace Narvalo.Applicative {
             Assert.False(m4.Equals(null, EqualityComparer<Obj>.Default));
         }
 
-        [t("Equals() follows structural equality rules.")]
+        [t("Equals(obj) returns false if obj is not Maybe.")]
         public static void Equals6() {
+            var some = Maybe.Of(1);
+            Assert.False(some.Equals(new Obj()));
+
+            var none = Maybe.Of(new Val(1));
+            Assert.False(none.Equals(new Obj()));
+        }
+
+        [t("Equals() follows structural equality rules.")]
+        public static void Equals7() {
             var m1 = Maybe.Of(1);
             var m2 = Maybe.Of(1);
             var m3 = Maybe.Of(2);
@@ -414,7 +431,7 @@ namespace Narvalo.Applicative {
         }
 
         [t("Equals() follows structural equality rules after boxing.")]
-        public static void Equals7() {
+        public static void Equals8() {
             var m1 = Maybe.Of(1);
             var m2 = Maybe.Of(1);
             var m3 = Maybe.Of(2);
@@ -469,10 +486,22 @@ namespace Narvalo.Applicative {
             var m1 = Maybe.Of(Tuple.Create("1"));
             var m2 = Maybe.Of(Tuple.Create("1"));
 
-            Assert.NotSame(m1, m2);
-            Assert.Equal(m1, m2);
             Assert.Equal(m1.GetHashCode(), m2.GetHashCode());
             Assert.Equal(m1.GetHashCode(EqualityComparer<Tuple<string>>.Default), m2.GetHashCode(EqualityComparer<Tuple<string>>.Default));
+        }
+
+        [t("GetHashCode() returns different results for non-equal instances.")]
+        public static void GetHashCode3() {
+            var m1 = Maybe.Of(1);
+            var m2 = Maybe.Of(2);
+
+            Assert.NotEqual(m1.GetHashCode(), m2.GetHashCode());
+            Assert.NotEqual(m1.GetHashCode(EqualityComparer<int>.Default), m2.GetHashCode(EqualityComparer<int>.Default));
+
+            var none = Maybe<int>.None;
+
+            Assert.NotEqual(m1.GetHashCode(), none.GetHashCode());
+            Assert.NotEqual(m1.GetHashCode(EqualityComparer<int>.Default), none.GetHashCode(EqualityComparer<int>.Default));
         }
 
         [t("ToString() result contains a string representation of the value if some, contains 'None' if none.")]
@@ -561,7 +590,7 @@ namespace Narvalo.Applicative {
             Assert.True(m2.Contains(value, EqualityComparer<Obj>.Default), "Reference type.");
         }
 
-        [t("Contains() returns true if references are different but they are structurally equals.")]
+        [t("Contains() returns true if references are different but they are structurally equal.")]
         public static void Contains3() {
             var some = Maybe.Of(Tuple.Create("value"));
 
@@ -946,9 +975,9 @@ namespace Narvalo.Applicative {
         public static void OnSome1() {
             var some = Maybe.Of(new Obj());
             var wasCalled = false;
-            Action<Obj> op = _ => wasCalled = true;
+            Action<Obj> act = _ => wasCalled = true;
 
-            some.OnSome(op);
+            some.OnSome(act);
 
             Assert.True(wasCalled);
         }
@@ -957,9 +986,9 @@ namespace Narvalo.Applicative {
         public static void OnSome2() {
             var none = Maybe<Obj>.None;
             var notCalled = true;
-            Action<Obj> op = _ => notCalled = false;
+            Action<Obj> act = _ => notCalled = false;
 
-            none.OnSome(op);
+            none.OnSome(act);
 
             Assert.True(notCalled);
         }

@@ -3,7 +3,6 @@
 namespace Narvalo.Applicative {
     using System;
     using System.Collections;
-    using System.Collections.Generic;
     using System.Linq;
 
     using Xunit;
@@ -13,11 +12,11 @@ namespace Narvalo.Applicative {
     public static partial class ResultFacts {
         [t("GetHashCode() guards.")]
         public static void GetHashCode0() {
-            var ok = (IStructuralEquatable)Result<Obj, string>.Of(new Obj());
-            Assert.Throws<ArgumentNullException>("comparer", () => ok.GetHashCode(null));
-
             var nok = (IStructuralEquatable)Result<Obj, string>.FromError("error");
             Assert.Throws<ArgumentNullException>("comparer", () => nok.GetHashCode(null));
+
+            var ok = (IStructuralEquatable)Result<Obj, string>.Of(new Obj());
+            Assert.Throws<ArgumentNullException>("comparer", () => ok.GetHashCode(null));
         }
 
         [t("GetHashCode() returns the same result when called repeatedly.")]
@@ -34,76 +33,51 @@ namespace Narvalo.Applicative {
 
         [t("GetHashCode(comparer) returns the same result when called repeatedly.")]
         public static void GetHashCode2() {
-            var nok = Result<Obj, string>.FromError("error");
-            var v = (IStructuralEquatable)nok;
-            Assert.Equal(v.GetHashCode(s_Comparer), v.GetHashCode(s_Comparer));
+            var nok = (IStructuralEquatable)Result<Obj, string>.FromError("error");
+            Assert.Equal(nok.GetHashCode(s_Comparer), nok.GetHashCode(s_Comparer));
 
-            var ok1 = Result<Obj, string>.Of(new Obj());
-            var v1 = (IStructuralEquatable)ok1;
-            Assert.Equal(v1.GetHashCode(s_Comparer), v1.GetHashCode(s_Comparer));
+            var ok1 = (IStructuralEquatable)Result<Obj, string>.Of(new Obj());
+            Assert.Equal(ok1.GetHashCode(s_Comparer), ok1.GetHashCode(s_Comparer));
 
-            var ok2 = Result<int, string>.Of(1);
-            var v2 = (IStructuralEquatable)ok2;
-            Assert.Equal(v2.GetHashCode(s_Comparer), v2.GetHashCode(s_Comparer));
-        }
-
-        [t("GetHashCode() returns different results for non-equal instances.")]
-        public static void GetHashCode3() {
-            var nok = Result<Obj, string>.FromError("error");
-            var ok = Result<Obj, string>.Of(new Obj());
-
-            Assert.NotEqual(nok.GetHashCode(), ok.GetHashCode());
-
-            var nok1 = Result<Obj, string>.FromError("error1");
-            var nok2 = Result<Obj, string>.FromError("error2");
-
-            Assert.NotEqual(nok1, nok2);
-            Assert.NotEqual(nok1.GetHashCode(), nok2.GetHashCode());
-
-            var ok1 = Result<Tuple<string>, string>.Of(Tuple.Create("1"));
-            var ok2 = Result<Tuple<string>, string>.Of(Tuple.Create("2"));
-
-            Assert.NotEqual(ok1, ok2);
-            Assert.NotEqual(ok1.GetHashCode(), ok2.GetHashCode());
+            var ok2 = (IStructuralEquatable)Result<int, string>.Of(1);
+            Assert.Equal(ok2.GetHashCode(s_Comparer), ok2.GetHashCode(s_Comparer));
         }
 
         [t("GetHashCode() returns the same result for equal instances.")]
-        public static void GetHashCode4() {
+        public static void GetHashCode3() {
             var nok1 = Result<Obj, string>.FromError("error");
             var nok2 = Result<Obj, string>.FromError("error");
-
-            Assert.NotSame(nok1, nok2);
-            Assert.Equal(nok1, nok2);
             Assert.Equal(nok1.GetHashCode(), nok2.GetHashCode());
 
             var ok1 = Result<Tuple<string>, string>.Of(Tuple.Create("1"));
             var ok2 = Result<Tuple<string>, string>.Of(Tuple.Create("1"));
-
-            Assert.NotSame(ok1, ok2);
-            Assert.Equal(ok1, ok2);
             Assert.Equal(ok1.GetHashCode(), ok2.GetHashCode());
         }
 
-        [t("GetHashCode(comparer) returns the same result for equal instances if OKs.")]
-        public static void GetHashCode5() {
-            var ok1 = Result<Tuple<string>, string>.Of(Tuple.Create("1"));
-            var v1 = (IStructuralEquatable)ok1;
+        [t("GetHashCode(comparer) returns the same result for equal instances.")]
+        public static void GetHashCode4() {
+            var nok1 = (IStructuralEquatable)Result<Obj, string>.FromError("error");
+            var nok2 = (IStructuralEquatable)Result<Obj, string>.FromError("error");
+            Assert.Equal(nok1.GetHashCode(s_Comparer), nok2.GetHashCode(s_Comparer));
 
-            var ok2 = Result<Tuple<string>, string>.Of(Tuple.Create("1"));
-            var v2 = (IStructuralEquatable)ok2;
-
-            Assert.Equal(v1.GetHashCode(s_Comparer), v2.GetHashCode(s_Comparer));
+            var ok1 = (IStructuralEquatable)Result<Tuple<string>, string>.Of(Tuple.Create("1"));
+            var ok2 = (IStructuralEquatable)Result<Tuple<string>, string>.Of(Tuple.Create("1"));
+            Assert.Equal(ok1.GetHashCode(s_Comparer), ok2.GetHashCode(s_Comparer));
         }
 
-        [t("GetHashCode(comparer) returns the same result for equal instances if NOKs.")]
-        public static void GetHashCode6() {
-            var nok1 = Result<Obj, string>.FromError("error");
-            var v1 = (IStructuralEquatable)nok1;
+        [t("GetHashCode() returns different results for non-equal instances.")]
+        public static void GetHashCode5() {
+            var nok = Result<Obj, string>.FromError("error");
+            var ok = Result<Obj, string>.Of(new Obj());
+            Assert.NotEqual(nok.GetHashCode(), ok.GetHashCode());
 
-            var nok2 = Result<Obj, string>.FromError("error");
-            var v2 = (IStructuralEquatable)nok2;
+            var nok1 = Result<Obj, string>.FromError("error1");
+            var nok2 = Result<Obj, string>.FromError("error2");
+            Assert.NotEqual(nok1.GetHashCode(), nok2.GetHashCode());
 
-            Assert.Equal(v1.GetHashCode(s_Comparer), v2.GetHashCode(s_Comparer));
+            var ok1 = Result<Obj, string>.Of(new Obj());
+            var ok2 = Result<Obj, string>.Of(new Obj());
+            Assert.NotEqual(ok1.GetHashCode(), ok2.GetHashCode());
         }
 
         [t("ToString() result contains a string representation of the value if OK, of the error if NOK.")]

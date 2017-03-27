@@ -223,18 +223,32 @@ namespace Narvalo.Applicative {
             var nok1 = Outcome<Obj>.FromError("error");
             var nok2 = Outcome<Obj>.FromError("error");
 
-            Assert.NotSame(nok1, nok2);
-            Assert.Equal(nok1, nok2);
             Assert.Equal(nok1.GetHashCode(), nok2.GetHashCode());
             Assert.Equal(nok1.GetHashCode(EqualityComparer<Obj>.Default), nok2.GetHashCode(EqualityComparer<Obj>.Default));
 
             var ok1 = Outcome.Of(Tuple.Create("1"));
             var ok2 = Outcome.Of(Tuple.Create("1"));
 
-            Assert.NotSame(ok1, ok2);
-            Assert.Equal(ok1, ok2);
             Assert.Equal(ok1.GetHashCode(), ok2.GetHashCode());
             Assert.Equal(ok1.GetHashCode(EqualityComparer<Tuple<string>>.Default), ok2.GetHashCode(EqualityComparer<Tuple<string>>.Default));
+        }
+
+        [t("GetHashCode() returns different results for non-equal instances.")]
+        public static void GetHashCode3() {
+            var nok1 = Outcome<int>.FromError("error1");
+            var nok2 = Outcome<int>.FromError("error2");
+
+            Assert.NotEqual(nok1.GetHashCode(), nok2.GetHashCode());
+            Assert.NotEqual(nok1.GetHashCode(EqualityComparer<int>.Default), nok2.GetHashCode(EqualityComparer<int>.Default));
+
+            var ok1 = Outcome.Of(1);
+            var ok2 = Outcome.Of(2);
+
+            Assert.NotEqual(ok1.GetHashCode(), ok2.GetHashCode());
+            Assert.NotEqual(ok1.GetHashCode(EqualityComparer<int>.Default), ok2.GetHashCode(EqualityComparer<int>.Default));
+
+            Assert.NotEqual(ok1.GetHashCode(), nok1.GetHashCode());
+            Assert.NotEqual(ok1.GetHashCode(EqualityComparer<int>.Default), nok1.GetHashCode(EqualityComparer<int>.Default));
         }
 
         [t("ToString() result contains a string representation of the value if OK, of the error if NOK.")]
@@ -325,8 +339,7 @@ namespace Narvalo.Applicative {
 
         [t("Bind() returns NOK if NOK.")]
         public static void Bind1() {
-            var exp = "error";
-            var nok = Outcome<Obj>.FromError(exp);
+            var nok = Outcome<Obj>.FromError("error");
             Func<Obj, Outcome<string>> binder = x => Outcome.Of(x.Value);
 
             var result = nok.Bind(binder);
@@ -336,9 +349,8 @@ namespace Narvalo.Applicative {
 
         [t("Bind() returns OK if OK.")]
         public static void Bind2() {
-            var exp = new Obj("My Value");
-            var ok = Outcome.Of(exp);
-            Func<Obj, Outcome<string>> binder = x => Outcome.Of(x.Value);
+            var ok = Outcome.Of(new Obj("My Value"));
+            Func<Obj, Outcome<string>> binder = x => Outcome.Of(x.Value.ToUpperInvariant());
 
             var result = ok.Bind(binder);
 
@@ -397,6 +409,17 @@ namespace Narvalo.Applicative {
             var result = nok.Bind(binder);
 
             Assert.Equal(exp, result.Error);
+        }
+
+        [t("Bind() applies binder if OK.")]
+        public static void Bind4() {
+            var value = "My Value";
+            var ok = Outcome.Of(new Obj(value));
+            Func<Obj, Outcome<string>> binder = x => Outcome.Of(x.Value.ToUpperInvariant());
+
+            var result = ok.Bind(binder);
+
+            Assert.Equal(value.ToUpperInvariant(), result.Value);
         }
     }
 

@@ -10,6 +10,8 @@ namespace Narvalo.Applicative {
 
     using static global::My;
 
+    using Assert = Narvalo.AssertExtended;
+
     // Tests for Fallible<T>.
     public static partial class FallibleTFacts {
         internal sealed class tAttribute : TestCaseAttribute {
@@ -34,24 +36,24 @@ namespace Narvalo.Applicative {
             => Assert.Throws<ArgumentNullException>("error", () => Fallible<int>.FromError(null));
 
         [t("FromError() returns NOK.")]
-        public static void FromError1ReturnsError() {
+        public static void FromError1() {
             var result = Fallible<int>.FromError(Error);
 
             Assert.True(result.IsError);
         }
 
-        [t("")]
-        public static void ThrowIfError_DoesNotThrow_IfSuccess() {
+        [t("ThrowIfError() does not throw if OK.")]
+        public static void ThrowIfError1() {
             var ok = Fallible.Of(new Obj());
 
-            ok.ThrowIfError();
+            Assert.DoesNotThrow(() => ok.ThrowIfError());
         }
 
-        [t("")]
-        public static void ThrowIfError_Throws_IfError() {
-            var err = Fallible<Obj>.FromError(Error);
+        [t("ThrowIfError() throws if NOK.")]
+        public static void ThrowIfError2() {
+            var nok = Fallible<Obj>.FromError(Error);
 
-            Action act = () => err.ThrowIfError();
+            Action act = () => nok.ThrowIfError();
             var ex = Record.Exception(act);
 
             Assert.NotNull(ex);
@@ -69,9 +71,9 @@ namespace Narvalo.Applicative {
 
         [t("")]
         public static void ValueOrDefault_ReturnsDefault_IfError() {
-            var err = Fallible<Obj>.FromError(Error);
+            var nok = Fallible<Obj>.FromError(Error);
 
-            Assert.Same(default(Obj), err.ValueOrDefault());
+            Assert.Same(default(Obj), nok.ValueOrDefault());
         }
 
         [t("")]
@@ -83,9 +85,9 @@ namespace Narvalo.Applicative {
 
         [t("")]
         public static void ValueOrNone_ReturnsNone_IfError() {
-            var err = Fallible<Obj>.FromError(Error);
+            var nok = Fallible<Obj>.FromError(Error);
 
-            Assert.True(err.ValueOrNone().IsNone);
+            Assert.True(nok.ValueOrNone().IsNone);
         }
 
         [t("ValueOrElse() guards.")]
@@ -109,11 +111,11 @@ namespace Narvalo.Applicative {
 
         [t("")]
         public static void ValueOrElse_ReturnsOther_IfError() {
-            var err = Fallible<Obj>.FromError(Error);
+            var nok = Fallible<Obj>.FromError(Error);
             var exp = new Obj();
 
-            Assert.Same(exp, err.ValueOrElse(exp));
-            Assert.Same(exp, err.ValueOrElse(() => exp));
+            Assert.Same(exp, nok.ValueOrElse(exp));
+            Assert.Same(exp, nok.ValueOrElse(() => exp));
         }
 
         [t("")]
@@ -126,9 +128,9 @@ namespace Narvalo.Applicative {
 
         [t("")]
         public static void ValueOrThrow_Throws_IfError() {
-            var err = Fallible<Obj>.FromError(Error);
+            var nok = Fallible<Obj>.FromError(Error);
 
-            Action act = () => err.ValueOrThrow();
+            Action act = () => nok.ValueOrThrow();
             var ex = Record.Exception(act);
 
             Assert.NotNull(ex);
@@ -177,18 +179,32 @@ namespace Narvalo.Applicative {
             var nok1 = Fallible<Obj>.FromError(Error);
             var nok2 = Fallible<Obj>.FromError(Error);
 
-            Assert.NotSame(nok1, nok2);
-            Assert.Equal(nok1, nok2);
             Assert.Equal(nok1.GetHashCode(), nok2.GetHashCode());
             Assert.Equal(nok1.GetHashCode(EqualityComparer<Obj>.Default), nok2.GetHashCode(EqualityComparer<Obj>.Default));
 
             var ok1 = Fallible.Of(Tuple.Create("1"));
             var ok2 = Fallible.Of(Tuple.Create("1"));
 
-            Assert.NotSame(ok1, ok2);
-            Assert.Equal(ok1, ok2);
             Assert.Equal(ok1.GetHashCode(), ok2.GetHashCode());
             Assert.Equal(ok1.GetHashCode(EqualityComparer<Tuple<string>>.Default), ok2.GetHashCode(EqualityComparer<Tuple<string>>.Default));
+        }
+
+        [t("GetHashCode() returns different results for non-equal instances.")]
+        public static void GetHashCode3() {
+            var nok1 = Fallible<int>.FromError(Error);
+            var nok2 = Fallible<int>.FromError(Error1);
+
+            Assert.NotEqual(nok1.GetHashCode(), nok2.GetHashCode());
+            Assert.NotEqual(nok1.GetHashCode(EqualityComparer<int>.Default), nok2.GetHashCode(EqualityComparer<int>.Default));
+
+            var ok1 = Fallible.Of(1);
+            var ok2 = Fallible.Of(2);
+
+            Assert.NotEqual(ok1.GetHashCode(), ok2.GetHashCode());
+            Assert.NotEqual(ok1.GetHashCode(EqualityComparer<int>.Default), ok2.GetHashCode(EqualityComparer<int>.Default));
+
+            Assert.NotEqual(ok1.GetHashCode(), nok1.GetHashCode());
+            Assert.NotEqual(ok1.GetHashCode(EqualityComparer<int>.Default), nok1.GetHashCode(EqualityComparer<int>.Default));
         }
 
         [t("ToString() result contains a string representation of the value if OK, of the error if NOK.")]
@@ -287,8 +303,7 @@ namespace Narvalo.Applicative {
 
         [t("Bind() returns OK if OK.")]
         public static void Bind2() {
-            var exp = new Obj("My Value");
-            var ok = Fallible.Of(exp);
+            var ok = Fallible.Of(new Obj("My Value"));
             Func<Obj, Fallible<string>> binder = x => Fallible.Of(x.Value);
 
             var result = ok.Bind(binder);
@@ -320,12 +335,23 @@ namespace Narvalo.Applicative {
     public static partial class FallibleTFacts {
         [t("Bind() transports error if NOK.")]
         public static void Bind3() {
-            var err = Fallible<Obj>.FromError(Error);
+            var nok = Fallible<Obj>.FromError(Error);
             Func<Obj, Fallible<string>> binder = x => Fallible.Of(x.Value);
 
-            var result = err.Bind(binder);
+            var result = nok.Bind(binder);
 
             Assert.Same(Error, result.Error);
+        }
+
+        [t("Bind() applies binder if OK.")]
+        public static void Bind4() {
+            var value = "My Value";
+            var ok = Fallible.Of(new Obj(value));
+            Func<Obj, Fallible<string>> binder = x => Fallible.Of(x.Value.ToUpperInvariant());
+
+            var result = ok.Bind(binder);
+
+            Assert.Equal(value.ToUpperInvariant(), result.Value);
         }
     }
 
@@ -334,8 +360,11 @@ namespace Narvalo.Applicative {
     public static partial class FallibleTFacts {
         private static readonly Lazy<ExceptionDispatchInfo> s_Error
             = new Lazy<ExceptionDispatchInfo>(CreateExceptionDispatchInfo);
+        private static readonly Lazy<ExceptionDispatchInfo> s_Error1
+            = new Lazy<ExceptionDispatchInfo>(CreateExceptionDispatchInfo);
 
         private static ExceptionDispatchInfo Error => s_Error.Value;
+        private static ExceptionDispatchInfo Error1 => s_Error1.Value;
 
         private static string ErrorMessage => "My error";
 
