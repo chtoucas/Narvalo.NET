@@ -1304,10 +1304,10 @@ namespace Narvalo.Applicative {
             var some1 = Maybe.Of(1);
             var some2 = Maybe.Of(2);
 
-            var m1 = some1.Join(some2, _ => _, _ => _, (i, j) => i + j);
+            var m1 = some1.Join(some2, i => i, i => i, (i, j) => i + j);
             Assert.True(m1.IsNone);
 
-            var m2 = Maybe.Join(some1, some2, _ => _, _ => _, (i, j) => i + j);
+            var m2 = Maybe.Join(some1, some2, i => i, i => i, (i, j) => i + j);
             Assert.True(m2.IsNone);
 
             var q = from i in some1
@@ -1444,11 +1444,11 @@ namespace Narvalo.Applicative {
             var source = Maybe.Of(1);
             var inner = Maybe.Of(2);
 
-            var m1 = source.Join(inner, _ => 2 * _, _ => _, (i, j) => i + j);
+            var m1 = source.Join(inner, i => 2 * i, i => i, (i, j) => i + j);
             Assert.True(m1.IsSome);
             Assert.Equal(3, m1.Value);
 
-            var m2 = Maybe.Join(source, inner, _ => 2 * _, _ => _, (i, j) => i + j);
+            var m2 = Maybe.Join(source, inner, i => 2 * i, i => i, (i, j) => i + j);
             Assert.True(m2.IsSome);
             Assert.Equal(3, m2.Value);
 
