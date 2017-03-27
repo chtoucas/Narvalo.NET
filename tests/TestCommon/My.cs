@@ -84,6 +84,8 @@ public static partial class My {
         public Obj(string value) => Value = value;
 
         public string Value { get; set; }
+
+        public override string ToString() => Value;
     }
 
     // An immutable reference type.
