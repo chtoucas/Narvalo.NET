@@ -53,7 +53,7 @@ namespace Narvalo.Applicative
         }
 
         public override string ToString()
-            => IsError ? "Error(" + Error.SourceException.ToString() + ")" : "Success";
+            => IsError ? "Error(" + Error.ToString() + ")" : "Success";
 
         /// <summary>
         /// Represents a debugger type proxy for <see cref="Fallible"/>.
