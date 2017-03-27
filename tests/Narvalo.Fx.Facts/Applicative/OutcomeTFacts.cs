@@ -24,7 +24,6 @@ namespace Narvalo.Applicative {
         [t("Of() returns OK.")]
         public static void Of1() {
             var ok = Outcome.Of(1);
-
             Assert.True(ok.IsSuccess);
             Assert.False(ok.IsError);
         }
@@ -38,7 +37,6 @@ namespace Narvalo.Applicative {
         [t("FromError() returns NOK.")]
         public static void FromError1() {
             var nok = Outcome<int>.FromError("error");
-
             Assert.True(nok.IsError);
             Assert.False(nok.IsSuccess);
         }
@@ -47,14 +45,12 @@ namespace Narvalo.Applicative {
         public static void ValueOrDefault1() {
             var exp = new Obj();
             var ok = Outcome.Of(exp);
-
             Assert.Same(exp, ok.ValueOrDefault());
         }
 
         [t("ValueOrDefault() returns default(T) if NOK.")]
         public static void ValueOrDefault2() {
             var nok = Outcome<Obj>.FromError("error");
-
             Assert.Same(default(Obj), nok.ValueOrDefault());
         }
 
@@ -62,18 +58,14 @@ namespace Narvalo.Applicative {
         public static void ValueOrNone1() {
             var exp = new Obj();
             var ok = Outcome.Of(exp);
-
             var maybe = ok.ValueOrNone();
-
             Assert.True(maybe.IsSome);
         }
 
         [t("ValueOrNone() returns none if NOK.")]
         public static void ValueOrNone() {
             var nok = Outcome<Obj>.FromError("error");
-
             var maybe = nok.ValueOrNone();
-
             Assert.True(maybe.IsNone);
         }
 
@@ -91,7 +83,6 @@ namespace Narvalo.Applicative {
             var exp = new Obj();
             var ok = Outcome.Of(exp);
             var other = new Obj("other");
-
             Assert.Same(exp, ok.ValueOrElse(other));
             Assert.Same(exp, ok.ValueOrElse(() => other));
         }
@@ -100,7 +91,6 @@ namespace Narvalo.Applicative {
         public static void ValueOrElse2() {
             var nok = Outcome<Obj>.FromError("error");
             var exp = new Obj();
-
             Assert.Same(exp, nok.ValueOrElse(exp));
             Assert.Same(exp, nok.ValueOrElse(() => exp));
         }
@@ -118,7 +108,6 @@ namespace Narvalo.Applicative {
         public static void ValueOrThrow1() {
             var exp = new Obj();
             var ok = Outcome.Of(exp);
-
             Assert.Same(exp, ok.ValueOrThrow());
             Assert.Equal(exp, ok.ValueOrThrow(error => new SimpleException(error)));
         }
@@ -126,9 +115,7 @@ namespace Narvalo.Applicative {
         [t("ValueOrThrow() throws InvalidOperationException if NOK.")]
         public static void ValueOrThrow2() {
             var nok = Outcome<Obj>.FromError("error");
-
             Action act = () => nok.ValueOrThrow();
-
             Assert.Throws<InvalidOperationException>(act);
         }
 
@@ -151,7 +138,6 @@ namespace Narvalo.Applicative {
             var err = Outcome<Obj>.FromError(message);
 
             Action act = () => err.ToValue();
-
             Assert.Throws<InvalidCastException>(act);
         }
 
@@ -159,7 +145,6 @@ namespace Narvalo.Applicative {
         public static void ToValue2() {
             var exp = new Obj();
             var ok = Outcome.Of(exp);
-
             Assert.Same(exp, ok.ToValue());
         }
 
@@ -169,7 +154,6 @@ namespace Narvalo.Applicative {
             var ok = Outcome.Of(exp);
 
             var maybe = ok.ToMaybe();
-
             Assert.True(maybe.IsSome);
         }
 
@@ -178,7 +162,6 @@ namespace Narvalo.Applicative {
             var nok = Outcome<Obj>.FromError("error");
 
             var maybe = nok.ToMaybe();
-
             Assert.True(maybe.IsNone);
         }
 
@@ -268,7 +251,6 @@ namespace Narvalo.Applicative {
         public static void ToEnumerable1() {
             var nok = Outcome<Obj>.FromError("error");
             var seq = nok.ToEnumerable();
-
             Assert.Empty(seq);
         }
 
@@ -277,7 +259,6 @@ namespace Narvalo.Applicative {
             var obj = new Obj();
             var ok = Outcome.Of(obj);
             var seq = ok.ToEnumerable();
-
             Assert.Equal(Enumerable.Repeat(obj, 1), seq);
         }
 
@@ -343,7 +324,6 @@ namespace Narvalo.Applicative {
             Func<Obj, Outcome<string>> binder = x => Outcome.Of(x.Value);
 
             var result = nok.Bind(binder);
-
             Assert.True(result.IsError);
         }
 
@@ -353,7 +333,6 @@ namespace Narvalo.Applicative {
             Func<Obj, Outcome<string>> binder = x => Outcome.Of(x.Value.ToUpperInvariant());
 
             var result = ok.Bind(binder);
-
             Assert.True(result.IsSuccess);
         }
 
@@ -362,7 +341,6 @@ namespace Narvalo.Applicative {
             var nok = Outcome<Outcome<Obj>>.FromError("error");
 
             var result = nok.Flatten();
-
             Assert.True(result.IsError);
         }
 
@@ -371,7 +349,6 @@ namespace Narvalo.Applicative {
             var ok = Outcome.Of(Outcome.Of(new Obj()));
 
             var result = ok.Flatten();
-
             Assert.True(result.IsSuccess);
         }
 
@@ -386,7 +363,6 @@ namespace Narvalo.Applicative {
             var ok = Outcome.Of(exp);
 
             var maybe = ok.ValueOrNone();
-
             Assert.Same(exp, maybe.Value);
         }
 
@@ -396,7 +372,6 @@ namespace Narvalo.Applicative {
             var ok = Outcome.Of(exp);
 
             var maybe = ok.ToMaybe();
-
             Assert.Same(exp, maybe.Value);
         }
 
@@ -407,7 +382,6 @@ namespace Narvalo.Applicative {
             Func<Obj, Outcome<string>> binder = x => Outcome.Of(x.Value);
 
             var result = nok.Bind(binder);
-
             Assert.Equal(exp, result.Error);
         }
 
@@ -418,7 +392,6 @@ namespace Narvalo.Applicative {
             Func<Obj, Outcome<string>> binder = x => Outcome.Of(x.Value.ToUpperInvariant());
 
             var result = ok.Bind(binder);
-
             Assert.Equal(value.ToUpperInvariant(), result.Value);
         }
     }

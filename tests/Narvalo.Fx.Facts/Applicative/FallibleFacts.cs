@@ -25,7 +25,6 @@ namespace Narvalo.Applicative {
         [t("FromError() returns NOK.")]
         public static void FromError1() {
             var nok = Fallible.FromError(Error);
-
             Assert.True(nok.IsError);
             Assert.False(nok.IsSuccess);
         }
@@ -33,14 +32,12 @@ namespace Narvalo.Applicative {
         [t("ThrowIfError() does not throw if OK.")]
         public static void ThrowIfError1() {
             var ok = Fallible.Ok;
-
             Assert.DoesNotThrow(() => ok.ThrowIfError());
         }
 
         [t("ThrowIfError() throws if NOK.")]
         public static void ThrowIfError2() {
             var nok = Fallible.FromError(Error);
-
             Action act = () => nok.ThrowIfError();
             var ex = Record.Exception(act);
 
@@ -66,7 +63,6 @@ namespace Narvalo.Applicative {
         public static void Equality3() {
             var ok = Fallible.Ok;
             var nok = Fallible.FromError(Error);
-
             Assert.True(nok != ok);
         }
 
@@ -103,7 +99,6 @@ namespace Narvalo.Applicative {
             var nok = Fallible.FromError(Error);
             var nok1 = Fallible.FromError(Error1);
             var nok2 = Fallible.FromError(Error1);
-
             Assert.False(ok.Equals(nok));
             Assert.False(nok1.Equals(nok));
             Assert.True(nok1.Equals(nok2));
@@ -238,7 +233,6 @@ namespace Narvalo.Applicative {
             var exp = new Obj("caseSuccess");
             Func<Obj> caseSuccess = () => { wasCalled = true; return exp; };
             Func<ExceptionDispatchInfo, Obj> caseError = err => { notCalled = false; return new Obj(err.ToString()); };
-
             var result = ok.Match(caseSuccess, caseError);
 
             Assert.True(notCalled);
@@ -254,7 +248,6 @@ namespace Narvalo.Applicative {
             var exp = new Obj("caseError");
             Func<Obj> caseSuccess = () => { notCalled = false; return new Obj("caseSuccess"); };
             Func<ExceptionDispatchInfo, Obj> caseError = err => { wasCalled = true; return exp; };
-
             var result = nok.Match(caseSuccess, caseError);
 
             Assert.True(notCalled);
@@ -317,7 +310,6 @@ namespace Narvalo.Applicative {
             Action act = () => wasCalled = true;
 
             ok.OnSuccess(act);
-
             Assert.True(wasCalled);
         }
 
@@ -328,7 +320,6 @@ namespace Narvalo.Applicative {
             Action act = () => notCalled = false;
 
             nok.OnSuccess(act);
-
             Assert.True(notCalled);
         }
 
@@ -348,7 +339,6 @@ namespace Narvalo.Applicative {
             Action<ExceptionDispatchInfo> act = _ => wasCalled = true;
 
             nok.OnError(act);
-
             Assert.True(wasCalled);
         }
 
@@ -359,7 +349,6 @@ namespace Narvalo.Applicative {
             Action<ExceptionDispatchInfo> act = _ => notCalled = false;
 
             ok.OnError(act);
-
             Assert.True(notCalled);
         }
     }
@@ -380,7 +369,6 @@ namespace Narvalo.Applicative {
             Func<Fallible<string>> binder = () => Fallible.Of("value");
 
             var result = nok.Bind(binder);
-
             Assert.True(result.IsError);
         }
 
@@ -390,28 +378,26 @@ namespace Narvalo.Applicative {
             Func<Fallible<string>> binder = () => Fallible.Of("value");
 
             var result = ok.Bind(binder);
-
             Assert.True(result.IsSuccess);
         }
 
-        [t("Select() returns OK if OK.")]
-        public static void Select1() {
+        [t("Map() returns OK if OK.")]
+        public static void Map1() {
             var ok = Fallible.Ok;
             Func<int> selector = () => 1;
 
-            var result = ok.Select(selector);
+            var result = ok.Map(selector);
             Assert.True(result.IsSuccess);
         }
 
-        [t("Select() returns NOK if NOK.")]
-        public static void Select2() {
+        [t("Map() returns NOK if NOK.")]
+        public static void Map2() {
             var nok = Fallible.FromError(Error);
             Func<int> selector = () => 1;
 
-            var result = nok.Select(selector);
+            var result = nok.Map(selector);
             Assert.True(result.IsError);
         }
-
 
         [t("ReplaceBy() returns OK if OK.")]
         public static void ReplaceBy1() {
@@ -459,7 +445,6 @@ namespace Narvalo.Applicative {
             Func<Fallible<string>> binder = () => Fallible.Of("value");
 
             var result = nok.Bind(binder);
-
             Assert.Same(Error, result.Error);
         }
 
@@ -470,16 +455,15 @@ namespace Narvalo.Applicative {
             Func<Fallible<Obj>> binder = () => Fallible.Of(exp);
 
             var result = ok.Bind(binder);
-
             Assert.Same(exp, result.Value);
         }
 
-        [t("Select() applies selector if some.")]
-        public static void Select3() {
+        [t("Map() applies selector if some.")]
+        public static void Map3() {
             var ok = Fallible.Ok;
             Func<int> selector = () => 1;
 
-            var result = ok.Select(selector);
+            var result = ok.Map(selector);
             Assert.Equal(1, result.Value);
         }
     }

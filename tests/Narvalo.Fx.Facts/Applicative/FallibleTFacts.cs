@@ -27,7 +27,6 @@ namespace Narvalo.Applicative {
         [t("Of() returns OK.")]
         public static void Of1() {
             var result = Fallible.Of(1);
-
             Assert.True(result.IsSuccess);
         }
 
@@ -38,14 +37,12 @@ namespace Narvalo.Applicative {
         [t("FromError() returns NOK.")]
         public static void FromError1() {
             var result = Fallible<int>.FromError(Error);
-
             Assert.True(result.IsError);
         }
 
         [t("ThrowIfError() does not throw if OK.")]
         public static void ThrowIfError1() {
             var ok = Fallible.Of(new Obj());
-
             Assert.DoesNotThrow(() => ok.ThrowIfError());
         }
 
@@ -65,28 +62,24 @@ namespace Narvalo.Applicative {
         public static void ValueOrDefault_ReturnsValue_IfSuccess() {
             var exp = new Obj();
             var ok = Fallible.Of(exp);
-
             Assert.Same(exp, ok.ValueOrDefault());
         }
 
         [t("")]
         public static void ValueOrDefault_ReturnsDefault_IfError() {
             var nok = Fallible<Obj>.FromError(Error);
-
             Assert.Same(default(Obj), nok.ValueOrDefault());
         }
 
         [t("")]
         public static void ValueOrNone_ReturnsSome_IfSuccess() {
             var ok = Fallible.Of(new Obj());
-
             Assert.True(ok.ValueOrNone().IsSome);
         }
 
         [t("")]
         public static void ValueOrNone_ReturnsNone_IfError() {
             var nok = Fallible<Obj>.FromError(Error);
-
             Assert.True(nok.ValueOrNone().IsNone);
         }
 
@@ -122,7 +115,6 @@ namespace Narvalo.Applicative {
         public static void ValueOrThrow_ReturnsValue_IfSuccess() {
             var exp = new Obj();
             var ok = Fallible.Of(exp);
-
             Assert.Same(exp, ok.ValueOrThrow());
         }
 
@@ -223,7 +215,6 @@ namespace Narvalo.Applicative {
         public static void ToEnumerable1() {
             var nok = Fallible<Obj>.FromError(Error);
             var seq = nok.ToEnumerable();
-
             Assert.Empty(seq);
         }
 
@@ -232,7 +223,6 @@ namespace Narvalo.Applicative {
             var obj = new Obj();
             var ok = Fallible.Of(obj);
             var seq = ok.ToEnumerable();
-
             Assert.Equal(Enumerable.Repeat(obj, 1), seq);
         }
 
@@ -297,7 +287,6 @@ namespace Narvalo.Applicative {
             Func<Obj, Fallible<string>> binder = x => Fallible.Of(x.Value);
 
             var result = nok.Bind(binder);
-
             Assert.True(result.IsError);
         }
 
@@ -307,7 +296,6 @@ namespace Narvalo.Applicative {
             Func<Obj, Fallible<string>> binder = x => Fallible.Of(x.Value);
 
             var result = ok.Bind(binder);
-
             Assert.True(result.IsSuccess);
         }
 
@@ -316,7 +304,6 @@ namespace Narvalo.Applicative {
             var nok = Fallible<Fallible<Obj>>.FromError(Error);
 
             var result = nok.Flatten();
-
             Assert.True(nok.IsError);
         }
 
@@ -325,7 +312,6 @@ namespace Narvalo.Applicative {
             var ok = Fallible.Of(Fallible.Of(new Obj()));
 
             var result = ok.Flatten();
-
             Assert.True(ok.IsSuccess);
         }
     }
@@ -339,7 +325,6 @@ namespace Narvalo.Applicative {
             Func<Obj, Fallible<string>> binder = x => Fallible.Of(x.Value);
 
             var result = nok.Bind(binder);
-
             Assert.Same(Error, result.Error);
         }
 
@@ -350,7 +335,6 @@ namespace Narvalo.Applicative {
             Func<Obj, Fallible<string>> binder = x => Fallible.Of(x.Value.ToUpperInvariant());
 
             var result = ok.Bind(binder);
-
             Assert.Equal(value.ToUpperInvariant(), result.Value);
         }
     }

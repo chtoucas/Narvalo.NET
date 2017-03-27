@@ -24,7 +24,6 @@ namespace Narvalo.Applicative {
         [t("FromError() returns NOK.")]
         public static void FromError1() {
             var nok = Outcome.FromError("error");
-
             Assert.True(nok.IsError);
         }
 
@@ -45,7 +44,6 @@ namespace Narvalo.Applicative {
         public static void Equality3() {
             var ok = Outcome.Ok;
             var nok = Outcome.FromError("error");
-
             Assert.True(nok != ok);
         }
 
@@ -224,7 +222,6 @@ namespace Narvalo.Applicative {
             Action act = () => wasCalled = true;
 
             ok.OnSuccess(act);
-
             Assert.True(wasCalled);
         }
 
@@ -235,7 +232,6 @@ namespace Narvalo.Applicative {
             Action act = () => notCalled = false;
 
             nok.OnSuccess(act);
-
             Assert.True(notCalled);
         }
 
@@ -255,7 +251,6 @@ namespace Narvalo.Applicative {
             Action<string> act = _ => wasCalled = true;
 
             nok.OnError(act);
-
             Assert.True(wasCalled);
         }
 
@@ -266,7 +261,6 @@ namespace Narvalo.Applicative {
             Action<string> act = _ => notCalled = false;
 
             ok.OnError(act);
-
             Assert.True(notCalled);
         }
     }
@@ -288,7 +282,6 @@ namespace Narvalo.Applicative {
             Func<Outcome<string>> binder = () => Outcome.Of("value");
 
             var result = nok.Bind(binder);
-
             Assert.True(result.IsError);
         }
 
@@ -298,25 +291,24 @@ namespace Narvalo.Applicative {
             Func<Outcome<string>> binder = () => Outcome.Of("value");
 
             var result = ok.Bind(binder);
-
             Assert.True(result.IsSuccess);
         }
 
-        [t("Select() returns OK if OK.")]
-        public static void Select1() {
+        [t("Map() returns OK if OK.")]
+        public static void Map1() {
             var ok = Outcome.Ok;
             Func<int> selector = () => 1;
 
-            var result = ok.Select(selector);
+            var result = ok.Map(selector);
             Assert.True(result.IsSuccess);
         }
 
-        [t("Select() returns NOK if NOK.")]
-        public static void Select2() {
+        [t("Map() returns NOK if NOK.")]
+        public static void Map2() {
             var nok = Outcome.FromError("error");
             Func<int> selector = () => 1;
 
-            var result = nok.Select(selector);
+            var result = nok.Map(selector);
             Assert.True(result.IsError);
         }
 
@@ -367,7 +359,6 @@ namespace Narvalo.Applicative {
             Func<Outcome<string>> binder = () => Outcome.Of("value");
 
             var result = err.Bind(binder);
-
             Assert.Equal(exp, result.Error);
         }
 
@@ -378,16 +369,15 @@ namespace Narvalo.Applicative {
             Func<Outcome<string>> binder = () => Outcome.Of(exp);
 
             var result = ok.Bind(binder);
-
             Assert.Equal(exp, result.Value);
         }
 
-        [t("Select() applies selector if some.")]
-        public static void Select3() {
+        [t("Map() applies selector if some.")]
+        public static void Map3() {
             var ok = Outcome.Ok;
             Func<int> selector = () => 1;
 
-            var result = ok.Select(selector);
+            var result = ok.Map(selector);
             Assert.Equal(1, result.Value);
         }
     }

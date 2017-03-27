@@ -79,6 +79,7 @@ namespace Narvalo.Applicative
     // Core methods.
     public partial struct Outcome
     {
+        // Compare w/ Bind(Func<Unit, Outcome<TResult>> func).
         public Outcome<TResult> Bind<TResult>(Func<Outcome<TResult>> binder)
         {
             Require.NotNull(binder, nameof(binder));
@@ -86,7 +87,8 @@ namespace Narvalo.Applicative
             return IsError ? Outcome<TResult>.FromError(Error) : binder();
         }
 
-        public Outcome<TResult> Select<TResult>(Func<TResult> func)
+        // Compare w/ Select(Func<Unit, TResult> func).
+        public Outcome<TResult> Map<TResult>(Func<TResult> func)
         {
             Require.NotNull(func, nameof(func));
 
