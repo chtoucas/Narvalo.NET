@@ -24,20 +24,21 @@ namespace Narvalo.Applicative {
 
         [t("None is none.")]
         public static void None2() {
-            var o1 = Maybe<int>.None;
-            var o2 = Maybe<Val>.None;
-            var o3 = Maybe<Val?>.None;
-            var o4 = Maybe<Obj>.None;
+            var m1 = Maybe<int>.None;
+            Assert.True(m1.IsNone);
+            Assert.False(m1.IsSome);
 
-            Assert.True(o1.IsNone);
-            Assert.True(o2.IsNone);
-            Assert.True(o3.IsNone);
-            Assert.True(o4.IsNone);
-            // IsSome == !IsNone
-            Assert.False(o1.IsSome);
-            Assert.False(o2.IsSome);
-            Assert.False(o3.IsSome);
-            Assert.False(o4.IsSome);
+            var m2 = Maybe<Val>.None;
+            Assert.True(m2.IsNone);
+            Assert.False(m2.IsSome);
+
+            var m3 = Maybe<Val?>.None;
+            Assert.True(m3.IsNone);
+            Assert.False(m3.IsSome);
+
+            var m4 = Maybe<Obj>.None;
+            Assert.True(m4.IsNone);
+            Assert.False(m4.IsSome);
         }
 
         [t("IsSome, once true, stays true.")]
@@ -70,41 +71,39 @@ namespace Narvalo.Applicative {
 
         [t("Of(non-null) returns some.")]
         public static void Of1() {
-            var o1 = Maybe.Of(1);
-            var o2 = Maybe.Of(new Val(1));
-            var o3 = Maybe.Of((Val?)new Val(1));
-            var o4 = Maybe.Of(new Obj());
+            var m1 = Maybe.Of(1);
+            Assert.True(m1.IsSome);
+            Assert.False(m1.IsNone);
 
-            Assert.True(o1.IsSome);
-            Assert.True(o2.IsSome);
-            Assert.True(o3.IsSome);
-            Assert.True(o4.IsSome);
-            // IsSome == !IsNone
-            Assert.False(o1.IsNone);
-            Assert.False(o2.IsNone);
-            Assert.False(o3.IsNone);
-            Assert.False(o4.IsNone);
+            var m2 = Maybe.Of(new Val(1));
+            Assert.True(m2.IsSome);
+            Assert.False(m2.IsNone);
+
+            var m3 = Maybe.Of((Val?)new Val(1));
+            Assert.True(m3.IsSome);
+            Assert.False(m3.IsNone);
+
+            var m4 = Maybe.Of(new Obj());
+            Assert.True(m4.IsSome);
+            Assert.False(m4.IsNone);
         }
 
         [t("Of(null) returns none.")]
         public static void Of2() {
-            var o1 = Maybe.Of((Obj)null);
-            var o2 = Maybe.Of((Val?)null);
+            var m1 = Maybe.Of((Obj)null);
+            Assert.True(m1.IsNone);
+            Assert.False(m1.IsSome);
 
-            Assert.True(o1.IsNone);
-            Assert.True(o2.IsNone);
-            // IsSome == !IsNone
-            Assert.False(o1.IsSome);
-            Assert.False(o2.IsSome);
+            var m2 = Maybe.Of((Val?)null);
+            Assert.True(m2.IsNone);
+            Assert.False(m2.IsSome);
         }
 
         [t("Casting (to T) throws if none.")]
         public static void cast1() {
             Action act = () => { var _ = (Obj)Maybe<Obj>.None; };
-            var ex = Record.Exception(act);
 
-            Assert.NotNull(ex);
-            Assert.IsType<InvalidCastException>(ex);
+            Assert.Throws<InvalidCastException>(act);
         }
 
         [t("Casting (to T) returns Value if some.")]
@@ -149,12 +148,11 @@ namespace Narvalo.Applicative {
 
         [t("ValueOrElse() guards.")]
         public static void ValueOrElse0() {
-            var none = Maybe<Obj>.None;
             var some = Maybe.Of(new Obj());
-
             Assert.Throws<ArgumentNullException>("other", () => some.ValueOrElse(default(Obj)));
             Assert.Throws<ArgumentNullException>("valueFactory", () => some.ValueOrElse(default(Func<Obj>)));
 
+            var none = Maybe<Obj>.None;
             Assert.Throws<ArgumentNullException>("other", () => none.ValueOrElse(default(Obj)));
             Assert.Throws<ArgumentNullException>("valueFactory", () => none.ValueOrElse(default(Func<Obj>)));
         }
@@ -180,10 +178,10 @@ namespace Narvalo.Applicative {
 
         [t("ValueOrThrow() guards.")]
         public static void ValueOrThrow0() {
-            var none = Maybe<Obj>.None;
             var some = Maybe.Of(new Obj());
-
             Assert.Throws<ArgumentNullException>("exceptionFactory", () => some.ValueOrThrow(null));
+
+            var none = Maybe<Obj>.None;
             Assert.Throws<ArgumentNullException>("exceptionFactory", () => none.ValueOrThrow(null));
         }
 
@@ -254,8 +252,8 @@ namespace Narvalo.Applicative {
 
         [t("Equals() guards.")]
         public static void Equals0() {
-            var none = Maybe<Obj>.None;
             var some = Maybe.Of(new Obj());
+            var none = Maybe<Obj>.None;
 
             Assert.Throws<ArgumentNullException>("comparer", () => some.Equals(some, null));
             Assert.Throws<ArgumentNullException>("comparer", () => some.Equals(none, null));
@@ -438,35 +436,36 @@ namespace Narvalo.Applicative {
 
         [t("GetHashCode() guards.")]
         public static void GetHashCode0() {
-            var none = Maybe<Obj>.None;
             var some = Maybe.Of(new Obj());
-
             Assert.Throws<ArgumentNullException>("comparer", () => some.GetHashCode(null));
+
+            var none = Maybe<Obj>.None;
             Assert.Throws<ArgumentNullException>("comparer", () => none.GetHashCode(null));
         }
 
         [t("GetHashCode() returns the same result when called repeatedly.")]
         public static void GetHashCode1() {
-            var none = Maybe<Obj>.None;
-            var someobj = Maybe.Of(new Obj());
-            var someval = Maybe.Of(1);
+            var m1 = Maybe<Obj>.None;
+            Assert.Equal(m1.GetHashCode(), m1.GetHashCode());
+            Assert.Equal(m1.GetHashCode(EqualityComparer<Obj>.Default), m1.GetHashCode(EqualityComparer<Obj>.Default));
 
-            Assert.Equal(none.GetHashCode(), none.GetHashCode());
-            Assert.Equal(someobj.GetHashCode(), someobj.GetHashCode());
-            Assert.Equal(someval.GetHashCode(), someval.GetHashCode());
-            Assert.Equal(none.GetHashCode(EqualityComparer<Obj>.Default), none.GetHashCode(EqualityComparer<Obj>.Default));
-            Assert.Equal(someobj.GetHashCode(EqualityComparer<Obj>.Default), someobj.GetHashCode(EqualityComparer<Obj>.Default));
-            Assert.Equal(someval.GetHashCode(EqualityComparer<int>.Default), someval.GetHashCode(EqualityComparer<int>.Default));
+            var m2 = Maybe.Of(new Obj());
+            Assert.Equal(m2.GetHashCode(), m2.GetHashCode());
+            Assert.Equal(m2.GetHashCode(EqualityComparer<Obj>.Default), m2.GetHashCode(EqualityComparer<Obj>.Default));
+
+            var m3 = Maybe.Of(1);
+            Assert.Equal(m3.GetHashCode(), m3.GetHashCode());
+            Assert.Equal(m3.GetHashCode(EqualityComparer<int>.Default), m3.GetHashCode(EqualityComparer<int>.Default));
         }
 
         [t("GetHashCode() returns the same result for equal instances.")]
         public static void GetHashCode2() {
-            var tuple1 = Maybe.Of(Tuple.Create("1"));
-            var tuple2 = Maybe.Of(Tuple.Create("1"));
+            var m1 = Maybe.Of(Tuple.Create("1"));
+            var m2 = Maybe.Of(Tuple.Create("1"));
 
-            Assert.NotSame(tuple1, tuple2);
-            Assert.Equal(tuple1.GetHashCode(), tuple2.GetHashCode());
-            Assert.Equal(tuple1.GetHashCode(EqualityComparer<Tuple<string>>.Default), tuple2.GetHashCode(EqualityComparer<Tuple<string>>.Default));
+            Assert.NotSame(m1, m2);
+            Assert.Equal(m1.GetHashCode(), m2.GetHashCode());
+            Assert.Equal(m1.GetHashCode(EqualityComparer<Tuple<string>>.Default), m2.GetHashCode(EqualityComparer<Tuple<string>>.Default));
         }
 
         [t("ToString() result contains a string representation of the value if some, contains 'None' if none.")]
@@ -522,35 +521,37 @@ namespace Narvalo.Applicative {
 
         [t("Contains() guards.")]
         public static void Contains0() {
-            var none = Maybe<Obj>.None;
-            var some = Maybe.Of(new Obj());
             var value = new Obj();
 
+            var some = Maybe.Of(new Obj());
             Assert.Throws<ArgumentNullException>("comparer", () => some.Contains(value, null));
+
+            var none = Maybe<Obj>.None;
             Assert.Throws<ArgumentNullException>("comparer", () => none.Contains(value, null));
         }
 
         [t("Contains() returns false if none.")]
         public static void Contains1() {
-            var n1 = Maybe<int>.None;
-            var n2 = Maybe<Obj>.None;
+            var m1 = Maybe<int>.None;
+            Assert.False(m1.Contains(1));
+            Assert.False(m1.Contains(1, EqualityComparer<int>.Default));
 
-            Assert.False(n1.Contains(1));
-            Assert.False(n1.Contains(1, EqualityComparer<int>.Default));
-            Assert.False(n2.Contains(new Obj()));
-            Assert.False(n2.Contains(new Obj(), EqualityComparer<Obj>.Default));
+            var m2 = Maybe<Obj>.None;
+            Assert.False(m2.Contains(new Obj()));
+            Assert.False(m2.Contains(new Obj(), EqualityComparer<Obj>.Default));
         }
 
         [t("Contains(value) returns true if it does contain 'value'.")]
         public static void Contains2() {
             var value = new Obj();
-            var s1 = Maybe.Of(1);
-            var s2 = Maybe.Of(value);
 
-            Assert.True(s1.Contains(1), "Value type.");
-            Assert.True(s1.Contains(1, EqualityComparer<int>.Default), "Value type.");
-            Assert.True(s2.Contains(value), "Reference type.");
-            Assert.True(s2.Contains(value, EqualityComparer<Obj>.Default), "Reference type.");
+            var m1 = Maybe.Of(1);
+            Assert.True(m1.Contains(1), "Value type.");
+            Assert.True(m1.Contains(1, EqualityComparer<int>.Default), "Value type.");
+
+            var m2 = Maybe.Of(value);
+            Assert.True(m2.Contains(value), "Reference type.");
+            Assert.True(m2.Contains(value, EqualityComparer<Obj>.Default), "Reference type.");
         }
 
         [t("Contains() returns true if references are different but they are structurally equals.")]
@@ -563,25 +564,25 @@ namespace Narvalo.Applicative {
 
         [t("Contains(value) returns false if it does not contain 'value'.")]
         public static void Contains4() {
-            var s1 = Maybe.Of(1);
-            var s2 = Maybe.Of(new Obj());
             var other = new Obj("other");
 
-            Assert.False(s1.Contains(2));
-            Assert.False(s1.Contains(2, EqualityComparer<int>.Default));
-            Assert.False(s2.Contains(other, EqualityComparer<Obj>.Default));
-            Assert.False(s2.Contains(new Obj(), EqualityComparer<Obj>.Default), "References differ.");
+            var m1 = Maybe.Of(1);
+            Assert.False(m1.Contains(2));
+            Assert.False(m1.Contains(2, EqualityComparer<int>.Default));
+
+            var m2 = Maybe.Of(new Obj());
+            Assert.False(m2.Contains(other, EqualityComparer<Obj>.Default));
+            Assert.False(m2.Contains(new Obj(), EqualityComparer<Obj>.Default), "References differ.");
         }
 
         [t("Match() guards.")]
         public static void Match0() {
-            var none = Maybe<Obj>.None;
             var some = Maybe.Of(new Obj());
-
             Assert.Throws<ArgumentNullException>("caseSome", () => some.Match(null, new Obj()));
             Assert.Throws<ArgumentNullException>("caseSome", () => some.Match(null, () => new Obj()));
             Assert.Throws<ArgumentNullException>("caseNone", () => some.Match(x => x, default(Func<Obj>)));
 
+            var none = Maybe<Obj>.None;
             Assert.Throws<ArgumentNullException>("caseSome", () => none.Match(null, new Obj()));
             Assert.Throws<ArgumentNullException>("caseSome", () => none.Match(null, () => new Obj()));
             Assert.Throws<ArgumentNullException>("caseNone", () => none.Match(x => x, default(Func<Obj>)));
@@ -590,17 +591,17 @@ namespace Narvalo.Applicative {
         [t("Match() calls 'caseSome' if some (1).")]
         public static void Match1() {
             var some = Maybe.Of(new Obj());
-            var caseSomeWasCalled = false;
-            var caseNoneWasCalled = false;
+            var wasCalled = false;
+            var notCalled = true;
             var exp = new Obj("caseSome");
-            Func<Obj, Obj> caseSome = _ => { caseSomeWasCalled = true; return exp; };
-            Func<Obj> caseNone = () => { caseNoneWasCalled = true; return new Obj("caseNone"); };
+            Func<Obj, Obj> caseSome = _ => { wasCalled = true; return exp; };
+            Func<Obj> caseNone = () => { notCalled = false; return new Obj("caseNone"); };
 
-            var rs = some.Match(caseSome, caseNone);
+            var result = some.Match(caseSome, caseNone);
 
-            Assert.True(caseSomeWasCalled);
-            Assert.Same(exp, rs);
-            Assert.False(caseNoneWasCalled);
+            Assert.True(notCalled);
+            Assert.True(wasCalled);
+            Assert.Same(exp, result);
         }
 
         [t("Match() calls 'caseSome' if some (2).")]
@@ -611,51 +612,50 @@ namespace Narvalo.Applicative {
             Func<Obj, Obj> caseSome = _ => { wasCalled = true; return exp; };
             var caseNone = new Obj("caseNone");
 
-            var rs = some.Match(caseSome, caseNone);
+            var result = some.Match(caseSome, caseNone);
 
             Assert.True(wasCalled);
-            Assert.Same(exp, rs);
+            Assert.Same(exp, result);
         }
 
         [t("Match() calls 'caseNone' if none (1).")]
         public static void Match3() {
             var none = Maybe<Obj>.None;
-            var caseSomeWasCalled = false;
-            var caseNoneWasCalled = false;
+            var wasCalled = false;
+            var notCalled = true;
             var exp = new Obj("caseNone");
-            Func<Obj, Obj> caseSome = _ => { caseSomeWasCalled = true; return new Obj("caseSome"); };
-            Func<Obj> caseNone = () => { caseNoneWasCalled = true; return exp; };
+            Func<Obj, Obj> caseSome = _ => { notCalled = false; return new Obj("caseSome"); };
+            Func<Obj> caseNone = () => { wasCalled = true; return exp; };
 
-            var rs = none.Match(caseSome, caseNone);
+            var result = none.Match(caseSome, caseNone);
 
-            Assert.True(caseNoneWasCalled);
-            Assert.Same(exp, rs);
-            Assert.False(caseSomeWasCalled);
+            Assert.True(notCalled);
+            Assert.True(wasCalled);
+            Assert.Same(exp, result);
         }
 
         [t("Match() calls 'caseNone' if none (2).")]
         public static void Match4() {
             var none = Maybe<Obj>.None;
-            var wasCalled = false;
-            Func<Obj, Obj> caseSome = _ => { wasCalled = true; return new Obj("caseSome"); };
+            var notCalled = true;
+            Func<Obj, Obj> caseSome = _ => { notCalled = false; return new Obj("caseSome"); };
             var caseNone = new Obj("caseNone");
 
-            var rs = none.Match(caseSome, caseNone);
+            var result = none.Match(caseSome, caseNone);
 
-            Assert.False(wasCalled);
-            Assert.Same(caseNone, rs);
+            Assert.True(notCalled);
+            Assert.Same(caseNone, result);
         }
 
         [t("Coalesce() guards.")]
         public static void Coalesce0() {
-            var none = Maybe<Obj>.None;
             var some = Maybe.Of(new Obj());
-
             Assert.Throws<ArgumentNullException>("predicate", () => some.Coalesce(null, new Obj("this"), new Obj("that")));
             Assert.Throws<ArgumentNullException>("predicate", () => some.Coalesce(null, x => x, () => new Obj()));
             Assert.Throws<ArgumentNullException>("selector", () => some.Coalesce(_ => true, null, () => new Obj()));
             Assert.Throws<ArgumentNullException>("otherwise", () => some.Coalesce(_ => true, x => x, null));
 
+            var none = Maybe<Obj>.None;
             Assert.Throws<ArgumentNullException>("predicate", () => none.Coalesce(null, new Obj("this"), new Obj("that")));
             Assert.Throws<ArgumentNullException>("predicate", () => none.Coalesce(null, x => x, () => new Obj()));
             Assert.Throws<ArgumentNullException>("selector", () => none.Coalesce(_ => true, null, () => new Obj()));
@@ -666,16 +666,16 @@ namespace Narvalo.Applicative {
         public static void Coalesce1() {
             var some = Maybe.Of(new Obj());
             var wasCalled = false;
-            var otherWasCalled = false;
+            var notCalled = true;
             var exp = new Obj("selector");
             Func<Obj, Obj> selector = _ => { wasCalled = true; return exp; };
-            Func<Obj> otherwise = () => { otherWasCalled = true; return new Obj("otherwise"); };
+            Func<Obj> otherwise = () => { notCalled = false; return new Obj("otherwise"); };
 
-            var rs = some.Coalesce(_ => true, selector, otherwise);
+            var result = some.Coalesce(_ => true, selector, otherwise);
 
+            Assert.True(notCalled);
             Assert.True(wasCalled);
-            Assert.Same(exp, rs);
-            Assert.False(otherWasCalled);
+            Assert.Same(exp, result);
         }
 
         [t("Coalesce() returns 'thenResult' if some and 'predicate' is true.")]
@@ -684,25 +684,25 @@ namespace Narvalo.Applicative {
             var thenResult = new Obj("then");
             var elseResult = new Obj("else");
 
-            var rs = some.Coalesce(_ => true, thenResult, elseResult);
+            var result = some.Coalesce(_ => true, thenResult, elseResult);
 
-            Assert.Same(thenResult, rs);
+            Assert.Same(thenResult, result);
         }
 
         [t("Coalesce() calls 'otherwise' if some and 'predicate' is false.")]
         public static void Coalesce3() {
             var some = Maybe.Of(new Obj());
             var wasCalled = false;
-            var otherWasCalled = false;
+            var notCalled = true;
             var exp = new Obj("otherwise");
-            Func<Obj, Obj> selector = _ => { wasCalled = true; return new Obj("selector"); };
-            Func<Obj> otherwise = () => { otherWasCalled = true; return exp; };
+            Func<Obj, Obj> selector = _ => { notCalled = false; return new Obj("selector"); };
+            Func<Obj> otherwise = () => { wasCalled = true; return exp; };
 
-            var rs = some.Coalesce(_ => false, selector, otherwise);
+            var result = some.Coalesce(_ => false, selector, otherwise);
 
-            Assert.True(otherWasCalled);
-            Assert.Same(exp, rs);
-            Assert.False(wasCalled);
+            Assert.True(notCalled);
+            Assert.True(wasCalled);
+            Assert.Same(exp, result);
         }
 
         [t("Coalesce() returns 'elseResult' if some and 'predicate' is false.")]
@@ -711,41 +711,41 @@ namespace Narvalo.Applicative {
             var thenResult = new Obj("then");
             var elseResult = new Obj("else");
 
-            var rs = some.Coalesce(_ => false, thenResult, elseResult);
+            var result = some.Coalesce(_ => false, thenResult, elseResult);
 
-            Assert.Same(elseResult, rs);
+            Assert.Same(elseResult, result);
         }
 
         [t("Coalesce() calls 'otherwise' if none and 'predicate' is true.")]
         public static void Coalesce5() {
             var none = Maybe<Obj>.None;
             var wasCalled = false;
-            var otherWasCalled = false;
+            var notCalled = true;
             var exp = new Obj("otherwise");
-            Func<Obj, Obj> selector = _ => { wasCalled = true; return new Obj("selector"); };
-            Func<Obj> otherwise = () => { otherWasCalled = true; return exp; };
+            Func<Obj, Obj> selector = _ => { notCalled = false; return new Obj("selector"); };
+            Func<Obj> otherwise = () => { wasCalled = true; return exp; };
 
-            var rs = none.Coalesce(_ => true, selector, otherwise);
+            var result = none.Coalesce(_ => true, selector, otherwise);
 
-            Assert.True(otherWasCalled);
-            Assert.Same(exp, rs);
-            Assert.False(wasCalled);
+            Assert.True(notCalled);
+            Assert.True(wasCalled);
+            Assert.Same(exp, result);
         }
 
         [t("Coalesce() calls 'otherwise' if none and 'predicate' is false.")]
         public static void Coalesce6() {
             var none = Maybe<Obj>.None;
             var wasCalled = false;
-            var otherWasCalled = false;
+            var notCalled = true;
             var exp = new Obj("otherwise");
-            Func<Obj, Obj> selector = _ => { wasCalled = true; return new Obj("selector"); };
-            Func<Obj> otherwise = () => { otherWasCalled = true; return exp; };
+            Func<Obj, Obj> selector = _ => { notCalled = false; return new Obj("selector"); };
+            Func<Obj> otherwise = () => { wasCalled = true; return exp; };
 
-            var rs = none.Coalesce(_ => false, selector, otherwise);
+            var result = none.Coalesce(_ => false, selector, otherwise);
 
-            Assert.True(otherWasCalled);
-            Assert.Same(exp, rs);
-            Assert.False(wasCalled);
+            Assert.True(notCalled);
+            Assert.True(wasCalled);
+            Assert.Same(exp, result);
         }
 
         [t("Coalesce() returns 'elseResult' if none and 'predicate' is true.")]
@@ -754,9 +754,9 @@ namespace Narvalo.Applicative {
             var thenResult = new Obj("then");
             var elseResult = new Obj("else");
 
-            var rs = none.Coalesce(_ => true, thenResult, elseResult);
+            var result = none.Coalesce(_ => true, thenResult, elseResult);
 
-            Assert.Same(elseResult, rs);
+            Assert.Same(elseResult, result);
         }
 
         [t("Coalesce() returns 'elseResult' if none and 'predicate' is false.")]
@@ -765,22 +765,21 @@ namespace Narvalo.Applicative {
             var thenResult = new Obj("then");
             var elseResult = new Obj("else");
 
-            var rs = none.Coalesce(_ => false, thenResult, elseResult);
+            var result = none.Coalesce(_ => false, thenResult, elseResult);
 
-            Assert.Same(elseResult, rs);
+            Assert.Same(elseResult, result);
         }
 
         [t("When() guards.")]
         public static void When0() {
-            var none = Maybe<Obj>.None;
             var some = Maybe.Of(new Obj());
-
             Assert.Throws<ArgumentNullException>("predicate", () => some.When(null, _ => { }));
             Assert.Throws<ArgumentNullException>("action", () => some.When(_ => true, null));
             Assert.Throws<ArgumentNullException>("predicate", () => some.When(null, _ => { }, () => { }));
             Assert.Throws<ArgumentNullException>("action", () => some.When(_ => true, null, () => { }));
             Assert.Throws<ArgumentNullException>("otherwise", () => some.When(_ => true, _ => { }, null));
 
+            var none = Maybe<Obj>.None;
             Assert.Throws<ArgumentNullException>("predicate", () => none.When(null, _ => { }));
             Assert.Throws<ArgumentNullException>("action", () => none.When(_ => true, null));
             Assert.Throws<ArgumentNullException>("predicate", () => none.When(null, _ => { }, () => { }));
@@ -792,14 +791,14 @@ namespace Narvalo.Applicative {
         public static void When1() {
             var some = Maybe.Of(new Obj());
             var wasCalled = false;
-            var otherWasCalled = false;
+            var notCalled = true;
             Action<Obj> action = _ => wasCalled = true;
-            Action otherwise = () => otherWasCalled = true;
+            Action otherwise = () => notCalled = false;
 
             some.When(_ => true, action, otherwise);
 
+            Assert.True(notCalled);
             Assert.True(wasCalled);
-            Assert.False(otherWasCalled);
         }
 
         [t("When() calls 'action' if some and 'predicate' is true (2).")]
@@ -817,85 +816,84 @@ namespace Narvalo.Applicative {
         public static void When3() {
             var some = Maybe.Of(new Obj());
             var wasCalled = false;
-            var otherWasCalled = false;
-            Action<Obj> action = _ => wasCalled = true;
-            Action otherwise = () => otherWasCalled = true;
+            var notCalled = true;
+            Action<Obj> action = _ => notCalled = false;
+            Action otherwise = () => wasCalled = true;
 
             some.When(_ => false, action, otherwise);
 
-            Assert.False(wasCalled);
-            Assert.True(otherWasCalled);
+            Assert.True(notCalled);
+            Assert.True(wasCalled);
         }
 
         [t("When() does not call 'action' if some and 'predicate' is false.")]
         public static void When4() {
             var some = Maybe.Of(new Obj());
-            var wasCalled = false;
-            Action<Obj> action = _ => wasCalled = true;
+            var notCalled = true;
+            Action<Obj> action = _ => notCalled = false;
 
             some.When(_ => false, action);
 
-            Assert.False(wasCalled);
+            Assert.True(notCalled);
         }
 
         [t("When() calls 'otherwise' if none and 'predicate' is true.")]
         public static void When5() {
             var none = Maybe<Obj>.None;
             var wasCalled = false;
-            var otherWasCalled = false;
-            Action<Obj> action = _ => wasCalled = true;
-            Action otherwise = () => otherWasCalled = true;
+            var notCalled = true;
+            Action<Obj> action = _ => notCalled = false;
+            Action otherwise = () => wasCalled = true;
 
             none.When(_ => true, action, otherwise);
 
-            Assert.False(wasCalled);
-            Assert.True(otherWasCalled);
+            Assert.True(notCalled);
+            Assert.True(wasCalled);
         }
 
         [t("When() does not call 'action' if none and 'predicate' is true.")]
         public static void When6() {
             var none = Maybe<Obj>.None;
-            var wasCalled = false;
-            Action<Obj> action = _ => wasCalled = true;
+            var notCalled = true;
+            Action<Obj> action = _ => notCalled = false;
 
             none.When(_ => true, action);
 
-            Assert.False(wasCalled);
+            Assert.True(notCalled);
         }
 
         [t("When() calls 'otherwise' if none and 'predicate' is false.")]
         public static void When7() {
             var none = Maybe<Obj>.None;
             var wasCalled = false;
-            var otherWasCalled = false;
-            Action<Obj> action = _ => wasCalled = true;
-            Action otherwise = () => otherWasCalled = true;
+            var notCalled = true;
+            Action<Obj> action = _ => notCalled = false;
+            Action otherwise = () => wasCalled = true;
 
             none.When(_ => false, action, otherwise);
 
-            Assert.False(wasCalled);
-            Assert.True(otherWasCalled);
+            Assert.True(notCalled);
+            Assert.True(wasCalled);
         }
 
         [t("When() does not call 'action' if none and 'predicate' is false.")]
         public static void When8() {
             var none = Maybe<Obj>.None;
-            var wasCalled = false;
-            Action<Obj> action = _ => wasCalled = true;
+            var notCalled = true;
+            Action<Obj> action = _ => notCalled = false;
 
             none.When(_ => false, action);
 
-            Assert.False(wasCalled);
+            Assert.True(notCalled);
         }
 
         [t("Do() guards.")]
         public static void Do0() {
-            var none = Maybe<Obj>.None;
             var some = Maybe.Of(new Obj());
-
             Assert.Throws<ArgumentNullException>("onSome", () => some.Do(null, () => { }));
             Assert.Throws<ArgumentNullException>("onNone", () => some.Do(_ => { }, null));
 
+            var none = Maybe<Obj>.None;
             Assert.Throws<ArgumentNullException>("onSome", () => none.Do(null, () => { }));
             Assert.Throws<ArgumentNullException>("onNone", () => none.Do(_ => { }, null));
         }
@@ -903,37 +901,37 @@ namespace Narvalo.Applicative {
         [t("Do() calls 'onSome' if some.")]
         public static void Do1() {
             var some = Maybe.Of(new Obj());
-            var onSomeWasCalled = false;
-            var onNoneWasCalled = false;
-            Action<Obj> onSome = _ => onSomeWasCalled = true;
-            Action onNone = () => onNoneWasCalled = true;
+            var wasCalled = false;
+            var notCalled = true;
+            Action<Obj> onSome = _ => wasCalled = true;
+            Action onNone = () => notCalled = false;
 
             some.Do(onSome, onNone);
 
-            Assert.True(onSomeWasCalled);
-            Assert.False(onNoneWasCalled);
+            Assert.True(notCalled);
+            Assert.True(wasCalled);
         }
 
         [t("Do() calls 'onNone' if none.")]
         public static void Do2() {
             var none = Maybe<Obj>.None;
-            var onSomeWasCalled = false;
-            var onNoneWasCalled = false;
-            Action<Obj> onSome = _ => onSomeWasCalled = true;
-            Action onNone = () => onNoneWasCalled = true;
+            var wasCalled = false;
+            var notCalled = true;
+            Action<Obj> onSome = _ => notCalled = false;
+            Action onNone = () => wasCalled = true;
 
             none.Do(onSome, onNone);
 
-            Assert.False(onSomeWasCalled);
-            Assert.True(onNoneWasCalled);
+            Assert.True(notCalled);
+            Assert.True(wasCalled);
         }
 
         [t("OnSome() guards.")]
         public static void OnSome0() {
-            var none = Maybe<Obj>.None;
             var some = Maybe.Of(new Obj());
-
             Assert.Throws<ArgumentNullException>("action", () => some.OnSome(null));
+
+            var none = Maybe<Obj>.None;
             Assert.Throws<ArgumentNullException>("action", () => none.OnSome(null));
         }
 
@@ -951,20 +949,20 @@ namespace Narvalo.Applicative {
         [t("OnSome() does not call 'action' if none.")]
         public static void OnSome2() {
             var none = Maybe<Obj>.None;
-            var wasCalled = false;
-            Action<Obj> op = _ => wasCalled = true;
+            var notCalled = true;
+            Action<Obj> op = _ => notCalled = false;
 
             none.OnSome(op);
 
-            Assert.False(wasCalled);
+            Assert.True(notCalled);
         }
 
         [t("OnNone() guards.")]
         public static void OnNone0() {
-            var none = Maybe<Obj>.None;
             var some = Maybe.Of(new Obj());
-
             Assert.Throws<ArgumentNullException>("action", () => some.OnNone(null));
+
+            var none = Maybe<Obj>.None;
             Assert.Throws<ArgumentNullException>("action", () => none.OnNone(null));
         }
 
@@ -982,12 +980,12 @@ namespace Narvalo.Applicative {
         [t("OnNone() does not call 'action' if some.")]
         public static void OnNone2() {
             var some = Maybe.Of(new Obj());
-            var wasCalled = false;
-            Action act = () => wasCalled = true;
+            var notCalled = true;
+            Action act = () => notCalled = false;
 
             some.OnNone(act);
 
-            Assert.False(wasCalled);
+            Assert.True(notCalled);
         }
     }
 
@@ -995,10 +993,10 @@ namespace Narvalo.Applicative {
     public static partial class MaybeFacts {
         [t("Bind() guards.")]
         public static void Bind0() {
-            var none = Maybe<Obj>.None;
             var some = Maybe.Of(new Obj());
-
             Assert.Throws<ArgumentNullException>("binder", () => some.Bind<string>(null));
+
+            var none = Maybe<Obj>.None;
             Assert.Throws<ArgumentNullException>("binder", () => none.Bind<string>(null));
         }
 
@@ -1007,9 +1005,9 @@ namespace Narvalo.Applicative {
             var none = Maybe<Obj>.None;
             Func<Obj, Maybe<string>> binder = x => Maybe.Of(x.Value);
 
-            var me = none.Bind(binder);
+            var m = none.Bind(binder);
 
-            Assert.True(me.IsNone);
+            Assert.True(m.IsNone);
         }
 
         [t("Bind() returns some if some.")]
@@ -1018,23 +1016,27 @@ namespace Narvalo.Applicative {
             var some = Maybe.Of(exp);
             Func<Obj, Maybe<string>> binder = x => Maybe.Of(x.Value);
 
-            var me = some.Bind(binder);
+            var m = some.Bind(binder);
 
-            Assert.True(me.IsSome);
+            Assert.True(m.IsSome);
         }
 
         [t("Flatten() returns none if none.")]
         public static void Flatten1() {
-            var me = Maybe<Maybe<Obj>>.None.Flatten();
+            var none = Maybe<Maybe<Obj>>.None;
 
-            Assert.True(me.IsNone);
+            var m = none.Flatten();
+
+            Assert.True(m.IsNone);
         }
 
         [t("Flatten() returns some if some.")]
         public static void Flatten2() {
-            var me = Maybe.Of(Maybe.Of(new Obj())).Flatten();
+            var some = Maybe.Of(Maybe.Of(new Obj()));
 
-            Assert.True(me.IsSome);
+            var m = some.Flatten();
+
+            Assert.True(m.IsSome);
         }
 
         [t("OrElse(other) returns 'other' if none.")]
@@ -1059,97 +1061,113 @@ namespace Narvalo.Applicative {
 
         [t("ReplaceBy() returns some if some.")]
         public static void ReplaceBy1() {
+            var some = Maybe.Of(1);
             var exp = 2;
 
-            var m1 = Maybe.Of(1).ReplaceBy(exp);
-            var m2 = Maybe.ReplaceBy(Maybe.Of(1), exp);
-
+            var m1 = some.ReplaceBy(exp);
             Assert.True(m1.IsSome);
+
+            var m2 = Maybe.ReplaceBy(some, exp);
             Assert.True(m2.IsSome);
         }
 
         [t("ReplaceBy() returns none if none.")]
         public static void ReplaceBy2() {
+            var none = Maybe<int>.None;
             var exp = 2;
 
-            var m1 = Maybe<int>.None.ReplaceBy(exp);
-            var m2 = Maybe.ReplaceBy(Maybe<int>.None, exp);
-
+            var m1 = none.ReplaceBy(exp);
             Assert.True(m1.IsNone);
+
+            var m2 = Maybe.ReplaceBy(none, exp);
             Assert.True(m2.IsNone);
         }
 
         [t("ContinueWith(other) returns 'other' if some.")]
         public static void ContinueWith1() {
+            var some = Maybe.Of(new Obj());
             var exp = Maybe.Of(1);
 
-            var m1 = Maybe.Of(new Obj()).ContinueWith(exp);
-            var m2 = Maybe.ContinueWith(Maybe.Of(new Obj()), exp);
-
+            var m1 = some.ContinueWith(exp);
             Assert.Equal(exp, m1);
+
+            var m2 = Maybe.ContinueWith(some, exp);
             Assert.Equal(exp, m2);
         }
 
         [t("ContinueWith() returns none if none.")]
         public static void ContinueWith2() {
+            var none = Maybe<Obj>.None;
             var other = Maybe.Of(1);
 
-            var m1 = Maybe<Obj>.None.ContinueWith(other);
-            var m2 = Maybe.ContinueWith(Maybe<Obj>.None, other);
-
+            var m1 = none.ContinueWith(other);
             Assert.True(m1.IsNone);
+
+            var m2 = Maybe.ContinueWith(none, other);
             Assert.True(m2.IsNone);
         }
 
         [t("PassBy(other) returns 'this' if 'other' is some.")]
         public static void PassBy1() {
-            var some = Maybe.Of(new Obj());
-            var none = Maybe<Obj>.None;
-
             var other = Maybe.Of(1);
 
-            var m1a = some.PassBy(other);
-            var m1b = Maybe.PassBy(some, other);
-            var m2a = none.PassBy(other);
-            var m2b = Maybe.PassBy(none, other);
+            var some = Maybe.Of(new Obj());
 
-            Assert.Equal(some, m1a);
-            Assert.Equal(some, m1b);
-            Assert.Equal(none, m2a);
-            Assert.Equal(none, m2b);
+            var m1 = some.PassBy(other);
+            Assert.Equal(some, m1);
+
+            var m2 = Maybe.PassBy(some, other);
+            Assert.Equal(some, m2);
+
+            var none = Maybe<Obj>.None;
+
+            var m3 = none.PassBy(other);
+            Assert.Equal(none, m3);
+
+            var m4 = Maybe.PassBy(none, other);
+            Assert.Equal(none, m4);
         }
 
         [t("PassBy(other) returns none if 'other' is none.")]
         public static void PassBy2() {
+            var other = Maybe<int>.None;
+
             var some = Maybe.Of(new Obj());
+
+            var m1 = some.PassBy(other);
+            Assert.True(m1.IsNone);
+
+            var m2 = Maybe.PassBy(some, other);
+            Assert.True(m2.IsNone);
+
             var none = Maybe<Obj>.None;
 
-            var m1a = some.PassBy(Maybe<int>.None);
-            var m1b = Maybe.PassBy(some, Maybe<int>.None);
-            var m2a = none.PassBy(Maybe<int>.None);
-            var m2b = Maybe.PassBy(none, Maybe<int>.None);
+            var m3 = none.PassBy(other);
+            Assert.True(m3.IsNone);
 
-            Assert.True(m1a.IsNone);
-            Assert.True(m1b.IsNone);
-            Assert.True(m2a.IsNone);
-            Assert.True(m2b.IsNone);
+            var m4 = Maybe.PassBy(none, other);
+            Assert.True(m4.IsNone);
         }
 
         [t("Skip() returns 'Maybe.Unit' if some.")]
         public static void Skip1() {
-            var m1 = Maybe.Of(new Obj()).Skip();
-            var m2 = Maybe.Skip(Maybe.Of(new Obj()));
+            var some = Maybe.Of(new Obj());
 
+            var m1 = some.Skip();
             Assert.Equal(Maybe.Unit, m1);
+
+            var m2 = Maybe.Skip(some);
             Assert.Equal(Maybe.Unit, m2);
         }
 
         [t("Skip() returns 'Maybe.None' if none.")]
         public static void Skip2() {
-            var m1 = Maybe<Obj>.None.Skip();
-            var m2 = Maybe.Skip(Maybe<Obj>.None);
+            var none = Maybe<Obj>.None;
 
+            var m1 = none.Skip();
             Assert.Equal(Maybe.None, m1);
+
+            var m2 = Maybe.Skip(none);
             Assert.Equal(Maybe.None, m2);
         }
 
@@ -1224,14 +1242,15 @@ namespace Narvalo.Applicative {
             Func<int, int, int> resultSelector = (i, j) => i + j;
 
             var m1 = none.SelectMany(valueSelector, resultSelector);
+            Assert.True(m1.IsNone);
+
             var m2 = Maybe.SelectMany(none, valueSelector, resultSelector);
+            Assert.True(m2.IsNone);
+
             var q = from i in none
                     from j in some
                     select resultSelector(i, j);
-
-            Assert.False(m1.IsSome);
-            Assert.False(m2.IsSome);
-            Assert.False(q.IsSome);
+            Assert.True(q.IsNone);
         }
 
         [t("SelectMany() returns none if none and 'valueSelector' returns none.")]
@@ -1242,14 +1261,15 @@ namespace Narvalo.Applicative {
             Func<int, int, int> resultSelector = (i, j) => i + j;
 
             var m1 = none1.SelectMany(valueSelector, resultSelector);
+            Assert.True(m1.IsNone);
+
             var m2 = Maybe.SelectMany(none1, valueSelector, resultSelector);
+            Assert.True(m2.IsNone);
+
             var q = from i in none1
                     from j in none2
                     select resultSelector(i, j);
-
-            Assert.False(m1.IsSome);
-            Assert.False(m2.IsSome);
-            Assert.False(q.IsSome);
+            Assert.True(q.IsNone);
         }
 
         [t("SelectMany() returns none if some and 'valueSelector' returns none..")]
@@ -1260,14 +1280,15 @@ namespace Narvalo.Applicative {
             Func<int, int, int> resultSelector = (i, j) => i + j;
 
             var m1 = some.SelectMany(valueSelector, resultSelector);
+            Assert.True(m1.IsNone);
+
             var m2 = Maybe.SelectMany(some, valueSelector, resultSelector);
+            Assert.True(m2.IsNone);
+
             var q = from i in some
                     from j in none
                     select resultSelector(i, j);
-
-            Assert.False(m1.IsSome);
-            Assert.False(m2.IsSome);
-            Assert.False(q.IsSome);
+            Assert.True(q.IsNone);
         }
 
         [t("Join() returns none if join fails.")]
@@ -1276,14 +1297,15 @@ namespace Narvalo.Applicative {
             var some2 = Maybe.Of(2);
 
             var m1 = some1.Join(some2, _ => _, _ => _, (i, j) => i + j);
+            Assert.True(m1.IsNone);
+
             var m2 = Maybe.Join(some1, some2, _ => _, _ => _, (i, j) => i + j);
+            Assert.True(m2.IsNone);
+
             var q = from i in some1
                     join j in some2 on i equals j
                     select i + j;
-
-            Assert.False(m1.IsSome);
-            Assert.False(m2.IsSome);
-            Assert.False(q.IsSome);
+            Assert.True(q.IsNone);
         }
     }
 
@@ -1395,16 +1417,17 @@ namespace Narvalo.Applicative {
             Func<int, int, int> resultSelector = (i, j) => i + j;
 
             var m1 = source.SelectMany(valueSelector, resultSelector);
+            Assert.True(m1.IsSome);
+            Assert.Equal(3, m1.Value);
+
             var m2 = Maybe.SelectMany(source, valueSelector, resultSelector);
+            Assert.True(m2.IsSome);
+            Assert.Equal(3, m2.Value);
+
             var q = from i in source
                     from j in middle
                     select resultSelector(i, j);
-
-            Assert.True(m1.IsSome);
-            Assert.True(m2.IsSome);
             Assert.True(q.IsSome);
-            Assert.Equal(3, m1.Value);
-            Assert.Equal(3, m2.Value);
             Assert.Equal(3, q.Value);
         }
 
@@ -1414,16 +1437,17 @@ namespace Narvalo.Applicative {
             var inner = Maybe.Of(2);
 
             var m1 = source.Join(inner, _ => 2 * _, _ => _, (i, j) => i + j);
+            Assert.True(m1.IsSome);
+            Assert.Equal(3, m1.Value);
+
             var m2 = Maybe.Join(source, inner, _ => 2 * _, _ => _, (i, j) => i + j);
+            Assert.True(m2.IsSome);
+            Assert.Equal(3, m2.Value);
+
             var q = from i in source
                     join j in inner on 2 * i equals j
                     select i + j;
-
-            Assert.True(m1.IsSome);
-            Assert.True(m2.IsSome);
             Assert.True(q.IsSome);
-            Assert.Equal(3, m1.Value);
-            Assert.Equal(3, m2.Value);
             Assert.Equal(3, q.Value);
         }
     }
