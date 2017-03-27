@@ -3,7 +3,7 @@
 namespace Narvalo {
     using Xunit;
 
-    internal class TestTheoryAttribute : TheoryAttribute {
+    public class TestTheoryAttribute : TheoryAttribute {
         public TestTheoryAttribute(string category, string description) : base() {
             DisplayName = category + " - " + description;
         }

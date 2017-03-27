@@ -9,10 +9,8 @@ namespace Narvalo {
 
     public static partial class RequireFacts {
         internal sealed class tAttribute : TestCaseAttribute {
-            public tAttribute(string message) : base(nameof(Require), message) { }
+            public tAttribute(string description) : base(nameof(Require), description) { }
         }
-
-        #region State()
 
         [t("State(true) does not throw if the precondition is met.")]
         public static void State1() {
@@ -35,10 +33,6 @@ namespace Narvalo {
             Assert.IsType<InvalidOperationException>(ex);
             Assert.Equal(message, ex.Message);
         }
-
-        #endregion
-
-        #region True()
 
         [t("True(true) does not throw if the precondition is met.")]
         public static void True1() {
@@ -74,10 +68,6 @@ namespace Narvalo {
             Assert.StartsWith(message, ex.Message, StringComparison.OrdinalIgnoreCase);
         }
 
-        #endregion
-
-        #region Range()
-
         [t("Range(true) does not throw if the precondition is met.")]
         public static void Range1() {
             Require.Range(true, "paramName");
@@ -112,10 +102,6 @@ namespace Narvalo {
             Assert.StartsWith(message, ex.Message, StringComparison.OrdinalIgnoreCase);
         }
 
-        #endregion
-
-        #region NotNull()
-
         [t("NotNull() does not throw if the precondition is met.")]
         public static void NotNull1() => Require.NotNull(new Obj(), "paramName");
 
@@ -132,10 +118,6 @@ namespace Narvalo {
             var argex = Assert.IsType<ArgumentNullException>(ex);
             Assert.Equal(paramName, argex.ParamName);
         }
-
-        #endregion
-
-        #region NotNullUnconstrained()
 
         [t("NotNullUnconstrained() does not throw if the precondition is met.")]
         public static void NotNullUnconstrained1() {
@@ -156,10 +138,6 @@ namespace Narvalo {
             var argex = Assert.IsType<ArgumentNullException>(ex);
             Assert.Equal(paramName, argex.ParamName);
         }
-
-        #endregion
-
-        #region NotNullOrEmpty()
 
         [t("NotNullOrEmpty() does not throw if the precondition is met.")]
         public static void NotNullOrEmpty1() {
@@ -192,10 +170,6 @@ namespace Narvalo {
             var argex = Assert.IsType<ArgumentException>(ex);
             Assert.Equal(paramName, argex.ParamName);
         }
-
-        #endregion
-
-        #region NotNullOrWhiteSpace()
 
         [t("NotNullOrWhiteSpace() does not throw if the precondition is met.")]
         public static void NotNullOrWhiteSpace1() {
@@ -241,7 +215,5 @@ namespace Narvalo {
             var argex = Assert.IsType<ArgumentException>(ex);
             Assert.Equal(paramName, argex.ParamName);
         }
-
-        #endregion
     }
 }

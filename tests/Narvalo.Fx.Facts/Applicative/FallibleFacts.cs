@@ -8,17 +8,11 @@ namespace Narvalo.Applicative {
 
     // Tests for Fallible.
     public static partial class FallibleFacts {
-        #region Ok
-
         [t("Ok is OK.")]
         public static void Ok1() {
             Assert.True(Fallible.Ok.IsSuccess);
             Assert.False(Fallible.Ok.IsError);
         }
-
-        #endregion
-
-        #region FromError()
 
         [t("FromError() guards.")]
         public static void FromError0()
@@ -32,17 +26,11 @@ namespace Narvalo.Applicative {
             Assert.False(result.IsSuccess);
         }
 
-        #endregion
-
-        #region Bind()
-
         [t("Bind() guards.")]
         public static void Bind0() {
             Assert.Throws<ArgumentNullException>("binder", () => Fallible.Ok.Bind<string>(null));
             Assert.Throws<ArgumentNullException>("binder", () => Fallible.FromError(Error).Bind<string>(null));
         }
-
-        #endregion
     }
 
     public static partial class FallibleFacts {

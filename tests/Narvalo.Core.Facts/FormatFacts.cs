@@ -7,7 +7,7 @@ namespace Narvalo {
 
     public static class FormatFacts {
         internal sealed class tAttribute : TestCaseAttribute {
-            public tAttribute(string message) : base(nameof(Format), message) { }
+            public tAttribute(string description) : base(nameof(Format), description) { }
         }
 
         [t("Current() guards.")]

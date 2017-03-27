@@ -5,7 +5,7 @@ namespace Narvalo {
 
     public static class ControlFlowExceptionFacts {
         internal sealed class tAttribute : TestCaseAttribute {
-            public tAttribute(string message) : base(nameof(ControlFlowException), message) { }
+            public tAttribute(string description) : base(nameof(ControlFlowException), description) { }
         }
 
         [t("Default ctor sets a default message.")]

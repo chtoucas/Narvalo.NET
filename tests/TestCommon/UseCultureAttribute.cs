@@ -12,8 +12,7 @@ using Xunit.Sdk;
 /// <see cref="CultureInfo.CurrentUICulture" /> with another culture.
 /// </summary>
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-public class UseCultureAttribute : BeforeAfterTestAttribute
-{
+public class UseCultureAttribute : BeforeAfterTestAttribute {
     readonly Lazy<CultureInfo> culture;
     readonly Lazy<CultureInfo> uiCulture;
 
@@ -40,8 +39,7 @@ public class UseCultureAttribute : BeforeAfterTestAttribute
     /// </summary>
     /// <param name="culture">The name of the culture.</param>
     /// <param name="uiCulture">The name of the UI culture.</param>
-    public UseCultureAttribute(string culture, string uiCulture)
-    {
+    public UseCultureAttribute(string culture, string uiCulture) {
         this.culture = new Lazy<CultureInfo>(() => new CultureInfo(culture, false));
         this.uiCulture = new Lazy<CultureInfo>(() => new CultureInfo(uiCulture, false));
     }
@@ -62,8 +60,7 @@ public class UseCultureAttribute : BeforeAfterTestAttribute
     /// and replaces them with the new cultures defined in the constructor.
     /// </summary>
     /// <param name="methodUnderTest">The method under test</param>
-    public override void Before(MethodInfo methodUnderTest)
-    {
+    public override void Before(MethodInfo methodUnderTest) {
         originalCulture = Thread.CurrentThread.CurrentCulture;
         originalUICulture = Thread.CurrentThread.CurrentUICulture;
 
@@ -76,8 +73,7 @@ public class UseCultureAttribute : BeforeAfterTestAttribute
     /// <see cref="CultureInfo.CurrentUICulture" /> to <see cref="Thread.CurrentPrincipal" />
     /// </summary>
     /// <param name="methodUnderTest">The method under test</param>
-    public override void After(MethodInfo methodUnderTest)
-    {
+    public override void After(MethodInfo methodUnderTest) {
         Thread.CurrentThread.CurrentCulture = originalCulture;
         Thread.CurrentThread.CurrentUICulture = originalUICulture;
     }

@@ -5,7 +5,7 @@ namespace Narvalo {
 
     public static class HashCodeHelpersFacts {
         internal sealed class tAttribute : TestCaseAttribute {
-            public tAttribute(string message) : base(nameof(HashCodeHelpers), message) { }
+            public tAttribute(string description) : base(nameof(HashCodeHelpers), description) { }
         }
 
         [t("Combine() does not throw OverflowException.")]

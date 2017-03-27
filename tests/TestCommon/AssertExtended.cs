@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo
-{
+namespace Narvalo {
     using System;
     using System.Collections.Generic;
     using System.Globalization;
@@ -9,8 +8,7 @@ namespace Narvalo
 
     using Xunit;
 
-    public partial class AssertExtended : Assert
-    {
+    public partial class AssertExtended : Assert {
         /// <summary>
         /// Check that the given function uses deferred execution.
         /// A "spiked" source is given to the function: the function
@@ -19,18 +17,15 @@ namespace Narvalo
         /// throw InvalidOperationException.
         /// </summary>
         // Adapted from https://raw.githubusercontent.com/jskeet/edulinq/master/src/Edulinq.TestSupport/ThrowingEnumerable.cs
-        public static void IsDeferred<T>(Func<IEnumerable<int>, IEnumerable<T>> fun)
-        {
+        public static void IsDeferred<T>(Func<IEnumerable<int>, IEnumerable<T>> fun) {
             var result = fun(new ThrowingEnumerable());
 
-            using (var iter = result.GetEnumerator())
-            {
+            using (var iter = result.GetEnumerator()) {
                 Assert.Throws<InvalidOperationException>(() => iter.MoveNext());
             }
         }
 
-        public static void IsNotLocalized(LocalizedStrings localizedStrings)
-        {
+        public static void IsNotLocalized(LocalizedStrings localizedStrings) {
             var dict = localizedStrings.GetStrings();
 
             Assert.Null(dict);
@@ -39,8 +34,7 @@ namespace Narvalo
         public static void IsLocalized(ResourceManager manager)
             => IsLocalized(new LocalizedStrings(manager));
 
-        public static void IsLocalized(LocalizedStrings localizedStrings)
-        {
+        public static void IsLocalized(LocalizedStrings localizedStrings) {
             var dict = localizedStrings.GetStrings();
 
             Assert.NotNull(dict);
@@ -56,30 +50,25 @@ namespace Narvalo
             );
         }
 
-        public static void IsLocalizationComplete(LocalizedStrings localizedStrings)
-        {
+        public static void IsLocalizationComplete(LocalizedStrings localizedStrings) {
             var dict = localizedStrings.GetStrings();
-            if (dict == null)
-            {
+            if (dict == null) {
                 Assert.True(false, $"No localized strings found in {CultureInfo.CurrentCulture.EnglishName}.");
                 return;
             }
 
             var keys = localizedStrings.ReferenceKeys;
-            if (keys == null)
-            {
+            if (keys == null) {
                 Assert.True(false, $"Unable to load the reference keys.");
                 return;
             }
 
-            foreach (var pair in dict)
-            {
+            foreach (var pair in dict) {
                 Assert.True(keys.Contains(pair.Key),
                     $"The resource contains an unrecognized key '{pair.Key}' in {CultureInfo.CurrentCulture.EnglishName}.");
             }
 
-            foreach (var key in keys)
-            {
+            foreach (var key in keys) {
                 Assert.True(dict.ContainsKey(key),
                     $"The key '{key}' does not exist in {CultureInfo.CurrentCulture.EnglishName}.");
             }

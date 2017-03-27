@@ -10,54 +10,73 @@ namespace Narvalo.Applicative {
             public tAttribute(string message) : base(nameof(Unit), message) { }
         }
 
-        [t("")]
-        public static void Equality_Tests() {
+        [t("== is always true.")]
+        public static void Equality1() {
+            var u = Unit.Default;
             var u1 = new Unit();
             var u2 = new Unit();
 
-            Assert.True(u1 == Unit.Default);
-            Assert.True(Unit.Default == u1);
+            Assert.True(u1 == u);
+            Assert.True(u == u1);
             Assert.True(u1 == u2);
         }
 
-        [t("")]
-        public static void Inequality_Tests() {
+        [t("!= is always false.")]
+        public static void Inequality1() {
+            var u = Unit.Default;
             var u1 = new Unit();
             var u2 = new Unit();
 
-            Assert.False(u1 != Unit.Default);
-            Assert.False(Unit.Default != u1);
+            Assert.False(u1 != u);
+            Assert.False(u != u1);
             Assert.False(u1 != u2);
         }
 
-        [t("")]
-        public static void Equals_Tests() {
+        [t("Equals(unit) is always true.")]
+        public static void Equals1() {
+            var u = Unit.Default;
             var u1 = new Unit();
             var u2 = new Unit();
 
             Assert.True(u1.Equals(u1));
             Assert.True(u1.Equals(u2));
-            Assert.True(u1.Equals(Unit.Default));
-            Assert.True(Unit.Default.Equals(u1));
-            Assert.True(Unit.Default.Equals(u2));
-            Assert.True(Unit.Default.Equals(Unit.Default));
+            Assert.True(u1.Equals(u));
+            Assert.True(u.Equals(u1));
+            Assert.True(u.Equals(u2));
+            Assert.True(u.Equals(u));
+        }
+
+        [t("Equals(non-unit) is always false.")]
+        public static void Equals2() {
+            var u = Unit.Default;
+            var u1 = new Unit();
+
+            var obj = new Object();
 
             Assert.False(u1.Equals(null));
-            Assert.False(u1.Equals(new Object()));
-            Assert.False(new Object().Equals(u1));
-            Assert.False(new Object().Equals(Unit.Default));
+            Assert.False(u1.Equals(obj));
+            Assert.False(u.Equals(null));
+            Assert.False(u.Equals(obj));
+            Assert.False(obj.Equals(u1));
+            Assert.False(obj.Equals(u));
         }
 
-        [t("")]
-        public static void GetHashCode_Tests() {
-            Assert.Equal(0, new Unit().GetHashCode());
-            Assert.Equal(0, Unit.Default.GetHashCode());
+        [t("GetHashCode() always returns zero.")]
+        public static void GetHashCode1() {
+            var u = Unit.Default;
+            var u1 = new Unit();
+
+            Assert.Equal(0, u1.GetHashCode());
+            Assert.Equal(0, u.GetHashCode());
         }
 
-        [t("")]
-        public static void ToString_Tests() {
-            Assert.Equal("()", new Unit().ToString());
-            Assert.Equal("()", Unit.Default.ToString());
+        [t("ToString() always returns ().")]
+        public static void ToString1() {
+            var u = Unit.Default;
+            var u1 = new Unit();
+
+            Assert.Equal("()", u1.ToString());
+            Assert.Equal("()", u.ToString());
         }
     }
 }

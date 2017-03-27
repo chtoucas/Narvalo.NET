@@ -7,17 +7,11 @@ namespace Narvalo.Applicative {
 
     // Tests for Outcome.
     public static partial class OutcomeFacts {
-        #region Ok
-
         [t("Ok is OK.")]
         public static void Ok1() {
             Assert.True(Outcome.Ok.IsSuccess);
             Assert.False(Outcome.Ok.IsError);
         }
-
-        #endregion
-
-        #region FromError()
 
         [t("FromError() guards.")]
         public static void FromError0() {
@@ -31,16 +25,10 @@ namespace Narvalo.Applicative {
             Assert.True(result.IsError);
         }
 
-        #endregion
-
-        #region Bind()
-
         [t("Bind() guards.")]
         public static void Bind0() {
             Assert.Throws<ArgumentNullException>("binder", () => Outcome.Ok.Bind<string>(null));
             Assert.Throws<ArgumentNullException>("binder", () => Outcome.FromError("error").Bind<string>(null));
         }
-
-        #endregion
     }
 }

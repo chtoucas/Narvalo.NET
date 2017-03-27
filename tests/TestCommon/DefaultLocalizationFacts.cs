@@ -6,8 +6,8 @@ namespace Narvalo {
     using Assert = Narvalo.AssertExtended;
 
     public abstract class DefaultLocalizationFacts {
-        internal sealed class factAttribute : TestCaseAttribute {
-            public factAttribute(string message) : base("L10N", message) { }
+        internal sealed class tAttribute : TestCaseAttribute {
+            public tAttribute(string description) : base("L10N", description) { }
         }
 
         protected DefaultLocalizationFacts(ResourceManager manager)
@@ -15,16 +15,16 @@ namespace Narvalo {
 
         protected LocalizedStrings LocalizedStrings { get; }
 
-        [fact("English localization is available and looks good."), UseCulture("en")]
+        [t("English localization is available and looks good."), UseCulture("en")]
         public void english_is_supported() => Assert.IsLocalized(LocalizedStrings);
 
-        [fact("La traduction des messages en français est disponible."), UseCulture("fr")]
+        [t("La traduction des messages en français est disponible."), UseCulture("fr")]
         public void français_is_supported() => Assert.IsLocalized(LocalizedStrings);
 
-        [fact("Le français est pleinement supporté."), UseCulture("fr")]
+        [t("Le français est pleinement supporté."), UseCulture("fr")]
         public void français_is_complete() => Assert.IsLocalizationComplete(LocalizedStrings);
 
-        [fact("Tiếng Việt localization is not available."), UseCulture("vn")]
+        [t("Tiếng Việt localization is not available."), UseCulture("vn")]
         public void tiếng_việt_is_not_supported() => Assert.IsNotLocalized(LocalizedStrings);
     }
 }

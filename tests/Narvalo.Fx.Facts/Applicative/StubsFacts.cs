@@ -15,14 +15,8 @@ namespace Narvalo.Applicative {
             public TAttribute(string description) : base(nameof(Stubs), description) { }
         }
 
-        #region Noop
-
         [t("Noop is not null.")]
         public static void Noop1() => Assert.NotNull(Stubs.Noop);
-
-        #endregion
-
-        #region AlwaysDefault
 
         [t("AlwaysDefault is not null.")]
         public static void AlwaysDefault1() {
@@ -56,10 +50,6 @@ namespace Narvalo.Applicative {
             Assert.Equal(default(object), Stubs<long, object>.AlwaysDefault(1L));
         }
 
-        #endregion
-
-        #region AlwaysFalse
-
         [t("AlwaysFalse is not null.")]
         public static void AlwaysFalse1() {
             Assert.NotNull(Stubs<string>.AlwaysFalse);
@@ -77,10 +67,6 @@ namespace Narvalo.Applicative {
         [MemberData(nameof(Int32TestData), DisableDiscoveryEnumeration = true)]
         public static void AlwaysFalse3(int input)
             => Assert.False(Stubs<int>.AlwaysFalse(input));
-
-        #endregion
-
-        #region AlwaysTrue
 
         [t("AlwaysTrue is not null.")]
         public static void AlwaysTrue1() {
@@ -100,10 +86,6 @@ namespace Narvalo.Applicative {
         public static void AlwaysTrue3(int input)
             => Assert.True(Stubs<int>.AlwaysTrue(input));
 
-        #endregion
-
-        #region Identity
-
         [t("Identity is not null.")]
         public static void Identity1() {
             Assert.NotNull(Stubs<string>.Identity);
@@ -122,10 +104,6 @@ namespace Narvalo.Applicative {
         public static void Identity3(int input)
             => Assert.Equal(input, Stubs<int>.Identity(input));
 
-        #endregion
-
-        #region Ignore
-
         [t("Ignore is not null.")]
         public static void Ignore1() {
             Assert.NotNull(Stubs<string>.Ignore);
@@ -133,8 +111,6 @@ namespace Narvalo.Applicative {
             Assert.NotNull(Stubs<long>.Ignore);
             Assert.NotNull(Stubs<object>.Ignore);
         }
-
-        #endregion
     }
 
     public static partial class StubsFacts {

@@ -6,8 +6,6 @@ namespace Narvalo.Applicative {
     using static global::My;
 
     public static partial class EitherFacts {
-        #region LeftOrNone()
-
         [t("LeftOrNone() returns none if righty.")]
         public static void LeftOrNone1() {
             var either = Either<string, string>.OfRight("leftValue");
@@ -29,10 +27,6 @@ namespace Narvalo.Applicative {
             Assert.Equal(exp, result);
         }
 
-        #endregion
-
-        #region RightOrNone()
-
         [t("RightOrNone() returns none if lefty.")]
         public static void RightOrNone1() {
             var either = Either<string, string>.OfLeft("rightValue");
@@ -53,7 +47,5 @@ namespace Narvalo.Applicative {
             Assert.True(result.IsSome);
             Assert.Equal(exp, result);
         }
-
-        #endregion
     }
 }

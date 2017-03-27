@@ -3,7 +3,7 @@
 namespace Narvalo {
     using Xunit;
 
-    internal class TestCaseAttribute : FactAttribute {
+    public class TestCaseAttribute : FactAttribute {
         public TestCaseAttribute(string category, string description) : base() {
             DisplayName = category + " - " + description;
         }
