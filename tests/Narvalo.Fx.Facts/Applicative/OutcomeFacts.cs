@@ -21,14 +21,49 @@ namespace Narvalo.Applicative {
 
         [t("FromError() returns NOK.")]
         public static void FromError1() {
-            var result = Outcome.FromError("error");
-            Assert.True(result.IsError);
+            var nok = Outcome.FromError("error");
+
+            Assert.True(nok.IsError);
         }
 
+        [t("GetHashCode() returns the same result when called repeatedly.")]
+        public static void GetHashCode1() {
+            var nok = Outcome.FromError("error");
+            Assert.Equal(nok.GetHashCode(), nok.GetHashCode());
+
+            var ok = Outcome.Ok;
+            Assert.Equal(ok.GetHashCode(), ok.GetHashCode());
+        }
+
+        [t("GetHashCode() returns the same result for equal instances.")]
+        public static void GetHashCode2() {
+            var nok1 = Outcome.FromError("error");
+            var nok2 = Outcome.FromError("error");
+
+            Assert.NotSame(nok1, nok2);
+            Assert.Equal(nok1, nok2);
+            Assert.Equal(nok1.GetHashCode(), nok2.GetHashCode());
+        }
+
+        [t("ToString() result contains a string representation of the value if OK, or is 'Success' if NOK.")]
+        public static void ToString1() {
+            var ok = Outcome.Ok;
+            Assert.Equal("Success", ok.ToString());
+
+            var error = "My error";
+            var nok = Outcome.FromError(error);
+            Assert.Contains(error, nok.ToString(), StringComparison.OrdinalIgnoreCase);
+        }
+    }
+
+    public static partial class OutcomeFacts {
         [t("Bind() guards.")]
         public static void Bind0() {
-            Assert.Throws<ArgumentNullException>("binder", () => Outcome.Ok.Bind<string>(null));
-            Assert.Throws<ArgumentNullException>("binder", () => Outcome.FromError("error").Bind<string>(null));
+            var ok = Outcome.Ok;
+            Assert.Throws<ArgumentNullException>("binder", () => ok.Bind<string>(null));
+
+            var nok = Outcome.FromError("error");
+            Assert.Throws<ArgumentNullException>("binder", () => nok.Bind<string>(null));
         }
     }
 }

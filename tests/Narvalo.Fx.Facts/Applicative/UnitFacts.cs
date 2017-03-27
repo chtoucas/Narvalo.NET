@@ -7,7 +7,7 @@ namespace Narvalo.Applicative {
 
     public static class UnitFacts {
         internal sealed class tAttribute : TestCaseAttribute {
-            public tAttribute(string message) : base(nameof(Unit), message) { }
+            public tAttribute(string description) : base(nameof(Unit), description) { }
         }
 
         [t("== is always true.")]

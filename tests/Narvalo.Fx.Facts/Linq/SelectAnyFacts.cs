@@ -9,7 +9,7 @@ namespace Narvalo.Linq {
 
     public static class SelectAnyFacts {
         internal sealed class tAttribute : TestCaseAttribute {
-            public tAttribute(string message) : base(nameof(Qperators), message) { }
+            public tAttribute(string description) : base(nameof(Qperators), description) { }
         }
 
         [t("")]

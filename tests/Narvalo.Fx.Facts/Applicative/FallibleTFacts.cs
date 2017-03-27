@@ -2,6 +2,8 @@
 
 namespace Narvalo.Applicative {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Runtime.ExceptionServices;
 
     using Xunit;
@@ -11,20 +13,14 @@ namespace Narvalo.Applicative {
     // Tests for Fallible<T>.
     public static partial class FallibleTFacts {
         internal sealed class tAttribute : TestCaseAttribute {
-            public tAttribute(string message) : base(nameof(Fallible), message) { }
+            public tAttribute(string description) : base(nameof(Fallible), description) { }
         }
-
-        #region Unit
 
         [t("Unit is OK.")]
         public static void Unit1() {
             Assert.True(Fallible.Unit.IsSuccess);
             Assert.False(Fallible.Unit.IsError);
         }
-
-        #endregion
-
-        #region Of()
 
         [t("Of() returns OK.")]
         public static void Of1() {
@@ -33,24 +29,16 @@ namespace Narvalo.Applicative {
             Assert.True(result.IsSuccess);
         }
 
-        #endregion
-
-        #region FromError()
-
         [t("FromError() guards.")]
         public static void FromError0()
             => Assert.Throws<ArgumentNullException>("error", () => Fallible<int>.FromError(null));
 
         [t("FromError() returns NOK.")]
         public static void FromError1ReturnsError() {
-            var result = Fallible<int>.FromError(Edi);
+            var result = Fallible<int>.FromError(Error);
 
             Assert.True(result.IsError);
         }
-
-        #endregion
-
-        #region ThrowIfError()
 
         [t("")]
         public static void ThrowIfError_DoesNotThrow_IfSuccess() {
@@ -61,19 +49,15 @@ namespace Narvalo.Applicative {
 
         [t("")]
         public static void ThrowIfError_Throws_IfError() {
-            var err = Fallible<Obj>.FromError(Edi);
+            var err = Fallible<Obj>.FromError(Error);
 
             Action act = () => err.ThrowIfError();
             var ex = Record.Exception(act);
 
             Assert.NotNull(ex);
             Assert.IsType<SimpleException>(ex);
-            Assert.Equal(s_EdiMessage, ex.Message);
+            Assert.Equal(ErrorMessage, ex.Message);
         }
-
-        #endregion
-
-        #region ValueOrDefault()
 
         [t("")]
         public static void ValueOrDefault_ReturnsValue_IfSuccess() {
@@ -85,14 +69,10 @@ namespace Narvalo.Applicative {
 
         [t("")]
         public static void ValueOrDefault_ReturnsDefault_IfError() {
-            var err = Fallible<Obj>.FromError(Edi);
+            var err = Fallible<Obj>.FromError(Error);
 
             Assert.Same(default(Obj), err.ValueOrDefault());
         }
-
-        #endregion
-
-        #region ValueOrNone()
 
         [t("")]
         public static void ValueOrNone_ReturnsSome_IfSuccess() {
@@ -103,19 +83,18 @@ namespace Narvalo.Applicative {
 
         [t("")]
         public static void ValueOrNone_ReturnsNone_IfError() {
-            var err = Fallible<Obj>.FromError(Edi);
+            var err = Fallible<Obj>.FromError(Error);
 
             Assert.True(err.ValueOrNone().IsNone);
         }
 
-        #endregion
+        [t("ValueOrElse() guards.")]
+        public static void ValueOrElse0() {
+            var ok = Fallible.Of(new Obj());
+            Assert.Throws<ArgumentNullException>("valueFactory", () => ok.ValueOrElse((Func<Obj>)null));
 
-        #region ValueOrElse()
-
-        [t("")]
-        public static void ValueOrElse_Guards() {
-            Assert.Throws<ArgumentNullException>("valueFactory", () => MySuccess.ValueOrElse((Func<Obj>)null));
-            Assert.Throws<ArgumentNullException>("valueFactory", () => MyError.ValueOrElse((Func<Obj>)null));
+            var nok = Fallible<Obj>.FromError(Error);
+            Assert.Throws<ArgumentNullException>("valueFactory", () => nok.ValueOrElse((Func<Obj>)null));
         }
 
         [t("")]
@@ -130,16 +109,12 @@ namespace Narvalo.Applicative {
 
         [t("")]
         public static void ValueOrElse_ReturnsOther_IfError() {
-            var err = Fallible<Obj>.FromError(Edi);
+            var err = Fallible<Obj>.FromError(Error);
             var exp = new Obj();
 
             Assert.Same(exp, err.ValueOrElse(exp));
             Assert.Same(exp, err.ValueOrElse(() => exp));
         }
-
-        #endregion
-
-        #region ValueOrThrow()
 
         [t("")]
         public static void ValueOrThrow_ReturnsValue_IfSuccess() {
@@ -151,138 +126,222 @@ namespace Narvalo.Applicative {
 
         [t("")]
         public static void ValueOrThrow_Throws_IfError() {
-            var err = Fallible<Obj>.FromError(Edi);
+            var err = Fallible<Obj>.FromError(Error);
 
             Action act = () => err.ValueOrThrow();
             var ex = Record.Exception(act);
 
             Assert.NotNull(ex);
             Assert.IsType<SimpleException>(ex);
-            Assert.Equal(s_EdiMessage, ex.Message);
+            Assert.Equal(ErrorMessage, ex.Message);
         }
 
-        #endregion
+        [t("Equals() guards.")]
+        public static void Equals0() {
+            var ok = Fallible.Of(new Obj());
+            var nok = Fallible<Obj>.FromError(Error);
 
-        #region Bind()
+            Assert.Throws<ArgumentNullException>("comparer", () => ok.Equals(ok, null));
+            Assert.Throws<ArgumentNullException>("comparer", () => ok.Equals(nok, null));
 
-        [t("")]
-        public static void Bind_Guards() {
-            Assert.Throws<ArgumentNullException>("binder", () => MySuccess.Bind<string>(null));
-            Assert.Throws<ArgumentNullException>("binder", () => MyError.Bind<string>(null));
+            Assert.Throws<ArgumentNullException>("comparer", () => nok.Equals(nok, null));
+            Assert.Throws<ArgumentNullException>("comparer", () => nok.Equals(ok, null));
         }
 
-        [t("")]
-        public static void Bind_ReturnsError_IfError() {
-            // Arrange
-            var err = Fallible<Obj>.FromError(Edi);
-            Func<Obj, Fallible<string>> binder = _ => Fallible.Of(_.Value);
+        [t("GetHashCode() guards.")]
+        public static void GetHashCode0() {
+            var ok = Fallible.Of(new Obj());
+            Assert.Throws<ArgumentNullException>("comparer", () => ok.GetHashCode(null));
 
-            // Act
-            var me = err.Bind(binder);
-
-            // Assert
-            Assert.True(me.IsError);
-#if !NO_INTERNALS_VISIBLE_TO
-            Assert.Same(Edi, me.Error);
-#endif
+            var nok = Fallible<Obj>.FromError(Error);
+            Assert.Throws<ArgumentNullException>("comparer", () => nok.GetHashCode(null));
         }
 
-        [t("")]
-        public static void Bind_ReturnsSuccess_IfSuccess() {
-            // Arrange
-            var exp = new Obj("My Value");
-            var ok = Fallible.Of(exp);
-            Func<Obj, Fallible<string>> binder = _ => Fallible.Of(_.Value);
+        [t("GetHashCode() returns the same result when called repeatedly.")]
+        public static void GetHashCode1() {
+            var nok = Fallible<Obj>.FromError(Error);
+            Assert.Equal(nok.GetHashCode(), nok.GetHashCode());
+            Assert.Equal(nok.GetHashCode(EqualityComparer<Obj>.Default), nok.GetHashCode(EqualityComparer<Obj>.Default));
 
-            // Act
-            var me = ok.Bind(binder);
+            var ok1 = Fallible.Of(new Obj());
+            Assert.Equal(ok1.GetHashCode(), ok1.GetHashCode());
+            Assert.Equal(ok1.GetHashCode(EqualityComparer<Obj>.Default), ok1.GetHashCode(EqualityComparer<Obj>.Default));
 
-            // Assert
-            Assert.True(me.IsSuccess);
+            var ok2 = Fallible.Of(1);
+            Assert.Equal(ok2.GetHashCode(), ok2.GetHashCode());
+            Assert.Equal(ok2.GetHashCode(EqualityComparer<int>.Default), ok2.GetHashCode(EqualityComparer<int>.Default));
         }
 
-        #endregion
+        [t("GetHashCode() returns the same result for equal instances.")]
+        public static void GetHashCode2() {
+            var nok1 = Fallible<Obj>.FromError(Error);
+            var nok2 = Fallible<Obj>.FromError(Error);
 
-        #region Flatten()
+            Assert.NotSame(nok1, nok2);
+            Assert.Equal(nok1, nok2);
+            Assert.Equal(nok1.GetHashCode(), nok2.GetHashCode());
+            Assert.Equal(nok1.GetHashCode(EqualityComparer<Obj>.Default), nok2.GetHashCode(EqualityComparer<Obj>.Default));
 
-        [t("")]
-        public static void Flatten_ReturnsError_IfError() {
-            var err = Fallible<Fallible<Obj>>.FromError(Edi);
+            var ok1 = Fallible.Of(Tuple.Create("1"));
+            var ok2 = Fallible.Of(Tuple.Create("1"));
 
-            Assert.True(err.IsError);
+            Assert.NotSame(ok1, ok2);
+            Assert.Equal(ok1, ok2);
+            Assert.Equal(ok1.GetHashCode(), ok2.GetHashCode());
+            Assert.Equal(ok1.GetHashCode(EqualityComparer<Tuple<string>>.Default), ok2.GetHashCode(EqualityComparer<Tuple<string>>.Default));
         }
 
-        [t("")]
-        public static void Flatten_ReturnsSuccess_IfSuccess() {
-            var ok = Fallible.Of(Fallible.Of(new Obj()));
+        [t("ToString() result contains a string representation of the value if OK, of the error if NOK.")]
+        public static void ToString1() {
+            var value = new Obj("My value");
+            var ok = Fallible.Of(value);
+            Assert.Contains(value.ToString(), ok.ToString(), StringComparison.OrdinalIgnoreCase);
 
-            Assert.True(ok.IsSuccess);
+            var nok = Fallible<Obj>.FromError(Error);
+            Assert.Contains(Error.ToString(), nok.ToString(), StringComparison.OrdinalIgnoreCase);
         }
-
-        #endregion
-
-        #region Contains()
-
-        [t("")]
-        public static void Contains_Guards() {
-            var value = new Obj();
-
-            Assert.Throws<ArgumentNullException>("comparer", () => MySuccess.Contains(value, null));
-            Assert.Throws<ArgumentNullException>("comparer", () => MyError.Contains(value, null));
-        }
-
-        #endregion
-
-        #region Match()
-
-        [t("")]
-        public static void Match_Guards() {
-            Assert.Throws<ArgumentNullException>("caseSuccess", () => MySuccess.Match(null, _ => new Obj()));
-            Assert.Throws<ArgumentNullException>("caseError", () => MySuccess.Match(val => val, null));
-
-            Assert.Throws<ArgumentNullException>("caseSuccess", () => MyError.Match(null, _ => new Obj()));
-            Assert.Throws<ArgumentNullException>("caseError", () => MyError.Match(val => val, null));
-        }
-
-        #endregion
-
-        #region Equals()
-
-        [t("")]
-        public static void Equals_Guards() {
-            Assert.Throws<ArgumentNullException>("comparer", () => MySuccess.Equals(MySuccess, null));
-            Assert.Throws<ArgumentNullException>("comparer", () => MySuccess.Equals(MyError, null));
-
-            Assert.Throws<ArgumentNullException>("comparer", () => MyError.Equals(MyError, null));
-            Assert.Throws<ArgumentNullException>("comparer", () => MyError.Equals(MySuccess, null));
-        }
-
-        #endregion
-
-        #region GetHashCode()
-
-        [t("")]
-        public static void GetHashCode_Guards() {
-            Assert.Throws<ArgumentNullException>("comparer", () => MySuccess.GetHashCode(null));
-            Assert.Throws<ArgumentNullException>("comparer", () => MyError.GetHashCode(null));
-        }
-
-        #endregion
     }
 
     public static partial class FallibleTFacts {
-        private static readonly Lazy<ExceptionDispatchInfo> s_Edi
+        [t("ToEnumerable() result is empty if NOK.")]
+        public static void ToEnumerable1() {
+            var nok = Fallible<Obj>.FromError(Error);
+            var seq = nok.ToEnumerable();
+
+            Assert.Empty(seq);
+        }
+
+        [t("ToEnumerable() result is a sequence made of exactly one element if OK.")]
+        public static void ToEnumerable2() {
+            var obj = new Obj();
+            var ok = Fallible.Of(obj);
+            var seq = ok.ToEnumerable();
+
+            Assert.Equal(Enumerable.Repeat(obj, 1), seq);
+        }
+
+        [t("GetEnumerator() does not iterate if NOK.")]
+        public static void GetEnumerator1() {
+            var nok = Fallible<Obj>.FromError(Error);
+            var count = 0;
+
+            foreach (var x in nok) { count++; }
+
+            Assert.Equal(0, count);
+        }
+
+        [t("GetEnumerator() iterates only once if OK.")]
+        public static void GetEnumerator2() {
+            var exp = new Obj();
+            var ok = Fallible.Of(exp);
+            var count = 0;
+
+            foreach (var x in ok) { count++; Assert.Same(exp, x); }
+
+            Assert.Equal(1, count);
+        }
+
+        [t("Contains() guards.")]
+        public static void Contains0() {
+            var value = new Obj();
+
+            var ok = Fallible.Of(new Obj());
+            Assert.Throws<ArgumentNullException>("comparer", () => ok.Contains(value, null));
+
+            var nok = Fallible<Obj>.FromError(Error);
+            Assert.Throws<ArgumentNullException>("comparer", () => nok.Contains(value, null));
+        }
+
+        [t("Match() guards.")]
+        public static void Match0() {
+            var ok = Fallible.Of(new Obj());
+            Assert.Throws<ArgumentNullException>("caseSuccess", () => ok.Match(null, _ => new Obj()));
+            Assert.Throws<ArgumentNullException>("caseError", () => ok.Match(val => val, null));
+
+            var nok = Fallible<Obj>.FromError(Error);
+            Assert.Throws<ArgumentNullException>("caseSuccess", () => nok.Match(null, _ => new Obj()));
+            Assert.Throws<ArgumentNullException>("caseError", () => nok.Match(val => val, null));
+        }
+    }
+
+    // Tests for the monadic methods.
+    public static partial class FallibleTFacts {
+        [t("Bind() guards.")]
+        public static void Bind0() {
+            var ok = Fallible.Of(new Obj());
+            Assert.Throws<ArgumentNullException>("binder", () => ok.Bind<string>(null));
+
+            var nok = Fallible<Obj>.FromError(Error);
+            Assert.Throws<ArgumentNullException>("binder", () => nok.Bind<string>(null));
+        }
+
+        [t("Bind() returns NOK if NOK.")]
+        public static void Bind1() {
+            var nok = Fallible<Obj>.FromError(Error);
+            Func<Obj, Fallible<string>> binder = x => Fallible.Of(x.Value);
+
+            var result = nok.Bind(binder);
+
+            Assert.True(result.IsError);
+        }
+
+        [t("Bind() returns OK if OK.")]
+        public static void Bind2() {
+            var exp = new Obj("My Value");
+            var ok = Fallible.Of(exp);
+            Func<Obj, Fallible<string>> binder = x => Fallible.Of(x.Value);
+
+            var result = ok.Bind(binder);
+
+            Assert.True(result.IsSuccess);
+        }
+
+        [t("Flatten() returns NOK if NOK.")]
+        public static void Flatten1() {
+            var nok = Fallible<Fallible<Obj>>.FromError(Error);
+
+            var result = nok.Flatten();
+
+            Assert.True(nok.IsError);
+        }
+
+        [t("Flatten() returns OK if OK.")]
+        public static void Flatten2() {
+            var ok = Fallible.Of(Fallible.Of(new Obj()));
+
+            var result = ok.Flatten();
+
+            Assert.True(ok.IsSuccess);
+        }
+    }
+
+#if !NO_INTERNALS_VISIBLE_TO
+
+    public static partial class FallibleTFacts {
+        [t("Bind() transports error if NOK.")]
+        public static void Bind3() {
+            var err = Fallible<Obj>.FromError(Error);
+            Func<Obj, Fallible<string>> binder = x => Fallible.Of(x.Value);
+
+            var result = err.Bind(binder);
+
+            Assert.Same(Error, result.Error);
+        }
+    }
+
+#endif
+
+    public static partial class FallibleTFacts {
+        private static readonly Lazy<ExceptionDispatchInfo> s_Error
             = new Lazy<ExceptionDispatchInfo>(CreateExceptionDispatchInfo);
 
-        private static ExceptionDispatchInfo Edi => s_Edi.Value;
-        private static Fallible<Obj> MySuccess => Fallible.Of(new Obj());
-        private static Fallible<Obj> MyError => Fallible<Obj>.FromError(Edi);
+        private static ExceptionDispatchInfo Error => s_Error.Value;
 
-        private static readonly string s_EdiMessage = "My message";
+        private static string ErrorMessage => "My error";
 
         private static ExceptionDispatchInfo CreateExceptionDispatchInfo() {
             try {
-                throw new SimpleException(s_EdiMessage);
+                throw new SimpleException(ErrorMessage);
             } catch (Exception ex) {
                 return ExceptionDispatchInfo.Capture(ex);
             }

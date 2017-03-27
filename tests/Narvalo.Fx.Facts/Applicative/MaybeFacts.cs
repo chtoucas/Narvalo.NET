@@ -472,18 +472,19 @@ namespace Narvalo.Applicative {
             var m2 = Maybe.Of(Tuple.Create("1"));
 
             Assert.NotSame(m1, m2);
+            Assert.Equal(m1, m2);
             Assert.Equal(m1.GetHashCode(), m2.GetHashCode());
             Assert.Equal(m1.GetHashCode(EqualityComparer<Tuple<string>>.Default), m2.GetHashCode(EqualityComparer<Tuple<string>>.Default));
         }
 
         [t("ToString() result contains a string representation of the value if some, contains 'None' if none.")]
         public static void ToString1() {
-            var exp = "My Value";
             var none = Maybe<Obj>.None;
-            var some = Maybe.Of(exp);
+            Assert.Contains("None", none.ToString(), StringComparison.OrdinalIgnoreCase);
 
-            Assert.Contains("None", none.ToString());
-            Assert.Contains(exp, some.ToString());
+            var value = new Obj("My Value");
+            var some = Maybe.Of(value);
+            Assert.Contains(value.ToString(), some.ToString(), StringComparison.OrdinalIgnoreCase);
         }
     }
 
@@ -506,7 +507,7 @@ namespace Narvalo.Applicative {
             Assert.Equal(Enumerable.Repeat(obj, 1), seq);
         }
 
-        [t("GetEnumerator() does not iterate.")]
+        [t("GetEnumerator() does not iterate if none.")]
         public static void GetEnumerator1() {
             var none = Maybe<Obj>.None;
             var count = 0;
@@ -516,7 +517,7 @@ namespace Narvalo.Applicative {
             Assert.Equal(0, count);
         }
 
-        [t("GetEnumerator() iterates only once.")]
+        [t("GetEnumerator() iterates only once if some.")]
         public static void GetEnumerator2() {
             var exp = new Obj();
             var some = Maybe.Of(exp);

@@ -6,6 +6,8 @@ namespace Narvalo.Applicative {
 
     using Xunit;
 
+    using static global::My;
+
     // Tests for Fallible.
     public static partial class FallibleFacts {
         [t("Ok is OK.")]
@@ -20,16 +22,49 @@ namespace Narvalo.Applicative {
 
         [t("FromError() returns NOK.")]
         public static void FromError1() {
-            var result = Fallible.FromError(Error);
+            var nok = Fallible.FromError(Error);
 
-            Assert.True(result.IsError);
-            Assert.False(result.IsSuccess);
+            Assert.True(nok.IsError);
+            Assert.False(nok.IsSuccess);
         }
 
+        [t("GetHashCode() returns the same result when called repeatedly.")]
+        public static void GetHashCode1() {
+            var nok = Fallible.FromError(Error);
+            Assert.Equal(nok.GetHashCode(), nok.GetHashCode());
+
+            var ok = Fallible.Ok;
+            Assert.Equal(ok.GetHashCode(), ok.GetHashCode());
+        }
+
+        [t("GetHashCode() returns the same result for equal instances.")]
+        public static void GetHashCode2() {
+            var nok1 = Fallible.FromError(Error);
+            var nok2 = Fallible.FromError(Error);
+
+            Assert.NotSame(nok1, nok2);
+            Assert.Equal(nok1, nok2);
+            Assert.Equal(nok1.GetHashCode(), nok2.GetHashCode());
+        }
+
+        [t("ToString() result contains a string representation of the value if OK, of the error if NOK.")]
+        public static void ToString1() {
+            var ok = Fallible.Ok;
+            Assert.Equal("Success", ok.ToString());
+
+            var nok = Fallible.FromError(Error);
+            Assert.Contains(Error.ToString(), nok.ToString(), StringComparison.OrdinalIgnoreCase);
+        }
+    }
+
+    public static partial class FallibleFacts {
         [t("Bind() guards.")]
         public static void Bind0() {
-            Assert.Throws<ArgumentNullException>("binder", () => Fallible.Ok.Bind<string>(null));
-            Assert.Throws<ArgumentNullException>("binder", () => Fallible.FromError(Error).Bind<string>(null));
+            var ok = Fallible.Ok;
+            Assert.Throws<ArgumentNullException>("binder", () => ok.Bind<string>(null));
+
+            var nok = Fallible.FromError(Error);
+            Assert.Throws<ArgumentNullException>("binder", () => nok.Bind<string>(null));
         }
     }
 
@@ -39,9 +74,11 @@ namespace Narvalo.Applicative {
 
         internal static ExceptionDispatchInfo Error => s_Error.Value;
 
+        private static string ErrorMessage => "My error";
+
         private static ExceptionDispatchInfo CreateExceptionDispatchInfo() {
             try {
-                throw new Exception("My message");
+                throw new SimpleException(ErrorMessage);
             } catch (Exception ex) {
                 return ExceptionDispatchInfo.Capture(ex);
             }

@@ -2,6 +2,8 @@
 
 namespace Narvalo.Applicative {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     using Xunit;
 
@@ -10,10 +12,8 @@ namespace Narvalo.Applicative {
     // Tests for Outcome<T>.
     public static partial class OutcomeTFacts {
         internal sealed class tAttribute : TestCaseAttribute {
-            public tAttribute(string message) : base(nameof(Outcome), message) { }
+            public tAttribute(string description) : base(nameof(Outcome), description) { }
         }
-
-        #region Unit
 
         [t("Unit is OK.")]
         public static void Unit1() {
@@ -21,21 +21,13 @@ namespace Narvalo.Applicative {
             Assert.False(Outcome.Unit.IsError);
         }
 
-        #endregion
-
-        #region Of()
-
         [t("Of() returns OK.")]
         public static void Of1() {
-            var result = Outcome.Of(1);
+            var ok = Outcome.Of(1);
 
-            Assert.True(result.IsSuccess);
-            Assert.False(result.IsError);
+            Assert.True(ok.IsSuccess);
+            Assert.False(ok.IsError);
         }
-
-        #endregion
-
-        #region FromError()
 
         [t("FromError() guards.")]
         public static void FromError0() {
@@ -45,67 +37,57 @@ namespace Narvalo.Applicative {
 
         [t("FromError() returns NOK.")]
         public static void FromError1() {
-            var result = Outcome<int>.FromError("error");
+            var nok = Outcome<int>.FromError("error");
 
-            Assert.True(result.IsError);
-            Assert.False(result.IsSuccess);
+            Assert.True(nok.IsError);
+            Assert.False(nok.IsSuccess);
         }
 
-        #endregion
-
-        #region ValueOrDefault()
-
-        [t("")]
-        public static void ValueOrDefault_ReturnsValue_IfSuccess() {
+        [t("ValueOrDefault() returns Value if OK.")]
+        public static void ValueOrDefault1() {
             var exp = new Obj();
             var ok = Outcome.Of(exp);
 
             Assert.Same(exp, ok.ValueOrDefault());
         }
 
-        [t("")]
-        public static void ValueOrDefault_ReturnsDefault_IfError() {
-            var err = Outcome<Obj>.FromError("error");
+        [t("ValueOrDefault() returns default(T) if NOK.")]
+        public static void ValueOrDefault2() {
+            var nok = Outcome<Obj>.FromError("error");
 
-            Assert.Same(default(Obj), err.ValueOrDefault());
+            Assert.Same(default(Obj), nok.ValueOrDefault());
         }
 
-        #endregion
-
-        #region ValueOrNone()
-
-        [t("")]
-        public static void ValueOrNone_ReturnsSome_IfSuccess() {
+        [t("ValueOrNone() returns some if OK.")]
+        public static void ValueOrNone1() {
             var exp = new Obj();
             var ok = Outcome.Of(exp);
 
             var maybe = ok.ValueOrNone();
 
             Assert.True(maybe.IsSome);
-#if !NO_INTERNALS_VISIBLE_TO
-            Assert.Same(exp, maybe.Value);
-#endif
         }
 
-        [t("")]
-        public static void ValueOrNone_ReturnsNone_IfError() {
-            var err = Outcome<Obj>.FromError("error");
+        [t("ValueOrNone() returns none if NOK.")]
+        public static void ValueOrNone() {
+            var nok = Outcome<Obj>.FromError("error");
 
-            Assert.True(err.ValueOrNone().IsNone);
+            var maybe = nok.ValueOrNone();
+
+            Assert.True(maybe.IsNone);
         }
 
-        #endregion
+        [t("ValueOrElse() guards.")]
+        public static void ValueOrElse0() {
+            var ok = Outcome.Of(new Obj());
+            Assert.Throws<ArgumentNullException>("valueFactory", () => ok.ValueOrElse((Func<Obj>)null));
 
-        #region ValueOrElse()
-
-        [t("")]
-        public static void ValueOrElse_Guards() {
-            Assert.Throws<ArgumentNullException>("valueFactory", () => MySuccess.ValueOrElse((Func<Obj>)null));
-            Assert.Throws<ArgumentNullException>("valueFactory", () => MyError.ValueOrElse((Func<Obj>)null));
+            var nok = Outcome<Obj>.FromError("error");
+            Assert.Throws<ArgumentNullException>("valueFactory", () => nok.ValueOrElse((Func<Obj>)null));
         }
 
-        [t("")]
-        public static void ValueOrElse_ReturnsValue_IfSuccess() {
+        [t("ValueOrElse() returns Value if OK.")]
+        public static void ValueOrElse1() {
             var exp = new Obj();
             var ok = Outcome.Of(exp);
             var other = new Obj("other");
@@ -114,27 +96,26 @@ namespace Narvalo.Applicative {
             Assert.Same(exp, ok.ValueOrElse(() => other));
         }
 
-        [t("")]
-        public static void ValueOrElse_ReturnsOther_IfError() {
-            var err = Outcome<Obj>.FromError("error");
+        [t("ValueOrElse(other) returns 'other' if NOK.")]
+        public static void ValueOrElse2() {
+            var nok = Outcome<Obj>.FromError("error");
             var exp = new Obj();
 
-            Assert.Same(exp, err.ValueOrElse(exp));
-            Assert.Same(exp, err.ValueOrElse(() => exp));
+            Assert.Same(exp, nok.ValueOrElse(exp));
+            Assert.Same(exp, nok.ValueOrElse(() => exp));
         }
 
-        #endregion
+        [t("ValueOrThrow() guards.")]
+        public static void ValueOrThrow0() {
+            var ok = Outcome.Of(new Obj());
+            Assert.Throws<ArgumentNullException>("exceptionFactory", () => ok.ValueOrThrow(null));
 
-        #region ValueOrThrow()
-
-        [t("")]
-        public static void ValueOrThrow_Guards() {
-            Assert.Throws<ArgumentNullException>("exceptionFactory", () => MySuccess.ValueOrThrow(null));
-            Assert.Throws<ArgumentNullException>("exceptionFactory", () => MyError.ValueOrThrow(null));
+            var nok = Outcome<Obj>.FromError("error");
+            Assert.Throws<ArgumentNullException>("exceptionFactory", () => nok.ValueOrThrow(null));
         }
 
-        [t("")]
-        public static void ValueOrThrow_ReturnsValue_IfSuccess() {
+        [t("ValueOrThrow() returns Value if OK.")]
+        public static void ValueOrThrow1() {
             var exp = new Obj();
             var ok = Outcome.Of(exp);
 
@@ -142,23 +123,21 @@ namespace Narvalo.Applicative {
             Assert.Equal(exp, ok.ValueOrThrow(error => new SimpleException(error)));
         }
 
-        [t("")]
-        public static void ValueOrThrow_Throws_IfError() {
-            var err = Outcome<Obj>.FromError("error");
+        [t("ValueOrThrow() throws InvalidOperationException if NOK.")]
+        public static void ValueOrThrow2() {
+            var nok = Outcome<Obj>.FromError("error");
 
-            Action act = () => err.ValueOrThrow();
-            var ex = Record.Exception(act);
+            Action act = () => nok.ValueOrThrow();
 
-            Assert.NotNull(ex);
-            Assert.IsType<InvalidOperationException>(ex);
+            Assert.Throws<InvalidOperationException>(act);
         }
 
-        [t("")]
-        public static void ValueOrThrow_ThrowsCustomException_IfError() {
+        [t("ValueOrThrow() throws custom exception if NOK.")]
+        public static void ValueOrThrow3() {
             var message = "error";
-            var err = Outcome<Obj>.FromError(message);
+            var nok = Outcome<Obj>.FromError(message);
 
-            Action act = () => err.ValueOrThrow(error => new SimpleException(error));
+            Action act = () => nok.ValueOrThrow(err => new SimpleException(err));
             var ex = Record.Exception(act);
 
             Assert.NotNull(ex);
@@ -166,173 +145,260 @@ namespace Narvalo.Applicative {
             Assert.Equal(message, ex.Message);
         }
 
-        #endregion
-
-        #region ToValue()
-
-        [t("")]
-        public static void ToValue_Throws_IfError() {
+        [t("ToValue() throws InvalidCastException if NOK.")]
+        public static void ToValue1() {
             var message = "error";
             var err = Outcome<Obj>.FromError(message);
 
             Action act = () => err.ToValue();
-            var ex = Record.Exception(act);
 
-            Assert.NotNull(ex);
-            Assert.IsType<InvalidCastException>(ex);
+            Assert.Throws<InvalidCastException>(act);
         }
 
-        [t("")]
-        public static void ToValue_ReturnsValue_IfSuccess() {
+        [t("ToValue() returns Value if OK.")]
+        public static void ToValue2() {
             var exp = new Obj();
             var ok = Outcome.Of(exp);
 
             Assert.Same(exp, ok.ToValue());
         }
 
-        #endregion
-
-        #region ToMaybe()
-
-        [t("")]
-        public static void ToMaybe_ReturnsSome_IfSuccess() {
+        [t("ToMaybe() returns some if OK.")]
+        public static void ToMaybe1() {
             var exp = new Obj();
             var ok = Outcome.Of(exp);
 
             var maybe = ok.ToMaybe();
 
             Assert.True(maybe.IsSome);
-#if !NO_INTERNALS_VISIBLE_TO
-            Assert.Same(exp, maybe.Value);
-#endif
         }
 
-        [t("")]
-        public static void ToMaybe_ReturnsNone_IfError() {
-            var err = Outcome<Obj>.FromError("error");
+        [t("ToMaybe() returns none if OK.")]
+        public static void ToMaybe2() {
+            var nok = Outcome<Obj>.FromError("error");
 
-            Assert.True(err.ToMaybe().IsNone);
+            var maybe = nok.ToMaybe();
+
+            Assert.True(maybe.IsNone);
         }
 
-        #endregion
+        [t("Equals() guards.")]
+        public static void Equals0() {
+            var ok = Outcome.Of(new Obj());
+            var nok = Outcome<Obj>.FromError("error");
 
-        #region Equals()
+            Assert.Throws<ArgumentNullException>("comparer", () => ok.Equals(ok, null));
+            Assert.Throws<ArgumentNullException>("comparer", () => ok.Equals(nok, null));
 
-        [t("")]
-        public static void Equals_Guards() {
-            Assert.Throws<ArgumentNullException>("comparer", () => MySuccess.Equals(MySuccess, null));
-            Assert.Throws<ArgumentNullException>("comparer", () => MySuccess.Equals(MyError, null));
-
-            Assert.Throws<ArgumentNullException>("comparer", () => MyError.Equals(MyError, null));
-            Assert.Throws<ArgumentNullException>("comparer", () => MyError.Equals(MySuccess, null));
+            Assert.Throws<ArgumentNullException>("comparer", () => nok.Equals(ok, null));
+            Assert.Throws<ArgumentNullException>("comparer", () => nok.Equals(nok, null));
         }
 
-        #endregion
+        [t("GetHashCode() guards.")]
+        public static void GetHashCode0() {
+            var ok = Outcome.Of(new Obj());
+            Assert.Throws<ArgumentNullException>("comparer", () => ok.GetHashCode(null));
 
-        #region GetHashCode()
-
-        [t("")]
-        public static void GetHashCode_Guards() {
-            Assert.Throws<ArgumentNullException>("comparer", () => MySuccess.GetHashCode(null));
-            Assert.Throws<ArgumentNullException>("comparer", () => MyError.GetHashCode(null));
+            var nok = Outcome<Obj>.FromError("error");
+            Assert.Throws<ArgumentNullException>("comparer", () => nok.GetHashCode(null));
         }
 
-        #endregion
+        [t("GetHashCode() returns the same result when called repeatedly.")]
+        public static void GetHashCode1() {
+            var nok = Outcome<Obj>.FromError("error");
+            Assert.Equal(nok.GetHashCode(), nok.GetHashCode());
+            Assert.Equal(nok.GetHashCode(EqualityComparer<Obj>.Default), nok.GetHashCode(EqualityComparer<Obj>.Default));
+
+            var ok1 = Outcome.Of(new Obj());
+            Assert.Equal(ok1.GetHashCode(), ok1.GetHashCode());
+            Assert.Equal(ok1.GetHashCode(EqualityComparer<Obj>.Default), ok1.GetHashCode(EqualityComparer<Obj>.Default));
+
+            var ok2 = Outcome.Of(1);
+            Assert.Equal(ok2.GetHashCode(), ok2.GetHashCode());
+            Assert.Equal(ok2.GetHashCode(EqualityComparer<int>.Default), ok2.GetHashCode(EqualityComparer<int>.Default));
+        }
+
+        [t("GetHashCode() returns the same result for equal instances.")]
+        public static void GetHashCode2() {
+            var nok1 = Outcome<Obj>.FromError("error");
+            var nok2 = Outcome<Obj>.FromError("error");
+
+            Assert.NotSame(nok1, nok2);
+            Assert.Equal(nok1, nok2);
+            Assert.Equal(nok1.GetHashCode(), nok2.GetHashCode());
+            Assert.Equal(nok1.GetHashCode(EqualityComparer<Obj>.Default), nok2.GetHashCode(EqualityComparer<Obj>.Default));
+
+            var ok1 = Outcome.Of(Tuple.Create("1"));
+            var ok2 = Outcome.Of(Tuple.Create("1"));
+
+            Assert.NotSame(ok1, ok2);
+            Assert.Equal(ok1, ok2);
+            Assert.Equal(ok1.GetHashCode(), ok2.GetHashCode());
+            Assert.Equal(ok1.GetHashCode(EqualityComparer<Tuple<string>>.Default), ok2.GetHashCode(EqualityComparer<Tuple<string>>.Default));
+        }
+
+        [t("ToString() result contains a string representation of the value if OK, of the error if NOK.")]
+        public static void ToString1() {
+            var value = new Obj("My value");
+            var ok = Outcome.Of(value);
+            Assert.Contains(value.ToString(), ok.ToString(), StringComparison.OrdinalIgnoreCase);
+
+            var error = "My error";
+            var nok = Outcome<Obj>.FromError(error);
+            Assert.Contains(error, nok.ToString(), StringComparison.OrdinalIgnoreCase);
+        }
     }
 
     public static partial class OutcomeTFacts {
-        #region Contains()
+        [t("ToEnumerable() result is empty if NOK.")]
+        public static void ToEnumerable1() {
+            var nok = Outcome<Obj>.FromError("error");
+            var seq = nok.ToEnumerable();
 
-        [t("")]
-        public static void Contains_Guards() {
+            Assert.Empty(seq);
+        }
+
+        [t("ToEnumerable() result is a sequence made of exactly one element if OK.")]
+        public static void ToEnumerable2() {
+            var obj = new Obj();
+            var ok = Outcome.Of(obj);
+            var seq = ok.ToEnumerable();
+
+            Assert.Equal(Enumerable.Repeat(obj, 1), seq);
+        }
+
+        [t("GetEnumerator() does not iterate if NOK.")]
+        public static void GetEnumerator1() {
+            var nok = Outcome<Obj>.FromError("error");
+            var count = 0;
+
+            foreach (var x in nok) { count++; }
+
+            Assert.Equal(0, count);
+        }
+
+        [t("GetEnumerator() iterates only once if OK.")]
+        public static void GetEnumerator2() {
+            var exp = new Obj();
+            var ok = Outcome.Of(exp);
+            var count = 0;
+
+            foreach (var x in ok) { count++; Assert.Same(exp, x); }
+
+            Assert.Equal(1, count);
+        }
+
+        [t("Contains() guards.")]
+        public static void Contains0() {
             var value = new Obj();
 
-            Assert.Throws<ArgumentNullException>("comparer", () => MySuccess.Contains(value, null));
-            Assert.Throws<ArgumentNullException>("comparer", () => MyError.Contains(value, null));
+            var ok = Outcome.Of(new Obj());
+            Assert.Throws<ArgumentNullException>("comparer", () => ok.Contains(value, null));
+
+            var nok = Outcome<Obj>.FromError("error");
+            Assert.Throws<ArgumentNullException>("comparer", () => nok.Contains(value, null));
         }
 
-        #endregion
+        [t("Match() guards.")]
+        public static void Match0() {
+            var ok = Outcome.Of(new Obj());
+            Assert.Throws<ArgumentNullException>("caseSuccess", () => ok.Match(null, _ => new Obj()));
+            Assert.Throws<ArgumentNullException>("caseError", () => ok.Match(val => val, null));
 
-        #region Match()
-
-        [t("")]
-        public static void Match_Guards() {
-            Assert.Throws<ArgumentNullException>("caseSuccess", () => MySuccess.Match(null, _ => new Obj()));
-            Assert.Throws<ArgumentNullException>("caseError", () => MySuccess.Match(val => val, null));
-
-            Assert.Throws<ArgumentNullException>("caseSuccess", () => MyError.Match(null, _ => new Obj()));
-            Assert.Throws<ArgumentNullException>("caseError", () => MyError.Match(val => val, null));
+            var nok = Outcome<Obj>.FromError("error");
+            Assert.Throws<ArgumentNullException>("caseSuccess", () => nok.Match(null, _ => new Obj()));
+            Assert.Throws<ArgumentNullException>("caseError", () => nok.Match(val => val, null));
         }
-
-        #endregion
     }
 
     // Tests for the monadic methods.
     public static partial class OutcomeTFacts {
 
-        #region Bind()
+        [t("Bind() guards.")]
+        public static void Bind0() {
+            var ok = Outcome.Of(new Obj());
+            Assert.Throws<ArgumentNullException>("binder", () => ok.Bind<string>(null));
 
-        [t("")]
-        public static void Bind_Guards() {
-            Assert.Throws<ArgumentNullException>("binder", () => MySuccess.Bind<string>(null));
-            Assert.Throws<ArgumentNullException>("binder", () => MyError.Bind<string>(null));
+            var nok = Outcome<Obj>.FromError("error");
+            Assert.Throws<ArgumentNullException>("binder", () => nok.Bind<string>(null));
         }
 
-        [t("")]
-        public static void Bind_ReturnsError_IfError() {
-            // Arrange
+        [t("Bind() returns NOK if NOK.")]
+        public static void Bind1() {
             var exp = "error";
-            var err = Outcome<Obj>.FromError(exp);
-            Func<Obj, Outcome<string>> binder = _ => Outcome.Of(_.Value);
+            var nok = Outcome<Obj>.FromError(exp);
+            Func<Obj, Outcome<string>> binder = x => Outcome.Of(x.Value);
 
-            // Act
-            var me = err.Bind(binder);
+            var result = nok.Bind(binder);
 
-            // Assert
-            Assert.True(me.IsError);
-#if !NO_INTERNALS_VISIBLE_TO
-            Assert.Equal(exp, me.Error);
-#endif
+            Assert.True(result.IsError);
         }
 
-        [t("")]
-        public static void Bind_ReturnsSuccess_IfSuccess() {
-            // Arrange
+        [t("Bind() returns OK if OK.")]
+        public static void Bind2() {
             var exp = new Obj("My Value");
             var ok = Outcome.Of(exp);
-            Func<Obj, Outcome<string>> binder = _ => Outcome.Of(_.Value);
+            Func<Obj, Outcome<string>> binder = x => Outcome.Of(x.Value);
 
-            // Act
-            var me = ok.Bind(binder);
+            var result = ok.Bind(binder);
 
-            // Assert
-            Assert.True(me.IsSuccess);
+            Assert.True(result.IsSuccess);
         }
 
-        #endregion
+        [t("Flatten() returns NOK if NOK.")]
+        public static void Flatten1() {
+            var nok = Outcome<Outcome<Obj>>.FromError("error");
 
-        #region Flatten()
+            var result = nok.Flatten();
 
-        [t("")]
-        public static void Flatten_ReturnsError_IfError() {
-            var err = Outcome<Outcome<Obj>>.FromError("error");
-
-            Assert.True(err.IsError);
+            Assert.True(result.IsError);
         }
 
-        [t("")]
-        public static void Flatten_ReturnsSuccess_IfSuccess() {
+        [t("Flatten() returns OK if OK.")]
+        public static void Flatten2() {
             var ok = Outcome.Of(Outcome.Of(new Obj()));
 
-            Assert.True(ok.IsSuccess);
+            var result = ok.Flatten();
+
+            Assert.True(result.IsSuccess);
         }
 
-        #endregion
-
     }
+
+#if !NO_INTERNALS_VISIBLE_TO
 
     public static partial class OutcomeTFacts {
-        private static Outcome<Obj> MySuccess => Outcome.Of(new Obj());
-        private static Outcome<Obj> MyError => Outcome<Obj>.FromError("error");
+        [t("ValueOrNone() returns some for underlying value if OK.")]
+        public static void ValueOrNone3() {
+            var exp = new Obj();
+            var ok = Outcome.Of(exp);
+
+            var maybe = ok.ValueOrNone();
+
+            Assert.Same(exp, maybe.Value);
+        }
+
+        [t("ToMaybe() returns some for underlying value if OK.")]
+        public static void ToMaybe3() {
+            var exp = new Obj();
+            var ok = Outcome.Of(exp);
+
+            var maybe = ok.ToMaybe();
+
+            Assert.Same(exp, maybe.Value);
+        }
+
+        [t("Bind() transports error if NOK.")]
+        public static void Bind3() {
+            var exp = "error";
+            var nok = Outcome<Obj>.FromError(exp);
+            Func<Obj, Outcome<string>> binder = x => Outcome.Of(x.Value);
+
+            var result = nok.Bind(binder);
+
+            Assert.Equal(exp, result.Error);
+        }
     }
+
+#endif
 }
