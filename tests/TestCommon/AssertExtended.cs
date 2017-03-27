@@ -9,6 +9,12 @@ namespace Narvalo {
     using Xunit;
 
     public partial class AssertExtended : Assert {
+        public static void DoesNotThrow(Action testCode) {
+            var ex = Record.Exception(testCode);
+
+            Assert.Null(ex);
+        }
+
         /// <summary>
         /// Check that the given function uses deferred execution.
         /// A "spiked" source is given to the function: the function

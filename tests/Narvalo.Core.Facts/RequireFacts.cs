@@ -6,6 +6,7 @@ namespace Narvalo {
     using Xunit;
 
     using static global::My;
+    using Assert = Narvalo.AssertExtended;
 
     public static partial class RequireFacts {
         internal sealed class tAttribute : TestCaseAttribute {
@@ -14,8 +15,12 @@ namespace Narvalo {
 
         [t("State(true) does not throw if the precondition is met.")]
         public static void State1() {
-            Require.State(true);
-            Require.State(true, "My message");
+            Action act = () => {
+                Require.State(true);
+                Require.State(true, "My message");
+            };
+
+            Assert.DoesNotThrow(act);
         }
 
         [t("State(false) throws InvalidOperationException.")]
@@ -36,8 +41,12 @@ namespace Narvalo {
 
         [t("True(true) does not throw if the precondition is met.")]
         public static void True1() {
-            Require.True(true, "paramName");
-            Require.True(true, "paramName", "My message");
+            Action act = () => {
+                Require.True(true, "paramName");
+                Require.True(true, "paramName", "My message");
+            };
+
+            Assert.DoesNotThrow(act);
         }
 
         [t("True(false) throws ArgumentException.")]
@@ -70,8 +79,12 @@ namespace Narvalo {
 
         [t("Range(true) does not throw if the precondition is met.")]
         public static void Range1() {
-            Require.Range(true, "paramName");
-            Require.Range(true, "paramName", "My message");
+            Action act = () => {
+                Require.Range(true, "paramName");
+                Require.Range(true, "paramName", "My message");
+            };
+
+            Assert.DoesNotThrow(act);
         }
 
         [t("Range(false) throws ArgumentOutOfRangeException.")]
@@ -103,7 +116,9 @@ namespace Narvalo {
         }
 
         [t("NotNull() does not throw if the precondition is met.")]
-        public static void NotNull1() => Require.NotNull(new Obj(), "paramName");
+        public static void NotNull1() {
+            Assert.DoesNotThrow(() => Require.NotNull(new Obj(), "paramName"));
+        }
 
         [t("NotNull(null) throws ArgumentNullException.")]
         public static void NotNull2() {
@@ -121,8 +136,12 @@ namespace Narvalo {
 
         [t("NotNullUnconstrained() does not throw if the precondition is met.")]
         public static void NotNullUnconstrained1() {
-            Require.NotNullUnconstrained(new Val(1), "paramName");
-            Require.NotNullUnconstrained(new Obj(), "paramName");
+            Action act = () => {
+                Require.NotNullUnconstrained(new Val(1), "paramName");
+                Require.NotNullUnconstrained(new Obj(), "paramName");
+            };
+
+            Assert.DoesNotThrow(act);
         }
 
         [t("NotNullUnconstrained(null) throws ArgumentNullException.")]
@@ -141,8 +160,12 @@ namespace Narvalo {
 
         [t("NotNullOrEmpty() does not throw if the precondition is met.")]
         public static void NotNullOrEmpty1() {
-            Require.NotNullOrEmpty("value", "paramName");
-            Require.NotNullOrEmpty(" ", "paramName");
+            Action act = () => {
+                Require.NotNullOrEmpty("value", "paramName");
+                Require.NotNullOrEmpty(" ", "paramName");
+            };
+
+            Assert.DoesNotThrow(act);
         }
 
         [t("NotNullOrEmpty(null) throws ArgumentNullException.")]
@@ -173,8 +196,12 @@ namespace Narvalo {
 
         [t("NotNullOrWhiteSpace() does not throw if the precondition is met.")]
         public static void NotNullOrWhiteSpace1() {
-            Require.NotNullOrWhiteSpace("value", "paramName");
-            Require.NotNullOrWhiteSpace("va lue", "paramName");
+            Action act = () => {
+                Require.NotNullOrWhiteSpace("value", "paramName");
+                Require.NotNullOrWhiteSpace("va lue", "paramName");
+            };
+
+            Assert.DoesNotThrow(act);
         }
 
         [t("NotNullOrWhiteSpace(null) throws ArgumentNullException.")]

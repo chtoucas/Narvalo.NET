@@ -5,6 +5,8 @@ namespace Narvalo {
 
     using Xunit;
 
+    using Assert = Narvalo.AssertExtended;
+
     public static class FormatFacts {
         internal sealed class tAttribute : TestCaseAttribute {
             public tAttribute(string description) : base(nameof(Format), description) { }
@@ -19,9 +21,13 @@ namespace Narvalo {
 
         [t("Current() accepts null args.")]
         public static void Current1() {
-            Format.Current("{0}", default(string));
-            Format.Current("{0} {1}", default(string), default(string));
-            Format.Current("{0} {1} {2}", default(string), default(string), default(string));
+            Action act = () => {
+                Format.Current("{0}", default(string));
+                Format.Current("{0} {1}", default(string), default(string));
+                Format.Current("{0} {1} {2}", default(string), default(string), default(string));
+            };
+
+            Assert.DoesNotThrow(act);
         }
 
         [t("Current() throws FormatException when the format is not valid.")]
