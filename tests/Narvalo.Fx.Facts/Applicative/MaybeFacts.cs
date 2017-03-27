@@ -204,50 +204,53 @@ namespace Narvalo.Applicative {
 
         [t("== and != when the Value's are equals.")]
         public static void Equality1() {
-            var o1a = Maybe.Of(1);
-            var o1b = Maybe.Of(1);
-            var o2a = Maybe.Of(new Val(1));
-            var o2b = Maybe.Of(new Val(1));
-            var o3a = Maybe.Of((Val?)new Val(1));
-            var o3b = Maybe.Of((Val?)new Val(1));
-            var o4a = Maybe.Of(Tuple.Create("1"));
-            var o4b = Maybe.Of(Tuple.Create("1"));
+            var m1 = Maybe.Of(1);
+            var m2 = Maybe.Of(1);
+            Assert.True(m1 == m2);
+            Assert.False(m1 != m2);
 
-            Assert.True(o1a == o1b);
-            Assert.True(o2a == o2b);
-            Assert.True(o3a == o3b);
-            Assert.True(o4a == o4b);
+            var m3 = Maybe.Of(new Val(1));
+            var m4 = Maybe.Of(new Val(1));
+            Assert.True(m3 == m4);
+            Assert.False(m3 != m4);
 
-            Assert.False(o1a != o1b);
-            Assert.False(o2a != o2b);
-            Assert.False(o3a != o3b);
-            Assert.False(o4a != o4b);
+            var m5 = Maybe.Of((Val?)new Val(1));
+            var m6 = Maybe.Of((Val?)new Val(1));
+            Assert.True(m5 == m6);
+            Assert.False(m5 != m6);
+
+            var m7 = Maybe.Of(Tuple.Create("1"));
+            var m8 = Maybe.Of(Tuple.Create("1"));
+            Assert.True(m7 == m8);
+            Assert.False(m7 != m8);
         }
 
         [t("== and != when the Value's are not equals.")]
         public static void Equality2() {
-            var o1a = Maybe.Of(1);
-            var o1b = Maybe.Of(2);
-            var o2a = Maybe.Of(new Val(1));
-            var o2b = Maybe.Of(new Val(2));
-            var o3a = Maybe.Of((Val?)new Val(1));
-            var o3b = Maybe.Of((Val?)new Val(2));
-            var o4a = Maybe.Of(Tuple.Create("1"));
-            var o4b = Maybe.Of(Tuple.Create("2"));
-            var o5a = Maybe.Of(new Obj());
-            var o5b = Maybe.Of(new Obj());
+            var m1 = Maybe.Of(1);
+            var m2 = Maybe.Of(2);
+            Assert.False(m1 == m2);
+            Assert.True(m1 != m2);
 
-            Assert.False(o1a == o1b);
-            Assert.False(o2a == o2b);
-            Assert.False(o3a == o3b);
-            Assert.False(o4a == o4b);
-            Assert.False(o5a == o5b);
+            var m3 = Maybe.Of(new Val(1));
+            var m4 = Maybe.Of(new Val(2));
+            Assert.False(m3 == m4);
+            Assert.True(m3 != m4);
 
-            Assert.True(o1a != o1b);
-            Assert.True(o2a != o2b);
-            Assert.True(o3a != o3b);
-            Assert.True(o4a != o4b);
-            Assert.True(o5a != o5b);
+            var m5 = Maybe.Of((Val?)new Val(1));
+            var m6 = Maybe.Of((Val?)new Val(2));
+            Assert.False(m5 == m6);
+            Assert.True(m5 != m6);
+
+            var m7 = Maybe.Of(Tuple.Create("1"));
+            var m8 = Maybe.Of(Tuple.Create("2"));
+            Assert.False(m7 == m8);
+            Assert.True(m7 != m8);
+
+            var m9 = Maybe.Of(new Obj());
+            var m10 = Maybe.Of(new Obj());
+            Assert.False(m9 == m10);
+            Assert.True(m9 != m10);
         }
 
         [t("Equals() guards.")]
@@ -264,174 +267,179 @@ namespace Narvalo.Applicative {
 
         [t("Equals() is reflexive.")]
         public static void Equals1() {
-            var n = Maybe<int>.None;
-            var o1 = Maybe.Of(1);
-            var o2 = Maybe.Of(new Val(1));
-            var o3 = Maybe.Of((Val?)new Val(1));
-            var o4 = Maybe.Of(new Obj());
+            var m1 = Maybe<int>.None;
+            Assert.True(m1.Equals(m1));
+            Assert.True(m1.Equals(m1, EqualityComparer<int>.Default));
 
-            Assert.True(n.Equals(n));
-            Assert.True(o1.Equals(o1));
-            Assert.True(o2.Equals(o2));
-            Assert.True(o3.Equals(o3));
-            Assert.True(o4.Equals(o4));
-            Assert.True(n.Equals(n, EqualityComparer<int>.Default));
-            Assert.True(o1.Equals(o1, EqualityComparer<int>.Default));
-            Assert.True(o2.Equals(o2, EqualityComparer<Val>.Default));
-            Assert.True(o3.Equals(o3, EqualityComparer<Val>.Default));
-            Assert.True(o4.Equals(o4, EqualityComparer<Obj>.Default));
+            var m2 = Maybe.Of(1);
+            Assert.True(m2.Equals(m2));
+            Assert.True(m2.Equals(m2, EqualityComparer<int>.Default));
+
+            var m3 = Maybe.Of(new Val(1));
+            Assert.True(m3.Equals(m3));
+            Assert.True(m3.Equals(m3, EqualityComparer<Val>.Default));
+
+            var m4 = Maybe.Of((Val?)new Val(1));
+            Assert.True(m4.Equals(m4));
+            Assert.True(m4.Equals(m4, EqualityComparer<Val>.Default));
+
+            var m5 = Maybe.Of(new Obj());
+            Assert.True(m5.Equals(m5));
+            Assert.True(m5.Equals(m5, EqualityComparer<Obj>.Default));
         }
 
         [t("Equals() is abelian.")]
         public static void Equals2() {
-            var o1a = Maybe.Of(1);
-            var o1b = Maybe.Of(1);
-            var o1c = Maybe.Of(2);
+            var m1 = Maybe.Of(1);
+            var m2 = Maybe.Of(1);
+            var m3 = Maybe.Of(2);
+            Assert.Equal(m1.Equals(m2), m2.Equals(m1));
+            Assert.Equal(m1.Equals(m2, EqualityComparer<int>.Default), m2.Equals(m1, EqualityComparer<int>.Default));
+            Assert.Equal(m1.Equals(m3), m3.Equals(m1));
+            Assert.Equal(m1.Equals(m3, EqualityComparer<int>.Default), m3.Equals(m1, EqualityComparer<int>.Default));
 
-            var o2a = Maybe.Of(new Val(1));
-            var o2b = Maybe.Of(new Val(1));
-            var o2c = Maybe.Of(new Val(2));
+            var m4 = Maybe.Of(new Val(1));
+            var m5 = Maybe.Of(new Val(1));
+            var m6 = Maybe.Of(new Val(2));
+            Assert.Equal(m4.Equals(m5), m5.Equals(m4));
+            Assert.Equal(m4.Equals(m5, EqualityComparer<Val>.Default), m5.Equals(m4, EqualityComparer<Val>.Default));
+            Assert.Equal(m4.Equals(m6), m6.Equals(m4));
+            Assert.Equal(m4.Equals(m6, EqualityComparer<Val>.Default), m6.Equals(m4, EqualityComparer<Val>.Default));
 
-            var o3a = Maybe.Of((Val?)new Val(1));
-            var o3b = Maybe.Of((Val?)new Val(1));
-            var o3c = Maybe.Of((Val?)new Val(2));
+            var m7 = Maybe.Of((Val?)new Val(1));
+            var m8 = Maybe.Of((Val?)new Val(1));
+            var m9 = Maybe.Of((Val?)new Val(2));
+            Assert.Equal(m7.Equals(m8), m5.Equals(m7));
+            Assert.Equal(m7.Equals(m8, EqualityComparer<Val>.Default), m5.Equals(m7, EqualityComparer<Val>.Default));
+            Assert.Equal(m7.Equals(m9), m6.Equals(m7));
+            Assert.Equal(m7.Equals(m9, EqualityComparer<Val>.Default), m6.Equals(m7, EqualityComparer<Val>.Default));
 
-            var o4a = Maybe.Of(new Obj());
-            var o4b = Maybe.Of(new Obj());
-            var o4c = Maybe.Of(new Obj("other"));
-
-            Assert.Equal(o1a.Equals(o1b), o1b.Equals(o1a));
-            Assert.Equal(o1a.Equals(o1c), o1c.Equals(o1a));
-            Assert.Equal(o2a.Equals(o2b), o2b.Equals(o2a));
-            Assert.Equal(o2a.Equals(o2c), o2c.Equals(o2a));
-            Assert.Equal(o3a.Equals(o3b), o2b.Equals(o3a));
-            Assert.Equal(o3a.Equals(o3c), o2c.Equals(o3a));
-            Assert.Equal(o4a.Equals(o4b), o4b.Equals(o4a));
-            Assert.Equal(o4a.Equals(o4c), o4c.Equals(o4a));
-            Assert.Equal(o1a.Equals(o1b, EqualityComparer<int>.Default), o1b.Equals(o1a, EqualityComparer<int>.Default));
-            Assert.Equal(o1a.Equals(o1c, EqualityComparer<int>.Default), o1c.Equals(o1a, EqualityComparer<int>.Default));
-            Assert.Equal(o2a.Equals(o2b, EqualityComparer<Val>.Default), o2b.Equals(o2a, EqualityComparer<Val>.Default));
-            Assert.Equal(o2a.Equals(o2c, EqualityComparer<Val>.Default), o2c.Equals(o2a, EqualityComparer<Val>.Default));
-            Assert.Equal(o3a.Equals(o3b, EqualityComparer<Val>.Default), o2b.Equals(o3a, EqualityComparer<Val>.Default));
-            Assert.Equal(o3a.Equals(o3c, EqualityComparer<Val>.Default), o2c.Equals(o3a, EqualityComparer<Val>.Default));
-            Assert.Equal(o4a.Equals(o4b, EqualityComparer<Obj>.Default), o4b.Equals(o4a, EqualityComparer<Obj>.Default));
-            Assert.Equal(o4a.Equals(o4c, EqualityComparer<Obj>.Default), o4c.Equals(o4a, EqualityComparer<Obj>.Default));
+            var m10 = Maybe.Of(new Obj());
+            var m11 = Maybe.Of(new Obj());
+            var m12 = Maybe.Of(new Obj("other"));
+            Assert.Equal(m10.Equals(m11), m11.Equals(m10));
+            Assert.Equal(m10.Equals(m11, EqualityComparer<Obj>.Default), m11.Equals(m10, EqualityComparer<Obj>.Default));
+            Assert.Equal(m10.Equals(m12), m12.Equals(m10));
+            Assert.Equal(m10.Equals(m12, EqualityComparer<Obj>.Default), m12.Equals(m10, EqualityComparer<Obj>.Default));
         }
 
         [t("Equals() is transitive.")]
         public static void Equals3() {
-            var o1a = Maybe.Of(1);
-            var o1b = Maybe.Of(1);
-            var o1c = Maybe.Of(1);
+            var m1 = Maybe.Of(1);
+            var m2 = Maybe.Of(1);
+            var m3 = Maybe.Of(1);
+            Assert.Equal(m1.Equals(m2) && m2.Equals(m3), m1.Equals(m3));
+            Assert.Equal(m1.Equals(m2, EqualityComparer<int>.Default) && m2.Equals(m3, EqualityComparer<int>.Default), m1.Equals(m3, EqualityComparer<int>.Default));
 
-            var o2a = Maybe.Of(new Val(1));
-            var o2b = Maybe.Of(new Val(1));
-            var o2c = Maybe.Of(new Val(1));
+            var m4 = Maybe.Of(new Val(1));
+            var m5 = Maybe.Of(new Val(1));
+            var m6 = Maybe.Of(new Val(1));
+            Assert.Equal(m4.Equals(m5) && m5.Equals(m6), m4.Equals(m6));
+            Assert.Equal(m4.Equals(m5, EqualityComparer<Val>.Default) && m5.Equals(m6, EqualityComparer<Val>.Default), m4.Equals(m6, EqualityComparer<Val>.Default));
 
-            var o3a = Maybe.Of((Val?)new Val(1));
-            var o3b = Maybe.Of((Val?)new Val(1));
-            var o3c = Maybe.Of((Val?)new Val(1));
+            var m7 = Maybe.Of((Val?)new Val(1));
+            var m8 = Maybe.Of((Val?)new Val(1));
+            var m9 = Maybe.Of((Val?)new Val(1));
+            Assert.Equal(m7.Equals(m8) && m8.Equals(m9), m4.Equals(m9));
+            Assert.Equal(m7.Equals(m8, EqualityComparer<Val>.Default) && m8.Equals(m9, EqualityComparer<Val>.Default), m4.Equals(m9, EqualityComparer<Val>.Default));
 
-            var o4a = Maybe.Of(new Obj());
-            var o4b = Maybe.Of(new Obj());
-            var o4c = Maybe.Of(new Obj());
-
-            Assert.Equal(o1a.Equals(o1b) && o1b.Equals(o1c), o1a.Equals(o1c));
-            Assert.Equal(o2a.Equals(o2b) && o2b.Equals(o2c), o2a.Equals(o2c));
-            Assert.Equal(o3a.Equals(o3b) && o3b.Equals(o3c), o2a.Equals(o3c));
-            Assert.Equal(o4a.Equals(o4b) && o4b.Equals(o4c), o4a.Equals(o4c));
-            Assert.Equal(o1a.Equals(o1b, EqualityComparer<int>.Default) && o1b.Equals(o1c, EqualityComparer<int>.Default), o1a.Equals(o1c, EqualityComparer<int>.Default));
-            Assert.Equal(o2a.Equals(o2b, EqualityComparer<Val>.Default) && o2b.Equals(o2c, EqualityComparer<Val>.Default), o2a.Equals(o2c, EqualityComparer<Val>.Default));
-            Assert.Equal(o3a.Equals(o3b, EqualityComparer<Val>.Default) && o3b.Equals(o3c, EqualityComparer<Val>.Default), o2a.Equals(o3c, EqualityComparer<Val>.Default));
-            Assert.Equal(o4a.Equals(o4b, EqualityComparer<Obj>.Default) && o4b.Equals(o4c, EqualityComparer<Obj>.Default), o4a.Equals(o4c, EqualityComparer<Obj>.Default));
+            var m10 = Maybe.Of(new Obj());
+            var m11 = Maybe.Of(new Obj());
+            var m12 = Maybe.Of(new Obj());
+            Assert.Equal(m10.Equals(m11) && m11.Equals(m12), m10.Equals(m12));
+            Assert.Equal(m10.Equals(m11, EqualityComparer<Obj>.Default) && m11.Equals(m12, EqualityComparer<Obj>.Default), m10.Equals(m12, EqualityComparer<Obj>.Default));
         }
 
         [t("Equals(null) returns false if none.")]
         public static void Equals4() {
-            var o1 = Maybe<int>.None;
-            var o2 = Maybe<Val>.None;
-            var o3 = Maybe<Val?>.None;
-            var o4 = Maybe<Obj>.None;
+            var m1 = Maybe<int>.None;
+            Assert.False(m1.Equals(null));
+            Assert.False(m1.Equals(null, EqualityComparer<int>.Default));
 
-            Assert.False(o1.Equals(null));
-            Assert.False(o2.Equals(null));
-            Assert.False(o3.Equals(null));
-            Assert.False(o4.Equals(null));
-            Assert.False(o1.Equals(null, EqualityComparer<int>.Default));
-            Assert.False(o2.Equals(null, EqualityComparer<Val>.Default));
-            Assert.False(o3.Equals(null, EqualityComparer<Val?>.Default));
-            Assert.False(o4.Equals(null, EqualityComparer<Obj>.Default));
+            var m2 = Maybe<Val>.None;
+            Assert.False(m2.Equals(null));
+            Assert.False(m2.Equals(null, EqualityComparer<Val>.Default));
+
+            var m3 = Maybe<Val?>.None;
+            Assert.False(m3.Equals(null));
+            Assert.False(m3.Equals(null, EqualityComparer<Val?>.Default));
+
+            var m4 = Maybe<Obj>.None;
+            Assert.False(m4.Equals(null));
+            Assert.False(m4.Equals(null, EqualityComparer<Obj>.Default));
         }
 
         [t("Equals(null) returns false if some.")]
         public static void Equals5() {
-            var o1 = Maybe.Of(1);
-            var o2 = Maybe.Of(new Val(1));
-            var o3 = Maybe.Of((Val?)new Val(1));
-            var o4 = Maybe.Of(new Obj());
+            var m1 = Maybe.Of(1);
+            Assert.False(m1.Equals(null));
+            Assert.False(m1.Equals(null, EqualityComparer<int>.Default));
 
-            Assert.False(o1.Equals(null));
-            Assert.False(o2.Equals(null));
-            Assert.False(o3.Equals(null));
-            Assert.False(o4.Equals(null));
-            Assert.False(o1.Equals(null, EqualityComparer<int>.Default));
-            Assert.False(o2.Equals(null, EqualityComparer<Val>.Default));
-            Assert.False(o3.Equals(null, EqualityComparer<Val>.Default));
-            Assert.False(o4.Equals(null, EqualityComparer<Obj>.Default));
+            var m2 = Maybe.Of(new Val(1));
+            Assert.False(m2.Equals(null));
+            Assert.False(m2.Equals(null, EqualityComparer<Val>.Default));
+
+            var m3 = Maybe.Of((Val?)new Val(1));
+            Assert.False(m3.Equals(null));
+            Assert.False(m3.Equals(null, EqualityComparer<Val>.Default));
+
+            var m4 = Maybe.Of(new Obj());
+            Assert.False(m4.Equals(null));
+            Assert.False(m4.Equals(null, EqualityComparer<Obj>.Default));
         }
 
         [t("Equals() follows structural equality rules.")]
         public static void Equals6() {
-            var o1a = Maybe.Of(1);
-            var o1b = Maybe.Of(1);
-            var o1c = Maybe.Of(2);
-            var o2a = Maybe.Of(new Val(1));
-            var o2b = Maybe.Of(new Val(1));
-            var o2c = Maybe.Of(new Val(2));
-            var o3a = Maybe.Of(Tuple.Create("1"));
-            var o3b = Maybe.Of(Tuple.Create("1"));
-            var o3c = Maybe.Of(Tuple.Create("2"));
+            var m1 = Maybe.Of(1);
+            var m2 = Maybe.Of(1);
+            var m3 = Maybe.Of(2);
+            Assert.True(m1.Equals(m2));
+            Assert.True(m1.Equals(m2, EqualityComparer<int>.Default));
+            Assert.False(m1.Equals(m3));
+            Assert.False(m1.Equals(m3, EqualityComparer<int>.Default));
 
-            Assert.True(o1a.Equals(o1b));
-            Assert.True(o2a.Equals(o2b));
-            Assert.True(o3a.Equals(o3b));
-            Assert.True(o1a.Equals(o1b, EqualityComparer<int>.Default));
-            Assert.True(o2a.Equals(o2b, EqualityComparer<Val>.Default));
-            Assert.True(o3a.Equals(o3b, EqualityComparer<Tuple<string>>.Default));
+            var m4 = Maybe.Of(new Val(1));
+            var m5 = Maybe.Of(new Val(1));
+            var m6 = Maybe.Of(new Val(2));
+            Assert.True(m4.Equals(m5));
+            Assert.True(m4.Equals(m5, EqualityComparer<Val>.Default));
+            Assert.False(m4.Equals(m6));
+            Assert.False(m4.Equals(m6, EqualityComparer<Val>.Default));
 
-            Assert.False(o1a.Equals(o1c));
-            Assert.False(o2a.Equals(o2c));
-            Assert.False(o3a.Equals(o3c));
-            Assert.False(o1a.Equals(o1c, EqualityComparer<int>.Default));
-            Assert.False(o2a.Equals(o2c, EqualityComparer<Val>.Default));
-            Assert.False(o3a.Equals(o3c, EqualityComparer<Tuple<string>>.Default));
+            var m7 = Maybe.Of(Tuple.Create("1"));
+            var m8 = Maybe.Of(Tuple.Create("1"));
+            var m9 = Maybe.Of(Tuple.Create("2"));
+            Assert.True(m7.Equals(m8));
+            Assert.True(m7.Equals(m8, EqualityComparer<Tuple<string>>.Default));
+            Assert.False(m7.Equals(m9));
+            Assert.False(m7.Equals(m9, EqualityComparer<Tuple<string>>.Default));
         }
 
         [t("Equals() follows structural equality rules after boxing.")]
         public static void Equals7() {
-            var o1a = Maybe.Of(1);
-            var o1b = Maybe.Of(1);
-            var o1c = Maybe.Of(2);
-            var o2a = Maybe.Of(new Val(1));
-            var o2b = Maybe.Of(new Val(1));
-            var o2c = Maybe.Of(new Val(2));
-            var o3a = Maybe.Of(Tuple.Create("1"));
-            var o3b = Maybe.Of(Tuple.Create("1"));
-            var o3c = Maybe.Of(Tuple.Create("2"));
+            var m1 = Maybe.Of(1);
+            var m2 = Maybe.Of(1);
+            var m3 = Maybe.Of(2);
+            Assert.True(m1.Equals((object)m2));
+            Assert.True(m1.Equals((object)m2, EqualityComparer<int>.Default));
+            Assert.False(m1.Equals((object)m3));
+            Assert.False(m1.Equals((object)m3, EqualityComparer<int>.Default));
 
-            Assert.True(o1a.Equals((object)o1b));
-            Assert.True(o2a.Equals((object)o2b));
-            Assert.True(o3a.Equals((object)o3b));
-            Assert.True(o1a.Equals((object)o1b, EqualityComparer<int>.Default));
-            Assert.True(o2a.Equals((object)o2b, EqualityComparer<Val>.Default));
-            Assert.True(o3a.Equals((object)o3b, EqualityComparer<Tuple<string>>.Default));
+            var m4 = Maybe.Of(new Val(1));
+            var m5 = Maybe.Of(new Val(1));
+            var m6 = Maybe.Of(new Val(2));
+            Assert.True(m4.Equals((object)m5));
+            Assert.True(m4.Equals((object)m5, EqualityComparer<Val>.Default));
+            Assert.False(m4.Equals((object)m6));
+            Assert.False(m4.Equals((object)m6, EqualityComparer<Val>.Default));
 
-            Assert.False(o1a.Equals((object)o1c));
-            Assert.False(o2a.Equals((object)o2c));
-            Assert.False(o3a.Equals((object)o3c));
-            Assert.False(o1a.Equals((object)o1c, EqualityComparer<int>.Default));
-            Assert.False(o2a.Equals((object)o2c, EqualityComparer<Val>.Default));
-            Assert.False(o3a.Equals((object)o3c, EqualityComparer<Tuple<string>>.Default));
+            var m7 = Maybe.Of(Tuple.Create("1"));
+            var m8 = Maybe.Of(Tuple.Create("1"));
+            var m9 = Maybe.Of(Tuple.Create("2"));
+            Assert.True(m7.Equals((object)m8));
+            Assert.True(m7.Equals((object)m8, EqualityComparer<Tuple<string>>.Default));
+            Assert.False(m7.Equals((object)m9));
+            Assert.False(m7.Equals((object)m9, EqualityComparer<Tuple<string>>.Default));
         }
 
         [t("GetHashCode() guards.")]
