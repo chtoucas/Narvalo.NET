@@ -7,6 +7,6 @@ namespace Narvalo.Linq {
 
     using Xunit;
 
-    public static class AppendPrependFacts {
+    public static partial class QperatorsFacts {
     }
 }

@@ -11,7 +11,6 @@ namespace Narvalo.Applicative {
             var either = Either<string, string>.OfRight("leftValue");
 
             var result = either.LeftOrNone();
-
             Assert.True(result.IsNone);
         }
 
@@ -22,7 +21,6 @@ namespace Narvalo.Applicative {
             var exp = Maybe.Of(value);
 
             var result = either.LeftOrNone();
-
             Assert.True(result.IsSome);
             Assert.Equal(exp, result);
         }
@@ -32,7 +30,6 @@ namespace Narvalo.Applicative {
             var either = Either<string, string>.OfLeft("rightValue");
 
             var result = either.RightOrNone();
-
             Assert.True(result.IsNone);
         }
 
@@ -43,7 +40,6 @@ namespace Narvalo.Applicative {
             var exp = Maybe.Of(value);
 
             var result = either.RightOrNone();
-
             Assert.True(result.IsSome);
             Assert.Equal(exp, result);
         }

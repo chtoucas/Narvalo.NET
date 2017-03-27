@@ -77,10 +77,13 @@
     </Compile>
     <Compile Include="Applicative\MaybeFacts.cs" />
     <Compile Include="Applicative\QullableFacts.cs" />
-    <Compile Include="Linq\AppendPrependFacts.cs" />
+    <Compile Include="Linq\AppendPrepend.cs" />
+    <Compile Include="Linq\EmptyIfNull.cs" />
+    <Compile Include="Linq\IsEmpty.cs" />
+    <Compile Include="Linq\QperatorsFacts.cs" />
     <Compile Include="Linq\_Externs\AppendPrependFacts.cs" />
     <Compile Include="Linq\_Externs\EnumerableTests.cs" />
-    <Compile Include="Linq\SelectAnyFacts.cs" />
+    <Compile Include="Linq\SelectAny.cs" />
     <Compile Include="Linq\_Externs\TestExtensions.cs" />
     <Compile Include="LocalizationFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
