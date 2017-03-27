@@ -167,7 +167,7 @@ switch ($Task) {
         if ($Fast) {
             $target = '/t:Package'
         } else {
-            $target = '/t:Xunit;Package'
+            $target = '/t:Test;Package'
         }
 
         # We do not append $customProject to force because it could create

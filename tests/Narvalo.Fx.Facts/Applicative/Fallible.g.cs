@@ -37,6 +37,8 @@ namespace Narvalo.Applicative {
         }
     }
 
+#if !NO_INTERNALS_VISIBLE_TO
+
     // Provides tests for Fallible<T>.
     // T4: EmitMonadGuards().
     public static partial class FallibleFacts {
@@ -112,6 +114,10 @@ namespace Narvalo.Applicative {
         #endregion
 
     }
+
+#endif
+
+#if !NO_INTERNALS_VISIBLE_TO
 
     // Provides tests for Fallible<T>: functor, monoid and monad laws.
     // T4: EmitMonadRules().
@@ -220,5 +226,7 @@ namespace Narvalo.Applicative {
 
         #endregion
     }
+
+#endif
 }
 

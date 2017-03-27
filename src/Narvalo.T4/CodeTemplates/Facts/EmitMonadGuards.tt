@@ -5,6 +5,8 @@ public partial class MonadTemplate
     public void EmitMonadGuards()
     {
 #>
+#if !NO_INTERNALS_VISIBLE_TO
+
     // Provides tests for <#= Name #><T<#= RTDecl #>>.
     // T4: EmitMonadGuards().
     public static partial class <#= Name #>Facts {
@@ -160,6 +162,8 @@ public partial class MonadTemplate
 
 <#+ } // T4: End of HasJoin. #>
     }
+
+#endif
 <#+
     } // T4: End of EmitMonadGuards().
 } // T4: End of MonadTemplate.

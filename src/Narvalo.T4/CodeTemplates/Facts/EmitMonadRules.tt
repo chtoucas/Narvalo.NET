@@ -5,6 +5,8 @@ public partial class MonadTemplate
     public void EmitMonadRules()
     {
 #>
+#if !NO_INTERNALS_VISIBLE_TO
+
     // Provides tests for <#= Name #><T<#= RTDecl #>>: functor, monoid and monad laws.
     // T4: EmitMonadRules().
     public static partial class <#= Name #>Facts {
@@ -229,6 +231,8 @@ public partial class MonadTemplate
         #endregion
 <#+ } // T4: End of HasZero && HasPlus. #>
     }
+
+#endif
 <#+
     } // T4: End of EmitMonadRules().
 } // T4: End of MonadTemplate.

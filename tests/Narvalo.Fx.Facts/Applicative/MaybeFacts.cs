@@ -125,7 +125,6 @@ namespace Narvalo.Applicative {
             var some = (Maybe<Obj>)exp;
 
             Assert.True(some.IsSome);
-            Assert.Same(exp, some.Value);
         }
 
         [t("ValueOrDefault() returns Value if some.")]
@@ -1370,6 +1369,14 @@ namespace Narvalo.Applicative {
 
             var m4 = Maybe<Obj>.η(new Obj());
             Assert.True(m4.IsSome);
+        }
+
+        [t("Casting (from) non-null returns some of Value.")]
+        public static void cast5() {
+            var exp = new Obj();
+            var some = (Maybe<Obj>)exp;
+
+            Assert.Same(exp, some.Value);
         }
 
         [t("Value is immutable.")]

@@ -37,6 +37,8 @@ namespace Narvalo.Applicative {
         }
     }
 
+#if !NO_INTERNALS_VISIBLE_TO
+
     // Provides tests for Result<T, My.Obj>.
     // T4: EmitMonadGuards().
     public static partial class ResultFacts {
@@ -112,6 +114,10 @@ namespace Narvalo.Applicative {
         #endregion
 
     }
+
+#endif
+
+#if !NO_INTERNALS_VISIBLE_TO
 
     // Provides tests for Result<T, My.Obj>: functor, monoid and monad laws.
     // T4: EmitMonadRules().
@@ -220,5 +226,7 @@ namespace Narvalo.Applicative {
 
         #endregion
     }
+
+#endif
 }
 
