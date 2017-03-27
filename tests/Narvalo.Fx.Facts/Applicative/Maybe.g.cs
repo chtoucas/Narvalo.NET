@@ -10,42 +10,40 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo.Applicative
-{
+namespace Narvalo.Applicative {
     using System;
-    using System.Collections.Generic;
 
     using FsCheck.Xunit;
     using Xunit;
 
     // T4: EmitMonadCore().
-    public static partial class MaybeFacts
-    {
-        internal sealed class tAttribute : FactAttribute
-        {
-            public tAttribute(string description) : base() { DisplayName = nameof(Maybe) + " - " + description; }
+    public static partial class MaybeFacts {
+        internal sealed class tAttribute : FactAttribute {
+            public tAttribute(string description) : base() {
+                DisplayName = nameof(Maybe) + " - " + description;
+            }
         }
 
-        internal sealed class TAttribute : TheoryAttribute
-        {
-            public TAttribute(string description) : base() { DisplayName = nameof(Maybe) + " - " + description; }
+        internal sealed class TAttribute : TheoryAttribute {
+            public TAttribute(string description) : base() {
+                DisplayName = nameof(Maybe) + " - " + description;
+            }
         }
 
-        internal sealed class qAttribute : PropertyAttribute
-        {
-            public qAttribute(string description) : base() { DisplayName = nameof(Maybe) + " - " + description; }
+        internal sealed class qAttribute : PropertyAttribute {
+            public qAttribute(string description) : base() {
+                DisplayName = nameof(Maybe) + " - " + description;
+            }
         }
     }
 
     // Provides tests for Maybe<T>.
     // T4: EmitMonadGuards().
-    public static partial class MaybeFacts
-    {
+    public static partial class MaybeFacts {
         #region Repeat()
 
         [t("Repeat() guards.")]
-        public static void Repeat_guards()
-        {
+        public static void Repeat0() {
             var source = Maybe<int>.η(1);
 
             Assert.Throws<ArgumentOutOfRangeException>("count", () => Maybe.Repeat(source, -1));
@@ -56,8 +54,7 @@ namespace Narvalo.Applicative
         #region Zip()
 
         [t("Zip() guards.")]
-        public static void Zip_guards()
-        {
+        public static void Zip0() {
             var first = Maybe<int>.η(1);
             var second = Maybe<int>.η(2);
             var third = Maybe<int>.η(3);
@@ -85,8 +82,7 @@ namespace Narvalo.Applicative
         #region Select()
 
         [t("Select() guards.")]
-        public static void Select_guards()
-        {
+        public static void Select0() {
             var source = Maybe<int>.η(1);
             Func<int, long> selector = null;
 
@@ -99,8 +95,7 @@ namespace Narvalo.Applicative
         #region Where()
 
         [t("Where() guards.")]
-        public static void Where_guards()
-        {
+        public static void Where0() {
             var source = Maybe<int>.η(1);
 
             Assert.Throws<ArgumentNullException>("predicate", () => source.Where(null));
@@ -112,11 +107,10 @@ namespace Narvalo.Applicative
         #region SelectMany()
 
         [t("SelectMany() guards.")]
-        public static void SelectMany_guards()
-        {
+        public static void SelectMany0() {
             var source = Maybe<short>.η(1);
             var middle = Maybe<int>.η(2);
-            Func<short, Maybe<int>> valueSelector =  i => Maybe<int>.η(i);
+            Func<short, Maybe<int>> valueSelector = i => Maybe<int>.η(i);
             Func<short, int, long> resultSelector = (i, j) => i + j;
 
             // Extension method.
@@ -132,8 +126,7 @@ namespace Narvalo.Applicative
         #region Join()
 
         [t("Join() guards.")]
-        public static void Join_guards()
-        {
+        public static void Join0() {
             var source = Maybe<int>.η(1);
             var inner = Maybe<int>.η(2);
             Func<int, int> outerKeySelector = val => val;
@@ -165,8 +158,7 @@ namespace Narvalo.Applicative
         #region GroupJoin()
 
         [t("GroupJoin() guards.")]
-        public static void GroupJoin_guards()
-        {
+        public static void GroupJoin0() {
             var source = Maybe<int>.η(1);
             var inner = Maybe<int>.η(2);
             Func<int, int> outerKeySelector = val => val;
@@ -197,106 +189,63 @@ namespace Narvalo.Applicative
 
     }
 
-#if !NO_INTERNALS_VISIBLE_TO
-
-    // Provides tests for Maybe<T> that need access to internals.
-    // T4: EmitMonadInternal().
-    public static partial class MaybeFacts
-    {
-        #region Bind()
-
-        [t("Bind() applies the binder to the underlying value.")]
-        public static void Bind_calls_binder()
-        {
-            var source = Maybe<int>.η(1);
-            Func<int, Maybe<int>> binder = val => Maybe<int>.η(2 * val);
-
-            var me = source.Bind(binder);
-
-            Assert.Equal(2, me.Value);
-        }
-
-        #endregion
-
-        #region Select()
-
-        [t("Select() applies the selector to the underlying value.")]
-        public static void Select_calls_selector()
-        {
-            var source = Maybe<int>.η(1);
-            Func<int, int> selector = val => 2 * val;
-
-            var me = source.Select(selector);
-
-            Assert.Equal(2, me.Value);
-        }
-
-        #endregion
-    }
-
-#endif
-
     // Provides tests for Maybe<T>: functor, monoid and monad laws.
     // T4: EmitMonadRules().
-    public static partial class MaybeFacts
-    {
+    public static partial class MaybeFacts {
         #region Functor Rules
 
-        [q("The identity map is a fixed point for Select (first functor law).")]
-        public static bool Identity_is_fixed_pointSelect(int arg)
-        {
-            var me = Maybe<int>.η(arg);
+        [q("The identity map is a fixed point for Select() (first functor rule).")]
+        public static bool Select01(int arg) {
+            var m = Maybe<int>.η(arg);
 
             // fmap id  ==  id
-            var left = me.Select(val => val);
-            var right = me;
+            var left = m.Select(x => x);
+            var right = m;
 
             return left.Equals(right);
         }
 
-        [q("Select() preserves the composition operator (second functor law).")]
-        public static bool Select_preserves_composition(short arg, Func<short, int> g, Func<int, long> f)
-        {
-            var me = Maybe<short>.η(arg);
+        [q("Select() preserves the composition operator (second functor rule).")]
+        public static bool Select02(short arg0, int arg1, long arg2) {
+            var m = Maybe<short>.η(arg0);
+            Func<short, int> g = x => arg1 * x;
+            Func<int, long> f = x => arg2 * x;
 
             // fmap (f . g)  ==  fmap f . fmap g
-            var left = me.Select(val => f(g(val)));
-            var right = me.Select(g).Select(f);
+            var left = m.Select(val => f(g(val)));
+            var right = m.Select(g).Select(f);
 
-           return left.Equals(right);
+            return left.Equals(right);
         }
 
         #endregion
 
-        #region Monoid Rules
+        #region Monoïd Rules
 
-        [q("None is a left identity for OrElse.")]
-        public static bool None_is_left_identity(int arg)
-        {
-            var me = Maybe<int>.η(arg);
+        [q("None is a left identity for OrElse().")]
+        public static bool None01(int arg) {
+            var m = Maybe<int>.η(arg);
 
             // mappend mempty x  ==  x
-            var left = Maybe<int>.None.OrElse(me);
-            var right = me;
+            var left = Maybe<int>.None.OrElse(m);
+            var right = m;
 
             return left.Equals(right);
         }
 
-        [q("None is a right identity for OrElse.")]
-        public static bool None_is_right_identity(int arg)
-        {
-            var me = Maybe<int>.η(arg);
+        [q("None is a right identity for OrElse().")]
+        public static bool None02(int arg) {
+            var m = Maybe<int>.η(arg);
 
             // mappend x mempty ==  x
-            var left = me.OrElse(Maybe<int>.None);
-            var right = me;
+            var left = m.OrElse(Maybe<int>.None);
+            var right = m;
 
             return left.Equals(right);
         }
 
         [q("OrElse() is associative.")]
-        public static bool OrElse_is_associative(int arg0, int arg1, int arg2)
-        {
+        public static bool OrElse01(int arg0, int arg1, int arg2) {
             var x = Maybe<int>.η(arg0);
             var y = Maybe<int>.η(arg1);
             var z = Maybe<int>.η(arg2);
@@ -312,10 +261,9 @@ namespace Narvalo.Applicative
 
         #region Monad Rules
 
-        [q("Of() is a left identity for Bind (first monad law).")]
-        public static bool Of_is_left_identity_for_bind(int arg0, float arg1)
-        {
-            Func<int, Maybe<float>> f = val => Maybe<float>.η(arg1 * val);
+        [q("Of() is a left identity for Bind() (first monad rule).")]
+        public static bool Of01(int arg0, float arg1) {
+            Func<int, Maybe<float>> f = x => Maybe<float>.η(arg1 * x);
 
             // return a >>= k  ==  k a
             var left = Maybe<int>.η(arg0).Bind(f);
@@ -324,11 +272,10 @@ namespace Narvalo.Applicative
             return left.Equals(right);
         }
 
-        [q("Of() is a left identity for Compose (first monad law).")]
-        public static bool Of_is_left_identity_for_compose(int arg0, float arg1)
-        {
+        [q("Of() is a left identity for Compose() (first monad rule).")]
+        public static bool Of02(int arg0, float arg1) {
             Func<int, Maybe<int>> of = Maybe<int>.η;
-            Func<int, Maybe<float>> f = val => Maybe<float>.η(arg1 * val);
+            Func<int, Maybe<float>> f = x => Maybe<float>.η(arg1 * x);
 
             // return >=> g  ==  g
             var left = of.Compose(f).Invoke(arg0);
@@ -337,22 +284,20 @@ namespace Narvalo.Applicative
             return left.Equals(right);
         }
 
-        [q("Of() is a right identity for Bind (second monad law).")]
-        public static bool Of_is_right_identity_for_bind(int arg0)
-        {
-            var me = Maybe<int>.η(arg0);
+        [q("Of() is a right identity for Bind() (second monad rule).")]
+        public static bool Of03(int arg0) {
+            var m = Maybe<int>.η(arg0);
 
             // m >>= return  ==  m
-            var left = me.Bind(Maybe<int>.η);
-            var right = me;
+            var left = m.Bind(Maybe<int>.η);
+            var right = m;
 
             return left.Equals(right);
         }
 
-        [q("Of() is a right identity for Compose (second monad law).")]
-        public static bool Of_is_right_identity_for_compose(int arg0, float arg1)
-        {
-            Func<int, Maybe<float>> f = val => Maybe<float>.η(arg1 * val);
+        [q("Of() is a right identity for Compose() (second monad rule).")]
+        public static bool Of04(int arg0, float arg1) {
+            Func<int, Maybe<float>> f = x => Maybe<float>.η(arg1 * x);
 
             // f >=> return  ==  f
             var left = f.Compose(Maybe<float>.η).Invoke(arg0);
@@ -361,27 +306,25 @@ namespace Narvalo.Applicative
             return left.Equals(right);
         }
 
-        [q("Bind() is associative (third monad law).")]
-        public static bool Bind_is_associative(short arg0, int arg1, long arg2)
-        {
-            var me = Maybe<short>.η(arg0);
+        [q("Bind() is associative (third monad rule).")]
+        public static bool Bind01(short arg0, int arg1, long arg2) {
+            var m = Maybe<short>.η(arg0);
 
-            Func<short, Maybe<int>> f = val => Maybe<int>.η(arg1 * val);
-            Func<int, Maybe<long>> g = val => Maybe<long>.η(arg2 * val);
+            Func<short, Maybe<int>> f = x => Maybe<int>.η(arg1 * x);
+            Func<int, Maybe<long>> g = x => Maybe<long>.η(arg2 * x);
 
             // m >>= (\x -> f x >>= g)  ==  (m >>= f) >>= g
-            var left = me.Bind(f).Bind(g);
-            var right = me.Bind(val => f(val).Bind(g));
+            var left = m.Bind(f).Bind(g);
+            var right = m.Bind(val => f(val).Bind(g));
 
             return left.Equals(right);
         }
 
-        [q("Compose() is associative (third monad law).")]
-        public static bool Compose_is_associative(short arg0, int arg1, long arg2, double arg3)
-        {
-            Func<short, Maybe<int>> f = val => Maybe<int>.η(arg1 * val);
-            Func<int, Maybe<long>> g = val => Maybe<long>.η(arg2 * val);
-            Func<long, Maybe<double>> h = val => Maybe<double>.η(arg3 * val);
+        [q("Compose() is associative (third monad rule).")]
+        public static bool Compose01(short arg0, int arg1, long arg2, double arg3) {
+            Func<short, Maybe<int>> f = x => Maybe<int>.η(arg1 * x);
+            Func<int, Maybe<long>> g = x => Maybe<long>.η(arg2 * x);
+            Func<long, Maybe<double>> h = x => Maybe<double>.η(arg3 * x);
 
             // f >=> (g >=> h)  ==  (f >=> g) >=> h
             var left = f.Compose(g.Compose(h)).Invoke(arg0);
@@ -392,12 +335,11 @@ namespace Narvalo.Applicative
 
         #endregion
 
-        #region Monad Plus Rules
+        #region Monad Zero, Plus and More Rules
 
-        [q("None is is a left zero for Bind (monad zero rule).")]
-        public static bool None_is_left_zero(long arg0)
-        {
-            Func<int, Maybe<long>> f = val => Maybe<long>.η(arg0 * val);
+        [q("None is is a left zero for Bind() (monad-zero rule).")]
+        public static bool None03(long arg0) {
+            Func<int, Maybe<long>> f = x => Maybe<long>.η(arg0 * x);
 
             // mzero >>= f  ==  mzero
             var left = Maybe<int>.None.Bind(f);
@@ -406,9 +348,8 @@ namespace Narvalo.Applicative
             return left.Equals(right);
         }
 
-        [q("None is is a right zero for Bind (monad more rule).")]
-        public static bool None_is_right_zero(int arg0)
-        {
+        [q("None is is a right zero for Bind() (monad-more rule).")]
+        public static bool None04(int arg0) {
             // m >>= (\x -> mzero) = mzero
             var left = Maybe<int>.η(arg0).Bind(_ => Maybe<long>.None);
             var right = Maybe<long>.None;
@@ -416,36 +357,52 @@ namespace Narvalo.Applicative
             return left.Equals(right);
         }
 
-        [t("")]
-        public static void Satisfies_MonadOrRule()
-        {
-            // Arrange
-            var monad = Maybe<int>.η(2);
+        [q("Of() is a left zero for OrElse() (monad-or rule (1)).")]
+        public static bool Of05(int arg0, int arg1) {
+            var m = Maybe<int>.η(arg0);
+            var right = m;
 
-            // Act
-            var leftSome = monad.OrElse(Maybe<int>.η(1));
-            var leftNone = monad.OrElse(Maybe<int>.None);
-            var right = monad;
+            // morelse (return a) b  ==  return a
+            var left = m.OrElse(Maybe<int>.η(arg1));
 
-            // Assert
-            Assert.True(leftSome.Equals(right));
-            Assert.True(leftNone.Equals(right));
+            return left.Equals(right);
         }
 
-        [t("")]
-        public static void DoesNotSatisfyRightZeroForPlus()
-        {
-            // Arrange
-            var monad = Maybe<int>.η(2);
+        [q("Of() is a left zero for OrElse() (monad-or rule (2)).")]
+        public static bool Of06(int arg0) {
+            var m = Maybe<int>.η(arg0);
+            var right = m;
 
-            // Act
-            var leftSome = Maybe<int>.η(1).OrElse(monad);
-            var leftNone = Maybe<int>.None.OrElse(monad);
-            var right = monad;
+            // morelse (return a) b  ==  return a
+            var left = m.OrElse(Maybe<int>.None);
 
-            // Assert
-            Assert.False(leftSome.Equals(right));   // NB: Fails here the "Unit is a right zero for Plus".
-            Assert.True(leftNone.Equals(right));
+            return left.Equals(right);
+        }
+
+        [q("Of() is a right zero for OrElse() (monad-plus rule (1)).")]
+        public static bool Of07(int arg0) {
+            var m = Maybe<int>.η(arg0);
+            var right = m;
+
+            // morelse b (return a)  ==  return a
+            var left = Maybe<int>.None.OrElse(m);
+
+            return left.Equals(right);
+        }
+
+        [q("Of() is NOT a right zero for OrElse() (monad-plus rule (2)).")]
+        public static bool Of08(int arg0, int arg1) {
+            // FIXME: filter before?
+            if (arg0 == arg1) { return true; }
+
+            var m = Maybe<int>.η(arg0);
+            var right = m;
+
+            // morelse b (return a)  !=  return a
+            var left = Maybe<int>.η(arg1).OrElse(m);
+
+            // NB: Fails here the "Unit is a right zero for Plus".
+            return !left.Equals(right);
         }
 
         #endregion

@@ -7,66 +7,62 @@ public partial class MonadTemplate
 #>
     // Provides tests for <#= Name #><T<#= RTDecl #>>: functor, monoid and monad laws.
     // T4: EmitMonadRules().
-    public static partial class <#= Name #>Facts
-    {
+    public static partial class <#= Name #>Facts {
         #region Functor Rules
 
-        [q("The identity map is a fixed point for <#= MapName #> (first functor law).")]
-        public static bool Identity_is_fixed_point<#= MapName #>(int arg)
-        {
-            var me = <#+ WriteFactory("int"); #>(arg);
+        [q("The identity map is a fixed point for <#= MapName #>() (first functor rule).")]
+        public static bool <#= MapName #>01(int arg) {
+            var m = <#+ WriteFactory("int"); #>(arg);
 
             // fmap id  ==  id
-            var left = me.<#= MapName #>(val => val);
-            var right = me;
+            var left = m.<#= MapName #>(x => x);
+            var right = m;
 
             return left.Equals(right);
         }
 
-        [q("<#= MapName #>() preserves the composition operator (second functor law).")]
-        public static bool <#= MapName #>_preserves_composition(short arg, Func<short, int> g, Func<int, long> f)
-        {
-            var me = <#+ WriteFactory("short"); #>(arg);
+        [q("<#= MapName #>() preserves the composition operator (second functor rule).")]
+        public static bool <#= MapName #>02(short arg0, int arg1, long arg2) {
+            var m = <#+ WriteFactory("short"); #>(arg0);
+            Func<short, int> g = x => arg1 * x;
+            Func<int, long> f = x => arg2 * x;
 
             // fmap (f . g)  ==  fmap f . fmap g
-            var left = me.<#= MapName #>(val => f(g(val)));
-            var right = me.<#= MapName #>(g).<#= MapName #>(f);
+            var left = m.<#= MapName #>(val => f(g(val)));
+            var right = m.<#= MapName #>(g).<#= MapName #>(f);
 
-           return left.Equals(right);
+            return left.Equals(right);
         }
 
         #endregion
 
 <#+ if (HasZero && HasPlus) { #>
-        #region Monoid Rules
+        #region Monoïd Rules
 
-        [q("<#= ZeroName #> is a left identity for <#= PlusName #>.")]
-        public static bool <#= ZeroName #>_is_left_identity(int arg)
-        {
-            var me = <#+ WriteFactory("int"); #>(arg);
+        [q("<#= ZeroName #> is a left identity for <#= PlusName #>().")]
+        public static bool <#= ZeroName #>01(int arg) {
+            var m = <#+ WriteFactory("int"); #>(arg);
 
             // mappend mempty x  ==  x
-            var left = <#= Name #><int>.<#= ZeroName #>.<#= PlusName #>(me);
-            var right = me;
+            var left = <#= Name #><int>.<#= ZeroName #>.<#= PlusName #>(m);
+            var right = m;
 
             return left.Equals(right);
         }
 
-        [q("<#= ZeroName #> is a right identity for <#= PlusName #>.")]
-        public static bool <#= ZeroName #>_is_right_identity(int arg)
-        {
-            var me = <#+ WriteFactory("int"); #>(arg);
+        [q("<#= ZeroName #> is a right identity for <#= PlusName #>().")]
+        public static bool <#= ZeroName #>02(int arg) {
+            var m = <#+ WriteFactory("int"); #>(arg);
 
             // mappend x mempty ==  x
-            var left = me.<#= PlusName #>(<#= Name #><int>.<#= ZeroName #>);
-            var right = me;
+            var left = m.<#= PlusName #>(<#= Name #><int>.<#= ZeroName #>);
+            var right = m;
 
             return left.Equals(right);
         }
 
         [q("<#= PlusName #>() is associative.")]
-        public static bool <#= PlusName #>_is_associative(int arg0, int arg1, int arg2)
-        {
+        public static bool <#= PlusName #>01(int arg0, int arg1, int arg2) {
             var x = <#+ WriteFactory("int"); #>(arg0);
             var y = <#+ WriteFactory("int"); #>(arg1);
             var z = <#+ WriteFactory("int"); #>(arg2);
@@ -83,10 +79,9 @@ public partial class MonadTemplate
 <#+ } // T4: End of HasZero && HasPlus. #>
         #region Monad Rules
 
-        [q("<#= ReturnName #>() is a left identity for Bind (first monad law).")]
-        public static bool <#= ReturnName #>_is_left_identity_for_bind(int arg0, float arg1)
-        {
-            Func<int, <#= Name #><float<#= RTDecl #>>> f = val => <#+ WriteFactory("float"); #>(arg1 * val);
+        [q("<#= ReturnName #>() is a left identity for Bind() (first monad rule).")]
+        public static bool <#= ReturnName #>01(int arg0, float arg1) {
+            Func<int, <#= Name #><float<#= RTDecl #>>> f = x => <#+ WriteFactory("float"); #>(arg1 * x);
 
             // return a >>= k  ==  k a
             var left = <#+ WriteFactory("int"); #>(arg0).Bind(f);
@@ -95,11 +90,10 @@ public partial class MonadTemplate
             return left.Equals(right);
         }
 
-        [q("<#= ReturnName #>() is a left identity for Compose (first monad law).")]
-        public static bool <#= ReturnName #>_is_left_identity_for_compose(int arg0, float arg1)
-        {
+        [q("<#= ReturnName #>() is a left identity for Compose() (first monad rule).")]
+        public static bool <#= ReturnName #>02(int arg0, float arg1) {
             Func<int, <#= Name #><int<#= RTDecl #>>> of = <#+ WriteFactory("int"); #>;
-            Func<int, <#= Name #><float<#= RTDecl #>>> f = val => <#+ WriteFactory("float"); #>(arg1 * val);
+            Func<int, <#= Name #><float<#= RTDecl #>>> f = x => <#+ WriteFactory("float"); #>(arg1 * x);
 
             // return >=> g  ==  g
             var left = of.Compose(f).Invoke(arg0);
@@ -108,22 +102,20 @@ public partial class MonadTemplate
             return left.Equals(right);
         }
 
-        [q("<#= ReturnName #>() is a right identity for Bind (second monad law).")]
-        public static bool <#= ReturnName #>_is_right_identity_for_bind(int arg0)
-        {
-            var me = <#+ WriteFactory("int"); #>(arg0);
+        [q("<#= ReturnName #>() is a right identity for Bind() (second monad rule).")]
+        public static bool <#= ReturnName #>03(int arg0) {
+            var m = <#+ WriteFactory("int"); #>(arg0);
 
             // m >>= return  ==  m
-            var left = me.Bind(<#+ WriteFactory("int"); #>);
-            var right = me;
+            var left = m.Bind(<#+ WriteFactory("int"); #>);
+            var right = m;
 
             return left.Equals(right);
         }
 
-        [q("<#= ReturnName #>() is a right identity for Compose (second monad law).")]
-        public static bool <#= ReturnName #>_is_right_identity_for_compose(int arg0, float arg1)
-        {
-            Func<int, <#= Name #><float<#= RTDecl #>>> f = val => <#+ WriteFactory("float"); #>(arg1 * val);
+        [q("<#= ReturnName #>() is a right identity for Compose() (second monad rule).")]
+        public static bool <#= ReturnName #>04(int arg0, float arg1) {
+            Func<int, <#= Name #><float<#= RTDecl #>>> f = x => <#+ WriteFactory("float"); #>(arg1 * x);
 
             // f >=> return  ==  f
             var left = f.Compose(<#+ WriteFactory("float"); #>).Invoke(arg0);
@@ -132,27 +124,25 @@ public partial class MonadTemplate
             return left.Equals(right);
         }
 
-        [q("Bind() is associative (third monad law).")]
-        public static bool Bind_is_associative(short arg0, int arg1, long arg2)
-        {
-            var me = <#+ WriteFactory("short"); #>(arg0);
+        [q("Bind() is associative (third monad rule).")]
+        public static bool Bind01(short arg0, int arg1, long arg2) {
+            var m = <#+ WriteFactory("short"); #>(arg0);
 
-            Func<short, <#= Name #><int<#= RTDecl #>>> f = val => <#+ WriteFactory("int"); #>(arg1 * val);
-            Func<int, <#= Name #><long<#= RTDecl #>>> g = val => <#+ WriteFactory("long"); #>(arg2 * val);
+            Func<short, <#= Name #><int<#= RTDecl #>>> f = x => <#+ WriteFactory("int"); #>(arg1 * x);
+            Func<int, <#= Name #><long<#= RTDecl #>>> g = x => <#+ WriteFactory("long"); #>(arg2 * x);
 
             // m >>= (\x -> f x >>= g)  ==  (m >>= f) >>= g
-            var left = me.Bind(f).Bind(g);
-            var right = me.Bind(val => f(val).Bind(g));
+            var left = m.Bind(f).Bind(g);
+            var right = m.Bind(val => f(val).Bind(g));
 
             return left.Equals(right);
         }
 
-        [q("Compose() is associative (third monad law).")]
-        public static bool Compose_is_associative(short arg0, int arg1, long arg2, double arg3)
-        {
-            Func<short, <#= Name #><int<#= RTDecl #>>> f = val => <#+ WriteFactory("int"); #>(arg1 * val);
-            Func<int, <#= Name #><long<#= RTDecl #>>> g = val => <#+ WriteFactory("long"); #>(arg2 * val);
-            Func<long, <#= Name #><double<#= RTDecl #>>> h = val => <#+ WriteFactory("double"); #>(arg3 * val);
+        [q("Compose() is associative (third monad rule).")]
+        public static bool Compose01(short arg0, int arg1, long arg2, double arg3) {
+            Func<short, <#= Name #><int<#= RTDecl #>>> f = x => <#+ WriteFactory("int"); #>(arg1 * x);
+            Func<int, <#= Name #><long<#= RTDecl #>>> g = x => <#+ WriteFactory("long"); #>(arg2 * x);
+            Func<long, <#= Name #><double<#= RTDecl #>>> h = x => <#+ WriteFactory("double"); #>(arg3 * x);
 
             // f >=> (g >=> h)  ==  (f >=> g) >=> h
             var left = f.Compose(g.Compose(h)).Invoke(arg0);
@@ -164,12 +154,11 @@ public partial class MonadTemplate
         #endregion
 <#+ if (HasZero) { #>
 
-        #region Monad Plus Rules
+        #region Monad Zero, Plus and More Rules
 
-        [q("<#= ZeroName #> is is a left zero for Bind (monad zero rule).")]
-        public static bool <#= ZeroName #>_is_left_zero(long arg0)
-        {
-            Func<int, <#= Name #><long>> f = val => <#+ WriteFactory("long"); #>(arg0 * val);
+        [q("<#= ZeroName #> is is a left zero for Bind() (monad-zero rule).")]
+        public static bool <#= ZeroName #>03(long arg0) {
+            Func<int, <#= Name #><long>> f = x => <#+ WriteFactory("long"); #>(arg0 * x);
 
             // mzero >>= f  ==  mzero
             var left = <#= Name #><int>.<#= ZeroName #>.Bind(f);
@@ -178,9 +167,8 @@ public partial class MonadTemplate
             return left.Equals(right);
         }
 
-        [q("<#= ZeroName #> is is a right zero for Bind (monad more rule).")]
-        public static bool <#= ZeroName #>_is_right_zero(int arg0)
-        {
+        [q("<#= ZeroName #> is is a right zero for Bind() (monad-more rule).")]
+        public static bool <#= ZeroName #>04(int arg0) {
             // m >>= (\x -> mzero) = mzero
             var left = <#+ WriteFactory("int"); #>(arg0).Bind(_ => <#= Name #><long>.<#= ZeroName #>);
             var right = <#= Name #><long>.<#= ZeroName #>;
@@ -190,36 +178,52 @@ public partial class MonadTemplate
 <#+ } // T4: End of HasZero. #>
 <#+ if (HasZero && HasPlus) { #>
 
-        [t("")]
-        public static void Satisfies_MonadOrRule()
-        {
-            // Arrange
-            var monad = <#+ WriteFactory("int"); #>(2);
+        [q("<#= ReturnName #>() is a left zero for <#= PlusName #>() (monad-or rule (1)).")]
+        public static bool <#= ReturnName #>05(int arg0, int arg1) {
+            var m = <#+ WriteFactory("int"); #>(arg0);
+            var right = m;
 
-            // Act
-            var leftSome = monad.<#= PlusName #>(<#+ WriteFactory("int"); #>(1));
-            var leftNone = monad.<#= PlusName #>(<#= Name #><int>.<#= ZeroName #>);
-            var right = monad;
+            // morelse (return a) b  ==  return a
+            var left = m.<#= PlusName #>(<#+ WriteFactory("int"); #>(arg1));
 
-            // Assert
-            Assert.True(leftSome.Equals(right));
-            Assert.True(leftNone.Equals(right));
+            return left.Equals(right);
         }
 
-        [t("")]
-        public static void DoesNotSatisfyRightZeroForPlus()
-        {
-            // Arrange
-            var monad = <#+ WriteFactory("int"); #>(2);
+        [q("<#= ReturnName #>() is a left zero for <#= PlusName #>() (monad-or rule (2)).")]
+        public static bool <#= ReturnName #>06(int arg0) {
+            var m = <#+ WriteFactory("int"); #>(arg0);
+            var right = m;
 
-            // Act
-            var leftSome = <#+ WriteFactory("int"); #>(1).<#= PlusName #>(monad);
-            var leftNone = <#= Name #><int>.<#= ZeroName #>.<#= PlusName #>(monad);
-            var right = monad;
+            // morelse (return a) b  ==  return a
+            var left = m.<#= PlusName #>(<#= Name #><int>.<#= ZeroName #>);
 
-            // Assert
-            Assert.False(leftSome.Equals(right));   // NB: Fails here the "Unit is a right zero for Plus".
-            Assert.True(leftNone.Equals(right));
+            return left.Equals(right);
+        }
+
+        [q("<#= ReturnName #>() is a right zero for <#= PlusName #>() (monad-plus rule (1)).")]
+        public static bool <#= ReturnName #>07(int arg0) {
+            var m = <#+ WriteFactory("int"); #>(arg0);
+            var right = m;
+
+            // morelse b (return a)  ==  return a
+            var left = <#= Name #><int>.<#= ZeroName #>.<#= PlusName #>(m);
+
+            return left.Equals(right);
+        }
+
+        [q("<#= ReturnName #>() is NOT a right zero for <#= PlusName #>() (monad-plus rule (2)).")]
+        public static bool <#= ReturnName #>08(int arg0, int arg1) {
+            // FIXME: filter before?
+            if (arg0 == arg1) { return true; }
+
+            var m = <#+ WriteFactory("int"); #>(arg0);
+            var right = m;
+
+            // morelse b (return a)  !=  return a
+            var left = <#+ WriteFactory("int"); #>(arg1).<#= PlusName #>(m);
+
+            // NB: Fails here the "Unit is a right zero for Plus".
+            return !left.Equals(right);
         }
 
         #endregion

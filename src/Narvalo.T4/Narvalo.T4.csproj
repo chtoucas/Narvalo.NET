@@ -58,7 +58,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CodeTemplates\Facts\EmitMonadCore.tt" />
-    <Content Include="CodeTemplates\Facts\EmitMonadInternal.tt" />
     <Content Include="CodeTemplates\Facts\EmitMonadGuards.tt" />
     <Content Include="CodeTemplates\Facts\EmitMonadRules.tt" />
   </ItemGroup>

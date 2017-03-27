@@ -10,42 +10,40 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo.Applicative
-{
+namespace Narvalo.Applicative {
     using System;
-    using System.Collections.Generic;
 
     using FsCheck.Xunit;
     using Xunit;
 
     // T4: EmitMonadCore().
-    public static partial class OutcomeFacts
-    {
-        internal sealed class tAttribute : FactAttribute
-        {
-            public tAttribute(string description) : base() { DisplayName = nameof(Outcome) + " - " + description; }
+    public static partial class OutcomeFacts {
+        internal sealed class tAttribute : FactAttribute {
+            public tAttribute(string description) : base() {
+                DisplayName = nameof(Outcome) + " - " + description;
+            }
         }
 
-        internal sealed class TAttribute : TheoryAttribute
-        {
-            public TAttribute(string description) : base() { DisplayName = nameof(Outcome) + " - " + description; }
+        internal sealed class TAttribute : TheoryAttribute {
+            public TAttribute(string description) : base() {
+                DisplayName = nameof(Outcome) + " - " + description;
+            }
         }
 
-        internal sealed class qAttribute : PropertyAttribute
-        {
-            public qAttribute(string description) : base() { DisplayName = nameof(Outcome) + " - " + description; }
+        internal sealed class qAttribute : PropertyAttribute {
+            public qAttribute(string description) : base() {
+                DisplayName = nameof(Outcome) + " - " + description;
+            }
         }
     }
 
     // Provides tests for Outcome<T>.
     // T4: EmitMonadGuards().
-    public static partial class OutcomeFacts
-    {
+    public static partial class OutcomeFacts {
         #region Repeat()
 
         [t("Repeat() guards.")]
-        public static void Repeat_guards()
-        {
+        public static void Repeat0() {
             var source = Outcome<int>.η(1);
 
             Assert.Throws<ArgumentOutOfRangeException>("count", () => Outcome.Repeat(source, -1));
@@ -56,8 +54,7 @@ namespace Narvalo.Applicative
         #region Zip()
 
         [t("Zip() guards.")]
-        public static void Zip_guards()
-        {
+        public static void Zip0() {
             var first = Outcome<int>.η(1);
             var second = Outcome<int>.η(2);
             var third = Outcome<int>.η(3);
@@ -85,8 +82,7 @@ namespace Narvalo.Applicative
         #region Select()
 
         [t("Select() guards.")]
-        public static void Select_guards()
-        {
+        public static void Select0() {
             var source = Outcome<int>.η(1);
             Func<int, long> selector = null;
 
@@ -99,11 +95,10 @@ namespace Narvalo.Applicative
         #region SelectMany()
 
         [t("SelectMany() guards.")]
-        public static void SelectMany_guards()
-        {
+        public static void SelectMany0() {
             var source = Outcome<short>.η(1);
             var middle = Outcome<int>.η(2);
-            Func<short, Outcome<int>> valueSelector =  i => Outcome<int>.η(i);
+            Func<short, Outcome<int>> valueSelector = i => Outcome<int>.η(i);
             Func<short, int, long> resultSelector = (i, j) => i + j;
 
             // Extension method.
@@ -118,83 +113,42 @@ namespace Narvalo.Applicative
 
     }
 
-#if !NO_INTERNALS_VISIBLE_TO
-
-    // Provides tests for Outcome<T> that need access to internals.
-    // T4: EmitMonadInternal().
-    public static partial class OutcomeFacts
-    {
-        #region Bind()
-
-        [t("Bind() applies the binder to the underlying value.")]
-        public static void Bind_calls_binder()
-        {
-            var source = Outcome<int>.η(1);
-            Func<int, Outcome<int>> binder = val => Outcome<int>.η(2 * val);
-
-            var me = source.Bind(binder);
-
-            Assert.Equal(2, me.Value);
-        }
-
-        #endregion
-
-        #region Select()
-
-        [t("Select() applies the selector to the underlying value.")]
-        public static void Select_calls_selector()
-        {
-            var source = Outcome<int>.η(1);
-            Func<int, int> selector = val => 2 * val;
-
-            var me = source.Select(selector);
-
-            Assert.Equal(2, me.Value);
-        }
-
-        #endregion
-    }
-
-#endif
-
     // Provides tests for Outcome<T>: functor, monoid and monad laws.
     // T4: EmitMonadRules().
-    public static partial class OutcomeFacts
-    {
+    public static partial class OutcomeFacts {
         #region Functor Rules
 
-        [q("The identity map is a fixed point for Select (first functor law).")]
-        public static bool Identity_is_fixed_pointSelect(int arg)
-        {
-            var me = Outcome<int>.η(arg);
+        [q("The identity map is a fixed point for Select() (first functor rule).")]
+        public static bool Select01(int arg) {
+            var m = Outcome<int>.η(arg);
 
             // fmap id  ==  id
-            var left = me.Select(val => val);
-            var right = me;
+            var left = m.Select(x => x);
+            var right = m;
 
             return left.Equals(right);
         }
 
-        [q("Select() preserves the composition operator (second functor law).")]
-        public static bool Select_preserves_composition(short arg, Func<short, int> g, Func<int, long> f)
-        {
-            var me = Outcome<short>.η(arg);
+        [q("Select() preserves the composition operator (second functor rule).")]
+        public static bool Select02(short arg0, int arg1, long arg2) {
+            var m = Outcome<short>.η(arg0);
+            Func<short, int> g = x => arg1 * x;
+            Func<int, long> f = x => arg2 * x;
 
             // fmap (f . g)  ==  fmap f . fmap g
-            var left = me.Select(val => f(g(val)));
-            var right = me.Select(g).Select(f);
+            var left = m.Select(val => f(g(val)));
+            var right = m.Select(g).Select(f);
 
-           return left.Equals(right);
+            return left.Equals(right);
         }
 
         #endregion
 
         #region Monad Rules
 
-        [q("Of() is a left identity for Bind (first monad law).")]
-        public static bool Of_is_left_identity_for_bind(int arg0, float arg1)
-        {
-            Func<int, Outcome<float>> f = val => Outcome<float>.η(arg1 * val);
+        [q("Of() is a left identity for Bind() (first monad rule).")]
+        public static bool Of01(int arg0, float arg1) {
+            Func<int, Outcome<float>> f = x => Outcome<float>.η(arg1 * x);
 
             // return a >>= k  ==  k a
             var left = Outcome<int>.η(arg0).Bind(f);
@@ -203,11 +157,10 @@ namespace Narvalo.Applicative
             return left.Equals(right);
         }
 
-        [q("Of() is a left identity for Compose (first monad law).")]
-        public static bool Of_is_left_identity_for_compose(int arg0, float arg1)
-        {
+        [q("Of() is a left identity for Compose() (first monad rule).")]
+        public static bool Of02(int arg0, float arg1) {
             Func<int, Outcome<int>> of = Outcome<int>.η;
-            Func<int, Outcome<float>> f = val => Outcome<float>.η(arg1 * val);
+            Func<int, Outcome<float>> f = x => Outcome<float>.η(arg1 * x);
 
             // return >=> g  ==  g
             var left = of.Compose(f).Invoke(arg0);
@@ -216,22 +169,20 @@ namespace Narvalo.Applicative
             return left.Equals(right);
         }
 
-        [q("Of() is a right identity for Bind (second monad law).")]
-        public static bool Of_is_right_identity_for_bind(int arg0)
-        {
-            var me = Outcome<int>.η(arg0);
+        [q("Of() is a right identity for Bind() (second monad rule).")]
+        public static bool Of03(int arg0) {
+            var m = Outcome<int>.η(arg0);
 
             // m >>= return  ==  m
-            var left = me.Bind(Outcome<int>.η);
-            var right = me;
+            var left = m.Bind(Outcome<int>.η);
+            var right = m;
 
             return left.Equals(right);
         }
 
-        [q("Of() is a right identity for Compose (second monad law).")]
-        public static bool Of_is_right_identity_for_compose(int arg0, float arg1)
-        {
-            Func<int, Outcome<float>> f = val => Outcome<float>.η(arg1 * val);
+        [q("Of() is a right identity for Compose() (second monad rule).")]
+        public static bool Of04(int arg0, float arg1) {
+            Func<int, Outcome<float>> f = x => Outcome<float>.η(arg1 * x);
 
             // f >=> return  ==  f
             var left = f.Compose(Outcome<float>.η).Invoke(arg0);
@@ -240,27 +191,25 @@ namespace Narvalo.Applicative
             return left.Equals(right);
         }
 
-        [q("Bind() is associative (third monad law).")]
-        public static bool Bind_is_associative(short arg0, int arg1, long arg2)
-        {
-            var me = Outcome<short>.η(arg0);
+        [q("Bind() is associative (third monad rule).")]
+        public static bool Bind01(short arg0, int arg1, long arg2) {
+            var m = Outcome<short>.η(arg0);
 
-            Func<short, Outcome<int>> f = val => Outcome<int>.η(arg1 * val);
-            Func<int, Outcome<long>> g = val => Outcome<long>.η(arg2 * val);
+            Func<short, Outcome<int>> f = x => Outcome<int>.η(arg1 * x);
+            Func<int, Outcome<long>> g = x => Outcome<long>.η(arg2 * x);
 
             // m >>= (\x -> f x >>= g)  ==  (m >>= f) >>= g
-            var left = me.Bind(f).Bind(g);
-            var right = me.Bind(val => f(val).Bind(g));
+            var left = m.Bind(f).Bind(g);
+            var right = m.Bind(val => f(val).Bind(g));
 
             return left.Equals(right);
         }
 
-        [q("Compose() is associative (third monad law).")]
-        public static bool Compose_is_associative(short arg0, int arg1, long arg2, double arg3)
-        {
-            Func<short, Outcome<int>> f = val => Outcome<int>.η(arg1 * val);
-            Func<int, Outcome<long>> g = val => Outcome<long>.η(arg2 * val);
-            Func<long, Outcome<double>> h = val => Outcome<double>.η(arg3 * val);
+        [q("Compose() is associative (third monad rule).")]
+        public static bool Compose01(short arg0, int arg1, long arg2, double arg3) {
+            Func<short, Outcome<int>> f = x => Outcome<int>.η(arg1 * x);
+            Func<int, Outcome<long>> g = x => Outcome<long>.η(arg2 * x);
+            Func<long, Outcome<double>> h = x => Outcome<double>.η(arg3 * x);
 
             // f >=> (g >=> h)  ==  (f >=> g) >=> h
             var left = f.Compose(g.Compose(h)).Invoke(arg0);

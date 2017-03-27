@@ -1057,34 +1057,6 @@ namespace Narvalo.Applicative {
             Assert.Equal(some, obj);
         }
 
-        [t("Select() returns some if some.")]
-        public static void Select1() {
-            var some = Maybe.Of(1);
-            Func<int, int> selector = x => 2 * x;
-
-            var m1 = some.Select(selector);
-            var m2 = Maybe.Select(some, selector);
-            var q = from item in some select selector(item);
-
-            Assert.True(m1.IsSome);
-            Assert.True(m2.IsSome);
-            Assert.True(q.IsSome);
-        }
-
-        [t("Select() returns none if none.")]
-        public static void Select2() {
-            var none = Maybe<int>.None;
-            Func<int, int> selector = x => 2 * x;
-
-            var m1 = none.Select(selector);
-            var m2 = Maybe.Select(none, selector);
-            var q = from item in none select selector(item);
-
-            Assert.True(m1.IsNone);
-            Assert.True(m2.IsNone);
-            Assert.True(q.IsNone);
-        }
-
         [t("ReplaceBy() returns some if some.")]
         public static void ReplaceBy1() {
             var exp = 2;
@@ -1180,95 +1152,68 @@ namespace Narvalo.Applicative {
             Assert.Equal(Maybe.None, m1);
             Assert.Equal(Maybe.None, m2);
         }
-    }
 
-#if !NO_INTERNALS_VISIBLE_TO
+        [t("Select() returns some if some.")]
+        public static void Select1() {
+            var some = Maybe.Of(1);
+            Func<int, int> selector = x => 2 * x;
 
-    public static partial class MaybeFacts {
-        [t("η(null) returns none.")]
-        public static void η1() {
-            var o1 = Maybe<Obj>.η(null);
-            var o2 = Maybe<Val?>.η(null);
+            var m1 = some.Select(selector);
+            Assert.True(m1.IsSome);
 
-            Assert.True(o1.IsNone);
-            Assert.True(o2.IsNone);
+            var m2 = Maybe.Select(some, selector);
+            Assert.True(m2.IsSome);
+
+            var q = from item in some select selector(item);
+            Assert.True(q.IsSome);
         }
 
-        [t("η(non-null) returns some.")]
-        public static void η2() {
-            var o1 = Maybe<int>.η(1);
-            var o2 = Maybe<Val>.η(new Val(1));
-            var o3 = Maybe<Val?>.η(new Val(1));
-            var o4 = Maybe<Obj>.η(new Obj());
+        [t("Select() returns none if none.")]
+        public static void Select2() {
+            var none = Maybe<int>.None;
+            Func<int, int> selector = x => 2 * x;
 
-            Assert.True(o1.IsSome);
-            Assert.True(o2.IsSome);
-            Assert.True(o3.IsSome);
-            Assert.True(o4.IsSome);
+            var m1 = none.Select(selector);
+            Assert.True(m1.IsNone);
+
+            var m2 = Maybe.Select(none, selector);
+            Assert.True(m2.IsNone);
+
+            var q = from item in none select selector(item);
+            Assert.True(q.IsNone);
         }
 
-        [t("Value is immutable.")]
-        public static void Value1() {
-            var exp = new Obj();
-            var some = Maybe.Of(exp);
-
-            exp = null;
-
-            Assert.NotNull(some.Value);
-            Assert.NotEqual(exp, some.Value);
-        }
-
-        [t("Value contains the original value.")]
-        public static void Value2() {
-            var exp1 = 1;
-            var exp2 = new Val(1);
-            var exp3 = (Val?)new Val(1);
-            var exp4 = new Obj();
-
-            var o1 = Maybe.Of(exp1);
-            var o2 = Maybe.Of(exp2);
-            var o3 = Maybe.Of(exp3);
-            var o4 = Maybe.Of(exp4);
-
-            Assert.Equal(exp1, o1.Value);
-            Assert.Equal(exp2, o2.Value);
-            Assert.Equal(exp3, o3.Value);
-            Assert.Equal(exp4, o4.Value);
-            Assert.Same(exp4, o4.Value);
-        }
-
-        [ReleaseOnlyFact]
-        public static void Value3() {
-            Assert.Equal(Maybe<int>.None.Value, default(int));
-            Assert.Null(Maybe<string>.None.Value);
-            Assert.Null(Maybe<Obj>.None.Value);
-        }
-
-        [t("ReplaceBy() replace Value with the new one if some.")]
-        public static void ReplaceBy3() {
-            var exp = new Obj("other");
-
-            var m = Maybe.Of(new Obj()).ReplaceBy(exp);
-
-            Assert.Same(exp, m.Value);
-        }
-    }
-
-#endif
-
-    public static partial class MaybeFacts {
-        [t("Where() returns none if predicate is false.")]
+        [t("Where() returns none if some and 'predicate' is false.")]
         public static void Where1() {
             var some = Maybe.Of(1);
             Func<int, bool> predicate = _ => false;
 
             var m1 = some.Where(predicate);
-            var m2 = Maybe.Where(some, predicate);
-            var q = from _ in some where predicate(_) select _;
+            Assert.True(m1.IsNone);
 
-            Assert.False(m1.IsSome);
-            Assert.False(m2.IsSome);
-            Assert.False(q.IsSome);
+            var m2 = Maybe.Where(some, predicate);
+            Assert.True(m2.IsNone);
+
+            var q = from _ in some where predicate(_) select _;
+            Assert.True(q.IsNone);
+        }
+
+        [t("Where() returns some if some and 'predicate' is true.")]
+        public static void Where2() {
+            var some = Maybe.Of(1);
+            Func<int, bool> predicate = _ => true;
+
+            var m1 = some.Where(predicate);
+            Assert.True(m1.IsSome);
+            Assert.Equal(some, m1);
+
+            var m2 = Maybe.Where(some, predicate);
+            Assert.True(m2.IsSome);
+            Assert.Equal(some, m2);
+
+            var q = from _ in some where predicate(_) select _;
+            Assert.True(q.IsSome);
+            Assert.Equal(some, q);
         }
 
         [t("SelectMany() returns none if none and 'valueSelector' returns some.")]
@@ -1345,21 +1290,101 @@ namespace Narvalo.Applicative {
 #if !NO_INTERNALS_VISIBLE_TO
 
     public static partial class MaybeFacts {
-        [t("Where() returns some if 'predicate' is true.")]
-        public static void Where2() {
-            var source = Maybe.Of(1);
-            Func<int, bool> predicate = _ => _ == 1;
+        [t("η(null) returns none.")]
+        public static void η1() {
+            var m1 = Maybe<Obj>.η(null);
+            Assert.True(m1.IsNone);
 
-            var m1 = source.Where(predicate);
-            var m2 = Maybe.Where(source, predicate);
-            var q = from _ in source where predicate(_) select _;
+            var m2 = Maybe<Val?>.η(null);
+            Assert.True(m2.IsNone);
+        }
 
+        [t("η(non-null) returns some.")]
+        public static void η2() {
+            var m1 = Maybe<int>.η(1);
             Assert.True(m1.IsSome);
+
+            var m2 = Maybe<Val>.η(new Val(1));
             Assert.True(m2.IsSome);
-            Assert.True(q.IsSome);
-            Assert.Equal(1, m1.Value);
-            Assert.Equal(1, m2.Value);
-            Assert.Equal(1, q.Value);
+
+            var m3 = Maybe<Val?>.η(new Val(1));
+            Assert.True(m3.IsSome);
+
+            var m4 = Maybe<Obj>.η(new Obj());
+            Assert.True(m4.IsSome);
+        }
+
+        [t("Value is immutable.")]
+        public static void Value1() {
+            var v = new Obj();
+            var m = Maybe.Of(v);
+
+            v = null;
+
+            Assert.NotNull(m.Value);
+            Assert.NotSame(v, m.Value);
+        }
+
+        [t("Value contains the original value.")]
+        public static void Value2() {
+            var v1 = 1;
+            var m1 = Maybe.Of(v1);
+            Assert.Equal(v1, m1.Value);
+
+            var v2 = new Val(1);
+            var m2 = Maybe.Of(v2);
+            Assert.Equal(v2, m2.Value);
+
+            var v3 = (Val?)new Val(1);
+            var m3 = Maybe.Of(v3);
+            Assert.Equal(v3, m3.Value);
+
+            var v4 = new Obj();
+            var m4 = Maybe.Of(v4);
+            Assert.Same(v4, m4.Value);
+        }
+
+        [ReleaseOnlyFact(DisplayName = nameof(Maybe) + " - Value contains default(T) if none.")]
+        public static void Value3() {
+            var m1 = Maybe<Val>.None;
+            Assert.Equal(default(Val), m1.Value);
+
+            var m2 = Maybe<Val?>.None;
+            Assert.Null(m2.Value);
+
+            var m3 = Maybe<Obj>.None;
+            Assert.Null(m3.Value);
+        }
+
+        [t("ReplaceBy() replace Value with the new one if some.")]
+        public static void ReplaceBy3() {
+            var v = new Obj("other");
+            var m = Maybe.Of(new Obj()).ReplaceBy(v);
+            Assert.Same(v, m.Value);
+        }
+
+        [t("Bind() applies binder if some.")]
+        public static void Bind3() {
+            var some = Maybe.Of(1);
+            Func<int, Maybe<int>> binder = x => Maybe.Of(2 * x);
+
+            var m = some.Bind(binder);
+            Assert.Equal(2, m.Value);
+        }
+
+        [t("Select() applies selector if some.")]
+        public static void Select3() {
+            var some = Maybe.Of(1);
+            Func<int, int> selector = x => 2 * x;
+
+            var m1 = some.Select(selector);
+            Assert.Equal(2, m1.Value);
+
+            var m2 = Maybe.Select(some, selector);
+            Assert.Equal(2, m2.Value);
+
+            var q = from item in some select selector(item);
+            Assert.Equal(2, q.Value);
         }
 
         [t("SelectMany() applies selectors ands returns some if some.")]

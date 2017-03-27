@@ -7,13 +7,11 @@ public partial class MonadTemplate
 #>
     // Provides tests for <#= Name #><T<#= RTDecl #>>.
     // T4: EmitMonadGuards().
-    public static partial class <#= Name #>Facts
-    {
+    public static partial class <#= Name #>Facts {
         #region Repeat()
 
         [t("Repeat() guards.")]
-        public static void Repeat_guards()
-        {
+        public static void Repeat0() {
             var source = <#+ WriteFactory("int"); #>(1);
 
             Assert.Throws<ArgumentOutOfRangeException>("count", () => <#= Name #>.Repeat(source, -1));
@@ -24,8 +22,7 @@ public partial class MonadTemplate
         #region Zip()
 
         [t("Zip() guards.")]
-        public static void Zip_guards()
-        {
+        public static void Zip0() {
             var first = <#+ WriteFactory("int"); #>(1);
             var second = <#+ WriteFactory("int"); #>(2);
             var third = <#+ WriteFactory("int"); #>(3);
@@ -53,8 +50,7 @@ public partial class MonadTemplate
         #region <#= MapName #>()
 
         [t("<#= MapName #>() guards.")]
-        public static void <#= MapName #>_guards()
-        {
+        public static void <#= MapName #>0() {
             var source = <#+ WriteFactory("int"); #>(1);
             Func<int, long> selector = null;
 
@@ -68,8 +64,7 @@ public partial class MonadTemplate
         #region <#= FilterName #>()
 
         [t("<#= FilterName #>() guards.")]
-        public static void <#= FilterName #>_guards()
-        {
+        public static void <#= FilterName #>0() {
             var source = <#+ WriteFactory("int"); #>(1);
 
             Assert.Throws<ArgumentNullException>("predicate", () => source.<#= FilterName #>(null));
@@ -82,11 +77,10 @@ public partial class MonadTemplate
         #region SelectMany()
 
         [t("SelectMany() guards.")]
-        public static void SelectMany_guards()
-        {
+        public static void SelectMany0() {
             var source = <#+ WriteFactory("short"); #>(1);
             var middle = <#+ WriteFactory("int"); #>(2);
-            Func<short, <#= Name #><int<#= RTDecl #>>> valueSelector =  i => <#+ WriteFactory("int"); #>(i);
+            Func<short, <#= Name #><int<#= RTDecl #>>> valueSelector = i => <#+ WriteFactory("int"); #>(i);
             Func<short, int, long> resultSelector = (i, j) => i + j;
 
             // Extension method.
@@ -103,8 +97,7 @@ public partial class MonadTemplate
         #region Join()
 
         [t("Join() guards.")]
-        public static void Join_guards()
-        {
+        public static void Join0() {
             var source = <#+ WriteFactory("int"); #>(1);
             var inner = <#+ WriteFactory("int"); #>(2);
             Func<int, int> outerKeySelector = val => val;
@@ -136,8 +129,7 @@ public partial class MonadTemplate
         #region GroupJoin()
 
         [t("GroupJoin() guards.")]
-        public static void GroupJoin_guards()
-        {
+        public static void GroupJoin0() {
             var source = <#+ WriteFactory("int"); #>(1);
             var inner = <#+ WriteFactory("int"); #>(2);
             Func<int, int> outerKeySelector = val => val;

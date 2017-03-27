@@ -6,21 +6,23 @@ public partial class MonadTemplate
     {
 #>
     // T4: EmitMonadCore().
-    public static partial class <#= Name #>Facts
-    {
-        internal sealed class tAttribute : FactAttribute
-        {
-            public tAttribute(string description) : base() { DisplayName = nameof(<#= Name #>) + " - " + description; }
+    public static partial class <#= Name #>Facts {
+        internal sealed class tAttribute : FactAttribute {
+            public tAttribute(string description) : base() {
+                DisplayName = nameof(<#= Name #>) + " - " + description;
+            }
         }
 
-        internal sealed class TAttribute : TheoryAttribute
-        {
-            public TAttribute(string description) : base() { DisplayName = nameof(<#= Name #>) + " - " + description; }
+        internal sealed class TAttribute : TheoryAttribute {
+            public TAttribute(string description) : base() {
+                DisplayName = nameof(<#= Name #>) + " - " + description;
+            }
         }
 
-        internal sealed class qAttribute : PropertyAttribute
-        {
-            public qAttribute(string description) : base() { DisplayName = nameof(<#= Name #>) + " - " + description; }
+        internal sealed class qAttribute : PropertyAttribute {
+            public qAttribute(string description) : base() {
+                DisplayName = nameof(<#= Name #>) + " - " + description;
+            }
         }
     }
 <#+
