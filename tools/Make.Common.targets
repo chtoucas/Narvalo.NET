@@ -63,11 +63,13 @@
                        Condition=" '@(BuildOutputs->EndsWith('Facts.dll'))' == 'true' " />
     </ItemGroup>
 
-    <!-- If we do not specify the working folder, Xunit may fail to find localized resources. -->
+    <!-- If we do not specify the working folder, Xunit may fail to find localized resources.
+         It seems that setting ShadowCopy to false helps too. -->
     <xunit Assemblies="@(_TestAssemblies)"
            WorkingFolder="$(OutDir)"
            Html="$(XunitHtmlFile)"
            Xml="$(XunitXmlFile)"
+           ShadowCopy="false"
            Condition=" '@(_TestAssemblies)' != '' " />
   </Target>
 
