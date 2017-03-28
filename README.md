@@ -1,13 +1,13 @@
 Narvalo.NET
 ===========
 
-- [Documentation](https://github.com/chtoucas/Narvalo.NET/tree/master/docs/index.md)
+- [Developer Documentation](https://github.com/chtoucas/Narvalo.NET/tree/master/docs/index.md)
 - [License](https://github.com/chtoucas/Narvalo.NET/tree/master/LICENSE.txt)
 
 Unstable packages are available on [myget](https://www.myget.org/gallery/narvalo-edge)
 
-Project | Summary | .NET Platform | Package
---------|---------|---------------|--------
+Project + README | Summary | .NET Platform | Package
+-----------------|---------|---------------|--------
 [Narvalo.Build](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Build/) | Custom **MSBuild** tasks |.NET 4.5 | [![NuGet](https://img.shields.io/nuget/v/Narvalo.Build.svg)](https://www.nuget.org/packages/Narvalo.Build/)
 [Narvalo.Cerbere](https://github.com/chtoucas/Cerbere) | **Code Contracts** and debugging put together | Standard 1.0 |  [![NuGet](https://img.shields.io/nuget/v/Narvalo.Cerbere.svg)](https://www.nuget.org/packages/Narvalo.Cerbere/)
 [Narvalo.Common](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Common/) | Utilities and extension methods | .NET 4.5 |  [![NuGet](https://img.shields.io/nuget/v/Narvalo.Common.svg)](https://www.nuget.org/packages/Narvalo.Common/)

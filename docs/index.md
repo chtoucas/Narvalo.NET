@@ -58,6 +58,8 @@ Project | Summary | .NET Platform | Internal Dependencie(s)
 [Narvalo.Mvp.Web](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Mvp.Web/) | MVP for WebForms | .NET 4.5 | Core, Mvp
 [Narvalo.Web](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Web/) | ASP.NET optimization | .NET 4.5 | Core, Common, Fx
 
+Except Narvalo.Build, each project has a matching test project.
+
 ### Samples
 
 - [Command-Line MVP sample](https://github.com/chtoucas/Narvalo.NET/tree/master/samples/MvpCommandLine)
