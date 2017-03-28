@@ -5,108 +5,137 @@ namespace Narvalo.Finance {
 
     using Xunit;
 
+    using Assert = Narvalo.AssertExtended;
+
     public static partial class IbanPartsFacts {
-        [Fact]
-        public static void Parse_ReturnsNull_ForNull()
-            => Assert.False(IbanParts.Parse(null).HasValue);
-
-        [Theory]
-        [IbanData(nameof(IbanData.ValidValues))]
-        public static void Parse_Succeeds_ForValidInput(string value)
-            => Assert.True(IbanParts.Parse(value).HasValue);
-
-        [Theory]
-        [IbanData(nameof(IbanData.InvalidValues))]
-        public static void Parse_ReturnsNull_ForInvalidInput(string value)
-            => Assert.False(IbanParts.Parse(value).HasValue);
-
-        [Theory]
-        [IbanData(nameof(IbanData.ValidValues))]
-        public static void Parse_SetCountryCodeCorrectly(string value) {
-            var parts = IbanParts.Parse(value);
-
-            Assert.Equal("FR", parts.Value.CountryCode);
+        internal sealed class tAttribute : TestCaseAttribute {
+            public tAttribute(string description) : base(nameof(IbanParts), description) { }
         }
 
-        [Theory]
-        [IbanData(nameof(IbanData.ValidValues))]
-        public static void Parse_SetCheckDigitsCorrectly(string value) {
-            var parts = IbanParts.Parse(value);
-
-            Assert.Equal("34", parts.Value.CheckDigits);
+        internal sealed class TAttribute : TestTheoryAttribute {
+            public TAttribute(string description) : base(nameof(IbanParts), description) { }
         }
 
-        [Theory]
-        [InlineData("FR345678901234", "5678901234")]
-        [InlineData("FR3456789012345", "56789012345")]
-        [InlineData("FR34567890123456", "567890123456")]
-        [InlineData("FR345678901234567", "5678901234567")]
-        [InlineData("FR3456789012345678", "56789012345678")]
-        [InlineData("FR34567890123456789", "567890123456789")]
-        [InlineData("FR345678901234567890", "5678901234567890")]
-        [InlineData("FR3456789012345678901", "56789012345678901")]
-        [InlineData("FR34567890123456789012", "567890123456789012")]
-        [InlineData("FR345678901234567890123", "5678901234567890123")]
-        [InlineData("FR3456789012345678901234", "56789012345678901234")]
-        [InlineData("FR34567890123456789012345", "567890123456789012345")]
-        [InlineData("FR345678901234567890123456", "5678901234567890123456")]
-        [InlineData("FR3456789012345678901234567", "56789012345678901234567")]
-        [InlineData("FR34567890123456789012345678", "567890123456789012345678")]
-        [InlineData("FR345678901234567890123456789", "5678901234567890123456789")]
-        [InlineData("FR3456789012345678901234567890", "56789012345678901234567890")]
-        [InlineData("FR34567890123456789012345678901", "567890123456789012345678901")]
-        [InlineData("FR345678901234567890123456789012", "5678901234567890123456789012")]
-        [InlineData("FR3456789012345678901234567890123", "56789012345678901234567890123")]
-        [InlineData("FR34567890123456789012345678901234", "567890123456789012345678901234")]
-        public static void Parse_SetBbanCorrectly(string value, string expectedValue) {
-            var parts = IbanParts.Parse(value);
+        [t("Parse() returns null for null.")]
+        public static void Parse1() => Assert.Null(IbanParts.Parse(null));
 
-            Assert.Equal(expectedValue, parts.Value.Bban);
+        [T("Parse() succeeds for actual IBANs.")]
+        [IbanData(nameof(IbanData.SampleValues))]
+        public static void Parse2(string value) => Assert.NotNull(IbanParts.Parse(value));
+
+        [T("Parse() does not perform any validation, it succeeds for well-formed values having an invalid checksum.")]
+        [IbanData(nameof(IbanData.BadChecksumValues))]
+        public static void Parse3(string value) => Assert.NotNull(IbanParts.Parse(value));
+
+        [T("Parse() returns null if the length of the input is not valid.")]
+        [IbanData(nameof(IbanData.BadLengthValues))]
+        public static void Parse4(string value) => Assert.Null(IbanParts.Parse(value));
+
+        [T("Parse() parses the different parts correctly.")]
+        [IbanData(nameof(IbanData.FakeValues))]
+        public static void Parse5(string value, string bban) {
+            var parts = IbanParts.Parse(value).Value;
+
+            Assert.Equal("FR", parts.CountryCode);
+            Assert.Equal("34", parts.CheckDigits);
+            Assert.Equal(bban, parts.Bban);
         }
 
-        [Fact]
-        public static void TryParse_ReturnsFailure_ForNull()
-            => Assert.False(IbanParts.TryParse(null).IsSuccess);
+        [t("TryParse() fails for null.")]
+        public static void TryParse1() => Assert.False(IbanParts.TryParse(null).IsSuccess);
 
-        [Theory]
-        [IbanData(nameof(IbanData.ValidValues))]
-        public static void TryParse_ReturnsSuccess_ForValidInput(string value)
-            => Assert.True(IbanParts.TryParse(value).IsSuccess);
+        [T("TryParse() succeeds for actual IBANs.")]
+        [IbanData(nameof(IbanData.SampleValues))]
+        public static void TryParse2(string value) => Assert.True(IbanParts.TryParse(value).IsSuccess);
 
-        [Theory]
-        [IbanData(nameof(IbanData.InvalidValues))]
-        public static void TryParse_ReturnsFailure_ForInvalidInput(string value)
-            => Assert.False(IbanParts.TryParse(value).IsSuccess);
+        [T("TryParse() does not perform any validation, it succeeds for well-formed values having an invalid checksum.")]
+        [IbanData(nameof(IbanData.BadChecksumValues))]
+        public static void TryParse3(string value) => Assert.True(IbanParts.TryParse(value).IsSuccess);
 
-        [Theory]
+        [T("TryParse() fails if the length of the input is not valid.")]
+        [IbanData(nameof(IbanData.BadLengthValues))]
+        public static void TryParse4(string value) => Assert.True(IbanParts.TryParse(value).IsError);
+
+        [T("TryParse() parses the different parts correctly.")]
+        [IbanData(nameof(IbanData.FakeValues))]
+        public static void TryParse5(string value, string expectedValue) {
+            var parts = IbanParts.TryParse(value);
+
+            var countryCode = parts.Select(x => x.CountryCode);
+            Assert.True(countryCode.Contains("FR"));
+
+            var checkDigits = parts.Select(x => x.CheckDigits);
+            Assert.True(checkDigits.Contains("34"));
+
+            var bban = parts.Select(x => x.Bban);
+            Assert.True(bban.Contains(expectedValue));
+        }
+
+        [T("Build() null guards")]
+        [InlineData(null, "20041010050500013M02606")]
+        [InlineData("FR", null)]
+        public static void Build0a(string countryCode, string bban)
+            => Assert.Throws<ArgumentNullException>(() => IbanParts.Build(countryCode, bban));
+
+        [T("Build() throws ArgumentException for invalid country code.")]
+        [IbanData(nameof(IbanData.BadCountryCodes))]
+        public static void Build0b(string value)
+            => Assert.Throws<ArgumentException>(() => IbanParts.Build(value, "20041010050500013M02606"));
+
+        [T("Build() throws ArgumentException for invalid BBANs.")]
+        [IbanData(nameof(IbanData.BadBbans))]
+        public static void Build0c(string value)
+            => Assert.Throws<ArgumentException>(() => IbanParts.Build("FR", value));
+
+        [T("Build() round-trip.")]
+        [IbanData(nameof(IbanData.SampleValues))]
+        public static void Build1(string value) {
+            // NB: We must use actual IBANs since Build() will compute the checksum.
+            var parts = IbanParts.Parse(value).Value;
+            var result = IbanParts.Build(parts.CountryCode, parts.Bban);
+
+            Assert.Equal(parts, result);
+        }
+
+        [T("Build() does not perform any validation, it succeeds for invalid BBANs.")]
+        [IbanData(nameof(IbanData.FakeBbans))]
+        public static void Build2(string value)
+            => Assert.DoesNotThrow(() => IbanParts.Build("FR", value));
+
+        [T("Create() null guards")]
         [InlineData(null, "14", "20041010050500013M02606")]
         [InlineData("FR", null, "20041010050500013M02606")]
         [InlineData("FR", "14", null)]
-        public static void Create_ThrowsArgumentNullException_ForNull(string countryCode, string checkDigits, string bban)
+        public static void Create0a(string countryCode, string checkDigits, string bban)
             => Assert.Throws<ArgumentNullException>(() => IbanParts.Create(countryCode, checkDigits, bban));
 
-        [Theory]
-        [IbanData(nameof(IbanData.InvalidCountryCodes))]
-        public static void Create_ThrowsArgumentException_ForInvalidCountryCode(string value)
+        [T("Create() throws ArgumentException for invalid country code.")]
+        [IbanData(nameof(IbanData.BadCountryCodes))]
+        public static void Create0b(string value)
             => Assert.Throws<ArgumentException>(() => IbanParts.Create(value, "14", "20041010050500013M02606"));
 
-        [Theory]
-        [IbanData(nameof(IbanData.InvalidCheckDigits))]
-        public static void Create_ThrowsArgumentException_ForInvalidCheckDigits(string value)
+        [T("Create() throws ArgumentException for invalid check digits.")]
+        [IbanData(nameof(IbanData.BadCheckDigits))]
+        public static void Create0c(string value)
             => Assert.Throws<ArgumentException>(() => IbanParts.Create("FR", value, "20041010050500013M02606"));
 
-        [Theory]
-        [IbanData(nameof(IbanData.InvalidBbans))]
-        public static void Create_ThrowsArgumentException_ForInvalidBban(string value)
+        [T("Create() throws ArgumentException for invalid BBANs.")]
+        [IbanData(nameof(IbanData.BadBbans))]
+        public static void Create0d(string value)
             => Assert.Throws<ArgumentException>(() => IbanParts.Create("FR", "14", value));
 
-        [Fact]
-        public static void Create_DoesNotThrowArgumentException_ForValidInput()
-            => IbanParts.Create("FR", "14", "20041010050500013M02606");
+        [T("Create() round-trip.")]
+        [IbanData(nameof(IbanData.FakeValues))]
+        public static void Create1(string value, string bban) {
+            var parts = IbanParts.Parse(value).Value;
+            var result = IbanParts.Create("FR", "34", bban);
 
-        [Theory]
-        [IbanData(nameof(IbanData.ValidBbans))]
-        public static void Create_DoesNotThrowArgumentException_ForValidBban(string value)
-            => IbanParts.Create("FR", "14", value);
+            Assert.Equal(parts, result);
+        }
+
+        [T("Create() does not perform any validation, it succeeds for invalid BBANs.")]
+        [IbanData(nameof(IbanData.FakeBbans))]
+        public static void Create2(string value)
+            => Assert.DoesNotThrow(() => IbanParts.Create("FR", "14", value));
     }
 }

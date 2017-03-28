@@ -47,7 +47,7 @@ namespace Narvalo.Finance
         public static bool Verify(string iban, bool useInt64)
             => (useInt64 ? ComputeInt64Checksum(iban) : ComputeInt32Checksum(iban)) == 1;
 
-        // WARNING: Only works for well-formed values (length and valid characters).
+        // WARNING: Throws for ill-formed values (invalid length and characters).
         public static int ComputeInt32Checksum(string value)
         {
             Require.NotNull(value, nameof(value));
@@ -82,7 +82,7 @@ namespace Narvalo.Finance
             return checksum % MODULUS;
         }
 
-        // WARNING: Only works for well-formed values (length and valid characters).
+        // WARNING: Throws for ill-formed values (invalid length and characters).
         public static int ComputeInt64Checksum(string value)
         {
             Require.NotNull(value, nameof(value));

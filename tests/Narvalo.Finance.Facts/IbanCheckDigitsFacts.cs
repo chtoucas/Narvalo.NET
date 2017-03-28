@@ -14,16 +14,19 @@ namespace Narvalo.Finance {
             public TAttribute(string description) : base(nameof(IbanCheckDigits), description) { }
         }
 
-        [t("Compute() guards.")]
-        public static void Compute0() {
+        [t("Compute() null guards.")]
+        public static void Compute0a() {
             Assert.Throws<ArgumentNullException>("bban", () => IbanCheckDigits.Compute("countryCode", null, true));
             Assert.Throws<ArgumentNullException>("countryCode", () => IbanCheckDigits.Compute(null, "bban", true));
-            Assert.Throws<ArgumentOutOfRangeException>("countryCode", () => IbanCheckDigits.Compute("", "bban", true));
-            Assert.Throws<ArgumentOutOfRangeException>("countryCode", () => IbanCheckDigits.Compute("1", "bban", true));
-            Assert.Throws<ArgumentOutOfRangeException>("countryCode", () => IbanCheckDigits.Compute("123", "bban", true));
         }
 
-        [T("Compute() succeeds.")]
+        [T("Compute() range guards.")]
+        [IbanData(nameof(IbanData.BadRangeCountryCodes))]
+        public static void Compute0b(string value) {
+            Assert.Throws<ArgumentOutOfRangeException>("countryCode", () => IbanCheckDigits.Compute(value, "bban", true));
+        }
+
+        [T("Compute() returns the correct check digits for actual IBANs.")]
         [IbanData(nameof(IbanData.SampleValues))]
         public static void Compute1(string value) {
             var iban = IbanParts.Parse(value).Value;
@@ -31,7 +34,7 @@ namespace Narvalo.Finance {
             Assert.Equal(iban.CheckDigits, IbanCheckDigits.Compute(iban.CountryCode, iban.Bban));
         }
 
-        [T("Compute() succeeds using Int32 arithmetic.")]
+        [T("Compute() returns the correct check digits for actual IBANs using Int32 arithmetic.")]
         [IbanData(nameof(IbanData.SampleValues))]
         public static void Compute2(string value) {
             var iban = IbanParts.Parse(value).Value;
@@ -39,7 +42,7 @@ namespace Narvalo.Finance {
             Assert.Equal(iban.CheckDigits, IbanCheckDigits.Compute(iban.CountryCode, iban.Bban, false));
         }
 
-        [T("Compute() succeeds using Int64 arithmetic.")]
+        [T("Compute() returns the correct check digits for actual IBANs using Int64 arithmetic.")]
         [IbanData(nameof(IbanData.SampleValues))]
         public static void Compute3(string value) {
             var iban = IbanParts.Parse(value).Value;
@@ -47,46 +50,71 @@ namespace Narvalo.Finance {
             Assert.Equal(iban.CheckDigits, IbanCheckDigits.Compute(iban.CountryCode, iban.Bban, true));
         }
 
-        [T("Verify() returns true.")]
+        [T("Verify() returns true for actual IBANs.")]
         [IbanData(nameof(IbanData.SampleValues))]
         public static void Verify1(string value)
             => Assert.True(IbanCheckDigits.Verify(value));
 
-        [T("Verify() returns true using Int32 arithmetic.")]
+        [T("Verify() returns true for actual IBANs using Int32 arithmetic.")]
         [IbanData(nameof(IbanData.SampleValues))]
         public static void Verify2(string value)
             => Assert.True(IbanCheckDigits.Verify(value, false));
 
-        [T("Verify() returns true using Int64 arithmetic.")]
+        [T("Verify() returns true for actual IBANs using Int64 arithmetic.")]
         [IbanData(nameof(IbanData.SampleValues))]
         public static void Verify3(string value)
             => Assert.True(IbanCheckDigits.Verify(value, true));
 
-        [t("ComputeInt32Checksum() guards.")]
-        public static void ComputeInt32Checksum0() {
+        [T("Verify() returns false for well-formed but invalid IBANs.")]
+        [IbanData(nameof(IbanData.BadChecksumValues))]
+        public static void Verify4(string value)
+            => Assert.False(IbanCheckDigits.Verify(value));
+
+        [T("Verify() returns false for well-formed but invalid IBANs using Int32 arithmetic.")]
+        [IbanData(nameof(IbanData.BadChecksumValues))]
+        public static void Verify5(string value)
+            => Assert.False(IbanCheckDigits.Verify(value, false));
+
+        [T("Verify() returns false for well-formed but invalid IBANs using Int64 arithmetic.")]
+        [IbanData(nameof(IbanData.BadChecksumValues))]
+        public static void Verify6(string value)
+            => Assert.False(IbanCheckDigits.Verify(value, true));
+
+        [t("ComputeInt32Checksum() null guards.")]
+        public static void ComputeInt32Checksum0a() {
             Assert.Throws<ArgumentNullException>("value", () => IbanCheckDigits.ComputeInt32Checksum(null));
-            Assert.Throws<ArgumentOutOfRangeException>("value", () => IbanCheckDigits.ComputeInt32Checksum("123"));
         }
 
-        [T("ComputeInt32Checksum() returns one.")]
+        [T("ComputeInt32Checksum() range guards.")]
+        [IbanData(nameof(IbanData.BadLengthValues))]
+        public static void ComputeInt32Checksum0b(string value) {
+            Assert.Throws<ArgumentOutOfRangeException>("value", () => IbanCheckDigits.ComputeInt32Checksum(value));
+        }
+
+        [T("ComputeInt32Checksum() returns one for actual IBANs.")]
         [IbanData(nameof(IbanData.SampleValues))]
         public static void ComputeInt32Checksum1(string value)
             => Assert.Equal(1, IbanCheckDigits.ComputeInt32Checksum(value));
 
-        [T("ComputeInt32Checksum() is not equal to one.")]
-        [InlineData("123456789012345")]
+        [T("ComputeInt32Checksum() does not return one for well-formed but invalid IBANs.")]
+        [IbanData(nameof(IbanData.BadChecksumValues))]
         public static void ComputeInt32Checksum2(string value)
             => Assert.NotEqual(1, IbanCheckDigits.ComputeInt32Checksum(value));
 
-        [T("ComputeInt32Checksum() throws ArgumentException when input is not well-formed.")]
-        [InlineData("1234567890àçéè$")]
+        [T("ComputeInt32Checksum() throws ArgumentException when the value contains invalid characters.")]
+        [IbanData(nameof(IbanData.BadContentValues))]
         public static void ComputeInt32Checksum3(string value)
             => Assert.Throws<ArgumentException>(() => IbanCheckDigits.ComputeInt32Checksum(value));
 
-        [t("ComputeInt64Checksum() guards.")]
-        public static void ComputeInt64Checksum0() {
+        [t("ComputeInt64Checksum() null guards.")]
+        public static void ComputeInt64Checksum0a() {
             Assert.Throws<ArgumentNullException>("value", () => IbanCheckDigits.ComputeInt64Checksum(null));
-            Assert.Throws<ArgumentOutOfRangeException>("value", () => IbanCheckDigits.ComputeInt64Checksum("123"));
+        }
+
+        [T("ComputeInt64Checksum() range guards.")]
+        [IbanData(nameof(IbanData.BadLengthValues))]
+        public static void ComputeInt64Checksum0b(string value) {
+            Assert.Throws<ArgumentOutOfRangeException>("value", () => IbanCheckDigits.ComputeInt64Checksum(value));
         }
 
         [T("ComputeInt64Checksum() returns one.")]
@@ -95,12 +123,12 @@ namespace Narvalo.Finance {
             => Assert.Equal(1, IbanCheckDigits.ComputeInt64Checksum(value));
 
         [T("ComputeInt32Checksum() is not equal to one.")]
-        [InlineData("123456789012345")]
+        [IbanData(nameof(IbanData.BadChecksumValues))]
         public static void ComputeInt64Checksum2(string value)
             => Assert.NotEqual(1, IbanCheckDigits.ComputeInt64Checksum(value));
 
-        [T("ComputeInt32Checksum() throws ArgumentException when input is not well-formed.")]
-        [InlineData("1234567890àçéè$")]
+        [T("ComputeInt32Checksum() throws ArgumentException when the value contains invalid characters.")]
+        [IbanData(nameof(IbanData.BadContentValues))]
         public static void ComputeInt64Checksum3(string value)
             => Assert.Throws<ArgumentException>(() => IbanCheckDigits.ComputeInt64Checksum(value));
     }

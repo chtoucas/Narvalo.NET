@@ -4,8 +4,8 @@ namespace Narvalo.Finance {
     using System.Collections.Generic;
 
     public static class IbanData {
-        // Well-formed IBAN values.
-        public static IEnumerable<object[]> ValidValues {
+        // Well-formed (valid content and length) BUT still invalid checksum.
+        public static IEnumerable<object[]> BadChecksumValues {
             get {
                 yield return new object[] { "FR345678901234" };
                 yield return new object[] { "FR3456789012345" };
@@ -31,8 +31,8 @@ namespace Narvalo.Finance {
             }
         }
 
-        // Ill-formed IBAN values.
-        public static IEnumerable<object[]> InvalidValues {
+        // Ill-formed (invalid length) values.
+        public static IEnumerable<object[]> BadLengthValues {
             get {
                 yield return new object[] { "" };
                 yield return new object[] { "F" };
@@ -52,8 +52,47 @@ namespace Narvalo.Finance {
             }
         }
 
-        // Well-formed BBAN values.
-        public static IEnumerable<object[]> ValidBbans {
+        // Ill-formed (valid length BUT invalid content) values.
+        public static IEnumerable<object[]> BadContentValues {
+            get {
+                yield return new object[] { "FR34567890123à" };
+                yield return new object[] { "FR@45678901234" };
+                yield return new object[] { "FR34_678901234" };
+            }
+        }
+
+        // Fake values - they do not have a valid checksum but their
+        // content is predictable: the country code is always 'FR',
+        // the check digits is always '34'. The second element in
+        // each array is the BBAN.
+        public static IEnumerable<object[]> FakeValues {
+            get {
+                yield return new object[] { "FR345678901234", "5678901234" };
+                yield return new object[] { "FR3456789012345", "56789012345" };
+                yield return new object[] { "FR34567890123456", "567890123456" };
+                yield return new object[] { "FR345678901234567", "5678901234567" };
+                yield return new object[] { "FR3456789012345678", "56789012345678" };
+                yield return new object[] { "FR34567890123456789", "567890123456789" };
+                yield return new object[] { "FR345678901234567890", "5678901234567890" };
+                yield return new object[] { "FR3456789012345678901", "56789012345678901" };
+                yield return new object[] { "FR34567890123456789012", "567890123456789012" };
+                yield return new object[] { "FR345678901234567890123", "5678901234567890123" };
+                yield return new object[] { "FR3456789012345678901234", "56789012345678901234" };
+                yield return new object[] { "FR34567890123456789012345", "567890123456789012345" };
+                yield return new object[] { "FR345678901234567890123456", "5678901234567890123456" };
+                yield return new object[] { "FR3456789012345678901234567", "56789012345678901234567" };
+                yield return new object[] { "FR34567890123456789012345678", "567890123456789012345678" };
+                yield return new object[] { "FR345678901234567890123456789", "5678901234567890123456789" };
+                yield return new object[] { "FR3456789012345678901234567890", "56789012345678901234567890" };
+                yield return new object[] { "FR34567890123456789012345678901", "567890123456789012345678901" };
+                yield return new object[] { "FR345678901234567890123456789012", "5678901234567890123456789012" };
+                yield return new object[] { "FR3456789012345678901234567890123", "56789012345678901234567890123" };
+                yield return new object[] { "FR34567890123456789012345678901234", "567890123456789012345678901234" };
+            }
+        }
+
+        // Well-formed (content and length) but invalid BBAN values.
+        public static IEnumerable<object[]> FakeBbans {
             get {
                 yield return new object[] { "1234567890" };
                 yield return new object[] { "12345678901" };
@@ -79,10 +118,23 @@ namespace Narvalo.Finance {
             }
         }
 
-        // Ill-formed BBAN values.
-        public static IEnumerable<object[]> InvalidBbans {
+        // Ill-formed (content and length) BBAN values.
+        public static IEnumerable<object[]> BadBbans {
             get {
                 // Lengths.
+                foreach (var item in BadLengthBbans) {
+                    yield return item;
+                }
+                // Content.
+                yield return new object[] { "         " };
+                yield return new object[] { "---------" };
+            }
+        }
+
+
+        // Ill-formed (content and length) BBAN values.
+        public static IEnumerable<object[]> BadLengthBbans {
+            get {
                 yield return new object[] { "" };
                 yield return new object[] { "1" };
                 yield return new object[] { "12" };
@@ -94,14 +146,11 @@ namespace Narvalo.Finance {
                 yield return new object[] { "12345678" };
                 yield return new object[] { "123456789" };
                 yield return new object[] { "1234567890123456789012345678901" };
-                // Content.
-                yield return new object[] { "         " };
-                yield return new object[] { "---------" };
             }
         }
 
-        // Ill-formed check digits.
-        public static IEnumerable<object[]> InvalidCheckDigits {
+        // Ill-formed (content and length) check digits.
+        public static IEnumerable<object[]> BadCheckDigits {
             get {
                 // Lengths.
                 yield return new object[] { "" };
@@ -114,16 +163,25 @@ namespace Narvalo.Finance {
             }
         }
 
-        // Ill-formed country codes.
-        public static IEnumerable<object[]> InvalidCountryCodes {
+        // Ill-formed (content and length) country codes.
+        public static IEnumerable<object[]> BadCountryCodes {
             get {
                 // Lengths.
-                yield return new object[] { "" };
-                yield return new object[] { "1" };
-                yield return new object[] { "123" };
+                foreach (var item in BadRangeCountryCodes) {
+                    yield return item;
+                }
                 // Content.
                 yield return new object[] { "  " };
                 yield return new object[] { "--" };
+            }
+        }
+
+        // Invalid lengths for country codes.
+        public static IEnumerable<object[]> BadRangeCountryCodes {
+            get {
+                yield return new object[] { "" };
+                yield return new object[] { "1" };
+                yield return new object[] { "123" };
             }
         }
 
@@ -257,7 +315,7 @@ namespace Narvalo.Finance {
             }
         }
 
-        // NB: Values are well-formed but not valid.
+        // Well-formed (invalid) IBAN values.
         public static IEnumerable<object[]> IdenticalValues {
             get {
                 yield return new object[] { "FR345678901234", "FR345678901234" };
@@ -284,7 +342,7 @@ namespace Narvalo.Finance {
             }
         }
 
-        // NB: Values are well-formed but not valid.
+        // Well-formed (invalid) IBAN values.
         public static IEnumerable<object[]> DistinctValues {
             get {
                 yield return new object[] { "FR345678901234", "FR3456789012345" };
@@ -311,7 +369,7 @@ namespace Narvalo.Finance {
             }
         }
 
-        // NB: Values are well-formed but not valid.
+        // Well-formed (invalid) IBAN values.
         public static IEnumerable<object[]> FormatSamples {
             get {
                 yield return new object[] { "FR345678901234", "FR34 5678 9012 34" };
