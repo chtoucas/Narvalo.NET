@@ -23,8 +23,7 @@ Minimal requirements:
   with MSBuild.
 - PowerShell v4+, F# v4.1+ and Git for the build scripts.
 
-### Layout
-
+Layout:
 - `data`, external data.
 - `docs`, documentation.
 - `etc`, shared configuration files.
@@ -216,16 +215,6 @@ Notable additions:
 
 See also: `src\Packaging\PortableProfiles.props`.
 
-#### Desktop application
-
-Desktop applications should include a .ini with:
-```
-[.NET Framework Debugging Control]
-GenerateTrackingInfo=0
-AllowOptimize=1
-```
-Ensure that it is copied to the output directory.
-
 #### Test project
 
 To create a test project use the "Class Library" template from Visual Studio.
@@ -256,6 +245,16 @@ Add the following content to you local customization property file `Narvalo.XXX.
 This has the following consequences:
 - Sample projects use a dummy assembly version.
 - Sample projects use custom CA rules.
+
+#### Desktop application
+
+Desktop applications should include a .ini with:
+```
+[.NET Framework Debugging Control]
+GenerateTrackingInfo=0
+AllowOptimize=1
+```
+Ensure that this file is copied to the output directory.
 
 --------------------------------------------------------------------------------
 
