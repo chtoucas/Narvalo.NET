@@ -7,12 +7,9 @@ using System.Collections.Generic;
 
 // Adapted from https://github.com/dotnet/corefx/blob/master/src/System.Linq/tests/EnumerableTests.cs
 
-namespace System.Linq.Tests
-{
-    public abstract class EnumerableTests
-    {
-        protected class TestCollection<T> : ICollection<T>
-        {
+namespace System.Linq.Tests {
+    public abstract class EnumerableTests {
+        protected class TestCollection<T> : ICollection<T> {
             public T[] Items = new T[0];
             public int CountTouched = 0;
             public int CopyToTouched = 0;
@@ -29,8 +26,7 @@ namespace System.Linq.Tests
             IEnumerator IEnumerable.GetEnumerator() => Items.GetEnumerator();
         }
 
-        protected class TestEnumerable<T> : IEnumerable<T>
-        {
+        protected class TestEnumerable<T> : IEnumerable<T> {
             public T[] Items = new T[0];
             public TestEnumerable(T[] items) { Items = items; }
 
@@ -38,8 +34,7 @@ namespace System.Linq.Tests
             IEnumerator IEnumerable.GetEnumerator() => Items.GetEnumerator();
         }
 
-        protected class TestReadOnlyCollection<T> : IReadOnlyCollection<T>
-        {
+        protected class TestReadOnlyCollection<T> : IReadOnlyCollection<T> {
             public T[] Items = new T[0];
             public int CountTouched = 0;
             public TestReadOnlyCollection(T[] items) { Items = items; }
@@ -49,8 +44,7 @@ namespace System.Linq.Tests
             IEnumerator IEnumerable.GetEnumerator() => Items.GetEnumerator();
         }
 
-        protected sealed class FastInfiniteEnumerator<T> : IEnumerable<T>, IEnumerator<T>
-        {
+        protected sealed class FastInfiniteEnumerator<T> : IEnumerable<T>, IEnumerator<T> {
             public IEnumerator<T> GetEnumerator() => this;
 
             IEnumerator IEnumerable.GetEnumerator() => this;
@@ -68,18 +62,14 @@ namespace System.Linq.Tests
 
         protected static bool IsEven(int num) => num % 2 == 0;
 
-        protected class AnagramEqualityComparer : IEqualityComparer<string>
-        {
-            public bool Equals(string x, string y)
-            {
+        protected class AnagramEqualityComparer : IEqualityComparer<string> {
+            public bool Equals(string x, string y) {
                 if (ReferenceEquals(x, y)) return true;
                 if (x == null | y == null) return false;
                 int length = x.Length;
                 if (length != y.Length) return false;
-                using (var en = x.OrderBy(i => i).GetEnumerator())
-                {
-                    foreach (char c in y.OrderBy(i => i))
-                    {
+                using (var en = x.OrderBy(i => i).GetEnumerator()) {
+                    foreach (char c in y.OrderBy(i => i)) {
                         en.MoveNext();
                         if (c != en.Current) return false;
                     }
@@ -87,8 +77,7 @@ namespace System.Linq.Tests
                 return true;
             }
 
-            public int GetHashCode(string obj)
-            {
+            public int GetHashCode(string obj) {
                 if (obj == null) return 0;
                 int hash = obj.Length;
                 foreach (char c in obj)
@@ -97,41 +86,33 @@ namespace System.Linq.Tests
             }
         }
 
-        protected static IEnumerable<int> RepeatedNumberGuaranteedNotCollectionType(int num, long count)
-        {
+        protected static IEnumerable<int> RepeatedNumberGuaranteedNotCollectionType(int num, long count) {
             for (long i = 0; i < count; i++) yield return num;
         }
 
-        protected static IEnumerable<int> NumberRangeGuaranteedNotCollectionType(int num, int count)
-        {
+        protected static IEnumerable<int> NumberRangeGuaranteedNotCollectionType(int num, int count) {
             for (int i = 0; i < count; i++) yield return num + i;
         }
 
-        protected static IEnumerable<int?> NullableNumberRangeGuaranteedNotCollectionType(int num, int count)
-        {
+        protected static IEnumerable<int?> NullableNumberRangeGuaranteedNotCollectionType(int num, int count) {
             for (int i = 0; i < count; i++) yield return num + i;
         }
 
-        protected static IEnumerable<int?> RepeatedNullableNumberGuaranteedNotCollectionType(int? num, long count)
-        {
+        protected static IEnumerable<int?> RepeatedNullableNumberGuaranteedNotCollectionType(int? num, long count) {
             for (long i = 0; i < count; i++) yield return num;
         }
 
-        protected class ThrowsOnMatchEnumerable<T> : IEnumerable<T>
-        {
+        protected class ThrowsOnMatchEnumerable<T> : IEnumerable<T> {
             private readonly IEnumerable<T> _data;
             private readonly T _thrownOn;
 
-            public ThrowsOnMatchEnumerable(IEnumerable<T> source, T thrownOn)
-            {
+            public ThrowsOnMatchEnumerable(IEnumerable<T> source, T thrownOn) {
                 _data = source;
                 _thrownOn = thrownOn;
             }
 
-            public IEnumerator<T> GetEnumerator()
-            {
-                foreach (var datum in _data)
-                {
+            public IEnumerator<T> GetEnumerator() {
+                foreach (var datum in _data) {
                     if (datum.Equals(_thrownOn)) throw new Exception();
                     yield return datum;
                 }
@@ -143,8 +124,7 @@ namespace System.Linq.Tests
         /// <summary>
         /// Test enumerator - returns int values from 1 to 5 inclusive.
         /// </summary>
-        protected class TestEnumerator : IEnumerable<int>, IEnumerator<int>
-        {
+        protected class TestEnumerator : IEnumerable<int>, IEnumerator<int> {
             private int _current = 0;
 
             public virtual int Current => _current;
@@ -157,8 +137,7 @@ namespace System.Linq.Tests
 
             public virtual bool MoveNext() => _current++ < 5;
 
-            public void Reset()
-            {
+            public void Reset() {
                 throw new NotImplementedException();
             }
 
@@ -168,15 +147,11 @@ namespace System.Linq.Tests
         /// <summary>
         /// A test enumerator that throws an InvalidOperationException when invoking Current after MoveNext has been called exactly once.
         /// </summary>
-        protected class ThrowsOnCurrentEnumerator : TestEnumerator
-        {
-            public override int Current
-            {
-                get
-                {
+        protected class ThrowsOnCurrentEnumerator : TestEnumerator {
+            public override int Current {
+                get {
                     var current = base.Current;
-                    if (current == 1)
-                    {
+                    if (current == 1) {
                         throw new InvalidOperationException();
                     }
                     return current;
@@ -187,13 +162,10 @@ namespace System.Linq.Tests
         /// <summary>
         /// A test enumerator that throws an InvalidOperationException when invoking MoveNext after MoveNext has been called exactly once.
         /// </summary>
-        protected class ThrowsOnMoveNext : TestEnumerator
-        {
-            public override bool MoveNext()
-            {
+        protected class ThrowsOnMoveNext : TestEnumerator {
+            public override bool MoveNext() {
                 bool baseReturn = base.MoveNext();
-                if (base.Current == 1)
-                {
+                if (base.Current == 1) {
                     throw new InvalidOperationException();
                 }
 
@@ -204,14 +176,11 @@ namespace System.Linq.Tests
         /// <summary>
         /// A test enumerator that throws an InvalidOperationException when GetEnumerator is called for the first time.
         /// </summary>
-        protected class ThrowsOnGetEnumerator : TestEnumerator
-        {
+        protected class ThrowsOnGetEnumerator : TestEnumerator {
             private int getEnumeratorCallCount;
 
-            public override IEnumerator<int> GetEnumerator()
-            {
-                if (getEnumeratorCallCount++ == 0)
-                {
+            public override IEnumerator<int> GetEnumerator() {
+                if (getEnumeratorCallCount++ == 0) {
                     throw new InvalidOperationException();
                 }
 
@@ -219,24 +188,20 @@ namespace System.Linq.Tests
             }
         }
 
-        protected static IEnumerable<T> ForceNotCollection<T>(IEnumerable<T> source)
-        {
+        protected static IEnumerable<T> ForceNotCollection<T>(IEnumerable<T> source) {
             foreach (T item in source) yield return item;
         }
 
-        protected static IEnumerable<T> FlipIsCollection<T>(IEnumerable<T> source)
-        {
+        protected static IEnumerable<T> FlipIsCollection<T>(IEnumerable<T> source) {
             return source is ICollection<T> ? ForceNotCollection(source) : new List<T>(source);
         }
 
-        protected struct StringWithIntArray
-        {
+        protected struct StringWithIntArray {
             public string name { get; set; }
             public int?[] total { get; set; }
         }
 
-        protected class DelegateBasedCollection<T> : ICollection<T>
-        {
+        protected class DelegateBasedCollection<T> : ICollection<T> {
             public Func<int> CountWorker { get; set; }
             public Func<bool> IsReadOnlyWorker { get; set; }
             public Action<T> AddWorker { get; set; }
@@ -247,8 +212,7 @@ namespace System.Linq.Tests
             public Func<IEnumerator<T>> GetEnumeratorWorker { get; set; }
             public Func<IEnumerator> NonGenericGetEnumeratorWorker { get; set; }
 
-            public DelegateBasedCollection()
-            {
+            public DelegateBasedCollection() {
                 CountWorker = () => 0;
                 IsReadOnlyWorker = () => false;
                 AddWorker = item => { };
@@ -271,8 +235,7 @@ namespace System.Linq.Tests
             IEnumerator IEnumerable.GetEnumerator() => NonGenericGetEnumeratorWorker();
         }
 
-        protected static List<Func<IEnumerable<T>, IEnumerable<T>>> IdentityTransforms<T>()
-        {
+        protected static List<Func<IEnumerable<T>, IEnumerable<T>>> IdentityTransforms<T>() {
             // All of these transforms should take an enumerable and produce
             // another enumerable with the same contents.
             return new List<Func<IEnumerable<T>, IEnumerable<T>>>
@@ -288,8 +251,7 @@ namespace System.Linq.Tests
             };
         }
 
-        protected sealed class DelegateIterator<TSource> : IEnumerable<TSource>, IEnumerator<TSource>
-        {
+        protected sealed class DelegateIterator<TSource> : IEnumerable<TSource>, IEnumerator<TSource> {
             private readonly Func<IEnumerator<TSource>> _getEnumerator;
             private readonly Func<bool> _moveNext;
             private readonly Func<TSource> _current;
@@ -305,8 +267,7 @@ namespace System.Linq.Tests
                 Func<IEnumerator> explicitGetEnumerator = null,
                 Func<object> explicitCurrent = null,
                 Action reset = null,
-                Action dispose = null)
-            {
+                Action dispose = null) {
                 _getEnumerator = getEnumerator ?? (() => this);
                 _moveNext = moveNext ?? (() => { throw new NotImplementedException(); });
                 _current = current ?? (() => { throw new NotImplementedException(); });

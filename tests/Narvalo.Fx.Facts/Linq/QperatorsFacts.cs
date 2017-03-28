@@ -1,9 +1,16 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
 namespace Narvalo.Linq {
-    public static partial class QperatorsFacts {
+    using System.Collections.Generic;
+    using System.Linq.Tests;
+
+    public partial class QperatorsFacts : EnumerableTests {
         internal sealed class tAttribute : TestCaseAttribute {
             public tAttribute(string description) : base(nameof(Qperators), description) { }
+        }
+
+        private static IEnumerable<T> EmptySource<T>() {
+            yield break;
         }
     }
 }

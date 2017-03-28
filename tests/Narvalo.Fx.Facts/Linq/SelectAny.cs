@@ -8,7 +8,7 @@ namespace Narvalo.Linq {
     using Narvalo.Applicative;
     using Xunit;
 
-    public static partial class QperatorsFacts {
+    public partial class QperatorsFacts {
         [t("SelectAny() guards.")]
         public static void SelectAny0() {
             IEnumerable<int> nullsource = null;

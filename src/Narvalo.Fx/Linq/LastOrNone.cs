@@ -14,8 +14,7 @@ namespace Narvalo.Linq
             Require.NotNull(@this, nameof(@this));
 
             // Fast track.
-            var list = @this as IList<TSource>;
-            if (list != null)
+            if (@this is IList<TSource> list)
             {
                 return list.Count > 0 ? Maybe.Of(list[list.Count - 1]) : Maybe<TSource>.None;
             }
@@ -44,8 +43,7 @@ namespace Narvalo.Linq
             Require.NotNull(predicate, nameof(predicate));
 
             // Fast track.
-            var list = @this as IList<TSource>;
-            if (list != null)
+            if (@this is IList<TSource> list)
             {
                 for (int i = list.Count - 1; i >= 0; --i)
                 {

@@ -15,8 +15,7 @@ namespace Narvalo.Linq
             Require.NotNull(@this, nameof(@this));
 
             // Fast track.
-            var list = @this as IList<TSource>;
-            if (list != null)
+            if (@this is IList<TSource> list)
             {
                 return list.Count > 0 ? Maybe.Of(list[0]) : Maybe<TSource>.None;
             }

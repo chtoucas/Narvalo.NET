@@ -9,13 +9,10 @@ using Narvalo.Linq;
 using System.Collections.Generic;
 using Xunit;
 
-namespace System.Linq.Tests
-{
-    public class AppendPrependTests : EnumerableTests
-    {
+namespace System.Linq.Tests {
+    public class AppendPrependTests : EnumerableTests {
         [Fact]
-        public void SameResultsRepeatCallsIntQueryAppend()
-        {
+        public void SameResultsRepeatCallsIntQueryAppend() {
             var q1 = from x1 in new int?[] { 2, 3, null, 2, null, 4, 5 }
                      select x1;
 
@@ -24,8 +21,7 @@ namespace System.Linq.Tests
         }
 
         [Fact]
-        public void SameResultsRepeatCallsIntQueryPrepend()
-        {
+        public void SameResultsRepeatCallsIntQueryPrepend() {
             var q1 = from x1 in new int?[] { 2, 3, null, 2, null, 4, 5 }
                      select x1;
 
@@ -34,8 +30,7 @@ namespace System.Linq.Tests
         }
 
         [Fact]
-        public void SameResultsRepeatCallsStringQueryAppend()
-        {
+        public void SameResultsRepeatCallsStringQueryAppend() {
             var q1 = from x1 in new[] { "AAA", String.Empty, "q", "C", "#", "!@#$%^", "0987654321", "Calling Twice" }
                      select x1;
 
@@ -44,8 +39,7 @@ namespace System.Linq.Tests
         }
 
         [Fact]
-        public void SameResultsRepeatCallsStringQueryPrepend()
-        {
+        public void SameResultsRepeatCallsStringQueryPrepend() {
             var q1 = from x1 in new[] { "AAA", String.Empty, "q", "C", "#", "!@#$%^", "0987654321", "Calling Twice" }
                      select x1;
 
@@ -54,8 +48,7 @@ namespace System.Linq.Tests
         }
 
         [Fact]
-        public void RepeatIteration()
-        {
+        public void RepeatIteration() {
             var q = Enumerable.Range(3, 4).Append(12);
             Assert.Equal(q, q);
             q = q.Append(14);
@@ -63,22 +56,19 @@ namespace System.Linq.Tests
         }
 
         [Fact]
-        public void EmptyAppend()
-        {
+        public void EmptyAppend() {
             int[] first = { };
             Assert.Single(first.Append(42), 42);
         }
 
         [Fact]
-        public void EmptyPrepend()
-        {
+        public void EmptyPrepend() {
             string[] first = { };
             Assert.Single(first.Prepend("aa"), "aa");
         }
 
         [Fact]
-        public void PrependNoIteratingSourceBeforeFirstItem()
-        {
+        public void PrependNoIteratingSourceBeforeFirstItem() {
             var ie = new List<int>();
             var prepended = (from i in ie select i).Prepend(4);
 
@@ -88,8 +78,7 @@ namespace System.Linq.Tests
         }
 
         [Fact]
-        public void ForcedToEnumeratorDoesntEnumeratePrepend()
-        {
+        public void ForcedToEnumeratorDoesntEnumeratePrepend() {
             var iterator = NumberRangeGuaranteedNotCollectionType(0, 3).Prepend(4);
             // Don't insist on this behaviour, but check it's correct if it happens
             var en = iterator as IEnumerator<int>;
@@ -97,8 +86,7 @@ namespace System.Linq.Tests
         }
 
         [Fact]
-        public void ForcedToEnumeratorDoesntEnumerateAppend()
-        {
+        public void ForcedToEnumeratorDoesntEnumerateAppend() {
             var iterator = NumberRangeGuaranteedNotCollectionType(0, 3).Append(4);
             // Don't insist on this behaviour, but check it's correct if it happens
             var en = iterator as IEnumerator<int>;
@@ -106,8 +94,7 @@ namespace System.Linq.Tests
         }
 
         [Fact]
-        public void ForcedToEnumeratorDoesntEnumerateMultipleAppendsAndPrepends()
-        {
+        public void ForcedToEnumeratorDoesntEnumerateMultipleAppendsAndPrepends() {
             var iterator = NumberRangeGuaranteedNotCollectionType(0, 3).Append(4).Append(5).Prepend(-1).Prepend(-2);
             // Don't insist on this behaviour, but check it's correct if it happens
             var en = iterator as IEnumerator<int>;
@@ -115,15 +102,13 @@ namespace System.Linq.Tests
         }
 
         [Fact]
-        public void SourceNull()
-        {
+        public void SourceNull() {
             Assert.Throws<ArgumentNullException>("this", () => ((IEnumerable<int>)null).Append(1));
             Assert.Throws<ArgumentNullException>("this", () => ((IEnumerable<int>)null).Prepend(1));
         }
 
         [Fact]
-        public void Combined()
-        {
+        public void Combined() {
             var v = "foo".Append('1').Append('2').Prepend('3').Concat("qq".Append('Q').Prepend('W'));
 
             Assert.Equal(v.ToArray(), "3foo12WqqQ".ToArray());
@@ -138,8 +123,7 @@ namespace System.Linq.Tests
         }
 
         [Fact]
-        public void AppendCombinations()
-        {
+        public void AppendCombinations() {
             var source = Enumerable.Range(0, 3).Append(3).Append(4);
             var app0a = source.Append(5);
             var app0b = source.Append(6);
@@ -157,8 +141,7 @@ namespace System.Linq.Tests
         }
 
         [Fact]
-        public void PrependCombinations()
-        {
+        public void PrependCombinations() {
             var source = Enumerable.Range(2, 2).Prepend(1).Prepend(0);
             var pre0a = source.Prepend(5);
             var pre0b = source.Prepend(6);
@@ -176,8 +159,7 @@ namespace System.Linq.Tests
         }
 
         [Fact]
-        public void Append1ToArrayToList()
-        {
+        public void Append1ToArrayToList() {
             var source = Enumerable.Range(0, 2).Append(2);
             Assert.Equal(Enumerable.Range(0, 3), source.ToList());
             Assert.Equal(Enumerable.Range(0, 3), source.ToArray());
@@ -192,8 +174,7 @@ namespace System.Linq.Tests
         }
 
         [Fact]
-        public void Prepend1ToArrayToList()
-        {
+        public void Prepend1ToArrayToList() {
             var source = Enumerable.Range(1, 2).Prepend(0);
             Assert.Equal(Enumerable.Range(0, 3), source.ToList());
             Assert.Equal(Enumerable.Range(0, 3), source.ToArray());
@@ -208,8 +189,7 @@ namespace System.Linq.Tests
         }
 
         [Fact]
-        public void AppendNToArrayToList()
-        {
+        public void AppendNToArrayToList() {
             var source = Enumerable.Range(0, 2).Append(2).Append(3);
             Assert.Equal(Enumerable.Range(0, 4), source.ToList());
             Assert.Equal(Enumerable.Range(0, 4), source.ToArray());
@@ -224,8 +204,7 @@ namespace System.Linq.Tests
         }
 
         [Fact]
-        public void PrependNToArrayToList()
-        {
+        public void PrependNToArrayToList() {
             var source = Enumerable.Range(2, 2).Prepend(1).Prepend(0);
             Assert.Equal(Enumerable.Range(0, 4), source.ToList());
             Assert.Equal(Enumerable.Range(0, 4), source.ToArray());
@@ -240,8 +219,7 @@ namespace System.Linq.Tests
         }
 
         [Fact]
-        public void AppendPrependToArrayToList()
-        {
+        public void AppendPrependToArrayToList() {
             var source = Enumerable.Range(2, 2).Prepend(1).Append(4).Prepend(0).Append(5);
             Assert.Equal(Enumerable.Range(0, 6), source.ToList());
             Assert.Equal(Enumerable.Range(0, 6), source.ToArray());
@@ -260,8 +238,7 @@ namespace System.Linq.Tests
         }
 
         [Fact]
-        public void AppendPrependRunOnce()
-        {
+        public void AppendPrependRunOnce() {
             var source = NumberRangeGuaranteedNotCollectionType(2, 2).RunOnce().Prepend(1).RunOnce().Prepend(0).RunOnce().Append(4).RunOnce().Append(5).RunOnce();
             Assert.Equal(Enumerable.Range(0, 6), source.ToList());
             source = NumberRangeGuaranteedNotCollectionType(2, 2).Prepend(1).Prepend(0).Append(4).Append(5).RunOnce();
