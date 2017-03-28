@@ -5,10 +5,8 @@ Divers et variés
 ----------------
 
 - [High] `make.ps1` fails sometimes for weird reasons (most of the time
-  it works perfectly):
-  * Xunit cannot find localized resources (should be fixed now).
-  * There seems to be a problem with the new MSBuild when we have VS opened
-    and it is running at the same time:
+  it works perfectly). There seems to be a problem with the new MSBuild when
+  we have VS opened and it is running at the same time:
 ```
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\Microsoft.Common.CurrentVersion.targets(
 3245,5): error MSB3491: Impossible d'écrire des lignes dans le fichier "I:\github\Narvalo.NET\work\obj\Debug\CoreCompil
@@ -17,11 +15,6 @@ he', car il est en cours d'utilisation par un autre processus. [I:\github\Narval
 .Facts.csproj]
 ```
   See [dotnet issue](https://github.com/dotnet/cli/issues/4786)?
-- Sometimes FsCheck fails with:
-```
-C:\Users\Kurt\Projects\FsCheck\FsCheck\src\FsCheck\Gen.fs(592):
----- System.ArgumentException : Un élément avec la même clé a déjà été ajouté.
-```
 - Review localization for Narvalo.Build, Narvalo.Mvp, Narvalo.Mvp.Web
   and Narvalo.Web.
 - [Low] Automatically create the assembly infos from the NuGet spec.
@@ -63,12 +56,12 @@ Narvalo.Fx
 - Simplify LINQ for `Maybe<T?>`.
 
 Next:
-- Add `SelectMany` to `Outcome` and `Fallible`... OR remove `Select`.
+- Add `MapMany` to `Outcome` and `Fallible`....
+- Add other monads - prototypes [here](https://github.com/chtoucas/Brouillons/tree/master/src/play/Functional/Monadic)
 - `OnError()`, `WhenError()` & co could return a boolean to signal if it did anything.
 - Explain what do we mean by shadowing.
 - More Haskell API, eg When, Forever & co?
 - Add async and lazy alternatives?
-- Complete T4 generation of tests for all monads
 - [Idioms](http://tomasp.net/blog/idioms-in-linq.aspx/)
 
 Narvalo.Money
