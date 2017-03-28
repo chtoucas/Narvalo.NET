@@ -18,11 +18,15 @@ Project | Summary | .NET Platform | Package
 [Narvalo.Mvp.Web](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Mvp.Web/) | MVP for WebForms | .NET 4.5 |  [![NuGet](https://img.shields.io/nuget/v/Narvalo.Mvp.Web.svg)](https://www.nuget.org/packages/Narvalo.Mvp.Web/)
 [Narvalo.Web](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Web/) | ASP.NET optimization | .NET 4.5 |  [![NuGet](https://img.shields.io/nuget/v/Narvalo.Web.svg)](https://www.nuget.org/packages/Narvalo.Web/)
 
-Samples:
+### Samples
+
 - [Command-Line MVP sample](https://github.com/chtoucas/Narvalo.NET/tree/master/samples/MvpCommandLine)
 - [WebForms MVP sample](https://github.com/chtoucas/Narvalo.NET/tree/master/samples/MvpWebForms)
 
-Internal dependency graph:
+For a much more elaborate example of a command-line application,
+see [Quaderno](https://github.com/chtoucas/Quaderno/tree/master/src/Quaderno).
+
+### Internal dependency graph:
 
 Project         | Dependencies
 ----------------|-------------
