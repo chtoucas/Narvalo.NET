@@ -1,8 +1,4 @@
 ﻿- name: Home
   href: index.md
-- name: User Documentation
-  href: userguide/index.md
 - name: API Documentation
   href: api/
-- name: Developer Guidelines
-  href: developer.md
