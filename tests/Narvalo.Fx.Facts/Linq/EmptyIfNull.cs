@@ -7,13 +7,13 @@ namespace Narvalo.Linq {
     using Xunit;
 
     public static partial class QperatorsFacts {
-        [t("EmptyIfNull() returns empty if null.")]
+        [t("EmptyIfNull(null) returns empty.")]
         public static void EmptyIfNull1() {
             IEnumerable<int> seq = null;
             Assert.Empty(seq.EmptyIfNull());
         }
 
-        [t("EmptyIfNull() returns seq if non-null.")]
+        [t("EmptyIfNull(non-null) returns the input.")]
         public static void EmptyIfNull2() {
             var seq = Enumerable.Range(0, 1);
             Assert.Same(seq, seq.EmptyIfNull());

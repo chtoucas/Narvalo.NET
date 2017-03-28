@@ -13,7 +13,7 @@ Changelog
 ---------
 
 **vNext**
-- **[Fix]** `Iban.Parse()` and `Iban.TryParse()` when using the option
+- **[Bug Fix]** `Iban.Parse()` and `Iban.TryParse()` when using the option
   `IbanStyles.AllowInnerWhite` but not the others allowed for leading or 
   trailing white spaces.
 - Achieve full test coverage.

@@ -77,10 +77,16 @@
     </Compile>
     <Compile Include="Applicative\MaybeFacts.cs" />
     <Compile Include="Applicative\QullableFacts.cs" />
+    <Compile Include="Linq\Aggregate.cs" />
     <Compile Include="Linq\AppendPrepend.cs" />
+    <Compile Include="Linq\SingleOrNone.cs" />
+    <Compile Include="Linq\LastOrNone.cs" />
+    <Compile Include="Linq\FirstOrNone.cs" />
+    <Compile Include="Linq\ElementAtOrNone.cs" />
     <Compile Include="Linq\EmptyIfNull.cs" />
     <Compile Include="Linq\IsEmpty.cs" />
     <Compile Include="Linq\QperatorsFacts.cs" />
+    <Compile Include="Linq\WhereAny.cs" />
     <Compile Include="Linq\_Externs\AppendPrependFacts.cs" />
     <Compile Include="Linq\_Externs\EnumerableTests.cs" />
     <Compile Include="Linq\SelectAny.cs" />

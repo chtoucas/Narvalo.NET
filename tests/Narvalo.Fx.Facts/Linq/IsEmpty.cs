@@ -6,13 +6,13 @@ namespace Narvalo.Linq {
     using Xunit;
 
     public static partial class QperatorsFacts {
-        [t("IsEmpty() returns true if empty.")]
+        [t("IsEmpty(empty) returns true.")]
         public static void IsEmpty1() {
             var seq = Enumerable.Empty<int>();
             Assert.True(seq.IsEmpty());
         }
 
-        [t("IsEmpty() returns false if non-empty.")]
+        [t("IsEmpty(non-empty) returns false.")]
         public static void IsEmpty2() {
             var seq = Enumerable.Range(0, 1);
             Assert.False(seq.IsEmpty());
