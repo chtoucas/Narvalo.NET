@@ -17,7 +17,7 @@ Overview
 
 ### Prerequisites
 
-Requirements:
+Minimal requirements:
 - Visual Studio Community 2017.
 - Modeling SDK (part of the Visual Studio installer) needed for T4 integration
   with MSBuild.
@@ -63,8 +63,8 @@ Project | Summary | .NET Platform | Package
 
 Internal dependency graph:
 
-Project         | Dependencies
-----------------|-------------
+Project         | Dependencie(s)
+----------------|---------------
 Narvalo.Build   | -
 Narvalo.Cerbere | -
 Narvalo.Common  | Core, Fx
@@ -107,10 +107,10 @@ All Code Analysis suppressions must be justified and tagged:
 
 ### Tests
 
-Test projects use a custom .editorconfig taylored to produce more compact code.
+Test projects use a custom .editorconfig tailored to produce more compact codes.
 
-We do not use any special scheme to name the test methods **instead** we should
-provide a display name.
+We do not use any special scheme to name the test methods **instead** we always
+provide a detailed description.
 
 Consider using traits:
   * `Slow` for slow tests.
@@ -153,8 +153,6 @@ A typical project file should then look like this:
 
 Clean up the assembly information file (`Properties\AssemblyInfo.cs`):
 ```csharp
-// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
-
 using System.Reflection;
 
 [assembly: AssemblyTitle("The assembly title.")]
@@ -165,7 +163,8 @@ For the assembly version see [here](#versioning).
 Optionally, give access to internals to the test project:
 ```csharp
 #if !NO_INTERNALS_VISIBLE_TO // Make internals visible to the test projects.
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Narvalo.XXX.Facts" + Narvalo.Properties.AssemblyInfo.PublicKeySuffix)]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo(
+    "Narvalo.XXX.Facts" + Narvalo.Properties.AssemblyInfo.PublicKeySuffix)]
 #endif
 ```
 
@@ -237,9 +236,11 @@ Add the following content to you local customization property file `Narvalo.XXX.
   <Import Project="$(RepositorySettingsDir)Tests.props" />
 </Project>
 ```
-This has two consequences:
+This has the following consequences:
 - Test projects use a dummy assembly version.
-- Test projects use custom FxCop rules.
+- Test projects are not signed.
+- Test projects are not CLS compliant.
+- Test projects use custom CA rules.
 
 Reference the shared project `tests\TestCommon`.
 
@@ -252,9 +253,9 @@ Add the following content to you local customization property file `Narvalo.XXX.
   <Import Project="$(RepositorySettingsDir)Samples.props" />
 </Project>
 ```
-This has ony one effect:
+This has the following consequences:
 - Sample projects use a dummy assembly version.
-- Sample projects use custom FxCop rules.
+- Sample projects use custom CA rules.
 
 --------------------------------------------------------------------------------
 
@@ -401,7 +402,7 @@ dependency on other Narvalo packages, always publish all packages together.
 Developer Operations
 --------------------
 
-### Cleanup the repository
+### Clean up the repository
 
 Common cases:
 - Remove untracked files and directories: `git clean -nd`
@@ -412,7 +413,7 @@ Common cases:
 
 When you are ready, change `-n` to `-f`, otherwise nothing will happen.
 
-Cleanup unnecessary files and optimize the local repository:
+Clean up unnecessary files and optimize the local repository:
 `git clean` and every so often `git clean --aggressive`.
 
 ### Scripts
