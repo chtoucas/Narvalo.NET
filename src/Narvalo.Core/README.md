@@ -16,7 +16,7 @@ Changelog
   we do not have a real use case for it.
 - **[Breaking]** Change the name of the second parameter (`arg0` to `arg` )
   in `Format.Current(string, T)`.
-- Achieve good documentation and test coverage.
+- Achieve good documentation and full test coverage.
 
 **Version 1.2.0** (released 2017-03-17)
 - **[Breaking]** Remove variants of `Format.Current` and `Format.Invariant`

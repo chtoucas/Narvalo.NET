@@ -53,7 +53,6 @@ namespace Narvalo.Finance
             ? _parts.LiteralValue.Substring(0, IbanParts.MinLength) + "..."
             : _parts.LiteralValue;
 
-        // REVIEW: TryBuild? Add validation?
         public static Iban Build(string countryCode, string bban)
         {
             var parts = IbanParts.Build(countryCode, bban);
@@ -151,6 +150,7 @@ namespace Narvalo.Finance
                     start++;
                 }
             }
+
             // The input contains only whitespaces.
             if (start == len) { return String.Empty; }
 
