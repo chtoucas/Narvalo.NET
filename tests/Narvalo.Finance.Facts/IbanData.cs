@@ -2,10 +2,17 @@
 
 namespace Narvalo.Finance {
     using System.Collections.Generic;
+    using System.Linq;
 
     public static class IbanData {
+        public static IEnumerable<object[]> BadIbans {
+            get => BadLengthIbans.Concat(BadCountryCodeIbans)
+                .Concat(BadCheckDigitsIbans)
+                .Concat(BadBbanIbans);
+        }
+
         // Well-formed (valid content and length) BUT still invalid checksum.
-        public static IEnumerable<object[]> BadChecksumValues {
+        public static IEnumerable<object[]> BadChecksumIbans {
             get {
                 yield return new object[] { "FR345678901234" };
                 yield return new object[] { "FR3456789012345" };
@@ -32,7 +39,7 @@ namespace Narvalo.Finance {
         }
 
         // Ill-formed (invalid length) values.
-        public static IEnumerable<object[]> BadLengthValues {
+        public static IEnumerable<object[]> BadLengthIbans {
             get {
                 yield return new object[] { "" };
                 yield return new object[] { "F" };
@@ -53,7 +60,7 @@ namespace Narvalo.Finance {
         }
 
         // Ill-formed (valid length BUT invalid content) values.
-        public static IEnumerable<object[]> BadContentValues {
+        public static IEnumerable<object[]> BadContentIbans {
             get {
                 yield return new object[] { "FR34567890123à" };
                 yield return new object[] { "FR@45678901234" };
@@ -61,11 +68,42 @@ namespace Narvalo.Finance {
             }
         }
 
+        // Ill-formed (valid length BUT invalid country code) values.
+        public static IEnumerable<object[]> BadCountryCodeIbans {
+            get {
+                yield return new object[] { "  345678901234" };
+                yield return new object[] { "--345678901234" };
+                yield return new object[] { "fr345678901234" };
+                yield return new object[] { "ça345678901234" };
+            }
+        }
+
+        // Ill-formed (valid length BUT invalid check digits) values.
+        public static IEnumerable<object[]> BadCheckDigitsIbans {
+            get {
+                yield return new object[] { "FR  5678901234" };
+                yield return new object[] { "FR--5678901234" };
+                yield return new object[] { "FRAB5678901234" };
+                yield return new object[] { "FRab5678901234" };
+                yield return new object[] { "FRça5678901234" };
+            }
+        }
+
+        // Ill-formed (valid length BUT invalid BBAN) values.
+        public static IEnumerable<object[]> BadBbanIbans {
+            get {
+                yield return new object[] { "FR3456789012  " };
+                yield return new object[] { "FR3456789012--" };
+                yield return new object[] { "FR3456789012ab" };
+                yield return new object[] { "FR3456789012ça" };
+            }
+        }
+
         // Fake values - they do not have a valid checksum but their
         // content is predictable: the country code is always 'FR',
         // the check digits is always '34'. The second element in
         // each array is the BBAN.
-        public static IEnumerable<object[]> FakeValues {
+        public static IEnumerable<object[]> FakeIbans {
             get {
                 yield return new object[] { "FR345678901234", "5678901234" };
                 yield return new object[] { "FR3456789012345", "56789012345" };
@@ -188,7 +226,7 @@ namespace Narvalo.Finance {
         // Sample IBANs from http://www.rbs.co.uk/corporate/international/g0/guide-to-international-business/regulatory-information/iban/iban-example.ashx.
         // except the last one "GB29 RBOS 6016 1331 9268 19" which is not valid;
         // we use instead http://www.xe.com/ibancalculator/sample/?ibancountry=united-kingdom.
-        public static IEnumerable<object[]> SampleDisplayValues {
+        public static IEnumerable<object[]> SampleDisplayIbans {
             get {
                 yield return new object[] { "AL47 2121 1009 0000 0002 3569 8741" };
                 yield return new object[] { "AD12 0001 2030 2003 5910 0100" };
@@ -252,7 +290,7 @@ namespace Narvalo.Finance {
         }
 
         // See comments before SampleDisplayValues.
-        public static IEnumerable<object[]> SampleValues {
+        public static IEnumerable<object[]> SampleIbans {
             get {
                 yield return new object[] { "AL47212110090000000235698741" };
                 yield return new object[] { "AD1200012030200359100100" };
@@ -316,7 +354,7 @@ namespace Narvalo.Finance {
         }
 
         // Well-formed (invalid) IBAN values.
-        public static IEnumerable<object[]> IdenticalValues {
+        public static IEnumerable<object[]> FakeIdenticalIbans {
             get {
                 yield return new object[] { "FR345678901234", "FR345678901234" };
                 yield return new object[] { "FR3456789012345", "FR3456789012345" };
@@ -343,7 +381,7 @@ namespace Narvalo.Finance {
         }
 
         // Well-formed (invalid) IBAN values.
-        public static IEnumerable<object[]> DistinctValues {
+        public static IEnumerable<object[]> FakeDistinctIbans {
             get {
                 yield return new object[] { "FR345678901234", "FR3456789012345" };
                 yield return new object[] { "FR3456789012345", "FR34567890123456" };
@@ -370,7 +408,7 @@ namespace Narvalo.Finance {
         }
 
         // Well-formed (invalid) IBAN values.
-        public static IEnumerable<object[]> FormatSamples {
+        public static IEnumerable<object[]> FakeFormattedIbans {
             get {
                 yield return new object[] { "FR345678901234", "FR34 5678 9012 34" };
                 yield return new object[] { "FR3456789012345", "FR34 5678 9012 345" };
