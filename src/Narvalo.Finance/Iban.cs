@@ -165,14 +165,27 @@ namespace Narvalo.Finance
                 }
             }
 
+            // removespaces is really remove **inner** spaces.
+            bool removespaces = styles.Contains(IbanStyles.AllowInnerWhite);
+
             if (styles.Contains(IbanStyles.AllowHeader)
                 && text.Length >= start + 5
                 && text.Substring(start, 5) == IbanParts.HumanHeader)
             {
                 start += 5;
+                if (removespaces)
+                {
+                    // Ignore leading whitespaces.
+                    // By removing an IBAN prefix, we might have white spaces
+                    // again at the beginning of the loop.
+                    while (start < len)
+                    {
+                        if (text[start] != WHITESPACE_CHAR) { break; }
+                        start++;
+                    }
+                }
             }
 
-            bool removespaces = styles.Contains(IbanStyles.AllowInnerWhite);
             bool transformcase = styles.Contains(IbanStyles.AllowLowercaseLetter);
 
             // NB: If end - start + 1 < MinLength, the input is clearly invalid, nevertheless
@@ -185,11 +198,7 @@ namespace Narvalo.Finance
             {
                 char ch = text[i];
 
-                // NB: If IbanStyles.AllowIbanPrefix is on and we did remove an IBAN prefix,
-                // we might have whitespaces again at the beginning of the loop. Lesson: do not
-                // exclude i = start. We do not exclude i = end too, even though we already know
-                // that "ch" is not a whitespace; useless optimization.
-                if (removespaces && ch == WHITESPACE_CHAR) { continue; }
+                if (removespaces && i != 0 && i != end && ch == WHITESPACE_CHAR) { continue; }
 
                 if (transformcase && ch >= 'a' && ch <= 'z')
                 {
