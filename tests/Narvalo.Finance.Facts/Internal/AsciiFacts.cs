@@ -1,33 +1,36 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Finance.Internal
-{
+namespace Narvalo.Finance.Internal {
 #if !NO_INTERNALS_VISIBLE_TO
 
     using System;
 
     using Xunit;
 
-    public static class AsciiFacts
-    {
-        [Fact]
-        public static void IsDigit_Fails_ForNullString()
-            => Assert.False(Ascii.IsDigit(null));
+    public static class AsciiFacts {
+        internal sealed class tAttribute : TestCaseAttribute {
+            public tAttribute(string description) : base(nameof(Ascii), description) { }
+        }
 
-        [Fact]
-        public static void IsDigit_Fails_ForEmptyString()
-            => Assert.False(Ascii.IsDigit(String.Empty));
+        internal sealed class TAttribute : TestTheoryAttribute {
+            public TAttribute(string description) : base(nameof(Ascii), description) { }
+        }
 
-        [Theory]
+        [t("IsDigit(null) returns false.")]
+        public static void IsDigit1() => Assert.False(Ascii.IsDigit(null));
+
+        [t(@"IsDigit("""") returns false.")]
+        public static void IsDigit2() => Assert.False(Ascii.IsDigit(String.Empty));
+
+        [T("IsDigit() returns true for valid input.")]
         [InlineData("1")]
         [InlineData("10")]
         [InlineData("100")]
         [InlineData("1000")]
         [InlineData("10000")]
-        public static void IsDigit_ReturnsTrue_ForValidInput(string value)
-            => Assert.True(Ascii.IsDigit(value));
+        public static void IsDigit3(string value) => Assert.True(Ascii.IsDigit(value));
 
-        [Theory]
+        [T("IsDigit() returns false for invalid input.")]
         [InlineData(" ")]
         [InlineData("a")]
         [InlineData("A")]
@@ -44,27 +47,26 @@ namespace Narvalo.Finance.Internal
         [InlineData(" 1a")]
         [InlineData("1a ")]
         [InlineData(" 1a ")]
-        public static void IsDigit_ReturnsFalse_ForInvalidInput(string value)
-            => Assert.False(Ascii.IsDigit(value));
+        public static void IsDigit4(string value) => Assert.False(Ascii.IsDigit(value));
 
-        [Fact]
-        public static void IsDigitOrUpperLetter_Fails_ForNullString()
+        [t("IsDigitOrUpperLetter(null) returns false.")]
+        public static void IsDigitOrUpperLetter1()
             => Assert.False(Ascii.IsDigitOrUpperLetter(null));
 
-        [Fact]
-        public static void IsDigitOrUpperLetter_Fails_ForEmptyString()
+        [t(@"IsDigitOrUpperLetter("""") returns false.")]
+        public static void IsDigitOrUpperLetter2()
             => Assert.False(Ascii.IsDigitOrUpperLetter(String.Empty));
 
-        [Theory]
+        [T("IsDigitOrUpperLetter() returns true for valid input.")]
         [InlineData("1")]
         [InlineData("10")]
         [InlineData("A")]
         [InlineData("AB")]
         [InlineData("1A2B3C")]
-        public static void IsDigitOrUpperLetter_ReturnsTrue_ForValidInput(string value)
+        public static void IsDigitOrUpperLetter3(string value)
             => Assert.True(Ascii.IsDigitOrUpperLetter(value));
 
-        [Theory]
+        [T("IsDigitOrUpperLetter() returns false for invalid input.")]
         [InlineData(" ")]
         [InlineData("a")]
         [InlineData("é")]
@@ -78,24 +80,21 @@ namespace Narvalo.Finance.Internal
         [InlineData(" 1a")]
         [InlineData("1a ")]
         [InlineData(" 1a ")]
-        public static void IsDigitOrUpperLetter_ReturnsFalse_ForInvalidInput(string value)
+        public static void IsDigitOrUpperLetter4(string value)
             => Assert.False(Ascii.IsDigitOrUpperLetter(value));
 
-        [Fact]
-        public static void IsUpperLetter_Fails_ForNullString()
-            => Assert.False(Ascii.IsUpperLetter(null));
+        [t("IsUpperLetter(null) returns false.")]
+        public static void IsUpperLetter1() => Assert.False(Ascii.IsUpperLetter(null));
 
-        [Fact]
-        public static void IsUpperLetter_Fails_ForEmptyString()
-            => Assert.False(Ascii.IsUpperLetter(String.Empty));
+        [t(@"IsUpperLetter("""") returns false.")]
+        public static void IsUpperLetter2() => Assert.False(Ascii.IsUpperLetter(String.Empty));
 
-        [Theory]
+        [T("IsUpperLetter() returns true for valid input.")]
         [InlineData("A")]
         [InlineData("AB")]
-        public static void IsUpperLetter_ReturnsTrue_ForValidInput(string value)
-            => Assert.True(Ascii.IsUpperLetter(value));
+        public static void IsUpperLetter3(string value) => Assert.True(Ascii.IsUpperLetter(value));
 
-        [Theory]
+        [T("IsUpperLetter() returns false for invalid input.")]
         [InlineData(" ")]
         [InlineData("a")]
         [InlineData("é")]
@@ -115,8 +114,7 @@ namespace Narvalo.Finance.Internal
         [InlineData(" 1a")]
         [InlineData("1a ")]
         [InlineData(" 1a ")]
-        public static void IsUpperLetter_ReturnsFalse_ForInvalidInput(string value)
-            => Assert.False(Ascii.IsUpperLetter(value));
+        public static void IsUpperLetter4(string value) => Assert.False(Ascii.IsUpperLetter(value));
     }
 
 #endif

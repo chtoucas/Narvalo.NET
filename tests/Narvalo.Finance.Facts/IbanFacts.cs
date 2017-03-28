@@ -66,10 +66,12 @@ namespace Narvalo.Finance {
             Assert.Equal(iban, result);
         }
 
-        [t("Try-Parse() returns null (fails) for null.")]
-        public static void Parse1() {
-            Assert.Null(Iban.Parse(null));
-            Assert.True(Iban.TryParse(null).IsError);
+        [T("Try-Parse() returns null (fails) for null or empty.")]
+        [InlineData(null)]
+        [InlineData("")]
+        public static void Parse1(string value) {
+            Assert.Null(Iban.Parse(value));
+            Assert.True(Iban.TryParse(value).IsError);
         }
 
         [T("Try-Parse() returns null (fails) if the input is not valid.")]
@@ -93,35 +95,108 @@ namespace Narvalo.Finance {
             Assert.True(Iban.TryParse(value, IbanValidationLevels.Bban).IsError);
         }
 
-        [T("Tr-Parse() succeeds for actual IBANs.")]
+        [T("Try-Parse() succeeds for actual IBANs.")]
         [IbanData(nameof(IbanData.SampleIbans))]
         public static void Parse3(string value) {
             Assert.NotNull(Iban.Parse(value));
             Assert.True(Iban.TryParse(value).IsSuccess);
         }
 
-        [t("Try-Parse() returns null (fails).")]
-        public static void Parse4() {
-            Assert.Null(Iban.Parse(String.Empty, IbanStyles.Any));
-            Assert.True(Iban.TryParse(String.Empty, IbanStyles.Any).IsError);
+        [T("Try-Parse(AllowTrailingWhite) returns null (fails) when white spaces are misplaced.")]
+        [InlineData(" AL47212110090000000235698741")]
+        [InlineData("AL 47212110090000000235698741")]
+        [InlineData("AL47212110090000000235698741\t")]
+        public static void Parse4a(string value) {
+            Assert.Null(Iban.Parse(value, IbanStyles.AllowTrailingWhite));
+            Assert.True(Iban.TryParse(value, IbanStyles.AllowTrailingWhite).IsError);
+        }
 
-            Assert.Null(Iban.Parse(" ", IbanStyles.AllowWhiteSpaces));
-            Assert.True(Iban.TryParse(" ", IbanStyles.AllowWhiteSpaces).IsError);
+        [T("Try-Parse(AllowTrailingWhite) succeeds when the input ends with white spaces.")]
+        [InlineData("AL47212110090000000235698741 ")]
+        [InlineData("AL47212110090000000235698741  ")]
+        public static void Parse4b(string value) {
+            Assert.NotNull(Iban.Parse(value, IbanStyles.AllowTrailingWhite));
+            Assert.True(Iban.TryParse(value, IbanStyles.AllowTrailingWhite).IsSuccess);
+        }
 
-            Assert.Null(Iban.Parse("X ", IbanStyles.AllowTrailingWhite));
-            Assert.True(Iban.TryParse("X ", IbanStyles.AllowLeadingWhite).IsError);
+        [T("Try-Parse(AllowLeadingWhite) returns null (fails) when white spaces are misplaced.")]
+        [InlineData("AL47212110090000000235698741 ")]
+        [InlineData("AL 47212110090000000235698741")]
+        [InlineData("\tAL47212110090000000235698741")]
+        public static void Parse4c(string value) {
+            Assert.Null(Iban.Parse(value, IbanStyles.AllowLeadingWhite));
+            Assert.True(Iban.TryParse(value, IbanStyles.AllowLeadingWhite).IsError);
+        }
 
-            Assert.Null(Iban.Parse(" X", IbanStyles.AllowLeadingWhite));
-            Assert.True(Iban.TryParse(" X", IbanStyles.AllowLeadingWhite).IsError);
+        [T("Try-Parse(AllowLeadingWhite) succeeds when the input starts with white spaces.")]
+        [InlineData(" AL47212110090000000235698741")]
+        [InlineData("  AL47212110090000000235698741")]
+        public static void Parse4d(string value) {
+            Assert.NotNull(Iban.Parse(value, IbanStyles.AllowLeadingWhite));
+            Assert.True(Iban.TryParse(value, IbanStyles.AllowLeadingWhite).IsSuccess);
+        }
 
-            Assert.Null(Iban.Parse(" X X ", IbanStyles.AllowLeadingWhite));
-            Assert.True(Iban.TryParse(" X X ", IbanStyles.AllowLeadingWhite).IsError);
+        [T("Try-Parse(AllowInnerWhite) returns null (fails) when white spaces are misplaced.")]
+        [InlineData("AL47212110090000000235698741 ")]
+        [InlineData("AL47212110090000000235698741  ")]
+        [InlineData(" AL47212110090000000235698741")]
+        [InlineData("  AL47212110090000000235698741")]
+        [InlineData("AL\t47212110090000000235698741")]
+        public static void Parse4e(string value) {
+            Assert.Null(Iban.Parse(value, IbanStyles.AllowInnerWhite));
+            Assert.True(Iban.TryParse(value, IbanStyles.AllowInnerWhite).IsError);
+        }
 
-            Assert.Null(Iban.Parse("IBAN X", IbanStyles.AllowHeader));
-            Assert.True(Iban.TryParse("IBAN X", IbanStyles.AllowHeader).IsError);
+        [T("Try-Parse(AllowInnerWhite) succeeds when the input contains inner white spaces.")]
+        [InlineData("AL472121 100900000002 35698741")]
+        [InlineData("AL47 21211009 0000000235698741")]
+        [InlineData("AL47 21211 009 0 0 0000 0235 698741")]
+        public static void Parse4f(string value) {
+            Assert.NotNull(Iban.Parse(value, IbanStyles.AllowInnerWhite));
+            Assert.True(Iban.TryParse(value, IbanStyles.AllowInnerWhite).IsSuccess);
+        }
 
-            Assert.True(Iban.TryParse("IBANAL47212110090000000235698741", IbanStyles.AllowHeader).IsError);
-            Assert.True(Iban.TryParse("IBANAL47212110090000000235698741", IbanStyles.AllowHeader).IsError);
+        [T("Try-Parse(AllowLowercaseLetter) succeeds if there are lowercase characters.")]
+        [InlineData("al47212110090000000235698741")]
+        [InlineData("Al47212110090000000235698741")]
+        [InlineData("mt84malt011000012345mtlcast001s")]
+        public static void Parse5(string value) {
+            Assert.NotNull(Iban.Parse(value, IbanStyles.AllowLowercaseLetter));
+            Assert.True(Iban.TryParse(value, IbanStyles.AllowLowercaseLetter).IsSuccess);
+        }
+
+        [T("Try-Parse(AllowHeader) fails if the header is not valid.")]
+        [InlineData("IBANAL47212110090000000235698741")]
+        [InlineData("ibanAL47212110090000000235698741")]
+        [InlineData("iban AL47212110090000000235698741")]
+        public static void Parse6a(string value) {
+            Assert.Null(Iban.Parse(value, IbanStyles.AllowHeader));
+            Assert.True(Iban.TryParse(value, IbanStyles.AllowHeader).IsError);
+        }
+
+        [t("Try-Parse(AllowHeader) succeeds if the header is valid.")]
+        public static void Parse6b() {
+            var value = "IBAN AL47212110090000000235698741";
+            Assert.NotNull(Iban.Parse(value, IbanStyles.AllowHeader));
+            Assert.True(Iban.TryParse(value, IbanStyles.AllowHeader).IsSuccess);
+        }
+
+        [t("Try-Parse(Any) returns null (fails).")]
+        public static void Parse7a() {
+            Assert.Null(Iban.Parse("", IbanStyles.Any));
+            Assert.True(Iban.TryParse("", IbanStyles.Any).IsError);
+
+            Assert.Null(Iban.Parse(" ", IbanStyles.Any));
+            Assert.True(Iban.TryParse(" ", IbanStyles.Any).IsError);
+
+            Assert.Null(Iban.Parse("X ", IbanStyles.Any));
+            Assert.True(Iban.TryParse("X ", IbanStyles.Any).IsError);
+
+            Assert.Null(Iban.Parse(" X", IbanStyles.Any));
+            Assert.True(Iban.TryParse(" X", IbanStyles.Any).IsError);
+
+            Assert.Null(Iban.Parse("X X", IbanStyles.Any));
+            Assert.True(Iban.TryParse("X X", IbanStyles.Any).IsError);
         }
 
         [T("Try-Parse(Any) succeeds.")]
@@ -130,21 +205,13 @@ namespace Narvalo.Finance {
         [InlineData("     AL47  2121  1009  0000  0002  3569  8741    ")]
         [InlineData("AL47 2121 1009 0000 0002 3569 8741     ")]
         [InlineData("IBAN AL47 2121 1009 0000 0002 3569 8741")]
+        [InlineData("IBAN   AL47 2121 1009 0000 0002 3569 8741")]
         [InlineData("     IBAN AL472121 1009 0000 0002 3569 8741")]
-        [InlineData("     IBAN AL 47 21 21 100 9 00 00  0002  3569  8741")]
+        [InlineData("     IBAN  AL 47 21 21 100 9 00 00  0002  3569  8741")]
         [InlineData("     IBAN AL4721 21 1009 00 00 0002 3569 8741    ")]
-        public static void Parse5(string value) {
+        public static void Parse7b(string value) {
             Assert.NotNull(Iban.Parse(value, IbanStyles.Any));
             Assert.True(Iban.TryParse(value, IbanStyles.Any).IsSuccess);
-        }
-
-        [T("Try-Parse(AllowLowercaseLetter) succeeds.")]
-        [InlineData("al47212110090000000235698741")]
-        [InlineData("Al47212110090000000235698741")]
-        [InlineData("mt84malt011000012345mtlcast001s")]
-        public static void Parse6(string value) {
-            Assert.NotNull(Iban.Parse(value, IbanStyles.AllowLowercaseLetter));
-            Assert.True(Iban.TryParse(value, IbanStyles.AllowLowercaseLetter).IsSuccess);
         }
 
         [T("== & != for equal values.")]
@@ -324,7 +391,7 @@ namespace Narvalo.Finance {
         [T("ToString() w/ null format provider.")]
         [IbanData(nameof(IbanData.FakeFormattedIbans))]
         public static void ToString7(string value, string formattedValue) {
-            // NB: The format provider is actually ignored.
+            // NB: The format provider is always ignored.
             var result = ParseFast(value).ToString("G", null);
 
             Assert.Equal(formattedValue, result);

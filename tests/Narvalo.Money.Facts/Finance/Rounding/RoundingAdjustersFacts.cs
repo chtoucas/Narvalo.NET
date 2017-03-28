@@ -222,11 +222,11 @@ namespace Narvalo.Finance.Rounding
             Assert.Equal(-1m, round(-1.5m));
         }
 
-        [Theory(Skip = "Temporary test.")]
-        [MemberData(nameof(Test1Data), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void Test1(decimal value, decimal expectedValue)
-            => Assert.Equal(expectedValue, Math.Ceiling(value));
+        //[Theory(Skip = "Temporary test.")]
+        //[MemberData(nameof(Test1Data), DisableDiscoveryEnumeration = true)]
+        //[CLSCompliant(false)]
+        //public static void Test1(decimal value, decimal expectedValue)
+        //    => Assert.Equal(expectedValue, Math.Ceiling(value));
 
         #endregion
     }
