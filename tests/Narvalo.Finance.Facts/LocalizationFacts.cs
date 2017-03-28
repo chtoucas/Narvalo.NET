@@ -2,12 +2,10 @@
 
 #if !NO_INTERNALS_VISIBLE_TO
 
-namespace Narvalo.Finance
-{
+namespace Narvalo.Finance {
     using Narvalo.Finance.Properties;
 
-    public class LocalizationFacts : DefaultLocalizationFacts
-    {
+    public class LocalizationFacts : DefaultLocalizationFacts {
         public LocalizationFacts() : base(Strings.ResourceManager) { }
     }
 }

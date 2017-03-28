@@ -10,8 +10,6 @@ namespace Narvalo.Finance.Internal
 
     public static class AsciiFacts
     {
-        #region IsDigit()
-
         [Fact]
         public static void IsDigit_Fails_ForNullString()
             => Assert.False(Ascii.IsDigit(null));
@@ -26,7 +24,6 @@ namespace Narvalo.Finance.Internal
         [InlineData("100")]
         [InlineData("1000")]
         [InlineData("10000")]
-        [CLSCompliant(false)]
         public static void IsDigit_ReturnsTrue_ForValidInput(string value)
             => Assert.True(Ascii.IsDigit(value));
 
@@ -47,13 +44,8 @@ namespace Narvalo.Finance.Internal
         [InlineData(" 1a")]
         [InlineData("1a ")]
         [InlineData(" 1a ")]
-        [CLSCompliant(false)]
         public static void IsDigit_ReturnsFalse_ForInvalidInput(string value)
             => Assert.False(Ascii.IsDigit(value));
-
-        #endregion
-
-        #region IsDigitOrUpperLetter()
 
         [Fact]
         public static void IsDigitOrUpperLetter_Fails_ForNullString()
@@ -69,7 +61,6 @@ namespace Narvalo.Finance.Internal
         [InlineData("A")]
         [InlineData("AB")]
         [InlineData("1A2B3C")]
-        [CLSCompliant(false)]
         public static void IsDigitOrUpperLetter_ReturnsTrue_ForValidInput(string value)
             => Assert.True(Ascii.IsDigitOrUpperLetter(value));
 
@@ -87,13 +78,8 @@ namespace Narvalo.Finance.Internal
         [InlineData(" 1a")]
         [InlineData("1a ")]
         [InlineData(" 1a ")]
-        [CLSCompliant(false)]
         public static void IsDigitOrUpperLetter_ReturnsFalse_ForInvalidInput(string value)
             => Assert.False(Ascii.IsDigitOrUpperLetter(value));
-
-        #endregion
-
-        #region IsUpperLetter()
 
         [Fact]
         public static void IsUpperLetter_Fails_ForNullString()
@@ -106,7 +92,6 @@ namespace Narvalo.Finance.Internal
         [Theory]
         [InlineData("A")]
         [InlineData("AB")]
-        [CLSCompliant(false)]
         public static void IsUpperLetter_ReturnsTrue_ForValidInput(string value)
             => Assert.True(Ascii.IsUpperLetter(value));
 
@@ -130,11 +115,8 @@ namespace Narvalo.Finance.Internal
         [InlineData(" 1a")]
         [InlineData("1a ")]
         [InlineData(" 1a ")]
-        [CLSCompliant(false)]
         public static void IsUpperLetter_ReturnsFalse_ForInvalidInput(string value)
             => Assert.False(Ascii.IsUpperLetter(value));
-
-        #endregion
     }
 
 #endif

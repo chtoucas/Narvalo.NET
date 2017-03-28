@@ -99,6 +99,7 @@ namespace Narvalo.Applicative {
             var nok = Fallible.FromError(Error);
             var nok1 = Fallible.FromError(Error1);
             var nok2 = Fallible.FromError(Error1);
+
             Assert.False(ok.Equals(nok));
             Assert.False(nok1.Equals(nok));
             Assert.True(nok1.Equals(nok2));
@@ -184,6 +185,7 @@ namespace Narvalo.Applicative {
             var wasCalled1 = false;
             Action finallyAct1 = () => wasCalled1 = true;
             var result1 = Fallible.TryFinally(act, finallyAct1);
+
             Assert.True(result1.IsSuccess);
             Assert.True(wasCalled1);
 
@@ -191,6 +193,7 @@ namespace Narvalo.Applicative {
             var wasCalled2 = false;
             Action finallyAct2 = () => wasCalled2 = true;
             var result2 = Fallible.TryFinally(func, finallyAct2);
+
             Assert.True(result2.IsSuccess);
             Assert.True(wasCalled2);
         }
@@ -201,6 +204,7 @@ namespace Narvalo.Applicative {
             var wasCalled1 = false;
             Action finallyAct1 = () => wasCalled1 = true;
             var result1 = Fallible.TryFinally(act, finallyAct1);
+
             Assert.True(result1.IsError);
             Assert.True(wasCalled1);
 
@@ -208,6 +212,7 @@ namespace Narvalo.Applicative {
             var wasCalled2 = false;
             Action finallyAct2 = () => wasCalled2 = true;
             var result2 = Fallible.TryFinally(func, finallyAct2);
+
             Assert.True(result2.IsError);
             Assert.True(wasCalled2);
         }
@@ -275,7 +280,6 @@ namespace Narvalo.Applicative {
             Action<ExceptionDispatchInfo> onError = err => notCalled = false;
 
             ok.Do(onSuccess, onError);
-
             Assert.True(notCalled);
             Assert.True(wasCalled);
         }
@@ -289,7 +293,6 @@ namespace Narvalo.Applicative {
             Action<ExceptionDispatchInfo> onError = _ => wasCalled = true;
 
             nok.Do(onSuccess, onError);
-
             Assert.True(notCalled);
             Assert.True(wasCalled);
         }

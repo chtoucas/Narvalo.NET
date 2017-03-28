@@ -24,7 +24,7 @@ namespace Narvalo.Finance {
         }
 
         [T("Compute() succeeds.")]
-        [MemberData(nameof(IbanFacts.SampleValues), MemberType = typeof(IbanFacts), DisableDiscoveryEnumeration = true)]
+        [IbanData(nameof(IbanData.SampleValues))]
         public static void Compute1(string value) {
             var iban = IbanParts.Parse(value).Value;
 
@@ -32,7 +32,7 @@ namespace Narvalo.Finance {
         }
 
         [T("Compute() succeeds using Int32 arithmetic.")]
-        [MemberData(nameof(IbanFacts.SampleValues), MemberType = typeof(IbanFacts), DisableDiscoveryEnumeration = true)]
+        [IbanData(nameof(IbanData.SampleValues))]
         public static void Compute2(string value) {
             var iban = IbanParts.Parse(value).Value;
 
@@ -40,7 +40,7 @@ namespace Narvalo.Finance {
         }
 
         [T("Compute() succeeds using Int64 arithmetic.")]
-        [MemberData(nameof(IbanFacts.SampleValues), MemberType = typeof(IbanFacts), DisableDiscoveryEnumeration = true)]
+        [IbanData(nameof(IbanData.SampleValues))]
         public static void Compute3(string value) {
             var iban = IbanParts.Parse(value).Value;
 
@@ -48,17 +48,17 @@ namespace Narvalo.Finance {
         }
 
         [T("Verify() returns true.")]
-        [MemberData(nameof(IbanFacts.SampleValues), MemberType = typeof(IbanFacts), DisableDiscoveryEnumeration = true)]
+        [IbanData(nameof(IbanData.SampleValues))]
         public static void Verify1(string value)
             => Assert.True(IbanCheckDigits.Verify(value));
 
         [T("Verify() returns true using Int32 arithmetic.")]
-        [MemberData(nameof(IbanFacts.SampleValues), MemberType = typeof(IbanFacts), DisableDiscoveryEnumeration = true)]
+        [IbanData(nameof(IbanData.SampleValues))]
         public static void Verify2(string value)
             => Assert.True(IbanCheckDigits.Verify(value, false));
 
         [T("Verify() returns true using Int64 arithmetic.")]
-        [MemberData(nameof(IbanFacts.SampleValues), MemberType = typeof(IbanFacts), DisableDiscoveryEnumeration = true)]
+        [IbanData(nameof(IbanData.SampleValues))]
         public static void Verify3(string value)
             => Assert.True(IbanCheckDigits.Verify(value, true));
 
@@ -69,7 +69,7 @@ namespace Narvalo.Finance {
         }
 
         [T("ComputeInt32Checksum() returns one.")]
-        [MemberData(nameof(IbanFacts.SampleValues), MemberType = typeof(IbanFacts), DisableDiscoveryEnumeration = true)]
+        [IbanData(nameof(IbanData.SampleValues))]
         public static void ComputeInt32Checksum1(string value)
             => Assert.Equal(1, IbanCheckDigits.ComputeInt32Checksum(value));
 
@@ -90,7 +90,7 @@ namespace Narvalo.Finance {
         }
 
         [T("ComputeInt64Checksum() returns one.")]
-        [MemberData(nameof(IbanFacts.SampleValues), MemberType = typeof(IbanFacts), DisableDiscoveryEnumeration = true)]
+        [IbanData(nameof(IbanData.SampleValues))]
         public static void ComputeInt64Checksum1(string value)
             => Assert.Equal(1, IbanCheckDigits.ComputeInt64Checksum(value));
 

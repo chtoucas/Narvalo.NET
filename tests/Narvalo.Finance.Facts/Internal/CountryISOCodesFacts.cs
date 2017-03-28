@@ -24,7 +24,6 @@ namespace Narvalo.Finance.Internal
         [InlineData("A")]
         [InlineData("ABC")]
         [InlineData("ABCD")]
-        [CLSCompliant(false)]
         public static void TwoLetterCodeExists_ReturnsFalse_ForInvalidLength(string value)
             => Assert.False(CountryISOCodes.TwoLetterCodeExists(value));
 

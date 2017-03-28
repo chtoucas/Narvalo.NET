@@ -31,7 +31,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BicData.cs" />
+    <Compile Include="BicDataAttribute.cs" />
     <Compile Include="BicFacts.cs" />
+    <Compile Include="IbanData.cs" />
+    <Compile Include="IbanDataAttribute.cs" />
     <Compile Include="Internal\CountryISOCodesFacts.cs" />
     <Compile Include="IbanFacts.cs" />
     <Compile Include="IbanPartsFacts.cs" />
