@@ -12,8 +12,10 @@
 
 namespace Narvalo.Applicative {
     using System;
+    using System.Linq;
 
     using FsCheck.Xunit;
+    using Narvalo.Linq;
     using Xunit;
 
     // T4: EmitMonadCore().
@@ -35,6 +37,43 @@ namespace Narvalo.Applicative {
                 DisplayName = nameof(Result) + " - " + description;
             }
         }
+
+        [q("Ap.Apply is Select.Gather w/ the arguments flipped.")]
+        public static bool Apply01(int arg0, long arg1) {
+            var applicative = Result<Func<int, long>, My.Obj>.Of(i => arg1 * i);
+            var value = Result<int, My.Obj>.Of(arg0);
+
+            var applied = applicative.Apply(value);
+            var gathered = value.Gather(applicative);
+
+            return applied.Equals(gathered);
+        }
+
+        [q("Kleisli.InvokeWith is Qperators.SelectWith w/ the arguments flipped.", Skip = "Needs some more work.")]
+        public static bool InvokeWith01(int arg0, long arg1, int arg3) {
+            Func<int, Result<long, My.Obj>> selector = i => Result<long, My.Obj>.Of(arg1 * i);
+            var seq = Enumerable.Repeat(arg0, arg3);
+
+            var invoked = selector.InvokeWith(seq);
+            var selected = seq.SelectWith(selector);
+
+            var q = from x in invoked
+                    from y in selected
+                    select Enumerable.SequenceEqual(x, y);
+
+            return q.Value;
+        }
+
+        [q("Kleisli.InvokeWith is Result.Bind w/ the arguments flipped.")]
+        public static bool InvokeWith02(int arg0, long arg1) {
+            Func<int, Result<long, My.Obj>> binder = i => Result<long, My.Obj>.Of(arg1 * i);
+            var value = Result<int, My.Obj>.Of(arg0);
+
+            var invoked = binder.InvokeWith(value);
+            var bounded = value.Bind(binder);
+
+            return invoked.Equals(bounded);
+        }
     }
 
 #if !NO_INTERNALS_VISIBLE_TO
@@ -42,7 +81,21 @@ namespace Narvalo.Applicative {
     // Provides tests for Result<T, My.Obj>.
     // T4: EmitMonadGuards().
     public static partial class ResultFacts {
-        #region Repeat()
+        [t("Compose() guards.")]
+        public static void Compose0() {
+            Func<int, Result<int, My.Obj>> first = null;
+            Func<int, Result<int, My.Obj>> second = i => Result<int, My.Obj>.Of(1);
+
+            Assert.Throws<ArgumentNullException>("this", () => first.Compose(second));
+        }
+
+        [t("Compose() guards.")]
+        public static void ComposeBack0() {
+            Func<int, Result<int, My.Obj>> first = i => Result<int, My.Obj>.Of(1);
+            Func<int, Result<int, My.Obj>> second = null;
+
+            Assert.Throws<ArgumentNullException>("second", () => first.ComposeBack(second));
+        }
 
         [t("Repeat() guards.")]
         public static void Repeat0() {
@@ -50,10 +103,6 @@ namespace Narvalo.Applicative {
 
             Assert.Throws<ArgumentOutOfRangeException>("count", () => Result.Repeat(source, -1));
         }
-
-        #endregion
-
-        #region Zip()
 
         [t("Zip() guards.")]
         public static void Zip0() {
@@ -79,10 +128,6 @@ namespace Narvalo.Applicative {
             Assert.Throws<ArgumentNullException>("zipper", () => Result.Zip(first, second, third, fourth, fifth, zipper5));
         }
 
-        #endregion
-
-        #region Select()
-
         [t("Select() guards.")]
         public static void Select0() {
             var source = Result<int, My.Obj>.Of(1);
@@ -91,10 +136,6 @@ namespace Narvalo.Applicative {
             Assert.Throws<ArgumentNullException>("selector", () => source.Select(selector));
             Assert.Throws<ArgumentNullException>("selector", () => Result.Select(source, selector));
         }
-
-        #endregion
-
-        #region SelectMany()
 
         [t("SelectMany() guards.")]
         public static void SelectMany0() {
@@ -110,8 +151,6 @@ namespace Narvalo.Applicative {
             Assert.Throws<ArgumentNullException>("selector", () => Result.SelectMany(source, null, resultSelector));
             Assert.Throws<ArgumentNullException>("resultSelector", () => Result.SelectMany(source, valueSelector, (Func<short, int, long>)null));
         }
-
-        #endregion
 
     }
 

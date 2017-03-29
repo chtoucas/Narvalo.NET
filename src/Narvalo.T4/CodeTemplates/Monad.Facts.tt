@@ -11,6 +11,8 @@
 
 public partial class MonadTemplate
 {
+    protected string ValueProperty { get; set; } = "Value";
+
     /// <summary>
     /// Generates tests for a Monad.
     /// </summary>
@@ -19,8 +21,10 @@ public partial class MonadTemplate
 #>
 namespace <#= Namespace #> {
     using System;
+    using System.Linq;
 
     using FsCheck.Xunit;
+    using Narvalo.Linq;
     using Xunit;
 
 <#+
