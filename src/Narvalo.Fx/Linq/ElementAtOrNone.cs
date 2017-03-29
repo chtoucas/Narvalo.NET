@@ -6,6 +6,7 @@ namespace Narvalo.Linq
 
     using Narvalo.Applicative;
 
+    // For IEnumerable<T?>, prefer ElementAtOrDefault() over ElementAtOrNone().
     public static partial class Qperators
     {
         // Adapted from https://github.com/jskeet/edulinq/blob/master/src/Edulinq/ElementAt.cs
@@ -16,14 +17,12 @@ namespace Narvalo.Linq
             if (index < 0) { return Maybe<TSource>.None; }
 
             // Fast track.
-            var collection = @this as ICollection<TSource>;
-            if (collection != null)
+            if (@this is ICollection<TSource> collection)
             {
                 int count = collection.Count;
                 if (index >= count) { return Maybe<TSource>.None; }
 
-                var list = @this as IList<TSource>;
-                if (list != null)
+                if (@this is IList<TSource> list)
                 {
                     return Maybe.Of(list[index]);
                 }

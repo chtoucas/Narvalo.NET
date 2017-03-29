@@ -9,6 +9,10 @@ namespace Narvalo.Linq {
             public tAttribute(string description) : base(nameof(Qperators), description) { }
         }
 
+        internal sealed class TAttribute : TestTheoryAttribute {
+            public TAttribute(string description) : base(nameof(Qperators), description) { }
+        }
+
         private static IEnumerable<T> EmptySource<T>() {
             yield break;
         }

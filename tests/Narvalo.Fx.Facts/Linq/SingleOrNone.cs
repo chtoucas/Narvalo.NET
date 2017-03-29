@@ -9,6 +9,8 @@ namespace Narvalo.Linq {
     using Narvalo.Applicative;
     using Xunit;
 
+    // Largely inspired by
+    // https://github.com/dotnet/corefx/blob/master/src/System.Linq/tests/SingleOrDefaultTests.cs
     public partial class QperatorsFacts {
         [t("SingleOrNone() guards.")]
         public static void SingleOrNone0() {
@@ -22,129 +24,133 @@ namespace Narvalo.Linq {
             Assert.Throws<ArgumentNullException>("predicate", () => source.SingleOrNone(default(Func<int, bool>)));
         }
 
-        // Adapted from https://github.com/dotnet/corefx/blob/master/src/System.Linq/tests/SingleOrDefaultTests.cs
-
-        [Fact]
-        public void SameResultsRepeatCallsIntQuery() {
+        [t("SingleOrNone() for int's returns the same result when called repeatedly.")]
+        public static void SingleOrNone1() {
             var q = from x in new[] { 0.12335f }
                     select x;
 
             Assert.Equal(q.SingleOrNone(), q.SingleOrNone());
         }
 
-        [Fact(Skip = "Need work.")]
-        public void SameResultsRepeatCallsStringQuery() {
+        [t("SingleOrNone() for string's returns the same result when called repeatedly.")]
+        public static void SingleOrNone2() {
             var q = from x in new[] { "" }
                     select x;
 
-            Assert.Equal(q.SingleOrDefault(String.IsNullOrEmpty), q.SingleOrDefault(String.IsNullOrEmpty));
+            Assert.Equal(q.SingleOrNone(String.IsNullOrEmpty), q.SingleOrNone(String.IsNullOrEmpty));
         }
 
-        //[Fact]
-        //public void EmptyIList() {
-        //    int?[] source = { };
-        //    int? expected = null;
+        [t("EmptyIList")]
+        public static void SingleOrNone3() {
+            string[] source = { };
+            var expected = Maybe<string>.None;
 
-        //    Assert.Equal(expected, source.SingleOrDefault());
-        //}
+            Assert.Equal(expected, source.SingleOrNone());
+        }
 
-        [Fact]
-        public void SingleElementIList() {
+        [t("SingleElementIList")]
+        public static void SingleOrNone4() {
             int[] source = { 4 };
             var expected = Maybe.Of(4);
 
             Assert.Equal(expected, source.SingleOrNone());
         }
 
-        [Fact(Skip = "Need work.")]
-        public void ManyElementIList() {
+        [t("ManyElementIList")]
+        public static void SingleOrNone5() {
             int[] source = { 4, 4, 4, 4, 4 };
+            var expected = Maybe<int>.None;
 
-            Assert.Throws<InvalidOperationException>(() => source.SingleOrNone());
+            // NB: SingleOrDefault() throws InvalidOperationException.
+            Assert.Equal(expected, source.SingleOrNone());
         }
 
-        [Fact]
-        public void EmptyNotIList() {
+        [t("EmptyNotIList")]
+        public static void SingleOrNone6() {
             IEnumerable<int> source = RepeatedNumberGuaranteedNotCollectionType(0, 0);
             var expected = Maybe<int>.None;
 
             Assert.Equal(expected, source.SingleOrNone());
         }
 
-        [Fact]
-        public void SingleElementNotIList() {
+        [t("SingleElementNotIList")]
+        public static void SingleOrNone7() {
             IEnumerable<int> source = RepeatedNumberGuaranteedNotCollectionType(-5, 1);
             var expected = Maybe.Of(-5);
 
             Assert.Equal(expected, source.SingleOrNone());
         }
 
-        [Fact(Skip = "Need work.")]
-        public void ManyElementNotIList() {
+        [t("ManyElementNotIList")]
+        public static void SingleOrNone8() {
             IEnumerable<int> source = RepeatedNumberGuaranteedNotCollectionType(3, 5);
+            var expected = Maybe<int>.None;
 
-            Assert.Throws<InvalidOperationException>(() => source.SingleOrNone());
+            // NB: SingleOrDefault() throws InvalidOperationException.
+            Assert.Equal(expected, source.SingleOrNone());
         }
 
-        [Fact]
-        public void EmptySourceWithPredicate() {
+        [t("EmptySourceWithPredicate")]
+        public static void SingleOrNone9() {
             int[] source = { };
             var expected = Maybe<int>.None;
 
             Assert.Equal(expected, source.SingleOrNone(i => i % 2 == 0));
         }
 
-        [Fact]
-        public void SingleElementPredicateTrue() {
+        [t("SingleElementPredicateTrue")]
+        public static void SingleOrNone10() {
             int[] source = { 4 };
             var expected = Maybe.Of(4);
 
             Assert.Equal(expected, source.SingleOrNone(i => i % 2 == 0));
         }
 
-        [Fact]
-        public void SingleElementPredicateFalse() {
+        [t("SingleElementPredicateFalse")]
+        public static void SingleOrNone11() {
             int[] source = { 3 };
             var expected = Maybe<int>.None;
 
             Assert.Equal(expected, source.SingleOrNone(i => i % 2 == 0));
         }
 
-        [Fact]
-        public void ManyElementsPredicateFalseForAll() {
+        [t("ManyElementsPredicateFalseForAll")]
+        public static void SingleOrNone12() {
             int[] source = { 3, 1, 7, 9, 13, 19 };
             var expected = Maybe<int>.None;
 
             Assert.Equal(expected, source.SingleOrNone(i => i % 2 == 0));
         }
 
-        [Fact]
-        public void ManyElementsPredicateTrueForLast() {
+        [t("ManyElementsPredicateTrueForLast")]
+        public static void SingleOrNone13() {
             int[] source = { 3, 1, 7, 9, 13, 19, 20 };
             var expected = Maybe.Of(20);
 
             Assert.Equal(expected, source.SingleOrNone(i => i % 2 == 0));
         }
 
-        [Fact(Skip = "Need work.")]
-        public void ManyElementsPredicateTrueForFirstAndFifth() {
+        [t("ManyElementsPredicateTrueForFirstAndFifth")]
+        public static void SingleOrNone14() {
             int[] source = { 2, 3, 1, 7, 10, 13, 19, 9 };
+            var expected = Maybe<int>.None;
 
-            Assert.Throws<InvalidOperationException>(() => source.SingleOrNone(i => i % 2 == 0));
+            // NB: SingleOrDefault() throws InvalidOperationException.
+            Assert.Equal(expected, source.SingleOrNone(i => i % 2 == 0));
         }
 
-        [Theory]
+        [T("FindSingleMatch")]
         [InlineData(1, 100)]
         [InlineData(42, 100)]
-        public void FindSingleMatch(int target, int range) {
+        public static void SingleOrNone15(int target, int range) {
             var expected = Maybe.Of(target);
             Assert.Equal(expected, Enumerable.Range(0, range).SingleOrNone(i => i == target));
         }
 
-        [Theory]
+        [T("RunOnce")]
         [InlineData(1, 100)]
         [InlineData(42, 100)]
-        public void RunOnce(int target, int range) {
+        public static void SingleOrNone16(int target, int range) {
             var expected = Maybe.Of(target);
             Assert.Equal(expected, Enumerable.Range(0, range).RunOnce().SingleOrNone(i => i == target));
         }

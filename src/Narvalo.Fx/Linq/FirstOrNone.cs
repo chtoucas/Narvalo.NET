@@ -8,6 +8,7 @@ namespace Narvalo.Linq
 
     using Narvalo.Applicative;
 
+    // For IEnumerable<T?>, prefer FirstOrDefault() over FirstOrNone().
     public static partial class Qperators
     {
         public static Maybe<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this)

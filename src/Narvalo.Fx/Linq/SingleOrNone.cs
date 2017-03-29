@@ -8,17 +8,17 @@ namespace Narvalo.Linq
 
     using Narvalo.Applicative;
 
+    // For IEnumerable<T?>, prefer SingleOrDefault() over SingleOrNone().
     public static partial class Qperators
     {
-        // WARNING: Here we defer in behaviour from LINQ.
+        // WARNING: Here we differ in behaviour from LINQ.
         // If there is more than one element, we do not throw but rather return None.
         public static Maybe<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this)
         {
             Require.NotNull(@this, nameof(@this));
 
             // Fast track.
-            var list = @this as IList<TSource>;
-            if (list != null)
+            if (@this is IList<TSource> list)
             {
                 return list.Count == 1 ? Maybe.Of(list[0]) : Maybe<TSource>.None;
             }
@@ -36,7 +36,7 @@ namespace Narvalo.Linq
             }
         }
 
-        // WARNING: Here we defer in behaviour from LINQ.
+        // WARNING: Here we differ in behaviour from LINQ.
         // If there is more than one element, we do not throw but rather return None.
         public static Maybe<TSource> SingleOrNone<TSource>(
             this IEnumerable<TSource> @this,

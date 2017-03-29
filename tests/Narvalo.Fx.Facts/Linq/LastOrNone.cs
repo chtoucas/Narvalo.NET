@@ -9,6 +9,8 @@ namespace Narvalo.Linq {
     using Narvalo.Applicative;
     using Xunit;
 
+    // Largely inspired by
+    // https://github.com/dotnet/corefx/blob/master/src/System.Linq/tests/LastOrDefaultTests.cs
     public partial class QperatorsFacts {
         [t("LastOrNone() guards.")]
         public static void LastOrNone0() {
@@ -22,10 +24,8 @@ namespace Narvalo.Linq {
             Assert.Throws<ArgumentNullException>("predicate", () => source.LastOrNone(default(Func<int, bool>)));
         }
 
-        // Adapted from https://github.com/dotnet/corefx/blob/master/src/System.Linq/tests/LastOrDefaultTests.cs
-
-        [t("SameResultsRepeatCallsIntQuery")]
-        public void LastOrNone1() {
+        [t("LastOrNone() for int's returns the same result when called repeatedly.")]
+        public static void LastOrNone1() {
             var q = from x in new[] { 9999, 0, 888, -1, 66, -777, 1, 2, -12345 }
                     where x > Int32.MinValue
                     select x;
@@ -33,8 +33,8 @@ namespace Narvalo.Linq {
             Assert.Equal(q.LastOrNone(), q.LastOrNone());
         }
 
-        [t("SameResultsRepeatCallsStringQuery")]
-        public void LastOrNone2() {
+        [t("LastOrNone() for string's returns the same result when called repeatedly.")]
+        public static void LastOrNone2() {
             var q = from x in new[] { "!@#$%^", "C", "AAA", "", "Calling Twice", "SoS", String.Empty }
                     where !String.IsNullOrEmpty(x)
                     select x;
@@ -47,12 +47,11 @@ namespace Narvalo.Linq {
             var expected = Maybe<T>.None;
 
             Assert.IsAssignableFrom<IList<T>>(source);
-
             Assert.Equal(expected, source.RunOnce().LastOrNone());
         }
 
         [t("EmptyIListT")]
-        public void LastOrNone3() {
+        public static void LastOrNone3() {
             LastOrNone3Impl<int>();
             LastOrNone3Impl<string>();
             LastOrNone3Impl<DateTime>();
@@ -60,86 +59,76 @@ namespace Narvalo.Linq {
         }
 
         [t("IListTOneElement")]
-        public void LastOrNone4() {
+        public static void LastOrNone4() {
             int[] source = { 5 };
             var expected = Maybe.Of(5);
 
             Assert.IsAssignableFrom<IList<int>>(source);
-
             Assert.Equal(expected, source.LastOrNone());
         }
 
-        //[Fact]
-        //public void IListTManyElementsLastIsDefault() {
-        //    int?[] source = { -10, 2, 4, 3, 0, 2, null };
-        //    int? expected = null;
+        [t("IListTManyElementsLastIsDefault")]
+        public static void LastOrNone5() {
+            string[] source = { "!@#$%^", "C", "AAA", "", "Calling Twice", "SoS", null };
+            var expected = Maybe<string>.None;
 
-        //    Assert.IsAssignableFrom<IList<int?>>(source);
+            Assert.IsAssignableFrom<IList<string>>(source);
+            Assert.Equal(expected, source.LastOrNone());
+        }
 
-        //    Assert.Equal(expected, source.LastOrDefault());
-        //}
+        [t("IListTManyElementsLastIsNotDefault")]
+        public static void LastOrNone6() {
+            string[] source = { "!@#$%^", "C", "AAA", "", "Calling Twice", null, "SoS" };
+            var expected = Maybe.Of("SoS");
 
-        //[Fact]
-        //public void IListTManyElementsLastIsNotDefault() {
-        //    int?[] source = { -10, 2, 4, 3, 0, 2, null, 19 };
-        //    int? expected = 19;
+            Assert.IsAssignableFrom<IList<string>>(source);
+            Assert.Equal(expected, source.LastOrNone());
+        }
 
-        //    Assert.IsAssignableFrom<IList<int?>>(source);
-
-        //    Assert.Equal(expected, source.LastOrDefault());
-        //}
-
-        //private static IEnumerable<T> EmptySource<T>() {
-        //    yield break;
-        //}
-
-        private static void LastOrNone5Impl<T>() {
+        private static void LastOrNone7Impl<T>() {
             var source = EmptySource<T>();
             var expected = Maybe<T>.None;
 
             Assert.Null(source as IList<T>);
-
             Assert.Equal(expected, source.RunOnce().LastOrNone());
         }
 
         [t("EmptyNotIListT")]
-        public void LastOrNone5() {
-            LastOrNone5Impl<int>();
-            LastOrNone5Impl<string>();
-            LastOrNone5Impl<DateTime>();
-            LastOrNone5Impl<QperatorsFacts>();
+        public static void LastOrNone7() {
+            LastOrNone7Impl<int>();
+            LastOrNone7Impl<string>();
+            LastOrNone7Impl<DateTime>();
+            LastOrNone7Impl<QperatorsFacts>();
         }
 
         [t("OneElementNotIListT")]
-        public void LastOrNone6() {
+        public static void LastOrNone8() {
             IEnumerable<int> source = NumberRangeGuaranteedNotCollectionType(-5, 1);
             var expected = Maybe.Of(-5);
 
             Assert.Null(source as IList<int>);
-
             Assert.Equal(expected, source.LastOrNone());
         }
 
         [t("ManyElementsNotIListT")]
-        public void LastOrNone7() {
+        public static void LastOrNone9() {
             IEnumerable<int> source = NumberRangeGuaranteedNotCollectionType(3, 10);
             var expected = Maybe.Of(12);
 
             Assert.Null(source as IList<int>);
-
             Assert.Equal(expected, source.LastOrNone());
         }
 
-        //[Fact]
-        //public void EmptyIListSource() {
-        //    int?[] source = { };
+        [t("EmptyIListSource")]
+        public static void LastOrNone10() {
+            string[] source = { };
 
-        //    Assert.Null(source.LastOrDefault(x => true));
-        //    Assert.Null(source.LastOrDefault(x => false));
-        //}
+            Assert.Equal(Maybe<string>.None, source.LastOrNone(x => true));
+            Assert.Equal(Maybe<string>.None, source.LastOrNone(x => false));
+        }
 
         [t("OneElementIListTruePredicate")]
-        public void LastOrNone8() {
+        public static void LastOrNone11() {
             int[] source = { 4 };
             Func<int, bool> predicate = IsEven;
             var expected = Maybe.Of(4);
@@ -148,7 +137,7 @@ namespace Narvalo.Linq {
         }
 
         [t("ManyElementsIListPredicateFalseForAll")]
-        public void LastOrNone9() {
+        public static void LastOrNone12() {
             int[] source = { 9, 5, 1, 3, 17, 21 };
             Func<int, bool> predicate = IsEven;
             var expected = Maybe<int>.None;
@@ -157,7 +146,7 @@ namespace Narvalo.Linq {
         }
 
         [t("IListPredicateTrueOnlyForLast")]
-        public void LastOrNone10() {
+        public static void LastOrNone13() {
             int[] source = { 9, 5, 1, 3, 17, 21, 50 };
             Func<int, bool> predicate = IsEven;
             var expected = Maybe.Of(50);
@@ -166,7 +155,7 @@ namespace Narvalo.Linq {
         }
 
         [t("IListPredicateTrueForSome")]
-        public void LastOrNone11() {
+        public static void LastOrNone14() {
             int[] source = { 3, 7, 10, 7, 9, 2, 11, 18, 13, 9 };
             Func<int, bool> predicate = IsEven;
             var expected = Maybe.Of(18);
@@ -175,7 +164,7 @@ namespace Narvalo.Linq {
         }
 
         [t("IListPredicateTrueForSomeRunOnce")]
-        public void LastOrNone12() {
+        public static void LastOrNone15() {
             int[] source = { 3, 7, 10, 7, 9, 2, 11, 18, 13, 9 };
             Func<int, bool> predicate = IsEven;
             var expected = Maybe.Of(18);
@@ -183,16 +172,16 @@ namespace Narvalo.Linq {
             Assert.Equal(expected, source.RunOnce().LastOrNone(predicate));
         }
 
-        //[Fact]
-        //public void EmptyNotIListSource() {
-        //    IEnumerable<int?> source = Enumerable.Repeat((int?)4, 0);
+        [t("EmptyNotIListSource")]
+        public static void LastOrNone16() {
+            IEnumerable<string> source = Enumerable.Repeat("value", 0);
 
-        //    Assert.Null(source.LastOrDefault(x => true));
-        //    Assert.Null(source.LastOrDefault(x => false));
-        //}
+            Assert.Equal(Maybe<string>.None, source.LastOrNone(x => true));
+            Assert.Equal(Maybe<string>.None, source.LastOrNone(x => false));
+        }
 
         [t("OneElementNotIListTruePredicate")]
-        public void LastOrNone13() {
+        public static void LastOrNone17() {
             IEnumerable<int> source = ForceNotCollection(new[] { 4 });
             Func<int, bool> predicate = IsEven;
             var expected = Maybe.Of(4);
@@ -201,7 +190,7 @@ namespace Narvalo.Linq {
         }
 
         [t("ManyElementsNotIListPredicateFalseForAll")]
-        public void LastOrNone14() {
+        public static void LastOrNone18() {
             IEnumerable<int> source = ForceNotCollection(new int[] { 9, 5, 1, 3, 17, 21 });
             Func<int, bool> predicate = IsEven;
             var expected = Maybe<int>.None;
@@ -210,7 +199,7 @@ namespace Narvalo.Linq {
         }
 
         [t("NotIListPredicateTrueOnlyForLast")]
-        public void LastOrNone15() {
+        public static void LastOrNone19() {
             IEnumerable<int> source = ForceNotCollection(new int[] { 9, 5, 1, 3, 17, 21, 50 });
             Func<int, bool> predicate = IsEven;
             var expected = Maybe.Of(50);
@@ -219,7 +208,7 @@ namespace Narvalo.Linq {
         }
 
         [t("NotIListPredicateTrueForSome")]
-        public void LastOrNone16() {
+        public static void LastOrNone20() {
             IEnumerable<int> source = ForceNotCollection(new int[] { 3, 7, 10, 7, 9, 2, 11, 18, 13, 9 });
             Func<int, bool> predicate = IsEven;
             var expected = Maybe.Of(18);
@@ -228,7 +217,7 @@ namespace Narvalo.Linq {
         }
 
         [t("NotIListPredicateTrueForSomeRunOnce")]
-        public void LastOrNone17() {
+        public static void LastOrNone21() {
             IEnumerable<int> source = ForceNotCollection(new int[] { 3, 7, 10, 7, 9, 2, 11, 18, 13, 9 });
             Func<int, bool> predicate = IsEven;
             var expected = Maybe.Of(18);
