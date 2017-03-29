@@ -18,6 +18,7 @@ namespace Narvalo.Linq {
 
             var q = Assert.DoesNotThrow(() => first.ZipWith(second, resultSelector));
             q.OnLeft(x => Assert.ThrowsOnNext(x));
+            q.OnRight(x => Assert.Fail());
         }
     }
 }

@@ -22,6 +22,7 @@ namespace Narvalo.Linq {
 
             var q = Assert.DoesNotThrow(() => source.Collect());
             q.OnLeft(x => Assert.ThrowsOnNext(x));
+            q.OnRight(x => Assert.Fail());
         }
     }
 }

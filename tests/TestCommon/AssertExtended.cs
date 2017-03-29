@@ -9,6 +9,8 @@ namespace Narvalo {
     using Xunit;
 
     public partial class AssertExtended : Assert {
+        public static void Fail() => Assert.True(false);
+
         public static void DoesNotThrow(Action testCode) {
             var ex = Record.Exception(testCode);
 

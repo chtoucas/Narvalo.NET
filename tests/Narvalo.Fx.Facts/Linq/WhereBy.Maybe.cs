@@ -29,6 +29,7 @@ namespace Narvalo.Linq {
 
             Assert.True(notCalled);
             q.OnSome(x => Assert.CalledOnNext(x, ref notCalled));
+            q.OnNone(() => Assert.Fail());
         }
     }
 }
