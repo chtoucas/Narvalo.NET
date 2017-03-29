@@ -8,15 +8,15 @@ namespace Narvalo.Linq
     /// </summary>
     /// <remarks>
     /// New LINQ operators:
-    /// - Projecting: SelectAny
-    /// - Filtering: WhereAny
-    /// - Set: Append, Prepend
+    /// - Projecting: SelectAny (deferred)
+    /// - Filtering: WhereAny (deferred)
+    /// - Set: Append (deferred), Prepend (deferred)
     /// - Element: FirstOrNone, LastOrNone, SingleOrNone, ElementAtOrNone
-    /// - Aggregation: Aggregate
+    /// - Aggregation: Aggregate (deferred)
     /// - Quantifiers: IsEmpty
     /// - Generation: EmptyIfNull
     /// We have also operators accepting arguments in the Kleisli "category":
-    /// SelectWith, SelectUnzip, ZipWith, WhereBy, Fold, Reduce.
+    /// SelectWith (deferred), ZipWith (deferred), WhereBy (deferred), Fold, Reduce.
     /// </remarks>
     /// For more generation operators, <seealso cref="Narvalo.Applicative.Sequence"/>.
     public static partial class Qperators { }

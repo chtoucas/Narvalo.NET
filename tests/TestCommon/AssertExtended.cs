@@ -22,15 +22,21 @@ namespace Narvalo {
         /// the result (by calling GetEnumerator() then MoveNext() on it) *should*
         /// throw InvalidOperationException.
         /// </summary>
-        // Adapted from https://raw.githubusercontent.com/jskeet/edulinq/master/src/Edulinq.TestSupport/ThrowingEnumerable.cs
+        // Adapted from Edulinq by Jon Skeet.
         // See https://msdn.microsoft.com/en-us/library/mt693095.aspx
-        public static void IsDeferred<T>(Func<IEnumerable<int>, IEnumerable<T>> fun) {
-            var result = fun(new ThrowingEnumerable<int>());
+        public static void IsDeferred<TSource, TResult>(
+            Func<IEnumerable<TSource>, IEnumerable<TResult>> fun) {
+            IEnumerable<TResult> result = null;
+
+            DoesNotThrow(() => result = fun(new ThrowingEnumerable<TSource>()));
 
             using (var iter = result.GetEnumerator()) {
                 Assert.Throws<InvalidOperationException>(() => iter.MoveNext());
             }
         }
+
+        public static void IsDeferred<T>(Func<IEnumerable<T>, IEnumerable<T>> fun)
+            => IsDeferred<T, T>(fun);
 
         public static void IsNotLocalized(LocalizedStrings localizedStrings) {
             var dict = localizedStrings.GetStrings();
