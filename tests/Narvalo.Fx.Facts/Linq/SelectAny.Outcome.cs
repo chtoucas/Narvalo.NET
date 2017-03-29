@@ -6,17 +6,16 @@ namespace Narvalo.Linq {
     using System.Linq;
 
     using Narvalo.Applicative;
-    using Xunit;
+
+    using Assert = Narvalo.AssertExtended;
 
     public partial class QperatorsFacts {
         [t("SelectAny() guards (Outcome).")]
         public static void SelectAny0c() {
-            IEnumerable<int> nullsource = null;
-
-            Assert.Throws<ArgumentNullException>("this", () => nullsource.SelectAny(x => Outcome.Of(x)));
+            IEnumerable<int> nil = null;
+            Assert.Throws<ArgumentNullException>("this", () => nil.SelectAny(x => Outcome.Of(x)));
 
             var source = Enumerable.Range(0, 1);
-
             Assert.Throws<ArgumentNullException>("selector", () => source.SelectAny(default(Func<int, Outcome<int>>)));
         }
 
@@ -27,6 +26,7 @@ namespace Narvalo.Linq {
             var q = Enumerable.Repeat(fun, 1).SelectAny(f => f());
 
             Assert.True(notCalled);
+            Assert.CalledOnNext(q, ref notCalled);
         }
     }
 }

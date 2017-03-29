@@ -14,9 +14,9 @@ namespace Narvalo.Linq {
     public partial class QperatorsFacts {
         [t("ElementAtOrNone() guards.")]
         public static void ElementAtOrNone0() {
-            IEnumerable<int> nullsource = null;
+            IEnumerable<int> nil = null;
 
-            Assert.Throws<ArgumentNullException>("this", () => nullsource.ElementAtOrNone(1));
+            Assert.Throws<ArgumentNullException>("this", () => nil.ElementAtOrNone(1));
         }
 
         [t("ElementAtOrNone() for int's returns the same result when called repeatedly.")]

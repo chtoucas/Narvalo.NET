@@ -5,18 +5,16 @@ namespace Narvalo.Linq {
     using System.Collections.Generic;
     using System.Linq;
 
-    using Xunit;
+    using Assert = Narvalo.AssertExtended;
 
     public partial class QperatorsFacts {
         [t("SelectAny() guards.")]
         public static void SelectAny0() {
-            IEnumerable<int> nullsource = null;
-
-            Assert.Throws<ArgumentNullException>("this", () => nullsource.SelectAny(x => (int?)x));
-            Assert.Throws<ArgumentNullException>("this", () => nullsource.SelectAny(_ => String.Empty));
+            IEnumerable<int> nil = null;
+            Assert.Throws<ArgumentNullException>("this", () => nil.SelectAny(x => (int?)x));
+            Assert.Throws<ArgumentNullException>("this", () => nil.SelectAny(_ => String.Empty));
 
             var source = Enumerable.Range(0, 1);
-
             Assert.Throws<ArgumentNullException>("selector", () => source.SelectAny(default(Func<int, int?>)));
             Assert.Throws<ArgumentNullException>("selector", () => source.SelectAny(default(Func<int, string>)));
         }
@@ -28,6 +26,7 @@ namespace Narvalo.Linq {
             var q = Enumerable.Repeat(fun, 1).SelectAny(f => f());
 
             Assert.True(notCalled);
+            Assert.CalledOnNext(q, ref notCalled);
         }
 
         [t("SelectAny() uses deferred execution (2).")]
@@ -37,6 +36,7 @@ namespace Narvalo.Linq {
             var q = Enumerable.Repeat(fun, 1).SelectAny(f => f());
 
             Assert.True(notCalled);
+            Assert.CalledOnNext(q, ref notCalled);
         }
     }
 }

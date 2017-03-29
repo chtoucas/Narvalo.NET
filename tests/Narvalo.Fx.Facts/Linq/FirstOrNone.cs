@@ -14,13 +14,11 @@ namespace Narvalo.Linq {
     public partial class QperatorsFacts {
         [t("FirstOrNone() guards.")]
         public static void FirstOrNone0() {
-            IEnumerable<int> nullsource = null;
-
-            Assert.Throws<ArgumentNullException>("this", () => nullsource.FirstOrNone());
-            Assert.Throws<ArgumentNullException>("this", () => nullsource.FirstOrNone(_ => true));
+            IEnumerable<int> nil = null;
+            Assert.Throws<ArgumentNullException>("this", () => nil.FirstOrNone());
+            Assert.Throws<ArgumentNullException>("this", () => nil.FirstOrNone(_ => true));
 
             var source = Enumerable.Range(0, 1);
-
             Assert.Throws<ArgumentNullException>("predicate", () => source.FirstOrNone(default(Func<int, bool>)));
         }
 

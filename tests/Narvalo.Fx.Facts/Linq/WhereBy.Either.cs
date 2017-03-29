@@ -6,18 +6,18 @@ namespace Narvalo.Linq {
     using System.Linq;
 
     using Narvalo.Applicative;
-    using Xunit;
+
+    using Assert = Narvalo.AssertExtended;
 
     public partial class QperatorsFacts {
         [t("WhereBy() guards (Either).")]
         public static void WhereBy0a() {
-            IEnumerable<int> nullsource = null;
             Func<int, Either<bool, int>> predicate = _ => Either<bool, int>.OfLeft(true);
 
-            Assert.Throws<ArgumentNullException>("this", () => nullsource.WhereBy(predicate));
+            IEnumerable<int> nil = null;
+            Assert.Throws<ArgumentNullException>("this", () => nil.WhereBy(predicate));
 
             var source = Enumerable.Range(0, 1);
-
             Assert.Throws<ArgumentNullException>("predicate", () => source.WhereBy(default(Func<int, Either<bool, int>>)));
         }
 
@@ -29,6 +29,7 @@ namespace Narvalo.Linq {
             var q = Enumerable.Repeat(fun, 1).WhereBy(f => f());
 
             Assert.True(notCalled);
+            q.OnLeft(x => Assert.CalledOnNext(x, ref notCalled));
         }
     }
 }

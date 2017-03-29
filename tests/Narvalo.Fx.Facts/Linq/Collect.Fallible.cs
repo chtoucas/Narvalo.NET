@@ -13,16 +13,17 @@ namespace Narvalo.Linq {
     public partial class QperatorsFacts {
         [t("Collect() guards (Fallible).")]
         public static void Collect0b() {
-            IEnumerable<Fallible<int>> nullsource = null;
+            IEnumerable<Fallible<int>> nil = null;
 
-            Assert.Throws<ArgumentNullException>("this", () => nullsource.Collect());
+            Assert.Throws<ArgumentNullException>("this", () => nil.Collect());
         }
 
         [t("Collect() uses deferred execution (Fallible).")]
         public static void Collect1b() {
             IEnumerable<Fallible<int>> source = new ThrowingEnumerable<Fallible<int>>();
 
-            Assert.DoesNotThrow(() => source.Collect());
+            var q = Assert.DoesNotThrow(() => source.Collect());
+            q.OnSuccess(x => Assert.ThrowsOnNext(x));
         }
     }
 }

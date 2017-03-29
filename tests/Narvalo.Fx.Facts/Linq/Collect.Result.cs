@@ -3,26 +3,25 @@
 namespace Narvalo.Linq {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
 
     using Narvalo.Applicative;
-    using Xunit;
 
     using Assert = Narvalo.AssertExtended;
 
     public partial class QperatorsFacts {
         [t("Collect() guards (Result).")]
         public static void Collect0e() {
-            IEnumerable<Result<int, int>> nullsource = null;
+            IEnumerable<Result<int, int>> nil = null;
 
-            Assert.Throws<ArgumentNullException>("this", () => nullsource.Collect());
+            Assert.Throws<ArgumentNullException>("this", () => nil.Collect());
         }
 
         [t("Collect() uses deferred execution (Result).")]
         public static void Collect1e() {
             IEnumerable<Result<int, int>> source = new ThrowingEnumerable<Result<int, int>>();
 
-            Assert.DoesNotThrow(() => source.Collect());
+            var q = Assert.DoesNotThrow(() => source.Collect());
+            q.OnSuccess(x => Assert.ThrowsOnNext(x));
         }
     }
 }

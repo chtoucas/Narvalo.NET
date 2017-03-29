@@ -14,10 +14,10 @@ namespace Narvalo.Linq {
     public partial class QperatorsFacts {
         [t("SingleOrNone() guards.")]
         public static void SingleOrNone0() {
-            IEnumerable<int> nullsource = null;
+            IEnumerable<int> nil = null;
 
-            Assert.Throws<ArgumentNullException>("this", () => nullsource.SingleOrNone());
-            Assert.Throws<ArgumentNullException>("this", () => nullsource.SingleOrNone(_ => true));
+            Assert.Throws<ArgumentNullException>("this", () => nil.SingleOrNone());
+            Assert.Throws<ArgumentNullException>("this", () => nil.SingleOrNone(_ => true));
 
             var source = Enumerable.Range(0, 1);
 

@@ -15,28 +15,44 @@ namespace Narvalo {
             Assert.Null(ex);
         }
 
-        /// <summary>
-        /// Check that the given function uses deferred execution.
-        /// A "spiked" source is given to the function: the function
-        /// call itself shouldn't throw an exception. However, using
-        /// the result (by calling GetEnumerator() then MoveNext() on it) *should*
-        /// throw InvalidOperationException.
-        /// </summary>
-        // Adapted from Edulinq by Jon Skeet.
-        // See https://msdn.microsoft.com/en-us/library/mt693095.aspx
-        public static void IsDeferred<TSource, TResult>(
-            Func<IEnumerable<TSource>, IEnumerable<TResult>> fun) {
-            IEnumerable<TResult> result = null;
+        public static T DoesNotThrow<T>(Func<T> testCode) {
+            T result = default(T);
+            var ex = Record.Exception(() => result = testCode());
 
-            DoesNotThrow(() => result = fun(new ThrowingEnumerable<TSource>()));
+            Assert.Null(ex);
 
-            using (var iter = result.GetEnumerator()) {
+            return result;
+        }
+
+        public static void ThrowsOnNext<T>(IEnumerable<T> seq) {
+            using (var iter = seq.GetEnumerator()) {
                 Assert.Throws<InvalidOperationException>(() => iter.MoveNext());
             }
         }
 
-        public static void IsDeferred<T>(Func<IEnumerable<T>, IEnumerable<T>> fun)
-            => IsDeferred<T, T>(fun);
+        public static void ThrowsAfter<T>(IEnumerable<T> seq, int count) {
+            int i = 0;
+            using (var iter = seq.GetEnumerator()) {
+                while (i < count) { Assert.True(iter.MoveNext()); i++; }
+                Assert.Throws<InvalidOperationException>(() => iter.MoveNext());
+            }
+        }
+
+        public static void CalledOnNext<T>(IEnumerable<T> seq, ref bool notCalled) {
+            using (var iter = seq.GetEnumerator()) {
+                iter.MoveNext();
+                Assert.False(notCalled);
+            }
+        }
+
+        public static void CalledAfter<T>(IEnumerable<T> seq, int count, ref bool notCalled) {
+            int i = 0;
+            using (var iter = seq.GetEnumerator()) {
+                while (i < count) { Assert.True(iter.MoveNext()); i++; }
+                iter.MoveNext();
+                Assert.False(notCalled);
+            }
+        }
 
         public static void IsNotLocalized(LocalizedStrings localizedStrings) {
             var dict = localizedStrings.GetStrings();

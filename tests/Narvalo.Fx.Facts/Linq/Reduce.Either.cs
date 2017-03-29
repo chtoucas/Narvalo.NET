@@ -14,9 +14,9 @@ namespace Narvalo.Linq {
             Func<int, int, Either<int, int>> accumulator = (i, j) => Either<int, int>.OfLeft(i + j);
             Func<Either<int, int>, bool> predicate = _ => true;
 
-            IEnumerable<int> nullsource = null;
-            Assert.Throws<ArgumentNullException>("this", () => nullsource.Reduce(accumulator));
-            Assert.Throws<ArgumentNullException>("this", () => nullsource.Reduce(accumulator, predicate));
+            IEnumerable<int> nil = null;
+            Assert.Throws<ArgumentNullException>("this", () => nil.Reduce(accumulator));
+            Assert.Throws<ArgumentNullException>("this", () => nil.Reduce(accumulator, predicate));
 
             var source = Enumerable.Range(0, 1);
             Assert.Throws<ArgumentNullException>("accumulator", () => source.Reduce(default(Func<int, int, Either<int, int>>)));

@@ -2,11 +2,11 @@
 
 namespace Narvalo.Linq {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
 
     using Narvalo.Applicative;
-    using Xunit;
+
+    using Assert = Narvalo.AssertExtended;
 
     public partial class QperatorsFacts {
         [t("SelectWith() uses deferred execution (Maybe).")]
@@ -16,6 +16,7 @@ namespace Narvalo.Linq {
             var q = Enumerable.Repeat(fun, 1).SelectWith(f => f());
 
             Assert.True(notCalled);
+            q.OnSome(x => Assert.CalledOnNext(x, ref notCalled));
         }
     }
 }

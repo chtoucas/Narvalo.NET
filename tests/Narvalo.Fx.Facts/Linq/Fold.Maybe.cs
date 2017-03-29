@@ -15,9 +15,9 @@ namespace Narvalo.Linq {
             Func<int, int, Maybe<int>> accumulator = (i, j) => Maybe.Of(i + j);
             Func<Maybe<int>, bool> predicate = _ => true;
 
-            IEnumerable<int> nullsource = null;
-            Assert.Throws<ArgumentNullException>("this", () => nullsource.Fold(seed, accumulator));
-            Assert.Throws<ArgumentNullException>("this", () => nullsource.Fold(seed, accumulator, predicate));
+            IEnumerable<int> nil = null;
+            Assert.Throws<ArgumentNullException>("this", () => nil.Fold(seed, accumulator));
+            Assert.Throws<ArgumentNullException>("this", () => nil.Fold(seed, accumulator, predicate));
 
             var source = Enumerable.Range(0, 1);
             Assert.Throws<ArgumentNullException>("accumulator", () => source.Fold(seed, default(Func<int, int, Maybe<int>>)));

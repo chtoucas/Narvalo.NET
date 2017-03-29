@@ -6,7 +6,6 @@ namespace Narvalo.Linq {
     using System.Linq;
 
     using Narvalo.Applicative;
-    using Xunit;
 
     using Assert = Narvalo.AssertExtended;
 
@@ -17,7 +16,8 @@ namespace Narvalo.Linq {
             var second = Enumerable.Range(0, 1);
             Func<int, int, Either<int, int>> resultSelector = (i, j) => Either<int, int>.OfLeft(i + j);
 
-            Assert.DoesNotThrow(() => first.ZipWith(second, resultSelector));
+            var q = Assert.DoesNotThrow(() => first.ZipWith(second, resultSelector));
+            q.OnLeft(x => Assert.ThrowsOnNext(x));
         }
     }
 }

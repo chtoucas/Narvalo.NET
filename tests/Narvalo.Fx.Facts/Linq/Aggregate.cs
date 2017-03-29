@@ -14,11 +14,11 @@ namespace Narvalo.Linq {
             Func<int, int> resultSelector = i => i + 1; ;
             Func<int, bool> predicate = _ => true;
 
-            IEnumerable<int> nullsource = null;
+            IEnumerable<int> nil = null;
 
-            Assert.Throws<ArgumentNullException>("this", () => nullsource.Aggregate(accumulator, predicate));
-            Assert.Throws<ArgumentNullException>("this", () => nullsource.Aggregate(1, accumulator, predicate));
-            Assert.Throws<ArgumentNullException>("this", () => nullsource.Aggregate(1, accumulator, resultSelector, predicate));
+            Assert.Throws<ArgumentNullException>("this", () => nil.Aggregate(accumulator, predicate));
+            Assert.Throws<ArgumentNullException>("this", () => nil.Aggregate(1, accumulator, predicate));
+            Assert.Throws<ArgumentNullException>("this", () => nil.Aggregate(1, accumulator, resultSelector, predicate));
 
             var source = Enumerable.Range(0, 1);
 

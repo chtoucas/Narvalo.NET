@@ -98,7 +98,6 @@
     <Compile Include="Linq\Fold.Maybe.cs" />
     <Compile Include="Linq\Sum.cs" />
     <Compile Include="Linq\CollectAny.Fallible.cs" />
-    <Compile Include="Linq\Reduce.cs" />
     <Compile Include="Linq\Fold.Outcome.cs" />
     <Compile Include="Linq\SelectAny.Fallible.cs" />
     <Compile Include="Linq\SelectAny.Outcome.cs" />
