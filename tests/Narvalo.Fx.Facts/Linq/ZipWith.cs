@@ -5,6 +5,7 @@ namespace Narvalo.Linq {
     using System.Collections.Generic;
     using System.Linq;
 
+    using Narvalo.Applicative;
     using Xunit;
 
     public partial class QperatorsFacts {

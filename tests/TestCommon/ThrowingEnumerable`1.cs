@@ -9,8 +9,8 @@ namespace Narvalo {
     /// Class to help for deferred execution tests: it throw an exception
     /// if GetEnumerator is called.
     /// </summary>
-    public sealed class ThrowingEnumerable : IEnumerable<int> {
-        public IEnumerator<int> GetEnumerator() => throw new InvalidOperationException();
+    public sealed class ThrowingEnumerable<T> : IEnumerable<T> {
+        public IEnumerator<T> GetEnumerator() => throw new InvalidOperationException();
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }

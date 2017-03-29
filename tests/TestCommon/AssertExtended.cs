@@ -23,8 +23,9 @@ namespace Narvalo {
         /// throw InvalidOperationException.
         /// </summary>
         // Adapted from https://raw.githubusercontent.com/jskeet/edulinq/master/src/Edulinq.TestSupport/ThrowingEnumerable.cs
+        // See https://msdn.microsoft.com/en-us/library/mt693095.aspx
         public static void IsDeferred<T>(Func<IEnumerable<int>, IEnumerable<T>> fun) {
-            var result = fun(new ThrowingEnumerable());
+            var result = fun(new ThrowingEnumerable<int>());
 
             using (var iter = result.GetEnumerator()) {
                 Assert.Throws<InvalidOperationException>(() => iter.MoveNext());

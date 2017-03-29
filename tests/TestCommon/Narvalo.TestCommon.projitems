@@ -17,7 +17,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)My.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AssertExtended.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ReleaseOnlyFactAttribute.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ThrowingEnumerable.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ThrowingEnumerable`1.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UseCultureAttribute.cs" />
   </ItemGroup>
 </Project>
