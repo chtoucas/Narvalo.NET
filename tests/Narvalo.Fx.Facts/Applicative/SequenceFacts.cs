@@ -20,7 +20,7 @@ namespace Narvalo.Applicative {
             Assert.Throws<ArgumentNullException>("predicate", () => Sequence.Unfold(0, accumulator, null));
         }
 
-        [t("Unfold() uses deferred streaming execution.")]
+        [t("Unfold() uses deferred (streaming) execution.")]
         public static void Unfold1() {
             Func<int, (int, int)> accumulator = _ => throw new InvalidOperationException();
 
@@ -47,23 +47,31 @@ namespace Narvalo.Applicative {
             Assert.Throws<ArgumentNullException>("predicate", () => Sequence.Gather(0, iterator, resultSelector, null));
         }
 
-        [t("Gather() uses deferred streaming execution.")]
+        [t("Gather() uses deferred (streaming) execution.")]
         public static void Gather1() {
             Func<int, int> iterator = _ => throw new InvalidOperationException();
             Func<int, int> resultSelector = _ => throw new InvalidOperationException();
             Func<int, bool> predicate = _ => throw new InvalidOperationException();
 
-            Assert.DoesNotThrow(() => Sequence.Gather(0, iterator));
+            var q1 = Assert.DoesNotThrow(() => Sequence.Gather(0, iterator));
+            Assert.ThrowsAfter(q1, 1);
 
-            Assert.DoesNotThrow(() => Sequence.Gather(0, iterator, _ => true));
-            Assert.DoesNotThrow(() => Sequence.Gather(0, i => i + 1, predicate));
+            var q2 = Assert.DoesNotThrow(() => Sequence.Gather(0, iterator, _ => true));
+            Assert.ThrowsAfter(q2, 1);
+            var q3 = Assert.DoesNotThrow(() => Sequence.Gather(0, i => i + 1, predicate));
+            Assert.ThrowsOnNext(q3);
 
-            Assert.DoesNotThrow(() => Sequence.Gather(0, iterator, i => i + 1));
-            Assert.DoesNotThrow(() => Sequence.Gather(0, i => i + 1, resultSelector));
+            var q4 = Assert.DoesNotThrow(() => Sequence.Gather(0, iterator, i => i + 1));
+            Assert.ThrowsAfter(q4, 1);
+            var q5 = Assert.DoesNotThrow(() => Sequence.Gather(0, i => i + 1, resultSelector));
+            Assert.ThrowsOnNext(q5);
 
-            Assert.DoesNotThrow(() => Sequence.Gather(0, iterator, i => i + 1, _ => true));
-            Assert.DoesNotThrow(() => Sequence.Gather(0, i => i + 1, resultSelector, _ => true));
-            Assert.DoesNotThrow(() => Sequence.Gather(0, i => i + 1, i => i + 1, predicate));
+            var q6 = Assert.DoesNotThrow(() => Sequence.Gather(0, iterator, i => i + 1, _ => true));
+            Assert.ThrowsAfter(q6, 1);
+            var q7 = Assert.DoesNotThrow(() => Sequence.Gather(0, i => i + 1, resultSelector, _ => true));
+            Assert.ThrowsOnNext(q7);
+            var q8 = Assert.DoesNotThrow(() => Sequence.Gather(0, i => i + 1, i => i + 1, predicate));
+            Assert.ThrowsOnNext(q8);
         }
     }
 }
