@@ -9,7 +9,27 @@ namespace Narvalo.Applicative {
 
     using static global::My;
 
+    using Assert = Narvalo.AssertExtended;
+
+    // Tests for Result<T, TError>.
     public static partial class ResultFacts {
+        [t("ThrowIfError() does not throw if OK.")]
+        public static void ThrowIfError1() {
+            var ok = Result<Obj, Exception>.Of(new Obj());
+            Assert.DoesNotThrow(() => ok.ThrowIfError());
+        }
+
+        [t("ThrowIfError() throws if NOK.")]
+        public static void ThrowIfError2() {
+            var error = "My message";
+            var nok = Result<Obj, SimpleException>.FromError(new SimpleException(error));
+            var ex = Record.Exception(() => nok.ThrowIfError());
+
+            Assert.NotNull(ex);
+            Assert.IsType<SimpleException>(ex);
+            Assert.Equal(error, ex.Message);
+        }
+
         [t("GetHashCode() guards.")]
         public static void GetHashCode0() {
             var nok = (IStructuralEquatable)Result<Obj, string>.FromError("error");
@@ -151,6 +171,41 @@ namespace Narvalo.Applicative {
             var nok = Result<Obj, string>.FromError("error");
             Assert.Throws<ArgumentNullException>("caseSuccess", () => nok.Match(null, _ => new Obj()));
             Assert.Throws<ArgumentNullException>("caseError", () => nok.Match(val => val, null));
+        }
+    }
+
+    // Tests for the monadic methods.
+    public static partial class ResultFacts {
+        [t("Flatten() returns NOK if NOK.")]
+        public static void Flatten1() {
+            var nok = Result<Result<Obj, string>, string>.FromError("error");
+            var result = nok.Flatten();
+            Assert.True(result.IsError);
+        }
+
+        [t("Flatten() returns OK if OK.")]
+        public static void Flatten2() {
+            var ok = Result<Result<Obj, string>, string>.Of(Result<Obj, string>.Of(new Obj()));
+            var result = ok.Flatten();
+            Assert.True(result.IsSuccess);
+        }
+
+        [t("Flatten() returns NOK if NOK.")]
+        public static void FlattenError1() {
+            var nok = Result<Obj, Result<Obj, string>>.FromError(Result<Obj, string>.FromError("error"));
+            var result = Result.FlattenError(nok);
+            Assert.True(result.IsError);
+        }
+
+        [t("Flatten() returns OK if OK.")]
+        public static void FlattenError2() {
+            var ok1 = Result<Obj, Result<Obj, string>>.FromError(Result<Obj, string>.Of(new Obj()));
+            var result1 = Result.FlattenError(ok1);
+            Assert.True(result1.IsSuccess);
+
+            var ok2 = Result<Obj, Result<Obj, string>>.Of(new Obj());
+            var result2 = Result.FlattenError(ok2);
+            Assert.True(result2.IsSuccess);
         }
     }
 

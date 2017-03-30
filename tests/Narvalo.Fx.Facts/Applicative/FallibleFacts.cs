@@ -38,12 +38,37 @@ namespace Narvalo.Applicative {
         [t("ThrowIfError() throws if NOK.")]
         public static void ThrowIfError2() {
             var nok = Fallible.FromError(Error);
-            Action act = () => nok.ThrowIfError();
-            var ex = Record.Exception(act);
+            var ex = Record.Exception(() => nok.ThrowIfError());
 
             Assert.NotNull(ex);
             Assert.IsType<SimpleException>(ex);
             Assert.Equal(ErrorMessage, ex.Message);
+        }
+
+        [t("ToExceptionInfo() throws if OK.")]
+        public static void ToExceptionInfo1() {
+            var ok = Fallible.Ok;
+            Assert.Throws<InvalidCastException>(() => ok.ToExceptionInfo());
+        }
+
+        [t("ToExceptionInfo() throws if NOK.")]
+        public static void ToExceptionInfo2() {
+            var nok = Fallible.FromError(Error);
+            var result = nok.ToExceptionInfo();
+            Assert.Equal(Error, result);
+        }
+
+        [t("Casting (to ExceptionDispatchInfo) throws if OK.")]
+        public static void cast1() {
+            var ok = Fallible.Ok;
+            Assert.Throws<InvalidCastException>(() => (ExceptionDispatchInfo)ok);
+        }
+
+        [t("Casting (to ExceptionDispatchInfo) returns the error if NOK.")]
+        public static void cast2() {
+            var nok = Fallible.FromError(Error);
+            var result = (ExceptionDispatchInfo)nok;
+            Assert.Equal(Error, result);
         }
 
         [t("== and != when both sides are NOK.")]

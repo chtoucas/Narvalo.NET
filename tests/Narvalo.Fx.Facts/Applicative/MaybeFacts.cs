@@ -99,34 +99,6 @@ namespace Narvalo.Applicative {
             Assert.False(m2.IsSome);
         }
 
-        [t("Casting (to T) throws if none.")]
-        public static void cast1() {
-            Assert.Throws<InvalidCastException>(() => { var _ = (Obj)Maybe<Obj>.None; });
-        }
-
-        [t("Casting (to T) returns Value if some.")]
-        public static void cast2() {
-            var exp = new Obj();
-            var some = Maybe.Of(exp);
-
-            Assert.Same(exp, (Obj)some);
-        }
-
-        [t("Casting (from) null returns none.")]
-        public static void cast3() {
-            var none = (Maybe<Obj>)null;
-
-            Assert.True(none.IsNone);
-        }
-
-        [t("Casting (from) non-null returns some.")]
-        public static void cast4() {
-            var exp = new Obj();
-            var some = (Maybe<Obj>)exp;
-
-            Assert.True(some.IsSome);
-        }
-
         [t("ValueOrDefault() returns Value if some.")]
         public static void ValueOrDefault1() {
             var exp = new Obj();
@@ -197,6 +169,57 @@ namespace Narvalo.Applicative {
 
             Assert.Throws<InvalidOperationException>(() => none.ValueOrThrow());
             Assert.Throws<SimpleException>(() => none.ValueOrThrow(() => new SimpleException()));
+        }
+
+        [t("Casting (to T) throws if none.")]
+        public static void cast1() {
+            Assert.Throws<InvalidCastException>(() => (Obj)Maybe<Obj>.None);
+        }
+
+        [t("Casting (to T) returns Value if some.")]
+        public static void cast2() {
+            var exp = new Obj();
+            var some = Maybe.Of(exp);
+
+            Assert.Same(exp, (Obj)some);
+        }
+
+        [t("Casting (from) null returns none.")]
+        public static void cast3() {
+            var none = (Maybe<Obj>)null;
+
+            Assert.True(none.IsNone);
+        }
+
+        [t("Casting (from) non-null returns some.")]
+        public static void cast4() {
+            var exp = new Obj();
+            var some = (Maybe<Obj>)exp;
+
+            Assert.True(some.IsSome);
+        }
+
+        [t("ToNullable() returns null if none and some if some (1).")]
+        public static void ToNullable1() {
+            int? exp = 1;
+            var some = Maybe.Of(1);
+            Assert.Equal(exp, some.ToNullable());
+
+            var none = Maybe<int>.None;
+            Assert.Null(none.ToNullable());
+        }
+
+        [t("ToNullable() returns null if none and some if some (2).")]
+        public static void ToNullable2() {
+            int? exp = 1;
+            Maybe<int?> some = Maybe.Of(1).Select<int?>(i => 1);
+            Assert.Equal(exp, some.ToNullable());
+
+            Maybe<int?> none1 = Maybe.Of(1).Select<int?>(i => null);
+            Assert.Null(none1.ToNullable());
+
+            var none2 = Maybe<int?>.None;
+            Assert.Null(none2.ToNullable());
         }
 
         [t("== and != when the Value's are equal.")]

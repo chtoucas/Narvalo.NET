@@ -6,6 +6,11 @@ Narvalo.Core
 
 Provides helpers on which depend the other Narvalo packages.
 
+### Status
+- **Stable**
+- Full test coverage.
+- Complete C# documentation.
+
 Changelog
 ---------
 

@@ -302,17 +302,15 @@ namespace Narvalo.Applicative {
         [t("Flatten() returns NOK if NOK.")]
         public static void Flatten1() {
             var nok = Fallible<Fallible<Obj>>.FromError(Error);
-
             var result = nok.Flatten();
-            Assert.True(nok.IsError);
+            Assert.True(result.IsError);
         }
 
         [t("Flatten() returns OK if OK.")]
         public static void Flatten2() {
             var ok = Fallible.Of(Fallible.Of(new Obj()));
-
             var result = ok.Flatten();
-            Assert.True(ok.IsSuccess);
+            Assert.True(result.IsSuccess);
         }
     }
 

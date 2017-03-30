@@ -9,6 +9,9 @@ programming: option type (`Maybe<T>`), return types (`Result<T, TError>`,
 `Outcome<T>` and `Fallible<T>`), simple disjoint union (`Either<T1, T2>`),
 sequence generators and LINQ extensions.
 
+### Status
+- The next release should be the first one to be declared stable.
+
 This assembly encourages an applicative-style of programming (or functional if
 you prefer):
 - Types are **immutable**.

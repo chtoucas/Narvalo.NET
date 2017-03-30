@@ -137,8 +137,7 @@ namespace Narvalo.Applicative {
             var message = "error";
             var err = Outcome<Obj>.FromError(message);
 
-            Action act = () => err.ToValue();
-            Assert.Throws<InvalidCastException>(act);
+            Assert.Throws<InvalidCastException>(() => err.ToValue());
         }
 
         [t("ToValue() returns Value if OK.")]
@@ -339,7 +338,6 @@ namespace Narvalo.Applicative {
         [t("Flatten() returns NOK if NOK.")]
         public static void Flatten1() {
             var nok = Outcome<Outcome<Obj>>.FromError("error");
-
             var result = nok.Flatten();
             Assert.True(result.IsError);
         }
@@ -347,7 +345,6 @@ namespace Narvalo.Applicative {
         [t("Flatten() returns OK if OK.")]
         public static void Flatten2() {
             var ok = Outcome.Of(Outcome.Of(new Obj()));
-
             var result = ok.Flatten();
             Assert.True(result.IsSuccess);
         }
