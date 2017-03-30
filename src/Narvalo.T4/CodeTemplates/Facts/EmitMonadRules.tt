@@ -93,12 +93,24 @@ public partial class MonadTemplate
         }
 
         [q("<#= ReturnName #>() is a left identity for Compose() (first monad rule).")]
-        public static bool <#= ReturnName #>02(int arg0, float arg1) {
+        public static bool <#= ReturnName #>02a(int arg0, float arg1) {
             Func<int, <#= Name #><int<#= RTDecl #>>> of = <#+ WriteFactory("int"); #>;
             Func<int, <#= Name #><float<#= RTDecl #>>> f = x => <#+ WriteFactory("float"); #>(arg1 * x);
 
             // return >=> g  ==  g
             var left = of.Compose(f).Invoke(arg0);
+            var right = f(arg0);
+
+            return left.Equals(right);
+        }
+
+        [q("<#= ReturnName #>() is a right identity for ComposeBack() (first monad rule).")]
+        public static bool <#= ReturnName #>02b(int arg0, float arg1) {
+            Func<int, <#= Name #><int<#= RTDecl #>>> of = <#+ WriteFactory("int"); #>;
+            Func<int, <#= Name #><float<#= RTDecl #>>> f = x => <#+ WriteFactory("float"); #>(arg1 * x);
+
+            // g <=< return  ==  g
+            var left = f.ComposeBack(of).Invoke(arg0);
             var right = f(arg0);
 
             return left.Equals(right);
@@ -116,11 +128,23 @@ public partial class MonadTemplate
         }
 
         [q("<#= ReturnName #>() is a right identity for Compose() (second monad rule).")]
-        public static bool <#= ReturnName #>04(int arg0, float arg1) {
+        public static bool <#= ReturnName #>04a(int arg0, float arg1) {
             Func<int, <#= Name #><float<#= RTDecl #>>> f = x => <#+ WriteFactory("float"); #>(arg1 * x);
 
             // f >=> return  ==  f
             var left = f.Compose(<#+ WriteFactory("float"); #>).Invoke(arg0);
+            var right = f(arg0);
+
+            return left.Equals(right);
+        }
+
+        [q("<#= ReturnName #>() is a left identity for ComposeBack() (second monad rule).")]
+        public static bool <#= ReturnName #>04b(int arg0, float arg1) {
+            Func<float, <#= Name #><float<#= RTDecl #>>> of = <#+ WriteFactory("float"); #>;
+            Func<int, <#= Name #><float<#= RTDecl #>>> f = x => <#+ WriteFactory("float"); #>(arg1 * x);
+
+            // return <=< f  ==  f
+            var left = of.ComposeBack(f).Invoke(arg0);
             var right = f(arg0);
 
             return left.Equals(right);
@@ -141,7 +165,7 @@ public partial class MonadTemplate
         }
 
         [q("Compose() is associative (third monad rule).")]
-        public static bool Compose01(short arg0, int arg1, long arg2, double arg3) {
+        public static bool Compose01a(short arg0, int arg1, long arg2, double arg3) {
             Func<short, <#= Name #><int<#= RTDecl #>>> f = x => <#+ WriteFactory("int"); #>(arg1 * x);
             Func<int, <#= Name #><long<#= RTDecl #>>> g = x => <#+ WriteFactory("long"); #>(arg2 * x);
             Func<long, <#= Name #><double<#= RTDecl #>>> h = x => <#+ WriteFactory("double"); #>(arg3 * x);
@@ -149,6 +173,19 @@ public partial class MonadTemplate
             // f >=> (g >=> h)  ==  (f >=> g) >=> h
             var left = f.Compose(g.Compose(h)).Invoke(arg0);
             var right = f.Compose(g).Compose(h).Invoke(arg0);
+
+            return left.Equals(right);
+        }
+
+        [q("ComposeBack() is associative (third monad rule).")]
+        public static bool Compose01b(short arg0, int arg1, long arg2, double arg3) {
+            Func<short, <#= Name #><int<#= RTDecl #>>> f = x => <#+ WriteFactory("int"); #>(arg1 * x);
+            Func<int, <#= Name #><long<#= RTDecl #>>> g = x => <#+ WriteFactory("long"); #>(arg2 * x);
+            Func<long, <#= Name #><double<#= RTDecl #>>> h = x => <#+ WriteFactory("double"); #>(arg3 * x);
+
+            // f <=< (g <=< h)  ==  (f <=< g) <=< h
+            var left = h.ComposeBack(g).ComposeBack(f).Invoke(arg0);
+            var right = h.ComposeBack(g.ComposeBack(f)).Invoke(arg0);
 
             return left.Equals(right);
         }

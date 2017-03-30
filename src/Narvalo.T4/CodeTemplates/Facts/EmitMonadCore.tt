@@ -24,42 +24,6 @@ public partial class MonadTemplate
                 DisplayName = nameof(<#= Name #>) + " - " + description;
             }
         }
-
-        [q("Ap.Apply is <#= MapName #>.Gather w/ the arguments flipped.")]
-        public static bool Apply01(int arg0, long arg1) {
-            var applicative = <#+ WriteFactory("Func<int, long>"); #>(i => arg1 * i);
-            var value = <#+ WriteFactory("int"); #>(arg0);
-
-            var applied = applicative.Apply(value);
-            var gathered = value.Gather(applicative);
-
-            return applied.Equals(gathered);
-        }
-
-        [q("Kleisli.InvokeWith is Qperators.SelectWith w/ the arguments flipped.")]
-        public static bool InvokeWith01(int[] arg0, long arg1) {
-            Func<int, <#= Name #><long<#= RTDecl #>>> selector = i => <#+ WriteFactory("long"); #>(arg1 * i);
-
-            var invoked = selector.InvokeWith(arg0);
-            var selected = arg0.SelectWith(selector);
-
-            var q = from x in invoked
-                    from y in selected
-                    select Enumerable.SequenceEqual(x, y);
-
-            return q.<#= ContainsName #>(true);
-        }
-
-        [q("Kleisli.InvokeWith is <#= Name #>.Bind w/ the arguments flipped.")]
-        public static bool InvokeWith02(int arg0, long arg1) {
-            Func<int, <#= Name #><long<#= RTDecl #>>> binder = i => <#+ WriteFactory("long"); #>(arg1 * i);
-            var value = <#+ WriteFactory("int"); #>(arg0);
-
-            var invoked = binder.InvokeWith(value);
-            var bounded = value.Bind(binder);
-
-            return invoked.Equals(bounded);
-        }
     }
 <#+
     } // T4: End of EmitMonadCore().

@@ -2,7 +2,8 @@
 <#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
 <#@ include file="Facts\EmitMonadCore.tt" #>
 <#@ include file="Facts\EmitMonadGuards.tt" #>
-<#@ include file="Facts\EmitMonadRules.tt" #><#+
+<#@ include file="Facts\EmitMonadRules.tt" #>
+<#@ include file="Facts\EmitMonadTests.tt" #><#+
 
 // This template depends on:
 // - Xunit
@@ -33,6 +34,9 @@ namespace <#= Namespace #> {
 
     WriteLine();
     EmitMonadGuards();
+
+    WriteLine();
+    EmitMonadTests();
 
     WriteLine();
     EmitMonadRules();
