@@ -42,9 +42,11 @@ The main namespace is `Narvalo.Applicative`:
 - `Sequence` which provides various ways to generate infinite sequences.
 - Stubs for some commonly used delegates.
 
-We dot yet include other monads. I am not yet convinced of their usefulness in
-the context of C# - for skeletons definitions of `IO`, `Reader`, `Writer`and
-`State`,
+Our implementation of monads follows very closely the Haskell API. We also
+enable the Query Expression Pattern on all monadic types.
+
+In the context of C#, I am yet to be convinced of the usefulness and practicability
+of the other common monads - for skeleton definitions of `IO`, `Reader` and `State`,
 see [here](https://github.com/chtoucas/Brouillons/tree/master/src/play/Functional/Monadic).
 
 The other namespace is `Narvalo.Linq` which contains LINQ extensions:

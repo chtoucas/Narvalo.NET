@@ -128,7 +128,7 @@ Play
 
 - Finish monad rules.
 - Add demo codes for all monads.
-- Add Write and Continuation monads.
+- Add Writer and Continuation monads.
 - Give examples: parser combinator (Sprache), state-machine (Stateless).
 
 Narvalo.Reliability
