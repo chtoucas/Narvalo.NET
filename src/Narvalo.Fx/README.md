@@ -12,8 +12,16 @@ sequence generators and LINQ extensions.
 ### Status
 - The next release should be the first one to be declared stable.
 
-Detailed description
---------------------
+### Content
+- [Overview](#overview)
+- [Maybe monad](#maybe-monad)
+- [Error monads](#error-monads)
+- [LINQ extensions](#linq-extensions)
+- [Infinite sequences](#infinite-sequences)
+- [Changelog](#changelog)
+
+Overview
+--------
 
 This assembly encourages an applicative-style of programming (or functional if
 you prefer):
@@ -36,8 +44,27 @@ The main namespace is `Narvalo.Applicative`:
 
 The other namespace is `Narvalo.Linq` which contains LINQ extensions.
 
-The various ways to return from a method
-----------------------------------------
+Maybe monad
+-----------
+
+The `Maybe<T>` class is like `Nullable<T>` class but without restriction
+on the underlying type: *it provides a way to tell the absence or the presence
+of a value*. For value types, most of the time `T?` offers a much better
+alternative. This class is sometimes referred to as the Option type.
+
+### Haskell ###
+- `catMaybes`   -> `Maybe.CollectAny()`
+- `isJust`      -> `Maybe<T>.IsSome`
+- `isNothing`   -> `Maybe<T>.IsNone`
+- `fromMaybe`
+- `fromJust`
+- `maybeToList` -> `Maybe<T>.ToEnumerable()`
+- `maybe`       -> `Maybe<T>.Match()`
+- `listToMaybe` -> `Qperators.FirstOrNone()`
+- `mapMaybe`    -> `Qperators.SelectAny()`
+
+Error monads
+------------
 
 Typical use cases:
 - To encapsulate the result of a computation with lightweight error reporting
@@ -67,3 +94,16 @@ Remarks:
 - **Always** prefer `Outcome` over `Maybe<TError>`.
   With `Maybe<TError>` it is not obvious that the underlying type (`TError`)
   represents an error and not the "normal" return type.
+
+LINQ Extensions
+---------------
+
+_TODO_
+
+Infinite Sequences
+------------------
+
+_TODO_
+
+Changelog
+---------
