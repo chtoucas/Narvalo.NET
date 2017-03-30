@@ -16,6 +16,7 @@ sequence generators and LINQ extensions.
 - [Overview](#overview)
 - [Maybe type](#maybe-type)
 - [Error types](#error-types)
+- [Either type](#either-type)
 - [LINQ extensions](#linq-extensions)
 - [Infinite sequences](#infinite-sequences)
 - [Monadic API](#monadic-api)
@@ -73,7 +74,7 @@ that maps a value to a Maybe, an Error or an Either:
   * `ZipWith` (deferred)
   * `WhereBy` (deferred)
   * `Fold`
-  * `Reduce`.
+  * `Reduce`
 
 Maybe type
 ----------
@@ -115,20 +116,17 @@ Remarks:
   With `Maybe<TError>` it is not obvious that the underlying type (`TError`)
   represents an error and not the "normal" return type.
 
+Either type
+-----------
+
 LINQ Extensions
 ---------------
-
-_TODO_
 
 Infinite Sequences
 ------------------
 
-_TODO_
-
 Monadic API
 -----------
-
-_TODO_
 
 Design
 ------
