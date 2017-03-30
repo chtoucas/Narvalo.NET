@@ -36,19 +36,18 @@ public partial class MonadTemplate
             return applied.Equals(gathered);
         }
 
-        [q("Kleisli.InvokeWith is Qperators.SelectWith w/ the arguments flipped.", Skip = "Needs some more work.")]
-        public static bool InvokeWith01(int arg0, long arg1, int arg3) {
+        [q("Kleisli.InvokeWith is Qperators.SelectWith w/ the arguments flipped.")]
+        public static bool InvokeWith01(int[] arg0, long arg1) {
             Func<int, <#= Name #><long<#= RTDecl #>>> selector = i => <#+ WriteFactory("long"); #>(arg1 * i);
-            var seq = Enumerable.Repeat(arg0, arg3);
 
-            var invoked = selector.InvokeWith(seq);
-            var selected = seq.SelectWith(selector);
+            var invoked = selector.InvokeWith(arg0);
+            var selected = arg0.SelectWith(selector);
 
             var q = from x in invoked
                     from y in selected
                     select Enumerable.SequenceEqual(x, y);
 
-            return q.<#= ValueProperty #>;
+            return q.<#= ContainsName #>(true);
         }
 
         [q("Kleisli.InvokeWith is <#= Name #>.Bind w/ the arguments flipped.")]

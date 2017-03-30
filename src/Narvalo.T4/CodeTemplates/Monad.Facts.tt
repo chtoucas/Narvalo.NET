@@ -4,14 +4,15 @@
 <#@ include file="Facts\EmitMonadGuards.tt" #>
 <#@ include file="Facts\EmitMonadRules.tt" #><#+
 
-// This template is fairly incomplete (does not work for many monads) and depend on:
+// This template depends on:
 // - Xunit
 // - FsCheck.Xunit
-// The template must define factAttribute.
 
 public partial class MonadTemplate
 {
-    protected string ValueProperty { get; set; } = "Value";
+    protected string ValueName { get; set; } = "Value";
+
+    protected string ContainsName { get; set; } = "Contains";
 
     /// <summary>
     /// Generates tests for a Monad.
