@@ -58,7 +58,9 @@ namespace Narvalo.Finance {
 
             Assert.True(result.IsError);
 
+#if !NO_INTERNALS_VISIBLE_TO
             result.OnError(err => Assert.Equal(Format.Current(Strings.InvalidIbanValue, value), err));
+#endif
         }
 
         [T("TryParse() fails if the country code is not valid.")]
@@ -68,7 +70,9 @@ namespace Narvalo.Finance {
 
             Assert.True(result.IsError);
 
+#if !NO_INTERNALS_VISIBLE_TO
             result.OnError(err => Assert.Equal(Format.Current(Strings.InvalidInput_CountryCode, value), err));
+#endif
         }
 
         [T("TryParse() fails if the check digits are not valid.")]
@@ -78,7 +82,9 @@ namespace Narvalo.Finance {
 
             Assert.True(result.IsError);
 
+#if !NO_INTERNALS_VISIBLE_TO
             result.OnError(err => Assert.Equal(Format.Current(Strings.InvalidInput_CheckDigits, value), err));
+#endif
         }
 
         [T("TryParse() fails if the BBAN is not valid.")]
@@ -88,7 +94,9 @@ namespace Narvalo.Finance {
 
             Assert.True(result.IsError);
 
+#if !NO_INTERNALS_VISIBLE_TO
             result.OnError(err => Assert.Equal(Format.Current(Strings.InvalidInput_Bban, value), err));
+#endif
         }
 
         [T("TryParse() parses the different parts correctly.")]

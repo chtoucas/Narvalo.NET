@@ -47,7 +47,9 @@ namespace Narvalo.Finance {
             var result = IbanValidator.TryValidate(ParseFast(value), IbanValidationLevels.Integrity);
             Assert.True(result.IsError);
 
+#if !NO_INTERNALS_VISIBLE_TO
             result.OnError(err => Assert.Equal(Format.Current(Strings.IbanIntegrityCheckFailure, value), err));
+#endif
         }
 
         [T("Try-Validate(ISOCountryCode) fails for IBANs w/ invalid country code.")]
@@ -60,7 +62,9 @@ namespace Narvalo.Finance {
 
             Assert.True(result.IsError);
 
+#if !NO_INTERNALS_VISIBLE_TO
             result.OnError(err => Assert.Equal(Format.Current(Strings.UnknownISOCountryCode, parts.CountryCode), err));
+#endif
         }
     }
 

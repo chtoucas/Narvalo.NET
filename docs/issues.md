@@ -15,6 +15,8 @@ he', car il est en cours d'utilisation par un autre processus. [I:\github\Narval
 .Facts.csproj]
 ```
   See [dotnet issue](https://github.com/dotnet/cli/issues/4786)?
+  Seems to happen less often now, but still sometimes it fails on Narvalo.Money
+  (resource problem).
 - Review localization for Narvalo.Build, Narvalo.Mvp, Narvalo.Mvp.Web
   and Narvalo.Web.
 - [Low] Automatically create the assembly infos from the NuGet spec.
@@ -53,6 +55,8 @@ Next:
 Narvalo.Fx
 ----------
 
+- Auto-generate tests for null-guards (missing only for Either).
+- Add more tests beyond the auto-generated ones.
 - Simplify LINQ for `Maybe<T?>`.
 
 Next:
