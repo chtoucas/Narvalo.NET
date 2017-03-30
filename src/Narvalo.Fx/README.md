@@ -42,17 +42,25 @@ The main namespace is `Narvalo.Applicative`:
 - `Sequence` which provides various ways to generate infinite sequences.
 - Stubs for some commonly used delegates.
 
+We dot yet include other monads. I am not yet convinced of their usefulness in
+the context of C# - for skeletons definitions of `IO`, `Reader`, `Writer`and
+`State`,
+see [here](https://github.com/chtoucas/Brouillons/tree/master/src/play/Functional/Monadic).
+
 The other namespace is `Narvalo.Linq` which contains LINQ extensions:
-- Projecting: `SelectAny` (deferred)
-- Filtering: `WhereAny` (deferred)
-- Set: `Append` (deferred), `Prepend` (deferred)
-- Element: `FirstOrNone`, `LastOrNone`, `SingleOrNone`, `ElementAtOrNone`
-- Aggregation: `Aggregate` (deferred)
-- Quantifiers: `IsEmpty`
-- Generation: `EmptyIfNull`
-We have also operators accepting arguments in the Kleisli "category":
-`SelectWith` (deferred), `ZipWit`h (deferred), `WhereBy` (deferred),
-`Fold`, `Reduce`.
+- [Projecting] `SelectAny` (deferred)
+- [Filtering] `WhereAny` (deferred)
+- [Set] `Append` (deferred), `Prepend` (deferred)
+- [Element] `FirstOrNone`, `LastOrNone`, `SingleOrNone`, `ElementAtOrNone`
+- [Aggregation] `Aggregate` (deferred)
+- [Quantifiers] `IsEmpty`
+- [Generation] `EmptyIfNull`
+- We have also operators accepting arguments in the Kleisli "category":
+  * `SelectWith` (deferred)
+  * `ZipWith` (deferred)
+  * `WhereBy` (deferred)
+  * `Fold`
+  * `Reduce`.
 
 Maybe monad
 -----------
