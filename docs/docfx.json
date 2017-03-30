@@ -32,6 +32,11 @@
           "*.{md,yml}",
           //"userguide/**/*.{md,yml}"
         ]
+      },
+      {
+        "files": [ "README.md" ],
+        "src": "../src/Narvalo.Fx",
+        "dest": "Narvalo.Fx"
       }
     ],
     "resource": [],
