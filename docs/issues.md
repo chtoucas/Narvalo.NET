@@ -65,7 +65,8 @@ Narvalo.Fx
 Next:
 - Add `MapMany` to `Outcome` and `Fallible`....
 - Add other monads - prototypes [here](https://github.com/chtoucas/Brouillons/tree/master/src/play/Functional/Monadic)
-- `OnError()`, `WhenError()` & co could return a boolean to signal if it did anything.
+- `OnError()`, `WhenError()` & co could return a boolean to signal when they
+  actually did something.
 - Explain what do we mean by shadowing.
 - More Haskell API, eg When, Forever & co?
 - Add async and lazy alternatives?

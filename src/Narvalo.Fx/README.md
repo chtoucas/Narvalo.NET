@@ -12,7 +12,9 @@ sequence generators and LINQ extensions.
 ### Status
 - The next release should be the first one to be declared stable.
 
-### Detailed description
+Detailed description
+--------------------
+
 This assembly encourages an applicative-style of programming (or functional if
 you prefer):
 - Types are **immutable**.
@@ -20,15 +22,17 @@ you prefer):
 
 The main namespace is `Narvalo.Applicative`:
 - `Unit`
-- `Maybe<T>`, the option monad.
-- `Outcome`
-- `Outcome<T>`
-- `Fallible`
-- `Fallible<T>`
-- `Result<T, TError>`, the error monad.
-- `Either<T1, T2>`, the either monad.
-- `Sequence`
-- Stubs
+- `Maybe<T>`, the Maybe monad.
+- `Outcome`, an Error monad with lightweight error reporting for methods without
+  a return type.
+- `Outcome<T>`, an Error monad with lightweight error reporting.
+- `Fallible`, an Error monad with exception capture for methods without
+  a return type.
+- `Fallible<T>`, an Error monad with exception capture.
+- `Result<T, TError>`, the Error monad.
+- `Either<T1, T2>`, the Either monad.
+- `Sequence` which provides various ways to generate infinite sequences.
+- Stubs for the most common delegates.
 
 The other namespace is `Narvalo.Linq` which contains LINQ extensions.
 
