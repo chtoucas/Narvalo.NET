@@ -10,7 +10,7 @@ programming: option type (`Maybe<T>`), return types (`Result<T, TError>`,
 sequence generators and LINQ extensions.
 
 ### Status
-- The next release should be the first one to be declared stable.
+- The next release should be the first one to be marked stable.
 
 ### Content
 - [Overview](#overview)
@@ -40,9 +40,19 @@ The main namespace is `Narvalo.Applicative`:
 - `Result<T, TError>`, the Error monad.
 - `Either<T1, T2>`, the Either monad.
 - `Sequence` which provides various ways to generate infinite sequences.
-- Stubs for the most common delegates.
+- Stubs for some commonly used delegates.
 
-The other namespace is `Narvalo.Linq` which contains LINQ extensions.
+The other namespace is `Narvalo.Linq` which contains LINQ extensions:
+- Projecting: `SelectAny` (deferred)
+- Filtering: `WhereAny` (deferred)
+- Set: `Append` (deferred), `Prepend` (deferred)
+- Element: `FirstOrNone`, `LastOrNone`, `SingleOrNone`, `ElementAtOrNone`
+- Aggregation: `Aggregate` (deferred)
+- Quantifiers: `IsEmpty`
+- Generation: `EmptyIfNull`
+We have also operators accepting arguments in the Kleisli "category":
+`SelectWith` (deferred), `ZipWit`h (deferred), `WhereBy` (deferred),
+`Fold`, `Reduce`.
 
 Maybe monad
 -----------
