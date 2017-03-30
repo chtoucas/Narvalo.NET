@@ -280,12 +280,12 @@ namespace Narvalo.T4.Testbed
         // Bind() with automatic resource management.
         public static MonadPlus<TResult> Using<TSource, TResult>(
             this MonadPlus<TSource> @this,
-            Func<TSource, MonadPlus<TResult>> selector)
+            Func<TSource, MonadPlus<TResult>> binder)
             where TSource : IDisposable
         {
             Require.NotNull(@this, nameof(@this));
-            Require.NotNull(selector, nameof(selector));
-            return @this.Bind(val => { using (val) { return selector(val); } });
+            Require.NotNull(binder, nameof(binder));
+            return @this.Bind(val => { using (val) { return binder(val); } });
         }
 
         // Select() with automatic resource management.

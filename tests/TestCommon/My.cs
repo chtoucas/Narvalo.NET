@@ -114,6 +114,16 @@ public static partial class My {
         public override int GetHashCode() => Value.GetHashCode();
     }
 
+    public sealed class DisposableObj : IDisposable {
+        public DisposableObj() { }
+
+        public bool WasDisposed { get; private set; }
+
+        public void Dispose() {
+            WasDisposed = true;
+        }
+    }
+
     [Serializable]
     public sealed class SimpleException : Exception {
         public SimpleException() : base() { }

@@ -5,6 +5,7 @@ public partial class MonadTemplate
     public void EmitMonadCore()
     {
 #>
+    // Provides tests for <#= Name #><T<#= RTDecl #>>.
     // T4: EmitMonadCore().
     public static partial class <#= Name #>Facts {
         internal sealed class tAttribute : FactAttribute {
@@ -22,6 +23,16 @@ public partial class MonadTemplate
         internal sealed class qAttribute : PropertyAttribute {
             public qAttribute(string description) : base() {
                 DisplayName = nameof(<#= Name #>) + " - " + description;
+            }
+        }
+
+        private sealed class DisposableObj : IDisposable {
+            public DisposableObj() { }
+
+            public bool WasDisposed { get; private set; }
+
+            public void Dispose() {
+                WasDisposed = true;
             }
         }
     }

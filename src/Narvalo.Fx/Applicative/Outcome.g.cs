@@ -273,12 +273,12 @@ namespace Narvalo.Applicative
         // Bind() with automatic resource management.
         public static Outcome<TResult> Using<TSource, TResult>(
             this Outcome<TSource> @this,
-            Func<TSource, Outcome<TResult>> selector)
+            Func<TSource, Outcome<TResult>> binder)
             where TSource : IDisposable
         {
             /* T4: NotNull(@this) */
-            Require.NotNull(selector, nameof(selector));
-            return @this.Bind(val => { using (val) { return selector(val); } });
+            Require.NotNull(binder, nameof(binder));
+            return @this.Bind(val => { using (val) { return binder(val); } });
         }
 
         // Select() with automatic resource management.

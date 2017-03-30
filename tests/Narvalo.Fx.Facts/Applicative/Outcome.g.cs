@@ -18,6 +18,7 @@ namespace Narvalo.Applicative {
     using Narvalo.Linq;
     using Xunit;
 
+    // Provides tests for Outcome<T>.
     // T4: EmitMonadCore().
     public static partial class OutcomeFacts {
         internal sealed class tAttribute : FactAttribute {
@@ -38,47 +39,19 @@ namespace Narvalo.Applicative {
             }
         }
 
-        [q("Ap.Apply is Select.Gather w/ the arguments flipped.")]
-        public static bool Apply01(int arg0, long arg1) {
-            var applicative = Outcome<Func<int, long>>.η(i => arg1 * i);
-            var value = Outcome<int>.η(arg0);
+        private sealed class DisposableObj : IDisposable {
+            public DisposableObj() { }
 
-            var applied = applicative.Apply(value);
-            var gathered = value.Gather(applicative);
+            public bool WasDisposed { get; private set; }
 
-            return applied.Equals(gathered);
-        }
-
-        [q("Kleisli.InvokeWith is Qperators.SelectWith w/ the arguments flipped.", Skip = "Needs some more work.")]
-        public static bool InvokeWith01(int arg0, long arg1, int arg3) {
-            Func<int, Outcome<long>> selector = i => Outcome<long>.η(arg1 * i);
-            var seq = Enumerable.Repeat(arg0, arg3);
-
-            var invoked = selector.InvokeWith(seq);
-            var selected = seq.SelectWith(selector);
-
-            var q = from x in invoked
-                    from y in selected
-                    select Enumerable.SequenceEqual(x, y);
-
-            return q.Value;
-        }
-
-        [q("Kleisli.InvokeWith is Outcome.Bind w/ the arguments flipped.")]
-        public static bool InvokeWith02(int arg0, long arg1) {
-            Func<int, Outcome<long>> binder = i => Outcome<long>.η(arg1 * i);
-            var value = Outcome<int>.η(arg0);
-
-            var invoked = binder.InvokeWith(value);
-            var bounded = value.Bind(binder);
-
-            return invoked.Equals(bounded);
+            public void Dispose() {
+                WasDisposed = true;
+            }
         }
     }
 
 #if !NO_INTERNALS_VISIBLE_TO
 
-    // Provides tests for Outcome<T>.
     // T4: EmitMonadGuards().
     public static partial class OutcomeFacts {
         [t("Compose() guards.")]
@@ -137,6 +110,19 @@ namespace Narvalo.Applicative {
             Assert.Throws<ArgumentNullException>("selector", () => OutcomeExtensions.Select(source, selector));
         }
 
+        [t("Using() guards.")]
+        public static void Using0() {
+            var source = Outcome<DisposableObj>.η(new DisposableObj());
+            Func<DisposableObj, Outcome<int>> binder = null;
+            Func<DisposableObj, int> selector = null;
+
+            Assert.Throws<ArgumentNullException>("binder", () => source.Using(binder));
+            Assert.Throws<ArgumentNullException>("binder", () => OutcomeExtensions.Using(source, binder));
+
+            Assert.Throws<ArgumentNullException>("selector", () => source.Using(selector));
+            Assert.Throws<ArgumentNullException>("selector", () => OutcomeExtensions.Using(source, selector));
+        }
+
         [t("SelectMany() guards.")]
         public static void SelectMany0() {
             var source = Outcome<short>.η(1);
@@ -152,6 +138,335 @@ namespace Narvalo.Applicative {
             Assert.Throws<ArgumentNullException>("resultSelector", () => OutcomeExtensions.SelectMany(source, valueSelector, (Func<short, int, long>)null));
         }
 
+    }
+
+#endif
+
+#if !NO_INTERNALS_VISIBLE_TO
+
+    // T4: EmitMonadTests().
+    public static partial class OutcomeFacts {
+        [q("Repeat() repeats the enclosed value if any.")]
+        public static bool Repeat01(int arg) {
+            var source = Outcome<int>.η(arg);
+
+            var result = Outcome.Repeat(source, 10);
+            var seq = Enumerable.Repeat(arg, 10);
+
+            var q = from x in result select Enumerable.SequenceEqual(x, seq);
+
+            return q.Contains(true);
+        }
+
+        [q("Lift() is Select().")]
+        public static bool Lift01(int arg0, long arg1) {
+            Func<int, long> selector = i => arg1 * i;
+            var selector1 = Outcome.Lift<int, long>(selector);
+
+            var source = Outcome<int>.η(arg0);
+
+            var left = selector1(source);
+            var right = source.Select(selector);
+
+            return left.Equals(right);
+        }
+
+        [q("Select() is Lift().")]
+        public static bool Select01(int arg0, long arg1) {
+            Func<int, long> selector = i => arg1 * i;
+            var selector1 = Outcome.Lift<int, long>(selector);
+
+            var source = Outcome<int>.η(arg0);
+
+            var left = selector1(source);
+            var right = OutcomeExtensions.Select(source, selector);
+
+            return left.Equals(right);
+        }
+
+        [q("Lift() is Zip() (1).")]
+        public static bool Lift02(int arg0, int arg1, int arg2, int arg3) {
+            Func<int, int, long> zipper = (i, j) => arg2 * i + arg3 * j;
+            var zipper1 = Outcome.Lift<int, int, long>(zipper);
+
+            var p0 = Outcome<int>.η(arg0);
+            var p1 = Outcome<int>.η(arg1);
+
+            var left = zipper1(p0, p1);
+            var right = p0.Zip(p1, zipper);
+
+            return left.Equals(right);
+        }
+
+        // NB: Lift01() but w/o using Zip as an extension method.
+        [q("Zip() is Lift() (1).")]
+        public static bool Zip02(int arg0, int arg1, int arg2, int arg3) {
+            Func<int, int, long> zipper = (i, j) => arg2 * i + arg3 * j;
+            var zipper1 = Outcome.Lift<int, int, long>(zipper);
+
+            var p0 = Outcome<int>.η(arg0);
+            var p1 = Outcome<int>.η(arg1);
+
+            var left = zipper1(p0, p1);
+            var right = OutcomeExtensions.Zip(p0, p1, zipper);
+
+            return left.Equals(right);
+        }
+
+        [q("Lift() is Zip() (2).")]
+        public static bool Lift03(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+            Func<int, int, int, long> zipper = (i, j, k) => arg3 * i + arg4 * j + arg5 * k;
+            var zipper1 = Outcome.Lift<int, int, int, long>(zipper);
+
+            var p0 = Outcome<int>.η(arg0);
+            var p1 = Outcome<int>.η(arg1);
+            var p2 = Outcome<int>.η(arg2);
+
+            var left = zipper1(p0, p1, p2);
+            var right = p0.Zip(p1, p2, zipper);
+
+            return left.Equals(right);
+        }
+
+        [q("Zip() is Lift() (2).")]
+        public static bool Zip03(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+            Func<int, int, int, long> zipper = (i, j, k) => arg3 * i + arg4 * j + arg5 * k;
+            var zipper1 = Outcome.Lift<int, int, int, long>(zipper);
+
+            var p0 = Outcome<int>.η(arg0);
+            var p1 = Outcome<int>.η(arg1);
+            var p2 = Outcome<int>.η(arg2);
+
+            var left = zipper1(p0, p1, p2);
+            var right = OutcomeExtensions.Zip(p0, p1, p2, zipper);
+
+            return left.Equals(right);
+        }
+
+        [q("Lift() is Zip() (3).")]
+        public static bool Lift04(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
+            Func<int, int, int, int, long> zipper = (i, j, k, l) => arg4 * i + arg5 * j + arg6 * k + arg7 * l;
+            var zipper1 = Outcome.Lift<int, int, int, int, long>(zipper);
+
+            var p0 = Outcome<int>.η(arg0);
+            var p1 = Outcome<int>.η(arg1);
+            var p2 = Outcome<int>.η(arg2);
+            var p3 = Outcome<int>.η(arg3);
+
+            var left = zipper1(p0, p1, p2, p3);
+            var right = p0.Zip(p1, p2, p3, zipper);
+
+            return left.Equals(right);
+        }
+
+        [q("Zip() is Lift() (3).")]
+        public static bool Zip04(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
+            Func<int, int, int, int, long> zipper = (i, j, k, l) => arg4 * i + arg5 * j + arg6 * k + arg7 * l;
+            var zipper1 = Outcome.Lift<int, int, int, int, long>(zipper);
+
+            var p0 = Outcome<int>.η(arg0);
+            var p1 = Outcome<int>.η(arg1);
+            var p2 = Outcome<int>.η(arg2);
+            var p3 = Outcome<int>.η(arg3);
+
+            var left = zipper1(p0, p1, p2, p3);
+            var right = OutcomeExtensions.Zip(p0, p1, p2, p3, zipper);
+
+            return left.Equals(right);
+        }
+
+        [q("Lift() is Zip() (4).")]
+        public static bool Lift05(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9) {
+            Func<int, int, int, int, int, long> zipper = (i, j, k, l, m) => arg5 * i + arg6 * j + arg7 * k + arg8 * l + arg9 * m;
+            var zipper1 = Outcome.Lift<int, int, int, int, int, long>(zipper);
+
+            var p0 = Outcome<int>.η(arg0);
+            var p1 = Outcome<int>.η(arg1);
+            var p2 = Outcome<int>.η(arg2);
+            var p3 = Outcome<int>.η(arg3);
+            var p4 = Outcome<int>.η(arg4);
+
+            var left = zipper1(p0, p1, p2, p3, p4);
+            var right = p0.Zip(p1, p2, p3, p4, zipper);
+
+            return left.Equals(right);
+        }
+
+        [q("Zip() is Lift() (4).")]
+        public static bool Zip05(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9) {
+            Func<int, int, int, int, int, long> zipper = (i, j, k, l, m) => arg5 * i + arg6 * j + arg7 * k + arg8 * l + arg9 * m;
+            var zipper1 = Outcome.Lift<int, int, int, int, int, long>(zipper);
+
+            var p0 = Outcome<int>.η(arg0);
+            var p1 = Outcome<int>.η(arg1);
+            var p2 = Outcome<int>.η(arg2);
+            var p3 = Outcome<int>.η(arg3);
+            var p4 = Outcome<int>.η(arg4);
+
+            var left = zipper1(p0, p1, p2, p3, p4);
+            var right = OutcomeExtensions.Zip(p0, p1, p2, p3, p4, zipper);
+
+            return left.Equals(right);
+        }
+
+        [q("ReplaceBy() replaces the enclosed value if any (1).")]
+        public static bool ReplaceBy01a(int arg0, int arg1) {
+            var source = Outcome<int>.η(arg0);
+            var result = source.ReplaceBy(arg1);
+
+            return result.Contains(arg1);
+        }
+
+        [q("ReplaceBy() replaces the enclosed value if any (2).")]
+        public static bool ReplaceBy01b(int arg0, int arg1) {
+            var source = Outcome<int>.η(arg0);
+            var result = OutcomeExtensions.ReplaceBy(source, arg1);
+
+            return result.Contains(arg1);
+        }
+
+        [q("ContinueWith() replaces the enclosed value if any (1).")]
+        public static bool ContinueWith01a(int arg0, int arg1) {
+            var source = Outcome<int>.η(arg0);
+            var other = Outcome<int>.η(arg1);
+            var result = source.ContinueWith(other);
+
+            return result.Contains(arg1);
+        }
+
+        [q("ContinueWith() replaces the enclosed value if any (2).")]
+        public static bool ContinueWith01b(int arg0, int arg1) {
+            var source = Outcome<int>.η(arg0);
+            var other = Outcome<int>.η(arg1);
+            var result = OutcomeExtensions.ContinueWith(source, other);
+
+            return result.Contains(arg1);
+        }
+
+        [q("PassBy() does not change the enclosed value if any (1).")]
+        public static bool PassBy01a(int arg0, int arg1) {
+            var source = Outcome<int>.η(arg0);
+            var other = Outcome<int>.η(arg1);
+            var result = source.PassBy(other);
+
+            return result.Contains(arg0);
+        }
+
+        [q("PassBy() does not change the enclosed value if any (2).")]
+        public static bool PassBy01b(int arg0, int arg1) {
+            var source = Outcome<int>.η(arg0);
+            var other = Outcome<int>.η(arg1);
+            var result = OutcomeExtensions.PassBy(source, other);
+
+            return result.Contains(arg0);
+        }
+
+        [q("Skip() replaces the enclosed value by Unit if any (1).")]
+        public static bool Skip01a(int arg0) {
+            var source = Outcome<int>.η(arg0);
+            var result = source.Skip();
+
+            return result.Contains(Unit.Default);
+        }
+
+        [q("Skip() replaces the enclosed value by Unit if any (2).")]
+        public static bool Skip01b(int arg0) {
+            var source = Outcome<int>.η(arg0);
+            var result = OutcomeExtensions.Skip(source);
+
+            return result.Contains(Unit.Default);
+        }
+
+        [q("Using() calls Dispose() and applies binder (1).")]
+        public static void Using01a() {
+            var obj = new DisposableObj();
+            var source = Outcome<DisposableObj>.η(obj);
+            Func<DisposableObj, Outcome<int>> binder = _ => Outcome<int>.η(1);
+            var result = source.Using(binder);
+
+            Assert.True(result.Contains(1));
+            Assert.True(obj.WasDisposed);
+        }
+
+        [q("Using() calls Dispose() and applies binder (2).")]
+        public static void Using01b() {
+            var obj = new DisposableObj();
+            var source = Outcome<DisposableObj>.η(obj);
+            Func<DisposableObj, Outcome<int>> binder = _ => Outcome<int>.η(1);
+            var result = OutcomeExtensions.Using(source, binder);
+
+            Assert.True(result.Contains(1));
+            Assert.True(obj.WasDisposed);
+        }
+
+        [q("Using() calls Dispose() and applies selector (1).")]
+        public static void Using02a() {
+            var obj = new DisposableObj();
+            var source = Outcome<DisposableObj>.η(obj);
+            Func<DisposableObj, int> selector = _ => 1;
+            var result = source.Using(selector);
+
+            Assert.True(result.Contains(1));
+            Assert.True(obj.WasDisposed);
+        }
+
+        [q("Using() calls Dispose() and applies selector (2).")]
+        public static void Using02b() {
+            var obj = new DisposableObj();
+            var source = Outcome<DisposableObj>.η(obj);
+            Func<DisposableObj, int> selector = _ => 1;
+            var result = OutcomeExtensions.Using(source, selector);
+
+            Assert.True(result.Contains(1));
+            Assert.True(obj.WasDisposed);
+        }
+
+        [q("Ap.Apply is Select.Gather w/ the arguments flipped (1).")]
+        public static bool Apply01a(int arg0, long arg1) {
+            var applicative = Outcome<Func<int, long>>.η(i => arg1 * i);
+            var value = Outcome<int>.η(arg0);
+
+            var applied = applicative.Apply(value);
+            var gathered = value.Gather(applicative);
+
+            return applied.Equals(gathered);
+        }
+
+        [q("Ap.Apply is Select.Gather w/ the arguments flipped (2).")]
+        public static bool Apply01b(int arg0, long arg1) {
+            var applicative = Outcome<Func<int, long>>.η(i => arg1 * i);
+            var value = Outcome<int>.η(arg0);
+
+            var applied = Ap.Apply(applicative, value);
+            var gathered = OutcomeExtensions.Gather(value, applicative);
+
+            return applied.Equals(gathered);
+        }
+
+        [q("Kleisli.InvokeWith is Qperators.SelectWith w/ the arguments flipped.")]
+        public static bool InvokeWith01(int[] arg0, long arg1) {
+            Func<int, Outcome<long>> selector = i => Outcome<long>.η(arg1 * i);
+
+            var invoked = selector.InvokeWith(arg0);
+            var selected = arg0.SelectWith(selector);
+
+            var q = from x in invoked
+                    from y in selected
+                    select Enumerable.SequenceEqual(x, y);
+
+            return q.Contains(true);
+        }
+
+        [q("Kleisli.InvokeWith is Outcome.Bind w/ the arguments flipped.")]
+        public static bool InvokeWith02(int arg0, long arg1) {
+            Func<int, Outcome<long>> binder = i => Outcome<long>.η(arg1 * i);
+            var value = Outcome<int>.η(arg0);
+
+            var invoked = binder.InvokeWith(value);
+            var bounded = value.Bind(binder);
+
+            return invoked.Equals(bounded);
+        }
     }
 
 #endif
@@ -203,12 +518,24 @@ namespace Narvalo.Applicative {
         }
 
         [q("Of() is a left identity for Compose() (first monad rule).")]
-        public static bool Of02(int arg0, float arg1) {
+        public static bool Of02a(int arg0, float arg1) {
             Func<int, Outcome<int>> of = Outcome<int>.η;
             Func<int, Outcome<float>> f = x => Outcome<float>.η(arg1 * x);
 
             // return >=> g  ==  g
             var left = of.Compose(f).Invoke(arg0);
+            var right = f(arg0);
+
+            return left.Equals(right);
+        }
+
+        [q("Of() is a right identity for ComposeBack() (first monad rule).")]
+        public static bool Of02b(int arg0, float arg1) {
+            Func<int, Outcome<int>> of = Outcome<int>.η;
+            Func<int, Outcome<float>> f = x => Outcome<float>.η(arg1 * x);
+
+            // g <=< return  ==  g
+            var left = f.ComposeBack(of).Invoke(arg0);
             var right = f(arg0);
 
             return left.Equals(right);
@@ -226,11 +553,23 @@ namespace Narvalo.Applicative {
         }
 
         [q("Of() is a right identity for Compose() (second monad rule).")]
-        public static bool Of04(int arg0, float arg1) {
+        public static bool Of04a(int arg0, float arg1) {
             Func<int, Outcome<float>> f = x => Outcome<float>.η(arg1 * x);
 
             // f >=> return  ==  f
             var left = f.Compose(Outcome<float>.η).Invoke(arg0);
+            var right = f(arg0);
+
+            return left.Equals(right);
+        }
+
+        [q("Of() is a left identity for ComposeBack() (second monad rule).")]
+        public static bool Of04b(int arg0, float arg1) {
+            Func<float, Outcome<float>> of = Outcome<float>.η;
+            Func<int, Outcome<float>> f = x => Outcome<float>.η(arg1 * x);
+
+            // return <=< f  ==  f
+            var left = of.ComposeBack(f).Invoke(arg0);
             var right = f(arg0);
 
             return left.Equals(right);
@@ -251,7 +590,7 @@ namespace Narvalo.Applicative {
         }
 
         [q("Compose() is associative (third monad rule).")]
-        public static bool Compose01(short arg0, int arg1, long arg2, double arg3) {
+        public static bool Compose01a(short arg0, int arg1, long arg2, double arg3) {
             Func<short, Outcome<int>> f = x => Outcome<int>.η(arg1 * x);
             Func<int, Outcome<long>> g = x => Outcome<long>.η(arg2 * x);
             Func<long, Outcome<double>> h = x => Outcome<double>.η(arg3 * x);
@@ -259,6 +598,19 @@ namespace Narvalo.Applicative {
             // f >=> (g >=> h)  ==  (f >=> g) >=> h
             var left = f.Compose(g.Compose(h)).Invoke(arg0);
             var right = f.Compose(g).Compose(h).Invoke(arg0);
+
+            return left.Equals(right);
+        }
+
+        [q("ComposeBack() is associative (third monad rule).")]
+        public static bool Compose01b(short arg0, int arg1, long arg2, double arg3) {
+            Func<short, Outcome<int>> f = x => Outcome<int>.η(arg1 * x);
+            Func<int, Outcome<long>> g = x => Outcome<long>.η(arg2 * x);
+            Func<long, Outcome<double>> h = x => Outcome<double>.η(arg3 * x);
+
+            // f <=< (g <=< h)  ==  (f <=< g) <=< h
+            var left = h.ComposeBack(g).ComposeBack(f).Invoke(arg0);
+            var right = h.ComposeBack(g.ComposeBack(f)).Invoke(arg0);
 
             return left.Equals(right);
         }

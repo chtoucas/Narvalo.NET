@@ -5,9 +5,10 @@ public partial class MonadTemplate
     public void EmitMonadGuards()
     {
 #>
+<#+ if (!HasRightGenerics) { #>
 #if !NO_INTERNALS_VISIBLE_TO
 
-    // Provides tests for <#= Name #><T<#= RTDecl #>>.
+<#+ } #>
     // T4: EmitMonadGuards().
     public static partial class <#= Name #>Facts {
         [t("Compose() guards.")]
@@ -64,6 +65,19 @@ public partial class MonadTemplate
 
             Assert.Throws<ArgumentNullException>("selector", () => source.Select(selector));
             Assert.Throws<ArgumentNullException>("selector", () => <#= ExtensionsClsName #>.Select(source, selector));
+        }
+
+        [t("Using() guards.")]
+        public static void Using0() {
+            var source = <#+ WriteFactory("DisposableObj"); #>(new DisposableObj());
+            Func<DisposableObj, <#= Name #><int<#= RTDecl #>>> binder = null;
+            Func<DisposableObj, int> selector = null;
+
+            Assert.Throws<ArgumentNullException>("binder", () => source.Using(binder));
+            Assert.Throws<ArgumentNullException>("binder", () => <#= ExtensionsClsName #>.Using(source, binder));
+
+            Assert.Throws<ArgumentNullException>("selector", () => source.Using(selector));
+            Assert.Throws<ArgumentNullException>("selector", () => <#= ExtensionsClsName #>.Using(source, selector));
         }
 
 <#+ if (HasFilter) { #>
@@ -149,8 +163,10 @@ public partial class MonadTemplate
         }
 <#+ } // T4: End of HasJoin. #>
     }
+<#+ if (!HasRightGenerics) { #>
 
 #endif
+<#+ } #>
 <#+
     } // T4: End of EmitMonadGuards().
 } // T4: End of MonadTemplate.

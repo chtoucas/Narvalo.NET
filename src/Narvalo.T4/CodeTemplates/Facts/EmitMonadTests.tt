@@ -5,17 +5,321 @@ public partial class MonadTemplate
     public void EmitMonadTests()
     {
 #>
+<#+ if (!HasRightGenerics) { #>
 #if !NO_INTERNALS_VISIBLE_TO
 
+<#+ } #>
     // T4: EmitMonadTests().
     public static partial class <#= Name #>Facts {
-        [q("Ap.Apply is <#= MapName #>.Gather w/ the arguments flipped.")]
-        public static bool Apply01(int arg0, long arg1) {
+<#+ if (HasZero) { #>
+        [t("Guard(true) returns <#= Name #>.Unit.")]
+        public static void Guard01() {
+            var result = <#= Name #>.Guard(true);
+
+            Assert.Equal(<#= Name #>.Unit, result);
+        }
+
+        [t("Guard(false) returns <#= Name #>.<#= ZeroName #>.")]
+        public static void Guard02() {
+            var result = <#= Name #>.Guard(false);
+
+            Assert.Equal(<#= Name #>.<#= ZeroName #>, result);
+        }
+
+<#+ } // T4: End of HasZero. #>
+        [q("Repeat() repeats the enclosed value if any.")]
+        public static bool Repeat01(int arg) {
+            var source = <#+ WriteFactory("int"); #>(arg);
+
+            var result = <#= Name #>.Repeat(source, 10);
+            var seq = Enumerable.Repeat(arg, 10);
+
+            var q = from x in result select Enumerable.SequenceEqual(x, seq);
+
+            return q.<#= ContainsName #>(true);
+        }
+
+        [q("Lift() is <#= MapName #>().")]
+        public static bool Lift01(int arg0, long arg1) {
+            Func<int, long> selector = i => arg1 * i;
+            var selector1 = <#= Name #>.Lift<int, long<#= RTDecl #>>(selector);
+
+            var source = <#+ WriteFactory("int"); #>(arg0);
+
+            var left = selector1(source);
+            var right = source.<#= MapName #>(selector);
+
+            return left.Equals(right);
+        }
+
+        [q("<#= MapName #>() is Lift().")]
+        public static bool <#= MapName #>01(int arg0, long arg1) {
+            Func<int, long> selector = i => arg1 * i;
+            var selector1 = <#= Name #>.Lift<int, long<#= RTDecl #>>(selector);
+
+            var source = <#+ WriteFactory("int"); #>(arg0);
+
+            var left = selector1(source);
+            var right = <#= ExtensionsClsName #>.<#= MapName #>(source, selector);
+
+            return left.Equals(right);
+        }
+
+        [q("Lift() is Zip() (1).")]
+        public static bool Lift02(int arg0, int arg1, int arg2, int arg3) {
+            Func<int, int, long> zipper = (i, j) => arg2 * i + arg3 * j;
+            var zipper1 = <#= Name #>.Lift<int, int, long<#= RTDecl #>>(zipper);
+
+            var p0 = <#+ WriteFactory("int"); #>(arg0);
+            var p1 = <#+ WriteFactory("int"); #>(arg1);
+
+            var left = zipper1(p0, p1);
+            var right = p0.Zip(p1, zipper);
+
+            return left.Equals(right);
+        }
+
+        // NB: Lift01() but w/o using Zip as an extension method.
+        [q("Zip() is Lift() (1).")]
+        public static bool Zip02(int arg0, int arg1, int arg2, int arg3) {
+            Func<int, int, long> zipper = (i, j) => arg2 * i + arg3 * j;
+            var zipper1 = <#= Name #>.Lift<int, int, long<#= RTDecl #>>(zipper);
+
+            var p0 = <#+ WriteFactory("int"); #>(arg0);
+            var p1 = <#+ WriteFactory("int"); #>(arg1);
+
+            var left = zipper1(p0, p1);
+            var right = <#= ExtensionsClsName #>.Zip(p0, p1, zipper);
+
+            return left.Equals(right);
+        }
+
+        [q("Lift() is Zip() (2).")]
+        public static bool Lift03(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+            Func<int, int, int, long> zipper = (i, j, k) => arg3 * i + arg4 * j + arg5 * k;
+            var zipper1 = <#= Name #>.Lift<int, int, int, long<#= RTDecl #>>(zipper);
+
+            var p0 = <#+ WriteFactory("int"); #>(arg0);
+            var p1 = <#+ WriteFactory("int"); #>(arg1);
+            var p2 = <#+ WriteFactory("int"); #>(arg2);
+
+            var left = zipper1(p0, p1, p2);
+            var right = p0.Zip(p1, p2, zipper);
+
+            return left.Equals(right);
+        }
+
+        [q("Zip() is Lift() (2).")]
+        public static bool Zip03(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+            Func<int, int, int, long> zipper = (i, j, k) => arg3 * i + arg4 * j + arg5 * k;
+            var zipper1 = <#= Name #>.Lift<int, int, int, long<#= RTDecl #>>(zipper);
+
+            var p0 = <#+ WriteFactory("int"); #>(arg0);
+            var p1 = <#+ WriteFactory("int"); #>(arg1);
+            var p2 = <#+ WriteFactory("int"); #>(arg2);
+
+            var left = zipper1(p0, p1, p2);
+            var right = <#= ExtensionsClsName #>.Zip(p0, p1, p2, zipper);
+
+            return left.Equals(right);
+        }
+
+        [q("Lift() is Zip() (3).")]
+        public static bool Lift04(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
+            Func<int, int, int, int, long> zipper = (i, j, k, l) => arg4 * i + arg5 * j + arg6 * k + arg7 * l;
+            var zipper1 = <#= Name #>.Lift<int, int, int, int, long<#= RTDecl #>>(zipper);
+
+            var p0 = <#+ WriteFactory("int"); #>(arg0);
+            var p1 = <#+ WriteFactory("int"); #>(arg1);
+            var p2 = <#+ WriteFactory("int"); #>(arg2);
+            var p3 = <#+ WriteFactory("int"); #>(arg3);
+
+            var left = zipper1(p0, p1, p2, p3);
+            var right = p0.Zip(p1, p2, p3, zipper);
+
+            return left.Equals(right);
+        }
+
+        [q("Zip() is Lift() (3).")]
+        public static bool Zip04(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
+            Func<int, int, int, int, long> zipper = (i, j, k, l) => arg4 * i + arg5 * j + arg6 * k + arg7 * l;
+            var zipper1 = <#= Name #>.Lift<int, int, int, int, long<#= RTDecl #>>(zipper);
+
+            var p0 = <#+ WriteFactory("int"); #>(arg0);
+            var p1 = <#+ WriteFactory("int"); #>(arg1);
+            var p2 = <#+ WriteFactory("int"); #>(arg2);
+            var p3 = <#+ WriteFactory("int"); #>(arg3);
+
+            var left = zipper1(p0, p1, p2, p3);
+            var right = <#= ExtensionsClsName #>.Zip(p0, p1, p2, p3, zipper);
+
+            return left.Equals(right);
+        }
+
+        [q("Lift() is Zip() (4).")]
+        public static bool Lift05(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9) {
+            Func<int, int, int, int, int, long> zipper = (i, j, k, l, m) => arg5 * i + arg6 * j + arg7 * k + arg8 * l + arg9 * m;
+            var zipper1 = <#= Name #>.Lift<int, int, int, int, int, long<#= RTDecl #>>(zipper);
+
+            var p0 = <#+ WriteFactory("int"); #>(arg0);
+            var p1 = <#+ WriteFactory("int"); #>(arg1);
+            var p2 = <#+ WriteFactory("int"); #>(arg2);
+            var p3 = <#+ WriteFactory("int"); #>(arg3);
+            var p4 = <#+ WriteFactory("int"); #>(arg4);
+
+            var left = zipper1(p0, p1, p2, p3, p4);
+            var right = p0.Zip(p1, p2, p3, p4, zipper);
+
+            return left.Equals(right);
+        }
+
+        [q("Zip() is Lift() (4).")]
+        public static bool Zip05(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9) {
+            Func<int, int, int, int, int, long> zipper = (i, j, k, l, m) => arg5 * i + arg6 * j + arg7 * k + arg8 * l + arg9 * m;
+            var zipper1 = <#= Name #>.Lift<int, int, int, int, int, long<#= RTDecl #>>(zipper);
+
+            var p0 = <#+ WriteFactory("int"); #>(arg0);
+            var p1 = <#+ WriteFactory("int"); #>(arg1);
+            var p2 = <#+ WriteFactory("int"); #>(arg2);
+            var p3 = <#+ WriteFactory("int"); #>(arg3);
+            var p4 = <#+ WriteFactory("int"); #>(arg4);
+
+            var left = zipper1(p0, p1, p2, p3, p4);
+            var right = <#= ExtensionsClsName #>.Zip(p0, p1, p2, p3, p4, zipper);
+
+            return left.Equals(right);
+        }
+
+        [q("ReplaceBy() replaces the enclosed value if any (1).")]
+        public static bool ReplaceBy01a(int arg0, int arg1) {
+            var source = <#+ WriteFactory("int"); #>(arg0);
+            var result = source.ReplaceBy(arg1);
+
+            return result.<#= ContainsName #>(arg1);
+        }
+
+        [q("ReplaceBy() replaces the enclosed value if any (2).")]
+        public static bool ReplaceBy01b(int arg0, int arg1) {
+            var source = <#+ WriteFactory("int"); #>(arg0);
+            var result = <#= ExtensionsClsName #>.ReplaceBy(source, arg1);
+
+            return result.<#= ContainsName #>(arg1);
+        }
+
+        [q("ContinueWith() replaces the enclosed value if any (1).")]
+        public static bool ContinueWith01a(int arg0, int arg1) {
+            var source = <#+ WriteFactory("int"); #>(arg0);
+            var other = <#+ WriteFactory("int"); #>(arg1);
+            var result = source.ContinueWith(other);
+
+            return result.<#= ContainsName #>(arg1);
+        }
+
+        [q("ContinueWith() replaces the enclosed value if any (2).")]
+        public static bool ContinueWith01b(int arg0, int arg1) {
+            var source = <#+ WriteFactory("int"); #>(arg0);
+            var other = <#+ WriteFactory("int"); #>(arg1);
+            var result = <#= ExtensionsClsName #>.ContinueWith(source, other);
+
+            return result.<#= ContainsName #>(arg1);
+        }
+
+        [q("PassBy() does not change the enclosed value if any (1).")]
+        public static bool PassBy01a(int arg0, int arg1) {
+            var source = <#+ WriteFactory("int"); #>(arg0);
+            var other = <#+ WriteFactory("int"); #>(arg1);
+            var result = source.PassBy(other);
+
+            return result.<#= ContainsName #>(arg0);
+        }
+
+        [q("PassBy() does not change the enclosed value if any (2).")]
+        public static bool PassBy01b(int arg0, int arg1) {
+            var source = <#+ WriteFactory("int"); #>(arg0);
+            var other = <#+ WriteFactory("int"); #>(arg1);
+            var result = <#= ExtensionsClsName #>.PassBy(source, other);
+
+            return result.<#= ContainsName #>(arg0);
+        }
+
+        [q("Skip() replaces the enclosed value by Unit if any (1).")]
+        public static bool Skip01a(int arg0) {
+            var source = <#+ WriteFactory("int"); #>(arg0);
+            var result = source.Skip();
+
+            return result.<#= ContainsName #>(Unit.Default);
+        }
+
+        [q("Skip() replaces the enclosed value by Unit if any (2).")]
+        public static bool Skip01b(int arg0) {
+            var source = <#+ WriteFactory("int"); #>(arg0);
+            var result = <#= ExtensionsClsName #>.Skip(source);
+
+            return result.<#= ContainsName #>(Unit.Default);
+        }
+
+        [q("Using() calls Dispose() and applies binder (1).")]
+        public static void Using01a() {
+            var obj = new DisposableObj();
+            var source = <#+ WriteFactory("DisposableObj"); #>(obj);
+            Func<DisposableObj, <#= Name #><int<#= RTDecl #>>> binder = _ => <#+ WriteFactory("int"); #>(1);
+            var result = source.Using(binder);
+
+            Assert.True(result.<#= ContainsName #>(1));
+            Assert.True(obj.WasDisposed);
+        }
+
+        [q("Using() calls Dispose() and applies binder (2).")]
+        public static void Using01b() {
+            var obj = new DisposableObj();
+            var source = <#+ WriteFactory("DisposableObj"); #>(obj);
+            Func<DisposableObj, <#= Name #><int<#= RTDecl #>>> binder = _ => <#+ WriteFactory("int"); #>(1);
+            var result = <#= ExtensionsClsName #>.Using(source, binder);
+
+            Assert.True(result.<#= ContainsName #>(1));
+            Assert.True(obj.WasDisposed);
+        }
+
+        [q("Using() calls Dispose() and applies selector (1).")]
+        public static void Using02a() {
+            var obj = new DisposableObj();
+            var source = <#+ WriteFactory("DisposableObj"); #>(obj);
+            Func<DisposableObj, int> selector = _ => 1;
+            var result = source.Using(selector);
+
+            Assert.True(result.<#= ContainsName #>(1));
+            Assert.True(obj.WasDisposed);
+        }
+
+        [q("Using() calls Dispose() and applies selector (2).")]
+        public static void Using02b() {
+            var obj = new DisposableObj();
+            var source = <#+ WriteFactory("DisposableObj"); #>(obj);
+            Func<DisposableObj, int> selector = _ => 1;
+            var result = <#= ExtensionsClsName #>.Using(source, selector);
+
+            Assert.True(result.<#= ContainsName #>(1));
+            Assert.True(obj.WasDisposed);
+        }
+
+        [q("Ap.Apply is <#= MapName #>.Gather w/ the arguments flipped (1).")]
+        public static bool Apply01a(int arg0, long arg1) {
             var applicative = <#+ WriteFactory("Func<int, long>"); #>(i => arg1 * i);
             var value = <#+ WriteFactory("int"); #>(arg0);
 
             var applied = applicative.Apply(value);
             var gathered = value.Gather(applicative);
+
+            return applied.Equals(gathered);
+        }
+
+        [q("Ap.Apply is <#= MapName #>.Gather w/ the arguments flipped (2).")]
+        public static bool Apply01b(int arg0, long arg1) {
+            var applicative = <#+ WriteFactory("Func<int, long>"); #>(i => arg1 * i);
+            var value = <#+ WriteFactory("int"); #>(arg0);
+
+            var applied = Ap.Apply(applicative, value);
+            var gathered = <#= ExtensionsClsName #>.Gather(value, applicative);
 
             return applied.Equals(gathered);
         }
@@ -45,8 +349,10 @@ public partial class MonadTemplate
             return invoked.Equals(bounded);
         }
     }
+<#+ if (!HasRightGenerics) { #>
 
 #endif
+<#+ } #>
 <#+
     } // T4: End of EmitMonadTests().
 } // T4: End of MonadTemplate.

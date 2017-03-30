@@ -8,6 +8,8 @@
 // This template depends on:
 // - Xunit
 // - FsCheck.Xunit
+// WARNING: We can only perform sanity checks since (here) we know nothing
+// about the underlying object.
 
 public partial class MonadTemplate
 {

@@ -205,12 +205,12 @@ public partial class MonadTemplate
         // Bind() with automatic resource management.
         public static <#= Name #><TResult<#= RTDecl #>> Using<TSource, TResult<#= RTDecl #>>(
             this <#= Name #><TSource<#= RTDecl #>> @this,
-            Func<TSource, <#= Name #><TResult<#= RTDecl #>>> selector)
+            Func<TSource, <#= Name #><TResult<#= RTDecl #>>> binder)
             where TSource : IDisposable
         {
             <#+ WriteNotNull(); #>
-            Require.NotNull(selector, nameof(selector));
-            return @this.Bind(val => { using (val) { return selector(val); } });
+            Require.NotNull(binder, nameof(binder));
+            return @this.Bind(val => { using (val) { return binder(val); } });
         }
 
         // Select() with automatic resource management.
