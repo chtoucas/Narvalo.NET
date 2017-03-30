@@ -19,6 +19,7 @@ he', car il est en cours d'utilisation par un autre processus. [I:\github\Narval
   (resource problem).
 - Review localization for Narvalo.Build, Narvalo.Mvp, Narvalo.Mvp.Web
   and Narvalo.Web.
+- `make.ps1`: Add filter to test only one Trait.
 - [Low] Automatically create the assembly infos from the NuGet spec.
 - [Low] Update CodeFormatter when it supports C# 7.0. After that, change
   from `format-code.cmd` to `format-code.ps1`.
@@ -57,6 +58,8 @@ Narvalo.Fx
 
 - Auto-generate tests for null-guards (missing only for Either).
 - Add more tests beyond the auto-generated ones.
+- Either, should we throw if we have a lefty method for a righty object
+  (see WhenLeft for instance).
 - Simplify LINQ for `Maybe<T?>`.
 
 Next:

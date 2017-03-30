@@ -12,6 +12,7 @@ sequence generators and LINQ extensions.
 ### Status
 - The next release should be the first one to be declared stable.
 
+### Detailed description
 This assembly encourages an applicative-style of programming (or functional if
 you prefer):
 - Types are **immutable**.
