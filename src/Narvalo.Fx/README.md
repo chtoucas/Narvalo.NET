@@ -134,13 +134,13 @@ a result element.
 Category | Operator | Return Type | Deferred
 -------- | -------- | ----------- | :------:
 Set            | `Append`             | `IEnumerable<T>`           | Streaming
--              | `Prepend`            | `IEnumerable<T>`           | Streaming
+|              | `Prepend`            | `IEnumerable<T>`           | Streaming
 Element        | `FirstOrNone`        | `Maybe<T>`                 | -
--              | `LastOrNone`         | `Maybe<T>`                 | -
--              | `SingleOrNone`       | `Maybe<T>`                 | -
--              | `ElementAtOrNone`    | `Maybe<T>`                 | -
+|              | `LastOrNone`         | `Maybe<T>`                 | -
+|              | `SingleOrNone`       | `Maybe<T>`                 | -
+|              | `ElementAtOrNone`    | `Maybe<T>`                 | -
 Aggregation    | `Aggregate` (reduce) | `T`                        | -
--              | `Aggregate` (fold)   | `TResult` or `TAccumulate` | -
+|              | `Aggregate` (fold)   | `TResult` or `TAccumulate` | -
 Quantification | `IsEmpty`            | `bool`                     | -
 Generation     | `EmptyIfNull`        | `IEnumerable<T>`           | -
 
@@ -191,7 +191,7 @@ Operators that act on an `IEnumerable<Monad<T>>`.
 Category | Operator | Return Type | Deferred
 -------- | -------- | ----------- | :------:
 Restriction    | `Collect`        | `Monad<IEnumerable<T>>` | Streaming
--              | `CollectAny` (*) | `IEnumerable<T>`        | Streaming
+|              | `CollectAny` (*) | `IEnumerable<T>`        | Streaming
 Aggregation    | `Sum` (**)       | `Maybe<T>`              | -
 
 (*) Not available for `Either<T1, T2>`
@@ -218,12 +218,12 @@ that maps a value to a nullable, a Maybe, an Error or an Either.
 Category | Operator | Return Type | Deferred
 -------- | -------- | ----------- | :------:
 Projection     | `SelectAny`  | `IEnumerable<TResult>`        | Streaming
--              | `SelectWith` | `Monad<IEnumerable<TResult>>` | Streaming
+|              | `SelectWith` | `Monad<IEnumerable<TResult>>` | Streaming
 Restriction    | `WhereAny`   | `IEnumerable<T>`              | Streaming
--              | `WhereBy`    | `Monad<IEnumerable<T>>`       | Streaming
+|              | `WhereBy`    | `Monad<IEnumerable<T>>`       | Streaming
 Set            | `ZipWith`    | `Monad<IEnumerable<TResult>>` | Streaming
 Aggregation    | `Reduce`     | `Monad<T>`                    | -
--              | `Fold`       | `Monad<TAccumulate>`          | -
+|              | `Fold`       | `Monad<TAccumulate>`          | -
 Generation     | `Repeat`     | `Monad<IEnumerable<T>>`       | Streaming
 
 NB: `SelectAny` and `WhereAny` are not supported by `Either<T1, T2>` and
