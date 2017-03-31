@@ -11,7 +11,7 @@ namespace Narvalo.Linq {
 
     public partial class QperatorsFacts {
         [t("SelectAny() guards (Fallible).")]
-        public static void SelectAny0a() {
+        public static void SelectAny0b() {
             IEnumerable<int> nil = null;
             Assert.Throws<ArgumentNullException>("this", () => nil.SelectAny(x => Maybe.Of(x)));
 
@@ -20,7 +20,7 @@ namespace Narvalo.Linq {
         }
 
         [t("SelectAny() uses deferred execution (Fallible).")]
-        public static void SelectAny1a() {
+        public static void SelectAny1b() {
             bool notCalled = true;
             Func<Fallible<int>> fun = () => { notCalled = false; return Fallible.Of(1); };
             var q = Enumerable.Repeat(fun, 1).SelectAny(f => f());

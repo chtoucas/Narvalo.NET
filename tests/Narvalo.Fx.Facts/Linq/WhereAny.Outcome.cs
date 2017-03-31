@@ -11,7 +11,7 @@ namespace Narvalo.Linq {
 
     public partial class QperatorsFacts {
         [t("WhereAny() guards (Outcome).")]
-        public static void WhereAny0c() {
+        public static void WhereAny0d() {
             IEnumerable<int> nil = null;
             Assert.Throws<ArgumentNullException>("this", () => nil.WhereAny(_ => Outcome.Of(true)));
 
@@ -20,7 +20,7 @@ namespace Narvalo.Linq {
         }
 
         [t("WhereAny() uses deferred execution (Outcome).")]
-        public static void WhereAny1c() {
+        public static void WhereAny1d() {
             bool notCalled = true;
             Func<Outcome<bool>> fun = () => { notCalled = false; return Outcome.Of(true); };
             var q = Enumerable.Repeat(fun, 1).WhereAny(f => f());

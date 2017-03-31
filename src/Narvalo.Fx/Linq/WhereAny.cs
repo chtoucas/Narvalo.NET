@@ -50,6 +50,26 @@ namespace Narvalo.Linq
             return WhereAnyIterator(@this, predicate);
         }
 
+        public static IEnumerable<TSource> WhereAny<TSource, TError>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, Result<bool, TError>> predicate)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+
+            return WhereAnyIterator(@this, predicate);
+        }
+
+        public static IEnumerable<TSource> WhereAny<TSource, TRight>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, Either<bool, TRight>> predicate)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+
+            return WhereAnyIterator(@this, predicate);
+        }
+
         private static IEnumerable<TSource> WhereAnyIterator<TSource>(
             IEnumerable<TSource> source,
             Func<TSource, bool?> predicate)
@@ -107,6 +127,36 @@ namespace Narvalo.Linq
                 var m = predicate(item);
 
                 if (m.IsSuccess && m.Value) { yield return item; }
+            }
+        }
+
+        private static IEnumerable<TSource> WhereAnyIterator<TSource, TError>(
+            IEnumerable<TSource> source,
+            Func<TSource, Result<bool, TError>> predicate)
+        {
+            Debug.Assert(source != null);
+            Debug.Assert(predicate != null);
+
+            foreach (var item in source)
+            {
+                var m = predicate(item);
+
+                if (m.IsSuccess && m.Value) { yield return item; }
+            }
+        }
+
+        private static IEnumerable<TSource> WhereAnyIterator<TSource, TRight>(
+            IEnumerable<TSource> source,
+            Func<TSource, Either<bool, TRight>> predicate)
+        {
+            Debug.Assert(source != null);
+            Debug.Assert(predicate != null);
+
+            foreach (var item in source)
+            {
+                var m = predicate(item);
+
+                if (m.IsLeft && m.Left) { yield return item; }
             }
         }
     }

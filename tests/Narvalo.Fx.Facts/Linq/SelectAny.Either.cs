@@ -10,19 +10,19 @@ namespace Narvalo.Linq {
     using Assert = Narvalo.AssertExtended;
 
     public partial class QperatorsFacts {
-        [t("SelectAny() guards (Maybe).")]
-        public static void SelectAny0c() {
+        [t("SelectAny() guards (Either).")]
+        public static void SelectAny0a() {
             IEnumerable<int> nil = null;
-            Assert.Throws<ArgumentNullException>("this", () => nil.SelectAny(x => Fallible.Of(x)));
+            Assert.Throws<ArgumentNullException>("this", () => nil.SelectAny(x => Either< int, int>.OfLeft(x)));
 
             var source = Enumerable.Range(0, 1);
-            Assert.Throws<ArgumentNullException>("selector", () => source.SelectAny(default(Func<int, Maybe<int>>)));
+            Assert.Throws<ArgumentNullException>("selector", () => source.SelectAny(default(Func<int, Either<int, int>>)));
         }
 
-        [t("SelectAny() uses deferred execution (Maybe).")]
-        public static void SelectAny1c() {
+        [t("SelectAny() uses deferred execution (Either).")]
+        public static void SelectAny1a() {
             bool notCalled = true;
-            Func<Maybe<int>> fun = () => { notCalled = false; return Maybe.Of(1); };
+            Func<Either<int, int>> fun = () => { notCalled = false; return Either<int, int>.OfLeft(1); };
             var q = Enumerable.Repeat(fun, 1).SelectAny(f => f());
 
             Assert.True(notCalled);

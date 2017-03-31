@@ -96,6 +96,8 @@
     <Compile Include="Linq\Fold.Either.cs" />
     <Compile Include="Linq\Fold.Fallible.cs" />
     <Compile Include="Linq\Fold.Maybe.cs" />
+    <Compile Include="Linq\SelectAny.Result.cs" />
+    <Compile Include="Linq\SelectAny.Either.cs" />
     <Compile Include="Linq\Sum.cs" />
     <Compile Include="Linq\CollectAny.Fallible.cs" />
     <Compile Include="Linq\Fold.Outcome.cs" />
@@ -106,6 +108,8 @@
     <Compile Include="Linq\SelectWith.Fallible.cs" />
     <Compile Include="Linq\SelectWith.Either.cs" />
     <Compile Include="Linq\SelectWith.Maybe.cs" />
+    <Compile Include="Linq\WhereAny.Result.cs" />
+    <Compile Include="Linq\WhereAny.Either.cs" />
     <Compile Include="Linq\WhereAny.Outcome.cs" />
     <Compile Include="Linq\WhereAny.Fallible.cs" />
     <Compile Include="Linq\WhereAny.Maybe.cs" />

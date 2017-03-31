@@ -191,12 +191,14 @@ Operators that act on an `IEnumerable<Monad<T>>`.
 
 Category | Operator | Return Type | Deferred
 -------- | -------- | ----------- | :------:
-Restriction    | `Collect`        | `Monad<IEnumerable<T>>` | Streaming
-|              | `CollectAny` (*) | `IEnumerable<T>`        | Streaming
-Aggregation    | `Sum` (**)       | `Maybe<T>`              | -
+Restriction    | `Collect`    | `Monad<IEnumerable<T>>` | Streaming
+|              | `CollectAny` | `IEnumerable<T>`        | Streaming
+Aggregation    | `Sum` (*)    | `Maybe<T>`              | -
 
-(*) Not available for `Either<T1, T2>`
-(**) Only available for `Maybe<T>`.
+(*) Only available for `IEnumerable<Maybe<T>>`.
+
+Accidentally for all monads considered here, `Collect` is just a `CollectAny`
+wrapped into a monad, but it is not true in general.
 
 #### `CollectAny` and `Collect`
 For instance, applying `CollectAny` to the sequence defined by:
@@ -226,8 +228,12 @@ Aggregation    | `Reduce`     | `Monad<T>`                    | -
 |              | `Fold`       | `Monad<TAccumulate>`          | -
 Generation     | `Repeat`     | `Monad<IEnumerable<T>>`       | Streaming
 
-NB: `SelectAny` and `WhereAny` are not supported by `Either<T1, T2>` and
-`Result<T, TError>`.
+Remarks:
+- `ZipWith` (resp. `SelectWith`) is a standard `Zip` (resp. `Select`)
+  followed by a `Collect`.
+- Accidentally for all monads considered here, `WhereBy` is just a `WhereAny`
+  wrapped into a monad but it is not true in general.
+
 
 ### Further readings
 
@@ -490,7 +496,9 @@ A MonadOr is a monad which is also a monoid and for which `Unit` is
 a left zero for `Plus`. Here, we prefer to use `OrElse` instead of `Plus` for the
 monoid composition operation.
 
-### .NET Framework types
+### Computation or Container?
+
+#### .NET Framework types
 
 Type             | Properties
 ---------------- | ------------------------
@@ -500,7 +508,7 @@ Type             | Properties
 `Lazy<T>`        |
 `Task<T>`        |
 
-### Relation to Category Theory
+### A Glimpse of Category Theory
 
 ### Further Readings
 - The first public discussion of monads in the context of .NET seems to be due to

@@ -10,19 +10,19 @@ namespace Narvalo.Linq {
     using Assert = Narvalo.AssertExtended;
 
     public partial class QperatorsFacts {
-        [t("WhereAny() guards (Fallible).")]
-        public static void WhereAny0b() {
+        [t("WhereAny() guards (Either).")]
+        public static void WhereAny0a() {
             IEnumerable<int> nil = null;
-            Assert.Throws<ArgumentNullException>("this", () => nil.WhereAny(_ => Fallible.Of(true)));
+            Assert.Throws<ArgumentNullException>("this", () => nil.WhereAny(_ => Either<bool, int>.OfLeft(true)));
 
             var source = Enumerable.Range(0, 1);
-            Assert.Throws<ArgumentNullException>("predicate", () => source.WhereAny(default(Func<int, Fallible<bool>>)));
+            Assert.Throws<ArgumentNullException>("predicate", () => source.WhereAny(default(Func<int, Either<bool, int>>)));
         }
 
-        [t("WhereAny() uses deferred execution (Fallible).")]
-        public static void WhereAny1b() {
+        [t("WhereAny() uses deferred execution (Either).")]
+        public static void WhereAny1a() {
             bool notCalled = true;
-            Func<Fallible<bool>> fun = () => { notCalled = false; return Fallible.Of(true); };
+            Func<Either<bool, int>> fun = () => { notCalled = false; return Either<bool, int>.OfLeft(true); };
             var q = Enumerable.Repeat(fun, 1).WhereAny(f => f());
 
             Assert.True(notCalled);

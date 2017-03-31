@@ -56,12 +56,18 @@ Next:
 Narvalo.Fx
 ----------
 
-- Auto-generate tests for null-guards (missing only for Either).
-- Add more tests beyond the auto-generated ones.
-- Either, should we throw if we have a lefty method for a righty object
-  (see WhenLeft for instance).
+- Auto-generate tests for null-guards (missing only for `Either`).
+  Add more tests beyond the auto-generated ones. Add tests for purity?
+- `Either`, should we throw if we have a lefty method for a righty object
+  (see `WhenLeft` for instance).
 - Simplify LINQ for `Maybe<T?>`.
-- Add CollectAny for Either, SelectAny and WhereAny for Either, Result?
+- Move `SelectAny` and `WhereAny` to Narvalo.Applicative? or the other way around
+  with `Collect`, `CollectAny` and `Sum`? This would make easier to find these
+  methods.
+- Add shadowing variants of `Collect` and vWhereBy` for `Result` and `Either`.
+- Add variants of `CollectAny` and co on the right for Either?
+- Remove `ZipWith` resp. `SelectWith`? Check that (here) `SelectWith` is just
+  a `Select` wrapped into a monad.
 
 Next:
 - Add `MapMany` to `Outcome` and `Fallible`....
