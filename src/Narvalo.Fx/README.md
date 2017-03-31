@@ -1,9 +1,6 @@
 Narvalo.Fx
 ==========
 
-[![NuGet](https://img.shields.io/nuget/v/Narvalo.Fx.svg)](https://www.nuget.org/packages/Narvalo.Fx/)
-[![MyGet](https://img.shields.io/myget/narvalo-edge/v/Narvalo.Fx.svg)](https://www.myget.org/feed/narvalo-edge/package/nuget/Narvalo.Fx)
-
 Features implementations of some of the usual suspects from functional
 programming: option type (`Maybe<T>`), error types (`Result<T, TError>`,
 `Outcome<T>` and `Fallible<T>`), simple disjoint union (`Either<T1, T2>`),
@@ -11,21 +8,24 @@ sequence generators and LINQ extensions.
 
 ### Status
 - The next release should be the first one to be declared stable.
-- Test coverage is starting to look good (75%).
+- Test coverage is starting to look good (75%). The number of functional tests
+  is progressing too.
 - C# documentation is largely missing.
 
 ### Content
 - [Overview](#overview)
-- [Maybe type](#maybe-type)
-- [Error types](#error-types)
-- [Either type](#either-type)
-- [LINQ extensions](#linq-extensions)
-- [Infinite sequences](#infinite-sequences)
+- [Maybe Type](#maybe-type)
+- [Error Types](#error-types)
+- [Either Type](#either-type)
+- [LINQ Extensions](#linq-extensions)
+- [Infinite Sequences](#infinite-sequences)
 - [Derived API](#derived-api)
-- [Monad Tutorial](#monad-tutorial)
+- [Design Notes](#design-notes)
 - [Changelog](#changelog)
 
 **WARNING:** _I am currently in the process of rewriting this document._
+
+--------------------------------------------------------------------------------
 
 Overview
 --------
@@ -34,7 +34,6 @@ This assembly encourages an applicative-style of programming, or functional-styl
 if you prefer: types are **immutable** and methods are **pure** - they are free
 of side-effects.
 
-### Namespace `Narvalo.Applicative`
 The main namespace is `Narvalo.Applicative`:
 - `Unit`
 - `Maybe<T>`, the Maybe type, a generalization of `Nullable<T>`.
@@ -49,24 +48,7 @@ The main namespace is `Narvalo.Applicative`:
 - `Sequence` which provides various ways to generate infinite sequences.
 - Stubs for some commonly used delegates.
 
-We also provide generalized LINQ operators accepting as arguments functions
-that maps a value to a Maybe, an Error or an Either:
-  * `SelectWith` (deferred)
-  * `ZipWith` (deferred)
-  * `WhereBy` (deferred)
-  * `Fold`
-  * `Reduce`
-
-### Namespace `Narvalo.Linq`
-The other namespace is `Narvalo.Linq` which contains LINQ extensions.
-
-- [Projection Operators] `SelectAny` (deferred)
-- [Restriction Operators] `WhereAny` (deferred), `CollectAny` (deferred)
-- [Set Operators] `Append` (deferred), `Prepend` (deferred)
-- [Element Operators] `FirstOrNone`, `LastOrNone`, `SingleOrNone`, `ElementAtOrNone`
-- [Aggregation Operators] `Aggregate` (deferred)
-- [Quantification Operators] `IsEmpty`
-- [Generation Operators] `EmptyIfNull`
+The other namespace is `Narvalo.Linq` dedicated to standard LINQ extensions.
 
 ### Remarks
 Maybe, Error and Either are examples of _monads_, a concept popularized by Haskell.
@@ -74,9 +56,9 @@ If you know nothing about monads or Haskell, don't worry, no previous knowledge
 is required.
 
 The implementation of Maybe, Error and Either follows closely the Haskell API
-but, of course, adapted to make it more C#-friendly (see [below](#derived-api)
-for more details on this). These types also support the query expression syntax
-[[Query expression pattern](https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#the-query-expression-pattern)].
+but, of course, adapted to make more palatable to C#-developers (see
+[below](#derived-api) for more details on this). These types also support the
+query expression syntax [[Query expression pattern](https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#the-query-expression-pattern)].
 
 The astute reader will have notice that some of the common monads are missing;
 they were not included on purpose. In the context of C#, I am yet to be
@@ -84,7 +66,9 @@ convinced of their usefulness and practicability (for skeleton definitions of
 `IO`, `Reader` and `State`,
 see [here](https://github.com/chtoucas/Brouillons/tree/master/src/play/Functional/Monadic)).
 
-Maybe type
+--------------------------------------------------------------------------------
+
+Maybe Type
 ----------
 
 The `Maybe<T>` class is a lot like the `Nullable<T>` class but without any
@@ -92,7 +76,9 @@ restriction on the underlying type: _it provides a way to tell the absence or
 the presence of a value_. For value types, most of the time `T?` offers a much
 better alternative. This class is sometimes referred to as the Option type.
 
-Error types
+--------------------------------------------------------------------------------
+
+Error Types
 -----------
 
 Typical use cases:
@@ -124,14 +110,133 @@ Remarks:
   With `Maybe<TError>` it is not obvious that the underlying type (`TError`)
   represents an error and not the "normal" return type.
 
-Either type
+--------------------------------------------------------------------------------
+
+Either Type
 -----------
+
+--------------------------------------------------------------------------------
 
 LINQ Extensions
 ---------------
 
+For each new query operator, we define its behaviour regarding deferred or
+immediate execution. To quote the [C# documentation](https://docs.microsoft.com/en-us/dotnet/articles/csharp/programming-guide/concepts/linq/classification-of-standard-query-operators-by-manner-of-execution),
+_deferred execution_ means that the operation is not performed at the point
+in the code where the query is declared. Additionally,
+query operators that use deferred execution can be classified as _streaming_,
+they do not have to read all the source data before they yield elements,
+or _not streaming_, they must read all the source data before they can yield
+a result element.
+
+### Query Operators
+
+Category | Operator | Return Type | Deferred
+-------- | -------- | ----------- | :------:
+Set            | `Append`             | `IEnumerable<T>`           | Streaming
+               | `Prepend`            | `IEnumerable<T>`           | Streaming
+Element        | `FirstOrNone`        | `Maybe<T>`                 | -
+               | `LastOrNone`         | `Maybe<T>`                 | -
+               | `SingleOrNone`       | `Maybe<T>`                 | -
+               | `ElementAtOrNone`    | `Maybe<T>`                 | -
+Aggregation    | `Aggregate` (reduce) | `T`                        | -
+               | `Aggregate` (fold)   | `TResult` or `TAccumulate` | -
+Quantification | `IsEmpty`            | `bool`                     | -
+Generation     | `EmptyIfNull`        | `IEnumerable<T>`           | -
+
+#### Set Operations
+`Append` appends a new element to a sequence and `Prepend` prepends a new
+element(!).
+
+#### Element Operations
+`FirstOrNone()` returns the first element of a sequence, or `Maybe<T>.None`
+if the sequence contains no elements.
+
+`FirstOrNone(predicate)` returns the first element of a sequence that satisfies the
+predicate, or `Maybe<TSource>.None` if no such element is found.
+
+`LastOrNone()` returns the last element of a sequence, or `Maybe<T>.None`
+if the sequence contains no elements.
+
+`LastOrNone(predicate)` returns the last element of a sequence that satisfies the
+predicate, or `Maybe<T>.None` if no such element is found.
+
+`SingleOrNone()` returns the only element of a sequence, or `Maybe<T>.None`
+if the sequence is empty or contains more than one element. **WARNING:**
+Here we differ in behaviour from the standard query `SingleOrDefault` which
+throws an exception if there is more than one element in the sequence.
+
+`SingleOrNone(predicate)` returns the only element of a sequence that satisfies
+a specified predicate, or `Maybe<T>.None`
+if no such element exists or there are more than one of them. **WARNING:**
+Here we differ in behaviour from the standard query `SingleOrDefault` which
+throws an exception if more than one element satisfies the predicate.
+
+`ElementAtOrNone(index)` returns the element at the specified index in a
+sequence or `Maybe<T>.None` if the index is out of range.
+
+#### Aggregation Operations
+
+#### Quantification Operations
+`IsEmpty` returns true if the sequence is empty; otherwise false.
+
+#### Generation Operations
+`EmptyIfNull` returns a new empty sequence if the sequence is empty; otherwise
+it returns the sequence.
+
+### Specialized Operators
+
+Operators that act on an `IEnumerable<Monad<T>>`.
+
+Category | Operator | Return Type | Deferred
+-------- | -------- | ----------- | :------:
+Restriction    | `Collect`        | `Monad<IEnumerable<T>>` | Streaming
+               | `CollectAny` (*) | `IEnumerable<T>`        | Streaming
+Aggregation    | `Sum` (**)       | `Maybe<T>`              | -
+
+(*) Not available for `Either<T1, T2>`
+(**) Only available for `Maybe<T>`.
+
+#### `CollectAny` and `Collect` for `IEnumerable<Maybe<T>>`
+For instance, applying `CollectAny` to the sequence of type
+`IEnumerable<Maybe<int>>` and defined by:
+```csharp
+yield return Maybe<int>.None;
+yield return Maybe.Of(2);
+yield return Maybe<int>.None;
+yield return Maybe.Of(4);
+yield return Maybe.Of(5);
+```
+would return a sequence with the three elements `2`, `4` and `5`; it filters out
+the two _none_'s
+
+### Generalized LINQ Operators
+
+We also provide generalized LINQ operators accepting as arguments functions
+that maps a value to a nullable, a Maybe, an Error or an Either.
+
+Category | Operator | Return Type | Deferred
+-------- | -------- | ----------- | :------:
+Projection     | `SelectAny`  | `IEnumerable<TResult>`        | Streaming
+               | `SelectWith` | `Monad<IEnumerable<TResult>>` | Streaming
+Restriction    | `WhereAny`   | `IEnumerable<T>`              | Streaming
+               | `WhereBy`    | `Monad<IEnumerable<T>>`       | Streaming
+Set            | `ZipWith`    | `Monad<IEnumerable<TResult>>` | Streaming
+Aggregation    | `Reduce`     | `Monad<T>`                    | -
+               | `Fold`       | `Monad<TAccumulate>`          | -
+Generation     | `Repeat`     | `Monad<IEnumerable<T>>`       | Streaming
+
+NB: `SelectAny` and `WhereAny` are not supported by `Either<T1, T2>` and
+`Result<T, TError>`.
+
+### Further readings
+
+--------------------------------------------------------------------------------
+
 Infinite Sequences
 ------------------
+
+--------------------------------------------------------------------------------
 
 Derived API
 -----------
@@ -248,19 +353,24 @@ Haskell | C# | Return Type
   [Control.Applicative](https://hackage.haskell.org/package/base-4.9.1.0/docs/Control-Applicative.html)
   and [Control.Monad](https://hackage.haskell.org/package/base-4.9.1.0/docs/Control-Monad.html)
 
-Monad Tutorial
---------------
+--------------------------------------------------------------------------------
+
+Design Notes
+------------
 
 Again, we will use the Maybe type as an example.
 
+### Monoid
+
 ### Functor
 
+A _functor_ is a type with one operation
 ```csharp
 public struct Maybe<T> {
     public Maybe<TResult> Select<TResult>(Func<T, TResult> selector) { ... }
 }
 ```
-The `Select` method must satisfy the **functor laws**:
+that satisfies the **functor laws**:
 1. **Identity.**  `Select` preserves the identity function.
 2. **Composition.** `Select` preserves the composition operator.
 
@@ -270,9 +380,11 @@ If `m` is an instance of the `Maybe<T>` class, the first law says that the resul
 var lhs = m.Select(x => f(g(x)));
 var rhs = m.Select(g).Select(f);
 ```
-where `f` and `g` are two functions, are equals.
+where `f` and `g` are arbitrary (composable) functions, are equals.
 
-### Applicative
+Outside .NET,
+
+### Applicative Functor
 
 ```csharp
 public static class Maybe {
@@ -286,9 +398,11 @@ public struct Maybe<T> {
 }
 ```
 
+### Alternative
+
 ### Monad
 
-A monad `Monad<T>` is simply a type with at least two operations
+A _monad_ is simply a type with at least two operations
 ```csharp
 public static class Maybe {
     public static Maybe<T> Of<T>(T value) { ... }
@@ -305,7 +419,7 @@ If one wishes to stay closer to the definition of monads from category theory,
 a monad is rather defined by a unit element `Of` and two operations
 `Select` and `Flatten` where `Select` must satisfy the _functor laws_.
 
-### Triad: an alternate definition of a monad
+### An alternate specification for a monad
 
 ```csharp
 public static class Maybe {
@@ -393,5 +507,9 @@ Type             | Properties
 - A popular explanation of monads given by [Eric Lippert](http://ericlippert.com/category/monads/).
 - A more abstract one by [Erik Meijer](http://laser.inf.ethz.ch/2012/slides/Meijer/).
 
+--------------------------------------------------------------------------------
+
 Changelog
 ---------
+
+--------------------------------------------------------------------------------

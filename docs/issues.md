@@ -61,6 +61,7 @@ Narvalo.Fx
 - Either, should we throw if we have a lefty method for a righty object
   (see WhenLeft for instance).
 - Simplify LINQ for `Maybe<T?>`.
+- Add CollectAny for Either, SelectAny and WhereAny for Either, Result?
 
 Next:
 - Add `MapMany` to `Outcome` and `Fallible`....
