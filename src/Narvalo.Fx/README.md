@@ -22,10 +22,10 @@ sequence generators and LINQ extensions.
 - [LINQ extensions](#linq-extensions)
 - [Infinite sequences](#infinite-sequences)
 - [Derived API](#derived-api)
-- [Design Notes](#design-notes)
+- [Monad Tutorial](#monad-tutorial)
 - [Changelog](#changelog)
 
-**WARNING** I am currently in the process of rewriting this document.
+**WARNING:** _I am currently in the process of rewriting this document._
 
 Overview
 --------
@@ -74,7 +74,7 @@ If you know nothing about monads or Haskell, don't worry, no previous knowledge
 is required.
 
 The implementation of Maybe, Error and Either follows closely the Haskell API
-but, of course, adapted to make it more C#-friendly (see [below](#design-notes)
+but, of course, adapted to make it more C#-friendly (see [below](#derived-api)
 for more details on this). These types also support the query expression syntax
 [[Query expression pattern](https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#the-query-expression-pattern)].
 
@@ -143,14 +143,14 @@ We will use the Maybe type as an example. Below we use:
 - `mseq` for an object of type `IEnumerable<Maybe<T>>`
 
 All variants that return a `Maybe<Unit>` instead of a `Maybe<T>` (those that have
-a postfix `_`) are not implemented.
+a suffix `_`) are not implemented.
 
 Haskell | C# | Return Type
 --------|----|------------
 `>>=`          | `obj.Bind`         | `Maybe<TResult>`
 `>>`           | `obj.ContinueWith` | `Maybe<TResult>`
 `return`       | `Maybe.Of`         | `Maybe<T>`
-`fail`         | (see below)        | -
+`fail`         | -                  | -
 `fmap`         | `obj.Select`       | `Maybe<TResult>`
 
 We do not implement `fail` as .NET has its own way of reporting errors.
@@ -176,7 +176,7 @@ Haskell | C# | Return Type
 --------|----|------------
 `join`                       | `square.Flatten`    | `Maybe<T>`
 `filterM`                    | `seq.WhereBy`       | `Maybe<IEnumerable<T>>`
-`mapAndUnzipM`               | (see below)         | -
+`mapAndUnzipM`               | -                   | -
 `zipWithM` / `zipWithM_`     | `seq.ZipWith`       | `Maybe<IEnumerable<TResult>>`
 `foldM` / `foldM_`           | `seq.Fold`          | `Maybe<TAccumulate>`
 `replicateM` / `replicateM_` | `Maybe.Repeat`      | `Maybe<IEnumerable<T>>`
@@ -248,41 +248,54 @@ Haskell | C# | Return Type
   [Control.Applicative](https://hackage.haskell.org/package/base-4.9.1.0/docs/Control-Applicative.html)
   and [Control.Monad](https://hackage.haskell.org/package/base-4.9.1.0/docs/Control-Monad.html)
 
-Design Notes
-------------
+Monad Tutorial
+--------------
+
+Again, we will use the Maybe type as an example.
 
 ### Functor
 
 ```csharp
-public class Functor<T> {
-    public Functor<TResult> Select<TResult>(Func<T, TResult> selector) { ... }
+public struct Maybe<T> {
+    public Maybe<TResult> Select<TResult>(Func<T, TResult> selector) { ... }
 }
 ```
+The `Select` method must satisfy the **functor laws**:
+1. **Identity.**  `Select` preserves the identity function.
+2. **Composition.** `Select` preserves the composition operator.
+
+If `m` is an instance of the `Maybe<T>` class, the first law says that the result of
+`m.Select(x => x)` is equal to `m`, and the second law that:
+```csharp
+var lhs = m.Select(x => f(g(x)));
+var rhs = m.Select(g).Select(f);
+```
+where `f` and `g` are two functions, are equals.
 
 ### Applicative
 
 ```csharp
-public static class Applicative {
-    public static Applicative<T> Of<T>(T value) { ... }
+public static class Maybe {
+    public static Maybe<T> Of<T>(T value) { ... }
 }
 
-public static class Applicative<T> {
-    public Applicative<TResult> Select<TResult>(Func<T, TResult> selector) { ... }
+public struct Maybe<T> {
+    public Maybe<TResult> Select<TResult>(Func<T, TResult> selector) { ... }
 
-    public Applicative<TResult> Gather<TResult>(Applicative<Func<T, TResult>> applicative) { ... }
+    public Maybe<TResult> Gather<TResult>(Maybe<Func<T, TResult>> applicative) { ... }
 }
 ```
 
 ### Monad
 
-Informally, a monad `Monad<T>` is simply a type with two operations
+A monad `Monad<T>` is simply a type with at least two operations
 ```csharp
-public static class Monad {
-    public static Monad<T> Of<T>(T value) { ... }
+public static class Maybe {
+    public static Maybe<T> Of<T>(T value) { ... }
 }
 
-public class Monad<T> {
-    Monad<TResult> Bind<TResult>(Func<T, Monad<TResult>> binder) { ... }
+public struct Maybe<T> {
+    public Maybe<TResult> Bind<TResult>(Func<T, Maybe<TResult>> binder) { ... }
 }
 ```
 that satisfy the _monad laws_. We won't discuss them but, in plain English, they
@@ -291,6 +304,44 @@ say that `Of` is an identity for `Bind`, and that `Bind` is associative.
 If one wishes to stay closer to the definition of monads from category theory,
 a monad is rather defined by a unit element `Of` and two operations
 `Select` and `Flatten` where `Select` must satisfy the _functor laws_.
+
+### Triad: an alternate definition of a monad
+
+```csharp
+public static class Maybe {
+    public static Maybe<T> Of<T>(T value) { ... }
+
+    public static Maybe<T> Flatten<T>(Maybe<Maybe<T>> square) { ... }
+}
+
+public struct Maybe<T> {
+    public Maybe<TResult> Select<TResult>(Func<T, TResult> selector) { ... }
+}
+```
+
+From a triad to a monad: `Bind` derived from `Flatten` and `Select`,
+```csharp
+public struct Maybe<T> {
+    public Maybe<TResult> Bind<TResult>(Func<T,Maybe<TResult>> binder) {
+        return Maybe.Flatten(Select(binder));
+    }
+}
+```
+From a monad to a triad: `Select` derived from `Of` and `Bind`,
+and `Flatten` derived from `Bind`.
+```csharp
+public struct Maybe<T> {
+    public Maybe<TResult> Select<TResult>(Func<T, TResult> selector) {
+        return Bind(x => Maybe.Of(selector(x)));
+    }
+}
+
+public static class Maybe {
+    public static Maybe<T> Flatten(Maybe<Maybe<T>> square) {
+        return square.Bind(x => x);
+    }
+}
+```
 
 ### Comonad
 
@@ -326,9 +377,9 @@ A MonadOr is a monad which is also a monoid and for which `Unit` is
 a left zero for `Plus`. Here, we prefer to use `OrElse` instead of `Plus` for the
 monoid composition operation.
 
-### Monads in the .NET Framework
+### .NET Framework types
 
-Class            | Type
+Type             | Properties
 ---------------- | ------------------------
 `IEnumerable<T>` |
 `Nullable<T>`    |
