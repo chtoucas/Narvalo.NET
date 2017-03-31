@@ -48,7 +48,8 @@ The main namespace is `Narvalo.Applicative`:
 - `Sequence` which provides various ways to generate infinite sequences.
 - Stubs for some commonly used delegates.
 
-The other namespace is `Narvalo.Linq` dedicated to standard LINQ extensions.
+The other namespace `Narvalo.Linq` is dedicated to define new (LINQ) query
+operators.
 
 ### Remarks
 Maybe, Error and Either are examples of _monads_, a concept popularized by Haskell.
@@ -153,7 +154,7 @@ element(!).
 if the sequence contains no elements.
 
 `FirstOrNone(predicate)` returns the first element of a sequence that satisfies the
-predicate, or `Maybe<TSource>.None` if no such element is found.
+predicate, or `Maybe<T>.None` if no such element is found.
 
 `LastOrNone()` returns the last element of a sequence, or `Maybe<T>.None`
 if the sequence contains no elements.
