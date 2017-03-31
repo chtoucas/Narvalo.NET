@@ -132,7 +132,7 @@ a result element.
 ### Query Operators
 
 Category | Operator | Return Type | Deferred
--------- | -------- | ----------- | :------:
+-------- | -------- | ----------- | --------
 Set            | `Append`             | `IEnumerable<T>`           | Streaming
                | `Prepend`            | `IEnumerable<T>`           | Streaming
 Element        | `FirstOrNone`        | `Maybe<T>`                 | -
@@ -189,7 +189,7 @@ it returns the sequence.
 Operators that act on an `IEnumerable<Monad<T>>`.
 
 Category | Operator | Return Type | Deferred
--------- | -------- | ----------- | :------:
+-------- | -------- | ----------- | --------
 Restriction    | `Collect`        | `Monad<IEnumerable<T>>` | Streaming
                | `CollectAny` (*) | `IEnumerable<T>`        | Streaming
 Aggregation    | `Sum` (**)       | `Maybe<T>`              | -
@@ -216,7 +216,7 @@ We also provide generalized LINQ operators accepting as arguments functions
 that maps a value to a nullable, a Maybe, an Error or an Either.
 
 Category | Operator | Return Type | Deferred
--------- | -------- | ----------- | :------:
+-------- | -------- | ----------- | --------
 Projection     | `SelectAny`  | `IEnumerable<TResult>`        | Streaming
                | `SelectWith` | `Monad<IEnumerable<TResult>>` | Streaming
 Restriction    | `WhereAny`   | `IEnumerable<T>`              | Streaming
