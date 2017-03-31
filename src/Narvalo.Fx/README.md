@@ -197,9 +197,8 @@ Aggregation    | `Sum` (**)       | `Maybe<T>`              | -
 (*) Not available for `Either<T1, T2>`
 (**) Only available for `Maybe<T>`.
 
-#### `CollectAny` and `Collect` for `IEnumerable<Maybe<T>>`
-For instance, applying `CollectAny` to the sequence of type
-`IEnumerable<Maybe<int>>` and defined by:
+#### `CollectAny` and `Collect`
+For instance, applying `CollectAny` to the sequence defined by:
 ```csharp
 yield return Maybe<int>.None;
 yield return Maybe.Of(2);
@@ -207,8 +206,8 @@ yield return Maybe<int>.None;
 yield return Maybe.Of(4);
 yield return Maybe.Of(5);
 ```
-would return a sequence with the three elements `2`, `4` and `5`; it filters out
-the two _none_'s
+would return a sequence of type `IEnumerable<int>` with three elements `2`, `4`
+and `5`; it filters out the two _none_'s
 
 ### Generalized LINQ Operators
 
@@ -419,8 +418,7 @@ If one wishes to stay closer to the definition of monads from category theory,
 a monad is rather defined by a unit element `Of` and two operations
 `Select` and `Flatten` where `Select` must satisfy the _functor laws_.
 
-### An alternate specification for a monad
-
+#### An alternate definition
 ```csharp
 public static class Maybe {
     public static Maybe<T> Of<T>(T value) { ... }
@@ -500,6 +498,8 @@ Type             | Properties
 `Func<T>`        |
 `Lazy<T>`        |
 `Task<T>`        |
+
+### Relation to Category Theory
 
 ### Further Readings
 - The first public discussion of monads in the context of .NET seems to be due to
