@@ -25,6 +25,8 @@ sequence generators and LINQ extensions.
 - [Design Notes](#design-notes)
 - [Changelog](#changelog)
 
+**WARNING** I am currently in the process of rewriting this document.
+
 Overview
 --------
 
@@ -72,7 +74,7 @@ If you know nothing about monads or Haskell, don't worry, no previous knowledge
 is required.
 
 The implementation of Maybe, Error and Either follows closely the Haskell API
-but, of course, adapted to make it more C#-friendly (see [below](#design)
+but, of course, adapted to make it more C#-friendly (see [below](#design-notes)
 for more details on this). These types also support the query expression syntax
 [[Query expression pattern](https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#the-query-expression-pattern)].
 
@@ -140,29 +142,31 @@ We will use the Maybe type as an example. Below we use:
 - `seq` for an object of type `IEnumerable<T>`.
 - `mseq` for an object of type `IEnumerable<Maybe<T>>`
 
+All variants that return a `Maybe<Unit>` instead of a `Maybe<T>` (those that have
+a postfix `_`) are not implemented.
+
 Haskell | C# | Return Type
 --------|----|------------
 `>>=`          | `obj.Bind`         | `Maybe<TResult>`
 `>>`           | `obj.ContinueWith` | `Maybe<TResult>`
 `return`       | `Maybe.Of`         | `Maybe<T>`
-`fail`         | -                  | -
+`fail`         | (see below)        | -
 `fmap`         | `obj.Select`       | `Maybe<TResult>`
+
+We do not implement `fail` as .NET has its own way of reporting errors.
 
 #### Basic monad functions
 
 Haskell | C# | Return Type
 --------|----|------------
-`mapM`          | `seq.SelectWith`   | `Maybe<IEnumerable<TResult>>`
-`mapM_`         | -                  | -
-`forM`          | `kunc.InvokeWith`  | `Maybe<IEnumerable<TResult>>`
-`forM_`         | -                  | -
-`sequence`      | `mseq.Collect`     | `Maybe<IEnumerable<T>>`
-`sequence_`     | -                  | -
-`(=<<)`         | `kunc.InvokeWith`  | `Maybe<TResult>`
-`(>=>)`         | `kunc.Compose`     | `Func<T, Maybe<TResult>>`
-`(<=<)`         | `kunc.ComposeBack` | `Func<T, Maybe<TResult>>`
-`forever`       | -                  | -
-`void`          | `obj.Skip`         | `Maybe<Unit>`
+`mapM` / `mapM_`         | `seq.SelectWith`   | `Maybe<IEnumerable<TResult>>`
+`forM` / `forM_`         | `kunc.InvokeWith`  | `Maybe<IEnumerable<TResult>>`
+`sequence` / `sequence_` | `mseq.Collect`     | `Maybe<IEnumerable<T>>`
+`(=<<)`                  | `kunc.InvokeWith`  | `Maybe<TResult>`
+`(>=>)`                  | `kunc.Compose`     | `Func<T, Maybe<TResult>>`
+`(<=<)`                  | `kunc.ComposeBack` | `Func<T, Maybe<TResult>>`
+`forever`                | -                  | -
+`void`                   | `obj.Skip`         | `Maybe<Unit>`
 
 #### Generalisations of list functions
 
@@ -170,23 +174,34 @@ Below `square` is an object of type `Maybe<Maybe<T>>`.
 
 Haskell | C# | Return Type
 --------|----|------------
-`join`         | `square.Flatten`    | `Maybe<T>`
-`msum`         | `mseq.Sum`          | `Maybe<IEnumerable<T>>`
-`mfilter`      |                     |
-`filterM`      | `seq.WhereBy`       | `Maybe<IEnumerable<T>>`
-`mapAndUnzipM` | -                   | -
-`zipWithM`     | `seq.ZipWith`       | `Maybe<IEnumerable<TResult>>`
-`zipWithM_`    | -                   | -
-`foldM`        | `seq.Fold`          | `Maybe<TAccumulate>`
-`foldM_`       | -                   | -
-`replicateM`   | `Maybe.Repeat`      | `Maybe<IEnumerable<T>>`
-`replicateM_`  | -                   | -
+`join`                       | `square.Flatten`    | `Maybe<T>`
+`filterM`                    | `seq.WhereBy`       | `Maybe<IEnumerable<T>>`
+`mapAndUnzipM`               | (see below)         | -
+`zipWithM` / `zipWithM_`     | `seq.ZipWith`       | `Maybe<IEnumerable<TResult>>`
+`foldM` / `foldM_`           | `seq.Fold`          | `Maybe<TAccumulate>`
+`replicateM` / `replicateM_` | `Maybe.Repeat`      | `Maybe<IEnumerable<T>>`
+
+`mapAndUnzipM` is easily implemented using `Select` and `SelectWith`:
+```csharp
+public Maybe<(IEnumerable<T1>, IEnumerable<T2>)> SelectUnzip<T, T1, T2>(
+    this IEnumerable<T> source,
+    Func<TSource, Maybe<(T1, T2)>> selector) {
+
+    Maybe<IEnumerable<(T1, T2)>> seq = SelectWith(source, selector);
+
+    return seq.Select(q => {
+        IEnumerable<T1> q1 = q.Select(x => x.Item1);
+        IEnumerable<T2> q2 = q.Select(x => x.Item2);
+
+        return (q1, q2);
+    });
+}
+```
 
 #### Conditional execution of monadic expressions
 
 Haskell | C# | Return Type
 --------|----|------------
-`guard`  | `Maybe.Guard` | `Maybe.Unit`
 `when`   | -             | -
 `unless` | -             | -
 
@@ -201,6 +216,18 @@ Haskell | C# | Return Type
 `liftM5` | `Maybe.Lift` | `Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<T4>, Maybe<T5>, Maybe<TResult>>`
 `ap`     | `obj.Gather` | `Maybe<TResult>`
 
+#### Extras
+
+#### Monad Plus
+
+Haskell | C# | Return Type
+--------|----|------------
+`mzero`   | `Maybe<T>.None` | `Maybe<T>`
+`mplus`   | `obj.OrElse`    | `Maybe<T>`
+`msum`    | `mseq.Sum`      | `Maybe<IEnumerable<T>>`
+`mfilter` | `obj.Where`     | `Maybe<T>`
+`guard`   | `Maybe.Guard`   | `Maybe.Unit`
+
 #### `Maybe` specific functions
 
 Haskell | C# | Return Type
@@ -208,8 +235,8 @@ Haskell | C# | Return Type
 `catMaybes`   | `mseq.CollectAny()`    | `Maybe<IEnumerable<T>>`
 `isJust`      | `obj.IsSome`           | `bool`
 `isNothing`   | `obj.IsNone`           | `bool`
-`fromMaybe`   | -                      | -
-`fromJust`    | -                      | -
+`fromMaybe`   |                        |
+`fromJust`    |                        |
 `maybeToList` | `obj.ToEnumerable()`   | `IEnumerable<T>`
 `maybe`       | `obj.Match()`          | `TResult`
 `listToMaybe` | `seq.FirstOrNone()`    | `Maybe<T>`
@@ -217,12 +244,14 @@ Haskell | C# | Return Type
 
 #### Further Readings
 - [The Haskell 98 Report](http://www.haskell.org/onlinereport/monad.html)
-- [Control.Monad](https://hackage.haskell.org/package/base-4.9.1.0/docs/Control-Monad.html)
+- Haskell: [Data.Functor](https://hackage.haskell.org/package/base-4.9.1.0/docs/Data-Functor.html),
+  [Control.Applicative](https://hackage.haskell.org/package/base-4.9.1.0/docs/Control-Applicative.html)
+  and [Control.Monad](https://hackage.haskell.org/package/base-4.9.1.0/docs/Control-Monad.html)
 
 Design Notes
 ------------
 
-#### Functor
+### Functor
 
 ```csharp
 public class Functor<T> {
@@ -230,7 +259,7 @@ public class Functor<T> {
 }
 ```
 
-#### Applicative
+### Applicative
 
 ```csharp
 public static class Applicative {
@@ -244,7 +273,7 @@ public static class Applicative<T> {
 }
 ```
 
-#### Monad
+### Monad
 
 Informally, a monad `Monad<T>` is simply a type with two operations
 ```csharp
@@ -263,10 +292,54 @@ If one wishes to stay closer to the definition of monads from category theory,
 a monad is rather defined by a unit element `Of` and two operations
 `Select` and `Flatten` where `Select` must satisfy the _functor laws_.
 
-### References
+### Comonad
+
+There are two equivalent ways to define a Comonad:
+- `Counit`, `Cobind`
+- `Counit`, `Map`, `Comultiply`
+
+### Richer Monads
+
+We follow (mostly) the proposed new terminology from the
+[MonadPlus Reform](http://www.haskell.org/haskellwiki/MonadPlus_reform_proposal).
+
+Name | Haskell | Terminology used here
+-----|---------|----------------------------------------
+`Zero` | `mzero` | `Zero`, `None`, `Empty`, `Ok`...
+`Plus` | `mplus` | `Plus`, `OrElse`...
+
+#### MonadZero
+A MonadZero is a monad with a left zero for `Bind`.
+
+#### MonadMore
+A MonadMore is a monad which is also a monoid and for which `Zero`
+is a zero for `Bind`. This is what Haskell calls a MonadPlus.
+
+#### MonadPlus
+A MonadPlus is a monad which is also a monoid and for which `Bind`
+is right distributive over `Plus`.
+
+REVIEW: Haskell uses the term left distributive. Am I missing something?
+
+#### MonadOr
+A MonadOr is a monad which is also a monoid and for which `Unit` is
+a left zero for `Plus`. Here, we prefer to use `OrElse` instead of `Plus` for the
+monoid composition operation.
+
+### Monads in the .NET Framework
+
+Class            | Type
+---------------- | ------------------------
+`IEnumerable<T>` |
+`Nullable<T>`    |
+`Func<T>`        |
+`Lazy<T>`        |
+`Task<T>`        |
+
+### Further Readings
 - The first public discussion of monads in the context of .NET seems to be due to
   [Wes Dyer](http://blogs.msdn.com/b/wesdyer/archive/2008/01/11/the-marvels-of-monads.aspx).
-- A popular explanation of monads by [Eric Lippert](http://ericlippert.com/category/monads/).
+- A popular explanation of monads given by [Eric Lippert](http://ericlippert.com/category/monads/).
 - A more abstract one by [Erik Meijer](http://laser.inf.ethz.ch/2012/slides/Meijer/).
 
 Changelog
