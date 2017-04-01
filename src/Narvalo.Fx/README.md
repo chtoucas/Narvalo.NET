@@ -146,62 +146,46 @@ Aggregation    | `Aggregate` (reduce) | `T`                        | -
 Quantification | `IsEmpty`            | `bool`                     | -
 Generation     | `EmptyIfNull`        | `IEnumerable<T>`           | -
 
-#### Set Operations
-`Append` appends a new element to a sequence and `Prepend` prepends a new
-element(!).
-
-#### Element Operations
-`FirstOrNone()` returns the first element of a sequence, or `Maybe<T>.None`
-if the sequence contains no elements.
-
-`FirstOrNone(predicate)` returns the first element of a sequence that satisfies the
-predicate, or `Maybe<T>.None` if no such element is found.
-
-`LastOrNone()` returns the last element of a sequence, or `Maybe<T>.None`
-if the sequence contains no elements.
-
-`LastOrNone(predicate)` returns the last element of a sequence that satisfies the
-predicate, or `Maybe<T>.None` if no such element is found.
-
-`SingleOrNone()` returns the only element of a sequence, or `Maybe<T>.None`
-if the sequence is empty or contains more than one element. **WARNING:**
-Here we differ in behaviour from the standard query `SingleOrDefault` which
-throws an exception if there is more than one element in the sequence.
-
-`SingleOrNone(predicate)` returns the only element of a sequence that satisfies
-a specified predicate, or `Maybe<T>.None`
-if no such element exists or there are more than one of them. **WARNING:**
-Here we differ in behaviour from the standard query `SingleOrDefault` which
-throws an exception if more than one element satisfies the predicate.
-
-`ElementAtOrNone(index)` returns the element at the specified index in a
-sequence or `Maybe<T>.None` if the index is out of range.
+- `Append` appends a new element to a sequence.
+- `Prepend` prepends a new element to a sequence.
+- `FirstOrNone()` returns the first element of a sequence, or `Maybe<T>.None`
+  if the sequence contains no elements.
+- `FirstOrNone(predicate)` returns the first element of a sequence that satisfies the
+  predicate, or `Maybe<T>.None` if no such element is found.
+- `LastOrNone()` returns the last element of a sequence, or `Maybe<T>.None`
+  if the sequence contains no elements.
+- `LastOrNone(predicate)` returns the last element of a sequence that satisfies the
+  predicate, or `Maybe<T>.None` if no such element is found.
+- `SingleOrNone()` returns the only element of a sequence, or `Maybe<T>.None`
+  if the sequence is empty or contains more than one element. **WARNING:**
+  Here we differ in behaviour from the standard query `SingleOrDefault` which
+  throws an exception if there is more than one element in the sequence.
+- `SingleOrNone(predicate)` returns the only element of a sequence that satisfies
+  a specified predicate, or `Maybe<T>.None`
+  if no such element exists or there are more than one of them. **WARNING:**
+  Here we differ in behaviour from the standard query `SingleOrDefault` which
+  throws an exception if more than one element satisfies the predicate.
+- `ElementAtOrNone(index)` returns the element at the specified index in a
+  sequence or `Maybe<T>.None` if the index is out of range.
+- `IsEmpty` returns true if the sequence is empty; otherwise false.
+- `EmptyIfNull` returns a new empty sequence if the sequence is empty; otherwise
+  it returns the sequence.
 
 #### Aggregation Operations
 
-#### Quantification Operations
-`IsEmpty` returns true if the sequence is empty; otherwise false.
-
-#### Generation Operations
-`EmptyIfNull` returns a new empty sequence if the sequence is empty; otherwise
-it returns the sequence.
-
-### Specialized Operators
+### `Collect` and `CollectAny`
 
 Operators that act on an `IEnumerable<Monad<T>>`.
 
-Category | Operator | Return Type | Deferred | Custom
--------- | -------- | ----------- | :------: | :-----:
-Restriction    | `Collect`    | `Monad<IEnumerable<T>>` | Streaming |
-|              | `CollectAny` | `IEnumerable<T>`        | Streaming | x
-Aggregation    | `Sum` (*)    | `Maybe<T>`              | -         |
+Category | Operator | Return Type | Deferred |
+-------- | -------- | ----------- | :------: |
+Restriction | `CollectAny` | `IEnumerable<T>`        | Streaming
+|           | `Collect`    | `Monad<IEnumerable<T>>` | Streaming
 
-(*) Only available for `IEnumerable<Maybe<T>>`.
-
-Accidentally for all monads considered here, `Collect` is just a `CollectAny`
+Accidentally, for all monads considered here, `Collect` is just a `CollectAny`
 wrapped into a monad, even if it is not true in general.
 
-#### `CollectAny` and `Collect`
+#### `CollectAny`
 For instance, applying `CollectAny` to the sequence defined by:
 ```csharp
 yield return Maybe<int>.None;
@@ -213,28 +197,44 @@ yield return Maybe.Of(5);
 would return a sequence of type `IEnumerable<int>` with three elements `2`, `4`
 and `5`; it filters out the two _none_'s
 
+#### `Collect`
+
 ### Generalized Operators
 
 We also provide generalized operators accepting as arguments functions
 that maps a value to a nullable, a Maybe, an Error or an Either.
 
-Category | Operator | Return Type | Deferred | Custom
--------- | -------- | ----------- | :------: | :-----:
-Projection     | `SelectAny`  | `IEnumerable<TResult>`        | Streaming | x
-|              | `SelectWith` | `Monad<IEnumerable<TResult>>` | Streaming |
-Restriction    | `WhereAny`   | `IEnumerable<T>`              | Streaming | x
-|              | `WhereBy`    | `Monad<IEnumerable<T>>`       | Streaming |
-Set            | `ZipWith`    | `Monad<IEnumerable<TResult>>` | Streaming |
-Aggregation    | `Reduce`     | `Monad<T>`                    | -         |
-|              | `Fold`       | `Monad<TAccumulate>`          | -         |
-Generation     | `Repeat`     | `Monad<IEnumerable<T>>`       | Streaming |
+Category | Operator | Return Type | Deferred
+-------- | -------- | ----------- | :------:
+Projection  | `SelectWith` | `Monad<IEnumerable<TResult>>` | Streaming
+Restriction | `WhereBy`    | `Monad<IEnumerable<T>>`       | Streaming
+Set         | `ZipWith`    | `Monad<IEnumerable<TResult>>` | Streaming
+Aggregation | `Reduce`     | `Monad<T>`                    | -
+|           | `Fold`       | `Monad<TAccumulate>`          | -
+Generation  | `Repeat`     | `Monad<IEnumerable<T>>`       | Streaming
 
-Remarks:
-- `ZipWith` (resp. `SelectWith`) is a standard `Zip` (resp. `Select`)
-  followed by a `Collect`.
-- Accidentally for all monads considered here, `WhereBy` is just a `WhereAny`
-  wrapped into a monad even if it is not true in general.
+Category | Operator | Return Type | Deferred
+-------- | -------- | ----------- | :------:
+Projection  | `SelectAny`  | `IEnumerable<TResult>`        | Streaming
+Restriction | `WhereAny`   | `IEnumerable<T>`              | Streaming
 
+#### `SelectWith`
+`SelectWith` is a standard `Select` followed by a `Collect`.
+
+#### `WhereBy`
+Accidentally for all monads considered here, `WhereBy` is just a `WhereAny`
+wrapped into a monad even if it is not true in general.
+
+#### `ZipWith`
+`ZipWith` is a standard `Zip` followed by a `Collect`.
+
+### Specialized Operators
+
+Operators that act on an `IEnumerable<Maybe<T>>`.
+
+Category | Operator | Return Type | Deferred
+-------- | -------- | ----------- | :------:
+Aggregation | `Sum` (*) | `Maybe<T>` | -
 
 ### Further readings
 

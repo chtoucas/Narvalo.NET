@@ -11,8 +11,12 @@ namespace Narvalo.Linq
     // For IEnumerable<T?>, prefer SingleOrDefault() over SingleOrNone().
     public static partial class Qperators
     {
-        // WARNING: Here we differ in behaviour from LINQ.
-        // If there is more than one element, we do not throw but rather return None.
+        /// <summary>
+        /// Returns the only element of a sequence, or <see cref="Maybe{TSource}.None"/>
+        /// if the sequence is empty or contains more than one element.
+        /// <para>Here we differ in behaviour from the standard query SingleOrDefault which
+        /// throws an exception if there is more than one element in the sequence.</para>
+        /// </summary>
         public static Maybe<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this)
         {
             Require.NotNull(@this, nameof(@this));
@@ -36,8 +40,13 @@ namespace Narvalo.Linq
             }
         }
 
-        // WARNING: Here we differ in behaviour from LINQ.
-        // If there is more than one element, we do not throw but rather return None.
+        /// <summary>
+        /// Returns the only element of a sequence that satisfies
+        /// a specified predicate, or <see cref="Maybe{TSource}.None"/>
+        /// if no such element exists or there are more than one of them.
+        /// <para>Here we differ in behaviour from the standard query SingleOrDefaultwhich
+        /// throws an exception if more than one element satisfies the predicate.</para>
+        /// </summary>
         public static Maybe<TSource> SingleOrNone<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, bool> predicate)

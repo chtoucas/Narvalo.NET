@@ -62,7 +62,7 @@ Narvalo.Fx
   (see `WhenLeft` for instance).
 - Simplify LINQ for `Maybe<T?>`.
 - Move `SelectAny` and `WhereAny` to Narvalo.Applicative? or the other way around
-  with `Collect`, `CollectAny` and `Sum`? This would make easier to find these
+  with `Collect`, `CollectAny` and `Sum`? This would make it easier to find these
   methods.
 - Add "shadows" of `Collect` and `WhereBy` for `Result` and `Either`.
 - Add variants of `CollectAny` and co on the right for Either?

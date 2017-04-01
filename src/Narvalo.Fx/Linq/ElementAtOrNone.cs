@@ -9,6 +9,10 @@ namespace Narvalo.Linq
     // For IEnumerable<T?>, prefer ElementAtOrDefault() over ElementAtOrNone().
     public static partial class Qperators
     {
+        /// <summary>
+        /// Returns the element at the specified index in a sequence or
+        /// <see cref="Maybe{TSource}.None"/> if the index is out of range.
+        /// </summary>
         // Adapted from https://github.com/jskeet/edulinq/blob/master/src/Edulinq/ElementAt.cs
         public static Maybe<TSource> ElementAtOrNone<TSource>(this IEnumerable<TSource> @this, int index)
         {

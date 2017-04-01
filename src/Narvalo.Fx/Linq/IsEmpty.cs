@@ -7,6 +7,9 @@ namespace Narvalo.Linq
 
     public static partial class Qperators
     {
+        /// <summary>
+        /// Returns true if the sequence is empty; otherwise false.
+        /// </summary>
         public static bool IsEmpty<TSource>(this IEnumerable<TSource> @this)
             => !@this.Any();
     }

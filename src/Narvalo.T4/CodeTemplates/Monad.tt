@@ -53,28 +53,28 @@ namespace <#= Namespace #>
 <#+ } #>
 
 <#+
-    // Disabled for now.
-    //WriteLine();
-    //EmitMethods();
+        // Disabled.
+        //WriteLine();
+        //EmitMethods();
 
-    WriteLine();
-    EmitHelpers();
+        WriteLine();
+        EmitHelpers();
 
-    WriteLine();
-    EmitExtensions();
+        WriteLine();
+        EmitExtensions();
 
-    // Disabled for now.
-    //WriteLine();
-    //EmitExtensionsExtras();
+        // Disabled
+        //WriteLine();
+        //EmitExtensionsExtras();
 
-    WriteLine();
-    EmitApplicative();
+        WriteLine();
+        EmitApplicative();
 
-    WriteLine();
-    EmitKleisli();
+        WriteLine();
+        EmitKleisli();
 
-    WriteLine();
-    EmitEnumerableExtensions();
+        WriteLine();
+        EmitEnumerableExtensions();
 #>
 }
 
@@ -93,8 +93,8 @@ namespace <#= InternalNamespace #>
 <#+ } #>
 
 <#+
-    WriteLine();
-    EmitEnumerableInternal();
+        WriteLine();
+        EmitEnumerableInternal();
 #>
 }
 <#+

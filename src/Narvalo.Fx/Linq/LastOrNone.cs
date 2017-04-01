@@ -10,6 +10,10 @@ namespace Narvalo.Linq
     // For IEnumerable<T?>, prefer LastOrDefault() over LastOrNone().
     public static partial class Qperators
     {
+        /// <summary>
+        /// Returns the last element of a sequence, or <see cref="Maybe{TSource}.None"/>
+        /// if the sequence contains no elements.
+        /// </summary>
         public static Maybe<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this)
         {
             Require.NotNull(@this, nameof(@this));
@@ -36,6 +40,11 @@ namespace Narvalo.Linq
             }
         }
 
+        /// <summary>
+        /// Returns the last element of a sequence that satisfies the
+        /// <paramref name="predicate"/>, or <see cref="Maybe{TSource}.None"/>
+        /// if no such element is found.
+        /// </summary>
         public static Maybe<TSource> LastOrNone<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, bool> predicate)
