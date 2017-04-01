@@ -64,7 +64,7 @@ Narvalo.Fx
 - Move `SelectAny` and `WhereAny` to Narvalo.Applicative? or the other way around
   with `Collect`, `CollectAny` and `Sum`? This would make easier to find these
   methods.
-- Add shadowing variants of `Collect` and vWhereBy` for `Result` and `Either`.
+- Add "shadows" of `Collect` and `WhereBy` for `Result` and `Either`.
 - Add variants of `CollectAny` and co on the right for Either?
 - Remove `ZipWith` resp. `SelectWith`? Check that (here) `SelectWith` is just
   a `Select` wrapped into a monad.

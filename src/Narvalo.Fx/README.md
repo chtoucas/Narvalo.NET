@@ -19,7 +19,8 @@ sequence generators and LINQ extensions.
 - [Either Type](#either-type)
 - [LINQ Extensions](#linq-extensions)
 - [Infinite Sequences](#infinite-sequences)
-- [Derived API](#derived-api)
+- [Monadic API Tour](#monadic-api-tour)
+- [Haskell to C# Walk-Through](#haskell-to-C-walk-through)
 - [Design Notes](#design-notes)
 - [Changelog](#changelog)
 
@@ -58,8 +59,8 @@ is required.
 
 The implementation of Maybe, Error and Either follows closely the Haskell API
 but, of course, adapted to make more palatable to C#-developers (see
-[below](#derived-api) for more details on this). These types also support the
-query expression syntax [[Query expression pattern](https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#the-query-expression-pattern)].
+[below](#monadic-api-tour) for more details on this). These types also support
+the query expression syntax [[Query expression pattern](https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#the-query-expression-pattern)].
 
 The astute reader will have notice that some of the common monads are missing;
 they were not included on purpose. In the context of C#, I am yet to be
@@ -189,16 +190,16 @@ it returns the sequence.
 
 Operators that act on an `IEnumerable<Monad<T>>`.
 
-Category | Operator | Return Type | Deferred
--------- | -------- | ----------- | :------:
-Restriction    | `Collect`    | `Monad<IEnumerable<T>>` | Streaming
-|              | `CollectAny` | `IEnumerable<T>`        | Streaming
-Aggregation    | `Sum` (*)    | `Maybe<T>`              | -
+Category | Operator | Return Type | Deferred | Custom
+-------- | -------- | ----------- | :------: | :-----:
+Restriction    | `Collect`    | `Monad<IEnumerable<T>>` | Streaming |
+|              | `CollectAny` | `IEnumerable<T>`        | Streaming | x
+Aggregation    | `Sum` (*)    | `Maybe<T>`              | -         |
 
 (*) Only available for `IEnumerable<Maybe<T>>`.
 
 Accidentally for all monads considered here, `Collect` is just a `CollectAny`
-wrapped into a monad, but it is not true in general.
+wrapped into a monad, even if it is not true in general.
 
 #### `CollectAny` and `Collect`
 For instance, applying `CollectAny` to the sequence defined by:
@@ -212,27 +213,27 @@ yield return Maybe.Of(5);
 would return a sequence of type `IEnumerable<int>` with three elements `2`, `4`
 and `5`; it filters out the two _none_'s
 
-### Generalized LINQ Operators
+### Generalized Operators
 
-We also provide generalized LINQ operators accepting as arguments functions
+We also provide generalized operators accepting as arguments functions
 that maps a value to a nullable, a Maybe, an Error or an Either.
 
-Category | Operator | Return Type | Deferred
--------- | -------- | ----------- | :------:
-Projection     | `SelectAny`  | `IEnumerable<TResult>`        | Streaming
-|              | `SelectWith` | `Monad<IEnumerable<TResult>>` | Streaming
-Restriction    | `WhereAny`   | `IEnumerable<T>`              | Streaming
-|              | `WhereBy`    | `Monad<IEnumerable<T>>`       | Streaming
-Set            | `ZipWith`    | `Monad<IEnumerable<TResult>>` | Streaming
-Aggregation    | `Reduce`     | `Monad<T>`                    | -
-|              | `Fold`       | `Monad<TAccumulate>`          | -
-Generation     | `Repeat`     | `Monad<IEnumerable<T>>`       | Streaming
+Category | Operator | Return Type | Deferred | Custom
+-------- | -------- | ----------- | :------: | :-----:
+Projection     | `SelectAny`  | `IEnumerable<TResult>`        | Streaming | x
+|              | `SelectWith` | `Monad<IEnumerable<TResult>>` | Streaming |
+Restriction    | `WhereAny`   | `IEnumerable<T>`              | Streaming | x
+|              | `WhereBy`    | `Monad<IEnumerable<T>>`       | Streaming |
+Set            | `ZipWith`    | `Monad<IEnumerable<TResult>>` | Streaming |
+Aggregation    | `Reduce`     | `Monad<T>`                    | -         |
+|              | `Fold`       | `Monad<TAccumulate>`          | -         |
+Generation     | `Repeat`     | `Monad<IEnumerable<T>>`       | Streaming |
 
 Remarks:
 - `ZipWith` (resp. `SelectWith`) is a standard `Zip` (resp. `Select`)
   followed by a `Collect`.
 - Accidentally for all monads considered here, `WhereBy` is just a `WhereAny`
-  wrapped into a monad but it is not true in general.
+  wrapped into a monad even if it is not true in general.
 
 
 ### Further readings
@@ -244,8 +245,17 @@ Infinite Sequences
 
 --------------------------------------------------------------------------------
 
-Derived API
------------
+Monadic API Tour
+----------------
+
+### Core API
+
+### Derived API
+
+--------------------------------------------------------------------------------
+
+Haskell to C# Walk-Through
+--------------------------
 
 We will use the Maybe type as an example. Below we use:
 - `obj` for an object of type `Maybe<T>`.
@@ -258,15 +268,15 @@ a suffix `_`) are not implemented.
 
 Haskell | C# | Return Type
 --------|----|------------
-`>>=`          | `obj.Bind`         | `Maybe<TResult>`
-`>>`           | `obj.ContinueWith` | `Maybe<TResult>`
-`return`       | `Maybe.Of`         | `Maybe<T>`
-`fail`         | -                  | -
-`fmap`         | `obj.Select`       | `Maybe<TResult>`
+`>>=`    | `obj.Bind`         | `Maybe<TResult>`
+`>>`     | `obj.ContinueWith` | `Maybe<TResult>`
+`return` | `Maybe.Of`         | `Maybe<T>`
+`fail`   | -                  | -
+`fmap`   | `obj.Select`       | `Maybe<TResult>`
 
 We do not implement `fail` as .NET has its own way of reporting errors.
 
-#### Basic monad functions
+### Basic monad functions
 
 Haskell | C# | Return Type
 --------|----|------------
@@ -279,7 +289,7 @@ Haskell | C# | Return Type
 `forever`                | -                  | -
 `void`                   | `obj.Skip`         | `Maybe<Unit>`
 
-#### Generalisations of list functions
+### Generalisations of list functions
 
 Below `square` is an object of type `Maybe<Maybe<T>>`.
 
@@ -292,9 +302,10 @@ Haskell | C# | Return Type
 `foldM` / `foldM_`           | `seq.Fold`          | `Maybe<TAccumulate>`
 `replicateM` / `replicateM_` | `Maybe.Repeat`      | `Maybe<IEnumerable<T>>`
 
+#### `SelectUnzip` (C#), `mapAndUnzipM` (F#))
 `mapAndUnzipM` is easily implemented using `Select` and `SelectWith`:
 ```csharp
-public Maybe<(IEnumerable<T1>, IEnumerable<T2>)> SelectUnzip<T, T1, T2>(
+public static Maybe<(IEnumerable<T1>, IEnumerable<T2>)> SelectUnzip<T, T1, T2>(
     this IEnumerable<T> source,
     Func<TSource, Maybe<(T1, T2)>> selector) {
 
@@ -309,14 +320,14 @@ public Maybe<(IEnumerable<T1>, IEnumerable<T2>)> SelectUnzip<T, T1, T2>(
 }
 ```
 
-#### Conditional execution of monadic expressions
+### Conditional execution of monadic expressions
 
 Haskell | C# | Return Type
 --------|----|------------
 `when`   | -             | -
 `unless` | -             | -
 
-#### Monadic lifting operators
+### Monadic lifting operators
 
 Haskell | C# | Return Type
 --------|----|------------
@@ -327,9 +338,7 @@ Haskell | C# | Return Type
 `liftM5` | `Maybe.Lift` | `Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<T4>, Maybe<T5>, Maybe<TResult>>`
 `ap`     | `obj.Gather` | `Maybe<TResult>`
 
-#### Extras
-
-#### Monad Plus
+### Monad Plus
 
 Haskell | C# | Return Type
 --------|----|------------
@@ -339,7 +348,7 @@ Haskell | C# | Return Type
 `mfilter` | `obj.Where`     | `Maybe<T>`
 `guard`   | `Maybe.Guard`   | `Maybe.Unit`
 
-#### `Maybe` specific functions
+### `Maybe` Specific Functions
 
 Haskell | C# | Return Type
 --------|----|------------
@@ -498,7 +507,9 @@ monoid composition operation.
 
 ### Computation or Container?
 
-#### .NET Framework types
+### F# Computation Expressions
+
+### .NET Framework types
 
 Type             | Properties
 ---------------- | ------------------------
