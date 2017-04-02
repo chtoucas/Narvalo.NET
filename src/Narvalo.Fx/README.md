@@ -60,12 +60,12 @@ The types `Maybe<T>`, `Outcome<T>`, `Fallible<T>`, `Result<T, TError>` and
 `Either<T1, T2>` are examples of **monads**, a concept popularized by the
 [Haskell](https://www.haskell.org/) language. If you know nothing about monads
 or Haskell, don't worry, no previous knowledge is required - in fact, we won't
-explain what we mean by a monad until the [end](#typologia) of this document.
+explain the term monad until the [end](#typologia) of this document.
 
 We will often say that something is _monadic_, which will simply mean that it is
-applicable/available to any of the aforementioned monads. For instance, it is
+applicable/available to any of the aforementioned monads. For instance, "it is
 well-known that the C# type system is not rich enough to make true monadic
-constructions, but we can still create monad-like types as we do.
+constructions, but we can still create monad-like types as we do".
 Our implementation of monads follows the Haskell API closely but, of course,
 adapted to make it more palatable and hopefully feel natural to C#-developers
 (see [below](#monadic-api-tour) for more details on this). In particular, we make
@@ -96,7 +96,6 @@ Maybe Type
 The `Maybe<T>` struct is a lot like the `Nullable<T>` class but without any
 restriction on the underlying type: _it provides a way to tell the absence or
 the presence of a value_ - this class is sometimes referred to as the _Option type_.
-For value types, `T?` offers a much better alternative.
 
 There is a [proposal](https://github.com/dotnet/csharplang/blob/master/proposals/nullable-reference-types.md)
 to add nullable reference types to C#, nevertheless it won't render this type
@@ -109,7 +108,7 @@ not:
 var some = Maybe.Of("value");
 var none = Maybe<string>.None;
 ```
-You can check afterwards its status by querying the property `IsSome`, which is
+You can check afterwards the status by querying the property `IsSome`, which is
 true in the first case and false in the second one - the property `IsNone` is
 the negation of `IsSome`. If it is easy to wrap a value into a maybe, but you
 will soon wonder why it is not possible to recover it later on - there is a
@@ -122,6 +121,8 @@ you really insist, the type supports deconstruction:
 The deconstruction is not a "safe" operation. Before accessing `value`, you
 should always check if `isSome` is true - when it is not, `value` is set to
 `default(T)`.
+
+##### The Special Case of `T?`
 
 --------------------------------------------------------------------------------
 
