@@ -7,24 +7,29 @@ programming: option type (`Maybe<T>`), error types (`Result<T, TError>`,
 sequence generators and LINQ extensions.
 
 ### Status
-- The next release should be the first one to be declared stable.
+- The next release should be the first one to be declared stable. Some breaking
+  changes are still in the work in the area of LINQ.
+- Support the .NET Standard v1.0 and the PCL profile Profile259.
 - Test coverage is starting to look good (75%). The number of functional tests
   is progressing too.
 - C# documentation is largely missing.
 
 ### Content
 - [Overview](#overview)
+- [Unit Type](#maybe-type)
 - [Maybe Type](#maybe-type)
 - [Error Types](#error-types)
 - [Either Type](#either-type)
-- [LINQ Extensions](#linq-extensions)
-- [Infinite Sequences](#infinite-sequences)
+- [Query Operators](#query-operators)
+- [Utilities](#utilities)
 - [Monadic API Tour](#monadic-api-tour)
 - [Haskell to C# Walk-Through](#haskell-to-C-walk-through)
+- [Typologia](#typologia)
 - [Design Notes](#design-notes)
 - [Changelog](#changelog)
 
-**WARNING:** _I am currently in the process of rewriting this document._
+**WARNING:** _I am currently in the process of rewriting this document. It also
+describes some features (eg deconstruction) that are not yet implemented._
 
 --------------------------------------------------------------------------------
 
@@ -35,38 +40,47 @@ This assembly encourages an applicative-style of programming, or functional-styl
 if you prefer: types are **immutable** and methods are **pure** - they are free
 of side-effects.
 
-The main namespace is `Narvalo.Applicative`:
-- `Unit`
-- `Maybe<T>`, the Maybe type, a generalization of `Nullable<T>`.
-- `Outcome`, an Error type with lightweight error reporting for methods without
-  a return type.
-- `Outcome<T>`, an Error type with lightweight error reporting.
-- `Fallible`, an Error type with exception capture for methods without
-  a return type.
-- `Fallible<T>`, an Error type with exception capture.
-- `Result<T, TError>`, the Error type.
-- `Either<T1, T2>`, the Either type.
-- `Sequence` which provides various ways to generate infinite sequences.
-- Stubs for some commonly used delegates.
+The main namespace (`Narvalo.Applicative`) includes:
+- `Unit`, a [Unit](https://en.wikipedia.org/wiki/Unit_type) type.
+- `Maybe<T>`, similar to `Nullable<T>` but without any constraint
+  attached to the underlying type.
+- Enhanced return types for methods which normally return `void`:
+  * `Outcome` for lightweight error reporting.
+  * `Fallible` for full exception capture.
+- Enhanced return types for methods which normally return an object of type `T`:
+  * `Outcome<T>` for lightweight error reporting.
+  * `Fallible<T>` for full exception capture.
+- `Result<T, TError>`, the most general Error type.
+- `Either<T1, T2>`, an Either type.
 
-The other namespace `Narvalo.Linq` is dedicated to define new (LINQ) query
-operators.
+The other namespace (`Narvalo.Linq`) is dedicated to the definition of new
+query operators.
 
 ### Remarks
-Maybe, Error and Either are examples of _monads_, a concept popularized by Haskell.
-If you know nothing about monads or Haskell, don't worry, no previous knowledge
-is required.
+`Maybe<T>`, `Outcome<T>`, `Fallible<T>`, `Result<T, TError>` and `Either<T1, T2>`
+are examples of **monads**, a concept popularized by [Haskell](https://www.haskell.org/).
+We will often say that something is _monadic_, which will simply mean that it is
+applicable/available to any of the aforementioned monads. If you know nothing
+about monads or Haskell, don't worry, no previous knowledge is required - in fact,
+we won't explain what we mean by a monad until the [end](#typologia) of this
+document. Our implementation of monads follows the Haskell API closely but, of
+course, adapted to make it (hopefully) more palatable to C#-developers (see
+[below](#monadic-api-tour) for more details on this). In particular, we make
+sure that all monads also support the query expression syntax
+[[Query expression pattern](https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#the-query-expression-pattern)].
 
-The implementation of Maybe, Error and Either follows closely the Haskell API
-but, of course, adapted to make more palatable to C#-developers (see
-[below](#monadic-api-tour) for more details on this). These types also support
-the query expression syntax [[Query expression pattern](https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#the-query-expression-pattern)].
-
-The astute reader will have notice that some of the common monads are missing;
+The astute reader will have noticed that some of the common monads are missing,
 they were not included on purpose. In the context of C#, I am yet to be
 convinced of their usefulness and practicability (for skeleton definitions of
 `IO`, `Reader` and `State`,
 see [here](https://github.com/chtoucas/Brouillons/tree/master/src/play/Functional/Monadic)).
+
+--------------------------------------------------------------------------------
+
+Unit Type
+---------
+
+The Unit type is not the [Void type](https://github.com/dotnet/coreclr/blob/master/src/mscorlib/shared/System/Void.cs).
 
 --------------------------------------------------------------------------------
 
@@ -75,8 +89,20 @@ Maybe Type
 
 The `Maybe<T>` class is a lot like the `Nullable<T>` class but without any
 restriction on the underlying type: _it provides a way to tell the absence or
-the presence of a value_. For value types, most of the time `T?` offers a much
-better alternative. This class is sometimes referred to as the Option type.
+the presence of a value_ - this class is sometimes referred to as the _Option type_.
+For value types, `T?` offers a much
+better alternative.
+
+#### Construction / Deconstruction
+```csharp
+var some = Maybe.Of(1);
+var none = Maybe<int>.None;
+```
+
+```csharp
+var (isSome, value) = maybe;
+(bool isSome, T value) = maybe;
+```
 
 --------------------------------------------------------------------------------
 
@@ -112,18 +138,110 @@ Remarks:
   With `Maybe<TError>` it is not obvious that the underlying type (`TError`)
   represents an error and not the "normal" return type.
 
+### `Outcome`
+
+#### Construction / Deconstruction
+```csharp
+var success = Outcome.Ok;
+var failure = Outcome.FromError("My error message.");
+```
+
+```csharp
+var (isSuccess, error) = outcome;
+(bool isSuccess, string error) = outcome;
+```
+
+### `Outcome<T>`
+
+#### Construction / Deconstruction
+```csharp
+var success = Outcome.Of(1);
+var failure = Outcome<int>.FromError("My error message.");
+```
+
+```csharp
+var (isSuccess, value, error) = outcome;
+(bool isSuccess, T value, string error) = outcome;
+
+var (value, error) = outcome;
+(Maybe<T> value, string error) = outcome;
+```
+
+### `Fallible`
+
+#### Construction / Deconstruction
+```csharp
+ExceptionDispatchInfo edi = ...;
+var success = Fallible.Ok;
+var failure = Fallible.FromError(edi);
+```
+
+```csharp
+var (isSuccess, ex) = fallible;
+(bool isSuccess, Exception ex) = fallible;
+```
+
+### `Fallible<T>`
+
+#### Construction / Deconstruction
+```csharp
+ExceptionDispatchInfo edi = ...;
+var success = Fallible.Of(1);
+var failure = Fallible<int>.FromError(edi);
+```
+
+```csharp
+var (isSuccess, value, ex) = fallible;
+(bool isSuccess, T value, Exception ex) = fallible;
+
+var (value, ex) = fallible;
+(Maybe<T> value, Exception ex) = fallible;
+```
+
+### `Result<T, TError>`
+
+#### Construction / Deconstruction
+```csharp
+var success = Result<int, Error>.Of(1);
+var failure = Result<int, Error>.FromError(new Error());
+```
+
+```csharp
+var (isSuccess, value, error) = result;
+(bool isSuccess, T value, TError error) = result;
+
+var (value, error) = result;
+(Maybe<T> value, TError error) = result;
+```
+
 --------------------------------------------------------------------------------
 
 Either Type
 -----------
 
+#### Construction / Deconstruction
+```csharp
+var lefty = Either<int, long>.OfLeft(1);
+var righty = Either<int, long>.OfRight(1L);
+```
+
+```csharp
+var (left, right) = either;
+(Maybe<TLeft> left, TRight right) = either;
+```
+
 --------------------------------------------------------------------------------
 
-LINQ Extensions
+Query Operators
 ---------------
 
+- [LINQ Extensions](#linq-extensions)
+- [`Collect` and `CollectAny`](#collect-and-collectany)
+- [Generalized Operators](#generalized-operators)
+- [Specialized Operators](#specialized-operators)
+
 For each new query operator, we define its behaviour regarding deferred or
-immediate execution. To quote the [C# documentation](https://docs.microsoft.com/en-us/dotnet/articles/csharp/programming-guide/concepts/linq/classification-of-standard-query-operators-by-manner-of-execution),
+immediate execution - to quote the [C# documentation](https://docs.microsoft.com/en-us/dotnet/articles/csharp/programming-guide/concepts/linq/classification-of-standard-query-operators-by-manner-of-execution),
 _deferred execution_ means that the operation is not performed at the point
 in the code where the query is declared. Additionally,
 query operators that use deferred execution can be classified as _streaming_,
@@ -131,7 +249,9 @@ they do not have to read all the source data before they yield elements,
 or _not streaming_, they must read all the source data before they can yield
 a result element.
 
-### Query Operators
+### LINQ Extensions
+
+To enable any of them, you must first import the namespace `Narvalo.Linq`.
 
 Category | Operator | Return Type | Deferred
 -------- | -------- | ----------- | :------:
@@ -139,15 +259,19 @@ Set            | `Append`             | `IEnumerable<T>`           | Streaming
 |              | `Prepend`            | `IEnumerable<T>`           | Streaming
 Element        | `FirstOrNone`        | `Maybe<T>`                 | -
 |              | `LastOrNone`         | `Maybe<T>`                 | -
-|              | `SingleOrNone`       | `Maybe<T>`                 | -
 |              | `ElementAtOrNone`    | `Maybe<T>`                 | -
+|              | `SingleOrNone`       | `Maybe<T>`                 | -
 Aggregation    | `Aggregate` (reduce) | `T`                        | -
 |              | `Aggregate` (fold)   | `TResult` or `TAccumulate` | -
 Quantification | `IsEmpty`            | `bool`                     | -
 Generation     | `EmptyIfNull`        | `IEnumerable<T>`           | -
 
-- `Append` appends a new element to a sequence.
-- `Prepend` prepends a new element to a sequence.
+All these operators are defined as extension methods (in `Qperators`) and expect
+an `IEnumerable<T>` as input:
+- `Append` (resp. `Prepend`) appends (resp. prepends) a new element to a sequence.
+  **NB:** A much better [implementation](https://github.com/dotnet/corefx/blob/master/src/System.Linq/src/System/Linq/AppendPrepend.cs)
+  appears in later versions of `System.Linq`; it optimizes multiple calls to
+  `Append` and `Prepend`.
 - `FirstOrNone()` returns the first element of a sequence, or `Maybe<T>.None`
   if the sequence contains no elements.
 - `FirstOrNone(predicate)` returns the first element of a sequence that satisfies the
@@ -156,22 +280,24 @@ Generation     | `EmptyIfNull`        | `IEnumerable<T>`           | -
   if the sequence contains no elements.
 - `LastOrNone(predicate)` returns the last element of a sequence that satisfies the
   predicate, or `Maybe<T>.None` if no such element is found.
+- `ElementAtOrNone(index)` returns the element at the specified index in a
+  sequence or `Maybe<T>.None` if the index is out of range.
 - `SingleOrNone()` returns the only element of a sequence, or `Maybe<T>.None`
   if the sequence is empty or contains more than one element. **WARNING:**
-  Here we differ in behaviour from the standard query `SingleOrDefault` which
-  throws an exception if there is more than one element in the sequence.
+  This operator differs in behaviour from the standard query `SingleOrDefault`
+  which throws an exception if there is more than one element in the sequence.
 - `SingleOrNone(predicate)` returns the only element of a sequence that satisfies
   a specified predicate, or `Maybe<T>.None`
   if no such element exists or there are more than one of them. **WARNING:**
-  Here we differ in behaviour from the standard query `SingleOrDefault` which
-  throws an exception if more than one element satisfies the predicate.
-- `ElementAtOrNone(index)` returns the element at the specified index in a
-  sequence or `Maybe<T>.None` if the index is out of range.
+  This operator differs in behaviour from the standard query `SingleOrDefault`
+  which throws an exception if more than one element satisfies the predicate.
 - `IsEmpty` returns true if the sequence is empty; otherwise false.
 - `EmptyIfNull` returns a new empty sequence if the sequence is empty; otherwise
   it returns the sequence.
 
-#### Aggregation Operations
+#### Reducing
+
+#### Folding
 
 ### `Collect` and `CollectAny`
 
@@ -240,8 +366,12 @@ Aggregation | `Sum` (*) | `Maybe<T>` | -
 
 --------------------------------------------------------------------------------
 
-Infinite Sequences
-------------------
+Utilities
+---------
+
+### Infinite Sequences
+
+### Recursion
 
 --------------------------------------------------------------------------------
 
@@ -370,8 +500,8 @@ Haskell | C# | Return Type
 
 --------------------------------------------------------------------------------
 
-Design Notes
-------------
+Typologia
+---------
 
 Again, we will use the Maybe type as an example.
 
@@ -526,6 +656,11 @@ Type             | Properties
   [Wes Dyer](http://blogs.msdn.com/b/wesdyer/archive/2008/01/11/the-marvels-of-monads.aspx).
 - A popular explanation of monads given by [Eric Lippert](http://ericlippert.com/category/monads/).
 - A more abstract one by [Erik Meijer](http://laser.inf.ethz.ch/2012/slides/Meijer/).
+
+--------------------------------------------------------------------------------
+
+Design Notes
+------------
 
 --------------------------------------------------------------------------------
 
