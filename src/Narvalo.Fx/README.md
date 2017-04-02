@@ -93,10 +93,14 @@ The CLR includes a [void type](https://github.com/dotnet/coreclr/blob/master/src
 Maybe Type
 ----------
 
-The `Maybe<T>` class is a lot like the `Nullable<T>` class but without any
+The `Maybe<T>` struct is a lot like the `Nullable<T>` class but without any
 restriction on the underlying type: _it provides a way to tell the absence or
 the presence of a value_ - this class is sometimes referred to as the _Option type_.
 For value types, `T?` offers a much better alternative.
+
+There is a [proposal](https://github.com/dotnet/csharplang/blob/master/proposals/nullable-reference-types.md)
+to add nullable reference types to C#, nevertheless it won't render this type
+obsolete; even if they might look similar, they carry different semantics.
 
 #### Construction / Deconstruction
 A `Maybe<T>` object exists in two states, it either contains a value or it does
@@ -115,8 +119,9 @@ you really insist, the type supports deconstruction:
 ```csharp
 (bool isSome, T value) = maybe;
 ```
-Deconstruction is not a "safe" operation. Before accessing `value`, you should
-always check if `isSome` is true - when it is not, `value` is set to `default(T)`.
+The deconstruction is not a "safe" operation. Before accessing `value`, you
+should always check if `isSome` is true - when it is not, `value` is set to
+`default(T)`.
 
 --------------------------------------------------------------------------------
 
