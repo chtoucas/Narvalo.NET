@@ -48,6 +48,13 @@ namespace Narvalo.Applicative
 
         public abstract Either<TRight, TLeft> SwapUnchecked();
 
+        public void Deconstruct(out bool isLeft, out TLeft left, out TRight right)
+        {
+            isLeft = IsLeft;
+            left = Left;
+            right = Right;
+        }
+
         /// <summary>
         /// Represents the left side of the <see cref="Either{TLeft, TRight}"/> type.
         /// </summary>

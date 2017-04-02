@@ -52,6 +52,12 @@ namespace Narvalo.Applicative
             if (IsError) { Error.Throw(); }
         }
 
+        public void Deconstruct(out bool succeed,out ExceptionDispatchInfo exceptionInfo)
+        {
+            succeed = IsSuccess;
+            exceptionInfo = _error;
+        }
+
         public override string ToString()
             => IsError ? "Error(" + Error.ToString() + ")" : "Success";
 

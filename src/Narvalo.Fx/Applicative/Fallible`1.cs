@@ -110,6 +110,16 @@ namespace Narvalo.Applicative
             return Value;
         }
 
+        public void Deconstruct(
+            out bool succeed,
+            out T value,
+            out ExceptionDispatchInfo exceptionInfo)
+        {
+            succeed = IsSuccess;
+            value = _value;
+            exceptionInfo = _error;
+        }
+
         public override string ToString()
             => IsSuccess ? "Success(" + Value?.ToString() + ")" : "Error(" + Error.ToString() + ")";
 

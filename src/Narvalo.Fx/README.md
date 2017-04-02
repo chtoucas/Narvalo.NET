@@ -28,8 +28,7 @@ sequence generators and LINQ extensions.
 - [Design Notes](#design-notes)
 - [Changelog](#changelog)
 
-**WARNING:** _I am currently in the process of rewriting this document. It also
-describes some features (eg deconstruction) that are not yet implemented._
+**WARNING:** _I am currently in the process of rewriting this document._
 
 --------------------------------------------------------------------------------
 
@@ -41,7 +40,7 @@ if you prefer: types are **immutable** and methods are **pure** - they are free
 of side-effects.
 
 The main namespace (`Narvalo.Applicative`) includes:
-- `Unit`, a [Unit](https://en.wikipedia.org/wiki/Unit_type) type.
+- `Unit`, a unit type.
 - `Maybe<T>`, similar to `Nullable<T>` but without any constraint
   attached to the underlying type.
 - Enhanced return types for methods which normally return `void`:
@@ -57,15 +56,19 @@ The other namespace (`Narvalo.Linq`) is dedicated to the definition of new
 query operators.
 
 ### Remarks
-`Maybe<T>`, `Outcome<T>`, `Fallible<T>`, `Result<T, TError>` and `Either<T1, T2>`
-are examples of **monads**, a concept popularized by [Haskell](https://www.haskell.org/).
+The types `Maybe<T>`, `Outcome<T>`, `Fallible<T>`, `Result<T, TError>` and
+`Either<T1, T2>` are examples of **monads**, a concept popularized by the
+[Haskell](https://www.haskell.org/) language. If you know nothing about monads
+or Haskell, don't worry, no previous knowledge is required - in fact, we won't
+explain what we mean by a monad until the [end](#typologia) of this document.
+
 We will often say that something is _monadic_, which will simply mean that it is
-applicable/available to any of the aforementioned monads. If you know nothing
-about monads or Haskell, don't worry, no previous knowledge is required - in fact,
-we won't explain what we mean by a monad until the [end](#typologia) of this
-document. Our implementation of monads follows the Haskell API closely but, of
-course, adapted to make it (hopefully) more palatable to C#-developers (see
-[below](#monadic-api-tour) for more details on this). In particular, we make
+applicable/available to any of the aforementioned monads. For instance, it is
+well-known that the C# type system is not rich enough to make true monadic
+constructions, but we can still create monad-like types as we do.
+Our implementation of monads follows the Haskell API closely but, of course,
+adapted to make it more palatable and hopefully feel natural to C#-developers
+(see [below](#monadic-api-tour) for more details on this). In particular, we make
 sure that all monads also support the query expression syntax
 [[Query expression pattern](https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#the-query-expression-pattern)].
 
@@ -80,7 +83,10 @@ see [here](https://github.com/chtoucas/Brouillons/tree/master/src/play/Functiona
 Unit Type
 ---------
 
-The Unit type is not the [Void type](https://github.com/dotnet/coreclr/blob/master/src/mscorlib/shared/System/Void.cs).
+The [unit type](https://en.wikipedia.org/wiki/Unit_type) is not the same as
+the [void type](https://en.wikipedia.org/wiki/Void_type).
+
+The CLR includes a [void type](https://github.com/dotnet/coreclr/blob/master/src/mscorlib/shared/System/Void.cs)
 
 --------------------------------------------------------------------------------
 
@@ -90,19 +96,27 @@ Maybe Type
 The `Maybe<T>` class is a lot like the `Nullable<T>` class but without any
 restriction on the underlying type: _it provides a way to tell the absence or
 the presence of a value_ - this class is sometimes referred to as the _Option type_.
-For value types, `T?` offers a much
-better alternative.
+For value types, `T?` offers a much better alternative.
 
 #### Construction / Deconstruction
+A `Maybe<T>` object exists in two states, it either contains a value or it does
+not:
 ```csharp
-var some = Maybe.Of(1);
-var none = Maybe<int>.None;
+var some = Maybe.Of("value");
+var none = Maybe<string>.None;
 ```
-
+You can check afterwards its status by querying the property `IsSome`, which is
+true in the first case and false in the second one - the property `IsNone` is
+the negation of `IsSome`. If it is easy to wrap a value into a maybe, but you
+will soon wonder why it is not possible to recover it later on - there is a
+property named `Value` exactly for that but it is only accessible internally.
+As we will learn, this is not the recommended way of doing things but, if
+you really insist, the type supports deconstruction:
 ```csharp
-var (isSome, value) = maybe;
 (bool isSome, T value) = maybe;
 ```
+Deconstruction is not a "safe" operation. Before accessing `value`, you should
+always check if `isSome` is true - when it is not, `value` is set to `default(T)`.
 
 --------------------------------------------------------------------------------
 
@@ -117,7 +131,7 @@ Typical use cases:
 - In all other cases: `Result<T, TError>`.
 
 Of course, we could have gone away with one single type, but at the expense
-of complicated signatures. The correspondence is as follows:
+of complicated type signatures. The correspondence is as follows:
 
 Type             | Alternatives
 -----------------|-------------
@@ -147,8 +161,7 @@ var failure = Outcome.FromError("My error message.");
 ```
 
 ```csharp
-var (isSuccess, error) = outcome;
-(bool isSuccess, string error) = outcome;
+(bool succeed, string error) = outcome;
 ```
 
 ### `Outcome<T>`
@@ -160,42 +173,33 @@ var failure = Outcome<int>.FromError("My error message.");
 ```
 
 ```csharp
-var (isSuccess, value, error) = outcome;
-(bool isSuccess, T value, string error) = outcome;
-
-var (value, error) = outcome;
-(Maybe<T> value, string error) = outcome;
+(bool succeed, T value, string error) = outcome;
 ```
 
 ### `Fallible`
 
-#### Construction / Deconstruction
+#### Construction
+If `edi` is an object of type `ExceptionDispatchInfo`:
 ```csharp
-ExceptionDispatchInfo edi = ...;
 var success = Fallible.Ok;
 var failure = Fallible.FromError(edi);
 ```
 
 ```csharp
-var (isSuccess, ex) = fallible;
-(bool isSuccess, Exception ex) = fallible;
+(bool succeed, ExceptionDispatchInfo exceptionInfo) = fallible;
 ```
 
 ### `Fallible<T>`
 
 #### Construction / Deconstruction
+If `edi` is an object of type `ExceptionDispatchInfo`:
 ```csharp
-ExceptionDispatchInfo edi = ...;
 var success = Fallible.Of(1);
 var failure = Fallible<int>.FromError(edi);
 ```
 
 ```csharp
-var (isSuccess, value, ex) = fallible;
-(bool isSuccess, T value, Exception ex) = fallible;
-
-var (value, ex) = fallible;
-(Maybe<T> value, Exception ex) = fallible;
+(bool succeed, T value, ExceptionDispatchInfo exceptionInfo) = fallible;
 ```
 
 ### `Result<T, TError>`
@@ -207,11 +211,7 @@ var failure = Result<int, Error>.FromError(new Error());
 ```
 
 ```csharp
-var (isSuccess, value, error) = result;
-(bool isSuccess, T value, TError error) = result;
-
-var (value, error) = result;
-(Maybe<T> value, TError error) = result;
+(bool succeed, T value, TError error) = result;
 ```
 
 --------------------------------------------------------------------------------
@@ -221,13 +221,12 @@ Either Type
 
 #### Construction / Deconstruction
 ```csharp
-var lefty = Either<int, long>.OfLeft(1);
-var righty = Either<int, long>.OfRight(1L);
+var left = Either<int, long>.OfLeft(1);
+var right = Either<int, long>.OfRight(1L);
 ```
 
 ```csharp
-var (left, right) = either;
-(Maybe<TLeft> left, TRight right) = either;
+(bool isLeft, TLeft left, TRight right) = either;
 ```
 
 --------------------------------------------------------------------------------

@@ -92,6 +92,13 @@ namespace Narvalo.Applicative
             return IsSuccess ? Value : throw exceptionFactory(Error);
         }
 
+        public void Deconstruct(out bool succeed, out T value, out TError error)
+        {
+            succeed = IsSuccess;
+            value = _value;
+            error = _error;
+        }
+
         public override string ToString()
             => IsSuccess ? "Success(" + Value?.ToString() + ")" : "Error(" + Error.ToString() + ")";
 

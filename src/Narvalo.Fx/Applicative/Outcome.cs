@@ -37,6 +37,12 @@ namespace Narvalo.Applicative
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
         private string DebuggerDisplay => IsError ? "Error" : "Success";
 
+        public void Deconstruct(out bool succeed, out string error)
+        {
+            succeed = IsSuccess;
+            error = _error;
+        }
+
         public override string ToString() => IsError ? "Error(" + Error + ")" : "Success";
 
         /// <summary>

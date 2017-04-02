@@ -92,6 +92,12 @@ namespace Narvalo.Applicative
             return IsSome ? Value : throw exceptionFactory();
         }
 
+        public void Deconstruct(out bool isSome, out T value)
+        {
+            isSome = IsSome;
+            value = _value;
+        }
+
         public override string ToString() => IsSome ? "Maybe(" + Value.ToString() + ")" : "Maybe(None)";
 
         /// <summary>
