@@ -56,7 +56,7 @@ Next:
 Narvalo.Fx
 ----------
 
-- Enable deconstruction of types.
+- Enable deconstruction of types. Almost done, still one to go (`Maybe<T?>`).
 - Auto-generate tests for null-guards (missing only for `Either`).
   Add more tests beyond the auto-generated ones. Add tests for purity?
 - `Either`, should we throw if we have a lefty method for a righty object

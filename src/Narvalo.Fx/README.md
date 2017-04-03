@@ -7,8 +7,8 @@ programming: option type (`Maybe<T>`), error types (`Result<T, TError>`,
 sequence generators and LINQ extensions.
 
 ### Status
-- The next release should be the first one to be declared stable. Some breaking
-  changes are still in the work in the area of LINQ.
+- The next release should be the first one to be declared stable (some breaking
+  changes are still in the work in the area of LINQ).
 - Support the .NET Standard v1.0 and the PCL profile Profile259.
 - Test coverage is starting to look good (75%). The number of functional tests
   is progressing too.
@@ -16,13 +16,15 @@ sequence generators and LINQ extensions.
 
 ### Content
 - [Overview](#overview)
-- [Unit Type](#maybe-type)
+- [Unit Type](#unit-type)
 - [Maybe Type](#maybe-type)
+- [Nullable Type](#nullable-type)
 - [Error Types](#error-types)
 - [Either Type](#either-type)
 - [Query Operators](#query-operators)
-- [Utilities](#utilities)
-- [Monadic API Tour](#monadic-api-tour)
+- [Generators](#generators)
+- [Recursion](#recursion)
+- [Tour of the Monad Verbs](#tour-of-the-monad-verbs)
 - [Haskell to C# Walk-Through](#haskell-to-C-walk-through)
 - [Typologia](#typologia)
 - [Design Notes](#design-notes)
@@ -93,13 +95,19 @@ The CLR includes a [void type](https://github.com/dotnet/coreclr/blob/master/src
 Maybe Type
 ----------
 
+- Construction / Deconstruction
+- Querying
+- Matching
+- Programming with Side-Effects
+- Beyond the Basics
+
 The `Maybe<T>` struct is a lot like the `Nullable<T>` class but without any
 restriction on the underlying type: _it provides a way to tell the absence or
 the presence of a value_ - this class is sometimes referred to as the _Option type_.
 
 There is a [proposal](https://github.com/dotnet/csharplang/blob/master/proposals/nullable-reference-types.md)
 to add nullable reference types to C#, nevertheless it won't render this type
-obsolete; even if they might look similar, they carry different semantics.
+obsolete; even if they look similar, they carry different semantics.
 
 #### Construction / Deconstruction
 A `Maybe<T>` object exists in two states, it either contains a value or it does
@@ -108,21 +116,93 @@ not:
 var some = Maybe.Of("value");
 var none = Maybe<string>.None;
 ```
-You can check afterwards the status by querying the property `IsSome`, which is
-true in the first case and false in the second one - the property `IsNone` is
-the negation of `IsSome`. If it is easy to wrap a value into a maybe, but you
-will soon wonder why it is not possible to recover it later on - there is a
-property named `Value` exactly for that but it is only accessible internally.
-As we will learn, this is not the recommended way of doing things but, if
-you really insist, the type supports deconstruction:
+You can check afterwards the status of a maybe by querying the property `IsSome`,
+which is true in the first case and false in the second one - there is also a
+property `IsNone` which is the negation of `IsSome`. If it is easy to wrap a
+value into a maybe, but you will soon wonder why it is not possible to get back
+the value - there is a property named `Value` exactly for that but it is only
+accessible internally. As we will learn, this is not the way things work with
+monads but, if you really insist, the type supports deconstruction:
 ```csharp
 (bool isSome, T value) = maybe;
 ```
-The deconstruction is not a "safe" operation. Before accessing `value`, you
-should always check if `isSome` is true - when it is not, `value` is set to
-`default(T)`.
+Deconstruction is "unsafe", before accessing `value`, you should always check
+if `isSome` is true - when it is not, `value` is set to `default(T)` that is
+`null` for reference types.
 
-##### The Special Case of `T?`
+By using `Maybe.Of` with a nullable value type, e.g. `T?`, you end up with an
+object of type `Maybe<T>` **not** `Maybe<T?>`:
+```csharp
+int? value = ...;
+Maybe<int> maybe = Maybe.Of(value);
+```
+
+#### Querying
+The `Maybe<T>` type supports a subset of the [Query expression pattern](https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#the-query-expression-pattern),
+namely:
+
+Method | C# Query Expression Syntax
+------ | --------------------------
+`Select`     | `select`
+`Where`      | `where`
+`SelectMany` | Multiple `from` clauses.
+`Join`       | `join ... in ... on ... equals ...`
+`GroupJoin`  | `join ... in ... on ... equals ... into ...`
+
+##### `Select`
+If `maybe` is of type `Maybe<T>` and `selector` is a generic delegate
+type `Func<T, TResult>`, then one can write:
+```csharp
+var q = maybe.Select(selector);
+var q = from x in maybe select selector(x);
+```
+where `q` is of type `Maybe<TResult>`. The two syntaxes are strictly equivalent -
+the C# compiler will transform the later into the former. Which one to use is a
+matter of personal preferences, but notice how the query syntax makes it clear
+that the selector applies to the value `x` enclosed in the object `maybe`, if
+any. If `maybe` is "none", it does not contain any value and `q` is "none". This
+is also the result when the selector returns `null`, whatever is the state of
+`maybe`, "some" or "none".
+```csharp
+var none = Maybe<string>.None;
+none.Select(x => x.Length) ≡ Maybe<int>.None;
+
+var some = Maybe.Of("value");
+some.Select(x => x.Length)     ≡ Maybe.Of(5);
+some.Select(x => (string)null) ≡ Maybe<string>.None;
+```
+**Remark:** Of course, this is not valid C# code, but we will often use a virtual
+operator `≡` to say that both sides are equal.
+
+##### `Where`
+If `maybe` is of type `Maybe<T>` and `predicate` is a generic delegate
+type `Func<T, bool>`, then one can write equivalently:
+```csharp
+var q = maybe.Where(predicate)
+var q = from x in maybe where predicate(x) select x;
+```
+where `q` is of type `Maybe<T>`.
+
+##### `SelectMany`
+
+##### `Join`
+
+##### `GroupJoin`
+
+#### Matching
+
+#### Programming with Side-Effects
+
+#### Beyond the Basics
+
+##### Binding
+
+##### Value Extraction Revisited
+
+--------------------------------------------------------------------------------
+
+Nullable Type
+-------------
 
 --------------------------------------------------------------------------------
 
@@ -170,6 +250,8 @@ var failure = Outcome.FromError("My error message.");
 (bool succeed, string error) = outcome;
 ```
 
+#### Querying
+
 ### `Outcome<T>`
 
 #### Construction / Deconstruction
@@ -181,6 +263,8 @@ var failure = Outcome<int>.FromError("My error message.");
 ```csharp
 (bool succeed, T value, string error) = outcome;
 ```
+
+#### Querying
 
 ### `Fallible`
 
@@ -195,6 +279,8 @@ var failure = Fallible.FromError(edi);
 (bool succeed, ExceptionDispatchInfo exceptionInfo) = fallible;
 ```
 
+#### Querying
+
 ### `Fallible<T>`
 
 #### Construction / Deconstruction
@@ -208,6 +294,8 @@ var failure = Fallible<int>.FromError(edi);
 (bool succeed, T value, ExceptionDispatchInfo exceptionInfo) = fallible;
 ```
 
+#### Query Expression Syntax
+
 ### `Result<T, TError>`
 
 #### Construction / Deconstruction
@@ -220,10 +308,15 @@ var failure = Result<int, Error>.FromError(new Error());
 (bool succeed, T value, TError error) = result;
 ```
 
+#### Querying
+
 --------------------------------------------------------------------------------
 
 Either Type
 -----------
+
+The either type is the simplest possible
+[discriminated union](https://en.wikipedia.org/wiki/Tagged_union).
 
 #### Construction / Deconstruction
 ```csharp
@@ -234,6 +327,10 @@ var right = Either<int, long>.OfRight(1L);
 ```csharp
 (bool isLeft, TLeft left, TRight right) = either;
 ```
+
+#### Querying
+
+#### Matching
 
 --------------------------------------------------------------------------------
 
@@ -371,21 +468,22 @@ Aggregation | `Sum` (*) | `Maybe<T>` | -
 
 --------------------------------------------------------------------------------
 
-Utilities
----------
-
-### Infinite Sequences
-
-### Recursion
+Generators
+----------
 
 --------------------------------------------------------------------------------
 
-Monadic API Tour
-----------------
+Recursion
+---------
 
-### Core API
+--------------------------------------------------------------------------------
 
-### Derived API
+Tour of the Monad Verbs
+-----------------------
+
+### Core Verbs
+
+### Derived Verbs
 
 --------------------------------------------------------------------------------
 
@@ -612,7 +710,7 @@ There are two equivalent ways to define a Comonad:
 - `Counit`, `Cobind`
 - `Counit`, `Map`, `Comultiply`
 
-### Richer Monads
+### Monad Plus
 
 We follow (mostly) the proposed new terminology from the
 [MonadPlus Reform](http://www.haskell.org/haskellwiki/MonadPlus_reform_proposal).
@@ -640,9 +738,9 @@ A MonadOr is a monad which is also a monoid and for which `Unit` is
 a left zero for `Plus`. Here, we prefer to use `OrElse` instead of `Plus` for the
 monoid composition operation.
 
-### Computation or Container?
+### Computation vs Container
 
-### F# Computation Expressions
+#### F# Computation Expressions
 
 ### .NET Framework types
 
