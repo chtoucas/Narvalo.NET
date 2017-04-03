@@ -26,6 +26,8 @@ namespace Narvalo.Applicative
     {
         private Either() { }
 
+        public abstract void Deconstruct(out bool isLeft, out TLeft left, out TRight right);
+
         public abstract bool IsLeft { get; }
 
         public bool IsRight => !IsLeft;
@@ -48,13 +50,6 @@ namespace Narvalo.Applicative
 
         public abstract Either<TRight, TLeft> SwapUnchecked();
 
-        public void Deconstruct(out bool isLeft, out TLeft left, out TRight right)
-        {
-            isLeft = IsLeft;
-            left = Left;
-            right = Right;
-        }
-
         /// <summary>
         /// Represents the left side of the <see cref="Either{TLeft, TRight}"/> type.
         /// </summary>
@@ -62,6 +57,13 @@ namespace Narvalo.Applicative
         private sealed partial class Left_ : Either<TLeft, TRight>, IEquatable<Left_>
         {
             public Left_(TLeft value) => Left = value;
+
+            public override void Deconstruct(out bool isLeft, out TLeft left, out TRight right)
+            {
+                isLeft = true;
+                left = Left;
+                right = default(TRight);
+            }
 
             public override bool IsLeft => true;
 
@@ -116,6 +118,13 @@ namespace Narvalo.Applicative
         private sealed partial class Right_ : Either<TLeft, TRight>, IEquatable<Right_>
         {
             public Right_(TRight value) => Right = value;
+
+            public override void Deconstruct(out bool isLeft, out TLeft left, out TRight right)
+            {
+                isLeft = false;
+                left = default(TLeft);
+                right = Right;
+            }
 
             public override bool IsLeft => false;
 
