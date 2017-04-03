@@ -69,9 +69,9 @@ Narvalo.Fx
 - Add variants of `CollectAny` and co on the right for Either?
 - Remove `ZipWith` resp. `SelectWith`? Check that (here) `SelectWith` is just
   a `Select` wrapped into a monad.
+- Add `MapMany` to `Outcome` and `Fallible`....
 
 Next:
-- Add `MapMany` to `Outcome` and `Fallible`....
 - Add other monads - prototypes [here](https://github.com/chtoucas/Brouillons/tree/master/src/play/Functional/Monadic)
 - `OnError()`, `WhenError()` & co could return a boolean to signal when they
   actually did something.

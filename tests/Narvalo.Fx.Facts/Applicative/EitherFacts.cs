@@ -55,20 +55,20 @@ namespace Narvalo.Applicative {
         [t("Deconstruct() if lefty.")]
         public static void Deconstruct1() {
             var exp = new Obj();
-            var either = Either<Obj, string>.OfLeft(exp);
+            var either = Either<Obj, int>.OfLeft(exp);
             var (isLeft, left, right) = either;
             Assert.True(isLeft);
             Assert.Same(exp, left);
-            Assert.Null(right);
+            Assert.Equal(default(int), right);
         }
 
         [t("Deconstruct() if righty.")]
         public static void Deconstruct2() {
             var exp = new Obj();
-            var either = Either<string, Obj>.OfRight(exp);
+            var either = Either<int, Obj>.OfRight(exp);
             var (isLeft, left, right) = either;
             Assert.False(isLeft);
-            Assert.Null(left);
+            Assert.Equal(default(int), left);
             Assert.Same(exp, right);
         }
 

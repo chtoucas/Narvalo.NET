@@ -86,7 +86,7 @@ interesting are [Optional](https://github.com/nlkl/Optional), and
 [RailwaySharp](https://github.com/gsscoder/railwaysharp) for Railway Oriented
 Programming. Why write another one? This project started as an exercise to better
 understand monads, it just happened that I thought it was strong enough to be
-published. Of course, I also prefer my version too :relaxed:.
+published. Of course, I prefer my version too :relaxed:.
 
 #### References
 - Railway Oriented Programming, [explanation](http://fsharpforfunandprofit.com/rop)
@@ -107,8 +107,9 @@ The CLR includes a [void type](https://github.com/dotnet/coreclr/blob/master/src
 Maybe Type
 ----------
 
-We discuss `Maybe<T>` in full-length, the type is simple enough to investigate
-many principles also applicable to the other monads.
+We discuss `Maybe<T>` at length, the type is simple enough it's well worth the
+time spent to investigate many principles that will be applicable to the other
+monads.
 
 - Construction / Deconstruction
 - Querying
@@ -118,11 +119,15 @@ many principles also applicable to the other monads.
 
 The `Maybe<T>` struct is a lot like the `Nullable<T>` class but without any
 restriction on the underlying type: _it provides a way to tell the absence or
-the presence of a value_ - this class is sometimes referred to as the _Option type_.
+the presence of a value_ - this class is usually referred to as the
+_[option type](https://en.wikipedia.org/wiki/Option_type)_.
 
 There is a [proposal](https://github.com/dotnet/csharplang/blob/master/proposals/nullable-reference-types.md)
-to add nullable reference types to C#, nevertheless it won't render this type
-obsolete; even if they look similar, they satisfy different needs.
+to add nullable reference types to C#, nevertheless it should not render this
+type obsolete. Even if the two types share the same objective, I think that they
+will be used in different situations: `Maybe<T>` forces you to handle the
+exceptional case, while a nullable value type does not - you can call the
+property `Value` even if `HasValue` is false.
 
 #### Construction / Deconstruction
 A `Maybe<T>` object exists in two states, it either contains a value or it does
@@ -146,11 +151,18 @@ Deconstruction is "unsafe", before accessing `value`, you should always check
 if `isSome` is true - when it is not, `value` is set to `default(T)` that is
 `null` for reference types.
 
-By using `Maybe.Of` with a nullable value type, e.g. `T?`, you end up with an
-object of type `Maybe<T>` **not** `Maybe<T?>`:
+When it comes to value types, there is really no reason to use `Maybe<T?>`
+instead of `Maybe<T>`. For this exact reason, by using `Maybe.Of` with a
+nullable value type, e.g. `T?`, you end up with an object of type `Maybe<T>`
+**not** `Maybe<T?>`:
 ```csharp
-int? value = ...;
+int? value = 1;
 Maybe<int> maybe = Maybe.Of(value);
+```
+It is still possible to...
+```csharp
+Maybe<T?> maybe = ...;
+(bool isSome, T value) = maybe;
 ```
 
 #### Querying
