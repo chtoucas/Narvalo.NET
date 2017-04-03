@@ -13,14 +13,25 @@ namespace Narvalo.Applicative
     public static partial class Maybe { }
 
     // Provides extension methods for Maybe<T?> or Maybe<T> where T is a struct.
-    // When it comes to value types, there is really no reason to use Maybe<T> or Maybe<T?>
-    // instead of T?. NB: It is still possible to construct indirectly such objects via Bind().
     public static partial class Maybe
     {
         // Conversion from T? to Maybe<T>.
         // NB: This method makes it impossible to create a Maybe<T?> **directly**.
         public static Maybe<T> Of<T>(T? value) where T : struct
             => value.HasValue ? Of(value.Value) : Maybe<T>.None;
+
+        public static void Deconstruct<T>(
+            this Maybe<T?> @this, out bool isSome, out T value) where T : struct
+        {
+            isSome = @this.IsSome;
+            value = @this.IsSome && @this.Value.HasValue ? @this.Value.Value : default(T);
+        }
+
+        // Conversion from Maybe<T?> to  Maybe<T>.
+        public static Maybe<T> Flatten<T>(this Maybe<T?> @this) where T : struct
+            => @this.IsSome && @this.Value.HasValue
+            ? Maybe.Of(@this.Value.Value)
+            : Maybe<T>.None;
 
         // Conversion from Maybe<T> to T?.
         public static T? ToNullable<T>(this Maybe<T> @this) where T : struct
