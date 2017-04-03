@@ -3,8 +3,8 @@ Narvalo.Fx
 
 Features implementations of some of the usual suspects from functional
 programming: option type (`Maybe<T>`), error types (`Result<T, TError>`,
-`Outcome<T>` and `Fallible<T>`), simple disjoint union (`Either<T1, T2>`),
-sequence generators and LINQ extensions.
+`Outcome<T>` and `Fallible<T>`) for Railway Oriented Programming, simple
+disjoint union (`Either<T1, T2>`), sequence generators and LINQ extensions.
 
 ### Status
 - The next release should be the first one to be declared stable (some breaking
@@ -57,7 +57,6 @@ The main namespace (`Narvalo.Applicative`) includes:
 The other namespace (`Narvalo.Linq`) is dedicated to the definition of new
 query operators.
 
-### Remarks
 The types `Maybe<T>`, `Outcome<T>`, `Fallible<T>`, `Result<T, TError>` and
 `Either<T1, T2>` are examples of **monads**, a concept popularized by the
 [Haskell](https://www.haskell.org/) language. If you know nothing about monads
@@ -80,6 +79,19 @@ convinced of their usefulness and practicability (for skeleton definitions of
 `IO`, `Reader` and `State`,
 see [here](https://github.com/chtoucas/Brouillons/tree/master/src/play/Functional/Monadic)).
 
+If you go to the [NuGet website](https://www.nuget.org), you will find many
+packages that solve the same problems as we do; those that I found most
+interesting are [Optional](https://github.com/nlkl/Optional), and
+[Chessie](https://github.com/fsprojects/Chessie) or
+[RailwaySharp](https://github.com/gsscoder/railwaysharp) for Railway Oriented
+Programming. Why write another one? This project started as an exercise to better
+understand monads, it just happened that I thought it was strong enough to be
+published. Of course, I also prefer my version too :relaxed:.
+
+#### References
+- Railway Oriented Programming, [explanation](http://fsharpforfunandprofit.com/rop)
+  and [sample codes](https://github.com/swlaschin/Railway-Oriented-Programming-Example)
+
 --------------------------------------------------------------------------------
 
 Unit Type
@@ -95,6 +107,9 @@ The CLR includes a [void type](https://github.com/dotnet/coreclr/blob/master/src
 Maybe Type
 ----------
 
+We discuss `Maybe<T>` in full-length, the type is simple enough to investigate
+many principles also applicable to the other monads.
+
 - Construction / Deconstruction
 - Querying
 - Matching
@@ -107,11 +122,12 @@ the presence of a value_ - this class is sometimes referred to as the _Option ty
 
 There is a [proposal](https://github.com/dotnet/csharplang/blob/master/proposals/nullable-reference-types.md)
 to add nullable reference types to C#, nevertheless it won't render this type
-obsolete; even if they look similar, they carry different semantics.
+obsolete; even if they look similar, they satisfy different needs.
 
 #### Construction / Deconstruction
 A `Maybe<T>` object exists in two states, it either contains a value or it does
-not:
+not. The constructor being private, to create a new instance, you use the static
+factory method `Maybe.Of` or the static property `Maybe<T>.None`:
 ```csharp
 var some = Maybe.Of("value");
 var none = Maybe<string>.None;
@@ -195,7 +211,7 @@ where `q` is of type `Maybe<T>`.
 
 #### Beyond the Basics
 
-##### Binding
+##### Binding, a First Taste of Monads
 
 ##### Value Extraction Revisited
 
@@ -208,6 +224,13 @@ Nullable Type
 
 Error Types
 -----------
+
+- Railway Oriented Programming
+- `Outcome`
+- `Outcome<T>`
+- `Fallible`
+- `Fallible<T>`
+- `Result<T, TError>`
 
 Typical use cases:
 - To encapsulate the result of a computation with lightweight error reporting
@@ -240,7 +263,6 @@ Remarks:
 
 ### `Outcome`
 
-#### Construction / Deconstruction
 ```csharp
 var success = Outcome.Ok;
 var failure = Outcome.FromError("My error message.");
@@ -250,11 +272,8 @@ var failure = Outcome.FromError("My error message.");
 (bool succeed, string error) = outcome;
 ```
 
-#### Querying
-
 ### `Outcome<T>`
 
-#### Construction / Deconstruction
 ```csharp
 var success = Outcome.Of(1);
 var failure = Outcome<int>.FromError("My error message.");
@@ -264,11 +283,8 @@ var failure = Outcome<int>.FromError("My error message.");
 (bool succeed, T value, string error) = outcome;
 ```
 
-#### Querying
-
 ### `Fallible`
 
-#### Construction
 If `edi` is an object of type `ExceptionDispatchInfo`:
 ```csharp
 var success = Fallible.Ok;
@@ -279,11 +295,8 @@ var failure = Fallible.FromError(edi);
 (bool succeed, ExceptionDispatchInfo exceptionInfo) = fallible;
 ```
 
-#### Querying
-
 ### `Fallible<T>`
 
-#### Construction / Deconstruction
 If `edi` is an object of type `ExceptionDispatchInfo`:
 ```csharp
 var success = Fallible.Of(1);
@@ -294,11 +307,8 @@ var failure = Fallible<int>.FromError(edi);
 (bool succeed, T value, ExceptionDispatchInfo exceptionInfo) = fallible;
 ```
 
-#### Query Expression Syntax
-
 ### `Result<T, TError>`
 
-#### Construction / Deconstruction
 ```csharp
 var success = Result<int, Error>.Of(1);
 var failure = Result<int, Error>.FromError(new Error());
@@ -307,8 +317,6 @@ var failure = Result<int, Error>.FromError(new Error());
 ```csharp
 (bool succeed, T value, TError error) = result;
 ```
-
-#### Querying
 
 --------------------------------------------------------------------------------
 

@@ -7,15 +7,15 @@
     <PackageTitle>Narvalo Monads and functional extensions for C#</PackageTitle>
     <PackageSummary>
       <![CDATA[
-Features implementations of various monads (Option, Error, Either), sequence generators and LINQ extensions.
+Features implementations of various monads, Railway Oriented Programming, sequence generators and LINQ extensions.
       ]]>
     </PackageSummary>
     <PackageDescription>
       <![CDATA[
-Features implementations of some of the usual suspects from functional programming: option type (Maybe&lt;T&gt;), error types (Result&lt;T, TError&gt;, Outcome&lt;T&gt; and Fallible&lt;T&gt;), simple disjoint union (Either&lt;T1, T2&gt;), (finite and infinite) sequence generators and LINQ extensions.
+Features implementations of some of the usual suspects from functional programming: option type (Maybe&lt;T&gt;), error types (Result&lt;T, TError&gt;, Outcome&lt;T&gt; and Fallible&lt;T&gt;) for Railway Oriented Programming, simple disjoint union (Either&lt;T1, T2&gt;), (finite and infinite) sequence generators and LINQ extensions.
       ]]>
     </PackageDescription>
-    <PackageTags>Maybe, Option, Error, Either, Linq, Monad, Functional</PackageTags>
+    <PackageTags>Maybe, Option, Error, ROP, Either, Linq, Monad, Functional</PackageTags>
 
     <NuReferences>
       <![CDATA[
