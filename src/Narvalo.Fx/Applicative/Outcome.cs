@@ -19,6 +19,12 @@ namespace Narvalo.Applicative
             IsError = true;
         }
 
+        public void Deconstruct(out bool succeed, out string error)
+        {
+            succeed = IsSuccess;
+            error = _error;
+        }
+
         /// <summary>
         /// Gets a value indicating whether the object is the result of an unsuccessful computation.
         /// </summary>
@@ -36,12 +42,6 @@ namespace Narvalo.Applicative
         [ExcludeFromCodeCoverage]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
         private string DebuggerDisplay => IsError ? "Error" : "Success";
-
-        public void Deconstruct(out bool succeed, out string error)
-        {
-            succeed = IsSuccess;
-            error = _error;
-        }
 
         public override string ToString() => IsError ? "Error(" + Error + ")" : "Success";
 

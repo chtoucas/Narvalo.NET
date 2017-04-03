@@ -99,6 +99,23 @@ namespace Narvalo.Applicative {
             Assert.False(m2.IsSome);
         }
 
+        [t("Deconstruct() if some.")]
+        public static void Deconstruct1() {
+            var exp = new Obj();
+            var some = Maybe.Of(exp);
+            var (isSome, value) = some;
+            Assert.True(isSome);
+            Assert.Same(exp, value);
+        }
+
+        [t("Deconstruct() if none.")]
+        public static void Deconstruct2() {
+            var none = Maybe<Obj>.None;
+            var (isSome, value) = none;
+            Assert.False(isSome);
+            Assert.Null(value);
+        }
+
         [t("ValueOrDefault() returns Value if some.")]
         public static void ValueOrDefault1() {
             var exp = new Obj();

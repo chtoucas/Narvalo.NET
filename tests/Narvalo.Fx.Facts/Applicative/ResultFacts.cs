@@ -13,6 +13,26 @@ namespace Narvalo.Applicative {
 
     // Tests for Result<T, TError>.
     public static partial class ResultFacts {
+        [t("Deconstruct() if OK.")]
+        public static void Deconstruct1() {
+            var exp = new Obj();
+            var ok = Result<Obj, string>.Of(exp);
+            var (succeed, value, err) = ok;
+            Assert.True(succeed);
+            Assert.Same(exp, value);
+            Assert.Null(err);
+        }
+
+        [t("Deconstruct() if NOK.")]
+        public static void Deconstruct2() {
+            var exp = new Obj();
+            var nok = Result<string, Obj>.FromError(exp);
+            var (succeed, value, err) = nok;
+            Assert.False(succeed);
+            Assert.Null(value);
+            Assert.Same(exp, err);
+        }
+
         [t("ThrowIfError() does not throw if OK.")]
         public static void ThrowIfError1() {
             var ok = Result<Obj, Exception>.Of(new Obj());

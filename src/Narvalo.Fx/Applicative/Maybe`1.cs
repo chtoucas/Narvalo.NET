@@ -38,6 +38,12 @@ namespace Narvalo.Applicative
             IsSome = true;
         }
 
+        public void Deconstruct(out bool isSome, out T value)
+        {
+            isSome = IsSome;
+            value = _value;
+        }
+
         /// <summary>
         /// Gets a value indicating whether the object does hold a value.
         /// </summary>
@@ -90,12 +96,6 @@ namespace Narvalo.Applicative
             Require.NotNull(exceptionFactory, nameof(exceptionFactory));
 
             return IsSome ? Value : throw exceptionFactory();
-        }
-
-        public void Deconstruct(out bool isSome, out T value)
-        {
-            isSome = IsSome;
-            value = _value;
         }
 
         public override string ToString() => IsSome ? "Maybe(" + Value.ToString() + ")" : "Maybe(None)";

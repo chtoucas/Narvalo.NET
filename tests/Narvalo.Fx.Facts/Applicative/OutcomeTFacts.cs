@@ -41,6 +41,26 @@ namespace Narvalo.Applicative {
             Assert.False(nok.IsSuccess);
         }
 
+        [t("Deconstruct() if OK.")]
+        public static void Deconstruct1() {
+            var exp = new Obj();
+            var ok = Outcome.Of(exp);
+            var (succeed, value, err) = ok;
+            Assert.True(succeed);
+            Assert.Equal(String.Empty, err);
+            Assert.Same(exp, value);
+        }
+
+        [t("Deconstruct() if NOK.")]
+        public static void Deconstruct2() {
+            var exp = "error";
+            var nok = Outcome<Obj>.FromError(exp);
+            var (succeed, value, err) = nok;
+            Assert.False(succeed);
+            Assert.Equal(exp, err);
+            Assert.Null(value);
+        }
+
         [t("ValueOrDefault() returns Value if OK.")]
         public static void ValueOrDefault1() {
             var exp = new Obj();

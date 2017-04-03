@@ -4,8 +4,6 @@ namespace Narvalo.Applicative {
     using System;
     using System.Collections.Generic;
 
-    using Xunit;
-
     using static global::My;
 
     using Assert = Narvalo.AssertExtended;
@@ -52,6 +50,26 @@ namespace Narvalo.Applicative {
         public static void Right2() {
             var either = Either<Obj, Obj>.OfLeft(new Obj("left"));
             Assert.Throws<InvalidOperationException>(() => either.Right);
+        }
+
+        [t("Deconstruct() if lefty.")]
+        public static void Deconstruct1() {
+            var exp = new Obj();
+            var either = Either<Obj, string>.OfLeft(exp);
+            var (isLeft, left, right) = either;
+            Assert.True(isLeft);
+            Assert.Same(exp, left);
+            Assert.Null(right);
+        }
+
+        [t("Deconstruct() if righty.")]
+        public static void Deconstruct2() {
+            var exp = new Obj();
+            var either = Either<string, Obj>.OfRight(exp);
+            var (isLeft, left, right) = either;
+            Assert.False(isLeft);
+            Assert.Null(left);
+            Assert.Same(exp, right);
         }
 
         [t("LeftOrNone() returns none if righty.")]

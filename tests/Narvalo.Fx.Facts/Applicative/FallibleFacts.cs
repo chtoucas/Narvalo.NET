@@ -29,6 +29,22 @@ namespace Narvalo.Applicative {
             Assert.False(nok.IsSuccess);
         }
 
+        [t("Deconstruct() if OK.")]
+        public static void Deconstruct1() {
+            var ok = Fallible.Ok;
+            var (succeed, err) = ok;
+            Assert.True(succeed);
+            Assert.Null(err);
+        }
+
+        [t("Deconstruct() if NOK.")]
+        public static void Deconstruct2() {
+            var nok = Fallible.FromError(Error);
+            var (succeed, err) = nok;
+            Assert.False(succeed);
+            Assert.Same(Error, err);
+        }
+
         [t("ThrowIfError() does not throw if OK.")]
         public static void ThrowIfError1() {
             var ok = Fallible.Ok;

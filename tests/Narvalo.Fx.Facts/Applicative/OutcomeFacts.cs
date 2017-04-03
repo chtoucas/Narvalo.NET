@@ -27,6 +27,22 @@ namespace Narvalo.Applicative {
             Assert.True(nok.IsError);
         }
 
+        [t("Deconstruct() if OK.")]
+        public static void Deconstruct1() {
+            var ok = Outcome.Ok;
+            var (succeed, err) = ok;
+            Assert.True(succeed);
+            Assert.Null(err);
+        }
+
+        [t("Deconstruct() if NOK.")]
+        public static void Deconstruct2() {
+            var nok = Outcome.FromError("error");
+            var (succeed, err) = nok;
+            Assert.False(succeed);
+            Assert.Equal("error", err);
+        }
+
         [t("== and != when both sides are NOK.")]
         public static void Equality1() {
             var nok1 = Outcome.FromError("error");

@@ -49,6 +49,16 @@ namespace Narvalo.Applicative
             IsSuccess = false;
         }
 
+        public void Deconstruct(
+            out bool succeed,
+            out T value,
+            out ExceptionDispatchInfo exceptionInfo)
+        {
+            succeed = IsSuccess;
+            value = _value;
+            exceptionInfo = _error;
+        }
+
         /// <summary>
         /// Gets a value indicating whether the object is the result of a successful computation.
         /// </summary>
@@ -108,16 +118,6 @@ namespace Narvalo.Applicative
         {
             if (IsError) { Error.Throw(); }
             return Value;
-        }
-
-        public void Deconstruct(
-            out bool succeed,
-            out T value,
-            out ExceptionDispatchInfo exceptionInfo)
-        {
-            succeed = IsSuccess;
-            value = _value;
-            exceptionInfo = _error;
         }
 
         public override string ToString()
