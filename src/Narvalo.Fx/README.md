@@ -17,7 +17,7 @@ disjoint union (`Either<T1, T2>`), sequence generators and LINQ extensions.
 ### Content
 - [Overview](#overview)
 - [Unit Type](#unit-type)
-- [Querying a Nullable](#querying-a-nullable)
+- [Nullable Type](#nullable-type)
 - [Maybe Type](#maybe-type)
 - [Railway Oriented Programming](#railway-oriented-programming)
 - [Either Type](#either-type)
@@ -124,8 +124,8 @@ the _empty tuple literal_ `()`.
 
 --------------------------------------------------------------------------------
 
-Querying a Nullable
--------------------
+Nullable Type
+-------------
 
 Importing the namespace `Narvalo.Applicable` enables a subset of the
 [Query expression pattern](https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#the-query-expression-pattern)
@@ -137,17 +137,60 @@ Method | C# Query Expression Syntax
 `Where`      | `where`
 `SelectMany` | Multiple `from` clauses.
 
+#### `Select`
 ```csharp
-int? x = 2;
-int? y = 1;
-// q1 is (int?)4
-var q1 = from i in x select i * i;
-// q2 is (int?)null
-var q2 = from i in y where i % 2 == 0 select i;
-// q3 is (int?)3
-var q3 = from i in x
-         from j in y
-         select i + j;
+short? x = 1;
+Func<short, int> selector = i => i * i;
+
+int? q = x.Select(selector);
+int? q = from i in x select selector(i);
+```
+
+#### `Where`
+```csharp
+int? x = 1;
+Func<int, bool> predicate = i => i % 2 == 0;
+
+int? q = x.Where(predicate);
+int? q = from i in x where predicate(i) select i;
+```
+
+#### `SelectMany`
+Cross join,
+```csharp
+short? x = 1;
+int? y = 2;
+Func<short, int, long> resultSelector = (i, j) => i + j;
+
+long? q = x.SelectMany(_ => y, resultSelector);
+long? q = from i in x
+          from j in y
+          select resultSelector(i, j);
+```
+Outer join,
+```csharp
+short? x = 1;
+Func<short, int?> valueSelector = i => 2 * i;
+Func<short, int, long> resultSelector = (i, j) => i + j;
+
+long? q = source.SelectMany(valueSelector, resultSelector);
+long? q = from i in x
+          from j in valueSelector(i)
+          select resultSelector(i, j);
+```
+
+### Binding
+```csharp
+short? x = 1;
+Func<short, int?> binder = i => 2 * i;
+
+int? q = x.Bind(binder);
+```
+```csharp
+int? q = x.SelectMany(binder, (_, j) => j);
+int? q = from i in x
+         from j in binder(i)
+         select j;
 ```
 
 --------------------------------------------------------------------------------
@@ -179,7 +222,7 @@ will be used in different situations: `Maybe<T>` forces you to handle the
 exceptional case, while a nullable value type does not - nothing prevents you
 from calling the property `Value`, even if `HasValue` is false.
 
-#### Construction / Deconstruction
+### Construction / Deconstruction
 A `Maybe<T>` object exists in two states, it either contains a value or it does
 not. The constructor being private, to create a new instance, you use the static
 factory method `Maybe.Of` or the static property `Maybe<T>.None`:
@@ -221,7 +264,7 @@ var maybe = Maybe<int?>.None;
 Maybe<int> better = maybe.Flatten();
 ```
 
-#### Give me back the value!
+### Give me back the value!
 
 To repeat myself, this is not a recommended practice. Anyway,
 - `ValueOrDefault()` returns the enclosed value if any; otherwise the default
@@ -234,11 +277,11 @@ To repeat myself, this is not a recommended practice. Anyway,
   `InvalidOperationException`. There is also an overload which accepts a factory
    as parameter.
 
-#### Matching
+### Matching
 
-#### Programming with side-effects
+### Programming with side-effects
 
-#### Querying
+### Querying
 The `Maybe<T>` type supports a subset of the [Query expression pattern](https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#the-query-expression-pattern),
 namely:
 
@@ -250,7 +293,7 @@ Method | C# Query Expression Syntax
 `Join`       | `join ... in ... on ... equals ...`
 `GroupJoin`  | `join ... in ... on ... equals ... into ...`
 
-##### `Select`
+#### `Select`
 If `maybe` is of type `Maybe<T>` and `selector` is a generic delegate
 type `Func<T, TResult>`, then one can write:
 ```csharp
@@ -275,7 +318,7 @@ some.Select(x => (string)null) ≡ Maybe<string>.None;
 **Remark:** Of course, this is not valid C# code, but we will often use a virtual
 operator `≡` to say that both sides are equal.
 
-##### `Where`
+#### `Where`
 If `maybe` is of type `Maybe<T>` and `predicate` is a generic delegate
 type `Func<T, bool>`, then one can write equivalently:
 ```csharp
@@ -284,17 +327,17 @@ var q = from x in maybe where predicate(x) select x;
 ```
 where `q` is of type `Maybe<T>`.
 
-##### `SelectMany`
+#### `SelectMany`
 
-##### `Join`
+#### `Join`
 
-##### `GroupJoin`
+#### `GroupJoin`
 
-#### Beyond the basics
+### Beyond the basics
 
-##### Binding, a First Taste of Monads
+#### Binding, a First Taste of Monads
 
-#### Design Notes
+### Design Notes
 
 [Struct vs Class] [Storage]
 

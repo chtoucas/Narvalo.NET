@@ -12,13 +12,13 @@ namespace Narvalo.Applicative {
 
         [t("Select() returns null if null.")]
         public static void Select1() {
-            int? source = null;
-            Func<int, int> selector = x => x;
+            short? source = null;
+            Func<short, int> selector = x => x;
 
-            var m = source.Select(selector);
+            int? m = source.Select(selector);
             Assert.Null(m);
 
-            var q = from _ in source select selector(_);
+            int? q = from _ in source select selector(_);
             Assert.Null(q);
         }
 
@@ -27,11 +27,11 @@ namespace Narvalo.Applicative {
             int? source = 1;
             Func<int, int> selector = x => 2 * x;
 
-            var m = source.Select(selector);
+            int? m = source.Select(selector);
             Assert.NotNull(m);
             Assert.Equal(2, m.Value);
 
-            var q = from _ in source select selector(_);
+            int? q = from _ in source select selector(_);
             Assert.NotNull(q);
             Assert.Equal(2, q.Value);
         }
@@ -42,16 +42,16 @@ namespace Narvalo.Applicative {
             Func<int, bool> pass = _ => true;
             Func<int, bool> fail = _ => true;
 
-            var m1 = source.Where(pass);
+            int? m1 = source.Where(pass);
             Assert.Null(m1);
 
-            var m2 = source.Where(fail);
+            int? m2 = source.Where(fail);
             Assert.Null(m2);
 
-            var q1 = from _ in source where pass(_) select _;
+            int? q1 = from _ in source where pass(_) select _;
             Assert.Null(q1);
 
-            var q2 = from _ in source where fail(_) select _;
+            int? q2 = from _ in source where fail(_) select _;
             Assert.Null(q2);
         }
 
@@ -60,11 +60,11 @@ namespace Narvalo.Applicative {
             int? source = 1;
             Func<int, bool> predicate = _ => true;
 
-            var m = source.Where(predicate);
+            int? m = source.Where(predicate);
             Assert.NotNull(m);
             Assert.Equal(1, m.Value);
 
-            var q = from _ in source where predicate(_) select _;
+            int? q = from _ in source where predicate(_) select _;
             Assert.NotNull(q);
             Assert.Equal(1, q.Value);
         }
@@ -74,75 +74,128 @@ namespace Narvalo.Applicative {
             int? source = 1;
             Func<int, bool> predicate = _ => false;
 
-            var m = source.Where(predicate);
+            int? m = source.Where(predicate);
             Assert.Null(m);
 
-            var q = from _ in source where predicate(_) select _;
+            int? q = from _ in source where predicate(_) select _;
             Assert.Null(q);
+        }
+
+        [t("Bind() applies binder if non-null.")]
+        public static void Bind1() {
+            (short, short)? source = (1, 2);
+            Func<(short, short), int?> binder = t => t.Item2 + 1;
+
+            int? m = source.Bind(binder);
+            Assert.NotNull(m);
+            Assert.Equal(3, m.Value);
+
+            // Bind via SelectMany.
+            int? m1 = source.SelectMany(binder, (_, j) => j);
+            Assert.NotNull(m1);
+            Assert.Equal(3, m1.Value);
+
+            // Bind via SelectMany using the query syntax.
+            int? q1 = from t in source
+                      from j in binder(t)
+                      select j;
+            Assert.NotNull(q1);
+            Assert.Equal(3, q1.Value);
+        }
+
+        [t("Bind() returns null if null.")]
+        public static void Bind2() {
+            (short, short)? source = null;
+            Func<(short, short), int?> binder = t => t.Item2 + 1;
+
+            int? m = source.Bind(binder);
+            Assert.Null(m);
+        }
+
+        [t("Bind() returns null if non-null and binder returns null.")]
+        public static void Bind3() {
+            (short, short)? source = (1, 2);
+            Func<(short, short), int?> binder = t => null;
+
+            int? m = source.Bind(binder);
+            Assert.Null(m);
         }
 
         [t("SelectMany() returns null if null and middle is non-null.")]
         public static void SelectMany1() {
-            int? source = null;
-            int? middle = 2;
-            Func<int, int?> valueSelector = x => 2 * x;
-            Func<int, int, int> resultSelector = (i, j) => i + j;
+            short? source = null;
+            Func<short, int?> valueSelector = i => 2 * i;
+            Func<short, int, long> resultSelector = (i, j) => i + j;
 
-            var m = source.SelectMany(valueSelector, resultSelector);
+            long? m = source.SelectMany(valueSelector, resultSelector);
             Assert.Null(m);
 
-            var q = from i in source
-                    from j in middle
-                    select resultSelector(i, j);
+            long? q = from i in source
+                      from j in valueSelector(i)
+                      select resultSelector(i, j);
             Assert.Null(q);
         }
 
         [t("SelectMany() returns null if null and middle is null.")]
         public static void SelectMany2() {
-            int? source = null;
-            int? middle = null;
-            Func<int, int?> valueSelector = _ => middle;
-            Func<int, int, int> resultSelector = (i, j) => i + j;
+            short? source = null;
+            Func<short, int?> valueSelector = _ => null;
+            Func<short, int, long> resultSelector = (i, j) => i + j;
 
-            var m = source.SelectMany(valueSelector, resultSelector);
+            long? m = source.SelectMany(valueSelector, resultSelector);
             Assert.Null(m);
 
-            var q = from i in source
-                    from j in middle
-                    select resultSelector(i, j);
+            long? q = from i in source
+                      from j in valueSelector(i)
+                      select resultSelector(i, j);
             Assert.Null(q);
         }
 
         [t("SelectMany() returns null if non-null and middle is null.")]
         public static void SelectMany3() {
-            int? source = 1;
-            int? middle = null;
-            Func<int, int?> valueSelector = _ => null;
-            Func<int, int, int> resultSelector = (i, j) => i + j;
+            short? source = 1;
+            Func<short, int?> valueSelector = _ => null;
+            Func<short, int, long> resultSelector = (i, j) => i + j;
 
-            var m = source.SelectMany(valueSelector, resultSelector);
+            long? m = source.SelectMany(valueSelector, resultSelector);
             Assert.Null(m);
 
-            var q = from i in source
-                    from j in middle
-                    select resultSelector(i, j);
+            long? q = from i in source
+                      from j in valueSelector(i)
+                      select resultSelector(i, j);
             Assert.Null(q);
         }
 
         [t("SelectMany() applies selectors if non-null and middle is non-null.")]
         public static void SelectMany4() {
-            int? source = 1;
-            int? middle = 2;
-            Func<int, int?> valueSelector = _ => middle;
-            Func<int, int, int> resultSelector = (i, j) => i + j;
+            short? source = 1;
+            Func<short, int?> valueSelector = i => 2 * i;
+            Func<short, int, long> resultSelector = (i, j) => i + j;
 
-            var m = source.SelectMany(valueSelector, resultSelector);
+            long? m = source.SelectMany(valueSelector, resultSelector);
             Assert.NotNull(m);
             Assert.Equal(3, m.Value);
 
-            var q = from i in source
-                    from j in middle
-                    select resultSelector(i, j);
+            long? q = from i in source
+                      from j in valueSelector(i)
+                      select resultSelector(i, j);
+            Assert.NotNull(q);
+            Assert.Equal(3, q.Value);
+        }
+
+        [t("SelectMany() cross-join.")]
+        public static void SelectMany5() {
+            short? source = 1;
+            int? middle = 2;
+            Func<short, int, long> resultSelector = (i, j) => i + j;
+
+            long? m = source.SelectMany(_ => middle, resultSelector);
+            Assert.NotNull(m);
+            Assert.Equal(3, m.Value);
+
+            long? q = from i in source
+                      from j in middle
+                      select resultSelector(i, j);
             Assert.NotNull(q);
             Assert.Equal(3, q.Value);
         }

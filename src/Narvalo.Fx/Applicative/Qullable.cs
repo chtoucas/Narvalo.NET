@@ -6,8 +6,22 @@ namespace Narvalo.Applicative
 
     using Narvalo;
 
+    public static partial class Qullable
+    {
+        public static TResult? Bind<TSource, TResult>(
+            this TSource? @this,
+            Func<TSource, TResult?> binder)
+            where TSource : struct
+            where TResult : struct
+        {
+            Require.NotNull(binder, nameof(binder));
+
+            return @this is TSource v ? binder(v) : null;
+        }
+    }
+
     // Query Expression Pattern for nullables.
-    public static class Qullable
+    public static partial class Qullable
     {
         public static TResult? Select<TSource, TResult>(this TSource? @this, Func<TSource, TResult> selector)
             where TSource : struct
@@ -26,17 +40,6 @@ namespace Narvalo.Applicative
             Require.NotNull(predicate, nameof(predicate));
 
             return @this is TSource v && predicate(v) ? @this : null;
-        }
-
-        public static TResult? SelectMany<TSource, TResult>(
-            this TSource? @this,
-            Func<TSource, TResult?> selector)
-            where TSource : struct
-            where TResult : struct
-        {
-            Require.NotNull(selector, nameof(selector));
-
-            return @this is TSource v ? selector(v) : null;
         }
 
         public static TResult? SelectMany<TSource, TMiddle, TResult>(
