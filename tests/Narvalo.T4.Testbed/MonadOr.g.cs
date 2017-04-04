@@ -10,7 +10,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using _Unit_ = global::Narvalo.Applicative.Unit;
+using unit = global::Narvalo.Applicative.Unit;
 
 namespace Narvalo.T4.Testbed
 {
@@ -29,17 +29,17 @@ namespace Narvalo.T4.Testbed
         /// <summary>
         /// The unique object of type <c>MonadOr&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly MonadOr<_Unit_> s_Unit = Of(_Unit_.Default);
+        private static readonly MonadOr<unit> s_Unit = Of(unit.Default);
 
         /// <summary>
         /// Gets the unique object of type <c>MonadOr&lt;Unit&gt;</c>.
         /// </summary>
-        public static MonadOr<_Unit_> Unit => s_Unit;
+        public static MonadOr<unit> Unit => s_Unit;
 
         /// <summary>
         /// Gets the zero for <see cref="MonadOr{T}.Bind"/>.
         /// </summary>
-        public static MonadOr<_Unit_> None => MonadOr<_Unit_>.None;
+        public static MonadOr<unit> None => MonadOr<unit>.None;
 
         /// <summary>
         /// Obtains an instance of the <see cref="MonadOr{T}"/> class for the specified value.
@@ -49,7 +49,7 @@ namespace Narvalo.T4.Testbed
         /// <returns>An instance of the <see cref="MonadOr{T}"/> class for the specified value.</returns>
         public static MonadOr<T> Of<T>(T value) => MonadOr<T>.η(value);
 
-        public static MonadOr<_Unit_> Guard(bool predicate) => predicate ? Unit : None;
+        public static MonadOr<unit> Guard(bool predicate) => predicate ? Unit : None;
 
         public static MonadOr<IEnumerable<TSource>> Repeat<TSource>(
             MonadOr<TSource> source,
@@ -171,7 +171,7 @@ namespace Narvalo.T4.Testbed
             return @this.Zip(other, (arg, _) => arg);
         }
 
-        public static MonadOr<_Unit_> Skip<TSource>(this MonadOr<TSource> @this)
+        public static MonadOr<unit> Skip<TSource>(this MonadOr<TSource> @this)
         {
             Require.NotNull(@this, nameof(@this));
             return @this.ContinueWith(MonadOr.Unit);

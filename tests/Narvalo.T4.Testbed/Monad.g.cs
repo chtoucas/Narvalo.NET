@@ -10,7 +10,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using _Unit_ = global::Narvalo.Applicative.Unit;
+using unit = global::Narvalo.Applicative.Unit;
 
 namespace Narvalo.T4.Testbed
 {
@@ -29,12 +29,12 @@ namespace Narvalo.T4.Testbed
         /// <summary>
         /// The unique object of type <c>Monad&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly Monad<_Unit_> s_Unit = Of(_Unit_.Default);
+        private static readonly Monad<unit> s_Unit = Of(unit.Default);
 
         /// <summary>
         /// Gets the unique object of type <c>Monad&lt;Unit&gt;</c>.
         /// </summary>
-        public static Monad<_Unit_> Unit => s_Unit;
+        public static Monad<unit> Unit => s_Unit;
 
         /// <summary>
         /// Obtains an instance of the <see cref="Monad{T}"/> class for the specified value.
@@ -164,7 +164,7 @@ namespace Narvalo.T4.Testbed
             return @this.Zip(other, (arg, _) => arg);
         }
 
-        public static Monad<_Unit_> Skip<TSource>(this Monad<TSource> @this)
+        public static Monad<unit> Skip<TSource>(this Monad<TSource> @this)
         {
             Require.NotNull(@this, nameof(@this));
             return @this.ContinueWith(Monad.Unit);

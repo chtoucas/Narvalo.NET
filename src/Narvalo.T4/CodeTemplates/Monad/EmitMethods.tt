@@ -9,8 +9,8 @@ public partial class MonadTemplate
     public partial <#= ClassTypeDecl #> <#= Name #><<#= GenericsDecl #>>
     {
 <#+ if (HasRightGenerics) { #>
-        private static readonly <#= Name #><_Unit_<#= RTDecl #>> s_Unit
-            = <#+ WriteFactory("Unit"); #>(_Unit_.Default);
+        private static readonly <#= Name #><unit<#= RTDecl #>> s_Unit
+            = <#+ WriteFactory("Unit"); #>(unit.Default);
 <#+ } #>
 
         public void Forever(Action<<#= MainGeneric #>> action)

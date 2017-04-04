@@ -10,7 +10,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using _Unit_ = global::Narvalo.Applicative.Unit;
+using unit = global::Narvalo.Applicative.Unit;
 
 namespace Narvalo.T4.Testbed
 {
@@ -29,17 +29,17 @@ namespace Narvalo.T4.Testbed
         /// <summary>
         /// The unique object of type <c>MonadZero&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly MonadZero<_Unit_> s_Unit = Of(_Unit_.Default);
+        private static readonly MonadZero<unit> s_Unit = Of(unit.Default);
 
         /// <summary>
         /// Gets the unique object of type <c>MonadZero&lt;Unit&gt;</c>.
         /// </summary>
-        public static MonadZero<_Unit_> Unit => s_Unit;
+        public static MonadZero<unit> Unit => s_Unit;
 
         /// <summary>
         /// Gets the zero for <see cref="MonadZero{T}.Bind"/>.
         /// </summary>
-        public static MonadZero<_Unit_> Zero => MonadZero<_Unit_>.Zero;
+        public static MonadZero<unit> Zero => MonadZero<unit>.Zero;
 
         /// <summary>
         /// Obtains an instance of the <see cref="MonadZero{T}"/> class for the specified value.
@@ -49,7 +49,7 @@ namespace Narvalo.T4.Testbed
         /// <returns>An instance of the <see cref="MonadZero{T}"/> class for the specified value.</returns>
         public static MonadZero<T> Of<T>(T value) => MonadZero<T>.η(value);
 
-        public static MonadZero<_Unit_> Guard(bool predicate) => predicate ? Unit : Zero;
+        public static MonadZero<unit> Guard(bool predicate) => predicate ? Unit : Zero;
 
         public static MonadZero<IEnumerable<TSource>> Repeat<TSource>(
             MonadZero<TSource> source,
@@ -171,7 +171,7 @@ namespace Narvalo.T4.Testbed
             return @this.Zip(other, (arg, _) => arg);
         }
 
-        public static MonadZero<_Unit_> Skip<TSource>(this MonadZero<TSource> @this)
+        public static MonadZero<unit> Skip<TSource>(this MonadZero<TSource> @this)
         {
             Require.NotNull(@this, nameof(@this));
             return @this.ContinueWith(MonadZero.Unit);

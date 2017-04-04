@@ -10,7 +10,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using _Unit_ = global::Narvalo.Applicative.Unit;
+using unit = global::Narvalo.Applicative.Unit;
 
 namespace Narvalo.Applicative
 {
@@ -29,12 +29,12 @@ namespace Narvalo.Applicative
         /// <summary>
         /// The unique object of type <c>Outcome&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly Outcome<_Unit_> s_Unit = Of(_Unit_.Default);
+        private static readonly Outcome<unit> s_Unit = Of(unit.Default);
 
         /// <summary>
         /// Gets the unique object of type <c>Outcome&lt;Unit&gt;</c>.
         /// </summary>
-        public static Outcome<_Unit_> Unit => s_Unit;
+        public static Outcome<unit> Unit => s_Unit;
 
         /// <summary>
         /// Obtains an instance of the <see cref="Outcome{T}"/> class for the specified value.
@@ -164,7 +164,7 @@ namespace Narvalo.Applicative
             return @this.Zip(other, (arg, _) => arg);
         }
 
-        public static Outcome<_Unit_> Skip<TSource>(this Outcome<TSource> @this)
+        public static Outcome<unit> Skip<TSource>(this Outcome<TSource> @this)
         {
             /* T4: NotNull(@this) */
             return @this.ContinueWith(Outcome.Unit);

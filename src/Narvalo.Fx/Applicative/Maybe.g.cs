@@ -10,7 +10,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using _Unit_ = global::Narvalo.Applicative.Unit;
+using unit = global::Narvalo.Applicative.Unit;
 
 namespace Narvalo.Applicative
 {
@@ -29,17 +29,17 @@ namespace Narvalo.Applicative
         /// <summary>
         /// The unique object of type <c>Maybe&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly Maybe<_Unit_> s_Unit = Of(_Unit_.Default);
+        private static readonly Maybe<unit> s_Unit = Of(unit.Default);
 
         /// <summary>
         /// Gets the unique object of type <c>Maybe&lt;Unit&gt;</c>.
         /// </summary>
-        public static Maybe<_Unit_> Unit => s_Unit;
+        public static Maybe<unit> Unit => s_Unit;
 
         /// <summary>
         /// Gets the zero for <see cref="Maybe{T}.Bind"/>.
         /// </summary>
-        public static Maybe<_Unit_> None => Maybe<_Unit_>.None;
+        public static Maybe<unit> None => Maybe<unit>.None;
 
         /// <summary>
         /// Obtains an instance of the <see cref="Maybe{T}"/> class for the specified value.
@@ -49,7 +49,7 @@ namespace Narvalo.Applicative
         /// <returns>An instance of the <see cref="Maybe{T}"/> class for the specified value.</returns>
         public static Maybe<T> Of<T>(T value) => Maybe<T>.η(value);
 
-        public static Maybe<_Unit_> Guard(bool predicate) => predicate ? Unit : None;
+        public static Maybe<unit> Guard(bool predicate) => predicate ? Unit : None;
 
         public static Maybe<IEnumerable<TSource>> Repeat<TSource>(
             Maybe<TSource> source,
@@ -171,7 +171,7 @@ namespace Narvalo.Applicative
             return @this.Zip(other, (arg, _) => arg);
         }
 
-        public static Maybe<_Unit_> Skip<TSource>(this Maybe<TSource> @this)
+        public static Maybe<unit> Skip<TSource>(this Maybe<TSource> @this)
         {
             /* T4: NotNull(@this) */
             return @this.ContinueWith(Maybe.Unit);

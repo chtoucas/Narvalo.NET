@@ -53,12 +53,12 @@ public partial class MonadTemplate
             return @this.Zip(other, (arg, _) => arg);
         }
 
-        public static <#= Name #><_Unit_<#= RTDecl #>> Skip<TSource<#= RTDecl #>>(this <#= Name #><TSource<#= RTDecl #>> @this)
+        public static <#= Name #><unit<#= RTDecl #>> Skip<TSource<#= RTDecl #>>(this <#= Name #><TSource<#= RTDecl #>> @this)
         {
             <#+ WriteNotNull(); #>
 
 <#+ if (HasRightGenerics) { #>
-            return @this.ReplaceBy(_Unit_.Default);
+            return @this.ReplaceBy(unit.Default);
 <#+ } else { #>
             return @this.ContinueWith(<#= Name #>.Unit);
 <#+ } #>

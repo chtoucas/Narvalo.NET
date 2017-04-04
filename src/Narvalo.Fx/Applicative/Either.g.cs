@@ -10,7 +10,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using _Unit_ = global::Narvalo.Applicative.Unit;
+using unit = global::Narvalo.Applicative.Unit;
 
 namespace Narvalo.Applicative
 {
@@ -146,10 +146,10 @@ namespace Narvalo.Applicative
             return @this.Zip(other, (arg, _) => arg);
         }
 
-        public static Either<_Unit_, TRight> Skip<TSource, TRight>(this Either<TSource, TRight> @this)
+        public static Either<unit, TRight> Skip<TSource, TRight>(this Either<TSource, TRight> @this)
         {
             Require.NotNull(@this, nameof(@this));
-            return @this.ReplaceBy(_Unit_.Default);
+            return @this.ReplaceBy(unit.Default);
         }
 
         #region Zip()

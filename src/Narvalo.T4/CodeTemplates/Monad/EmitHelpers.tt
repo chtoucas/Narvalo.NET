@@ -13,19 +13,19 @@ public partial class MonadTemplate
         /// <summary>
         /// The unique object of type <c><#= Name #>&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly <#= Name #><_Unit_> s_Unit = <#= ReturnName #>(_Unit_.Default);
+        private static readonly <#= Name #><unit> s_Unit = <#= ReturnName #>(unit.Default);
 
         /// <summary>
         /// Gets the unique object of type <c><#= Name #>&lt;Unit&gt;</c>.
         /// </summary>
-        public static <#= Name #><_Unit_> Unit => s_Unit;
+        public static <#= Name #><unit> Unit => s_Unit;
 
 <#+ } #>
 <#+ if (HasZero) { #>
         /// <summary>
         /// Gets the zero for <see cref="<#= Name #>{T}.Bind"/>.
         /// </summary>
-        public static <#= Name #><_Unit_> <#= ZeroName #> => <#= Name #><_Unit_>.<#= ZeroName #>;
+        public static <#= Name #><unit> <#= ZeroName #> => <#= Name #><unit>.<#= ZeroName #>;
 
 <#+ } // End of HasZero #>
 <#+ if (!DisableReturn) { #>
@@ -42,7 +42,7 @@ public partial class MonadTemplate
 
 <#+ } // End of !DisableReturn #>
 <#+ if (HasZero) { #>
-        public static <#= Name #><_Unit_> Guard(bool predicate) => predicate ? Unit : <#= ZeroName #>;
+        public static <#= Name #><unit> Guard(bool predicate) => predicate ? Unit : <#= ZeroName #>;
 
 <#+ } // T4: End of HasZero. #>
         public static <#= Name #><IEnumerable<TSource><#= RTDecl #>> Repeat<TSource<#= RTDecl #>>(

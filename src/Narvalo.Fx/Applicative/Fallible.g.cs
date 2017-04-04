@@ -10,7 +10,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using _Unit_ = global::Narvalo.Applicative.Unit;
+using unit = global::Narvalo.Applicative.Unit;
 
 namespace Narvalo.Applicative
 {
@@ -29,12 +29,12 @@ namespace Narvalo.Applicative
         /// <summary>
         /// The unique object of type <c>Fallible&lt;Unit&gt;</c>.
         /// </summary>
-        private static readonly Fallible<_Unit_> s_Unit = Of(_Unit_.Default);
+        private static readonly Fallible<unit> s_Unit = Of(unit.Default);
 
         /// <summary>
         /// Gets the unique object of type <c>Fallible&lt;Unit&gt;</c>.
         /// </summary>
-        public static Fallible<_Unit_> Unit => s_Unit;
+        public static Fallible<unit> Unit => s_Unit;
 
         /// <summary>
         /// Obtains an instance of the <see cref="Fallible{T}"/> class for the specified value.
@@ -164,7 +164,7 @@ namespace Narvalo.Applicative
             return @this.Zip(other, (arg, _) => arg);
         }
 
-        public static Fallible<_Unit_> Skip<TSource>(this Fallible<TSource> @this)
+        public static Fallible<unit> Skip<TSource>(this Fallible<TSource> @this)
         {
             /* T4: NotNull(@this) */
             return @this.ContinueWith(Fallible.Unit);

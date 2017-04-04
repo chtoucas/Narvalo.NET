@@ -38,7 +38,7 @@ public abstract partial class MonadTemplate : _MonadTemplate
 <#+ if (!Namespace.StartsWith("Narvalo.")) { #>
 using Require = global::Narvalo.Require;
 <#+ } #>
-using _Unit_ = global::Narvalo.Applicative.Unit;
+using unit = global::Narvalo.Applicative.Unit;
 
 namespace <#= Namespace #>
 {
