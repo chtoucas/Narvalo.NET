@@ -27,6 +27,7 @@ disjoint union (`Either<T1, T2>`), sequence generators and LINQ extensions.
 - [Tour of the Monad Verbs](#tour-of-the-monad-verbs)
 - [Haskell to C# Walk-Through](#haskell-to-C-walk-through)
 - [Typologia](#typologia)
+- [F# is better at functional programming!](#f-is-better-at-functional-programming)
 - [Design Notes](#design-notes)
 - [Changelog](#changelog)
 
@@ -123,6 +124,21 @@ the _empty tuple literal_ `()`.
 
 --------------------------------------------------------------------------------
 
+Nullable Type
+-------------
+
+Importing the namespace `Narvalo.Applicable` enables a subset of the
+[Query expression pattern](https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#the-query-expression-pattern)
+for the `Nullable<T>` type, namely:
+
+Method | C# Query Expression Syntax
+------ | --------------------------
+`Select`     | `select`
+`Where`      | `where`
+`SelectMany` | Multiple `from` clauses.
+
+--------------------------------------------------------------------------------
+
 Maybe Type
 ----------
 
@@ -158,6 +174,7 @@ factory method `Maybe.Of` or the static property `Maybe<T>.None`:
 var some = Maybe.Of("value");
 var none = Maybe<string>.None;
 ```
+Of course, passing null to `Maybe.Of<T>` returns `Maybe<T>.None`.
 You can check afterwards the status of a "maybe" by querying the property `IsSome`,
 which is true in the first case and false in the second one - there is also a
 property `IsNone` which is the negation of `IsSome`. If it is easy to wrap a
@@ -171,6 +188,10 @@ monads but, if you really insist, the type supports deconstruction:
 Deconstruction is **unsafe**, before accessing `value`, you should always check
 if `isSome` is true - when it is not, `value` is set to `default(T)` that is
 `null` for reference types :worried:.
+
+**Remark:** To check if a "maybe" contains a given value, rather than extracting
+the enclosed value, you should use the `Contains` helper - there is also an
+overload when you want to use a custom equality comparer.
 
 When it comes to value types, there is really no reason to use `Maybe<T?>`
 instead of `Maybe<T>`. For this exact reason, `Maybe.Of` with a
@@ -186,6 +207,7 @@ below), in which case...
 Maybe<T?> maybe;
 Maybe<T> better = maybe.Flatten();
 ```
+Deconstruction (_does not work yet_):
 ```csharp
 Maybe<T?> maybe;
 (bool isSome, T value) = maybe;
@@ -267,11 +289,6 @@ where `q` is of type `Maybe<T>`.
 #### Design Notes
 
 [Struct vs Class] [Storage]
-
---------------------------------------------------------------------------------
-
-Nullable Type
--------------
 
 --------------------------------------------------------------------------------
 
@@ -801,8 +818,6 @@ monoid composition operation.
 
 ### Computation vs Container
 
-#### F# Computation Expressions
-
 ### .NET Framework types
 
 Type             | Properties
@@ -820,6 +835,22 @@ Type             | Properties
   [Wes Dyer](http://blogs.msdn.com/b/wesdyer/archive/2008/01/11/the-marvels-of-monads.aspx).
 - A popular explanation of monads given by [Eric Lippert](http://ericlippert.com/category/monads/).
 - A more abstract one by [Erik Meijer](http://laser.inf.ethz.ch/2012/slides/Meijer/).
+
+--------------------------------------------------------------------------------
+
+F# is better at functional programming!
+---------------------------------------
+
+I feel dumb to state the obvious, but it is interesting to see what F# has
+to offer and why it is so much better. F# already has a
+[unit type](https://docs.microsoft.com/en-us/dotnet/articles/fsharp/language-reference/unit-type),
+an
+[option type](https://docs.microsoft.com/en-us/dotnet/articles/fsharp/language-reference/options),
+and a result type (`Result<'T,'TError>` in F# v4.1+).
+More importantly, null is not permitted as a regular value. This is all very
+nice, but the real big thing is Computation Expressions.
+
+#### F# Computation Expressions
 
 --------------------------------------------------------------------------------
 

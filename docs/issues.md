@@ -56,6 +56,8 @@ Next:
 Narvalo.Fx
 ----------
 
+- Use `source` instead of `@this` in Linq.
+- Fix `Maybe.Deconstruct<T>(Maybe<T?>)` ignored.
 - Enable deconstruction of types. Almost done, still one to go (`Maybe<T?>`).
 - Auto-generate tests for null-guards (missing only for `Either`).
   Add more tests beyond the auto-generated ones. Add tests for purity?
