@@ -10,7 +10,9 @@ namespace Narvalo.Linq
         /// <summary>
         /// Returns true if the sequence is empty; otherwise false.
         /// </summary>
-        public static bool IsEmpty<TSource>(this IEnumerable<TSource> @this)
-            => !@this.Any();
+        /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.
+        /// </typeparam>
+        public static bool IsEmpty<TSource>(this IEnumerable<TSource> source)
+            => !source.Any();
     }
 }

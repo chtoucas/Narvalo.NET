@@ -13,27 +13,31 @@ namespace Narvalo.Linq
         /// Returns the element at the specified index in a sequence or
         /// <see cref="Maybe{TSource}.None"/> if the index is out of range.
         /// </summary>
+        /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.
+        /// </typeparam>
         // Adapted from https://github.com/jskeet/edulinq/blob/master/src/Edulinq/ElementAt.cs
-        public static Maybe<TSource> ElementAtOrNone<TSource>(this IEnumerable<TSource> @this, int index)
+        public static Maybe<TSource> ElementAtOrNone<TSource>(
+            this IEnumerable<TSource> source,
+            int index)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
 
             if (index < 0) { return Maybe<TSource>.None; }
 
             // Fast track.
-            if (@this is ICollection<TSource> collection)
+            if (source is ICollection<TSource> collection)
             {
                 int count = collection.Count;
                 if (index >= count) { return Maybe<TSource>.None; }
 
-                if (@this is IList<TSource> list)
+                if (source is IList<TSource> list)
                 {
                     return Maybe.Of(list[index]);
                 }
             }
 
             // Slow track.
-            using (var iter = @this.GetEnumerator())
+            using (var iter = source.GetEnumerator())
             {
                 // Note use of -1 so that we start off my moving onto element 0.
                 // Don't want to use i <= index in case index == int.MaxValue!

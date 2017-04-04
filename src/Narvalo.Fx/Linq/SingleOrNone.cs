@@ -17,18 +17,20 @@ namespace Narvalo.Linq
         /// <para>Here we differ in behaviour from the standard query SingleOrDefault which
         /// throws an exception if there is more than one element in the sequence.</para>
         /// </summary>
-        public static Maybe<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this)
+        /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.
+        /// </typeparam>
+        public static Maybe<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> source)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
 
             // Fast track.
-            if (@this is IList<TSource> list)
+            if (source is IList<TSource> list)
             {
                 return list.Count == 1 ? Maybe.Of(list[0]) : Maybe<TSource>.None;
             }
 
             // Slow track.
-            using (var iter = @this.GetEnumerator())
+            using (var iter = source.GetEnumerator())
             {
                 // Return None if the sequence is empty.
                 if (!iter.MoveNext()) { return Maybe<TSource>.None; }
@@ -47,14 +49,16 @@ namespace Narvalo.Linq
         /// <para>Here we differ in behaviour from the standard query SingleOrDefaultwhich
         /// throws an exception if more than one element satisfies the predicate.</para>
         /// </summary>
+        /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.
+        /// </typeparam>
         public static Maybe<TSource> SingleOrNone<TSource>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, bool> predicate)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
             Require.NotNull(predicate, nameof(predicate));
 
-            var seq = @this.Where(predicate);
+            var seq = source.Where(predicate);
 
             using (var iter = seq.GetEnumerator())
             {

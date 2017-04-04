@@ -11,7 +11,9 @@ namespace Narvalo.Linq
         /// Returns a new empty sequence if the sequence is empty; otherwise
         /// it returns the sequence.
         /// </summary>
-        public static IEnumerable<TSource> EmptyIfNull<TSource>(this IEnumerable<TSource> @this)
-            => @this ?? Enumerable.Empty<TSource>();
+        /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.
+        /// </typeparam>
+        public static IEnumerable<TSource> EmptyIfNull<TSource>(this IEnumerable<TSource> source)
+            => source ?? Enumerable.Empty<TSource>();
     }
 }

@@ -98,12 +98,12 @@ Unit Type
 ---------
 
 In C#, when a function does not return any value, it has a `void` return type
-which, on close inspection, looks quite odd. The .NET CLR does define a
+which, on close inspection, looks quite odd. The .NET CLR defines a
 [Void](https://github.com/dotnet/coreclr/blob/master/src/mscorlib/shared/System/Void.cs)
-type, but it does not allow you to use it as a normal type (it has internal
-visibility). Moreover, it breaks the composition of functions, `Void` cannot
-appear in a function parameter. Finally, it cannot be used as a generic
-type parameter, e.g. `List<Void>` is explicitly forbidden.
+type, but it does not allow you to use it as a normal type: it has internal
+visibility and it cannot be used as a generic type parameter, e.g. `List<Void>`
+is explicitly forbidden. Moreover, it breaks the composition of functions,
+`Void` cannot appear in a function parameter.
 
 In a functional-style of programming, one prefers a
 [unit type](https://en.wikipedia.org/wiki/Unit_type) over a
@@ -126,10 +126,6 @@ the _empty tuple literal_ `()`.
 Maybe Type
 ----------
 
-We discuss `Maybe<T>` at length, the type is quite simple, nevertheless it
-illustrates many principles that are applicable to the other monads, it's well
-worth the time spent to study it.
-
 - Construction / Deconstruction
 - Give me back the value!
 - Matching
@@ -137,6 +133,10 @@ worth the time spent to study it.
 - Querying
 - Beyond the basics
 - Design notes
+
+We discuss `Maybe<T>` at length, the type is quite simple, nevertheless it
+illustrates many principles that are applicable to the other monads, it's well
+worth the time spent to study it.
 
 The `Maybe<T>` struct is a lot like the `Nullable<T>` class but without any
 restriction on the underlying type: _it provides a way to tell the absence or
