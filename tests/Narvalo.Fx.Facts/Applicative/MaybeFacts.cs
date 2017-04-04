@@ -116,6 +116,34 @@ namespace Narvalo.Applicative {
             Assert.Null(value);
         }
 
+        [t("Deconstruct() w/ a nullable type.")]
+        public static void Deconstruct3() {
+            var none = Maybe<int?>.None;
+            var (isSome, value) = none;
+            Assert.True(none.IsNone);
+            Assert.False(isSome);
+            Assert.Null(value);
+        }
+
+        [t("Deconstruct() w/ a nullable type.")]
+        public static void Deconstruct4() {
+            Maybe<int?> none = Maybe.Of(0).Select<int?>(x => null);
+            var (isSome, value) = none;
+            Assert.True(none.IsNone);
+            Assert.False(isSome);
+            Assert.Null(value);
+        }
+
+        [t("Deconstruct() w/ a nullable type.")]
+        public static void Deconstruct5() {
+            int exp = 1;
+            Maybe<int?> some = Maybe.Of(0).Select<int?>(x => exp);
+            var (isSome, value) = some;
+            Assert.True(some.IsSome);
+            Assert.True(isSome);
+            Assert.Equal(exp, value);
+        }
+
         [t("ValueOrDefault() returns Value if some.")]
         public static void ValueOrDefault1() {
             var exp = new Obj();
@@ -1099,18 +1127,35 @@ namespace Narvalo.Applicative {
         [t("Flatten() returns none if none.")]
         public static void Flatten1() {
             var none = Maybe<Maybe<Obj>>.None;
-
             var m = none.Flatten();
-
             Assert.True(m.IsNone);
         }
 
         [t("Flatten() returns some if some.")]
         public static void Flatten2() {
             var some = Maybe.Of(Maybe.Of(new Obj()));
-
             var m = some.Flatten();
+            Assert.True(m.IsSome);
+        }
 
+        [t("Flatten() returns none if none for T? (1).")]
+        public static void Flatten3() {
+            var none = Maybe<int?>.None;
+            var m = none.Flatten();
+            Assert.True(m.IsNone);
+        }
+
+        [t("Flatten() returns none if none for T? (2).")]
+        public static void Flatten4() {
+            var none = Maybe.Of(1).Select<int?>(i => null);
+            var m = none.Flatten();
+            Assert.True(m.IsNone);
+        }
+
+        [t("Flatten() returns some if some for T?.")]
+        public static void Flatten5() {
+            var some = Maybe.Of(1).Select<int?>(i => 1);
+            var m = some.Flatten();
             Assert.True(m.IsSome);
         }
 
