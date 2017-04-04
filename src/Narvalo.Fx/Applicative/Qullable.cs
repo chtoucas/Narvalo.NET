@@ -15,7 +15,7 @@ namespace Narvalo.Applicative
         {
             Require.NotNull(selector, nameof(selector));
 
-            return @this.HasValue ? (TResult?)selector(@this.Value) : null;
+            return @this is TSource v ? (TResult?)selector(v) : null;
         }
 
         public static TSource? Where<TSource>(
@@ -25,7 +25,18 @@ namespace Narvalo.Applicative
         {
             Require.NotNull(predicate, nameof(predicate));
 
-            return @this.HasValue && predicate(@this.Value) ? @this : null;
+            return @this is TSource v && predicate(v) ? @this : null;
+        }
+
+        public static TResult? SelectMany<TSource, TResult>(
+            this TSource? @this,
+            Func<TSource, TResult?> selector)
+            where TSource : struct
+            where TResult : struct
+        {
+            Require.NotNull(selector, nameof(selector));
+
+            return @this is TSource v ? selector(v) : null;
         }
 
         public static TResult? SelectMany<TSource, TMiddle, TResult>(
@@ -39,13 +50,9 @@ namespace Narvalo.Applicative
             Require.NotNull(valueSelector, nameof(valueSelector));
             Require.NotNull(resultSelector, nameof(resultSelector));
 
-            if (!@this.HasValue) { return null; }
-
-            var middle = valueSelector(@this.Value);
-
-            if (!middle.HasValue) { return null; }
-
-            return resultSelector(@this.Value, middle.Value);
+            return @this is TSource v && valueSelector(v) is TMiddle m
+                ? resultSelector(v, m)
+                : (TResult?)null;
         }
     }
 }
