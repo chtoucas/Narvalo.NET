@@ -17,9 +17,9 @@ disjoint union (`Either<T1, T2>`), sequence generators and LINQ extensions.
 ### Content
 - [Overview](#overview)
 - [Unit Type](#unit-type)
+- [Querying a Nullable](#querying-a-nullable)
 - [Maybe Type](#maybe-type)
-- [Nullable Type](#nullable-type)
-- [Error Types](#error-types)
+- [Railway Oriented Programming](#railway-oriented-programming)
 - [Either Type](#either-type)
 - [Query Operators](#query-operators)
 - [Generators](#generators)
@@ -124,8 +124,8 @@ the _empty tuple literal_ `()`.
 
 --------------------------------------------------------------------------------
 
-Nullable Type
--------------
+Querying a Nullable
+-------------------
 
 Importing the namespace `Narvalo.Applicable` enables a subset of the
 [Query expression pattern](https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#the-query-expression-pattern)
@@ -292,10 +292,9 @@ where `q` is of type `Maybe<T>`.
 
 --------------------------------------------------------------------------------
 
-Error Types
------------
+Railway Oriented Programming
+----------------------------
 
-- Railway Oriented Programming
 - `Outcome`
 - `Outcome<T>`
 - `Fallible`
