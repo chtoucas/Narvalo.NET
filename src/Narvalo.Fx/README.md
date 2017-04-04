@@ -80,13 +80,13 @@ convinced of their usefulness and practicability (for skeleton definitions of
 see [here](https://github.com/chtoucas/Brouillons/tree/master/src/play/Functional/Monadic)).
 
 If you go to the [NuGet website](https://www.nuget.org), you will find many
-packages that solve the same problems as we do; those that I found most
+packages that solve the same problems as we do; those that I found the most
 interesting are [Optional](https://github.com/nlkl/Optional), and
 [Chessie](https://github.com/fsprojects/Chessie) or
 [RailwaySharp](https://github.com/gsscoder/railwaysharp) for Railway Oriented
 Programming. Why write another one? This project started as an exercise to better
-understand monads, it just happened that I thought it was strong enough to be
-published. Of course, I prefer my version too :relaxed:.
+understand monads, it just happened that I thought it was solid enough to be
+published; of course, I prefer my version too :relaxed:.
 
 #### References
 - Railway Oriented Programming, [explanation](http://fsharpforfunandprofit.com/rop)
@@ -97,25 +97,46 @@ published. Of course, I prefer my version too :relaxed:.
 Unit Type
 ---------
 
-The [unit type](https://en.wikipedia.org/wiki/Unit_type) is not the same as
-the [void type](https://en.wikipedia.org/wiki/Void_type).
+In C#, when a function does not return any value, it has a `void` return type
+which, on close inspection, looks quite odd. The .NET CLR does define a
+[Void](https://github.com/dotnet/coreclr/blob/master/src/mscorlib/shared/System/Void.cs)
+type, but it does not allow you to use it as a normal type (it has internal
+visibility). Moreover, it breaks the composition of functions, `Void` cannot
+appear in a function parameter. Finally, it cannot be used as a generic
+type parameter, e.g. `List<Void>` is explicitly forbidden.
 
-The CLR includes a [void type](https://github.com/dotnet/coreclr/blob/master/src/mscorlib/shared/System/Void.cs)
+In a functional-style of programming, one prefers a
+[unit type](https://en.wikipedia.org/wiki/Unit_type) over a
+[void type](https://en.wikipedia.org/wiki/Void_type). All functions can then be
+treated equal, there is no longer a need to define custom delegates for
+actions - for instance, `Func<unit, unit>` (instead of `Action`) and
+`Func<T, unit>` (instead of `Action<T>`) are perfectly legal.
+
+The unit type `Unit` (in `Narvalo.Applicative`) is both an empty struct and a
+singleton, it has only one value `Unit.Default`.
+Personally, I like to make it look like a built-in type with:
+```csharp
+using unit = global::Narvalo.Applicative.Unit;
+```
+An implementation detail is that we make sure that `Unit.Default` is equal to
+the _empty tuple literal_ `()`.
 
 --------------------------------------------------------------------------------
 
 Maybe Type
 ----------
 
-We discuss `Maybe<T>` at length, the type is simple enough it's well worth the
-time spent to investigate many principles that will be applicable to the other
-monads.
+We discuss `Maybe<T>` at length, the type is quite simple, nevertheless it
+illustrates many principles that are applicable to the other monads, it's well
+worth the time spent to study it.
 
 - Construction / Deconstruction
-- Querying
+- Give me back the value!
 - Matching
-- Programming with Side-Effects
-- Beyond the Basics
+- Programming with side-effects
+- Querying
+- Beyond the basics
+- Design notes
 
 The `Maybe<T>` struct is a lot like the `Nullable<T>` class but without any
 restriction on the underlying type: _it provides a way to tell the absence or
@@ -137,7 +158,7 @@ factory method `Maybe.Of` or the static property `Maybe<T>.None`:
 var some = Maybe.Of("value");
 var none = Maybe<string>.None;
 ```
-You can check afterwards the status of a maybe by querying the property `IsSome`,
+You can check afterwards the status of a "maybe" by querying the property `IsSome`,
 which is true in the first case and false in the second one - there is also a
 property `IsNone` which is the negation of `IsSome`. If it is easy to wrap a
 value into a maybe, but you will soon wonder why it is not possible to get back
@@ -147,23 +168,45 @@ monads but, if you really insist, the type supports deconstruction:
 ```csharp
 (bool isSome, T value) = maybe;
 ```
-Deconstruction is "unsafe", before accessing `value`, you should always check
+Deconstruction is **unsafe**, before accessing `value`, you should always check
 if `isSome` is true - when it is not, `value` is set to `default(T)` that is
-`null` for reference types.
+`null` for reference types :worried:.
 
 When it comes to value types, there is really no reason to use `Maybe<T?>`
-instead of `Maybe<T>`. For this exact reason, by using `Maybe.Of` with a
-nullable value type, e.g. `T?`, you end up with an object of type `Maybe<T>`
+instead of `Maybe<T>`. For this exact reason, `Maybe.Of` with a
+nullable value type, e.g. `T?`, returns an object of type `Maybe<T>`
 **not** `Maybe<T?>`:
 ```csharp
 int? value = 1;
 Maybe<int> maybe = Maybe.Of(value);
 ```
-It is still possible to...
+It is still possible to end up with an object of type `Maybe<T?>` (see Binding
+below), in which case...
 ```csharp
-Maybe<T?> maybe = ...;
+Maybe<T?> maybe;
+Maybe<T> better = maybe.Flatten();
+```
+```csharp
+Maybe<T?> maybe;
 (bool isSome, T value) = maybe;
 ```
+
+#### Give me back the value!
+
+To repeat myself, this is not a recommended practice. Anyway,
+- `ValueOrDefault()` returns the enclosed value if any; otherwise the default
+  value of type `T`.
+- `ValueOrElse(other)` returns the enclosed value if any; otherwise `other`.
+  There is also an overload which accepts a factory as parameter. Beware,
+  if `ValueOrElse(other)` never returns null, depending on the factory, the
+  overload may well.
+- `ValueOrThrow()` returns the enclosed value if any; otherwise throws an
+  `InvalidOperationException`. There is also an overload which accepts a factory
+   as parameter.
+
+#### Matching
+
+#### Programming with side-effects
 
 #### Querying
 The `Maybe<T>` type supports a subset of the [Query expression pattern](https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#the-query-expression-pattern),
@@ -217,15 +260,13 @@ where `q` is of type `Maybe<T>`.
 
 ##### `GroupJoin`
 
-#### Matching
-
-#### Programming with Side-Effects
-
-#### Beyond the Basics
+#### Beyond the basics
 
 ##### Binding, a First Taste of Monads
 
-##### Value Extraction Revisited
+#### Design Notes
+
+[Struct vs Class] [Storage]
 
 --------------------------------------------------------------------------------
 
@@ -390,7 +431,7 @@ Generation     | `EmptyIfNull`        | `IEnumerable<T>`           | -
 
 All these operators are defined as extension methods (in `Qperators`) and expect
 an `IEnumerable<T>` as input:
-- `Append` (resp. `Prepend`) appends (resp. prepends) a new element to a sequence.
+- `Append()` (resp. `Prepend()`) appends (resp. prepends) a new element to a sequence.
   **NB:** A much better [implementation](https://github.com/dotnet/corefx/blob/master/src/System.Linq/src/System/Linq/AppendPrepend.cs)
   appears in later versions of `System.Linq`; it optimizes multiple calls to
   `Append` and `Prepend`.
