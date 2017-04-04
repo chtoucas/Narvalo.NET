@@ -20,19 +20,12 @@ namespace Narvalo.Applicative
         public static Maybe<T> Of<T>(T? value) where T : struct
             => value.HasValue ? Of(value.Value) : Maybe<T>.None;
 
-        // FIXME: C# always ignores this method in favor of Maybe<T?>.Deconstruct().
-        public static void Deconstruct<T>(
-            this Maybe<T?> @this,
-            out bool isSome,
-            out T value)
-            where T : struct
-        {
-            isSome = @this.IsSome;
-            value = @this.IsSome ? @this.Value.Value : default(T);
-        }
-
         // Conversion from Maybe<T?> to  Maybe<T>.
         public static Maybe<T> Flatten<T>(this Maybe<T?> @this) where T : struct
+            // NB: When IsSome is true, Value.HasValue is always true,
+            // therefore we can safely access Value.Value. Indeed, the only way
+            // to construct a maybe is via "η" which returns "none" if the
+            // input is null (input.HasValue is false).
             => @this.IsSome
             ? Maybe.Of(@this.Value.Value)
             : Maybe<T>.None;
@@ -44,10 +37,11 @@ namespace Narvalo.Applicative
         // Conversion from Maybe<T?> to T?.
         public static T? ToNullable<T>(this Maybe<T?> @this) where T : struct
 #if DEBUG
-            // In Debug mode, we protect the access to Value.
+            // We have to be careful in Debug mode, the access to Value is
+            // protected by a Debug.Assert.
             => @this.IsSome ? @this.Value : null;
 #else
-            // If the object is "none", Value is default(T?) == null.
+            // If the object is "none", Value is default(T?) ie null.
             => @this.Value;
 #endif
     }
