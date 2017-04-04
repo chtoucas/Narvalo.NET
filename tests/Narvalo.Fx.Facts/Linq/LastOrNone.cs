@@ -15,8 +15,8 @@ namespace Narvalo.Linq {
         [t("LastOrNone() guards.")]
         public static void LastOrNone0() {
             IEnumerable<int> nil = null;
-            Assert.Throws<ArgumentNullException>("this", () => nil.LastOrNone());
-            Assert.Throws<ArgumentNullException>("this", () => nil.LastOrNone(_ => true));
+            Assert.Throws<ArgumentNullException>("source", () => nil.LastOrNone());
+            Assert.Throws<ArgumentNullException>("source", () => nil.LastOrNone(_ => true));
 
             var source = Enumerable.Range(0, 1);
             Assert.Throws<ArgumentNullException>("predicate", () => source.LastOrNone(default(Func<int, bool>)));

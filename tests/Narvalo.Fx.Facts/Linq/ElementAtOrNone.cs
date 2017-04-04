@@ -16,7 +16,7 @@ namespace Narvalo.Linq {
         public static void ElementAtOrNone0() {
             IEnumerable<int> nil = null;
 
-            Assert.Throws<ArgumentNullException>("this", () => nil.ElementAtOrNone(1));
+            Assert.Throws<ArgumentNullException>("source", () => nil.ElementAtOrNone(1));
         }
 
         [t("ElementAtOrNone() for int's returns the same result when called repeatedly.")]

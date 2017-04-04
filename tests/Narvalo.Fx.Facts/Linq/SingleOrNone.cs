@@ -16,8 +16,8 @@ namespace Narvalo.Linq {
         public static void SingleOrNone0() {
             IEnumerable<int> nil = null;
 
-            Assert.Throws<ArgumentNullException>("this", () => nil.SingleOrNone());
-            Assert.Throws<ArgumentNullException>("this", () => nil.SingleOrNone(_ => true));
+            Assert.Throws<ArgumentNullException>("source", () => nil.SingleOrNone());
+            Assert.Throws<ArgumentNullException>("source", () => nil.SingleOrNone(_ => true));
 
             var source = Enumerable.Range(0, 1);
 
