@@ -56,8 +56,7 @@ Next:
 Narvalo.Fx
 ----------
 
-- Use `source` instead of `@this` in Linq.
-- Fix `Maybe.Deconstruct<T>(Maybe<T?>)` ignored.
+- Use `source` instead of `@this` in Linq. More QEP for Monads.
 - Enable deconstruction of types. Almost done, still one to go (`Maybe<T?>`).
 - Auto-generate tests for null-guards (missing only for `Either`).
   Add more tests beyond the auto-generated ones. Add tests for purity?
@@ -74,6 +73,20 @@ Narvalo.Fx
 - Add `MapMany` to `Outcome` and `Fallible`....
 
 Next:
+- Deconstruction for `Maybe<T?>`, but I think this is not possible.
+```csharp
+public static void Deconstruct<T>(
+    this Maybe<T?> @this,
+    out bool isSome,
+    out T value)
+    where T : struct
+{
+    isSome = @this.IsSome;
+    value = @this.IsSome ? @this.Value.Value : default(T);
+}
+```
+  this is perfectly legal but will always be ignored in favor of the
+  deconstructor method of `Maybe<T?>`.
 - Add other monads - prototypes [here](https://github.com/chtoucas/Brouillons/tree/master/src/play/Functional/Monadic)
 - `OnError()`, `WhenError()` & co could return a boolean to signal when they
   actually did something.

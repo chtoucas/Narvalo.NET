@@ -137,6 +137,19 @@ Method | C# Query Expression Syntax
 `Where`      | `where`
 `SelectMany` | Multiple `from` clauses.
 
+```csharp
+int? x = 2;
+int? y = 1;
+// q1 is (int?)4
+var q1 = from i in x select i * i;
+// q2 is (int?)null
+var q2 = from i in y where i % 2 == 0 select i;
+// q3 is (int?)3
+var q3 = from i in x
+         from j in y
+         select i + j;
+```
+
 --------------------------------------------------------------------------------
 
 Maybe Type
@@ -163,8 +176,8 @@ There is a [proposal](https://github.com/dotnet/csharplang/blob/master/proposals
 to add nullable reference types to C#, nevertheless it should not render this
 type obsolete. Even if the two types share the same objective, I think that they
 will be used in different situations: `Maybe<T>` forces you to handle the
-exceptional case, while a nullable value type does not - you can call the
-property `Value` even if `HasValue` is false.
+exceptional case, while a nullable value type does not - nothing prevents you
+from calling the property `Value`, even if `HasValue` is false.
 
 #### Construction / Deconstruction
 A `Maybe<T>` object exists in two states, it either contains a value or it does
@@ -174,7 +187,7 @@ factory method `Maybe.Of` or the static property `Maybe<T>.None`:
 var some = Maybe.Of("value");
 var none = Maybe<string>.None;
 ```
-Of course, passing null to `Maybe.Of<T>` returns `Maybe<T>.None`.
+Of course, passing `null` to `Maybe.Of<T>` returns `Maybe<T>.None`.
 You can check afterwards the status of a "maybe" by querying the property `IsSome`,
 which is true in the first case and false in the second one - there is also a
 property `IsNone` which is the negation of `IsSome`. If it is easy to wrap a
@@ -194,23 +207,18 @@ the enclosed value, you should use the `Contains` helper - there is also an
 overload when you want to use a custom equality comparer.
 
 When it comes to value types, there is really no reason to use `Maybe<T?>`
-instead of `Maybe<T>`. For this exact reason, `Maybe.Of` with a
-nullable value type, e.g. `T?`, returns an object of type `Maybe<T>`
-**not** `Maybe<T?>`:
+instead of `Maybe<T>`. For this exact reason, `Maybe.Of<T?>` returns an object
+of type `Maybe<T>` **not** `Maybe<T?>`:
 ```csharp
 int? value = 1;
 Maybe<int> maybe = Maybe.Of(value);
 ```
-It is still possible to end up with an object of type `Maybe<T?>` (see Binding
-below), in which case...
+Nevertheless, it is still possible to end up with an object of type `Maybe<T?>`,
+e.g. `Maybe<int?>.None` (see also Binding below for a more realistic example).
+Fortunately, we can always "flatten" the object:
 ```csharp
-Maybe<T?> maybe;
-Maybe<T> better = maybe.Flatten();
-```
-Deconstruction (_does not work yet_):
-```csharp
-Maybe<T?> maybe;
-(bool isSome, T value) = maybe;
+var maybe = Maybe<int?>.None;
+Maybe<int> better = maybe.Flatten();
 ```
 
 #### Give me back the value!
