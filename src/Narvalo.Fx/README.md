@@ -143,6 +143,8 @@ Method | C# Query Expression Syntax
 `Select`     | `select`
 `Where`      | `where`
 `SelectMany` | Multiple `from` clauses.
+`Join`       | `join ... in ... on ... equals ...`
+`GroupJoin`  | `join ... in ... on ... equals ... into ...`
 
 These operators do not behave like those on `IEnumerable<T>`, they use
 _immediate execution_.
@@ -175,7 +177,7 @@ var q = from outer in source
             outer.Item1,
             (from inner in outer.Item2 select inner.Item1 + inner.Item2));
 ```
-the result is `(1, 5)` with type `(int, int?)?`. I agree with you, this is a
+the result is `(1, 5)` of type `(int, int?)?`. I agree with you, this is a
 rather contrived example but, wait, we will show you soon a better and simpler
 solution (see `SelectMany`).
 
@@ -225,13 +227,30 @@ var q = from outer in source
         select (outer.Item1, inner.Item1 + inner.Item2);
 
 ```
-the result is still `(1, 5)` but, this time, with a "flatter" type `(int, int)?`
-instead of `(int, int?)?`. Furthermore, the code is so much easier to read and
+the result is still `(1, 5)` but, this time, of type `(int, int)?`
+instead of `(int, int?)?`; the operator `SelectMany` eliminates the hierarchical
+structure of LINQ queries. Furthermore, the code is so much easier to read and
 maintain. A good exercise is to write the same query by using only `HasValue`
 and `Value`, or with pattern matching - of course, you won't come very often
 across such a convoluted example.
 
+#### `Join`
+
+```csharp
+(int, int)? x1 = (1, 2);
+(int, int)? x2 = (2, 3);
+
+var q = from t1 in x1
+        join t2 in x2 on t1.Item2 equals t2.Item1
+        select (t1.Item1, t2.Item2);
+```
+the result is still `(1, 3)` of type `(int, int)?`.
+
+#### `GroupJoin`
+
 ### Binding
+One can think of binding as mapping from a nullable to a "nullable of
+nullable" which is then flattened:
 ```csharp
 T? x = ...;
 Func<T, TResult?> binder = ...;

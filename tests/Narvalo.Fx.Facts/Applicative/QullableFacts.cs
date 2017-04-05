@@ -183,6 +183,19 @@ namespace Narvalo.Applicative {
             Assert.Equal(3, q.Value);
         }
 
+        [t("Join().")]
+        public static void Join1() {
+            (int, int)? x1 = (1, 2);
+            (int, int)? x2 = (2, 3);
+
+            (int, int)? q = from t1 in x1
+                            join t2 in x2 on t1.Item2 equals t2.Item1
+                            select (t1.Item1, t2.Item2);
+            Assert.NotNull(q);
+            Assert.Equal(1, q.Value.Item1);
+            Assert.Equal(3, q.Value.Item2);
+        }
+
         [t("Cross join w/ SelectMany().")]
         public static void CrossJoin1() {
             short? source = 1;
