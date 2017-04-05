@@ -115,7 +115,7 @@ actions - for instance, `Func<unit, unit>` (instead of `Action`) and
 
 The unit type `Unit` (in `Narvalo.Applicative`) is both an empty struct and a
 singleton, it has only one value `Unit.Default`. This type is not an original
-creation, far from it. _Rendons à César ce qui est à César_, it is largely
+creation, far from it, _rendons à César ce qui est à César_, it is largely
 copied from
 [Rx.NET](https://github.com/Reactive-Extensions/Rx.NET/blob/develop/Rx.NET/Source/src/System.Reactive/Unit.cs).
 Personally, I like to make it look like a built-in type with:
@@ -151,7 +151,7 @@ _immediate execution_.
 First, another programmer might not know that LINQ is not just for
 `IEnumerable<T>` therefore might have problems understanding your code, and
 second, the result will always be less performant than hand-written code.
-Nevertheless, as with "traditional" LINQ, there are situations where a piece of
+Nevertheless, as with "normal" LINQ, there are situations where a piece of
 code written in query syntax is much more readable.
 
 #### `Select`
@@ -162,7 +162,7 @@ Func<T, TResult> selector = ...;
 TResult? q = x.Select(selector);
 TResult? q = from v in x select selector(v);
 ```
-For instance, to take the square of the a nullable integer:
+For instance, to take the square of a nullable integer:
 ```csharp
 short? x = 1;
 int? q = from i in x select i * i;
@@ -176,7 +176,7 @@ var q = from outer in source
             (from inner in outer.Item2 select inner.Item1 + inner.Item2));
 ```
 the result is `(1, 5)` with type `(int, int?)?`. I agree with you, this is a
-rather contrived example but, wait, we will show you a better and simpler
+rather contrived example but, wait, we will show you soon a better and simpler
 solution (see `SelectMany`).
 
 #### `Where`
@@ -187,9 +187,10 @@ Func<T, bool> predicate = ...;
 T? q = x.Where(predicate);
 T? q = from v in x where predicate(v) select v;
 ```
-We can mix and match `where` and `select` clauses:
+We can mix and match `where` and `select` clauses: take the square of a nullable
+integer only if it is "even"
 ```csharp
-int? x = 1;
+int? x = 2;
 int? q = from i in x where i % 2 == 0 select i * i;
 ```
 
@@ -244,6 +245,7 @@ TResult? q = from v1 in x
              from v2 in binder(v1)
              select v2;
 ```
+In LINQ for Objects, `Bind` is even named `SelectMany`.
 
 **Remark.** In fact, `Bind` is the most important method upon which
 one can construct all the other operators; it is not the other way around, more
