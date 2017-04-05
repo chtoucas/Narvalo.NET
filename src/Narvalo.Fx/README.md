@@ -114,13 +114,20 @@ actions - for instance, `Func<unit, unit>` (instead of `Action`) and
 `Func<T, unit>` (instead of `Action<T>`) are perfectly legal.
 
 The unit type `Unit` (in `Narvalo.Applicative`) is both an empty struct and a
-singleton, it has only one value `Unit.Default`.
+singleton, it has only one value `Unit.Default`. This type is not an original
+creation, far from it. _Rendons à César ce qui est à César_, it is largely
+copied from
+[Rx.NET](https://github.com/Reactive-Extensions/Rx.NET/blob/develop/Rx.NET/Source/src/System.Reactive/Unit.cs).
 Personally, I like to make it look like a built-in type with:
 ```csharp
 using unit = global::Narvalo.Applicative.Unit;
 ```
-An implementation detail is that we make sure that `Unit.Default` is equal to
-the _empty tuple literal_ `()`.
+An implementation detail is that we make sure that a `Unit` instance is equal to
+any _empty tuple literal_, the 0-tuples. The .NET team _"lovingly
+[refers](https://github.com/dotnet/roslyn/issues/10429) to 0-tuples as nuples,
+and 1-tuples as womples"_. Currently, there is no special syntax for writing
+nuples or womples, but we might get `()` for nuples which would make the 0-tuple
+a very natural unit type.
 
 --------------------------------------------------------------------------------
 
@@ -137,61 +144,110 @@ Method | C# Query Expression Syntax
 `Where`      | `where`
 `SelectMany` | Multiple `from` clauses.
 
+These operators do not behave like those on `IEnumerable<T>`, they use
+_immediate execution_.
+
+**Caution.** It is not because it is possible, that you should use this.
+First, another programmer might not know that LINQ is not just for
+`IEnumerable<T>` therefore might have problems understanding your code, and
+second, the result will always be less performant than hand-written code.
+Nevertheless, as with "traditional" LINQ, there are situations where a piece of
+code written in query syntax is much more readable.
+
 #### `Select`
 ```csharp
-short? x = 1;
-Func<short, int> selector = i => i * i;
+T? x = ...;
+Func<T, TResult> selector = ...;
 
-int? q = x.Select(selector);
-int? q = from i in x select selector(i);
+TResult? q = x.Select(selector);
+TResult? q = from v in x select selector(v);
 ```
+For instance, to take the square of the a nullable integer:
+```csharp
+short? x = 1;
+int? q = from i in x select i * i;
+```
+Joining the hard way via a subquery:
+```csharp
+(int, (int, int)?)? source = (1, (2, 3));
+var q = from outer in source
+        select (
+            outer.Item1,
+            (from inner in outer.Item2 select inner.Item1 + inner.Item2));
+```
+the result is `(1, 5)` with type `(int, int?)?`. I agree with you, this is a
+rather contrived example but, wait, we will show you a better and simpler
+solution (see `SelectMany`).
 
 #### `Where`
 ```csharp
-int? x = 1;
-Func<int, bool> predicate = i => i % 2 == 0;
+T? x = ...;
+Func<T, bool> predicate = ...;
 
-int? q = x.Where(predicate);
-int? q = from i in x where predicate(i) select i;
+T? q = x.Where(predicate);
+T? q = from v in x where predicate(v) select v;
+```
+We can mix and match `where` and `select` clauses:
+```csharp
+int? x = 1;
+int? q = from i in x where i % 2 == 0 select i * i;
 ```
 
 #### `SelectMany`
 Cross join,
 ```csharp
-short? x = 1;
-int? y = 2;
-Func<short, int, long> resultSelector = (i, j) => i + j;
+T1? x1 = ...;
+T2? x2 = ...;
+Func<T1, T2, TResult> resultSelector = ...;
 
-long? q = x.SelectMany(_ => y, resultSelector);
-long? q = from i in x
-          from j in y
-          select resultSelector(i, j);
+TResult? q = x.SelectMany(_ => x2, resultSelector);
+TResult? q = from v1 in x1
+             from v2 in x2
+             select resultSelector(v1, v2);
 ```
 Outer join,
 ```csharp
-short? x = 1;
-Func<short, int?> valueSelector = i => 2 * i;
-Func<short, int, long> resultSelector = (i, j) => i + j;
+T1? x1 = ...;
+Func<T1, T2?> valueSelector = ...;
+Func<T1, T2, TResult> resultSelector = ...;
 
-long? q = source.SelectMany(valueSelector, resultSelector);
-long? q = from i in x
-          from j in valueSelector(i)
-          select resultSelector(i, j);
+TResult? q = x1.SelectMany(valueSelector, resultSelector);
+TResult? q = from v1 in x1
+             from v2 in valueSelector(v1)
+             select resultSelector(v1, v2);
 ```
+Let's rewrite the subquery example with `SelectMany`:
+```csharp
+(int, (int, int)?)? source = (1, (2, 3));
+var q = from outer in source
+        from inner in outer.Item2
+        select (outer.Item1, inner.Item1 + inner.Item2);
+
+```
+the result is still `(1, 5)` but, this time, with a "flatter" type `(int, int)?`
+instead of `(int, int?)?`. Furthermore, the code is so much easier to read and
+maintain. A good exercise is to write the same query by using only `HasValue`
+and `Value`, or with pattern matching - of course, you won't come very often
+across such a convoluted example.
 
 ### Binding
 ```csharp
-short? x = 1;
-Func<short, int?> binder = i => 2 * i;
+T? x = ...;
+Func<T, TResult?> binder = ...;
 
-int? q = x.Bind(binder);
+TResult? q = x.Bind(binder);
 ```
+`Bind` is really a special case of `SelectMany<T, TResult, TResult>`:
 ```csharp
-int? q = x.SelectMany(binder, (_, j) => j);
-int? q = from i in x
-         from j in binder(i)
-         select j;
+TResult? q = x.SelectMany(binder, (_, v2) => v2);
+TResult? q = from v1 in x
+             from v2 in binder(v1)
+             select v2;
 ```
+
+**Remark.** In fact, `Bind` is the most important method upon which
+one can construct all the other operators; it is not the other way around, more
+on this later.
 
 --------------------------------------------------------------------------------
 
@@ -878,6 +934,26 @@ Type             | Properties
 `Lazy<T>`        |
 `Task<T>`        |
 
+#### Is `Nullable<T>` really a monad?
+
+The `Bind` method is easy to write as an extension method:
+```csharp
+public static TResult? Bind<TSource, TResult>(
+    this TSource? source,
+    Func<TSource, TResult?> binder)
+    where TSource : struct
+    where TResult : struct
+{
+    // Argument validation omitted.
+    return source is TSource value ? binder(value) : null;
+}
+```
+- `Of` is casting `(T?)value`.
+- `Zero` is `null`.
+- `null` is a left zero for `Bind`; `null.Bind(binder) ≡ null`
+
+`Nullable<Nullable<T>>` is not permitted.
+
 ### A Glimpse of Category Theory
 
 ### Further Readings
@@ -906,6 +982,12 @@ nice, but the real big thing is Computation Expressions.
 
 Design Notes
 ------------
+
+T4
+
+Extension methods
+
+Shadowing
 
 --------------------------------------------------------------------------------
 

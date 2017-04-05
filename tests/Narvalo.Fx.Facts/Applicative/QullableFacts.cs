@@ -183,8 +183,8 @@ namespace Narvalo.Applicative {
             Assert.Equal(3, q.Value);
         }
 
-        [t("SelectMany() cross-join.")]
-        public static void SelectMany5() {
+        [t("Cross join w/ SelectMany().")]
+        public static void CrossJoin1() {
             short? source = 1;
             int? middle = 2;
             Func<short, int, long> resultSelector = (i, j) => i + j;
@@ -198,6 +198,45 @@ namespace Narvalo.Applicative {
                       select resultSelector(i, j);
             Assert.NotNull(q);
             Assert.Equal(3, q.Value);
+        }
+
+        [t("Subquery w/ Select().")]
+        public static void Subquery1() {
+            (int, (int, int)?)? source = (1, (2, 3));
+            Func<(int, (int, int)?), (int, int?)> selector
+                = outer => (
+                outer.Item1,
+                (from inner in outer.Item2 select inner.Item1 + inner.Item2));
+
+            // m is of type (int, int?)?
+            var m = source.Select(selector);
+            Assert.NotNull(m);
+            Assert.NotNull(m.Value.Item2);
+            Assert.Equal(1, m.Value.Item1);
+            Assert.Equal(5, m.Value.Item2.Value);
+
+            var q = from outer in source
+                    select (
+                        outer.Item1,
+                        (from inner in outer.Item2 select inner.Item1 + inner.Item2));
+            Assert.NotNull(q);
+            Assert.NotNull(q.Value.Item2);
+            Assert.Equal(1, q.Value.Item1);
+            Assert.Equal(5, q.Value.Item2.Value);
+        }
+
+        [t("Outer join w/ SelectMany().")]
+        public static void OuterJoin1() {
+            (int, (int, int)?)? source = (1, (2, 3));
+
+            // Compare w/ Subquery1(), the result is now flattened.
+            // m is of type (int, int)?
+            var q = from outer in source
+                    from inner in outer.Item2
+                    select (outer.Item1, inner.Item1 + inner.Item2);
+            Assert.NotNull(q);
+            Assert.Equal(1, q.Value.Item1);
+            Assert.Equal(5, q.Value.Item2);
         }
     }
 }
