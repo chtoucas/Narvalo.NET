@@ -365,10 +365,10 @@ namespace Narvalo.T4.Testbed
             Require.NotNull(innerKeySelector, nameof(innerKeySelector));
             Require.NotNull(comparer, nameof(comparer));
 
-            var keyLookup = GetKeyLookup(
-                inner, outerKeySelector, innerKeySelector, comparer);
+            var lookup = GetKeyLookup(inner, innerKeySelector, comparer);
+            Func<TSource, MonadPlus<TInner>> valueSelector = outer => lookup(outerKeySelector(outer));
 
-            return @this.SelectMany(val => keyLookup(val).ContinueWith(inner), resultSelector);
+            return @this.SelectMany(valueSelector, resultSelector);
         }
 
         public static MonadPlus<TResult> GroupJoin<TSource, TInner, TKey, TResult>(
@@ -400,25 +400,26 @@ namespace Narvalo.T4.Testbed
             Require.NotNull(innerKeySelector, nameof(innerKeySelector));
             Require.NotNull(comparer, nameof(comparer));
 
-            var keyLookup = GetKeyLookup(
-                inner, outerKeySelector, innerKeySelector, comparer);
+            var lookup = GetKeyLookup(inner, innerKeySelector, comparer);
+            Func<TSource, MonadPlus<TInner>> selector = outer => lookup(outerKeySelector(outer));
 
-            return @this.Select(val => resultSelector(val, keyLookup(val).ContinueWith(inner)));
+            return @this.Select(outer => resultSelector(outer, selector(outer)));
         }
 
-        private static Func<TSource, MonadPlus<TKey>> GetKeyLookup<TSource, TInner, TKey>(
+        private static Func<TKey, MonadPlus<TInner>> GetKeyLookup<TInner, TKey>(
             MonadPlus<TInner> inner,
-            Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             IEqualityComparer<TKey> comparer)
         {
             Debug.Assert(inner != null);
-            Debug.Assert(outerKeySelector != null);
             Debug.Assert(innerKeySelector != null);
             Debug.Assert(comparer != null);
 
-            return arg => inner.Select(innerKeySelector)
-                .Where(key => comparer.Equals(key, outerKeySelector(arg)));
+            return outerKey => (
+                from innerKey in inner.Select(innerKeySelector)
+                where comparer.Equals(innerKey, outerKey)
+                select innerKey
+            ).ContinueWith(inner);
         }
 
         #endregion

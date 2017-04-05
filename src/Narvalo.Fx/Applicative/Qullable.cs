@@ -92,11 +92,15 @@ namespace Narvalo.Applicative
             where TKey : struct
             where TResult : struct
         {
-            var keyLookup = GetKeyLookup(
-                inner, outerKeySelector, innerKeySelector, comparer);
+            Require.NotNull(resultSelector, nameof(resultSelector));
+            Require.NotNull(outerKeySelector, nameof(outerKeySelector));
+            Require.NotNull(innerKeySelector, nameof(innerKeySelector));
+            Require.NotNull(comparer, nameof(comparer));
 
-            return @this.SelectMany(
-                outer => (keyLookup(outer) is TKey key ? inner : null), resultSelector);
+            var lookup = GetKeyLookup(inner, innerKeySelector, comparer);
+            Func<TSource, TInner?> valueSelector = outer => lookup(outerKeySelector(outer));
+
+            return @this.SelectMany(valueSelector, resultSelector);
         }
 
         public static TResult? GroupJoin<TSource, TInner, TKey, TResult>(
@@ -107,6 +111,7 @@ namespace Narvalo.Applicative
             Func<TSource, TInner?, TResult> resultSelector)
             where TSource : struct
             where TInner : struct
+            where TKey : struct
             where TResult : struct
             => GroupJoin(
                 @this,
@@ -125,30 +130,38 @@ namespace Narvalo.Applicative
             IEqualityComparer<TKey> comparer)
             where TSource : struct
             where TInner : struct
+            where TKey : struct
             where TResult : struct
         {
-            throw new NotImplementedException();
+            Require.NotNull(resultSelector, nameof(resultSelector));
+            Require.NotNull(outerKeySelector, nameof(outerKeySelector));
+            Require.NotNull(innerKeySelector, nameof(innerKeySelector));
+            Require.NotNull(comparer, nameof(comparer));
+
+            var lookup = GetKeyLookup(inner, innerKeySelector, comparer);
+            Func<TSource, TInner?> selector = outer => lookup(outerKeySelector(outer));
+
+            return @this.Select(outer => resultSelector(outer, selector(outer)));
         }
 
-        private static Func<TSource, TKey?> GetKeyLookup<TSource, TInner, TKey>(
+        private static Func<TKey, TInner?> GetKeyLookup<TInner, TKey>(
             TInner? inner,
-            Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             IEqualityComparer<TKey> comparer)
-            where TSource : struct
             where TInner : struct
             where TKey : struct
         {
-            Debug.Assert(outerKeySelector != null);
             Debug.Assert(innerKeySelector != null);
             Debug.Assert(comparer != null);
 
-            return arg =>
+            return outerKey =>
             {
-                TKey? innerKey = from v in inner select innerKeySelector(v);
-                return from key in innerKey
-                       where comparer.Equals(key, outerKeySelector(arg))
-                       select key;
+                // We can select anything, the only thing that really matters
+                // is if it is null or not.
+                var q = from innerKey in inner.Select(innerKeySelector)
+                        where comparer.Equals(innerKey, outerKey)
+                        select true;
+                return q.HasValue ? inner : null;
             };
         }
     }

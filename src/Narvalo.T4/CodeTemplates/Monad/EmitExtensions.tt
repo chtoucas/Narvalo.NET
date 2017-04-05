@@ -314,10 +314,10 @@ public partial class MonadTemplate
             Require.NotNull(innerKeySelector, nameof(innerKeySelector));
             Require.NotNull(comparer, nameof(comparer));
 
-            var keyLookup = GetKeyLookup(
-                inner, outerKeySelector, innerKeySelector, comparer);
+            var lookup = GetKeyLookup(inner, innerKeySelector, comparer);
+            Func<TSource, <#= Name #><TInner>> valueSelector = outer => lookup(outerKeySelector(outer));
 
-            return @this.SelectMany(val => keyLookup(val).ContinueWith(inner), resultSelector);
+            return @this.SelectMany(valueSelector, resultSelector);
         }
 
         public static <#= Name #><TResult> GroupJoin<TSource, TInner, TKey, TResult>(
@@ -349,27 +349,28 @@ public partial class MonadTemplate
             Require.NotNull(innerKeySelector, nameof(innerKeySelector));
             Require.NotNull(comparer, nameof(comparer));
 
-            var keyLookup = GetKeyLookup(
-                inner, outerKeySelector, innerKeySelector, comparer);
+            var lookup = GetKeyLookup(inner, innerKeySelector, comparer);
+            Func<TSource, <#= Name #><TInner>> selector = outer => lookup(outerKeySelector(outer));
 
-            return @this.Select(val => resultSelector(val, keyLookup(val).ContinueWith(inner)));
+            return @this.Select(outer => resultSelector(outer, selector(outer)));
         }
 
-        private static Func<TSource, <#= Name #><TKey>> GetKeyLookup<TSource, TInner, TKey>(
+        private static Func<TKey, <#= Name #><TInner>> GetKeyLookup<TInner, TKey>(
             <#= Name #><TInner> inner,
-            Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             IEqualityComparer<TKey> comparer)
         {
 <#+ if (IsNullable) { #>
             Debug.Assert(inner != null);
 <#+ } #>
-            Debug.Assert(outerKeySelector != null);
             Debug.Assert(innerKeySelector != null);
             Debug.Assert(comparer != null);
 
-            return arg => inner.<#= MapName #>(innerKeySelector)
-                .<#= FilterName #>(key => comparer.Equals(key, outerKeySelector(arg)));
+            return outerKey => (
+                from innerKey in inner.Select(innerKeySelector)
+                where comparer.Equals(innerKey, outerKey)
+                select innerKey
+            ).ContinueWith(inner);
         }
 <#+ } // T4: End of HasJoin. #>
 
