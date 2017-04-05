@@ -7,6 +7,7 @@ namespace Narvalo.Web
     using System.Web;
     using System.Web.Mvc;
 
+    using Narvalo.Applicative;
     using Narvalo.Web.Properties;
 
     /// <summary>
@@ -79,9 +80,10 @@ namespace Narvalo.Web
         {
             Debug.Assert(request != null);
 
-            var verbs = ParseTo.Enum<HttpVerbs>(request.HttpMethod);
+            bool? q = from x in ParseTo.Enum<HttpVerbs>(request.HttpMethod)
+                      select AcceptedVerbs.Contains(x);
 
-            return verbs.HasValue ? AcceptedVerbs.Contains(verbs.Value) : false;
+            return q ?? false;
         }
     }
 }
