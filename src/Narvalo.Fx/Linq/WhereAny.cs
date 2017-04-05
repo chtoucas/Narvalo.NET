@@ -11,63 +11,63 @@ namespace Narvalo.Linq
     public static partial class Qperators
     {
         public static IEnumerable<TSource> WhereAny<TSource>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, bool?> predicate)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
             Require.NotNull(predicate, nameof(predicate));
 
-            return WhereAnyIterator(@this, predicate);
+            return WhereAnyIterator(source, predicate);
         }
 
         public static IEnumerable<TSource> WhereAny<TSource>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, Maybe<bool>> predicate)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
             Require.NotNull(predicate, nameof(predicate));
 
-            return WhereAnyIterator(@this, predicate);
+            return WhereAnyIterator(source, predicate);
         }
 
         public static IEnumerable<TSource> WhereAny<TSource>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, Outcome<bool>> predicate)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
             Require.NotNull(predicate, nameof(predicate));
 
-            return WhereAnyIterator(@this, predicate);
+            return WhereAnyIterator(source, predicate);
         }
 
         public static IEnumerable<TSource> WhereAny<TSource>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, Fallible<bool>> predicate)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
             Require.NotNull(predicate, nameof(predicate));
 
-            return WhereAnyIterator(@this, predicate);
+            return WhereAnyIterator(source, predicate);
         }
 
         public static IEnumerable<TSource> WhereAny<TSource, TError>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, Result<bool, TError>> predicate)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
             Require.NotNull(predicate, nameof(predicate));
 
-            return WhereAnyIterator(@this, predicate);
+            return WhereAnyIterator(source, predicate);
         }
 
         public static IEnumerable<TSource> WhereAny<TSource, TRight>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, Either<bool, TRight>> predicate)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
             Require.NotNull(predicate, nameof(predicate));
 
-            return WhereAnyIterator(@this, predicate);
+            return WhereAnyIterator(source, predicate);
         }
 
         private static IEnumerable<TSource> WhereAnyIterator<TSource>(

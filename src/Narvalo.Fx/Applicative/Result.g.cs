@@ -358,8 +358,8 @@ namespace Narvalo.Applicative
     public static partial class Result
     {
         public static Result<IEnumerable<TSource>, TError> Collect<TSource, TError>(
-            this IEnumerable<Result<TSource, TError>> @this)
-            => @this.CollectImpl();
+            this IEnumerable<Result<TSource, TError>> source)
+            => source.CollectImpl();
     }
 }
 
@@ -378,10 +378,10 @@ namespace Narvalo.Internal
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Result<IEnumerable<TSource>, TError> CollectImpl<TSource, TError>(
-            this IEnumerable<Result<TSource, TError>> @this)
+            this IEnumerable<Result<TSource, TError>> source)
         {
-            Require.NotNull(@this, nameof(@this));
-            return Result<IEnumerable<TSource>, TError>.Of(CollectIterator(@this));
+            Require.NotNull(source, nameof(source));
+            return Result<IEnumerable<TSource>, TError>.Of(CollectIterator(source));
         }
 
         private static IEnumerable<TSource> CollectIterator<TSource, TError>(IEnumerable<Result<TSource, TError>> source)
@@ -431,44 +431,44 @@ namespace Narvalo.Linq
     public static partial class Qperators
     {
         public static Result<IEnumerable<TResult>, TError> SelectWith<TSource, TResult, TError>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, Result<TResult, TError>> selector)
-            => @this.SelectWithImpl(selector);
+            => source.SelectWithImpl(selector);
 
         public static Result<IEnumerable<TSource>, TError> WhereBy<TSource, TError>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, Result<bool, TError>> predicate)
-            => @this.WhereByImpl(predicate);
+            => source.WhereByImpl(predicate);
 
         public static Result<IEnumerable<TResult>, TError> ZipWith<TFirst, TSecond, TResult, TError>(
-            this IEnumerable<TFirst> @this,
+            this IEnumerable<TFirst> source,
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, Result<TResult, TError>> resultSelector)
-            => @this.ZipWithImpl(second, resultSelector);
+            => source.ZipWithImpl(second, resultSelector);
 
         public static Result<TAccumulate, TError> Fold<TSource, TAccumulate, TError>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             TAccumulate seed,
             Func<TAccumulate, TSource, Result<TAccumulate, TError>> accumulator)
-            => @this.FoldImpl(seed, accumulator);
+            => source.FoldImpl(seed, accumulator);
 
         public static Result<TAccumulate, TError> Fold<TSource, TAccumulate, TError>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             TAccumulate seed,
             Func<TAccumulate, TSource, Result<TAccumulate, TError>> accumulator,
             Func<Result<TAccumulate, TError>, bool> predicate)
-            => @this.FoldImpl(seed, accumulator, predicate);
+            => source.FoldImpl(seed, accumulator, predicate);
 
         public static Result<TSource, TError> Reduce<TSource, TError>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, TSource, Result<TSource, TError>> accumulator)
-            => @this.ReduceImpl(accumulator);
+            => source.ReduceImpl(accumulator);
 
         public static Result<TSource, TError> Reduce<TSource, TError>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, TSource, Result<TSource, TError>> accumulator,
             Func<Result<TSource, TError>, bool> predicate)
-            => @this.ReduceImpl(accumulator, predicate);
+            => source.ReduceImpl(accumulator, predicate);
     }
 }
 
@@ -489,24 +489,24 @@ namespace Narvalo.Internal
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Result<IEnumerable<TResult>, TError> SelectWithImpl<TSource, TResult, TError>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, Result<TResult, TError>> selector)
         {
-            Debug.Assert(@this != null);
+            Debug.Assert(source != null);
             Debug.Assert(selector != null);
 
-            return @this.Select(selector).Collect();
+            return source.Select(selector).Collect();
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Result<IEnumerable<TSource>, TError> WhereByImpl<TSource, TError>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, Result<bool, TError>> predicate)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
             Require.NotNull(predicate, nameof(predicate));
 
-            return Result<IEnumerable<TSource>, TError>.Of(WhereByIterator(@this, predicate));
+            return Result<IEnumerable<TSource>, TError>.Of(WhereByIterator(source, predicate));
         }
 
         private static IEnumerable<TSource> WhereByIterator<TSource, TError>(
@@ -539,29 +539,29 @@ namespace Narvalo.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Result<IEnumerable<TResult>, TError> ZipWithImpl<TFirst, TSecond, TResult, TError>(
-            this IEnumerable<TFirst> @this,
+            this IEnumerable<TFirst> source,
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, Result<TResult, TError>> resultSelector)
         {
             Debug.Assert(resultSelector != null);
-            Debug.Assert(@this != null);
+            Debug.Assert(source != null);
             Debug.Assert(second != null);
 
-            return @this.Zip(second, resultSelector).Collect();
+            return source.Zip(second, resultSelector).Collect();
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Result<TAccumulate, TError> FoldImpl<TSource, TAccumulate, TError>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             TAccumulate seed,
             Func<TAccumulate, TSource, Result<TAccumulate, TError>> accumulator)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
             Require.NotNull(accumulator, nameof(accumulator));
 
             Result<TAccumulate, TError> retval = Result<TAccumulate, TError>.Of(seed);
 
-            using (var iter = @this.GetEnumerator())
+            using (var iter = source.GetEnumerator())
             {
                 while (iter.MoveNext())
                 {
@@ -574,18 +574,18 @@ namespace Narvalo.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Result<TAccumulate, TError> FoldImpl<TSource, TAccumulate, TError>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             TAccumulate seed,
             Func<TAccumulate, TSource, Result<TAccumulate, TError>> accumulator,
             Func<Result<TAccumulate, TError>, bool> predicate)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
             Require.NotNull(accumulator, nameof(accumulator));
             Require.NotNull(predicate, nameof(predicate));
 
             Result<TAccumulate, TError> retval = Result<TAccumulate, TError>.Of(seed);
 
-            using (var iter = @this.GetEnumerator())
+            using (var iter = source.GetEnumerator())
             {
                 while (predicate(retval) && iter.MoveNext())
                 {
@@ -598,13 +598,13 @@ namespace Narvalo.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Result<TSource, TError> ReduceImpl<TSource, TError>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, TSource, Result<TSource, TError>> accumulator)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
             Require.NotNull(accumulator, nameof(accumulator));
 
-            using (var iter = @this.GetEnumerator())
+            using (var iter = source.GetEnumerator())
             {
                 if (!iter.MoveNext())
                 {
@@ -624,15 +624,15 @@ namespace Narvalo.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Result<TSource, TError> ReduceImpl<TSource, TError>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, TSource, Result<TSource, TError>> accumulator,
             Func<Result<TSource, TError>, bool> predicate)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
             Require.NotNull(accumulator, nameof(accumulator));
             Require.NotNull(predicate, nameof(predicate));
 
-            using (var iter = @this.GetEnumerator())
+            using (var iter = source.GetEnumerator())
             {
                 if (!iter.MoveNext())
                 {

@@ -14,7 +14,7 @@ namespace Narvalo.Linq {
         public static void Collect0a() {
             IEnumerable<Either<int, int>> nil = null;
 
-            Assert.Throws<ArgumentNullException>("this", () => nil.Collect());
+            Assert.Throws<ArgumentNullException>("source", () => nil.Collect());
         }
 
         [t("Collect() uses deferred execution (Either).")]
@@ -33,7 +33,7 @@ namespace Narvalo.Linq {
         public static void Collect0b() {
             IEnumerable<Fallible<int>> nil = null;
 
-            Assert.Throws<ArgumentNullException>("this", () => nil.Collect());
+            Assert.Throws<ArgumentNullException>("source", () => nil.Collect());
         }
 
         [t("Collect() uses deferred execution (Fallible).")]
@@ -52,7 +52,7 @@ namespace Narvalo.Linq {
         public static void Collect0c() {
             IEnumerable<Maybe<int>> nil = null;
 
-            Assert.Throws<ArgumentNullException>("this", () => nil.Collect());
+            Assert.Throws<ArgumentNullException>("source", () => nil.Collect());
         }
 
         [t("Collect() uses deferred execution (Maybe).")]
@@ -71,7 +71,7 @@ namespace Narvalo.Linq {
         public static void Collect0d() {
             IEnumerable<Outcome<int>> nil = null;
 
-            Assert.Throws<ArgumentNullException>("this", () => nil.Collect());
+            Assert.Throws<ArgumentNullException>("source", () => nil.Collect());
         }
 
         [t("Collect() uses deferred execution (Outcome).")]
@@ -90,7 +90,7 @@ namespace Narvalo.Linq {
         public static void Collect0e() {
             IEnumerable<Result<int, int>> nil = null;
 
-            Assert.Throws<ArgumentNullException>("this", () => nil.Collect());
+            Assert.Throws<ArgumentNullException>("source", () => nil.Collect());
         }
 
         [t("Collect() uses deferred execution (Result).")]

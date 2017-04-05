@@ -4,7 +4,6 @@ namespace Narvalo.Applicative
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
 
     /// <summary>
     /// Provides a set of static methods that produce objects of type <see cref="IEnumerable{T}"/>.
@@ -31,11 +30,25 @@ namespace Narvalo.Applicative
         /// </summary>
         public static IEnumerable<TResult> Unfold<TSource, TResult>(
             TSource seed,
-            Func<TSource, (TResult, TSource)> accumulator)
+            Func<TSource, (TResult, TSource)> generator)
         {
-            Require.NotNull(accumulator, nameof(accumulator));
+            Require.NotNull(generator, nameof(generator));
 
-            return UnfoldIterator(seed, accumulator);
+            return Iterator();
+
+            IEnumerable<TResult> Iterator()
+            {
+                TSource current = seed;
+
+                while (true)
+                {
+                    var (result, next) = generator(current);
+
+                    yield return result;
+
+                    current = next;
+                }
+            }
         }
 
         public static IEnumerable<TResult> Unfold<TSource, TResult>(
@@ -46,44 +59,20 @@ namespace Narvalo.Applicative
             Require.NotNull(generator, nameof(generator));
             Require.NotNull(predicate, nameof(predicate));
 
-            return UnfoldIterator(seed, generator, predicate);
-        }
+            return Iterator();
 
-        private static IEnumerable<TResult> UnfoldIterator<TSource, TResult>(
-            TSource seed,
-            Func<TSource, (TResult, TSource)> accumulator)
-        {
-            Debug.Assert(accumulator != null);
-
-            TSource current = seed;
-
-            while (true)
+            IEnumerable<TResult> Iterator()
             {
-                var (result, next) = accumulator(current);
+                TSource current = seed;
 
-                yield return result;
+                while (predicate(current))
+                {
+                    var (result, next) = generator(current);
 
-                current = next;
-            }
-        }
+                    yield return result;
 
-        private static IEnumerable<TResult> UnfoldIterator<TSource, TResult>(
-            TSource seed,
-            Func<TSource, (TResult, TSource)> accumulator,
-            Func<TSource, bool> predicate)
-        {
-            Debug.Assert(accumulator != null);
-            Debug.Assert(predicate != null);
-
-            TSource current = seed;
-
-            while (predicate(current))
-            {
-                var (result, next) = accumulator(current);
-
-                yield return result;
-
-                current = next;
+                    current = next;
+                }
             }
         }
 
@@ -113,7 +102,19 @@ namespace Narvalo.Applicative
         {
             Require.NotNull(iterator, nameof(iterator));
 
-            return GatherIterator(seed, iterator);
+            return Iterator();
+
+            IEnumerable<TSource> Iterator()
+            {
+                TSource current = seed;
+
+                while (true)
+                {
+                    yield return current;
+
+                    current = iterator(current);
+                }
+            }
         }
 
         public static IEnumerable<TSource> Gather<TSource>(
@@ -124,7 +125,19 @@ namespace Narvalo.Applicative
             Require.NotNull(iterator, nameof(iterator));
             Require.NotNull(predicate, nameof(predicate));
 
-            return GatherIterator(seed, iterator, predicate);
+            return Iterator();
+
+            IEnumerable<TSource> Iterator()
+            {
+                TSource current = seed;
+
+                while (predicate(current))
+                {
+                    yield return current;
+
+                    current = iterator(current);
+                }
+            }
         }
 
         /// <summary>
@@ -144,7 +157,19 @@ namespace Narvalo.Applicative
             Require.NotNull(iterator, nameof(iterator));
             Require.NotNull(resultSelector, nameof(resultSelector));
 
-            return GatherIterator(seed, iterator, resultSelector);
+            return Iterator();
+
+            IEnumerable<TResult> Iterator()
+            {
+                TSource current = seed;
+
+                while (true)
+                {
+                    yield return resultSelector(current);
+
+                    current = iterator(current);
+                }
+            }
         }
 
         /// <remarks>
@@ -163,78 +188,18 @@ namespace Narvalo.Applicative
             Require.NotNull(resultSelector, nameof(resultSelector));
             Require.NotNull(predicate, nameof(predicate));
 
-            return GatherIterator(seed, iterator, resultSelector, predicate);
-        }
+            return Iterator();
 
-        private static IEnumerable<TSource> GatherIterator<TSource>(
-            TSource seed,
-            Func<TSource, TSource> iterator)
-        {
-            Debug.Assert(iterator != null);
-
-            TSource current = seed;
-
-            while (true)
+            IEnumerable<TResult> Iterator()
             {
-                yield return current;
+                TSource current = seed;
 
-                current = iterator(current);
-            }
-        }
+                while (predicate(current))
+                {
+                    yield return resultSelector(current);
 
-        private static IEnumerable<TSource> GatherIterator<TSource>(
-            TSource seed,
-            Func<TSource, TSource> iterator,
-            Func<TSource, bool> predicate)
-        {
-            Debug.Assert(iterator != null);
-            Debug.Assert(predicate != null);
-
-            TSource current = seed;
-
-            while (predicate(current))
-            {
-                yield return current;
-
-                current = iterator(current);
-            }
-        }
-
-        private static IEnumerable<TResult> GatherIterator<TSource, TResult>(
-            TSource seed,
-            Func<TSource, TSource> iterator,
-            Func<TSource, TResult> resultSelector)
-        {
-            Debug.Assert(iterator != null);
-            Debug.Assert(resultSelector != null);
-
-            TSource current = seed;
-
-            while (true)
-            {
-                yield return resultSelector(current);
-
-                current = iterator(current);
-            }
-        }
-
-        private static IEnumerable<TResult> GatherIterator<TSource, TResult>(
-            TSource seed,
-            Func<TSource, TSource> iterator,
-            Func<TSource, TResult> resultSelector,
-            Func<TSource, bool> predicate)
-        {
-            Debug.Assert(iterator != null);
-            Debug.Assert(resultSelector != null);
-            Debug.Assert(predicate != null);
-
-            TSource current = seed;
-
-            while (predicate(current))
-            {
-                yield return resultSelector(current);
-
-                current = iterator(current);
+                    current = iterator(current);
+                }
             }
         }
 

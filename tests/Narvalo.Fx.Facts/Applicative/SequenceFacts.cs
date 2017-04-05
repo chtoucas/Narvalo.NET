@@ -16,7 +16,7 @@ namespace Narvalo.Applicative {
         public static void Unfold0() {
             Func<int, (int, int)> accumulator = i => (i, i + 1);
 
-            Assert.Throws<ArgumentNullException>("accumulator", () => Sequence.Unfold(0, default(Func<int, (int, int)>)));
+            Assert.Throws<ArgumentNullException>("generator", () => Sequence.Unfold(0, default(Func<int, (int, int)>)));
             Assert.Throws<ArgumentNullException>("predicate", () => Sequence.Unfold(0, accumulator, null));
         }
 

@@ -512,9 +512,9 @@ namespace Narvalo.T4
 
         protected virtual void WriteContent() { }
 
-        protected void WriteNotNull(string name)
+        protected void WriteNotNull(string name, bool force = false)
         {
-            if (IsNullable)
+            if (force || IsNullable)
             {
                 WriteLine(@"Require.NotNull({0}, nameof({0}));", name);
             }

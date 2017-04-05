@@ -13,8 +13,8 @@ namespace Narvalo.Linq {
         [t("SelectAny() guards.")]
         public static void SelectAny0() {
             IEnumerable<int> nil = null;
-            Assert.Throws<ArgumentNullException>("this", () => nil.SelectAny(x => (int?)x));
-            Assert.Throws<ArgumentNullException>("this", () => nil.SelectAny(_ => String.Empty));
+            Assert.Throws<ArgumentNullException>("source", () => nil.SelectAny(x => (int?)x));
+            Assert.Throws<ArgumentNullException>("source", () => nil.SelectAny(_ => String.Empty));
 
             var source = Enumerable.Range(0, 1);
             Assert.Throws<ArgumentNullException>("selector", () => source.SelectAny(default(Func<int, int?>)));
@@ -47,7 +47,7 @@ namespace Narvalo.Linq {
         [t("SelectAny() guards (Either).")]
         public static void SelectAny0a() {
             IEnumerable<int> nil = null;
-            Assert.Throws<ArgumentNullException>("this", () => nil.SelectAny(x => Either<int, int>.OfLeft(x)));
+            Assert.Throws<ArgumentNullException>("source", () => nil.SelectAny(x => Either<int, int>.OfLeft(x)));
 
             var source = Enumerable.Range(0, 1);
             Assert.Throws<ArgumentNullException>("selector", () => source.SelectAny(default(Func<int, Either<int, int>>)));
@@ -69,7 +69,7 @@ namespace Narvalo.Linq {
         [t("SelectAny() guards (Fallible).")]
         public static void SelectAny0b() {
             IEnumerable<int> nil = null;
-            Assert.Throws<ArgumentNullException>("this", () => nil.SelectAny(x => Maybe.Of(x)));
+            Assert.Throws<ArgumentNullException>("source", () => nil.SelectAny(x => Maybe.Of(x)));
 
             var source = Enumerable.Range(0, 1);
             Assert.Throws<ArgumentNullException>("selector", () => source.SelectAny(default(Func<int, Fallible<int>>)));
@@ -91,7 +91,7 @@ namespace Narvalo.Linq {
         [t("SelectAny() guards (Maybe).")]
         public static void SelectAny0c() {
             IEnumerable<int> nil = null;
-            Assert.Throws<ArgumentNullException>("this", () => nil.SelectAny(x => Fallible.Of(x)));
+            Assert.Throws<ArgumentNullException>("source", () => nil.SelectAny(x => Fallible.Of(x)));
 
             var source = Enumerable.Range(0, 1);
             Assert.Throws<ArgumentNullException>("selector", () => source.SelectAny(default(Func<int, Maybe<int>>)));
@@ -113,7 +113,7 @@ namespace Narvalo.Linq {
         [t("SelectAny() guards (Outcome).")]
         public static void SelectAny0d() {
             IEnumerable<int> nil = null;
-            Assert.Throws<ArgumentNullException>("this", () => nil.SelectAny(x => Outcome.Of(x)));
+            Assert.Throws<ArgumentNullException>("source", () => nil.SelectAny(x => Outcome.Of(x)));
 
             var source = Enumerable.Range(0, 1);
             Assert.Throws<ArgumentNullException>("selector", () => source.SelectAny(default(Func<int, Outcome<int>>)));
@@ -135,7 +135,7 @@ namespace Narvalo.Linq {
         [t("SelectAny() guards (Result).")]
         public static void SelectAny0e() {
             IEnumerable<int> nil = null;
-            Assert.Throws<ArgumentNullException>("this", () => nil.SelectAny(x => Result<int, int>.Of(x)));
+            Assert.Throws<ArgumentNullException>("source", () => nil.SelectAny(x => Result<int, int>.Of(x)));
 
             var source = Enumerable.Range(0, 1);
             Assert.Throws<ArgumentNullException>("selector", () => source.SelectAny(default(Func<int, Result<int, int>>)));

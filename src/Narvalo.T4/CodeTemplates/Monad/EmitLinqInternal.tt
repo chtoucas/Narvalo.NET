@@ -12,24 +12,24 @@ public partial class MonadTemplate
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static <#= Name #><IEnumerable<TResult><#= RTDecl #>> SelectWithImpl<TSource, TResult<#= RTDecl #>>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, <#= Name #><TResult<#= RTDecl #>>> selector)
         {
-            Debug.Assert(@this != null);
+            Debug.Assert(source != null);
             Debug.Assert(selector != null);
 
-            return @this.Select(selector).Collect();
+            return source.Select(selector).Collect();
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static <#= Name #><IEnumerable<TSource><#= RTDecl #>> WhereByImpl<TSource<#= RTDecl #>>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, <#= Name #><bool<#= RTDecl #>>> predicate)
         {
-            <#+ WriteNotNull(true); #>
+            <#+ WriteNotNull("source", true); #>
             Require.NotNull(predicate, nameof(predicate));
 
-            return <#+ WriteFactory("IEnumerable<TSource>"); #>(WhereByIterator(@this, predicate));
+            return <#+ WriteFactory("IEnumerable<TSource>"); #>(WhereByIterator(source, predicate));
         }
 
         private static IEnumerable<TSource> WhereByIterator<TSource<#= RTDecl #>>(
@@ -68,29 +68,29 @@ public partial class MonadTemplate
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static <#= Name #><IEnumerable<TResult><#= RTDecl #>> ZipWithImpl<TFirst, TSecond, TResult<#= RTDecl #>>(
-            this IEnumerable<TFirst> @this,
+            this IEnumerable<TFirst> source,
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, <#= Name #><TResult<#= RTDecl #>>> resultSelector)
         {
             Debug.Assert(resultSelector != null);
-            Debug.Assert(@this != null);
+            Debug.Assert(source != null);
             Debug.Assert(second != null);
 
-            return @this.Zip(second, resultSelector).Collect();
+            return source.Zip(second, resultSelector).Collect();
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static <#= Name #><TAccumulate<#= RTDecl #>> FoldImpl<TSource, TAccumulate<#= RTDecl #>>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             TAccumulate seed,
             Func<TAccumulate, TSource, <#= Name #><TAccumulate<#= RTDecl #>>> accumulator)
         {
-            <#+ WriteNotNull(true); #>
+            <#+ WriteNotNull("source", true); #>
             Require.NotNull(accumulator, nameof(accumulator));
 
             <#= Name #><TAccumulate<#= RTDecl #>> retval = <#+ WriteFactory("TAccumulate"); #>(seed);
 
-            using (var iter = @this.GetEnumerator())
+            using (var iter = source.GetEnumerator())
             {
                 while (iter.MoveNext())
                 {
@@ -107,18 +107,18 @@ public partial class MonadTemplate
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static <#= Name #><TAccumulate<#= RTDecl #>> FoldImpl<TSource, TAccumulate<#= RTDecl #>>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             TAccumulate seed,
             Func<TAccumulate, TSource, <#= Name #><TAccumulate<#= RTDecl #>>> accumulator,
             Func<<#= Name #><TAccumulate<#= RTDecl #>>, bool> predicate)
         {
-            <#+ WriteNotNull(true); #>
+            <#+ WriteNotNull("source", true); #>
             Require.NotNull(accumulator, nameof(accumulator));
             Require.NotNull(predicate, nameof(predicate));
 
             <#= Name #><TAccumulate<#= RTDecl #>> retval = <#+ WriteFactory("TAccumulate"); #>(seed);
 
-            using (var iter = @this.GetEnumerator())
+            using (var iter = source.GetEnumerator())
             {
                 while (predicate(retval) && iter.MoveNext())
                 {
@@ -135,13 +135,13 @@ public partial class MonadTemplate
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static <#= Name #><TSource<#= RTDecl #>> ReduceImpl<TSource<#= RTDecl #>>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, TSource, <#= Name #><TSource<#= RTDecl #>>> accumulator)
         {
-            <#+ WriteNotNull(true); #>
+            <#+ WriteNotNull("source", true); #>
             Require.NotNull(accumulator, nameof(accumulator));
 
-            using (var iter = @this.GetEnumerator())
+            using (var iter = source.GetEnumerator())
             {
                 if (!iter.MoveNext())
                 {
@@ -165,15 +165,15 @@ public partial class MonadTemplate
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static <#= Name #><TSource<#= RTDecl #>> ReduceImpl<TSource<#= RTDecl #>>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, TSource, <#= Name #><TSource<#= RTDecl #>>> accumulator,
             Func<<#= Name #><TSource<#= RTDecl #>>, bool> predicate)
         {
-            <#+ WriteNotNull(true); #>
+            <#+ WriteNotNull("source", true); #>
             Require.NotNull(accumulator, nameof(accumulator));
             Require.NotNull(predicate, nameof(predicate));
 
-            using (var iter = @this.GetEnumerator())
+            using (var iter = source.GetEnumerator())
             {
                 if (!iter.MoveNext())
                 {

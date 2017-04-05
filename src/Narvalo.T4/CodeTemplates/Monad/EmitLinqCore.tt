@@ -15,44 +15,44 @@ public partial class MonadTemplate
     public static partial class Qperators
     {
         public static <#= Name #><IEnumerable<TResult><#= RTDecl #>> SelectWith<TSource, TResult<#= RTDecl #>>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, <#= Name #><TResult<#= RTDecl #>>> selector)
-            => @this.SelectWithImpl(selector);
+            => source.SelectWithImpl(selector);
 
         public static <#= Name #><IEnumerable<TSource><#= RTDecl #>> WhereBy<TSource<#= RTDecl #>>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, <#= Name #><bool<#= RTDecl #>>> predicate)
-            => @this.WhereByImpl(predicate);
+            => source.WhereByImpl(predicate);
 
         public static <#= Name #><IEnumerable<TResult><#= RTDecl #>> ZipWith<TFirst, TSecond, TResult<#= RTDecl #>>(
-            this IEnumerable<TFirst> @this,
+            this IEnumerable<TFirst> source,
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, <#= Name #><TResult<#= RTDecl #>>> resultSelector)
-            => @this.ZipWithImpl(second, resultSelector);
+            => source.ZipWithImpl(second, resultSelector);
 
         public static <#= Name #><TAccumulate<#= RTDecl #>> Fold<TSource, TAccumulate<#= RTDecl #>>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             TAccumulate seed,
             Func<TAccumulate, TSource, <#= Name #><TAccumulate<#= RTDecl #>>> accumulator)
-            => @this.FoldImpl(seed, accumulator);
+            => source.FoldImpl(seed, accumulator);
 
         public static <#= Name #><TAccumulate<#= RTDecl #>> Fold<TSource, TAccumulate<#= RTDecl #>>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             TAccumulate seed,
             Func<TAccumulate, TSource, <#= Name #><TAccumulate<#= RTDecl #>>> accumulator,
             Func<<#= Name #><TAccumulate<#= RTDecl #>>, bool> predicate)
-            => @this.FoldImpl(seed, accumulator, predicate);
+            => source.FoldImpl(seed, accumulator, predicate);
 
         public static <#= Name #><TSource<#= RTDecl #>> Reduce<TSource<#= RTDecl #>>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, TSource, <#= Name #><TSource<#= RTDecl #>>> accumulator)
-            => @this.ReduceImpl(accumulator);
+            => source.ReduceImpl(accumulator);
 
         public static <#= Name #><TSource<#= RTDecl #>> Reduce<TSource<#= RTDecl #>>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, TSource, <#= Name #><TSource<#= RTDecl #>>> accumulator,
             Func<<#= Name #><TSource<#= RTDecl #>>, bool> predicate)
-            => @this.ReduceImpl(accumulator, predicate);
+            => source.ReduceImpl(accumulator, predicate);
     }
 <#+
     } // T4: End of EmitLinqCore().

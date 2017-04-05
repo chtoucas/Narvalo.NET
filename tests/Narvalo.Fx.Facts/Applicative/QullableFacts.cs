@@ -55,7 +55,7 @@ namespace Narvalo.Applicative {
             Assert.Null(q2);
         }
 
-        [t("Where() returns value if non-null and predicate is true.")]
+        [t("Where() returns non-null if non-null and predicate is true.")]
         public static void Where2() {
             int? source = 1;
             Func<int, bool> predicate = _ => true;
@@ -183,13 +183,22 @@ namespace Narvalo.Applicative {
             Assert.Equal(3, q.Value);
         }
 
-        [t("Join().")]
+        [t("Join() joins if non-null.")]
         public static void Join1() {
-            (int, int)? x1 = (1, 2);
-            (int, int)? x2 = (2, 3);
+            (int, short)? inner = (1, 2);
+            (short, int)? outer = (2, 3);
+            Func<(int, short), short> outerKeySelector = t => t.Item2;
+            Func<(short, int), short> innerKeySelector = t => t.Item1;
+            Func<(int, short), (short, int), (int, int)> resultSelector
+                = (x, y) => (x.Item1, y.Item2);
 
-            (int, int)? q = from t1 in x1
-                            join t2 in x2 on t1.Item2 equals t2.Item1
+            (int, int)? m = inner.Join(outer, outerKeySelector, innerKeySelector, resultSelector);
+            Assert.NotNull(m);
+            Assert.Equal(1, m.Value.Item1);
+            Assert.Equal(3, m.Value.Item2);
+
+            (int, int)? q = from t1 in inner
+                            join t2 in outer on t1.Item2 equals t2.Item1
                             select (t1.Item1, t2.Item2);
             Assert.NotNull(q);
             Assert.Equal(1, q.Value.Item1);

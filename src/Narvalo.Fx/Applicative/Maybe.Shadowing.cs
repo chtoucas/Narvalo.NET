@@ -111,11 +111,12 @@ namespace Narvalo.Applicative
 
     public static partial class Maybe
     {
-        internal static Maybe<IEnumerable<TSource>> CollectImpl<TSource>(this IEnumerable<Maybe<TSource>> @this)
+        internal static Maybe<IEnumerable<TSource>> CollectImpl<TSource>(
+            this IEnumerable<Maybe<TSource>> source)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
 
-            return Of(CollectAnyIterator(@this));
+            return Of(CollectAnyIterator(source));
         }
     }
 }
@@ -130,13 +131,13 @@ namespace Narvalo.Linq
     public static partial class Qperators
     {
         internal static Maybe<IEnumerable<TSource>> WhereByImpl<TSource>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, Maybe<bool>> predicate)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
             Require.NotNull(predicate, nameof(predicate));
 
-            return Maybe.Of(WhereAnyIterator(@this, predicate));
+            return Maybe.Of(WhereAnyIterator(source, predicate));
         }
     }
 }

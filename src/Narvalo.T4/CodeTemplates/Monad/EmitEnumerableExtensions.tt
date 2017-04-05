@@ -10,12 +10,12 @@ public partial class MonadTemplate
     public static partial class <#= ExtensionsClsName #>
     {
         public static <#= Name #><IEnumerable<TSource><#= RTDecl #>> Collect<TSource<#= RTDecl #>>(
-            this IEnumerable<<#= Name #><TSource<#= RTDecl #>>> @this)
-            => @this.CollectImpl();
+            this IEnumerable<<#= Name #><TSource<#= RTDecl #>>> source)
+            => source.CollectImpl();
 <#+ if (HasSum) { #>
 
-        public static <#= Name #><TSource> Sum<TSource>(this IEnumerable<<#= Name #><TSource>> @this)
-            => @this.SumImpl();
+        public static <#= Name #><TSource> Sum<TSource>(this IEnumerable<<#= Name #><TSource>> source)
+            => source.SumImpl();
 <#+ } // T4: End of HasSum. #>
     }
 <#+

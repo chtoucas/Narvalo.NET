@@ -477,11 +477,11 @@ namespace Narvalo.Applicative
     public static partial class Maybe
     {
         public static Maybe<IEnumerable<TSource>> Collect<TSource>(
-            this IEnumerable<Maybe<TSource>> @this)
-            => @this.CollectImpl();
+            this IEnumerable<Maybe<TSource>> source)
+            => source.CollectImpl();
 
-        public static Maybe<TSource> Sum<TSource>(this IEnumerable<Maybe<TSource>> @this)
-            => @this.SumImpl();
+        public static Maybe<TSource> Sum<TSource>(this IEnumerable<Maybe<TSource>> source)
+            => source.SumImpl();
     }
 }
 
@@ -502,10 +502,10 @@ namespace Narvalo.Internal
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Maybe<IEnumerable<TSource>> CollectImpl<TSource>(
-            this IEnumerable<Maybe<TSource>> @this)
+            this IEnumerable<Maybe<TSource>> source)
         {
-            Require.NotNull(@this, nameof(@this));
-            return Maybe<IEnumerable<TSource>>.η(CollectIterator(@this));
+            Require.NotNull(source, nameof(source));
+            return Maybe<IEnumerable<TSource>>.η(CollectIterator(source));
         }
 
         private static IEnumerable<TSource> CollectIterator<TSource>(IEnumerable<Maybe<TSource>> source)
@@ -536,10 +536,10 @@ namespace Narvalo.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Maybe<TSource> SumImpl<TSource>(
-            this IEnumerable<Maybe<TSource>> @this)
+            this IEnumerable<Maybe<TSource>> source)
         {
-            Debug.Assert(@this != null);
-            return @this.Aggregate(Maybe<TSource>.None, (m, n) => m.OrElse(n));
+            Debug.Assert(source != null);
+            return source.Aggregate(Maybe<TSource>.None, (m, n) => m.OrElse(n));
         }
     }
 }
@@ -562,44 +562,44 @@ namespace Narvalo.Linq
     public static partial class Qperators
     {
         public static Maybe<IEnumerable<TResult>> SelectWith<TSource, TResult>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, Maybe<TResult>> selector)
-            => @this.SelectWithImpl(selector);
+            => source.SelectWithImpl(selector);
 
         public static Maybe<IEnumerable<TSource>> WhereBy<TSource>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, Maybe<bool>> predicate)
-            => @this.WhereByImpl(predicate);
+            => source.WhereByImpl(predicate);
 
         public static Maybe<IEnumerable<TResult>> ZipWith<TFirst, TSecond, TResult>(
-            this IEnumerable<TFirst> @this,
+            this IEnumerable<TFirst> source,
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, Maybe<TResult>> resultSelector)
-            => @this.ZipWithImpl(second, resultSelector);
+            => source.ZipWithImpl(second, resultSelector);
 
         public static Maybe<TAccumulate> Fold<TSource, TAccumulate>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             TAccumulate seed,
             Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulator)
-            => @this.FoldImpl(seed, accumulator);
+            => source.FoldImpl(seed, accumulator);
 
         public static Maybe<TAccumulate> Fold<TSource, TAccumulate>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             TAccumulate seed,
             Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulator,
             Func<Maybe<TAccumulate>, bool> predicate)
-            => @this.FoldImpl(seed, accumulator, predicate);
+            => source.FoldImpl(seed, accumulator, predicate);
 
         public static Maybe<TSource> Reduce<TSource>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, TSource, Maybe<TSource>> accumulator)
-            => @this.ReduceImpl(accumulator);
+            => source.ReduceImpl(accumulator);
 
         public static Maybe<TSource> Reduce<TSource>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, TSource, Maybe<TSource>> accumulator,
             Func<Maybe<TSource>, bool> predicate)
-            => @this.ReduceImpl(accumulator, predicate);
+            => source.ReduceImpl(accumulator, predicate);
     }
 }
 
@@ -620,24 +620,24 @@ namespace Narvalo.Internal
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Maybe<IEnumerable<TResult>> SelectWithImpl<TSource, TResult>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, Maybe<TResult>> selector)
         {
-            Debug.Assert(@this != null);
+            Debug.Assert(source != null);
             Debug.Assert(selector != null);
 
-            return @this.Select(selector).Collect();
+            return source.Select(selector).Collect();
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Maybe<IEnumerable<TSource>> WhereByImpl<TSource>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, Maybe<bool>> predicate)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
             Require.NotNull(predicate, nameof(predicate));
 
-            return Maybe<IEnumerable<TSource>>.η(WhereByIterator(@this, predicate));
+            return Maybe<IEnumerable<TSource>>.η(WhereByIterator(source, predicate));
         }
 
         private static IEnumerable<TSource> WhereByIterator<TSource>(
@@ -668,29 +668,29 @@ namespace Narvalo.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Maybe<IEnumerable<TResult>> ZipWithImpl<TFirst, TSecond, TResult>(
-            this IEnumerable<TFirst> @this,
+            this IEnumerable<TFirst> source,
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, Maybe<TResult>> resultSelector)
         {
             Debug.Assert(resultSelector != null);
-            Debug.Assert(@this != null);
+            Debug.Assert(source != null);
             Debug.Assert(second != null);
 
-            return @this.Zip(second, resultSelector).Collect();
+            return source.Zip(second, resultSelector).Collect();
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Maybe<TAccumulate> FoldImpl<TSource, TAccumulate>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             TAccumulate seed,
             Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulator)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
             Require.NotNull(accumulator, nameof(accumulator));
 
             Maybe<TAccumulate> retval = Maybe<TAccumulate>.η(seed);
 
-            using (var iter = @this.GetEnumerator())
+            using (var iter = source.GetEnumerator())
             {
                 while (iter.MoveNext())
                 {
@@ -703,18 +703,18 @@ namespace Narvalo.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Maybe<TAccumulate> FoldImpl<TSource, TAccumulate>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             TAccumulate seed,
             Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulator,
             Func<Maybe<TAccumulate>, bool> predicate)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
             Require.NotNull(accumulator, nameof(accumulator));
             Require.NotNull(predicate, nameof(predicate));
 
             Maybe<TAccumulate> retval = Maybe<TAccumulate>.η(seed);
 
-            using (var iter = @this.GetEnumerator())
+            using (var iter = source.GetEnumerator())
             {
                 while (predicate(retval) && iter.MoveNext())
                 {
@@ -727,13 +727,13 @@ namespace Narvalo.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Maybe<TSource> ReduceImpl<TSource>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, TSource, Maybe<TSource>> accumulator)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
             Require.NotNull(accumulator, nameof(accumulator));
 
-            using (var iter = @this.GetEnumerator())
+            using (var iter = source.GetEnumerator())
             {
                 if (!iter.MoveNext())
                 {
@@ -753,15 +753,15 @@ namespace Narvalo.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Maybe<TSource> ReduceImpl<TSource>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, TSource, Maybe<TSource>> accumulator,
             Func<Maybe<TSource>, bool> predicate)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
             Require.NotNull(accumulator, nameof(accumulator));
             Require.NotNull(predicate, nameof(predicate));
 
-            using (var iter = @this.GetEnumerator())
+            using (var iter = source.GetEnumerator())
             {
                 if (!iter.MoveNext())
                 {

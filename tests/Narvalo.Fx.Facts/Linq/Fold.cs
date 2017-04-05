@@ -17,8 +17,8 @@ namespace Narvalo.Linq {
             Func<Either<int, int>, bool> predicate = _ => true;
 
             IEnumerable<int> nil = null;
-            Assert.Throws<ArgumentNullException>("this", () => nil.Fold(seed, accumulator));
-            Assert.Throws<ArgumentNullException>("this", () => nil.Fold(seed, accumulator, predicate));
+            Assert.Throws<ArgumentNullException>("source", () => nil.Fold(seed, accumulator));
+            Assert.Throws<ArgumentNullException>("source", () => nil.Fold(seed, accumulator, predicate));
 
             var source = Enumerable.Range(0, 1);
             Assert.Throws<ArgumentNullException>("accumulator", () => source.Fold(seed, default(Func<int, int, Either<int, int>>)));
@@ -35,8 +35,8 @@ namespace Narvalo.Linq {
             Func<Fallible<int>, bool> predicate = _ => true;
 
             IEnumerable<int> nil = null;
-            Assert.Throws<ArgumentNullException>("this", () => nil.Fold(seed, accumulator));
-            Assert.Throws<ArgumentNullException>("this", () => nil.Fold(seed, accumulator, predicate));
+            Assert.Throws<ArgumentNullException>("source", () => nil.Fold(seed, accumulator));
+            Assert.Throws<ArgumentNullException>("source", () => nil.Fold(seed, accumulator, predicate));
 
             var source = Enumerable.Range(0, 1);
             Assert.Throws<ArgumentNullException>("accumulator", () => source.Fold(seed, default(Func<int, int, Fallible<int>>)));
@@ -53,8 +53,8 @@ namespace Narvalo.Linq {
             Func<Maybe<int>, bool> predicate = _ => true;
 
             IEnumerable<int> nil = null;
-            Assert.Throws<ArgumentNullException>("this", () => nil.Fold(seed, accumulator));
-            Assert.Throws<ArgumentNullException>("this", () => nil.Fold(seed, accumulator, predicate));
+            Assert.Throws<ArgumentNullException>("source", () => nil.Fold(seed, accumulator));
+            Assert.Throws<ArgumentNullException>("source", () => nil.Fold(seed, accumulator, predicate));
 
             var source = Enumerable.Range(0, 1);
             Assert.Throws<ArgumentNullException>("accumulator", () => source.Fold(seed, default(Func<int, int, Maybe<int>>)));
@@ -71,8 +71,8 @@ namespace Narvalo.Linq {
             Func<Outcome<int>, bool> predicate = _ => true;
 
             IEnumerable<int> nil = null;
-            Assert.Throws<ArgumentNullException>("this", () => nil.Fold(seed, accumulator));
-            Assert.Throws<ArgumentNullException>("this", () => nil.Fold(seed, accumulator, predicate));
+            Assert.Throws<ArgumentNullException>("source", () => nil.Fold(seed, accumulator));
+            Assert.Throws<ArgumentNullException>("source", () => nil.Fold(seed, accumulator, predicate));
 
             var source = Enumerable.Range(0, 1);
             Assert.Throws<ArgumentNullException>("accumulator", () => source.Fold(seed, default(Func<int, int, Outcome<int>>)));
@@ -89,8 +89,8 @@ namespace Narvalo.Linq {
             Func<Result<int, int>, bool> predicate = _ => true;
 
             IEnumerable<int> nil = null;
-            Assert.Throws<ArgumentNullException>("this", () => nil.Fold(seed, accumulator));
-            Assert.Throws<ArgumentNullException>("this", () => nil.Fold(seed, accumulator, predicate));
+            Assert.Throws<ArgumentNullException>("source", () => nil.Fold(seed, accumulator));
+            Assert.Throws<ArgumentNullException>("source", () => nil.Fold(seed, accumulator, predicate));
 
             var source = Enumerable.Range(0, 1);
             Assert.Throws<ArgumentNullException>("accumulator", () => source.Fold(seed, default(Func<int, int, Result<int, int>>)));

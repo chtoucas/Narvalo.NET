@@ -478,8 +478,8 @@ namespace Narvalo.T4.Testbed
     public static partial class MonadZero
     {
         public static MonadZero<IEnumerable<TSource>> Collect<TSource>(
-            this IEnumerable<MonadZero<TSource>> @this)
-            => @this.CollectImpl();
+            this IEnumerable<MonadZero<TSource>> source)
+            => source.CollectImpl();
     }
 }
 
@@ -498,10 +498,10 @@ namespace Narvalo.T4.Testbed.Internal
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static MonadZero<IEnumerable<TSource>> CollectImpl<TSource>(
-            this IEnumerable<MonadZero<TSource>> @this)
+            this IEnumerable<MonadZero<TSource>> source)
         {
-            Require.NotNull(@this, nameof(@this));
-            return MonadZero<IEnumerable<TSource>>.η(CollectIterator(@this));
+            Require.NotNull(source, nameof(source));
+            return MonadZero<IEnumerable<TSource>>.η(CollectIterator(source));
         }
 
         private static IEnumerable<TSource> CollectIterator<TSource>(IEnumerable<MonadZero<TSource>> source)
@@ -550,44 +550,44 @@ namespace Narvalo.T4.Testbed.Linq
     public static partial class Qperators
     {
         public static MonadZero<IEnumerable<TResult>> SelectWith<TSource, TResult>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, MonadZero<TResult>> selector)
-            => @this.SelectWithImpl(selector);
+            => source.SelectWithImpl(selector);
 
         public static MonadZero<IEnumerable<TSource>> WhereBy<TSource>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, MonadZero<bool>> predicate)
-            => @this.WhereByImpl(predicate);
+            => source.WhereByImpl(predicate);
 
         public static MonadZero<IEnumerable<TResult>> ZipWith<TFirst, TSecond, TResult>(
-            this IEnumerable<TFirst> @this,
+            this IEnumerable<TFirst> source,
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, MonadZero<TResult>> resultSelector)
-            => @this.ZipWithImpl(second, resultSelector);
+            => source.ZipWithImpl(second, resultSelector);
 
         public static MonadZero<TAccumulate> Fold<TSource, TAccumulate>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             TAccumulate seed,
             Func<TAccumulate, TSource, MonadZero<TAccumulate>> accumulator)
-            => @this.FoldImpl(seed, accumulator);
+            => source.FoldImpl(seed, accumulator);
 
         public static MonadZero<TAccumulate> Fold<TSource, TAccumulate>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             TAccumulate seed,
             Func<TAccumulate, TSource, MonadZero<TAccumulate>> accumulator,
             Func<MonadZero<TAccumulate>, bool> predicate)
-            => @this.FoldImpl(seed, accumulator, predicate);
+            => source.FoldImpl(seed, accumulator, predicate);
 
         public static MonadZero<TSource> Reduce<TSource>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, TSource, MonadZero<TSource>> accumulator)
-            => @this.ReduceImpl(accumulator);
+            => source.ReduceImpl(accumulator);
 
         public static MonadZero<TSource> Reduce<TSource>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, TSource, MonadZero<TSource>> accumulator,
             Func<MonadZero<TSource>, bool> predicate)
-            => @this.ReduceImpl(accumulator, predicate);
+            => source.ReduceImpl(accumulator, predicate);
     }
 }
 
@@ -608,24 +608,24 @@ namespace Narvalo.T4.Testbed.Internal
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static MonadZero<IEnumerable<TResult>> SelectWithImpl<TSource, TResult>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, MonadZero<TResult>> selector)
         {
-            Debug.Assert(@this != null);
+            Debug.Assert(source != null);
             Debug.Assert(selector != null);
 
-            return @this.Select(selector).Collect();
+            return source.Select(selector).Collect();
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static MonadZero<IEnumerable<TSource>> WhereByImpl<TSource>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, MonadZero<bool>> predicate)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
             Require.NotNull(predicate, nameof(predicate));
 
-            return MonadZero<IEnumerable<TSource>>.η(WhereByIterator(@this, predicate));
+            return MonadZero<IEnumerable<TSource>>.η(WhereByIterator(source, predicate));
         }
 
         private static IEnumerable<TSource> WhereByIterator<TSource>(
@@ -656,29 +656,29 @@ namespace Narvalo.T4.Testbed.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static MonadZero<IEnumerable<TResult>> ZipWithImpl<TFirst, TSecond, TResult>(
-            this IEnumerable<TFirst> @this,
+            this IEnumerable<TFirst> source,
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, MonadZero<TResult>> resultSelector)
         {
             Debug.Assert(resultSelector != null);
-            Debug.Assert(@this != null);
+            Debug.Assert(source != null);
             Debug.Assert(second != null);
 
-            return @this.Zip(second, resultSelector).Collect();
+            return source.Zip(second, resultSelector).Collect();
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static MonadZero<TAccumulate> FoldImpl<TSource, TAccumulate>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             TAccumulate seed,
             Func<TAccumulate, TSource, MonadZero<TAccumulate>> accumulator)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
             Require.NotNull(accumulator, nameof(accumulator));
 
             MonadZero<TAccumulate> retval = MonadZero<TAccumulate>.η(seed);
 
-            using (var iter = @this.GetEnumerator())
+            using (var iter = source.GetEnumerator())
             {
                 while (iter.MoveNext())
                 {
@@ -693,18 +693,18 @@ namespace Narvalo.T4.Testbed.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static MonadZero<TAccumulate> FoldImpl<TSource, TAccumulate>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             TAccumulate seed,
             Func<TAccumulate, TSource, MonadZero<TAccumulate>> accumulator,
             Func<MonadZero<TAccumulate>, bool> predicate)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
             Require.NotNull(accumulator, nameof(accumulator));
             Require.NotNull(predicate, nameof(predicate));
 
             MonadZero<TAccumulate> retval = MonadZero<TAccumulate>.η(seed);
 
-            using (var iter = @this.GetEnumerator())
+            using (var iter = source.GetEnumerator())
             {
                 while (predicate(retval) && iter.MoveNext())
                 {
@@ -719,13 +719,13 @@ namespace Narvalo.T4.Testbed.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static MonadZero<TSource> ReduceImpl<TSource>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, TSource, MonadZero<TSource>> accumulator)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
             Require.NotNull(accumulator, nameof(accumulator));
 
-            using (var iter = @this.GetEnumerator())
+            using (var iter = source.GetEnumerator())
             {
                 if (!iter.MoveNext())
                 {
@@ -747,15 +747,15 @@ namespace Narvalo.T4.Testbed.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static MonadZero<TSource> ReduceImpl<TSource>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, TSource, MonadZero<TSource>> accumulator,
             Func<MonadZero<TSource>, bool> predicate)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
             Require.NotNull(accumulator, nameof(accumulator));
             Require.NotNull(predicate, nameof(predicate));
 
-            using (var iter = @this.GetEnumerator())
+            using (var iter = source.GetEnumerator())
             {
                 if (!iter.MoveNext())
                 {

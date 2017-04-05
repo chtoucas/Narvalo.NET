@@ -29,11 +29,11 @@ namespace Narvalo.Applicative
     public static partial class OutcomeExtensions
     {
         internal static Outcome<IEnumerable<TSource>> CollectImpl<TSource>(
-            this IEnumerable<Outcome<TSource>> @this)
+            this IEnumerable<Outcome<TSource>> source)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
 
-            return Outcome.Of(CollectAnyIterator(@this));
+            return Outcome.Of(CollectAnyIterator(source));
         }
     }
 }
@@ -48,13 +48,13 @@ namespace Narvalo.Linq
     public static partial class Qperators
     {
         internal static Outcome<IEnumerable<TSource>> WhereByImpl<TSource>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, Outcome<bool>> predicate)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
             Require.NotNull(predicate, nameof(predicate));
 
-            return Outcome.Of(WhereAnyIterator(@this, predicate));
+            return Outcome.Of(WhereAnyIterator(source, predicate));
         }
     }
 }

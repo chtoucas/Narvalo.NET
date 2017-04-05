@@ -49,11 +49,11 @@ namespace Narvalo.Applicative
     // Provides extension methods for IEnumerable<Maybe<T>>.
     public static partial class Maybe
     {
-        public static IEnumerable<TSource> CollectAny<TSource>(this IEnumerable<Maybe<TSource>> @this)
+        public static IEnumerable<TSource> CollectAny<TSource>(this IEnumerable<Maybe<TSource>> source)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
 
-            return CollectAnyIterator(@this);
+            return CollectAnyIterator(source);
         }
 
         private static IEnumerable<TSource> CollectAnyIterator<TSource>(IEnumerable<Maybe<TSource>> source)

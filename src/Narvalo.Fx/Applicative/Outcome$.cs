@@ -15,14 +15,16 @@ namespace Narvalo.Applicative
     // Provides extension methods for IEnumerable<Outcome<T>>.
     public static partial class OutcomeExtensions
     {
-        public static IEnumerable<TSource> CollectAny<TSource>(this IEnumerable<Outcome<TSource>> @this)
+        public static IEnumerable<TSource> CollectAny<TSource>(
+            this IEnumerable<Outcome<TSource>> source)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
 
-            return CollectAnyIterator(@this);
+            return CollectAnyIterator(source);
         }
 
-        private static IEnumerable<TSource> CollectAnyIterator<TSource>(IEnumerable<Outcome<TSource>> source)
+        private static IEnumerable<TSource> CollectAnyIterator<TSource>(
+            IEnumerable<Outcome<TSource>> source)
         {
             Debug.Assert(source != null);
 

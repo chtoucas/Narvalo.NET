@@ -16,7 +16,7 @@ namespace Narvalo.Linq {
             Func<int, Either<bool, int>> predicate = _ => Either<bool, int>.OfLeft(true);
 
             IEnumerable<int> nil = null;
-            Assert.Throws<ArgumentNullException>("this", () => nil.WhereBy(predicate));
+            Assert.Throws<ArgumentNullException>("source", () => nil.WhereBy(predicate));
 
             var source = Enumerable.Range(0, 1);
             Assert.Throws<ArgumentNullException>("predicate", () => source.WhereBy(default(Func<int, Either<bool, int>>)));
@@ -42,7 +42,7 @@ namespace Narvalo.Linq {
             Func<int, Fallible<bool>> predicate = _ => Fallible.Of(true);
 
             IEnumerable<int> nil = null;
-            Assert.Throws<ArgumentNullException>("this", () => nil.WhereBy(predicate));
+            Assert.Throws<ArgumentNullException>("source", () => nil.WhereBy(predicate));
 
             var source = Enumerable.Range(0, 1);
             Assert.Throws<ArgumentNullException>("predicate", () => source.WhereBy(default(Func<int, Fallible<bool>>)));
@@ -67,7 +67,7 @@ namespace Narvalo.Linq {
             Func<int, Maybe<bool>> predicate = _ => Maybe.Of(true);
 
             IEnumerable<int> nil = null;
-            Assert.Throws<ArgumentNullException>("this", () => nil.WhereBy(predicate));
+            Assert.Throws<ArgumentNullException>("source", () => nil.WhereBy(predicate));
 
             var source = Enumerable.Range(0, 1);
             Assert.Throws<ArgumentNullException>("predicate", () => source.WhereBy(default(Func<int, Maybe<bool>>)));
@@ -92,7 +92,7 @@ namespace Narvalo.Linq {
             Func<int, Outcome<bool>> predicate = _ => Outcome.Of(true);
 
             IEnumerable<int> nil = null;
-            Assert.Throws<ArgumentNullException>("this", () => nil.WhereBy(predicate));
+            Assert.Throws<ArgumentNullException>("source", () => nil.WhereBy(predicate));
 
             var source = Enumerable.Range(0, 1);
             Assert.Throws<ArgumentNullException>("predicate", () => source.WhereBy(default(Func<int, Outcome<bool>>)));
@@ -117,7 +117,7 @@ namespace Narvalo.Linq {
             Func<int, Result<bool, int>> predicate = _ => Result<bool, int>.Of(true);
 
             IEnumerable<int> nil = null;
-            Assert.Throws<ArgumentNullException>("this", () => nil.WhereBy(predicate));
+            Assert.Throws<ArgumentNullException>("source", () => nil.WhereBy(predicate));
 
             var source = Enumerable.Range(0, 1);
             Assert.Throws<ArgumentNullException>("predicate", () => source.WhereBy(default(Func<int, Result<bool, int>>)));

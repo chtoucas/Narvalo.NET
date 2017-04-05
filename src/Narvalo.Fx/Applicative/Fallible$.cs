@@ -14,14 +14,16 @@ namespace Narvalo.Applicative
     // Provides extension methods for IEnumerable<Fallible<T>>.
     public static partial class FallibleExtensions
     {
-        public static IEnumerable<TSource> CollectAny<TSource>(this IEnumerable<Fallible<TSource>> @this)
+        public static IEnumerable<TSource> CollectAny<TSource>(
+            this IEnumerable<Fallible<TSource>> source)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
 
-            return CollectAnyIterator(@this);
+            return CollectAnyIterator(source);
         }
 
-        private static IEnumerable<TSource> CollectAnyIterator<TSource>(IEnumerable<Fallible<TSource>> source)
+        private static IEnumerable<TSource> CollectAnyIterator<TSource>(
+            IEnumerable<Fallible<TSource>> source)
         {
             Debug.Assert(source != null);
 

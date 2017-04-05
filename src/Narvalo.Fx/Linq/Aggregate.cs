@@ -9,15 +9,15 @@ namespace Narvalo.Linq
     {
         // Reduce
         public static TSource Aggregate<TSource>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, TSource, TSource> accumulator,
             Func<TSource, bool> predicate)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
             Require.NotNull(accumulator, nameof(accumulator));
             Require.NotNull(predicate, nameof(predicate));
 
-            using (var iter = @this.GetEnumerator())
+            using (var iter = source.GetEnumerator())
             {
                 if (!iter.MoveNext())
                 {
@@ -37,18 +37,18 @@ namespace Narvalo.Linq
 
         // Fold
         public static TAccumulate Aggregate<TSource, TAccumulate>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             TAccumulate seed,
             Func<TAccumulate, TSource, TAccumulate> accumulator,
             Func<TAccumulate, bool> predicate)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
             Require.NotNull(accumulator, nameof(accumulator));
             Require.NotNull(predicate, nameof(predicate));
 
             TAccumulate retval = seed;
 
-            using (var iter = @this.GetEnumerator())
+            using (var iter = source.GetEnumerator())
             {
                 while (predicate(retval) && iter.MoveNext())
                 {
@@ -61,20 +61,20 @@ namespace Narvalo.Linq
 
         // Fold
         public static TResult Aggregate<TSource, TAccumulate, TResult>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             TAccumulate seed,
             Func<TAccumulate, TSource, TAccumulate> accumulator,
             Func<TAccumulate, TResult> resultSelector,
             Func<TAccumulate, bool> predicate)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
             Require.NotNull(accumulator, nameof(accumulator));
             Require.NotNull(resultSelector, nameof(resultSelector));
             Require.NotNull(predicate, nameof(predicate));
 
             TAccumulate retval = seed;
 
-            using (var iter = @this.GetEnumerator())
+            using (var iter = source.GetEnumerator())
             {
                 while (predicate(retval) && iter.MoveNext())
                 {

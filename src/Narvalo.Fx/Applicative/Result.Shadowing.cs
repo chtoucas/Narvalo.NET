@@ -28,11 +28,11 @@ namespace Narvalo.Applicative
     public static partial class Result
     {
         internal static Result<IEnumerable<TSource>, TError> CollectImpl<TSource, TError>(
-            this IEnumerable<Result<TSource, TError>> @this)
+            this IEnumerable<Result<TSource, TError>> source)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
 
-            return Result<IEnumerable<TSource>, TError>.Of(CollectAnyIterator(@this));
+            return Result<IEnumerable<TSource>, TError>.Of(CollectAnyIterator(source));
         }
     }
 }

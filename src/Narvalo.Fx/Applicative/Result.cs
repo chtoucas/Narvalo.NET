@@ -32,11 +32,12 @@ namespace Narvalo.Applicative
     // Provides extension methods for IEnumerable<Result<T, TError>>.
     public static partial class Result
     {
-        public static IEnumerable<TSource> CollectAny<TSource, TError>(this IEnumerable<Result<TSource, TError>> @this)
+        public static IEnumerable<TSource> CollectAny<TSource, TError>(
+            this IEnumerable<Result<TSource, TError>> source)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
 
-            return CollectAnyIterator(@this);
+            return CollectAnyIterator(source);
         }
 
         private static IEnumerable<TSource> CollectAnyIterator<TSource, TError>(

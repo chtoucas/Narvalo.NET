@@ -13,7 +13,7 @@ namespace Narvalo.Linq {
         [t("WhereAny() guards.")]
         public static void WhereAny0() {
             IEnumerable<int> nil = null;
-            Assert.Throws<ArgumentNullException>("this", () => nil.WhereAny(_ => true));
+            Assert.Throws<ArgumentNullException>("source", () => nil.WhereAny(_ => true));
 
             var source = Enumerable.Range(0, 1);
             Assert.Throws<ArgumentNullException>("predicate", () => source.WhereAny(default(Func<int, bool?>)));
@@ -35,7 +35,7 @@ namespace Narvalo.Linq {
         [t("WhereAny() guards (Either).")]
         public static void WhereAny0a() {
             IEnumerable<int> nil = null;
-            Assert.Throws<ArgumentNullException>("this", () => nil.WhereAny(_ => Either<bool, int>.OfLeft(true)));
+            Assert.Throws<ArgumentNullException>("source", () => nil.WhereAny(_ => Either<bool, int>.OfLeft(true)));
 
             var source = Enumerable.Range(0, 1);
             Assert.Throws<ArgumentNullException>("predicate", () => source.WhereAny(default(Func<int, Either<bool, int>>)));
@@ -57,7 +57,7 @@ namespace Narvalo.Linq {
         [t("WhereAny() guards (Fallible).")]
         public static void WhereAny0b() {
             IEnumerable<int> nil = null;
-            Assert.Throws<ArgumentNullException>("this", () => nil.WhereAny(_ => Fallible.Of(true)));
+            Assert.Throws<ArgumentNullException>("source", () => nil.WhereAny(_ => Fallible.Of(true)));
 
             var source = Enumerable.Range(0, 1);
             Assert.Throws<ArgumentNullException>("predicate", () => source.WhereAny(default(Func<int, Fallible<bool>>)));
@@ -79,7 +79,7 @@ namespace Narvalo.Linq {
         [t("WhereAny() guards (Maybe).")]
         public static void WhereAny0c() {
             IEnumerable<int> nil = null;
-            Assert.Throws<ArgumentNullException>("this", () => nil.WhereAny(_ => Maybe.Of(true)));
+            Assert.Throws<ArgumentNullException>("source", () => nil.WhereAny(_ => Maybe.Of(true)));
 
             var source = Enumerable.Range(0, 1);
             Assert.Throws<ArgumentNullException>("predicate", () => source.WhereAny(default(Func<int, Maybe<bool>>)));
@@ -101,7 +101,7 @@ namespace Narvalo.Linq {
         [t("WhereAny() guards (Outcome).")]
         public static void WhereAny0d() {
             IEnumerable<int> nil = null;
-            Assert.Throws<ArgumentNullException>("this", () => nil.WhereAny(_ => Outcome.Of(true)));
+            Assert.Throws<ArgumentNullException>("source", () => nil.WhereAny(_ => Outcome.Of(true)));
 
             var source = Enumerable.Range(0, 1);
             Assert.Throws<ArgumentNullException>("predicate", () => source.WhereAny(default(Func<int, Outcome<bool>>)));
@@ -123,7 +123,7 @@ namespace Narvalo.Linq {
         [t("WhereAny() guards (Result).")]
         public static void WhereAny0e() {
             IEnumerable<int> nil = null;
-            Assert.Throws<ArgumentNullException>("this", () => nil.WhereAny(_ => Result<bool, int>.Of(true)));
+            Assert.Throws<ArgumentNullException>("source", () => nil.WhereAny(_ => Result<bool, int>.Of(true)));
 
             var source = Enumerable.Range(0, 1);
             Assert.Throws<ArgumentNullException>("predicate", () => source.WhereAny(default(Func<int, Result<bool, int>>)));

@@ -103,8 +103,8 @@ namespace System.Linq.Tests {
 
         [Fact]
         public void SourceNull() {
-            Assert.Throws<ArgumentNullException>("this", () => ((IEnumerable<int>)null).Append(1));
-            Assert.Throws<ArgumentNullException>("this", () => ((IEnumerable<int>)null).Prepend(1));
+            Assert.Throws<ArgumentNullException>("source", () => ((IEnumerable<int>)null).Append(1));
+            Assert.Throws<ArgumentNullException>("source", () => ((IEnumerable<int>)null).Prepend(1));
         }
 
         [Fact]

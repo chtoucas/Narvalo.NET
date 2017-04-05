@@ -16,9 +16,9 @@ namespace Narvalo.Linq {
 
             IEnumerable<int> nil = null;
 
-            Assert.Throws<ArgumentNullException>("this", () => nil.Aggregate(accumulator, predicate));
-            Assert.Throws<ArgumentNullException>("this", () => nil.Aggregate(1, accumulator, predicate));
-            Assert.Throws<ArgumentNullException>("this", () => nil.Aggregate(1, accumulator, resultSelector, predicate));
+            Assert.Throws<ArgumentNullException>("source", () => nil.Aggregate(accumulator, predicate));
+            Assert.Throws<ArgumentNullException>("source", () => nil.Aggregate(1, accumulator, predicate));
+            Assert.Throws<ArgumentNullException>("source", () => nil.Aggregate(1, accumulator, resultSelector, predicate));
 
             var source = Enumerable.Range(0, 1);
 

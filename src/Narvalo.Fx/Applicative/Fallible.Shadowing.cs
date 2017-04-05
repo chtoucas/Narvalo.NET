@@ -38,11 +38,11 @@ namespace Narvalo.Applicative
     public static partial class FallibleExtensions
     {
         internal static Fallible<IEnumerable<TSource>> CollectImpl<TSource>(
-            this IEnumerable<Fallible<TSource>> @this)
+            this IEnumerable<Fallible<TSource>> source)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
 
-            return Fallible.Of(CollectAnyIterator(@this));
+            return Fallible.Of(CollectAnyIterator(source));
         }
     }
 }
@@ -57,13 +57,13 @@ namespace Narvalo.Linq
     public static partial class Qperators
     {
         internal static Fallible<IEnumerable<TSource>> WhereByImpl<TSource>(
-            this IEnumerable<TSource> @this,
+            this IEnumerable<TSource> source,
             Func<TSource, Fallible<bool>> predicate)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(source, nameof(source));
             Require.NotNull(predicate, nameof(predicate));
 
-            return Fallible.Of(WhereAnyIterator(@this, predicate));
+            return Fallible.Of(WhereAnyIterator(source, predicate));
         }
     }
 }
