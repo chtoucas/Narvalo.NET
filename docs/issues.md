@@ -56,14 +56,13 @@ Next:
 Narvalo.Fx
 ----------
 
-- More QEP for Monads.
-- Simplify LINQ for `Maybe<T?>`?
+- More QEP for Monads? Simplify LINQ for `Maybe<T?>`?
 - Auto-generate tests for null-guards (missing only for `Either`).
   Add more tests beyond the auto-generated ones. Add tests for purity?
 - `Either`, should we throw if we have a lefty method for a righty object
   (see `WhenLeft` for instance).
-- Move `Collect`, `CollectAny` and `Sum` to `Narvalo.Linq`? This would make
-  it easier to find them.
+- Move `Collect`, `CollectAny` and `Sum` to `Qperators`? This would make
+  it easier to find them. Move `Repeat` to `Sequence`?
 - Add "shadows" of `Collect` and `WhereBy` for `Result` and `Either`.
 - Add variants of `CollectAny` and co on the right for Either?
 - Remove `ZipWith` resp. `SelectWith`? Check that (here) `SelectWith` is just

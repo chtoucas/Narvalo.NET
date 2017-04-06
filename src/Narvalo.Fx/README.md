@@ -88,10 +88,6 @@ Programming. Why write another one? This project started as an exercise to bette
 understand monads, it just happened that I thought it was solid enough to be
 published; of course, I prefer my version too :relaxed:.
 
-#### References
-- Railway Oriented Programming, [explanation](http://fsharpforfunandprofit.com/rop)
-  and [sample codes](https://github.com/swlaschin/Railway-Oriented-Programming-Example)
-
 --------------------------------------------------------------------------------
 
 Unit Type
@@ -287,7 +283,7 @@ Maybe Type
 - [Construction / Deconstruction](#maybe-ctor)
 - [Give me back the value!](#maybe-value)
 - [Matching](#maybe-matching)
-- [Programming with side-effects](#maybe-effects)
+- [Programming for side-effects](#maybe-effects)
 - [Querying](#maybe-querying)
 - [Binding](#maybe-binding)
 - [Design notes](#maybe-design)
@@ -365,7 +361,7 @@ To repeat myself, this is not a recommended practice. Anyway,
 
 ### <a name="maybe-matching"></a>Matching
 
-### <a name="maybe-effects"></a>Programming with side-effects
+### <a name="maybe-effects"></a>Programming for side-effects
 
 ### <a name="maybe-querying"></a>Querying
 The `Maybe<T>` type supports a subset of the [Query expression pattern](https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#the-query-expression-pattern),
@@ -435,6 +431,7 @@ Railway Oriented Programming
 - [`Fallible`](#rop-fallible)
 - [`Fallible<T>`](#rop-fallibleT)
 - [`Result<T, TError>`](#rop-result)
+- [Further readings](#rop-further)
 
 Typical use cases:
 - To encapsulate the result of a computation with lightweight error reporting
@@ -522,15 +519,19 @@ var failure = Result<int, Error>.FromError(new Error());
 (bool succeed, T value, TError error) = result;
 ```
 
+### <a name="rop-further"></a>Further readings
+- Railway Oriented Programming, [explanation](http://fsharpforfunandprofit.com/rop)
+  and [sample codes](https://github.com/swlaschin/Railway-Oriented-Programming-Example)
+
 --------------------------------------------------------------------------------
 
 Either Type
 -----------
 
-- Construction / Deconstruction
-- Matching
-- Querying
-- Binding
+- [Construction / Deconstruction](#either-ctor)
+- [Matching](#either-matching)
+- [Querying](#either-querying)
+- [Binding](#either-binding)
 
 The either type is the simplest possible
 [discriminated union](https://en.wikipedia.org/wiki/Tagged_union).
@@ -545,9 +546,9 @@ var right = Either<int, long>.OfRight(1L);
 (bool isLeft, TLeft left, TRight right) = either;
 ```
 
-### <a name="either-querying"></a>Querying
-
 ### <a name="either-matching"></a>Matching
+
+### <a name="either-querying"></a>Querying
 
 ### <a name="either-binding"></a>Binding
 
@@ -692,8 +693,6 @@ Operator | Return Type | Deferred
 `Unfold`      | `IEnumerable<T>`           | Streaming
 `Repeat`      | `Monad<IEnumerable<T>>`    | Streaming
 
-### Further readings
-
 --------------------------------------------------------------------------------
 
 Recursion
@@ -712,6 +711,14 @@ Tour of the Monad Verbs
 
 Haskell to C# Walk-Through
 --------------------------
+
+- [Basic monad functions](#haskell-basic)
+- [Generalisations of list functions](#haskell-list)
+- [Conditional execution of monadic expressions](#haskell-exec)
+- [Monadic lifting operators](#haskell-lift)
+- [Monad Plus](#haskell-plus)
+- [`Maybe` specific functions](#haskell-maybe)
+- [Further readings](#haskell-further)
 
 We will use the Maybe type as an example. Below we use:
 - `obj` for an object of type `Maybe<T>`.
@@ -732,7 +739,7 @@ Haskell | C# | Return Type
 
 We do not implement `fail` as .NET has its own way of reporting errors.
 
-### Basic monad functions
+### <a name="haskell-basic"></a>Basic monad functions
 
 Haskell | C# | Return Type
 --------|----|------------
@@ -745,7 +752,7 @@ Haskell | C# | Return Type
 `forever`                | -                  | -
 `void`                   | `obj.Skip`         | `Maybe<Unit>`
 
-### Generalisations of list functions
+### <a name="haskell-list"></a>Generalisations of list functions
 
 Below `square` is an object of type `Maybe<Maybe<T>>`.
 
@@ -776,14 +783,14 @@ public static Maybe<(IEnumerable<T1>, IEnumerable<T2>)> SelectUnzip<T, T1, T2>(
 }
 ```
 
-### Conditional execution of monadic expressions
+### <a name="haskell-exec"></a>Conditional execution of monadic expressions
 
 Haskell | C# | Return Type
 --------|----|------------
 `when`   | -             | -
 `unless` | -             | -
 
-### Monadic lifting operators
+### <a name="haskell-lift"></a>Monadic lifting operators
 
 Haskell | C# | Return Type
 --------|----|------------
@@ -794,7 +801,7 @@ Haskell | C# | Return Type
 `liftM5` | `Maybe.Lift` | `Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<T4>, Maybe<T5>, Maybe<TResult>>`
 `ap`     | `obj.Gather` | `Maybe<TResult>`
 
-### Monad Plus
+### <a name="haskell-plus"></a>Monad Plus
 
 Haskell | C# | Return Type
 --------|----|------------
@@ -804,7 +811,7 @@ Haskell | C# | Return Type
 `mfilter` | `obj.Where`     | `Maybe<T>`
 `guard`   | `Maybe.Guard`   | `Maybe.Unit`
 
-### `Maybe` Specific Functions
+### <a name="haskell-maybe"></a>`Maybe` specific functions
 
 Haskell | C# | Return Type
 --------|----|------------
@@ -818,7 +825,7 @@ Haskell | C# | Return Type
 `listToMaybe` | `seq.FirstOrNone()`    | `Maybe<T>`
 `mapMaybe`    | `seq.SelectAny()`      | `IEnumerable<TResult>`
 
-#### Further Readings
+### <a name="haskell-further"></a>Further readings
 - [The Haskell 98 Report](http://www.haskell.org/onlinereport/monad.html)
 - Haskell: [Data.Functor](https://hackage.haskell.org/package/base-4.9.1.0/docs/Data-Functor.html),
   [Control.Applicative](https://hackage.haskell.org/package/base-4.9.1.0/docs/Control-Applicative.html)
@@ -828,6 +835,17 @@ Haskell | C# | Return Type
 
 Typologia
 ---------
+
+- Monoid
+- Functor
+- Applicative Functor
+- Alternative Functor
+- Monad
+- Comonad
+- Monad Plus
+- .NET Framework types
+- A Glimpse of Category Theory
+- Further readings
 
 Again, we will use the Maybe type as an example.
 
@@ -869,7 +887,7 @@ public struct Maybe<T> {
 }
 ```
 
-### Alternative
+### Alternative Functor
 
 ### Monad
 
@@ -927,6 +945,8 @@ public static class Maybe {
 }
 ```
 
+#### Computation vs Container
+
 ### Comonad
 
 There are two equivalent ways to define a Comonad:
@@ -961,14 +981,12 @@ A MonadOr is a monad which is also a monoid and for which `Unit` is
 a left zero for `Plus`. Here, we prefer to use `OrElse` instead of `Plus` for the
 monoid composition operation.
 
-### Computation vs Container
-
 ### .NET Framework types
 
 Type             | Properties
 ---------------- | ------------------------
-`IEnumerable<T>` |
 `Nullable<T>`    |
+`IEnumerable<T>` |
 `Func<T>`        |
 `Lazy<T>`        |
 `Task<T>`        |
@@ -993,9 +1011,11 @@ public static TResult? Bind<TSource, TResult>(
 
 `Nullable<Nullable<T>>` is not permitted.
 
+#### Is `IEnumerable<T>` really a monad?
+
 ### A Glimpse of Category Theory
 
-### Further Readings
+### Further readings
 - The first public discussion of monads in the context of .NET seems to be due to
   [Wes Dyer](http://blogs.msdn.com/b/wesdyer/archive/2008/01/11/the-marvels-of-monads.aspx).
 - A popular explanation of monads given by [Eric Lippert](http://ericlippert.com/category/monads/).
