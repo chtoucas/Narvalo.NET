@@ -17,15 +17,15 @@ namespace Narvalo.Linq
             Require.NotNull(source, nameof(source));
             Require.NotNull(selector, nameof(selector));
 
-            return Iterator();
+            return iterator();
 
-            IEnumerable<TResult> Iterator()
+            IEnumerable<TResult> iterator()
             {
                 foreach (var item in source)
                 {
-                    var m = selector(item);
+                    var result = selector(item);
 
-                    if (m.HasValue) { yield return m.Value; }
+                    if (result.HasValue) { yield return result.Value; }
                 }
             }
         }
@@ -38,15 +38,15 @@ namespace Narvalo.Linq
             Require.NotNull(source, nameof(source));
             Require.NotNull(selector, nameof(selector));
 
-            return Iterator();
+            return iterator();
 
-            IEnumerable<TResult> Iterator()
+            IEnumerable<TResult> iterator()
             {
                 foreach (var item in source)
                 {
-                    var m = selector(item);
+                    var result = selector(item);
 
-                    if (m != null) { yield return m; }
+                    if (result != null) { yield return result; }
                 }
             }
         }
@@ -58,15 +58,15 @@ namespace Narvalo.Linq
             Require.NotNull(source, nameof(source));
             Require.NotNull(selector, nameof(selector));
 
-            return Iterator();
+            return iterator();
 
-            IEnumerable<TResult> Iterator()
+            IEnumerable<TResult> iterator()
             {
                 foreach (var item in source)
                 {
-                    var m = selector(item);
+                    var result = selector(item);
 
-                    if (m.IsSome) { yield return m.Value; }
+                    if (result.IsSome) { yield return result.Value; }
                 }
             }
         }
@@ -78,15 +78,15 @@ namespace Narvalo.Linq
             Require.NotNull(source, nameof(source));
             Require.NotNull(selector, nameof(selector));
 
-            return Iterator();
+            return iterator();
 
-            IEnumerable<TResult> Iterator()
+            IEnumerable<TResult> iterator()
             {
                 foreach (var item in source)
                 {
-                    var m = selector(item);
+                    var result = selector(item);
 
-                    if (m.IsSuccess) { yield return m.Value; }
+                    if (result.IsSuccess) { yield return result.Value; }
                 }
             }
         }
@@ -98,15 +98,15 @@ namespace Narvalo.Linq
             Require.NotNull(source, nameof(source));
             Require.NotNull(selector, nameof(selector));
 
-            return Iterator();
+            return iterator();
 
-            IEnumerable<TResult> Iterator()
+            IEnumerable<TResult> iterator()
             {
                 foreach (var item in source)
                 {
-                    var m = selector(item);
+                    var result = selector(item);
 
-                    if (m.IsSuccess) { yield return m.Value; }
+                    if (result.IsSuccess) { yield return result.Value; }
                 }
             }
         }
@@ -118,15 +118,15 @@ namespace Narvalo.Linq
             Require.NotNull(source, nameof(source));
             Require.NotNull(selector, nameof(selector));
 
-            return Iterator();
+            return iterator();
 
-            IEnumerable<T> Iterator()
+            IEnumerable<T> iterator()
             {
                 foreach (var item in source)
                 {
-                    var m = selector(item);
+                    var result = selector(item);
 
-                    if (m.IsSuccess) { yield return m.Value; }
+                    if (result.IsSuccess) { yield return result.Value; }
                 }
             }
         }
@@ -138,15 +138,15 @@ namespace Narvalo.Linq
             Require.NotNull(source, nameof(source));
             Require.NotNull(selector, nameof(selector));
 
-            return Iterator();
+            return iterator();
 
-            IEnumerable<TLeft> Iterator()
+            IEnumerable<TLeft> iterator()
             {
                 foreach (var item in source)
                 {
-                    var m = selector(item);
+                    var result = selector(item);
 
-                    if (m.IsLeft) { yield return m.Left; }
+                    if (result.IsLeft) { yield return result.Left; }
                 }
             }
         }
