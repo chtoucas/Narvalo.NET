@@ -415,11 +415,10 @@ namespace Narvalo.T4.Testbed
             Debug.Assert(innerKeySelector != null);
             Debug.Assert(comparer != null);
 
-            return outerKey => (
-                from innerKey in inner.Select(innerKeySelector)
-                where comparer.Equals(innerKey, outerKey)
-                select innerKey
-            ).ContinueWith(inner);
+            return outerKey =>
+                inner.Select(innerKeySelector)
+                    .Where(innerKey => comparer.Equals(innerKey, outerKey))
+                    .ContinueWith(inner);
         }
 
         #endregion

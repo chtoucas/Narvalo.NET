@@ -39,7 +39,7 @@ Overview
 
 This assembly encourages an applicative-style of programming, or functional-style
 if you prefer: types are **immutable** and methods are **pure** - they are free
-of side-effects.
+of side-effects and always return a new object.
 
 The main namespace (`Narvalo.Applicative`) includes:
 - `Unit`, a unit type.

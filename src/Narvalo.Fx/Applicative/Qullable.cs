@@ -97,10 +97,18 @@ namespace Narvalo.Applicative
             Require.NotNull(innerKeySelector, nameof(innerKeySelector));
             Require.NotNull(comparer, nameof(comparer));
 
-            var lookup = GetKeyLookup(inner, innerKeySelector, comparer);
-            Func<TSource, TInner?> valueSelector = outer => lookup(outerKeySelector(outer));
+            if (@this is TSource outerValue && inner is TInner innerValue)
+            {
+                var outerKey = outerKeySelector(outerValue);
+                var innerKey = innerKeySelector(innerValue);
 
-            return @this.SelectMany(valueSelector, resultSelector);
+                if (comparer.Equals(outerKey, innerKey))
+                {
+                    return resultSelector(outerValue, innerValue);
+                }
+            }
+
+            return null;
         }
 
         public static TResult? GroupJoin<TSource, TInner, TKey, TResult>(
@@ -138,31 +146,18 @@ namespace Narvalo.Applicative
             Require.NotNull(innerKeySelector, nameof(innerKeySelector));
             Require.NotNull(comparer, nameof(comparer));
 
-            var lookup = GetKeyLookup(inner, innerKeySelector, comparer);
-            Func<TSource, TInner?> selector = outer => lookup(outerKeySelector(outer));
-
-            return @this.Select(outer => resultSelector(outer, selector(outer)));
-        }
-
-        private static Func<TKey, TInner?> GetKeyLookup<TInner, TKey>(
-            TInner? inner,
-            Func<TInner, TKey> innerKeySelector,
-            IEqualityComparer<TKey> comparer)
-            where TInner : struct
-            where TKey : struct
-        {
-            Debug.Assert(innerKeySelector != null);
-            Debug.Assert(comparer != null);
-
-            return outerKey =>
+            if (@this is TSource outerValue && inner is TInner innerValue)
             {
-                // We can select anything, the only thing that really matters
-                // is if it is null or not.
-                var q = from innerKey in inner.Select(innerKeySelector)
-                        where comparer.Equals(innerKey, outerKey)
-                        select true;
-                return q.HasValue ? inner : null;
-            };
+                var outerKey = outerKeySelector(outerValue);
+                var innerKey = innerKeySelector(innerValue);
+
+                if (comparer.Equals(outerKey, innerKey))
+                {
+                    return resultSelector(outerValue, inner);
+                }
+            }
+
+            return null;
         }
     }
 }

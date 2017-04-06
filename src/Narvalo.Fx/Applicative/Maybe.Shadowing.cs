@@ -44,7 +44,8 @@ namespace Narvalo.Applicative
         {
             Require.NotNull(predicate, nameof(predicate));
 
-            // Returning "this" is not very "functional", but since Maybe is a value type, it is fine.
+            // Returning "this" is not very "functional",
+            // but since Maybe is a value type, it is fine.
             return IsSome && predicate(Value) ? this : None;
         }
 
@@ -74,14 +75,18 @@ namespace Narvalo.Applicative
             Require.NotNull(resultSelector, nameof(resultSelector));
             Require.NotNull(comparer, nameof(comparer));
 
-            if (IsNone || inner.IsNone) { return Maybe<TResult>.None; }
+            if (IsSome && inner.IsSome)
+            {
+                var outerKey = outerKeySelector(Value);
+                var innerKey = innerKeySelector(inner.Value);
 
-            var outerKey = outerKeySelector(Value);
-            var innerKey = innerKeySelector(inner.Value);
+                if (comparer.Equals(outerKey, innerKey))
+                {
+                    return Maybe<TResult>.η(resultSelector(Value, inner.Value));
+                }
+            }
 
-            return comparer.Equals(outerKey, innerKey)
-                ? Maybe<TResult>.η(resultSelector(Value, inner.Value))
-                : Maybe<TResult>.None;
+            return Maybe<TResult>.None;
         }
 
         public Maybe<TResult> GroupJoin<TInner, TKey, TResult>(
@@ -96,14 +101,18 @@ namespace Narvalo.Applicative
             Require.NotNull(resultSelector, nameof(resultSelector));
             Require.NotNull(comparer, nameof(comparer));
 
-            if (IsNone || inner.IsNone) { return Maybe<TResult>.None; }
+            if (IsSome && inner.IsSome)
+            {
+                var outerKey = outerKeySelector(Value);
+                var innerKey = innerKeySelector(inner.Value);
 
-            var outerKey = outerKeySelector(Value);
-            var innerKey = innerKeySelector(inner.Value);
+                if (comparer.Equals(outerKey, innerKey))
+                {
+                    return Maybe<TResult>.η(resultSelector(Value, inner));
+                }
+            }
 
-            return comparer.Equals(outerKey, innerKey)
-                ? Maybe<TResult>.η(resultSelector(Value, inner))
-                : Maybe<TResult>.None;
+            return Maybe<TResult>.None;
         }
 
         #endregion
