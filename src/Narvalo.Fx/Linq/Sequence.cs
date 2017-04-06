@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Applicative
+namespace Narvalo.Linq
 {
     using System;
     using System.Collections.Generic;
@@ -34,9 +34,9 @@ namespace Narvalo.Applicative
         {
             Require.NotNull(generator, nameof(generator));
 
-            return Iterator();
+            return iterator();
 
-            IEnumerable<TResult> Iterator()
+            IEnumerable<TResult> iterator()
             {
                 TSource current = seed;
 
@@ -59,9 +59,9 @@ namespace Narvalo.Applicative
             Require.NotNull(generator, nameof(generator));
             Require.NotNull(predicate, nameof(predicate));
 
-            return Iterator();
+            return iterator();
 
-            IEnumerable<TResult> Iterator()
+            IEnumerable<TResult> iterator()
             {
                 TSource current = seed;
 
@@ -83,7 +83,8 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Generates an infinite sequence containing one repeated value.
         /// </summary>
-        /// <typeparam name="TSource">The type of the value to be used in the result sequence.</typeparam>
+        /// <typeparam name="TSource">The type of the value to be used in the
+        /// result sequence.</typeparam>
         /// <param name="value">The value to be repeated.</param>
         public static IEnumerable<TSource> Gather<TSource>(TSource value)
         {
@@ -98,13 +99,13 @@ namespace Narvalo.Applicative
         /// </summary>
         public static IEnumerable<TSource> Gather<TSource>(
             TSource seed,
-            Func<TSource, TSource> iterator)
+            Func<TSource, TSource> generator)
         {
-            Require.NotNull(iterator, nameof(iterator));
+            Require.NotNull(generator, nameof(generator));
 
-            return Iterator();
+            return iterator();
 
-            IEnumerable<TSource> Iterator()
+            IEnumerable<TSource> iterator()
             {
                 TSource current = seed;
 
@@ -112,22 +113,22 @@ namespace Narvalo.Applicative
                 {
                     yield return current;
 
-                    current = iterator(current);
+                    current = generator(current);
                 }
             }
         }
 
         public static IEnumerable<TSource> Gather<TSource>(
             TSource seed,
-            Func<TSource, TSource> iterator,
+            Func<TSource, TSource> generator,
             Func<TSource, bool> predicate)
         {
-            Require.NotNull(iterator, nameof(iterator));
+            Require.NotNull(generator, nameof(generator));
             Require.NotNull(predicate, nameof(predicate));
 
-            return Iterator();
+            return iterator();
 
-            IEnumerable<TSource> Iterator()
+            IEnumerable<TSource> iterator()
             {
                 TSource current = seed;
 
@@ -135,7 +136,7 @@ namespace Narvalo.Applicative
                 {
                     yield return current;
 
-                    current = iterator(current);
+                    current = generator(current);
                 }
             }
         }
@@ -146,20 +147,20 @@ namespace Narvalo.Applicative
         /// <remarks>
         /// This method can be derived from Unfold:
         /// <code>
-        /// Sequence.Unfold(seed, _ => (resultSelector(_), iterator(_)));
+        /// Sequence.Unfold(seed, _ => (resultSelector(_), generator(_)));
         /// </code>
         /// </remarks>
         public static IEnumerable<TResult> Gather<TSource, TResult>(
             TSource seed,
-            Func<TSource, TSource> iterator,
+            Func<TSource, TSource> generator,
             Func<TSource, TResult> resultSelector)
         {
-            Require.NotNull(iterator, nameof(iterator));
+            Require.NotNull(generator, nameof(generator));
             Require.NotNull(resultSelector, nameof(resultSelector));
 
-            return Iterator();
+            return iterator();
 
-            IEnumerable<TResult> Iterator()
+            IEnumerable<TResult> iterator()
             {
                 TSource current = seed;
 
@@ -167,7 +168,7 @@ namespace Narvalo.Applicative
                 {
                     yield return resultSelector(current);
 
-                    current = iterator(current);
+                    current = generator(current);
                 }
             }
         }
@@ -175,22 +176,22 @@ namespace Narvalo.Applicative
         /// <remarks>
         /// This method can be derived from Unfold:
         /// <code>
-        /// Sequence.Unfold(seed, _ => (resultSelector(_), iterator(_)), predicate);
+        /// Sequence.Unfold(seed, _ => (resultSelector(_), generator(_)), predicate);
         /// </code>
         /// </remarks>
         public static IEnumerable<TResult> Gather<TSource, TResult>(
             TSource seed,
-            Func<TSource, TSource> iterator,
+            Func<TSource, TSource> generator,
             Func<TSource, TResult> resultSelector,
             Func<TSource, bool> predicate)
         {
-            Require.NotNull(iterator, nameof(iterator));
+            Require.NotNull(generator, nameof(generator));
             Require.NotNull(resultSelector, nameof(resultSelector));
             Require.NotNull(predicate, nameof(predicate));
 
-            return Iterator();
+            return iterator();
 
-            IEnumerable<TResult> Iterator()
+            IEnumerable<TResult> iterator()
             {
                 TSource current = seed;
 
@@ -198,7 +199,7 @@ namespace Narvalo.Applicative
                 {
                     yield return resultSelector(current);
 
-                    current = iterator(current);
+                    current = generator(current);
                 }
             }
         }

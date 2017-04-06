@@ -10,6 +10,7 @@ namespace Narvalo.Applicative
     using System.Linq;
     using System.Runtime.CompilerServices;
 
+    using Narvalo.Linq;
     using Narvalo.Properties;
 
     [DebuggerDisplay("{DebuggerDisplay,nq}")]

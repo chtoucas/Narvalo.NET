@@ -10,6 +10,7 @@ namespace Narvalo.Applicative
     using System.Runtime.CompilerServices;
     using System.Runtime.ExceptionServices;
 
+    using Narvalo.Linq;
     using Narvalo.Properties;
 
     /// <summary>

@@ -71,7 +71,7 @@
     </Compile>
     <Compile Include="Applicative\Fallible`1.cs" />
     <Compile Include="Applicative\Result`2.cs" />
-    <Compile Include="Applicative\Sequence.cs" />
+    <Compile Include="Linq\Sequence.cs" />
     <Compile Include="Applicative\Stubs`.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Linq\Qperators_.cs" />

@@ -9,6 +9,7 @@ namespace Narvalo.Applicative
     using System.Linq;
     using System.Runtime.CompilerServices;
 
+    using Narvalo.Linq;
     using Narvalo.Properties;
 
     /// <summary>
@@ -297,6 +298,7 @@ namespace Narvalo.Applicative
             if (IsSome) { action(Value); }
         }
 
+        // Of course, if (obj.IsNone) { action(); } is simpler.
         public void OnNone(Action action)
         {
             Require.NotNull(action, nameof(action));
