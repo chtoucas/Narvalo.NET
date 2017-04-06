@@ -133,6 +133,11 @@ a very natural unit type.
 Nullable Type
 -------------
 
+- [Querying](#nullable-querying)
+- [Binding](#nullable-binding)
+
+### <a name="nullable-querying"></a>Querying
+
 Importing the namespace `Narvalo.Applicable` enables a subset of the
 [Query expression pattern](https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#the-query-expression-pattern)
 for the `Nullable<T>` type, namely:
@@ -158,6 +163,7 @@ there are situations where a piece of code written in query syntax is much more
 readable.
 
 #### `Select`
+`Select` allows to transform the enclosed value with a given selector:
 ```csharp
 T? x = ...;
 Func<T, TResult> selector = ...;
@@ -183,6 +189,7 @@ rather contrived example but, wait, we will show you soon a better and simpler
 solution (see `SelectMany`).
 
 #### `Where`
+`Where` allows to filter the enclosed value with a given predicate:
 ```csharp
 T? x = ...;
 Func<T, bool> predicate = ...;
@@ -236,7 +243,6 @@ and `Value`, or with pattern matching - of course, you won't come very often
 across such a convoluted example.
 
 #### `Join`
-
 ```csharp
 (int, int)? x1 = (1, 2);
 (int, int)? x2 = (2, 3);
@@ -247,11 +253,13 @@ var q = from t1 in x1
 ```
 the result is still `(1, 3)` of type `(int, int)?`.
 
+[Discuss Join vs SelectMany / In LINQ to Objects, Join is better, not here]
+
 #### `GroupJoin`
 
-### Binding
-One can think of binding as mapping from a nullable to a "nullable of
-nullable" which is then flattened:
+### <a name="nullable-binding"></a>Binding
+`Bind` allows to transform the enclosed value to a nullable which is then
+"flattened":
 ```csharp
 T? x = ...;
 Func<T, TResult?> binder = ...;
@@ -281,7 +289,7 @@ Maybe Type
 - Matching
 - Programming with side-effects
 - Querying
-- Beyond the basics
+- Binding
 - Design notes
 
 We discuss `Maybe<T>` at length, the type is quite simple, nevertheless it
@@ -411,9 +419,7 @@ where `q` is of type `Maybe<T>`.
 
 #### `GroupJoin`
 
-### Beyond the basics
-
-#### Binding, a First Taste of Monads
+### Binding
 
 ### Design Notes
 
