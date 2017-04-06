@@ -135,7 +135,7 @@ Nullable Type
 ### <a name="nullable-querying"></a>Querying
 
 Importing the namespace `Narvalo.Applicable` enables a subset of the
-[Query expression pattern](https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#the-query-expression-pattern)
+[query expression pattern](https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#the-query-expression-pattern)
 for the `Nullable<T>` type, namely:
 
 Method | C# Query Expression Syntax
@@ -149,9 +149,9 @@ Method | C# Query Expression Syntax
 These operators do not behave like those on `IEnumerable<T>`, they use
 _immediate execution_.
 
-**Caution.** It is not because something is possible, that you should use it and
-abuse it. First, another programmer might not know that LINQ is not just for
-`IEnumerable<T>` therefore might have problems understanding your code,
+**Caution.** It is not because something is possible, that you should use it even
+less abuse it. First, another programmer might not know that the query syntax is not
+just for `IEnumerable<T>` therefore might have problems understanding your code,
 second, the result will always be less performant than hand-written code, and
 lastly C# already offers nice syntactic sugars for nullables (the conditional
 operators `?:` and `?.`, and the null-coalescing operator `??`). Nevertheless,
@@ -262,14 +262,14 @@ Func<T, TResult?> binder = ...;
 
 TResult? q = x.Bind(binder);
 ```
-`Bind` is really a special case of `SelectMany<T, TResult, TResult>`:
+`Bind` is really a special case of `SelectMany<T, TResult, TResult>`,
+in LINQ to Objects, `Bind` is even named `SelectMany`:
 ```csharp
 TResult? q = x.SelectMany(binder, (_, v2) => v2);
 TResult? q = from v1 in x
              from v2 in binder(v1)
              select v2;
 ```
-In LINQ for Objects, `Bind` is even named `SelectMany`.
 
 **Remark.** In fact, `Bind` is the most important method upon which
 one can construct all the other operators; it is not the other way around, more
@@ -364,7 +364,7 @@ To repeat myself, this is not a recommended practice. Anyway,
 ### <a name="maybe-effects"></a>Programming for side-effects
 
 ### <a name="maybe-querying"></a>Querying
-The `Maybe<T>` type supports a subset of the [Query expression pattern](https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#the-query-expression-pattern),
+The `Maybe<T>` type supports a subset of the [query expression pattern](https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#the-query-expression-pattern),
 namely:
 
 Method | C# Query Expression Syntax
