@@ -6,18 +6,18 @@ namespace Narvalo.Linq
 
     public static partial class Sequence
     {
-        // There is a much better implementation coming soon (?).
+        // There is a much better implementation in later versions of System.Linq.
         // https://github.com/dotnet/corefx/blob/master/src/System.Linq/src/System/Linq/AppendPrepend.cs
-        // This is of particular important when calling Append or Prepend mutiple times in a row.
+        // which optimizes multiple calls to Append or Prepend.
         public static IEnumerable<TSource> Append<TSource>(
             this IEnumerable<TSource> source,
             TSource element)
         {
             Require.NotNull(source, nameof(source));
 
-            return Iterator();
+            return iterator();
 
-            IEnumerable<TSource> Iterator()
+            IEnumerable<TSource> iterator()
             {
                 foreach (var item in source)
                 {
@@ -34,9 +34,9 @@ namespace Narvalo.Linq
         {
             Require.NotNull(source, nameof(source));
 
-            return Iterator();
+            return iterator();
 
-            IEnumerable<TSource> Iterator()
+            IEnumerable<TSource> iterator()
             {
                 yield return element;
 

@@ -5,6 +5,8 @@ namespace Narvalo.Linq
     using System;
     using System.Collections.Generic;
 
+    using Narvalo.Properties;
+
     public static partial class Sequence
     {
         // Reduce
@@ -21,7 +23,7 @@ namespace Narvalo.Linq
             {
                 if (!iter.MoveNext())
                 {
-                    throw new InvalidOperationException("Source sequence was empty.");
+                    throw new InvalidOperationException(Strings.SequenceIsEmpty);
                 }
 
                 TSource retval = iter.Current;

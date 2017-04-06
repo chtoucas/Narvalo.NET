@@ -132,4 +132,7 @@
   <data name="InvalidOperation_SwapRightyEither" xml:space="preserve">
     <value>Impossible d'échanger les paramètres de type générique. Veuillez vérifier au préalable que la propriété IsLeft a la valeur true ou utilisez à la place la méthode SwapUnchecked.</value>
   </data>
+  <data name="SequenceIsEmpty" xml:space="preserve">
+    <value>La séquence ne contient aucun élément.</value>
+  </data>
 </root>

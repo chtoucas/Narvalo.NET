@@ -132,4 +132,7 @@
   <data name="InvalidOperation_SwapRightyEither" xml:space="preserve">
     <value>Cannot swap the generic type parameters of a "righty" object. You should either check that the property IsLeft is true before, or use SwapUnchecked instead.</value>
   </data>
+  <data name="SequenceIsEmpty" xml:space="preserve">
+    <value>Source sequence was empty.</value>
+  </data>
 </root>

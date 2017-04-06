@@ -79,9 +79,9 @@ namespace Narvalo.Linq
 
             foreach (var item in source)
             {
-                var m = predicate(item);
+                var result = predicate(item);
 
-                if (m.HasValue && m.Value) { yield return item; }
+                if (result.HasValue && result.Value) { yield return item; }
             }
         }
 
@@ -94,9 +94,9 @@ namespace Narvalo.Linq
 
             foreach (var item in source)
             {
-                var m = predicate(item);
+                var result = predicate(item);
 
-                if (m.IsSome && m.Value) { yield return item; }
+                if (result.IsSome && result.Value) { yield return item; }
             }
         }
 
@@ -109,9 +109,9 @@ namespace Narvalo.Linq
 
             foreach (var item in source)
             {
-                var m = predicate(item);
+                var result = predicate(item);
 
-                if (m.IsSuccess && m.Value) { yield return item; }
+                if (result.IsSuccess && result.Value) { yield return item; }
             }
         }
 
@@ -124,9 +124,9 @@ namespace Narvalo.Linq
 
             foreach (var item in source)
             {
-                var m = predicate(item);
+                var result = predicate(item);
 
-                if (m.IsSuccess && m.Value) { yield return item; }
+                if (result.IsSuccess && result.Value) { yield return item; }
             }
         }
 
@@ -139,9 +139,9 @@ namespace Narvalo.Linq
 
             foreach (var item in source)
             {
-                var m = predicate(item);
+                var result = predicate(item);
 
-                if (m.IsSuccess && m.Value) { yield return item; }
+                if (result.IsSuccess && result.Value) { yield return item; }
             }
         }
 
@@ -154,9 +154,9 @@ namespace Narvalo.Linq
 
             foreach (var item in source)
             {
-                var m = predicate(item);
+                var result = predicate(item);
 
-                if (m.IsLeft && m.Left) { yield return item; }
+                if (result.IsLeft && result.Left) { yield return item; }
             }
         }
     }

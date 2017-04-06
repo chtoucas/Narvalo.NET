@@ -62,9 +62,8 @@ Narvalo.Fx
   Add more tests beyond the auto-generated ones. Add tests for purity?
 - `Either`, should we throw if we have a lefty method for a righty object
   (see `WhenLeft` for instance).
-- Move `SelectAny` and `WhereAny` to Narvalo.Applicative? or the other way around
-  with `Collect`, `CollectAny` and `Sum`? This would make it easier to find these
-  methods.
+- Move `Collect`, `CollectAny` and `Sum` to `Narvalo.Linq`? This would make
+  it easier to find them.
 - Add "shadows" of `Collect` and `WhereBy` for `Result` and `Either`.
 - Add variants of `CollectAny` and co on the right for Either?
 - Remove `ZipWith` resp. `SelectWith`? Check that (here) `SelectWith` is just

@@ -105,5 +105,14 @@ namespace Narvalo.Properties {
                 return ResourceManager.GetString("InvalidOperation_SwapRightyEither", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Source sequence was empty..
+        /// </summary>
+        internal static string SequenceIsEmpty {
+            get {
+                return ResourceManager.GetString("SequenceIsEmpty", resourceCulture);
+            }
+        }
     }
 }
