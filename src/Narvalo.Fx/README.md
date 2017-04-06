@@ -1,4 +1,4 @@
-Narvalo.Fx
+ Narvalo.Fx
 ==========
 
 Features implementations of some of the usual suspects from functional
@@ -21,8 +21,7 @@ disjoint union (`Either<T1, T2>`), sequence generators and LINQ extensions.
 - [Maybe Type](#maybe-type)
 - [Railway Oriented Programming](#railway-oriented-programming)
 - [Either Type](#either-type)
-- [Query Operators](#query-operators)
-- [Generators](#generators)
+- [Query Operators and Generators](#query-operators-and-generators)
 - [Recursion](#recursion)
 - [Tour of the Monad Verbs](#tour-of-the-monad-verbs)
 - [Haskell to C# Walk-Through](#haskell-to-C-walk-through)
@@ -149,12 +148,14 @@ Method | C# Query Expression Syntax
 These operators do not behave like those on `IEnumerable<T>`, they use
 _immediate execution_.
 
-**Caution.** It is not because it is possible, that you should use this.
-First, another programmer might not know that LINQ is not just for
-`IEnumerable<T>` therefore might have problems understanding your code, and
-second, the result will always be less performant than hand-written code.
-Nevertheless, as with "normal" LINQ, there are situations where a piece of
-code written in query syntax is much more readable.
+**Caution.** It is not because something is possible, that you should use it and
+abuse it. First, another programmer might not know that LINQ is not just for
+`IEnumerable<T>` therefore might have problems understanding your code,
+second, the result will always be less performant than hand-written code, and
+lastly C# already offers nice syntactic sugars for nullables (the conditional
+operators `?:` and `?.`, and the null-coalescing operator `??`). Nevertheless,
+there are situations where a piece of code written in query syntax is much more
+readable.
 
 #### `Select`
 ```csharp
@@ -539,13 +540,14 @@ var right = Either<int, long>.OfRight(1L);
 
 --------------------------------------------------------------------------------
 
-Query Operators
----------------
+Query Operators and Generators
+------------------------------
 
 - [LINQ Extensions](#linq-extensions)
 - [`Collect` and `CollectAny`](#collect-and-collectany)
 - [Generalized Operators](#generalized-operators)
 - [Specialized Operators](#specialized-operators)
+- [Generators](#generators)
 
 For each new query operator, we define its behaviour regarding deferred or
 immediate execution - to quote the [C# documentation](https://docs.microsoft.com/en-us/dotnet/articles/csharp/programming-guide/concepts/linq/classification-of-standard-query-operators-by-manner-of-execution),
@@ -573,7 +575,7 @@ Aggregation    | `Aggregate` (reduce) | `T`                        | -
 Quantification | `IsEmpty`            | `bool`                     | -
 Generation     | `EmptyIfNull`        | `IEnumerable<T>`           | -
 
-All these operators are defined as extension methods (in `Qperators`) and expect
+All these operators are defined as extension methods (in `Sequence`) and expect
 an `IEnumerable<T>` as input:
 - `Append()` (resp. `Prepend()`) appends (resp. prepends) a new element to a sequence.
   **NB:** A much better [implementation](https://github.com/dotnet/corefx/blob/master/src/System.Linq/src/System/Linq/AppendPrepend.cs)
@@ -669,12 +671,9 @@ Category | Operator | Return Type | Deferred
 -------- | -------- | ----------- | :------:
 Aggregation | `Sum` (*) | `Maybe<T>` | -
 
+### Generators
+
 ### Further readings
-
---------------------------------------------------------------------------------
-
-Generators
-----------
 
 --------------------------------------------------------------------------------
 

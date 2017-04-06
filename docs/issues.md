@@ -56,13 +56,12 @@ Next:
 Narvalo.Fx
 ----------
 
-- Use `source` instead of `@this` in Linq. More QEP for Monads.
-- Enable deconstruction of types. Almost done, still one to go (`Maybe<T?>`).
+- More QEP for Monads.
+- Simplify LINQ for `Maybe<T?>`?
 - Auto-generate tests for null-guards (missing only for `Either`).
   Add more tests beyond the auto-generated ones. Add tests for purity?
 - `Either`, should we throw if we have a lefty method for a righty object
   (see `WhenLeft` for instance).
-- Simplify LINQ for `Maybe<T?>`.
 - Move `SelectAny` and `WhereAny` to Narvalo.Applicative? or the other way around
   with `Collect`, `CollectAny` and `Sum`? This would make it easier to find these
   methods.
@@ -73,6 +72,7 @@ Narvalo.Fx
 - Add `MapMany` to `Outcome` and `Fallible`....
 
 Next:
+- Custom `is` operators (it seems that it is not yet possible).
 - Deconstruction for `Maybe<T?>`, but I think this is not possible.
 ```csharp
 public static void Deconstruct<T>(
@@ -90,7 +90,7 @@ public static void Deconstruct<T>(
 - Add other monads - prototypes [here](https://github.com/chtoucas/Brouillons/tree/master/src/play/Functional/Monadic)
 - `OnError()`, `WhenError()` & co could return a boolean to signal when they
   actually did something.
-- Explain what do we mean by shadowing.
+- Explain what the meaning of shadowing.
 - More Haskell API, eg When, Forever & co?
 - Add async and lazy alternatives?
 - [Idioms](http://tomasp.net/blog/idioms-in-linq.aspx/)
