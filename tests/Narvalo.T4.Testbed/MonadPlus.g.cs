@@ -559,7 +559,7 @@ namespace Narvalo.T4.Testbed.Linq
     // - Zip       -> ZipWith
     // - Aggregate -> Reduce or Fold
     // T4: EmitLinqCore().
-    public static partial class Sequence
+    public static partial class Qperators
     {
         public static MonadPlus<IEnumerable<TResult>> SelectWith<TSource, TResult>(
             this IEnumerable<TSource> source,

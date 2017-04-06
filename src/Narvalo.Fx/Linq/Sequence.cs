@@ -5,21 +5,8 @@ namespace Narvalo.Linq
     using System.Collections.Generic;
 
     /// <summary>
-    /// Provides a set of static and extension methods for querying or producing
-    /// objects that implement <see cref="IEnumerable{T}"/>.
+    /// Provides a set of static methods for producing sequences.
     /// </summary>
-    /// <remarks>
-    /// New LINQ operators:
-    /// - Projecting: SelectAny (deferred)
-    /// - Filtering: WhereAny (deferred)
-    /// - Set: Append (deferred), Prepend (deferred)
-    /// - Element: FirstOrNone, LastOrNone, SingleOrNone, ElementAtOrNone
-    /// - Aggregation: Aggregate (deferred)
-    /// - Quantifiers: IsEmpty
-    /// - Generation: EmptyIfNull
-    /// We have also operators accepting arguments in the Kleisli "category":
-    /// SelectWith (deferred), ZipWith (deferred), WhereBy (deferred), Fold, Reduce.
-    /// </remarks>
     public static partial class Sequence
     {
         /// <summary>
@@ -31,7 +18,7 @@ namespace Narvalo.Linq
         /// <returns>An <see cref="IEnumerable{T}"/> that contains a single element.</returns>
         public static IEnumerable<TSource> Of<TSource>(TSource value)
         {
-            // Enumerable.Repeat(value, 1) works too, but is less readable.
+            // Enumerable.Repeat(value, 1) works too.
             yield return value;
         }
     }

@@ -11,7 +11,7 @@ namespace Narvalo.Linq {
 
     // Largely inspired by
     // https://github.com/dotnet/corefx/blob/master/src/System.Linq/tests/FirstOrDefaultTests.cs
-    public partial class SequenceFacts {
+    public partial class QperatorsFacts {
         [t("FirstOrNone() guards.")]
         public static void FirstOrNone0() {
             IEnumerable<int> nil = null;
@@ -53,7 +53,7 @@ namespace Narvalo.Linq {
             FirstOrNone3Impl<int>();
             FirstOrNone3Impl<string>();
             FirstOrNone3Impl<DateTime>();
-            FirstOrNone3Impl<SequenceFacts>();
+            FirstOrNone3Impl<QperatorsFacts>();
         }
 
         [t("FirstOrNone() for an IList<T> of one element.")]
@@ -96,7 +96,7 @@ namespace Narvalo.Linq {
             FirstOrNone7Impl<int>();
             FirstOrNone7Impl<string>();
             FirstOrNone7Impl<DateTime>();
-            FirstOrNone7Impl<SequenceFacts>();
+            FirstOrNone7Impl<QperatorsFacts>();
         }
 
         [t("OneElementNotIListT")]

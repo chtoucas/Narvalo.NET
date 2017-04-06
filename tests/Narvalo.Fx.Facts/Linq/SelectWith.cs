@@ -9,7 +9,7 @@ namespace Narvalo.Linq {
     using Assert = Narvalo.AssertExtended;
 
     // SelectWith for Either.
-    public partial class SequenceFacts {
+    public partial class QperatorsFacts {
         [t("SelectWith() uses deferred execution (Either).")]
         public static void SelectWith1a() {
             bool notCalled = true;
@@ -23,7 +23,7 @@ namespace Narvalo.Linq {
     }
 
     // SelectWith for Fallible.
-    public partial class SequenceFacts {
+    public partial class QperatorsFacts {
         [t("SelectWith() uses deferred execution (Fallible).")]
         public static void SelectWith1b() {
             bool notCalled = true;
@@ -37,7 +37,7 @@ namespace Narvalo.Linq {
     }
 
     // SelectWith for Maybe.
-    public partial class SequenceFacts {
+    public partial class QperatorsFacts {
         [t("SelectWith() uses deferred execution (Maybe).")]
         public static void SelectWith1c() {
             bool notCalled = true;
@@ -51,7 +51,7 @@ namespace Narvalo.Linq {
     }
 
     // SelectWith for Outcome.
-    public partial class SequenceFacts {
+    public partial class QperatorsFacts {
         [t("SelectWith() uses deferred execution (Outcome).")]
         public static void SelectWith1d() {
             bool notCalled = true;
@@ -65,7 +65,7 @@ namespace Narvalo.Linq {
     }
 
     // SelectWith for Result.
-    public partial class SequenceFacts {
+    public partial class QperatorsFacts {
         [t("SelectWith() uses deferred execution (Result).")]
         public static void SelectWith1e() {
             bool notCalled = true;

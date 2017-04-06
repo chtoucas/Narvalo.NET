@@ -10,23 +10,5 @@ namespace Narvalo.Linq {
         internal sealed class tAttribute : TestCaseAttribute {
             public tAttribute(string description) : base(nameof(Sequence), description) { }
         }
-
-        internal sealed class TAttribute : TestTheoryAttribute {
-            public TAttribute(string description) : base(nameof(Sequence), description) { }
-        }
-
-        private static IEnumerable<T> EmptySource<T>() {
-            yield break;
-        }
-
-        /// <summary>
-        /// Class to help for deferred execution tests: it throw an exception
-        /// if GetEnumerator is called.
-        /// </summary>
-        private sealed class ThrowingEnumerable<T> : IEnumerable<T> {
-            public IEnumerator<T> GetEnumerator() => throw new InvalidOperationException();
-
-            IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-        }
     }
 }

@@ -7,7 +7,7 @@ namespace Narvalo.Linq {
 
     using Xunit;
 
-    public partial class SequenceFacts {
+    public partial class QperatorsFacts {
         [t("Aggregate() guards.")]
         public static void Aggregate0() {
             Func<int, int, int> accumulator = (i, j) => i + j;

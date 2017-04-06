@@ -11,7 +11,7 @@ namespace Narvalo.Linq {
 
     // Largely inspired by
     // https://github.com/dotnet/corefx/blob/master/src/System.Linq/tests/SingleOrDefaultTests.cs
-    public partial class SequenceFacts {
+    public partial class QperatorsFacts {
         [t("SingleOrNone() guards.")]
         public static void SingleOrNone0() {
             IEnumerable<int> nil = null;

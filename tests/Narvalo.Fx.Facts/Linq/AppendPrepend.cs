@@ -6,7 +6,7 @@ namespace Narvalo.Linq {
     using Assert = Narvalo.AssertExtended;
 
     // See also System.Linq.Tests.AppendPrependTests
-    public partial class SequenceFacts {
+    public partial class QperatorsFacts {
         [t("Append() uses deferred execution.")]
         public static void Append1() {
             IEnumerable<int> source = new ThrowingEnumerable<int>();

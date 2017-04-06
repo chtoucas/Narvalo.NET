@@ -588,7 +588,7 @@ Aggregation    | `Aggregate` (reduce) | `T`                        | -
 Quantification | `IsEmpty`            | `bool`                     | -
 Generation     | `EmptyIfNull`        | `IEnumerable<T>`           | -
 
-All these operators are defined as extension methods (in `Sequence`) and expect
+All these operators are defined as extension methods (in `Qperators`) and expect
 an `IEnumerable<T>` as input:
 - `Append()` (resp. `Prepend()`) appends (resp. prepends) a new element to a sequence.
   **NB:** A much better [implementation](https://github.com/dotnet/corefx/blob/master/src/System.Linq/src/System/Linq/AppendPrepend.cs)

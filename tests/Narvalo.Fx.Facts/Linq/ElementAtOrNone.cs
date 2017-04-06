@@ -11,7 +11,7 @@ namespace Narvalo.Linq {
 
     // Largely inspired by
     // https://github.com/dotnet/corefx/blob/master/src/System.Linq/tests/ElementAtOrDefaultTests.cs
-    public partial class SequenceFacts {
+    public partial class QperatorsFacts {
         [t("ElementAtOrNone() guards.")]
         public static void ElementAtOrNone0() {
             IEnumerable<int> nil = null;
@@ -64,7 +64,7 @@ namespace Narvalo.Linq {
         }
     }
 
-    public partial class SequenceFacts {
+    public partial class QperatorsFacts {
         public static IEnumerable<object[]> ElementAtOrNoneData {
             get {
                 yield return new object[] { NumberRangeGuaranteedNotCollectionType(9, 1), 0, Maybe.Of(9) };

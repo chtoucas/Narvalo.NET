@@ -82,6 +82,7 @@
     <Compile Include="Linq\Collect.cs" />
     <Compile Include="Linq\Reduce.cs" />
     <Compile Include="Linq\Fold.cs" />
+    <Compile Include="Linq\QperatorsFacts.cs" />
     <Compile Include="Linq\Sum.cs" />
     <Compile Include="Linq\CollectAny.cs" />
     <Compile Include="Linq\SelectWith.cs" />

@@ -7,6 +7,6 @@ namespace Narvalo.Linq {
 
     using Xunit;
 
-    public partial class SequenceFacts {
+    public partial class QperatorsFacts {
     }
 }

@@ -9,7 +9,7 @@ namespace Narvalo.Linq
     using Narvalo.Applicative;
 
     // For IEnumerable<T?>, prefer SingleOrDefault() over SingleOrNone().
-    public static partial class Sequence
+    public static partial class Qperators
     {
         /// <summary>
         /// Returns the only element of a sequence, or <see cref="Maybe{TSource}.None"/>

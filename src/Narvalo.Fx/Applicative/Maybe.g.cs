@@ -558,7 +558,7 @@ namespace Narvalo.Linq
     // - Zip       -> ZipWith
     // - Aggregate -> Reduce or Fold
     // T4: EmitLinqCore().
-    public static partial class Sequence
+    public static partial class Qperators
     {
         public static Maybe<IEnumerable<TResult>> SelectWith<TSource, TResult>(
             this IEnumerable<TSource> source,

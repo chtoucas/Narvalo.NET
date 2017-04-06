@@ -4,7 +4,7 @@ namespace Narvalo.Linq
 {
     using System.Collections.Generic;
 
-    public static partial class Sequence
+    public static partial class Qperators
     {
         public static IEnumerable<TSource> Append<TSource>(
             this IEnumerable<TSource> source,
