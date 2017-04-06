@@ -6,9 +6,6 @@ namespace Narvalo.Linq
 
     public static partial class Sequence
     {
-        // There is a much better implementation in later versions of System.Linq.
-        // https://github.com/dotnet/corefx/blob/master/src/System.Linq/src/System/Linq/AppendPrepend.cs
-        // which optimizes multiple calls to Append or Prepend.
         public static IEnumerable<TSource> Append<TSource>(
             this IEnumerable<TSource> source,
             TSource element)

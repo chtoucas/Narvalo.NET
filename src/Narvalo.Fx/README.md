@@ -284,13 +284,13 @@ on this later.
 Maybe Type
 ----------
 
-- Construction / Deconstruction
-- Give me back the value!
-- Matching
-- Programming with side-effects
-- Querying
-- Binding
-- Design notes
+- [Construction / Deconstruction](#maybe-ctor)
+- [Give me back the value!](#maybe-value)
+- [Matching](#maybe-matching)
+- [Programming with side-effects](#maybe-effects)
+- [Querying](#maybe-querying)
+- [Binding](#maybe-binding)
+- [Design notes](#maybe-design)
 
 We discuss `Maybe<T>` at length, the type is quite simple, nevertheless it
 illustrates many principles that are applicable to the other monads, it's well
@@ -308,7 +308,7 @@ will be used in different situations: `Maybe<T>` forces you to handle the
 exceptional case, while a nullable value type does not - nothing prevents you
 from calling the property `Value`, even if `HasValue` is false.
 
-### Construction / Deconstruction
+### <a name="maybe-ctor"></a>Construction / Deconstruction
 A `Maybe<T>` object exists in two states, it either contains a value or it does
 not. The constructor being private, to create a new instance, you use the static
 factory method `Maybe.Of` or the static property `Maybe<T>.None`:
@@ -350,7 +350,7 @@ var maybe = Maybe<int?>.None;
 Maybe<int> better = maybe.Flatten();
 ```
 
-### Give me back the value!
+### <a name="maybe-value"></a>Give me back the value!
 
 To repeat myself, this is not a recommended practice. Anyway,
 - `ValueOrDefault()` returns the enclosed value if any; otherwise the default
@@ -363,11 +363,11 @@ To repeat myself, this is not a recommended practice. Anyway,
   `InvalidOperationException`. There is also an overload which accepts a factory
    as parameter.
 
-### Matching
+### <a name="maybe-matching"></a>Matching
 
-### Programming with side-effects
+### <a name="maybe-effects"></a>Programming with side-effects
 
-### Querying
+### <a name="maybe-querying"></a>Querying
 The `Maybe<T>` type supports a subset of the [Query expression pattern](https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#the-query-expression-pattern),
 namely:
 
@@ -419,9 +419,9 @@ where `q` is of type `Maybe<T>`.
 
 #### `GroupJoin`
 
-### Binding
+### <a name="maybe-binding"></a>Binding
 
-### Design Notes
+### <a name="maybe-design"></a>Design Notes
 
 [Struct vs Class] [Storage]
 
@@ -430,11 +430,11 @@ where `q` is of type `Maybe<T>`.
 Railway Oriented Programming
 ----------------------------
 
-- `Outcome`
-- `Outcome<T>`
-- `Fallible`
-- `Fallible<T>`
-- `Result<T, TError>`
+- [`Outcome`](#rop-outcome)
+- [`Outcome<T>`](#rop-outcomeT)
+- [`Fallible`](#rop-fallible)
+- [`Fallible<T>`](#rop-fallibleT)
+- [`Result<T, TError>`](#rop-result)
 
 Typical use cases:
 - To encapsulate the result of a computation with lightweight error reporting
@@ -465,7 +465,7 @@ Remarks:
   With `Maybe<TError>` it is not obvious that the underlying type (`TError`)
   represents an error and not the "normal" return type.
 
-### `Outcome`
+### <a name="rop-outcome"></a>`Outcome`
 
 ```csharp
 var success = Outcome.Ok;
@@ -476,7 +476,7 @@ var failure = Outcome.FromError("My error message.");
 (bool succeed, string error) = outcome;
 ```
 
-### `Outcome<T>`
+### <a name="rop-outcomeT"></a>`Outcome<T>`
 
 ```csharp
 var success = Outcome.Of(1);
@@ -487,7 +487,7 @@ var failure = Outcome<int>.FromError("My error message.");
 (bool succeed, T value, string error) = outcome;
 ```
 
-### `Fallible`
+### <a name="rop-fallible"></a>`Fallible`
 
 If `edi` is an object of type `ExceptionDispatchInfo`:
 ```csharp
@@ -499,7 +499,7 @@ var failure = Fallible.FromError(edi);
 (bool succeed, ExceptionDispatchInfo exceptionInfo) = fallible;
 ```
 
-### `Fallible<T>`
+### <a name="rop-fallibleT"></a>`Fallible<T>`
 
 If `edi` is an object of type `ExceptionDispatchInfo`:
 ```csharp
@@ -511,7 +511,7 @@ var failure = Fallible<int>.FromError(edi);
 (bool succeed, T value, ExceptionDispatchInfo exceptionInfo) = fallible;
 ```
 
-### `Result<T, TError>`
+### <a name="rop-result"></a>`Result<T, TError>`
 
 ```csharp
 var success = Result<int, Error>.Of(1);
@@ -527,10 +527,15 @@ var failure = Result<int, Error>.FromError(new Error());
 Either Type
 -----------
 
+- Construction / Deconstruction
+- Matching
+- Querying
+- Binding
+
 The either type is the simplest possible
 [discriminated union](https://en.wikipedia.org/wiki/Tagged_union).
 
-#### Construction / Deconstruction
+### <a name="either-ctor"></a>Construction / Deconstruction
 ```csharp
 var left = Either<int, long>.OfLeft(1);
 var right = Either<int, long>.OfRight(1L);
@@ -540,9 +545,11 @@ var right = Either<int, long>.OfRight(1L);
 (bool isLeft, TLeft left, TRight right) = either;
 ```
 
-#### Querying
+### <a name="either-querying"></a>Querying
 
-#### Matching
+### <a name="either-matching"></a>Matching
+
+### <a name="either-binding"></a>Binding
 
 --------------------------------------------------------------------------------
 
@@ -550,10 +557,10 @@ Query Operators and Generators
 ------------------------------
 
 - [LINQ Extensions](#linq-extensions)
-- [`Collect` and `CollectAny`](#collect-and-collectany)
-- [Generalized Operators](#generalized-operators)
-- [Specialized Operators](#specialized-operators)
-- [Generators](#generators)
+- [`Collect` and `CollectAny`](#linq-collect)
+- [Generalized Operators](#linq-generalized)
+- [Specialized Operators](#linq-specialized)
+- [Generators](#linq-generators)
 
 For each new query operator, we define its behaviour regarding deferred or
 immediate execution - to quote the [C# documentation](https://docs.microsoft.com/en-us/dotnet/articles/csharp/programming-guide/concepts/linq/classification-of-standard-query-operators-by-manner-of-execution),
@@ -564,7 +571,7 @@ they do not have to read all the source data before they yield elements,
 or _not streaming_, they must read all the source data before they can yield
 a result element.
 
-### LINQ Extensions
+### <a name="linq-extensions"></a>LINQ Extensions
 
 To enable any of them, you must first import the namespace `Narvalo.Linq`.
 
@@ -585,8 +592,8 @@ All these operators are defined as extension methods (in `Sequence`) and expect
 an `IEnumerable<T>` as input:
 - `Append()` (resp. `Prepend()`) appends (resp. prepends) a new element to a sequence.
   **NB:** A much better [implementation](https://github.com/dotnet/corefx/blob/master/src/System.Linq/src/System/Linq/AppendPrepend.cs)
-  appears in later versions of `System.Linq`; it optimizes multiple calls to
-  `Append` and `Prepend`.
+  appears in later versions of `System.Linq`; it optimizes multiple consecutive
+  calls to `Append` and `Prepend`.
 - `FirstOrNone()` returns the first element of a sequence, or `Maybe<T>.None`
   if the sequence contains no elements.
 - `FirstOrNone(predicate)` returns the first element of a sequence that satisfies the
@@ -614,7 +621,7 @@ an `IEnumerable<T>` as input:
 
 #### Folding
 
-### `Collect` and `CollectAny`
+### <a name="linq-collect"></a>`Collect` and `CollectAny`
 
 Operators that act on an `IEnumerable<Monad<T>>`.
 
@@ -640,7 +647,7 @@ and `5`; it filters out the two _none_'s
 
 #### `Collect`
 
-### Generalized Operators
+### <a name="linq-generalized"></a>Generalized Operators
 
 We also provide generalized operators accepting as arguments functions
 that maps a value to a nullable, a Maybe, an Error or an Either.
@@ -652,7 +659,6 @@ Restriction | `WhereBy`    | `Monad<IEnumerable<T>>`       | Streaming
 Set         | `ZipWith`    | `Monad<IEnumerable<TResult>>` | Streaming
 Aggregation | `Reduce`     | `Monad<T>`                    | -
 |           | `Fold`       | `Monad<TAccumulate>`          | -
-Generation  | `Repeat`     | `Monad<IEnumerable<T>>`       | Streaming
 
 Category | Operator | Return Type | Deferred
 -------- | -------- | ----------- | :------:
@@ -669,7 +675,7 @@ wrapped into a monad even if it is not true in general.
 #### `ZipWith`
 `ZipWith` is a standard `Zip` followed by a `Collect`.
 
-### Specialized Operators
+### <a name="linq-specialized"></a>Specialized Operators
 
 Operators that act on an `IEnumerable<Maybe<T>>`.
 
@@ -677,7 +683,14 @@ Category | Operator | Return Type | Deferred
 -------- | -------- | ----------- | :------:
 Aggregation | `Sum` (*) | `Maybe<T>` | -
 
-### Generators
+### <a name="linq-generators"></a>Generators
+
+Operator | Return Type | Deferred
+-------- | ----------- | :------:
+`Of`          | `IEnumerable<T>`           | Streaming
+`Gather`      | `IEnumerable<T>`           | Streaming
+`Unfold`      | `IEnumerable<T>`           | Streaming
+`Repeat`      | `Monad<IEnumerable<T>>`    | Streaming
 
 ### Further readings
 
