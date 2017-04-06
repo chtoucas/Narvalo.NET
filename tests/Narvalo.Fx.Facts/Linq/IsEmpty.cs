@@ -5,7 +5,7 @@ namespace Narvalo.Linq {
 
     using Xunit;
 
-    public partial class QperatorsFacts {
+    public partial class SequenceFacts {
         [t("IsEmpty(empty) returns true.")]
         public static void IsEmpty1() {
             var seq = Enumerable.Empty<int>();

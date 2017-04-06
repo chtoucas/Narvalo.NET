@@ -8,7 +8,7 @@ namespace Narvalo.Linq
     using Narvalo.Applicative;
 
     // For IEnumerable<T?>, prefer LastOrDefault() over LastOrNone().
-    public static partial class Qperators
+    public static partial class Sequence
     {
         /// <summary>
         /// Returns the last element of a sequence, or <see cref="Maybe{TSource}.None"/>

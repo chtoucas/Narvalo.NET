@@ -443,7 +443,7 @@ namespace Narvalo.Applicative {
             return applied.Equals(gathered);
         }
 
-        [q("Kleisli.InvokeWith is Qperators.SelectWith w/ the arguments flipped.")]
+        [q("Kleisli.InvokeWith is Sequence.SelectWith w/ the arguments flipped.")]
         public static bool InvokeWith01(int[] arg0, long arg1) {
             Func<int, Fallible<long>> selector = i => Fallible<long>.η(arg1 * i);
 

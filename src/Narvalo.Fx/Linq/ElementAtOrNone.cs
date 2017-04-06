@@ -7,7 +7,7 @@ namespace Narvalo.Linq
     using Narvalo.Applicative;
 
     // For IEnumerable<T?>, prefer ElementAtOrDefault() over ElementAtOrNone().
-    public static partial class Qperators
+    public static partial class Sequence
     {
         /// <summary>
         /// Returns the element at the specified index in a sequence or

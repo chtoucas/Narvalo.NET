@@ -2,12 +2,24 @@
 
 namespace Narvalo.Linq
 {
-    using System;
     using System.Collections.Generic;
 
     /// <summary>
-    /// Provides a set of static methods that produce objects of type <see cref="IEnumerable{T}"/>.
+    /// Provides a set of static and extension methods for querying or producing
+    /// objects that implement <see cref="IEnumerable{T}"/>.
     /// </summary>
+    /// <remarks>
+    /// New LINQ operators:
+    /// - Projecting: SelectAny (deferred)
+    /// - Filtering: WhereAny (deferred)
+    /// - Set: Append (deferred), Prepend (deferred)
+    /// - Element: FirstOrNone, LastOrNone, SingleOrNone, ElementAtOrNone
+    /// - Aggregation: Aggregate (deferred)
+    /// - Quantifiers: IsEmpty
+    /// - Generation: EmptyIfNull
+    /// We have also operators accepting arguments in the Kleisli "category":
+    /// SelectWith (deferred), ZipWith (deferred), WhereBy (deferred), Fold, Reduce.
+    /// </remarks>
     public static partial class Sequence
     {
         /// <summary>
@@ -22,188 +34,5 @@ namespace Narvalo.Linq
             // Enumerable.Repeat(value, 1) works too, but is less readable.
             yield return value;
         }
-
-        #region Unfold
-
-        /// <summary>
-        /// Generates an infinite sequence.
-        /// </summary>
-        public static IEnumerable<TResult> Unfold<TSource, TResult>(
-            TSource seed,
-            Func<TSource, (TResult, TSource)> generator)
-        {
-            Require.NotNull(generator, nameof(generator));
-
-            return iterator();
-
-            IEnumerable<TResult> iterator()
-            {
-                TSource current = seed;
-
-                while (true)
-                {
-                    var (result, next) = generator(current);
-
-                    yield return result;
-
-                    current = next;
-                }
-            }
-        }
-
-        public static IEnumerable<TResult> Unfold<TSource, TResult>(
-            TSource seed,
-            Func<TSource, (TResult, TSource)> generator,
-            Func<TSource, bool> predicate)
-        {
-            Require.NotNull(generator, nameof(generator));
-            Require.NotNull(predicate, nameof(predicate));
-
-            return iterator();
-
-            IEnumerable<TResult> iterator()
-            {
-                TSource current = seed;
-
-                while (predicate(current))
-                {
-                    var (result, next) = generator(current);
-
-                    yield return result;
-
-                    current = next;
-                }
-            }
-        }
-
-        #endregion
-
-        #region Gather
-
-        /// <summary>
-        /// Generates an infinite sequence containing one repeated value.
-        /// </summary>
-        /// <typeparam name="TSource">The type of the value to be used in the
-        /// result sequence.</typeparam>
-        /// <param name="value">The value to be repeated.</param>
-        public static IEnumerable<TSource> Gather<TSource>(TSource value)
-        {
-            while (true)
-            {
-                yield return value;
-            }
-        }
-
-        /// <summary>
-        /// Generates an infinite sequence.
-        /// </summary>
-        public static IEnumerable<TSource> Gather<TSource>(
-            TSource seed,
-            Func<TSource, TSource> generator)
-        {
-            Require.NotNull(generator, nameof(generator));
-
-            return iterator();
-
-            IEnumerable<TSource> iterator()
-            {
-                TSource current = seed;
-
-                while (true)
-                {
-                    yield return current;
-
-                    current = generator(current);
-                }
-            }
-        }
-
-        public static IEnumerable<TSource> Gather<TSource>(
-            TSource seed,
-            Func<TSource, TSource> generator,
-            Func<TSource, bool> predicate)
-        {
-            Require.NotNull(generator, nameof(generator));
-            Require.NotNull(predicate, nameof(predicate));
-
-            return iterator();
-
-            IEnumerable<TSource> iterator()
-            {
-                TSource current = seed;
-
-                while (predicate(current))
-                {
-                    yield return current;
-
-                    current = generator(current);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Generates an infinite sequence.
-        /// </summary>
-        /// <remarks>
-        /// This method can be derived from Unfold:
-        /// <code>
-        /// Sequence.Unfold(seed, _ => (resultSelector(_), generator(_)));
-        /// </code>
-        /// </remarks>
-        public static IEnumerable<TResult> Gather<TSource, TResult>(
-            TSource seed,
-            Func<TSource, TSource> generator,
-            Func<TSource, TResult> resultSelector)
-        {
-            Require.NotNull(generator, nameof(generator));
-            Require.NotNull(resultSelector, nameof(resultSelector));
-
-            return iterator();
-
-            IEnumerable<TResult> iterator()
-            {
-                TSource current = seed;
-
-                while (true)
-                {
-                    yield return resultSelector(current);
-
-                    current = generator(current);
-                }
-            }
-        }
-
-        /// <remarks>
-        /// This method can be derived from Unfold:
-        /// <code>
-        /// Sequence.Unfold(seed, _ => (resultSelector(_), generator(_)), predicate);
-        /// </code>
-        /// </remarks>
-        public static IEnumerable<TResult> Gather<TSource, TResult>(
-            TSource seed,
-            Func<TSource, TSource> generator,
-            Func<TSource, TResult> resultSelector,
-            Func<TSource, bool> predicate)
-        {
-            Require.NotNull(generator, nameof(generator));
-            Require.NotNull(resultSelector, nameof(resultSelector));
-            Require.NotNull(predicate, nameof(predicate));
-
-            return iterator();
-
-            IEnumerable<TResult> iterator()
-            {
-                TSource current = seed;
-
-                while (predicate(current))
-                {
-                    yield return resultSelector(current);
-
-                    current = generator(current);
-                }
-            }
-        }
-
-        #endregion
     }
 }

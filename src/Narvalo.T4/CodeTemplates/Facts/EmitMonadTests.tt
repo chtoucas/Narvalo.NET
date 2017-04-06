@@ -324,7 +324,7 @@ public partial class MonadTemplate
             return applied.Equals(gathered);
         }
 
-        [q("Kleisli.InvokeWith is Qperators.SelectWith w/ the arguments flipped.")]
+        [q("Kleisli.InvokeWith is Sequence.SelectWith w/ the arguments flipped.")]
         public static bool InvokeWith01(int[] arg0, long arg1) {
             Func<int, <#= Name #><long<#= RTDecl #>>> selector = i => <#+ WriteFactory("long"); #>(arg1 * i);
 

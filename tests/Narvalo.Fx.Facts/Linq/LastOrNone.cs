@@ -11,7 +11,7 @@ namespace Narvalo.Linq {
 
     // Largely inspired by
     // https://github.com/dotnet/corefx/blob/master/src/System.Linq/tests/LastOrDefaultTests.cs
-    public partial class QperatorsFacts {
+    public partial class SequenceFacts {
         [t("LastOrNone() guards.")]
         public static void LastOrNone0() {
             IEnumerable<int> nil = null;
@@ -53,7 +53,7 @@ namespace Narvalo.Linq {
             LastOrNone3Impl<int>();
             LastOrNone3Impl<string>();
             LastOrNone3Impl<DateTime>();
-            LastOrNone3Impl<QperatorsFacts>();
+            LastOrNone3Impl<SequenceFacts>();
         }
 
         [t("IListTOneElement")]
@@ -96,7 +96,7 @@ namespace Narvalo.Linq {
             LastOrNone7Impl<int>();
             LastOrNone7Impl<string>();
             LastOrNone7Impl<DateTime>();
-            LastOrNone7Impl<QperatorsFacts>();
+            LastOrNone7Impl<SequenceFacts>();
         }
 
         [t("OneElementNotIListT")]

@@ -5,7 +5,7 @@ namespace Narvalo.Linq
     using System.Collections.Generic;
     using System.Linq;
 
-    public static partial class Qperators
+    public static partial class Sequence
     {
         /// <summary>
         /// Returns true if the sequence is empty; otherwise false.

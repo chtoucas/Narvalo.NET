@@ -4,7 +4,7 @@ namespace Narvalo.Linq
 {
     using System.Collections.Generic;
 
-    public static partial class Qperators
+    public static partial class Sequence
     {
         // There is a much better implementation coming soon (?).
         // https://github.com/dotnet/corefx/blob/master/src/System.Linq/src/System/Linq/AppendPrepend.cs

@@ -8,7 +8,7 @@ namespace Narvalo.Linq
 
     using Narvalo.Applicative;
 
-    public static partial class Qperators
+    public static partial class Sequence
     {
         public static IEnumerable<TSource> WhereAny<TSource>(
             this IEnumerable<TSource> source,

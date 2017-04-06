@@ -10,7 +10,7 @@ namespace Narvalo.Linq {
     using Assert = Narvalo.AssertExtended;
 
     // WhereBy for Either.
-    public partial class QperatorsFacts {
+    public partial class SequenceFacts {
         [t("WhereBy() guards (Either).")]
         public static void WhereBy0a() {
             Func<int, Either<bool, int>> predicate = _ => Either<bool, int>.OfLeft(true);
@@ -36,7 +36,7 @@ namespace Narvalo.Linq {
     }
 
     // WhereBy for Fallible.
-    public partial class QperatorsFacts {
+    public partial class SequenceFacts {
         [t("WhereBy() guards (Fallible).")]
         public static void WhereBy0b() {
             Func<int, Fallible<bool>> predicate = _ => Fallible.Of(true);
@@ -61,7 +61,7 @@ namespace Narvalo.Linq {
     }
 
     // WhereBy for Maybe.
-    public partial class QperatorsFacts {
+    public partial class SequenceFacts {
         [t("WhereBy() guards (Maybe).")]
         public static void WhereBy0c() {
             Func<int, Maybe<bool>> predicate = _ => Maybe.Of(true);
@@ -86,7 +86,7 @@ namespace Narvalo.Linq {
     }
 
     // WhereBy for Outcome.
-    public partial class QperatorsFacts {
+    public partial class SequenceFacts {
         [t("WhereBy() guards (Outcome).")]
         public static void WhereBy0d() {
             Func<int, Outcome<bool>> predicate = _ => Outcome.Of(true);
@@ -111,7 +111,7 @@ namespace Narvalo.Linq {
     }
 
     // WhereBy for Result.
-    public partial class QperatorsFacts {
+    public partial class SequenceFacts {
         [t("WhereBy() guards (Result).")]
         public static void WhereBy0e() {
             Func<int, Result<bool, int>> predicate = _ => Result<bool, int>.Of(true);

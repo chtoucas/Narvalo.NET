@@ -9,7 +9,7 @@ namespace Narvalo.Linq {
     using Assert = Narvalo.AssertExtended;
 
     // Collect for Either.
-    public partial class QperatorsFacts {
+    public partial class SequenceFacts {
         [t("Collect() guards (Either).")]
         public static void Collect0a() {
             IEnumerable<Either<int, int>> nil = null;
@@ -28,7 +28,7 @@ namespace Narvalo.Linq {
     }
 
     // Collect for Fallible.
-    public partial class QperatorsFacts {
+    public partial class SequenceFacts {
         [t("Collect() guards (Fallible).")]
         public static void Collect0b() {
             IEnumerable<Fallible<int>> nil = null;
@@ -47,7 +47,7 @@ namespace Narvalo.Linq {
     }
 
     // Collect for Maybe.
-    public partial class QperatorsFacts {
+    public partial class SequenceFacts {
         [t("Collect() guards (Maybe).")]
         public static void Collect0c() {
             IEnumerable<Maybe<int>> nil = null;
@@ -66,7 +66,7 @@ namespace Narvalo.Linq {
     }
 
     // Collect for Outcome.
-    public partial class QperatorsFacts {
+    public partial class SequenceFacts {
         [t("Collect() guards (Outcome).")]
         public static void Collect0d() {
             IEnumerable<Outcome<int>> nil = null;
@@ -85,7 +85,7 @@ namespace Narvalo.Linq {
     }
 
     // Collect for Result.
-    public partial class QperatorsFacts {
+    public partial class SequenceFacts {
         [t("Collect() guards (Result).")]
         public static void Collect0e() {
             IEnumerable<Result<int, int>> nil = null;

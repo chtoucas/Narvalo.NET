@@ -5,7 +5,7 @@ namespace Narvalo.Linq
     using System;
     using System.Collections.Generic;
 
-    public static partial class Qperators
+    public static partial class Sequence
     {
         // Reduce
         public static TSource Aggregate<TSource>(

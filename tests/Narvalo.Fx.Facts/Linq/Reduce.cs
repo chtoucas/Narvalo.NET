@@ -9,7 +9,7 @@ namespace Narvalo.Linq {
     using Xunit;
 
     // Reduce for Either.
-    public partial class QperatorsFacts {
+    public partial class SequenceFacts {
         [t("Reduce() guards (Either).")]
         public static void Reduce0a() {
             Func<int, int, Either<int, int>> accumulator = (i, j) => Either<int, int>.OfLeft(i + j);
@@ -26,7 +26,7 @@ namespace Narvalo.Linq {
     }
 
     // Reduce for Fallible.
-    public partial class QperatorsFacts {
+    public partial class SequenceFacts {
         [t("Reduce() guards (Fallible).")]
         public static void Reduce0b() {
             Func<int, int, Fallible<int>> accumulator = (i, j) => Fallible.Of(i + j);
@@ -43,7 +43,7 @@ namespace Narvalo.Linq {
     }
 
     // Reduce for Maybe.
-    public partial class QperatorsFacts {
+    public partial class SequenceFacts {
         [t("Reduce() guards (Maybe).")]
         public static void Reduce0c() {
             Func<int, int, Maybe<int>> accumulator = (i, j) => Maybe.Of(i + j);
@@ -60,7 +60,7 @@ namespace Narvalo.Linq {
     }
 
     // Reduce for Outcome.
-    public partial class QperatorsFacts {
+    public partial class SequenceFacts {
         [t("Reduce() guards (Outcome).")]
         public static void Reduce0d() {
             Func<int, int, Outcome<int>> accumulator = (i, j) => Outcome.Of(i + j);
@@ -77,7 +77,7 @@ namespace Narvalo.Linq {
     }
 
     // Reduce for Result.
-    public partial class QperatorsFacts {
+    public partial class SequenceFacts {
         [t("Reduce() guards (Result).")]
         public static void Reduce0e() {
             Func<int, int, Result<int, int>> accumulator = (i, j) => Result<int, int>.Of(i + j);

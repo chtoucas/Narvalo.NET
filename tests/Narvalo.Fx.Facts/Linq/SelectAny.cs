@@ -9,7 +9,7 @@ namespace Narvalo.Linq {
 
     using Assert = Narvalo.AssertExtended;
 
-    public partial class QperatorsFacts {
+    public partial class SequenceFacts {
         [t("SelectAny() guards.")]
         public static void SelectAny0() {
             IEnumerable<int> nil = null;
@@ -43,7 +43,7 @@ namespace Narvalo.Linq {
     }
 
     // SelectAny for Either.
-    public partial class QperatorsFacts {
+    public partial class SequenceFacts {
         [t("SelectAny() guards (Either).")]
         public static void SelectAny0a() {
             IEnumerable<int> nil = null;
@@ -65,7 +65,7 @@ namespace Narvalo.Linq {
     }
 
     // SelectAny for Fallible.
-    public partial class QperatorsFacts {
+    public partial class SequenceFacts {
         [t("SelectAny() guards (Fallible).")]
         public static void SelectAny0b() {
             IEnumerable<int> nil = null;
@@ -87,7 +87,7 @@ namespace Narvalo.Linq {
     }
 
     // SelectAny for Maybe.
-    public partial class QperatorsFacts {
+    public partial class SequenceFacts {
         [t("SelectAny() guards (Maybe).")]
         public static void SelectAny0c() {
             IEnumerable<int> nil = null;
@@ -109,7 +109,7 @@ namespace Narvalo.Linq {
     }
 
     // SelectAny for Outcome.
-    public partial class QperatorsFacts {
+    public partial class SequenceFacts {
         [t("SelectAny() guards (Outcome).")]
         public static void SelectAny0d() {
             IEnumerable<int> nil = null;
@@ -131,7 +131,7 @@ namespace Narvalo.Linq {
     }
 
     // SelectAny for Result.
-    public partial class QperatorsFacts {
+    public partial class SequenceFacts {
         [t("SelectAny() guards (Result).")]
         public static void SelectAny0e() {
             IEnumerable<int> nil = null;

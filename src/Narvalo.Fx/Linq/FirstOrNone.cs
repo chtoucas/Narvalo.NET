@@ -9,7 +9,7 @@ namespace Narvalo.Linq
     using Narvalo.Applicative;
 
     // For IEnumerable<T?>, prefer FirstOrDefault() over FirstOrNone().
-    public static partial class Qperators
+    public static partial class Sequence
     {
         /// <summary>
         /// Returns the first element of a sequence, or <see cref="Maybe{TSource}.None"/>

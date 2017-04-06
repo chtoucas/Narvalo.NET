@@ -45,7 +45,7 @@ namespace Narvalo.Linq
 
     using Narvalo.Applicative;
 
-    public static partial class Qperators
+    public static partial class Sequence
     {
         internal static Outcome<IEnumerable<TSource>> WhereByImpl<TSource>(
             this IEnumerable<TSource> source,

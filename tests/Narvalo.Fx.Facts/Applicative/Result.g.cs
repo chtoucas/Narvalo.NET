@@ -437,7 +437,7 @@ namespace Narvalo.Applicative {
             return applied.Equals(gathered);
         }
 
-        [q("Kleisli.InvokeWith is Qperators.SelectWith w/ the arguments flipped.")]
+        [q("Kleisli.InvokeWith is Sequence.SelectWith w/ the arguments flipped.")]
         public static bool InvokeWith01(int[] arg0, long arg1) {
             Func<int, Result<long, My.Obj>> selector = i => Result<long, My.Obj>.Of(arg1 * i);
 

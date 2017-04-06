@@ -6,7 +6,7 @@ namespace Narvalo.Linq {
 
     using Xunit;
 
-    public partial class QperatorsFacts {
+    public partial class SequenceFacts {
         [t("EmptyIfNull(null) returns empty.")]
         public static void EmptyIfNull1() {
             IEnumerable<int> seq = null;

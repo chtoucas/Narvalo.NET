@@ -9,7 +9,7 @@ namespace Narvalo.Linq {
     using Xunit;
 
     // Fold for Either.
-    public partial class QperatorsFacts {
+    public partial class SequenceFacts {
         [t("Fold() guards (Either).")]
         public static void Fold0a() {
             int seed = 0;
@@ -27,7 +27,7 @@ namespace Narvalo.Linq {
     }
 
     // Fold for Fallible.
-    public partial class QperatorsFacts {
+    public partial class SequenceFacts {
         [t("Fold() guards (Fallible).")]
         public static void Fold0b() {
             int seed = 0;
@@ -45,7 +45,7 @@ namespace Narvalo.Linq {
     }
 
     // Fold for Maybe.
-    public partial class QperatorsFacts {
+    public partial class SequenceFacts {
         [t("Fold() guards (Maybe).")]
         public static void Fold0c() {
             int seed = 0;
@@ -63,7 +63,7 @@ namespace Narvalo.Linq {
     }
 
     // Fold for Outcome.
-    public partial class QperatorsFacts {
+    public partial class SequenceFacts {
         [t("Fold() guards (Outcome).")]
         public static void Fold0d() {
             int seed = 0;
@@ -81,7 +81,7 @@ namespace Narvalo.Linq {
     }
 
     // Fold for Result.
-    public partial class QperatorsFacts {
+    public partial class SequenceFacts {
         [t("Fold() guards (Result).")]
         public static void Fold0e() {
             int seed = 0;

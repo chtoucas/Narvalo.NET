@@ -10,7 +10,7 @@ namespace Narvalo.Linq {
     using Assert = Narvalo.AssertExtended;
 
     // ZipWith for Either.
-    public partial class QperatorsFacts {
+    public partial class SequenceFacts {
         [t("ZipWith() uses deferred execution (Either).")]
         public static void ZipWith1a() {
             IEnumerable<int> first = new ThrowingEnumerable<int>();
@@ -24,7 +24,7 @@ namespace Narvalo.Linq {
     }
 
     // ZipWith for Fallible.
-    public partial class QperatorsFacts {
+    public partial class SequenceFacts {
         [t("ZipWith() uses deferred execution (Fallible).")]
         public static void ZipWith1b() {
             IEnumerable<int> first = new ThrowingEnumerable<int>();
@@ -38,7 +38,7 @@ namespace Narvalo.Linq {
     }
 
     // ZipWith for Maybe.
-    public partial class QperatorsFacts {
+    public partial class SequenceFacts {
         [t("ZipWith() uses deferred execution (Maybe).")]
         public static void ZipWith1c() {
             IEnumerable<int> first = new ThrowingEnumerable<int>();
@@ -52,7 +52,7 @@ namespace Narvalo.Linq {
     }
 
     // ZipWith for Outcome.
-    public partial class QperatorsFacts {
+    public partial class SequenceFacts {
         [t("ZipWith() uses deferred execution (Outcome).")]
         public static void ZipWith1d() {
             IEnumerable<int> first = new ThrowingEnumerable<int>();
@@ -66,7 +66,7 @@ namespace Narvalo.Linq {
     }
 
     // ZipWith for Result.
-    public partial class QperatorsFacts {
+    public partial class SequenceFacts {
         [t("ZipWith() uses deferred execution (Result).")]
         public static void ZipWith1e() {
             IEnumerable<int> first = new ThrowingEnumerable<int>();
