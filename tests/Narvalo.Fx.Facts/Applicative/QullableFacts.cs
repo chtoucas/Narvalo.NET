@@ -185,21 +185,44 @@ namespace Narvalo.Applicative {
 
         [t("Join() joins if non-null.")]
         public static void Join1() {
-            (int, short)? inner = (1, 2);
-            (short, int)? outer = (2, 3);
+            (int, short)? outer = (1, 2);
+            (short, int)? inner = (2, 3);
             Func<(int, short), short> outerKeySelector = t => t.Item2;
             Func<(short, int), short> innerKeySelector = t => t.Item1;
             Func<(int, short), (short, int), (int, int)> resultSelector
                 = (x, y) => (x.Item1, y.Item2);
 
-            (int, int)? m = inner.Join(outer, outerKeySelector, innerKeySelector, resultSelector);
+            (int, int)? m = outer.Join(inner, outerKeySelector, innerKeySelector, resultSelector);
             Assert.NotNull(m);
             Assert.Equal(1, m.Value.Item1);
             Assert.Equal(3, m.Value.Item2);
 
-            (int, int)? q = from t1 in inner
-                            join t2 in outer on t1.Item2 equals t2.Item1
+            (int, int)? q = from t1 in outer
+                            join t2 in inner on t1.Item2 equals t2.Item1
                             select (t1.Item1, t2.Item2);
+            Assert.NotNull(q);
+            Assert.Equal(1, q.Value.Item1);
+            Assert.Equal(3, q.Value.Item2);
+        }
+
+        [t("GroupJoin() joins if non-null.")]
+        public static void GroupJoin1() {
+            (int, short)? outer = (1, 2);
+            (short, int)? inner = (2, 3);
+            Func<(int, short), short> outerKeySelector = t => t.Item2;
+            Func<(short, int), short> innerKeySelector = t => t.Item1;
+            Func<(int, short), (short, int)?, (int, int)> resultSelector
+                = (x, y) => (x.Item1, y?.Item2 ?? 0);
+
+            (int, int)? m = outer.GroupJoin(inner, outerKeySelector, innerKeySelector, resultSelector);
+            Assert.NotNull(m);
+            Assert.Equal(1, m.Value.Item1);
+            Assert.Equal(3, m.Value.Item2);
+
+            (int, int)? q = from t1 in outer
+                            join t2 in inner on t1.Item2 equals t2.Item1
+                            into g
+                            select (t1.Item1, g?.Item2 ?? 0);
             Assert.NotNull(q);
             Assert.Equal(1, q.Value.Item1);
             Assert.Equal(3, q.Value.Item2);
