@@ -280,7 +280,7 @@ type.
 
 With LINQ, you can use `SelectMany` to write equi-joins - even if, in general,
 it is better to stick with `Join` (because it is faster) for that purpose - it
-is not possible here using the query syntax. If we try rewrite the previous
+is not possible here using the query syntax. If we try to rewrite the previous
 query with `SelectMany`:
 ```csharp
 // WARNING: Won't compile.
@@ -289,8 +289,8 @@ var q = from outer in source1
         where outer.Item2 == inner.Item1
         select (outer.Item1, inner.Item2);
 ```
-the C# compiler will cry out loud. The reason is that it tries to translate
-this into something similar to this:
+the C# compiler will cry out loud. The reason is that it translates the query
+into something similar to:
 ```csharp
 // WARNING: Won't compile.
 var q = source1.SelectMany(_ => source2, (outer, inner) => new { outer, inner })
