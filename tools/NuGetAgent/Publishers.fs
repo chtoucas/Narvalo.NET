@@ -154,7 +154,7 @@ module Publishers =
 
             | Retail(official, inner) ->
                 printfn <| if official then "Publishing retail packages to the official NuGet server."
-                           else "Publishing retail packages to our own private NuGet server."
+                           else "Publishing retail packages to MyGet."
 
                 findLatestPackages path (
                     // Legacy behaviour:
@@ -164,7 +164,7 @@ module Publishers =
                 |> (publishPackages <| inner)
 
             | Edge(inner) ->
-                printfn "Publishing edge packages to our own private NuGet server."
+                printfn "Publishing edge packages to MyGet."
 
                 findLatestPackages path (
                     // Legacy behaviour:
