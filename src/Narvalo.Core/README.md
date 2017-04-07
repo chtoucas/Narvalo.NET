@@ -11,6 +11,9 @@ Provides helpers on which depend the other Narvalo packages.
 - Full test coverage.
 - Complete C# documentation.
 
+Our versioning scheme is explained
+[here](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/index.md#versioning).
+
 Changelog
 ---------
 

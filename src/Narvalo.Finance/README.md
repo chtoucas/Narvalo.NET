@@ -10,6 +10,9 @@ BIC (ISO 9362) and IBAN types; includes support for parsing, validation and form
 - **Stable**
 - Full test coverage.
 
+Our versioning scheme is explained
+[here](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/index.md#versioning).
+
 Notes:
 - IBAN validation does not yet perform full BBAN validation.
 

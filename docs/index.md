@@ -271,6 +271,33 @@ We use the following:
 - `AssemblyVersion = MAJOR.MINOR.0.0`
 - `AssemblyFileVersion = MAJOR.MINOR.BUILD.REVISION`
 - `AssemblyInformationalVersion = MAJOR.MINOR.PATCH(-PreRelaseLabel)(+BuildMetadata)`
+- NuGet packages use `AssemblyInformationalVersion` without build metadata
+  attached: `PackageVersion = MAJOR.MINOR.PATCH(-PreRelaseLabel)`.
+
+We **don't** use semantic versioning. We increment the:
+- `MAJOR` version when we introduce important new functionalities or major
+  breaking changes,
+- `MINOR` version when we have small API changes, or minor breaking changes that
+  can be quickly fixed, e.g. marking a method as obsolete but providing a
+  replacement for it, or changes in parameter names,
+- `PATCH` version when we make backwards-compatible bug fixes and internal
+  improvements.
+
+Anything strictly below 1.0.0 is considered unstable, breaking changes are
+always to be expected. For stable packages, we provide a Changelog (end of the
+README.md of each individual package) so you can see in advance what to expect.
+
+From a customer perspective, only patch updates are always safe. Minor updates
+are usually safe but could incur a bit of work on your side. For major updates,
+I hope to use them only for big and backwards-compatible API changes, not for
+major breaking changes but this might well happen, which would simply mean that
+I was wrong in the first place.
+
+### Updating
+
+**IMPORTANT:** Only update the version number immediately before a new release
+to the _official_ NuGet repository. Otherwise, versions found in the repository
+must **match** the ones found in the NuGet registry.
 
 `MAJOR`, `MINOR`, `PATCH` and `PreRelaseLabel` (`alpha`, `beta`...) are set manually.
 
@@ -279,6 +306,11 @@ We use the following:
 - Continuous build or publicly released build should increment them.
 
 We do not change the `AssemblyVersion` attribute when `PATCH` is incremented.
+
+Unstable packages (published to [myget](http://www.myget.org)) use the official
+version with the PATCH number increased by one and a unique PreReleaseLabel -
+all this is done automatically. Their dependencies on other Narvalo packages
+are always set to the highest unstable version.
 
 ### How to customize the Assembly Version
 
@@ -309,14 +341,7 @@ If you do not want to use the default version properties:
 </Project>
 ```
 
-### Version updates & NuGet packages
-
-NuGet packages use `AssemblyInformationalVersion` without build metadata
-attached: `PackageVersion = MAJOR.MINOR.PATCH(-PreRelaseLabel)`.
-
-**IMPORTANT:** Only update the version number immediately before a new release
-to the _official_ NuGet repository. Otherwise, versions found in the repository
-must **match** the ones found in the NuGet registry.
+### Version updates & NuGet dependencies
 
 If two projects use a shared version `DefaultVersion.props`, we need to be very
 careful. Let's see how things work with NuGet when Narvalo.YYY depends on
@@ -333,11 +358,6 @@ Narvalo.XXX:
     since Narvalo.YYY references an assembly version unknown outside.
     The solution is obvious: do not change the shared version and configure
     Narvalo.YYY to use a custom version.
-
-Unstable packages (published to [myget](http://www.myget.org)) use the official
-version with the PATCH number increased by one and a unique PreReleaseLabel -
-all this is done automatically. Their dependencies on other Narvalo packages
-are always set to the highest unstable version.
 
 --------------------------------------------------------------------------------
 

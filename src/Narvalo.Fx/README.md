@@ -15,6 +15,9 @@ disjoint union (`Either<T1, T2>`), sequence generators and LINQ extensions.
   is progressing too.
 - C# documentation is largely missing.
 
+Our versioning scheme is explained
+[here](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/index.md#versioning).
+
 ### Content
 - [Overview](#overview)
 - [Unit Type](#unit-type)
