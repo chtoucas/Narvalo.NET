@@ -34,6 +34,7 @@
     <Compile Include="Applicative\Outcome.Shadowing.cs" />
     <Compile Include="Applicative\Outcome%24.cs" />
     <Compile Include="Applicative\Fallible.Helpers.cs" />
+    <Compile Include="Applicative\Vuple.cs" />
     <Compile Include="Applicative\Qullable.cs" />
     <Compile Include="Internal\ISecondaryContainer`1.cs" />
     <Compile Include="Internal\IEither`2.cs" />

@@ -236,13 +236,29 @@ namespace Narvalo.Applicative {
             (int, string)? outer = (1, "key");
             (string, int)? inner = ("key", 3);
 
-            // No query syntax (see README in Narvalo.Fx for an explanation).
+            // No real query syntax (see README in Narvalo.Fx for an explanation).
             var m = outer.SelectMany(x => inner, (o, i) => (o, i))
                 .Where(t => t.Item1.Item2 == t.Item2.Item1)
                 .Select(t => (t.Item1.Item1, t.Item2.Item2));
             Assert.NotNull(m);
             Assert.Equal(1, m.Value.Item1);
             Assert.Equal(3, m.Value.Item2);
+        }
+
+        [t("Non equi-join w/ SelectMany().")]
+        public static void NonEquiJoin1() {
+            (int, int)? first = (1, 2);
+            (int, int)? second = (3, 3);
+            (int, int)? third = (3, 7);
+
+            // No real query syntax (see README in Narvalo.Fx for an explanation).
+            var q = from t in Vuple.Gather(first, second, third)
+                    where t.Item1.Item2 < t.Item2.Item1
+                        && t.Item2.Item2 == t.Item3.Item1
+                    select (t.Item1.Item1, t.Item3.Item2);
+            Assert.NotNull(q);
+            Assert.Equal(1, q.Value.Item1);
+            Assert.Equal(7, q.Value.Item2);
         }
 
         [t("Cross join w/ SelectMany().")]

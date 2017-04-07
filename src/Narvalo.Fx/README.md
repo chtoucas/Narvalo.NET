@@ -227,7 +227,7 @@ TResult? q = from v1 in source
              select resultSelector(v1, v2);
 ```
 
-Cross join,
+##### Cross-join
 ```csharp
 T1? source1 = ...;
 T2? source2 = ...;
@@ -239,14 +239,12 @@ TResult? q = from v1 in source1
              select resultSelector(v1, v2);
 ```
 
-[Equi-join, see below]
-
 Let's rewrite the subquery example with `SelectMany`:
 ```csharp
-(int, (int, int)?)? source = (1, (2, 3));
-var q = from outer in source
-        from inner in outer.Item2
-        select (outer.Item1, inner.Item1 + inner.Item2);
+(int, (int, int)?)? outer = (1, (2, 3));
+var q = from outerValue in outer
+        from innerValue in outer.Item2
+        select (outerValue.Item1, innerValue.Item1 + innerValue.Item2);
 
 ```
 the result is still `(1, 5)` but, this time, of type `(int, int)?`
@@ -254,9 +252,9 @@ instead of `(int, int?)?`; the operator `SelectMany` eliminates the hierarchical
 structure of LINQ queries. Now, if you are asked to compute the sum of all
 integers in `source`, this is straightforward:
 ```csharp
-var q = from outer in source
-        from inner in outer.Item2
-        select outer.Item1 + inner.Item1 + inner.Item2;
+var q = from outerValue in outer
+        from innerValue in outer.Item2
+        select outerValue.Item1 + innerValue.Item1 + innerValue.Item2;
 ```
 the result is `6` of type `int?`. A good exercise is to write the same query
 by using only `HasValue` and `Value`, or with pattern matching - of course,
@@ -264,64 +262,99 @@ you won't come very often across such a convoluted example.
 
 [Explain why this example won't compile with `(int, (int, int))?`]
 
-#### `Join`
-We don't describe the fluent syntax which is way more complicated than the
-query syntax.
-```csharp
-(int, string)? source1 = (1, "key");
-(string, int)? source2 = ("key", 3);
-
-var q = from outer in source1
-        join inner in source2 on outer.Item2 equals inner.Item1
-        select (outer.Item1, inner.Item2);
-```
-the result is `(1, 3)` of type `(int, int)?`.
-
-**Remark.** We use a string to emphasize that the key needs not to be a nullable
-type.
-
-With LINQ, you can use `SelectMany` to write equi-joins - even if, in general,
-it is better to stick with `Join` (because it is faster) for that purpose - it
-is not possible here using the query syntax. If we try to rewrite the previous
-query with `SelectMany`:
+##### Equi-join
+With LINQ, one can use `SelectMany` to write equi-joins, with nullables, it is
+not possible using only the same query syntax (but see the next paragraph and
+the one on `Join` for alternatives):
 ```csharp
 // WARNING: Won't compile.
-var q = from outer in source1
-        from inner in source2
-        where outer.Item2 == inner.Item1
-        select (outer.Item1, inner.Item2);
+(int, string)? outer = (1, "key");
+(string, int)? inner = ("key", 3);
+
+var q = from outerValue in outer
+        from innerValue in inner
+        where outerValue.Item2 == innerValue.Item1
+        select (outerValue.Item1, innerValue.Item2);
 ```
 the C# compiler will cry out loud. The reason is that it translates the query
 into something similar to:
 ```csharp
 // WARNING: Won't compile.
-var q = source1.SelectMany(_ => source2, (outer, inner) => new { outer, inner })
-          .Where(t => t.outer.Item2 == t.inner.Item1)
-          .Select(t => (t.outer.Item1, t.inner.Item2));
+var q = outer.SelectMany(_ => inner, (outerValue, innerValue) => new { outerValue, innerValue })
+          .Where(t => t.outerValue.Item2 == t.innerValue.Item1)
+          .Select(t => (t.outerValue.Item1, t.innerValue.Item2));
 ```
 The problem lies in the use of an anonymous type in `SelectMany` - remember
 that `resultSelector` must have a nullable return type. To write an equi-join
 with `SelectMany`, we must revert to the fluent syntax:
 ```csharp
-var q = source1.SelectMany(_ => source2, (outer, inner) => (outer, inner))
+var q = outer.SelectMany(_ => inner, (outerValue, innerValue) => (outerValue, innerValue))
           .Where(t => t.Item1.Item2 == t.Item2.Item1)
           .Select(t => (t.Item1.Item1, t.Item2.Item2));
 ```
 the only difference being that _we use a value tuple instead of an anonymous
 type_.
 
+##### Join (equi or not)
+We just saw that joins are difficult to write with `SelectMany`, and we only
+discussed equi-joins! There must be a better solution. Actually, there is, it is
+very simple and we already saw it: just don't use a join but a intermediate
+value tuple. For this purpose, we have created an helper `Vuple` that takes
+n nullable values as input and return one n-tuple with the values if none of
+them are null, and `null` if any of them is null. Finally, we can rewrite the
+previous query using the query syntax:
+```csharp
+(int, string)? outer = (1, "key");
+(string, int)? inner = ("key", 3);
+
+var q = from t in Vuple.Gather(outer, inner)
+        where t.Item1.Item2 == t.Item2.Item1
+        select (t.Item1.Item1, t.Item2.Item2);
+```
+The good news is that this "trick" works with an arbitrary number of nullables
+(to be honest, eight being the maximum number of elements in a value tuple,
+there is an upper limit) and, even better, applies to non equi-joins too:
+```csharp
+(int, int)? first  = (1, 2);
+(int, int)? second = (3, "key");
+(int, int)? third  = ("key", 7);
+
+var q = from t in Vuple.Gather(first, second, third)
+        where t.Item1.Item2 < t.Item2.Item1
+            && t.Item2.Item2 == t.Item3.Item1
+        select (t.Item1.Item1, t.Item3.Item2);
+```
+the result is `(1, 7)` of type `(int, int)?`.
+
+#### `Join`
+We don't describe the fluent syntax which is way more complicated than the
+query syntax.
+
+```csharp
+(int, string)? outer = (1, "key");
+(string, int)? inner = ("key", 3);
+
+var q = from outerValue in outer
+        join innerValue in inner on outerValue.Item2 equals innerValue.Item1
+        select (outerValue.Item1, innerValue.Item2);
+```
+the result is `(1, 3)` of type `(int, int)?`.
+
+**Remark.** We use a string to emphasize that the key needs not to be a nullable
+type.
+
 #### `GroupJoin`
 We don't describe the fluent syntax which is way more complicated than the
 query syntax. `GroupJoin` is not that interesting, `Join` is always a better
 choice.
 ```csharp
-(int, string)? source1 = (1, "key");
-(string, int)? source2 = ("key", 3);
+(int, string)? outer = (1, "key");
+(string, int)? inner = ("key", 3);
 
-var q = from outer in source1
-        join inner in source2 on outer.Item2 equals inner.Item1
+var q = from outerValue in outer
+        join innerValue in inner on outerValue.Item2 equals innerValue.Item1
         into innerGroup
-        select (outer.Item1, innerGroup?.Item2);
+        select (outerValue.Item1, innerGroup?.Item2);
 ```
 the result is `(1, 3)` of type `(int, int?)?`.
 
