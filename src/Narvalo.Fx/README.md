@@ -293,7 +293,7 @@ the C# compiler will cry out loud. The reason is that it tries to translate
 this into something similar to this:
 ```csharp
 // WARNING: Won't compile.
-var q = source1.SelectMany(x => source2, (outer, inner) => new { outer, inner })
+var q = source1.SelectMany(_ => source2, (outer, inner) => new { outer, inner })
           .Where(t => t.outer.Item2 == t.inner.Item1)
           .Select(t => (t.outer.Item1, t.inner.Item2));
 ```
@@ -301,7 +301,7 @@ The problem lies in the use of an anonymous type in `SelectMany` - remember
 that `resultSelector` must have a nullable return type. To write an equi-join
 with `SelectMany`, we must revert to the fluent syntax:
 ```csharp
-var q = source1.SelectMany(x => source2, (outer, inner) => (outer, inner))
+var q = source1.SelectMany(_ => source2, (outer, inner) => (outer, inner))
           .Where(t => t.Item1.Item2 == t.Item2.Item1)
           .Select(t => (t.Item1.Item1, t.Item2.Item2));
 ```
@@ -1072,18 +1072,7 @@ Type             | Properties
 
 #### Is `Nullable<T>` really a monad?
 
-The `Bind` method is easy to write as an extension method:
-```csharp
-public static TResult? Bind<TSource, TResult>(
-    this TSource? source,
-    Func<TSource, TResult?> binder)
-    where TSource : struct
-    where TResult : struct
-{
-    // Argument validation omitted.
-    return source is TSource value ? binder(value) : null;
-}
-```
+- `Bind`, see [here](#nullable-binding).
 - `Of` is casting `(T?)value`.
 - `Zero` is `null`.
 - `null` is a left zero for `Bind`; `null.Bind(binder) ≡ null`
