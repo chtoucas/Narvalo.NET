@@ -4,6 +4,9 @@ Issues & TODOs (en vrac)
 Divers et variés
 ----------------
 
+- [High] Resources for Narvalo.Money get mixed up when using `make.ps1 pack`:
+  it embeds `Strings.resx` from Narvalo.Fx????!!!! Really disturbing.
+  Current fix: rename `Strings.resx` to `Strings_Money.resx`.
 - [High] `make.ps1` fails sometimes for weird reasons (most of the time
   it works perfectly). There seems to be a problem with the new MSBuild when
   we have VS opened and it is running at the same time:
@@ -84,7 +87,7 @@ public static void Deconstruct<T>(
 }
 ```
   this is perfectly legal but will always be ignored in favor of the
-  deconstructor method of `Maybe<T?>`.
+  deconstructor method on `Maybe<T?>`.
 - Add other monads - prototypes [here](https://github.com/chtoucas/Brouillons/tree/master/src/play/Functional/Monadic)
 - `OnError()`, `WhenError()` & co could return a boolean to signal when they
   actually did something.
