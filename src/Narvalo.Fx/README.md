@@ -21,6 +21,8 @@ disjoint union (`Either<T1, T2>`), sequence generators and LINQ extensions.
 Our versioning scheme is explained
 [here](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/index.md#versioning).
 
+**WARNING: _I am currently in the process of rewriting this document._**
+
 ### Content
 - [Overview](#overview)
 - [Unit Type](#unit-type)
@@ -36,8 +38,6 @@ Our versioning scheme is explained
 - [F# is better at functional programming!](#f-is-better-at-functional-programming)
 - [Design Notes](#design-notes)
 - [Changelog](#changelog)
-
-**WARNING:** _I am currently in the process of rewriting this document._
 
 --------------------------------------------------------------------------------
 
@@ -67,8 +67,10 @@ query operators mostly in relation to `Maybe<T>`, `Outcome<T>`...
 The types `Maybe<T>`, `Outcome<T>`, `Fallible<T>`, `Result<T, TError>` and
 `Either<T1, T2>` are examples of **monads**, a concept popularized by the
 [Haskell](https://www.haskell.org/) language. If you know nothing about monads
-or Haskell, don't worry, no previous knowledge is required - in fact, we won't
-explain the term monad until the [end](#typologia) of this document.
+or Haskell, don't worry, no previous knowledge is required. In fact, we won't
+explain the term monad until the [end](#typologia) of this document and, if you
+don't care, just ignore the whole monad stuff which is just an implementation
+detail.
 
 We will often say that something is _monadic_, which will simply mean that it is
 applicable/available to any of the aforementioned monads. For instance, "it is
@@ -1035,8 +1037,13 @@ public static TResult? Bind<TSource, TResult>(
 F# is better at functional programming!
 ---------------------------------------
 
+**WARNING:** I don't say that C# is bad at it, on the contrary, I find more
+pleasing to work with C# when mixing functional and OOP styles, and it seems
+that the .NET Team is planning to bring more and more functional-style goodness
+to C#.
+
 I feel dumb to state the obvious, but it is interesting to see what F# has
-to offer and why it is so much better. F# already has a
+to offer and why it is so much better at certain things. F# already has a
 [unit type](https://docs.microsoft.com/en-us/dotnet/articles/fsharp/language-reference/unit-type),
 an
 [option type](https://docs.microsoft.com/en-us/dotnet/articles/fsharp/language-reference/options),
