@@ -4,9 +4,6 @@ Issues & TODOs (en vrac)
 Divers et variés
 ----------------
 
-- [High] Resources for Narvalo.Money get mixed up when using `make.ps1 pack`:
-  it embeds `Strings.resx` from Narvalo.Fx????!!!! Really disturbing.
-  Current fix: rename `Strings.resx` to `Strings_Money.resx`.
 - [High] `make.ps1` fails sometimes for weird reasons (most of the time
   it works perfectly). There seems to be a problem with the new MSBuild when
   we have VS opened and it is running at the same time:
@@ -18,8 +15,9 @@ he', car il est en cours d'utilisation par un autre processus. [I:\github\Narval
 .Facts.csproj]
 ```
   See [dotnet issue](https://github.com/dotnet/cli/issues/4786)?
-  Seems to happen less often now, but still sometimes it fails on Narvalo.Money
-  (resource problem).
+- Resources for Narvalo.Money get mixed up when using `make.ps1 pack`:
+  it embeds `Strings.resx` from Narvalo.Fx????!!!! Really disturbing.
+  Current fix: rename `Strings.resx` to `Strings_Money.resx`.
 - Review localization for Narvalo.Build, Narvalo.Mvp, Narvalo.Mvp.Web
   and Narvalo.Web.
 - `make.ps1`: Add filter to test only one Trait.
@@ -30,7 +28,7 @@ he', car il est en cours d'utilisation par un autre processus. [I:\github\Narval
 - [Low] Enable continuous integration (Travis, AppVeyor, Coverall, Readthedoc, GitLink)?
 
 ### Migration to .NET Standard projects.
-- Pending: support for Code Analysis.
+- Pending: support for Code Analysis (I really want this).
 - We might have a conflict between the new MSBuild and our target `Package`.
 - Use `PackageReference` instead of parsing `packages.config`.
 - Update to use the (new) native package properties: `Version`, `AssemblyVersion`,

@@ -95,7 +95,6 @@ namespace Narvalo
 
         // Divide+Remainder aka DivRem.
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Div", Justification = "[Intentionally] Math.DivRem().")]
-        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "2#", Justification = "[Intentionally] Math.DivRem().")]
         public static Money DivRem(Money dividend, long divisor, out Money remainder)
         {
             // REVIEW: remainder = dividend % divisor is slower for integers. What about decimals?

@@ -62,7 +62,6 @@ namespace Narvalo
 
         // Divide+Remainder aka DivRem.
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Div", Justification = "[Intentionally] Math.DivRem().")]
-        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "2#", Justification = "[Intentionally] Math.DivRem().")]
         public static Moneypenny DivRem(Moneypenny dividend, long divisor, out Moneypenny remainder)
         {
             long q = Number.DivRem(dividend.Amount, divisor, out long rem);

@@ -28,10 +28,8 @@ namespace Narvalo
 
             if (style.Contains(BooleanStyles.Literal))
             {
-                bool retval;
-
                 // NB: Cette méthode n'est pas sensible à la casse de "value".
-                if (System.Boolean.TryParse(val, out retval))
+                if (System.Boolean.TryParse(val, out bool retval))
                 {
                     return retval;
                 }
@@ -55,8 +53,8 @@ namespace Narvalo
 
         public static decimal? Decimal(string value, NumberStyles style, IFormatProvider provider)
         {
-            TryParser<decimal> parser =
-                (string _, out decimal result) => decimal.TryParse(_, style, provider, out result);
+            TryParser<decimal> parser = (string v, out decimal result)
+                => System.Decimal.TryParse(v, style, provider, out result);
 
             return parser.NullInvoke(value);
         }
@@ -76,8 +74,8 @@ namespace Narvalo
 
         public static double? Double(string value, NumberStyles style, IFormatProvider provider)
         {
-            TryParser<double> parser = (string _, out double result)
-                => double.TryParse(_, style, provider, out result);
+            TryParser<double> parser = (string v, out double result)
+                => System.Double.TryParse(v, style, provider, out result);
 
             return parser.NullInvoke(value);
         }
@@ -87,7 +85,8 @@ namespace Narvalo
 
         public static short? Int16(string value, NumberStyles style, IFormatProvider provider)
         {
-            TryParser<short> parser = (string _, out short result) => short.TryParse(_, style, provider, out result);
+            TryParser<short> parser = (string v, out short result)
+                => System.Int16.TryParse(v, style, provider, out result);
 
             return parser.NullInvoke(value);
         }
@@ -97,7 +96,8 @@ namespace Narvalo
 
         public static int? Int32(string value, NumberStyles style, IFormatProvider provider)
         {
-            TryParser<int> parser = (string _, out int result) => int.TryParse(_, style, provider, out result);
+            TryParser<int> parser = (string v, out int result)
+                => System.Int32.TryParse(v, style, provider, out result);
 
             return parser.NullInvoke(value);
         }
@@ -107,7 +107,8 @@ namespace Narvalo
 
         public static long? Int64(string value, NumberStyles style, IFormatProvider provider)
         {
-            TryParser<long> parser = (string _, out long result) => long.TryParse(_, style, provider, out result);
+            TryParser<long> parser = (string v, out long result)
+                => System.Int64.TryParse(v, style, provider, out result);
 
             return parser.NullInvoke(value);
         }
@@ -117,7 +118,8 @@ namespace Narvalo
 
         public static float? Single(string value, NumberStyles style, IFormatProvider provider)
         {
-            TryParser<float> parser = (string _, out float result) => float.TryParse(_, style, provider, out result);
+            TryParser<float> parser = (string v, out float result)
+                => System.Single.TryParse(v, style, provider, out result);
 
             return parser.NullInvoke(value);
         }
@@ -129,7 +131,8 @@ namespace Narvalo
         [CLSCompliant(false)]
         public static sbyte? SByte(string value, NumberStyles style, IFormatProvider provider)
         {
-            TryParser<sbyte> parser = (string _, out sbyte result) => sbyte.TryParse(_, style, provider, out result);
+            TryParser<sbyte> parser = (string v, out sbyte result)
+                => System.SByte.TryParse(v, style, provider, out result);
 
             return parser.NullInvoke(value);
         }
@@ -141,7 +144,8 @@ namespace Narvalo
         [CLSCompliant(false)]
         public static byte? Byte(string value, NumberStyles style, IFormatProvider provider)
         {
-            TryParser<byte> parser = (string _, out byte result) => byte.TryParse(_, style, provider, out result);
+            TryParser<byte> parser = (string v, out byte result)
+                => System.Byte.TryParse(v, style, provider, out result);
 
             return parser.NullInvoke(value);
         }
@@ -153,8 +157,8 @@ namespace Narvalo
         [CLSCompliant(false)]
         public static ushort? UInt16(string value, NumberStyles style, IFormatProvider provider)
         {
-            TryParser<ushort> parser = (string _, out ushort result)
-                => ushort.TryParse(_, style, provider, out result);
+            TryParser<ushort> parser = (string v, out ushort result)
+                => System.UInt16.TryParse(v, style, provider, out result);
 
             return parser.NullInvoke(value);
         }
@@ -166,7 +170,8 @@ namespace Narvalo
         [CLSCompliant(false)]
         public static uint? UInt32(string value, NumberStyles style, IFormatProvider provider)
         {
-            TryParser<uint> parser = (string _, out uint result) => uint.TryParse(_, style, provider, out result);
+            TryParser<uint> parser = (string v, out uint result)
+                => System.UInt32.TryParse(v, style, provider, out result);
 
             return parser.NullInvoke(value);
         }
@@ -178,26 +183,27 @@ namespace Narvalo
         [CLSCompliant(false)]
         public static ulong? UInt64(string value, NumberStyles style, IFormatProvider provider)
         {
-            TryParser<ulong> parser = (string _, out ulong result) => ulong.TryParse(_, style, provider, out result);
+            TryParser<ulong> parser = (string v, out ulong result)
+                => System.UInt64.TryParse(v, style, provider, out result);
 
             return parser.NullInvoke(value);
         }
     }
 
-    // Implements parsers for value types that are not simple types.
+    // Provides parsers for value types that are not simple types.
     public static partial class ParseTo
     {
         public static TEnum? Enum<TEnum>(string value) where TEnum : struct
             => Enum<TEnum>(value, ignoreCase: true);
 
-        // TODO: Explain that this method exhibits the same behaviour as Enum.TryParse, in the sense
-        // that parsing any literal integer value will succeed even if it is not a valid value
-        // for the enumeration.
+        // TODO: Explain that this method exhibits the same behaviour as Enum.TryParse,
+        // in the sense that parsing any literal integer value will succeed even if
+        // it is not a valid enumeration value.
         // See http://stackoverflow.com/questions/2191037/why-can-i-parse-invalid-values-to-an-enum-in-net
         public static TEnum? Enum<TEnum>(string value, bool ignoreCase) where TEnum : struct
         {
-            TryParser<TEnum> parser =
-                (string _, out TEnum result) => System.Enum.TryParse<TEnum>(_, ignoreCase, out result);
+            TryParser<TEnum> parser = (string v, out TEnum result)
+                => System.Enum.TryParse<TEnum>(v, ignoreCase, out result);
 
             return parser.NullInvoke(value);
         }
@@ -213,14 +219,14 @@ namespace Narvalo
             IFormatProvider provider,
             DateTimeStyles style)
         {
-            TryParser<DateTime> parser = (string _, out DateTime result)
-                => System.DateTime.TryParseExact(_, format, provider, style, out result);
+            TryParser<DateTime> parser = (string v, out DateTime result)
+                => System.DateTime.TryParseExact(v, format, provider, style, out result);
 
             return parser.NullInvoke(value);
         }
     }
 
-    // Implements parsers for reference types.
+    // Provides parsers for reference types.
     public static partial class ParseTo
     {
         public static Maybe<Uri> Uri(string value, UriKind uriKind)
@@ -231,7 +237,8 @@ namespace Narvalo
                 return Maybe<Uri>.None;
             }
 
-            TryParser<Uri> parser = (string _, out Uri result) => System.Uri.TryCreate(_, uriKind, out result);
+            TryParser<Uri> parser = (string v, out Uri result)
+                => System.Uri.TryCreate(v, uriKind, out result);
 
             return parser.MayInvoke(value);
         }
