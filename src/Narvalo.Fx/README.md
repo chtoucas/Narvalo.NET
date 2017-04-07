@@ -8,7 +8,8 @@ disjoint union (`Either<T1, T2>`), sequence generators and LINQ extensions.
 
 ### Status
 - The next release should be the first one to be declared stable (some breaking
-  changes are still in the work in the area of LINQ).
+  changes are still in the work in the area of LINQ). Tentative release date:
+  end of april 2017.
 - Support the .NET Standard v1.0 and the PCL profile Profile259.
 - Test coverage is starting to look good (75%). The number of functional tests
   is progressing too.
@@ -70,7 +71,7 @@ constructions, but we can still create monad-like types as we do".
 Our implementation of monads follows the Haskell API closely but, of course,
 adapted to make it more palatable and hopefully feel natural to C#-developers
 (see [below](#monadic-api-tour) for more details on this). In particular, we make
-sure that all monads also support the query expression syntax
+sure that all monads also support the query syntax
 [[Query expression pattern](https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#the-query-expression-pattern)].
 
 The astute reader will have noticed that some of the common monads are missing,
