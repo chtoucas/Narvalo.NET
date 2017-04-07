@@ -4,8 +4,11 @@
 .SYNOPSIS
     Run the build script.
 .PARAMETER Assembly
-    Build only the specified assembly (ignored by the task 'pack').
+    Build only the specified assembly.
     Assembly is the name of the assembly without the extension part.
+    WARNING: Unsafe with the task 'pack'.
+.PARAMETER DryRun
+    Run the tests but do not pack (only for the task 'pack').
 .PARAMETER Fast
     Do not run the tests (only for the task 'pack').
 .PARAMETER Release
@@ -51,6 +54,7 @@ param(
     [ValidateSet('q', 'quiet', 'm', 'minimal', 'n', 'normal', 'd', 'detailed', 'diag', 'diagnostic')]
     [Alias('v')] [string] $Verbosity = 'minimal',
 
+    [switch] $DryRun,
     [switch] $Fast,
     [switch] $Release,
     [Alias('r')] [switch] $Retail,
@@ -164,7 +168,9 @@ switch ($Task) {
             Exit-Gracefully 'When building retail packages, the git commit hash CAN NOT be empty.'
         }
 
-        if ($Fast) {
+        if ($DryRun) {
+            $target = '/t:Test'
+        } elseif ($Fast) {
             $target = '/t:Package'
         } else {
             $target = '/t:Test;Package'
@@ -172,7 +178,7 @@ switch ($Task) {
 
         # We do not append $customProject to force because it could create
         # unresolved dependencies in the NuGet registry.
-        & $msbuild $project $msbuildpackprops "/p:GitCommitHash=$hash" $target
+        & $msbuild $project $msbuildpackprops $customProject "/p:GitCommitHash=$hash" $target
     }
 }
 
