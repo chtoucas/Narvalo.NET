@@ -2,13 +2,15 @@
 
 namespace Narvalo.Internal
 {
+    using System.Diagnostics;
+
     using Narvalo.Applicative;
 
     internal static class TryParserExtensions
     {
         public static T? NullInvoke<T>(this TryParser<T> @this, string value) where T : struct
         {
-            Require.NotNull(@this, nameof(@this));
+            Debug.Assert(@this != null);
 
             if (value == null) { return null; }
 
@@ -17,7 +19,7 @@ namespace Narvalo.Internal
 
         public static Maybe<T> MayInvoke<T>(this TryParser<T> @this, string value) where T : class
         {
-            Require.NotNull(@this, nameof(@this));
+            Debug.Assert(@this != null);
 
             if (value == null) { return Maybe<T>.None; }
 
