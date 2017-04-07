@@ -26,32 +26,6 @@ namespace Narvalo.Applicative {
             Assert.False(either.IsLeft);
         }
 
-        [t("Left returns value if lefty.")]
-        public static void Left1() {
-            var exp = new Obj("left");
-            var either = Either<Obj, Obj>.OfLeft(exp);
-            Assert.Same(exp, either.Left);
-        }
-
-        [t("Left throws if righty.")]
-        public static void Left2() {
-            var either = Either<Obj, Obj>.OfRight(new Obj("right"));
-            Assert.Throws<InvalidOperationException>(() => either.Left);
-        }
-
-        [t("Right returns value if righty.")]
-        public static void Right1() {
-            var exp = new Obj("right");
-            var either = Either<Obj, Obj>.OfRight(exp);
-            Assert.Same(exp, either.Right);
-        }
-
-        [t("Right throws if lefty.")]
-        public static void Right2() {
-            var either = Either<Obj, Obj>.OfLeft(new Obj("left"));
-            Assert.Throws<InvalidOperationException>(() => either.Right);
-        }
-
         [t("Deconstruct() if lefty.")]
         public static void Deconstruct1() {
             var exp = new Obj();
@@ -645,6 +619,34 @@ namespace Narvalo.Applicative {
     }
 
 #if !NO_INTERNALS_VISIBLE_TO
+
+    public static partial class EitherFacts {
+        [t("Left returns value if lefty.")]
+        public static void Left1() {
+            var exp = new Obj("left");
+            var either = Either<Obj, Obj>.OfLeft(exp);
+            Assert.Same(exp, either.Left);
+        }
+
+        [t("Left throws if righty.")]
+        public static void Left2() {
+            var either = Either<Obj, Obj>.OfRight(new Obj("right"));
+            Assert.Throws<InvalidOperationException>(() => either.Left);
+        }
+
+        [t("Right returns value if righty.")]
+        public static void Right1() {
+            var exp = new Obj("right");
+            var either = Either<Obj, Obj>.OfRight(exp);
+            Assert.Same(exp, either.Right);
+        }
+
+        [t("Right throws if lefty.")]
+        public static void Right2() {
+            var either = Either<Obj, Obj>.OfLeft(new Obj("left"));
+            Assert.Throws<InvalidOperationException>(() => either.Right);
+        }
+    }
 
 #endif
 }
