@@ -288,6 +288,18 @@ namespace Narvalo.Applicative {
             Assert.True(m.IsSome);
         }
 
+        [t("ValueOrEmpty() returns some if some and empty if none.")]
+        public static void ValueOrEmpty1() {
+            var none = Maybe<IEnumerable<int>>.None;
+            var m1 = none.ValueOrEmpty();
+            Assert.True(!m1.Any());
+
+            var exp = Enumerable.Range(0, 10);
+            var some = Maybe.Of(exp);
+            var m2 = some.ValueOrEmpty();
+            Assert.Equal(exp, m2);
+        }
+
         [t("== and != when the Value's are equal.")]
         public static void Equality1() {
             var m1 = Maybe.Of(1);
