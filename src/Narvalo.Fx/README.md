@@ -10,13 +10,13 @@ programming: option type (`Maybe<T>`), error types (`Result<T, TError>`,
 disjoint union (`Either<T1, T2>`), sequence generators and LINQ extensions.
 
 ### Status
-- The next release should be the first one to be declared stable (some breaking
-  changes are still in the work in the area of LINQ). Tentative release date:
-  end of april 2017.
+- Unstable: some breaking changes are still in the work in the area of LINQ.
+  Tentative release date for a stable package: end of april 2017.
 - Support the .NET Standard v1.0 and the PCL profile Profile259.
 - Test coverage is starting to look good (75%). The number of functional tests
   is progressing too.
 - C# documentation is largely missing.
+- Provide localized messages in both French and English.
 
 Our versioning scheme is explained
 [here](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/index.md#versioning).

@@ -9,6 +9,7 @@ BIC (ISO 9362) and IBAN types; includes support for parsing, validation and form
 ### Status
 - **Stable**
 - Full test coverage.
+- Provide localized messages in both French and English.
 
 Our versioning scheme is explained
 [here](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/index.md#versioning).
@@ -19,7 +20,7 @@ Notes:
 Changelog
 ---------
 
-**vNext**
+**Version 1.1.1** (released 2017-04-07)
 - **[Bug Fix]** `Iban.Parse()` and `Iban.TryParse()` when using the option
   `IbanStyles.AllowInnerWhite` but not the others allowed for leading or
   trailing white spaces.

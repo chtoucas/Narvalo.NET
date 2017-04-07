@@ -10,6 +10,7 @@ Provides helpers on which depend the other Narvalo packages.
 - **Stable**
 - Full test coverage.
 - Complete C# documentation.
+- Provide localized messages in both French and English.
 
 Our versioning scheme is explained
 [here](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/index.md#versioning).
@@ -17,7 +18,7 @@ Our versioning scheme is explained
 Changelog
 ---------
 
-**vNext**
+**Version 2.0.0** (released 2017-04-07)
 - **[Breaking]** Remove all variants of `Format.Invariant`;
   use `FormattableString.Invariant` instead.
 - **[Breaking]** Remove variant of `Format.Current` w/ variable arguments;
