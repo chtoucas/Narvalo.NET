@@ -1,6 +1,9 @@
  Narvalo.Fx
 ==========
 
+[![NuGet](https://img.shields.io/nuget/v/Narvalo.Fx.svg)](https://www.nuget.org/packages/Narvalo.Fx/)
+[![MyGet](https://img.shields.io/myget/narvalo-edge/v/Narvalo.Fx.svg)](https://www.myget.org/feed/narvalo-edge/package/nuget/Narvalo.Fx)
+
 Features implementations of some of the usual suspects from functional
 programming: option type (`Maybe<T>`), error types (`Result<T, TError>`,
 `Outcome<T>` and `Fallible<T>`) for Railway Oriented Programming, simple
@@ -59,7 +62,7 @@ The main namespace (`Narvalo.Applicative`) includes:
 - `Either<T1, T2>`, an Either type.
 
 The other namespace (`Narvalo.Linq`) is dedicated to the definition of new
-query operators.
+query operators in relation to `Maybe<T>`, `Outcome<T>`...
 
 The types `Maybe<T>`, `Outcome<T>`, `Fallible<T>`, `Result<T, TError>` and
 `Either<T1, T2>` are examples of **monads**, a concept popularized by the
@@ -153,14 +156,15 @@ Method | C# Query Expression Syntax
 These operators do not behave like those on `IEnumerable<T>`, they use
 _immediate execution_.
 
-**Caution.** It is not because something is possible, that you should use it even
-less abuse it. First, another programmer might not know that the query syntax is not
-just for `IEnumerable<T>` therefore might have problems understanding your code,
-second, the result will always be less performant than hand-written code, and
-lastly C# already offers nice syntactic sugars for nullables (the conditional
-operators `?:` and `?.`, and the null-coalescing operator `??`). Nevertheless,
-there are situations where a piece of code written in query syntax is much more
-readable.
+**Caution.** It is not because something is possible, that you should use it,
+even less abuse it. First, another programmer might not know that the query
+syntax is not just for `IEnumerable<T>` and might have problems understanding
+your code, second, the result will always be less performant than hand-written
+code, and lastly C# already offers nice syntactic sugars for nullables (the
+conditional operators `?:` and `?.`, and the null-coalescing operator `??`).
+Nevertheless, there are situations where a piece of code written in query syntax
+is much more readable, therefore easier to maintain. Finally, it is still a good
+exercise to do before moving to the new `Maybe<T>` type.
 
 #### `Select`
 `Select` allows to transform the enclosed value with a given selector:
