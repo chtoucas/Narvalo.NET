@@ -9,7 +9,7 @@ BIC (ISO 9362) and IBAN types; includes support for parsing, validation and form
 ### Status
 - **Stable**
 - Full test coverage.
-- Provide localized messages in both French and English.
+- Localized messages available in both French and English.
 
 Our versioning scheme is explained
 [here](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/index.md#versioning).

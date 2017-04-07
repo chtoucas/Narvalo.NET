@@ -273,8 +273,8 @@ Func<T, TResult?> binder = ...;
 
 TResult? q = x.Bind(binder);
 ```
-`Bind` is really a special case of `SelectMany<T, TResult, TResult>`,
-in LINQ to Objects, `Bind` is even named `SelectMany`:
+`Bind` is really a special case of `SelectMany<T, TResult, TResult>` -
+in LINQ, `Bind` is even named `SelectMany`:
 ```csharp
 TResult? q = x.SelectMany(binder, (_, v2) => v2);
 TResult? q = from v1 in x

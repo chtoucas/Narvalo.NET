@@ -10,7 +10,7 @@ Provides helpers on which depend the other Narvalo packages.
 - **Stable**
 - Full test coverage.
 - Complete C# documentation.
-- Provide localized messages in both French and English.
+- Localized messages available in both French and English.
 
 Our versioning scheme is explained
 [here](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/index.md#versioning).
