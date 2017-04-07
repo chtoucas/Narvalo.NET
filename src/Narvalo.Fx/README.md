@@ -10,7 +10,7 @@ programming: option type (`Maybe<T>`), error types (`Result<T, TError>`,
 disjoint union (`Either<T1, T2>`), sequence generators and LINQ extensions.
 
 ### Status
-- Unstable: some breaking changes are still in the work in the area of LINQ.
+- **Unstable.** Some breaking changes are still in the work in the area of LINQ.
   Tentative release date for a stable package: end of april 2017?
 - Support the .NET Standard v1.0 and the PCL profile Profile259.
 - Test coverage is starting to look good (75%). The number of functional tests
@@ -163,8 +163,9 @@ _immediate execution_.
 even less abuse it. First, another programmer might not know that the query
 syntax is not just for `IEnumerable<T>` and might have problems understanding
 your code, second, the result will always be less performant than hand-written
-code, and lastly C# already offers nice syntactic sugars for nullables (the
-conditional operators `?:` and `?.`, and the null-coalescing operator `??`).
+code, third, in LINQ we can use any selector we'd like, this is not the case
+with a nullable, and last, C# already offers nice syntactic sugars for nullables
+(the conditional operators `?:` and `?.`, and the null-coalescing operator `??`).
 Nevertheless, there are situations where a piece of code written in query syntax
 is much more readable, therefore easier to maintain. Finally, it is still a good
 exercise to do before moving to the new `Maybe<T>` type.
@@ -172,16 +173,16 @@ exercise to do before moving to the new `Maybe<T>` type.
 #### `Select`
 `Select` allows to transform the enclosed value with a given selector:
 ```csharp
-T? x = ...;
+T? source = ...;
 Func<T, TResult> selector = ...;
 
-TResult? q = x.Select(selector);
-TResult? q = from v in x select selector(v);
+TResult? q = source.Select(selector);
+TResult? q = from v in source select selector(v);
 ```
 For instance, to take the square of a nullable integer:
 ```csharp
-short? x = 1;
-int? q = from i in x select i * i;
+short? source = 1;
+int? q = from i in source select i * i;
 ```
 Joining the hard way via a subquery:
 ```csharp
@@ -195,45 +196,49 @@ the result is `(1, 5)` of type `(int, int?)?`. I agree with you, this is a
 rather contrived example but, wait, we will show you soon a better and simpler
 solution (see `SelectMany`).
 
+[Explain why this example won't compile with `(int, (int, int))?`]
+
 #### `Where`
 `Where` allows to filter the enclosed value with a given predicate:
 ```csharp
-T? x = ...;
+T? source = ...;
 Func<T, bool> predicate = ...;
 
-T? q = x.Where(predicate);
-T? q = from v in x where predicate(v) select v;
+T? q = source.Where(predicate);
+T? q = from v in source where predicate(v) select v;
 ```
 We can mix and match `where` and `select` clauses: take the square of a nullable
 integer only if it is "even"
 ```csharp
-int? x = 2;
-int? q = from i in x where i % 2 == 0 select i * i;
+int? source = 2;
+int? q = from i in source where i % 2 == 0 select i * i;
 ```
 
 #### `SelectMany`
-Cross join,
-```csharp
-T1? x1 = ...;
-T2? x2 = ...;
-Func<T1, T2, TResult> resultSelector = ...;
 
-TResult? q = x.SelectMany(_ => x2, resultSelector);
-TResult? q = from v1 in x1
-             from v2 in x2
-             select resultSelector(v1, v2);
-```
-Outer join,
 ```csharp
-T1? x1 = ...;
+T1? source = ...;
 Func<T1, T2?> valueSelector = ...;
 Func<T1, T2, TResult> resultSelector = ...;
 
-TResult? q = x1.SelectMany(valueSelector, resultSelector);
-TResult? q = from v1 in x1
+TResult? q = source.SelectMany(valueSelector, resultSelector);
+TResult? q = from v1 in source
              from v2 in valueSelector(v1)
              select resultSelector(v1, v2);
 ```
+
+Cross join,
+```csharp
+T1? source1 = ...;
+T2? source2 = ...;
+Func<T1, T2, TResult> resultSelector = ...;
+
+TResult? q = source1.SelectMany(_ => source2, resultSelector);
+TResult? q = from v1 in source1
+             from v2 in source2
+             select resultSelector(v1, v2);
+```
+
 Let's rewrite the subquery example with `SelectMany`:
 ```csharp
 (int, (int, int)?)? source = (1, (2, 3));
@@ -244,43 +249,106 @@ var q = from outer in source
 ```
 the result is still `(1, 5)` but, this time, of type `(int, int)?`
 instead of `(int, int?)?`; the operator `SelectMany` eliminates the hierarchical
-structure of LINQ queries. Furthermore, the code is so much easier to read and
-maintain. A good exercise is to write the same query by using only `HasValue`
-and `Value`, or with pattern matching - of course, you won't come very often
-across such a convoluted example.
+structure of LINQ queries. Now, if you are asked to compute the sum of all
+integers in `source`, this is straightforward:
+```csharp
+var q = from outer in source
+        from inner in outer.Item2
+        select outer.Item1 + inner.Item1 + inner.Item2;
+```
+the result is `6` of type `int?`. A good exercise is to write the same query
+by using only `HasValue` and `Value`, or with pattern matching - of course,
+you won't come very often across such a convoluted example.
+
+[Explain why this example won't compile with `(int, (int, int))?`]
 
 #### `Join`
+We don't describe the fluent syntax which is way more complicated than the
+query syntax.
 ```csharp
-(int, int)? x1 = (1, 2);
-(int, int)? x2 = (2, 3);
+(int, string)? source1 = (1, "key");
+(string, int)? source2 = ("key", 3);
 
-var q = from t1 in x1
-        join t2 in x2 on t1.Item2 equals t2.Item1
-        select (t1.Item1, t2.Item2);
+var q = from outer in source1
+        join inner in source2 on outer.Item2 equals inner.Item1
+        select (outer.Item1, inner.Item2);
 ```
-the result is still `(1, 3)` of type `(int, int)?`.
+the result is `(1, 3)` of type `(int, int)?`.
 
-[Discuss Join vs SelectMany / In LINQ to Objects, Join is better, not here]
+**Remark.** We use a string to emphasize that the key needs not to be a nullable
+type.
+
+With LINQ, you can use `SelectMany` to write equi-joins - even if, in general,
+it is better to stick with `Join` (because it is faster) for that purpose - it
+is not possible here using the query syntax. If we try rewrite the previous
+query with `SelectMany`:
+```csharp
+// WARNING: Won't compile.
+var q = from outer in source1
+        from inner in source2
+        where outer.Item2 == inner.Item1
+        select (outer.Item1, inner.Item2);
+```
+the C# compiler will cry out loud. The reason is that it tries to translate
+this into something similar to this:
+```csharp
+// WARNING: Won't compile.
+var q = source1.SelectMany(x => source2, (outer, inner) => new { outer, inner })
+          .Where(t => t.outer.Item2 == t.inner.Item1)
+          .Select(t => (t.outer.Item1, t.inner.Item2));
+```
+The problem lies in the use of an anonymous type in `SelectMany` - remember
+that `resultSelector` must have a nullable return type. To write an equi-join
+with `SelectMany`, we must revert to the fluent syntax:
+```csharp
+var q = source1.SelectMany(x => source2, (outer, inner) => (outer, inner))
+          .Where(t => t.Item1.Item2 == t.Item2.Item1)
+          .Select(t => (t.Item1.Item1, t.Item2.Item2));
+```
+the only difference being that _we use a value tuple instead of an anonymous
+type_.
 
 #### `GroupJoin`
+We don't describe the fluent syntax which is way more complicated than the
+query syntax. `GroupJoin` is not that interesting, `Join` is always a better
+choice.
+```csharp
+(int, string)? source1 = (1, "key");
+(string, int)? source2 = ("key", 3);
+
+var q = from outer in source1
+        join inner in source2 on outer.Item2 equals inner.Item1
+        into innerGroup
+        select (outer.Item1, innerGroup?.Item2);
+```
+the result is `(1, 3)` of type `(int, int?)?`.
 
 ### <a name="nullable-binding"></a>Binding
 `Bind` allows to transform the enclosed value to a nullable which is then
 "flattened":
 ```csharp
-T? x = ...;
+T? source = ...;
 Func<T, TResult?> binder = ...;
 
-TResult? q = x.Bind(binder);
+TResult? q = source.Bind(binder);
 ```
 `Bind` is really a special case of `SelectMany<T, TResult, TResult>` -
 in LINQ, `Bind` is even named `SelectMany`:
 ```csharp
-TResult? q = x.SelectMany(binder, (_, v2) => v2);
-TResult? q = from v1 in x
+TResult? q = source.SelectMany(binder, (_, v2) => v2);
+TResult? q = from v1 in source
              from v2 in binder(v1)
              select v2;
 ```
+
+```csharp
+(int, int)? source = (1, 2);
+var q1 = from t in source
+         from j in (int?)(t.Item1 + t.Item2)
+         select j;
+```
+Notice that we have to cast to a nullable integer otherwise the query would not
+have been valid.
 
 **Remark.** In fact, `Bind` is the most important method upon which
 one can construct all the other operators; it is not the other way around, more
@@ -1037,10 +1105,10 @@ public static TResult? Bind<TSource, TResult>(
 F# is better at functional programming!
 ---------------------------------------
 
-**WARNING:** I don't say that C# is bad at it, on the contrary, I find more
+**Remark.** I don't say that C# is bad at it, on the contrary, I find more
 pleasing to work with C# when mixing functional and OOP styles, and it seems
-that the .NET Team is planning to bring more and more functional-style goodness
-to C#.
+that the .NET Team is planning to continue bringing more and more
+functional-style goodness to C#.
 
 I feel dumb to state the obvious, but it is interesting to see what F# has
 to offer and why it is so much better at certain things. F# already has a

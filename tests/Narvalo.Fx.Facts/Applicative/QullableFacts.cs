@@ -97,7 +97,7 @@ namespace Narvalo.Applicative {
 
             // Bind via SelectMany using the query syntax.
             int? q1 = from t in source
-                      from j in binder(t)
+                      from j in (int?)(t.Item2 + 1)
                       select j;
             Assert.NotNull(q1);
             Assert.Equal(3, q1.Value);
@@ -185,11 +185,11 @@ namespace Narvalo.Applicative {
 
         [t("Join() joins if non-null.")]
         public static void Join1() {
-            (int, short)? outer = (1, 2);
-            (short, int)? inner = (2, 3);
-            Func<(int, short), short> outerKeySelector = t => t.Item2;
-            Func<(short, int), short> innerKeySelector = t => t.Item1;
-            Func<(int, short), (short, int), (int, int)> resultSelector
+            (int, string)? outer = (1, "key");
+            (string, int)? inner = ("key", 3);
+            Func<(int, string), string> outerKeySelector = t => t.Item2;
+            Func<(string, int), string> innerKeySelector = t => t.Item1;
+            Func<(int, string), (string, int), (int, int)> resultSelector
                 = (x, y) => (x.Item1, y.Item2);
 
             (int, int)? m = outer.Join(inner, outerKeySelector, innerKeySelector, resultSelector);
@@ -207,25 +207,42 @@ namespace Narvalo.Applicative {
 
         [t("GroupJoin() joins if non-null.")]
         public static void GroupJoin1() {
-            (int, short)? outer = (1, 2);
-            (short, int)? inner = (2, 3);
-            Func<(int, short), short> outerKeySelector = t => t.Item2;
-            Func<(short, int), short> innerKeySelector = t => t.Item1;
-            Func<(int, short), (short, int)?, (int, int)> resultSelector
-                = (x, y) => (x.Item1, y?.Item2 ?? 0);
+            (int, string)? outer = (1, "key");
+            (string, int)? inner = ("key", 3);
+            Func<(int, string), string> outerKeySelector = t => t.Item2;
+            Func<(string, int), string> innerKeySelector = t => t.Item1;
+            Func<(int, string), (string, int)?, (int, int?)> resultSelector
+                = (x, y) => (x.Item1, y?.Item2);
 
-            (int, int)? m = outer.GroupJoin(inner, outerKeySelector, innerKeySelector, resultSelector);
+            (int, int?)? m = outer.GroupJoin(inner, outerKeySelector, innerKeySelector, resultSelector);
+            Assert.NotNull(m);
+            Assert.Equal(1, m.Value.Item1);
+            Assert.NotNull(m.Value.Item2);
+            Assert.Equal(3, m.Value.Item2.Value);
+
+            (int, int?)? q
+                = from t1 in outer
+                  join t2 in inner on t1.Item2 equals t2.Item1
+                  into g2
+                  select (t1.Item1, g2?.Item2);
+            Assert.NotNull(q);
+            Assert.Equal(1, q.Value.Item1);
+            Assert.NotNull(q.Value.Item2);
+            Assert.Equal(3, q.Value.Item2.Value);
+        }
+
+        [t("Equi-join w/ SelectMany().")]
+        public static void EquiJoin1() {
+            (int, string)? outer = (1, "key");
+            (string, int)? inner = ("key", 3);
+
+            // No query syntax (see README in Narvalo.Fx for an explanation).
+            var m = outer.SelectMany(x => inner, (o, i) => (o, i))
+                .Where(t => t.Item1.Item2 == t.Item2.Item1)
+                .Select(t => (t.Item1.Item1, t.Item2.Item2));
             Assert.NotNull(m);
             Assert.Equal(1, m.Value.Item1);
             Assert.Equal(3, m.Value.Item2);
-
-            (int, int)? q = from t1 in outer
-                            join t2 in inner on t1.Item2 equals t2.Item1
-                            into g
-                            select (t1.Item1, g?.Item2 ?? 0);
-            Assert.NotNull(q);
-            Assert.Equal(1, q.Value.Item1);
-            Assert.Equal(3, q.Value.Item2);
         }
 
         [t("Cross join w/ SelectMany().")]
