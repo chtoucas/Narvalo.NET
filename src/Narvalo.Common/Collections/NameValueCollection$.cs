@@ -12,7 +12,8 @@ namespace Narvalo.Collections
     using Narvalo.Linq;
 
     /// <summary>
-    /// Provides extension methods for <see cref="NameValueCollection"/> that depend on the <see cref="Maybe{T}"/> class.
+    /// Provides extension methods for <see cref="NameValueCollection"/>
+    /// that depend on the <see cref="Maybe{T}"/> class.
     /// </summary>
     public static partial class NameValueCollectionExtensions
     {

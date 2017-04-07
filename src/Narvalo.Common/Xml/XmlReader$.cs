@@ -11,8 +11,6 @@ namespace Narvalo.Xml
     /// </summary>
     public static class XmlReaderExtensions
     {
-        #region Wrappers for XmlReader methods using a XName parameter.
-
         public static string GetAttribute(this XmlReader @this, XName name)
         {
             Require.NotNull(@this, nameof(@this));
@@ -144,8 +142,6 @@ namespace Narvalo.Xml
 
             return @this.ReadToNextSibling(name.LocalName, name.NamespaceName);
         }
-
-        #endregion
 
         #region Wrappers not available with PCL.
 

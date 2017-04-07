@@ -4,7 +4,6 @@ namespace Narvalo.Data
 {
     using System;
     using System.Data.SqlClient;
-    using System.Diagnostics;
 
     using Narvalo.Applicative;
 
