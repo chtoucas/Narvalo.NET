@@ -62,7 +62,7 @@ The main namespace (`Narvalo.Applicative`) includes:
 - `Either<T1, T2>`, an Either type.
 
 The other namespace (`Narvalo.Linq`) is dedicated to the definition of new
-query operators in relation to `Maybe<T>`, `Outcome<T>`...
+query operators mostly in relation to `Maybe<T>`, `Outcome<T>`...
 
 The types `Maybe<T>`, `Outcome<T>`, `Fallible<T>`, `Result<T, TError>` and
 `Either<T1, T2>` are examples of **monads**, a concept popularized by the
@@ -129,7 +129,8 @@ any _empty tuple literal_, the 0-tuples. The .NET team _"lovingly
 [refers](https://github.com/dotnet/roslyn/issues/10429) to 0-tuples as nuples,
 and 1-tuples as womples"_. Currently, there is no special syntax for writing
 nuples or womples, but we might get `()` for nuples which would make the 0-tuple
-a very natural unit type.
+a very natural unit type - this would fit perfectly with the existing syntax
+for actions: `Action<T> action = () => { ... };`.
 
 --------------------------------------------------------------------------------
 
