@@ -269,7 +269,7 @@ the one on `Join` for alternatives):
 ```csharp
 // WARNING: Won't compile.
 (int, string)? outer = (1, "key");
-(string, int)? inner = ("key", 3);
+(string, int, int)? inner = ("key", 2, 3);
 
 var q = from outerValue in outer
         from innerValue in inner
@@ -295,41 +295,45 @@ var q = outer.SelectMany(_ => inner, (outerValue, innerValue) => (outerValue, in
 the only difference being that _we use a value tuple instead of an anonymous
 type_.
 
-##### Join (equi or not)
-We just saw that joins are difficult to write with `SelectMany`, and we only
-discussed equi-joins! There must be a better solution. Actually, there is, it is
-very simple and we already saw it: just don't use a join but a intermediate
-value tuple. For this purpose, we have created an helper `Vuple` that takes
-n nullable values as input and return one n-tuple with the values if none of
-them are null, and `null` if any of them is null. Finally, we can rewrite the
-previous query using the query syntax:
+This is ok, there must be a simpler solution, I mean without resorting
+to `HasValue` and `Value` which, by the way, is the best option here!
+Actually, there is, it is very simple and we already saw it: just don't use a
+join but a intermediate value tuple. For this purpose, we have created an helper
+`Vuple.Gather` that takes two nullables as input and return a 2-tuple of
+the values if both of them are null, and `null` otherwise. For convenience, each
+item in the tuple gets a custom name: `Value1` for the first one and `Value2`
+for the other. Finally, we can rewrite the previous query using the query syntax:
 ```csharp
-(int, string)? outer = (1, "key");
-(string, int)? inner = ("key", 3);
-
 var q = from t in Vuple.Gather(outer, inner)
-        where t.Item1.Item2 == t.Item2.Item1
-        select (t.Item1.Item1, t.Item2.Item2);
+        where t.Value1.Item2 == t.Value2.Item1
+        select (t.Value1.Item1, t.Value2.Item2);
 ```
-The good news is that this "trick" works with an arbitrary number of nullables
+the result is `(1, 2)` of type `(int, int)?`.
+
+##### Join (equi or not)
+The good news is that the above "trick" works with an arbitrary number of nullables
 (to be honest, eight being the maximum number of elements in a value tuple,
-there is an upper limit) and, even better, applies to non equi-joins too:
+there is an upper limit) and, even better, it applies to non equi-joins too:
 ```csharp
-(int, int)? first  = (1, 2);
-(int, int)? second = (3, "key");
-(int, int)? third  = ("key", 7);
+(int, int)? first = (1, 2);
+(int, string)? second = (3, "key");
+(string, int, int, int)? third  = ("key", 6, 7, 8);
 
 var q = from t in Vuple.Gather(first, second, third)
-        where t.Item1.Item2 < t.Item2.Item1
-            && t.Item2.Item2 == t.Item3.Item1
-        select (t.Item1.Item1, t.Item3.Item2);
+        where t.Value1.Item2 < t.Value2.Item1
+            && t.Value2.Item2 == t.Value3.Item1
+        select (t.Value1.Item1, t.Value3.Item3);
 ```
 the result is `(1, 7)` of type `(int, int)?`.
+
+**Remark.** `Vuple.Gather<T1, ... , T8>` returns `(T1 Value1, ... , T8 Value8)?`
 
 #### `Join`
 We don't describe the fluent syntax which is way more complicated than the
 query syntax.
 
+We just saw that joins are difficult to write with `SelectMany`. The right tool
+for the job is `Join`:
 ```csharp
 (int, string)? outer = (1, "key");
 (string, int)? inner = ("key", 3);

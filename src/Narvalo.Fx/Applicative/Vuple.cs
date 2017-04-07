@@ -4,7 +4,7 @@ namespace Narvalo.Applicative
 {
     public static class Vuple
     {
-        public static (T1, T2)? Gather<T1, T2>(T1? arg1, T2? arg2)
+        public static (T1 Value1, T2 Value2)? Gather<T1, T2>(T1? arg1, T2? arg2)
             where T1 : struct
             where T2 : struct
         {
@@ -16,7 +16,8 @@ namespace Narvalo.Applicative
             return null;
         }
 
-        public static (T1, T2, T3)? Gather<T1, T2, T3>(T1? arg1, T2? arg2, T3? arg3)
+        public static (T1 Value1, T2 Value2, T3 Value3)? Gather<T1, T2, T3>(
+            T1? arg1, T2? arg2, T3? arg3)
             where T1 : struct
             where T2 : struct
             where T3 : struct
@@ -29,7 +30,7 @@ namespace Narvalo.Applicative
             return null;
         }
 
-        public static (T1, T2, T3, T4)? Gather<T1, T2, T3, T4>(
+        public static (T1 Value1, T2 Value2, T3 Value3, T4 Value4)? Gather<T1, T2, T3, T4>(
             T1? arg1, T2? arg2, T3? arg3, T4? arg4)
             where T1 : struct
             where T2 : struct
@@ -44,7 +45,8 @@ namespace Narvalo.Applicative
             return null;
         }
 
-        public static (T1, T2, T3, T4, T5)? Gather<T1, T2, T3, T4, T5>(
+        public static (T1 Value1, T2 Value2, T3 Value3, T4 Value4, T5 Value5)?
+            Gather<T1, T2, T3, T4, T5>(
             T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
             where T1 : struct
             where T2 : struct
@@ -61,7 +63,8 @@ namespace Narvalo.Applicative
             return null;
         }
 
-        public static (T1, T2, T3, T4, T5, T6)? Gather<T1, T2, T3, T4, T5, T6>(
+        public static (T1 Value1, T2 Value2, T3 Value3, T4 Value4, T5 Value5, T6 Value6)?
+            Gather<T1, T2, T3, T4, T5, T6>(
             T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
             where T1 : struct
             where T2 : struct
@@ -79,7 +82,8 @@ namespace Narvalo.Applicative
             return null;
         }
 
-        public static (T1, T2, T3, T4, T5, T6, T7)? Gather<T1, T2, T3, T4, T5, T6, T7>(
+        public static (T1 Value1, T2 Value2, T3 Value3, T4 Value4, T5 Value5, T6 Value6, T7 Value7)?
+            Gather<T1, T2, T3, T4, T5, T6, T7>(
             T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
             where T1 : struct
             where T2 : struct
@@ -98,7 +102,8 @@ namespace Narvalo.Applicative
             return null;
         }
 
-        public static (T1, T2, T3, T4, T5, T6, T7, T8)? Gather<T1, T2, T3, T4, T5, T6, T7, T8>(
+        public static (T1 Value1, T2 Value2, T3 Value3, T4 Value4, T5 Value5, T6 Value6, T7 Value7, T8 Value8)?
+            Gather<T1, T2, T3, T4, T5, T6, T7, T8>(
             T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
             where T1 : struct
             where T2 : struct

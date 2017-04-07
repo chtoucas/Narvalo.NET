@@ -253,9 +253,9 @@ namespace Narvalo.Applicative {
 
             // No real query syntax (see README in Narvalo.Fx for an explanation).
             var q = from t in Vuple.Gather(first, second, third)
-                    where t.Item1.Item2 < t.Item2.Item1
-                        && t.Item2.Item2 == t.Item3.Item1
-                    select (t.Item1.Item1, t.Item3.Item2);
+                    where t.Value1.Item2 < t.Value2.Item1
+                        && t.Value2.Item2 == t.Value3.Item1
+                    select (t.Value1.Item1, t.Value3.Item2);
             Assert.NotNull(q);
             Assert.Equal(1, q.Value.Item1);
             Assert.Equal(7, q.Value.Item2);
