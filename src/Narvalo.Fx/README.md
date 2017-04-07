@@ -227,18 +227,6 @@ TResult? q = from v1 in source
              select resultSelector(v1, v2);
 ```
 
-##### Cross-join
-```csharp
-T1? source1 = ...;
-T2? source2 = ...;
-Func<T1, T2, TResult> resultSelector = ...;
-
-TResult? q = source1.SelectMany(_ => source2, resultSelector);
-TResult? q = from v1 in source1
-             from v2 in source2
-             select resultSelector(v1, v2);
-```
-
 Let's rewrite the subquery example with `SelectMany`:
 ```csharp
 (int, (int, int)?)? outer = (1, (2, 3));
@@ -261,6 +249,18 @@ by using only `HasValue` and `Value`, or with pattern matching - of course,
 you won't come very often across such a convoluted example.
 
 [Explain why this example won't compile with `(int, (int, int))?`]
+
+##### Cross-join
+```csharp
+T1? source1 = ...;
+T2? source2 = ...;
+Func<T1, T2, TResult> resultSelector = ...;
+
+TResult? q = source1.SelectMany(_ => source2, resultSelector);
+TResult? q = from v1 in source1
+             from v2 in source2
+             select resultSelector(v1, v2);
+```
 
 ##### Equi-join
 With LINQ, one can use `SelectMany` to write equi-joins, with nullables, it is
@@ -332,8 +332,8 @@ the result is `(1, 7)` of type `(int, int)?`.
 We don't describe the fluent syntax which is way more complicated than the
 query syntax.
 
-We just saw that joins are difficult to write with `SelectMany`. The right tool
-for the job is `Join`:
+We just saw that equi-joins are difficult to write with `SelectMany`.
+The right tool for the job is `Join`:
 ```csharp
 (int, string)? outer = (1, "key");
 (string, int)? inner = ("key", 3);
