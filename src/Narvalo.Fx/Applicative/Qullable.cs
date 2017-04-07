@@ -69,7 +69,6 @@ namespace Narvalo.Applicative
             Func<TSource, TInner, TResult> resultSelector)
             where TSource : struct
             where TInner : struct
-            where TKey : struct
             where TResult : struct
             => Join(
                 @this,
@@ -88,7 +87,6 @@ namespace Narvalo.Applicative
             IEqualityComparer<TKey> comparer)
             where TSource : struct
             where TInner : struct
-            where TKey : struct
             where TResult : struct
         {
             Require.NotNull(resultSelector, nameof(resultSelector));
@@ -110,6 +108,7 @@ namespace Narvalo.Applicative
             return null;
         }
 
+        // Only added for completeness, Join() should do it.
         public static TResult? GroupJoin<TSource, TInner, TKey, TResult>(
             this TSource? @this,
             TInner? inner,
@@ -118,7 +117,6 @@ namespace Narvalo.Applicative
             Func<TSource, TInner?, TResult> resultSelector)
             where TSource : struct
             where TInner : struct
-            where TKey : struct
             where TResult : struct
             => GroupJoin(
                 @this,
@@ -128,6 +126,7 @@ namespace Narvalo.Applicative
                 resultSelector,
                 EqualityComparer<TKey>.Default);
 
+        // Only added for completeness, Join() should do it.
         public static TResult? GroupJoin<TSource, TInner, TKey, TResult>(
             this TSource? @this,
             TInner? inner,
@@ -137,7 +136,6 @@ namespace Narvalo.Applicative
             IEqualityComparer<TKey> comparer)
             where TSource : struct
             where TInner : struct
-            where TKey : struct
             where TResult : struct
         {
             Require.NotNull(resultSelector, nameof(resultSelector));
