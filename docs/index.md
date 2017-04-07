@@ -375,7 +375,7 @@ Checklist:
 - Individual package descriptions in `src\Packaging`.
 - Check that the property `frameworkAssemblies` in nuspec's do not need any update.
 - Check that the `TargetFrameworkVersion` property in the project file and
-  the one in the nuspec's must match.
+  the one in the nuspec's match.
 - Check that there is no new resource, eg a satellite assembly for french or
   a Code Contracts assembly.
 
