@@ -1,4 +1,4 @@
- Narvalo.Fx
+Narvalo.Fx
 ==========
 
 [![NuGet](https://img.shields.io/nuget/v/Narvalo.Fx.svg)](https://www.nuget.org/packages/Narvalo.Fx/)
@@ -11,12 +11,12 @@ disjoint union (`Either<T1, T2>`), sequence generators and LINQ extensions.
 
 ### Status
 - Unstable: some breaking changes are still in the work in the area of LINQ.
-  Tentative release date for a stable package: end of april 2017.
+  Tentative release date for a stable package: end of april 2017?
 - Support the .NET Standard v1.0 and the PCL profile Profile259.
 - Test coverage is starting to look good (75%). The number of functional tests
   is progressing too.
 - C# documentation is largely missing.
-- Provide localized messages in both French and English.
+- Localized messages available in both French and English.
 
 Our versioning scheme is explained
 [here](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/index.md#versioning).
@@ -351,10 +351,10 @@ Maybe<int> maybe = Maybe.Of(value);
 ```
 Nevertheless, it is still possible to end up with an object of type `Maybe<T?>`,
 e.g. `Maybe<int?>.None` (see also Binding below for a more realistic example).
-Fortunately, we can always "flatten" the object:
+Fortunately, we can always squash the object:
 ```csharp
 var maybe = Maybe<int?>.None;
-Maybe<int> better = maybe.Flatten();
+Maybe<int> better = maybe.Squash();
 ```
 
 ### <a name="maybe-value"></a>Give me back the value!

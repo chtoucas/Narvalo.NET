@@ -4,6 +4,7 @@ namespace Narvalo.Applicative
 {
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Linq;
 
     /// <summary>
     /// Provides a set of static and extension methods for <see cref="Maybe{T}"/>
@@ -21,7 +22,7 @@ namespace Narvalo.Applicative
             => value.HasValue ? Of(value.Value) : Maybe<T>.None;
 
         // Conversion from Maybe<T?> to  Maybe<T>.
-        public static Maybe<T> Flatten<T>(this Maybe<T?> @this) where T : struct
+        public static Maybe<T> Squash<T>(this Maybe<T?> @this) where T : struct
             // NB: When IsSome is true, Value.HasValue is always true,
             // therefore we can safely access Value.Value. Indeed, the only way
             // to construct a maybe is via "η" which returns "none" if the
@@ -44,6 +45,12 @@ namespace Narvalo.Applicative
             // If the object is "none", Value is default(T?) ie null.
             => @this.Value;
 #endif
+    }
+
+    public static partial class Maybe
+    {
+        public static IEnumerable<T> ValueOrEmpty<T>(this Maybe<IEnumerable<T>> @this)
+            => @this.IsSome ? @this.Value : Enumerable.Empty<T>();
     }
 
     // Provides extension methods for IEnumerable<Maybe<T>>.

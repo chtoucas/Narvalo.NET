@@ -267,6 +267,27 @@ namespace Narvalo.Applicative {
             Assert.Null(none2.ToNullable());
         }
 
+        [t("Flatten() returns none if none for T? (1).")]
+        public static void Squash1() {
+            var none = Maybe<int?>.None;
+            var m = none.Squash();
+            Assert.True(m.IsNone);
+        }
+
+        [t("Flatten() returns none if none for T? (2).")]
+        public static void Squash2() {
+            var none = Maybe.Of(1).Select<int?>(i => null);
+            var m = none.Squash();
+            Assert.True(m.IsNone);
+        }
+
+        [t("Flatten() returns some if some for T?.")]
+        public static void Squash3() {
+            var some = Maybe.Of(1).Select<int?>(i => 1);
+            var m = some.Squash();
+            Assert.True(m.IsSome);
+        }
+
         [t("== and != when the Value's are equal.")]
         public static void Equality1() {
             var m1 = Maybe.Of(1);
@@ -1134,27 +1155,6 @@ namespace Narvalo.Applicative {
         [t("Flatten() returns some if some.")]
         public static void Flatten2() {
             var some = Maybe.Of(Maybe.Of(new Obj()));
-            var m = some.Flatten();
-            Assert.True(m.IsSome);
-        }
-
-        [t("Flatten() returns none if none for T? (1).")]
-        public static void Flatten3() {
-            var none = Maybe<int?>.None;
-            var m = none.Flatten();
-            Assert.True(m.IsNone);
-        }
-
-        [t("Flatten() returns none if none for T? (2).")]
-        public static void Flatten4() {
-            var none = Maybe.Of(1).Select<int?>(i => null);
-            var m = none.Flatten();
-            Assert.True(m.IsNone);
-        }
-
-        [t("Flatten() returns some if some for T?.")]
-        public static void Flatten5() {
-            var some = Maybe.Of(1).Select<int?>(i => 1);
             var m = some.Flatten();
             Assert.True(m.IsSome);
         }
