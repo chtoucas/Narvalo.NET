@@ -239,6 +239,8 @@ TResult? q = from v1 in source1
              select resultSelector(v1, v2);
 ```
 
+[Equi-join, see below]
+
 Let's rewrite the subquery example with `SelectMany`:
 ```csharp
 (int, (int, int)?)? source = (1, (2, 3));
