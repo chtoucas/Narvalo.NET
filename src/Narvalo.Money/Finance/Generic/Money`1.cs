@@ -119,7 +119,7 @@ namespace Narvalo.Finance.Generic
         {
             if (!IsNormalized)
             {
-                throw new InvalidCastException(Strings.InvalidConversion_MoneyIsNotNormalized);
+                throw new InvalidCastException(Strings_Money.InvalidConversion_MoneyIsNotNormalized);
             }
 
             decimal minor = ToMinor();
@@ -133,7 +133,7 @@ namespace Narvalo.Finance.Generic
         {
             if (!IsRounded)
             {
-                throw new InvalidCastException(Strings.InvalidConversion_MoneyIsNotRounded);
+                throw new InvalidCastException(Strings_Money.InvalidConversion_MoneyIsNotRounded);
             }
 
             long? amount = ToLongMinor();
@@ -269,7 +269,7 @@ namespace Narvalo.Finance.Generic
 
             if (!(obj is Money<TCurrency>))
             {
-                throw new ArgumentException(Strings.Argument_CannotCompare, nameof(obj));
+                throw new ArgumentException(Strings_Money.Argument_CannotCompare, nameof(obj));
             }
 
             return CompareTo((Money<TCurrency>)obj);

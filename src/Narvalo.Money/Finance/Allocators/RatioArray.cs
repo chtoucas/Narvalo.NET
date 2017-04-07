@@ -35,7 +35,7 @@ namespace Narvalo.Finance.Allocators
 
             if (ratios.Sum() != 1M)
             {
-                throw new ArgumentException(Strings.Argument_IncompleteRatioArray, nameof(ratios));
+                throw new ArgumentException(Strings_Money.Argument_IncompleteRatioArray, nameof(ratios));
             }
 
             return new RatioArray(ratios);
@@ -54,7 +54,7 @@ namespace Narvalo.Finance.Allocators
 
             if (percentages.Sum() != 100)
             {
-                throw new ArgumentException(Strings.Argument_IncompleteRatioArray, nameof(percentages));
+                throw new ArgumentException(Strings_Money.Argument_IncompleteRatioArray, nameof(percentages));
             }
 
             var ratios = new decimal[percentages.Length];

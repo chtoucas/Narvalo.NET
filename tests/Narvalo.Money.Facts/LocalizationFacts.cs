@@ -8,7 +8,7 @@ namespace Narvalo
 
     public class LocalizationFacts : DefaultLocalizationFacts
     {
-        public LocalizationFacts() : base(Strings.ResourceManager) { }
+        public LocalizationFacts() : base(Strings_Money.ResourceManager) { }
     }
 }
 

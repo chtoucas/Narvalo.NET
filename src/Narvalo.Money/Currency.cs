@@ -180,7 +180,7 @@ namespace Narvalo
             => HasMinorCurrency
             ? new FractionalCurrency(this, Epsilon, MinorCurrencyCode)
             : throw new NotSupportedException(
-                Format.Current(Strings.NotSupported_MinorCurrency, Code));
+                Format.Current(Strings_Money.NotSupported_MinorCurrency, Code));
 
         // If the currency admits a minor currency unit, we obtain its code by "lowercasing"
         // the last character of its code: "EUR" -> "EUr". This convention is not officially
@@ -204,7 +204,7 @@ namespace Narvalo
             if (Code != unit.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch, Code, unit.Code));
+                    Format.Current(Strings_Money.CurrencyMismatch, Code, unit.Code));
             }
 
             return unit;
@@ -225,7 +225,8 @@ namespace Narvalo
 
             if (!Codes.TryGetValue(code, out short? minorUnits))
             {
-                throw new CurrencyNotFoundException(Format.Current(Strings.CurrencyNotFound_UnknownCode, code));
+                throw new CurrencyNotFoundException(
+                    Format.Current(Strings_Money.CurrencyNotFound_UnknownCode, code));
             }
 
             return new Currency(code, minorUnits);
@@ -237,7 +238,7 @@ namespace Narvalo
             Currency? cy = TryCreate(code, types);
             if (!cy.HasValue)
             {
-                throw new CurrencyNotFoundException(Format.Current(Strings.CurrencyNotFound_UnknownCode, code));
+                throw new CurrencyNotFoundException(Format.Current(Strings_Money.CurrencyNotFound_UnknownCode, code));
             }
 
             return cy.Value;
@@ -315,7 +316,7 @@ namespace Narvalo
             Require.True(
                 !cultureInfo.IsNeutralCulture,
                 nameof(cultureInfo),
-                Format.Current(Strings.Argument_NeutralCultureNotSupported, cultureInfo));
+                Format.Current(Strings_Money.Argument_NeutralCultureNotSupported, cultureInfo));
 
             return ForRegion(new RegionInfo(cultureInfo.Name));
         }
@@ -362,11 +363,11 @@ namespace Narvalo
             Require.True(
                 ValidateCode(code),
                 nameof(code),
-                Format.Current(Strings.Argument_InvalidCurrencyCode, code));
+                Format.Current(Strings_Money.Argument_InvalidCurrencyCode, code));
             Require.True(
                 ValidateMinorUnits(minorUnits),
                 nameof(minorUnits),
-                Format.Current(Strings.Argument_InvalidCurrencyMinorUnits, minorUnits));
+                Format.Current(Strings_Money.Argument_InvalidCurrencyMinorUnits, minorUnits));
 
             // Codes and WithdrawnCodes are immutable, so no concurrency problems here.
             if (Codes.ContainsKey(code) || WithdrawnCodes.Contains(code)) { return false; }
@@ -410,12 +411,12 @@ namespace Narvalo
                 string code = pair.Key;
                 if (code == null)
                 {
-                    throw new ArgumentException(Strings.Argument_CurrencyCodeIsNull, nameof(currencies));
+                    throw new ArgumentException(Strings_Money.Argument_CurrencyCodeIsNull, nameof(currencies));
                 }
                 if (!ValidateCode(code))
                 {
                     throw new ArgumentException(
-                        Format.Current(Strings.Argument_InvalidCurrencyCode, code),
+                        Format.Current(Strings_Money.Argument_InvalidCurrencyCode, code),
                         nameof(currencies));
                 }
 
@@ -423,7 +424,7 @@ namespace Narvalo
                 if (!ValidateMinorUnits(minorUnits))
                 {
                     throw new ArgumentException(
-                        Format.Current(Strings.Argument_InvalidCurrencyMinorUnits, minorUnits),
+                        Format.Current(Strings_Money.Argument_InvalidCurrencyMinorUnits, minorUnits),
                         nameof(currencies));
                 }
 

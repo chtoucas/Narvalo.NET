@@ -230,7 +230,7 @@ namespace Narvalo
             {
                 if (!iter.MoveNext())
                 {
-                    throw new InvalidOperationException(Strings.InvalidOperation_EmptySequence);
+                    throw new InvalidOperationException(Strings_Money.InvalidOperation_EmptySequence);
                 }
 
                 Money mny = iter.Current;

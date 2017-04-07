@@ -47,7 +47,7 @@ namespace Narvalo
             if (format.Length == 3 && format[1] == '0')
             {
                 throw new FormatException(
-                    Format.Current(Strings.Money_BadPrecisionSpecifier, format));
+                    Format.Current(Strings_Money.Money_BadPrecisionSpecifier, format));
             }
 
             if (format.Length <= 3)
@@ -63,14 +63,14 @@ namespace Narvalo
                 if (!succeed)
                 {
                     throw new FormatException(
-                    Format.Current(Strings.Money_BadPrecisionSpecifier, format));
+                    Format.Current(Strings_Money.Money_BadPrecisionSpecifier, format));
                 }
 
                 return new MoneyFormat(format[0], decimalPlaces);
             }
 
             throw new FormatException(
-                    Format.Current(Strings.Money_BadFormatSpecifier, format));
+                    Format.Current(Strings_Money.Money_BadFormatSpecifier, format));
         }
     }
 }

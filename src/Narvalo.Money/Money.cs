@@ -145,7 +145,7 @@ namespace Narvalo
             => Require.True(
                 Currency == money.Currency,
                 parameterName,
-                Format.Current(Strings.CurrencyMismatch, Currency, money.Currency));
+                Format.Current(Strings_Money.CurrencyMismatch, Currency, money.Currency));
 
         [ExcludeFromCodeCoverage]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
@@ -283,7 +283,7 @@ namespace Narvalo
         {
             if (!IsNormalized)
             {
-                throw new InvalidCastException(Strings.InvalidConversion_MoneyIsNotNormalized);
+                throw new InvalidCastException(Strings_Money.InvalidConversion_MoneyIsNotNormalized);
             }
 
             decimal minor = ToMinor();
@@ -297,7 +297,7 @@ namespace Narvalo
             {
                 throw new InvalidCastException(
                     Format.Current(
-                        Strings.CurrencyMismatch,
+                        Strings_Money.CurrencyMismatch,
                         Currency.Code,
                         Money<TCurrency>.UnderlyingUnit.Code));
             }
@@ -309,7 +309,7 @@ namespace Narvalo
         {
             if (!IsRounded)
             {
-                throw new InvalidCastException(Strings.InvalidConversion_MoneyIsNotRounded);
+                throw new InvalidCastException(Strings_Money.InvalidConversion_MoneyIsNotRounded);
             }
 
             long? amount = ToLongMinor();
@@ -447,7 +447,7 @@ namespace Narvalo
 
             if (!(obj is Money))
             {
-                throw new ArgumentException(Strings.Argument_CannotCompare, nameof(obj));
+                throw new ArgumentException(Strings_Money.Argument_CannotCompare, nameof(obj));
             }
 
             return CompareTo((Money)obj);

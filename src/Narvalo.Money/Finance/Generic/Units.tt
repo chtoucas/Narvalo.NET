@@ -79,7 +79,7 @@ namespace <#= Namespace #>
             if (Name != value.Code)
             {
                 throw new InvalidCastException(
-                    Format.Current(Strings.CurrencyMismatch, Name, value.Code));
+                    Format.Current(Strings_Money.CurrencyMismatch, Name, value.Code));
             }
 
             return Unit;

@@ -77,7 +77,7 @@ namespace Narvalo
             => Require.True(
                 Currency == penny.Currency,
                 parameterName,
-                Format.Current(Strings.CurrencyMismatch, Currency, penny.Currency));
+                Format.Current(Strings_Money.CurrencyMismatch, Currency, penny.Currency));
 
         [ExcludeFromCodeCoverage]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
@@ -152,7 +152,7 @@ namespace Narvalo
             {
                 throw new InvalidCastException(
                     Format.Current(
-                        Strings.CurrencyMismatch,
+                        Strings_Money.CurrencyMismatch,
                         Currency.Code,
                         Money<TCurrency>.UnderlyingUnit.Code));
             }
@@ -255,7 +255,7 @@ namespace Narvalo
             else
             {
                 throw new FormatException(
-                    Format.Current(Strings.Money_BadMainSpecifier, format));
+                    Format.Current(Strings_Money.Money_BadMainSpecifier, format));
             }
 
             return MoneyFormatter.FormatMoney(spec, Amount, PennyOrCurrencyCode, info);
@@ -298,7 +298,7 @@ namespace Narvalo
 
             if (!(obj is Moneypenny))
             {
-                throw new ArgumentException(Strings.Argument_CannotCompare, nameof(obj));
+                throw new ArgumentException(Strings_Money.Argument_CannotCompare, nameof(obj));
             }
 
             return CompareTo((Moneypenny)obj);

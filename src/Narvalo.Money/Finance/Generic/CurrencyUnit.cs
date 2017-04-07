@@ -26,7 +26,7 @@ namespace Narvalo.Finance.Generic
             if (currency == null)
             {
                 throw new NotSupportedException(
-                    Format.Current(Strings.NotSupported_CurrencyActivation, typeof(TCurrency).FullName));
+                    Format.Current(Strings_Money.NotSupported_CurrencyActivation, typeof(TCurrency).FullName));
             }
 
             return currency;
