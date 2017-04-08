@@ -57,22 +57,30 @@ Next:
 Narvalo.Fx
 ----------
 
+- LINQ changes:
+  * Replace `CollectImpl` by `CollectAny` and make it public.
+  * Remove `Collect`, `ZipWith` and `SelectWith`? `Collect` is just
+    `Monad.Of(CollectAny)`, `ZipWith` is `Zip().Collect()`, and `SelectWith`
+    is `Select().Collect()` (to be checked). Another good reason to remove them
+    is that they are not composable. What about `WhereBy`?
+  * Move `Repeat` to `Sequence`?
+  * Move `Collect`, `CollectAny` and `Sum` to Narvalo.Linq? They act on
+    `IEnumerable<Monad<T>>`, but in Narvalo.Applicative they are hard to find.
 - More QEP for Monads? Simplify LINQ for `Maybe<T?>`?
 - Auto-generate tests for null-guards (missing only for `Either`).
   Add more tests beyond the auto-generated ones. Add tests for purity?
 - `Either`, should we throw if we have a lefty method for a righty object
   (see `WhenLeft` for instance).
-- Move `Collect`, `CollectAny` and `Sum` to `Qperators`? This would make
-  it easier to find them. Move `Repeat` to `Sequence`?
 - Add "shadows" of `Collect` and `WhereBy` for `Result` and `Either`.
 - Add variants of `CollectAny` and co on the right for Either?
-- Remove `ZipWith` resp. `SelectWith`? Check that (here) `SelectWith` is just
-  a `Select` wrapped into a monad.
 - Add `MapMany` to `Outcome` and `Fallible`....
+- Merge `Sequence.Gather` and `Sequence.Unfold`?
 
 Next:
-- Custom `is` operators (it seems that it is not yet possible).
-- Deconstruction for `Maybe<T?>`, but I think this is not possible.
+- Add async and lazy alternatives?
+- Implement trampoline.
+- Custom `is` operators (it is in the proposal but it is not yet possible).
+- Deconstruction for `Maybe<T?>`,
 ```csharp
 public static void Deconstruct<T>(
     this Maybe<T?> @this,
@@ -89,9 +97,7 @@ public static void Deconstruct<T>(
 - Add other monads - prototypes [here](https://github.com/chtoucas/Brouillons/tree/master/src/play/Functional/Monadic)
 - `OnError()`, `WhenError()` & co could return a boolean to signal when they
   actually did something.
-- Explain what the meaning of shadowing.
 - More Haskell API, eg When, Forever & co?
-- Add async and lazy alternatives?
 - [Idioms](http://tomasp.net/blog/idioms-in-linq.aspx/)
 
 Narvalo.Money

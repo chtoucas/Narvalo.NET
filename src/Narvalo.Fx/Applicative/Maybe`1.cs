@@ -3,6 +3,7 @@
 namespace Narvalo.Applicative
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
@@ -298,7 +299,9 @@ namespace Narvalo.Applicative
             if (IsSome) { action(Value); }
         }
 
-        // Of course, if (obj.IsNone) { action(); } is simpler.
+        // Only added for completeness,
+        // > if (obj.IsNone) { action(); }
+        // is simpler and faster.
         public void OnNone(Action action)
         {
             Require.NotNull(action, nameof(action));

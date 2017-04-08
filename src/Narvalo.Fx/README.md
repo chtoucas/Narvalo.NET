@@ -10,10 +10,11 @@ programming: option type (`Maybe<T>`), error types (`Result<T, TError>`,
 disjoint union (`Either<T1, T2>`), sequence generators and LINQ extensions.
 
 ### Status
-- **Unstable.** Some breaking changes are still in the work in the area of LINQ.
-  Tentative release date for a stable package: end of april 2017?
+- **Unstable.**
+- Tentative release date for a stable package: end of april 2017?
+  Breaking changes are expected in the area of LINQ.
 - Support the .NET Standard v1.0 and the PCL profile Profile259.
-- Test coverage is starting to look good (75%). The number of functional tests
+- Test coverage is starting to look good (75%), the number of functional tests
   is progressing too.
 - C# documentation is largely missing.
 - Localized messages available in both French and English.
@@ -164,11 +165,11 @@ even less abuse it. First, another programmer might not know that the query
 syntax is not just for `IEnumerable<T>` and might have problems understanding
 your code, second, the result will always be less performant than hand-written
 code, third, in LINQ we can use any selector we'd like, this is not the case
-with a nullable, and last, C# already offers nice syntactic sugars for nullables
-(the conditional operators `?:` and `?.`, and the null-coalescing operator `??`).
-Nevertheless, there are situations where a piece of code written in query syntax
-is much more readable, therefore easier to maintain. Finally, it is still a good
-exercise to do before moving to the new `Maybe<T>` type.
+with a nullable, and last, C# already offers nice syntactic sugars for
+nullables (the conditional operators `?:` and `?.`, and the null-coalescing
+operator `??`). Nevertheless, there are situations where a piece of code written
+in query syntax is much more readable, therefore easier to maintain. Finally,
+it is still a good exercise to do before moving to the new `Maybe<T>` type.
 
 #### `Select`
 `Select` allows to transform the enclosed value with a given selector:
@@ -298,7 +299,7 @@ type_.
 This is ok, there must be a simpler solution, I mean without resorting
 to `HasValue` and `Value` which, by the way, is the best option here!
 Actually, there is, it is very simple and we already saw it: just don't use a
-join but a intermediate value tuple. For this purpose, we have created an helper
+join but an intermediate value tuple. For this purpose, we have created an helper
 `Vuple.Gather` that takes two nullables as input and return a 2-tuple of
 the values if both of them are null, and `null` otherwise. For convenience, each
 item in the tuple gets a custom name: `Value1` for the first one and `Value2`
@@ -326,7 +327,7 @@ var q = from t in Vuple.Gather(first, second, third)
 ```
 the result is `(1, 7)` of type `(int, int)?`.
 
-**Remark.** `Vuple.Gather<T1, ... , T8>` returns `(T1 Value1, ... , T8 Value8)?`
+**Remark.** `Vuple.Gather<T1, ... , T8>` returns `(T1 Value1, ... , T8 Value8)?`.
 
 #### `Join`
 We don't describe the fluent syntax which is way more complicated than the
@@ -465,7 +466,6 @@ Maybe<int> better = maybe.Squash();
 ```
 
 ### <a name="maybe-value"></a>Give me back the value!
-
 To repeat myself, this is not a recommended practice. Anyway,
 - `ValueOrDefault()` returns the enclosed value if any; otherwise the default
   value of type `T`.
@@ -477,9 +477,48 @@ To repeat myself, this is not a recommended practice. Anyway,
   `InvalidOperationException`. There is also an overload which accepts a factory
    as parameter.
 
+Let me show you another way to access the enclosed value of a "maybe",
+`Maybe<T>` does not implement `IEnumerable<T>` but you can iterate over it:
+```csharp
+foreach (T value in maybe) { ... }
+```
+
+**Remark.** We could have implemented `IEnumerable<T>` but we didn't since it
+would have enabled LINQ to Objects, something we certainly do not want (- )what
+would mean `orderby` on a "maybe"?), at least in this form (see
+[here](#maybe-querying] and [here](#maybe-linq) for more on this).
+
 ### <a name="maybe-matching"></a>Matching
 
 ### <a name="maybe-effects"></a>Programming for side-effects
+
+#### `Do`
+```csharp
+Action<T> onSome = ...
+Action onNone = ...
+maybe.Do(onSome, onNone);
+```
+
+#### `OnSome`
+```csharp
+Action<T> action = ...
+maybe.OnSome(action);
+```
+
+Let me show you another way of calling `action` when the object is "some":
+```csharp
+foreach (T value in maybe) { action(value); }
+```
+
+#### `OnNone`
+```csharp
+Action action = ...
+maybe.OnNone(action);
+```
+Rather than using `OnNone`, it is simpler to write:
+```csharp
+if (maybe.IsNone) { action(); }
+```
 
 ### <a name="maybe-querying"></a>Querying
 The `Maybe<T>` type supports a subset of the [query expression pattern](https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#the-query-expression-pattern),
@@ -532,6 +571,23 @@ where `q` is of type `Maybe<T>`.
 #### `Join`
 
 #### `GroupJoin`
+
+#### <a name="maybe-linq"></a>LINQ to Objects
+Using `ToEnumerable` allows to mix the above operators with those from LINQ to
+Objects:
+```csharp
+var q = Maybe.Of("some")
+    .Select(x => x.ToUpperInvariant())
+    .ToEnumerable()
+    .Where(x => !String.IsNullOrEmpty(x));
+```
+where `Select` is the select we described above and `Where` is from LINQ to
+Objects. This is a curiosity, nothing more.
+
+**Remark.** Compare this to `AsEnumerable` for interpreted queries, e.g.
+applying it to an `IQueryable<T>` in a LINQ to SQL query forces subsequent
+operators to bind to `Enumerable` making them local (useful for queries that
+do not translate to SQL).
 
 ### <a name="maybe-binding"></a>Binding
 
@@ -1004,6 +1060,8 @@ public struct Maybe<T> {
     public Maybe<TResult> Gather<TResult>(Maybe<Func<T, TResult>> applicative) { ... }
 }
 ```
+`return` being a reserved keyword, better not to use it. A popular choice is
+`Create`, but I prefer `Of`.
 
 ### Alternative Functor
 
@@ -1114,6 +1172,7 @@ Type             | Properties
 - `Bind`, see [here](#nullable-binding).
 - `Of` is casting `(T?)value`.
 - `Zero` is `null`.
+
 - `null` is a left zero for `Bind`; `null.Bind(binder) ≡ null`
 
 `Nullable<Nullable<T>>` is not permitted.

@@ -2,6 +2,7 @@
 
 namespace Narvalo.Applicative
 {
+    // Vuple as V(alue T)uple so that it doesn't clash with the core type.
     public static class Vuple
     {
         public static (T1 Value1, T2 Value2)? Gather<T1, T2>(T1? arg1, T2? arg2)
