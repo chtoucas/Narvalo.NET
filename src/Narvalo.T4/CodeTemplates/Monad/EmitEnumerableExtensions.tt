@@ -9,11 +9,12 @@ public partial class MonadTemplate
     // T4: EmitEnumerableExtensions().
     public static partial class <#= ExtensionsClsName #>
     {
-        public static <#= Name #><IEnumerable<TSource><#= RTDecl #>> Collect<TSource<#= RTDecl #>>(
+        // **Hidden** because this operator is not composable.
+        internal static <#= Name #><IEnumerable<TSource><#= RTDecl #>> Collect<TSource<#= RTDecl #>>(
             this IEnumerable<<#= Name #><TSource<#= RTDecl #>>> source)
         {
             <#+ WriteNotNull("source", true); #>
-            return <#+ WriteFactory("IEnumerable<TSource>"); #>(source.CollectAnyImpl());
+            return source.CollectImpl();
         }
 
         public static IEnumerable<TSource> CollectAny<TSource<#= RTDecl #>>(
