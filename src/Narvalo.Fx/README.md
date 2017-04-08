@@ -939,18 +939,20 @@ Haskell | C# | Return Type
 `foldM` / `foldM_`           | `seq.Fold`          | `Maybe<TAccumulate>`
 `replicateM` / `replicateM_` | `Maybe.Repeat`      | `Maybe<IEnumerable<T>>`
 
-#### `SelectUnzip` (C#), `mapAndUnzipM` (F#))
-`mapAndUnzipM` is easily implemented using `Select` and `SelectWith`:
+#### `SelectUnzip` (C#)
+To quote the Haskell documentation, _`mapAndUnzipM` is mainly used with
+complicated data structures or a state-transforming monad_. If you really
+need it, it is easily implemented using `Select` and `SelectWith`:
 ```csharp
 public static Maybe<(IEnumerable<T1>, IEnumerable<T2>)> SelectUnzip<T, T1, T2>(
     this IEnumerable<T> source,
     Func<TSource, Maybe<(T1, T2)>> selector) {
 
-    Maybe<IEnumerable<(T1, T2)>> seq = SelectWith(source, selector);
+    Maybe<IEnumerable<(T1, T2)>> seq = source.SelectWith(selector);
 
     return seq.Select(q => {
-        IEnumerable<T1> q1 = q.Select(x => x.Item1);
-        IEnumerable<T2> q2 = q.Select(x => x.Item2);
+        IEnumerable<T1> q1 = q.Select(t => t.Item1);
+        IEnumerable<T2> q2 = q.Select(t => t.Item2);
 
         return (q1, q2);
     });

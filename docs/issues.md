@@ -62,10 +62,10 @@ Narvalo.Fx
   * Remove `Collect`, `ZipWith` and `SelectWith`? `Collect` is just
     `Monad.Of(CollectAny)`, `ZipWith` is `Zip().Collect()`, and `SelectWith`
     is `Select().Collect()` (to be checked). Another good reason to remove them
-    is that they are not composable. What about `WhereBy`?
-  * Move `Repeat` to `Sequence`?
-  * Move `Collect`, `CollectAny` and `Sum` to Narvalo.Linq? They act on
-    `IEnumerable<Monad<T>>`, but in Narvalo.Applicative they are hard to find.
+    is that they are not composable. Idem `WhereBy` is `Monad.Of(WhereAny)`.
+  * Move `Repeat` to `Sequence`? Move `Collect`, `CollectAny` and `Sum` to
+    Narvalo.Linq? They act on `IEnumerable<Monad<T>>`, but being in
+    Narvalo.Applicative they are hard to find.
 - More QEP for Monads? Simplify LINQ for `Maybe<T?>`?
 - Auto-generate tests for null-guards (missing only for `Either`).
   Add more tests beyond the auto-generated ones. Add tests for purity?
