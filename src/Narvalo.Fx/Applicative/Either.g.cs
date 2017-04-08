@@ -357,18 +357,19 @@ namespace Narvalo.Applicative
     // T4: EmitEnumerableExtensions().
     public static partial class Either
     {
-        public static Either<IEnumerable<TSource>, TRight> Collect<TSource, TRight>(
-            this IEnumerable<Either<TSource, TRight>> source)
-        {
-            Require.NotNull(source, nameof(source));
-            return Either<IEnumerable<TSource>, TRight>.OfLeft(source.CollectAnyImpl());
-        }
-
         public static IEnumerable<TSource> CollectAny<TSource, TRight>(
             this IEnumerable<Either<TSource, TRight>> source)
         {
             Require.NotNull(source, nameof(source));
             return source.CollectAnyImpl();
+        }
+
+        // **Hidden** because this operator is not composable.
+        internal static Either<IEnumerable<TSource>, TRight> Collect<TSource, TRight>(
+            this IEnumerable<Either<TSource, TRight>> source)
+        {
+            Require.NotNull(source, nameof(source));
+            return source.CollectImpl();
         }
     }
 }
@@ -386,14 +387,6 @@ namespace Narvalo.Internal
     // T4: EmitEnumerableInternal().
     internal static partial class EnumerableExtensions
     {
-        /* [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Either<IEnumerable<TSource>, TRight> CollectImpl<TSource, TRight>(
-            this IEnumerable<Either<TSource, TRight>> source)
-        {
-            Require.NotNull(source, nameof(source));
-            return Either<IEnumerable<TSource>, TRight>.OfLeft(CollectAnyImpl(source));
-        } */
-
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static IEnumerable<TSource> CollectAnyImpl<TSource, TRight>(
             this IEnumerable<Either<TSource, TRight>> source)
@@ -422,6 +415,14 @@ namespace Narvalo.Internal
                 }
             }
         }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static Either<IEnumerable<TSource>, TRight> CollectImpl<TSource, TRight>(
+            this IEnumerable<Either<TSource, TRight>> source)
+        {
+            Require.NotNull(source, nameof(source));
+            return Either<IEnumerable<TSource>, TRight>.OfLeft(CollectAnyImpl(source));
+        }
     }
 }
 
@@ -442,17 +443,29 @@ namespace Narvalo.Linq
     // T4: EmitLinqCore().
     public static partial class Qperators
     {
-        public static Either<IEnumerable<TResult>, TRight> SelectWith<TSource, TResult, TRight>(
+        public static IEnumerable<TSource> WhereAny<TSource, TRight>(
+            this IEnumerable<TSource> source,
+            Func<TSource, Either<bool, TRight>> predicate)
+        {
+            Require.NotNull(source, nameof(source));
+            Require.NotNull(predicate, nameof(predicate));
+            return source.WhereAnyImpl(predicate);
+        }
+
+        // **Hidden** because this operator is not composable.
+        internal static Either<IEnumerable<TResult>, TRight> SelectWith<TSource, TResult, TRight>(
             this IEnumerable<TSource> source,
             Func<TSource, Either<TResult, TRight>> selector)
             => source.SelectWithImpl(selector);
 
-        public static Either<IEnumerable<TSource>, TRight> WhereBy<TSource, TRight>(
+        // **Hidden** because this operator is not composable.
+        internal static Either<IEnumerable<TSource>, TRight> WhereBy<TSource, TRight>(
             this IEnumerable<TSource> source,
             Func<TSource, Either<bool, TRight>> predicate)
             => source.WhereByImpl(predicate);
 
-        public static Either<IEnumerable<TResult>, TRight> ZipWith<TFirst, TSecond, TResult, TRight>(
+        // **Hidden** because this operator is not composable.
+        internal static Either<IEnumerable<TResult>, TRight> ZipWith<TFirst, TSecond, TResult, TRight>(
             this IEnumerable<TFirst> source,
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, Either<TResult, TRight>> resultSelector)
@@ -500,29 +513,8 @@ namespace Narvalo.Internal
     internal static partial class EnumerableExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Either<IEnumerable<TResult>, TRight> SelectWithImpl<TSource, TResult, TRight>(
+        internal static IEnumerable<TSource> WhereAnyImpl<TSource, TRight>(
             this IEnumerable<TSource> source,
-            Func<TSource, Either<TResult, TRight>> selector)
-        {
-            Debug.Assert(source != null);
-            Debug.Assert(selector != null);
-
-            return source.Select(selector).Collect();
-        }
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Either<IEnumerable<TSource>, TRight> WhereByImpl<TSource, TRight>(
-            this IEnumerable<TSource> source,
-            Func<TSource, Either<bool, TRight>> predicate)
-        {
-            Require.NotNull(source, nameof(source));
-            Require.NotNull(predicate, nameof(predicate));
-
-            return Either<IEnumerable<TSource>, TRight>.OfLeft(WhereByIterator(source, predicate));
-        }
-
-        private static IEnumerable<TSource> WhereByIterator<TSource, TRight>(
-            IEnumerable<TSource> source,
             Func<TSource, Either<bool, TRight>> predicate)
         {
             Debug.Assert(source != null);
@@ -547,6 +539,28 @@ namespace Narvalo.Internal
                     if (pass) { yield return item; }
                 }
             }
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static Either<IEnumerable<TSource>, TRight> WhereByImpl<TSource, TRight>(
+            this IEnumerable<TSource> source,
+            Func<TSource, Either<bool, TRight>> predicate)
+        {
+            Require.NotNull(source, nameof(source));
+            Require.NotNull(predicate, nameof(predicate));
+
+            return Either<IEnumerable<TSource>, TRight>.OfLeft(WhereAnyImpl(source, predicate));
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static Either<IEnumerable<TResult>, TRight> SelectWithImpl<TSource, TResult, TRight>(
+            this IEnumerable<TSource> source,
+            Func<TSource, Either<TResult, TRight>> selector)
+        {
+            Debug.Assert(source != null);
+            Debug.Assert(selector != null);
+
+            return source.Select(selector).Collect();
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]

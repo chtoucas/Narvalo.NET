@@ -59,10 +59,8 @@ Narvalo.Fx
 
 - LINQ changes:
   * Replace `CollectIterator` by `CollectAny` and make it public. (**DONE**)
-  * Remove `Collect`, `ZipWith` and `SelectWith`? `Collect` is just
-    `Monad.Of(CollectAny)`, `ZipWith` is `Zip().Collect()`, and `SelectWith`
-    is `Select().Collect()` (to be checked). Another good reason to remove them
-    is that they are not composable. Idem `WhereBy` is `Monad.Of(WhereAny)`.
+  * Hide `Collect`, `WhereBy`, `ZipWith` and `SelectWith`. (**DONE**)
+    Move arg-checks to main method. Remove for good the above ops.
   * Move `Repeat` to `Sequence`? Move `Collect`, `CollectAny` and `Sum` to
     Narvalo.Linq? They act on `IEnumerable<Monad<T>>`, but being in
     Narvalo.Applicative they are hard to find.

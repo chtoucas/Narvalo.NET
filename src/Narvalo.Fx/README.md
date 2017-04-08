@@ -731,10 +731,8 @@ Query Operators and Generators
 ------------------------------
 
 - [LINQ Extensions](#linq-extensions)
-- [`Collect` and `CollectAny`](#linq-collect)
-- [Generalized Operators](#linq-generalized)
-- [Specialized Operators](#linq-specialized)
 - [Generators](#linq-generators)
+- [Specialized Operators](#linq-specialized)
 
 For each new query operator, we define its behaviour regarding deferred or
 immediate execution - to quote the [C# documentation](https://docs.microsoft.com/en-us/dotnet/articles/csharp/programming-guide/concepts/linq/classification-of-standard-query-operators-by-manner-of-execution),
@@ -751,6 +749,8 @@ To enable any of them, you must first import the namespace `Narvalo.Linq`.
 
 Category | Operator | Return Type | Deferred
 -------- | -------- | ----------- | :------:
+Projection     | `SelectAny`          | `IEnumerable<TResult>`     | Streaming
+Restriction    | `WhereAny`           | `IEnumerable<T>`           | Streaming
 Set            | `Append`             | `IEnumerable<T>`           | Streaming
 |              | `Prepend`            | `IEnumerable<T>`           | Streaming
 Element        | `FirstOrNone`        | `Maybe<T>`                 | -
@@ -759,6 +759,8 @@ Element        | `FirstOrNone`        | `Maybe<T>`                 | -
 |              | `SingleOrNone`       | `Maybe<T>`                 | -
 Aggregation    | `Aggregate` (reduce) | `T`                        | -
 |              | `Aggregate` (fold)   | `TResult` or `TAccumulate` | -
+|              | `Reduce`             | `Monad<T>`                 | -
+|              | `Fold`               | `Monad<TAccumulate>`       | -
 Quantification | `IsEmpty`            | `bool`                     | -
 Generation     | `EmptyIfNull`        | `IEnumerable<T>`           | -
 
@@ -795,19 +797,24 @@ an `IEnumerable<T>` as input:
 
 #### Folding
 
-### <a name="linq-collect"></a>`Collect` and `CollectAny`
+### <a name="linq-generators"></a>Generators
 
-Operators that act on an `IEnumerable<Monad<T>>`.
+Operator | Return Type | Deferred
+-------- | ----------- | :------:
+`Of`          | `IEnumerable<T>`           | Streaming
+`Gather`      | `IEnumerable<T>`           | Streaming
+`Unfold`      | `IEnumerable<T>`           | Streaming
+`Repeat`      | `Monad<IEnumerable<T>>`    | Streaming
+
+### <a name="linq-specialized"></a>Specialized Operators
 
 Category | Operator | Return Type | Deferred |
 -------- | -------- | ----------- | :------: |
-Restriction | `CollectAny` | `IEnumerable<T>`        | Streaming
-|           | `Collect`    | `Monad<IEnumerable<T>>` | Streaming
-
-Accidentally, for all monads considered here, `Collect` is just a `CollectAny`
-wrapped into a monad, even if it is not true in general.
+Restriction | `CollectAny` | `IEnumerable<T>` | Streaming
+Aggregation | `Sum` (*)    | `Maybe<T>`       | -
 
 #### `CollectAny`
+`CollectAny` acts on an `IEnumerable<Monad<T>>`.
 For instance, applying `CollectAny` to the sequence defined by:
 ```csharp
 yield return Maybe<int>.None;
@@ -819,52 +826,8 @@ yield return Maybe.Of(5);
 would return a sequence of type `IEnumerable<int>` with three elements `2`, `4`
 and `5`; it filters out the two _none_'s
 
-#### `Collect`
-
-### <a name="linq-generalized"></a>Generalized Operators
-
-We also provide generalized operators accepting as arguments functions
-that maps a value to a nullable, a Maybe, an Error or an Either.
-
-Category | Operator | Return Type | Deferred
--------- | -------- | ----------- | :------:
-Projection  | `SelectWith` | `Monad<IEnumerable<TResult>>` | Streaming
-Restriction | `WhereBy`    | `Monad<IEnumerable<T>>`       | Streaming
-Set         | `ZipWith`    | `Monad<IEnumerable<TResult>>` | Streaming
-Aggregation | `Reduce`     | `Monad<T>`                    | -
-|           | `Fold`       | `Monad<TAccumulate>`          | -
-
-Category | Operator | Return Type | Deferred
--------- | -------- | ----------- | :------:
-Projection  | `SelectAny`  | `IEnumerable<TResult>`        | Streaming
-Restriction | `WhereAny`   | `IEnumerable<T>`              | Streaming
-
-#### `SelectWith`
-`SelectWith` is a standard `Select` followed by a `Collect`.
-
-#### `WhereBy`
-Accidentally for all monads considered here, `WhereBy` is just a `WhereAny`
-wrapped into a monad even if it is not true in general.
-
-#### `ZipWith`
-`ZipWith` is a standard `Zip` followed by a `Collect`.
-
-### <a name="linq-specialized"></a>Specialized Operators
-
-Operators that act on an `IEnumerable<Maybe<T>>`.
-
-Category | Operator | Return Type | Deferred
--------- | -------- | ----------- | :------:
-Aggregation | `Sum` (*) | `Maybe<T>` | -
-
-### <a name="linq-generators"></a>Generators
-
-Operator | Return Type | Deferred
--------- | ----------- | :------:
-`Of`          | `IEnumerable<T>`           | Streaming
-`Gather`      | `IEnumerable<T>`           | Streaming
-`Unfold`      | `IEnumerable<T>`           | Streaming
-`Repeat`      | `Monad<IEnumerable<T>>`    | Streaming
+#### `Sum`
+`Sum` acts on an `IEnumerable<Maybe<T>>`.
 
 --------------------------------------------------------------------------------
 
@@ -916,14 +879,20 @@ We do not implement `fail` as .NET has its own way of reporting errors.
 
 Haskell | C# | Return Type
 --------|----|------------
-`mapM` / `mapM_`         | `seq.SelectWith`   | `Maybe<IEnumerable<TResult>>`
+`mapM` / `mapM_`         | (`seq.SelectWith`) | (`Maybe<IEnumerable<TResult>>`)
 `forM` / `forM_`         | `kunc.InvokeWith`  | `Maybe<IEnumerable<TResult>>`
-`sequence` / `sequence_` | `mseq.Collect`     | `Maybe<IEnumerable<T>>`
+`sequence` / `sequence_` | (`mseq.Collect`)   | (`Maybe<IEnumerable<T>>`)
 `(=<<)`                  | `kunc.InvokeWith`  | `Maybe<TResult>`
 `(>=>)`                  | `kunc.Compose`     | `Func<T, Maybe<TResult>>`
 `(<=<)`                  | `kunc.ComposeBack` | `Func<T, Maybe<TResult>>`
 `forever`                | -                  | -
 `void`                   | `obj.Skip`         | `Maybe<Unit>`
+
+#### `SelectWith`
+`SelectWith` is a LINQ `Select` followed by a `Collect`.
+
+#### `Collect`
+`Collect` is a LINQ `CollectAny` wrapped into a "maybe".
 
 ### <a name="haskell-list"></a>Generalisations of list functions
 
@@ -932,13 +901,19 @@ Below `square` is an object of type `Maybe<Maybe<T>>`.
 Haskell | C# | Return Type
 --------|----|------------
 `join`                       | `square.Flatten`    | `Maybe<T>`
-`filterM`                    | `seq.WhereBy`       | `Maybe<IEnumerable<T>>`
-`mapAndUnzipM`               | -                   | -
-`zipWithM` / `zipWithM_`     | `seq.ZipWith`       | `Maybe<IEnumerable<TResult>>`
+`filterM`                    | (`seq.WhereBy`)     | (`Maybe<IEnumerable<T>>`)
+`mapAndUnzipM`               | (`seq.SelectUnzip`) | (`Maybe<(IEnumerable<T1>, IEnumerable<T2>)>`)
+`zipWithM` / `zipWithM_`     | (`seq.ZipWith`)     | (`Maybe<IEnumerable<TResult>>`)
 `foldM` / `foldM_`           | `seq.Fold`          | `Maybe<TAccumulate>`
 `replicateM` / `replicateM_` | `Maybe.Repeat`      | `Maybe<IEnumerable<T>>`
 
-#### `SelectUnzip` (C#)
+#### `WhereBy`
+`WhereBy` is a LINQ `WhereAny` wrapped into a "maybe".
+
+#### `ZipWith`
+`ZipWith` is a LINQ `Zip` followed by a `Collect`.
+
+#### `SelectUnzip`
 To quote the Haskell documentation, _`mapAndUnzipM` is mainly used with
 complicated data structures or a state-transforming monad_. If you really
 need it, it is easily implemented using `Select` and `SelectWith`:

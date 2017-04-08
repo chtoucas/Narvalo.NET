@@ -150,7 +150,7 @@ namespace Narvalo.Linq
             Require.NotNull(source, nameof(source));
             Require.NotNull(predicate, nameof(predicate));
 
-            return Maybe.Of(WhereAnyIterator(source, predicate));
+            return Maybe.Of(WhereAnyImpl(source, predicate));
         }
     }
 }

@@ -11,14 +11,6 @@ public partial class MonadTemplate
     internal static partial class EnumerableExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static <#= Name #><IEnumerable<TSource><#= RTDecl #>> CollectImpl<TSource<#= RTDecl #>>(
-            this IEnumerable<<#= Name #><TSource<#= RTDecl #>>> source)
-        {
-            <#+ WriteNotNull("source", true); #>
-            return <#+ WriteFactory("IEnumerable<TSource>"); #>(CollectAnyImpl(source));
-        }
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static IEnumerable<TSource> CollectAnyImpl<TSource<#= RTDecl #>>(
             this IEnumerable<<#= Name #><TSource<#= RTDecl #>>> source)
         {
@@ -51,6 +43,14 @@ public partial class MonadTemplate
                     if (append) { yield return item; }
                 }
             }
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static <#= Name #><IEnumerable<TSource><#= RTDecl #>> CollectImpl<TSource<#= RTDecl #>>(
+            this IEnumerable<<#= Name #><TSource<#= RTDecl #>>> source)
+        {
+            <#+ WriteNotNull("source", true); #>
+            return <#+ WriteFactory("IEnumerable<TSource>"); #>(CollectAnyImpl(source));
         }
 <#+ if (HasSum) { #>
 

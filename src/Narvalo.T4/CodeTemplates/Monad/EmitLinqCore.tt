@@ -14,17 +14,29 @@ public partial class MonadTemplate
     // T4: EmitLinqCore().
     public static partial class Qperators
     {
-        public static <#= Name #><IEnumerable<TResult><#= RTDecl #>> SelectWith<TSource, TResult<#= RTDecl #>>(
+        public static IEnumerable<TSource> WhereAny<TSource<#= RTDecl #>>(
+            this IEnumerable<TSource> source,
+            Func<TSource, <#= Name #><bool<#= RTDecl #>>> predicate)
+        {
+            <#+ WriteNotNull("source", true); #>
+            Require.NotNull(predicate, nameof(predicate));
+            return source.WhereAnyImpl(predicate);
+        }
+
+        // **Hidden** because this operator is not composable.
+        internal static <#= Name #><IEnumerable<TResult><#= RTDecl #>> SelectWith<TSource, TResult<#= RTDecl #>>(
             this IEnumerable<TSource> source,
             Func<TSource, <#= Name #><TResult<#= RTDecl #>>> selector)
             => source.SelectWithImpl(selector);
 
-        public static <#= Name #><IEnumerable<TSource><#= RTDecl #>> WhereBy<TSource<#= RTDecl #>>(
+        // **Hidden** because this operator is not composable.
+        internal static <#= Name #><IEnumerable<TSource><#= RTDecl #>> WhereBy<TSource<#= RTDecl #>>(
             this IEnumerable<TSource> source,
             Func<TSource, <#= Name #><bool<#= RTDecl #>>> predicate)
             => source.WhereByImpl(predicate);
 
-        public static <#= Name #><IEnumerable<TResult><#= RTDecl #>> ZipWith<TFirst, TSecond, TResult<#= RTDecl #>>(
+        // **Hidden** because this operator is not composable.
+        internal static <#= Name #><IEnumerable<TResult><#= RTDecl #>> ZipWith<TFirst, TSecond, TResult<#= RTDecl #>>(
             this IEnumerable<TFirst> source,
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, <#= Name #><TResult<#= RTDecl #>>> resultSelector)

@@ -67,7 +67,7 @@ namespace Narvalo.Linq
             Require.NotNull(source, nameof(source));
             Require.NotNull(predicate, nameof(predicate));
 
-            return Fallible.Of(WhereAnyIterator(source, predicate));
+            return Fallible.Of(WhereAnyImpl(source, predicate));
         }
     }
 }

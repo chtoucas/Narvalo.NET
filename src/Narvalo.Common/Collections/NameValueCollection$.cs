@@ -40,6 +40,6 @@ namespace Narvalo.Collections
             this NameValueCollection @this,
             string name,
             Func<string, Maybe<T>> parser)
-            => @this.MayGetValues(name).Bind(val => val.SelectWith(parser));
+            => @this.MayGetValues(name).Select(val => val.Select(parser).CollectAny());
     }
 }

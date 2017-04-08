@@ -375,9 +375,20 @@ namespace Narvalo.T4.Testbed
     // T4: EmitEnumerableExtensions().
     public static partial class Monad
     {
-        public static Monad<IEnumerable<TSource>> Collect<TSource>(
+        public static IEnumerable<TSource> CollectAny<TSource>(
             this IEnumerable<Monad<TSource>> source)
-            => source.CollectImpl();
+        {
+            Require.NotNull(source, nameof(source));
+            return source.CollectAnyImpl();
+        }
+
+        // **Hidden** because this operator is not composable.
+        internal static Monad<IEnumerable<TSource>> Collect<TSource>(
+            this IEnumerable<Monad<TSource>> source)
+        {
+            Require.NotNull(source, nameof(source));
+            return source.CollectImpl();
+        }
     }
 }
 
@@ -395,14 +406,8 @@ namespace Narvalo.T4.Testbed.Internal
     internal static partial class EnumerableExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Monad<IEnumerable<TSource>> CollectImpl<TSource>(
+        internal static IEnumerable<TSource> CollectAnyImpl<TSource>(
             this IEnumerable<Monad<TSource>> source)
-        {
-            Require.NotNull(source, nameof(source));
-            return Monad<IEnumerable<TSource>>.η(CollectIterator(source));
-        }
-
-        private static IEnumerable<TSource> CollectIterator<TSource>(IEnumerable<Monad<TSource>> source)
         {
             Debug.Assert(source != null);
 
@@ -427,6 +432,14 @@ namespace Narvalo.T4.Testbed.Internal
                 }
             }
         }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static Monad<IEnumerable<TSource>> CollectImpl<TSource>(
+            this IEnumerable<Monad<TSource>> source)
+        {
+            Require.NotNull(source, nameof(source));
+            return Monad<IEnumerable<TSource>>.η(CollectAnyImpl(source));
+        }
     }
 }
 
@@ -447,17 +460,29 @@ namespace Narvalo.T4.Testbed.Linq
     // T4: EmitLinqCore().
     public static partial class Qperators
     {
-        public static Monad<IEnumerable<TResult>> SelectWith<TSource, TResult>(
+        public static IEnumerable<TSource> WhereAny<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, Monad<bool>> predicate)
+        {
+            Require.NotNull(source, nameof(source));
+            Require.NotNull(predicate, nameof(predicate));
+            return source.WhereAnyImpl(predicate);
+        }
+
+        // **Hidden** because this operator is not composable.
+        internal static Monad<IEnumerable<TResult>> SelectWith<TSource, TResult>(
             this IEnumerable<TSource> source,
             Func<TSource, Monad<TResult>> selector)
             => source.SelectWithImpl(selector);
 
-        public static Monad<IEnumerable<TSource>> WhereBy<TSource>(
+        // **Hidden** because this operator is not composable.
+        internal static Monad<IEnumerable<TSource>> WhereBy<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, Monad<bool>> predicate)
             => source.WhereByImpl(predicate);
 
-        public static Monad<IEnumerable<TResult>> ZipWith<TFirst, TSecond, TResult>(
+        // **Hidden** because this operator is not composable.
+        internal static Monad<IEnumerable<TResult>> ZipWith<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> source,
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, Monad<TResult>> resultSelector)
@@ -505,29 +530,8 @@ namespace Narvalo.T4.Testbed.Internal
     internal static partial class EnumerableExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Monad<IEnumerable<TResult>> SelectWithImpl<TSource, TResult>(
+        internal static IEnumerable<TSource> WhereAnyImpl<TSource>(
             this IEnumerable<TSource> source,
-            Func<TSource, Monad<TResult>> selector)
-        {
-            Debug.Assert(source != null);
-            Debug.Assert(selector != null);
-
-            return source.Select(selector).Collect();
-        }
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Monad<IEnumerable<TSource>> WhereByImpl<TSource>(
-            this IEnumerable<TSource> source,
-            Func<TSource, Monad<bool>> predicate)
-        {
-            Require.NotNull(source, nameof(source));
-            Require.NotNull(predicate, nameof(predicate));
-
-            return Monad<IEnumerable<TSource>>.η(WhereByIterator(source, predicate));
-        }
-
-        private static IEnumerable<TSource> WhereByIterator<TSource>(
-            IEnumerable<TSource> source,
             Func<TSource, Monad<bool>> predicate)
         {
             Debug.Assert(source != null);
@@ -550,6 +554,28 @@ namespace Narvalo.T4.Testbed.Internal
                     if (pass) { yield return item; }
                 }
             }
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static Monad<IEnumerable<TSource>> WhereByImpl<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, Monad<bool>> predicate)
+        {
+            Require.NotNull(source, nameof(source));
+            Require.NotNull(predicate, nameof(predicate));
+
+            return Monad<IEnumerable<TSource>>.η(WhereAnyImpl(source, predicate));
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static Monad<IEnumerable<TResult>> SelectWithImpl<TSource, TResult>(
+            this IEnumerable<TSource> source,
+            Func<TSource, Monad<TResult>> selector)
+        {
+            Debug.Assert(source != null);
+            Debug.Assert(selector != null);
+
+            return source.Select(selector).Collect();
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]

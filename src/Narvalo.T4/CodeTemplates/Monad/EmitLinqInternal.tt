@@ -11,29 +11,8 @@ public partial class MonadTemplate
     internal static partial class EnumerableExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static <#= Name #><IEnumerable<TResult><#= RTDecl #>> SelectWithImpl<TSource, TResult<#= RTDecl #>>(
+        internal static IEnumerable<TSource> WhereAnyImpl<TSource<#= RTDecl #>>(
             this IEnumerable<TSource> source,
-            Func<TSource, <#= Name #><TResult<#= RTDecl #>>> selector)
-        {
-            Debug.Assert(source != null);
-            Debug.Assert(selector != null);
-
-            return source.Select(selector).Collect();
-        }
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static <#= Name #><IEnumerable<TSource><#= RTDecl #>> WhereByImpl<TSource<#= RTDecl #>>(
-            this IEnumerable<TSource> source,
-            Func<TSource, <#= Name #><bool<#= RTDecl #>>> predicate)
-        {
-            <#+ WriteNotNull("source", true); #>
-            Require.NotNull(predicate, nameof(predicate));
-
-            return <#+ WriteFactory("IEnumerable<TSource>"); #>(WhereByIterator(source, predicate));
-        }
-
-        private static IEnumerable<TSource> WhereByIterator<TSource<#= RTDecl #>>(
-            IEnumerable<TSource> source,
             Func<TSource, <#= Name #><bool<#= RTDecl #>>> predicate)
         {
             Debug.Assert(source != null);
@@ -64,6 +43,28 @@ public partial class MonadTemplate
                     if (pass) { yield return item; }
                 }
             }
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static <#= Name #><IEnumerable<TSource><#= RTDecl #>> WhereByImpl<TSource<#= RTDecl #>>(
+            this IEnumerable<TSource> source,
+            Func<TSource, <#= Name #><bool<#= RTDecl #>>> predicate)
+        {
+            <#+ WriteNotNull("source", true); #>
+            Require.NotNull(predicate, nameof(predicate));
+
+            return <#+ WriteFactory("IEnumerable<TSource>"); #>(WhereAnyImpl(source, predicate));
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static <#= Name #><IEnumerable<TResult><#= RTDecl #>> SelectWithImpl<TSource, TResult<#= RTDecl #>>(
+            this IEnumerable<TSource> source,
+            Func<TSource, <#= Name #><TResult<#= RTDecl #>>> selector)
+        {
+            Debug.Assert(source != null);
+            Debug.Assert(selector != null);
+
+            return source.Select(selector).Collect();
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
