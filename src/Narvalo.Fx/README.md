@@ -504,8 +504,7 @@ maybe.Do(onSome, onNone);
 Action<T> action = ...
 maybe.OnSome(action);
 ```
-
-Let me show you another way of calling `action` when the object is "some":
+This is equivalent to:
 ```csharp
 foreach (T value in maybe) { action(value); }
 ```
