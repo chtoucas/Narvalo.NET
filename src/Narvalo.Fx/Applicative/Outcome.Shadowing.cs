@@ -4,6 +4,7 @@ namespace Narvalo.Applicative
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
 
     public partial struct Outcome<T>
     {
@@ -28,12 +29,15 @@ namespace Narvalo.Applicative
 
     public static partial class OutcomeExtensions
     {
-        internal static Outcome<IEnumerable<TSource>> CollectImpl<TSource>(
+        internal static IEnumerable<TSource> CollectAnyImpl<TSource>(
             this IEnumerable<Outcome<TSource>> source)
         {
-            Require.NotNull(source, nameof(source));
+            Debug.Assert(source != null);
 
-            return Outcome.Of(CollectAnyIterator(source));
+            foreach (var item in source)
+            {
+                if (item.IsSuccess) { yield return item.Value; }
+            }
         }
     }
 }

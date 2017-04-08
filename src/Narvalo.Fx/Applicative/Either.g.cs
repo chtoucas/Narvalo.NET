@@ -359,7 +359,17 @@ namespace Narvalo.Applicative
     {
         public static Either<IEnumerable<TSource>, TRight> Collect<TSource, TRight>(
             this IEnumerable<Either<TSource, TRight>> source)
-            => source.CollectImpl();
+        {
+            Require.NotNull(source, nameof(source));
+            return Either<IEnumerable<TSource>, TRight>.OfLeft(source.CollectAnyImpl());
+        }
+
+        public static IEnumerable<TSource> CollectAny<TSource, TRight>(
+            this IEnumerable<Either<TSource, TRight>> source)
+        {
+            Require.NotNull(source, nameof(source));
+            return source.CollectAnyImpl();
+        }
     }
 }
 
@@ -376,15 +386,17 @@ namespace Narvalo.Internal
     // T4: EmitEnumerableInternal().
     internal static partial class EnumerableExtensions
     {
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        /* [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Either<IEnumerable<TSource>, TRight> CollectImpl<TSource, TRight>(
             this IEnumerable<Either<TSource, TRight>> source)
         {
             Require.NotNull(source, nameof(source));
-            return Either<IEnumerable<TSource>, TRight>.OfLeft(CollectIterator(source));
-        }
+            return Either<IEnumerable<TSource>, TRight>.OfLeft(CollectAnyImpl(source));
+        } */
 
-        private static IEnumerable<TSource> CollectIterator<TSource, TRight>(IEnumerable<Either<TSource, TRight>> source)
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static IEnumerable<TSource> CollectAnyImpl<TSource, TRight>(
+            this IEnumerable<Either<TSource, TRight>> source)
         {
             Debug.Assert(source != null);
 

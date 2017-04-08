@@ -4,6 +4,7 @@ namespace Narvalo.Applicative
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.ExceptionServices;
 
@@ -37,12 +38,15 @@ namespace Narvalo.Applicative
 
     public static partial class FallibleExtensions
     {
-        internal static Fallible<IEnumerable<TSource>> CollectImpl<TSource>(
+        internal static IEnumerable<TSource> CollectAnyImpl<TSource>(
             this IEnumerable<Fallible<TSource>> source)
         {
-            Require.NotNull(source, nameof(source));
+            Debug.Assert(source != null);
 
-            return Fallible.Of(CollectAnyIterator(source));
+            foreach (var item in source)
+            {
+                if (item.IsSuccess) { yield return item.Value; }
+            }
         }
     }
 }

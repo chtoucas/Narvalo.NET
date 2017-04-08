@@ -58,7 +58,7 @@ Narvalo.Fx
 ----------
 
 - LINQ changes:
-  * Replace `CollectImpl` by `CollectAny` and make it public.
+  * Replace `CollectIterator` by `CollectAny` and make it public. (**DONE**)
   * Remove `Collect`, `ZipWith` and `SelectWith`? `Collect` is just
     `Monad.Of(CollectAny)`, `ZipWith` is `Zip().Collect()`, and `SelectWith`
     is `Select().Collect()` (to be checked). Another good reason to remove them

@@ -477,7 +477,17 @@ namespace Narvalo.Applicative
     {
         public static Maybe<IEnumerable<TSource>> Collect<TSource>(
             this IEnumerable<Maybe<TSource>> source)
-            => source.CollectImpl();
+        {
+            Require.NotNull(source, nameof(source));
+            return Maybe<IEnumerable<TSource>>.η(source.CollectAnyImpl());
+        }
+
+        public static IEnumerable<TSource> CollectAny<TSource>(
+            this IEnumerable<Maybe<TSource>> source)
+        {
+            Require.NotNull(source, nameof(source));
+            return source.CollectAnyImpl();
+        }
 
         public static Maybe<TSource> Sum<TSource>(this IEnumerable<Maybe<TSource>> source)
             => source.SumImpl();
@@ -499,15 +509,17 @@ namespace Narvalo.Internal
     // T4: EmitEnumerableInternal().
     internal static partial class EnumerableExtensions
     {
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        /* [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Maybe<IEnumerable<TSource>> CollectImpl<TSource>(
             this IEnumerable<Maybe<TSource>> source)
         {
             Require.NotNull(source, nameof(source));
-            return Maybe<IEnumerable<TSource>>.η(CollectIterator(source));
-        }
+            return Maybe<IEnumerable<TSource>>.η(CollectAnyImpl(source));
+        } */
 
-        private static IEnumerable<TSource> CollectIterator<TSource>(IEnumerable<Maybe<TSource>> source)
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static IEnumerable<TSource> CollectAnyImpl<TSource>(
+            this IEnumerable<Maybe<TSource>> source)
         {
             Debug.Assert(source != null);
 

@@ -377,7 +377,17 @@ namespace Narvalo.Applicative
     {
         public static Fallible<IEnumerable<TSource>> Collect<TSource>(
             this IEnumerable<Fallible<TSource>> source)
-            => source.CollectImpl();
+        {
+            Require.NotNull(source, nameof(source));
+            return Fallible<IEnumerable<TSource>>.η(source.CollectAnyImpl());
+        }
+
+        public static IEnumerable<TSource> CollectAny<TSource>(
+            this IEnumerable<Fallible<TSource>> source)
+        {
+            Require.NotNull(source, nameof(source));
+            return source.CollectAnyImpl();
+        }
     }
 }
 
@@ -394,15 +404,17 @@ namespace Narvalo.Internal
     // T4: EmitEnumerableInternal().
     internal static partial class EnumerableExtensions
     {
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        /* [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Fallible<IEnumerable<TSource>> CollectImpl<TSource>(
             this IEnumerable<Fallible<TSource>> source)
         {
             Require.NotNull(source, nameof(source));
-            return Fallible<IEnumerable<TSource>>.η(CollectIterator(source));
-        }
+            return Fallible<IEnumerable<TSource>>.η(CollectAnyImpl(source));
+        } */
 
-        private static IEnumerable<TSource> CollectIterator<TSource>(IEnumerable<Fallible<TSource>> source)
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static IEnumerable<TSource> CollectAnyImpl<TSource>(
+            this IEnumerable<Fallible<TSource>> source)
         {
             Debug.Assert(source != null);
 

@@ -4,6 +4,7 @@ namespace Narvalo.Applicative
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
 
     public partial struct Maybe<T>
     {
@@ -120,12 +121,15 @@ namespace Narvalo.Applicative
 
     public static partial class Maybe
     {
-        internal static Maybe<IEnumerable<TSource>> CollectImpl<TSource>(
+        internal static IEnumerable<TSource> CollectAnyImpl<TSource>(
             this IEnumerable<Maybe<TSource>> source)
         {
-            Require.NotNull(source, nameof(source));
+            Debug.Assert(source != null);
 
-            return Of(CollectAnyIterator(source));
+            foreach (var item in source)
+            {
+                if (item.IsSome) { yield return item.Value; }
+            }
         }
     }
 }

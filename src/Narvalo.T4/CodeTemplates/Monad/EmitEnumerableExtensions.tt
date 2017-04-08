@@ -11,7 +11,17 @@ public partial class MonadTemplate
     {
         public static <#= Name #><IEnumerable<TSource><#= RTDecl #>> Collect<TSource<#= RTDecl #>>(
             this IEnumerable<<#= Name #><TSource<#= RTDecl #>>> source)
-            => source.CollectImpl();
+        {
+            <#+ WriteNotNull("source", true); #>
+            return <#+ WriteFactory("IEnumerable<TSource>"); #>(source.CollectAnyImpl());
+        }
+
+        public static IEnumerable<TSource> CollectAny<TSource<#= RTDecl #>>(
+            this IEnumerable<<#= Name #><TSource<#= RTDecl #>>> source)
+        {
+            <#+ WriteNotNull("source", true); #>
+            return source.CollectAnyImpl();
+        }
 <#+ if (HasSum) { #>
 
         public static <#= Name #><TSource> Sum<TSource>(this IEnumerable<<#= Name #><TSource>> source)

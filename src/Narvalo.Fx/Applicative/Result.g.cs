@@ -359,7 +359,17 @@ namespace Narvalo.Applicative
     {
         public static Result<IEnumerable<TSource>, TError> Collect<TSource, TError>(
             this IEnumerable<Result<TSource, TError>> source)
-            => source.CollectImpl();
+        {
+            Require.NotNull(source, nameof(source));
+            return Result<IEnumerable<TSource>, TError>.Of(source.CollectAnyImpl());
+        }
+
+        public static IEnumerable<TSource> CollectAny<TSource, TError>(
+            this IEnumerable<Result<TSource, TError>> source)
+        {
+            Require.NotNull(source, nameof(source));
+            return source.CollectAnyImpl();
+        }
     }
 }
 
@@ -376,15 +386,17 @@ namespace Narvalo.Internal
     // T4: EmitEnumerableInternal().
     internal static partial class EnumerableExtensions
     {
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        /* [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Result<IEnumerable<TSource>, TError> CollectImpl<TSource, TError>(
             this IEnumerable<Result<TSource, TError>> source)
         {
             Require.NotNull(source, nameof(source));
-            return Result<IEnumerable<TSource>, TError>.Of(CollectIterator(source));
-        }
+            return Result<IEnumerable<TSource>, TError>.Of(CollectAnyImpl(source));
+        } */
 
-        private static IEnumerable<TSource> CollectIterator<TSource, TError>(IEnumerable<Result<TSource, TError>> source)
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static IEnumerable<TSource> CollectAnyImpl<TSource, TError>(
+            this IEnumerable<Result<TSource, TError>> source)
         {
             Debug.Assert(source != null);
 

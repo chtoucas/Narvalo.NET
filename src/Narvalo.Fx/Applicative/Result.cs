@@ -3,8 +3,6 @@
 namespace Narvalo.Applicative
 {
     using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
 
     /// <summary>
     /// Provides a set of static and extension methods for <see cref="Result{T, TError}"/>
@@ -26,29 +24,6 @@ namespace Narvalo.Applicative
         {
             // NB: The Error property is never null.
             if (@this.IsError) { throw @this.Error; }
-        }
-    }
-
-    // Provides extension methods for IEnumerable<Result<T, TError>>.
-    public static partial class Result
-    {
-        public static IEnumerable<TSource> CollectAny<TSource, TError>(
-            this IEnumerable<Result<TSource, TError>> source)
-        {
-            Require.NotNull(source, nameof(source));
-
-            return CollectAnyIterator(source);
-        }
-
-        private static IEnumerable<TSource> CollectAnyIterator<TSource, TError>(
-            IEnumerable<Result<TSource, TError>> source)
-        {
-            Debug.Assert(source != null);
-
-            foreach (var item in source)
-            {
-                if (item.IsSuccess) { yield return item.Value; }
-            }
         }
     }
 }

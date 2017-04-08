@@ -4,6 +4,7 @@ namespace Narvalo.Applicative
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
 
     public partial struct Result<T, TError>
@@ -27,12 +28,15 @@ namespace Narvalo.Applicative
 
     public static partial class Result
     {
-        internal static Result<IEnumerable<TSource>, TError> CollectImpl<TSource, TError>(
+        internal static IEnumerable<TSource> CollectAnyImpl<TSource, TError>(
             this IEnumerable<Result<TSource, TError>> source)
         {
-            Require.NotNull(source, nameof(source));
+            Debug.Assert(source != null);
 
-            return Result<IEnumerable<TSource>, TError>.Of(CollectAnyIterator(source));
+            foreach (var item in source)
+            {
+                if (item.IsSuccess) { yield return item.Value; }
+            }
         }
     }
 }

@@ -3,10 +3,6 @@
 namespace Narvalo.Applicative
 {
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Linq;
 
     /// <summary>
     /// Provides a set of static and extension methods for <see cref="Either{TLeft, TRight}"/>.
@@ -41,29 +37,6 @@ namespace Narvalo.Applicative
             Require.NotNull(selector, nameof(selector));
 
             return @this.BindRight(val => Either<TLeft, TResult>.OfRight(selector(val)));
-        }
-    }
-
-    // Provides extension methods for IEnumerable<Either<T, TError>>.
-    public static partial class Either
-    {
-        public static IEnumerable<TLeft> CollectAny<TLeft, TRight>(
-            this IEnumerable<Either<TLeft, TRight>> @this)
-        {
-            Require.NotNull(@this, nameof(@this));
-
-            return CollectAnyIterator(@this);
-        }
-
-        private static IEnumerable<TLeft> CollectAnyIterator<TLeft, TRight>(
-            IEnumerable<Either<TLeft, TRight>> source)
-        {
-            Debug.Assert(source != null);
-
-            foreach (var item in source)
-            {
-                if (item.IsLeft) { yield return item.Left; }
-            }
         }
     }
 }

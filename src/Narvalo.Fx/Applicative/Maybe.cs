@@ -3,7 +3,6 @@
 namespace Narvalo.Applicative
 {
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Linq;
 
     /// <summary>
@@ -51,28 +50,5 @@ namespace Narvalo.Applicative
     {
         public static IEnumerable<T> ValueOrEmpty<T>(this Maybe<IEnumerable<T>> @this)
             => @this.IsSome ? @this.Value : Enumerable.Empty<T>();
-    }
-
-    // Provides extension methods for IEnumerable<Maybe<T>>.
-    public static partial class Maybe
-    {
-        public static IEnumerable<TSource> CollectAny<TSource>(
-            this IEnumerable<Maybe<TSource>> source)
-        {
-            Require.NotNull(source, nameof(source));
-
-            return CollectAnyIterator(source);
-        }
-
-        private static IEnumerable<TSource> CollectAnyIterator<TSource>(
-            IEnumerable<Maybe<TSource>> source)
-        {
-            Debug.Assert(source != null);
-
-            foreach (var item in source)
-            {
-                if (item.IsSome) { yield return item.Value; }
-            }
-        }
     }
 }
