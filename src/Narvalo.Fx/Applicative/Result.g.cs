@@ -326,7 +326,7 @@ namespace Narvalo.Applicative
         public static Result<IEnumerable<TResult>, TError> InvokeWith<TSource, TResult, TError>(
             this Func<TSource, Result<TResult, TError>> @this,
             IEnumerable<TSource> seq)
-            => seq.SelectWith(@this);
+            => seq.Select(@this).Collect();
 
         public static Result<TResult, TError> InvokeWith<TSource, TResult, TError>(
             this Func<TSource, Result<TResult, TError>> @this,
@@ -364,7 +364,8 @@ namespace Narvalo.Applicative
             return source.CollectAnyImpl();
         }
 
-        // **Hidden** because this operator is not composable.
+        // Hidden because this operator is not composable.
+        // Do not disable, we use it in Kleisli.InvokeWith().
         internal static Result<IEnumerable<TSource>, TError> Collect<TSource, TError>(
             this IEnumerable<Result<TSource, TError>> source)
         {
@@ -420,7 +421,7 @@ namespace Narvalo.Internal
         internal static Result<IEnumerable<TSource>, TError> CollectImpl<TSource, TError>(
             this IEnumerable<Result<TSource, TError>> source)
         {
-            Require.NotNull(source, nameof(source));
+            Debug.Assert(source != null);
             return Result<IEnumerable<TSource>, TError>.Of(CollectAnyImpl(source));
         }
     }
@@ -452,48 +453,72 @@ namespace Narvalo.Linq
             return source.WhereAnyImpl(predicate);
         }
 
-        // **Hidden** because this operator is not composable.
-        internal static Result<IEnumerable<TResult>, TError> SelectWith<TSource, TResult, TError>(
-            this IEnumerable<TSource> source,
-            Func<TSource, Result<TResult, TError>> selector)
-            => source.SelectWithImpl(selector);
-
-        // **Hidden** because this operator is not composable.
-        internal static Result<IEnumerable<TSource>, TError> WhereBy<TSource, TError>(
-            this IEnumerable<TSource> source,
-            Func<TSource, Result<bool, TError>> predicate)
-            => source.WhereByImpl(predicate);
-
-        // **Hidden** because this operator is not composable.
-        internal static Result<IEnumerable<TResult>, TError> ZipWith<TFirst, TSecond, TResult, TError>(
-            this IEnumerable<TFirst> source,
-            IEnumerable<TSecond> second,
-            Func<TFirst, TSecond, Result<TResult, TError>> resultSelector)
-            => source.ZipWithImpl(second, resultSelector);
+        //
+        // Disabled because these operators are not composable.
+        //
+        //
+        //internal static Result<IEnumerable<TSource>, TError> WhereBy<TSource, TError>(
+        //    this IEnumerable<TSource> source,
+        //    Func<TSource, Result<bool, TError>> predicate)
+        //{
+        //    Require.NotNull(source, nameof(source));
+        //    Require.NotNull(predicate, nameof(predicate));
+        //    return source.WhereByImpl(predicate);
+        //}
+        //
+        //internal static Result<IEnumerable<TResult>, TError> SelectWith<TSource, TResult, TError>(
+        //    this IEnumerable<TSource> source,
+        //    Func<TSource, Result<TResult, TError>> selector)
+        //    => source.SelectWithImpl(selector);
+        //
+        //internal static Result<IEnumerable<TResult>, TError> ZipWith<TFirst, TSecond, TResult, TError>(
+        //    this IEnumerable<TFirst> source,
+        //    IEnumerable<TSecond> second,
+        //    Func<TFirst, TSecond, Result<TResult, TError>> resultSelector)
+        //    => source.ZipWithImpl(second, resultSelector);
+        //
 
         public static Result<TAccumulate, TError> Fold<TSource, TAccumulate, TError>(
             this IEnumerable<TSource> source,
             TAccumulate seed,
             Func<TAccumulate, TSource, Result<TAccumulate, TError>> accumulator)
-            => source.FoldImpl(seed, accumulator);
+        {
+            Require.NotNull(source, nameof(source));
+            Require.NotNull(accumulator, nameof(accumulator));
+            return source.FoldImpl(seed, accumulator);
+        }
 
         public static Result<TAccumulate, TError> Fold<TSource, TAccumulate, TError>(
             this IEnumerable<TSource> source,
             TAccumulate seed,
             Func<TAccumulate, TSource, Result<TAccumulate, TError>> accumulator,
             Func<Result<TAccumulate, TError>, bool> predicate)
-            => source.FoldImpl(seed, accumulator, predicate);
+        {
+            Require.NotNull(source, nameof(source));
+            Require.NotNull(accumulator, nameof(accumulator));
+            Require.NotNull(predicate, nameof(predicate));
+            return source.FoldImpl(seed, accumulator, predicate);
+        }
 
         public static Result<TSource, TError> Reduce<TSource, TError>(
             this IEnumerable<TSource> source,
             Func<TSource, TSource, Result<TSource, TError>> accumulator)
-            => source.ReduceImpl(accumulator);
+        {
+            Require.NotNull(source, nameof(source));
+            Require.NotNull(accumulator, nameof(accumulator));
+            return source.ReduceImpl(accumulator);
+        }
 
         public static Result<TSource, TError> Reduce<TSource, TError>(
             this IEnumerable<TSource> source,
             Func<TSource, TSource, Result<TSource, TError>> accumulator,
             Func<Result<TSource, TError>, bool> predicate)
-            => source.ReduceImpl(accumulator, predicate);
+        {
+            Require.NotNull(source, nameof(source));
+            Require.NotNull(accumulator, nameof(accumulator));
+            Require.NotNull(predicate, nameof(predicate));
+            return source.ReduceImpl(accumulator, predicate);
+        }
     }
 }
 
@@ -503,7 +528,6 @@ namespace Narvalo.Internal
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
 
     using Narvalo.Applicative;
 
@@ -541,40 +565,34 @@ namespace Narvalo.Internal
             }
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Result<IEnumerable<TSource>, TError> WhereByImpl<TSource, TError>(
-            this IEnumerable<TSource> source,
-            Func<TSource, Result<bool, TError>> predicate)
-        {
-            Require.NotNull(source, nameof(source));
-            Require.NotNull(predicate, nameof(predicate));
-
-            return Result<IEnumerable<TSource>, TError>.Of(WhereAnyImpl(source, predicate));
-        }
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Result<IEnumerable<TResult>, TError> SelectWithImpl<TSource, TResult, TError>(
-            this IEnumerable<TSource> source,
-            Func<TSource, Result<TResult, TError>> selector)
-        {
-            Debug.Assert(source != null);
-            Debug.Assert(selector != null);
-
-            return source.Select(selector).Collect();
-        }
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Result<IEnumerable<TResult>, TError> ZipWithImpl<TFirst, TSecond, TResult, TError>(
-            this IEnumerable<TFirst> source,
-            IEnumerable<TSecond> second,
-            Func<TFirst, TSecond, Result<TResult, TError>> resultSelector)
-        {
-            Debug.Assert(resultSelector != null);
-            Debug.Assert(source != null);
-            Debug.Assert(second != null);
-
-            return source.Zip(second, resultSelector).Collect();
-        }
+        //
+        // Parent operators are disabled because they are not composable.
+        //
+        //
+        //[SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        //internal static Result<IEnumerable<TSource>, TError> WhereByImpl<TSource, TError>(
+        //    this IEnumerable<TSource> source,
+        //    Func<TSource, Result<bool, TError>> predicate)
+        //{
+        //    Debug.Assert(source != null);
+        //    Debug.Assert(predicate != null);
+        //
+        //    return Result<IEnumerable<TSource>, TError>.Of(WhereAnyImpl(source, predicate));
+        //}
+        //
+        //[SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        //internal static Result<IEnumerable<TResult>, TError> SelectWithImpl<TSource, TResult, TError>(
+        //    this IEnumerable<TSource> source,
+        //    Func<TSource, Result<TResult, TError>> selector)
+        //    => source.Select(selector).Collect();
+        //
+        //[SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        //internal static Result<IEnumerable<TResult>, TError> ZipWithImpl<TFirst, TSecond, TResult, TError>(
+        //    this IEnumerable<TFirst> source,
+        //    IEnumerable<TSecond> second,
+        //    Func<TFirst, TSecond, Result<TResult, TError>> resultSelector)
+        //    => source.Zip(second, resultSelector).Collect();
+        //
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Result<TAccumulate, TError> FoldImpl<TSource, TAccumulate, TError>(
@@ -582,8 +600,8 @@ namespace Narvalo.Internal
             TAccumulate seed,
             Func<TAccumulate, TSource, Result<TAccumulate, TError>> accumulator)
         {
-            Require.NotNull(source, nameof(source));
-            Require.NotNull(accumulator, nameof(accumulator));
+            Debug.Assert(source != null);
+            Debug.Assert(accumulator != null);
 
             Result<TAccumulate, TError> retval = Result<TAccumulate, TError>.Of(seed);
 
@@ -605,9 +623,9 @@ namespace Narvalo.Internal
             Func<TAccumulate, TSource, Result<TAccumulate, TError>> accumulator,
             Func<Result<TAccumulate, TError>, bool> predicate)
         {
-            Require.NotNull(source, nameof(source));
-            Require.NotNull(accumulator, nameof(accumulator));
-            Require.NotNull(predicate, nameof(predicate));
+            Debug.Assert(source != null);
+            Debug.Assert(accumulator != null);
+            Debug.Assert(predicate != null);
 
             Result<TAccumulate, TError> retval = Result<TAccumulate, TError>.Of(seed);
 
@@ -627,8 +645,8 @@ namespace Narvalo.Internal
             this IEnumerable<TSource> source,
             Func<TSource, TSource, Result<TSource, TError>> accumulator)
         {
-            Require.NotNull(source, nameof(source));
-            Require.NotNull(accumulator, nameof(accumulator));
+            Debug.Assert(source != null);
+            Debug.Assert(accumulator != null);
 
             using (var iter = source.GetEnumerator())
             {
@@ -654,9 +672,9 @@ namespace Narvalo.Internal
             Func<TSource, TSource, Result<TSource, TError>> accumulator,
             Func<Result<TSource, TError>, bool> predicate)
         {
-            Require.NotNull(source, nameof(source));
-            Require.NotNull(accumulator, nameof(accumulator));
-            Require.NotNull(predicate, nameof(predicate));
+            Debug.Assert(source != null);
+            Debug.Assert(accumulator != null);
+            Debug.Assert(predicate != null);
 
             using (var iter = source.GetEnumerator())
             {

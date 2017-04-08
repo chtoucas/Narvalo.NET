@@ -23,48 +23,72 @@ public partial class MonadTemplate
             return source.WhereAnyImpl(predicate);
         }
 
-        // **Hidden** because this operator is not composable.
-        internal static <#= Name #><IEnumerable<TResult><#= RTDecl #>> SelectWith<TSource, TResult<#= RTDecl #>>(
-            this IEnumerable<TSource> source,
-            Func<TSource, <#= Name #><TResult<#= RTDecl #>>> selector)
-            => source.SelectWithImpl(selector);
-
-        // **Hidden** because this operator is not composable.
-        internal static <#= Name #><IEnumerable<TSource><#= RTDecl #>> WhereBy<TSource<#= RTDecl #>>(
-            this IEnumerable<TSource> source,
-            Func<TSource, <#= Name #><bool<#= RTDecl #>>> predicate)
-            => source.WhereByImpl(predicate);
-
-        // **Hidden** because this operator is not composable.
-        internal static <#= Name #><IEnumerable<TResult><#= RTDecl #>> ZipWith<TFirst, TSecond, TResult<#= RTDecl #>>(
-            this IEnumerable<TFirst> source,
-            IEnumerable<TSecond> second,
-            Func<TFirst, TSecond, <#= Name #><TResult<#= RTDecl #>>> resultSelector)
-            => source.ZipWithImpl(second, resultSelector);
+        //
+        // Disabled because these operators are not composable.
+        //
+        //
+        //internal static <#= Name #><IEnumerable<TSource><#= RTDecl #>> WhereBy<TSource<#= RTDecl #>>(
+        //    this IEnumerable<TSource> source,
+        //    Func<TSource, <#= Name #><bool<#= RTDecl #>>> predicate)
+        //{
+        //    <#+ WriteNotNull("source", true); #>
+        //    Require.NotNull(predicate, nameof(predicate));
+        //    return source.WhereByImpl(predicate);
+        //}
+        //
+        //internal static <#= Name #><IEnumerable<TResult><#= RTDecl #>> SelectWith<TSource, TResult<#= RTDecl #>>(
+        //    this IEnumerable<TSource> source,
+        //    Func<TSource, <#= Name #><TResult<#= RTDecl #>>> selector)
+        //    => source.SelectWithImpl(selector);
+        //
+        //internal static <#= Name #><IEnumerable<TResult><#= RTDecl #>> ZipWith<TFirst, TSecond, TResult<#= RTDecl #>>(
+        //    this IEnumerable<TFirst> source,
+        //    IEnumerable<TSecond> second,
+        //    Func<TFirst, TSecond, <#= Name #><TResult<#= RTDecl #>>> resultSelector)
+        //    => source.ZipWithImpl(second, resultSelector);
+        //
 
         public static <#= Name #><TAccumulate<#= RTDecl #>> Fold<TSource, TAccumulate<#= RTDecl #>>(
             this IEnumerable<TSource> source,
             TAccumulate seed,
             Func<TAccumulate, TSource, <#= Name #><TAccumulate<#= RTDecl #>>> accumulator)
-            => source.FoldImpl(seed, accumulator);
+        {
+            <#+ WriteNotNull("source", true); #>
+            Require.NotNull(accumulator, nameof(accumulator));
+            return source.FoldImpl(seed, accumulator);
+        }
 
         public static <#= Name #><TAccumulate<#= RTDecl #>> Fold<TSource, TAccumulate<#= RTDecl #>>(
             this IEnumerable<TSource> source,
             TAccumulate seed,
             Func<TAccumulate, TSource, <#= Name #><TAccumulate<#= RTDecl #>>> accumulator,
             Func<<#= Name #><TAccumulate<#= RTDecl #>>, bool> predicate)
-            => source.FoldImpl(seed, accumulator, predicate);
+        {
+            <#+ WriteNotNull("source", true); #>
+            Require.NotNull(accumulator, nameof(accumulator));
+            Require.NotNull(predicate, nameof(predicate));
+            return source.FoldImpl(seed, accumulator, predicate);
+        }
 
         public static <#= Name #><TSource<#= RTDecl #>> Reduce<TSource<#= RTDecl #>>(
             this IEnumerable<TSource> source,
             Func<TSource, TSource, <#= Name #><TSource<#= RTDecl #>>> accumulator)
-            => source.ReduceImpl(accumulator);
+        {
+            <#+ WriteNotNull("source", true); #>
+            Require.NotNull(accumulator, nameof(accumulator));
+            return source.ReduceImpl(accumulator);
+        }
 
         public static <#= Name #><TSource<#= RTDecl #>> Reduce<TSource<#= RTDecl #>>(
             this IEnumerable<TSource> source,
             Func<TSource, TSource, <#= Name #><TSource<#= RTDecl #>>> accumulator,
             Func<<#= Name #><TSource<#= RTDecl #>>, bool> predicate)
-            => source.ReduceImpl(accumulator, predicate);
+        {
+            <#+ WriteNotNull("source", true); #>
+            Require.NotNull(accumulator, nameof(accumulator));
+            Require.NotNull(predicate, nameof(predicate));
+            return source.ReduceImpl(accumulator, predicate);
+        }
     }
 <#+
     } // T4: End of EmitLinqCore().

@@ -51,24 +51,28 @@ namespace Narvalo.Applicative
     }
 }
 
-namespace Narvalo.Linq
-{
-    using System;
-    using System.Collections.Generic;
+//
+// WhereBy operatoris currently disabled.
+//
+//
+//namespace Narvalo.Linq
+//{
+//    using System;
+//    using System.Collections.Generic;
 
-    using Narvalo.Applicative;
+//    using Narvalo.Applicative;
 
-    public static partial class Qperators
-    {
-        internal static Fallible<IEnumerable<TSource>> WhereByImpl<TSource>(
-            this IEnumerable<TSource> source,
-            Func<TSource, Fallible<bool>> predicate)
-        {
-            Require.NotNull(source, nameof(source));
-            Require.NotNull(predicate, nameof(predicate));
+//    public static partial class Qperators
+//    {
+//        internal static Fallible<IEnumerable<TSource>> WhereByImpl<TSource>(
+//            this IEnumerable<TSource> source,
+//            Func<TSource, Fallible<bool>> predicate)
+//        {
+//            Require.NotNull(source, nameof(source));
+//            Require.NotNull(predicate, nameof(predicate));
 
-            return Fallible.Of(WhereAnyImpl(source, predicate));
-        }
-    }
-}
+//            return Fallible.Of(WhereAnyImpl(source, predicate));
+//        }
+//    }
+//}
 

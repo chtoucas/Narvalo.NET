@@ -49,7 +49,7 @@ public partial class MonadTemplate
         internal static <#= Name #><IEnumerable<TSource><#= RTDecl #>> CollectImpl<TSource<#= RTDecl #>>(
             this IEnumerable<<#= Name #><TSource<#= RTDecl #>>> source)
         {
-            <#+ WriteNotNull("source", true); #>
+            Debug.Assert(source != null);
             return <#+ WriteFactory("IEnumerable<TSource>"); #>(CollectAnyImpl(source));
         }
 <#+ if (HasSum) { #>

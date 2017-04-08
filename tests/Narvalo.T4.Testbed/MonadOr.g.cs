@@ -445,7 +445,7 @@ namespace Narvalo.T4.Testbed
         public static MonadOr<IEnumerable<TResult>> InvokeWith<TSource, TResult>(
             this Func<TSource, MonadOr<TResult>> @this,
             IEnumerable<TSource> seq)
-            => seq.SelectWith(@this);
+            => seq.Select(@this).Collect();
 
         public static MonadOr<TResult> InvokeWith<TSource, TResult>(
             this Func<TSource, MonadOr<TResult>> @this,
@@ -483,7 +483,8 @@ namespace Narvalo.T4.Testbed
             return source.CollectAnyImpl();
         }
 
-        // **Hidden** because this operator is not composable.
+        // Hidden because this operator is not composable.
+        // Do not disable, we use it in Kleisli.InvokeWith().
         internal static MonadOr<IEnumerable<TSource>> Collect<TSource>(
             this IEnumerable<MonadOr<TSource>> source)
         {
@@ -543,7 +544,7 @@ namespace Narvalo.T4.Testbed.Internal
         internal static MonadOr<IEnumerable<TSource>> CollectImpl<TSource>(
             this IEnumerable<MonadOr<TSource>> source)
         {
-            Require.NotNull(source, nameof(source));
+            Debug.Assert(source != null);
             return MonadOr<IEnumerable<TSource>>.η(CollectAnyImpl(source));
         }
 
@@ -583,48 +584,72 @@ namespace Narvalo.T4.Testbed.Linq
             return source.WhereAnyImpl(predicate);
         }
 
-        // **Hidden** because this operator is not composable.
-        internal static MonadOr<IEnumerable<TResult>> SelectWith<TSource, TResult>(
-            this IEnumerable<TSource> source,
-            Func<TSource, MonadOr<TResult>> selector)
-            => source.SelectWithImpl(selector);
-
-        // **Hidden** because this operator is not composable.
-        internal static MonadOr<IEnumerable<TSource>> WhereBy<TSource>(
-            this IEnumerable<TSource> source,
-            Func<TSource, MonadOr<bool>> predicate)
-            => source.WhereByImpl(predicate);
-
-        // **Hidden** because this operator is not composable.
-        internal static MonadOr<IEnumerable<TResult>> ZipWith<TFirst, TSecond, TResult>(
-            this IEnumerable<TFirst> source,
-            IEnumerable<TSecond> second,
-            Func<TFirst, TSecond, MonadOr<TResult>> resultSelector)
-            => source.ZipWithImpl(second, resultSelector);
+        //
+        // Disabled because these operators are not composable.
+        //
+        //
+        //internal static MonadOr<IEnumerable<TSource>> WhereBy<TSource>(
+        //    this IEnumerable<TSource> source,
+        //    Func<TSource, MonadOr<bool>> predicate)
+        //{
+        //    Require.NotNull(source, nameof(source));
+        //    Require.NotNull(predicate, nameof(predicate));
+        //    return source.WhereByImpl(predicate);
+        //}
+        //
+        //internal static MonadOr<IEnumerable<TResult>> SelectWith<TSource, TResult>(
+        //    this IEnumerable<TSource> source,
+        //    Func<TSource, MonadOr<TResult>> selector)
+        //    => source.SelectWithImpl(selector);
+        //
+        //internal static MonadOr<IEnumerable<TResult>> ZipWith<TFirst, TSecond, TResult>(
+        //    this IEnumerable<TFirst> source,
+        //    IEnumerable<TSecond> second,
+        //    Func<TFirst, TSecond, MonadOr<TResult>> resultSelector)
+        //    => source.ZipWithImpl(second, resultSelector);
+        //
 
         public static MonadOr<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> source,
             TAccumulate seed,
             Func<TAccumulate, TSource, MonadOr<TAccumulate>> accumulator)
-            => source.FoldImpl(seed, accumulator);
+        {
+            Require.NotNull(source, nameof(source));
+            Require.NotNull(accumulator, nameof(accumulator));
+            return source.FoldImpl(seed, accumulator);
+        }
 
         public static MonadOr<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> source,
             TAccumulate seed,
             Func<TAccumulate, TSource, MonadOr<TAccumulate>> accumulator,
             Func<MonadOr<TAccumulate>, bool> predicate)
-            => source.FoldImpl(seed, accumulator, predicate);
+        {
+            Require.NotNull(source, nameof(source));
+            Require.NotNull(accumulator, nameof(accumulator));
+            Require.NotNull(predicate, nameof(predicate));
+            return source.FoldImpl(seed, accumulator, predicate);
+        }
 
         public static MonadOr<TSource> Reduce<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, TSource, MonadOr<TSource>> accumulator)
-            => source.ReduceImpl(accumulator);
+        {
+            Require.NotNull(source, nameof(source));
+            Require.NotNull(accumulator, nameof(accumulator));
+            return source.ReduceImpl(accumulator);
+        }
 
         public static MonadOr<TSource> Reduce<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, TSource, MonadOr<TSource>> accumulator,
             Func<MonadOr<TSource>, bool> predicate)
-            => source.ReduceImpl(accumulator, predicate);
+        {
+            Require.NotNull(source, nameof(source));
+            Require.NotNull(accumulator, nameof(accumulator));
+            Require.NotNull(predicate, nameof(predicate));
+            return source.ReduceImpl(accumulator, predicate);
+        }
     }
 }
 
@@ -634,7 +659,6 @@ namespace Narvalo.T4.Testbed.Internal
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
 
     using Narvalo.T4.Testbed;
 
@@ -670,40 +694,34 @@ namespace Narvalo.T4.Testbed.Internal
             }
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static MonadOr<IEnumerable<TSource>> WhereByImpl<TSource>(
-            this IEnumerable<TSource> source,
-            Func<TSource, MonadOr<bool>> predicate)
-        {
-            Require.NotNull(source, nameof(source));
-            Require.NotNull(predicate, nameof(predicate));
-
-            return MonadOr<IEnumerable<TSource>>.η(WhereAnyImpl(source, predicate));
-        }
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static MonadOr<IEnumerable<TResult>> SelectWithImpl<TSource, TResult>(
-            this IEnumerable<TSource> source,
-            Func<TSource, MonadOr<TResult>> selector)
-        {
-            Debug.Assert(source != null);
-            Debug.Assert(selector != null);
-
-            return source.Select(selector).Collect();
-        }
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static MonadOr<IEnumerable<TResult>> ZipWithImpl<TFirst, TSecond, TResult>(
-            this IEnumerable<TFirst> source,
-            IEnumerable<TSecond> second,
-            Func<TFirst, TSecond, MonadOr<TResult>> resultSelector)
-        {
-            Debug.Assert(resultSelector != null);
-            Debug.Assert(source != null);
-            Debug.Assert(second != null);
-
-            return source.Zip(second, resultSelector).Collect();
-        }
+        //
+        // Parent operators are disabled because they are not composable.
+        //
+        //
+        //[SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        //internal static MonadOr<IEnumerable<TSource>> WhereByImpl<TSource>(
+        //    this IEnumerable<TSource> source,
+        //    Func<TSource, MonadOr<bool>> predicate)
+        //{
+        //    Debug.Assert(source != null);
+        //    Debug.Assert(predicate != null);
+        //
+        //    return MonadOr<IEnumerable<TSource>>.η(WhereAnyImpl(source, predicate));
+        //}
+        //
+        //[SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        //internal static MonadOr<IEnumerable<TResult>> SelectWithImpl<TSource, TResult>(
+        //    this IEnumerable<TSource> source,
+        //    Func<TSource, MonadOr<TResult>> selector)
+        //    => source.Select(selector).Collect();
+        //
+        //[SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        //internal static MonadOr<IEnumerable<TResult>> ZipWithImpl<TFirst, TSecond, TResult>(
+        //    this IEnumerable<TFirst> source,
+        //    IEnumerable<TSecond> second,
+        //    Func<TFirst, TSecond, MonadOr<TResult>> resultSelector)
+        //    => source.Zip(second, resultSelector).Collect();
+        //
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static MonadOr<TAccumulate> FoldImpl<TSource, TAccumulate>(
@@ -711,8 +729,8 @@ namespace Narvalo.T4.Testbed.Internal
             TAccumulate seed,
             Func<TAccumulate, TSource, MonadOr<TAccumulate>> accumulator)
         {
-            Require.NotNull(source, nameof(source));
-            Require.NotNull(accumulator, nameof(accumulator));
+            Debug.Assert(source != null);
+            Debug.Assert(accumulator != null);
 
             MonadOr<TAccumulate> retval = MonadOr<TAccumulate>.η(seed);
 
@@ -736,9 +754,9 @@ namespace Narvalo.T4.Testbed.Internal
             Func<TAccumulate, TSource, MonadOr<TAccumulate>> accumulator,
             Func<MonadOr<TAccumulate>, bool> predicate)
         {
-            Require.NotNull(source, nameof(source));
-            Require.NotNull(accumulator, nameof(accumulator));
-            Require.NotNull(predicate, nameof(predicate));
+            Debug.Assert(source != null);
+            Debug.Assert(accumulator != null);
+            Debug.Assert(predicate != null);
 
             MonadOr<TAccumulate> retval = MonadOr<TAccumulate>.η(seed);
 
@@ -760,8 +778,8 @@ namespace Narvalo.T4.Testbed.Internal
             this IEnumerable<TSource> source,
             Func<TSource, TSource, MonadOr<TSource>> accumulator)
         {
-            Require.NotNull(source, nameof(source));
-            Require.NotNull(accumulator, nameof(accumulator));
+            Debug.Assert(source != null);
+            Debug.Assert(accumulator != null);
 
             using (var iter = source.GetEnumerator())
             {
@@ -789,9 +807,9 @@ namespace Narvalo.T4.Testbed.Internal
             Func<TSource, TSource, MonadOr<TSource>> accumulator,
             Func<MonadOr<TSource>, bool> predicate)
         {
-            Require.NotNull(source, nameof(source));
-            Require.NotNull(accumulator, nameof(accumulator));
-            Require.NotNull(predicate, nameof(predicate));
+            Debug.Assert(source != null);
+            Debug.Assert(accumulator != null);
+            Debug.Assert(predicate != null);
 
             using (var iter = source.GetEnumerator())
             {

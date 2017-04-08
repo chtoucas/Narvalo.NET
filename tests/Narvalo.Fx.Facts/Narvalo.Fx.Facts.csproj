@@ -79,16 +79,12 @@
     <Compile Include="Applicative\MaybeFacts.cs" />
     <Compile Include="Applicative\QullableFacts.cs" />
     <Compile Include="Linq\Aggregate.cs" />
-    <Compile Include="Linq\Collect.cs" />
     <Compile Include="Linq\Reduce.cs" />
     <Compile Include="Linq\Fold.cs" />
     <Compile Include="Linq\QperatorsFacts.cs" />
     <Compile Include="Linq\Sum.cs" />
     <Compile Include="Linq\CollectAny.cs" />
-    <Compile Include="Linq\SelectWith.cs" />
     <Compile Include="Linq\Gather.cs" />
-    <Compile Include="Linq\WhereBy.cs" />
-    <Compile Include="Linq\ZipWith.cs" />
     <Compile Include="Linq\AppendPrepend.cs" />
     <Compile Include="Linq\SingleOrNone.cs" />
     <Compile Include="Linq\LastOrNone.cs" />

@@ -442,7 +442,8 @@ namespace Narvalo.Applicative {
             Func<int, Either<long, My.Obj>> selector = i => Either<long, My.Obj>.OfLeft(arg1 * i);
 
             var invoked = selector.InvokeWith(arg0);
-            var selected = arg0.SelectWith(selector);
+            // SelectWith() is Select().Collect()
+            var selected = arg0.Select(selector).Collect();
 
             var q = from x in invoked
                     from y in selected
