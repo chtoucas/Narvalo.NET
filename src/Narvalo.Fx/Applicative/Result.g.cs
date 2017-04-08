@@ -20,7 +20,6 @@ namespace Narvalo.Applicative
     using System.Linq;
 
     using Narvalo.Internal;
-    using Narvalo.Linq;
 
     // Provides a set of static methods for Result<T, TError>.
     // T4: EmitHelpers().

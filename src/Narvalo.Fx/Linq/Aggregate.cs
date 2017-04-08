@@ -9,34 +9,6 @@ namespace Narvalo.Linq
 
     public static partial class Qperators
     {
-        // Reduce
-        public static TSource Aggregate<TSource>(
-            this IEnumerable<TSource> source,
-            Func<TSource, TSource, TSource> accumulator,
-            Func<TSource, bool> predicate)
-        {
-            Require.NotNull(source, nameof(source));
-            Require.NotNull(accumulator, nameof(accumulator));
-            Require.NotNull(predicate, nameof(predicate));
-
-            using (var iter = source.GetEnumerator())
-            {
-                if (!iter.MoveNext())
-                {
-                    throw new InvalidOperationException(Strings.SequenceIsEmpty);
-                }
-
-                TSource retval = iter.Current;
-
-                while (predicate(retval) && iter.MoveNext())
-                {
-                    retval = accumulator(retval, iter.Current);
-                }
-
-                return retval;
-            }
-        }
-
         // Fold
         public static TAccumulate Aggregate<TSource, TAccumulate>(
             this IEnumerable<TSource> source,
@@ -85,6 +57,34 @@ namespace Narvalo.Linq
             }
 
             return resultSelector(retval);
+        }
+
+        // Reduce
+        public static TSource Aggregate<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TSource, TSource> accumulator,
+            Func<TSource, bool> predicate)
+        {
+            Require.NotNull(source, nameof(source));
+            Require.NotNull(accumulator, nameof(accumulator));
+            Require.NotNull(predicate, nameof(predicate));
+
+            using (var iter = source.GetEnumerator())
+            {
+                if (!iter.MoveNext())
+                {
+                    throw new InvalidOperationException(Strings.SequenceIsEmpty);
+                }
+
+                TSource retval = iter.Current;
+
+                while (predicate(retval) && iter.MoveNext())
+                {
+                    retval = accumulator(retval, iter.Current);
+                }
+
+                return retval;
+            }
         }
     }
 }

@@ -20,7 +20,6 @@ namespace Narvalo.T4.Testbed
     using System.Linq;
 
     using Narvalo.T4.Testbed.Internal;
-    using Narvalo.T4.Testbed.Linq;
 
     // Provides a set of static methods for MonadZero<T>.
     // T4: EmitHelpers().

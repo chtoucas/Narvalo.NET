@@ -757,9 +757,10 @@ Element        | `FirstOrNone`        | `Maybe<T>`                 | -
 |              | `LastOrNone`         | `Maybe<T>`                 | -
 |              | `ElementAtOrNone`    | `Maybe<T>`                 | -
 |              | `SingleOrNone`       | `Maybe<T>`                 | -
-Aggregation    | `Aggregate` (reduce) | `T`                        | -
-|              | `Aggregate` (fold)   | `TResult` or `TAccumulate` | -
+Aggregation    | `Aggregate` (Reduce) | `T`                        | -
 |              | `Reduce`             | `Monad<T>`                 | -
+|              | `Aggregate` (Fold)   | `TResult`                  | -
+|              | `Aggregate` (Fold)   | `TAccumulate`              | -
 |              | `Fold`               | `Monad<TAccumulate>`       | -
 Quantification | `IsEmpty`            | `bool`                     | -
 Generation     | `EmptyIfNull`        | `IEnumerable<T>`           | -
@@ -804,14 +805,16 @@ Operator | Return Type | Deferred
 `Of`          | `IEnumerable<T>`           | Streaming
 `Gather`      | `IEnumerable<T>`           | Streaming
 `Unfold`      | `IEnumerable<T>`           | Streaming
-`Repeat`      | `Monad<IEnumerable<T>>`    | Streaming
 
 ### <a name="linq-specialized"></a>Specialized Operators
 
+These are operators that are defined in `Narvalo.Applicative`.
+
 Category | Operator | Return Type | Deferred |
 -------- | -------- | ----------- | :------: |
-Restriction | `CollectAny` | `IEnumerable<T>` | Streaming
-Aggregation | `Sum` (*)    | `Maybe<T>`       | -
+Restriction | `CollectAny` | `IEnumerable<T>`        | Streaming
+Aggregation | `Sum` (*)    | `Maybe<T>`              | -
+Generation  | `Repeat`     | `Monad<IEnumerable<T>>` | Streaming
 
 #### `CollectAny`
 `CollectAny` acts on an `IEnumerable<Monad<T>>`.

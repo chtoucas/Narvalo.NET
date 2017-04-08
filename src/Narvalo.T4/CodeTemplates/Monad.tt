@@ -48,10 +48,6 @@ namespace <#= Namespace #>
     using System.Linq;
 
     using <#= InternalNamespace #>;
-<#+ if (EmitLinq) { #>
-    using <#= LinqNamespace #>;
-<#+ } #>
-
 <#+
         // Disabled.
         //WriteLine();
