@@ -477,16 +477,16 @@ To repeat myself, this is not a recommended practice. Anyway,
   `InvalidOperationException`. There is also an overload which accepts a factory
    as parameter.
 
-Let me show you another way to access the enclosed value of a "maybe",
+Let me show you another way to access the enclosed value of a "maybe".
 `Maybe<T>` does not implement `IEnumerable<T>` but you can iterate over it:
 ```csharp
 foreach (T value in maybe) { ... }
 ```
 
 **Remark.** We could have implemented `IEnumerable<T>` but we didn't since it
-would have enabled LINQ to Objects, something we certainly do not want (- )what
+would have enabled LINQ to Objects, something we certainly do not want (what
 would mean `orderby` on a "maybe"?), at least in this form (see
-[here](#maybe-querying] and [here](#maybe-linq) for more on this).
+[here](#maybe-querying) and [here](#maybe-linq) for more on this).
 
 ### <a name="maybe-matching"></a>Matching
 
