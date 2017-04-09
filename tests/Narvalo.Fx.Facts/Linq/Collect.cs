@@ -1,8 +1,7 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-/*
- * DISABLED
- */
+#if !NO_INTERNALS_VISIBLE_TO
+
 namespace Narvalo.Linq {
     using System;
     using System.Collections.Generic;
@@ -106,3 +105,5 @@ namespace Narvalo.Linq {
         }
     }
 }
+
+#endif

@@ -1,8 +1,7 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-/*
- * DISABLED
- */
+#if EXTENDED_LINQ
+
 namespace Narvalo.Linq {
     using System;
     using System.Linq;
@@ -81,3 +80,5 @@ namespace Narvalo.Linq {
         }
     }
 }
+
+#endif
