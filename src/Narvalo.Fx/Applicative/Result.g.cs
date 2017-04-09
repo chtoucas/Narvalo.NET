@@ -383,7 +383,7 @@ namespace Narvalo.Internal
     using Narvalo.Applicative;
 
     // Provides default implementations for the extension methods for IEnumerable<Result<T, TError>>.
-    // You will certainly want to override them to improve performance.
+    // You will certainly want to shadow them to improve performance.
     // T4: EmitEnumerableInternal().
     internal static partial class EnumerableExtensions
     {
@@ -435,11 +435,6 @@ namespace Narvalo.Linq
     using Narvalo.Internal;
 
     // Provides extension methods for IEnumerable<T>.
-    // We do not use the standard LINQ names to avoid any confusion.
-    // - Select    -> SelectWith
-    // - Where     -> WhereBy
-    // - Zip       -> ZipWith
-    // - Aggregate -> Reduce or Fold
     // T4: EmitLinqCore().
     public static partial class Qperators
     {
@@ -451,31 +446,6 @@ namespace Narvalo.Linq
             Require.NotNull(predicate, nameof(predicate));
             return source.WhereAnyImpl(predicate);
         }
-
-        //
-        // Disabled because these operators are not composable.
-        //
-        //
-        //internal static Result<IEnumerable<TSource>, TError> WhereBy<TSource, TError>(
-        //    this IEnumerable<TSource> source,
-        //    Func<TSource, Result<bool, TError>> predicate)
-        //{
-        //    Require.NotNull(source, nameof(source));
-        //    Require.NotNull(predicate, nameof(predicate));
-        //    return source.WhereByImpl(predicate);
-        //}
-        //
-        //internal static Result<IEnumerable<TResult>, TError> SelectWith<TSource, TResult, TError>(
-        //    this IEnumerable<TSource> source,
-        //    Func<TSource, Result<TResult, TError>> selector)
-        //    => source.SelectWithImpl(selector);
-        //
-        //internal static Result<IEnumerable<TResult>, TError> ZipWith<TFirst, TSecond, TResult, TError>(
-        //    this IEnumerable<TFirst> source,
-        //    IEnumerable<TSecond> second,
-        //    Func<TFirst, TSecond, Result<TResult, TError>> resultSelector)
-        //    => source.ZipWithImpl(second, resultSelector);
-        //
 
         public static Result<TAccumulate, TError> Fold<TSource, TAccumulate, TError>(
             this IEnumerable<TSource> source,
@@ -531,7 +501,7 @@ namespace Narvalo.Internal
     using Narvalo.Applicative;
 
     // Provides default implementations for the extension methods for IEnumerable<T>.
-    // You will certainly want to override them to improve performance.
+    // You will certainly want to shadow them to improve performance.
     // T4: EmitLinqInternal().
     internal static partial class EnumerableExtensions
     {
@@ -563,35 +533,6 @@ namespace Narvalo.Internal
                 }
             }
         }
-
-        //
-        // Parent operators are disabled because they are not composable.
-        //
-        //
-        //[SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        //internal static Result<IEnumerable<TSource>, TError> WhereByImpl<TSource, TError>(
-        //    this IEnumerable<TSource> source,
-        //    Func<TSource, Result<bool, TError>> predicate)
-        //{
-        //    Debug.Assert(source != null);
-        //    Debug.Assert(predicate != null);
-        //
-        //    return Result<IEnumerable<TSource>, TError>.Of(WhereAnyImpl(source, predicate));
-        //}
-        //
-        //[SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        //internal static Result<IEnumerable<TResult>, TError> SelectWithImpl<TSource, TResult, TError>(
-        //    this IEnumerable<TSource> source,
-        //    Func<TSource, Result<TResult, TError>> selector)
-        //    => source.Select(selector).Collect();
-        //
-        //[SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        //internal static Result<IEnumerable<TResult>, TError> ZipWithImpl<TFirst, TSecond, TResult, TError>(
-        //    this IEnumerable<TFirst> source,
-        //    IEnumerable<TSecond> second,
-        //    Func<TFirst, TSecond, Result<TResult, TError>> resultSelector)
-        //    => source.Zip(second, resultSelector).Collect();
-        //
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Result<TAccumulate, TError> FoldImpl<TSource, TAccumulate, TError>(

@@ -12,7 +12,11 @@ public partial class MonadTemplate
         public static <#= Name #><IEnumerable<TResult><#= RTDecl #>> InvokeWith<TSource, TResult<#= RTDecl #>>(
             this Func<TSource, <#= Name #><TResult<#= RTDecl #>>> @this,
             IEnumerable<TSource> seq)
+<#+ if (EmitExtendedLinq) { #>
+            => seq.SelectWith(@this);
+<#+ } else { #>
             => seq.Select(@this).Collect();
+<#+ } #>
 
         public static <#= Name #><TResult<#= RTDecl #>> InvokeWith<TSource, TResult<#= RTDecl #>>(
             this Func<TSource, <#= Name #><TResult<#= RTDecl #>>> @this,

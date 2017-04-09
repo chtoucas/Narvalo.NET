@@ -20,6 +20,47 @@ namespace Narvalo.T4.Testbed
     using System.Linq;
 
     using Narvalo.T4.Testbed.Internal;
+    using Narvalo.T4.Testbed.Linq;
+
+    // Provides EXPERIMENTAL methods for Monad<T>.
+    // T4: EmitMethodsExperimental().
+    public partial class Monad<T>
+    {
+        public void Forever(Action<T> action)
+        {
+            Require.NotNull(action, nameof(action));
+
+            ForeverImpl(action);
+        }
+
+        partial void ForeverImpl(Action<T> action);
+
+        public void While(Func<bool> condition, Action<T> action)
+        {
+            Require.NotNull(condition, nameof(condition));
+            Require.NotNull(action, nameof(action));
+
+            Bind(val =>
+            {
+                while (condition()) { action(val); }
+
+                return Monad.Unit;
+            });
+        }
+
+        public void Until(Func<bool> condition, Action<T> action)
+        {
+            Require.NotNull(condition, nameof(condition));
+            Require.NotNull(action, nameof(action));
+
+            Bind(val =>
+            {
+                while (!condition()) { action(val); }
+
+                return Monad.Unit;
+            });
+        }
+    }
 
     // Provides a set of static methods for Monad<T>.
     // T4: EmitHelpers().
@@ -322,6 +363,30 @@ namespace Narvalo.T4.Testbed
         #endregion
     }
 
+    // Provides EXPERIMENTAL extension methods for Monad<T>.
+    // T4: EmitExtensionsExperimental().
+    public static partial class Monad
+    {
+        public static Monad<(T1, T2)> Zip<T1, T2>(
+            this Monad<T1> @this,
+            Monad<T2> other)
+        {
+            Require.NotNull(@this, nameof(@this));
+            return @this.Zip(other, ValueTuple.Create);
+        }
+
+        public static Monad<TResult> Coalesce<TSource, TResult>(
+            this Monad<TSource> @this,
+            Func<TSource, bool> predicate,
+            Monad<TResult> thenResult,
+            Monad<TResult> elseResult)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+            return @this.Bind(val => predicate(val) ? thenResult : elseResult);
+        }
+    }
+
     // Provides extension methods for Monad<Func<TSource, TResult>>.
     // T4: EmitApplicative().
     public static partial class Ap
@@ -343,7 +408,7 @@ namespace Narvalo.T4.Testbed
         public static Monad<IEnumerable<TResult>> InvokeWith<TSource, TResult>(
             this Func<TSource, Monad<TResult>> @this,
             IEnumerable<TSource> seq)
-            => seq.Select(@this).Collect();
+            => seq.SelectWith(@this);
 
         public static Monad<TResult> InvokeWith<TSource, TResult>(
             this Func<TSource, Monad<TResult>> @this,
@@ -381,9 +446,7 @@ namespace Narvalo.T4.Testbed
             return source.CollectAnyImpl();
         }
 
-        // Hidden because this operator is not composable.
-        // Do not disable, we use it in Kleisli.InvokeWith().
-        internal static Monad<IEnumerable<TSource>> Collect<TSource>(
+        public static Monad<IEnumerable<TSource>> Collect<TSource>(
             this IEnumerable<Monad<TSource>> source)
         {
             Require.NotNull(source, nameof(source));
@@ -401,7 +464,7 @@ namespace Narvalo.T4.Testbed.Internal
     using Narvalo.T4.Testbed;
 
     // Provides default implementations for the extension methods for IEnumerable<Monad<T>>.
-    // You will certainly want to override them to improve performance.
+    // You will certainly want to shadow them to improve performance.
     // T4: EmitEnumerableInternal().
     internal static partial class EnumerableExtensions
     {
@@ -452,14 +515,32 @@ namespace Narvalo.T4.Testbed.Linq
     using Narvalo.T4.Testbed.Internal;
 
     // Provides extension methods for IEnumerable<T>.
-    // We do not use the standard LINQ names to avoid any confusion.
-    // - Select    -> SelectWith
-    // - Where     -> WhereBy
-    // - Zip       -> ZipWith
-    // - Aggregate -> Reduce or Fold
     // T4: EmitLinqCore().
     public static partial class Qperators
     {
+        // NB: This operator is not composable.
+        public static Monad<IEnumerable<TSource>> WhereBy<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, Monad<bool>> predicate)
+        {
+            Require.NotNull(source, nameof(source));
+            Require.NotNull(predicate, nameof(predicate));
+            return source.WhereByImpl(predicate);
+        }
+
+        // NB: This operator is not composable.
+        public static Monad<IEnumerable<TResult>> SelectWith<TSource, TResult>(
+            this IEnumerable<TSource> source,
+            Func<TSource, Monad<TResult>> selector)
+            => source.SelectWithImpl(selector);
+
+        // NB: This operator is not composable.
+        public static Monad<IEnumerable<TResult>> ZipWith<TFirst, TSecond, TResult>(
+            this IEnumerable<TFirst> source,
+            IEnumerable<TSecond> second,
+            Func<TFirst, TSecond, Monad<TResult>> resultSelector)
+            => source.ZipWithImpl(second, resultSelector);
+
         public static IEnumerable<TSource> WhereAny<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, Monad<bool>> predicate)
@@ -468,31 +549,6 @@ namespace Narvalo.T4.Testbed.Linq
             Require.NotNull(predicate, nameof(predicate));
             return source.WhereAnyImpl(predicate);
         }
-
-        //
-        // Disabled because these operators are not composable.
-        //
-        //
-        //internal static Monad<IEnumerable<TSource>> WhereBy<TSource>(
-        //    this IEnumerable<TSource> source,
-        //    Func<TSource, Monad<bool>> predicate)
-        //{
-        //    Require.NotNull(source, nameof(source));
-        //    Require.NotNull(predicate, nameof(predicate));
-        //    return source.WhereByImpl(predicate);
-        //}
-        //
-        //internal static Monad<IEnumerable<TResult>> SelectWith<TSource, TResult>(
-        //    this IEnumerable<TSource> source,
-        //    Func<TSource, Monad<TResult>> selector)
-        //    => source.SelectWithImpl(selector);
-        //
-        //internal static Monad<IEnumerable<TResult>> ZipWith<TFirst, TSecond, TResult>(
-        //    this IEnumerable<TFirst> source,
-        //    IEnumerable<TSecond> second,
-        //    Func<TFirst, TSecond, Monad<TResult>> resultSelector)
-        //    => source.ZipWithImpl(second, resultSelector);
-        //
 
         public static Monad<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> source,
@@ -544,14 +600,39 @@ namespace Narvalo.T4.Testbed.Internal
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
 
     using Narvalo.T4.Testbed;
 
     // Provides default implementations for the extension methods for IEnumerable<T>.
-    // You will certainly want to override them to improve performance.
+    // You will certainly want to shadow them to improve performance.
     // T4: EmitLinqInternal().
     internal static partial class EnumerableExtensions
     {
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static Monad<IEnumerable<TSource>> WhereByImpl<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, Monad<bool>> predicate)
+        {
+            Debug.Assert(source != null);
+            Debug.Assert(predicate != null);
+
+            return Monad<IEnumerable<TSource>>.η(WhereAnyImpl(source, predicate));
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static Monad<IEnumerable<TResult>> SelectWithImpl<TSource, TResult>(
+            this IEnumerable<TSource> source,
+            Func<TSource, Monad<TResult>> selector)
+            => source.Select(selector).Collect();
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static Monad<IEnumerable<TResult>> ZipWithImpl<TFirst, TSecond, TResult>(
+            this IEnumerable<TFirst> source,
+            IEnumerable<TSecond> second,
+            Func<TFirst, TSecond, Monad<TResult>> resultSelector)
+            => source.Zip(second, resultSelector).Collect();
+
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static IEnumerable<TSource> WhereAnyImpl<TSource>(
             this IEnumerable<TSource> source,
@@ -578,35 +659,6 @@ namespace Narvalo.T4.Testbed.Internal
                 }
             }
         }
-
-        //
-        // Parent operators are disabled because they are not composable.
-        //
-        //
-        //[SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        //internal static Monad<IEnumerable<TSource>> WhereByImpl<TSource>(
-        //    this IEnumerable<TSource> source,
-        //    Func<TSource, Monad<bool>> predicate)
-        //{
-        //    Debug.Assert(source != null);
-        //    Debug.Assert(predicate != null);
-        //
-        //    return Monad<IEnumerable<TSource>>.η(WhereAnyImpl(source, predicate));
-        //}
-        //
-        //[SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        //internal static Monad<IEnumerable<TResult>> SelectWithImpl<TSource, TResult>(
-        //    this IEnumerable<TSource> source,
-        //    Func<TSource, Monad<TResult>> selector)
-        //    => source.Select(selector).Collect();
-        //
-        //[SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        //internal static Monad<IEnumerable<TResult>> ZipWithImpl<TFirst, TSecond, TResult>(
-        //    this IEnumerable<TFirst> source,
-        //    IEnumerable<TSecond> second,
-        //    Func<TFirst, TSecond, Monad<TResult>> resultSelector)
-        //    => source.Zip(second, resultSelector).Collect();
-        //
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Monad<TAccumulate> FoldImpl<TSource, TAccumulate>(

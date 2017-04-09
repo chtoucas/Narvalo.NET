@@ -6,10 +6,36 @@ public partial class MonadTemplate
     {
 #>
     // Provides default implementations for the extension methods for IEnumerable<T>.
-    // You will certainly want to override them to improve performance.
+    // You will certainly want to shadow them to improve performance.
     // T4: EmitLinqInternal().
     internal static partial class EnumerableExtensions
     {
+<#+ if (EmitExtendedLinq) { #>
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static <#= Name #><IEnumerable<TSource><#= RTDecl #>> WhereByImpl<TSource<#= RTDecl #>>(
+            this IEnumerable<TSource> source,
+            Func<TSource, <#= Name #><bool<#= RTDecl #>>> predicate)
+        {
+            Debug.Assert(source != null);
+            Debug.Assert(predicate != null);
+
+            return <#+ WriteFactory("IEnumerable<TSource>"); #>(WhereAnyImpl(source, predicate));
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static <#= Name #><IEnumerable<TResult><#= RTDecl #>> SelectWithImpl<TSource, TResult<#= RTDecl #>>(
+            this IEnumerable<TSource> source,
+            Func<TSource, <#= Name #><TResult<#= RTDecl #>>> selector)
+            => source.Select(selector).Collect();
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static <#= Name #><IEnumerable<TResult><#= RTDecl #>> ZipWithImpl<TFirst, TSecond, TResult<#= RTDecl #>>(
+            this IEnumerable<TFirst> source,
+            IEnumerable<TSecond> second,
+            Func<TFirst, TSecond, <#= Name #><TResult<#= RTDecl #>>> resultSelector)
+            => source.Zip(second, resultSelector).Collect();
+
+<#+ } // End of EmitExtendedLinq #>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static IEnumerable<TSource> WhereAnyImpl<TSource<#= RTDecl #>>(
             this IEnumerable<TSource> source,
@@ -44,35 +70,6 @@ public partial class MonadTemplate
                 }
             }
         }
-
-        //
-        // Parent operators are disabled because they are not composable.
-        //
-        //
-        //[SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        //internal static <#= Name #><IEnumerable<TSource><#= RTDecl #>> WhereByImpl<TSource<#= RTDecl #>>(
-        //    this IEnumerable<TSource> source,
-        //    Func<TSource, <#= Name #><bool<#= RTDecl #>>> predicate)
-        //{
-        //    Debug.Assert(source != null);
-        //    Debug.Assert(predicate != null);
-        //
-        //    return <#+ WriteFactory("IEnumerable<TSource>"); #>(WhereAnyImpl(source, predicate));
-        //}
-        //
-        //[SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        //internal static <#= Name #><IEnumerable<TResult><#= RTDecl #>> SelectWithImpl<TSource, TResult<#= RTDecl #>>(
-        //    this IEnumerable<TSource> source,
-        //    Func<TSource, <#= Name #><TResult<#= RTDecl #>>> selector)
-        //    => source.Select(selector).Collect();
-        //
-        //[SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        //internal static <#= Name #><IEnumerable<TResult><#= RTDecl #>> ZipWithImpl<TFirst, TSecond, TResult<#= RTDecl #>>(
-        //    this IEnumerable<TFirst> source,
-        //    IEnumerable<TSecond> second,
-        //    Func<TFirst, TSecond, <#= Name #><TResult<#= RTDecl #>>> resultSelector)
-        //    => source.Zip(second, resultSelector).Collect();
-        //
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static <#= Name #><TAccumulate<#= RTDecl #>> FoldImpl<TSource, TAccumulate<#= RTDecl #>>(

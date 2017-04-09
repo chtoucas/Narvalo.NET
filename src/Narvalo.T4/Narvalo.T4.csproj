@@ -50,9 +50,9 @@
     <None Include="CodeTemplates\Either.tt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="CodeTemplates\Monad\EmitMethods.tt" />
+    <None Include="CodeTemplates\Monad\_EmitMethodsExperimental.tt" />
     <None Include="CodeTemplates\Outcome.tt" />
-    <None Include="CodeTemplates\Monad\EmitExtensionsExtras.tt" />
+    <None Include="CodeTemplates\Monad\_EmitExtensionsExperimental.tt" />
     <None Include="CodeTemplates\Monad\EmitApplicative.tt" />
     <None Include="README.md" />
   </ItemGroup>

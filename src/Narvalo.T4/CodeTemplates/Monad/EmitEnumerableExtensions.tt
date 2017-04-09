@@ -16,9 +16,13 @@ public partial class MonadTemplate
             return source.CollectAnyImpl();
         }
 
+<#+ if (EmitExtendedLinq) { #>
+        public static <#= Name #><IEnumerable<TSource><#= RTDecl #>> Collect<TSource<#= RTDecl #>>(
+<#+ } else { #>
         // Hidden because this operator is not composable.
         // Do not disable, we use it in Kleisli.InvokeWith().
         internal static <#= Name #><IEnumerable<TSource><#= RTDecl #>> Collect<TSource<#= RTDecl #>>(
+<#+ } #>
             this IEnumerable<<#= Name #><TSource<#= RTDecl #>>> source)
         {
             <#+ WriteNotNull("source", true); #>

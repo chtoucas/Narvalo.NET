@@ -503,10 +503,9 @@ namespace Narvalo.Internal
     using System.Linq;
 
     using Narvalo.Applicative;
-    using Narvalo.Linq;
 
     // Provides default implementations for the extension methods for IEnumerable<Maybe<T>>.
-    // You will certainly want to override them to improve performance.
+    // You will certainly want to shadow them to improve performance.
     // T4: EmitEnumerableInternal().
     internal static partial class EnumerableExtensions
     {
@@ -565,11 +564,6 @@ namespace Narvalo.Linq
     using Narvalo.Internal;
 
     // Provides extension methods for IEnumerable<T>.
-    // We do not use the standard LINQ names to avoid any confusion.
-    // - Select    -> SelectWith
-    // - Where     -> WhereBy
-    // - Zip       -> ZipWith
-    // - Aggregate -> Reduce or Fold
     // T4: EmitLinqCore().
     public static partial class Qperators
     {
@@ -581,31 +575,6 @@ namespace Narvalo.Linq
             Require.NotNull(predicate, nameof(predicate));
             return source.WhereAnyImpl(predicate);
         }
-
-        //
-        // Disabled because these operators are not composable.
-        //
-        //
-        //internal static Maybe<IEnumerable<TSource>> WhereBy<TSource>(
-        //    this IEnumerable<TSource> source,
-        //    Func<TSource, Maybe<bool>> predicate)
-        //{
-        //    Require.NotNull(source, nameof(source));
-        //    Require.NotNull(predicate, nameof(predicate));
-        //    return source.WhereByImpl(predicate);
-        //}
-        //
-        //internal static Maybe<IEnumerable<TResult>> SelectWith<TSource, TResult>(
-        //    this IEnumerable<TSource> source,
-        //    Func<TSource, Maybe<TResult>> selector)
-        //    => source.SelectWithImpl(selector);
-        //
-        //internal static Maybe<IEnumerable<TResult>> ZipWith<TFirst, TSecond, TResult>(
-        //    this IEnumerable<TFirst> source,
-        //    IEnumerable<TSecond> second,
-        //    Func<TFirst, TSecond, Maybe<TResult>> resultSelector)
-        //    => source.ZipWithImpl(second, resultSelector);
-        //
 
         public static Maybe<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> source,
@@ -661,7 +630,7 @@ namespace Narvalo.Internal
     using Narvalo.Applicative;
 
     // Provides default implementations for the extension methods for IEnumerable<T>.
-    // You will certainly want to override them to improve performance.
+    // You will certainly want to shadow them to improve performance.
     // T4: EmitLinqInternal().
     internal static partial class EnumerableExtensions
     {
@@ -691,35 +660,6 @@ namespace Narvalo.Internal
                 }
             }
         }
-
-        //
-        // Parent operators are disabled because they are not composable.
-        //
-        //
-        //[SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        //internal static Maybe<IEnumerable<TSource>> WhereByImpl<TSource>(
-        //    this IEnumerable<TSource> source,
-        //    Func<TSource, Maybe<bool>> predicate)
-        //{
-        //    Debug.Assert(source != null);
-        //    Debug.Assert(predicate != null);
-        //
-        //    return Maybe<IEnumerable<TSource>>.η(WhereAnyImpl(source, predicate));
-        //}
-        //
-        //[SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        //internal static Maybe<IEnumerable<TResult>> SelectWithImpl<TSource, TResult>(
-        //    this IEnumerable<TSource> source,
-        //    Func<TSource, Maybe<TResult>> selector)
-        //    => source.Select(selector).Collect();
-        //
-        //[SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        //internal static Maybe<IEnumerable<TResult>> ZipWithImpl<TFirst, TSecond, TResult>(
-        //    this IEnumerable<TFirst> source,
-        //    IEnumerable<TSecond> second,
-        //    Func<TFirst, TSecond, Maybe<TResult>> resultSelector)
-        //    => source.Zip(second, resultSelector).Collect();
-        //
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Maybe<TAccumulate> FoldImpl<TSource, TAccumulate>(

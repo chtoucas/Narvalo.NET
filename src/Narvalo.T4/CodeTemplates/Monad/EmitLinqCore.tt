@@ -6,14 +6,34 @@ public partial class MonadTemplate
     {
 #>
     // Provides extension methods for IEnumerable<T>.
-    // We do not use the standard LINQ names to avoid any confusion.
-    // - Select    -> SelectWith
-    // - Where     -> WhereBy
-    // - Zip       -> ZipWith
-    // - Aggregate -> Reduce or Fold
     // T4: EmitLinqCore().
     public static partial class Qperators
     {
+<#+ if (EmitExtendedLinq) { #>
+        // NB: This operator is not composable.
+        public static <#= Name #><IEnumerable<TSource><#= RTDecl #>> WhereBy<TSource<#= RTDecl #>>(
+            this IEnumerable<TSource> source,
+            Func<TSource, <#= Name #><bool<#= RTDecl #>>> predicate)
+        {
+            <#+ WriteNotNull("source", true); #>
+            Require.NotNull(predicate, nameof(predicate));
+            return source.WhereByImpl(predicate);
+        }
+
+        // NB: This operator is not composable.
+        public static <#= Name #><IEnumerable<TResult><#= RTDecl #>> SelectWith<TSource, TResult<#= RTDecl #>>(
+            this IEnumerable<TSource> source,
+            Func<TSource, <#= Name #><TResult<#= RTDecl #>>> selector)
+            => source.SelectWithImpl(selector);
+
+        // NB: This operator is not composable.
+        public static <#= Name #><IEnumerable<TResult><#= RTDecl #>> ZipWith<TFirst, TSecond, TResult<#= RTDecl #>>(
+            this IEnumerable<TFirst> source,
+            IEnumerable<TSecond> second,
+            Func<TFirst, TSecond, <#= Name #><TResult<#= RTDecl #>>> resultSelector)
+            => source.ZipWithImpl(second, resultSelector);
+
+<#+ } // End of EmitExtendedLinq #>
         public static IEnumerable<TSource> WhereAny<TSource<#= RTDecl #>>(
             this IEnumerable<TSource> source,
             Func<TSource, <#= Name #><bool<#= RTDecl #>>> predicate)
@@ -22,31 +42,6 @@ public partial class MonadTemplate
             Require.NotNull(predicate, nameof(predicate));
             return source.WhereAnyImpl(predicate);
         }
-
-        //
-        // Disabled because these operators are not composable.
-        //
-        //
-        //internal static <#= Name #><IEnumerable<TSource><#= RTDecl #>> WhereBy<TSource<#= RTDecl #>>(
-        //    this IEnumerable<TSource> source,
-        //    Func<TSource, <#= Name #><bool<#= RTDecl #>>> predicate)
-        //{
-        //    <#+ WriteNotNull("source", true); #>
-        //    Require.NotNull(predicate, nameof(predicate));
-        //    return source.WhereByImpl(predicate);
-        //}
-        //
-        //internal static <#= Name #><IEnumerable<TResult><#= RTDecl #>> SelectWith<TSource, TResult<#= RTDecl #>>(
-        //    this IEnumerable<TSource> source,
-        //    Func<TSource, <#= Name #><TResult<#= RTDecl #>>> selector)
-        //    => source.SelectWithImpl(selector);
-        //
-        //internal static <#= Name #><IEnumerable<TResult><#= RTDecl #>> ZipWith<TFirst, TSecond, TResult<#= RTDecl #>>(
-        //    this IEnumerable<TFirst> source,
-        //    IEnumerable<TSecond> second,
-        //    Func<TFirst, TSecond, <#= Name #><TResult<#= RTDecl #>>> resultSelector)
-        //    => source.ZipWithImpl(second, resultSelector);
-        //
 
         public static <#= Name #><TAccumulate<#= RTDecl #>> Fold<TSource, TAccumulate<#= RTDecl #>>(
             this IEnumerable<TSource> source,

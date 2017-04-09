@@ -6,7 +6,7 @@ public partial class MonadTemplate
     {
 #>
     // Provides default implementations for the extension methods for IEnumerable<<#= Name #><T<#= RTDecl #>>>.
-    // You will certainly want to override them to improve performance.
+    // You will certainly want to shadow them to improve performance.
     // T4: EmitEnumerableInternal().
     internal static partial class EnumerableExtensions
     {

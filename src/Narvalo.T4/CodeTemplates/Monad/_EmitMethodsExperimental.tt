@@ -2,17 +2,18 @@
 
 public partial class MonadTemplate
 {
-    protected void EmitMethods()
+    protected void EmitMethodsExperimental()
     {
 #>
-    // T4: EmitMethods().
+    // Provides EXPERIMENTAL methods for <#= Name #><<#= GenericsDecl #>>.
+    // T4: EmitMethodsExperimental().
     public partial <#= ClassTypeDecl #> <#= Name #><<#= GenericsDecl #>>
     {
 <#+ if (HasRightGenerics) { #>
         private static readonly <#= Name #><unit<#= RTDecl #>> s_Unit
             = <#+ WriteFactory("Unit"); #>(unit.Default);
-<#+ } #>
 
+<#+ } #>
         public void Forever(Action<<#= MainGeneric #>> action)
         {
             Require.NotNull(action, nameof(action));
@@ -22,14 +23,14 @@ public partial class MonadTemplate
 
         partial void ForeverImpl(Action<<#= MainGeneric #>> action);
 
-        public void While(Func<bool> istrue, Action<<#= MainGeneric #>> action)
+        public void While(Func<bool> condition, Action<<#= MainGeneric #>> action)
         {
-            Require.NotNull(istrue, nameof(istrue));
+            Require.NotNull(condition, nameof(condition));
             Require.NotNull(action, nameof(action));
 
             Bind(val =>
             {
-                while (istrue()) { action(val); }
+                while (condition()) { action(val); }
 
 <#+ if (HasRightGenerics) { #>
                 return s_Unit;
@@ -39,14 +40,14 @@ public partial class MonadTemplate
             });
         }
 
-        public void Until(Func<bool> istrue, Action<<#= MainGeneric #>> action)
+        public void Until(Func<bool> condition, Action<<#= MainGeneric #>> action)
         {
-            Require.NotNull(istrue, nameof(istrue));
+            Require.NotNull(condition, nameof(condition));
             Require.NotNull(action, nameof(action));
 
             Bind(val =>
             {
-                while (!istrue()) { action(val); }
+                while (!condition()) { action(val); }
 
 <#+ if (HasRightGenerics) { #>
                 return s_Unit;
@@ -55,7 +56,7 @@ public partial class MonadTemplate
 <#+ } #>
             });
         }
-    } // End of <#= Name #> - T4: EmitMethods().
+    }
 <#+
     } // T4: End of EmitMethods().
 } // T4: End of MonadTemplate.

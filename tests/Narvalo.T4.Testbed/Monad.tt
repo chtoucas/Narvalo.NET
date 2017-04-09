@@ -7,6 +7,12 @@
     public partial class _Template : MonadTemplate
     {
         public _Template(TextTransformation parent) : base(parent) { }
+
+        public override void Initialize()
+        {
+            EmitExtendedLinq = true;
+            EmitExperimental = true;
+        }
     }
 
 #>

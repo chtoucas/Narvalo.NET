@@ -1,28 +1,29 @@
 ﻿<#@ assembly name="$(T4NarvaloLibrary)" #>
 <#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
 <#@ import namespace="Narvalo.T4" #>
-<#@ include file="Monad\EmitMethods.tt" #>
 <#@ include file="Monad\EmitHelpers.tt" #>
 <#@ include file="Monad\EmitExtensions.tt" #>
-<#@ include file="Monad\EmitExtensionsExtras.tt" #>
 <#@ include file="Monad\EmitApplicative.tt" #>
 <#@ include file="Monad\EmitKleisli.tt" #>
 <#@ include file="Monad\EmitEnumerableExtensions.tt" #>
 <#@ include file="Monad\EmitEnumerableInternal.tt" #>
 <#@ include file="Monad\EmitLinqCore.tt" #>
 <#@ include file="Monad\EmitLinqInternal.tt" #>
-<#@ include file="Monad\EmitComonadHelpers.tt" #><#+
+<#@ include file="Monad\EmitComonadHelpers.tt" #>
+<#@ include file="Monad\_EmitMethodsExperimental.tt" #>
+<#@ include file="Monad\_EmitExtensionsExperimental.tt" #><#+
 
 // WARNINGs:
 // This templates depend on:
-// - The classes Narvalo.Require (Narvalo.Core).
-// - The class Narvalo.Applicative.Unit (Narvalo.Fx).
-// - Enumerable extensions in Narvalo.Linq (Narvalo.Fx).
-// The generated files are free of CA warnings except for CA1006:DoNotNestGenericTypesInMemberSignatures.
+// - The class Narvalo.Require (Narvalo.Core).
+// - The struct Narvalo.Applicative.Unit (Narvalo.Fx).
 
 public abstract partial class MonadTemplate : _MonadTemplate
 {
     protected MonadTemplate(TextTransformation parent) : base(parent) { }
+
+    protected bool EmitExtendedLinq { get; set; }
+    protected bool EmitExperimental { get; set; }
 
     protected override void WriteContent()
     {
@@ -48,10 +49,14 @@ namespace <#= Namespace #>
     using System.Linq;
 
     using <#= InternalNamespace #>;
+<#+ if (EmitExtendedLinq) { #>
+    using <#= LinqNamespace #>;
+<#+ } #>
 <#+
-        // Disabled.
-        //WriteLine();
-        //EmitMethods();
+        if (EmitExperimental) {
+            WriteLine();
+            EmitMethodsExperimental();
+        }
 
         WriteLine();
         EmitHelpers();
@@ -59,9 +64,10 @@ namespace <#= Namespace #>
         WriteLine();
         EmitExtensions();
 
-        // Disabled
-        //WriteLine();
-        //EmitExtensionsExtras();
+        if (EmitExperimental) {
+            WriteLine();
+            EmitExtensionsExperimental();
+        }
 
         WriteLine();
         EmitApplicative();
@@ -84,10 +90,6 @@ namespace <#= InternalNamespace #>
 <#+ } #>
 
     using <#= Namespace #>;
-<#+ if (HasSum) { #>
-    using Narvalo.Linq;
-<#+ } #>
-
 <#+
         WriteLine();
         EmitEnumerableInternal();
@@ -137,6 +139,9 @@ namespace <#= InternalNamespace #>
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+<#+ if (EmitExtendedLinq) { #>
+    using System.Linq;
+<#+ } #>
 
     using <#= Namespace #>;
 
