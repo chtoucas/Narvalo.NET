@@ -759,9 +759,8 @@ Element        | `FirstOrNone`        | `Maybe<T>`                 | -
 |              | `LastOrNone`         | `Maybe<T>`                 | -
 |              | `ElementAtOrNone`    | `Maybe<T>`                 | -
 |              | `SingleOrNone`       | `Maybe<T>`                 | -
-Aggregation    | `Aggregate` (Reduce) | `T`                        | -
-|              | `Aggregate` (Fold)   | `TResult`                  | -
-|              | `Aggregate` (Fold)   | `TAccumulate`              | -
+Aggregation    | `Aggregate` (Fold)   | `TAccumulate`              | -
+|              | `Aggregate` (Reduce) | `T`                        | -
 |              | `Fold`               | `Monad<TAccumulate>`       | -
 |              | `Reduce`             | `Monad<T>`                 | -
 Quantification | `IsEmpty`            | `bool`                     | -

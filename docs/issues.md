@@ -58,7 +58,6 @@ Narvalo.Fx
 ----------
 
 - LINQ changes:
-  * Add monadic `Fold` w/ `resultSelector`.
   * Merge `Sequence.Gather` and `Sequence.Unfold`?
   * Simplify LINQ for `Maybe<T?>`?
 - Remove `GroupJoin` for monads?

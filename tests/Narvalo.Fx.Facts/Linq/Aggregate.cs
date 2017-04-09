@@ -11,14 +11,12 @@ namespace Narvalo.Linq {
         [t("Aggregate() guards.")]
         public static void Aggregate0() {
             Func<int, int, int> accumulator = (i, j) => i + j;
-            Func<int, int> resultSelector = i => i + 1; ;
             Func<int, bool> predicate = _ => true;
 
             IEnumerable<int> nil = null;
 
             Assert.Throws<ArgumentNullException>("source", () => nil.Aggregate(accumulator, predicate));
             Assert.Throws<ArgumentNullException>("source", () => nil.Aggregate(1, accumulator, predicate));
-            Assert.Throws<ArgumentNullException>("source", () => nil.Aggregate(1, accumulator, resultSelector, predicate));
 
             var source = Enumerable.Range(0, 1);
 
@@ -27,10 +25,6 @@ namespace Narvalo.Linq {
 
             Assert.Throws<ArgumentNullException>("accumulator", () => source.Aggregate(1, null, predicate));
             Assert.Throws<ArgumentNullException>("predicate", () => source.Aggregate(1, accumulator, null));
-
-            Assert.Throws<ArgumentNullException>("accumulator", () => source.Aggregate(1, null, resultSelector, predicate));
-            Assert.Throws<ArgumentNullException>("resultSelector", () => source.Aggregate(1, accumulator, default(Func<int, int>), predicate));
-            Assert.Throws<ArgumentNullException>("predicate", () => source.Aggregate(1, accumulator, resultSelector, null));
         }
     }
 }
