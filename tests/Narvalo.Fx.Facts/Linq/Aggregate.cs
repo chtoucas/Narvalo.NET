@@ -15,16 +15,16 @@ namespace Narvalo.Linq {
 
             IEnumerable<int> nil = null;
 
-            Assert.Throws<ArgumentNullException>("source", () => nil.Aggregate(accumulator, predicate));
-            Assert.Throws<ArgumentNullException>("source", () => nil.Aggregate(1, accumulator, predicate));
+            Assert.Throws<ArgumentNullException>("source", () => nil.Reduce(accumulator, predicate));
+            Assert.Throws<ArgumentNullException>("source", () => nil.Fold(1, accumulator, predicate));
 
             var source = Enumerable.Range(0, 1);
 
-            Assert.Throws<ArgumentNullException>("accumulator", () => source.Aggregate(null, predicate));
-            Assert.Throws<ArgumentNullException>("predicate", () => source.Aggregate(accumulator, null));
+            Assert.Throws<ArgumentNullException>("accumulator", () => source.Reduce(null, predicate));
+            Assert.Throws<ArgumentNullException>("predicate", () => source.Reduce(accumulator, null));
 
-            Assert.Throws<ArgumentNullException>("accumulator", () => source.Aggregate(1, null, predicate));
-            Assert.Throws<ArgumentNullException>("predicate", () => source.Aggregate(1, accumulator, null));
+            Assert.Throws<ArgumentNullException>("accumulator", () => source.Fold(1, null, predicate));
+            Assert.Throws<ArgumentNullException>("predicate", () => source.Fold(1, accumulator, null));
         }
     }
 }

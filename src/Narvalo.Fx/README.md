@@ -759,9 +759,9 @@ Element        | `FirstOrNone`        | `Maybe<T>`                 | -
 |              | `LastOrNone`         | `Maybe<T>`                 | -
 |              | `ElementAtOrNone`    | `Maybe<T>`                 | -
 |              | `SingleOrNone`       | `Maybe<T>`                 | -
-Aggregation    | `Aggregate` (Fold)   | `TAccumulate`              | -
-|              | `Aggregate` (Reduce) | `T`                        | -
+Aggregation    | `Fold`               | `TAccumulate`              | -
 |              | `Fold`               | `Monad<TAccumulate>`       | -
+|              | `Reduce`             | `T`                        | -
 |              | `Reduce`             | `Monad<T>`                 | -
 Quantification | `IsEmpty`            | `bool`                     | -
 Generation     | `EmptyIfNull`        | `IEnumerable<T>`           | -
@@ -799,11 +799,9 @@ an `IEnumerable<T>` as input:
 
 #### `WhereAny`
 
-#### `Aggregate`
+#### `Fold`
 
 #### `Reduce`
-
-#### `Fold`
 
 ### <a name="linq-generators"></a>Generators
 

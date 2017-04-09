@@ -9,8 +9,29 @@ namespace Narvalo.Linq
 
     public static partial class Qperators
     {
-        // Fold
-        public static TAccumulate Aggregate<TSource, TAccumulate>(
+        // Strictly equivalent to Enumerable.Aggregate. Added for symmetry.
+        public static TAccumulate Fold<TSource, TAccumulate>(
+            this IEnumerable<TSource> source,
+            TAccumulate seed,
+            Func<TAccumulate, TSource, TAccumulate> accumulator)
+        {
+            Require.NotNull(source, nameof(source));
+            Require.NotNull(accumulator, nameof(accumulator));
+
+            TAccumulate retval = seed;
+
+            using (var iter = source.GetEnumerator())
+            {
+                while (iter.MoveNext())
+                {
+                    retval = accumulator(retval, iter.Current);
+                }
+            }
+
+            return retval;
+        }
+
+        public static TAccumulate Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> source,
             TAccumulate seed,
             Func<TAccumulate, TSource, TAccumulate> accumulator,
@@ -33,8 +54,33 @@ namespace Narvalo.Linq
             return retval;
         }
 
-        // Reduce
-        public static TSource Aggregate<TSource>(
+        // Strictly equivalent to Enumerable.Aggregate. Added for symmetry.
+        public static TSource Reduce<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TSource, TSource> accumulator)
+        {
+            Require.NotNull(source, nameof(source));
+            Require.NotNull(accumulator, nameof(accumulator));
+
+            using (var iter = source.GetEnumerator())
+            {
+                if (!iter.MoveNext())
+                {
+                    throw new InvalidOperationException(Strings.SequenceIsEmpty);
+                }
+
+                TSource retval = iter.Current;
+
+                while (iter.MoveNext())
+                {
+                    retval = accumulator(retval, iter.Current);
+                }
+
+                return retval;
+            }
+        }
+
+        public static TSource Reduce<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, TSource, TSource> accumulator,
             Func<TSource, bool> predicate)
