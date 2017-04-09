@@ -33,7 +33,7 @@ Our versioning scheme is explained
 - [Either Type](#either-type)
 - [Query Operators and Generators](#query-operators-and-generators)
 - [Recursion](#recursion)
-- [Tour of the Monad Verbs](#tour-of-the-monad-verbs)
+- [Tour of the Monadic API](#tour-of-the-monadic-api)
 - [Haskell to C# Walk-Through](#haskell-to-C-walk-through)
 - [Typologia](#typologia)
 - [F# is better at functional programming!](#f-is-better-at-functional-programming)
@@ -581,7 +581,7 @@ var q = Maybe.Of("some")
     .Where(x => !String.IsNullOrEmpty(x));
 ```
 where `Select` is the select we described above and `Where` is from LINQ to
-Objects. This is a curiosity, nothing more.
+Objects. This is a curiosity, nothing much.
 
 **Remark.** Compare this to `AsEnumerable` for interpreted queries, e.g.
 applying it to an `IQueryable<T>` in a LINQ to SQL query forces subsequent
@@ -758,10 +758,10 @@ Element        | `FirstOrNone`        | `Maybe<T>`                 | -
 |              | `ElementAtOrNone`    | `Maybe<T>`                 | -
 |              | `SingleOrNone`       | `Maybe<T>`                 | -
 Aggregation    | `Aggregate` (Reduce) | `T`                        | -
-|              | `Reduce`             | `Monad<T>`                 | -
 |              | `Aggregate` (Fold)   | `TResult`                  | -
 |              | `Aggregate` (Fold)   | `TAccumulate`              | -
 |              | `Fold`               | `Monad<TAccumulate>`       | -
+|              | `Reduce`             | `Monad<T>`                 | -
 Quantification | `IsEmpty`            | `bool`                     | -
 Generation     | `EmptyIfNull`        | `IEnumerable<T>`           | -
 
@@ -790,13 +790,19 @@ an `IEnumerable<T>` as input:
   if no such element exists or there are more than one of them. **WARNING:**
   This operator differs in behaviour from the standard query `SingleOrDefault`
   which throws an exception if more than one element satisfies the predicate.
-- `IsEmpty` returns true if the sequence is empty; otherwise false.
-- `EmptyIfNull` returns a new empty sequence if the sequence is empty; otherwise
-  it returns the sequence.
+- `IsEmpty()` returns true if the sequence is empty; otherwise false.
+- `EmptyIfNull()` returns a new empty sequence if the sequence is empty;
+  otherwise it returns the sequence.
 
-#### Reducing
+#### `SelectAny`
 
-#### Folding
+#### `WhereAny`
+
+#### `Aggregate`
+
+#### `Reduce`
+
+#### `Fold`
 
 ### <a name="linq-generators"></a>Generators
 
@@ -839,7 +845,7 @@ Recursion
 
 --------------------------------------------------------------------------------
 
-Tour of the Monad Verbs
+Tour of the Monadic API
 -----------------------
 
 ### Core Verbs
@@ -891,11 +897,8 @@ Haskell | C# | Return Type
 `forever`                | -                  | -
 `void`                   | `obj.Skip`         | `Maybe<Unit>`
 
-#### `SelectWith`
-`SelectWith` is a LINQ `Select` followed by a `Collect`.
-
-#### `Collect`
-`Collect` is a LINQ `CollectAny` wrapped into a "maybe".
+- `Collect` is `CollectAny` wrapped into a "maybe".
+- `SelectWith` is `Select` followed by `Collect`.
 
 ### <a name="haskell-list"></a>Generalisations of list functions
 
@@ -910,11 +913,8 @@ Haskell | C# | Return Type
 `foldM` / `foldM_`           | `seq.Fold`          | `Maybe<TAccumulate>`
 `replicateM` / `replicateM_` | `Maybe.Repeat`      | `Maybe<IEnumerable<T>>`
 
-#### `WhereBy`
-`WhereBy` is a LINQ `WhereAny` wrapped into a "maybe".
-
-#### `ZipWith`
-`ZipWith` is a LINQ `Zip` followed by a `Collect`.
+- `WhereBy` is `WhereAny` wrapped into a "maybe".
+- `ZipWith` is `Zip` followed by `Collect`.
 
 #### `SelectUnzip`
 To quote the Haskell documentation, _`mapAndUnzipM` is mainly used with

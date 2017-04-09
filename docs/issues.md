@@ -63,7 +63,7 @@ Narvalo.Fx
   * Move `Repeat` to `Sequence`? Move `CollectAny` and `Sum` to
     Narvalo.Linq? They act on `IEnumerable<Monad<T>>` but, being in
     Narvalo.Applicative, they are hard to find.
-  * Add more `Fold` w/ `resultSelector`.
+  * Add monadic `Fold` w/ `resultSelector`.
   * Merge `Sequence.Gather` and `Sequence.Unfold`?
 - More QEP for Monads? Simplify LINQ for `Maybe<T?>`?
 - Auto-generate tests for null-guards (missing only for `Either`).
