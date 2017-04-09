@@ -26,6 +26,7 @@
       <Word>Kleisli</Word>
       <Word>Qperators</Word>  <!-- Q(uery) Operators-->
       <Word>Qullable</Word>   <!-- Q(ueryable) Nullable -->
+      <Word>Vuple</Word>      <!-- V(alue T)uple -->
 
       <!-- Narvalo.Money -->
       <Word>Moneypenny</Word>
