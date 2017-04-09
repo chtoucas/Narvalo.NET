@@ -57,17 +57,17 @@ Next:
 Narvalo.Fx
 ----------
 
-- T4: If the monad is nullable check that we handle all null's (affects only
-  `Either<T1, T2>`).
 - LINQ changes:
   * Add monadic `Fold` w/ `resultSelector`.
   * Merge `Sequence.Gather` and `Sequence.Unfold`?
-- Simplify LINQ for `Maybe<T?>`?
-- Remove `GroupJoin`?
+  * Simplify LINQ for `Maybe<T?>`?
+- Remove `GroupJoin` for monads?
 - Explain `Bind` and `Select` for `Outcome` and `Fallible`,
   `Where` for `Outcome<T>` and `Fallible<T>`.
-- Fallible: review handling of exceptions.
+- Fallible: review handling of exceptions + tests.
 - `Either<T1, T2>`:
+  * T4: If the monad is nullable check that we handle all null's (affects only
+    `Either<T1, T2>`) + tests.
   * Add variants operators on the right for Either?
   * Auto-generate tests for null-guards (missing only for `Either`).
     Add more tests beyond the auto-generated ones. Add tests for purity?
