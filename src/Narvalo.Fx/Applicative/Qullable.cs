@@ -19,6 +19,23 @@ namespace Narvalo.Applicative
 
             return @this is TSource v ? binder(v) : null;
         }
+
+        public static IEnumerable<TSource> CollectAny<TSource>(
+            this IEnumerable<TSource?> source)
+            where TSource : struct
+        {
+            Require.NotNull(source, nameof(source));
+
+            return iterator();
+
+            IEnumerable<TSource> iterator()
+            {
+                foreach (var item in source)
+                {
+                    if (item.HasValue) { yield return item.Value; }
+                }
+            }
+        }
     }
 
     // Query Expression Pattern for nullables.
