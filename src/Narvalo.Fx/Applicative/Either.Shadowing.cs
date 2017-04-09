@@ -14,7 +14,7 @@ namespace Narvalo.Applicative
 
             foreach (var item in source)
             {
-                if (item.IsLeft) { yield return item.Left; }
+                if (item != null && item.IsLeft) { yield return item.Left; }
             }
         }
     }
