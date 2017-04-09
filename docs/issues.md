@@ -60,15 +60,12 @@ Narvalo.Fx
 - T4: If the monad is nullable check that we handle all null's (affects only
   `Either<T1, T2>`).
 - LINQ changes:
-  * Move `Repeat` to `Sequence`? Move `CollectAny` and `Sum` to
-    Narvalo.Linq? They act on `IEnumerable<Monad<T>>` but being in
-    Narvalo.Applicative makes them hard to find.
   * Add monadic `Fold` w/ `resultSelector`.
   * Merge `Sequence.Gather` and `Sequence.Unfold`?
 - Simplify LINQ for `Maybe<T?>`?
 - Remove `GroupJoin`?
-- Explain `Bind` and `Select` for `Outcome` and `Fallible`.
-- Explain `Where` for `Outcome<T>` and `Fallible<T>`.
+- Explain `Bind` and `Select` for `Outcome` and `Fallible`,
+  `Where` for `Outcome<T>` and `Fallible<T>`.
 - Fallible: review handling of exceptions.
 - `Either<T1, T2>`:
   * Add variants operators on the right for Either?

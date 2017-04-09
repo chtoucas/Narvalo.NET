@@ -734,7 +734,7 @@ Query Operators and Generators
 
 - [LINQ Extensions](#linq-extensions)
 - [Generators](#linq-generators)
-- [Specialized Operators](#linq-specialized)
+- [Special Operators](#linq-special)
 
 For each new query operator, we define its behaviour regarding deferred or
 immediate execution - to quote the [C# documentation](https://docs.microsoft.com/en-us/dotnet/articles/csharp/programming-guide/concepts/linq/classification-of-standard-query-operators-by-manner-of-execution),
@@ -814,19 +814,19 @@ Operator | Return Type | Deferred
 `Gather`      | `IEnumerable<T>`           | Streaming
 `Unfold`      | `IEnumerable<T>`           | Streaming
 
-### <a name="linq-specialized"></a>Specialized Operators
+### <a name="linq-special"></a>Special Operators
 
-These are operators that are defined in `Narvalo.Applicative`.
+A "special" operator acts on sequences of monads; it is available once you
+import `Narvalo.Applicative`.
 
 Category | Operator | Return Type | Deferred |
 -------- | -------- | ----------- | :------: |
 Restriction | `CollectAny` | `IEnumerable<T>`        | Streaming
 Aggregation | `Sum` (*)    | `Maybe<T>`              | -
-Generation  | `Repeat`     | `Monad<IEnumerable<T>>` | Streaming
 
 #### `CollectAny`
 `CollectAny` acts on an `IEnumerable<Monad<T>>`.
-For instance, applying `CollectAny` to the sequence defined by:
+For instance, applying `CollectAny` to the sequence:
 ```csharp
 yield return Maybe<int>.None;
 yield return Maybe.Of(2);
@@ -834,8 +834,8 @@ yield return Maybe<int>.None;
 yield return Maybe.Of(4);
 yield return Maybe.Of(5);
 ```
-would return a sequence of type `IEnumerable<int>` with three elements `2`, `4`
-and `5`; it filters out the two _none_'s
+returns a sequence of type `IEnumerable<int>` with three elements `2`, `4`
+and `5`; it filters out the two _none_'s.
 
 #### `Sum`
 `Sum` acts on an `IEnumerable<Maybe<T>>`.
