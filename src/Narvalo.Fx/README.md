@@ -296,7 +296,7 @@ var q = outer.SelectMany(_ => inner, (outerValue, innerValue) => (outerValue, in
 the only difference being that _we use a value tuple instead of an anonymous
 type_.
 
-This is ok, there must be a simpler solution, I mean without resorting
+This is ok, but there must be a simpler solution, I mean without resorting
 to `HasValue` and `Value` which, by the way, is the best option here!
 Actually, there is, it is very simple and we already saw it: just don't use a
 join but an intermediate value tuple. For this purpose, we have created an helper
@@ -372,8 +372,8 @@ Func<T, TResult?> binder = ...;
 
 TResult? q = source.Bind(binder);
 ```
-`Bind` is really a special case of `SelectMany<T, TResult, TResult>` -
-in LINQ, `Bind` is even named `SelectMany`:
+`Bind` is a special case of `SelectMany<T, TResult, TResult>` - in LINQ, `Bind`
+is even named `SelectMany`:
 ```csharp
 TResult? q = source.SelectMany(binder, (_, v2) => v2);
 TResult? q = from v1 in source
@@ -391,7 +391,8 @@ Notice that we have to cast to a nullable integer otherwise the query would not
 have been valid.
 
 **Remark.** In fact, `Bind` is the most important method upon which
-one can construct all the other operators; it is not the other way around, more
+one can construct all the other operators; it is not the other way around,
+for instance, `SelectMany` is really a `Bind` combined with a `Select`, more
 on this later.
 
 --------------------------------------------------------------------------------
@@ -581,7 +582,7 @@ var q = Maybe.Of("some")
     .Where(x => !String.IsNullOrEmpty(x));
 ```
 where `Select` is the select we described above and `Where` is from LINQ to
-Objects. This is a curiosity, nothing much.
+Objects. This is merely a curiosity, nothing much.
 
 **Remark.** Compare this to `AsEnumerable` for interpreted queries, e.g.
 applying it to an `IQueryable<T>` in a LINQ to SQL query forces subsequent
@@ -1029,11 +1030,9 @@ Outside .NET,
 ### Applicative Functor
 
 ```csharp
-public static class Maybe {
-    public static Maybe<T> Of<T>(T value) { ... }
-}
-
 public struct Maybe<T> {
+    public static Maybe<T> Of(T value) { ... }
+
     public Maybe<TResult> Select<TResult>(Func<T, TResult> selector) { ... }
 
     public Maybe<TResult> Gather<TResult>(Maybe<Func<T, TResult>> applicative) { ... }
@@ -1048,11 +1047,9 @@ public struct Maybe<T> {
 
 A _monad_ is simply a type with at least two operations
 ```csharp
-public static class Maybe {
-    public static Maybe<T> Of<T>(T value) { ... }
-}
-
 public struct Maybe<T> {
+    public static Maybe<T> Of(T value) { ... }
+
     public Maybe<TResult> Bind<TResult>(Func<T, Maybe<TResult>> binder) { ... }
 }
 ```
@@ -1065,13 +1062,11 @@ a monad is rather defined by a unit element `Of` and two operations
 
 #### An alternate definition
 ```csharp
-public static class Maybe {
-    public static Maybe<T> Of<T>(T value) { ... }
-
-    public static Maybe<T> Flatten<T>(Maybe<Maybe<T>> square) { ... }
-}
-
 public struct Maybe<T> {
+    public static Maybe<T> Of(T value) { ... }
+
+    public static Maybe<T> Flatten(Maybe<Maybe<T>> square) { ... }
+
     public Maybe<TResult> Select<TResult>(Func<T, TResult> selector) { ... }
 }
 ```
@@ -1080,7 +1075,7 @@ From a triad to a monad: `Bind` derived from `Flatten` and `Select`,
 ```csharp
 public struct Maybe<T> {
     public Maybe<TResult> Bind<TResult>(Func<T,Maybe<TResult>> binder) {
-        return Maybe.Flatten(Select(binder));
+        return Maybe<TResult>.Flatten(Select(binder));
     }
 }
 ```
@@ -1088,14 +1083,12 @@ From a monad to a triad: `Select` derived from `Of` and `Bind`,
 and `Flatten` derived from `Bind`.
 ```csharp
 public struct Maybe<T> {
-    public Maybe<TResult> Select<TResult>(Func<T, TResult> selector) {
-        return Bind(x => Maybe.Of(selector(x)));
-    }
-}
-
-public static class Maybe {
     public static Maybe<T> Flatten(Maybe<Maybe<T>> square) {
         return square.Bind(x => x);
+    }
+
+    public Maybe<TResult> Select<TResult>(Func<T, TResult> selector) {
+        return Bind(x => Maybe.Of(selector(x)));
     }
 }
 ```

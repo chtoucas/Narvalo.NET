@@ -100,6 +100,16 @@ Consider using traits:
   * `Slow` for slow tests.
   * `Unsafe` for unsafe tests.
 
+### Compiler directives
+
+- `NO_INTERNALS_VISIBLE_TO`
+- `EXTENDED_LINQ`
+
+- `NOT_CLS_COMPLIANT`
+- `DUMMY_GENERATED_VERSION`
+- `BUILD_GENERATED_VERSION`
+- `SIGNED_ASSEMBLY`
+
 --------------------------------------------------------------------------------
 
 Project Configuration

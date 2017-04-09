@@ -57,21 +57,26 @@ Next:
 Narvalo.Fx
 ----------
 
+- T4: If the monad is nullable check that we handle all null's (affects only
+  Either).
 - LINQ changes:
   * Replace `CollectIterator` by `CollectAny` and make it public. (**DONE**)
   * Hide or remove `Collect`, `WhereBy`, `ZipWith` and `SelectWith`. (**DONE**)
+  * `SelectAny` for all monads.  (**DONE**)
   * Move `Repeat` to `Sequence`? Move `CollectAny` and `Sum` to
-    Narvalo.Linq? They act on `IEnumerable<Monad<T>>` but, being in
-    Narvalo.Applicative, they are hard to find.
+    Narvalo.Linq? They act on `IEnumerable<Monad<T>>` but being in
+    Narvalo.Applicative makes them hard to find.
   * Add monadic `Fold` w/ `resultSelector`.
   * Merge `Sequence.Gather` and `Sequence.Unfold`?
-- More QEP for Monads? Simplify LINQ for `Maybe<T?>`?
-- Auto-generate tests for null-guards (missing only for `Either`).
-  Add more tests beyond the auto-generated ones. Add tests for purity?
-- `Either`, should we throw if we have a lefty method for a righty object
-  (see `WhenLeft` for instance).
-- Add variants operators on the right for Either?
+- Simplify LINQ for `Maybe<T?>`?
 - Add `MapMany` to `Outcome` and `Fallible`....
+- Remove `GroupJoin`?
+- Either:
+  * Add variants operators on the right for Either?
+  * Auto-generate tests for null-guards (missing only for `Either`).
+    Add more tests beyond the auto-generated ones. Add tests for purity?
+  * `Either`, should we throw if we have a lefty method for a righty object
+    (see `WhenLeft` for instance).
 
 Next:
 - Add async and lazy alternatives?
