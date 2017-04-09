@@ -134,27 +134,27 @@ namespace Narvalo.Applicative
     }
 }
 
-//
-// WhereBy operatoris currently disabled.
-//
-//
-//namespace Narvalo.Linq
-//{
-//    using System;
-//    using System.Collections.Generic;
+#if EXTENDED_LINQ
 
-//    using Narvalo.Applicative;
+namespace Narvalo.Linq
+{
+    using System;
+    using System.Collections.Generic;
 
-//    public static partial class Qperators
-//    {
-//        internal static Maybe<IEnumerable<TSource>> WhereByImpl<TSource>(
-//            this IEnumerable<TSource> source,
-//            Func<TSource, Maybe<bool>> predicate)
-//        {
-//            Require.NotNull(source, nameof(source));
-//            Require.NotNull(predicate, nameof(predicate));
+    using Narvalo.Applicative;
 
-//            return Maybe.Of(WhereAnyImpl(source, predicate));
-//        }
-//    }
-//}
+    public static partial class Qperators
+    {
+        internal static Maybe<IEnumerable<TSource>> WhereByImpl<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, Maybe<bool>> predicate)
+        {
+            Require.NotNull(source, nameof(source));
+            Require.NotNull(predicate, nameof(predicate));
+
+            return Maybe.Of(WhereAnyImpl(source, predicate));
+        }
+    }
+}
+
+#endif
