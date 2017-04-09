@@ -31,7 +31,11 @@ public partial class MonadTemplate
             Func<TMiddle, <#= Name #><TResult<#= RTDecl #>>> second)
         {
             Require.NotNull(@this, nameof(@this));
+<#+ if (IsNullable) { #>
+            return arg => @this(arg)?.Bind(second);
+<#+ } else { #>
             return arg => @this(arg).Bind(second);
+<#+ } #>
         }
 
         public static Func<TSource, <#= Name #><TResult<#= RTDecl #>>> ComposeBack<TSource, TMiddle, TResult<#= RTDecl #>>(
@@ -39,7 +43,11 @@ public partial class MonadTemplate
             Func<TSource, <#= Name #><TMiddle<#= RTDecl #>>> second)
         {
             Require.NotNull(second, nameof(second));
+<#+ if (IsNullable) { #>
+            return arg =>second(arg)?.Bind(@this);
+<#+ } else { #>
             return arg => second(arg).Bind(@this);
+<#+ } #>
         }
     }
 <#+

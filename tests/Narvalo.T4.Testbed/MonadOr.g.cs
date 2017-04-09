@@ -459,7 +459,7 @@ namespace Narvalo.T4.Testbed
             Func<TMiddle, MonadOr<TResult>> second)
         {
             Require.NotNull(@this, nameof(@this));
-            return arg => @this(arg).Bind(second);
+            return arg => @this(arg)?.Bind(second);
         }
 
         public static Func<TSource, MonadOr<TResult>> ComposeBack<TSource, TMiddle, TResult>(
@@ -467,7 +467,7 @@ namespace Narvalo.T4.Testbed
             Func<TSource, MonadOr<TMiddle>> second)
         {
             Require.NotNull(second, nameof(second));
-            return arg => second(arg).Bind(@this);
+            return arg =>second(arg)?.Bind(@this);
         }
     }
 
@@ -522,16 +522,18 @@ namespace Narvalo.T4.Testbed.Internal
             {
                 while (iter.MoveNext())
                 {
-                    var append = false;
+                    bool append = false;
+                    var current = iter.Current;
 
-                    iter.Current.Bind(
-                        val =>
-                        {
-                            append = true;
-                            item = val;
+                    if (current == null) { continue; }
 
-                            return MonadOr.Unit;
-                        });
+                    current.Bind(val =>
+                    {
+                        append = true;
+                        item = val;
+
+                        return MonadOr.Unit;
+                    });
 
                     if (append) { yield return item; }
                 }
@@ -568,6 +570,15 @@ namespace Narvalo.T4.Testbed.Linq
     // T4: EmitLinqCore().
     public static partial class Qperators
     {
+        public static IEnumerable<TResult> SelectAny<TSource, TResult>(
+            this IEnumerable<TSource> source,
+            Func<TSource, MonadOr<TResult>> selector)
+        {
+            Require.NotNull(source, nameof(source));
+            Require.NotNull(selector, nameof(selector));
+            return source.SelectAnyImpl(selector);
+        }
+
         public static IEnumerable<TSource> WhereAny<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, MonadOr<bool>> predicate)
@@ -636,6 +647,38 @@ namespace Narvalo.T4.Testbed.Internal
     internal static partial class EnumerableExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static IEnumerable<TResult> SelectAnyImpl<TSource, TResult>(
+            this IEnumerable<TSource> source,
+            Func<TSource, MonadOr<TResult>> selector)
+        {
+            Debug.Assert(source != null);
+            Debug.Assert(selector != null);
+
+            var result = default(TResult);
+
+            using (var iter = source.GetEnumerator())
+            {
+                while (iter.MoveNext())
+                {
+                    bool append = false;
+
+                    var item = selector(iter.Current);
+                    if (item == null) { continue; }
+
+                    item.Bind(val =>
+                    {
+                        append = true;
+                        result = val;
+
+                        return MonadOr.Unit;
+                    });
+
+                    if (append) { yield return result; }
+                }
+            }
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static IEnumerable<TSource> WhereAnyImpl<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, MonadOr<bool>> predicate)
@@ -648,16 +691,19 @@ namespace Narvalo.T4.Testbed.Internal
                 while (iter.MoveNext())
                 {
                     bool pass = false;
-                    TSource item = iter.Current;
+                    TSource current = iter.Current;
 
-                    predicate(item).Bind(val =>
+                    var item = predicate(current);
+                    if (item == null) { continue; }
+
+                    item.Bind(val =>
                     {
                         pass = val;
 
                         return MonadOr.Unit;
                     });
 
-                    if (pass) { yield return item; }
+                    if (pass) { yield return current; }
                 }
             }
         }

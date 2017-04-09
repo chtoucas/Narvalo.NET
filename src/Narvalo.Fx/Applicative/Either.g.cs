@@ -340,7 +340,7 @@ namespace Narvalo.Applicative
             Func<TMiddle, Either<TResult, TRight>> second)
         {
             Require.NotNull(@this, nameof(@this));
-            return arg => @this(arg).Bind(second);
+            return arg => @this(arg)?.Bind(second);
         }
 
         public static Func<TSource, Either<TResult, TRight>> ComposeBack<TSource, TMiddle, TResult, TRight>(
@@ -348,7 +348,7 @@ namespace Narvalo.Applicative
             Func<TSource, Either<TMiddle, TRight>> second)
         {
             Require.NotNull(second, nameof(second));
-            return arg => second(arg).Bind(@this);
+            return arg =>second(arg)?.Bind(@this);
         }
     }
 
@@ -400,16 +400,18 @@ namespace Narvalo.Internal
             {
                 while (iter.MoveNext())
                 {
-                    var append = false;
+                    bool append = false;
+                    var current = iter.Current;
 
-                    iter.Current.Bind(
-                        val =>
-                        {
-                            append = true;
-                            item = val;
+                    if (current == null) { continue; }
 
-                            return unit;
-                        });
+                    current.Bind(val =>
+                    {
+                        append = true;
+                        item = val;
+
+                        return unit;
+                    });
 
                     if (append) { yield return item; }
                 }
@@ -438,6 +440,15 @@ namespace Narvalo.Linq
     // T4: EmitLinqCore().
     public static partial class Qperators
     {
+        public static IEnumerable<TResult> SelectAny<TSource, TResult, TRight>(
+            this IEnumerable<TSource> source,
+            Func<TSource, Either<TResult, TRight>> selector)
+        {
+            Require.NotNull(source, nameof(source));
+            Require.NotNull(selector, nameof(selector));
+            return source.SelectAnyImpl(selector);
+        }
+
         public static IEnumerable<TSource> WhereAny<TSource, TRight>(
             this IEnumerable<TSource> source,
             Func<TSource, Either<bool, TRight>> predicate)
@@ -506,6 +517,39 @@ namespace Narvalo.Internal
     internal static partial class EnumerableExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static IEnumerable<TResult> SelectAnyImpl<TSource, TResult, TRight>(
+            this IEnumerable<TSource> source,
+            Func<TSource, Either<TResult, TRight>> selector)
+        {
+            Debug.Assert(source != null);
+            Debug.Assert(selector != null);
+
+            var unit = Either<Unit, TRight>.OfLeft(Unit.Default);
+            var result = default(TResult);
+
+            using (var iter = source.GetEnumerator())
+            {
+                while (iter.MoveNext())
+                {
+                    bool append = false;
+
+                    var item = selector(iter.Current);
+                    if (item == null) { continue; }
+
+                    item.Bind(val =>
+                    {
+                        append = true;
+                        result = val;
+
+                        return unit;
+                    });
+
+                    if (append) { yield return result; }
+                }
+            }
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static IEnumerable<TSource> WhereAnyImpl<TSource, TRight>(
             this IEnumerable<TSource> source,
             Func<TSource, Either<bool, TRight>> predicate)
@@ -520,16 +564,19 @@ namespace Narvalo.Internal
                 while (iter.MoveNext())
                 {
                     bool pass = false;
-                    TSource item = iter.Current;
+                    TSource current = iter.Current;
 
-                    predicate(item).Bind(val =>
+                    var item = predicate(current);
+                    if (item == null) { continue; }
+
+                    item.Bind(val =>
                     {
                         pass = val;
 
                         return unit;
                     });
 
-                    if (pass) { yield return item; }
+                    if (pass) { yield return current; }
                 }
             }
         }

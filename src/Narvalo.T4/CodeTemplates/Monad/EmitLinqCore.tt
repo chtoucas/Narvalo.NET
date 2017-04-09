@@ -34,6 +34,15 @@ public partial class MonadTemplate
             => source.ZipWithImpl(second, resultSelector);
 
 <#+ } // End of EmitExtendedLinq #>
+        public static IEnumerable<TResult> SelectAny<TSource, TResult<#= RTDecl #>>(
+            this IEnumerable<TSource> source,
+            Func<TSource, <#= Name #><TResult<#= RTDecl #>>> selector)
+        {
+            <#+ WriteNotNull("source", true); #>
+            Require.NotNull(selector, nameof(selector));
+            return source.SelectAnyImpl(selector);
+        }
+
         public static IEnumerable<TSource> WhereAny<TSource<#= RTDecl #>>(
             this IEnumerable<TSource> source,
             Func<TSource, <#= Name #><bool<#= RTDecl #>>> predicate)

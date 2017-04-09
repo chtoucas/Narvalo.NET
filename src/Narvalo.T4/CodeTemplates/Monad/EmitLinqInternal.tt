@@ -37,6 +37,47 @@ public partial class MonadTemplate
 
 <#+ } // End of EmitExtendedLinq #>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static IEnumerable<TResult> SelectAnyImpl<TSource, TResult<#= RTDecl #>>(
+            this IEnumerable<TSource> source,
+            Func<TSource, <#= Name #><TResult<#= RTDecl #>>> selector)
+        {
+            Debug.Assert(source != null);
+            Debug.Assert(selector != null);
+
+<#+ if (HasRightGenerics) { #>
+            var unit = <#+ WriteFactory("Unit"); #>(Unit.Default);
+<#+ } #>
+            var result = default(TResult);
+
+            using (var iter = source.GetEnumerator())
+            {
+                while (iter.MoveNext())
+                {
+                    bool append = false;
+
+                    var item = selector(iter.Current);
+<#+ if (IsNullable) { #>
+                    if (item == null) { continue; }
+<#+ } #>
+
+                    item.Bind(val =>
+                    {
+                        append = true;
+                        result = val;
+
+<#+ if (HasRightGenerics) { #>
+                        return unit;
+<#+ } else { #>
+                        return <#= Name #>.Unit;
+<#+ } #>
+                    });
+
+                    if (append) { yield return result; }
+                }
+            }
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static IEnumerable<TSource> WhereAnyImpl<TSource<#= RTDecl #>>(
             this IEnumerable<TSource> source,
             Func<TSource, <#= Name #><bool<#= RTDecl #>>> predicate)
@@ -53,9 +94,14 @@ public partial class MonadTemplate
                 while (iter.MoveNext())
                 {
                     bool pass = false;
-                    TSource item = iter.Current;
+                    TSource current = iter.Current;
 
-                    predicate(item).Bind(val =>
+                    var item = predicate(current);
+<#+ if (IsNullable) { #>
+                    if (item == null) { continue; }
+<#+ } #>
+
+                    item.Bind(val =>
                     {
                         pass = val;
 
@@ -66,7 +112,7 @@ public partial class MonadTemplate
 <#+ } #>
                     });
 
-                    if (pass) { yield return item; }
+                    if (pass) { yield return current; }
                 }
             }
         }

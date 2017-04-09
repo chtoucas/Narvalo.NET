@@ -25,20 +25,24 @@ public partial class MonadTemplate
             {
                 while (iter.MoveNext())
                 {
-                    var append = false;
+                    bool append = false;
+                    var current = iter.Current;
 
-                    iter.Current.Bind(
-                        val =>
-                        {
-                            append = true;
-                            item = val;
+<#+ if (IsNullable) { #>
+                    if (current == null) { continue; }
+<#+ } #>
+
+                    current.Bind(val =>
+                    {
+                        append = true;
+                        item = val;
 
 <#+ if (HasRightGenerics) { #>
-                            return unit;
+                        return unit;
 <#+ } else { #>
-                            return <#= Name #>.Unit;
+                        return <#= Name #>.Unit;
 <#+ } #>
-                        });
+                    });
 
                     if (append) { yield return item; }
                 }

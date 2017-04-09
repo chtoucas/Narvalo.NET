@@ -400,16 +400,17 @@ namespace Narvalo.Internal
             {
                 while (iter.MoveNext())
                 {
-                    var append = false;
+                    bool append = false;
+                    var current = iter.Current;
 
-                    iter.Current.Bind(
-                        val =>
-                        {
-                            append = true;
-                            item = val;
 
-                            return unit;
-                        });
+                    current.Bind(val =>
+                    {
+                        append = true;
+                        item = val;
+
+                        return unit;
+                    });
 
                     if (append) { yield return item; }
                 }
@@ -438,6 +439,15 @@ namespace Narvalo.Linq
     // T4: EmitLinqCore().
     public static partial class Qperators
     {
+        public static IEnumerable<TResult> SelectAny<TSource, TResult, TError>(
+            this IEnumerable<TSource> source,
+            Func<TSource, Result<TResult, TError>> selector)
+        {
+            Require.NotNull(source, nameof(source));
+            Require.NotNull(selector, nameof(selector));
+            return source.SelectAnyImpl(selector);
+        }
+
         public static IEnumerable<TSource> WhereAny<TSource, TError>(
             this IEnumerable<TSource> source,
             Func<TSource, Result<bool, TError>> predicate)
@@ -506,6 +516,38 @@ namespace Narvalo.Internal
     internal static partial class EnumerableExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static IEnumerable<TResult> SelectAnyImpl<TSource, TResult, TError>(
+            this IEnumerable<TSource> source,
+            Func<TSource, Result<TResult, TError>> selector)
+        {
+            Debug.Assert(source != null);
+            Debug.Assert(selector != null);
+
+            var unit = Result<Unit, TError>.Of(Unit.Default);
+            var result = default(TResult);
+
+            using (var iter = source.GetEnumerator())
+            {
+                while (iter.MoveNext())
+                {
+                    bool append = false;
+
+                    var item = selector(iter.Current);
+
+                    item.Bind(val =>
+                    {
+                        append = true;
+                        result = val;
+
+                        return unit;
+                    });
+
+                    if (append) { yield return result; }
+                }
+            }
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static IEnumerable<TSource> WhereAnyImpl<TSource, TError>(
             this IEnumerable<TSource> source,
             Func<TSource, Result<bool, TError>> predicate)
@@ -520,16 +562,18 @@ namespace Narvalo.Internal
                 while (iter.MoveNext())
                 {
                     bool pass = false;
-                    TSource item = iter.Current;
+                    TSource current = iter.Current;
 
-                    predicate(item).Bind(val =>
+                    var item = predicate(current);
+
+                    item.Bind(val =>
                     {
                         pass = val;
 
                         return unit;
                     });
 
-                    if (pass) { yield return item; }
+                    if (pass) { yield return current; }
                 }
             }
         }
