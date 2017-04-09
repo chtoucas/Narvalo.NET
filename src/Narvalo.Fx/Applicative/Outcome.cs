@@ -85,7 +85,7 @@ namespace Narvalo.Applicative
     // Core methods.
     public partial struct Outcome
     {
-        // Compare w/ Bind(Func<Unit, Outcome<TResult>> func).
+        // Compare w/ Bind(Func<Unit, Outcome<TResult>>).
         public Outcome<TResult> Bind<TResult>(Func<Outcome<TResult>> binder)
         {
             Require.NotNull(binder, nameof(binder));
@@ -93,16 +93,16 @@ namespace Narvalo.Applicative
             return IsError ? Outcome<TResult>.FromError(Error) : binder();
         }
 
-        // Compare w/ Select(Func<Unit, TResult> func).
-        public Outcome<TResult> Map<TResult>(Func<TResult> func)
+        // Compare w/ Select(Func<Unit, TResult>).
+        public Outcome<TResult> Select<TResult>(Func<TResult> selector)
         {
-            Require.NotNull(func, nameof(func));
+            Require.NotNull(selector, nameof(selector));
 
-            return IsError ? Outcome<TResult>.FromError(Error) : Of(func());
+            return IsError ? Outcome<TResult>.FromError(Error) : Of(selector());
         }
 
-        public Outcome<TResult> ReplaceBy<TResult>(TResult result)
-            => IsError ? Outcome<TResult>.FromError(Error) : Of(result);
+        public Outcome<TResult> ReplaceBy<TResult>(TResult value)
+            => IsError ? Outcome<TResult>.FromError(Error) : Of(value);
 
         public Outcome<TResult> ContinueWith<TResult>(Outcome<TResult> result)
             => IsError ? Outcome<TResult>.FromError(Error) : result;

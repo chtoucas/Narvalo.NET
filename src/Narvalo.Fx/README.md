@@ -162,10 +162,10 @@ _immediate execution_.
 
 **Caution.** It is not because something is possible, that you should use it,
 even less abuse it. First, another programmer might not know that the query
-syntax is not just for `IEnumerable<T>` and might have problems understanding
-your code, second, the result will always be less performant than hand-written
-code, third, in LINQ we can use any selector we'd like, this is not the case
-with a nullable, and last, C# already offers nice syntactic sugars for
+(comprehension) syntax is not just for `IEnumerable<T>` and might have problems
+understanding your code, second, the result will always be less performant than
+hand-written code, third, in LINQ we can use any selector we'd like, this is not
+the case with a nullable, and last, C# already offers nice syntactic sugars for
 nullables (the conditional operators `?:` and `?.`, and the null-coalescing
 operator `??`). Nevertheless, there are situations where a piece of code written
 in query syntax is much more readable, therefore easier to maintain. Finally,
@@ -483,6 +483,7 @@ Let me show you another way to access the enclosed value of a "maybe".
 ```csharp
 foreach (T value in maybe) { ... }
 ```
+Deconstructing a "maybe" is unsafe, but iterating over it is safe.
 
 **Remark.** We could have implemented `IEnumerable<T>` but we didn't since it
 would have enabled LINQ to Objects, something we certainly do not want (what

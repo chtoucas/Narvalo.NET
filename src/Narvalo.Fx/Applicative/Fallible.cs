@@ -113,7 +113,7 @@ namespace Narvalo.Applicative
     // Core methods.
     public partial struct Fallible
     {
-        // Compare w/ Bind(Func<Unit, Outcome<TResult>> func).
+        // Compare w/ Bind(Func<Unit, Fallible<TResult>>).
         public Fallible<TResult> Bind<TResult>(Func<Fallible<TResult>> binder)
         {
             Require.NotNull(binder, nameof(binder));
@@ -121,16 +121,16 @@ namespace Narvalo.Applicative
             return IsError ? Fallible<TResult>.FromError(Error) : binder();
         }
 
-        // Compare w/ Select(Func<Unit, TResult> func).
-        public Fallible<TResult> Map<TResult>(Func<TResult> func)
+        // Compare w/ Select(Func<Unit, TResult>).
+        public Fallible<TResult> Select<TResult>(Func<TResult> selector)
         {
-            Require.NotNull(func, nameof(func));
+            Require.NotNull(selector, nameof(selector));
 
-            return IsError ? Fallible<TResult>.FromError(Error) : Of(func());
+            return IsError ? Fallible<TResult>.FromError(Error) : Of(selector());
         }
 
-        public Fallible<TResult> ReplaceBy<TResult>(TResult result)
-            => IsError ? Fallible<TResult>.FromError(Error) : Of(result);
+        public Fallible<TResult> ReplaceBy<TResult>(TResult value)
+            => IsError ? Fallible<TResult>.FromError(Error) : Of(value);
 
         public Fallible<TResult> ContinueWith<TResult>(Fallible<TResult> other)
             => IsError ? Fallible<TResult>.FromError(Error) : other;

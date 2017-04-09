@@ -425,21 +425,21 @@ namespace Narvalo.Applicative {
             Assert.True(result.IsSuccess);
         }
 
-        [t("Map() returns OK if OK.")]
-        public static void Map1() {
+        [t("Select() returns OK if OK.")]
+        public static void Select1() {
             var ok = Fallible.Ok;
             Func<int> selector = () => 1;
 
-            var result = ok.Map(selector);
+            var result = ok.Select(selector);
             Assert.True(result.IsSuccess);
         }
 
-        [t("Map() returns NOK if NOK.")]
-        public static void Map2() {
+        [t("Select() returns NOK if NOK.")]
+        public static void Select2() {
             var nok = Fallible.FromError(Error);
             Func<int> selector = () => 1;
 
-            var result = nok.Map(selector);
+            var result = nok.Select(selector);
             Assert.True(result.IsError);
         }
 
@@ -502,12 +502,12 @@ namespace Narvalo.Applicative {
             Assert.Same(exp, result.Value);
         }
 
-        [t("Map() applies selector if some.")]
-        public static void Map3() {
+        [t("Select() applies selector if some.")]
+        public static void Select3() {
             var ok = Fallible.Ok;
             Func<int> selector = () => 1;
 
-            var result = ok.Map(selector);
+            var result = ok.Select(selector);
             Assert.Equal(1, result.Value);
         }
     }

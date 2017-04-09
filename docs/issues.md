@@ -58,24 +58,23 @@ Narvalo.Fx
 ----------
 
 - T4: If the monad is nullable check that we handle all null's (affects only
-  Either).
+  `Either<T1, T2>`).
 - LINQ changes:
-  * Replace `CollectIterator` by `CollectAny` and make it public. (**DONE**)
-  * Hide or remove `Collect`, `WhereBy`, `ZipWith` and `SelectWith`. (**DONE**)
-  * `SelectAny` for all monads.  (**DONE**)
   * Move `Repeat` to `Sequence`? Move `CollectAny` and `Sum` to
     Narvalo.Linq? They act on `IEnumerable<Monad<T>>` but being in
     Narvalo.Applicative makes them hard to find.
   * Add monadic `Fold` w/ `resultSelector`.
   * Merge `Sequence.Gather` and `Sequence.Unfold`?
 - Simplify LINQ for `Maybe<T?>`?
-- Add `MapMany` to `Outcome` and `Fallible`....
 - Remove `GroupJoin`?
-- Either:
+- Explain `Bind` and `Select` for `Outcome` and `Fallible`.
+- Explain `Where` for `Outcome<T>` and `Fallible<T>`.
+- Fallible: review handling of exceptions.
+- `Either<T1, T2>`:
   * Add variants operators on the right for Either?
   * Auto-generate tests for null-guards (missing only for `Either`).
     Add more tests beyond the auto-generated ones. Add tests for purity?
-  * `Either`, should we throw if we have a lefty method for a righty object
+  * Should we throw if we have a lefty method for a righty object
     (see `WhenLeft` for instance).
 
 Next:
