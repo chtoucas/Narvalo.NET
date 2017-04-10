@@ -7,12 +7,9 @@ namespace Narvalo.Linq
 
     public static partial class Sequence
     {
-        /// <summary>
-        /// Generates an infinite sequence.
-        /// </summary>
-        public static IEnumerable<TResult> Unfold<TSource, TResult>(
-            TSource seed,
-            Func<TSource, (TResult, TSource)> generator)
+        public static IEnumerable<TResult> Unfold<TState, TResult>(
+            TState seed,
+            Func<TState, (TResult, TState)> generator)
         {
             Require.NotNull(generator, nameof(generator));
 
@@ -20,23 +17,22 @@ namespace Narvalo.Linq
 
             IEnumerable<TResult> iterator()
             {
-                TSource current = seed;
+                TState state = seed;
+                TResult result;
 
                 while (true)
                 {
-                    var (result, next) = generator(current);
+                    (result, state) = generator(state);
 
                     yield return result;
-
-                    current = next;
                 }
             }
         }
 
-        public static IEnumerable<TResult> Unfold<TSource, TResult>(
-            TSource seed,
-            Func<TSource, (TResult, TSource)> generator,
-            Func<TSource, bool> predicate)
+        public static IEnumerable<TResult> Unfold<TState, TResult>(
+            TState seed,
+            Func<TState, (TResult, TState)> generator,
+            Func<TState, bool> predicate)
         {
             Require.NotNull(generator, nameof(generator));
             Require.NotNull(predicate, nameof(predicate));
@@ -45,15 +41,14 @@ namespace Narvalo.Linq
 
             IEnumerable<TResult> iterator()
             {
-                TSource current = seed;
+                TState state = seed;
+                TResult result;
 
-                while (predicate(current))
+                while (predicate(state))
                 {
-                    var (result, next) = generator(current);
+                    (result, state) = generator(state);
 
                     yield return result;
-
-                    current = next;
                 }
             }
         }
