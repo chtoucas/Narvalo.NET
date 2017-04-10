@@ -10,10 +10,10 @@ namespace Narvalo.Linq
         /// <summary>
         /// Generates an infinite sequence containing one repeated value.
         /// </summary>
-        /// <typeparam name="TSource">The type of the value to be used in the
+        /// <typeparam name="TResult">The type of the value to be used in the
         /// result sequence.</typeparam>
         /// <param name="value">The value to be repeated.</param>
-        public static IEnumerable<TSource> Gather<TSource>(TSource value)
+        public static IEnumerable<TResult> Gather<TResult>(TResult value)
         {
             while (true)
             {
@@ -21,20 +21,17 @@ namespace Narvalo.Linq
             }
         }
 
-        /// <summary>
-        /// Generates an infinite sequence.
-        /// </summary>
-        public static IEnumerable<TSource> Gather<TSource>(
-            TSource seed,
-            Func<TSource, TSource> generator)
+        public static IEnumerable<TResult> Gather<TResult>(
+            TResult seed,
+            Func<TResult, TResult> generator)
         {
             Require.NotNull(generator, nameof(generator));
 
             return iterator();
 
-            IEnumerable<TSource> iterator()
+            IEnumerable<TResult> iterator()
             {
-                TSource current = seed;
+                TResult current = seed;
 
                 while (true)
                 {
@@ -45,19 +42,19 @@ namespace Narvalo.Linq
             }
         }
 
-        public static IEnumerable<TSource> Gather<TSource>(
-            TSource seed,
-            Func<TSource, TSource> generator,
-            Func<TSource, bool> predicate)
+        public static IEnumerable<TResult> Gather<TResult>(
+            TResult seed,
+            Func<TResult, TResult> generator,
+            Func<TResult, bool> predicate)
         {
             Require.NotNull(generator, nameof(generator));
             Require.NotNull(predicate, nameof(predicate));
 
             return iterator();
 
-            IEnumerable<TSource> iterator()
+            IEnumerable<TResult> iterator()
             {
-                TSource current = seed;
+                TResult current = seed;
 
                 while (predicate(current))
                 {
@@ -68,19 +65,16 @@ namespace Narvalo.Linq
             }
         }
 
-        /// <summary>
-        /// Generates an infinite sequence.
-        /// </summary>
         /// <remarks>
         /// This method can be derived from Unfold:
         /// <code>
-        /// Sequence.Unfold(seed, _ => (resultSelector(_), generator(_)));
+        /// Sequence.Unfold(seed, state => (resultSelector(state), generator(state)));
         /// </code>
         /// </remarks>
-        public static IEnumerable<TResult> Gather<TSource, TResult>(
-            TSource seed,
-            Func<TSource, TSource> generator,
-            Func<TSource, TResult> resultSelector)
+        public static IEnumerable<TResult> Gather<TState, TResult>(
+            TState seed,
+            Func<TState, TState> generator,
+            Func<TState, TResult> resultSelector)
         {
             Require.NotNull(generator, nameof(generator));
             Require.NotNull(resultSelector, nameof(resultSelector));
@@ -89,13 +83,13 @@ namespace Narvalo.Linq
 
             IEnumerable<TResult> iterator()
             {
-                TSource current = seed;
+                TState state = seed;
 
                 while (true)
                 {
-                    yield return resultSelector(current);
+                    yield return resultSelector(state);
 
-                    current = generator(current);
+                    state = generator(state);
                 }
             }
         }
@@ -103,14 +97,14 @@ namespace Narvalo.Linq
         /// <remarks>
         /// This method can be derived from Unfold:
         /// <code>
-        /// Sequence.Unfold(seed, _ => (resultSelector(_), generator(_)), predicate);
+        /// Sequence.Unfold(seed, state => (resultSelector(state), generator(state)), predicate);
         /// </code>
         /// </remarks>
-        public static IEnumerable<TResult> Gather<TSource, TResult>(
-            TSource seed,
-            Func<TSource, TSource> generator,
-            Func<TSource, TResult> resultSelector,
-            Func<TSource, bool> predicate)
+        public static IEnumerable<TResult> Gather<TState, TResult>(
+            TState seed,
+            Func<TState, TState> generator,
+            Func<TState, TResult> resultSelector,
+            Func<TState, bool> predicate)
         {
             Require.NotNull(generator, nameof(generator));
             Require.NotNull(resultSelector, nameof(resultSelector));
@@ -120,13 +114,13 @@ namespace Narvalo.Linq
 
             IEnumerable<TResult> iterator()
             {
-                TSource current = seed;
+                TState state = seed;
 
-                while (predicate(current))
+                while (predicate(state))
                 {
-                    yield return resultSelector(current);
+                    yield return resultSelector(state);
 
-                    current = generator(current);
+                    state = generator(state);
                 }
             }
         }

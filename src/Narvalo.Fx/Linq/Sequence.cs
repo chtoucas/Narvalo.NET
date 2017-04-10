@@ -13,10 +13,10 @@ namespace Narvalo.Linq
         /// Generates a sequence that contains exactly one value.
         /// </summary>
         /// <remarks>The result is immutable.</remarks>
-        /// <typeparam name="TSource">The type of the value to be used in the result sequence.</typeparam>
+        /// <typeparam name="TResult">The type of the value to be used in the result sequence.</typeparam>
         /// <param name="value">The single value of the sequence.</param>
         /// <returns>An <see cref="IEnumerable{T}"/> that contains a single element.</returns>
-        public static IEnumerable<TSource> Of<TSource>(TSource value)
+        public static IEnumerable<TResult> Of<TResult>(TResult value)
         {
             // Enumerable.Repeat(value, 1) works too.
             yield return value;
