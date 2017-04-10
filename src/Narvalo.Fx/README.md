@@ -764,6 +764,7 @@ Aggregation    | `Fold`               | `TAccumulate`              | -
 |              | `Reduce`             | `T`                        | -
 |              | `Reduce`             | `Monad<T>`                 | -
 Quantification | `IsEmpty`            | `bool`                     | -
+|              | `None`               | `bool`                     | -
 Generation     | `EmptyIfNull`        | `IEnumerable<T>`           | -
 
 All these operators are defined as extension methods (in `Qperators`) and expect
@@ -807,19 +808,20 @@ an `IEnumerable<T>` as input:
 
 Operator | Return Type | Deferred
 -------- | ----------- | :------:
-`Of`          | `IEnumerable<T>`           | Streaming
-`Gather`      | `IEnumerable<T>`           | Streaming
-`Unfold`      | `IEnumerable<T>`           | Streaming
+`Of`          | `IEnumerable<T>` | Streaming
+`Gather`      | `IEnumerable<T>` | Streaming
+`Unfold`      | `IEnumerable<T>` | Streaming
 
 ### <a name="linq-special"></a>Special Operators
 
 A "special" operator acts on sequences of monads; it is available once you
-import `Narvalo.Applicative`.
+import `Narvalo.Applicative` (NB: that might change).
 
-Category | Operator | Return Type | Deferred |
--------- | -------- | ----------- | :------: |
-Restriction | `CollectAny` | `IEnumerable<T>`        | Streaming
-Aggregation | `Sum` (*)    | `Maybe<T>`              | -
+Category | Operator | Input Type | Return Type | Deferred |
+-------- | -------- | ---------- | ----------- | :------: |
+Restriction | `CollectAny` | `IEnumerable<Monad<T>>`       | `IEnumerable<T>` | Streaming
+Aggregation | `Sum` (*)    | `IEnumerable<Maybe<T>>`       | `Maybe<T>`       | -
+????        | `Flatten`    | `IEnumerable<IEnumerable<T>>` | `IEnumerable<T>` | Streaming
 
 #### `CollectAny`
 `CollectAny` acts on an `IEnumerable<Monad<T>>`.

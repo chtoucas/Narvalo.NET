@@ -58,24 +58,25 @@ Narvalo.Fx
 ----------
 
 - LINQ changes:
-  * Merge `Sequence.Gather` and `Sequence.Unfold`?
+  * Merge `Sequence.Gather` and `Sequence.Unfold`? Remove overloads of `Gather`
+    that are just `Unfold`'s.
   * Simplify LINQ for `Maybe<T?>`?
 - Remove `GroupJoin` for monads?
 - Explain `Bind` and `Select` for `Outcome` and `Fallible`,
   `Where` for `Outcome<T>` and `Fallible<T>`.
+- Add tests for purity?
 - Fallible: review handling of exceptions + tests.
 - `Either<T1, T2>`:
-  * T4: If the monad is nullable check that we handle all null's (affects only
-    `Either<T1, T2>`) + tests.
-  * Add variants operators on the right for Either?
-  * Auto-generate tests for null-guards (missing only for `Either`).
-    Add more tests beyond the auto-generated ones. Add tests for purity?
+  * T4: If the monad is nullable, check that we handle all null's. Auto-generate
+    tests for null-guards (affects only `Either<T1, T2>`) + tests.
+  * Add variant operators on the right for Either?
   * Should we throw if we have a lefty method for a righty object
     (see `WhenLeft` for instance).
 
 Next:
 - Add async and lazy alternatives?
-- Implement trampoline.
+- More recursion helpers: trampoline + other Y Combinators.
+- LINQ: `FoldBack` and `ReduceBack`.
 - Custom `is` operators (it is in the proposal but it is not yet possible).
 - Deconstruction for `Maybe<T?>`,
 ```csharp
