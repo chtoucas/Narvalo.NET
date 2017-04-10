@@ -42,11 +42,14 @@
     <Compile Include="Internal\IEither`2.cs" />
     <Compile Include="Internal\IMaybe`1.cs" />
     <Compile Include="Internal\Iterable`1.cs" />
+    <Compile Include="Linq\Fold.cs" />
     <Compile Include="Linq\ElementAtOrNone.cs" />
     <Compile Include="Linq\AppendPrepend.cs" />
     <Compile Include="Linq\EmptyIfNull.cs" />
-    <Compile Include="Linq\Aggregate.cs" />
+    <Compile Include="Linq\Reduce.cs" />
     <Compile Include="Linq\Gather.cs" />
+    <Compile Include="Linq\Flatten.cs" />
+    <Compile Include="Linq\None.cs" />
     <Compile Include="Linq\Qperators.cs" />
     <Compile Include="Linq\Unfold.cs" />
     <Compile Include="Linq\SingleOrNone.cs" />
