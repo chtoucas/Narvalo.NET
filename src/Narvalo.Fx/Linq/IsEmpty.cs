@@ -3,7 +3,6 @@
 namespace Narvalo.Linq
 {
     using System.Collections.Generic;
-    using System.Linq;
 
     public static partial class Qperators
     {
@@ -13,6 +12,14 @@ namespace Narvalo.Linq
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.
         /// </typeparam>
         public static bool IsEmpty<TSource>(this IEnumerable<TSource> source)
-            => !source.Any();
+        {
+            Require.NotNull(source, nameof(source));
+
+            // Same as !source.Any();
+            using (var iter = source.GetEnumerator())
+            {
+                return !iter.MoveNext();
+            }
+        }
     }
 }
