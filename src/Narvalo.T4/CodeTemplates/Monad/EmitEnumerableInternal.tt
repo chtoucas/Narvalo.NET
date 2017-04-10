@@ -27,8 +27,8 @@ public partial class MonadTemplate
                 {
                     bool append = false;
                     var current = iter.Current;
-
 <#+ if (IsNullable) { #>
+
                     if (current == null) { continue; }
 <#+ } #>
 

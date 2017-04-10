@@ -78,7 +78,6 @@
     </Compile>
     <Compile Include="Applicative\MaybeFacts.cs" />
     <Compile Include="Applicative\QullableFacts.cs" />
-    <Compile Include="Linq\Aggregate.cs" />
     <Compile Include="Linq\Collect.cs" />
     <Compile Include="Linq\Extended\SelectWith.cs" />
     <Compile Include="Linq\Extended\WhereBy.cs" />
