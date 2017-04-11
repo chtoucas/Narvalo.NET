@@ -9,7 +9,7 @@ namespace Narvalo.Collections
 
     using Narvalo;
     using Narvalo.Applicative;
-    using Narvalo.Linq;
+    using Narvalo.Linq.Applicative;
 
     /// <summary>
     /// Provides extension methods for <see cref="NameValueCollection"/>
@@ -33,13 +33,13 @@ namespace Narvalo.Collections
             this NameValueCollection @this,
             string name,
             Func<string, Maybe<T>> parser)
-            => (from vals in @this.MayGetValues(name) select vals.SelectAny(parser))
+            => (from arr in @this.MayGetValues(name) select arr.SelectAny(parser))
                 .ValueOrElse(Enumerable.Empty<T>());
 
         public static Maybe<IEnumerable<T>> MayParseAll<T>(
             this NameValueCollection @this,
             string name,
             Func<string, Maybe<T>> parser)
-            => @this.MayGetValues(name).Select(val => val.Select(parser).CollectAny());
+            => @this.MayGetValues(name).Select(arr => arr.Select(parser).CollectAny());
     }
 }
