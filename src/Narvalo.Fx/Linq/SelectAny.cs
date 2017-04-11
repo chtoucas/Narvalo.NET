@@ -24,7 +24,7 @@ namespace Narvalo.Linq
 
             return iterator();
 
-            // This is just: from x in source where x != null select x;
+            // Identical to: source.Select(selector).Where(x => x != null);
             IEnumerable<TResult> iterator()
             {
                 foreach (var item in source)
@@ -54,7 +54,7 @@ namespace Narvalo.Linq
 
             return iterator();
 
-            // This is just: source.Select(selector).Where(x => x != null);
+            // Identical to: source.Select(selector).Where(x => x != null);
             IEnumerable<TResult> iterator()
             {
                 int index = 0;
@@ -86,7 +86,7 @@ namespace Narvalo.Linq
 
             return iterator();
 
-            // This is just: from x in source where x.HasValue select x.Value;
+            // Identical to: source.Select(selector).Where(x => x.HasValue).Select(x => x.Value);
             IEnumerable<TResult> iterator()
             {
                 foreach (var item in source)
@@ -116,7 +116,7 @@ namespace Narvalo.Linq
 
             return iterator();
 
-            // This is just: source.Select(selector).Where(x => x.HasValue).Select(x => x.Value);
+            // Identical to: source.Select(selector).Where(x => x.HasValue).Select(x => x.Value);
             IEnumerable<TResult> iterator()
             {
                 int index = 0;
