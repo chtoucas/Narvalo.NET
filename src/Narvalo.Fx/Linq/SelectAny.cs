@@ -7,6 +7,13 @@ namespace Narvalo.Linq
 
     public static partial class Qperators
     {
+        /// <summary>
+        /// Projects each element of a sequence into a new form while discarding any null.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
+        /// <typeparam name="TResult">The type of the value returned by <paramref name="selector"/>.</typeparam>
+        /// <param name="source">A sequence of values to invoke a transform function on.</param>
+        /// <param name="selector">A transform function to apply to each element.</param>
         public static IEnumerable<TResult> SelectAny<TSource, TResult>(
             this IEnumerable<TSource> source,
             Func<TSource, TResult> selector)
@@ -17,6 +24,7 @@ namespace Narvalo.Linq
 
             return iterator();
 
+            // This is just: from x in source where x != null select x;
             IEnumerable<TResult> iterator()
             {
                 foreach (var item in source)
@@ -28,6 +36,46 @@ namespace Narvalo.Linq
             }
         }
 
+        /// <summary>
+        /// Projects each element of a sequence into a new form while discarding any null.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
+        /// <typeparam name="TResult">The type of the value returned by <paramref name="selector"/>.</typeparam>
+        /// <param name="source">A sequence of values to invoke a transform function on.</param>
+        /// <param name="selector">A transform function to apply to each element; the second parameter
+        /// of the function represents the index of the source element.</param>
+        public static IEnumerable<TResult> SelectAny<TSource, TResult>(
+            this IEnumerable<TSource> source,
+            Func<TSource, int, TResult> selector)
+            where TResult : class
+        {
+            Require.NotNull(source, nameof(source));
+            Require.NotNull(selector, nameof(selector));
+
+            return iterator();
+
+            // This is just: source.Select(selector).Where(x => x != null);
+            IEnumerable<TResult> iterator()
+            {
+                int index = 0;
+                foreach (var item in source)
+                {
+                    var result = selector(item, index);
+
+                    if (result != null) { yield return result; }
+
+                    index++;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Projects each element of a sequence into a new form while discarding any null.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
+        /// <typeparam name="TResult">The type of the value returned by <paramref name="selector"/>.</typeparam>
+        /// <param name="source">A sequence of values to invoke a transform function on.</param>
+        /// <param name="selector">A transform function to apply to each element.</param>
         public static IEnumerable<TResult> SelectAny<TSource, TResult>(
             this IEnumerable<TSource> source,
             Func<TSource, TResult?> selector)
@@ -38,6 +86,7 @@ namespace Narvalo.Linq
 
             return iterator();
 
+            // This is just: from x in source where x.HasValue select x.Value;
             IEnumerable<TResult> iterator()
             {
                 foreach (var item in source)
@@ -45,6 +94,39 @@ namespace Narvalo.Linq
                     var result = selector(item);
 
                     if (result.HasValue) { yield return result.Value; }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Projects each element of a sequence into a new form while discarding any null.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
+        /// <typeparam name="TResult">The type of the value returned by <paramref name="selector"/>.</typeparam>
+        /// <param name="source">A sequence of values to invoke a transform function on.</param>
+        /// <param name="selector">A transform function to apply to each element; the second parameter
+        /// of the function represents the index of the source element.</param>
+        public static IEnumerable<TResult> SelectAny<TSource, TResult>(
+            this IEnumerable<TSource> source,
+            Func<TSource, int, TResult?> selector)
+            where TResult : struct
+        {
+            Require.NotNull(source, nameof(source));
+            Require.NotNull(selector, nameof(selector));
+
+            return iterator();
+
+            // This is just: source.Select(selector).Where(x => x.HasValue).Select(x => x.Value);
+            IEnumerable<TResult> iterator()
+            {
+                int index = 0;
+                foreach (var item in source)
+                {
+                    var result = selector(item, index);
+
+                    if (result.HasValue) { yield return result.Value; }
+
+                    index++;
                 }
             }
         }
