@@ -41,28 +41,3 @@ namespace Narvalo.Applicative
         }
     }
 }
-
-#if EXTENDED_LINQ
-
-namespace Narvalo.Linq
-{
-    using System;
-    using System.Collections.Generic;
-
-    using Narvalo.Applicative;
-
-    public static partial class Qperators
-    {
-        internal static Outcome<IEnumerable<TSource>> WhereByImpl<TSource>(
-            this IEnumerable<TSource> source,
-            Func<TSource, Outcome<bool>> predicate)
-        {
-            Require.NotNull(source, nameof(source));
-            Require.NotNull(predicate, nameof(predicate));
-
-            return Outcome.Of(WhereAnyImpl(source, predicate));
-        }
-    }
-}
-
-#endif

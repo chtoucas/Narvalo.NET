@@ -42,6 +42,7 @@
     <Compile Include="Internal\IEither`2.cs" />
     <Compile Include="Internal\IMaybe`1.cs" />
     <Compile Include="Internal\Iterable`1.cs" />
+    <Compile Include="Linq\Applicative\WhereBy.cs" />
     <Compile Include="Linq\Applicative\Kperators.cs" />
     <Compile Include="Linq\Applicative\SelectAny.cs" />
     <Compile Include="Linq\Applicative\WhereAny.cs" />

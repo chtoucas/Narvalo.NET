@@ -1,5 +1,10 @@
 ﻿<#+
 
+//
+// TODO: Move this to EmitExtensionsExperimental() so that one can override them.
+//
+//
+//
 public partial class MonadTemplate
 {
     protected void EmitMethodsExperimental()
