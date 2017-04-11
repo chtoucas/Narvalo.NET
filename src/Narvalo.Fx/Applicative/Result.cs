@@ -6,7 +6,7 @@ namespace Narvalo.Applicative
 
     /// <summary>
     /// Provides a set of static and extension methods for <see cref="Result{T, TError}"/>
-    /// and for querying objects that implement <see cref="IEnumerable{T}"/> where T is of type
+    /// and for querying objects that implement <see cref="System.Collections.Generic.IEnumerable{T}"/> where T is of type
     /// <see cref="Result{S, TError}"/>.
     /// </summary>
     public static partial class Result { }
