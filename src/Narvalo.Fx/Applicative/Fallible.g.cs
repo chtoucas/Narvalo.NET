@@ -21,7 +21,7 @@ namespace Narvalo.Applicative
 
     using Narvalo.Internal;
 
-    // Provides a set of static methods for Fallible<T>.
+    // Provides a set of static methods involving <see cref="Fallible{T}"/>.
     // T4: EmitHelpers().
     public partial struct Fallible
     {
@@ -51,6 +51,33 @@ namespace Narvalo.Applicative
             Require.Range(count >= 0, nameof(count));
             return source.Select(val => Enumerable.Repeat(val, count));
         }
+
+        public static Fallible<IEnumerable<T>> Collect<T>(
+            IEnumerable<Fallible<T>> source)
+        {
+            Require.NotNull(source, nameof(source));
+            return source.CollectImpl();
+        }
+
+        public static Fallible<IEnumerable<T>> Filter<T>(
+            IEnumerable<T> source,
+            Func<T, Fallible<bool>> predicate)
+        {
+            Require.NotNull(source, nameof(source));
+            Require.NotNull(predicate, nameof(predicate));
+            return source.WhereImpl(predicate);
+        }
+
+        public static Fallible<IEnumerable<TResult>> Map<T, TResult>(
+            IEnumerable<T> source,
+            Func<T, Fallible<TResult>> selector)
+            => Fallible.Collect(source.Select(selector));
+
+        public static Fallible<IEnumerable<TResult>> Zip<T1, T2, TResult>(
+            IEnumerable<T1> first,
+            IEnumerable<T2> second,
+            Func<T1, T2, Fallible<TResult>> resultSelector)
+            => Fallible.Collect(first.Zip(second, resultSelector));
 
         #region Lift()
 
@@ -119,7 +146,9 @@ namespace Narvalo.Applicative
         #endregion
     }
 
-    // Provides extension methods for Fallible<T>.
+    /// <summary>
+    /// Provides extension methods for <see cref="Fallible{T}"/>.
+    /// </summary>
     // T4: EmitExtensions().
     public static partial class FallibleExtensions
     {
@@ -322,7 +351,10 @@ namespace Narvalo.Applicative
         #endregion
     }
 
-    // Provides extension methods for Fallible<Func<TSource, TResult>>.
+    /// <summary>
+    /// Provides extension methods for <see cref="Fallible{T}"/>
+    /// where T is of type <see cref="Func{TSource, TResult}"/>.
+    /// </summary>
     // T4: EmitApplicative().
     public static partial class Ap
     {
@@ -336,7 +368,10 @@ namespace Narvalo.Applicative
         }
     }
 
-    // Provides extension methods for functions in the Kleisli category.
+    /// <summary>
+    /// Provides extension methods for functions in the Kleisli category:
+    /// <see cref="Func{TSource, TResult}"/> where TResult is of type <see cref="Fallible{T}"/>.
+    /// </summary>
     // T4: EmitKleisli().
     public static partial class Kleisli
     {
@@ -369,39 +404,6 @@ namespace Narvalo.Applicative
             return arg => second(arg).Bind(@this);
         }
     }
-
-    // Provides static methods to operate on IEnumerable<Fallible<T>>.
-    // These are not extension methods like any LINQ operator, because they are not composable.
-    // T4: EmitEnumerableExtensions().
-    public partial struct Fallible
-    {
-        public static Fallible<IEnumerable<T>> Collect<T>(
-            IEnumerable<Fallible<T>> source)
-        {
-            Require.NotNull(source, nameof(source));
-            return source.CollectImpl();
-        }
-
-        public static Fallible<IEnumerable<T>> Filter<T>(
-            IEnumerable<T> source,
-            Func<T, Fallible<bool>> predicate)
-        {
-            Require.NotNull(source, nameof(source));
-            Require.NotNull(predicate, nameof(predicate));
-            return source.WhereImpl(predicate);
-        }
-
-        public static Fallible<IEnumerable<TResult>> Map<T, TResult>(
-            IEnumerable<T> source,
-            Func<T, Fallible<TResult>> selector)
-            => Fallible.Collect(source.Select(selector));
-
-        public static Fallible<IEnumerable<TResult>> Zip<T1, T2, TResult>(
-            IEnumerable<T1> first,
-            IEnumerable<T2> second,
-            Func<T1, T2, Fallible<TResult>> resultSelector)
-            => Fallible.Collect(first.Zip(second, resultSelector));
-    }
 }
 
 namespace Narvalo.Internal
@@ -415,7 +417,7 @@ namespace Narvalo.Internal
     using Narvalo.Linq;
     using Narvalo.Applicative;
 
-    // Provides default implementations for the extension methods for IEnumerable<Fallible<T>>.
+    // Provides default implementations for extension methods on IEnumerable<Fallible<T>>.
     // You will certainly want to shadow them to improve performance.
     // T4: EmitEnumerableInternal().
     internal static partial class EnumerableExtensions
@@ -546,7 +548,7 @@ namespace Narvalo.Internal
 
     using Narvalo.Applicative;
 
-    // Provides default implementations for the extension methods for IEnumerable<T>
+    // Provides default implementations for extension methods on IEnumerable<T>
     // and IEnumerable<Fallible<T>>.
     // You will certainly want to shadow them to improve performance.
     // T4: EmitLinqInternal().

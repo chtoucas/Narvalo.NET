@@ -93,10 +93,10 @@ namespace Narvalo.Applicative {
             Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, third, fourth, zipper4));
             Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, third, fourth, fifth, zipper5));
             // Static method.
-            Assert.Throws<ArgumentNullException>("zipper", () => Either.Zip(first, second, zipper2));
-            Assert.Throws<ArgumentNullException>("zipper", () => Either.Zip(first, second, third, zipper3));
-            Assert.Throws<ArgumentNullException>("zipper", () => Either.Zip(first, second, third, fourth, zipper4));
-            Assert.Throws<ArgumentNullException>("zipper", () => Either.Zip(first, second, third, fourth, fifth, zipper5));
+            Assert.Throws<ArgumentNullException>("zipper", () => EitherExtensions.Zip(first, second, zipper2));
+            Assert.Throws<ArgumentNullException>("zipper", () => EitherExtensions.Zip(first, second, third, zipper3));
+            Assert.Throws<ArgumentNullException>("zipper", () => EitherExtensions.Zip(first, second, third, fourth, zipper4));
+            Assert.Throws<ArgumentNullException>("zipper", () => EitherExtensions.Zip(first, second, third, fourth, fifth, zipper5));
         }
 
         [t("Select() guards.")]
@@ -105,7 +105,7 @@ namespace Narvalo.Applicative {
             Func<int, long> selector = null;
 
             Assert.Throws<ArgumentNullException>("selector", () => source.Select(selector));
-            Assert.Throws<ArgumentNullException>("selector", () => Either.Select(source, selector));
+            Assert.Throws<ArgumentNullException>("selector", () => EitherExtensions.Select(source, selector));
         }
 
         [t("Using() guards.")]
@@ -115,10 +115,10 @@ namespace Narvalo.Applicative {
             Func<DisposableObj, int> selector = null;
 
             Assert.Throws<ArgumentNullException>("binder", () => source.Using(binder));
-            Assert.Throws<ArgumentNullException>("binder", () => Either.Using(source, binder));
+            Assert.Throws<ArgumentNullException>("binder", () => EitherExtensions.Using(source, binder));
 
             Assert.Throws<ArgumentNullException>("selector", () => source.Using(selector));
-            Assert.Throws<ArgumentNullException>("selector", () => Either.Using(source, selector));
+            Assert.Throws<ArgumentNullException>("selector", () => EitherExtensions.Using(source, selector));
         }
 
         [t("SelectMany() guards.")]
@@ -132,8 +132,8 @@ namespace Narvalo.Applicative {
             Assert.Throws<ArgumentNullException>("selector", () => source.SelectMany(null, resultSelector));
             Assert.Throws<ArgumentNullException>("resultSelector", () => source.SelectMany(valueSelector, (Func<short, int, long>)null));
             // Static method.
-            Assert.Throws<ArgumentNullException>("selector", () => Either.SelectMany(source, null, resultSelector));
-            Assert.Throws<ArgumentNullException>("resultSelector", () => Either.SelectMany(source, valueSelector, (Func<short, int, long>)null));
+            Assert.Throws<ArgumentNullException>("selector", () => EitherExtensions.SelectMany(source, null, resultSelector));
+            Assert.Throws<ArgumentNullException>("resultSelector", () => EitherExtensions.SelectMany(source, valueSelector, (Func<short, int, long>)null));
         }
 
     }
@@ -173,7 +173,7 @@ namespace Narvalo.Applicative {
             var source = Either<int, My.Obj>.OfLeft(arg0);
 
             var left = selector1(source);
-            var right = Either.Select(source, selector);
+            var right = EitherExtensions.Select(source, selector);
 
             return left.Equals(right);
         }
@@ -202,7 +202,7 @@ namespace Narvalo.Applicative {
             var p1 = Either<int, My.Obj>.OfLeft(arg1);
 
             var left = zipper1(p0, p1);
-            var right = Either.Zip(p0, p1, zipper);
+            var right = EitherExtensions.Zip(p0, p1, zipper);
 
             return left.Equals(right);
         }
@@ -232,7 +232,7 @@ namespace Narvalo.Applicative {
             var p2 = Either<int, My.Obj>.OfLeft(arg2);
 
             var left = zipper1(p0, p1, p2);
-            var right = Either.Zip(p0, p1, p2, zipper);
+            var right = EitherExtensions.Zip(p0, p1, p2, zipper);
 
             return left.Equals(right);
         }
@@ -264,7 +264,7 @@ namespace Narvalo.Applicative {
             var p3 = Either<int, My.Obj>.OfLeft(arg3);
 
             var left = zipper1(p0, p1, p2, p3);
-            var right = Either.Zip(p0, p1, p2, p3, zipper);
+            var right = EitherExtensions.Zip(p0, p1, p2, p3, zipper);
 
             return left.Equals(right);
         }
@@ -298,7 +298,7 @@ namespace Narvalo.Applicative {
             var p4 = Either<int, My.Obj>.OfLeft(arg4);
 
             var left = zipper1(p0, p1, p2, p3, p4);
-            var right = Either.Zip(p0, p1, p2, p3, p4, zipper);
+            var right = EitherExtensions.Zip(p0, p1, p2, p3, p4, zipper);
 
             return left.Equals(right);
         }
@@ -314,7 +314,7 @@ namespace Narvalo.Applicative {
         [q("ReplaceBy() replaces the enclosed value if any (2).")]
         public static bool ReplaceBy01b(int arg0, int arg1) {
             var source = Either<int, My.Obj>.OfLeft(arg0);
-            var result = Either.ReplaceBy(source, arg1);
+            var result = EitherExtensions.ReplaceBy(source, arg1);
 
             return result.ContainsLeft(arg1);
         }
@@ -332,7 +332,7 @@ namespace Narvalo.Applicative {
         public static bool ContinueWith01b(int arg0, int arg1) {
             var source = Either<int, My.Obj>.OfLeft(arg0);
             var other = Either<int, My.Obj>.OfLeft(arg1);
-            var result = Either.ContinueWith(source, other);
+            var result = EitherExtensions.ContinueWith(source, other);
 
             return result.ContainsLeft(arg1);
         }
@@ -350,7 +350,7 @@ namespace Narvalo.Applicative {
         public static bool PassBy01b(int arg0, int arg1) {
             var source = Either<int, My.Obj>.OfLeft(arg0);
             var other = Either<int, My.Obj>.OfLeft(arg1);
-            var result = Either.PassBy(source, other);
+            var result = EitherExtensions.PassBy(source, other);
 
             return result.ContainsLeft(arg0);
         }
@@ -366,7 +366,7 @@ namespace Narvalo.Applicative {
         [q("Skip() replaces the enclosed value by Unit if any (2).")]
         public static bool Skip01b(int arg0) {
             var source = Either<int, My.Obj>.OfLeft(arg0);
-            var result = Either.Skip(source);
+            var result = EitherExtensions.Skip(source);
 
             return result.ContainsLeft(Unit.Default);
         }
@@ -387,7 +387,7 @@ namespace Narvalo.Applicative {
             var obj = new DisposableObj();
             var source = Either<DisposableObj, My.Obj>.OfLeft(obj);
             Func<DisposableObj, Either<int, My.Obj>> binder = _ => Either<int, My.Obj>.OfLeft(1);
-            var result = Either.Using(source, binder);
+            var result = EitherExtensions.Using(source, binder);
 
             Assert.True(result.ContainsLeft(1));
             Assert.True(obj.WasDisposed);
@@ -409,7 +409,7 @@ namespace Narvalo.Applicative {
             var obj = new DisposableObj();
             var source = Either<DisposableObj, My.Obj>.OfLeft(obj);
             Func<DisposableObj, int> selector = _ => 1;
-            var result = Either.Using(source, selector);
+            var result = EitherExtensions.Using(source, selector);
 
             Assert.True(result.ContainsLeft(1));
             Assert.True(obj.WasDisposed);
@@ -432,7 +432,7 @@ namespace Narvalo.Applicative {
             var value = Either<int, My.Obj>.OfLeft(arg0);
 
             var applied = Ap.Apply(applicative, value);
-            var gathered = Either.Gather(value, applicative);
+            var gathered = EitherExtensions.Gather(value, applicative);
 
             return applied.Equals(gathered);
         }

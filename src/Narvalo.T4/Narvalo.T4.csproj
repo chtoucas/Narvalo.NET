@@ -32,7 +32,6 @@
     <None Include="CodeTemplates\Monad\EmitLinqInternal.tt" />
     <None Include="CodeTemplates\Monad\EmitKleisli.tt" />
     <None Include="CodeTemplates\Monad\EmitHelpers.tt" />
-    <None Include="CodeTemplates\Monad\EmitEnumerableExtensions.tt" />
     <None Include="CodeTemplates\Monad\EmitEnumerableInternal.tt" />
     <None Include="CodeTemplates\Monad\EmitExtensions.tt" />
     <None Include="CodeTemplates\Fallible.tt" />

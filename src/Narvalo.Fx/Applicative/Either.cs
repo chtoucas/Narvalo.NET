@@ -4,9 +4,6 @@ namespace Narvalo.Applicative
 {
     using System;
 
-    /// <summary>
-    /// Provides a set of static and extension methods for <see cref="Either{TLeft, TRight}"/>.
-    /// </summary>
     public static partial class Either
     {
         public static Either<TLeft, TRight> FlattenLeft<TLeft, TRight>(Either<Either<TLeft, TRight>, TRight> square)

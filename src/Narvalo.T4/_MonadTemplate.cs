@@ -54,7 +54,7 @@ namespace Narvalo.T4
         /// </summary>
         private string _zeroName = "Zero";
 
-        private string _extensionsClsSuffix = String.Empty;
+        private string _extensionsClsSuffix = "Extensions";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="_MonadTemplate"/> class.
@@ -75,6 +75,8 @@ namespace Narvalo.T4
         protected bool IsDelegate { get; set; } = false;
 
         protected bool EmitLinq { get; set; } = true;
+
+        protected bool HelpersIsStruct { get; set; } = false;
 
         protected string InternalNamespace
         {
@@ -436,6 +438,7 @@ namespace Narvalo.T4
 
         protected void InitializeHelpers(bool asStruct, string suffix = "Extensions")
         {
+            HelpersIsStruct = asStruct;
             HelpersTypeDecl = asStruct ? "partial struct" : "partial class";
             _extensionsClsSuffix = suffix;
         }

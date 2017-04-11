@@ -5,7 +5,7 @@ public partial class MonadTemplate
     protected void EmitLinqInternal()
     {
 #>
-    // Provides default implementations for the extension methods for IEnumerable<T>
+    // Provides default implementations for extension methods on IEnumerable<T>
     // and IEnumerable<<#= Name #><T<#= RTDecl #>>>.
     // You will certainly want to shadow them to improve performance.
     // T4: EmitLinqInternal().

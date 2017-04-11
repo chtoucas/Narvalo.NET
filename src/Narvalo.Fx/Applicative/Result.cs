@@ -4,13 +4,6 @@ namespace Narvalo.Applicative
 {
     using System;
 
-    /// <summary>
-    /// Provides a set of static and extension methods for <see cref="Result{T, TError}"/>
-    /// and for querying objects that implement <see cref="System.Collections.Generic.IEnumerable{T}"/> where T is of type
-    /// <see cref="Result{S, TError}"/>.
-    /// </summary>
-    public static partial class Result { }
-
     public static partial class Result
     {
         public static Result<T, TError> FlattenError<T, TError>(Result<T, Result<T, TError>> square)

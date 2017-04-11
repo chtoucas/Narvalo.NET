@@ -7,7 +7,9 @@ public partial class MonadTemplate
         // If we re-enable type constraints, we should also check HasTypeConstraints.
         bool zipViaBind = true;
 #>
-    // Provides extension methods for <#= Name #><T<#= RTDecl #>>.
+    /// <summary>
+    /// Provides extension methods for <see cref="<#= Name #>{T<#= RTDecl #>}"/>.
+    /// </summary>
     // T4: EmitExtensions().
     public static partial class <#= ExtensionsClsName #>
     {

@@ -5,7 +5,6 @@
 <#@ include file="Monad\EmitExtensions.tt" #>
 <#@ include file="Monad\EmitApplicative.tt" #>
 <#@ include file="Monad\EmitKleisli.tt" #>
-<#@ include file="Monad\EmitEnumerableExtensions.tt" #>
 <#@ include file="Monad\EmitEnumerableInternal.tt" #>
 <#@ include file="Monad\EmitLinqCore.tt" #>
 <#@ include file="Monad\EmitLinqInternal.tt" #>
@@ -71,9 +70,6 @@ namespace <#= Namespace #>
 
         WriteLine();
         EmitKleisli();
-
-        WriteLine();
-        EmitEnumerableExtensions();
 #>
 }
 

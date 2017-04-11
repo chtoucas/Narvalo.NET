@@ -21,7 +21,9 @@ namespace Narvalo.T4.Testbed
 
     using Narvalo.T4.Testbed.Internal;
 
-    // Provides a set of static methods for MonadPlus<T>.
+    /// <summary>
+    /// Provides a set of static methods involving <see cref="MonadPlus{T}"/>.
+    /// </summary>
     // T4: EmitHelpers().
     public static partial class MonadPlus
     {
@@ -59,12 +61,39 @@ namespace Narvalo.T4.Testbed
             return source.Select(val => Enumerable.Repeat(val, count));
         }
 
+        public static MonadPlus<IEnumerable<T>> Collect<T>(
+            IEnumerable<MonadPlus<T>> source)
+        {
+            Require.NotNull(source, nameof(source));
+            return source.CollectImpl();
+        }
+
+        public static MonadPlus<IEnumerable<T>> Filter<T>(
+            IEnumerable<T> source,
+            Func<T, MonadPlus<bool>> predicate)
+        {
+            Require.NotNull(source, nameof(source));
+            Require.NotNull(predicate, nameof(predicate));
+            return source.WhereImpl(predicate);
+        }
+
+        public static MonadPlus<IEnumerable<TResult>> Map<T, TResult>(
+            IEnumerable<T> source,
+            Func<T, MonadPlus<TResult>> selector)
+            => MonadPlus.Collect(source.Select(selector));
+
+        public static MonadPlus<IEnumerable<TResult>> Zip<T1, T2, TResult>(
+            IEnumerable<T1> first,
+            IEnumerable<T2> second,
+            Func<T1, T2, MonadPlus<TResult>> resultSelector)
+            => MonadPlus.Collect(first.Zip(second, resultSelector));
+
         #region Lift()
 
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadPlus{T}" /> values.
         /// </summary>
-        /// <seealso cref="MonadPlus.Select{T, TResult}" />
+        /// <seealso cref="MonadPlusExtensions.Select{T, TResult}" />
         public static Func<MonadPlus<T>, MonadPlus<TResult>> Lift<T, TResult>(
             Func<T, TResult> func)
             => arg =>
@@ -76,7 +105,7 @@ namespace Narvalo.T4.Testbed
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadPlus{T}" /> values.
         /// </summary>
-        /// <seealso cref="MonadPlus.Zip{T1, T2, TResult}"/>
+        /// <seealso cref="MonadPlusExtensions.Zip{T1, T2, TResult}"/>
         public static Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
             => (arg1, arg2) =>
@@ -88,7 +117,7 @@ namespace Narvalo.T4.Testbed
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadPlus{T}" /> values.
         /// </summary>
-        /// <seealso cref="MonadPlus.Zip{T1, T2, T3, TResult}"/>
+        /// <seealso cref="MonadPlusExtensions.Zip{T1, T2, T3, TResult}"/>
         public static Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<T3>, MonadPlus<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
             => (arg1, arg2, arg3) =>
@@ -100,7 +129,7 @@ namespace Narvalo.T4.Testbed
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadPlus{T}" /> values.
         /// </summary>
-        /// <seealso cref="MonadPlus.Zip{T1, T2, T3, T4, TResult}"/>
+        /// <seealso cref="MonadPlusExtensions.Zip{T1, T2, T3, T4, TResult}"/>
         public static Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<T3>, MonadPlus<T4>, MonadPlus<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> func)
@@ -113,7 +142,7 @@ namespace Narvalo.T4.Testbed
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadPlus{T}" /> values.
         /// </summary>
-        /// <seealso cref="MonadPlus.Zip{T1, T2, T3, T4, T5, TResult}"/>
+        /// <seealso cref="MonadPlusExtensions.Zip{T1, T2, T3, T4, T5, TResult}"/>
         public static Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<T3>, MonadPlus<T4>, MonadPlus<T5>, MonadPlus<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> func)
@@ -126,9 +155,11 @@ namespace Narvalo.T4.Testbed
         #endregion
     }
 
-    // Provides extension methods for MonadPlus<T>.
+    /// <summary>
+    /// Provides extension methods for <see cref="MonadPlus{T}"/>.
+    /// </summary>
     // T4: EmitExtensions().
-    public static partial class MonadPlus
+    public static partial class MonadPlusExtensions
     {
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
@@ -423,11 +454,14 @@ namespace Narvalo.T4.Testbed
         #endregion
     }
 
-    // Provides extension methods for MonadPlus<Func<TSource, TResult>>.
+    /// <summary>
+    /// Provides extension methods for <see cref="MonadPlus{T}"/>
+    /// where T is of type <see cref="Func{TSource, TResult}"/>.
+    /// </summary>
     // T4: EmitApplicative().
     public static partial class Ap
     {
-        /// <seealso cref="MonadPlus.Gather{TSource, TResult}" />
+        /// <seealso cref="MonadPlusExtensions.Gather{TSource, TResult}" />
         public static MonadPlus<TResult> Apply<TSource, TResult>(
             this MonadPlus<Func<TSource, TResult>> @this,
             MonadPlus<TSource> value)
@@ -437,7 +471,10 @@ namespace Narvalo.T4.Testbed
         }
     }
 
-    // Provides extension methods for functions in the Kleisli category.
+    /// <summary>
+    /// Provides extension methods for functions in the Kleisli category:
+    /// <see cref="Func{TSource, TResult}"/> where TResult is of type <see cref="MonadPlus{T}"/>.
+    /// </summary>
     // T4: EmitKleisli().
     public static partial class Kleisli
     {
@@ -470,39 +507,6 @@ namespace Narvalo.T4.Testbed
             return arg =>second(arg)?.Bind(@this);
         }
     }
-
-    // Provides static methods to operate on IEnumerable<MonadPlus<T>>.
-    // These are not extension methods like any LINQ operator, because they are not composable.
-    // T4: EmitEnumerableExtensions().
-    public static partial class MonadPlus
-    {
-        public static MonadPlus<IEnumerable<T>> Collect<T>(
-            IEnumerable<MonadPlus<T>> source)
-        {
-            Require.NotNull(source, nameof(source));
-            return source.CollectImpl();
-        }
-
-        public static MonadPlus<IEnumerable<T>> Filter<T>(
-            IEnumerable<T> source,
-            Func<T, MonadPlus<bool>> predicate)
-        {
-            Require.NotNull(source, nameof(source));
-            Require.NotNull(predicate, nameof(predicate));
-            return source.WhereImpl(predicate);
-        }
-
-        public static MonadPlus<IEnumerable<TResult>> Map<T, TResult>(
-            IEnumerable<T> source,
-            Func<T, MonadPlus<TResult>> selector)
-            => MonadPlus.Collect(source.Select(selector));
-
-        public static MonadPlus<IEnumerable<TResult>> Zip<T1, T2, TResult>(
-            IEnumerable<T1> first,
-            IEnumerable<T2> second,
-            Func<T1, T2, MonadPlus<TResult>> resultSelector)
-            => MonadPlus.Collect(first.Zip(second, resultSelector));
-    }
 }
 
 namespace Narvalo.T4.Testbed.Internal
@@ -516,7 +520,7 @@ namespace Narvalo.T4.Testbed.Internal
     using Narvalo.Linq;
     using Narvalo.T4.Testbed;
 
-    // Provides default implementations for the extension methods for IEnumerable<MonadPlus<T>>.
+    // Provides default implementations for extension methods on IEnumerable<MonadPlus<T>>.
     // You will certainly want to shadow them to improve performance.
     // T4: EmitEnumerableInternal().
     internal static partial class EnumerableExtensions
@@ -651,7 +655,7 @@ namespace Narvalo.T4.Testbed.Internal
 
     using Narvalo.T4.Testbed;
 
-    // Provides default implementations for the extension methods for IEnumerable<T>
+    // Provides default implementations for extension methods on IEnumerable<T>
     // and IEnumerable<MonadPlus<T>>.
     // You will certainly want to shadow them to improve performance.
     // T4: EmitLinqInternal().

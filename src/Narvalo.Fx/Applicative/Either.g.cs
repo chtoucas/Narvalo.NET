@@ -21,7 +21,9 @@ namespace Narvalo.Applicative
 
     using Narvalo.Internal;
 
-    // Provides a set of static methods for Either<T, TRight>.
+    /// <summary>
+    /// Provides a set of static methods involving <see cref="Either{T, TRight}"/>.
+    /// </summary>
     // T4: EmitHelpers().
     public static partial class Either
     {
@@ -34,12 +36,39 @@ namespace Narvalo.Applicative
             return source.Select(val => Enumerable.Repeat(val, count));
         }
 
+        public static Either<IEnumerable<T>, TRight> Collect<T, TRight>(
+            IEnumerable<Either<T, TRight>> source)
+        {
+            Require.NotNull(source, nameof(source));
+            return source.CollectImpl();
+        }
+
+        public static Either<IEnumerable<T>, TRight> Filter<T, TRight>(
+            IEnumerable<T> source,
+            Func<T, Either<bool, TRight>> predicate)
+        {
+            Require.NotNull(source, nameof(source));
+            Require.NotNull(predicate, nameof(predicate));
+            return source.WhereImpl(predicate);
+        }
+
+        public static Either<IEnumerable<TResult>, TRight> Map<T, TResult, TRight>(
+            IEnumerable<T> source,
+            Func<T, Either<TResult, TRight>> selector)
+            => Either.Collect(source.Select(selector));
+
+        public static Either<IEnumerable<TResult>, TRight> Zip<T1, T2, TResult, TRight>(
+            IEnumerable<T1> first,
+            IEnumerable<T2> second,
+            Func<T1, T2, Either<TResult, TRight>> resultSelector)
+            => Either.Collect(first.Zip(second, resultSelector));
+
         #region Lift()
 
         /// <summary>
         /// Promotes a function to use and return <see cref="Either{T, TRight}" /> values.
         /// </summary>
-        /// <seealso cref="Either.Select{T, TResult, TRight}" />
+        /// <seealso cref="EitherExtensions.Select{T, TResult, TRight}" />
         public static Func<Either<T, TRight>, Either<TResult, TRight>> Lift<T, TResult, TRight>(
             Func<T, TResult> func)
             => arg =>
@@ -51,7 +80,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Either{T, TRight}" /> values.
         /// </summary>
-        /// <seealso cref="Either.Zip{T1, T2, TResult, TRight}"/>
+        /// <seealso cref="EitherExtensions.Zip{T1, T2, TResult, TRight}"/>
         public static Func<Either<T1, TRight>, Either<T2, TRight>, Either<TResult, TRight>>
             Lift<T1, T2, TResult, TRight>(Func<T1, T2, TResult> func)
             => (arg1, arg2) =>
@@ -63,7 +92,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Either{T, TRight}" /> values.
         /// </summary>
-        /// <seealso cref="Either.Zip{T1, T2, T3, TResult, TRight}"/>
+        /// <seealso cref="EitherExtensions.Zip{T1, T2, T3, TResult, TRight}"/>
         public static Func<Either<T1, TRight>, Either<T2, TRight>, Either<T3, TRight>, Either<TResult, TRight>>
             Lift<T1, T2, T3, TResult, TRight>(Func<T1, T2, T3, TResult> func)
             => (arg1, arg2, arg3) =>
@@ -75,7 +104,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Either{T, TRight}" /> values.
         /// </summary>
-        /// <seealso cref="Either.Zip{T1, T2, T3, T4, TResult, TRight}"/>
+        /// <seealso cref="EitherExtensions.Zip{T1, T2, T3, T4, TResult, TRight}"/>
         public static Func<Either<T1, TRight>, Either<T2, TRight>, Either<T3, TRight>, Either<T4, TRight>, Either<TResult, TRight>>
             Lift<T1, T2, T3, T4, TResult, TRight>(
             Func<T1, T2, T3, T4, TResult> func)
@@ -88,7 +117,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Either{T, TRight}" /> values.
         /// </summary>
-        /// <seealso cref="Either.Zip{T1, T2, T3, T4, T5, TResult, TRight}"/>
+        /// <seealso cref="EitherExtensions.Zip{T1, T2, T3, T4, T5, TResult, TRight}"/>
         public static Func<Either<T1, TRight>, Either<T2, TRight>, Either<T3, TRight>, Either<T4, TRight>, Either<T5, TRight>, Either<TResult, TRight>>
             Lift<T1, T2, T3, T4, T5, TResult, TRight>(
             Func<T1, T2, T3, T4, T5, TResult> func)
@@ -101,9 +130,11 @@ namespace Narvalo.Applicative
         #endregion
     }
 
-    // Provides extension methods for Either<T, TRight>.
+    /// <summary>
+    /// Provides extension methods for <see cref="Either{T, TRight}"/>.
+    /// </summary>
     // T4: EmitExtensions().
-    public static partial class Either
+    public static partial class EitherExtensions
     {
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
@@ -304,11 +335,14 @@ namespace Narvalo.Applicative
         #endregion
     }
 
-    // Provides extension methods for Either<Func<TSource, TResult>, TRight>.
+    /// <summary>
+    /// Provides extension methods for <see cref="Either{T, TRight}"/>
+    /// where T is of type <see cref="Func{TSource, TResult}"/>.
+    /// </summary>
     // T4: EmitApplicative().
     public static partial class Ap
     {
-        /// <seealso cref="Either.Gather{TSource, TResult, TRight}" />
+        /// <seealso cref="EitherExtensions.Gather{TSource, TResult, TRight}" />
         public static Either<TResult, TRight> Apply<TSource, TResult, TRight>(
             this Either<Func<TSource, TResult>, TRight> @this,
             Either<TSource, TRight> value)
@@ -318,7 +352,10 @@ namespace Narvalo.Applicative
         }
     }
 
-    // Provides extension methods for functions in the Kleisli category.
+    /// <summary>
+    /// Provides extension methods for functions in the Kleisli category:
+    /// <see cref="Func{TSource, TResult}"/> where TResult is of type <see cref="Either{T, TRight}"/>.
+    /// </summary>
     // T4: EmitKleisli().
     public static partial class Kleisli
     {
@@ -351,39 +388,6 @@ namespace Narvalo.Applicative
             return arg =>second(arg)?.Bind(@this);
         }
     }
-
-    // Provides static methods to operate on IEnumerable<Either<T, TRight>>.
-    // These are not extension methods like any LINQ operator, because they are not composable.
-    // T4: EmitEnumerableExtensions().
-    public static partial class Either
-    {
-        public static Either<IEnumerable<T>, TRight> Collect<T, TRight>(
-            IEnumerable<Either<T, TRight>> source)
-        {
-            Require.NotNull(source, nameof(source));
-            return source.CollectImpl();
-        }
-
-        public static Either<IEnumerable<T>, TRight> Filter<T, TRight>(
-            IEnumerable<T> source,
-            Func<T, Either<bool, TRight>> predicate)
-        {
-            Require.NotNull(source, nameof(source));
-            Require.NotNull(predicate, nameof(predicate));
-            return source.WhereImpl(predicate);
-        }
-
-        public static Either<IEnumerable<TResult>, TRight> Map<T, TResult, TRight>(
-            IEnumerable<T> source,
-            Func<T, Either<TResult, TRight>> selector)
-            => Either.Collect(source.Select(selector));
-
-        public static Either<IEnumerable<TResult>, TRight> Zip<T1, T2, TResult, TRight>(
-            IEnumerable<T1> first,
-            IEnumerable<T2> second,
-            Func<T1, T2, Either<TResult, TRight>> resultSelector)
-            => Either.Collect(first.Zip(second, resultSelector));
-    }
 }
 
 namespace Narvalo.Internal
@@ -397,7 +401,7 @@ namespace Narvalo.Internal
     using Narvalo.Linq;
     using Narvalo.Applicative;
 
-    // Provides default implementations for the extension methods for IEnumerable<Either<T, TRight>>.
+    // Provides default implementations for extension methods on IEnumerable<Either<T, TRight>>.
     // You will certainly want to shadow them to improve performance.
     // T4: EmitEnumerableInternal().
     internal static partial class EnumerableExtensions
@@ -528,7 +532,7 @@ namespace Narvalo.Internal
 
     using Narvalo.Applicative;
 
-    // Provides default implementations for the extension methods for IEnumerable<T>
+    // Provides default implementations for extension methods on IEnumerable<T>
     // and IEnumerable<Either<T, TRight>>.
     // You will certainly want to shadow them to improve performance.
     // T4: EmitLinqInternal().

@@ -21,7 +21,9 @@ namespace Narvalo.T4.Testbed
 
     using Narvalo.T4.Testbed.Internal;
 
-    // Provides a set of static methods for MonadOr<T>.
+    /// <summary>
+    /// Provides a set of static methods involving <see cref="MonadOr{T}"/>.
+    /// </summary>
     // T4: EmitHelpers().
     public static partial class MonadOr
     {
@@ -59,12 +61,39 @@ namespace Narvalo.T4.Testbed
             return source.Select(val => Enumerable.Repeat(val, count));
         }
 
+        public static MonadOr<IEnumerable<T>> Collect<T>(
+            IEnumerable<MonadOr<T>> source)
+        {
+            Require.NotNull(source, nameof(source));
+            return source.CollectImpl();
+        }
+
+        public static MonadOr<IEnumerable<T>> Filter<T>(
+            IEnumerable<T> source,
+            Func<T, MonadOr<bool>> predicate)
+        {
+            Require.NotNull(source, nameof(source));
+            Require.NotNull(predicate, nameof(predicate));
+            return source.WhereImpl(predicate);
+        }
+
+        public static MonadOr<IEnumerable<TResult>> Map<T, TResult>(
+            IEnumerable<T> source,
+            Func<T, MonadOr<TResult>> selector)
+            => MonadOr.Collect(source.Select(selector));
+
+        public static MonadOr<IEnumerable<TResult>> Zip<T1, T2, TResult>(
+            IEnumerable<T1> first,
+            IEnumerable<T2> second,
+            Func<T1, T2, MonadOr<TResult>> resultSelector)
+            => MonadOr.Collect(first.Zip(second, resultSelector));
+
         #region Lift()
 
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadOr{T}" /> values.
         /// </summary>
-        /// <seealso cref="MonadOr.Select{T, TResult}" />
+        /// <seealso cref="MonadOrExtensions.Select{T, TResult}" />
         public static Func<MonadOr<T>, MonadOr<TResult>> Lift<T, TResult>(
             Func<T, TResult> func)
             => arg =>
@@ -76,7 +105,7 @@ namespace Narvalo.T4.Testbed
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadOr{T}" /> values.
         /// </summary>
-        /// <seealso cref="MonadOr.Zip{T1, T2, TResult}"/>
+        /// <seealso cref="MonadOrExtensions.Zip{T1, T2, TResult}"/>
         public static Func<MonadOr<T1>, MonadOr<T2>, MonadOr<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
             => (arg1, arg2) =>
@@ -88,7 +117,7 @@ namespace Narvalo.T4.Testbed
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadOr{T}" /> values.
         /// </summary>
-        /// <seealso cref="MonadOr.Zip{T1, T2, T3, TResult}"/>
+        /// <seealso cref="MonadOrExtensions.Zip{T1, T2, T3, TResult}"/>
         public static Func<MonadOr<T1>, MonadOr<T2>, MonadOr<T3>, MonadOr<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
             => (arg1, arg2, arg3) =>
@@ -100,7 +129,7 @@ namespace Narvalo.T4.Testbed
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadOr{T}" /> values.
         /// </summary>
-        /// <seealso cref="MonadOr.Zip{T1, T2, T3, T4, TResult}"/>
+        /// <seealso cref="MonadOrExtensions.Zip{T1, T2, T3, T4, TResult}"/>
         public static Func<MonadOr<T1>, MonadOr<T2>, MonadOr<T3>, MonadOr<T4>, MonadOr<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> func)
@@ -113,7 +142,7 @@ namespace Narvalo.T4.Testbed
         /// <summary>
         /// Promotes a function to use and return <see cref="MonadOr{T}" /> values.
         /// </summary>
-        /// <seealso cref="MonadOr.Zip{T1, T2, T3, T4, T5, TResult}"/>
+        /// <seealso cref="MonadOrExtensions.Zip{T1, T2, T3, T4, T5, TResult}"/>
         public static Func<MonadOr<T1>, MonadOr<T2>, MonadOr<T3>, MonadOr<T4>, MonadOr<T5>, MonadOr<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> func)
@@ -126,9 +155,11 @@ namespace Narvalo.T4.Testbed
         #endregion
     }
 
-    // Provides extension methods for MonadOr<T>.
+    /// <summary>
+    /// Provides extension methods for <see cref="MonadOr{T}"/>.
+    /// </summary>
     // T4: EmitExtensions().
-    public static partial class MonadOr
+    public static partial class MonadOrExtensions
     {
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
@@ -423,11 +454,14 @@ namespace Narvalo.T4.Testbed
         #endregion
     }
 
-    // Provides extension methods for MonadOr<Func<TSource, TResult>>.
+    /// <summary>
+    /// Provides extension methods for <see cref="MonadOr{T}"/>
+    /// where T is of type <see cref="Func{TSource, TResult}"/>.
+    /// </summary>
     // T4: EmitApplicative().
     public static partial class Ap
     {
-        /// <seealso cref="MonadOr.Gather{TSource, TResult}" />
+        /// <seealso cref="MonadOrExtensions.Gather{TSource, TResult}" />
         public static MonadOr<TResult> Apply<TSource, TResult>(
             this MonadOr<Func<TSource, TResult>> @this,
             MonadOr<TSource> value)
@@ -437,7 +471,10 @@ namespace Narvalo.T4.Testbed
         }
     }
 
-    // Provides extension methods for functions in the Kleisli category.
+    /// <summary>
+    /// Provides extension methods for functions in the Kleisli category:
+    /// <see cref="Func{TSource, TResult}"/> where TResult is of type <see cref="MonadOr{T}"/>.
+    /// </summary>
     // T4: EmitKleisli().
     public static partial class Kleisli
     {
@@ -470,39 +507,6 @@ namespace Narvalo.T4.Testbed
             return arg =>second(arg)?.Bind(@this);
         }
     }
-
-    // Provides static methods to operate on IEnumerable<MonadOr<T>>.
-    // These are not extension methods like any LINQ operator, because they are not composable.
-    // T4: EmitEnumerableExtensions().
-    public static partial class MonadOr
-    {
-        public static MonadOr<IEnumerable<T>> Collect<T>(
-            IEnumerable<MonadOr<T>> source)
-        {
-            Require.NotNull(source, nameof(source));
-            return source.CollectImpl();
-        }
-
-        public static MonadOr<IEnumerable<T>> Filter<T>(
-            IEnumerable<T> source,
-            Func<T, MonadOr<bool>> predicate)
-        {
-            Require.NotNull(source, nameof(source));
-            Require.NotNull(predicate, nameof(predicate));
-            return source.WhereImpl(predicate);
-        }
-
-        public static MonadOr<IEnumerable<TResult>> Map<T, TResult>(
-            IEnumerable<T> source,
-            Func<T, MonadOr<TResult>> selector)
-            => MonadOr.Collect(source.Select(selector));
-
-        public static MonadOr<IEnumerable<TResult>> Zip<T1, T2, TResult>(
-            IEnumerable<T1> first,
-            IEnumerable<T2> second,
-            Func<T1, T2, MonadOr<TResult>> resultSelector)
-            => MonadOr.Collect(first.Zip(second, resultSelector));
-    }
 }
 
 namespace Narvalo.T4.Testbed.Internal
@@ -516,7 +520,7 @@ namespace Narvalo.T4.Testbed.Internal
     using Narvalo.Linq;
     using Narvalo.T4.Testbed;
 
-    // Provides default implementations for the extension methods for IEnumerable<MonadOr<T>>.
+    // Provides default implementations for extension methods on IEnumerable<MonadOr<T>>.
     // You will certainly want to shadow them to improve performance.
     // T4: EmitEnumerableInternal().
     internal static partial class EnumerableExtensions
@@ -651,7 +655,7 @@ namespace Narvalo.T4.Testbed.Internal
 
     using Narvalo.T4.Testbed;
 
-    // Provides default implementations for the extension methods for IEnumerable<T>
+    // Provides default implementations for extension methods on IEnumerable<T>
     // and IEnumerable<MonadOr<T>>.
     // You will certainly want to shadow them to improve performance.
     // T4: EmitLinqInternal().

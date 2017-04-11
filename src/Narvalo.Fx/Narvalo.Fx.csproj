@@ -29,11 +29,9 @@
       <DependentUpon>Outcome.tt</DependentUpon>
     </Compile>
     <Compile Include="Applicative\Fallible.Shadowing.cs" />
-    <Compile Include="Applicative\Fallible%24.cs" />
     <Compile Include="Applicative\Fallible.cs" />
     <Compile Include="Applicative\Outcome`1.cs" />
     <Compile Include="Applicative\Outcome.Shadowing.cs" />
-    <Compile Include="Applicative\Outcome%24.cs" />
     <Compile Include="Applicative\Fallible.Helpers.cs" />
     <Compile Include="Applicative\Vuple.cs" />
     <Compile Include="Applicative\Qullable.cs" />
@@ -53,6 +51,7 @@
     <Compile Include="Linq\Reduce.cs" />
     <Compile Include="Linq\Flatten.cs" />
     <Compile Include="Linq\Qperators.cs" />
+    <Compile Include="Linq\CollectAny.cs" />
     <Compile Include="Linq\SingleOrNone.cs" />
     <Compile Include="Linq\LastOrNone.cs" />
     <Compile Include="Linq\FirstOrNone.cs" />

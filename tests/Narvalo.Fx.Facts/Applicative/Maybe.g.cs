@@ -95,10 +95,10 @@ namespace Narvalo.Applicative {
             Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, third, fourth, zipper4));
             Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, third, fourth, fifth, zipper5));
             // Static method.
-            Assert.Throws<ArgumentNullException>("zipper", () => Maybe.Zip(first, second, zipper2));
-            Assert.Throws<ArgumentNullException>("zipper", () => Maybe.Zip(first, second, third, zipper3));
-            Assert.Throws<ArgumentNullException>("zipper", () => Maybe.Zip(first, second, third, fourth, zipper4));
-            Assert.Throws<ArgumentNullException>("zipper", () => Maybe.Zip(first, second, third, fourth, fifth, zipper5));
+            Assert.Throws<ArgumentNullException>("zipper", () => MaybeExtensions.Zip(first, second, zipper2));
+            Assert.Throws<ArgumentNullException>("zipper", () => MaybeExtensions.Zip(first, second, third, zipper3));
+            Assert.Throws<ArgumentNullException>("zipper", () => MaybeExtensions.Zip(first, second, third, fourth, zipper4));
+            Assert.Throws<ArgumentNullException>("zipper", () => MaybeExtensions.Zip(first, second, third, fourth, fifth, zipper5));
         }
 
         [t("Select() guards.")]
@@ -107,7 +107,7 @@ namespace Narvalo.Applicative {
             Func<int, long> selector = null;
 
             Assert.Throws<ArgumentNullException>("selector", () => source.Select(selector));
-            Assert.Throws<ArgumentNullException>("selector", () => Maybe.Select(source, selector));
+            Assert.Throws<ArgumentNullException>("selector", () => MaybeExtensions.Select(source, selector));
         }
 
         [t("Using() guards.")]
@@ -117,10 +117,10 @@ namespace Narvalo.Applicative {
             Func<DisposableObj, int> selector = null;
 
             Assert.Throws<ArgumentNullException>("binder", () => source.Using(binder));
-            Assert.Throws<ArgumentNullException>("binder", () => Maybe.Using(source, binder));
+            Assert.Throws<ArgumentNullException>("binder", () => MaybeExtensions.Using(source, binder));
 
             Assert.Throws<ArgumentNullException>("selector", () => source.Using(selector));
-            Assert.Throws<ArgumentNullException>("selector", () => Maybe.Using(source, selector));
+            Assert.Throws<ArgumentNullException>("selector", () => MaybeExtensions.Using(source, selector));
         }
 
         [t("Where() guards.")]
@@ -128,7 +128,7 @@ namespace Narvalo.Applicative {
             var source = Maybe<int>.η(1);
 
             Assert.Throws<ArgumentNullException>("predicate", () => source.Where(null));
-            Assert.Throws<ArgumentNullException>("predicate", () => Maybe.Where(source, null));
+            Assert.Throws<ArgumentNullException>("predicate", () => MaybeExtensions.Where(source, null));
         }
 
         [t("SelectMany() guards.")]
@@ -142,8 +142,8 @@ namespace Narvalo.Applicative {
             Assert.Throws<ArgumentNullException>("selector", () => source.SelectMany(null, resultSelector));
             Assert.Throws<ArgumentNullException>("resultSelector", () => source.SelectMany(valueSelector, (Func<short, int, long>)null));
             // Static method.
-            Assert.Throws<ArgumentNullException>("selector", () => Maybe.SelectMany(source, null, resultSelector));
-            Assert.Throws<ArgumentNullException>("resultSelector", () => Maybe.SelectMany(source, valueSelector, (Func<short, int, long>)null));
+            Assert.Throws<ArgumentNullException>("selector", () => MaybeExtensions.SelectMany(source, null, resultSelector));
+            Assert.Throws<ArgumentNullException>("resultSelector", () => MaybeExtensions.SelectMany(source, valueSelector, (Func<short, int, long>)null));
         }
 
         [t("Join() guards.")]
@@ -165,13 +165,13 @@ namespace Narvalo.Applicative {
                 () => source.Join(inner, outerKeySelector, innerKeySelector, resultSelector, null));
             // Static method.
             Assert.Throws<ArgumentNullException>("outerKeySelector",
-                () => Maybe.Join(source, inner, (Func<int, int>)null, innerKeySelector, resultSelector));
+                () => MaybeExtensions.Join(source, inner, (Func<int, int>)null, innerKeySelector, resultSelector));
             Assert.Throws<ArgumentNullException>("innerKeySelector",
-                () => Maybe.Join(source, inner, outerKeySelector, (Func<int, int>)null, resultSelector));
+                () => MaybeExtensions.Join(source, inner, outerKeySelector, (Func<int, int>)null, resultSelector));
             Assert.Throws<ArgumentNullException>("resultSelector",
-                () => Maybe.Join(source, inner, outerKeySelector, innerKeySelector, (Func<int, int, int>)null));
+                () => MaybeExtensions.Join(source, inner, outerKeySelector, innerKeySelector, (Func<int, int, int>)null));
             Assert.Throws<ArgumentNullException>("comparer",
-                () => Maybe.Join(source, inner, outerKeySelector, innerKeySelector, resultSelector, null));
+                () => MaybeExtensions.Join(source, inner, outerKeySelector, innerKeySelector, resultSelector, null));
         }
 
         [t("GroupJoin() guards.")]
@@ -193,13 +193,13 @@ namespace Narvalo.Applicative {
                 () => source.GroupJoin(inner, outerKeySelector, innerKeySelector, resultSelector, null));
             // Static method.
             Assert.Throws<ArgumentNullException>("outerKeySelector",
-                () => Maybe.GroupJoin(source, inner, (Func<int, int>)null, innerKeySelector, resultSelector));
+                () => MaybeExtensions.GroupJoin(source, inner, (Func<int, int>)null, innerKeySelector, resultSelector));
             Assert.Throws<ArgumentNullException>("innerKeySelector",
-                () => Maybe.GroupJoin(source, inner, outerKeySelector, (Func<int, int>)null, resultSelector));
+                () => MaybeExtensions.GroupJoin(source, inner, outerKeySelector, (Func<int, int>)null, resultSelector));
             Assert.Throws<ArgumentNullException>("resultSelector",
-                () => Maybe.GroupJoin(source, inner, outerKeySelector, innerKeySelector, (Func<int, Maybe<int>, int>)null));
+                () => MaybeExtensions.GroupJoin(source, inner, outerKeySelector, innerKeySelector, (Func<int, Maybe<int>, int>)null));
             Assert.Throws<ArgumentNullException>("comparer",
-                () => Maybe.GroupJoin(source, inner, outerKeySelector, innerKeySelector, resultSelector, null));
+                () => MaybeExtensions.GroupJoin(source, inner, outerKeySelector, innerKeySelector, resultSelector, null));
         }
     }
 
@@ -256,7 +256,7 @@ namespace Narvalo.Applicative {
             var source = Maybe<int>.η(arg0);
 
             var left = selector1(source);
-            var right = Maybe.Select(source, selector);
+            var right = MaybeExtensions.Select(source, selector);
 
             return left.Equals(right);
         }
@@ -285,7 +285,7 @@ namespace Narvalo.Applicative {
             var p1 = Maybe<int>.η(arg1);
 
             var left = zipper1(p0, p1);
-            var right = Maybe.Zip(p0, p1, zipper);
+            var right = MaybeExtensions.Zip(p0, p1, zipper);
 
             return left.Equals(right);
         }
@@ -315,7 +315,7 @@ namespace Narvalo.Applicative {
             var p2 = Maybe<int>.η(arg2);
 
             var left = zipper1(p0, p1, p2);
-            var right = Maybe.Zip(p0, p1, p2, zipper);
+            var right = MaybeExtensions.Zip(p0, p1, p2, zipper);
 
             return left.Equals(right);
         }
@@ -347,7 +347,7 @@ namespace Narvalo.Applicative {
             var p3 = Maybe<int>.η(arg3);
 
             var left = zipper1(p0, p1, p2, p3);
-            var right = Maybe.Zip(p0, p1, p2, p3, zipper);
+            var right = MaybeExtensions.Zip(p0, p1, p2, p3, zipper);
 
             return left.Equals(right);
         }
@@ -381,7 +381,7 @@ namespace Narvalo.Applicative {
             var p4 = Maybe<int>.η(arg4);
 
             var left = zipper1(p0, p1, p2, p3, p4);
-            var right = Maybe.Zip(p0, p1, p2, p3, p4, zipper);
+            var right = MaybeExtensions.Zip(p0, p1, p2, p3, p4, zipper);
 
             return left.Equals(right);
         }
@@ -397,7 +397,7 @@ namespace Narvalo.Applicative {
         [q("ReplaceBy() replaces the enclosed value if any (2).")]
         public static bool ReplaceBy01b(int arg0, int arg1) {
             var source = Maybe<int>.η(arg0);
-            var result = Maybe.ReplaceBy(source, arg1);
+            var result = MaybeExtensions.ReplaceBy(source, arg1);
 
             return result.Contains(arg1);
         }
@@ -415,7 +415,7 @@ namespace Narvalo.Applicative {
         public static bool ContinueWith01b(int arg0, int arg1) {
             var source = Maybe<int>.η(arg0);
             var other = Maybe<int>.η(arg1);
-            var result = Maybe.ContinueWith(source, other);
+            var result = MaybeExtensions.ContinueWith(source, other);
 
             return result.Contains(arg1);
         }
@@ -433,7 +433,7 @@ namespace Narvalo.Applicative {
         public static bool PassBy01b(int arg0, int arg1) {
             var source = Maybe<int>.η(arg0);
             var other = Maybe<int>.η(arg1);
-            var result = Maybe.PassBy(source, other);
+            var result = MaybeExtensions.PassBy(source, other);
 
             return result.Contains(arg0);
         }
@@ -449,7 +449,7 @@ namespace Narvalo.Applicative {
         [q("Skip() replaces the enclosed value by Unit if any (2).")]
         public static bool Skip01b(int arg0) {
             var source = Maybe<int>.η(arg0);
-            var result = Maybe.Skip(source);
+            var result = MaybeExtensions.Skip(source);
 
             return result.Contains(Unit.Default);
         }
@@ -470,7 +470,7 @@ namespace Narvalo.Applicative {
             var obj = new DisposableObj();
             var source = Maybe<DisposableObj>.η(obj);
             Func<DisposableObj, Maybe<int>> binder = _ => Maybe<int>.η(1);
-            var result = Maybe.Using(source, binder);
+            var result = MaybeExtensions.Using(source, binder);
 
             Assert.True(result.Contains(1));
             Assert.True(obj.WasDisposed);
@@ -492,7 +492,7 @@ namespace Narvalo.Applicative {
             var obj = new DisposableObj();
             var source = Maybe<DisposableObj>.η(obj);
             Func<DisposableObj, int> selector = _ => 1;
-            var result = Maybe.Using(source, selector);
+            var result = MaybeExtensions.Using(source, selector);
 
             Assert.True(result.Contains(1));
             Assert.True(obj.WasDisposed);
@@ -515,7 +515,7 @@ namespace Narvalo.Applicative {
             var value = Maybe<int>.η(arg0);
 
             var applied = Ap.Apply(applicative, value);
-            var gathered = Maybe.Gather(value, applicative);
+            var gathered = MaybeExtensions.Gather(value, applicative);
 
             return applied.Equals(gathered);
         }

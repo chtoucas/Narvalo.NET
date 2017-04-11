@@ -93,10 +93,10 @@ namespace Narvalo.Applicative {
             Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, third, fourth, zipper4));
             Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, third, fourth, fifth, zipper5));
             // Static method.
-            Assert.Throws<ArgumentNullException>("zipper", () => Result.Zip(first, second, zipper2));
-            Assert.Throws<ArgumentNullException>("zipper", () => Result.Zip(first, second, third, zipper3));
-            Assert.Throws<ArgumentNullException>("zipper", () => Result.Zip(first, second, third, fourth, zipper4));
-            Assert.Throws<ArgumentNullException>("zipper", () => Result.Zip(first, second, third, fourth, fifth, zipper5));
+            Assert.Throws<ArgumentNullException>("zipper", () => ResultExtensions.Zip(first, second, zipper2));
+            Assert.Throws<ArgumentNullException>("zipper", () => ResultExtensions.Zip(first, second, third, zipper3));
+            Assert.Throws<ArgumentNullException>("zipper", () => ResultExtensions.Zip(first, second, third, fourth, zipper4));
+            Assert.Throws<ArgumentNullException>("zipper", () => ResultExtensions.Zip(first, second, third, fourth, fifth, zipper5));
         }
 
         [t("Select() guards.")]
@@ -105,7 +105,7 @@ namespace Narvalo.Applicative {
             Func<int, long> selector = null;
 
             Assert.Throws<ArgumentNullException>("selector", () => source.Select(selector));
-            Assert.Throws<ArgumentNullException>("selector", () => Result.Select(source, selector));
+            Assert.Throws<ArgumentNullException>("selector", () => ResultExtensions.Select(source, selector));
         }
 
         [t("Using() guards.")]
@@ -115,10 +115,10 @@ namespace Narvalo.Applicative {
             Func<DisposableObj, int> selector = null;
 
             Assert.Throws<ArgumentNullException>("binder", () => source.Using(binder));
-            Assert.Throws<ArgumentNullException>("binder", () => Result.Using(source, binder));
+            Assert.Throws<ArgumentNullException>("binder", () => ResultExtensions.Using(source, binder));
 
             Assert.Throws<ArgumentNullException>("selector", () => source.Using(selector));
-            Assert.Throws<ArgumentNullException>("selector", () => Result.Using(source, selector));
+            Assert.Throws<ArgumentNullException>("selector", () => ResultExtensions.Using(source, selector));
         }
 
         [t("SelectMany() guards.")]
@@ -132,8 +132,8 @@ namespace Narvalo.Applicative {
             Assert.Throws<ArgumentNullException>("selector", () => source.SelectMany(null, resultSelector));
             Assert.Throws<ArgumentNullException>("resultSelector", () => source.SelectMany(valueSelector, (Func<short, int, long>)null));
             // Static method.
-            Assert.Throws<ArgumentNullException>("selector", () => Result.SelectMany(source, null, resultSelector));
-            Assert.Throws<ArgumentNullException>("resultSelector", () => Result.SelectMany(source, valueSelector, (Func<short, int, long>)null));
+            Assert.Throws<ArgumentNullException>("selector", () => ResultExtensions.SelectMany(source, null, resultSelector));
+            Assert.Throws<ArgumentNullException>("resultSelector", () => ResultExtensions.SelectMany(source, valueSelector, (Func<short, int, long>)null));
         }
 
     }
@@ -173,7 +173,7 @@ namespace Narvalo.Applicative {
             var source = Result<int, My.Obj>.Of(arg0);
 
             var left = selector1(source);
-            var right = Result.Select(source, selector);
+            var right = ResultExtensions.Select(source, selector);
 
             return left.Equals(right);
         }
@@ -202,7 +202,7 @@ namespace Narvalo.Applicative {
             var p1 = Result<int, My.Obj>.Of(arg1);
 
             var left = zipper1(p0, p1);
-            var right = Result.Zip(p0, p1, zipper);
+            var right = ResultExtensions.Zip(p0, p1, zipper);
 
             return left.Equals(right);
         }
@@ -232,7 +232,7 @@ namespace Narvalo.Applicative {
             var p2 = Result<int, My.Obj>.Of(arg2);
 
             var left = zipper1(p0, p1, p2);
-            var right = Result.Zip(p0, p1, p2, zipper);
+            var right = ResultExtensions.Zip(p0, p1, p2, zipper);
 
             return left.Equals(right);
         }
@@ -264,7 +264,7 @@ namespace Narvalo.Applicative {
             var p3 = Result<int, My.Obj>.Of(arg3);
 
             var left = zipper1(p0, p1, p2, p3);
-            var right = Result.Zip(p0, p1, p2, p3, zipper);
+            var right = ResultExtensions.Zip(p0, p1, p2, p3, zipper);
 
             return left.Equals(right);
         }
@@ -298,7 +298,7 @@ namespace Narvalo.Applicative {
             var p4 = Result<int, My.Obj>.Of(arg4);
 
             var left = zipper1(p0, p1, p2, p3, p4);
-            var right = Result.Zip(p0, p1, p2, p3, p4, zipper);
+            var right = ResultExtensions.Zip(p0, p1, p2, p3, p4, zipper);
 
             return left.Equals(right);
         }
@@ -314,7 +314,7 @@ namespace Narvalo.Applicative {
         [q("ReplaceBy() replaces the enclosed value if any (2).")]
         public static bool ReplaceBy01b(int arg0, int arg1) {
             var source = Result<int, My.Obj>.Of(arg0);
-            var result = Result.ReplaceBy(source, arg1);
+            var result = ResultExtensions.ReplaceBy(source, arg1);
 
             return result.Contains(arg1);
         }
@@ -332,7 +332,7 @@ namespace Narvalo.Applicative {
         public static bool ContinueWith01b(int arg0, int arg1) {
             var source = Result<int, My.Obj>.Of(arg0);
             var other = Result<int, My.Obj>.Of(arg1);
-            var result = Result.ContinueWith(source, other);
+            var result = ResultExtensions.ContinueWith(source, other);
 
             return result.Contains(arg1);
         }
@@ -350,7 +350,7 @@ namespace Narvalo.Applicative {
         public static bool PassBy01b(int arg0, int arg1) {
             var source = Result<int, My.Obj>.Of(arg0);
             var other = Result<int, My.Obj>.Of(arg1);
-            var result = Result.PassBy(source, other);
+            var result = ResultExtensions.PassBy(source, other);
 
             return result.Contains(arg0);
         }
@@ -366,7 +366,7 @@ namespace Narvalo.Applicative {
         [q("Skip() replaces the enclosed value by Unit if any (2).")]
         public static bool Skip01b(int arg0) {
             var source = Result<int, My.Obj>.Of(arg0);
-            var result = Result.Skip(source);
+            var result = ResultExtensions.Skip(source);
 
             return result.Contains(Unit.Default);
         }
@@ -387,7 +387,7 @@ namespace Narvalo.Applicative {
             var obj = new DisposableObj();
             var source = Result<DisposableObj, My.Obj>.Of(obj);
             Func<DisposableObj, Result<int, My.Obj>> binder = _ => Result<int, My.Obj>.Of(1);
-            var result = Result.Using(source, binder);
+            var result = ResultExtensions.Using(source, binder);
 
             Assert.True(result.Contains(1));
             Assert.True(obj.WasDisposed);
@@ -409,7 +409,7 @@ namespace Narvalo.Applicative {
             var obj = new DisposableObj();
             var source = Result<DisposableObj, My.Obj>.Of(obj);
             Func<DisposableObj, int> selector = _ => 1;
-            var result = Result.Using(source, selector);
+            var result = ResultExtensions.Using(source, selector);
 
             Assert.True(result.Contains(1));
             Assert.True(obj.WasDisposed);
@@ -432,7 +432,7 @@ namespace Narvalo.Applicative {
             var value = Result<int, My.Obj>.Of(arg0);
 
             var applied = Ap.Apply(applicative, value);
-            var gathered = Result.Gather(value, applicative);
+            var gathered = ResultExtensions.Gather(value, applicative);
 
             return applied.Equals(gathered);
         }

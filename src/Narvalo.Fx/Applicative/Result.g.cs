@@ -21,7 +21,9 @@ namespace Narvalo.Applicative
 
     using Narvalo.Internal;
 
-    // Provides a set of static methods for Result<T, TError>.
+    /// <summary>
+    /// Provides a set of static methods involving <see cref="Result{T, TError}"/>.
+    /// </summary>
     // T4: EmitHelpers().
     public static partial class Result
     {
@@ -34,12 +36,39 @@ namespace Narvalo.Applicative
             return source.Select(val => Enumerable.Repeat(val, count));
         }
 
+        public static Result<IEnumerable<T>, TError> Collect<T, TError>(
+            IEnumerable<Result<T, TError>> source)
+        {
+            Require.NotNull(source, nameof(source));
+            return source.CollectImpl();
+        }
+
+        public static Result<IEnumerable<T>, TError> Filter<T, TError>(
+            IEnumerable<T> source,
+            Func<T, Result<bool, TError>> predicate)
+        {
+            Require.NotNull(source, nameof(source));
+            Require.NotNull(predicate, nameof(predicate));
+            return source.WhereImpl(predicate);
+        }
+
+        public static Result<IEnumerable<TResult>, TError> Map<T, TResult, TError>(
+            IEnumerable<T> source,
+            Func<T, Result<TResult, TError>> selector)
+            => Result.Collect(source.Select(selector));
+
+        public static Result<IEnumerable<TResult>, TError> Zip<T1, T2, TResult, TError>(
+            IEnumerable<T1> first,
+            IEnumerable<T2> second,
+            Func<T1, T2, Result<TResult, TError>> resultSelector)
+            => Result.Collect(first.Zip(second, resultSelector));
+
         #region Lift()
 
         /// <summary>
         /// Promotes a function to use and return <see cref="Result{T, TError}" /> values.
         /// </summary>
-        /// <seealso cref="Result.Select{T, TResult, TError}" />
+        /// <seealso cref="ResultExtensions.Select{T, TResult, TError}" />
         public static Func<Result<T, TError>, Result<TResult, TError>> Lift<T, TResult, TError>(
             Func<T, TResult> func)
             => arg =>
@@ -51,7 +80,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Result{T, TError}" /> values.
         /// </summary>
-        /// <seealso cref="Result.Zip{T1, T2, TResult, TError}"/>
+        /// <seealso cref="ResultExtensions.Zip{T1, T2, TResult, TError}"/>
         public static Func<Result<T1, TError>, Result<T2, TError>, Result<TResult, TError>>
             Lift<T1, T2, TResult, TError>(Func<T1, T2, TResult> func)
             => (arg1, arg2) =>
@@ -63,7 +92,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Result{T, TError}" /> values.
         /// </summary>
-        /// <seealso cref="Result.Zip{T1, T2, T3, TResult, TError}"/>
+        /// <seealso cref="ResultExtensions.Zip{T1, T2, T3, TResult, TError}"/>
         public static Func<Result<T1, TError>, Result<T2, TError>, Result<T3, TError>, Result<TResult, TError>>
             Lift<T1, T2, T3, TResult, TError>(Func<T1, T2, T3, TResult> func)
             => (arg1, arg2, arg3) =>
@@ -75,7 +104,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Result{T, TError}" /> values.
         /// </summary>
-        /// <seealso cref="Result.Zip{T1, T2, T3, T4, TResult, TError}"/>
+        /// <seealso cref="ResultExtensions.Zip{T1, T2, T3, T4, TResult, TError}"/>
         public static Func<Result<T1, TError>, Result<T2, TError>, Result<T3, TError>, Result<T4, TError>, Result<TResult, TError>>
             Lift<T1, T2, T3, T4, TResult, TError>(
             Func<T1, T2, T3, T4, TResult> func)
@@ -88,7 +117,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Result{T, TError}" /> values.
         /// </summary>
-        /// <seealso cref="Result.Zip{T1, T2, T3, T4, T5, TResult, TError}"/>
+        /// <seealso cref="ResultExtensions.Zip{T1, T2, T3, T4, T5, TResult, TError}"/>
         public static Func<Result<T1, TError>, Result<T2, TError>, Result<T3, TError>, Result<T4, TError>, Result<T5, TError>, Result<TResult, TError>>
             Lift<T1, T2, T3, T4, T5, TResult, TError>(
             Func<T1, T2, T3, T4, T5, TResult> func)
@@ -101,9 +130,11 @@ namespace Narvalo.Applicative
         #endregion
     }
 
-    // Provides extension methods for Result<T, TError>.
+    /// <summary>
+    /// Provides extension methods for <see cref="Result{T, TError}"/>.
+    /// </summary>
     // T4: EmitExtensions().
-    public static partial class Result
+    public static partial class ResultExtensions
     {
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
@@ -304,11 +335,14 @@ namespace Narvalo.Applicative
         #endregion
     }
 
-    // Provides extension methods for Result<Func<TSource, TResult>, TError>.
+    /// <summary>
+    /// Provides extension methods for <see cref="Result{T, TError}"/>
+    /// where T is of type <see cref="Func{TSource, TResult}"/>.
+    /// </summary>
     // T4: EmitApplicative().
     public static partial class Ap
     {
-        /// <seealso cref="Result.Gather{TSource, TResult, TError}" />
+        /// <seealso cref="ResultExtensions.Gather{TSource, TResult, TError}" />
         public static Result<TResult, TError> Apply<TSource, TResult, TError>(
             this Result<Func<TSource, TResult>, TError> @this,
             Result<TSource, TError> value)
@@ -318,7 +352,10 @@ namespace Narvalo.Applicative
         }
     }
 
-    // Provides extension methods for functions in the Kleisli category.
+    /// <summary>
+    /// Provides extension methods for functions in the Kleisli category:
+    /// <see cref="Func{TSource, TResult}"/> where TResult is of type <see cref="Result{T, TError}"/>.
+    /// </summary>
     // T4: EmitKleisli().
     public static partial class Kleisli
     {
@@ -351,39 +388,6 @@ namespace Narvalo.Applicative
             return arg => second(arg).Bind(@this);
         }
     }
-
-    // Provides static methods to operate on IEnumerable<Result<T, TError>>.
-    // These are not extension methods like any LINQ operator, because they are not composable.
-    // T4: EmitEnumerableExtensions().
-    public static partial class Result
-    {
-        public static Result<IEnumerable<T>, TError> Collect<T, TError>(
-            IEnumerable<Result<T, TError>> source)
-        {
-            Require.NotNull(source, nameof(source));
-            return source.CollectImpl();
-        }
-
-        public static Result<IEnumerable<T>, TError> Filter<T, TError>(
-            IEnumerable<T> source,
-            Func<T, Result<bool, TError>> predicate)
-        {
-            Require.NotNull(source, nameof(source));
-            Require.NotNull(predicate, nameof(predicate));
-            return source.WhereImpl(predicate);
-        }
-
-        public static Result<IEnumerable<TResult>, TError> Map<T, TResult, TError>(
-            IEnumerable<T> source,
-            Func<T, Result<TResult, TError>> selector)
-            => Result.Collect(source.Select(selector));
-
-        public static Result<IEnumerable<TResult>, TError> Zip<T1, T2, TResult, TError>(
-            IEnumerable<T1> first,
-            IEnumerable<T2> second,
-            Func<T1, T2, Result<TResult, TError>> resultSelector)
-            => Result.Collect(first.Zip(second, resultSelector));
-    }
 }
 
 namespace Narvalo.Internal
@@ -397,7 +401,7 @@ namespace Narvalo.Internal
     using Narvalo.Linq;
     using Narvalo.Applicative;
 
-    // Provides default implementations for the extension methods for IEnumerable<Result<T, TError>>.
+    // Provides default implementations for extension methods on IEnumerable<Result<T, TError>>.
     // You will certainly want to shadow them to improve performance.
     // T4: EmitEnumerableInternal().
     internal static partial class EnumerableExtensions
@@ -528,7 +532,7 @@ namespace Narvalo.Internal
 
     using Narvalo.Applicative;
 
-    // Provides default implementations for the extension methods for IEnumerable<T>
+    // Provides default implementations for extension methods on IEnumerable<T>
     // and IEnumerable<Result<T, TError>>.
     // You will certainly want to shadow them to improve performance.
     // T4: EmitLinqInternal().

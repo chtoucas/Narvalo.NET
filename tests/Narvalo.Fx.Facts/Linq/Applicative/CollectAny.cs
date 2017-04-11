@@ -8,17 +8,35 @@ namespace Narvalo.Linq.Applicative {
 
     using Assert = Narvalo.AssertExtended;
 
+    // CollectAny for Either.
+    public partial class AperatorsFacts {
+        [t("CollectAny() guards (Either).")]
+        public static void CollectAny0a() {
+            IEnumerable<Either<int, int>> nil = null;
+
+            Assert.Throws<ArgumentNullException>("source", () => nil.CollectAny());
+        }
+
+        [t("CollectAny() uses deferred execution (Either).")]
+        public static void CollectAny1a() {
+            IEnumerable<Either<int, int>> source = new ThrowingEnumerable<Either<int, int>>();
+
+            var q = Assert.DoesNotThrow(() => source.CollectAny());
+            Assert.ThrowsOnNext(q);
+        }
+    }
+
     // CollectAny for Fallible.
     public partial class AperatorsFacts {
         [t("CollectAny() guards (Fallible).")]
-        public static void CollectAny0a() {
+        public static void CollectAny0b() {
             IEnumerable<Fallible<int>> nil = null;
 
             Assert.Throws<ArgumentNullException>("source", () => nil.CollectAny());
         }
 
         [t("CollectAny() uses deferred execution (Fallible).")]
-        public static void CollectAny1a() {
+        public static void CollectAny1b() {
             IEnumerable<Fallible<int>> source = new ThrowingEnumerable<Fallible<int>>();
 
             var q = Assert.DoesNotThrow(() => source.CollectAny());
@@ -29,14 +47,14 @@ namespace Narvalo.Linq.Applicative {
     // CollectAny for Maybe.
     public partial class AperatorsFacts {
         [t("CollectAny() guards (Maybe).")]
-        public static void CollectAny0b() {
+        public static void CollectAny0c() {
             IEnumerable<Maybe<int>> nil = null;
 
             Assert.Throws<ArgumentNullException>("source", () => nil.CollectAny());
         }
 
         [t("CollectAny() uses deferred execution (Maybe).")]
-        public static void CollectAny1b() {
+        public static void CollectAny1c() {
             IEnumerable<Maybe<int>> source = new ThrowingEnumerable<Maybe<int>>();
 
             var q = Assert.DoesNotThrow(() => source.CollectAny());
@@ -47,14 +65,14 @@ namespace Narvalo.Linq.Applicative {
     // CollectAny for Outcome.
     public partial class AperatorsFacts {
         [t("CollectAny() guards (Outcome).")]
-        public static void CollectAny0c() {
+        public static void CollectAny0d() {
             IEnumerable<Outcome<int>> nil = null;
 
             Assert.Throws<ArgumentNullException>("source", () => nil.CollectAny());
         }
 
         [t("CollectAny() uses deferred execution (Outcome).")]
-        public static void CollectAny1c() {
+        public static void CollectAny1d() {
             IEnumerable<Outcome<int>> source = new ThrowingEnumerable<Outcome<int>>();
 
             var q = Assert.DoesNotThrow(() => source.CollectAny());
@@ -65,14 +83,14 @@ namespace Narvalo.Linq.Applicative {
     // CollectAny for Result.
     public partial class AperatorsFacts {
         [t("CollectAny() guards (Result).")]
-        public static void CollectAny0d() {
+        public static void CollectAny0e() {
             IEnumerable<Result<int, int>> nil = null;
 
             Assert.Throws<ArgumentNullException>("source", () => nil.CollectAny());
         }
 
         [t("CollectAny() uses deferred execution (Result).")]
-        public static void CollectAny1d() {
+        public static void CollectAny1e() {
             IEnumerable<Result<int, int>> source = new ThrowingEnumerable<Result<int, int>>();
 
             var q = Assert.DoesNotThrow(() => source.CollectAny());

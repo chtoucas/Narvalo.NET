@@ -755,6 +755,7 @@ Category | Operator | Return Type | Deferred
 -------- | -------- | ----------- | :------:
 Projection     | `SelectAny`          | `IEnumerable<TResult>`     | Streaming
 Restriction    | `WhereAny`           | `IEnumerable<T>`           | Streaming
+|              | `CollectAny`         | `IEnumerable<T>`           | Streaming
 Set            | `Append`             | `IEnumerable<T>`           | Streaming
 |              | `Prepend`            | `IEnumerable<T>`           | Streaming
 Element        | `FirstOrNone`        | `Maybe<T>`                 | -
@@ -924,6 +925,8 @@ Haskell | C# | Return Type
 `forever`                | -                  | -
 `void`                   | `obj.Skip`         | `Maybe<Unit>`
 
+We do not make `Collect` and `Map` extension methods like any LINQ operator,
+because they are not composable:
 - `Collect` is `mseq.CollectAny` wrapped into a "maybe".
 - `Map` is `seq.Select` followed by `Maybe.Collect`.
 

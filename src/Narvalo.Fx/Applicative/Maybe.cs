@@ -5,13 +5,6 @@ namespace Narvalo.Applicative
     using System.Collections.Generic;
     using System.Linq;
 
-    /// <summary>
-    /// Provides a set of static and extension methods for <see cref="Maybe{T}"/>
-    /// and for querying objects that implement <see cref="IEnumerable{T}"/>
-    /// where T is of type <see cref="Maybe{S}"/>.
-    /// </summary>
-    public static partial class Maybe { }
-
     // Provides extension methods for Maybe<T?> or Maybe<T> where T is a struct.
     public static partial class Maybe
     {

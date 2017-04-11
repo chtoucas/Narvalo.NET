@@ -1199,7 +1199,7 @@ namespace Narvalo.Applicative {
             var m1 = some.ReplaceBy(exp);
             Assert.True(m1.IsSome);
 
-            var m2 = Maybe.ReplaceBy(some, exp);
+            var m2 = MaybeExtensions.ReplaceBy(some, exp);
             Assert.True(m2.IsSome);
         }
 
@@ -1211,7 +1211,7 @@ namespace Narvalo.Applicative {
             var m1 = none.ReplaceBy(exp);
             Assert.True(m1.IsNone);
 
-            var m2 = Maybe.ReplaceBy(none, exp);
+            var m2 = MaybeExtensions.ReplaceBy(none, exp);
             Assert.True(m2.IsNone);
         }
 
@@ -1223,7 +1223,7 @@ namespace Narvalo.Applicative {
             var m1 = some.ContinueWith(exp);
             Assert.Equal(exp, m1);
 
-            var m2 = Maybe.ContinueWith(some, exp);
+            var m2 = MaybeExtensions.ContinueWith(some, exp);
             Assert.Equal(exp, m2);
         }
 
@@ -1235,7 +1235,7 @@ namespace Narvalo.Applicative {
             var m1 = none.ContinueWith(other);
             Assert.True(m1.IsNone);
 
-            var m2 = Maybe.ContinueWith(none, other);
+            var m2 = MaybeExtensions.ContinueWith(none, other);
             Assert.True(m2.IsNone);
         }
 
@@ -1248,7 +1248,7 @@ namespace Narvalo.Applicative {
             var m1 = some.PassBy(other);
             Assert.Equal(some, m1);
 
-            var m2 = Maybe.PassBy(some, other);
+            var m2 = MaybeExtensions.PassBy(some, other);
             Assert.Equal(some, m2);
 
             var none = Maybe<Obj>.None;
@@ -1256,7 +1256,7 @@ namespace Narvalo.Applicative {
             var m3 = none.PassBy(other);
             Assert.Equal(none, m3);
 
-            var m4 = Maybe.PassBy(none, other);
+            var m4 = MaybeExtensions.PassBy(none, other);
             Assert.Equal(none, m4);
         }
 
@@ -1269,7 +1269,7 @@ namespace Narvalo.Applicative {
             var m1 = some.PassBy(other);
             Assert.True(m1.IsNone);
 
-            var m2 = Maybe.PassBy(some, other);
+            var m2 = MaybeExtensions.PassBy(some, other);
             Assert.True(m2.IsNone);
 
             var none = Maybe<Obj>.None;
@@ -1277,7 +1277,7 @@ namespace Narvalo.Applicative {
             var m3 = none.PassBy(other);
             Assert.True(m3.IsNone);
 
-            var m4 = Maybe.PassBy(none, other);
+            var m4 = MaybeExtensions.PassBy(none, other);
             Assert.True(m4.IsNone);
         }
 
@@ -1288,7 +1288,7 @@ namespace Narvalo.Applicative {
             var m1 = some.Skip();
             Assert.Equal(Maybe.Unit, m1);
 
-            var m2 = Maybe.Skip(some);
+            var m2 = MaybeExtensions.Skip(some);
             Assert.Equal(Maybe.Unit, m2);
         }
 
@@ -1299,7 +1299,7 @@ namespace Narvalo.Applicative {
             var m1 = none.Skip();
             Assert.Equal(Maybe.None, m1);
 
-            var m2 = Maybe.Skip(none);
+            var m2 = MaybeExtensions.Skip(none);
             Assert.Equal(Maybe.None, m2);
         }
 
@@ -1311,7 +1311,7 @@ namespace Narvalo.Applicative {
             var m1 = some.Select(selector);
             Assert.True(m1.IsSome);
 
-            var m2 = Maybe.Select(some, selector);
+            var m2 = MaybeExtensions.Select(some, selector);
             Assert.True(m2.IsSome);
 
             var q = from item in some select selector(item);
@@ -1326,7 +1326,7 @@ namespace Narvalo.Applicative {
             var m1 = none.Select(selector);
             Assert.True(m1.IsNone);
 
-            var m2 = Maybe.Select(none, selector);
+            var m2 = MaybeExtensions.Select(none, selector);
             Assert.True(m2.IsNone);
 
             var q = from item in none select selector(item);
@@ -1341,7 +1341,7 @@ namespace Narvalo.Applicative {
             var m1 = some.Where(predicate);
             Assert.True(m1.IsNone);
 
-            var m2 = Maybe.Where(some, predicate);
+            var m2 = MaybeExtensions.Where(some, predicate);
             Assert.True(m2.IsNone);
 
             var q = from _ in some where predicate(_) select _;
@@ -1357,7 +1357,7 @@ namespace Narvalo.Applicative {
             Assert.True(m1.IsSome);
             Assert.Equal(some, m1);
 
-            var m2 = Maybe.Where(some, predicate);
+            var m2 = MaybeExtensions.Where(some, predicate);
             Assert.True(m2.IsSome);
             Assert.Equal(some, m2);
 
@@ -1376,7 +1376,7 @@ namespace Narvalo.Applicative {
             var m1 = none.SelectMany(valueSelector, resultSelector);
             Assert.True(m1.IsNone);
 
-            var m2 = Maybe.SelectMany(none, valueSelector, resultSelector);
+            var m2 = MaybeExtensions.SelectMany(none, valueSelector, resultSelector);
             Assert.True(m2.IsNone);
 
             var q = from i in none
@@ -1395,7 +1395,7 @@ namespace Narvalo.Applicative {
             var m1 = none1.SelectMany(valueSelector, resultSelector);
             Assert.True(m1.IsNone);
 
-            var m2 = Maybe.SelectMany(none1, valueSelector, resultSelector);
+            var m2 = MaybeExtensions.SelectMany(none1, valueSelector, resultSelector);
             Assert.True(m2.IsNone);
 
             var q = from i in none1
@@ -1414,7 +1414,7 @@ namespace Narvalo.Applicative {
             var m1 = some.SelectMany(valueSelector, resultSelector);
             Assert.True(m1.IsNone);
 
-            var m2 = Maybe.SelectMany(some, valueSelector, resultSelector);
+            var m2 = MaybeExtensions.SelectMany(some, valueSelector, resultSelector);
             Assert.True(m2.IsNone);
 
             var q = from i in some
@@ -1431,7 +1431,7 @@ namespace Narvalo.Applicative {
             var m1 = some1.Join(some2, i => i, i => i, (i, j) => i + j);
             Assert.True(m1.IsNone);
 
-            var m2 = Maybe.Join(some1, some2, i => i, i => i, (i, j) => i + j);
+            var m2 = MaybeExtensions.Join(some1, some2, i => i, i => i, (i, j) => i + j);
             Assert.True(m2.IsNone);
 
             var q = from i in some1
@@ -1542,7 +1542,7 @@ namespace Narvalo.Applicative {
             var m1 = some.Select(selector);
             Assert.Equal(2, m1.Value);
 
-            var m2 = Maybe.Select(some, selector);
+            var m2 = MaybeExtensions.Select(some, selector);
             Assert.Equal(2, m2.Value);
 
             var q = from item in some select selector(item);
@@ -1560,7 +1560,7 @@ namespace Narvalo.Applicative {
             Assert.True(m1.IsSome);
             Assert.Equal(3, m1.Value);
 
-            var m2 = Maybe.SelectMany(source, valueSelector, resultSelector);
+            var m2 = MaybeExtensions.SelectMany(source, valueSelector, resultSelector);
             Assert.True(m2.IsSome);
             Assert.Equal(3, m2.Value);
 
@@ -1580,7 +1580,7 @@ namespace Narvalo.Applicative {
             Assert.True(m1.IsSome);
             Assert.Equal(3, m1.Value);
 
-            var m2 = Maybe.Join(source, inner, i => 2 * i, i => i, (i, j) => i + j);
+            var m2 = MaybeExtensions.Join(source, inner, i => 2 * i, i => i, (i, j) => i + j);
             Assert.True(m2.IsSome);
             Assert.Equal(3, m2.Value);
 
