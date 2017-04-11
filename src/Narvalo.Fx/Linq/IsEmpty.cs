@@ -2,6 +2,7 @@
 
 namespace Narvalo.Linq
 {
+    using System;
     using System.Collections.Generic;
 
     public static partial class Qperators
@@ -20,6 +21,28 @@ namespace Narvalo.Linq
             {
                 return !iter.MoveNext();
             }
+        }
+
+        // Returns true if no element in the sequence satisfies the predicate; otherwise false.
+        public static bool IsEmpty<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, bool> predicate)
+        {
+            Require.NotNull(source, nameof(source));
+            Require.NotNull(predicate, nameof(predicate));
+
+            // Same as !source.Any(predicate);
+            // Same as source.All(x => !predicate(x));
+            // Same as !source.Where(predicate).Any();
+            foreach (var element in source)
+            {
+                if (predicate(element))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

@@ -765,7 +765,6 @@ Element        | `FirstOrNone`        | `Maybe<T>`                 | -
 Aggregation    | `Fold`               | `TAccumulate`              | -
 |              | `Reduce`             | `T`                        | -
 Quantification | `IsEmpty`            | `bool`                     | -
-|              | `None`               | `bool`                     | -
 Other          | `EmptyIfNull`        | `IEnumerable<T>`           | -
 
 Operator | Input Type | Return Type | Deferred
@@ -798,6 +797,8 @@ an `IEnumerable<T>` as input (except `Flatten`):
   This operator differs in behaviour from the standard query `SingleOrDefault`
   which throws an exception if more than one element satisfies the predicate.
 - `IsEmpty()` returns true if the sequence is empty; otherwise false.
+- `IsEmpty(predicate)` returns true if no element in the sequence satisfies the
+  predicate; otherwise false.
 - `EmptyIfNull()` returns a new empty sequence if the sequence is empty;
   otherwise it returns the sequence.
 
@@ -860,6 +861,8 @@ with three elements `2`, `4` and `5`; it filters out the two _none_'s.
 
 #### `Sum`
 `Sum` acts on an `IEnumerable<Maybe<T>>`.
+
+[Correspondance with Rx.NET (naming differences)]
 
 --------------------------------------------------------------------------------
 

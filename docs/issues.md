@@ -58,7 +58,6 @@ Narvalo.Fx
 ----------
 
 - Move `Collect`, `CollectAny` and `Sum` to `Narvalo.Linq`.
-- Mimimic other Rx operators: `Scan`, `MinBy`, `MaxBy`, `GroupBy`...
 - Simplify LINQ for `Maybe<T?>`?
 - Remove `GroupJoin` for monads?
 - Explain `Bind` and `Select` for `Outcome` and `Fallible`,
@@ -73,9 +72,9 @@ Narvalo.Fx
     (see `WhenLeft` for instance).
 
 Next:
+- LINQ: `FoldBack` and `ReduceBack`. Mimimic Rx operators: `Scan`, `MinBy`, `MaxBy`, `GroupBy`...
 - Add async and lazy alternatives?
 - More recursion helpers: trampoline + other Y Combinators.
-- LINQ: `FoldBack` and `ReduceBack`.
 - Custom `is` operators (it is in the proposal but it is not yet possible).
 - Deconstruction for `Maybe<T?>`,
 ```csharp
