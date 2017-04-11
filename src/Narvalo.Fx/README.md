@@ -924,8 +924,8 @@ Haskell | C# | Return Type
 `forever`                | -                  | -
 `void`                   | `obj.Skip`         | `Maybe<Unit>`
 
-- `Collect` is `CollectAny` wrapped into a "maybe".
-- `Map` is `Select` followed by `Maybe.Collect`.
+- `Collect` is `mseq.CollectAny` wrapped into a "maybe".
+- `Map` is `seq.Select` followed by `Maybe.Collect`.
 
 ### <a name="haskell-list"></a>Generalisations of list functions
 
@@ -934,14 +934,14 @@ Below `square` is an object of type `Maybe<Maybe<T>>`.
 Haskell | C# | Return Type
 --------|----|------------
 `join`                       | `square.Flatten`    | `Maybe<T>`
-`filterM`                    | `Maybe.Where`       | `Maybe<IEnumerable<T>>`
+`filterM`                    | `Maybe.Filter`      | `Maybe<IEnumerable<T>>`
 `mapAndUnzipM`               | (`Maybe.MapUnzip`)  | (`Maybe<(IEnumerable<T1>, IEnumerable<T2>)>`)
 `zipWithM` / `zipWithM_`     | `Maybe.Zip`         | `Maybe<IEnumerable<TResult>>`
 `foldM` / `foldM_`           | `seq.Fold`          | `Maybe<TAccumulate>`
 `replicateM` / `replicateM_` | `Maybe.Repeat`      | `Maybe<IEnumerable<T>>`
 
-- `WhereBy` is `WhereAny` wrapped into a "maybe".
-- `ZipWith` is `Zip` followed by `Collect`.
+- `Filter` is `seq.WhereAny` wrapped into a "maybe".
+- `Zip` is `seq.Zip` followed by `Collect`.
 
 #### `MapUnzip`
 To quote the Haskell documentation, _`mapAndUnzipM` is mainly used with
