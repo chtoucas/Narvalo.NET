@@ -293,7 +293,7 @@ namespace Narvalo.Applicative
     // Implements the Internal.Iterable<T> interface.
     public partial struct Outcome<T>
     {
-        public IEnumerable<T> ToEnumerable() => IsSuccess ? Sequence.Of(Value) : Enumerable.Empty<T>();
+        public IEnumerable<T> ToEnumerable() => IsSuccess ? Sequence.Return(Value) : Enumerable.Empty<T>();
 
         public IEnumerator<T> GetEnumerator() => ToEnumerable().GetEnumerator();
     }

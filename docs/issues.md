@@ -57,10 +57,7 @@ Next:
 Narvalo.Fx
 ----------
 
-- LINQ changes:
-  * Merge `Sequence.Gather` and `Sequence.Unfold`? Remove overloads of `Gather`
-    that are just `Unfold`'s.
-  * Simplify LINQ for `Maybe<T?>`?
+- Simplify LINQ for `Maybe<T?>`?
 - Remove `GroupJoin` for monads?
 - Explain `Bind` and `Select` for `Outcome` and `Fallible`,
   `Where` for `Outcome<T>` and `Fallible<T>`.

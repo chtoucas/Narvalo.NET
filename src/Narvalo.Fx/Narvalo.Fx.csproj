@@ -47,11 +47,9 @@
     <Compile Include="Linq\AppendPrepend.cs" />
     <Compile Include="Linq\EmptyIfNull.cs" />
     <Compile Include="Linq\Reduce.cs" />
-    <Compile Include="Linq\Gather.cs" />
     <Compile Include="Linq\Flatten.cs" />
     <Compile Include="Linq\None.cs" />
     <Compile Include="Linq\Qperators.cs" />
-    <Compile Include="Linq\Unfold.cs" />
     <Compile Include="Linq\SingleOrNone.cs" />
     <Compile Include="Linq\LastOrNone.cs" />
     <Compile Include="Linq\FirstOrNone.cs" />

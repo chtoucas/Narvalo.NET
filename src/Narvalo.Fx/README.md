@@ -22,6 +22,8 @@ disjoint union (`Either<T1, T2>`), sequence generators and LINQ extensions.
 Our versioning scheme is explained
 [here](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/index.md#versioning).
 
+[What's Next](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/issues.md#narvalo.fx)
+
 **WARNING: _I am currently in the process of rewriting this document._**
 
 ### Content
@@ -732,7 +734,7 @@ var right = Either<int, long>.OfRight(1L);
 Query Operators and Generators
 ------------------------------
 
-- [LINQ Extensions](#linq-extensions)
+- [Operators](#linq-operators)
 - [Generators](#linq-generators)
 - [Special Operators](#linq-special)
 
@@ -745,7 +747,7 @@ they do not have to read all the source data before they yield elements,
 or _not streaming_, they must read all the source data before they can yield
 a result element.
 
-### <a name="linq-extensions"></a>LINQ Extensions
+### <a name="linq-operators"></a>Operators
 
 To enable any of them, you must first import the namespace `Narvalo.Linq`.
 
@@ -808,9 +810,12 @@ an `IEnumerable<T>` as input:
 
 Operator | Return Type | Deferred
 -------- | ----------- | :------:
-`Of`          | `IEnumerable<T>` | Streaming
-`Gather`      | `IEnumerable<T>` | Streaming
-`Unfold`      | `IEnumerable<T>` | Streaming
+`Return` | `IEnumerable<T>` | Streaming
+`Repeat` | `IEnumerable<T>` | Streaming
+`Unfold` | `IEnumerable<T>` | Streaming
+
+Be careful with infinite sequences, a simple way to terminate one is to use
+the `Take` operator.
 
 ### <a name="linq-special"></a>Special Operators
 
@@ -843,6 +848,8 @@ and `5`; it filters out the two _none_'s.
 
 Recursion
 ---------
+
+[Corecursion]
 
 --------------------------------------------------------------------------------
 
@@ -1195,5 +1202,7 @@ Shadowing
 
 Changelog
 ---------
+
+Nothing until we reach 1.0.0.
 
 --------------------------------------------------------------------------------

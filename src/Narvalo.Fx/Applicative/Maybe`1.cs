@@ -172,7 +172,7 @@ namespace Narvalo.Applicative
     // Implements the Internal.IMaybe<T> interface.
     public partial struct Maybe<T>
     {
-        public IEnumerable<T> ToEnumerable() => IsSome ? Sequence.Of(Value) : Enumerable.Empty<T>();
+        public IEnumerable<T> ToEnumerable() => IsSome ? Sequence.Return(Value) : Enumerable.Empty<T>();
 
         public IEnumerator<T> GetEnumerator() => ToEnumerable().GetEnumerator();
 
