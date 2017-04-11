@@ -37,7 +37,7 @@ namespace Narvalo.Linq
             }
         }
 
-        public static IEnumerable<TResult> Unfold<TResult>(
+        public static IEnumerable<TResult> Generate<TResult>(
             TResult seed,
             Func<TResult, TResult> generator)
         {
@@ -58,7 +58,7 @@ namespace Narvalo.Linq
             }
         }
 
-        public static IEnumerable<TResult> Unfold<TResult>(
+        public static IEnumerable<TResult> Generate<TResult>(
             TResult seed,
             Func<TResult, TResult> generator,
             Func<TResult, bool> predicate)

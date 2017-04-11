@@ -72,7 +72,9 @@ Narvalo.Fx
     (see `WhenLeft` for instance).
 
 Next:
-- LINQ: `FoldBack` and `ReduceBack`. Mimimic Rx operators: `Scan`, `MinBy`, `MaxBy`, `GroupBy`...
+- LINQ: `FoldBack` and `ReduceBack`. Mimic Rx operators: `Scan`, `MinBy`,
+  `MaxBy`... (see also F#) I am sure we can improve the default implementations
+  for `CollectAny`, `SelectAny` and `WhereAny`.
 - Add async and lazy alternatives?
 - More recursion helpers: trampoline + other Y Combinators.
 - Custom `is` operators (it is in the proposal but it is not yet possible).

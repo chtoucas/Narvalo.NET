@@ -11,6 +11,31 @@ namespace Narvalo.Linq {
             public tAttribute(string description) : base(nameof(Sequence), description) { }
         }
 
+        [t("Generate() guards.")]
+        public static void Generate0() {
+            Func<int, int> generator = i => i + 1;
+            Func<int, bool> predicate = _ => true;
+
+            Assert.Throws<ArgumentNullException>("generator", () => Sequence.Generate(0, default(Func<int, int>)));
+
+            Assert.Throws<ArgumentNullException>("generator", () => Sequence.Generate(0, null, predicate));
+            Assert.Throws<ArgumentNullException>("predicate", () => Sequence.Generate(0, generator, default(Func<int, bool>)));
+        }
+
+        [t("Generate() uses deferred (streaming) execution.")]
+        public static void Generate01() {
+            Func<int, int> generator = _ => throw new InvalidOperationException();
+            Func<int, bool> predicate = _ => throw new InvalidOperationException();
+
+            var q1 = Assert.DoesNotThrow(() => Sequence.Generate(0, generator));
+            Assert.ThrowsAfter(q1, 1);
+
+            var q2 = Assert.DoesNotThrow(() => Sequence.Generate(0, generator, _ => true));
+            Assert.ThrowsAfter(q2, 1);
+            var q3 = Assert.DoesNotThrow(() => Sequence.Generate(0, i => i + 1, predicate));
+            Assert.ThrowsOnNext(q3);
+        }
+
         [t("Unfold() guards (1).")]
         public static void Unfold0() {
             Func<int, (int, int)> generator = i => (i, i + 1);
@@ -24,11 +49,6 @@ namespace Narvalo.Linq {
             Func<int, int> generator = i => i + 1;
             Func<int, int> resultSelector = i => i + 1;
             Func<int, bool> predicate = _ => true;
-
-            Assert.Throws<ArgumentNullException>("generator", () => Sequence.Unfold(0, default(Func<int, int>)));
-
-            Assert.Throws<ArgumentNullException>("generator", () => Sequence.Unfold(0, null, predicate));
-            Assert.Throws<ArgumentNullException>("predicate", () => Sequence.Unfold(0, generator, default(Func<int, bool>)));
 
             Assert.Throws<ArgumentNullException>("generator", () => Sequence.Unfold(0, null, resultSelector));
             Assert.Throws<ArgumentNullException>("resultSelector", () => Sequence.Unfold(0, generator, default(Func<int, int>)));
@@ -52,25 +72,17 @@ namespace Narvalo.Linq {
             Func<int, int> resultSelector = _ => throw new InvalidOperationException();
             Func<int, bool> predicate = _ => throw new InvalidOperationException();
 
-            var q1 = Assert.DoesNotThrow(() => Sequence.Unfold(0, generator));
+            var q1 = Assert.DoesNotThrow(() => Sequence.Unfold(0, generator, i => i + 1));
             Assert.ThrowsAfter(q1, 1);
+            var q2 = Assert.DoesNotThrow(() => Sequence.Unfold(0, i => i + 1, resultSelector));
+            Assert.ThrowsOnNext(q2);
 
-            var q2 = Assert.DoesNotThrow(() => Sequence.Unfold(0, generator, _ => true));
-            Assert.ThrowsAfter(q2, 1);
-            var q3 = Assert.DoesNotThrow(() => Sequence.Unfold(0, i => i + 1, predicate));
-            Assert.ThrowsOnNext(q3);
-
-            var q4 = Assert.DoesNotThrow(() => Sequence.Unfold(0, generator, i => i + 1));
-            Assert.ThrowsAfter(q4, 1);
-            var q5 = Assert.DoesNotThrow(() => Sequence.Unfold(0, i => i + 1, resultSelector));
+            var q3 = Assert.DoesNotThrow(() => Sequence.Unfold(0, generator, i => i + 1, _ => true));
+            Assert.ThrowsAfter(q3, 1);
+            var q4 = Assert.DoesNotThrow(() => Sequence.Unfold(0, i => i + 1, resultSelector, _ => true));
+            Assert.ThrowsOnNext(q4);
+            var q5 = Assert.DoesNotThrow(() => Sequence.Unfold(0, i => i + 1, i => i + 1, predicate));
             Assert.ThrowsOnNext(q5);
-
-            var q6 = Assert.DoesNotThrow(() => Sequence.Unfold(0, generator, i => i + 1, _ => true));
-            Assert.ThrowsAfter(q6, 1);
-            var q7 = Assert.DoesNotThrow(() => Sequence.Unfold(0, i => i + 1, resultSelector, _ => true));
-            Assert.ThrowsOnNext(q7);
-            var q8 = Assert.DoesNotThrow(() => Sequence.Unfold(0, i => i + 1, i => i + 1, predicate));
-            Assert.ThrowsOnNext(q8);
         }
     }
 }

@@ -814,9 +814,10 @@ an `IEnumerable<T>` as input (except `Flatten`):
 
 Operator | Return Type | Deferred
 -------- | ----------- | :------:
-`Return` | `IEnumerable<T>` | Streaming
-`Repeat` | `IEnumerable<T>` | Streaming
-`Unfold` | `IEnumerable<T>` | Streaming
+`Return`   | `IEnumerable<T>` | Streaming
+`Repeat`   | `IEnumerable<T>` | Streaming
+`Generate` | `IEnumerable<T>` | Streaming
+`Unfold`   | `IEnumerable<T>` | Streaming
 
 Be careful with infinite sequences, a simple way to terminate one is to use
 the `Take` operator.
