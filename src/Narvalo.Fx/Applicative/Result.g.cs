@@ -403,7 +403,6 @@ namespace Narvalo.Internal
                     bool append = false;
                     var current = iter.Current;
 
-
                     current.Bind(val =>
                     {
                         append = true;
@@ -427,7 +426,7 @@ namespace Narvalo.Internal
     }
 }
 
-namespace Narvalo.Linq
+namespace Narvalo.Linq.Applicative
 {
     using System;
     using System.Collections.Generic;
@@ -437,7 +436,7 @@ namespace Narvalo.Linq
 
     // Provides extension methods for IEnumerable<T>.
     // T4: EmitLinqCore().
-    public static partial class Qperators
+    public static partial class Kperators
     {
         public static IEnumerable<TResult> SelectAny<TSource, TResult, TError>(
             this IEnumerable<TSource> source,

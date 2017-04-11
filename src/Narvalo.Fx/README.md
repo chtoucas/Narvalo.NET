@@ -35,7 +35,7 @@ Our versioning scheme is explained
 - [Either Type](#either-type)
 - [Query Operators and Generators](#query-operators-and-generators)
 - [Recursion](#recursion)
-- [Tour of the Monadic API](#tour-of-the-monadic-api)
+- [Tour of the API](#tour-of-the-api)
 - [Haskell to C# Walk-Through](#haskell-to-C-walk-through)
 - [Typologia](#typologia)
 - [F# is better at functional programming!](#f-is-better-at-functional-programming)
@@ -736,6 +736,7 @@ Query Operators and Generators
 
 - [Operators](#linq-operators)
 - [Generators](#linq-generators)
+- [Kleisli Operators](#linq-kleisli)
 - [Special Operators](#linq-special)
 
 For each new query operator, we define its behaviour regarding deferred or
@@ -762,15 +763,17 @@ Element        | `FirstOrNone`        | `Maybe<T>`                 | -
 |              | `ElementAtOrNone`    | `Maybe<T>`                 | -
 |              | `SingleOrNone`       | `Maybe<T>`                 | -
 Aggregation    | `Fold`               | `TAccumulate`              | -
-|              | `Fold`               | `Monad<TAccumulate>`       | -
 |              | `Reduce`             | `T`                        | -
-|              | `Reduce`             | `Monad<T>`                 | -
 Quantification | `IsEmpty`            | `bool`                     | -
 |              | `None`               | `bool`                     | -
-Generation     | `EmptyIfNull`        | `IEnumerable<T>`           | -
+Other          | `EmptyIfNull`        | `IEnumerable<T>`           | -
+
+Operator | Input Type | Return Type | Deferred
+-------- | ---------- | ----------- | :------:
+`Flatten` | `IEnumerable<IEnumerable<T>>` | `IEnumerable<T>` | Streaming
 
 All these operators are defined as extension methods (in `Qperators`) and expect
-an `IEnumerable<T>` as input:
+an `IEnumerable<T>` as input (except `Flatten`):
 - `Append()` (resp. `Prepend()`) appends (resp. prepends) a new element to a sequence.
   **NB:** A much better [implementation](https://github.com/dotnet/corefx/blob/master/src/System.Linq/src/System/Linq/AppendPrepend.cs)
   appears in later versions of `System.Linq`; it optimizes multiple consecutive
@@ -817,19 +820,33 @@ Operator | Return Type | Deferred
 Be careful with infinite sequences, a simple way to terminate one is to use
 the `Take` operator.
 
+- `Return(value)` generates a sequence that contains exactly one value.
+- `Repeat(value)` generates an **infinite** sequence that contains one repeated
+  value.
+
+### <a name="linq-kleisli"></a>Kleisli Operators
+
+These operators are available once you import `Narvalo.Linq.Applicative`.
+
+Category | Operator | Return Type | Deferred |
+-------- | -------- | ----------- | :------: |
+Projection  | `SelectAny`  | `IEnumerable<TResult>` | Streaming
+Restriction | `WhereAny`   | `IEnumerable<T>`       | Streaming
+Aggregation | `Fold`       | `Monad<TAccumulate>`   | -
+|           | `Reduce`     | `Monad<T>`             | -
+
 ### <a name="linq-special"></a>Special Operators
 
-A "special" operator acts on sequences of monads; it is available once you
-import `Narvalo.Applicative` (NB: that might change).
+These operators are available once you import `Narvalo.Applicative`.
 
 Category | Operator | Input Type | Return Type | Deferred |
 -------- | -------- | ---------- | ----------- | :------: |
-Restriction | `CollectAny` | `IEnumerable<Monad<T>>`       | `IEnumerable<T>` | Streaming
-Aggregation | `Sum` (*)    | `IEnumerable<Maybe<T>>`       | `Maybe<T>`       | -
-????        | `Flatten`    | `IEnumerable<IEnumerable<T>>` | `IEnumerable<T>` | Streaming
+Restriction | `CollectAny` | `IEnumerable<Monad<T>>`       | `IEnumerable<T>`       | Streaming
+Aggregation | `Sum` (*)    | `IEnumerable<Maybe<T>>`       | `Maybe<T>`             | -
 
 #### `CollectAny`
 `CollectAny` acts on an `IEnumerable<Monad<T>>`.
+
 For instance, applying `CollectAny` to the sequence:
 ```csharp
 yield return Maybe<int>.None;
@@ -838,8 +855,8 @@ yield return Maybe<int>.None;
 yield return Maybe.Of(4);
 yield return Maybe.Of(5);
 ```
-returns a sequence of type `IEnumerable<int>` with three elements `2`, `4`
-and `5`; it filters out the two _none_'s.
+of type  `IEnumerable<Maybe<int>>` returns a sequence of type `IEnumerable<int>`
+with three elements `2`, `4` and `5`; it filters out the two _none_'s.
 
 #### `Sum`
 `Sum` acts on an `IEnumerable<Maybe<T>>`.
@@ -853,8 +870,8 @@ Recursion
 
 --------------------------------------------------------------------------------
 
-Tour of the Monadic API
------------------------
+Tour of the API
+---------------
 
 ### Core Verbs
 

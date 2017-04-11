@@ -7,7 +7,7 @@ public partial class MonadTemplate
 #>
     // Provides extension methods for IEnumerable<T>.
     // T4: EmitLinqCore().
-    public static partial class Qperators
+    public static partial class Kperators
     {
 <#+ if (EmitExtendedLinq) { #>
         // NB: This operator is not composable.

@@ -431,7 +431,7 @@ namespace Narvalo.T4
         protected void InitializeNamespacesForNarvaloFx()
         {
             InternalNamespace = "Narvalo.Internal";
-            LinqNamespace = "Narvalo.Linq";
+            LinqNamespace = "Narvalo.Linq.Applicative";
         }
 
         protected void InitializeHelpers(bool asStruct, string suffix = "Extensions")

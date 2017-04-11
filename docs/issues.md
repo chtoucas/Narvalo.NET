@@ -57,6 +57,8 @@ Next:
 Narvalo.Fx
 ----------
 
+- Move `Collect`, `CollectAny` and `Sum` to `Narvalo.Linq`.
+- Mimimic other Rx operators: `Scan`, `MinBy`, `MaxBy`, `GroupBy`...
 - Simplify LINQ for `Maybe<T?>`?
 - Remove `GroupJoin` for monads?
 - Explain `Bind` and `Select` for `Outcome` and `Fallible`,

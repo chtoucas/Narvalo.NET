@@ -568,7 +568,7 @@ namespace Narvalo.T4.Testbed.Linq
 
     // Provides extension methods for IEnumerable<T>.
     // T4: EmitLinqCore().
-    public static partial class Qperators
+    public static partial class Kperators
     {
         public static IEnumerable<TResult> SelectAny<TSource, TResult>(
             this IEnumerable<TSource> source,

@@ -8,7 +8,7 @@ namespace Narvalo.Linq
     /// <summary>
     /// Provides a set of static methods for producing sequences.
     /// </summary>
-    public static partial class Sequence
+    public static class Sequence
     {
         /// <summary>
         /// Generates a sequence that contains exactly one value.

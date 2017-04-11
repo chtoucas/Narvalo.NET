@@ -21,7 +21,7 @@
     <Compile Include="Applicative\Either.Shadowing.cs" />
     <Compile Include="Applicative\Either.cs" />
     <Compile Include="Applicative\Either`2.cs" />
-    <Compile Include="Applicative\Ap_.cs" />
+    <Compile Include="Applicative\Ap.cs" />
     <Compile Include="Applicative\Maybe.Shadowing.cs" />
     <Compile Include="Applicative\Outcome.cs" />
     <Compile Include="Applicative\Outcome.g.cs">
@@ -42,10 +42,13 @@
     <Compile Include="Internal\IEither`2.cs" />
     <Compile Include="Internal\IMaybe`1.cs" />
     <Compile Include="Internal\Iterable`1.cs" />
+    <Compile Include="Linq\Applicative\Kperators.cs" />
+    <Compile Include="Linq\Applicative\SelectAny.cs" />
+    <Compile Include="Linq\Applicative\WhereAny.cs" />
+    <Compile Include="Linq\EmptyIfNull.cs" />
     <Compile Include="Linq\Fold.cs" />
     <Compile Include="Linq\ElementAtOrNone.cs" />
     <Compile Include="Linq\AppendPrepend.cs" />
-    <Compile Include="Linq\EmptyIfNull.cs" />
     <Compile Include="Linq\Reduce.cs" />
     <Compile Include="Linq\Flatten.cs" />
     <Compile Include="Linq\None.cs" />
@@ -59,7 +62,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Applicative\Kleisli_.cs" />
+    <Compile Include="Applicative\Kleisli.cs" />
     <Compile Include="Applicative\Result.cs" />
     <Compile Include="Applicative\Result.g.cs">
       <DependentUpon>Result.tt</DependentUpon>

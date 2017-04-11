@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Linq
+namespace Narvalo.Linq.Applicative
 {
     /// <summary>
     /// Provides a set of extension methods for querying
@@ -10,12 +10,7 @@ namespace Narvalo.Linq
     /// New LINQ operators:
     /// - Projecting: SelectAny (deferred)
     /// - Filtering: WhereAny (deferred)
-    /// - Set: Append (deferred), Prepend (deferred)
-    /// - Element: FirstOrNone, LastOrNone, SingleOrNone, ElementAtOrNone
     /// - Aggregation: Fold, Reduce
-    /// - Quantifiers: IsEmpty, None
-    /// - Generation: EmptyIfNull
-    /// - Others: Flatten
     /// </remarks>
-    public static partial class Qperators { }
+    public static partial class Kperators { }
 }
