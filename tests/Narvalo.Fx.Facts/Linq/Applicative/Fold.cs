@@ -9,7 +9,7 @@ namespace Narvalo.Linq.Applicative {
     using Xunit;
 
     // Fold for Either.
-    public partial class KperatorsFacts {
+    public partial class AperatorsFacts {
         [t("Fold() guards (Either).")]
         public static void Fold0a() {
             int seed = 0;
@@ -27,7 +27,7 @@ namespace Narvalo.Linq.Applicative {
     }
 
     // Fold for Fallible.
-    public partial class KperatorsFacts {
+    public partial class AperatorsFacts {
         [t("Fold() guards (Fallible).")]
         public static void Fold0b() {
             int seed = 0;
@@ -45,7 +45,7 @@ namespace Narvalo.Linq.Applicative {
     }
 
     // Fold for Maybe.
-    public partial class KperatorsFacts {
+    public partial class AperatorsFacts {
         [t("Fold() guards (Maybe).")]
         public static void Fold0c() {
             int seed = 0;
@@ -63,7 +63,7 @@ namespace Narvalo.Linq.Applicative {
     }
 
     // Fold for Outcome.
-    public partial class KperatorsFacts {
+    public partial class AperatorsFacts {
         [t("Fold() guards (Outcome).")]
         public static void Fold0d() {
             int seed = 0;
@@ -81,7 +81,7 @@ namespace Narvalo.Linq.Applicative {
     }
 
     // Fold for Result.
-    public partial class KperatorsFacts {
+    public partial class AperatorsFacts {
         [t("Fold() guards (Result).")]
         public static void Fold0e() {
             int seed = 0;

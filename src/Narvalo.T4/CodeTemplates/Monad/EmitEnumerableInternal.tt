@@ -11,61 +11,38 @@ public partial class MonadTemplate
     internal static partial class EnumerableExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static IEnumerable<TSource> CollectAnyImpl<TSource<#= RTDecl #>>(
-            this IEnumerable<<#= Name #><TSource<#= RTDecl #>>> source)
-        {
-            Debug.Assert(source != null);
-
-<#+ if (HasRightGenerics) { #>
-            var unit = <#+ WriteFactory("Unit"); #>(Unit.Default);
-<#+ } #>
-            var item = default(TSource);
-
-            using (var iter = source.GetEnumerator())
-            {
-                while (iter.MoveNext())
-                {
-                    bool append = false;
-                    var current = iter.Current;
-<#+ if (IsNullable) { #>
-
-                    if (current == null) { continue; }
-<#+ } #>
-
-                    current.Bind(val =>
-                    {
-                        append = true;
-                        item = val;
-
-<#+ if (HasRightGenerics) { #>
-                        return unit;
-<#+ } else { #>
-                        return <#= Name #>.Unit;
-<#+ } #>
-                    });
-
-                    if (append) { yield return item; }
-                }
-            }
-        }
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static <#= Name #><IEnumerable<TSource><#= RTDecl #>> CollectImpl<TSource<#= RTDecl #>>(
             this IEnumerable<<#= Name #><TSource<#= RTDecl #>>> source)
         {
             Debug.Assert(source != null);
-            return <#+ WriteFactory("IEnumerable<TSource>"); #>(CollectAnyImpl(source));
+
+            var seed = <#+ WriteFactory("IEnumerable<TSource>"); #>(Enumerable.Empty<TSource>());
+            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append
+                = (seq, item) => seq.Append(item);
+
+            var accumulator = <#= Name #>.Lift<IEnumerable<TSource>, TSource, IEnumerable<TSource><#= RTDecl #>>(append);
+
+            return source.Aggregate(seed, accumulator);
         }
-<#+ if (HasSum) { #>
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static <#= Name #><TSource> SumImpl<TSource>(
-            this IEnumerable<<#= Name #><TSource>> source)
+        internal static <#= Name #><IEnumerable<TSource><#= RTDecl #>> WhereImpl<TSource<#= RTDecl #>>(
+            this IEnumerable<TSource> source,
+            Func<TSource, <#= Name #><bool<#= RTDecl #>>> predicate)
         {
             Debug.Assert(source != null);
-            return source.Aggregate(<#= Name #><TSource>.<#= ZeroName #>, (m, n) => m.<#= PlusName #>(n));
+            Debug.Assert(predicate != null);
+
+            var seed = <#+ WriteFactory("IEnumerable<TSource>"); #>(Enumerable.Empty<TSource>());
+
+            Func<TSource, Func<bool, IEnumerable<TSource>, IEnumerable<TSource>>> func
+                = item => (b, seq) => b ? seq.Append(item) : seq;
+
+            Func<<#= Name #><IEnumerable<TSource><#= RTDecl #>>, TSource, <#= Name #><IEnumerable<TSource><#= RTDecl #>>> accumulator
+                = (mseq, item) => predicate(item).Zip(mseq, func(item));
+
+            return source.Aggregate(seed, accumulator);
         }
-<#+ } // T4: End of HasSum. #>
     }
 <#+
     } // T4: End of EmitEnumerableInternal().

@@ -18,7 +18,6 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Applicative\Either.Shadowing.cs" />
     <Compile Include="Applicative\Either.cs" />
     <Compile Include="Applicative\Either`2.cs" />
     <Compile Include="Applicative\Ap.cs" />
@@ -42,8 +41,9 @@
     <Compile Include="Internal\IEither`2.cs" />
     <Compile Include="Internal\IMaybe`1.cs" />
     <Compile Include="Internal\Iterable`1.cs" />
-    <Compile Include="Linq\Applicative\WhereBy.cs" />
-    <Compile Include="Linq\Applicative\Kperators.cs" />
+    <Compile Include="Linq\Applicative\CollectAny.cs" />
+    <Compile Include="Applicative\Qperators.Shadowing.cs" />
+    <Compile Include="Linq\Applicative\Aperators.cs" />
     <Compile Include="Linq\Applicative\SelectAny.cs" />
     <Compile Include="Linq\Applicative\WhereAny.cs" />
     <Compile Include="Linq\EmptyIfNull.cs" />

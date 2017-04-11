@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-#if !NO_INTERNALS_VISIBLE_TO
+#if EXTENDED_LINQ
 
 namespace Narvalo.Linq {
     using System;

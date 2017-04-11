@@ -736,8 +736,7 @@ Query Operators and Generators
 
 - [Operators](#linq-operators)
 - [Generators](#linq-generators)
-- [Kleisli Operators](#linq-kleisli)
-- [Special Operators](#linq-special)
+- [Operators (Applicative)](#linq-applicative)
 
 For each new query operator, we define its behaviour regarding deferred or
 immediate execution - to quote the [C# documentation](https://docs.microsoft.com/en-us/dotnet/articles/csharp/programming-guide/concepts/linq/classification-of-standard-query-operators-by-manner-of-execution),
@@ -765,14 +764,14 @@ Element        | `FirstOrNone`        | `Maybe<T>`                 | -
 Aggregation    | `Fold`               | `TAccumulate`              | -
 |              | `Reduce`             | `T`                        | -
 Quantification | `IsEmpty`            | `bool`                     | -
-Other          | `EmptyIfNull`        | `IEnumerable<T>`           | -
+????           | `EmptyIfNull`        | `IEnumerable<T>`           | -
 
-Operator | Input Type | Return Type | Deferred
--------- | ---------- | ----------- | :------:
+Operator | Input Type | Return Type | Deferred |
+-------- | ---------- | ----------- | :------: |
 `Flatten` | `IEnumerable<IEnumerable<T>>` | `IEnumerable<T>` | Streaming
 
-All these operators are defined as extension methods (in `Qperators`) and expect
-an `IEnumerable<T>` as input (except `Flatten`):
+All operators are defined as extension methods (in `Qperators`), and expect an
+`IEnumerable<T>` as input:
 - `Append()` (resp. `Prepend()`) appends (resp. prepends) a new element to a sequence.
   **NB:** A much better [implementation](https://github.com/dotnet/corefx/blob/master/src/System.Linq/src/System/Linq/AppendPrepend.cs)
   appears in later versions of `System.Linq`; it optimizes multiple consecutive
@@ -812,6 +811,8 @@ an `IEnumerable<T>` as input (except `Flatten`):
 
 ### <a name="linq-generators"></a>Generators
 
+All generators are static methods in `Sequence`.
+
 Operator | Return Type | Deferred
 -------- | ----------- | :------:
 `Return`   | `IEnumerable<T>` | Streaming
@@ -826,7 +827,7 @@ the `Take` operator.
 - `Repeat(value)` generates an **infinite** sequence that contains one repeated
   value.
 
-### <a name="linq-kleisli"></a>Kleisli Operators
+### <a name="linq-applicative"></a>Operators (Applicative)
 
 These operators are available once you import `Narvalo.Linq.Applicative`.
 
@@ -837,14 +838,10 @@ Restriction | `WhereAny`   | `IEnumerable<T>`       | Streaming
 Aggregation | `Fold`       | `Monad<TAccumulate>`   | -
 |           | `Reduce`     | `Monad<T>`             | -
 
-### <a name="linq-special"></a>Special Operators
-
-These operators are available once you import `Narvalo.Applicative`.
-
 Category | Operator | Input Type | Return Type | Deferred |
 -------- | -------- | ---------- | ----------- | :------: |
-Restriction | `CollectAny` | `IEnumerable<Monad<T>>`       | `IEnumerable<T>`       | Streaming
-Aggregation | `Sum` (*)    | `IEnumerable<Maybe<T>>`       | `Maybe<T>`             | -
+Restriction | `CollectAny` | `IEnumerable<Monad<T>>` | `IEnumerable<T>` | Streaming
+Aggregation | `Sum`        | `IEnumerable<Maybe<T>>` | `Maybe<T>`       | -
 
 #### `CollectAny`
 `CollectAny` acts on an `IEnumerable<Monad<T>>`.
@@ -863,6 +860,7 @@ with three elements `2`, `4` and `5`; it filters out the two _none_'s.
 #### `Sum`
 `Sum` acts on an `IEnumerable<Maybe<T>>`.
 
+### Notes
 [Correspondance with Rx.NET (naming differences)]
 
 --------------------------------------------------------------------------------
@@ -917,9 +915,9 @@ We do not implement `fail` as .NET has its own way of reporting errors.
 
 Haskell | C# | Return Type
 --------|----|------------
-`mapM` / `mapM_`         | (`seq.SelectWith`) | (`Maybe<IEnumerable<TResult>>`)
+`mapM` / `mapM_`         | `Maybe.Map`        | `Maybe<IEnumerable<TResult>>`
 `forM` / `forM_`         | `kunc.InvokeWith`  | `Maybe<IEnumerable<TResult>>`
-`sequence` / `sequence_` | (`mseq.Collect`)   | (`Maybe<IEnumerable<T>>`)
+`sequence` / `sequence_` | `Maybe.Collect`    | `Maybe<IEnumerable<T>>`
 `(=<<)`                  | `kunc.InvokeWith`  | `Maybe<TResult>`
 `(>=>)`                  | `kunc.Compose`     | `Func<T, Maybe<TResult>>`
 `(<=<)`                  | `kunc.ComposeBack` | `Func<T, Maybe<TResult>>`
@@ -927,7 +925,7 @@ Haskell | C# | Return Type
 `void`                   | `obj.Skip`         | `Maybe<Unit>`
 
 - `Collect` is `CollectAny` wrapped into a "maybe".
-- `SelectWith` is `Select` followed by `Collect`.
+- `Map` is `Select` followed by `Maybe.Collect`.
 
 ### <a name="haskell-list"></a>Generalisations of list functions
 
@@ -936,25 +934,25 @@ Below `square` is an object of type `Maybe<Maybe<T>>`.
 Haskell | C# | Return Type
 --------|----|------------
 `join`                       | `square.Flatten`    | `Maybe<T>`
-`filterM`                    | (`seq.WhereBy`)     | (`Maybe<IEnumerable<T>>`)
-`mapAndUnzipM`               | (`seq.SelectUnzip`) | (`Maybe<(IEnumerable<T1>, IEnumerable<T2>)>`)
-`zipWithM` / `zipWithM_`     | (`seq.ZipWith`)     | (`Maybe<IEnumerable<TResult>>`)
+`filterM`                    | `Maybe.Where`       | `Maybe<IEnumerable<T>>`
+`mapAndUnzipM`               | (`Maybe.MapUnzip`)  | (`Maybe<(IEnumerable<T1>, IEnumerable<T2>)>`)
+`zipWithM` / `zipWithM_`     | `Maybe.Zip`         | `Maybe<IEnumerable<TResult>>`
 `foldM` / `foldM_`           | `seq.Fold`          | `Maybe<TAccumulate>`
 `replicateM` / `replicateM_` | `Maybe.Repeat`      | `Maybe<IEnumerable<T>>`
 
 - `WhereBy` is `WhereAny` wrapped into a "maybe".
 - `ZipWith` is `Zip` followed by `Collect`.
 
-#### `SelectUnzip`
+#### `MapUnzip`
 To quote the Haskell documentation, _`mapAndUnzipM` is mainly used with
 complicated data structures or a state-transforming monad_. If you really
-need it, it is easily implemented using `Select` and `SelectWith`:
+need it, it is easily implemented using `Select` and `Maybe.Map`:
 ```csharp
-public static Maybe<(IEnumerable<T1>, IEnumerable<T2>)> SelectUnzip<T, T1, T2>(
-    this IEnumerable<T> source,
+public static Maybe<(IEnumerable<T1>, IEnumerable<T2>)> MapUnzip<T, T1, T2>(
+    IEnumerable<T> source,
     Func<TSource, Maybe<(T1, T2)>> selector) {
 
-    Maybe<IEnumerable<(T1, T2)>> seq = source.SelectWith(selector);
+    Maybe<IEnumerable<(T1, T2)>> seq = Maybe.Map(source, selector);
 
     return seq.Select(q => {
         IEnumerable<T1> q1 = q.Select(t => t.Item1);

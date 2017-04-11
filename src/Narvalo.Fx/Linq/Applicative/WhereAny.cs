@@ -8,7 +8,7 @@ namespace Narvalo.Linq.Applicative
 
     using Narvalo.Applicative;
 
-    public static partial class Kperators
+    public static partial class Aperators
     {
         internal static IEnumerable<TSource> WhereAnyImpl<TSource, TRight>(
             this IEnumerable<TSource> source,

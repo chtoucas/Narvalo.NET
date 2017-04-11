@@ -343,7 +343,7 @@ namespace Narvalo.Applicative
         public static Outcome<IEnumerable<TResult>> InvokeWith<TSource, TResult>(
             this Func<TSource, Outcome<TResult>> @this,
             IEnumerable<TSource> seq)
-            => seq.Select(@this).Collect();
+            => Outcome.Map(seq, @this);
 
         public static Outcome<TResult> InvokeWith<TSource, TResult>(
             this Func<TSource, Outcome<TResult>> @this,
@@ -370,34 +370,49 @@ namespace Narvalo.Applicative
         }
     }
 
-    // Provides extension methods for IEnumerable<Outcome<T>>.
+    // Provides static methods to operate on IEnumerable<Outcome<T>>.
+    // These are not extension methods like any LINQ operator, because they are not composable.
     // T4: EmitEnumerableExtensions().
-    public static partial class OutcomeExtensions
+    public partial struct Outcome
     {
-        public static IEnumerable<TSource> CollectAny<TSource>(
-            this IEnumerable<Outcome<TSource>> source)
-        {
-            Require.NotNull(source, nameof(source));
-            return source.CollectAnyImpl();
-        }
-
-        // Hidden because this operator is not composable.
-        // Do not disable, we use it in Kleisli.InvokeWith().
-        internal static Outcome<IEnumerable<TSource>> Collect<TSource>(
-            this IEnumerable<Outcome<TSource>> source)
+        public static Outcome<IEnumerable<T>> Collect<T>(
+            IEnumerable<Outcome<T>> source)
         {
             Require.NotNull(source, nameof(source));
             return source.CollectImpl();
         }
+
+        public static Outcome<IEnumerable<T>> Filter<T>(
+            IEnumerable<T> source,
+            Func<T, Outcome<bool>> predicate)
+        {
+            Require.NotNull(source, nameof(source));
+            Require.NotNull(predicate, nameof(predicate));
+            return source.WhereImpl(predicate);
+        }
+
+        public static Outcome<IEnumerable<TResult>> Map<T, TResult>(
+            IEnumerable<T> source,
+            Func<T, Outcome<TResult>> selector)
+            => Outcome.Collect(source.Select(selector));
+
+        public static Outcome<IEnumerable<TResult>> Zip<T1, T2, TResult>(
+            IEnumerable<T1> first,
+            IEnumerable<T2> second,
+            Func<T1, T2, Outcome<TResult>> resultSelector)
+            => Outcome.Collect(first.Zip(second, resultSelector));
     }
 }
 
 namespace Narvalo.Internal
 {
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
 
+    using Narvalo.Linq;
     using Narvalo.Applicative;
 
     // Provides default implementations for the extension methods for IEnumerable<Outcome<T>>.
@@ -406,39 +421,37 @@ namespace Narvalo.Internal
     internal static partial class EnumerableExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static IEnumerable<TSource> CollectAnyImpl<TSource>(
-            this IEnumerable<Outcome<TSource>> source)
-        {
-            Debug.Assert(source != null);
-
-            var item = default(TSource);
-
-            using (var iter = source.GetEnumerator())
-            {
-                while (iter.MoveNext())
-                {
-                    bool append = false;
-                    var current = iter.Current;
-
-                    current.Bind(val =>
-                    {
-                        append = true;
-                        item = val;
-
-                        return Outcome.Unit;
-                    });
-
-                    if (append) { yield return item; }
-                }
-            }
-        }
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Outcome<IEnumerable<TSource>> CollectImpl<TSource>(
             this IEnumerable<Outcome<TSource>> source)
         {
             Debug.Assert(source != null);
-            return Outcome<IEnumerable<TSource>>.η(CollectAnyImpl(source));
+
+            var seed = Outcome<IEnumerable<TSource>>.η(Enumerable.Empty<TSource>());
+            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append
+                = (seq, item) => seq.Append(item);
+
+            var accumulator = Outcome.Lift<IEnumerable<TSource>, TSource, IEnumerable<TSource>>(append);
+
+            return source.Aggregate(seed, accumulator);
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static Outcome<IEnumerable<TSource>> WhereImpl<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, Outcome<bool>> predicate)
+        {
+            Debug.Assert(source != null);
+            Debug.Assert(predicate != null);
+
+            var seed = Outcome<IEnumerable<TSource>>.η(Enumerable.Empty<TSource>());
+
+            Func<TSource, Func<bool, IEnumerable<TSource>, IEnumerable<TSource>>> func
+                = item => (b, seq) => b ? seq.Append(item) : seq;
+
+            Func<Outcome<IEnumerable<TSource>>, TSource, Outcome<IEnumerable<TSource>>> accumulator
+                = (mseq, item) => predicate(item).Zip(mseq, func(item));
+
+            return source.Aggregate(seed, accumulator);
         }
     }
 }
@@ -451,10 +464,17 @@ namespace Narvalo.Linq.Applicative
     using Narvalo.Applicative;
     using Narvalo.Internal;
 
-    // Provides extension methods for IEnumerable<T>.
+    // Provides extension methods for IEnumerable<T> and IEnumerable<Outcome<T>>.
     // T4: EmitLinqCore().
-    public static partial class Kperators
+    public static partial class Aperators
     {
+        public static IEnumerable<TSource> CollectAny<TSource>(
+            this IEnumerable<Outcome<TSource>> source)
+        {
+            Require.NotNull(source, nameof(source));
+            return source.CollectAnyImpl();
+        }
+
         public static IEnumerable<TResult> SelectAny<TSource, TResult>(
             this IEnumerable<TSource> source,
             Func<TSource, Outcome<TResult>> selector)
@@ -526,11 +546,40 @@ namespace Narvalo.Internal
 
     using Narvalo.Applicative;
 
-    // Provides default implementations for the extension methods for IEnumerable<T>.
+    // Provides default implementations for the extension methods for IEnumerable<T>
+    // and IEnumerable<Outcome<T>>.
     // You will certainly want to shadow them to improve performance.
     // T4: EmitLinqInternal().
     internal static partial class EnumerableExtensions
     {
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static IEnumerable<TSource> CollectAnyImpl<TSource>(
+            this IEnumerable<Outcome<TSource>> source)
+        {
+            Debug.Assert(source != null);
+
+            var item = default(TSource);
+
+            using (var iter = source.GetEnumerator())
+            {
+                while (iter.MoveNext())
+                {
+                    bool append = false;
+                    var current = iter.Current;
+
+                    current.Bind(val =>
+                    {
+                        append = true;
+                        item = val;
+
+                        return Outcome.Unit;
+                    });
+
+                    if (append) { yield return item; }
+                }
+            }
+        }
+
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static IEnumerable<TResult> SelectAnyImpl<TSource, TResult>(
             this IEnumerable<TSource> source,

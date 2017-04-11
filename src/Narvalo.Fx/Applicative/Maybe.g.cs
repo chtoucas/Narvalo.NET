@@ -443,7 +443,7 @@ namespace Narvalo.Applicative
         public static Maybe<IEnumerable<TResult>> InvokeWith<TSource, TResult>(
             this Func<TSource, Maybe<TResult>> @this,
             IEnumerable<TSource> seq)
-            => seq.Select(@this).Collect();
+            => Maybe.Map(seq, @this);
 
         public static Maybe<TResult> InvokeWith<TSource, TResult>(
             this Func<TSource, Maybe<TResult>> @this,
@@ -470,38 +470,49 @@ namespace Narvalo.Applicative
         }
     }
 
-    // Provides extension methods for IEnumerable<Maybe<T>>.
+    // Provides static methods to operate on IEnumerable<Maybe<T>>.
+    // These are not extension methods like any LINQ operator, because they are not composable.
     // T4: EmitEnumerableExtensions().
     public static partial class Maybe
     {
-        public static IEnumerable<TSource> CollectAny<TSource>(
-            this IEnumerable<Maybe<TSource>> source)
-        {
-            Require.NotNull(source, nameof(source));
-            return source.CollectAnyImpl();
-        }
-
-        // Hidden because this operator is not composable.
-        // Do not disable, we use it in Kleisli.InvokeWith().
-        internal static Maybe<IEnumerable<TSource>> Collect<TSource>(
-            this IEnumerable<Maybe<TSource>> source)
+        public static Maybe<IEnumerable<T>> Collect<T>(
+            IEnumerable<Maybe<T>> source)
         {
             Require.NotNull(source, nameof(source));
             return source.CollectImpl();
         }
 
-        public static Maybe<TSource> Sum<TSource>(this IEnumerable<Maybe<TSource>> source)
-            => source.SumImpl();
+        public static Maybe<IEnumerable<T>> Filter<T>(
+            IEnumerable<T> source,
+            Func<T, Maybe<bool>> predicate)
+        {
+            Require.NotNull(source, nameof(source));
+            Require.NotNull(predicate, nameof(predicate));
+            return source.WhereImpl(predicate);
+        }
+
+        public static Maybe<IEnumerable<TResult>> Map<T, TResult>(
+            IEnumerable<T> source,
+            Func<T, Maybe<TResult>> selector)
+            => Maybe.Collect(source.Select(selector));
+
+        public static Maybe<IEnumerable<TResult>> Zip<T1, T2, TResult>(
+            IEnumerable<T1> first,
+            IEnumerable<T2> second,
+            Func<T1, T2, Maybe<TResult>> resultSelector)
+            => Maybe.Collect(first.Zip(second, resultSelector));
     }
 }
 
 namespace Narvalo.Internal
 {
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
+    using Narvalo.Linq;
     using Narvalo.Applicative;
 
     // Provides default implementations for the extension methods for IEnumerable<Maybe<T>>.
@@ -510,47 +521,37 @@ namespace Narvalo.Internal
     internal static partial class EnumerableExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static IEnumerable<TSource> CollectAnyImpl<TSource>(
-            this IEnumerable<Maybe<TSource>> source)
-        {
-            Debug.Assert(source != null);
-
-            var item = default(TSource);
-
-            using (var iter = source.GetEnumerator())
-            {
-                while (iter.MoveNext())
-                {
-                    bool append = false;
-                    var current = iter.Current;
-
-                    current.Bind(val =>
-                    {
-                        append = true;
-                        item = val;
-
-                        return Maybe.Unit;
-                    });
-
-                    if (append) { yield return item; }
-                }
-            }
-        }
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Maybe<IEnumerable<TSource>> CollectImpl<TSource>(
             this IEnumerable<Maybe<TSource>> source)
         {
             Debug.Assert(source != null);
-            return Maybe<IEnumerable<TSource>>.η(CollectAnyImpl(source));
+
+            var seed = Maybe<IEnumerable<TSource>>.η(Enumerable.Empty<TSource>());
+            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append
+                = (seq, item) => seq.Append(item);
+
+            var accumulator = Maybe.Lift<IEnumerable<TSource>, TSource, IEnumerable<TSource>>(append);
+
+            return source.Aggregate(seed, accumulator);
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Maybe<TSource> SumImpl<TSource>(
-            this IEnumerable<Maybe<TSource>> source)
+        internal static Maybe<IEnumerable<TSource>> WhereImpl<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, Maybe<bool>> predicate)
         {
             Debug.Assert(source != null);
-            return source.Aggregate(Maybe<TSource>.None, (m, n) => m.OrElse(n));
+            Debug.Assert(predicate != null);
+
+            var seed = Maybe<IEnumerable<TSource>>.η(Enumerable.Empty<TSource>());
+
+            Func<TSource, Func<bool, IEnumerable<TSource>, IEnumerable<TSource>>> func
+                = item => (b, seq) => b ? seq.Append(item) : seq;
+
+            Func<Maybe<IEnumerable<TSource>>, TSource, Maybe<IEnumerable<TSource>>> accumulator
+                = (mseq, item) => predicate(item).Zip(mseq, func(item));
+
+            return source.Aggregate(seed, accumulator);
         }
     }
 }
@@ -563,10 +564,20 @@ namespace Narvalo.Linq.Applicative
     using Narvalo.Applicative;
     using Narvalo.Internal;
 
-    // Provides extension methods for IEnumerable<T>.
+    // Provides extension methods for IEnumerable<T> and IEnumerable<Maybe<T>>.
     // T4: EmitLinqCore().
-    public static partial class Kperators
+    public static partial class Aperators
     {
+        public static IEnumerable<TSource> CollectAny<TSource>(
+            this IEnumerable<Maybe<TSource>> source)
+        {
+            Require.NotNull(source, nameof(source));
+            return source.CollectAnyImpl();
+        }
+
+        public static Maybe<TSource> Sum<TSource>(this IEnumerable<Maybe<TSource>> source)
+            => source.SumImpl();
+
         public static IEnumerable<TResult> SelectAny<TSource, TResult>(
             this IEnumerable<TSource> source,
             Func<TSource, Maybe<TResult>> selector)
@@ -635,14 +646,52 @@ namespace Narvalo.Internal
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
 
     using Narvalo.Applicative;
 
-    // Provides default implementations for the extension methods for IEnumerable<T>.
+    // Provides default implementations for the extension methods for IEnumerable<T>
+    // and IEnumerable<Maybe<T>>.
     // You will certainly want to shadow them to improve performance.
     // T4: EmitLinqInternal().
     internal static partial class EnumerableExtensions
     {
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static IEnumerable<TSource> CollectAnyImpl<TSource>(
+            this IEnumerable<Maybe<TSource>> source)
+        {
+            Debug.Assert(source != null);
+
+            var item = default(TSource);
+
+            using (var iter = source.GetEnumerator())
+            {
+                while (iter.MoveNext())
+                {
+                    bool append = false;
+                    var current = iter.Current;
+
+                    current.Bind(val =>
+                    {
+                        append = true;
+                        item = val;
+
+                        return Maybe.Unit;
+                    });
+
+                    if (append) { yield return item; }
+                }
+            }
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static Maybe<TSource> SumImpl<TSource>(
+            this IEnumerable<Maybe<TSource>> source)
+        {
+            Debug.Assert(source != null);
+            return source.Aggregate(Maybe<TSource>.None, (m, n) => m.OrElse(n));
+        }
+
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static IEnumerable<TResult> SelectAnyImpl<TSource, TResult>(
             this IEnumerable<TSource> source,

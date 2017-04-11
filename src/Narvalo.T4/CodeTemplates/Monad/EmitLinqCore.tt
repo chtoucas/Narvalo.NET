@@ -5,35 +5,22 @@ public partial class MonadTemplate
     protected void EmitLinqCore()
     {
 #>
-    // Provides extension methods for IEnumerable<T>.
+    // Provides extension methods for IEnumerable<T> and IEnumerable<<#= Name #><T<#= RTDecl #>>>.
     // T4: EmitLinqCore().
-    public static partial class Kperators
+    public static partial class Aperators
     {
-<#+ if (EmitExtendedLinq) { #>
-        // NB: This operator is not composable.
-        public static <#= Name #><IEnumerable<TSource><#= RTDecl #>> WhereBy<TSource<#= RTDecl #>>(
-            this IEnumerable<TSource> source,
-            Func<TSource, <#= Name #><bool<#= RTDecl #>>> predicate)
+        public static IEnumerable<TSource> CollectAny<TSource<#= RTDecl #>>(
+            this IEnumerable<<#= Name #><TSource<#= RTDecl #>>> source)
         {
             <#+ WriteNotNull("source", true); #>
-            Require.NotNull(predicate, nameof(predicate));
-            return source.WhereByImpl(predicate);
+            return source.CollectAnyImpl();
         }
+<#+ if (HasSum) { #>
 
-        // NB: This operator is not composable.
-        public static <#= Name #><IEnumerable<TResult><#= RTDecl #>> SelectWith<TSource, TResult<#= RTDecl #>>(
-            this IEnumerable<TSource> source,
-            Func<TSource, <#= Name #><TResult<#= RTDecl #>>> selector)
-            => source.SelectWithImpl(selector);
+        public static <#= Name #><TSource> Sum<TSource>(this IEnumerable<<#= Name #><TSource>> source)
+            => source.SumImpl();
+<#+ } // T4: End of HasSum. #>
 
-        // NB: This operator is not composable.
-        public static <#= Name #><IEnumerable<TResult><#= RTDecl #>> ZipWith<TFirst, TSecond, TResult<#= RTDecl #>>(
-            this IEnumerable<TFirst> source,
-            IEnumerable<TSecond> second,
-            Func<TFirst, TSecond, <#= Name #><TResult<#= RTDecl #>>> resultSelector)
-            => source.ZipWithImpl(second, resultSelector);
-
-<#+ } // End of EmitExtendedLinq #>
         public static IEnumerable<TResult> SelectAny<TSource, TResult<#= RTDecl #>>(
             this IEnumerable<TSource> source,
             Func<TSource, <#= Name #><TResult<#= RTDecl #>>> selector)

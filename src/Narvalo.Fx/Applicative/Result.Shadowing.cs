@@ -3,8 +3,6 @@
 namespace Narvalo.Applicative
 {
     using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
 
     public partial struct Result<T, TError>
@@ -23,20 +21,6 @@ namespace Narvalo.Applicative
             return IsSuccess
                 ? Result<TResult, TError>.Of(selector(Value))
                 : Result<TResult, TError>.FromError(Error); ;
-        }
-    }
-
-    public static partial class Result
-    {
-        internal static IEnumerable<TSource> CollectAnyImpl<TSource, TError>(
-            this IEnumerable<Result<TSource, TError>> source)
-        {
-            Debug.Assert(source != null);
-
-            foreach (var item in source)
-            {
-                if (item.IsSuccess) { yield return item.Value; }
-            }
         }
     }
 }

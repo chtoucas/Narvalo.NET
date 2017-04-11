@@ -10,7 +10,7 @@ namespace Narvalo.Linq.Applicative {
     using Assert = Narvalo.AssertExtended;
 
     // SelectAny for Either.
-    public partial class KperatorsFacts {
+    public partial class AperatorsFacts {
         [t("SelectAny() guards (Either).")]
         public static void SelectAny0a() {
             IEnumerable<int> nil = null;
@@ -32,7 +32,7 @@ namespace Narvalo.Linq.Applicative {
     }
 
     // SelectAny for Fallible.
-    public partial class KperatorsFacts {
+    public partial class AperatorsFacts {
         [t("SelectAny() guards (Fallible).")]
         public static void SelectAny0b() {
             IEnumerable<int> nil = null;
@@ -54,7 +54,7 @@ namespace Narvalo.Linq.Applicative {
     }
 
     // SelectAny for Maybe.
-    public partial class KperatorsFacts {
+    public partial class AperatorsFacts {
         [t("SelectAny() guards (Maybe).")]
         public static void SelectAny0c() {
             IEnumerable<int> nil = null;
@@ -76,7 +76,7 @@ namespace Narvalo.Linq.Applicative {
     }
 
     // SelectAny for Outcome.
-    public partial class KperatorsFacts {
+    public partial class AperatorsFacts {
         [t("SelectAny() guards (Outcome).")]
         public static void SelectAny0d() {
             IEnumerable<int> nil = null;
@@ -98,7 +98,7 @@ namespace Narvalo.Linq.Applicative {
     }
 
     // SelectAny for Result.
-    public partial class KperatorsFacts {
+    public partial class AperatorsFacts {
         [t("SelectAny() guards (Result).")]
         public static void SelectAny0e() {
             IEnumerable<int> nil = null;

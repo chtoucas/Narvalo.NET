@@ -17,12 +17,12 @@
 // This templates depend on:
 // - The class Narvalo.Require (Narvalo.Core).
 // - The struct Narvalo.Applicative.Unit (Narvalo.Fx).
+// - The LINQ operator Append() (Narvalo.Linq or System.Linq).
 
 public abstract partial class MonadTemplate : _MonadTemplate
 {
     protected MonadTemplate(TextTransformation parent) : base(parent) { }
 
-    protected bool EmitExtendedLinq { get; set; }
     protected bool EmitExperimental { get; set; }
 
     protected override void WriteContent()
@@ -49,9 +49,6 @@ namespace <#= Namespace #>
     using System.Linq;
 
     using <#= InternalNamespace #>;
-<#+ if (EmitExtendedLinq) { #>
-    using <#= LinqNamespace #>;
-<#+ } #>
 <#+
         if (EmitExperimental) {
             WriteLine();
@@ -82,13 +79,13 @@ namespace <#= Namespace #>
 
 namespace <#= InternalNamespace #>
 {
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
-<#+ if (HasSum) { #>
     using System.Linq;
-<#+ } #>
 
+    using Narvalo.Linq;
     using <#= Namespace #>;
 <#+
         WriteLine();
@@ -139,7 +136,7 @@ namespace <#= InternalNamespace #>
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
-<#+ if (EmitExtendedLinq) { #>
+<#+ if (HasSum) { #>
     using System.Linq;
 <#+ } #>
 

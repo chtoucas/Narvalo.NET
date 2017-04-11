@@ -5,37 +5,61 @@ public partial class MonadTemplate
     protected void EmitLinqInternal()
     {
 #>
-    // Provides default implementations for the extension methods for IEnumerable<T>.
+    // Provides default implementations for the extension methods for IEnumerable<T>
+    // and IEnumerable<<#= Name #><T<#= RTDecl #>>>.
     // You will certainly want to shadow them to improve performance.
     // T4: EmitLinqInternal().
     internal static partial class EnumerableExtensions
     {
-<#+ if (EmitExtendedLinq) { #>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static <#= Name #><IEnumerable<TSource><#= RTDecl #>> WhereByImpl<TSource<#= RTDecl #>>(
-            this IEnumerable<TSource> source,
-            Func<TSource, <#= Name #><bool<#= RTDecl #>>> predicate)
+        internal static IEnumerable<TSource> CollectAnyImpl<TSource<#= RTDecl #>>(
+            this IEnumerable<<#= Name #><TSource<#= RTDecl #>>> source)
         {
             Debug.Assert(source != null);
-            Debug.Assert(predicate != null);
 
-            return <#+ WriteFactory("IEnumerable<TSource>"); #>(WhereAnyImpl(source, predicate));
+<#+ if (HasRightGenerics) { #>
+            var unit = <#+ WriteFactory("Unit"); #>(Unit.Default);
+<#+ } #>
+            var item = default(TSource);
+
+            using (var iter = source.GetEnumerator())
+            {
+                while (iter.MoveNext())
+                {
+                    bool append = false;
+                    var current = iter.Current;
+<#+ if (IsNullable) { #>
+
+                    if (current == null) { continue; }
+<#+ } #>
+
+                    current.Bind(val =>
+                    {
+                        append = true;
+                        item = val;
+
+<#+ if (HasRightGenerics) { #>
+                        return unit;
+<#+ } else { #>
+                        return <#= Name #>.Unit;
+<#+ } #>
+                    });
+
+                    if (append) { yield return item; }
+                }
+            }
         }
+<#+ if (HasSum) { #>
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static <#= Name #><IEnumerable<TResult><#= RTDecl #>> SelectWithImpl<TSource, TResult<#= RTDecl #>>(
-            this IEnumerable<TSource> source,
-            Func<TSource, <#= Name #><TResult<#= RTDecl #>>> selector)
-            => source.Select(selector).Collect();
+        internal static <#= Name #><TSource> SumImpl<TSource>(
+            this IEnumerable<<#= Name #><TSource>> source)
+        {
+            Debug.Assert(source != null);
+            return source.Aggregate(<#= Name #><TSource>.<#= ZeroName #>, (m, n) => m.<#= PlusName #>(n));
+        }
+<#+ } // T4: End of HasSum. #>
 
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static <#= Name #><IEnumerable<TResult><#= RTDecl #>> ZipWithImpl<TFirst, TSecond, TResult<#= RTDecl #>>(
-            this IEnumerable<TFirst> source,
-            IEnumerable<TSecond> second,
-            Func<TFirst, TSecond, <#= Name #><TResult<#= RTDecl #>>> resultSelector)
-            => source.Zip(second, resultSelector).Collect();
-
-<#+ } // End of EmitExtendedLinq #>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static IEnumerable<TResult> SelectAnyImpl<TSource, TResult<#= RTDecl #>>(
             this IEnumerable<TSource> source,

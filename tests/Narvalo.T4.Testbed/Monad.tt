@@ -10,7 +10,6 @@
 
         public override void Initialize()
         {
-            EmitExtendedLinq = true;
             EmitExperimental = true;
         }
     }

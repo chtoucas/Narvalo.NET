@@ -12,5 +12,5 @@ namespace Narvalo.Linq.Applicative
     /// - Filtering: WhereAny (deferred)
     /// - Aggregation: Fold, Reduce
     /// </remarks>
-    public static partial class Kperators { }
+    public static partial class Aperators { }
 }

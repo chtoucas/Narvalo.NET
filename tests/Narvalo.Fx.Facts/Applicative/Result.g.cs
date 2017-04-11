@@ -437,13 +437,12 @@ namespace Narvalo.Applicative {
             return applied.Equals(gathered);
         }
 
-        [q("Kleisli.InvokeWith is Sequence.SelectWith w/ the arguments flipped.")]
+        [q("Kleisli.InvokeWith is Result.Map w/ the arguments flipped.")]
         public static bool InvokeWith01(int[] arg0, long arg1) {
             Func<int, Result<long, My.Obj>> selector = i => Result<long, My.Obj>.Of(arg1 * i);
 
             var invoked = selector.InvokeWith(arg0);
-            // SelectWith() is Select().Collect()
-            var selected = arg0.Select(selector).Collect();
+            var selected = Result.Map(arg0, selector);
 
             var q = from x in invoked
                     from y in selected

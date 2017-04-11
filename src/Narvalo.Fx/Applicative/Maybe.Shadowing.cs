@@ -4,7 +4,6 @@ namespace Narvalo.Applicative
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
 
     public partial struct Maybe<T>
     {
@@ -117,19 +116,5 @@ namespace Narvalo.Applicative
         }
 
         #endregion
-    }
-
-    public static partial class Maybe
-    {
-        internal static IEnumerable<TSource> CollectAnyImpl<TSource>(
-            this IEnumerable<Maybe<TSource>> source)
-        {
-            Debug.Assert(source != null);
-
-            foreach (var item in source)
-            {
-                if (item.IsSome) { yield return item.Value; }
-            }
-        }
     }
 }

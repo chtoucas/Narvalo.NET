@@ -325,7 +325,7 @@ namespace Narvalo.Applicative
         public static Either<IEnumerable<TResult>, TRight> InvokeWith<TSource, TResult, TRight>(
             this Func<TSource, Either<TResult, TRight>> @this,
             IEnumerable<TSource> seq)
-            => seq.Select(@this).Collect();
+            => Either.Map(seq, @this);
 
         public static Either<TResult, TRight> InvokeWith<TSource, TResult, TRight>(
             this Func<TSource, Either<TResult, TRight>> @this,
@@ -352,34 +352,49 @@ namespace Narvalo.Applicative
         }
     }
 
-    // Provides extension methods for IEnumerable<Either<T, TRight>>.
+    // Provides static methods to operate on IEnumerable<Either<T, TRight>>.
+    // These are not extension methods like any LINQ operator, because they are not composable.
     // T4: EmitEnumerableExtensions().
     public static partial class Either
     {
-        public static IEnumerable<TSource> CollectAny<TSource, TRight>(
-            this IEnumerable<Either<TSource, TRight>> source)
-        {
-            Require.NotNull(source, nameof(source));
-            return source.CollectAnyImpl();
-        }
-
-        // Hidden because this operator is not composable.
-        // Do not disable, we use it in Kleisli.InvokeWith().
-        internal static Either<IEnumerable<TSource>, TRight> Collect<TSource, TRight>(
-            this IEnumerable<Either<TSource, TRight>> source)
+        public static Either<IEnumerable<T>, TRight> Collect<T, TRight>(
+            IEnumerable<Either<T, TRight>> source)
         {
             Require.NotNull(source, nameof(source));
             return source.CollectImpl();
         }
+
+        public static Either<IEnumerable<T>, TRight> Filter<T, TRight>(
+            IEnumerable<T> source,
+            Func<T, Either<bool, TRight>> predicate)
+        {
+            Require.NotNull(source, nameof(source));
+            Require.NotNull(predicate, nameof(predicate));
+            return source.WhereImpl(predicate);
+        }
+
+        public static Either<IEnumerable<TResult>, TRight> Map<T, TResult, TRight>(
+            IEnumerable<T> source,
+            Func<T, Either<TResult, TRight>> selector)
+            => Either.Collect(source.Select(selector));
+
+        public static Either<IEnumerable<TResult>, TRight> Zip<T1, T2, TResult, TRight>(
+            IEnumerable<T1> first,
+            IEnumerable<T2> second,
+            Func<T1, T2, Either<TResult, TRight>> resultSelector)
+            => Either.Collect(first.Zip(second, resultSelector));
     }
 }
 
 namespace Narvalo.Internal
 {
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
 
+    using Narvalo.Linq;
     using Narvalo.Applicative;
 
     // Provides default implementations for the extension methods for IEnumerable<Either<T, TRight>>.
@@ -388,42 +403,37 @@ namespace Narvalo.Internal
     internal static partial class EnumerableExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static IEnumerable<TSource> CollectAnyImpl<TSource, TRight>(
-            this IEnumerable<Either<TSource, TRight>> source)
-        {
-            Debug.Assert(source != null);
-
-            var unit = Either<Unit, TRight>.OfLeft(Unit.Default);
-            var item = default(TSource);
-
-            using (var iter = source.GetEnumerator())
-            {
-                while (iter.MoveNext())
-                {
-                    bool append = false;
-                    var current = iter.Current;
-
-                    if (current == null) { continue; }
-
-                    current.Bind(val =>
-                    {
-                        append = true;
-                        item = val;
-
-                        return unit;
-                    });
-
-                    if (append) { yield return item; }
-                }
-            }
-        }
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Either<IEnumerable<TSource>, TRight> CollectImpl<TSource, TRight>(
             this IEnumerable<Either<TSource, TRight>> source)
         {
             Debug.Assert(source != null);
-            return Either<IEnumerable<TSource>, TRight>.OfLeft(CollectAnyImpl(source));
+
+            var seed = Either<IEnumerable<TSource>, TRight>.OfLeft(Enumerable.Empty<TSource>());
+            Func<IEnumerable<TSource>, TSource, IEnumerable<TSource>> append
+                = (seq, item) => seq.Append(item);
+
+            var accumulator = Either.Lift<IEnumerable<TSource>, TSource, IEnumerable<TSource>, TRight>(append);
+
+            return source.Aggregate(seed, accumulator);
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static Either<IEnumerable<TSource>, TRight> WhereImpl<TSource, TRight>(
+            this IEnumerable<TSource> source,
+            Func<TSource, Either<bool, TRight>> predicate)
+        {
+            Debug.Assert(source != null);
+            Debug.Assert(predicate != null);
+
+            var seed = Either<IEnumerable<TSource>, TRight>.OfLeft(Enumerable.Empty<TSource>());
+
+            Func<TSource, Func<bool, IEnumerable<TSource>, IEnumerable<TSource>>> func
+                = item => (b, seq) => b ? seq.Append(item) : seq;
+
+            Func<Either<IEnumerable<TSource>, TRight>, TSource, Either<IEnumerable<TSource>, TRight>> accumulator
+                = (mseq, item) => predicate(item).Zip(mseq, func(item));
+
+            return source.Aggregate(seed, accumulator);
         }
     }
 }
@@ -436,10 +446,17 @@ namespace Narvalo.Linq.Applicative
     using Narvalo.Applicative;
     using Narvalo.Internal;
 
-    // Provides extension methods for IEnumerable<T>.
+    // Provides extension methods for IEnumerable<T> and IEnumerable<Either<T, TRight>>.
     // T4: EmitLinqCore().
-    public static partial class Kperators
+    public static partial class Aperators
     {
+        public static IEnumerable<TSource> CollectAny<TSource, TRight>(
+            this IEnumerable<Either<TSource, TRight>> source)
+        {
+            Require.NotNull(source, nameof(source));
+            return source.CollectAnyImpl();
+        }
+
         public static IEnumerable<TResult> SelectAny<TSource, TResult, TRight>(
             this IEnumerable<TSource> source,
             Func<TSource, Either<TResult, TRight>> selector)
@@ -511,11 +528,43 @@ namespace Narvalo.Internal
 
     using Narvalo.Applicative;
 
-    // Provides default implementations for the extension methods for IEnumerable<T>.
+    // Provides default implementations for the extension methods for IEnumerable<T>
+    // and IEnumerable<Either<T, TRight>>.
     // You will certainly want to shadow them to improve performance.
     // T4: EmitLinqInternal().
     internal static partial class EnumerableExtensions
     {
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static IEnumerable<TSource> CollectAnyImpl<TSource, TRight>(
+            this IEnumerable<Either<TSource, TRight>> source)
+        {
+            Debug.Assert(source != null);
+
+            var unit = Either<Unit, TRight>.OfLeft(Unit.Default);
+            var item = default(TSource);
+
+            using (var iter = source.GetEnumerator())
+            {
+                while (iter.MoveNext())
+                {
+                    bool append = false;
+                    var current = iter.Current;
+
+                    if (current == null) { continue; }
+
+                    current.Bind(val =>
+                    {
+                        append = true;
+                        item = val;
+
+                        return unit;
+                    });
+
+                    if (append) { yield return item; }
+                }
+            }
+        }
+
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static IEnumerable<TResult> SelectAnyImpl<TSource, TResult, TRight>(
             this IEnumerable<TSource> source,

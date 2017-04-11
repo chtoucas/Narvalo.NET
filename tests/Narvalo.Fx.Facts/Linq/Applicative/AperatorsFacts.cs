@@ -6,13 +6,13 @@ namespace Narvalo.Linq.Applicative {
     using System.Collections.Generic;
     using System.Linq.Tests;
 
-    public partial class KperatorsFacts : EnumerableTests {
+    public partial class AperatorsFacts : EnumerableTests {
         internal sealed class tAttribute : TestCaseAttribute {
-            public tAttribute(string description) : base(nameof(Kperators), description) { }
+            public tAttribute(string description) : base(nameof(Aperators), description) { }
         }
 
         internal sealed class TAttribute : TestTheoryAttribute {
-            public TAttribute(string description) : base(nameof(Kperators), description) { }
+            public TAttribute(string description) : base(nameof(Aperators), description) { }
         }
 
         private static IEnumerable<T> EmptySource<T>() {

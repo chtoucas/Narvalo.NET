@@ -443,13 +443,12 @@ namespace Narvalo.Applicative {
             return applied.Equals(gathered);
         }
 
-        [q("Kleisli.InvokeWith is Sequence.SelectWith w/ the arguments flipped.")]
+        [q("Kleisli.InvokeWith is Fallible.Map w/ the arguments flipped.")]
         public static bool InvokeWith01(int[] arg0, long arg1) {
             Func<int, Fallible<long>> selector = i => Fallible<long>.η(arg1 * i);
 
             var invoked = selector.InvokeWith(arg0);
-            // SelectWith() is Select().Collect()
-            var selected = arg0.Select(selector).Collect();
+            var selected = Fallible.Map(arg0, selector);
 
             var q = from x in invoked
                     from y in selected

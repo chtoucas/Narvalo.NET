@@ -1,12 +1,12 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Linq {
+namespace Narvalo.Linq.Applicative {
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
     using Xunit;
 
-    public partial class QperatorsFacts {
+    public partial class AperatorsFacts {
     }
 }

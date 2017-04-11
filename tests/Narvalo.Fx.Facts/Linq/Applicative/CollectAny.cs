@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Linq {
+namespace Narvalo.Linq.Applicative {
     using System;
     using System.Collections.Generic;
 
@@ -9,7 +9,7 @@ namespace Narvalo.Linq {
     using Assert = Narvalo.AssertExtended;
 
     // CollectAny for Fallible.
-    public partial class QperatorsFacts {
+    public partial class AperatorsFacts {
         [t("CollectAny() guards (Fallible).")]
         public static void CollectAny0a() {
             IEnumerable<Fallible<int>> nil = null;
@@ -27,7 +27,7 @@ namespace Narvalo.Linq {
     }
 
     // CollectAny for Maybe.
-    public partial class QperatorsFacts {
+    public partial class AperatorsFacts {
         [t("CollectAny() guards (Maybe).")]
         public static void CollectAny0b() {
             IEnumerable<Maybe<int>> nil = null;
@@ -45,7 +45,7 @@ namespace Narvalo.Linq {
     }
 
     // CollectAny for Outcome.
-    public partial class QperatorsFacts {
+    public partial class AperatorsFacts {
         [t("CollectAny() guards (Outcome).")]
         public static void CollectAny0c() {
             IEnumerable<Outcome<int>> nil = null;
@@ -63,7 +63,7 @@ namespace Narvalo.Linq {
     }
 
     // CollectAny for Result.
-    public partial class QperatorsFacts {
+    public partial class AperatorsFacts {
         [t("CollectAny() guards (Result).")]
         public static void CollectAny0d() {
             IEnumerable<Result<int, int>> nil = null;

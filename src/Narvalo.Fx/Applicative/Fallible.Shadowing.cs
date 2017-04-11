@@ -3,8 +3,6 @@
 namespace Narvalo.Applicative
 {
     using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.ExceptionServices;
 
@@ -32,20 +30,6 @@ namespace Narvalo.Applicative
             {
                 var edi = ExceptionDispatchInfo.Capture(ex);
                 return Fallible<TResult>.FromError(edi);
-            }
-        }
-    }
-
-    public static partial class FallibleExtensions
-    {
-        internal static IEnumerable<TSource> CollectAnyImpl<TSource>(
-            this IEnumerable<Fallible<TSource>> source)
-        {
-            Debug.Assert(source != null);
-
-            foreach (var item in source)
-            {
-                if (item.IsSuccess) { yield return item.Value; }
             }
         }
     }

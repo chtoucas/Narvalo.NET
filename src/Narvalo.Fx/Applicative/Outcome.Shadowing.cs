@@ -3,8 +3,6 @@
 namespace Narvalo.Applicative
 {
     using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
 
     public partial struct Outcome<T>
     {
@@ -24,20 +22,6 @@ namespace Narvalo.Applicative
             Require.NotNull(selector, nameof(selector));
 
             return IsSuccess ? Outcome.Of(selector(Value)) : Outcome<TResult>.FromError(Error);
-        }
-    }
-
-    public static partial class OutcomeExtensions
-    {
-        internal static IEnumerable<TSource> CollectAnyImpl<TSource>(
-            this IEnumerable<Outcome<TSource>> source)
-        {
-            Debug.Assert(source != null);
-
-            foreach (var item in source)
-            {
-                if (item.IsSuccess) { yield return item.Value; }
-            }
         }
     }
 }
