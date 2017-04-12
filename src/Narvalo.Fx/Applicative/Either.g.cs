@@ -142,7 +142,16 @@ namespace Narvalo.Applicative
         public static Either<T, TRight> Flatten<T, TRight>(this Either<Either<T, TRight>, TRight> @this)
             => Either<T, TRight>.μ(@this);
 
-        /// <seealso cref="Ap.Apply{TSource, TResult, TRight}(Either{Func{TSource, TResult}, TRight}, Either{TSource, TRight})" />
+        /// <seealso cref="Gather{TSource, TResult, TRight}" />
+        public static Either<TResult, TRight> Apply<TSource, TResult, TRight>(
+            this Either<Func<TSource, TResult>, TRight> @this,
+            Either<TSource, TRight> value)
+        {
+            Require.NotNull(value, nameof(value));
+            return value.Gather(@this);
+        }
+
+        /// <seealso cref="Apply{TSource, TResult, TRight}(Either{Func{TSource, TResult}, TRight}, Either{TSource, TRight})" />
         public static Either<TResult, TRight> Gather<TSource, TResult, TRight>(
             this Either<TSource, TRight> @this,
             Either<Func<TSource, TResult>, TRight> applicative)
@@ -333,23 +342,6 @@ namespace Narvalo.Applicative
         }
 
         #endregion
-    }
-
-    /// <summary>
-    /// Provides extension methods for <see cref="Either{T, TRight}"/>
-    /// where T is of type <see cref="Func{TSource, TResult}"/>.
-    /// </summary>
-    // T4: EmitApplicative().
-    public static partial class Ap
-    {
-        /// <seealso cref="EitherExtensions.Gather{TSource, TResult, TRight}" />
-        public static Either<TResult, TRight> Apply<TSource, TResult, TRight>(
-            this Either<Func<TSource, TResult>, TRight> @this,
-            Either<TSource, TRight> value)
-        {
-            Require.NotNull(value, nameof(value));
-            return value.Gather(@this);
-        }
     }
 
     /// <summary>

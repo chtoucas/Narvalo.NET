@@ -498,7 +498,7 @@ namespace Narvalo.Applicative {
             Assert.True(obj.WasDisposed);
         }
 
-        [q("Ap.Apply is Select.Gather w/ the arguments flipped (1).")]
+        [q("Apply() is Select.Gather w/ the arguments flipped (1).")]
         public static bool Apply01a(int arg0, long arg1) {
             var applicative = Maybe<Func<int, long>>.η(i => arg1 * i);
             var value = Maybe<int>.η(arg0);
@@ -509,12 +509,12 @@ namespace Narvalo.Applicative {
             return applied.Equals(gathered);
         }
 
-        [q("Ap.Apply is Select.Gather w/ the arguments flipped (2).")]
+        [q("Apply() is Select.Gather w/ the arguments flipped (2).")]
         public static bool Apply01b(int arg0, long arg1) {
             var applicative = Maybe<Func<int, long>>.η(i => arg1 * i);
             var value = Maybe<int>.η(arg0);
 
-            var applied = Ap.Apply(applicative, value);
+            var applied = MaybeExtensions.Apply(applicative, value);
             var gathered = MaybeExtensions.Gather(value, applicative);
 
             return applied.Equals(gathered);

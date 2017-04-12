@@ -167,7 +167,16 @@ namespace Narvalo.T4.Testbed
         public static MonadOr<T> Flatten<T>(this MonadOr<MonadOr<T>> @this)
             => MonadOr<T>.μ(@this);
 
-        /// <seealso cref="Ap.Apply{TSource, TResult}(MonadOr{Func{TSource, TResult}}, MonadOr{TSource})" />
+        /// <seealso cref="Gather{TSource, TResult}" />
+        public static MonadOr<TResult> Apply<TSource, TResult>(
+            this MonadOr<Func<TSource, TResult>> @this,
+            MonadOr<TSource> value)
+        {
+            Require.NotNull(value, nameof(value));
+            return value.Gather(@this);
+        }
+
+        /// <seealso cref="Apply{TSource, TResult}(MonadOr{Func{TSource, TResult}}, MonadOr{TSource})" />
         public static MonadOr<TResult> Gather<TSource, TResult>(
             this MonadOr<TSource> @this,
             MonadOr<Func<TSource, TResult>> applicative)
@@ -452,23 +461,6 @@ namespace Narvalo.T4.Testbed
         }
 
         #endregion
-    }
-
-    /// <summary>
-    /// Provides extension methods for <see cref="MonadOr{T}"/>
-    /// where T is of type <see cref="Func{TSource, TResult}"/>.
-    /// </summary>
-    // T4: EmitApplicative().
-    public static partial class Ap
-    {
-        /// <seealso cref="MonadOrExtensions.Gather{TSource, TResult}" />
-        public static MonadOr<TResult> Apply<TSource, TResult>(
-            this MonadOr<Func<TSource, TResult>> @this,
-            MonadOr<TSource> value)
-        {
-            Require.NotNull(value, nameof(value));
-            return value.Gather(@this);
-        }
     }
 
     /// <summary>

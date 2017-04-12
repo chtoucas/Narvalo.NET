@@ -21,7 +21,16 @@ public partial class MonadTemplate
             => <#= Name #><T<#= RTDecl #>>.μ(@this);
 
 <#+ } // End of DisableFlatten #>
-        /// <seealso cref="Ap.Apply{TSource, TResult<#= RTDecl #>}(<#= Name #>{Func{TSource, TResult}<#= RTDecl #>}, <#= Name #>{TSource<#= RTDecl #>})" />
+        /// <seealso cref="Gather{TSource, TResult<#= RTDecl #>}" />
+        public static <#= Name #><TResult<#= RTDecl #>> Apply<TSource, TResult<#= RTDecl #>>(
+            this <#= Name #><Func<TSource, TResult><#= RTDecl #>> @this,
+            <#= Name #><TSource<#= RTDecl #>> value)
+        {
+            <#+ WriteNotNull("value"); #>
+            return value.Gather(@this);
+        }
+
+        /// <seealso cref="Apply{TSource, TResult<#= RTDecl #>}(<#= Name #>{Func{TSource, TResult}<#= RTDecl #>}, <#= Name #>{TSource<#= RTDecl #>})" />
         public static <#= Name #><TResult<#= RTDecl #>> Gather<TSource, TResult<#= RTDecl #>>(
             this <#= Name #><TSource<#= RTDecl #>> @this,
             <#= Name #><Func<TSource, TResult><#= RTDecl #>> applicative)

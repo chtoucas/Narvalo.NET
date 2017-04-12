@@ -158,7 +158,16 @@ namespace Narvalo.Applicative
         public static Fallible<T> Flatten<T>(this Fallible<Fallible<T>> @this)
             => Fallible<T>.μ(@this);
 
-        /// <seealso cref="Ap.Apply{TSource, TResult}(Fallible{Func{TSource, TResult}}, Fallible{TSource})" />
+        /// <seealso cref="Gather{TSource, TResult}" />
+        public static Fallible<TResult> Apply<TSource, TResult>(
+            this Fallible<Func<TSource, TResult>> @this,
+            Fallible<TSource> value)
+        {
+            /* T4: NotNull(value) */
+            return value.Gather(@this);
+        }
+
+        /// <seealso cref="Apply{TSource, TResult}(Fallible{Func{TSource, TResult}}, Fallible{TSource})" />
         public static Fallible<TResult> Gather<TSource, TResult>(
             this Fallible<TSource> @this,
             Fallible<Func<TSource, TResult>> applicative)
@@ -349,23 +358,6 @@ namespace Narvalo.Applicative
         }
 
         #endregion
-    }
-
-    /// <summary>
-    /// Provides extension methods for <see cref="Fallible{T}"/>
-    /// where T is of type <see cref="Func{TSource, TResult}"/>.
-    /// </summary>
-    // T4: EmitApplicative().
-    public static partial class Ap
-    {
-        /// <seealso cref="FallibleExtensions.Gather{TSource, TResult}" />
-        public static Fallible<TResult> Apply<TSource, TResult>(
-            this Fallible<Func<TSource, TResult>> @this,
-            Fallible<TSource> value)
-        {
-            /* T4: NotNull(value) */
-            return value.Gather(@this);
-        }
     }
 
     /// <summary>

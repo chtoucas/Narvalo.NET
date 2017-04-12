@@ -158,7 +158,16 @@ namespace Narvalo.Applicative
         public static Outcome<T> Flatten<T>(this Outcome<Outcome<T>> @this)
             => Outcome<T>.μ(@this);
 
-        /// <seealso cref="Ap.Apply{TSource, TResult}(Outcome{Func{TSource, TResult}}, Outcome{TSource})" />
+        /// <seealso cref="Gather{TSource, TResult}" />
+        public static Outcome<TResult> Apply<TSource, TResult>(
+            this Outcome<Func<TSource, TResult>> @this,
+            Outcome<TSource> value)
+        {
+            /* T4: NotNull(value) */
+            return value.Gather(@this);
+        }
+
+        /// <seealso cref="Apply{TSource, TResult}(Outcome{Func{TSource, TResult}}, Outcome{TSource})" />
         public static Outcome<TResult> Gather<TSource, TResult>(
             this Outcome<TSource> @this,
             Outcome<Func<TSource, TResult>> applicative)
@@ -349,23 +358,6 @@ namespace Narvalo.Applicative
         }
 
         #endregion
-    }
-
-    /// <summary>
-    /// Provides extension methods for <see cref="Outcome{T}"/>
-    /// where T is of type <see cref="Func{TSource, TResult}"/>.
-    /// </summary>
-    // T4: EmitApplicative().
-    public static partial class Ap
-    {
-        /// <seealso cref="OutcomeExtensions.Gather{TSource, TResult}" />
-        public static Outcome<TResult> Apply<TSource, TResult>(
-            this Outcome<Func<TSource, TResult>> @this,
-            Outcome<TSource> value)
-        {
-            /* T4: NotNull(value) */
-            return value.Gather(@this);
-        }
     }
 
     /// <summary>

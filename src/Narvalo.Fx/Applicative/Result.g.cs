@@ -142,7 +142,16 @@ namespace Narvalo.Applicative
         public static Result<T, TError> Flatten<T, TError>(this Result<Result<T, TError>, TError> @this)
             => Result<T, TError>.μ(@this);
 
-        /// <seealso cref="Ap.Apply{TSource, TResult, TError}(Result{Func{TSource, TResult}, TError}, Result{TSource, TError})" />
+        /// <seealso cref="Gather{TSource, TResult, TError}" />
+        public static Result<TResult, TError> Apply<TSource, TResult, TError>(
+            this Result<Func<TSource, TResult>, TError> @this,
+            Result<TSource, TError> value)
+        {
+            /* T4: NotNull(value) */
+            return value.Gather(@this);
+        }
+
+        /// <seealso cref="Apply{TSource, TResult, TError}(Result{Func{TSource, TResult}, TError}, Result{TSource, TError})" />
         public static Result<TResult, TError> Gather<TSource, TResult, TError>(
             this Result<TSource, TError> @this,
             Result<Func<TSource, TResult>, TError> applicative)
@@ -333,23 +342,6 @@ namespace Narvalo.Applicative
         }
 
         #endregion
-    }
-
-    /// <summary>
-    /// Provides extension methods for <see cref="Result{T, TError}"/>
-    /// where T is of type <see cref="Func{TSource, TResult}"/>.
-    /// </summary>
-    // T4: EmitApplicative().
-    public static partial class Ap
-    {
-        /// <seealso cref="ResultExtensions.Gather{TSource, TResult, TError}" />
-        public static Result<TResult, TError> Apply<TSource, TResult, TError>(
-            this Result<Func<TSource, TResult>, TError> @this,
-            Result<TSource, TError> value)
-        {
-            /* T4: NotNull(value) */
-            return value.Gather(@this);
-        }
     }
 
     /// <summary>

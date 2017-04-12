@@ -302,7 +302,7 @@ public partial class MonadTemplate
             Assert.True(obj.WasDisposed);
         }
 
-        [q("Ap.Apply is <#= MapName #>.Gather w/ the arguments flipped (1).")]
+        [q("Apply() is <#= MapName #>.Gather w/ the arguments flipped (1).")]
         public static bool Apply01a(int arg0, long arg1) {
             var applicative = <#+ WriteFactory("Func<int, long>"); #>(i => arg1 * i);
             var value = <#+ WriteFactory("int"); #>(arg0);
@@ -313,12 +313,12 @@ public partial class MonadTemplate
             return applied.Equals(gathered);
         }
 
-        [q("Ap.Apply is <#= MapName #>.Gather w/ the arguments flipped (2).")]
+        [q("Apply() is <#= MapName #>.Gather w/ the arguments flipped (2).")]
         public static bool Apply01b(int arg0, long arg1) {
             var applicative = <#+ WriteFactory("Func<int, long>"); #>(i => arg1 * i);
             var value = <#+ WriteFactory("int"); #>(arg0);
 
-            var applied = Ap.Apply(applicative, value);
+            var applied = <#= ExtensionsClsName #>.Apply(applicative, value);
             var gathered = <#= ExtensionsClsName #>.Gather(value, applicative);
 
             return applied.Equals(gathered);

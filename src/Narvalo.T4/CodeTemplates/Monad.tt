@@ -3,7 +3,6 @@
 <#@ import namespace="Narvalo.T4" #>
 <#@ include file="Monad\EmitHelpers.tt" #>
 <#@ include file="Monad\EmitExtensions.tt" #>
-<#@ include file="Monad\EmitApplicative.tt" #>
 <#@ include file="Monad\EmitKleisli.tt" #>
 <#@ include file="Monad\EmitEnumerableInternal.tt" #>
 <#@ include file="Monad\EmitLinqCore.tt" #>
@@ -64,9 +63,6 @@ namespace <#= Namespace #>
             WriteLine();
             EmitExtensionsExperimental();
         }
-
-        WriteLine();
-        EmitApplicative();
 
         WriteLine();
         EmitKleisli();

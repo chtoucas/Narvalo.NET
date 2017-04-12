@@ -167,7 +167,16 @@ namespace Narvalo.Applicative
         public static Maybe<T> Flatten<T>(this Maybe<Maybe<T>> @this)
             => Maybe<T>.μ(@this);
 
-        /// <seealso cref="Ap.Apply{TSource, TResult}(Maybe{Func{TSource, TResult}}, Maybe{TSource})" />
+        /// <seealso cref="Gather{TSource, TResult}" />
+        public static Maybe<TResult> Apply<TSource, TResult>(
+            this Maybe<Func<TSource, TResult>> @this,
+            Maybe<TSource> value)
+        {
+            /* T4: NotNull(value) */
+            return value.Gather(@this);
+        }
+
+        /// <seealso cref="Apply{TSource, TResult}(Maybe{Func{TSource, TResult}}, Maybe{TSource})" />
         public static Maybe<TResult> Gather<TSource, TResult>(
             this Maybe<TSource> @this,
             Maybe<Func<TSource, TResult>> applicative)
@@ -451,23 +460,6 @@ namespace Narvalo.Applicative
         }
 
         #endregion
-    }
-
-    /// <summary>
-    /// Provides extension methods for <see cref="Maybe{T}"/>
-    /// where T is of type <see cref="Func{TSource, TResult}"/>.
-    /// </summary>
-    // T4: EmitApplicative().
-    public static partial class Ap
-    {
-        /// <seealso cref="MaybeExtensions.Gather{TSource, TResult}" />
-        public static Maybe<TResult> Apply<TSource, TResult>(
-            this Maybe<Func<TSource, TResult>> @this,
-            Maybe<TSource> value)
-        {
-            /* T4: NotNull(value) */
-            return value.Gather(@this);
-        }
     }
 
     /// <summary>

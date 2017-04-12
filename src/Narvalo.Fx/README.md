@@ -825,8 +825,7 @@ Be careful with infinite sequences, a simple way to terminate one is to use
 the `Take` operator.
 
 - `Return(value)` generates a sequence that contains exactly one value.
-- `Repeat(value)` generates an **infinite** sequence that contains one repeated
-  value.
+- `Repeat(value)` generates an **infinite** sequence of one repeated value.
 
 ### <a name="linq-applicative"></a>Operators (Applicative)
 

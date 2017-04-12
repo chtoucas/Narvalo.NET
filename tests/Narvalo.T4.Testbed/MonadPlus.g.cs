@@ -167,7 +167,16 @@ namespace Narvalo.T4.Testbed
         public static MonadPlus<T> Flatten<T>(this MonadPlus<MonadPlus<T>> @this)
             => MonadPlus<T>.μ(@this);
 
-        /// <seealso cref="Ap.Apply{TSource, TResult}(MonadPlus{Func{TSource, TResult}}, MonadPlus{TSource})" />
+        /// <seealso cref="Gather{TSource, TResult}" />
+        public static MonadPlus<TResult> Apply<TSource, TResult>(
+            this MonadPlus<Func<TSource, TResult>> @this,
+            MonadPlus<TSource> value)
+        {
+            Require.NotNull(value, nameof(value));
+            return value.Gather(@this);
+        }
+
+        /// <seealso cref="Apply{TSource, TResult}(MonadPlus{Func{TSource, TResult}}, MonadPlus{TSource})" />
         public static MonadPlus<TResult> Gather<TSource, TResult>(
             this MonadPlus<TSource> @this,
             MonadPlus<Func<TSource, TResult>> applicative)
@@ -452,23 +461,6 @@ namespace Narvalo.T4.Testbed
         }
 
         #endregion
-    }
-
-    /// <summary>
-    /// Provides extension methods for <see cref="MonadPlus{T}"/>
-    /// where T is of type <see cref="Func{TSource, TResult}"/>.
-    /// </summary>
-    // T4: EmitApplicative().
-    public static partial class Ap
-    {
-        /// <seealso cref="MonadPlusExtensions.Gather{TSource, TResult}" />
-        public static MonadPlus<TResult> Apply<TSource, TResult>(
-            this MonadPlus<Func<TSource, TResult>> @this,
-            MonadPlus<TSource> value)
-        {
-            Require.NotNull(value, nameof(value));
-            return value.Gather(@this);
-        }
     }
 
     /// <summary>

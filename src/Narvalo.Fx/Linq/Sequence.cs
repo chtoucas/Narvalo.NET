@@ -24,7 +24,7 @@ namespace Narvalo.Linq
         }
 
         /// <summary>
-        /// Generates an infinite sequence containing one repeated value.
+        /// Generates an infinite sequence of one repeated value.
         /// </summary>
         /// <typeparam name="TResult">The type of the value to be used in the
         /// result sequence.</typeparam>
