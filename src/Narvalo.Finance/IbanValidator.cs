@@ -50,7 +50,7 @@ namespace Narvalo.Finance
                     Format.Current(Strings.BbanVerificationFailure, parts.Bban));
             }
 
-            return Outcome.Ok;
+            return Outcome.Success;
         }
 
         public static bool VerifyISOCountryCode(IbanParts parts)

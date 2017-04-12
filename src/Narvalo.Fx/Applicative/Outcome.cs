@@ -67,12 +67,12 @@ namespace Narvalo.Applicative
     public partial struct Outcome
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private static readonly Outcome s_Ok = new Outcome();
+        private static readonly Outcome s_Success = new Outcome();
 
         /// <summary>
         /// Obtains an instance of <see cref="Outcome" /> that represents a successful computation.
         /// </summary>
-        public static Outcome Ok => s_Ok;
+        public static Outcome Success => s_Success;
 
         public static Outcome FromError(string error)
         {

@@ -666,7 +666,8 @@ var failure = Outcome<int>.FromError("My error message.");
 ### <a name="rop-fallible"></a>`Fallible`
 
 [Explain when to use this class; mainly for querying remote services]
-[Explain the limits; what exceptions do we catch and when. Do not expect to much]
+[Explain the limits; what exceptions do we catch and when. Do not expect to much;
+ LINQ extensions are unchecked.]
 
 If `edi` is an object of type `ExceptionDispatchInfo`:
 ```csharp
@@ -681,7 +682,8 @@ var failure = Fallible.FromError(edi);
 ### <a name="rop-fallibleT"></a>`Fallible<T>`
 
 [Explain when to use this class; mainly for querying remote services]
-[Explain the limits; what exceptions do we catch and when. Do not expect to much]
+[Explain the limits; what exceptions do we catch and when. Do not expect to much;
+ LINQ extensions are unchecked.]
 
 If `edi` is an object of type `ExceptionDispatchInfo`:
 ```csharp
