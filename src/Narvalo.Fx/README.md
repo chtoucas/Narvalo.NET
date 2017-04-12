@@ -13,7 +13,7 @@ disjoint union (`Either<T1, T2>`), sequence generators and LINQ extensions.
 - **Unstable.**
 - Tentative release date for a stable package: end of april 2017?
 - Support the .NET Standard v1.0 and the PCL profile Profile259.
-- Test coverage is starting to look good (75%), the number of functional tests
+- Test coverage is starting to look good (70%); the number of functional tests
   is progressing too.
 - C# documentation is largely missing.
 - Localized messages available in both French and English.
@@ -665,6 +665,9 @@ var failure = Outcome<int>.FromError("My error message.");
 
 ### <a name="rop-fallible"></a>`Fallible`
 
+[Explain when to use this class; mainly for querying remote services]
+[Explain the limits; what exceptions do we catch and when. Do not expect to much]
+
 If `edi` is an object of type `ExceptionDispatchInfo`:
 ```csharp
 var success = Fallible.Ok;
@@ -676,6 +679,9 @@ var failure = Fallible.FromError(edi);
 ```
 
 ### <a name="rop-fallibleT"></a>`Fallible<T>`
+
+[Explain when to use this class; mainly for querying remote services]
+[Explain the limits; what exceptions do we catch and when. Do not expect to much]
 
 If `edi` is an object of type `ExceptionDispatchInfo`:
 ```csharp

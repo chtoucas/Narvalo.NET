@@ -64,19 +64,19 @@ Narvalo.Fx
     tests for null-guards (affects only `Either<T1, T2>`) + tests.
   * Should we throw (arg-check) if we have a lefty method for a righty object
     (see `WhenLeft` for instance).
-- `Fallible`: check that we catch all exceptions + tests.
+- `Fallible` and `Fallible<T>`: thorough test of exceptions.
 - Could we simplify LINQ for `Maybe<T?>`?
 - Remove `GroupJoin` for monads?
 - Explain `Bind` and `Select` for `Outcome` and `Fallible`,
   `Where` for `Outcome<T>` and `Fallible<T>`.
 
 Next:
+- Add async and lazy alternatives?
 - LINQ: `FoldBack` and `ReduceBack`. Mimic Rx operators: `Scan`, `MinBy`,
   `MaxBy`...? (see also F#) I am sure we can improve the default implementations
   for `CollectAny`, `SelectAny` and `WhereAny`.
 - Add operators on the right for `Either<T1, T2>`?
 - Add tests for purity?
-- Add async and lazy alternatives?
 - More recursion helpers: trampoline + other Y Combinators.
 - Custom `is` operators (it is in the proposal but it is not yet possible).
 - Deconstruction for `Maybe<T?>`,

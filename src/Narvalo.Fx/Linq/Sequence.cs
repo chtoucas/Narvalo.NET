@@ -13,7 +13,6 @@ namespace Narvalo.Linq
         /// <summary>
         /// Generates a sequence that contains exactly one value.
         /// </summary>
-        /// <remarks>The result is immutable.</remarks>
         /// <typeparam name="TResult">The type of the value to be used in the result sequence.</typeparam>
         /// <param name="value">The single value of the sequence.</param>
         /// <returns>An <see cref="IEnumerable{TResult}"/> that contains a single element.</returns>
