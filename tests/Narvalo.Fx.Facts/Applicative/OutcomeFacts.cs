@@ -10,9 +10,9 @@ namespace Narvalo.Applicative {
     // Tests for Outcome.
     public static partial class OutcomeFacts {
         [t("Ok is OK.")]
-        public static void Success1() {
-            Assert.True(Outcome.Success.IsSuccess);
-            Assert.False(Outcome.Success.IsError);
+        public static void Ok1() {
+            Assert.True(Outcome.Ok.IsSuccess);
+            Assert.False(Outcome.Ok.IsError);
         }
 
         [t("FromError() guards.")]
@@ -29,7 +29,7 @@ namespace Narvalo.Applicative {
 
         [t("Deconstruct() if OK.")]
         public static void Deconstruct1() {
-            var ok = Outcome.Success;
+            var ok = Outcome.Ok;
             var (succeed, err) = ok;
             Assert.True(succeed);
             Assert.Null(err);
@@ -58,14 +58,14 @@ namespace Narvalo.Applicative {
 
         [t("!= when one of the sides is OK.")]
         public static void Equality3() {
-            var ok = Outcome.Success;
+            var ok = Outcome.Ok;
             var nok = Outcome.FromError("error");
             Assert.True(nok != ok);
         }
 
         [t("Equals() is reflexive.")]
         public static void Equals1() {
-            var ok = Outcome.Success;
+            var ok = Outcome.Ok;
             Assert.True(ok.Equals(ok));
 
             var nok = Outcome.FromError("error");
@@ -74,7 +74,7 @@ namespace Narvalo.Applicative {
 
         [t("Equals(null) returns false.")]
         public static void Equals2() {
-            var ok = Outcome.Success;
+            var ok = Outcome.Ok;
             Assert.False(ok.Equals(null));
 
             var nok = Outcome.FromError("error");
@@ -83,7 +83,7 @@ namespace Narvalo.Applicative {
 
         [t("Equals(obj) returns false if obj is not Outcome.")]
         public static void Equals3() {
-            var ok = Outcome.Success;
+            var ok = Outcome.Ok;
             Assert.False(ok.Equals(new Obj()));
 
             var nok = Outcome.FromError("error");
@@ -92,7 +92,7 @@ namespace Narvalo.Applicative {
 
         [t("Equals() returns true only if instances wrap the same error.")]
         public static void Equals4() {
-            var ok = Outcome.Success;
+            var ok = Outcome.Ok;
             var nok = Outcome.FromError("error");
             var nok1 = Outcome.FromError("error1");
             var nok2 = Outcome.FromError("error1");
@@ -107,7 +107,7 @@ namespace Narvalo.Applicative {
             var nok = Outcome.FromError("error");
             Assert.Equal(nok.GetHashCode(), nok.GetHashCode());
 
-            var ok = Outcome.Success;
+            var ok = Outcome.Ok;
             Assert.Equal(ok.GetHashCode(), ok.GetHashCode());
         }
 
@@ -124,13 +124,13 @@ namespace Narvalo.Applicative {
             var nok2 = Outcome.FromError("error2");
             Assert.NotEqual(nok1.GetHashCode(), nok2.GetHashCode());
 
-            var ok = Outcome.Success;
+            var ok = Outcome.Ok;
             Assert.NotEqual(nok1.GetHashCode(), ok.GetHashCode());
         }
 
         [t("ToString() result contains a string representation of the value if OK, or is 'Success' if NOK.")]
         public static void ToString1() {
-            var ok = Outcome.Success;
+            var ok = Outcome.Ok;
             Assert.Equal("Success", ok.ToString());
 
             var error = "My error";
@@ -142,7 +142,7 @@ namespace Narvalo.Applicative {
     public static partial class OutcomeFacts {
         [t("Match() guards.")]
         public static void Match0() {
-            var ok = Outcome.Success;
+            var ok = Outcome.Ok;
             Assert.Throws<ArgumentNullException>("caseSuccess", () => ok.Match(null, default(Func<string, Obj>)));
             Assert.Throws<ArgumentNullException>("caseError", () => ok.Match(() => default(Obj), null));
 
@@ -153,7 +153,7 @@ namespace Narvalo.Applicative {
 
         [t("Match() calls 'caseSuccess' if OK.")]
         public static void Match1() {
-            var ok = Outcome.Success;
+            var ok = Outcome.Ok;
             var wasCalled = false;
             var notCalled = true;
             var exp = new Obj("caseSuccess");
@@ -185,7 +185,7 @@ namespace Narvalo.Applicative {
 
         [t("Do() guards.")]
         public static void Do0() {
-            var ok = Outcome.Success;
+            var ok = Outcome.Ok;
             Assert.Throws<ArgumentNullException>("onSuccess", () => ok.Do(null, _ => { }));
             Assert.Throws<ArgumentNullException>("onError", () => ok.Do(() => { }, null));
 
@@ -196,7 +196,7 @@ namespace Narvalo.Applicative {
 
         [t("Do() calls 'onSuccess' if OK.")]
         public static void Do1() {
-            var ok = Outcome.Success;
+            var ok = Outcome.Ok;
             var wasCalled = false;
             var notCalled = true;
             Action onSuccess = () => wasCalled = true;
@@ -224,7 +224,7 @@ namespace Narvalo.Applicative {
 
         [t("OnSuccess() guards.")]
         public static void OnSuccess0() {
-            var ok = Outcome.Success;
+            var ok = Outcome.Ok;
             Assert.Throws<ArgumentNullException>("action", () => ok.OnSuccess(null));
 
             var nok = Outcome.FromError("error");
@@ -233,7 +233,7 @@ namespace Narvalo.Applicative {
 
         [t("OnSuccess() calls 'action' if OK.")]
         public static void OnSuccess1() {
-            var ok = Outcome.Success;
+            var ok = Outcome.Ok;
             var wasCalled = false;
             Action act = () => wasCalled = true;
 
@@ -253,7 +253,7 @@ namespace Narvalo.Applicative {
 
         [t("OnError() guards.")]
         public static void OnError0() {
-            var ok = Outcome.Success;
+            var ok = Outcome.Ok;
             Assert.Throws<ArgumentNullException>("action", () => ok.OnError(null));
 
             var nok = Outcome.FromError("error");
@@ -272,7 +272,7 @@ namespace Narvalo.Applicative {
 
         [t("OnError() does not call 'action' if OK.")]
         public static void OnError2() {
-            var ok = Outcome.Success;
+            var ok = Outcome.Ok;
             var notCalled = true;
             Action<string> act = _ => notCalled = false;
 
@@ -285,7 +285,7 @@ namespace Narvalo.Applicative {
     public static partial class OutcomeFacts {
         [t("Bind() guards.")]
         public static void Bind0() {
-            var ok = Outcome.Success;
+            var ok = Outcome.Ok;
             Assert.Throws<ArgumentNullException>("binder", () => ok.Bind<string>(null));
 
             var nok = Outcome.FromError("error");
@@ -303,7 +303,7 @@ namespace Narvalo.Applicative {
 
         [t("Bind() returns OK if OK.")]
         public static void Bind2() {
-            var ok = Outcome.Success;
+            var ok = Outcome.Ok;
             Func<Outcome<string>> binder = () => Outcome.Of("value");
 
             var result = ok.Bind(binder);
@@ -312,7 +312,7 @@ namespace Narvalo.Applicative {
 
         [t("Select() returns OK if OK.")]
         public static void Select1() {
-            var ok = Outcome.Success;
+            var ok = Outcome.Ok;
             Func<int> selector = () => 1;
 
             var result = ok.Select(selector);
@@ -330,7 +330,7 @@ namespace Narvalo.Applicative {
 
         [t("ReplaceBy() returns OK if OK.")]
         public static void ReplaceBy1() {
-            var ok = Outcome.Success;
+            var ok = Outcome.Ok;
             var exp = Outcome.Of(1);
 
             var result = ok.ReplaceBy(exp);
@@ -348,7 +348,7 @@ namespace Narvalo.Applicative {
 
         [t("ContinueWith(other) returns 'other' if OK.")]
         public static void ContinueWith1() {
-            var ok = Outcome.Success;
+            var ok = Outcome.Ok;
             var exp = Outcome.Of(1);
 
             var result = ok.ContinueWith(exp);
@@ -381,7 +381,7 @@ namespace Narvalo.Applicative {
         [t("Bind() applies binder if OK.")]
         public static void Bind4() {
             var exp = "value";
-            var ok = Outcome.Success;
+            var ok = Outcome.Ok;
             Func<Outcome<string>> binder = () => Outcome.Of(exp);
 
             var result = ok.Bind(binder);
@@ -390,7 +390,7 @@ namespace Narvalo.Applicative {
 
         [t("Select() applies selector if OK.")]
         public static void Select3() {
-            var ok = Outcome.Success;
+            var ok = Outcome.Ok;
             Func<int> selector = () => 1;
 
             var result = ok.Select(selector);

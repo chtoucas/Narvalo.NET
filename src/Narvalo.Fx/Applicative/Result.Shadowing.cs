@@ -8,7 +8,7 @@ namespace Narvalo.Applicative
     public partial struct Result<T, TError>
     {
         public Result<TResult, TError> ReplaceBy<TResult>(TResult value)
-            => IsSuccess ? Result.Success<TError>.Return(value) : Result.Error<TResult>.Return(Error);
+            => IsSuccess ? Result.Ok<TError>.Return(value) : Result.Error<TResult>.Return(Error);
 
         public Result<TResult, TError> ContinueWith<TResult>(Result<TResult, TError> other)
             => IsSuccess ? other : Result.Error<TResult>.Return(Error);
@@ -19,7 +19,7 @@ namespace Narvalo.Applicative
             Require.NotNull(selector, nameof(selector));
 
             return IsSuccess
-                ? Result.Success<TError>.Return(selector(Value))
+                ? Result.Ok<TError>.Return(selector(Value))
                 : Result.Error<TResult>.Return(Error); ;
         }
     }

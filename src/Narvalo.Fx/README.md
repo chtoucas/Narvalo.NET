@@ -703,6 +703,11 @@ var failure = Result<int, Error>.FromError(new Error());
 ```
 
 ```csharp
+var success = Result.Ok<Error>.Return(1);
+var failure = Result.Error<int>.Return(new Error());
+```
+
+```csharp
 (bool succeed, T value, TError error) = result;
 ```
 
@@ -1022,7 +1027,7 @@ We follow (mostly) the proposed new terminology from the
 
 Name | Haskell | Terminology used here
 -----|---------|----------------------------------------
-`Zero` | `mzero` | `Zero`, `None`, `Empty`, `Ok`...
+`Zero` | `mzero` | `Zero`, `None`, `Empty`, `Success`...
 `Plus` | `mplus` | `Plus`, `OrElse`...
 
 #### MonadZero

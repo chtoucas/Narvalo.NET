@@ -167,7 +167,7 @@ namespace Narvalo.Applicative
         public Result<T, ExceptionDispatchInfo> ToResult()
             => IsError
             ? Result.Error<T>.Return(Error)
-            : Result.Success<ExceptionDispatchInfo>.Return(Value);
+            : Result.Ok<ExceptionDispatchInfo>.Return(Value);
 
         public static explicit operator T(Fallible<T> value) => value.ToValue();
 

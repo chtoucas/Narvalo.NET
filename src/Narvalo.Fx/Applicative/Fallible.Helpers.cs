@@ -16,7 +16,7 @@ namespace Narvalo.Applicative
             try
             {
                 action();
-                return Success;
+                return Ok;
             }
             catch (Exception ex)
             {
@@ -50,7 +50,7 @@ namespace Narvalo.Applicative
             try
             {
                 action();
-                return Success;
+                return Ok;
             }
             catch (Exception ex)
             {

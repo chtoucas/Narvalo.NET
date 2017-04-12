@@ -48,7 +48,7 @@ namespace Narvalo.Applicative
             this IEnumerable<Result<TSource, TError>> source)
         {
             Debug.Assert(source != null);
-            return Result.Success<TError>.Return(QImpl.CollectAnyImpl(source));
+            return Result.Ok<TError>.Return(QImpl.CollectAnyImpl(source));
         }
     }
 
@@ -97,7 +97,7 @@ namespace Narvalo.Applicative
         {
             Debug.Assert(source != null);
             Debug.Assert(predicate != null);
-            return Result.Success<TError>.Return(QImpl.WhereAnyImpl(source, predicate));
+            return Result.Ok<TError>.Return(QImpl.WhereAnyImpl(source, predicate));
         }
     }
 }

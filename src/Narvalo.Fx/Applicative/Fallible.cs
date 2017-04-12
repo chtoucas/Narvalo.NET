@@ -83,12 +83,12 @@ namespace Narvalo.Applicative
     public partial struct Fallible
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private static readonly Fallible s_Success = new Fallible();
+        private static readonly Fallible s_Ok = new Fallible();
 
         /// <summary>
         /// Obtains an instance of <see cref="Fallible" /> that represents a successful computation.
         /// </summary>
-        public static Fallible Success => s_Success;
+        public static Fallible Ok => s_Ok;
 
         public static Fallible FromError(ExceptionDispatchInfo error)
         {
