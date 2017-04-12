@@ -22,7 +22,7 @@ disjoint union (`Either<T1, T2>`), sequence generators and LINQ extensions.
 Our versioning scheme is explained
 [here](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/index.md#versioning).
 
-[What's Next](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/issues.md#narvalo.fx)
+[What's Next](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/issues.md#narvalofx)
 
 **WARNING: _I am currently in the process of rewriting this document._**
 
@@ -878,9 +878,18 @@ Recursion
 Tour of the API
 ---------------
 
-### Core Verbs
+- [Core methods](#api-core)
+- [L-extensions](#api-L)
+- [K-extensions](#api-K)
+- [Q-extensions](#api-Q)
 
-### Derived Verbs
+### <a name="api-core"></a>Core methods
+
+### <a name="api-L"></a>L-extensions
+
+### <a name="api-K"></a>K-extensions
+
+### <a name="api-Q"></a>Q-extensions
 
 --------------------------------------------------------------------------------
 

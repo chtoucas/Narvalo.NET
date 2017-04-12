@@ -62,7 +62,8 @@ Narvalo.Fx
 - Remove `GroupJoin` for monads?
 - Explain `Bind` and `Select` for `Outcome` and `Fallible`,
   `Where` for `Outcome<T>` and `Fallible<T>`.
-- Add tests for purity?
+- `OnError()`, `WhenError()` & co could return a boolean to signal when they
+  actually did something.
 - Fallible: review handling of exceptions + tests.
 - `Either<T1, T2>`:
   * T4: If the monad is nullable, check that we handle all null's. Auto-generate
@@ -75,6 +76,7 @@ Next:
 - LINQ: `FoldBack` and `ReduceBack`. Mimic Rx operators: `Scan`, `MinBy`,
   `MaxBy`... (see also F#) I am sure we can improve the default implementations
   for `CollectAny`, `SelectAny` and `WhereAny`.
+- Add tests for purity?
 - Add async and lazy alternatives?
 - More recursion helpers: trampoline + other Y Combinators.
 - Custom `is` operators (it is in the proposal but it is not yet possible).
@@ -93,8 +95,6 @@ public static void Deconstruct<T>(
   this is perfectly legal but will always be ignored in favor of the
   deconstructor method on `Maybe<T?>`.
 - Add other monads - prototypes [here](https://github.com/chtoucas/Brouillons/tree/master/src/play/Functional/Monadic)
-- `OnError()`, `WhenError()` & co could return a boolean to signal when they
-  actually did something.
 - More Haskell API, eg When, Forever & co?
 - [Idioms](http://tomasp.net/blog/idioms-in-linq.aspx/)
 
