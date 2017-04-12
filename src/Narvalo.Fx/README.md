@@ -744,6 +744,9 @@ var right = Either<int, long>.OfRight(1L);
 
 ### <a name="either-binding"></a>Binding
 
+[WARNING A Left and a Right do not handle arg-check the same way, for instance
+`WhenLeft` will check args when it is lefty, not when it is righty]
+
 --------------------------------------------------------------------------------
 
 Query Operators and Generators

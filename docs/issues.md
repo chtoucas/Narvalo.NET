@@ -59,12 +59,9 @@ Next:
 Narvalo.Fx
 ----------
 
-- `Either<T1, T2>`:
-  * T4: If the monad is nullable, check that we handle all null's. Auto-generate
-    tests for null-guards (affects only `Either<T1, T2>`) + tests.
-  * Should we throw (arg-check) if we have a lefty method for a righty object
-    (see `WhenLeft` for instance).
-- `Fallible` and `Fallible<T>`: thorough test of exceptions.
+- T4: If the monad is nullable, check that we handle all null's. Auto-generate
+  tests for null-guards (affects only `Either<T1, T2>`).
+- `Fallible` and `Fallible<T>`: test exceptions thoroughly.
 - Could we simplify LINQ for `Maybe<T?>`?
 - Remove `GroupJoin` for monads?
 - Explain `Bind` and `Select` for `Outcome` and `Fallible`,
