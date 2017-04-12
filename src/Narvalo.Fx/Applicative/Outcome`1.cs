@@ -226,34 +226,38 @@ namespace Narvalo.Applicative
             if (IsSuccess) { onSuccess(Value); } else { onError(Error); }
         }
 
-        public void WhenSuccess(Func<T, bool> predicate, Action<T> action)
+        public bool WhenSuccess(Func<T, bool> predicate, Action<T> action)
         {
             Require.NotNull(predicate, nameof(predicate));
             Require.NotNull(action, nameof(action));
 
-            if (IsSuccess && predicate(Value)) { action(Value); }
+            if (IsSuccess && predicate(Value)) { action(Value); return true; }
+            return false;
         }
 
-        public void WhenError(Func<string, bool> predicate, Action<string> action)
+        public bool WhenError(Func<string, bool> predicate, Action<string> action)
         {
             Require.NotNull(predicate, nameof(predicate));
             Require.NotNull(action, nameof(action));
 
-            if (IsError && predicate(Error)) { action(Error); }
+            if (IsError && predicate(Error)) { action(Error); return true; }
+            return false;
         }
 
-        public void OnSuccess(Action<T> action)
+        public bool OnSuccess(Action<T> action)
         {
             Require.NotNull(action, nameof(action));
 
-            if (IsSuccess) { action(Value); }
+            if (IsSuccess) { action(Value); return true; }
+            return false;
         }
 
-        public void OnError(Action<string> action)
+        public bool OnError(Action<string> action)
         {
             Require.NotNull(action, nameof(action));
 
-            if (IsError) { action(Error); }
+            if (IsError) { action(Error); return true; }
+            return false;
         }
 
         #region Publicly hidden methods.
@@ -268,21 +272,21 @@ namespace Narvalo.Applicative
 
         // Alias for WhenSuccess().
         [ExcludeFromCodeCoverage]
-        void Internal.IContainer<T>.When(Func<T, bool> predicate, Action<T> action)
+        bool Internal.IContainer<T>.When(Func<T, bool> predicate, Action<T> action)
            => WhenSuccess(predicate, action);
 
         // Alias for WhenError().
         [ExcludeFromCodeCoverage]
-        void Internal.ISecondaryContainer<string>.When(Func<string, bool> predicate, Action<string> action)
+        bool Internal.ISecondaryContainer<string>.When(Func<string, bool> predicate, Action<string> action)
             => WhenError(predicate, action);
 
         // Alias for OnSuccess().
         [ExcludeFromCodeCoverage]
-        void Internal.IContainer<T>.Do(Action<T> action) => OnSuccess(action);
+        bool Internal.IContainer<T>.Do(Action<T> action) => OnSuccess(action);
 
         // Alias for OnError().
         [ExcludeFromCodeCoverage]
-        void Internal.ISecondaryContainer<string>.Do(Action<string> action)
+        bool Internal.ISecondaryContainer<string>.Do(Action<string> action)
             => OnError(action);
 
         #endregion

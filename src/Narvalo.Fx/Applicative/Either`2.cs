@@ -289,11 +289,11 @@ namespace Narvalo.Applicative
 
         public abstract void Do(Action<TLeft> onLeft, Action<TRight> onRight);
 
-        public abstract void WhenLeft(Func<TLeft, bool> predicate, Action<TLeft> action);
-        public abstract void WhenRight(Func<TRight, bool> predicate, Action<TRight> action);
+        public abstract bool WhenLeft(Func<TLeft, bool> predicate, Action<TLeft> action);
+        public abstract bool WhenRight(Func<TRight, bool> predicate, Action<TRight> action);
 
-        public abstract void OnLeft(Action<TLeft> action);
-        public abstract void OnRight(Action<TRight> action);
+        public abstract bool OnLeft(Action<TLeft> action);
+        public abstract bool OnRight(Action<TRight> action);
 
         #region Publicly hidden methods.
 
@@ -319,21 +319,21 @@ namespace Narvalo.Applicative
 
         // Alias for WhenLeft().
         [ExcludeFromCodeCoverage]
-        void Internal.IContainer<TLeft>.When(Func<TLeft, bool> predicate, Action<TLeft> action)
+        bool Internal.IContainer<TLeft>.When(Func<TLeft, bool> predicate, Action<TLeft> action)
             => WhenLeft(predicate, action);
 
         // Alias for WhenRight().
         [ExcludeFromCodeCoverage]
-        void Internal.ISecondaryContainer<TRight>.When(Func<TRight, bool> predicate, Action<TRight> action)
+        bool Internal.ISecondaryContainer<TRight>.When(Func<TRight, bool> predicate, Action<TRight> action)
             => WhenRight(predicate, action);
 
         // Alias for OnLeft().
         [ExcludeFromCodeCoverage]
-        void Internal.IContainer<TLeft>.Do(Action<TLeft> action) => OnLeft(action);
+        bool Internal.IContainer<TLeft>.Do(Action<TLeft> action) => OnLeft(action);
 
         // Alias for OnRight().
         [ExcludeFromCodeCoverage]
-        void Internal.ISecondaryContainer<TRight>.Do(Action<TRight> action) => OnRight(action);
+        bool Internal.ISecondaryContainer<TRight>.Do(Action<TRight> action) => OnRight(action);
 
         #endregion
 
@@ -356,15 +356,16 @@ namespace Narvalo.Applicative
                 return caseLeft(Left);
             }
 
-            public override void WhenLeft(Func<TLeft, bool> predicate, Action<TLeft> action)
+            public override bool WhenLeft(Func<TLeft, bool> predicate, Action<TLeft> action)
             {
                 Require.NotNull(predicate, nameof(predicate));
                 Require.NotNull(action, nameof(action));
 
-                if (predicate(Left)) { action(Left); }
+                if (predicate(Left)) { action(Left); return true; }
+                return false;
             }
 
-            public override void WhenRight(Func<TRight, bool> predicate, Action<TRight> action) { }
+            public override bool WhenRight(Func<TRight, bool> predicate, Action<TRight> action) => false;
 
             public override void Do(Action<TLeft> onLeft, Action<TRight> onRight)
             {
@@ -373,14 +374,15 @@ namespace Narvalo.Applicative
                 onLeft(Left);
             }
 
-            public override void OnLeft(Action<TLeft> action)
+            public override bool OnLeft(Action<TLeft> action)
             {
                 Require.NotNull(action, nameof(action));
 
                 action(Left);
+                return true;
             }
 
-            public override void OnRight(Action<TRight> action) { }
+            public override bool OnRight(Action<TRight> action) => false;
         }
 
         private partial class Right_
@@ -402,14 +404,15 @@ namespace Narvalo.Applicative
                 return caseRight(Right);
             }
 
-            public override void WhenLeft(Func<TLeft, bool> predicate, Action<TLeft> action) { }
+            public override bool WhenLeft(Func<TLeft, bool> predicate, Action<TLeft> action) => false;
 
-            public override void WhenRight(Func<TRight, bool> predicate, Action<TRight> action)
+            public override bool WhenRight(Func<TRight, bool> predicate, Action<TRight> action)
             {
                 Require.NotNull(predicate, nameof(predicate));
                 Require.NotNull(action, nameof(action));
 
-                if (predicate(Right)) { action(Right); }
+                if (predicate(Right)) { action(Right); return true; }
+                return false;
             }
 
             public override void Do(Action<TLeft> onLeft, Action<TRight> onRight)
@@ -419,13 +422,14 @@ namespace Narvalo.Applicative
                 onRight(Right);
             }
 
-            public override void OnLeft(Action<TLeft> action) { }
+            public override bool OnLeft(Action<TLeft> action) => false;
 
-            public override void OnRight(Action<TRight> action)
+            public override bool OnRight(Action<TRight> action)
             {
                 Require.NotNull(action, nameof(action));
 
                 action(Right);
+                return true;
             }
         }
     }

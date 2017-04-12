@@ -3,7 +3,6 @@
 namespace Narvalo.Applicative
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
@@ -274,12 +273,13 @@ namespace Narvalo.Applicative
             if (IsSome && predicate(Value)) { action(Value); } else { otherwise(); }
         }
 
-        public void When(Func<T, bool> predicate, Action<T> action)
+        public bool When(Func<T, bool> predicate, Action<T> action)
         {
             Require.NotNull(predicate, nameof(predicate));
             Require.NotNull(action, nameof(action));
 
-            if (IsSome && predicate(Value)) { action(Value); }
+            if (IsSome && predicate(Value)) { action(Value); return true; }
+            return false;
         }
 
         public void Do(Action<T> onSome, Action onNone)
@@ -290,26 +290,28 @@ namespace Narvalo.Applicative
             if (IsSome) { onSome(Value); } else { onNone(); }
         }
 
-        public void OnSome(Action<T> action)
+        public bool OnSome(Action<T> action)
         {
             Require.NotNull(action, nameof(action));
 
-            if (IsSome) { action(Value); }
+            if (IsSome) { action(Value); return true; }
+            return false;
         }
 
         // Only added for completeness,
         // > if (obj.IsNone) { action(); }
         // is simpler and faster.
-        public void OnNone(Action action)
+        public bool OnNone(Action action)
         {
             Require.NotNull(action, nameof(action));
 
-            if (IsNone) { action(); }
+            if (IsNone) { action(); return true; }
+            return false;
         }
 
         // Alias for OnSome(). Publicly hidden.
         [ExcludeFromCodeCoverage]
-        void Internal.IContainer<T>.Do(Action<T> action) => OnSome(action);
+        bool Internal.IContainer<T>.Do(Action<T> action) => OnSome(action);
     }
 
     // Implements the IEquatable<Maybe<T>> interface.

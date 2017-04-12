@@ -153,18 +153,20 @@ namespace Narvalo.Applicative
             if (IsSuccess) { onSuccess(); } else { onError(Error); }
         }
 
-        public void OnSuccess(Action action)
+        public bool OnSuccess(Action action)
         {
             Require.NotNull(action, nameof(action));
 
-            if (IsSuccess) { action(); }
+            if (IsSuccess) { action(); return true; }
+            return false;
         }
 
-        public void OnError(Action<ExceptionDispatchInfo> action)
+        public bool OnError(Action<ExceptionDispatchInfo> action)
         {
             Require.NotNull(action, nameof(action));
 
-            if (IsError) { action(Error); }
+            if (IsError) { action(Error); return true; }
+            return false;
         }
     }
 

@@ -16,8 +16,8 @@ namespace Narvalo.Internal
 
         bool Contains(T value, IEqualityComparer<T> comparer);
 
-        void When(Func<T, bool> predicate, Action<T> action);
+        bool When(Func<T, bool> predicate, Action<T> action);
 
-        void Do(Action<T> action);
+        bool Do(Action<T> action);
     }
 }
