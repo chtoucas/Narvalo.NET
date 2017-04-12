@@ -424,9 +424,10 @@ _[option type](https://en.wikipedia.org/wiki/Option_type)_.
 There is a [proposal](https://github.com/dotnet/csharplang/blob/master/proposals/nullable-reference-types.md)
 to add nullable reference types to C#, nevertheless it should not render this
 type obsolete. Even if the two types share the same objective, I think that they
-will be used in different situations: `Maybe<T>` forces you to handle the
-exceptional case, while a nullable value type does not - nothing prevents you
-from calling the property `Value`, even if `HasValue` is false.
+will be used in different situations (after re-reading the proposal, I am no
+longer sure about that, anyway we are not there yet): `Maybe<T>` forces you to
+handle the exceptional case, while a nullable value type does not - nothing
+prevents you from calling the property `Value`, even if `HasValue` is false.
 
 ### <a name="maybe-ctor"></a>Construction / Deconstruction
 A `Maybe<T>` object exists in two states, it either contains a value or it does
