@@ -359,18 +359,6 @@ namespace Narvalo.Applicative {
             Assert.True(none != some);
         }
 
-        [t("Equals() guards.")]
-        public static void Equals0() {
-            var some = Maybe.Of(new Obj());
-            var none = Maybe<Obj>.None;
-
-            Assert.Throws<ArgumentNullException>("comparer", () => some.Equals(some, null));
-            Assert.Throws<ArgumentNullException>("comparer", () => some.Equals(none, null));
-
-            Assert.Throws<ArgumentNullException>("comparer", () => none.Equals(none, null));
-            Assert.Throws<ArgumentNullException>("comparer", () => none.Equals(some, null));
-        }
-
         [t("Equals() is reflexive.")]
         public static void Equals1() {
             var m1 = Maybe<int>.None;
@@ -557,15 +545,6 @@ namespace Narvalo.Applicative {
             Assert.False(m7.Equals((object)m9, EqualityComparer<Tuple<string>>.Default));
         }
 
-        [t("GetHashCode() guards.")]
-        public static void GetHashCode0() {
-            var some = Maybe.Of(new Obj());
-            Assert.Throws<ArgumentNullException>("comparer", () => some.GetHashCode(null));
-
-            var none = Maybe<Obj>.None;
-            Assert.Throws<ArgumentNullException>("comparer", () => none.GetHashCode(null));
-        }
-
         [t("GetHashCode() returns the same result when called repeatedly.")]
         public static void GetHashCode1() {
             var m1 = Maybe<Obj>.None;
@@ -653,17 +632,6 @@ namespace Narvalo.Applicative {
             foreach (var x in some) { count++; Assert.Same(exp, x); }
 
             Assert.Equal(1, count);
-        }
-
-        [t("Contains() guards.")]
-        public static void Contains0() {
-            var value = new Obj();
-
-            var some = Maybe.Of(new Obj());
-            Assert.Throws<ArgumentNullException>("comparer", () => some.Contains(value, null));
-
-            var none = Maybe<Obj>.None;
-            Assert.Throws<ArgumentNullException>("comparer", () => none.Contains(value, null));
         }
 
         [t("Contains() returns false if none.")]

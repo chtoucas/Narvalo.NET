@@ -57,6 +57,7 @@ Next:
 Narvalo.Fx
 ----------
 
+- No longer throw for a null comparer, just use the default comparer.
 - Can we simply Result and Either APIs / generic type hints.
 - Simplify LINQ for `Maybe<T?>`?
 - Remove `GroupJoin` for monads?

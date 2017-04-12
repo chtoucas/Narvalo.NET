@@ -93,7 +93,7 @@ namespace Narvalo.Applicative
                 outerKeySelector,
                 innerKeySelector,
                 resultSelector,
-                EqualityComparer<TKey>.Default);
+                null);
 
         public static TResult? Join<TSource, TInner, TKey, TResult>(
             this TSource? @this,
@@ -109,14 +109,13 @@ namespace Narvalo.Applicative
             Require.NotNull(resultSelector, nameof(resultSelector));
             Require.NotNull(outerKeySelector, nameof(outerKeySelector));
             Require.NotNull(innerKeySelector, nameof(innerKeySelector));
-            Require.NotNull(comparer, nameof(comparer));
 
             if (@this is TSource outerValue && inner is TInner innerValue)
             {
                 var outerKey = outerKeySelector(outerValue);
                 var innerKey = innerKeySelector(innerValue);
 
-                if (comparer.Equals(outerKey, innerKey))
+                if ((comparer ?? EqualityComparer<TKey>.Default).Equals(outerKey, innerKey))
                 {
                     return resultSelector(outerValue, innerValue);
                 }
@@ -141,7 +140,7 @@ namespace Narvalo.Applicative
                 outerKeySelector,
                 innerKeySelector,
                 resultSelector,
-                EqualityComparer<TKey>.Default);
+                null);
 
         // Only added for completeness, Join() should do it.
         public static TResult? GroupJoin<TSource, TInner, TKey, TResult>(
@@ -158,14 +157,13 @@ namespace Narvalo.Applicative
             Require.NotNull(resultSelector, nameof(resultSelector));
             Require.NotNull(outerKeySelector, nameof(outerKeySelector));
             Require.NotNull(innerKeySelector, nameof(innerKeySelector));
-            Require.NotNull(comparer, nameof(comparer));
 
             if (@this is TSource outerValue && inner is TInner innerValue)
             {
                 var outerKey = outerKeySelector(outerValue);
                 var innerKey = innerKeySelector(innerValue);
 
-                if (comparer.Equals(outerKey, innerKey))
+                if ((comparer ?? EqualityComparer<TKey>.Default).Equals(outerKey, innerKey))
                 {
                     return resultSelector(outerValue, inner);
                 }

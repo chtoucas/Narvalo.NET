@@ -179,8 +179,6 @@ namespace Narvalo.Applicative {
                 () => source.Join(inner, outerKeySelector, (Func<int, int>)null, resultSelector));
             Assert.Throws<ArgumentNullException>("resultSelector",
                 () => source.Join(inner, outerKeySelector, innerKeySelector, (Func<int, int, int>)null));
-            Assert.Throws<ArgumentNullException>("comparer",
-                () => source.Join(inner, outerKeySelector, innerKeySelector, resultSelector, null));
             // Static method.
             Assert.Throws<ArgumentNullException>("outerKeySelector",
                 () => MaybeL.Join(source, inner, (Func<int, int>)null, innerKeySelector, resultSelector));
@@ -188,8 +186,6 @@ namespace Narvalo.Applicative {
                 () => MaybeL.Join(source, inner, outerKeySelector, (Func<int, int>)null, resultSelector));
             Assert.Throws<ArgumentNullException>("resultSelector",
                 () => MaybeL.Join(source, inner, outerKeySelector, innerKeySelector, (Func<int, int, int>)null));
-            Assert.Throws<ArgumentNullException>("comparer",
-                () => MaybeL.Join(source, inner, outerKeySelector, innerKeySelector, resultSelector, null));
         }
 
         [t("GroupJoin() guards.")]
@@ -207,8 +203,6 @@ namespace Narvalo.Applicative {
                 () => source.GroupJoin(inner, outerKeySelector, (Func<int, int>)null, resultSelector));
             Assert.Throws<ArgumentNullException>("resultSelector",
                 () => source.GroupJoin(inner, outerKeySelector, innerKeySelector, (Func<int, Maybe<int>, int>)null));
-            Assert.Throws<ArgumentNullException>("comparer",
-                () => source.GroupJoin(inner, outerKeySelector, innerKeySelector, resultSelector, null));
             // Static method.
             Assert.Throws<ArgumentNullException>("outerKeySelector",
                 () => MaybeL.GroupJoin(source, inner, (Func<int, int>)null, innerKeySelector, resultSelector));
@@ -216,8 +210,6 @@ namespace Narvalo.Applicative {
                 () => MaybeL.GroupJoin(source, inner, outerKeySelector, (Func<int, int>)null, resultSelector));
             Assert.Throws<ArgumentNullException>("resultSelector",
                 () => MaybeL.GroupJoin(source, inner, outerKeySelector, innerKeySelector, (Func<int, Maybe<int>, int>)null));
-            Assert.Throws<ArgumentNullException>("comparer",
-                () => MaybeL.GroupJoin(source, inner, outerKeySelector, innerKeySelector, resultSelector, null));
         }
     }
 

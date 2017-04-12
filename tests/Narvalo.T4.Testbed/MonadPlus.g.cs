@@ -381,13 +381,12 @@ namespace Narvalo.T4.Testbed
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, TInner, TResult> resultSelector)
-            => Join(
-                @this,
+            => @this.Join(
                 inner,
                 outerKeySelector,
                 innerKeySelector,
                 resultSelector,
-                EqualityComparer<TKey>.Default);
+                null);
 
         public static MonadPlus<TResult> Join<TSource, TInner, TKey, TResult>(
             this MonadPlus<TSource> @this,
@@ -402,7 +401,6 @@ namespace Narvalo.T4.Testbed
             Require.NotNull(resultSelector, nameof(resultSelector));
             Require.NotNull(outerKeySelector, nameof(outerKeySelector));
             Require.NotNull(innerKeySelector, nameof(innerKeySelector));
-            Require.NotNull(comparer, nameof(comparer));
 
             var lookup = GetKeyLookup(inner, innerKeySelector, comparer);
             Func<TSource, MonadPlus<TInner>> valueSelector = outer => lookup(outerKeySelector(outer));
@@ -416,13 +414,12 @@ namespace Narvalo.T4.Testbed
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, MonadPlus<TInner>, TResult> resultSelector)
-            => GroupJoin(
-                @this,
+            => @this.GroupJoin(
                 inner,
                 outerKeySelector,
                 innerKeySelector,
                 resultSelector,
-                EqualityComparer<TKey>.Default);
+                null);
 
         public static MonadPlus<TResult> GroupJoin<TSource, TInner, TKey, TResult>(
             this MonadPlus<TSource> @this,
@@ -437,7 +434,6 @@ namespace Narvalo.T4.Testbed
             Require.NotNull(resultSelector, nameof(resultSelector));
             Require.NotNull(outerKeySelector, nameof(outerKeySelector));
             Require.NotNull(innerKeySelector, nameof(innerKeySelector));
-            Require.NotNull(comparer, nameof(comparer));
 
             var lookup = GetKeyLookup(inner, innerKeySelector, comparer);
             Func<TSource, MonadPlus<TInner>> selector = outer => lookup(outerKeySelector(outer));
@@ -452,11 +448,10 @@ namespace Narvalo.T4.Testbed
         {
             Debug.Assert(inner != null);
             Debug.Assert(innerKeySelector != null);
-            Debug.Assert(comparer != null);
 
             return outerKey =>
                 inner.Select(innerKeySelector)
-                    .Where(innerKey => comparer.Equals(innerKey, outerKey))
+                    .Where(innerKey => (comparer ?? EqualityComparer<TKey>.Default).Equals(innerKey, outerKey))
                     .ContinueWith(inner);
         }
 

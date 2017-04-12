@@ -139,8 +139,6 @@ public partial class MonadTemplate
                 () => source.Join(inner, outerKeySelector, (Func<int, int>)null, resultSelector));
             Assert.Throws<ArgumentNullException>("resultSelector",
                 () => source.Join(inner, outerKeySelector, innerKeySelector, (Func<int, int, int>)null));
-            Assert.Throws<ArgumentNullException>("comparer",
-                () => source.Join(inner, outerKeySelector, innerKeySelector, resultSelector, null));
             // Static method.
             Assert.Throws<ArgumentNullException>("outerKeySelector",
                 () => <#= ExtensionsClsName #>.Join(source, inner, (Func<int, int>)null, innerKeySelector, resultSelector));
@@ -148,8 +146,6 @@ public partial class MonadTemplate
                 () => <#= ExtensionsClsName #>.Join(source, inner, outerKeySelector, (Func<int, int>)null, resultSelector));
             Assert.Throws<ArgumentNullException>("resultSelector",
                 () => <#= ExtensionsClsName #>.Join(source, inner, outerKeySelector, innerKeySelector, (Func<int, int, int>)null));
-            Assert.Throws<ArgumentNullException>("comparer",
-                () => <#= ExtensionsClsName #>.Join(source, inner, outerKeySelector, innerKeySelector, resultSelector, null));
         }
 
         [t("GroupJoin() guards.")]
@@ -167,8 +163,6 @@ public partial class MonadTemplate
                 () => source.GroupJoin(inner, outerKeySelector, (Func<int, int>)null, resultSelector));
             Assert.Throws<ArgumentNullException>("resultSelector",
                 () => source.GroupJoin(inner, outerKeySelector, innerKeySelector, (Func<int, <#= Name #><int>, int>)null));
-            Assert.Throws<ArgumentNullException>("comparer",
-                () => source.GroupJoin(inner, outerKeySelector, innerKeySelector, resultSelector, null));
             // Static method.
             Assert.Throws<ArgumentNullException>("outerKeySelector",
                 () => <#= ExtensionsClsName #>.GroupJoin(source, inner, (Func<int, int>)null, innerKeySelector, resultSelector));
@@ -176,8 +170,6 @@ public partial class MonadTemplate
                 () => <#= ExtensionsClsName #>.GroupJoin(source, inner, outerKeySelector, (Func<int, int>)null, resultSelector));
             Assert.Throws<ArgumentNullException>("resultSelector",
                 () => <#= ExtensionsClsName #>.GroupJoin(source, inner, outerKeySelector, innerKeySelector, (Func<int, <#= Name #><int>, int>)null));
-            Assert.Throws<ArgumentNullException>("comparer",
-                () => <#= ExtensionsClsName #>.GroupJoin(source, inner, outerKeySelector, innerKeySelector, resultSelector, null));
         }
 <#+ } // T4: End of HasJoin. #>
     }

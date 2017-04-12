@@ -184,27 +184,6 @@ namespace Narvalo.Applicative {
             Assert.True(maybe.IsNone);
         }
 
-        [t("Equals() guards.")]
-        public static void Equals0() {
-            var ok = Outcome.Of(new Obj());
-            var nok = Outcome<Obj>.FromError("error");
-
-            Assert.Throws<ArgumentNullException>("comparer", () => ok.Equals(ok, null));
-            Assert.Throws<ArgumentNullException>("comparer", () => ok.Equals(nok, null));
-
-            Assert.Throws<ArgumentNullException>("comparer", () => nok.Equals(ok, null));
-            Assert.Throws<ArgumentNullException>("comparer", () => nok.Equals(nok, null));
-        }
-
-        [t("GetHashCode() guards.")]
-        public static void GetHashCode0() {
-            var ok = Outcome.Of(new Obj());
-            Assert.Throws<ArgumentNullException>("comparer", () => ok.GetHashCode(null));
-
-            var nok = Outcome<Obj>.FromError("error");
-            Assert.Throws<ArgumentNullException>("comparer", () => nok.GetHashCode(null));
-        }
-
         [t("GetHashCode() returns the same result when called repeatedly.")]
         public static void GetHashCode1() {
             var nok = Outcome<Obj>.FromError("error");
@@ -300,17 +279,6 @@ namespace Narvalo.Applicative {
             foreach (var x in ok) { count++; Assert.Same(exp, x); }
 
             Assert.Equal(1, count);
-        }
-
-        [t("Contains() guards.")]
-        public static void Contains0() {
-            var value = new Obj();
-
-            var ok = Outcome.Of(new Obj());
-            Assert.Throws<ArgumentNullException>("comparer", () => ok.Contains(value, null));
-
-            var nok = Outcome<Obj>.FromError("error");
-            Assert.Throws<ArgumentNullException>("comparer", () => nok.Contains(value, null));
         }
 
         [t("Match() guards.")]

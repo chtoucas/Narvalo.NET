@@ -171,17 +171,6 @@ namespace Narvalo.Applicative {
             Assert.Equal(1, count);
         }
 
-        [t("Contains() guards.")]
-        public static void Contains0() {
-            var value = new Obj();
-
-            var ok = Result<Obj, string>.Of(new Obj());
-            Assert.Throws<ArgumentNullException>("comparer", () => ok.Contains(value, null));
-
-            var nok = Result<Obj, string>.FromError("error");
-            Assert.Throws<ArgumentNullException>("comparer", () => nok.Contains(value, null));
-        }
-
         [t("Match() guards.")]
         public static void Match0() {
             var ok = Result<Obj, string>.Of(new Obj());

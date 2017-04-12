@@ -73,14 +73,13 @@ namespace Narvalo.Applicative
             Require.NotNull(outerKeySelector, nameof(outerKeySelector));
             Require.NotNull(innerKeySelector, nameof(innerKeySelector));
             Require.NotNull(resultSelector, nameof(resultSelector));
-            Require.NotNull(comparer, nameof(comparer));
 
             if (IsSome && inner.IsSome)
             {
                 var outerKey = outerKeySelector(Value);
                 var innerKey = innerKeySelector(inner.Value);
 
-                if (comparer.Equals(outerKey, innerKey))
+                if ((comparer ?? EqualityComparer<TKey>.Default).Equals(outerKey, innerKey))
                 {
                     return Maybe<TResult>.η(resultSelector(Value, inner.Value));
                 }
@@ -99,14 +98,13 @@ namespace Narvalo.Applicative
             Require.NotNull(outerKeySelector, nameof(outerKeySelector));
             Require.NotNull(innerKeySelector, nameof(innerKeySelector));
             Require.NotNull(resultSelector, nameof(resultSelector));
-            Require.NotNull(comparer, nameof(comparer));
 
             if (IsSome && inner.IsSome)
             {
                 var outerKey = outerKeySelector(Value);
                 var innerKey = innerKeySelector(inner.Value);
 
-                if (comparer.Equals(outerKey, innerKey))
+                if ((comparer ?? EqualityComparer<TKey>.Default).Equals(outerKey, innerKey))
                 {
                     return Maybe<TResult>.η(resultSelector(Value, inner));
                 }

@@ -341,11 +341,7 @@ namespace Narvalo.Applicative
                 => EqualityComparer<TLeft>.Default.Equals(Left, value);
 
             public override bool ContainsLeft(TLeft value, IEqualityComparer<TLeft> comparer)
-            {
-                Require.NotNull(comparer, nameof(comparer));
-
-                return comparer.Equals(Left, value);
-            }
+                => (comparer ?? EqualityComparer<TLeft>.Default).Equals(Left, value);
 
             public override bool ContainsRight(TRight value) => false;
 
@@ -395,11 +391,7 @@ namespace Narvalo.Applicative
                 => EqualityComparer<TRight>.Default.Equals(Right, value);
 
             public override bool ContainsRight(TRight value, IEqualityComparer<TRight> comparer)
-            {
-                Require.NotNull(comparer, nameof(comparer));
-
-                return comparer.Equals(Right, value);
-            }
+                => (comparer ?? EqualityComparer<TRight>.Default).Equals(Right, value);
 
             public override TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
             {

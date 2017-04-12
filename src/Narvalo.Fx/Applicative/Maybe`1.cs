@@ -184,10 +184,8 @@ namespace Narvalo.Applicative
 
         public bool Contains(T value, IEqualityComparer<T> comparer)
         {
-            Require.NotNull(comparer, nameof(comparer));
-
             if (IsNone) { return false; }
-            return comparer.Equals(Value, value);
+            return (comparer ?? EqualityComparer<T>.Default).Equals(Value, value);
         }
 
         /// <summary>
@@ -329,9 +327,11 @@ namespace Narvalo.Applicative
 
         public bool Equals(Maybe<T> other, IEqualityComparer<T> comparer)
         {
-            Require.NotNull(comparer, nameof(comparer));
-
-            if (IsSome) { return other.IsSome && comparer.Equals(Value, other.Value); }
+            if (IsSome)
+            {
+                return other.IsSome
+                    && (comparer ?? EqualityComparer<T>.Default).Equals(Value, other.Value);
+            }
             return other.IsNone;
         }
 
@@ -344,10 +344,6 @@ namespace Narvalo.Applicative
         public override int GetHashCode() => _value?.GetHashCode() ?? 0;
 
         public int GetHashCode(IEqualityComparer<T> comparer)
-        {
-            Require.NotNull(comparer, nameof(comparer));
-
-            return IsSome ? comparer.GetHashCode(Value) : 0;
-        }
+            => IsSome ? (comparer ?? EqualityComparer<T>.Default).GetHashCode(Value) : 0;
     }
 }

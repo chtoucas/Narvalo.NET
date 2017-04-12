@@ -218,10 +218,8 @@ namespace Narvalo.Applicative
 
         public bool Contains(T value, IEqualityComparer<T> comparer)
         {
-            Require.NotNull(comparer, nameof(comparer));
-
             if (IsError) { return false; }
-            return comparer.Equals(Value, value);
+            return (comparer ?? EqualityComparer<T>.Default).Equals(Value, value);
         }
 
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]

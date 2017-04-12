@@ -241,10 +241,8 @@ namespace Narvalo.Applicative
 
         public bool Contains(T value, IEqualityComparer<T> comparer)
         {
-            Require.NotNull(comparer, nameof(comparer));
-
             if (IsError) { return false; }
-            return comparer.Equals(Value, value);
+            return (comparer ?? EqualityComparer<T>.Default).Equals(Value, value);
         }
 
         [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
@@ -364,9 +362,11 @@ namespace Narvalo.Applicative
 
         public bool Equals(Fallible<T> other, IEqualityComparer<T> comparer)
         {
-            Require.NotNull(comparer, nameof(comparer));
-
-            if (IsSuccess) { return other.IsSuccess && comparer.Equals(Value, other.Value); }
+            if (IsSuccess)
+            {
+                return other.IsSuccess
+                    && (comparer ?? EqualityComparer<T>.Default).Equals(Value, other.Value);
+            }
             return other.IsError && ReferenceEquals(Error, other.Error);
         }
 
@@ -381,9 +381,9 @@ namespace Narvalo.Applicative
 
         public int GetHashCode(IEqualityComparer<T> comparer)
         {
-            Require.NotNull(comparer, nameof(comparer));
-
-            return HashCodeHelpers.Combine(comparer.GetHashCode(_value), _error?.GetHashCode() ?? 0);
+            return HashCodeHelpers.Combine(
+                (comparer ?? EqualityComparer<T>.Default).GetHashCode(_value),
+                _error?.GetHashCode() ?? 0);
         }
     }
 }

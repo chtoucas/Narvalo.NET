@@ -302,13 +302,12 @@ public partial class MonadTemplate
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, TInner, TResult> resultSelector)
-            => Join(
-                @this,
+            => @this.Join(
                 inner,
                 outerKeySelector,
                 innerKeySelector,
                 resultSelector,
-                EqualityComparer<TKey>.Default);
+                null);
 
         public static <#= Name #><TResult> Join<TSource, TInner, TKey, TResult>(
             this <#= Name #><TSource> @this,
@@ -323,7 +322,6 @@ public partial class MonadTemplate
             Require.NotNull(resultSelector, nameof(resultSelector));
             Require.NotNull(outerKeySelector, nameof(outerKeySelector));
             Require.NotNull(innerKeySelector, nameof(innerKeySelector));
-            Require.NotNull(comparer, nameof(comparer));
 
             var lookup = GetKeyLookup(inner, innerKeySelector, comparer);
             Func<TSource, <#= Name #><TInner>> valueSelector = outer => lookup(outerKeySelector(outer));
@@ -337,13 +335,12 @@ public partial class MonadTemplate
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, <#= Name #><TInner>, TResult> resultSelector)
-            => GroupJoin(
-                @this,
+            => @this.GroupJoin(
                 inner,
                 outerKeySelector,
                 innerKeySelector,
                 resultSelector,
-                EqualityComparer<TKey>.Default);
+                null);
 
         public static <#= Name #><TResult> GroupJoin<TSource, TInner, TKey, TResult>(
             this <#= Name #><TSource> @this,
@@ -358,7 +355,6 @@ public partial class MonadTemplate
             Require.NotNull(resultSelector, nameof(resultSelector));
             Require.NotNull(outerKeySelector, nameof(outerKeySelector));
             Require.NotNull(innerKeySelector, nameof(innerKeySelector));
-            Require.NotNull(comparer, nameof(comparer));
 
             var lookup = GetKeyLookup(inner, innerKeySelector, comparer);
             Func<TSource, <#= Name #><TInner>> selector = outer => lookup(outerKeySelector(outer));
@@ -375,11 +371,10 @@ public partial class MonadTemplate
             Debug.Assert(inner != null);
 <#+ } #>
             Debug.Assert(innerKeySelector != null);
-            Debug.Assert(comparer != null);
 
             return outerKey =>
                 inner.Select(innerKeySelector)
-                    .Where(innerKey => comparer.Equals(innerKey, outerKey))
+                    .Where(innerKey => (comparer ?? EqualityComparer<TKey>.Default).Equals(innerKey, outerKey))
                     .ContinueWith(inner);
         }
 <#+ } // T4: End of HasJoin. #>
