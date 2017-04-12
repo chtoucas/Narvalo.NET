@@ -83,7 +83,7 @@ namespace Narvalo.Linq
 
         public static IEnumerable<TResult> Unfold<TState, TResult>(
             TState seed,
-            Func<TState, (TResult, TState)> generator)
+            Func<TState, (TState, TResult)> generator)
         {
             Require.NotNull(generator, nameof(generator));
 
@@ -96,7 +96,7 @@ namespace Narvalo.Linq
 
                 while (true)
                 {
-                    (result, state) = generator(state);
+                    (state, result) = generator(state);
 
                     yield return result;
                 }
@@ -105,7 +105,7 @@ namespace Narvalo.Linq
 
         public static IEnumerable<TResult> Unfold<TState, TResult>(
             TState seed,
-            Func<TState, (TResult, TState)> generator,
+            Func<TState, (TState, TResult)> generator,
             Func<TState, bool> predicate)
         {
             Require.NotNull(generator, nameof(generator));
@@ -120,7 +120,7 @@ namespace Narvalo.Linq
 
                 while (predicate(state))
                 {
-                    (result, state) = generator(state);
+                    (state, result) = generator(state);
 
                     yield return result;
                 }
@@ -130,7 +130,7 @@ namespace Narvalo.Linq
         /// <remarks>
         /// This method can be derived from:
         /// <code>
-        /// Sequence.Unfold(seed, state => (resultSelector(state), generator(state)));
+        /// Sequence.Unfold(seed, state => (generator(state), resultSelector(state)));
         /// </code>
         /// </remarks>
         public static IEnumerable<TResult> Unfold<TState, TResult>(
@@ -159,7 +159,7 @@ namespace Narvalo.Linq
         /// <remarks>
         /// This method can be derived from:
         /// <code>
-        /// Sequence.Unfold(seed, state => (resultSelector(state), generator(state)), predicate);
+        /// Sequence.Unfold(seed, state => (generator(state), resultSelector(state)), predicate);
         /// </code>
         /// </remarks>
         public static IEnumerable<TResult> Unfold<TState, TResult>(
