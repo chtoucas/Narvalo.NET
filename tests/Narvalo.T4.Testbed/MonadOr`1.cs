@@ -28,6 +28,6 @@ namespace Narvalo.T4.Testbed
         }
 
         internal static MonadOr<T> μ(MonadOr<MonadOr<T>> square)
-            => square.Bind(Stubs<MonadOr<T>>.Identity);
+            => square.Bind(Stubs<MonadOr<T>>.Ident);
     }
 }

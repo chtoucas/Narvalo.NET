@@ -86,23 +86,23 @@ namespace Narvalo.Applicative {
         public static void AlwaysTrue3(int input)
             => Assert.True(Stubs<int>.AlwaysTrue(input));
 
-        [t("Identity is not null.")]
-        public static void Identity1() {
-            Assert.NotNull(Stubs<string>.Identity);
-            Assert.NotNull(Stubs<int>.Identity);
-            Assert.NotNull(Stubs<long>.Identity);
-            Assert.NotNull(Stubs<object>.Identity);
+        [t("Ident is not null.")]
+        public static void Ident1() {
+            Assert.NotNull(Stubs<string>.Ident);
+            Assert.NotNull(Stubs<int>.Ident);
+            Assert.NotNull(Stubs<long>.Ident);
+            Assert.NotNull(Stubs<object>.Ident);
         }
 
-        [T("Identity is identity.")]
+        [T("Ident is identity.")]
         [MemberData(nameof(StringTestData), DisableDiscoveryEnumeration = true)]
-        public static void Identity2(string input)
-            => Assert.Equal(input, Stubs<string>.Identity(input));
+        public static void Ident2(string input)
+            => Assert.Equal(input, Stubs<string>.Ident(input));
 
-        [T("Identity is identity.")]
+        [T("Ident is identity.")]
         [MemberData(nameof(Int32TestData), DisableDiscoveryEnumeration = true)]
-        public static void Identity3(int input)
-            => Assert.Equal(input, Stubs<int>.Identity(input));
+        public static void Ident3(int input)
+            => Assert.Equal(input, Stubs<int>.Ident(input));
 
         [t("Ignore is not null.")]
         public static void Ignore1() {

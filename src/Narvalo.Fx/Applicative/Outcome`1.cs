@@ -140,7 +140,7 @@ namespace Narvalo.Applicative
         public Maybe<T> ToMaybe() => ValueOrNone();
 
         public Result<T, string> ToResult()
-            => IsError ? Result<T, string>.FromError(Error) : Result<T, string>.Of(Value);
+            => IsError ? Result.Error<T>.Return(Error) : Result.Success<string>.Return(Value);
 
         public static explicit operator T(Outcome<T> value) => value.ToValue();
 

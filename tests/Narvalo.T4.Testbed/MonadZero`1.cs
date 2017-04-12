@@ -23,6 +23,6 @@ namespace Narvalo.T4.Testbed
         }
 
         internal static MonadZero<T> μ(MonadZero<MonadZero<T>> square)
-            => square.Bind(Stubs<MonadZero<T>>.Identity);
+            => square.Bind(Stubs<MonadZero<T>>.Ident);
     }
 }

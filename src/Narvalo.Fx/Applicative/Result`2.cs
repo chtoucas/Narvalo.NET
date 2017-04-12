@@ -142,7 +142,7 @@ namespace Narvalo.Applicative
 
         // NB: In Haskell, the error is the left parameter.
         public Either<T, TError> ToEither()
-            => IsSuccess ? Either<T, TError>.OfLeft(Value) : Either<T, TError>.OfRight(Error);
+            => IsSuccess ? Either.Left<TError>.Return(Value) : Either.Right<T>.Return(Error);
 
         public static explicit operator T(Result<T, TError> value) => value.ToValue();
 
@@ -165,6 +165,7 @@ namespace Narvalo.Applicative
 
         // NB: This method is normally internal, but Result<T, TError>.Of() is more readable
         // than Result.Of<T, TError>() - no type inference.
+        // See also Result.Succcess<TError>.Return(T);
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Intentionally] A static method in a static class won't help.")]
         public static Result<T, TError> Of(T value) => new Result<T, TError>(value);
 
@@ -193,6 +194,7 @@ namespace Narvalo.Applicative
 
         // NB: This method is normally internal, but Result<T, TError>.FromError() is more readable
         // than Result.FromError<T, TError>() - no type inference.
+        // See also Result.Error<T>.Return(TError);
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Intentionally] A static method in a static class won't help.")]
         public static Result<T, TError> FromError(TError error)
         {

@@ -8,10 +8,10 @@ namespace Narvalo.Applicative
     public partial struct Result<T, TError>
     {
         public Result<TResult, TError> ReplaceBy<TResult>(TResult value)
-            => IsSuccess ? Result<TResult, TError>.Of(value) : Result<TResult, TError>.FromError(Error);
+            => IsSuccess ? Result.Success<TError>.Return(value) : Result.Error<TResult>.Return(Error);
 
         public Result<TResult, TError> ContinueWith<TResult>(Result<TResult, TError> other)
-            => IsSuccess ? other : Result<TResult, TError>.FromError(Error);
+            => IsSuccess ? other : Result.Error<TResult>.Return(Error);
 
         [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Select", Justification = "[Intentionally] No trouble here, this 'Select' is the one from the LINQ standard query operators.")]
         public Result<TResult, TError> Select<TResult>(Func<T, TResult> selector)
@@ -19,8 +19,8 @@ namespace Narvalo.Applicative
             Require.NotNull(selector, nameof(selector));
 
             return IsSuccess
-                ? Result<TResult, TError>.Of(selector(Value))
-                : Result<TResult, TError>.FromError(Error); ;
+                ? Result.Success<TError>.Return(selector(Value))
+                : Result.Error<TResult>.Return(Error); ;
         }
     }
 }

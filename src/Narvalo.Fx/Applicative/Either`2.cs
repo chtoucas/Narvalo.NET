@@ -221,11 +221,13 @@ namespace Narvalo.Applicative
 
         // NB: This method is normally internal, but Either<TLeft, TRight>.OfLeft() is more readable
         // than Either.OfLeft<TLeft, TRight>() - no type inference.
+        // See also Either.Left<TRight>.Return(TLeft).
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Intentionally] A static method in a static class won't help.")]
         public static Either<TLeft, TRight> OfLeft(TLeft leftValue) => new Left_(leftValue);
 
         // NB: This method is normally internal, but Either<TLeft, TRight>.OfRight() is more readable
         // than Either.OfRight<TLeft, TRight>() - no type inference.
+        // See also Either.Right<TLeft>.Return(TRight).
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Intentionally] A static method in a static class won't help.")]
         public static Either<TLeft, TRight> OfRight(TRight value) => new Right_(value);
 

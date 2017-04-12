@@ -12,7 +12,6 @@ disjoint union (`Either<T1, T2>`), sequence generators and LINQ extensions.
 ### Status
 - **Unstable.**
 - Tentative release date for a stable package: end of april 2017?
-  Breaking changes are expected in the area of LINQ.
 - Support the .NET Standard v1.0 and the PCL profile Profile259.
 - Test coverage is starting to look good (75%), the number of functional tests
   is progressing too.
@@ -61,7 +60,7 @@ The main namespace (`Narvalo.Applicative`) includes:
   * `Outcome<T>` for lightweight error reporting.
   * `Fallible<T>` for full exception capture.
 - `Result<T, TError>`, the most general Error type.
-- `Either<T1, T2>`, an Either type.
+- `Either<T1, T2>`, the disjoint union of `T1` and `T2`.
 
 The other namespace (`Narvalo.Linq`) is dedicated to the definition of new
 query operators mostly in relation to `Maybe<T>`, `Outcome<T>`...
@@ -1219,7 +1218,7 @@ Haskell | C# | Return Type
 `isJust`      | `obj.IsSome`           | `bool`
 `isNothing`   | `obj.IsNone`           | `bool`
 `fromMaybe`   | `obj.ValueOrElse()`    | `T`
-`fromJust`    | `obj.ValueOrThrow()`   |
+`fromJust`    | `obj.ValueOrThrow()`   | `T`
 `maybeToList` | `obj.ToEnumerable()`   | `IEnumerable<T>`
 `maybe`       | `obj.Match()`          | `TResult`
 `listToMaybe` | `seq.FirstOrNone()`    | `Maybe<T>`

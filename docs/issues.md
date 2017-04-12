@@ -44,7 +44,9 @@ Next:
 Narvalo.Finance
 ---------------
 
-- Implement BBAN validation.
+- Implement BBAN validation. Since this must be done per country, a good start
+  would be to provide a general API + an implementation a selected number of
+  countries.
 
 Next:
 - [Internet International Bank Account Number](https://tools.ietf.org/html/draft-iiban-00)
@@ -57,26 +59,24 @@ Next:
 Narvalo.Fx
 ----------
 
-- No longer throw for a null comparer, just use the default comparer.
-- Can we simply Result and Either APIs / generic type hints.
-- Simplify LINQ for `Maybe<T?>`?
+- `Either<T1, T2>`:
+  * T4: If the monad is nullable, check that we handle all null's. Auto-generate
+    tests for null-guards (affects only `Either<T1, T2>`) + tests.
+  * Should we throw if we have a lefty method for a righty object
+    (see `WhenLeft` for instance).
+- `Fallible`: check that we catch all exceptions + tests.
+- Could we simplify LINQ for `Maybe<T?>`?
 - Remove `GroupJoin` for monads?
 - Explain `Bind` and `Select` for `Outcome` and `Fallible`,
   `Where` for `Outcome<T>` and `Fallible<T>`.
 - `OnError()`, `WhenError()` & co could return a boolean to signal when they
   actually did something.
-- Fallible: review handling of exceptions + tests.
-- `Either<T1, T2>`:
-  * T4: If the monad is nullable, check that we handle all null's. Auto-generate
-    tests for null-guards (affects only `Either<T1, T2>`) + tests.
-  * Add variant operators on the right for Either?
-  * Should we throw if we have a lefty method for a righty object
-    (see `WhenLeft` for instance).
 
 Next:
 - LINQ: `FoldBack` and `ReduceBack`. Mimic Rx operators: `Scan`, `MinBy`,
   `MaxBy`...? (see also F#) I am sure we can improve the default implementations
   for `CollectAny`, `SelectAny` and `WhereAny`.
+- Add operators on the right for `Either<T1, T2>`?
 - Add tests for purity?
 - Add async and lazy alternatives?
 - More recursion helpers: trampoline + other Y Combinators.
@@ -95,6 +95,8 @@ public static void Deconstruct<T>(
 ```
   this is perfectly legal but will always be ignored in favor of the
   deconstructor method on `Maybe<T?>`.
+- For `IStructuralEquatable.Equals` whe throw when the comparer is null, is it
+  the correct behaviour?
 - Add other monads - prototypes [here](https://github.com/chtoucas/Brouillons/tree/master/src/play/Functional/Monadic)
 - More Haskell API, eg When, Forever & co?
 - [Idioms](http://tomasp.net/blog/idioms-in-linq.aspx/)

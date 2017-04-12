@@ -3,6 +3,27 @@
 namespace Narvalo.Applicative
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
+
+    public static partial class Result
+    {
+        [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible", Justification = "[Intentionally] Fluent API.")]
+        public static class Success<TError>
+        {
+            [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Intentionally] A static method in a static class won't help.")]
+            public static Result<T, TError> Return<T>(T value)
+                => Result<T, TError>.Of(value);
+        }
+
+        [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible", Justification = "[Intentionally] Fluent API.")]
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", Justification = "[Intentionally] Matches the property IsError.")]
+        public static class Error<T>
+        {
+            [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Intentionally] A static method in a static class won't help.")]
+            public static Result<T, TError> Return<TError>(TError error)
+                => Result<T, TError>.FromError(error);
+        }
+    }
 
     public static partial class Result
     {
@@ -13,7 +34,8 @@ namespace Narvalo.Applicative
     // Provides extension methods for Result<T, TError> where TError is of type Exception.
     public static partial class Result
     {
-        public static void ThrowIfError<T, TException>(this Result<T, TException> @this) where TException : Exception
+        public static void ThrowIfError<T, TException>(this Result<T, TException> @this)
+            where TException : Exception
         {
             // NB: The Error property is never null.
             if (@this.IsError) { throw @this.Error; }
