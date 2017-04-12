@@ -7,7 +7,7 @@ namespace Narvalo.Linq
 
     public static partial class Qperators
     {
-        // Strictly equivalent to Enumerable.Aggregate. Added for symmetry.
+        // Equivalent to Enumerable.Aggregate. Added for symmetry.
         public static TAccumulate Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> source,
             TAccumulate seed,

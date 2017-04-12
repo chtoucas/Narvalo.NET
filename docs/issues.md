@@ -74,7 +74,7 @@ Narvalo.Fx
 
 Next:
 - LINQ: `FoldBack` and `ReduceBack`. Mimic Rx operators: `Scan`, `MinBy`,
-  `MaxBy`... (see also F#) I am sure we can improve the default implementations
+  `MaxBy`...? (see also F#) I am sure we can improve the default implementations
   for `CollectAny`, `SelectAny` and `WhereAny`.
 - Add tests for purity?
 - Add async and lazy alternatives?

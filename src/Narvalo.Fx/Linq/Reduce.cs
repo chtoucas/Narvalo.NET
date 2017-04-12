@@ -9,7 +9,7 @@ namespace Narvalo.Linq
 
     public static partial class Qperators
     {
-        // Strictly equivalent to Enumerable.Aggregate. Added for symmetry.
+        // Equivalent to Enumerable.Aggregate. Added for symmetry.
         public static TSource Reduce<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, TSource, TSource> accumulator)
