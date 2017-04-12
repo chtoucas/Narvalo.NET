@@ -9,7 +9,7 @@ public partial class MonadTemplate
     // and IEnumerable<<#= Name #><T<#= RTDecl #>>>.
     // You will certainly want to shadow them to improve performance.
     // T4: EmitLinqInternal().
-    internal static partial class EnumerableExtensions
+    internal static partial class <#= Name #>QImpl
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static IEnumerable<TSource> CollectAnyImpl<TSource<#= RTDecl #>>(

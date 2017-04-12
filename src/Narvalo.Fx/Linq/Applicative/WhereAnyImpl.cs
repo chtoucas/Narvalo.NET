@@ -8,9 +8,9 @@ namespace Narvalo.Linq.Applicative
 
     using Narvalo.Applicative;
 
-    public static partial class Aperators
+    internal static partial class EnumerableIntern
     {
-        internal static IEnumerable<TSource> WhereAnyImpl<TSource, TRight>(
+        public static IEnumerable<TSource> WhereAnyImpl<TSource, TRight>(
             this IEnumerable<TSource> source,
             Func<TSource, Either<bool, TRight>> predicate)
         {
@@ -25,7 +25,7 @@ namespace Narvalo.Linq.Applicative
             }
         }
 
-        internal static IEnumerable<TSource> WhereAnyImpl<TSource>(
+        public static IEnumerable<TSource> WhereAnyImpl<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, Fallible<bool>> predicate)
         {
@@ -40,7 +40,7 @@ namespace Narvalo.Linq.Applicative
             }
         }
 
-        internal static IEnumerable<TSource> WhereAnyImpl<TSource>(
+        public static IEnumerable<TSource> WhereAnyImpl<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, Maybe<bool>> predicate)
         {
@@ -55,7 +55,7 @@ namespace Narvalo.Linq.Applicative
             }
         }
 
-        internal static IEnumerable<TSource> WhereAnyImpl<TSource>(
+        public static IEnumerable<TSource> WhereAnyImpl<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, Outcome<bool>> predicate)
         {
@@ -70,7 +70,7 @@ namespace Narvalo.Linq.Applicative
             }
         }
 
-        internal static IEnumerable<TSource> WhereAnyImpl<TSource, TError>(
+        public static IEnumerable<TSource> WhereAnyImpl<TSource, TError>(
             this IEnumerable<TSource> source,
             Func<TSource, Result<bool, TError>> predicate)
         {

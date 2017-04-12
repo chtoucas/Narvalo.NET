@@ -68,7 +68,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Either{T, TRight}" /> values.
         /// </summary>
-        /// <seealso cref="EitherExtensions.Select{T, TResult, TRight}" />
+        /// <seealso cref="EitherL.Select{T, TResult, TRight}" />
         public static Func<Either<T, TRight>, Either<TResult, TRight>> Lift<T, TResult, TRight>(
             Func<T, TResult> func)
             => arg =>
@@ -80,51 +80,51 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Either{T, TRight}" /> values.
         /// </summary>
-        /// <seealso cref="EitherExtensions.Zip{T1, T2, TResult, TRight}"/>
+        /// <seealso cref="EitherL.ZipWith{T1, T2, TResult, TRight}"/>
         public static Func<Either<T1, TRight>, Either<T2, TRight>, Either<TResult, TRight>>
             Lift<T1, T2, TResult, TRight>(Func<T1, T2, TResult> func)
             => (arg1, arg2) =>
             {
                 Require.NotNull(arg1, nameof(arg1));
-                return arg1.Zip(arg2, func);
+                return arg1.ZipWith(arg2, func);
             };
 
         /// <summary>
         /// Promotes a function to use and return <see cref="Either{T, TRight}" /> values.
         /// </summary>
-        /// <seealso cref="EitherExtensions.Zip{T1, T2, T3, TResult, TRight}"/>
+        /// <seealso cref="EitherL.ZipWith{T1, T2, T3, TResult, TRight}"/>
         public static Func<Either<T1, TRight>, Either<T2, TRight>, Either<T3, TRight>, Either<TResult, TRight>>
             Lift<T1, T2, T3, TResult, TRight>(Func<T1, T2, T3, TResult> func)
             => (arg1, arg2, arg3) =>
             {
                 Require.NotNull(arg1, nameof(arg1));
-                return arg1.Zip(arg2, arg3, func);
+                return arg1.ZipWith(arg2, arg3, func);
             };
 
         /// <summary>
         /// Promotes a function to use and return <see cref="Either{T, TRight}" /> values.
         /// </summary>
-        /// <seealso cref="EitherExtensions.Zip{T1, T2, T3, T4, TResult, TRight}"/>
+        /// <seealso cref="EitherL.ZipWith{T1, T2, T3, T4, TResult, TRight}"/>
         public static Func<Either<T1, TRight>, Either<T2, TRight>, Either<T3, TRight>, Either<T4, TRight>, Either<TResult, TRight>>
             Lift<T1, T2, T3, T4, TResult, TRight>(
             Func<T1, T2, T3, T4, TResult> func)
             => (arg1, arg2, arg3, arg4) =>
             {
                 Require.NotNull(arg1, nameof(arg1));
-                return arg1.Zip(arg2, arg3, arg4, func);
+                return arg1.ZipWith(arg2, arg3, arg4, func);
             };
 
         /// <summary>
         /// Promotes a function to use and return <see cref="Either{T, TRight}" /> values.
         /// </summary>
-        /// <seealso cref="EitherExtensions.Zip{T1, T2, T3, T4, T5, TResult, TRight}"/>
+        /// <seealso cref="EitherL.ZipWith{T1, T2, T3, T4, T5, TResult, TRight}"/>
         public static Func<Either<T1, TRight>, Either<T2, TRight>, Either<T3, TRight>, Either<T4, TRight>, Either<T5, TRight>, Either<TResult, TRight>>
             Lift<T1, T2, T3, T4, T5, TResult, TRight>(
             Func<T1, T2, T3, T4, T5, TResult> func)
             => (arg1, arg2, arg3, arg4, arg5) =>
             {
                 Require.NotNull(arg1, nameof(arg1));
-                return arg1.Zip(arg2, arg3, arg4, arg5, func);
+                return arg1.ZipWith(arg2, arg3, arg4, arg5, func);
             };
 
         #endregion
@@ -134,7 +134,7 @@ namespace Narvalo.Applicative
     /// Provides extension methods for <see cref="Either{T, TRight}"/>.
     /// </summary>
     // T4: EmitExtensions().
-    public static partial class EitherExtensions
+    public static partial class EitherL
     {
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
@@ -182,7 +182,7 @@ namespace Narvalo.Applicative
             Either<TOther, TRight> other)
         {
             Require.NotNull(@this, nameof(@this));
-            return @this.Zip(other, (arg, _) => arg);
+            return @this.ZipWith(other, (arg, _) => arg);
         }
 
         public static Either<unit, TRight> Skip<TSource, TRight>(this Either<TSource, TRight> @this)
@@ -191,10 +191,10 @@ namespace Narvalo.Applicative
             return @this.ReplaceBy(unit.Default);
         }
 
-        #region Zip()
+        #region ZipWith()
 
         /// <seealso cref="Either.Lift{T1, T2, TResult, TRight}"/>
-        public static Either<TResult, TRight> Zip<T1, T2, TResult, TRight>(
+        public static Either<TResult, TRight> ZipWith<T1, T2, TResult, TRight>(
             this Either<T1, TRight> @this,
             Either<T2, TRight> second,
             Func<T1, T2, TResult> zipper)
@@ -209,7 +209,7 @@ namespace Narvalo.Applicative
         }
 
         /// <seealso cref="Either.Lift{T1, T2, T3, TResult, TRight}"/>
-        public static Either<TResult, TRight> Zip<T1, T2, T3, TResult, TRight>(
+        public static Either<TResult, TRight> ZipWith<T1, T2, T3, TResult, TRight>(
             this Either<T1, TRight> @this,
             Either<T2, TRight> second,
             Either<T3, TRight> third,
@@ -225,14 +225,14 @@ namespace Narvalo.Applicative
             // >     arg1 => second.Bind(
             // >        arg2 => third.Select(
             // >            arg3 => zipper(arg1, arg2, arg3))));
-            // but faster if Zip is locally shadowed.
+            // but faster if ZipWith is locally shadowed.
             return @this.Bind(
-                arg1 => second.Zip(
+                arg1 => second.ZipWith(
                     third, (arg2, arg3) => zipper(arg1, arg2, arg3)));
         }
 
         /// <seealso cref="Either.Lift{T1, T2, T3, T4, TResult, TRight}"/>
-        public static Either<TResult, TRight> Zip<T1, T2, T3, T4, TResult, TRight>(
+        public static Either<TResult, TRight> ZipWith<T1, T2, T3, T4, TResult, TRight>(
              this Either<T1, TRight> @this,
              Either<T2, TRight> second,
              Either<T3, TRight> third,
@@ -251,14 +251,14 @@ namespace Narvalo.Applicative
             // >             arg3 => fourth.Select(
             // >                 arg4 => zipper(arg1, arg2, arg3, arg4)))));
             return @this.Bind(
-                arg1 => second.Zip(
+                arg1 => second.ZipWith(
                     third,
                     fourth,
                     (arg2, arg3, arg4) => zipper(arg1, arg2, arg3, arg4)));
         }
 
         /// <seealso cref="Either.Lift{T1, T2, T3, T4, T5, TResult, TRight}"/>
-        public static Either<TResult, TRight> Zip<T1, T2, T3, T4, T5, TResult, TRight>(
+        public static Either<TResult, TRight> ZipWith<T1, T2, T3, T4, T5, TResult, TRight>(
             this Either<T1, TRight> @this,
             Either<T2, TRight> second,
             Either<T3, TRight> third,
@@ -280,7 +280,7 @@ namespace Narvalo.Applicative
             // >                 arg4 => fifth.Select(
             // >                     arg5 => zipper(arg1, arg2, arg3, arg4, arg5))))));
             return @this.Bind(
-                arg1 => second.Zip(
+                arg1 => second.ZipWith(
                     third,
                     fourth,
                     fifth,
@@ -326,7 +326,7 @@ namespace Narvalo.Applicative
             return @this.Bind(val => Either<TResult, TRight>.OfLeft(selector(val)));
         }
 
-        // Generalizes both Bind() and Zip<T1, T2, TResult>().
+        // Generalizes both Bind() and ZipWith<T1, T2, TResult>().
         public static Either<TResult, TRight> SelectMany<TSource, TMiddle, TResult, TRight>(
             this Either<TSource, TRight> @this,
             Func<TSource, Either<TMiddle, TRight>> selector,
@@ -346,10 +346,10 @@ namespace Narvalo.Applicative
 
     /// <summary>
     /// Provides extension methods for functions in the Kleisli category:
-    /// <see cref="Func{TSource, TResult}"/> where TResult is of type <see cref="Either{T, TRight}"/>.
+    /// <see cref="Func{TSource, TResult}"/> where <c>TResult</c> is of type <see cref="Either{T, TRight}"/>.
     /// </summary>
     // T4: EmitKleisli().
-    public static partial class Kleisli
+    public static partial class EitherK
     {
         public static Either<IEnumerable<TResult>, TRight> InvokeWith<TSource, TResult, TRight>(
             this Func<TSource, Either<TResult, TRight>> @this,
@@ -396,7 +396,7 @@ namespace Narvalo.Internal
     // Provides default implementations for extension methods on IEnumerable<Either<T, TRight>>.
     // You will certainly want to shadow them to improve performance.
     // T4: EmitEnumerableInternal().
-    internal static partial class EnumerableExtensions
+    internal static partial class EitherQImpl
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Either<IEnumerable<TSource>, TRight> CollectImpl<TSource, TRight>(
@@ -427,7 +427,7 @@ namespace Narvalo.Internal
                 = item => (b, seq) => b ? seq.Append(item) : seq;
 
             Func<Either<IEnumerable<TSource>, TRight>, TSource, Either<IEnumerable<TSource>, TRight>> accumulator
-                = (mseq, item) => predicate(item).Zip(mseq, func(item));
+                = (mseq, item) => predicate(item).ZipWith(mseq, func(item));
 
             return source.Aggregate(seed, accumulator);
         }
@@ -442,9 +442,16 @@ namespace Narvalo.Linq.Applicative
     using Narvalo.Applicative;
     using Narvalo.Internal;
 
-    // Provides extension methods for IEnumerable<T> and IEnumerable<Either<T, TRight>>.
+    /// <summary>
+    /// Provides a set of extension methods for querying objects that implement <see cref="IEnumerable{T}"/>.
+    /// </summary>
+    /// <remarks>
+    /// New LINQ operators:
+    /// - Projecting: SelectAny (deferred)
+    /// - Filtering: CollectAny (deferred), WhereAny (deferred)
+    /// - Aggregation: Fold, Reduce</remarks>
     // T4: EmitLinqCore().
-    public static partial class Aperators
+    public static partial class EitherQ
     {
         public static IEnumerable<TSource> CollectAny<TSource, TRight>(
             this IEnumerable<Either<TSource, TRight>> source)
@@ -528,7 +535,7 @@ namespace Narvalo.Internal
     // and IEnumerable<Either<T, TRight>>.
     // You will certainly want to shadow them to improve performance.
     // T4: EmitLinqInternal().
-    internal static partial class EnumerableExtensions
+    internal static partial class EitherQImpl
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static IEnumerable<TSource> CollectAnyImpl<TSource, TRight>(

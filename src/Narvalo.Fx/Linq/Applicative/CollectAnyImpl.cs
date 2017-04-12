@@ -7,9 +7,9 @@ namespace Narvalo.Linq.Applicative
 
     using Narvalo.Applicative;
 
-    public static partial class Aperators
+    internal static partial class EnumerableIntern
     {
-        internal static IEnumerable<TLeft> CollectAnyImpl<TLeft, TRight>(
+        public static IEnumerable<TLeft> CollectAnyImpl<TLeft, TRight>(
             this IEnumerable<Either<TLeft, TRight>> source)
         {
             Debug.Assert(source != null);
@@ -20,7 +20,7 @@ namespace Narvalo.Linq.Applicative
             }
         }
 
-        internal static IEnumerable<TSource> CollectAnyImpl<TSource>(
+        public static IEnumerable<TSource> CollectAnyImpl<TSource>(
             this IEnumerable<Fallible<TSource>> source)
         {
             Debug.Assert(source != null);
@@ -31,7 +31,7 @@ namespace Narvalo.Linq.Applicative
             }
         }
 
-        internal static IEnumerable<TSource> CollectAnyImpl<TSource>(
+        public static IEnumerable<TSource> CollectAnyImpl<TSource>(
             this IEnumerable<Maybe<TSource>> source)
         {
             Debug.Assert(source != null);
@@ -42,7 +42,7 @@ namespace Narvalo.Linq.Applicative
             }
         }
 
-        internal static IEnumerable<TSource> CollectAnyImpl<TSource>(
+        public static IEnumerable<TSource> CollectAnyImpl<TSource>(
             this IEnumerable<Outcome<TSource>> source)
         {
             Debug.Assert(source != null);
@@ -53,7 +53,7 @@ namespace Narvalo.Linq.Applicative
             }
         }
 
-        internal static IEnumerable<TSource> CollectAnyImpl<TSource, TError>(
+        public static IEnumerable<TSource> CollectAnyImpl<TSource, TError>(
             this IEnumerable<Result<TSource, TError>> source)
         {
             Debug.Assert(source != null);

@@ -93,7 +93,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Maybe{T}" /> values.
         /// </summary>
-        /// <seealso cref="MaybeExtensions.Select{T, TResult}" />
+        /// <seealso cref="MaybeL.Select{T, TResult}" />
         public static Func<Maybe<T>, Maybe<TResult>> Lift<T, TResult>(
             Func<T, TResult> func)
             => arg =>
@@ -105,51 +105,51 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Maybe{T}" /> values.
         /// </summary>
-        /// <seealso cref="MaybeExtensions.Zip{T1, T2, TResult}"/>
+        /// <seealso cref="MaybeL.ZipWith{T1, T2, TResult}"/>
         public static Func<Maybe<T1>, Maybe<T2>, Maybe<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
             => (arg1, arg2) =>
             {
                 /* T4: NotNull(arg1) */
-                return arg1.Zip(arg2, func);
+                return arg1.ZipWith(arg2, func);
             };
 
         /// <summary>
         /// Promotes a function to use and return <see cref="Maybe{T}" /> values.
         /// </summary>
-        /// <seealso cref="MaybeExtensions.Zip{T1, T2, T3, TResult}"/>
+        /// <seealso cref="MaybeL.ZipWith{T1, T2, T3, TResult}"/>
         public static Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
             => (arg1, arg2, arg3) =>
             {
                 /* T4: NotNull(arg1) */
-                return arg1.Zip(arg2, arg3, func);
+                return arg1.ZipWith(arg2, arg3, func);
             };
 
         /// <summary>
         /// Promotes a function to use and return <see cref="Maybe{T}" /> values.
         /// </summary>
-        /// <seealso cref="MaybeExtensions.Zip{T1, T2, T3, T4, TResult}"/>
+        /// <seealso cref="MaybeL.ZipWith{T1, T2, T3, T4, TResult}"/>
         public static Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<T4>, Maybe<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> func)
             => (arg1, arg2, arg3, arg4) =>
             {
                 /* T4: NotNull(arg1) */
-                return arg1.Zip(arg2, arg3, arg4, func);
+                return arg1.ZipWith(arg2, arg3, arg4, func);
             };
 
         /// <summary>
         /// Promotes a function to use and return <see cref="Maybe{T}" /> values.
         /// </summary>
-        /// <seealso cref="MaybeExtensions.Zip{T1, T2, T3, T4, T5, TResult}"/>
+        /// <seealso cref="MaybeL.ZipWith{T1, T2, T3, T4, T5, TResult}"/>
         public static Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<T4>, Maybe<T5>, Maybe<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> func)
             => (arg1, arg2, arg3, arg4, arg5) =>
             {
                 /* T4: NotNull(arg1) */
-                return arg1.Zip(arg2, arg3, arg4, arg5, func);
+                return arg1.ZipWith(arg2, arg3, arg4, arg5, func);
             };
 
         #endregion
@@ -159,7 +159,7 @@ namespace Narvalo.Applicative
     /// Provides extension methods for <see cref="Maybe{T}"/>.
     /// </summary>
     // T4: EmitExtensions().
-    public static partial class MaybeExtensions
+    public static partial class MaybeL
     {
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
@@ -207,7 +207,7 @@ namespace Narvalo.Applicative
             Maybe<TOther> other)
         {
             /* T4: NotNull(@this) */
-            return @this.Zip(other, (arg, _) => arg);
+            return @this.ZipWith(other, (arg, _) => arg);
         }
 
         public static Maybe<unit> Skip<TSource>(this Maybe<TSource> @this)
@@ -216,10 +216,10 @@ namespace Narvalo.Applicative
             return @this.ContinueWith(Maybe.Unit);
         }
 
-        #region Zip()
+        #region ZipWith()
 
         /// <seealso cref="Maybe.Lift{T1, T2, TResult}"/>
-        public static Maybe<TResult> Zip<T1, T2, TResult>(
+        public static Maybe<TResult> ZipWith<T1, T2, TResult>(
             this Maybe<T1> @this,
             Maybe<T2> second,
             Func<T1, T2, TResult> zipper)
@@ -234,7 +234,7 @@ namespace Narvalo.Applicative
         }
 
         /// <seealso cref="Maybe.Lift{T1, T2, T3, TResult}"/>
-        public static Maybe<TResult> Zip<T1, T2, T3, TResult>(
+        public static Maybe<TResult> ZipWith<T1, T2, T3, TResult>(
             this Maybe<T1> @this,
             Maybe<T2> second,
             Maybe<T3> third,
@@ -250,14 +250,14 @@ namespace Narvalo.Applicative
             // >     arg1 => second.Bind(
             // >        arg2 => third.Select(
             // >            arg3 => zipper(arg1, arg2, arg3))));
-            // but faster if Zip is locally shadowed.
+            // but faster if ZipWith is locally shadowed.
             return @this.Bind(
-                arg1 => second.Zip(
+                arg1 => second.ZipWith(
                     third, (arg2, arg3) => zipper(arg1, arg2, arg3)));
         }
 
         /// <seealso cref="Maybe.Lift{T1, T2, T3, T4, TResult}"/>
-        public static Maybe<TResult> Zip<T1, T2, T3, T4, TResult>(
+        public static Maybe<TResult> ZipWith<T1, T2, T3, T4, TResult>(
              this Maybe<T1> @this,
              Maybe<T2> second,
              Maybe<T3> third,
@@ -276,14 +276,14 @@ namespace Narvalo.Applicative
             // >             arg3 => fourth.Select(
             // >                 arg4 => zipper(arg1, arg2, arg3, arg4)))));
             return @this.Bind(
-                arg1 => second.Zip(
+                arg1 => second.ZipWith(
                     third,
                     fourth,
                     (arg2, arg3, arg4) => zipper(arg1, arg2, arg3, arg4)));
         }
 
         /// <seealso cref="Maybe.Lift{T1, T2, T3, T4, T5, TResult}"/>
-        public static Maybe<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
+        public static Maybe<TResult> ZipWith<T1, T2, T3, T4, T5, TResult>(
             this Maybe<T1> @this,
             Maybe<T2> second,
             Maybe<T3> third,
@@ -305,7 +305,7 @@ namespace Narvalo.Applicative
             // >                 arg4 => fifth.Select(
             // >                     arg5 => zipper(arg1, arg2, arg3, arg4, arg5))))));
             return @this.Bind(
-                arg1 => second.Zip(
+                arg1 => second.ZipWith(
                     third,
                     fourth,
                     fifth,
@@ -360,7 +360,7 @@ namespace Narvalo.Applicative
             return @this.Bind(val => predicate(val) ? Maybe<TSource>.η(val) : Maybe<TSource>.None);
         }
 
-        // Generalizes both Bind() and Zip<T1, T2, TResult>().
+        // Generalizes both Bind() and ZipWith<T1, T2, TResult>().
         public static Maybe<TResult> SelectMany<TSource, TMiddle, TResult>(
             this Maybe<TSource> @this,
             Func<TSource, Maybe<TMiddle>> selector,
@@ -464,10 +464,10 @@ namespace Narvalo.Applicative
 
     /// <summary>
     /// Provides extension methods for functions in the Kleisli category:
-    /// <see cref="Func{TSource, TResult}"/> where TResult is of type <see cref="Maybe{T}"/>.
+    /// <see cref="Func{TSource, TResult}"/> where <c>TResult</c> is of type <see cref="Maybe{T}"/>.
     /// </summary>
     // T4: EmitKleisli().
-    public static partial class Kleisli
+    public static partial class MaybeK
     {
         public static Maybe<IEnumerable<TResult>> InvokeWith<TSource, TResult>(
             this Func<TSource, Maybe<TResult>> @this,
@@ -514,7 +514,7 @@ namespace Narvalo.Internal
     // Provides default implementations for extension methods on IEnumerable<Maybe<T>>.
     // You will certainly want to shadow them to improve performance.
     // T4: EmitEnumerableInternal().
-    internal static partial class EnumerableExtensions
+    internal static partial class MaybeQImpl
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Maybe<IEnumerable<TSource>> CollectImpl<TSource>(
@@ -545,7 +545,7 @@ namespace Narvalo.Internal
                 = item => (b, seq) => b ? seq.Append(item) : seq;
 
             Func<Maybe<IEnumerable<TSource>>, TSource, Maybe<IEnumerable<TSource>>> accumulator
-                = (mseq, item) => predicate(item).Zip(mseq, func(item));
+                = (mseq, item) => predicate(item).ZipWith(mseq, func(item));
 
             return source.Aggregate(seed, accumulator);
         }
@@ -560,9 +560,16 @@ namespace Narvalo.Linq.Applicative
     using Narvalo.Applicative;
     using Narvalo.Internal;
 
-    // Provides extension methods for IEnumerable<T> and IEnumerable<Maybe<T>>.
+    /// <summary>
+    /// Provides a set of extension methods for querying objects that implement <see cref="IEnumerable{T}"/>.
+    /// </summary>
+    /// <remarks>
+    /// New LINQ operators:
+    /// - Projecting: SelectAny (deferred)
+    /// - Filtering: CollectAny (deferred), WhereAny (deferred)
+    /// - Aggregation: Fold, Reduce, Sum</remarks>
     // T4: EmitLinqCore().
-    public static partial class Aperators
+    public static partial class MaybeQ
     {
         public static IEnumerable<TSource> CollectAny<TSource>(
             this IEnumerable<Maybe<TSource>> source)
@@ -650,7 +657,7 @@ namespace Narvalo.Internal
     // and IEnumerable<Maybe<T>>.
     // You will certainly want to shadow them to improve performance.
     // T4: EmitLinqInternal().
-    internal static partial class EnumerableExtensions
+    internal static partial class MaybeQImpl
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static IEnumerable<TSource> CollectAnyImpl<TSource>(

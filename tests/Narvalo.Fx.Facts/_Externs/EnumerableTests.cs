@@ -8,7 +8,7 @@ using System.Collections.Generic;
 // Adapted from https://github.com/dotnet/corefx/blob/master/src/System.Linq/tests/EnumerableTests.cs
 
 namespace System.Linq.Tests {
-    public abstract class EnumerableTests {
+    public abstract partial class EnumerableTests {
         protected class TestCollection<T> : ICollection<T> {
             public T[] Items = new T[0];
             public int CountTouched = 0;

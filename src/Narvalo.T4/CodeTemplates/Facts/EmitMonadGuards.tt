@@ -34,8 +34,26 @@ public partial class MonadTemplate
             Assert.Throws<ArgumentOutOfRangeException>("count", () => <#= Name #>.Repeat(source, -1));
         }
 
-        [t("Zip() guards.")]
-        public static void Zip0() {
+        [t("Collect() guards.")]
+        public static void Collect0() {
+            IEnumerable<<#= Name #><int<#= RTDecl #>>> source = null;
+
+            Assert.Throws<ArgumentNullException>("source", () => <#= Name #>.Collect(source));
+        }
+
+        [t("Filter() guards.")]
+        public static void Filter0() {
+            Func<int, <#= Name #><bool<#= RTDecl #>>> predicate = _ => <#+ WriteFactory("bool"); #>(true);
+
+            IEnumerable<int> nil = null;
+            Assert.Throws<ArgumentNullException>("source", () => <#= Name #>.Filter(nil, predicate));
+
+            var source = Enumerable.Range(0, 1);
+            Assert.Throws<ArgumentNullException>("predicate", () => <#= Name #>.Filter(source, default(Func<int, <#= Name #><bool<#= RTDecl #>>>)));
+        }
+
+        [t("ZipWith() guards.")]
+        public static void ZipWith0() {
             var first = <#+ WriteFactory("int"); #>(1);
             var second = <#+ WriteFactory("int"); #>(2);
             var third = <#+ WriteFactory("int"); #>(3);
@@ -47,15 +65,15 @@ public partial class MonadTemplate
             Func<int, int, int, int, int, int> zipper5 = null;
 
             // Extension method.
-            Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, zipper2));
-            Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, third, zipper3));
-            Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, third, fourth, zipper4));
-            Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, third, fourth, fifth, zipper5));
+            Assert.Throws<ArgumentNullException>("zipper", () => first.ZipWith(second, zipper2));
+            Assert.Throws<ArgumentNullException>("zipper", () => first.ZipWith(second, third, zipper3));
+            Assert.Throws<ArgumentNullException>("zipper", () => first.ZipWith(second, third, fourth, zipper4));
+            Assert.Throws<ArgumentNullException>("zipper", () => first.ZipWith(second, third, fourth, fifth, zipper5));
             // Static method.
-            Assert.Throws<ArgumentNullException>("zipper", () => <#= ExtensionsClsName #>.Zip(first, second, zipper2));
-            Assert.Throws<ArgumentNullException>("zipper", () => <#= ExtensionsClsName #>.Zip(first, second, third, zipper3));
-            Assert.Throws<ArgumentNullException>("zipper", () => <#= ExtensionsClsName #>.Zip(first, second, third, fourth, zipper4));
-            Assert.Throws<ArgumentNullException>("zipper", () => <#= ExtensionsClsName #>.Zip(first, second, third, fourth, fifth, zipper5));
+            Assert.Throws<ArgumentNullException>("zipper", () => <#= ExtensionsClsName #>.ZipWith(first, second, zipper2));
+            Assert.Throws<ArgumentNullException>("zipper", () => <#= ExtensionsClsName #>.ZipWith(first, second, third, zipper3));
+            Assert.Throws<ArgumentNullException>("zipper", () => <#= ExtensionsClsName #>.ZipWith(first, second, third, fourth, zipper4));
+            Assert.Throws<ArgumentNullException>("zipper", () => <#= ExtensionsClsName #>.ZipWith(first, second, third, fourth, fifth, zipper5));
         }
 
         [t("<#= MapName #>() guards.")]

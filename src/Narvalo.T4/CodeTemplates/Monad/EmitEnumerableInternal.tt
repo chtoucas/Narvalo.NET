@@ -8,7 +8,7 @@ public partial class MonadTemplate
     // Provides default implementations for extension methods on IEnumerable<<#= Name #><T<#= RTDecl #>>>.
     // You will certainly want to shadow them to improve performance.
     // T4: EmitEnumerableInternal().
-    internal static partial class EnumerableExtensions
+    internal static partial class <#= Name #>QImpl
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static <#= Name #><IEnumerable<TSource><#= RTDecl #>> CollectImpl<TSource<#= RTDecl #>>(
@@ -39,7 +39,7 @@ public partial class MonadTemplate
                 = item => (b, seq) => b ? seq.Append(item) : seq;
 
             Func<<#= Name #><IEnumerable<TSource><#= RTDecl #>>, TSource, <#= Name #><IEnumerable<TSource><#= RTDecl #>>> accumulator
-                = (mseq, item) => predicate(item).Zip(mseq, func(item));
+                = (mseq, item) => predicate(item).ZipWith(mseq, func(item));
 
             return source.Aggregate(seed, accumulator);
         }

@@ -5,9 +5,16 @@ public partial class MonadTemplate
     protected void EmitLinqCore()
     {
 #>
-    // Provides extension methods for IEnumerable<T> and IEnumerable<<#= Name #><T<#= RTDecl #>>>.
+    /// <summary>
+    /// Provides a set of extension methods for querying objects that implement <see cref="IEnumerable{T}"/>.
+    /// </summary>
+    /// <remarks>
+    /// New LINQ operators:
+    /// - Projecting: SelectAny (deferred)
+    /// - Filtering: CollectAny (deferred), WhereAny (deferred)
+    /// - Aggregation: Fold, Reduce<#+ if (HasSum) { #>, Sum<#+ } #></remarks>
     // T4: EmitLinqCore().
-    public static partial class Aperators
+    public static partial class <#= Name #>Q
     {
         public static IEnumerable<TSource> CollectAny<TSource<#= RTDecl #>>(
             this IEnumerable<<#= Name #><TSource<#= RTDecl #>>> source)

@@ -9,7 +9,7 @@ namespace Narvalo.Linq.Applicative {
     using Assert = Narvalo.AssertExtended;
 
     // CollectAny for Either.
-    public partial class AperatorsFacts {
+    public partial class EnumerableFacts {
         [t("CollectAny() guards (Either).")]
         public static void CollectAny0a() {
             IEnumerable<Either<int, int>> nil = null;
@@ -27,7 +27,7 @@ namespace Narvalo.Linq.Applicative {
     }
 
     // CollectAny for Fallible.
-    public partial class AperatorsFacts {
+    public partial class EnumerableFacts {
         [t("CollectAny() guards (Fallible).")]
         public static void CollectAny0b() {
             IEnumerable<Fallible<int>> nil = null;
@@ -45,7 +45,7 @@ namespace Narvalo.Linq.Applicative {
     }
 
     // CollectAny for Maybe.
-    public partial class AperatorsFacts {
+    public partial class EnumerableFacts {
         [t("CollectAny() guards (Maybe).")]
         public static void CollectAny0c() {
             IEnumerable<Maybe<int>> nil = null;
@@ -63,7 +63,7 @@ namespace Narvalo.Linq.Applicative {
     }
 
     // CollectAny for Outcome.
-    public partial class AperatorsFacts {
+    public partial class EnumerableFacts {
         [t("CollectAny() guards (Outcome).")]
         public static void CollectAny0d() {
             IEnumerable<Outcome<int>> nil = null;
@@ -81,7 +81,7 @@ namespace Narvalo.Linq.Applicative {
     }
 
     // CollectAny for Result.
-    public partial class AperatorsFacts {
+    public partial class EnumerableFacts {
         [t("CollectAny() guards (Result).")]
         public static void CollectAny0e() {
             IEnumerable<Result<int, int>> nil = null;

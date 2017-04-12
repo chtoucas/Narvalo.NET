@@ -61,7 +61,7 @@ public partial class MonadTemplate
             <#= Name #><TOther<#= RTDecl #>> other)
         {
             <#+ WriteNotNull(); #>
-            return @this.Zip(other, (arg, _) => arg);
+            return @this.ZipWith(other, (arg, _) => arg);
         }
 
         public static <#= Name #><unit<#= RTDecl #>> Skip<TSource<#= RTDecl #>>(this <#= Name #><TSource<#= RTDecl #>> @this)
@@ -75,10 +75,10 @@ public partial class MonadTemplate
 <#+ } #>
         }
 
-        #region Zip()
+        #region ZipWith()
 
         /// <seealso cref="<#= Name #>.Lift{T1, T2, TResult<#= RTDecl #>}"/>
-        public static <#= Name #><TResult<#= RTDecl #>> Zip<T1, T2, TResult<#= RTDecl #>>(
+        public static <#= Name #><TResult<#= RTDecl #>> ZipWith<T1, T2, TResult<#= RTDecl #>>(
             this <#= Name #><T1<#= RTDecl #>> @this,
             <#= Name #><T2<#= RTDecl #>> second,
             Func<T1, T2, TResult> zipper)
@@ -101,7 +101,7 @@ public partial class MonadTemplate
         }
 
         /// <seealso cref="<#= Name #>.Lift{T1, T2, T3, TResult<#= RTDecl #>}"/>
-        public static <#= Name #><TResult<#= RTDecl #>> Zip<T1, T2, T3, TResult<#= RTDecl #>>(
+        public static <#= Name #><TResult<#= RTDecl #>> ZipWith<T1, T2, T3, TResult<#= RTDecl #>>(
             this <#= Name #><T1<#= RTDecl #>> @this,
             <#= Name #><T2<#= RTDecl #>> second,
             <#= Name #><T3<#= RTDecl #>> third,
@@ -118,9 +118,9 @@ public partial class MonadTemplate
             // >     arg1 => second.Bind(
             // >        arg2 => third.Select(
             // >            arg3 => zipper(arg1, arg2, arg3))));
-            // but faster if Zip is locally shadowed.
+            // but faster if ZipWith is locally shadowed.
             return @this.Bind(
-                arg1 => second.Zip(
+                arg1 => second.ZipWith(
                     third, (arg2, arg3) => zipper(arg1, arg2, arg3)));
 <#+ } else { #>
             Func<T1, Func<T2, Func<T3, TResult>>> selector
@@ -133,7 +133,7 @@ public partial class MonadTemplate
         }
 
         /// <seealso cref="<#= Name #>.Lift{T1, T2, T3, T4, TResult<#= RTDecl #>}"/>
-        public static <#= Name #><TResult<#= RTDecl #>> Zip<T1, T2, T3, T4, TResult<#= RTDecl #>>(
+        public static <#= Name #><TResult<#= RTDecl #>> ZipWith<T1, T2, T3, T4, TResult<#= RTDecl #>>(
              this <#= Name #><T1<#= RTDecl #>> @this,
              <#= Name #><T2<#= RTDecl #>> second,
              <#= Name #><T3<#= RTDecl #>> third,
@@ -153,7 +153,7 @@ public partial class MonadTemplate
             // >             arg3 => fourth.Select(
             // >                 arg4 => zipper(arg1, arg2, arg3, arg4)))));
             return @this.Bind(
-                arg1 => second.Zip(
+                arg1 => second.ZipWith(
                     third,
                     fourth,
                     (arg2, arg3, arg4) => zipper(arg1, arg2, arg3, arg4)));
@@ -169,7 +169,7 @@ public partial class MonadTemplate
         }
 
         /// <seealso cref="<#= Name #>.Lift{T1, T2, T3, T4, T5, TResult<#= RTDecl #>}"/>
-        public static <#= Name #><TResult<#= RTDecl #>> Zip<T1, T2, T3, T4, T5, TResult<#= RTDecl #>>(
+        public static <#= Name #><TResult<#= RTDecl #>> ZipWith<T1, T2, T3, T4, T5, TResult<#= RTDecl #>>(
             this <#= Name #><T1<#= RTDecl #>> @this,
             <#= Name #><T2<#= RTDecl #>> second,
             <#= Name #><T3<#= RTDecl #>> third,
@@ -192,7 +192,7 @@ public partial class MonadTemplate
             // >                 arg4 => fifth.Select(
             // >                     arg5 => zipper(arg1, arg2, arg3, arg4, arg5))))));
             return @this.Bind(
-                arg1 => second.Zip(
+                arg1 => second.ZipWith(
                     third,
                     fourth,
                     fifth,
@@ -280,7 +280,7 @@ public partial class MonadTemplate
         }
 <#+ } // T4: End of !PreferLinqDialect. #>
 
-        // Generalizes both Bind() and Zip<T1, T2, TResult>().
+        // Generalizes both Bind() and ZipWith<T1, T2, TResult>().
         public static <#= Name #><TResult<#= RTDecl #>> SelectMany<TSource, TMiddle, TResult<#= RTDecl #>>(
             this <#= Name #><TSource<#= RTDecl #>> @this,
             Func<TSource, <#= Name #><TMiddle<#= RTDecl #>>> selector,

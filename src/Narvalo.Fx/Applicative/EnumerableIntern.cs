@@ -6,49 +6,54 @@ namespace Narvalo.Applicative
     using System.Collections.Generic;
     using System.Diagnostics;
 
-    using Narvalo.Linq.Applicative;
+    using QImpl = Narvalo.Linq.Applicative.EnumerableIntern;
+
+    // **WARNING:** Keep this class internal. It provides LINQ operators,
+    // but none of them are composable, therefore it seems like a bad idea to expose them.
+    // Moreover they do not perform any arg-check.
+    internal static partial class EnumerableIntern { }
 
     // Shadows for CollectImpl().
-    internal static partial class Qperators
+    internal static partial class EnumerableIntern
     {
         public static Either<IEnumerable<TSource>, TRight> CollectImpl<TSource, TRight>(
             this IEnumerable<Either<TSource, TRight>> source)
         {
             Debug.Assert(source != null);
-            return Either<IEnumerable<TSource>, TRight>.OfLeft(Aperators.CollectAny(source));
+            return Either<IEnumerable<TSource>, TRight>.OfLeft(QImpl.CollectAnyImpl(source));
         }
 
         public static Fallible<IEnumerable<TSource>> CollectImpl<TSource>(
             this IEnumerable<Fallible<TSource>> source)
         {
             Debug.Assert(source != null);
-            return Fallible.Of(Aperators.CollectAny(source));
+            return Fallible.Of(QImpl.CollectAnyImpl(source));
         }
 
         public static Maybe<IEnumerable<TSource>> CollectImpl<TSource>(
             this IEnumerable<Maybe<TSource>> source)
         {
             Debug.Assert(source != null);
-            return Maybe.Of(Aperators.CollectAny(source));
+            return Maybe.Of(QImpl.CollectAnyImpl(source));
         }
 
         public static Outcome<IEnumerable<TSource>> CollectImpl<TSource>(
             this IEnumerable<Outcome<TSource>> source)
         {
             Debug.Assert(source != null);
-            return Outcome.Of(Aperators.CollectAny(source));
+            return Outcome.Of(QImpl.CollectAnyImpl(source));
         }
 
         public static Result<IEnumerable<TSource>, TError> CollectImpl<TSource, TError>(
             this IEnumerable<Result<TSource, TError>> source)
         {
             Debug.Assert(source != null);
-            return Result<IEnumerable<TSource>, TError>.Of(Aperators.CollectAny(source));
+            return Result<IEnumerable<TSource>, TError>.Of(QImpl.CollectAnyImpl(source));
         }
     }
 
     // Shadows for WhereImpl().
-    internal static partial class Qperators
+    internal static partial class EnumerableIntern
     {
         public static Either<IEnumerable<TSource>, TRight> WhereImpl<TSource, TRight>(
             this IEnumerable<TSource> source,
@@ -56,7 +61,7 @@ namespace Narvalo.Applicative
         {
             Debug.Assert(source != null);
             Debug.Assert(predicate != null);
-            return Either<IEnumerable<TSource>, TRight>.OfLeft(Aperators.WhereAnyImpl(source, predicate));
+            return Either<IEnumerable<TSource>, TRight>.OfLeft(QImpl.WhereAnyImpl(source, predicate));
         }
 
         public static Fallible<IEnumerable<TSource>> WhereImpl<TSource>(
@@ -65,7 +70,7 @@ namespace Narvalo.Applicative
         {
             Debug.Assert(source != null);
             Debug.Assert(predicate != null);
-            return Fallible.Of(Aperators.WhereAnyImpl(source, predicate));
+            return Fallible.Of(QImpl.WhereAnyImpl(source, predicate));
         }
 
         public static Maybe<IEnumerable<TSource>> WhereImpl<TSource>(
@@ -74,7 +79,7 @@ namespace Narvalo.Applicative
         {
             Debug.Assert(source != null);
             Debug.Assert(predicate != null);
-            return Maybe.Of(Aperators.WhereAnyImpl(source, predicate));
+            return Maybe.Of(QImpl.WhereAnyImpl(source, predicate));
         }
 
         public static Outcome<IEnumerable<TSource>> WhereImpl<TSource>(
@@ -83,7 +88,7 @@ namespace Narvalo.Applicative
         {
             Debug.Assert(source != null);
             Debug.Assert(predicate != null);
-            return Outcome.Of(Aperators.WhereAnyImpl(source, predicate));
+            return Outcome.Of(QImpl.WhereAnyImpl(source, predicate));
         }
 
         public static Result<IEnumerable<TSource>, TError> WhereImpl<TSource, TError>(
@@ -92,7 +97,7 @@ namespace Narvalo.Applicative
         {
             Debug.Assert(source != null);
             Debug.Assert(predicate != null);
-            return Result<IEnumerable<TSource>, TError>.Of(Aperators.WhereAnyImpl(source, predicate));
+            return Result<IEnumerable<TSource>, TError>.Of(QImpl.WhereAnyImpl(source, predicate));
         }
     }
 }

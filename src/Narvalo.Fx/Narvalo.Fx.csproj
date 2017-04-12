@@ -38,11 +38,11 @@
     <Compile Include="Internal\IEither`2.cs" />
     <Compile Include="Internal\IMaybe`1.cs" />
     <Compile Include="Internal\Iterable`1.cs" />
-    <Compile Include="Linq\Applicative\CollectAny.cs" />
-    <Compile Include="Applicative\Qperators.Shadowing.cs" />
-    <Compile Include="Linq\Applicative\Aperators.cs" />
-    <Compile Include="Linq\Applicative\SelectAny.cs" />
-    <Compile Include="Linq\Applicative\WhereAny.cs" />
+    <Compile Include="Linq\Applicative\CollectAnyImpl.cs" />
+    <Compile Include="Applicative\EnumerableIntern.cs" />
+    <Compile Include="Linq\Applicative\EnumerableIntern.cs" />
+    <Compile Include="Linq\Applicative\SelectAnyImpl.cs" />
+    <Compile Include="Linq\Applicative\WhereAnyImpl.cs" />
     <Compile Include="Linq\EmptyIfNull.cs" />
     <Compile Include="Linq\Fold.cs" />
     <Compile Include="Linq\ElementAtOrNone.cs" />
@@ -101,9 +101,6 @@
     </Compile>
     <Compile Include="Applicative\Unit.cs" />
     <Compile Include="Applicative\Recursion.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

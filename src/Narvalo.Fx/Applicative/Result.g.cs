@@ -68,7 +68,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Result{T, TError}" /> values.
         /// </summary>
-        /// <seealso cref="ResultExtensions.Select{T, TResult, TError}" />
+        /// <seealso cref="ResultL.Select{T, TResult, TError}" />
         public static Func<Result<T, TError>, Result<TResult, TError>> Lift<T, TResult, TError>(
             Func<T, TResult> func)
             => arg =>
@@ -80,51 +80,51 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Result{T, TError}" /> values.
         /// </summary>
-        /// <seealso cref="ResultExtensions.Zip{T1, T2, TResult, TError}"/>
+        /// <seealso cref="ResultL.ZipWith{T1, T2, TResult, TError}"/>
         public static Func<Result<T1, TError>, Result<T2, TError>, Result<TResult, TError>>
             Lift<T1, T2, TResult, TError>(Func<T1, T2, TResult> func)
             => (arg1, arg2) =>
             {
                 /* T4: NotNull(arg1) */
-                return arg1.Zip(arg2, func);
+                return arg1.ZipWith(arg2, func);
             };
 
         /// <summary>
         /// Promotes a function to use and return <see cref="Result{T, TError}" /> values.
         /// </summary>
-        /// <seealso cref="ResultExtensions.Zip{T1, T2, T3, TResult, TError}"/>
+        /// <seealso cref="ResultL.ZipWith{T1, T2, T3, TResult, TError}"/>
         public static Func<Result<T1, TError>, Result<T2, TError>, Result<T3, TError>, Result<TResult, TError>>
             Lift<T1, T2, T3, TResult, TError>(Func<T1, T2, T3, TResult> func)
             => (arg1, arg2, arg3) =>
             {
                 /* T4: NotNull(arg1) */
-                return arg1.Zip(arg2, arg3, func);
+                return arg1.ZipWith(arg2, arg3, func);
             };
 
         /// <summary>
         /// Promotes a function to use and return <see cref="Result{T, TError}" /> values.
         /// </summary>
-        /// <seealso cref="ResultExtensions.Zip{T1, T2, T3, T4, TResult, TError}"/>
+        /// <seealso cref="ResultL.ZipWith{T1, T2, T3, T4, TResult, TError}"/>
         public static Func<Result<T1, TError>, Result<T2, TError>, Result<T3, TError>, Result<T4, TError>, Result<TResult, TError>>
             Lift<T1, T2, T3, T4, TResult, TError>(
             Func<T1, T2, T3, T4, TResult> func)
             => (arg1, arg2, arg3, arg4) =>
             {
                 /* T4: NotNull(arg1) */
-                return arg1.Zip(arg2, arg3, arg4, func);
+                return arg1.ZipWith(arg2, arg3, arg4, func);
             };
 
         /// <summary>
         /// Promotes a function to use and return <see cref="Result{T, TError}" /> values.
         /// </summary>
-        /// <seealso cref="ResultExtensions.Zip{T1, T2, T3, T4, T5, TResult, TError}"/>
+        /// <seealso cref="ResultL.ZipWith{T1, T2, T3, T4, T5, TResult, TError}"/>
         public static Func<Result<T1, TError>, Result<T2, TError>, Result<T3, TError>, Result<T4, TError>, Result<T5, TError>, Result<TResult, TError>>
             Lift<T1, T2, T3, T4, T5, TResult, TError>(
             Func<T1, T2, T3, T4, T5, TResult> func)
             => (arg1, arg2, arg3, arg4, arg5) =>
             {
                 /* T4: NotNull(arg1) */
-                return arg1.Zip(arg2, arg3, arg4, arg5, func);
+                return arg1.ZipWith(arg2, arg3, arg4, arg5, func);
             };
 
         #endregion
@@ -134,7 +134,7 @@ namespace Narvalo.Applicative
     /// Provides extension methods for <see cref="Result{T, TError}"/>.
     /// </summary>
     // T4: EmitExtensions().
-    public static partial class ResultExtensions
+    public static partial class ResultL
     {
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
@@ -182,7 +182,7 @@ namespace Narvalo.Applicative
             Result<TOther, TError> other)
         {
             /* T4: NotNull(@this) */
-            return @this.Zip(other, (arg, _) => arg);
+            return @this.ZipWith(other, (arg, _) => arg);
         }
 
         public static Result<unit, TError> Skip<TSource, TError>(this Result<TSource, TError> @this)
@@ -191,10 +191,10 @@ namespace Narvalo.Applicative
             return @this.ReplaceBy(unit.Default);
         }
 
-        #region Zip()
+        #region ZipWith()
 
         /// <seealso cref="Result.Lift{T1, T2, TResult, TError}"/>
-        public static Result<TResult, TError> Zip<T1, T2, TResult, TError>(
+        public static Result<TResult, TError> ZipWith<T1, T2, TResult, TError>(
             this Result<T1, TError> @this,
             Result<T2, TError> second,
             Func<T1, T2, TResult> zipper)
@@ -209,7 +209,7 @@ namespace Narvalo.Applicative
         }
 
         /// <seealso cref="Result.Lift{T1, T2, T3, TResult, TError}"/>
-        public static Result<TResult, TError> Zip<T1, T2, T3, TResult, TError>(
+        public static Result<TResult, TError> ZipWith<T1, T2, T3, TResult, TError>(
             this Result<T1, TError> @this,
             Result<T2, TError> second,
             Result<T3, TError> third,
@@ -225,14 +225,14 @@ namespace Narvalo.Applicative
             // >     arg1 => second.Bind(
             // >        arg2 => third.Select(
             // >            arg3 => zipper(arg1, arg2, arg3))));
-            // but faster if Zip is locally shadowed.
+            // but faster if ZipWith is locally shadowed.
             return @this.Bind(
-                arg1 => second.Zip(
+                arg1 => second.ZipWith(
                     third, (arg2, arg3) => zipper(arg1, arg2, arg3)));
         }
 
         /// <seealso cref="Result.Lift{T1, T2, T3, T4, TResult, TError}"/>
-        public static Result<TResult, TError> Zip<T1, T2, T3, T4, TResult, TError>(
+        public static Result<TResult, TError> ZipWith<T1, T2, T3, T4, TResult, TError>(
              this Result<T1, TError> @this,
              Result<T2, TError> second,
              Result<T3, TError> third,
@@ -251,14 +251,14 @@ namespace Narvalo.Applicative
             // >             arg3 => fourth.Select(
             // >                 arg4 => zipper(arg1, arg2, arg3, arg4)))));
             return @this.Bind(
-                arg1 => second.Zip(
+                arg1 => second.ZipWith(
                     third,
                     fourth,
                     (arg2, arg3, arg4) => zipper(arg1, arg2, arg3, arg4)));
         }
 
         /// <seealso cref="Result.Lift{T1, T2, T3, T4, T5, TResult, TError}"/>
-        public static Result<TResult, TError> Zip<T1, T2, T3, T4, T5, TResult, TError>(
+        public static Result<TResult, TError> ZipWith<T1, T2, T3, T4, T5, TResult, TError>(
             this Result<T1, TError> @this,
             Result<T2, TError> second,
             Result<T3, TError> third,
@@ -280,7 +280,7 @@ namespace Narvalo.Applicative
             // >                 arg4 => fifth.Select(
             // >                     arg5 => zipper(arg1, arg2, arg3, arg4, arg5))))));
             return @this.Bind(
-                arg1 => second.Zip(
+                arg1 => second.ZipWith(
                     third,
                     fourth,
                     fifth,
@@ -326,7 +326,7 @@ namespace Narvalo.Applicative
             return @this.Bind(val => Result<TResult, TError>.Of(selector(val)));
         }
 
-        // Generalizes both Bind() and Zip<T1, T2, TResult>().
+        // Generalizes both Bind() and ZipWith<T1, T2, TResult>().
         public static Result<TResult, TError> SelectMany<TSource, TMiddle, TResult, TError>(
             this Result<TSource, TError> @this,
             Func<TSource, Result<TMiddle, TError>> selector,
@@ -346,10 +346,10 @@ namespace Narvalo.Applicative
 
     /// <summary>
     /// Provides extension methods for functions in the Kleisli category:
-    /// <see cref="Func{TSource, TResult}"/> where TResult is of type <see cref="Result{T, TError}"/>.
+    /// <see cref="Func{TSource, TResult}"/> where <c>TResult</c> is of type <see cref="Result{T, TError}"/>.
     /// </summary>
     // T4: EmitKleisli().
-    public static partial class Kleisli
+    public static partial class ResultK
     {
         public static Result<IEnumerable<TResult>, TError> InvokeWith<TSource, TResult, TError>(
             this Func<TSource, Result<TResult, TError>> @this,
@@ -396,7 +396,7 @@ namespace Narvalo.Internal
     // Provides default implementations for extension methods on IEnumerable<Result<T, TError>>.
     // You will certainly want to shadow them to improve performance.
     // T4: EmitEnumerableInternal().
-    internal static partial class EnumerableExtensions
+    internal static partial class ResultQImpl
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Result<IEnumerable<TSource>, TError> CollectImpl<TSource, TError>(
@@ -427,7 +427,7 @@ namespace Narvalo.Internal
                 = item => (b, seq) => b ? seq.Append(item) : seq;
 
             Func<Result<IEnumerable<TSource>, TError>, TSource, Result<IEnumerable<TSource>, TError>> accumulator
-                = (mseq, item) => predicate(item).Zip(mseq, func(item));
+                = (mseq, item) => predicate(item).ZipWith(mseq, func(item));
 
             return source.Aggregate(seed, accumulator);
         }
@@ -442,9 +442,16 @@ namespace Narvalo.Linq.Applicative
     using Narvalo.Applicative;
     using Narvalo.Internal;
 
-    // Provides extension methods for IEnumerable<T> and IEnumerable<Result<T, TError>>.
+    /// <summary>
+    /// Provides a set of extension methods for querying objects that implement <see cref="IEnumerable{T}"/>.
+    /// </summary>
+    /// <remarks>
+    /// New LINQ operators:
+    /// - Projecting: SelectAny (deferred)
+    /// - Filtering: CollectAny (deferred), WhereAny (deferred)
+    /// - Aggregation: Fold, Reduce</remarks>
     // T4: EmitLinqCore().
-    public static partial class Aperators
+    public static partial class ResultQ
     {
         public static IEnumerable<TSource> CollectAny<TSource, TError>(
             this IEnumerable<Result<TSource, TError>> source)
@@ -528,7 +535,7 @@ namespace Narvalo.Internal
     // and IEnumerable<Result<T, TError>>.
     // You will certainly want to shadow them to improve performance.
     // T4: EmitLinqInternal().
-    internal static partial class EnumerableExtensions
+    internal static partial class ResultQImpl
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static IEnumerable<TSource> CollectAnyImpl<TSource, TError>(

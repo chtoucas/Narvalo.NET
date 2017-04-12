@@ -84,7 +84,7 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Fallible{T}" /> values.
         /// </summary>
-        /// <seealso cref="FallibleExtensions.Select{T, TResult}" />
+        /// <seealso cref="FallibleL.Select{T, TResult}" />
         public static Func<Fallible<T>, Fallible<TResult>> Lift<T, TResult>(
             Func<T, TResult> func)
             => arg =>
@@ -96,51 +96,51 @@ namespace Narvalo.Applicative
         /// <summary>
         /// Promotes a function to use and return <see cref="Fallible{T}" /> values.
         /// </summary>
-        /// <seealso cref="FallibleExtensions.Zip{T1, T2, TResult}"/>
+        /// <seealso cref="FallibleL.ZipWith{T1, T2, TResult}"/>
         public static Func<Fallible<T1>, Fallible<T2>, Fallible<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
             => (arg1, arg2) =>
             {
                 /* T4: NotNull(arg1) */
-                return arg1.Zip(arg2, func);
+                return arg1.ZipWith(arg2, func);
             };
 
         /// <summary>
         /// Promotes a function to use and return <see cref="Fallible{T}" /> values.
         /// </summary>
-        /// <seealso cref="FallibleExtensions.Zip{T1, T2, T3, TResult}"/>
+        /// <seealso cref="FallibleL.ZipWith{T1, T2, T3, TResult}"/>
         public static Func<Fallible<T1>, Fallible<T2>, Fallible<T3>, Fallible<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
             => (arg1, arg2, arg3) =>
             {
                 /* T4: NotNull(arg1) */
-                return arg1.Zip(arg2, arg3, func);
+                return arg1.ZipWith(arg2, arg3, func);
             };
 
         /// <summary>
         /// Promotes a function to use and return <see cref="Fallible{T}" /> values.
         /// </summary>
-        /// <seealso cref="FallibleExtensions.Zip{T1, T2, T3, T4, TResult}"/>
+        /// <seealso cref="FallibleL.ZipWith{T1, T2, T3, T4, TResult}"/>
         public static Func<Fallible<T1>, Fallible<T2>, Fallible<T3>, Fallible<T4>, Fallible<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> func)
             => (arg1, arg2, arg3, arg4) =>
             {
                 /* T4: NotNull(arg1) */
-                return arg1.Zip(arg2, arg3, arg4, func);
+                return arg1.ZipWith(arg2, arg3, arg4, func);
             };
 
         /// <summary>
         /// Promotes a function to use and return <see cref="Fallible{T}" /> values.
         /// </summary>
-        /// <seealso cref="FallibleExtensions.Zip{T1, T2, T3, T4, T5, TResult}"/>
+        /// <seealso cref="FallibleL.ZipWith{T1, T2, T3, T4, T5, TResult}"/>
         public static Func<Fallible<T1>, Fallible<T2>, Fallible<T3>, Fallible<T4>, Fallible<T5>, Fallible<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> func)
             => (arg1, arg2, arg3, arg4, arg5) =>
             {
                 /* T4: NotNull(arg1) */
-                return arg1.Zip(arg2, arg3, arg4, arg5, func);
+                return arg1.ZipWith(arg2, arg3, arg4, arg5, func);
             };
 
         #endregion
@@ -150,7 +150,7 @@ namespace Narvalo.Applicative
     /// Provides extension methods for <see cref="Fallible{T}"/>.
     /// </summary>
     // T4: EmitExtensions().
-    public static partial class FallibleExtensions
+    public static partial class FallibleL
     {
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
@@ -198,7 +198,7 @@ namespace Narvalo.Applicative
             Fallible<TOther> other)
         {
             /* T4: NotNull(@this) */
-            return @this.Zip(other, (arg, _) => arg);
+            return @this.ZipWith(other, (arg, _) => arg);
         }
 
         public static Fallible<unit> Skip<TSource>(this Fallible<TSource> @this)
@@ -207,10 +207,10 @@ namespace Narvalo.Applicative
             return @this.ContinueWith(Fallible.Unit);
         }
 
-        #region Zip()
+        #region ZipWith()
 
         /// <seealso cref="Fallible.Lift{T1, T2, TResult}"/>
-        public static Fallible<TResult> Zip<T1, T2, TResult>(
+        public static Fallible<TResult> ZipWith<T1, T2, TResult>(
             this Fallible<T1> @this,
             Fallible<T2> second,
             Func<T1, T2, TResult> zipper)
@@ -225,7 +225,7 @@ namespace Narvalo.Applicative
         }
 
         /// <seealso cref="Fallible.Lift{T1, T2, T3, TResult}"/>
-        public static Fallible<TResult> Zip<T1, T2, T3, TResult>(
+        public static Fallible<TResult> ZipWith<T1, T2, T3, TResult>(
             this Fallible<T1> @this,
             Fallible<T2> second,
             Fallible<T3> third,
@@ -241,14 +241,14 @@ namespace Narvalo.Applicative
             // >     arg1 => second.Bind(
             // >        arg2 => third.Select(
             // >            arg3 => zipper(arg1, arg2, arg3))));
-            // but faster if Zip is locally shadowed.
+            // but faster if ZipWith is locally shadowed.
             return @this.Bind(
-                arg1 => second.Zip(
+                arg1 => second.ZipWith(
                     third, (arg2, arg3) => zipper(arg1, arg2, arg3)));
         }
 
         /// <seealso cref="Fallible.Lift{T1, T2, T3, T4, TResult}"/>
-        public static Fallible<TResult> Zip<T1, T2, T3, T4, TResult>(
+        public static Fallible<TResult> ZipWith<T1, T2, T3, T4, TResult>(
              this Fallible<T1> @this,
              Fallible<T2> second,
              Fallible<T3> third,
@@ -267,14 +267,14 @@ namespace Narvalo.Applicative
             // >             arg3 => fourth.Select(
             // >                 arg4 => zipper(arg1, arg2, arg3, arg4)))));
             return @this.Bind(
-                arg1 => second.Zip(
+                arg1 => second.ZipWith(
                     third,
                     fourth,
                     (arg2, arg3, arg4) => zipper(arg1, arg2, arg3, arg4)));
         }
 
         /// <seealso cref="Fallible.Lift{T1, T2, T3, T4, T5, TResult}"/>
-        public static Fallible<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
+        public static Fallible<TResult> ZipWith<T1, T2, T3, T4, T5, TResult>(
             this Fallible<T1> @this,
             Fallible<T2> second,
             Fallible<T3> third,
@@ -296,7 +296,7 @@ namespace Narvalo.Applicative
             // >                 arg4 => fifth.Select(
             // >                     arg5 => zipper(arg1, arg2, arg3, arg4, arg5))))));
             return @this.Bind(
-                arg1 => second.Zip(
+                arg1 => second.ZipWith(
                     third,
                     fourth,
                     fifth,
@@ -342,7 +342,7 @@ namespace Narvalo.Applicative
             return @this.Bind(val => Fallible<TResult>.η(selector(val)));
         }
 
-        // Generalizes both Bind() and Zip<T1, T2, TResult>().
+        // Generalizes both Bind() and ZipWith<T1, T2, TResult>().
         public static Fallible<TResult> SelectMany<TSource, TMiddle, TResult>(
             this Fallible<TSource> @this,
             Func<TSource, Fallible<TMiddle>> selector,
@@ -362,10 +362,10 @@ namespace Narvalo.Applicative
 
     /// <summary>
     /// Provides extension methods for functions in the Kleisli category:
-    /// <see cref="Func{TSource, TResult}"/> where TResult is of type <see cref="Fallible{T}"/>.
+    /// <see cref="Func{TSource, TResult}"/> where <c>TResult</c> is of type <see cref="Fallible{T}"/>.
     /// </summary>
     // T4: EmitKleisli().
-    public static partial class Kleisli
+    public static partial class FallibleK
     {
         public static Fallible<IEnumerable<TResult>> InvokeWith<TSource, TResult>(
             this Func<TSource, Fallible<TResult>> @this,
@@ -412,7 +412,7 @@ namespace Narvalo.Internal
     // Provides default implementations for extension methods on IEnumerable<Fallible<T>>.
     // You will certainly want to shadow them to improve performance.
     // T4: EmitEnumerableInternal().
-    internal static partial class EnumerableExtensions
+    internal static partial class FallibleQImpl
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Fallible<IEnumerable<TSource>> CollectImpl<TSource>(
@@ -443,7 +443,7 @@ namespace Narvalo.Internal
                 = item => (b, seq) => b ? seq.Append(item) : seq;
 
             Func<Fallible<IEnumerable<TSource>>, TSource, Fallible<IEnumerable<TSource>>> accumulator
-                = (mseq, item) => predicate(item).Zip(mseq, func(item));
+                = (mseq, item) => predicate(item).ZipWith(mseq, func(item));
 
             return source.Aggregate(seed, accumulator);
         }
@@ -458,9 +458,16 @@ namespace Narvalo.Linq.Applicative
     using Narvalo.Applicative;
     using Narvalo.Internal;
 
-    // Provides extension methods for IEnumerable<T> and IEnumerable<Fallible<T>>.
+    /// <summary>
+    /// Provides a set of extension methods for querying objects that implement <see cref="IEnumerable{T}"/>.
+    /// </summary>
+    /// <remarks>
+    /// New LINQ operators:
+    /// - Projecting: SelectAny (deferred)
+    /// - Filtering: CollectAny (deferred), WhereAny (deferred)
+    /// - Aggregation: Fold, Reduce</remarks>
     // T4: EmitLinqCore().
-    public static partial class Aperators
+    public static partial class FallibleQ
     {
         public static IEnumerable<TSource> CollectAny<TSource>(
             this IEnumerable<Fallible<TSource>> source)
@@ -544,7 +551,7 @@ namespace Narvalo.Internal
     // and IEnumerable<Fallible<T>>.
     // You will certainly want to shadow them to improve performance.
     // T4: EmitLinqInternal().
-    internal static partial class EnumerableExtensions
+    internal static partial class FallibleQImpl
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static IEnumerable<TSource> CollectAnyImpl<TSource>(

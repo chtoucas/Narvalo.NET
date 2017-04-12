@@ -26,6 +26,8 @@ namespace Narvalo.T4
     /// </remarks>
     public abstract class _MonadTemplate : VSTemplate
     {
+        public const string ExtensionsSuffix = "L";
+
         /// <summary>
         /// The generic constraints on the underlying type T.
         /// </summary>
@@ -54,7 +56,7 @@ namespace Narvalo.T4
         /// </summary>
         private string _zeroName = "Zero";
 
-        private string _extensionsClsSuffix = "Extensions";
+        private string _extensionsClsSuffix = ExtensionsSuffix;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="_MonadTemplate"/> class.
@@ -436,7 +438,7 @@ namespace Narvalo.T4
             LinqNamespace = "Narvalo.Linq.Applicative";
         }
 
-        protected void InitializeHelpers(bool asStruct, string suffix = "Extensions")
+        protected void InitializeHelpers(bool asStruct, string suffix = ExtensionsSuffix)
         {
             HelpersIsStruct = asStruct;
             HelpersTypeDecl = asStruct ? "partial struct" : "partial class";

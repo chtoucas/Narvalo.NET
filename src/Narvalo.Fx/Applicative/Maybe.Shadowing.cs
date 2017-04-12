@@ -24,7 +24,7 @@ namespace Narvalo.Applicative
         public Maybe<Unit> Skip()
             => IsSome ? Maybe.Unit : Maybe.None;
 
-        public Maybe<TResult> Zip<TSecond, TResult>(Maybe<TSecond> second, Func<T, TSecond, TResult> zipper)
+        public Maybe<TResult> ZipWith<TSecond, TResult>(Maybe<TSecond> second, Func<T, TSecond, TResult> zipper)
         {
             Require.NotNull(zipper, nameof(zipper));
 

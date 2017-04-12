@@ -14,7 +14,7 @@ public partial class MonadTemplate
             <#= Name #><T2<#= RTDecl #>> other)
         {
             <#+ WriteNotNull(); #>
-            return @this.Zip(other, ValueTuple.Create);
+            return @this.ZipWith(other, ValueTuple.Create);
         }
 
 <#+ if (HasZero) { #>

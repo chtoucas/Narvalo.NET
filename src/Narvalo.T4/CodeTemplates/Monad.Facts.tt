@@ -8,8 +8,6 @@
 // This template depends on:
 // - Xunit
 // - FsCheck.Xunit
-// WARNING: We can only perform sanity checks since (here) we know nothing
-// about the underlying object.
 
 public partial class MonadTemplate
 {
@@ -25,10 +23,10 @@ public partial class MonadTemplate
 #>
 namespace <#= Namespace #> {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
 
     using FsCheck.Xunit;
-    using Narvalo.Linq;
     using Xunit;
 
 <#+

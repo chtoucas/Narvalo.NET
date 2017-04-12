@@ -44,6 +44,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Applicative\EnumerableFacts.cs" />
+    <Compile Include="Applicative\EnumerableInternFacts.WhereImpl.cs" />
+    <Compile Include="Applicative\EnumerableInternFacts.CollectImpl.cs" />
     <Compile Include="Applicative\RecursionFacts.cs" />
     <Compile Include="Applicative\ResultFacts.cs" />
     <Compile Include="Applicative\EitherFacts.cs" />
@@ -79,13 +82,13 @@
     <Compile Include="Applicative\MaybeFacts.cs" />
     <Compile Include="Applicative\QullableFacts.cs" />
     <Compile Include="Linq\Applicative\Fold.cs" />
-    <Compile Include="Linq\Applicative\AperatorsFacts.cs" />
+    <Compile Include="Linq\Applicative\EnumerableFacts.cs" />
     <Compile Include="Linq\Applicative\Reduce.cs" />
     <Compile Include="Linq\Applicative\SelectAny.cs" />
     <Compile Include="Linq\Applicative\WhereAny.cs" />
-    <Compile Include="Linq\Extended\QperatorsFacts.cs" />
-    <Compile Include="Linq\Extended\SelectWith.cs" />
-    <Compile Include="Linq\Extended\ZipWith.cs" />
+    <Compile Include="Applicative\EnumerableInternFacts.cs" />
+    <Compile Include="Applicative\EnumerableFacts.Map.cs" />
+    <Compile Include="Applicative\EnumerableFacts.Zip.cs" />
     <Compile Include="Linq\Reduce.cs" />
     <Compile Include="Linq\Fold.cs" />
     <Compile Include="Linq\QperatorsFacts.cs" />
@@ -100,10 +103,11 @@
     <Compile Include="Linq\IsEmpty.cs" />
     <Compile Include="Linq\SequenceFacts.cs" />
     <Compile Include="Linq\WhereAny.cs" />
-    <Compile Include="Linq\_Externs\AppendPrependFacts.cs" />
-    <Compile Include="Linq\_Externs\EnumerableTests.cs" />
+    <Compile Include="_Externs\AppendPrependFacts.cs" />
+    <Compile Include="_Externs\EnumerableTests.cs" />
     <Compile Include="Linq\SelectAny.cs" />
-    <Compile Include="Linq\_Externs\TestExtensions.cs" />
+    <Compile Include="_Externs\EnumerableTests.Local.cs" />
+    <Compile Include="_Externs\TestExtensions.cs" />
     <Compile Include="LocalizationFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Applicative\StubsFacts.cs" />

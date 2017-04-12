@@ -8,9 +8,9 @@ namespace Narvalo.Linq.Applicative
 
     using Narvalo.Applicative;
 
-    public static partial class Aperators
+    internal static partial class EnumerableIntern
     {
-        internal static IEnumerable<TLeft> SelectAnyImpl<TSource, TLeft, TRight>(
+        public static IEnumerable<TLeft> SelectAnyImpl<TSource, TLeft, TRight>(
             this IEnumerable<TSource> source,
             Func<TSource, Either<TLeft, TRight>> selector)
         {
@@ -25,7 +25,7 @@ namespace Narvalo.Linq.Applicative
             }
         }
 
-        internal static IEnumerable<TResult> SelectAnyImpl<TSource, TResult>(
+        public static IEnumerable<TResult> SelectAnyImpl<TSource, TResult>(
             this IEnumerable<TSource> source,
             Func<TSource, Fallible<TResult>> selector)
         {
@@ -40,7 +40,7 @@ namespace Narvalo.Linq.Applicative
             }
         }
 
-        internal static IEnumerable<TResult> SelectAnyImpl<TSource, TResult>(
+        public static IEnumerable<TResult> SelectAnyImpl<TSource, TResult>(
             this IEnumerable<TSource> source,
             Func<TSource, Maybe<TResult>> selector)
         {
@@ -55,7 +55,7 @@ namespace Narvalo.Linq.Applicative
             }
         }
 
-        internal static IEnumerable<TResult> SelectAnyImpl<TSource, TResult>(
+        public static IEnumerable<TResult> SelectAnyImpl<TSource, TResult>(
             this IEnumerable<TSource> source,
             Func<TSource, Outcome<TResult>> selector)
         {
@@ -70,7 +70,7 @@ namespace Narvalo.Linq.Applicative
             }
         }
 
-        internal static IEnumerable<T> SelectAnyImpl<TSource, T, TError>(
+        public static IEnumerable<T> SelectAnyImpl<TSource, T, TError>(
             this IEnumerable<TSource> source,
             Func<TSource, Result<T, TError>> selector)
         {

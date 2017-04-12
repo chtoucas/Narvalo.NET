@@ -12,10 +12,10 @@
 
 namespace Narvalo.Applicative {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
 
     using FsCheck.Xunit;
-    using Narvalo.Linq;
     using Xunit;
 
     // Provides tests for Outcome<T>.
@@ -77,8 +77,26 @@ namespace Narvalo.Applicative {
             Assert.Throws<ArgumentOutOfRangeException>("count", () => Outcome.Repeat(source, -1));
         }
 
-        [t("Zip() guards.")]
-        public static void Zip0() {
+        [t("Collect() guards.")]
+        public static void Collect0() {
+            IEnumerable<Outcome<int>> source = null;
+
+            Assert.Throws<ArgumentNullException>("source", () => Outcome.Collect(source));
+        }
+
+        [t("Filter() guards.")]
+        public static void Filter0() {
+            Func<int, Outcome<bool>> predicate = _ => Outcome<bool>.η(true);
+
+            IEnumerable<int> nil = null;
+            Assert.Throws<ArgumentNullException>("source", () => Outcome.Filter(nil, predicate));
+
+            var source = Enumerable.Range(0, 1);
+            Assert.Throws<ArgumentNullException>("predicate", () => Outcome.Filter(source, default(Func<int, Outcome<bool>>)));
+        }
+
+        [t("ZipWith() guards.")]
+        public static void ZipWith0() {
             var first = Outcome<int>.η(1);
             var second = Outcome<int>.η(2);
             var third = Outcome<int>.η(3);
@@ -90,15 +108,15 @@ namespace Narvalo.Applicative {
             Func<int, int, int, int, int, int> zipper5 = null;
 
             // Extension method.
-            Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, zipper2));
-            Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, third, zipper3));
-            Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, third, fourth, zipper4));
-            Assert.Throws<ArgumentNullException>("zipper", () => first.Zip(second, third, fourth, fifth, zipper5));
+            Assert.Throws<ArgumentNullException>("zipper", () => first.ZipWith(second, zipper2));
+            Assert.Throws<ArgumentNullException>("zipper", () => first.ZipWith(second, third, zipper3));
+            Assert.Throws<ArgumentNullException>("zipper", () => first.ZipWith(second, third, fourth, zipper4));
+            Assert.Throws<ArgumentNullException>("zipper", () => first.ZipWith(second, third, fourth, fifth, zipper5));
             // Static method.
-            Assert.Throws<ArgumentNullException>("zipper", () => OutcomeExtensions.Zip(first, second, zipper2));
-            Assert.Throws<ArgumentNullException>("zipper", () => OutcomeExtensions.Zip(first, second, third, zipper3));
-            Assert.Throws<ArgumentNullException>("zipper", () => OutcomeExtensions.Zip(first, second, third, fourth, zipper4));
-            Assert.Throws<ArgumentNullException>("zipper", () => OutcomeExtensions.Zip(first, second, third, fourth, fifth, zipper5));
+            Assert.Throws<ArgumentNullException>("zipper", () => OutcomeL.ZipWith(first, second, zipper2));
+            Assert.Throws<ArgumentNullException>("zipper", () => OutcomeL.ZipWith(first, second, third, zipper3));
+            Assert.Throws<ArgumentNullException>("zipper", () => OutcomeL.ZipWith(first, second, third, fourth, zipper4));
+            Assert.Throws<ArgumentNullException>("zipper", () => OutcomeL.ZipWith(first, second, third, fourth, fifth, zipper5));
         }
 
         [t("Select() guards.")]
@@ -107,7 +125,7 @@ namespace Narvalo.Applicative {
             Func<int, long> selector = null;
 
             Assert.Throws<ArgumentNullException>("selector", () => source.Select(selector));
-            Assert.Throws<ArgumentNullException>("selector", () => OutcomeExtensions.Select(source, selector));
+            Assert.Throws<ArgumentNullException>("selector", () => OutcomeL.Select(source, selector));
         }
 
         [t("Using() guards.")]
@@ -117,10 +135,10 @@ namespace Narvalo.Applicative {
             Func<DisposableObj, int> selector = null;
 
             Assert.Throws<ArgumentNullException>("binder", () => source.Using(binder));
-            Assert.Throws<ArgumentNullException>("binder", () => OutcomeExtensions.Using(source, binder));
+            Assert.Throws<ArgumentNullException>("binder", () => OutcomeL.Using(source, binder));
 
             Assert.Throws<ArgumentNullException>("selector", () => source.Using(selector));
-            Assert.Throws<ArgumentNullException>("selector", () => OutcomeExtensions.Using(source, selector));
+            Assert.Throws<ArgumentNullException>("selector", () => OutcomeL.Using(source, selector));
         }
 
         [t("SelectMany() guards.")]
@@ -134,8 +152,8 @@ namespace Narvalo.Applicative {
             Assert.Throws<ArgumentNullException>("selector", () => source.SelectMany(null, resultSelector));
             Assert.Throws<ArgumentNullException>("resultSelector", () => source.SelectMany(valueSelector, (Func<short, int, long>)null));
             // Static method.
-            Assert.Throws<ArgumentNullException>("selector", () => OutcomeExtensions.SelectMany(source, null, resultSelector));
-            Assert.Throws<ArgumentNullException>("resultSelector", () => OutcomeExtensions.SelectMany(source, valueSelector, (Func<short, int, long>)null));
+            Assert.Throws<ArgumentNullException>("selector", () => OutcomeL.SelectMany(source, null, resultSelector));
+            Assert.Throws<ArgumentNullException>("resultSelector", () => OutcomeL.SelectMany(source, valueSelector, (Func<short, int, long>)null));
         }
 
     }
@@ -179,12 +197,12 @@ namespace Narvalo.Applicative {
             var source = Outcome<int>.η(arg0);
 
             var left = selector1(source);
-            var right = OutcomeExtensions.Select(source, selector);
+            var right = OutcomeL.Select(source, selector);
 
             return left.Equals(right);
         }
 
-        [q("Lift() is Zip() (1).")]
+        [q("Lift() is ZipWith() (1).")]
         public static bool Lift02(int arg0, int arg1, int arg2, int arg3) {
             Func<int, int, long> zipper = (i, j) => arg2 * i + arg3 * j;
             var zipper1 = Outcome.Lift<int, int, long>(zipper);
@@ -193,14 +211,14 @@ namespace Narvalo.Applicative {
             var p1 = Outcome<int>.η(arg1);
 
             var left = zipper1(p0, p1);
-            var right = p0.Zip(p1, zipper);
+            var right = p0.ZipWith(p1, zipper);
 
             return left.Equals(right);
         }
 
-        // NB: Lift01() but w/o using Zip as an extension method.
-        [q("Zip() is Lift() (1).")]
-        public static bool Zip02(int arg0, int arg1, int arg2, int arg3) {
+        // NB: Lift01() but w/o using ZipWith as an extension method.
+        [q("ZipWith() is Lift() (1).")]
+        public static bool ZipWith02(int arg0, int arg1, int arg2, int arg3) {
             Func<int, int, long> zipper = (i, j) => arg2 * i + arg3 * j;
             var zipper1 = Outcome.Lift<int, int, long>(zipper);
 
@@ -208,12 +226,12 @@ namespace Narvalo.Applicative {
             var p1 = Outcome<int>.η(arg1);
 
             var left = zipper1(p0, p1);
-            var right = OutcomeExtensions.Zip(p0, p1, zipper);
+            var right = OutcomeL.ZipWith(p0, p1, zipper);
 
             return left.Equals(right);
         }
 
-        [q("Lift() is Zip() (2).")]
+        [q("Lift() is ZipWith() (2).")]
         public static bool Lift03(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
             Func<int, int, int, long> zipper = (i, j, k) => arg3 * i + arg4 * j + arg5 * k;
             var zipper1 = Outcome.Lift<int, int, int, long>(zipper);
@@ -223,13 +241,13 @@ namespace Narvalo.Applicative {
             var p2 = Outcome<int>.η(arg2);
 
             var left = zipper1(p0, p1, p2);
-            var right = p0.Zip(p1, p2, zipper);
+            var right = p0.ZipWith(p1, p2, zipper);
 
             return left.Equals(right);
         }
 
-        [q("Zip() is Lift() (2).")]
-        public static bool Zip03(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+        [q("ZipWith() is Lift() (2).")]
+        public static bool ZipWith03(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
             Func<int, int, int, long> zipper = (i, j, k) => arg3 * i + arg4 * j + arg5 * k;
             var zipper1 = Outcome.Lift<int, int, int, long>(zipper);
 
@@ -238,12 +256,12 @@ namespace Narvalo.Applicative {
             var p2 = Outcome<int>.η(arg2);
 
             var left = zipper1(p0, p1, p2);
-            var right = OutcomeExtensions.Zip(p0, p1, p2, zipper);
+            var right = OutcomeL.ZipWith(p0, p1, p2, zipper);
 
             return left.Equals(right);
         }
 
-        [q("Lift() is Zip() (3).")]
+        [q("Lift() is ZipWith() (3).")]
         public static bool Lift04(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
             Func<int, int, int, int, long> zipper = (i, j, k, l) => arg4 * i + arg5 * j + arg6 * k + arg7 * l;
             var zipper1 = Outcome.Lift<int, int, int, int, long>(zipper);
@@ -254,13 +272,13 @@ namespace Narvalo.Applicative {
             var p3 = Outcome<int>.η(arg3);
 
             var left = zipper1(p0, p1, p2, p3);
-            var right = p0.Zip(p1, p2, p3, zipper);
+            var right = p0.ZipWith(p1, p2, p3, zipper);
 
             return left.Equals(right);
         }
 
-        [q("Zip() is Lift() (3).")]
-        public static bool Zip04(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
+        [q("ZipWith() is Lift() (3).")]
+        public static bool ZipWith04(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
             Func<int, int, int, int, long> zipper = (i, j, k, l) => arg4 * i + arg5 * j + arg6 * k + arg7 * l;
             var zipper1 = Outcome.Lift<int, int, int, int, long>(zipper);
 
@@ -270,12 +288,12 @@ namespace Narvalo.Applicative {
             var p3 = Outcome<int>.η(arg3);
 
             var left = zipper1(p0, p1, p2, p3);
-            var right = OutcomeExtensions.Zip(p0, p1, p2, p3, zipper);
+            var right = OutcomeL.ZipWith(p0, p1, p2, p3, zipper);
 
             return left.Equals(right);
         }
 
-        [q("Lift() is Zip() (4).")]
+        [q("Lift() is ZipWith() (4).")]
         public static bool Lift05(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9) {
             Func<int, int, int, int, int, long> zipper = (i, j, k, l, m) => arg5 * i + arg6 * j + arg7 * k + arg8 * l + arg9 * m;
             var zipper1 = Outcome.Lift<int, int, int, int, int, long>(zipper);
@@ -287,13 +305,13 @@ namespace Narvalo.Applicative {
             var p4 = Outcome<int>.η(arg4);
 
             var left = zipper1(p0, p1, p2, p3, p4);
-            var right = p0.Zip(p1, p2, p3, p4, zipper);
+            var right = p0.ZipWith(p1, p2, p3, p4, zipper);
 
             return left.Equals(right);
         }
 
-        [q("Zip() is Lift() (4).")]
-        public static bool Zip05(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9) {
+        [q("ZipWith() is Lift() (4).")]
+        public static bool ZipWith05(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9) {
             Func<int, int, int, int, int, long> zipper = (i, j, k, l, m) => arg5 * i + arg6 * j + arg7 * k + arg8 * l + arg9 * m;
             var zipper1 = Outcome.Lift<int, int, int, int, int, long>(zipper);
 
@@ -304,7 +322,7 @@ namespace Narvalo.Applicative {
             var p4 = Outcome<int>.η(arg4);
 
             var left = zipper1(p0, p1, p2, p3, p4);
-            var right = OutcomeExtensions.Zip(p0, p1, p2, p3, p4, zipper);
+            var right = OutcomeL.ZipWith(p0, p1, p2, p3, p4, zipper);
 
             return left.Equals(right);
         }
@@ -320,7 +338,7 @@ namespace Narvalo.Applicative {
         [q("ReplaceBy() replaces the enclosed value if any (2).")]
         public static bool ReplaceBy01b(int arg0, int arg1) {
             var source = Outcome<int>.η(arg0);
-            var result = OutcomeExtensions.ReplaceBy(source, arg1);
+            var result = OutcomeL.ReplaceBy(source, arg1);
 
             return result.Contains(arg1);
         }
@@ -338,7 +356,7 @@ namespace Narvalo.Applicative {
         public static bool ContinueWith01b(int arg0, int arg1) {
             var source = Outcome<int>.η(arg0);
             var other = Outcome<int>.η(arg1);
-            var result = OutcomeExtensions.ContinueWith(source, other);
+            var result = OutcomeL.ContinueWith(source, other);
 
             return result.Contains(arg1);
         }
@@ -356,7 +374,7 @@ namespace Narvalo.Applicative {
         public static bool PassBy01b(int arg0, int arg1) {
             var source = Outcome<int>.η(arg0);
             var other = Outcome<int>.η(arg1);
-            var result = OutcomeExtensions.PassBy(source, other);
+            var result = OutcomeL.PassBy(source, other);
 
             return result.Contains(arg0);
         }
@@ -372,7 +390,7 @@ namespace Narvalo.Applicative {
         [q("Skip() replaces the enclosed value by Unit if any (2).")]
         public static bool Skip01b(int arg0) {
             var source = Outcome<int>.η(arg0);
-            var result = OutcomeExtensions.Skip(source);
+            var result = OutcomeL.Skip(source);
 
             return result.Contains(Unit.Default);
         }
@@ -393,7 +411,7 @@ namespace Narvalo.Applicative {
             var obj = new DisposableObj();
             var source = Outcome<DisposableObj>.η(obj);
             Func<DisposableObj, Outcome<int>> binder = _ => Outcome<int>.η(1);
-            var result = OutcomeExtensions.Using(source, binder);
+            var result = OutcomeL.Using(source, binder);
 
             Assert.True(result.Contains(1));
             Assert.True(obj.WasDisposed);
@@ -415,7 +433,7 @@ namespace Narvalo.Applicative {
             var obj = new DisposableObj();
             var source = Outcome<DisposableObj>.η(obj);
             Func<DisposableObj, int> selector = _ => 1;
-            var result = OutcomeExtensions.Using(source, selector);
+            var result = OutcomeL.Using(source, selector);
 
             Assert.True(result.Contains(1));
             Assert.True(obj.WasDisposed);
@@ -437,8 +455,8 @@ namespace Narvalo.Applicative {
             var applicative = Outcome<Func<int, long>>.η(i => arg1 * i);
             var value = Outcome<int>.η(arg0);
 
-            var applied = OutcomeExtensions.Apply(applicative, value);
-            var gathered = OutcomeExtensions.Gather(value, applicative);
+            var applied = OutcomeL.Apply(applicative, value);
+            var gathered = OutcomeL.Gather(value, applicative);
 
             return applied.Equals(gathered);
         }

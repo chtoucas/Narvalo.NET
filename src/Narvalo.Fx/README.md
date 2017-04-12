@@ -36,10 +36,9 @@ Our versioning scheme is explained
 - [Query Operators and Generators](#query-operators-and-generators)
 - [Recursion](#recursion)
 - [Tour of the API](#tour-of-the-api)
-- [Haskell to C# Walk-Through](#haskell-to-C-walk-through)
 - [Typologia](#typologia)
 - [F# is better at functional programming!](#f-is-better-at-functional-programming)
-- [Design Notes](#design-notes)
+- [Haskell to C# Walk-Through](#haskell-to-C-walk-through)
 - [Changelog](#changelog)
 
 --------------------------------------------------------------------------------
@@ -87,7 +86,8 @@ sure that all monads also support the query syntax
 
 The astute reader will have noticed that some of the common monads are missing,
 they were not included on purpose. In the context of C#, I am yet to be
-convinced of their usefulness and practicability (for skeleton definitions of
+convinced of their usefulness and practicability, but I might change my mind
+(for skeleton definitions of
 `IO`, `Reader` and `State`,
 see [here](https://github.com/chtoucas/Brouillons/tree/master/src/play/Functional/Monadic)).
 
@@ -129,6 +129,8 @@ Personally, I like to make it look like a built-in type with:
 ```csharp
 using unit = global::Narvalo.Applicative.Unit;
 ```
+
+### Developer notes
 An implementation detail is that we make sure that a `Unit` instance is equal to
 any _empty tuple literal_, the 0-tuples. The .NET team _"lovingly
 [refers](https://github.com/dotnet/roslyn/issues/10429) to 0-tuples as nuples,
@@ -408,7 +410,7 @@ Maybe Type
 - [Programming for side-effects](#maybe-effects)
 - [Querying](#maybe-querying)
 - [Binding](#maybe-binding)
-- [Design notes](#maybe-design)
+- [Developer notes](#maybe-notes)
 
 We discuss `Maybe<T>` at length, the type is quite simple, nevertheless it
 illustrates many principles that are applicable to the other monads, it's well
@@ -594,7 +596,7 @@ do not translate to SQL).
 
 ### <a name="maybe-binding"></a>Binding
 
-### <a name="maybe-design"></a>Design Notes
+### <a name="maybe-notes"></a>Developer notes
 
 [Struct vs Class] [Storage]
 
@@ -608,7 +610,7 @@ Railway Oriented Programming
 - [`Fallible`](#rop-fallible)
 - [`Fallible<T>`](#rop-fallibleT)
 - [`Result<T, TError>`](#rop-result)
-- [Further readings](#rop-further)
+- [Developer notes](#rop-notes)
 
 Typical use cases:
 - To encapsulate the result of a computation with lightweight error reporting
@@ -696,7 +698,7 @@ var failure = Result<int, Error>.FromError(new Error());
 (bool succeed, T value, TError error) = result;
 ```
 
-### <a name="rop-further"></a>Further readings
+### <a name="rop-notes"></a>Developer notes
 - Railway Oriented Programming, [explanation](http://fsharpforfunandprofit.com/rop)
   and [sample codes](https://github.com/swlaschin/Railway-Oriented-Programming-Example)
 
@@ -737,6 +739,7 @@ Query Operators and Generators
 - [Operators](#linq-operators)
 - [Generators](#linq-generators)
 - [Operators (Applicative)](#linq-applicative)
+- [Developer notes](#linq-notes)
 
 For each new query operator, we define its behaviour regarding deferred or
 immediate execution - to quote the [C# documentation](https://docs.microsoft.com/en-us/dotnet/articles/csharp/programming-guide/concepts/linq/classification-of-standard-query-operators-by-manner-of-execution),
@@ -860,7 +863,7 @@ with three elements `2`, `4` and `5`; it filters out the two _none_'s.
 #### `Sum`
 `Sum` acts on an `IEnumerable<Maybe<T>>`.
 
-### Notes
+### <a name="linq-notes"></a>Developer notes
 [Correspondance with Rx.NET (naming differences)]
 
 --------------------------------------------------------------------------------
@@ -878,140 +881,6 @@ Tour of the API
 ### Core Verbs
 
 ### Derived Verbs
-
---------------------------------------------------------------------------------
-
-Haskell to C# Walk-Through
---------------------------
-
-- [Basic monad functions](#haskell-basic)
-- [Generalisations of list functions](#haskell-list)
-- [Conditional execution of monadic expressions](#haskell-exec)
-- [Monadic lifting operators](#haskell-lift)
-- [Monad Plus](#haskell-plus)
-- [`Maybe` specific functions](#haskell-maybe)
-- [Further readings](#haskell-further)
-
-We will use the Maybe type as an example. Below we use:
-- `obj` for an object of type `Maybe<T>`.
-- `kunc` for a function of type `Func<T, Maybe<TResult>>`.
-- `seq` for an object of type `IEnumerable<T>`.
-- `mseq` for an object of type `IEnumerable<Maybe<T>>`
-
-All variants that return a `Maybe<Unit>` instead of a `Maybe<T>` (those that have
-a suffix `_`) are not implemented.
-
-Haskell | C# | Return Type
---------|----|------------
-`>>=`    | `obj.Bind`         | `Maybe<TResult>`
-`>>`     | `obj.ContinueWith` | `Maybe<TResult>`
-`return` | `Maybe.Of`         | `Maybe<T>`
-`fail`   | -                  | -
-`fmap`   | `obj.Select`       | `Maybe<TResult>`
-
-We do not implement `fail` as .NET has its own way of reporting errors.
-
-### <a name="haskell-basic"></a>Basic monad functions
-
-Haskell | C# | Return Type
---------|----|------------
-`mapM` / `mapM_`         | `Maybe.Map`        | `Maybe<IEnumerable<TResult>>`
-`forM` / `forM_`         | `kunc.InvokeWith`  | `Maybe<IEnumerable<TResult>>`
-`sequence` / `sequence_` | `Maybe.Collect`    | `Maybe<IEnumerable<T>>`
-`(=<<)`                  | `kunc.InvokeWith`  | `Maybe<TResult>`
-`(>=>)`                  | `kunc.Compose`     | `Func<T, Maybe<TResult>>`
-`(<=<)`                  | `kunc.ComposeBack` | `Func<T, Maybe<TResult>>`
-`forever`                | -                  | -
-`void`                   | `obj.Skip`         | `Maybe<Unit>`
-
-We do not make `Collect` and `Map` extension methods like any LINQ operator,
-because they are not composable:
-- `Collect` is `mseq.CollectAny` wrapped into a "maybe".
-- `Map` is `seq.Select` followed by `Maybe.Collect`.
-
-### <a name="haskell-list"></a>Generalisations of list functions
-
-Below `square` is an object of type `Maybe<Maybe<T>>`.
-
-Haskell | C# | Return Type
---------|----|------------
-`join`                       | `square.Flatten`    | `Maybe<T>`
-`filterM`                    | `Maybe.Filter`      | `Maybe<IEnumerable<T>>`
-`mapAndUnzipM`               | (`Maybe.MapUnzip`)  | (`Maybe<(IEnumerable<T1>, IEnumerable<T2>)>`)
-`zipWithM` / `zipWithM_`     | `Maybe.Zip`         | `Maybe<IEnumerable<TResult>>`
-`foldM` / `foldM_`           | `seq.Fold`          | `Maybe<TAccumulate>`
-`replicateM` / `replicateM_` | `Maybe.Repeat`      | `Maybe<IEnumerable<T>>`
-
-- `Filter` is `seq.WhereAny` wrapped into a "maybe".
-- `Zip` is `seq.Zip` followed by `Collect`.
-
-#### `MapUnzip`
-To quote the Haskell documentation, _`mapAndUnzipM` is mainly used with
-complicated data structures or a state-transforming monad_. If you really
-need it, it is easily implemented using `Select` and `Maybe.Map`:
-```csharp
-public static Maybe<(IEnumerable<T1>, IEnumerable<T2>)> MapUnzip<T, T1, T2>(
-    IEnumerable<T> source,
-    Func<TSource, Maybe<(T1, T2)>> selector) {
-
-    Maybe<IEnumerable<(T1, T2)>> seq = Maybe.Map(source, selector);
-
-    return seq.Select(q => {
-        IEnumerable<T1> q1 = q.Select(t => t.Item1);
-        IEnumerable<T2> q2 = q.Select(t => t.Item2);
-
-        return (q1, q2);
-    });
-}
-```
-
-### <a name="haskell-exec"></a>Conditional execution of monadic expressions
-
-Haskell | C# | Return Type
---------|----|------------
-`when`   | -             | -
-`unless` | -             | -
-
-### <a name="haskell-lift"></a>Monadic lifting operators
-
-Haskell | C# | Return Type
---------|----|------------
-`liftM`  | `Maybe.Lift` | `Func<Maybe<T>, Maybe<TResult>>`
-`liftM2` | `Maybe.Lift` | `Func<Maybe<T1>, Maybe<T2>, Maybe<TResult>>`
-`liftM3` | `Maybe.Lift` | `Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<TResult>>`
-`liftM4` | `Maybe.Lift` | `Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<T4>, Maybe<TResult>>`
-`liftM5` | `Maybe.Lift` | `Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<T4>, Maybe<T5>, Maybe<TResult>>`
-`ap`     | `obj.Gather` | `Maybe<TResult>`
-
-### <a name="haskell-plus"></a>Monad Plus
-
-Haskell | C# | Return Type
---------|----|------------
-`mzero`   | `Maybe<T>.None` | `Maybe<T>`
-`mplus`   | `obj.OrElse`    | `Maybe<T>`
-`msum`    | `mseq.Sum`      | `Maybe<IEnumerable<T>>`
-`mfilter` | `obj.Where`     | `Maybe<T>`
-`guard`   | `Maybe.Guard`   | `Maybe.Unit`
-
-### <a name="haskell-maybe"></a>`Maybe` specific functions
-
-Haskell | C# | Return Type
---------|----|------------
-`catMaybes`   | `mseq.CollectAny()`    | `Maybe<IEnumerable<T>>`
-`isJust`      | `obj.IsSome`           | `bool`
-`isNothing`   | `obj.IsNone`           | `bool`
-`fromMaybe`   |                        |
-`fromJust`    |                        |
-`maybeToList` | `obj.ToEnumerable()`   | `IEnumerable<T>`
-`maybe`       | `obj.Match()`          | `TResult`
-`listToMaybe` | `seq.FirstOrNone()`    | `Maybe<T>`
-`mapMaybe`    | `seq.SelectAny()`      | `IEnumerable<TResult>`
-
-### <a name="haskell-further"></a>Further readings
-- [The Haskell 98 Report](http://www.haskell.org/onlinereport/monad.html)
-- Haskell: [Data.Functor](https://hackage.haskell.org/package/base-4.9.1.0/docs/Data-Functor.html),
-  [Control.Applicative](https://hackage.haskell.org/package/base-4.9.1.0/docs/Control-Applicative.html)
-  and [Control.Monad](https://hackage.haskell.org/package/base-4.9.1.0/docs/Control-Monad.html)
 
 --------------------------------------------------------------------------------
 
@@ -1210,20 +1079,153 @@ nice, but the real big thing is Computation Expressions.
 
 --------------------------------------------------------------------------------
 
-Design Notes
-------------
+Haskell to C# Walk-Through
+--------------------------
 
-T4
+- [C# implementation](#haskell-impl)
+- [Core monad operations](#haskell-core)
+- [Basic monad functions](#haskell-basic)
+- [Generalisations of list functions](#haskell-list)
+- [Conditional execution of monadic expressions](#haskell-exec)
+- [Monadic lifting operators](#haskell-lift)
+- [Monad Plus](#haskell-plus)
+- [`Maybe` specific functions](#haskell-maybe)
+- [Further readings](#haskell-further)
 
-Extension methods
+### <a name="haskell-impl"></a>C# implementation
 
-Shadowing
+- T4
+- Extension methods
+- Shadowing
+
+### <a name="haskell-core"></a>Core monad operations
+
+We will use the Maybe type as an example and:
+- `obj` for an object of type `Maybe<T>`.
+- `kunc` for a function of type `Func<T, Maybe<TResult>>`.
+- `seq` for an object of type `IEnumerable<T>`.
+- `mseq` for an object of type `IEnumerable<Maybe<T>>`
+
+All variants that return a `Maybe<Unit>` instead of a `Maybe<T>` (those that have
+a suffix `_`) are not implemented.
+
+Haskell | C# | Return Type
+--------|----|------------
+`>>=`    | `obj.Bind`         | `Maybe<TResult>`
+`>>`     | `obj.ContinueWith` | `Maybe<TResult>`
+`return` | `Maybe.Of`         | `Maybe<T>`
+`fail`   | -                  | -
+`fmap`   | `obj.Select`       | `Maybe<TResult>`
+
+We do not implement `fail` as .NET has its own way of reporting errors.
+
+### <a name="haskell-basic"></a>Basic monad functions
+
+Haskell | C# | Return Type
+--------|----|------------
+`mapM` / `mapM_`         | `Maybe.Map`        | `Maybe<IEnumerable<TResult>>`
+`forM` / `forM_`         | `kunc.InvokeWith`  | `Maybe<IEnumerable<TResult>>`
+`sequence` / `sequence_` | `Maybe.Collect`    | `Maybe<IEnumerable<T>>`
+`(=<<)`                  | `kunc.InvokeWith`  | `Maybe<TResult>`
+`(>=>)`                  | `kunc.Compose`     | `Func<T, Maybe<TResult>>`
+`(<=<)`                  | `kunc.ComposeBack` | `Func<T, Maybe<TResult>>`
+`forever`                | -                  | -
+`void`                   | `obj.Skip`         | `Maybe<Unit>`
+
+We do not make `Collect` and `Map` extension methods like any LINQ operator,
+because they are not composable:
+- `Maybe.Collect` is `mseq.CollectAny` wrapped into a "maybe".
+- `Maybe.Map` is `seq.Select` followed by `Maybe.Collect`.
+
+### <a name="haskell-list"></a>Generalisations of list functions
+
+Below `square` is an object of type `Maybe<Maybe<T>>`.
+
+Haskell | C# | Return Type
+--------|----|------------
+`join`                       | `square.Flatten`    | `Maybe<T>`
+`filterM`                    | `Maybe.Filter`      | `Maybe<IEnumerable<T>>`
+`mapAndUnzipM`               | (`Maybe.MapUnzip`)  | (`Maybe<(IEnumerable<T1>, IEnumerable<T2>)>`)
+`zipWithM` / `zipWithM_`     | `Maybe.Zip`         | `Maybe<IEnumerable<TResult>>`
+`foldM` / `foldM_`           | `seq.Fold`          | `Maybe<TAccumulate>`
+`replicateM` / `replicateM_` | `Maybe.Repeat`      | `Maybe<IEnumerable<T>>`
+
+- `Maybe.Filter` is `seq.WhereAny` wrapped into a "maybe".
+- `Maybe.Zip` is `seq.Zip` followed by `Collect`.
+
+#### `MapUnzip`
+To quote the Haskell documentation, _`mapAndUnzipM` is mainly used with
+complicated data structures or a state-transforming monad_. If you really
+need it, it is easily implemented using `Select` and `Maybe.Map`:
+```csharp
+public static Maybe<(IEnumerable<T1>, IEnumerable<T2>)> MapUnzip<T, T1, T2>(
+    IEnumerable<T> source,
+    Func<TSource, Maybe<(T1, T2)>> selector) {
+
+    Maybe<IEnumerable<(T1, T2)>> seq = Maybe.Map(source, selector);
+
+    return seq.Select(q => {
+        IEnumerable<T1> q1 = q.Select(t => t.Item1);
+        IEnumerable<T2> q2 = q.Select(t => t.Item2);
+
+        return (q1, q2);
+    });
+}
+```
+
+### <a name="haskell-exec"></a>Conditional execution of monadic expressions
+
+Haskell | C# | Return Type
+--------|----|------------
+`when`   | - | -
+`unless` | - | -
+
+### <a name="haskell-lift"></a>Monadic lifting operators
+
+Haskell | C# | Return Type
+--------|----|------------
+`liftM`  | `Maybe.Lift` | `Func<Maybe<T>, Maybe<TResult>>`
+`liftM2` | `Maybe.Lift` | `Func<Maybe<T1>, Maybe<T2>, Maybe<TResult>>`
+`liftM3` | `Maybe.Lift` | `Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<TResult>>`
+`liftM4` | `Maybe.Lift` | `Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<T4>, Maybe<TResult>>`
+`liftM5` | `Maybe.Lift` | `Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<T4>, Maybe<T5>, Maybe<TResult>>`
+`ap`     | `obj.Gather` | `Maybe<TResult>`
+
+### <a name="haskell-plus"></a>Monad Plus
+
+Haskell | C# | Return Type
+--------|----|------------
+`mzero`   | `Maybe<T>.None` | `Maybe<T>`
+`mplus`   | `obj.OrElse`    | `Maybe<T>`
+`msum`    | `mseq.Sum`      | `Maybe<IEnumerable<T>>`
+`mfilter` | `obj.Where`     | `Maybe<T>`
+`guard`   | `Maybe.Guard`   | `Maybe.Unit`
+
+### <a name="haskell-maybe"></a>`Maybe` specific functions
+
+Haskell | C# | Return Type
+--------|----|------------
+`catMaybes`   | `mseq.CollectAny()`    | `IEnumerable<T>`
+`isJust`      | `obj.IsSome`           | `bool`
+`isNothing`   | `obj.IsNone`           | `bool`
+`fromMaybe`   | `obj.ValueOrElse()`    | `T`
+`fromJust`    | `obj.ValueOrThrow()`   |
+`maybeToList` | `obj.ToEnumerable()`   | `IEnumerable<T>`
+`maybe`       | `obj.Match()`          | `TResult`
+`listToMaybe` | `seq.FirstOrNone()`    | `Maybe<T>`
+`mapMaybe`    | `seq.SelectAny()`      | `IEnumerable<TResult>`
+
+### <a name="haskell-further"></a>Further readings
+- [The Haskell 98 Report](http://www.haskell.org/onlinereport/monad.html)
+- Haskell: [Data.Functor](https://hackage.haskell.org/package/base-4.9.1.0/docs/Data-Functor.html),
+  [Control.Applicative](https://hackage.haskell.org/package/base-4.9.1.0/docs/Control-Applicative.html)
+  and [Control.Monad](https://hackage.haskell.org/package/base-4.9.1.0/docs/Control-Monad.html)
 
 --------------------------------------------------------------------------------
 
 Changelog
 ---------
 
-Nothing until we reach 1.0.0.
+Nothing here until we reach 1.0.0.
 
 --------------------------------------------------------------------------------

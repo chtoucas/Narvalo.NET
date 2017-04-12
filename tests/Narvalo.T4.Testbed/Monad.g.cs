@@ -126,7 +126,7 @@ namespace Narvalo.T4.Testbed
         /// <summary>
         /// Promotes a function to use and return <see cref="Monad{T}" /> values.
         /// </summary>
-        /// <seealso cref="MonadExtensions.Select{T, TResult}" />
+        /// <seealso cref="MonadL.Select{T, TResult}" />
         public static Func<Monad<T>, Monad<TResult>> Lift<T, TResult>(
             Func<T, TResult> func)
             => arg =>
@@ -138,51 +138,51 @@ namespace Narvalo.T4.Testbed
         /// <summary>
         /// Promotes a function to use and return <see cref="Monad{T}" /> values.
         /// </summary>
-        /// <seealso cref="MonadExtensions.Zip{T1, T2, TResult}"/>
+        /// <seealso cref="MonadL.ZipWith{T1, T2, TResult}"/>
         public static Func<Monad<T1>, Monad<T2>, Monad<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> func)
             => (arg1, arg2) =>
             {
                 Require.NotNull(arg1, nameof(arg1));
-                return arg1.Zip(arg2, func);
+                return arg1.ZipWith(arg2, func);
             };
 
         /// <summary>
         /// Promotes a function to use and return <see cref="Monad{T}" /> values.
         /// </summary>
-        /// <seealso cref="MonadExtensions.Zip{T1, T2, T3, TResult}"/>
+        /// <seealso cref="MonadL.ZipWith{T1, T2, T3, TResult}"/>
         public static Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func)
             => (arg1, arg2, arg3) =>
             {
                 Require.NotNull(arg1, nameof(arg1));
-                return arg1.Zip(arg2, arg3, func);
+                return arg1.ZipWith(arg2, arg3, func);
             };
 
         /// <summary>
         /// Promotes a function to use and return <see cref="Monad{T}" /> values.
         /// </summary>
-        /// <seealso cref="MonadExtensions.Zip{T1, T2, T3, T4, TResult}"/>
+        /// <seealso cref="MonadL.ZipWith{T1, T2, T3, T4, TResult}"/>
         public static Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<T4>, Monad<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> func)
             => (arg1, arg2, arg3, arg4) =>
             {
                 Require.NotNull(arg1, nameof(arg1));
-                return arg1.Zip(arg2, arg3, arg4, func);
+                return arg1.ZipWith(arg2, arg3, arg4, func);
             };
 
         /// <summary>
         /// Promotes a function to use and return <see cref="Monad{T}" /> values.
         /// </summary>
-        /// <seealso cref="MonadExtensions.Zip{T1, T2, T3, T4, T5, TResult}"/>
+        /// <seealso cref="MonadL.ZipWith{T1, T2, T3, T4, T5, TResult}"/>
         public static Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<T4>, Monad<T5>, Monad<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> func)
             => (arg1, arg2, arg3, arg4, arg5) =>
             {
                 Require.NotNull(arg1, nameof(arg1));
-                return arg1.Zip(arg2, arg3, arg4, arg5, func);
+                return arg1.ZipWith(arg2, arg3, arg4, arg5, func);
             };
 
         #endregion
@@ -192,7 +192,7 @@ namespace Narvalo.T4.Testbed
     /// Provides extension methods for <see cref="Monad{T}"/>.
     /// </summary>
     // T4: EmitExtensions().
-    public static partial class MonadExtensions
+    public static partial class MonadL
     {
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
@@ -240,7 +240,7 @@ namespace Narvalo.T4.Testbed
             Monad<TOther> other)
         {
             Require.NotNull(@this, nameof(@this));
-            return @this.Zip(other, (arg, _) => arg);
+            return @this.ZipWith(other, (arg, _) => arg);
         }
 
         public static Monad<unit> Skip<TSource>(this Monad<TSource> @this)
@@ -249,10 +249,10 @@ namespace Narvalo.T4.Testbed
             return @this.ContinueWith(Monad.Unit);
         }
 
-        #region Zip()
+        #region ZipWith()
 
         /// <seealso cref="Monad.Lift{T1, T2, TResult}"/>
-        public static Monad<TResult> Zip<T1, T2, TResult>(
+        public static Monad<TResult> ZipWith<T1, T2, TResult>(
             this Monad<T1> @this,
             Monad<T2> second,
             Func<T1, T2, TResult> zipper)
@@ -267,7 +267,7 @@ namespace Narvalo.T4.Testbed
         }
 
         /// <seealso cref="Monad.Lift{T1, T2, T3, TResult}"/>
-        public static Monad<TResult> Zip<T1, T2, T3, TResult>(
+        public static Monad<TResult> ZipWith<T1, T2, T3, TResult>(
             this Monad<T1> @this,
             Monad<T2> second,
             Monad<T3> third,
@@ -283,14 +283,14 @@ namespace Narvalo.T4.Testbed
             // >     arg1 => second.Bind(
             // >        arg2 => third.Select(
             // >            arg3 => zipper(arg1, arg2, arg3))));
-            // but faster if Zip is locally shadowed.
+            // but faster if ZipWith is locally shadowed.
             return @this.Bind(
-                arg1 => second.Zip(
+                arg1 => second.ZipWith(
                     third, (arg2, arg3) => zipper(arg1, arg2, arg3)));
         }
 
         /// <seealso cref="Monad.Lift{T1, T2, T3, T4, TResult}"/>
-        public static Monad<TResult> Zip<T1, T2, T3, T4, TResult>(
+        public static Monad<TResult> ZipWith<T1, T2, T3, T4, TResult>(
              this Monad<T1> @this,
              Monad<T2> second,
              Monad<T3> third,
@@ -309,14 +309,14 @@ namespace Narvalo.T4.Testbed
             // >             arg3 => fourth.Select(
             // >                 arg4 => zipper(arg1, arg2, arg3, arg4)))));
             return @this.Bind(
-                arg1 => second.Zip(
+                arg1 => second.ZipWith(
                     third,
                     fourth,
                     (arg2, arg3, arg4) => zipper(arg1, arg2, arg3, arg4)));
         }
 
         /// <seealso cref="Monad.Lift{T1, T2, T3, T4, T5, TResult}"/>
-        public static Monad<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
+        public static Monad<TResult> ZipWith<T1, T2, T3, T4, T5, TResult>(
             this Monad<T1> @this,
             Monad<T2> second,
             Monad<T3> third,
@@ -338,7 +338,7 @@ namespace Narvalo.T4.Testbed
             // >                 arg4 => fifth.Select(
             // >                     arg5 => zipper(arg1, arg2, arg3, arg4, arg5))))));
             return @this.Bind(
-                arg1 => second.Zip(
+                arg1 => second.ZipWith(
                     third,
                     fourth,
                     fifth,
@@ -384,7 +384,7 @@ namespace Narvalo.T4.Testbed
             return @this.Bind(val => Monad<TResult>.η(selector(val)));
         }
 
-        // Generalizes both Bind() and Zip<T1, T2, TResult>().
+        // Generalizes both Bind() and ZipWith<T1, T2, TResult>().
         public static Monad<TResult> SelectMany<TSource, TMiddle, TResult>(
             this Monad<TSource> @this,
             Func<TSource, Monad<TMiddle>> selector,
@@ -404,14 +404,14 @@ namespace Narvalo.T4.Testbed
 
     // Provides EXPERIMENTAL extension methods for Monad<T>.
     // T4: EmitExtensionsExperimental().
-    public static partial class MonadExtensions
+    public static partial class MonadL
     {
         public static Monad<(T1, T2)> Zip<T1, T2>(
             this Monad<T1> @this,
             Monad<T2> other)
         {
             Require.NotNull(@this, nameof(@this));
-            return @this.Zip(other, ValueTuple.Create);
+            return @this.ZipWith(other, ValueTuple.Create);
         }
 
         public static Monad<TResult> Coalesce<TSource, TResult>(
@@ -428,10 +428,10 @@ namespace Narvalo.T4.Testbed
 
     /// <summary>
     /// Provides extension methods for functions in the Kleisli category:
-    /// <see cref="Func{TSource, TResult}"/> where TResult is of type <see cref="Monad{T}"/>.
+    /// <see cref="Func{TSource, TResult}"/> where <c>TResult</c> is of type <see cref="Monad{T}"/>.
     /// </summary>
     // T4: EmitKleisli().
-    public static partial class Kleisli
+    public static partial class MonadK
     {
         public static Monad<IEnumerable<TResult>> InvokeWith<TSource, TResult>(
             this Func<TSource, Monad<TResult>> @this,
@@ -478,7 +478,7 @@ namespace Narvalo.T4.Testbed.Internal
     // Provides default implementations for extension methods on IEnumerable<Monad<T>>.
     // You will certainly want to shadow them to improve performance.
     // T4: EmitEnumerableInternal().
-    internal static partial class EnumerableExtensions
+    internal static partial class MonadQImpl
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Monad<IEnumerable<TSource>> CollectImpl<TSource>(
@@ -509,7 +509,7 @@ namespace Narvalo.T4.Testbed.Internal
                 = item => (b, seq) => b ? seq.Append(item) : seq;
 
             Func<Monad<IEnumerable<TSource>>, TSource, Monad<IEnumerable<TSource>>> accumulator
-                = (mseq, item) => predicate(item).Zip(mseq, func(item));
+                = (mseq, item) => predicate(item).ZipWith(mseq, func(item));
 
             return source.Aggregate(seed, accumulator);
         }
@@ -524,9 +524,16 @@ namespace Narvalo.T4.Testbed.Linq
     using Narvalo.T4.Testbed;
     using Narvalo.T4.Testbed.Internal;
 
-    // Provides extension methods for IEnumerable<T> and IEnumerable<Monad<T>>.
+    /// <summary>
+    /// Provides a set of extension methods for querying objects that implement <see cref="IEnumerable{T}"/>.
+    /// </summary>
+    /// <remarks>
+    /// New LINQ operators:
+    /// - Projecting: SelectAny (deferred)
+    /// - Filtering: CollectAny (deferred), WhereAny (deferred)
+    /// - Aggregation: Fold, Reduce</remarks>
     // T4: EmitLinqCore().
-    public static partial class Aperators
+    public static partial class MonadQ
     {
         public static IEnumerable<TSource> CollectAny<TSource>(
             this IEnumerable<Monad<TSource>> source)
@@ -610,7 +617,7 @@ namespace Narvalo.T4.Testbed.Internal
     // and IEnumerable<Monad<T>>.
     // You will certainly want to shadow them to improve performance.
     // T4: EmitLinqInternal().
-    internal static partial class EnumerableExtensions
+    internal static partial class MonadQImpl
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static IEnumerable<TSource> CollectAnyImpl<TSource>(

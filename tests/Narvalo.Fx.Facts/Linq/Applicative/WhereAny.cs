@@ -10,7 +10,7 @@ namespace Narvalo.Linq.Applicative {
     using Assert = Narvalo.AssertExtended;
 
     // WhereAny for Either.
-    public partial class AperatorsFacts {
+    public partial class EnumerableFacts {
         [t("WhereAny() guards (Either).")]
         public static void WhereAny0a() {
             IEnumerable<int> nil = null;
@@ -32,7 +32,7 @@ namespace Narvalo.Linq.Applicative {
     }
 
     // WhereAny for Fallible.
-    public partial class AperatorsFacts {
+    public partial class EnumerableFacts {
         [t("WhereAny() guards (Fallible).")]
         public static void WhereAny0b() {
             IEnumerable<int> nil = null;
@@ -54,7 +54,7 @@ namespace Narvalo.Linq.Applicative {
     }
 
     // WhereAny for Maybe.
-    public partial class AperatorsFacts {
+    public partial class EnumerableFacts {
         [t("WhereAny() guards (Maybe).")]
         public static void WhereAny0c() {
             IEnumerable<int> nil = null;
@@ -76,7 +76,7 @@ namespace Narvalo.Linq.Applicative {
     }
 
     // WhereAny for Outcome.
-    public partial class AperatorsFacts {
+    public partial class EnumerableFacts {
         [t("WhereAny() guards (Outcome).")]
         public static void WhereAny0d() {
             IEnumerable<int> nil = null;
@@ -98,7 +98,7 @@ namespace Narvalo.Linq.Applicative {
     }
 
     // WhereAny for Result.
-    public partial class AperatorsFacts {
+    public partial class EnumerableFacts {
         [t("WhereAny() guards (Result).")]
         public static void WhereAny0e() {
             IEnumerable<int> nil = null;

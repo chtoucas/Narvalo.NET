@@ -65,7 +65,7 @@ public partial class MonadTemplate
             return left.Equals(right);
         }
 
-        [q("Lift() is Zip() (1).")]
+        [q("Lift() is ZipWith() (1).")]
         public static bool Lift02(int arg0, int arg1, int arg2, int arg3) {
             Func<int, int, long> zipper = (i, j) => arg2 * i + arg3 * j;
             var zipper1 = <#= Name #>.Lift<int, int, long<#= RTDecl #>>(zipper);
@@ -74,14 +74,14 @@ public partial class MonadTemplate
             var p1 = <#+ WriteFactory("int"); #>(arg1);
 
             var left = zipper1(p0, p1);
-            var right = p0.Zip(p1, zipper);
+            var right = p0.ZipWith(p1, zipper);
 
             return left.Equals(right);
         }
 
-        // NB: Lift01() but w/o using Zip as an extension method.
-        [q("Zip() is Lift() (1).")]
-        public static bool Zip02(int arg0, int arg1, int arg2, int arg3) {
+        // NB: Lift01() but w/o using ZipWith as an extension method.
+        [q("ZipWith() is Lift() (1).")]
+        public static bool ZipWith02(int arg0, int arg1, int arg2, int arg3) {
             Func<int, int, long> zipper = (i, j) => arg2 * i + arg3 * j;
             var zipper1 = <#= Name #>.Lift<int, int, long<#= RTDecl #>>(zipper);
 
@@ -89,12 +89,12 @@ public partial class MonadTemplate
             var p1 = <#+ WriteFactory("int"); #>(arg1);
 
             var left = zipper1(p0, p1);
-            var right = <#= ExtensionsClsName #>.Zip(p0, p1, zipper);
+            var right = <#= ExtensionsClsName #>.ZipWith(p0, p1, zipper);
 
             return left.Equals(right);
         }
 
-        [q("Lift() is Zip() (2).")]
+        [q("Lift() is ZipWith() (2).")]
         public static bool Lift03(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
             Func<int, int, int, long> zipper = (i, j, k) => arg3 * i + arg4 * j + arg5 * k;
             var zipper1 = <#= Name #>.Lift<int, int, int, long<#= RTDecl #>>(zipper);
@@ -104,13 +104,13 @@ public partial class MonadTemplate
             var p2 = <#+ WriteFactory("int"); #>(arg2);
 
             var left = zipper1(p0, p1, p2);
-            var right = p0.Zip(p1, p2, zipper);
+            var right = p0.ZipWith(p1, p2, zipper);
 
             return left.Equals(right);
         }
 
-        [q("Zip() is Lift() (2).")]
-        public static bool Zip03(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+        [q("ZipWith() is Lift() (2).")]
+        public static bool ZipWith03(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
             Func<int, int, int, long> zipper = (i, j, k) => arg3 * i + arg4 * j + arg5 * k;
             var zipper1 = <#= Name #>.Lift<int, int, int, long<#= RTDecl #>>(zipper);
 
@@ -119,12 +119,12 @@ public partial class MonadTemplate
             var p2 = <#+ WriteFactory("int"); #>(arg2);
 
             var left = zipper1(p0, p1, p2);
-            var right = <#= ExtensionsClsName #>.Zip(p0, p1, p2, zipper);
+            var right = <#= ExtensionsClsName #>.ZipWith(p0, p1, p2, zipper);
 
             return left.Equals(right);
         }
 
-        [q("Lift() is Zip() (3).")]
+        [q("Lift() is ZipWith() (3).")]
         public static bool Lift04(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
             Func<int, int, int, int, long> zipper = (i, j, k, l) => arg4 * i + arg5 * j + arg6 * k + arg7 * l;
             var zipper1 = <#= Name #>.Lift<int, int, int, int, long<#= RTDecl #>>(zipper);
@@ -135,13 +135,13 @@ public partial class MonadTemplate
             var p3 = <#+ WriteFactory("int"); #>(arg3);
 
             var left = zipper1(p0, p1, p2, p3);
-            var right = p0.Zip(p1, p2, p3, zipper);
+            var right = p0.ZipWith(p1, p2, p3, zipper);
 
             return left.Equals(right);
         }
 
-        [q("Zip() is Lift() (3).")]
-        public static bool Zip04(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
+        [q("ZipWith() is Lift() (3).")]
+        public static bool ZipWith04(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
             Func<int, int, int, int, long> zipper = (i, j, k, l) => arg4 * i + arg5 * j + arg6 * k + arg7 * l;
             var zipper1 = <#= Name #>.Lift<int, int, int, int, long<#= RTDecl #>>(zipper);
 
@@ -151,12 +151,12 @@ public partial class MonadTemplate
             var p3 = <#+ WriteFactory("int"); #>(arg3);
 
             var left = zipper1(p0, p1, p2, p3);
-            var right = <#= ExtensionsClsName #>.Zip(p0, p1, p2, p3, zipper);
+            var right = <#= ExtensionsClsName #>.ZipWith(p0, p1, p2, p3, zipper);
 
             return left.Equals(right);
         }
 
-        [q("Lift() is Zip() (4).")]
+        [q("Lift() is ZipWith() (4).")]
         public static bool Lift05(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9) {
             Func<int, int, int, int, int, long> zipper = (i, j, k, l, m) => arg5 * i + arg6 * j + arg7 * k + arg8 * l + arg9 * m;
             var zipper1 = <#= Name #>.Lift<int, int, int, int, int, long<#= RTDecl #>>(zipper);
@@ -168,13 +168,13 @@ public partial class MonadTemplate
             var p4 = <#+ WriteFactory("int"); #>(arg4);
 
             var left = zipper1(p0, p1, p2, p3, p4);
-            var right = p0.Zip(p1, p2, p3, p4, zipper);
+            var right = p0.ZipWith(p1, p2, p3, p4, zipper);
 
             return left.Equals(right);
         }
 
-        [q("Zip() is Lift() (4).")]
-        public static bool Zip05(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9) {
+        [q("ZipWith() is Lift() (4).")]
+        public static bool ZipWith05(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9) {
             Func<int, int, int, int, int, long> zipper = (i, j, k, l, m) => arg5 * i + arg6 * j + arg7 * k + arg8 * l + arg9 * m;
             var zipper1 = <#= Name #>.Lift<int, int, int, int, int, long<#= RTDecl #>>(zipper);
 
@@ -185,7 +185,7 @@ public partial class MonadTemplate
             var p4 = <#+ WriteFactory("int"); #>(arg4);
 
             var left = zipper1(p0, p1, p2, p3, p4);
-            var right = <#= ExtensionsClsName #>.Zip(p0, p1, p2, p3, p4, zipper);
+            var right = <#= ExtensionsClsName #>.ZipWith(p0, p1, p2, p3, p4, zipper);
 
             return left.Equals(right);
         }

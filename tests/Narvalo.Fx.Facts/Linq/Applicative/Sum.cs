@@ -7,6 +7,6 @@ namespace Narvalo.Linq.Applicative {
 
     using Xunit;
 
-    public partial class AperatorsFacts {
+    public partial class EnumerableFacts {
     }
 }
