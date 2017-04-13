@@ -28,7 +28,7 @@ namespace Narvalo.Applicative
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     [DebuggerTypeProxy(typeof(Fallible<>.DebugView))]
     public partial struct Fallible<T>
-        : IEquatable<Fallible<T>>, Internal.IEither<T, ExceptionDispatchInfo>, Internal.Iterable<T>
+        : IEquatable<Fallible<T>>, Internal.IResult<T, ExceptionDispatchInfo>, Internal.Iterable<T>
     {
         private readonly ExceptionDispatchInfo _error;
         private readonly T _value;
@@ -233,8 +233,6 @@ namespace Narvalo.Applicative
             return (comparer ?? EqualityComparer<T>.Default).Equals(Value, value);
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "1#", Justification = "[Intentionally] Internal interface.")]
         public TResult Match<TResult>(
             Func<T, TResult> caseSuccess,
             Func<ExceptionDispatchInfo, TResult> caseError)
@@ -245,8 +243,6 @@ namespace Narvalo.Applicative
             return IsSuccess ? caseSuccess(Value) : caseError(Error);
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#", Justification = "[Intentionally] Internal interface.")]
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "1#", Justification = "[Intentionally] Internal interface.")]
         public void Do(Action<T> onSuccess, Action<ExceptionDispatchInfo> onError)
         {
             Require.NotNull(onSuccess, nameof(onSuccess));

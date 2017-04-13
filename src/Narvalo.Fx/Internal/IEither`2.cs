@@ -10,6 +10,7 @@ namespace Narvalo.Internal
     /// </summary>
     /// <typeparam name="TLeft">The type of the underlying left value of the sum.</typeparam>
     /// <typeparam name="TRight">The type of the underlying right value of the sum.</typeparam>
+    // **WARNING** If we update this interface, we should mirror the modifications in IResult<T, TError>.
     internal interface IEither<TLeft, TRight> : IContainer<TLeft>, ISecondaryContainer<TRight>
     {
         TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight);
