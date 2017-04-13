@@ -205,19 +205,6 @@ namespace Narvalo.Applicative
             => square.IsSuccess ? square.Value : FromError(square.Error);
     }
 
-    // Query Expression Pattern.
-    public partial struct Fallible<T>
-    {
-        // Fallible<T> is not a MonadOr but we can still construct a Where() operator.
-        // It is weird that it works (filter is not a predicate) but it does.
-        public Fallible<T> Where(Func<T, Fallible> filter)
-        {
-            Require.NotNull(filter, nameof(filter));
-
-            return Bind(val => filter(val).ReplaceBy(val));
-        }
-    }
-
     // Implements the Internal.IEither<T, ExceptionDispatchInfo> interface.
     public partial struct Fallible<T>
     {
