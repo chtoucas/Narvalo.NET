@@ -60,7 +60,9 @@ Narvalo.Fx
 ----------
 
 - T4: If the monad is nullable, check that we handle all null's. Auto-generate
-  tests for null-guards (affects only `Either<T1, T2>`).
+  tests for null-guards. Affects only `Either<T1, T2>` <- we should check
+  that the behaviour in Either.Shadowing is the same as in the auto-generated
+  file (currently it is not the case for `SelectMany`).
 - Explain `Bind` and `Select` for `Outcome` and `Fallible`,
   `Where` for `Outcome<T>` and `Fallible<T>` (by the way, it seems weird now)?
 - Could we simplify LINQ for `Maybe<T?>`?
