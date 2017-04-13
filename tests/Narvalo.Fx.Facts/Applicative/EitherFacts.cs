@@ -433,24 +433,13 @@ namespace Narvalo.Applicative {
 
     // Tests for the monadic methods.
     public static partial class EitherFacts {
-        [t("SelectLeft() guards.")]
-        public static void SelectLeft0() {
-            Either<int, int> nil = null;
-            Func<int, int> selector = x => x;
-            Assert.Throws<ArgumentNullException>("this", () => nil.SelectLeft(selector));
-
-            Either<int, int> either = Either<int, int>.OfLeft(1);
-            Assert.Throws<ArgumentNullException>("selector", () => either.SelectLeft(default(Func<int, int>)));
-        }
-
         [t("SelectRight() guards.")]
         public static void SelectRight0() {
-            Either<int, int> nil = null;
-            Func<int, int> selector = x => x;
-            Assert.Throws<ArgumentNullException>("this", () => nil.SelectRight(selector));
+            Either<int, int> lefty = Either<int, int>.OfLeft(1);
+            Assert.DoesNotThrow(() => lefty.SelectRight(default(Func<int, int>)));
 
-            Either<int, int> either = Either<int, int>.OfLeft(1);
-            Assert.Throws<ArgumentNullException>("selector", () => either.SelectRight(default(Func<int, int>)));
+            Either<int, int> righty = Either<int, int>.OfRight(1);
+            Assert.Throws<ArgumentNullException>("selector", () => righty.SelectRight(default(Func<int, int>)));
         }
 
         [t("Flatten() returns inner 'orientation' if lefty.")]
@@ -471,39 +460,39 @@ namespace Narvalo.Applicative {
             Assert.True(result.IsRight);
         }
 
-        [t("FlattenLeft() returns inner 'orientation' if lefty.")]
+        [t("Flatten() returns inner 'orientation' if lefty.")]
         public static void FlattenLeft1() {
             var leftleft = Either<Either<int, int>, int>.OfLeft(Either<int, int>.OfLeft(1));
-            var result1 = Either.FlattenLeft(leftleft);
+            var result1 = EitherL.Flatten(leftleft);
             Assert.True(result1.IsLeft);
 
             var leftright = Either<Either<int, int>, int>.OfLeft(Either<int, int>.OfRight(1));
-            var result2 = Either.FlattenLeft(leftright);
+            var result2 = EitherL.Flatten(leftright);
             Assert.True(result2.IsRight);
         }
 
-        [t("FlattenLeft() returns righty if righty.")]
+        [t("Flatten() returns righty if righty.")]
         public static void FlattenLeft2() {
             var right = Either<Either<int, int>, int>.OfRight(1);
-            var result = Either.FlattenLeft(right);
+            var result = EitherL.Flatten(right);
             Assert.True(result.IsRight);
         }
 
-        [t("FlattenRight() returns inner 'orientation' if righty.")]
+        [t("Flatten() returns inner 'orientation' if righty.")]
         public static void FlattenRight1() {
             var rightright = Either<int, Either<int, int>>.OfRight(Either<int, int>.OfRight(1));
-            var result1 = Either.FlattenRight(rightright);
+            var result1 = EitherL.Flatten(rightright);
             Assert.True(result1.IsRight);
 
             var rightleft = Either<int, Either<int, int>>.OfRight(Either<int, int>.OfLeft(1));
-            var result2 = Either.FlattenRight(rightleft);
+            var result2 = EitherL.Flatten(rightleft);
             Assert.True(result2.IsLeft);
         }
 
-        [t("FlattenRight() returns lefty if lefty.")]
+        [t("Flatten() returns lefty if lefty.")]
         public static void FlattenRight2() {
             var left = Either<int, Either<int, int>>.OfLeft(1);
-            var result = Either.FlattenRight(left);
+            var result = EitherL.Flatten(left);
             Assert.True(result.IsLeft);
         }
     }

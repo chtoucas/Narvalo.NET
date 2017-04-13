@@ -202,18 +202,18 @@ namespace Narvalo.Applicative {
         [t("Flatten() returns NOK if NOK.")]
         public static void FlattenError1() {
             var nok = Result<Obj, Result<Obj, string>>.FromError(Result<Obj, string>.FromError("error"));
-            var result = Result.FlattenError(nok);
+            var result = ResultL.Flatten(nok);
             Assert.True(result.IsError);
         }
 
         [t("Flatten() returns OK if OK.")]
         public static void FlattenError2() {
             var ok1 = Result<Obj, Result<Obj, string>>.FromError(Result<Obj, string>.Of(new Obj()));
-            var result1 = Result.FlattenError(ok1);
+            var result1 = ResultL.Flatten(ok1);
             Assert.True(result1.IsSuccess);
 
             var ok2 = Result<Obj, Result<Obj, string>>.Of(new Obj());
-            var result2 = Result.FlattenError(ok2);
+            var result2 = ResultL.Flatten(ok2);
             Assert.True(result2.IsSuccess);
         }
     }

@@ -5,14 +5,17 @@ namespace Narvalo.Applicative
     using System.Collections.Generic;
     using System.Linq;
 
-    // Provides extension methods for Maybe<T?> or Maybe<T> where T is a struct.
     public static partial class Maybe
     {
         // Conversion from T? to Maybe<T>.
         // NB: This method makes it impossible to create a Maybe<T?> **directly**.
         public static Maybe<T> Of<T>(T? value) where T : struct
             => value.HasValue ? Of(value.Value) : Maybe<T>.None;
+    }
 
+    // Provides extension methods for Maybe<T?> or Maybe<T> where T is a struct.
+    public static partial class MaybeL
+    {
         // Conversion from Maybe<T?> to  Maybe<T>.
         public static Maybe<T> Squash<T>(this Maybe<T?> @this) where T : struct
             // NB: When IsSome is true, Value.HasValue is always true,
@@ -39,7 +42,7 @@ namespace Narvalo.Applicative
 #endif
     }
 
-    public static partial class Maybe
+    public static partial class MaybeL
     {
         public static IEnumerable<T> ValueOrEmpty<T>(this Maybe<IEnumerable<T>> @this)
             => @this.IsSome ? @this.Value : Enumerable.Empty<T>();

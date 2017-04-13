@@ -8,10 +8,10 @@ namespace Narvalo.Applicative
     public static partial class Result
     {
         [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible", Justification = "[Intentionally] Fluent API.")]
-        public static class OfError<TError>
+        public static class OfTError<TError>
         {
             [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Intentionally] A static method in a static class won't help.")]
-            public static Result<T, TError> Return<T>(T value) => Result<T, TError>.Of(value);
+            public static Result<T, TError> Of<T>(T value) => Result<T, TError>.Of(value);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible", Justification = "[Intentionally] Fluent API.")]
@@ -22,15 +22,12 @@ namespace Narvalo.Applicative
         }
     }
 
-    public static partial class Result
+    public static partial class ResultL
     {
-        public static Result<T, TError> FlattenError<T, TError>(Result<T, Result<T, TError>> square)
+        public static Result<T, TError> Flatten<T, TError>(
+            this Result<T, Result<T, TError>> square)
             => Result<T, TError>.FlattenError(square);
-    }
 
-    // Provides extension methods for Result<T, TError> where TError is of type Exception.
-    public static partial class Result
-    {
         public static void ThrowIfError<T, TException>(this Result<T, TException> @this)
             where TException : Exception
         {

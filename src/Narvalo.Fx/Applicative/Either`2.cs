@@ -212,66 +212,71 @@ namespace Narvalo.Applicative
     // Provides the core Monad methods + minimalist implementation of a Monad on the right.
     public partial class Either<TLeft, TRight>
     {
-        public Either<TResult, TRight> Bind<TResult>(Func<TLeft, Either<TResult, TRight>> leftBinder)
-            => BindLeft(leftBinder);
-
-        public abstract Either<TResult, TRight> BindLeft<TResult>(Func<TLeft, Either<TResult, TRight>> binder);
+        public abstract Either<TResult, TRight> Bind<TResult>(Func<TLeft, Either<TResult, TRight>> binder);
 
         public abstract Either<TLeft, TResult> BindRight<TResult>(Func<TRight, Either<TLeft, TResult>> binder);
 
+        public abstract Either<TLeft, TResult> SelectRight<TResult>(Func<TRight, TResult> selector);
+
         // NB: This method is normally internal, but Either<TLeft, TRight>.OfLeft() is more readable
         // than Either.OfLeft<TLeft, TRight>() - no type inference.
-        // See also Either.Left<TRight>.Return(TLeft).
+        // See also Either.OfTRight<TRight>.OfLeft(TLeft).
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Intentionally] A static method in a static class won't help.")]
         public static Either<TLeft, TRight> OfLeft(TLeft leftValue) => new Left_(leftValue);
 
         // NB: This method is normally internal, but Either<TLeft, TRight>.OfRight() is more readable
         // than Either.OfRight<TLeft, TRight>() - no type inference.
-        // See also Either.Right<TLeft>.Return(TRight).
+        // See also Either.OfTLeft<TLeft>.OfRight(TRight).
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Intentionally] A static method in a static class won't help.")]
-        public static Either<TLeft, TRight> OfRight(TRight value) => new Right_(value);
+        public static Either<TLeft, TRight> OfRight(TRight rightValue) => new Right_(rightValue);
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Either<TLeft, TRight> μ(Either<Either<TLeft, TRight>, TRight> square)
         {
             Require.NotNull(square, nameof(square));
-
             return square.IsLeft ? square.Left : OfRight(square.Right);
         }
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static Either<TLeft, TRight> FlattenRight(Either<TLeft, Either<TLeft, TRight>> square)
+        internal static Either<TLeft, TRight> μ(Either<TLeft, Either<TLeft, TRight>> square)
         {
             Require.NotNull(square, nameof(square));
-
             return square.IsRight ? square.Right : OfLeft(square.Left);
         }
 
         private partial class Left_
         {
-            public override Either<TResult, TRight> BindLeft<TResult>(Func<TLeft, Either<TResult, TRight>> binder)
+            public override Either<TResult, TRight> Bind<TResult>(Func<TLeft, Either<TResult, TRight>> binder)
             {
                 Require.NotNull(binder, nameof(binder));
-
                 return binder(Left);
             }
 
             public override Either<TLeft, TResult> BindRight<TResult>(Func<TRight, Either<TLeft, TResult>> binder)
                 => Either<TLeft, TResult>.OfLeft(Left);
+
+            public override Either<TLeft, TResult> SelectRight<TResult>(Func<TRight, TResult> selector)
+                => Either<TLeft, TResult>.OfLeft(Left);
+
         }
 
         private partial class Right_
         {
-            public override Either<TResult, TRight> BindLeft<TResult>(Func<TLeft, Either<TResult, TRight>> binder)
+            public override Either<TResult, TRight> Bind<TResult>(Func<TLeft, Either<TResult, TRight>> binder)
                 => Either<TResult, TRight>.OfRight(Right);
 
             public override Either<TLeft, TResult> BindRight<TResult>(Func<TRight, Either<TLeft, TResult>> binder)
             {
                 Require.NotNull(binder, nameof(binder));
-
                 return binder(Right);
+            }
+
+            public override Either<TLeft, TResult> SelectRight<TResult>(Func<TRight, TResult> selector)
+            {
+                Require.NotNull(selector, nameof(selector));
+                return Either<TLeft, TResult>.OfRight(selector(Right));
             }
         }
     }

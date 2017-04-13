@@ -26,7 +26,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Comonad`1.cs" />
-    <Compile Include="Internal\Enumerable%24.cs" />
     <Compile Include="Monad.g.cs">
       <DependentUpon>Monad.tt</DependentUpon>
       <AutoGen>True</AutoGen>

@@ -165,7 +165,7 @@ namespace Narvalo.Applicative
 
         // NB: This method is normally internal, but Result<T, TError>.Of() is more readable
         // than Result.Of<T, TError>() - no type inference.
-        // See also Result.Succcess<TError>.Return(T);
+        // See also Result.OfTError<TError>.Of(T);
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Intentionally] A static method in a static class won't help.")]
         public static Result<T, TError> Of(T value) => new Result<T, TError>(value);
 
@@ -194,7 +194,7 @@ namespace Narvalo.Applicative
 
         // NB: This method is normally internal, but Result<T, TError>.FromError() is more readable
         // than Result.FromError<T, TError>() - no type inference.
-        // See also Result.Error<T>.Return(TError);
+        // See also Result.OfType<T>.FromError(TError);
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Intentionally] A static method in a static class won't help.")]
         public static Result<T, TError> FromError(TError error)
         {

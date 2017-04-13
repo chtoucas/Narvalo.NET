@@ -2,13 +2,12 @@
 
 namespace Narvalo.Applicative
 {
-    using System;
     using System.Diagnostics.CodeAnalysis;
 
     public static partial class Either
     {
         [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible", Justification = "[Intentionally] Fluent API.")]
-        public static class OfRight<TRight>
+        public static class OfTRight<TRight>
         {
             [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Intentionally] A static method in a static class won't help.")]
             public static Either<TLeft, TRight> OfLeft<TLeft>(TLeft leftValue)
@@ -16,7 +15,7 @@ namespace Narvalo.Applicative
         }
 
         [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible", Justification = "[Intentionally] Fluent API.")]
-        public static class OfLeft<TLeft>
+        public static class OfTLeft<TLeft>
         {
             [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Intentionally] A static method in a static class won't help.")]
             public static Either<TLeft, TRight> OfRight<TRight>(TRight rightValue)
@@ -24,36 +23,10 @@ namespace Narvalo.Applicative
         }
     }
 
-    public static partial class Either
+    public static partial class EitherL
     {
-        public static Either<TLeft, TRight> FlattenLeft<TLeft, TRight>(Either<Either<TLeft, TRight>, TRight> square)
+        public static Either<TLeft, TRight> Flatten<TLeft, TRight>(
+            this Either<TLeft, Either<TLeft, TRight>> square)
             => Either<TLeft, TRight>.μ(square);
-
-        public static Either<TLeft, TRight> FlattenRight<TLeft, TRight>(Either<TLeft, Either<TLeft, TRight>> square)
-            => Either<TLeft, TRight>.FlattenRight(square);
-    }
-
-    // Provides extension methods for Either<TLeft, TRight>.
-    public static partial class Either
-    {
-        public static Either<TResult, TRight> SelectLeft<TLeft, TRight, TResult>(
-            this Either<TLeft, TRight> @this,
-            Func<TLeft, TResult> selector)
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(selector, nameof(selector));
-
-            return @this.BindLeft(val => Either<TResult, TRight>.OfLeft(selector(val)));
-        }
-
-        public static Either<TLeft, TResult> SelectRight<TLeft, TRight, TResult>(
-            this Either<TLeft, TRight> @this,
-            Func<TRight, TResult> selector)
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(selector, nameof(selector));
-
-            return @this.BindRight(val => Either<TLeft, TResult>.OfRight(selector(val)));
-        }
     }
 }
