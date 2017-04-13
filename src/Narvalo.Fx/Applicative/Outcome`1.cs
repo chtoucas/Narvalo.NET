@@ -150,7 +150,6 @@ namespace Narvalo.Applicative
     // Core Monad methods.
     public partial struct Outcome<T>
     {
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "[Intentionally] Raison d'être of this method.")]
         public Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> binder)
         {
             Require.NotNull(binder, nameof(binder));
