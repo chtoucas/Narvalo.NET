@@ -66,7 +66,6 @@ Narvalo.Fx
   `Where` for `Outcome<T>` and `Fallible<T>` (by the way, it seems weird now)?
 - Sync all shadows.
 - Could we simplify LINQ for `Maybe<T?>`?
-- Remove `GroupJoin` for monads?
 
 Next:
 - Add async and lazy alternatives?
@@ -77,6 +76,10 @@ Next:
 - Add tests for purity?
 - More recursion helpers: trampoline + other Y Combinators.
 - Custom `is` operators (it is in the proposal but it is not yet possible).
+- More Haskell API,
+  * `When`, `Forever` & co? See experimental extensions in Narvalo.T4.
+  * Enable `GroupJoin` for monads? Do not forget to enable it in
+    `EmitMonadGuards` too.
 - Deconstruction for `Maybe<T?>`,
 ```csharp
 public static void Deconstruct<T>(
@@ -94,7 +97,6 @@ public static void Deconstruct<T>(
 - For `IStructuralEquatable.Equals` whe throw when the comparer is null, is it
   the correct behaviour?
 - Add other monads - prototypes [here](https://github.com/chtoucas/Brouillons/tree/master/src/play/Functional/Monadic)
-- More Haskell API, eg When, Forever & co?
 - [Idioms](http://tomasp.net/blog/idioms-in-linq.aspx/)
 
 Narvalo.Money

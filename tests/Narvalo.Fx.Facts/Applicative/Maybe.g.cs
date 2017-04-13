@@ -188,6 +188,7 @@ namespace Narvalo.Applicative {
                 () => MaybeL.Join(source, inner, outerKeySelector, innerKeySelector, (Func<int, int, int>)null));
         }
 
+        /* DISABLED: GroupJoin() is currently disabled.
         [t("GroupJoin() guards.")]
         public static void GroupJoin0() {
             var source = Maybe<int>.η(1);
@@ -211,6 +212,7 @@ namespace Narvalo.Applicative {
             Assert.Throws<ArgumentNullException>("resultSelector",
                 () => MaybeL.GroupJoin(source, inner, outerKeySelector, innerKeySelector, (Func<int, Maybe<int>, int>)null));
         }
+        */
     }
 
 #endif

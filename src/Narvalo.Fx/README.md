@@ -541,7 +541,6 @@ Method | C# Query Expression Syntax
 `Where`      | `where`
 `SelectMany` | Multiple `from` clauses.
 `Join`       | `join ... in ... on ... equals ...`
-`GroupJoin`  | `join ... in ... on ... equals ... into ...`
 
 #### `Select`
 If `maybe` is of type `Maybe<T>` and `selector` is a generic delegate
@@ -580,8 +579,6 @@ where `q` is of type `Maybe<T>`.
 #### `SelectMany`
 
 #### `Join`
-
-#### `GroupJoin`
 
 #### <a name="maybe-linq"></a>LINQ to Objects
 Using `ToEnumerable` allows to mix the above operators with those from LINQ to
@@ -705,7 +702,7 @@ var failure = Fallible<int>.FromError(edi);
 var success = Result<int, Error>.Of(1);
 var failure = Result<int, Error>.FromError(new Error());
 ```
-
+"Fluent" syntax:
 ```csharp
 var success = Result.Ok<Error>.Return(1);
 var failure = Result.Error<int>.Return(new Error());
@@ -737,6 +734,11 @@ The either type is the simplest possible
 var left = Either<int, long>.OfLeft(1);
 var right = Either<int, long>.OfRight(1L);
 ```
+"Fluent" syntax:
+```csharp
+var left = Either.Left<long>.Return(1);
+var right = Either.Right<int>.Return(1L);
+```
 
 ```csharp
 (bool isLeft, TLeft left, TRight right) = either;
@@ -748,8 +750,8 @@ var right = Either<int, long>.OfRight(1L);
 
 ### <a name="either-binding"></a>Binding
 
-[WARNING A Left and a Right do not handle arg-check the same way, for instance
-`WhenLeft` will check args when it is lefty, not when it is righty]
+[WARNING: Left's and Right's do not handle arg-check the same way, for instance
+`OnLeft` will check args when it is lefty, not when it is righty]
 
 --------------------------------------------------------------------------------
 

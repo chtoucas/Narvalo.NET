@@ -329,39 +329,6 @@ public partial class MonadTemplate
             return @this.SelectMany(valueSelector, resultSelector);
         }
 
-        public static <#= Name #><TResult> GroupJoin<TSource, TInner, TKey, TResult>(
-            this <#= Name #><TSource> @this,
-            <#= Name #><TInner> inner,
-            Func<TSource, TKey> outerKeySelector,
-            Func<TInner, TKey> innerKeySelector,
-            Func<TSource, <#= Name #><TInner>, TResult> resultSelector)
-            => @this.GroupJoin(
-                inner,
-                outerKeySelector,
-                innerKeySelector,
-                resultSelector,
-                null);
-
-        public static <#= Name #><TResult> GroupJoin<TSource, TInner, TKey, TResult>(
-            this <#= Name #><TSource> @this,
-            <#= Name #><TInner> inner,
-            Func<TSource, TKey> outerKeySelector,
-            Func<TInner, TKey> innerKeySelector,
-            Func<TSource, <#= Name #><TInner>, TResult> resultSelector,
-            IEqualityComparer<TKey> comparer)
-        {
-            <#+ WriteNotNull(); #>
-            <#+ WriteNotNull("inner"); #>
-            Require.NotNull(resultSelector, nameof(resultSelector));
-            Require.NotNull(outerKeySelector, nameof(outerKeySelector));
-            Require.NotNull(innerKeySelector, nameof(innerKeySelector));
-
-            var lookup = GetKeyLookup(inner, innerKeySelector, comparer);
-            Func<TSource, <#= Name #><TInner>> selector = outer => lookup(outerKeySelector(outer));
-
-            return @this.Select(outer => resultSelector(outer, selector(outer)));
-        }
-
         private static Func<TKey, <#= Name #><TInner>> GetKeyLookup<TInner, TKey>(
             <#= Name #><TInner> inner,
             Func<TInner, TKey> innerKeySelector,

@@ -21,7 +21,7 @@ namespace Narvalo.Applicative
         }
     }
 
-    // Query Expression Pattern for nullables.
+    // Query Expression Pattern.
     public static partial class Qullable
     {
         public static TSource? Where<TSource>(

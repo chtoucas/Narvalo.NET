@@ -408,39 +408,6 @@ namespace Narvalo.Applicative
             return @this.SelectMany(valueSelector, resultSelector);
         }
 
-        public static Maybe<TResult> GroupJoin<TSource, TInner, TKey, TResult>(
-            this Maybe<TSource> @this,
-            Maybe<TInner> inner,
-            Func<TSource, TKey> outerKeySelector,
-            Func<TInner, TKey> innerKeySelector,
-            Func<TSource, Maybe<TInner>, TResult> resultSelector)
-            => @this.GroupJoin(
-                inner,
-                outerKeySelector,
-                innerKeySelector,
-                resultSelector,
-                null);
-
-        public static Maybe<TResult> GroupJoin<TSource, TInner, TKey, TResult>(
-            this Maybe<TSource> @this,
-            Maybe<TInner> inner,
-            Func<TSource, TKey> outerKeySelector,
-            Func<TInner, TKey> innerKeySelector,
-            Func<TSource, Maybe<TInner>, TResult> resultSelector,
-            IEqualityComparer<TKey> comparer)
-        {
-            /* T4: NotNull(@this) */
-            /* T4: NotNull(inner) */
-            Require.NotNull(resultSelector, nameof(resultSelector));
-            Require.NotNull(outerKeySelector, nameof(outerKeySelector));
-            Require.NotNull(innerKeySelector, nameof(innerKeySelector));
-
-            var lookup = GetKeyLookup(inner, innerKeySelector, comparer);
-            Func<TSource, Maybe<TInner>> selector = outer => lookup(outerKeySelector(outer));
-
-            return @this.Select(outer => resultSelector(outer, selector(outer)));
-        }
-
         private static Func<TKey, Maybe<TInner>> GetKeyLookup<TInner, TKey>(
             Maybe<TInner> inner,
             Func<TInner, TKey> innerKeySelector,

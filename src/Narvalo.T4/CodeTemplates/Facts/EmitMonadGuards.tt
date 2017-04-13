@@ -148,6 +148,7 @@ public partial class MonadTemplate
                 () => <#= ExtensionsClsName #>.Join(source, inner, outerKeySelector, innerKeySelector, (Func<int, int, int>)null));
         }
 
+        /* DISABLED: GroupJoin() is currently disabled.
         [t("GroupJoin() guards.")]
         public static void GroupJoin0() {
             var source = <#+ WriteFactory("int"); #>(1);
@@ -171,6 +172,7 @@ public partial class MonadTemplate
             Assert.Throws<ArgumentNullException>("resultSelector",
                 () => <#= ExtensionsClsName #>.GroupJoin(source, inner, outerKeySelector, innerKeySelector, (Func<int, <#= Name #><int>, int>)null));
         }
+        */
 <#+ } // T4: End of HasJoin. #>
     }
 <#+ if (!HasRightGenerics) { #>
