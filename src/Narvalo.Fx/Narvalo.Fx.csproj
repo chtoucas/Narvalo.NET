@@ -60,7 +60,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Applicative\Kleisli.cs" />
     <Compile Include="Applicative\Result.cs" />
     <Compile Include="Applicative\Result.g.cs">
       <DependentUpon>Result.tt</DependentUpon>
