@@ -25,7 +25,7 @@ he', car il est en cours d'utilisation par un autre processus. [I:\github\Narval
 - [Low] Update CodeFormatter when it supports C# 7.0. After that, change
   from `format-code.cmd` to `format-code.ps1`.
 - [Low] Add a "dry run" option to NuGetAgent.
-- [Low] Enable continuous integration (Travis, AppVeyor, Coverall, Readthedoc, GitLink)?
+- [Low] Enable CI (Travis, AppVeyor, Coverall, Readthedoc, GitLink)?
 
 ### Migration to .NET Standard projects.
 - Pending: support for Code Analysis (I really want this).
@@ -61,26 +61,27 @@ Narvalo.Fx
 
 - T4: If the monad is nullable, check that we handle all null's. Auto-generate
   tests for null-guards (affects only `Either<T1, T2>`).
-- Review `Outcome` and `Fallible`.
 - Explain `Bind` and `Select` for `Outcome` and `Fallible`,
   `Where` for `Outcome<T>` and `Fallible<T>` (by the way, it seems weird now)?
 - Sync all shadows.
 - Could we simplify LINQ for `Maybe<T?>`?
 
 Next:
-- Add async and lazy alternatives?
 - LINQ: `FoldBack` and `ReduceBack`. Mimic Rx operators: `Scan`, `MinBy`,
   `MaxBy`...? (see also F#) I am sure we can improve the default implementations
   for `CollectAny`, `SelectAny` and `WhereAny`.
-- Add operators on the right for `Either<T1, T2>`?
-- Add tests for purity?
-- More recursion helpers: trampoline + other Y Combinators.
-- Custom `is` operators (it is in the proposal but it is not yet possible).
-- More Haskell API,
-  * `When`, `Forever` & co? See experimental extensions in Narvalo.T4.
+- Enhance existing types:
+  * More recursion helpers: trampoline + other Y Combinators.
+  * Add tests for purity?
+  * Add async and lazy alternatives?
+  * More Haskell API, `When`, `Forever` & co? See experiments in Narvalo.T4.
   * Enable `GroupJoin` for monads? Do not forget to enable it in
     `EmitMonadGuards` too.
-- Deconstruction for `Maybe<T?>`,
+  * Add operators on the right for `Either<T1, T2>`?
+  * Add more monad-like ops to `Outcome` and `Fallible`.
+  * Custom `is` operators (it is in the proposal but it is not yet possible).
+- Open questions:
+  * Deconstruction for `Maybe<T?>`,
 ```csharp
 public static void Deconstruct<T>(
     this Maybe<T?> @this,
@@ -92,10 +93,10 @@ public static void Deconstruct<T>(
     value = @this.IsSome ? @this.Value.Value : default(T);
 }
 ```
-  this is perfectly legal but will always be ignored in favor of the
-  deconstructor method on `Maybe<T?>`.
-- For `IStructuralEquatable.Equals` whe throw when the comparer is null, is it
-  the correct behaviour?
+    this is perfectly legal but will always be ignored in favor of the
+    deconstructor method in `Maybe<T?>`.
+  * For `IStructuralEquatable.Equals` whe throw when the comparer is null, is it
+    the correct behaviour?
 - Add other monads - prototypes [here](https://github.com/chtoucas/Brouillons/tree/master/src/play/Functional/Monadic)
 - [Idioms](http://tomasp.net/blog/idioms-in-linq.aspx/)
 
