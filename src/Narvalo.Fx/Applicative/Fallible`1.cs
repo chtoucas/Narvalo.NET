@@ -19,9 +19,8 @@ namespace Narvalo.Applicative
     /// value or the exception state at the point it was thrown.
     /// </summary>
     /// <remarks>
-    /// <para>We do not catch exceptions throw by any supplied delegate; there is only one exception
-    /// though: <see cref="Fallible{T}.Select{TResult}(Func{T, TResult})"/>. A good pratice is that
-    /// a function that returns a <see cref="Fallible{T}"/> does not normally throw.</para>
+    /// <para>We do not catch exceptions throw by any supplied delegate. A good pratice is that
+    /// a delegate should not normally throw.</para>
     /// <para>This class is not meant to replace the standard exception mechanism.</para>
     /// </remarks>
     /// <typeparam name="T">The underlying type of the value.</typeparam>
@@ -184,17 +183,7 @@ namespace Narvalo.Applicative
         {
             Require.NotNull(binder, nameof(binder));
 
-            if (IsError) { return Fallible<TResult>.FromError(Error); }
-
-            try
-            {
-                return binder(Value);
-            }
-            catch (Exception ex)
-            {
-                var edi = ExceptionDispatchInfo.Capture(ex);
-                return Fallible<TResult>.FromError(edi);
-            }
+            return IsError ? Fallible<TResult>.FromError(Error) : binder(Value);
         }
 
         [DebuggerHidden]

@@ -26,7 +26,8 @@ Our versioning scheme is explained
 **WARNING: _I am currently in the process of rewriting this document._**
 
 ### Content
-- [Overview](#overview)
+- [Quick Start](#quick-start)
+- [Introduction](#introduction)
 - [Unit Type](#unit-type)
 - [Nullable Type](#nullable-type)
 - [Maybe Type](#maybe-type)
@@ -42,8 +43,13 @@ Our versioning scheme is explained
 
 --------------------------------------------------------------------------------
 
-Overview
---------
+Quick Start
+-----------
+
+--------------------------------------------------------------------------------
+
+Introduction
+------------
 
 This assembly encourages an applicative-style of programming, or functional-style
 if you prefer: types are **immutable** and methods are **pure** - they are free
@@ -63,7 +69,7 @@ The main namespace (`Narvalo.Applicative`) includes:
 - `Either<T1, T2>`, the disjoint union of `T1` and `T2`.
 
 The other namespace (`Narvalo.Linq`) is dedicated to the definition of new
-query operators mostly in relation to `Maybe<T>`, `Outcome<T>`...
+query operators.
 
 The types `Maybe<T>`, `Outcome<T>`, `Fallible<T>`, `Result<T, TError>` and
 `Either<T1, T2>` are examples of **monads**, a concept popularized by the
@@ -665,10 +671,6 @@ var failure = Outcome<int>.FromError("My error message.");
 
 ### <a name="rop-fallible"></a>`Fallible`
 
-[Explain when to use this class; mainly for querying remote services]
-[Explain the limits; what exceptions do we catch and when. Do not expect to much;
- LINQ extensions are unchecked.]
-
 If `edi` is an object of type `ExceptionDispatchInfo`:
 ```csharp
 var success = Fallible.Ok;
@@ -679,11 +681,10 @@ var failure = Fallible.FromError(edi);
 (bool succeed, ExceptionDispatchInfo exceptionInfo) = fallible;
 ```
 
-### <a name="rop-fallibleT"></a>`Fallible<T>`
+[Explain when to use this class and what to expect; e.g. for querying remote services]
+**We do not catch exceptions thrown by any supplied delegate.**
 
-[Explain when to use this class; mainly for querying remote services]
-[Explain the limits; what exceptions do we catch and when. Do not expect to much;
- LINQ extensions are unchecked.]
+### <a name="rop-fallibleT"></a>`Fallible<T>`
 
 If `edi` is an object of type `ExceptionDispatchInfo`:
 ```csharp
@@ -694,6 +695,9 @@ var failure = Fallible<int>.FromError(edi);
 ```csharp
 (bool succeed, T value, ExceptionDispatchInfo exceptionInfo) = fallible;
 ```
+
+[Explain when to use this class and what to expect; e.g. for querying remote services]
+**We do not catch exceptions thrown by any supplied delegate.**
 
 ### <a name="rop-result"></a>`Result<T, TError>`
 

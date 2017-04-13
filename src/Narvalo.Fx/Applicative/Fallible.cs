@@ -118,17 +118,7 @@ namespace Narvalo.Applicative
         {
             Require.NotNull(binder, nameof(binder));
 
-            if (IsError) { return Fallible<TResult>.FromError(Error); }
-
-            try
-            {
-                return binder();
-            }
-            catch (Exception ex)
-            {
-                var edi = ExceptionDispatchInfo.Capture(ex);
-                return Fallible<TResult>.FromError(edi);
-            }
+            return IsError ? Fallible<TResult>.FromError(Error) : binder();
         }
 
         // Compare w/ Select(Func<Unit, TResult>).
@@ -136,17 +126,7 @@ namespace Narvalo.Applicative
         {
             Require.NotNull(selector, nameof(selector));
 
-            if (IsError) { return Fallible<TResult>.FromError(Error); }
-
-            try
-            {
-                return Of(selector());
-            }
-            catch (Exception ex)
-            {
-                var edi = ExceptionDispatchInfo.Capture(ex);
-                return Fallible<TResult>.FromError(edi);
-            }
+            return IsError ? Fallible<TResult>.FromError(Error) : Of(selector());
         }
 
         public Fallible<TResult> ReplaceBy<TResult>(TResult value)

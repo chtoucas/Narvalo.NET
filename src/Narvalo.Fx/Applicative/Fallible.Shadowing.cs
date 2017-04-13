@@ -4,7 +4,6 @@ namespace Narvalo.Applicative
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using System.Runtime.ExceptionServices;
 
     public partial struct Fallible<T>
     {
@@ -20,17 +19,7 @@ namespace Narvalo.Applicative
         {
             Require.NotNull(selector, nameof(selector));
 
-            if (IsError) { Fallible<TResult>.FromError(Error); }
-
-            try
-            {
-                return Fallible.Of(selector(Value));
-            }
-            catch (Exception ex)
-            {
-                var edi = ExceptionDispatchInfo.Capture(ex);
-                return Fallible<TResult>.FromError(edi);
-            }
+            return IsError ? Fallible<TResult>.FromError(Error) : Fallible.Of(selector(Value));
         }
     }
 }
