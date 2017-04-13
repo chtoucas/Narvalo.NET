@@ -32,6 +32,7 @@
     <Compile Include="Applicative\Outcome`1.cs" />
     <Compile Include="Applicative\Outcome.Shadowing.cs" />
     <Compile Include="Applicative\Fallible.Helpers.cs" />
+    <Compile Include="Applicative\Either.Shadowing.cs" />
     <Compile Include="Applicative\Vuple.cs" />
     <Compile Include="Applicative\Qullable.cs" />
     <Compile Include="Internal\IResult`2.cs" />

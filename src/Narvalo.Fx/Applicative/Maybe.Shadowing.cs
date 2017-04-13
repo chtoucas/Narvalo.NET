@@ -7,7 +7,6 @@ namespace Narvalo.Applicative
 
     public partial struct Maybe<T>
     {
-        // If "applicative" contains "f" and "this" contains "x", return a Maybe of "f(x)".
         public Maybe<TResult> Gather<TResult>(Maybe<Func<T, TResult>> applicative)
             => IsSome && applicative.IsSome ? Maybe<TResult>.η(applicative.Value(Value)) : Maybe<TResult>.None;
 
@@ -18,8 +17,8 @@ namespace Narvalo.Applicative
             => IsSome ? other : Maybe<TResult>.None;
 
         public Maybe<T> PassBy<TOther>(Maybe<TOther> other)
-            // Returning "this" is not very "functional"-like, but Maybe being a value type, that's fine.
-            => other.IsSome ? this : None;
+            // Returning "this" is not very "functional"-like, but having a value type, that's fine.
+            => IsSome && other.IsSome ? this : None;
 
         public Maybe<Unit> Skip()
             => IsSome ? Maybe.Unit : Maybe.None;
@@ -30,8 +29,6 @@ namespace Narvalo.Applicative
 
             return IsSome && second.IsSome ? Maybe<TResult>.η(zipper(Value, second.Value)) : Maybe<TResult>.None;
         }
-
-        #region Query Expression Pattern
 
         public Maybe<TResult> Select<TResult>(Func<T, TResult> selector)
         {
@@ -44,8 +41,7 @@ namespace Narvalo.Applicative
         {
             Require.NotNull(predicate, nameof(predicate));
 
-            // Returning "this" is not very "functional",
-            // but since Maybe is a value type, it is fine.
+            // Returning "this" is not very "functional"-like, but having a value type, that's fine.
             return IsSome && predicate(Value) ? this : None;
         }
 
@@ -88,31 +84,33 @@ namespace Narvalo.Applicative
             return Maybe<TResult>.None;
         }
 
-        public Maybe<TResult> GroupJoin<TInner, TKey, TResult>(
-            Maybe<TInner> inner,
-            Func<T, TKey> outerKeySelector,
-            Func<TInner, TKey> innerKeySelector,
-            Func<T, Maybe<TInner>, TResult> resultSelector,
-            IEqualityComparer<TKey> comparer)
-        {
-            Require.NotNull(outerKeySelector, nameof(outerKeySelector));
-            Require.NotNull(innerKeySelector, nameof(innerKeySelector));
-            Require.NotNull(resultSelector, nameof(resultSelector));
+        //
+        // GroupJoin is currently disabled.
+        //
+        //
+        //public Maybe<TResult> GroupJoin<TInner, TKey, TResult>(
+        //    Maybe<TInner> inner,
+        //    Func<T, TKey> outerKeySelector,
+        //    Func<TInner, TKey> innerKeySelector,
+        //    Func<T, Maybe<TInner>, TResult> resultSelector,
+        //    IEqualityComparer<TKey> comparer)
+        //{
+        //    Require.NotNull(outerKeySelector, nameof(outerKeySelector));
+        //    Require.NotNull(innerKeySelector, nameof(innerKeySelector));
+        //    Require.NotNull(resultSelector, nameof(resultSelector));
 
-            if (IsSome && inner.IsSome)
-            {
-                var outerKey = outerKeySelector(Value);
-                var innerKey = innerKeySelector(inner.Value);
+        //    if (IsSome && inner.IsSome)
+        //    {
+        //        var outerKey = outerKeySelector(Value);
+        //        var innerKey = innerKeySelector(inner.Value);
 
-                if ((comparer ?? EqualityComparer<TKey>.Default).Equals(outerKey, innerKey))
-                {
-                    return Maybe<TResult>.η(resultSelector(Value, inner));
-                }
-            }
+        //        if ((comparer ?? EqualityComparer<TKey>.Default).Equals(outerKey, innerKey))
+        //        {
+        //            return Maybe<TResult>.η(resultSelector(Value, inner));
+        //        }
+        //    }
 
-            return Maybe<TResult>.None;
-        }
-
-        #endregion
+        //    return Maybe<TResult>.None;
+        //}
     }
 }

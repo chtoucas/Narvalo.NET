@@ -3,22 +3,57 @@
 namespace Narvalo.Applicative
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
 
     public partial struct Fallible<T>
     {
+        public Fallible<TResult> Gather<TResult>(Fallible<Func<T, TResult>> applicative)
+            => IsSuccess && applicative.IsSuccess
+            ? Fallible<TResult>.η(applicative.Value(Value))
+            : Fallible<TResult>.FromError(Error);
+
         public Fallible<TResult> ReplaceBy<TResult>(TResult other)
-            => IsSuccess ? Fallible.Of(other) : Fallible<TResult>.FromError(Error);
+            => IsSuccess ? Fallible<TResult>.η(other) : Fallible<TResult>.FromError(Error);
 
         public Fallible<TResult> ContinueWith<TResult>(Fallible<TResult> other)
             => IsSuccess ? other : Fallible<TResult>.FromError(Error);
 
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Select", Justification = "[Intentionally] No trouble here, this 'Select' is the one from the LINQ standard query operators.")]
+        public Fallible<T> PassBy<TOther>(Fallible<TOther> other)
+            // Returning "this" is not very "functional"-like, but having a value type, that's fine.
+            => IsSuccess && other.IsSuccess ? this : FromError(Error);
+
+        public Fallible<Unit> Skip()
+            => IsSuccess ? Fallible.Unit : Fallible<Unit>.FromError(Error);
+
+        public Fallible<TResult> ZipWith<TSecond, TResult>(
+            Fallible<TSecond> second,
+            Func<T, TSecond, TResult> zipper)
+        {
+            Require.NotNull(zipper, nameof(zipper));
+
+            return IsSuccess && second.IsSuccess
+                ? Fallible<TResult>.η(zipper(Value, second.Value))
+                : Fallible<TResult>.FromError(Error);
+        }
+
         public Fallible<TResult> Select<TResult>(Func<T, TResult> selector)
         {
             Require.NotNull(selector, nameof(selector));
 
-            return IsError ? Fallible<TResult>.FromError(Error) : Fallible.Of(selector(Value));
+            return IsError ? Fallible<TResult>.FromError(Error) : Fallible<TResult>.η(selector(Value));
+        }
+
+        public Fallible<TResult> SelectMany<TMiddle, TResult>(
+            Func<T, Fallible<TMiddle>> selector,
+            Func<T, TMiddle, TResult> resultSelector)
+        {
+            Require.NotNull(selector, nameof(selector));
+            Require.NotNull(resultSelector, nameof(resultSelector));
+
+            if (IsError) { return Fallible<TResult>.FromError(Error); }
+            var middle = selector(Value);
+
+            if (middle.IsError) { return Fallible<TResult>.FromError(Error); }
+            return Fallible<TResult>.η(resultSelector(Value, middle.Value));
         }
     }
 }
