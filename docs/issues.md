@@ -61,11 +61,12 @@ Narvalo.Fx
 
 - T4: If the monad is nullable, check that we handle all null's. Auto-generate
   tests for null-guards (affects only `Either<T1, T2>`).
-- `Fallible` and `Fallible<T>`: test exceptions thoroughly.
+- Review `Outcome` and `Fallible`.
+- Explain `Bind` and `Select` for `Outcome` and `Fallible`,
+  `Where` for `Outcome<T>` and `Fallible<T>` (by the way, it seems weird now)?
+- Sync all shadows.
 - Could we simplify LINQ for `Maybe<T?>`?
 - Remove `GroupJoin` for monads?
-- Explain `Bind` and `Select` for `Outcome` and `Fallible`,
-  `Where` for `Outcome<T>` and `Fallible<T>`.
 
 Next:
 - Add async and lazy alternatives?

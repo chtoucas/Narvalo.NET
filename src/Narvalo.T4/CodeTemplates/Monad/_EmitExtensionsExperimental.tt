@@ -6,6 +6,9 @@ public partial class MonadTemplate
     {
 #>
     // Provides EXPERIMENTAL extension methods for <#= Name #><T<#= RTDecl #>>.
+    // - Zip
+    // - If
+    // - Coalesce
     // T4: EmitExtensionsExperimental().
     public static partial class <#= ExtensionsClsName #>
     {
