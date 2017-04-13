@@ -655,6 +655,8 @@ var failure = Outcome.FromError("My error message.");
 (bool succeed, string error) = outcome;
 ```
 
+[Explain: We have a `Select` but no QEP]
+
 ### <a name="rop-outcomeT"></a>`Outcome<T>`
 
 ```csharp
@@ -664,6 +666,16 @@ var failure = Outcome<int>.FromError("My error message.");
 
 ```csharp
 (bool succeed, T value, string error) = outcome;
+```
+
+#### `Where`
+**WARNING:** The operator does **not** accept a predicate.
+```csharp
+var outcome = Outcome.Of(1);
+Func<int, Outcome> filter = i => i >= 0 ? Outcome.Ok : Outcome.FromError("i < 0");
+
+var q = outcome.Where(filter);
+var q = from val in outcome where filter(val) select val;
 ```
 
 ### <a name="rop-fallible"></a>`Fallible`
@@ -678,6 +690,7 @@ var failure = Fallible.FromError(edi);
 (bool succeed, ExceptionDispatchInfo exceptionInfo) = fallible;
 ```
 
+[Explain: We have a `Select` but no QEP]
 [Explain when to use this class and what to expect; e.g. for querying remote services]
 **We do not catch exceptions thrown by any supplied delegate.**
 
@@ -693,6 +706,12 @@ var failure = Fallible<int>.FromError(edi);
 (bool succeed, T value, ExceptionDispatchInfo exceptionInfo) = fallible;
 ```
 
+[Explain] No Where op. It is possible but what could be the EDI for `FromError`?
+If the `oucome` is NOK, we could use `outcome.Error`, but if it is OK????
+```csharp
+Func<int, Fallible> filter = i => i >= 0 ? Fallible.Ok : Fallible.FromError(???);
+```
+
 [Explain when to use this class and what to expect; e.g. for querying remote services]
 **We do not catch exceptions thrown by any supplied delegate.**
 
@@ -702,8 +721,8 @@ var failure = Fallible<int>.FromError(edi);
 var success = Result<int, Error>.Of(1);
 var failure = Result<int, Error>.FromError(new Error());
 ```
-"Fluent" API if you want to enjoy type inference and you prefer a simpler syntax
-when the generic parameters are complicated:
+"Fluent" API if you want to enjoy type inference and you prefer a simpler code
+when the generic parameters are too complicated:
 ```csharp
 var success = Result.OfTError<Error>.Of(1);
 var failure = Result.OfType<int>.FromError(new Error());
@@ -736,8 +755,8 @@ The either type is the simplest possible
 var left = Either<int, long>.OfLeft(1);
 var right = Either<int, long>.OfRight(1L);
 ```
-"Fluent" API if you want to enjoy type inference and you prefer a simpler syntax
-when the generic parameters are complicated:
+"Fluent" API if you want to enjoy type inference and you prefer a simpler code
+when the generic parameters are too complicated:
 ```csharp
 var left = Either.OfTRight<long>.OfLeft(1);
 var right = Either.OfTLeft<int>.OfRight(1L);

@@ -12,6 +12,8 @@ public partial class MonadTemplate
     // T4: EmitExtensionsExperimental().
     public static partial class <#= ExtensionsClsName #>
     {
+        // Dubious...
+        // This ought to be a purely static method: Monad.Zip(first, second).
         public static <#= Name #><(T1, T2)<#= RTDecl #>> Zip<T1, T2<#= RTDecl #>>(
             this <#= Name #><T1<#= RTDecl #>> @this,
             <#= Name #><T2<#= RTDecl #>> other)
@@ -21,6 +23,7 @@ public partial class MonadTemplate
         }
 
 <#+ if (HasZero) { #>
+        // Dubious...
         public static <#= Name #><TResult> If<TSource, TResult>(
             this <#= Name #><TSource> @this,
             Func<TSource, bool> predicate,
@@ -32,6 +35,7 @@ public partial class MonadTemplate
         }
 
 <#+ } // T4: End of HasZero. #>
+        // Dubious...
         public static <#= Name #><TResult<#= RTDecl #>> Coalesce<TSource, TResult<#= RTDecl #>>(
             this <#= Name #><TSource<#= RTDecl #>> @this,
             Func<TSource, bool> predicate,

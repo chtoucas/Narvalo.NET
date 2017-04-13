@@ -295,7 +295,6 @@ namespace Narvalo.Applicative {
 
     // Tests for the monadic methods.
     public static partial class OutcomeTFacts {
-
         [t("Bind() guards.")]
         public static void Bind0() {
             var ok = Outcome.Of(new Obj());
@@ -337,6 +336,59 @@ namespace Narvalo.Applicative {
             Assert.True(result.IsSuccess);
         }
 
+        [t("Where() guards.")]
+        public static void Where0() {
+            var ok = Outcome.Of(new Obj());
+            Assert.Throws<ArgumentNullException>("filter", () => ok.Where(null));
+
+            var nok = Outcome<Obj>.FromError("error");
+            Assert.Throws<ArgumentNullException>("filter", () => nok.Where(null));
+        }
+
+        [t("Where() returns NOK if OK and filter returns NOK.")]
+        public static void Where1() {
+            var ok = Outcome.Of(new Obj());
+            Func<Obj, Outcome> filter = _ => Outcome.FromError("error");
+            var result = ok.Where(filter);
+            Assert.True(result.IsError);
+
+            var q = from val in ok where filter(val) select val;
+            Assert.True(q.IsError);
+        }
+
+        [t("Where() returns OK if OK and filter returns OK.")]
+        public static void Where2() {
+            var ok = Outcome.Of(new Obj());
+            Func<Obj, Outcome> filter = _ => Outcome.Ok;
+            var result = ok.Where(filter);
+            Assert.True(result.IsSuccess);
+
+            var q = from val in ok where filter(val) select val;
+            Assert.True(q.IsSuccess);
+
+        }
+
+        [t("Where() returns NOK if NOK and filter returns NOK.")]
+        public static void Where3() {
+            var ok = Outcome<Obj>.FromError("error");
+            Func<Obj, Outcome> filter = _ => Outcome.FromError("error");
+            var result = ok.Where(filter);
+            Assert.True(result.IsError);
+
+            var q = from val in ok where filter(val) select val;
+            Assert.True(q.IsError);
+        }
+
+        [t("Where() returns NOK if NOK and filter returns OK.")]
+        public static void Where4() {
+            var ok = Outcome<Obj>.FromError("error");
+            Func<Obj, Outcome> filter = _ => Outcome.Ok;
+            var result = ok.Where(filter);
+            Assert.True(result.IsError);
+
+            var q = from val in ok where filter(val) select val;
+            Assert.True(q.IsError);
+        }
     }
 
 #if !NO_INTERNALS_VISIBLE_TO

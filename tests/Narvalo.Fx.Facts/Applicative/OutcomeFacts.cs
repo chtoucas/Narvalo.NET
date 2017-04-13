@@ -7,6 +7,8 @@ namespace Narvalo.Applicative {
 
     using static global::My;
 
+    using unit = Narvalo.Applicative.Unit;
+
     // Tests for Outcome.
     public static partial class OutcomeFacts {
         [t("Ok is OK.")]
