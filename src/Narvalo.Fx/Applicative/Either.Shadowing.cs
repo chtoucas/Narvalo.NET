@@ -7,9 +7,13 @@ namespace Narvalo.Applicative
     public partial class Either<TLeft, TRight>
     {
         public Either<TResult, TRight> Gather<TResult>(Either<Func<TLeft, TResult>, TRight> applicative)
-            => IsLeft && applicative.IsLeft
-            ? Either<TResult, TRight>.OfLeft(applicative.Left(Left))
-            : Either<TResult, TRight>.OfRight(Right);
+        {
+            Require.NotNull(applicative, nameof(applicative));
+
+            return IsLeft && applicative.IsLeft
+               ? Either<TResult, TRight>.OfLeft(applicative.Left(Left))
+               : Either<TResult, TRight>.OfRight(Right);
+        }
 
         public Either<TResult, TRight> ReplaceBy<TResult>(TResult value)
             => IsLeft ? Either<TResult, TRight>.OfLeft(value) : Either<TResult, TRight>.OfRight(Right);
@@ -18,8 +22,12 @@ namespace Narvalo.Applicative
             => IsLeft ? other : Either<TResult, TRight>.OfRight(Right);
 
         public Either<TLeft, TRight> PassBy<TOther>(Either<TOther, TRight> other)
+        {
             // Returning "this" is not very "functional"-like, but having a value type, that's fine.
-            => IsLeft && other.IsLeft ? this : OfRight(Right);
+            Require.NotNull(other, nameof(other));
+
+            return IsLeft && other.IsLeft ? this : OfRight(Right);
+        }
 
         public Either<Unit, TRight> Skip()
             => IsLeft ? Either<Unit, TRight>.OfLeft(Unit.Default) : Either<Unit, TRight>.OfRight(Right);
@@ -29,6 +37,7 @@ namespace Narvalo.Applicative
             Func<TLeft, TSecond, TResult> zipper)
         {
             Require.NotNull(zipper, nameof(zipper));
+            Require.NotNull(second, nameof(second));
 
             return IsLeft && second.IsLeft
                 ? Either<TResult, TRight>.OfLeft(zipper(Left, second.Left))
@@ -54,7 +63,7 @@ namespace Narvalo.Applicative
             if (IsRight) { return Either<TResult, TRight>.OfRight(Right); }
             var middle = selector(Left);
 
-            if (middle.IsRight) { return Either<TResult, TRight>.OfRight(Right); }
+            if (middle == null || middle.IsRight) { return Either<TResult, TRight>.OfRight(Right); }
             return Either<TResult, TRight>.OfLeft(resultSelector(Left, middle.Left));
         }
     }
