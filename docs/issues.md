@@ -78,7 +78,7 @@ Next:
   * More Haskell API, `When`, `Forever` & co? See experiments in Narvalo.T4.
   * Enable `GroupJoin` for monads? Do not forget to enable it in
     `EmitMonadGuards` too and Maybe.Shadowing.
-  * Add operators on the right for `Either<T1, T2>`?
+  * Add operators on the right for `Either<T1, T2>` and `Result<T, TError>`?
   * Add more monad-like ops to `Outcome` and `Fallible`.
   * Custom `is` operators (it is in the proposal but it is not yet possible).
 - Open questions:
