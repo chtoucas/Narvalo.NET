@@ -21,6 +21,46 @@ namespace Narvalo.T4.Testbed
 
     using Narvalo.T4.Testbed.Internal;
 
+    // Provides EXPERIMENTAL methods for MonadZero<T>.
+    // T4: EmitMethodsExperimental().
+    public partial class MonadZero<T>
+    {
+        public void Forever(Action<T> action)
+        {
+            Require.NotNull(action, nameof(action));
+
+            ForeverImpl(action);
+        }
+
+        partial void ForeverImpl(Action<T> action);
+
+        public void While(Func<bool> condition, Action<T> action)
+        {
+            Require.NotNull(condition, nameof(condition));
+            Require.NotNull(action, nameof(action));
+
+            Bind(val =>
+            {
+                while (condition()) { action(val); }
+
+                return MonadZero.Unit;
+            });
+        }
+
+        public void Until(Func<bool> condition, Action<T> action)
+        {
+            Require.NotNull(condition, nameof(condition));
+            Require.NotNull(action, nameof(action));
+
+            Bind(val =>
+            {
+                while (!condition()) { action(val); }
+
+                return MonadZero.Unit;
+            });
+        }
+    }
+
     /// <summary>
     /// Provides a set of static methods involving <see cref="MonadZero{T}"/>.
     /// </summary>
@@ -408,6 +448,59 @@ namespace Narvalo.T4.Testbed
             return @this.SelectMany(valueSelector, resultSelector);
         }
 
+        private static Func<TKey, MonadZero<TInner>> GetKeyLookup<TInner, TKey>(
+            MonadZero<TInner> inner,
+            Func<TInner, TKey> innerKeySelector,
+            IEqualityComparer<TKey> comparer)
+        {
+            Debug.Assert(inner != null);
+            Debug.Assert(innerKeySelector != null);
+
+            return outerKey =>
+                inner.Select(innerKeySelector)
+                    .Where(innerKey => (comparer ?? EqualityComparer<TKey>.Default).Equals(innerKey, outerKey))
+                    .ContinueWith(inner);
+        }
+
+        #endregion
+    }
+
+    // Provides EXPERIMENTAL extension methods for MonadZero<T>.
+    // - Zip
+    // - If
+    // - Coalesce
+    // T4: EmitExtensionsExperimental().
+    public static partial class MonadZeroL
+    {
+        public static MonadZero<(T1, T2)> Zip<T1, T2>(
+            this MonadZero<T1> @this,
+            MonadZero<T2> other)
+        {
+            Require.NotNull(@this, nameof(@this));
+            return @this.ZipWith(other, ValueTuple.Create);
+        }
+
+        public static MonadZero<TResult> If<TSource, TResult>(
+            this MonadZero<TSource> @this,
+            Func<TSource, bool> predicate,
+            MonadZero<TResult> thenResult)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+            return @this.Bind(val => predicate(val) ? thenResult : MonadZero<TResult>.Zero);
+        }
+
+        public static MonadZero<TResult> Coalesce<TSource, TResult>(
+            this MonadZero<TSource> @this,
+            Func<TSource, bool> predicate,
+            MonadZero<TResult> thenResult,
+            MonadZero<TResult> elseResult)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(predicate, nameof(predicate));
+            return @this.Bind(val => predicate(val) ? thenResult : elseResult);
+        }
+
         public static MonadZero<TResult> GroupJoin<TSource, TInner, TKey, TResult>(
             this MonadZero<TSource> @this,
             MonadZero<TInner> inner,
@@ -440,22 +533,6 @@ namespace Narvalo.T4.Testbed
 
             return @this.Select(outer => resultSelector(outer, selector(outer)));
         }
-
-        private static Func<TKey, MonadZero<TInner>> GetKeyLookup<TInner, TKey>(
-            MonadZero<TInner> inner,
-            Func<TInner, TKey> innerKeySelector,
-            IEqualityComparer<TKey> comparer)
-        {
-            Debug.Assert(inner != null);
-            Debug.Assert(innerKeySelector != null);
-
-            return outerKey =>
-                inner.Select(innerKeySelector)
-                    .Where(innerKey => (comparer ?? EqualityComparer<TKey>.Default).Equals(innerKey, outerKey))
-                    .ContinueWith(inner);
-        }
-
-        #endregion
     }
 
     /// <summary>

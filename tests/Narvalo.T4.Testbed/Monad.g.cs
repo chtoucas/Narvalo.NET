@@ -403,6 +403,9 @@ namespace Narvalo.T4.Testbed
     }
 
     // Provides EXPERIMENTAL extension methods for Monad<T>.
+    // - Zip
+    // - If
+    // - Coalesce
     // T4: EmitExtensionsExperimental().
     public static partial class MonadL
     {
