@@ -4,8 +4,6 @@ namespace Narvalo.Applicative
 {
     using System;
 
-    internal delegate Func<TSource, TResult> Recursive<TSource, TResult>(Recursive<TSource, TResult> rec);
-
     public static class Recursion
     {
         // Y Combinator.
