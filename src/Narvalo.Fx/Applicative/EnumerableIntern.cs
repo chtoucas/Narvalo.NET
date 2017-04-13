@@ -20,7 +20,7 @@ namespace Narvalo.Applicative
             this IEnumerable<Either<TSource, TRight>> source)
         {
             Debug.Assert(source != null);
-            return Either.Left<TRight>.Return(QImpl.CollectAnyImpl(source));
+            return Either.OfRight<TRight>.OfLeft(QImpl.CollectAnyImpl(source));
         }
 
         public static Fallible<IEnumerable<TSource>> CollectImpl<TSource>(
@@ -48,7 +48,7 @@ namespace Narvalo.Applicative
             this IEnumerable<Result<TSource, TError>> source)
         {
             Debug.Assert(source != null);
-            return Result.Ok<TError>.Return(QImpl.CollectAnyImpl(source));
+            return Result.OfError<TError>.Return(QImpl.CollectAnyImpl(source));
         }
     }
 
@@ -61,7 +61,7 @@ namespace Narvalo.Applicative
         {
             Debug.Assert(source != null);
             Debug.Assert(predicate != null);
-            return Either.Left<TRight>.Return(QImpl.WhereAnyImpl(source, predicate));
+            return Either.OfRight<TRight>.OfLeft(QImpl.WhereAnyImpl(source, predicate));
         }
 
         public static Fallible<IEnumerable<TSource>> WhereImpl<TSource>(
@@ -97,7 +97,7 @@ namespace Narvalo.Applicative
         {
             Debug.Assert(source != null);
             Debug.Assert(predicate != null);
-            return Result.Ok<TError>.Return(QImpl.WhereAnyImpl(source, predicate));
+            return Result.OfError<TError>.Return(QImpl.WhereAnyImpl(source, predicate));
         }
     }
 }

@@ -8,18 +8,18 @@ namespace Narvalo.Applicative
     public static partial class Either
     {
         [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible", Justification = "[Intentionally] Fluent API.")]
-        public static class Left<TRight>
+        public static class OfRight<TRight>
         {
             [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Intentionally] A static method in a static class won't help.")]
-            public static Either<TLeft, TRight> Return<TLeft>(TLeft leftValue)
+            public static Either<TLeft, TRight> OfLeft<TLeft>(TLeft leftValue)
                 => Either<TLeft, TRight>.OfLeft(leftValue);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible", Justification = "[Intentionally] Fluent API.")]
-        public static class Right<TLeft>
+        public static class OfLeft<TLeft>
         {
             [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Intentionally] A static method in a static class won't help.")]
-            public static Either<TLeft, TRight> Return<TRight>(TRight rightValue)
+            public static Either<TLeft, TRight> OfRight<TRight>(TRight rightValue)
                 => Either<TLeft, TRight>.OfRight(rightValue);
         }
     }
@@ -43,7 +43,7 @@ namespace Narvalo.Applicative
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));
 
-            return @this.BindLeft(val => Left<TRight>.Return(selector(val)));
+            return @this.BindLeft(val => Either<TResult, TRight>.OfLeft(selector(val)));
         }
 
         public static Either<TLeft, TResult> SelectRight<TLeft, TRight, TResult>(
@@ -53,7 +53,7 @@ namespace Narvalo.Applicative
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));
 
-            return @this.BindRight(val => Right<TLeft>.Return(selector(val)));
+            return @this.BindRight(val => Either<TLeft, TResult>.OfRight(selector(val)));
         }
     }
 }

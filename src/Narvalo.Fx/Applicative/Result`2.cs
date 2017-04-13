@@ -142,7 +142,7 @@ namespace Narvalo.Applicative
 
         // NB: In Haskell, the error is the left parameter.
         public Either<T, TError> ToEither()
-            => IsSuccess ? Either.Left<TError>.Return(Value) : Either.Right<T>.Return(Error);
+            => IsSuccess ? Either<T, TError>.OfLeft(Value) : Either<T, TError>.OfRight(Error);
 
         public static explicit operator T(Result<T, TError> value) => value.ToValue();
 

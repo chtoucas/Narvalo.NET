@@ -63,7 +63,6 @@ Narvalo.Fx
   tests for null-guards (affects only `Either<T1, T2>`).
 - Explain `Bind` and `Select` for `Outcome` and `Fallible`,
   `Where` for `Outcome<T>` and `Fallible<T>` (by the way, it seems weird now)?
-- Sync all shadows.
 - Could we simplify LINQ for `Maybe<T?>`?
 
 Next:
@@ -76,7 +75,7 @@ Next:
   * Add async and lazy alternatives?
   * More Haskell API, `When`, `Forever` & co? See experiments in Narvalo.T4.
   * Enable `GroupJoin` for monads? Do not forget to enable it in
-    `EmitMonadGuards` too.
+    `EmitMonadGuards` too and Maybe.Shadowing.
   * Add operators on the right for `Either<T1, T2>`?
   * Add more monad-like ops to `Outcome` and `Fallible`.
   * Custom `is` operators (it is in the proposal but it is not yet possible).

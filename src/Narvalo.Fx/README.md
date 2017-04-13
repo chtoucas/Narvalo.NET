@@ -702,10 +702,10 @@ var failure = Fallible<int>.FromError(edi);
 var success = Result<int, Error>.Of(1);
 var failure = Result<int, Error>.FromError(new Error());
 ```
-"Fluent" syntax:
+"Fluent" syntax if you want to enjoy type inference:
 ```csharp
-var success = Result.Ok<Error>.Return(1);
-var failure = Result.Error<int>.Return(new Error());
+var success = Result.OfError<Error>.Return(1);
+var failure = Result.OfType<int>.FromError(new Error());
 ```
 
 ```csharp
@@ -730,14 +730,15 @@ The either type is the simplest possible
 [discriminated union](https://en.wikipedia.org/wiki/Tagged_union).
 
 ### <a name="either-ctor"></a>Construction / Deconstruction
+
 ```csharp
 var left = Either<int, long>.OfLeft(1);
 var right = Either<int, long>.OfRight(1L);
 ```
-"Fluent" syntax:
+"Fluent" syntax if you want to enjoy type inference:
 ```csharp
-var left = Either.Left<long>.Return(1);
-var right = Either.Right<int>.Return(1L);
+var left = Either.OfRight<long>.OfLeft(1);
+var right = Either.OfLeft<int>.OfRight(1L);
 ```
 
 ```csharp
