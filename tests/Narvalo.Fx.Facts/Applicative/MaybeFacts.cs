@@ -682,17 +682,17 @@ namespace Narvalo.Applicative {
         [t("Match() guards.")]
         public static void Match0() {
             var some = Maybe.Of(new Obj());
-            Assert.Throws<ArgumentNullException>("caseSome", () => some.Match(null, new Obj()));
+            //Assert.Throws<ArgumentNullException>("caseSome", () => some.Match(null, new Obj()));
             Assert.Throws<ArgumentNullException>("caseSome", () => some.Match(null, () => new Obj()));
             Assert.Throws<ArgumentNullException>("caseNone", () => some.Match(x => x, default(Func<Obj>)));
 
             var none = Maybe<Obj>.None;
-            Assert.Throws<ArgumentNullException>("caseSome", () => none.Match(null, new Obj()));
+            //Assert.Throws<ArgumentNullException>("caseSome", () => none.Match(null, new Obj()));
             Assert.Throws<ArgumentNullException>("caseSome", () => none.Match(null, () => new Obj()));
             Assert.Throws<ArgumentNullException>("caseNone", () => none.Match(x => x, default(Func<Obj>)));
         }
 
-        [t("Match() calls 'caseSome' if some (1).")]
+        [t("Match() calls 'caseSome' if some.")]
         public static void Match1() {
             var some = Maybe.Of(new Obj());
             var wasCalled = false;
@@ -708,22 +708,8 @@ namespace Narvalo.Applicative {
             Assert.Same(exp, result);
         }
 
-        [t("Match() calls 'caseSome' if some (2).")]
+        [t("Match() calls 'caseNone' if none.")]
         public static void Match2() {
-            var some = Maybe.Of(new Obj());
-            var wasCalled = false;
-            var exp = new Obj("caseSome");
-            Func<Obj, Obj> caseSome = _ => { wasCalled = true; return exp; };
-            var caseNone = new Obj("caseNone");
-
-            var result = some.Match(caseSome, caseNone);
-
-            Assert.True(wasCalled);
-            Assert.Same(exp, result);
-        }
-
-        [t("Match() calls 'caseNone' if none (1).")]
-        public static void Match3() {
             var none = Maybe<Obj>.None;
             var wasCalled = false;
             var notCalled = true;
@@ -736,259 +722,6 @@ namespace Narvalo.Applicative {
             Assert.True(notCalled);
             Assert.True(wasCalled);
             Assert.Same(exp, result);
-        }
-
-        [t("Match() calls 'caseNone' if none (2).")]
-        public static void Match4() {
-            var none = Maybe<Obj>.None;
-            var notCalled = true;
-            Func<Obj, Obj> caseSome = _ => { notCalled = false; return new Obj("caseSome"); };
-            var caseNone = new Obj("caseNone");
-
-            var result = none.Match(caseSome, caseNone);
-
-            Assert.True(notCalled);
-            Assert.Same(caseNone, result);
-        }
-
-        [t("Coalesce() guards.")]
-        public static void Coalesce0() {
-            var some = Maybe.Of(new Obj());
-            Assert.Throws<ArgumentNullException>("predicate", () => some.Coalesce(null, new Obj("this"), new Obj("that")));
-            Assert.Throws<ArgumentNullException>("predicate", () => some.Coalesce(null, x => x, () => new Obj()));
-            Assert.Throws<ArgumentNullException>("selector", () => some.Coalesce(_ => true, null, () => new Obj()));
-            Assert.Throws<ArgumentNullException>("otherwise", () => some.Coalesce(_ => true, x => x, null));
-
-            var none = Maybe<Obj>.None;
-            Assert.Throws<ArgumentNullException>("predicate", () => none.Coalesce(null, new Obj("this"), new Obj("that")));
-            Assert.Throws<ArgumentNullException>("predicate", () => none.Coalesce(null, x => x, () => new Obj()));
-            Assert.Throws<ArgumentNullException>("selector", () => none.Coalesce(_ => true, null, () => new Obj()));
-            Assert.Throws<ArgumentNullException>("otherwise", () => none.Coalesce(_ => true, x => x, null));
-        }
-
-        [t("Coalesce() calls 'selector' if some and 'predicate' is true.")]
-        public static void Coalesce1() {
-            var some = Maybe.Of(new Obj());
-            var wasCalled = false;
-            var notCalled = true;
-            var exp = new Obj("selector");
-            Func<Obj, Obj> selector = _ => { wasCalled = true; return exp; };
-            Func<Obj> otherwise = () => { notCalled = false; return new Obj("otherwise"); };
-
-            var result = some.Coalesce(_ => true, selector, otherwise);
-
-            Assert.True(notCalled);
-            Assert.True(wasCalled);
-            Assert.Same(exp, result);
-        }
-
-        [t("Coalesce() returns 'thenResult' if some and 'predicate' is true.")]
-        public static void Coalesce2() {
-            var some = Maybe.Of(new Obj());
-            var thenResult = new Obj("then");
-            var elseResult = new Obj("else");
-
-            var result = some.Coalesce(_ => true, thenResult, elseResult);
-
-            Assert.Same(thenResult, result);
-        }
-
-        [t("Coalesce() calls 'otherwise' if some and 'predicate' is false.")]
-        public static void Coalesce3() {
-            var some = Maybe.Of(new Obj());
-            var wasCalled = false;
-            var notCalled = true;
-            var exp = new Obj("otherwise");
-            Func<Obj, Obj> selector = _ => { notCalled = false; return new Obj("selector"); };
-            Func<Obj> otherwise = () => { wasCalled = true; return exp; };
-
-            var result = some.Coalesce(_ => false, selector, otherwise);
-
-            Assert.True(notCalled);
-            Assert.True(wasCalled);
-            Assert.Same(exp, result);
-        }
-
-        [t("Coalesce() returns 'elseResult' if some and 'predicate' is false.")]
-        public static void Coalesce4() {
-            var some = Maybe.Of(new Obj());
-            var thenResult = new Obj("then");
-            var elseResult = new Obj("else");
-
-            var result = some.Coalesce(_ => false, thenResult, elseResult);
-
-            Assert.Same(elseResult, result);
-        }
-
-        [t("Coalesce() calls 'otherwise' if none and 'predicate' is true.")]
-        public static void Coalesce5() {
-            var none = Maybe<Obj>.None;
-            var wasCalled = false;
-            var notCalled = true;
-            var exp = new Obj("otherwise");
-            Func<Obj, Obj> selector = _ => { notCalled = false; return new Obj("selector"); };
-            Func<Obj> otherwise = () => { wasCalled = true; return exp; };
-
-            var result = none.Coalesce(_ => true, selector, otherwise);
-
-            Assert.True(notCalled);
-            Assert.True(wasCalled);
-            Assert.Same(exp, result);
-        }
-
-        [t("Coalesce() calls 'otherwise' if none and 'predicate' is false.")]
-        public static void Coalesce6() {
-            var none = Maybe<Obj>.None;
-            var wasCalled = false;
-            var notCalled = true;
-            var exp = new Obj("otherwise");
-            Func<Obj, Obj> selector = _ => { notCalled = false; return new Obj("selector"); };
-            Func<Obj> otherwise = () => { wasCalled = true; return exp; };
-
-            var result = none.Coalesce(_ => false, selector, otherwise);
-
-            Assert.True(notCalled);
-            Assert.True(wasCalled);
-            Assert.Same(exp, result);
-        }
-
-        [t("Coalesce() returns 'elseResult' if none and 'predicate' is true.")]
-        public static void Coalesce7() {
-            var none = Maybe<Obj>.None;
-            var thenResult = new Obj("then");
-            var elseResult = new Obj("else");
-
-            var result = none.Coalesce(_ => true, thenResult, elseResult);
-
-            Assert.Same(elseResult, result);
-        }
-
-        [t("Coalesce() returns 'elseResult' if none and 'predicate' is false.")]
-        public static void Coalesce8() {
-            var none = Maybe<Obj>.None;
-            var thenResult = new Obj("then");
-            var elseResult = new Obj("else");
-
-            var result = none.Coalesce(_ => false, thenResult, elseResult);
-
-            Assert.Same(elseResult, result);
-        }
-
-        [t("When() guards.")]
-        public static void When0() {
-            var some = Maybe.Of(new Obj());
-            Assert.Throws<ArgumentNullException>("predicate", () => some.When(null, _ => { }));
-            Assert.Throws<ArgumentNullException>("action", () => some.When(_ => true, null));
-            Assert.Throws<ArgumentNullException>("predicate", () => some.When(null, _ => { }, () => { }));
-            Assert.Throws<ArgumentNullException>("action", () => some.When(_ => true, null, () => { }));
-            Assert.Throws<ArgumentNullException>("otherwise", () => some.When(_ => true, _ => { }, null));
-
-            var none = Maybe<Obj>.None;
-            Assert.Throws<ArgumentNullException>("predicate", () => none.When(null, _ => { }));
-            Assert.Throws<ArgumentNullException>("action", () => none.When(_ => true, null));
-            Assert.Throws<ArgumentNullException>("predicate", () => none.When(null, _ => { }, () => { }));
-            Assert.Throws<ArgumentNullException>("action", () => none.When(_ => true, null, () => { }));
-            Assert.Throws<ArgumentNullException>("otherwise", () => none.When(_ => true, _ => { }, null));
-        }
-
-        [t("When() calls 'action' if some and 'predicate' is true (1).")]
-        public static void When1() {
-            var some = Maybe.Of(new Obj());
-            var wasCalled = false;
-            var notCalled = true;
-            Action<Obj> action = _ => wasCalled = true;
-            Action otherwise = () => notCalled = false;
-
-            some.When(_ => true, action, otherwise);
-
-            Assert.True(notCalled);
-            Assert.True(wasCalled);
-        }
-
-        [t("When() calls 'action' if some and 'predicate' is true (2).")]
-        public static void When2() {
-            var some = Maybe.Of(new Obj());
-            var wasCalled = false;
-            Action<Obj> action = _ => wasCalled = true;
-
-            some.When(_ => true, action);
-
-            Assert.True(wasCalled);
-        }
-
-        [t("When() calls 'otherwise' if some and 'predicate' is false.")]
-        public static void When3() {
-            var some = Maybe.Of(new Obj());
-            var wasCalled = false;
-            var notCalled = true;
-            Action<Obj> action = _ => notCalled = false;
-            Action otherwise = () => wasCalled = true;
-
-            some.When(_ => false, action, otherwise);
-
-            Assert.True(notCalled);
-            Assert.True(wasCalled);
-        }
-
-        [t("When() does not call 'action' if some and 'predicate' is false.")]
-        public static void When4() {
-            var some = Maybe.Of(new Obj());
-            var notCalled = true;
-            Action<Obj> action = _ => notCalled = false;
-
-            some.When(_ => false, action);
-
-            Assert.True(notCalled);
-        }
-
-        [t("When() calls 'otherwise' if none and 'predicate' is true.")]
-        public static void When5() {
-            var none = Maybe<Obj>.None;
-            var wasCalled = false;
-            var notCalled = true;
-            Action<Obj> action = _ => notCalled = false;
-            Action otherwise = () => wasCalled = true;
-
-            none.When(_ => true, action, otherwise);
-
-            Assert.True(notCalled);
-            Assert.True(wasCalled);
-        }
-
-        [t("When() does not call 'action' if none and 'predicate' is true.")]
-        public static void When6() {
-            var none = Maybe<Obj>.None;
-            var notCalled = true;
-            Action<Obj> action = _ => notCalled = false;
-
-            none.When(_ => true, action);
-
-            Assert.True(notCalled);
-        }
-
-        [t("When() calls 'otherwise' if none and 'predicate' is false.")]
-        public static void When7() {
-            var none = Maybe<Obj>.None;
-            var wasCalled = false;
-            var notCalled = true;
-            Action<Obj> action = _ => notCalled = false;
-            Action otherwise = () => wasCalled = true;
-
-            none.When(_ => false, action, otherwise);
-
-            Assert.True(notCalled);
-            Assert.True(wasCalled);
-        }
-
-        [t("When() does not call 'action' if none and 'predicate' is false.")]
-        public static void When8() {
-            var none = Maybe<Obj>.None;
-            var notCalled = true;
-            Action<Obj> action = _ => notCalled = false;
-
-            none.When(_ => false, action);
-
-            Assert.True(notCalled);
         }
 
         [t("Do() guards.")]

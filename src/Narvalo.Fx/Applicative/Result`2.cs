@@ -244,24 +244,6 @@ namespace Narvalo.Applicative
             if (IsSuccess) { onSuccess(Value); } else { onError(Error); }
         }
 
-        public bool WhenSuccess(Func<T, bool> predicate, Action<T> action)
-        {
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            if (IsSuccess && predicate(Value)) { action(Value); return true; }
-            return false;
-        }
-
-        public bool WhenError(Func<TError, bool> predicate, Action<TError> action)
-        {
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            if (IsError && predicate(Error)) { action(Error); return true; }
-            return false;
-        }
-
         public bool OnSuccess(Action<T> action)
         {
             Require.NotNull(action, nameof(action));
@@ -285,18 +267,6 @@ namespace Narvalo.Applicative
         [ExcludeFromCodeCoverage]
         bool Internal.ISecondaryContainer<TError>.Contains(TError value, IEqualityComparer<TError> comparer)
             => throw new NotSupportedException();
-
-        // Alias for WhenSuccess().
-        [ExcludeFromCodeCoverage]
-        bool Internal.IContainer<T>.When(Func<T, bool> predicate, Action<T> action)
-           => WhenSuccess(predicate, action);
-
-        // Alias for WhenError().
-        [ExcludeFromCodeCoverage]
-        bool Internal.ISecondaryContainer<TError>.When(
-            Func<TError, bool> predicate,
-            Action<TError> action)
-            => WhenError(predicate, action);
 
         // Alias for OnSuccess().
         [ExcludeFromCodeCoverage]

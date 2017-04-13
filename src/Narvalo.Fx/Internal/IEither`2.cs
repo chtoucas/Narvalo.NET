@@ -14,8 +14,7 @@ namespace Narvalo.Internal
     {
         TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight);
 
-        // Equivalent to Match<Unit>().
-        // See also:
+        // Complements:
         // > IContainer<TLeft>.Do(Action<TLeft> action);
         // > ISecondaryContainer<TRight>.Do(Action<TRight> action);
         void Do(Action<TLeft> onLeft, Action<TRight> onRight);

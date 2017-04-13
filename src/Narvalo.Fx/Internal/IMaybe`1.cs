@@ -13,23 +13,7 @@ namespace Narvalo.Internal
     {
         TResult Match<TResult>(Func<T, TResult> caseSome, Func<TResult> caseNone);
 
-        TResult Match<TResult>(Func<T, TResult> caseSome, TResult caseNone);
-
-        // See also the auto-generated methods:
-        // > Monad<TResult> Coalesce<TResult>(Func<T, bool> predicate, Monad<TResult> thenResult, Monad<TResult> elseResult);
-        // > Monad<TResult> If<TResult>(Func<T, bool> predicate, Monad<TResult> thenResult);
-        TResult Coalesce<TResult>(Func<T, bool> predicate, Func<T, TResult> selector, Func<TResult> otherwise);
-
-        TResult Coalesce<TResult>(Func<T, bool> predicate, TResult thenResult, TResult elseResult);
-
-        // See also:
-        // > IContainer<T>.When(Func<T, bool> predicate, Action<T> action);
-        // Equivalent to Coalesce<Unit>().
-        void When(Func<T, bool> predicate, Action<T> action, Action otherwise);
-
-        // See also:
-        // > IContainer<T>.Do(Action<T> action);
-        // Equivalent to Match<Unit>().
+        // Complements IContainer<T>.Do(Action<T> action).
         void Do(Action<T> onSome, Action onNone);
     }
 }

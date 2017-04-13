@@ -226,24 +226,6 @@ namespace Narvalo.Applicative
             if (IsSuccess) { onSuccess(Value); } else { onError(Error); }
         }
 
-        public bool WhenSuccess(Func<T, bool> predicate, Action<T> action)
-        {
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            if (IsSuccess && predicate(Value)) { action(Value); return true; }
-            return false;
-        }
-
-        public bool WhenError(Func<string, bool> predicate, Action<string> action)
-        {
-            Require.NotNull(predicate, nameof(predicate));
-            Require.NotNull(action, nameof(action));
-
-            if (IsError && predicate(Error)) { action(Error); return true; }
-            return false;
-        }
-
         public bool OnSuccess(Action<T> action)
         {
             Require.NotNull(action, nameof(action));
@@ -269,16 +251,6 @@ namespace Narvalo.Applicative
         [ExcludeFromCodeCoverage]
         bool Internal.ISecondaryContainer<string>.Contains(string value, IEqualityComparer<string> comparer)
             => throw new NotSupportedException();
-
-        // Alias for WhenSuccess().
-        [ExcludeFromCodeCoverage]
-        bool Internal.IContainer<T>.When(Func<T, bool> predicate, Action<T> action)
-           => WhenSuccess(predicate, action);
-
-        // Alias for WhenError().
-        [ExcludeFromCodeCoverage]
-        bool Internal.ISecondaryContainer<string>.When(Func<string, bool> predicate, Action<string> action)
-            => WhenError(predicate, action);
 
         // Alias for OnSuccess().
         [ExcludeFromCodeCoverage]

@@ -289,9 +289,6 @@ namespace Narvalo.Applicative
 
         public abstract void Do(Action<TLeft> onLeft, Action<TRight> onRight);
 
-        public abstract bool WhenLeft(Func<TLeft, bool> predicate, Action<TLeft> action);
-        public abstract bool WhenRight(Func<TRight, bool> predicate, Action<TRight> action);
-
         public abstract bool OnLeft(Action<TLeft> action);
         public abstract bool OnRight(Action<TRight> action);
 
@@ -316,16 +313,6 @@ namespace Narvalo.Applicative
         [ExcludeFromCodeCoverage]
         bool Internal.ISecondaryContainer<TRight>.Contains(TRight value, IEqualityComparer<TRight> comparer)
            => ContainsRight(value, comparer);
-
-        // Alias for WhenLeft().
-        [ExcludeFromCodeCoverage]
-        bool Internal.IContainer<TLeft>.When(Func<TLeft, bool> predicate, Action<TLeft> action)
-            => WhenLeft(predicate, action);
-
-        // Alias for WhenRight().
-        [ExcludeFromCodeCoverage]
-        bool Internal.ISecondaryContainer<TRight>.When(Func<TRight, bool> predicate, Action<TRight> action)
-            => WhenRight(predicate, action);
 
         // Alias for OnLeft().
         [ExcludeFromCodeCoverage]
@@ -355,17 +342,6 @@ namespace Narvalo.Applicative
 
                 return caseLeft(Left);
             }
-
-            public override bool WhenLeft(Func<TLeft, bool> predicate, Action<TLeft> action)
-            {
-                Require.NotNull(predicate, nameof(predicate));
-                Require.NotNull(action, nameof(action));
-
-                if (predicate(Left)) { action(Left); return true; }
-                return false;
-            }
-
-            public override bool WhenRight(Func<TRight, bool> predicate, Action<TRight> action) => false;
 
             public override void Do(Action<TLeft> onLeft, Action<TRight> onRight)
             {
@@ -402,17 +378,6 @@ namespace Narvalo.Applicative
                 Require.NotNull(caseRight, nameof(caseRight));
 
                 return caseRight(Right);
-            }
-
-            public override bool WhenLeft(Func<TLeft, bool> predicate, Action<TLeft> action) => false;
-
-            public override bool WhenRight(Func<TRight, bool> predicate, Action<TRight> action)
-            {
-                Require.NotNull(predicate, nameof(predicate));
-                Require.NotNull(action, nameof(action));
-
-                if (predicate(Right)) { action(Right); return true; }
-                return false;
             }
 
             public override void Do(Action<TLeft> onLeft, Action<TRight> onRight)
