@@ -26,21 +26,18 @@ namespace Narvalo.Applicative
         public Maybe<TResult> ZipWith<TSecond, TResult>(Maybe<TSecond> second, Func<T, TSecond, TResult> zipper)
         {
             Require.NotNull(zipper, nameof(zipper));
-
             return IsSome && second.IsSome ? Maybe<TResult>.η(zipper(Value, second.Value)) : Maybe<TResult>.None;
         }
 
         public Maybe<TResult> Select<TResult>(Func<T, TResult> selector)
         {
             Require.NotNull(selector, nameof(selector));
-
             return IsSome ? Maybe<TResult>.η(selector(Value)) : Maybe<TResult>.None;
         }
 
         public Maybe<T> Where(Func<T, bool> predicate)
         {
             Require.NotNull(predicate, nameof(predicate));
-
             // Returning "this" is not very "functional"-like, but having a value type, that's fine.
             return IsSome && predicate(Value) ? this : None;
         }

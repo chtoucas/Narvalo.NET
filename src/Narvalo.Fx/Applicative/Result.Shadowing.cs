@@ -29,7 +29,6 @@ namespace Narvalo.Applicative
             Func<T, TSecond, TResult> zipper)
         {
             Require.NotNull(zipper, nameof(zipper));
-
             return IsSuccess && second.IsSuccess
                 ? Result<TResult, TError>.Of(zipper(Value, second.Value))
                 : Result<TResult, TError>.FromError(Error);
@@ -38,7 +37,6 @@ namespace Narvalo.Applicative
         public Result<TResult, TError> Select<TResult>(Func<T, TResult> selector)
         {
             Require.NotNull(selector, nameof(selector));
-
             return IsSuccess
                 ? Result<TResult, TError>.Of(selector(Value))
                 : Result<TResult, TError>.FromError(Error); ;

@@ -9,7 +9,6 @@ namespace Narvalo.Applicative
         public Either<TResult, TRight> Gather<TResult>(Either<Func<TLeft, TResult>, TRight> applicative)
         {
             Require.NotNull(applicative, nameof(applicative));
-
             return IsLeft && applicative.IsLeft
                ? Either<TResult, TRight>.OfLeft(applicative.Left(Left))
                : Either<TResult, TRight>.OfRight(Right);
@@ -25,7 +24,6 @@ namespace Narvalo.Applicative
         {
             // Returning "this" is not very "functional"-like, but having a value type, that's fine.
             Require.NotNull(other, nameof(other));
-
             return IsLeft && other.IsLeft ? this : OfRight(Right);
         }
 
@@ -38,7 +36,6 @@ namespace Narvalo.Applicative
         {
             Require.NotNull(zipper, nameof(zipper));
             Require.NotNull(second, nameof(second));
-
             return IsLeft && second.IsLeft
                 ? Either<TResult, TRight>.OfLeft(zipper(Left, second.Left))
                 : Either<TResult, TRight>.OfRight(Right);
@@ -47,7 +44,6 @@ namespace Narvalo.Applicative
         public Either<TResult, TRight> Select<TResult>(Func<TLeft, TResult> selector)
         {
             Require.NotNull(selector, nameof(selector));
-
             return IsLeft
                 ? Either<TResult, TRight>.OfLeft(selector(Left))
                 : Either<TResult, TRight>.OfRight(Right); ;

@@ -94,7 +94,7 @@ they were not included on purpose. In the context of C#, I am yet to be
 convinced of their usefulness and practicability, but I might change my mind
 (for skeleton definitions of
 `IO`, `Reader` and `State`,
-see [here](https://github.com/chtoucas/Brouillons/tree/master/src/play/Functional/Monadic)).
+see [here](https://github.com/chtoucas/Brouillons/tree/master/src/Narvalo.Futures/Applicative/)).
 
 If you go to the [NuGet website](https://www.nuget.org), you will find many
 packages that solve the same problems as we do; those that I found the most
@@ -702,7 +702,8 @@ var failure = Fallible<int>.FromError(edi);
 var success = Result<int, Error>.Of(1);
 var failure = Result<int, Error>.FromError(new Error());
 ```
-"Fluent" API if you want to enjoy type inference and you prefer a simpler syntax:
+"Fluent" API if you want to enjoy type inference and you prefer a simpler syntax
+when the generic parameters are complicated:
 ```csharp
 var success = Result.OfTError<Error>.Of(1);
 var failure = Result.OfType<int>.FromError(new Error());
@@ -735,7 +736,8 @@ The either type is the simplest possible
 var left = Either<int, long>.OfLeft(1);
 var right = Either<int, long>.OfRight(1L);
 ```
-"Fluent" API if you want to enjoy type inference and you prefer a simpler syntax:
+"Fluent" API if you want to enjoy type inference and you prefer a simpler syntax
+when the generic parameters are complicated:
 ```csharp
 var left = Either.OfTRight<long>.OfLeft(1);
 var right = Either.OfTLeft<int>.OfRight(1L);

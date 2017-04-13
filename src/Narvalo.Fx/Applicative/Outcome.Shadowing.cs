@@ -29,7 +29,6 @@ namespace Narvalo.Applicative
             Func<T, TSecond, TResult> zipper)
         {
             Require.NotNull(zipper, nameof(zipper));
-
             return IsSuccess && second.IsSuccess
                 ? Outcome<TResult>.η(zipper(Value, second.Value))
                 : Outcome<TResult>.FromError(Error);
@@ -38,7 +37,6 @@ namespace Narvalo.Applicative
         public Outcome<TResult> Select<TResult>(Func<T, TResult> selector)
         {
             Require.NotNull(selector, nameof(selector));
-
             return IsSuccess ? Outcome<TResult>.η(selector(Value)) : Outcome<TResult>.FromError(Error);
         }
 

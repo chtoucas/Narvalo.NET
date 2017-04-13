@@ -98,8 +98,10 @@ public static void Deconstruct<T>(
     deconstructor method in `Maybe<T?>`.
   * For `IStructuralEquatable.Equals` whe throw when the comparer is null, is it
     the correct behaviour?
-- Add other monads - prototypes [here](https://github.com/chtoucas/Brouillons/tree/master/src/play/Functional/Monadic)
+- Add `Monoid` and other monads (`IO`, `Reader`, `Writer`, `Continuation`, `State`) -
+  prototypes [here](https://github.com/chtoucas/Brouillons/tree/master/src/Narvalo.Futures/Applicative/)
 - [Idioms](http://tomasp.net/blog/idioms-in-linq.aspx/)
+- Check out [FSharp.Extras](https://fsprojects.github.io/FSharpx.Extras/index.html)
 
 Narvalo.Money
 -------------

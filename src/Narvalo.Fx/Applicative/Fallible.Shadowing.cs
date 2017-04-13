@@ -29,7 +29,6 @@ namespace Narvalo.Applicative
             Func<T, TSecond, TResult> zipper)
         {
             Require.NotNull(zipper, nameof(zipper));
-
             return IsSuccess && second.IsSuccess
                 ? Fallible<TResult>.η(zipper(Value, second.Value))
                 : Fallible<TResult>.FromError(Error);
@@ -38,7 +37,6 @@ namespace Narvalo.Applicative
         public Fallible<TResult> Select<TResult>(Func<T, TResult> selector)
         {
             Require.NotNull(selector, nameof(selector));
-
             return IsError ? Fallible<TResult>.FromError(Error) : Fallible<TResult>.η(selector(Value));
         }
 
