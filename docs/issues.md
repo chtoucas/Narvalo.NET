@@ -80,6 +80,7 @@ Next:
   * Add operators on the right for `Either<T1, T2>` and `Result<T, TError>`?
   * Add more monad-like ops to `Outcome` and `Fallible`.
   * Custom `is` operators (it is in the proposal but it is not yet possible).
+  * Add `IComparable` to `Unit`?
 - Open questions:
   * Deconstruction for `Maybe<T?>`,
 ```csharp
