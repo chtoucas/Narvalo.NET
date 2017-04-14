@@ -13,11 +13,11 @@ namespace Narvalo.Applicative {
 
     // Tests for Result<T, TError>.
     public static partial class ResultFacts {
-        [t("default(Result<T, TError>) is NOK.")]
+        [t("default(Result<T, TError>) is OK.")]
         public static void Default1() {
             var result = default(Result<int, int>);
 
-            Assert.True(result.IsError);
+            Assert.True(result.IsSuccess);
         }
 
         [t("Deconstruct() if OK.")]

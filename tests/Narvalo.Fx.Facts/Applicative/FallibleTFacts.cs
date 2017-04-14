@@ -18,11 +18,11 @@ namespace Narvalo.Applicative {
             public tAttribute(string description) : base(nameof(Fallible), description) { }
         }
 
-        [t("default(Fallible<T>) is NOK.")]
+        [t("default(Fallible<T>) is OK.")]
         public static void Default1() {
             var result = default(Fallible<int>);
 
-            Assert.True(result.IsError);
+            Assert.True(result.IsSuccess);
         }
 
         [t("Unit is OK.")]

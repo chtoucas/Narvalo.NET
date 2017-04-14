@@ -37,7 +37,7 @@ namespace Narvalo.Applicative
         {
             _error = default(ExceptionDispatchInfo);
             _value = value;
-            IsSuccess = true;
+            IsError = false;
         }
 
         private Fallible(ExceptionDispatchInfo error)
@@ -46,7 +46,7 @@ namespace Narvalo.Applicative
 
             _error = error;
             _value = default(T);
-            IsSuccess = false;
+            IsError = true;
         }
 
         public void Deconstruct(
@@ -60,16 +60,16 @@ namespace Narvalo.Applicative
         }
 
         /// <summary>
-        /// Gets a value indicating whether the object is the result of a successful computation.
-        /// </summary>
-        /// <value>true if the outcome was successful; otherwise false.</value>
-        public bool IsSuccess { get; }
-
-        /// <summary>
         /// Gets a value indicating whether the object is the result of an unsuccessful computation.
         /// </summary>
         /// <value>true if the outcome was unsuccessful; otherwise false.</value>
-        public bool IsError => !IsSuccess;
+        public bool IsError { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether the object is the result of a successful computation.
+        /// </summary>
+        /// <value>true if the outcome was successful; otherwise false.</value>
+        public bool IsSuccess => !IsError;
 
         /// <summary>
         /// Obtains the enclosed value if any.

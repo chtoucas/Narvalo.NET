@@ -92,7 +92,6 @@ namespace Narvalo.Applicative
         public static Fallible FromError(ExceptionDispatchInfo error)
         {
             Require.NotNull(error, nameof(error));
-
             return new Fallible(error);
         }
     }
