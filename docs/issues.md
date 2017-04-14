@@ -59,8 +59,9 @@ Next:
 Narvalo.Fx
 ----------
 
-- Ensure that the default value of a monad is indeed the unit; if it is not
-  the case, we will have to change our wording.
+- [High] All result-like types should have a default value of the same kind,
+  all OK's or all NOK's; currently `default(Fallible)` and `default(Outcome)` are
+  OK's but the others are NOK's.
 - T4: If the monad is nullable, check that we handle all null's. Auto-generate
   tests for null-guards. Affects only `Either<T1, T2>` <- we should check
   that the behaviour in Either.Shadowing is the same as in the auto-generated

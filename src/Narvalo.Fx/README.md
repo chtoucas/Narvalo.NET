@@ -38,7 +38,7 @@ Our versioning scheme is explained
 - [Tour of the API](#tour-of-the-api)
 - [Typologia](#typologia)
 - [F# is better at functional programming!](#f-is-better-at-functional-programming)
-- [Haskell to C# Walk-Through](#haskell-to-C-walk-through)
+- [Haskell to C# Walk-Through](#haskell-to-c-walk-through)
 - [Changelog](#changelog)
 
 --------------------------------------------------------------------------------
@@ -126,9 +126,9 @@ actions - for instance, `Func<unit, unit>` (instead of `Action`) and
 `Func<T, unit>` (instead of `Action<T>`) are perfectly legal.
 
 The unit type `Unit` (in `Narvalo.Applicative`) is both an empty struct and a
-singleton, it has only one value `Unit.Default`. This type is not an original
-creation, far from it, _rendons à César ce qui est à César_, it is largely
-copied from
+singleton, it has only one value `Unit.Default` which, of course, is the same
+as `default(Unit)`. This type is not an original creation, far from it, _rendons
+à César ce qui est à César_, it is largely copied from
 [Rx.NET](https://github.com/Reactive-Extensions/Rx.NET/blob/develop/Rx.NET/Source/src/System.Reactive/Unit.cs).
 Personally, I like to make it look like a built-in type with:
 ```csharp
@@ -456,6 +456,8 @@ monads but, if you really insist, the type supports deconstruction:
 Deconstruction is **unsafe**, before accessing `value`, you should always check
 if `isSome` is true - when it is not, `value` is set to `default(T)` that is
 `null` for reference types :worried:.
+
+**Remark:** The default value (`default(Maybe<T>)`) is `Maybe<T>.None`.
 
 **Remark:** To check if a "maybe" contains a given value, rather than extracting
 the enclosed value, you should use the `Contains` helper - there is also an

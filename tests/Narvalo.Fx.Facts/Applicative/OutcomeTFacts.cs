@@ -15,6 +15,13 @@ namespace Narvalo.Applicative {
             public tAttribute(string description) : base(nameof(Outcome), description) { }
         }
 
+        [t("default(Outcome<T>) is NOK.")]
+        public static void Default1() {
+            var result = default(Outcome<int>);
+
+            Assert.True(result.IsError);
+        }
+
         [t("Unit is OK.")]
         public static void Unit1() {
             Assert.True(Outcome.Unit.IsSuccess);

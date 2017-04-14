@@ -7,10 +7,15 @@ namespace Narvalo.Applicative {
 
     using static global::My;
 
-    using unit = Narvalo.Applicative.Unit;
-
     // Tests for Outcome.
     public static partial class OutcomeFacts {
+        [t("default(Outcome) is OK.")]
+        public static void Default1() {
+            var result = default(Outcome);
+
+            Assert.True(result.IsSuccess);
+        }
+
         [t("Ok is OK.")]
         public static void Ok1() {
             Assert.True(Outcome.Ok.IsSuccess);

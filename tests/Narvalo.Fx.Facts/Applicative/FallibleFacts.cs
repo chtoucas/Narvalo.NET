@@ -12,6 +12,13 @@ namespace Narvalo.Applicative {
 
     // Tests for Fallible.
     public static partial class FallibleFacts {
+        [t("default(Fallible) is OK.")]
+        public static void Default1() {
+            var result = default(Fallible);
+
+            Assert.True(result.IsSuccess);
+        }
+
         [t("Ok is OK.")]
         public static void Ok1() {
             Assert.True(Fallible.Ok.IsSuccess);

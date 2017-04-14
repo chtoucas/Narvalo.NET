@@ -10,18 +10,21 @@ namespace Narvalo.Applicative {
     using static global::My;
 
     public static partial class MaybeFacts {
+        [t("default(Maybe<T>) is none.")]
+        public static void Default1() {
+            var m1 = default(Maybe<Unit>);
+            var m2 = default(Maybe<int>);
+            var m3 = default(Maybe<string>);
+
+            Assert.True(m1.IsNone);
+            Assert.True(m2.IsNone);
+            Assert.True(m3.IsNone);
+        }
+
         [t("Unit is some.")]
         public static void Unit1() {
             Assert.True(Maybe.Unit.IsSome);
             Assert.False(Maybe.Unit.IsNone);
-        }
-
-        [t("Unit is default(Maybe<Unit>).", Skip = "Pending decision regarding the default value.")]
-        public static void Unit2() {
-            var m = default(Maybe<Unit>);
-
-            Assert.True(m == Maybe.Unit);
-            Assert.True(m.Equals(Maybe.Unit));
         }
 
         [t("None (static) is none.")]
