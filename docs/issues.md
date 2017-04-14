@@ -59,6 +59,8 @@ Next:
 Narvalo.Fx
 ----------
 
+- Ensure that the default value of a monad is indeed the unit; if it is not
+  the case, we will have to change our wording.
 - T4: If the monad is nullable, check that we handle all null's. Auto-generate
   tests for null-guards. Affects only `Either<T1, T2>` <- we should check
   that the behaviour in Either.Shadowing is the same as in the auto-generated
