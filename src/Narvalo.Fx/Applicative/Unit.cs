@@ -9,6 +9,10 @@ namespace Narvalo.Applicative
     {
         public static Unit Default => default(Unit);
 
+        public static explicit operator ValueTuple(Unit value) => new ValueTuple();
+
+        public static explicit operator Unit(ValueTuple value) => Default;
+
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "left", Justification = "[Intentionally] This method always returns 'true'.")]
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "right", Justification = "[Intentionally] This method always returns 'true'.")]
         public static bool operator ==(Unit left, Unit right) => true;
