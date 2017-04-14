@@ -59,6 +59,7 @@ Next:
 Narvalo.Fx
 ----------
 
+- Add guidelines.
 - Add a note concerning the size of the structs.
 - T4: If the monad is nullable, check that we handle all null's. Auto-generate
   tests for null-guards. Affects only `Either<T1, T2>` <- we should check

@@ -611,7 +611,7 @@ do not translate to SQL).
 Railway Oriented Programming
 ----------------------------
 
-- [Getting started](#rop-quickstart)
+- [Overview](#rop-overview)
 - [`Outcome`](#rop-outcome)
 - [`Outcome<T>`](#rop-outcomeT)
 - [`Fallible`](#rop-fallible)
@@ -619,7 +619,7 @@ Railway Oriented Programming
 - [`Result<T, TError>`](#rop-result)
 - [Developer notes](#rop-notes)
 
-### <a name="rop-quickstart"></a>Getting started
+### <a name="rop-overview"></a>Overview
 
 `Outcome` and `Outcome<T>` encapsulate the result of a computation with
 lightweight error reporting to the caller in the form of a string;
@@ -643,10 +643,15 @@ full exception capture (`ExceptionDispatchInfo`).
   expected to throw in common scenarios. [TODO: give concrete examples, network
   calls, third-party library w/ unexpected irregular behaviour].
 - **DO** use the prefix "Try" for methods implementing this pattern.
-- **DO** prefer `Outcome` over `Maybe<string>`. With `Maybe<string>` it is not
-  obvious that the underlying type (`string`) represents an error and not the
-  "normal" return type.
+- **DO** prefer `Outcome` over `Maybe<string>` to send an optional error
+  message. With  `Maybe<string>` it is not obvious that the underlying type
+  (`string`) represents an error and not the "normal" return type.
+- **AVOID** using `Outcome<bool>`, `Fallible<bool>` or `Result<bool, TError>`,
+  but prefer `Outcome`, `Fallible` or `Result<Unit, TError>`
+  for methods that normally return a boolean to indicate if they succeed or not;
+  the properties `IsSuccess` and `IsError` are here for that.
 - **DO NOT** use any of these types for anything besides return types.
+  All these types are value types, for long-lived objects prefer `Either<T1, T2>`.
 - **DO NOT** use `Fallible` and `Fallible<T>` on public APIs.
 - **DO NOT** use `Result<T, Exception>`; this is **not** a replacement for the
   standard exception mechanism in .NET.
@@ -679,9 +684,6 @@ Type             | Alternatives
 `Outcome<T>`     | `Result<T, string>`
 `Fallible`       | `Result<Unit, ExceptionDispatchInfo>` or `Fallible<Unit>`
 `Fallible<T>`    | `Result<T, ExceptionDispatchInfo>`
-
-All these types are value types, as stated above, their primary usage is as a
-return type. For long-lived objects prefer `Either<T1, T2>`.
 
 ### <a name="rop-outcome"></a>`Outcome`
 
