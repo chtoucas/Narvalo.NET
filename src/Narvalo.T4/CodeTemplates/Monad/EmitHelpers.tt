@@ -17,12 +17,12 @@ public partial class MonadTemplate
     {
 <#+ if (!HasRightGenerics) { #>
         /// <summary>
-        /// The unique object of type <c><#= Name #>&lt;Unit&gt;</c>.
+        /// The default object of type <c><#= Name #>&lt;Unit&gt;</c>.
         /// </summary>
         private static readonly <#= Name #><unit> s_Unit = <#= ReturnName #>(unit.Default);
 
         /// <summary>
-        /// Gets the unique object of type <c><#= Name #>&lt;Unit&gt;</c>.
+        /// Gets the default object of type <c><#= Name #>&lt;Unit&gt;</c>.
         /// </summary>
         public static <#= Name #><unit> Unit => s_Unit;
 

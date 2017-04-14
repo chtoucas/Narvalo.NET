@@ -655,7 +655,8 @@ var failure = Outcome.FromError("My error message.");
 (bool succeed, string error) = outcome;
 ```
 
-[Explain: We have a `Select` but no QEP]
+[Explain: Not really a monad, no QEP but conversion to `Outcome<Unit>` and Result,
+which is conveninet when you have a mix of `Outcome` and other return types]
 
 ### <a name="rop-outcomeT"></a>`Outcome<T>`
 
@@ -690,7 +691,7 @@ var failure = Fallible.FromError(edi);
 (bool succeed, ExceptionDispatchInfo exceptionInfo) = fallible;
 ```
 
-[Explain: We have a `Select` but no QEP]
+[Explain: Not really a monad, no QEP but conversion to `Fallible<Unit>` and Result]
 [Explain when to use this class and what to expect; e.g. for querying remote services]
 **We do not catch exceptions thrown by any supplied delegate.**
 

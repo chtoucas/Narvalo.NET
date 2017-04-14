@@ -82,7 +82,6 @@ namespace Narvalo.Applicative
     // Factory methods.
     public partial struct Fallible
     {
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private static readonly Fallible s_Ok = new Fallible();
 
         /// <summary>
@@ -107,50 +106,36 @@ namespace Narvalo.Applicative
             return Error;
         }
 
+        public Fallible<Unit> ToFallibleT()
+            => IsError
+            ? Fallible<Unit>.FromError(Error)
+            : Fallible.Unit;
+
+        public Result<Unit, ExceptionDispatchInfo> ToResult()
+            => IsError
+            ? Result<Unit, ExceptionDispatchInfo>.FromError(Error)
+            : Result<ExceptionDispatchInfo>.Unit;
+
         public static explicit operator ExceptionDispatchInfo(Fallible value) => value.ToExceptionInfo();
     }
 
     // Core methods.
     public partial struct Fallible
     {
-        // Compare w/ Bind(Func<Unit, Fallible<TResult>>).
-        public Fallible<TResult> Bind<TResult>(Func<Fallible<TResult>> binder)
-        {
-            Require.NotNull(binder, nameof(binder));
-
-            return IsError ? Fallible<TResult>.FromError(Error) : binder();
-        }
-
-        // Compare w/ Select(Func<Unit, TResult>).
-        public Fallible<TResult> Select<TResult>(Func<TResult> selector)
-        {
-            Require.NotNull(selector, nameof(selector));
-
-            return IsError ? Fallible<TResult>.FromError(Error) : Of(selector());
-        }
-
-        public Fallible<TResult> ReplaceBy<TResult>(TResult value)
-            => IsError ? Fallible<TResult>.FromError(Error) : Of(value);
-
-        public Fallible<TResult> ContinueWith<TResult>(Fallible<TResult> other)
-            => IsError ? Fallible<TResult>.FromError(Error) : other;
-
         public TResult Match<TResult>(
             Func<TResult> caseSuccess,
             Func<ExceptionDispatchInfo, TResult> caseError)
         {
             Require.NotNull(caseSuccess, nameof(caseSuccess));
             Require.NotNull(caseError, nameof(caseError));
-
-            return IsSuccess ? caseSuccess() : caseError(Error);
+            return IsError ? caseError(Error) : caseSuccess();
         }
 
         public void Do(Action onSuccess, Action<ExceptionDispatchInfo> onError)
         {
             Require.NotNull(onSuccess, nameof(onSuccess));
             Require.NotNull(onError, nameof(onError));
-
-            if (IsSuccess) { onSuccess(); } else { onError(Error); }
+            if (IsError) { onError(Error); } else { onSuccess(); }
         }
 
         public bool OnSuccess(Action action)
@@ -167,6 +152,30 @@ namespace Narvalo.Applicative
 
             if (IsError) { action(Error); return true; }
             return false;
+        }
+    }
+
+    // Monad-like methods.
+    public partial struct Fallible
+    {
+        // Compare w/ Bind(Func<Unit, Fallible<TResult>>).
+        public Fallible<TResult> Bind<TResult>(Func<Fallible<TResult>> binder)
+        {
+            Require.NotNull(binder, nameof(binder));
+            return IsError ? Fallible<TResult>.FromError(Error) : binder();
+        }
+
+        public Fallible<TResult> ReplaceBy<TResult>(TResult value)
+            => IsError ? Fallible<TResult>.FromError(Error) : Fallible<TResult>.η(value);
+
+        public Fallible<TResult> ContinueWith<TResult>(Fallible<TResult> other)
+            => IsError ? Fallible<TResult>.FromError(Error) : other;
+
+        // Compare w/ Select(Func<Unit, TResult>).
+        public Fallible<TResult> Select<TResult>(Func<TResult> selector)
+        {
+            Require.NotNull(selector, nameof(selector));
+            return IsError ? Fallible<TResult>.FromError(Error) : Of(selector());
         }
     }
 

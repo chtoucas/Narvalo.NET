@@ -10,6 +10,15 @@ namespace Narvalo.Applicative {
             public tAttribute(string description) : base(nameof(Unit), description) { }
         }
 
+        [t("Default is default(Unit)")]
+        public static void Default1() {
+            var u = Unit.Default;
+            var u1 = default(Unit);
+
+            Assert.True(u == u1);
+            Assert.True(u.Equals(u1));
+        }
+
         [t("== and !=.")]
         public static void Equality1() {
             var u = Unit.Default;

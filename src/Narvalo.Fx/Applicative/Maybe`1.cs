@@ -20,8 +20,7 @@ namespace Narvalo.Applicative
     [DebuggerTypeProxy(typeof(Maybe<>.DebugView))]
     public partial struct Maybe<T> : IEquatable<Maybe<T>>, Internal.IMaybe<T>
     {
-        // You should NEVER use this field directly, use the Value property instead. The Code Contracts
-        // static checker should then prove that no illegal access to this field happens (i.e. when IsSome is false).
+        // We should NEVER use this field directly, use the Value property instead.
         private readonly T _value;
 
         /// <summary>
@@ -51,10 +50,8 @@ namespace Narvalo.Applicative
         /// <remarks>Most of the time, you don't need to access this property.
         /// You are better off using the rich vocabulary that this class offers.</remarks>
         /// <value>true if the object does hold a value; otherwise false.</value>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public bool IsSome { get; }
 
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public bool IsNone => !IsSome;
 
         /// <summary>

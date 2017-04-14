@@ -28,7 +28,7 @@ namespace Narvalo.Applicative
         }
 
         public Either<Unit, TRight> Skip()
-            => IsLeft ? Either<Unit, TRight>.OfLeft(Unit.Default) : Either<Unit, TRight>.OfRight(Right);
+            => IsLeft ? Either<TRight>.Unit : Either<Unit, TRight>.OfRight(Right);
 
         public Either<TResult, TRight> ZipWith<TSecond, TResult>(
             Either<TSecond, TRight> second,

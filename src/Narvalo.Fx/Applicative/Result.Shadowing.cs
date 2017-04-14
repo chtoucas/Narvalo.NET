@@ -22,7 +22,7 @@ namespace Narvalo.Applicative
             => IsSuccess && other.IsSuccess ? this : FromError(Error);
 
         public Result<Unit, TError> Skip()
-            => IsSuccess ? Result<Unit, TError>.Of(Unit.Default) : Result<Unit, TError>.FromError(Error);
+            => IsSuccess ? Result<TError>.Unit : Result<Unit, TError>.FromError(Error);
 
         public Result<TResult, TError> ZipWith<TSecond, TResult>(
             Result<TSecond, TError> second,

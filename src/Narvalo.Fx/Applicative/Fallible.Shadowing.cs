@@ -37,7 +37,7 @@ namespace Narvalo.Applicative
         public Fallible<TResult> Select<TResult>(Func<T, TResult> selector)
         {
             Require.NotNull(selector, nameof(selector));
-            return IsError ? Fallible<TResult>.FromError(Error) : Fallible<TResult>.η(selector(Value));
+            return IsSuccess ? Fallible<TResult>.η(selector(Value)) : Fallible<TResult>.FromError(Error);
         }
 
         public Fallible<TResult> SelectMany<TMiddle, TResult>(

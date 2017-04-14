@@ -16,6 +16,14 @@ namespace Narvalo.Applicative {
             Assert.False(Maybe.Unit.IsNone);
         }
 
+        [t("Unit is default(Maybe<Unit>).", Skip = "Pending decision regarding the default value.")]
+        public static void Unit2() {
+            var m = default(Maybe<Unit>);
+
+            Assert.True(m == Maybe.Unit);
+            Assert.True(m.Equals(Maybe.Unit));
+        }
+
         [t("None (static) is none.")]
         public static void None1() {
             Assert.True(Maybe.None.IsNone);

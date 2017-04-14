@@ -66,7 +66,6 @@ namespace Narvalo.Applicative
     // Factory methods.
     public partial struct Outcome
     {
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private static readonly Outcome s_Ok = new Outcome();
 
         /// <summary>
@@ -82,37 +81,29 @@ namespace Narvalo.Applicative
         }
     }
 
+    // Conversion operators.
+    public partial struct Outcome
+    {
+        public Outcome<Unit> ToOutcomeT()
+            => IsError
+            ? Outcome<Unit>.FromError(Error)
+            : Outcome.Unit;
+
+        public Result<Unit, string> ToResult()
+            => IsError
+            ? Result<Unit, string>.FromError(Error)
+            : Result<string>.Unit;
+    }
+
     // Core methods.
     public partial struct Outcome
     {
-        // Compare w/ Bind(Func<Unit, Outcome<TResult>>).
-        public Outcome<TResult> Bind<TResult>(Func<Outcome<TResult>> binder)
-        {
-            Require.NotNull(binder, nameof(binder));
-
-            return IsError ? Outcome<TResult>.FromError(Error) : binder();
-        }
-
-        // Compare w/ Select(Func<Unit, TResult>).
-        public Outcome<TResult> Select<TResult>(Func<TResult> selector)
-        {
-            Require.NotNull(selector, nameof(selector));
-
-            return IsError ? Outcome<TResult>.FromError(Error) : Of(selector());
-        }
-
-        public Outcome<TResult> ReplaceBy<TResult>(TResult value)
-            => IsError ? Outcome<TResult>.FromError(Error) : Of(value);
-
-        public Outcome<TResult> ContinueWith<TResult>(Outcome<TResult> result)
-            => IsError ? Outcome<TResult>.FromError(Error) : result;
-
         public TResult Match<TResult>(Func<TResult> caseSuccess, Func<string, TResult> caseError)
         {
             Require.NotNull(caseSuccess, nameof(caseSuccess));
             Require.NotNull(caseError, nameof(caseError));
 
-            return IsSuccess ? caseSuccess() : caseError(Error);
+            return IsError ? caseError(Error) : caseSuccess();
         }
 
         public void Do(Action onSuccess, Action<string> onError)
@@ -120,7 +111,7 @@ namespace Narvalo.Applicative
             Require.NotNull(onSuccess, nameof(onSuccess));
             Require.NotNull(onError, nameof(onError));
 
-            if (IsSuccess) { onSuccess(); } else { onError(Error); }
+            if (IsError) { onError(Error); } else { onSuccess(); }
         }
 
         public bool OnSuccess(Action action)
@@ -140,6 +131,32 @@ namespace Narvalo.Applicative
         }
     }
 
+    // Monad-like methods.
+    public partial struct Outcome
+    {
+        // Compare w/ Bind(Func<Unit, Outcome<TResult>>).
+        public Outcome<TResult> Bind<TResult>(Func<Outcome<TResult>> binder)
+        {
+            Require.NotNull(binder, nameof(binder));
+
+            return IsError ? Outcome<TResult>.FromError(Error) : binder();
+        }
+
+        public Outcome<TResult> ReplaceBy<TResult>(TResult value)
+            => IsError ? Outcome<TResult>.FromError(Error) : Of(value);
+
+        public Outcome<TResult> ContinueWith<TResult>(Outcome<TResult> result)
+            => IsError ? Outcome<TResult>.FromError(Error) : result;
+
+        // Compare w/ Select(Func<Unit, TResult>).
+        public Outcome<TResult> Select<TResult>(Func<TResult> selector)
+        {
+            Require.NotNull(selector, nameof(selector));
+
+            return IsError ? Outcome<TResult>.FromError(Error) : Of(selector());
+        }
+    }
+
     // Implements the IEquatable<Outcome> interface.
     public partial struct Outcome
     {
@@ -149,8 +166,8 @@ namespace Narvalo.Applicative
 
         public bool Equals(Outcome other)
         {
-            if (IsSuccess) { return other.IsSuccess; }
-            return other.IsError && Error == other.Error;
+            if (IsError) { return other.IsError && Error == other.Error; }
+            return other.IsSuccess;
         }
 
         public override bool Equals(object obj) => (obj is Outcome) && Equals((Outcome)obj);

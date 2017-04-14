@@ -164,9 +164,9 @@ namespace Narvalo.Applicative
         public Maybe<T> ToMaybe() => ValueOrNone();
 
         public Result<T, ExceptionDispatchInfo> ToResult()
-            => IsError
-            ? Result<T, ExceptionDispatchInfo>.FromError(Error)
-            : Result<T, ExceptionDispatchInfo>.Of(Value);
+            => IsSuccess
+            ? Result<T, ExceptionDispatchInfo>.Of(Value)
+            : Result<T, ExceptionDispatchInfo>.FromError(Error);
 
         public static explicit operator T(Fallible<T> value) => value.ToValue();
 
@@ -181,8 +181,7 @@ namespace Narvalo.Applicative
         public Fallible<TResult> Bind<TResult>(Func<T, Fallible<TResult>> binder)
         {
             Require.NotNull(binder, nameof(binder));
-
-            return IsError ? Fallible<TResult>.FromError(Error) : binder(Value);
+            return IsSuccess ? binder(Value) : Fallible<TResult>.FromError(Error);
         }
 
         [DebuggerHidden]
@@ -195,7 +194,6 @@ namespace Narvalo.Applicative
         public static Fallible<T> FromError(ExceptionDispatchInfo error)
         {
             Require.NotNull(error, nameof(error));
-
             return new Fallible<T>(error);
         }
 
@@ -226,7 +224,6 @@ namespace Narvalo.Applicative
         {
             Require.NotNull(caseSuccess, nameof(caseSuccess));
             Require.NotNull(caseError, nameof(caseError));
-
             return IsSuccess ? caseSuccess(Value) : caseError(Error);
         }
 
@@ -234,7 +231,6 @@ namespace Narvalo.Applicative
         {
             Require.NotNull(onSuccess, nameof(onSuccess));
             Require.NotNull(onError, nameof(onError));
-
             if (IsSuccess) { onSuccess(Value); } else { onError(Error); }
         }
 
