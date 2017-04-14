@@ -8,13 +8,10 @@ namespace Narvalo.Applicative
 
     internal static partial class Either<TRight>
     {
-        /// <summary>
-        /// The default object of type <c>Either&lt;Unit, TRight&gt;</c>.
-        /// </summary>
         private static readonly Either<Unit, TRight> s_Unit = Either<Unit, TRight>.OfLeft(unit.Default);
 
         /// <summary>
-        /// Gets the default object of type <c>Either&lt;Unit, TRight&gt;</c>.
+        /// Gets the unique (non-null) object of type <c>Either&lt;Unit, TRight&gt;</c>.
         /// </summary>
         public static Either<Unit, TRight> Unit => s_Unit;
     }

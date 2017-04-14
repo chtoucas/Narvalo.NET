@@ -9,13 +9,10 @@ namespace Narvalo.Applicative
 
     internal static partial class Result<TError>
     {
-        /// <summary>
-        /// The default object of type <c>Result&lt;Unit, TError&gt;</c>.
-        /// </summary>
         private static readonly Result<Unit, TError> s_Unit = Result<Unit, TError>.Of(unit.Default);
 
         /// <summary>
-        /// Gets the default object of type <c>Result&lt;Unit, TError&gt;</c>.
+        /// Gets the default and unique successful object of type <c>Result&lt;Unit, TError&gt;</c>.
         /// </summary>
         public static Result<Unit, TError> Unit => s_Unit;
     }

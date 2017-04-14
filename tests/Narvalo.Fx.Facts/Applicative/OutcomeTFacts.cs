@@ -28,6 +28,11 @@ namespace Narvalo.Applicative {
             Assert.False(Outcome.Unit.IsError);
         }
 
+        [t("Unit is default(Outcome<Unit>).")]
+        public static void Unit2() {
+            Assert.Equal(default(Outcome<Unit>), Outcome.Unit);
+        }
+
         [t("Of() returns OK.")]
         public static void Of1() {
             var ok = Outcome.Of(1);

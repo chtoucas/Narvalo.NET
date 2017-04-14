@@ -67,13 +67,10 @@ namespace Narvalo.T4.Testbed
     // T4: EmitHelpers().
     public static partial class MonadZero
     {
-        /// <summary>
-        /// The unique object of type <c>MonadZero&lt;Unit&gt;</c>.
-        /// </summary>
         private static readonly MonadZero<unit> s_Unit = Of(unit.Default);
 
         /// <summary>
-        /// Gets the unique object of type <c>MonadZero&lt;Unit&gt;</c>.
+        /// Gets the unique (non-null) object of type <c>MonadZero&lt;Unit&gt;</c>.
         /// </summary>
         public static MonadZero<unit> Unit => s_Unit;
 
@@ -466,12 +463,14 @@ namespace Narvalo.T4.Testbed
     }
 
     // Provides EXPERIMENTAL extension methods for MonadZero<T>.
-    // - Zip
-    // - If
-    // - Coalesce
+    // - Coalesce (dubious)
+    // - GroupJoin
+    // - If (dubious)
+    // - Zip (dubious)
     // T4: EmitExtensionsExperimental().
     public static partial class MonadZeroL
     {
+        // This ought to be a purely static method: Monad.Zip(first, second).
         public static MonadZero<(T1, T2)> Zip<T1, T2>(
             this MonadZero<T1> @this,
             MonadZero<T2> other)

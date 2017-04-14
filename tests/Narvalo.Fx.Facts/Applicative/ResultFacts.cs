@@ -246,6 +246,17 @@ namespace Narvalo.Applicative {
             Assert.Equal(default(int), result1.Value);
             Assert.Equal(default(string), result2.Value);
         }
+
+        [t("Unit is OK.")]
+        public static void Unit1() {
+            Assert.True(Result<string>.Unit.IsSuccess);
+            Assert.False(Result<string>.Unit.IsError);
+        }
+
+        [t("Unit is default(Result<Unit, TError>).")]
+        public static void Unit2() {
+            Assert.Equal(default(Result<Unit, string>), Result<string>.Unit);
+        }
     }
 
 #endif

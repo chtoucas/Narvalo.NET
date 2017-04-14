@@ -25,13 +25,10 @@ namespace Narvalo.Applicative
     // T4: EmitHelpers().
     public partial struct Outcome
     {
-        /// <summary>
-        /// The unique object of type <c>Outcome&lt;Unit&gt;</c>.
-        /// </summary>
         private static readonly Outcome<unit> s_Unit = Of(unit.Default);
 
         /// <summary>
-        /// Gets the unique object of type <c>Outcome&lt;Unit&gt;</c>.
+        /// Gets the default and unique object of type <c>Outcome&lt;Unit&gt;</c>.
         /// </summary>
         public static Outcome<unit> Unit => s_Unit;
 

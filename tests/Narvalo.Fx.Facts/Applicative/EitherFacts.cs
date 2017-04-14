@@ -500,6 +500,12 @@ namespace Narvalo.Applicative {
 #if !NO_INTERNALS_VISIBLE_TO
 
     public static partial class EitherFacts {
+        [t("Unit is lefty.")]
+        public static void Unit1() {
+            Assert.True(Either<string>.Unit.IsLeft);
+            Assert.False(Either<string>.Unit.IsRight);
+        }
+
         [t("Left returns value if lefty.")]
         public static void Left1() {
             var exp = new Obj("left");

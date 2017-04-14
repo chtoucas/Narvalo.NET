@@ -31,6 +31,11 @@ namespace Narvalo.Applicative {
             Assert.False(Fallible.Unit.IsError);
         }
 
+        [t("Unit is default(Fallible<Unit>).")]
+        public static void Unit2() {
+            Assert.Equal(default(Fallible<Unit>), Fallible.Unit);
+        }
+
         [t("Of() returns OK.")]
         public static void Of1() {
             var result = Fallible.Of(1);

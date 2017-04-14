@@ -67,13 +67,10 @@ namespace Narvalo.T4.Testbed
     // T4: EmitHelpers().
     public static partial class MonadOr
     {
-        /// <summary>
-        /// The unique object of type <c>MonadOr&lt;Unit&gt;</c>.
-        /// </summary>
         private static readonly MonadOr<unit> s_Unit = Of(unit.Default);
 
         /// <summary>
-        /// Gets the unique object of type <c>MonadOr&lt;Unit&gt;</c>.
+        /// Gets the unique (non-null) object of type <c>MonadOr&lt;Unit&gt;</c>.
         /// </summary>
         public static MonadOr<unit> Unit => s_Unit;
 
@@ -466,12 +463,14 @@ namespace Narvalo.T4.Testbed
     }
 
     // Provides EXPERIMENTAL extension methods for MonadOr<T>.
-    // - Zip
-    // - If
-    // - Coalesce
+    // - Coalesce (dubious)
+    // - GroupJoin
+    // - If (dubious)
+    // - Zip (dubious)
     // T4: EmitExtensionsExperimental().
     public static partial class MonadOrL
     {
+        // This ought to be a purely static method: Monad.Zip(first, second).
         public static MonadOr<(T1, T2)> Zip<T1, T2>(
             this MonadOr<T1> @this,
             MonadOr<T2> other)
