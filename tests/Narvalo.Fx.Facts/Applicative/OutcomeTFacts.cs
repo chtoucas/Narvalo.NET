@@ -401,6 +401,15 @@ namespace Narvalo.Applicative {
 #if !NO_INTERNALS_VISIBLE_TO
 
     public static partial class OutcomeTFacts {
+        [t("default(Outcome<T>) contains default(T).")]
+        public static void Default2() {
+            var result1 = default(Outcome<int>);
+            var result2 = default(Outcome<string>);
+
+            Assert.Equal(default(int), result1.Value);
+            Assert.Equal(default(string), result2.Value);
+        }
+
         [t("ValueOrNone() returns some for underlying value if OK.")]
         public static void ValueOrNone3() {
             var exp = new Obj();

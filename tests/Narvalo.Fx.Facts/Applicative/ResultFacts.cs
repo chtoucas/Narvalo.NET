@@ -234,4 +234,19 @@ namespace Narvalo.Applicative {
             public int GetHashCode(object obj) => obj?.GetHashCode() ?? 0;
         }
     }
+
+#if !NO_INTERNALS_VISIBLE_TO
+
+    public static partial class ResultFacts {
+        [t("default(Result<T, TError>) contains default(T).")]
+        public static void Default2() {
+            var result1 = default(Result<int, int>);
+            var result2 = default(Result<string, int>);
+
+            Assert.Equal(default(int), result1.Value);
+            Assert.Equal(default(string), result2.Value);
+        }
+    }
+
+#endif
 }

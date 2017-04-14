@@ -625,6 +625,13 @@ Typical use cases:
   (`ExceptionDispatchInfo`): `Fallible` and `Fallible<T>`.
 - In all other cases: `Result<T, TError>`.
 
+Guidelines (TO BE COMPLETED):
+- CONSIDER using `Outcome` and `Outcome<T>` to provide alternatives to methods
+  that might fail but the error is not fatal.
+- DO NOT use the other types on public APIs.
+- CONSIDER using `Fallible` and `Fallible<T>` to provide alternatives to methods
+  that might throw.
+
 Of course, we could have gone away with one single type, but at the expense
 of complicated type signatures. The correspondence is as follows:
 
@@ -646,6 +653,23 @@ Remarks:
 - **Always** prefer `Outcome` over `Maybe<TError>`.
   With `Maybe<TError>` it is not obvious that the underlying type (`TError`)
   represents an error and not the "normal" return type.
+
+The default value of any of these result types is a successful object. This is
+consistent with what we would do with "normal" methods:
+```csharp
+public T Method1() {
+  if (...) { ... return ...}
+  // Default
+  return default(T);
+}
+public Outcome<T> Method2() {
+  if (...) { ... return ...}
+  // Default
+  return default(Outcome<T>);
+}
+```
+The default return value of `Method2` is a successful object containing
+`default(T)`.
 
 ### <a name="rop-outcome"></a>`Outcome`
 

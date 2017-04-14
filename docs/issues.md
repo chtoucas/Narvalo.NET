@@ -65,6 +65,7 @@ Narvalo.Fx
   of fields when using `default` (`Error` is then null which is not good at all).
   Conclusion: We should always default to OK (the default instance will have a
   null `Value` case we already handle).
+- Add note on the size on the structs.
 - T4: If the monad is nullable, check that we handle all null's. Auto-generate
   tests for null-guards. Affects only `Either<T1, T2>` <- we should check
   that the behaviour in Either.Shadowing is the same as in the auto-generated

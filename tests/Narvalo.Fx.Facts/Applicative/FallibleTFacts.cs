@@ -311,6 +311,15 @@ namespace Narvalo.Applicative {
 #if !NO_INTERNALS_VISIBLE_TO
 
     public static partial class FallibleTFacts {
+        [t("default(Fallible<T>) contains default(T).")]
+        public static void Default2() {
+            var result1 = default(Fallible<int>);
+            var result2 = default(Fallible<string>);
+
+            Assert.Equal(default(int), result1.Value);
+            Assert.Equal(default(string), result2.Value);
+        }
+
         [t("Bind() transports error if NOK.")]
         public static void Bind3() {
             var nok = Fallible<Obj>.FromError(Error);
