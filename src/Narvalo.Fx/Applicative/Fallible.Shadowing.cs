@@ -7,37 +7,37 @@ namespace Narvalo.Applicative
     public partial struct Fallible<T>
     {
         public Fallible<TResult> Gather<TResult>(Fallible<Func<T, TResult>> applicative)
-            => IsSuccess && applicative.IsSuccess
-            ? Fallible<TResult>.η(applicative.Value(Value))
-            : Fallible<TResult>.FromError(Error);
+            => IsError && applicative.IsError
+            ? Fallible<TResult>.FromError(Error)
+            : Fallible<TResult>.η(applicative.Value(Value));
 
         public Fallible<TResult> ReplaceBy<TResult>(TResult other)
-            => IsSuccess ? Fallible<TResult>.η(other) : Fallible<TResult>.FromError(Error);
+            => IsError ? Fallible<TResult>.FromError(Error) : Fallible<TResult>.η(other);
 
         public Fallible<TResult> ContinueWith<TResult>(Fallible<TResult> other)
-            => IsSuccess ? other : Fallible<TResult>.FromError(Error);
+            => IsError ? Fallible<TResult>.FromError(Error) : other;
 
         public Fallible<T> PassBy<TOther>(Fallible<TOther> other)
             // Returning "this" is not very "functional"-like, but having a value type, that's fine.
-            => IsSuccess && other.IsSuccess ? this : FromError(Error);
+            => IsError && other.IsError ? FromError(Error) : this;
 
         public Fallible<Unit> Skip()
-            => IsSuccess ? Fallible.Unit : Fallible<Unit>.FromError(Error);
+            => IsError ? Fallible<Unit>.FromError(Error) : Fallible.Unit;
 
         public Fallible<TResult> ZipWith<TSecond, TResult>(
             Fallible<TSecond> second,
             Func<T, TSecond, TResult> zipper)
         {
             Require.NotNull(zipper, nameof(zipper));
-            return IsSuccess && second.IsSuccess
-                ? Fallible<TResult>.η(zipper(Value, second.Value))
-                : Fallible<TResult>.FromError(Error);
+            return IsError && second.IsError
+                ? Fallible<TResult>.FromError(Error)
+                : Fallible<TResult>.η(zipper(Value, second.Value));
         }
 
         public Fallible<TResult> Select<TResult>(Func<T, TResult> selector)
         {
             Require.NotNull(selector, nameof(selector));
-            return IsSuccess ? Fallible<TResult>.η(selector(Value)) : Fallible<TResult>.FromError(Error);
+            return IsError ? Fallible<TResult>.FromError(Error) : Fallible<TResult>.η(selector(Value));
         }
 
         public Fallible<TResult> SelectMany<TMiddle, TResult>(
