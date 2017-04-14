@@ -73,29 +73,29 @@ namespace Narvalo.Applicative
 
         [ExcludeFromCodeCoverage]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
-        private string DebuggerDisplay => IsSuccess ? "Success" : "Error";
+        private string DebuggerDisplay => IsError ? "Error" : "Success";
 
         /// <summary>
         /// Obtains the enclosed value if any; otherwise the default value of the type T.
         /// </summary>
         public T ValueOrDefault() => _value;
 
-        public Maybe<T> ValueOrNone() => IsSuccess ? Maybe.Of(Value) : Maybe<T>.None;
+        public Maybe<T> ValueOrNone() => IsError ? Maybe<T>.None : Maybe.Of(Value);
 
         /// <summary>
         /// Returns the enclosed value if any; otherwise <paramref name="other"/>.
         /// </summary>
         /// <param name="other">A default value to be used if if there is no underlying value.</param>
-        public T ValueOrElse(T other) => IsSuccess ? Value : other;
+        public T ValueOrElse(T other) => IsError ? other : Value;
 
         public T ValueOrElse(Func<T> valueFactory)
         {
             Require.NotNull(valueFactory, nameof(valueFactory));
 
-            return IsSuccess ? Value : valueFactory();
+            return IsError ? valueFactory() : Value;
         }
 
-        public T ValueOrThrow() => IsSuccess ? Value : throw new InvalidOperationException(Error);
+        public T ValueOrThrow() => IsError ? throw new InvalidOperationException(Error) : Value;
 
         public T ValueOrThrow(Func<string, Exception> exceptionFactory)
         {
@@ -106,7 +106,7 @@ namespace Narvalo.Applicative
         }
 
         public override string ToString()
-            => IsSuccess ? "Success(" + Value?.ToString() + ")" : "Error(" + Error + ")";
+            => IsError ? "Error(" + Error + ")" : "Success(" + Value?.ToString() + ")";
 
         /// <summary>
         /// Represents a debugger type proxy for <see cref="Outcome{T}"/>.
@@ -154,7 +154,7 @@ namespace Narvalo.Applicative
         {
             Require.NotNull(binder, nameof(binder));
 
-            return IsSuccess ? binder(Value) : Outcome<TResult>.FromError(Error);
+            return IsError ? Outcome<TResult>.FromError(Error) : binder(Value);
         }
 
         [DebuggerHidden]
@@ -174,7 +174,7 @@ namespace Narvalo.Applicative
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Outcome<T> μ(Outcome<Outcome<T>> square)
-            => square.IsSuccess ? square.Value : FromError(square.Error);
+            => square.IsError ? FromError(square.Error) : square.Value;
     }
 
     // Query Expression Pattern.
@@ -210,7 +210,7 @@ namespace Narvalo.Applicative
             Require.NotNull(caseSuccess, nameof(caseSuccess));
             Require.NotNull(caseError, nameof(caseError));
 
-            return IsSuccess ? caseSuccess(Value) : caseError(Error);
+            return IsError ? caseError(Error) : caseSuccess(Value);
         }
 
         public void Do(Action<T> onSuccess, Action<string> onError)
@@ -218,7 +218,7 @@ namespace Narvalo.Applicative
             Require.NotNull(onSuccess, nameof(onSuccess));
             Require.NotNull(onError, nameof(onError));
 
-            if (IsSuccess) { onSuccess(Value); } else { onError(Error); }
+            if (IsError) { onError(Error); } else { onSuccess(Value); }
         }
 
         public bool OnSuccess(Action<T> action)
@@ -262,7 +262,7 @@ namespace Narvalo.Applicative
     // Implements the Internal.Iterable<T> interface.
     public partial struct Outcome<T>
     {
-        public IEnumerable<T> ToEnumerable() => IsSuccess ? Sequence.Return(Value) : Enumerable.Empty<T>();
+        public IEnumerable<T> ToEnumerable() => IsError ? Enumerable.Empty<T>() : Sequence.Return(Value);
 
         public IEnumerator<T> GetEnumerator() => ToEnumerable().GetEnumerator();
     }
@@ -276,18 +276,15 @@ namespace Narvalo.Applicative
 
         public bool Equals(Outcome<T> other)
         {
-            if (IsSuccess) { return other.IsSuccess && EqualityComparer<T>.Default.Equals(Value, other.Value); }
-            return other.IsError && Error == other.Error;
+            if (IsError) { return other.IsError && Error == other.Error; }
+            return other.IsSuccess && EqualityComparer<T>.Default.Equals(Value, other.Value);
         }
 
         public bool Equals(Outcome<T> other, IEqualityComparer<T> comparer)
         {
-            if (IsSuccess)
-            {
-                return other.IsSuccess
-                    && (comparer ?? EqualityComparer<T>.Default).Equals(Value, other.Value);
-            }
-            return other.IsError && Error == other.Error;
+            if (IsError) { return other.IsError && Error == other.Error;  }
+            return other.IsSuccess
+                && (comparer ?? EqualityComparer<T>.Default).Equals(Value, other.Value);
         }
 
         public override bool Equals(object obj)

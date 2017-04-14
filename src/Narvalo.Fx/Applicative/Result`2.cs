@@ -71,37 +71,37 @@ namespace Narvalo.Applicative
 
         [ExcludeFromCodeCoverage]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
-        private string DebuggerDisplay => IsSuccess ? "Success" : "Error";
+        private string DebuggerDisplay => IsError ? "Error" : "Success";
 
         /// <summary>
         /// Obtains the enclosed value if any; otherwise the default value of the type T.
         /// </summary>
         public T ValueOrDefault() => _value;
 
-        public Maybe<T> ValueOrNone() => IsSuccess ? Maybe.Of(Value) : Maybe<T>.None;
+        public Maybe<T> ValueOrNone() => IsError ? Maybe<T>.None : Maybe.Of(Value);
 
         /// <summary>
         /// Returns the enclosed value if any; otherwise <paramref name="other"/>.
         /// </summary>
         /// <param name="other">A default value to be used if if there is no underlying value.</param>
-        public T ValueOrElse(T other) => IsSuccess ? Value : other;
+        public T ValueOrElse(T other) => IsError ? other : Value;
 
         public T ValueOrElse(Func<T> valueFactory)
         {
             Require.NotNull(valueFactory, nameof(valueFactory));
 
-            return IsSuccess ? Value : valueFactory();
+            return IsError ? valueFactory() : Value;
         }
 
         public T ValueOrThrow(Func<TError, Exception> exceptionFactory)
         {
             Require.NotNull(exceptionFactory, nameof(exceptionFactory));
 
-            return IsSuccess ? Value : throw exceptionFactory(Error);
+            return IsError ? throw exceptionFactory(Error) : Value;
         }
 
         public override string ToString()
-            => IsSuccess ? "Success(" + Value?.ToString() + ")" : "Error(" + Error.ToString() + ")";
+            => IsError ? "Error(" + Error.ToString() + ")" : "Success(" + Value?.ToString() + ")";
 
         /// <summary>
         /// Represents a debugger type proxy for <see cref="Result{T, TError}"/>.
@@ -142,7 +142,7 @@ namespace Narvalo.Applicative
 
         // NB: In Haskell, the error is the left parameter.
         public Either<T, TError> ToEither()
-            => IsSuccess ? Either<T, TError>.OfLeft(Value) : Either<T, TError>.OfRight(Error);
+            => IsError ? Either<T, TError>.OfRight(Error) : Either<T, TError>.OfLeft(Value);
 
         public static explicit operator T(Result<T, TError> value) => value.ToValue();
 
@@ -160,7 +160,7 @@ namespace Narvalo.Applicative
         {
             Require.NotNull(binder, nameof(binder));
 
-            return IsSuccess ? binder(Value) : Result<TResult, TError>.FromError(Error);
+            return IsError ? Result<TResult, TError>.FromError(Error) : binder(Value);
         }
 
         // NB: This method is normally internal, but Result<T, TError>.Of() is more readable
@@ -172,7 +172,7 @@ namespace Narvalo.Applicative
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Result<T, TError> μ(Result<Result<T, TError>, TError> square)
-            => square.IsSuccess ? square.Value : FromError(square.Error);
+            => square.IsError ? FromError(square.Error) : square.Value;
     }
 
     // Minimalist implementation of a monad on TError.
@@ -229,7 +229,7 @@ namespace Narvalo.Applicative
             Require.NotNull(caseSuccess, nameof(caseSuccess));
             Require.NotNull(caseError, nameof(caseError));
 
-            return IsSuccess ? caseSuccess(Value) : caseError(Error);
+            return IsError ? caseError(Error) : caseSuccess(Value);
         }
 
         public void Do(Action<T> onSuccess, Action<TError> onError)
@@ -237,7 +237,7 @@ namespace Narvalo.Applicative
             Require.NotNull(onSuccess, nameof(onSuccess));
             Require.NotNull(onError, nameof(onError));
 
-            if (IsSuccess) { onSuccess(Value); } else { onError(Error); }
+            if (IsError) { onError(Error); } else { onSuccess(Value); }
         }
 
         public bool OnSuccess(Action<T> action)
@@ -278,7 +278,7 @@ namespace Narvalo.Applicative
     // Implements the Internal.Iterable<T> interface.
     public partial struct Result<T, TError>
     {
-        public IEnumerable<T> ToEnumerable() => IsSuccess ? Sequence.Return(Value) : Enumerable.Empty<T>();
+        public IEnumerable<T> ToEnumerable() => IsError ? Enumerable.Empty<T>() : Sequence.Return(Value);
 
         public IEnumerator<T> GetEnumerator() => ToEnumerable().GetEnumerator();
     }
@@ -292,8 +292,8 @@ namespace Narvalo.Applicative
 
         public bool Equals(Result<T, TError> other)
         {
-            if (IsSuccess) { return other.IsSuccess && EqualityComparer<T>.Default.Equals(Value, other.Value); }
-            return other.IsError && EqualityComparer<TError>.Default.Equals(Error, other.Error);
+            if (IsError) { return other.IsError && EqualityComparer<TError>.Default.Equals(Error, other.Error); }
+            return other.IsSuccess && EqualityComparer<T>.Default.Equals(Value, other.Value);
         }
 
         public override bool Equals(object obj)
@@ -310,8 +310,8 @@ namespace Narvalo.Applicative
 
             var obj = (Result<T, TError>)other;
 
-            if (IsSuccess) { return obj.IsSuccess && comparer.Equals(Value, obj.Value); }
-            return obj.IsError && comparer.Equals(Error, obj.Error);
+            if (IsError) { return obj.IsError && comparer.Equals(Error, obj.Error); }
+            return obj.IsSuccess && comparer.Equals(Value, obj.Value);
         }
 
         int IStructuralEquatable.GetHashCode(IEqualityComparer comparer)

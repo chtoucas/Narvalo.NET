@@ -7,37 +7,37 @@ namespace Narvalo.Applicative
     public partial struct Outcome<T>
     {
         public Outcome<TResult> Gather<TResult>(Outcome<Func<T, TResult>> applicative)
-            => IsSuccess && applicative.IsSuccess
-            ? Outcome<TResult>.η(applicative.Value(Value))
-            : Outcome<TResult>.FromError(Error);
+            => IsError && applicative.IsError
+            ? Outcome<TResult>.FromError(Error)
+            : Outcome<TResult>.η(applicative.Value(Value));
 
         public Outcome<TResult> ReplaceBy<TResult>(TResult other)
-            => IsSuccess ? Outcome<TResult>.η(other) : Outcome<TResult>.FromError(Error);
+            => IsError ? Outcome<TResult>.FromError(Error) : Outcome<TResult>.η(other);
 
         public Outcome<TResult> ContinueWith<TResult>(Outcome<TResult> other)
-            => IsSuccess ? other : Outcome<TResult>.FromError(Error);
+            => IsError ? Outcome<TResult>.FromError(Error) : other;
 
         public Outcome<T> PassBy<TOther>(Outcome<TOther> other)
             // Returning "this" is not very "functional"-like, but having a value type, that's fine.
-            => IsSuccess && other.IsSuccess ? this : FromError(Error);
+            => IsError && other.IsError ? FromError(Error) : this;
 
         public Outcome<Unit> Skip()
-            => IsSuccess ? Outcome.Unit : Outcome<Unit>.FromError(Error);
+            => IsError ? Outcome<Unit>.FromError(Error) : Outcome.Unit;
 
         public Outcome<TResult> ZipWith<TSecond, TResult>(
             Outcome<TSecond> second,
             Func<T, TSecond, TResult> zipper)
         {
             Require.NotNull(zipper, nameof(zipper));
-            return IsSuccess && second.IsSuccess
-                ? Outcome<TResult>.η(zipper(Value, second.Value))
-                : Outcome<TResult>.FromError(Error);
+            return IsError && second.IsError
+                ? Outcome<TResult>.FromError(Error)
+                : Outcome<TResult>.η(zipper(Value, second.Value));
         }
 
         public Outcome<TResult> Select<TResult>(Func<T, TResult> selector)
         {
             Require.NotNull(selector, nameof(selector));
-            return IsSuccess ? Outcome<TResult>.η(selector(Value)) : Outcome<TResult>.FromError(Error);
+            return IsError ? Outcome<TResult>.FromError(Error) : Outcome<TResult>.η(selector(Value));
         }
 
         public Outcome<TResult> SelectMany<TMiddle, TResult>(
