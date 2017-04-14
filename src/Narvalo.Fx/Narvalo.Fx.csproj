@@ -45,7 +45,6 @@
     <Compile Include="Linq\Applicative\EnumerableIntern.cs" />
     <Compile Include="Linq\Applicative\SelectAnyImpl.cs" />
     <Compile Include="Linq\Applicative\WhereAnyImpl.cs" />
-    <Compile Include="Linq\EmptyIfNull.cs" />
     <Compile Include="Linq\Fold.cs" />
     <Compile Include="Linq\ElementAtOrNone.cs" />
     <Compile Include="Linq\AppendPrepend.cs" />

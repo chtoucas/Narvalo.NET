@@ -457,7 +457,8 @@ Deconstruction is **unsafe**, before accessing `value`, you should always check
 if `isSome` is true - when it is not, `value` is set to `default(T)` that is
 `null` for reference types :worried:.
 
-**Remark:** The default value (`default(Maybe<T>)`) is `Maybe<T>.None`.
+**Remark:** The default value of `Maybe<T>` (`default(Maybe<T>)`) is
+`Maybe<T>.None`.
 
 **Remark:** To check if a "maybe" contains a given value, rather than extracting
 the enclosed value, you should use the `Contains` helper - there is also an
@@ -815,7 +816,6 @@ Element        | `FirstOrNone`        | `Maybe<T>`                 | -
 Aggregation    | `Fold`               | `TAccumulate`              | -
 |              | `Reduce`             | `T`                        | -
 Quantification | `IsEmpty`            | `bool`                     | -
-????           | `EmptyIfNull`        | `IEnumerable<T>`           | -
 
 Operator | Input Type | Return Type | Deferred |
 -------- | ---------- | ----------- | :------: |
@@ -849,8 +849,6 @@ All operators are defined as extension methods (in `Qperators`) and expect an
 - `IsEmpty()` returns true if the sequence is empty; otherwise false.
 - `IsEmpty(predicate)` returns true if no element in the sequence satisfies the
   predicate; otherwise false.
-- `EmptyIfNull()` returns a new empty sequence if the sequence is empty;
-  otherwise it returns the sequence.
 
 #### `SelectAny`
 

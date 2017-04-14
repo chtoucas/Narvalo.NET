@@ -99,7 +99,6 @@
     <Compile Include="Linq\LastOrNone.cs" />
     <Compile Include="Linq\FirstOrNone.cs" />
     <Compile Include="Linq\ElementAtOrNone.cs" />
-    <Compile Include="Linq\EmptyIfNull.cs" />
     <Compile Include="Linq\IsEmpty.cs" />
     <Compile Include="Linq\SequenceFacts.cs" />
     <Compile Include="Linq\WhereAny.cs" />
