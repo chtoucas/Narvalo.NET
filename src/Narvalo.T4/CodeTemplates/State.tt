@@ -1,0 +1,20 @@
+﻿<#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
+<#@ include file="Monad.tt" once="true" #><#+
+
+public partial class StateTemplate : MonadTemplate
+{
+    public MaybeTemplate(TextTransformation parent) : base(parent) { }
+
+    public override void Initialize()
+    {
+        InitializeNamespacesForNarvaloFx();
+        InitializeGenericParameters("T", "TState");
+        InitializeDelegate();
+
+        EtaName = "Return";
+        Name = "State";
+        EmitLinq = false;
+    }
+}
+
+#>

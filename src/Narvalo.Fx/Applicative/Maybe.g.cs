@@ -27,12 +27,10 @@ namespace Narvalo.Applicative
     // T4: EmitHelpers().
     public static partial class Maybe
     {
-        private static readonly Maybe<unit> s_Unit = Of(unit.Default);
-
         /// <summary>
-        /// Gets the default and unique object of type <c>Maybe&lt;Unit&gt;</c>.
+        /// Gets the unit for the type <see cref="Maybe{T}"/>.
         /// </summary>
-        public static Maybe<unit> Unit => s_Unit;
+        public static Maybe<unit> Unit => Maybe<unit>.η(unit.Default);
 
         /// <summary>
         /// Gets the zero for <see cref="Maybe{T}.Bind"/>.

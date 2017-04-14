@@ -25,12 +25,10 @@ namespace Narvalo.Applicative
     // T4: EmitHelpers().
     public partial struct Fallible
     {
-        private static readonly Fallible<unit> s_Unit = Of(unit.Default);
-
         /// <summary>
-        /// Gets the default and unique object of type <c>Fallible&lt;Unit&gt;</c>.
+        /// Gets the unit for the type <see cref="Fallible{T}"/>.
         /// </summary>
-        public static Fallible<unit> Unit => s_Unit;
+        public static Fallible<unit> Unit => Fallible<unit>.η(unit.Default);
 
         /// <summary>
         /// Obtains an instance of the <see cref="Fallible{T}"/> class for the specified value.

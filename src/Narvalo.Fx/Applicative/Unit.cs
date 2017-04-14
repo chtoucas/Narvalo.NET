@@ -7,9 +7,7 @@ namespace Narvalo.Applicative
 
     public struct Unit : IEquatable<Unit>, IEquatable<ValueTuple>
     {
-        private static readonly Unit s_Default = new Unit();
-
-        public static Unit Default => s_Default;
+        public static Unit Default => default(Unit);
 
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "left", Justification = "[Intentionally] This method always returns 'true'.")]
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "right", Justification = "[Intentionally] This method always returns 'true'.")]

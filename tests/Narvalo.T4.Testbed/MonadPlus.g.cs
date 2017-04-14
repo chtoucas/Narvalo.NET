@@ -70,7 +70,7 @@ namespace Narvalo.T4.Testbed
         private static readonly MonadPlus<unit> s_Unit = Of(unit.Default);
 
         /// <summary>
-        /// Gets the unique (non-null) object of type <c>MonadPlus&lt;Unit&gt;</c>.
+        /// Gets the unit for the type <see cref="MonadPlus{T}"/>.
         /// </summary>
         public static MonadPlus<unit> Unit => s_Unit;
 

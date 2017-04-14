@@ -12,7 +12,6 @@ namespace Narvalo.Applicative
     using Narvalo.Linq;
     using Narvalo.Properties;
 
-    // Friendly version of Result<T, string>.
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     [DebuggerTypeProxy(typeof(Outcome<>.DebugView))]
     public partial struct Outcome<T>

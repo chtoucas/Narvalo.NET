@@ -9,7 +9,6 @@ namespace Narvalo.Applicative
 
     using Narvalo.Properties;
 
-    // Friendly version of Result<Unit, ExceptionDispatchInfo>.
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     [DebuggerTypeProxy(typeof(Fallible.DebugView))]
     public partial struct Fallible : IEquatable<Fallible>
@@ -82,12 +81,10 @@ namespace Narvalo.Applicative
     // Factory methods.
     public partial struct Fallible
     {
-        private static readonly Fallible s_Ok = new Fallible();
-
         /// <summary>
         /// Obtains an instance of <see cref="Fallible" /> that represents a successful computation.
         /// </summary>
-        public static Fallible Ok => s_Ok;
+        public static Fallible Ok => default(Fallible);
 
         public static Fallible FromError(ExceptionDispatchInfo error)
         {

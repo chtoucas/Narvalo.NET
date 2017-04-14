@@ -19,13 +19,6 @@ namespace Narvalo.Finance.Generic
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private static readonly TCurrency s_UnderlyingUnit = CurrencyUnit.OfType<TCurrency>();
 
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private static readonly Money<TCurrency> s_Zero = new Money<TCurrency>(0);
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private static readonly Money<TCurrency> s_Epsilon = new Money<TCurrency>(UnderlyingUnit.Epsilon);
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private static readonly Money<TCurrency> s_One = new Money<TCurrency>(UnderlyingUnit.One);
-
         [CLSCompliant(false)]
         public Money(uint amount) : this(amount, true) { }
 
@@ -45,13 +38,13 @@ namespace Narvalo.Finance.Generic
         }
 
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
-        public static Money<TCurrency> Zero => s_Zero;
+        public static Money<TCurrency> Zero => new Money<TCurrency>(0);;
 
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
-        public static Money<TCurrency> Epsilon => s_Epsilon;
+        public static Money<TCurrency> Epsilon => new Money<TCurrency>(UnderlyingUnit.Epsilon);
 
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
-        public static Money<TCurrency> One => s_One;
+        public static Money<TCurrency> One => new Money<TCurrency>(UnderlyingUnit.One);
 
         internal static TCurrency UnderlyingUnit => s_UnderlyingUnit;
 

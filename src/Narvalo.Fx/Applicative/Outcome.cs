@@ -6,7 +6,6 @@ namespace Narvalo.Applicative
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
 
-    // Friendly version of Result<Unit, string>.
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     [DebuggerTypeProxy(typeof(Outcome.DebugView))]
     public partial struct Outcome : IEquatable<Outcome>
@@ -66,12 +65,10 @@ namespace Narvalo.Applicative
     // Factory methods.
     public partial struct Outcome
     {
-        private static readonly Outcome s_Ok = new Outcome();
-
         /// <summary>
         /// Obtains an instance of <see cref="Outcome" /> that represents a successful computation.
         /// </summary>
-        public static Outcome Ok => s_Ok;
+        public static Outcome Ok => default(Outcome);
 
         public static Outcome FromError(string error)
         {

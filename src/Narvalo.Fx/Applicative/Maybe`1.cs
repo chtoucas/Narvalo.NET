@@ -154,13 +154,11 @@ namespace Narvalo.Applicative
     // Provides the core MonadOr methods.
     public partial struct Maybe<T>
     {
-        private static readonly Maybe<T> s_None = new Maybe<T>();
-
         /// <summary>
         /// Obtains an instance of <see cref="Maybe{T}" /> that does not enclose any value.
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
-        public static Maybe<T> None => s_None;
+        public static Maybe<T> None => default(Maybe<T>);
 
         public Maybe<T> OrElse(Maybe<T> other) => IsNone ? other : this;
     }

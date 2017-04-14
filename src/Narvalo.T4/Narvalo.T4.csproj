@@ -59,6 +59,7 @@
     <Content Include="CodeTemplates\Facts\EmitMonadCore.tt" />
     <Content Include="CodeTemplates\Facts\EmitMonadGuards.tt" />
     <Content Include="CodeTemplates\Facts\EmitMonadRules.tt" />
+    <None Include="CodeTemplates\State.tt" />
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -20,6 +20,7 @@
   <ItemGroup>
     <Compile Include="Applicative\Either.cs" />
     <Compile Include="Applicative\Either`2.cs" />
+    <Compile Include="Applicative\Fallible.cs" />
     <Compile Include="Applicative\Maybe.Shadowing.cs" />
     <Compile Include="Applicative\Outcome.cs" />
     <Compile Include="Applicative\Outcome.g.cs">
@@ -28,7 +29,6 @@
       <DependentUpon>Outcome.tt</DependentUpon>
     </Compile>
     <Compile Include="Applicative\Fallible.Shadowing.cs" />
-    <Compile Include="Applicative\Fallible.cs" />
     <Compile Include="Applicative\Outcome`1.cs" />
     <Compile Include="Applicative\Outcome.Shadowing.cs" />
     <Compile Include="Applicative\Fallible.Helpers.cs" />
