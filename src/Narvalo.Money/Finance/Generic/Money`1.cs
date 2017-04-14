@@ -38,7 +38,7 @@ namespace Narvalo.Finance.Generic
         }
 
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
-        public static Money<TCurrency> Zero => new Money<TCurrency>(0);;
+        public static Money<TCurrency> Zero => new Money<TCurrency>(0);
 
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
         public static Money<TCurrency> Epsilon => new Money<TCurrency>(UnderlyingUnit.Epsilon);
