@@ -611,6 +611,7 @@ do not translate to SQL).
 Railway Oriented Programming
 ----------------------------
 
+- [Getting started](#rop-quickstart)
 - [`Outcome`](#rop-outcome)
 - [`Outcome<T>`](#rop-outcomeT)
 - [`Fallible`](#rop-fallible)
@@ -618,20 +619,57 @@ Railway Oriented Programming
 - [`Result<T, TError>`](#rop-result)
 - [Developer notes](#rop-notes)
 
-Typical use cases:
-- To encapsulate the result of a computation with lightweight error reporting
-  to the caller in the form of a string: `Outcome` and `Outcome<T>`.
-- To encapsulate the result of a computation with full exception capture
-  (`ExceptionDispatchInfo`): `Fallible` and `Fallible<T>`.
-- In all other cases: `Result<T, TError>`.
+### <a name="rop-quickstart"></a>Getting started
 
-Guidelines (TO BE COMPLETED):
-- CONSIDER using `Outcome` and `Outcome<T>` to provide alternatives to methods
-  that might fail but the error is not fatal.
-- DO NOT use the other types on public APIs.
-- CONSIDER using `Fallible` and `Fallible<T>` to provide alternatives to methods
-  that might throw.
+`Outcome` and `Outcome<T>` encapsulate the result of a computation with
+lightweight error reporting to the caller in the form of a string;
+`Result<T, TError>` does the same but with a custom error type.
 
+`Fallible` and `Fallible<T>` encapsulate the result of a computation with
+full exception capture (`ExceptionDispatchInfo`).
+
+[More details]
+
+#### Guidelines
+(TO BE COMPLETED)
+- **CONSIDER** using `Outcome` and `Outcome<T>` to provide alternatives to methods
+  that are expected to fail in common scenarios, the error is never
+  fatal, and you are able to give an informative feedback. [For instance
+  `Outcome TryValidate()` in addition to `bool Validate()`, and
+  `Outcome<T> TryParse()` in addition to `T Parse()`]
+- **CONSIDER** using `Result<T, TError>` in the same situations but you wish to
+  pass a custom error type instead of a string.
+- **CONSIDER** using `Fallible` and `Fallible<T>` to wrap method calls that are
+  expected to throw in common scenarios. [TODO: give concrete examples, network
+  calls, third-party library w/ unexpected irregular behaviour].
+- **DO** use the prefix "Try" for methods implementing this pattern.
+- **DO** prefer `Outcome` over `Maybe<string>`. With `Maybe<string>` it is not
+  obvious that the underlying type (`string`) represents an error and not the
+  "normal" return type.
+- **DO NOT** use any of these types for anything besides return types.
+- **DO NOT** use `Fallible` and `Fallible<T>` on public APIs.
+- **DO NOT** use `Result<T, Exception>`; this is **not** a replacement for the
+  standard exception mechanism in .NET.
+
+#### Default value
+The default value of any of the result types is a successful object. This is
+consistent with what we would do with "normal" methods:
+```csharp
+public T Method1() {
+  if (...) { ... return ...}
+  // Default
+  return default(T);
+}
+
+public Outcome<T> Method2() {
+  if (...) { ... return ...}
+  // Default
+  return default(Outcome<T>);
+}
+```
+`default(Outcome<T>)` represents a successful computation and contains `default(T)`.
+
+#### Remarks
 Of course, we could have gone away with one single type, but at the expense
 of complicated type signatures. The correspondence is as follows:
 
@@ -642,34 +680,8 @@ Type             | Alternatives
 `Fallible`       | `Result<Unit, ExceptionDispatchInfo>` or `Fallible<Unit>`
 `Fallible<T>`    | `Result<T, ExceptionDispatchInfo>`
 
-Remarks:
-- All these types are value types, their primary usage is as a return type.
-  For long-lived objects prefer `Either<T, TError>`.
-- `Result<T, Exception>` should be used only in very rare situations; this is
-  **not** a replacement for the standard exception mechanism in .NET.
-  In any cases, `Fallible` and `Fallible<T>` offer better alternatives.
-- You can see `Outcome` and `Outcome<T>` as verbose versions of `Maybe<Unit>`
-  and `Maybe<T>`.
-- **Always** prefer `Outcome` over `Maybe<TError>`.
-  With `Maybe<TError>` it is not obvious that the underlying type (`TError`)
-  represents an error and not the "normal" return type.
-
-The default value of any of these result types is a successful object. This is
-consistent with what we would do with "normal" methods:
-```csharp
-public T Method1() {
-  if (...) { ... return ...}
-  // Default
-  return default(T);
-}
-public Outcome<T> Method2() {
-  if (...) { ... return ...}
-  // Default
-  return default(Outcome<T>);
-}
-```
-The default return value of `Method2` is a successful object containing
-`default(T)`.
+All these types are value types, as stated above, their primary usage is as a
+return type. For long-lived objects prefer `Either<T1, T2>`.
 
 ### <a name="rop-outcome"></a>`Outcome`
 
@@ -697,7 +709,7 @@ var failure = Outcome<int>.FromError("My error message.");
 ```
 
 #### `Where`
-**WARNING:** The operator does **not** accept a predicate.
+**WARNING:** `Where` does **not** accept a predicate but a filter.
 ```csharp
 var outcome = Outcome.Of(1);
 Func<int, Outcome> filter = i => i >= 0 ? Outcome.Ok : Outcome.FromError("i < 0");
