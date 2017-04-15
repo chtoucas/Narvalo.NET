@@ -12,6 +12,8 @@ disjoint union (`Either<T1, T2>`), sequence generators and LINQ extensions.
 ### Status
 - **Unstable.**
 - Tentative release date for a stable package: end of april 2017?
+  Pending: ensure API is stable, good documentation and full test coverage.
+  Open question: should the error types be put in a separate assembly?
 - Support the .NET Standard v1.0 and the PCL profile Profile259.
 - Test coverage is starting to look good (70%); the number of functional tests
   is progressing too.
@@ -31,7 +33,7 @@ Our versioning scheme is explained
 - [Unit Type](#unit-type)
 - [Nullable Type](#nullable-type)
 - [Maybe Type](#maybe-type)
-- [Railway Oriented Programming](#railway-oriented-programming)
+- [Error Types](#error-types)
 - [Either Type](#either-type)
 - [Query Operators and Generators](#query-operators-and-generators)
 - [Recursion](#recursion)
@@ -85,7 +87,7 @@ well-known that the C# type system is not rich enough to make true monadic
 constructions, but we can still create monad-like types as we do".
 Our implementation of monads follows the Haskell API closely but, of course,
 adapted to make it more palatable and hopefully feel natural to C#-developers
-(see [below](#monadic-api-tour) for more details on this). In particular, we make
+(see [below](#tour-of-the-api) for more details on this). In particular, we make
 sure that all monads also support the query syntax
 [[Query expression pattern](https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#the-query-expression-pattern)].
 
@@ -180,7 +182,7 @@ operator `??`). Nevertheless, there are situations where a piece of code written
 in query syntax is much more readable, therefore easier to maintain. Finally,
 it is still a good exercise to do before moving to the new `Maybe<T>` type.
 
-#### `Select`
+#### Select
 `Select` allows to transform the enclosed value with a given selector:
 ```csharp
 T? source = ...;
@@ -208,7 +210,7 @@ solution (see `SelectMany`).
 
 [Explain why this example won't compile with `(int, (int, int))?`]
 
-#### `Where`
+#### Where
 `Where` allows to filter the enclosed value with a given predicate:
 ```csharp
 T? source = ...;
@@ -224,7 +226,7 @@ int? source = 2;
 int? q = from i in source where i % 2 == 0 select i * i;
 ```
 
-#### `SelectMany`
+#### SelectMany
 
 ```csharp
 T1? source = ...;
@@ -338,7 +340,7 @@ the result is `(1, 7)` of type `(int, int)?`.
 
 **Remark.** `Vuple.Gather<T1, ... , T8>` returns `(T1 Value1, ... , T8 Value8)?`.
 
-#### `Join`
+#### Join
 We don't describe the fluent syntax which is way more complicated than the
 query syntax.
 
@@ -357,7 +359,7 @@ the result is `(1, 3)` of type `(int, int)?`.
 **Remark.** We use a string to emphasize that the key needs not to be a nullable
 type.
 
-#### `GroupJoin`
+#### GroupJoin
 We don't describe the fluent syntax which is way more complicated than the
 query syntax. `GroupJoin` is not that interesting, `Join` is always a better
 choice.
@@ -507,14 +509,14 @@ would mean `orderby` on a "maybe"?), at least in this form (see
 
 ### <a name="maybe-effects"></a>Programming for side-effects
 
-#### `Do`
+#### Do
 ```csharp
 Action<T> onSome = ...
 Action onNone = ...
 maybe.Do(onSome, onNone);
 ```
 
-#### `OnSome`
+#### OnSome
 ```csharp
 Action<T> action = ...
 maybe.OnSome(action);
@@ -524,7 +526,7 @@ This is equivalent to:
 foreach (T value in maybe) { action(value); }
 ```
 
-#### `OnNone`
+#### OnNone
 ```csharp
 Action action = ...
 maybe.OnNone(action);
@@ -545,7 +547,7 @@ Method | C# Query Expression Syntax
 `SelectMany` | Multiple `from` clauses.
 `Join`       | `join ... in ... on ... equals ...`
 
-#### `Select`
+#### Select
 If `maybe` is of type `Maybe<T>` and `selector` is a generic delegate
 type `Func<T, TResult>`, then one can write:
 ```csharp
@@ -570,7 +572,7 @@ some.Select(x => (string)null) ≡ Maybe<string>.None;
 **Remark:** Of course, this is not valid C# code, but we will often use a virtual
 operator `≡` to say that both sides are equal.
 
-#### `Where`
+#### Where
 If `maybe` is of type `Maybe<T>` and `predicate` is a generic delegate
 type `Func<T, bool>`, then one can write equivalently:
 ```csharp
@@ -579,9 +581,9 @@ var q = from x in maybe where predicate(x) select x;
 ```
 where `q` is of type `Maybe<T>`.
 
-#### `SelectMany`
+#### SelectMany
 
-#### `Join`
+#### Join
 
 #### <a name="maybe-linq"></a>LINQ to Objects
 Using `ToEnumerable` allows to mix the above operators with those from LINQ to
@@ -608,18 +610,18 @@ do not translate to SQL).
 
 --------------------------------------------------------------------------------
 
-Railway Oriented Programming
-----------------------------
+Error Types
+-----------
 
-- [Overview](#rop-overview)
-- [`Outcome`](#rop-outcome)
-- [`Outcome<T>`](#rop-outcomeT)
-- [`Fallible`](#rop-fallible)
-- [`Fallible<T>`](#rop-fallibleT)
-- [`Result<T, TError>`](#rop-result)
-- [Developer notes](#rop-notes)
+- [Overview](#error-overview)
+- [`Outcome`](#error-outcome)
+- [`Outcome<T>`](#error-outcomeT)
+- [`Fallible`](#error-fallible)
+- [`Fallible<T>`](#error-fallibleT)
+- [`Result<T, TError>`](#error-result)
+- [Developer notes](#error-notes)
 
-### <a name="rop-overview"></a>Overview
+### <a name="error-overview"></a>Overview
 
 `Outcome` and `Outcome<T>` encapsulate the result of a computation with
 lightweight error reporting to the caller in the form of a string;
@@ -685,7 +687,7 @@ Type             | Alternatives
 `Fallible`       | `Result<Unit, ExceptionDispatchInfo>` or `Fallible<Unit>`
 `Fallible<T>`    | `Result<T, ExceptionDispatchInfo>`
 
-### <a name="rop-outcome"></a>`Outcome`
+### <a name="error-outcome"></a>Outcome
 
 ```csharp
 var success = Outcome.Ok;
@@ -699,7 +701,7 @@ var failure = Outcome.FromError("My error message.");
 [Explain: Not really a monad, no QEP but conversion to `Outcome<Unit>` and Result,
 which is conveninet when you have a mix of `Outcome` and other return types]
 
-### <a name="rop-outcomeT"></a>`Outcome<T>`
+### <a name="error-outcomeT"></a>Outcome\<T\>
 
 ```csharp
 var success = Outcome.Of(1);
@@ -710,7 +712,7 @@ var failure = Outcome<int>.FromError("My error message.");
 (bool succeed, T value, string error) = outcome;
 ```
 
-#### `Where`
+#### Where
 **WARNING:** `Where` does **not** accept a predicate but a filter.
 ```csharp
 var outcome = Outcome.Of(1);
@@ -720,7 +722,7 @@ var q = outcome.Where(filter);
 var q = from val in outcome where filter(val) select val;
 ```
 
-### <a name="rop-fallible"></a>`Fallible`
+### <a name="error-fallible"></a>Fallible
 
 If `edi` is an object of type `ExceptionDispatchInfo`:
 ```csharp
@@ -736,7 +738,7 @@ var failure = Fallible.FromError(edi);
 [Explain when to use this class and what to expect; e.g. for querying remote services]
 **We do not catch exceptions thrown by any supplied delegate.**
 
-### <a name="rop-fallibleT"></a>`Fallible<T>`
+### <a name="error-fallibleT"></a>Fallible\<T\>
 
 If `edi` is an object of type `ExceptionDispatchInfo`:
 ```csharp
@@ -757,7 +759,7 @@ Func<int, Fallible> filter = i => i >= 0 ? Fallible.Ok : Fallible.FromError(???)
 [Explain when to use this class and what to expect; e.g. for querying remote services]
 **We do not catch exceptions thrown by any supplied delegate.**
 
-### <a name="rop-result"></a>`Result<T, TError>`
+### <a name="error-result"></a>Result\<T, TError\>
 
 ```csharp
 var success = Result<int, Error>.Of(1);
@@ -774,7 +776,7 @@ var failure = Result.OfType<int>.FromError(new Error());
 (bool succeed, T value, TError error) = result;
 ```
 
-### <a name="rop-notes"></a>Developer notes
+### <a name="error-notes"></a>Developer notes
 - Railway Oriented Programming, [explanation](http://fsharpforfunandprofit.com/rop)
   and [sample codes](https://github.com/swlaschin/Railway-Oriented-Programming-Example)
 
@@ -888,13 +890,13 @@ All operators are defined as extension methods (in `Qperators`) and expect an
 - `IsEmpty(predicate)` returns true if no element in the sequence satisfies the
   predicate; otherwise false.
 
-#### `SelectAny`
+#### SelectAny
 
-#### `WhereAny`
+#### WhereAny
 
-#### `Fold`
+#### Fold
 
-#### `Reduce`
+#### Reduce
 
 ### <a name="linq-generators"></a>Generators
 
@@ -929,7 +931,7 @@ Category | Operator | Input Type | Return Type | Deferred |
 Restriction | `CollectAny` | `IEnumerable<Monad<T>>` | `IEnumerable<T>` | Streaming
 Aggregation | `Sum`        | `IEnumerable<Maybe<T>>` | `Maybe<T>`       | -
 
-#### `CollectAny`
+#### CollectAny
 `CollectAny` acts on an `IEnumerable<Monad<T>>`.
 
 For instance, applying `CollectAny` to the sequence:
@@ -943,7 +945,7 @@ yield return Maybe.Of(5);
 of type  `IEnumerable<Maybe<int>>` returns a sequence of type `IEnumerable<int>`
 with three elements `2`, `4` and `5`; it filters out the two _none_'s.
 
-#### `Sum`
+#### Sum
 `Sum` acts on an `IEnumerable<Maybe<T>>`.
 
 ### <a name="linq-notes"></a>Developer notes
@@ -1245,7 +1247,7 @@ Haskell | C# | Return Type
 - `Maybe.Filter` is `seq.WhereAny` wrapped into a "maybe".
 - `Maybe.Zip` is `seq.Zip` followed by `Collect`.
 
-#### `MapUnzip`
+#### MapUnzip
 To quote the Haskell documentation, _`mapAndUnzipM` is mainly used with
 complicated data structures or a state-transforming monad_. If you really
 need it, it is easily implemented using `Select` and `Maybe.Map`:
@@ -1293,7 +1295,7 @@ Haskell | C# | Return Type
 `mfilter` | `obj.Where`     | `Maybe<T>`
 `guard`   | `Maybe.Guard`   | `Maybe.Unit`
 
-### <a name="haskell-maybe"></a>`Maybe` specific functions
+### <a name="haskell-maybe"></a>Maybe specific functions
 
 Haskell | C# | Return Type
 --------|----|------------

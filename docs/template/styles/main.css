@@ -1,21 +1,30 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Vollkorn');
+
 BODY {
-  font-family: segoe-ui_normal, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif, "Segoe UI Symbol";
+  font-family: 'Open Sans', sans-serif;
   font-size: 16px;
-  line-height: 1.5;
+  font-weight: 400;
+  line-height: 25px;
 }
 
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
-  font-family: segoe-ui_normal, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif, "Segoe UI Symbol";
+  font-family: 'Vollkorn', 'Georgia', serif;
+  font-weight: normal;
   line-height: 1.25;
-  text-rendering: optimizeLegibility;
 }
 
-.h1, h1 { font-size: 2.2em; font-family: Georgia, serif; }
-.h2, h2 { font-size: 2em; font-family: Georgia, serif; color: #E74C3C; }
-.h3, h3 { font-size: 1.6em; font-family: Georgia, serif; color: #E74C3C; }
-.h4, h4 { font-size: 1.2em; font-family: Georgia, serif; }
-.h5, h5 { font-size: 1em; font-style: italic; }
-.h6, h6 { font-size: .9em; }
+code, kbd, pre, samp, tt {
+    font-family: 'Consolas', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', 'Monaco', 'Courier New';
+    font-size: 14px !important;
+}
+
+.h1, h1 { font-size: 2.6em; }
+.h2, h2 { font-size: 2em; color: #E74C3C; }
+.h3, h3 { font-size: 1.6em; }
+.h4, h4 { font-size: 1.4em; color: #E74C3C; }
+.h5, h5 { font-size: 1.2em; font-style: italic; }
+.h6, h6 { font-size: 1em; font-style: italic; }
+
 
 /* Menu en haut */
 #navbar .level1 { font-size: .9em; }
@@ -54,4 +63,5 @@ header .navbar { border: none; }
 
 table { font-size: .9em; }
 
-article h4 { padding-bottom: .3em; }
+article h4 { padding-bottom: .3em; border-bottom: none; }
+article h5 { margin-top: 1em; margin-bottom: .5em; }

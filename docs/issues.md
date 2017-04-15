@@ -59,6 +59,7 @@ Next:
 Narvalo.Fx
 ----------
 
+- Error types: implicit conversion from `T`? explicit conversion to `bool`?
 - Add guidelines.
 - Add a note concerning the size of the structs.
 - T4: If the monad is nullable, check that we handle all null's. Auto-generate
@@ -154,6 +155,10 @@ Notes for the other [repository](https://github.com/chtoucas/Brouillons).
   * [Onism](https://github.com/pgolebiowski/onism-cldr)
   * [cldrjs](https://github.com/rxaviers/cldrjs)
 - INSEE COG
+- JSON Path
+  * [JSONPath](https://github.com/json-path/JsonPath)
+  * [Amazon States Language](https://states-language.net/spec.html)
+  * [Tim Bray](https://www.tbray.org/ongoing/When/201x/2017/04/14/JsonPath-Needs-Work)
 
 Play
 ----
