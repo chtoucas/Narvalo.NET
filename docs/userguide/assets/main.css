@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Vollkorn|Montserrat:700');
+
+BODY {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding-right: 1em;
+    padding-left: 1em;
+    font-family: "Open Sans", sans-serif;
+	font-size: 15px;
+}
+HR {
+	color: crimson;
+	margin-top: 2em;
+}
+A {
+	text-decoration: none;
+	color: #0366d6;
+}
+A:hover {
+	color: black;
+}
+H1, H2, H3, H4, H5 {
+	font-family: 'Vollkorn', 'Georgia', serif;
+	font-weight: normal;
+}
+H1 {
+	font-size: 2.6rem;
+	text-align: center;
+}
+H2 {
+	font-size: 2rem;
+	color: crimson;
+}
+H3 {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 1.2rem;
+	font: bold 1.6rem/175%;
+    letter-spacing: .2rem;
+	text-transform: uppercase;
+	margin-top: 3em;
+	margin-bottom: 2em;
+}
+H4 {
+	font-size: 1.4rem;
+}
+H5 {
+	font-size: 1.2rem;
+	font-style: italic;
+}
+P, UL , OL {
+	line-height: 1.5rem;
+}
+PRE {
+    /*border: 1px solid #ccc;*/
+    border-radius: 3px;
+}
+CODE{
+	white-space: pre;
+}
+CODE, TT {
+    font-family: 'Consolas', 'Monaco', monospace;
+	font-size: 14px;
+	/*font-size: .9em;*/
+    margin: 0;
+    padding-right: 0.3em;
+    padding-bottom: 0.2em;
+    padding-top: 0.2em;
+    padding-left: 0.3em;
+	/*border: 1px solid #e1e1e8;*/
+    border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.04);
+}
+CODE.hljs {
+    padding: 1em;
+    background: rgba(0, 0, 0, 0.04);
+}
+PRE CODE {
+	border: none;
+}
+TABLE {
+    border-collapse: collapse;
+    border-spacing: 0;
+    /* margin: 2em auto; */
+	font-size: .9em;
+}
+TABLE THEAD TR {
+	background-color: #f8f8f8;
+}
+TABLE TR {
+	background-color: #fff;
+    border-top: 1px solid #ccc;
+}
+TABLE TH, TABLE TD {
+    border: 1px solid #ddd;
+    padding: 6px 13px;
+}
+TABLE TR:nth-child(2n) {
+    background-color: #f8f8f8;
+}
+DT CODE {
+	font-weight: bold;
+}
+DD P {
+	margin-top: 0;
+}
+DT {
+	font-style: italic;
+}
+FOOTER {
+	font-size: .7em;
+	padding-top: 5em;
+	padding-bottom: 2em;
+	text-align: center;
+	color: gray;
+}
+#TOC {
+	display: none;
+	position: fixed;
+	top: 0;
+	right: 0;
+	border: 1px solid #ccc;
+	z-index: 1;
+	opacity: .8;
+	background-color: #fff;
+	/* overflow-y: scroll;
+    height: 100%; */
+	font-size: .9em;
+}
+#TOC UL {
+	padding-left: 1em;
+	padding-right: 1em;
+}
+#TOC LI {
+	list-style: none;
+}
+#TOC A {
+	color: black;
+	text-decoration: none;
+}
+.footnoteRef::before {
+	content: ' ('
+}
+.footnoteRef::after {
+	content: ')'
+}
+.footnotes {
+	font-size: .9rem;
+}

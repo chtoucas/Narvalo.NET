@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title></title>
+<meta name=robots content="index, follow"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="author" content="Pascal Tran-Ngoc-Bich"/>
+<link rel="stylesheet" href="assets/main.css"/>
+<link rel="stylesheet" href="assets/highlight-default.css"/>
+</head>
+<body>
+$if(toc)$
+<nav id="$idprefix$TOC">
+$toc$
+</nav>
+$endif$
+$body$
+<footer>&copy; 2017 <a href="http://narvalo.org">Narvalo.Org</a></footer>
+<script src="assets/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>

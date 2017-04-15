@@ -13,7 +13,7 @@ disjoint union (`Either<T1, T2>`), sequence generators and LINQ extensions.
 - **Unstable.**
 - Tentative release date for a stable package: end of april 2017?
   Pending: API stability, good documentation and full test coverage.
-  Open question: should the error types be put in a separate assembly?
+  _Open question: should the error types be put in a separate assembly?_
 - Support the .NET Standard v1.0 and the PCL profile Profile259.
 - Test coverage is starting to look good (70%); the number of functional tests
   is progressing too.
@@ -105,7 +105,7 @@ interesting are [Optional](https://github.com/nlkl/Optional), and
 [RailwaySharp](https://github.com/gsscoder/railwaysharp) for Railway Oriented
 Programming. Why write another one? This project started as an exercise to better
 understand monads, it just happened that I thought it was solid enough to be
-published; of course, I prefer my version too :relaxed:.
+published; of course, I prefer my version too :smiley:.
 
 --------------------------------------------------------------------------------
 
