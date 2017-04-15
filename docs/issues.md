@@ -59,7 +59,9 @@ Next:
 Narvalo.Fx
 ----------
 
-- Error types: implicit conversion from `T`? explicit conversion to `bool`?
+- Error types: implicit conversion from `T` (could simplify object creation)?
+  explicit conversion to `bool` (this one might be a bad idea when `T` is `bool`
+  but, if we follow the guidelines, we never create such types)?
 - Add guidelines.
 - Add a note concerning the size of the structs.
 - T4: If the monad is nullable, check that we handle all null's. Auto-generate

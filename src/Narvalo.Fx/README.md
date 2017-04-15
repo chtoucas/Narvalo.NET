@@ -12,7 +12,7 @@ disjoint union (`Either<T1, T2>`), sequence generators and LINQ extensions.
 ### Status
 - **Unstable.**
 - Tentative release date for a stable package: end of april 2017?
-  Pending: ensure API is stable, good documentation and full test coverage.
+  Pending: API stability, good documentation and full test coverage.
   Open question: should the error types be put in a separate assembly?
 - Support the .NET Standard v1.0 and the PCL profile Profile259.
 - Test coverage is starting to look good (70%); the number of functional tests
@@ -120,7 +120,7 @@ visibility and it cannot be used as a generic type parameter, e.g. `List<Void>`
 is explicitly forbidden. Moreover, it breaks the composition of functions,
 `Void` cannot appear in a function parameter.
 
-In a functional-style of programming, one prefers a
+In the functional-style of programming, one prefers a
 [unit type](https://en.wikipedia.org/wiki/Unit_type) over a
 [void type](https://en.wikipedia.org/wiki/Void_type). All functions can then be
 treated equal, there is no longer a need to define custom delegates for
@@ -137,7 +137,7 @@ Personally, I like to make it look like a built-in type with:
 using unit = global::Narvalo.Applicative.Unit;
 ```
 
-### Developer notes
+**Remark.**
 An implementation detail is that we make sure that a `Unit` instance is equal to
 any _empty tuple literal_, the 0-tuples. The .NET team _"lovingly
 [refers](https://github.com/dotnet/roslyn/issues/10429) to 0-tuples as nuples,
@@ -338,7 +338,7 @@ var q = from t in Vuple.Gather(first, second, third)
 ```
 the result is `(1, 7)` of type `(int, int)?`.
 
-**Remark.** `Vuple.Gather<T1, ... , T8>` returns `(T1 Value1, ... , T8 Value8)?`.
+**Remark.** `Vuple.Gather<T1, ... >` returns `(T1 Value1, ... )?`.
 
 #### Join
 We don't describe the fluent syntax which is way more complicated than the
@@ -459,10 +459,10 @@ Deconstruction is **unsafe**, before accessing `value`, you should always check
 if `isSome` is true - when it is not, `value` is set to `default(T)` that is
 `null` for reference types :worried:.
 
-**Remark:** The default value of `Maybe<T>` (`default(Maybe<T>)`) is
+**Remark.** The default value of `Maybe<T>` (`default(Maybe<T>)`) is
 `Maybe<T>.None`.
 
-**Remark:** To check if a "maybe" contains a given value, rather than extracting
+**Tip.** To check if a "maybe" contains a given value, rather than extracting
 the enclosed value, you should use the `Contains` helper - there is also an
 overload when you want to use a custom equality comparer.
 
@@ -569,7 +569,7 @@ var some = Maybe.Of("value");
 some.Select(x => x.Length)     ≡ Maybe.Of(5);
 some.Select(x => (string)null) ≡ Maybe<string>.None;
 ```
-**Remark:** Of course, this is not valid C# code, but we will often use a virtual
+**Remark.** Of course, this is not valid C# code, but we will often use a virtual
 operator `≡` to say that both sides are equal.
 
 #### Where
@@ -614,11 +614,10 @@ Error Types
 -----------
 
 - [Overview](#error-overview)
-- [`Outcome`](#error-outcome)
-- [`Outcome<T>`](#error-outcomeT)
-- [`Fallible`](#error-fallible)
-- [`Fallible<T>`](#error-fallibleT)
-- [`Result<T, TError>`](#error-result)
+- [Guidelines](#error-guidelines)
+- [Outcome types](#error-outcome)
+- [Fallible types](#error-fallible)
+- [Result type](#error-result)
 - [Developer notes](#error-notes)
 
 ### <a name="error-overview"></a>Overview
@@ -632,14 +631,41 @@ full exception capture (`ExceptionDispatchInfo`).
 
 [More details]
 
-#### Guidelines
+The default value of any of the result types is a successful object. This is
+consistent with what we would do with "normal" methods:
+```csharp
+public T Method1() {
+  if (...) { ... return ...}
+  // Default
+  return default(T);
+}
+
+public Outcome<T> Method2() {
+  if (...) { ... return ...}
+  // Default
+  return default(Outcome<T>);
+}
+```
+`default(Outcome<T>)` represents a successful computation and contains `default(T)`.
+
+Of course, we could have gone away with one single type, but at the expense
+of complicated type signatures. The correspondence is as follows:
+
+Type             | Alternatives
+-----------------|-------------
+`Outcome`        | `Result<Unit, string>` or `Outcome<Unit>`
+`Outcome<T>`     | `Result<T, string>`
+`Fallible`       | `Result<Unit, ExceptionDispatchInfo>` or `Fallible<Unit>`
+`Fallible<T>`    | `Result<T, ExceptionDispatchInfo>`
+
+### <a name="error-guidelines"></a>Guidelines
 (TO BE COMPLETED)
 - **CONSIDER** using `Outcome` and `Outcome<T>` to provide alternatives to methods
   that are expected to fail in common scenarios, the error is never
   fatal, and you are able to give an informative feedback. [For instance
   `Outcome TryValidate()` in addition to `bool Validate()`, and
   `Outcome<T> TryParse()` in addition to `T Parse()`]
-- **CONSIDER** using `Result<T, TError>` in the same situations but you wish to
+- **CONSIDER** using `Result<T, TError>` in the same situations, but you wish to
   pass a custom error type instead of a string.
 - **CONSIDER** using `Fallible` and `Fallible<T>` to wrap method calls that are
   expected to throw in common scenarios. [TODO: give concrete examples, network
@@ -658,37 +684,9 @@ full exception capture (`ExceptionDispatchInfo`).
 - **DO NOT** use `Result<T, Exception>`; this is **not** a replacement for the
   standard exception mechanism in .NET.
 
-#### Default value
-The default value of any of the result types is a successful object. This is
-consistent with what we would do with "normal" methods:
-```csharp
-public T Method1() {
-  if (...) { ... return ...}
-  // Default
-  return default(T);
-}
+### <a name="error-outcome"></a>Outcome types
 
-public Outcome<T> Method2() {
-  if (...) { ... return ...}
-  // Default
-  return default(Outcome<T>);
-}
-```
-`default(Outcome<T>)` represents a successful computation and contains `default(T)`.
-
-#### Remarks
-Of course, we could have gone away with one single type, but at the expense
-of complicated type signatures. The correspondence is as follows:
-
-Type             | Alternatives
------------------|-------------
-`Outcome`        | `Result<Unit, string>` or `Outcome<Unit>`
-`Outcome<T>`     | `Result<T, string>`
-`Fallible`       | `Result<Unit, ExceptionDispatchInfo>` or `Fallible<Unit>`
-`Fallible<T>`    | `Result<T, ExceptionDispatchInfo>`
-
-### <a name="error-outcome"></a>Outcome
-
+#### Outcome
 ```csharp
 var success = Outcome.Ok;
 var failure = Outcome.FromError("My error message.");
@@ -701,7 +699,7 @@ var failure = Outcome.FromError("My error message.");
 [Explain: Not really a monad, no QEP but conversion to `Outcome<Unit>` and Result,
 which is conveninet when you have a mix of `Outcome` and other return types]
 
-### <a name="error-outcomeT"></a>Outcome\<T\>
+#### Outcome\<T\>
 
 ```csharp
 var success = Outcome.Of(1);
@@ -712,7 +710,6 @@ var failure = Outcome<int>.FromError("My error message.");
 (bool succeed, T value, string error) = outcome;
 ```
 
-#### Where
 **WARNING:** `Where` does **not** accept a predicate but a filter.
 ```csharp
 var outcome = Outcome.Of(1);
@@ -722,8 +719,12 @@ var q = outcome.Where(filter);
 var q = from val in outcome where filter(val) select val;
 ```
 
-### <a name="error-fallible"></a>Fallible
+### <a name="error-fallible"></a>Fallible types
 
+[Explain when to use this class and what to expect; e.g. for querying remote services]
+**We do not catch exceptions thrown by any supplied delegate.**
+
+#### Fallible
 If `edi` is an object of type `ExceptionDispatchInfo`:
 ```csharp
 var success = Fallible.Ok;
@@ -735,10 +736,8 @@ var failure = Fallible.FromError(edi);
 ```
 
 [Explain: Not really a monad, no QEP but conversion to `Fallible<Unit>` and Result]
-[Explain when to use this class and what to expect; e.g. for querying remote services]
-**We do not catch exceptions thrown by any supplied delegate.**
 
-### <a name="error-fallibleT"></a>Fallible\<T\>
+#### Fallible\<T\>
 
 If `edi` is an object of type `ExceptionDispatchInfo`:
 ```csharp
@@ -756,10 +755,7 @@ If the `oucome` is NOK, we could use `outcome.Error`, but if it is OK????
 Func<int, Fallible> filter = i => i >= 0 ? Fallible.Ok : Fallible.FromError(???);
 ```
 
-[Explain when to use this class and what to expect; e.g. for querying remote services]
-**We do not catch exceptions thrown by any supplied delegate.**
-
-### <a name="error-result"></a>Result\<T, TError\>
+### <a name="error-result"></a>Result type
 
 ```csharp
 var success = Result<int, Error>.Of(1);
@@ -1183,7 +1179,7 @@ Haskell to C# Walk-Through
 - [Conditional execution of monadic expressions](#haskell-exec)
 - [Monadic lifting operators](#haskell-lift)
 - [Monad Plus](#haskell-plus)
-- [`Maybe` specific functions](#haskell-maybe)
+- [Maybe specific functions](#haskell-maybe)
 - [Further readings](#haskell-further)
 
 ### <a name="haskell-impl"></a>C# implementation
