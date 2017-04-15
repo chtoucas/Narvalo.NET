@@ -5,11 +5,12 @@ pandoc ^
   --standalone ^
   --smart ^
   --toc ^
-  --toc-depth=2 ^
+  --toc-depth=3 ^
   --no-highlight ^
   -f markdown_github-hard_line_breaks+emoji ^
   -t html5 ^
-  ../../src/Narvalo.Fx/README.md ^
-  -o README.html
+  content/narvalo-fx.md ^
+  content/developer.md ^
+  -o index.html
 
 @exit /B %ERRORLEVEL%

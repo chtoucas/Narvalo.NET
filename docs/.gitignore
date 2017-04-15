@@ -1,3 +1,5 @@
 _exported_templates/
 _www/
-api/
+_api/
+
+index.html

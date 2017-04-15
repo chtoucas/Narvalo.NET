@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans|Vollkorn|Montserrat:700');
 
 BODY {
-    max-width: 42rem;
-    margin: 0 auto;
+    max-width: 40rem;
+    /*margin: 0 auto;*/
+	margin-left: 5em;
     padding-right: 1em;
     padding-left: 1em;
     font-family: "Open Sans", sans-serif;
@@ -33,22 +34,30 @@ H2 {
 }
 H3 {
 	font-family: 'Montserrat', sans-serif;
-	font-size: 1.2rem;
+	font-size: 1rem;
 	font: bold 1.6rem/175%;
     letter-spacing: .2rem;
 	text-transform: uppercase;
-	margin-top: 3em;
-	margin-bottom: 2em;
+	margin-top: 2.5em;
+	margin-bottom: 1.5em;
 }
 H4 {
 	font-size: 1.4rem;
+	color: crimson;
+	margin-top: 1em;
+	margin-bottom: 0em;
 }
 H5 {
 	font-size: 1.2rem;
 	font-style: italic;
+	margin-top: 1.5em;
+	margin-bottom: 0em;
 }
 P, UL , OL {
 	line-height: 1.5rem;
+}
+UL {
+	padding-left: 1.5rem;
 }
 PRE {
     /*border: 1px solid #ccc;*/
@@ -80,8 +89,8 @@ PRE CODE {
 TABLE {
     border-collapse: collapse;
     border-spacing: 0;
-    /* margin: 2em auto; */
-	font-size: .9em;
+    margin: 2em auto;
+	font-size: .9rem;
 }
 TABLE THEAD TR {
 	background-color: #f8f8f8;
@@ -107,24 +116,22 @@ DT {
 	font-style: italic;
 }
 FOOTER {
-	font-size: .7em;
 	padding-top: 5em;
 	padding-bottom: 2em;
 	text-align: center;
 	color: gray;
 }
 #TOC {
-	display: none;
 	position: fixed;
 	top: 0;
 	right: 0;
 	border: 1px solid #ccc;
 	z-index: 1;
 	opacity: .8;
-	background-color: #fff;
-	/* overflow-y: scroll;
-    height: 100%; */
-	font-size: .9em;
+	background-color: #edf0f2;
+	overflow-y: scroll;
+    height: 100%;
+	font-size: .7rem;
 }
 #TOC UL {
 	padding-left: 1em;

@@ -1,15 +1,6 @@
 Developer Guidelines
 ====================
 
-- [Overview](#overview)
-- [Coding Rules](#coding-rules)
-- [Project Configuration](#project-configuration)
-- [Localization](#localization)
-- [Versioning](#versioning)
-- [Packaging](#packaging)
-- [Developer Operations](#developer-operations)
-- [Issues](issues.md)
-
 --------------------------------------------------------------------------------
 
 Overview

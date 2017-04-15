@@ -16,7 +16,7 @@ $toc$
 </nav>
 $endif$
 $body$
-<footer>&copy; 2017 <a href="http://narvalo.org">Narvalo.Org</a></footer>
+<footer>&copy; 2013-2017, <a href="http://narvalo.org">Narvalo.Org</a></footer>
 <script src="assets/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 </body>

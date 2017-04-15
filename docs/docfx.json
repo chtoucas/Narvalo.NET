@@ -15,7 +15,7 @@
           "src": "../src"
         }
       ],
-      "dest": "api",
+      "dest": "_api",
       // FIXME: Does not seem to work.
       "filter": "filterConfig.yml"
     }
@@ -24,12 +24,12 @@
     "content": [
       {
         "files": [ "toc.yml", "**/*.yml" ],
-        "src": "api",
+        "src": "_api",
         "dest": "api"
       }
     ],
     "resource": [],
-    "overwrite": "apidocs/**/*.md",
+    // "overwrite": "apidocs/**/*.md",
     "dest": "_www",
     "globalMetadata": {
       "_appTitle": "Narvalo .NET libraries",
@@ -38,7 +38,8 @@
     },
     "globalMetadataFiles": [],
     "fileMetadataFiles": [],
-    "template": ["default", "template"],
+    // "template": ["default", "template"],
+    "template": ["default"],
     "postProcessors": [],
     "xref": ["../packages/msdn.4.5.2.0.1.0-alpha-1611021200/content/msdn.4.5.2.zip"],
     "noLangKeyword": false
