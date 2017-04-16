@@ -32,7 +32,7 @@
     "overwrite": "apidocs/**/*.md",
     "dest": "_www",
     "globalMetadata": {
-      "_disableAffix": "true",
+      "_disableNavbar": "true",
       "_appTitle": "Narvalo .NET libraries",
       "_appFooter": "Copyright (c) Narvalo.Org",
       "_disableContribution": true
