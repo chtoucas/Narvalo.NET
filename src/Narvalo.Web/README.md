@@ -7,3 +7,10 @@ Narvalo.Web
 Provides types that might prove useful for Web development: generic
 `HttpHandler` type, asset providers, Razor and WebForms compile-time optimizers.
 
+### Status
+- **Unstable.** Versioning scheme explained
+  [here](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/content/developer.md#versioning).
+- Target the **.NET Framework 4.5**.
+- C# documentation is largely missing.
+
+[What's next?](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/content/issues.md)

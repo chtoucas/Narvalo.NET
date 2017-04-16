@@ -1,7 +1,7 @@
 Narvalo.NET
 ===========
 
-- [Developer Documentation](https://github.com/chtoucas/Narvalo.NET/tree/master/docs/index.md)
+- [Documentation](https://github.com/chtoucas/Narvalo.NET/tree/master/docs/content/)
 - [License](https://github.com/chtoucas/Narvalo.NET/tree/master/LICENSE.txt)
 
 Unstable packages are available on [myget](https://www.myget.org/gallery/narvalo-edge)

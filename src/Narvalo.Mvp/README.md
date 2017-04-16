@@ -10,3 +10,11 @@ nevertheless, featurewise, it should be on par with the original Web Forms Mvp.
 
 Most (if not all) credits should go to the markers of Web Forms MVP,
 of course if you find any error I am the one to be blamed for.
+
+### Status
+- **Stable.** Versioning scheme explained
+  [here](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/content/developer.md#versioning).
+- Target the **.NET Framework 4.5**.
+- C# documentation is largely missing.
+
+[What's next?](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/content/issues.md)

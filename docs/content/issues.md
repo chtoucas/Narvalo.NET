@@ -1,5 +1,7 @@
-Issues & TODOs (en vrac)
-========================
+Issues
+======
+
+--------------------------------------------------------------------------------
 
 Divers et variés
 ----------------
@@ -35,11 +37,15 @@ he', car il est en cours d'utilisation par un autre processus. [I:\github\Narval
   `FileVersion`... instead of `_AssemblyVersion`, `_AssemblyInformationalVersion`
   and `_AssemblyFileVersion`.
 
+--------------------------------------------------------------------------------
+
 Narvalo.Common
 --------------
 
 Next:
 - Make it a .NET Standard 2.0 library.
+
+--------------------------------------------------------------------------------
 
 Narvalo.Finance
 ---------------
@@ -55,6 +61,8 @@ Next:
   * [BBAN](https://github.com/globalcitizen/php-iban/issues/39)
   * [python-stdnum](https://github.com/arthurdejong/python-stdnum)
   * [France](http://marlot.org/util/calcul-de-la-cle-nir.php)
+
+--------------------------------------------------------------------------------
 
 Narvalo.Fx
 ----------
@@ -107,6 +115,8 @@ public static void Deconstruct<T>(
   * [Idioms](http://tomasp.net/blog/idioms-in-linq.aspx/)
   * Check out [FSharp.Extras](https://fsprojects.github.io/FSharpx.Extras/index.html)
 
+--------------------------------------------------------------------------------
+
 Narvalo.Money
 -------------
 
@@ -126,6 +136,8 @@ Next:
   * [CSharpMoney](https://csharpmoney.codeplex.com/)
   * [NMoneys](https://github.com/dgg/nmoneys)
 
+--------------------------------------------------------------------------------
+
 Narvalo.Mvp
 -----------
 
@@ -142,8 +154,10 @@ Next:
   See [here](http://aspiringcraftsman.com/tag/model-view-presenter/)
   and [here](http://aspiringcraftsman.com/2007/08/25/interactive-application-architecture/)
 
+--------------------------------------------------------------------------------
+
 Futures
-=======
+-------
 
 Notes for the other [repository](https://github.com/chtoucas/Brouillons).
 
@@ -162,16 +176,13 @@ Notes for the other [repository](https://github.com/chtoucas/Brouillons).
   * [Amazon States Language](https://states-language.net/spec.html)
   * [Tim Bray](https://www.tbray.org/ongoing/When/201x/2017/04/14/JsonPath-Needs-Work)
 
-Play
-----
-
+### Play
 - Finish monad rules.
 - Add demo codes for all monads.
 - Add Writer and Continuation monads.
 - Give examples: parser combinator (Sprache), state-machine (Stateless).
 
-Narvalo.Reliability
--------------------
+### Narvalo.Reliability
 
 References:
 - [Polly](https://github.com/App-vNext/Polly)
@@ -179,9 +190,7 @@ References:
 - jrugged
 - [Hystrix](https://github.com/Netflix/Hystrix)
 
-Narvalo.Mvp.Futures
--------------------
-
+### Narvalo.Mvp.Futures
 - Cross-presenter communication in WinForms is not functional.
   Things to work on before it might prove to be useful:
   * Right now, only controls contained in a MvpForm share the same presenter binder.
@@ -190,3 +199,5 @@ Narvalo.Mvp.Futures
     are fully loaded before we reach the `CreateControl` or `Load` events in the form
     container where we normally perform the binding.
   * The message coordinator must support unsubscription (automatic or manual).
+
+--------------------------------------------------------------------------------

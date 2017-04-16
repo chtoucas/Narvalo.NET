@@ -7,15 +7,16 @@ Narvalo.Finance
 BIC (ISO 9362) and IBAN types; includes support for parsing, validation and formatting.
 
 ### Status
-- **Stable**
-- Full test coverage.
+- **Stable.** Versioning scheme explained
+  [here](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/content/developer.md#versioning).
+- Target the **.NET Standard 1.0** and the **Profile259** PCL profile.
 - Localized messages available in both French and English.
+- C# documentation is largely missing.
+- Full test coverage.
 
-Our versioning scheme is explained
-[here](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/index.md#versioning).
+[What's next?](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/content/issues.md)
 
-Notes:
-- IBAN validation does not yet perform full BBAN validation.
+**NB:** IBAN validation does not yet perform full BBAN validation.
 
 Changelog
 ---------

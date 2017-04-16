@@ -10,28 +10,17 @@ programming: option type (`Maybe<T>`), error types (`Result<T, TError>`,
 disjoint union (`Either<T1, T2>`), sequence generators and LINQ extensions.
 
 ### Status
-- **Unstable.**
-- Tentative release date for a stable package: end of april 2017?
-  Pending: API stability, good documentation and full test coverage.
-  _Open question: should the error types be put in a separate assembly?_
-- Support the .NET Standard v1.0 and the PCL profile Profile259.
-- Test coverage is starting to look good (70%); the number of functional tests
-  is progressing too.
+- **Unstable.** Versioning scheme explained
+  [here](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/content/developer.md#versioning).
+- Target the **.NET Standard 1.0** and the **Profile259** PCL profile.
+- Localized messages available in both **French** and **English**.
+- **[User guide](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/content/narvalo-fx.md)**
 - C# documentation is largely missing.
-- Localized messages available in both French and English.
+- Test coverage is starting to look good (70%). The number of functional tests
+  is progressing too.
 
-Our versioning scheme is explained
-[here](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/content/developer.md#versioning).
+Tentative release date for a stable package: end of april 2017?
+_Pending:_ API stability, good documentation and thorough testing.
+_Open question:_ should the error types be put in a separate assembly?
 
-[What's Next](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/issues.md#narvalofx)
-
-[Documentation](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/content/narvalo.fx.md)
-
---------------------------------------------------------------------------------
-
-Changelog
----------
-
-Nothing here until we reach 1.0.0.
-
---------------------------------------------------------------------------------
+[What's next?](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/content/issues.md)

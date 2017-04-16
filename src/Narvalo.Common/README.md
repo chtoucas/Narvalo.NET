@@ -6,3 +6,12 @@ Narvalo.Common
 
 Provides various utilities (simple parsers, Int64 encoders) and extension
 methods for Collections, SQL client and XDom.
+
+### Status
+- **Unstable.** Versioning scheme explained
+  [here](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/content/developer.md#versioning).
+- Target the **.NET Framework 4.5**.
+- Localized messages available in both **French** and **English**.
+- C# documentation is largely missing.
+
+[What's next?](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/content/issues.md)

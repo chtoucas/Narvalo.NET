@@ -2,4 +2,4 @@ _exported_templates/
 _www/
 _api/
 
-index.html
+*.html

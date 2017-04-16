@@ -10,8 +10,12 @@ BODY {
 	font-size: 15px;
 }
 HR {
-	color: crimson;
+	background-color: crimson;
 	margin-top: 2em;
+	height: 0.25em;
+	padding: 0;
+	margin: 24px 0;
+	border: 0;
 }
 A {
 	text-decoration: none;

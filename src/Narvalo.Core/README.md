@@ -7,13 +7,14 @@ Narvalo.Core
 Provides helpers on which depend the other Narvalo packages.
 
 ### Status
-- **Stable**
-- Full test coverage.
+- **Stable.** Versioning scheme explained
+  [here](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/content/developer.md#versioning).
+- Target the **.NET Standard 1.0** and the **Profile259** PCL profile.
+- Localized messages available in both **French** and **English**.
 - Complete C# documentation.
-- Localized messages available in both French and English.
+- Full test coverage.
 
-Our versioning scheme is explained
-[here](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/index.md#versioning).
+[What's next?](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/content/issues.md)
 
 Changelog
 ---------

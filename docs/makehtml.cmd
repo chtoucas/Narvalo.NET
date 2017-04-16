@@ -10,7 +10,6 @@ pandoc ^
   -f markdown_github-hard_line_breaks+emoji ^
   -t html5 ^
   content/narvalo-fx.md ^
-  content/developer.md ^
-  -o index.html
+  -o narvalo-fx.html
 
 @exit /B %ERRORLEVEL%
