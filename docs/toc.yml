@@ -1,8 +1,4 @@
 ﻿- name: Home
   href: /
-- name: User Guide
-  href: userguide/index.html
 - name: API Documentation
   href: _api/
-- name: Developer Guide
-  href: developer.html

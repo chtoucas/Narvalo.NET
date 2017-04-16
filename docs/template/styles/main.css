@@ -2,7 +2,7 @@
 
 body {
   font-family: 'Lato', sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 24px;
 }
 
@@ -20,16 +20,33 @@ code, kbd, pre, samp, tt {
   border: none;
 }
 
-table { font-size: .9em; }
 table > thead { display: none; }
 table > tbody > tr { background-color: #fff !important; }
 .table-bordered > tbody > tr > td { border: none; border-bottom: 1px solid #e3e3e3; }
 
-#_content { max-width: 40em; }
+#_content { max-width: 45em; }
 
 .subnav { background-color: #2980B9; }
 .subnav A { color: white; }
+.navbar-default { border-color: #2980B9; }
 
-/* Menu à gauche */
-#toc { padding-right: 20px; }
-.toc .level2 { margin: 0px; font-size: .9em; }
+/* Menu de gauche */
+.sidetoc, .sidefilter, body .toc { background-color: #343131;  }
+.sidetoc { overflow-y: hidden; }
+.toc { padding-left: 0; }
+.expand-stub::before { content: "" !important; }
+.toc .level1 > li > a { font-style: italic; font-weight: normal; color: #e3e3e3 !important; }
+.toc .level1 > li.active > a { color: #2980B9 !important; }
+.toc .level1 > li > a:hover { color: white !important; }
+.toc .level2 { margin: 0px; }
+.toc .nav > li > a { color: #b3b3b3; }
+.toc .nav > li.active > a { color: #2980B9; }
+.toc .nav > li > a:hover, .toc .nav > li > a:focus { color: white; }
+.toc .nav > li.active > a:hover, .toc .nav > li.active > a:focus { color: white; }
+
+.level1.summary {
+  border-radius: 3px;
+  background-color: #f9f9f9;
+  border: 1px solid #2980B9;
+  padding: .5em .3em 0em .5em;
+}
