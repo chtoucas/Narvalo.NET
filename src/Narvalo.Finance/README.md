@@ -6,6 +6,8 @@ Narvalo.Finance
 
 BIC (ISO 9362) and IBAN types; includes support for parsing, validation and formatting.
 
+**WARNING:** IBAN validation does not yet perform full BBAN validation.
+
 ### Status
 - **Stable.** Versioning scheme explained
   [here](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/content/developer.md#versioning).
@@ -15,8 +17,6 @@ BIC (ISO 9362) and IBAN types; includes support for parsing, validation and form
 - Full test coverage.
 
 [What's next?](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/content/issues.md)
-
-**NB:** IBAN validation does not yet perform full BBAN validation.
 
 Changelog
 ---------

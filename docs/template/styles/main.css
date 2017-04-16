@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css?family=Lato|Roboto+Slab:700');
+
+body {
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.h1, .h2, .h3, .h4, .h5, h1, h2, h3, h4, h5 {
+  font-family: 'Roboto Slab', serif;
+  line-height: 1.5em;
+}
+.h5, h5 { color: #4c668b; margin-top: 1em; }
+article h4 { border-bottom: none; }
+
+code, kbd, pre, samp, tt {
+  font-family: 'Consolas', monospace;
+  font-size: 12px !important;
+  background-color: #f9f9f9;
+  border: none;
+}
+
+table { font-size: .9em; }
+table > thead { display: none; }
+table > tbody > tr { background-color: #fff !important; }
+.table-bordered > tbody > tr > td { border: none; border-bottom: 1px solid #e3e3e3; }
+
+#_content { max-width: 40em; }
+
+.subnav { background-color: #2980B9; }
+.subnav A { color: white; }
+
+/* Menu à gauche */
+#toc { padding-right: 20px; }
+.toc .level2 { margin: 0px; font-size: .9em; }
