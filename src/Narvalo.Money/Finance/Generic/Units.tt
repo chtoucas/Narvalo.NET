@@ -56,6 +56,7 @@ namespace <#= Namespace #>
 #>
     // We don't want to clutter the open cover report.
     [ExcludeFromCodeCoverage]
+    [ExcludeFromApiReference]
 <#
         }
 #>

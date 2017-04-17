@@ -19,6 +19,9 @@ Provides helpers on which depend the other Narvalo packages.
 Changelog
 ---------
 
+**vNext**
+- New attribute `ExcludeFromApiReference` to exclude code from the API reference.
+
 **Version 2.0.0** (released 2017-04-07)
 - **[Breaking]** Remove all variants of `Format.Invariant`;
   use `FormattableString.Invariant` instead.
