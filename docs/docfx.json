@@ -4,19 +4,20 @@
       "src": [
         {
           "files": [
+            "Narvalo.Common/Narvalo.Common.csproj",
             "Narvalo.Core/Narvalo.Core.csproj",
-            // "Narvalo.Money/Narvalo.Money.csproj",
-            "Narvalo.Fx/Narvalo.Fx.csproj",
             "Narvalo.Finance/Narvalo.Finance.csproj",
-            // "Narvalo.Common/Narvalo.Common.csproj",
-            // "Narvalo.Web/Narvalo.Web.csproj"
+            "Narvalo.Fx/Narvalo.Fx.csproj",
+            "Narvalo.Money/Narvalo.Money.csproj",
+            "Narvalo.Mvp/Narvalo.Mvp.csproj",
+            "Narvalo.Mvp.Web/Narvalo.Mvp.Web.csproj",
+            "Narvalo.Web/Narvalo.Web.csproj"
           ],
           "exclude": [ "**/bin/**", "**/obj/**" ],
           "src": "../src"
         }
       ],
       "dest": "_api",
-      // FIXME: Does not seem to work.
       "filter": "filterConfig.yml"
     }
   ],
@@ -26,22 +27,18 @@
         "files": [ "**/*.yml" ],
         "src": "_api",
         "dest": "api"
-      },
-      { "files": [ "toc.yml" ] }
+      }
     ],
     "overwrite": "apidocs/**/*.md",
     "dest": "_www",
     "globalMetadata": {
-      "_disableNavbar": "true",
+      "_disableContribution": false,
+      "_disableNavbar": true,
+      "_enableNewTab": true,
       "_appTitle": "Narvalo .NET libraries",
-      "_appFooter": "Copyright (c) Narvalo.Org",
-      "_disableContribution": true
+      "_appFooter": "Copyright (c) Narvalo.Org"
     },
-    "globalMetadataFiles": [],
-    "fileMetadataFiles": [],
-    "template": ["default", "template"],
-    "postProcessors": [],
-    "xref": ["../packages/msdn.4.5.2.0.1.0-alpha-1611021200/content/msdn.4.5.2.zip"],
-    "noLangKeyword": true
+    "template": ["default", "template"]
+    // "xref": ["../packages/msdn.4.5.2.0.1.0-alpha-1611021200/content/msdn.4.5.2.zip"],
   }
 }
