@@ -2,7 +2,7 @@
 
 [CmdletBinding()]
 param(
-    [Alias('x')] [switch] $ExtractApi,
+    [Alias('x')] [switch] $Extract,
     [Alias('b')] [switch] $Build,
     [Alias('t')] [switch] $Test
 )
@@ -27,7 +27,7 @@ trap {
 $docfx = (Get-LocalPath "packages") | Get-DocFXExe
 
 # Extract language metadata.
-if ($ExtractApi) { . $docfx metadata }
+if ($Extract) { . $docfx metadata }
 
 # Generate documentation.
 if ($Build) { . $docfx build }
