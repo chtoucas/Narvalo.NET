@@ -14,7 +14,7 @@ Provides helpers on which depend the other Narvalo packages.
 - Complete C# documentation.
 - Full test coverage.
 
-[What's next?](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/content/issues.md)
+[What's next?](https://github.com/chtoucas/Narvalo.NET/blob/master/issues.md)
 
 Changelog
 ---------

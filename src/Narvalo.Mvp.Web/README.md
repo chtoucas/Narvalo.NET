@@ -12,4 +12,4 @@ Enhances the Narvalo.Mvp library with support for ASP.NET WebForms.
 - Target the **.NET Framework 4.5**.
 - C# documentation is largely missing.
 
-[What's next?](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/content/issues.md)
+[What's next?](https://github.com/chtoucas/Narvalo.NET/blob/master/issues.md)

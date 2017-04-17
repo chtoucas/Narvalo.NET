@@ -14,7 +14,7 @@ disjoint union (`Either<T1, T2>`), sequence generators and LINQ extensions.
   [here](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/content/developer.md#versioning).
 - Target the **.NET Standard 1.0** and the **Profile259** PCL profile.
 - Localized messages available in both **French** and **English**.
-- **[User guide](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/content/narvalo-fx.md)**
+- **[User guide](https://github.com/chtoucas/NarvaloWebSite/www/projects/)**
 - C# documentation is largely missing.
 - Test coverage is starting to look good (70%). The number of functional tests
   is progressing too.
@@ -23,4 +23,4 @@ Tentative release date for a stable package: end of april 2017?
 _Pending:_ API stability, good documentation and thorough testing.
 _Open question:_ should the error types be put in a separate assembly?
 
-[What's next?](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/content/issues.md)
+[What's next?](https://github.com/chtoucas/Narvalo.NET/blob/master/issues.md)

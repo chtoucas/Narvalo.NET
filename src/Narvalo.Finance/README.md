@@ -16,7 +16,7 @@ BIC (ISO 9362) and IBAN types; includes support for parsing, validation and form
 - C# documentation is largely missing.
 - Full test coverage.
 
-[What's next?](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/content/issues.md)
+[What's next?](https://github.com/chtoucas/Narvalo.NET/blob/master/issues.md)
 
 Changelog
 ---------

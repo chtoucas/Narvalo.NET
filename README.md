@@ -1,7 +1,7 @@
 Narvalo.NET
 ===========
 
-- [Documentation](https://github.com/chtoucas/Narvalo.NET/tree/master/docs/content/)
+- [Documentation](https://github.com/chtoucas/NarvaloWebSite/www/projects/)
 - [License](https://github.com/chtoucas/Narvalo.NET/tree/master/LICENSE.txt)
 
 Unstable packages are available on [myget](https://www.myget.org/gallery/narvalo-edge)
@@ -9,7 +9,6 @@ Unstable packages are available on [myget](https://www.myget.org/gallery/narvalo
 Project + README | Summary | .NET Platform | Package
 -----------------|---------|---------------|--------
 [Narvalo.Build](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Build/) | Custom **MSBuild** tasks |.NET 4.5 | [![NuGet](https://img.shields.io/nuget/v/Narvalo.Build.svg)](https://www.nuget.org/packages/Narvalo.Build/)
-[Narvalo.Cerbere](https://github.com/chtoucas/Cerbere) | **Code Contracts** and debugging put together | Standard 1.0 |  [![NuGet](https://img.shields.io/nuget/v/Narvalo.Cerbere.svg)](https://www.nuget.org/packages/Narvalo.Cerbere/)
 [Narvalo.Common](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Common/) | Utilities and extension methods | .NET 4.5 |  [![NuGet](https://img.shields.io/nuget/v/Narvalo.Common.svg)](https://www.nuget.org/packages/Narvalo.Common/)
 [Narvalo.Core](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Core/) | Base dependency for the other packages | Standard 1.0 |  [![NuGet](https://img.shields.io/nuget/v/Narvalo.Core.svg)](https://www.nuget.org/packages/Narvalo.Core/)
 [Narvalo.Finance](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Finance/) | **BIC** and **IBAN** types | Standard 1.0 |  [![NuGet](https://img.shields.io/nuget/v/Narvalo.Finance.svg)](https://www.nuget.org/packages/Narvalo.Finance/)

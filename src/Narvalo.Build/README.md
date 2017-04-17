@@ -13,4 +13,4 @@ and YUICompressor.
   [here](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/content/developer.md#versioning).
 - Target the **.NET Framework 4.5**.
 
-[What's next?](https://github.com/chtoucas/Narvalo.NET/blob/master/docs/content/issues.md)
+[What's next?](https://github.com/chtoucas/Narvalo.NET/blob/master/issues.md)
