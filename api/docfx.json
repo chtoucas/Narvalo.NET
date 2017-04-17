@@ -29,7 +29,7 @@
         "dest": "api"
       }
     ],
-    "overwrite": "apidocs/**/*.md",
+    "overwrite": "api/**/*.md",
     "dest": "_www",
     "globalMetadata": {
       "_disableContribution": false,
