@@ -5,8 +5,6 @@ uid: Narvalo.Web.Optimization
 The **Narvalo.Web.Optimization** namespace contains types that enable you to
 optimize web content for HTTP delivery.
 
-## HTML Optimizations ##
-
 Work related to HTML optimizations would have not been
 possible without other open source contributors. I owe a lot to this
 [blog](http://omari-o.blogspot.com/2009/09/aspnet-white-space-cleaning-with-no.html)
