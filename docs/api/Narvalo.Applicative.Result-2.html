@@ -1,0 +1,2279 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Struct Result&lt;T, TError&gt;
+   | Narvalo .NET libraries </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Struct Result&lt;T, TError&gt;
+   | Narvalo .NET libraries ">
+    <meta name="generator" content="docfx 2.15.5.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content">
+              
+              
+              <h1 id="Narvalo_Applicative_Result_2" data-uid="Narvalo.Applicative.Result`2">Struct Result&lt;T, TError&gt;
+              </h1>
+              <div class="markdown level0 summary"></div>
+              <div class="markdown level0 conceptual"></div>
+              <div class="inheritedMembers">
+                <h5>Inherited Members</h5>
+                <div>
+                  <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.GetType()</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+                </div>
+              </div>
+              <h6><strong>Namespace</strong>:Narvalo.Applicative</h6>
+              <h6><strong>Assembly</strong>:Narvalo.Fx.dll</h6>
+              <h5 id="Narvalo_Applicative_Result_2_syntax">Syntax</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public struct Result&lt;T, TError&gt; : IEquatable&lt;Result&lt;T, TError&gt;&gt;, IStructuralEquatable, IResult&lt;T, TError&gt;, IContainer&lt;T&gt;, ISecondaryContainer&lt;TError&gt;, Iterable&lt;T&gt;</code></pre>
+              </div>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">T</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TError</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h3 id="properties">Properties
+              </h3>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_IsError.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.IsError%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L50">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_IsError_" data-uid="Narvalo.Applicative.Result`2.IsError*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_IsError" data-uid="Narvalo.Applicative.Result`2.IsError">IsError</h4>
+              <div class="markdown level1 summary"><p>Gets a value indicating whether the object is the result of an unsuccessful computation.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public bool IsError { get; }</code></pre>
+              </div>
+              <h5 class="propertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td><p>true if the outcome was unsuccessful; otherwise false.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_IsSuccess.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.IsSuccess%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L56">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_IsSuccess_" data-uid="Narvalo.Applicative.Result`2.IsSuccess*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_IsSuccess" data-uid="Narvalo.Applicative.Result`2.IsSuccess">IsSuccess</h4>
+              <div class="markdown level1 summary"><p>Gets a value indicating whether the object is the result of a successful computation.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public bool IsSuccess { get; }</code></pre>
+              </div>
+              <h5 class="propertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td><p>true if the outcome was successful; otherwise false.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h3 id="methods">Methods
+              </h3>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_Bind__1_System_Func__0_Narvalo_Applicative_Result___0__1___.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.Bind%60%601(System.Func%7B%600%2CNarvalo.Applicative.Result%7B%60%600%2C%601%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L159">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_Bind_" data-uid="Narvalo.Applicative.Result`2.Bind*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_Bind__1_System_Func__0_Narvalo_Applicative_Result___0__1___" data-uid="Narvalo.Applicative.Result`2.Bind``1(System.Func{`0,Narvalo.Applicative.Result{``0,`1}})">Bind&lt;TResult&gt;(Func&lt;T, Result&lt;TResult, TError&gt;&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public Result&lt;TResult, TError&gt; Bind&lt;TResult&gt;(Func&lt;T, Result&lt;TResult, TError&gt;&gt; binder)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;T, <a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;TResult, TError&gt;&gt;</td>
+                    <td><span class="parametername">binder</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;TResult, TError&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_BindError__1_System_Func__1_Narvalo_Applicative_Result__0___0___.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.BindError%60%601(System.Func%7B%601%2CNarvalo.Applicative.Result%7B%600%2C%60%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L181">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_BindError_" data-uid="Narvalo.Applicative.Result`2.BindError*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_BindError__1_System_Func__1_Narvalo_Applicative_Result__0___0___" data-uid="Narvalo.Applicative.Result`2.BindError``1(System.Func{`1,Narvalo.Applicative.Result{`0,``0}})">BindError&lt;TResult&gt;(Func&lt;TError, Result&lt;T, TResult&gt;&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public Result&lt;T, TResult&gt; BindError&lt;TResult&gt;(Func&lt;TError, Result&lt;T, TResult&gt;&gt; binder)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TError, <a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;T, TResult&gt;&gt;</td>
+                    <td><span class="parametername">binder</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;T, TResult&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_Contains__0_.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.Contains(%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L215">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_Contains_" data-uid="Narvalo.Applicative.Result`2.Contains*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_Contains__0_" data-uid="Narvalo.Applicative.Result`2.Contains(`0)">Contains(T)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public bool Contains(T value)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">T</span></td>
+                    <td><span class="parametername">value</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_Contains__0_System_Collections_Generic_IEqualityComparer__0__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.Contains(%600%2CSystem.Collections.Generic.IEqualityComparer%7B%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L221">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_Contains_" data-uid="Narvalo.Applicative.Result`2.Contains*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_Contains__0_System_Collections_Generic_IEqualityComparer__0__" data-uid="Narvalo.Applicative.Result`2.Contains(`0,System.Collections.Generic.IEqualityComparer{`0})">Contains(T, IEqualityComparer&lt;T&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public bool Contains(T value, IEqualityComparer&lt;T&gt; comparer)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">T</span></td>
+                    <td><span class="parametername">value</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEqualityComparer</span>&lt;T&gt;</td>
+                    <td><span class="parametername">comparer</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_ContinueWith__1_Narvalo_Applicative_Result___0__1__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.ContinueWith%60%601(Narvalo.Applicative.Result%7B%60%600%2C%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result.Shadowing.cs/#L17">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_ContinueWith_" data-uid="Narvalo.Applicative.Result`2.ContinueWith*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_ContinueWith__1_Narvalo_Applicative_Result___0__1__" data-uid="Narvalo.Applicative.Result`2.ContinueWith``1(Narvalo.Applicative.Result{``0,`1})">ContinueWith&lt;TResult&gt;(Result&lt;TResult, TError&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public Result&lt;TResult, TError&gt; ContinueWith&lt;TResult&gt;(Result&lt;TResult, TError&gt; other)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;TResult, TError&gt;</td>
+                    <td><span class="parametername">other</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;TResult, TError&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_Deconstruct_System_Boolean___0___1__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.Deconstruct(System.Boolean%40%2C%600%40%2C%601%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L39">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_Deconstruct_" data-uid="Narvalo.Applicative.Result`2.Deconstruct*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_Deconstruct_System_Boolean___0___1__" data-uid="Narvalo.Applicative.Result`2.Deconstruct(System.Boolean@,`0@,`1@)">Deconstruct(out Boolean, out T, out TError)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public void Deconstruct(out bool succeed, out T value, out TError error)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td><span class="parametername">succeed</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">T</span></td>
+                    <td><span class="parametername">value</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">TError</span></td>
+                    <td><span class="parametername">error</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_Do_System_Action__0__System_Action__1__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.Do(System.Action%7B%600%7D%2CSystem.Action%7B%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L235">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_Do_" data-uid="Narvalo.Applicative.Result`2.Do*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_Do_System_Action__0__System_Action__1__" data-uid="Narvalo.Applicative.Result`2.Do(System.Action{`0},System.Action{`1})">Do(Action&lt;T&gt;, Action&lt;TError&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public void Do(Action&lt;T&gt; onSuccess, Action&lt;TError&gt; onError)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Action</span>&lt;T&gt;</td>
+                    <td><span class="parametername">onSuccess</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Action</span>&lt;TError&gt;</td>
+                    <td><span class="parametername">onError</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_Equals_Narvalo_Applicative_Result__0__1__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.Equals(Narvalo.Applicative.Result%7B%600%2C%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L293">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_Equals_" data-uid="Narvalo.Applicative.Result`2.Equals*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_Equals_Narvalo_Applicative_Result__0__1__" data-uid="Narvalo.Applicative.Result`2.Equals(Narvalo.Applicative.Result{`0,`1})">Equals(Result&lt;T, TError&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public bool Equals(Result&lt;T, TError&gt; other)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;T, TError&gt;</td>
+                    <td><span class="parametername">other</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="implements">Implements</h5>
+                  <div><span class="xref">System.IEquatable&lt;T&gt;.Equals(T)</span></div>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_Equals_System_Object_.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L299">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_Equals_" data-uid="Narvalo.Applicative.Result`2.Equals*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_Equals_System_Object_" data-uid="Narvalo.Applicative.Result`2.Equals(System.Object)">Equals(Object)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Object</span></td>
+                    <td><span class="parametername">obj</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="overrides">Overrides</h5>
+              <div><span class="xref">System.ValueType.Equals(System.Object)</span></div>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_FromError__1_.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.FromError(%601)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L198">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_FromError_" data-uid="Narvalo.Applicative.Result`2.FromError*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_FromError__1_" data-uid="Narvalo.Applicative.Result`2.FromError(`1)">FromError(TError)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Result&lt;T, TError&gt; FromError(TError error)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">TError</span></td>
+                    <td><span class="parametername">error</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;T, TError&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_Gather__1_Narvalo_Applicative_Result_System_Func__0___0___1__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.Gather%60%601(Narvalo.Applicative.Result%7BSystem.Func%7B%600%2C%60%600%7D%2C%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result.Shadowing.cs/#L9">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_Gather_" data-uid="Narvalo.Applicative.Result`2.Gather*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_Gather__1_Narvalo_Applicative_Result_System_Func__0___0___1__" data-uid="Narvalo.Applicative.Result`2.Gather``1(Narvalo.Applicative.Result{System.Func{`0,``0},`1})">Gather&lt;TResult&gt;(Result&lt;Func&lt;T, TResult&gt;, TError&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public Result&lt;TResult, TError&gt; Gather&lt;TResult&gt;(Result&lt;Func&lt;T, TResult&gt;, TError&gt; applicative)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;<span class="xref">System.Func</span>&lt;T, TResult&gt;, TError&gt;</td>
+                    <td><span class="parametername">applicative</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;TResult, TError&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_GetEnumerator.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.GetEnumerator%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L283">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_GetEnumerator_" data-uid="Narvalo.Applicative.Result`2.GetEnumerator*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_GetEnumerator" data-uid="Narvalo.Applicative.Result`2.GetEnumerator">GetEnumerator()</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public IEnumerator&lt;T&gt; GetEnumerator()</code></pre>
+              </div>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerator</span>&lt;T&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_GetHashCode.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L302">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_GetHashCode_" data-uid="Narvalo.Applicative.Result`2.GetHashCode*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_GetHashCode" data-uid="Narvalo.Applicative.Result`2.GetHashCode">GetHashCode()</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
+              </div>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Int32</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="overrides">Overrides</h5>
+              <div><span class="xref">System.ValueType.GetHashCode()</span></div>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_Match__1_System_Func__0___0__System_Func__1___0__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.Match%60%601(System.Func%7B%600%2C%60%600%7D%2CSystem.Func%7B%601%2C%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L227">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_Match_" data-uid="Narvalo.Applicative.Result`2.Match*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_Match__1_System_Func__0___0__System_Func__1___0__" data-uid="Narvalo.Applicative.Result`2.Match``1(System.Func{`0,``0},System.Func{`1,``0})">Match&lt;TResult&gt;(Func&lt;T, TResult&gt;, Func&lt;TError, TResult&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public TResult Match&lt;TResult&gt;(Func&lt;T, TResult&gt; caseSuccess, Func&lt;TError, TResult&gt; caseError)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;T, TResult&gt;</td>
+                    <td><span class="parametername">caseSuccess</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TError, TResult&gt;</td>
+                    <td><span class="parametername">caseError</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">TResult</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_Of__0_.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.Of(%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L169">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_Of_" data-uid="Narvalo.Applicative.Result`2.Of*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_Of__0_" data-uid="Narvalo.Applicative.Result`2.Of(`0)">Of(T)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Result&lt;T, TError&gt; Of(T value)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">T</span></td>
+                    <td><span class="parametername">value</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;T, TError&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_OnError_System_Action__1__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.OnError(System.Action%7B%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L250">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_OnError_" data-uid="Narvalo.Applicative.Result`2.OnError*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_OnError_System_Action__1__" data-uid="Narvalo.Applicative.Result`2.OnError(System.Action{`1})">OnError(Action&lt;TError&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public bool OnError(Action&lt;TError&gt; action)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Action</span>&lt;TError&gt;</td>
+                    <td><span class="parametername">action</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_OnSuccess_System_Action__0__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.OnSuccess(System.Action%7B%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L243">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_OnSuccess_" data-uid="Narvalo.Applicative.Result`2.OnSuccess*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_OnSuccess_System_Action__0__" data-uid="Narvalo.Applicative.Result`2.OnSuccess(System.Action{`0})">OnSuccess(Action&lt;T&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public bool OnSuccess(Action&lt;T&gt; action)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Action</span>&lt;T&gt;</td>
+                    <td><span class="parametername">action</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_PassBy__1_Narvalo_Applicative_Result___0__1__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.PassBy%60%601(Narvalo.Applicative.Result%7B%60%600%2C%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result.Shadowing.cs/#L20">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_PassBy_" data-uid="Narvalo.Applicative.Result`2.PassBy*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_PassBy__1_Narvalo_Applicative_Result___0__1__" data-uid="Narvalo.Applicative.Result`2.PassBy``1(Narvalo.Applicative.Result{``0,`1})">PassBy&lt;TOther&gt;(Result&lt;TOther, TError&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public Result&lt;T, TError&gt; PassBy&lt;TOther&gt;(Result&lt;TOther, TError&gt; other)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;TOther, TError&gt;</td>
+                    <td><span class="parametername">other</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;T, TError&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TOther</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_ReplaceBy__1___0_.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.ReplaceBy%60%601(%60%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result.Shadowing.cs/#L14">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_ReplaceBy_" data-uid="Narvalo.Applicative.Result`2.ReplaceBy*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_ReplaceBy__1___0_" data-uid="Narvalo.Applicative.Result`2.ReplaceBy``1(``0)">ReplaceBy&lt;TResult&gt;(TResult)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public Result&lt;TResult, TError&gt; ReplaceBy&lt;TResult&gt;(TResult value)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">TResult</span></td>
+                    <td><span class="parametername">value</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;TResult, TError&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_Select__1_System_Func__0___0__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.Select%60%601(System.Func%7B%600%2C%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result.Shadowing.cs/#L37">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_Select_" data-uid="Narvalo.Applicative.Result`2.Select*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_Select__1_System_Func__0___0__" data-uid="Narvalo.Applicative.Result`2.Select``1(System.Func{`0,``0})">Select&lt;TResult&gt;(Func&lt;T, TResult&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public Result&lt;TResult, TError&gt; Select&lt;TResult&gt;(Func&lt;T, TResult&gt; selector)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;T, TResult&gt;</td>
+                    <td><span class="parametername">selector</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;TResult, TError&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_SelectError__1_System_Func__1___0__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.SelectError%60%601(System.Func%7B%601%2C%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L188">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_SelectError_" data-uid="Narvalo.Applicative.Result`2.SelectError*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_SelectError__1_System_Func__1___0__" data-uid="Narvalo.Applicative.Result`2.SelectError``1(System.Func{`1,``0})">SelectError&lt;TResult&gt;(Func&lt;TError, TResult&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public Result&lt;T, TResult&gt; SelectError&lt;TResult&gt;(Func&lt;TError, TResult&gt; selector)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TError, TResult&gt;</td>
+                    <td><span class="parametername">selector</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;T, TResult&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_SelectMany__2_System_Func__0_Narvalo_Applicative_Result___0__1___System_Func__0___0___1__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.SelectMany%60%602(System.Func%7B%600%2CNarvalo.Applicative.Result%7B%60%600%2C%601%7D%7D%2CSystem.Func%7B%600%2C%60%600%2C%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result.Shadowing.cs/#L45">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_SelectMany_" data-uid="Narvalo.Applicative.Result`2.SelectMany*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_SelectMany__2_System_Func__0_Narvalo_Applicative_Result___0__1___System_Func__0___0___1__" data-uid="Narvalo.Applicative.Result`2.SelectMany``2(System.Func{`0,Narvalo.Applicative.Result{``0,`1}},System.Func{`0,``0,``1})">SelectMany&lt;TMiddle, TResult&gt;(Func&lt;T, Result&lt;TMiddle, TError&gt;&gt;, Func&lt;T, TMiddle, TResult&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public Result&lt;TResult, TError&gt; SelectMany&lt;TMiddle, TResult&gt;(Func&lt;T, Result&lt;TMiddle, TError&gt;&gt; selector, Func&lt;T, TMiddle, TResult&gt; resultSelector)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;T, <a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;TMiddle, TError&gt;&gt;</td>
+                    <td><span class="parametername">selector</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;T, TMiddle, TResult&gt;</td>
+                    <td><span class="parametername">resultSelector</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;TResult, TError&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TMiddle</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_Skip.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.Skip%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result.Shadowing.cs/#L24">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_Skip_" data-uid="Narvalo.Applicative.Result`2.Skip*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_Skip" data-uid="Narvalo.Applicative.Result`2.Skip">Skip()</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public Result&lt;Unit, TError&gt; Skip()</code></pre>
+              </div>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;<a class="xref" href="Narvalo.Applicative.Unit.html">Unit</a>, TError&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_ToEither.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.ToEither%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L144">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_ToEither_" data-uid="Narvalo.Applicative.Result`2.ToEither*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_ToEither" data-uid="Narvalo.Applicative.Result`2.ToEither">ToEither()</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public Either&lt;T, TError&gt; ToEither()</code></pre>
+              </div>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;T, TError&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_ToEnumerable.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.ToEnumerable%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L281">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_ToEnumerable_" data-uid="Narvalo.Applicative.Result`2.ToEnumerable*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_ToEnumerable" data-uid="Narvalo.Applicative.Result`2.ToEnumerable">ToEnumerable()</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public IEnumerable&lt;T&gt; ToEnumerable()</code></pre>
+              </div>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;T&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_ToError.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.ToError%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L135">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_ToError_" data-uid="Narvalo.Applicative.Result`2.ToError*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_ToError" data-uid="Narvalo.Applicative.Result`2.ToError">ToError()</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public TError ToError()</code></pre>
+              </div>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">TError</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_ToMaybe.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.ToMaybe%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L141">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_ToMaybe_" data-uid="Narvalo.Applicative.Result`2.ToMaybe*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_ToMaybe" data-uid="Narvalo.Applicative.Result`2.ToMaybe">ToMaybe()</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public Maybe&lt;T&gt; ToMaybe()</code></pre>
+              </div>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;T&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_ToString.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L103">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_ToString_" data-uid="Narvalo.Applicative.Result`2.ToString*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_ToString" data-uid="Narvalo.Applicative.Result`2.ToString">ToString()</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+              </div>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="overrides">Overrides</h5>
+              <div><span class="xref">System.ValueType.ToString()</span></div>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_ToValue.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.ToValue%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L129">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_ToValue_" data-uid="Narvalo.Applicative.Result`2.ToValue*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_ToValue" data-uid="Narvalo.Applicative.Result`2.ToValue">ToValue()</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public T ToValue()</code></pre>
+              </div>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">T</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_ValueOrDefault.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.ValueOrDefault%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L79">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_ValueOrDefault_" data-uid="Narvalo.Applicative.Result`2.ValueOrDefault*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_ValueOrDefault" data-uid="Narvalo.Applicative.Result`2.ValueOrDefault">ValueOrDefault()</h4>
+              <div class="markdown level1 summary"><p>Obtains the enclosed value if any; otherwise the default value of the type T.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public T ValueOrDefault()</code></pre>
+              </div>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">T</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_ValueOrElse__0_.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.ValueOrElse(%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L87">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_ValueOrElse_" data-uid="Narvalo.Applicative.Result`2.ValueOrElse*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_ValueOrElse__0_" data-uid="Narvalo.Applicative.Result`2.ValueOrElse(`0)">ValueOrElse(T)</h4>
+              <div class="markdown level1 summary"><p>Returns the enclosed value if any; otherwise <span class="paramref">other</span>.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public T ValueOrElse(T other)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">T</span></td>
+                    <td><span class="parametername">other</span></td>
+                    <td><p>A default value to be used if if there is no underlying value.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">T</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_ValueOrElse_System_Func__0__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.ValueOrElse(System.Func%7B%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L89">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_ValueOrElse_" data-uid="Narvalo.Applicative.Result`2.ValueOrElse*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_ValueOrElse_System_Func__0__" data-uid="Narvalo.Applicative.Result`2.ValueOrElse(System.Func{`0})">ValueOrElse(Func&lt;T&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public T ValueOrElse(Func&lt;T&gt; valueFactory)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;T&gt;</td>
+                    <td><span class="parametername">valueFactory</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">T</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_ValueOrNone.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.ValueOrNone%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L81">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_ValueOrNone_" data-uid="Narvalo.Applicative.Result`2.ValueOrNone*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_ValueOrNone" data-uid="Narvalo.Applicative.Result`2.ValueOrNone">ValueOrNone()</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public Maybe&lt;T&gt; ValueOrNone()</code></pre>
+              </div>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;T&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_ValueOrThrow_System_Func__1_System_Exception__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.ValueOrThrow(System.Func%7B%601%2CSystem.Exception%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L96">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_ValueOrThrow_" data-uid="Narvalo.Applicative.Result`2.ValueOrThrow*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_ValueOrThrow_System_Func__1_System_Exception__" data-uid="Narvalo.Applicative.Result`2.ValueOrThrow(System.Func{`1,System.Exception})">ValueOrThrow(Func&lt;TError, Exception&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public T ValueOrThrow(Func&lt;TError, Exception&gt; exceptionFactory)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TError, <span class="xref">System.Exception</span>&gt;</td>
+                    <td><span class="parametername">exceptionFactory</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">T</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_ZipWith__2_Narvalo_Applicative_Result___0__1__System_Func__0___0___1__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.ZipWith%60%602(Narvalo.Applicative.Result%7B%60%600%2C%601%7D%2CSystem.Func%7B%600%2C%60%600%2C%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result.Shadowing.cs/#L27">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_ZipWith_" data-uid="Narvalo.Applicative.Result`2.ZipWith*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_ZipWith__2_Narvalo_Applicative_Result___0__1__System_Func__0___0___1__" data-uid="Narvalo.Applicative.Result`2.ZipWith``2(Narvalo.Applicative.Result{``0,`1},System.Func{`0,``0,``1})">ZipWith&lt;TSecond, TResult&gt;(Result&lt;TSecond, TError&gt;, Func&lt;T, TSecond, TResult&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public Result&lt;TResult, TError&gt; ZipWith&lt;TSecond, TResult&gt;(Result&lt;TSecond, TError&gt; second, Func&lt;T, TSecond, TResult&gt; zipper)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;TSecond, TError&gt;</td>
+                    <td><span class="parametername">second</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;T, TSecond, TResult&gt;</td>
+                    <td><span class="parametername">zipper</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;TResult, TError&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSecond</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h3 id="operators">Operators
+              </h3>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_op_Equality_Narvalo_Applicative_Result__0__1__Narvalo_Applicative_Result__0__1__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.op_Equality(Narvalo.Applicative.Result%7B%600%2C%601%7D%2CNarvalo.Applicative.Result%7B%600%2C%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L289">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_op_Equality_" data-uid="Narvalo.Applicative.Result`2.op_Equality*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_op_Equality_Narvalo_Applicative_Result__0__1__Narvalo_Applicative_Result__0__1__" data-uid="Narvalo.Applicative.Result`2.op_Equality(Narvalo.Applicative.Result{`0,`1},Narvalo.Applicative.Result{`0,`1})">Equality(Result&lt;T, TError&gt;, Result&lt;T, TError&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static bool operator ==(Result&lt;T, TError&gt; left, Result&lt;T, TError&gt; right)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;T, TError&gt;</td>
+                    <td><span class="parametername">left</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;T, TError&gt;</td>
+                    <td><span class="parametername">right</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_op_Explicit__0__Narvalo_Applicative_Result__0__1_.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.op_Explicit(%600)~Narvalo.Applicative.Result%7B%600%2C%601%7D%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L151">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_op_Explicit_" data-uid="Narvalo.Applicative.Result`2.op_Explicit*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_op_Explicit__0__Narvalo_Applicative_Result__0__1_" data-uid="Narvalo.Applicative.Result`2.op_Explicit(`0)~Narvalo.Applicative.Result{`0,`1}">Explicit(T to Result&lt;T, TError&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static explicit operator Result&lt;T, TError&gt;(T value)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">T</span></td>
+                    <td><span class="parametername">value</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;T, TError&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_op_Explicit__1__Narvalo_Applicative_Result__0__1_.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.op_Explicit(%601)~Narvalo.Applicative.Result%7B%600%2C%601%7D%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L153">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_op_Explicit_" data-uid="Narvalo.Applicative.Result`2.op_Explicit*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_op_Explicit__1__Narvalo_Applicative_Result__0__1_" data-uid="Narvalo.Applicative.Result`2.op_Explicit(`1)~Narvalo.Applicative.Result{`0,`1}">Explicit(TError to Result&lt;T, TError&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static explicit operator Result&lt;T, TError&gt;(TError error)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">TError</span></td>
+                    <td><span class="parametername">error</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;T, TError&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_op_Explicit_Narvalo_Applicative_Result__0__1____0.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.op_Explicit(Narvalo.Applicative.Result%7B%600%2C%601%7D)~%600%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L147">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_op_Explicit_" data-uid="Narvalo.Applicative.Result`2.op_Explicit*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_op_Explicit_Narvalo_Applicative_Result__0__1____0" data-uid="Narvalo.Applicative.Result`2.op_Explicit(Narvalo.Applicative.Result{`0,`1})~`0">Explicit(Result&lt;T, TError&gt; to T)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static explicit operator T(Result&lt;T, TError&gt; value)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;T, TError&gt;</td>
+                    <td><span class="parametername">value</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">T</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_op_Explicit_Narvalo_Applicative_Result__0__1____1.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.op_Explicit(Narvalo.Applicative.Result%7B%600%2C%601%7D)~%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L149">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_op_Explicit_" data-uid="Narvalo.Applicative.Result`2.op_Explicit*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_op_Explicit_Narvalo_Applicative_Result__0__1____1" data-uid="Narvalo.Applicative.Result`2.op_Explicit(Narvalo.Applicative.Result{`0,`1})~`1">Explicit(Result&lt;T, TError&gt; to TError)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static explicit operator TError(Result&lt;T, TError&gt; value)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;T, TError&gt;</td>
+                    <td><span class="parametername">value</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">TError</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_op_Inequality_Narvalo_Applicative_Result__0__1__Narvalo_Applicative_Result__0__1__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.op_Inequality(Narvalo.Applicative.Result%7B%600%2C%601%7D%2CNarvalo.Applicative.Result%7B%600%2C%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L291">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_op_Inequality_" data-uid="Narvalo.Applicative.Result`2.op_Inequality*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_op_Inequality_Narvalo_Applicative_Result__0__1__Narvalo_Applicative_Result__0__1__" data-uid="Narvalo.Applicative.Result`2.op_Inequality(Narvalo.Applicative.Result{`0,`1},Narvalo.Applicative.Result{`0,`1})">Inequality(Result&lt;T, TError&gt;, Result&lt;T, TError&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static bool operator !=(Result&lt;T, TError&gt; left, Result&lt;T, TError&gt; right)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;T, TError&gt;</td>
+                    <td><span class="parametername">left</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;T, TError&gt;</td>
+                    <td><span class="parametername">right</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h3 id="eii">Explicit Interface Implementations
+              </h3>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_System_Collections_IStructuralEquatable_Equals_System_Object_System_Collections_IEqualityComparer_.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.System%23Collections%23IStructuralEquatable%23Equals(System.Object%2CSystem.Collections.IEqualityComparer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L305">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_System_Collections_IStructuralEquatable_Equals_" data-uid="Narvalo.Applicative.Result`2.System#Collections#IStructuralEquatable#Equals*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_System_Collections_IStructuralEquatable_Equals_System_Object_System_Collections_IEqualityComparer_" data-uid="Narvalo.Applicative.Result`2.System#Collections#IStructuralEquatable#Equals(System.Object,System.Collections.IEqualityComparer)">IStructuralEquatable.Equals(Object, IEqualityComparer)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">bool IStructuralEquatable.Equals(object other, IEqualityComparer comparer)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Object</span></td>
+                    <td><span class="parametername">other</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Collections.IEqualityComparer</span></td>
+                    <td><span class="parametername">comparer</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="implements">Implements</h5>
+                  <div><span class="xref">System.Collections.IStructuralEquatable.Equals(System.Object, System.Collections.IEqualityComparer)</span></div>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2_System_Collections_IStructuralEquatable_GetHashCode_System_Collections_IEqualityComparer_.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602.System%23Collections%23IStructuralEquatable%23GetHashCode(System.Collections.IEqualityComparer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L317">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_Result_2_System_Collections_IStructuralEquatable_GetHashCode_" data-uid="Narvalo.Applicative.Result`2.System#Collections#IStructuralEquatable#GetHashCode*"></a>
+              <h4 id="Narvalo_Applicative_Result_2_System_Collections_IStructuralEquatable_GetHashCode_System_Collections_IEqualityComparer_" data-uid="Narvalo.Applicative.Result`2.System#Collections#IStructuralEquatable#GetHashCode(System.Collections.IEqualityComparer)">IStructuralEquatable.GetHashCode(IEqualityComparer)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">int IStructuralEquatable.GetHashCode(IEqualityComparer comparer)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.IEqualityComparer</span></td>
+                    <td><span class="parametername">comparer</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Int32</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="implements">Implements</h5>
+                  <div><span class="xref">System.Collections.IStructuralEquatable.GetHashCode(System.Collections.IEqualityComparer)</span></div>
+              <h3 id="extensionmethods">Extension Methods</h3>
+              <div>
+                  <a class="xref" href="Narvalo.Applicative.ResultL.html#Narvalo_Applicative_ResultL_Gather__3_Narvalo_Applicative_Result___0___2__Narvalo_Applicative_Result_System_Func___0___1____2__">ResultL.Gather&lt;TSource, TResult, TError&gt;(Result&lt;TSource, TError&gt;, Result&lt;Func&lt;TSource, TResult&gt;, TError&gt;)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Narvalo.Applicative.ResultL.html#Narvalo_Applicative_ResultL_ReplaceBy__3_Narvalo_Applicative_Result___0___2____1_">ResultL.ReplaceBy&lt;TSource, TResult, TError&gt;(Result&lt;TSource, TError&gt;, TResult)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Narvalo.Applicative.ResultL.html#Narvalo_Applicative_ResultL_ContinueWith__3_Narvalo_Applicative_Result___0___2__Narvalo_Applicative_Result___1___2__">ResultL.ContinueWith&lt;TSource, TResult, TError&gt;(Result&lt;TSource, TError&gt;, Result&lt;TResult, TError&gt;)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Narvalo.Applicative.ResultL.html#Narvalo_Applicative_ResultL_PassBy__3_Narvalo_Applicative_Result___0___2__Narvalo_Applicative_Result___1___2__">ResultL.PassBy&lt;TSource, TOther, TError&gt;(Result&lt;TSource, TError&gt;, Result&lt;TOther, TError&gt;)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Narvalo.Applicative.ResultL.html#Narvalo_Applicative_ResultL_Skip__2_Narvalo_Applicative_Result___0___1__">ResultL.Skip&lt;TSource, TError&gt;(Result&lt;TSource, TError&gt;)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Narvalo.Applicative.ResultL.html#Narvalo_Applicative_ResultL_ZipWith__4_Narvalo_Applicative_Result___0___3__Narvalo_Applicative_Result___1___3__System_Func___0___1___2__">ResultL.ZipWith&lt;T1, T2, TResult, TError&gt;(Result&lt;T1, TError&gt;, Result&lt;T2, TError&gt;, Func&lt;T1, T2, TResult&gt;)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Narvalo.Applicative.ResultL.html#Narvalo_Applicative_ResultL_ZipWith__5_Narvalo_Applicative_Result___0___4__Narvalo_Applicative_Result___1___4__Narvalo_Applicative_Result___2___4__System_Func___0___1___2___3__">ResultL.ZipWith&lt;T1, T2, T3, TResult, TError&gt;(Result&lt;T1, TError&gt;, Result&lt;T2, TError&gt;, Result&lt;T3, TError&gt;, Func&lt;T1, T2, T3, TResult&gt;)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Narvalo.Applicative.ResultL.html#Narvalo_Applicative_ResultL_ZipWith__6_Narvalo_Applicative_Result___0___5__Narvalo_Applicative_Result___1___5__Narvalo_Applicative_Result___2___5__Narvalo_Applicative_Result___3___5__System_Func___0___1___2___3___4__">ResultL.ZipWith&lt;T1, T2, T3, T4, TResult, TError&gt;(Result&lt;T1, TError&gt;, Result&lt;T2, TError&gt;, Result&lt;T3, TError&gt;, Result&lt;T4, TError&gt;, Func&lt;T1, T2, T3, T4, TResult&gt;)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Narvalo.Applicative.ResultL.html#Narvalo_Applicative_ResultL_ZipWith__7_Narvalo_Applicative_Result___0___6__Narvalo_Applicative_Result___1___6__Narvalo_Applicative_Result___2___6__Narvalo_Applicative_Result___3___6__Narvalo_Applicative_Result___4___6__System_Func___0___1___2___3___4___5__">ResultL.ZipWith&lt;T1, T2, T3, T4, T5, TResult, TError&gt;(Result&lt;T1, TError&gt;, Result&lt;T2, TError&gt;, Result&lt;T3, TError&gt;, Result&lt;T4, TError&gt;, Result&lt;T5, TError&gt;, Func&lt;T1, T2, T3, T4, T5, TResult&gt;)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Narvalo.Applicative.ResultL.html#Narvalo_Applicative_ResultL_Select__3_Narvalo_Applicative_Result___0___2__System_Func___0___1__">ResultL.Select&lt;TSource, TResult, TError&gt;(Result&lt;TSource, TError&gt;, Func&lt;TSource, TResult&gt;)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Narvalo.Applicative.ResultL.html#Narvalo_Applicative_ResultL_SelectMany__4_Narvalo_Applicative_Result___0___3__System_Func___0_Narvalo_Applicative_Result___1___3___System_Func___0___1___2__">ResultL.SelectMany&lt;TSource, TMiddle, TResult, TError&gt;(Result&lt;TSource, TError&gt;, Func&lt;TSource, Result&lt;TMiddle, TError&gt;&gt;, Func&lt;TSource, TMiddle, TResult&gt;)</a>
+              </div>
+                        </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_Result_2.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.Result%602%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result`2.cs/#L287" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright (c) Narvalo.Org
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

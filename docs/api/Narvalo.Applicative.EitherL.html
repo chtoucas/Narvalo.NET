@@ -1,0 +1,1429 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class EitherL
+   | Narvalo .NET libraries </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class EitherL
+   | Narvalo .NET libraries ">
+    <meta name="generator" content="docfx 2.15.5.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content">
+              
+              
+              <h1 id="Narvalo_Applicative_EitherL" data-uid="Narvalo.Applicative.EitherL">Class EitherL
+              </h1>
+              <div class="markdown level0 summary"><p>Provides extension methods for <a class="xref" href="Narvalo.Applicative.Either-2.html">Either&lt;TLeft, TRight&gt;</a>.</p>
+</div>
+              <div class="markdown level0 conceptual"></div>
+              <div class="inheritance">
+                <h5>Inheritance</h5>
+                  <div class="level0"><span class="xref">System.Object</span></div>
+                  <div class="level1"><span class="xref">EitherL</span></div>
+              </div>
+              <div class="inheritedMembers">
+                <h5>Inherited Members</h5>
+                <div>
+                  <span class="xref">System.Object.Equals(System.Object)</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.GetHashCode()</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.GetType()</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.MemberwiseClone()</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.ToString()</span>
+                </div>
+              </div>
+              <h6><strong>Namespace</strong>:Narvalo.Applicative</h6>
+              <h6><strong>Assembly</strong>:Narvalo.Fx.dll</h6>
+              <h5 id="Narvalo_Applicative_EitherL_syntax">Syntax</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static class EitherL</code></pre>
+              </div>
+              <h3 id="methods">Methods
+              </h3>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_EitherL_Apply__3_Narvalo_Applicative_Either_System_Func___0___1____2__Narvalo_Applicative_Either___0___2__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.EitherL.Apply%60%603(Narvalo.Applicative.Either%7BSystem.Func%7B%60%600%2C%60%601%7D%2C%60%602%7D%2CNarvalo.Applicative.Either%7B%60%600%2C%60%602%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Either.g.cs/#L146">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_EitherL_Apply_" data-uid="Narvalo.Applicative.EitherL.Apply*"></a>
+              <h4 id="Narvalo_Applicative_EitherL_Apply__3_Narvalo_Applicative_Either_System_Func___0___1____2__Narvalo_Applicative_Either___0___2__" data-uid="Narvalo.Applicative.EitherL.Apply``3(Narvalo.Applicative.Either{System.Func{``0,``1},``2},Narvalo.Applicative.Either{``0,``2})">Apply&lt;TSource, TResult, TRight&gt;(Either&lt;Func&lt;TSource, TResult&gt;, TRight&gt;, Either&lt;TSource, TRight&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Either&lt;TResult, TRight&gt; Apply&lt;TSource, TResult, TRight&gt;(this Either&lt;Func&lt;TSource, TResult&gt;, TRight&gt; this, Either&lt;TSource, TRight&gt; value)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;<span class="xref">System.Func</span>&lt;TSource, TResult&gt;, TRight&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;TSource, TRight&gt;</td>
+                    <td><span class="parametername">value</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;TResult, TRight&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TRight</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 id="Narvalo_Applicative_EitherL_Apply__3_Narvalo_Applicative_Either_System_Func___0___1____2__Narvalo_Applicative_Either___0___2___seealso">See Also</h5>
+              <div class="seealso">
+                  <div><a class="xref" href="Narvalo.Applicative.EitherL.html#Narvalo_Applicative_EitherL_Gather__3_Narvalo_Applicative_Either___0___2__Narvalo_Applicative_Either_System_Func___0___1____2__">Gather&lt;TSource, TResult, TRight&gt;(Either&lt;TSource, TRight&gt;, Either&lt;Func&lt;TSource, TResult&gt;, TRight&gt;)</a></div>
+              </div>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_EitherL_ContinueWith__3_Narvalo_Applicative_Either___0___2__Narvalo_Applicative_Either___1___2__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.EitherL.ContinueWith%60%603(Narvalo.Applicative.Either%7B%60%600%2C%60%602%7D%2CNarvalo.Applicative.Either%7B%60%601%2C%60%602%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Either.g.cs/#L172">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_EitherL_ContinueWith_" data-uid="Narvalo.Applicative.EitherL.ContinueWith*"></a>
+              <h4 id="Narvalo_Applicative_EitherL_ContinueWith__3_Narvalo_Applicative_Either___0___2__Narvalo_Applicative_Either___1___2__" data-uid="Narvalo.Applicative.EitherL.ContinueWith``3(Narvalo.Applicative.Either{``0,``2},Narvalo.Applicative.Either{``1,``2})">ContinueWith&lt;TSource, TResult, TRight&gt;(Either&lt;TSource, TRight&gt;, Either&lt;TResult, TRight&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Either&lt;TResult, TRight&gt; ContinueWith&lt;TSource, TResult, TRight&gt;(this Either&lt;TSource, TRight&gt; this, Either&lt;TResult, TRight&gt; other)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;TSource, TRight&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;TResult, TRight&gt;</td>
+                    <td><span class="parametername">other</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;TResult, TRight&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TRight</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_EitherL_Flatten__2_Narvalo_Applicative_Either___0_Narvalo_Applicative_Either___0___1___.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.EitherL.Flatten%60%602(Narvalo.Applicative.Either%7B%60%600%2CNarvalo.Applicative.Either%7B%60%600%2C%60%601%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Either.cs/#L40">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_EitherL_Flatten_" data-uid="Narvalo.Applicative.EitherL.Flatten*"></a>
+              <h4 id="Narvalo_Applicative_EitherL_Flatten__2_Narvalo_Applicative_Either___0_Narvalo_Applicative_Either___0___1___" data-uid="Narvalo.Applicative.EitherL.Flatten``2(Narvalo.Applicative.Either{``0,Narvalo.Applicative.Either{``0,``1}})">Flatten&lt;TLeft, TRight&gt;(Either&lt;TLeft, Either&lt;TLeft, TRight&gt;&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Either&lt;TLeft, TRight&gt; Flatten&lt;TLeft, TRight&gt;(this Either&lt;TLeft, Either&lt;TLeft, TRight&gt;&gt; square)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;TLeft, <a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;TLeft, TRight&gt;&gt;</td>
+                    <td><span class="parametername">square</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;TLeft, TRight&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TLeft</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TRight</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_EitherL_Flatten__2_Narvalo_Applicative_Either_Narvalo_Applicative_Either___0___1____1__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.EitherL.Flatten%60%602(Narvalo.Applicative.Either%7BNarvalo.Applicative.Either%7B%60%600%2C%60%601%7D%2C%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Either.g.cs/#L142">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_EitherL_Flatten_" data-uid="Narvalo.Applicative.EitherL.Flatten*"></a>
+              <h4 id="Narvalo_Applicative_EitherL_Flatten__2_Narvalo_Applicative_Either_Narvalo_Applicative_Either___0___1____1__" data-uid="Narvalo.Applicative.EitherL.Flatten``2(Narvalo.Applicative.Either{Narvalo.Applicative.Either{``0,``1},``1})">Flatten&lt;T, TRight&gt;(Either&lt;Either&lt;T, TRight&gt;, TRight&gt;)</h4>
+              <div class="markdown level1 summary"><p>Removes one level of structure, projecting its bound value into the outer level.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Either&lt;T, TRight&gt; Flatten&lt;T, TRight&gt;(this Either&lt;Either&lt;T, TRight&gt;, TRight&gt; this)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;<a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;T, TRight&gt;, TRight&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;T, TRight&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">T</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TRight</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_EitherL_Gather__3_Narvalo_Applicative_Either___0___2__Narvalo_Applicative_Either_System_Func___0___1____2__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.EitherL.Gather%60%603(Narvalo.Applicative.Either%7B%60%600%2C%60%602%7D%2CNarvalo.Applicative.Either%7BSystem.Func%7B%60%600%2C%60%601%7D%2C%60%602%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Either.g.cs/#L155">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_EitherL_Gather_" data-uid="Narvalo.Applicative.EitherL.Gather*"></a>
+              <h4 id="Narvalo_Applicative_EitherL_Gather__3_Narvalo_Applicative_Either___0___2__Narvalo_Applicative_Either_System_Func___0___1____2__" data-uid="Narvalo.Applicative.EitherL.Gather``3(Narvalo.Applicative.Either{``0,``2},Narvalo.Applicative.Either{System.Func{``0,``1},``2})">Gather&lt;TSource, TResult, TRight&gt;(Either&lt;TSource, TRight&gt;, Either&lt;Func&lt;TSource, TResult&gt;, TRight&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Either&lt;TResult, TRight&gt; Gather&lt;TSource, TResult, TRight&gt;(this Either&lt;TSource, TRight&gt; this, Either&lt;Func&lt;TSource, TResult&gt;, TRight&gt; applicative)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;TSource, TRight&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;<span class="xref">System.Func</span>&lt;TSource, TResult&gt;, TRight&gt;</td>
+                    <td><span class="parametername">applicative</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;TResult, TRight&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TRight</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 id="Narvalo_Applicative_EitherL_Gather__3_Narvalo_Applicative_Either___0___2__Narvalo_Applicative_Either_System_Func___0___1____2___seealso">See Also</h5>
+              <div class="seealso">
+                  <div><a class="xref" href="Narvalo.Applicative.EitherL.html#Narvalo_Applicative_EitherL_Apply__3_Narvalo_Applicative_Either_System_Func___0___1____2__Narvalo_Applicative_Either___0___2__">Apply&lt;TSource, TResult, TRight&gt;(Either&lt;Func&lt;TSource, TResult&gt;, TRight&gt;, Either&lt;TSource, TRight&gt;)</a></div>
+              </div>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_EitherL_PassBy__3_Narvalo_Applicative_Either___0___2__Narvalo_Applicative_Either___1___2__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.EitherL.PassBy%60%603(Narvalo.Applicative.Either%7B%60%600%2C%60%602%7D%2CNarvalo.Applicative.Either%7B%60%601%2C%60%602%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Either.g.cs/#L180">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_EitherL_PassBy_" data-uid="Narvalo.Applicative.EitherL.PassBy*"></a>
+              <h4 id="Narvalo_Applicative_EitherL_PassBy__3_Narvalo_Applicative_Either___0___2__Narvalo_Applicative_Either___1___2__" data-uid="Narvalo.Applicative.EitherL.PassBy``3(Narvalo.Applicative.Either{``0,``2},Narvalo.Applicative.Either{``1,``2})">PassBy&lt;TSource, TOther, TRight&gt;(Either&lt;TSource, TRight&gt;, Either&lt;TOther, TRight&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Either&lt;TSource, TRight&gt; PassBy&lt;TSource, TOther, TRight&gt;(this Either&lt;TSource, TRight&gt; this, Either&lt;TOther, TRight&gt; other)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;TSource, TRight&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;TOther, TRight&gt;</td>
+                    <td><span class="parametername">other</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;TSource, TRight&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TOther</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TRight</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_EitherL_ReplaceBy__3_Narvalo_Applicative_Either___0___2____1_.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.EitherL.ReplaceBy%60%603(Narvalo.Applicative.Either%7B%60%600%2C%60%602%7D%2C%60%601)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Either.g.cs/#L164">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_EitherL_ReplaceBy_" data-uid="Narvalo.Applicative.EitherL.ReplaceBy*"></a>
+              <h4 id="Narvalo_Applicative_EitherL_ReplaceBy__3_Narvalo_Applicative_Either___0___2____1_" data-uid="Narvalo.Applicative.EitherL.ReplaceBy``3(Narvalo.Applicative.Either{``0,``2},``1)">ReplaceBy&lt;TSource, TResult, TRight&gt;(Either&lt;TSource, TRight&gt;, TResult)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Either&lt;TResult, TRight&gt; ReplaceBy&lt;TSource, TResult, TRight&gt;(this Either&lt;TSource, TRight&gt; this, TResult value)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;TSource, TRight&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">TResult</span></td>
+                    <td><span class="parametername">value</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;TResult, TRight&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TRight</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_EitherL_Select__3_Narvalo_Applicative_Either___0___2__System_Func___0___1__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.EitherL.Select%60%603(Narvalo.Applicative.Either%7B%60%600%2C%60%602%7D%2CSystem.Func%7B%60%600%2C%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Either.g.cs/#L320">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_EitherL_Select_" data-uid="Narvalo.Applicative.EitherL.Select*"></a>
+              <h4 id="Narvalo_Applicative_EitherL_Select__3_Narvalo_Applicative_Either___0___2__System_Func___0___1__" data-uid="Narvalo.Applicative.EitherL.Select``3(Narvalo.Applicative.Either{``0,``2},System.Func{``0,``1})">Select&lt;TSource, TResult, TRight&gt;(Either&lt;TSource, TRight&gt;, Func&lt;TSource, TResult&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Either&lt;TResult, TRight&gt; Select&lt;TSource, TResult, TRight&gt;(this Either&lt;TSource, TRight&gt; this, Func&lt;TSource, TResult&gt; selector)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;TSource, TRight&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, TResult&gt;</td>
+                    <td><span class="parametername">selector</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;TResult, TRight&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TRight</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_EitherL_SelectMany__4_Narvalo_Applicative_Either___0___3__System_Func___0_Narvalo_Applicative_Either___1___3___System_Func___0___1___2__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.EitherL.SelectMany%60%604(Narvalo.Applicative.Either%7B%60%600%2C%60%603%7D%2CSystem.Func%7B%60%600%2CNarvalo.Applicative.Either%7B%60%601%2C%60%603%7D%7D%2CSystem.Func%7B%60%600%2C%60%601%2C%60%602%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Either.g.cs/#L330">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_EitherL_SelectMany_" data-uid="Narvalo.Applicative.EitherL.SelectMany*"></a>
+              <h4 id="Narvalo_Applicative_EitherL_SelectMany__4_Narvalo_Applicative_Either___0___3__System_Func___0_Narvalo_Applicative_Either___1___3___System_Func___0___1___2__" data-uid="Narvalo.Applicative.EitherL.SelectMany``4(Narvalo.Applicative.Either{``0,``3},System.Func{``0,Narvalo.Applicative.Either{``1,``3}},System.Func{``0,``1,``2})">SelectMany&lt;TSource, TMiddle, TResult, TRight&gt;(Either&lt;TSource, TRight&gt;, Func&lt;TSource, Either&lt;TMiddle, TRight&gt;&gt;, Func&lt;TSource, TMiddle, TResult&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Either&lt;TResult, TRight&gt; SelectMany&lt;TSource, TMiddle, TResult, TRight&gt;(this Either&lt;TSource, TRight&gt; this, Func&lt;TSource, Either&lt;TMiddle, TRight&gt;&gt; selector, Func&lt;TSource, TMiddle, TResult&gt; resultSelector)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;TSource, TRight&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, <a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;TMiddle, TRight&gt;&gt;</td>
+                    <td><span class="parametername">selector</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, TMiddle, TResult&gt;</td>
+                    <td><span class="parametername">resultSelector</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;TResult, TRight&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TMiddle</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TRight</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_EitherL_Skip__2_Narvalo_Applicative_Either___0___1__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.EitherL.Skip%60%602(Narvalo.Applicative.Either%7B%60%600%2C%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Either.g.cs/#L188">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_EitherL_Skip_" data-uid="Narvalo.Applicative.EitherL.Skip*"></a>
+              <h4 id="Narvalo_Applicative_EitherL_Skip__2_Narvalo_Applicative_Either___0___1__" data-uid="Narvalo.Applicative.EitherL.Skip``2(Narvalo.Applicative.Either{``0,``1})">Skip&lt;TSource, TRight&gt;(Either&lt;TSource, TRight&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Either&lt;Unit, TRight&gt; Skip&lt;TSource, TRight&gt;(this Either&lt;TSource, TRight&gt; this)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;TSource, TRight&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;<a class="xref" href="Narvalo.Applicative.Unit.html">Unit</a>, TRight&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TRight</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_EitherL_Using__3_Narvalo_Applicative_Either___0___2__System_Func___0___1__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.EitherL.Using%60%603(Narvalo.Applicative.Either%7B%60%600%2C%60%602%7D%2CSystem.Func%7B%60%600%2C%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Either.g.cs/#L306">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_EitherL_Using_" data-uid="Narvalo.Applicative.EitherL.Using*"></a>
+              <h4 id="Narvalo_Applicative_EitherL_Using__3_Narvalo_Applicative_Either___0___2__System_Func___0___1__" data-uid="Narvalo.Applicative.EitherL.Using``3(Narvalo.Applicative.Either{``0,``2},System.Func{``0,``1})">Using&lt;TSource, TResult, TRight&gt;(Either&lt;TSource, TRight&gt;, Func&lt;TSource, TResult&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Either&lt;TResult, TRight&gt; Using&lt;TSource, TResult, TRight&gt;(this Either&lt;TSource, TRight&gt; this, Func&lt;TSource, TResult&gt; selector)where TSource : IDisposable</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;TSource, TRight&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, TResult&gt;</td>
+                    <td><span class="parametername">selector</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;TResult, TRight&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TRight</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_EitherL_Using__3_Narvalo_Applicative_Either___0___2__System_Func___0_Narvalo_Applicative_Either___1___2___.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.EitherL.Using%60%603(Narvalo.Applicative.Either%7B%60%600%2C%60%602%7D%2CSystem.Func%7B%60%600%2CNarvalo.Applicative.Either%7B%60%601%2C%60%602%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Either.g.cs/#L295">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_EitherL_Using_" data-uid="Narvalo.Applicative.EitherL.Using*"></a>
+              <h4 id="Narvalo_Applicative_EitherL_Using__3_Narvalo_Applicative_Either___0___2__System_Func___0_Narvalo_Applicative_Either___1___2___" data-uid="Narvalo.Applicative.EitherL.Using``3(Narvalo.Applicative.Either{``0,``2},System.Func{``0,Narvalo.Applicative.Either{``1,``2}})">Using&lt;TSource, TResult, TRight&gt;(Either&lt;TSource, TRight&gt;, Func&lt;TSource, Either&lt;TResult, TRight&gt;&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Either&lt;TResult, TRight&gt; Using&lt;TSource, TResult, TRight&gt;(this Either&lt;TSource, TRight&gt; this, Func&lt;TSource, Either&lt;TResult, TRight&gt;&gt; binder)where TSource : IDisposable</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;TSource, TRight&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, <a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;TResult, TRight&gt;&gt;</td>
+                    <td><span class="parametername">binder</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;TResult, TRight&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TRight</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_EitherL_ZipWith__4_Narvalo_Applicative_Either___0___3__Narvalo_Applicative_Either___1___3__System_Func___0___1___2__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.EitherL.ZipWith%60%604(Narvalo.Applicative.Either%7B%60%600%2C%60%603%7D%2CNarvalo.Applicative.Either%7B%60%601%2C%60%603%7D%2CSystem.Func%7B%60%600%2C%60%601%2C%60%602%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Either.g.cs/#L197">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_EitherL_ZipWith_" data-uid="Narvalo.Applicative.EitherL.ZipWith*"></a>
+              <h4 id="Narvalo_Applicative_EitherL_ZipWith__4_Narvalo_Applicative_Either___0___3__Narvalo_Applicative_Either___1___3__System_Func___0___1___2__" data-uid="Narvalo.Applicative.EitherL.ZipWith``4(Narvalo.Applicative.Either{``0,``3},Narvalo.Applicative.Either{``1,``3},System.Func{``0,``1,``2})">ZipWith&lt;T1, T2, TResult, TRight&gt;(Either&lt;T1, TRight&gt;, Either&lt;T2, TRight&gt;, Func&lt;T1, T2, TResult&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Either&lt;TResult, TRight&gt; ZipWith&lt;T1, T2, TResult, TRight&gt;(this Either&lt;T1, TRight&gt; this, Either&lt;T2, TRight&gt; second, Func&lt;T1, T2, TResult&gt; zipper)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;T1, TRight&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;T2, TRight&gt;</td>
+                    <td><span class="parametername">second</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;T1, T2, TResult&gt;</td>
+                    <td><span class="parametername">zipper</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;TResult, TRight&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">T1</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">T2</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TRight</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 id="Narvalo_Applicative_EitherL_ZipWith__4_Narvalo_Applicative_Either___0___3__Narvalo_Applicative_Either___1___3__System_Func___0___1___2___seealso">See Also</h5>
+              <div class="seealso">
+                  <div><a class="xref" href="Narvalo.Applicative.Either.html#Narvalo_Applicative_Either_Lift__4_System_Func___0___1___2__">Lift&lt;T1, T2, TResult, TRight&gt;(Func&lt;T1, T2, TResult&gt;)</a></div>
+              </div>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_EitherL_ZipWith__5_Narvalo_Applicative_Either___0___4__Narvalo_Applicative_Either___1___4__Narvalo_Applicative_Either___2___4__System_Func___0___1___2___3__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.EitherL.ZipWith%60%605(Narvalo.Applicative.Either%7B%60%600%2C%60%604%7D%2CNarvalo.Applicative.Either%7B%60%601%2C%60%604%7D%2CNarvalo.Applicative.Either%7B%60%602%2C%60%604%7D%2CSystem.Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Either.g.cs/#L212">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_EitherL_ZipWith_" data-uid="Narvalo.Applicative.EitherL.ZipWith*"></a>
+              <h4 id="Narvalo_Applicative_EitherL_ZipWith__5_Narvalo_Applicative_Either___0___4__Narvalo_Applicative_Either___1___4__Narvalo_Applicative_Either___2___4__System_Func___0___1___2___3__" data-uid="Narvalo.Applicative.EitherL.ZipWith``5(Narvalo.Applicative.Either{``0,``4},Narvalo.Applicative.Either{``1,``4},Narvalo.Applicative.Either{``2,``4},System.Func{``0,``1,``2,``3})">ZipWith&lt;T1, T2, T3, TResult, TRight&gt;(Either&lt;T1, TRight&gt;, Either&lt;T2, TRight&gt;, Either&lt;T3, TRight&gt;, Func&lt;T1, T2, T3, TResult&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Either&lt;TResult, TRight&gt; ZipWith&lt;T1, T2, T3, TResult, TRight&gt;(this Either&lt;T1, TRight&gt; this, Either&lt;T2, TRight&gt; second, Either&lt;T3, TRight&gt; third, Func&lt;T1, T2, T3, TResult&gt; zipper)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;T1, TRight&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;T2, TRight&gt;</td>
+                    <td><span class="parametername">second</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;T3, TRight&gt;</td>
+                    <td><span class="parametername">third</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;T1, T2, T3, TResult&gt;</td>
+                    <td><span class="parametername">zipper</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;TResult, TRight&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">T1</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">T2</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">T3</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TRight</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 id="Narvalo_Applicative_EitherL_ZipWith__5_Narvalo_Applicative_Either___0___4__Narvalo_Applicative_Either___1___4__Narvalo_Applicative_Either___2___4__System_Func___0___1___2___3___seealso">See Also</h5>
+              <div class="seealso">
+                  <div><a class="xref" href="Narvalo.Applicative.Either.html#Narvalo_Applicative_Either_Lift__5_System_Func___0___1___2___3__">Lift&lt;T1, T2, T3, TResult, TRight&gt;(Func&lt;T1, T2, T3, TResult&gt;)</a></div>
+              </div>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_EitherL_ZipWith__6_Narvalo_Applicative_Either___0___5__Narvalo_Applicative_Either___1___5__Narvalo_Applicative_Either___2___5__Narvalo_Applicative_Either___3___5__System_Func___0___1___2___3___4__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.EitherL.ZipWith%60%606(Narvalo.Applicative.Either%7B%60%600%2C%60%605%7D%2CNarvalo.Applicative.Either%7B%60%601%2C%60%605%7D%2CNarvalo.Applicative.Either%7B%60%602%2C%60%605%7D%2CNarvalo.Applicative.Either%7B%60%603%2C%60%605%7D%2CSystem.Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Either.g.cs/#L235">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_EitherL_ZipWith_" data-uid="Narvalo.Applicative.EitherL.ZipWith*"></a>
+              <h4 id="Narvalo_Applicative_EitherL_ZipWith__6_Narvalo_Applicative_Either___0___5__Narvalo_Applicative_Either___1___5__Narvalo_Applicative_Either___2___5__Narvalo_Applicative_Either___3___5__System_Func___0___1___2___3___4__" data-uid="Narvalo.Applicative.EitherL.ZipWith``6(Narvalo.Applicative.Either{``0,``5},Narvalo.Applicative.Either{``1,``5},Narvalo.Applicative.Either{``2,``5},Narvalo.Applicative.Either{``3,``5},System.Func{``0,``1,``2,``3,``4})">ZipWith&lt;T1, T2, T3, T4, TResult, TRight&gt;(Either&lt;T1, TRight&gt;, Either&lt;T2, TRight&gt;, Either&lt;T3, TRight&gt;, Either&lt;T4, TRight&gt;, Func&lt;T1, T2, T3, T4, TResult&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Either&lt;TResult, TRight&gt; ZipWith&lt;T1, T2, T3, T4, TResult, TRight&gt;(this Either&lt;T1, TRight&gt; this, Either&lt;T2, TRight&gt; second, Either&lt;T3, TRight&gt; third, Either&lt;T4, TRight&gt; fourth, Func&lt;T1, T2, T3, T4, TResult&gt; zipper)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;T1, TRight&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;T2, TRight&gt;</td>
+                    <td><span class="parametername">second</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;T3, TRight&gt;</td>
+                    <td><span class="parametername">third</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;T4, TRight&gt;</td>
+                    <td><span class="parametername">fourth</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;T1, T2, T3, T4, TResult&gt;</td>
+                    <td><span class="parametername">zipper</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;TResult, TRight&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">T1</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">T2</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">T3</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">T4</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TRight</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 id="Narvalo_Applicative_EitherL_ZipWith__6_Narvalo_Applicative_Either___0___5__Narvalo_Applicative_Either___1___5__Narvalo_Applicative_Either___2___5__Narvalo_Applicative_Either___3___5__System_Func___0___1___2___3___4___seealso">See Also</h5>
+              <div class="seealso">
+                  <div><a class="xref" href="Narvalo.Applicative.Either.html#Narvalo_Applicative_Either_Lift__6_System_Func___0___1___2___3___4__">Lift&lt;T1, T2, T3, T4, TResult, TRight&gt;(Func&lt;T1, T2, T3, T4, TResult&gt;)</a></div>
+              </div>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_EitherL_ZipWith__7_Narvalo_Applicative_Either___0___6__Narvalo_Applicative_Either___1___6__Narvalo_Applicative_Either___2___6__Narvalo_Applicative_Either___3___6__Narvalo_Applicative_Either___4___6__System_Func___0___1___2___3___4___5__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.EitherL.ZipWith%60%607(Narvalo.Applicative.Either%7B%60%600%2C%60%606%7D%2CNarvalo.Applicative.Either%7B%60%601%2C%60%606%7D%2CNarvalo.Applicative.Either%7B%60%602%2C%60%606%7D%2CNarvalo.Applicative.Either%7B%60%603%2C%60%606%7D%2CNarvalo.Applicative.Either%7B%60%604%2C%60%606%7D%2CSystem.Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Either.g.cs/#L261">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_EitherL_ZipWith_" data-uid="Narvalo.Applicative.EitherL.ZipWith*"></a>
+              <h4 id="Narvalo_Applicative_EitherL_ZipWith__7_Narvalo_Applicative_Either___0___6__Narvalo_Applicative_Either___1___6__Narvalo_Applicative_Either___2___6__Narvalo_Applicative_Either___3___6__Narvalo_Applicative_Either___4___6__System_Func___0___1___2___3___4___5__" data-uid="Narvalo.Applicative.EitherL.ZipWith``7(Narvalo.Applicative.Either{``0,``6},Narvalo.Applicative.Either{``1,``6},Narvalo.Applicative.Either{``2,``6},Narvalo.Applicative.Either{``3,``6},Narvalo.Applicative.Either{``4,``6},System.Func{``0,``1,``2,``3,``4,``5})">ZipWith&lt;T1, T2, T3, T4, T5, TResult, TRight&gt;(Either&lt;T1, TRight&gt;, Either&lt;T2, TRight&gt;, Either&lt;T3, TRight&gt;, Either&lt;T4, TRight&gt;, Either&lt;T5, TRight&gt;, Func&lt;T1, T2, T3, T4, T5, TResult&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Either&lt;TResult, TRight&gt; ZipWith&lt;T1, T2, T3, T4, T5, TResult, TRight&gt;(this Either&lt;T1, TRight&gt; this, Either&lt;T2, TRight&gt; second, Either&lt;T3, TRight&gt; third, Either&lt;T4, TRight&gt; fourth, Either&lt;T5, TRight&gt; fifth, Func&lt;T1, T2, T3, T4, T5, TResult&gt; zipper)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;T1, TRight&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;T2, TRight&gt;</td>
+                    <td><span class="parametername">second</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;T3, TRight&gt;</td>
+                    <td><span class="parametername">third</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;T4, TRight&gt;</td>
+                    <td><span class="parametername">fourth</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;T5, TRight&gt;</td>
+                    <td><span class="parametername">fifth</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;T1, T2, T3, T4, T5, TResult&gt;</td>
+                    <td><span class="parametername">zipper</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Either-2.html">Either</a>&lt;TResult, TRight&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">T1</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">T2</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">T3</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">T4</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">T5</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TRight</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 id="Narvalo_Applicative_EitherL_ZipWith__7_Narvalo_Applicative_Either___0___6__Narvalo_Applicative_Either___1___6__Narvalo_Applicative_Either___2___6__Narvalo_Applicative_Either___3___6__Narvalo_Applicative_Either___4___6__System_Func___0___1___2___3___4___5___seealso">See Also</h5>
+              <div class="seealso">
+                  <div><a class="xref" href="Narvalo.Applicative.Either.html#Narvalo_Applicative_Either_Lift__7_System_Func___0___1___2___3___4___5__">Lift&lt;T1, T2, T3, T4, T5, TResult, TRight&gt;(Func&lt;T1, T2, T3, T4, T5, TResult&gt;)</a></div>
+              </div>
+                        </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_EitherL.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.EitherL%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Either.g.cs/#L137" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright (c) Narvalo.Org
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

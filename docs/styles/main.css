@@ -1,0 +1,74 @@
+/*
+ * Customize fonts and colors. No top nav, no footer.
+ */
+
+@import url('https://fonts.googleapis.com/css?family=Lato|Roboto+Slab:700');
+
+/* Fonts: family, size, line-height */
+body {
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  line-height: 24px;
+}
+code, kbd, pre, samp, tt {
+  font-family: 'Consolas', monospace;
+  font-size: 12px !important;
+}
+.h1, .h2, .h3, .h4, .h5, h1, h2, h3, h4, h5 {
+  font-family: 'Roboto Slab', serif;
+  line-height: 1.5em;
+}
+
+/* No top navigation */
+.container { margin-left: 0; padding-left: 0; }
+.breadcrumb { padding-left: 35px; }
+.footer { padding: 5px 0px 5px 35px; }
+.sidetoc.shiftup { bottom: 36px; }
+.article { margin-top: 50px; }
+.sideaffix { margin-top: 0px; }
+.sidefilter { top: 40px; border-left: none; }
+.sidetoc { top: 100px; border-left: none; }
+
+/* Breadcrumb */
+.subnav { background-color: #2980B9; }
+.subnav A { color: white; }
+.navbar-default { border-color: #2980B9; }
+
+/* Left menu */
+.sidetoc, .sidefilter, body .toc { background-color: #343131;  }
+.expand-stub { color: white; }
+.toc .level1 > li > a { font-style: italic; font-weight: normal; color: #e3e3e3 !important; }
+.toc .level1 > li.active > a { color: #2980B9 !important; }
+.toc .level1 > li > a:hover { color: white !important; }
+.toc .nav > li > a { color: #b3b3b3; }
+.toc .nav > li.active > a { color: #2980B9; }
+.toc .nav > li > a:hover,
+  .toc .nav > li > a:focus { color: white; }
+.toc .nav > li.active > a:hover,
+  .toc .nav > li.active > a:focus { color: white; }
+
+/* Content */
+#_content { max-width: 45em; }
+
+/* Titles */
+.h5, h5 { margin-top: 1em; color: #4c668b; }
+article h4 { border-bottom: none; }
+
+/* Methods */
+.level1.summary {
+  border-radius: 3px;
+  background-color: #f9f9f9;
+  border: 1px solid #2980B9;
+  padding: .5em .3em 0em .5em;
+}
+
+/* Code blocks */
+code, kbd, pre, samp, tt {
+  background-color: #f9f9f9;
+  border: none;
+}
+
+/* Tables */
+table > thead { display: none; }
+table > tbody > tr { background-color: #fff !important; }
+.table-bordered > tbody > tr > td { border: none; border-bottom: 1px solid #e3e3e3; }

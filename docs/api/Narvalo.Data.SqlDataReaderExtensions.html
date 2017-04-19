@@ -1,0 +1,3060 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class SqlDataReaderExtensions
+   | Narvalo .NET libraries </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class SqlDataReaderExtensions
+   | Narvalo .NET libraries ">
+    <meta name="generator" content="docfx 2.15.5.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content">
+              
+              
+              <h1 id="Narvalo_Data_SqlDataReaderExtensions" data-uid="Narvalo.Data.SqlDataReaderExtensions">Class SqlDataReaderExtensions
+              </h1>
+              <div class="markdown level0 summary"><p>Provides extension methods for <span class="xref">System.Data.SqlClient.SqlDataReader</span>.</p>
+</div>
+              <div class="markdown level0 conceptual"></div>
+              <div class="inheritance">
+                <h5>Inheritance</h5>
+                  <div class="level0"><span class="xref">System.Object</span></div>
+                  <div class="level1"><span class="xref">SqlDataReaderExtensions</span></div>
+              </div>
+              <div class="inheritedMembers">
+                <h5>Inherited Members</h5>
+                <div>
+                  <span class="xref">System.Object.ToString()</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.Equals(System.Object)</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.GetHashCode()</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.GetType()</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.MemberwiseClone()</span>
+                </div>
+              </div>
+              <h6><strong>Namespace</strong>:Narvalo.Data</h6>
+              <h6><strong>Assembly</strong>:Narvalo.Common.dll</h6>
+              <h5 id="Narvalo_Data_SqlDataReaderExtensions_syntax">Syntax</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static class SqlDataReaderExtensions</code></pre>
+              </div>
+              <h3 id="methods">Methods
+              </h3>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetBoolean_System_Data_SqlClient_SqlDataReader_System_Int32_System_Boolean_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetBoolean(System.Data.SqlClient.SqlDataReader%2CSystem.Int32%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L49">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetBoolean_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetBoolean*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetBoolean_System_Data_SqlClient_SqlDataReader_System_Int32_System_Boolean_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetBoolean(System.Data.SqlClient.SqlDataReader,System.Int32,System.Boolean)">GetBoolean(SqlDataReader, Int32, Boolean)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static bool GetBoolean(this SqlDataReader this, int ordinal, bool defaultValue)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Int32</span></td>
+                    <td><span class="parametername">ordinal</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td><span class="parametername">defaultValue</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetBoolean_System_Data_SqlClient_SqlDataReader_System_String_System_Boolean_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetBoolean(System.Data.SqlClient.SqlDataReader%2CSystem.String%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L57">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetBoolean_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetBoolean*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetBoolean_System_Data_SqlClient_SqlDataReader_System_String_System_Boolean_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetBoolean(System.Data.SqlClient.SqlDataReader,System.String,System.Boolean)">GetBoolean(SqlDataReader, String, Boolean)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static bool GetBoolean(this SqlDataReader this, string name, bool defaultValue)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">name</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td><span class="parametername">defaultValue</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetByte_System_Data_SqlClient_SqlDataReader_System_Int32_System_Byte_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetByte(System.Data.SqlClient.SqlDataReader%2CSystem.Int32%2CSystem.Byte)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L80">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetByte_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetByte*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetByte_System_Data_SqlClient_SqlDataReader_System_Int32_System_Byte_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetByte(System.Data.SqlClient.SqlDataReader,System.Int32,System.Byte)">GetByte(SqlDataReader, Int32, Byte)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static byte GetByte(this SqlDataReader this, int ordinal, byte defaultValue)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Int32</span></td>
+                    <td><span class="parametername">ordinal</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Byte</span></td>
+                    <td><span class="parametername">defaultValue</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Byte</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetByte_System_Data_SqlClient_SqlDataReader_System_String_System_Byte_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetByte(System.Data.SqlClient.SqlDataReader%2CSystem.String%2CSystem.Byte)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L88">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetByte_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetByte*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetByte_System_Data_SqlClient_SqlDataReader_System_String_System_Byte_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetByte(System.Data.SqlClient.SqlDataReader,System.String,System.Byte)">GetByte(SqlDataReader, String, Byte)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static byte GetByte(this SqlDataReader this, string name, byte defaultValue)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">name</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Byte</span></td>
+                    <td><span class="parametername">defaultValue</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Byte</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetDateTime_System_Data_SqlClient_SqlDataReader_System_Int32_System_DateTime_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetDateTime(System.Data.SqlClient.SqlDataReader%2CSystem.Int32%2CSystem.DateTime)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L111">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetDateTime_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetDateTime*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetDateTime_System_Data_SqlClient_SqlDataReader_System_Int32_System_DateTime_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetDateTime(System.Data.SqlClient.SqlDataReader,System.Int32,System.DateTime)">GetDateTime(SqlDataReader, Int32, DateTime)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static DateTime GetDateTime(this SqlDataReader this, int ordinal, DateTime defaultValue)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Int32</span></td>
+                    <td><span class="parametername">ordinal</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.DateTime</span></td>
+                    <td><span class="parametername">defaultValue</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.DateTime</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetDateTime_System_Data_SqlClient_SqlDataReader_System_String_System_DateTime_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetDateTime(System.Data.SqlClient.SqlDataReader%2CSystem.String%2CSystem.DateTime)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L119">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetDateTime_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetDateTime*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetDateTime_System_Data_SqlClient_SqlDataReader_System_String_System_DateTime_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetDateTime(System.Data.SqlClient.SqlDataReader,System.String,System.DateTime)">GetDateTime(SqlDataReader, String, DateTime)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static DateTime GetDateTime(this SqlDataReader this, string name, DateTime defaultValue)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">name</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.DateTime</span></td>
+                    <td><span class="parametername">defaultValue</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.DateTime</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetDecimal_System_Data_SqlClient_SqlDataReader_System_Int32_System_Decimal_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetDecimal(System.Data.SqlClient.SqlDataReader%2CSystem.Int32%2CSystem.Decimal)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L142">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetDecimal_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetDecimal*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetDecimal_System_Data_SqlClient_SqlDataReader_System_Int32_System_Decimal_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetDecimal(System.Data.SqlClient.SqlDataReader,System.Int32,System.Decimal)">GetDecimal(SqlDataReader, Int32, Decimal)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static decimal GetDecimal(this SqlDataReader this, int ordinal, decimal defaultValue)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Int32</span></td>
+                    <td><span class="parametername">ordinal</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Decimal</span></td>
+                    <td><span class="parametername">defaultValue</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Decimal</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetDecimal_System_Data_SqlClient_SqlDataReader_System_String_System_Decimal_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetDecimal(System.Data.SqlClient.SqlDataReader%2CSystem.String%2CSystem.Decimal)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L150">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetDecimal_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetDecimal*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetDecimal_System_Data_SqlClient_SqlDataReader_System_String_System_Decimal_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetDecimal(System.Data.SqlClient.SqlDataReader,System.String,System.Decimal)">GetDecimal(SqlDataReader, String, Decimal)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static decimal GetDecimal(this SqlDataReader this, string name, decimal defaultValue)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">name</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Decimal</span></td>
+                    <td><span class="parametername">defaultValue</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Decimal</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetDouble_System_Data_SqlClient_SqlDataReader_System_Int32_System_Double_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetDouble(System.Data.SqlClient.SqlDataReader%2CSystem.Int32%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L173">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetDouble_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetDouble*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetDouble_System_Data_SqlClient_SqlDataReader_System_Int32_System_Double_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetDouble(System.Data.SqlClient.SqlDataReader,System.Int32,System.Double)">GetDouble(SqlDataReader, Int32, Double)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static double GetDouble(this SqlDataReader this, int ordinal, double defaultValue)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Int32</span></td>
+                    <td><span class="parametername">ordinal</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Double</span></td>
+                    <td><span class="parametername">defaultValue</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Double</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetDouble_System_Data_SqlClient_SqlDataReader_System_String_System_Double_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetDouble(System.Data.SqlClient.SqlDataReader%2CSystem.String%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L181">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetDouble_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetDouble*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetDouble_System_Data_SqlClient_SqlDataReader_System_String_System_Double_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetDouble(System.Data.SqlClient.SqlDataReader,System.String,System.Double)">GetDouble(SqlDataReader, String, Double)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static double GetDouble(this SqlDataReader this, string name, double defaultValue)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">name</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Double</span></td>
+                    <td><span class="parametername">defaultValue</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Double</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetGuid_System_Data_SqlClient_SqlDataReader_System_Int32_System_Guid_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetGuid(System.Data.SqlClient.SqlDataReader%2CSystem.Int32%2CSystem.Guid)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L204">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetGuid_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetGuid*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetGuid_System_Data_SqlClient_SqlDataReader_System_Int32_System_Guid_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetGuid(System.Data.SqlClient.SqlDataReader,System.Int32,System.Guid)">GetGuid(SqlDataReader, Int32, Guid)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Guid GetGuid(this SqlDataReader this, int ordinal, Guid defaultValue)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Int32</span></td>
+                    <td><span class="parametername">ordinal</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Guid</span></td>
+                    <td><span class="parametername">defaultValue</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Guid</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetGuid_System_Data_SqlClient_SqlDataReader_System_String_System_Guid_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetGuid(System.Data.SqlClient.SqlDataReader%2CSystem.String%2CSystem.Guid)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L212">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetGuid_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetGuid*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetGuid_System_Data_SqlClient_SqlDataReader_System_String_System_Guid_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetGuid(System.Data.SqlClient.SqlDataReader,System.String,System.Guid)">GetGuid(SqlDataReader, String, Guid)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Guid GetGuid(this SqlDataReader this, string name, Guid defaultValue)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">name</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Guid</span></td>
+                    <td><span class="parametername">defaultValue</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Guid</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetInt16_System_Data_SqlClient_SqlDataReader_System_Int32_System_Int16_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetInt16(System.Data.SqlClient.SqlDataReader%2CSystem.Int32%2CSystem.Int16)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L235">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetInt16_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetInt16*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetInt16_System_Data_SqlClient_SqlDataReader_System_Int32_System_Int16_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetInt16(System.Data.SqlClient.SqlDataReader,System.Int32,System.Int16)">GetInt16(SqlDataReader, Int32, Int16)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static short GetInt16(this SqlDataReader this, int ordinal, short defaultValue)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Int32</span></td>
+                    <td><span class="parametername">ordinal</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Int16</span></td>
+                    <td><span class="parametername">defaultValue</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Int16</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetInt16_System_Data_SqlClient_SqlDataReader_System_String_System_Int16_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetInt16(System.Data.SqlClient.SqlDataReader%2CSystem.String%2CSystem.Int16)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L243">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetInt16_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetInt16*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetInt16_System_Data_SqlClient_SqlDataReader_System_String_System_Int16_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetInt16(System.Data.SqlClient.SqlDataReader,System.String,System.Int16)">GetInt16(SqlDataReader, String, Int16)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static short GetInt16(this SqlDataReader this, string name, short defaultValue)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">name</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Int16</span></td>
+                    <td><span class="parametername">defaultValue</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Int16</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetInt32_System_Data_SqlClient_SqlDataReader_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetInt32(System.Data.SqlClient.SqlDataReader%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L266">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetInt32_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetInt32*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetInt32_System_Data_SqlClient_SqlDataReader_System_Int32_System_Int32_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetInt32(System.Data.SqlClient.SqlDataReader,System.Int32,System.Int32)">GetInt32(SqlDataReader, Int32, Int32)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static int GetInt32(this SqlDataReader this, int ordinal, int defaultValue)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Int32</span></td>
+                    <td><span class="parametername">ordinal</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Int32</span></td>
+                    <td><span class="parametername">defaultValue</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Int32</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetInt32_System_Data_SqlClient_SqlDataReader_System_String_System_Int32_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetInt32(System.Data.SqlClient.SqlDataReader%2CSystem.String%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L274">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetInt32_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetInt32*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetInt32_System_Data_SqlClient_SqlDataReader_System_String_System_Int32_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetInt32(System.Data.SqlClient.SqlDataReader,System.String,System.Int32)">GetInt32(SqlDataReader, String, Int32)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static int GetInt32(this SqlDataReader this, string name, int defaultValue)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">name</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Int32</span></td>
+                    <td><span class="parametername">defaultValue</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Int32</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetInt64_System_Data_SqlClient_SqlDataReader_System_Int32_System_Int64_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetInt64(System.Data.SqlClient.SqlDataReader%2CSystem.Int32%2CSystem.Int64)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L297">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetInt64_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetInt64*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetInt64_System_Data_SqlClient_SqlDataReader_System_Int32_System_Int64_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetInt64(System.Data.SqlClient.SqlDataReader,System.Int32,System.Int64)">GetInt64(SqlDataReader, Int32, Int64)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static long GetInt64(this SqlDataReader this, int ordinal, long defaultValue)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Int32</span></td>
+                    <td><span class="parametername">ordinal</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Int64</span></td>
+                    <td><span class="parametername">defaultValue</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Int64</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetInt64_System_Data_SqlClient_SqlDataReader_System_String_System_Int64_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetInt64(System.Data.SqlClient.SqlDataReader%2CSystem.String%2CSystem.Int64)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L305">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetInt64_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetInt64*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetInt64_System_Data_SqlClient_SqlDataReader_System_String_System_Int64_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetInt64(System.Data.SqlClient.SqlDataReader,System.String,System.Int64)">GetInt64(SqlDataReader, String, Int64)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static long GetInt64(this SqlDataReader this, string name, long defaultValue)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">name</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Int64</span></td>
+                    <td><span class="parametername">defaultValue</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Int64</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetMoney_System_Data_SqlClient_SqlDataReader_System_Int32_System_Decimal_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetMoney(System.Data.SqlClient.SqlDataReader%2CSystem.Int32%2CSystem.Decimal)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L403">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetMoney_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetMoney*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetMoney_System_Data_SqlClient_SqlDataReader_System_Int32_System_Decimal_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetMoney(System.Data.SqlClient.SqlDataReader,System.Int32,System.Decimal)">GetMoney(SqlDataReader, Int32, Decimal)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static decimal GetMoney(this SqlDataReader this, int ordinal, decimal defaultValue)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Int32</span></td>
+                    <td><span class="parametername">ordinal</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Decimal</span></td>
+                    <td><span class="parametername">defaultValue</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Decimal</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetMoney_System_Data_SqlClient_SqlDataReader_System_String_System_Decimal_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetMoney(System.Data.SqlClient.SqlDataReader%2CSystem.String%2CSystem.Decimal)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L411">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetMoney_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetMoney*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetMoney_System_Data_SqlClient_SqlDataReader_System_String_System_Decimal_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetMoney(System.Data.SqlClient.SqlDataReader,System.String,System.Decimal)">GetMoney(SqlDataReader, String, Decimal)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static decimal GetMoney(this SqlDataReader this, string name, decimal defaultValue)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">name</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Decimal</span></td>
+                    <td><span class="parametername">defaultValue</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Decimal</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetNullableBoolean_System_Data_SqlClient_SqlDataReader_System_Int32_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetNullableBoolean(System.Data.SqlClient.SqlDataReader%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L64">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetNullableBoolean_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableBoolean*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetNullableBoolean_System_Data_SqlClient_SqlDataReader_System_Int32_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableBoolean(System.Data.SqlClient.SqlDataReader,System.Int32)">GetNullableBoolean(SqlDataReader, Int32)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static bool ? GetNullableBoolean(this SqlDataReader this, int ordinal)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Int32</span></td>
+                    <td><span class="parametername">ordinal</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetNullableBoolean_System_Data_SqlClient_SqlDataReader_System_String_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetNullableBoolean(System.Data.SqlClient.SqlDataReader%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L73">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetNullableBoolean_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableBoolean*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetNullableBoolean_System_Data_SqlClient_SqlDataReader_System_String_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableBoolean(System.Data.SqlClient.SqlDataReader,System.String)">GetNullableBoolean(SqlDataReader, String)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static bool ? GetNullableBoolean(this SqlDataReader this, string name)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">name</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetNullableByte_System_Data_SqlClient_SqlDataReader_System_Int32_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetNullableByte(System.Data.SqlClient.SqlDataReader%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L95">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetNullableByte_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableByte*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetNullableByte_System_Data_SqlClient_SqlDataReader_System_Int32_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableByte(System.Data.SqlClient.SqlDataReader,System.Int32)">GetNullableByte(SqlDataReader, Int32)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static byte ? GetNullableByte(this SqlDataReader this, int ordinal)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Int32</span></td>
+                    <td><span class="parametername">ordinal</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Byte</span>&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetNullableByte_System_Data_SqlClient_SqlDataReader_System_String_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetNullableByte(System.Data.SqlClient.SqlDataReader%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L104">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetNullableByte_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableByte*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetNullableByte_System_Data_SqlClient_SqlDataReader_System_String_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableByte(System.Data.SqlClient.SqlDataReader,System.String)">GetNullableByte(SqlDataReader, String)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static byte ? GetNullableByte(this SqlDataReader this, string name)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">name</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Byte</span>&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetNullableDateTime_System_Data_SqlClient_SqlDataReader_System_Int32_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetNullableDateTime(System.Data.SqlClient.SqlDataReader%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L126">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetNullableDateTime_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableDateTime*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetNullableDateTime_System_Data_SqlClient_SqlDataReader_System_Int32_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableDateTime(System.Data.SqlClient.SqlDataReader,System.Int32)">GetNullableDateTime(SqlDataReader, Int32)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static DateTime? GetNullableDateTime(this SqlDataReader this, int ordinal)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Int32</span></td>
+                    <td><span class="parametername">ordinal</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.DateTime</span>&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetNullableDateTime_System_Data_SqlClient_SqlDataReader_System_String_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetNullableDateTime(System.Data.SqlClient.SqlDataReader%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L135">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetNullableDateTime_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableDateTime*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetNullableDateTime_System_Data_SqlClient_SqlDataReader_System_String_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableDateTime(System.Data.SqlClient.SqlDataReader,System.String)">GetNullableDateTime(SqlDataReader, String)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static DateTime? GetNullableDateTime(this SqlDataReader this, string name)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">name</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.DateTime</span>&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetNullableDecimal_System_Data_SqlClient_SqlDataReader_System_Int32_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetNullableDecimal(System.Data.SqlClient.SqlDataReader%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L157">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetNullableDecimal_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableDecimal*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetNullableDecimal_System_Data_SqlClient_SqlDataReader_System_Int32_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableDecimal(System.Data.SqlClient.SqlDataReader,System.Int32)">GetNullableDecimal(SqlDataReader, Int32)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static decimal ? GetNullableDecimal(this SqlDataReader this, int ordinal)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Int32</span></td>
+                    <td><span class="parametername">ordinal</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Decimal</span>&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetNullableDecimal_System_Data_SqlClient_SqlDataReader_System_String_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetNullableDecimal(System.Data.SqlClient.SqlDataReader%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L166">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetNullableDecimal_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableDecimal*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetNullableDecimal_System_Data_SqlClient_SqlDataReader_System_String_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableDecimal(System.Data.SqlClient.SqlDataReader,System.String)">GetNullableDecimal(SqlDataReader, String)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static decimal ? GetNullableDecimal(this SqlDataReader this, string name)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">name</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Decimal</span>&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetNullableDouble_System_Data_SqlClient_SqlDataReader_System_Int32_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetNullableDouble(System.Data.SqlClient.SqlDataReader%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L188">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetNullableDouble_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableDouble*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetNullableDouble_System_Data_SqlClient_SqlDataReader_System_Int32_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableDouble(System.Data.SqlClient.SqlDataReader,System.Int32)">GetNullableDouble(SqlDataReader, Int32)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static double ? GetNullableDouble(this SqlDataReader this, int ordinal)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Int32</span></td>
+                    <td><span class="parametername">ordinal</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Double</span>&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetNullableDouble_System_Data_SqlClient_SqlDataReader_System_String_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetNullableDouble(System.Data.SqlClient.SqlDataReader%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L197">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetNullableDouble_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableDouble*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetNullableDouble_System_Data_SqlClient_SqlDataReader_System_String_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableDouble(System.Data.SqlClient.SqlDataReader,System.String)">GetNullableDouble(SqlDataReader, String)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static double ? GetNullableDouble(this SqlDataReader this, string name)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">name</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Double</span>&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetNullableGuid_System_Data_SqlClient_SqlDataReader_System_Int32_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetNullableGuid(System.Data.SqlClient.SqlDataReader%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L219">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetNullableGuid_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableGuid*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetNullableGuid_System_Data_SqlClient_SqlDataReader_System_Int32_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableGuid(System.Data.SqlClient.SqlDataReader,System.Int32)">GetNullableGuid(SqlDataReader, Int32)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Guid? GetNullableGuid(this SqlDataReader this, int ordinal)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Int32</span></td>
+                    <td><span class="parametername">ordinal</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Guid</span>&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetNullableGuid_System_Data_SqlClient_SqlDataReader_System_String_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetNullableGuid(System.Data.SqlClient.SqlDataReader%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L228">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetNullableGuid_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableGuid*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetNullableGuid_System_Data_SqlClient_SqlDataReader_System_String_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableGuid(System.Data.SqlClient.SqlDataReader,System.String)">GetNullableGuid(SqlDataReader, String)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Guid? GetNullableGuid(this SqlDataReader this, string name)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">name</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Guid</span>&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetNullableInt16_System_Data_SqlClient_SqlDataReader_System_Int32_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetNullableInt16(System.Data.SqlClient.SqlDataReader%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L250">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetNullableInt16_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableInt16*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetNullableInt16_System_Data_SqlClient_SqlDataReader_System_Int32_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableInt16(System.Data.SqlClient.SqlDataReader,System.Int32)">GetNullableInt16(SqlDataReader, Int32)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static short ? GetNullableInt16(this SqlDataReader this, int ordinal)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Int32</span></td>
+                    <td><span class="parametername">ordinal</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int16</span>&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetNullableInt16_System_Data_SqlClient_SqlDataReader_System_String_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetNullableInt16(System.Data.SqlClient.SqlDataReader%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L259">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetNullableInt16_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableInt16*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetNullableInt16_System_Data_SqlClient_SqlDataReader_System_String_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableInt16(System.Data.SqlClient.SqlDataReader,System.String)">GetNullableInt16(SqlDataReader, String)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static short ? GetNullableInt16(this SqlDataReader this, string name)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">name</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int16</span>&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetNullableInt32_System_Data_SqlClient_SqlDataReader_System_Int32_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetNullableInt32(System.Data.SqlClient.SqlDataReader%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L281">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetNullableInt32_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableInt32*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetNullableInt32_System_Data_SqlClient_SqlDataReader_System_Int32_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableInt32(System.Data.SqlClient.SqlDataReader,System.Int32)">GetNullableInt32(SqlDataReader, Int32)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static int ? GetNullableInt32(this SqlDataReader this, int ordinal)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Int32</span></td>
+                    <td><span class="parametername">ordinal</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetNullableInt32_System_Data_SqlClient_SqlDataReader_System_String_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetNullableInt32(System.Data.SqlClient.SqlDataReader%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L290">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetNullableInt32_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableInt32*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetNullableInt32_System_Data_SqlClient_SqlDataReader_System_String_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableInt32(System.Data.SqlClient.SqlDataReader,System.String)">GetNullableInt32(SqlDataReader, String)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static int ? GetNullableInt32(this SqlDataReader this, string name)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">name</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetNullableInt64_System_Data_SqlClient_SqlDataReader_System_Int32_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetNullableInt64(System.Data.SqlClient.SqlDataReader%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L312">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetNullableInt64_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableInt64*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetNullableInt64_System_Data_SqlClient_SqlDataReader_System_Int32_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableInt64(System.Data.SqlClient.SqlDataReader,System.Int32)">GetNullableInt64(SqlDataReader, Int32)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static long ? GetNullableInt64(this SqlDataReader this, int ordinal)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Int32</span></td>
+                    <td><span class="parametername">ordinal</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int64</span>&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetNullableInt64_System_Data_SqlClient_SqlDataReader_System_String_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetNullableInt64(System.Data.SqlClient.SqlDataReader%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L321">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetNullableInt64_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableInt64*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetNullableInt64_System_Data_SqlClient_SqlDataReader_System_String_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableInt64(System.Data.SqlClient.SqlDataReader,System.String)">GetNullableInt64(SqlDataReader, String)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static long ? GetNullableInt64(this SqlDataReader this, string name)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">name</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int64</span>&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetNullableMoney_System_Data_SqlClient_SqlDataReader_System_Int32_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetNullableMoney(System.Data.SqlClient.SqlDataReader%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L418">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetNullableMoney_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableMoney*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetNullableMoney_System_Data_SqlClient_SqlDataReader_System_Int32_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableMoney(System.Data.SqlClient.SqlDataReader,System.Int32)">GetNullableMoney(SqlDataReader, Int32)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static decimal ? GetNullableMoney(this SqlDataReader this, int ordinal)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Int32</span></td>
+                    <td><span class="parametername">ordinal</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Decimal</span>&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetNullableMoney_System_Data_SqlClient_SqlDataReader_System_String_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetNullableMoney(System.Data.SqlClient.SqlDataReader%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L427">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetNullableMoney_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableMoney*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetNullableMoney_System_Data_SqlClient_SqlDataReader_System_String_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetNullableMoney(System.Data.SqlClient.SqlDataReader,System.String)">GetNullableMoney(SqlDataReader, String)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static decimal ? GetNullableMoney(this SqlDataReader this, string name)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">name</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Decimal</span>&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetString_System_Data_SqlClient_SqlDataReader_System_Int32_System_String_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetString(System.Data.SqlClient.SqlDataReader%2CSystem.Int32%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L374">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetString_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetString*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetString_System_Data_SqlClient_SqlDataReader_System_Int32_System_String_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetString(System.Data.SqlClient.SqlDataReader,System.Int32,System.String)">GetString(SqlDataReader, Int32, String)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static string GetString(this SqlDataReader this, int ordinal, string defaultValue)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Int32</span></td>
+                    <td><span class="parametername">ordinal</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">defaultValue</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetString_System_Data_SqlClient_SqlDataReader_System_String_System_String_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetString(System.Data.SqlClient.SqlDataReader%2CSystem.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L382">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetString_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetString*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetString_System_Data_SqlClient_SqlDataReader_System_String_System_String_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetString(System.Data.SqlClient.SqlDataReader,System.String,System.String)">GetString(SqlDataReader, String, String)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static string GetString(this SqlDataReader this, string name, string defaultValue)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">name</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">defaultValue</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetXml_System_Data_SqlClient_SqlDataReader_System_Int32_System_String_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetXml(System.Data.SqlClient.SqlDataReader%2CSystem.Int32%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L434">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetXml_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetXml*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetXml_System_Data_SqlClient_SqlDataReader_System_Int32_System_String_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetXml(System.Data.SqlClient.SqlDataReader,System.Int32,System.String)">GetXml(SqlDataReader, Int32, String)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static string GetXml(this SqlDataReader this, int ordinal, string defaultValue)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Int32</span></td>
+                    <td><span class="parametername">ordinal</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">defaultValue</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_GetXml_System_Data_SqlClient_SqlDataReader_System_String_System_String_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.GetXml(System.Data.SqlClient.SqlDataReader%2CSystem.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L442">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_GetXml_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetXml*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_GetXml_System_Data_SqlClient_SqlDataReader_System_String_System_String_" data-uid="Narvalo.Data.SqlDataReaderExtensions.GetXml(System.Data.SqlClient.SqlDataReader,System.String,System.String)">GetXml(SqlDataReader, String, String)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static string GetXml(this SqlDataReader this, string name, string defaultValue)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">name</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">defaultValue</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_MayGetBinary_System_Data_SqlClient_SqlDataReader_System_Int32_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.MayGetBinary(System.Data.SqlClient.SqlDataReader%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L346">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_MayGetBinary_" data-uid="Narvalo.Data.SqlDataReaderExtensions.MayGetBinary*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_MayGetBinary_System_Data_SqlClient_SqlDataReader_System_Int32_" data-uid="Narvalo.Data.SqlDataReaderExtensions.MayGetBinary(System.Data.SqlClient.SqlDataReader,System.Int32)">MayGetBinary(SqlDataReader, Int32)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Maybe&lt;byte[]&gt; MayGetBinary(this SqlDataReader this, int ordinal)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Int32</span></td>
+                    <td><span class="parametername">ordinal</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;<span class="xref">System.Byte</span>[]&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_MayGetBinary_System_Data_SqlClient_SqlDataReader_System_String_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.MayGetBinary(System.Data.SqlClient.SqlDataReader%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L353">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_MayGetBinary_" data-uid="Narvalo.Data.SqlDataReaderExtensions.MayGetBinary*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_MayGetBinary_System_Data_SqlClient_SqlDataReader_System_String_" data-uid="Narvalo.Data.SqlDataReaderExtensions.MayGetBinary(System.Data.SqlClient.SqlDataReader,System.String)">MayGetBinary(SqlDataReader, String)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Maybe&lt;byte[]&gt; MayGetBinary(this SqlDataReader this, string name)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">name</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;<span class="xref">System.Byte</span>[]&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_MayGetBytes_System_Data_SqlClient_SqlDataReader_System_Int32_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.MayGetBytes(System.Data.SqlClient.SqlDataReader%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L332">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_MayGetBytes_" data-uid="Narvalo.Data.SqlDataReaderExtensions.MayGetBytes*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_MayGetBytes_System_Data_SqlClient_SqlDataReader_System_Int32_" data-uid="Narvalo.Data.SqlDataReaderExtensions.MayGetBytes(System.Data.SqlClient.SqlDataReader,System.Int32)">MayGetBytes(SqlDataReader, Int32)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Maybe&lt;byte[]&gt; MayGetBytes(this SqlDataReader this, int ordinal)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Int32</span></td>
+                    <td><span class="parametername">ordinal</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;<span class="xref">System.Byte</span>[]&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_MayGetBytes_System_Data_SqlClient_SqlDataReader_System_String_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.MayGetBytes(System.Data.SqlClient.SqlDataReader%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L339">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_MayGetBytes_" data-uid="Narvalo.Data.SqlDataReaderExtensions.MayGetBytes*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_MayGetBytes_System_Data_SqlClient_SqlDataReader_System_String_" data-uid="Narvalo.Data.SqlDataReaderExtensions.MayGetBytes(System.Data.SqlClient.SqlDataReader,System.String)">MayGetBytes(SqlDataReader, String)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Maybe&lt;byte[]&gt; MayGetBytes(this SqlDataReader this, string name)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">name</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;<span class="xref">System.Byte</span>[]&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_MayGetChars_System_Data_SqlClient_SqlDataReader_System_Int32_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.MayGetChars(System.Data.SqlClient.SqlDataReader%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L360">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_MayGetChars_" data-uid="Narvalo.Data.SqlDataReaderExtensions.MayGetChars*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_MayGetChars_System_Data_SqlClient_SqlDataReader_System_Int32_" data-uid="Narvalo.Data.SqlDataReaderExtensions.MayGetChars(System.Data.SqlClient.SqlDataReader,System.Int32)">MayGetChars(SqlDataReader, Int32)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Maybe&lt;char[]&gt; MayGetChars(this SqlDataReader this, int ordinal)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Int32</span></td>
+                    <td><span class="parametername">ordinal</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;<span class="xref">System.Char</span>[]&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_MayGetChars_System_Data_SqlClient_SqlDataReader_System_String_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.MayGetChars(System.Data.SqlClient.SqlDataReader%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L367">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_MayGetChars_" data-uid="Narvalo.Data.SqlDataReaderExtensions.MayGetChars*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_MayGetChars_System_Data_SqlClient_SqlDataReader_System_String_" data-uid="Narvalo.Data.SqlDataReaderExtensions.MayGetChars(System.Data.SqlClient.SqlDataReader,System.String)">MayGetChars(SqlDataReader, String)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Maybe&lt;char[]&gt; MayGetChars(this SqlDataReader this, string name)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">name</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;<span class="xref">System.Char</span>[]&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_MayGetString_System_Data_SqlClient_SqlDataReader_System_Int32_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.MayGetString(System.Data.SqlClient.SqlDataReader%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L389">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_MayGetString_" data-uid="Narvalo.Data.SqlDataReaderExtensions.MayGetString*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_MayGetString_System_Data_SqlClient_SqlDataReader_System_Int32_" data-uid="Narvalo.Data.SqlDataReaderExtensions.MayGetString(System.Data.SqlClient.SqlDataReader,System.Int32)">MayGetString(SqlDataReader, Int32)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Maybe&lt;string&gt; MayGetString(this SqlDataReader this, int ordinal)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Int32</span></td>
+                    <td><span class="parametername">ordinal</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;<span class="xref">System.String</span>&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_MayGetString_System_Data_SqlClient_SqlDataReader_System_String_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.MayGetString(System.Data.SqlClient.SqlDataReader%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L396">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_MayGetString_" data-uid="Narvalo.Data.SqlDataReaderExtensions.MayGetString*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_MayGetString_System_Data_SqlClient_SqlDataReader_System_String_" data-uid="Narvalo.Data.SqlDataReaderExtensions.MayGetString(System.Data.SqlClient.SqlDataReader,System.String)">MayGetString(SqlDataReader, String)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Maybe&lt;string&gt; MayGetString(this SqlDataReader this, string name)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">name</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;<span class="xref">System.String</span>&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_MayGetXml_System_Data_SqlClient_SqlDataReader_System_Int32_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.MayGetXml(System.Data.SqlClient.SqlDataReader%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L449">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_MayGetXml_" data-uid="Narvalo.Data.SqlDataReaderExtensions.MayGetXml*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_MayGetXml_System_Data_SqlClient_SqlDataReader_System_Int32_" data-uid="Narvalo.Data.SqlDataReaderExtensions.MayGetXml(System.Data.SqlClient.SqlDataReader,System.Int32)">MayGetXml(SqlDataReader, Int32)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Maybe&lt;string&gt; MayGetXml(this SqlDataReader this, int ordinal)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Int32</span></td>
+                    <td><span class="parametername">ordinal</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;<span class="xref">System.String</span>&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions_MayGetXml_System_Data_SqlClient_SqlDataReader_System_String_.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions.MayGetXml(System.Data.SqlClient.SqlDataReader%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L456">View Source</a>
+              </span>
+              <a id="Narvalo_Data_SqlDataReaderExtensions_MayGetXml_" data-uid="Narvalo.Data.SqlDataReaderExtensions.MayGetXml*"></a>
+              <h4 id="Narvalo_Data_SqlDataReaderExtensions_MayGetXml_System_Data_SqlClient_SqlDataReader_System_String_" data-uid="Narvalo.Data.SqlDataReaderExtensions.MayGetXml(System.Data.SqlClient.SqlDataReader,System.String)">MayGetXml(SqlDataReader, String)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Maybe&lt;string&gt; MayGetXml(this SqlDataReader this, string name)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Data.SqlClient.SqlDataReader</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">name</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;<span class="xref">System.String</span>&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+                        </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Data_SqlDataReaderExtensions.md&amp;value=---%0Auid%3A%20Narvalo.Data.SqlDataReaderExtensions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Common/Data/SqlDataReader$.cs/#L330" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright (c) Narvalo.Org
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1830 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class Qperators
+   | Narvalo .NET libraries </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class Qperators
+   | Narvalo .NET libraries ">
+    <meta name="generator" content="docfx 2.15.5.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content">
+              
+              
+              <h1 id="Narvalo_Linq_Qperators" data-uid="Narvalo.Linq.Qperators">Class Qperators
+              </h1>
+              <div class="markdown level0 summary"><p>Provides a set of extension methods for querying
+objects that implement <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span>.</p>
+</div>
+              <div class="markdown level0 conceptual"></div>
+              <div class="inheritance">
+                <h5>Inheritance</h5>
+                  <div class="level0"><span class="xref">System.Object</span></div>
+                  <div class="level1"><span class="xref">Qperators</span></div>
+              </div>
+              <div class="inheritedMembers">
+                <h5>Inherited Members</h5>
+                <div>
+                  <span class="xref">System.Object.Equals(System.Object)</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.GetHashCode()</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.GetType()</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.MemberwiseClone()</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.ToString()</span>
+                </div>
+              </div>
+              <h6><strong>Namespace</strong>:Narvalo.Linq</h6>
+              <h6><strong>Assembly</strong>:Narvalo.Fx.dll</h6>
+              <h5 id="Narvalo_Linq_Qperators_syntax">Syntax</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static class Qperators</code></pre>
+              </div>
+              <h5 id="Narvalo_Linq_Qperators_remarks"><strong>Remarks</strong></h5>
+              <div class="markdown level0 remarks"><p>New LINQ operators:</p>
+<ul>
+<li>Projecting: SelectAny (deferred)</li>
+<li>Filtering: WhereAny (deferred)</li>
+<li>Set: Append (deferred), Prepend (deferred)</li>
+<li>Element: FirstOrNone, LastOrNone, SingleOrNone, ElementAtOrNone</li>
+<li>Aggregation: Fold, Reduce</li>
+<li>Quantifiers: IsEmpty, None</li>
+<li>Generation: EmptyIfNull</li>
+<li>Others: Flatten</li>
+</ul>
+</div>
+              <h3 id="methods">Methods
+              </h3>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Linq_Qperators_Append__1_System_Collections_Generic_IEnumerable___0____0_.md&amp;value=---%0Auid%3A%20Narvalo.Linq.Qperators.Append%60%601(System.Collections.Generic.IEnumerable%7B%60%600%7D%2C%60%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Linq/AppendPrepend.cs/#L9">View Source</a>
+              </span>
+              <a id="Narvalo_Linq_Qperators_Append_" data-uid="Narvalo.Linq.Qperators.Append*"></a>
+              <h4 id="Narvalo_Linq_Qperators_Append__1_System_Collections_Generic_IEnumerable___0____0_" data-uid="Narvalo.Linq.Qperators.Append``1(System.Collections.Generic.IEnumerable{``0},``0)">Append&lt;TSource&gt;(IEnumerable&lt;TSource&gt;, TSource)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static IEnumerable&lt;TSource&gt; Append&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source, TSource element)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td><span class="parametername">source</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">TSource</span></td>
+                    <td><span class="parametername">element</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Linq_Qperators_CollectAny__1_System_Collections_Generic_IEnumerable___0__.md&amp;value=---%0Auid%3A%20Narvalo.Linq.Qperators.CollectAny%60%601(System.Collections.Generic.IEnumerable%7B%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Linq/CollectAny.cs/#L10">View Source</a>
+              </span>
+              <a id="Narvalo_Linq_Qperators_CollectAny_" data-uid="Narvalo.Linq.Qperators.CollectAny*"></a>
+              <h4 id="Narvalo_Linq_Qperators_CollectAny__1_System_Collections_Generic_IEnumerable___0__" data-uid="Narvalo.Linq.Qperators.CollectAny``1(System.Collections.Generic.IEnumerable{``0})">CollectAny&lt;TSource&gt;(IEnumerable&lt;TSource&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static IEnumerable&lt;TSource&gt; CollectAny&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source)where TSource : class</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td><span class="parametername">source</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Linq_Qperators_CollectAny__1_System_Collections_Generic_IEnumerable_System_Nullable___0___.md&amp;value=---%0Auid%3A%20Narvalo.Linq.Qperators.CollectAny%60%601(System.Collections.Generic.IEnumerable%7BSystem.Nullable%7B%60%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Linq/CollectAny.cs/#L19">View Source</a>
+              </span>
+              <a id="Narvalo_Linq_Qperators_CollectAny_" data-uid="Narvalo.Linq.Qperators.CollectAny*"></a>
+              <h4 id="Narvalo_Linq_Qperators_CollectAny__1_System_Collections_Generic_IEnumerable_System_Nullable___0___" data-uid="Narvalo.Linq.Qperators.CollectAny``1(System.Collections.Generic.IEnumerable{System.Nullable{``0}})">CollectAny&lt;TSource&gt;(IEnumerable&lt;Nullable&lt;TSource&gt;&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static IEnumerable&lt;TSource&gt; CollectAny&lt;TSource&gt;(this IEnumerable&lt;TSource? &gt; source)where TSource : struct</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.Nullable</span>&lt;TSource&gt;&gt;</td>
+                    <td><span class="parametername">source</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Linq_Qperators_ElementAtOrNone__1_System_Collections_Generic_IEnumerable___0__System_Int32_.md&amp;value=---%0Auid%3A%20Narvalo.Linq.Qperators.ElementAtOrNone%60%601(System.Collections.Generic.IEnumerable%7B%60%600%7D%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Linq/ElementAtOrNone.cs/#L19">View Source</a>
+              </span>
+              <a id="Narvalo_Linq_Qperators_ElementAtOrNone_" data-uid="Narvalo.Linq.Qperators.ElementAtOrNone*"></a>
+              <h4 id="Narvalo_Linq_Qperators_ElementAtOrNone__1_System_Collections_Generic_IEnumerable___0__System_Int32_" data-uid="Narvalo.Linq.Qperators.ElementAtOrNone``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">ElementAtOrNone&lt;TSource&gt;(IEnumerable&lt;TSource&gt;, Int32)</h4>
+              <div class="markdown level1 summary"><p>Returns the element at the specified index in a sequence or
+<a class="xref" href="Narvalo.Applicative.Maybe-1.html#Narvalo_Applicative_Maybe_1_None">None</a> if the index is out of range.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Maybe&lt;TSource&gt; ElementAtOrNone&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source, int index)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td><span class="parametername">source</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Int32</span></td>
+                    <td><span class="parametername">index</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TSource&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td><p>The type of the elements of <span class="paramref">source</span>.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Linq_Qperators_FirstOrNone__1_System_Collections_Generic_IEnumerable___0__.md&amp;value=---%0Auid%3A%20Narvalo.Linq.Qperators.FirstOrNone%60%601(System.Collections.Generic.IEnumerable%7B%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Linq/FirstOrNone.cs/#L20">View Source</a>
+              </span>
+              <a id="Narvalo_Linq_Qperators_FirstOrNone_" data-uid="Narvalo.Linq.Qperators.FirstOrNone*"></a>
+              <h4 id="Narvalo_Linq_Qperators_FirstOrNone__1_System_Collections_Generic_IEnumerable___0__" data-uid="Narvalo.Linq.Qperators.FirstOrNone``1(System.Collections.Generic.IEnumerable{``0})">FirstOrNone&lt;TSource&gt;(IEnumerable&lt;TSource&gt;)</h4>
+              <div class="markdown level1 summary"><p>Returns the first element of a sequence, or <a class="xref" href="Narvalo.Applicative.Maybe-1.html#Narvalo_Applicative_Maybe_1_None">None</a>
+if the sequence contains no elements.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Maybe&lt;TSource&gt; FirstOrNone&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td><span class="parametername">source</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TSource&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td><p>The type of the elements of <span class="paramref">source</span>.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Linq_Qperators_FirstOrNone__1_System_Collections_Generic_IEnumerable___0__System_Func___0_System_Boolean__.md&amp;value=---%0Auid%3A%20Narvalo.Linq.Qperators.FirstOrNone%60%601(System.Collections.Generic.IEnumerable%7B%60%600%7D%2CSystem.Func%7B%60%600%2CSystem.Boolean%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Linq/FirstOrNone.cs/#L44">View Source</a>
+              </span>
+              <a id="Narvalo_Linq_Qperators_FirstOrNone_" data-uid="Narvalo.Linq.Qperators.FirstOrNone*"></a>
+              <h4 id="Narvalo_Linq_Qperators_FirstOrNone__1_System_Collections_Generic_IEnumerable___0__System_Func___0_System_Boolean__" data-uid="Narvalo.Linq.Qperators.FirstOrNone``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">FirstOrNone&lt;TSource&gt;(IEnumerable&lt;TSource&gt;, Func&lt;TSource, Boolean&gt;)</h4>
+              <div class="markdown level1 summary"><p>Returns the first element of a sequence that satisfies the
+<span class="paramref">predicate</span>, or <a class="xref" href="Narvalo.Applicative.Maybe-1.html#Narvalo_Applicative_Maybe_1_None">None</a>
+if no such element is found.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Maybe&lt;TSource&gt; FirstOrNone&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, bool&gt; predicate)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td><span class="parametername">source</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, <span class="xref">System.Boolean</span>&gt;</td>
+                    <td><span class="parametername">predicate</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TSource&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td><p>The type of the elements of <span class="paramref">source</span>.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Linq_Qperators_Flatten__1_System_Collections_Generic_IEnumerable_System_Collections_Generic_IEnumerable___0___.md&amp;value=---%0Auid%3A%20Narvalo.Linq.Qperators.Flatten%60%601(System.Collections.Generic.IEnumerable%7BSystem.Collections.Generic.IEnumerable%7B%60%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Linq/Flatten.cs/#L9">View Source</a>
+              </span>
+              <a id="Narvalo_Linq_Qperators_Flatten_" data-uid="Narvalo.Linq.Qperators.Flatten*"></a>
+              <h4 id="Narvalo_Linq_Qperators_Flatten__1_System_Collections_Generic_IEnumerable_System_Collections_Generic_IEnumerable___0___" data-uid="Narvalo.Linq.Qperators.Flatten``1(System.Collections.Generic.IEnumerable{System.Collections.Generic.IEnumerable{``0}})">Flatten&lt;TSource&gt;(IEnumerable&lt;IEnumerable&lt;TSource&gt;&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static IEnumerable&lt;TSource&gt; Flatten&lt;TSource&gt;(this IEnumerable&lt;IEnumerable&lt;TSource&gt;&gt; source)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;&gt;</td>
+                    <td><span class="parametername">source</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Linq_Qperators_Fold__2_System_Collections_Generic_IEnumerable___0____1_System_Func___1___0___1__.md&amp;value=---%0Auid%3A%20Narvalo.Linq.Qperators.Fold%60%602(System.Collections.Generic.IEnumerable%7B%60%600%7D%2C%60%601%2CSystem.Func%7B%60%601%2C%60%600%2C%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Linq/Fold.cs/#L11">View Source</a>
+              </span>
+              <a id="Narvalo_Linq_Qperators_Fold_" data-uid="Narvalo.Linq.Qperators.Fold*"></a>
+              <h4 id="Narvalo_Linq_Qperators_Fold__2_System_Collections_Generic_IEnumerable___0____1_System_Func___1___0___1__" data-uid="Narvalo.Linq.Qperators.Fold``2(System.Collections.Generic.IEnumerable{``0},``1,System.Func{``1,``0,``1})">Fold&lt;TSource, TAccumulate&gt;(IEnumerable&lt;TSource&gt;, TAccumulate, Func&lt;TAccumulate, TSource, TAccumulate&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static TAccumulate Fold&lt;TSource, TAccumulate&gt;(this IEnumerable&lt;TSource&gt; source, TAccumulate seed, Func&lt;TAccumulate, TSource, TAccumulate&gt; accumulator)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td><span class="parametername">source</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">TAccumulate</span></td>
+                    <td><span class="parametername">seed</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TAccumulate, TSource, TAccumulate&gt;</td>
+                    <td><span class="parametername">accumulator</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">TAccumulate</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TAccumulate</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Linq_Qperators_Fold__2_System_Collections_Generic_IEnumerable___0____1_System_Func___1___0___1__System_Func___1_System_Boolean__.md&amp;value=---%0Auid%3A%20Narvalo.Linq.Qperators.Fold%60%602(System.Collections.Generic.IEnumerable%7B%60%600%7D%2C%60%601%2CSystem.Func%7B%60%601%2C%60%600%2C%60%601%7D%2CSystem.Func%7B%60%601%2CSystem.Boolean%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Linq/Fold.cs/#L32">View Source</a>
+              </span>
+              <a id="Narvalo_Linq_Qperators_Fold_" data-uid="Narvalo.Linq.Qperators.Fold*"></a>
+              <h4 id="Narvalo_Linq_Qperators_Fold__2_System_Collections_Generic_IEnumerable___0____1_System_Func___1___0___1__System_Func___1_System_Boolean__" data-uid="Narvalo.Linq.Qperators.Fold``2(System.Collections.Generic.IEnumerable{``0},``1,System.Func{``1,``0,``1},System.Func{``1,System.Boolean})">Fold&lt;TSource, TAccumulate&gt;(IEnumerable&lt;TSource&gt;, TAccumulate, Func&lt;TAccumulate, TSource, TAccumulate&gt;, Func&lt;TAccumulate, Boolean&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static TAccumulate Fold&lt;TSource, TAccumulate&gt;(this IEnumerable&lt;TSource&gt; source, TAccumulate seed, Func&lt;TAccumulate, TSource, TAccumulate&gt; accumulator, Func&lt;TAccumulate, bool&gt; predicate)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td><span class="parametername">source</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">TAccumulate</span></td>
+                    <td><span class="parametername">seed</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TAccumulate, TSource, TAccumulate&gt;</td>
+                    <td><span class="parametername">accumulator</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TAccumulate, <span class="xref">System.Boolean</span>&gt;</td>
+                    <td><span class="parametername">predicate</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">TAccumulate</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TAccumulate</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Linq_Qperators_IsEmpty__1_System_Collections_Generic_IEnumerable___0__.md&amp;value=---%0Auid%3A%20Narvalo.Linq.Qperators.IsEmpty%60%601(System.Collections.Generic.IEnumerable%7B%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Linq/IsEmpty.cs/#L15">View Source</a>
+              </span>
+              <a id="Narvalo_Linq_Qperators_IsEmpty_" data-uid="Narvalo.Linq.Qperators.IsEmpty*"></a>
+              <h4 id="Narvalo_Linq_Qperators_IsEmpty__1_System_Collections_Generic_IEnumerable___0__" data-uid="Narvalo.Linq.Qperators.IsEmpty``1(System.Collections.Generic.IEnumerable{``0})">IsEmpty&lt;TSource&gt;(IEnumerable&lt;TSource&gt;)</h4>
+              <div class="markdown level1 summary"><p>Returns true if the sequence is empty; otherwise false.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static bool IsEmpty&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td><span class="parametername">source</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td><p>The type of the elements of <span class="paramref">source</span>.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Linq_Qperators_IsEmpty__1_System_Collections_Generic_IEnumerable___0__System_Func___0_System_Boolean__.md&amp;value=---%0Auid%3A%20Narvalo.Linq.Qperators.IsEmpty%60%601(System.Collections.Generic.IEnumerable%7B%60%600%7D%2CSystem.Func%7B%60%600%2CSystem.Boolean%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Linq/IsEmpty.cs/#L31">View Source</a>
+              </span>
+              <a id="Narvalo_Linq_Qperators_IsEmpty_" data-uid="Narvalo.Linq.Qperators.IsEmpty*"></a>
+              <h4 id="Narvalo_Linq_Qperators_IsEmpty__1_System_Collections_Generic_IEnumerable___0__System_Func___0_System_Boolean__" data-uid="Narvalo.Linq.Qperators.IsEmpty``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">IsEmpty&lt;TSource&gt;(IEnumerable&lt;TSource&gt;, Func&lt;TSource, Boolean&gt;)</h4>
+              <div class="markdown level1 summary"><p>Returns true if no element in the sequence satisfies the predicate;
+otherwise false.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static bool IsEmpty&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, bool&gt; predicate)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td><span class="parametername">source</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, <span class="xref">System.Boolean</span>&gt;</td>
+                    <td><span class="parametername">predicate</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td><p>The type of the elements of <span class="paramref">source</span>.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Linq_Qperators_LastOrNone__1_System_Collections_Generic_IEnumerable___0__.md&amp;value=---%0Auid%3A%20Narvalo.Linq.Qperators.LastOrNone%60%601(System.Collections.Generic.IEnumerable%7B%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Linq/LastOrNone.cs/#L19">View Source</a>
+              </span>
+              <a id="Narvalo_Linq_Qperators_LastOrNone_" data-uid="Narvalo.Linq.Qperators.LastOrNone*"></a>
+              <h4 id="Narvalo_Linq_Qperators_LastOrNone__1_System_Collections_Generic_IEnumerable___0__" data-uid="Narvalo.Linq.Qperators.LastOrNone``1(System.Collections.Generic.IEnumerable{``0})">LastOrNone&lt;TSource&gt;(IEnumerable&lt;TSource&gt;)</h4>
+              <div class="markdown level1 summary"><p>Returns the last element of a sequence, or <a class="xref" href="Narvalo.Applicative.Maybe-1.html#Narvalo_Applicative_Maybe_1_None">None</a>
+if the sequence contains no elements.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Maybe&lt;TSource&gt; LastOrNone&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td><span class="parametername">source</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TSource&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td><p>The type of the elements of <span class="paramref">source</span>.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Linq_Qperators_LastOrNone__1_System_Collections_Generic_IEnumerable___0__System_Func___0_System_Boolean__.md&amp;value=---%0Auid%3A%20Narvalo.Linq.Qperators.LastOrNone%60%601(System.Collections.Generic.IEnumerable%7B%60%600%7D%2CSystem.Func%7B%60%600%2CSystem.Boolean%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Linq/LastOrNone.cs/#L52">View Source</a>
+              </span>
+              <a id="Narvalo_Linq_Qperators_LastOrNone_" data-uid="Narvalo.Linq.Qperators.LastOrNone*"></a>
+              <h4 id="Narvalo_Linq_Qperators_LastOrNone__1_System_Collections_Generic_IEnumerable___0__System_Func___0_System_Boolean__" data-uid="Narvalo.Linq.Qperators.LastOrNone``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">LastOrNone&lt;TSource&gt;(IEnumerable&lt;TSource&gt;, Func&lt;TSource, Boolean&gt;)</h4>
+              <div class="markdown level1 summary"><p>Returns the last element of a sequence that satisfies the
+<span class="paramref">predicate</span>, or <a class="xref" href="Narvalo.Applicative.Maybe-1.html#Narvalo_Applicative_Maybe_1_None">None</a>
+if no such element is found.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Maybe&lt;TSource&gt; LastOrNone&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, bool&gt; predicate)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td><span class="parametername">source</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, <span class="xref">System.Boolean</span>&gt;</td>
+                    <td><span class="parametername">predicate</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TSource&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td><p>The type of the elements of <span class="paramref">source</span>.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Linq_Qperators_Prepend__1_System_Collections_Generic_IEnumerable___0____0_.md&amp;value=---%0Auid%3A%20Narvalo.Linq.Qperators.Prepend%60%601(System.Collections.Generic.IEnumerable%7B%60%600%7D%2C%60%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Linq/AppendPrepend.cs/#L28">View Source</a>
+              </span>
+              <a id="Narvalo_Linq_Qperators_Prepend_" data-uid="Narvalo.Linq.Qperators.Prepend*"></a>
+              <h4 id="Narvalo_Linq_Qperators_Prepend__1_System_Collections_Generic_IEnumerable___0____0_" data-uid="Narvalo.Linq.Qperators.Prepend``1(System.Collections.Generic.IEnumerable{``0},``0)">Prepend&lt;TSource&gt;(IEnumerable&lt;TSource&gt;, TSource)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static IEnumerable&lt;TSource&gt; Prepend&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source, TSource element)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td><span class="parametername">source</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">TSource</span></td>
+                    <td><span class="parametername">element</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Linq_Qperators_Reduce__1_System_Collections_Generic_IEnumerable___0__System_Func___0___0___0__.md&amp;value=---%0Auid%3A%20Narvalo.Linq.Qperators.Reduce%60%601(System.Collections.Generic.IEnumerable%7B%60%600%7D%2CSystem.Func%7B%60%600%2C%60%600%2C%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Linq/Reduce.cs/#L13">View Source</a>
+              </span>
+              <a id="Narvalo_Linq_Qperators_Reduce_" data-uid="Narvalo.Linq.Qperators.Reduce*"></a>
+              <h4 id="Narvalo_Linq_Qperators_Reduce__1_System_Collections_Generic_IEnumerable___0__System_Func___0___0___0__" data-uid="Narvalo.Linq.Qperators.Reduce``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``0,``0})">Reduce&lt;TSource&gt;(IEnumerable&lt;TSource&gt;, Func&lt;TSource, TSource, TSource&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static TSource Reduce&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, TSource, TSource&gt; accumulator)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td><span class="parametername">source</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, TSource, TSource&gt;</td>
+                    <td><span class="parametername">accumulator</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">TSource</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Linq_Qperators_Reduce__1_System_Collections_Generic_IEnumerable___0__System_Func___0___0___0__System_Func___0_System_Boolean__.md&amp;value=---%0Auid%3A%20Narvalo.Linq.Qperators.Reduce%60%601(System.Collections.Generic.IEnumerable%7B%60%600%7D%2CSystem.Func%7B%60%600%2C%60%600%2C%60%600%7D%2CSystem.Func%7B%60%600%2CSystem.Boolean%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Linq/Reduce.cs/#L38">View Source</a>
+              </span>
+              <a id="Narvalo_Linq_Qperators_Reduce_" data-uid="Narvalo.Linq.Qperators.Reduce*"></a>
+              <h4 id="Narvalo_Linq_Qperators_Reduce__1_System_Collections_Generic_IEnumerable___0__System_Func___0___0___0__System_Func___0_System_Boolean__" data-uid="Narvalo.Linq.Qperators.Reduce``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``0,``0},System.Func{``0,System.Boolean})">Reduce&lt;TSource&gt;(IEnumerable&lt;TSource&gt;, Func&lt;TSource, TSource, TSource&gt;, Func&lt;TSource, Boolean&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static TSource Reduce&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, TSource, TSource&gt; accumulator, Func&lt;TSource, bool&gt; predicate)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td><span class="parametername">source</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, TSource, TSource&gt;</td>
+                    <td><span class="parametername">accumulator</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, <span class="xref">System.Boolean</span>&gt;</td>
+                    <td><span class="parametername">predicate</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">TSource</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Linq_Qperators_SelectAny__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__.md&amp;value=---%0Auid%3A%20Narvalo.Linq.Qperators.SelectAny%60%602(System.Collections.Generic.IEnumerable%7B%60%600%7D%2CSystem.Func%7B%60%600%2C%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Linq/SelectAny.cs/#L17">View Source</a>
+              </span>
+              <a id="Narvalo_Linq_Qperators_SelectAny_" data-uid="Narvalo.Linq.Qperators.SelectAny*"></a>
+              <h4 id="Narvalo_Linq_Qperators_SelectAny__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__" data-uid="Narvalo.Linq.Qperators.SelectAny``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})">SelectAny&lt;TSource, TResult&gt;(IEnumerable&lt;TSource&gt;, Func&lt;TSource, TResult&gt;)</h4>
+              <div class="markdown level1 summary"><p>Projects each element of a sequence into a new form while discarding any null.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static IEnumerable&lt;TResult&gt; SelectAny&lt;TSource, TResult&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, TResult&gt; selector)where TResult : class</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td><span class="parametername">source</span></td>
+                    <td><p>A sequence of values to invoke a transform function on.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, TResult&gt;</td>
+                    <td><span class="parametername">selector</span></td>
+                    <td><p>A transform function to apply to each element.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TResult&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td><p>The type of the elements of <span class="paramref">source</span>.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td><p>The type of the value returned by <span class="paramref">selector</span>.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Linq_Qperators_SelectAny__2_System_Collections_Generic_IEnumerable___0__System_Func___0_System_Int32___1__.md&amp;value=---%0Auid%3A%20Narvalo.Linq.Qperators.SelectAny%60%602(System.Collections.Generic.IEnumerable%7B%60%600%7D%2CSystem.Func%7B%60%600%2CSystem.Int32%2C%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Linq/SelectAny.cs/#L47">View Source</a>
+              </span>
+              <a id="Narvalo_Linq_Qperators_SelectAny_" data-uid="Narvalo.Linq.Qperators.SelectAny*"></a>
+              <h4 id="Narvalo_Linq_Qperators_SelectAny__2_System_Collections_Generic_IEnumerable___0__System_Func___0_System_Int32___1__" data-uid="Narvalo.Linq.Qperators.SelectAny``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Int32,``1})">SelectAny&lt;TSource, TResult&gt;(IEnumerable&lt;TSource&gt;, Func&lt;TSource, Int32, TResult&gt;)</h4>
+              <div class="markdown level1 summary"><p>Projects each element of a sequence into a new form while discarding any null.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static IEnumerable&lt;TResult&gt; SelectAny&lt;TSource, TResult&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, int, TResult&gt; selector)where TResult : class</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td><span class="parametername">source</span></td>
+                    <td><p>A sequence of values to invoke a transform function on.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, <span class="xref">System.Int32</span>, TResult&gt;</td>
+                    <td><span class="parametername">selector</span></td>
+                    <td><p>A transform function to apply to each element; the second parameter
+of the function represents the index of the source element.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TResult&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td><p>The type of the elements of <span class="paramref">source</span>.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td><p>The type of the value returned by <span class="paramref">selector</span>.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Linq_Qperators_SelectAny__2_System_Collections_Generic_IEnumerable___0__System_Func___0_System_Int32_System_Nullable___1___.md&amp;value=---%0Auid%3A%20Narvalo.Linq.Qperators.SelectAny%60%602(System.Collections.Generic.IEnumerable%7B%60%600%7D%2CSystem.Func%7B%60%600%2CSystem.Int32%2CSystem.Nullable%7B%60%601%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Linq/SelectAny.cs/#L109">View Source</a>
+              </span>
+              <a id="Narvalo_Linq_Qperators_SelectAny_" data-uid="Narvalo.Linq.Qperators.SelectAny*"></a>
+              <h4 id="Narvalo_Linq_Qperators_SelectAny__2_System_Collections_Generic_IEnumerable___0__System_Func___0_System_Int32_System_Nullable___1___" data-uid="Narvalo.Linq.Qperators.SelectAny``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Int32,System.Nullable{``1}})">SelectAny&lt;TSource, TResult&gt;(IEnumerable&lt;TSource&gt;, Func&lt;TSource, Int32, Nullable&lt;TResult&gt;&gt;)</h4>
+              <div class="markdown level1 summary"><p>Projects each element of a sequence into a new form while discarding any null.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static IEnumerable&lt;TResult&gt; SelectAny&lt;TSource, TResult&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, int, TResult? &gt; selector)where TResult : struct</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td><span class="parametername">source</span></td>
+                    <td><p>A sequence of values to invoke a transform function on.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, <span class="xref">System.Int32</span>, <span class="xref">System.Nullable</span>&lt;TResult&gt;&gt;</td>
+                    <td><span class="parametername">selector</span></td>
+                    <td><p>A transform function to apply to each element; the second parameter
+of the function represents the index of the source element.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TResult&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td><p>The type of the elements of <span class="paramref">source</span>.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td><p>The type of the value returned by <span class="paramref">selector</span>.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Linq_Qperators_SelectAny__2_System_Collections_Generic_IEnumerable___0__System_Func___0_System_Nullable___1___.md&amp;value=---%0Auid%3A%20Narvalo.Linq.Qperators.SelectAny%60%602(System.Collections.Generic.IEnumerable%7B%60%600%7D%2CSystem.Func%7B%60%600%2CSystem.Nullable%7B%60%601%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Linq/SelectAny.cs/#L79">View Source</a>
+              </span>
+              <a id="Narvalo_Linq_Qperators_SelectAny_" data-uid="Narvalo.Linq.Qperators.SelectAny*"></a>
+              <h4 id="Narvalo_Linq_Qperators_SelectAny__2_System_Collections_Generic_IEnumerable___0__System_Func___0_System_Nullable___1___" data-uid="Narvalo.Linq.Qperators.SelectAny``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Nullable{``1}})">SelectAny&lt;TSource, TResult&gt;(IEnumerable&lt;TSource&gt;, Func&lt;TSource, Nullable&lt;TResult&gt;&gt;)</h4>
+              <div class="markdown level1 summary"><p>Projects each element of a sequence into a new form while discarding any null.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static IEnumerable&lt;TResult&gt; SelectAny&lt;TSource, TResult&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, TResult? &gt; selector)where TResult : struct</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td><span class="parametername">source</span></td>
+                    <td><p>A sequence of values to invoke a transform function on.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, <span class="xref">System.Nullable</span>&lt;TResult&gt;&gt;</td>
+                    <td><span class="parametername">selector</span></td>
+                    <td><p>A transform function to apply to each element.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TResult&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td><p>The type of the elements of <span class="paramref">source</span>.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td><p>The type of the value returned by <span class="paramref">selector</span>.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Linq_Qperators_SingleOrNone__1_System_Collections_Generic_IEnumerable___0__.md&amp;value=---%0Auid%3A%20Narvalo.Linq.Qperators.SingleOrNone%60%601(System.Collections.Generic.IEnumerable%7B%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Linq/SingleOrNone.cs/#L22">View Source</a>
+              </span>
+              <a id="Narvalo_Linq_Qperators_SingleOrNone_" data-uid="Narvalo.Linq.Qperators.SingleOrNone*"></a>
+              <h4 id="Narvalo_Linq_Qperators_SingleOrNone__1_System_Collections_Generic_IEnumerable___0__" data-uid="Narvalo.Linq.Qperators.SingleOrNone``1(System.Collections.Generic.IEnumerable{``0})">SingleOrNone&lt;TSource&gt;(IEnumerable&lt;TSource&gt;)</h4>
+              <div class="markdown level1 summary"><p>Returns the only element of a sequence, or <a class="xref" href="Narvalo.Applicative.Maybe-1.html#Narvalo_Applicative_Maybe_1_None">None</a>
+if the sequence is empty or contains more than one element.
+<p>Here we differ in behaviour from the standard query SingleOrDefault which
+throws an exception if there is more than one element in the sequence.</p></p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Maybe&lt;TSource&gt; SingleOrNone&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td><span class="parametername">source</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TSource&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td><p>The type of the elements of <span class="paramref">source</span>.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Linq_Qperators_SingleOrNone__1_System_Collections_Generic_IEnumerable___0__System_Func___0_System_Boolean__.md&amp;value=---%0Auid%3A%20Narvalo.Linq.Qperators.SingleOrNone%60%601(System.Collections.Generic.IEnumerable%7B%60%600%7D%2CSystem.Func%7B%60%600%2CSystem.Boolean%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Linq/SingleOrNone.cs/#L54">View Source</a>
+              </span>
+              <a id="Narvalo_Linq_Qperators_SingleOrNone_" data-uid="Narvalo.Linq.Qperators.SingleOrNone*"></a>
+              <h4 id="Narvalo_Linq_Qperators_SingleOrNone__1_System_Collections_Generic_IEnumerable___0__System_Func___0_System_Boolean__" data-uid="Narvalo.Linq.Qperators.SingleOrNone``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">SingleOrNone&lt;TSource&gt;(IEnumerable&lt;TSource&gt;, Func&lt;TSource, Boolean&gt;)</h4>
+              <div class="markdown level1 summary"><p>Returns the only element of a sequence that satisfies
+a specified predicate, or <a class="xref" href="Narvalo.Applicative.Maybe-1.html#Narvalo_Applicative_Maybe_1_None">None</a>
+if no such element exists or there are more than one of them.
+<p>Here we differ in behaviour from the standard query SingleOrDefaultwhich
+throws an exception if more than one element satisfies the predicate.</p></p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Maybe&lt;TSource&gt; SingleOrNone&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, bool&gt; predicate)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td><span class="parametername">source</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, <span class="xref">System.Boolean</span>&gt;</td>
+                    <td><span class="parametername">predicate</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TSource&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td><p>The type of the elements of <span class="paramref">source</span>.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Linq_Qperators_WhereAny__1_System_Collections_Generic_IEnumerable___0__System_Func___0_System_Int32_System_Nullable_System_Boolean___.md&amp;value=---%0Auid%3A%20Narvalo.Linq.Qperators.WhereAny%60%601(System.Collections.Generic.IEnumerable%7B%60%600%7D%2CSystem.Func%7B%60%600%2CSystem.Int32%2CSystem.Nullable%7BSystem.Boolean%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Linq/WhereAny.cs/#L46">View Source</a>
+              </span>
+              <a id="Narvalo_Linq_Qperators_WhereAny_" data-uid="Narvalo.Linq.Qperators.WhereAny*"></a>
+              <h4 id="Narvalo_Linq_Qperators_WhereAny__1_System_Collections_Generic_IEnumerable___0__System_Func___0_System_Int32_System_Nullable_System_Boolean___" data-uid="Narvalo.Linq.Qperators.WhereAny``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Int32,System.Nullable{System.Boolean}})">WhereAny&lt;TSource&gt;(IEnumerable&lt;TSource&gt;, Func&lt;TSource, Int32, Nullable&lt;Boolean&gt;&gt;)</h4>
+              <div class="markdown level1 summary"><p>Filters a sequence of values based on a predicate while discarding
+any value for which the filter returns null. Each element&#39;s index is
+used in the logic of the predicate function.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static IEnumerable&lt;TSource&gt; WhereAny&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, int, bool ? &gt; predicate)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td><span class="parametername">source</span></td>
+                    <td><p>A sequence to filter.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, <span class="xref">System.Int32</span>, <span class="xref">System.Nullable</span>&lt;<span class="xref">System.Boolean</span>&gt;&gt;</td>
+                    <td><span class="parametername">predicate</span></td>
+                    <td><p>A function to test each element for a condition;
+the second parameter of the function represents the index of the source element.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td><p>The type of the elements of <span class="paramref">source</span>.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Linq_Qperators_WhereAny__1_System_Collections_Generic_IEnumerable___0__System_Func___0_System_Nullable_System_Boolean___.md&amp;value=---%0Auid%3A%20Narvalo.Linq.Qperators.WhereAny%60%601(System.Collections.Generic.IEnumerable%7B%60%600%7D%2CSystem.Func%7B%60%600%2CSystem.Nullable%7BSystem.Boolean%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Linq/WhereAny.cs/#L17">View Source</a>
+              </span>
+              <a id="Narvalo_Linq_Qperators_WhereAny_" data-uid="Narvalo.Linq.Qperators.WhereAny*"></a>
+              <h4 id="Narvalo_Linq_Qperators_WhereAny__1_System_Collections_Generic_IEnumerable___0__System_Func___0_System_Nullable_System_Boolean___" data-uid="Narvalo.Linq.Qperators.WhereAny``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Nullable{System.Boolean}})">WhereAny&lt;TSource&gt;(IEnumerable&lt;TSource&gt;, Func&lt;TSource, Nullable&lt;Boolean&gt;&gt;)</h4>
+              <div class="markdown level1 summary"><p>Filters a sequence of values based on a predicate while discarding
+any value for which the filter returns null.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static IEnumerable&lt;TSource&gt; WhereAny&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, bool ? &gt; predicate)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td><span class="parametername">source</span></td>
+                    <td><p>A sequence to filter.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, <span class="xref">System.Nullable</span>&lt;<span class="xref">System.Boolean</span>&gt;&gt;</td>
+                    <td><span class="parametername">predicate</span></td>
+                    <td><p>A function to test each element for a condition.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td><p>The type of the elements of <span class="paramref">source</span>.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+                        </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Linq_Qperators.md&amp;value=---%0Auid%3A%20Narvalo.Linq.Qperators%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Linq/SelectAny.cs/#L8" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright (c) Narvalo.Org
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

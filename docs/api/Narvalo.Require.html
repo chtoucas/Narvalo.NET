@@ -1,0 +1,761 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class Require
+   | Narvalo .NET libraries </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class Require
+   | Narvalo .NET libraries ">
+    <meta name="generator" content="docfx 2.15.5.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content">
+              
+              
+              <h1 id="Narvalo_Require" data-uid="Narvalo.Require">Class Require
+              </h1>
+              <div class="markdown level0 summary"><p>Provides helper methods to specify preconditions on a method.</p>
+</div>
+              <div class="markdown level0 conceptual"></div>
+              <div class="inheritance">
+                <h5>Inheritance</h5>
+                  <div class="level0"><span class="xref">System.Object</span></div>
+                  <div class="level1"><span class="xref">Require</span></div>
+              </div>
+              <div class="inheritedMembers">
+                <h5>Inherited Members</h5>
+                <div>
+                  <span class="xref">System.Object.Equals(System.Object)</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.GetHashCode()</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.GetType()</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.MemberwiseClone()</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.ToString()</span>
+                </div>
+              </div>
+              <h6><strong>Namespace</strong>:Narvalo</h6>
+              <h6><strong>Assembly</strong>:Narvalo.Core.dll</h6>
+              <h5 id="Narvalo_Require_syntax">Syntax</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static class Require</code></pre>
+              </div>
+              <h5 id="Narvalo_Require_remarks"><strong>Remarks</strong></h5>
+              <div class="markdown level0 remarks"><p>Guards against null values will be recognized by FxCop.</p>
+</div>
+              <h3 id="methods">Methods
+              </h3>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Require_NotNull__1___0_System_String_.md&amp;value=---%0Auid%3A%20Narvalo.Require.NotNull%60%601(%60%600%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Core/Require.cs/#L124">View Source</a>
+              </span>
+              <a id="Narvalo_Require_NotNull_" data-uid="Narvalo.Require.NotNull*"></a>
+              <h4 id="Narvalo_Require_NotNull__1___0_System_String_" data-uid="Narvalo.Require.NotNull``1(``0,System.String)">NotNull&lt;T&gt;(T, String)</h4>
+              <div class="markdown level1 summary"><p>Validates that the specified parameter is not null.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static void NotNull&lt;T&gt;(T value, string parameterName)where T : class</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">T</span></td>
+                    <td><span class="parametername">value</span></td>
+                    <td><p>The parameter to check.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">parameterName</span></td>
+                    <td><p>The name of the parameter.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">T</span></td>
+                    <td><p>The type of <span class="paramref">value</span>.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 id="Narvalo_Require_NotNull__1___0_System_String__remarks">Remarks</h5>
+              <div class="markdown level1 remarks"><p>For a method without a reference constraint on <span class="paramref">value</span>,
+see <a class="xref" href="Narvalo.Require.html#Narvalo_Require_NotNullUnconstrained__1___0_System_String_">NotNullUnconstrained&lt;T&gt;(T, String)</a>.</p>
+</div>
+              <h5 class="exceptions">Exceptions</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.ArgumentNullException</span></td>
+                    <td><p>Thrown if <span class="paramref">value</span> is
+null.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Require_NotNullOrEmpty_System_String_System_String_.md&amp;value=---%0Auid%3A%20Narvalo.Require.NotNullOrEmpty(System.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Core/Require.cs/#L157">View Source</a>
+              </span>
+              <a id="Narvalo_Require_NotNullOrEmpty_" data-uid="Narvalo.Require.NotNullOrEmpty*"></a>
+              <h4 id="Narvalo_Require_NotNullOrEmpty_System_String_System_String_" data-uid="Narvalo.Require.NotNullOrEmpty(System.String,System.String)">NotNullOrEmpty(String, String)</h4>
+              <div class="markdown level1 summary"><p>Validates that the specified parameter is not null or empty.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static void NotNullOrEmpty(string value, string parameterName)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">value</span></td>
+                    <td><p>The parameter to validate.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">parameterName</span></td>
+                    <td><p>The name of the parameter.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="exceptions">Exceptions</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.ArgumentNullException</span></td>
+                    <td><p>Thrown if <span class="paramref">value</span> is
+null.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.ArgumentException</span></td>
+                    <td><p>Thrown if <span class="paramref">value</span> is empty.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Require_NotNullOrWhiteSpace_System_String_System_String_.md&amp;value=---%0Auid%3A%20Narvalo.Require.NotNullOrWhiteSpace(System.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Core/Require.cs/#L177">View Source</a>
+              </span>
+              <a id="Narvalo_Require_NotNullOrWhiteSpace_" data-uid="Narvalo.Require.NotNullOrWhiteSpace*"></a>
+              <h4 id="Narvalo_Require_NotNullOrWhiteSpace_System_String_System_String_" data-uid="Narvalo.Require.NotNullOrWhiteSpace(System.String,System.String)">NotNullOrWhiteSpace(String, String)</h4>
+              <div class="markdown level1 summary"><p>Validates that the specified parameter is not null or empty, and does not
+consist only of white-space characters.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static void NotNullOrWhiteSpace(string value, string parameterName)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">value</span></td>
+                    <td><p>The parameter to validate.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">parameterName</span></td>
+                    <td><p>The name of the parameter.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="exceptions">Exceptions</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.ArgumentNullException</span></td>
+                    <td><p>Thrown if <span class="paramref">value</span> is
+null.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.ArgumentException</span></td>
+                    <td><p>Thrown if <span class="paramref">value</span> is empty,
+or consists only of white-space characters.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Require_NotNullUnconstrained__1___0_System_String_.md&amp;value=---%0Auid%3A%20Narvalo.Require.NotNullUnconstrained%60%601(%60%600%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Core/Require.cs/#L141">View Source</a>
+              </span>
+              <a id="Narvalo_Require_NotNullUnconstrained_" data-uid="Narvalo.Require.NotNullUnconstrained*"></a>
+              <h4 id="Narvalo_Require_NotNullUnconstrained__1___0_System_String_" data-uid="Narvalo.Require.NotNullUnconstrained``1(``0,System.String)">NotNullUnconstrained&lt;T&gt;(T, String)</h4>
+              <div class="markdown level1 summary"><p>Validates that the specified parameter is not null.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static void NotNullUnconstrained&lt;T&gt;(T value, string parameterName)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">T</span></td>
+                    <td><span class="parametername">value</span></td>
+                    <td><p>The parameter to validate.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">parameterName</span></td>
+                    <td><p>The name of the parameter.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">T</span></td>
+                    <td><p>The type of <span class="paramref">value</span>.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="exceptions">Exceptions</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.ArgumentNullException</span></td>
+                    <td><p>Thrown if <span class="paramref">value</span> is
+null.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Require_Range_System_Boolean_System_String_.md&amp;value=---%0Auid%3A%20Narvalo.Require.Range(System.Boolean%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Core/Require.cs/#L89">View Source</a>
+              </span>
+              <a id="Narvalo_Require_Range_" data-uid="Narvalo.Require.Range*"></a>
+              <h4 id="Narvalo_Require_Range_System_Boolean_System_String_" data-uid="Narvalo.Require.Range(System.Boolean,System.String)">Range(Boolean, String)</h4>
+              <div class="markdown level1 summary"><p>Validates a range condition on a parameter.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static void Range(bool rangeCondition, string parameterName)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td><span class="parametername">rangeCondition</span></td>
+                    <td><p>The range condition to evaluate.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">parameterName</span></td>
+                    <td><p>The name of the parameter.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="exceptions">Exceptions</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.ArgumentOutOfRangeException</span></td>
+                    <td><p>Thrown if <span class="paramref">rangeCondition</span>
+is false.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Require_Range_System_Boolean_System_String_System_String_.md&amp;value=---%0Auid%3A%20Narvalo.Require.Range(System.Boolean%2CSystem.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Core/Require.cs/#L106">View Source</a>
+              </span>
+              <a id="Narvalo_Require_Range_" data-uid="Narvalo.Require.Range*"></a>
+              <h4 id="Narvalo_Require_Range_System_Boolean_System_String_System_String_" data-uid="Narvalo.Require.Range(System.Boolean,System.String,System.String)">Range(Boolean, String, String)</h4>
+              <div class="markdown level1 summary"><p>Validates a range condition on a parameter.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static void Range(bool rangeCondition, string parameterName, string message)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td><span class="parametername">rangeCondition</span></td>
+                    <td><p>The range condition to evaluate.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">parameterName</span></td>
+                    <td><p>The name of the parameter.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">message</span></td>
+                    <td><p>A string that describes the error when
+<span class="paramref">rangeCondition</span> is false.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="exceptions">Exceptions</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.ArgumentOutOfRangeException</span></td>
+                    <td><p>Thrown if <span class="paramref">rangeCondition</span>
+is false.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Require_State_System_Boolean_.md&amp;value=---%0Auid%3A%20Narvalo.Require.State(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Core/Require.cs/#L23">View Source</a>
+              </span>
+              <a id="Narvalo_Require_State_" data-uid="Narvalo.Require.State*"></a>
+              <h4 id="Narvalo_Require_State_System_Boolean_" data-uid="Narvalo.Require.State(System.Boolean)">State(Boolean)</h4>
+              <div class="markdown level1 summary"><p>Validates a condition on the object&#39;s current state.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static void State(bool testCondition)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td><span class="parametername">testCondition</span></td>
+                    <td><p>The conditional expression to evaluate.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="exceptions">Exceptions</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.InvalidOperationException</span></td>
+                    <td><p>Thrown if <span class="paramref">testCondition</span>
+is false.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Require_State_System_Boolean_System_String_.md&amp;value=---%0Auid%3A%20Narvalo.Require.State(System.Boolean%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Core/Require.cs/#L38">View Source</a>
+              </span>
+              <a id="Narvalo_Require_State_" data-uid="Narvalo.Require.State*"></a>
+              <h4 id="Narvalo_Require_State_System_Boolean_System_String_" data-uid="Narvalo.Require.State(System.Boolean,System.String)">State(Boolean, String)</h4>
+              <div class="markdown level1 summary"><p>Validates a condition on the object&#39;s current state.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static void State(bool testCondition, string message)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td><span class="parametername">testCondition</span></td>
+                    <td><p>The conditional expression to evaluate.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">message</span></td>
+                    <td><p>The name of the parameter.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="exceptions">Exceptions</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.InvalidOperationException</span></td>
+                    <td><p>Thrown if <span class="paramref">testCondition</span>
+is false.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Require_True_System_Boolean_System_String_.md&amp;value=---%0Auid%3A%20Narvalo.Require.True(System.Boolean%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Core/Require.cs/#L57">View Source</a>
+              </span>
+              <a id="Narvalo_Require_True_" data-uid="Narvalo.Require.True*"></a>
+              <h4 id="Narvalo_Require_True_System_Boolean_System_String_" data-uid="Narvalo.Require.True(System.Boolean,System.String)">True(Boolean, String)</h4>
+              <div class="markdown level1 summary"><p>Validates a condition on a parameter.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static void True(bool testCondition, string parameterName)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td><span class="parametername">testCondition</span></td>
+                    <td><p>The conditional expression to evaluate.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">parameterName</span></td>
+                    <td><p>The name of the parameter.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="exceptions">Exceptions</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.ArgumentException</span></td>
+                    <td><p>Thrown if <span class="paramref">testCondition</span>
+is false.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Require_True_System_Boolean_System_String_System_String_.md&amp;value=---%0Auid%3A%20Narvalo.Require.True(System.Boolean%2CSystem.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Core/Require.cs/#L74">View Source</a>
+              </span>
+              <a id="Narvalo_Require_True_" data-uid="Narvalo.Require.True*"></a>
+              <h4 id="Narvalo_Require_True_System_Boolean_System_String_System_String_" data-uid="Narvalo.Require.True(System.Boolean,System.String,System.String)">True(Boolean, String, String)</h4>
+              <div class="markdown level1 summary"><p>Validates a condition on a parameter.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static void True(bool testCondition, string parameterName, string message)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td><span class="parametername">testCondition</span></td>
+                    <td><p>The conditional expression to evaluate.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">parameterName</span></td>
+                    <td><p>The name of the parameter.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><span class="parametername">message</span></td>
+                    <td><p>A string that describes the error when
+<span class="paramref">testCondition</span> is false.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="exceptions">Exceptions</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.ArgumentException</span></td>
+                    <td><p>Thrown if <span class="paramref">testCondition</span>
+is false.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+                        </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Require.md&amp;value=---%0Auid%3A%20Narvalo.Require%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Core/Require.cs/#L48" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright (c) Narvalo.Org
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,636 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class OutcomeQ
+   | Narvalo .NET libraries </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class OutcomeQ
+   | Narvalo .NET libraries ">
+    <meta name="generator" content="docfx 2.15.5.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content">
+              
+              
+              <h1 id="Narvalo_Linq_Applicative_OutcomeQ" data-uid="Narvalo.Linq.Applicative.OutcomeQ">Class OutcomeQ
+              </h1>
+              <div class="markdown level0 summary"><p>Provides a set of extension methods for querying objects that implement <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span>.</p>
+</div>
+              <div class="markdown level0 conceptual"></div>
+              <div class="inheritance">
+                <h5>Inheritance</h5>
+                  <div class="level0"><span class="xref">System.Object</span></div>
+                  <div class="level1"><span class="xref">OutcomeQ</span></div>
+              </div>
+              <div class="inheritedMembers">
+                <h5>Inherited Members</h5>
+                <div>
+                  <span class="xref">System.Object.Equals(System.Object)</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.GetHashCode()</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.GetType()</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.MemberwiseClone()</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.ToString()</span>
+                </div>
+              </div>
+              <h6><strong>Namespace</strong>:Narvalo.Linq.Applicative</h6>
+              <h6><strong>Assembly</strong>:Narvalo.Fx.dll</h6>
+              <h5 id="Narvalo_Linq_Applicative_OutcomeQ_syntax">Syntax</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static class OutcomeQ</code></pre>
+              </div>
+              <h5 id="Narvalo_Linq_Applicative_OutcomeQ_remarks"><strong>Remarks</strong></h5>
+              <div class="markdown level0 remarks"><p>New LINQ operators:</p>
+<ul>
+<li>Projecting: SelectAny (deferred)</li>
+<li>Filtering: CollectAny (deferred), WhereAny (deferred)</li>
+<li>Aggregation: Fold, Reduce</li>
+</ul>
+</div>
+              <h3 id="methods">Methods
+              </h3>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Linq_Applicative_OutcomeQ_CollectAny__1_System_Collections_Generic_IEnumerable_Narvalo_Applicative_Outcome___0___.md&amp;value=---%0Auid%3A%20Narvalo.Linq.Applicative.OutcomeQ.CollectAny%60%601(System.Collections.Generic.IEnumerable%7BNarvalo.Applicative.Outcome%7B%60%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Outcome.g.cs/#L467">View Source</a>
+              </span>
+              <a id="Narvalo_Linq_Applicative_OutcomeQ_CollectAny_" data-uid="Narvalo.Linq.Applicative.OutcomeQ.CollectAny*"></a>
+              <h4 id="Narvalo_Linq_Applicative_OutcomeQ_CollectAny__1_System_Collections_Generic_IEnumerable_Narvalo_Applicative_Outcome___0___" data-uid="Narvalo.Linq.Applicative.OutcomeQ.CollectAny``1(System.Collections.Generic.IEnumerable{Narvalo.Applicative.Outcome{``0}})">CollectAny&lt;TSource&gt;(IEnumerable&lt;Outcome&lt;TSource&gt;&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static IEnumerable&lt;TSource&gt; CollectAny&lt;TSource&gt;(this IEnumerable&lt;Outcome&lt;TSource&gt;&gt; source)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Narvalo.Applicative.Outcome-1.html">Outcome</a>&lt;TSource&gt;&gt;</td>
+                    <td><span class="parametername">source</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Linq_Applicative_OutcomeQ_Fold__2_System_Collections_Generic_IEnumerable___0____1_System_Func___1___0_Narvalo_Applicative_Outcome___1___.md&amp;value=---%0Auid%3A%20Narvalo.Linq.Applicative.OutcomeQ.Fold%60%602(System.Collections.Generic.IEnumerable%7B%60%600%7D%2C%60%601%2CSystem.Func%7B%60%601%2C%60%600%2CNarvalo.Applicative.Outcome%7B%60%601%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Outcome.g.cs/#L492">View Source</a>
+              </span>
+              <a id="Narvalo_Linq_Applicative_OutcomeQ_Fold_" data-uid="Narvalo.Linq.Applicative.OutcomeQ.Fold*"></a>
+              <h4 id="Narvalo_Linq_Applicative_OutcomeQ_Fold__2_System_Collections_Generic_IEnumerable___0____1_System_Func___1___0_Narvalo_Applicative_Outcome___1___" data-uid="Narvalo.Linq.Applicative.OutcomeQ.Fold``2(System.Collections.Generic.IEnumerable{``0},``1,System.Func{``1,``0,Narvalo.Applicative.Outcome{``1}})">Fold&lt;TSource, TAccumulate&gt;(IEnumerable&lt;TSource&gt;, TAccumulate, Func&lt;TAccumulate, TSource, Outcome&lt;TAccumulate&gt;&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Outcome&lt;TAccumulate&gt; Fold&lt;TSource, TAccumulate&gt;(this IEnumerable&lt;TSource&gt; source, TAccumulate seed, Func&lt;TAccumulate, TSource, Outcome&lt;TAccumulate&gt;&gt; accumulator)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td><span class="parametername">source</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">TAccumulate</span></td>
+                    <td><span class="parametername">seed</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TAccumulate, TSource, <a class="xref" href="Narvalo.Applicative.Outcome-1.html">Outcome</a>&lt;TAccumulate&gt;&gt;</td>
+                    <td><span class="parametername">accumulator</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Outcome-1.html">Outcome</a>&lt;TAccumulate&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TAccumulate</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Linq_Applicative_OutcomeQ_Fold__2_System_Collections_Generic_IEnumerable___0____1_System_Func___1___0_Narvalo_Applicative_Outcome___1___System_Func_Narvalo_Applicative_Outcome___1__System_Boolean__.md&amp;value=---%0Auid%3A%20Narvalo.Linq.Applicative.OutcomeQ.Fold%60%602(System.Collections.Generic.IEnumerable%7B%60%600%7D%2C%60%601%2CSystem.Func%7B%60%601%2C%60%600%2CNarvalo.Applicative.Outcome%7B%60%601%7D%7D%2CSystem.Func%7BNarvalo.Applicative.Outcome%7B%60%601%7D%2CSystem.Boolean%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Outcome.g.cs/#L502">View Source</a>
+              </span>
+              <a id="Narvalo_Linq_Applicative_OutcomeQ_Fold_" data-uid="Narvalo.Linq.Applicative.OutcomeQ.Fold*"></a>
+              <h4 id="Narvalo_Linq_Applicative_OutcomeQ_Fold__2_System_Collections_Generic_IEnumerable___0____1_System_Func___1___0_Narvalo_Applicative_Outcome___1___System_Func_Narvalo_Applicative_Outcome___1__System_Boolean__" data-uid="Narvalo.Linq.Applicative.OutcomeQ.Fold``2(System.Collections.Generic.IEnumerable{``0},``1,System.Func{``1,``0,Narvalo.Applicative.Outcome{``1}},System.Func{Narvalo.Applicative.Outcome{``1},System.Boolean})">Fold&lt;TSource, TAccumulate&gt;(IEnumerable&lt;TSource&gt;, TAccumulate, Func&lt;TAccumulate, TSource, Outcome&lt;TAccumulate&gt;&gt;, Func&lt;Outcome&lt;TAccumulate&gt;, Boolean&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Outcome&lt;TAccumulate&gt; Fold&lt;TSource, TAccumulate&gt;(this IEnumerable&lt;TSource&gt; source, TAccumulate seed, Func&lt;TAccumulate, TSource, Outcome&lt;TAccumulate&gt;&gt; accumulator, Func&lt;Outcome&lt;TAccumulate&gt;, bool&gt; predicate)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td><span class="parametername">source</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">TAccumulate</span></td>
+                    <td><span class="parametername">seed</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TAccumulate, TSource, <a class="xref" href="Narvalo.Applicative.Outcome-1.html">Outcome</a>&lt;TAccumulate&gt;&gt;</td>
+                    <td><span class="parametername">accumulator</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;<a class="xref" href="Narvalo.Applicative.Outcome-1.html">Outcome</a>&lt;TAccumulate&gt;, <span class="xref">System.Boolean</span>&gt;</td>
+                    <td><span class="parametername">predicate</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Outcome-1.html">Outcome</a>&lt;TAccumulate&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TAccumulate</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Linq_Applicative_OutcomeQ_Reduce__1_System_Collections_Generic_IEnumerable___0__System_Func___0___0_Narvalo_Applicative_Outcome___0___.md&amp;value=---%0Auid%3A%20Narvalo.Linq.Applicative.OutcomeQ.Reduce%60%601(System.Collections.Generic.IEnumerable%7B%60%600%7D%2CSystem.Func%7B%60%600%2C%60%600%2CNarvalo.Applicative.Outcome%7B%60%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Outcome.g.cs/#L514">View Source</a>
+              </span>
+              <a id="Narvalo_Linq_Applicative_OutcomeQ_Reduce_" data-uid="Narvalo.Linq.Applicative.OutcomeQ.Reduce*"></a>
+              <h4 id="Narvalo_Linq_Applicative_OutcomeQ_Reduce__1_System_Collections_Generic_IEnumerable___0__System_Func___0___0_Narvalo_Applicative_Outcome___0___" data-uid="Narvalo.Linq.Applicative.OutcomeQ.Reduce``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``0,Narvalo.Applicative.Outcome{``0}})">Reduce&lt;TSource&gt;(IEnumerable&lt;TSource&gt;, Func&lt;TSource, TSource, Outcome&lt;TSource&gt;&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Outcome&lt;TSource&gt; Reduce&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, TSource, Outcome&lt;TSource&gt;&gt; accumulator)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td><span class="parametername">source</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, TSource, <a class="xref" href="Narvalo.Applicative.Outcome-1.html">Outcome</a>&lt;TSource&gt;&gt;</td>
+                    <td><span class="parametername">accumulator</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Outcome-1.html">Outcome</a>&lt;TSource&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Linq_Applicative_OutcomeQ_Reduce__1_System_Collections_Generic_IEnumerable___0__System_Func___0___0_Narvalo_Applicative_Outcome___0___System_Func_Narvalo_Applicative_Outcome___0__System_Boolean__.md&amp;value=---%0Auid%3A%20Narvalo.Linq.Applicative.OutcomeQ.Reduce%60%601(System.Collections.Generic.IEnumerable%7B%60%600%7D%2CSystem.Func%7B%60%600%2C%60%600%2CNarvalo.Applicative.Outcome%7B%60%600%7D%7D%2CSystem.Func%7BNarvalo.Applicative.Outcome%7B%60%600%7D%2CSystem.Boolean%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Outcome.g.cs/#L523">View Source</a>
+              </span>
+              <a id="Narvalo_Linq_Applicative_OutcomeQ_Reduce_" data-uid="Narvalo.Linq.Applicative.OutcomeQ.Reduce*"></a>
+              <h4 id="Narvalo_Linq_Applicative_OutcomeQ_Reduce__1_System_Collections_Generic_IEnumerable___0__System_Func___0___0_Narvalo_Applicative_Outcome___0___System_Func_Narvalo_Applicative_Outcome___0__System_Boolean__" data-uid="Narvalo.Linq.Applicative.OutcomeQ.Reduce``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``0,Narvalo.Applicative.Outcome{``0}},System.Func{Narvalo.Applicative.Outcome{``0},System.Boolean})">Reduce&lt;TSource&gt;(IEnumerable&lt;TSource&gt;, Func&lt;TSource, TSource, Outcome&lt;TSource&gt;&gt;, Func&lt;Outcome&lt;TSource&gt;, Boolean&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Outcome&lt;TSource&gt; Reduce&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, TSource, Outcome&lt;TSource&gt;&gt; accumulator, Func&lt;Outcome&lt;TSource&gt;, bool&gt; predicate)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td><span class="parametername">source</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, TSource, <a class="xref" href="Narvalo.Applicative.Outcome-1.html">Outcome</a>&lt;TSource&gt;&gt;</td>
+                    <td><span class="parametername">accumulator</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;<a class="xref" href="Narvalo.Applicative.Outcome-1.html">Outcome</a>&lt;TSource&gt;, <span class="xref">System.Boolean</span>&gt;</td>
+                    <td><span class="parametername">predicate</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Outcome-1.html">Outcome</a>&lt;TSource&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Linq_Applicative_OutcomeQ_SelectAny__2_System_Collections_Generic_IEnumerable___0__System_Func___0_Narvalo_Applicative_Outcome___1___.md&amp;value=---%0Auid%3A%20Narvalo.Linq.Applicative.OutcomeQ.SelectAny%60%602(System.Collections.Generic.IEnumerable%7B%60%600%7D%2CSystem.Func%7B%60%600%2CNarvalo.Applicative.Outcome%7B%60%601%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Outcome.g.cs/#L474">View Source</a>
+              </span>
+              <a id="Narvalo_Linq_Applicative_OutcomeQ_SelectAny_" data-uid="Narvalo.Linq.Applicative.OutcomeQ.SelectAny*"></a>
+              <h4 id="Narvalo_Linq_Applicative_OutcomeQ_SelectAny__2_System_Collections_Generic_IEnumerable___0__System_Func___0_Narvalo_Applicative_Outcome___1___" data-uid="Narvalo.Linq.Applicative.OutcomeQ.SelectAny``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,Narvalo.Applicative.Outcome{``1}})">SelectAny&lt;TSource, TResult&gt;(IEnumerable&lt;TSource&gt;, Func&lt;TSource, Outcome&lt;TResult&gt;&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static IEnumerable&lt;TResult&gt; SelectAny&lt;TSource, TResult&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, Outcome&lt;TResult&gt;&gt; selector)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td><span class="parametername">source</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, <a class="xref" href="Narvalo.Applicative.Outcome-1.html">Outcome</a>&lt;TResult&gt;&gt;</td>
+                    <td><span class="parametername">selector</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TResult&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Linq_Applicative_OutcomeQ_WhereAny__1_System_Collections_Generic_IEnumerable___0__System_Func___0_Narvalo_Applicative_Outcome_System_Boolean___.md&amp;value=---%0Auid%3A%20Narvalo.Linq.Applicative.OutcomeQ.WhereAny%60%601(System.Collections.Generic.IEnumerable%7B%60%600%7D%2CSystem.Func%7B%60%600%2CNarvalo.Applicative.Outcome%7BSystem.Boolean%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Outcome.g.cs/#L483">View Source</a>
+              </span>
+              <a id="Narvalo_Linq_Applicative_OutcomeQ_WhereAny_" data-uid="Narvalo.Linq.Applicative.OutcomeQ.WhereAny*"></a>
+              <h4 id="Narvalo_Linq_Applicative_OutcomeQ_WhereAny__1_System_Collections_Generic_IEnumerable___0__System_Func___0_Narvalo_Applicative_Outcome_System_Boolean___" data-uid="Narvalo.Linq.Applicative.OutcomeQ.WhereAny``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,Narvalo.Applicative.Outcome{System.Boolean}})">WhereAny&lt;TSource&gt;(IEnumerable&lt;TSource&gt;, Func&lt;TSource, Outcome&lt;Boolean&gt;&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static IEnumerable&lt;TSource&gt; WhereAny&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, Outcome&lt;bool&gt;&gt; predicate)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td><span class="parametername">source</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, <a class="xref" href="Narvalo.Applicative.Outcome-1.html">Outcome</a>&lt;<span class="xref">System.Boolean</span>&gt;&gt;</td>
+                    <td><span class="parametername">predicate</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+                        </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Linq_Applicative_OutcomeQ.md&amp;value=---%0Auid%3A%20Narvalo.Linq.Applicative.OutcomeQ%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Outcome.g.cs/#L465" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright (c) Narvalo.Org
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

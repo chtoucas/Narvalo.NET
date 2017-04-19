@@ -1,0 +1,340 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class ControlBuilderExtensions
+   | Narvalo .NET libraries </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class ControlBuilderExtensions
+   | Narvalo .NET libraries ">
+    <meta name="generator" content="docfx 2.15.5.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content">
+              
+              
+              <h1 id="Narvalo_Web_UI_ControlBuilderExtensions" data-uid="Narvalo.Web.UI.ControlBuilderExtensions">Class ControlBuilderExtensions
+              </h1>
+              <div class="markdown level0 summary"><p>Provides extension methods for <span class="xref">System.Web.UI.ControlBuilder</span>.</p>
+</div>
+              <div class="markdown level0 conceptual"><p>Ce code est inspiré de la classe <code>Omari.Web.UI.ControlBuilderExtensions</code>.
+Par rapport au code d&#39;origine, on a effectué les changements suivants :</p>
+<ul>
+<li>utilisation de méthodes d&#39;extension ;</li>
+<li>certaines propriétés étant maintenant publiques, on a supprimé les méthodes
+permettant d&#39;accéder aux propriétés suivantes :<ul>
+<li><code>ComplexPropertyEntries</code> ;</li>
+<li><code>SubBuilders</code> ;</li>
+<li><code>TemplatePropertyEntries</code>.</li>
+</ul>
+</li>
+<li>on préfère conserver la signature d&#39;origine, ie <code>ICollection</code> plutôt que <code>ArrayList</code> ;</li>
+<li>désactivation des méthodes dont l&#39;utilité ne saute pas aux yeux (en ce qui nous concerne) :<ul>
+<li><code>GetParentBuilder()</code> qui donne accès à la propriété interne <code>ParentBuilder</code> ;</li>
+<li><code>GetSimplePropertyEntries()</code> qui donne accès à la propriété interne <code>SimplePropertyEntries</code> ;</li>
+<li><code>GetRootBuilder()</code>.</li>
+</ul>
+</li>
+</ul>
+<p><strong>WARNING:</strong> Cette classe dépend de l&#39;API non publique de <code>ControlBuilder</code>.</p>
+</div>
+              <div class="inheritance">
+                <h5>Inheritance</h5>
+                  <div class="level0"><span class="xref">System.Object</span></div>
+                  <div class="level1"><span class="xref">ControlBuilderExtensions</span></div>
+              </div>
+              <div class="inheritedMembers">
+                <h5>Inherited Members</h5>
+                <div>
+                  <span class="xref">System.Object.ToString()</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.Equals(System.Object)</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.GetHashCode()</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.GetType()</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.MemberwiseClone()</span>
+                </div>
+              </div>
+              <h6><strong>Namespace</strong>:Narvalo.Web.UI</h6>
+              <h6><strong>Assembly</strong>:Narvalo.Web.dll</h6>
+              <h5 id="Narvalo_Web_UI_ControlBuilderExtensions_syntax">Syntax</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static class ControlBuilderExtensions</code></pre>
+              </div>
+              <h3 id="methods">Methods
+              </h3>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Web_UI_ControlBuilderExtensions_GetDefaultPropertyBuilder_System_Web_UI_ControlBuilder_.md&amp;value=---%0Auid%3A%20Narvalo.Web.UI.ControlBuilderExtensions.GetDefaultPropertyBuilder(System.Web.UI.ControlBuilder)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Web/UI/ControlBuilder$.cs/#L18">View Source</a>
+              </span>
+              <a id="Narvalo_Web_UI_ControlBuilderExtensions_GetDefaultPropertyBuilder_" data-uid="Narvalo.Web.UI.ControlBuilderExtensions.GetDefaultPropertyBuilder*"></a>
+              <h4 id="Narvalo_Web_UI_ControlBuilderExtensions_GetDefaultPropertyBuilder_System_Web_UI_ControlBuilder_" data-uid="Narvalo.Web.UI.ControlBuilderExtensions.GetDefaultPropertyBuilder(System.Web.UI.ControlBuilder)">GetDefaultPropertyBuilder(ControlBuilder)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static ControlBuilder GetDefaultPropertyBuilder(this ControlBuilder this)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Web.UI.ControlBuilder</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Web.UI.ControlBuilder</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Web_UI_ControlBuilderExtensions_GetParentBuilder_System_Web_UI_ControlBuilder_.md&amp;value=---%0Auid%3A%20Narvalo.Web.UI.ControlBuilderExtensions.GetParentBuilder(System.Web.UI.ControlBuilder)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Web/UI/ControlBuilder$.cs/#L34">View Source</a>
+              </span>
+              <a id="Narvalo_Web_UI_ControlBuilderExtensions_GetParentBuilder_" data-uid="Narvalo.Web.UI.ControlBuilderExtensions.GetParentBuilder*"></a>
+              <h4 id="Narvalo_Web_UI_ControlBuilderExtensions_GetParentBuilder_System_Web_UI_ControlBuilder_" data-uid="Narvalo.Web.UI.ControlBuilderExtensions.GetParentBuilder(System.Web.UI.ControlBuilder)">GetParentBuilder(ControlBuilder)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static ControlBuilder GetParentBuilder(this ControlBuilder this)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Web.UI.ControlBuilder</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Web.UI.ControlBuilder</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Web_UI_ControlBuilderExtensions_GetRootBuilder_System_Web_UI_ControlBuilder_.md&amp;value=---%0Auid%3A%20Narvalo.Web.UI.ControlBuilderExtensions.GetRootBuilder(System.Web.UI.ControlBuilder)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Web/UI/ControlBuilder$.cs/#L44">View Source</a>
+              </span>
+              <a id="Narvalo_Web_UI_ControlBuilderExtensions_GetRootBuilder_" data-uid="Narvalo.Web.UI.ControlBuilderExtensions.GetRootBuilder*"></a>
+              <h4 id="Narvalo_Web_UI_ControlBuilderExtensions_GetRootBuilder_System_Web_UI_ControlBuilder_" data-uid="Narvalo.Web.UI.ControlBuilderExtensions.GetRootBuilder(System.Web.UI.ControlBuilder)">GetRootBuilder(ControlBuilder)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static ControlBuilder GetRootBuilder(this ControlBuilder this)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Web.UI.ControlBuilder</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Web.UI.ControlBuilder</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Web_UI_ControlBuilderExtensions_GetSimplePropertyEntries_System_Web_UI_ControlBuilder_.md&amp;value=---%0Auid%3A%20Narvalo.Web.UI.ControlBuilderExtensions.GetSimplePropertyEntries(System.Web.UI.ControlBuilder)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Web/UI/ControlBuilder$.cs/#L64">View Source</a>
+              </span>
+              <a id="Narvalo_Web_UI_ControlBuilderExtensions_GetSimplePropertyEntries_" data-uid="Narvalo.Web.UI.ControlBuilderExtensions.GetSimplePropertyEntries*"></a>
+              <h4 id="Narvalo_Web_UI_ControlBuilderExtensions_GetSimplePropertyEntries_System_Web_UI_ControlBuilder_" data-uid="Narvalo.Web.UI.ControlBuilderExtensions.GetSimplePropertyEntries(System.Web.UI.ControlBuilder)">GetSimplePropertyEntries(ControlBuilder)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static ICollection GetSimplePropertyEntries(this ControlBuilder this)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Web.UI.ControlBuilder</span></td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.ICollection</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+                        </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/api/api/Narvalo.Web/UI.ControlBuilderExtensions.md/#L2" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Web/UI/ControlBuilder$.cs/#L13" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright (c) Narvalo.Org
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

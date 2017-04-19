@@ -1,0 +1,1811 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class MaybeL
+   | Narvalo .NET libraries </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class MaybeL
+   | Narvalo .NET libraries ">
+    <meta name="generator" content="docfx 2.15.5.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content">
+              
+              
+              <h1 id="Narvalo_Applicative_MaybeL" data-uid="Narvalo.Applicative.MaybeL">Class MaybeL
+              </h1>
+              <div class="markdown level0 summary"><p>Provides extension methods for <a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe&lt;T&gt;</a>.</p>
+</div>
+              <div class="markdown level0 conceptual"></div>
+              <div class="inheritance">
+                <h5>Inheritance</h5>
+                  <div class="level0"><span class="xref">System.Object</span></div>
+                  <div class="level1"><span class="xref">MaybeL</span></div>
+              </div>
+              <div class="inheritedMembers">
+                <h5>Inherited Members</h5>
+                <div>
+                  <span class="xref">System.Object.Equals(System.Object)</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.GetHashCode()</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.GetType()</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.MemberwiseClone()</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.ToString()</span>
+                </div>
+              </div>
+              <h6><strong>Namespace</strong>:Narvalo.Applicative</h6>
+              <h6><strong>Assembly</strong>:Narvalo.Fx.dll</h6>
+              <h5 id="Narvalo_Applicative_MaybeL_syntax">Syntax</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static class MaybeL</code></pre>
+              </div>
+              <h3 id="methods">Methods
+              </h3>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_MaybeL_Apply__2_Narvalo_Applicative_Maybe_System_Func___0___1___Narvalo_Applicative_Maybe___0__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.MaybeL.Apply%60%602(Narvalo.Applicative.Maybe%7BSystem.Func%7B%60%600%2C%60%601%7D%7D%2CNarvalo.Applicative.Maybe%7B%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Maybe.g.cs/#L166">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_MaybeL_Apply_" data-uid="Narvalo.Applicative.MaybeL.Apply*"></a>
+              <h4 id="Narvalo_Applicative_MaybeL_Apply__2_Narvalo_Applicative_Maybe_System_Func___0___1___Narvalo_Applicative_Maybe___0__" data-uid="Narvalo.Applicative.MaybeL.Apply``2(Narvalo.Applicative.Maybe{System.Func{``0,``1}},Narvalo.Applicative.Maybe{``0})">Apply&lt;TSource, TResult&gt;(Maybe&lt;Func&lt;TSource, TResult&gt;&gt;, Maybe&lt;TSource&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Maybe&lt;TResult&gt; Apply&lt;TSource, TResult&gt;(this Maybe&lt;Func&lt;TSource, TResult&gt;&gt; this, Maybe&lt;TSource&gt; value)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;<span class="xref">System.Func</span>&lt;TSource, TResult&gt;&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TSource&gt;</td>
+                    <td><span class="parametername">value</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TResult&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 id="Narvalo_Applicative_MaybeL_Apply__2_Narvalo_Applicative_Maybe_System_Func___0___1___Narvalo_Applicative_Maybe___0___seealso">See Also</h5>
+              <div class="seealso">
+                  <div><a class="xref" href="Narvalo.Applicative.MaybeL.html#Narvalo_Applicative_MaybeL_Gather__2_Narvalo_Applicative_Maybe___0__Narvalo_Applicative_Maybe_System_Func___0___1___">Gather&lt;TSource, TResult&gt;(Maybe&lt;TSource&gt;, Maybe&lt;Func&lt;TSource, TResult&gt;&gt;)</a></div>
+              </div>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_MaybeL_ContinueWith__2_Narvalo_Applicative_Maybe___0__Narvalo_Applicative_Maybe___1__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.MaybeL.ContinueWith%60%602(Narvalo.Applicative.Maybe%7B%60%600%7D%2CNarvalo.Applicative.Maybe%7B%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Maybe.g.cs/#L192">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_MaybeL_ContinueWith_" data-uid="Narvalo.Applicative.MaybeL.ContinueWith*"></a>
+              <h4 id="Narvalo_Applicative_MaybeL_ContinueWith__2_Narvalo_Applicative_Maybe___0__Narvalo_Applicative_Maybe___1__" data-uid="Narvalo.Applicative.MaybeL.ContinueWith``2(Narvalo.Applicative.Maybe{``0},Narvalo.Applicative.Maybe{``1})">ContinueWith&lt;TSource, TResult&gt;(Maybe&lt;TSource&gt;, Maybe&lt;TResult&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Maybe&lt;TResult&gt; ContinueWith&lt;TSource, TResult&gt;(this Maybe&lt;TSource&gt; this, Maybe&lt;TResult&gt; other)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TSource&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TResult&gt;</td>
+                    <td><span class="parametername">other</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TResult&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_MaybeL_Flatten__1_Narvalo_Applicative_Maybe_Narvalo_Applicative_Maybe___0___.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.MaybeL.Flatten%60%601(Narvalo.Applicative.Maybe%7BNarvalo.Applicative.Maybe%7B%60%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Maybe.g.cs/#L162">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_MaybeL_Flatten_" data-uid="Narvalo.Applicative.MaybeL.Flatten*"></a>
+              <h4 id="Narvalo_Applicative_MaybeL_Flatten__1_Narvalo_Applicative_Maybe_Narvalo_Applicative_Maybe___0___" data-uid="Narvalo.Applicative.MaybeL.Flatten``1(Narvalo.Applicative.Maybe{Narvalo.Applicative.Maybe{``0}})">Flatten&lt;T&gt;(Maybe&lt;Maybe&lt;T&gt;&gt;)</h4>
+              <div class="markdown level1 summary"><p>Removes one level of structure, projecting its bound value into the outer level.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Maybe&lt;T&gt; Flatten&lt;T&gt;(this Maybe&lt;Maybe&lt;T&gt;&gt; this)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;<a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;T&gt;&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;T&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">T</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_MaybeL_Gather__2_Narvalo_Applicative_Maybe___0__Narvalo_Applicative_Maybe_System_Func___0___1___.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.MaybeL.Gather%60%602(Narvalo.Applicative.Maybe%7B%60%600%7D%2CNarvalo.Applicative.Maybe%7BSystem.Func%7B%60%600%2C%60%601%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Maybe.g.cs/#L175">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_MaybeL_Gather_" data-uid="Narvalo.Applicative.MaybeL.Gather*"></a>
+              <h4 id="Narvalo_Applicative_MaybeL_Gather__2_Narvalo_Applicative_Maybe___0__Narvalo_Applicative_Maybe_System_Func___0___1___" data-uid="Narvalo.Applicative.MaybeL.Gather``2(Narvalo.Applicative.Maybe{``0},Narvalo.Applicative.Maybe{System.Func{``0,``1}})">Gather&lt;TSource, TResult&gt;(Maybe&lt;TSource&gt;, Maybe&lt;Func&lt;TSource, TResult&gt;&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Maybe&lt;TResult&gt; Gather&lt;TSource, TResult&gt;(this Maybe&lt;TSource&gt; this, Maybe&lt;Func&lt;TSource, TResult&gt;&gt; applicative)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TSource&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;<span class="xref">System.Func</span>&lt;TSource, TResult&gt;&gt;</td>
+                    <td><span class="parametername">applicative</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TResult&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 id="Narvalo_Applicative_MaybeL_Gather__2_Narvalo_Applicative_Maybe___0__Narvalo_Applicative_Maybe_System_Func___0___1____seealso">See Also</h5>
+              <div class="seealso">
+                  <div><a class="xref" href="Narvalo.Applicative.MaybeL.html#Narvalo_Applicative_MaybeL_Apply__2_Narvalo_Applicative_Maybe_System_Func___0___1___Narvalo_Applicative_Maybe___0__">Apply&lt;TSource, TResult&gt;(Maybe&lt;Func&lt;TSource, TResult&gt;&gt;, Maybe&lt;TSource&gt;)</a></div>
+              </div>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_MaybeL_Join__4_Narvalo_Applicative_Maybe___0__Narvalo_Applicative_Maybe___1__System_Func___0___2__System_Func___1___2__System_Func___0___1___3__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.MaybeL.Join%60%604(Narvalo.Applicative.Maybe%7B%60%600%7D%2CNarvalo.Applicative.Maybe%7B%60%601%7D%2CSystem.Func%7B%60%600%2C%60%602%7D%2CSystem.Func%7B%60%601%2C%60%602%7D%2CSystem.Func%7B%60%600%2C%60%601%2C%60%603%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Maybe.g.cs/#L373">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_MaybeL_Join_" data-uid="Narvalo.Applicative.MaybeL.Join*"></a>
+              <h4 id="Narvalo_Applicative_MaybeL_Join__4_Narvalo_Applicative_Maybe___0__Narvalo_Applicative_Maybe___1__System_Func___0___2__System_Func___1___2__System_Func___0___1___3__" data-uid="Narvalo.Applicative.MaybeL.Join``4(Narvalo.Applicative.Maybe{``0},Narvalo.Applicative.Maybe{``1},System.Func{``0,``2},System.Func{``1,``2},System.Func{``0,``1,``3})">Join&lt;TSource, TInner, TKey, TResult&gt;(Maybe&lt;TSource&gt;, Maybe&lt;TInner&gt;, Func&lt;TSource, TKey&gt;, Func&lt;TInner, TKey&gt;, Func&lt;TSource, TInner, TResult&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Maybe&lt;TResult&gt; Join&lt;TSource, TInner, TKey, TResult&gt;(this Maybe&lt;TSource&gt; this, Maybe&lt;TInner&gt; inner, Func&lt;TSource, TKey&gt; outerKeySelector, Func&lt;TInner, TKey&gt; innerKeySelector, Func&lt;TSource, TInner, TResult&gt; resultSelector)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TSource&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TInner&gt;</td>
+                    <td><span class="parametername">inner</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, TKey&gt;</td>
+                    <td><span class="parametername">outerKeySelector</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TInner, TKey&gt;</td>
+                    <td><span class="parametername">innerKeySelector</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, TInner, TResult&gt;</td>
+                    <td><span class="parametername">resultSelector</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TResult&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TInner</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TKey</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_MaybeL_Join__4_Narvalo_Applicative_Maybe___0__Narvalo_Applicative_Maybe___1__System_Func___0___2__System_Func___1___2__System_Func___0___1___3__System_Collections_Generic_IEqualityComparer___2__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.MaybeL.Join%60%604(Narvalo.Applicative.Maybe%7B%60%600%7D%2CNarvalo.Applicative.Maybe%7B%60%601%7D%2CSystem.Func%7B%60%600%2C%60%602%7D%2CSystem.Func%7B%60%601%2C%60%602%7D%2CSystem.Func%7B%60%600%2C%60%601%2C%60%603%7D%2CSystem.Collections.Generic.IEqualityComparer%7B%60%602%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Maybe.g.cs/#L386">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_MaybeL_Join_" data-uid="Narvalo.Applicative.MaybeL.Join*"></a>
+              <h4 id="Narvalo_Applicative_MaybeL_Join__4_Narvalo_Applicative_Maybe___0__Narvalo_Applicative_Maybe___1__System_Func___0___2__System_Func___1___2__System_Func___0___1___3__System_Collections_Generic_IEqualityComparer___2__" data-uid="Narvalo.Applicative.MaybeL.Join``4(Narvalo.Applicative.Maybe{``0},Narvalo.Applicative.Maybe{``1},System.Func{``0,``2},System.Func{``1,``2},System.Func{``0,``1,``3},System.Collections.Generic.IEqualityComparer{``2})">Join&lt;TSource, TInner, TKey, TResult&gt;(Maybe&lt;TSource&gt;, Maybe&lt;TInner&gt;, Func&lt;TSource, TKey&gt;, Func&lt;TInner, TKey&gt;, Func&lt;TSource, TInner, TResult&gt;, IEqualityComparer&lt;TKey&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Maybe&lt;TResult&gt; Join&lt;TSource, TInner, TKey, TResult&gt;(this Maybe&lt;TSource&gt; this, Maybe&lt;TInner&gt; inner, Func&lt;TSource, TKey&gt; outerKeySelector, Func&lt;TInner, TKey&gt; innerKeySelector, Func&lt;TSource, TInner, TResult&gt; resultSelector, IEqualityComparer&lt;TKey&gt; comparer)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TSource&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TInner&gt;</td>
+                    <td><span class="parametername">inner</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, TKey&gt;</td>
+                    <td><span class="parametername">outerKeySelector</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TInner, TKey&gt;</td>
+                    <td><span class="parametername">innerKeySelector</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, TInner, TResult&gt;</td>
+                    <td><span class="parametername">resultSelector</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEqualityComparer</span>&lt;TKey&gt;</td>
+                    <td><span class="parametername">comparer</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TResult&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TInner</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TKey</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_MaybeL_PassBy__2_Narvalo_Applicative_Maybe___0__Narvalo_Applicative_Maybe___1__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.MaybeL.PassBy%60%602(Narvalo.Applicative.Maybe%7B%60%600%7D%2CNarvalo.Applicative.Maybe%7B%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Maybe.g.cs/#L200">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_MaybeL_PassBy_" data-uid="Narvalo.Applicative.MaybeL.PassBy*"></a>
+              <h4 id="Narvalo_Applicative_MaybeL_PassBy__2_Narvalo_Applicative_Maybe___0__Narvalo_Applicative_Maybe___1__" data-uid="Narvalo.Applicative.MaybeL.PassBy``2(Narvalo.Applicative.Maybe{``0},Narvalo.Applicative.Maybe{``1})">PassBy&lt;TSource, TOther&gt;(Maybe&lt;TSource&gt;, Maybe&lt;TOther&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Maybe&lt;TSource&gt; PassBy&lt;TSource, TOther&gt;(this Maybe&lt;TSource&gt; this, Maybe&lt;TOther&gt; other)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TSource&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TOther&gt;</td>
+                    <td><span class="parametername">other</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TSource&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TOther</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_MaybeL_ReplaceBy__2_Narvalo_Applicative_Maybe___0____1_.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.MaybeL.ReplaceBy%60%602(Narvalo.Applicative.Maybe%7B%60%600%7D%2C%60%601)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Maybe.g.cs/#L184">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_MaybeL_ReplaceBy_" data-uid="Narvalo.Applicative.MaybeL.ReplaceBy*"></a>
+              <h4 id="Narvalo_Applicative_MaybeL_ReplaceBy__2_Narvalo_Applicative_Maybe___0____1_" data-uid="Narvalo.Applicative.MaybeL.ReplaceBy``2(Narvalo.Applicative.Maybe{``0},``1)">ReplaceBy&lt;TSource, TResult&gt;(Maybe&lt;TSource&gt;, TResult)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Maybe&lt;TResult&gt; ReplaceBy&lt;TSource, TResult&gt;(this Maybe&lt;TSource&gt; this, TResult value)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TSource&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">TResult</span></td>
+                    <td><span class="parametername">value</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TResult&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_MaybeL_Select__2_Narvalo_Applicative_Maybe___0__System_Func___0___1__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.MaybeL.Select%60%602(Narvalo.Applicative.Maybe%7B%60%600%7D%2CSystem.Func%7B%60%600%2C%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Maybe.g.cs/#L340">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_MaybeL_Select_" data-uid="Narvalo.Applicative.MaybeL.Select*"></a>
+              <h4 id="Narvalo_Applicative_MaybeL_Select__2_Narvalo_Applicative_Maybe___0__System_Func___0___1__" data-uid="Narvalo.Applicative.MaybeL.Select``2(Narvalo.Applicative.Maybe{``0},System.Func{``0,``1})">Select&lt;TSource, TResult&gt;(Maybe&lt;TSource&gt;, Func&lt;TSource, TResult&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Maybe&lt;TResult&gt; Select&lt;TSource, TResult&gt;(this Maybe&lt;TSource&gt; this, Func&lt;TSource, TResult&gt; selector)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TSource&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, TResult&gt;</td>
+                    <td><span class="parametername">selector</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TResult&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_MaybeL_SelectMany__3_Narvalo_Applicative_Maybe___0__System_Func___0_Narvalo_Applicative_Maybe___1___System_Func___0___1___2__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.MaybeL.SelectMany%60%603(Narvalo.Applicative.Maybe%7B%60%600%7D%2CSystem.Func%7B%60%600%2CNarvalo.Applicative.Maybe%7B%60%601%7D%7D%2CSystem.Func%7B%60%600%2C%60%601%2C%60%602%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Maybe.g.cs/#L359">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_MaybeL_SelectMany_" data-uid="Narvalo.Applicative.MaybeL.SelectMany*"></a>
+              <h4 id="Narvalo_Applicative_MaybeL_SelectMany__3_Narvalo_Applicative_Maybe___0__System_Func___0_Narvalo_Applicative_Maybe___1___System_Func___0___1___2__" data-uid="Narvalo.Applicative.MaybeL.SelectMany``3(Narvalo.Applicative.Maybe{``0},System.Func{``0,Narvalo.Applicative.Maybe{``1}},System.Func{``0,``1,``2})">SelectMany&lt;TSource, TMiddle, TResult&gt;(Maybe&lt;TSource&gt;, Func&lt;TSource, Maybe&lt;TMiddle&gt;&gt;, Func&lt;TSource, TMiddle, TResult&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Maybe&lt;TResult&gt; SelectMany&lt;TSource, TMiddle, TResult&gt;(this Maybe&lt;TSource&gt; this, Func&lt;TSource, Maybe&lt;TMiddle&gt;&gt; selector, Func&lt;TSource, TMiddle, TResult&gt; resultSelector)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TSource&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, <a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TMiddle&gt;&gt;</td>
+                    <td><span class="parametername">selector</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, TMiddle, TResult&gt;</td>
+                    <td><span class="parametername">resultSelector</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TResult&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TMiddle</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_MaybeL_Skip__1_Narvalo_Applicative_Maybe___0__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.MaybeL.Skip%60%601(Narvalo.Applicative.Maybe%7B%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Maybe.g.cs/#L208">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_MaybeL_Skip_" data-uid="Narvalo.Applicative.MaybeL.Skip*"></a>
+              <h4 id="Narvalo_Applicative_MaybeL_Skip__1_Narvalo_Applicative_Maybe___0__" data-uid="Narvalo.Applicative.MaybeL.Skip``1(Narvalo.Applicative.Maybe{``0})">Skip&lt;TSource&gt;(Maybe&lt;TSource&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Maybe&lt;Unit&gt; Skip&lt;TSource&gt;(this Maybe&lt;TSource&gt; this)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TSource&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;<a class="xref" href="Narvalo.Applicative.Unit.html">Unit</a>&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_MaybeL_Squash__1_Narvalo_Applicative_Maybe_System_Nullable___0___.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.MaybeL.Squash%60%601(Narvalo.Applicative.Maybe%7BSystem.Nullable%7B%60%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Maybe.cs/#L20">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_MaybeL_Squash_" data-uid="Narvalo.Applicative.MaybeL.Squash*"></a>
+              <h4 id="Narvalo_Applicative_MaybeL_Squash__1_Narvalo_Applicative_Maybe_System_Nullable___0___" data-uid="Narvalo.Applicative.MaybeL.Squash``1(Narvalo.Applicative.Maybe{System.Nullable{``0}})">Squash&lt;T&gt;(Maybe&lt;Nullable&lt;T&gt;&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Maybe&lt;T&gt; Squash&lt;T&gt;(this Maybe&lt;T? &gt; this)where T : struct</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;<span class="xref">System.Nullable</span>&lt;T&gt;&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;T&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">T</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_MaybeL_ToNullable__1_Narvalo_Applicative_Maybe___0__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.MaybeL.ToNullable%60%601(Narvalo.Applicative.Maybe%7B%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Maybe.cs/#L30">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_MaybeL_ToNullable_" data-uid="Narvalo.Applicative.MaybeL.ToNullable*"></a>
+              <h4 id="Narvalo_Applicative_MaybeL_ToNullable__1_Narvalo_Applicative_Maybe___0__" data-uid="Narvalo.Applicative.MaybeL.ToNullable``1(Narvalo.Applicative.Maybe{``0})">ToNullable&lt;T&gt;(Maybe&lt;T&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static T? ToNullable&lt;T&gt;(this Maybe&lt;T&gt; this)where T : struct</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;T&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Nullable</span>&lt;T&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">T</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_MaybeL_ToNullable__1_Narvalo_Applicative_Maybe_System_Nullable___0___.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.MaybeL.ToNullable%60%601(Narvalo.Applicative.Maybe%7BSystem.Nullable%7B%60%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Maybe.cs/#L34">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_MaybeL_ToNullable_" data-uid="Narvalo.Applicative.MaybeL.ToNullable*"></a>
+              <h4 id="Narvalo_Applicative_MaybeL_ToNullable__1_Narvalo_Applicative_Maybe_System_Nullable___0___" data-uid="Narvalo.Applicative.MaybeL.ToNullable``1(Narvalo.Applicative.Maybe{System.Nullable{``0}})">ToNullable&lt;T&gt;(Maybe&lt;Nullable&lt;T&gt;&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static T? ToNullable&lt;T&gt;(this Maybe&lt;T? &gt; this)where T : struct</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;<span class="xref">System.Nullable</span>&lt;T&gt;&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Nullable</span>&lt;T&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">T</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_MaybeL_Using__2_Narvalo_Applicative_Maybe___0__System_Func___0___1__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.MaybeL.Using%60%602(Narvalo.Applicative.Maybe%7B%60%600%7D%2CSystem.Func%7B%60%600%2C%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Maybe.g.cs/#L326">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_MaybeL_Using_" data-uid="Narvalo.Applicative.MaybeL.Using*"></a>
+              <h4 id="Narvalo_Applicative_MaybeL_Using__2_Narvalo_Applicative_Maybe___0__System_Func___0___1__" data-uid="Narvalo.Applicative.MaybeL.Using``2(Narvalo.Applicative.Maybe{``0},System.Func{``0,``1})">Using&lt;TSource, TResult&gt;(Maybe&lt;TSource&gt;, Func&lt;TSource, TResult&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Maybe&lt;TResult&gt; Using&lt;TSource, TResult&gt;(this Maybe&lt;TSource&gt; this, Func&lt;TSource, TResult&gt; selector)where TSource : IDisposable</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TSource&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, TResult&gt;</td>
+                    <td><span class="parametername">selector</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TResult&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_MaybeL_Using__2_Narvalo_Applicative_Maybe___0__System_Func___0_Narvalo_Applicative_Maybe___1___.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.MaybeL.Using%60%602(Narvalo.Applicative.Maybe%7B%60%600%7D%2CSystem.Func%7B%60%600%2CNarvalo.Applicative.Maybe%7B%60%601%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Maybe.g.cs/#L315">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_MaybeL_Using_" data-uid="Narvalo.Applicative.MaybeL.Using*"></a>
+              <h4 id="Narvalo_Applicative_MaybeL_Using__2_Narvalo_Applicative_Maybe___0__System_Func___0_Narvalo_Applicative_Maybe___1___" data-uid="Narvalo.Applicative.MaybeL.Using``2(Narvalo.Applicative.Maybe{``0},System.Func{``0,Narvalo.Applicative.Maybe{``1}})">Using&lt;TSource, TResult&gt;(Maybe&lt;TSource&gt;, Func&lt;TSource, Maybe&lt;TResult&gt;&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Maybe&lt;TResult&gt; Using&lt;TSource, TResult&gt;(this Maybe&lt;TSource&gt; this, Func&lt;TSource, Maybe&lt;TResult&gt;&gt; binder)where TSource : IDisposable</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TSource&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, <a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TResult&gt;&gt;</td>
+                    <td><span class="parametername">binder</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TResult&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_MaybeL_ValueOrEmpty__1_Narvalo_Applicative_Maybe_System_Collections_Generic_IEnumerable___0___.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.MaybeL.ValueOrEmpty%60%601(Narvalo.Applicative.Maybe%7BSystem.Collections.Generic.IEnumerable%7B%60%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Maybe.cs/#L47">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_MaybeL_ValueOrEmpty_" data-uid="Narvalo.Applicative.MaybeL.ValueOrEmpty*"></a>
+              <h4 id="Narvalo_Applicative_MaybeL_ValueOrEmpty__1_Narvalo_Applicative_Maybe_System_Collections_Generic_IEnumerable___0___" data-uid="Narvalo.Applicative.MaybeL.ValueOrEmpty``1(Narvalo.Applicative.Maybe{System.Collections.Generic.IEnumerable{``0}})">ValueOrEmpty&lt;T&gt;(Maybe&lt;IEnumerable&lt;T&gt;&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static IEnumerable&lt;T&gt; ValueOrEmpty&lt;T&gt;(this Maybe&lt;IEnumerable&lt;T&gt;&gt; this)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;<span class="xref">System.Collections.Generic.IEnumerable</span>&lt;T&gt;&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;T&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">T</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_MaybeL_Where__1_Narvalo_Applicative_Maybe___0__System_Func___0_System_Boolean__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.MaybeL.Where%60%601(Narvalo.Applicative.Maybe%7B%60%600%7D%2CSystem.Func%7B%60%600%2CSystem.Boolean%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Maybe.g.cs/#L349">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_MaybeL_Where_" data-uid="Narvalo.Applicative.MaybeL.Where*"></a>
+              <h4 id="Narvalo_Applicative_MaybeL_Where__1_Narvalo_Applicative_Maybe___0__System_Func___0_System_Boolean__" data-uid="Narvalo.Applicative.MaybeL.Where``1(Narvalo.Applicative.Maybe{``0},System.Func{``0,System.Boolean})">Where&lt;TSource&gt;(Maybe&lt;TSource&gt;, Func&lt;TSource, Boolean&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Maybe&lt;TSource&gt; Where&lt;TSource&gt;(this Maybe&lt;TSource&gt; this, Func&lt;TSource, bool&gt; predicate)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TSource&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, <span class="xref">System.Boolean</span>&gt;</td>
+                    <td><span class="parametername">predicate</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TSource&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_MaybeL_ZipWith__3_Narvalo_Applicative_Maybe___0__Narvalo_Applicative_Maybe___1__System_Func___0___1___2__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.MaybeL.ZipWith%60%603(Narvalo.Applicative.Maybe%7B%60%600%7D%2CNarvalo.Applicative.Maybe%7B%60%601%7D%2CSystem.Func%7B%60%600%2C%60%601%2C%60%602%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Maybe.g.cs/#L217">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_MaybeL_ZipWith_" data-uid="Narvalo.Applicative.MaybeL.ZipWith*"></a>
+              <h4 id="Narvalo_Applicative_MaybeL_ZipWith__3_Narvalo_Applicative_Maybe___0__Narvalo_Applicative_Maybe___1__System_Func___0___1___2__" data-uid="Narvalo.Applicative.MaybeL.ZipWith``3(Narvalo.Applicative.Maybe{``0},Narvalo.Applicative.Maybe{``1},System.Func{``0,``1,``2})">ZipWith&lt;T1, T2, TResult&gt;(Maybe&lt;T1&gt;, Maybe&lt;T2&gt;, Func&lt;T1, T2, TResult&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Maybe&lt;TResult&gt; ZipWith&lt;T1, T2, TResult&gt;(this Maybe&lt;T1&gt; this, Maybe&lt;T2&gt; second, Func&lt;T1, T2, TResult&gt; zipper)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;T1&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;T2&gt;</td>
+                    <td><span class="parametername">second</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;T1, T2, TResult&gt;</td>
+                    <td><span class="parametername">zipper</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TResult&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">T1</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">T2</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 id="Narvalo_Applicative_MaybeL_ZipWith__3_Narvalo_Applicative_Maybe___0__Narvalo_Applicative_Maybe___1__System_Func___0___1___2___seealso">See Also</h5>
+              <div class="seealso">
+                  <div><a class="xref" href="Narvalo.Applicative.Maybe.html#Narvalo_Applicative_Maybe_Lift__3_System_Func___0___1___2__">Lift&lt;T1, T2, TResult&gt;(Func&lt;T1, T2, TResult&gt;)</a></div>
+              </div>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_MaybeL_ZipWith__4_Narvalo_Applicative_Maybe___0__Narvalo_Applicative_Maybe___1__Narvalo_Applicative_Maybe___2__System_Func___0___1___2___3__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.MaybeL.ZipWith%60%604(Narvalo.Applicative.Maybe%7B%60%600%7D%2CNarvalo.Applicative.Maybe%7B%60%601%7D%2CNarvalo.Applicative.Maybe%7B%60%602%7D%2CSystem.Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Maybe.g.cs/#L232">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_MaybeL_ZipWith_" data-uid="Narvalo.Applicative.MaybeL.ZipWith*"></a>
+              <h4 id="Narvalo_Applicative_MaybeL_ZipWith__4_Narvalo_Applicative_Maybe___0__Narvalo_Applicative_Maybe___1__Narvalo_Applicative_Maybe___2__System_Func___0___1___2___3__" data-uid="Narvalo.Applicative.MaybeL.ZipWith``4(Narvalo.Applicative.Maybe{``0},Narvalo.Applicative.Maybe{``1},Narvalo.Applicative.Maybe{``2},System.Func{``0,``1,``2,``3})">ZipWith&lt;T1, T2, T3, TResult&gt;(Maybe&lt;T1&gt;, Maybe&lt;T2&gt;, Maybe&lt;T3&gt;, Func&lt;T1, T2, T3, TResult&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Maybe&lt;TResult&gt; ZipWith&lt;T1, T2, T3, TResult&gt;(this Maybe&lt;T1&gt; this, Maybe&lt;T2&gt; second, Maybe&lt;T3&gt; third, Func&lt;T1, T2, T3, TResult&gt; zipper)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;T1&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;T2&gt;</td>
+                    <td><span class="parametername">second</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;T3&gt;</td>
+                    <td><span class="parametername">third</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;T1, T2, T3, TResult&gt;</td>
+                    <td><span class="parametername">zipper</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TResult&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">T1</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">T2</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">T3</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 id="Narvalo_Applicative_MaybeL_ZipWith__4_Narvalo_Applicative_Maybe___0__Narvalo_Applicative_Maybe___1__Narvalo_Applicative_Maybe___2__System_Func___0___1___2___3___seealso">See Also</h5>
+              <div class="seealso">
+                  <div><a class="xref" href="Narvalo.Applicative.Maybe.html#Narvalo_Applicative_Maybe_Lift__4_System_Func___0___1___2___3__">Lift&lt;T1, T2, T3, TResult&gt;(Func&lt;T1, T2, T3, TResult&gt;)</a></div>
+              </div>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_MaybeL_ZipWith__5_Narvalo_Applicative_Maybe___0__Narvalo_Applicative_Maybe___1__Narvalo_Applicative_Maybe___2__Narvalo_Applicative_Maybe___3__System_Func___0___1___2___3___4__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.MaybeL.ZipWith%60%605(Narvalo.Applicative.Maybe%7B%60%600%7D%2CNarvalo.Applicative.Maybe%7B%60%601%7D%2CNarvalo.Applicative.Maybe%7B%60%602%7D%2CNarvalo.Applicative.Maybe%7B%60%603%7D%2CSystem.Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Maybe.g.cs/#L255">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_MaybeL_ZipWith_" data-uid="Narvalo.Applicative.MaybeL.ZipWith*"></a>
+              <h4 id="Narvalo_Applicative_MaybeL_ZipWith__5_Narvalo_Applicative_Maybe___0__Narvalo_Applicative_Maybe___1__Narvalo_Applicative_Maybe___2__Narvalo_Applicative_Maybe___3__System_Func___0___1___2___3___4__" data-uid="Narvalo.Applicative.MaybeL.ZipWith``5(Narvalo.Applicative.Maybe{``0},Narvalo.Applicative.Maybe{``1},Narvalo.Applicative.Maybe{``2},Narvalo.Applicative.Maybe{``3},System.Func{``0,``1,``2,``3,``4})">ZipWith&lt;T1, T2, T3, T4, TResult&gt;(Maybe&lt;T1&gt;, Maybe&lt;T2&gt;, Maybe&lt;T3&gt;, Maybe&lt;T4&gt;, Func&lt;T1, T2, T3, T4, TResult&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Maybe&lt;TResult&gt; ZipWith&lt;T1, T2, T3, T4, TResult&gt;(this Maybe&lt;T1&gt; this, Maybe&lt;T2&gt; second, Maybe&lt;T3&gt; third, Maybe&lt;T4&gt; fourth, Func&lt;T1, T2, T3, T4, TResult&gt; zipper)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;T1&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;T2&gt;</td>
+                    <td><span class="parametername">second</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;T3&gt;</td>
+                    <td><span class="parametername">third</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;T4&gt;</td>
+                    <td><span class="parametername">fourth</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;T1, T2, T3, T4, TResult&gt;</td>
+                    <td><span class="parametername">zipper</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TResult&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">T1</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">T2</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">T3</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">T4</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 id="Narvalo_Applicative_MaybeL_ZipWith__5_Narvalo_Applicative_Maybe___0__Narvalo_Applicative_Maybe___1__Narvalo_Applicative_Maybe___2__Narvalo_Applicative_Maybe___3__System_Func___0___1___2___3___4___seealso">See Also</h5>
+              <div class="seealso">
+                  <div><a class="xref" href="Narvalo.Applicative.Maybe.html#Narvalo_Applicative_Maybe_Lift__5_System_Func___0___1___2___3___4__">Lift&lt;T1, T2, T3, T4, TResult&gt;(Func&lt;T1, T2, T3, T4, TResult&gt;)</a></div>
+              </div>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_MaybeL_ZipWith__6_Narvalo_Applicative_Maybe___0__Narvalo_Applicative_Maybe___1__Narvalo_Applicative_Maybe___2__Narvalo_Applicative_Maybe___3__Narvalo_Applicative_Maybe___4__System_Func___0___1___2___3___4___5__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.MaybeL.ZipWith%60%606(Narvalo.Applicative.Maybe%7B%60%600%7D%2CNarvalo.Applicative.Maybe%7B%60%601%7D%2CNarvalo.Applicative.Maybe%7B%60%602%7D%2CNarvalo.Applicative.Maybe%7B%60%603%7D%2CNarvalo.Applicative.Maybe%7B%60%604%7D%2CSystem.Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Maybe.g.cs/#L281">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_MaybeL_ZipWith_" data-uid="Narvalo.Applicative.MaybeL.ZipWith*"></a>
+              <h4 id="Narvalo_Applicative_MaybeL_ZipWith__6_Narvalo_Applicative_Maybe___0__Narvalo_Applicative_Maybe___1__Narvalo_Applicative_Maybe___2__Narvalo_Applicative_Maybe___3__Narvalo_Applicative_Maybe___4__System_Func___0___1___2___3___4___5__" data-uid="Narvalo.Applicative.MaybeL.ZipWith``6(Narvalo.Applicative.Maybe{``0},Narvalo.Applicative.Maybe{``1},Narvalo.Applicative.Maybe{``2},Narvalo.Applicative.Maybe{``3},Narvalo.Applicative.Maybe{``4},System.Func{``0,``1,``2,``3,``4,``5})">ZipWith&lt;T1, T2, T3, T4, T5, TResult&gt;(Maybe&lt;T1&gt;, Maybe&lt;T2&gt;, Maybe&lt;T3&gt;, Maybe&lt;T4&gt;, Maybe&lt;T5&gt;, Func&lt;T1, T2, T3, T4, T5, TResult&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Maybe&lt;TResult&gt; ZipWith&lt;T1, T2, T3, T4, T5, TResult&gt;(this Maybe&lt;T1&gt; this, Maybe&lt;T2&gt; second, Maybe&lt;T3&gt; third, Maybe&lt;T4&gt; fourth, Maybe&lt;T5&gt; fifth, Func&lt;T1, T2, T3, T4, T5, TResult&gt; zipper)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;T1&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;T2&gt;</td>
+                    <td><span class="parametername">second</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;T3&gt;</td>
+                    <td><span class="parametername">third</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;T4&gt;</td>
+                    <td><span class="parametername">fourth</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;T5&gt;</td>
+                    <td><span class="parametername">fifth</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;T1, T2, T3, T4, T5, TResult&gt;</td>
+                    <td><span class="parametername">zipper</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Maybe-1.html">Maybe</a>&lt;TResult&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">T1</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">T2</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">T3</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">T4</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">T5</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 id="Narvalo_Applicative_MaybeL_ZipWith__6_Narvalo_Applicative_Maybe___0__Narvalo_Applicative_Maybe___1__Narvalo_Applicative_Maybe___2__Narvalo_Applicative_Maybe___3__Narvalo_Applicative_Maybe___4__System_Func___0___1___2___3___4___5___seealso">See Also</h5>
+              <div class="seealso">
+                  <div><a class="xref" href="Narvalo.Applicative.Maybe.html#Narvalo_Applicative_Maybe_Lift__6_System_Func___0___1___2___3___4___5__">Lift&lt;T1, T2, T3, T4, T5, TResult&gt;(Func&lt;T1, T2, T3, T4, T5, TResult&gt;)</a></div>
+              </div>
+                        </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_MaybeL.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.MaybeL%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Maybe.g.cs/#L157" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright (c) Narvalo.Org
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

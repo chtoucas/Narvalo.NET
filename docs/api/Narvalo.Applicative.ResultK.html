@@ -1,0 +1,441 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class ResultK
+   | Narvalo .NET libraries </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class ResultK
+   | Narvalo .NET libraries ">
+    <meta name="generator" content="docfx 2.15.5.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content">
+              
+              
+              <h1 id="Narvalo_Applicative_ResultK" data-uid="Narvalo.Applicative.ResultK">Class ResultK
+              </h1>
+              <div class="markdown level0 summary"><p>Provides extension methods for functions in the Kleisli category:
+<span class="xref">System.Func&lt;T, TResult&gt;</span> where <code>TResult</code> is of type <a class="xref" href="Narvalo.Applicative.Result-2.html">Result&lt;T, TError&gt;</a>.</p>
+</div>
+              <div class="markdown level0 conceptual"></div>
+              <div class="inheritance">
+                <h5>Inheritance</h5>
+                  <div class="level0"><span class="xref">System.Object</span></div>
+                  <div class="level1"><span class="xref">ResultK</span></div>
+              </div>
+              <div class="inheritedMembers">
+                <h5>Inherited Members</h5>
+                <div>
+                  <span class="xref">System.Object.Equals(System.Object)</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.GetHashCode()</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.GetType()</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.MemberwiseClone()</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.ToString()</span>
+                </div>
+              </div>
+              <h6><strong>Namespace</strong>:Narvalo.Applicative</h6>
+              <h6><strong>Assembly</strong>:Narvalo.Fx.dll</h6>
+              <h5 id="Narvalo_Applicative_ResultK_syntax">Syntax</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static class ResultK</code></pre>
+              </div>
+              <h3 id="methods">Methods
+              </h3>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_ResultK_Compose__4_System_Func___0_Narvalo_Applicative_Result___1___3___System_Func___1_Narvalo_Applicative_Result___2___3___.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.ResultK.Compose%60%604(System.Func%7B%60%600%2CNarvalo.Applicative.Result%7B%60%601%2C%60%603%7D%7D%2CSystem.Func%7B%60%601%2CNarvalo.Applicative.Result%7B%60%602%2C%60%603%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result.g.cs/#L367">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_ResultK_Compose_" data-uid="Narvalo.Applicative.ResultK.Compose*"></a>
+              <h4 id="Narvalo_Applicative_ResultK_Compose__4_System_Func___0_Narvalo_Applicative_Result___1___3___System_Func___1_Narvalo_Applicative_Result___2___3___" data-uid="Narvalo.Applicative.ResultK.Compose``4(System.Func{``0,Narvalo.Applicative.Result{``1,``3}},System.Func{``1,Narvalo.Applicative.Result{``2,``3}})">Compose&lt;TSource, TMiddle, TResult, TError&gt;(Func&lt;TSource, Result&lt;TMiddle, TError&gt;&gt;, Func&lt;TMiddle, Result&lt;TResult, TError&gt;&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Func&lt;TSource, Result&lt;TResult, TError&gt;&gt; Compose&lt;TSource, TMiddle, TResult, TError&gt;(this Func&lt;TSource, Result&lt;TMiddle, TError&gt;&gt; this, Func&lt;TMiddle, Result&lt;TResult, TError&gt;&gt; second)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, <a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;TMiddle, TError&gt;&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TMiddle, <a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;TResult, TError&gt;&gt;</td>
+                    <td><span class="parametername">second</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, <a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;TResult, TError&gt;&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TMiddle</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TError</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_ResultK_ComposeBack__4_System_Func___1_Narvalo_Applicative_Result___2___3___System_Func___0_Narvalo_Applicative_Result___1___3___.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.ResultK.ComposeBack%60%604(System.Func%7B%60%601%2CNarvalo.Applicative.Result%7B%60%602%2C%60%603%7D%7D%2CSystem.Func%7B%60%600%2CNarvalo.Applicative.Result%7B%60%601%2C%60%603%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result.g.cs/#L375">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_ResultK_ComposeBack_" data-uid="Narvalo.Applicative.ResultK.ComposeBack*"></a>
+              <h4 id="Narvalo_Applicative_ResultK_ComposeBack__4_System_Func___1_Narvalo_Applicative_Result___2___3___System_Func___0_Narvalo_Applicative_Result___1___3___" data-uid="Narvalo.Applicative.ResultK.ComposeBack``4(System.Func{``1,Narvalo.Applicative.Result{``2,``3}},System.Func{``0,Narvalo.Applicative.Result{``1,``3}})">ComposeBack&lt;TSource, TMiddle, TResult, TError&gt;(Func&lt;TMiddle, Result&lt;TResult, TError&gt;&gt;, Func&lt;TSource, Result&lt;TMiddle, TError&gt;&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Func&lt;TSource, Result&lt;TResult, TError&gt;&gt; ComposeBack&lt;TSource, TMiddle, TResult, TError&gt;(this Func&lt;TMiddle, Result&lt;TResult, TError&gt;&gt; this, Func&lt;TSource, Result&lt;TMiddle, TError&gt;&gt; second)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TMiddle, <a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;TResult, TError&gt;&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, <a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;TMiddle, TError&gt;&gt;</td>
+                    <td><span class="parametername">second</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, <a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;TResult, TError&gt;&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TMiddle</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TError</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_ResultK_InvokeWith__3_System_Func___0_Narvalo_Applicative_Result___1___2___Narvalo_Applicative_Result___0___2__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.ResultK.InvokeWith%60%603(System.Func%7B%60%600%2CNarvalo.Applicative.Result%7B%60%601%2C%60%602%7D%7D%2CNarvalo.Applicative.Result%7B%60%600%2C%60%602%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result.g.cs/#L359">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_ResultK_InvokeWith_" data-uid="Narvalo.Applicative.ResultK.InvokeWith*"></a>
+              <h4 id="Narvalo_Applicative_ResultK_InvokeWith__3_System_Func___0_Narvalo_Applicative_Result___1___2___Narvalo_Applicative_Result___0___2__" data-uid="Narvalo.Applicative.ResultK.InvokeWith``3(System.Func{``0,Narvalo.Applicative.Result{``1,``2}},Narvalo.Applicative.Result{``0,``2})">InvokeWith&lt;TSource, TResult, TError&gt;(Func&lt;TSource, Result&lt;TResult, TError&gt;&gt;, Result&lt;TSource, TError&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Result&lt;TResult, TError&gt; InvokeWith&lt;TSource, TResult, TError&gt;(this Func&lt;TSource, Result&lt;TResult, TError&gt;&gt; this, Result&lt;TSource, TError&gt; value)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, <a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;TResult, TError&gt;&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;TSource, TError&gt;</td>
+                    <td><span class="parametername">value</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;TResult, TError&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TError</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_ResultK_InvokeWith__3_System_Func___0_Narvalo_Applicative_Result___1___2___System_Collections_Generic_IEnumerable___0__.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.ResultK.InvokeWith%60%603(System.Func%7B%60%600%2CNarvalo.Applicative.Result%7B%60%601%2C%60%602%7D%7D%2CSystem.Collections.Generic.IEnumerable%7B%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result.g.cs/#L354">View Source</a>
+              </span>
+              <a id="Narvalo_Applicative_ResultK_InvokeWith_" data-uid="Narvalo.Applicative.ResultK.InvokeWith*"></a>
+              <h4 id="Narvalo_Applicative_ResultK_InvokeWith__3_System_Func___0_Narvalo_Applicative_Result___1___2___System_Collections_Generic_IEnumerable___0__" data-uid="Narvalo.Applicative.ResultK.InvokeWith``3(System.Func{``0,Narvalo.Applicative.Result{``1,``2}},System.Collections.Generic.IEnumerable{``0})">InvokeWith&lt;TSource, TResult, TError&gt;(Func&lt;TSource, Result&lt;TResult, TError&gt;&gt;, IEnumerable&lt;TSource&gt;)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Result&lt;IEnumerable&lt;TResult&gt;, TError&gt; InvokeWith&lt;TSource, TResult, TError&gt;(this Func&lt;TSource, Result&lt;TResult, TError&gt;&gt; this, IEnumerable&lt;TSource&gt; seq)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Func</span>&lt;TSource, <a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;TResult, TError&gt;&gt;</td>
+                    <td><span class="parametername">this</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TSource&gt;</td>
+                    <td><span class="parametername">seq</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Narvalo.Applicative.Result-2.html">Result</a>&lt;<span class="xref">System.Collections.Generic.IEnumerable</span>&lt;TResult&gt;, TError&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">TSource</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TError</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+                        </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/chtoucas/Narvalo.NET/new/master/apiSpec/new?filename=Narvalo_Applicative_ResultK.md&amp;value=---%0Auid%3A%20Narvalo.Applicative.ResultK%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/chtoucas/Narvalo.NET/blob/master/src/Narvalo.Fx/Applicative/Result.g.cs/#L352" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright (c) Narvalo.Org
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

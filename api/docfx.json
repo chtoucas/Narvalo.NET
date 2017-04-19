@@ -29,6 +29,11 @@
         "dest": "api"
       }
     ],
+    "resource": [
+      {
+        "files": ["index.html"]
+      }
+    ],
     "overwrite": "api/**/*.md",
     "dest": "_www",
     "globalMetadata": {
