@@ -2,6 +2,7 @@ Narvalo.NET
 ===========
 
 - [Documentation](https://github.com/chtoucas/narvalo.org/tree/master/content/project)
+- [API Documentation](https://chtoucas.github.io/Narvalo.NET/api/Narvalo.html)
 - [License](https://github.com/chtoucas/Narvalo.NET/tree/master/LICENSE.txt)
 
 Unstable packages are available on [myget](https://www.myget.org/gallery/narvalo-edge)
