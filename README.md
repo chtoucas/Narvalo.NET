@@ -1,7 +1,7 @@
 Narvalo.NET
 ===========
 
-- [Documentation](https://github.com/chtoucas/narvalo.org/tree/master/content/project)
+- [Documentation](https://github.com/chtoucas/narvalo.org/tree/master/content/doc)
 - [API Reference](https://chtoucas.github.io/narvalo-dotnet/api/Narvalo.html) (very incomplete)
 - [License](https://github.com/chtoucas/Narvalo.NET/tree/master/LICENSE.txt)
 
