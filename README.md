@@ -1,6 +1,8 @@
 Narvalo.NET
 ===========
 
+**This project is no longer maintained, please, do not use.** 
+
 - [License](https://github.com/chtoucas/Narvalo.NET/tree/master/LICENSE.txt)
 
 Unstable packages are available on [myget](https://www.myget.org/gallery/narvalo-edge)
